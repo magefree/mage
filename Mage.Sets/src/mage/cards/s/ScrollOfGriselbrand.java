@@ -16,7 +16,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -27,7 +26,7 @@ public final class ScrollOfGriselbrand extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent();
 
     static {
-        filter.add(new SubtypePredicate(SubType.DEMON));
+        filter.add(SubType.DEMON.getPredicate());
     }
 
     public ScrollOfGriselbrand(UUID ownerId, CardSetInfo setInfo) {

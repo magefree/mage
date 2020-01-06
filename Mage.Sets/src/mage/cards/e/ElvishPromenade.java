@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.ElfToken;
 
 /**
@@ -21,7 +20,7 @@ public final class ElvishPromenade extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Elf you control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ELF));
+        filter.add(SubType.ELF.getPredicate());
     }
 
     public ElvishPromenade(UUID ownerId, CardSetInfo setInfo) {

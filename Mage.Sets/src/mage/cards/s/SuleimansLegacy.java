@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -26,8 +25,8 @@ public final class SuleimansLegacy extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new SubtypePredicate(SubType.DJINN),
-                new SubtypePredicate(SubType.EFREET)
+                SubType.DJINN.getPredicate(),
+                SubType.EFREET.getPredicate()
         ));
     }
 

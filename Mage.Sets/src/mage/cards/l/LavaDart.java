@@ -11,7 +11,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TimingRule;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetAnyTarget;
 
@@ -24,7 +23,7 @@ public final class LavaDart extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Mountain");
     
     static {
-        filter.add(new SubtypePredicate(SubType.MOUNTAIN));
+        filter.add(SubType.MOUNTAIN.getPredicate());
     }
 
     public LavaDart(UUID ownerId, CardSetInfo setInfo) {

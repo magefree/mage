@@ -8,7 +8,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -18,7 +17,7 @@ public final class BoilingSeas extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("Islands");
     static {
-        filter.add(new SubtypePredicate(SubType.ISLAND));
+        filter.add(SubType.ISLAND.getPredicate());
     }
 
     public BoilingSeas(UUID ownerId, CardSetInfo setInfo) {

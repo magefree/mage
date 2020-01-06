@@ -19,11 +19,9 @@ import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.ArrayList;
@@ -173,18 +171,18 @@ class CrypticGatewayEffect extends OneShotEffect {
                     changeling2 = true;
                 }
 
-                List<SubtypePredicate> subtypes = new ArrayList<>();
+                List<SubType.SubTypePredicate> subtypes = new ArrayList<>();
 
                 for (SubType subtype : creature.getSubtype(game)) {
                     if (creature2.hasSubtype(subtype, game) || changeling2) {
-                        subtypes.add(new SubtypePredicate(subtype));
+                        subtypes.add(subtype.getPredicate());
                         commonSubType = true;
                     }
                 }
 
                 for (SubType subtype : creature2.getSubtype(game)) {
                     if (creature.hasSubtype(subtype, game) || changeling) {
-                        subtypes.add(new SubtypePredicate(subtype));
+                        subtypes.add(subtype.getPredicate());
                         commonSubType = true;
                     }
                 }

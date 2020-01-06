@@ -12,7 +12,6 @@ import mage.abilities.effects.PayCostToAttackBlockEffectImpl;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepSourceEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
-import mage.abilities.effects.common.combat.CantAttackUnlessPaysAttachedEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -23,7 +22,6 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetControlledPermanent;
@@ -39,7 +37,7 @@ public final class Leviathan extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("two Islands");
     static {
-        filter.add(new SubtypePredicate(SubType.ISLAND));
+        filter.add(SubType.ISLAND.getPredicate());
     }
 
     public Leviathan(UUID ownerId, CardSetInfo setInfo) {
@@ -86,7 +84,7 @@ class LeviathanCostToAttackBlockEffect extends PayCostToAttackBlockEffectImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("two Islands");
     static {
-        filter.add(new SubtypePredicate(SubType.ISLAND));
+        filter.add(SubType.ISLAND.getPredicate());
     }
 
     LeviathanCostToAttackBlockEffect() {

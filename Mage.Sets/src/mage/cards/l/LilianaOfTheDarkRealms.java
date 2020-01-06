@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterLandCard;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.command.emblems.LilianaOfTheDarkRealmsEmblem;
@@ -31,7 +30,7 @@ public final class LilianaOfTheDarkRealms extends CardImpl {
     private static final FilterLandCard filter = new FilterLandCard("Swamp card");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SWAMP));
+        filter.add(SubType.SWAMP.getPredicate());
     }
 
     public LilianaOfTheDarkRealms(UUID ownerId, CardSetInfo setInfo) {
@@ -86,7 +85,7 @@ class LilianaOfTheDarkRealmsEffect extends ContinuousEffectImpl {
         super.init(source, game);
 
         FilterLandPermanent filter = new FilterLandPermanent("Swamps");
-        filter.add(new SubtypePredicate(SubType.SWAMP));
+        filter.add(SubType.SWAMP.getPredicate());
         filter.add(new ControllerPredicate(TargetController.YOU));
         this.amount = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
 

@@ -13,7 +13,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  * @author nantuko
@@ -23,7 +22,7 @@ public final class GallowsWarden extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Spirit creatures");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SPIRIT));
+        filter.add(SubType.SPIRIT.getPredicate());
     }
 
     public GallowsWarden(UUID ownerId, CardSetInfo setInfo) {

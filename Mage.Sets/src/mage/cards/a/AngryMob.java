@@ -13,7 +13,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
@@ -25,7 +24,7 @@ public final class AngryMob extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Swamps you opponents control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SWAMP));
+        filter.add(SubType.SWAMP.getPredicate());
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 

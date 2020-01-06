@@ -18,7 +18,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -71,7 +70,7 @@ class RiptideChronologistEffect extends OneShotEffect {
             if (player.choose(outcome, typeChoice, game)) {
                 game.informPlayers(sourceObject.getLogName() + " chosen type: " + typeChoice.getChoice());
                 FilterCreaturePermanent filterCreaturePermanent = new FilterCreaturePermanent();
-                filterCreaturePermanent.add(new SubtypePredicate(SubType.byDescription(typeChoice.getChoice())));
+                filterCreaturePermanent.add(SubType.byDescription(typeChoice.getChoice()).getPredicate());
                 for (Permanent creature : game.getBattlefield().getActivePermanents(filterCreaturePermanent, source.getSourceId(), game)) {
                     creature.untap(game);
                 }

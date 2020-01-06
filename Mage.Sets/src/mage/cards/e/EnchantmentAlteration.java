@@ -14,7 +14,6 @@ import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AttachmentAttachedToCardTypePredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
@@ -32,7 +31,7 @@ public final class EnchantmentAlteration extends CardImpl {
     private static final FilterPermanent filter2 = new FilterPermanent("another target permanent that shares that type of creature or land");
 
     static {
-        filter.add(new SubtypePredicate(SubType.AURA));
+        filter.add(SubType.AURA.getPredicate());
         filter.add(Predicates.or(new AttachmentAttachedToCardTypePredicate(CardType.CREATURE),
                 new AttachmentAttachedToCardTypePredicate(CardType.LAND)));
         filter2.add(new SharesEnchantedCardTypePredicate());

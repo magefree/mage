@@ -9,7 +9,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -20,7 +19,7 @@ public final class TranquilDomain extends CardImpl {
     private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("non-Aura enchantments");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate(SubType.AURA)));
+        filter.add(Predicates.not(SubType.AURA.getPredicate()));
     }
 
     public TranquilDomain(UUID ownerId, CardSetInfo setInfo) {

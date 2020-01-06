@@ -22,7 +22,6 @@ import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -34,8 +33,8 @@ public final class RakdosTheDefiler extends CardImpl {
     private static final FilterPermanent damageToPlayerTriggerFilter = new FilterPermanent("the non-Demon permanents you control");
 
     static {
-        attackTriggerFilter.add(Predicates.not(new SubtypePredicate(SubType.DEMON)));
-        damageToPlayerTriggerFilter.add(Predicates.not(new SubtypePredicate(SubType.DEMON)));
+        attackTriggerFilter.add(Predicates.not(SubType.DEMON.getPredicate()));
+        damageToPlayerTriggerFilter.add(Predicates.not(SubType.DEMON.getPredicate()));
     }
 
     public RakdosTheDefiler(UUID ownerId, CardSetInfo setInfo) {

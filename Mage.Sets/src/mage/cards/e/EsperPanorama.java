@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
@@ -30,9 +29,9 @@ public final class EsperPanorama extends CardImpl {
         filter.add(CardType.LAND.getPredicate());
         filter.add(new SupertypePredicate(SuperType.BASIC));
         filter.add(Predicates.or(
-                new SubtypePredicate(SubType.PLAINS),
-                new SubtypePredicate(SubType.ISLAND),
-                new SubtypePredicate(SubType.SWAMP)));
+                SubType.PLAINS.getPredicate(),
+                SubType.ISLAND.getPredicate(),
+                SubType.SWAMP.getPredicate()));
     }
 
     public EsperPanorama(UUID ownerId, CardSetInfo setInfo) {

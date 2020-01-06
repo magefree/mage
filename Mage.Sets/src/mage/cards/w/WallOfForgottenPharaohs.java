@@ -18,7 +18,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
@@ -31,8 +30,8 @@ public final class WallOfForgottenPharaohs extends CardImpl {
     private static final FilterCard filterDesertCard = new FilterCard("Desert card");
 
     static {
-        filterDesertPermanent.add(new SubtypePredicate(SubType.DESERT));
-        filterDesertCard.add(new SubtypePredicate(SubType.DESERT));
+        filterDesertPermanent.add(SubType.DESERT.getPredicate());
+        filterDesertCard.add(SubType.DESERT.getPredicate());
     }
 
     public WallOfForgottenPharaohs(UUID ownerId, CardSetInfo setInfo) {

@@ -14,7 +14,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -30,7 +29,7 @@ public final class NoxiousGhoul extends CardImpl {
 
     static {
         filter.add(CardType.CREATURE.getPredicate());
-        filter.add(Predicates.not(new SubtypePredicate(SubType.ZOMBIE)));
+        filter.add(Predicates.not(SubType.ZOMBIE.getPredicate()));
         filter2.add(NoxiousGhoulPredicate.instance);
     }
 

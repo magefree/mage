@@ -11,7 +11,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterPermanentCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -22,7 +21,7 @@ public final class Didgeridoo extends CardImpl {
     private static final FilterPermanentCard filter = new FilterPermanentCard("a Minotaur permanent card");
 
     static {
-        filter.add(new SubtypePredicate(SubType.MINOTAUR));
+        filter.add(SubType.MINOTAUR.getPredicate());
     }
 
     public Didgeridoo(UUID ownerId, CardSetInfo setInfo) {

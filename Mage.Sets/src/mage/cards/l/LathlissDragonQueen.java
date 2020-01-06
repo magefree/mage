@@ -18,7 +18,6 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.DragonToken2;
@@ -33,10 +32,10 @@ public final class LathlissDragonQueen extends CardImpl {
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Dragons");
 
     static {
-        filter.add(new SubtypePredicate(SubType.DRAGON));
+        filter.add(SubType.DRAGON.getPredicate());
         filter.add(Predicates.not(TokenPredicate.instance));
         filter.add(AnotherPredicate.instance);
-        filter2.add(new SubtypePredicate(SubType.DRAGON));
+        filter2.add(SubType.DRAGON.getPredicate());
     }
 
     public LathlissDragonQueen(UUID ownerId, CardSetInfo setInfo) {

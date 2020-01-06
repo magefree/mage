@@ -13,7 +13,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -24,7 +23,7 @@ public final class NagaoBoundByHonor extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Samurai creatures");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SAMURAI));
+        filter.add(SubType.SAMURAI.getPredicate());
     }
 
     public NagaoBoundByHonor(UUID ownerId, CardSetInfo setInfo) {

@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetAnyTarget;
 
 /**
@@ -25,7 +24,7 @@ public final class SpawnOfThraxes extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Mountains you control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.MOUNTAIN));
+        filter.add(SubType.MOUNTAIN.getPredicate());
     }
     
     public SpawnOfThraxes(UUID ownerId, CardSetInfo setInfo) {

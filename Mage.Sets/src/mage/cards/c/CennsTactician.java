@@ -16,7 +16,6 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.CounterPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -29,7 +28,7 @@ public final class CennsTactician extends CardImpl {
     private static final FilterCreaturePermanent filterSoldier = new FilterCreaturePermanent("Soldier creature");
     private static final FilterControlledCreaturePermanent filterCounter = new FilterControlledCreaturePermanent("Each creature you control with a +1/+1 counter on it");
     static {
-        filterSoldier.add(new SubtypePredicate(SubType.SOLDIER));
+        filterSoldier.add(SubType.SOLDIER.getPredicate());
         filterCounter.add(new CounterPredicate(CounterType.P1P1));
     }
 

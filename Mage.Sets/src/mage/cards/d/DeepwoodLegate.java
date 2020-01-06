@@ -18,7 +18,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -30,8 +29,8 @@ public final class DeepwoodLegate extends CardImpl {
     private static final FilterPermanent filterSwamp = new FilterPermanent();
 
     static {
-        filterForest.add(new SubtypePredicate(SubType.FOREST));
-        filterSwamp.add(new SubtypePredicate(SubType.SWAMP));
+        filterForest.add(SubType.FOREST.getPredicate());
+        filterSwamp.add(SubType.SWAMP.getPredicate());
     }
 
     public DeepwoodLegate(UUID ownerId, CardSetInfo setInfo) {

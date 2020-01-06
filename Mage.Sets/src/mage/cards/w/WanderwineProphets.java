@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -26,7 +25,7 @@ public final class WanderwineProphets extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Merfolk");
 
     static {
-        filter.add(new SubtypePredicate(SubType.MERFOLK));
+        filter.add(SubType.MERFOLK.getPredicate());
     }
 
     public WanderwineProphets(UUID ownerId, CardSetInfo setInfo) {

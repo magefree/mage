@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -21,7 +20,7 @@ public final class Scald extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("a player taps an Island");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ISLAND));
+        filter.add(SubType.ISLAND.getPredicate());
     }
 
     public Scald(UUID ownerId, CardSetInfo setInfo) {

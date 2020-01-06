@@ -18,7 +18,6 @@ import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -83,7 +82,7 @@ class HarshMercyEffect extends OneShotEffect {
 
             FilterPermanent filter = new FilterCreaturePermanent("creatures");
             for (String type : chosenTypes) {
-                filter.add(Predicates.not(new SubtypePredicate(SubType.byDescription(type))));
+                filter.add(Predicates.not(SubType.byDescription(type).getPredicate()));
             }
 
             return new DestroyAllEffect(filter, true).apply(game, source);

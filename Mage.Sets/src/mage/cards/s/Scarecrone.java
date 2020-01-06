@@ -17,7 +17,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -31,7 +30,7 @@ public final class Scarecrone extends CardImpl {
     static {
         filter.add(CardType.ARTIFACT.getPredicate());
         filter.add(CardType.CREATURE.getPredicate());
-        filterScarecrow.add(new SubtypePredicate(SubType.SCARECROW));
+        filterScarecrow.add(SubType.SCARECROW.getPredicate());
     }
 
     public Scarecrone(UUID ownerId, CardSetInfo setInfo) {

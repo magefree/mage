@@ -17,7 +17,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -30,7 +29,7 @@ public final class AngelicOverseer extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Human");
 
     static {
-        filter.add(new SubtypePredicate(SubType.HUMAN));
+        filter.add(SubType.HUMAN.getPredicate());
     }
 
     public AngelicOverseer(UUID ownerId, CardSetInfo setInfo) {

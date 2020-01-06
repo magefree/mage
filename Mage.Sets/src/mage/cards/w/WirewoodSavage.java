@@ -11,7 +11,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -22,7 +21,7 @@ public final class WirewoodSavage extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("a Beast");
 
     static {
-        filter.add(new SubtypePredicate(SubType.BEAST));
+        filter.add(SubType.BEAST.getPredicate());
     }
 
     public WirewoodSavage(UUID ownerId, CardSetInfo setInfo) {

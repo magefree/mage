@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.GoblinToken;
 import mage.target.common.TargetControlledPermanent;
 
@@ -22,7 +21,7 @@ public final class MoggAlarm extends CardImpl {
 
      private static final FilterControlledPermanent filter = new FilterControlledPermanent("two Mountains");
     static {
-        filter.add(new SubtypePredicate(SubType.MOUNTAIN));
+        filter.add(SubType.MOUNTAIN.getPredicate());
     }
     
     public MoggAlarm(UUID ownerId, CardSetInfo setInfo) {

@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
@@ -27,7 +26,7 @@ public final class SliverOverlord extends CardImpl {
     private static final FilterCard filter = new FilterCard("Sliver card");
     
     static{
-        filter.add(new SubtypePredicate(SubType.SLIVER));
+        filter.add(SubType.SLIVER.getPredicate());
     }
 
     public SliverOverlord(UUID ownerId, CardSetInfo setInfo) {

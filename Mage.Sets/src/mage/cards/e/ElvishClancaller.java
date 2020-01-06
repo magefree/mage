@@ -18,7 +18,6 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -31,7 +30,7 @@ public final class ElvishClancaller extends CardImpl {
     private static final FilterCard filter2 = new FilterCard("card named Elvish Clancaller");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ELF));
+        filter.add(SubType.ELF.getPredicate());
         filter2.add(new NamePredicate("Elvish Clancaller"));
     }
 

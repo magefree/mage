@@ -13,7 +13,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -25,8 +24,8 @@ public final class AvenBrigadier extends CardImpl {
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Soldier creatures");
 
     static {
-        filter1.add(new SubtypePredicate(SubType.BIRD));
-        filter2.add(new SubtypePredicate(SubType.SOLDIER));
+        filter1.add(SubType.BIRD.getPredicate());
+        filter2.add(SubType.SOLDIER.getPredicate());
     }
 
     public AvenBrigadier(UUID ownerId, CardSetInfo setInfo) {

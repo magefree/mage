@@ -8,7 +8,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterInstantOrSorcerySpell;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 import java.util.UUID;
 
@@ -21,7 +20,7 @@ public final class LuckyClover extends CardImpl {
             = new FilterInstantOrSorcerySpell("an Adventure instant or sorcery spell");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ADVENTURE));
+        filter.add(SubType.ADVENTURE.getPredicate());
     }
 
     public LuckyClover(UUID ownerId, CardSetInfo setInfo) {

@@ -14,7 +14,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.other.AuraCardCanAttachToPermanentId;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -68,7 +67,7 @@ class AcademyResearchersEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         FilterCard filterCardInHand = new FilterCard();
-        filterCardInHand.add(new SubtypePredicate(SubType.AURA));
+        filterCardInHand.add(SubType.AURA.getPredicate());
         Player controller = game.getPlayer(source.getControllerId());
         Permanent academyResearchers = game.getPermanent(source.getSourceId());
         if (controller != null && academyResearchers != null) {

@@ -18,7 +18,6 @@ import mage.constants.SubTypeSet;
 import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -75,10 +74,10 @@ class EndemicPlagueEffect extends OneShotEffect {
             if (subs == null) {
                 return false;
             }
-            List<SubtypePredicate> preds = new ArrayList<>();
+            List<SubType.SubTypePredicate> preds = new ArrayList<>();
             for (SubType subType : subs) {
                 if (subType.getSubTypeSet() == SubTypeSet.CreatureType) {
-                    preds.add(new SubtypePredicate(subType));
+                    preds.add(subType.getPredicate());
                 }
             }
             FilterCreaturePermanent filter = new FilterCreaturePermanent();

@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -25,7 +24,7 @@ public final class GempalmIncinerator extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Goblins on the battlefield");
     static {
-        filter.add(new SubtypePredicate(SubType.GOBLIN));
+        filter.add(SubType.GOBLIN.getPredicate());
     }
     
     public GempalmIncinerator(UUID ownerId, CardSetInfo setInfo) {

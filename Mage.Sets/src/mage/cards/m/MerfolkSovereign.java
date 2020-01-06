@@ -14,7 +14,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -28,8 +27,8 @@ public final class MerfolkSovereign extends CardImpl {
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Merfolk creature");
 
     static {
-        filter1.add(new SubtypePredicate(SubType.MERFOLK));
-        filter2.add(new SubtypePredicate(SubType.MERFOLK));
+        filter1.add(SubType.MERFOLK.getPredicate());
+        filter2.add(SubType.MERFOLK.getPredicate());
     }
 
     public MerfolkSovereign(UUID ownerId, CardSetInfo setInfo) {

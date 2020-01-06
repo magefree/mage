@@ -12,7 +12,6 @@ import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  * @author nantuko
@@ -22,7 +21,7 @@ public final class SpareFromEvil extends CardImpl {
     private static final FilterCreatureCard filterNonHuman = new FilterCreatureCard("non-Human creatures");
 
     static {
-        filterNonHuman.add(Predicates.not(new SubtypePredicate(SubType.HUMAN)));
+        filterNonHuman.add(Predicates.not(SubType.HUMAN.getPredicate()));
     }
 
     public SpareFromEvil(UUID ownerId, CardSetInfo setInfo) {

@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -28,7 +27,7 @@ public final class HarmonicSliver extends CardImpl {
 
     private static final FilterCreaturePermanent filterSliver = new FilterCreaturePermanent();
     static {
-        filterSliver.add(new SubtypePredicate(SubType.SLIVER));
+        filterSliver.add(SubType.SLIVER.getPredicate());
     }
 
     public HarmonicSliver(UUID ownerId, CardSetInfo setInfo) {

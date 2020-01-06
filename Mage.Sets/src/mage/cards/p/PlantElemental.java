@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -23,7 +22,7 @@ public final class PlantElemental extends CardImpl {
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("a Forest");
     
     static{
-        filter.add(new SubtypePredicate(SubType.FOREST));
+        filter.add(SubType.FOREST.getPredicate());
     }
 
     public PlantElemental(UUID ownerId, CardSetInfo setInfo) {

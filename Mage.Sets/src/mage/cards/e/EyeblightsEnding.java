@@ -9,7 +9,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -21,7 +20,7 @@ public final class EyeblightsEnding extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Elf creature");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate(SubType.ELF)));
+        filter.add(Predicates.not(SubType.ELF.getPredicate()));
     }
 
     public EyeblightsEnding(UUID ownerId, CardSetInfo setInfo) {

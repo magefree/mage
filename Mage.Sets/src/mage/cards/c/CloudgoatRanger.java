@@ -20,7 +20,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.permanent.token.KithkinToken;
 import mage.target.common.TargetControlledPermanent;
@@ -35,7 +34,7 @@ public final class CloudgoatRanger extends CardImpl {
 
     static {
         filter.add(Predicates.not(TappedPredicate.instance));
-        filter.add(new SubtypePredicate(SubType.KITHKIN));
+        filter.add(SubType.KITHKIN.getPredicate());
     }
 
     public CloudgoatRanger(UUID ownerId, CardSetInfo setInfo) {

@@ -14,7 +14,6 @@ import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
@@ -29,7 +28,7 @@ public final class QuestForTheGoblinLord extends CardImpl {
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        goblinFilter.add(new SubtypePredicate(SubType.GOBLIN));
+        goblinFilter.add(SubType.GOBLIN.getPredicate());
     }
 
     public QuestForTheGoblinLord(UUID ownerId, CardSetInfo setInfo) {

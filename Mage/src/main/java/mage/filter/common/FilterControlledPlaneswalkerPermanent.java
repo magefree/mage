@@ -2,7 +2,6 @@ package mage.filter.common;
 
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  * @author LevelX2
@@ -20,7 +19,7 @@ public class FilterControlledPlaneswalkerPermanent extends FilterControlledPerma
     public FilterControlledPlaneswalkerPermanent(SubType subType, String name) {
         super(name);
         this.add(CardType.PLANESWALKER.getPredicate());
-        this.add(new SubtypePredicate(subType));
+        this.add(subType.getPredicate());
     }
 
     public FilterControlledPlaneswalkerPermanent(String name) {

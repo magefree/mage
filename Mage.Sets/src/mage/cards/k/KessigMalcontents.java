@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
@@ -23,7 +22,7 @@ public final class KessigMalcontents extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Humans you control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.HUMAN));
+        filter.add(SubType.HUMAN.getPredicate());
     }
 
     public KessigMalcontents(UUID ownerId, CardSetInfo setInfo) {

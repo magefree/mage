@@ -14,7 +14,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetEnchantmentPermanent;
@@ -28,7 +27,7 @@ public final class EmeraldCharm extends CardImpl {
     private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("non-Aura enchantment");
     
     static {
-        filter.add(Predicates.not(new SubtypePredicate(SubType.AURA)));
+        filter.add(Predicates.not(SubType.AURA.getPredicate()));
     }
 
     public EmeraldCharm(UUID ownerId, CardSetInfo setInfo) {

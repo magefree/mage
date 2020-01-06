@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInHand;
 
 /**
@@ -25,8 +24,8 @@ public final class GameTrail extends CardImpl {
     private static final FilterCard filter = new FilterCard("a Mountain or Forest card from your hand");
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate(SubType.MOUNTAIN),
-                new SubtypePredicate(SubType.FOREST)));
+        filter.add(Predicates.or(SubType.MOUNTAIN.getPredicate(),
+                SubType.FOREST.getPredicate()));
     }
 
     public GameTrail(UUID ownerId, CardSetInfo setInfo) {

@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AttachedToPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -30,9 +29,9 @@ public final class PietyCharm extends CardImpl {
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Soldier creature");
 
     static {
-        filter1.add(new SubtypePredicate(SubType.AURA));
+        filter1.add(SubType.AURA.getPredicate());
         filter1.add(new AttachedToPredicate(new FilterCreaturePermanent()));
-        filter2.add(new SubtypePredicate(SubType.SOLDIER));
+        filter2.add(SubType.SOLDIER.getPredicate());
     }
 
     public PietyCharm(UUID ownerId, CardSetInfo setInfo) {

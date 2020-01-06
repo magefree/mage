@@ -16,7 +16,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
@@ -28,7 +27,7 @@ public final class HeadstrongBrute extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("another Pirate");
 
     static {
-        filter.add(new SubtypePredicate(SubType.PIRATE));
+        filter.add(SubType.PIRATE.getPredicate());
         filter.add(AnotherPredicate.instance);
     }
 

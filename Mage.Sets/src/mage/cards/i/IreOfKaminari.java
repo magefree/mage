@@ -8,7 +8,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetAnyTarget;
 
 import java.util.UUID;
@@ -22,7 +21,7 @@ public final class IreOfKaminari extends CardImpl {
     private static final FilterCard filter = new FilterCard("Arcane");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ARCANE));
+        filter.add(SubType.ARCANE.getPredicate());
     }
 
     public IreOfKaminari(UUID ownerId, CardSetInfo setInfo) {

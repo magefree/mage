@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -63,7 +62,7 @@ class LuminescentRainEffect extends OneShotEffect {
         Choice typeChoice = new ChoiceCreatureType(game.getObject(source.getSourceId()));
         if (player != null && player.choose(Outcome.BoostCreature, typeChoice, game)) {
             FilterControlledPermanent filter = new FilterControlledPermanent();
-            filter.add(new SubtypePredicate(SubType.byDescription(typeChoice.getChoice())));
+            filter.add(SubType.byDescription(typeChoice.getChoice()).getPredicate());
             return new GainLifeEffect(new PermanentsOnBattlefieldCount(filter, 2)).apply(game, source);
         }
         return false;

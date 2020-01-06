@@ -13,7 +13,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 import java.util.UUID;
 
@@ -26,9 +25,9 @@ public final class DeathBaron extends CardImpl {
     private static final FilterCreaturePermanent filterZombie = new FilterCreaturePermanent();
 
     static {
-        filterSkeletons.add(new SubtypePredicate(SubType.SKELETON));
-        filterZombie.add(new SubtypePredicate(SubType.ZOMBIE));
-        filterZombie.add(Predicates.not(new SubtypePredicate(SubType.SKELETON)));
+        filterSkeletons.add(SubType.SKELETON.getPredicate());
+        filterZombie.add(SubType.ZOMBIE.getPredicate());
+        filterZombie.add(Predicates.not(SubType.SKELETON.getPredicate()));
     }
 
     public DeathBaron(UUID ownerId, CardSetInfo setInfo) {

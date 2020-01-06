@@ -18,7 +18,6 @@ import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.filter.predicate.mageobject.NamePredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.filter.predicate.permanent.AttackingSameNotBandedPredicate;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
@@ -323,7 +322,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                         for (Ability ab : bandsWithOther) {
                             BandsWithOtherAbility ability = (BandsWithOtherAbility) ab;
                             if (ability.getSubtype() != null) {
-                                predicates.add(new SubtypePredicate(ability.getSubtype()));
+                                predicates.add(ability.getSubtype().getPredicate());
                             }
                             if (ability.getSupertype() != null) {
                                 predicates.add(new SupertypePredicate(ability.getSupertype()));
@@ -357,7 +356,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                                 for (Ability ab : bandsWithOther) {
                                     BandsWithOtherAbility ability = (BandsWithOtherAbility) ab;
                                     if (ability.getSubtype() != null) {
-                                        predicates.add(new SubtypePredicate(ability.getSubtype()));
+                                        predicates.add(ability.getSubtype().getPredicate());
                                     }
                                     if (ability.getSupertype() != null) {
                                         predicates.add(new SupertypePredicate(ability.getSupertype()));

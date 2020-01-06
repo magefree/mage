@@ -15,7 +15,6 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.AnotherCardPredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -78,7 +77,7 @@ class RelentlessDeadEffect extends OneShotEffect {
                 int payCount = ManaUtil.playerPaysXGenericMana(true, "Relentless Dead", controller, source, game);
                 // can be 0
                 FilterCard filter = new FilterCard("Another target Zombie card with converted mana cost {" + payCount + "}");
-                filter.add(new SubtypePredicate(SubType.ZOMBIE));
+                filter.add(SubType.ZOMBIE.getPredicate());
                 filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, payCount));
                 filter.add(new AnotherCardPredicate());
                 TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(filter);

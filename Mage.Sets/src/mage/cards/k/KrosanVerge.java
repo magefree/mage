@@ -18,7 +18,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -31,8 +30,8 @@ public final class KrosanVerge extends CardImpl {
     private static final FilterCard filterPlains = new FilterCard("a Plains");
 
     static {
-        filterForest.add(new SubtypePredicate(SubType.FOREST));
-        filterPlains.add(new SubtypePredicate(SubType.PLAINS));
+        filterForest.add(SubType.FOREST.getPredicate());
+        filterPlains.add(SubType.PLAINS.getPredicate());
     }
 
     public KrosanVerge(UUID ownerId, CardSetInfo setInfo) {

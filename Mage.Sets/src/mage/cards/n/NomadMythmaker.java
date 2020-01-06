@@ -17,7 +17,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -34,7 +33,7 @@ public final class NomadMythmaker extends CardImpl {
 
     static {
         FILTER.add(CardType.ENCHANTMENT.getPredicate());
-        FILTER.add(new SubtypePredicate(SubType.AURA));
+        FILTER.add(SubType.AURA.getPredicate());
     }
 
     public NomadMythmaker(UUID ownerId, CardSetInfo setInfo) {

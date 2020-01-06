@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -20,7 +19,7 @@ public final class WarrenScourgeElf extends CardImpl {
     private static final FilterCard filter = new FilterCard("Goblin");
 
     static {
-        filter.add(new SubtypePredicate(SubType.GOBLIN));
+        filter.add(SubType.GOBLIN.getPredicate());
     }
 
     public WarrenScourgeElf(UUID ownerId, CardSetInfo setInfo) {

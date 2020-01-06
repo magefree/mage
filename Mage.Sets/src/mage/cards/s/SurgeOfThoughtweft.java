@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -23,7 +22,7 @@ public final class SurgeOfThoughtweft extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Kithkin");
 
     static {
-        filter.add(new SubtypePredicate(SubType.KITHKIN));
+        filter.add(SubType.KITHKIN.getPredicate());
     }
 
     public SurgeOfThoughtweft(UUID ownerId, CardSetInfo setInfo) {

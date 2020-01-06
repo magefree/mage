@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.TargetPermanent;
 
@@ -26,9 +25,9 @@ public final class ReaperKing extends CardImpl {
     private static final FilterCreaturePermanent filterTrigger = new FilterCreaturePermanent("another Scarecrow");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SCARECROW));
+        filter.add(SubType.SCARECROW.getPredicate());
         filterTrigger.add(AnotherPredicate.instance);
-        filterTrigger.add(new SubtypePredicate(SubType.SCARECROW));
+        filterTrigger.add(SubType.SCARECROW.getPredicate());
     }
 
     public ReaperKing(UUID ownerId, CardSetInfo setInfo) {

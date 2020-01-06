@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -55,7 +54,7 @@ enum AphettoDredgingAdjuster implements TargetAdjuster {
         if (controller != null && controller.choose(Outcome.PutCreatureInPlay, typeChoice, game)) {
             String chosenType = typeChoice.getChoice();
             FilterCreatureCard filter = new FilterCreatureCard(chosenType + " cards");
-            filter.add(new SubtypePredicate(SubType.byDescription(chosenType)));
+            filter.add(SubType.byDescription(chosenType).getPredicate());
             ability.addTarget(new TargetCardInYourGraveyard(0, 3, filter));
         }
     }

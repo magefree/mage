@@ -16,7 +16,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -27,7 +26,7 @@ public final class CloakAndDagger extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent("a Rogue creature");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ROGUE));
+        filter.add(SubType.ROGUE.getPredicate());
     }
 
     public CloakAndDagger(UUID ownerId, CardSetInfo setInfo) {

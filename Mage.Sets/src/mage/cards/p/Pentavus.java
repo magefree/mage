@@ -18,7 +18,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.PentaviteToken;
 import mage.target.common.TargetControlledPermanent;
 
@@ -31,7 +30,7 @@ public final class Pentavus extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Pentavite");
 
     static {
-        filter.add(new SubtypePredicate(SubType.PENTAVITE));
+        filter.add(SubType.PENTAVITE.getPredicate());
     }
 
     public Pentavus(UUID ownerId, CardSetInfo setInfo) {

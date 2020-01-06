@@ -16,7 +16,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.ElementalCatToken;
@@ -32,7 +31,7 @@ public final class FirecatBlitz extends CardImpl {
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("Mountains");
 
     static {
-        filter.add(new SubtypePredicate(SubType.MOUNTAIN));
+        filter.add(SubType.MOUNTAIN.getPredicate());
     }
 
     public FirecatBlitz(UUID ownerId, CardSetInfo setInfo) {

@@ -16,7 +16,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterPermanentCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 
@@ -30,8 +29,8 @@ public final class GoblinWizard extends CardImpl {
     private static final FilterPermanent goblinPermanent = new FilterPermanent("Goblin");
 
     static {
-        filter.add(new SubtypePredicate(SubType.GOBLIN));
-        goblinPermanent.add(new SubtypePredicate(SubType.GOBLIN));
+        filter.add(SubType.GOBLIN.getPredicate());
+        goblinPermanent.add(SubType.GOBLIN.getPredicate());
     }
 
     public GoblinWizard(UUID ownerId, CardSetInfo setInfo) {

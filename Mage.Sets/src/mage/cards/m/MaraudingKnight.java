@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
@@ -23,7 +22,7 @@ public final class MaraudingKnight extends CardImpl {
 
     private static final FilterLandPermanent plainsFilter = new FilterLandPermanent("Plains your opponent controls");
     static {
-      plainsFilter.add(new SubtypePredicate(SubType.PLAINS));
+      plainsFilter.add(SubType.PLAINS.getPredicate());
       plainsFilter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 

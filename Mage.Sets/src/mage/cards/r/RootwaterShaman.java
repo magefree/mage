@@ -17,7 +17,6 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 
 /**
@@ -28,7 +27,7 @@ public final class RootwaterShaman extends CardImpl {
 
    private static final FilterCard filter = new FilterCard("Aura spells with enchant creature");
     static {
-        filter.add(new SubtypePredicate(SubType.AURA));
+        filter.add(SubType.AURA.getPredicate());
         filter.add(new RootwaterShamanAbilityPredicate());
     }
 

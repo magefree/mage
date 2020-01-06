@@ -15,7 +15,6 @@ import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -127,7 +126,7 @@ public class ExchangeControlTargetEffect extends ContinuousEffectImpl {
             permanent.getAbilities().setControllerId(lockedControllers.get(permanent.getId()));
             if (destroyAttachedAuras) {
                 FilterPermanent filter = new FilterPermanent();
-                filter.add(new SubtypePredicate(SubType.AURA));
+                filter.add(SubType.AURA.getPredicate());
                 for (UUID attachmentId : new HashSet<>(permanent.getAttachments())) {
                     Permanent attachment = game.getPermanent(attachmentId);
                     if (attachment != null && filter.match(attachment, game)) {

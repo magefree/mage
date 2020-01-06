@@ -22,7 +22,6 @@ import mage.choices.ChoiceLandType;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -111,7 +110,7 @@ class VisionCharmEffect extends ContinuousEffectImpl {
             return;
         }
         FilterPermanent filter = new FilterLandPermanent();
-        filter.add(new SubtypePredicate(SubType.byDescription(targetLandType)));
+        filter.add(SubType.byDescription(targetLandType).getPredicate());
         if (this.affectedObjectsSet) {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, game)) {
                 affectedObjectList.add(new MageObjectReference(permanent, game));

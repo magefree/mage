@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.SaprolingToken;
 import mage.target.common.TargetControlledPermanent;
 
@@ -26,8 +25,8 @@ public final class NemataGroveGuardian extends CardImpl {
     private static final FilterControlledPermanent filter1 = new FilterControlledPermanent("Saproling");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SAPROLING));
-        filter1.add(new SubtypePredicate(SubType.SAPROLING));
+        filter.add(SubType.SAPROLING.getPredicate());
+        filter1.add(SubType.SAPROLING.getPredicate());
     }
 
     public NemataGroveGuardian(UUID ownerId, CardSetInfo setInfo) {

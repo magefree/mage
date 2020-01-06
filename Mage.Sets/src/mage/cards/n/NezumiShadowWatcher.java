@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -25,7 +24,7 @@ public final class NezumiShadowWatcher extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Ninja");
 
     static {
-        filter.add(new SubtypePredicate(SubType.NINJA));
+        filter.add(SubType.NINJA.getPredicate());
     }
 
     public NezumiShadowWatcher(UUID ownerId, CardSetInfo setInfo) {

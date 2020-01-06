@@ -13,7 +13,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -29,7 +28,7 @@ public final class CatacombDragon extends CardImpl {
 
     static {
         filter.add(Predicates.not(CardType.ARTIFACT.getPredicate()));
-        filter.add(Predicates.not(new SubtypePredicate(SubType.DRAGON)));
+        filter.add(Predicates.not(SubType.DRAGON.getPredicate()));
     }
 
     public CatacombDragon(UUID ownerId, CardSetInfo setInfo) {

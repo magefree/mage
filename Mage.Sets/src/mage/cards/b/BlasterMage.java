@@ -15,7 +15,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -27,7 +26,7 @@ public final class BlasterMage extends CardImpl {
    private static final FilterPermanent filter = new FilterPermanent("Wall");
 
     static {
-        filter.add(new SubtypePredicate(SubType.WALL));
+        filter.add(SubType.WALL.getPredicate());
     }
 
     public BlasterMage(UUID ownerId, CardSetInfo setInfo) {

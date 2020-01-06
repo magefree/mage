@@ -17,7 +17,6 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.permanent.token.TreasureToken;
 
@@ -32,7 +31,7 @@ public final class RevelInRiches extends CardImpl {
 
     static {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
-        filter2.add(new SubtypePredicate(SubType.TREASURE));
+        filter2.add(SubType.TREASURE.getPredicate());
     }
 
     public RevelInRiches(UUID ownerId, CardSetInfo setInfo) {

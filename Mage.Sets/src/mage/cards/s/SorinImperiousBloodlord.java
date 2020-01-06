@@ -20,7 +20,6 @@ import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -43,7 +42,7 @@ public final class SorinImperiousBloodlord extends CardImpl {
             = new FilterCreatureCard("a Vampire creature card");
 
     static {
-        filter2.add(new SubtypePredicate(SubType.VAMPIRE));
+        filter2.add(SubType.VAMPIRE.getPredicate());
     }
 
     public SorinImperiousBloodlord(UUID ownerId, CardSetInfo setInfo) {

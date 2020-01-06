@@ -15,7 +15,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  * @author Loki
@@ -25,7 +24,7 @@ public final class ClotSliver extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Slivers");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SLIVER));
+        filter.add(SubType.SLIVER.getPredicate());
     }
 
     public ClotSliver(UUID ownerId, CardSetInfo setInfo) {

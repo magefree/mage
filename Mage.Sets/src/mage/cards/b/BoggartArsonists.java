@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -29,8 +28,8 @@ public final class BoggartArsonists extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new SubtypePredicate(SubType.SCARECROW),
-                new SubtypePredicate(SubType.PLAINS)));
+                SubType.SCARECROW.getPredicate(),
+                SubType.PLAINS.getPredicate()));
     }
 
     public BoggartArsonists(UUID ownerId, CardSetInfo setInfo) {

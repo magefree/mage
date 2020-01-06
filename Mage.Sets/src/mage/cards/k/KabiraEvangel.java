@@ -16,7 +16,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardIdPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -27,7 +26,7 @@ public final class KabiraEvangel extends CardImpl {
     private static final FilterControlledCreaturePermanent FILTER1 = new FilterControlledCreaturePermanent();
 
     static {
-        FILTER1.add(new SubtypePredicate(SubType.ALLY));
+        FILTER1.add(SubType.ALLY.getPredicate());
     }
 
     public KabiraEvangel(UUID ownerId, CardSetInfo setInfo) {
@@ -40,7 +39,7 @@ public final class KabiraEvangel extends CardImpl {
         this.toughness = new MageInt(3);
 
         FilterPermanent filter2 = new FilterPermanent(getName() + " or another Ally");
-        filter2.add(Predicates.or(new CardIdPredicate(this.getId()), new SubtypePredicate(SubType.ALLY)));
+        filter2.add(Predicates.or(new CardIdPredicate(this.getId()), SubType.ALLY.getPredicate()));
 
         // Whenever Kabira Evangel or another Ally enters the battlefield under your control, you may choose a color. If you do, Allies you control gain protection from the chosen color until end of turn.
         Effect effect = new GainProtectionFromColorAllEffect(Duration.EndOfTurn, FILTER1);

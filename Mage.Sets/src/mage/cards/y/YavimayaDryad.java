@@ -15,7 +15,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -30,7 +29,7 @@ public final class YavimayaDryad extends CardImpl {
     private static final FilterLandCard filter = new FilterLandCard("a Forest card");
 
     static {
-        filter.add(new SubtypePredicate(SubType.FOREST));
+        filter.add(SubType.FOREST.getPredicate());
     }
 
     public YavimayaDryad(UUID ownerId, CardSetInfo setInfo) {

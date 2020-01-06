@@ -16,7 +16,6 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -75,9 +74,9 @@ class PatriarchsBiddingEffect extends OneShotEffect {
                 chosenTypes.add(chosenType);
             }
 
-            List<SubtypePredicate> predicates = new ArrayList<>();
+            List<SubType.SubTypePredicate> predicates = new ArrayList<>();
             for (String type : chosenTypes) {
-                predicates.add(new SubtypePredicate(SubType.byDescription(type)));
+                predicates.add(SubType.byDescription(type).getPredicate());
             }
             FilterCard filter = new FilterCreatureCard();
             filter.add(Predicates.or(predicates));

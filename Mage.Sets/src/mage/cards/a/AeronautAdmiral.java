@@ -13,7 +13,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledArtifactPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -24,7 +23,7 @@ public final class AeronautAdmiral extends CardImpl {
     private static final FilterControlledArtifactPermanent filter = new FilterControlledArtifactPermanent("Vehicles");
 
     static {
-        filter.add(new SubtypePredicate(SubType.VEHICLE));
+        filter.add(SubType.VEHICLE.getPredicate());
     }
 
     public AeronautAdmiral(UUID ownerId, CardSetInfo setInfo) {

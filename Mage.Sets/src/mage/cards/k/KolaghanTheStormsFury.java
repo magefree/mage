@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
@@ -24,7 +23,7 @@ public final class KolaghanTheStormsFury extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Dragon you control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.DRAGON));
+        filter.add(SubType.DRAGON.getPredicate());
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

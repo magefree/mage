@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
@@ -27,9 +26,9 @@ public final class ScionOfOona extends CardImpl {
     private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("Faeries");
 
     static {
-        filter.add(new SubtypePredicate(SubType.FAERIE));
+        filter.add(SubType.FAERIE.getPredicate());
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filterCreature.add(new SubtypePredicate(SubType.FAERIE));
+        filterCreature.add(SubType.FAERIE.getPredicate());
         filterCreature.add(new ControllerPredicate(TargetController.YOU));
     }
 

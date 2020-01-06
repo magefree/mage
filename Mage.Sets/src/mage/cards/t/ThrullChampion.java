@@ -18,7 +18,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -30,7 +29,7 @@ public final class ThrullChampion extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Thrull creatures");
 
     static {
-        filter.add(new SubtypePredicate(SubType.THRULL));
+        filter.add(SubType.THRULL.getPredicate());
     }
 
     public ThrullChampion(UUID ownerId, CardSetInfo setInfo) {

@@ -17,7 +17,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.CanBeEnchantedByPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -53,7 +52,7 @@ class RetetherEffect extends OneShotEffect {
 
     static {
         filterAura.add(CardType.ENCHANTMENT.getPredicate());
-        filterAura.add(new SubtypePredicate(SubType.AURA));
+        filterAura.add(SubType.AURA.getPredicate());
     }
 
     public RetetherEffect() {

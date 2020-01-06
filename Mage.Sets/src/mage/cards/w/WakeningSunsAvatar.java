@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.watchers.common.CastFromHandWatcher;
 
 /**
@@ -25,7 +24,7 @@ public final class WakeningSunsAvatar extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Dinosaur creatures");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate(SubType.DINOSAUR)));
+        filter.add(Predicates.not(SubType.DINOSAUR.getPredicate()));
     }
 
     public WakeningSunsAvatar(UUID ownerId, CardSetInfo setInfo) {

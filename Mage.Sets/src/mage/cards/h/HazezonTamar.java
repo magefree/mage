@@ -21,7 +21,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.token.HazezonTamarSandWarriorToken;
 import mage.players.Player;
@@ -35,8 +34,8 @@ public final class HazezonTamar extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Sand Warriors");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SAND));
-        filter.add(new SubtypePredicate(SubType.WARRIOR));
+        filter.add(SubType.SAND.getPredicate());
+        filter.add(SubType.WARRIOR.getPredicate());
     }
 
     public HazezonTamar(UUID ownerId, CardSetInfo setInfo) {

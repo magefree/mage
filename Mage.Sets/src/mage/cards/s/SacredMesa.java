@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.PegasusToken;
 import mage.target.common.TargetControlledPermanent;
 
@@ -27,7 +26,7 @@ public final class SacredMesa extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Pegasus");
     static {
-        filter.add(new SubtypePredicate(SubType.PEGASUS));
+        filter.add(SubType.PEGASUS.getPredicate());
     }
 
     public SacredMesa(UUID ownerId, CardSetInfo setInfo) {

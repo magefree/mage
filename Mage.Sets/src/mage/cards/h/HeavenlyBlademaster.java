@@ -24,7 +24,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -86,8 +85,8 @@ class HeavenlyBlademasterEffect extends OneShotEffect {
 
     static {
         filter.add(Predicates.or(
-                new SubtypePredicate(SubType.AURA),
-                new SubtypePredicate(SubType.EQUIPMENT)
+                SubType.AURA.getPredicate(),
+                SubType.EQUIPMENT.getPredicate()
         ));
     }
 

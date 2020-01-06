@@ -17,7 +17,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -72,7 +71,7 @@ class TribalUnityEffect extends OneShotEffect {
                 game.informPlayers(sourceObject.getLogName() + " chosen type: " + typeChoice.getChoice());
             }
             FilterCreaturePermanent filterCreaturePermanent = new FilterCreaturePermanent();
-            filterCreaturePermanent.add(new SubtypePredicate(SubType.byDescription(typeChoice.getChoice())));
+            filterCreaturePermanent.add(SubType.byDescription(typeChoice.getChoice()).getPredicate());
             game.addEffect(new BoostAllEffect(
                     boost, boost, Duration.EndOfTurn, filterCreaturePermanent, false), source);
             return true;

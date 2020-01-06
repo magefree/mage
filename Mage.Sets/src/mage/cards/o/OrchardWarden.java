@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -25,7 +24,7 @@ public final class OrchardWarden extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another Treefolk creature");
     
     static {
-        filter.add(new SubtypePredicate(SubType.TREEFOLK));
+        filter.add(SubType.TREEFOLK.getPredicate());
         filter.add(AnotherPredicate.instance);
     }
     

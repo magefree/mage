@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -27,10 +26,10 @@ public final class Swarmyard extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-            new SubtypePredicate(SubType.INSECT),
-            new SubtypePredicate(SubType.RAT),
-            new SubtypePredicate(SubType.SPIDER),
-            new SubtypePredicate(SubType.SQUIRREL)
+            SubType.INSECT.getPredicate(),
+            SubType.RAT.getPredicate(),
+            SubType.SPIDER.getPredicate(),
+            SubType.SQUIRREL.getPredicate()
         ));
     }
 

@@ -15,7 +15,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
@@ -27,7 +26,7 @@ public final class ShaperApprentice extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("another Merfolk");
 
     static {
-        filter.add(new SubtypePredicate(SubType.MERFOLK));
+        filter.add(SubType.MERFOLK.getPredicate());
         filter.add(AnotherPredicate.instance);
     }
 

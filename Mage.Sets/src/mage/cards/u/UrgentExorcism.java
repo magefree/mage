@@ -9,7 +9,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -22,7 +21,7 @@ public final class UrgentExorcism extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new SubtypePredicate(SubType.SPIRIT),
+                SubType.SPIRIT.getPredicate(),
                 CardType.ENCHANTMENT.getPredicate()));
     }
 

@@ -18,7 +18,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
@@ -31,7 +30,7 @@ public final class Outbreak extends CardImpl {
     private static final FilterCard filterLand = new FilterCard("a Swamp card");
 
     static {
-        filterLand.add(new SubtypePredicate(SubType.SWAMP));
+        filterLand.add(SubType.SWAMP.getPredicate());
     }
 
     public Outbreak(UUID ownerId, CardSetInfo setInfo) {
@@ -72,7 +71,7 @@ class OutbreakEffect extends OneShotEffect {
         if (player != null && player.choose(outcome, typeChoice, game)) {
             game.informPlayers(player.getLogName() + " has chosen " + typeChoice.getChoice());
             FilterCreaturePermanent filter = new FilterCreaturePermanent("All creatures of the chosen type");
-            filter.add(new SubtypePredicate(SubType.byDescription(typeChoice.getChoice())));
+            filter.add(SubType.byDescription(typeChoice.getChoice()).getPredicate());
             ContinuousEffect effect = new BoostAllEffect(-1, -1, Duration.WhileOnBattlefield, filter, false);
             game.addEffect(effect, source);
             return true;

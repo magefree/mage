@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.permanent.token.SaprolingToken;
 
@@ -39,8 +38,8 @@ public final class VerdelothTheAncient extends CardImpl {
         // Saproling creatures and other Treefolk creatures get +1/+1.
         FilterCreaturePermanent filter = new FilterCreaturePermanent("Saproling creatures and other Treefolk creatures");
         filter.add(Predicates.or(
-                Predicates.and(new SubtypePredicate(SubType.TREEFOLK), Predicates.not(new PermanentIdPredicate(this.getId()))),
-                new SubtypePredicate(SubType.SAPROLING))
+                Predicates.and(SubType.TREEFOLK.getPredicate(), Predicates.not(new PermanentIdPredicate(this.getId()))),
+                SubType.SAPROLING.getPredicate())
         );
         filter.add(Predicates.not(new PermanentIdPredicate(this.getId())));
 

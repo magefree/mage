@@ -22,7 +22,6 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -38,7 +37,7 @@ public final class IncandescentSoulstoke extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Elemental creatures");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ELEMENTAL));
+        filter.add(SubType.ELEMENTAL.getPredicate());
     }
 
     public IncandescentSoulstoke(UUID ownerId, CardSetInfo setInfo) {
@@ -92,7 +91,7 @@ class IncandescentSoulstokeEffect extends OneShotEffect {
         if (controller != null) {
             if (controller.chooseUse(Outcome.PutCreatureInPlay, choiceText, source, game)) {
                 FilterCard filter = new FilterCreatureCard();
-                filter.add(new SubtypePredicate((SubType.ELEMENTAL)));
+                filter.add(SubType.ELEMENTAL.getPredicate());
                 TargetCardInHand target = new TargetCardInHand(filter);
                 if (controller.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
                     Card card = game.getCard(target.getFirstTarget());

@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -28,7 +27,7 @@ public final class JediTraining extends CardImpl {
     protected static final FilterCard filter = new FilterCard("Jedi spells");
 
     static {
-        filter.add(new SubtypePredicate(SubType.JEDI));
+        filter.add(SubType.JEDI.getPredicate());
     }
 
     public JediTraining(UUID ownerId, CardSetInfo setInfo) {

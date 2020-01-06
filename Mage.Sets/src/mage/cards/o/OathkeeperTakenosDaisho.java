@@ -16,7 +16,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -30,7 +29,7 @@ public final class OathkeeperTakenosDaisho extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("it's a Samurai card");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SAMURAI));
+        filter.add(SubType.SAMURAI.getPredicate());
     }
 
     public OathkeeperTakenosDaisho(UUID ownerId, CardSetInfo setInfo) {

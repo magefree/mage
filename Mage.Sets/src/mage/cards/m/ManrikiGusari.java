@@ -15,7 +15,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -27,7 +26,7 @@ public final class ManrikiGusari extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Equipment");
 
     static {
-        filter.add(new SubtypePredicate(SubType.EQUIPMENT));
+        filter.add(SubType.EQUIPMENT.getPredicate());
     }
 
     public ManrikiGusari(UUID ownerId, CardSetInfo setInfo) {

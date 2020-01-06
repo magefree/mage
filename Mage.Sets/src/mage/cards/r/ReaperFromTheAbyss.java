@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -32,7 +31,7 @@ public final class ReaperFromTheAbyss extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Demon creature");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate(SubType.DEMON)));
+        filter.add(Predicates.not(SubType.DEMON.getPredicate()));
     }
 
     public ReaperFromTheAbyss(UUID ownerId, CardSetInfo setInfo) {

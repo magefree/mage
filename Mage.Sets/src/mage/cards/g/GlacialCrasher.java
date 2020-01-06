@@ -12,7 +12,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -51,7 +50,7 @@ class GlacialCrasherEffect extends RestrictionEffect {
     private static final FilterLandPermanent filter = new FilterLandPermanent("Mountain");
 
     static {
-        filter.add(new SubtypePredicate(SubType.MOUNTAIN));
+        filter.add(SubType.MOUNTAIN.getPredicate());
     }
 
     public GlacialCrasherEffect() {

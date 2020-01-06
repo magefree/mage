@@ -14,7 +14,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -27,7 +26,7 @@ public final class AnabaAncestor extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Another target Minotaur creature");
 
     static {
-        filter.add(new SubtypePredicate(SubType.MINOTAUR));
+        filter.add(SubType.MINOTAUR.getPredicate());
         filter.add(AnotherPredicate.instance);
     }
 

@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  * 
@@ -26,7 +25,7 @@ public final class FortifiedArea extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Wall creatures");
 
     static {
-        filter.add(new SubtypePredicate(SubType.WALL));
+        filter.add(SubType.WALL.getPredicate());
     }
 
     public FortifiedArea(UUID ownerId, CardSetInfo setInfo) {

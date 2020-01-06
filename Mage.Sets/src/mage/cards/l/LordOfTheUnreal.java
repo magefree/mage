@@ -16,7 +16,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  * @author Loki
@@ -26,7 +25,7 @@ public final class LordOfTheUnreal extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Illusion creatures");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ILLUSION));
+        filter.add(SubType.ILLUSION.getPredicate());
     }
 
     public LordOfTheUnreal(UUID ownerId, CardSetInfo setInfo) {

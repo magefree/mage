@@ -9,7 +9,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetSpell;
 
 /**
@@ -23,7 +22,7 @@ public final class Nullify extends CardImpl {
     static {
         filter.add(Predicates.or(
                 CardType.CREATURE.getPredicate(),
-                new SubtypePredicate(SubType.AURA)));
+                SubType.AURA.getPredicate()));
     }
     
     public Nullify(UUID ownerId, CardSetInfo setInfo) {

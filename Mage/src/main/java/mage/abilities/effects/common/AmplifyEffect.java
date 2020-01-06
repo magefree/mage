@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
@@ -29,7 +28,7 @@ import java.util.List;
 
 /**
  * Effect for the AmplifyAbility
- *
+ * <p>
  * 702.37. Amplify 702.37a Amplify is a static ability. “Amplify N” means “As
  * this object enters the battlefield, reveal any number of cards from your hand
  * that share a creature type with it. This permanent enters the battlefield
@@ -37,7 +36,6 @@ import java.util.List;
  * this card or any other cards that are entering the battlefield at the same
  * time as this card.” 702.37b If a creature has multiple instances of amplify,
  * each one works separately.
- *
  *
  * @author FenrisulfrX
  */
@@ -101,9 +99,9 @@ public class AmplifyEffect extends ReplacementEffectImpl {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && sourceCreature != null) {
             FilterCreatureCard filter = new FilterCreatureCard("creatures cards to reveal");
-            List<SubtypePredicate> filterSubtypes = new ArrayList<>();
+            List<SubType.SubTypePredicate> filterSubtypes = new ArrayList<>();
             for (SubType subtype : sourceCreature.getSubtype(game)) {
-                filterSubtypes.add(new SubtypePredicate(subtype));
+                filterSubtypes.add(subtype.getPredicate());
             }
             if (filterSubtypes.size() > 1) {
                 filter.add(Predicates.or(filterSubtypes));

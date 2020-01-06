@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -29,9 +28,9 @@ public final class UndeadSlayer extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new SubtypePredicate(SubType.SKELETON),
-                new SubtypePredicate(SubType.VAMPIRE),
-                new SubtypePredicate(SubType.ZOMBIE)));
+                SubType.SKELETON.getPredicate(),
+                SubType.VAMPIRE.getPredicate(),
+                SubType.ZOMBIE.getPredicate()));
     }
 
     public UndeadSlayer(UUID ownerId, CardSetInfo setInfo) {

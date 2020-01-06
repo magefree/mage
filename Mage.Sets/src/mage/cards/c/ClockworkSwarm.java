@@ -29,7 +29,6 @@ import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.counters.Counters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.watchers.common.AttackedOrBlockedThisCombatWatcher;
 
@@ -42,7 +41,7 @@ public final class ClockworkSwarm extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Walls");
 
     static {
-        filter.add(new SubtypePredicate(SubType.WALL));
+        filter.add(SubType.WALL.getPredicate());
     }
 
     public ClockworkSwarm(UUID ownerId, CardSetInfo setInfo) {

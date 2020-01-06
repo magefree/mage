@@ -18,7 +18,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
@@ -31,7 +30,7 @@ public final class FullMoonsRise extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Werewolf creatures");
 
     static {
-        filter.add(new SubtypePredicate(SubType.WEREWOLF));
+        filter.add(SubType.WEREWOLF.getPredicate());
     }
 
     public FullMoonsRise(UUID ownerId, CardSetInfo setInfo) {

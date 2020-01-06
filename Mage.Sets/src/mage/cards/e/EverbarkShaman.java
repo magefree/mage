@@ -15,7 +15,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -29,8 +28,8 @@ public final class EverbarkShaman extends CardImpl {
     private static final FilterCard filterTreefolk = new FilterCard("Treefolk from your graveyard");
 
     static {
-        filterForest.add(new SubtypePredicate(SubType.FOREST));
-        filterTreefolk.add(new SubtypePredicate(SubType.TREEFOLK));
+        filterForest.add(SubType.FOREST.getPredicate());
+        filterTreefolk.add(SubType.TREEFOLK.getPredicate());
     }
 
     public EverbarkShaman(UUID ownerId, CardSetInfo setInfo) {

@@ -18,7 +18,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -59,7 +58,7 @@ class WarrenWeirdingEffect extends OneShotEffect {
     private static final FilterCreaturePermanent filterGoblin = new FilterCreaturePermanent();
 
     static {
-        filterGoblin.add(new SubtypePredicate(SubType.GOBLIN));
+        filterGoblin.add(SubType.GOBLIN.getPredicate());
     }
 
     WarrenWeirdingEffect() {

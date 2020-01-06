@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 
 /**
@@ -51,7 +50,7 @@ class OgreJailbreakerEffect extends AsThoughEffectImpl {
     private static final FilterPermanent filter = new FilterPermanent();
     private PermanentsOnTheBattlefieldCondition gateCondition;
     static {
-        filter.add(new SubtypePredicate(SubType.GATE));
+        filter.add(SubType.GATE.getPredicate());
     }
 
     public OgreJailbreakerEffect() {

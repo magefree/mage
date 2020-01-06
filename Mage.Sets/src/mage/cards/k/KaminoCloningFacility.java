@@ -16,7 +16,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.TrooperToken;
 
 /**
@@ -28,7 +27,7 @@ public final class KaminoCloningFacility extends CardImpl {
     private static final FilterSpell FILTER = new FilterSpell("a Trooper spell");
 
     static {
-        FILTER.add(new SubtypePredicate(SubType.TROOPER));
+        FILTER.add(SubType.TROOPER.getPredicate());
     }
 
     public KaminoCloningFacility(UUID ownerId, CardSetInfo setInfo) {

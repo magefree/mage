@@ -15,7 +15,6 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterPermanentCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledPermanent;
@@ -30,7 +29,7 @@ public final class Lifespinner extends CardImpl {
 
     static {
         filter.add(new SupertypePredicate(SuperType.LEGENDARY));
-        filter.add(new SubtypePredicate(SubType.SPIRIT));
+        filter.add(SubType.SPIRIT.getPredicate());
     }
 
     public Lifespinner(UUID ownerId, CardSetInfo setInfo) {

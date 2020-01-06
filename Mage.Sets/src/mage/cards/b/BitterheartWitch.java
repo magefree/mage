@@ -15,7 +15,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -58,7 +57,7 @@ class BitterheartWitchEffect extends OneShotEffect {
     private static final FilterCard filter = new FilterCard("Curse card in your library");
 
     static {
-        filter.add(new SubtypePredicate(SubType.CURSE));
+        filter.add(SubType.CURSE.getPredicate());
     }
 
     public BitterheartWitchEffect() {

@@ -15,7 +15,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.permanent.token.WolfToken;
 
@@ -28,7 +27,7 @@ public final class WrensRunPackmaster extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Wolf");
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(new SubtypePredicate(SubType.WOLF));
+        filter.add(SubType.WOLF.getPredicate());
     }
 
     public WrensRunPackmaster(UUID ownerId, CardSetInfo setInfo) {

@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.ZombieToken;
@@ -31,7 +30,7 @@ public final class DiregrafColossus extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("a Zombie spell");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ZOMBIE));
+        filter.add(SubType.ZOMBIE.getPredicate());
     }
 
     public DiregrafColossus(UUID ownerId, CardSetInfo setInfo) {
@@ -64,7 +63,7 @@ class DiregrafColossusEffect extends OneShotEffect {
     private static final FilterCard filter = new FilterCard();
 
     static {
-        filter.add(new SubtypePredicate(SubType.ZOMBIE));
+        filter.add(SubType.ZOMBIE.getPredicate());
     }
 
     public DiregrafColossusEffect() {

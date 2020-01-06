@@ -19,7 +19,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
@@ -30,7 +29,7 @@ public final class SunCrestedPterodon extends CardImpl {
     private static final FilterControlledCreaturePermanent filterAnotherDino = new FilterControlledCreaturePermanent();
     static {
         filterAnotherDino.add(AnotherPredicate.instance);
-        filterAnotherDino.add(new SubtypePredicate(SubType.DINOSAUR));
+        filterAnotherDino.add(SubType.DINOSAUR.getPredicate());
     }
 
     public SunCrestedPterodon(UUID ownerId, CardSetInfo setInfo) {

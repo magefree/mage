@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -26,7 +25,7 @@ public final class FlashFlood extends CardImpl {
 
     static {
         filter1.add(new ColorPredicate(ObjectColor.RED));
-        filter2.add(new SubtypePredicate(SubType.MOUNTAIN));
+        filter2.add(SubType.MOUNTAIN.getPredicate());
     }
 
     public FlashFlood(UUID ownerId, CardSetInfo setInfo) {

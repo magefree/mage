@@ -9,7 +9,6 @@ import mage.cards.Cards;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.target.common.TargetCardInLibrary;
 
@@ -43,7 +42,7 @@ class ThreeDreamsTarget extends TargetCardInLibrary {
     private static final FilterCard aurafilter = new FilterCard("Aura cards with different names");
 
     static {
-        aurafilter.add(new SubtypePredicate(SubType.AURA));
+        aurafilter.add(SubType.AURA.getPredicate());
     }
 
     public ThreeDreamsTarget() {

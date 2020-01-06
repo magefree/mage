@@ -13,7 +13,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -26,8 +25,8 @@ public final class Moonmist extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures other than Werewolves and Wolves");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate(SubType.WEREWOLF)));
-        filter.add(Predicates.not(new SubtypePredicate(SubType.WOLF)));
+        filter.add(Predicates.not(SubType.WEREWOLF.getPredicate()));
+        filter.add(Predicates.not(SubType.WOLF.getPredicate()));
     }
 
     public Moonmist(UUID ownerId, CardSetInfo setInfo) {
@@ -54,7 +53,7 @@ class MoonmistEffect extends OneShotEffect {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("humans");
 
     static {
-        filter.add(new SubtypePredicate(SubType.HUMAN));
+        filter.add(SubType.HUMAN.getPredicate());
     }
 
     public MoonmistEffect() {

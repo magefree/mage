@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -27,7 +26,7 @@ public final class OrcishCaptain extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Orc creature");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ORC));
+        filter.add(SubType.ORC.getPredicate());
     }
 
     public OrcishCaptain(UUID ownerId, CardSetInfo setInfo) {

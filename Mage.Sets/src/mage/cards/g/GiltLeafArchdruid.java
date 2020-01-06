@@ -17,7 +17,6 @@ import mage.constants.*;
 import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -34,7 +33,7 @@ public final class GiltLeafArchdruid extends CardImpl {
     private static final FilterSpell filterSpell = new FilterSpell("a Druid spell");
 
     static {
-        filterSpell.add(new SubtypePredicate(SubType.DRUID));
+        filterSpell.add(SubType.DRUID.getPredicate());
     }
 
     public GiltLeafArchdruid(UUID ownerId, CardSetInfo setInfo) {

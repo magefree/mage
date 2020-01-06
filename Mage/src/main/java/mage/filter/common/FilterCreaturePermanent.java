@@ -5,7 +5,6 @@ package mage.filter.common;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -25,7 +24,7 @@ public class FilterCreaturePermanent extends FilterPermanent {
     public FilterCreaturePermanent(SubType subtype, String name) {
         super(name);
         this.add(CardType.CREATURE.getPredicate());
-        this.add(new SubtypePredicate(subtype));
+        this.add(subtype.getPredicate());
     }
 
     public FilterCreaturePermanent(final FilterCreaturePermanent filter) {

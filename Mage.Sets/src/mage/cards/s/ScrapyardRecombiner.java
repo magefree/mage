@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledPermanent;
 
@@ -30,7 +29,7 @@ public final class ScrapyardRecombiner extends CardImpl {
             = new FilterControlledArtifactPermanent("an artifact");
 
     static {
-        filter.add(new SubtypePredicate(SubType.CONSTRUCT));
+        filter.add(SubType.CONSTRUCT.getPredicate());
     }
 
     public ScrapyardRecombiner(UUID ownerId, CardSetInfo setInfo) {

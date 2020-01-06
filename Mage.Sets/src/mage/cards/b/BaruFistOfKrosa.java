@@ -19,11 +19,9 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.token.BaruFistOfKrosaToken;
-import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 /**
@@ -36,7 +34,7 @@ public final class BaruFistOfKrosa extends CardImpl {
     private static final FilterCreaturePermanent greenCreatureFilter = new FilterCreaturePermanent("green creatures you control");
 
     static {
-        forestFilter.add(new SubtypePredicate(SubType.FOREST));
+        forestFilter.add(SubType.FOREST.getPredicate());
         greenCreatureFilter.add(new ControllerPredicate(TargetController.YOU));
         greenCreatureFilter.add(new ColorPredicate(ObjectColor.GREEN));
     }

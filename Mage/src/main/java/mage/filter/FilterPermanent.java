@@ -10,7 +10,6 @@ import mage.filter.predicate.ObjectPlayer;
 import mage.filter.predicate.ObjectPlayerPredicate;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -32,13 +31,13 @@ public class FilterPermanent extends FilterObject<Permanent> implements FilterIn
 
     public FilterPermanent(SubType subtype, String name) {
         super(name);
-        this.add(new SubtypePredicate(subtype));
+        this.add(subtype.getPredicate());
     }
 
     public FilterPermanent(Set<SubType> subtypesList, String name) {
         super(name);
         for (SubType subtype : subtypesList) {
-            this.add(new SubtypePredicate(subtype));
+            this.add(subtype.getPredicate());
         }
     }
 

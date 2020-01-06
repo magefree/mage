@@ -11,7 +11,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
@@ -23,7 +22,7 @@ public final class ElvishVanguard extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("another Elf");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ELF));
+        filter.add(SubType.ELF.getPredicate());
         filter.add(AnotherPredicate.instance);
     }
 

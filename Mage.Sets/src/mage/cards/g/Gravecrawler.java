@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 
 /**
@@ -51,7 +50,7 @@ class GravecrawlerPlayEffect extends AsThoughEffectImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("zombie");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ZOMBIE));
+        filter.add(SubType.ZOMBIE.getPredicate());
     }
 
     public GravecrawlerPlayEffect() {

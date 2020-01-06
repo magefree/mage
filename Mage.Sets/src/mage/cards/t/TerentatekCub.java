@@ -17,7 +17,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 import java.util.UUID;
 
@@ -29,7 +28,7 @@ public final class TerentatekCub extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Hunter or Rogue card");
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate(SubType.JEDI), new SubtypePredicate(SubType.SITH)));
+        filter.add(Predicates.or(SubType.JEDI.getPredicate(), SubType.SITH.getPredicate()));
     }
 
     public TerentatekCub(UUID ownerId, CardSetInfo setInfo) {

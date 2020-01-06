@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -22,7 +21,7 @@ public final class TendrilsOfCorruption extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Swamp you control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SWAMP));
+        filter.add(SubType.SWAMP.getPredicate());
     }
 
     public TendrilsOfCorruption(UUID ownerId, CardSetInfo setInfo) {

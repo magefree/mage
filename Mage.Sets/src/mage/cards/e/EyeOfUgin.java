@@ -19,7 +19,6 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -33,7 +32,7 @@ public final class EyeOfUgin extends CardImpl {
     static {
         filter.add(ColorlessPredicate.instance);
         filterSpells.add(ColorlessPredicate.instance);
-        filterSpells.add(new SubtypePredicate(SubType.ELDRAZI));
+        filterSpells.add(SubType.ELDRAZI.getPredicate());
     }
 
     public EyeOfUgin(UUID ownerId, CardSetInfo setInfo) {

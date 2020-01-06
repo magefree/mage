@@ -16,7 +16,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.predicate.mageobject.AttachmentAttachedToCardTypePredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -62,7 +61,7 @@ class AutumnTailKitsuneSage extends TokenImpl {
 
     static {
         filter.add(new AttachmentAttachedToCardTypePredicate(CardType.CREATURE));
-        filter.add(new SubtypePredicate(SubType.AURA));
+        filter.add(SubType.AURA.getPredicate());
     }
 
     AutumnTailKitsuneSage() {

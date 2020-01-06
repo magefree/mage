@@ -15,7 +15,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -27,7 +26,7 @@ public final class MyrGalvanizer extends CardImpl {
     static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Myr creatures");
 
     static {
-        filter.add(new SubtypePredicate(SubType.MYR));
+        filter.add(SubType.MYR.getPredicate());
     }
 
     public MyrGalvanizer (UUID ownerId, CardSetInfo setInfo) {

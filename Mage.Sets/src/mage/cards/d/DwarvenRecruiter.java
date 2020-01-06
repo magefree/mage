@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -21,7 +20,7 @@ public final class DwarvenRecruiter extends CardImpl {
     private static final FilterCard filter = new FilterCard("Dwarf cards");
 
     static {
-        filter.add(new SubtypePredicate(SubType.DWARF));
+        filter.add(SubType.DWARF.getPredicate());
     }
 
     public DwarvenRecruiter(UUID ownerId, CardSetInfo setInfo) {

@@ -11,7 +11,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -22,7 +21,7 @@ public final class KithkinMourncaller extends CardImpl {
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("an attacking Kithkin or Elf");
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate(SubType.KITHKIN), new SubtypePredicate(SubType.ELF)));
+        filter.add(Predicates.or(SubType.KITHKIN.getPredicate(), SubType.ELF.getPredicate()));
     }
 
     public KithkinMourncaller(UUID ownerId, CardSetInfo setInfo) {

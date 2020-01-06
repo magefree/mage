@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.TrooperToken;
 
@@ -26,7 +25,7 @@ public final class CommanderCody extends CardImpl {
 
     static {
         filter.add(Predicates.not(TokenPredicate.instance));
-        filter.add(new SubtypePredicate(SubType.TROOPER));
+        filter.add(SubType.TROOPER.getPredicate());
     }
 
     public CommanderCody(UUID ownerId, CardSetInfo setInfo) {

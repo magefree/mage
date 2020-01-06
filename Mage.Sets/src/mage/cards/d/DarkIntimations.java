@@ -18,7 +18,6 @@ import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
@@ -40,7 +39,7 @@ public final class DarkIntimations extends CardImpl {
 
     static {
         filter.add(CardType.PLANESWALKER.getPredicate());
-        filter.add(new SubtypePredicate(SubType.BOLAS));
+        filter.add(SubType.BOLAS.getPredicate());
     }
 
     public DarkIntimations(UUID ownerId, CardSetInfo setInfo) {

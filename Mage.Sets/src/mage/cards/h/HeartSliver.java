@@ -13,7 +13,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  * @author Loki
@@ -23,7 +22,7 @@ public final class HeartSliver extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("All sliver creatures");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SLIVER));
+        filter.add(SubType.SLIVER.getPredicate());
     }
 
     public HeartSliver(UUID ownerId, CardSetInfo setInfo) {

@@ -17,7 +17,6 @@ import mage.constants.ColoredManaSymbol;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.KithkinToken;
 import mage.target.common.TargetControlledPermanent;
 
@@ -30,7 +29,7 @@ public final class GuardianOfCloverdell extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Kithkin");
 
     static {
-        filter.add(new SubtypePredicate(SubType.KITHKIN));
+        filter.add(SubType.KITHKIN.getPredicate());
     }
 
     public GuardianOfCloverdell(UUID ownerId, CardSetInfo setInfo) {

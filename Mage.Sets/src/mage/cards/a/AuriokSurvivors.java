@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -27,7 +26,7 @@ public final class AuriokSurvivors extends CardImpl {
     private static final FilterCard filter = new FilterCard("Equipment card from your graveyard");
 
     static {
-        filter.add(new SubtypePredicate(SubType.EQUIPMENT));
+        filter.add(SubType.EQUIPMENT.getPredicate());
     }
 
     public AuriokSurvivors(UUID ownerId, CardSetInfo setInfo) {

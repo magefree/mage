@@ -16,7 +16,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -26,7 +25,7 @@ public final class ScrollOfAvacyn extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent();
 
     static {
-        filter.add(new SubtypePredicate(SubType.ANGEL));
+        filter.add(SubType.ANGEL.getPredicate());
     }
 
     public ScrollOfAvacyn(UUID ownerId, CardSetInfo setInfo) {

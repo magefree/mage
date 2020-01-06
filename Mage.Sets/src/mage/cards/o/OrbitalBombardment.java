@@ -9,7 +9,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -20,7 +19,7 @@ public final class OrbitalBombardment extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Starship creatures");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate(SubType.STARSHIP)));
+        filter.add(Predicates.not(SubType.STARSHIP.getPredicate()));
     }
 
     public OrbitalBombardment(UUID ownerId, CardSetInfo setInfo) {

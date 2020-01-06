@@ -19,7 +19,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -32,8 +31,8 @@ public final class LysAlanaScarblade extends CardImpl {
     private static final FilterCard filter2 = new FilterCard("an Elf card");
 
     static {
-        filter1.add(new SubtypePredicate(SubType.ELF));
-        filter2.add(new SubtypePredicate(SubType.ELF));
+        filter1.add(SubType.ELF.getPredicate());
+        filter2.add(SubType.ELF.getPredicate());
     }
 
     public LysAlanaScarblade(UUID ownerId, CardSetInfo setInfo) {

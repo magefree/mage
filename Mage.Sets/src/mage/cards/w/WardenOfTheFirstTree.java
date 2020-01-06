@@ -21,9 +21,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.TokenImpl;
-import mage.game.permanent.token.Token;
 
 /**
  *
@@ -35,8 +33,8 @@ public final class WardenOfTheFirstTree extends CardImpl {
     private static final FilterCreaturePermanent FILTER2 = new FilterCreaturePermanent();
 
     static {
-        FILTER.add(new SubtypePredicate(SubType.WARRIOR));
-        FILTER2.add(new SubtypePredicate(SubType.SPIRIT));
+        FILTER.add(SubType.WARRIOR.getPredicate());
+        FILTER2.add(SubType.SPIRIT.getPredicate());
     }
 
     public WardenOfTheFirstTree(UUID ownerId, CardSetInfo setInfo) {

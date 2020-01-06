@@ -17,7 +17,6 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -39,10 +38,10 @@ public final class QuestForUlasTemple extends CardImpl {
         // At the beginning of each end step, if there are three or more quest counters on Quest for Ula's Temple, you may put a Kraken, Leviathan, Octopus, or Serpent creature card from your hand onto the battlefield.
         FilterCreatureCard filter = new FilterCreatureCard("Kraken, Leviathan, Octopus, or Serpent creature card");
         filter.add(Predicates.or(
-                new SubtypePredicate(SubType.KRAKEN),
-                new SubtypePredicate(SubType.LEVIATHAN),
-                new SubtypePredicate(SubType.OCTOPUS),
-                new SubtypePredicate(SubType.SERPENT)));
+                SubType.KRAKEN.getPredicate(),
+                SubType.LEVIATHAN.getPredicate(),
+                SubType.OCTOPUS.getPredicate(),
+                SubType.SERPENT.getPredicate()));
         this.addAbility(new QuestForUlasTempleTriggeredAbility(new PutCardFromHandOntoBattlefieldEffect(filter)));
     }
 

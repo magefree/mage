@@ -15,7 +15,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 import java.util.UUID;
 
@@ -28,7 +27,7 @@ public final class RootboundCrag extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent();
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate(SubType.MOUNTAIN), new SubtypePredicate(SubType.FOREST)));
+        filter.add(Predicates.or(SubType.MOUNTAIN.getPredicate(), SubType.FOREST.getPredicate()));
     }
 
     public RootboundCrag(UUID ownerId, CardSetInfo setInfo) {

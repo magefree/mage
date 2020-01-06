@@ -1,7 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -15,12 +14,12 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.permanent.token.RebelToken;
 
+import java.util.UUID;
+
 /**
- *
  * @author Styxo
  */
 public final class PrincessLeia extends CardImpl {
@@ -29,10 +28,9 @@ public final class PrincessLeia extends CardImpl {
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Rebel creature you control");
 
     static {
-        SubtypePredicate rebel = new SubtypePredicate(SubType.REBEL);
         filter1.add(AnotherPredicate.instance);
-        filter1.add(rebel);
-        filter2.add(rebel);
+        filter1.add(SubType.REBEL.getPredicate());
+        filter2.add(SubType.REBEL.getPredicate());
     }
 
     public PrincessLeia(UUID ownerId, CardSetInfo setInfo) {

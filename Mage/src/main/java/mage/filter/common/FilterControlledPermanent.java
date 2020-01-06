@@ -3,7 +3,6 @@ package mage.filter.common;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
@@ -27,7 +26,7 @@ public class FilterControlledPermanent extends FilterPermanent {
         super(name);
         this.add(new ControllerPredicate(TargetController.YOU));
         if (subtype != null) {
-            this.add(new SubtypePredicate(subtype));
+            this.add(subtype.getPredicate());
         }
     }
 

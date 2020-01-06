@@ -20,7 +20,6 @@ import mage.filter.FilterPlayer;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -70,7 +69,7 @@ class BoreasChargerEffect extends OneShotEffect {
 
     static {
         filter.add(new BoreasChargerPredicate());
-        filter2.add(new SubtypePredicate(SubType.PLAINS));
+        filter2.add(SubType.PLAINS.getPredicate());
     }
 
     public BoreasChargerEffect() {

@@ -20,7 +20,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -61,13 +60,13 @@ class DesertInGYorBFCondition implements Condition {
     private static final FilterCard filter = new FilterCard();
 
     static {
-        filter.add(new SubtypePredicate(SubType.DESERT));
+        filter.add(SubType.DESERT.getPredicate());
     }
 
     private static final FilterControlledLandPermanent filter2 = new FilterControlledLandPermanent("a desert");
 
     static {
-        filter2.add(new SubtypePredicate(SubType.DESERT));
+        filter2.add(SubType.DESERT.getPredicate());
     }
 
     @Override

@@ -21,7 +21,6 @@ import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -100,7 +99,7 @@ class ChaosMoonOddTriggeredAbility extends DelayedTriggeredManaAbility {
     private static final FilterLandPermanent filter = new FilterLandPermanent("Mountain");
 
     static {
-        filter.add(new SubtypePredicate(SubType.MOUNTAIN));
+        filter.add(SubType.MOUNTAIN.getPredicate());
     }
 
     public ChaosMoonOddTriggeredAbility() {
@@ -145,7 +144,7 @@ class ChaosMoonEvenReplacementEffect extends ReplacementEffectImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent("Mountain");
 
     static {
-        filter.add(new SubtypePredicate(SubType.MOUNTAIN));
+        filter.add(SubType.MOUNTAIN.getPredicate());
     }
 
     ChaosMoonEvenReplacementEffect() {

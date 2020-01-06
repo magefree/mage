@@ -13,7 +13,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -25,8 +24,8 @@ public final class ShiftingSliver extends CardImpl {
     private static final FilterCreaturePermanent filterBlockedBy = new FilterCreaturePermanent("except by Slivers");
 
     static {
-        filterCreatures.add(new SubtypePredicate(SubType.SLIVER));
-        filterBlockedBy.add(Predicates.not(new SubtypePredicate(SubType.SLIVER)));
+        filterCreatures.add(SubType.SLIVER.getPredicate());
+        filterBlockedBy.add(Predicates.not(SubType.SLIVER.getPredicate()));
     }
 
     public ShiftingSliver(UUID ownerId, CardSetInfo setInfo) {

@@ -21,7 +21,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -103,7 +102,7 @@ class IconOfAncestryEffect extends OneShotEffect {
         FilterCreatureCard filter = new FilterCreatureCard("creature card that matches the chosen subtype");
         SubType subtype = (SubType) game.getState().getValue(source.getSourceId() + "_type");
         if (subtype != null) {
-            filter.add(new SubtypePredicate(subtype));
+            filter.add(subtype.getPredicate());
         }
         TargetCard target = new TargetCard(Zone.LIBRARY, filter);
         if (target.canChoose(controller.getId(), game)

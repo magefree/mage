@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AttachedToPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -31,7 +30,7 @@ public final class SeedlingCharm extends CardImpl {
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("green creature");
 
     static {
-        filter1.add(new SubtypePredicate(SubType.AURA));
+        filter1.add(SubType.AURA.getPredicate());
         filter1.add(new AttachedToPredicate(new FilterCreaturePermanent()));
         filter2.add(new ColorPredicate(ObjectColor.GREEN));
     }

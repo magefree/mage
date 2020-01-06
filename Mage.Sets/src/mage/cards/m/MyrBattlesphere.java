@@ -21,7 +21,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -106,7 +105,7 @@ class MyrBattlesphereEffect extends OneShotEffect {
 
     static {
         filter.add(Predicates.not(TappedPredicate.instance));
-        filter.add(new SubtypePredicate(SubType.MYR));
+        filter.add(SubType.MYR.getPredicate());
     }
 
     public MyrBattlesphereEffect() {

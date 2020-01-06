@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -28,7 +27,7 @@ public final class LysAlanaBowmaster extends CardImpl {
     private static final FilterCreaturePermanent filterFlying = new FilterCreaturePermanent("creature with flying");
 
     static {
-        filterElf.add(new SubtypePredicate(SubType.ELF));
+        filterElf.add(SubType.ELF.getPredicate());
         filterFlying.add(new AbilityPredicate(FlyingAbility.class));
     }
 

@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -25,7 +24,7 @@ public final class LovisaColdeyes extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that's a Barbarian, a Warrior, or a Berserker");
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate(SubType.BARBARIAN), new SubtypePredicate(SubType.WARRIOR), new SubtypePredicate(SubType.BERSERKER)));
+        filter.add(Predicates.or(SubType.BARBARIAN.getPredicate(), SubType.WARRIOR.getPredicate(), SubType.BERSERKER.getPredicate()));
     }
 
     public LovisaColdeyes(UUID ownerId, CardSetInfo setInfo) {

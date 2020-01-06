@@ -8,7 +8,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
@@ -21,7 +20,7 @@ public final class RiseToGlory extends CardImpl {
     private static final FilterCard filter = new FilterCard("Aura card from your graveyard");
 
     static {
-        filter.add(new SubtypePredicate(SubType.AURA));
+        filter.add(SubType.AURA.getPredicate());
     }
 
     public RiseToGlory(UUID ownerId, CardSetInfo setInfo) {

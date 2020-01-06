@@ -22,7 +22,6 @@ import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AnotherTargetPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
@@ -42,7 +41,7 @@ public final class SimicGuildmage extends CardImpl {
     private static final FilterEnchantmentPermanent auraFilter = new FilterEnchantmentPermanent("Aura");
 
     static {
-        auraFilter.add(new SubtypePredicate(SubType.AURA));
+        auraFilter.add(SubType.AURA.getPredicate());
     }
 
     public SimicGuildmage(UUID ownerId, CardSetInfo setInfo) {

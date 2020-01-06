@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetArtifactPermanent;
 import mage.target.common.TargetEnchantmentPermanent;
 
@@ -28,8 +27,8 @@ public final class DuergarHedgeMage extends CardImpl {
     private static final FilterLandPermanent filter2 = new FilterLandPermanent("a Plains");
 
     static {
-        filter.add(new SubtypePredicate(SubType.MOUNTAIN));
-        filter2.add(new SubtypePredicate(SubType.PLAINS));
+        filter.add(SubType.MOUNTAIN.getPredicate());
+        filter2.add(SubType.PLAINS.getPredicate());
     }
     private static final String rule1 = "When {this} enters the battlefield, if you control two or more Mountains, you may destroy target artifact.";
     private static final String rule2 = "When {this} enters the battlefield, if you control two or more Plains, you may destroy target enchantment.";

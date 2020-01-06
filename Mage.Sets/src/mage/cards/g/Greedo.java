@@ -14,7 +14,6 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.BlockedByIdPredicate;
 import mage.filter.predicate.permanent.BlockingAttackerIdPredicate;
 import mage.target.common.TargetCardInLibrary;
@@ -28,7 +27,7 @@ public final class Greedo extends CardImpl {
     private static final FilterCard filterCard = new FilterCard("Hunter or Rogue card");
 
     static {
-        filterCard.add(Predicates.or(new SubtypePredicate(SubType.ROGUE), new SubtypePredicate(SubType.HUNTER)));
+        filterCard.add(Predicates.or(SubType.ROGUE.getPredicate(), SubType.HUNTER.getPredicate()));
 
     }
 

@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -66,7 +65,7 @@ public final class VulshokBattlemaster extends CardImpl {
             Permanent battlemaster = game.getPermanent(source.getSourceId());
             if (battlemaster != null) {
                 FilterPermanent filter = new FilterPermanent();
-                filter.add(new SubtypePredicate(SubType.EQUIPMENT));
+                filter.add(SubType.EQUIPMENT.getPredicate());
                 for (Permanent equipment : game.getBattlefield().getAllActivePermanents(filter, game)) {
                     if (equipment != null) {
                         //If an Equipment can't equip Vulshok Battlemaster, it isn't attached to the Battlemaster, and it doesn't become unattached (if it's attached to a creature). (https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=48125)

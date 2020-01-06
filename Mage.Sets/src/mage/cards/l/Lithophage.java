@@ -13,7 +13,6 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -25,7 +24,7 @@ public final class Lithophage extends CardImpl {
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("a Mountain");
     
     static {
-        filter.add(new SubtypePredicate(SubType.MOUNTAIN));
+        filter.add(SubType.MOUNTAIN.getPredicate());
     }
     
     public Lithophage(UUID ownerId, CardSetInfo setInfo) {

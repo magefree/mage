@@ -8,7 +8,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.HumanToken;
 
 import java.util.UUID;
@@ -21,7 +20,7 @@ public final class WorthyKnight extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("a Knight spell");
 
     static {
-        filter.add(new SubtypePredicate(SubType.KNIGHT));
+        filter.add(SubType.KNIGHT.getPredicate());
     }
 
     public WorthyKnight(UUID ownerId, CardSetInfo setInfo) {

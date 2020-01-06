@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -25,7 +24,7 @@ public final class KeldonWarlord extends CardImpl {
     
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("non-Wall creatures you control.");
      static {
-    filter.add(Predicates.not(new SubtypePredicate(SubType.WALL)));
+    filter.add(Predicates.not(SubType.WALL.getPredicate()));
             }
 
     public KeldonWarlord(UUID ownerId, CardSetInfo setInfo) {

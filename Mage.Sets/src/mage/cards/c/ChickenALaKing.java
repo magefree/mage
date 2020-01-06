@@ -18,7 +18,6 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -34,7 +33,7 @@ public final class ChickenALaKing extends CardImpl {
 
     static {
         filter.add(Predicates.not(TappedPredicate.instance));
-        filter.add(new SubtypePredicate(SubType.CHICKEN));
+        filter.add(SubType.CHICKEN.getPredicate());
     }
 
     public ChickenALaKing(UUID ownerId, CardSetInfo setInfo) {
@@ -66,7 +65,7 @@ class ChickenALaKingTriggeredAbility extends TriggeredAbilityImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each Chicken");
 
     static {
-        filter.add(new SubtypePredicate(SubType.CHICKEN));
+        filter.add(SubType.CHICKEN.getPredicate());
     }
 
     public ChickenALaKingTriggeredAbility() {

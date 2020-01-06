@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInHand;
 
 /**
@@ -25,8 +24,8 @@ public final class ChokedEstuary extends CardImpl {
     private static final FilterCard filter = new FilterCard("an Island or Swamp card from your hand");
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate(SubType.ISLAND),
-                new SubtypePredicate(SubType.SWAMP)));
+        filter.add(Predicates.or(SubType.ISLAND.getPredicate(),
+                SubType.SWAMP.getPredicate()));
     }
 
     public ChokedEstuary(UUID ownerId, CardSetInfo setInfo) {

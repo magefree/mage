@@ -17,7 +17,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -30,7 +29,7 @@ public final class MaintenanceHangar extends CardImpl {
     private static final FilterCreaturePermanent filterPermanent = new FilterCreaturePermanent("Starship creatures");
 
     static {
-        filterPermanent.add(new SubtypePredicate(SubType.STARSHIP));
+        filterPermanent.add(SubType.STARSHIP.getPredicate());
     }
 
     public MaintenanceHangar(UUID ownerId, CardSetInfo setInfo) {
@@ -93,7 +92,7 @@ class MaintenanceHangarEffect extends ContinuousEffectImpl {
     private static final FilterCreatureCard filterCard = new FilterCreatureCard("Starship creatures");
 
     static {
-        filterCard.add(new SubtypePredicate(SubType.STARSHIP));
+        filterCard.add(SubType.STARSHIP.getPredicate());
     }
 
     public MaintenanceHangarEffect() {

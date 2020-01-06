@@ -13,7 +13,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledEnchantmentPermanent;
 import mage.filter.predicate.ObjectPlayer;
 import mage.filter.predicate.ObjectPlayerPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.other.OwnerPredicate;
 import mage.filter.predicate.permanent.AttachedToControlledPermanentPredicate;
 import mage.game.Game;
@@ -36,21 +35,21 @@ public final class RemoveEnchantments extends CardImpl {
         filter1.add(new OwnerPredicate(TargetController.YOU));
             // all Auras you own attached to permanents you control
         filter2.add(new AttachedToControlledPermanentPredicate());
-        filter2.add(new SubtypePredicate(SubType.AURA));
+        filter2.add(SubType.AURA.getPredicate());
         filter2.add(new OwnerPredicate(TargetController.YOU));
             // all Auras you own attached to attacking creatures your opponents control
         filter3.add(new AttachedToOpponentControlledAttackingCreaturePredicate());
-        filter3.add(new SubtypePredicate(SubType.AURA));
+        filter3.add(SubType.AURA.getPredicate());
         filter3.add(new OwnerPredicate(TargetController.YOU));
             // all other enchantments you control (i.e. that you don't own)
         filter4.add(new OwnerPredicate(TargetController.NOT_YOU));
             // all other Auras attached to permanents you control (i.e. that you don't own)
         filter5.add(new AttachedToControlledPermanentPredicate());
-        filter5.add(new SubtypePredicate(SubType.AURA));
+        filter5.add(SubType.AURA.getPredicate());
         filter5.add(new OwnerPredicate(TargetController.NOT_YOU));
             // all other Auras attached to attacking creatures your opponents control (i.e. that you don't own)
         filter6.add(new AttachedToOpponentControlledAttackingCreaturePredicate());
-        filter6.add(new SubtypePredicate(SubType.AURA));
+        filter6.add(SubType.AURA.getPredicate());
         filter6.add(new OwnerPredicate(TargetController.NOT_YOU));
     }
 

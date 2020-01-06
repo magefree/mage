@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.GoblinRogueToken;
 import mage.target.common.TargetControlledPermanent;
 
@@ -27,7 +26,7 @@ public final class WeirdingShaman extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Goblin");
 
     static {
-        filter.add(new SubtypePredicate(SubType.GOBLIN));
+        filter.add(SubType.GOBLIN.getPredicate());
     }
 
     public WeirdingShaman(UUID ownerId, CardSetInfo setInfo) {

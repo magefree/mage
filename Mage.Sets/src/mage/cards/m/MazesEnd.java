@@ -19,7 +19,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -38,7 +37,7 @@ public final class MazesEnd extends CardImpl {
     private static final FilterCard filterCard = new FilterCard("Gate card");
 
     static {
-        filterCard.add(new SubtypePredicate(SubType.GATE));
+        filterCard.add(SubType.GATE.getPredicate());
     }
 
     public MazesEnd(UUID ownerId, CardSetInfo setInfo) {

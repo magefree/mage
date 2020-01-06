@@ -13,7 +13,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -52,7 +51,7 @@ class EmeriaTheSkyRuinTriggeredAbility extends TriggeredAbilityImpl {
     static final FilterLandPermanent filter = new FilterLandPermanent("Plains");
 
     static {
-        filter.add(new SubtypePredicate(SubType.PLAINS));
+        filter.add(SubType.PLAINS.getPredicate());
     }
 
     public EmeriaTheSkyRuinTriggeredAbility() {

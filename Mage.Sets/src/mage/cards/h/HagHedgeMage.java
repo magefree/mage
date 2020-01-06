@@ -15,7 +15,6 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -30,8 +29,8 @@ public final class HagHedgeMage extends CardImpl {
     private static final FilterLandPermanent filter2 = new FilterLandPermanent();
 
     static {
-        filter.add(new SubtypePredicate(SubType.SWAMP));
-        filter2.add(new SubtypePredicate(SubType.FOREST));
+        filter.add(SubType.SWAMP.getPredicate());
+        filter2.add(SubType.FOREST.getPredicate());
     }
 
     private String rule = "When {this} enters the battlefield, if you control two or more Swamps, you may have target player discard a card.";

@@ -13,7 +13,6 @@ import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -28,7 +27,7 @@ public final class NissasDefeat extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Forest, green enchantment, or green planeswalker");
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate(SubType.FOREST),
+        filter.add(Predicates.or(SubType.FOREST.getPredicate(),
             (Predicates.and(new ColorPredicate(ObjectColor.GREEN), CardType.ENCHANTMENT.getPredicate())),
             (Predicates.and(new ColorPredicate(ObjectColor.GREEN), CardType.PLANESWALKER.getPredicate()))));
     }
@@ -57,7 +56,7 @@ class NissasDefeatEffect extends OneShotEffect {
 
     static {
         filter.add(CardType.PLANESWALKER.getPredicate());
-        filter.add(new SubtypePredicate(SubType.NISSA));
+        filter.add(SubType.NISSA.getPredicate());
     }
 
     public NissasDefeatEffect() {

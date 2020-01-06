@@ -14,7 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -26,7 +25,7 @@ public final class IizukaTheRuthless extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Samurai");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SAMURAI));
+        filter.add(SubType.SAMURAI.getPredicate());
     }
 
     public IizukaTheRuthless(UUID ownerId, CardSetInfo setInfo) {

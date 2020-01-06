@@ -22,7 +22,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -37,7 +36,7 @@ public final class PsychicAllergy extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("two Islands");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ISLAND));
+        filter.add(SubType.ISLAND.getPredicate());
     }
 
     public PsychicAllergy(UUID ownerId, CardSetInfo setInfo) {

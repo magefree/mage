@@ -13,7 +13,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 import java.util.UUID;
 
@@ -26,8 +25,8 @@ public final class SivvisRuse extends CardImpl {
     private static final FilterPermanent filterPlains = new FilterPermanent();
 
     static {
-        filterMountain.add(new SubtypePredicate((SubType.MOUNTAIN)));
-        filterPlains.add(new SubtypePredicate((SubType.PLAINS)));
+        filterMountain.add(SubType.MOUNTAIN.getPredicate());
+        filterPlains.add(SubType.PLAINS.getPredicate());
     }
 
     public SivvisRuse(UUID ownerId, CardSetInfo setInfo) {

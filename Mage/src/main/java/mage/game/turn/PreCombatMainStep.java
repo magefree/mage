@@ -6,7 +6,6 @@ import mage.constants.PhaseStep;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
@@ -20,7 +19,7 @@ public class PreCombatMainStep extends Step {
     private static final FilterPermanent filter = new FilterPermanent("Saga");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SAGA));
+        filter.add(SubType.SAGA.getPredicate());
     }
 
     public PreCombatMainStep() {

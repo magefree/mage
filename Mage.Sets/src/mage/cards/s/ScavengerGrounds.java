@@ -15,7 +15,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -27,7 +26,7 @@ public final class ScavengerGrounds extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Desert");
 
     static {
-        filter.add(new SubtypePredicate(SubType.DESERT));
+        filter.add(SubType.DESERT.getPredicate());
     }
 
     public ScavengerGrounds(UUID ownerId, CardSetInfo setInfo) {

@@ -19,7 +19,6 @@ import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.filter.Filter;
 import mage.filter.common.FilterEnchantmentPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -103,7 +102,7 @@ class TawnossCoffinEffect extends OneShotEffect {
     private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent();
 
     static {
-        filter.add(new SubtypePredicate(SubType.AURA));
+        filter.add(SubType.AURA.getPredicate());
     }
 
     public TawnossCoffinEffect() {

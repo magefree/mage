@@ -22,7 +22,6 @@ import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControlledFromStartOfControllerTurnPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
@@ -45,7 +44,7 @@ public final class Norritt extends CardImpl {
     private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("non-Wall creature");
 
     static {
-        filterCreature.add(Predicates.not(new SubtypePredicate(SubType.WALL)));
+        filterCreature.add(Predicates.not(SubType.WALL.getPredicate()));
         filterCreature.add(new ControlledFromStartOfControllerTurnPredicate());
         filterCreature.add(new ControllerPredicate(TargetController.ACTIVE));
         filterCreature.setMessage("non-Wall creature the active player has controlled continuously since the beginning of the turn.");

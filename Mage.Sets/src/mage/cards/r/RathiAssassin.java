@@ -22,7 +22,6 @@ import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCreaturePermanent;
@@ -37,7 +36,7 @@ public final class RathiAssassin extends CardImpl {
     private static final FilterCreaturePermanent destroyFilter = new FilterCreaturePermanent("tapped nonblack creature");
 
     static {
-        filter.add(new SubtypePredicate(SubType.MERCENARY));
+        filter.add(SubType.MERCENARY.getPredicate());
         filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
         destroyFilter.add(TappedPredicate.instance);
         destroyFilter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));

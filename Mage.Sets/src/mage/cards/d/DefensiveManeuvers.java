@@ -13,7 +13,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -73,7 +72,7 @@ class DefensiveManeuversEffect extends OneShotEffect {
             return false;
         }
         FilterCreaturePermanent filter = new FilterCreaturePermanent();
-        filter.add(new SubtypePredicate(subType));
+        filter.add(subType.getPredicate());
         game.addEffect(new BoostAllEffect(0, 4, Duration.EndOfTurn, filter, false), source);
         return true;
     }

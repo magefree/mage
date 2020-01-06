@@ -19,7 +19,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
@@ -39,10 +38,10 @@ public final class ArahboRoarOfTheWorld extends CardImpl {
     private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent("another Cat you control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.CAT));
+        filter.add(SubType.CAT.getPredicate());
         filter.add(new ControllerPredicate(TargetController.YOU));
         filter.add(AnotherPredicate.instance);
-        filter2.add(new SubtypePredicate(SubType.CAT));
+        filter2.add(SubType.CAT.getPredicate());
         filter2.add(new ControllerPredicate(TargetController.YOU));
         filter2.add(AnotherPredicate.instance);
     }

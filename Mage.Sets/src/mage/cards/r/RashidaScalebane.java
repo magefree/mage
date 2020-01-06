@@ -18,7 +18,6 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.filter.predicate.permanent.BlockingPredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -33,7 +32,7 @@ public final class RashidaScalebane extends CardImpl {
 
     static {
         filter.add(Predicates.or(AttackingPredicate.instance, BlockingPredicate.instance));
-        filter.add(new SubtypePredicate(SubType.DRAGON));
+        filter.add(SubType.DRAGON.getPredicate());
     }
 
     public RashidaScalebane(UUID ownerId, CardSetInfo setInfo) {

@@ -13,7 +13,6 @@ import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -47,7 +46,7 @@ class EngulfTheShoreEffect extends OneShotEffect {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("number of Islands you control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ISLAND));
+        filter.add(SubType.ISLAND.getPredicate());
     }
 
     public EngulfTheShoreEffect() {

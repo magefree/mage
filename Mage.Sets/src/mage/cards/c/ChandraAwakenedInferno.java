@@ -21,7 +21,6 @@ import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.command.emblems.ChandraAwakenedInfernoEmblem;
 import mage.target.common.TargetCreatureOrPlaneswalker;
@@ -36,7 +35,7 @@ public final class ChandraAwakenedInferno extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent("non-Elemental creature");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate(SubType.ELEMENTAL)));
+        filter.add(Predicates.not(SubType.ELEMENTAL.getPredicate()));
     }
 
     public ChandraAwakenedInferno(UUID ownerId, CardSetInfo setInfo) {

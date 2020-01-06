@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -22,7 +21,7 @@ public final class MarchOfTheDrowned extends CardImpl {
     private static final FilterCard filter = new FilterCard("Pirate cards from your graveyard");
 
     static {
-        filter.add(new SubtypePredicate(SubType.PIRATE));
+        filter.add(SubType.PIRATE.getPredicate());
     }
 
     public MarchOfTheDrowned(UUID ownerId, CardSetInfo setInfo) {

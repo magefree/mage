@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -27,7 +26,7 @@ public final class LightningRigCrew extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("a Pirate spell");
 
     static {
-        filter.add(new SubtypePredicate(SubType.PIRATE));
+        filter.add(SubType.PIRATE.getPredicate());
     }
 
     public LightningRigCrew(UUID ownerId, CardSetInfo setInfo) {

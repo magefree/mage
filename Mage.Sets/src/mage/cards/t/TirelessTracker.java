@@ -15,7 +15,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -29,7 +28,7 @@ public final class TirelessTracker extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Clue");
 
     static {
-        filter.add(new SubtypePredicate(SubType.CLUE));
+        filter.add(SubType.CLUE.getPredicate());
     }
 
     public TirelessTracker(UUID ownerId, CardSetInfo setInfo) {

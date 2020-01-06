@@ -17,7 +17,6 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.NamePredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -30,9 +29,9 @@ public final class EzuriRenegadeLeader extends CardImpl {
     private static final FilterControlledCreaturePermanent notEzuri = new FilterControlledCreaturePermanent();
 
     static {
-        elfFilter.add(new SubtypePredicate(SubType.ELF));
+        elfFilter.add(SubType.ELF.getPredicate());
 
-        notEzuri.add(new SubtypePredicate(SubType.ELF));
+        notEzuri.add(SubType.ELF.getPredicate());
         notEzuri.add(Predicates.not(new NamePredicate("Ezuri, Renegade Leader")));
     }
 

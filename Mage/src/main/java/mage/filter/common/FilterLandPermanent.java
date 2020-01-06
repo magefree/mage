@@ -7,7 +7,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 
 /**
@@ -27,7 +26,7 @@ public class FilterLandPermanent extends FilterPermanent {
     public FilterLandPermanent(SubType subtype, String name) {
         super(name);
         this.add(CardType.LAND.getPredicate());
-        this.add(new SubtypePredicate(subtype));
+        this.add(subtype.getPredicate());
     }
 
     public static FilterLandPermanent nonbasicLand() {

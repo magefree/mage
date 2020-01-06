@@ -15,7 +15,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -26,7 +25,7 @@ public final class MesmericSliver extends CardImpl {
     private static final FilterCreaturePermanent filterSliver = new FilterCreaturePermanent();
 
     static {
-        filterSliver.add(new SubtypePredicate(SubType.SLIVER));
+        filterSliver.add(SubType.SLIVER.getPredicate());
     }
 
     public MesmericSliver(UUID ownerId, CardSetInfo setInfo) {

@@ -6,7 +6,6 @@ import mage.abilities.effects.Effect;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 
 /**
@@ -18,7 +17,7 @@ public enum GateYouControlCount implements DynamicValue {
     private static final FilterPermanent filter = new FilterControlledPermanent("Gate you control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.GATE));
+        filter.add(SubType.GATE.getPredicate());
     }
 
     @Override

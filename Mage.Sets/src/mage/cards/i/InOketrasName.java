@@ -10,7 +10,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -21,7 +20,7 @@ public final class InOketrasName extends CardImpl {
     private static final FilterCreaturePermanent filterNotZombies = new FilterCreaturePermanent("Other creatures");
 
     static {
-        filterNotZombies.add(Predicates.not(new SubtypePredicate(SubType.ZOMBIE)));
+        filterNotZombies.add(Predicates.not(SubType.ZOMBIE.getPredicate()));
     }
 
     public InOketrasName(UUID ownerId, CardSetInfo setInfo) {

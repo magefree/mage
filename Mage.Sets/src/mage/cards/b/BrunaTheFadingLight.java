@@ -19,7 +19,6 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -32,8 +31,8 @@ public final class BrunaTheFadingLight extends CardImpl {
 
     static {
         filter.add(Predicates.and(CardType.CREATURE.getPredicate(),
-                (Predicates.or(new SubtypePredicate(SubType.HUMAN),
-                    (new SubtypePredicate(SubType.ANGEL))))));
+                (Predicates.or(SubType.HUMAN.getPredicate(),
+                    (SubType.ANGEL.getPredicate())))));
     }
 
     public BrunaTheFadingLight(UUID ownerId, CardSetInfo setInfo) {

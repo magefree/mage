@@ -14,7 +14,6 @@ import mage.constants.*;
 import mage.filter.Filter;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -29,7 +28,7 @@ public final class EchoBaseCommando extends CardImpl {
     private static final Filter filter = new FilterPermanent("Beasts");
 
     static {
-        filter.add(new SubtypePredicate(SubType.BEAST));
+        filter.add(SubType.BEAST.getPredicate());
     }
 
     public EchoBaseCommando(UUID ownerId, CardSetInfo setInfo) {

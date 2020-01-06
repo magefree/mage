@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -22,7 +21,7 @@ public final class BoggartHarbinger extends CardImpl {
     private static final FilterCard filter = new FilterCard("Goblin card");
 
     static {
-        filter.add(new SubtypePredicate(SubType.GOBLIN));
+        filter.add(SubType.GOBLIN.getPredicate());
     }
 
     public BoggartHarbinger(UUID ownerId, CardSetInfo setInfo) {

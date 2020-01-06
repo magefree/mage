@@ -14,7 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
@@ -26,7 +25,7 @@ public final class PheresBandWarchief extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Other Centaur creatures you control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.CENTAUR));
+        filter.add(SubType.CENTAUR.getPredicate());
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

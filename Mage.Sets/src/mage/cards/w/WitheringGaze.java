@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
@@ -51,7 +50,7 @@ class WitheringGazeEffect extends OneShotEffect {
     private static final FilterCard filter = new FilterCard("Forest or green card");
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate(SubType.FOREST),
+        filter.add(Predicates.or(SubType.FOREST.getPredicate(),
             new ColorPredicate(ObjectColor.GREEN)));
     }
 

@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -23,7 +22,7 @@ public final class WirewoodChanneler extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Elves");
 
     static {
-        filter.add(new SubtypePredicate((SubType.ELF)));
+        filter.add(SubType.ELF.getPredicate());
     }
 
     public WirewoodChanneler(UUID ownerId, CardSetInfo setInfo) {

@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
@@ -26,7 +25,7 @@ public final class RithsGrove extends CardImpl {
 
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("non-Lair land");
     static{
-        filter.add(Predicates.not(new SubtypePredicate(SubType.LAIR)));
+        filter.add(Predicates.not(SubType.LAIR.getPredicate()));
     }
     
     public RithsGrove(UUID ownerId, CardSetInfo setInfo) {

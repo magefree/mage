@@ -16,7 +16,6 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -30,7 +29,7 @@ public final class BaronSengir extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target Vampire");
 
     static {
-        filter.add(new SubtypePredicate(SubType.VAMPIRE));
+        filter.add(SubType.VAMPIRE.getPredicate());
         filter.add(AnotherPredicate.instance);
     }
 

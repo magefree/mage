@@ -15,7 +15,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.SaprolingToken;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -27,7 +26,7 @@ public final class ThallidDevourer extends CardImpl {
     
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Saproling");
     static {
-        filter.add(new SubtypePredicate(SubType.SAPROLING));
+        filter.add(SubType.SAPROLING.getPredicate());
     }
 
     public ThallidDevourer(UUID ownerId, CardSetInfo setInfo) {

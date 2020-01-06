@@ -19,7 +19,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
@@ -67,7 +66,7 @@ enum DragonlordsPrerogativeAdjuster implements CostAdjuster {
     private static final FilterCard filter = new FilterCard("a Dragon card from your hand");
 
     static {
-        filter.add(new SubtypePredicate(SubType.DRAGON));
+        filter.add(SubType.DRAGON.getPredicate());
     }
 
     @Override
@@ -86,7 +85,7 @@ class DragonlordsPrerogativeCondition implements Condition {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Dragon");
 
     static {
-        filter.add(new SubtypePredicate(SubType.DRAGON));
+        filter.add(SubType.DRAGON.getPredicate());
     }
 
     @Override

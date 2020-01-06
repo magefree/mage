@@ -21,7 +21,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 import java.util.UUID;
 
@@ -33,7 +32,7 @@ public final class GatebreakerRam extends CardImpl {
     private static final FilterPermanent filter = new FilterControlledPermanent();
 
     static {
-        filter.add(new SubtypePredicate(SubType.GATE));
+        filter.add(SubType.GATE.getPredicate());
     }
 
     private static final DynamicValue xValue

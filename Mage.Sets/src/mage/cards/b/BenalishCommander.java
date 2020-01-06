@@ -18,7 +18,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -33,7 +32,7 @@ public final class BenalishCommander extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Soldiers you control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SOLDIER));
+        filter.add(SubType.SOLDIER.getPredicate());
     }
 
     public BenalishCommander(UUID ownerId, CardSetInfo setInfo) {

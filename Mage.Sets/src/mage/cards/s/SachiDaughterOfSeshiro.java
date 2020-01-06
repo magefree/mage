@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  * @author Loki
@@ -25,8 +24,8 @@ public final class SachiDaughterOfSeshiro extends CardImpl {
     private static final FilterPermanent shamanFilter = new FilterPermanent("Shamans");
 
     static {
-        snakeFilter.add(new SubtypePredicate(SubType.SNAKE));
-        shamanFilter.add(new SubtypePredicate(SubType.SHAMAN));
+        snakeFilter.add(SubType.SNAKE.getPredicate());
+        shamanFilter.add(SubType.SHAMAN.getPredicate());
     }
 
     public SachiDaughterOfSeshiro(UUID ownerId, CardSetInfo setInfo) {

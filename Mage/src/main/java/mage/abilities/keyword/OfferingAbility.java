@@ -10,7 +10,6 @@ import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.Card;
 import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -48,7 +47,7 @@ public class OfferingAbility extends StaticAbility {
      */
     public OfferingAbility(SubType subtype) {
         super(Zone.ALL, null);
-        filter.add(new SubtypePredicate(subtype));
+        filter.add(subtype.getPredicate());
         filter.setMessage(subtype.getDescription());
         this.addEffect(new OfferingAsThoughEffect());
     }

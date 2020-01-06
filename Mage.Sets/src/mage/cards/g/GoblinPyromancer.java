@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -26,7 +25,7 @@ public final class GoblinPyromancer extends CardImpl {
     private static final FilterPermanent filterPermanent = new FilterPermanent("Goblins");
 
     static {
-        filterPermanent.add(new SubtypePredicate(SubType.GOBLIN));
+        filterPermanent.add(SubType.GOBLIN.getPredicate());
     }
 
     public GoblinPyromancer(UUID ownerId, CardSetInfo setInfo) {

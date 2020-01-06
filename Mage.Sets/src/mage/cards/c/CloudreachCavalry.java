@@ -17,7 +17,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -28,7 +27,7 @@ public final class CloudreachCavalry extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Bird");
 
     static {
-        filter.add(new SubtypePredicate(SubType.BIRD));
+        filter.add(SubType.BIRD.getPredicate());
     }
 
     public CloudreachCavalry(UUID ownerId, CardSetInfo setInfo) {

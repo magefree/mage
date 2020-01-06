@@ -12,7 +12,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -23,7 +22,7 @@ public final class ScoutTrooper extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Trooper creatures");
 
     static {
-        filter.add(new SubtypePredicate(SubType.TROOPER));
+        filter.add(SubType.TROOPER.getPredicate());
     }
 
     public ScoutTrooper(UUID ownerId, CardSetInfo setInfo) {

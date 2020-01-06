@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -26,7 +25,7 @@ public final class SerpentOfTheEndlessSea extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Islands you control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ISLAND));
+        filter.add(SubType.ISLAND.getPredicate());
     }
 
     public SerpentOfTheEndlessSea(UUID ownerId, CardSetInfo setInfo) {

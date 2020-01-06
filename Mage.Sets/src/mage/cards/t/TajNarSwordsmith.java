@@ -13,7 +13,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
@@ -70,7 +69,7 @@ class TajNarSwordsmithEffect extends OneShotEffect {
             // can be zero
             int payCount = ManaUtil.playerPaysXGenericMana(true, "Taj-Nar Swordsmith", player, source, game);
             FilterCard filter = new FilterCard("Equipment card with converted mana cost {" + payCount + "} or less");
-            filter.add(new SubtypePredicate(SubType.EQUIPMENT));
+            filter.add(SubType.EQUIPMENT.getPredicate());
             filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, payCount + 1));
             new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 1, filter), false, true).apply(game, source);
             return true;

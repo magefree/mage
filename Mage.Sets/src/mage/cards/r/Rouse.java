@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -24,7 +23,7 @@ public final class Rouse extends CardImpl {
     private static final FilterLandPermanent filterSwamp = new FilterLandPermanent("If you control a Swamp");
 
     static {
-        filterSwamp.add(new SubtypePredicate(SubType.SWAMP));
+        filterSwamp.add(SubType.SWAMP.getPredicate());
     }
 
     public Rouse(UUID ownerId, CardSetInfo setInfo) {

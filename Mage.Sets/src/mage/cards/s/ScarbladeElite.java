@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -27,7 +26,7 @@ public final class ScarbladeElite extends CardImpl {
     private static final FilterCard filter = new FilterCard("Assassin card from your graveyard");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ASSASSIN));
+        filter.add(SubType.ASSASSIN.getPredicate());
     }
 
     public ScarbladeElite(UUID ownerId, CardSetInfo setInfo) {

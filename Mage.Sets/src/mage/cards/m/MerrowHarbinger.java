@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -24,7 +23,7 @@ public final class MerrowHarbinger extends CardImpl {
     static final FilterCard filter = new FilterCard("Merfolk card");
 
     static {
-        filter.add(new SubtypePredicate(SubType.MERFOLK   ));
+        filter.add(SubType.MERFOLK   .getPredicate());
     }
 
     public MerrowHarbinger(UUID ownerId, CardSetInfo setInfo) {

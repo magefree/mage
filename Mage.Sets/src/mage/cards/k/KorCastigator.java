@@ -11,7 +11,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -22,8 +21,8 @@ public final class KorCastigator extends CardImpl {
     private static final FilterCreaturePermanent FILTER = new FilterCreaturePermanent("Eldrazi Scions");
 
     static {
-        FILTER.add(new SubtypePredicate(SubType.ELDRAZI));
-        FILTER.add(new SubtypePredicate(SubType.SCION));
+        FILTER.add(SubType.ELDRAZI.getPredicate());
+        FILTER.add(SubType.SCION.getPredicate());
     }
 
     public KorCastigator(UUID ownerId, CardSetInfo setInfo) {

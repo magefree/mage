@@ -17,7 +17,6 @@ import mage.choices.ChoiceImpl;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -102,7 +101,7 @@ class TeferisRealmEffect extends OneShotEffect {
                     break;
                 case NON_AURA_ENCHANTMENT:
                     filter.add(CardType.ENCHANTMENT.getPredicate());
-                    filter.add(Predicates.not(new SubtypePredicate(SubType.AURA)));
+                    filter.add(Predicates.not(SubType.AURA.getPredicate()));
                     break;
                 default:
                     return false;

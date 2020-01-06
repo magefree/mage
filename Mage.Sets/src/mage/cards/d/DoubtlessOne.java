@@ -14,7 +14,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -25,7 +24,7 @@ public final class DoubtlessOne extends CardImpl {
     static final FilterPermanent filter = new FilterPermanent("Clerics on the battlefield");
 
         static {
-            filter.add(new SubtypePredicate(SubType.CLERIC));
+            filter.add(SubType.CLERIC.getPredicate());
         }
 
     public DoubtlessOne(UUID ownerId, CardSetInfo setInfo) {

@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
@@ -31,7 +30,7 @@ public final class ContestedCliffs extends CardImpl {
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creature an opponent controls");
     static {
         filter1.add(new ControllerPredicate(TargetController.YOU));
-        filter1.add(new SubtypePredicate(SubType.BEAST));
+        filter1.add(SubType.BEAST.getPredicate());
         filter2.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 

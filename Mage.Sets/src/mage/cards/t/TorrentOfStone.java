@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -22,7 +21,7 @@ public final class TorrentOfStone extends CardImpl {
     private static final FilterControlledLandPermanent filterSacrifice = new FilterControlledLandPermanent("two Mountains");
 
     static {
-        filterSacrifice.add(new SubtypePredicate(SubType.MOUNTAIN));
+        filterSacrifice.add(SubType.MOUNTAIN.getPredicate());
     }
 
     public TorrentOfStone(UUID ownerId, CardSetInfo setInfo) {

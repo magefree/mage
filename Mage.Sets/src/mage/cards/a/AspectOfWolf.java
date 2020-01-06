@@ -13,7 +13,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -55,7 +54,7 @@ class HalfForestsDownCount implements DynamicValue {
     private static final FilterLandPermanent filter = new FilterLandPermanent();
 
     static {
-        filter.add(new SubtypePredicate(SubType.FOREST));
+        filter.add(SubType.FOREST.getPredicate());
     }
 
     @Override
@@ -85,7 +84,7 @@ class HalfForestsUpCount implements DynamicValue {
     private static final FilterLandPermanent filter = new FilterLandPermanent();
 
     static {
-        filter.add(new SubtypePredicate(SubType.FOREST));
+        filter.add(SubType.FOREST.getPredicate());
     }
 
     @Override

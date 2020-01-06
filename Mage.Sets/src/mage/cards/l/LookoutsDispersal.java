@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetSpell;
 
 /**
@@ -26,7 +25,7 @@ public final class LookoutsDispersal extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Pirate");
 
     static {
-        filter.add(new SubtypePredicate(SubType.PIRATE));
+        filter.add(SubType.PIRATE.getPredicate());
     }
 
     public LookoutsDispersal(UUID ownerId, CardSetInfo setInfo) {

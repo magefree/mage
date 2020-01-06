@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -28,7 +27,7 @@ public final class IsaoEnlightenedBushi extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Samurai");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SAMURAI));
+        filter.add(SubType.SAMURAI.getPredicate());
     }
 
     public IsaoEnlightenedBushi(UUID ownerId, CardSetInfo setInfo) {

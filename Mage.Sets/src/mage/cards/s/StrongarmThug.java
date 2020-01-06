@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -24,7 +23,7 @@ public final class StrongarmThug extends CardImpl {
     private static final FilterCreatureCard filter = new FilterCreatureCard("Mercenary card");
 
     static {
-        filter.add(new SubtypePredicate(SubType.MERCENARY));
+        filter.add(SubType.MERCENARY.getPredicate());
     }
 
     public StrongarmThug(UUID ownerId, CardSetInfo setInfo) {

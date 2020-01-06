@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 
 /**
@@ -24,7 +23,7 @@ public final class FirefistAdept extends CardImpl {
     private static final FilterControlledCreaturePermanent filterCount = new FilterControlledCreaturePermanent("Wizards you control");
 
     static {
-        filterCount.add(new SubtypePredicate(SubType.WIZARD));
+        filterCount.add(SubType.WIZARD.getPredicate());
     }
 
     public FirefistAdept(UUID ownerId, CardSetInfo setInfo) {

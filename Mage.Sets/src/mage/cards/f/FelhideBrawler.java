@@ -11,7 +11,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
@@ -23,7 +22,7 @@ public final class FelhideBrawler extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("another Minotaur");
 
     static {
-        filter.add(new SubtypePredicate(SubType.MINOTAUR));
+        filter.add(SubType.MINOTAUR.getPredicate());
         filter.add(AnotherPredicate.instance);
     }
 

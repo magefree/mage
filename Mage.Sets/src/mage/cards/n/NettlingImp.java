@@ -18,7 +18,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControlledFromStartOfControllerTurnPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
@@ -36,7 +35,7 @@ public final class NettlingImp extends CardImpl {
     static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Wall");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate(SubType.WALL)));
+        filter.add(Predicates.not(SubType.WALL.getPredicate()));
         filter.add(new ControlledFromStartOfControllerTurnPredicate());
         filter.add(new ControllerPredicate(TargetController.ACTIVE));
         filter.setMessage("non-Wall creature the active player has controlled continuously since the beginning of the turn.");

@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -98,9 +97,9 @@ class KaaliaOfTheVastEffect extends OneShotEffect {
 
     static {
         filter.add(Predicates.or(
-                new SubtypePredicate(SubType.ANGEL),
-                new SubtypePredicate(SubType.DEMON),
-                new SubtypePredicate(SubType.DRAGON)));
+                SubType.ANGEL.getPredicate(),
+                SubType.DEMON.getPredicate(),
+                SubType.DRAGON.getPredicate()));
     }
 
     public KaaliaOfTheVastEffect() {

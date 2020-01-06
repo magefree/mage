@@ -14,7 +14,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -26,7 +25,7 @@ public final class DwarvenLieutenant extends CardImpl {
     static FilterCreaturePermanent filter = new FilterCreaturePermanent("Dwarf creature");
 
     static {
-        filter.add(new SubtypePredicate(SubType.DWARF));
+        filter.add(SubType.DWARF.getPredicate());
     }
 
     public DwarvenLieutenant(UUID ownerId, CardSetInfo setInfo) {

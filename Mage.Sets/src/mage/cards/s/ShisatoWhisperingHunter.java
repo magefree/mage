@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -26,7 +25,7 @@ public final class ShisatoWhisperingHunter extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Snake");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SNAKE));
+        filter.add(SubType.SNAKE.getPredicate());
     }
 
     public ShisatoWhisperingHunter(UUID ownerId, CardSetInfo setInfo) {

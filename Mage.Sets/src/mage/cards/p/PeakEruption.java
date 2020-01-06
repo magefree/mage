@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetLandPermanent;
 
 /**
@@ -22,7 +21,7 @@ public final class PeakEruption extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent("Mountain");
 
     static{
-        filter.add(new SubtypePredicate(SubType.MOUNTAIN));
+        filter.add(SubType.MOUNTAIN.getPredicate());
     }
 
     public PeakEruption(UUID ownerId, CardSetInfo setInfo) {

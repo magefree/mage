@@ -17,7 +17,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -62,7 +61,7 @@ class EmrakulsEvangelCost extends CostImpl {
 
     static {
         filter.add(AnotherPredicate.instance);
-        filter.add(Predicates.not(new SubtypePredicate(SubType.ELDRAZI)));
+        filter.add(Predicates.not(SubType.ELDRAZI.getPredicate()));
     }
 
     private int numSacrificed = 1; // always sacrifices self at least

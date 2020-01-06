@@ -17,7 +17,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
@@ -58,7 +57,7 @@ class SunflareShamanEffect extends OneShotEffect {
     private static final FilterCard filter = new FilterCard("Elemental");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ELEMENTAL));
+        filter.add(SubType.ELEMENTAL.getPredicate());
     }
 
     public SunflareShamanEffect() {

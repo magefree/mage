@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 
 /**
@@ -34,7 +33,7 @@ public final class SquirrelMob extends CardImpl {
 
         // Squirrel Mob gets +1/+1 for each other Squirrel on the battlefield.
         FilterCreaturePermanent filter = new FilterCreaturePermanent("other Squirrel");
-        filter.add(new SubtypePredicate(SubType.SQUIRREL));
+        filter.add(SubType.SQUIRREL.getPredicate());
         filter.add(Predicates.not(new PermanentIdPredicate(this.getId())));
         DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
         Effect effect = new BoostSourceEffect(xValue, xValue, Duration.WhileOnBattlefield, false);

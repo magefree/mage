@@ -14,9 +14,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.permanent.token.TokenImpl;
-import mage.game.permanent.token.Token;
 import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.common.TargetLandPermanent;
 import mage.util.SubTypeList;
@@ -29,7 +26,7 @@ public final class FendeepSummoner extends CardImpl {
     static final FilterLandPermanent filter = new FilterLandPermanent("Swamp");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SWAMP));
+        filter.add(SubType.SWAMP.getPredicate());
     }
 
     public FendeepSummoner(UUID ownerId, CardSetInfo setInfo) {

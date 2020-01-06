@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -26,8 +25,8 @@ public final class DaruWarchief extends CardImpl {
     private static final FilterCreaturePermanent filterCreatures = new FilterCreaturePermanent("Soldier creatures");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SOLDIER));
-        filterCreatures.add(new SubtypePredicate(SubType.SOLDIER));
+        filter.add(SubType.SOLDIER.getPredicate());
+        filterCreatures.add(SubType.SOLDIER.getPredicate());
     }
 
     public DaruWarchief(UUID ownerId, CardSetInfo setInfo) {

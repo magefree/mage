@@ -13,7 +13,6 @@ import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.cards.*;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
@@ -29,7 +28,7 @@ public final class DementiaSliver extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("All Slivers");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SLIVER));
+        filter.add(SubType.SLIVER.getPredicate());
     }
 
     public DementiaSliver(UUID ownerId, CardSetInfo setInfo) {

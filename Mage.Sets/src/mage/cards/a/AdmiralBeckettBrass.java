@@ -14,7 +14,6 @@ import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.Predicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
@@ -33,7 +32,7 @@ public final class AdmiralBeckettBrass extends CardImpl {
     private static final FilterNonlandPermanent filter2 = new FilterNonlandPermanent("nonland permanent controlled by a player who was dealt combat damage by three or more Pirates this turn");
 
     static {
-        filter.add(new SubtypePredicate(SubType.PIRATE));
+        filter.add(SubType.PIRATE.getPredicate());
         filter.add(new ControllerPredicate(TargetController.YOU));
         filter2.add(new ControllerDealtDamageByPiratesPredicate());
     }

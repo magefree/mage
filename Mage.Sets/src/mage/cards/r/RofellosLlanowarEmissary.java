@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -24,7 +23,7 @@ public final class RofellosLlanowarEmissary extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("for each Forest you control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.FOREST));
+        filter.add(SubType.FOREST.getPredicate());
     }
 
     public RofellosLlanowarEmissary(UUID ownerId, CardSetInfo setInfo) {

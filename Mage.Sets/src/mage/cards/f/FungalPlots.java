@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.SaprolingToken;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetControlledPermanent;
@@ -31,7 +30,7 @@ public final class FungalPlots extends CardImpl {
     private static final FilterControlledPermanent filter2 = new FilterControlledPermanent("two Saprolings");
 
     static {
-        filter2.add(new SubtypePredicate(SubType.SAPROLING));
+        filter2.add(SubType.SAPROLING.getPredicate());
     }
 
     public FungalPlots(UUID ownerId, CardSetInfo setInfo) {

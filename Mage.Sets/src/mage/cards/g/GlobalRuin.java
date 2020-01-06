@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.constants.SubTypeSet;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -70,7 +69,7 @@ class GlobalRuinDestroyLandEffect extends OneShotEffect {
             if(player != null) {
                 for (SubType landName : Arrays.stream(SubType.values()).filter(p -> p.getSubTypeSet() == SubTypeSet.BasicLandType).collect(Collectors.toSet())) {
                     FilterControlledLandPermanent filter = new FilterControlledLandPermanent(landName + " you control");
-                    filter.add(new SubtypePredicate(landName));
+                    filter.add(landName.getPredicate());
                     Target target = new TargetControlledPermanent(1, 1, filter, true);
                     if (target.canChoose(player.getId(), game)) {
                         player.chooseTarget(outcome, target, source, game);

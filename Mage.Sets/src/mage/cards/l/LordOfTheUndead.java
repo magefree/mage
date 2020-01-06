@@ -18,7 +18,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -30,8 +29,8 @@ public final class LordOfTheUndead extends CardImpl {
     private static final FilterCard filterCard = new FilterCard("Zombie card from your graveyard");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ZOMBIE));
-        filterCard.add(new SubtypePredicate(SubType.ZOMBIE));
+        filter.add(SubType.ZOMBIE.getPredicate());
+        filterCard.add(SubType.ZOMBIE.getPredicate());
     }
 
     public LordOfTheUndead(UUID ownerId, CardSetInfo setInfo) {

@@ -11,7 +11,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -22,7 +21,7 @@ public final class KavuHowler extends CardImpl {
     private static final FilterCard filter = new FilterCard("Kavu cards");
 
     static {
-        filter.add(new SubtypePredicate(SubType.KAVU));
+        filter.add(SubType.KAVU.getPredicate());
     }
 
     public KavuHowler(UUID ownerId, CardSetInfo setInfo) {

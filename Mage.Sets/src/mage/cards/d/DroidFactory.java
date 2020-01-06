@@ -13,7 +13,6 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
@@ -60,9 +59,9 @@ public final class DroidFactory extends CardImpl {
             FilterCard filter = new FilterCard("basic Plains, Island or Swamp");
             filter.add(CardType.LAND.getPredicate());
             List<Predicate<MageObject>> subtypePredicates = new ArrayList<>();
-            subtypePredicates.add(new SubtypePredicate(SubType.SWAMP));
-            subtypePredicates.add(new SubtypePredicate(SubType.PLAINS));
-            subtypePredicates.add(new SubtypePredicate(SubType.ISLAND));
+            subtypePredicates.add(SubType.SWAMP.getPredicate());
+            subtypePredicates.add(SubType.PLAINS.getPredicate());
+            subtypePredicates.add(SubType.ISLAND.getPredicate());
             filter.add(Predicates.or(subtypePredicates));
             filter.add(new SupertypePredicate(SuperType.BASIC));
             TargetCardInLibrary target = new TargetCardInLibrary(filter);

@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 
 /**
@@ -22,7 +21,7 @@ public final class GoblinRecruiter extends CardImpl {
     private static final FilterCard filter = new FilterCard("Goblin cards");
 
     static {
-        filter.add(new SubtypePredicate(SubType.GOBLIN));
+        filter.add(SubType.GOBLIN.getPredicate());
     }
 
     public GoblinRecruiter(UUID ownerId, CardSetInfo setInfo) {

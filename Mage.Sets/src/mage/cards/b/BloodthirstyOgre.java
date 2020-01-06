@@ -21,7 +21,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -33,7 +32,7 @@ public final class BloodthirstyOgre extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("you control a Demon");
     
     static {
-        filter.add(new SubtypePredicate(SubType.DEMON));
+        filter.add(SubType.DEMON.getPredicate());
     }
 
     public BloodthirstyOgre(UUID ownerId, CardSetInfo setInfo) {

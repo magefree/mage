@@ -20,7 +20,6 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -66,7 +65,7 @@ enum CallerOfTheHuntAdjuster implements CostAdjuster {
             SubType typeChoice = (SubType) game.getState().getValue(mageObject.getId() + "_type");
             if (typeChoice != null) {
                 FilterCreaturePermanent filter = new FilterCreaturePermanent("chosen creature type");
-                filter.add(new SubtypePredicate(typeChoice));
+                filter.add(typeChoice.getPredicate());
                 ContinuousEffect effectPowerToughness = new SetPowerToughnessSourceEffect(
                         new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame);
                 effectPowerToughness.setText("");

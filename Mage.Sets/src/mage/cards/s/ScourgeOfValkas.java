@@ -19,7 +19,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -34,7 +33,7 @@ public final class ScourgeOfValkas extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("{this} or another Dragon");
 
     static {
-        filter.add(new SubtypePredicate(SubType.DRAGON));
+        filter.add(SubType.DRAGON.getPredicate());
     }
 
     private static final String rule = "Whenever {this} or another Dragon enters the battlefield under your control, it deals X damage to any target, where X is the number of Dragons you control.";
@@ -92,7 +91,7 @@ class ScourgeOfValkasDamageEffect extends OneShotEffect {
         Permanent enteringDragon = (Permanent) getValue("permanentEnteringBattlefield");
         if (controller != null && enteringDragon != null) {
             FilterPermanent filter = new FilterPermanent();
-            filter.add(new SubtypePredicate(SubType.DRAGON));
+            filter.add(SubType.DRAGON.getPredicate());
             int dragons = game.getBattlefield().countAll(filter, source.getControllerId(), game);
             if (dragons > 0) {
                 Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));

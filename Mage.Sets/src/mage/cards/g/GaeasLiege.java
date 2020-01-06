@@ -22,7 +22,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
@@ -37,7 +36,7 @@ public final class GaeasLiege extends CardImpl {
     static final FilterControlledPermanent filterLands = new FilterControlledPermanent("Forests you control");
 
     static {
-        filterLands.add(new SubtypePredicate(SubType.FOREST));
+        filterLands.add(SubType.FOREST.getPredicate());
     }
 
     public GaeasLiege(UUID ownerId, CardSetInfo setInfo) {
@@ -84,7 +83,7 @@ class DefendersForestCount implements DynamicValue {
                 }
 
                 FilterLandPermanent filter = new FilterLandPermanent("forest");
-                filter.add(new SubtypePredicate(SubType.FOREST));
+                filter.add(SubType.FOREST.getPredicate());
                 return game.getBattlefield().countAll(filter, defenderId, game);
 
             }

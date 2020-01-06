@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetSpell;
 
 /**
@@ -21,7 +20,7 @@ public final class HisokasDefiance extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("Spirit or Arcane spell");
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate(SubType.SPIRIT), new SubtypePredicate(SubType.ARCANE)));
+        filter.add(Predicates.or(SubType.SPIRIT.getPredicate(), SubType.ARCANE.getPredicate()));
     }
 
     public HisokasDefiance(UUID ownerId, CardSetInfo setInfo) {

@@ -13,7 +13,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AttackingPredicate;
 
 /**
@@ -24,7 +23,7 @@ public final class CavalryPegasus extends CardImpl {
 
     private static final FilterPermanent filter = new FilterCreaturePermanent("each attacking Human");
     static {
-        filter.add(new SubtypePredicate(SubType.HUMAN));
+        filter.add(SubType.HUMAN.getPredicate());
         filter.add(AttackingPredicate.instance);
     }
 

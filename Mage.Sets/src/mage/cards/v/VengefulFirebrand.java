@@ -19,7 +19,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -62,7 +61,7 @@ enum VengefulFirebrandCondition implements Condition {
     private static final FilterCard filter = new FilterCard("Warrior");
 
     static {
-        filter.add(new SubtypePredicate(SubType.WARRIOR));
+        filter.add(SubType.WARRIOR.getPredicate());
     }
 
     @Override

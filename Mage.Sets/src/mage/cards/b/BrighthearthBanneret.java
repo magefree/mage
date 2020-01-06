@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -26,8 +25,8 @@ public final class BrighthearthBanneret extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new SubtypePredicate(SubType.ELEMENTAL),
-                new SubtypePredicate(SubType.WARRIOR)));
+                SubType.ELEMENTAL.getPredicate(),
+                SubType.WARRIOR.getPredicate()));
     }
 
     public BrighthearthBanneret(UUID ownerId, CardSetInfo setInfo) {

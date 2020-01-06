@@ -11,7 +11,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.command.Emblem;
 
 /**
@@ -23,7 +22,7 @@ public final class LilianaOfTheDarkRealmsEmblem extends Emblem {
     private static final FilterLandPermanent filter = new FilterLandPermanent("Swamps");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SWAMP));
+        filter.add(SubType.SWAMP.getPredicate());
     }
 
     public LilianaOfTheDarkRealmsEmblem() {

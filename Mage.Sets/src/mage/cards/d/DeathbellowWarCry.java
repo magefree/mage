@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.target.common.TargetCardInLibrary;
 
@@ -44,7 +43,7 @@ class DeathbellowWarCryTarget extends TargetCardInLibrary {
             = new FilterCreatureCard("Minotaur creature cards with different names");
 
     static {
-        minotaurFilter.add(new SubtypePredicate(SubType.MINOTAUR));
+        minotaurFilter.add(SubType.MINOTAUR.getPredicate());
     }
 
     DeathbellowWarCryTarget() {

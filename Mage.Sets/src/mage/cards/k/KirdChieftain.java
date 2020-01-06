@@ -21,7 +21,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -34,7 +33,7 @@ public final class KirdChieftain extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent("a Forest");
     
     static {
-        filter.add(new SubtypePredicate(SubType.FOREST));
+        filter.add(SubType.FOREST.getPredicate());
     }
     
     public KirdChieftain(UUID ownerId, CardSetInfo setInfo) {

@@ -19,8 +19,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 
-import mage.filter.predicate.mageobject.SubtypePredicate;
-
 /**
  *
  * @author LevelX2
@@ -32,7 +30,7 @@ public final class GuardianOfTheGreatConduit extends CardImpl {
 
     static {
         filter.add(CardType.PLANESWALKER.getPredicate());
-        filter.add(new SubtypePredicate(SubType.NISSA));
+        filter.add(SubType.NISSA.getPredicate());
     }
 
     public GuardianOfTheGreatConduit(UUID ownerId, CardSetInfo setInfo) {

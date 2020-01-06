@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -26,7 +25,7 @@ public final class ArashinForemost extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another target Warrior creature you control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.WARRIOR));
+        filter.add(SubType.WARRIOR.getPredicate());
         filter.add(AnotherPredicate.instance);
     }
 

@@ -16,7 +16,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -73,7 +72,7 @@ class BloodlineShamanEffect extends OneShotEffect {
         if (controller != null && sourceObject != null && controller.choose(outcome, typeChoice, game)) {
             game.informPlayers(sourceObject.getLogName() + " chosen type: " + typeChoice.getChoice());
             FilterCard filterSubtype = new FilterCard();
-            filterSubtype.add(new SubtypePredicate(SubType.byDescription(typeChoice.getChoice())));
+            filterSubtype.add(SubType.byDescription(typeChoice.getChoice()).getPredicate());
 
             // Reveal the top card of your library.
             if (controller.getLibrary().hasCards()) {

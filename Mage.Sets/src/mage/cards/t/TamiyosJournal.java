@@ -13,7 +13,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledPermanent;
 
@@ -26,7 +25,7 @@ public final class TamiyosJournal extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("three Clues");
 
     static {
-        filter.add(new SubtypePredicate(SubType.CLUE));
+        filter.add(SubType.CLUE.getPredicate());
     }
 
     public TamiyosJournal(UUID ownerId, CardSetInfo setInfo) {

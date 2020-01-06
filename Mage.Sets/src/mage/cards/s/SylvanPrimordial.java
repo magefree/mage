@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterLandCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -82,7 +81,7 @@ class SylvanPrimordialEffect extends OneShotEffect {
     private static final FilterLandCard filterForest = new FilterLandCard("Forest");
 
     static {
-        filterForest.add(new SubtypePredicate(SubType.FOREST));
+        filterForest.add(SubType.FOREST.getPredicate());
     }
 
     public SylvanPrimordialEffect() {

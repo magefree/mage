@@ -15,7 +15,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -29,7 +28,7 @@ public final class ReturnOfTheWildspeaker extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Human creatures");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate(SubType.HUMAN)));
+        filter.add(Predicates.not(SubType.HUMAN.getPredicate()));
     }
 
     public ReturnOfTheWildspeaker(UUID ownerId, CardSetInfo setInfo) {

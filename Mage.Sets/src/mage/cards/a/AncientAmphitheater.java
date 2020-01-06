@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInHand;
 
 /**
@@ -23,7 +22,7 @@ public final class AncientAmphitheater extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a Giant from your hand");
     static {
-        filter.add(new SubtypePredicate(SubType.GIANT));
+        filter.add(SubType.GIANT.getPredicate());
     }
 
     public AncientAmphitheater(UUID ownerId, CardSetInfo setInfo) {

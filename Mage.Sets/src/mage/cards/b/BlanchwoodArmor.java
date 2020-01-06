@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -25,7 +24,7 @@ public final class BlanchwoodArmor extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Forest you control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.FOREST));
+        filter.add(SubType.FOREST.getPredicate());
     }
 
     public BlanchwoodArmor(UUID ownerId, CardSetInfo setInfo) {

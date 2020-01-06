@@ -13,7 +13,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.permanent.token.SaprolingToken;
 
@@ -27,7 +26,7 @@ public final class TendershootDryad extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Saprolings you control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SAPROLING));
+        filter.add(SubType.SAPROLING.getPredicate());
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

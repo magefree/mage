@@ -11,7 +11,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  * @author Loki
@@ -21,7 +20,7 @@ public final class CallToGlory extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Samurai");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SAMURAI));
+        filter.add(SubType.SAMURAI.getPredicate());
     }
 
     public CallToGlory(UUID ownerId, CardSetInfo setInfo) {

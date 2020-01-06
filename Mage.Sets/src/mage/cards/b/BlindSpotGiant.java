@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
@@ -24,7 +23,7 @@ public final class BlindSpotGiant extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("you control another Giant");
 
     static {
-        filter.add(new SubtypePredicate(SubType.GIANT));
+        filter.add(SubType.GIANT.getPredicate());
         filter.add(AnotherPredicate.instance);
     }
 

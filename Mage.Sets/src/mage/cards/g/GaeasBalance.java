@@ -14,7 +14,6 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
@@ -60,11 +59,11 @@ class GaeasBalanceEffect extends OneShotEffect {
     private static final FilterCard forestFilter = new FilterLandCard("a Forest land card");
 
     static {
-        plainsFilter.add(new SubtypePredicate(SubType.PLAINS));
-        islandFilter.add(new SubtypePredicate(SubType.ISLAND));
-        swampFilter.add(new SubtypePredicate(SubType.SWAMP));
-        mountainFilter.add(new SubtypePredicate(SubType.MOUNTAIN));
-        forestFilter.add(new SubtypePredicate(SubType.FOREST));
+        plainsFilter.add(SubType.PLAINS.getPredicate());
+        islandFilter.add(SubType.ISLAND.getPredicate());
+        swampFilter.add(SubType.SWAMP.getPredicate());
+        mountainFilter.add(SubType.MOUNTAIN.getPredicate());
+        forestFilter.add(SubType.FOREST.getPredicate());
     }
 
     private static final List<FilterCard> filterList = Arrays.asList(

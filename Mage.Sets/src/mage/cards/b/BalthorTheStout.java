@@ -13,7 +13,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -27,9 +26,9 @@ public final class BalthorTheStout extends CardImpl {
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("another target Barbarian");
 
     static {
-        filter1.add(new SubtypePredicate(SubType.BARBARIAN));
+        filter1.add(SubType.BARBARIAN.getPredicate());
         filter2.add(AnotherPredicate.instance);
-        filter2.add(new SubtypePredicate(SubType.BARBARIAN));
+        filter2.add(SubType.BARBARIAN.getPredicate());
     }
     
     public BalthorTheStout(UUID ownerId, CardSetInfo setInfo) {

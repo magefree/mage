@@ -11,7 +11,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -24,7 +23,7 @@ public final class Peppersmoke extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("If you control a Faerie,");
     static {
-        filter.add(new SubtypePredicate(SubType.FAERIE));
+        filter.add(SubType.FAERIE.getPredicate());
     }
 
     public Peppersmoke(UUID ownerId, CardSetInfo setInfo) {

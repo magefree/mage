@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.GremlinToken;
 import mage.target.common.TargetAnyTarget;
 
@@ -28,7 +27,7 @@ public final class ChandraGremlinWrangler extends CardImpl {
     private static final FilterPermanent filter = new FilterControlledPermanent();
 
     static {
-        filter.add(new SubtypePredicate(SubType.GREMLIN));
+        filter.add(SubType.GREMLIN.getPredicate());
     }
 
     private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);

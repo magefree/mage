@@ -14,7 +14,6 @@ import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -27,7 +26,7 @@ public final class StaffOfTheFlameMagus extends CardImpl {
     
     static {
         filterSpell.add(new ColorPredicate(ObjectColor.RED));
-        filterLand.add(new SubtypePredicate(SubType.MOUNTAIN));
+        filterLand.add(SubType.MOUNTAIN.getPredicate());
     }
 
     public StaffOfTheFlameMagus(UUID ownerId, CardSetInfo setInfo) {

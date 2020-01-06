@@ -9,7 +9,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterLandCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
@@ -22,7 +21,7 @@ public final class FlagstonesOfTrokair extends CardImpl {
     private static final FilterLandCard FILTER = new FilterLandCard("Plains card");
 
     static {
-        FILTER.add(new SubtypePredicate(SubType.PLAINS));
+        FILTER.add(SubType.PLAINS.getPredicate());
     }
 
     public FlagstonesOfTrokair(UUID ownerId, CardSetInfo setInfo) {

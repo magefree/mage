@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.permanent.token.ZombieToken;
 import mage.target.common.TargetControlledPermanent;
@@ -30,7 +29,7 @@ public final class DranasChosen extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an untapped Ally you control");
     
     static {
-        filter.add(new SubtypePredicate(SubType.ALLY));
+        filter.add(SubType.ALLY.getPredicate());
         filter.add(Predicates.not(TappedPredicate.instance));
     }
 

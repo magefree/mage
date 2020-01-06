@@ -15,7 +15,6 @@ import mage.constants.ColoredManaSymbol;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -26,7 +25,7 @@ public final class VillainousOgre extends CardImpl {
     private static final String rule = "As long as you control a Demon, {this} has {B}: Regenerate Villainous Ogre";
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Demon");
     static {
-        filter.add(new SubtypePredicate(SubType.DEMON));
+        filter.add(SubType.DEMON.getPredicate());
     }
 
     public VillainousOgre(UUID ownerId, CardSetInfo setInfo) {

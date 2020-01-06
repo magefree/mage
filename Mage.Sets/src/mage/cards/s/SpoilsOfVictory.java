@@ -10,7 +10,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -22,11 +21,11 @@ public final class SpoilsOfVictory extends CardImpl {
     private static final FilterCard filter = new FilterCard("Plains, Island, Swamp, Mountain, or Forest card");
     static {
         filter.add(Predicates.or(
-                new SubtypePredicate(SubType.PLAINS),
-                new SubtypePredicate(SubType.ISLAND),
-                new SubtypePredicate(SubType.SWAMP),
-                new SubtypePredicate(SubType.MOUNTAIN),
-                new SubtypePredicate(SubType.FOREST)));
+                SubType.PLAINS.getPredicate(),
+                SubType.ISLAND.getPredicate(),
+                SubType.SWAMP.getPredicate(),
+                SubType.MOUNTAIN.getPredicate(),
+                SubType.FOREST.getPredicate()));
     }
 
     public SpoilsOfVictory(UUID ownerId, CardSetInfo setInfo) {

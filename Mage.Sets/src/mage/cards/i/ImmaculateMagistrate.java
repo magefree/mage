@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -55,7 +54,7 @@ public final class ImmaculateMagistrate extends CardImpl {
 class ImmaculateMagistrateEffect extends OneShotEffect {
     static final FilterControlledPermanent filter = new FilterControlledPermanent("Elf");
     static {
-        filter.add(new SubtypePredicate(SubType.ELF));
+        filter.add(SubType.ELF.getPredicate());
     }
     public ImmaculateMagistrateEffect() {
         super(Outcome.BoostCreature);

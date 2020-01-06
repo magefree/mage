@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -27,7 +26,7 @@ public final class GutwrencherOni extends CardImpl {
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent("Ogre");
 
     static {
-        filter.add(new SubtypePredicate(SubType.OGRE));
+        filter.add(SubType.OGRE.getPredicate());
     }
 
     public GutwrencherOni(UUID ownerId, CardSetInfo setInfo) {

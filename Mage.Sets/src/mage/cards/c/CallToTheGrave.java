@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.events.GameEvent;
 
 import java.util.UUID;
@@ -31,7 +30,7 @@ public final class CallToTheGrave extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Zombie creature");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate(SubType.ZOMBIE)));
+        filter.add(Predicates.not(SubType.ZOMBIE.getPredicate()));
     }
 
     public CallToTheGrave(UUID ownerId, CardSetInfo setInfo) {

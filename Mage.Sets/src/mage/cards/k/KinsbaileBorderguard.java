@@ -18,7 +18,6 @@ import mage.constants.SubType;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.KithkinToken;
@@ -32,7 +31,7 @@ public final class KinsbaileBorderguard extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
 
     static {
-        filter.add(new SubtypePredicate(SubType.KITHKIN));
+        filter.add(SubType.KITHKIN.getPredicate());
     }
 
     public KinsbaileBorderguard(UUID ownerId, CardSetInfo setInfo) {

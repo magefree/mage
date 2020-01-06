@@ -15,7 +15,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 
@@ -28,7 +27,7 @@ public final class TivadarOfThorn extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Goblin");
     
     static {
-        filter.add(new SubtypePredicate(SubType.GOBLIN));
+        filter.add(SubType.GOBLIN.getPredicate());
     }
 
     public TivadarOfThorn(UUID ownerId, CardSetInfo setInfo) {

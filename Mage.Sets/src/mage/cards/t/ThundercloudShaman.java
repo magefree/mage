@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
@@ -27,8 +26,8 @@ public final class ThundercloudShaman extends CardImpl {
     private static final FilterCreaturePermanent filterNonGiants = new FilterCreaturePermanent("non-Giant creature");
     static {
         filterGiants.add(new ControllerPredicate(TargetController.YOU));
-        filterGiants.add(new SubtypePredicate(SubType.GIANT));
-        filterNonGiants.add(Predicates.not(new SubtypePredicate(SubType.GIANT)));
+        filterGiants.add(SubType.GIANT.getPredicate());
+        filterNonGiants.add(Predicates.not(SubType.GIANT.getPredicate()));
     }
 
     public ThundercloudShaman(UUID ownerId, CardSetInfo setInfo) {

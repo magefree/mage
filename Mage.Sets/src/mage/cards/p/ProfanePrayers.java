@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetAnyTarget;
 
 /**
@@ -22,7 +21,7 @@ public final class ProfanePrayers extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Cleric on the battlefield");
 
     static {
-        filter.add(new SubtypePredicate(SubType.CLERIC));
+        filter.add(SubType.CLERIC.getPredicate());
     }
     
     public ProfanePrayers(UUID ownerId, CardSetInfo setInfo) {

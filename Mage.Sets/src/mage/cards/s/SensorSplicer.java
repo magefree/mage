@@ -15,7 +15,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.GolemToken;
 
 /**
@@ -28,7 +27,7 @@ public final class SensorSplicer extends CardImpl {
 
     static {
         filter.add(CardType.CREATURE.getPredicate());
-        filter.add(new SubtypePredicate(SubType.GOLEM));
+        filter.add(SubType.GOLEM.getPredicate());
     }
 
     public SensorSplicer(UUID ownerId, CardSetInfo setInfo) {

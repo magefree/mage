@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 
 /**
@@ -23,7 +22,7 @@ public final class LegionsOfLimDul extends CardImpl {
     
     static {
         filter.add(new SupertypePredicate(SuperType.SNOW));
-        filter.add(new SubtypePredicate(SubType.SWAMP   ));
+        filter.add(SubType.SWAMP   .getPredicate());
     }
 
     public LegionsOfLimDul(UUID ownerId, CardSetInfo setInfo) {

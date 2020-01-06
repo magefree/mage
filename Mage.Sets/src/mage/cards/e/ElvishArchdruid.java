@@ -17,7 +17,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -29,8 +28,8 @@ public final class ElvishArchdruid extends CardImpl {
     private static final FilterControlledCreaturePermanent filterCount = new FilterControlledCreaturePermanent("Elf you control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ELF));
-        filterCount.add(new SubtypePredicate(SubType.ELF));
+        filter.add(SubType.ELF.getPredicate());
+        filterCount.add(SubType.ELF.getPredicate());
     }
 
     public ElvishArchdruid(UUID ownerId, CardSetInfo setInfo) {

@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInHand;
 
 /**
@@ -22,7 +21,7 @@ public final class GoldmeadowStalwart extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a Kithkin card from your hand");
     static {
-        filter.add(new SubtypePredicate(SubType.KITHKIN));
+        filter.add(SubType.KITHKIN.getPredicate());
     }
 
     public GoldmeadowStalwart(UUID ownerId, CardSetInfo setInfo) {

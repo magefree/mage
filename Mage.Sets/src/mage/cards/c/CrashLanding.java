@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -28,7 +27,7 @@ public final class CrashLanding extends CardImpl {
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creature with flying");
 
     static {
-        filter.add(new SubtypePredicate(SubType.FOREST));
+        filter.add(SubType.FOREST.getPredicate());
         filter2.add(new AbilityPredicate(FlyingAbility.class));
     }
 

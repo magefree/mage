@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -26,8 +25,8 @@ public final class CaterwaulingBoggart extends CardImpl {
     private static final FilterPermanent filterElemental = new FilterControlledCreaturePermanent("Elemental");
 
     static {
-        filterGoblin.add(new SubtypePredicate(SubType.GOBLIN));
-        filterElemental.add(new SubtypePredicate(SubType.ELEMENTAL));
+        filterGoblin.add(SubType.GOBLIN.getPredicate());
+        filterElemental.add(SubType.ELEMENTAL.getPredicate());
     }
 
     public CaterwaulingBoggart(UUID ownerId, CardSetInfo setInfo) {

@@ -18,7 +18,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.NamePredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -31,7 +30,7 @@ public final class ShadowbornApostle extends CardImpl {
     private static final FilterCreatureCard filter = new FilterCreatureCard("a Demon creature");
     private static final FilterControlledCreaturePermanent filterApostle = new FilterControlledCreaturePermanent("six creatures named Shadowborn Apostle");
     static {
-        filter.add(new SubtypePredicate(SubType.DEMON));
+        filter.add(SubType.DEMON.getPredicate());
         filterApostle.add(new NamePredicate("Shadowborn Apostle"));
     }
 

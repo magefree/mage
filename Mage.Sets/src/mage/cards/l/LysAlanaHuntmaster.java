@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.ElfToken;
 
 /**
@@ -22,7 +21,7 @@ public final class LysAlanaHuntmaster extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("Elf spell");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ELF));
+        filter.add(SubType.ELF.getPredicate());
     }
 
     public LysAlanaHuntmaster(UUID ownerId, CardSetInfo setInfo) {

@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -56,7 +55,7 @@ class ThopterAssemblyTriggeredAbility extends TriggeredAbilityImpl {
 
     private static final FilterPermanent filter = new FilterPermanent();
     static {
-        filter.add(new SubtypePredicate(SubType.THOPTER));
+        filter.add(SubType.THOPTER.getPredicate());
         filter.add(AnotherPredicate.instance);
     }
 

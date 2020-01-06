@@ -16,9 +16,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.TokenImpl;
-import mage.game.permanent.token.Token;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -30,7 +28,7 @@ public final class MishrasFactory extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Assembly-Worker creature");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ASSEMBLY_WORKER));
+        filter.add(SubType.ASSEMBLY_WORKER.getPredicate());
     }
 
     public MishrasFactory(UUID ownerId, CardSetInfo setInfo) {

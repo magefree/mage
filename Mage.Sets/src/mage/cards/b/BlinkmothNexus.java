@@ -19,7 +19,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.TargetPermanent;
 
@@ -31,7 +30,7 @@ public final class BlinkmothNexus extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Blinkmoth");
 
     static {
-        filter.add(new SubtypePredicate(SubType.BLINKMOTH));
+        filter.add(SubType.BLINKMOTH.getPredicate());
     }
 
     public BlinkmothNexus(UUID ownerId, CardSetInfo setInfo) {

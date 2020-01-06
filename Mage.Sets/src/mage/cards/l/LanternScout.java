@@ -17,7 +17,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardIdPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -36,7 +35,7 @@ public final class LanternScout extends CardImpl {
         FilterPermanent filter = new FilterPermanent("{this} or another Ally");
         filter.add(Predicates.or(
                 new CardIdPredicate(this.getId()),
-                new SubtypePredicate(SubType.ALLY)));
+                SubType.ALLY.getPredicate()));
 
         // <i>Rally</i> &mdash; Whenever Lantern Scout or another Ally enters the battlefield under your control, creatures you control gain lifelink until end of turn.
         Effect effect = new GainAbilityAllEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent());

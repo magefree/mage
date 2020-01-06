@@ -21,7 +21,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -81,7 +80,7 @@ public final class BalanWanderingKnight extends CardImpl {
             Permanent balan = game.getPermanent(source.getSourceId());
             if (balan != null) {
                 FilterPermanent filter = new FilterPermanent();
-                filter.add(new SubtypePredicate(SubType.EQUIPMENT));
+                filter.add(SubType.EQUIPMENT.getPredicate());
                 for (Permanent equipment : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(),game)) {
                     if (equipment != null) {
                         //If an Equipment can't equip, it isn't attached, and it doesn't become unattached (if it's attached to a creature).

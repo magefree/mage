@@ -18,7 +18,6 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
@@ -35,7 +34,7 @@ public final class DarkSupplicant extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("three Clerics you control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.CLERIC));
+        filter.add(SubType.CLERIC.getPredicate());
     }
 
     public DarkSupplicant(UUID ownerId, CardSetInfo setInfo) {

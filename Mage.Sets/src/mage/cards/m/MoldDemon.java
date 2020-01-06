@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -23,7 +22,7 @@ public final class MoldDemon extends CardImpl {
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("two Swamps");
     
     static{
-        filter.add(new SubtypePredicate(SubType.SWAMP));
+        filter.add(SubType.SWAMP.getPredicate());
     }
 
     public MoldDemon(UUID ownerId, CardSetInfo setInfo) {

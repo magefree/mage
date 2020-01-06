@@ -13,7 +13,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetAnyTarget;
 
 import java.util.UUID;
@@ -27,7 +26,7 @@ public final class HondenOfInfiniteRage extends CardImpl {
     static final FilterControlledPermanent filter = new FilterControlledPermanent("Shrine");
 
         static {
-            filter.add(new SubtypePredicate(SubType.SHRINE));
+            filter.add(SubType.SHRINE.getPredicate());
         }
 
         public HondenOfInfiniteRage (UUID ownerId, CardSetInfo setInfo) {

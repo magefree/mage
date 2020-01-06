@@ -17,7 +17,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -28,7 +27,7 @@ public final class SkirkOutrider extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Beast");
 
     static {
-        filter.add(new SubtypePredicate(SubType.BEAST));
+        filter.add(SubType.BEAST.getPredicate());
     }    
     
     public SkirkOutrider(UUID ownerId, CardSetInfo setInfo) {

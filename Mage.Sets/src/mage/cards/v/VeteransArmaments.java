@@ -19,7 +19,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -29,7 +28,7 @@ public final class VeteransArmaments extends CardImpl {
 
     private static final FilterPermanent filter = new FilterCreaturePermanent("a Soldier creature");
     static {
-        filter.add(new SubtypePredicate(SubType.SOLDIER));
+        filter.add(SubType.SOLDIER.getPredicate());
     }
 
     public VeteransArmaments(UUID ownerId, CardSetInfo setInfo) {

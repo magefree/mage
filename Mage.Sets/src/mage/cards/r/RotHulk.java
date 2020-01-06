@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -26,7 +25,7 @@ public final class RotHulk extends CardImpl {
     private static final FilterCard filterZombie = new FilterCard("Zombie cards from your graveyard");
 
     static {
-        filterZombie.add(new SubtypePredicate(SubType.ZOMBIE));
+        filterZombie.add(SubType.ZOMBIE.getPredicate());
     }
 
     private final UUID entersBattlefieldAbilityID;

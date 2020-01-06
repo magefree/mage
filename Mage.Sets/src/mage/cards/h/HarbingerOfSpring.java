@@ -11,7 +11,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -21,7 +20,7 @@ public final class HarbingerOfSpring extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Spirit creatures");
     static {
-        filter.add(Predicates.not(new SubtypePredicate(SubType.SPIRIT)));
+        filter.add(Predicates.not(SubType.SPIRIT.getPredicate()));
     }
 
     public HarbingerOfSpring(UUID ownerId, CardSetInfo setInfo) {

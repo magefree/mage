@@ -19,7 +19,6 @@ import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -87,7 +86,7 @@ class ReinsOfTheVinesteedEffect extends OneShotEffect {
             StringBuilder sb = new StringBuilder("creature that shares a creature type with the formerly attached creature: ");
             List<Predicate<MageObject>> subtypes = new ArrayList<>();
             for (SubType subtype : lastStateCreature.getSubtype(game)) {
-                subtypes.add(new SubtypePredicate(subtype));
+                subtypes.add(subtype.getPredicate());
                 sb.append(subtype).append(", ");
             }
             FILTER.add(Predicates.or(subtypes));

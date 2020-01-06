@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.BlockedPredicate;
 import mage.target.common.TargetCardInHand;
 
@@ -28,7 +27,7 @@ public final class Snag extends CardImpl {
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("unblocked creatures");
 
     static {
-        filter.add(new SubtypePredicate(SubType.FOREST));
+        filter.add(SubType.FOREST.getPredicate());
         filter2.add(Predicates.not(BlockedPredicate.instance));
     }
 

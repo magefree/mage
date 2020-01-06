@@ -21,7 +21,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -34,7 +33,7 @@ public final class JaggedScarArchers extends CardImpl {
     private static final FilterControlledPermanent controlledElvesFilter = new FilterControlledPermanent("Elves you control");
     static {
         flyingCreatureFilter.add(new AbilityPredicate(FlyingAbility.class));
-        controlledElvesFilter.add(new SubtypePredicate(SubType.ELF));
+        controlledElvesFilter.add(SubType.ELF.getPredicate());
     }
 
     public JaggedScarArchers(UUID ownerId, CardSetInfo setInfo) {

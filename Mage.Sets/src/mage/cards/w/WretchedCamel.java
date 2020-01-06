@@ -16,7 +16,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPlayer;
 
 /**
@@ -29,8 +28,8 @@ public final class WretchedCamel extends CardImpl {
     private static final FilterCard filterDesertCard = new FilterCard("Desert card");
 
     static {
-        filterDesertPermanent.add(new SubtypePredicate(SubType.DESERT));
-        filterDesertCard.add(new SubtypePredicate(SubType.DESERT));
+        filterDesertPermanent.add(SubType.DESERT.getPredicate());
+        filterDesertCard.add(SubType.DESERT.getPredicate());
     }
 
     public WretchedCamel(UUID ownerId, CardSetInfo setInfo) {

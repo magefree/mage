@@ -21,7 +21,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -79,7 +78,7 @@ public class ChampionAbility extends StaticAbility {
         if (!subtypes.isEmpty()) {
             int i = 0;
             for (SubType subtype : this.subtypes) {
-                subtypesPredicates.add(new SubtypePredicate(subtype));
+                subtypesPredicates.add(subtype.getPredicate());
                 if (i == 0) {
                     sb.append(subtype);
                 } else {

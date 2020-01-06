@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.MyrToken;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledPermanent;
@@ -29,8 +28,8 @@ public final class MyrTurbine extends CardImpl {
     private static final FilterControlledPermanent filterMyr = new FilterControlledPermanent("Myr you control");
 
     static {
-        filterCard.add(new SubtypePredicate(SubType.MYR));
-        filterMyr.add(new SubtypePredicate(SubType.MYR));
+        filterCard.add(SubType.MYR.getPredicate());
+        filterMyr.add(SubType.MYR.getPredicate());
 
     }
 

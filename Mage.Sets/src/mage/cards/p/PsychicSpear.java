@@ -10,7 +10,6 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPlayer;
 
 /**
@@ -22,7 +21,7 @@ public final class PsychicSpear extends CardImpl {
     private static final FilterCard filter = new FilterCard("a Spirit or Arcane card to discard");
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate(SubType.SPIRIT),new SubtypePredicate(SubType.ARCANE)));
+        filter.add(Predicates.or(SubType.SPIRIT.getPredicate(),SubType.ARCANE.getPredicate()));
     }
 
     public PsychicSpear(UUID ownerId, CardSetInfo setInfo) {

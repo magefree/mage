@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -25,7 +24,7 @@ public final class IroncladSlayer extends CardImpl {
     private static final FilterCard filter = new FilterCard("Aura or Equipment card from your graveyard");
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate(SubType.AURA), new SubtypePredicate(SubType.EQUIPMENT)));
+        filter.add(Predicates.or(SubType.AURA.getPredicate(), SubType.EQUIPMENT.getPredicate()));
     }
 
     public IroncladSlayer(UUID ownerId, CardSetInfo setInfo) {

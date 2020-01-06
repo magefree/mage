@@ -19,7 +19,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -89,7 +88,7 @@ class GishathSunsAvatarEffect extends OneShotEffect {
         if (!cards.isEmpty()) {
             controller.revealCards(source, cards, game);
             FilterCreatureCard filter = new FilterCreatureCard("Dinosaur creature cards");
-            filter.add(new SubtypePredicate(SubType.DINOSAUR));
+            filter.add(SubType.DINOSAUR.getPredicate());
             TargetCard target1 = new TargetCard(0, Integer.MAX_VALUE, Zone.LIBRARY, filter);
             target1.setNotTarget(true);
             controller.choose(Outcome.PutCardInPlay, cards, target1, game);

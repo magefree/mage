@@ -20,7 +20,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.EldraziHorrorToken;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -33,7 +32,7 @@ public final class ExtricatorOfFlesh extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("non-Eldrazi creature");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate(SubType.ELDRAZI)));
+        filter.add(Predicates.not(SubType.ELDRAZI.getPredicate()));
     }
 
     public ExtricatorOfFlesh(UUID ownerId, CardSetInfo setInfo) {

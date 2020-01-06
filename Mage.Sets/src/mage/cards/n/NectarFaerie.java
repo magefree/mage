@@ -15,7 +15,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -27,7 +26,7 @@ public final class NectarFaerie extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Faerie or Elf");
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate(SubType.FAERIE),new SubtypePredicate(SubType.ELF)));
+        filter.add(Predicates.or(SubType.FAERIE.getPredicate(),SubType.ELF.getPredicate()));
     }
 
     public NectarFaerie(UUID ownerId, CardSetInfo setInfo) {

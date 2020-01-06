@@ -24,7 +24,6 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.PowerPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.token.KnightToken;
@@ -81,7 +80,7 @@ class AryelTapXTargetCost extends VariableCostImpl {
 
     static {
         filter.add(Predicates.not(TappedPredicate.instance));
-        filter.add(new SubtypePredicate(SubType.KNIGHT));
+        filter.add(SubType.KNIGHT.getPredicate());
     }
 
     public AryelTapXTargetCost() {

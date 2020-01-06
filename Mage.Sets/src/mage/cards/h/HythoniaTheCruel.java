@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -24,7 +23,7 @@ public final class HythoniaTheCruel extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Gorgon creatures");
     static {
-        filter.add(Predicates.not(new SubtypePredicate(SubType.GORGON)));
+        filter.add(Predicates.not(SubType.GORGON.getPredicate()));
     }
 
     public HythoniaTheCruel(UUID ownerId, CardSetInfo setInfo) {

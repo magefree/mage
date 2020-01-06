@@ -17,7 +17,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -28,7 +27,7 @@ public final class TrialOfSolidarity extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Cartouche");
 
     static {
-        filter.add(new SubtypePredicate(SubType.CARTOUCHE));
+        filter.add(SubType.CARTOUCHE.getPredicate());
     }
 
     public TrialOfSolidarity(UUID ownerId, CardSetInfo setInfo) {

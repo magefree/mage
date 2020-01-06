@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -63,7 +62,7 @@ class DistantMelodyEffect extends OneShotEffect {
         Choice typeChoice = new ChoiceCreatureType(game.getObject(source.getSourceId()));
         if (controller != null && controller.choose(Outcome.BoostCreature, typeChoice, game)) {
             FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
-            filter.add(new SubtypePredicate(SubType.byDescription(typeChoice.getChoice())));
+            filter.add(SubType.byDescription(typeChoice.getChoice()).getPredicate());
             return new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(filter)).apply(game, source);
         }
         return false;

@@ -15,7 +15,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -28,7 +27,7 @@ public final class WolfhuntersQuiver extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Werewolf creature");
 
     static {
-        filter.add(new SubtypePredicate(SubType.WEREWOLF));
+        filter.add(SubType.WEREWOLF.getPredicate());
     }
 
     public WolfhuntersQuiver(UUID ownerId, CardSetInfo setInfo) {

@@ -16,7 +16,6 @@ import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
@@ -65,7 +64,7 @@ class GargantuanGorillaSacrificeEffect extends OneShotEffect {
     private static final FilterPermanent filterSnow = new FilterPermanent("snow permanent");
 
     static {
-        filter.add(new SubtypePredicate(SubType.FOREST));
+        filter.add(SubType.FOREST.getPredicate());
         filterSnow.add(new SupertypePredicate(SuperType.SNOW));
     }
 

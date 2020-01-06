@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
@@ -29,7 +28,7 @@ public final class IndulgentAristocrat extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Vampire you control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.VAMPIRE));
+        filter.add(SubType.VAMPIRE.getPredicate());
     }
 
     public IndulgentAristocrat(UUID ownerId, CardSetInfo setInfo) {

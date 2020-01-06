@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
@@ -22,7 +21,7 @@ public final class StromkirkCondemned extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Vampires");
 
     static {
-        filter.add(new SubtypePredicate(SubType.VAMPIRE));
+        filter.add(SubType.VAMPIRE.getPredicate());
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

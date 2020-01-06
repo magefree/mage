@@ -13,7 +13,6 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -25,7 +24,7 @@ public final class Ratcatcher extends CardImpl {
     private static final FilterCard filter = new FilterCard("Rat card");
     
     static {
-        filter.add(new SubtypePredicate(SubType.RAT));
+        filter.add(SubType.RAT.getPredicate());
     }
 
     public Ratcatcher(UUID ownerId, CardSetInfo setInfo) {

@@ -12,7 +12,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 import java.util.UUID;
 
@@ -24,7 +23,7 @@ public final class HondenOfCleansingFire extends CardImpl {
     static final FilterControlledPermanent filter = new FilterControlledPermanent("Shrine");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SHRINE));
+        filter.add(SubType.SHRINE.getPredicate());
     }
 
     public HondenOfCleansingFire(UUID ownerId, CardSetInfo setInfo) {

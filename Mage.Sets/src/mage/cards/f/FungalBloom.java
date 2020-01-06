@@ -13,7 +13,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -25,7 +24,7 @@ public final class FungalBloom extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Fungus");
 
     static {
-        filter.add(new SubtypePredicate(SubType.FUNGUS));
+        filter.add(SubType.FUNGUS.getPredicate());
     }
 
     public FungalBloom(UUID ownerId, CardSetInfo setInfo) {

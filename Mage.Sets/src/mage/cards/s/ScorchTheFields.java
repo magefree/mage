@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetLandPermanent;
 
 /**
@@ -21,7 +20,7 @@ public final class ScorchTheFields extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Human creature");
 
     static {
-        filter.add(new SubtypePredicate(SubType.HUMAN));
+        filter.add(SubType.HUMAN.getPredicate());
     }
 
     public ScorchTheFields(UUID ownerId, CardSetInfo setInfo) {

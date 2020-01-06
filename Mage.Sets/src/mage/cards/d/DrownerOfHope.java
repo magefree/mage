@@ -18,7 +18,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.EldraziScionToken;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -33,8 +32,8 @@ public final class DrownerOfHope extends CardImpl {
 
     static {
         FILTER.add(Predicates.and(
-                new SubtypePredicate(SubType.ELDRAZI),
-                new SubtypePredicate(SubType.SCION)));
+                SubType.ELDRAZI.getPredicate(),
+                SubType.SCION.getPredicate()));
     }
 
     public DrownerOfHope(UUID ownerId, CardSetInfo setInfo) {

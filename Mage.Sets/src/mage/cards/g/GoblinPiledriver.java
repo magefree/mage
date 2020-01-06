@@ -15,7 +15,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterAttackingCreature;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
@@ -27,7 +26,7 @@ public final class GoblinPiledriver extends CardImpl {
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("other attacking Goblin");
 
     static {
-        filter.add(new SubtypePredicate(SubType.GOBLIN));
+        filter.add(SubType.GOBLIN.getPredicate());
         filter.add(AnotherPredicate.instance);
     }
 

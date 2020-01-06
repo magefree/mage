@@ -14,7 +14,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -27,8 +26,8 @@ public final class CorruptedRoots extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new SubtypePredicate(SubType.FOREST),
-                new SubtypePredicate(SubType.PLAINS)));
+                SubType.FOREST.getPredicate(),
+                SubType.PLAINS.getPredicate()));
     }
 
     public CorruptedRoots(UUID ownerId, CardSetInfo setInfo) {

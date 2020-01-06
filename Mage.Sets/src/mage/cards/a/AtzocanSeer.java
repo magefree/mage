@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -26,7 +25,7 @@ public final class AtzocanSeer extends CardImpl {
     private static final FilterCard filter = new FilterCard("Dinosaur from your graveyard");
     
     static {
-        filter.add(new SubtypePredicate(SubType.DINOSAUR));
+        filter.add(SubType.DINOSAUR.getPredicate());
     }
 
     public AtzocanSeer(UUID ownerId, CardSetInfo setInfo) {

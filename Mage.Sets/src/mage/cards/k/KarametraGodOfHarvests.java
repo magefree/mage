@@ -15,7 +15,6 @@ import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
@@ -29,8 +28,8 @@ public final class KarametraGodOfHarvests extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new SubtypePredicate(SubType.FOREST),
-                new SubtypePredicate(SubType.PLAINS)
+                SubType.FOREST.getPredicate(),
+                SubType.PLAINS.getPredicate()
         ));
     }
 

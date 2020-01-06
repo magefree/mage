@@ -21,7 +21,6 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
@@ -36,7 +35,7 @@ public final class PriestOfTheWakeningSun extends CardImpl {
     private static final FilterCard filter = new FilterCard("Dinosaur card");
 
     static {
-        filter.add(new SubtypePredicate(SubType.DINOSAUR));
+        filter.add(SubType.DINOSAUR.getPredicate());
     }
 
     public PriestOfTheWakeningSun(UUID ownerId, CardSetInfo setInfo) {
@@ -73,7 +72,7 @@ class PriestOfTheWakeningSunEffect extends OneShotEffect {
     private static final FilterCard filter = new FilterCard("a Dinosaur card to reveal");
 
     static {
-        filter.add(new SubtypePredicate(SubType.DINOSAUR));
+        filter.add(SubType.DINOSAUR.getPredicate());
     }
 
     PriestOfTheWakeningSunEffect() {

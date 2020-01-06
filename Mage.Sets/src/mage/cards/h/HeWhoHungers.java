@@ -23,7 +23,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetOpponent;
 
@@ -35,7 +34,7 @@ public final class HeWhoHungers extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Spirit");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SPIRIT));
+        filter.add(SubType.SPIRIT.getPredicate());
     }
 
     public HeWhoHungers(UUID ownerId, CardSetInfo setInfo) {

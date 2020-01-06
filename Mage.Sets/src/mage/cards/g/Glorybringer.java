@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -29,7 +28,7 @@ public final class Glorybringer extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Dragon creature an opponent controls");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate(SubType.DRAGON)));
+        filter.add(Predicates.not(SubType.DRAGON.getPredicate()));
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 

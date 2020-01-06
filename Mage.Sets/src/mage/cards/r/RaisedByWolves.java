@@ -15,7 +15,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.WolfToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -29,7 +28,7 @@ public final class RaisedByWolves extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Wolf you control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.WOLF));
+        filter.add(SubType.WOLF.getPredicate());
     }
 
     public RaisedByWolves(UUID ownerId, CardSetInfo setInfo) {

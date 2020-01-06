@@ -22,7 +22,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -71,7 +70,7 @@ class RamunapHydraBoostEffect extends WhileConditionContinuousEffect {
     private static final FilterCard filter = new FilterCard("a Desert");
 
     static {
-        filter.add(new SubtypePredicate(SubType.DESERT));
+        filter.add(SubType.DESERT.getPredicate());
     }
 
     private final int power;

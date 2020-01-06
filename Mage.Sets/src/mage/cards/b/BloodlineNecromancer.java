@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -27,7 +26,7 @@ public final class BloodlineNecromancer extends CardImpl {
     private static final FilterCreatureCard filter = new FilterCreatureCard("Vampire or Wizard creature card from your graveyard");
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate(SubType.VAMPIRE), new SubtypePredicate(SubType.WIZARD)));
+        filter.add(Predicates.or(SubType.VAMPIRE.getPredicate(), SubType.WIZARD.getPredicate()));
     }
 
     public BloodlineNecromancer(UUID ownerId, CardSetInfo setInfo) {

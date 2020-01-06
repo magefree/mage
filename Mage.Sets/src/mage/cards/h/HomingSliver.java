@@ -14,7 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -28,7 +27,7 @@ public final class HomingSliver extends CardImpl {
     private static final FilterCard filter = new FilterCard("Sliver card");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SLIVER));
+        filter.add(SubType.SLIVER.getPredicate());
     }
 
     public HomingSliver(UUID ownerId, CardSetInfo setInfo) {
@@ -59,7 +58,7 @@ class HomingSliverEffect extends ContinuousEffectImpl {
     private static final FilterCard filter = new FilterCard("Sliver card");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SLIVER));
+        filter.add(SubType.SLIVER.getPredicate());
     }
 
     public HomingSliverEffect() {

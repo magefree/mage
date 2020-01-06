@@ -8,7 +8,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -20,7 +19,7 @@ public final class SarkhansTriumph extends CardImpl {
     private static final FilterCreatureCard filter = new FilterCreatureCard("Dragon creature card");
     
     static {
-        filter.add(new SubtypePredicate(SubType.DRAGON));
+        filter.add(SubType.DRAGON.getPredicate());
     }
 
     public SarkhansTriumph(UUID ownerId, CardSetInfo setInfo) {

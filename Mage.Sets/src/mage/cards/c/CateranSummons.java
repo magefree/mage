@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -22,7 +21,7 @@ public final class CateranSummons extends CardImpl {
     private static final FilterCard filter = new FilterCreatureCard("Mercenary card");
 
     static {
-        filter.add(new SubtypePredicate(SubType.MERCENARY));
+        filter.add(SubType.MERCENARY.getPredicate());
     }
 
     public CateranSummons(UUID ownerId, CardSetInfo setInfo) {

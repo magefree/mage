@@ -3,7 +3,6 @@ package mage.cards.r;
 
 import java.util.UUID;
 import mage.ObjectColor;
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
@@ -17,10 +16,8 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
@@ -56,8 +53,8 @@ class RoyalDecreeAbility extends TriggeredAbilityImpl {
     private static final FilterPermanent filter = new FilterPermanent("a Swamp, Mountain, black permanent, or red permanent");
     static {
         filter.add(Predicates.or(
-                new SubtypePredicate(SubType.SWAMP),
-                new SubtypePredicate(SubType.MOUNTAIN),
+                SubType.SWAMP.getPredicate(),
+                SubType.MOUNTAIN.getPredicate(),
                 new ColorPredicate(ObjectColor.BLACK),
                 new ColorPredicate(ObjectColor.RED)));
     }

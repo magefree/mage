@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -27,8 +26,8 @@ public final class DeathlessBehemoth extends CardImpl {
 
     static {
         filter.add(Predicates.and(
-                new SubtypePredicate(SubType.ELDRAZI),
-                new SubtypePredicate(SubType.SCION)));
+                SubType.ELDRAZI.getPredicate(),
+                SubType.SCION.getPredicate()));
     }
 
     public DeathlessBehemoth(UUID ownerId, CardSetInfo setInfo) {

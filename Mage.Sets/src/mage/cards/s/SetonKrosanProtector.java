@@ -14,7 +14,6 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -28,7 +27,7 @@ public final class SetonKrosanProtector extends CardImpl {
     
     static {
         filter.add(Predicates.not(TappedPredicate.instance));
-        filter.add(new SubtypePredicate(SubType.DRUID));
+        filter.add(SubType.DRUID.getPredicate());
     }
 
     public SetonKrosanProtector(UUID ownerId, CardSetInfo setInfo) {

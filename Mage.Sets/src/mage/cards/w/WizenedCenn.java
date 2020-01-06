@@ -12,7 +12,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -23,7 +22,7 @@ public final class WizenedCenn extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Kithkin creatures");
 
     static {
-        filter.add(new SubtypePredicate(SubType.KITHKIN));
+        filter.add(SubType.KITHKIN.getPredicate());
     }
 
     public WizenedCenn(UUID ownerId, CardSetInfo setInfo) {

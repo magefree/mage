@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePlayerOrPlaneswalker;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetAnyTarget;
 
 /**
@@ -26,7 +25,7 @@ public final class ImperialGunner extends CardImpl {
     private static final FilterCreaturePlayerOrPlaneswalker filter = new FilterCreaturePlayerOrPlaneswalker("target player, planeswalker or Starship creature");
 
     static {
-        filter.getCreatureFilter().add(new SubtypePredicate(SubType.STARSHIP));
+        filter.getCreatureFilter().add(SubType.STARSHIP.getPredicate());
     }
 
     public ImperialGunner(UUID ownerId, CardSetInfo setInfo) {

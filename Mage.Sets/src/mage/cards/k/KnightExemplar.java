@@ -14,7 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
@@ -27,7 +26,7 @@ public final class KnightExemplar extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Knight creatures");
 
     static {
-        filter.add(new SubtypePredicate(SubType.KNIGHT));
+        filter.add(SubType.KNIGHT.getPredicate());
     }
 
     public KnightExemplar(UUID ownerId, CardSetInfo setInfo) {

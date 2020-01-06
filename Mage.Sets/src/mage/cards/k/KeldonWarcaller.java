@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -24,7 +23,7 @@ public final class KeldonWarcaller extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Saga you control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SAGA));
+        filter.add(SubType.SAGA.getPredicate());
     }
 
     public KeldonWarcaller(UUID ownerId, CardSetInfo setInfo) {

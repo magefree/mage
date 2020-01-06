@@ -20,7 +20,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 
@@ -34,7 +33,7 @@ public final class WillowPriestess extends CardImpl {
     private static final FilterCreaturePermanent greenCreature = new FilterCreaturePermanent("green creature");
 
     static {
-        filter.add(new SubtypePredicate(SubType.FAERIE));
+        filter.add(SubType.FAERIE.getPredicate());
         greenCreature.add(new ColorPredicate(ObjectColor.GREEN));
     }
 

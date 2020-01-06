@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPlayer;
 
 /**
@@ -23,7 +22,7 @@ public final class QuillSlingerBoggart extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("a Kithkin spell");
 
     static {
-        filter.add(new SubtypePredicate(SubType.KITHKIN));
+        filter.add(SubType.KITHKIN.getPredicate());
     }
 
     public QuillSlingerBoggart(UUID ownerId, CardSetInfo setInfo) {

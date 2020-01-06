@@ -19,7 +19,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TransformedPredicate;
 
 
@@ -31,13 +30,13 @@ public final class GrimlockDinobotLeader extends CardImpl{
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Dinosaurs and Vehicles");
     static {
-        filter.add(Predicates.or(new SubtypePredicate(SubType.DINOSAUR), new SubtypePredicate(SubType.VEHICLE)));
+        filter.add(Predicates.or(SubType.DINOSAUR.getPredicate(), SubType.VEHICLE.getPredicate()));
     }
     
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Transformers creatures");
     static {
-        filter2.add(Predicates.not(new SubtypePredicate(SubType.DINOSAUR))); 
-        filter2.add(Predicates.not(new SubtypePredicate(SubType.VEHICLE))); 
+        filter2.add(Predicates.not(SubType.DINOSAUR.getPredicate()));
+        filter2.add(Predicates.not(SubType.VEHICLE.getPredicate()));
         filter2.add(Predicates.or(new AbilityPredicate(TransformAbility.class), TransformedPredicate.instance));
     }
     

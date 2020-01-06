@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -22,7 +21,7 @@ public final class Ragemonger extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Minotaur spells");
     static {
-        filter.add(new SubtypePredicate(SubType.MINOTAUR));
+        filter.add(SubType.MINOTAUR.getPredicate());
     }
 
     public Ragemonger(UUID ownerId, CardSetInfo setInfo) {

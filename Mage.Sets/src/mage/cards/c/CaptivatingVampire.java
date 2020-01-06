@@ -15,7 +15,6 @@ import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -32,8 +31,8 @@ public final class CaptivatingVampire extends CardImpl {
     private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent("untapped Vampires you control");
 
     static {
-        filter1.add(new SubtypePredicate(SubType.VAMPIRE));
-        filter2.add(new SubtypePredicate(SubType.VAMPIRE));
+        filter1.add(SubType.VAMPIRE.getPredicate());
+        filter2.add(SubType.VAMPIRE.getPredicate());
         filter2.add(Predicates.not(TappedPredicate.instance));
     }
 

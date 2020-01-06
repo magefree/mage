@@ -17,7 +17,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.SliverToken;
 
 import java.util.UUID;
@@ -35,8 +34,8 @@ public final class SliverHive extends CardImpl {
     }
 
     static {
-        filter.add(new SubtypePredicate(SubType.SLIVER));
-        filterSpell.add(new SubtypePredicate(SubType.SLIVER));
+        filter.add(SubType.SLIVER.getPredicate());
+        filterSpell.add(SubType.SLIVER.getPredicate());
     }
 
     public SliverHive(UUID ownerId, CardSetInfo setInfo) {

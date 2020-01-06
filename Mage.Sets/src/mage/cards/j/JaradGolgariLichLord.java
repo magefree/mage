@@ -18,7 +18,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
 
@@ -32,8 +31,8 @@ public final class JaradGolgariLichLord extends CardImpl {
     private static final FilterControlledPermanent filterForest = new FilterControlledPermanent("a Forest");
 
     static {
-        filterSwamp.add(new SubtypePredicate(SubType.SWAMP));
-        filterForest.add(new SubtypePredicate(SubType.FOREST));
+        filterSwamp.add(SubType.SWAMP.getPredicate());
+        filterForest.add(SubType.FOREST.getPredicate());
     }
 
     public JaradGolgariLichLord(UUID ownerId, CardSetInfo setInfo) {

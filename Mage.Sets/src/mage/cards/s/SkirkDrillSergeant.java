@@ -18,7 +18,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterPermanentCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -33,7 +32,7 @@ public final class SkirkDrillSergeant extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("or another Goblin");
 
     static {
-        filter.add(new SubtypePredicate(SubType.GOBLIN));
+        filter.add(SubType.GOBLIN.getPredicate());
     }
 
     public SkirkDrillSergeant(UUID ownerId, CardSetInfo setInfo) {
@@ -63,7 +62,7 @@ class SkirkDrillSergeantEffect extends OneShotEffect {
     private static final FilterPermanentCard filter = new FilterPermanentCard("Goblin permanent card");
 
     static {
-        filter.add(new SubtypePredicate(SubType.GOBLIN));
+        filter.add(SubType.GOBLIN.getPredicate());
     }
 
     public SkirkDrillSergeantEffect() {

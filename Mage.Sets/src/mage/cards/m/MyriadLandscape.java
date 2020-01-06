@@ -1,6 +1,5 @@
 package mage.cards.m;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -19,18 +18,15 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.target.common.TargetCardInLibrary;
 import mage.util.SubTypeList;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author LevelX2
@@ -71,11 +67,12 @@ class TargetCardInLibrarySharingLandType extends TargetCardInLibrary {
     private static final FilterCard filterBasicLandCard = new FilterCard("basic land card");
 
     static {
-        List<Predicate<MageObject>> subTypePreds = new ArrayList<>();
-        for (SubType landType : SubType.getLandTypes()) {
-            subTypePreds.add(new SubtypePredicate(landType));
-        }
-        filterBasicLandCard.add(Predicates.or(subTypePreds));
+        filterBasicLandCard.add(Predicates.or(
+                SubType.getLandTypes()
+                        .stream()
+                        .map(SubType::getPredicate)
+                        .collect(Collectors.toSet())
+        ));
         filterBasicLandCard.add(new SupertypePredicate(SuperType.BASIC));
     }
 

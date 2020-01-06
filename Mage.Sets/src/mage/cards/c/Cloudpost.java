@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -22,7 +21,7 @@ public final class Cloudpost extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Locus on the battlefield");
 
     static {
-        filter.add(new SubtypePredicate(SubType.LOCUS));
+        filter.add(SubType.LOCUS.getPredicate());
     }
 
     public Cloudpost(UUID ownerId, CardSetInfo setInfo) {

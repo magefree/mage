@@ -16,7 +16,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.PirateToken;
@@ -30,7 +29,7 @@ public final class FathomFleetCaptain extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("another nontoken Pirate");
 
     static {
-        filter.add(new SubtypePredicate(SubType.PIRATE));
+        filter.add(SubType.PIRATE.getPredicate());
         filter.add(AnotherPredicate.instance);
         filter.add(Predicates.not(TokenPredicate.instance));
     }

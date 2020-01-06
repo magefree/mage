@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetArtifactPermanent;
 
 /**
@@ -26,8 +25,8 @@ public final class MoggSalvage extends CardImpl {
     private static final FilterPermanent filterIsland = new FilterPermanent();
 
     static {
-        filterMountain.add(new SubtypePredicate(SubType.MOUNTAIN));
-        filterIsland.add(new SubtypePredicate(SubType.ISLAND));
+        filterMountain.add(SubType.MOUNTAIN.getPredicate());
+        filterIsland.add(SubType.ISLAND.getPredicate());
     }
 
     public MoggSalvage(UUID ownerId, CardSetInfo setInfo) {

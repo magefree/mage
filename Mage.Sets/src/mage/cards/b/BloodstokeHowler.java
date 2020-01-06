@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -24,7 +23,7 @@ public final class BloodstokeHowler extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Beast creatures you control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.BEAST));
+        filter.add(SubType.BEAST.getPredicate());
     }
 
     public BloodstokeHowler(UUID ownerId, CardSetInfo setInfo) {

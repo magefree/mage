@@ -9,7 +9,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -21,7 +20,7 @@ public final class SafewrightQuest extends CardImpl {
     private static final FilterCard filter = new FilterCard("Forest or Plains card");
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate(SubType.FOREST), new SubtypePredicate(SubType.PLAINS)));
+        filter.add(Predicates.or(SubType.FOREST.getPredicate(), SubType.PLAINS.getPredicate()));
     }
 
     public SafewrightQuest(UUID ownerId, CardSetInfo setInfo) {

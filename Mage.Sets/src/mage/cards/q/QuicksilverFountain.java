@@ -22,7 +22,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -70,7 +69,7 @@ enum QuicksilverFountainAdjuster implements TargetAdjuster {
         if (activePlayer != null) {
             ability.getTargets().clear();
             FilterLandPermanent filter = new FilterLandPermanent();
-            filter.add(Predicates.not(new SubtypePredicate(SubType.ISLAND)));
+            filter.add(Predicates.not(SubType.ISLAND.getPredicate()));
             filter.add(new ControllerPredicate(TargetController.ACTIVE));
             TargetLandPermanent target = new TargetLandPermanent(1, 1, filter, false);
             target.setTargetController(activePlayer.getId());
@@ -149,7 +148,7 @@ class AllLandsAreSubtypeCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         FilterLandPermanent filterLand = new FilterLandPermanent();
-        filterLand.add(new SubtypePredicate(subtype));
+        filterLand.add(subtype.getPredicate());
         int landCount = game.getBattlefield().getAllActivePermanents(CardType.LAND).size();
         return game.getBattlefield().getAllActivePermanents(filterLand, game).size() == landCount;
     }

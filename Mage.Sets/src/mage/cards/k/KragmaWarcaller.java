@@ -16,7 +16,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -27,7 +26,7 @@ public final class KragmaWarcaller extends CardImpl {
     private static final FilterControlledCreaturePermanent filter1 = new FilterControlledCreaturePermanent("Minotaur creatures you control");
     private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent("Minotaur you control");
     static {
-        filter1.add(new SubtypePredicate(SubType.MINOTAUR));
+        filter1.add(SubType.MINOTAUR.getPredicate());
     }
 
     public KragmaWarcaller(UUID ownerId, CardSetInfo setInfo) {

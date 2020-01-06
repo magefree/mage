@@ -15,7 +15,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -26,7 +25,7 @@ public final class AkutaBornOfAsh extends CardImpl {
 
     private static final FilterControlledPermanent filterSwamp = new FilterControlledPermanent("a Swamp");
     static {
-        filterSwamp.add(new SubtypePredicate(SubType.SWAMP));
+        filterSwamp.add(SubType.SWAMP.getPredicate());
     }
 
     public AkutaBornOfAsh(UUID ownerId, CardSetInfo setInfo) {

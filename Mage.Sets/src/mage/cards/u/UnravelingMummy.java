@@ -17,7 +17,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -31,7 +30,7 @@ public final class UnravelingMummy extends CardImpl {
 
     static {
         filter.add(AttackingPredicate.instance);
-        filter.add(new SubtypePredicate(SubType.ZOMBIE));
+        filter.add(SubType.ZOMBIE.getPredicate());
     }
 
     public UnravelingMummy(UUID ownerId, CardSetInfo setInfo) {

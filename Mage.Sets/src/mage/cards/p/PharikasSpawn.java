@@ -13,7 +13,6 @@ import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
@@ -53,7 +52,7 @@ class PharikasSpawnDelayedTriggeredAbility extends DelayedTriggeredAbility {
     private static final FilterPermanent filter = new FilterCreaturePermanent("a non-Gorgon creature");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate(SubType.GORGON)));
+        filter.add(Predicates.not(SubType.GORGON.getPredicate()));
     }
 
     PharikasSpawnDelayedTriggeredAbility() {

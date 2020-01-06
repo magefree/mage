@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -29,8 +28,8 @@ public final class BoggartLoggers extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new SubtypePredicate(SubType.TREEFOLK),
-                new SubtypePredicate(SubType.FOREST)));
+                SubType.TREEFOLK.getPredicate(),
+                SubType.FOREST.getPredicate()));
     }
 
     public BoggartLoggers(UUID ownerId, CardSetInfo setInfo) {

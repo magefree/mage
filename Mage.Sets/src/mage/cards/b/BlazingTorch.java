@@ -24,7 +24,6 @@ import java.util.UUID;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesAttachedEffect;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -34,8 +33,8 @@ public final class BlazingTorch extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Vampires or Zombies");
     static {
-        filter.add(Predicates.or(new SubtypePredicate(SubType.VAMPIRE), 
-                                 new SubtypePredicate(SubType.ZOMBIE)));
+        filter.add(Predicates.or(SubType.VAMPIRE.getPredicate(),
+                                 SubType.ZOMBIE.getPredicate()));
     }
     
     public BlazingTorch(UUID ownerId, CardSetInfo setInfo) {

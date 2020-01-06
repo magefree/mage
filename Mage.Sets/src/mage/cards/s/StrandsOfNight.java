@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetControlledPermanent;
 
@@ -28,7 +27,7 @@ public final class StrandsOfNight extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Swamp");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SWAMP));
+        filter.add(SubType.SWAMP.getPredicate());
     }
 
     public StrandsOfNight(UUID ownerId, CardSetInfo setInfo) {

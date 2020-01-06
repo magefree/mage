@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -25,9 +24,9 @@ public final class ConsumingBonfire extends CardImpl {
 
     static {
         filter.add(CardType.CREATURE.getPredicate());
-        filter.add(Predicates.not(new SubtypePredicate(SubType.ELEMENTAL)));
+        filter.add(Predicates.not(SubType.ELEMENTAL.getPredicate()));
         filter2.add(CardType.CREATURE.getPredicate());
-        filter2.add(new SubtypePredicate(SubType.TREEFOLK));
+        filter2.add(SubType.TREEFOLK.getPredicate());
     }
 
     public ConsumingBonfire(UUID ownerId, CardSetInfo setInfo) {

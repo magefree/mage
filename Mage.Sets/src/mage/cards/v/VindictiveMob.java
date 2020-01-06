@@ -14,7 +14,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -25,7 +24,7 @@ public final class VindictiveMob extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("can't be blocked by Saprolings");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SAPROLING));
+        filter.add(SubType.SAPROLING.getPredicate());
     }
 
     public VindictiveMob(UUID ownerId, CardSetInfo setInfo) {

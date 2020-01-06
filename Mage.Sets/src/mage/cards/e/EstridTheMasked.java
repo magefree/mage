@@ -19,7 +19,6 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterEnchantmentCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.EnchantedPredicate;
 import mage.game.Game;
@@ -123,8 +122,8 @@ class EstridTheMaskedGraveyardEffect extends OneShotEffect {
             = new FilterEnchantmentCard();
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate(SubType.AURA)));
-        filter.add(new SubtypePredicate(SubType.AURA));
+        filter.add(Predicates.not(SubType.AURA.getPredicate()));
+        filter.add(SubType.AURA.getPredicate());
     }
 
     public EstridTheMaskedGraveyardEffect() {

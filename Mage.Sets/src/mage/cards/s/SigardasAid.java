@@ -13,7 +13,6 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -29,8 +28,8 @@ public final class SigardasAid extends CardImpl {
     private static final FilterCard filterCard = new FilterCard("Aura and Equipment spells");
 
     static {
-        filter.add(new SubtypePredicate(SubType.EQUIPMENT));
-        filterCard.add(Predicates.or(new SubtypePredicate(SubType.AURA), new SubtypePredicate(SubType.EQUIPMENT)));
+        filter.add(SubType.EQUIPMENT.getPredicate());
+        filterCard.add(Predicates.or(SubType.AURA.getPredicate(), SubType.EQUIPMENT.getPredicate()));
     }
 
     public SigardasAid(UUID ownerId, CardSetInfo setInfo) {
