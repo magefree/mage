@@ -5,12 +5,19 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.IntStream;
 
 public class StaticValue implements DynamicValue {
 
-    private static final Map<Integer, StaticValue> staticValueMap = new HashMap();
+    private static final List<StaticValue> staticValues = new ArrayList();
+
+    static {
+        IntStream.rangeClosed(-10, 10)
+                .mapToObj(StaticValue::new)
+                .forEachOrdered(staticValues::add);
+    }
 
     private final int value;
 
@@ -43,7 +50,9 @@ public class StaticValue implements DynamicValue {
     }
 
     public static StaticValue get(int value) {
-        staticValueMap.putIfAbsent(value, new StaticValue(value));
-        return staticValueMap.get(value);
+        if (value < -10 || value > 10) {
+            return new StaticValue(value);
+        }
+        return staticValues.get(value + 10);
     }
 }
