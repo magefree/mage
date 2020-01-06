@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetSpell;
 import mage.target.common.TargetArtifactPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -24,7 +23,7 @@ public final class BantCharm extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("instant spell");
 
     static {
-        filter.add(new CardTypePredicate(CardType.INSTANT));
+        filter.add(CardType.INSTANT.getPredicate());
     }
 
     public BantCharm(UUID ownerId, CardSetInfo setInfo) {

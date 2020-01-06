@@ -17,7 +17,6 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetCardInHand;
 
@@ -30,7 +29,7 @@ public final class MagetaTheLion extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("creatures except for {this}");
 
     static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
         filter.add(AnotherPredicate.instance);
     }
 

@@ -17,7 +17,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SharesColorWithSourcePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
@@ -56,7 +55,7 @@ public class ConspireAbility extends StaticAbility implements OptionalAdditional
     static {
         filter.add(Predicates.not(TappedPredicate.instance));
         filter.add(new SharesColorWithSourcePredicate());
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
     }
 
     public enum ConspireTargets {

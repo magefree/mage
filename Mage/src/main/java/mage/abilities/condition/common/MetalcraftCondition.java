@@ -4,7 +4,6 @@ import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.constants.CardType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 
 /**
@@ -17,7 +16,7 @@ public enum MetalcraftCondition implements Condition {
     private static final FilterPermanent filter = new FilterPermanent("artifact");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(CardType.ARTIFACT.getPredicate());
     }
 
 

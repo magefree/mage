@@ -4,7 +4,6 @@ package mage.filter.common;
 
 import mage.constants.CardType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -18,7 +17,7 @@ public class FilterPlaneswalkerCard extends FilterCard {
 
     public FilterPlaneswalkerCard(String name) {
         super(name);
-        this.add(new CardTypePredicate(CardType.PLANESWALKER));
+        this.add(CardType.PLANESWALKER.getPredicate());
     }
 
     public FilterPlaneswalkerCard(final FilterPlaneswalkerCard filter) {

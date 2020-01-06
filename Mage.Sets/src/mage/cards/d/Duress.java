@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -20,8 +19,8 @@ public final class Duress extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a noncreature, nonland card");
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
-        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
+        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
+        filter.add(Predicates.not(CardType.LAND.getPredicate()));
     }
 
     public Duress(UUID ownerId, CardSetInfo setInfo){

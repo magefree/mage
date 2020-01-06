@@ -23,7 +23,6 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -39,7 +38,7 @@ public final class NimDevourer extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact you control");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(CardType.ARTIFACT.getPredicate());
     }
 
     public NimDevourer(UUID ownerId, CardSetInfo setInfo) {

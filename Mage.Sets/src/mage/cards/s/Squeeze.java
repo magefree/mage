@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -21,7 +20,7 @@ public final class Squeeze extends CardImpl {
     private static final FilterCard filter = new FilterCard("Sorcery spells");
     
     static {
-        filter.add(new CardTypePredicate(CardType.SORCERY));
+        filter.add(CardType.SORCERY.getPredicate());
     }
 
     public Squeeze(UUID ownerId, CardSetInfo setInfo) {

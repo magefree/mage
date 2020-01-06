@@ -16,7 +16,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.TargetSpell;
 
@@ -31,8 +30,8 @@ public final class NivmagusElemental extends CardImpl {
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.INSTANT),
-                new CardTypePredicate(CardType.SORCERY)));
+                CardType.INSTANT.getPredicate(),
+                CardType.SORCERY.getPredicate()));
     }
 
     public NivmagusElemental(UUID ownerId, CardSetInfo setInfo) {

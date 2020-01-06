@@ -15,7 +15,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -28,7 +27,7 @@ public final class HoardSmelterDragon extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("artifact");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(CardType.ARTIFACT.getPredicate());
     }
 
     public HoardSmelterDragon (UUID ownerId, CardSetInfo setInfo) {

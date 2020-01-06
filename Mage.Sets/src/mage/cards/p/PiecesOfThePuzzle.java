@@ -11,7 +11,6 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -22,7 +21,7 @@ public final class PiecesOfThePuzzle extends CardImpl {
     private static final FilterCard FILTER = new FilterCard("up to two instant and/or sorcery cards");
 
     static {
-        FILTER.add(Predicates.or(new CardTypePredicate(CardType.INSTANT), new CardTypePredicate(CardType.SORCERY)));
+        FILTER.add(Predicates.or(CardType.INSTANT.getPredicate(), CardType.SORCERY.getPredicate()));
     }
 
     public PiecesOfThePuzzle(UUID ownerId, CardSetInfo setInfo) {

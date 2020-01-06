@@ -26,7 +26,6 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.command.Plane;
 import mage.game.stack.Spell;
@@ -45,7 +44,7 @@ public class TrailOfTheMageRingsPlane extends Plane {
     private static final FilterCard filter = new FilterCard("creature spells");
 
     static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
     }
 
     public TrailOfTheMageRingsPlane() {
@@ -78,7 +77,7 @@ class TrailOfTheMageRingsReboundEffect extends ContinuousEffectImpl {
     protected static final FilterCard filter = new FilterCard("Instant and sorcery spells");
 
     static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.INSTANT), new CardTypePredicate(CardType.SORCERY)));
+        filter.add(Predicates.or(CardType.INSTANT.getPredicate(), CardType.SORCERY.getPredicate()));
     }
 
     public TrailOfTheMageRingsReboundEffect() {

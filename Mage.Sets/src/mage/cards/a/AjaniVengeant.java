@@ -15,7 +15,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetAnyTarget;
@@ -29,7 +28,7 @@ public final class AjaniVengeant extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("lands");
 
     static {
-        filter.add(new CardTypePredicate(CardType.LAND));
+        filter.add(CardType.LAND.getPredicate());
     }
 
     public AjaniVengeant(UUID ownerId, CardSetInfo setInfo) {

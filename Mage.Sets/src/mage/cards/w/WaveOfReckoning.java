@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -52,7 +51,7 @@ class WaveOfReckoningDamageEffect extends OneShotEffect {
         public boolean apply(Game game, Ability source) {
 
             FilterPermanent filter = new FilterPermanent();
-            filter.add(new CardTypePredicate(CardType.CREATURE));
+            filter.add(CardType.CREATURE.getPredicate());
 
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
                 int amount = permanent.getPower().getValue();

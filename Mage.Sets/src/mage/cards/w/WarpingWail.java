@@ -14,7 +14,6 @@ import mage.constants.ComparisonType;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
 import mage.game.permanent.token.EldraziScionToken;
@@ -34,7 +33,7 @@ public final class WarpingWail extends CardImpl {
         filterCreature.add(Predicates.or(
                 new PowerPredicate(ComparisonType.FEWER_THAN, 2),
                 new ToughnessPredicate(ComparisonType.FEWER_THAN, 2)));
-        filterSorcery.add(new CardTypePredicate(CardType.SORCERY));
+        filterSorcery.add(CardType.SORCERY.getPredicate());
     }
 
     public WarpingWail(UUID ownerId, CardSetInfo setInfo) {

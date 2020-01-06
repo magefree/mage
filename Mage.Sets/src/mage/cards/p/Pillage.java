@@ -8,7 +8,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -22,8 +21,8 @@ public final class Pillage extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.LAND)));
+                CardType.ARTIFACT.getPredicate(),
+                CardType.LAND.getPredicate()));
     }
 
     public Pillage(UUID ownerId, CardSetInfo setInfo) {

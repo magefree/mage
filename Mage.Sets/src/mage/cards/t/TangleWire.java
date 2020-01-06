@@ -15,7 +15,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -53,9 +52,9 @@ class TangleWireEffect extends OneShotEffect {
     static{
         filter.add(Predicates.not(TappedPredicate.instance));
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.CREATURE),
-                new CardTypePredicate(CardType.LAND)));
+                CardType.ARTIFACT.getPredicate(),
+                CardType.CREATURE.getPredicate(),
+                CardType.LAND.getPredicate()));
     }
 
     TangleWireEffect() {

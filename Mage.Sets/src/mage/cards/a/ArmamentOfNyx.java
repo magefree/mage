@@ -19,7 +19,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -32,7 +31,7 @@ public final class ArmamentOfNyx extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("enchantment");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
+        filter.add(CardType.ENCHANTMENT.getPredicate());
     }
 
     public ArmamentOfNyx(UUID ownerId, CardSetInfo setInfo) {

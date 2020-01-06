@@ -19,7 +19,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
@@ -35,7 +34,7 @@ public final class EmrakulThePromisedEnd extends CardImpl {
     private static final FilterCard filter = new FilterCard("instants");
 
     static {
-        filter.add(new CardTypePredicate(CardType.INSTANT));
+        filter.add(CardType.INSTANT.getPredicate());
     }
 
     public EmrakulThePromisedEnd(UUID ownerId, CardSetInfo setInfo) {

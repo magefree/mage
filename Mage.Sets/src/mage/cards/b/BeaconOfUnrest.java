@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
 
@@ -22,8 +21,8 @@ public final class BeaconOfUnrest extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.CREATURE)));
+                CardType.ARTIFACT.getPredicate(),
+                CardType.CREATURE.getPredicate()));
     }
 
     public BeaconOfUnrest(UUID ownerId, CardSetInfo setInfo) {

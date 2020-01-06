@@ -21,7 +21,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
@@ -97,7 +96,7 @@ public class ChampionAbility extends StaticAbility {
             filter.add(Predicates.or(subtypesPredicates));
         }
         if (requiresCreature) {
-            filter.add(new CardTypePredicate(CardType.CREATURE));
+            filter.add(CardType.CREATURE.getPredicate());
         }
         filter.add(AnotherPredicate.instance);
 

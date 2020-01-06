@@ -2,26 +2,18 @@ package mage.cards.f;
 
 import java.util.UUID;
 
-import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.OptionalAdditionalCost;
 import mage.abilities.costs.OrCost;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.dynamicvalue.common.SacrificeCostCreaturesToughness;
 import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.common.TargetOpponentsCreaturePermanent;
 
 /**
  *
@@ -31,7 +23,7 @@ public final class FinalPayment extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a creature or enchantment");
 
     static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE), new CardTypePredicate(CardType.ENCHANTMENT)));
+        filter.add(Predicates.or(CardType.CREATURE.getPredicate(), CardType.ENCHANTMENT.getPredicate()));
     }
 
     public FinalPayment(UUID ownerId, CardSetInfo setInfo) {

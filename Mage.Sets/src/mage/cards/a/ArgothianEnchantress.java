@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 import java.util.UUID;
 
@@ -21,7 +20,7 @@ public final class ArgothianEnchantress extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("an Enchantment spell");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
+        filter.add(CardType.ENCHANTMENT.getPredicate());
     }
 
     public ArgothianEnchantress(UUID ownerId, CardSetInfo setInfo) {

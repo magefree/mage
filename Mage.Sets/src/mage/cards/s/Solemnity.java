@@ -12,7 +12,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -85,10 +84,10 @@ class SolemnityEffect2 extends ReplacementEffectImpl {
 
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.CREATURE),
-                new CardTypePredicate(CardType.ENCHANTMENT),
-                new CardTypePredicate(CardType.LAND)));
+                CardType.ARTIFACT.getPredicate(),
+                CardType.CREATURE.getPredicate(),
+                CardType.ENCHANTMENT.getPredicate(),
+                CardType.LAND.getPredicate()));
     }
 
     public SolemnityEffect2() {

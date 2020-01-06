@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.CounterPredicate;
 
@@ -25,7 +24,7 @@ public final class AbzanFalconer extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent();
     static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
         filter.add(new ControllerPredicate(TargetController.YOU));
         filter.add(new CounterPredicate(CounterType.P1P1));
     }

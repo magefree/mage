@@ -2,7 +2,6 @@
 package mage.filter.common;
 
 import mage.constants.CardType;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -21,7 +20,7 @@ public class FilterControlledEnchantmentPermanent extends FilterControlledPerman
      */
     public FilterControlledEnchantmentPermanent(String name) {
         super(name);
-        this.add(new CardTypePredicate(CardType.ENCHANTMENT));
+        this.add(CardType.ENCHANTMENT.getPredicate());
     }
 
     public FilterControlledEnchantmentPermanent(final FilterControlledEnchantmentPermanent filter) {

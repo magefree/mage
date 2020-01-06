@@ -11,7 +11,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 import java.util.UUID;
 
@@ -25,8 +24,8 @@ public final class SilhanaWayfinder extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.CREATURE),
-                new CardTypePredicate(CardType.LAND)
+                CardType.CREATURE.getPredicate(),
+                CardType.LAND.getPredicate()
         ));
     }
 

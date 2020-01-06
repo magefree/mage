@@ -19,9 +19,7 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.permanent.token.TokenImpl;
-import mage.game.permanent.token.Token;
 
 /**
  *
@@ -32,7 +30,7 @@ public final class Riddleform extends CardImpl {
     private static final FilterSpell filterNonCreature = new FilterSpell("a noncreature spell");
 
     static {
-        filterNonCreature.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+        filterNonCreature.add(Predicates.not(CardType.CREATURE.getPredicate()));
     }
 
     public Riddleform(UUID ownerId, CardSetInfo setInfo) {

@@ -18,7 +18,6 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -29,7 +28,7 @@ public final class SurrakDragonclaw extends CardImpl {
     private static final FilterSpell filterTarget = new FilterSpell("Creature spells you control");
 
     static {
-        filterTarget.add(new CardTypePredicate(CardType.CREATURE));
+        filterTarget.add(CardType.CREATURE.getPredicate());
     }
 
     public SurrakDragonclaw(UUID ownerId, CardSetInfo setInfo) {

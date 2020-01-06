@@ -16,7 +16,6 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
@@ -51,8 +50,8 @@ class GuidedPassageEffect extends OneShotEffect {
     private static final FilterCard filter = new FilterCard("noncreature, nonland card");
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
-        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
+        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
+        filter.add(Predicates.not(CardType.LAND.getPredicate()));
     }
 
     GuidedPassageEffect() {

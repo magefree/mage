@@ -13,7 +13,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.ElephantToken;
@@ -33,7 +32,7 @@ public final class Terastodon extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("noncreature permanent");
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
     }
 
     public Terastodon(UUID ownerId, CardSetInfo setInfo) {

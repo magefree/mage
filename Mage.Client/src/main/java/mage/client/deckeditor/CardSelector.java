@@ -24,7 +24,6 @@ import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
 import mage.filter.predicate.other.CardTextPredicate;
@@ -253,25 +252,25 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
             predicates.clear();
             if (this.tbLand.isSelected()) {
-                predicates.add(new CardTypePredicate(CardType.LAND));
+                predicates.add(CardType.LAND.getPredicate());
             }
             if (this.tbArifiacts.isSelected()) {
-                predicates.add(new CardTypePredicate(CardType.ARTIFACT));
+                predicates.add(CardType.ARTIFACT.getPredicate());
             }
             if (this.tbCreatures.isSelected()) {
-                predicates.add(new CardTypePredicate(CardType.CREATURE));
+                predicates.add(CardType.CREATURE.getPredicate());
             }
             if (this.tbEnchantments.isSelected()) {
-                predicates.add(new CardTypePredicate(CardType.ENCHANTMENT));
+                predicates.add(CardType.ENCHANTMENT.getPredicate());
             }
             if (this.tbInstants.isSelected()) {
-                predicates.add(new CardTypePredicate(CardType.INSTANT));
+                predicates.add(CardType.INSTANT.getPredicate());
             }
             if (this.tbSorceries.isSelected()) {
-                predicates.add(new CardTypePredicate(CardType.SORCERY));
+                predicates.add(CardType.SORCERY.getPredicate());
             }
             if (this.tbPlaneswalkers.isSelected()) {
-                predicates.add(new CardTypePredicate(CardType.PLANESWALKER));
+                predicates.add(CardType.PLANESWALKER.getPredicate());
             }
             filter.add(Predicates.or(predicates));
 

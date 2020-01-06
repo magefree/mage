@@ -19,7 +19,6 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
@@ -33,7 +32,7 @@ public final class TezzeretsGatebreaker extends CardImpl {
     static {
         filter.add(Predicates.or(
                 new ColorPredicate(ObjectColor.BLUE),
-                new CardTypePredicate(CardType.ARTIFACT)
+                CardType.ARTIFACT.getPredicate()
         ));
     }
 

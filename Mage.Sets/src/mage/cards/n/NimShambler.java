@@ -18,7 +18,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -29,7 +28,7 @@ public final class NimShambler extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact you control");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(CardType.ARTIFACT.getPredicate());
     }
 
     public NimShambler(UUID ownerId, CardSetInfo setInfo) {

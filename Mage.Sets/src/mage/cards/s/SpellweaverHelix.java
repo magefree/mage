@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -33,7 +32,7 @@ public final class SpellweaverHelix extends CardImpl {
     private static final FilterCard filter = new FilterCard("sorcery cards from a single graveyard");
 
     static {
-        filter.add(new CardTypePredicate(CardType.SORCERY));
+        filter.add(CardType.SORCERY.getPredicate());
     }
 
     public SpellweaverHelix(UUID ownerId, CardSetInfo setInfo) {

@@ -17,7 +17,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -28,7 +27,7 @@ public final class ZephyrScribe extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("a noncreature spell");
     
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
     }
     
     public ZephyrScribe(UUID ownerId, CardSetInfo setInfo) {

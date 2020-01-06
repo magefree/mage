@@ -16,7 +16,6 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -27,8 +26,8 @@ public final class AzcantaTheSunkenRuin extends CardImpl {
     private static final FilterCard filter = new FilterCard("noncreature, nonland card");
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
-        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
+        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
+        filter.add(Predicates.not(CardType.LAND.getPredicate()));
     }
 
     public AzcantaTheSunkenRuin(UUID ownerId, CardSetInfo setInfo) {

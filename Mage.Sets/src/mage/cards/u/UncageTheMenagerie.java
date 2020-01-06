@@ -8,7 +8,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
@@ -42,7 +41,7 @@ class UncageTheMenagerieEffect extends OneShotEffect {
     private static final FilterCard filter = new FilterCard("creature");
 
     static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
     }
 
     public UncageTheMenagerieEffect() {

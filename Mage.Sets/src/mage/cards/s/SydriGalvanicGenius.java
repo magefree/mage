@@ -17,7 +17,6 @@ import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -32,9 +31,9 @@ public final class SydriGalvanicGenius extends CardImpl {
     private static final FilterArtifactPermanent filterNonCreature = new FilterArtifactPermanent("noncreature artifact");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
-        filter.add(new CardTypePredicate(CardType.CREATURE));
-        filterNonCreature.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+        filter.add(CardType.ARTIFACT.getPredicate());
+        filter.add(CardType.CREATURE.getPredicate());
+        filterNonCreature.add(Predicates.not(CardType.CREATURE.getPredicate()));
     }
 
     public SydriGalvanicGenius(UUID ownerId, CardSetInfo setInfo) {

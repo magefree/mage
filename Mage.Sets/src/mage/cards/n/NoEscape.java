@@ -8,7 +8,6 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetSpell;
 
 import java.util.UUID;
@@ -22,8 +21,8 @@ public final class NoEscape extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.CREATURE),
-                new CardTypePredicate(CardType.PLANESWALKER)
+                CardType.CREATURE.getPredicate(),
+                CardType.PLANESWALKER.getPredicate()
         ));
     }
 

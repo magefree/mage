@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
@@ -30,7 +29,7 @@ public final class OgreGeargrabber extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Equipment an opponent controls");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(CardType.ARTIFACT.getPredicate());
         filter.add(new SubtypePredicate(SubType.EQUIPMENT));
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }

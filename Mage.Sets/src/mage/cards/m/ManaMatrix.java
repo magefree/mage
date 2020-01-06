@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -22,8 +21,8 @@ public final class ManaMatrix extends CardImpl {
     
     static {
         filter.add(Predicates.or(
-            new CardTypePredicate(CardType.INSTANT),
-            new CardTypePredicate(CardType.ENCHANTMENT)
+            CardType.INSTANT.getPredicate(),
+            CardType.ENCHANTMENT.getPredicate()
         ));                
     }
             

@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -28,8 +27,8 @@ public final class NarsetParterOfVeils extends CardImpl {
     private static final FilterCard filter = new FilterCard("noncreature, nonland card");
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
-        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
+        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
+        filter.add(Predicates.not(CardType.LAND.getPredicate()));
     }
 
     public NarsetParterOfVeils(UUID ownerId, CardSetInfo setInfo) {

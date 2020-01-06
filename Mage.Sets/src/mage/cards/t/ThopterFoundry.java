@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.ThopterToken;
 import mage.target.common.TargetControlledPermanent;
@@ -28,7 +27,7 @@ public final class ThopterFoundry extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a nontoken artifact");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(CardType.ARTIFACT.getPredicate());
         filter.add(Predicates.not(TokenPredicate.instance));
     }
 

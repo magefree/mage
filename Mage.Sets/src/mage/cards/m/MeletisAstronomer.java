@@ -11,7 +11,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -21,7 +20,7 @@ public final class MeletisAstronomer extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("an enchantment card");
     static {
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
+        filter.add(CardType.ENCHANTMENT.getPredicate());
     }
     
     public MeletisAstronomer(UUID ownerId, CardSetInfo setInfo) {

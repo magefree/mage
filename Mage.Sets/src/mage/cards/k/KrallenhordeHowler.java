@@ -19,7 +19,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -30,7 +29,7 @@ public final class KrallenhordeHowler extends CardImpl {
     private static final FilterCard FILTER = new FilterCard("Creature spells");
 
     static {
-        FILTER.add(Predicates.or(new CardTypePredicate(CardType.CREATURE)));
+        FILTER.add(Predicates.or(CardType.CREATURE.getPredicate()));
     }
 
     public KrallenhordeHowler(UUID ownerId, CardSetInfo setInfo) {

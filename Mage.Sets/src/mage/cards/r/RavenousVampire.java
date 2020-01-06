@@ -16,7 +16,6 @@ import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -28,7 +27,7 @@ public final class RavenousVampire extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a nonartifact creature");
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
+        filter.add(Predicates.not(CardType.ARTIFACT.getPredicate()));
     }
 
     public RavenousVampire(UUID ownerId, CardSetInfo setInfo) {

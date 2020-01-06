@@ -19,7 +19,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -35,8 +34,8 @@ public final class GremlinMine extends CardImpl {
     private static final FilterArtifactPermanent filterNonCreature = new FilterArtifactPermanent("noncreature artifact");
 
     static {
-        filterCreature.add(new CardTypePredicate(CardType.CREATURE));
-        filterNonCreature.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+        filterCreature.add(CardType.CREATURE.getPredicate());
+        filterNonCreature.add(Predicates.not(CardType.CREATURE.getPredicate()));
     }
 
     public GremlinMine(UUID ownerId, CardSetInfo setInfo) {

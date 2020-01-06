@@ -16,7 +16,6 @@ import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.functions.ApplyToPermanent;
@@ -32,8 +31,8 @@ public final class SparkDouble extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.CREATURE),
-                new CardTypePredicate(CardType.PLANESWALKER)));
+                CardType.CREATURE.getPredicate(),
+                CardType.PLANESWALKER.getPredicate()));
     }
 
     public SparkDouble(UUID ownerId, CardSetInfo setInfo) {

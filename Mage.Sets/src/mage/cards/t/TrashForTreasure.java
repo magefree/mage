@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetControlledPermanent;
 
@@ -23,8 +22,8 @@ public final class TrashForTreasure extends CardImpl {
     private static final FilterCard filterCard = new FilterCard("artifact card from your graveyard");
 
     static {
-        filterPermanent.add(new CardTypePredicate(CardType.ARTIFACT));
-        filterCard.add(new CardTypePredicate(CardType.ARTIFACT));
+        filterPermanent.add(CardType.ARTIFACT.getPredicate());
+        filterCard.add(CardType.ARTIFACT.getPredicate());
     }
 
     public TrashForTreasure(UUID ownerId, CardSetInfo setInfo) {

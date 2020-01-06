@@ -15,7 +15,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.watchers.common.CastFromHandWatcher;
 
@@ -28,7 +27,7 @@ public final class ReiverDemon extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonartifact, nonblack creatures");
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
+        filter.add(Predicates.not(CardType.ARTIFACT.getPredicate()));
         filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
     }
 

@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -22,7 +21,7 @@ public final class ArtificersEpiphany extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("you control no artifacts");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(CardType.ARTIFACT.getPredicate());
     }
 
     public ArtificersEpiphany(UUID ownerId, CardSetInfo setInfo) {

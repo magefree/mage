@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -23,7 +22,7 @@ public final class HungerOfTheNim extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact you control");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(CardType.ARTIFACT.getPredicate());
     }
 
     public HungerOfTheNim(UUID ownerId, CardSetInfo setInfo) {

@@ -18,7 +18,6 @@ import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -32,9 +31,9 @@ public final class ImprisonedInTheMoon extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("creature, land, or planeswalker");
 
     static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE),
-                new CardTypePredicate(CardType.LAND),
-                new CardTypePredicate(CardType.PLANESWALKER)));
+        filter.add(Predicates.or(CardType.CREATURE.getPredicate(),
+                CardType.LAND.getPredicate(),
+                CardType.PLANESWALKER.getPredicate()));
     }
 
     public ImprisonedInTheMoon(UUID ownerId, CardSetInfo setInfo) {

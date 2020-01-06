@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetSpell;
 
 /**
@@ -23,7 +22,7 @@ public final class RevolutionaryRebuff extends CardImpl {
 
         // Counter target nonartifact spell unless its controller pays 2.
         FilterSpell filter = new FilterSpell("nonartifact spell");
-        filter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
+        filter.add(Predicates.not(CardType.ARTIFACT.getPredicate()));
         this.getSpellAbility().addTarget(new TargetSpell(filter));
         this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new GenericManaCost(2)));
     }

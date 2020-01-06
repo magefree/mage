@@ -3,13 +3,9 @@ package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.common.BecomesTappedAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.FortifyAbility;
@@ -19,16 +15,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TimingRule;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.target.Target;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**

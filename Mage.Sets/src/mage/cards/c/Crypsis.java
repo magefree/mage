@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -25,7 +24,7 @@ public final class Crypsis extends CardImpl {
     static final FilterCard filter = new FilterCard("creatures your opponents control");
 
     static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 

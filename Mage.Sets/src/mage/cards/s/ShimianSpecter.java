@@ -19,7 +19,6 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -61,7 +60,7 @@ class ShimianSpecterEffect extends OneShotEffect {
     private static final FilterCard filter = new FilterCard("nonland card");
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
+        filter.add(Predicates.not(CardType.LAND.getPredicate()));
     }
 
     public ShimianSpecterEffect() {

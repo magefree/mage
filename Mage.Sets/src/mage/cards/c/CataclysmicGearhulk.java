@@ -20,7 +20,6 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledEnchantmentPermanent;
 import mage.filter.common.FilterControlledPlaneswalkerPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -66,17 +65,17 @@ class CataclysmicGearhulkEffect extends OneShotEffect {
 
     static {
         filterArtifact.add(Predicates.and(
-                new CardTypePredicate(CardType.ARTIFACT),
-                Predicates.not(new CardTypePredicate(CardType.LAND))));
+                CardType.ARTIFACT.getPredicate(),
+                Predicates.not(CardType.LAND.getPredicate())));
         filterCreature.add(Predicates.and(
-                new CardTypePredicate(CardType.CREATURE),
-                Predicates.not(new CardTypePredicate(CardType.LAND))));
+                CardType.CREATURE.getPredicate(),
+                Predicates.not(CardType.LAND.getPredicate())));
         filterEnchantment.add(Predicates.and(
-                new CardTypePredicate(CardType.ENCHANTMENT),
-                Predicates.not(new CardTypePredicate(CardType.LAND))));
+                CardType.ENCHANTMENT.getPredicate(),
+                Predicates.not(CardType.LAND.getPredicate())));
         filterPlaneswalker.add(Predicates.and(
-                new CardTypePredicate(CardType.PLANESWALKER),
-                Predicates.not(new CardTypePredicate(CardType.LAND))));
+                CardType.PLANESWALKER.getPredicate(),
+                Predicates.not(CardType.LAND.getPredicate())));
     }
 
     public CataclysmicGearhulkEffect() {

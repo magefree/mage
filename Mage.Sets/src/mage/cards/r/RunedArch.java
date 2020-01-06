@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.target.TargetPermanent;
 import mage.target.targetadjustment.XTargetsAdjuster;
@@ -28,7 +27,7 @@ public final class RunedArch extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("creatures with power 2 or less");
 
     static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
         filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 3));
     }
 

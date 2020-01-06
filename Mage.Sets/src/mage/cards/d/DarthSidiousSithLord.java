@@ -18,7 +18,6 @@ import mage.constants.SuperType;
 import mage.constants.Duration;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
@@ -32,7 +31,7 @@ public final class DarthSidiousSithLord extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("noncreature permanent");
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
     }
 
     public DarthSidiousSithLord(UUID ownerId, CardSetInfo setInfo) {

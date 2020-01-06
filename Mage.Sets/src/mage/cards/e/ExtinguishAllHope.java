@@ -8,7 +8,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -19,8 +18,8 @@ public final class ExtinguishAllHope extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("nonenchantment creatures");
     
     static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
-        filter.add(Predicates.not(new CardTypePredicate(CardType.ENCHANTMENT)));
+        filter.add(CardType.CREATURE.getPredicate());
+        filter.add(Predicates.not(CardType.ENCHANTMENT.getPredicate()));
     }
     
     

@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TimingRule;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -50,7 +49,7 @@ class ParallelEvolutionEffect extends OneShotEffect {
     private static final FilterPermanent filter = new FilterPermanent();
 
     static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
         filter.add(TokenPredicate.instance);
     }
 

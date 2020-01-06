@@ -19,7 +19,6 @@ import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
@@ -64,7 +63,7 @@ class IsperiaTheInscrutableEffect extends OneShotEffect {
 
     static {
         filter.add(new AbilityPredicate(FlyingAbility.class));
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
     }
 
     public IsperiaTheInscrutableEffect() {

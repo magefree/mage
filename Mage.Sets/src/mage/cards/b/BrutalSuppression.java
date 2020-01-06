@@ -18,7 +18,6 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
@@ -52,7 +51,7 @@ class BrutalSuppressionAdditionalCostEffect extends CostModificationEffectImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a land");
     static{
-        filter.add(new CardTypePredicate(CardType.LAND));
+        filter.add(CardType.LAND.getPredicate());
     }
 
     private static final FilterPermanent filter2 = new FilterPermanent("nontoken Rebels");

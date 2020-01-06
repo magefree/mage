@@ -16,7 +16,6 @@ import mage.constants.TargetController;
 import mage.constants.WatcherScope;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
@@ -75,7 +74,7 @@ class DesolationEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     FilterControlledPermanent filter = new FilterControlledPermanent("land");
-                    filter.add(new CardTypePredicate(CardType.LAND));
+                    filter.add(CardType.LAND.getPredicate());
                     filter.add(new ControllerIdPredicate(playerId));
                     TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);
                     if (target.canChoose(player.getId(), game)) {

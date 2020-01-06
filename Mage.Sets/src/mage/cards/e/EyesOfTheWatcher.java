@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -21,7 +20,7 @@ public final class EyesOfTheWatcher extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("an instant or sorcery spell");
     static{
-        filter.add(Predicates.or(new CardTypePredicate(CardType.INSTANT), new CardTypePredicate(CardType.SORCERY)));
+        filter.add(Predicates.or(CardType.INSTANT.getPredicate(), CardType.SORCERY.getPredicate()));
     }
     
     public EyesOfTheWatcher(UUID ownerId, CardSetInfo setInfo) {

@@ -15,7 +15,6 @@ import mage.constants.SpellAbilityType;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -75,8 +74,8 @@ class HitEffect extends OneShotEffect {
         if (targetPlayer != null) {
             FilterControlledPermanent filter = new FilterControlledPermanent("artifact or creature");
             filter.add(Predicates.or(
-                    new CardTypePredicate(CardType.ARTIFACT),
-                    new CardTypePredicate(CardType.CREATURE)));
+                    CardType.ARTIFACT.getPredicate(),
+                    CardType.CREATURE.getPredicate()));
             TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);
 
             if (target.canChoose(targetPlayer.getId(), game)) {

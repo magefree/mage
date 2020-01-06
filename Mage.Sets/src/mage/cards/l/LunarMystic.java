@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -23,7 +22,7 @@ public final class LunarMystic extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("an instant spell");
 
     static {
-        filter.add(new CardTypePredicate(CardType.INSTANT));
+        filter.add(CardType.INSTANT.getPredicate());
     }
 
     public LunarMystic(UUID ownerId, CardSetInfo setInfo) {

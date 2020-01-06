@@ -18,7 +18,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 
@@ -31,8 +30,8 @@ public final class EtherswornAdjudicator extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.CREATURE),
-                new CardTypePredicate(CardType.ENCHANTMENT)));
+                CardType.CREATURE.getPredicate(),
+                CardType.ENCHANTMENT.getPredicate()));
     }
 
     public EtherswornAdjudicator(UUID ownerId, CardSetInfo setInfo) {

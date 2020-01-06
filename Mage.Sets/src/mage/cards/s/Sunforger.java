@@ -26,7 +26,6 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
@@ -105,7 +104,7 @@ class SunforgerEffect extends OneShotEffect {
                 filter.add(Predicates.or(
                         new ColorPredicate(ObjectColor.RED),
                         new ColorPredicate(ObjectColor.WHITE)));
-                filter.add(new CardTypePredicate(CardType.INSTANT));
+                filter.add(CardType.INSTANT.getPredicate());
                 filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 5));
                 filter.add(new CardCanBeCastPredicate(source.getControllerId()));
                 if (controller.searchLibrary(target, source, game, controller.getId())) {

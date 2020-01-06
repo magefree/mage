@@ -18,7 +18,6 @@ import mage.constants.*;
 import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -38,8 +37,8 @@ public final class TaigamOjutaiMaster extends CardImpl {
     static {
         filter.add(
                 (Predicates.or(
-                        new CardTypePredicate(CardType.INSTANT),
-                        new CardTypePredicate(CardType.SORCERY),
+                        CardType.INSTANT.getPredicate(),
+                        CardType.SORCERY.getPredicate(),
                         new SubtypePredicate(SubType.DRAGON)))
         );
     }

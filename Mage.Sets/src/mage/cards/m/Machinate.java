@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -22,7 +21,7 @@ public final class Machinate extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifacts you control");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(CardType.ARTIFACT.getPredicate());
     }
 
     public Machinate(UUID ownerId, CardSetInfo setInfo) {

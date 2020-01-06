@@ -17,7 +17,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -30,7 +29,7 @@ public final class AshnodsTransmogrant extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonartifact creature");
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
+        filter.add(Predicates.not(CardType.ARTIFACT.getPredicate()));
     }
 
     public AshnodsTransmogrant(UUID ownerId, CardSetInfo setInfo) {

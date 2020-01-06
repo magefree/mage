@@ -14,7 +14,6 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 import java.util.UUID;
 
@@ -28,8 +27,8 @@ public final class BaralChiefOfCompliance extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.INSTANT),
-                new CardTypePredicate(CardType.SORCERY)
+                CardType.INSTANT.getPredicate(),
+                CardType.SORCERY.getPredicate()
         ));
     }
 

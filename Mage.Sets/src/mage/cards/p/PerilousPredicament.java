@@ -13,7 +13,6 @@ import mage.constants.Outcome;
 import mage.filter.common.FilterArtifactCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -68,7 +67,7 @@ class PerilousPredicamentSacrificeOpponentsEffect extends OneShotEffect {
                 FilterArtifactCreaturePermanent filterArtifact = new FilterArtifactCreaturePermanent("an artifact creature");
                 filterArtifact.add(new ControllerIdPredicate(player.getId()));
                 FilterCreaturePermanent filterNonArtifact = new FilterCreaturePermanent("a nonartifact creature");
-                filterNonArtifact.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
+                filterNonArtifact.add(Predicates.not(CardType.ARTIFACT.getPredicate()));
                 filterNonArtifact.add(new ControllerIdPredicate(player.getId()));
                 if (game.getBattlefield().countAll(filterArtifact, player.getId(), game) > 0) {
                     TargetPermanent target = new TargetPermanent(1, 1, filterArtifact, true);

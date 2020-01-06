@@ -10,7 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+
 import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
@@ -23,7 +23,7 @@ public final class NovablastWurm extends CardImpl {
 
     static {
         filter.add(AnotherPredicate.instance);
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
     }
 
     public NovablastWurm(UUID ownerId, CardSetInfo setInfo) {

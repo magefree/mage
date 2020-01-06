@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInGraveyard;
 
 /**
@@ -22,8 +21,8 @@ public final class PulseOfMurasa extends CardImpl {
 
     static {
         FILTER.add(Predicates.or(
-                new CardTypePredicate(CardType.CREATURE),
-                new CardTypePredicate(CardType.LAND)));
+                CardType.CREATURE.getPredicate(),
+                CardType.LAND.getPredicate()));
     }
 
     public PulseOfMurasa(UUID ownerId, CardSetInfo setInfo) {

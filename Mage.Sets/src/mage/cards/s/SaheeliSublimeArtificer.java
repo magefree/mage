@@ -18,7 +18,6 @@ import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AnotherTargetPredicate;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.ServoToken;
@@ -41,8 +40,8 @@ public final class SaheeliSublimeArtificer extends CardImpl {
         filter.add(new AnotherTargetPredicate(1));
         filter2.add(new AnotherTargetPredicate(2));
         filter2.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.CREATURE)
+                CardType.ARTIFACT.getPredicate(),
+                CardType.CREATURE.getPredicate()
         ));
     }
 

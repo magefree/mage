@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInHand;
@@ -27,7 +26,7 @@ public final class Unmask extends CardImpl {
     private static final FilterCard filterNonLand = new FilterCard("nonland card");
 
     static {
-        filterNonLand.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
+        filterNonLand.add(Predicates.not(CardType.LAND.getPredicate()));
         filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
     

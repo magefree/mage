@@ -17,9 +17,6 @@ import mage.constants.CardType;
 import mage.constants.DependencyType;
 import mage.constants.Duration;
 import mage.constants.Layer;
-import static mage.constants.Layer.AbilityAddingRemovingEffects_6;
-import static mage.constants.Layer.PTChangingEffects_7;
-import static mage.constants.Layer.TypeChangingEffects_4;
 import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
 import mage.constants.SubLayer;
@@ -27,7 +24,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
@@ -41,7 +37,7 @@ public final class OpalTitan extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("creature spell");
 
     static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
     }
 
     public OpalTitan(UUID ownerId, CardSetInfo setInfo) {

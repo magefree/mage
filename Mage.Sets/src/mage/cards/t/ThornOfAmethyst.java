@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -20,7 +19,7 @@ public final class ThornOfAmethyst extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Noncreature spells");
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
     }
     public ThornOfAmethyst(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

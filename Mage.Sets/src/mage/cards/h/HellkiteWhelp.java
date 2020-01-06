@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.DefendingPlayerControlsPredicate;
 import mage.target.TargetPermanent;
 
@@ -24,7 +23,7 @@ public final class HellkiteWhelp extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("creature defending player controls");
 
     static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
         filter.add(DefendingPlayerControlsPredicate.instance);
     }
 

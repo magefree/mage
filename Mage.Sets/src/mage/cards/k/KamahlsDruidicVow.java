@@ -16,7 +16,6 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
@@ -77,7 +76,7 @@ class KamahlsDruidicVowEffect extends OneShotEffect {
             filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, xValue + 1));
             filter.add(
                     Predicates.or(
-                            new CardTypePredicate(CardType.LAND),
+                            CardType.LAND.getPredicate(),
                             new SupertypePredicate(SuperType.LEGENDARY)
                     ));
             TargetCard target1 = new TargetCard(0, Integer.MAX_VALUE, Zone.LIBRARY, filter);

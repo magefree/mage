@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInGraveyard;
 
 /**
@@ -21,8 +20,8 @@ public final class MineExcavation extends CardImpl {
     private static final FilterCard filter = new FilterCard("artifact or enchantment card in a graveyard");
 
     static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.ENCHANTMENT)));
+        filter.add(Predicates.or(CardType.ARTIFACT.getPredicate(),
+                CardType.ENCHANTMENT.getPredicate()));
     }
 
     public MineExcavation(UUID ownerId, CardSetInfo setInfo) {

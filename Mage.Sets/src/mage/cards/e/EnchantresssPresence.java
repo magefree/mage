@@ -8,7 +8,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -19,7 +18,7 @@ public final class EnchantresssPresence extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("an Enchantment spell");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
+        filter.add(CardType.ENCHANTMENT.getPredicate());
     }
 
     

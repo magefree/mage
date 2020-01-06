@@ -15,7 +15,6 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -81,14 +80,14 @@ class EquipoiseEffect extends OneShotEffect {
 
     private void phaseOutCardType(Player controller, Player targetPlayer, CardType cardType, Ability source, Game game) {
         FilterPermanent filter = new FilterControlledPermanent();
-        filter.add(new CardTypePredicate(cardType));
+        filter.add(cardType.getPredicate());
         int numberController = game.getBattlefield().count(filter, source.getSourceId(), controller.getId(), game);
         int numberTargetPlayer = game.getBattlefield().count(filter, source.getSourceId(), targetPlayer.getId(), game);
         int excess = numberTargetPlayer - numberController;
         if (excess > 0) {
             FilterPermanent filterChoose = new FilterPermanent(cardType.toString().toLowerCase(Locale.ENGLISH) + (excess > 1 ? "s" : "") + " of target player");
             filterChoose.add(new ControllerIdPredicate(targetPlayer.getId()));
-            filterChoose.add(new CardTypePredicate(cardType));
+            filterChoose.add(cardType.getPredicate());
             Target target = new TargetPermanent(excess, excess, filterChoose, true);
             controller.chooseTarget(outcome, target, source, game);
             new PhaseOutAllEffect(target.getTargets()).apply(game, source);

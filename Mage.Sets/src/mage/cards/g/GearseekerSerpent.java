@@ -13,7 +13,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.util.CardUtil;
 
@@ -53,7 +52,7 @@ class GearseekerSerpentCostReductionEffect extends CostModificationEffectImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(CardType.ARTIFACT.getPredicate());
     }
 
     public GearseekerSerpentCostReductionEffect() {

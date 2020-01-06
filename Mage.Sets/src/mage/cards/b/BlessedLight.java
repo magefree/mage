@@ -8,7 +8,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -20,7 +19,7 @@ public final class BlessedLight extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("creature or enchantment");
 
     static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE), new CardTypePredicate(CardType.ENCHANTMENT)));
+        filter.add(Predicates.or(CardType.CREATURE.getPredicate(), CardType.ENCHANTMENT.getPredicate()));
     }
 
     public BlessedLight(UUID ownerId, CardSetInfo setInfo) {

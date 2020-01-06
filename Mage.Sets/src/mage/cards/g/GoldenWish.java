@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -21,8 +20,8 @@ public final class GoldenWish extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.ENCHANTMENT)));
+                CardType.ARTIFACT.getPredicate(),
+                CardType.ENCHANTMENT.getPredicate()));
     }
 
     public GoldenWish(UUID ownerId, CardSetInfo setInfo) {

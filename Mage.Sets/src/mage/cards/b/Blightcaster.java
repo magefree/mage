@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -24,7 +23,7 @@ public final class Blightcaster extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("an enchantment spell");
     static {
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
+        filter.add(CardType.ENCHANTMENT.getPredicate());
     }
 
     public Blightcaster(UUID ownerId, CardSetInfo setInfo) {

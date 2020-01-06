@@ -14,7 +14,6 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -26,7 +25,7 @@ public final class ThranForge extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
+        filter.add(Predicates.not(CardType.ARTIFACT.getPredicate()));
     }
 
     public ThranForge(UUID ownerId, CardSetInfo setInfo) {

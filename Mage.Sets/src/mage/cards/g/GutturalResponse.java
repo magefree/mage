@@ -8,7 +8,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.TargetSpell;
 
@@ -21,7 +20,7 @@ public final class GutturalResponse extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("blue instant spell");
 
     static {
-        filter.add(new CardTypePredicate(CardType.INSTANT));
+        filter.add(CardType.INSTANT.getPredicate());
         filter.add(new ColorPredicate(ObjectColor.BLUE));
     }
 

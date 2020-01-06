@@ -15,7 +15,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.command.emblems.GarrukApexPredatorEmblem;
@@ -36,7 +35,7 @@ public final class GarrukApexPredator extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("another target planeswalker");
 
     static {
-        filter.add(new CardTypePredicate(CardType.PLANESWALKER));
+        filter.add(CardType.PLANESWALKER.getPredicate());
         filter.add(AnotherPredicate.instance);
     }
 

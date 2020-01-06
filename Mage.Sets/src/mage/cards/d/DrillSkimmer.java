@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 
 import java.util.UUID;
@@ -31,7 +30,7 @@ public final class DrillSkimmer extends CardImpl {
 
     static {
         filter.add(AnotherPredicate.instance);
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(CardType.ARTIFACT.getPredicate());
     }
 
     public DrillSkimmer(UUID ownerId, CardSetInfo setInfo) {

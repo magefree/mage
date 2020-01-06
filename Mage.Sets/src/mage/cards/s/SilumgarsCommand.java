@@ -14,7 +14,6 @@ import mage.constants.Duration;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 import mage.target.TargetSpell;
 import mage.target.common.TargetCreaturePermanent;
@@ -29,8 +28,8 @@ public final class SilumgarsCommand extends CardImpl {
     private static final FilterPermanent filter2 = new FilterPermanent("planeswalker");
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
-        filter2.add(new CardTypePredicate(CardType.PLANESWALKER));
+        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
+        filter2.add(CardType.PLANESWALKER.getPredicate());
     }
 
     public SilumgarsCommand(UUID ownerId, CardSetInfo setInfo) {

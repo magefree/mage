@@ -21,7 +21,6 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledPermanent;
@@ -60,7 +59,7 @@ class MetalworkColossusCostReductionEffect extends CostModificationEffectImpl {
 
     private static final FilterPermanent filter = new FilterControlledArtifactPermanent("noncreature artifacts you control");
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
     }
 
     MetalworkColossusCostReductionEffect() {

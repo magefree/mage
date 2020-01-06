@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -22,7 +21,7 @@ public final class BlessedSpirits extends CardImpl {
     
     private static final FilterSpell filter = new FilterSpell("an enchantment spell");
     static {
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
+        filter.add(CardType.ENCHANTMENT.getPredicate());
     }
 
     public BlessedSpirits(UUID ownerId, CardSetInfo setInfo) {

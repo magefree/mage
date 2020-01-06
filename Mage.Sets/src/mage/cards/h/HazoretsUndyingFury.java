@@ -20,7 +20,6 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -64,7 +63,7 @@ class HazoretsUndyingFuryEffect extends OneShotEffect {
             "nonland cards with converted mana cost 5 or less");
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
+        filter.add(Predicates.not(CardType.LAND.getPredicate()));
         filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 6));
     }
 

@@ -13,7 +13,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
@@ -27,7 +26,7 @@ public final class AmrouSeekers extends CardImpl {
     static {
         notArtificatOrWhite.add(Predicates.not(
                 Predicates.or(
-                        new CardTypePredicate(CardType.ARTIFACT),
+                        CardType.ARTIFACT.getPredicate(),
                         new ColorPredicate(ObjectColor.WHITE)
                 )
         ));

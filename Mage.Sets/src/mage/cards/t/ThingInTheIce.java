@@ -22,7 +22,6 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  * @author fireshoes
@@ -33,8 +32,8 @@ public final class ThingInTheIce extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.INSTANT),
-                new CardTypePredicate(CardType.SORCERY)));
+                CardType.INSTANT.getPredicate(),
+                CardType.SORCERY.getPredicate()));
     }
 
     public ThingInTheIce(UUID ownerId, CardSetInfo setInfo) {

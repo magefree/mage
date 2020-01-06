@@ -5,7 +5,6 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.condition.common.AttachedToMatchesFilterCondition;
-import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapAttachedCost;
 import mage.abilities.effects.common.AttachEffect;
@@ -22,7 +21,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterBlockingCreature;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
@@ -37,7 +35,7 @@ public final class Earthlore extends CardImpl {
     private static final FilterControlledPermanent filterLand = new FilterControlledPermanent("land you control");
 
     static {
-        filterLand.add(new CardTypePredicate(CardType.LAND));
+        filterLand.add(CardType.LAND.getPredicate());
     }
 
     private static final FilterPermanent filterUntapped = new FilterPermanent("enchanted land is untapped");

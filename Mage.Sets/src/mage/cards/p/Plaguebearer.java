@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.TargetPermanent;
 import mage.target.targetadjustment.XCMCPermanentAdjuster;
@@ -28,7 +27,7 @@ public final class Plaguebearer extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("nonblack creature with converted mana cost X");
 
     static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
         filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
     }
 

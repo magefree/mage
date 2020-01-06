@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -41,8 +40,8 @@ class FracturingGustDestroyEffect extends OneShotEffect {
 
     private static final FilterPermanent filter = new FilterPermanent();
     static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT),
-                                 new CardTypePredicate(CardType.ENCHANTMENT)));
+        filter.add(Predicates.or(CardType.ARTIFACT.getPredicate(),
+                                 CardType.ENCHANTMENT.getPredicate()));
     }
     public FracturingGustDestroyEffect() {
         super(Outcome.DestroyPermanent);

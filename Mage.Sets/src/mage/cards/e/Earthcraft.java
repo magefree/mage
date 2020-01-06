@@ -14,7 +14,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.TargetPermanent;
@@ -30,7 +29,7 @@ public final class Earthcraft extends CardImpl {
 
     static {
         filterCreature.add(Predicates.not(TappedPredicate.instance));
-        filterLand.add(new CardTypePredicate(CardType.LAND));
+        filterLand.add(CardType.LAND.getPredicate());
         filterLand.add(new SupertypePredicate(SuperType.BASIC));
     }
 

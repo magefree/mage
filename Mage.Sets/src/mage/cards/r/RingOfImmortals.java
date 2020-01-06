@@ -15,7 +15,6 @@ import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.other.TargetsPermanentPredicate;
 import mage.target.TargetSpell;
@@ -29,7 +28,7 @@ public final class RingOfImmortals extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("instant or Aura spell that targets a permanent you control");
 
     static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.INSTANT), new SubtypePredicate(SubType.AURA)));
+        filter.add(Predicates.or(CardType.INSTANT.getPredicate(), new SubtypePredicate(SubType.AURA)));
         filter.add(new TargetsPermanentPredicate(new FilterControlledPermanent()));
     }
 

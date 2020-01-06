@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -25,7 +24,7 @@ public final class TimeOut extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("nonland permanent");
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
+        filter.add(Predicates.not(CardType.LAND.getPredicate()));
     }
 
     public TimeOut(UUID ownerId, CardSetInfo setInfo) {

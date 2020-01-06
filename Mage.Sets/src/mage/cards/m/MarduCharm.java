@@ -18,7 +18,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.WarriorToken;
@@ -36,8 +35,8 @@ public final class MarduCharm extends CardImpl {
     private static final FilterCard filter = new FilterCard("a noncreature, nonland card");
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
-        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
+        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
+        filter.add(Predicates.not(CardType.LAND.getPredicate()));
     }
 
     public MarduCharm(UUID ownerId, CardSetInfo setInfo) {

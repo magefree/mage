@@ -13,7 +13,6 @@ import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 
 /**
@@ -25,7 +24,7 @@ public final class KrosanDrover extends CardImpl {
     private static final FilterCard filter = new FilterCard("Creature spells with converted mana cost 6 or greater");
 
     static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
         filter.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 5));
     }
     

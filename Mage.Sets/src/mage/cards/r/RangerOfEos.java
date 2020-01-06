@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.target.common.TargetCardInLibrary;
 
@@ -25,7 +24,7 @@ public final class RangerOfEos extends CardImpl {
     private static final FilterCard filter = new FilterCard("creature cards with converted mana cost 1 or less");
 
     static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
         filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 2));
     }
 

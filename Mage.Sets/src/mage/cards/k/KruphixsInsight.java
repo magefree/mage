@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -20,7 +19,7 @@ public final class KruphixsInsight extends CardImpl {
     private static final FilterCard filter = new FilterCard("up to three enchantment cards");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
+        filter.add(CardType.ENCHANTMENT.getPredicate());
     }
 
     public KruphixsInsight(UUID ownerId, CardSetInfo setInfo) {

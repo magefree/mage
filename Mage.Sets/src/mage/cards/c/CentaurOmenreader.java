@@ -13,7 +13,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -26,7 +25,7 @@ public final class CentaurOmenreader extends CardImpl {
     private static final FilterCard filter = new FilterCard("creature spells");
 
     static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
     }
 
     public CentaurOmenreader(UUID ownerId, CardSetInfo setInfo) {

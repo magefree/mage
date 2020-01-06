@@ -17,7 +17,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -33,8 +32,8 @@ public final class Seeker extends CardImpl {
     static {
         filter.add(Predicates.not(
                 Predicates.or(
-                        Predicates.and(new CardTypePredicate(CardType.ARTIFACT), new CardTypePredicate(CardType.CREATURE)),
-                        Predicates.and(new CardTypePredicate(CardType.CREATURE), new ColorPredicate(ObjectColor.WHITE)
+                        Predicates.and(CardType.ARTIFACT.getPredicate(), CardType.CREATURE.getPredicate()),
+                        Predicates.and(CardType.CREATURE.getPredicate(), new ColorPredicate(ObjectColor.WHITE)
                         ))));
     }
 

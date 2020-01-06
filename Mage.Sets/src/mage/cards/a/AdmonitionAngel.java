@@ -17,7 +17,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.TargetPermanent;
 
@@ -31,7 +30,7 @@ public final class AdmonitionAngel extends CardImpl {
 
     static {
         filter.add(AnotherPredicate.instance);
-        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
+        filter.add(Predicates.not(CardType.LAND.getPredicate()));
     }
 
     public AdmonitionAngel(UUID ownerId, CardSetInfo setInfo) {

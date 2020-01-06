@@ -12,7 +12,6 @@ import mage.constants.Duration;
 import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -26,7 +25,7 @@ public final class RitualOfTheMachine extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonartifact, nonblack creature");
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
+        filter.add(Predicates.not(CardType.ARTIFACT.getPredicate()));
         filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
     }
 

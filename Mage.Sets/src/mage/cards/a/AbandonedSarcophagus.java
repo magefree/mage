@@ -13,7 +13,6 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -31,7 +30,7 @@ public final class AbandonedSarcophagus extends CardImpl {
 
         // You may cast nonland cards with cycling from your graveyard.
         FilterCard filter = new FilterCard("nonland cards with cycling");
-        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
+        filter.add(Predicates.not(CardType.LAND.getPredicate()));
         filter.add(new AbilityPredicate(CyclingAbility.class));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new PlayFromNotOwnHandZoneAllEffect(filter,

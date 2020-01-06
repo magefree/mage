@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -72,7 +71,7 @@ class LavalancheEffect extends OneShotEffect {
         }
         targetPlayer.damage(amount.calculate(game, source, this), source.getSourceId(), game, false, true);
         FilterPermanent filter = new FilterPermanent("and each creature that player or that planeswalker's controller controls");
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
         filter.add(new ControllerIdPredicate(targetPlayer.getId()));
         List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
         for (Permanent permanent : permanents) {

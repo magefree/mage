@@ -8,7 +8,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -19,7 +18,7 @@ public final class Whipflare extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonartifact creature");
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
+        filter.add(Predicates.not(CardType.ARTIFACT.getPredicate()));
     }
 
     public Whipflare(UUID ownerId, CardSetInfo setInfo) {

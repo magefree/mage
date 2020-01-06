@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.WasitoraCatDragonToken;
@@ -80,7 +79,7 @@ class WasitoraNekoruQueenEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (damagedPlayer != null && controller != null) {
             FilterControlledPermanent filter = new FilterControlledPermanent("creature");
-            filter.add(new CardTypePredicate(CardType.CREATURE));
+            filter.add(CardType.CREATURE.getPredicate());
             TargetPermanent target = new TargetPermanent(1, 1, filter, true);
             if (damagedPlayer.choose(Outcome.Sacrifice, target, source.getSourceId(), game)) {
                 Permanent objectToBeSacrificed = game.getPermanent(target.getFirstTarget());

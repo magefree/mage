@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  * @author Loki
@@ -25,7 +24,7 @@ public final class NimShrieker extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact you control");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(CardType.ARTIFACT.getPredicate());
     }
 
     public NimShrieker(UUID ownerId, CardSetInfo setInfo) {

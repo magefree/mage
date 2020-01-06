@@ -13,7 +13,6 @@ import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -34,9 +33,9 @@ public final class ConfusionInTheRanks extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.CREATURE),
-                new CardTypePredicate(CardType.ENCHANTMENT)
+                CardType.ARTIFACT.getPredicate(),
+                CardType.CREATURE.getPredicate(),
+                CardType.ENCHANTMENT.getPredicate()
         ));
     }
 
@@ -89,9 +88,9 @@ enum ConfusionInTheRanksAdjuster implements TargetAdjuster {
         FilterPermanent filterTarget = new FilterPermanent();
         String message = "";
         filterTarget.add(Predicates.not(new ControllerIdPredicate(enteringPermanent.getControllerId())));
-        Set<CardTypePredicate> cardTypesPredicates = new HashSet<>(1);
+        Set<CardType.CardTypePredicate> cardTypesPredicates = new HashSet<>(1);
         for (CardType cardTypeEntering : enteringPermanent.getCardType()) {
-            cardTypesPredicates.add(new CardTypePredicate(cardTypeEntering));
+            cardTypesPredicates.add(cardTypeEntering.getPredicate());
             if (!message.isEmpty()) {
                 message += "or ";
             }

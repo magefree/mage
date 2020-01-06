@@ -16,7 +16,6 @@ import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.constants.TimingRule;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -30,7 +29,7 @@ public final class Recoup extends CardImpl {
     private static final FilterCard filter = new FilterCard("sorcery card");
             
     static{
-        filter.add(new CardTypePredicate(CardType.SORCERY));
+        filter.add(CardType.SORCERY.getPredicate());
     }
 
     public Recoup(UUID ownerId, CardSetInfo setInfo) {

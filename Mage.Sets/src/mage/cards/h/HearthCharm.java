@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -27,7 +26,7 @@ public final class HearthCharm extends CardImpl {
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("attacking creatures");
     private static final FilterCreaturePermanent filter3 = new FilterCreaturePermanent("creature with power 2 or less");
     static {
-        filter1.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter1.add(CardType.ARTIFACT.getPredicate());
         filter2.add(AttackingPredicate.instance);
         filter3.add(new PowerPredicate(ComparisonType.FEWER_THAN, 3));
     }

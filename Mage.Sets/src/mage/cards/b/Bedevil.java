@@ -6,7 +6,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -20,9 +19,9 @@ public final class Bedevil extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.CREATURE),
-                new CardTypePredicate(CardType.PLANESWALKER)
+                CardType.ARTIFACT.getPredicate(),
+                CardType.CREATURE.getPredicate(),
+                CardType.PLANESWALKER.getPredicate()
         ));
     }
 

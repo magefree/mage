@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.other.OwnerIdPredicate;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
@@ -84,7 +83,7 @@ class ScionOfDarknessTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         FilterCard filter = new FilterCard("creature in " + damagedPlayer.getName() + "'s graveyard");
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
         filter.add(new OwnerIdPredicate(damagedPlayer.getId()));
         TargetCardInGraveyard target = new TargetCardInGraveyard(filter);
         this.getTargets().clear();

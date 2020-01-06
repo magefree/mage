@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -26,8 +25,8 @@ public final class OdunosRiverTrawler extends CardImpl {
     private static final FilterCard filter = new FilterCard("enchantment creature card from your graveyard");
     
     static {
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.ENCHANTMENT.getPredicate());
+        filter.add(CardType.CREATURE.getPredicate());
     }
     
     public OdunosRiverTrawler(UUID ownerId, CardSetInfo setInfo) {

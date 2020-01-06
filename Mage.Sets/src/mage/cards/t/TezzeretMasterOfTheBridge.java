@@ -17,7 +17,6 @@ import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterArtifactCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -33,8 +32,8 @@ public final class TezzeretMasterOfTheBridge extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.PLANESWALKER),
-                new CardTypePredicate(CardType.CREATURE)
+                CardType.PLANESWALKER.getPredicate(),
+                CardType.CREATURE.getPredicate()
         ));
     }
 

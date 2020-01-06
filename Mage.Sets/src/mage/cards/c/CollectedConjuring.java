@@ -10,7 +10,6 @@ import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -49,7 +48,7 @@ class CollectedConjuringEffect extends OneShotEffect {
             "sorcery cards with converted mana cost 3 or less");
 
     static {
-        filter.add(new CardTypePredicate(CardType.SORCERY));
+        filter.add(CardType.SORCERY.getPredicate());
         filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
     }
 

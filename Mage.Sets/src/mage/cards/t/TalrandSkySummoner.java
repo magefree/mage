@@ -12,7 +12,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.permanent.token.DrakeToken;
 
 /**
@@ -25,8 +24,8 @@ public final class TalrandSkySummoner extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.INSTANT),
-                new CardTypePredicate(CardType.SORCERY)));
+                CardType.INSTANT.getPredicate(),
+                CardType.SORCERY.getPredicate()));
     }
 
     public TalrandSkySummoner(UUID ownerId, CardSetInfo setInfo) {

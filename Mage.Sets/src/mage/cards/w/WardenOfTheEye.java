@@ -14,7 +14,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.other.OwnerPredicate;
 import mage.target.TargetCard;
 
@@ -28,8 +27,8 @@ public final class WardenOfTheEye extends CardImpl {
 
     static {
         filter.add(new OwnerPredicate(TargetController.YOU));
-        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
-        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
+        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
+        filter.add(Predicates.not(CardType.LAND.getPredicate()));
     }
 
     public WardenOfTheEye(UUID ownerId, CardSetInfo setInfo) {

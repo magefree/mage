@@ -17,7 +17,6 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetSpell;
 import mage.target.common.TargetControlledPermanent;
 
@@ -30,7 +29,7 @@ public final class ErtaiTheCorrupted extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a creature or enchantment");
     
     static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE), new CardTypePredicate(CardType.ENCHANTMENT)));
+        filter.add(Predicates.or(CardType.CREATURE.getPredicate(), CardType.ENCHANTMENT.getPredicate()));
     }
 
     public ErtaiTheCorrupted(UUID ownerId, CardSetInfo setInfo) {

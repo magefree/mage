@@ -7,7 +7,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -18,7 +17,7 @@ public final class PleaForGuidance extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("enchantment cards");
     static {
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
+        filter.add(CardType.ENCHANTMENT.getPredicate());
     }
     
     public PleaForGuidance(UUID ownerId, CardSetInfo setInfo) {

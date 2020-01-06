@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterPermanentOrSuspendedCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetPermanentOrSuspendedCard;
 
 /**
@@ -21,7 +20,7 @@ public final class VensersDiffusion extends CardImpl {
     private static final FilterPermanentOrSuspendedCard filter = new FilterPermanentOrSuspendedCard("nonland permanent or suspended card");
     
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
+        filter.add(Predicates.not(CardType.LAND.getPredicate()));
     }
 
     public VensersDiffusion (UUID ownerId, CardSetInfo setInfo) {

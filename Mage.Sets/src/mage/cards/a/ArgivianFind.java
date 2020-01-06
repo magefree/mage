@@ -8,7 +8,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -19,7 +18,7 @@ public final class ArgivianFind extends CardImpl {
     
     private static final FilterCard filter = new FilterCard("artifact or enchantment card");
     static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT), new CardTypePredicate(CardType.ENCHANTMENT)));
+        filter.add(Predicates.or(CardType.ARTIFACT.getPredicate(), CardType.ENCHANTMENT.getPredicate()));
     }
 
     public ArgivianFind(UUID ownerId, CardSetInfo setInfo) {

@@ -15,7 +15,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.EldraziHorrorToken;
@@ -30,7 +29,7 @@ public final class FoulEmissary extends CardImpl {
     private static final FilterCard filter = new FilterCard("a creature card");
 
     static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
     }
 
     public FoulEmissary(UUID ownerId, CardSetInfo setInfo) {

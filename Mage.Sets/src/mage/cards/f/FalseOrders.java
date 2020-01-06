@@ -19,7 +19,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.predicate.ObjectPlayer;
 import mage.filter.predicate.ObjectPlayerPredicate;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.PermanentInListPredicate;
 import mage.game.Controllable;
 import mage.game.Game;
@@ -40,7 +39,7 @@ public final class FalseOrders extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("creature defending player controls");
 
     static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
         filter.add(new FalseOrdersDefendingPlayerControlsPredicate());
     }
 

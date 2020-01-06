@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -57,7 +56,7 @@ class GlintHawkEffect extends OneShotEffect {
 
     static {
         filter = new FilterControlledPermanent();
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(CardType.ARTIFACT.getPredicate());
     }
 
     GlintHawkEffect ( ) {

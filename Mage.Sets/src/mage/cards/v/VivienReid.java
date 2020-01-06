@@ -19,7 +19,6 @@ import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.command.emblems.VivienReidEmblem;
 import mage.target.TargetPermanent;
 
@@ -34,14 +33,14 @@ public final class VivienReid extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.CREATURE),
-                new CardTypePredicate(CardType.LAND)
+                CardType.CREATURE.getPredicate(),
+                CardType.LAND.getPredicate()
         ));
         filter2.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.ENCHANTMENT),
+                CardType.ARTIFACT.getPredicate(),
+                CardType.ENCHANTMENT.getPredicate(),
                 Predicates.and(
-                        new CardTypePredicate(CardType.CREATURE),
+                        CardType.CREATURE.getPredicate(),
                         new AbilityPredicate(FlyingAbility.class)
                 )
         ));

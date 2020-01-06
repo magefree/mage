@@ -13,7 +13,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -56,9 +55,9 @@ class CustodiSquireVoteEffect extends OneShotEffect {
     private static final FilterCard filter = new FilterCard("artifact, creature, or enchantment card from your graveyard");
 
     static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.CREATURE),
-                new CardTypePredicate(CardType.ENCHANTMENT)));
+        filter.add(Predicates.or(CardType.ARTIFACT.getPredicate(),
+                CardType.CREATURE.getPredicate(),
+                CardType.ENCHANTMENT.getPredicate()));
     }
 
     CustodiSquireVoteEffect() {

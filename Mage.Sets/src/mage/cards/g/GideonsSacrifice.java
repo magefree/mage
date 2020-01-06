@@ -12,7 +12,6 @@ import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
@@ -52,8 +51,8 @@ class GideonsSacrificeEffect extends OneShotEffect {
 
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.PLANESWALKER),
-                new CardTypePredicate(CardType.CREATURE)
+                CardType.PLANESWALKER.getPredicate(),
+                CardType.CREATURE.getPredicate()
         ));
     }
 

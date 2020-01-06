@@ -10,7 +10,6 @@ import mage.game.Game;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.constants.CardType;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.abilities.effects.common.search.SearchLibraryGraveyardWithLessCMCPutIntoPlay;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -29,7 +28,7 @@ public final class FinaleOfDevastation extends CardImpl {
     private static final FilterCard filter = new FilterCard("creature");
     
     static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
     }
 
     public FinaleOfDevastation(UUID ownerId, CardSetInfo setInfo) {

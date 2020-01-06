@@ -2,7 +2,6 @@ package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -14,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
@@ -28,7 +26,7 @@ public final class AttendantOfVraska extends CardImpl {
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(new CardTypePredicate(CardType.PLANESWALKER));
+        filter.add(CardType.PLANESWALKER.getPredicate());
         filter.add(new SubtypePredicate(SubType.VRASKA));
     }
 

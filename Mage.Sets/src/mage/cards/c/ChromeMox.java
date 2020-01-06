@@ -19,7 +19,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -60,7 +59,7 @@ class ChromeMoxEffect extends OneShotEffect {
     private static final FilterCard filter = new FilterCard("nonartifact, nonland card");
 
     static {
-        filter.add(Predicates.not(Predicates.or(new CardTypePredicate(CardType.LAND), new CardTypePredicate(CardType.ARTIFACT))));
+        filter.add(Predicates.not(Predicates.or(CardType.LAND.getPredicate(), CardType.ARTIFACT.getPredicate())));
     }
 
     public ChromeMoxEffect() {

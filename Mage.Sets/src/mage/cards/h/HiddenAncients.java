@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.permanent.token.TokenImpl;
 
 import java.util.UUID;
@@ -29,7 +28,7 @@ public final class HiddenAncients extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("enchantment spell");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
+        filter.add(CardType.ENCHANTMENT.getPredicate());
     }
 
     public HiddenAncients(UUID ownerId, CardSetInfo setInfo) {

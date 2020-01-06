@@ -13,7 +13,6 @@ import mage.constants.TimingRule;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -27,7 +26,7 @@ public final class MysticalTeachings extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.INSTANT),
+                CardType.INSTANT.getPredicate(),
                 new AbilityPredicate(FlashAbility.class)));
     }
 

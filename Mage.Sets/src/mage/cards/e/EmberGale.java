@@ -15,7 +15,6 @@ import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
@@ -77,7 +76,7 @@ class EmberGaleEffect extends OneShotEffect {
             filter2.add(new ControllerIdPredicate(targetPlayer.getId()));
             filter2.add(Predicates.or(new ColorPredicate(ObjectColor.WHITE),
                     new ColorPredicate(ObjectColor.BLUE)));
-            filter2.add(new CardTypePredicate(CardType.CREATURE));
+            filter2.add(CardType.CREATURE.getPredicate());
             for (Permanent creature : game.getBattlefield().getAllActivePermanents(filter2, targetPlayer.getId(), game)) {
                 creature.damage(1, source.getSourceId(), game, false, true);
             }

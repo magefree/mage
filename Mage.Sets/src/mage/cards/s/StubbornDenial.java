@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetSpell;
 
 import java.util.UUID;
@@ -25,7 +24,7 @@ public final class StubbornDenial extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("noncreature spell");
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
     }
 
     public StubbornDenial(UUID ownerId, CardSetInfo setInfo) {

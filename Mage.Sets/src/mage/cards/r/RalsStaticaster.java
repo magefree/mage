@@ -16,7 +16,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
@@ -30,7 +29,7 @@ public final class RalsStaticaster extends CardImpl {
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(new CardTypePredicate(CardType.PLANESWALKER));
+        filter.add(CardType.PLANESWALKER.getPredicate());
         filter.add(new SubtypePredicate(SubType.RAL));
     }
 

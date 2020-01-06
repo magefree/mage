@@ -14,7 +14,6 @@ import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.SubLayer;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TokenImpl;
@@ -29,7 +28,7 @@ public final class SkilledAnimator extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact you control");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(CardType.ARTIFACT.getPredicate());
     }
 
     public SkilledAnimator(UUID ownerId, CardSetInfo setInfo) {

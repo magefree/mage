@@ -7,7 +7,6 @@ package mage.filter.common;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -22,7 +21,7 @@ public class FilterInstantOrSorceryCard extends FilterCard {
 
     public FilterInstantOrSorceryCard(String name) {
         super(name);
-        this.add(Predicates.or(new CardTypePredicate(CardType.INSTANT), new CardTypePredicate(CardType.SORCERY)));
+        this.add(Predicates.or(CardType.INSTANT.getPredicate(), CardType.SORCERY.getPredicate()));
     }
 
     public FilterInstantOrSorceryCard(final FilterInstantOrSorceryCard filter) {

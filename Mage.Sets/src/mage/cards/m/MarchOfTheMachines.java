@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -44,7 +43,7 @@ class MarchOfTheMachinesEffect extends ContinuousEffectImpl {
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent();
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
     }
 
     public MarchOfTheMachinesEffect() {

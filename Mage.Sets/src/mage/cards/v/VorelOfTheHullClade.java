@@ -18,7 +18,6 @@ import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -33,9 +32,9 @@ public final class VorelOfTheHullClade extends CardImpl {
     
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.CREATURE),
-                new CardTypePredicate(CardType.LAND)));
+                CardType.ARTIFACT.getPredicate(),
+                CardType.CREATURE.getPredicate(),
+                CardType.LAND.getPredicate()));
     }
 
     public VorelOfTheHullClade(UUID ownerId, CardSetInfo setInfo) {

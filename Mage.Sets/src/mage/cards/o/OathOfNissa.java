@@ -11,7 +11,6 @@ import mage.cards.*;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.players.ManaPoolItem;
 import mage.players.Player;
@@ -51,9 +50,9 @@ class OathOfNissaEffect extends OneShotEffect {
     private static final FilterCard filter = new FilterCard("a creature, land, or planeswalker card");
 
     static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE),
-                new CardTypePredicate(CardType.PLANESWALKER),
-                new CardTypePredicate(CardType.LAND)));
+        filter.add(Predicates.or(CardType.CREATURE.getPredicate(),
+                CardType.PLANESWALKER.getPredicate(),
+                CardType.LAND.getPredicate()));
     }
 
     public OathOfNissaEffect() {

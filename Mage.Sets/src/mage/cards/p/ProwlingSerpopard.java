@@ -13,7 +13,6 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -24,7 +23,7 @@ public final class ProwlingSerpopard extends CardImpl {
     private static final FilterSpell filterTarget = new FilterSpell("Creature spells you control");
 
     static {
-        filterTarget.add(new CardTypePredicate(CardType.CREATURE));
+        filterTarget.add(CardType.CREATURE.getPredicate());
     }
 
     public ProwlingSerpopard(UUID ownerId, CardSetInfo setInfo) {

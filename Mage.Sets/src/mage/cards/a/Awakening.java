@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -22,8 +21,8 @@ public final class Awakening extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.CREATURE),
-                new CardTypePredicate(CardType.LAND)
+                CardType.CREATURE.getPredicate(),
+                CardType.LAND.getPredicate()
         ));
     }
 

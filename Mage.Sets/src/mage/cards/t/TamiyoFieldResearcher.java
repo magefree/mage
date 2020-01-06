@@ -20,7 +20,6 @@ import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.command.emblems.TamiyoFieldResearcherEmblem;
 import mage.game.events.DamagedEvent;
@@ -44,7 +43,7 @@ public final class TamiyoFieldResearcher extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("nonland permanent");
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
+        filter.add(Predicates.not(CardType.LAND.getPredicate()));
     }
 
     public TamiyoFieldResearcher(UUID ownerId, CardSetInfo setInfo) {

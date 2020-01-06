@@ -5,7 +5,6 @@ package mage.filter.common;
 import mage.constants.CardType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -20,8 +19,8 @@ public class FilterCreatureOrPlaneswalkerPermanent extends FilterPermanent {
     public FilterCreatureOrPlaneswalkerPermanent(String name) {
         super(name);
         this.add(Predicates.or(
-                new CardTypePredicate(CardType.CREATURE),
-                new CardTypePredicate(CardType.PLANESWALKER)));
+                CardType.CREATURE.getPredicate(),
+                CardType.PLANESWALKER.getPredicate()));
     }
 
     public FilterCreatureOrPlaneswalkerPermanent(final FilterCreatureOrPlaneswalkerPermanent filter) {

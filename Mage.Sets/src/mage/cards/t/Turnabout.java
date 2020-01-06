@@ -1,9 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -14,15 +11,17 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author Plopman
  */
 public final class Turnabout extends CardImpl {
@@ -107,7 +106,7 @@ class TurnaboutEffect extends OneShotEffect {
             }
 
             FilterPermanent filter = new FilterPermanent();
-            filter.add(new CardTypePredicate(type));
+            filter.add(type.getPredicate());
 
             if (choiceImpl.getChoice().equals("Untap")) {
                 filter.add(TappedPredicate.instance);

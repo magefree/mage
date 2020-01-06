@@ -6,7 +6,6 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePlayerOrPlaneswalker;
 import mage.filter.common.FilterPermanentOrPlayer;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -17,7 +16,7 @@ public class TargetAnyTargetAmount extends TargetPermanentOrPlayerAmount {
             = new FilterCreaturePlayerOrPlaneswalker("targets");
 
     static {
-        defaultFilter.getPermanentFilter().add(new CardTypePredicate(CardType.CREATURE));
+        defaultFilter.getPermanentFilter().add(CardType.CREATURE.getPredicate());
     }
 
     public TargetAnyTargetAmount(int amount) {

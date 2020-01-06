@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -24,8 +23,8 @@ public final class PacificationArray extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("artifact or creature");
 
     static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.CREATURE)));
+        filter.add(Predicates.or(CardType.ARTIFACT.getPredicate(),
+                CardType.CREATURE.getPredicate()));
     }
 
     public PacificationArray(UUID ownerId, CardSetInfo setInfo) {

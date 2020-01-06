@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -24,7 +23,7 @@ public final class Scrivener extends CardImpl {
     private static final FilterCard filter = new FilterCard("instant card from your graveyard");
     
     static{
-        filter.add(new CardTypePredicate(CardType.INSTANT));
+        filter.add(CardType.INSTANT.getPredicate());
     }       
     
     public Scrivener(UUID ownerId, CardSetInfo setInfo) {

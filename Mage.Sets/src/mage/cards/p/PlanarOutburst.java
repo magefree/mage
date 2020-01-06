@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -20,7 +19,7 @@ public final class PlanarOutburst extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonland creatures");
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
+        filter.add(Predicates.not(CardType.LAND.getPredicate()));
     }
 
     public PlanarOutburst(UUID ownerId, CardSetInfo setInfo) {

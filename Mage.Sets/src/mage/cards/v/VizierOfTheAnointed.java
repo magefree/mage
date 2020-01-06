@@ -21,7 +21,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicate;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.StackAbility;
@@ -37,7 +36,7 @@ public final class VizierOfTheAnointed extends CardImpl {
     private static final FilterCard filter = new FilterCard("a creature card with eternalize or embalm");
 
     static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
         filter.add(new VizierOfTheAnointedAbilityPredicate());
     }
 

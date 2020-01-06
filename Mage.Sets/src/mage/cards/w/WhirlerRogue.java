@@ -16,7 +16,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.permanent.token.ThopterColorlessToken;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -30,7 +29,7 @@ public final class WhirlerRogue extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifacts");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(CardType.ARTIFACT.getPredicate());
     }
 
     public WhirlerRogue(UUID ownerId, CardSetInfo setInfo) {

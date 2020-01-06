@@ -10,7 +10,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -62,7 +61,7 @@ class CommuneWithTheGodsEffect extends OneShotEffect {
             Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 5));
             if (!cards.isEmpty()) {
                 FilterCard filterPutInHand = new FilterCard("creature or enchantment card to put in hand");
-                filterPutInHand.add(Predicates.or(new CardTypePredicate(CardType.CREATURE), new CardTypePredicate(CardType.ENCHANTMENT)));
+                filterPutInHand.add(Predicates.or(CardType.CREATURE.getPredicate(), CardType.ENCHANTMENT.getPredicate()));
                 controller.revealCards(source, cards, game);
                 if (cards.count(filterPutInHand, source.getSourceId(), source.getControllerId(), game) > 0) {
                     TargetCard target = new TargetCard(0, 1, Zone.LIBRARY, filterPutInHand);

@@ -16,7 +16,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
@@ -102,7 +101,7 @@ class SpellbinderImprintEffect extends OneShotEffect {
     private static final FilterCard filter = new FilterCard("instant card");
 
     static {
-        filter.add(new CardTypePredicate(CardType.INSTANT));
+        filter.add(CardType.INSTANT.getPredicate());
     }
 
     public SpellbinderImprintEffect() {

@@ -16,7 +16,6 @@ import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -60,7 +59,7 @@ class RescuerSphinxEffect extends OneShotEffect {
             = new FilterControlledPermanent("nonland permanent you control");
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
+        filter.add(Predicates.not(CardType.LAND.getPredicate()));
     }
 
     RescuerSphinxEffect() {

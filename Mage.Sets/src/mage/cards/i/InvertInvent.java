@@ -16,7 +16,6 @@ import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
@@ -86,8 +85,8 @@ class InventEffect extends OneShotEffect {
     private static final FilterCard filter2 = new FilterCard("sorcery card");
 
     static {
-        filter1.add(new CardTypePredicate(CardType.INSTANT));
-        filter2.add(new CardTypePredicate(CardType.SORCERY));
+        filter1.add(CardType.INSTANT.getPredicate());
+        filter2.add(CardType.SORCERY.getPredicate());
     }
 
     public InventEffect() {

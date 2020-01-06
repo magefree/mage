@@ -10,7 +10,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -43,7 +42,7 @@ class GrislySalvageEffect extends OneShotEffect {
     private static final FilterCard filterPutInHand = new FilterCard("creature or land card to put in hand");
 
     static {
-        filterPutInHand.add(Predicates.or(new CardTypePredicate(CardType.CREATURE), new CardTypePredicate(CardType.LAND)));
+        filterPutInHand.add(Predicates.or(CardType.CREATURE.getPredicate(), CardType.LAND.getPredicate()));
     }
 
     public GrislySalvageEffect() {

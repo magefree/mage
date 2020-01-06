@@ -18,7 +18,6 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.DamageCreatureEvent;
 import mage.game.events.GameEvent;
@@ -33,8 +32,8 @@ public final class DralnuLichLord extends CardImpl {
     private static final FilterCard filter = new FilterCard("instant or sorcery card in your graveyard");
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.INSTANT),
-                new CardTypePredicate(CardType.SORCERY)));
+                CardType.INSTANT.getPredicate(),
+                CardType.SORCERY.getPredicate()));
     }
 
     public DralnuLichLord(UUID ownerId, CardSetInfo setInfo) {

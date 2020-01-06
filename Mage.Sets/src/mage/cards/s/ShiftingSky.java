@@ -18,7 +18,6 @@ import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -54,7 +53,7 @@ class ShiftingSkyEffect extends ContinuousEffectImpl {
     private static final FilterPermanent filter = new FilterPermanent("All nonland permanents");
     
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
+        filter.add(Predicates.not(CardType.LAND.getPredicate()));
     }
     
     public ShiftingSkyEffect() {

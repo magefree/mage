@@ -8,7 +8,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCardInLibrary;
 
@@ -22,7 +21,7 @@ public final class MerchantScroll extends CardImpl {
 
     static {
         filter.add(new ColorPredicate(ObjectColor.BLUE));
-        filter.add(new CardTypePredicate(CardType.INSTANT));
+        filter.add(CardType.INSTANT.getPredicate());
     }
 
     public MerchantScroll(UUID ownerId, CardSetInfo setInfo) {

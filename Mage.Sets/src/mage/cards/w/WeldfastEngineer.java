@@ -13,7 +13,6 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -25,7 +24,7 @@ public final class WeldfastEngineer extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("artifact creature you control");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(CardType.ARTIFACT.getPredicate());
     }
 
     public WeldfastEngineer(UUID ownerId, CardSetInfo setInfo) {

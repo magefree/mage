@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.DefendingPlayerControlsPredicate;
 
 /**
@@ -25,7 +24,7 @@ public final class ScaldingSalamander extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("creature without flying defending player controls");
 
     static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
         filter.add(DefendingPlayerControlsPredicate.instance);
         filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
     }

@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -25,7 +24,7 @@ public final class ReclusiveArtificer extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifacts you control");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(CardType.ARTIFACT.getPredicate());
     }
 
     public ReclusiveArtificer(UUID ownerId, CardSetInfo setInfo) {

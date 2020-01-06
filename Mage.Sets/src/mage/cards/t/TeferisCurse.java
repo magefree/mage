@@ -17,7 +17,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -30,8 +29,8 @@ public final class TeferisCurse extends CardImpl {
     
     static {
         filter.add(Predicates.or(
-        new CardTypePredicate(CardType.CREATURE),
-        new CardTypePredicate(CardType.ARTIFACT)));
+        CardType.CREATURE.getPredicate(),
+        CardType.ARTIFACT.getPredicate()));
     }
 
     public TeferisCurse(UUID ownerId, CardSetInfo setInfo) {

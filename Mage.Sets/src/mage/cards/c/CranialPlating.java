@@ -19,7 +19,6 @@ import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -30,7 +29,7 @@ public final class CranialPlating extends CardImpl {
     private static final FilterControlledPermanent filterCounted = new FilterControlledPermanent("artifacts you control");
 
     static {
-        filterCounted.add(new CardTypePredicate(CardType.ARTIFACT));
+        filterCounted.add(CardType.ARTIFACT.getPredicate());
     }
 
     public CranialPlating(UUID ownerId, CardSetInfo setInfo) {

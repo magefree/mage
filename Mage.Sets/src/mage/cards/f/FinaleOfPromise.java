@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -36,8 +35,8 @@ public final class FinaleOfPromise extends CardImpl {
     static final FilterCard filterSorcery = new FilterCard("sorcery card from your graveyard");
 
     static {
-        filterInstant.add(new CardTypePredicate(CardType.INSTANT));
-        filterSorcery.add(new CardTypePredicate(CardType.SORCERY));
+        filterInstant.add(CardType.INSTANT.getPredicate());
+        filterSorcery.add(CardType.SORCERY.getPredicate());
     }
 
     public FinaleOfPromise(UUID ownerId, CardSetInfo setInfo) {

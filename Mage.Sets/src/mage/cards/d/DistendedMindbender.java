@@ -19,7 +19,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -67,7 +66,7 @@ class DistendedMindbenderEffect extends OneShotEffect {
     static {
         filterFourOrGreater.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 3));
         filterThreeOrLess.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
-        filterThreeOrLess.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
+        filterThreeOrLess.add(Predicates.not(CardType.LAND.getPredicate()));
     }
 
     public DistendedMindbenderEffect() {

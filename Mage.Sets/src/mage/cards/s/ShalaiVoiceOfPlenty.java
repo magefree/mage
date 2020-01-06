@@ -22,9 +22,7 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -35,7 +33,7 @@ public final class ShalaiVoiceOfPlenty extends CardImpl {
     private static final FilterControlledPermanent filter1 = new FilterControlledPermanent("planeswalkers you control");
 
     static {
-        filter1.add(new CardTypePredicate(CardType.PLANESWALKER));
+        filter1.add(CardType.PLANESWALKER.getPredicate());
     }
 
     public ShalaiVoiceOfPlenty(UUID ownerId, CardSetInfo setInfo) {

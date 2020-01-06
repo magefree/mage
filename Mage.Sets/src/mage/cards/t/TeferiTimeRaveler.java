@@ -15,7 +15,6 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -32,11 +31,11 @@ public final class TeferiTimeRaveler extends CardImpl {
     public static final FilterPermanent filter2 = new FilterPermanent("artifact, creature, or enchantment");
 
     static {
-        filter.add(new CardTypePredicate(CardType.SORCERY));
+        filter.add(CardType.SORCERY.getPredicate());
         filter2.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.CREATURE),
-                new CardTypePredicate(CardType.ENCHANTMENT)
+                CardType.ARTIFACT.getPredicate(),
+                CardType.CREATURE.getPredicate(),
+                CardType.ENCHANTMENT.getPredicate()
         ));
     }
 

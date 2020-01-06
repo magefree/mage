@@ -8,7 +8,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -19,7 +18,7 @@ public final class SculptingSteel extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("artifact");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(CardType.ARTIFACT.getPredicate());
     }
 
     public SculptingSteel(UUID ownerId, CardSetInfo setInfo) {

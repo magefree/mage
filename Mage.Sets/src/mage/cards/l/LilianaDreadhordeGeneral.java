@@ -17,7 +17,6 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardIdPredicate;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -101,7 +100,7 @@ class LilianaDreadhordeGeneralEffect extends OneShotEffect {
                         "a " + cardType.toString() + " you control " +
                                 "(everything you don't choose will be sacrificed)"
                 );
-                filter.add(new CardTypePredicate(cardType));
+                filter.add(cardType.getPredicate());
                 Target target = new TargetControlledPermanent(filter);
                 target.setNotTarget(true);
                 if (opponent.choose(outcome, target, source.getSourceId(), game)) {

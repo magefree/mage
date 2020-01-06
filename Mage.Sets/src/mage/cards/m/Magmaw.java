@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetAnyTarget;
 
@@ -27,7 +26,7 @@ public final class Magmaw extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("nonland permanent");
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
+        filter.add(Predicates.not(CardType.LAND.getPredicate()));
     }
 
     public Magmaw(UUID ownerId, CardSetInfo setInfo) {

@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -27,7 +26,7 @@ public final class Ferrovore extends CardImpl {
      private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(CardType.ARTIFACT.getPredicate());
     }
 
     public Ferrovore (UUID ownerId, CardSetInfo setInfo) {

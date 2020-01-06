@@ -17,7 +17,6 @@ import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.permanent.token.TreasureToken;
 
@@ -30,7 +29,7 @@ public final class DeadeyePlunderers extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("artifact you control");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(CardType.ARTIFACT.getPredicate());
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

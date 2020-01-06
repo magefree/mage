@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterObject;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -23,7 +22,7 @@ public final class CircleOfProtectionArtifacts extends CardImpl {
     private static final FilterObject filter = new FilterObject("artifact source");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(CardType.ARTIFACT.getPredicate());
     }
     
     public CircleOfProtectionArtifacts(UUID ownerId, CardSetInfo setInfo) {

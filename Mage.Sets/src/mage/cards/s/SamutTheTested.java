@@ -17,7 +17,6 @@ import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetAnyTargetAmount;
 import mage.target.common.TargetCreaturePermanent;
@@ -49,8 +48,8 @@ public final class SamutTheTested extends CardImpl {
         // -7: Search your library or up to two creature and/or planeswalkercards, put them onto the battlefield, then shuffle your library.
         FilterCard filterCard = new FilterCard("creature or planeswalker card");
         filterCard.add(Predicates.or(
-            new CardTypePredicate(CardType.CREATURE),
-            new CardTypePredicate(CardType.PLANESWALKER)
+            CardType.CREATURE.getPredicate(),
+            CardType.PLANESWALKER.getPredicate()
         ));
         effect = new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 2, filterCard), false, true);
         ability = new LoyaltyAbility(effect, -7);

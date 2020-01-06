@@ -23,7 +23,6 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterOwnedCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
@@ -40,8 +39,8 @@ public final class IzzetChemister extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.INSTANT),
-                new CardTypePredicate(CardType.SORCERY))
+                CardType.INSTANT.getPredicate(),
+                CardType.SORCERY.getPredicate())
         );
     }
 

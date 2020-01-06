@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -24,7 +23,7 @@ public final class GolgariThug extends CardImpl {
     private static final FilterCard filter = new FilterCard("creature card from your graveyard");
 
     static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
     }
 
     public GolgariThug(UUID ownerId, CardSetInfo setInfo) {

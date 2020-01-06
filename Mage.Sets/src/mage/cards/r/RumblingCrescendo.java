@@ -16,7 +16,7 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+
 import mage.target.TargetPermanent;
 import mage.target.targetadjustment.VerseCounterAdjuster;
 
@@ -29,7 +29,7 @@ public final class RumblingCrescendo extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("up to X target lands, where X is the number of verse counters on {this}");
 
     static {
-        filter.add(new CardTypePredicate(CardType.LAND));
+        filter.add(CardType.LAND.getPredicate());
     }
 
     public RumblingCrescendo(UUID ownerId, CardSetInfo setInfo) {

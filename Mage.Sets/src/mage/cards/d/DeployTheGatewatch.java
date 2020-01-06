@@ -9,7 +9,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -43,7 +42,7 @@ class DeployTheGatewatchEffect extends OneShotEffect {
     private static final FilterCard filter = new FilterCard("up to two planeswalker cards");
 
     static {
-        filter.add(new CardTypePredicate(CardType.PLANESWALKER));
+        filter.add(CardType.PLANESWALKER.getPredicate());
     }
 
     public DeployTheGatewatchEffect() {

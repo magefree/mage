@@ -12,7 +12,6 @@ import mage.constants.Duration;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.DefendingPlayerControlsPredicate;
 import mage.target.TargetPermanent;
 
@@ -28,8 +27,8 @@ public final class StormTheCitadel extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.ENCHANTMENT)
+                CardType.ARTIFACT.getPredicate(),
+                CardType.ENCHANTMENT.getPredicate()
         ));
         filter.add(DefendingPlayerControlsPredicate.instance);
     }

@@ -12,7 +12,6 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.token.ZombieToken;
 import mage.players.Player;
@@ -65,8 +64,8 @@ class TymaretCallsTheDeadFirstEffect extends OneShotEffect {
 
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.CREATURE),
-                new CardTypePredicate(CardType.ENCHANTMENT)
+                CardType.CREATURE.getPredicate(),
+                CardType.ENCHANTMENT.getPredicate()
         ));
     }
 

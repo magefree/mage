@@ -16,7 +16,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -34,8 +33,8 @@ public final class NumbingDose extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.CREATURE)));
+                CardType.ARTIFACT.getPredicate(),
+                CardType.CREATURE.getPredicate()));
     }
 
     public NumbingDose(UUID ownerId, CardSetInfo setInfo) {

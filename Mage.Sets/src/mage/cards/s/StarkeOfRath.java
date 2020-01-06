@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -31,8 +30,8 @@ public final class StarkeOfRath extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.CREATURE)));
+                CardType.ARTIFACT.getPredicate(),
+                CardType.CREATURE.getPredicate()));
     }
 
     public StarkeOfRath(UUID ownerId, CardSetInfo setInfo) {

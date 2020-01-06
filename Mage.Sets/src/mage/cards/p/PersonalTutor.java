@@ -7,7 +7,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -17,7 +16,7 @@ import mage.target.common.TargetCardInLibrary;
 public final class PersonalTutor extends CardImpl {
     private static final FilterCard filter = new FilterCard("Sorcery card");
     static{
-        filter.add(new CardTypePredicate(CardType.SORCERY));
+        filter.add(CardType.SORCERY.getPredicate());
     }
    
     public PersonalTutor(UUID ownerId, CardSetInfo setInfo) {

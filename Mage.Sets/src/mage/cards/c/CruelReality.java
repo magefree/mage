@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -123,8 +122,8 @@ class CruelRealityEffect extends OneShotEffect {
                 && controller != null) {
                 FilterControlledPermanent filter = new FilterControlledPermanent("creature or planeswalker");
                 filter.add(Predicates.or(
-                        new CardTypePredicate(CardType.CREATURE),
-                        new CardTypePredicate(CardType.PLANESWALKER)));
+                        CardType.CREATURE.getPredicate(),
+                        CardType.PLANESWALKER.getPredicate()));
                 TargetPermanent target = new TargetPermanent(filter);
                 if (cursedPlayer.choose(Outcome.Sacrifice, target, source.getId(), game)) {
                     Permanent objectToBeSacrificed = game.getPermanent(target.getFirstTarget());

@@ -16,7 +16,6 @@ import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 import java.util.UUID;
 
@@ -28,7 +27,7 @@ public final class ElshaOfTheInfinite extends CardImpl {
     private static final FilterCard filter = new FilterNonlandCard();
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
     }
 
     public ElshaOfTheInfinite(UUID ownerId, CardSetInfo setInfo) {

@@ -16,7 +16,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -29,8 +28,8 @@ public final class RunechantersPike extends CardImpl {
 
     static {
         filterCard.add(Predicates.or(
-                new CardTypePredicate(CardType.INSTANT),
-                new CardTypePredicate(CardType.SORCERY)));
+                CardType.INSTANT.getPredicate(),
+                CardType.SORCERY.getPredicate()));
     }
 
     public RunechantersPike(UUID ownerId, CardSetInfo setInfo) {

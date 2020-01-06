@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.constants.TargetController;
 import mage.target.TargetPlayer;
 
@@ -23,8 +22,8 @@ public final class Divest extends CardImpl {
     private static final FilterCard filter = new FilterCard("an artifact or creature card");
 
     static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.CREATURE)));
+        filter.add(Predicates.or(CardType.ARTIFACT.getPredicate(),
+                CardType.CREATURE.getPredicate()));
     }
 
     public Divest(UUID ownerId, CardSetInfo setInfo) {

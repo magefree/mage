@@ -3,7 +3,6 @@ package mage.filter.common;
 
 import mage.constants.CardType;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -17,6 +16,6 @@ public class FilterArtifactSpell extends FilterSpell {
 
     public FilterArtifactSpell(String name) {
         super(name);
-        this.add(new CardTypePredicate(CardType.ARTIFACT));
+        this.add(CardType.ARTIFACT.getPredicate());
     }
 }

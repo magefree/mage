@@ -15,7 +15,6 @@ import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.permanent.token.FaerieToken;
 
@@ -34,8 +33,8 @@ public final class AlelaArtfulProvocateur extends CardImpl {
         filter.add(new AbilityPredicate(FlyingAbility.class));
         filter.add(new ControllerPredicate(TargetController.YOU));
         filter2.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.ENCHANTMENT)
+                CardType.ARTIFACT.getPredicate(),
+                CardType.ENCHANTMENT.getPredicate()
         ));
     }
 

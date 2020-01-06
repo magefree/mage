@@ -18,7 +18,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.TargetPermanent;
 import mage.target.targetadjustment.VerseCounterAdjuster;
@@ -33,7 +32,7 @@ public final class VileRequiem extends CardImpl {
 
     static {
         filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
     }
 
     public VileRequiem(UUID ownerId, CardSetInfo setInfo) {

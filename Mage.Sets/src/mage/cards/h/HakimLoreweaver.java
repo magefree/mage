@@ -18,7 +18,6 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardIdPredicate;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.other.AuraCardCanAttachToPermanentId;
 import mage.filter.predicate.other.OwnerPredicate;
@@ -40,7 +39,7 @@ public final class HakimLoreweaver extends CardImpl {
     private static final FilterCard filter = new FilterCard("target Aura card from your graveyard");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
+        filter.add(CardType.ENCHANTMENT.getPredicate());
         filter.add(new SubtypePredicate(SubType.AURA));
         filter.add(new OwnerPredicate(TargetController.YOU));
     }
@@ -68,7 +67,7 @@ public final class HakimLoreweaver extends CardImpl {
 
         // {U}{U}, {tap}: Destroy all Auras attached to Hakim.
         FilterPermanent filterAurasOnHakim = new FilterPermanent("Auras attached to Hakim");
-        filterAurasOnHakim.add(new CardTypePredicate(CardType.ENCHANTMENT));
+        filterAurasOnHakim.add(CardType.ENCHANTMENT.getPredicate());
         filterAurasOnHakim.add(new SubtypePredicate(SubType.AURA));
         FilterPermanent filterSourceId = new FilterPermanent();
         filterSourceId.add(new CardIdPredicate(this.getId()));
@@ -131,7 +130,7 @@ class HakimLoreweaverCondition implements Condition {
     static private final FilterPermanent auras = new FilterPermanent();
 
     static {
-        auras.add(new CardTypePredicate(CardType.ENCHANTMENT));
+        auras.add(CardType.ENCHANTMENT.getPredicate());
     }
 
     @Override

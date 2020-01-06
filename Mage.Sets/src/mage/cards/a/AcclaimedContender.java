@@ -17,7 +17,6 @@ import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -41,7 +40,7 @@ public final class AcclaimedContender extends CardImpl {
                 new SubtypePredicate(SubType.EQUIPMENT),
                 Predicates.and(
                         new SupertypePredicate(SuperType.LEGENDARY),
-                        new CardTypePredicate(CardType.ARTIFACT)
+                        CardType.ARTIFACT.getPredicate()
                 )
         ));
     }

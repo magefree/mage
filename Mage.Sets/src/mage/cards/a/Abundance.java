@@ -13,7 +13,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -71,10 +70,10 @@ class AbundanceReplacementEffect extends ReplacementEffectImpl {
             if (controller.chooseUse(Outcome.Detriment, "Choose card type:",
                     source.getSourceObject(game).getLogName(), "land", "nonland", source, game)) {
                 game.informPlayers(controller.getLogName() + "chooses land.");
-                filter.add(new CardTypePredicate(CardType.LAND));
+                filter.add(CardType.LAND.getPredicate());
             } else {
                 game.informPlayers(controller.getLogName() + "chooses nonland.");
-                filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
+                filter.add(Predicates.not(CardType.LAND.getPredicate()));
             }
             Cards toReveal = new CardsImpl();
             Card selectedCard = null;

@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -26,7 +25,7 @@ public final class SoulbladeDjinn extends CardImpl {
     private static final FilterSpell filterNonCreature = new FilterSpell("a noncreature spell");
 
     static {
-        filterNonCreature.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+        filterNonCreature.add(Predicates.not(CardType.CREATURE.getPredicate()));
     }
 
     public SoulbladeDjinn(UUID ownerId, CardSetInfo setInfo) {

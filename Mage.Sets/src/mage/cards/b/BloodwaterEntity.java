@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
@@ -29,8 +28,8 @@ public final class BloodwaterEntity extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.INSTANT),
-                new CardTypePredicate(CardType.SORCERY)));
+                CardType.INSTANT.getPredicate(),
+                CardType.SORCERY.getPredicate()));
     }
     
     public BloodwaterEntity(UUID ownerId, CardSetInfo setInfo) {

@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
@@ -25,8 +24,8 @@ public final class MorkrutNecropod extends CardImpl {
 
     static {       
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.CREATURE), 
-                new CardTypePredicate(CardType.LAND)));        
+                CardType.CREATURE.getPredicate(),
+                CardType.LAND.getPredicate()));
         filter.add(AnotherPredicate.instance);
     }
 

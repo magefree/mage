@@ -16,7 +16,6 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
@@ -33,7 +32,7 @@ public final class PrimalCommand extends CardImpl {
     private static final FilterPermanent filterNonCreature = new FilterPermanent("noncreature permanent");
 
     static {
-        filterNonCreature.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+        filterNonCreature.add(Predicates.not(CardType.CREATURE.getPredicate()));
     }
 
     public PrimalCommand(UUID ownerId, CardSetInfo setInfo) {

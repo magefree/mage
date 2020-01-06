@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -60,7 +59,7 @@ class GlissaTheTraitorTriggeredAbility extends TriggeredAbilityImpl {
     private static final FilterCard filter = new FilterCard("artifact card from your graveyard");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(CardType.ARTIFACT.getPredicate());
     }
 
     GlissaTheTraitorTriggeredAbility() {

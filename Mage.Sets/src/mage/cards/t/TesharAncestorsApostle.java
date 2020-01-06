@@ -16,7 +16,6 @@ import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterHistoricSpell;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -30,7 +29,7 @@ public final class TesharAncestorsApostle extends CardImpl {
 
     static {
         filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
     }
 
     public TesharAncestorsApostle(UUID ownerId, CardSetInfo cardSetInfo) {
