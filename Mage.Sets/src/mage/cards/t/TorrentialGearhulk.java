@@ -18,7 +18,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -36,7 +35,7 @@ public final class TorrentialGearhulk extends CardImpl {
     private static final FilterCard filter = new FilterCard("instant card from your graveyard");
 
     static {
-        filter.add(new CardTypePredicate(CardType.INSTANT));
+        filter.add(CardType.INSTANT.getPredicate());
     }
 
     public TorrentialGearhulk(UUID ownerId, CardSetInfo setInfo) {

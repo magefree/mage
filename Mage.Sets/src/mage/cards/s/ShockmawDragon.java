@@ -11,7 +11,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
@@ -74,7 +73,7 @@ class PolisCrusherTriggeredAbility extends TriggeredAbilityImpl {
             Player player = game.getPlayer(event.getTargetId());
             if (player != null) {
                 FilterPermanent filter = new FilterPermanent("a creature controlled by " + player.getLogName());
-                filter.add(new CardTypePredicate(CardType.CREATURE));
+                filter.add(CardType.CREATURE.getPredicate());
                 filter.add(new ControllerIdPredicate(event.getTargetId()));
                 this.getTargets().clear();
                 this.addTarget(new TargetPermanent(filter));

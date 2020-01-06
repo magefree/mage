@@ -18,7 +18,6 @@ import mage.constants.*;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -105,7 +104,7 @@ class AngelOfJubilationSacrificeFilterEffect extends CostModificationEffectImpl 
             if (cost instanceof SacrificeTargetCost) {
                 SacrificeTargetCost sacrificeCost = (SacrificeTargetCost) cost;
                 Filter filter = sacrificeCost.getTargets().get(0).getFilter();
-                filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+                filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
             }
         }
         return true;

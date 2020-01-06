@@ -37,7 +37,7 @@ public final class Flamebreak extends CardImpl {
 
 
         // Flamebreak deals 3 damage to each creature without flying and each player. Creatures dealt damage this way can't be regenerated this turn.
-        this.getSpellAbility().addEffect(new DamageEverythingEffect(new StaticValue(3), filter1));
+        this.getSpellAbility().addEffect(new DamageEverythingEffect(StaticValue.get(3), filter1));
         this.getSpellAbility().addEffect(new FlamebreakCantRegenerateEffect());
         this.getSpellAbility().addWatcher(new DamagedByWatcher(false));
     }

@@ -11,7 +11,6 @@ import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -84,7 +83,7 @@ class RiteOfRuinEffect extends OneShotEffect {
         int count = 1;
         for (CardType cardType : order) {
             FilterControlledPermanent filter = new FilterControlledPermanent(cardType + " you control");
-            filter.add(new CardTypePredicate(cardType));
+            filter.add(cardType.getPredicate());
             new SacrificeAllEffect(count, filter).apply(game, source);
             count++;
         }

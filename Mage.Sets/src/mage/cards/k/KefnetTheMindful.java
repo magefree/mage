@@ -15,7 +15,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -113,7 +112,7 @@ class KefnetTheMindfulEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         FilterControlledPermanent filterControlledLand = new FilterControlledPermanent("land you control");
-        filterControlledLand.add(new CardTypePredicate(CardType.LAND));
+        filterControlledLand.add(CardType.LAND.getPredicate());
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             controller.drawCards(1, game);

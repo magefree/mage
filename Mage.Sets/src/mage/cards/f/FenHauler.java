@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -23,7 +22,7 @@ public final class FenHauler extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("artifact creatures");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(CardType.ARTIFACT.getPredicate());
     }
 
     public FenHauler(UUID ownerId, CardSetInfo setInfo) {

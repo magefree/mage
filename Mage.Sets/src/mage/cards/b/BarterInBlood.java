@@ -7,7 +7,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -18,7 +17,7 @@ public final class BarterInBlood extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("creature");
     
     static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
     }
 
     public BarterInBlood(UUID ownerId, CardSetInfo setInfo) {

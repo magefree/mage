@@ -47,7 +47,7 @@ public final class DragonlordOjutai extends CardImpl {
         
         // Whenever Dragonlord Ojutai deals combat damage to a player, look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new LookLibraryAndPickControllerEffect
-            (new StaticValue(3), false, new StaticValue(1), new FilterCard(), Zone.LIBRARY, false, false), false));
+            (StaticValue.get(3), false, StaticValue.get(1), new FilterCard(), Zone.LIBRARY, false, false), false));
     }
 
     public DragonlordOjutai(final DragonlordOjutai card) {

@@ -39,7 +39,7 @@ public final class BloodLust extends CardImpl {
         // If target creature has toughness 5 or greater, it gets +4/-4 until end of turn. Otherwise, it gets +4/-X until end of turn, where X is its toughness minus 1.
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
                 new BoostTargetEffect(4, -4, Duration.EndOfTurn),
-                new BoostTargetEffect(new StaticValue(4), new SignInversionDynamicValue(TargetPermanentToughnessMinus1Value.instance), Duration.WhileOnBattlefield),
+                new BoostTargetEffect(StaticValue.get(4), new SignInversionDynamicValue(TargetPermanentToughnessMinus1Value.instance), Duration.WhileOnBattlefield),
                 new TargetMatchesFilterCondition(filter),
                 "If target creature has toughness 5 or greater, it gets +4/-4 until end of turn. Otherwise, it gets +4/-X until end of turn, where X is its toughness minus 1"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

@@ -13,7 +13,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 import mage.target.targetadjustment.XCMCPermanentAdjuster;
 
@@ -26,8 +25,8 @@ public final class GorillaShaman extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("noncreature artifact with converted mana cost X");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
-        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+        filter.add(CardType.ARTIFACT.getPredicate());
+        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
     }
 
     public GorillaShaman(UUID ownerId, CardSetInfo setInfo) {

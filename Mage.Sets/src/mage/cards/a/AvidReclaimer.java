@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
@@ -26,7 +25,7 @@ public final class AvidReclaimer extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
 
     static {
-        filter.add(new CardTypePredicate(CardType.PLANESWALKER));
+        filter.add(CardType.PLANESWALKER.getPredicate());
         filter.add(new SubtypePredicate(SubType.NISSA));
     }
 

@@ -21,7 +21,6 @@ import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.TargetSpell;
 
@@ -38,8 +37,8 @@ public final class NaruMehaMasterWizard extends CardImpl {
         wizardFilter.add(new ControllerPredicate(TargetController.YOU));
         spellFilter.add(new ControllerPredicate(TargetController.YOU));
         spellFilter.add(Predicates.or(
-                new CardTypePredicate(CardType.INSTANT),
-                new CardTypePredicate(CardType.SORCERY)
+                CardType.INSTANT.getPredicate(),
+                CardType.SORCERY.getPredicate()
         ));
     }
 

@@ -13,7 +13,7 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -26,7 +26,7 @@ public final class MalevolentAwakening extends CardImpl {
     private static final FilterCard filter = new FilterCard("creature card from your graveyard");
 
     static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
     }
 
     public MalevolentAwakening(UUID ownerId, CardSetInfo setInfo) {

@@ -17,7 +17,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -33,7 +32,7 @@ public final class ParadoxicalOutcome extends CardImpl {
     private static FilterControlledPermanent filter = new FilterControlledPermanent("any number of target nonland, nontoken permanents you control");
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
+        filter.add(Predicates.not(CardType.LAND.getPredicate()));
         filter.add(Predicates.not(TokenPredicate.instance));
     }
 

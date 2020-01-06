@@ -8,7 +8,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.EnchantedPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -23,7 +22,7 @@ public final class FeastOfDreams extends CardImpl {
     static {
         filter.add(Predicates.or(
                 EnchantedPredicate.instance,
-                new CardTypePredicate(CardType.ENCHANTMENT)
+                CardType.ENCHANTMENT.getPredicate()
         ));
     }
 

@@ -21,7 +21,6 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
 
@@ -35,7 +34,7 @@ public final class PristineAngel extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
+                CardType.ARTIFACT.getPredicate(),
                 new ColorPredicate(ObjectColor.BLACK),
                 new ColorPredicate(ObjectColor.BLUE),
                 new ColorPredicate(ObjectColor.GREEN),

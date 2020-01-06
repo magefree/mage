@@ -47,7 +47,7 @@ public final class RimehornAurochs extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Whenever Rimehorn Aurochs attacks, it gets +1/+0 until end of turn for each other attacking Aurochs.
-        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(new PermanentsOnBattlefieldCount(filter), new StaticValue(0), Duration.EndOfTurn, true), false));
+        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(new PermanentsOnBattlefieldCount(filter), StaticValue.get(0), Duration.EndOfTurn, true), false));
         
         // {2}{S}: Target creature blocks target creature this turn if able.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RimehornAurochsEffect(), new ManaCostsImpl("{2}{S}"));

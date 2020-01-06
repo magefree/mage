@@ -18,7 +18,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -33,7 +32,7 @@ public class Soulshriek extends CardImpl {
     protected static final FilterCard filterCard = new FilterCard("creature cards");
 
     static {
-        filterCard.add(new CardTypePredicate(CardType.CREATURE));
+        filterCard.add(CardType.CREATURE.getPredicate());
     }
 
     public Soulshriek(UUID ownerId, CardSetInfo setInfo) {
@@ -70,7 +69,7 @@ class SoulshriekEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (permanent != null) {
-            ContinuousEffect boost = new BoostTargetEffect(new CardsInControllerGraveyardCount(Soulshriek.filterCard), new StaticValue(0), Duration.EndOfTurn);
+            ContinuousEffect boost = new BoostTargetEffect(new CardsInControllerGraveyardCount(Soulshriek.filterCard), StaticValue.get(0), Duration.EndOfTurn);
             boost.setTargetPointer(new FixedTarget(permanent, game));
             game.addEffect(boost, source);
             Effect sacrifice = new SacrificeTargetEffect("Sacrifice that creature at the beginning of the next end step", source.getControllerId());

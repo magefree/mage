@@ -5,7 +5,6 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterPermanentOrPlayer;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -16,7 +15,7 @@ public class TargetCreatureOrPlayerAmount extends TargetPermanentOrPlayerAmount 
             = new FilterPermanentOrPlayer("creatures and/or players");
 
     static {
-        defaultFilter.getPermanentFilter().add(new CardTypePredicate(CardType.CREATURE));
+        defaultFilter.getPermanentFilter().add(CardType.CREATURE.getPredicate());
     }
 
     public TargetCreatureOrPlayerAmount(int amount) {
@@ -24,7 +23,7 @@ public class TargetCreatureOrPlayerAmount extends TargetPermanentOrPlayerAmount 
         // any positive number or zero, unless something (such as damage or counters) is being divided
         // or distributed among “any number” of players and/or objects. In that case, a nonzero number
         // of players and/or objects must be chosen if possible.
-        this(new StaticValue(amount));
+        this(StaticValue.get(amount));
         this.minNumberOfTargets = 1;
     }
 

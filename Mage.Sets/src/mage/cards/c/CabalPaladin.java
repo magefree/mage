@@ -30,7 +30,7 @@ public final class CabalPaladin extends CardImpl {
 
         // Whenever you cast a historic spell, Cabal Paladin deals 2 damage to each opponent.
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                new DamagePlayersEffect(Outcome.Damage, new StaticValue(2), TargetController.OPPONENT)
+                new DamagePlayersEffect(Outcome.Damage, StaticValue.get(2), TargetController.OPPONENT)
                         .setText("{this} deals 2 damage to each opponent. <i>(Artifacts, legendaries, and Sagas are historic.)</i>"),
                 new FilterHistoricSpell("a historic spell"), false
         ));

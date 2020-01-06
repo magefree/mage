@@ -20,7 +20,6 @@ import mage.constants.SubLayer;
 import mage.constants.TimingRule;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -34,8 +33,8 @@ public final class SnapcasterMage extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.INSTANT),
-                new CardTypePredicate(CardType.SORCERY)));
+                CardType.INSTANT.getPredicate(),
+                CardType.SORCERY.getPredicate()));
     }
 
     public SnapcasterMage(UUID ownerId, CardSetInfo setInfo) {

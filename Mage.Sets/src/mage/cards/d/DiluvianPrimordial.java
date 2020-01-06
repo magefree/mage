@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.other.OwnerIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -76,7 +75,7 @@ enum DiluvianPrimordialAdjuster implements TargetAdjuster {
             FilterCard filter = new FilterCard("instant or sorcery card from "
                     + opponent.getLogName() + "'s graveyard");
             filter.add(new OwnerIdPredicate(opponentId));
-            filter.add(Predicates.or(new CardTypePredicate(CardType.INSTANT), new CardTypePredicate(CardType.SORCERY)));
+            filter.add(Predicates.or(CardType.INSTANT.getPredicate(), CardType.SORCERY.getPredicate()));
             TargetCardInOpponentsGraveyard target = new TargetCardInOpponentsGraveyard(0, 1, filter);
             ability.addTarget(target);
         }

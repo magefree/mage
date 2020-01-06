@@ -12,7 +12,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -118,10 +117,10 @@ class MartyrsBondEffect extends OneShotEffect {
                 String message = "permanent with type (";
                 boolean firstType = true;
 
-                List<CardTypePredicate> cardTypes = new ArrayList<>();
+                List<CardType.CardTypePredicate> cardTypes = new ArrayList<>();
 
                 for (CardType type : saccedPermanent.getCardType()) {
-                    cardTypes.add(new CardTypePredicate(type));
+                    cardTypes.add(type.getPredicate());
                     if (firstType) {
                         message += type;
                         firstType = false;

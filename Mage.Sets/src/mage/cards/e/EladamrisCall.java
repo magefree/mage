@@ -7,7 +7,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -19,7 +18,7 @@ public final class EladamrisCall extends CardImpl {
     private static final FilterCard filter = new FilterCard("creature card");
     
     static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
     }
     
     public EladamrisCall(UUID ownerId, CardSetInfo setInfo) {

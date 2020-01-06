@@ -9,7 +9,6 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.target.common.TargetCardInLibrary;
 
@@ -23,7 +22,7 @@ public final class TributeMage extends CardImpl {
     private static final FilterCard filter = new FilterCard("an artifact card with converted mana cost 2");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(CardType.ARTIFACT.getPredicate());
         filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, 2));
     }
 

@@ -14,7 +14,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
@@ -26,7 +25,7 @@ public final class MilitantInquisitor extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Equipment you control");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(CardType.ARTIFACT.getPredicate());
         filter.add(new SubtypePredicate(SubType.EQUIPMENT));
     }
 
@@ -38,7 +37,7 @@ public final class MilitantInquisitor extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Miltant Inquisitor gets +1/+0 for each Equipment you control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(new PermanentsOnBattlefieldCount(filter), new StaticValue(0), Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(new PermanentsOnBattlefieldCount(filter), StaticValue.get(0), Duration.WhileOnBattlefield)));
     }
 
     public MilitantInquisitor(final MilitantInquisitor card) {

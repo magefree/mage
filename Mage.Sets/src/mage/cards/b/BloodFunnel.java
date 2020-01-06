@@ -16,7 +16,6 @@ import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
 import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -29,8 +28,8 @@ public final class BloodFunnel extends CardImpl {
     private static final FilterSpell filterNoncreature = new FilterSpell("a noncreature spell");
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
-        filterNoncreature.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
+        filterNoncreature.add(Predicates.not(CardType.CREATURE.getPredicate()));
     }
 
     public BloodFunnel(UUID ownerId, CardSetInfo setInfo) {

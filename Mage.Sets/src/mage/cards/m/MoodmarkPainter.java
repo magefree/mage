@@ -44,7 +44,7 @@ public final class MoodmarkPainter extends CardImpl {
                 false, "<i>Undergrowth</i> &mdash; "
         );
         ability.addEffect(new BoostTargetEffect(
-                xValue, new StaticValue(0),
+                xValue, StaticValue.get(0),
                 Duration.EndOfTurn, true
         ).setText("and gets +X/+0 until end of turn, "
                 + "where X is the number of creature cards in your graveyard")

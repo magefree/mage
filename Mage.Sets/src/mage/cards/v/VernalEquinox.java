@@ -11,7 +11,6 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -22,7 +21,7 @@ public final class VernalEquinox extends CardImpl {
     private static final FilterCard filter = new FilterCard("creature and enchantment spells");
 
     static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE), new CardTypePredicate(CardType.ENCHANTMENT)));
+        filter.add(Predicates.or(CardType.CREATURE.getPredicate(), CardType.ENCHANTMENT.getPredicate()));
     }
 
     public VernalEquinox(UUID ownerId, CardSetInfo setInfo) {

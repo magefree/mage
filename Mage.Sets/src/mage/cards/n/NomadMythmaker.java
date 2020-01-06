@@ -17,7 +17,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -34,7 +33,7 @@ public final class NomadMythmaker extends CardImpl {
     private static final FilterCard FILTER = new FilterCard("Aura card from a graveyard");
 
     static {
-        FILTER.add(new CardTypePredicate(CardType.ENCHANTMENT));
+        FILTER.add(CardType.ENCHANTMENT.getPredicate());
         FILTER.add(new SubtypePredicate(SubType.AURA));
     }
 

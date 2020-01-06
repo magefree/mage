@@ -13,7 +13,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
@@ -78,8 +77,8 @@ class TrygonPredatorTriggeredAbility extends TriggeredAbilityImpl {
             if (player != null) {
                 FilterPermanent filter = new FilterPermanent("an artifact or enchantment controlled by " + player.getLogName());
                 filter.add(Predicates.or(
-                    new CardTypePredicate(CardType.ARTIFACT),
-                    new CardTypePredicate(CardType.ENCHANTMENT)));
+                    CardType.ARTIFACT.getPredicate(),
+                    CardType.ENCHANTMENT.getPredicate()));
                 filter.add(new ControllerIdPredicate(event.getTargetId()));
 
                 this.getTargets().clear();

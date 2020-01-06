@@ -12,7 +12,6 @@ import mage.constants.SpellAbilityType;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.TargetSpell;
 import mage.target.common.TargetCreaturePermanent;
@@ -26,7 +25,7 @@ public final class SpiteMalice extends SplitCard {
     private static final FilterSpell filterNonCreatureSpell = new FilterSpell("noncreature spell");
 
     static {
-        filterNonCreatureSpell.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+        filterNonCreatureSpell.add(Predicates.not(CardType.CREATURE.getPredicate()));
     }
 
     private static final FilterCreaturePermanent filterNonBlackCreature = new FilterCreaturePermanent("nonblack creature");

@@ -32,7 +32,7 @@ public class SacrificeOpponentsEffect extends OneShotEffect {
     }
 
     public SacrificeOpponentsEffect(int amount, FilterPermanent filter) {
-        this(new StaticValue(amount), filter);
+        this(StaticValue.get(amount), filter);
     }
 
     public SacrificeOpponentsEffect(DynamicValue amount, FilterPermanent filter) {

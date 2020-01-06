@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -38,8 +37,8 @@ public final class HostageTaker extends CardImpl {
     static {
         filter.add(AnotherPredicate.instance);
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.CREATURE)
+                CardType.ARTIFACT.getPredicate(),
+                CardType.CREATURE.getPredicate()
         ));
     }
 

@@ -13,7 +13,6 @@ import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
@@ -25,7 +24,7 @@ public final class ChiefOfTheFoundry extends CardImpl {
     private static final FilterCreaturePermanent filterBoosted = new FilterCreaturePermanent("Other artifact creatures you control");
 
     static {
-        filterBoosted.add(new CardTypePredicate(CardType.ARTIFACT));
+        filterBoosted.add(CardType.ARTIFACT.getPredicate());
         filterBoosted.add(new ControllerPredicate(TargetController.YOU));
     }
 

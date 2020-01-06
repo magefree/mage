@@ -14,7 +14,6 @@ import mage.filter.FilterSpell;
 import mage.filter.predicate.ObjectPlayer;
 import mage.filter.predicate.ObjectPlayerPredicate;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.stack.StackObject;
 import mage.target.Target;
@@ -30,7 +29,7 @@ public final class MirrorSheen extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("instant or sorcery spell that targets you");
 
     static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.INSTANT), new CardTypePredicate(CardType.SORCERY)));
+        filter.add(Predicates.or(CardType.INSTANT.getPredicate(), CardType.SORCERY.getPredicate()));
         filter.add(new TargetYouPredicate());
     }
 

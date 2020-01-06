@@ -19,7 +19,7 @@ public class LoseLifeTargetEffect extends OneShotEffect {
     protected DynamicValue amount;
 
     public LoseLifeTargetEffect(int amount) {
-        this(new StaticValue(amount));
+        this(StaticValue.get(amount));
     }
 
     public LoseLifeTargetEffect(DynamicValue amount) {

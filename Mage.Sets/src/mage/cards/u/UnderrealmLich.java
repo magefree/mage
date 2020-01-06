@@ -91,7 +91,7 @@ class UnderrealmLichReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         return new LookLibraryAndPickControllerEffect(
-                new StaticValue(3), false, new StaticValue(1),
+                StaticValue.get(3), false, StaticValue.get(1),
                 StaticFilters.FILTER_CARD, Zone.GRAVEYARD,
                 false, false, false, Zone.HAND, false
         ).apply(game, source);

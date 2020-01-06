@@ -60,7 +60,7 @@ public final class TowerGeist extends CardImpl {
 
         // When Tower Geist enters the battlefield, look at the top two cards of your library. Put one of them into your hand and the other into your graveyard.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new LookLibraryAndPickControllerEffect(new StaticValue(2), false, new StaticValue(1), new FilterCard(), Zone.GRAVEYARD, false, false)));
+                new LookLibraryAndPickControllerEffect(StaticValue.get(2), false, StaticValue.get(1), new FilterCard(), Zone.GRAVEYARD, false, false)));
     }
 
     public TowerGeist(final TowerGeist card) {

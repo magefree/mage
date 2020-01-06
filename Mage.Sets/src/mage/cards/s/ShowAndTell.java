@@ -1,11 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -16,19 +11,21 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class ShowAndTell extends CardImpl {
 
     public ShowAndTell(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}");
 
         // Each player may put an artifact, creature, enchantment, or land card from their hand onto the battlefield.
         this.getSpellAbility().addEffect(new ShowAndTellEffect());
@@ -49,12 +46,12 @@ class ShowAndTellEffect extends OneShotEffect {
     private static final FilterCard filter = new FilterCard("artifact, creature, enchantment, or land card");
 
     static {
-        List<CardTypePredicate> cardTypes = new ArrayList<>();
-        cardTypes.add(new CardTypePredicate(CardType.ARTIFACT));
-        cardTypes.add(new CardTypePredicate(CardType.CREATURE));
-        cardTypes.add(new CardTypePredicate(CardType.ENCHANTMENT));
-        cardTypes.add(new CardTypePredicate(CardType.LAND));
-        filter.add(Predicates.or(cardTypes));
+        filter.add(Predicates.or(
+                CardType.ARTIFACT.getPredicate(),
+                CardType.CREATURE.getPredicate(),
+                CardType.ENCHANTMENT.getPredicate(),
+                CardType.LAND.getPredicate()
+        ));
     }
 
     public ShowAndTellEffect() {

@@ -10,10 +10,8 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.token.SwanSongBirdToken;
-import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
 import mage.target.TargetSpell;
@@ -27,9 +25,9 @@ public final class SwanSong extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("enchantment, instant or sorcery spell");
 
     static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.ENCHANTMENT),
-                new CardTypePredicate(CardType.INSTANT),
-                new CardTypePredicate(CardType.SORCERY)));
+        filter.add(Predicates.or(CardType.ENCHANTMENT.getPredicate(),
+                CardType.INSTANT.getPredicate(),
+                CardType.SORCERY.getPredicate()));
     }
 
     public SwanSong(UUID ownerId, CardSetInfo setInfo) {

@@ -25,7 +25,7 @@ public class LoseLifeDefendingPlayerEffect extends OneShotEffect {
      * attacker false if attacker has to be taken from targetPointer
      */
     public LoseLifeDefendingPlayerEffect(int amount, boolean attackerIsSource) {
-        this(new StaticValue(amount), attackerIsSource);
+        this(StaticValue.get(amount), attackerIsSource);
     }
 
     public LoseLifeDefendingPlayerEffect(DynamicValue amount, boolean attackerIsSource) {

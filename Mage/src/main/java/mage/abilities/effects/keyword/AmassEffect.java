@@ -36,7 +36,7 @@ public class AmassEffect extends OneShotEffect {
     private UUID amassedCreatureId = null;
 
     public AmassEffect(int amassNumber) {
-        this(new StaticValue(amassNumber));
+        this(StaticValue.get(amassNumber));
         staticText = "amass " + amassNumber + ". <i>(Put " + CardUtil.numberToText(amassNumber)
                 + " +1/+1 counter" + (amassNumber > 1 ? "s " : " ")
                 + "on an Army you control. If you don't control one, "

@@ -15,7 +15,6 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -26,7 +25,7 @@ public final class Scourglass extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("permanents except for artifacts and lands");
 
     static {
-        filter.add(Predicates.not(Predicates.or(new CardTypePredicate(CardType.ARTIFACT), new CardTypePredicate(CardType.LAND))));
+        filter.add(Predicates.not(Predicates.or(CardType.ARTIFACT.getPredicate(), CardType.LAND.getPredicate())));
     }
 
     public Scourglass(UUID ownerId, CardSetInfo setInfo) {

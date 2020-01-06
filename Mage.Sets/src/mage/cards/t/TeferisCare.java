@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetSpell;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetEnchantmentPermanent;
@@ -30,8 +29,8 @@ public final class TeferisCare extends CardImpl {
     private static final FilterSpell filter2 = new FilterSpell("enchantment spell");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
-        filter2.add(new CardTypePredicate(CardType.ENCHANTMENT));
+        filter.add(CardType.ENCHANTMENT.getPredicate());
+        filter2.add(CardType.ENCHANTMENT.getPredicate());
     }
 
     public TeferisCare(UUID ownerId, CardSetInfo setInfo) {

@@ -17,7 +17,6 @@ import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
@@ -37,7 +36,7 @@ public final class GrandArchitect extends CardImpl {
 
     static {
         boostFilter.add(new ColorPredicate(ObjectColor.BLUE));
-        targetFilter.add(new CardTypePredicate(CardType.ARTIFACT));
+        targetFilter.add(CardType.ARTIFACT.getPredicate());
     }
 
     public GrandArchitect(UUID ownerId, CardSetInfo setInfo) {

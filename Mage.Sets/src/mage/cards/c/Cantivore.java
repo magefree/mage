@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -26,7 +25,7 @@ public final class Cantivore extends CardImpl {
     static final FilterCard filter = new FilterCard("enchantment cards");
     
     static {
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
+        filter.add(CardType.ENCHANTMENT.getPredicate());
     }
  
     public Cantivore(UUID ownerId, CardSetInfo setInfo) {

@@ -17,7 +17,6 @@ import mage.constants.CardType;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.command.emblems.LukeSkywalkerEmblem;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -31,7 +30,7 @@ public final class LukeSkywalkerTheLastJedi extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("noncreature permanent");
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
     }
 
     public LukeSkywalkerTheLastJedi(UUID ownerId, CardSetInfo setInfo) {

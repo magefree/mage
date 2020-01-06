@@ -22,7 +22,6 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -39,7 +38,7 @@ public final class MinionOfLeshrac extends CardImpl {
     private static final FilterPermanent filterCreatureOrLand = new FilterPermanent("creature or land");
     
     static {
-        filterCreatureOrLand.add(Predicates.or(new CardTypePredicate(CardType.CREATURE), new CardTypePredicate(CardType.LAND)));
+        filterCreatureOrLand.add(Predicates.or(CardType.CREATURE.getPredicate(), CardType.LAND.getPredicate()));
     }
     
     public MinionOfLeshrac(UUID ownerId, CardSetInfo setInfo) {
@@ -91,7 +90,7 @@ class MinionLeshracEffect extends OneShotEffect {
         if (controller != null
                 && minionLeshrac != null) {
             FilterControlledPermanent filterCreature = new FilterControlledPermanent();
-            filterCreature.add(new CardTypePredicate(CardType.CREATURE));
+            filterCreature.add(CardType.CREATURE.getPredicate());
             filterCreature.add(AnotherPredicate.instance);
             TargetControlledPermanent target = new TargetControlledPermanent(filterCreature);
             SacrificeTargetCost cost = new SacrificeTargetCost(target);

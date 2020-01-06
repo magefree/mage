@@ -30,7 +30,7 @@ public class SacrificeAllEffect extends OneShotEffect {
     }
 
     public SacrificeAllEffect(int amount, FilterControlledPermanent filter) {
-        this(new StaticValue(amount), filter);
+        this(StaticValue.get(amount), filter);
     }
 
     public SacrificeAllEffect(DynamicValue amount, FilterControlledPermanent filter) {

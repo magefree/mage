@@ -23,7 +23,7 @@ public class DrawCardSourceControllerEffect extends OneShotEffect {
     }
 
     public DrawCardSourceControllerEffect(int amount, String whoDrawCard) {
-        this(new StaticValue(amount), whoDrawCard);
+        this(StaticValue.get(amount), whoDrawCard);
     }
 
     public DrawCardSourceControllerEffect(DynamicValue amount) {

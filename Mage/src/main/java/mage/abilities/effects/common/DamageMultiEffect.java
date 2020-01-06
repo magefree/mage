@@ -26,11 +26,11 @@ public class DamageMultiEffect extends OneShotEffect {
     private final Set<MageObjectReference> damagedSet = new HashSet<>();
 
     public DamageMultiEffect(int amount) {
-        this(new StaticValue(amount));
+        this(StaticValue.get(amount));
     }
 
     public DamageMultiEffect(int amount, String whoDealDamageName) {
-        this(new StaticValue(amount));
+        this(StaticValue.get(amount));
         this.sourceName = whoDealDamageName;
     }
 

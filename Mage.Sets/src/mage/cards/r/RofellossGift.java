@@ -2,14 +2,12 @@ package mage.cards.r;
 
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -47,7 +45,7 @@ class RofellossGiftEffect extends OneShotEffect {
 
     static {
         filter1.add(new ColorPredicate(ObjectColor.GREEN));
-        filter2.add(new CardTypePredicate(CardType.ENCHANTMENT));
+        filter2.add(CardType.ENCHANTMENT.getPredicate());
     }
 
     public RofellossGiftEffect() {

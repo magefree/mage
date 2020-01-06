@@ -16,7 +16,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -29,8 +28,8 @@ public final class RunechantersPike extends CardImpl {
 
     static {
         filterCard.add(Predicates.or(
-                new CardTypePredicate(CardType.INSTANT),
-                new CardTypePredicate(CardType.SORCERY)));
+                CardType.INSTANT.getPredicate(),
+                CardType.SORCERY.getPredicate()));
     }
 
     public RunechantersPike(UUID ownerId, CardSetInfo setInfo) {
@@ -42,7 +41,7 @@ public final class RunechantersPike extends CardImpl {
 
         // Equipped creature has first strike and gets +X/+0 where X is the number of instant and sorcery cards in your graveyard.
         Effect effect = new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.EQUIPMENT);
-        Effect effect2 = new BoostEquippedEffect(new RunechantersPikeValue(), new StaticValue(0));
+        Effect effect2 = new BoostEquippedEffect(new RunechantersPikeValue(), StaticValue.get(0));
         effect.setText("Equipped creature has first strike");
         effect2.setText(" and gets +X/+0 where X is the number of instant and sorcery cards in your graveyard.");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);

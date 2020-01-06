@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.CounterPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -23,7 +22,7 @@ public final class CodeSlice extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Artifact creatures with bounty counters on them");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(CardType.ARTIFACT.getPredicate());
         filter.add(new CounterPredicate(CounterType.BOUNTY));
     }
 

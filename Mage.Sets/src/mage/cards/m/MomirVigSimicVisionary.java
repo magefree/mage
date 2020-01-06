@@ -18,7 +18,6 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -36,9 +35,9 @@ public final class MomirVigSimicVisionary extends CardImpl {
 
     static {
         filter.add(new ColorPredicate(ObjectColor.GREEN));
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
         filter2.add(new ColorPredicate(ObjectColor.BLUE));
-        filter2.add(new CardTypePredicate(CardType.CREATURE));
+        filter2.add(CardType.CREATURE.getPredicate());
     }
 
     public MomirVigSimicVisionary(UUID ownerId, CardSetInfo setInfo) {

@@ -20,7 +20,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -34,7 +33,7 @@ public final class Toymaker extends CardImpl {
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("noncreature artifact");
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
     }
 
     public Toymaker(UUID ownerId, CardSetInfo setInfo) {

@@ -23,7 +23,7 @@ public final class HowlFromBeyond extends CardImpl {
 
 
         // Target creature gets +X/+0 until end of turn.
-        this.getSpellAbility().addEffect(new BoostTargetEffect(ManacostVariableValue.instance, new StaticValue(0), Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(ManacostVariableValue.instance, StaticValue.get(0), Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

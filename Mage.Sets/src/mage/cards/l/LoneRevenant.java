@@ -54,7 +54,7 @@ class LoneRevenantTriggeredAbility extends TriggeredAbilityImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 
     public LoneRevenantTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new LookLibraryAndPickControllerEffect(new StaticValue(4), false, new StaticValue(1), new FilterCard(), Zone.LIBRARY, false, false));
+        super(Zone.BATTLEFIELD, new LookLibraryAndPickControllerEffect(StaticValue.get(4), false, StaticValue.get(1), new FilterCard(), Zone.LIBRARY, false, false));
     }
 
     public LoneRevenantTriggeredAbility(final LoneRevenantTriggeredAbility ability) {

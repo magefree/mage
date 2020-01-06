@@ -15,7 +15,6 @@ import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.stack.StackObject;
 import mage.players.Player;
@@ -78,7 +77,7 @@ class CounterlashEffect extends OneShotEffect {
                 List<Predicate<MageObject>> types = new ArrayList<>();
                 for (CardType type : stackObject.getCardType()) {
                     if (type != CardType.LAND) {
-                        types.add(new CardTypePredicate(type));
+                        types.add(type.getPredicate());
                     }
                 }
                 filter.add(Predicates.or(types));

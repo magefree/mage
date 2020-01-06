@@ -16,7 +16,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.token.MyrToken;
 import mage.players.Player;
@@ -54,7 +53,7 @@ class MyrIncubatorEffect extends SearchEffect {
     private static final FilterCard filter = new FilterCard();
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(CardType.ARTIFACT.getPredicate());
     }
     
     int tokensToCreate = 0;

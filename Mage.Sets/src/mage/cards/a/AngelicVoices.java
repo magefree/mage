@@ -15,7 +15,6 @@ import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
@@ -31,7 +30,7 @@ public final class AngelicVoices extends CardImpl {
     static {
         filter.add(Predicates.not(
                 Predicates.or(
-                        new CardTypePredicate(CardType.ARTIFACT),
+                        CardType.ARTIFACT.getPredicate(),
                         new ColorPredicate(ObjectColor.WHITE)
                 )
         ));

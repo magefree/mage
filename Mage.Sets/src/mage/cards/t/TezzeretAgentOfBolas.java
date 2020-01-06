@@ -20,7 +20,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -35,7 +34,7 @@ public final class TezzeretAgentOfBolas extends CardImpl {
     private static final FilterCard filter = new FilterCard("an artifact card");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(CardType.ARTIFACT.getPredicate());
     }
 
     public TezzeretAgentOfBolas(UUID ownerId, CardSetInfo setInfo) {

@@ -19,7 +19,6 @@ import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.command.emblems.VivienReidEmblem;
 import mage.target.TargetPermanent;
 
@@ -34,14 +33,14 @@ public final class VivienReid extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.CREATURE),
-                new CardTypePredicate(CardType.LAND)
+                CardType.CREATURE.getPredicate(),
+                CardType.LAND.getPredicate()
         ));
         filter2.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.ENCHANTMENT),
+                CardType.ARTIFACT.getPredicate(),
+                CardType.ENCHANTMENT.getPredicate(),
                 Predicates.and(
-                        new CardTypePredicate(CardType.CREATURE),
+                        CardType.CREATURE.getPredicate(),
                         new AbilityPredicate(FlyingAbility.class)
                 )
         ));
@@ -57,7 +56,7 @@ public final class VivienReid extends CardImpl {
         // +1: Look at the top four cards of your library. You may reveal a creature or land card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
         this.addAbility(new LoyaltyAbility(
                 new LookLibraryAndPickControllerEffect(
-                        new StaticValue(4), false, new StaticValue(1), filter,
+                        StaticValue.get(4), false, StaticValue.get(1), filter,
                         Zone.LIBRARY, false, true, false, Zone.HAND, true, false, false)
                         .setBackInRandomOrder(true)
                         .setText("Look at the top four cards of your library. You may reveal a creature or land card from among them"

@@ -19,7 +19,7 @@ public class LoseLifeSourceControllerEffect extends OneShotEffect {
     protected DynamicValue amount;
 
     public LoseLifeSourceControllerEffect(int amount) {
-        this(new StaticValue(amount));
+        this(StaticValue.get(amount));
     }
 
     public LoseLifeSourceControllerEffect(DynamicValue amount) {

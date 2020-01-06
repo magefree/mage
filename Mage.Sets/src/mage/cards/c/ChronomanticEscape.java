@@ -29,7 +29,7 @@ public final class ChronomanticEscape extends CardImpl {
         // Until your next turn, creatures can't attack you. Exile Chronomantic Escape with three time counters on it.
         getSpellAbility().addEffect(new CantAttackYouAllEffect(Duration.UntilYourNextTurn, StaticFilters.FILTER_PERMANENT_CREATURES));
         getSpellAbility().addEffect(ExileSpellEffect.getInstance());
-        Effect effect = new AddCountersSourceEffect(CounterType.TIME.createInstance(), new StaticValue(3), true, true);
+        Effect effect = new AddCountersSourceEffect(CounterType.TIME.createInstance(), StaticValue.get(3), true, true);
         effect.setText("with 3 time counters on it");
         getSpellAbility().addEffect(effect);
 

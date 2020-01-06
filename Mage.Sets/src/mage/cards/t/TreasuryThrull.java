@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -24,9 +23,9 @@ public final class TreasuryThrull extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("artifact, creature, or enchantment card from your graveyard");
     static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT),
-                                 new CardTypePredicate(CardType.CREATURE),
-                                 new CardTypePredicate(CardType.ENCHANTMENT)));
+        filter.add(Predicates.or(CardType.ARTIFACT.getPredicate(),
+                                 CardType.CREATURE.getPredicate(),
+                                 CardType.ENCHANTMENT.getPredicate()));
     }
 
     public TreasuryThrull(UUID ownerId, CardSetInfo setInfo) {

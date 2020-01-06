@@ -19,7 +19,7 @@ public class PutTopCardOfLibraryIntoGraveTargetEffect extends OneShotEffect {
     private DynamicValue numberCards;
 
     public PutTopCardOfLibraryIntoGraveTargetEffect(int numberCards) {
-        this(new StaticValue(numberCards));
+        this(StaticValue.get(numberCards));
     }
 
     public PutTopCardOfLibraryIntoGraveTargetEffect(DynamicValue numberCards) {

@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -25,8 +24,8 @@ public final class SkeletonShard extends CardImpl {
     private static final FilterCard filter = new FilterCard("artifact creature card from your graveyard");
     
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.ARTIFACT.getPredicate());
+        filter.add(CardType.CREATURE.getPredicate());
     }
 
     public SkeletonShard(UUID ownerId, CardSetInfo setInfo) {

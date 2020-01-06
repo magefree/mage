@@ -41,7 +41,7 @@ public final class GrevenPredatorCaptain extends CardImpl {
 
         // Greven, Predator Captain gets +X/+0, where X is the amount of life you've lost this turn.
         this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(
-                GrevenPredatorCaptainValue.instance, StaticValue.getZeroValue(), Duration.WhileOnBattlefield
+                GrevenPredatorCaptainValue.instance, StaticValue.get(0), Duration.WhileOnBattlefield
         )));
 
         // Whenever Greven attacks, you may sacrifice another creature. If you do, you draw cards equal to that creature's power and you lose life equal to that creature's toughness.

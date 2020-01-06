@@ -1,19 +1,15 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.abilities.common.SpellCastControllerTriggeredAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.FirstSpellOpponentsTurnTriggeredAbility;
 import mage.abilities.effects.common.MayTapOrUntapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.stack.Spell;
-import mage.target.common.TargetNonlandPermanent;
-import mage.watchers.common.SpellsCastWatcher;
+import mage.target.TargetPermanent;
 
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -29,7 +25,11 @@ public final class StingingLionfish extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever you cast your first spell during each opponent's turn, you may tap or untap target nonland permanent.
-        this.addAbility(new StingingLionfishTriggeredAbility(), new SpellsCastWatcher());
+        Ability ability = new FirstSpellOpponentsTurnTriggeredAbility(
+                new MayTapOrUntapTargetEffect(), false
+        );
+        ability.addTarget(new TargetPermanent());
+        this.addAbility(ability);
     }
 
     private StingingLionfish(final StingingLionfish card) {
@@ -39,47 +39,5 @@ public final class StingingLionfish extends CardImpl {
     @Override
     public StingingLionfish copy() {
         return new StingingLionfish(this);
-    }
-}
-
-class StingingLionfishTriggeredAbility extends SpellCastControllerTriggeredAbility {
-
-    StingingLionfishTriggeredAbility() {
-        super(new MayTapOrUntapTargetEffect(), false);
-        this.addTarget(new TargetNonlandPermanent());
-    }
-
-    private StingingLionfishTriggeredAbility(StingingLionfishTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public StingingLionfishTriggeredAbility copy() {
-        return new StingingLionfishTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (game.getActivePlayerId().equals(this.getControllerId()) // ignore controller turn
-                || !super.checkTrigger(event, game)) {
-            return false;
-        }
-
-        if (!game.getOpponents(this.getControllerId()).contains(game.getActivePlayerId())) {
-            return false;
-        }
-
-        SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
-        if (watcher == null) {
-            return false;
-        }
-
-        List<Spell> spells = watcher.getSpellsCastThisTurn(event.getPlayerId());
-        return spells != null && spells.size() == 1;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you cast your first spell during each opponent's turn, you mat tap or untap target permanent.";
     }
 }

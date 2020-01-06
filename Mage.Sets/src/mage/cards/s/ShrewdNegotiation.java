@@ -11,7 +11,6 @@ import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
@@ -28,8 +27,8 @@ public final class ShrewdNegotiation extends CardImpl {
 
     static {
         filter.add(new ControllerPredicate(TargetController.NOT_YOU));
-        filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.CREATURE)));
+        filter.add(Predicates.or(CardType.ARTIFACT.getPredicate(),
+                CardType.CREATURE.getPredicate()));
     }
 
     public ShrewdNegotiation(UUID ownerId, CardSetInfo setInfo) {

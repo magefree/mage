@@ -11,7 +11,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
@@ -27,8 +26,8 @@ public final class Illumination extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.ENCHANTMENT)));
+                CardType.ARTIFACT.getPredicate(),
+                CardType.ENCHANTMENT.getPredicate()));
     }
 
     public Illumination(UUID ownerId, CardSetInfo setInfo) {

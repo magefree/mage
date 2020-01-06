@@ -18,9 +18,7 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.permanent.token.TokenImpl;
-import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 
 /**
@@ -32,8 +30,8 @@ public final class EmbodimentOfFury extends CardImpl {
     private static final FilterPermanent filterLandCreatures = new FilterPermanent("Land creatures");
 
     static {
-        filterLandCreatures.add(new CardTypePredicate(CardType.LAND));
-        filterLandCreatures.add(new CardTypePredicate(CardType.CREATURE));
+        filterLandCreatures.add(CardType.LAND.getPredicate());
+        filterLandCreatures.add(CardType.CREATURE.getPredicate());
     }
 
     public EmbodimentOfFury(UUID ownerId, CardSetInfo setInfo) {

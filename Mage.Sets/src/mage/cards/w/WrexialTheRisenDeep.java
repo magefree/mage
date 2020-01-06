@@ -15,7 +15,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.other.OwnerIdPredicate;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
@@ -96,8 +95,8 @@ class WrexialTheRisenDeepTriggeredAbility extends TriggeredAbilityImpl {
                 + damagedPlayer.getName() + "'s graveyard");
         filter.add(new OwnerIdPredicate(damagedPlayer.getId()));
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.INSTANT),
-                new CardTypePredicate(CardType.SORCERY)));
+                CardType.INSTANT.getPredicate(),
+                CardType.SORCERY.getPredicate()));
 
         Target target = new TargetCardInGraveyard(filter);
         this.getTargets().clear();

@@ -17,7 +17,6 @@ import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -45,7 +44,7 @@ public final class NazahnReveredBladesmith extends CardImpl {
     private static final FilterCard filter = new FilterCard("Equipment card");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(CardType.ARTIFACT.getPredicate());
         filter.add(new SubtypePredicate(SubType.EQUIPMENT));
     }
 

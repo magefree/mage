@@ -21,7 +21,7 @@ import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+
 import mage.target.TargetSpell;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetCreaturePermanent;
@@ -35,7 +35,7 @@ public final class DiscipleOfTheRing extends CardImpl {
     private static final FilterSpell filterSpell = new FilterSpell("noncreature spell");
 
     static {
-        filterSpell.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+        filterSpell.add(Predicates.not(CardType.CREATURE.getPredicate()));
     }
 
     public DiscipleOfTheRing(UUID ownerId, CardSetInfo setInfo) {

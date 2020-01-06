@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -24,7 +23,7 @@ public final class LotusEyeMystics extends CardImpl {
     private static final FilterCard filter = new FilterCard("enchantment card from your graveyard");
     
     static {
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
+        filter.add(CardType.ENCHANTMENT.getPredicate());
     }
 
     public LotusEyeMystics(UUID ownerId, CardSetInfo setInfo) {

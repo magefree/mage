@@ -20,7 +20,6 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.command.emblems.SorinLordOfInnistradEmblem;
 import mage.game.permanent.Permanent;
@@ -38,8 +37,8 @@ public final class SorinLordOfInnistrad extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.CREATURE),
-                new CardTypePredicate(CardType.PLANESWALKER)));
+                CardType.CREATURE.getPredicate(),
+                CardType.PLANESWALKER.getPredicate()));
     }
 
     public SorinLordOfInnistrad(UUID ownerId, CardSetInfo setInfo) {

@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -23,7 +22,7 @@ public final class GeistFueledScarecrow extends CardImpl {
     private static final FilterCard filter = new FilterCard("Creature spells");
 
     static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
     }
 
     public GeistFueledScarecrow(UUID ownerId, CardSetInfo setInfo) {

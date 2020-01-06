@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -45,8 +44,8 @@ class ReprocessEffect extends OneShotEffect {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifacts, creatures, and/or lands");
 
     static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT), new CardTypePredicate(CardType.CREATURE),
-            new CardTypePredicate(CardType.LAND)));
+        filter.add(Predicates.or(CardType.ARTIFACT.getPredicate(), CardType.CREATURE.getPredicate(),
+            CardType.LAND.getPredicate()));
     }
 
     public ReprocessEffect() {

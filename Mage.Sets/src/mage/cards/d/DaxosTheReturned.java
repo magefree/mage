@@ -15,7 +15,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.permanent.token.DaxosSpiritToken;
 
 /**
@@ -27,7 +26,7 @@ public final class DaxosTheReturned extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("an enchantment spell");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
+        filter.add(CardType.ENCHANTMENT.getPredicate());
     }
 
     public DaxosTheReturned(UUID ownerId, CardSetInfo setInfo) {

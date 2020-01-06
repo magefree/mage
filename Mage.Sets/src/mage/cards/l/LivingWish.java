@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -21,8 +20,8 @@ public final class LivingWish extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.CREATURE),
-                new CardTypePredicate(CardType.LAND)));
+                CardType.CREATURE.getPredicate(),
+                CardType.LAND.getPredicate()));
     }
 
     public LivingWish(UUID ownerId, CardSetInfo setInfo) {

@@ -13,7 +13,6 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -24,7 +23,7 @@ public final class YavimayaEnchantress extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("enchantment on the battlefield");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
+        filter.add(CardType.ENCHANTMENT.getPredicate());
     }
 
     public YavimayaEnchantress(UUID ownerId, CardSetInfo setInfo) {

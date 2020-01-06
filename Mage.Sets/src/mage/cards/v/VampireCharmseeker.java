@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInGraveyard;
 
 /**
@@ -27,9 +26,9 @@ public final class VampireCharmseeker extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.INSTANT),
-                new CardTypePredicate(CardType.SORCERY),
-                new CardTypePredicate(CardType.CREATURE)
+                CardType.INSTANT.getPredicate(),
+                CardType.SORCERY.getPredicate(),
+                CardType.CREATURE.getPredicate()
         ));
     }
 

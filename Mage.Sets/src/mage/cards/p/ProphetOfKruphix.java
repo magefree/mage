@@ -15,7 +15,6 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -27,8 +26,8 @@ public final class ProphetOfKruphix extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.CREATURE),
-                new CardTypePredicate(CardType.LAND)));
+                CardType.CREATURE.getPredicate(),
+                CardType.LAND.getPredicate()));
     }
 
     public ProphetOfKruphix(UUID ownerId, CardSetInfo setInfo) {

@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -55,7 +54,7 @@ public final class AuraBarbs extends CardImpl {
         public boolean apply(Game game, Ability source) {
 
             FilterPermanent filterEnchantments = new FilterPermanent();
-            filterEnchantments.add(new CardTypePredicate(CardType.ENCHANTMENT));
+            filterEnchantments.add(CardType.ENCHANTMENT.getPredicate());
 
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filterEnchantments, source.getControllerId(), source.getSourceId(), game)) {
                 Player controller = game.getPlayer(permanent.getControllerId());

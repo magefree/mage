@@ -22,7 +22,7 @@ public class DamageAttachedControllerEffect extends OneShotEffect {
 
     public DamageAttachedControllerEffect(int amount) {
         super(Outcome.Damage);
-        this.amount = new StaticValue(amount);
+        this.amount = StaticValue.get(amount);
     }
     
     public DamageAttachedControllerEffect(DynamicValue amount) {

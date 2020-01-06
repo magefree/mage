@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  * @author Loki
@@ -20,8 +19,8 @@ public final class MagneticFlux extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Artifact creatures");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.ARTIFACT.getPredicate());
+        filter.add(CardType.CREATURE.getPredicate());
     }
 
     public MagneticFlux(UUID ownerId, CardSetInfo setInfo) {

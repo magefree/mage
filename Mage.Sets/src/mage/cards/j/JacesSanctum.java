@@ -13,7 +13,6 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -27,11 +26,11 @@ public final class JacesSanctum extends CardImpl {
     private static final FilterSpell filter2 = new FilterSpell("an instant or sorcery spell");
 
     static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.INSTANT), new CardTypePredicate(CardType.SORCERY)));
+        filter.add(Predicates.or(CardType.INSTANT.getPredicate(), CardType.SORCERY.getPredicate()));
     }
     
     static {
-        filter2.add(Predicates.or(new CardTypePredicate(CardType.INSTANT), new CardTypePredicate(CardType.SORCERY)));
+        filter2.add(Predicates.or(CardType.INSTANT.getPredicate(), CardType.SORCERY.getPredicate()));
     }
 
     public JacesSanctum(UUID ownerId, CardSetInfo setInfo) {

@@ -4,7 +4,6 @@ package mage.filter.common;
 
 import mage.constants.CardType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -18,7 +17,7 @@ public class FilterArtifactCard extends FilterCard {
 
     public FilterArtifactCard(String name) {
         super(name);
-        this.add(new CardTypePredicate(CardType.ARTIFACT));
+        this.add(CardType.ARTIFACT.getPredicate());
     }
 
     public FilterArtifactCard(final FilterArtifactCard filter) {

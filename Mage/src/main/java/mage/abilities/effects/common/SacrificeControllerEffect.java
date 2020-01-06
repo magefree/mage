@@ -22,7 +22,7 @@ public class SacrificeControllerEffect extends SacrificeEffect {
     }
 
     public SacrificeControllerEffect(FilterPermanent filter, int count, String preText ) {
-        this(filter, new StaticValue(count), preText);
+        this(filter, StaticValue.get(count), preText);
     }
 
     public SacrificeControllerEffect(final SacrificeControllerEffect effect ) {

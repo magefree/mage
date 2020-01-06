@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -22,7 +21,7 @@ public final class StructuralDistortion extends CardImpl {
     private static final FilterPermanent FILTER = new FilterPermanent("artifact or land");
 
     static {
-        FILTER.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT), new CardTypePredicate(CardType.LAND)));
+        FILTER.add(Predicates.or(CardType.ARTIFACT.getPredicate(), CardType.LAND.getPredicate()));
     }
 
     public StructuralDistortion(UUID ownerId, CardSetInfo setInfo) {

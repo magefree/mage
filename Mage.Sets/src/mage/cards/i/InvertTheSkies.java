@@ -17,7 +17,6 @@ import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.watchers.common.ManaSpentToCastWatcher;
 
@@ -33,7 +32,7 @@ public final class InvertTheSkies extends CardImpl {
     static {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
         filter.add(new AbilityPredicate(FlyingAbility.class));
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
     }
 
     public InvertTheSkies(UUID ownerId, CardSetInfo setInfo) {

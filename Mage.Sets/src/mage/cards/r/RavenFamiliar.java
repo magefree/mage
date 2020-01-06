@@ -33,7 +33,7 @@ public final class RavenFamiliar extends CardImpl {
         this.addAbility(new EchoAbility("{2}{U}"));
         // When Raven Familiar enters the battlefield, look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new LookLibraryAndPickControllerEffect(new StaticValue(3), false, new StaticValue(1), StaticFilters.FILTER_CARD, Zone.LIBRARY, false, false),
+                new LookLibraryAndPickControllerEffect(StaticValue.get(3), false, StaticValue.get(1), StaticFilters.FILTER_CARD, Zone.LIBRARY, false, false),
                 false));
     }
 

@@ -48,7 +48,7 @@ public final class NissaSageAnimist extends CardImpl {
 
         // -7: Untap up to six target lands. They become 6/6 Elemental creatures. They're still lands.
         Ability ability = new LoyaltyAbility(new UntapTargetEffect(), -7);
-        ability.addTarget(new TargetLandPermanent(0, 6, StaticFilters.FILTER_LANDS, false));
+        ability.addTarget(new TargetLandPermanent(0, 6, StaticFilters.FILTER_LAND, false));
         ability.addEffect(new NissaSageAnimistMinusAnimateEffect());
         this.addAbility(ability);
     }
@@ -127,54 +127,4 @@ class NissaSageAnimistMinusAnimateEffect extends OneShotEffect {
         }
         return true;
     }
-
-//    class NissaSageAnimistMinusSevenEffect extends ContinuousEffectImpl {
-//
-//        NissaSageAnimistMinusSevenEffect() {
-//            super(Duration.EndOfGame, Outcome.BecomeCreature);
-//            this.staticText = "They become 6/6 Elemental creatures. They're still lands";
-//        }
-//
-//        NissaSageAnimistMinusSevenEffect(final NissaSageAnimistMinusSevenEffect effect) {
-//            super(effect);
-//        }
-//
-//        @Override
-//        public NissaSageAnimistMinusSevenEffect copy() {
-//            return new NissaSageAnimistMinusSevenEffect(this);
-//        }
-//
-//        @Override
-//        public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-//            for (UUID permanentId : this.getTargetPointer().getTargets(game, source)) {
-//                Permanent permanent = game.getPermanent(permanentId);
-//                if (permanent != null) {
-//                    switch (layer) {
-//                        case TypeChangingEffects_4:
-//                            permanent.addCardType(CardType.CREATURE);
-//                            if (!permanent.hasSubtype(SubType.ELEMENTAL, game)) {
-//                                permanent.getSubtype(game).add(SubType.ELEMENTAL);
-//                            }
-//                            break;
-//                        case PTChangingEffects_7:
-//                            if (sublayer == SubLayer.SetPT_7b) {
-//                                permanent.getToughness().setValue(6);
-//                                permanent.getPower().setValue(6);
-//                            }
-//                    }
-//                }
-//            }
-//            return true;
-//        }
-//
-//        @Override
-//        public boolean apply(Game game, Ability source) {
-//            return false;
-//        }
-//
-//        @Override
-//        public boolean hasLayer(Layer layer) {
-//            return layer == Layer.TypeChangingEffects_4 || layer == Layer.PTChangingEffects_7;
-//        }
-//    }
 }

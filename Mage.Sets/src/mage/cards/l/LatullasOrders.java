@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
@@ -85,7 +84,7 @@ class LatullasOrdersTriggeredAbility extends TriggeredAbilityImpl {
             Player player = game.getPlayer(event.getTargetId());
             if (player != null) {
                 FilterPermanent filter = new FilterPermanent("an artifact controlled by " + player.getLogName());
-                filter.add(new CardTypePredicate(CardType.ARTIFACT));
+                filter.add(CardType.ARTIFACT.getPredicate());
                 filter.add(new ControllerIdPredicate(event.getTargetId()));
 
                 this.getTargets().clear();

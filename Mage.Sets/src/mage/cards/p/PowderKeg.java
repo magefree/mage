@@ -19,7 +19,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -71,7 +70,7 @@ class PowderKegEffect extends OneShotEffect {
         }
         int count = sourcePermanent.getCounters(game).getCount(CounterType.FUSE);
         FilterPermanent filter = new FilterPermanent();
-        filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT), new CardTypePredicate(CardType.CREATURE)));
+        filter.add(Predicates.or(CardType.ARTIFACT.getPredicate(), CardType.CREATURE.getPredicate()));
         filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, count));
         for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
             perm.destroy(source.getSourceId(), game, false);

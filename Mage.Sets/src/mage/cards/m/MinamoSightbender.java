@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
 import mage.target.Target;
@@ -31,7 +30,7 @@ public final class MinamoSightbender extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("creature with power X or less");
 
     static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
     }
 
     public MinamoSightbender(UUID ownerId, CardSetInfo setInfo) {

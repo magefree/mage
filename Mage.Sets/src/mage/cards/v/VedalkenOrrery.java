@@ -11,7 +11,6 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -22,7 +21,7 @@ public final class VedalkenOrrery extends CardImpl {
     private static final FilterCard filter = new FilterCard("spells");
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
+        filter.add(Predicates.not(CardType.LAND.getPredicate()));
     }
 
     public VedalkenOrrery(UUID ownerId, CardSetInfo setInfo) {

@@ -32,9 +32,9 @@ public final class NagaOracle extends CardImpl {
         // and the rest back on top of your library in any order.
         Effect effect = new LookLibraryAndPickControllerEffect(
                         /* oh god, Microsoft looks conservative with their function parameters in comparison */
-                        new StaticValue(3),
+                        StaticValue.get(3),
                         false,
-                        new StaticValue(3),
+                        StaticValue.get(3),
                         new FilterCard("cards"),
                         Zone.LIBRARY,
                         true,

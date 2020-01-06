@@ -74,7 +74,7 @@ class SoulScarMageDamageReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent toGetCounters = game.getPermanent(event.getTargetId());
         if (toGetCounters != null) {
-            AddCountersTargetEffect addCounters = new AddCountersTargetEffect(CounterType.M1M1.createInstance(), new StaticValue(event.getAmount()));
+            AddCountersTargetEffect addCounters = new AddCountersTargetEffect(CounterType.M1M1.createInstance(), StaticValue.get(event.getAmount()));
             addCounters.setTargetPointer(new FixedTarget(toGetCounters.getId()));
             addCounters.apply(game, source);
             return true;

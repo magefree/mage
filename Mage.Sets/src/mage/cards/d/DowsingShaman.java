@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -26,7 +25,7 @@ public final class DowsingShaman extends CardImpl {
     private static final FilterCard filter = new FilterCard("enchantment card from your graveyard");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
+        filter.add(CardType.ENCHANTMENT.getPredicate());
     }
 
     public DowsingShaman(UUID ownerId, CardSetInfo setInfo) {

@@ -18,7 +18,6 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  * @author nantuko
@@ -30,7 +29,7 @@ public final class IndomitableArchangel extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Artifacts");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(CardType.ARTIFACT.getPredicate());
     }
 
     public IndomitableArchangel(UUID ownerId, CardSetInfo setInfo) {

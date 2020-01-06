@@ -15,7 +15,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreatureSpell;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetAnyTarget;
@@ -35,8 +34,8 @@ public final class SarkhansUnsealing extends CardImpl {
         filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 7));
         filter2.add(new PowerPredicate(ComparisonType.MORE_THAN, 6));
         filter3.add(Predicates.or(
-                new CardTypePredicate(CardType.CREATURE),
-                new CardTypePredicate(CardType.PLANESWALKER)
+                CardType.CREATURE.getPredicate(),
+                CardType.PLANESWALKER.getPredicate()
         ));
         filter3.add(new ControllerPredicate(TargetController.OPPONENT));
     }

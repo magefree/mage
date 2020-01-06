@@ -16,7 +16,6 @@ import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
@@ -30,7 +29,7 @@ public final class DriftOfTheDead extends CardImpl {
 
     static {
         filter.add(new SupertypePredicate(SuperType.SNOW));
-        filter.add(new CardTypePredicate(CardType.LAND));
+        filter.add(CardType.LAND.getPredicate());
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

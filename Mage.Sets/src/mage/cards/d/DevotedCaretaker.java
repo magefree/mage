@@ -17,7 +17,6 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
 
@@ -30,7 +29,7 @@ public final class DevotedCaretaker extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("instant spells and sorcery spells");
     
     static{
-        filter.add(Predicates.or(new CardTypePredicate(CardType.SORCERY), new CardTypePredicate(CardType.INSTANT)));
+        filter.add(Predicates.or(CardType.SORCERY.getPredicate(), CardType.INSTANT.getPredicate()));
     }
 
     public DevotedCaretaker(UUID ownerId, CardSetInfo setInfo) {

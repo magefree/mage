@@ -14,7 +14,6 @@ import mage.constants.Duration;
 import mage.constants.SagaChapter;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -32,8 +31,8 @@ public final class TheMirariConjecture extends CardImpl {
     private static final FilterCard filterSorceryCard = new FilterCard("sorcery card from your graveyard");
 
     static {
-        filterInstantCard.add(new CardTypePredicate(CardType.INSTANT));
-        filterSorceryCard.add(new CardTypePredicate(CardType.SORCERY));
+        filterInstantCard.add(CardType.INSTANT.getPredicate());
+        filterSorceryCard.add(CardType.SORCERY.getPredicate());
     }
 
     public TheMirariConjecture(UUID ownerId, CardSetInfo setInfo) {

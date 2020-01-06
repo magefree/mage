@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
@@ -23,7 +22,7 @@ public final class ThroneOfGeth extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an artifact");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(CardType.ARTIFACT.getPredicate());
     }
 
     public ThroneOfGeth(UUID ownerId, CardSetInfo setInfo) {

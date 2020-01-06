@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -23,7 +22,7 @@ public final class FaerieMechanist extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("an artifact card");
     static {
-            filter.add(new CardTypePredicate(CardType.ARTIFACT));
+            filter.add(CardType.ARTIFACT.getPredicate());
     }
 
     public FaerieMechanist(UUID ownerId, CardSetInfo setInfo) {
@@ -37,7 +36,7 @@ public final class FaerieMechanist extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // When Faerie Mechanist enters the battlefield, look at the top three cards of your library. 
         // You may reveal an artifact card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new LookLibraryAndPickControllerEffect(new StaticValue(3), false, new StaticValue(1), filter, false)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new LookLibraryAndPickControllerEffect(StaticValue.get(3), false, StaticValue.get(1), filter, false)));
     }
 
     public FaerieMechanist(final FaerieMechanist card) {

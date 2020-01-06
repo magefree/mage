@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.permanent.token.SkywiseTeachingsToken;
 
 /**
@@ -23,7 +22,7 @@ public final class SkywiseTeachings extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("a noncreature spell");
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
     }
 
     public SkywiseTeachings(UUID ownerId, CardSetInfo setInfo) {

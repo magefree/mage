@@ -15,7 +15,6 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
@@ -42,7 +41,7 @@ public class FetchLandActivatedAbility extends ActivatedAbilityImpl {
         }
         addCost(new SacrificeSourceCost());
         FilterCard filter = new FilterCard(subTypeNames(subtypes));
-        filter.add(new CardTypePredicate(CardType.LAND));
+        filter.add(CardType.LAND.getPredicate());
         List<Predicate<MageObject>> subtypePredicates = new ArrayList<>();
         for (SubType subtype : subtypes) {
             subtypePredicates.add(new SubtypePredicate(subtype));

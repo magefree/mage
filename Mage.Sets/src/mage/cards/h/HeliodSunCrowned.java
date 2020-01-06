@@ -23,7 +23,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.TargetPermanent;
 
@@ -39,8 +38,8 @@ public final class HeliodSunCrowned extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.CREATURE),
-                new CardTypePredicate(CardType.ENCHANTMENT)
+                CardType.CREATURE.getPredicate(),
+                CardType.ENCHANTMENT.getPredicate()
         ));
         filter2.add(AnotherPredicate.instance);
     }

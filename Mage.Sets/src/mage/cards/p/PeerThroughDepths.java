@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 import java.util.UUID;
 
@@ -23,8 +22,8 @@ public final class PeerThroughDepths extends CardImpl {
     private static final FilterCard filter = new FilterCard("an instant or sorcery card");
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.SORCERY),
-                new CardTypePredicate(CardType.INSTANT)));
+                CardType.SORCERY.getPredicate(),
+                CardType.INSTANT.getPredicate()));
     }
 
 
@@ -35,7 +34,7 @@ public final class PeerThroughDepths extends CardImpl {
 
         // Look at the top five cards of your library. You may reveal an instant or sorcery card from among them and put it into your hand. 
         // Put the rest on the bottom of your library in any order.
-        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(new StaticValue(5), false, new StaticValue(1), filter, false));
+        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(StaticValue.get(5), false, StaticValue.get(1), filter, false));
     }
 
     public PeerThroughDepths (final PeerThroughDepths card) {

@@ -15,7 +15,7 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+
 import mage.target.TargetPermanent;
 
 /**
@@ -28,10 +28,10 @@ public final class EnergyChamber extends CardImpl {
     private static final FilterPermanent filter2 = new FilterPermanent("noncreature artifact");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
-        filter.add(new CardTypePredicate(CardType.CREATURE));
-        filter2.add(new CardTypePredicate(CardType.ARTIFACT));
-        filter2.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+        filter.add(CardType.ARTIFACT.getPredicate());
+        filter.add(CardType.CREATURE.getPredicate());
+        filter2.add(CardType.ARTIFACT.getPredicate());
+        filter2.add(Predicates.not(CardType.CREATURE.getPredicate()));
     }
 
     public EnergyChamber(UUID ownerId, CardSetInfo setInfo) {

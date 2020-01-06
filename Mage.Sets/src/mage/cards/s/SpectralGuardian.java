@@ -17,7 +17,6 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -28,7 +27,7 @@ public final class SpectralGuardian extends CardImpl {
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent();
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
     }
 
     public SpectralGuardian(UUID ownerId, CardSetInfo setInfo) {

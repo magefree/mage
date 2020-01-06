@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
@@ -46,7 +45,7 @@ class TragicLessonEffect extends OneShotEffect {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a land you control");
 
     static {
-        filter.add(new CardTypePredicate(CardType.LAND));
+        filter.add(CardType.LAND.getPredicate());
     }
 
     public TragicLessonEffect() {

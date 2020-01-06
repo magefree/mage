@@ -35,7 +35,7 @@ public final class TheBattleOfGeonosis extends CardImpl {
         this.getSpellAbility().addEffect(effect);
 
         // Creatures you control get +X/+0 until end of turn.
-        this.getSpellAbility().addEffect(new BoostControlledEffect(ManacostVariableValue.instance, new StaticValue(0), Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostControlledEffect(ManacostVariableValue.instance, StaticValue.get(0), Duration.EndOfTurn));
 
     }
 

@@ -19,7 +19,7 @@ public final class GlimpseTheFuture extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}");
 
         // Look at the top three cards of your library. Put one of them into your hand and the rest into your graveyard.
-        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(new StaticValue(3), false, new StaticValue(1),
+        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(StaticValue.get(3), false, StaticValue.get(1),
                 StaticFilters.FILTER_CARD, Zone.GRAVEYARD, false, false, false, Zone.HAND, false));
 
     }

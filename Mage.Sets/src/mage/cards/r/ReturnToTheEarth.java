@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -23,10 +22,10 @@ public final class ReturnToTheEarth extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.ENCHANTMENT),
+                CardType.ARTIFACT.getPredicate(),
+                CardType.ENCHANTMENT.getPredicate(),
                 Predicates.and(
-                    new CardTypePredicate(CardType.CREATURE),
+                    CardType.CREATURE.getPredicate(),
                     new AbilityPredicate(FlyingAbility.class))
               ));
     }

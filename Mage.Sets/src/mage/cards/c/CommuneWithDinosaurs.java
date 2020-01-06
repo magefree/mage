@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
@@ -23,7 +22,7 @@ public final class CommuneWithDinosaurs extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.LAND),
+                CardType.LAND.getPredicate(),
                 new SubtypePredicate(SubType.DINOSAUR)
         ));
     }
@@ -32,7 +31,7 @@ public final class CommuneWithDinosaurs extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{G}");
 
         //Look at the top five cards of your library. You may reveal a Dinosaur or land card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
-        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(new StaticValue(5), false, new StaticValue(1), filter, false));
+        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(StaticValue.get(5), false, StaticValue.get(1), filter, false));
     }
 
     public CommuneWithDinosaurs(final CommuneWithDinosaurs card) {

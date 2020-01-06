@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPlayer;
 
 /**
@@ -27,7 +26,7 @@ public final class GatekeeperOfMalakir extends CardImpl {
 
     static {
         filter = new FilterControlledPermanent("creature");
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
     }
 
     public GatekeeperOfMalakir(UUID ownerId, CardSetInfo setInfo) {

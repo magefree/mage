@@ -22,7 +22,6 @@ import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.command.emblems.NissaWhoShakesTheWorldEmblem;
@@ -44,7 +43,7 @@ public final class NissaWhoShakesTheWorld extends CardImpl {
     private static final FilterCard filter2 = new FilterCard("Forest cards");
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
         filter2.add(new SubtypePredicate(SubType.FOREST));
     }
 

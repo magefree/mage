@@ -7,7 +7,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -19,7 +18,7 @@ public final class DejaVu extends CardImpl {
     static final FilterCard filter = new FilterCard("sorcery card from your graveyard");
 
     static {
-        filter.add(new CardTypePredicate(CardType.SORCERY));
+        filter.add(CardType.SORCERY.getPredicate());
     }
 
     public DejaVu(UUID ownerId, CardSetInfo setInfo) {

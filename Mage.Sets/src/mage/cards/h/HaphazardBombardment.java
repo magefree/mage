@@ -19,7 +19,6 @@ import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.CounterPredicate;
 import mage.game.Game;
@@ -80,7 +79,7 @@ class HaphazardBombardmentEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             FilterPermanent filter = new FilterPermanent("nonenchantment permanents you don't control");
-            filter.add(Predicates.not(new CardTypePredicate(CardType.ENCHANTMENT)));
+            filter.add(Predicates.not(CardType.ENCHANTMENT.getPredicate()));
             filter.add(new ControllerPredicate(TargetController.OPPONENT));
             List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
             if (permanents.size() > 4) {

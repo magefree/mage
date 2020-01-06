@@ -42,7 +42,7 @@ public final class SilvergillDouser extends CardImpl {
 
         // {tap}: Target creature gets -X/-0 until end of turn, where X is the number of Merfolk and/or Faeries you control.
         DynamicValue number = new PermanentsOnBattlefieldCount(new FilterControlledPermanent(filter), -1);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(number, new StaticValue(0), Duration.EndOfTurn, true), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(number, StaticValue.get(0), Duration.EndOfTurn, true), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

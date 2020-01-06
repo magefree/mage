@@ -17,7 +17,6 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -28,7 +27,7 @@ public final class MephiticOoze extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact you control");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(CardType.ARTIFACT.getPredicate());
     }
 
     public MephiticOoze(UUID ownerId, CardSetInfo setInfo) {
@@ -38,7 +37,7 @@ public final class MephiticOoze extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Mephitic Ooze gets +1/+0 for each artifact you control.
-        Effect effect = new BoostSourceEffect(new PermanentsOnBattlefieldCount(filter), new StaticValue(0), Duration.WhileOnBattlefield);
+        Effect effect = new BoostSourceEffect(new PermanentsOnBattlefieldCount(filter), StaticValue.get(0), Duration.WhileOnBattlefield);
         effect.setText("{this} gets +1/+0 for each artifact you control");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 

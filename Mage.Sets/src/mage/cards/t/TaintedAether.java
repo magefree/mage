@@ -12,7 +12,6 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -24,7 +23,7 @@ public final class TaintedAether extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a creature or a land");
 
     static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE), new CardTypePredicate(CardType.LAND)));
+        filter.add(Predicates.or(CardType.CREATURE.getPredicate(), CardType.LAND.getPredicate()));
     }
 
     public TaintedAether(UUID ownerId, CardSetInfo setInfo) {

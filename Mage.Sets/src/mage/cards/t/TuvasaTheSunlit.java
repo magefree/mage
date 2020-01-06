@@ -23,7 +23,6 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterEnchantmentPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -80,7 +79,7 @@ class TuvasaTheSunlitTriggeredAbility extends SpellCastControllerTriggeredAbilit
 
     public TuvasaTheSunlitTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1),
-                (FilterSpell) new FilterSpell("an enchantment spell").add(new CardTypePredicate(CardType.ENCHANTMENT)), false, true);
+                (FilterSpell) new FilterSpell("an enchantment spell").add(CardType.ENCHANTMENT.getPredicate()), false, true);
     }
 
     public TuvasaTheSunlitTriggeredAbility(final TuvasaTheSunlitTriggeredAbility ability) {

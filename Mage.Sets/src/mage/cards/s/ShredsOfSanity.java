@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -29,8 +28,8 @@ public final class ShredsOfSanity extends CardImpl {
     private static final FilterCard filterSorcery = new FilterCard("a sorcery card in your graveyard");
 
     static {
-        filterInstant.add(new CardTypePredicate(CardType.INSTANT));
-        filterSorcery.add(new CardTypePredicate(CardType.SORCERY));
+        filterInstant.add(CardType.INSTANT.getPredicate());
+        filterSorcery.add(CardType.SORCERY.getPredicate());
     }
 
     public ShredsOfSanity(UUID ownerId, CardSetInfo setInfo) {

@@ -30,7 +30,7 @@ public final class FistsOfFlame extends CardImpl {
         ).setText("Until end of turn, target creature gains trample"));
         this.getSpellAbility().addEffect(new BoostTargetEffect(
                 CardsDrawnThisTurnDynamicValue.instance,
-                StaticValue.getZeroValue(), Duration.EndOfTurn
+                StaticValue.get(0), Duration.EndOfTurn
         ).setText("and gets +1/+0 for each card you've drawn this turn."));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addWatcher(new CardsDrawnThisTurnWatcher());

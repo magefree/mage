@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -35,7 +34,7 @@ public final class SpellweaverVolute extends CardImpl {
 
         // Enchant instant card in a graveyard
         FilterCard filter = new FilterCard("instant card in a graveyard");
-        filter.add(new CardTypePredicate(CardType.INSTANT));
+        filter.add(CardType.INSTANT.getPredicate());
         TargetCardInGraveyard auraTarget = new TargetCardInGraveyard(filter);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
@@ -47,7 +46,7 @@ public final class SpellweaverVolute extends CardImpl {
         // If you do, exile the enchanted card and attach Spellweaver Volute 
         // to another instant card in a graveyard.
         FilterSpell filterSpell = new FilterSpell("a sorcery spell");
-        filterSpell.add(new CardTypePredicate(CardType.SORCERY));
+        filterSpell.add(CardType.SORCERY.getPredicate());
         this.addAbility(new SpellCastControllerTriggeredAbility(new SpellweaverVoluteEffect(), filterSpell, false));
     }
 
@@ -102,7 +101,7 @@ class SpellweaverVoluteEffect extends OneShotEffect {
                                 }
                                 if (controller.moveCards(enchantedCard, Zone.EXILED, source, game)) {
                                     FilterCard filter = new FilterCard("instant card in a graveyard");
-                                    filter.add(new CardTypePredicate(CardType.INSTANT));
+                                    filter.add(CardType.INSTANT.getPredicate());
                                     TargetCardInGraveyard auraTarget = new TargetCardInGraveyard(filter);
                                     if (auraTarget.canChoose(source.getSourceId(), controller.getId(), game)) {
                                         controller.choose(Outcome.Benefit, auraTarget, source.getSourceId(), game);

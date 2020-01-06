@@ -17,7 +17,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.CanBeEnchantedByPredicate;
 import mage.game.Game;
@@ -53,7 +52,7 @@ class RetetherEffect extends OneShotEffect {
     private static final FilterCard filterAura = new FilterCard("Aura card from your graveyard");
 
     static {
-        filterAura.add(new CardTypePredicate(CardType.ENCHANTMENT));
+        filterAura.add(CardType.ENCHANTMENT.getPredicate());
         filterAura.add(new SubtypePredicate(SubType.AURA));
     }
 
@@ -101,7 +100,7 @@ class RetetherEffect extends OneShotEffect {
                         }
                     }
                     if (target != null) {
-                        target.getFilter().add(new CardTypePredicate(CardType.CREATURE));
+                        target.getFilter().add(CardType.CREATURE.getPredicate());
                         target.setNotTarget(true);
                         if (target.canChoose(controller.getId(), game)) {
                             target.setTargetName("creature to enchant (" + aura.getLogName() + ')');

@@ -32,7 +32,7 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
     }
 
     public BoostTargetEffect(int power, int toughness, Duration duration) {
-        this(new StaticValue(power), new StaticValue(toughness), duration, false);
+        this(StaticValue.get(power), StaticValue.get(toughness), duration, false);
     }
 
     public BoostTargetEffect(DynamicValue power, DynamicValue toughness, Duration duration) {
@@ -69,8 +69,8 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
     public void init(Ability source, Game game) {
         super.init(source, game);
         if (lockedIn) {
-            power = new StaticValue(power.calculate(game, source, this));
-            toughness = new StaticValue(toughness.calculate(game, source, this));
+            power = StaticValue.get(power.calculate(game, source, this));
+            toughness = StaticValue.get(toughness.calculate(game, source, this));
         }
     }
 

@@ -1,9 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -12,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
@@ -21,8 +17,10 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+import java.util.stream.Collectors;
+
 /**
- *
  * @author LevelX2
  */
 public final class CloudstoneCurio extends CardImpl {
@@ -30,7 +28,7 @@ public final class CloudstoneCurio extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("a nonartifact permanent");
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
+        filter.add(Predicates.not(CardType.ARTIFACT.getPredicate()));
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
@@ -80,13 +78,14 @@ class CloudstoneCurioEffect extends OneShotEffect {
                 FilterPermanent filter = new FilterPermanent("another permanent you control that shares a permanent type with " + triggeringCreature.getName());
                 filter.add(Predicates.not(new PermanentIdPredicate(triggeringCreature.getId())));
                 filter.add(new ControllerPredicate(TargetController.YOU));
-                Set<CardTypePredicate> cardTypes = new HashSet<>();
-                for (CardType cardType : triggeringCreature.getCardType()) {
-                    if (cardType.isPermanentType()) {
-                        cardTypes.add(new CardTypePredicate(cardType));
-                    }
-                }
-                filter.add(Predicates.or(cardTypes));
+                filter.add(Predicates.or(
+                        triggeringCreature
+                                .getCardType()
+                                .stream()
+                                .filter(CardType::isPermanentType)
+                                .map(CardType::getPredicate)
+                                .collect(Collectors.toSet())
+                ));
                 TargetPermanent target = new TargetPermanent(1, 1, filter, true);
 
                 if (target.canChoose(controller.getId(), game) && controller.chooseTarget(outcome, target, source, game)) {

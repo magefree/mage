@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
@@ -32,7 +31,7 @@ public final class PolisCrusher extends CardImpl {
     private static final FilterCard filter = new FilterCard("enchantments");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
+        filter.add(CardType.ENCHANTMENT.getPredicate());
     }
 
     public PolisCrusher(UUID ownerId, CardSetInfo setInfo) {
@@ -96,7 +95,7 @@ class PolisCrusherTriggeredAbility extends TriggeredAbilityImpl {
             Player player = game.getPlayer(event.getTargetId());
             if (player != null) {
                 FilterPermanent filter = new FilterPermanent("an enchantment controlled by " + player.getLogName());
-                filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
+                filter.add(CardType.ENCHANTMENT.getPredicate());
                 filter.add(new ControllerIdPredicate(event.getTargetId()));
                 this.getTargets().clear();
                 this.addTarget(new TargetPermanent(filter));

@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -52,7 +51,7 @@ class GuardianOfTheAgesTriggerAbility extends TriggeredAbilityImpl {
     
     private static final FilterCard filter = new FilterCard("creature");
     static{
-        filter.add(Predicates.and(new CardTypePredicate(CardType.CREATURE)));
+        filter.add(Predicates.and(CardType.CREATURE.getPredicate()));
     }
     public GuardianOfTheAgesTriggerAbility(){
         super(Zone.BATTLEFIELD, new GainAbilitySourceEffect(TrampleAbility.getInstance()));

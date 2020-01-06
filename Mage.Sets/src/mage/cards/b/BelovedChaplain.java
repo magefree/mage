@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -20,7 +19,7 @@ public final class BelovedChaplain extends CardImpl {
     static final FilterCard filter = new FilterCard("creatures");
 
     static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
     }
 
     public BelovedChaplain(UUID ownerId, CardSetInfo setInfo) {

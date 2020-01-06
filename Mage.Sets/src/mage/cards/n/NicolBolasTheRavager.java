@@ -41,7 +41,7 @@ public final class NicolBolasTheRavager extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Nicol Bolas, the Ravager enters the battlefield, each opponent discards a card.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new DiscardEachPlayerEffect(new StaticValue(1), false, TargetController.OPPONENT)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DiscardEachPlayerEffect(StaticValue.get(1), false, TargetController.OPPONENT)));
 
         // {4}{U}{B}{R}: Exile Nicol Bolas, the Ravager, then return him to the battlefield transformed under his owner's control. Activate this ability only any time you could cast a sorcerry.
         this.addAbility(new TransformAbility());

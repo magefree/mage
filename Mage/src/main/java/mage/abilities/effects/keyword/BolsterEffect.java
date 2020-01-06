@@ -30,7 +30,7 @@ public class BolsterEffect extends OneShotEffect {
     private final DynamicValue amount;
 
     public BolsterEffect(int amount) {
-        this(new StaticValue(amount));
+        this(StaticValue.get(amount));
     }
 
     public BolsterEffect(DynamicValue amount) {

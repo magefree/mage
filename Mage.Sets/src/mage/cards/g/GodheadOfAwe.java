@@ -13,7 +13,6 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
@@ -26,7 +25,7 @@ public final class GodheadOfAwe extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Other creatures");
 
     static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
         filter.add(AnotherPredicate.instance);
     }
 

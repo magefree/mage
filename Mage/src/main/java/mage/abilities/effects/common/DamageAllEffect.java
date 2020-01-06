@@ -22,11 +22,11 @@ public class DamageAllEffect extends OneShotEffect {
     private String sourceName = "{source}";
 
     public DamageAllEffect(int amount, FilterPermanent filter) {
-        this(new StaticValue(amount), filter);
+        this(StaticValue.get(amount), filter);
     }
 
     public DamageAllEffect(int amount, String whoDealDamageName, FilterPermanent filter) {
-        this(new StaticValue(amount), filter);
+        this(StaticValue.get(amount), filter);
 
         this.sourceName = whoDealDamageName;
         setText(); // TODO: replace to @Override public String getText()

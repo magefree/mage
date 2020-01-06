@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.RandomUtil;
@@ -63,7 +62,7 @@ class SurrealMemoirEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             FilterCard filter = new FilterCard("instant card");
-            filter.add(new CardTypePredicate(CardType.INSTANT));
+            filter.add(CardType.INSTANT.getPredicate());
             Card[] cards = player.getGraveyard().getCards(filter, game).toArray(new Card[0]);
             if (cards.length > 0) {
                 Card card = cards[RandomUtil.nextInt(cards.length)];

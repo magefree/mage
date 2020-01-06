@@ -29,7 +29,6 @@ import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.counters.Counters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.watchers.common.AttackedOrBlockedThisCombatWatcher;
 
@@ -42,7 +41,7 @@ public final class ClockworkSteed extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("artifact creatures");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(CardType.ARTIFACT.getPredicate());
     }
 
     public ClockworkSteed(UUID ownerId, CardSetInfo setInfo) {

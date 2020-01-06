@@ -15,7 +15,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
@@ -28,7 +27,7 @@ public final class ArgothianPixies extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("artifact creatures");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(CardType.ARTIFACT.getPredicate());
     }
 
     public ArgothianPixies(UUID ownerId, CardSetInfo setInfo) {

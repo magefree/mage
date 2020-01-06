@@ -30,7 +30,7 @@ public final class WanderingGoblins extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Domain - {3}: Wandering Goblins gets +1/+0 until end of turn for each basic land type among lands you control.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(new DomainValue(), new StaticValue(0), Duration.EndOfTurn), new GenericManaCost(3)));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(new DomainValue(), StaticValue.get(0), Duration.EndOfTurn), new GenericManaCost(3)));
     }
 
     public WanderingGoblins(final WanderingGoblins card) {

@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetEnchantmentPermanent;
@@ -22,7 +21,7 @@ public final class LeaveNoTrace extends CardImpl {
     static final FilterPermanent filter = new FilterPermanent("enchantment");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
+        filter.add(CardType.ENCHANTMENT.getPredicate());
     }
 
     public LeaveNoTrace(UUID ownerId, CardSetInfo setInfo) {
@@ -48,7 +47,7 @@ class LeaveNoTraceEffect extends OneShotEffect {
     static final FilterPermanent filter = new FilterPermanent("enchantment");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
+        filter.add(CardType.ENCHANTMENT.getPredicate());
     }
 
     LeaveNoTraceEffect() {

@@ -20,7 +20,7 @@ public class BushidoAbility extends TriggeredAbilityImpl {
     private String rulesText = null;
 
     public BushidoAbility(int value) {
-        this(new StaticValue(value));
+        this(StaticValue.get(value));
         rulesText = "Bushido " + value + getReminder(Integer.toString(value));
     }
 

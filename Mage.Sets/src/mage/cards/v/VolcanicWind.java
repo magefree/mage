@@ -9,7 +9,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCreaturePermanentAmount;
 
 /**
@@ -21,7 +20,7 @@ public final class VolcanicWind extends CardImpl {
     static final private FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures");
 
     static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
     }
 
     static final private String rule = "{this} deals X damage divided as you choose among any number of target creatures, where X is the number of creatures on the battlefield as you cast {this}";

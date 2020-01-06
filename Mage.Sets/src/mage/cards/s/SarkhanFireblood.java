@@ -47,7 +47,7 @@ public final class SarkhanFireblood extends CardImpl {
         // +1: Add two mana of any combination of colors. Spend this mana only to cast Dragon spells.
         this.addAbility(new LoyaltyAbility(
                 new AddConditionalManaOfAnyColorEffect(
-                        new StaticValue(2),
+                        StaticValue.get(2),
                         new ConditionalSpellManaBuilder(filter),
                         false
                 ), 1

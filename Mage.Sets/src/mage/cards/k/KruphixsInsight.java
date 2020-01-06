@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -20,7 +19,7 @@ public final class KruphixsInsight extends CardImpl {
     private static final FilterCard filter = new FilterCard("up to three enchantment cards");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
+        filter.add(CardType.ENCHANTMENT.getPredicate());
     }
 
     public KruphixsInsight(UUID ownerId, CardSetInfo setInfo) {
@@ -28,7 +27,7 @@ public final class KruphixsInsight extends CardImpl {
 
 
         // Reveal the top six cards of your library. Put up to three enchantment cards from among them into your hand and the rest of the revealed cards into your graveyard.
-        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(new StaticValue(6), false, new StaticValue(3), filter, Zone.GRAVEYARD, false, true, true,Zone.HAND, false));
+        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(StaticValue.get(6), false, StaticValue.get(3), filter, Zone.GRAVEYARD, false, true, true,Zone.HAND, false));
     }
 
     public KruphixsInsight(final KruphixsInsight card) {

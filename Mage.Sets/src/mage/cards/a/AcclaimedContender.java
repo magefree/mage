@@ -17,7 +17,6 @@ import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -41,7 +40,7 @@ public final class AcclaimedContender extends CardImpl {
                 new SubtypePredicate(SubType.EQUIPMENT),
                 Predicates.and(
                         new SupertypePredicate(SuperType.LEGENDARY),
-                        new CardTypePredicate(CardType.ARTIFACT)
+                        CardType.ARTIFACT.getPredicate()
                 )
         ));
     }
@@ -59,7 +58,7 @@ public final class AcclaimedContender extends CardImpl {
         // When Acclaimed Contender enters the battlefield, if you control another Knight, look at the top five cards of your library. You may reveal a Knight, Aura, Equipment, or legendary artifact card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new LookLibraryAndPickControllerEffect(
-                        new StaticValue(5), false, new StaticValue(1), filter2, Zone.LIBRARY, false,
+                        StaticValue.get(5), false, StaticValue.get(1), filter2, Zone.LIBRARY, false,
                         true, false, Zone.HAND, true, false, false
                 ).setBackInRandomOrder(true)), condition, "When {this} enters the battlefield, " +
                 "if you control another Knight, look at the top five cards of your library. " +

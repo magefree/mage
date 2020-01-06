@@ -9,7 +9,6 @@ import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPlayer;
 
 /**
@@ -20,7 +19,7 @@ public final class Distress extends CardImpl {
     private static final FilterCard filter = new FilterCard("nonland card");
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
+        filter.add(Predicates.not(CardType.LAND.getPredicate()));
     }
 
     public Distress(UUID ownerId, CardSetInfo setInfo) {

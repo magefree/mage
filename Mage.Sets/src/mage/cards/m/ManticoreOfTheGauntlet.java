@@ -37,7 +37,7 @@ public final class ManticoreOfTheGauntlet extends CardImpl {
         counters.setText("put a -1/-1 counter on target creature you control");
         counters.setTargetPointer(new FirstTargetPointer());
 
-        Effect damage = new DamageTargetEffect(new StaticValue(3), true, "", true);
+        Effect damage = new DamageTargetEffect(StaticValue.get(3), true, "", true);
         damage.setText("{this} deals 3 damage to target opponent or planeswalker.");
         damage.setTargetPointer(new SecondTargetPointer());
 

@@ -14,7 +14,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -78,7 +77,7 @@ class AgadeemOccultistEffect extends OneShotEffect {
             }
         }
         FilterCard filter = new FilterCard("creature card in an opponent's graveyard");
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
         TargetCardInOpponentsGraveyard target = new TargetCardInOpponentsGraveyard(1, 1, filter);
 
         if (controller != null) {

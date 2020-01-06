@@ -40,7 +40,7 @@ public final class LostOrderOfJarkeld extends CardImpl {
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL,
                 new SetPowerToughnessSourceEffect(
-                        new AdditiveDynamicValue(new CreaturesControlledByChosenPlayer(), new StaticValue(1)), Duration.EndOfGame)
+                        new AdditiveDynamicValue(new CreaturesControlledByChosenPlayer(), StaticValue.get(1)), Duration.EndOfGame)
         ));
     }
 

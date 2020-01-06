@@ -31,7 +31,7 @@ public class ConditionalAnyColorManaAbility extends ActivatedManaAbilityImpl {
     }
 
     public ConditionalAnyColorManaAbility(Cost cost, int amount, ConditionalManaBuilder manaBuilder, boolean oneChoice) {
-        this(cost, new StaticValue(amount), manaBuilder, oneChoice);
+        this(cost, StaticValue.get(amount), manaBuilder, oneChoice);
     }
 
     public ConditionalAnyColorManaAbility(Cost cost, DynamicValue amount, ConditionalManaBuilder manaBuilder, boolean oneChoice) {

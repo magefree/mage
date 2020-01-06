@@ -16,7 +16,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.target.TargetPermanent;
 
@@ -31,7 +30,7 @@ public final class MightOfTheWild extends CardImpl {
 
     static {
         filterMode1.add(new PowerPredicate(ComparisonType.FEWER_THAN, 4));
-        filterMode2.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT), new CardTypePredicate(CardType.ENCHANTMENT)));
+        filterMode2.add(Predicates.or(CardType.ARTIFACT.getPredicate(), CardType.ENCHANTMENT.getPredicate()));
     }
 
     public MightOfTheWild(UUID ownerId, CardSetInfo setInfo) {

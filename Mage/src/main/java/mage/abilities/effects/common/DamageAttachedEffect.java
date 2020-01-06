@@ -22,7 +22,7 @@ public class DamageAttachedEffect extends OneShotEffect {
 
     public DamageAttachedEffect(int amount) {
         super(Outcome.Damage);
-        this.amount = new StaticValue(amount);
+        this.amount = StaticValue.get(amount);
     }
 
     public DamageAttachedEffect(int amount, String whoDealDamageName) {

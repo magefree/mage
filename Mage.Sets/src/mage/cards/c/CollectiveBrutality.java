@@ -18,7 +18,6 @@ import mage.filter.FilterCard;
 import mage.filter.FilterPlayer;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.other.PlayerPredicate;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
@@ -36,8 +35,8 @@ public final class CollectiveBrutality extends CardImpl {
     private static final FilterPlayer filterLoseLife = new FilterPlayer("opponent to lose life");
 
     static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.INSTANT),
-                new CardTypePredicate(CardType.SORCERY)));
+        filter.add(Predicates.or(CardType.INSTANT.getPredicate(),
+                CardType.SORCERY.getPredicate()));
         filterDiscard.add(new PlayerPredicate(TargetController.OPPONENT));
         filterLoseLife.add(new PlayerPredicate(TargetController.OPPONENT));
     }

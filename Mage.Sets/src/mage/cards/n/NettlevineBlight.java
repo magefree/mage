@@ -15,7 +15,6 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.CanBeEnchantedByPredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
@@ -33,8 +32,8 @@ public final class NettlevineBlight extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("creature or land permanent");
 
     static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE),
-                new CardTypePredicate(CardType.LAND)));
+        filter.add(Predicates.or(CardType.CREATURE.getPredicate(),
+                CardType.LAND.getPredicate()));
     }
 
     public NettlevineBlight(UUID ownerId, CardSetInfo setInfo) {
@@ -94,8 +93,8 @@ class NettlevineBlightEffect extends OneShotEffect {
             }
             if (newController != null) {
                 FilterPermanent filter = new FilterPermanent("creature or land permanent you control");
-                filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE),
-                        new CardTypePredicate(CardType.LAND)));
+                filter.add(Predicates.or(CardType.CREATURE.getPredicate(),
+                        CardType.LAND.getPredicate()));
                 filter.add(new ControllerIdPredicate(newController.getId()));
                 filter.add(new CanBeEnchantedByPredicate(nettlevineBlight));
                 Target target = new TargetPermanent(filter);

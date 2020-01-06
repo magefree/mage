@@ -15,7 +15,6 @@ import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.PowerPredicate;
 
 
@@ -28,7 +27,7 @@ public final class SpellbreakerBehemoth extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("Creature spells you control with power 5 or greater");
 
     static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
         filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 4));
     }
 

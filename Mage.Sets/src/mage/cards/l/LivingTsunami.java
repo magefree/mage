@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -26,7 +25,7 @@ public final class LivingTsunami extends CardImpl {
     static final private FilterControlledPermanent filter = new FilterControlledPermanent("a land");
     
     static {
-        filter.add(new CardTypePredicate(CardType.LAND));
+        filter.add(CardType.LAND.getPredicate());
     }
 
     public LivingTsunami(UUID ownerId, CardSetInfo setInfo) {

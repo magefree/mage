@@ -33,7 +33,7 @@ public class SoulshiftAbility extends DiesTriggeredAbility {
     private final DynamicValue amount;
 
     public SoulshiftAbility(int amount) {
-        this(new StaticValue(amount));
+        this(StaticValue.get(amount));
     }
 
     public SoulshiftAbility(DynamicValue amount) {

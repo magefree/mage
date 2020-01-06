@@ -20,7 +20,6 @@ import mage.filter.FilterSpell;
 import mage.filter.predicate.ObjectPlayer;
 import mage.filter.predicate.ObjectPlayerPredicate;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
@@ -42,8 +41,8 @@ public final class ShellOfTheLastKappa extends CardImpl {
 
     static {
         filter.add(new TargetYouPredicate());
-        filter.add(Predicates.or(new CardTypePredicate(CardType.INSTANT),
-                new CardTypePredicate(CardType.SORCERY)));
+        filter.add(Predicates.or(CardType.INSTANT.getPredicate(),
+                CardType.SORCERY.getPredicate()));
     }
 
     public ShellOfTheLastKappa(UUID ownerId, CardSetInfo setInfo) {

@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.util.CardUtil;
 
@@ -53,7 +52,7 @@ class BrineGiantCostReductionEffect extends CostModificationEffectImpl {
     static final FilterControlledPermanent filter = new FilterControlledPermanent();
 
     static {
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
+        filter.add(CardType.ENCHANTMENT.getPredicate());
     }
 
     BrineGiantCostReductionEffect() {

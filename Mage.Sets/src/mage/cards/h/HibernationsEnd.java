@@ -15,7 +15,6 @@ import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -104,7 +103,7 @@ class HibernationsEndEffect extends OneShotEffect {
             int newConvertedCost = sourcePermanent.getCounters(game).getCount("age");
             FilterCard filter = new FilterCard("creature card with converted mana cost " + newConvertedCost);
             filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, newConvertedCost));
-            filter.add(new CardTypePredicate(CardType.CREATURE));
+            filter.add(CardType.CREATURE.getPredicate());
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
             return new SearchLibraryPutInPlayEffect(target).apply(game, source);
         }

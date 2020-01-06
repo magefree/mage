@@ -33,7 +33,7 @@ public final class GoblinGaveleer extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
         // Goblin Gaveleer gets +2/+0 for each Equipment attached to it.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(new EquipmentAttachedCount(2),
-                new StaticValue(0), Duration.WhileOnBattlefield)));
+                StaticValue.get(0), Duration.WhileOnBattlefield)));
     }
 
     public GoblinGaveleer(final GoblinGaveleer card) {

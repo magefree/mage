@@ -15,7 +15,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -26,7 +25,7 @@ public final class AkiriLineSlinger extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact you control");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(CardType.ARTIFACT.getPredicate());
     }
 
     public AkiriLineSlinger(UUID ownerId, CardSetInfo setInfo) {
@@ -46,7 +45,7 @@ public final class AkiriLineSlinger extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Akiri, Line-Slinger gets +1/+0 for each artifact you control.
-        Effect effect = new BoostSourceEffect(new PermanentsOnBattlefieldCount(filter), new StaticValue(0), Duration.WhileOnBattlefield);
+        Effect effect = new BoostSourceEffect(new PermanentsOnBattlefieldCount(filter), StaticValue.get(0), Duration.WhileOnBattlefield);
         effect.setText("{this} gets +1/+0 for each artifact you control");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 

@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.permanent.token.DragonToken2;
 
 /**
@@ -27,7 +26,7 @@ public final class DragonmasterOutcast extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("land");
 
     static {
-        filter.add(new CardTypePredicate(CardType.LAND));
+        filter.add(CardType.LAND.getPredicate());
     }
 
     public DragonmasterOutcast(UUID ownerId, CardSetInfo setInfo) {

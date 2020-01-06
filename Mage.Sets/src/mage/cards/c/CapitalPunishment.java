@@ -69,7 +69,7 @@ class CapitalPunishmentDilemmaEffect extends CouncilsDilemmaVoteEffect {
 
         //Taxes Votes
         if (voteTwoCount > 0) {
-            Effect discardEffect = new DiscardEachPlayerEffect(new StaticValue(voteTwoCount), false, TargetController.OPPONENT);
+            Effect discardEffect = new DiscardEachPlayerEffect(StaticValue.get(voteTwoCount), false, TargetController.OPPONENT);
             discardEffect.apply(game, source);
         }
 

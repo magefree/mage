@@ -75,7 +75,7 @@ class BelltowerSphinxEffect extends TriggeredAbilityImpl {
                 Player player = game.getPlayer(controller);
                 if (player != null) {
                     getEffects().get(0).setTargetPointer(new FixedTarget(player.getId()));
-                    ((PutLibraryIntoGraveTargetEffect) getEffects().get(0)).setAmount(new StaticValue(event.getAmount()));
+                    ((PutLibraryIntoGraveTargetEffect) getEffects().get(0)).setAmount(StaticValue.get(event.getAmount()));
                     return true;
                 }
             }

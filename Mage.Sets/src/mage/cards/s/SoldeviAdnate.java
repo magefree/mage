@@ -15,7 +15,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetControlledPermanent;
 
@@ -28,7 +27,7 @@ public final class SoldeviAdnate extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("black or artifact creature");
 
     static {
-        filter.add(Predicates.or(new ColorPredicate(ObjectColor.BLACK), new CardTypePredicate(CardType.ARTIFACT)));
+        filter.add(Predicates.or(new ColorPredicate(ObjectColor.BLACK), CardType.ARTIFACT.getPredicate()));
     }
 
     public SoldeviAdnate(UUID ownerId, CardSetInfo setInfo) {

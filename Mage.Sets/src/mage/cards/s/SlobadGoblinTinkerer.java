@@ -19,7 +19,6 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 
@@ -32,8 +31,8 @@ public final class SlobadGoblinTinkerer extends CardImpl {
     private static final FilterControlledPermanent filterControlled = new FilterControlledPermanent("an artifact");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
-        filterControlled.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(CardType.ARTIFACT.getPredicate());
+        filterControlled.add(CardType.ARTIFACT.getPredicate());
     }
 
     public SlobadGoblinTinkerer(UUID ownerId, CardSetInfo setInfo) {

@@ -23,8 +23,8 @@ public final class BondOfFlourishing extends CardImpl {
 
         // Look at the top three card of your library. You may reveal a permanent card from among them and put it into your hand. Put the rest on the bottom of your library in any order. You gain 3 life.
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(
-                new StaticValue(3), false,
-                new StaticValue(1), filter, false
+                StaticValue.get(3), false,
+                StaticValue.get(1), filter, false
         ));
         this.getSpellAbility().addEffect(new GainLifeEffect(3).setText("You gain 3 life."));
     }

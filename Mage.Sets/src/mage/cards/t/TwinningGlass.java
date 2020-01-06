@@ -14,7 +14,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -74,7 +73,7 @@ class TwinningGlassEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         FilterCard filterCard = new FilterCard();
-        filterCard.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
+        filterCard.add(Predicates.not(CardType.LAND.getPredicate()));
         Permanent twinningGlass = game.getPermanent(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
         SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);

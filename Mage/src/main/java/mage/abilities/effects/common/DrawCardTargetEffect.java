@@ -25,11 +25,11 @@ public class DrawCardTargetEffect extends OneShotEffect {
     protected boolean upTo;
 
     public DrawCardTargetEffect(int amount) {
-        this(new StaticValue(amount));
+        this(StaticValue.get(amount));
     }
 
     public DrawCardTargetEffect(int amount, boolean optional) {
-        this(new StaticValue(amount), optional);
+        this(StaticValue.get(amount), optional);
     }
 
     public DrawCardTargetEffect(DynamicValue amount) {

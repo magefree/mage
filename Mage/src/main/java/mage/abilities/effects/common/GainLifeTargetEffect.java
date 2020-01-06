@@ -22,7 +22,7 @@ public class GainLifeTargetEffect extends OneShotEffect {
     private DynamicValue life;
 
     public GainLifeTargetEffect(int life) {
-        this(new StaticValue(life));
+        this(StaticValue.get(life));
     }
 
     public GainLifeTargetEffect(DynamicValue life) {

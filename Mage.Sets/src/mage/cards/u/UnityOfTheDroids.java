@@ -15,7 +15,6 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -28,8 +27,8 @@ public final class UnityOfTheDroids extends CardImpl {
     private static final FilterCreaturePermanent nonArtifactCreatureFilter = new FilterCreaturePermanent("nonartifact creature");
 
     static {
-        artifactCreatureFilter.add(new CardTypePredicate(CardType.ARTIFACT));
-        nonArtifactCreatureFilter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
+        artifactCreatureFilter.add(CardType.ARTIFACT.getPredicate());
+        nonArtifactCreatureFilter.add(Predicates.not(CardType.ARTIFACT.getPredicate()));
 
     }
 
@@ -42,7 +41,7 @@ public final class UnityOfTheDroids extends CardImpl {
 
         //   Look at the top four cards of your library. Put one of them into your hand and the rest into your graveyard.
         Mode mode = new Mode();
-        mode.addEffect(new LookLibraryAndPickControllerEffect(new StaticValue(4), false, new StaticValue(1), new FilterCard(), Zone.GRAVEYARD, false, false));
+        mode.addEffect(new LookLibraryAndPickControllerEffect(StaticValue.get(4), false, StaticValue.get(1), new FilterCard(), Zone.GRAVEYARD, false, false));
         this.getSpellAbility().addMode(mode);
 
         //   Destroy target nonartifact creature.

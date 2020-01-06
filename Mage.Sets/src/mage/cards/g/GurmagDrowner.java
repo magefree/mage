@@ -30,7 +30,7 @@ public final class GurmagDrowner extends CardImpl {
         this.addAbility(new ExploitAbility());
 
         // When Gurmag Drowner exploits a creature, look at the top four cards of your library. Put one of them into your hand and the rest into your graveyard.
-        this.addAbility(new ExploitCreatureTriggeredAbility(new LookLibraryAndPickControllerEffect(new StaticValue(4), false, new StaticValue(1),
+        this.addAbility(new ExploitCreatureTriggeredAbility(new LookLibraryAndPickControllerEffect(StaticValue.get(4), false, StaticValue.get(1),
                 StaticFilters.FILTER_CARD, Zone.GRAVEYARD, false, false, false, Zone.HAND, false), false));
     }
 

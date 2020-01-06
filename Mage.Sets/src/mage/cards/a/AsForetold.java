@@ -34,7 +34,7 @@ public final class AsForetold extends CardImpl {
                 new BeginningOfUpkeepTriggeredAbility(
                         new AddCountersSourceEffect(
                                 CounterType.TIME.createInstance(),
-                                new StaticValue(1),
+                                StaticValue.get(1),
                                 true),
                         TargetController.YOU,
                         false));

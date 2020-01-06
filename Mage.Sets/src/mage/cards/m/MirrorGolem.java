@@ -13,7 +13,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -121,7 +120,7 @@ class MirrorGolemEffect extends ContinuousEffectImpl {
                         } else {
                             filterCard = new FilterCard(cardType.toString() + "s");
                         }
-                        filterCard.add(new CardTypePredicate(cardType));
+                        filterCard.add(cardType.getPredicate());
                         sourceObject.addAbility(new ProtectionAbility(filterCard));
                     }
                 }

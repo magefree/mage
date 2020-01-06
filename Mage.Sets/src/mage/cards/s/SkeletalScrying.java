@@ -82,7 +82,7 @@ class SkeletalScryingEffect extends OneShotEffect {
     protected DynamicValue amount;
 
     public SkeletalScryingEffect(int amount) {
-        this(new StaticValue(amount));
+        this(StaticValue.get(amount));
     }
 
     public SkeletalScryingEffect(DynamicValue amount) {

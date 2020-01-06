@@ -35,7 +35,7 @@ public class RepairAbility extends DiesTriggeredAbility {
     private String ruleText;
 
     public RepairAbility(int count) {
-        super(new AddCountersSourceEffect(CounterType.REPAIR.createInstance(), new StaticValue(count), false, true));
+        super(new AddCountersSourceEffect(CounterType.REPAIR.createInstance(), StaticValue.get(count), false, true));
         addSubAbility(new RepairBeginningOfUpkeepInterveningIfTriggeredAbility());
         addSubAbility(new RepairCastFromGraveyardTriggeredAbility());
 

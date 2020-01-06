@@ -16,7 +16,6 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -28,7 +27,7 @@ public final class KrarkClanShaman extends CardImpl {
     private static final FilterCreaturePermanent filterTargetedCreatures = new FilterCreaturePermanent("creature without flying");
 
     static {
-        filterSacrificed.add(new CardTypePredicate(CardType.ARTIFACT));
+        filterSacrificed.add(CardType.ARTIFACT.getPredicate());
         filterTargetedCreatures.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
     }
 

@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -28,8 +27,8 @@ public final class NarsetParterOfVeils extends CardImpl {
     private static final FilterCard filter = new FilterCard("noncreature, nonland card");
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
-        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
+        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
+        filter.add(Predicates.not(CardType.LAND.getPredicate()));
     }
 
     public NarsetParterOfVeils(UUID ownerId, CardSetInfo setInfo) {
@@ -44,7 +43,7 @@ public final class NarsetParterOfVeils extends CardImpl {
 
         // -2: Look at the top four cards of your library. You may reveal a noncreature, nonland card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
         this.addAbility(new LoyaltyAbility(new LookLibraryAndPickControllerEffect(
-                new StaticValue(4), false, new StaticValue(1), filter,
+                StaticValue.get(4), false, StaticValue.get(1), filter,
                 Zone.LIBRARY, false, true, false, Zone.HAND,
                 true, false, false
         ).setBackInRandomOrder(true).setText("Look at the top four cards of your library. " +

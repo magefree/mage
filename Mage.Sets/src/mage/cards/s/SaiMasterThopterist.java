@@ -17,7 +17,6 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterControlledArtifactPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.permanent.token.ThopterColorlessToken;
 import mage.target.common.TargetControlledPermanent;
 
@@ -31,7 +30,7 @@ public final class SaiMasterThopterist extends CardImpl {
     private static final FilterControlledArtifactPermanent filter2 = new FilterControlledArtifactPermanent("artifacts");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(CardType.ARTIFACT.getPredicate());
     }
 
     public SaiMasterThopterist(UUID ownerId, CardSetInfo setInfo) {

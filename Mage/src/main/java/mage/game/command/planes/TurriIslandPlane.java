@@ -13,7 +13,6 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.RevealLibraryPutIntoHandEffect;
 import mage.abilities.effects.common.RollPlanarDieEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
-import mage.abilities.effects.common.cost.SpellsCostReductionAllEffect;
 import mage.cards.Card;
 import mage.constants.CardType;
 import mage.constants.CostModificationType;
@@ -23,7 +22,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.command.Plane;
 import mage.game.stack.Spell;
@@ -67,7 +65,7 @@ class TurriIslandEffect extends CostModificationEffectImpl {
     private static final FilterCard filter = new FilterCard("creature spells");
 
     static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
     }
 
     private static final String rule = "Creature spells cost {2} less to cast";

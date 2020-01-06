@@ -14,7 +14,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterArtifactPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -43,7 +42,7 @@ public class ModularAbility extends DiesTriggeredAbility {
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("artifact creature");
 
     static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
     }
     private int amount;
     private boolean sunburst;
@@ -136,7 +135,7 @@ class ModularDistributeCounterEffect extends OneShotEffect {
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("artifact creature");
 
     static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
     }
 
     public ModularDistributeCounterEffect() {

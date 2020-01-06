@@ -12,7 +12,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -30,7 +29,7 @@ public final class ChandrasDefeat extends CardImpl {
 
     static {
         filter.add(new ColorPredicate(ObjectColor.RED));
-        filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE), new CardTypePredicate(CardType.PLANESWALKER)));
+        filter.add(Predicates.or(CardType.CREATURE.getPredicate(), CardType.PLANESWALKER.getPredicate()));
     }
 
     public ChandrasDefeat(UUID ownerId, CardSetInfo setInfo) {
@@ -56,7 +55,7 @@ class ChandrasDefeatEffect extends OneShotEffect {
     private static final FilterPermanent filter = new FilterPermanent();
 
     static {
-        filter.add(new CardTypePredicate(CardType.PLANESWALKER));
+        filter.add(CardType.PLANESWALKER.getPredicate());
         filter.add(new SubtypePredicate(SubType.CHANDRA));
     }
 

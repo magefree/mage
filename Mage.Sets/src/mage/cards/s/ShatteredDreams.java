@@ -7,7 +7,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -18,7 +17,7 @@ public final class ShatteredDreams extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("an artifact card from it");
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(CardType.ARTIFACT.getPredicate());
     }
     
     public ShatteredDreams(UUID ownerId, CardSetInfo setInfo) {

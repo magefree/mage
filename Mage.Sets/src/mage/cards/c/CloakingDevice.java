@@ -72,7 +72,7 @@ class CloakingDeviceLoseLifeDefendingPlayerEffect extends OneShotEffect {
      * attacker false if attacker has to be taken from targetPointer
      */
     public CloakingDeviceLoseLifeDefendingPlayerEffect(int amount, boolean attackerIsSource) {
-        this(new StaticValue(amount), attackerIsSource);
+        this(StaticValue.get(amount), attackerIsSource);
     }
 
     public CloakingDeviceLoseLifeDefendingPlayerEffect(DynamicValue amount, boolean attackerIsSource) {

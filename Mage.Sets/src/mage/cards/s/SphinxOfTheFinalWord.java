@@ -16,7 +16,6 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -27,8 +26,8 @@ public final class SphinxOfTheFinalWord extends CardImpl {
     private static final FilterSpell filterTarget = new FilterSpell("Instant and sorcery spells you control");
 
     static {
-        filterTarget.add(Predicates.or(new CardTypePredicate(CardType.INSTANT),
-                (new CardTypePredicate(CardType.SORCERY))));
+        filterTarget.add(Predicates.or(CardType.INSTANT.getPredicate(),
+                (CardType.SORCERY.getPredicate())));
     }
     
     public SphinxOfTheFinalWord(UUID ownerId, CardSetInfo setInfo) {

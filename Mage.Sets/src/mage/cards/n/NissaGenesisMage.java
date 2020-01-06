@@ -19,7 +19,6 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetLandPermanent;
 
@@ -33,8 +32,8 @@ public final class NissaGenesisMage extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.CREATURE),
-                new CardTypePredicate(CardType.LAND)
+                CardType.CREATURE.getPredicate(),
+                CardType.LAND.getPredicate()
         ));
     }
 
@@ -58,7 +57,7 @@ public final class NissaGenesisMage extends CardImpl {
 
         //-10: Look at the top ten cards of your library. You may put any number of creature and/or land cards from among them onto the battlefield. Put the rest on the bottom of your library in a random order.);
         this.addAbility(new LoyaltyAbility(
-                new LookLibraryAndPickControllerEffect(new StaticValue(10), false, new StaticValue(10), filter,
+                new LookLibraryAndPickControllerEffect(StaticValue.get(10), false, StaticValue.get(10), filter,
                         Zone.LIBRARY, true, false, true, Zone.BATTLEFIELD, true, true, false).setBackInRandomOrder(true),
                 -10));
     }

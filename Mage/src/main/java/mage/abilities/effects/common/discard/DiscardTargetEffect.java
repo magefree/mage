@@ -32,7 +32,7 @@ public class DiscardTargetEffect extends OneShotEffect {
     }
 
     public DiscardTargetEffect(int amount) {
-        this(new StaticValue(amount));
+        this(StaticValue.get(amount));
     }
 
     /**
@@ -44,7 +44,7 @@ public class DiscardTargetEffect extends OneShotEffect {
     public DiscardTargetEffect(int amount, boolean randomDiscard) {
         super(Outcome.Discard);
         this.randomDiscard = randomDiscard;
-        this.amount = new StaticValue(amount);
+        this.amount = StaticValue.get(amount);
     }
 
     public DiscardTargetEffect(final DiscardTargetEffect effect) {

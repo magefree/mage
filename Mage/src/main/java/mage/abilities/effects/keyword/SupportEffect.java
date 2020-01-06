@@ -20,8 +20,8 @@ public class SupportEffect extends AddCountersTargetEffect {
     private final boolean otherPermanent;
 
     public SupportEffect(Card card, int amount, boolean otherPermanent) {
-        super(CounterType.P1P1.createInstance(0), new StaticValue(1));
-        this.amountSupportTargets = new StaticValue(amount);
+        super(CounterType.P1P1.createInstance(0), StaticValue.get(1));
+        this.amountSupportTargets = StaticValue.get(amount);
         this.otherPermanent = otherPermanent;
         if (card.isInstant() || card.isSorcery()) {
             card.getSpellAbility().addTarget(new TargetCreaturePermanent(0, amount, new FilterCreaturePermanent("target creatures"), false));

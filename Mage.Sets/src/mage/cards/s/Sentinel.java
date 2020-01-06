@@ -81,7 +81,7 @@ class SentinelEffect extends OneShotEffect {
         Permanent targetPermanent = game.getPermanentOrLKIBattlefield(targetPointer.getFirst(game, source));
         if (controller != null && targetPermanent != null) {
             int newToughness = CardUtil.addWithOverflowCheck(targetPermanent.getPower().getValue(), 1);
-            game.addEffect(new SetToughnessSourceEffect(new StaticValue(newToughness), Duration.Custom, SubLayer.SetPT_7b), source);
+            game.addEffect(new SetToughnessSourceEffect(StaticValue.get(newToughness), Duration.Custom, SubLayer.SetPT_7b), source);
             return true;
         }
         return false;

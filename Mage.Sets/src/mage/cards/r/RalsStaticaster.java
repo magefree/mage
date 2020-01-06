@@ -16,7 +16,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
@@ -30,7 +29,7 @@ public final class RalsStaticaster extends CardImpl {
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(new CardTypePredicate(CardType.PLANESWALKER));
+        filter.add(CardType.PLANESWALKER.getPredicate());
         filter.add(new SubtypePredicate(SubType.RAL));
     }
 
@@ -48,7 +47,7 @@ public final class RalsStaticaster extends CardImpl {
         // Whenever Ral's Staticaster attacks, if you control a Ral planeswalker, Ral's Staticaster gets +1/+0 for each card in your hand until end of turn.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new AttacksTriggeredAbility(new BoostSourceEffect(
-                        CardsInControllerHandCount.instance, new StaticValue(0),
+                        CardsInControllerHandCount.instance, StaticValue.get(0),
                         Duration.EndOfTurn, true), false),
                 new PermanentsOnTheBattlefieldCondition(filter),
                 "Whenever {this} attacks, if you control a Ral planeswalker, "

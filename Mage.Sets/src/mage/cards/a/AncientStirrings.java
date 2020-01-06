@@ -29,7 +29,7 @@ public final class AncientStirrings extends CardImpl {
 
         // Look at the top five cards of your library. You may reveal a colorless card from among them and put it into your hand. 
         // Then put the rest on the bottom of your library in any order. (Cards with no colored mana in their mana costs are colorless. Lands are also colorless.)
-        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(new StaticValue(5), false, new StaticValue(1), filter, Zone.LIBRARY, 
+        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(StaticValue.get(5), false, StaticValue.get(1), filter, Zone.LIBRARY,
                 false, true, false, Zone.HAND, true));
         
     }

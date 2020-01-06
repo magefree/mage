@@ -29,7 +29,7 @@ public final class FesteringMarch extends CardImpl {
         // Exile Festering March
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
         // with three time counters on it.
-        Effect effect = new AddCountersSourceEffect(CounterType.TIME.createInstance(), new StaticValue(3), false, true);
+        Effect effect = new AddCountersSourceEffect(CounterType.TIME.createInstance(), StaticValue.get(3), false, true);
         effect.setText("with 3 time counters on it");
         this.getSpellAbility().addEffect(effect);
 

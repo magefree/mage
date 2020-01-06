@@ -9,7 +9,6 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -20,7 +19,7 @@ public final class LairDelve extends CardImpl {
     private static final FilterCard filter = new FilterCard("all creature and land cards");
 
     static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.LAND), new CardTypePredicate(CardType.CREATURE)));
+        filter.add(Predicates.or(CardType.LAND.getPredicate(), CardType.CREATURE.getPredicate()));
 
     }
 

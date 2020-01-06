@@ -34,7 +34,7 @@ public final class GlaiveOfTheGuildpact extends CardImpl {
                 Zone.BATTLEFIELD,
                 new BoostEquippedEffect(
                         GateYouControlCount.instance,
-                        new StaticValue(0)
+                        StaticValue.get(0)
                 )
         );
         ability.addEffect(new GainAbilityAttachedEffect(

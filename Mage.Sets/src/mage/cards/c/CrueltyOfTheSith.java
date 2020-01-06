@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPlayer;
 import mage.target.TargetSpell;
 
@@ -26,7 +25,7 @@ public final class CrueltyOfTheSith extends CardImpl {
     private static final FilterSpell filterNoncreature = new FilterSpell("noncreature spell");
 
     static {
-        filterNoncreature.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+        filterNoncreature.add(Predicates.not(CardType.CREATURE.getPredicate()));
     }
 
     public CrueltyOfTheSith(UUID ownerId, CardSetInfo setInfo) {

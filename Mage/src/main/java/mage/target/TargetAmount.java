@@ -22,7 +22,7 @@ public abstract class TargetAmount extends TargetImpl {
     int remainingAmount;
 
     public TargetAmount(int amount) {
-        this(new StaticValue(amount));
+        this(StaticValue.get(amount));
     }
 
     public TargetAmount(DynamicValue amount) {

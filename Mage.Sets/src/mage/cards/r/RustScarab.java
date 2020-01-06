@@ -13,7 +13,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -74,7 +73,7 @@ class BecomesBlockedTriggeredAbility extends TriggeredAbilityImpl {
             if (defenderId != null) {
                 this.getTargets().clear();
                 FilterPermanent filter = new FilterPermanent("artifact or enchantment defending player controls");
-                filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT), new CardTypePredicate(CardType.ENCHANTMENT)));
+                filter.add(Predicates.or(CardType.ARTIFACT.getPredicate(), CardType.ENCHANTMENT.getPredicate()));
                 filter.add(new ControllerIdPredicate(defenderId));
                 Target target = new TargetPermanent(filter);
                 this.addTarget(target);

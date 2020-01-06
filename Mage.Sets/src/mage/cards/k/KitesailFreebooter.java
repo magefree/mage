@@ -21,7 +21,6 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -92,7 +91,7 @@ class KitesailFreebooterExileEffect extends OneShotEffect {
                 opponent.revealCards(sourcePermanent.getIdName(), opponent.getHand(), game);
 
                 FilterCard filter = new FilterNonlandCard("noncreature, nonland card to exile");
-                filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+                filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
                 TargetCard target = new TargetCard(Zone.HAND, filter);
                 if (opponent.getHand().count(filter, game) > 0 && controller.choose(Outcome.Exile, opponent.getHand(), target, game)) {
                     Card card = opponent.getHand().get(target.getFirstTarget(), game);

@@ -15,7 +15,6 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -72,7 +71,7 @@ class DesecrationDemonEffect extends OneShotEffect {
                 Player opponent = game.getPlayer(opponentId);
                 if (opponent != null) {
                     FilterControlledPermanent filter = new FilterControlledPermanent("creature to sacrifice");
-                    filter.add(new CardTypePredicate(CardType.CREATURE));
+                    filter.add(CardType.CREATURE.getPredicate());
                     filter.add(new ControllerPredicate(TargetController.YOU));
                     TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, false);
                     if (target.canChoose(opponent.getId(), game)) {
