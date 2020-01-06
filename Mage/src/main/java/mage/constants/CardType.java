@@ -1,10 +1,13 @@
 package mage.constants;
 
+import mage.MageObject;
+import mage.filter.predicate.Predicate;
+import mage.game.Game;
+
 import java.util.Arrays;
 import java.util.EnumSet;
 
 /**
- *
  * @author North
  */
 public enum CardType {
@@ -20,10 +23,12 @@ public enum CardType {
 
     private final String text;
     private final boolean permanentType;
+    private final CardTypePredicate predicate;
 
     CardType(String text, boolean permanentType) {
         this.text = text;
         this.permanentType = permanentType;
+        this.predicate = new CardTypePredicate(this);
     }
 
     @Override
@@ -60,4 +65,26 @@ public enum CardType {
         return cardTypes.toArray(new CardType[0]);
     }
 
+    public CardTypePredicate getPredicate() {
+        return this.predicate;
+    }
+
+    public static class CardTypePredicate implements Predicate<MageObject> {
+
+        private final CardType cardType;
+
+        private CardTypePredicate(CardType cardType) {
+            this.cardType = cardType;
+        }
+
+        @Override
+        public boolean apply(MageObject input, Game game) {
+            return input.getCardType().contains(cardType);
+        }
+
+        @Override
+        public String toString() {
+            return "CardType(" + cardType.toString() + ')';
+        }
+    }
 }
