@@ -87,8 +87,8 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
 
     public LookLibraryAndPickControllerEffect(int numberOfCards,
                                               int numberToPick, FilterCard pickFilter, boolean upTo) {
-        this(new StaticValue(numberOfCards), false,
-                new StaticValue(numberToPick), pickFilter, Zone.LIBRARY, false,
+        this(StaticValue.get(numberOfCards), false,
+                StaticValue.get(numberToPick), pickFilter, Zone.LIBRARY, false,
                 true, upTo);
     }
 
@@ -104,8 +104,8 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
     public LookLibraryAndPickControllerEffect(int numberOfCards,
                                               int numberToPick, FilterCard pickFilter, boolean reveal,
                                               boolean upTo, Zone targetZonePickedCards, boolean optional) {
-        this(new StaticValue(numberOfCards), false,
-                new StaticValue(numberToPick), pickFilter, Zone.LIBRARY, false,
+        this(StaticValue.get(numberOfCards), false,
+                StaticValue.get(numberToPick), pickFilter, Zone.LIBRARY, false,
                 reveal, upTo, targetZonePickedCards, optional, true, true);
 
     }

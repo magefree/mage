@@ -48,7 +48,7 @@ public final class StoneforgeAcolyte extends CardImpl {
         // <i>Cohort</i> &mdash; {T}, Tap an untapped Ally you control: Look at the top four cards of your library.
         // You may reveal an Equipment card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new LookLibraryAndPickControllerEffect(new StaticValue(4), false, new StaticValue(1), filterEquipment, false),
+                new LookLibraryAndPickControllerEffect(StaticValue.get(4), false, StaticValue.get(1), filterEquipment, false),
                 new TapSourceCost());
         ability.addCost(new TapTargetCost(new TargetControlledPermanent(filterAlly)));
         ability.setAbilityWord(AbilityWord.COHORT);

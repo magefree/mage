@@ -80,7 +80,7 @@ class ExplosionEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int xValue = source.getManaCostsToPay().getX();
-        Effect effect = new DamageTargetEffect(new StaticValue(xValue), true, "", true);
+        Effect effect = new DamageTargetEffect(StaticValue.get(xValue), true, "", true);
         effect.setTargetPointer(new FixedTarget(source.getFirstTarget(), game));
         effect.apply(game, source);
         Player player = game.getPlayer(source.getTargets().get(1).getFirstTarget());

@@ -40,7 +40,7 @@ public class BoostAllEffect extends ContinuousEffectImpl {
     }
 
     public BoostAllEffect(int power, int toughness, Duration duration, FilterCreaturePermanent filter, boolean excludeSource) {
-        this(new StaticValue(power), new StaticValue(toughness), duration, filter, excludeSource);
+        this(StaticValue.get(power), StaticValue.get(toughness), duration, filter, excludeSource);
     }
 
     public BoostAllEffect(DynamicValue power, DynamicValue toughness, Duration duration, FilterCreaturePermanent filter, boolean excludeSource) {
@@ -92,8 +92,8 @@ public class BoostAllEffect extends ContinuousEffectImpl {
             }
         }
         if (lockedInPT) {
-            power = new StaticValue(power.calculate(game, source, this));
-            toughness = new StaticValue(toughness.calculate(game, source, this));
+            power = StaticValue.get(power.calculate(game, source, this));
+            toughness = StaticValue.get(toughness.calculate(game, source, this));
         }
     }
 

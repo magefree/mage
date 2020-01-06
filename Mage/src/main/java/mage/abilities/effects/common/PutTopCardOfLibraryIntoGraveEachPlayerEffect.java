@@ -23,7 +23,7 @@ public class PutTopCardOfLibraryIntoGraveEachPlayerEffect extends OneShotEffect 
     private final TargetController targetController;
 
     public PutTopCardOfLibraryIntoGraveEachPlayerEffect(int numberCards, TargetController targetController) {
-        this(new StaticValue(numberCards), targetController);
+        this(StaticValue.get(numberCards), targetController);
     }
 
     public PutTopCardOfLibraryIntoGraveEachPlayerEffect(DynamicValue numberCards, TargetController targetController) {

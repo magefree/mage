@@ -36,7 +36,7 @@ public final class CourtHussar extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
         // When Court Hussar enters the battlefield, look at the top three cards of your library, then put one of them into your hand and the rest on the bottom of your library in any order.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new LookLibraryAndPickControllerEffect(new StaticValue(3), false, new StaticValue(1), new FilterCard(), Zone.LIBRARY, false, false),
+                new LookLibraryAndPickControllerEffect(StaticValue.get(3), false, StaticValue.get(1), new FilterCard(), Zone.LIBRARY, false, false),
                 false));
         // When Court Hussar enters the battlefield, sacrifice it unless {W} was spent to cast it.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessConditionEffect(new ManaWasSpentCondition(ColoredManaSymbol.W)), false), new ManaSpentToCastWatcher());

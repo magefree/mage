@@ -29,7 +29,7 @@ public final class DemonsHorn extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
         
         // Whenever a player casts a black spell, you may gain 1 life.
-        this.addAbility(new SpellCastAllTriggeredAbility(new GainLifeEffect(new StaticValue(1), "you may gain 1 life"), filter, true));
+        this.addAbility(new SpellCastAllTriggeredAbility(new GainLifeEffect(StaticValue.get(1), "you may gain 1 life"), filter, true));
     }
 
     public DemonsHorn(final DemonsHorn card) {

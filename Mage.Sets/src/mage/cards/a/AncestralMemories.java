@@ -26,7 +26,7 @@ public final class AncestralMemories extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}{U}{U}");
 
         // Look at the top seven cards of your library. Put two of them into your hand and the rest into your graveyard.
-        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(new StaticValue(7), false, new StaticValue(2),
+        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(StaticValue.get(7), false, StaticValue.get(2),
                 StaticFilters.FILTER_CARD, Zone.GRAVEYARD, false, false, false, Zone.HAND, false));
     }
 

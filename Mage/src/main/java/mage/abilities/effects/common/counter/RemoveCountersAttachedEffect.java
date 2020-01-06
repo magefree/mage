@@ -24,7 +24,7 @@ public class RemoveCountersAttachedEffect extends OneShotEffect {
     private String textEnchanted;
 
     public RemoveCountersAttachedEffect(Counter counter, String textEnchanted) {
-        this(counter, new StaticValue(0), textEnchanted);
+        this(counter, StaticValue.get(0), textEnchanted);
     }
 
     /**

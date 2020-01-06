@@ -115,7 +115,7 @@ class DispersalEffect extends OneShotEffect {
         filter.add(Predicates.or(permsToReturn));
         new ReturnToHandFromBattlefieldAllEffect(filter).apply(game, source);
         new DiscardEachPlayerEffect(
-                new StaticValue(1), false, TargetController.OPPONENT
+                StaticValue.get(1), false, TargetController.OPPONENT
         ).apply(game, source);
         return true;
     }

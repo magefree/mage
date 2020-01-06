@@ -62,7 +62,7 @@ public final class KyloRen extends CardImpl {
 
         // Whenever Kylo Ren attacks, it gets +1/+0 for each creature in your graveyard and you may tap target creature defending player controls.
         CardsInControllerGraveyardCount value = new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_CREATURE);
-        Effect effect = new BoostSourceEffect(value, new StaticValue(0), Duration.WhileOnBattlefield);
+        Effect effect = new BoostSourceEffect(value, StaticValue.get(0), Duration.WhileOnBattlefield);
         effect.setText("it gets +1/+0 for each creature in your graveyard");
         Ability ability = new AttacksTriggeredAbility(effect, false);
         ability.addEffect(new KyloRenTapTargetEffect());

@@ -32,11 +32,11 @@ public class CreateTokenEffect extends OneShotEffect {
     private ArrayList<UUID> lastAddedTokenIds = new ArrayList<>();
 
     public CreateTokenEffect(Token token) {
-        this(token, new StaticValue(1));
+        this(token, StaticValue.get(1));
     }
 
     public CreateTokenEffect(Token token, int amount) {
-        this(token, new StaticValue(amount));
+        this(token, StaticValue.get(amount));
     }
 
     public CreateTokenEffect(Token token, DynamicValue amount) {
@@ -44,7 +44,7 @@ public class CreateTokenEffect extends OneShotEffect {
     }
 
     public CreateTokenEffect(Token token, int amount, boolean tapped, boolean attacking) {
-        this(token, new StaticValue(amount), tapped, attacking);
+        this(token, StaticValue.get(amount), tapped, attacking);
     }
 
     public CreateTokenEffect(Token token, DynamicValue amount, boolean tapped, boolean attacking) {

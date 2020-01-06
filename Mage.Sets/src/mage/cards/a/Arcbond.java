@@ -139,7 +139,7 @@ class ArcbondEffect extends OneShotEffect {
             }
             FilterPermanent filter = new FilterCreaturePermanent("each other creature");
             filter.add(Predicates.not(new PermanentIdPredicate(sourceId)));
-            return new DamageEverythingEffect(new StaticValue(damage), filter, sourceId).apply(game, source);
+            return new DamageEverythingEffect(StaticValue.get(damage), filter, sourceId).apply(game, source);
         }
         return false;
     }

@@ -29,7 +29,7 @@ public class TargetAnyTargetAmount extends TargetPermanentOrPlayerAmount {
         // any positive number or zero, unless something (such as damage or counters) is being divided
         // or distributed among “any number” of players and/or objects. In that case, a nonzero number
         // of players and/or objects must be chosen if possible.
-        this(new StaticValue(amount), maxNumberOfTargets);
+        this(StaticValue.get(amount), maxNumberOfTargets);
         this.minNumberOfTargets = 1;
     }
 

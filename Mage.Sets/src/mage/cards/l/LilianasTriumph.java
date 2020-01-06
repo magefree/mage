@@ -34,7 +34,7 @@ public final class LilianasTriumph extends CardImpl {
         ));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DiscardEachPlayerEffect(
-                        new StaticValue(1), false, TargetController.OPPONENT
+                        StaticValue.get(1), false, TargetController.OPPONENT
                 ), condition, "If you control a Liliana planeswalker, each opponent also discards a card."
         ));
     }

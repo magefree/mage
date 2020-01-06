@@ -26,7 +26,7 @@ public class SacrificeEffect extends OneShotEffect {
     private DynamicValue count;
 
     public SacrificeEffect(FilterPermanent filter, int count, String preText) {
-        this(filter, new StaticValue(count), preText);
+        this(filter, StaticValue.get(count), preText);
     }
 
     public SacrificeEffect(FilterPermanent filter, DynamicValue count, String preText) {

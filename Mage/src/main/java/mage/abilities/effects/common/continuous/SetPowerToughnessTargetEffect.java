@@ -31,7 +31,7 @@ public class SetPowerToughnessTargetEffect extends ContinuousEffectImpl {
     }
 
     public SetPowerToughnessTargetEffect(int power, int toughness, Duration duration) {
-        this(new StaticValue(power), new StaticValue(toughness), duration);
+        this(StaticValue.get(power), StaticValue.get(toughness), duration);
     }
 
     public SetPowerToughnessTargetEffect(final SetPowerToughnessTargetEffect effect) {

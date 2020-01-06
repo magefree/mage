@@ -20,7 +20,7 @@ public final class TaigamsScheming extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}");
 
         // Look at the top five cards of your library. Put any number of them into your graveyard and the rest back on top of your library in any order
-        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(new StaticValue(5), false, new StaticValue(5),
+        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(StaticValue.get(5), false, StaticValue.get(5),
                 new FilterCard("cards"), Zone.LIBRARY, true, false, true, Zone.GRAVEYARD, false));
     }
 

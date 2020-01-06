@@ -20,7 +20,7 @@ public final class BitterRevelation extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}");
 
         // Look at the top four cards of your library. Put two of them into your hand and the rest into your graveyard. You lose 2 life.
-        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(new StaticValue(4), false, new StaticValue(2),
+        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(StaticValue.get(4), false, StaticValue.get(2),
                 StaticFilters.FILTER_CARD, Zone.GRAVEYARD, false, false, false, Zone.HAND, false));
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(2));
     }

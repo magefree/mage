@@ -138,7 +138,7 @@ class LodestoneBaubleDrawEffect extends OneShotEffect {
         UUID targetId = this.getTargetPointer().getFirst(game, source);
         Player targetPlayer = game.getPlayer(targetId);
         if (targetPlayer != null) {
-            Effect effect = new DrawCardTargetEffect(new StaticValue(1), false);
+            Effect effect = new DrawCardTargetEffect(StaticValue.get(1), false);
             effect.setTargetPointer(new FixedTarget(targetPlayer.getId()));
             DelayedTriggeredAbility ability = new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(effect);
             game.addDelayedTriggeredAbility(ability, source);

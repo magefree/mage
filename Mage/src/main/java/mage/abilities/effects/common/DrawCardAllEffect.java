@@ -30,7 +30,7 @@ public class DrawCardAllEffect extends OneShotEffect {
     }
 
     public DrawCardAllEffect(int amount, TargetController targetController) {
-        this(new StaticValue(amount), targetController);
+        this(StaticValue.get(amount), targetController);
     }
 
     public DrawCardAllEffect(DynamicValue amount, TargetController targetController) {

@@ -44,7 +44,7 @@ public final class VileManifestation extends CardImpl {
 
         // Vile Manifestation gets +1/+0 for each card with cycling in your graveyard.
         DynamicValue amount = new CardsInControllerGraveyardCount(new FilterCard(filter));
-        Effect effect = new BoostSourceEffect(amount, new StaticValue(0), Duration.WhileOnBattlefield);
+        Effect effect = new BoostSourceEffect(amount, StaticValue.get(0), Duration.WhileOnBattlefield);
         effect.setText("Vile Manifestation gets +1/+0 for each card with cycling in your graveyard.");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
         this.addAbility(ability);

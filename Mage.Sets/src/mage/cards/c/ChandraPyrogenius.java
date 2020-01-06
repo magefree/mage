@@ -34,7 +34,7 @@ public final class ChandraPyrogenius extends CardImpl {
         this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
 
         // +2: Chandra, Pyrogenius deals 2 damage to each opponent.
-        this.addAbility(new LoyaltyAbility(new DamagePlayersEffect(Outcome.Damage, new StaticValue(2), TargetController.OPPONENT), 2));
+        this.addAbility(new LoyaltyAbility(new DamagePlayersEffect(Outcome.Damage, StaticValue.get(2), TargetController.OPPONENT), 2));
 
         // -3: Chandra, Pyrogenius deals 4 damage to target creature.
         LoyaltyAbility ability = new LoyaltyAbility(new DamageTargetEffect(4), -3);

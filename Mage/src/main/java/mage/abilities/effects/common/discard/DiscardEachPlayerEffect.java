@@ -27,15 +27,15 @@ public class DiscardEachPlayerEffect extends OneShotEffect {
     private TargetController targetController;
 
     public DiscardEachPlayerEffect() {
-        this(new StaticValue(1), false);
+        this(StaticValue.get(1), false);
     }
 
     public DiscardEachPlayerEffect(TargetController targetController) {
-        this(new StaticValue(1), false, targetController);
+        this(StaticValue.get(1), false, targetController);
     }
 
     public DiscardEachPlayerEffect(int amount, boolean randomDiscard) {
-        this(new StaticValue(amount), randomDiscard);
+        this(StaticValue.get(amount), randomDiscard);
     }
 
     public DiscardEachPlayerEffect(DynamicValue amount, boolean randomDiscard) {

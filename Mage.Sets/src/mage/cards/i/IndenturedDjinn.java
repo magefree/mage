@@ -71,7 +71,7 @@ class IndenturedDjinnEffect extends OneShotEffect {
             for (UUID playerId : game.getOpponents(source.getControllerId())) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    Effect effect = new DrawCardTargetEffect(new StaticValue(3), false, true);
+                    Effect effect = new DrawCardTargetEffect(StaticValue.get(3), false, true);
                     effect.setTargetPointer(new FixedTarget(playerId));
                     effect.setText(player.getLogName() + " may draw up to three cards");
                     effect.apply(game, source);

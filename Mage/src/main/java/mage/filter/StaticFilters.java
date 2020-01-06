@@ -50,6 +50,13 @@ public final class StaticFilters {
         FILTER_CARD.setLockedFilter(true);
     }
 
+
+    public static final FilterCard FILTER_CARD_A = new FilterCard("a card");
+
+    static {
+        FILTER_CARD_A.setLockedFilter(true);
+    }
+
     public static final FilterCard FILTER_CARD_CARDS = new FilterCard("cards");
 
     static {

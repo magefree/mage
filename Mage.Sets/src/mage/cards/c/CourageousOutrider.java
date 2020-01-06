@@ -34,7 +34,7 @@ public final class CourageousOutrider extends CardImpl {
 
         // When Courageous Outrider enters the battlefield, look at the top four cards of your library. You may reveal a Human card from among them
         // and put it into your hand. Put the rest on the bottom of your library in any order.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new LookLibraryAndPickControllerEffect(new StaticValue(4), false, new StaticValue(1), filter, false) , false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new LookLibraryAndPickControllerEffect(StaticValue.get(4), false, StaticValue.get(1), filter, false) , false));
     }
 
     public CourageousOutrider(final CourageousOutrider card) {

@@ -21,7 +21,7 @@ public final class CommuneWithNature extends CardImpl {
         // Look at the top five cards of your library. You may reveal a creature card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
         this.getSpellAbility().addEffect(
                 new LookLibraryAndPickControllerEffect(
-                        new StaticValue(5), false, new StaticValue(1), new FilterCreatureCard("a creature card"), false
+                        StaticValue.get(5), false, StaticValue.get(1), new FilterCreatureCard("a creature card"), false
                 )
         );
     }

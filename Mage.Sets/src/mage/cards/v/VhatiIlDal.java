@@ -71,9 +71,9 @@ class VhatiIlDalEffect extends OneShotEffect {
             DynamicValue power = null;
             DynamicValue toughness = null;
             if (controller.chooseUse(outcome, "Set power? (otherwise toughness is set)", source, game)) {
-                power = new StaticValue(1);
+                power = StaticValue.get(1);
             } else {
-                toughness = new StaticValue(1);
+                toughness = StaticValue.get(1);
             }
             ContinuousEffect effect = new SetPowerToughnessTargetEffect(power, toughness, Duration.EndOfTurn);
             game.addEffect(effect, source);

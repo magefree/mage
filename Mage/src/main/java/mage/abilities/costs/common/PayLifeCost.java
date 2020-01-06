@@ -18,7 +18,7 @@ public class PayLifeCost extends CostImpl {
     private final DynamicValue amount;
 
     public PayLifeCost(int amount) {
-        this.amount = new StaticValue(amount);
+        this.amount = StaticValue.get(amount);
         this.text = "Pay " + Integer.toString(amount) + " life";
     }
 

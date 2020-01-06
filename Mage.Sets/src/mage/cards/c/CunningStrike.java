@@ -23,9 +23,9 @@ public final class CunningStrike extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{U}{R}");
 
         // Cunning Strike deals 2 damage to target creature and 2 damage to target player.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(new StaticValue(2), true, "", true));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(StaticValue.get(2), true, "", true));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        Effect effect = new DamageTargetEffect(new StaticValue(2), true, "", true);
+        Effect effect = new DamageTargetEffect(StaticValue.get(2), true, "", true);
         effect.setTargetPointer(new SecondTargetPointer());
         effect.setText("and 2 damage to target player");
         this.getSpellAbility().addEffect(effect);

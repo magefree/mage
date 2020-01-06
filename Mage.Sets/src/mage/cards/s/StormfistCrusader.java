@@ -35,7 +35,7 @@ public final class StormfistCrusader extends CardImpl {
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
                 new DrawCardAllEffect(1), TargetController.YOU, false
         );
-        ability.addEffect(new LoseLifeAllPlayersEffect(new StaticValue(1), "and loses 1 life"));
+        ability.addEffect(new LoseLifeAllPlayersEffect(StaticValue.get(1), "and loses 1 life"));
         this.addAbility(ability);
     }
 

@@ -33,7 +33,7 @@ public class SetPlayerLifeAllEffect extends OneShotEffect {
     }
 
     public SetPlayerLifeAllEffect(int amount, TargetController targetController) {
-        this(new StaticValue(amount), targetController);
+        this(StaticValue.get(amount), targetController);
     }
 
     public SetPlayerLifeAllEffect(DynamicValue amount, TargetController targetController) {

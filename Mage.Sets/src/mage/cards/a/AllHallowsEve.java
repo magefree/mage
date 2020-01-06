@@ -31,7 +31,7 @@ public final class AllHallowsEve extends CardImpl {
 
         // Exile All Hallow's Eve with two scream counters on it.
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
-        Effect effect = new AddCountersSourceEffect(CounterType.SCREAM.createInstance(), new StaticValue(2), true, true);
+        Effect effect = new AddCountersSourceEffect(CounterType.SCREAM.createInstance(), StaticValue.get(2), true, true);
         effect.setText("with 2 scream counters on it");
         this.getSpellAbility().addEffect(effect);
 

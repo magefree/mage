@@ -38,7 +38,7 @@ public final class CranialPlating extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +1/+0 for each artifact you control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(new PermanentsOnBattlefieldCount(filterCounted), new StaticValue(0))));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(new PermanentsOnBattlefieldCount(filterCounted), StaticValue.get(0))));
         // {B}{B}: Attach Cranial Plating to target creature you control.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AttachEffect(Outcome.BoostCreature, "Attach {this} to target creature you control"), new ManaCostsImpl("{B}{B}"));
         ability.addTarget(new TargetControlledCreaturePermanent());

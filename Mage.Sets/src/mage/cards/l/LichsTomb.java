@@ -67,7 +67,7 @@ class LichsTombTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getPlayerId().equals(this.getControllerId())) {
-            ((SacrificeEffect) this.getEffects().get(0)).setAmount(new StaticValue(event.getAmount()));
+            ((SacrificeEffect) this.getEffects().get(0)).setAmount(StaticValue.get(event.getAmount()));
             return true;
         }
         return false;

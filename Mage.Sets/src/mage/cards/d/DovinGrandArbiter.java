@@ -47,8 +47,8 @@ public final class DovinGrandArbiter extends CardImpl {
 
         // -7: Look at the top ten cards of your library. Put three of them into your hand and the rest on the bottom of your library in a random order.
         this.addAbility(new LoyaltyAbility(new LookLibraryAndPickControllerEffect(
-                new StaticValue(10), false,
-                new StaticValue(3), StaticFilters.FILTER_CARD,
+                StaticValue.get(10), false,
+                StaticValue.get(3), StaticFilters.FILTER_CARD,
                 Zone.LIBRARY, false, false, false,
                 Zone.HAND, false, false, false
         ).setBackInRandomOrder(true).setText("Look at the top ten cards of your library. " +

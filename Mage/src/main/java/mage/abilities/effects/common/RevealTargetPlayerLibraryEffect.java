@@ -22,7 +22,7 @@ public class RevealTargetPlayerLibraryEffect extends OneShotEffect {
     private DynamicValue amountCards;
 
     public RevealTargetPlayerLibraryEffect(int amountCards) {
-        this(new StaticValue(amountCards));
+        this(StaticValue.get(amountCards));
     }
 
     public RevealTargetPlayerLibraryEffect(DynamicValue amountCards) {

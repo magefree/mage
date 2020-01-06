@@ -78,7 +78,7 @@ class BiteOfTheBlackRoseEffect extends OneShotEffect {
                 ContinuousEffect effect = new BoostOpponentsEffect(-2, -2, Duration.EndOfTurn);
                 game.addEffect(effect, source);
             } else {
-                new DiscardEachPlayerEffect(new StaticValue(2), false, TargetController.OPPONENT).apply(game, source);
+                new DiscardEachPlayerEffect(StaticValue.get(2), false, TargetController.OPPONENT).apply(game, source);
             }
             return true;
         }

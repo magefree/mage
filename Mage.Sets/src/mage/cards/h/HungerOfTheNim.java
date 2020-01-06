@@ -30,7 +30,7 @@ public final class HungerOfTheNim extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");
 
         // Target creature gets +1/+0 until end of turn for each artifact you control.
-        Effect effect = new BoostTargetEffect(new PermanentsOnBattlefieldCount(filter), new StaticValue(0), Duration.EndOfTurn, true);
+        Effect effect = new BoostTargetEffect(new PermanentsOnBattlefieldCount(filter), StaticValue.get(0), Duration.EndOfTurn, true);
         effect.setText("Target creature gets +1/+0 until end of turn for each artifact you control");
         getSpellAbility().addEffect(effect);
         getSpellAbility().addTarget(new TargetCreaturePermanent());

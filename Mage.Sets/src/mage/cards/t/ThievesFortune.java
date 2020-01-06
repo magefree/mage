@@ -26,7 +26,7 @@ public final class ThievesFortune extends CardImpl {
         this.addAbility(new ProwlAbility(this, "{U}"));
 
         // Look at the top four cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.
-        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(new StaticValue(4), false, new StaticValue(1), StaticFilters.FILTER_CARD, Zone.LIBRARY, false, false));
+        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(StaticValue.get(4), false, StaticValue.get(1), StaticFilters.FILTER_CARD, Zone.LIBRARY, false, false));
     }
 
     public ThievesFortune(final ThievesFortune card) {

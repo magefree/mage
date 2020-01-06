@@ -28,7 +28,7 @@ public final class HoldTheGates extends CardImpl {
 
         // Creatures you control get +0/+1 for each Gate you control and have vigilance.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new BoostControlledEffect(new StaticValue(0), GateYouControlCount.instance, Duration.WhileOnBattlefield));
+                new BoostControlledEffect(StaticValue.get(0), GateYouControlCount.instance, Duration.WhileOnBattlefield));
         ability.addEffect(new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent("Creatures"))
                 .setText("Creatures you control get +0/+1 for each Gate you control and have vigilance"));
         ability.addHint(GateYouControlHint.instance);

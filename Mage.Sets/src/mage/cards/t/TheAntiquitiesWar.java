@@ -40,7 +40,7 @@ public final class TheAntiquitiesWar extends CardImpl {
 
         // I, II — Look at the top five cards of your library. You may reveal an artifact card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_II,
-                new LookLibraryAndPickControllerEffect(new StaticValue(5), false, new StaticValue(1),
+                new LookLibraryAndPickControllerEffect(StaticValue.get(5), false, StaticValue.get(1),
                         StaticFilters.FILTER_CARD_ARTIFACT_AN, Zone.LIBRARY, false, true, false, Zone.HAND, true, true, false).setBackInRandomOrder(true));
 
         // III — Artifacts you control become artifact creatures with base power and toughness 5/5 until end of turn.

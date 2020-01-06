@@ -17,7 +17,7 @@ public class LoseLifeControllerAttachedEffect extends OneShotEffect {
     protected DynamicValue amount;
 
     public LoseLifeControllerAttachedEffect(int amount) {
-        this(new StaticValue(amount));
+        this(StaticValue.get(amount));
     }
 
     public LoseLifeControllerAttachedEffect(DynamicValue amount) {

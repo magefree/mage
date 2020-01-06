@@ -40,7 +40,7 @@ public final class MercilessJavelineer extends CardImpl {
                         Zone.BATTLEFIELD,
                         new AddCountersTargetEffect(
                                 CounterType.M1M1.createInstance(),
-                                new StaticValue(1),
+                                StaticValue.get(1),
                                 Outcome.Removal),
                         new ManaCostsImpl("{2}"));
         ability.addEffect(

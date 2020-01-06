@@ -5,24 +5,24 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.IntStream;
+
 public class StaticValue implements DynamicValue {
 
+    private static final List<StaticValue> staticValues = new ArrayList();
+
+    static {
+        IntStream.rangeClosed(-10, 10)
+                .mapToObj(StaticValue::new)
+                .forEachOrdered(staticValues::add);
+    }
+
     private final int value;
-    private final String message;
-    private static final StaticValue zeroValue = new StaticValue(0);
 
-    public StaticValue(int value) {
-        this(value, "");
-    }
-
-    public StaticValue(int value, String message) {
+    private StaticValue(int value) {
         this.value = value;
-        this.message = message;
-    }
-
-    public StaticValue(final StaticValue staticValue) {
-        this.value = staticValue.value;
-        this.message = staticValue.message;
     }
 
     @Override
@@ -32,7 +32,7 @@ public class StaticValue implements DynamicValue {
 
     @Override
     public StaticValue copy() {
-        return new StaticValue(this);
+        return this;
     }
 
     @Override
@@ -42,14 +42,17 @@ public class StaticValue implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return message;
+        return "";
     }
 
     public int getValue() {
         return value;
     }
 
-    public static StaticValue getZeroValue() {
-        return zeroValue;
+    public static StaticValue get(int value) {
+        if (value < -10 || value > 10) {
+            return new StaticValue(value);
+        }
+        return staticValues.get(value + 10);
     }
 }

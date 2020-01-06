@@ -29,7 +29,7 @@ public final class DisinformationCampaign extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(
                 new DrawCardSourceControllerEffect(1, "you"));
         ability.addEffect(new DiscardEachPlayerEffect(
-                new StaticValue(1), false, TargetController.OPPONENT).concatBy("and"));
+                StaticValue.get(1), false, TargetController.OPPONENT).concatBy("and"));
         this.addAbility(ability);
 
         // Whenever you surveil, return Disinformation Campaign to its owner's hand.

@@ -49,7 +49,7 @@ public final class AurochsHerd extends CardImpl {
             new TargetCardInLibrary(filter1), true), true));
         // Whenever Aurochs Herd attacks, it gets +1/+0 until end of turn for each other attacking Aurochs.
         PermanentsOnBattlefieldCount value = new PermanentsOnBattlefieldCount(filter2, 1);
-        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(value, new StaticValue(0), Duration.EndOfTurn, true), false));
+        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(value, StaticValue.get(0), Duration.EndOfTurn, true), false));
     }
 
     public AurochsHerd(final AurochsHerd card) {

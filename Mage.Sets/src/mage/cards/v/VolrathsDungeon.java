@@ -64,7 +64,7 @@ class PayLifeActivePlayerCost extends CostImpl {
     private final DynamicValue amount;
 
     public PayLifeActivePlayerCost(int amount) {
-        this.amount = new StaticValue(amount);
+        this.amount = StaticValue.get(amount);
         this.text = "Pay " + amount + " life";
     }
 

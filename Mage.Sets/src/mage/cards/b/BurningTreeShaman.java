@@ -48,7 +48,7 @@ public final class BurningTreeShaman extends CardImpl {
 class BurningTreeShamanTriggeredAbility extends TriggeredAbilityImpl {
 
     BurningTreeShamanTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(new StaticValue(1), true, "that player", true));
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(StaticValue.get(1), true, "that player", true));
     }
 
     BurningTreeShamanTriggeredAbility(final BurningTreeShamanTriggeredAbility ability) {

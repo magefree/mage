@@ -19,7 +19,7 @@ public class GetEnergyCountersControllerEffect extends OneShotEffect {
     private final DynamicValue value;
 
     public GetEnergyCountersControllerEffect(int value) {
-        this(new StaticValue(value));
+        this(StaticValue.get(value));
     }
 
     public GetEnergyCountersControllerEffect(DynamicValue value) {

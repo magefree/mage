@@ -30,7 +30,7 @@ public final class Machinate extends CardImpl {
 
         // Look at the top X cards of your library, where X is the number of artifacts you control. Put one of those cards into your hand and the rest on the bottom of your library in any order.
         DynamicValue artifactsOnControl = new PermanentsOnBattlefieldCount(filter);
-        LookLibraryAndPickControllerEffect effect = new LookLibraryAndPickControllerEffect(artifactsOnControl, false, new StaticValue(1), new FilterCard(), Zone.LIBRARY, false, false);
+        LookLibraryAndPickControllerEffect effect = new LookLibraryAndPickControllerEffect(artifactsOnControl, false, StaticValue.get(1), new FilterCard(), Zone.LIBRARY, false, false);
         effect.setText("Look at the top X cards of your library, where X is the number of artifacts you control. Put one of those cards into your hand and the rest on the bottom of your library in any order.");
         this.getSpellAbility().addEffect(effect);
     }

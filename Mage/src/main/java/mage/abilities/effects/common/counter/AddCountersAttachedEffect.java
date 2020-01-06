@@ -23,7 +23,7 @@ public class AddCountersAttachedEffect extends OneShotEffect {
     private String textEnchanted;
 
     public AddCountersAttachedEffect(Counter counter, String textEnchanted) {
-        this(counter, new StaticValue(1), textEnchanted);
+        this(counter, StaticValue.get(1), textEnchanted);
     }
 
     /**

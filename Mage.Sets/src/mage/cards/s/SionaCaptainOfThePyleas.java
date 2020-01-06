@@ -44,7 +44,7 @@ public final class SionaCaptainOfThePyleas extends CardImpl {
         // When Siona, Captain of the Pyleas enters the battlefield, look at the top seven cards of your library. You may reveal an Aura card among them and put it into your hand. Put the rest on the bottom of your library in a random order.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
                 new LookLibraryAndPickControllerEffect(
-                        new StaticValue(7), false, new StaticValue(1), filter,
+                        StaticValue.get(7), false, StaticValue.get(1), filter,
                         Zone.LIBRARY, false, true, false, Zone.HAND,
                         true, false, false
                 ).setBackInRandomOrder(true).setText("Look at the top seven cards of your library. " +

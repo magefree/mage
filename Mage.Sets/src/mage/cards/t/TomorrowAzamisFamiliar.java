@@ -66,7 +66,7 @@ class TomorrowAzamisFamiliarReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        new LookLibraryAndPickControllerEffect(new StaticValue(3), false, new StaticValue(1), new FilterCard(), Zone.LIBRARY, false, false)
+        new LookLibraryAndPickControllerEffect(StaticValue.get(3), false, StaticValue.get(1), new FilterCard(), Zone.LIBRARY, false, false)
                 .apply(game, source);
         return true;
     }

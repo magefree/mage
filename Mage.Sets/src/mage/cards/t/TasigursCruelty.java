@@ -23,7 +23,7 @@ public final class TasigursCruelty extends CardImpl {
         this.addAbility(new DelveAbility());
 
         // Each opponent discards two cards.
-        this.getSpellAbility().addEffect(new DiscardEachPlayerEffect(new StaticValue(2), false, TargetController.OPPONENT));
+        this.getSpellAbility().addEffect(new DiscardEachPlayerEffect(StaticValue.get(2), false, TargetController.OPPONENT));
     }
 
     public TasigursCruelty(final TasigursCruelty card) {

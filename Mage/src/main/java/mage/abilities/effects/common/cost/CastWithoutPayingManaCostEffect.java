@@ -33,7 +33,7 @@ public class CastWithoutPayingManaCostEffect extends OneShotEffect {
      * @param maxCost Maximum converted mana cost for this effect to apply to
      */
     public CastWithoutPayingManaCostEffect(int maxCost) {
-        this(new StaticValue(maxCost));
+        this(StaticValue.get(maxCost));
     }
 
     public CastWithoutPayingManaCostEffect(DynamicValue maxCost) {

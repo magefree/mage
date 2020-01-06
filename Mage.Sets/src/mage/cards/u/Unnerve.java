@@ -19,7 +19,7 @@ public final class Unnerve extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}");
 
         // Each opponent discards two cards.
-        this.getSpellAbility().addEffect(new DiscardEachPlayerEffect(new StaticValue(2), false, TargetController.OPPONENT));
+        this.getSpellAbility().addEffect(new DiscardEachPlayerEffect(StaticValue.get(2), false, TargetController.OPPONENT));
     }
 
     public Unnerve(final Unnerve card) {

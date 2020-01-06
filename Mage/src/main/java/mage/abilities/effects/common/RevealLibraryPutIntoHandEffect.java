@@ -32,7 +32,7 @@ public class RevealLibraryPutIntoHandEffect extends OneShotEffect {
     }
 
     public RevealLibraryPutIntoHandEffect(int amountCards, FilterCard filter, Zone zoneToPutRest, boolean anyOrder) {
-        this(new StaticValue(amountCards), filter, zoneToPutRest, anyOrder);
+        this(StaticValue.get(amountCards), filter, zoneToPutRest, anyOrder);
     }
 
     public RevealLibraryPutIntoHandEffect(DynamicValue amountCards, FilterCard filter, Zone zoneToPutRest, boolean anyOrder) {

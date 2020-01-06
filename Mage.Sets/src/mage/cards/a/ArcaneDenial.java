@@ -75,7 +75,7 @@ class ArcaneDenialEffect extends OneShotEffect {
             countered = true;
         }
         if (controller != null) {
-            Effect effect = new DrawCardTargetEffect(new StaticValue(2), false, true);
+            Effect effect = new DrawCardTargetEffect(StaticValue.get(2), false, true);
             effect.setTargetPointer(new FixedTarget(controller.getId()));
             effect.setText("Its controller may draw up to two cards");
             DelayedTriggeredAbility ability = new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(effect);

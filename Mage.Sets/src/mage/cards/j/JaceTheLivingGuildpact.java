@@ -42,7 +42,7 @@ public final class JaceTheLivingGuildpact extends CardImpl {
 
         // +1: Look at the top two cards of your library. Put one of them into your graveyard.
         Effect effect = new LookLibraryAndPickControllerEffect(
-                new StaticValue(2), false, new StaticValue(1), new FilterCard(), Zone.LIBRARY, true, false, false, Zone.GRAVEYARD, false);
+                StaticValue.get(2), false, StaticValue.get(1), new FilterCard(), Zone.LIBRARY, true, false, false, Zone.GRAVEYARD, false);
         effect.setText("Look at the top two cards of your library. Put one of them into your graveyard");
         this.addAbility(new LoyaltyAbility(effect, 1));
 

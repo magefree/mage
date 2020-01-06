@@ -44,7 +44,7 @@ public final class DomriChaosBringer extends CardImpl {
 
         // −3: Look at the top four cards of your library. You may reveal up to two creature cards from among them and put them into your hand. Put the rest on the bottom of your library in a random order.
         this.addAbility(new LoyaltyAbility(new LookLibraryAndPickControllerEffect(
-                new StaticValue(4), false, new StaticValue(2),
+                StaticValue.get(4), false, StaticValue.get(2),
                 StaticFilters.FILTER_CARD_CREATURE, Zone.LIBRARY, false,
                 true, true, Zone.HAND, false, false, false
         ).setText(

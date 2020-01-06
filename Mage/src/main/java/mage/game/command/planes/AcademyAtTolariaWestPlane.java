@@ -63,7 +63,7 @@ class DrawCardsActivePlayerEffect extends OneShotEffect {
     protected DynamicValue amount;
 
     public DrawCardsActivePlayerEffect(int amount) {
-        this(new StaticValue(amount));
+        this(StaticValue.get(amount));
     }
 
     public DrawCardsActivePlayerEffect(DynamicValue amount) {

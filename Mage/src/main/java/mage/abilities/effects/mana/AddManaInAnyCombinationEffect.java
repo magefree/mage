@@ -23,11 +23,11 @@ public class AddManaInAnyCombinationEffect extends ManaEffect {
     private final DynamicValue amount;
 
     public AddManaInAnyCombinationEffect(int amount) {
-        this(new StaticValue(amount), ColoredManaSymbol.B, ColoredManaSymbol.U, ColoredManaSymbol.R, ColoredManaSymbol.W, ColoredManaSymbol.G);
+        this(StaticValue.get(amount), ColoredManaSymbol.B, ColoredManaSymbol.U, ColoredManaSymbol.R, ColoredManaSymbol.W, ColoredManaSymbol.G);
     }
 
     public AddManaInAnyCombinationEffect(int amount, ColoredManaSymbol... coloredManaSymbols) {
-        this(new StaticValue(amount), coloredManaSymbols);
+        this(StaticValue.get(amount), coloredManaSymbols);
     }
 
     public AddManaInAnyCombinationEffect(DynamicValue amount, ColoredManaSymbol... coloredManaSymbols) {

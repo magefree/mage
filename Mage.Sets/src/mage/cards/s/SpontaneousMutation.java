@@ -43,7 +43,7 @@ public final class SpontaneousMutation extends CardImpl {
 
         // Enchanted creature gets -X/-0, where X is the number of cards in your graveyard.
         DynamicValue value = new SignInversionDynamicValue(new CardsInControllerGraveyardCount());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(value, new StaticValue(-0))));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(value, StaticValue.get(-0))));
     }
 
     public SpontaneousMutation(final SpontaneousMutation card) {

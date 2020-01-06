@@ -41,7 +41,7 @@ public final class ShaleskinBruiser extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
         // Whenever Shaleskin Bruiser attacks, it gets +3/+0 until end of turn for each other attacking Beast.
         PermanentsOnBattlefieldCount value = new PermanentsOnBattlefieldCount(filter, 3);
-        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(value, new StaticValue(0), Duration.EndOfTurn, true), false));
+        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(value, StaticValue.get(0), Duration.EndOfTurn, true), false));
     }
 
     public ShaleskinBruiser(final ShaleskinBruiser card) {

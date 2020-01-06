@@ -21,7 +21,7 @@ public final class SleightOfHand extends CardImpl {
 
 
         // Look at the top two cards of your library. Put one of them into your hand and the other on the bottom of your library.
-        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(new StaticValue(2), false, new StaticValue(1), new FilterCard(), Zone.LIBRARY, false, false));
+        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(StaticValue.get(2), false, StaticValue.get(1), new FilterCard(), Zone.LIBRARY, false, false));
     }
 
     public SleightOfHand(final SleightOfHand card) {
