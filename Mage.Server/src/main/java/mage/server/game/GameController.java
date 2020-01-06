@@ -50,7 +50,7 @@ import java.util.zip.GZIPOutputStream;
  */
 public class GameController implements GameCallback {
 
-    private static final int GAME_TIMEOUTS_CHECK_JOINING_STATUS_EVERY_SECS = 15; // checks and inform players about joining status
+    private static final int GAME_TIMEOUTS_CHECK_JOINING_STATUS_EVERY_SECS = 5; // checks and inform players about joining status
     private static final int GAME_TIMEOUTS_CANCEL_PLAYER_GAME_JOINING_AFTER_INACTIVE_SECS = 2 * 60; // leave player from game if it don't join and inactive on server
 
     private static final ExecutorService gameExecutor = ThreadExecutor.instance.getGameExecutor();
@@ -324,25 +324,22 @@ public class GameController implements GameCallback {
     }
 
     private void sendInfoAboutPlayersNotJoinedYet() {
-        // runs every 15 secs untill all players join
+        // runs every 5 secs untill all players join
         for (Player player : game.getPlayers().values()) {
             if (!player.hasLeft() && player.isHuman()) {
                 Optional<User> requestedUser = getUserByPlayerId(player.getId());
                 if (requestedUser.isPresent()) {
                     User user = requestedUser.get();
-                    if (!user.isConnected()) {
-                        if (gameSessions.get(player.getId()) == null) {
-                            // join the game because player has not joined are was removed because of disconnect
-                            user.removeConstructing(player.getId());
-                            GameManager.instance.joinGame(game.getId(), user.getId());
-                            logger.debug("Player " + player.getName() + " (disconnected) has joined gameId: " + game.getId());
-                        }
+                    if (gameSessions.get(player.getId()) == null) {
+                        // join the game because player has not joined are was removed because of disconnect
+                        user.removeConstructing(player.getId());
+                        GameManager.instance.joinGame(game.getId(), user.getId());
+                        logger.debug("Player " + player.getName() + " (disconnected) has joined gameId: " + game.getId());
                         ChatManager.instance.broadcast(chatId, player.getName(), user.getPingInfo()
-                                        + " is pending to join the game (waiting " + user.getSecondsDisconnected() + " of "
+                                        + " is pending to join the game (waiting only for "
                                         + GAME_TIMEOUTS_CANCEL_PLAYER_GAME_JOINING_AFTER_INACTIVE_SECS + " secs)",
                                 MessageColor.BLUE, true, ChatMessage.MessageType.STATUS, null);
-                        if (user.getSecondsDisconnected() > GAME_TIMEOUTS_CANCEL_PLAYER_GAME_JOINING_AFTER_INACTIVE_SECS) {
-                            // TODO: 2019.04.22 - if user playing another game on server but not joining (that's the reason?), then that's check will never trigger
+                        if (!user.isConnected() && user.getSecondsDisconnected() > GAME_TIMEOUTS_CANCEL_PLAYER_GAME_JOINING_AFTER_INACTIVE_SECS) {
                             // Cancel player join possibility lately after 4 minutes
                             logger.debug("Player " + player.getName() + " - canceled game (after 240 seconds) gameId: " + game.getId());
                             player.leave();
