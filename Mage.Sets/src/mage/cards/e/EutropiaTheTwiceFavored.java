@@ -13,6 +13,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
+import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
@@ -38,6 +39,7 @@ public final class EutropiaTheTwiceFavored extends CardImpl {
                 FlyingAbility.getInstance(), Duration.EndOfTurn,
                 "That creature gains flying until end of turn"
         ));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 
