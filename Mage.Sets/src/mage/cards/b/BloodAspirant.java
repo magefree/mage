@@ -22,6 +22,7 @@ import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
@@ -58,6 +59,7 @@ public final class BloodAspirant extends CardImpl {
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         ability.addEffect(new CantBlockTargetEffect(Duration.EndOfTurn)
                 .setText("That creature can't block this turn."));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 
