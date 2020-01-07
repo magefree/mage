@@ -79,6 +79,7 @@ public final class TherosBeyondDeath extends ExpansionSet {
         cards.add(new SetCardInfo("Inspire Awe", 175, Rarity.COMMON, mage.cards.i.InspireAwe.class));
         cards.add(new SetCardInfo("Ironscale Hydra", 296, Rarity.RARE, mage.cards.i.IronscaleHydra.class));
         cards.add(new SetCardInfo("Island", 251, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Kiora Bests the Sea God", 52, Rarity.MYTHIC, mage.cards.k.KioraBestsTheSeaGod.class));
         cards.add(new SetCardInfo("Klothys's Design", 176, Rarity.UNCOMMON, mage.cards.k.KlothyssDesign.class));
         cards.add(new SetCardInfo("Klothys, God of Destiny", 220, Rarity.MYTHIC, mage.cards.k.KlothysGodOfDestiny.class));
         cards.add(new SetCardInfo("Kunoros, Hound of Athreos", 222, Rarity.RARE, mage.cards.k.KunorosHoundOfAthreos.class));
