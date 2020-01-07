@@ -139,6 +139,7 @@ public final class TherosBeyondDeath extends ExpansionSet {
         cards.add(new SetCardInfo("The Akroan War", 124, Rarity.RARE, mage.cards.t.TheAkroanWar.class));
         cards.add(new SetCardInfo("The Binding of the Titans", 166, Rarity.UNCOMMON, mage.cards.t.TheBindingOfTheTitans.class));
         cards.add(new SetCardInfo("The Birth of Meletis", 5, Rarity.UNCOMMON, mage.cards.t.TheBirthOfMeletis.class));
+        cards.add(new SetCardInfo("The First Iroan Games", 170, Rarity.RARE, mage.cards.t.TheFirstIroanGames.class));
         cards.add(new SetCardInfo("The Triumph of Anax", 160, Rarity.UNCOMMON, mage.cards.t.TheTriumphOfAnax.class));
         cards.add(new SetCardInfo("Thirst for Meaning", 74, Rarity.COMMON, mage.cards.t.ThirstForMeaning.class));
         cards.add(new SetCardInfo("Thryx, the Sudden Storm", 76, Rarity.RARE, mage.cards.t.ThryxTheSuddenStorm.class));
