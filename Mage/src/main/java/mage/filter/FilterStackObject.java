@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- *
  * @author North
  */
 public class FilterStackObject extends FilterObject<StackObject> {

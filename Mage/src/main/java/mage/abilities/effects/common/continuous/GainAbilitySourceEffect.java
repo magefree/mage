@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common.continuous;
 
 import mage.MageObjectReference;
@@ -13,7 +12,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class GainAbilitySourceEffect extends ContinuousEffectImpl implements SourceEffect {
