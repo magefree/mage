@@ -24,7 +24,7 @@ import java.util.UUID;
 public final class AnaxHardenedInTheForge extends CardImpl {
 
     public AnaxHardenedInTheForge(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{R}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{R}{R}");
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEMIGOD);
