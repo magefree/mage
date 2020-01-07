@@ -34,22 +34,30 @@ public class GainAbilityDependenciesTest extends CardTestPlayerBase {
                         SubType.HUMAN.getPredicate(),
                         SubType.ORC.getPredicate())
         ));
+        FilterPermanent filterNotTree = new FilterPermanent("tree");
+        filterNotTree.add(Predicates.not(
+                Predicates.or(
+                        SubType.HUMAN.getPredicate(),
+                        SubType.ORC.getPredicate())
+        ));
 
         ContinuousEffectImpl effectEmpty = new GainAbilityAllEffect(HasteAbility.getInstance(), Duration.EndOfTurn, filterEmpty);
         ContinuousEffectImpl effectSubtype = new GainAbilityAllEffect(HasteAbility.getInstance(), Duration.EndOfTurn, filterSubtype);
         ContinuousEffectImpl effectOr = new GainAbilityAllEffect(HasteAbility.getInstance(), Duration.EndOfTurn, filterOr);
         ContinuousEffectImpl effectTree = new GainAbilityAllEffect(HasteAbility.getInstance(), Duration.EndOfTurn, filterTree);
+        ContinuousEffectImpl effectNotTree = new GainAbilityAllEffect(HasteAbility.getInstance(), Duration.EndOfTurn, filterNotTree);
 
         Assert.assertFalse("must haven't depends with empty filter", effectEmpty.getDependedToTypes().contains(DependencyType.AddingCreatureType));
         Assert.assertTrue("must have depend from subtype predicate", effectSubtype.getDependedToTypes().contains(DependencyType.AddingCreatureType));
         Assert.assertTrue("must have depend from or predicate", effectOr.getDependedToTypes().contains(DependencyType.AddingCreatureType));
         Assert.assertTrue("must have depend from tree predicate", effectTree.getDependedToTypes().contains(DependencyType.AddingCreatureType));
+        Assert.assertTrue("must have depend from not-tree predicate", effectNotTree.getDependedToTypes().contains(DependencyType.AddingCreatureType));
     }
 
     /**
      * I had an elephant token equipped with Amorphous Axe attacking and a Tempered Sliver in play. The token did combat
      * damage to a player but it didnt get the +1/+1 counter it hsould be getting.
-     *
+     * <p>
      * More details: https://github.com/magefree/mage/issues/6147
      */
     @Test

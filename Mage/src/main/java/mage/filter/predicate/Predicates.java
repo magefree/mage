@@ -1,4 +1,3 @@
-
 package mage.filter.predicate;
 
 import mage.game.Game;
@@ -69,7 +68,7 @@ public final class Predicates {
      * @return
      */
     public static <T> Predicate<T> and(Predicate<? super T> first, Predicate<? super T> second) {
-        return new AndPredicate<T>(Predicates.<T>asList(checkNotNull(first), checkNotNull(second)));
+        return new AndPredicate<T>(Predicates.asList(checkNotNull(first), checkNotNull(second)));
     }
 
     /**
@@ -110,7 +109,7 @@ public final class Predicates {
      * @return
      */
     public static <T> Predicate<T> or(Predicate<? super T> first, Predicate<? super T> second) {
-        return new OrPredicate<T>(Predicates.<T>asList(first, second));
+        return new OrPredicate<T>(Predicates.asList(first, second));
     }
 
     /**
@@ -188,7 +187,7 @@ public final class Predicates {
 
     @SuppressWarnings("unchecked")
     private static <T> List<Predicate<? super T>> asList(Predicate<? super T> first, Predicate<? super T> second) {
-        return Arrays.<Predicate<? super T>>asList(first, second);
+        return Arrays.asList(first, second);
     }
 
     private static <T> List<T> defensiveCopy(T... array) {
@@ -231,7 +230,7 @@ public final class Predicates {
      */
     public static void collectAllComponents(Predicate predicate, List<Predicate> res) {
         if (predicate instanceof NotPredicate) {
-            res.add(((NotPredicate) predicate).predicate);
+            collectAllComponents(((NotPredicate) predicate).predicate, res);
         } else if (predicate instanceof AndPredicate) {
             collectAllComponents(((AndPredicate) predicate).components, res);
         } else if (predicate instanceof OrPredicate) {
