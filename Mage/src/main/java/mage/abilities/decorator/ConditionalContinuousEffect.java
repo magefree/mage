@@ -163,6 +163,14 @@ public class ConditionalContinuousEffect extends ContinuousEffectImpl {
     }
 
     @Override
+    public EnumSet<DependencyType> getDependedToTypes() {
+        if (effect != null) {
+            return effect.getDependedToTypes();
+        }
+        return super.getDependedToTypes();
+    }
+
+    @Override
     public Set<UUID> isDependentTo(List<ContinuousEffect> allEffectsInLayer) {
         if (effect != null) {
             return effect.isDependentTo(allEffectsInLayer);

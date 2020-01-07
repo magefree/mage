@@ -75,7 +75,6 @@ public class FilterCard extends FilterObject<Card> {
 
     public Set<Card> filter(Set<Card> cards, Game game) {
         return cards.stream().filter(card -> match(card, game)).collect(Collectors.toSet());
-
     }
 
     public boolean hasPredicates() {

@@ -71,5 +71,4 @@ public class FilterPermanent extends FilterObject<Permanent> implements FilterIn
     public FilterPermanent copy() {
         return new FilterPermanent(this);
     }
-
 }

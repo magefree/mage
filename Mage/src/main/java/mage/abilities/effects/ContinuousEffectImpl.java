@@ -2,12 +2,17 @@ package mage.abilities.effects;
 
 import mage.MageObjectReference;
 import mage.abilities.Ability;
+import mage.abilities.CompoundAbility;
 import mage.abilities.MageSingleton;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.keyword.ChangelingAbility;
 import mage.constants.*;
+import mage.filter.Filter;
+import mage.filter.predicate.Predicate;
+import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.targetpointer.TargetPointer;
@@ -320,6 +325,11 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     }
 
     @Override
+    public EnumSet<DependencyType> getDependedToTypes() {
+        return dependendToTypes;
+    }
+
+    @Override
     public void addDependencyType(DependencyType dependencyType) {
         dependencyTypes.add(dependencyType);
     }
@@ -341,4 +351,48 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         return this;
     }
 
+    /**
+     * Auto-generates dependencies on different effects (what's apply first and what's apply second)
+     */
+    public void generateGainAbilityDependencies(Ability abilityToGain, Filter filterToSearch) {
+        this.addDependencyType(DependencyType.AddingAbility);
+        this.generateGainAbilityDependenciesFromAbility(abilityToGain);
+        this.generateGainAbilityDependenciesFromFilter(filterToSearch);
+    }
+
+    public void generateGainAbilityDependencies(CompoundAbility abilityToGain, Filter filterToSearch) {
+        this.addDependencyType(DependencyType.AddingAbility);
+        this.generateGainAbilityDependenciesFromAbility(abilityToGain);
+        this.generateGainAbilityDependenciesFromFilter(filterToSearch);
+    }
+
+    private void generateGainAbilityDependenciesFromAbility(CompoundAbility compoundAbility) {
+        if (compoundAbility == null) return;
+        for (Ability ability : compoundAbility) {
+            generateGainAbilityDependenciesFromAbility(ability);
+        }
+    }
+
+    private void generateGainAbilityDependenciesFromAbility(Ability ability) {
+        if (ability == null) return;
+
+        // 1. "Is all type" ability (changeling)
+        // make dependency
+        if (ability instanceof ChangelingAbility) {
+            this.addDependencyType(DependencyType.AddingCreatureType);
+        }
+    }
+
+    private void generateGainAbilityDependenciesFromFilter(Filter filter) {
+        if (filter == null) return;
+
+        // 1. "Is all type" ability (changeling)
+        // wait dependency
+        // extraPredicates from some filters is player related, you don't need it here
+        List<Predicate> list = new ArrayList<>();
+        Predicates.collectAllComponents(filter.getPredicates(), list);
+        if (list.stream().anyMatch(p -> p instanceof SubType.SubTypePredicate)) {
+            this.addDependedToType(DependencyType.AddingCreatureType);
+        }
+    }
 }

@@ -59,6 +59,8 @@ public interface ContinuousEffect extends Effect {
 
     void setDependedToType(DependencyType dependencyType);
 
+    EnumSet<DependencyType> getDependedToTypes();
+
     void addDependedToType(DependencyType dependencyType);
 
     void setStartingControllerAndTurnNum(Game game, UUID startingController, UUID activePlayerId);

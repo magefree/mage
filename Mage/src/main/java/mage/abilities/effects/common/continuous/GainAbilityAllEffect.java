@@ -55,7 +55,8 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
         this.ability.newId();
         this.filter = filter;
         this.excludeSource = excludeSource;
-        this.addDependencyType(DependencyType.AddingAbility);
+
+        this.generateGainAbilityDependencies(ability, filter);
     }
 
     public GainAbilityAllEffect(final GainAbilityAllEffect effect) {

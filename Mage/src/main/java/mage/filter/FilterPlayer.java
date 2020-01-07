@@ -56,5 +56,4 @@ public class FilterPlayer extends FilterImpl<Player> {
     public FilterPlayer copy() {
         return new FilterPlayer(this);
     }
-
 }

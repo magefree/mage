@@ -44,7 +44,8 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
         this.ability = ability;
         staticText = rule;
         this.onCard = onCard;
-        this.addDependencyType(DependencyType.AddingAbility);
+
+        this.generateGainAbilityDependencies(ability, null);
     }
 
     public GainAbilityTargetEffect(final GainAbilityTargetEffect effect) {

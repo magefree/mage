@@ -17,6 +17,7 @@ import mage.cards.FrameStyle;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.Permanent;
 import mage.util.GameLog;
 import mage.util.SubTypeList;
 
@@ -251,8 +252,14 @@ public abstract class MageObjectImpl implements MageObject {
             if (value.getSubTypeSet() != SubTypeSet.CreatureType) {
                 return false;
             }
-            // as it is creature subtype, then check the existence of Changeling
-            return abilities.contains(ChangelingAbility.getInstance()) || isAllCreatureTypes();
+            // as it is a creature subtype, then check the existence of Changeling
+            Abilities<Ability> checkList;
+            if (this instanceof Permanent) {
+                checkList = ((Permanent) this).getAbilities(game);
+            } else {
+                checkList = abilities;
+            }
+            return checkList.contains(ChangelingAbility.getInstance()) || isAllCreatureTypes();
         }
     }
 
