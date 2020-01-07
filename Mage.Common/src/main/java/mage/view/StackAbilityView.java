@@ -40,12 +40,12 @@ public class StackAbilityView extends CardView {
         this.subTypes = ability.getSubtype(game);
         this.superTypes = ability.getSuperType();
         this.color = ability.getColor(game);
-        this.manaCost = ability.getManaCost().getSymbols();
+        this.manaCostLeft = ability.getManaCost().getSymbols();
+        this.manaCostRight = new ArrayList<>();
         this.cardTypes = ability.getCardType();
         this.subTypes = ability.getSubtype(game);
         this.superTypes = ability.getSuperType();
         this.color = ability.getColor(game);
-        this.manaCost = ability.getManaCost().getSymbols();
         this.power = ability.getPower().toString();
         this.toughness = ability.getToughness().toString();
         String nameToShow;
@@ -56,7 +56,8 @@ public class StackAbilityView extends CardView {
             tmpSourceCard.subTypes.clear();
             tmpSourceCard.cardTypes.clear();
             tmpSourceCard.cardTypes.add(CardType.CREATURE);
-            tmpSourceCard.manaCost.clear();
+            tmpSourceCard.manaCostLeft.clear();
+            tmpSourceCard.manaCostRight.clear();
             tmpSourceCard.power = "2";
             tmpSourceCard.toughness = "2";
             nameToShow = "creature without name";

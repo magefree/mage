@@ -18,8 +18,6 @@ import mage.game.Game;
 import mage.game.GameImpl;
 import mage.game.command.Emblem;
 import mage.game.command.Plane;
-import mage.game.command.emblems.AjaniAdversaryOfTyrantsEmblem;
-import mage.game.command.planes.AkoumPlane;
 import mage.game.match.MatchType;
 import mage.game.mulligan.Mulligan;
 import mage.game.mulligan.MulliganType;
@@ -97,6 +95,21 @@ public class TestCardRenderDialog extends MageDialog {
         return cardView;
     }
 
+    private CardView createHandCard(Game game, UUID controllerId, String code, String cardNumber, int power, int toughness, int damage) {
+        CardInfo cardInfo = CardRepository.instance.findCard(code, cardNumber);
+        ExpansionInfo setInfo = ExpansionRepository.instance.getSetByCode(code);
+        CardSetInfo testSet = new CardSetInfo(cardInfo.getName(), setInfo.getCode(), cardNumber, cardInfo.getRarity(),
+                new CardGraphicInfo(cardInfo.getFrameStyle(), cardInfo.usesVariousArt()));
+        Card card = CardImpl.createCard(cardInfo.getClassName(), testSet);
+
+        Set<Card> cardsList = new HashSet<>();
+        cardsList.add(card);
+        game.loadCards(cardsList, controllerId);
+
+        CardView cardView = new CardView(card);
+        return cardView;
+    }
+
     private AbilityView createEmblem(Emblem emblem) {
         AbilityView emblemView = new AbilityView(emblem.getAbilities().get(0), emblem.getName(), new CardView(new EmblemView(emblem)));
         emblemView.setName(emblem.getName());
@@ -121,10 +134,17 @@ public class TestCardRenderDialog extends MageDialog {
         BigCard big = new BigCard();
         CardsView view = new CardsView();
         CardView card;
+        /*
         card = createCard(game, player.getId(), "RNA", "263", 0, 0, 0); // mountain
         view.put(card.getId(), card);
         card = createCard(game, player.getId(), "RNA", "185", 0, 0, 0); // Judith, the Scourge Diva
         view.put(card.getId(), card);
+        //*/
+        card = createHandCard(game, player.getId(), "DIS", "153", 0, 0, 0); // Odds // Ends (split card)
+        view.put(card.getId(), card);
+        card = createHandCard(game, player.getId(), "ELD", "38", 2, 2, 0); // Animating Faerie (adventure card)
+        view.put(card.getId(), card);
+        /*
         card = createCard(game, player.getId(), "RNA", "78", 125, 89, 0); // Noxious Groodion
         view.put(card.getId(), card);
         card = createCard(game, player.getId(), "RNA", "14", 3, 5, 2); // Knight of Sorrows
@@ -139,6 +159,7 @@ public class TestCardRenderDialog extends MageDialog {
         view.put(card.getId(), card);
         card = createPlane(new AkoumPlane()); // Plane - Akoum
         view.put(card.getId(), card);
+        //*/
 
         cardsPanel.setCustomCardSize(new Dimension(getCardWidth(), getCardHeight()));
         cardsPanel.changeGUISize();

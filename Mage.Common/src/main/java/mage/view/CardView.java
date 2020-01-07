@@ -1,8 +1,6 @@
 package mage.view;
 
 import com.google.gson.annotations.Expose;
-import java.util.*;
-import java.util.stream.Collectors;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Abilities;
@@ -12,6 +10,8 @@ import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.keyword.AftermathAbility;
 import mage.cards.*;
+import mage.cards.mock.MockCard;
+import mage.cards.repository.CardInfo;
 import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.CounterType;
@@ -26,7 +26,11 @@ import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
 import mage.target.Target;
 import mage.target.Targets;
+import mage.util.CardUtil;
 import mage.util.SubTypeList;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -40,6 +44,8 @@ public class CardView extends SimpleCardView {
     protected String name;
     @Expose
     protected String displayName;
+    @Expose
+    protected String displayFullName;
     @Expose
     protected List<String> rules;
     @Expose
@@ -55,7 +61,9 @@ public class CardView extends SimpleCardView {
     protected ObjectColor color;
     protected ObjectColor frameColor;
     protected FrameStyle frameStyle;
-    protected List<String> manaCost;
+    // can combine multiple costs for MockCard from deck editor or db (left/right, card/adventure)
+    protected List<String> manaCostLeft;
+    protected List<String> manaCostRight;
     protected int convertedManaCost;
     protected Rarity rarity;
 
@@ -137,6 +145,7 @@ public class CardView extends SimpleCardView {
         this.parentId = cardView.parentId;
         this.name = cardView.name;
         this.displayName = cardView.displayName;
+        this.displayFullName = cardView.displayFullName;
         this.rules = cardView.rules;
         this.power = cardView.power;
         this.toughness = cardView.toughness;
@@ -148,7 +157,8 @@ public class CardView extends SimpleCardView {
         this.color = cardView.color;
         this.frameColor = cardView.frameColor;
         this.frameStyle = cardView.frameStyle;
-        this.manaCost = cardView.manaCost;
+        this.manaCostLeft = cardView.manaCostLeft;
+        this.manaCostRight = cardView.manaCostRight;
         this.convertedManaCost = cardView.convertedManaCost;
         this.rarity = cardView.rarity;
 
@@ -210,8 +220,8 @@ public class CardView extends SimpleCardView {
      * @param card
      * @param game
      * @param controlled is the card view created for the card controller - used
-     * for morph / face down cards to know which player may see information for
-     * the card
+     *                   for morph / face down cards to know which player may see information for
+     *                   the card
      */
     public CardView(Card card, Game game, boolean controlled) {
         this(card, game, controlled, false, false);
@@ -237,12 +247,12 @@ public class CardView extends SimpleCardView {
     /**
      * @param card
      * @param game
-     * @param controlled is the card view created for the card controller - used
-     * for morph / face down cards to know which player may see information for
-     * the card
+     * @param controlled       is the card view created for the card controller - used
+     *                         for morph / face down cards to know which player may see information for
+     *                         the card
      * @param showFaceDownCard if true and the card is not on the battlefield,
-     * also a face down card is shown in the view, face down cards will be shown
-     * @param storeZone if true the card zone will be set in the zone attribute.
+     *                         also a face down card is shown in the view, face down cards will be shown
+     * @param storeZone        if true the card zone will be set in the zone attribute.
      */
     public CardView(Card card, Game game, boolean controlled, boolean showFaceDownCard, boolean storeZone) {
         super(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.getUsesVariousArt(), card.getTokenSetCode(), game != null, card.getTokenDescriptor());
@@ -275,6 +285,7 @@ public class CardView extends SimpleCardView {
                 if (controlled) {
                     this.name = card.getName();
                     this.displayName = card.getName();
+                    this.displayFullName = card.getName();
                     this.alternateName = card.getName();
                 }
                 this.power = "2";
@@ -313,6 +324,15 @@ public class CardView extends SimpleCardView {
                     break;
             }
         }
+
+        AdventureCard adventureCard = null;
+        AdventureCardSpell adventureCardSpell = null;
+        if (card instanceof AdventureCard) {
+            adventureCard = (AdventureCard) card;
+            adventureCardSpell = (AdventureCardSpell) adventureCard.getSpellCard();
+        }
+
+        String fullCardName;
         if (splitCard != null) {
             this.isSplitCard = true;
             leftSplitName = splitCard.getLeftHalfCard().getName();
@@ -323,16 +343,34 @@ public class CardView extends SimpleCardView {
             rightSplitCosts = splitCard.getRightHalfCard().getManaCost();
             rightSplitRules = splitCard.getRightHalfCard().getRules(game);
             rightSplitTypeLine = getCardTypeLine(game, splitCard.getRightHalfCard());
+
+            fullCardName = card.getName(); // split card contains full name as normal
+            this.manaCostLeft = splitCard.getLeftHalfCard().getManaCost().getSymbols();
+            this.manaCostRight = splitCard.getRightHalfCard().getManaCost().getSymbols();
+        } else if (adventureCard != null) {
+            fullCardName = adventureCard.getName() + MockCard.ADVENTURE_NAME_SEPARATOR + adventureCardSpell.getName();
+            this.manaCostLeft = adventureCardSpell.getManaCost().getSymbols();
+            this.manaCostRight = adventureCard.getManaCost().getSymbols();
+        } else if (card instanceof MockCard) {
+            // deck editor cards
+            fullCardName = ((MockCard) card).getFullName(true);
+            this.manaCostLeft = ((MockCard) card).getManaCost(CardInfo.ManaCostSide.LEFT).getSymbols();
+            this.manaCostRight = ((MockCard) card).getManaCost(CardInfo.ManaCostSide.RIGHT).getSymbols();
+        } else {
+            fullCardName = card.getName();
+            this.manaCostLeft = card.getManaCost().getSymbols();
+            this.manaCostRight = new ArrayList<>();
         }
+        //this.manaCost = card.getManaCost().getSymbols();
 
         this.name = card.getImageName();
         this.displayName = card.getName();
+        this.displayFullName = fullCardName;
         if (game == null) {
             this.rules = card.getRules();
         } else {
             this.rules = card.getRules(game);
         }
-        this.manaCost = card.getManaCost().getSymbols();
         this.convertedManaCost = card.getManaCost().convertedManaCost();
 
         if (card instanceof Permanent) {
@@ -475,6 +513,7 @@ public class CardView extends SimpleCardView {
 
         this.name = object.getName();
         this.displayName = object.getName();
+        this.displayFullName = object.getName();
         if (object instanceof Permanent) {
             this.mageObjectType = MageObjectType.PERMANENT;
             this.power = Integer.toString(object.getPower().getValue());
@@ -489,7 +528,8 @@ public class CardView extends SimpleCardView {
         this.subTypes = object.getSubtype(null);
         this.superTypes = object.getSuperType();
         this.color = object.getColor(null);
-        this.manaCost = object.getManaCost().getSymbols();
+        this.manaCostLeft = object.getManaCost().getSymbols();
+        this.manaCostRight = new ArrayList<>();
         this.convertedManaCost = object.getManaCost().convertedManaCost();
         if (object instanceof PermanentToken) {
             this.mageObjectType = MageObjectType.TOKEN;
@@ -547,6 +587,7 @@ public class CardView extends SimpleCardView {
         this.mageObjectType = MageObjectType.EMBLEM;
         this.name = emblem.getName();
         this.displayName = name;
+        this.displayFullName = name;
         this.rules = emblem.getRules();
         // emblem images are always with common (black) symbol
         this.frameStyle = FrameStyle.M15_NORMAL;
@@ -561,6 +602,7 @@ public class CardView extends SimpleCardView {
         this.mageObjectType = MageObjectType.PLANE;
         this.name = plane.getName();
         this.displayName = name;
+        this.displayFullName = name;
         this.rules = plane.getRules();
         // Display the plane in landscape (similar to Fused cards)
         this.rotate = true;
@@ -576,6 +618,7 @@ public class CardView extends SimpleCardView {
         this.mageObjectType = MageObjectType.NULL;
         this.name = designation.getName();
         this.displayName = name;
+        this.displayFullName = name;
         this.rules = new ArrayList<>();
         this.rules.add(stackAbility.getRule(designation.getName()));
         this.frameStyle = FrameStyle.M15_NORMAL;
@@ -594,6 +637,7 @@ public class CardView extends SimpleCardView {
     private void fillEmpty(Card card, boolean controlled) {
         this.name = "Face Down";
         this.displayName = name;
+        this.displayFullName = name;
         this.rules = new ArrayList<>();
         this.power = "";
         this.toughness = "";
@@ -605,7 +649,8 @@ public class CardView extends SimpleCardView {
         this.color = new ObjectColor();
         this.frameColor = new ObjectColor();
         this.frameStyle = FrameStyle.M15_NORMAL;
-        this.manaCost = new ArrayList<>();
+        this.manaCostLeft = new ArrayList<>();
+        this.manaCostRight = new ArrayList<>();
         this.convertedManaCost = 0;
 
         // the controller can see more information (e.g. enlarged image) than other players for face down cards (e.g. Morph played face down)
@@ -641,6 +686,7 @@ public class CardView extends SimpleCardView {
         this.id = token.getId();
         this.name = token.getName();
         this.displayName = token.getName();
+        this.displayFullName = token.getName();
         this.rules = token.getAbilities().getRules(this.name);
         this.power = token.getPower().toString();
         this.toughness = token.getToughness().toString();
@@ -652,7 +698,8 @@ public class CardView extends SimpleCardView {
         this.color = token.getColor(null);
         this.frameColor = token.getFrameColor(null);
         this.frameStyle = token.getFrameStyle();
-        this.manaCost = token.getManaCost().getSymbols();
+        this.manaCostLeft = token.getManaCost().getSymbols();
+        this.manaCostRight = new ArrayList<>();
         this.rarity = Rarity.SPECIAL;
         this.type = token.getTokenType();
         this.tokenDescriptor = token.getTokenDescriptor();
@@ -678,6 +725,10 @@ public class CardView extends SimpleCardView {
 
     public String getDisplayName() {
         return displayName;
+    }
+
+    public String getDisplayFullName() {
+        return displayFullName;
     }
 
     public List<String> getRules() {
@@ -745,7 +796,7 @@ public class CardView extends SimpleCardView {
     }
 
     public List<String> getManaCost() {
-        return manaCost;
+        return CardUtil.concatManaSymbols(CardInfo.SPLIT_MANA_SEPARATOR_FULL, this.manaCostLeft, this.manaCostRight);
     }
 
     public int getConvertedManaCost() {

@@ -1,21 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.mage.card.arcane;
 
-import java.awt.Image;
+import mage.cards.repository.CardInfo;
+import mage.view.CardView;
+import org.apache.log4j.Logger;
+
+import java.awt.*;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import mage.view.CardView;
-import org.apache.log4j.Logger;
 
 /**
- *
  * @author StravantUser
  */
 public final class TextboxRuleParser {
@@ -120,11 +116,16 @@ public final class TextboxRuleParser {
                                 index = closeIndex + 1;
                             } else {
                                 // Bad entry
-                                build.append('{');
-                                build.append(contents);
-                                build.append('}');
+                                if (contents.equals(CardInfo.SPLIT_MANA_SEPARATOR_FULL)) {
+                                    build.append(CardInfo.SPLIT_MANA_SEPARATOR_RENDER);
+                                    outputIndex += contents.length() - CardInfo.SPLIT_MANA_SEPARATOR_RENDER.length();
+                                } else {
+                                    build.append('{');
+                                    build.append(contents);
+                                    build.append('}');
+                                    outputIndex += (contents.length() + 2);
+                                }
                                 index = closeIndex + 1;
-                                outputIndex += (contents.length() + 2);
                             }
                         }
                     }

@@ -1,18 +1,19 @@
-
 package mage.filter.predicate.other;
-
-import java.util.HashMap;
-import java.util.Locale;
 
 import mage.cards.AdventureCard;
 import mage.cards.Card;
 import mage.cards.SplitCard;
+import mage.cards.mock.MockCard;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 
+import java.util.HashMap;
+import java.util.Locale;
+
 /**
+ * Special predicate to search cards in deck editor
  *
  * @author North
  */
@@ -41,20 +42,29 @@ public class CardTextPredicate implements Predicate<Card> {
         }
 
         if (text.isEmpty() && isUnique) {
-            boolean found = !seenCards.keySet().contains(input.getName());
+            boolean found = !seenCards.containsKey(input.getName());
             seenCards.put(input.getName(), true);
             return found;
         }
 
         // first check in card name
-        if (inNames && input.getName().toLowerCase(Locale.ENGLISH).contains(text.toLowerCase(Locale.ENGLISH))) {
-            if (isUnique && seenCards.keySet().contains(input.getName())) {
-                return false;
+        if (inNames) {
+            String fullName = input.getName();
+            if (input instanceof MockCard) {
+                fullName = ((MockCard) input).getFullName(true);
+            } else if (input instanceof AdventureCard) {
+                fullName = input.getName() + MockCard.ADVENTURE_NAME_SEPARATOR + ((AdventureCard) input).getSpellCard().getName();
             }
-            if (isUnique) {
-                seenCards.put(input.getName(), true);
+
+            if (fullName.toLowerCase(Locale.ENGLISH).contains(text.toLowerCase(Locale.ENGLISH))) {
+                if (isUnique && seenCards.containsKey(input.getName())) {
+                    return false;
+                }
+                if (isUnique) {
+                    seenCards.put(input.getName(), true);
+                }
+                return true;
             }
-            return true;
         }
 
         //separate by spaces
@@ -109,7 +119,7 @@ public class CardTextPredicate implements Predicate<Card> {
                 }
             }
 
-            if (found && isUnique && seenCards.keySet().contains(input.getName())) {
+            if (found && isUnique && seenCards.containsKey(input.getName())) {
                 found = false;
             }
             if (!found) {

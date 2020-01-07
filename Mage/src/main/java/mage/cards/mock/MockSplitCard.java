@@ -20,8 +20,8 @@ public class MockSplitCard extends SplitCard {
     public MockSplitCard(CardInfo card) {
         super(null, new CardSetInfo(card.getName(), card.getSetCode(), card.getCardNumber(), card.getRarity()),
                 card.getTypes().toArray(new CardType[0]),
-                join(card.getManaCosts()),
-                "",
+                join(card.getManaCosts(CardInfo.ManaCostSide.LEFT)),
+                join(card.getManaCosts(CardInfo.ManaCostSide.RIGHT)),
                 getSpellAbilityType(card));
         this.expansionSetCode = card.getSetCode();
         this.power = mageIntFromString(card.getPower());

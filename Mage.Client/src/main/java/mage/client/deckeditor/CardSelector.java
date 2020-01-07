@@ -417,9 +417,9 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
     private void filterCards() {
         FilterCard filter = buildFilter();
+        MageFrame.getDesktop().setCursor(new Cursor(Cursor.WAIT_CURSOR));
         try {
             java.util.List<Card> filteredCards = new ArrayList<>();
-            setCursor(new Cursor(Cursor.WAIT_CURSOR));
 
             boolean chkPD = chkPennyDreadful.isSelected();
             if (chkPD) {
@@ -452,7 +452,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             this.currentView.loadCards(new CardsView(filteredCards), sortSetting, bigCard, null, false);
             this.cardCount.setText(String.valueOf(filteredCards.size()));
         } finally {
-            setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+            MageFrame.getDesktop().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }
     }
 

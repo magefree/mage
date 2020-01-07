@@ -248,7 +248,7 @@ public enum ChatManager {
                 CardInfo cardInfo = CardRepository.instance.findPreferedCoreExpansionCard(cardName, true);
                 if (cardInfo != null) {
                     cardInfo.getRules();
-                    message = "<font color=orange>" + cardInfo.getName() + "</font>: Cost:" + cardInfo.getManaCosts().toString() + ",  Types:" + cardInfo.getTypes().toString() + ", ";
+                    message = "<font color=orange>" + cardInfo.getName() + "</font>: Cost:" + cardInfo.getManaCosts(CardInfo.ManaCostSide.ALL).toString() + ",  Types:" + cardInfo.getTypes().toString() + ", ";
                     for (String rule : cardInfo.getRules()) {
                         message = message + rule;
                     }

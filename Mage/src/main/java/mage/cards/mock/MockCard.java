@@ -2,6 +2,8 @@ package mage.cards.mock;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.cards.CardImpl;
 import mage.cards.repository.CardInfo;
@@ -11,14 +13,23 @@ import org.apache.log4j.Logger;
 import java.util.List;
 
 /**
+ * Mock card for GUI (deck editor and panels)
+ *
  * @author North
  */
 public class MockCard extends CardImpl {
+
+    static public String ADVENTURE_NAME_SEPARATOR = " // ";
 
     // Needs to be here, as it is normally calculated from the
     // PlaneswalkerEntersWithLoyaltyAbility of the card... but the MockCard
     // only has MockAbilities.
     private int startingLoyalty;
+
+    // mana cost extra info for multiple mana drawing
+    protected ManaCosts<ManaCost> manaCostLeft;
+    protected ManaCosts<ManaCost> manaCostRight;
+    protected String adventureSpellName;
 
     public MockCard(CardInfo card) {
         super(null, card.getName());
@@ -33,7 +44,9 @@ public class MockCard extends CardImpl {
 
         this.usesVariousArt = card.usesVariousArt();
 
-        this.manaCost = new ManaCostsImpl(join(card.getManaCosts()));
+        this.manaCostLeft = new ManaCostsImpl(join(card.getManaCosts(CardInfo.ManaCostSide.LEFT)));
+        this.manaCostRight = new ManaCostsImpl(join(card.getManaCosts(CardInfo.ManaCostSide.RIGHT)));
+        this.manaCost = new ManaCostsImpl(join(card.getManaCosts(CardInfo.ManaCostSide.ALL)));
 
         this.color = card.getColor();
 
@@ -47,6 +60,10 @@ public class MockCard extends CardImpl {
         this.nightCard = card.isNightCard();
         if (card.getSecondSideName() != null && !card.getSecondSideName().isEmpty()) {
             this.secondSideCard = new MockCard(CardRepository.instance.findCardWPreferredSet(card.getSecondSideName(), card.getSetCode(), false));
+        }
+
+        if (card.isAdventureCard()) {
+            this.adventureSpellName = card.getAdventureSpellName();
         }
 
         if (this.isPlaneswalker()) {
@@ -81,6 +98,32 @@ public class MockCard extends CardImpl {
     public MockCard copy() {
         return new MockCard(this);
     }
+
+    @Override
+    public ManaCosts<ManaCost> getManaCost() {
+        return manaCost;
+    }
+
+    public ManaCosts<ManaCost> getManaCost(CardInfo.ManaCostSide manaCostSide) {
+        switch (manaCostSide) {
+            case LEFT:
+                return manaCostLeft;
+            case RIGHT:
+                return manaCostRight;
+            default:
+            case ALL:
+                return manaCost;
+        }
+    }
+
+    public String getFullName(boolean showSecondName) {
+        if (adventureSpellName != null) {
+            return getName() + ADVENTURE_NAME_SEPARATOR + adventureSpellName;
+        } else {
+            return getName();
+        }
+    }
+
 
     private MageInt mageIntFromString(String value) {
         try {

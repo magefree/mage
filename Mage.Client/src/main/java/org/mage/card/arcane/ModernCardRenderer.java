@@ -59,6 +59,7 @@ public class ModernCardRenderer extends CardRenderer {
 
     private static final Logger LOGGER = Logger.getLogger(ModernCardRenderer.class);
     private static final GlowText glowTextRenderer = new GlowText();
+    public static final Color MANA_ICONS_TEXT_COLOR = Color.DARK_GRAY; // text color of missing mana icons in IMAGE render mode
 
     ///////////////////////////////////////////////////////////////////////////
     // Textures for modern frame cards
@@ -879,7 +880,7 @@ public class ModernCardRenderer extends CardRenderer {
 
         // Draw the mana symbols
         if (!cardView.isAbility() && !cardView.isFaceDown()) {
-            ManaSymbols.draw(g, manaCost, x + w - manaCostWidth, y + boxTextOffset, boxTextHeight, Color.black, 2);
+            ManaSymbols.draw(g, manaCost, x + w - manaCostWidth, y + boxTextOffset, boxTextHeight, ModernCardRenderer.MANA_ICONS_TEXT_COLOR, 2);
         }
     }
 
@@ -1256,18 +1257,18 @@ public class ModernCardRenderer extends CardRenderer {
         String symbs = symbol;
         int symbHeight = (int) (0.8 * h);
         int manaCostWidth = CardRendererUtils.getManaCostWidth(symbs, symbHeight);
-        ManaSymbols.draw(g, symbs, x + (w - manaCostWidth) / 2, y + (h - symbHeight) / 2, symbHeight, Color.black, 2);
+        ManaSymbols.draw(g, symbs, x + (w - manaCostWidth) / 2, y + (h - symbHeight) / 2, symbHeight, ModernCardRenderer.MANA_ICONS_TEXT_COLOR, 2);
     }
 
     private void drawBasicManaSymbol(Graphics2D g, int x, int y, int w, int h, String symbol) {
         String symbs = symbol;
         if (getSizedManaSymbol(symbol) != null) {
-            ManaSymbols.draw(g, symbs, x, y, w, Color.black, 2);
+            ManaSymbols.draw(g, symbs, x, y, w, ModernCardRenderer.MANA_ICONS_TEXT_COLOR, 2);
         }
         if (symbol.length() == 2) {
             String symbs2 = "" + symbol.charAt(1) + symbol.charAt(0);
             if (getSizedManaSymbol(symbs2) != null) {
-                ManaSymbols.draw(g, symbs2, x, y, w, Color.black, 2);
+                ManaSymbols.draw(g, symbs2, x, y, w, ModernCardRenderer.MANA_ICONS_TEXT_COLOR, 2);
             }
         }
     }

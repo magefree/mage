@@ -1,6 +1,7 @@
 package org.mage.card.arcane;
 
 import mage.abilities.hint.HintUtils;
+import mage.cards.repository.CardInfo;
 import mage.cards.repository.ExpansionRepository;
 import mage.client.MageFrame;
 import mage.client.constants.Constants;
@@ -587,7 +588,7 @@ public final class ManaSymbols {
     }
 
     public static void draw(Graphics g, String manaCost, int x, int y, int symbolWidth) {
-        draw(g, manaCost, x, y, symbolWidth, Color.white, 0);
+        draw(g, manaCost, x, y, symbolWidth, ModernCardRenderer.MANA_ICONS_TEXT_COLOR, 0);
     }
 
     public static void draw(Graphics g, String manaCost, int x, int y, int symbolWidth, Color symbolsTextColor, int symbolMarginX) {
@@ -657,20 +658,24 @@ public final class ManaSymbols {
 
             if (image == null) {
                 // TEXT draw
-
-                labelRender.setText("{" + symbol + "}");
-                labelRender.setForeground(symbolsTextColor);
+                String sampleAutoFontText = "{W}"; // need same font size for all -- use max symbol ever, not current text
+                if (symbol.equals(CardInfo.SPLIT_MANA_SEPARATOR_SHORT)) {
+                    labelRender.setText(CardInfo.SPLIT_MANA_SEPARATOR_RENDER);
+                    sampleAutoFontText = CardInfo.SPLIT_MANA_SEPARATOR_RENDER; // separator must be big
+                } else {
+                    labelRender.setText("{" + symbol + "}");
+                }
                 labelRender.setSize(symbolWidth, symbolWidth);
                 labelRender.setVerticalAlignment(SwingConstants.CENTER);
+                labelRender.setForeground(symbolsTextColor);
                 labelRender.setHorizontalAlignment(SwingConstants.CENTER);
-                //labelRender.setBorder(new LineBorder(new Color(125, 250, 250), 1));
+                //labelRender.setBorder(new LineBorder(new Color(125, 250, 250), 1)); // debug draw
 
                 // fix font size for mana text
                 // work for labels WITHOUT borders
                 // https://stackoverflow.com/questions/2715118/how-to-change-the-size-of-the-font-of-a-jlabel-to-take-the-maximum-size
                 Font labelFont = labelRender.getFont();
-                String labelText = "{W}"; //labelRender.getText(); // need same font size for all -- use max symbol ever, not current text
-                int stringWidth = labelRender.getFontMetrics(labelFont).stringWidth(labelText);
+                int stringWidth = labelRender.getFontMetrics(labelFont).stringWidth(sampleAutoFontText);
                 int componentWidth = labelRender.getWidth();
                 // Find out how much the font can grow in width.
                 double widthRatio = (double) componentWidth / (double) stringWidth;
@@ -702,7 +707,11 @@ public final class ManaSymbols {
         for (String s : manaCost) {
             sb.append(s);
         }
-        return sb.toString().replace("/", "").replace("{", "").replace("}", " ").trim();
+        return sb.toString()
+                .replace("/", "")
+                .replace("{", "")
+                .replace("}", " ")
+                .trim();
     }
 
     public enum Type {
@@ -767,6 +776,7 @@ public final class ManaSymbols {
         htmlImagesPath = htmlImagesPath
                 .replace("$", "@S@"); // paths with $ will rise error, need escape that
 
+        replaced = replaced.replace(CardInfo.SPLIT_MANA_SEPARATOR_FULL, CardInfo.SPLIT_MANA_SEPARATOR_RENDER);
         replaced = REPLACE_SYMBOLS_PATTERN.matcher(replaced).replaceAll(
                 "<img src='" + filePathToUrl(htmlImagesPath) + "$1$2" + ".png' alt='$1$2' width="
                         + symbolSize + " height=" + symbolSize + '>');

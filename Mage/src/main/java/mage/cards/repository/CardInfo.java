@@ -1,11 +1,8 @@
-
 package mage.cards.repository;
 
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
-import java.util.*;
-import java.util.stream.Collectors;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -18,6 +15,9 @@ import mage.util.CardUtil;
 import mage.util.SubTypeList;
 import org.apache.log4j.Logger;
 
+import java.util.*;
+import java.util.stream.Collectors;
+
 /**
  * @author North
  */
@@ -27,6 +27,11 @@ public class CardInfo {
     private static final int MAX_RULE_LENGTH = 750;
 
     private static final String SEPARATOR = "@@@";
+
+    public static final String SPLIT_MANA_SEPARATOR_SHORT = "*";
+    public static final String SPLIT_MANA_SEPARATOR_FULL = "{" + SPLIT_MANA_SEPARATOR_SHORT + "}";
+    public static final String SPLIT_MANA_SEPARATOR_RENDER = " / ";
+
     @DatabaseField(indexName = "name_index")
     protected String name;
     @DatabaseField(indexName = "setCode_cardNumber_index")
@@ -89,6 +94,14 @@ public class CardInfo {
     protected String flipCardName;
     @DatabaseField
     protected String secondSideName;
+    @DatabaseField
+    protected boolean adventureCard;
+    @DatabaseField
+    protected String adventureSpellName;
+
+    public enum ManaCostSide {
+        LEFT, RIGHT, ALL
+    }
 
     public CardInfo() {
     }
@@ -116,6 +129,11 @@ public class CardInfo {
             this.secondSideName = secondSide.getName();
         }
 
+        if (card instanceof AdventureCard) {
+            this.adventureCard = true;
+            this.adventureSpellName = ((AdventureCard) card).getSpellCard().getName();
+        }
+
         this.frameStyle = card.getFrameStyle().toString();
         this.frameColor = card.getFrameColor(null).toString();
         this.variousArt = card.getUsesVariousArt();
@@ -128,7 +146,19 @@ public class CardInfo {
         this.setTypes(card.getCardType());
         this.setSubtypes(card.getSubtype(null).stream().map(SubType::toString).collect(Collectors.toList()));
         this.setSuperTypes(card.getSuperType());
-        this.setManaCosts(card.getManaCost().getSymbols());
+
+        // mana cost can contains multiple cards (split left/right, card/adventure)
+        if (card instanceof SplitCard) {
+            List<String> manaCostLeft = ((SplitCard) card).getLeftHalfCard().getManaCost().getSymbols();
+            List<String> manaCostRight = ((SplitCard) card).getRightHalfCard().getManaCost().getSymbols();
+            this.setManaCosts(CardUtil.concatManaSymbols(SPLIT_MANA_SEPARATOR_FULL, manaCostLeft, manaCostRight));
+        } else if (card instanceof AdventureCard) {
+            List<String> manaCostLeft = ((AdventureCard) card).getSpellCard().getManaCost().getSymbols(); // Spell from left like MTGA
+            List<String> manaCostRight = card.getManaCost().getSymbols();
+            this.setManaCosts(CardUtil.concatManaSymbols(SPLIT_MANA_SEPARATOR_FULL, manaCostLeft, manaCostRight));
+        } else {
+            this.setManaCosts(card.getManaCost().getSymbols());
+        }
 
         int length = 0;
         List<String> rulesList = new ArrayList<>();
@@ -236,12 +266,27 @@ public class CardInfo {
         return sb.toString();
     }
 
-    private List<String> parseList(String list) {
+    private List<String> parseList(String list, ManaCostSide manaCostSide) {
         if (list.isEmpty()) {
             return Collections.emptyList();
         }
 
-        return Arrays.asList(list.split(SEPARATOR));
+        List<String> res = new ArrayList<>();
+        boolean leftSide = true;
+        for (String s : list.split(SEPARATOR)) {
+            if (s.equals(SPLIT_MANA_SEPARATOR_FULL)) {
+                leftSide = false;
+                continue;
+            }
+
+            if (manaCostSide.equals(ManaCostSide.ALL)
+                    || (manaCostSide.equals(ManaCostSide.LEFT) && leftSide)
+                    || (manaCostSide.equals(ManaCostSide.RIGHT) && !leftSide)) {
+                res.add(s);
+            }
+        }
+
+        return res;
     }
 
     public final Set<CardType> getTypes() {
@@ -267,8 +312,8 @@ public class CardInfo {
         return convertedManaCost;
     }
 
-    public final List<String> getManaCosts() {
-        return parseList(manaCosts);
+    public final List<String> getManaCosts(ManaCostSide manaCostSide) {
+        return parseList(manaCosts, manaCostSide);
     }
 
     public final void setManaCosts(List<String> manaCosts) {
@@ -288,7 +333,7 @@ public class CardInfo {
     }
 
     public final List<String> getRules() {
-        return parseList(rules);
+        return parseList(rules, ManaCostSide.ALL);
     }
 
     public final void setRules(List<String> rules) {
@@ -387,5 +432,13 @@ public class CardInfo {
 
     public String getSecondSideName() {
         return secondSideName;
+    }
+
+    public boolean isAdventureCard() {
+        return adventureCard;
+    }
+
+    public String getAdventureSpellName() {
+        return adventureSpellName;
     }
 }

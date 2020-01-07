@@ -1,5 +1,6 @@
 package org.mage.card.arcane;
 
+import mage.cards.repository.CardInfo;
 import mage.client.util.GUISizeHelper;
 
 import javax.swing.*;
@@ -45,17 +46,23 @@ public final class ManaSymbolsCellRenderer extends DefaultTableCellRenderer {
                 String symbol = tok.nextToken();
 
                 JLabel symbolLabel = new JLabel();
-                //symbolLabel.setBorder(new LineBorder(new Color(150, 150, 150))); // debug
+                symbolLabel.setFont(GUISizeHelper.tableFont);
                 symbolLabel.setBorder(new EmptyBorder(0, symbolHorizontalMargin, 0, 0));
+                //symbolLabel.setBorder(new LineBorder(new Color(150, 150, 150))); // debug draw
 
                 BufferedImage image = ManaSymbols.getSizedManaSymbol(symbol, symbolWidth);
                 if (image != null) {
                     // icon
                     symbolLabel.setIcon(new ImageIcon(image));
                 } else {
-                    // text
-                    symbolLabel.setText("{" + symbol + "}");
-                    symbolLabel.setOpaque(baseComp.isOpaque());
+                    // text (mana symbols withoiut brackets like R U * B)
+                    // TODO: add auto-size text from ManaSymbols.draw
+                    if (symbol.equals(CardInfo.SPLIT_MANA_SEPARATOR_SHORT)) {
+                        symbolLabel.setText(CardInfo.SPLIT_MANA_SEPARATOR_RENDER);
+                    } else {
+                        symbolLabel.setText("{" + symbol + "}");
+                    }
+                    symbolLabel.setOpaque(false);
                     symbolLabel.setForeground(baseComp.getForeground());
                     symbolLabel.setBackground(baseComp.getBackground());
                 }

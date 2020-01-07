@@ -525,7 +525,7 @@ public class CardPanelComponentImpl extends CardPanel {
             int manaX = getCardXOffset() + getCardWidth() - manaMarginRight - manaWidth;
             int manaY = getCardYOffset() + manaMarginTop;
 
-            ManaSymbols.draw(g, manaCost, manaX, manaY, getSymbolWidth(), Color.black, symbolMarginX);
+            ManaSymbols.draw(g, manaCost, manaX, manaY, getSymbolWidth(), ModernCardRenderer.MANA_ICONS_TEXT_COLOR, symbolMarginX);
         }
     }
 
