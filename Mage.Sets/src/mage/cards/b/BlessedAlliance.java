@@ -14,7 +14,6 @@ import mage.constants.TargetController;
 import mage.filter.FilterPlayer;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.other.PlayerPredicate;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -30,7 +29,7 @@ public final class BlessedAlliance extends CardImpl {
     private static final FilterPlayer filterGainLife = new FilterPlayer("player to gain life");
 
     static {
-        filterSacrifice.add(new PlayerPredicate(TargetController.OPPONENT));
+        filterSacrifice.add(TargetController.OPPONENT.getPlayerPredicate());
     }
 
     public BlessedAlliance(UUID ownerId, CardSetInfo setInfo) {

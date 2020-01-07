@@ -12,7 +12,6 @@ import mage.constants.TargetController;
 import mage.filter.common.*;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;
-import mage.filter.predicate.other.PlayerPredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -633,7 +632,7 @@ public final class StaticFilters {
     public static final FilterPlayer FILTER_PLAYER_CONTROLLER = new FilterPlayer("you");
 
     static {
-        FILTER_PLAYER_CONTROLLER.add(new PlayerPredicate(TargetController.YOU));
+        FILTER_PLAYER_CONTROLLER.add(TargetController.YOU.getPlayerPredicate());
         FILTER_PLAYER_CONTROLLER.setLockedFilter(true);
     }
 }

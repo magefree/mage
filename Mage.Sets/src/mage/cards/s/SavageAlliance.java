@@ -18,7 +18,6 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.filter.FilterPlayer;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.other.PlayerPredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -39,7 +38,7 @@ public final class SavageAlliance extends CardImpl {
     private static final FilterPlayer filterOpponent = new FilterPlayer();
 
     static {
-        filterOpponent.add(new PlayerPredicate(TargetController.OPPONENT));
+        filterOpponent.add(TargetController.OPPONENT.getPlayerPredicate());
     }
 
     public SavageAlliance(UUID ownerId, CardSetInfo setInfo) {
