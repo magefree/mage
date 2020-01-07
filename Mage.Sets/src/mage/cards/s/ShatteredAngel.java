@@ -15,7 +15,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -25,7 +24,7 @@ public final class ShatteredAngel extends CardImpl {
 
     private static final FilterPermanent filter = new FilterLandPermanent("a land");
     static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public ShatteredAngel (UUID ownerId, CardSetInfo setInfo) {

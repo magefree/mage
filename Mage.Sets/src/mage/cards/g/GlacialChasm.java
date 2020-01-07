@@ -17,7 +17,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -34,7 +33,7 @@ public final class GlacialChasm extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeControllerEffect(StaticFilters.FILTER_LAND, 1, "")));
         // Creatures you control can't attack.
         FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures you control");
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackAnyPlayerAllEffect(Duration.WhileOnBattlefield, filter)));
         // Prevent all damage that would be dealt to you.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventDamageToControllerEffect(Duration.WhileOnBattlefield)));

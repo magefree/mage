@@ -16,7 +16,6 @@ import mage.constants.SetTargetPointer;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -28,7 +27,7 @@ public final class SireOfStagnation extends CardImpl {
     private static final String rule = "Whenever a land enters the battlefield under an opponent's control, that player exiles the top two cards of their library and you draw two cards.";
 
     static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public SireOfStagnation(UUID ownerId, CardSetInfo setInfo) {

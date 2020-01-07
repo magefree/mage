@@ -16,7 +16,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.TargetPlayer;
 
 /**
@@ -30,7 +29,7 @@ public final class SagesRowDenizen extends CardImpl {
     static {
         filter.add(new ColorPredicate(ObjectColor.BLUE));
         filter.add(AnotherPredicate.instance);
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public SagesRowDenizen(UUID ownerId, CardSetInfo setInfo) {

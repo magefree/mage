@@ -14,7 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -54,7 +53,7 @@ class DayOfTheDragonsEntersEffect extends OneShotEffect {
     private static final FilterPermanent filter = new FilterPermanent("all creatures you control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
         filter.add(CardType.CREATURE.getPredicate());
     }
 
@@ -96,7 +95,7 @@ class DayOfTheDragonsLeavesEffect extends OneShotEffect {
     private static final FilterPermanent filter = new FilterPermanent("all Dragons you control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
         filter.add(SubType.DRAGON.getPredicate());
     }
 

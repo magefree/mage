@@ -18,7 +18,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -30,7 +29,7 @@ public final class JuniperOrderAdvocate extends CardImpl {
 
     static {
         filter.add(new ColorPredicate(ObjectColor.GREEN));
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public JuniperOrderAdvocate(UUID ownerId, CardSetInfo setInfo) {

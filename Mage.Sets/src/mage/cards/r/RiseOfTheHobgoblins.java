@@ -23,7 +23,6 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.token.GoblinSoldierToken;
 import mage.game.permanent.token.Token;
@@ -39,7 +38,7 @@ public final class RiseOfTheHobgoblins extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Red creatures and white creatures");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
         filter.add(CardType.CREATURE.getPredicate());
         filter.add(Predicates.or(
                 new ColorPredicate(ObjectColor.RED),

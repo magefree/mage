@@ -12,7 +12,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  * @author nantuko
@@ -23,7 +22,7 @@ public final class VampiricFury extends CardImpl {
 
     static {
         vampires.add(SubType.VAMPIRE.getPredicate());
-        vampires.add(new ControllerPredicate(TargetController.YOU));
+        vampires.add(TargetController.YOU.getControllerPredicate());
     }
 
     public VampiricFury(UUID ownerId, CardSetInfo setInfo) {

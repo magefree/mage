@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.BeastToken2;
@@ -74,7 +73,7 @@ class EzurisPredationEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             FilterCreaturePermanent filterCreature = new FilterCreaturePermanent();
-            filterCreature.add(new ControllerPredicate(TargetController.OPPONENT));
+            filterCreature.add(TargetController.OPPONENT.getControllerPredicate());
             List<Permanent> creaturesOfOpponents = game.getBattlefield().getActivePermanents(filterCreature, source.getControllerId(), source.getSourceId(), game);
             if (!creaturesOfOpponents.isEmpty()) {
                 CreateTokenEffect effect = new CreateTokenEffect(new BeastToken2(), creaturesOfOpponents.size());

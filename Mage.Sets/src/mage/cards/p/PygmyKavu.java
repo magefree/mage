@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -26,7 +25,7 @@ public final class PygmyKavu extends CardImpl {
 
     static {
         filter.add(new ColorPredicate(ObjectColor.BLACK));
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public PygmyKavu(UUID ownerId, CardSetInfo setInfo) {

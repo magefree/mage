@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterAttackingCreature;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetAnyTarget;
 
 /**
@@ -21,7 +20,7 @@ public final class Dogpile extends CardImpl {
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("attacking creatures you control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public Dogpile(UUID ownerId, CardSetInfo setInfo) {

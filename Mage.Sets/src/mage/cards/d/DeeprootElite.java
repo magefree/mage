@@ -15,7 +15,6 @@ import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -27,12 +26,12 @@ public final class DeeprootElite extends CardImpl {
     private static final FilterPermanent filterYourAnotherMerfolk = new FilterPermanent(SubType.MERFOLK, "another " + SubType.MERFOLK.toString());
     static {
         filterYourAnotherMerfolk.add(AnotherPredicate.instance);
-        filterYourAnotherMerfolk.add(new ControllerPredicate(TargetController.YOU));
+        filterYourAnotherMerfolk.add(TargetController.YOU.getControllerPredicate());
     }
 
     private static final FilterControlledCreaturePermanent filterYourAnyMerfolk = new FilterControlledCreaturePermanent(SubType.MERFOLK);
     static {
-        filterYourAnyMerfolk.add(new ControllerPredicate(TargetController.YOU));
+        filterYourAnyMerfolk.add(TargetController.YOU.getControllerPredicate());
     }
 
     public DeeprootElite(UUID ownerId, CardSetInfo setInfo) {

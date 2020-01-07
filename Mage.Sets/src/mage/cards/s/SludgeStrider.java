@@ -60,7 +60,7 @@ class SludgeStriderTriggeredAbility extends TriggeredAbilityImpl {
 
     private static final FilterArtifactCard filter = new FilterArtifactCard("another artifact under your control");
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
         filter.add(AnotherPredicate.instance);
     }
 

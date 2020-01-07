@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.TargetPermanent;
 
@@ -27,7 +26,7 @@ public final class SealAway extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
         filter.add(TappedPredicate.instance);
     }
 

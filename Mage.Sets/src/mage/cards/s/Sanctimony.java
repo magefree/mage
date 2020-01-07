@@ -11,7 +11,6 @@ import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -22,7 +21,7 @@ public final class Sanctimony extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("an opponent taps a Mountain");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
         filter.add(SubType.MOUNTAIN.getPredicate());
     }
 

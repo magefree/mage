@@ -9,7 +9,6 @@ import mage.constants.SpellAbilityType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.permanent.token.RedGreenBeastToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -25,7 +24,7 @@ public final class ThrashThreat extends SplitCard {
             = new FilterCreatureOrPlaneswalkerPermanent("creature or planeswalker you don't control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.NOT_YOU));
+        filter.add(TargetController.NOT_YOU.getControllerPredicate());
     }
 
     public ThrashThreat(UUID ownerId, CardSetInfo setInfo) {

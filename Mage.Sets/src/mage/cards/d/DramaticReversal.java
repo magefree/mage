@@ -8,7 +8,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterNonlandPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -19,7 +18,7 @@ public final class DramaticReversal extends CardImpl {
     private static final FilterNonlandPermanent filter = new FilterNonlandPermanent("nonland permanents");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public DramaticReversal(UUID ownerId, CardSetInfo setInfo) {

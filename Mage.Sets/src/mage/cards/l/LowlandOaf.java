@@ -18,7 +18,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -34,7 +33,7 @@ public final class LowlandOaf extends CardImpl {
 
     static {
         filter.add(SubType.GOBLIN.getPredicate());
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public LowlandOaf(UUID ownerId, CardSetInfo setInfo) {

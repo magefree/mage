@@ -13,7 +13,6 @@ import mage.constants.ComparisonType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -25,7 +24,7 @@ public final class UlvenwaldObserver extends CardImpl {
 
     static {
         filter.add(new ToughnessPredicate(ComparisonType.MORE_THAN, 3));
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public UlvenwaldObserver(UUID ownerId, CardSetInfo setInfo) {

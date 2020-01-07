@@ -12,7 +12,6 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterArtifactSpell;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -22,7 +21,7 @@ public final class CitanulDruid extends CardImpl {
     private static final FilterArtifactSpell filter = new FilterArtifactSpell();
 
     static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
 

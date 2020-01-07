@@ -15,7 +15,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.GoatToken;
@@ -96,7 +95,7 @@ class ClackbridgeTrollEffect extends OneShotEffect {
             }
             FilterControlledPermanent filter = new FilterControlledPermanent("creature to sacrifice");
             filter.add(CardType.CREATURE.getPredicate());
-            filter.add(new ControllerPredicate(TargetController.YOU));
+            filter.add(TargetController.YOU.getControllerPredicate());
             TargetControlledPermanent target = new TargetControlledPermanent(filter);
             target.setNotTarget(true);
             if (!target.canChoose(opponent.getId(), game)

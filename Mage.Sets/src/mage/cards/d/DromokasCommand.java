@@ -17,7 +17,6 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.common.FilterInstantOrSorcerySpell;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.TargetPlayer;
 import mage.target.TargetSpell;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -34,7 +33,7 @@ public final class DromokasCommand extends CardImpl {
     private static final FilterCreaturePermanent filterUncontrolledCreature = new FilterCreaturePermanent("creature you don't control");
 
     static {
-        filterUncontrolledCreature.add(new ControllerPredicate(TargetController.NOT_YOU));
+        filterUncontrolledCreature.add(TargetController.NOT_YOU.getControllerPredicate());
     }
 
     public DromokasCommand(UUID ownerId, CardSetInfo setInfo) {

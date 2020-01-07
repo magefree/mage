@@ -14,7 +14,6 @@ import mage.constants.ComparisonType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.permanent.token.DinosaurToken;
 import mage.target.Target;
 import mage.target.TargetPermanent;
@@ -30,7 +29,7 @@ public final class BafflingEnd extends CardImpl {
 
     static {
         filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public BafflingEnd(UUID ownerId, CardSetInfo setInfo) {

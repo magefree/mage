@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -26,7 +25,7 @@ public final class MasterOfEtherium extends CardImpl {
     static {
         filterCounted.add(CardType.ARTIFACT.getPredicate());
         filterBoosted.add(CardType.ARTIFACT.getPredicate());
-        filterBoosted.add(new ControllerPredicate(TargetController.YOU));
+        filterBoosted.add(TargetController.YOU.getControllerPredicate());
     }
 
     public MasterOfEtherium(UUID ownerId, CardSetInfo setInfo) {

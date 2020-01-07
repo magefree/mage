@@ -14,7 +14,6 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ChosenSubtypePredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 import java.util.UUID;
 
@@ -29,7 +28,7 @@ public final class MorophonTheBoundless extends CardImpl {
 
     static {
         filter.add(ChosenSubtypePredicate.instance);
-        filter2.add(new ControllerPredicate(TargetController.YOU));
+        filter2.add(TargetController.YOU.getControllerPredicate());
     }
 
     public MorophonTheBoundless(UUID ownerId, CardSetInfo setInfo) {

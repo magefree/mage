@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -26,7 +25,7 @@ public final class EvilEyeOfOrmsByGore extends CardImpl {
     static {
         cantBeBlockedByFilter.add(Predicates.not(SubType.WALL.getPredicate()));
         cantAttackFilter.add(Predicates.not((SubType.EYE.getPredicate())));
-        cantAttackFilter.add(new ControllerPredicate(TargetController.YOU));
+        cantAttackFilter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public EvilEyeOfOrmsByGore(UUID ownerId, CardSetInfo setInfo) {

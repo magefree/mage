@@ -15,7 +15,6 @@ import mage.cards.CardsImpl;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -32,7 +31,7 @@ public final class FaerieArtisans extends CardImpl {
 
     static {
         filterNontoken.add(Predicates.not(TokenPredicate.instance));
-        filterNontoken.add(new ControllerPredicate(TargetController.OPPONENT));
+        filterNontoken.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public FaerieArtisans(UUID ownerId, CardSetInfo setInfo) {

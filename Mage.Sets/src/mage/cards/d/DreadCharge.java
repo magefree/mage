@@ -26,7 +26,7 @@ public final class DreadCharge extends CardImpl {
     static {
         filter.add(new ColorPredicate(ObjectColor.BLACK));
         filter2.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public DreadCharge(UUID ownerId, CardSetInfo setInfo) {

@@ -16,7 +16,6 @@ import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -31,8 +30,8 @@ public final class WarsToll extends CardImpl {
     private static final FilterLandPermanent filterOpponentLand = new FilterLandPermanent("an opponent taps a land");
 
     static {
-        filterOpponentCreature.add(new ControllerPredicate(TargetController.OPPONENT));
-        filterOpponentLand.add(new ControllerPredicate(TargetController.OPPONENT));
+        filterOpponentCreature.add(TargetController.OPPONENT.getControllerPredicate());
+        filterOpponentLand.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public WarsToll(UUID ownerId, CardSetInfo setInfo) {

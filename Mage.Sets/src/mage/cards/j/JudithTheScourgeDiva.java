@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.target.common.TargetAnyTarget;
 
@@ -26,7 +25,7 @@ public final class JudithTheScourgeDiva extends CardImpl {
             = new FilterCreaturePermanent("nontoken creature you control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
         filter.add(Predicates.not(TokenPredicate.instance));
     }
 

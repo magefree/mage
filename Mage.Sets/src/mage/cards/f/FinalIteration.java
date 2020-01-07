@@ -17,7 +17,6 @@ import mage.constants.*;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.permanent.token.HumanWizardToken;
 
 /**
@@ -31,7 +30,7 @@ public final class FinalIteration extends CardImpl {
 
     static {
         filter.add(SubType.WIZARD.getPredicate());
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
         filterSpell.add(Predicates.or(
                 CardType.INSTANT.getPredicate(),
                 CardType.SORCERY.getPredicate()));

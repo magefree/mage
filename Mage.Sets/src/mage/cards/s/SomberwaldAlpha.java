@@ -19,7 +19,6 @@ import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -31,7 +30,7 @@ public final class SomberwaldAlpha extends CardImpl {
     static final private FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature you control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public SomberwaldAlpha(UUID ownerId, CardSetInfo setInfo) {

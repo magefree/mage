@@ -7,7 +7,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.SecondTargetPointer;
@@ -22,7 +21,7 @@ public final class RecklessRage extends CardImpl {
 
         // Reckless Rage deals 4 damage to target creature you don't control and 2 damage to target creature you control.
         FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you don't control");
-        filter.add(new ControllerPredicate(TargetController.NOT_YOU));
+        filter.add(TargetController.NOT_YOU.getControllerPredicate());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new DamageTargetEffect(4).setUseOnlyTargetPointer(true));
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());

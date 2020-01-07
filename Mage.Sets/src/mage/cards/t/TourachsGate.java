@@ -30,7 +30,6 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.AttackingPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -57,7 +56,7 @@ public final class TourachsGate extends CardImpl {
     private static final FilterCreaturePermanent filterAttackingCreatures = new FilterCreaturePermanent("attacking creatures you control");
     static {
         filterAttackingCreatures.add(AttackingPredicate.instance);
-        filterAttackingCreatures.add(new ControllerPredicate(TargetController.YOU));
+        filterAttackingCreatures.add(TargetController.YOU.getControllerPredicate());
     }
 
     private static final FilterControlledCreaturePermanent filterThrull = new FilterControlledCreaturePermanent("a Thrull");

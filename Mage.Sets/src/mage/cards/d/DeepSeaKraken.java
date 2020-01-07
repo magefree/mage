@@ -19,7 +19,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -30,7 +29,7 @@ public final class DeepSeaKraken extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("an opponent casts");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public DeepSeaKraken(UUID ownerId, CardSetInfo setInfo) {

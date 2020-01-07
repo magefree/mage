@@ -11,7 +11,6 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.command.Emblem;
 import mage.target.TargetPermanent;
 
@@ -26,7 +25,7 @@ public final class TeferiHeroOfDominariaEmblem extends Emblem {
         this.setName("Emblem Teferi");
         Ability ability = new DrawCardControllerTriggeredAbility(Zone.COMMAND, new ExileTargetEffect(), false);
         FilterPermanent filter = new FilterPermanent("permanent an opponent controls");
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
         ability.addTarget(new TargetPermanent(filter));
         this.getAbilities().add(ability);
     }

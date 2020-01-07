@@ -15,7 +15,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -90,7 +89,7 @@ class PucasMischiefSecondTarget extends TargetPermanent {
     public PucasMischiefSecondTarget() {
         super();
         this.filter = this.filter.copy();
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
         filter.add(Predicates.not(CardType.LAND.getPredicate()));
         setTargetName("permanent an opponent controls with an equal or lesser converted mana cost");
     }

@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -59,7 +58,7 @@ class TwistedJusticeEffect extends OneShotEffect {
 
         FilterControlledPermanent filter = new FilterControlledPermanent("creature");
         filter.add(CardType.CREATURE.getPredicate());
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
         TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);
 
         //A spell or ability could have removed the only legal target this player

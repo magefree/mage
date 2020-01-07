@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -27,8 +26,8 @@ public final class KapshoKitefins extends CardImpl {
     private static final FilterCreaturePermanent filterTarget = new FilterCreaturePermanent("creature an opponent controls");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
-        filterTarget.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.YOU.getControllerPredicate());
+        filterTarget.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public KapshoKitefins(UUID ownerId, CardSetInfo setInfo) {

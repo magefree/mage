@@ -16,7 +16,6 @@ import mage.constants.ColoredManaSymbol;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -69,7 +68,7 @@ class AnyColorPermanentTypesManaEffect extends ManaEffect {
         super();
         filter = permanentTypes;
         this.onlyColors = onlyColors;
-        filter.add(new ControllerPredicate(targetController));
+        filter.add(targetController.getControllerPredicate());
         String text = targetController == TargetController.OPPONENT ? "an opponent controls." : "you control.";
         staticText = "Add one mana of any " + (this.onlyColors ? "color" : "type") + " among " + permanentTypes.getMessage() + " " + text;
     }

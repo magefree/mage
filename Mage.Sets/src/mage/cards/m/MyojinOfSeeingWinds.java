@@ -22,7 +22,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.watchers.common.CastFromHandWatcher;
 
 /**
@@ -32,7 +31,7 @@ public final class MyojinOfSeeingWinds extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("permanent you control");
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public MyojinOfSeeingWinds(UUID ownerId, CardSetInfo setInfo) {

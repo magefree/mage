@@ -13,7 +13,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.NamePredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -49,7 +48,7 @@ class AlpineMoonEffect extends ContinuousEffectImpl {
     private static final FilterPermanent filter = new FilterLandPermanent();
 
     static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
         filter.add(Predicates.not(SuperType.BASIC.getPredicate()));
     }
 

@@ -19,7 +19,6 @@ import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 
@@ -33,7 +32,7 @@ public final class EnthrallingVictor extends CardImpl {
 
     static {
         filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 3));
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
     
     public EnthrallingVictor(UUID ownerId, CardSetInfo setInfo) {

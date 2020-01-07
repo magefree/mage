@@ -12,7 +12,6 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -25,7 +24,7 @@ public final class JadeBearer extends CardImpl {
     static {
         filterYourAnotherMerfolk.add(AnotherPredicate.instance);
         filterYourAnotherMerfolk.add(SubType.MERFOLK.getPredicate());
-        filterYourAnotherMerfolk.add(new ControllerPredicate(TargetController.YOU));
+        filterYourAnotherMerfolk.add(TargetController.YOU.getControllerPredicate());
         filterYourAnotherMerfolk.setMessage("another " + SubType.MERFOLK.toString() + " you control");
     }
 

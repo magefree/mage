@@ -73,7 +73,7 @@ class AnyColorLandsProduceManaEffect extends ManaEffect {
             this.filter = filter.copy();
         }
         this.onlyColors = onlyColors;
-        this.filter.add(new ControllerPredicate(targetController));
+        this.filter.add(targetController.getControllerPredicate());
         String text = targetController == TargetController.OPPONENT ? "an opponent controls" : "you control";
         staticText = "Add one mana of any " + (this.onlyColors ? "color" : "type") + " that a "
                 + (filter == null ? "land " : filter.getMessage() + " ") + text + " could produce";

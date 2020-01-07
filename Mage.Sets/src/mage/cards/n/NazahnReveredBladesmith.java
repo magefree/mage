@@ -18,7 +18,6 @@ import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.EquippedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -37,7 +36,7 @@ public final class NazahnReveredBladesmith extends CardImpl {
 
     static {
         equippedFilter.add(EquippedPredicate.instance);
-        equippedFilter.add(new ControllerPredicate(TargetController.YOU));
+        equippedFilter.add(TargetController.YOU.getControllerPredicate());
     }
 
     private static final FilterCard filter = new FilterCard("Equipment card");

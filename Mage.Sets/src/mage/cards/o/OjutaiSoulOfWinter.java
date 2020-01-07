@@ -15,7 +15,6 @@ import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterNonlandPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -29,8 +28,8 @@ public final class OjutaiSoulOfWinter extends CardImpl {
 
     static {
         filterDragon.add(SubType.DRAGON.getPredicate());
-        filterDragon.add(new ControllerPredicate(TargetController.YOU));
-        filterNonlandPermanent.add(new ControllerPredicate(TargetController.OPPONENT));
+        filterDragon.add(TargetController.YOU.getControllerPredicate());
+        filterNonlandPermanent.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public OjutaiSoulOfWinter(UUID ownerId, CardSetInfo setInfo) {

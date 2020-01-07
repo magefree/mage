@@ -17,7 +17,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -32,7 +31,7 @@ public final class AysenCrusader extends CardImpl {
                 SubType.SOLDIER.getPredicate(),
                 SubType.WARRIOR.getPredicate()
         ));
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public AysenCrusader(UUID ownerId, CardSetInfo setInfo) {

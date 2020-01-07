@@ -19,7 +19,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -32,7 +31,7 @@ public final class SilumgarAssassin extends CardImpl {
 
     static {
         filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 4));
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public SilumgarAssassin(UUID ownerId, CardSetInfo setInfo) {

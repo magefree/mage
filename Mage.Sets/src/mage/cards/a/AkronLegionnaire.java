@@ -12,7 +12,6 @@ import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.NamePredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -23,7 +22,7 @@ public final class AkronLegionnaire extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
     
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
         filter.add(Predicates.not(new NamePredicate("Akron Legionnaire")));
         filter.add(Predicates.not(CardType.ARTIFACT.getPredicate()));
     }

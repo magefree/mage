@@ -14,7 +14,6 @@ import mage.cards.CardsImpl;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -66,7 +65,7 @@ class ProfanerOfTheDeadReturnEffect extends OneShotEffect {
         Permanent exploitedCreature = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
         if (controller != null && exploitedCreature != null) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent();
-            filter.add(new ControllerPredicate(TargetController.OPPONENT));
+            filter.add(TargetController.OPPONENT.getControllerPredicate());
             filter.add(new ToughnessPredicate(ComparisonType.FEWER_THAN, exploitedCreature.getToughness().getValue()));
             Cards cardsToHand = new CardsImpl();
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {

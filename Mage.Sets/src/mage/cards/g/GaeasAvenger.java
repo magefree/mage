@@ -15,7 +15,6 @@ import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 
 /**
@@ -27,7 +26,7 @@ public final class GaeasAvenger extends CardImpl {
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("artifacts opponent control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public GaeasAvenger(UUID ownerId, CardSetInfo setInfo) {

@@ -16,7 +16,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -66,7 +65,7 @@ class UlrichUncontestedAlphaAbility extends TriggeredAbilityImpl {
 
     static {
         filter.add(Predicates.not(SubType.WEREWOLF.getPredicate()));
-        filter.add(new ControllerPredicate(TargetController.NOT_YOU));
+        filter.add(TargetController.NOT_YOU.getControllerPredicate());
     }
 
     public UlrichUncontestedAlphaAbility() {

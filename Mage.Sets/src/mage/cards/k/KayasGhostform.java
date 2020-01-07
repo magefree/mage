@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -28,7 +27,7 @@ public final class KayasGhostform extends CardImpl {
             = new FilterCreatureOrPlaneswalkerPermanent("creature or planeswalker you control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public KayasGhostform(UUID ownerId, CardSetInfo setInfo) {

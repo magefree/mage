@@ -21,7 +21,6 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
@@ -36,7 +35,7 @@ public final class FieldOfRuin extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent("nonbasic land an opponent controls");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
         filter.add(Predicates.not(SuperType.BASIC.getPredicate()));
     }
 

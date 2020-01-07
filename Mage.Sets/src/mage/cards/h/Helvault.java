@@ -15,7 +15,6 @@ import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -28,7 +27,7 @@ public final class Helvault extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you don't control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.NOT_YOU));
+        filter.add(TargetController.NOT_YOU.getControllerPredicate());
     }
 
     public Helvault(UUID ownerId, CardSetInfo setInfo) {

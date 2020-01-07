@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -30,7 +29,7 @@ public final class OgreGeargrabber extends CardImpl {
     static {
         filter.add(CardType.ARTIFACT.getPredicate());
         filter.add(SubType.EQUIPMENT.getPredicate());
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public OgreGeargrabber(UUID ownerId, CardSetInfo setInfo) {

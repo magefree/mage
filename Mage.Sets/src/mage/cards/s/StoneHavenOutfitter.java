@@ -15,7 +15,6 @@ import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.EquippedPredicate;
 
 /**
@@ -28,7 +27,7 @@ public final class StoneHavenOutfitter extends CardImpl {
 
     static {
         filter.add(EquippedPredicate.instance);
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public StoneHavenOutfitter(UUID ownerId, CardSetInfo setInfo) {

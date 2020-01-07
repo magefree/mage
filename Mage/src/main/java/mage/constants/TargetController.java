@@ -36,7 +36,7 @@ public enum TargetController {
     TargetController() {
         this.ownerPredicate = this.getOwnerPredicate();
         this.playerPredicate = new PlayerPredicate(this);
-        this.controllerPredicate = new ControllerPredicate(this);
+        this.controllerPredicate = this.getControllerPredicate();
         this.damagedPlayerThisTurnPredicate = new DamagedPlayerThisTurnPredicate(this);
     }
 

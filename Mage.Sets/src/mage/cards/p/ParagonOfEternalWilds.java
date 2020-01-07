@@ -23,7 +23,6 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -37,7 +36,7 @@ public final class ParagonOfEternalWilds extends CardImpl {
 
     static {
         filterGreen.add(new ColorPredicate(ObjectColor.GREEN));
-        filterGreen.add(new ControllerPredicate(TargetController.YOU));
+        filterGreen.add(TargetController.YOU.getControllerPredicate());
         filterGreen2.add(new ColorPredicate(ObjectColor.GREEN));        
         filterGreen2.add(AnotherPredicate.instance);
     }

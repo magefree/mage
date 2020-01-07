@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -21,7 +20,7 @@ public final class RewardsOfDiversity extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("a multicolored spell");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
         filter.add(MulticoloredPredicate.instance);
     }
 

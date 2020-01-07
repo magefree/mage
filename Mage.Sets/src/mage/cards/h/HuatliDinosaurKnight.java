@@ -17,7 +17,6 @@ import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -32,10 +31,10 @@ public final class HuatliDinosaurKnight extends CardImpl {
 
     static {
         filter.add(SubType.DINOSAUR.getPredicate());
-        filter.add(new ControllerPredicate(TargetController.YOU));
-        filter2.add(new ControllerPredicate(TargetController.NOT_YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
+        filter2.add(TargetController.NOT_YOU.getControllerPredicate());
         filter3.add(SubType.DINOSAUR.getPredicate());
-        filter3.add(new ControllerPredicate(TargetController.YOU));
+        filter3.add(TargetController.YOU.getControllerPredicate());
     }
 
     public HuatliDinosaurKnight(UUID ownerId, CardSetInfo setInfo) {

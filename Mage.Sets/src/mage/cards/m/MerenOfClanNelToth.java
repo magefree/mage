@@ -17,7 +17,6 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
@@ -33,7 +32,7 @@ public final class MerenOfClanNelToth extends CardImpl {
 
     static {
         filter.add(AnotherPredicate.instance);
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public MerenOfClanNelToth(UUID ownerId, CardSetInfo setInfo) {

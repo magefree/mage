@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterStackObject;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -24,7 +23,7 @@ public final class LeylineOfSanctity extends CardImpl {
     private static final FilterStackObject filter = new FilterStackObject("spells or abilities your opponents control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public LeylineOfSanctity(UUID ownerId, CardSetInfo setInfo) {

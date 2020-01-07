@@ -15,7 +15,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AttackingPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 import java.util.UUID;
 
@@ -30,7 +29,7 @@ public final class IroasGodOfVictory extends CardImpl {
             = new FilterControlledCreaturePermanent("attacking creatures you control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
         filterAttacking.add(AttackingPredicate.instance);
     }
 

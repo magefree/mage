@@ -16,7 +16,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -30,7 +29,7 @@ public final class OrcSureshot extends CardImpl {
 
     static {
         filter.add(AnotherPredicate.instance);
-        filterOpponentCreature.add(new ControllerPredicate(TargetController.OPPONENT));
+        filterOpponentCreature.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public OrcSureshot(UUID ownerId, CardSetInfo setInfo) {

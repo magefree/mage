@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -23,7 +22,7 @@ public final class EarthServant extends CardImpl {
 
     static {
         filter.add(SubType.MOUNTAIN.getPredicate());
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public EarthServant(UUID ownerId, CardSetInfo setInfo) {

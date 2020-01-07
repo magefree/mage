@@ -12,7 +12,6 @@ import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -22,7 +21,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures you control");
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public GoblinWarDrums(UUID ownerId, CardSetInfo setInfo) {

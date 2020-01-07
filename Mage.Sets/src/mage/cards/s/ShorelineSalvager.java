@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -25,7 +24,7 @@ public final class ShorelineSalvager extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Island");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
         filter.add(SubType.ISLAND.getPredicate());
     }
 

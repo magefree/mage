@@ -23,7 +23,7 @@ public final class CrusadingKnight extends CardImpl {
     private static final FilterLandPermanent swampFilter = new FilterLandPermanent("Swamp your opponent controls");
     static {
       swampFilter.add(SubType.SWAMP.getPredicate());
-      swampFilter.add(new ControllerPredicate(TargetController.OPPONENT));
+      swampFilter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public CrusadingKnight(UUID ownerId, CardSetInfo setInfo) {

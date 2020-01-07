@@ -17,7 +17,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -36,7 +35,7 @@ public final class DeputyOfDetention extends CardImpl {
     private static final FilterPermanent filter = new FilterNonlandPermanent("nonland permanent an opponent controls");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public DeputyOfDetention(UUID ownerId, CardSetInfo setInfo) {

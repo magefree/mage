@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.SaprolingToken;
 
@@ -23,7 +22,7 @@ public final class GolgariGermination extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature you control");
     
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
         filter.add(Predicates.not(TokenPredicate.instance));
     }    
     

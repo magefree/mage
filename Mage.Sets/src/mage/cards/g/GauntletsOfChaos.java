@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -131,7 +130,7 @@ class GauntletsOfChaosSecondTarget extends TargetPermanent {
     public GauntletsOfChaosSecondTarget() {
         super();
         this.filter = this.filter.copy();
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
         setTargetName("permanent an opponent controls that shares one of those types with it");
     }
 

@@ -15,7 +15,6 @@ import mage.filter.predicate.permanent.TokenPredicate;
 
 import java.util.UUID;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  * @author TheElk801
@@ -28,7 +27,7 @@ public final class DreadhordeInvasion extends CardImpl {
     static {
         filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 5));
         filter.add(TokenPredicate.instance);
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public DreadhordeInvasion(UUID ownerId, CardSetInfo setInfo) {

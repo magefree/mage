@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -35,7 +34,7 @@ public final class ToshiroUmezawa extends CardImpl {
     private static final FilterCard filterInstant = new FilterCard("instant card from your graveyard");
     
     static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
         filterInstant.add(CardType.INSTANT.getPredicate());
     }
     

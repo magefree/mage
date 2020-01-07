@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -24,7 +23,7 @@ public final class SpiritualSanctuary extends CardImpl {
 
     static {
         filter.add(SubType.PLAINS.getPredicate());
-        filter.add(new ControllerPredicate(TargetController.ACTIVE));
+        filter.add(TargetController.ACTIVE.getControllerPredicate());
     }
 
     public SpiritualSanctuary(UUID ownerId, CardSetInfo setInfo) {

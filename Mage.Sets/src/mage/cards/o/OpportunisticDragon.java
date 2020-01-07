@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -33,7 +32,7 @@ public final class OpportunisticDragon extends CardImpl {
                 CardType.ARTIFACT.getPredicate(),
                 SubType.HUMAN.getPredicate()
         ));
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public OpportunisticDragon(UUID ownerId, CardSetInfo setInfo) {

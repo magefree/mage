@@ -21,7 +21,6 @@ import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.TargetPermanent;
 
@@ -37,7 +36,7 @@ public final class HivisOfTheScale extends CardImpl {
     
     static {
         filter.add(TappedPredicate.instance);
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
         filterDragon.add(SubType.DRAGON.getPredicate());
     }
 

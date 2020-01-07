@@ -14,7 +14,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -57,7 +56,7 @@ class MavrenFeinDuskApostleTriggeredAbility extends TriggeredAbilityImpl {
     static {
         filter.add(SubType.VAMPIRE.getPredicate());
         filter.add(Predicates.not(TokenPredicate.instance));
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public MavrenFeinDuskApostleTriggeredAbility() {

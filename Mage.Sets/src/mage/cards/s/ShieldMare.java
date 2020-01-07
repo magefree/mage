@@ -17,7 +17,6 @@ import mage.constants.Zone;
 import mage.filter.FilterStackObject;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -69,7 +68,7 @@ class ShieldMareTriggeredAbility extends TriggeredAbilityImpl {
     private static final FilterStackObject filter = new FilterStackObject();
 
     static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public ShieldMareTriggeredAbility() {

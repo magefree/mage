@@ -23,7 +23,7 @@ public final class ButcherOfMalakir extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you control");
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public ButcherOfMalakir(UUID ownerId, CardSetInfo setInfo) {

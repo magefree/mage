@@ -17,7 +17,6 @@ import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterBySubtypeCard;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -29,7 +28,7 @@ public final class ForerunnerOfTheHeralds extends CardImpl {
     private static final FilterPermanent filterAnotherMerfolk = new FilterPermanent(SubType.MERFOLK, "another " + SubType.MERFOLK.toString());
     static {
         filterAnotherMerfolk.add(AnotherPredicate.instance);
-        filterAnotherMerfolk.add(new ControllerPredicate(TargetController.YOU));
+        filterAnotherMerfolk.add(TargetController.YOU.getControllerPredicate());
     }
 
     public ForerunnerOfTheHeralds(UUID ownerId, CardSetInfo setInfo) {

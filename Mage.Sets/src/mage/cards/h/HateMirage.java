@@ -10,7 +10,6 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.target.Target;
 import mage.target.TargetPermanent;
@@ -27,7 +26,7 @@ public final class HateMirage extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent("creatures you don't control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.NOT_YOU));
+        filter.add(TargetController.NOT_YOU.getControllerPredicate());
     }
 
     public HateMirage(UUID ownerId, CardSetInfo setInfo) {

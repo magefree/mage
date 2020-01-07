@@ -13,7 +13,6 @@ import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -25,7 +24,7 @@ public final class GavonyUnhallowed extends CardImpl {
 
     static {
         filter.add(AnotherPredicate.instance);
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public GavonyUnhallowed(UUID ownerId, CardSetInfo setInfo) {

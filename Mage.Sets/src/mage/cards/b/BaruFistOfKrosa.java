@@ -19,7 +19,6 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.token.BaruFistOfKrosaToken;
 import mage.game.permanent.token.Token;
@@ -35,7 +34,7 @@ public final class BaruFistOfKrosa extends CardImpl {
 
     static {
         forestFilter.add(SubType.FOREST.getPredicate());
-        greenCreatureFilter.add(new ControllerPredicate(TargetController.YOU));
+        greenCreatureFilter.add(TargetController.YOU.getControllerPredicate());
         greenCreatureFilter.add(new ColorPredicate(ObjectColor.GREEN));
     }
 

@@ -16,7 +16,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetLandPermanent;
 
@@ -32,7 +31,7 @@ public final class KukemssaSerpent extends CardImpl {
     private static final FilterControlledLandPermanent filterControlledLand = new FilterControlledLandPermanent("an Island");
 
     static {
-        filterOpponentLand.add(new ControllerPredicate(TargetController.OPPONENT));
+        filterOpponentLand.add(TargetController.OPPONENT.getControllerPredicate());
         filterControlledLand.add(SubType.ISLAND.getPredicate());
     }
 

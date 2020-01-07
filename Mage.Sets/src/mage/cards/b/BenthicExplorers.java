@@ -16,7 +16,6 @@ import mage.choices.Choice;
 import mage.choices.ChoiceColor;
 import mage.constants.*;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -36,7 +35,7 @@ public final class BenthicExplorers extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent("tapped land an opponent controls");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
         filter.add(TappedPredicate.instance);
     }
 

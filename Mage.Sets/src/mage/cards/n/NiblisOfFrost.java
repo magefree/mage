@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -26,7 +25,7 @@ public final class NiblisOfFrost extends CardImpl {
     private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("creature an opponent controls");
 
     static {
-        filterCreature.add(new ControllerPredicate(TargetController.OPPONENT));
+        filterCreature.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public NiblisOfFrost(UUID ownerId, CardSetInfo setInfo) {

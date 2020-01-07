@@ -12,7 +12,6 @@ import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -25,7 +24,7 @@ public final class LilianasInfluence extends CardImpl {
 
     static {
         filter.add(new NamePredicate("Liliana, Death Wielder"));
-        filterCreatures.add(new ControllerPredicate(TargetController.NOT_YOU));
+        filterCreatures.add(TargetController.NOT_YOU.getControllerPredicate());
     }
 
     public LilianasInfluence(UUID ownerId, CardSetInfo setInfo) {

@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -29,7 +28,7 @@ public final class CloudstoneCurio extends CardImpl {
 
     static {
         filter.add(Predicates.not(CardType.ARTIFACT.getPredicate()));
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public CloudstoneCurio(UUID ownerId, CardSetInfo setInfo) {
@@ -77,7 +76,7 @@ class CloudstoneCurioEffect extends OneShotEffect {
             if (triggeringCreature != null) {
                 FilterPermanent filter = new FilterPermanent("another permanent you control that shares a permanent type with " + triggeringCreature.getName());
                 filter.add(Predicates.not(new PermanentIdPredicate(triggeringCreature.getId())));
-                filter.add(new ControllerPredicate(TargetController.YOU));
+                filter.add(TargetController.YOU.getControllerPredicate());
                 filter.add(Predicates.or(
                         triggeringCreature
                                 .getCardType()

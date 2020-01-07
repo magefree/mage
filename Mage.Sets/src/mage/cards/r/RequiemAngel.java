@@ -14,7 +14,6 @@ import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.permanent.token.SpiritWhiteToken;
 
 /**
@@ -27,7 +26,7 @@ public final class RequiemAngel extends CardImpl {
     static {
         filter.add(Predicates.not(SubType.SPIRIT.getPredicate()));
         filter.add(AnotherPredicate.instance);
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public RequiemAngel(UUID ownerId, CardSetInfo setInfo) {

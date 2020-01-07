@@ -11,7 +11,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 import java.util.UUID;
 
@@ -24,7 +23,7 @@ public final class UndeadAugur extends CardImpl {
             = new FilterCreaturePermanent(SubType.ZOMBIE, "Zombie you control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public UndeadAugur(UUID ownerId, CardSetInfo setInfo) {

@@ -13,7 +13,6 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -25,7 +24,7 @@ public final class EyeblightAssassin extends CardImpl {
     private static final FilterCreaturePermanent filterOpponentCreature = new FilterCreaturePermanent("creature an opponent controls");
 
     static {
-        filterOpponentCreature.add(new ControllerPredicate(TargetController.OPPONENT));
+        filterOpponentCreature.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public EyeblightAssassin(UUID ownerId, CardSetInfo setInfo) {

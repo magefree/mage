@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 import java.util.UUID;
 
@@ -22,7 +21,7 @@ public final class DarkProphecy extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature you control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public DarkProphecy(UUID ownerId, CardSetInfo setInfo) {

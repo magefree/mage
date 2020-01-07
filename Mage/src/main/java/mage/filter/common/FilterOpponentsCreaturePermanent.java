@@ -2,7 +2,6 @@ package mage.filter.common;
 
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -21,13 +20,13 @@ public class FilterOpponentsCreaturePermanent extends FilterCreaturePermanent {
 
     public FilterOpponentsCreaturePermanent(String name) {
         super(name);
-        this.add(new ControllerPredicate(TargetController.OPPONENT));
+        this.add(TargetController.OPPONENT.getControllerPredicate());
 
     }
 
     public FilterOpponentsCreaturePermanent(SubType subtype, String name) {
         super(subtype, name);
-        this.add(new ControllerPredicate(TargetController.OPPONENT));
+        this.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public FilterOpponentsCreaturePermanent(final FilterOpponentsCreaturePermanent filter) {

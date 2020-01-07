@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.permanent.token.EldraziScionToken;
 
 /**
@@ -27,7 +26,7 @@ public final class CatacombSifter extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature you control");
     static {
         filter.add(AnotherPredicate.instance);
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }        
 
     public CatacombSifter(UUID ownerId, CardSetInfo setInfo) {

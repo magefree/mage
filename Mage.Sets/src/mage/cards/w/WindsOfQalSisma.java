@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 import java.util.UUID;
 
@@ -24,7 +23,7 @@ public final class WindsOfQalSisma extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures your opponents control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public WindsOfQalSisma(UUID ownerId, CardSetInfo setInfo) {

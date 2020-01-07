@@ -16,7 +16,6 @@ import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -28,7 +27,7 @@ public final class LoyalGyrfalcon extends CardImpl {
     
     static {
         filter.add(new ColorPredicate(ObjectColor.WHITE));
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
     
     private static final String rule = "Whenever you cast a white spell, {this} loses defender until end of turn.";

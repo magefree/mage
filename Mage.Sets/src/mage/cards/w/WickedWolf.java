@@ -20,7 +20,6 @@ import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 
@@ -37,7 +36,7 @@ public final class WickedWolf extends CardImpl {
             = new FilterControlledPermanent(SubType.FOOD, "a Food");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.NOT_YOU));
+        filter.add(TargetController.NOT_YOU.getControllerPredicate());
     }
 
     public WickedWolf(UUID ownerId, CardSetInfo setInfo) {

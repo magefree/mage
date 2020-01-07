@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 
@@ -22,7 +21,7 @@ public final class AetherTradewinds extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("permanent you don't control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.NOT_YOU));
+        filter.add(TargetController.NOT_YOU.getControllerPredicate());
     }
 
     public AetherTradewinds(UUID ownerId, CardSetInfo setInfo) {

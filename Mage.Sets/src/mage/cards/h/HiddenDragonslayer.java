@@ -17,7 +17,6 @@ import mage.constants.ComparisonType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -30,7 +29,7 @@ public final class HiddenDragonslayer extends CardImpl {
     
     static {
         filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 3));
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public HiddenDragonslayer(UUID ownerId, CardSetInfo setInfo) {

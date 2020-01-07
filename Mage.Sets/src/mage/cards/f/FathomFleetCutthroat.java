@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.WasDealtDamageThisTurnPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -26,7 +25,7 @@ public final class FathomFleetCutthroat extends CardImpl {
 
     static {
         filter.add(new WasDealtDamageThisTurnPredicate());
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public FathomFleetCutthroat(UUID ownerId, CardSetInfo setInfo) {

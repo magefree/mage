@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 import java.util.UUID;
 
@@ -25,7 +24,7 @@ public final class MidnightEntourage extends CardImpl {
 
     static {
         filter.add(SubType.AETHERBORN.getPredicate());
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public MidnightEntourage(UUID ownerId, CardSetInfo setInfo) {

@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -29,7 +28,7 @@ public final class DesolationGiant extends CardImpl {
     static {
         filter.add(AnotherPredicate.instance);
         filter2.add(AnotherPredicate.instance);
-        filter2.add(new ControllerPredicate(TargetController.YOU));
+        filter2.add(TargetController.YOU.getControllerPredicate());
     }
 
     public DesolationGiant(UUID ownerId, CardSetInfo setInfo) {

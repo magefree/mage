@@ -16,7 +16,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.TargetPermanent;
 import mage.target.TargetSpell;
 import mage.target.common.TargetCreaturePermanent;
@@ -32,7 +31,7 @@ public final class DualCasting extends CardImpl {
         filter.add(Predicates.or(
                 CardType.INSTANT.getPredicate(),
                 CardType.SORCERY.getPredicate()));
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public DualCasting(UUID ownerId, CardSetInfo setInfo) {

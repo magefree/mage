@@ -13,7 +13,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
@@ -66,7 +65,7 @@ class BoundlessRealmsEffect extends OneShotEffect {
             return false;
         }
         FilterLandPermanent filter = new FilterLandPermanent();
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
 
         int amount = new PermanentsOnBattlefieldCount(filter).calculate(game, source, this);
         TargetCardInLibrary target = new TargetCardInLibrary(0, amount, StaticFilters.FILTER_CARD_BASIC_LAND);

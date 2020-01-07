@@ -16,7 +16,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 import java.util.UUID;
 
@@ -34,7 +33,7 @@ public final class AngelicVoices extends CardImpl {
                         new ColorPredicate(ObjectColor.WHITE)
                 )
         ));
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     private static final Condition condition = new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter));

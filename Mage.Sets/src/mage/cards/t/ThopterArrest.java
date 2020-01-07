@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -29,7 +28,7 @@ public final class ThopterArrest extends CardImpl {
                 CardType.ARTIFACT.getPredicate(),
                 CardType.CREATURE.getPredicate()
         ));
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public ThopterArrest(UUID ownerId, CardSetInfo setInfo) {

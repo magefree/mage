@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterEnchantmentPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetEnchantmentPermanent;
 
 /**
@@ -22,7 +21,7 @@ public final class SpringCleaning extends CardImpl {
     private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("enchantments your opponents control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.NOT_YOU));
+        filter.add(TargetController.NOT_YOU.getControllerPredicate());
     }
 
     public SpringCleaning(UUID ownerId, CardSetInfo setInfo) {

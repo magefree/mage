@@ -10,7 +10,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -99,7 +98,7 @@ public class SacrificeOpponentsUnlessPayEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         List<UUID> permsToSacrifice = new ArrayList<>();
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
 
         for (UUID playerId : game.getOpponents(source.getControllerId())) {
             Player player = game.getPlayer(playerId);

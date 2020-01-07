@@ -9,7 +9,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 import java.util.UUID;
 
@@ -22,7 +21,7 @@ public final class WarteyeWitch extends CardImpl {
             = new FilterCreaturePermanent("creature you control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public WarteyeWitch(UUID ownerId, CardSetInfo setInfo) {

@@ -20,7 +20,6 @@ import mage.filter.FilterCard;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInGraveyard;
@@ -40,7 +39,7 @@ public final class StarfieldOfNyx extends CardImpl {
             = new FilterEnchantmentPermanent("enchantment you control");
 
     static {
-        filterEnchantmentYouControl.add(new ControllerPredicate(TargetController.YOU));
+        filterEnchantmentYouControl.add(TargetController.YOU.getControllerPredicate());
     }
 
     static {
@@ -85,7 +84,7 @@ class StarfieldOfNyxEffect extends ContinuousEffectImpl {
     static {
         filter.add(Predicates.not(SubType.AURA.getPredicate()));
         filter.add(AnotherPredicate.instance);
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public StarfieldOfNyxEffect() {

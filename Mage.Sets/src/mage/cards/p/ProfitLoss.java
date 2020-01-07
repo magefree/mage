@@ -11,14 +11,13 @@ import mage.constants.Duration;
 import mage.constants.SpellAbilityType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 public final class ProfitLoss extends SplitCard {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures your opponents control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public ProfitLoss(UUID ownerId, CardSetInfo setInfo) {

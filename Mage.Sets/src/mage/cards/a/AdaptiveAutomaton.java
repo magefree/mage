@@ -13,7 +13,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  * @author nantuko
@@ -23,7 +22,7 @@ public final class AdaptiveAutomaton extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures you control of the chosen type");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public AdaptiveAutomaton(UUID ownerId, CardSetInfo setInfo) {

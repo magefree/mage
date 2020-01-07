@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 import java.util.UUID;
 
@@ -31,7 +30,7 @@ public final class GoldenDemise extends CardImpl {
 
         // All creatures get -2/-2 until end of turn. If you have the city's blessing, instead only creatures your opponents control get -2/-2 until end of turn.
         FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures your opponents control");
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
                 new BoostAllEffect(-2, -2, Duration.EndOfTurn, filter, false),
                 new BoostAllEffect(-2, -2, Duration.EndOfTurn),

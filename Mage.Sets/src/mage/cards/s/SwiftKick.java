@@ -25,7 +25,7 @@ public final class SwiftKick extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you don't control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.NOT_YOU));
+        filter.add(TargetController.NOT_YOU.getControllerPredicate());
     }
 
     public SwiftKick(UUID ownerId, CardSetInfo setInfo) {

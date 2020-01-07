@@ -14,7 +14,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -25,7 +24,7 @@ public final class HungryDragonsnake extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("under an opponents's control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public HungryDragonsnake(UUID ownerId, CardSetInfo setInfo) {

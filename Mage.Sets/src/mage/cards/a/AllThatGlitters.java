@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -26,7 +25,7 @@ public final class AllThatGlitters extends CardImpl {
     private static final FilterPermanent filter = new FilterArtifactOrEnchantmentPermanent();
 
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);

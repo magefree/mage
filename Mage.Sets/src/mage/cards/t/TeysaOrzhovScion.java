@@ -21,7 +21,6 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.permanent.token.SpiritWhiteToken;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -38,7 +37,7 @@ public final class TeysaOrzhovScion extends CardImpl {
         filterWhite.add(new ColorPredicate(ObjectColor.WHITE));
         filterBlack.add(new ColorPredicate(ObjectColor.BLACK));
         filterBlack.add(AnotherPredicate.instance);
-        filterBlack.add(new ControllerPredicate(TargetController.YOU));
+        filterBlack.add(TargetController.YOU.getControllerPredicate());
     }
 
     public TeysaOrzhovScion(UUID ownerId, CardSetInfo setInfo) {

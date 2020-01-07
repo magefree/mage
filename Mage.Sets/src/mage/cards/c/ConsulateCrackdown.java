@@ -16,7 +16,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.filter.common.FilterArtifactPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -50,7 +49,7 @@ class ConsulateCracksownExileEffect extends OneShotEffect {
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("artifacts your opponents control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public ConsulateCracksownExileEffect() {

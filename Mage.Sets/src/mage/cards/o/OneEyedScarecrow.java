@@ -16,7 +16,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -28,7 +27,7 @@ public final class OneEyedScarecrow extends CardImpl {
 
     static {
         filter.add(new AbilityPredicate(FlyingAbility.class));
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public OneEyedScarecrow(UUID ownerId, CardSetInfo setInfo) {

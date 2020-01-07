@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -26,7 +25,7 @@ public final class ShamanOfThePack extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("equal to the number of elves you control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
         filter.add(SubType.ELF.getPredicate());
     }
 

@@ -16,7 +16,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -58,7 +57,7 @@ class ImpetuousProtegeEffect extends OneShotEffect {
 
     static {
         filter.add(TappedPredicate.instance);
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     ImpetuousProtegeEffect() {

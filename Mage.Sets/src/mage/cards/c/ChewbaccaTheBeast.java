@@ -11,10 +11,8 @@ import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherTargetPredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.AttackingPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -26,7 +24,7 @@ public final class ChewbaccaTheBeast extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target attacking creature you control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
         filter.add(AnotherPredicate.instance);
         filter.add(AttackingPredicate.instance);
     }

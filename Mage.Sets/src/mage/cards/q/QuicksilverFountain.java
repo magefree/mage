@@ -22,7 +22,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -70,7 +69,7 @@ enum QuicksilverFountainAdjuster implements TargetAdjuster {
             ability.getTargets().clear();
             FilterLandPermanent filter = new FilterLandPermanent();
             filter.add(Predicates.not(SubType.ISLAND.getPredicate()));
-            filter.add(new ControllerPredicate(TargetController.ACTIVE));
+            filter.add(TargetController.ACTIVE.getControllerPredicate());
             TargetLandPermanent target = new TargetLandPermanent(1, 1, filter, false);
             target.setTargetController(activePlayer.getId());
             ability.getTargets().add(target);

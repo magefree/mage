@@ -16,7 +16,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetNonlandPermanent;
@@ -31,7 +30,7 @@ public final class GalecasterColossus extends CardImpl {
     private static final FilterControlledPermanent filter2 = new FilterControlledPermanent("untapped Wizard you control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.NOT_YOU));
+        filter.add(TargetController.NOT_YOU.getControllerPredicate());
         filter2.add(SubType.WIZARD.getPredicate());
         filter2.add(Predicates.not(TappedPredicate.instance));
     }

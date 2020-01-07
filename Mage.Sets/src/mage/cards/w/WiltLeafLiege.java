@@ -16,7 +16,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -28,9 +27,9 @@ public final class WiltLeafLiege extends CardImpl {
     private static final FilterCreaturePermanent filterWhite = new FilterCreaturePermanent("white creatures you control");
     static {
         filterGreen.add(new ColorPredicate(ObjectColor.GREEN));
-        filterGreen.add(new ControllerPredicate(TargetController.YOU));
+        filterGreen.add(TargetController.YOU.getControllerPredicate());
         filterWhite.add(new ColorPredicate(ObjectColor.WHITE));
-        filterWhite.add(new ControllerPredicate(TargetController.YOU));
+        filterWhite.add(TargetController.YOU.getControllerPredicate());
     }
 
     public WiltLeafLiege(UUID ownerId, CardSetInfo setInfo) {

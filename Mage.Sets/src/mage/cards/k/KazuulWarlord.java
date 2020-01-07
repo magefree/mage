@@ -12,7 +12,6 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -24,7 +23,7 @@ public final class KazuulWarlord extends CardImpl {
 
     static {
         filter.add(SubType.ALLY.getPredicate());
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public KazuulWarlord(UUID ownerId, CardSetInfo setInfo) {

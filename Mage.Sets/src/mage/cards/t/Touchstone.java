@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetArtifactPermanent;
 
 /**
@@ -24,7 +23,7 @@ public final class Touchstone extends CardImpl {
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("artifact you don't control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.NOT_YOU));
+        filter.add(TargetController.NOT_YOU.getControllerPredicate());
     }
 
     public Touchstone(UUID ownerId, CardSetInfo setInfo) {

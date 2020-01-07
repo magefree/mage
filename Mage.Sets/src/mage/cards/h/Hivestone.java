@@ -9,7 +9,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.util.SubTypeList;
 
 /**
@@ -20,7 +19,7 @@ public final class Hivestone extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures you control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public Hivestone(UUID ownerId, CardSetInfo setInfo) {

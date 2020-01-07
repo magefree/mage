@@ -12,7 +12,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterEnchantmentPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -29,7 +28,7 @@ public final class AuraFinesse extends CardImpl {
     private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("Aura you control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
         filter.add(SubType.AURA.getPredicate());
     }
 

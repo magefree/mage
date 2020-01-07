@@ -11,7 +11,6 @@ import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 
@@ -26,7 +25,7 @@ public final class PoliticalTrickery extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent("land an opponent controls");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public PoliticalTrickery(UUID ownerId, CardSetInfo setInfo) {

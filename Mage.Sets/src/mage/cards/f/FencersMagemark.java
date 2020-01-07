@@ -14,7 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.EnchantedPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -28,7 +27,7 @@ public final class FencersMagemark extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures you control that are enchanted");
     static {
         filter.add(EnchantedPredicate.instance);
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
     
     public FencersMagemark(UUID ownerId, CardSetInfo setInfo) {

@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.CounterPredicate;
 
 /**
@@ -22,7 +21,7 @@ public final class TimeOfHeroes extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Each creature you control with a level counter");
     
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
         filter.add(new CounterPredicate(CounterType.LEVEL));
     }
 

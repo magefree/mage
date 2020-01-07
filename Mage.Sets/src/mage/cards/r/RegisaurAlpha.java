@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.permanent.token.DinosaurToken;
 
 /**
@@ -29,7 +28,7 @@ public final class RegisaurAlpha extends CardImpl {
 
     static {
         filter.add(SubType.DINOSAUR.getPredicate());
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public RegisaurAlpha(UUID ownerId, CardSetInfo setInfo) {

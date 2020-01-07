@@ -27,7 +27,7 @@ public final class GontisAetherHeart extends CardImpl {
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("{this} or another artifact");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public GontisAetherHeart(UUID ownerId, CardSetInfo setInfo) {

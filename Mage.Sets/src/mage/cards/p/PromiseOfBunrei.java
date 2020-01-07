@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SpiritToken;
@@ -27,7 +26,7 @@ public final class PromiseOfBunrei extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature you control");
     
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
     
     public PromiseOfBunrei(UUID ownerId, CardSetInfo setInfo) {

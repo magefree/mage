@@ -15,7 +15,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -32,7 +31,7 @@ public final class UlvenwaldMysteries extends CardImpl {
     private static final FilterControlledPermanent filterClue = new FilterControlledPermanent("a Clue");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
         filter.add(Predicates.not(TokenPredicate.instance));
         filterClue.add(SubType.CLUE.getPredicate());
     }

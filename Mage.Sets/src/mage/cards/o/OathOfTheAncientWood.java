@@ -14,7 +14,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterEnchantmentPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -26,7 +25,7 @@ public final class OathOfTheAncientWood extends CardImpl {
     private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("Oath of the Ancient Wood or another enchantment");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public OathOfTheAncientWood(UUID ownerId, CardSetInfo setInfo) {

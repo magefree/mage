@@ -30,7 +30,7 @@ public final class SabaccGame extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("permanent an opponent controls");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public SabaccGame(UUID ownerId, CardSetInfo setInfo) {

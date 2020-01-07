@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterLandCard;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.command.emblems.LilianaOfTheDarkRealmsEmblem;
 import mage.game.permanent.Permanent;
@@ -86,7 +85,7 @@ class LilianaOfTheDarkRealmsEffect extends ContinuousEffectImpl {
 
         FilterLandPermanent filter = new FilterLandPermanent("Swamps");
         filter.add(SubType.SWAMP.getPredicate());
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
         this.amount = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
 
         Player player = game.getPlayer(source.getControllerId());

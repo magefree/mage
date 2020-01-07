@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.permanent.token.ZombieToken;
 
 /**
@@ -25,7 +24,7 @@ public final class XathridNecromancer extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Human creature you control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
         filter.add(SubType.HUMAN.getPredicate());
     }
 

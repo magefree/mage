@@ -16,7 +16,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 import java.util.UUID;
 
@@ -30,7 +29,7 @@ public final class RadiantDestiny extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures you control of the chosen type");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public RadiantDestiny(UUID ownerId, CardSetInfo setInfo) {

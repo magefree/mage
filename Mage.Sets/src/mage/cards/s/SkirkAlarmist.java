@@ -20,7 +20,6 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.other.FaceDownPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -36,7 +35,7 @@ public final class SkirkAlarmist extends CardImpl {
 
     static {
         filter.add(FaceDownPredicate.instance);
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public SkirkAlarmist(UUID ownerId, CardSetInfo setInfo) {

@@ -34,7 +34,7 @@ public final class IcefallRegent extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public IcefallRegent(UUID ownerId, CardSetInfo setInfo) {

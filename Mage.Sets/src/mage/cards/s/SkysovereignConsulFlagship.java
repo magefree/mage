@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreatureOrPlaneswalker;
 
 import java.util.UUID;
@@ -27,7 +26,7 @@ public final class SkysovereignConsulFlagship extends CardImpl {
     private static final FilterCreatureOrPlaneswalkerPermanent filter = new FilterCreatureOrPlaneswalkerPermanent("creature or planeswalker an opponent controls");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public SkysovereignConsulFlagship(UUID ownerId, CardSetInfo setInfo) {

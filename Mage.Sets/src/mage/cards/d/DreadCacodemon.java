@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.watchers.common.CastFromHandWatcher;
 
 /**
@@ -26,12 +25,12 @@ public final class DreadCacodemon extends CardImpl {
     
     private static final FilterCreaturePermanent opponentsCreatures = new FilterCreaturePermanent("creatures your opponents control");
     static {
-        opponentsCreatures.add(new ControllerPredicate(TargetController.OPPONENT));
+        opponentsCreatures.add(TargetController.OPPONENT.getControllerPredicate());
     }
    
     private static final FilterCreaturePermanent otherCreaturesYouControl = new FilterCreaturePermanent("other creatures you control");
     static {
-        otherCreaturesYouControl.add(new ControllerPredicate(TargetController.YOU));
+        otherCreaturesYouControl.add(TargetController.YOU.getControllerPredicate());
         otherCreaturesYouControl.add(AnotherPredicate.instance);
     }
 	

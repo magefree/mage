@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterNonlandPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -23,7 +22,7 @@ public final class MeteorGolem extends CardImpl {
     private static final FilterNonlandPermanent filter = new FilterNonlandPermanent("nonland permanent an opponent controls");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public MeteorGolem(UUID ownerId, CardSetInfo setInfo) {

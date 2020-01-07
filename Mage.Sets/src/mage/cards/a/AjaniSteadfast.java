@@ -23,7 +23,6 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterPlaneswalkerPermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.command.emblems.AjaniSteadfastEmblem;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -37,7 +36,7 @@ public final class AjaniSteadfast extends CardImpl {
 
     static {
         filter.add(AnotherPredicate.instance);
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public AjaniSteadfast(UUID ownerId, CardSetInfo setInfo) {

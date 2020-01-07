@@ -22,7 +22,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.PermanentToken;
@@ -69,7 +68,7 @@ class WorldgorgerDragonEntersEffect extends OneShotEffect {
     private static final FilterPermanent filter = new FilterPermanent("all other permanents you control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
         filter.add(AnotherPredicate.instance);
     }
 

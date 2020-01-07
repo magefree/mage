@@ -19,7 +19,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 
@@ -35,7 +34,7 @@ public final class SlitheryStalker extends CardImpl {
         filter.add(Predicates.or(
                 new ColorPredicate(ObjectColor.GREEN),
                 new ColorPredicate(ObjectColor.WHITE)));
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public SlitheryStalker(UUID ownerId, CardSetInfo setInfo) {

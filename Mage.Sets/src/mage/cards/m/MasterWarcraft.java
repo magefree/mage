@@ -2,16 +2,14 @@
 package mage.cards.m;
 
 import java.util.*;
-import mage.MageObject;
+
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
 import mage.abilities.condition.common.BeforeAttackersAreDeclaredCondition;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.RestrictionEffect;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.combat.AttacksIfAbleTargetEffect;
 import mage.abilities.effects.common.combat.CantAttackTargetEffect;
 import mage.cards.CardImpl;
@@ -20,14 +18,10 @@ import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.Watcher;
 import mage.watchers.common.ChooseBlockersRedundancyWatcher;
@@ -124,7 +118,7 @@ class MasterWarcraftChooseAttackersEffect extends ContinuousRuleModifyingEffectI
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures that will attack this combat (creatures not chosen won't attack this combat)");
     static {
-        filter.add(new ControllerPredicate(TargetController.ACTIVE));
+        filter.add(TargetController.ACTIVE.getControllerPredicate());
     }
 
     public MasterWarcraftChooseAttackersEffect() {

@@ -11,7 +11,6 @@ import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -28,7 +27,7 @@ public final class DomrisAmbush extends CardImpl {
             = new FilterCreatureOrPlaneswalkerPermanent("creature or planeswalker you don't control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.NOT_YOU));
+        filter.add(TargetController.NOT_YOU.getControllerPredicate());
     }
 
     public DomrisAmbush(UUID ownerId, CardSetInfo setInfo) {

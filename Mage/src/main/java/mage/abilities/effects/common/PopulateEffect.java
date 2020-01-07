@@ -7,7 +7,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -35,7 +34,7 @@ public class PopulateEffect extends OneShotEffect {
 
     static {
         filter.add(TokenPredicate.instance);
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public PopulateEffect() {

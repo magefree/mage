@@ -17,7 +17,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -35,9 +34,9 @@ public final class FrontierSiege extends CardImpl {
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("a creature you don't control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
         filter.add(new AbilityPredicate(FlyingAbility.class));
-        filter2.add(new ControllerPredicate(TargetController.NOT_YOU));
+        filter2.add(TargetController.NOT_YOU.getControllerPredicate());
     }
     private static final String ruleTrigger1 = "&bull Khans &mdash; At the beginning of each of your main phases, add {G}{G}.";
     private static final String ruleTrigger2 = "&bull Dragons &mdash; Whenever a creature with flying enters the battlefield under your control, you may have it fight target creature you don't control.";

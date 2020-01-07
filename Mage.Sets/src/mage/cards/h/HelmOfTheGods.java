@@ -16,7 +16,6 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterEnchantmentPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -27,7 +26,7 @@ public final class HelmOfTheGods extends CardImpl {
     private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("enchantment you control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public HelmOfTheGods(UUID ownerId, CardSetInfo setInfo) {

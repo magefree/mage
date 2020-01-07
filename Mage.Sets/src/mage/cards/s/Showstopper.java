@@ -14,7 +14,6 @@ import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -29,7 +28,7 @@ public final class Showstopper extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creatures you control");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creature an opponent controls");
     static {
-        filter2.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter2.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public Showstopper (UUID ownerId, CardSetInfo setInfo) {
