@@ -17,7 +17,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.token.TokenImpl;
 import mage.players.Player;
@@ -34,7 +33,7 @@ public final class MobilizedDistrict extends CardImpl {
 
     static {
         filter.add(SuperType.LEGENDARY.getPredicate());
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     static final DynamicValue cardsCount = new PermanentsOnBattlefieldCount(filter);

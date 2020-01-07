@@ -21,7 +21,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.filter.predicate.permanent.ControllerControlsIslandPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -36,7 +35,7 @@ public final class Seasinger extends CardImpl {
 
     static {
         islandYouControl.add(SubType.ISLAND.getPredicate());
-        islandYouControl.add(new ControllerPredicate(TargetController.YOU));
+        islandYouControl.add(TargetController.YOU.getControllerPredicate());
     }
 
     public Seasinger(UUID ownerId, CardSetInfo setInfo) {
@@ -47,7 +46,7 @@ public final class Seasinger extends CardImpl {
         this.toughness = new MageInt(1);
 
         FilterPermanent seasinger = new FilterPermanent();
-        seasinger.add(new ControllerPredicate(TargetController.YOU));
+        seasinger.add(TargetController.YOU.getControllerPredicate());
         seasinger.add(new CardIdPredicate(this.getId()));
 
         // When you control no Islands, sacrifice Seasinger.

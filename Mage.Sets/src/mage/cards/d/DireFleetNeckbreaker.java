@@ -10,7 +10,6 @@ import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.filter.common.FilterAttackingCreature;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -20,7 +19,7 @@ public final class DireFleetNeckbreaker extends CardImpl {
 
     private static final FilterAttackingCreature filterYourAttackingPirates = new FilterAttackingCreature("Attacking Pirates");
     static {
-        filterYourAttackingPirates.add(new ControllerPredicate(TargetController.YOU));
+        filterYourAttackingPirates.add(TargetController.YOU.getControllerPredicate());
         filterYourAttackingPirates.add(SubType.PIRATE.getPredicate());
     }
 

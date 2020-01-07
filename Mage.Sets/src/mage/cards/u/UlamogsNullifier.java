@@ -19,7 +19,6 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.other.OwnerPredicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
@@ -71,7 +70,7 @@ class UlamogsNullifierEffect extends OneShotEffect {
     private static final FilterCard filter = new FilterCard("cards your opponents own from exile");
 
     static {
-        filter.add(new OwnerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getOwnerPredicate());
     }
 
     public UlamogsNullifierEffect() {

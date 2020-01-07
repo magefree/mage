@@ -18,7 +18,6 @@ import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.AttackingPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.permanent.token.GoblinToken;
 import mage.watchers.common.AttackedThisTurnWatcher;
 
@@ -33,7 +32,7 @@ public final class GoblinRabblemaster extends CardImpl {
 
     static {
         otherGoblinFilter.add(AnotherPredicate.instance);
-        otherGoblinFilter.add(new ControllerPredicate(TargetController.YOU));
+        otherGoblinFilter.add(TargetController.YOU.getControllerPredicate());
 
         attackingFilter.add(AttackingPredicate.instance);
         attackingFilter.add(AnotherPredicate.instance);

@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.other.OwnerPredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -25,7 +24,7 @@ public final class TelJiladStylus extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent();
     
     static {
-        filter.add(new OwnerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getOwnerPredicate());
     }
     
     public TelJiladStylus(UUID ownerId, CardSetInfo setInfo) {

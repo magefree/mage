@@ -17,7 +17,6 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ManaEvent;
@@ -36,7 +35,7 @@ public final class ExtraplanarLens extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent("land you control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public ExtraplanarLens(UUID ownerId, CardSetInfo setInfo) {

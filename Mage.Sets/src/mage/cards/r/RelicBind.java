@@ -16,7 +16,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterArtifactPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetPlayerOrPlaneswalker;
@@ -30,7 +29,7 @@ public final class RelicBind extends CardImpl {
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("artifact an opponent controls");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public RelicBind(UUID ownerId, CardSetInfo setInfo) {

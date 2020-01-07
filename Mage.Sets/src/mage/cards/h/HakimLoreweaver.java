@@ -19,7 +19,6 @@ import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.filter.predicate.other.AuraCardCanAttachToPermanentId;
-import mage.filter.predicate.other.OwnerPredicate;
 import mage.filter.predicate.permanent.AttachedToPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -40,7 +39,7 @@ public final class HakimLoreweaver extends CardImpl {
     static {
         filter.add(CardType.ENCHANTMENT.getPredicate());
         filter.add(SubType.AURA.getPredicate());
-        filter.add(new OwnerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getOwnerPredicate());
     }
 
     public HakimLoreweaver(UUID ownerId, CardSetInfo setInfo) {

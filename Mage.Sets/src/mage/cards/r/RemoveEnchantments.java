@@ -13,7 +13,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledEnchantmentPermanent;
 import mage.filter.predicate.ObjectPlayer;
 import mage.filter.predicate.ObjectPlayerPredicate;
-import mage.filter.predicate.other.OwnerPredicate;
 import mage.filter.predicate.permanent.AttachedToControlledPermanentPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -32,25 +31,25 @@ public final class RemoveEnchantments extends CardImpl {
     private static final FilterPermanent filter6 = new FilterPermanent();
     static {
             // all enchantments you both own and control
-        filter1.add(new OwnerPredicate(TargetController.YOU));
+        filter1.add(TargetController.YOU.getOwnerPredicate());
             // all Auras you own attached to permanents you control
         filter2.add(new AttachedToControlledPermanentPredicate());
         filter2.add(SubType.AURA.getPredicate());
-        filter2.add(new OwnerPredicate(TargetController.YOU));
+        filter2.add(TargetController.YOU.getOwnerPredicate());
             // all Auras you own attached to attacking creatures your opponents control
         filter3.add(new AttachedToOpponentControlledAttackingCreaturePredicate());
         filter3.add(SubType.AURA.getPredicate());
-        filter3.add(new OwnerPredicate(TargetController.YOU));
+        filter3.add(TargetController.YOU.getOwnerPredicate());
             // all other enchantments you control (i.e. that you don't own)
-        filter4.add(new OwnerPredicate(TargetController.NOT_YOU));
+        filter4.add(TargetController.NOT_YOU.getOwnerPredicate());
             // all other Auras attached to permanents you control (i.e. that you don't own)
         filter5.add(new AttachedToControlledPermanentPredicate());
         filter5.add(SubType.AURA.getPredicate());
-        filter5.add(new OwnerPredicate(TargetController.NOT_YOU));
+        filter5.add(TargetController.NOT_YOU.getOwnerPredicate());
             // all other Auras attached to attacking creatures your opponents control (i.e. that you don't own)
         filter6.add(new AttachedToOpponentControlledAttackingCreaturePredicate());
         filter6.add(SubType.AURA.getPredicate());
-        filter6.add(new OwnerPredicate(TargetController.NOT_YOU));
+        filter6.add(TargetController.NOT_YOU.getOwnerPredicate());
     }
 
     public RemoveEnchantments(UUID ownerId, CardSetInfo setInfo) {

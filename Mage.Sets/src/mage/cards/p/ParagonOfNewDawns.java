@@ -22,7 +22,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -36,10 +35,10 @@ public final class ParagonOfNewDawns extends CardImpl {
 
     static {
         filter.add(new ColorPredicate(ObjectColor.WHITE));
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
         filter2.add(AnotherPredicate.instance);
         filter2.add(new ColorPredicate(ObjectColor.WHITE));
-        filter2.add(new ControllerPredicate(TargetController.YOU));
+        filter2.add(TargetController.YOU.getControllerPredicate());
     }
 
     public ParagonOfNewDawns(UUID ownerId, CardSetInfo setInfo) {

@@ -13,7 +13,6 @@ import mage.constants.TargetController;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -70,7 +69,7 @@ class SelfInflictedWoundEffect extends OneShotEffect {
         }
         FilterControlledPermanent filter = new FilterControlledPermanent("a green or white creature");
         filter.add(CardType.CREATURE.getPredicate());
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
         filter.add(Predicates.or(new ColorPredicate(ObjectColor.GREEN), new ColorPredicate(ObjectColor.WHITE)));
         TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);
 

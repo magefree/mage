@@ -15,7 +15,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -30,7 +29,7 @@ public final class SpiritualAsylum extends CardImpl {
                 CardType.CREATURE.getPredicate(),
                 CardType.LAND.getPredicate()
         ));
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public SpiritualAsylum(UUID ownerId, CardSetInfo setInfo) {

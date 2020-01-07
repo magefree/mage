@@ -17,7 +17,6 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardIdPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.ZombieToken;
@@ -86,7 +85,7 @@ class LilianaDreadhordeGeneralEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         FilterPermanent keepFilter = new FilterPermanent();
-        keepFilter.add(new ControllerPredicate(TargetController.OPPONENT));
+        keepFilter.add(TargetController.OPPONENT.getControllerPredicate());
         for (UUID opponentId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player opponent = game.getPlayer(opponentId);
             if (opponent == null || !opponent.hasOpponent(source.getControllerId(), game)) {

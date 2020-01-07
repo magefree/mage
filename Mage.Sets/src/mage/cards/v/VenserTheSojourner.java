@@ -17,7 +17,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.other.OwnerPredicate;
 import mage.game.Game;
 import mage.game.command.emblems.VenserTheSojournerEmblem;
 import mage.game.permanent.Permanent;
@@ -34,7 +33,7 @@ public final class VenserTheSojourner extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("permanent you own");
 
     static {
-        filter.add(new OwnerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getOwnerPredicate());
     }
 
     public VenserTheSojourner(UUID ownerId, CardSetInfo setInfo) {

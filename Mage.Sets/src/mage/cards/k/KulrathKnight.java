@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.CounterAnyPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -55,7 +54,7 @@ class KulrathKnightRestrictionEffect extends RestrictionEffect {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures your opponents control with counters on them");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
         filter.add(CounterAnyPredicate.instance);
     }
 

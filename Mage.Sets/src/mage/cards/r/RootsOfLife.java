@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -29,9 +28,9 @@ public final class RootsOfLife extends CardImpl {
 
     static {
         islandFilter.add(SubType.ISLAND.getPredicate());
-        islandFilter.add(new ControllerPredicate(TargetController.OPPONENT));
+        islandFilter.add(TargetController.OPPONENT.getControllerPredicate());
         swampFilter.add(SubType.SWAMP.getPredicate());
-        swampFilter.add(new ControllerPredicate(TargetController.OPPONENT));
+        swampFilter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public RootsOfLife(UUID ownerId, CardSetInfo setInfo) {

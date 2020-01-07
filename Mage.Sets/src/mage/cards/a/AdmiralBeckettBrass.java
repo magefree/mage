@@ -14,7 +14,6 @@ import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.Predicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
@@ -33,7 +32,7 @@ public final class AdmiralBeckettBrass extends CardImpl {
 
     static {
         filter.add(SubType.PIRATE.getPredicate());
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
         filter2.add(new ControllerDealtDamageByPiratesPredicate());
     }
 

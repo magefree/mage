@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -27,7 +26,7 @@ public final class DinosaurStampede extends CardImpl {
 
     static {
         filter2.add(SubType.DINOSAUR.getPredicate());
-        filter2.add(new ControllerPredicate(TargetController.YOU));
+        filter2.add(TargetController.YOU.getControllerPredicate());
     }
 
     public DinosaurStampede(UUID ownerId, CardSetInfo setInfo) {

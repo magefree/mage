@@ -13,7 +13,6 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterNonlandPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.players.Library;
 import mage.players.Player;
@@ -35,7 +34,7 @@ public final class NicolBolasGodPharaoh extends CardImpl {
     private static final FilterPermanent opponentsNonlandPermanentsFilter = new FilterNonlandPermanent("non-land permanents your opponents control");
 
     static {
-        opponentsNonlandPermanentsFilter.add(new ControllerPredicate(TargetController.OPPONENT));
+        opponentsNonlandPermanentsFilter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public NicolBolasGodPharaoh(UUID ownerId, CardSetInfo setInfo) {

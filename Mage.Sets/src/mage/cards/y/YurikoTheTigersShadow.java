@@ -20,7 +20,6 @@ import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -34,7 +33,7 @@ public final class YurikoTheTigersShadow extends CardImpl {
             = new FilterCreaturePermanent(SubType.NINJA, "a Ninja you control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public YurikoTheTigersShadow(UUID ownerId, CardSetInfo setInfo) {

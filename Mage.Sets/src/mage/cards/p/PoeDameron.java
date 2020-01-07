@@ -9,7 +9,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 
 /**
@@ -22,9 +21,9 @@ public final class PoeDameron extends CardImpl {
     private static final FilterCreaturePermanent filterStarship = new FilterCreaturePermanent("starship creatures you control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
         filter.add(Predicates.not(TokenPredicate.instance));
-        filterStarship.add(new ControllerPredicate(TargetController.YOU));
+        filterStarship.add(TargetController.YOU.getControllerPredicate());
         filterStarship.add(SubType.STARSHIP.getPredicate());
     }
 

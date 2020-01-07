@@ -16,7 +16,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.filter.predicate.other.OwnerPredicate;
 
 /**
  *
@@ -30,7 +29,7 @@ public final class GruulCharm extends CardImpl {
 
     static {
         filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
-        filter2.add(new OwnerPredicate(TargetController.YOU));
+        filter2.add(TargetController.YOU.getOwnerPredicate());
         filter3.add(new AbilityPredicate(FlyingAbility.class));
     }
 

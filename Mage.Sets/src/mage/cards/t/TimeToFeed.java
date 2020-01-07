@@ -18,7 +18,6 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -43,7 +42,7 @@ public final class TimeToFeed extends CardImpl {
 
     private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent("creature an opponent controls");
     static {
-        filter1.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter1.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public TimeToFeed(UUID ownerId, CardSetInfo setInfo) {

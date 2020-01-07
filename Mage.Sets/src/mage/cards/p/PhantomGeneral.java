@@ -13,7 +13,6 @@ import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 
 /**
@@ -25,7 +24,7 @@ public final class PhantomGeneral extends CardImpl {
 
     static {
         filter.add(TokenPredicate.instance);
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public PhantomGeneral(UUID ownerId, CardSetInfo setInfo) {

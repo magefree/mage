@@ -15,7 +15,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterStackObject;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.StackObject;
@@ -58,7 +57,7 @@ class AmuletOfSafekeepingTriggeredAbility extends TriggeredAbilityImpl {
     private static final FilterStackObject filter = new FilterStackObject();
 
     static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public AmuletOfSafekeepingTriggeredAbility() {

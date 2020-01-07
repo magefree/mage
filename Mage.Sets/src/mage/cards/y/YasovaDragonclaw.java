@@ -23,7 +23,6 @@ import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -38,7 +37,7 @@ public final class YasovaDragonclaw extends CardImpl {
 
     static {
         filter.add(new YasovaDragonclawPowerLessThanSourcePredicate());
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public YasovaDragonclaw(UUID ownerId, CardSetInfo setInfo) {

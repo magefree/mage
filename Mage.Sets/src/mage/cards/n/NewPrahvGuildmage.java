@@ -17,7 +17,6 @@ import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterNonlandPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetNonlandPermanent;
 
@@ -30,7 +29,7 @@ public final class NewPrahvGuildmage extends CardImpl {
     private static final FilterNonlandPermanent filter = new FilterNonlandPermanent("nonland permanent an opponent control");
  
     static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
     
     public NewPrahvGuildmage(UUID ownerId, CardSetInfo setInfo) {

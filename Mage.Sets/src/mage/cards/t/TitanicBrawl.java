@@ -14,7 +14,6 @@ import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.CounterPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -32,7 +31,7 @@ public final class TitanicBrawl extends CardImpl {
             = new FilterControlledCreaturePermanent("a creature you control with a +1/+1 counter on it");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.NOT_YOU));
+        filter.add(TargetController.NOT_YOU.getControllerPredicate());
         filter2.add(new CounterPredicate(CounterType.P1P1));
     }
 

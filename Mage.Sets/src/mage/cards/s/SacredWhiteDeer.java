@@ -15,7 +15,6 @@ import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -26,7 +25,7 @@ public final class SacredWhiteDeer extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("you control a Yanggu planeswalker");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
         filter.add(CardType.PLANESWALKER.getPredicate());
         filter.add(SubType.YANGGU.getPredicate());
     }

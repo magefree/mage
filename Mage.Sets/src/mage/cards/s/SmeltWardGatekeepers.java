@@ -16,7 +16,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -34,7 +33,7 @@ public final class SmeltWardGatekeepers extends CardImpl {
 
     static {
         filter.add(SubType.GATE.getPredicate());
-        targetFilter.add(new ControllerPredicate(TargetController.OPPONENT));
+        targetFilter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     private static final Condition gatesCondition = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1);

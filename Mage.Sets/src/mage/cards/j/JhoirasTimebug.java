@@ -17,8 +17,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterPermanentOrSuspendedCard;
-import mage.filter.predicate.other.OwnerPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -32,8 +30,8 @@ public final class JhoirasTimebug extends CardImpl {
 
     private static final FilterPermanentOrSuspendedCard filter = new FilterPermanentOrSuspendedCard("permanent you control or suspended card you own");
     static {
-        filter.getPermanentFilter().add(new ControllerPredicate(TargetController.YOU));
-        filter.getCardFilter().add(new OwnerPredicate(TargetController.YOU));
+        filter.getPermanentFilter().add(TargetController.YOU.getControllerPredicate());
+        filter.getCardFilter().add(TargetController.YOU.getOwnerPredicate());
     }
 
     public JhoirasTimebug(UUID ownerId, CardSetInfo setInfo) {

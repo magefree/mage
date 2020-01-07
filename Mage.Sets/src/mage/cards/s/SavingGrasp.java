@@ -11,7 +11,6 @@ import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.constants.TimingRule;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.other.OwnerPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -23,7 +22,7 @@ public final class SavingGrasp extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you own");
 
     static {
-        filter.add(new OwnerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getOwnerPredicate());
     }
 
     public SavingGrasp(UUID ownerId, CardSetInfo setInfo) {

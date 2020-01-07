@@ -12,7 +12,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -73,7 +72,7 @@ class AnyColorLandsProduceManaEffect extends ManaEffect {
             this.filter = filter.copy();
         }
         this.onlyColors = onlyColors;
-        this.filter.add(new ControllerPredicate(targetController));
+        this.filter.add(targetController.getControllerPredicate());
         String text = targetController == TargetController.OPPONENT ? "an opponent controls" : "you control";
         staticText = "Add one mana of any " + (this.onlyColors ? "color" : "type") + " that a "
                 + (filter == null ? "land " : filter.getMessage() + " ") + text + " could produce";

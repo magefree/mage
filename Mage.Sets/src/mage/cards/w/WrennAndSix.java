@@ -13,7 +13,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterLandCard;
-import mage.filter.predicate.other.OwnerPredicate;
 import mage.game.command.emblems.WrennAndSixEmblem;
 import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -28,7 +27,7 @@ public final class WrennAndSix extends CardImpl {
     private static final FilterLandCard filter = new FilterLandCard("land card from your graveyard");
 
     static {
-        filter.add(new OwnerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getOwnerPredicate());
     }
 
     public WrennAndSix(UUID ownerId, CardSetInfo setInfo) {

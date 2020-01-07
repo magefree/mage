@@ -13,7 +13,6 @@ import mage.constants.TargetController;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
@@ -28,7 +27,7 @@ public final class EvolutionaryEscalation extends CardImpl {
     private static final FilterCreaturePermanent filterOpponentCreature = new FilterCreaturePermanent("creature an opponent controls");
     
     static {
-        filterOpponentCreature.add(new ControllerPredicate(TargetController.OPPONENT));
+        filterOpponentCreature.add(TargetController.OPPONENT.getControllerPredicate());
     }    
 
     public EvolutionaryEscalation(UUID ownerId, CardSetInfo setInfo) {

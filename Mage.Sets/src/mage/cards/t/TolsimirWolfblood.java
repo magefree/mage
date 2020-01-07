@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.permanent.token.VojaToken;
 
 /**
@@ -28,9 +27,9 @@ public final class TolsimirWolfblood extends CardImpl {
 
     static {
         filterGreen.add(new ColorPredicate(ObjectColor.GREEN));
-        filterGreen.add(new ControllerPredicate(TargetController.YOU));
+        filterGreen.add(TargetController.YOU.getControllerPredicate());
         filterWhite.add(new ColorPredicate(ObjectColor.WHITE));
-        filterWhite.add(new ControllerPredicate(TargetController.YOU));
+        filterWhite.add(TargetController.YOU.getControllerPredicate());
     }
 
     public TolsimirWolfblood(UUID ownerId, CardSetInfo setInfo) {

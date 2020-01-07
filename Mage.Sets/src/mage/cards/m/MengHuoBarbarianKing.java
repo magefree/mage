@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -23,7 +22,7 @@ public final class MengHuoBarbarianKing extends CardImpl {
 
     static {
         filterGreen.add(new ColorPredicate(ObjectColor.GREEN));
-        filterGreen.add(new ControllerPredicate(TargetController.YOU));
+        filterGreen.add(TargetController.YOU.getControllerPredicate());
     }
 
     public MengHuoBarbarianKing(UUID ownerId, CardSetInfo setInfo) {

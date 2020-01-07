@@ -13,7 +13,6 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.CounterPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -30,7 +29,7 @@ public final class NissasJudgment extends CardImpl {
     private static final FilterCreaturePermanent FILTER = new FilterCreaturePermanent("creature an opponent controls");
 
     static {
-        FILTER.add(new ControllerPredicate(TargetController.OPPONENT));
+        FILTER.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public NissasJudgment(UUID ownerId, CardSetInfo setInfo) {
@@ -63,7 +62,7 @@ class NissasJudgmentEffect extends OneShotEffect {
     private static final FilterCreaturePermanent filterWithCounter = new FilterCreaturePermanent();
 
     static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
         filterWithCounter.add(new CounterPredicate(CounterType.P1P1));
     }
 

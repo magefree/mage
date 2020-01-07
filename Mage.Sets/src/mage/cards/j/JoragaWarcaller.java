@@ -16,7 +16,6 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -29,7 +28,7 @@ public final class JoragaWarcaller extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("elf creatures you control");
     
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
         filter.add(SubType.ELF.getPredicate());
         filter.add(AnotherPredicate.instance);
     }

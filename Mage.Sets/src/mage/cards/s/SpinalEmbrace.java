@@ -20,7 +20,6 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.TurnPhase;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -36,7 +35,7 @@ public final class SpinalEmbrace extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you don't control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.NOT_YOU));
+        filter.add(TargetController.NOT_YOU.getControllerPredicate());
     }
 
     public SpinalEmbrace(UUID ownerId, CardSetInfo setInfo) {

@@ -14,7 +14,6 @@ import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -30,7 +29,7 @@ public final class HuntTheHunter extends CardImpl {
 
     static {
         filterControlledGreen.add(new ColorPredicate(ObjectColor.GREEN));
-        filterOpponentGreen.add(new ControllerPredicate(TargetController.OPPONENT));
+        filterOpponentGreen.add(TargetController.OPPONENT.getControllerPredicate());
         filterOpponentGreen.add(new ColorPredicate(ObjectColor.GREEN));
     }
 

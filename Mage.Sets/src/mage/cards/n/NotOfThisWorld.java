@@ -13,7 +13,6 @@ import mage.constants.*;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
@@ -146,7 +145,7 @@ enum NotOfThisWorldCondition implements Condition {
 
     static {
         filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 6));
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
 

@@ -13,7 +13,6 @@ import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.watchers.common.ManaSpentToCastWatcher;
 
 /**
@@ -27,8 +26,8 @@ public final class UnnervingAssault extends CardImpl {
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creatures you control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
-        filter2.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
+        filter2.add(TargetController.YOU.getControllerPredicate());
     }
 
     public UnnervingAssault(UUID ownerId, CardSetInfo setInfo) {

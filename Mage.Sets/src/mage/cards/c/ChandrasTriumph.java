@@ -11,7 +11,6 @@ import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPlaneswalkerPermanent;
 import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -27,7 +26,7 @@ public final class ChandrasTriumph extends CardImpl {
             = new FilterCreatureOrPlaneswalkerPermanent("creature or planeswalker an opponent controls");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public ChandrasTriumph(UUID ownerId, CardSetInfo setInfo) {

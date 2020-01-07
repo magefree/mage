@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  * @author Loki
@@ -26,7 +25,7 @@ public final class DesolationAngel extends CardImpl {
     private static final FilterLandPermanent filter2 = new FilterLandPermanent("lands you control");
 
     static {
-        filter2.add(new ControllerPredicate(TargetController.YOU));
+        filter2.add(TargetController.YOU.getControllerPredicate());
     }
 
     public DesolationAngel(UUID ownerId, CardSetInfo setInfo) {

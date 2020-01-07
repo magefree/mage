@@ -19,7 +19,6 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterNonlandPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.TargetPermanent;
@@ -92,7 +91,7 @@ class DreamEaterReflexiveTriggeredAbility extends DelayedTriggeredAbility {
             = new FilterNonlandPermanent("nonland permanent an opponent controls");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public DreamEaterReflexiveTriggeredAbility() {

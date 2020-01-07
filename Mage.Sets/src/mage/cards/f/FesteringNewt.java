@@ -18,7 +18,6 @@ import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -30,7 +29,7 @@ public final class FesteringNewt extends CardImpl {
     private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("creature an opponent controls");
     private static final FilterCreaturePermanent filterBogbrewWitch = new FilterCreaturePermanent();
     static {
-        filterCreature.add(new ControllerPredicate(TargetController.OPPONENT));
+        filterCreature.add(TargetController.OPPONENT.getControllerPredicate());
         filterBogbrewWitch.add(new NamePredicate("Bogbrew Witch"));
     }
     public FesteringNewt(UUID ownerId, CardSetInfo setInfo) {

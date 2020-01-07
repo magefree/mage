@@ -23,7 +23,6 @@ import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -35,7 +34,7 @@ public final class KheruBloodsucker extends CardImpl {
     private static final FilterCreaturePermanent toughnessFilter = new FilterCreaturePermanent("a creature you control with toughness 4 or greater");
 
     static {
-        toughnessFilter.add(new ControllerPredicate(TargetController.YOU));
+        toughnessFilter.add(TargetController.YOU.getControllerPredicate());
         toughnessFilter.add(new ToughnessPredicate(ComparisonType.MORE_THAN, 3));
     }
 

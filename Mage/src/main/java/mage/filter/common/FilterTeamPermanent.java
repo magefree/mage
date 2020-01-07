@@ -3,7 +3,6 @@ package mage.filter.common;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -22,13 +21,13 @@ public class FilterTeamPermanent extends FilterPermanent {
 
     public FilterTeamPermanent(String name) {
         super(name);
-        this.add(new ControllerPredicate(TargetController.TEAM));
+        this.add(TargetController.TEAM.getControllerPredicate());
 
     }
 
     public FilterTeamPermanent(SubType subtype, String name) {
         super(subtype, name);
-        this.add(new ControllerPredicate(TargetController.TEAM));
+        this.add(TargetController.TEAM.getControllerPredicate());
     }
 
     public FilterTeamPermanent(final FilterTeamPermanent filter) {

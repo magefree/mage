@@ -17,7 +17,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -30,7 +29,7 @@ public final class WeaponSurge extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("All creature you control");
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public WeaponSurge(UUID ownerId, CardSetInfo setInfo) {

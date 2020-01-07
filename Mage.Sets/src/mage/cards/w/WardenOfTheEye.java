@@ -14,7 +14,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.other.OwnerPredicate;
 import mage.target.TargetCard;
 
 /**
@@ -26,7 +25,7 @@ public final class WardenOfTheEye extends CardImpl {
     private static final FilterCard filter = new FilterCard("noncreature, nonland card from your graveyard");
 
     static {
-        filter.add(new OwnerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getOwnerPredicate());
         filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
         filter.add(Predicates.not(CardType.LAND.getPredicate()));
     }

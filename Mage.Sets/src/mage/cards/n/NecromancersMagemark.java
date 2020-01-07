@@ -17,7 +17,6 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.EnchantedPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -37,7 +36,7 @@ public final class NecromancersMagemark extends CardImpl {
 
     static {
         filter.add(EnchantedPredicate.instance);
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public NecromancersMagemark(UUID ownerId, CardSetInfo setInfo) {

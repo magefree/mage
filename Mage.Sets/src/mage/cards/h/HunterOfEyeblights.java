@@ -18,7 +18,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.CounterAnyPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -32,7 +31,7 @@ public final class HunterOfEyeblights extends CardImpl {
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creature with a counter on it");
 
     static {
-        filter1.add(new ControllerPredicate(TargetController.NOT_YOU));
+        filter1.add(TargetController.NOT_YOU.getControllerPredicate());
         filter2.add(CounterAnyPredicate.instance);
 
     }

@@ -14,7 +14,6 @@ import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterBySubtypeCard;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -27,7 +26,7 @@ public final class ForerunnerOfTheCoalition extends CardImpl {
 
     static {
         filterAnotherPirate.add(AnotherPredicate.instance);
-        filterAnotherPirate.add(new ControllerPredicate(TargetController.YOU));
+        filterAnotherPirate.add(TargetController.YOU.getControllerPredicate());
     }
 
     public ForerunnerOfTheCoalition(UUID ownerId, CardSetInfo setInfo) {

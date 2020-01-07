@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
@@ -23,7 +22,7 @@ public final class GoblinWarStrike extends CardImpl {
 
     static {
         filter.add(SubType.GOBLIN.getPredicate());
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public GoblinWarStrike(UUID ownerId, CardSetInfo setInfo) {

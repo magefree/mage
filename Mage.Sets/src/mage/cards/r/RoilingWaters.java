@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.SecondTargetPointer;
@@ -24,7 +23,7 @@ public final class RoilingWaters extends CardImpl {
     private static final FilterCreaturePermanent FILTER = new FilterCreaturePermanent("creatures your opponents control");
 
     static {
-        FILTER.add(new ControllerPredicate(TargetController.OPPONENT));
+        FILTER.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public RoilingWaters(UUID ownerId, CardSetInfo setInfo) {

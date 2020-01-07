@@ -12,7 +12,6 @@ import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.filter.common.FilterNonlandPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -32,8 +31,8 @@ public final class CapriciousEfreet extends CardImpl {
     private static final FilterNonlandPermanent filterNotControlled = new FilterNonlandPermanent("nonland permanent you don't control");
 
     static {
-        filterControlled.add(new ControllerPredicate(TargetController.YOU));
-        filterNotControlled.add(new ControllerPredicate(TargetController.NOT_YOU));
+        filterControlled.add(TargetController.YOU.getControllerPredicate());
+        filterNotControlled.add(TargetController.NOT_YOU.getControllerPredicate());
     }
 
     public CapriciousEfreet(UUID ownerId, CardSetInfo setInfo) {

@@ -17,7 +17,6 @@ import mage.choices.ChoiceLeftOrRight;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterNonlandPermanent;
-import mage.filter.predicate.other.OwnerPredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
@@ -39,7 +38,7 @@ public class AminatouTheFateshifter extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("permanent you own");
 
     static {
-        filter.add(new OwnerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getOwnerPredicate());
         filter.add(AnotherPredicate.instance);
     }
 

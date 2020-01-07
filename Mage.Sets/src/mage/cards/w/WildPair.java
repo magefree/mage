@@ -15,7 +15,6 @@ import mage.constants.*;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.IntComparePredicate;
-import mage.filter.predicate.other.OwnerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
@@ -32,7 +31,7 @@ public final class WildPair extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature");
 
     static {
-        filter.add(new OwnerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getOwnerPredicate());
     }
 
     public WildPair(UUID ownerId, CardSetInfo setInfo) {

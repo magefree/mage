@@ -12,7 +12,6 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.stack.StackObject;
 import mage.players.Player;
@@ -52,7 +51,7 @@ class SpellSyphonEffect extends OneShotEffect {
 
     static {
         filter.add(new ColorPredicate(ObjectColor.BLUE));
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public SpellSyphonEffect() {

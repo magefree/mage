@@ -15,7 +15,6 @@ import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -27,7 +26,7 @@ public final class StreetSpasm extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature without flying you don't control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.NOT_YOU));
+        filter.add(TargetController.NOT_YOU.getControllerPredicate());
         filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
     }
 

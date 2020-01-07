@@ -16,7 +16,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
@@ -37,7 +36,7 @@ public final class GadwickTheWizened extends CardImpl {
 
     static {
         filter.add(new ColorPredicate(ObjectColor.BLUE));
-        filter2.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter2.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public GadwickTheWizened(UUID ownerId, CardSetInfo setInfo) {

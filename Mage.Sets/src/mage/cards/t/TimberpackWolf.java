@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -25,7 +24,7 @@ public final class TimberpackWolf extends CardImpl {
 
     static {
         filter.add(new NamePredicate("Timberpack Wolf"));
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public TimberpackWolf(UUID ownerId, CardSetInfo setInfo) {

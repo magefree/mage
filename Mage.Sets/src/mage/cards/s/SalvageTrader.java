@@ -13,7 +13,6 @@ import mage.constants.*;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
@@ -38,10 +37,10 @@ public final class SalvageTrader extends CardImpl {
                         "Exchange control of target artifact you control and target artifact an opponent controls with the same converted mana cost", false, true),
                 new TapSourceCost());
         FilterArtifactPermanent filterYou = new FilterArtifactPermanent("artifact you control");
-        filterYou.add(new ControllerPredicate(TargetController.YOU));
+        filterYou.add(TargetController.YOU.getControllerPredicate());
         ability.addTarget(new TargetArtifactPermanent(filterYou));
         FilterArtifactPermanent filterOpponent = new FilterArtifactPermanent("artifact an opponent controls with the same casting cost as your targeted artifact");
-        filterOpponent.add(new ControllerPredicate(TargetController.OPPONENT));
+        filterOpponent.add(TargetController.OPPONENT.getControllerPredicate());
         filterOpponent.add(new SameCastingCostPredicate());
         ability.addTarget(new TargetArtifactPermanent(filterOpponent));
 

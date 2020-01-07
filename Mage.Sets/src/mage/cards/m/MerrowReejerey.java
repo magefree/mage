@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 
@@ -28,7 +27,7 @@ public final class MerrowReejerey extends CardImpl {
 
     static {
         filter1.add(SubType.MERFOLK.getPredicate());
-        filter1.add(new ControllerPredicate(TargetController.YOU));
+        filter1.add(TargetController.YOU.getControllerPredicate());
         filter2.add(SubType.MERFOLK.getPredicate());
     }
 

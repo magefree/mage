@@ -16,7 +16,6 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterNonlandPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -62,7 +61,7 @@ enum QuarantineFieldAdjuster implements TargetAdjuster {
         if (sourceObject != null) {
             int isolationCounters = sourceObject.getCounters(game).getCount(CounterType.ISOLATION);
             FilterNonlandPermanent filter = new FilterNonlandPermanent("up to " + isolationCounters + " nonland permanents controlled by an opponent");
-            filter.add(new ControllerPredicate(TargetController.OPPONENT));
+            filter.add(TargetController.OPPONENT.getControllerPredicate());
             ability.addTarget(new TargetPermanent(0, isolationCounters, filter, false));
         }
     }

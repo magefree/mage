@@ -23,7 +23,6 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -37,7 +36,7 @@ public final class ParagonOfGatheringMists extends CardImpl {
 
     static {
         filterBlue.add(new ColorPredicate(ObjectColor.BLUE));
-        filterBlue.add(new ControllerPredicate(TargetController.YOU));
+        filterBlue.add(TargetController.YOU.getControllerPredicate());
         filterBlue2.add(new ColorPredicate(ObjectColor.BLUE));
         filterBlue2.add(AnotherPredicate.instance);
     }

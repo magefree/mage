@@ -17,7 +17,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.command.emblems.KioraEmblem;
 import mage.game.events.DamageEvent;
@@ -35,7 +34,7 @@ public final class KioraTheCrashingWave extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("permanent an opponent controls");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public KioraTheCrashingWave(UUID ownerId, CardSetInfo setInfo) {

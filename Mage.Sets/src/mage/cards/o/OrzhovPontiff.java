@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -25,8 +24,8 @@ public final class OrzhovPontiff extends CardImpl {
     private static final FilterCreaturePermanent filterControlled = new FilterCreaturePermanent("Creatures you control");
     private static final FilterCreaturePermanent filterNotControlled = new FilterCreaturePermanent("creatures you don't control");
     static {
-        filterControlled.add(new ControllerPredicate(TargetController.YOU));
-        filterNotControlled.add((new ControllerPredicate(TargetController.NOT_YOU)));
+        filterControlled.add(TargetController.YOU.getControllerPredicate());
+        filterNotControlled.add((TargetController.NOT_YOU.getControllerPredicate()));
     }
 
     public OrzhovPontiff(UUID ownerId, CardSetInfo setInfo) {

@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterBySubtypeCard;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -27,7 +26,7 @@ public final class ForerunnerOfTheLegion extends CardImpl {
     private static final FilterPermanent filterAnotherVampire = new FilterPermanent(SubType.VAMPIRE, "another " + SubType.VAMPIRE.toString());
     static {
         filterAnotherVampire.add(AnotherPredicate.instance);
-        filterAnotherVampire.add(new ControllerPredicate(TargetController.YOU));
+        filterAnotherVampire.add(TargetController.YOU.getControllerPredicate());
     }
 
     public ForerunnerOfTheLegion(UUID ownerId, CardSetInfo setInfo) {

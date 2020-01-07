@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.other.OwnerPredicate;
 import mage.filter.predicate.permanent.CommanderPredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -29,7 +28,7 @@ public final class MythUnbound extends CardImpl {
 
     static {
         filter.add(CommanderPredicate.instance);
-        filter.add(new OwnerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getOwnerPredicate());
     }
 
     public MythUnbound(UUID ownerId, CardSetInfo setInfo) {

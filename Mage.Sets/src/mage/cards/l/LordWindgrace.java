@@ -19,7 +19,6 @@ import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandCard;
-import mage.filter.predicate.other.OwnerPredicate;
 import mage.game.Game;
 import mage.game.permanent.token.CatWarriorToken;
 import mage.players.Player;
@@ -35,7 +34,7 @@ public final class LordWindgrace extends CardImpl {
     private static final FilterLandCard filter = new FilterLandCard("land cards from your graveyard");
 
     static {
-        filter.add(new OwnerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getOwnerPredicate());
     }
 
     public LordWindgrace(UUID ownerId, CardSetInfo setInfo) {

@@ -15,7 +15,6 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.TargetPermanent;
 import mage.target.Targets;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -32,7 +31,7 @@ public final class TheTriumphOfAnax extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent("creature you don't control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.NOT_YOU));
+        filter.add(TargetController.NOT_YOU.getControllerPredicate());
     }
 
     public TheTriumphOfAnax(UUID ownerId, CardSetInfo setInfo) {

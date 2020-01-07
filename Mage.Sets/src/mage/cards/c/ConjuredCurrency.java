@@ -11,8 +11,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.other.OwnerPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -23,8 +21,8 @@ public final class ConjuredCurrency extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("permanent you neither own nor control");
 
     static {
-        filter.add(new OwnerPredicate(TargetController.NOT_YOU));
-        filter.add(new ControllerPredicate(TargetController.NOT_YOU));
+        filter.add(TargetController.NOT_YOU.getOwnerPredicate());
+        filter.add(TargetController.NOT_YOU.getControllerPredicate());
     }
     private static final String rule = "you may exchange control of {this} and target permanent you neither own nor control";
 

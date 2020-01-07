@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -29,7 +28,7 @@ public final class GoblinChainwhirler extends CardImpl {
         filter.add(Predicates.or(
                 CardType.CREATURE.getPredicate(),
                 CardType.PLANESWALKER.getPredicate()));
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public GoblinChainwhirler(UUID ownerId, CardSetInfo setInfo) {

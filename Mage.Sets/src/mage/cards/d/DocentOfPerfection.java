@@ -21,7 +21,6 @@ import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.token.HumanWizardToken;
 import mage.players.Player;
@@ -77,7 +76,7 @@ class DocentOfPerfectionEffect extends OneShotEffect {
 
     static {
         filter.add(SubType.WIZARD.getPredicate());
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public DocentOfPerfectionEffect() {

@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.other.OwnerPredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -24,7 +23,7 @@ public final class DespoticScepter extends CardImpl {
     private static final FilterPermanent FILTER = new FilterPermanent("permanent you own");
 
     static {
-        FILTER.add(new OwnerPredicate(TargetController.YOU));
+        FILTER.add(TargetController.YOU.getOwnerPredicate());
     }
 
     public DespoticScepter(UUID ownerId, CardSetInfo setInfo) {

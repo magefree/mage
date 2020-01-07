@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -24,7 +23,7 @@ public final class KolaghanTheStormsFury extends CardImpl {
 
     static {
         filter.add(SubType.DRAGON.getPredicate());
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public KolaghanTheStormsFury(UUID ownerId, CardSetInfo setInfo) {

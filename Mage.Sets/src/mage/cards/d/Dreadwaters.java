@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.TargetPlayer;
 
 /**
@@ -22,7 +21,7 @@ public final class Dreadwaters extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent("lands you control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public Dreadwaters(UUID ownerId, CardSetInfo setInfo) {

@@ -16,7 +16,6 @@ import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -27,7 +26,7 @@ public final class UrborgStalker extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent();
 
     static {
-        filter.add(new ControllerPredicate(TargetController.ACTIVE));
+        filter.add(TargetController.ACTIVE.getControllerPredicate());
         filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
         filter.add(Predicates.not(CardType.LAND.getPredicate()));
     }

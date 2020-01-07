@@ -16,7 +16,6 @@ import mage.constants.TargetController;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -30,7 +29,7 @@ public final class QuietContemplation extends CardImpl {
 
     static {
         filterNonCreature.add(Predicates.not(CardType.CREATURE.getPredicate()));
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
        
     public QuietContemplation(UUID ownerId, CardSetInfo setInfo) {

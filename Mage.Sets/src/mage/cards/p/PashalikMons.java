@@ -18,7 +18,6 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.permanent.token.GoblinToken;
 import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetControlledPermanent;
@@ -37,7 +36,7 @@ public final class PashalikMons extends CardImpl {
 
     static {
         filter.add(AnotherPredicate.instance);
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public PashalikMons(UUID ownerId, CardSetInfo setInfo) {

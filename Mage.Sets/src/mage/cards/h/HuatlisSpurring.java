@@ -12,7 +12,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -24,7 +23,7 @@ public final class HuatlisSpurring extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("a Jace planeswalker");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
         filter.add(CardType.PLANESWALKER.getPredicate());
         filter.add(SubType.HUATLI.getPredicate());
     }

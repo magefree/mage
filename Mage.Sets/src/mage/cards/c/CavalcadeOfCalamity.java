@@ -8,7 +8,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 
 import java.util.UUID;
@@ -22,7 +21,7 @@ public final class CavalcadeOfCalamity extends CardImpl {
             = new FilterCreaturePermanent("creaure you control with power 1 or less");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
         filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 2));
     }
 

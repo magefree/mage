@@ -10,7 +10,6 @@ import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.*;
 import mage.filter.FilterPlayer;
-import mage.filter.predicate.other.PlayerPredicate;
 import mage.game.Game;
 import mage.players.ManaPool;
 import mage.players.Player;
@@ -26,7 +25,7 @@ public class AssistAbility extends SimpleStaticAbility implements AlternateManaP
     private static final FilterPlayer filter = new FilterPlayer("another player");
 
     static {
-        filter.add(new PlayerPredicate(TargetController.NOT_YOU));
+        filter.add(TargetController.NOT_YOU.getPlayerPredicate());
     }
 
     public AssistAbility() {

@@ -18,7 +18,6 @@ import mage.filter.FilterCard;
 import mage.filter.FilterPlayer;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.other.PlayerPredicate;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -37,8 +36,8 @@ public final class CollectiveBrutality extends CardImpl {
     static {
         filter.add(Predicates.or(CardType.INSTANT.getPredicate(),
                 CardType.SORCERY.getPredicate()));
-        filterDiscard.add(new PlayerPredicate(TargetController.OPPONENT));
-        filterLoseLife.add(new PlayerPredicate(TargetController.OPPONENT));
+        filterDiscard.add(TargetController.OPPONENT.getPlayerPredicate());
+        filterLoseLife.add(TargetController.OPPONENT.getPlayerPredicate());
     }
 
     public CollectiveBrutality(UUID ownerId, CardSetInfo setInfo) {

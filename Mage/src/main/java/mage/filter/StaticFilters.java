@@ -12,10 +12,8 @@ import mage.constants.TargetController;
 import mage.filter.common.*;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;
-import mage.filter.predicate.other.PlayerPredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.AttackingPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 
 /**
@@ -305,21 +303,21 @@ public final class StaticFilters {
     public static final FilterPermanent FILTER_OPPONENTS_PERMANENT = new FilterPermanent("permanent an opponent controls");
 
     static {
-        FILTER_OPPONENTS_PERMANENT.add(new ControllerPredicate(TargetController.OPPONENT));
+        FILTER_OPPONENTS_PERMANENT.add(TargetController.OPPONENT.getControllerPredicate());
         FILTER_OPPONENTS_PERMANENT.setLockedFilter(true);
     }
 
     public static final FilterCreaturePermanent FILTER_OPPONENTS_PERMANENT_CREATURE = new FilterCreaturePermanent("creature an opponent controls");
 
     static {
-        FILTER_OPPONENTS_PERMANENT_CREATURE.add(new ControllerPredicate(TargetController.OPPONENT));
+        FILTER_OPPONENTS_PERMANENT_CREATURE.add(TargetController.OPPONENT.getControllerPredicate());
         FILTER_OPPONENTS_PERMANENT_CREATURE.setLockedFilter(true);
     }
 
     public static final FilterPermanent FILTER_OPPONENTS_PERMANENT_ARTIFACT = new FilterPermanent("artifact an opponent controls");
 
     static {
-        FILTER_OPPONENTS_PERMANENT_ARTIFACT.add(new ControllerPredicate(TargetController.OPPONENT));
+        FILTER_OPPONENTS_PERMANENT_ARTIFACT.add(TargetController.OPPONENT.getControllerPredicate());
         FILTER_OPPONENTS_PERMANENT_ARTIFACT.add(CardType.ARTIFACT.getPredicate());
         FILTER_OPPONENTS_PERMANENT_ARTIFACT.setLockedFilter(true);
     }
@@ -327,7 +325,7 @@ public final class StaticFilters {
     public static final FilterPermanent FILTER_OPPONENTS_PERMANENT_ARTIFACT_OR_CREATURE = new FilterPermanent("artifact or creature an opponent controls");
 
     static {
-        FILTER_OPPONENTS_PERMANENT_ARTIFACT_OR_CREATURE.add(new ControllerPredicate(TargetController.OPPONENT));
+        FILTER_OPPONENTS_PERMANENT_ARTIFACT_OR_CREATURE.add(TargetController.OPPONENT.getControllerPredicate());
         FILTER_OPPONENTS_PERMANENT_ARTIFACT_OR_CREATURE.add(Predicates.or(
                 CardType.ARTIFACT.getPredicate(),
                 CardType.CREATURE.getPredicate()
@@ -436,7 +434,7 @@ public final class StaticFilters {
     public static final FilterCreaturePermanent FILTER_PERMANENT_CREATURE_CONTROLLED = new FilterCreaturePermanent("creature you control");
 
     static {
-        FILTER_PERMANENT_CREATURE_CONTROLLED.add(new ControllerPredicate(TargetController.YOU));
+        FILTER_PERMANENT_CREATURE_CONTROLLED.add(TargetController.YOU.getControllerPredicate());
         FILTER_PERMANENT_CREATURE_CONTROLLED.setLockedFilter(true);
     }
 
@@ -449,7 +447,7 @@ public final class StaticFilters {
     public static final FilterCreaturePermanent FILTER_PERMANENT_CREATURES_CONTROLLED = new FilterCreaturePermanent("creatures you control");
 
     static {
-        FILTER_PERMANENT_CREATURES_CONTROLLED.add(new ControllerPredicate(TargetController.YOU));
+        FILTER_PERMANENT_CREATURES_CONTROLLED.add(TargetController.YOU.getControllerPredicate());
         FILTER_PERMANENT_CREATURES_CONTROLLED.setLockedFilter(true);
     }
 
@@ -492,7 +490,7 @@ public final class StaticFilters {
     public static final FilterStackObject FILTER_SPELL_OR_ABILITY_OPPONENTS = new FilterStackObject("spell or ability and opponent controls");
 
     static {
-        FILTER_SPELL_OR_ABILITY_OPPONENTS.add(new ControllerPredicate(TargetController.OPPONENT));
+        FILTER_SPELL_OR_ABILITY_OPPONENTS.add(TargetController.OPPONENT.getControllerPredicate());
         FILTER_SPELL_OR_ABILITY_OPPONENTS.setLockedFilter(true);
     }
 
@@ -633,7 +631,7 @@ public final class StaticFilters {
     public static final FilterPlayer FILTER_PLAYER_CONTROLLER = new FilterPlayer("you");
 
     static {
-        FILTER_PLAYER_CONTROLLER.add(new PlayerPredicate(TargetController.YOU));
+        FILTER_PLAYER_CONTROLLER.add(TargetController.YOU.getPlayerPredicate());
         FILTER_PLAYER_CONTROLLER.setLockedFilter(true);
     }
 }

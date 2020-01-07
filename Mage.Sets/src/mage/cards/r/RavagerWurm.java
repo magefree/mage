@@ -16,7 +16,6 @@ import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -34,7 +33,7 @@ public final class RavagerWurm extends CardImpl {
             = new FilterPermanent("land with an activated ability that isn't a mana ability");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.NOT_YOU));
+        filter.add(TargetController.NOT_YOU.getControllerPredicate());
         filter2.add(RavagerWurmPredicate.instance);
     }
 

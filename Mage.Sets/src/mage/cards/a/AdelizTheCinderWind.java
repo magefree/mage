@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 import java.util.UUID;
 
@@ -24,7 +23,7 @@ public final class AdelizTheCinderWind extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Wizards");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
         filter.add(SubType.WIZARD.getPredicate());
     }
 

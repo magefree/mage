@@ -16,7 +16,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.TargetSpell;
 
 /**
@@ -28,7 +27,7 @@ public final class NivmagusElemental extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("an instant or sorcery spell you control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
         filter.add(Predicates.or(
                 CardType.INSTANT.getPredicate(),
                 CardType.SORCERY.getPredicate()));

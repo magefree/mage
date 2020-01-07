@@ -19,7 +19,6 @@ import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanentAmount;
 
 /**
@@ -32,7 +31,7 @@ public final class AjaniMentorOfHeroes extends CardImpl {
     private static final FilterCard filterCard = new FilterCard("an Aura, creature, or planeswalker card");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
         filterCard.add(Predicates.or(
                 SubType.AURA.getPredicate(),
                 CardType.CREATURE.getPredicate(),

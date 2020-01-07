@@ -14,7 +14,6 @@ import mage.cards.CardsImpl;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.other.FaceDownPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -54,7 +53,7 @@ class KeeperOfTheLensLookFaceDownAbility extends ActivatedAbilityImpl {
 
     static {
         filter.add(FaceDownPredicate.instance);
-        filter.add(new ControllerPredicate(TargetController.NOT_YOU));
+        filter.add(TargetController.NOT_YOU.getControllerPredicate());
     }
 
     public KeeperOfTheLensLookFaceDownAbility() {

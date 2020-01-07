@@ -21,7 +21,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.CounterPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -34,7 +33,7 @@ public final class TetzimocPrimalDeath extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature your opponents control with a prey counter on it");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
         filter.add(new CounterPredicate(CounterType.PREY));
     }
 

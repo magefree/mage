@@ -15,7 +15,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterBySubtypeCard;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
@@ -28,7 +27,7 @@ public final class ForerunnerOfTheEmpire extends CardImpl {
     private static final FilterCreaturePermanent filterAnyDinosaur = new FilterCreaturePermanent(SubType.DINOSAUR, SubType.DINOSAUR.toString());
 
     static {
-        filterAnyDinosaur.add(new ControllerPredicate(TargetController.YOU));
+        filterAnyDinosaur.add(TargetController.YOU.getControllerPredicate());
     }
 
     public ForerunnerOfTheEmpire(UUID ownerId, CardSetInfo setInfo) {

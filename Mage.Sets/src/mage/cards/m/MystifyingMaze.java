@@ -19,7 +19,6 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterAttackingCreature;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -34,7 +33,7 @@ public final class MystifyingMaze extends CardImpl {
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("attacking creature an opponent controls");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public MystifyingMaze(UUID ownerId, CardSetInfo setInfo) {

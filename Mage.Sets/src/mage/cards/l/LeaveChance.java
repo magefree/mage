@@ -7,7 +7,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.AftermathAbility;
 import mage.cards.Card;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.SplitCard;
@@ -17,7 +16,6 @@ import mage.constants.SpellAbilityType;
 import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.other.OwnerPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -35,7 +33,7 @@ public final class LeaveChance extends SplitCard {
 
         // Return any number of target permanents you own to your hand.
         FilterPermanent filter = new FilterPermanent("permanents you own");
-        filter.add(new OwnerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getOwnerPredicate());
         getLeftHalfCard().getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         getLeftHalfCard().getSpellAbility().addTarget(new TargetPermanent(0, Integer.MAX_VALUE, filter, false));
 

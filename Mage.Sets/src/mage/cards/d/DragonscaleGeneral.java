@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 
 /**
@@ -25,7 +24,7 @@ public final class DragonscaleGeneral extends CardImpl {
 
     static {
         filter.add(TappedPredicate.instance);
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public DragonscaleGeneral(UUID ownerId, CardSetInfo setInfo) {

@@ -19,7 +19,6 @@ import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -39,7 +38,7 @@ public final class KefnetsMonument extends CardImpl {
         filter2.add(CardType.CREATURE.getPredicate());
     }
     static {
-        filter3.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter3.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
 

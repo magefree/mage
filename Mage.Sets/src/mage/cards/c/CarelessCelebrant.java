@@ -11,7 +11,6 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -25,7 +24,7 @@ public final class CarelessCelebrant extends CardImpl {
             = new FilterPermanent("creature or planeswalker an opponent controls");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
         filter.add(Predicates.or(
                 CardType.CREATURE.getPredicate(),
                 CardType.PLANESWALKER.getPredicate()

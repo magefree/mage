@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.other.OwnerPredicate;
 import mage.target.common.TargetAttackingCreature;
 import mage.target.common.TargetCardInASingleGraveyard;
 import mage.target.targetpointer.SecondTargetPointer;
@@ -30,7 +29,7 @@ public final class SpurnmageAdvocate extends CardImpl {
     private static final FilterCard filter = new FilterCard("two target cards from an opponent's graveyard");
 
     static {
-        filter.add(new OwnerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getOwnerPredicate());
     }
 
     public SpurnmageAdvocate(UUID ownerId, CardSetInfo setInfo) {

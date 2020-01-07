@@ -12,7 +12,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.permanent.token.DoomedArtisanToken;
 
 import java.util.UUID;
@@ -26,7 +25,7 @@ public final class DoomedArtisan extends CardImpl {
             = new FilterCreaturePermanent(SubType.SCULPTURE, "Sculptures you control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public DoomedArtisan(UUID ownerId, CardSetInfo setInfo) {

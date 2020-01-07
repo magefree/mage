@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  * @author magenoxx_at_gmail.com
@@ -22,7 +21,7 @@ public final class PredatoryRampage extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Each creature your opponents control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public PredatoryRampage(UUID ownerId, CardSetInfo setInfo) {

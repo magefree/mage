@@ -13,7 +13,6 @@ import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -25,7 +24,7 @@ public final class ChiefOfTheFoundry extends CardImpl {
 
     static {
         filterBoosted.add(CardType.ARTIFACT.getPredicate());
-        filterBoosted.add(new ControllerPredicate(TargetController.YOU));
+        filterBoosted.add(TargetController.YOU.getControllerPredicate());
     }
 
     public ChiefOfTheFoundry(UUID ownerId, CardSetInfo setInfo) {

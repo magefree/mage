@@ -18,7 +18,6 @@ import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -36,7 +35,7 @@ public final class SavageStomp extends CardImpl {
             = new FilterControlledCreaturePermanent(SubType.DINOSAUR, "a Dinosaur you control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.NOT_YOU));
+        filter.add(TargetController.NOT_YOU.getControllerPredicate());
     }
 
     private static final Condition condition = new SourceTargetsPermanentCondition(filter2);

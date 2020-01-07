@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.permanent.token.TreasureToken;
 
 /**
@@ -29,7 +28,7 @@ public final class CaptainLanneryStorm extends CardImpl {
 
     static {
         filter.add(SubType.TREASURE.getPredicate());
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public CaptainLanneryStorm(UUID ownerId, CardSetInfo setInfo) {

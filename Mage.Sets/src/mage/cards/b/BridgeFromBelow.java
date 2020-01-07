@@ -12,7 +12,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.other.OwnerPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -31,9 +30,9 @@ public final class BridgeFromBelow extends CardImpl {
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("When a creature is put into an opponent's graveyard from the battlefield");
 
     static {
-        filter1.add(new OwnerPredicate(TargetController.YOU));
+        filter1.add(TargetController.YOU.getOwnerPredicate());
         filter1.add(Predicates.not(TokenPredicate.instance));
-        filter2.add(new OwnerPredicate(TargetController.OPPONENT));
+        filter2.add(TargetController.OPPONENT.getOwnerPredicate());
     }
 
     public BridgeFromBelow(UUID ownerId, CardSetInfo setInfo) {

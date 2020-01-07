@@ -17,7 +17,6 @@ import mage.constants.SpellAbilityType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -45,7 +44,7 @@ public final class AppealAuthority extends SplitCard {
         // Tap up to two target creatures your opponents control. Creatures you control gain vigilance until end of turn.
         getRightHalfCard().getSpellAbility().addEffect(new TapTargetEffect());
         FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures your opponents control");
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
         getRightHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2, filter, false));
         getRightHalfCard().getSpellAbility().addEffect(new GainAbilityControlledEffect(VigilanceAbility.getInstance(),
                 Duration.EndOfTurn, new FilterControlledCreaturePermanent("creatures")));

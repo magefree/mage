@@ -16,7 +16,6 @@ import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -31,7 +30,7 @@ public final class JediSentinel extends CardImpl {
 
     static {
         filter1.add(AnotherPredicate.instance);
-        filter2.add(new ControllerPredicate(TargetController.NOT_YOU));
+        filter2.add(TargetController.NOT_YOU.getControllerPredicate());
     }
 
     public JediSentinel(UUID ownerId, CardSetInfo setInfo) {

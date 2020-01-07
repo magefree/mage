@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterArtifactPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetArtifactPermanent;
 
 import java.util.UUID;
@@ -22,7 +21,7 @@ public final class Vandalblast extends CardImpl {
     private static final FilterArtifactPermanent FILTER = new FilterArtifactPermanent("artifact you don't control");
 
     static {
-        FILTER.add(new ControllerPredicate(TargetController.NOT_YOU));
+        FILTER.add(TargetController.NOT_YOU.getControllerPredicate());
     }
 
     public Vandalblast(UUID ownerId, CardSetInfo setInfo) {

@@ -14,7 +14,6 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.filter.FilterPlayer;
 import mage.filter.predicate.other.PlayerCanGainLifePredicate;
-import mage.filter.predicate.other.PlayerPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -28,7 +27,7 @@ public class GainLifeOpponentCost extends CostImpl {
     private static final FilterPlayer filter = new FilterPlayer("opponent that can gain life");
 
     static {
-        filter.add(new PlayerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getPlayerPredicate());
         filter.add(new PlayerCanGainLifePredicate()); // you can't pay the costs by letting a player gain life that can't get life by rule changing effect
     }
 

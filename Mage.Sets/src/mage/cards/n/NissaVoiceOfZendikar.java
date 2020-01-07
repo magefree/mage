@@ -19,7 +19,6 @@ import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.permanent.token.PlantToken;
 
 /**
@@ -31,7 +30,7 @@ public final class NissaVoiceOfZendikar extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent("lands you control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public NissaVoiceOfZendikar(UUID ownerId, CardSetInfo setInfo) {

@@ -11,7 +11,6 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.WasDealtDamageThisTurnPredicate;
 import mage.target.TargetPermanent;
 
@@ -28,7 +27,7 @@ public final class VraskasFinisher extends CardImpl {
 
     static {
         filter.add(new WasDealtDamageThisTurnPredicate());
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public VraskasFinisher(UUID ownerId, CardSetInfo setInfo) {

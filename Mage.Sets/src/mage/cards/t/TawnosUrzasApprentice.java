@@ -18,7 +18,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterStackObject;
 import mage.filter.predicate.ability.ArtifactSourcePredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
@@ -35,7 +34,7 @@ public final class TawnosUrzasApprentice extends CardImpl {
 
     static {
         filter.add(new ArtifactSourcePredicate());
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public TawnosUrzasApprentice(UUID ownerId, CardSetInfo setInfo) {

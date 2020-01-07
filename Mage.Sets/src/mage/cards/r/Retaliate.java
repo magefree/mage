@@ -1,7 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -10,17 +9,22 @@ import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.DamagedPlayerThisTurnPredicate;
 
+import java.util.UUID;
+
 /**
- *
  * @author Plopman
  */
 public final class Retaliate extends CardImpl {
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures that dealt damage to you this turn");
+
+    private static final FilterCreaturePermanent filter
+            = new FilterCreaturePermanent("creatures that dealt damage to you this turn");
+
     static {
         filter.add(new DamagedPlayerThisTurnPredicate(TargetController.YOU));
     }
+
     public Retaliate(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{W}{W}");
 
         // Destroy all creatures that dealt damage to you this turn.
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));

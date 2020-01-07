@@ -19,7 +19,6 @@ import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.common.FilterPermanentCard;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.command.emblems.NissaVitalForceEmblem;
 import mage.game.permanent.token.TokenImpl;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -34,7 +33,7 @@ public final class NissaVitalForce extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent("land you control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public NissaVitalForce(UUID ownerId, CardSetInfo setInfo) {

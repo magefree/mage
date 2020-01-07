@@ -15,7 +15,6 @@ import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.CounterAnyPredicate;
 import mage.target.TargetPermanent;
 
@@ -28,7 +27,7 @@ public final class ChiseiHeartOfOceans extends CardImpl {
     private static final  FilterPermanent filter = new FilterControlledPermanent("remove a counter from a permanent you control");
     
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
         filter.add(CounterAnyPredicate.instance);
     }       
     

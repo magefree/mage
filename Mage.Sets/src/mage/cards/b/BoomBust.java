@@ -12,7 +12,6 @@ import mage.constants.SpellAbilityType;
 import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.TargetPermanent;
 
 public final class BoomBust extends SplitCard {
@@ -21,8 +20,8 @@ public final class BoomBust extends SplitCard {
     private static final FilterLandPermanent filter2 = new FilterLandPermanent("land you don't control");
 
     static {
-        filter1.add(new ControllerPredicate(TargetController.YOU));
-        filter2.add(new ControllerPredicate(TargetController.NOT_YOU));
+        filter1.add(TargetController.YOU.getControllerPredicate());
+        filter2.add(TargetController.NOT_YOU.getControllerPredicate());
     }
 
     public BoomBust(UUID ownerId, CardSetInfo setInfo) {

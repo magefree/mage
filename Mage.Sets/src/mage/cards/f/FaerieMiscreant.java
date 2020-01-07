@@ -15,7 +15,6 @@ import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 import java.util.UUID;
 
@@ -29,7 +28,7 @@ public final class FaerieMiscreant extends CardImpl {
     static {
         filter.add(new NamePredicate("Faerie Miscreant"));
         filter.add(AnotherPredicate.instance);
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter);

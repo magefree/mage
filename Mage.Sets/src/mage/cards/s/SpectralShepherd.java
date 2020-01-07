@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -27,7 +26,7 @@ public final class SpectralShepherd extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Spirit");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
         filter.add(SubType.SPIRIT.getPredicate());
     }
 

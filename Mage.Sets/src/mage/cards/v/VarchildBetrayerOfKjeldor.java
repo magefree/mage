@@ -22,7 +22,6 @@ import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.token.SurvivorToken;
 
@@ -39,7 +38,7 @@ public final class VarchildBetrayerOfKjeldor extends CardImpl {
             );
 
     static {
-        filter1.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter1.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public VarchildBetrayerOfKjeldor(UUID ownerId, CardSetInfo setInfo) {

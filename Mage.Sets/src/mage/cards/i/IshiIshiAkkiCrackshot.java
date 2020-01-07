@@ -9,7 +9,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterSpiritOrArcaneCard;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -20,7 +19,7 @@ public final class IshiIshiAkkiCrackshot extends CardImpl {
     private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 
     static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public IshiIshiAkkiCrackshot(UUID ownerId, CardSetInfo setInfo) {

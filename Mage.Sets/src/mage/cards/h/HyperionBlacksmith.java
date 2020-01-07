@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetArtifactPermanent;
 
 /**
@@ -26,7 +25,7 @@ public final class HyperionBlacksmith extends CardImpl {
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("artifact an opponent controls");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public HyperionBlacksmith(UUID ownerId, CardSetInfo setInfo) {

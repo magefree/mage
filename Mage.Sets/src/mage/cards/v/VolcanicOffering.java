@@ -12,7 +12,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -52,9 +51,9 @@ enum VolcanicOfferingAdjuster implements TargetAdjuster {
     private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("creature you don't control");
 
     static {
-        filterLand.add(new ControllerPredicate(TargetController.NOT_YOU));
+        filterLand.add(TargetController.NOT_YOU.getControllerPredicate());
         filterLand.add(Predicates.not(SuperType.BASIC.getPredicate()));
-        filterCreature.add(new ControllerPredicate(TargetController.NOT_YOU));
+        filterCreature.add(TargetController.NOT_YOU.getControllerPredicate());
     }
 
     @Override

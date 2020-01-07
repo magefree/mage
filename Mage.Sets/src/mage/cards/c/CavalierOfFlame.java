@@ -20,7 +20,6 @@ import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterPlaneswalkerPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
@@ -36,7 +35,7 @@ public final class CavalierOfFlame extends CardImpl {
     private static final FilterPermanent filter = new FilterPlaneswalkerPermanent();
 
     static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public CavalierOfFlame(UUID ownerId, CardSetInfo setInfo) {

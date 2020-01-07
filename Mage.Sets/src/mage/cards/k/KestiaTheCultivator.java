@@ -18,7 +18,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.EnchantedPredicate;
 
 /**
@@ -35,7 +34,7 @@ public final class KestiaTheCultivator extends CardImpl {
                 EnchantedPredicate.instance,
                 CardType.ENCHANTMENT.getPredicate()
         ));
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public KestiaTheCultivator(UUID ownerId, CardSetInfo setInfo) {

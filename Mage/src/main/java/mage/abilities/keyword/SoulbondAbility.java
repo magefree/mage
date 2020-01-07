@@ -15,7 +15,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -172,7 +171,7 @@ class SoulbondEntersOtherAbility extends EntersBattlefieldAllTriggeredAbility {
 
     static {
         soulbondFilter.add(Predicates.not(new PairedPredicate()));
-        soulbondFilter.add(new ControllerPredicate(TargetController.YOU));
+        soulbondFilter.add(TargetController.YOU.getControllerPredicate());
         soulbondFilter.add(AnotherPredicate.instance);
     }
 

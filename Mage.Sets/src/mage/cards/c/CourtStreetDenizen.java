@@ -17,7 +17,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -31,8 +30,8 @@ public final class CourtStreetDenizen extends CardImpl {
     static {
         filter.add(AnotherPredicate.instance);
         filter.add(new ColorPredicate(ObjectColor.WHITE));
-        filter.add(new ControllerPredicate(TargetController.YOU));
-        filterOpponentCreature.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.YOU.getControllerPredicate());
+        filterOpponentCreature.add(TargetController.OPPONENT.getControllerPredicate());
     }
     public CourtStreetDenizen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

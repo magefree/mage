@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.other.OwnerPredicate;
 
 /**
  *
@@ -21,7 +20,7 @@ public final class Brand extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("all permanents you own");
 
     static {
-        filter.add(new OwnerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getOwnerPredicate());
     }
 
     public Brand(UUID ownerId, CardSetInfo setInfo) {

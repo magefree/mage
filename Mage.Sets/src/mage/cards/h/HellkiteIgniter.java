@@ -18,7 +18,6 @@ import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -29,7 +28,7 @@ public final class HellkiteIgniter extends CardImpl {
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("artifact you control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public HellkiteIgniter(UUID ownerId, CardSetInfo setInfo) {

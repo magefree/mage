@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -27,9 +26,9 @@ public final class ScionOfOona extends CardImpl {
 
     static {
         filter.add(SubType.FAERIE.getPredicate());
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
         filterCreature.add(SubType.FAERIE.getPredicate());
-        filterCreature.add(new ControllerPredicate(TargetController.YOU));
+        filterCreature.add(TargetController.YOU.getControllerPredicate());
     }
 
     public ScionOfOona(UUID ownerId, CardSetInfo setInfo) {

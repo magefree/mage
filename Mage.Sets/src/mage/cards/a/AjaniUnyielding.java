@@ -20,7 +20,6 @@ import mage.filter.common.FilterPermanentCard;
 import mage.filter.common.FilterPlaneswalkerPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -33,7 +32,7 @@ public final class AjaniUnyielding extends CardImpl {
 
     static {
         nonlandPermanentFilter.add(Predicates.not(CardType.LAND.getPredicate()));
-        planeswalkerFilter.add(new ControllerPredicate(TargetController.YOU));
+        planeswalkerFilter.add(TargetController.YOU.getControllerPredicate());
         planeswalkerFilter.add(AnotherPredicate.instance);
     }
 

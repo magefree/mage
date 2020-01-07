@@ -17,7 +17,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -30,7 +29,7 @@ public final class PendelhavenElder extends CardImpl {
     static {
         filter.add(new PowerPredicate(ComparisonType.EQUAL_TO, 1));
         filter.add(new ToughnessPredicate(ComparisonType.EQUAL_TO, 1));
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public PendelhavenElder(UUID ownerId, CardSetInfo setInfo) {

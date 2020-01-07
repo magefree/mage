@@ -17,7 +17,6 @@ import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -30,7 +29,7 @@ public final class WoollyMammoths extends CardImpl {
     static {
         filter.add(SuperType.SNOW.getPredicate());
         filter.add(CardType.LAND.getPredicate());
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public WoollyMammoths(UUID ownerId, CardSetInfo setInfo) {

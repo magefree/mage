@@ -15,7 +15,6 @@ import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterAttackingCreature;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -26,7 +25,7 @@ public final class DranaLiberatorOfMalakir extends CardImpl {
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("each attacking creature you control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public DranaLiberatorOfMalakir(UUID ownerId, CardSetInfo setInfo) {

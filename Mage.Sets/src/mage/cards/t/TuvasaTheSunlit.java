@@ -23,7 +23,6 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterEnchantmentPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
@@ -47,7 +46,7 @@ public final class TuvasaTheSunlit extends CardImpl {
         // Tuvasa the Sunlit gets +1/+1 for each enchantment you control.
         FilterEnchantmentPermanent filter
                 = new FilterEnchantmentPermanent("enchantment you control");
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
         DynamicValue value
                 = new PermanentsOnBattlefieldCount(new FilterPermanent(filter));
         Ability ability = new SimpleStaticAbility(

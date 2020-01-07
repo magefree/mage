@@ -14,7 +14,6 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.other.OwnerPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
@@ -43,7 +42,7 @@ public class ExileOpponentsCardFromExileToGraveyardCost extends CostImpl {
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
             FilterCard filter = new FilterCard();
-            filter.add(new OwnerPredicate(TargetController.OPPONENT));
+            filter.add(TargetController.OPPONENT.getOwnerPredicate());
             Target target = new TargetCardInExile(filter);
             if (controller.chooseTarget(Outcome.Damage, target, ability, game)) {
                 Card card = game.getCard(target.getFirstTarget());

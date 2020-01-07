@@ -19,7 +19,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -34,7 +33,7 @@ public final class Topplegeist extends CardImpl {
     private static final FilterCreaturePermanent FILTER = new FilterCreaturePermanent("creature an opponent controls");
 
     static {
-        FILTER.add(new ControllerPredicate(TargetController.OPPONENT));
+        FILTER.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public Topplegeist(UUID ownerId, CardSetInfo setInfo) {

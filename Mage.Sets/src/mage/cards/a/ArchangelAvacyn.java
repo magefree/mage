@@ -19,7 +19,6 @@ import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
@@ -34,7 +33,7 @@ public final class ArchangelAvacyn extends CardImpl {
 
     static {
         filter.add(Predicates.not(SubType.ANGEL.getPredicate()));
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public ArchangelAvacyn(UUID ownerId, CardSetInfo setInfo) {

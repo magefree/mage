@@ -22,7 +22,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.other.OwnerPredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.command.emblems.YodaEmblem;
@@ -40,7 +39,7 @@ public final class YodaJediMaster extends CardImpl {
 
     static {
         filter.add(AnotherPredicate.instance);
-        filter.add(new OwnerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getOwnerPredicate());
     }
 
     public YodaJediMaster(UUID ownerId, CardSetInfo setInfo) {

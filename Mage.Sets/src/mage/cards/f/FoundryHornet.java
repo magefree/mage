@@ -18,7 +18,6 @@ import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.CounterPredicate;
 
 /**
@@ -32,7 +31,7 @@ public final class FoundryHornet extends CardImpl {
 
     static {
         filter.add(new CounterPredicate(CounterType.P1P1));
-        filterOpponent.add(new ControllerPredicate(TargetController.OPPONENT));
+        filterOpponent.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     private static final String rule = "When {this} enters the battlefield, if you control a creature with a +1/+1 counter on it, creatures your opponents control get -1/-1 until end of turn.";

@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterSpellOrPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetSpellOrPermanent;
 
 /**
@@ -27,7 +26,7 @@ public final class MaceWindu extends CardImpl {
     private static final FilterSpellOrPermanent filter = new FilterSpellOrPermanent("spell or creature you don't control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.NOT_YOU));
+        filter.add(TargetController.NOT_YOU.getControllerPredicate());
     }
 
     public MaceWindu(UUID ownerId, CardSetInfo setInfo) {

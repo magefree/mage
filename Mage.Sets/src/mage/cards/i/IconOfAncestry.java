@@ -14,7 +14,7 @@ import mage.constants.*;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ChosenSubtypePredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
+
 import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -35,7 +35,7 @@ public final class IconOfAncestry extends CardImpl {
 
     static {
         filter.add(ChosenSubtypePredicate.instance);
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public IconOfAncestry(UUID ownerId, CardSetInfo setInfo) {

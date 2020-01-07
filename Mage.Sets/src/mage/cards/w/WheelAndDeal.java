@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.filter.FilterPlayer;
-import mage.filter.predicate.other.PlayerPredicate;
 import mage.target.TargetPlayer;
 
 /**
@@ -23,7 +22,7 @@ public final class WheelAndDeal extends CardImpl {
     private static final FilterPlayer filter = new FilterPlayer("opponent");
     
     static {
-        filter.add(new PlayerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getPlayerPredicate());
     }
 
     public WheelAndDeal(UUID ownerId, CardSetInfo setInfo) {

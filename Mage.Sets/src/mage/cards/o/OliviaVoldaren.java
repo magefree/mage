@@ -22,7 +22,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -50,7 +49,7 @@ public final class OliviaVoldaren extends CardImpl {
         String rule = "Gain control of target Vampire for as long as you control {this}";
 
         FilterPermanent filter2 = new FilterPermanent();
-        filter2.add(new ControllerPredicate(TargetController.YOU));
+        filter2.add(TargetController.YOU.getControllerPredicate());
         filter2.add(new CardIdPredicate(this.getId()));
 
         this.addAbility(FlyingAbility.getInstance());

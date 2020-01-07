@@ -16,7 +16,6 @@ import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterLandCard;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.permanent.token.TitaniaProtectorOfArgothElementalToken;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -29,7 +28,7 @@ public final class TitaniaProtectorOfArgoth extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent("a land you control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public TitaniaProtectorOfArgoth(UUID ownerId, CardSetInfo setInfo) {

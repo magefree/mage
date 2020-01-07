@@ -15,7 +15,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.CounterPredicate;
 
 /**
@@ -27,7 +26,7 @@ public final class CrownedCeratok extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Each creature you control with a +1/+1 counter on it");
     static {
         filter.add(new CounterPredicate(CounterType.P1P1));
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public CrownedCeratok(UUID ownerId, CardSetInfo setInfo) {

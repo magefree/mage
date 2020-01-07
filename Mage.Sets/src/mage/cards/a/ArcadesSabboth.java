@@ -17,7 +17,6 @@ import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.AttackingPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 
 /**
@@ -28,7 +27,7 @@ public final class ArcadesSabboth extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("untapped nonattacking creatures you control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getControllerPredicate());
         filter.add(Predicates.not(TappedPredicate.instance));
         filter.add(Predicates.not(AttackingPredicate.instance));
     }
