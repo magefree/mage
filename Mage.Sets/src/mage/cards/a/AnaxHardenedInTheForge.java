@@ -15,6 +15,7 @@ import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.SatyrCantBlockToken;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -79,7 +80,8 @@ class AnaxHardenedInTheForgeTriggeredAbility extends TriggeredAbilityImpl {
         }
         if (!zEvent.getTarget().getId().equals(getSourceId())
                 && (zEvent.getTarget() instanceof PermanentToken
-                || !zEvent.getTarget().isCreature())) {
+                || !zEvent.getTarget().isCreature()
+                || !Objects.equals(zEvent.getTarget().getControllerId(), getControllerId()))) {
             return false;
         }
         int tokenCount = zEvent.getTarget().getPower().getValue() > 3 ? 2 : 1;
