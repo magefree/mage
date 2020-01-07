@@ -14,6 +14,7 @@ import mage.constants.SuperType;
 import mage.game.draft.RateCard;
 import mage.game.permanent.token.Token;
 import mage.game.permanent.token.TokenImpl;
+import mage.sets.TherosBeyondDeath;
 import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
@@ -54,52 +55,75 @@ public class VerifyCardDataTest {
         skipCheckLists.put(listName, new LinkedHashSet<>());
     }
 
-    private static void skipListAddName(String listName, String set, String name) {
-        skipCheckLists.get(listName).add(set + " - " + name);
+    private static void skipListAddName(String listName, String set, String cardName) {
+        skipCheckLists.get(listName).add(set + " - " + cardName);
     }
 
-    private static boolean skipListHaveName(String listName, String set, String name) {
-        return skipCheckLists.get(listName).contains(set + " - " + name);
+    private static void skipListAddName(String listName, String set) {
+        skipCheckLists.get(listName).add(set);
     }
+
+    private static boolean skipListHaveName(String listName, String set, String cardName) {
+        return skipCheckLists.get(listName).contains(set + " - " + cardName)
+                || skipCheckLists.get(listName).contains(set);
+    }
+
+    private static boolean skipListHaveName(String listName, String set) {
+        return skipCheckLists.get(listName).contains(set);
+    }
+
+    private static final String SKIP_LIST_PT = "PT";
+    private static final String SKIP_LIST_COLOR = "COLOR";
+    private static final String SKIP_LIST_COST = "COST";
+    private static final String SKIP_LIST_SUPERTYPE = "SUPERTYPE";
+    private static final String SKIP_LIST_TYPE = "TYPE";
+    private static final String SKIP_LIST_SUBTYPE = "SUBTYPE";
+    private static final String SKIP_LIST_NUMBER = "NUMBER";
+    private static final String SKIP_LIST_MISSING_ABILITIES = "MISSING_ABILITIES";
+    private static final String SKIP_LIST_DOUBLE_RARE = "DOUBLE_RARE";
 
     static {
         // skip lists for checks (example: unstable cards with same name may have different stats)
+        // can be full set ignore list or set + cardname
 
         // power-toughness
-        skipListCreate("PT");
-        skipListAddName("PT", "UST", "Garbage Elemental");
-        skipListAddName("PT", "UST", "Infinity Elemental");
-        skipListAddName("PT", "UNH", "Old Fogey");
-        skipListAddName("PT", "MH1", "Ruination Rioter");
+        skipListCreate(SKIP_LIST_PT);
+        skipListAddName(SKIP_LIST_PT, "UST", "Garbage Elemental");
+        skipListAddName(SKIP_LIST_PT, "UST", "Infinity Elemental");
+        skipListAddName(SKIP_LIST_PT, "UNH", "Old Fogey");
+        skipListAddName(SKIP_LIST_PT, "MH1", "Ruination Rioter");
 
         // color
-        skipListCreate("COLOR");
+        skipListCreate(SKIP_LIST_COLOR);
 
         // cost
-        skipListCreate("COST");
-        skipListAddName("COST", "KTK", "Erase");
-        skipListAddName("COST", "M13", "Erase");
-        skipListAddName("COST", "ULG", "Erase");
-        skipListAddName("COST", "H17", "Grimlock, Dinobot Leader");
-        skipListAddName("COST", "UST", "Everythingamajig");
+        skipListCreate(SKIP_LIST_COST);
+        skipListAddName(SKIP_LIST_COST, "KTK", "Erase");
+        skipListAddName(SKIP_LIST_COST, "M13", "Erase");
+        skipListAddName(SKIP_LIST_COST, "ULG", "Erase");
+        skipListAddName(SKIP_LIST_COST, "H17", "Grimlock, Dinobot Leader");
+        skipListAddName(SKIP_LIST_COST, "UST", "Everythingamajig");
 
         // supertype
-        skipListCreate("SUPERTYPE");
+        skipListCreate(SKIP_LIST_SUPERTYPE);
 
         // type
-        skipListCreate("TYPE");
-        skipListAddName("TYPE", "UNH", "Old Fogey");
-        skipListAddName("TYPE", "UST", "capital offense");
+        skipListCreate(SKIP_LIST_TYPE);
+        skipListAddName(SKIP_LIST_TYPE, "UNH", "Old Fogey");
+        skipListAddName(SKIP_LIST_TYPE, "UST", "capital offense");
 
         // subtype
-        skipListCreate("SUBTYPE");
-        skipListAddName("SUBTYPE", "UGL", "Miss Demeanor");
+        skipListCreate(SKIP_LIST_SUBTYPE);
+        skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Miss Demeanor");
 
         // number
-        skipListCreate("NUMBER");
+        skipListCreate(SKIP_LIST_NUMBER);
 
         // missing abilities
-        skipListCreate("MISSING_ABILITIES");
+        skipListCreate(SKIP_LIST_MISSING_ABILITIES);
+
+        // double rare cards
+        skipListCreate(SKIP_LIST_DOUBLE_RARE);
     }
 
     private void warn(Card card, String message) {
@@ -180,6 +204,66 @@ public class VerifyCardDataTest {
 
         if (doubleErrors.size() > 0) {
             Assert.fail("DB has duplicated card numbers, found errors: " + doubleErrors.size());
+        }
+    }
+
+    @Test
+    @Ignore // TODO: enable it after THB set will be completed
+    public void checkDoubleRareCardsInSets() {
+        // all basic sets after THB must have double rare cards (one normal, one bonus)
+        // ELD can have same rules, but xmage stores it as different sets (ELD and CELD)
+        Date startCheck = TherosBeyondDeath.getInstance().getReleaseDate();
+        Calendar cal = Calendar.getInstance();
+        cal.set(2050, Calendar.JANUARY, 1); // optimistic
+        Date endCheck = cal.getTime();
+
+        Collection<String> doubleErrors = new ArrayList<>();
+
+        Collection<ExpansionSet> sets = Sets.getInstance().values();
+        for (ExpansionSet set : sets) {
+            // only post THB sets must have double versions
+            if (set.getReleaseDate().before(startCheck)
+                    || set.getReleaseDate().after(endCheck)
+                    || !set.getSetType().isStandardLegal()) {
+                continue;
+            }
+
+            if (skipListHaveName(SKIP_LIST_DOUBLE_RARE, set.getCode())) {
+                continue;
+            }
+
+            Map<String, Integer> cardsList = new HashMap<>();
+            for (ExpansionSet.SetCardInfo checkCard : set.getSetCardInfo()) {
+                // only rare cards must have double versions
+                if (!checkCard.getRarity().equals(Rarity.RARE) && !checkCard.getRarity().equals(Rarity.MYTHIC)) {
+                    continue;
+                }
+
+                if (skipListHaveName(SKIP_LIST_DOUBLE_RARE, set.getCode(), checkCard.getName())) {
+                    continue;
+                }
+
+                String cardName = checkCard.getName();
+                cardsList.putIfAbsent(cardName, 0);
+                cardsList.compute(cardName, (k, v) -> v + 1);
+            }
+
+            cardsList.forEach((cardName, amount) -> {
+                if (amount != 2) {
+                    String error = "Error: found non duplicated rare card - "
+                            + " set (" + set.getCode() + " - " + set.getName() + ")"
+                            + " card (" + cardName + ")";
+                    doubleErrors.add(error);
+                }
+            });
+        }
+
+        for (String error : doubleErrors) {
+            System.out.println(error);
+        }
+
+        if (doubleErrors.size() > 0) {
+            Assert.fail("DB has non duplicated rare cards, found errors: " + doubleErrors.size());
         }
     }
 
@@ -407,7 +491,8 @@ public class VerifyCardDataTest {
                 boolean cardHaveVariousSetting = card.getGraphicInfo() != null && card.getGraphicInfo().getUsesVariousArt();
 
                 if (cardHaveDoubleName && !cardHaveVariousSetting) {
-                    errorsList.add("error, founded double card names, but UsesVariousArt is not true: " + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
+                    errorsList.add("error, founded double card names, but UsesVariousArt = false (missing NON_FULL_USE_VARIOUS, etc): "
+                            + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
                 }
             }
         }
@@ -476,10 +561,9 @@ public class VerifyCardDataTest {
                 Object[] args = new Object[constructor.getParameterCount()];
                 for (int index = 0; index < constructor.getParameterTypes().length; index++) {
                     Class<?> parameterType = constructor.getParameterTypes()[index];
-                        if(parameterType.getSimpleName().equalsIgnoreCase("boolean")){
-                            args[index]=false;
-                        }
-                    else {
+                    if (parameterType.getSimpleName().equalsIgnoreCase("boolean")) {
+                        args[index] = false;
+                    } else {
                         args[index] = null;
                     }
 
@@ -679,7 +763,7 @@ public class VerifyCardDataTest {
     }
 
     private void checkColors(Card card, JsonCard ref) {
-        if (skipListHaveName("COLOR", card.getExpansionSetCode(), card.getName())) {
+        if (skipListHaveName(SKIP_LIST_COLOR, card.getExpansionSetCode(), card.getName())) {
             return;
         }
 
@@ -704,7 +788,7 @@ public class VerifyCardDataTest {
     }
 
     private void checkSubtypes(Card card, JsonCard ref) {
-        if (skipListHaveName("SUBTYPE", card.getExpansionSetCode(), card.getName())) {
+        if (skipListHaveName(SKIP_LIST_SUBTYPE, card.getExpansionSetCode(), card.getName())) {
             return;
         }
 
@@ -738,7 +822,7 @@ public class VerifyCardDataTest {
     }
 
     private void checkSupertypes(Card card, JsonCard ref) {
-        if (skipListHaveName("SUPERTYPE", card.getExpansionSetCode(), card.getName())) {
+        if (skipListHaveName(SKIP_LIST_SUPERTYPE, card.getExpansionSetCode(), card.getName())) {
             return;
         }
 
@@ -749,7 +833,7 @@ public class VerifyCardDataTest {
     }
 
     private void checkMissingAbilities(Card card, JsonCard ref) {
-        if (skipListHaveName("MISSING_ABILITIES", card.getExpansionSetCode(), card.getName())) {
+        if (skipListHaveName(SKIP_LIST_MISSING_ABILITIES, card.getExpansionSetCode(), card.getName())) {
             return;
         }
 
@@ -954,7 +1038,7 @@ public class VerifyCardDataTest {
 
 
     private void checkTypes(Card card, JsonCard ref) {
-        if (skipListHaveName("TYPE", card.getExpansionSetCode(), card.getName())) {
+        if (skipListHaveName(SKIP_LIST_TYPE, card.getExpansionSetCode(), card.getName())) {
             return;
         }
 
@@ -976,7 +1060,7 @@ public class VerifyCardDataTest {
     }
 
     private void checkPT(Card card, JsonCard ref) {
-        if (skipListHaveName("PT", card.getExpansionSetCode(), card.getName())) {
+        if (skipListHaveName(SKIP_LIST_PT, card.getExpansionSetCode(), card.getName())) {
             return;
         }
 
@@ -996,7 +1080,7 @@ public class VerifyCardDataTest {
     }
 
     private void checkCost(Card card, JsonCard ref) {
-        if (skipListHaveName("COST", card.getExpansionSetCode(), card.getName())) {
+        if (skipListHaveName(SKIP_LIST_COST, card.getExpansionSetCode(), card.getName())) {
             return;
         }
 
@@ -1014,7 +1098,7 @@ public class VerifyCardDataTest {
     }
 
     private void checkNumbers(Card card, JsonCard ref) {
-        if (skipListHaveName("NUMBER", card.getExpansionSetCode(), card.getName())) {
+        if (skipListHaveName(SKIP_LIST_NUMBER, card.getExpansionSetCode(), card.getName())) {
             return;
         }
 
