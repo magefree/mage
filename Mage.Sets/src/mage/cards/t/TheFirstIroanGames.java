@@ -6,6 +6,7 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
+import mage.abilities.hint.common.FerociousHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -50,6 +51,7 @@ public final class TheFirstIroanGames extends CardImpl {
                         "if you control a creature with power 4 or greater, draw two cards"
                 )
         );
+        sagaAbility.addHint(FerociousHint.instance);
 
         // IV — Create a Gold token.
         sagaAbility.addChapterEffect(

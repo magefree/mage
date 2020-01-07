@@ -4,15 +4,16 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.FerociousCondition;
 import mage.abilities.effects.common.ChooseNewTargetsTargetEffect;
 import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
+import mage.abilities.hint.common.FerociousHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
+import mage.filter.FilterStackObject;
 import mage.filter.predicate.mageobject.NumberOfTargetsPredicate;
+import mage.target.TargetStackObject;
 
 import java.util.UUID;
-import mage.filter.FilterStackObject;
-import mage.target.TargetStackObject;
 
 /**
  * @author TheElk801
@@ -31,7 +32,7 @@ public final class BoltBend extends CardImpl {
         // This spell costs {3} less to cast if you control a creature with power 4 or greater.
         this.addAbility(new SimpleStaticAbility(
                 Zone.STACK, new SpellCostReductionSourceEffect(3, FerociousCondition.instance)
-        ).setRuleAtTheTop(true));
+        ).setRuleAtTheTop(true).addHint(FerociousHint.instance));
 
         // Change the target of target spell or ability with a single target.
         this.getSpellAbility().addEffect(new ChooseNewTargetsTargetEffect(true, true));
