@@ -115,7 +115,7 @@ public abstract class MageTestPlayerBase {
     private static Class<?> loadPlugin(Plugin plugin) {
         try {
             classLoader.addURL(new File(pluginFolder + '/' + plugin.getJar()).toURI().toURL());
-            logger.info("Loading plugin: " + plugin.getClassName());
+            logger.debug("Loading plugin: " + plugin.getClassName());
             return Class.forName(plugin.getClassName(), true, classLoader);
         } catch (ClassNotFoundException ex) {
             logger.warn("Plugin not Found:" + plugin.getJar() + " - check plugin folder");
@@ -128,7 +128,7 @@ public abstract class MageTestPlayerBase {
     private static MatchType loadGameType(GamePlugin plugin) {
         try {
             classLoader.addURL(new File(pluginFolder + '/' + plugin.getJar()).toURI().toURL());
-            logger.info("Loading game type: " + plugin.getClassName());
+            logger.debug("Loading game type: " + plugin.getClassName());
             return (MatchType) Class.forName(plugin.getTypeName(), true, classLoader).getConstructor().newInstance();
         } catch (ClassNotFoundException ex) {
             logger.warn("Game type not found:" + plugin.getJar() + " - check plugin folder");

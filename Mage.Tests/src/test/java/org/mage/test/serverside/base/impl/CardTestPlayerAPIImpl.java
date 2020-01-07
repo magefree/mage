@@ -46,7 +46,7 @@ import java.util.stream.Collectors;
  * @author ayratn
  */
 public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implements CardTestAPI {
-
+   
     // Defines the constant if for activate ability is not target but a ability on the stack to define
     public static final String NO_TARGET = "NO_TARGET";
 
@@ -256,7 +256,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         currentGame.start(activePlayer.getId());
         long t2 = System.nanoTime();
         logger.debug("Winner: " + currentGame.getWinner());
-        logger.info("Test has been executed. Execution time: " + (t2 - t1) / 1000000 + " ms");
+        logger.info(Thread.currentThread().getStackTrace()[2].getMethodName() + " has been executed. Execution time: " + (t2 - t1) / 1000000 + " ms");
 
         // TODO: 01.12.2018, JayDi85 - uncomment and fix MANY broken tests with wrong commands
         //assertAllCommandsUsed();

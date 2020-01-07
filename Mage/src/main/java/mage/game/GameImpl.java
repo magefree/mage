@@ -813,7 +813,7 @@ public abstract class GameImpl implements Game, Serializable {
                 sb.append(']');
                 count++;
             }
-            logger.info(sb.toString());
+            logger.debug(sb.toString());
         }
     }
 
@@ -2886,7 +2886,7 @@ public abstract class GameImpl implements Game, Serializable {
                                     try {
                                         Integer amount = Integer.parseInt(s[1]);
                                         player.setLife(amount, this, ownerId);
-                                        logger.info("Setting player's life: ");
+                                        logger.debug("Setting player's life: ");
                                     } catch (NumberFormatException e) {
                                         logger.fatal("error setting life", e);
                                     }
