@@ -38,7 +38,7 @@ public final class AnaxHardenedInTheForge extends CardImpl {
                         .setText("{this}'s power is equal to your devotion to red")
         ).addHint(DevotionCount.R.getHint()));
 
-        // Whenever Anax or another nontoken creature you control dies, create a 1/1 red Satyr creature token with "This creature can't block." If the creature had 4 power or greater, create two of those tokens instead.
+        // Whenever Anax or another nontoken creature you control dies, create a 1/1 red Satyr creature token with "This creature can't block." If the creature had power 4 or greater, create two of those tokens instead.
         this.addAbility(new AnaxHardenedInTheForgeTriggeredAbility());
     }
 
@@ -94,6 +94,6 @@ class AnaxHardenedInTheForgeTriggeredAbility extends TriggeredAbilityImpl {
     public String getRule() {
         return "Whenever {this} or another nontoken creature you control dies, " +
                 "create a 1/1 red Satyr creature token with \"This creature can't block.\" " +
-                "If the creature had 4 power or greater, create two of those tokens instead.";
+                "If the creature had power 4 or greater, create two of those tokens instead.";
     }
 }
