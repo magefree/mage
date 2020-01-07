@@ -29,7 +29,7 @@ public final class GrumgullyTheGenerous extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Each other non-Human creature you controls enters the battlefield with an additional +1/+1 counter on it.
+        // Each other non-Human creature you control enters the battlefield with an additional +1/+1 counter on it.
         this.addAbility(new SimpleStaticAbility(new GrumgullyTheGenerousReplacementEffect()));
     }
 
@@ -47,7 +47,7 @@ class GrumgullyTheGenerousReplacementEffect extends ReplacementEffectImpl {
 
     GrumgullyTheGenerousReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
-        staticText = "Each other non-Human creature you controls " +
+        staticText = "Each other non-Human creature you control " +
                 "enters the battlefield with an additional +1/+1 counter on it.";
     }
 
