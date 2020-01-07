@@ -27,29 +27,26 @@ public enum TargetController {
     NEXT,
     EACH_PLAYER;
 
-    private OwnerPredicate ownerPredicate = null;
-    private PlayerPredicate playerPredicate = null;
-    private ControllerPredicate controllerPredicate = null;
+    private final OwnerPredicate ownerPredicate;
+    private final PlayerPredicate playerPredicate;
+    private final ControllerPredicate controllerPredicate;
+
+    private TargetController() {
+        this.ownerPredicate = new OwnerPredicate(this);
+        this.playerPredicate = new PlayerPredicate(this);
+        this.controllerPredicate = new ControllerPredicate(this);
+    }
 
     public OwnerPredicate getOwnerPredicate() {
-        if (this.ownerPredicate == null) {
-            this.ownerPredicate = new OwnerPredicate(this);
-        }
-        return this.ownerPredicate;
+        return ownerPredicate;
     }
 
     public PlayerPredicate getPlayerPredicate() {
-        if (this.playerPredicate == null) {
-            this.playerPredicate = new PlayerPredicate(this);
-        }
-        return this.playerPredicate;
+        return playerPredicate;
     }
 
     public ControllerPredicate getControllerPredicate() {
-        if (this.controllerPredicate == null) {
-            this.controllerPredicate = new ControllerPredicate(this);
-        }
-        return this.controllerPredicate;
+        return controllerPredicate;
     }
 
     public static class OwnerPredicate implements ObjectPlayerPredicate<ObjectPlayer<Card>> {
