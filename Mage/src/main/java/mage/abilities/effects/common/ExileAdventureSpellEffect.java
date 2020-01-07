@@ -53,10 +53,10 @@ public class ExileAdventureSpellEffect extends OneShotEffect implements MageSing
                 Card spellCard = spell.getCard();
                 if (spellCard instanceof AdventureCardSpell) {
                     UUID exileId = adventureExileId(controller.getId(), game);
-                    game.getExile().createZone(exileId, "On an Adventure");
+                    game.getExile().createZone(exileId, "On an Adventure from " + controller.getName());
                     AdventureCardSpell adventureSpellCard = (AdventureCardSpell) spellCard;
                     Card parentCard = adventureSpellCard.getParentCard();
-                    if (controller.moveCardsToExile(parentCard, source, game, true, exileId, "On an Adventure")) {
+                    if (controller.moveCardsToExile(parentCard, source, game, true, exileId, "On an Adventure from " + controller.getName())) {
                         ContinuousEffect effect = new AdventureCastFromExileEffect();
                         effect.setTargetPointer(new FixedTarget(parentCard.getId(), game));
                         game.addEffect(effect, source);
