@@ -27,37 +27,36 @@ public enum TargetController {
     NEXT,
     EACH_PLAYER;
 
-    private final OwnerPredicate ownerPredicate;
-    private final PlayerPredicate playerPredicate;
-    private final ControllerPredicate controllerPredicate;
-
-    TargetController() {
-        this.ownerPredicate = new OwnerPredicate(this);
-        this.playerPredicate = new PlayerPredicate(this);
-        this.controllerPredicate = new ControllerPredicate(this);
-    }
+    private OwnerPredicate ownerPredicate = null;
+    private PlayerPredicate playerPredicate = null;
+    private ControllerPredicate controllerPredicate = null;
 
     public OwnerPredicate getOwnerPredicate() {
-        return ownerPredicate;
+        if (this.ownerPredicate == null) {
+            this.ownerPredicate = new OwnerPredicate(this);
+        }
+        return this.ownerPredicate;
     }
 
     public PlayerPredicate getPlayerPredicate() {
-        return playerPredicate;
+        if (this.playerPredicate == null) {
+            this.playerPredicate = new PlayerPredicate(this);
+        }
+        return this.playerPredicate;
     }
 
     public ControllerPredicate getControllerPredicate() {
-        return controllerPredicate;
-    }
-
-    public DamagedPlayerThisTurnPredicate getDamagedPlayerThisTurnPredicate() {
-        return damagedPlayerThisTurnPredicate;
+        if (this.controllerPredicate == null) {
+            this.controllerPredicate = new ControllerPredicate(this);
+        }
+        return this.controllerPredicate;
     }
 
     public static class OwnerPredicate implements ObjectPlayerPredicate<ObjectPlayer<Card>> {
 
         private final TargetController targetOwner;
 
-        public OwnerPredicate(TargetController targetOwner) {
+        private OwnerPredicate(TargetController targetOwner) {
             this.targetOwner = targetOwner;
         }
 
@@ -103,7 +102,7 @@ public enum TargetController {
 
         private final TargetController targetPlayer;
 
-        public PlayerPredicate(TargetController player) {
+        private PlayerPredicate(TargetController player) {
             this.targetPlayer = player;
         }
 
@@ -147,7 +146,7 @@ public enum TargetController {
 
         private final TargetController controller;
 
-        public ControllerPredicate(TargetController controller) {
+        private ControllerPredicate(TargetController controller) {
             this.controller = controller;
         }
 
