@@ -21,7 +21,6 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
-import mage.filter.predicate.other.OwnerPredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -59,9 +58,9 @@ class HedronAlignmentEffect extends OneShotEffect {
 
     static {
         filterPermanent.add(new NamePredicate("Hedron Alignment"));
-        filterPermanent.add(new OwnerPredicate(TargetController.YOU));
+        filterPermanent.add(TargetController.YOU.getOwnerPredicate());
         filterCard.add(new NamePredicate("Hedron Alignment"));
-        filterCard.add(new OwnerPredicate(TargetController.YOU));
+        filterCard.add(TargetController.YOU.getOwnerPredicate());
     }
 
     public HedronAlignmentEffect() {

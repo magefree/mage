@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.other.OwnerPredicate;
 import mage.game.permanent.token.TokenImpl;
 
 /**
@@ -28,7 +27,7 @@ public final class LurkingSkirge extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
     
     static {
-        filter.add(new OwnerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getOwnerPredicate());
     }
 
     public LurkingSkirge(UUID ownerId, CardSetInfo setInfo) {

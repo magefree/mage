@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.other.OwnerPredicate;
 import mage.target.common.TargetControlledPermanent;
 
 
@@ -26,7 +25,7 @@ public final class ObeliskOfUndoing extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
         
     static {
-        filter.add(new OwnerPredicate(TargetController.YOU));        
+        filter.add(TargetController.YOU.getOwnerPredicate());
     }
     
     public ObeliskOfUndoing(UUID ownerId, CardSetInfo setInfo) {

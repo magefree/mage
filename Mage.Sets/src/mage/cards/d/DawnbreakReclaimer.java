@@ -19,7 +19,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.other.OwnerIdPredicate;
-import mage.filter.predicate.other.OwnerPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -90,7 +89,7 @@ class DawnbreakReclaimerEffect extends OneShotEffect {
         if (controller != null
                 && sourceObject != null) {
             FilterCreatureCard filter = new FilterCreatureCard("a creature card in an opponent's graveyard");
-            filter.add(new OwnerPredicate(TargetController.OPPONENT));
+            filter.add(TargetController.OPPONENT.getOwnerPredicate());
             TargetCard chosenCreatureOpponentGraveyard = new TargetCard(Zone.GRAVEYARD, filter);
             Player opponent = null;
             Card cardOpponentGraveyard = null;

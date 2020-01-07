@@ -20,7 +20,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterPermanentOrSuspendedCard;
-import mage.filter.predicate.other.OwnerPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.CounterPredicate;
 import mage.game.Game;
@@ -64,7 +63,7 @@ class RiftElementalCost extends CostImpl {
     static {
         filter.getPermanentFilter().add(new ControllerPredicate(TargetController.YOU));
         filter.getPermanentFilter().add(new CounterPredicate(CounterType.TIME));
-        filter.getCardFilter().add(new OwnerPredicate(TargetController.YOU));
+        filter.getCardFilter().add(TargetController.YOU.getOwnerPredicate());
     }
 
     RiftElementalCost() {

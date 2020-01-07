@@ -17,7 +17,6 @@ import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.other.OwnerPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -66,7 +65,7 @@ class EmbalmersToolsEffect extends CostModificationEffectImpl {
     private static final FilterCreatureCard filter = new FilterCreatureCard();
 
     static {
-        filter.add(new OwnerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getOwnerPredicate());
     }
 
     public EmbalmersToolsEffect() {

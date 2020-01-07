@@ -27,7 +27,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.other.OwnerIdPredicate;
-import mage.filter.predicate.other.OwnerPredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
@@ -44,7 +43,7 @@ public final class HeraldOfLeshrac extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledLandPermanent("land you control but don't own");
     static {
-        filter.add(new OwnerPredicate(TargetController.NOT_YOU));
+        filter.add(TargetController.NOT_YOU.getOwnerPredicate());
     }
 
     public HeraldOfLeshrac(UUID ownerId, CardSetInfo setInfo) {

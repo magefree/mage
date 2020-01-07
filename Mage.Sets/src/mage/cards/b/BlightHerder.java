@@ -13,7 +13,6 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.*;
 import mage.filter.FilterCard;
-import mage.filter.predicate.other.OwnerPredicate;
 import mage.game.Game;
 import mage.game.permanent.token.EldraziScionToken;
 import mage.players.Player;
@@ -51,7 +50,7 @@ class BlightHerderEffect extends OneShotEffect {
     private static final FilterCard filter = new FilterCard("cards your opponents own from exile");
 
     static {
-        filter.add(new OwnerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getOwnerPredicate());
     }
 
     public BlightHerderEffect() {

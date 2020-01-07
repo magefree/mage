@@ -19,7 +19,6 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.other.OwnerPredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
@@ -46,7 +45,7 @@ public final class StarfieldOfNyx extends CardImpl {
 
     static {
         filterGraveyardEnchantment.add(CardType.ENCHANTMENT.getPredicate());
-        filterGraveyardEnchantment.add(new OwnerPredicate(TargetController.YOU));
+        filterGraveyardEnchantment.add(TargetController.YOU.getOwnerPredicate());
     }
 
     public StarfieldOfNyx(UUID ownerId, CardSetInfo setInfo) {

@@ -19,7 +19,6 @@ import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.other.OwnerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -34,7 +33,7 @@ public final class KothophedSoulHoarder extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent();
 
     static {
-        filter.add(new OwnerPredicate(TargetController.NOT_YOU));
+        filter.add(TargetController.NOT_YOU.getOwnerPredicate());
     }
 
     public KothophedSoulHoarder(UUID ownerId, CardSetInfo setInfo) {

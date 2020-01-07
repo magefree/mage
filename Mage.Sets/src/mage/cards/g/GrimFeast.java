@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.other.OwnerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -51,7 +50,7 @@ class GrimFeastTriggeredAbility extends PutIntoGraveFromBattlefieldAllTriggeredA
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature");
 
     static {
-        filter.add(new OwnerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getOwnerPredicate());
     }
 
     public GrimFeastTriggeredAbility() {

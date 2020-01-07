@@ -16,7 +16,6 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.other.OwnerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -32,7 +31,7 @@ public final class RealityScramble extends CardImpl {
             = new FilterPermanent("permanent you own");
 
     static {
-        filter.add(new OwnerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getOwnerPredicate());
     }
 
     public RealityScramble(UUID ownerId, CardSetInfo setInfo) {

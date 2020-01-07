@@ -8,7 +8,6 @@ import mage.constants.SetTargetPointer;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.other.OwnerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -40,7 +39,7 @@ public class PutCardIntoGraveFromAnywhereAllTriggeredAbility extends TriggeredAb
         super(zone, effect, optional);
         this.filter = filter.copy();
         this.setTargetPointer = setTargetPointer;
-        this.filter.add(new OwnerPredicate(targetController));
+        this.filter.add(targetController.getOwnerPredicate());
         StringBuilder sb = new StringBuilder("Whenever ");
         sb.append(filter.getMessage());
         sb.append(" is put into ");

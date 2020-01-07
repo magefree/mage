@@ -16,7 +16,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.other.OwnerPredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -36,7 +35,7 @@ public final class AthreosGodOfPassage extends CardImpl {
 
     static {
         filter.add(AnotherPredicate.instance);
-        filter.add(new OwnerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getOwnerPredicate());
     }
 
     public AthreosGodOfPassage(UUID ownerId, CardSetInfo setInfo) {

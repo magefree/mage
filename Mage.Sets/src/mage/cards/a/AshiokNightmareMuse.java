@@ -9,7 +9,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
-import mage.filter.predicate.other.OwnerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.AshiokNightmareMuseToken;
@@ -19,7 +18,7 @@ import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetNonlandPermanent;
 
 import java.util.UUID;
-import mage.MageObject;
+
 import mage.MageObjectReference;
 import mage.cards.Card;
 
@@ -98,7 +97,7 @@ class AshiokNightmareMuseCastEffect extends OneShotEffect {
     private static final FilterCard filter = new FilterCard("face-up cards your opponents own from exile");
 
     static {
-        filter.add(new OwnerPredicate(TargetController.OPPONENT));
+        filter.add(TargetController.OPPONENT.getOwnerPredicate());
     }
 
     AshiokNightmareMuseCastEffect() {

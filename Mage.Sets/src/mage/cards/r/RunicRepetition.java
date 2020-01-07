@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.filter.predicate.other.OwnerPredicate;
 import mage.target.common.TargetCardInExile;
 
 /**
@@ -22,7 +21,7 @@ public final class RunicRepetition extends CardImpl {
     private static final FilterCard filter = new FilterCard("exiled card with flashback you own");
 
     static {
-        filter.add(new OwnerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getOwnerPredicate());
         filter.add(new AbilityPredicate(FlashbackAbility.class));
     }
 

@@ -19,7 +19,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.other.OwnerPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInASingleGraveyard;
@@ -34,7 +33,7 @@ public final class PulsemageAdvocate extends CardImpl {
     private static final FilterCard filter = new FilterCard("cards from an opponent's graveyard");
 
     static {
-        filter.add(new OwnerPredicate(TargetController.NOT_YOU));
+        filter.add(TargetController.NOT_YOU.getOwnerPredicate());
     }
 
     public PulsemageAdvocate(UUID ownerId, CardSetInfo setInfo) {

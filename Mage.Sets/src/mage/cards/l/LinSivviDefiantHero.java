@@ -17,7 +17,6 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
-import mage.filter.predicate.other.OwnerPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
@@ -32,7 +31,7 @@ public final class LinSivviDefiantHero extends CardImpl {
     private static final FilterCard filter = new FilterCard("Rebel card from your graveyard");
 
     static {
-        filter.add(new OwnerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getOwnerPredicate());
         filter.add(SubType.REBEL.getPredicate());
     }
 

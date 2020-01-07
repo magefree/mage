@@ -15,7 +15,6 @@ import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.other.OwnerPredicate;
 import mage.target.common.TargetCardInGraveyard;
 
 /**
@@ -27,7 +26,7 @@ public final class CelestialGatekeeper extends CardImpl {
     private static final FilterCard filter = new FilterCard("Bird and/or Cleric permanent cards");
 
     static {
-        filter.add(new OwnerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getOwnerPredicate());
         filter.add(Predicates.or(
                 SubType.BIRD.getPredicate(),
                 SubType.CLERIC.getPredicate()

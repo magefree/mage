@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.other.OwnerPredicate;
 import mage.filter.predicate.permanent.CommanderPredicate;
 import mage.target.TargetPermanent;
 
@@ -28,7 +27,7 @@ public final class SanctumOfEternity extends CardImpl {
 
     static {
         filter.add(CommanderPredicate.instance);
-        filter.add(new OwnerPredicate(TargetController.YOU));
+        filter.add(TargetController.YOU.getOwnerPredicate());
     }
 
     public SanctumOfEternity(UUID ownerId, CardSetInfo setInfo) {

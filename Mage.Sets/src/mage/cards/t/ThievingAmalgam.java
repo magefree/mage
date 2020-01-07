@@ -17,7 +17,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.other.OwnerPredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -33,7 +32,7 @@ public final class ThievingAmalgam extends CardImpl {
             = new FilterControlledCreaturePermanent("a creature you control but don't own");
 
     static {
-        filter.add(new OwnerPredicate(TargetController.NOT_YOU));
+        filter.add(TargetController.NOT_YOU.getOwnerPredicate());
     }
 
     public ThievingAmalgam(UUID ownerId, CardSetInfo setInfo) {

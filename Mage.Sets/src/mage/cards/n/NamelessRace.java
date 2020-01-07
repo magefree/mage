@@ -21,7 +21,6 @@ import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.other.OwnerPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
@@ -73,7 +72,7 @@ class NamelessRaceEffect extends OneShotEffect {
         filter.add(Predicates.not(TokenPredicate.instance));
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
         filter2.add(new ColorPredicate(ObjectColor.WHITE));
-        filter2.add(new OwnerPredicate(TargetController.OPPONENT));
+        filter2.add(TargetController.OPPONENT.getOwnerPredicate());
     }
 
     NamelessRaceEffect() {
