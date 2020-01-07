@@ -14,7 +14,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -26,7 +25,7 @@ public final class HallowedGround extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("nonsnow land you control");
 
     static {
-        filter.add(Predicates.not(new SupertypePredicate(SuperType.SNOW)));
+        filter.add(Predicates.not(SuperType.SNOW.getPredicate()));
     }
 
     public HallowedGround(UUID ownerId, CardSetInfo setInfo) {

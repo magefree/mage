@@ -18,7 +18,6 @@ import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInLibrary;
@@ -120,7 +119,7 @@ class SisayWeatherlightCaptainEffect extends OneShotEffect {
         }
         int power = permanent.getPower().getValue();
         FilterCard filter = new FilterPermanentCard("legendary permanent card with converted mana cost less than " + power);
-        filter.add(new SupertypePredicate(SuperType.LEGENDARY));
+        filter.add(SuperType.LEGENDARY.getPredicate());
         filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, power));
         return new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)).apply(game, source);
     }

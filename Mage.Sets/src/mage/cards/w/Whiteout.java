@@ -16,7 +16,6 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -28,7 +27,7 @@ public final class Whiteout extends CardImpl {
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("a snow land");
 
     static {
-        filter.add(new SupertypePredicate(SuperType.SNOW));
+        filter.add(SuperType.SNOW.getPredicate());
     }
 
     public Whiteout(UUID ownerId, CardSetInfo setInfo) {

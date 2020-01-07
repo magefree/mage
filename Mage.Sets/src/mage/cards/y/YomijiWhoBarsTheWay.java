@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
@@ -32,7 +31,7 @@ public final class YomijiWhoBarsTheWay extends CardImpl {
         // Whenever a legendary permanent other than Yomiji, Who Bars the Way is put into a graveyard from the battlefield, return that card to its owner's hand.
         FilterPermanent filter = new FilterPermanent("a legendary permanent other than " + getName());
         filter.add(AnotherPredicate.instance);
-        filter.add(new SupertypePredicate(SuperType.LEGENDARY));
+        filter.add(SuperType.LEGENDARY.getPredicate());
         Effect effect = new ReturnToHandTargetEffect();
         effect.setText("return that card to its owner's hand");
         this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(effect, false, filter, true));

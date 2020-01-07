@@ -18,7 +18,6 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -56,7 +55,7 @@ class StarCompassManaEffect extends ManaEffect {
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 
     static {
-        filter.add(new SupertypePredicate(SuperType.BASIC));
+        filter.add(SuperType.BASIC.getPredicate());
     }
 
     public StarCompassManaEffect() {

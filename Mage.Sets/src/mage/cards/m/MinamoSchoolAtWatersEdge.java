@@ -16,7 +16,6 @@ import mage.constants.ColoredManaSymbol;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -28,7 +27,7 @@ public final class MinamoSchoolAtWatersEdge extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("legendary permanent");
 
     static {
-        filter.add(new SupertypePredicate(SuperType.LEGENDARY));
+        filter.add(SuperType.LEGENDARY.getPredicate());
     }
 
 

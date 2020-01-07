@@ -18,7 +18,6 @@ import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -33,8 +32,8 @@ public final class ThermalFlux extends CardImpl {
     private static final FilterPermanent filterSnow = new FilterPermanent("snow permanent");
 
     static {
-        filterNonsnow.add(Predicates.not(new SupertypePredicate(SuperType.SNOW)));
-        filterSnow.add(new SupertypePredicate(SuperType.SNOW));
+        filterNonsnow.add(Predicates.not(SuperType.SNOW.getPredicate()));
+        filterSnow.add(SuperType.SNOW.getPredicate());
     }
 
     public ThermalFlux(UUID ownerId, CardSetInfo setInfo) {

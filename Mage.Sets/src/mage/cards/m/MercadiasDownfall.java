@@ -15,7 +15,6 @@ import mage.constants.SuperType;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
@@ -60,7 +59,7 @@ public final class MercadiasDownfall extends CardImpl {
                     }
                 }
                 FilterLandPermanent filter = new FilterLandPermanent("nonbasic land");
-                filter.add(Predicates.not(new SupertypePredicate(SuperType.BASIC)));
+                filter.add(Predicates.not(SuperType.BASIC.getPredicate()));
                 System.out.println("The number of nonbasic lands is " + game.getBattlefield().countAll(filter, defenderId, game));
                 return game.getBattlefield().countAll(filter, defenderId, game);
             }

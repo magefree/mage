@@ -15,7 +15,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 
 /**
  *
@@ -25,7 +24,7 @@ public final class ArenaOfTheAncients extends CardImpl {
     
     private static final FilterCreaturePermanent legendaryFilter = new FilterCreaturePermanent("legendary creatures");
     static {
-        legendaryFilter.add(new SupertypePredicate(SuperType.LEGENDARY));
+        legendaryFilter.add(SuperType.LEGENDARY.getPredicate());
     }
     
     public ArenaOfTheAncients(UUID ownerId, CardSetInfo setInfo) {

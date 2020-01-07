@@ -9,7 +9,6 @@ import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -21,7 +20,7 @@ public final class ChillToTheBone extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonsnow creature");
 
     static {
-        filter.add(Predicates.not(new SupertypePredicate(SuperType.SNOW)));
+        filter.add(Predicates.not(SuperType.SNOW.getPredicate()));
     }
 
     public ChillToTheBone(UUID ownerId, CardSetInfo setInfo) {

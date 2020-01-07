@@ -12,7 +12,6 @@ import mage.constants.TargetController;
 import mage.filter.common.*;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.filter.predicate.other.PlayerPredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.AttackingPredicate;
@@ -617,7 +616,7 @@ public final class StaticFilters {
     public static final FilterPermanent FILTER_PERMANENT_LEGENDARY = new FilterPermanent();
 
     static {
-        FILTER_PERMANENT_LEGENDARY.add(new SupertypePredicate(SuperType.LEGENDARY));
+        FILTER_PERMANENT_LEGENDARY.add(SuperType.LEGENDARY.getPredicate());
         FILTER_PERMANENT_LEGENDARY.setLockedFilter(true);
     }
 

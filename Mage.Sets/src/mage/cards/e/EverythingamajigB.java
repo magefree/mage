@@ -21,7 +21,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.NamePredicate;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.filter.predicate.other.ExpansionSetPredicate;
 
 /**
@@ -34,7 +33,7 @@ public final class EverythingamajigB extends CardImpl {
 
     static {
         filter.add(Predicates.and(
-                Predicates.not(new SupertypePredicate(SuperType.BASIC)), // all Un-set basic lands are black bordered cards, and thus illegal choices
+                Predicates.not(SuperType.BASIC.getPredicate()), // all Un-set basic lands are black bordered cards, and thus illegal choices
                 Predicates.not(new NamePredicate("Steamflogger Boss")), // printed in Unstable with a black border
                 Predicates.or(new ExpansionSetPredicate("UGL"), new ExpansionSetPredicate("UNH"), new ExpansionSetPredicate("UST"))
         ));

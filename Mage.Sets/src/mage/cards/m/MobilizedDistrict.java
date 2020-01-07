@@ -17,7 +17,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.token.TokenImpl;
@@ -34,7 +33,7 @@ public final class MobilizedDistrict extends CardImpl {
     private static final FilterPermanent filter = new FilterCreatureOrPlaneswalkerPermanent();
 
     static {
-        filter.add(new SupertypePredicate(SuperType.LEGENDARY));
+        filter.add(SuperType.LEGENDARY.getPredicate());
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

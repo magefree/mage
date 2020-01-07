@@ -15,7 +15,6 @@ import mage.constants.SuperType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 
 
 /**
@@ -27,7 +26,7 @@ public final class ArvadTheCursed extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("legendary creatures");
 
     static {
-        filter.add(new SupertypePredicate(SuperType.LEGENDARY));
+        filter.add(SuperType.LEGENDARY.getPredicate());
     }
 
     public ArvadTheCursed(UUID ownerId, CardSetInfo setInfo) {

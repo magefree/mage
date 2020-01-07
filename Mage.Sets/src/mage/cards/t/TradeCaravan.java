@@ -22,7 +22,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -34,7 +33,7 @@ public final class TradeCaravan extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent("basic land");
 
     static {
-        filter.add(new SupertypePredicate(SuperType.BASIC));
+        filter.add(SuperType.BASIC.getPredicate());
     }
 
     public TradeCaravan(UUID ownerId, CardSetInfo setInfo) {

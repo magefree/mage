@@ -21,7 +21,6 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -38,7 +37,7 @@ public final class FieldOfRuin extends CardImpl {
 
     static {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
-        filter.add(Predicates.not(new SupertypePredicate(SuperType.BASIC)));
+        filter.add(Predicates.not(SuperType.BASIC.getPredicate()));
     }
 
     public FieldOfRuin(UUID ownerId, CardSetInfo setInfo) {

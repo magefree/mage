@@ -17,7 +17,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.target.TargetPlayer;
@@ -63,7 +62,7 @@ class AnathemancerCount implements DynamicValue {
         }
 
         FilterLandPermanent filter = new FilterLandPermanent();
-        filter.add(Predicates.not(new SupertypePredicate(SuperType.BASIC)));
+        filter.add(Predicates.not(SuperType.BASIC.getPredicate()));
         filter.add(new ControllerIdPredicate(sourceAbility.getFirstTarget()));
 
         return game.getBattlefield().count(filter, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game);

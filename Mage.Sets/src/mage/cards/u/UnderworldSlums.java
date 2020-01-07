@@ -13,7 +13,6 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 import java.util.ArrayList;
@@ -63,7 +62,7 @@ public final class UnderworldSlums extends CardImpl {
             subtypePredicates.add(SubType.MOUNTAIN.getPredicate());
             subtypePredicates.add(SubType.FOREST.getPredicate());
             filter.add(Predicates.or(subtypePredicates));
-            filter.add(new SupertypePredicate(SuperType.BASIC));
+            filter.add(SuperType.BASIC.getPredicate());
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
             addEffect(new SearchLibraryPutInPlayEffect(target, true, true, Outcome.PutLandInPlay));
         }

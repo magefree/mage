@@ -17,7 +17,6 @@ import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -31,7 +30,7 @@ public final class HeroesPodium extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Each legendary creature you control");
 
     static {
-        filter.add(new SupertypePredicate(SuperType.LEGENDARY));
+        filter.add(SuperType.LEGENDARY.getPredicate());
     }
 
     public HeroesPodium(UUID ownerId, CardSetInfo setInfo) {
@@ -65,7 +64,7 @@ class HeroesPodiumLegendaryCount implements DynamicValue {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other legendary creature you control");
 
     static {
-        filter.add(new SupertypePredicate(SuperType.LEGENDARY));
+        filter.add(SuperType.LEGENDARY.getPredicate());
     }
 
     @Override
@@ -98,7 +97,7 @@ class HeroesPodiumEffect extends OneShotEffect {
     private static final FilterCreatureCard filter = new FilterCreatureCard("a legendary creature card");
 
     static {
-        filter.add(new SupertypePredicate(SuperType.LEGENDARY));
+        filter.add(SuperType.LEGENDARY.getPredicate());
     }
 
     public HeroesPodiumEffect() {

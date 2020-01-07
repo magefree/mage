@@ -11,7 +11,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.TargetPermanent;
 
@@ -25,7 +24,7 @@ public final class RimeTender extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("another target snow permanent");
 
     static {
-        filter.add(new SupertypePredicate(SuperType.SNOW));
+        filter.add(SuperType.SNOW.getPredicate());
         filter.add(AnotherPredicate.instance);
     }
 

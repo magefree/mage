@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -24,7 +23,7 @@ public final class GlacialCrevasses extends CardImpl {
 
     static {
         filter.add(SubType.MOUNTAIN.getPredicate());
-        filter.add(new SupertypePredicate(SuperType.SNOW));
+        filter.add(SuperType.SNOW.getPredicate());
     }
 
     public GlacialCrevasses(UUID ownerId, CardSetInfo setInfo) {

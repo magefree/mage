@@ -9,7 +9,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterPermanentCard;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -45,7 +44,7 @@ class PrimevalsGloriousRebirthEffect extends OneShotEffect {
     private static final FilterPermanentCard filter = new FilterPermanentCard();
 
     static {
-        filter.add(new SupertypePredicate(SuperType.LEGENDARY));
+        filter.add(SuperType.LEGENDARY.getPredicate());
     }
 
     public PrimevalsGloriousRebirthEffect() {

@@ -41,7 +41,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
@@ -56,7 +55,7 @@ public final class KondasBanner extends CardImpl {
     private static final FilterControlledCreaturePermanent legendaryFilter = new FilterControlledCreaturePermanent("legendary creatures");
 
     static {
-        legendaryFilter.add(new SupertypePredicate(SuperType.LEGENDARY));
+        legendaryFilter.add(SuperType.LEGENDARY.getPredicate());
     }
 
     public KondasBanner(UUID ownerId, CardSetInfo setInfo) {

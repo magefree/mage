@@ -9,7 +9,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.filter.common.FilterLandCard;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -21,7 +20,7 @@ public final class IntoTheNorth extends CardImpl {
     private static final FilterLandCard filter = new FilterLandCard("snow land card");
 
     static {
-        filter.add(new SupertypePredicate(SuperType.SNOW));
+        filter.add(SuperType.SNOW.getPredicate());
     }
     
     public IntoTheNorth(UUID ownerId, CardSetInfo setInfo) {

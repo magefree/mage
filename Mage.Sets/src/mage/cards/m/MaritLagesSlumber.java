@@ -17,7 +17,6 @@ import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.permanent.token.MaritLageToken;
 
 import java.util.UUID;
@@ -31,7 +30,7 @@ public final class MaritLagesSlumber extends CardImpl {
             = new FilterControlledPermanent("{this} or another snow permanent");
 
     static {
-        filter.add(new SupertypePredicate(SuperType.SNOW));
+        filter.add(SuperType.SNOW.getPredicate());
     }
 
     private static final Condition condition

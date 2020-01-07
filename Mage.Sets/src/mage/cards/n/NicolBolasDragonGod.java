@@ -13,7 +13,6 @@ import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
 import mage.filter.common.FilterPlaneswalkerPermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -182,7 +181,7 @@ class NicolBolasDragonGodMinus8Effect extends OneShotEffect {
     private static final FilterPermanent filter = new FilterCreatureOrPlaneswalkerPermanent();
 
     static {
-        filter.add(new SupertypePredicate(SuperType.LEGENDARY));
+        filter.add(SuperType.LEGENDARY.getPredicate());
     }
 
     NicolBolasDragonGodMinus8Effect() {

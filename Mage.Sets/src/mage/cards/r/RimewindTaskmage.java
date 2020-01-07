@@ -17,7 +17,6 @@ import mage.constants.ComparisonType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -29,7 +28,7 @@ public final class RimewindTaskmage extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("you control four or more snow permanents");
 
     static {
-        filter.add(new SupertypePredicate(SuperType.SNOW));
+        filter.add(SuperType.SNOW.getPredicate());
     }
 
     public RimewindTaskmage(UUID ownerId, CardSetInfo setInfo) {

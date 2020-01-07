@@ -11,7 +11,6 @@ import mage.constants.SagaChapter;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.permanent.token.ArtifactWallToken;
 import mage.target.common.TargetCardInLibrary;
 
@@ -26,7 +25,7 @@ public final class TheBirthOfMeletis extends CardImpl {
 
     static {
         filter.add(SubType.PLAINS.getPredicate());
-        filter.add(new SupertypePredicate(SuperType.BASIC));
+        filter.add(SuperType.BASIC.getPredicate());
     }
 
     public TheBirthOfMeletis(UUID ownerId, CardSetInfo setInfo) {

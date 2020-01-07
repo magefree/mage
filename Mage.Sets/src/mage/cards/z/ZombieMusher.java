@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 
 /**
  *
@@ -25,7 +24,7 @@ public final class ZombieMusher extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent("snow land");
 
     static {
-        filter.add(new SupertypePredicate(SuperType.SNOW));
+        filter.add(SuperType.SNOW.getPredicate());
     }
 
     public ZombieMusher(UUID ownerId, CardSetInfo setInfo) {

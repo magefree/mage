@@ -14,8 +14,6 @@ import mage.constants.CardType;
 import mage.constants.SetTargetPointer;
 import mage.constants.SuperType;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -25,7 +23,7 @@ public final class WintersNight extends CardImpl {
     
     private static final FilterLandPermanent filter = new FilterLandPermanent("a player taps a snow land");
     {
-        filter.add(new SupertypePredicate(SuperType.SNOW));
+        filter.add(SuperType.SNOW.getPredicate());
     }
 
     public WintersNight(UUID ownerId, CardSetInfo setInfo) {

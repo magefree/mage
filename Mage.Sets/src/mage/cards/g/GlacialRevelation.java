@@ -12,7 +12,6 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterPermanentCard;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -46,7 +45,7 @@ class GlacialRevelationEffect extends OneShotEffect {
     private static final FilterCard filter = new FilterPermanentCard("snow permanent cards");
 
     static {
-        filter.add(new SupertypePredicate(SuperType.SNOW));
+        filter.add(SuperType.SNOW.getPredicate());
     }
 
     GlacialRevelationEffect() {

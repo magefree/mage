@@ -13,7 +13,6 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.NamePredicate;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -49,7 +48,7 @@ class LobotomyEffect extends OneShotEffect {
     private static final FilterCard filter = new FilterCard("card other than a basic land card");
 
     static {
-        filter.add(Predicates.not(Predicates.and(CardType.LAND.getPredicate(), new SupertypePredicate(SuperType.BASIC))));
+        filter.add(Predicates.not(Predicates.and(CardType.LAND.getPredicate(), SuperType.BASIC.getPredicate())));
     }
 
     public LobotomyEffect() {

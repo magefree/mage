@@ -19,7 +19,6 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.target.common.TargetCardInLibrary;
 import mage.util.SubTypeList;
@@ -73,7 +72,7 @@ class TargetCardInLibrarySharingLandType extends TargetCardInLibrary {
                         .map(SubType::getPredicate)
                         .collect(Collectors.toSet())
         ));
-        filterBasicLandCard.add(new SupertypePredicate(SuperType.BASIC));
+        filterBasicLandCard.add(SuperType.BASIC.getPredicate());
     }
 
     public TargetCardInLibrarySharingLandType(int minNumTargets, int maxNumTargets) {

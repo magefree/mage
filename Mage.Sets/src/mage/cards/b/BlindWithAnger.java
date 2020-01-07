@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -25,7 +24,7 @@ public final class BlindWithAnger extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonlegendary creature");
 
     static {
-        filter.add(Predicates.not(new SupertypePredicate(SuperType.LEGENDARY)));
+        filter.add(Predicates.not(SuperType.LEGENDARY.getPredicate()));
     }
 
     public BlindWithAnger(UUID ownerId, CardSetInfo setInfo) {

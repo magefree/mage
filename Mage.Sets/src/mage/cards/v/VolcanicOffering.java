@@ -11,7 +11,6 @@ import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
@@ -54,7 +53,7 @@ enum VolcanicOfferingAdjuster implements TargetAdjuster {
 
     static {
         filterLand.add(new ControllerPredicate(TargetController.NOT_YOU));
-        filterLand.add(Predicates.not(new SupertypePredicate(SuperType.BASIC)));
+        filterLand.add(Predicates.not(SuperType.BASIC.getPredicate()));
         filterCreature.add(new ControllerPredicate(TargetController.NOT_YOU));
     }
 
@@ -67,7 +66,7 @@ enum VolcanicOfferingAdjuster implements TargetAdjuster {
         ability.getTargets().clear();
         ability.addTarget(new TargetPermanent(filterLand));
         FilterLandPermanent filterLandForOpponent = new FilterLandPermanent("nonbasic land not controlled by " + controller.getLogName());
-        filterLandForOpponent.add(Predicates.not(new SupertypePredicate(SuperType.BASIC)));
+        filterLandForOpponent.add(Predicates.not(SuperType.BASIC.getPredicate()));
         filterLandForOpponent.add(Predicates.not(new ControllerIdPredicate(controller.getId())));
         ability.addTarget(new TargetOpponentsChoicePermanent(1, 1, filterLandForOpponent, false));
 

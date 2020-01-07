@@ -9,7 +9,6 @@ import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.target.TargetPermanent;
 import mage.target.targetadjustment.TargetAdjuster;
@@ -44,7 +43,7 @@ enum AvalancheAdjuster implements TargetAdjuster {
     private static final FilterPermanent filter = new FilterLandPermanent("snow lands");
 
     static {
-        filter.add(new SupertypePredicate(SuperType.SNOW));
+        filter.add(SuperType.SNOW.getPredicate());
     }
 
     @Override

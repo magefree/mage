@@ -16,7 +16,6 @@ import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -28,7 +27,7 @@ public final class FirewildBorderpost extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("a basic land");
 
     static {
-        filter.add(new SupertypePredicate(SuperType.BASIC));
+        filter.add(SuperType.BASIC.getPredicate());
     }
 
     public FirewildBorderpost (UUID ownerId, CardSetInfo setInfo) {

@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 
 /**
  *
@@ -23,7 +22,7 @@ public final class RonomHulk extends CardImpl {
     private static final FilterCard filter = new FilterCard("snow");
 
     static {
-        filter.add(new SupertypePredicate(SuperType.SNOW));
+        filter.add(SuperType.SNOW.getPredicate());
     }
 
     public RonomHulk(UUID ownerId, CardSetInfo setInfo) {

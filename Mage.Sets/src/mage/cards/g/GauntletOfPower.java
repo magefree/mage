@@ -17,7 +17,6 @@ import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -35,7 +34,7 @@ public final class GauntletOfPower extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent("a basic land");
 
     static {
-        filter.add(new SupertypePredicate(SuperType.BASIC));
+        filter.add(SuperType.BASIC.getPredicate());
     }
 
     public GauntletOfPower(UUID ownerId, CardSetInfo setInfo) {

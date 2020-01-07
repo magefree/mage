@@ -17,7 +17,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 
 import java.util.UUID;
 
@@ -32,7 +31,7 @@ public final class BlackbladeReforged extends CardImpl {
             = new FilterControlledCreaturePermanent("legendary creature");
 
     static {
-        filter.add(new SupertypePredicate(SuperType.LEGENDARY));
+        filter.add(SuperType.LEGENDARY.getPredicate());
     }
 
     public BlackbladeReforged(UUID ownerId, CardSetInfo setInfo) {

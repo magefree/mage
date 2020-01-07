@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 
 /**
  *
@@ -21,7 +20,7 @@ public final class RimeDryad extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent("snow forest");
 
     static {
-        filter.add(new SupertypePredicate(SuperType.SNOW));
+        filter.add(SuperType.SNOW.getPredicate());
         filter.add(SubType.FOREST.getPredicate());
     }
 

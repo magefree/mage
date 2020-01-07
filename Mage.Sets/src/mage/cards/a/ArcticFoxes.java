@@ -13,7 +13,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 
 import java.util.UUID;
@@ -60,7 +59,7 @@ enum ArcticFoxesCondition implements Condition {
     private static final FilterPermanent filter = new FilterLandPermanent();
 
     static {
-        filter.add(new SupertypePredicate(SuperType.SNOW));
+        filter.add(SuperType.SNOW.getPredicate());
     }
 
     @Override

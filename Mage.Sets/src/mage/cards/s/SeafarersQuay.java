@@ -14,7 +14,6 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 
 /**
  *
@@ -26,7 +25,7 @@ public final class SeafarersQuay extends CardImpl {
 
     static {
         filter.add(new ColorPredicate(ObjectColor.BLUE));
-        filter.add(new SupertypePredicate(SuperType.LEGENDARY));
+        filter.add(SuperType.LEGENDARY.getPredicate());
     }
 
     public SeafarersQuay(UUID ownerId, CardSetInfo setInfo) {

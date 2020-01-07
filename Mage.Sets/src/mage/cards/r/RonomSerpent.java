@@ -15,7 +15,6 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 
 /**
  *
@@ -27,8 +26,8 @@ public final class RonomSerpent extends CardImpl {
     private static final FilterLandPermanent filter2 = new FilterLandPermanent("no snow lands");
 
     static {
-        filter.add(new SupertypePredicate(SuperType.SNOW));
-        filter2.add(new SupertypePredicate(SuperType.SNOW));
+        filter.add(SuperType.SNOW.getPredicate());
+        filter2.add(SuperType.SNOW.getPredicate());
     }
 
     public RonomSerpent(UUID ownerId, CardSetInfo setInfo) {

@@ -20,7 +20,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
@@ -57,7 +56,7 @@ class WitheringWispsActivatedAbility extends ActivatedAbilityImpl {
     private static final FilterPermanent filter = new FilterPermanent("snow Swamps you control");
 
     static {
-        filter.add(new SupertypePredicate(SuperType.SNOW));
+        filter.add(SuperType.SNOW.getPredicate());
         filter.add(SubType.SWAMP.getPredicate());
         filter.add(new ControllerPredicate(TargetController.YOU));
     }

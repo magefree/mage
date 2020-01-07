@@ -20,7 +20,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 
 /**
  *
@@ -32,7 +31,7 @@ public final class Blizzard extends CardImpl {
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creatures with flying");
 
     static {
-        filter.add(new SupertypePredicate(SuperType.SNOW));
+        filter.add(SuperType.SNOW.getPredicate());
         filter2.add(new AbilityPredicate(FlyingAbility.class));
     }
 

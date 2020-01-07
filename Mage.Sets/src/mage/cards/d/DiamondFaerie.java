@@ -15,7 +15,6 @@ import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 
 /**
  *
@@ -26,7 +25,7 @@ public final class DiamondFaerie extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Snow creatures");
 
     static {
-        filter.add(new SupertypePredicate(SuperType.SNOW));
+        filter.add(SuperType.SNOW.getPredicate());
     }
 
     public DiamondFaerie(UUID ownerId, CardSetInfo setInfo) {

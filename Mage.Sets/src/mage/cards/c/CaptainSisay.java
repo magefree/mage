@@ -13,7 +13,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -25,7 +24,7 @@ public final class CaptainSisay extends CardImpl {
     private static final FilterCard filter = new FilterCard("legendary card");
     
     static {
-        filter.add(new SupertypePredicate(SuperType.LEGENDARY));
+        filter.add(SuperType.LEGENDARY.getPredicate());
     }
     
     public CaptainSisay(UUID ownerId, CardSetInfo setInfo) {

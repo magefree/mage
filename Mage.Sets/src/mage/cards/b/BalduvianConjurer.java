@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.TargetPermanent;
 
@@ -25,7 +24,7 @@ public final class BalduvianConjurer extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent("snow land");
 
     static {
-        filter.add(new SupertypePredicate(SuperType.SNOW));
+        filter.add(SuperType.SNOW.getPredicate());
     }
 
     public BalduvianConjurer(UUID ownerId, CardSetInfo setInfo) {

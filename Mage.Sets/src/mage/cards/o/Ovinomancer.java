@@ -20,7 +20,6 @@ import mage.constants.SuperType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SheepToken;
@@ -36,7 +35,7 @@ public final class Ovinomancer extends CardImpl {
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("basic lands");
 
     static {
-        filter.add(new SupertypePredicate(SuperType.BASIC));
+        filter.add(SuperType.BASIC.getPredicate());
     }
 
     public Ovinomancer(UUID ownerId, CardSetInfo setInfo) {

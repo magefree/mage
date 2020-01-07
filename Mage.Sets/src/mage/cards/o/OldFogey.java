@@ -19,7 +19,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 
 /**
  *
@@ -32,7 +31,7 @@ public final class OldFogey extends CardImpl {
 
     static {
         filter.add(SubType.HOMARID.getPredicate());
-        filter2.add(new SupertypePredicate(SuperType.SNOW));
+        filter2.add(SuperType.SNOW.getPredicate());
         filter2.add(SubType.PLAINS.getPredicate());
     }
 

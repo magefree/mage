@@ -16,7 +16,6 @@ import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.game.command.emblems.LilianaDefiantNecromancerEmblem;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -31,7 +30,7 @@ public final class LilianaDefiantNecromancer extends CardImpl {
     protected static final FilterCreatureCard filter = new FilterCreatureCard("nonlegendary creature with converted mana cost X from your graveyard");
 
     static {
-        filter.add(Predicates.not(new SupertypePredicate(SuperType.LEGENDARY)));
+        filter.add(Predicates.not(SuperType.LEGENDARY.getPredicate()));
     }
 
     public LilianaDefiantNecromancer(UUID ownerId, CardSetInfo setInfo) {

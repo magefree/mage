@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -27,7 +26,7 @@ public final class LoyalRetainers extends CardImpl {
     private static final FilterCreatureCard filter = new FilterCreatureCard("legendary creature card from your graveyard");
 
     static {
-        filter.add(new SupertypePredicate(SuperType.LEGENDARY));
+        filter.add(SuperType.LEGENDARY.getPredicate());
     }
 
     public LoyalRetainers(UUID ownerId, CardSetInfo setInfo) {

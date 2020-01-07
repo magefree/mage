@@ -25,8 +25,6 @@ import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.filter.predicate.permanent.CounterPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -43,7 +41,7 @@ public final class RimefeatherOwl extends CardImpl {
 
     static {
         filter.add(new CounterPredicate(CounterType.ICE));
-        filter2.add(new SupertypePredicate(SuperType.SNOW));
+        filter2.add(SuperType.SNOW.getPredicate());
     }
 
     public RimefeatherOwl(UUID ownerId, CardSetInfo setInfo) {

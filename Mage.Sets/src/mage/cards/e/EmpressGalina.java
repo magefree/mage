@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -23,7 +22,7 @@ public final class EmpressGalina extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("legendary permanent");
 
     static {
-        filter.add(new SupertypePredicate(SuperType.LEGENDARY));
+        filter.add(SuperType.LEGENDARY.getPredicate());
     }
 
     public EmpressGalina(UUID ownerId, CardSetInfo setInfo) {

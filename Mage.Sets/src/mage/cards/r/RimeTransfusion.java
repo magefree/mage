@@ -18,7 +18,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -33,7 +32,7 @@ public final class RimeTransfusion extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("except by snow creatures until end of turn");
 
     static {
-        filter.add(Predicates.not(new SupertypePredicate(SuperType.SNOW)));
+        filter.add(Predicates.not(SuperType.SNOW.getPredicate()));
     }
 
     public RimeTransfusion(UUID ownerId, CardSetInfo setInfo) {

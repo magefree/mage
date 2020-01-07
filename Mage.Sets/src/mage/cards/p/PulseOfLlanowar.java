@@ -16,7 +16,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -50,7 +49,7 @@ class PulseOfLlanowarReplacementEffect extends ReplacementEffectImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
     static {
-        filter.add(new SupertypePredicate(SuperType.BASIC));
+        filter.add(SuperType.BASIC.getPredicate());
     }
 
     PulseOfLlanowarReplacementEffect() {

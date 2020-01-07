@@ -18,7 +18,6 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -30,7 +29,7 @@ public final class JaliraMasterPolymorphist extends CardImpl {
     private static final FilterCreatureCard filterCard = new FilterCreatureCard("nonlegendary creature card");
 
     static {
-        filterCard.add(Predicates.not(new SupertypePredicate(SuperType.LEGENDARY)));
+        filterCard.add(Predicates.not(SuperType.LEGENDARY.getPredicate()));
     }
 
     public JaliraMasterPolymorphist(UUID ownerId, CardSetInfo setInfo) {

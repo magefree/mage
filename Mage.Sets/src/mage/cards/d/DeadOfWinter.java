@@ -12,7 +12,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 
 import java.util.UUID;
 
@@ -25,8 +24,8 @@ public final class DeadOfWinter extends CardImpl {
     private static final FilterPermanent filter2 = new FilterControlledPermanent();
 
     static {
-        filter.add(Predicates.not(new SupertypePredicate(SuperType.SNOW)));
-        filter2.add(new SupertypePredicate(SuperType.SNOW));
+        filter.add(Predicates.not(SuperType.SNOW.getPredicate()));
+        filter2.add(SuperType.SNOW.getPredicate());
     }
 
     private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter2, -1);

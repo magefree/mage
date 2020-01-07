@@ -1,5 +1,9 @@
 package mage.constants;
 
+import mage.MageObject;
+import mage.filter.predicate.Predicate;
+import mage.game.Game;
+
 /**
  * Created by IGOUDT on 26-3-2017.
  */
@@ -12,10 +16,31 @@ public enum SuperType {
     SNOW("Snow"),
     WORLD("World");
 
-    String text;
+    public static class SuperTypePredicate implements Predicate<MageObject> {
+
+        private final SuperType supertype;
+
+        private SuperTypePredicate(SuperType supertype) {
+            this.supertype = supertype;
+        }
+
+        @Override
+        public boolean apply(MageObject input, Game game) {
+            return input.getSuperType().contains(supertype);
+        }
+
+        @Override
+        public String toString() {
+            return "Supertype(" + supertype + ')';
+        }
+    }
+
+    private final String text;
+    private final SuperTypePredicate predicate;
 
     SuperType(String text) {
         this.text = text;
+        this.predicate = new SuperTypePredicate(this);
     }
 
     @Override
@@ -23,4 +48,7 @@ public enum SuperType {
         return text;
     }
 
+    public SuperTypePredicate getPredicate() {
+        return predicate;
+    }
 }

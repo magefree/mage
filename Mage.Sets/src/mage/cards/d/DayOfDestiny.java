@@ -11,7 +11,6 @@ import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 
 /**
  *
@@ -22,7 +21,7 @@ public final class DayOfDestiny extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Legendary creatures");
 
     static {
-        filter.add(new SupertypePredicate(SuperType.LEGENDARY));
+        filter.add(SuperType.LEGENDARY.getPredicate());
     }
 
     public DayOfDestiny(UUID ownerId, CardSetInfo setInfo) {

@@ -13,7 +13,6 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -58,7 +57,7 @@ class EyeOfSingularityETBEffect extends OneShotEffect {
     private static final FilterPermanent filter = new FilterPermanent();
 
     static {
-        filter.add(Predicates.not(new SupertypePredicate(SuperType.BASIC)));
+        filter.add(Predicates.not(SuperType.BASIC.getPredicate()));
     }
 
     EyeOfSingularityETBEffect() {
@@ -146,7 +145,7 @@ class EyeOfSingularityTriggeredEffect extends OneShotEffect {
     private static final FilterPermanent filter = new FilterPermanent();
 
     static {
-        filter.add(Predicates.not(new SupertypePredicate(SuperType.BASIC)));
+        filter.add(Predicates.not(SuperType.BASIC.getPredicate()));
     }
 
     EyeOfSingularityTriggeredEffect() {

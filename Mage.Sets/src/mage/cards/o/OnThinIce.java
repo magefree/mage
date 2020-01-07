@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 
@@ -29,7 +28,7 @@ public final class OnThinIce extends CardImpl {
     private static final FilterPermanent filter = new FilterControlledLandPermanent("snow land you control");
 
     static {
-        filter.add(new SupertypePredicate(SuperType.SNOW));
+        filter.add(SuperType.SNOW.getPredicate());
     }
 
     public OnThinIce(UUID ownerId, CardSetInfo setInfo) {

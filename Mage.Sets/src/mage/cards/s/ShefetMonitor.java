@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -29,7 +28,7 @@ public final class ShefetMonitor extends CardImpl {
             Predicates.or(
                 Predicates.and(
                          CardType.LAND.getPredicate(),
-                         new SupertypePredicate(SuperType.BASIC)),
+                         SuperType.BASIC.getPredicate()),
                 SubType.DESERT.getPredicate()));
     }
 

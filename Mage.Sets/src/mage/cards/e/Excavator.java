@@ -16,7 +16,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledPermanent;
@@ -31,7 +30,7 @@ public final class Excavator extends CardImpl {
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("basic land");
     static
     {
-        filter.add(new SupertypePredicate(SuperType.BASIC));
+        filter.add(SuperType.BASIC.getPredicate());
     }
    
     public Excavator(UUID ownerId, CardSetInfo setInfo) {

@@ -17,7 +17,6 @@ import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 
 /**
  * @author fireshoes
@@ -27,7 +26,7 @@ public final class CanopyVista extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent();
 
     static {
-        filter.add(new SupertypePredicate(SuperType.BASIC));
+        filter.add(SuperType.BASIC.getPredicate());
     }
 
     public CanopyVista(UUID ownerId, CardSetInfo setInfo) {

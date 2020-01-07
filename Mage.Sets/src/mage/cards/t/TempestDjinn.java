@@ -16,7 +16,6 @@ import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 
 /**
  *
@@ -27,7 +26,7 @@ public final class TempestDjinn extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("basic Island you control");
 
     static {
-        filter.add(new SupertypePredicate(SuperType.BASIC));
+        filter.add(SuperType.BASIC.getPredicate());
         filter.add(SubType.ISLAND.getPredicate());
     }
 

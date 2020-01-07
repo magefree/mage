@@ -14,7 +14,6 @@ import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 
 /**
  *
@@ -25,7 +24,7 @@ public final class FreyalisesRadiance extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("snow permanents");
 
     static {
-        filter.add(new SupertypePredicate(SuperType.SNOW));
+        filter.add(SuperType.SNOW.getPredicate());
     }
 
     public FreyalisesRadiance(UUID ownerId, CardSetInfo setInfo) {

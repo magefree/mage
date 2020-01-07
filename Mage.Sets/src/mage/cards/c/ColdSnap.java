@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -47,7 +46,7 @@ class ColdSnapDamageTargetEffect extends OneShotEffect{
     private static final FilterLandPermanent filter = new FilterLandPermanent("snow lands");
 
     static {
-        filter.add(new SupertypePredicate(SuperType.SNOW));
+        filter.add(SuperType.SNOW.getPredicate());
     }
     
     public ColdSnapDamageTargetEffect()

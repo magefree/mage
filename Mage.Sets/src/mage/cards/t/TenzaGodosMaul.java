@@ -44,7 +44,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -60,7 +59,7 @@ public final class TenzaGodosMaul extends CardImpl {
     private static final FilterCreaturePermanent redFilter = new FilterCreaturePermanent("red");
 
     static {
-        legendaryFilter.add(new SupertypePredicate(SuperType.LEGENDARY));
+        legendaryFilter.add(SuperType.LEGENDARY.getPredicate());
         redFilter.add(new ColorPredicate(ObjectColor.RED));
     }
 

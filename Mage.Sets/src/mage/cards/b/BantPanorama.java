@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -26,7 +25,7 @@ public final class BantPanorama extends CardImpl {
 
     static {
         filter.add(CardType.LAND.getPredicate());
-        filter.add(new SupertypePredicate(SuperType.BASIC));
+        filter.add(SuperType.BASIC.getPredicate());
         filter.add(Predicates.or(
                 SubType.FOREST.getPredicate(),
                 SubType.PLAINS.getPredicate(),

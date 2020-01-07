@@ -17,7 +17,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
@@ -51,7 +50,7 @@ class NissasPilgrimageEffect extends OneShotEffect {
     private static final FilterCard filter = new FilterCard("basic Forest card");
 
     static {
-        filter.add(new SupertypePredicate(SuperType.BASIC));
+        filter.add(SuperType.BASIC.getPredicate());
         filter.add(SubType.FOREST.getPredicate());
     }
 

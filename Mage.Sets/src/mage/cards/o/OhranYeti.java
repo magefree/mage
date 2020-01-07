@@ -16,7 +16,6 @@ import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -28,7 +27,7 @@ public final class OhranYeti extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("snow creature");
 
     static {
-        filter.add(new SupertypePredicate(SuperType.SNOW));
+        filter.add(SuperType.SNOW.getPredicate());
     }
 
     public OhranYeti(UUID ownerId, CardSetInfo setInfo) {

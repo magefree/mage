@@ -16,7 +16,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -37,7 +36,7 @@ public final class BlizzardStrix extends CardImpl {
     static {
         filter.add(AnotherPredicate.instance);
         filter2.add(AnotherPredicate.instance);
-        filter2.add(new SupertypePredicate(SuperType.SNOW));
+        filter2.add(SuperType.SNOW.getPredicate());
     }
 
     private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter2);

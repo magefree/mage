@@ -10,7 +10,6 @@ import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.TargetPlayer;
 
 /**
@@ -23,7 +22,7 @@ public final class LayBareTheHeart extends CardImpl {
 
     static {
         filter.add(Predicates.not(CardType.LAND.getPredicate()));
-        filter.add(Predicates.not(new SupertypePredicate(SuperType.LEGENDARY)));
+        filter.add(Predicates.not(SuperType.LEGENDARY.getPredicate()));
     }
 
     public LayBareTheHeart(UUID ownerId, CardSetInfo setInfo) {

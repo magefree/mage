@@ -13,7 +13,6 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -27,7 +26,7 @@ public final class PriceOfFame extends CardImpl {
             = new FilterCreaturePermanent("a legendary creature");
 
     static {
-        filter.add(new SupertypePredicate(SuperType.LEGENDARY));
+        filter.add(SuperType.LEGENDARY.getPredicate());
     }
 
     private static final Condition condition = new SourceTargetsPermanentCondition(filter);

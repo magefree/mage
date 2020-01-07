@@ -16,7 +16,6 @@ import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.game.Game;
@@ -33,7 +32,7 @@ public final class TilonallisSkinshifter extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
-        filter.add(Predicates.not(new SupertypePredicate(SuperType.LEGENDARY)));
+        filter.add(Predicates.not(SuperType.LEGENDARY.getPredicate()));
         filter.add(AttackingPredicate.instance);
         filter.add(AnotherPredicate.instance);
     }

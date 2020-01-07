@@ -11,7 +11,6 @@ import mage.constants.SetTargetPointer;
 import mage.constants.SuperType;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 
 /**
  *
@@ -22,7 +21,7 @@ public final class BurningEarth extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent("a player taps a nonbasic land");
     
     static {
-        filter.add(Predicates.not(new SupertypePredicate(SuperType.BASIC)));
+        filter.add(Predicates.not(SuperType.BASIC.getPredicate()));
     }
     
     public BurningEarth(UUID ownerId, CardSetInfo setInfo) {

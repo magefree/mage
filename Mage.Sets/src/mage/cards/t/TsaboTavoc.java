@@ -17,7 +17,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -30,8 +29,8 @@ public final class TsaboTavoc extends CardImpl {
     private static final FilterCreaturePermanent filterDestroy = new FilterCreaturePermanent("legendary creature");
     
     static {
-        filter.add(new SupertypePredicate(SuperType.LEGENDARY));
-        filterDestroy.add(new SupertypePredicate(SuperType.LEGENDARY));
+        filter.add(SuperType.LEGENDARY.getPredicate());
+        filterDestroy.add(SuperType.LEGENDARY.getPredicate());
     }
     
     public TsaboTavoc(UUID ownerId, CardSetInfo setInfo) {

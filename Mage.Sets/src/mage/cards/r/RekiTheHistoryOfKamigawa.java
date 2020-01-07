@@ -11,7 +11,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 
 /**
  *
@@ -22,7 +21,7 @@ public final class RekiTheHistoryOfKamigawa extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("legendary spell");
 
     static {
-        filter.add(new SupertypePredicate(SuperType.LEGENDARY));
+        filter.add(SuperType.LEGENDARY.getPredicate());
     }
 
     public RekiTheHistoryOfKamigawa(UUID ownerId, CardSetInfo setInfo) {

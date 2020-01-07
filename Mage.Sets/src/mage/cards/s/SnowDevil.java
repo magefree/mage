@@ -22,7 +22,6 @@ import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
@@ -79,7 +78,7 @@ enum SnowDevilCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         FilterLandPermanent filter = new FilterLandPermanent();
-        filter.add(new SupertypePredicate(SuperType.SNOW));
+        filter.add(SuperType.SNOW.getPredicate());
         Permanent enchantment = game.getPermanent(source.getSourceId());
         if (enchantment != null) {
             Player controller = game.getPlayer(enchantment.getControllerId());

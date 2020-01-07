@@ -10,7 +10,6 @@ import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 
 /**
  *
@@ -27,7 +26,7 @@ public final class MoxAmber extends CardImpl {
         filter.add(Predicates.or(
                 Predicates.and(
                     CardType.CREATURE.getPredicate(),
-                    new SupertypePredicate(SuperType.LEGENDARY)
+                    SuperType.LEGENDARY.getPredicate()
                 ),
             CardType.PLANESWALKER.getPredicate())
         );

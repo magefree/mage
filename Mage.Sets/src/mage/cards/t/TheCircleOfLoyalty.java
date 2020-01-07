@@ -16,7 +16,6 @@ import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.game.permanent.token.KnightToken;
 import mage.util.CardUtil;
@@ -31,7 +30,7 @@ public final class TheCircleOfLoyalty extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("a legendary spell");
 
     static {
-        filter.add(new SupertypePredicate(SuperType.LEGENDARY));
+        filter.add(SuperType.LEGENDARY.getPredicate());
     }
 
     public TheCircleOfLoyalty(UUID ownerId, CardSetInfo setInfo) {
