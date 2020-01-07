@@ -7,6 +7,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.DamagedPlayerThisTurnPredicate;
 
 import java.util.UUID;
 
@@ -19,7 +20,7 @@ public final class Retaliate extends CardImpl {
             = new FilterCreaturePermanent("creatures that dealt damage to you this turn");
 
     static {
-        filter.add(TargetController.YOU.getDamagedPlayerThisTurnPredicate());
+        filter.add(new DamagedPlayerThisTurnPredicate(TargetController.YOU));
     }
 
     public Retaliate(UUID ownerId, CardSetInfo setInfo) {

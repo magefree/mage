@@ -15,6 +15,7 @@ import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.DamagedPlayerThisTurnPredicate;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -29,7 +30,7 @@ public final class SpearOfHeliod extends CardImpl {
             = new FilterCreaturePermanent("creature that dealt damage to you this turn");
 
     static {
-        filter.add(TargetController.YOU.getDamagedPlayerThisTurnPredicate());
+        filter.add(new DamagedPlayerThisTurnPredicate(TargetController.YOU));
     }
 
     public SpearOfHeliod(UUID ownerId, CardSetInfo setInfo) {
