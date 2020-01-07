@@ -50,7 +50,7 @@ import java.util.zip.GZIPOutputStream;
  */
 public class GameController implements GameCallback {
 
-    private static final int GAME_TIMEOUTS_CHECK_JOINING_STATUS_EVERY_SECS = 5; // checks and inform players about joining status
+    private static final int GAME_TIMEOUTS_CHECK_JOINING_STATUS_EVERY_SECS = 10; // checks and inform players about joining status
     private static final int GAME_TIMEOUTS_CANCEL_PLAYER_GAME_JOINING_AFTER_INACTIVE_SECS = 2 * 60; // leave player from game if it don't join and inactive on server
 
     private static final ExecutorService gameExecutor = ThreadExecutor.instance.getGameExecutor();
@@ -330,18 +330,20 @@ public class GameController implements GameCallback {
                 Optional<User> requestedUser = getUserByPlayerId(player.getId());
                 if (requestedUser.isPresent()) {
                     User user = requestedUser.get();
+                    // TODO: workaround to fix not started games in tourneys, need to find out real reason
                     if (gameSessions.get(player.getId()) == null) {
                         // join the game because player has not joined are was removed because of disconnect
                         user.removeConstructing(player.getId());
                         GameManager.instance.joinGame(game.getId(), user.getId());
-                        logger.debug("Player " + player.getName() + " (disconnected) has joined gameId: " + game.getId());
+                        logger.warn("Forced join of player " + player.getName() + " (" + user.getUserState()  + ") to gameId: " + game.getId());
                         ChatManager.instance.broadcast(chatId, player.getName(), user.getPingInfo()
-                                        + " is pending to join the game (waiting only for "
+                                        + " is forced to join the game (waiting ends after "
                                         + GAME_TIMEOUTS_CANCEL_PLAYER_GAME_JOINING_AFTER_INACTIVE_SECS + " secs)",
                                 MessageColor.BLUE, true, ChatMessage.MessageType.STATUS, null);
                         if (!user.isConnected() && user.getSecondsDisconnected() > GAME_TIMEOUTS_CANCEL_PLAYER_GAME_JOINING_AFTER_INACTIVE_SECS) {
-                            // Cancel player join possibility lately after 4 minutes
-                            logger.debug("Player " + player.getName() + " - canceled game (after 240 seconds) gameId: " + game.getId());
+                            // Cancel player join possibility lately
+                            logger.debug("Player " + player.getName() + " - canceled joining game (after "
+                                    + user.getSecondsDisconnected() + " secs of inactivity) gameId: " + game.getId());
                             player.leave();
                         }
                     }
