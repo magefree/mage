@@ -11,6 +11,7 @@ import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterOpponentsCreaturePermanent;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
@@ -84,28 +85,25 @@ class LegionsEndEffect extends OneShotEffect {
             return player.moveCards(permanent, Zone.EXILED, source, game);
         }
         Cards cards = new CardsImpl();
-        game
-                .getBattlefield()
-                .getAllActivePermanents(player.getId())
+        game.getBattlefield()
+                .getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, player.getId(), game)
                 .stream()
                 .filter(perm -> name.equals(perm.getName()))
-                .forEach(perm -> cards.add(perm));
+                .forEach(cards::add);
 
         player.revealCards(source, player.getHand(), game);
 
-        player
-                .getHand()
+        player.getHand()
                 .getCards(game)
                 .stream()
                 .filter(card -> name.equals(card.getName()))
-                .forEach(card -> cards.add(card));
+                .forEach(cards::add);
 
-        player
-                .getGraveyard()
+        player.getGraveyard()
                 .getCards(game)
                 .stream()
                 .filter(card -> name.equals(card.getName()))
-                .forEach(card -> cards.add(card));
+                .forEach(cards::add);
 
         return player.moveCards(cards, Zone.EXILED, source, game);
     }
