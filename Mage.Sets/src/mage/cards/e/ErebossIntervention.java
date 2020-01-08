@@ -5,7 +5,6 @@ import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -17,6 +16,9 @@ import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.TargetAdjuster;
 
 import java.util.UUID;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 
 /**
  * @author TheElk801
@@ -28,9 +30,8 @@ public final class ErebossIntervention extends CardImpl {
 
         // Choose one —
         // • Target creature gets -X/-X until end of turn. You gain X life.
-        this.getSpellAbility().addEffect(new BoostTargetEffect(
-                ManacostVariableValue.instance, ManacostVariableValue.instance, Duration.EndOfTurn
-        ));
+        DynamicValue x = new SignInversionDynamicValue(ManacostVariableValue.instance);
+        this.getSpellAbility().addEffect(new BoostTargetEffect(x,x,Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new GainLifeEffect(ManacostVariableValue.instance)
                 .setText("You gain X life"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
