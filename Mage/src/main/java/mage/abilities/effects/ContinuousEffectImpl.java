@@ -14,6 +14,8 @@ import mage.filter.Filter;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
+import mage.game.stack.Spell;
+import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.targetpointer.TargetPointer;
 
@@ -394,5 +396,18 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         if (list.stream().anyMatch(p -> p instanceof SubType.SubTypePredicate)) {
             this.addDependedToType(DependencyType.AddingCreatureType);
         }
+    }
+
+    public boolean isCanLookAtNextTopLibraryCard(Game game) {
+        // If the top card of your library changes while you’re casting a spell, playing a land, or activating an ability,
+        // you can’t look at the new top card until you finish doing so. This means that if you cast the top card of
+        // your library, you can’t look at the next one until you’re done paying for that spell. (2019-05-03)
+        if (!game.getStack().isEmpty()) {
+            StackObject stackObject = game.getStack().getFirst();
+            return !(stackObject instanceof Spell)
+                    || !Zone.LIBRARY.equals(((Spell) stackObject).getFromZone())
+                    || ((Spell) stackObject).isDoneActivatingManaAbilities();
+        }
+        return true;
     }
 }

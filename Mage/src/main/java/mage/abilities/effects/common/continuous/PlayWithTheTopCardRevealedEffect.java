@@ -1,18 +1,15 @@
-
 package mage.abilities.effects.common.continuous;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
-import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  * @author nantuko
@@ -47,24 +44,14 @@ public class PlayWithTheTopCardRevealedEffect extends ContinuousEffectImpl {
             if (allPlayers) {
                 for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                     Player player = game.getPlayer(playerId);
-                    if (player != null && !isCastFromPlayersLibrary(game, playerId)) {
+                    if (player != null && isCanLookAtNextTopLibraryCard(game)) {
                         player.setTopCardRevealed(true);
                     }
                 }
-            } else if (!isCastFromPlayersLibrary(game, controller.getId())) {
+            } else if (isCanLookAtNextTopLibraryCard(game)) {
                 controller.setTopCardRevealed(true);
             }
             return true;
-        }
-        return false;
-    }
-
-    boolean isCastFromPlayersLibrary(Game game, UUID playerId) {
-        if (!game.getStack().isEmpty()) {
-            StackObject stackObject = game.getStack().getLast();
-            return stackObject instanceof Spell
-                    && !((Spell) stackObject).isDoneActivatingManaAbilities()
-                    && Zone.LIBRARY.equals(((Spell) stackObject).getFromZone());
         }
         return false;
     }
