@@ -23,7 +23,6 @@ public class CanadianHighlander extends Constructed {
         pointMap.put("Crop Rotation", 1);
         pointMap.put("Demonic Tutor", 4);
         pointMap.put("Dig Through Time", 1);
-        pointMap.put("Enlightened Tutor", 1);
         pointMap.put("Flash", 6);
         pointMap.put("Gifts Ungiven", 2);
         pointMap.put("Imperial Seal", 1);
@@ -45,18 +44,19 @@ public class CanadianHighlander extends Constructed {
         pointMap.put("Sol Ring", 4);
         pointMap.put("Spellseeker", 1);
         pointMap.put("Stoneforge Mystic", 1);
-        pointMap.put("Strip Mine", 2);
-        pointMap.put("Summoner's Pact", 2);
+        pointMap.put("Strip Mine", 3);
+        pointMap.put("Summoner's Pact", 1);
         pointMap.put("Survival of the Fittest", 2);
-        pointMap.put("Time Vault", 6);
+        pointMap.put("Time Vault", 7);
         pointMap.put("Time Walk", 6);
-        pointMap.put("Tinker", 4);
+        pointMap.put("Tinker", 3);
         pointMap.put("Tolarian Academy", 1);
         pointMap.put("Transmute Artifact", 1);
         pointMap.put("Treasure Cruise", 1);
         pointMap.put("True-Name Nemesis", 1);
         pointMap.put("Umezawa's Jitte", 2);
         pointMap.put("Vampiric Tutor", 2);
+        pointMap.put("Yawgmoth's Will", 1);
     }
 
     public CanadianHighlander() {
