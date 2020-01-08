@@ -95,7 +95,7 @@ class KioraBestsTheSeaGodEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         game.addEffect(new DontUntapInControllersNextUntapStepTargetEffect()
                 .setTargetPointer(new FixedTargets(game.getBattlefield().getAllActivePermanents(
-                        StaticFilters.FILTER_PERMANENT_CREATURE, source.getFirstTarget(), game
+                        StaticFilters.FILTER_PERMANENTS_NON_LAND, source.getFirstTarget(), game
                 ), game)), source
         );
         return true;
