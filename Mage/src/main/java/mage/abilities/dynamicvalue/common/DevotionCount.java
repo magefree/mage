@@ -2,9 +2,11 @@ package mage.abilities.dynamicvalue.common;
 
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
 import mage.constants.ColoredManaSymbol;
@@ -13,6 +15,7 @@ import mage.game.Game;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 /**
  * Each colored mana symbol (e.g. {U}) in the mana costs of permanents you
@@ -47,13 +50,22 @@ public enum DevotionCount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return game.getBattlefield()
+        int devotion = game.getBattlefield()
                 .getAllActivePermanents(sourceAbility.getControllerId())
                 .stream()
                 .map(MageObject::getManaCost)
                 .flatMap(Collection::stream)
                 .mapToInt(this::checkCost)
                 .sum();
+        int countIncrease = game.getBattlefield()
+                .getAllActivePermanents(sourceAbility.getControllerId())
+                .stream()
+                .map(permanent -> permanent.getAbilities(game))
+                .flatMap(Collection::stream)
+                .filter(IncreaseDevotionAbility.class::isInstance)
+                .mapToInt(x -> 1)
+                .sum();
+        return devotion + countIncrease;
     }
 
     private int checkCost(ManaCost manaCost) {
@@ -72,19 +84,31 @@ public enum DevotionCount implements DynamicValue {
 
     @Override
     public String getMessage() {
-        StringBuilder sb = new StringBuilder("your devotion to ");
-        int count = 0;
-        for (ColoredManaSymbol coloredManaSymbol : devotionColors) {
-            if (count > 0) {
-                sb.append(" and ");
-            }
-            sb.append(coloredManaSymbol.getColorName());
-            count++;
-        }
-        return sb.toString();
+        return "your devotion to " + String.join(
+                " and ",
+                devotionColors.stream()
+                        .map(ColoredManaSymbol::getColorName)
+                        .collect(Collectors.toList())
+        );
     }
 
     public Hint getHint() {
         return hint;
+    }
+
+    public static final class IncreaseDevotionAbility extends SimpleStaticAbility {
+
+        public IncreaseDevotionAbility() {
+            super(new InfoEffect("Your devotion to each color and each combination of colors is increased by one."));
+        }
+
+        private IncreaseDevotionAbility(final IncreaseDevotionAbility ability) {
+            super(ability);
+        }
+
+        @Override
+        public IncreaseDevotionAbility copy() {
+            return new IncreaseDevotionAbility(this);
+        }
     }
 }
