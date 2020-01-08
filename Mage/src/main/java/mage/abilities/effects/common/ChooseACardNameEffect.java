@@ -20,7 +20,6 @@ public class ChooseACardNameEffect extends OneShotEffect {
     public static final String INFO_KEY = "NAMED_CARD";
 
     public enum TypeOfName {
-
         ALL,
         NOT_BASIC_LAND_NAME,
         NONBASIC_LAND_NAME,

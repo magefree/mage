@@ -39,7 +39,7 @@ public class LookAtTopCardOfLibraryAnyTimeEffect extends ContinuousEffectImpl {
         if (obj == null) {
             return false;
         }
-        if (!isCanLookAtNextTopLibraryCard(game)) {
+        if (!canLookAtNextTopLibraryCard(game)) {
             return false;
         }
         controller.lookAtCards("Top card of " + obj.getIdName() + " controller's library", topCard, game);

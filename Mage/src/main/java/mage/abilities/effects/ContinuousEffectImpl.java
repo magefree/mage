@@ -398,7 +398,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         }
     }
 
-    public boolean isCanLookAtNextTopLibraryCard(Game game) {
+    public boolean canLookAtNextTopLibraryCard(Game game) {
         // If the top card of your library changes while you’re casting a spell, playing a land, or activating an ability,
         // you can’t look at the new top card until you finish doing so. This means that if you cast the top card of
         // your library, you can’t look at the next one until you’re done paying for that spell. (2019-05-03)

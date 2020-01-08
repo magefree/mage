@@ -456,6 +456,8 @@ public interface Player extends MageItem, Copyable<Player> {
     /**
      * Adds the cards to the reveal window and adds the source object's id name
      * to the title bar of the revealed cards window
+     * <p>
+     * Warning, if you use it from continuous effect, then check with extra call isCanLookAtNextTopLibraryCard
      *
      * @param source
      * @param name
@@ -472,6 +474,8 @@ public interface Player extends MageItem, Copyable<Player> {
     /**
      * Adds the cards to the look window and adds the source object's id name to
      * the title bar of the lookedAt window
+     * <p>
+     * Warning, if you use it from continuous effect, then check with extra call isCanLookAtNextTopLibraryCard
      *
      * @param source
      * @param name

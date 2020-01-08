@@ -250,7 +250,7 @@ public class VerifyCardDataTest {
 
             cardsList.forEach((cardName, amount) -> {
                 if (amount != 2) {
-                    String error = "Error: found non duplicated rare card - "
+                    String error = "Error: found non duplicated rare card -"
                             + " set (" + set.getCode() + " - " + set.getName() + ")"
                             + " card (" + cardName + ")";
                     doubleErrors.add(error);

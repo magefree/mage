@@ -1,10 +1,5 @@
-
 package mage.server;
 
-import java.util.*;
-import java.util.Map.Entry;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.TimeUnit;
 import mage.cards.decks.Deck;
 import mage.constants.ManaType;
 import mage.constants.TableState;
@@ -28,6 +23,11 @@ import mage.server.util.ServerMessagesUtil;
 import mage.server.util.SystemUtil;
 import mage.view.TableClientMessage;
 import org.apache.log4j.Logger;
+
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -180,7 +180,7 @@ public class User {
 
     public void lostConnection() {
         // Because watched games don't get restored after reconnection call stop watching
-        for (Iterator<UUID> iterator = watchedGames.iterator(); iterator.hasNext();) {
+        for (Iterator<UUID> iterator = watchedGames.iterator(); iterator.hasNext(); ) {
             UUID gameId = iterator.next();
             GameManager.instance.stopWatching(gameId, userId);
             iterator.remove();
@@ -215,10 +215,10 @@ public class User {
         int minutes = (int) SystemUtil.getDateDiff(connectionTime, new Date(), TimeUnit.SECONDS) / 60;
         int hours = 0;
         if (minutes > 59) {
-            hours = (int) minutes / 60;
+            hours = minutes / 60;
             minutes = minutes - (hours * 60);
         }
-        return Integer.toString(hours) + ":" + (minutes > 9 ? Integer.toString(minutes) : '0' + Integer.toString(minutes));
+        return hours + ":" + (minutes > 9 ? Integer.toString(minutes) : '0' + Integer.toString(minutes));
     }
 
     public void fireCallback(final ClientCallback call) {
@@ -329,10 +329,11 @@ public class User {
 
     private void reconnect() {
         logger.trace(userName + " started reconnect");
+        //lastActivity = new Date(); // ??? comment to test can't reconnect to game on disconnect
         for (Entry<UUID, Table> entry : tables.entrySet()) {
             ccJoinedTable(entry.getValue().getRoomId(), entry.getValue().getId(), entry.getValue().isTournament());
         }
-        for (Iterator<Entry<UUID, UUID>> iterator = userTournaments.entrySet().iterator(); iterator.hasNext();) {
+        for (Iterator<Entry<UUID, UUID>> iterator = userTournaments.entrySet().iterator(); iterator.hasNext(); ) {
             Entry<UUID, UUID> next = iterator.next();
             Optional<TournamentController> tournamentController = TournamentManager.instance.getTournamentController(next.getValue());
             if (tournamentController.isPresent()) {
@@ -442,7 +443,7 @@ public class User {
         }
         gameSessions.clear();
         logger.trace("REMOVE " + userName + " watched Games " + watchedGames.size());
-        for (Iterator<UUID> it = watchedGames.iterator(); it.hasNext();) { // Iterator to prevent ConcurrentModificationException
+        for (Iterator<UUID> it = watchedGames.iterator(); it.hasNext(); ) { // Iterator to prevent ConcurrentModificationException
             UUID gameId = it.next();
             GameManager.instance.stopWatching(gameId, userId);
         }
@@ -658,13 +659,13 @@ public class User {
         builder.append(proto.getMatches());
         List<String> quit = new ArrayList<>();
         if (proto.getMatchesIdleTimeout() > 0) {
-            quit.add("I:" + Integer.toString(proto.getMatchesIdleTimeout()));
+            quit.add("I:" + proto.getMatchesIdleTimeout());
         }
         if (proto.getMatchesTimerTimeout() > 0) {
-            quit.add("T:" + Integer.toString(proto.getMatchesTimerTimeout()));
+            quit.add("T:" + proto.getMatchesTimerTimeout());
         }
         if (proto.getMatchesQuit() > 0) {
-            quit.add("Q:" + Integer.toString(proto.getMatchesQuit()));
+            quit.add("Q:" + proto.getMatchesQuit());
         }
         if (!quit.isEmpty()) {
             builder.append(" (");
@@ -690,13 +691,13 @@ public class User {
         builder.append(proto.getTourneys());
         List<String> quit = new ArrayList<>();
         if (proto.getTourneysQuitDuringDrafting() > 0) {
-            quit.add("D:" + Integer.toString(proto.getTourneysQuitDuringDrafting()));
+            quit.add("D:" + proto.getTourneysQuitDuringDrafting());
         }
         if (proto.getTourneysQuitDuringConstruction() > 0) {
-            quit.add("C:" + Integer.toString(proto.getTourneysQuitDuringConstruction()));
+            quit.add("C:" + proto.getTourneysQuitDuringConstruction());
         }
         if (proto.getTourneysQuitDuringRound() > 0) {
-            quit.add("R:" + Integer.toString(proto.getTourneysQuitDuringRound()));
+            quit.add("R:" + proto.getTourneysQuitDuringRound());
         }
         if (!quit.isEmpty()) {
             builder.append(" (");
