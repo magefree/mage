@@ -50,7 +50,7 @@ public final class KioraBestsTheSeaGod extends CardImpl {
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_II, SagaChapter.CHAPTER_II,
                 new Effects(new TapAllTargetPlayerControlsEffect(
-                        StaticFilters.FILTER_PERMANENT_CREATURES
+                        StaticFilters.FILTER_PERMANENTS_NON_LAND
                 ), new KioraBestsTheSeaGodEffect()),
                 new TargetOpponent()
         );
