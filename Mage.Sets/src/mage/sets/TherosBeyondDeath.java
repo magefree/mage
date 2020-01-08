@@ -74,6 +74,7 @@ public final class TherosBeyondDeath extends ExpansionSet {
         cards.add(new SetCardInfo("Gray Merchant of Asphodel", 99, Rarity.UNCOMMON, mage.cards.g.GrayMerchantOfAsphodel.class));
         cards.add(new SetCardInfo("Haktos the Unscarred", 218, Rarity.RARE, mage.cards.h.HaktosTheUnscarred.class));
         cards.add(new SetCardInfo("Heliod, Sun-Crowned", 18, Rarity.MYTHIC, mage.cards.h.HeliodSunCrowned.class));
+        cards.add(new SetCardInfo("Hero of the Pride", 22, Rarity.COMMON, mage.cards.h.HeroOfThePride.class));
         cards.add(new SetCardInfo("Hero of the Winds", 23, Rarity.UNCOMMON, mage.cards.h.HeroOfTheWinds.class));
         cards.add(new SetCardInfo("Ichthyomorphosis", 51, Rarity.COMMON, mage.cards.i.Ichthyomorphosis.class));
         cards.add(new SetCardInfo("Idyllic Tutor", 24, Rarity.RARE, mage.cards.i.IdyllicTutor.class));
