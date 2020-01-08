@@ -3410,7 +3410,9 @@ public abstract class PlayerImpl implements Player, Serializable {
                     if (player != null) {
                         if (/*player.isTopCardRevealed() &&*/player.getLibrary().hasCards()) {
                             Card card = player.getLibrary().getFromTop(game);
-                            getPlayableFromNonHandCardAll(game, Zone.LIBRARY, card, availableMana, playable);
+                            if (card != null) {
+                                getPlayableFromNonHandCardAll(game, Zone.LIBRARY, card, availableMana, playable);
+                            }
                         }
                     }
                 }
