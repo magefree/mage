@@ -91,7 +91,6 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_PT, "UST", "Garbage Elemental");
         skipListAddName(SKIP_LIST_PT, "UST", "Infinity Elemental");
         skipListAddName(SKIP_LIST_PT, "UNH", "Old Fogey");
-        skipListAddName(SKIP_LIST_PT, "MH1", "Ruination Rioter");
 
         // color
         skipListCreate(SKIP_LIST_COLOR);
@@ -103,6 +102,7 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_COST, "ULG", "Erase");
         skipListAddName(SKIP_LIST_COST, "H17", "Grimlock, Dinobot Leader");
         skipListAddName(SKIP_LIST_COST, "UST", "Everythingamajig");
+        skipListAddName(SKIP_LIST_COST, "THB", "Anax, Hardened in the Forge"); // until it's been corrected in MTGJSON
 
         // supertype
         skipListCreate(SKIP_LIST_SUPERTYPE);
