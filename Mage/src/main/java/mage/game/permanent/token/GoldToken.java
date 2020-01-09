@@ -1,41 +1,38 @@
-
-
 package mage.game.permanent.token;
+
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.mana.AnyColorManaAbility;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.effects.mana.AddManaOfAnyColorEffect;
-import mage.abilities.mana.SimpleManaAbility;
-import mage.constants.CardType;
-import mage.constants.Zone;
 
 /**
- *
  * @author LevelX2
  */
 public final class GoldToken extends TokenImpl {
-    
+
     static final private List<String> tokenImageSets = new ArrayList<>();
+
     static {
-        tokenImageSets.addAll(Arrays.asList("BNG", "C17"));
+        tokenImageSets.addAll(Arrays.asList("BNG", "C17", "THB"));
     }
 
     public GoldToken() {
-        this((String)null);
-    }
-
-    public GoldToken(String setCode) {
-        super("Gold", "colorless artifact token named Gold with \"Sacrifice this artifact: Add one mana of any color.\"");
+        super("Gold", "Gold token");
         availableImageSetCodes = tokenImageSets;
-        setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.ARTIFACT);
+        subtype.add(SubType.GOLD);
 
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new SacrificeSourceCost()));
+        Cost cost = new SacrificeSourceCost();
+        cost.setText("Sacrifice this artifact");
+        this.addAbility(new AnyColorManaAbility(cost));
     }
 
-    public GoldToken(final GoldToken token) {
+    private GoldToken(final GoldToken token) {
         super(token);
     }
 

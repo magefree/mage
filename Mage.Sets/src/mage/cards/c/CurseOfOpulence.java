@@ -1,9 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EnchantedPlayerAttackedTriggeredAbility;
 import mage.abilities.effects.Effect;
@@ -23,8 +19,11 @@ import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author Saga
  */
 public final class CurseOfOpulence extends CardImpl {
@@ -44,7 +43,7 @@ public final class CurseOfOpulence extends CardImpl {
         this.addAbility(new EnchantedPlayerAttackedTriggeredAbility(new CurseOfOpulenceEffect()));
     }
 
-    public CurseOfOpulence(final CurseOfOpulence card) {
+    private CurseOfOpulence(final CurseOfOpulence card) {
         super(card);
     }
 
@@ -58,12 +57,10 @@ class CurseOfOpulenceEffect extends OneShotEffect {
 
     CurseOfOpulenceEffect() {
         super(Outcome.Benefit);
-        this.staticText = "create a colorless artifact token named Gold. It has "
-                + "\"sacrifice this artifact: Add one mana of any color.\" "
-                + "Each opponent attacking that player does the same.";
+        this.staticText = "create a Gold token. Each opponent attacking that player does the same.";
     }
 
-    CurseOfOpulenceEffect(final CurseOfOpulenceEffect effect) {
+    private CurseOfOpulenceEffect(final CurseOfOpulenceEffect effect) {
         super(effect);
     }
 
@@ -75,28 +72,28 @@ class CurseOfOpulenceEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (enchantment != null) {
-            Player enchantedPlayer = game.getPlayer(enchantment.getAttachedTo());
-            if (enchantedPlayer != null) {
-                Set<UUID> players = new HashSet<>();
-                for (UUID attacker : game.getCombat().getAttackers()) {
-                    UUID defender = game.getCombat().getDefenderId(attacker);
-                    if (defender.equals(enchantedPlayer.getId())
-                            && game.getPlayer(source.getControllerId()).hasOpponent(game.getPermanent(attacker).getControllerId(), game)) {
-                        players.add(game.getPermanent(attacker).getControllerId());
-                    }
-                }
-                players.add(source.getControllerId());
-                for (UUID player : players) {
-                    game.getPlayer(player);
-                    Effect effect = new CreateTokenTargetEffect(new GoldToken());
-                    effect.setTargetPointer(new FixedTarget(player));
-                    effect.apply(game, source);
-                }
-            }
-            return true;
-
+        if (enchantment == null) {
+            return false;
         }
-        return false;
+        Player enchantedPlayer = game.getPlayer(enchantment.getAttachedTo());
+        if (enchantedPlayer == null) {
+            return false;
+        }
+        Set<UUID> players = new HashSet<>();
+        for (UUID attacker : game.getCombat().getAttackers()) {
+            UUID defender = game.getCombat().getDefenderId(attacker);
+            if (defender.equals(enchantedPlayer.getId())
+                    && game.getPlayer(source.getControllerId()).hasOpponent(game.getPermanent(attacker).getControllerId(), game)) {
+                players.add(game.getPermanent(attacker).getControllerId());
+            }
+        }
+        players.add(source.getControllerId());
+        for (UUID player : players) {
+            game.getPlayer(player);
+            Effect effect = new CreateTokenTargetEffect(new GoldToken());
+            effect.setTargetPointer(new FixedTarget(player));
+            effect.apply(game, source);
+        }
+        return true;
     }
 }

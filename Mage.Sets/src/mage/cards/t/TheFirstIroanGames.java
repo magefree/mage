@@ -54,10 +54,7 @@ public final class TheFirstIroanGames extends CardImpl {
         sagaAbility.addHint(FerociousHint.instance);
 
         // IV — Create a Gold token.
-        sagaAbility.addChapterEffect(
-                this, SagaChapter.CHAPTER_IV, new CreateTokenEffect(new GoldToken())
-                        .setText("create a Gold token")
-        );
+        sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_IV, new CreateTokenEffect(new GoldToken()));
     }
 
     private TheFirstIroanGames(final TheFirstIroanGames card) {

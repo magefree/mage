@@ -1,4 +1,3 @@
-
 package mage.cards.k;
 
 import mage.MageInt;
@@ -34,7 +33,7 @@ public final class KingMacarTheGoldCursed extends CardImpl {
         Ability ability = new InspiredAbility(new ExileTargetEffect(), true);
         ability.addTarget(new TargetCreaturePermanent());
         Effect effect = new CreateTokenEffect(new GoldToken());
-        effect.setText("If you do, create a colorless artifact token named Gold. It has \"Sacrifice this artifact: Add one mana of any color.\"");
+        effect.setText("If you do, create a Gold token");
         ability.addEffect(effect);
         this.addAbility(ability);
     }
