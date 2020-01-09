@@ -4,6 +4,7 @@ package mage.abilities.effects.common;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -55,6 +56,11 @@ public class TransformSourceEffect extends OneShotEffect {
                     if (withoutTrigger) {
                         sourcePermanent.setTransformed(fromDayToNight);
                     } else {
+                        if (sourcePermanent.isTransformed()) {
+                            Card orgCard = game.getCard(source.getSourceId());
+                            sourcePermanent.getPower().modifyBaseValue(orgCard.getPower().getValue());
+                            sourcePermanent.getToughness().modifyBaseValue(orgCard.getToughness().getValue());
+                        }
                         sourcePermanent.transform(game);
                     }
                     if (!game.isSimulation()) {

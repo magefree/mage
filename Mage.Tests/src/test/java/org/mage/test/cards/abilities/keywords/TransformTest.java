@@ -356,11 +356,40 @@ public class TransformTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Ravager of the Fells", 0);
         assertPermanentCount(playerA, "Huntmaster of the Fells", 1);
+        assertPowerToughness(playerA,  "Huntmaster of the Fells", 2, 2);
         assertTappedCount("Plains", true, 2);
         assertTappedCount("Wastes", true, 1);
 
     }
+   @Test
+    public void testHuntmasterTransformed() {
+        // Whenever this creature enters the battlefield or transforms into Huntmaster of the Fells, create a 2/2 green Wolf creature token and you gain 2 life.
+        // At the beginning of each upkeep, if no spells were cast last turn, transform Huntmaster of the Fells.
+        // Ravager of the Fells
+        // Whenever this creature transforms into Ravager of the Fells, it deals 2 damage to target opponent and 2 damage to up to one target creature that player controls.
+        // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Ravager of the Fells.
+        addCard(Zone.HAND, playerA, "Huntmaster of the Fells"); // Creature {2}{R}{G}
+        addCard(Zone.HAND, playerA, "Silvercoat Lion", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
 
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Huntmaster of the Fells");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
+        setStopAt(4, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertLife(playerA, 24);
+        assertLife(playerB, 18);
+        assertPermanentCount(playerA, "Wolf", 2);
+        assertPermanentCount(playerA, "Silvercoat Lion", 2);
+        assertPermanentCount(playerA, "Ravager of the Fells", 0);
+        assertPermanentCount(playerA, "Huntmaster of the Fells", 1);
+        assertPowerToughness(playerA, "Huntmaster of the Fells", 2, 2);
+        
+
+    }
     /**
      * Having cast Phantasmal Image copying my opponent's flipped Thing in the
      * Ice, I was left with a 0/4 Awoken Horror.
