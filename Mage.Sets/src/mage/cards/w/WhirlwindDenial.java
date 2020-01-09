@@ -67,7 +67,8 @@ class WhirlwindDenialEffect extends OneShotEffect {
                         return;
                     }
                     Cost cost = new GenericManaCost(4);
-                    if (player.chooseUse(outcome, "Pay {4} to prevent " + stackObject.getIdName() + " from being countered?", source, game)
+                    if (cost.canPay(source, source.getSourceId(), source.getControllerId(), game)
+                            && player.chooseUse(outcome, "Pay {4} to prevent " + stackObject.getIdName() + " from being countered?", source, game)
                             && cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
                         return;
                     }
