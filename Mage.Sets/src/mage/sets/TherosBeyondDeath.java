@@ -27,6 +27,7 @@ public final class TherosBeyondDeath extends ExpansionSet {
         this.maxCardNumberInBooster = 254;
 
         cards.add(new SetCardInfo("Allure of the Unknown", 207, Rarity.RARE, mage.cards.a.AllureOfTheUnknown.class));
+        cards.add(new SetCardInfo("Alseid of Life's Bounty", 1, Rarity.UNCOMMON, mage.cards.a.AlseidOfLifesBounty.class));
         cards.add(new SetCardInfo("Altar of the Pantheon", 231, Rarity.COMMON, mage.cards.a.AltarOfThePantheon.class));
         cards.add(new SetCardInfo("Anax, Hardened in the Forge", 125, Rarity.UNCOMMON, mage.cards.a.AnaxHardenedInTheForge.class));
         cards.add(new SetCardInfo("Aphemia, the Cacophony", 84, Rarity.RARE, mage.cards.a.AphemiaTheCacophony.class));
