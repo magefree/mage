@@ -1,5 +1,7 @@
 package mage.players;
 
+import java.io.Serializable;
+import java.util.*;
 import mage.MageItem;
 import mage.MageObject;
 import mage.MageObjectReference;
@@ -38,9 +40,6 @@ import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
 import mage.util.Copyable;
 
-import java.io.Serializable;
-import java.util.*;
-
 /**
  * @author BetaSteward_at_googlemail.com
  */
@@ -75,7 +74,7 @@ public interface Player extends MageItem, Copyable<Player> {
     void setLife(int life, Game game, UUID sourceId);
 
     /**
-     * @param amount   amount of life loss
+     * @param amount amount of life loss
      * @param game
      * @param atCombat was the source combat damage
      * @return
@@ -344,7 +343,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param source
      * @param game
      * @param targetPlayerId player whose library will be searched
-     * @param triggerEvents  whether searching will trigger any game events
+     * @param triggerEvents whether searching will trigger any game events
      * @return true if search was successful
      */
     boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game, UUID targetPlayerId, boolean triggerEvents);
@@ -365,23 +364,23 @@ public interface Player extends MageItem, Copyable<Player> {
     /**
      * Plays a card if possible
      *
-     * @param card         the card that can be cast
+     * @param card the card that can be cast
      * @param game
-     * @param noMana       if it's a spell i can be cast without paying mana
+     * @param noMana if it's a spell i can be cast without paying mana
      * @param ignoreTiming if it's cast during the resolution of another spell
-     *                     no sorcery or play land timing restriction are checked. For a land it has
-     *                     to be the turn of the player playing that card.
-     * @param reference    mage object that allows to play the card
+     * no sorcery or play land timing restriction are checked. For a land it has
+     * to be the turn of the player playing that card.
+     * @param reference mage object that allows to play the card
      * @return
      */
     boolean playCard(Card card, Game game, boolean noMana, boolean ignoreTiming, MageObjectReference reference);
 
     /**
-     * @param card         the land card to play
+     * @param card the land card to play
      * @param game
      * @param ignoreTiming false - it won't be checked if the stack is empty and
-     *                     you are able to play a Sorcery. It's still checked, if you are able to
-     *                     play a land concerning the number of lands you already played.
+     * you are able to play a Sorcery. It's still checked, if you are able to
+     * play a land concerning the number of lands you already played.
      * @return
      */
     boolean playLand(Card card, Game game, boolean ignoreTiming);
@@ -457,7 +456,8 @@ public interface Player extends MageItem, Copyable<Player> {
      * Adds the cards to the reveal window and adds the source object's id name
      * to the title bar of the revealed cards window
      * <p>
-     * Warning, if you use it from continuous effect, then check with extra call isCanLookAtNextTopLibraryCard
+     * Warning, if you use it from continuous effect, then check with extra call
+     * isCanLookAtNextTopLibraryCard
      *
      * @param source
      * @param name
@@ -475,7 +475,8 @@ public interface Player extends MageItem, Copyable<Player> {
      * Adds the cards to the look window and adds the source object's id name to
      * the title bar of the lookedAt window
      * <p>
-     * Warning, if you use it from continuous effect, then check with extra call isCanLookAtNextTopLibraryCard
+     * Warning, if you use it from continuous effect, then check with extra call
+     * isCanLookAtNextTopLibraryCard
      *
      * @param source
      * @param name
@@ -528,11 +529,11 @@ public interface Player extends MageItem, Copyable<Player> {
     /**
      * Moves the cards from cards to the bottom of the players library.
      *
-     * @param cards    - list of cards that have to be moved
-     * @param game     - game
+     * @param cards - list of cards that have to be moved
+     * @param game - game
      * @param anyOrder - true if player can determine the order of the cards
-     *                 else random order
-     * @param source   - source ability
+     * else random order
+     * @param source - source ability
      * @return
      */
     boolean putCardsOnBottomOfLibrary(Cards cards, Game game, Ability source, boolean anyOrder);
@@ -553,10 +554,10 @@ public interface Player extends MageItem, Copyable<Player> {
     /**
      * Moves the cards from cards to the top of players library.
      *
-     * @param cards    - list of cards that have to be moved
-     * @param game     - game
+     * @param cards - list of cards that have to be moved
+     * @param game - game
      * @param anyOrder - true if player can determine the order of the cards
-     * @param source   - source ability
+     * @param source - source ability
      * @return
      */
     boolean putCardsOnTopOfLibrary(Cards cards, Game game, Ability source, boolean anyOrder);
@@ -587,8 +588,8 @@ public interface Player extends MageItem, Copyable<Player> {
     /**
      * Choose the order in which blockers get damage assigned to
      *
-     * @param blockers     list of blockers where to choose the next one from
-     * @param combatGroup  the concerning combat group
+     * @param blockers list of blockers where to choose the next one from
+     * @param combatGroup the concerning combat group
      * @param blockerOrder the already set order of blockers
      * @param game
      * @return blocker next to add to the blocker order
@@ -658,7 +659,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param card
      * @param game
      * @param abilitiesToActivate extra info about abilities that can be
-     *                            activated on NO option
+     * activated on NO option
      * @return player looked at the card
      */
     boolean lookAtFaceDownCard(Card card, Game game, int abilitiesToActivate);
@@ -731,11 +732,11 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param toZone
      * @param source
      * @param game
-     * @param tapped         the cards are tapped on the battlefield
-     * @param faceDown       the cards are face down in the to zone
-     * @param byOwner        the card is moved (or put onto battlefield) by the owner
-     *                       of the card and if target zone is battlefield controls the permanent
-     *                       (instead of the controller of the source)
+     * @param tapped the cards are tapped on the battlefield
+     * @param faceDown the cards are face down in the to zone
+     * @param byOwner the card is moved (or put onto battlefield) by the owner
+     * of the card and if target zone is battlefield controls the permanent
+     * (instead of the controller of the source)
      * @param appliedEffects
      * @return
      */
@@ -771,7 +772,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * list of applied effects is not saved
      *
      * @param card
-     * @param exileId   exile zone id (optional)
+     * @param exileId exile zone id (optional)
      * @param exileName name of exile zone (optional)
      * @param sourceId
      * @param game
@@ -813,11 +814,23 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param sourceId
      * @param game
      * @param fromZone if null, this info isn't postet
-     * @param toTop    to the top of the library else to the bottom
+     * @param toTop to the top of the library else to the bottom
      * @param withName show the card name in the log
      * @return
      */
     boolean moveCardToLibraryWithInfo(Card card, UUID sourceId, Game game, Zone fromZone, boolean toTop, boolean withName);
+
+    /**
+     * Uses card.moveToZone and posts a inform message about moving the card to
+     * library into the game log
+     *
+     * @param card
+     * @param sourceId
+     * @param game
+     * @param fromZone if null, this info isn't postet
+     * @return
+     */
+    boolean moveCardToCommandWithInfo(Card card, UUID sourceId, Game game, Zone fromZone);
 
     /**
      * Checks if the playerToCheckId is from an opponent in range
@@ -838,10 +851,10 @@ public interface Player extends MageItem, Copyable<Player> {
      * without mana (null) or the mana set to manaCosts instead of its normal
      * mana costs.
      *
-     * @param sourceId  the source that can be cast without mana
+     * @param sourceId the source that can be cast without mana
      * @param manaCosts alternate ManaCost, null if it can be cast without mana
-     *                  cost
-     * @param costs     alternate other costs you need to pay
+     * cost
+     * @param costs alternate other costs you need to pay
      */
     void setCastSourceIdWithAlternateMana(UUID sourceId, ManaCosts<ManaCost> manaCosts, Costs<Cost> costs);
 
