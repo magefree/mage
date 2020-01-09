@@ -1,10 +1,10 @@
-
 package mage;
+
+import mage.util.CardUtil;
+import mage.util.Copyable;
 
 import java.io.Serializable;
 import java.util.Objects;
-
-import mage.util.Copyable;
 
 public class MageInt implements Serializable, Copyable<MageInt> {
 
@@ -80,7 +80,7 @@ public class MageInt implements Serializable, Copyable<MageInt> {
     }
 
     public void boostValue(int amount) {
-        this.boostedValue += amount;
+        this.boostedValue = CardUtil.addWithOverflowCheck(this.boostedValue, amount);
     }
 
     public void resetToBaseValue() {

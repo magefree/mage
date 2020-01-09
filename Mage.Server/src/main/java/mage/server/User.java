@@ -329,7 +329,6 @@ public class User {
 
     private void reconnect() {
         logger.trace(userName + " started reconnect");
-        //lastActivity = new Date(); // ??? comment to test can't reconnect to game on disconnect
         for (Entry<UUID, Table> entry : tables.entrySet()) {
             ccJoinedTable(entry.getValue().getRoomId(), entry.getValue().getId(), entry.getValue().isTournament());
         }
