@@ -58,6 +58,7 @@ public final class TherosBeyondDeath extends ExpansionSet {
         cards.add(new SetCardInfo("Dreamshaper Shaman", 130, Rarity.UNCOMMON, mage.cards.d.DreamshaperShaman.class));
         cards.add(new SetCardInfo("Dryad of the Ilysian Grove", 169, Rarity.RARE, mage.cards.d.DryadOfTheIlysianGrove.class));
         cards.add(new SetCardInfo("Eat to Extinction", 90, Rarity.RARE, mage.cards.e.EatToExtinction.class));
+        cards.add(new SetCardInfo("Eidolon of Inspiration", 271, Rarity.UNCOMMON, mage.cards.e.EidolonOfInspiration.class));
         cards.add(new SetCardInfo("Eidolon of Obstruction", 12, Rarity.RARE, mage.cards.e.EidolonOfObstruction.class));
         cards.add(new SetCardInfo("Eidolon of Philosophy", 48, Rarity.COMMON, mage.cards.e.EidolonOfPhilosophy.class));
         cards.add(new SetCardInfo("Elspeth, Sun's Nemesis", 14, Rarity.MYTHIC, mage.cards.e.ElspethSunsNemesis.class));
