@@ -1,5 +1,7 @@
 package org.mage.test.stub;
 
+import java.io.Serializable;
+import java.util.*;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.*;
@@ -38,9 +40,6 @@ import mage.target.Target;
 import mage.target.TargetAmount;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
-
-import java.io.Serializable;
-import java.util.*;
 
 /**
  * @author Quercitron
@@ -1184,6 +1183,11 @@ public class PlayerStub implements Player {
 
     @Override
     public boolean moveCardToLibraryWithInfo(Card card, UUID sourceId, Game game, Zone fromZone, boolean toTop, boolean withName) {
+        return false;
+    }
+
+    @Override
+    public boolean moveCardToCommandWithInfo(Card card, UUID sourceId, Game game, Zone fromZone) {
         return false;
     }
 

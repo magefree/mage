@@ -1,10 +1,8 @@
-
 package mage.abilities.effects.common;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -37,9 +35,9 @@ public class ReturnToHandFromGraveyardAllEffect extends OneShotEffect {
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    for (Card card : player.getGraveyard().getCards(filter, source.getSourceId(), source.getControllerId(), game)) {
-                        card.moveToZone(Zone.HAND, playerId, game, false);
-                    }
+                    player.moveCards(player.getGraveyard()
+                            .getCards(filter, source.getSourceId(), player.getId(), game),
+                            Zone.HAND, source, game);
                 }
 
             }

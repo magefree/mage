@@ -20,8 +20,8 @@ import mage.players.Player;
  */
 public class ExploreSourceEffect extends OneShotEffect {
 
-    // "it explores. <i>(Reveal the top card of your library. Put that card into 
-    // your hand if it's a land. Otherwise, put a +1/+1 counter on this creature, 
+    // "it explores. <i>(Reveal the top card of your library. Put that card into
+    // your hand if it's a land. Otherwise, put a +1/+1 counter on this creature,
     // then put the card back or put it into your graveyard.)</i>";
     private static final String RULE_TEXT_START = "explores.";
     private static final String RULE_TEXT_HINT = "<i>(Reveal the top card of your library. "
@@ -98,7 +98,7 @@ public class ExploreSourceEffect extends OneShotEffect {
         if (permanentController == null) {
             return false;
         }
-        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.EXPLORED, permanentId, 
+        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.EXPLORED, permanentId,
                 source.getSourceId(), permanent.getControllerId()));
         if (permanentController.getLibrary().hasCards()) {
             Card card = permanentController.getLibrary().getFromTop(game);
@@ -108,6 +108,7 @@ public class ExploreSourceEffect extends OneShotEffect {
             cardWasRevealed = true;
             if (card != null) {
                 if (card.isLand()) {
+                    permanentController.moveCardToHandWithInfo(card, source.getSourceId(), game);
                     card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
                 } else {
                     if (game.getState().getZone(permanentId) == Zone.BATTLEFIELD) { // needed in case LKI object is used
@@ -124,7 +125,7 @@ public class ExploreSourceEffect extends OneShotEffect {
         }
         if (!cardWasRevealed
                 && game.getState().getZone(permanentId) == Zone.BATTLEFIELD) {
-            // If no card is revealed, most likely because that player's library is empty, 
+            // If no card is revealed, most likely because that player's library is empty,
             // the exploring creature receives a +1/+1 counter.
             permanent.addCounters(CounterType.P1P1.createInstance(), source, game);
         }

@@ -1,5 +1,10 @@
 package org.mage.test.player;
 
+import java.io.Serializable;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import mage.MageItem;
 import mage.MageObject;
 import mage.MageObjectReference;
@@ -55,13 +60,6 @@ import mage.util.CardUtil;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Ignore;
-
-import java.io.Serializable;
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-
 import static org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl.*;
 
 /**
@@ -177,7 +175,7 @@ public class TestPlayer implements Player {
 
     /**
      * @param maxCallsWithoutAction max number of priority passes a player may
-     *                              have for this test (default = 100)
+     * have for this test (default = 100)
      */
     public void setMaxCallsWithoutAction(int maxCallsWithoutAction) {
         this.maxCallsWithoutAction = maxCallsWithoutAction;
@@ -449,7 +447,6 @@ public class TestPlayer implements Player {
                         }
 
                         // found, can use as target
-
                         if (currentTarget.getNumberOfTargets() == 1) {
                             currentTarget.clearChosen();
                         }
@@ -898,15 +895,13 @@ public class TestPlayer implements Player {
         System.out.println("Total permanents: " + cards.size());
 
         List<String> data = cards.stream()
-                .map(c -> (
-                        ((c instanceof PermanentToken) ? "[T] " : "[C] ")
-                                + c.getIdName()
-                                + (c.isCopy() ? " [copy of " + c.getCopyFrom().getId().toString().substring(0, 3) + "]" : "")
-                                + " - " + c.getPower().getValue() + "/" + c.getToughness().getValue()
-                                + (c.isPlaneswalker() ? " - L" + c.getCounters(game).getCount(CounterType.LOYALTY) : "")
-                                + ", " + (c.isTapped() ? "Tapped" : "Untapped")
-                                + (c.getAttachedTo() == null ? "" : ", attached to " + game.getPermanent(c.getAttachedTo()).getIdName())
-                ))
+                .map(c -> (((c instanceof PermanentToken) ? "[T] " : "[C] ")
+                + c.getIdName()
+                + (c.isCopy() ? " [copy of " + c.getCopyFrom().getId().toString().substring(0, 3) + "]" : "")
+                + " - " + c.getPower().getValue() + "/" + c.getToughness().getValue()
+                + (c.isPlaneswalker() ? " - L" + c.getCounters(game).getCount(CounterType.LOYALTY) : "")
+                + ", " + (c.isTapped() ? "Tapped" : "Untapped")
+                + (c.getAttachedTo() == null ? "" : ", attached to " + game.getPermanent(c.getAttachedTo()).getIdName())))
                 .sorted()
                 .collect(Collectors.toList());
 
@@ -929,14 +924,12 @@ public class TestPlayer implements Player {
         }
 
         List<String> data = abilities.stream()
-                .map(a -> (
-                        a.getZone() + " -> "
-                                + a.getSourceObject(game).getIdName() + " -> "
-                                + (a.toString().length() > 0
-                                ? a.toString().substring(0, Math.min(20, a.toString().length()) - 1)
-                                : a.getClass().getSimpleName())
-                                + "..."
-                ))
+                .map(a -> (a.getZone() + " -> "
+                + a.getSourceObject(game).getIdName() + " -> "
+                + (a.toString().length() > 0
+                ? a.toString().substring(0, Math.min(20, a.toString().length()) - 1)
+                : a.getClass().getSimpleName())
+                + "..."))
                 .sorted()
                 .collect(Collectors.toList());
 
@@ -944,7 +937,6 @@ public class TestPlayer implements Player {
             System.out.println(s);
         }
     }
-
 
     private String getAliasInfo(Game game, TestPlayer player, String aliasName) {
         MageItem item = findAliasObject(game, player, aliasName);
@@ -1291,7 +1283,7 @@ public class TestPlayer implements Player {
         UUID defenderId = null;
         boolean mustAttackByAction = false;
         boolean madeAttackByAction = false;
-        for (Iterator<org.mage.test.player.PlayerAction> it = actions.iterator(); it.hasNext(); ) {
+        for (Iterator<org.mage.test.player.PlayerAction> it = actions.iterator(); it.hasNext();) {
             PlayerAction action = it.next();
             if (action.getTurnNum() == game.getTurnNum() && action.getAction().startsWith("attack:")) {
                 mustAttackByAction = true;
@@ -1727,7 +1719,7 @@ public class TestPlayer implements Player {
             if (!target.getTargetName().equals("starting player")) {
                 Assert.fail("Wrong choice");
             }
-            */
+             */
         }
 
         // ignore player select
@@ -1926,7 +1918,6 @@ public class TestPlayer implements Player {
                     }
                 }
             }
-
 
             // card in graveyard
             if (target.getOriginalTarget() instanceof TargetCardInOpponentsGraveyard
@@ -3137,6 +3128,11 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public boolean moveCardToCommandWithInfo(Card card, UUID sourceId, Game game, Zone fromZone) {
+        return computerPlayer.moveCardToCommandWithInfo(card, sourceId, game, fromZone);
+    }
+
+    @Override
     public boolean hasOpponent(UUID playerToCheckId, Game game) {
         return computerPlayer.hasOpponent(playerToCheckId, game);
     }
@@ -3239,7 +3235,7 @@ public class TestPlayer implements Player {
 
     @Override
     public boolean choose(Outcome outcome, Target target,
-                          UUID sourceId, Game game
+            UUID sourceId, Game game
     ) {
         // needed to call here the TestPlayer because it's overwitten
         return choose(outcome, target, sourceId, game, null);
@@ -3247,7 +3243,7 @@ public class TestPlayer implements Player {
 
     @Override
     public boolean choose(Outcome outcome, Cards cards,
-                          TargetCard target, Game game
+            TargetCard target, Game game
     ) {
         if (!choices.isEmpty()) {
             for (String choose2 : choices) {
@@ -3283,7 +3279,7 @@ public class TestPlayer implements Player {
 
     @Override
     public boolean chooseTargetAmount(Outcome outcome, TargetAmount target,
-                                      Ability source, Game game
+            Ability source, Game game
     ) {
         // command format: targetName^X=3
 
@@ -3342,15 +3338,15 @@ public class TestPlayer implements Player {
 
     @Override
     public boolean choosePile(Outcome outcome, String message,
-                              List<? extends Card> pile1, List<? extends Card> pile2,
-                              Game game
+            List<? extends Card> pile1, List<? extends Card> pile2,
+            Game game
     ) {
         return computerPlayer.choosePile(outcome, message, pile1, pile2, game);
     }
 
     @Override
     public boolean playMana(Ability ability, ManaCost unpaid,
-                            String promptText, Game game
+            String promptText, Game game
     ) {
         groupsForTargetHandling = null;
         return computerPlayer.playMana(ability, unpaid, promptText, game);
@@ -3364,15 +3360,15 @@ public class TestPlayer implements Player {
 
     @Override
     public UUID chooseBlockerOrder(List<Permanent> blockers, CombatGroup combatGroup,
-                                   List<UUID> blockerOrder, Game game
+            List<UUID> blockerOrder, Game game
     ) {
         return computerPlayer.chooseBlockerOrder(blockers, combatGroup, blockerOrder, game);
     }
 
     @Override
     public void assignDamage(int damage, List<UUID> targets,
-                             String singleTargetName, UUID sourceId,
-                             Game game
+            String singleTargetName, UUID sourceId,
+            Game game
     ) {
         computerPlayer.assignDamage(damage, targets, singleTargetName, sourceId, game);
     }
@@ -3391,14 +3387,14 @@ public class TestPlayer implements Player {
 
     @Override
     public void pickCard(List<Card> cards, Deck deck,
-                         Draft draft
+            Draft draft
     ) {
         computerPlayer.pickCard(cards, deck, draft);
     }
 
     @Override
     public boolean scry(int value, Ability source,
-                        Game game
+            Game game
     ) {
         // Don't scry at the start of the game.
         if (game.getTurnNum() == 1 && game.getStep() == null) {
@@ -3409,44 +3405,44 @@ public class TestPlayer implements Player {
 
     @Override
     public boolean surveil(int value, Ability source,
-                           Game game
+            Game game
     ) {
         return computerPlayer.surveil(value, source, game);
     }
 
     @Override
     public boolean moveCards(Card card, Zone toZone,
-                             Ability source, Game game
+            Ability source, Game game
     ) {
         return computerPlayer.moveCards(card, toZone, source, game);
     }
 
     @Override
     public boolean moveCards(Card card, Zone toZone,
-                             Ability source, Game game,
-                             boolean tapped, boolean faceDown, boolean byOwner, List<UUID> appliedEffects
+            Ability source, Game game,
+            boolean tapped, boolean faceDown, boolean byOwner, List<UUID> appliedEffects
     ) {
         return computerPlayer.moveCards(card, toZone, source, game, tapped, faceDown, byOwner, appliedEffects);
     }
 
     @Override
     public boolean moveCards(Cards cards, Zone toZone,
-                             Ability source, Game game
+            Ability source, Game game
     ) {
         return computerPlayer.moveCards(cards, toZone, source, game);
     }
 
     @Override
     public boolean moveCards(Set<Card> cards, Zone toZone,
-                             Ability source, Game game
+            Ability source, Game game
     ) {
         return computerPlayer.moveCards(cards, toZone, source, game);
     }
 
     @Override
     public boolean moveCards(Set<Card> cards, Zone toZone,
-                             Ability source, Game game,
-                             boolean tapped, boolean faceDown, boolean byOwner, List<UUID> appliedEffects
+            Ability source, Game game,
+            boolean tapped, boolean faceDown, boolean byOwner, List<UUID> appliedEffects
     ) {
         return computerPlayer.moveCards(cards, toZone, source, game, tapped, faceDown, byOwner, appliedEffects);
     }

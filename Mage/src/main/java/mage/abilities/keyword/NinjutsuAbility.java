@@ -1,5 +1,6 @@
 package mage.abilities.keyword;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
@@ -19,8 +20,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
-
-import java.util.UUID;
 
 /**
  * 702.47. Ninjutsu
@@ -149,11 +148,12 @@ class ReturnAttackerToHandTargetCost extends CostImpl {
         if (targets.choose(Outcome.ReturnToHand, controllerId, sourceId, game)) {
             for (UUID targetId : targets.get(0).getTargets()) {
                 Permanent permanent = game.getPermanent(targetId);
-                if (permanent == null) {
+                Player controller = game.getPlayer(controllerId);
+                if (permanent == null || controller == null) {
                     return false;
                 }
                 defendingPlayerId = game.getCombat().getDefenderId(permanent.getId());
-                paid |= permanent.moveToZone(Zone.HAND, sourceId, game, false);
+                paid |= controller.moveCardToHandWithInfo(permanent, sourceId, game);
             }
         }
         return paid;
