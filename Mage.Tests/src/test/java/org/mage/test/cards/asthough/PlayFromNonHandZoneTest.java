@@ -144,4 +144,33 @@ public class PlayFromNonHandZoneTest extends CardTestPlayerBase {
 
     }
 
+    /**
+     * Kess, Dissident Mage and Fire/Ice - When you cast fire/ice from your
+     * graverayr with kess it doesn't exile it self
+     */
+    @Test
+    public void testKessWithSpliCard() {
+        // Flying
+        // During each of your turns, you may cast an instant or sorcery card from your graveyard. If a card cast this way would be put into your graveyard this turn, exile it instead.
+        addCard(Zone.BATTLEFIELD, playerA, "Kess, Dissident Mage", 1);
+
+        // Fire {1}{R}
+        // Fire deals 2 damage divided as you choose among one or two target creatures and/or players.
+        // Ice {1}{U}
+        // Tap target permanent.
+        // Draw a card.
+        addCard(Zone.GRAVEYARD, playerA, "Fire // Ice");
+
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fire", playerB);
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertLife(playerB, 18);
+        assertExileCount(playerA, "Fire // Ice", 1);
+
+    }
+
 }

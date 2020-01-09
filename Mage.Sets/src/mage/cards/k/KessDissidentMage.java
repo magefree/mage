@@ -172,7 +172,7 @@ class KessDissidentMageWatcher extends Watcher {
                     && (spell.isInstant()
                     || spell.isSorcery())) {
                 allowingObjects.add(event.getAdditionalReference());
-                castSpells.put(new MageObjectReference(spell.getSourceId(), game),
+                castSpells.put(new MageObjectReference(spell.getMainCard().getId(), game),
                         event.getAdditionalReference().getSourceId());
             }
         }
