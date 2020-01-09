@@ -8,17 +8,15 @@ import mage.abilities.costs.common.ExileSourceFromGraveCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.cards.*;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.token.YoungPyromancerElementalToken;
 import mage.players.Player;
-import mage.target.TargetCard;
-import mage.target.common.TargetCardInHand;
 
 import java.util.UUID;
 
@@ -40,7 +38,6 @@ public final class SeasonedPyromancer extends CardImpl {
 
         // {3}{R}{R}, Exile Seasoned Pyromancer from your graveyard: Create two 1/1 red Elemental creature tokens.
         Ability ability = new SimpleActivatedAbility(
-                Zone.GRAVEYARD,
                 new CreateTokenEffect(new YoungPyromancerElementalToken(), 2),
                 new ManaCostsImpl("{3}{R}{R}")
         );
@@ -82,23 +79,16 @@ class SeasonedPyromancerEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        int nonlands = 0;
-        int toDiscard = Math.min(player.getHand().size(), 2);
-        if (toDiscard > 0) {
-            TargetCard target = new TargetCardInHand(toDiscard, StaticFilters.FILTER_CARD);
-            if (player.choose(Outcome.Discard, player.getHand(), target, game)) {
-                Cards cards = new CardsImpl(target.getTargets());
-                for (Card card : cards.getCards(game)) {
-                    if (player.discard(card, source, game) && !card.isLand()) {
-                        nonlands++;
-                    }
-                }
-            }
-        }
+        int nonlands = player
+                .discard(2, false, source, game)
+                .count(StaticFilters.FILTER_CARD_NON_LAND, game);
         player.drawCards(2, game);
-        if (nonlands > 0) {
-            return new CreateTokenEffect(new YoungPyromancerElementalToken(), nonlands).apply(game, source);
+        if (nonlands == 0) {
+            return true;
         }
+        new YoungPyromancerElementalToken().putOntoBattlefield(
+                nonlands, game, source.getSourceId(), source.getControllerId()
+        );
         return true;
     }
 }
