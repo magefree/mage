@@ -1,21 +1,20 @@
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
- *
  * @author TheElk801
  */
 public final class FreshFacedRecruit extends CardImpl {
@@ -29,20 +28,13 @@ public final class FreshFacedRecruit extends CardImpl {
         this.toughness = new MageInt(1);
 
         // As long as it's your turn, Fresh-Faced Recruit has first strike.
-        this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
-                new ConditionalContinuousEffect(
-                        new GainAbilitySourceEffect(
-                                FirstStrikeAbility.getInstance(),
-                                Duration.WhileOnBattlefield
-                        ), MyTurnCondition.instance,
-                        "As long as it's your turn, "
-                        + "{this} has first strike."
-                )
-        ));
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
+                new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield),
+                MyTurnCondition.instance, "As long as it's your turn, {this} has first strike."
+        )));
     }
 
-    public FreshFacedRecruit(final FreshFacedRecruit card) {
+    private FreshFacedRecruit(final FreshFacedRecruit card) {
         super(card);
     }
 
