@@ -138,6 +138,7 @@ public final class TherosBeyondDeath extends ExpansionSet {
         cards.add(new SetCardInfo("Storm's Wrath", 157, Rarity.RARE, mage.cards.s.StormsWrath.class));
         cards.add(new SetCardInfo("Swamp", 252, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Sweet Oblivion", 70, Rarity.UNCOMMON, mage.cards.s.SweetOblivion.class));
+        cards.add(new SetCardInfo("Swimmer in Nightmares", 275, Rarity.UNCOMMON, mage.cards.s.SwimmerInNightmares.class));
         cards.add(new SetCardInfo("Taranika, Akroan Veteran", 39, Rarity.RARE, mage.cards.t.TaranikaAkroanVeteran.class));
         cards.add(new SetCardInfo("Tectonic Giant", 158, Rarity.RARE, mage.cards.t.TectonicGiant.class));
         cards.add(new SetCardInfo("Temple of Abandon", 244, Rarity.RARE, mage.cards.t.TempleOfAbandon.class));
