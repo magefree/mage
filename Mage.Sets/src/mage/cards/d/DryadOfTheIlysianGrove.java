@@ -15,9 +15,9 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class DryadOfIlysianGrove extends CardImpl {
+public final class DryadOfTheIlysianGrove extends CardImpl {
 
-    public DryadOfIlysianGrove(UUID ownerId, CardSetInfo setInfo) {
+    public DryadOfTheIlysianGrove(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{G}");
 
         this.subtype.add(SubType.NYMPH);
@@ -33,12 +33,12 @@ public final class DryadOfIlysianGrove extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BecomesAllBasicsControlledEffect()));
     }
 
-    private DryadOfIlysianGrove(final DryadOfIlysianGrove card) {
+    private DryadOfTheIlysianGrove(final DryadOfTheIlysianGrove card) {
         super(card);
     }
 
     @Override
-    public DryadOfIlysianGrove copy() {
-        return new DryadOfIlysianGrove(this);
+    public DryadOfTheIlysianGrove copy() {
+        return new DryadOfTheIlysianGrove(this);
     }
 }
