@@ -53,6 +53,7 @@ public final class TherosBeyondDeath extends ExpansionSet {
         cards.add(new SetCardInfo("Deathbellow War Cry", 294, Rarity.RARE, mage.cards.d.DeathbellowWarCry.class));
         cards.add(new SetCardInfo("Demon of Loathing", 292, Rarity.RARE, mage.cards.d.DemonOfLoathing.class));
         cards.add(new SetCardInfo("Devourer of Memory", 213, Rarity.UNCOMMON, mage.cards.d.DevourerOfMemory.class));
+        cards.add(new SetCardInfo("Discordant Piper", 88, Rarity.COMMON, mage.cards.d.DiscordantPiper.class));
         cards.add(new SetCardInfo("Drag to the Underworld", 89, Rarity.UNCOMMON, mage.cards.d.DragToTheUnderworld.class));
         cards.add(new SetCardInfo("Dreamshaper Shaman", 130, Rarity.UNCOMMON, mage.cards.d.DreamshaperShaman.class));
         cards.add(new SetCardInfo("Dryad of the Ilysian Grove", 169, Rarity.RARE, mage.cards.d.DryadOfTheIlysianGrove.class));
