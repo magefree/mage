@@ -36,6 +36,7 @@ public final class TherosBeyondDeath extends ExpansionSet {
         cards.add(new SetCardInfo("Archon of Sun's Grace", 3, Rarity.RARE, mage.cards.a.ArchonOfSunsGrace.class));
         cards.add(new SetCardInfo("Arena Trickster", 126, Rarity.COMMON, mage.cards.a.ArenaTrickster.class));
         cards.add(new SetCardInfo("Ashiok's Erasure", 43, Rarity.RARE, mage.cards.a.AshioksErasure.class));
+        cards.add(new SetCardInfo("Ashiok's Forerunner", 277, Rarity.RARE, mage.cards.a.AshioksForerunner.class));
         cards.add(new SetCardInfo("Ashiok, Nightmare Muse", 208, Rarity.MYTHIC, mage.cards.a.AshiokNightmareMuse.class));
         cards.add(new SetCardInfo("Ashiok, Sculptor of Fears", 274, Rarity.MYTHIC, mage.cards.a.AshiokSculptorOfFears.class));
         cards.add(new SetCardInfo("Athreos, Shroud-Veiled", 269, Rarity.MYTHIC, mage.cards.a.AthreosShroudVeiled.class));
