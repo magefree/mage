@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.ArrayList;
@@ -34,7 +33,7 @@ import mage.game.permanent.Permanent;
 public final class CityInABottle extends CardImpl {
 
     public CityInABottle(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // Whenever a nontoken permanent originally printed in the Arabian Nights expansion other than City in a Bottle is on the battlefield, its controller sacrifices it.
         this.addAbility(new CityInABottleStateTriggeredAbility());
@@ -164,7 +163,7 @@ class CityInABottleStateTriggeredAbility extends StateTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "Whenever a nontoken permanent originally printed in the Arabian Nights expansion other than City in a Bottle is on the battlefield, its controller sacrifices it";
+        return "Whenever one or more other nontoken permanents with a name originally printed in the <i>Arabian Nights</i> expansion are on the battlefield, their controllers sacrifice them";
     }
 }
 
@@ -210,7 +209,7 @@ class CityInABottleCantPlayEffect extends ContinuousRuleModifyingEffectImpl {
 
     CityInABottleCantPlayEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "Players can't play cards originally printed in the Arabian Nights expansion";
+        staticText = "Players can't play cards originally printed in the <i>Arabian Nights</i> expansion";
     }
 
     CityInABottleCantPlayEffect(final CityInABottleCantPlayEffect effect) {
