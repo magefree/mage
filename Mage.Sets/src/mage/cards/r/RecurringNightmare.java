@@ -29,7 +29,7 @@ public final class RecurringNightmare extends CardImpl {
                 new ReturnFromGraveyardToBattlefieldTargetEffect(),
                 new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_CREATURE))
         );
-        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE));
+        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         ability.addCost(new ReturnToHandFromBattlefieldSourceCost());
         this.addAbility(ability);
     }
