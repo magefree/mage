@@ -1,40 +1,32 @@
-
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.cards.*;
+import mage.constants.*;
+import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterLandCard;
-import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.command.emblems.KioraMasterOfTheDepthsEmblem;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.OctopusToken;
 import mage.players.Player;
+import mage.target.Target;
 import mage.target.TargetCard;
-import mage.target.common.TargetCreaturePermanent;
-import mage.target.common.TargetLandPermanent;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCardInLibrary;
+
+import java.util.Collection;
+import java.util.Objects;
+import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 public final class KioraMasterOfTheDepths extends CardImpl {
@@ -47,20 +39,19 @@ public final class KioraMasterOfTheDepths extends CardImpl {
         this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
 
         // +1: Untap up to one target creature and up to one target land.
-        LoyaltyAbility ability1 = new LoyaltyAbility(new KioraUntapEffect(), 1);
-        ability1.addTarget(new TargetCreaturePermanent(0, 1, StaticFilters.FILTER_PERMANENT_CREATURE, false));
-        ability1.addTarget(new TargetLandPermanent(0, 1, new FilterLandPermanent(), false));
-        this.addAbility(ability1);
+        LoyaltyAbility ability = new LoyaltyAbility(new KioraUntapEffect(), 1);
+        ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_PERMANENT_CREATURE, false));
+        ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_LAND, false));
+        this.addAbility(ability);
 
         // -2: Reveal the top four cards of your library. You may put a creature card and/or a land card from among them into your hand. Put the rest into your graveyard.
         this.addAbility(new LoyaltyAbility(new KioraRevealEffect(), -2));
 
         // -8: You get an emblem with "Whenever a creature enters the battlefield under your control, you may have it fight target creature." Then create three 8/8 blue Octopus creature tokens.
-        Effect effect = new CreateTokenEffect(new OctopusToken(), 3);
-        effect.setText("Then create three 8/8 blue Octopus creature tokens");
-        LoyaltyAbility ability3 = new LoyaltyAbility(new GetEmblemEffect(new KioraMasterOfTheDepthsEmblem()), -8);
-        ability3.addEffect(effect);
-        this.addAbility(ability3);
+        ability = new LoyaltyAbility(new GetEmblemEffect(new KioraMasterOfTheDepthsEmblem()), -8);
+        ability.addEffect(new CreateTokenEffect(new OctopusToken(), 3)
+                .setText("Then create three 8/8 blue Octopus creature tokens"));
+        this.addAbility(ability);
     }
 
     public KioraMasterOfTheDepths(final KioraMasterOfTheDepths card) {
@@ -75,12 +66,12 @@ public final class KioraMasterOfTheDepths extends CardImpl {
 
 class KioraUntapEffect extends OneShotEffect {
 
-    public KioraUntapEffect() {
+    KioraUntapEffect() {
         super(Outcome.Untap);
         this.staticText = "Untap up to one target creature and up to one target land";
     }
 
-    public KioraUntapEffect(final KioraUntapEffect effect) {
+    private KioraUntapEffect(final KioraUntapEffect effect) {
         super(effect);
     }
 
@@ -91,26 +82,32 @@ class KioraUntapEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent firstTarget = game.getPermanent(source.getTargets().get(0).getFirstTarget());
-        Permanent secondTarget = game.getPermanent(source.getTargets().get(1).getFirstTarget());
-        if (firstTarget != null) {
-            firstTarget.untap(game);
-        }
-        if (secondTarget != null) {
-            return secondTarget.untap(game);
-        }
+        source.getTargets()
+                .stream()
+                .map(Target::getTargets)
+                .flatMap(Collection::stream)
+                .map(game::getPermanent)
+                .filter(Objects::nonNull)
+                .forEachOrdered(permanent -> permanent.untap(game));
         return true;
     }
 }
 
 class KioraRevealEffect extends OneShotEffect {
 
-    public KioraRevealEffect() {
+    private static final FilterCard creatureFilter
+            = new FilterCreatureCard("creature card to put into your hand");
+    private static final FilterCard landFilter
+            = new FilterLandCard("land card to put into your hand");
+
+    KioraRevealEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "Reveal the top four cards of your library. You may put a creature card and/or a land card from among them into your hand. Put the rest into your graveyard";
+        this.staticText = "Reveal the top four cards of your library. " +
+                "You may put a creature card and/or a land card from among them into your hand." +
+                " Put the rest into your graveyard";
     }
 
-    public KioraRevealEffect(final KioraRevealEffect effect) {
+    private KioraRevealEffect(final KioraRevealEffect effect) {
         super(effect);
     }
 
@@ -123,50 +120,40 @@ class KioraRevealEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
-        if (sourceObject != null && controller != null) {
-            Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 4));
-            boolean creatureCardFound = false;
-            boolean landCardFound = false;
-            for (UUID cardId : cards) {
-                Card card = game.getCard(cardId);
-                if (card != null) {
-                    cards.add(card);
-                    if (card.isCreature()) {
-                        creatureCardFound = true;
-                    }
-                    if (card.isLand()) {
-                        landCardFound = true;
-                    }
-                }
-            }
+        if (controller == null || sourceObject == null) {
+            return false;
+        }
+        Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 4));
+        if (cards.isEmpty()) {
+            return false;
+        }
 
-            if (!cards.isEmpty()) {
-                controller.revealCards(sourceObject.getName(), cards, game);
-                if ((creatureCardFound || landCardFound)
-                        && controller.chooseUse(Outcome.DrawCard,
-                                "Put a creature card and/or a land card into your hand?", source, game)) {
-                    TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCreatureCard("creature card to put into your hand"));
-                    if (creatureCardFound && controller.chooseTarget(Outcome.DrawCard, cards, target, source, game)) {
-                        Card card = cards.get(target.getFirstTarget(), game);
-                        if (card != null) {
-                            cards.remove(card);
-                            controller.moveCards(card, Zone.HAND, source, game);
-                        }
-                    }
+        controller.revealCards(sourceObject.getName(), cards, game);
 
-                    target = new TargetCard(Zone.LIBRARY, new FilterLandCard("land card to put into your hand"));
-                    if (landCardFound && controller.chooseTarget(Outcome.DrawCard, cards, target, source, game)) {
-                        Card card = cards.get(target.getFirstTarget(), game);
-                        if (card != null) {
-                            cards.remove(card);
-                            controller.moveCards(card, Zone.HAND, source, game);
-                        }
-                    }
-                }
-            }
+        boolean creatureCardFound = cards.getCards(game).stream().anyMatch(Card::isCreature);
+        boolean landCardFound = cards.getCards(game).stream().anyMatch(Card::isLand);
+
+        if (!creatureCardFound && !landCardFound) {
             controller.moveCards(cards, Zone.GRAVEYARD, source, game);
             return true;
         }
-        return false;
+
+        Cards cardsToHand = new CardsImpl();
+
+        if (creatureCardFound) {
+            TargetCard target = new TargetCardInLibrary(0, 1, creatureFilter);
+            controller.chooseTarget(Outcome.DrawCard, cards, target, source, game);
+            cards.remove(target.getFirstTarget());
+            cardsToHand.add(target.getFirstTarget());
+        }
+        if (landCardFound) {
+            TargetCard target = new TargetCardInLibrary(0, 1, landFilter);
+            controller.chooseTarget(Outcome.DrawCard, cards, target, source, game);
+            cards.remove(target.getFirstTarget());
+            cardsToHand.add(target.getFirstTarget());
+        }
+        controller.moveCards(cardsToHand, Zone.HAND, source, game);
+        controller.moveCards(cards, Zone.GRAVEYARD, source, game);
+        return true;
     }
 }
