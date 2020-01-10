@@ -1,4 +1,3 @@
-
 package mage.cards.v;
 
 import java.util.UUID;
@@ -32,7 +31,7 @@ import mage.target.common.TargetCreaturePermanent;
 public final class VenarianGold extends CardImpl {
 
     public VenarianGold(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{X}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{X}{U}{U}");
         this.subtype.add(SubType.AURA);
 
         // Enchant creature
@@ -41,19 +40,19 @@ public final class VenarianGold extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
-        // When Venarian Gold enters the battlefield, tap enchanted creature and put a number of sleep counters on it equal to the value of X as you cast Venarian Gold.
+        // When Venarian Gold enters the battlefield, tap enchanted creature and put X sleep counters on it.
         Ability ability = new EntersBattlefieldTriggeredAbility(new TapEnchantedEffect());
-        ability.addEffect(new AddCountersAttachedEffect(CounterType.SLEEP.createInstance(), new VenarianGoldValue(), "it equal to the value of X as you cast {this}"));
+        ability.addEffect(new AddCountersAttachedEffect(CounterType.SLEEP.createInstance(), new VenarianGoldValue(), "it").setText("and put X sleep counters on it"));
         this.addAbility(ability);
 
         // Enchanted creature doesn’t untap during its controller’s untap step if it has a sleep counter on it.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousRuleModifyingEffect(new DontUntapInControllersUntapStepEnchantedEffect(), 
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousRuleModifyingEffect(new DontUntapInControllersUntapStepEnchantedEffect(),
                 new AttachedToCounterCondition(CounterType.SLEEP, 1)).setText("Enchanted creature doesn't untap during its controller's untap step if it has a sleep counter on it")));
 
         // At the beginning of the upkeep of enchanted creature’s controller, remove a sleep counter from that creature.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new RemoveCountersAttachedEffect(CounterType.SLEEP.createInstance(), "that creature"), 
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new RemoveCountersAttachedEffect(CounterType.SLEEP.createInstance(), "that creature"),
                 TargetController.CONTROLLER_ATTACHED_TO, false));
-        
+
     }
 
     public VenarianGold(final VenarianGold card) {

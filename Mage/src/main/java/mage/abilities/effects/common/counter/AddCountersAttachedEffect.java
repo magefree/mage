@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common.counter;
 
 import java.util.Locale;
@@ -69,6 +68,9 @@ public class AddCountersAttachedEffect extends OneShotEffect {
     }
 
     private void setText() {
+        if (!staticText.isEmpty()) {
+            return;
+        }
         StringBuilder sb = new StringBuilder();
         // put a +1/+1 counter on it
         sb.append("put ");
