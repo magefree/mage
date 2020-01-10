@@ -17,12 +17,10 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetCard;
-import mage.target.common.TargetCardInHand;
-
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
+import mage.target.common.TargetCardInHand;
 
 /**
  * @author TheElk801
@@ -33,7 +31,8 @@ public final class ScrollOfFate extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // {T}: Manifest a card from your hand.
-        this.addAbility(new SimpleActivatedAbility(new ScrollOfFateEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new ScrollOfFateEffect(), 
+                new TapSourceCost()));
     }
 
     private ScrollOfFate(final ScrollOfFate card) {
@@ -65,11 +64,13 @@ class ScrollOfFateEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null || controller.getHand().isEmpty()) {
+        if (controller == null
+                || controller.getHand().isEmpty()) {
             return false;
         }
-        TargetCard targetCard = new TargetCardInHand();
-        if (!controller.choose(outcome, controller.getHand(), targetCard, game)) {
+        TargetCardInHand targetCard = new TargetCardInHand();
+        if (!controller.chooseTarget(Outcome.PutCardInPlay, controller.getHand(), 
+                targetCard, source, game)) {
             return false;
         }
         Ability newSource = source.copy();
@@ -87,8 +88,10 @@ class ScrollOfFateEffect extends OneShotEffect {
                     manaCosts = new ManaCostsImpl("{0}");
                 }
             }
-            MageObjectReference objectReference = new MageObjectReference(card.getId(), card.getZoneChangeCounter(game) + 1, game);
-            game.addEffect(new BecomesFaceDownCreatureEffect(manaCosts, objectReference, Duration.Custom, BecomesFaceDownCreatureEffect.FaceDownType.MANIFESTED), newSource);
+            MageObjectReference objectReference = new MageObjectReference(card.getId(), 
+                    card.getZoneChangeCounter(game) + 1, game);
+            game.addEffect(new BecomesFaceDownCreatureEffect(manaCosts, objectReference, 
+                    Duration.Custom, BecomesFaceDownCreatureEffect.FaceDownType.MANIFESTED), newSource);
         });
         controller.moveCards(cards, Zone.BATTLEFIELD, source, game, false, true, false, null);
         cards.stream()
