@@ -140,6 +140,7 @@ public final class TherosBeyondDeath extends ExpansionSet {
         cards.add(new SetCardInfo("Nyxborn Seaguard", 57, Rarity.COMMON, mage.cards.n.NyxbornSeaguard.class));
         cards.add(new SetCardInfo("Omen of the Dead", 110, Rarity.COMMON, mage.cards.o.OmenOfTheDead.class));
         cards.add(new SetCardInfo("Omen of the Forge", 145, Rarity.COMMON, mage.cards.o.OmenOfTheForge.class));
+        cards.add(new SetCardInfo("Omen of the Hunt", 192, Rarity.COMMON, mage.cards.o.OmenOfTheHunt.class));
         cards.add(new SetCardInfo("Omen of the Sea", 58, Rarity.COMMON, mage.cards.o.OmenOfTheSea.class));
         cards.add(new SetCardInfo("Omen of the Sun", 30, Rarity.COMMON, mage.cards.o.OmenOfTheSun.class));
         cards.add(new SetCardInfo("One with the Stars", 59, Rarity.UNCOMMON, mage.cards.o.OneWithTheStars.class));
