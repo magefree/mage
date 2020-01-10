@@ -115,6 +115,12 @@ public class VerifyCardDataTest {
         // subtype
         skipListCreate(SKIP_LIST_SUBTYPE);
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Miss Demeanor");
+        // the following are temporary
+        subtypesToIgnore.add("Noble");
+        skipListAddName(SKIP_LIST_SUBTYPE, "AER", "Ridgescale Tusker");
+        skipListAddName(SKIP_LIST_SUBTYPE, "ME3", "Lady Caleria");
+        skipListAddName(SKIP_LIST_SUBTYPE, "LEG", "Lady Caleria");
+
 
         // number
         skipListCreate(SKIP_LIST_NUMBER);

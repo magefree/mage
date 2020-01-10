@@ -37,6 +37,7 @@ public final class CrovaxAscendantHero extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.NOBLE);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

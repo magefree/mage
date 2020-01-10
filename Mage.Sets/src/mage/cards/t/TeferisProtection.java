@@ -78,7 +78,7 @@ class TeferisProtectionEffect extends OneShotEffect {
      */
     public TeferisProtectionEffect() {
         super(Outcome.Protect);
-        staticText = ", and you have protection from everything";
+        staticText = ", and you gain protection from everything";
     }
 
     public TeferisProtectionEffect(final TeferisProtectionEffect effect) {

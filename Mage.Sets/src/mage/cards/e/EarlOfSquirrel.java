@@ -39,6 +39,7 @@ public final class EarlOfSquirrel extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
 
         this.subtype.add(SubType.SQUIRREL);
+        this.subtype.add(SubType.NOBLE);
         this.subtype.add(SubType.ADVISOR);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

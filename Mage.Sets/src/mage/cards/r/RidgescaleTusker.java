@@ -28,6 +28,7 @@ public final class RidgescaleTusker extends CardImpl {
     public RidgescaleTusker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
 
+        this.subtype.add(SubType.PANGOLIN);
         this.subtype.add(SubType.BEAST);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

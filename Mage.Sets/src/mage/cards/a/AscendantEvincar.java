@@ -32,6 +32,7 @@ public final class AscendantEvincar extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
+        this.subtype.add(SubType.NOBLE);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
