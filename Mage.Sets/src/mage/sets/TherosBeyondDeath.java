@@ -105,6 +105,7 @@ public final class TherosBeyondDeath extends ExpansionSet {
         cards.add(new SetCardInfo("Inevitable End", 102, Rarity.UNCOMMON, mage.cards.i.InevitableEnd.class));
         cards.add(new SetCardInfo("Infuriate", 141, Rarity.COMMON, mage.cards.i.Infuriate.class));
         cards.add(new SetCardInfo("Inspire Awe", 175, Rarity.COMMON, mage.cards.i.InspireAwe.class));
+        cards.add(new SetCardInfo("Iroas's Blessing", 142, Rarity.COMMON, mage.cards.i.IroassBlessing.class));
         cards.add(new SetCardInfo("Ironscale Hydra", 296, Rarity.RARE, mage.cards.i.IronscaleHydra.class));
         cards.add(new SetCardInfo("Irreverent Revelers", 143, Rarity.COMMON, mage.cards.i.IrreverentRevelers.class));
         cards.add(new SetCardInfo("Island", 251, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
