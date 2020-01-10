@@ -1,5 +1,6 @@
 package mage.cards.m;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageToAPlayerAllTriggeredAbility;
@@ -15,10 +16,6 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.targetpointer.FixedTarget;
-
-import java.util.UUID;
-
-import static mage.constants.Outcome.Benefit;
 
 /**
  * @author TheElk801
@@ -57,7 +54,7 @@ public final class MarisiBreakerOfTheCoil extends CardImpl {
 class MarisiBreakerOfTheCoilSpellEffect extends ContinuousRuleModifyingEffectImpl {
 
     MarisiBreakerOfTheCoilSpellEffect() {
-        super(Duration.EndOfTurn, Outcome.Neutral);
+        super(Duration.WhileOnBattlefield, Outcome.PreventCast);
         staticText = "your opponents can't cast spells during combat";
     }
 
@@ -92,8 +89,9 @@ class MarisiBreakerOfTheCoilEffect extends OneShotEffect {
     private static final Effect effect = new GoadTargetEffect();
 
     MarisiBreakerOfTheCoilEffect() {
-        super(Benefit);
-        staticText = "goad each creature that player controls";
+        super(Outcome.Benefit);
+        staticText = "goad each creature that player controls "
+                + "<i>(Until your next turn, those creatures attack each combat if able and attack a player other than you if able.)</i>";
     }
 
     private MarisiBreakerOfTheCoilEffect(final MarisiBreakerOfTheCoilEffect effect) {

@@ -28,6 +28,7 @@ public enum Outcome {
     PutManaInPool(true),
     Regenerate(true),
     PreventDamage(true),
+    PreventCast(false),
     RedirectDamage(true),
     Tap(false),
     Transform(true),
@@ -40,6 +41,7 @@ public enum Outcome {
     Removal(false),
     AIDontUseIt(false),
     Vote(true);
+
     private final boolean good; // good or bad effect for targeting player (for AI usage)
     private boolean canTargetAll;
 
