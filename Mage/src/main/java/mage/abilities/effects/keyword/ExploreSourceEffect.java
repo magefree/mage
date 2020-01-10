@@ -108,15 +108,13 @@ public class ExploreSourceEffect extends OneShotEffect {
             cardWasRevealed = true;
             if (card != null) {
                 if (card.isLand()) {
-                    permanentController.moveCardToHandWithInfo(card, source.getSourceId(), game);
-                    card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
+                    permanentController.moveCards(card, Zone.HAND, source, game);
                 } else {
                     if (game.getState().getZone(permanentId) == Zone.BATTLEFIELD) { // needed in case LKI object is used
                         permanent.addCounters(CounterType.P1P1.createInstance(), source, game);
                     }
                     if (permanentController.chooseUse(Outcome.Neutral, "Put " + card.getLogName() + " in your graveyard?", source, game)) {
-                        card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, true);
-                        game.informPlayers(permanentController.getLogName() + " puts " + card.getLogName() + " into their graveyard.");
+                        permanentController.moveCards(card, Zone.GRAVEYARD, source, game);
                     } else {
                         game.informPlayers(permanentController.getLogName() + " leaves " + card.getLogName() + " on top of their library.");
                     }
