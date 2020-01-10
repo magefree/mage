@@ -66,6 +66,7 @@ public final class TherosBeyondDeath extends ExpansionSet {
         cards.add(new SetCardInfo("Eidolon of Inspiration", 271, Rarity.UNCOMMON, mage.cards.e.EidolonOfInspiration.class));
         cards.add(new SetCardInfo("Eidolon of Obstruction", 12, Rarity.RARE, mage.cards.e.EidolonOfObstruction.class));
         cards.add(new SetCardInfo("Eidolon of Philosophy", 48, Rarity.COMMON, mage.cards.e.EidolonOfPhilosophy.class));
+        cards.add(new SetCardInfo("Elite Instructor", 49, Rarity.COMMON, mage.cards.e.EliteInstructor.class));
         cards.add(new SetCardInfo("Elspeth Conquers Death", 13, Rarity.RARE, mage.cards.e.ElspethConquersDeath.class));
         cards.add(new SetCardInfo("Elspeth's Devotee", 272, Rarity.RARE, mage.cards.e.ElspethsDevotee.class));
         cards.add(new SetCardInfo("Elspeth's Nightmare", 91, Rarity.UNCOMMON, mage.cards.e.ElspethsNightmare.class));
