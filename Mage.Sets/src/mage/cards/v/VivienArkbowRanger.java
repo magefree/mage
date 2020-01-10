@@ -21,9 +21,7 @@ import mage.target.common.TargetCreatureOrPlaneswalker;
 import mage.target.common.TargetCreaturePermanentAmount;
 
 import java.util.UUID;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.TargetAdjuster;
 
 /**
@@ -45,8 +43,12 @@ public final class VivienArkbowRanger extends CardImpl {
                 TrampleAbility.getInstance(), Duration.EndOfTurn,
                 "They gain trample until end of turn"
         ));
-        ability.addTarget(new TargetCreaturePermanent(0, 2, new FilterCreaturePermanent(), false));
-        ability.setTargetAdjuster(VivienArkbowRangerAdjuster.instance);
+        TargetCreaturePermanentAmount target = new TargetCreaturePermanentAmount(2);
+        target.setMinNumberOfTargets(0);
+        target.setMaxNumberOfTargets(2);        
+        ability.addTarget(target);
+        
+       // ability.setTargetAdjuster(VivienArkbowRangerAdjuster.instance);
         this.addAbility(ability);
 
         // −3: Target creature you control deals damage equal to its power to target creature or planeswalker.
@@ -77,7 +79,7 @@ public final class VivienArkbowRanger extends CardImpl {
         @Override
         public void adjustTargets(Ability ability, Game game) {
             // if targets are available, switch over to a working target method
-            if (game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), game).size() > 0) {
+            if (game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, game).size() > 0) {
                 ability.getTargets().clear();
                 ability.addTarget(new TargetCreaturePermanentAmount(2));
             }
