@@ -23,17 +23,17 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.net.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author JayDi85
  */
 public class WhatsNewDialog extends MageDialog {
 
-    private static final Logger logger = Logger.getLogger(WhatsNewDialog.class);
-    private static final MageVersion clientVersion = new MageVersion(WhatsNewDialog.class);
+    private static final Logger LOGGER = Logger.getLogger(WhatsNewDialog.class);
+    private static final MageVersion CLIENT_VERSION = new MageVersion(WhatsNewDialog.class);
 
     // cookies tester: http://www.html-kit.com/tools/cookietester/
     private static final String WHATS_NEW_PAGE = "https://jaydi85.github.io/xmage-web-news/news.html";
@@ -52,15 +52,15 @@ public class WhatsNewDialog extends MageDialog {
                 int maxWait = WHATS_NEW_LOAD_TIMEOUT_SECS;
                 int currentWait = 0;
                 while (!isPageReady) {
-                    Thread.sleep(1000);
+                    TimeUnit.SECONDS.sleep(1);
                     currentWait++;
                     if (currentWait > maxWait) {
-                        logger.error("Can't load news page: " + WHATS_NEW_PAGE);
+                        LOGGER.error("Can't load news page: " + WHATS_NEW_PAGE);
                         break;
                     }
                 }
             } catch (InterruptedException e) {
-                logger.error("Checking news was interrupted", e);
+                LOGGER.error("Checking news was interrupted", e);
                 Thread.currentThread().interrupt();
             }
             return null;
@@ -68,12 +68,9 @@ public class WhatsNewDialog extends MageDialog {
 
         @Override
         public void done() {
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    if (isPageReady) {
-                        showDialog();
-                    }
+            SwingUtilities.invokeLater(() -> {
+                if (isPageReady) {
+                    showDialog();
                 }
             });
         }
@@ -98,9 +95,9 @@ public class WhatsNewDialog extends MageDialog {
                     newVersion = result.substring("version=".length());
                 }
             } catch (MalformedURLException e) {
-                logger.error("Checking updates got wrong url " + WHATS_NEW_VERSION_PAGE, e);
+                LOGGER.error("Checking updates got wrong url " + WHATS_NEW_VERSION_PAGE, e);
             } catch (IOException e) {
-                logger.error("Checking updates got error", e);
+                LOGGER.error("Checking updates got error", e);
             }
             return null;
         }
@@ -179,7 +176,7 @@ public class WhatsNewDialog extends MageDialog {
      * Store cookies in preferences
      */
     private class PersistentCookieStore implements CookieStore, Runnable {
-        private CookieStore store;
+        private final CookieStore store;
 
         public PersistentCookieStore() {
             store = new CookieManager().getCookieStore();
@@ -195,7 +192,7 @@ public class WhatsNewDialog extends MageDialog {
             String sourceValue = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEWS_PAGE_COOKIES, "");
 
             Gson gson = new GsonBuilder().create();
-            List<HttpCookie> httpCookies = new ArrayList<>();
+            List<HttpCookie> httpCookies;
             Type type = new TypeToken<List<HttpCookie>>() {
             }.getType();
             try {
@@ -206,7 +203,7 @@ public class WhatsNewDialog extends MageDialog {
                     }
                 }
             } catch (Exception e) {
-                logger.error("Wrong news page cookies", e);
+                LOGGER.error("Wrong news page cookies", e);
             }
         }
 
@@ -264,7 +261,7 @@ public class WhatsNewDialog extends MageDialog {
 
                 webView = new WebView();
                 engine = webView.getEngine();
-                engine.setUserAgent(engine.getUserAgent() + " XMage/" + clientVersion.toString(false));
+                engine.setUserAgent(engine.getUserAgent() + " XMage/" + CLIENT_VERSION.toString(false));
                 webView.contextMenuEnabledProperty().setValue(false);
 
                 CookieManager cookieManager = new CookieManager(new PersistentCookieStore(), CookiePolicy.ACCEPT_ALL);
@@ -272,12 +269,13 @@ public class WhatsNewDialog extends MageDialog {
 
                 // on error
                 engine.getLoadWorker().exceptionProperty().addListener(new ChangeListener<Throwable>() {
+                    @Override
                     public void changed(ObservableValue<? extends Throwable> o, Throwable old, final Throwable value) {
                         if (engine.getLoadWorker().getState() == Worker.State.FAILED) {
                             SwingUtilities.invokeLater(new Runnable() {
                                 @Override
                                 public void run() {
-                                    logger.error("Can't load news page: " + (value != null ? value.getMessage() : "null"), value);
+                                    LOGGER.error("Can't load news page: " + (value != null ? value.getMessage() : "null"), value);
                                 }
                             });
                         }
@@ -286,12 +284,14 @@ public class WhatsNewDialog extends MageDialog {
 
                 // on completed
                 engine.getLoadWorker().stateProperty().addListener(new ChangeListener<Worker.State>() {
+                    @Override
                     public void changed(ObservableValue ov, Worker.State oldState, Worker.State newState) {
                         if (newState == Worker.State.SUCCEEDED) {
 
                             // 1. replace urls with custom click processing
                             // all classes from org.w3c.dom
                             org.w3c.dom.events.EventListener listener = new EventListener() {
+                                @Override
                                 public void handleEvent(org.w3c.dom.events.Event ev) {
                                     String href = ((org.w3c.dom.Element) ev.getTarget()).getAttribute("href");
                                     ev.preventDefault();
