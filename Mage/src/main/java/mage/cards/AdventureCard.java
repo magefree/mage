@@ -1,5 +1,7 @@
 package mage.cards;
 
+import java.util.List;
+import java.util.UUID;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
@@ -7,9 +9,6 @@ import mage.abilities.SpellAbility;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;
-
-import java.util.List;
-import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -92,9 +91,9 @@ public abstract class AdventureCard extends CardImpl {
         return allAbilities;
     }
 
-    public Abilities<Ability> getSharedAbilities() {
+    public Abilities<Ability> getSharedAbilities(Game game) {
         // abilities without spellcard
-        return super.getAbilities();
+        return super.getAbilities(game);
     }
 
     @Override

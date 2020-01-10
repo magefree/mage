@@ -1574,7 +1574,8 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
         }
     }
-   @Override
+
+    @Override
     public LinkedHashMap<UUID, ActivatedAbility> getUseableActivatedAbilities(MageObject object, Zone zone, Game game) {
         // TODO: replace with getPlayableFromNonHandCardAll (uses for all tests)
         boolean previousState = game.inCheckPlayableState();
@@ -1590,16 +1591,16 @@ public abstract class PlayerImpl implements Player, Serializable {
             getUseableActivatedAbilitiesHalfImpl(splitCard.getRightHalfCard(),
                     zone, game, splitCard.getRightHalfCard().getAbilities(game), useable);
             getUseableActivatedAbilitiesHalfImpl(splitCard,
-                    zone, game, splitCard.getSharedAbilities(), useable);
-        } else if (object instanceof Card){
+                    zone, game, splitCard.getSharedAbilities(game), useable);
+        } else if (object instanceof Card) {
             getUseableActivatedAbilitiesHalfImpl(object,
-                    zone, game, ((Card)object).getAbilities(game), useable);
+                    zone, game, ((Card) object).getAbilities(game), useable);
         } else if (object != null) {
             getUseableActivatedAbilitiesHalfImpl(object,
                     zone, game, object.getAbilities(), useable);
             getOtherUseableActivatedAbilities(object, zone, game, useable);
         }
-        
+
         game.setCheckPlayableState(previousState);
         return useable;
     }
@@ -3245,12 +3246,12 @@ public abstract class PlayerImpl implements Player, Serializable {
             SplitCard splitCard = (SplitCard) card;
             getPlayableFromNonHandCardSingle(game, fromZone, splitCard.getLeftHalfCard(), splitCard.getLeftHalfCard().getAbilities(), availableMana, output);
             getPlayableFromNonHandCardSingle(game, fromZone, splitCard.getRightHalfCard(), splitCard.getRightHalfCard().getAbilities(), availableMana, output);
-            getPlayableFromNonHandCardSingle(game, fromZone, splitCard, splitCard.getSharedAbilities(), availableMana, output);
+            getPlayableFromNonHandCardSingle(game, fromZone, splitCard, splitCard.getSharedAbilities(game), availableMana, output);
         } else if (card instanceof AdventureCard) {
             // adventure must use different card characteristics for different spells (main or adventure)
             AdventureCard adventureCard = (AdventureCard) card;
             getPlayableFromNonHandCardSingle(game, fromZone, adventureCard.getSpellCard(), adventureCard.getSpellCard().getAbilities(), availableMana, output);
-            getPlayableFromNonHandCardSingle(game, fromZone, adventureCard, adventureCard.getSharedAbilities(), availableMana, output);
+            getPlayableFromNonHandCardSingle(game, fromZone, adventureCard, adventureCard.getSharedAbilities(game), availableMana, output);
         } else {
             getPlayableFromNonHandCardSingle(game, fromZone, card, card.getAbilities(), availableMana, output);
         }
