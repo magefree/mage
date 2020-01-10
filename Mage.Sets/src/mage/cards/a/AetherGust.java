@@ -56,7 +56,7 @@ public final class AetherGust extends CardImpl {
 class AetherGustEffect extends OneShotEffect {
 
     AetherGustEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.Removal);
         staticText = "Choose target spell or permanent that's red or green. " +
                 "Its owner puts it on the top or bottom of their library.";
     }
@@ -76,7 +76,7 @@ class AetherGustEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        if (player.chooseUse(outcome, "Put the targeted object on the top or bottom of your library?",
+        if (player.chooseUse(Outcome.Detriment, "Put the targeted object on the top or bottom of your library?",
                 "", "Top", "Bottom", source, game)) {
             return new PutOnLibraryTargetEffect(true).apply(game, source);
         }
