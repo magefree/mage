@@ -214,6 +214,7 @@ public final class TherosBeyondDeath extends ExpansionSet {
         cards.add(new SetCardInfo("Warden of the Chained", 230, Rarity.UNCOMMON, mage.cards.w.WardenOfTheChained.class));
         cards.add(new SetCardInfo("Wavebreak Hippocamp", 80, Rarity.RARE, mage.cards.w.WavebreakHippocamp.class));
         cards.add(new SetCardInfo("Whirlwind Denial", 81, Rarity.UNCOMMON, mage.cards.w.WhirlwindDenial.class));
+        cards.add(new SetCardInfo("Witness of Tomorrows", 82, Rarity.COMMON, mage.cards.w.WitnessOfTomorrows.class));
         cards.add(new SetCardInfo("Woe Strider", 123, Rarity.RARE, mage.cards.w.WoeStrider.class));
         cards.add(new SetCardInfo("Wolfwillow Haven", 205, Rarity.UNCOMMON, mage.cards.w.WolfwillowHaven.class));
         cards.add(new SetCardInfo("Wrap in Flames", 164, Rarity.COMMON, mage.cards.w.WrapInFlames.class));
