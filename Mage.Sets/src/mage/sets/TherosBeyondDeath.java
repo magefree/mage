@@ -128,6 +128,7 @@ public final class TherosBeyondDeath extends ExpansionSet {
         cards.add(new SetCardInfo("Nyx Herald", 189, Rarity.UNCOMMON, mage.cards.n.NyxHerald.class));
         cards.add(new SetCardInfo("Nyx Lotus", 235, Rarity.RARE, mage.cards.n.NyxLotus.class));
         cards.add(new SetCardInfo("Nyxbloom Ancient", 190, Rarity.MYTHIC, mage.cards.n.NyxbloomAncient.class));
+        cards.add(new SetCardInfo("Nyxborn Brute", 144, Rarity.COMMON, mage.cards.n.NyxbornBrute.class));
         cards.add(new SetCardInfo("Nyxborn Colossus", 191, Rarity.COMMON, mage.cards.n.NyxbornColossus.class));
         cards.add(new SetCardInfo("Nyxborn Courser", 29, Rarity.COMMON, mage.cards.n.NyxbornCourser.class));
         cards.add(new SetCardInfo("Nyxborn Marauder", 109, Rarity.COMMON, mage.cards.n.NyxbornMarauder.class));
