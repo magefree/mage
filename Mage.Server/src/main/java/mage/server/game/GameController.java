@@ -333,9 +333,14 @@ public class GameController implements GameCallback {
                     // TODO: workaround to fix not started games in tourneys, need to find out real reason
                     if (gameSessions.get(player.getId()) == null) {
                         // join the game because player has not joined are was removed because of disconnect
-                        user.removeConstructing(player.getId());
-                        GameManager.instance.joinGame(game.getId(), user.getId());
-                        logger.warn("Forced join of player " + player.getName() + " (" + user.getUserState()  + ") to gameId: " + game.getId());
+                        if (user.isConnected()) {
+                            user.ccGameStarted(game.getId(), player.getId());
+                            logger.warn("Player " + player.getName() + " (missed message) has joined gameId: " + game.getId());
+                        } else {
+                            user.removeConstructing(player.getId());
+                            GameManager.instance.joinGame(game.getId(), user.getId());
+                            logger.warn("Forced join of player " + player.getName() + " (" + user.getUserState() + ") to gameId: " + game.getId());
+                        }
                         ChatManager.instance.broadcast(chatId, player.getName(), user.getPingInfo()
                                         + " is forced to join the game (waiting ends after "
                                         + GAME_TIMEOUTS_CANCEL_PLAYER_GAME_JOINING_AFTER_INACTIVE_SECS + " secs)",
