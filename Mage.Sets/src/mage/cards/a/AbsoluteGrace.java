@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -23,6 +22,7 @@ public final class AbsoluteGrace extends CardImpl {
     public AbsoluteGrace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
 
+        // All creatures have protection from black.
         Ability ability = ProtectionAbility.from(ObjectColor.BLACK);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield, FILTER_PERMANENT_CREATURES, false)));
     }
