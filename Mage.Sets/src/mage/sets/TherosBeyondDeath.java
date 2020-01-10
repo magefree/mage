@@ -82,6 +82,7 @@ public final class TherosBeyondDeath extends ExpansionSet {
         cards.add(new SetCardInfo("Field of Ruin", 242, Rarity.UNCOMMON, mage.cards.f.FieldOfRuin.class));
         cards.add(new SetCardInfo("Final Death", 95, Rarity.COMMON, mage.cards.f.FinalDeath.class));
         cards.add(new SetCardInfo("Forest", 254, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Fruit of Tizerus", 96, Rarity.COMMON, mage.cards.f.FruitOfTizerus.class));
         cards.add(new SetCardInfo("Funeral Rites", 97, Rarity.COMMON, mage.cards.f.FuneralRites.class));
         cards.add(new SetCardInfo("Gallia of the Endless Dance", 217, Rarity.RARE, mage.cards.g.GalliaOfTheEndlessDance.class));
         cards.add(new SetCardInfo("Gift of Strength", 171, Rarity.COMMON, mage.cards.g.GiftOfStrength.class));
