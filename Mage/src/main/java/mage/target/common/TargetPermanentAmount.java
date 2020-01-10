@@ -78,26 +78,14 @@ public abstract class TargetPermanentAmount extends TargetAmount {
 
     @Override
     public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
-        int count = 0;
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game)) {
-            count++;
-            if (count >= this.minNumberOfTargets) {
-                return true;
-            }
-        }
-        return false;
+        return game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game).size() 
+                >= this.minNumberOfTargets;
     }
 
     @Override
     public boolean canChoose(UUID sourceControllerId, Game game) {
-        int count = 0;
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, game)) {
-            count++;
-            if (count >= this.minNumberOfTargets) {
-                return true;
-            }
-        }
-        return false;
+        return game.getBattlefield().getActivePermanents(filter, sourceControllerId, game).size() 
+                >= this.minNumberOfTargets;
     }
 
     @Override
@@ -136,12 +124,12 @@ public abstract class TargetPermanentAmount extends TargetAmount {
     @Override
     public String getTargetedName(Game game) {
         StringBuilder sb = new StringBuilder();
-        for (UUID targetId : getTargets()) {
+        getTargets().forEach((targetId) -> {
             Permanent permanent = game.getPermanent(targetId);
             if (permanent != null) {
                 sb.append(permanent.getLogName()).append('(').append(getTargetAmount(targetId)).append(") ");
             }
-        }
+        });
         return sb.toString();
     }
 

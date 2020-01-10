@@ -52,7 +52,10 @@ public abstract class TargetAmount extends TargetImpl {
 
     @Override
     public boolean doneChosing() {
-        return amountWasSet && remainingAmount == 0;
+        return amountWasSet 
+                && (remainingAmount == 0 
+                    || (getMinNumberOfTargets() < getMaxNumberOfTargets() 
+                        && getTargets().size() >= getMinNumberOfTargets()));
     }
 
     @Override
@@ -85,9 +88,9 @@ public abstract class TargetAmount extends TargetImpl {
 
     @Override
     public void remove(UUID id) {
-        int amount = getTargetAmount(id);
+        int usedAmount = getTargetAmount(id);
         super.remove(id);
-        this.remainingAmount += amount;
+        this.remainingAmount += usedAmount;
     }
 
     @Override
@@ -95,16 +98,16 @@ public abstract class TargetAmount extends TargetImpl {
         if (!amountWasSet) {
             setAmount(source, game);
         }
-        chosen = remainingAmount == 0;
+        chosen = isChosen();
         while (remainingAmount > 0) {
-            if (!getTargetController(game, playerId).chooseTargetAmount(outcome, this, source, game)) {
+            if (!getTargetController(game, playerId).chooseTargetAmount(outcome, this, source, game)) {                
                 return chosen;
             }
-            chosen = remainingAmount == 0;
+            chosen = isChosen();
         }
         return chosen = true;
     }
-
+    
     @Override
     public List<? extends TargetAmount> getTargetOptions(Ability source, Game game) {
         List<TargetAmount> options = new ArrayList<>();
