@@ -1604,6 +1604,11 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         player.addTarget("targetPlayer=" + targetPlayer.getName());
     }
 
+    public void addTargetAmount(TestPlayer player, String target, int amount) {
+        player.addTargetAmount(target, amount);
+    }
+    
+    
     public void setDecknamePlayerA(String deckname) {
         deckNameA = deckname;
     }

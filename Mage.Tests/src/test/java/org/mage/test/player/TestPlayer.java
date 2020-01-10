@@ -2,6 +2,7 @@ package org.mage.test.player;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -16,6 +17,7 @@ import mage.abilities.costs.Costs;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.mana.ManaOptions;
 import mage.cards.Card;
@@ -70,7 +72,7 @@ import static org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl.*;
 @Ignore
 public class TestPlayer implements Player {
 
-    private static final Logger logger = Logger.getLogger(TestPlayer.class);
+    private static final Logger LOGGER = Logger.getLogger(TestPlayer.class);
 
     public static final String TARGET_SKIP = "[target_skip]";
     public static final String BLOCK_SKIP = "[block_skip]";
@@ -82,6 +84,7 @@ public class TestPlayer implements Player {
     private final List<PlayerAction> actions = new ArrayList<>();
     private final List<String> choices = new ArrayList<>(); // choices stack for choice
     private final List<String> targets = new ArrayList<>(); // targets stack for choose (it's uses on empty direct target by cast command)
+    private final LinkedHashMap<String, Integer> targetsAmount = new LinkedHashMap<>(); // targets and amounts for targets that also need to set an amount    
     private final Map<String, UUID> aliases = new HashMap<>(); // aliases for game objects/players (use it for cards with same name to save and use)
     private final List<String> modesSet = new ArrayList<>();
 
@@ -153,6 +156,16 @@ public class TestPlayer implements Player {
         targets.add(target);
     }
 
+    /**
+     * Sets the data for TargetAmount classes that include also an amount beside the target like TargetPermanentAmount
+     * 
+     * @param targetName
+     * @param amount 
+     */
+    public void addTargetAmount(String targetName, Integer amount) {
+        targetsAmount.put(targetName, amount);
+    }
+        
     public void addAlias(String name, UUID Id) {
         aliases.put(name, Id);
     }
@@ -3277,59 +3290,40 @@ public class TestPlayer implements Player {
         return computerPlayer.choose(outcome, cards, target, game);
     }
 
-    @Override
+   @Override
     public boolean chooseTargetAmount(Outcome outcome, TargetAmount target,
-            Ability source, Game game
+                                      Ability source, Game game
     ) {
-        // command format: targetName^X=3
-
-        // chooseTargetAmount calls by TargetAmount for EACH target cycle
-        Assert.assertTrue("chooseTargetAmount supports only one target, but found " + target.getMaxNumberOfTargets(), target.getMaxNumberOfTargets() <= 1);
-        Assert.assertNotEquals("chooseTargetAmount need remaining > 0", 0, target.getAmountRemaining());
-
-        if (!targets.isEmpty()) {
-
-            boolean founded = false;
-            String foundedRecord = "";
-            CheckTargets:
-            for (String targetRecord : targets) {
-                String[] choiceSettings = targetRecord.split("\\^");
-                if (choiceSettings.length == 2 && choiceSettings[1].startsWith("X=")) {
-                    // can choice
-                    String choiceName = choiceSettings[0];
-                    int choiceAmount = Integer.parseInt(choiceSettings[1].substring(2));
-
-                    Assert.assertNotEquals("choice amount must be not zero", 0, choiceAmount);
-                    Assert.assertTrue("choice amount " + choiceAmount + "must be <= remaining " + target.getAmountRemaining(), choiceAmount <= target.getAmountRemaining());
-
-                    for (UUID possibleTarget : target.possibleTargets(source.getSourceId(), source.getControllerId(), game)) {
-                        MageObject objectPermanent = game.getObject(possibleTarget);
-                        Player objectPlayer = game.getPlayer(possibleTarget);
-                        String objectName = objectPermanent != null ? objectPermanent.getName() : objectPlayer.getName();
-                        if (objectName.equals(choiceName)) {
-                            if (!target.getTargets().contains(possibleTarget) && target.canTarget(possibleTarget, source, game)) {
-                                // can select
-                                target.addTarget(possibleTarget, choiceAmount, source, game);
-                                founded = true;
-                                foundedRecord = targetRecord;
-                                break CheckTargets;
+        if (!targetsAmount.isEmpty()) {
+                for (Iterator<Entry<String, Integer>> iterator = targetsAmount.entrySet().iterator(); iterator.hasNext();) {
+                    Entry<String, Integer> targetRecord = iterator.next();
+                    if (target.getAmountRemaining() > 0) {
+                        target.possibleTargets(source.getSourceId(), source.getControllerId(), game).forEach((possibleTarget) -> {
+                            MageObject objectPermanent = game.getObject(possibleTarget);
+                            Player objectPlayer = game.getPlayer(possibleTarget);
+                            String objectName = objectPermanent != null ? objectPermanent.getName() : objectPlayer.getName();
+                            if (objectName.equals(targetRecord.getKey())) {
+                                if (!target.getTargets().contains(possibleTarget) && target.canTarget(possibleTarget, source, game)) {
+                                    // can select
+                                    target.addTarget(possibleTarget, targetRecord.getValue(), source, game);
+                                    iterator.remove();
+                                }
                             }
-                        }
-                    }
+                        });
                 }
-            }
-
-            if (founded) {
-                // all done
-                targets.remove(foundedRecord);
+            }                
+        }
+        if (!target.isRequired() && target.getAmountRemaining() > 0) {
+            if (strictChooseMode) {
+                target.setAmountDefinition(StaticValue.get(0));
+                target.setAmount(source, game);
                 return true;
             }
         }
-
-        this.chooseStrictModeFailed(game, getInfo(source) + "; " + getInfo(target));
+        this.chooseStrictModeFailed(game, getInfo(source) + "; " + getInfo(target));        
         return computerPlayer.chooseTargetAmount(outcome, target, source, game);
     }
-
+    
     @Override
     public boolean chooseMulligan(Game game
     ) {

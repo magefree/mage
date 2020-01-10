@@ -246,14 +246,14 @@ public class SpellskiteTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Royal Assassin"); // 1/1
         addCard(Zone.BATTLEFIELD, playerB, "Blinking Spirit"); // 2/2
         addCard(Zone.BATTLEFIELD, playerB, "Pearled Unicorn"); // 2/2
-
+        // Fiery Justice deals 5 damage divided as you choose among any number of target creatures and/or players. Target opponent gains 5 life.
         addCard(Zone.HAND, playerA, "Fiery Justice");
 
-        // A cast Fiery Justice
+        // Cast Fiery Justice
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fiery Justice");
         addTarget(playerA, playerB); // 5 life to B
-        addTarget(playerA, "Scute Mob^X=1"); // target 1
-        addTarget(playerA, "Spellskite^X=4"); // target 2
+        addTargetAmount(playerA, "Scute Mob" , 1); // target 1
+        addTargetAmount(playerA, "Spellskite", 4); // target 2
         // B activate Spellskite, but can't change any targets cause it's already targeted
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{U/P}: Change a target", "Fiery Justice", "Fiery Justice");
         setChoice(playerB, "Yes"); // pay 2 life
@@ -288,7 +288,7 @@ public class SpellskiteTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Fiery Justice");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fiery Justice"); // 5 damage distributed to any number of targets
-        addTarget(playerA, "Scute Mob^X=5");
+        addTargetAmount(playerA, "Scute Mob", 5);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{U/P}: Change a target", "Fiery Justice", "Fiery Justice");
         setChoice(playerB, "Yes"); // pay 2 life
@@ -319,9 +319,9 @@ public class SpellskiteTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Fiery Justice");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fiery Justice"); // 5 damage distributed to any number of targets
-        addTarget(playerA, "Royal Assassin^X=1");
-        addTarget(playerA, "Blinking Spirit^X=2");
-        addTarget(playerA, "Pearled Unicorn^X=2");
+        addTargetAmount(playerA, "Royal Assassin",1);
+        addTargetAmount(playerA, "Blinking Spirit",2);
+        addTargetAmount(playerA, "Pearled Unicorn",2);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{U/P}: Change a target", "Fiery Justice", "Fiery Justice");
         setChoice(playerB, "Yes"); // pay 2 life

@@ -43,7 +43,7 @@ public abstract class MageTestBase {
 
     public static PluginClassLoader classLoader = new PluginClassLoader();
 
-    private static final String pluginFolder = "plugins";
+    private static final String PLUGIN_FOLDER = "plugins";
 
     protected Pattern pattern = Pattern.compile("([a-zA-Z]*):([\\w]*):([a-zA-Z ,\\-.!'\\d]*):([\\d]*)(:\\{tapped\\})?");
 
@@ -88,7 +88,7 @@ public abstract class MageTestBase {
     /**
      * Expected results of the test. Read from test case in {@link String} based
      * format:
-     * <p/>
+     * <p></p>
      * Example: turn:1 result:won:ComputerA life:ComputerA:20 life:ComputerB:0
      * battlefield:ComputerB:Tine Shrike:0 graveyard:ComputerB:Tine Shrike:1
      */
@@ -103,24 +103,25 @@ public abstract class MageTestBase {
         logger.info("Logging level: " + logger.getLevel());
         deleteSavedGames();
         ConfigSettings config = ConfigSettings.instance;
-        for (GamePlugin plugin : config.getGameTypes()) {
-            GameFactory.instance.addGameType(plugin.getName(), loadGameType(plugin), loadPlugin(plugin));
-        }
-        for (GamePlugin plugin : config.getTournamentTypes()) {
-            TournamentFactory.instance.addTournamentType(plugin.getName(), loadTournamentType(plugin), loadPlugin(plugin));
-        }
-        for (Plugin plugin : config.getPlayerTypes()) {
-            PlayerFactory.instance.addPlayerType(plugin.getName(), loadPlugin(plugin));
-        }
+        config.getGameTypes().forEach((gameType) -> {
+            GameFactory.instance.addGameType(gameType.getName(), loadGameType(gameType), loadPlugin(gameType));
+        });
+        config.getTournamentTypes().forEach((tournamentType) -> {
+            TournamentFactory.instance.addTournamentType(tournamentType.getName(), loadTournamentType(tournamentType), loadPlugin(tournamentType));
+        });
+        config.getPlayerTypes().forEach((playerType) -> {
+            PlayerFactory.instance.addPlayerType(playerType.getName(), loadPlugin(playerType));
+        });
 //        for (Plugin plugin : config.getDeckTypes()) {
 //            DeckValidatorFactory.getInstance().addDeckType(plugin.getName(), loadPlugin(plugin));
 //        }
         Copier.setLoader(classLoader);
     }
 
+    @SuppressWarnings("UseSpecificCatch")
     private static Class<?> loadPlugin(Plugin plugin) {
         try {
-            classLoader.addURL(new File(pluginFolder + '/' + plugin.getJar()).toURI().toURL());
+            classLoader.addURL(new File(PLUGIN_FOLDER + '/' + plugin.getJar()).toURI().toURL());
             logger.debug("Loading plugin: " + plugin.getClassName());
             return Class.forName(plugin.getClassName(), true, classLoader);
         } catch (ClassNotFoundException ex) {
@@ -133,11 +134,11 @@ public abstract class MageTestBase {
 
     private static MatchType loadGameType(GamePlugin plugin) {
         try {
-            classLoader.addURL(new File(pluginFolder + '/' + plugin.getJar()).toURI().toURL());
+            classLoader.addURL(new File(PLUGIN_FOLDER + '/' + plugin.getJar()).toURI().toURL());
             logger.debug("Loading game type: " + plugin.getClassName());
             return (MatchType) Class.forName(plugin.getTypeName(), true, classLoader).getConstructor().newInstance();
         } catch (ClassNotFoundException ex) {
-            logger.warn("Game type not found:" + plugin.getJar() + " - check plugin folder");
+            logger.warn("Game type not found:" + plugin.getJar() + " - check plugin folder", ex);
         } catch (Exception ex) {
             logger.fatal("Error loading game type " + plugin.getJar(), ex);
         }
@@ -146,7 +147,7 @@ public abstract class MageTestBase {
 
     private static TournamentType loadTournamentType(GamePlugin plugin) {
         try {
-            classLoader.addURL(new File(pluginFolder + '/' + plugin.getJar()).toURI().toURL());
+            classLoader.addURL(new File(PLUGIN_FOLDER + '/' + plugin.getJar()).toURI().toURL());
             logger.info("Loading tournament type: " + plugin.getClassName());
             return (TournamentType) Class.forName(plugin.getTypeName(), true, classLoader).getConstructor().newInstance();
         } catch (ClassNotFoundException ex) {
