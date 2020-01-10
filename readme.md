@@ -44,6 +44,45 @@ Also there is always a bug thread in the [Official XMage forum](http://www.sligh
 Look [here](http://www.slightlymagic.net/forum/viewtopic.php?f=70&t=13632) for more detailed instructions.
 [Here](http://github.com/magefree/mage/wiki/Release-changes) you can find a log of the latest changes.
 
+## Performance tweaks
+
+If you have a good GPU, it's very likely you'll be able increase performance by **a lot** through extra Java flags.
+
+XMage runs on JRE 8, so [this link](https://docs.oracle.com/javase/8/docs/technotes/guides/2d/flags.html) should give you the available flags.
+
+### How to enable the extra flags
+
+1. Launch XMage
+2. In the menu bar from the launcher, click on "Settings", which will open up the Settings Window
+3. Go to the "Java" tab
+4. You can pass extra flags by editing the "Client java options" text field
+
+### Linux guide
+
+#### Enable OpenGL
+
+[Link](https://docs.oracle.com/javase/8/docs/technotes/guides/2d/flags.html#opengl)
+
+`-Dsun.java2d.opengl=true`
+
+_**Caveat**_: [There's a bug](https://bugs.openjdk.java.net/browse/JDK-6545140) with the file chooser when OpenGL is enabled (you use the file chooser when you, for instance, try to load a deck from disk). The [suggested workaround](https://bugs.java.com/bugdatabase/view_bug.do?bug_id=6439320) will make the game crash, so it's not an option.
+
+_**Workaround**_: When using [i3](https://github.com/i3/i3), you're able to work around the bug by toggling the "floating" capabilities of the window and forcing it to re-render.
+
+#### Enable XRender
+
+[Link](https://docs.oracle.com/javase/8/docs/technotes/guides/2d/flags.html#xrender)
+
+`-Dsun.java2d.xrender=true`
+
+#### Bigger upfront heap size
+
+[SO explanation](https://stackoverflow.com/a/57839720/8401696)
+
+This is not guaranteed to yield improvements, but it depends on your use-case. If you have a lot of RAM to spare, you might as well increase the initial heap size for good measure.
+
+`-Xms1G -Xmx2G`
+
 ## Developer
 
 If you are interested in developing XMage, here are some useful resources:
