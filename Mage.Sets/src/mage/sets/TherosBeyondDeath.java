@@ -86,6 +86,7 @@ public final class TherosBeyondDeath extends ExpansionSet {
         cards.add(new SetCardInfo("Grasping Giant", 288, Rarity.RARE, mage.cards.g.GraspingGiant.class));
         cards.add(new SetCardInfo("Gray Merchant of Asphodel", 99, Rarity.UNCOMMON, mage.cards.g.GrayMerchantOfAsphodel.class));
         cards.add(new SetCardInfo("Haktos the Unscarred", 218, Rarity.RARE, mage.cards.h.HaktosTheUnscarred.class));
+        cards.add(new SetCardInfo("Hateful Eidolon", 101, Rarity.UNCOMMON, mage.cards.h.HatefulEidolon.class));
         cards.add(new SetCardInfo("Heliod's Intervention", 19, Rarity.RARE, mage.cards.h.HeliodsIntervention.class));
         cards.add(new SetCardInfo("Heliod's Pilgrim", 20, Rarity.COMMON, mage.cards.h.HeliodsPilgrim.class));
         cards.add(new SetCardInfo("Heliod, Sun-Crowned", 18, Rarity.MYTHIC, mage.cards.h.HeliodSunCrowned.class));
