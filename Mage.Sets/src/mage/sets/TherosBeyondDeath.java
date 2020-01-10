@@ -181,6 +181,7 @@ public final class TherosBeyondDeath extends ExpansionSet {
         cards.add(new SetCardInfo("Thassa's Intervention", 72, Rarity.RARE, mage.cards.t.ThassasIntervention.class));
         cards.add(new SetCardInfo("Thassa's Oracle", 73, Rarity.RARE, mage.cards.t.ThassasOracle.class));
         cards.add(new SetCardInfo("Thassa, Deep-Dwelling", 71, Rarity.MYTHIC, mage.cards.t.ThassaDeepDwelling.class));
+        cards.add(new SetCardInfo("Thaumaturge's Familiar", 238, Rarity.COMMON, mage.cards.t.ThaumaturgesFamiliar.class));
         cards.add(new SetCardInfo("The Akroan War", 124, Rarity.RARE, mage.cards.t.TheAkroanWar.class));
         cards.add(new SetCardInfo("The Binding of the Titans", 166, Rarity.UNCOMMON, mage.cards.t.TheBindingOfTheTitans.class));
         cards.add(new SetCardInfo("The Birth of Meletis", 5, Rarity.UNCOMMON, mage.cards.t.TheBirthOfMeletis.class));
