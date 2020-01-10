@@ -1574,29 +1574,33 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
         }
     }
-
-    @Override
+   @Override
     public LinkedHashMap<UUID, ActivatedAbility> getUseableActivatedAbilities(MageObject object, Zone zone, Game game) {
         // TODO: replace with getPlayableFromNonHandCardAll (uses for all tests)
+        boolean previousState = game.inCheckPlayableState();
         game.setCheckPlayableState(true);
         LinkedHashMap<UUID, ActivatedAbility> useable = new LinkedHashMap<>();
         if (object instanceof StackAbility) { // It may not be possible to activate abilities of stack abilities
             return useable;
         }
-        if (object instanceof SplitCard) {
+        if (object instanceof SplitCard) { // TODO: use of getAbilities(game)
             SplitCard splitCard = (SplitCard) object;
             getUseableActivatedAbilitiesHalfImpl(splitCard.getLeftHalfCard(),
-                    zone, game, splitCard.getLeftHalfCard().getAbilities(), useable);
+                    zone, game, splitCard.getLeftHalfCard().getAbilities(game), useable);
             getUseableActivatedAbilitiesHalfImpl(splitCard.getRightHalfCard(),
-                    zone, game, splitCard.getRightHalfCard().getAbilities(), useable);
+                    zone, game, splitCard.getRightHalfCard().getAbilities(game), useable);
             getUseableActivatedAbilitiesHalfImpl(splitCard,
                     zone, game, splitCard.getSharedAbilities(), useable);
-        } else {
+        } else if (object instanceof Card){
+            getUseableActivatedAbilitiesHalfImpl(object,
+                    zone, game, ((Card)object).getAbilities(game), useable);
+        } else if (object != null) {
             getUseableActivatedAbilitiesHalfImpl(object,
                     zone, game, object.getAbilities(), useable);
+            getOtherUseableActivatedAbilities(object, zone, game, useable);
         }
-        getOtherUseableActivatedAbilities(object, zone, game, useable);
-        game.setCheckPlayableState(false);
+        
+        game.setCheckPlayableState(previousState);
         return useable;
     }
 
