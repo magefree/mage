@@ -205,6 +205,7 @@ public final class TherosBeyondDeath extends ExpansionSet {
         cards.add(new SetCardInfo("Tymaret Calls the Dead", 118, Rarity.RARE, mage.cards.t.TymaretCallsTheDead.class));
         cards.add(new SetCardInfo("Tymaret, Chosen from Death", 119, Rarity.UNCOMMON, mage.cards.t.TymaretChosenFromDeath.class));
         cards.add(new SetCardInfo("Underworld Breach", 161, Rarity.RARE, mage.cards.u.UnderworldBreach.class));
+        cards.add(new SetCardInfo("Underworld Charger", 120, Rarity.COMMON, mage.cards.u.UnderworldCharger.class));
         cards.add(new SetCardInfo("Underworld Dreams", 121, Rarity.UNCOMMON, mage.cards.u.UnderworldDreams.class));
         cards.add(new SetCardInfo("Underworld Rage-Hound", 163, Rarity.COMMON, mage.cards.u.UnderworldRageHound.class));
         cards.add(new SetCardInfo("Underworld Sentinel", 293, Rarity.RARE, mage.cards.u.UnderworldSentinel.class));
