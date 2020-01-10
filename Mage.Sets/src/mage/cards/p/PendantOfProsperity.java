@@ -26,6 +26,7 @@ import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
+import mage.abilities.effects.common.EntersBattlefieldUnderControlOfOpponentOfChoiceEffect;
 
 import static mage.constants.Outcome.Benefit;
 
@@ -38,7 +39,7 @@ public final class PendantOfProsperity extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // Pendant of Prosperity enters the battlefield under the control of an opponent of your choice.
-        this.addAbility(new EntersBattlefieldAbility(new PendantOfProsperityETBEffect()));
+        this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldUnderControlOfOpponentOfChoiceEffect()));
 
         // {2}, {T}: Draw a card, then you may put a land card from your hand onto the battlefield. Pendant of Prosperity's owner draws a card, then that player may put a land card from their hand onto the battlefield.
         Ability ability = new SimpleActivatedAbility(new PendantOfProsperityEffect(), new GenericManaCost(2));
@@ -54,49 +55,6 @@ public final class PendantOfProsperity extends CardImpl {
     public PendantOfProsperity copy() {
         return new PendantOfProsperity(this);
     }
-}
-
-class PendantOfProsperityETBEffect extends OneShotEffect {
-
-    PendantOfProsperityETBEffect() {
-        super(Benefit);
-        staticText = "under the control of an opponent of your choice";
-    }
-
-    private PendantOfProsperityETBEffect(final PendantOfProsperityETBEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public PendantOfProsperityETBEffect copy() {
-        return new PendantOfProsperityETBEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-        Target target = new TargetOpponent();
-        target.setNotTarget(true);
-        if (!controller.choose(Benefit, target, source.getSourceId(), game)) {
-            return false;
-        }
-        Player player = game.getPlayer(target.getFirstTarget());
-        if (player == null) {
-            return false;
-        }
-        ContinuousEffect continuousEffect = new GainControlTargetEffect(
-                Duration.WhileOnBattlefield, true, player.getId()
-        );
-        continuousEffect.setTargetPointer(new FixedTarget(
-                source.getSourceId(), source.getSourceObjectZoneChangeCounter()
-        ));
-        game.addEffect(continuousEffect, source);
-        return true;
-    }
-
 }
 
 class PendantOfProsperityEffect extends OneShotEffect {
