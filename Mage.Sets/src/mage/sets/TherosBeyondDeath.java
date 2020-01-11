@@ -209,6 +209,7 @@ public final class TherosBeyondDeath extends ExpansionSet {
         cards.add(new SetCardInfo("Shimmerwing Chimera", 64, Rarity.UNCOMMON, mage.cards.s.ShimmerwingChimera.class));
         cards.add(new SetCardInfo("Shoal Kraken", 65, Rarity.UNCOMMON, mage.cards.s.ShoalKraken.class));
         cards.add(new SetCardInfo("Siona, Captain of the Pyleas", 226, Rarity.UNCOMMON, mage.cards.s.SionaCaptainOfThePyleas.class));
+        cards.add(new SetCardInfo("Skola Grovedancer", 202, Rarity.COMMON, mage.cards.s.SkolaGrovedancer.class));
         cards.add(new SetCardInfo("Skophos Maze-Warden", 153, Rarity.UNCOMMON, mage.cards.s.SkophosMazeWarden.class));
         cards.add(new SetCardInfo("Skophos Warleader", 154, Rarity.COMMON, mage.cards.s.SkophosWarleader.class));
         cards.add(new SetCardInfo("Slaughter-Priest of Mogis", 227, Rarity.UNCOMMON, mage.cards.s.SlaughterPriestOfMogis.class));

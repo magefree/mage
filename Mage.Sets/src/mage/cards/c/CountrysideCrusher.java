@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -9,19 +8,16 @@ import mage.abilities.common.PutCardIntoGraveFromAnywhereAllTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.*;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.common.FilterLandCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class CountrysideCrusher extends CardImpl {
@@ -35,16 +31,19 @@ public final class CountrysideCrusher extends CardImpl {
         this.toughness = new MageInt(3);
 
         // At the beginning of your upkeep, reveal the top card of your library. If it's a land card, put it into your graveyard and repeat this process.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CountrysideCrusherEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
+                new CountrysideCrusherEffect(), TargetController.YOU, false
+        ));
+
         // Whenever a land card is put into your graveyard from anywhere, put a +1/+1 counter on Countryside Crusher.
         this.addAbility(new PutCardIntoGraveFromAnywhereAllTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                false, new FilterLandCard("a land card"), TargetController.YOU
+                false, StaticFilters.FILTER_CARD_LAND_A, TargetController.YOU
         ));
 
     }
 
-    public CountrysideCrusher(final CountrysideCrusher card) {
+    private CountrysideCrusher(final CountrysideCrusher card) {
         super(card);
     }
 
@@ -56,12 +55,12 @@ public final class CountrysideCrusher extends CardImpl {
 
 class CountrysideCrusherEffect extends OneShotEffect {
 
-    public CountrysideCrusherEffect() {
+    CountrysideCrusherEffect() {
         super(Outcome.Discard);
         this.staticText = "reveal the top card of your library. If it's a land card, put it into your graveyard and repeat this process";
     }
 
-    public CountrysideCrusherEffect(final CountrysideCrusherEffect effect) {
+    private CountrysideCrusherEffect(final CountrysideCrusherEffect effect) {
         super(effect);
     }
 
@@ -74,19 +73,19 @@ class CountrysideCrusherEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (controller != null && sourcePermanent != null) {
-            Cards cards = new CardsImpl();
-            for (Card card : controller.getLibrary().getCards(game)) {
-                cards.add(card);
-                if (card.isLand()) {
-                    controller.moveCards(card, Zone.GRAVEYARD, source, game);
-                } else {
-                    break;
-                }
-            }
-            controller.revealCards(sourcePermanent.getName(), cards, game);
-            return true;
+        if (controller == null || sourcePermanent == null) {
+            return false;
         }
-        return false;
+        Cards cards = new CardsImpl();
+        for (Card card : controller.getLibrary().getCards(game)) {
+            cards.add(card);
+            if (card.isLand()) {
+                controller.moveCards(card, Zone.GRAVEYARD, source, game);
+            } else {
+                break;
+            }
+        }
+        controller.revealCards(sourcePermanent.getName(), cards, game);
+        return true;
     }
 }
