@@ -43,6 +43,7 @@ public final class TherosBeyondDeath extends ExpansionSet {
         cards.add(new SetCardInfo("Athreos, Shroud-Veiled", 269, Rarity.MYTHIC, mage.cards.a.AthreosShroudVeiled.class));
         cards.add(new SetCardInfo("Atris, Oracle of Half-Truths", 209, Rarity.RARE, mage.cards.a.AtrisOracleOfHalfTruths.class));
         cards.add(new SetCardInfo("Banishing Light", 4, Rarity.UNCOMMON, mage.cards.b.BanishingLight.class));
+        cards.add(new SetCardInfo("Blight-Breath Catoblepas", 86, Rarity.COMMON, mage.cards.b.BlightBreathCatoblepas.class));
         cards.add(new SetCardInfo("Blood Aspirant", 128, Rarity.UNCOMMON, mage.cards.b.BloodAspirant.class));
         cards.add(new SetCardInfo("Brine Giant", 44, Rarity.COMMON, mage.cards.b.BrineGiant.class));
         cards.add(new SetCardInfo("Bronze Sword", 232, Rarity.COMMON, mage.cards.b.BronzeSword.class));
