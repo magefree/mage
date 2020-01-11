@@ -31,7 +31,7 @@ public final class MischievousChimera extends CardImpl {
 
         // Whenever you cast your first spell during each opponent's turn, Mischievous Chimera deals 1 damage to each opponent. Scry 1.
         Ability ability = new FirstSpellOpponentsTurnTriggeredAbility(
-                new DamagePlayersEffect(1, TargetController.YOU), false
+                new DamagePlayersEffect(1, TargetController.OPPONENT), false
         );
         ability.addEffect(new ScryEffect(1).setText("Scry 1"));
         this.addAbility(ability);
