@@ -184,6 +184,7 @@ public final class TherosBeyondDeath extends ExpansionSet {
         cards.add(new SetCardInfo("Plummet", 194, Rarity.COMMON, mage.cards.p.Plummet.class));
         cards.add(new SetCardInfo("Polukranos, Unchained", 224, Rarity.MYTHIC, mage.cards.p.PolukranosUnchained.class));
         cards.add(new SetCardInfo("Portent of Betrayal", 149, Rarity.COMMON, mage.cards.p.PortentOfBetrayal.class));
+        cards.add(new SetCardInfo("Protean Thaumaturge", 60, Rarity.RARE, mage.cards.p.ProteanThaumaturge.class));
         cards.add(new SetCardInfo("Purphoros's Intervention", 151, Rarity.RARE, mage.cards.p.PurphorossIntervention.class));
         cards.add(new SetCardInfo("Purphoros, Bronze-Blooded", 150, Rarity.MYTHIC, mage.cards.p.PurphorosBronzeBlooded.class));
         cards.add(new SetCardInfo("Rage-Scarred Berserker", 113, Rarity.COMMON, mage.cards.r.RageScarredBerserker.class));
