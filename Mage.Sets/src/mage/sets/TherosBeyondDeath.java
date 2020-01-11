@@ -91,6 +91,7 @@ public final class TherosBeyondDeath extends ExpansionSet {
         cards.add(new SetCardInfo("Favored of Iroas", 15, Rarity.UNCOMMON, mage.cards.f.FavoredOfIroas.class));
         cards.add(new SetCardInfo("Field of Ruin", 242, Rarity.UNCOMMON, mage.cards.f.FieldOfRuin.class));
         cards.add(new SetCardInfo("Final Death", 95, Rarity.COMMON, mage.cards.f.FinalDeath.class));
+        cards.add(new SetCardInfo("Final Flare", 134, Rarity.COMMON, mage.cards.f.FinalFlare.class));
         cards.add(new SetCardInfo("Flicker of Fate", 16, Rarity.COMMON, mage.cards.f.FlickerOfFate.class));
         cards.add(new SetCardInfo("Forest", 254, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Fruit of Tizerus", 96, Rarity.COMMON, mage.cards.f.FruitOfTizerus.class));
