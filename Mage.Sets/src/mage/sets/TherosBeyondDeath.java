@@ -96,6 +96,7 @@ public final class TherosBeyondDeath extends ExpansionSet {
         cards.add(new SetCardInfo("Gallia of the Endless Dance", 217, Rarity.RARE, mage.cards.g.GalliaOfTheEndlessDance.class));
         cards.add(new SetCardInfo("Gift of Strength", 171, Rarity.COMMON, mage.cards.g.GiftOfStrength.class));
         cards.add(new SetCardInfo("Glimpse of Freedom", 50, Rarity.UNCOMMON, mage.cards.g.GlimpseOfFreedom.class));
+        cards.add(new SetCardInfo("Glory Bearers", 17, Rarity.COMMON, mage.cards.g.GloryBearers.class));
         cards.add(new SetCardInfo("Grasping Giant", 288, Rarity.RARE, mage.cards.g.GraspingGiant.class));
         cards.add(new SetCardInfo("Gray Merchant of Asphodel", 99, Rarity.UNCOMMON, mage.cards.g.GrayMerchantOfAsphodel.class));
         cards.add(new SetCardInfo("Grim Physician", 100, Rarity.COMMON, mage.cards.g.GrimPhysician.class));
