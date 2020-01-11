@@ -1,6 +1,6 @@
-
 package mage.cards.h;
 
+import java.util.UUID;
 import mage.ConditionalMana;
 import mage.MageObject;
 import mage.Mana;
@@ -27,8 +27,6 @@ import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
 
-import java.util.UUID;
-
 /**
  *
  * @author jeffwadsworth
@@ -43,7 +41,7 @@ public final class HavenOfTheSpiritDragon extends CardImpl {
     }
 
     public HavenOfTheSpiritDragon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
