@@ -102,7 +102,7 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
         } else {
             sb.append("gains ");
         }
-        sb.append('"' + ability.getRule("this creature") + '"');
+        sb.append('"').append(ability.getRule("this creature")).append('"');
         if (!duration.toString().isEmpty()) {
             sb.append(' ').append(duration.toString());
         }
