@@ -133,6 +133,7 @@ public final class TherosBeyondDeath extends ExpansionSet {
         cards.add(new SetCardInfo("Mindwrack Harpy", 276, Rarity.COMMON, mage.cards.m.MindwrackHarpy.class));
         cards.add(new SetCardInfo("Mire Triton", 105, Rarity.UNCOMMON, mage.cards.m.MireTriton.class));
         cards.add(new SetCardInfo("Mire's Grasp", 106, Rarity.COMMON, mage.cards.m.MiresGrasp.class));
+        cards.add(new SetCardInfo("Mischievous Chimera", 223, Rarity.UNCOMMON, mage.cards.m.MischievousChimera.class));
         cards.add(new SetCardInfo("Mogis's Favor", 107, Rarity.COMMON, mage.cards.m.MogissFavor.class));
         cards.add(new SetCardInfo("Moss Viper", 179, Rarity.COMMON, mage.cards.m.MossViper.class));
         cards.add(new SetCardInfo("Mountain", 253, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
