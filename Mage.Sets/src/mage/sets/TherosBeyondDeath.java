@@ -142,6 +142,7 @@ public final class TherosBeyondDeath extends ExpansionSet {
         cards.add(new SetCardInfo("Naiad of Hidden Coves", 56, Rarity.COMMON, mage.cards.n.NaiadOfHiddenCoves.class));
         cards.add(new SetCardInfo("Nessian Boar", 181, Rarity.RARE, mage.cards.n.NessianBoar.class));
         cards.add(new SetCardInfo("Nessian Wanderer", 183, Rarity.UNCOMMON, mage.cards.n.NessianWanderer.class));
+        cards.add(new SetCardInfo("Nexus Wardens", 184, Rarity.COMMON, mage.cards.n.NexusWardens.class));
         cards.add(new SetCardInfo("Nylea's Forerunner", 186, Rarity.COMMON, mage.cards.n.NyleasForerunner.class));
         cards.add(new SetCardInfo("Nylea's Huntmaster", 187, Rarity.COMMON, mage.cards.n.NyleasHuntmaster.class));
         cards.add(new SetCardInfo("Nylea's Intervention", 188, Rarity.RARE, mage.cards.n.NyleasIntervention.class));
