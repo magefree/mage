@@ -207,6 +207,7 @@ public final class TherosBeyondDeath extends ExpansionSet {
         cards.add(new SetCardInfo("Siona, Captain of the Pyleas", 226, Rarity.UNCOMMON, mage.cards.s.SionaCaptainOfThePyleas.class));
         cards.add(new SetCardInfo("Skophos Maze-Warden", 153, Rarity.UNCOMMON, mage.cards.s.SkophosMazeWarden.class));
         cards.add(new SetCardInfo("Skophos Warleader", 154, Rarity.COMMON, mage.cards.s.SkophosWarleader.class));
+        cards.add(new SetCardInfo("Slaughter-Priest of Mogis", 227, Rarity.UNCOMMON, mage.cards.s.SlaughterPriestOfMogis.class));
         cards.add(new SetCardInfo("Sleep of the Dead", 66, Rarity.COMMON, mage.cards.s.SleepOfTheDead.class));
         cards.add(new SetCardInfo("Soul-Guide Lantern", 237, Rarity.UNCOMMON, mage.cards.s.SoulGuideLantern.class));
         cards.add(new SetCardInfo("Soulreaper of Mogis", 115, Rarity.COMMON, mage.cards.s.SoulreaperOfMogis.class));
@@ -216,6 +217,7 @@ public final class TherosBeyondDeath extends ExpansionSet {
         cards.add(new SetCardInfo("Starlit Mantle", 67, Rarity.COMMON, mage.cards.s.StarlitMantle.class));
         cards.add(new SetCardInfo("Stern Dismissal", 68, Rarity.COMMON, mage.cards.s.SternDismissal.class));
         cards.add(new SetCardInfo("Stinging Lionfish", 69, Rarity.UNCOMMON, mage.cards.s.StingingLionfish.class));
+        cards.add(new SetCardInfo("Storm Herald", 156, Rarity.RARE, mage.cards.s.StormHerald.class));
         cards.add(new SetCardInfo("Storm's Wrath", 157, Rarity.RARE, mage.cards.s.StormsWrath.class));
         cards.add(new SetCardInfo("Sunlit Hoplite", 273, Rarity.COMMON, mage.cards.s.SunlitHoplite.class));
         cards.add(new SetCardInfo("Sunmane Pegasus", 38, Rarity.COMMON, mage.cards.s.SunmanePegasus.class));
