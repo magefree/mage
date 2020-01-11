@@ -172,6 +172,7 @@ public final class TherosBeyondDeath extends ExpansionSet {
         cards.add(new SetCardInfo("Phalanx Tactics", 31, Rarity.UNCOMMON, mage.cards.p.PhalanxTactics.class));
         cards.add(new SetCardInfo("Pharika's Libation", 111, Rarity.COMMON, mage.cards.p.PharikasLibation.class));
         cards.add(new SetCardInfo("Pharika's Spawn", 112, Rarity.UNCOMMON, mage.cards.p.PharikasSpawn.class));
+        cards.add(new SetCardInfo("Pheres-Band Brawler", 193, Rarity.UNCOMMON, mage.cards.p.PheresBandBrawler.class));
         cards.add(new SetCardInfo("Phoenix of Ash", 148, Rarity.RARE, mage.cards.p.PhoenixOfAsh.class));
         cards.add(new SetCardInfo("Pious Wayfarer", 32, Rarity.COMMON, mage.cards.p.PiousWayfarer.class));
         cards.add(new SetCardInfo("Plains", 250, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
