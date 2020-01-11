@@ -391,6 +391,7 @@ public enum SubType {
     ASHIOK("Ashiok", SubTypeSet.PlaneswalkerType),
     AURRA("Aurra", SubTypeSet.PlaneswalkerType, true), // Star Wars
     BOLAS("Bolas", SubTypeSet.PlaneswalkerType),
+    CALIX("Calix", SubTypeSet.PlaneswalkerType),
     CHANDRA("Chandra", SubTypeSet.PlaneswalkerType),
     DACK("Dack", SubTypeSet.PlaneswalkerType),
     DARETTI("Daretti", SubTypeSet.PlaneswalkerType),

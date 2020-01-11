@@ -28,7 +28,7 @@ import java.util.UUID;
 public final class TeferiTimeRaveler extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("sorcery spells");
-    public static final FilterPermanent filter2 = new FilterPermanent("artifact, creature, or enchantment");
+    private static final FilterPermanent filter2 = new FilterPermanent("artifact, creature, or enchantment");
 
     static {
         filter.add(CardType.SORCERY.getPredicate());
