@@ -171,6 +171,7 @@ public final class TherosBeyondDeath extends ExpansionSet {
         cards.add(new SetCardInfo("Riptide Turtle", 61, Rarity.COMMON, mage.cards.r.RiptideTurtle.class));
         cards.add(new SetCardInfo("Rise to Glory", 225, Rarity.UNCOMMON, mage.cards.r.RiseToGlory.class));
         cards.add(new SetCardInfo("Rumbling Sentry", 35, Rarity.COMMON, mage.cards.r.RumblingSentry.class));
+        cards.add(new SetCardInfo("Sage of Mysteries", 62, Rarity.UNCOMMON, mage.cards.s.SageOfMysteries.class));
         cards.add(new SetCardInfo("Satyr's Cunning", 152, Rarity.COMMON, mage.cards.s.SatyrsCunning.class));
         cards.add(new SetCardInfo("Scavenging Harpy", 114, Rarity.COMMON, mage.cards.s.ScavengingHarpy.class));
         cards.add(new SetCardInfo("Sea God's Scorn", 63, Rarity.UNCOMMON, mage.cards.s.SeaGodsScorn.class));
