@@ -1,9 +1,5 @@
-
 package mage.target.common;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.constants.Zone;
@@ -13,8 +9,11 @@ import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.TargetCard;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class TargetCardInHand extends TargetCard {
@@ -43,7 +42,7 @@ public class TargetCardInHand extends TargetCard {
     @Override
     public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
         Card card = game.getPlayer(playerId).getHand().get(id, game);
-        return card != null && filter.match(card, source.getSourceId(), playerId, game);
+        return card != null && filter.match(card, source != null ? source.getSourceId() : null, playerId, game);
     }
 
     @Override
