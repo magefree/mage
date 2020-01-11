@@ -63,6 +63,7 @@ public final class TherosBeyondDeath extends ExpansionSet {
         cards.add(new SetCardInfo("Devourer of Memory", 213, Rarity.UNCOMMON, mage.cards.d.DevourerOfMemory.class));
         cards.add(new SetCardInfo("Discordant Piper", 88, Rarity.COMMON, mage.cards.d.DiscordantPiper.class));
         cards.add(new SetCardInfo("Drag to the Underworld", 89, Rarity.UNCOMMON, mage.cards.d.DragToTheUnderworld.class));
+        cards.add(new SetCardInfo("Dreadful Apathy", 11, Rarity.COMMON, mage.cards.d.DreadfulApathy.class));
         cards.add(new SetCardInfo("Dream Trawler", 214, Rarity.RARE, mage.cards.d.DreamTrawler.class));
         cards.add(new SetCardInfo("Dreamshaper Shaman", 130, Rarity.UNCOMMON, mage.cards.d.DreamshaperShaman.class));
         cards.add(new SetCardInfo("Dreamstalker Manticore", 131, Rarity.UNCOMMON, mage.cards.d.DreamstalkerManticore.class));
