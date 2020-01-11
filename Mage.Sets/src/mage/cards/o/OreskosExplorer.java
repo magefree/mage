@@ -1,7 +1,5 @@
-
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -11,21 +9,25 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.filter.common.FilterLandCard;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class OreskosExplorer extends CardImpl {
 
     public OreskosExplorer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.subtype.add(SubType.CAT);
         this.subtype.add(SubType.SCOUT);
         this.power = new MageInt(2);
@@ -82,10 +84,9 @@ class OreskosExplorerEffect extends OneShotEffect {
         }
         if (landsToSearch > 0) {
             FilterLandCard filterPlains = new FilterLandCard("up to " + landsToSearch + " Plains cards");
-            filterPlains.add(TargetController.YOU.getControllerPredicate());
             filterPlains.add(SubType.PLAINS.getPredicate());
             TargetCardInLibrary target = new TargetCardInLibrary(0, landsToSearch, filterPlains);
-            if (controller.searchLibrary(target, source, game)) {
+            if (controller.searchLibrary(target, source, game, controller.getId())) {
                 Cards cards = new CardsImpl(target.getTargets());
                 controller.revealCards(sourceObject.getIdName(), cards, game);
                 controller.moveCards(cards.getCards(game), Zone.HAND, source, game);
