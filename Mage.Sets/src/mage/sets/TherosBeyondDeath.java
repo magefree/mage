@@ -27,6 +27,7 @@ public final class TherosBeyondDeath extends ExpansionSet {
         this.maxCardNumberInBooster = 254;
 
         cards.add(new SetCardInfo("Acolyte of Affliction", 206, Rarity.UNCOMMON, mage.cards.a.AcolyteOfAffliction.class));
+        cards.add(new SetCardInfo("Alirios, Enraptured", 42, Rarity.UNCOMMON, mage.cards.a.AliriosEnraptured.class));
         cards.add(new SetCardInfo("Allure of the Unknown", 207, Rarity.RARE, mage.cards.a.AllureOfTheUnknown.class));
         cards.add(new SetCardInfo("Alseid of Life's Bounty", 1, Rarity.UNCOMMON, mage.cards.a.AlseidOfLifesBounty.class));
         cards.add(new SetCardInfo("Altar of the Pantheon", 231, Rarity.COMMON, mage.cards.a.AltarOfThePantheon.class));
@@ -94,6 +95,7 @@ public final class TherosBeyondDeath extends ExpansionSet {
         cards.add(new SetCardInfo("Final Death", 95, Rarity.COMMON, mage.cards.f.FinalDeath.class));
         cards.add(new SetCardInfo("Final Flare", 134, Rarity.COMMON, mage.cards.f.FinalFlare.class));
         cards.add(new SetCardInfo("Flicker of Fate", 16, Rarity.COMMON, mage.cards.f.FlickerOfFate.class));
+        cards.add(new SetCardInfo("Flummoxed Cyclops", 135, Rarity.COMMON, mage.cards.f.FlummoxedCyclops.class));
         cards.add(new SetCardInfo("Forest", 254, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Fruit of Tizerus", 96, Rarity.COMMON, mage.cards.f.FruitOfTizerus.class));
         cards.add(new SetCardInfo("Funeral Rites", 97, Rarity.COMMON, mage.cards.f.FuneralRites.class));
@@ -154,6 +156,7 @@ public final class TherosBeyondDeath extends ExpansionSet {
         cards.add(new SetCardInfo("Nadir Kraken", 55, Rarity.RARE, mage.cards.n.NadirKraken.class));
         cards.add(new SetCardInfo("Naiad of Hidden Coves", 56, Rarity.COMMON, mage.cards.n.NaiadOfHiddenCoves.class));
         cards.add(new SetCardInfo("Nessian Boar", 181, Rarity.RARE, mage.cards.n.NessianBoar.class));
+        cards.add(new SetCardInfo("Nessian Hornbeetle", 182, Rarity.UNCOMMON, mage.cards.n.NessianHornbeetle.class));
         cards.add(new SetCardInfo("Nessian Wanderer", 183, Rarity.UNCOMMON, mage.cards.n.NessianWanderer.class));
         cards.add(new SetCardInfo("Nexus Wardens", 184, Rarity.COMMON, mage.cards.n.NexusWardens.class));
         cards.add(new SetCardInfo("Nylea's Forerunner", 186, Rarity.COMMON, mage.cards.n.NyleasForerunner.class));
@@ -186,6 +189,7 @@ public final class TherosBeyondDeath extends ExpansionSet {
         cards.add(new SetCardInfo("Plummet", 194, Rarity.COMMON, mage.cards.p.Plummet.class));
         cards.add(new SetCardInfo("Polukranos, Unchained", 224, Rarity.MYTHIC, mage.cards.p.PolukranosUnchained.class));
         cards.add(new SetCardInfo("Portent of Betrayal", 149, Rarity.COMMON, mage.cards.p.PortentOfBetrayal.class));
+        cards.add(new SetCardInfo("Protean Thaumaturge", 60, Rarity.RARE, mage.cards.p.ProteanThaumaturge.class));
         cards.add(new SetCardInfo("Purphoros's Intervention", 151, Rarity.RARE, mage.cards.p.PurphorossIntervention.class));
         cards.add(new SetCardInfo("Purphoros, Bronze-Blooded", 150, Rarity.MYTHIC, mage.cards.p.PurphorosBronzeBlooded.class));
         cards.add(new SetCardInfo("Rage-Scarred Berserker", 113, Rarity.COMMON, mage.cards.r.RageScarredBerserker.class));
@@ -212,6 +216,7 @@ public final class TherosBeyondDeath extends ExpansionSet {
         cards.add(new SetCardInfo("Shimmerwing Chimera", 64, Rarity.UNCOMMON, mage.cards.s.ShimmerwingChimera.class));
         cards.add(new SetCardInfo("Shoal Kraken", 65, Rarity.UNCOMMON, mage.cards.s.ShoalKraken.class));
         cards.add(new SetCardInfo("Siona, Captain of the Pyleas", 226, Rarity.UNCOMMON, mage.cards.s.SionaCaptainOfThePyleas.class));
+        cards.add(new SetCardInfo("Skola Grovedancer", 202, Rarity.COMMON, mage.cards.s.SkolaGrovedancer.class));
         cards.add(new SetCardInfo("Skophos Maze-Warden", 153, Rarity.UNCOMMON, mage.cards.s.SkophosMazeWarden.class));
         cards.add(new SetCardInfo("Skophos Warleader", 154, Rarity.COMMON, mage.cards.s.SkophosWarleader.class));
         cards.add(new SetCardInfo("Slaughter-Priest of Mogis", 227, Rarity.UNCOMMON, mage.cards.s.SlaughterPriestOfMogis.class));
@@ -274,6 +279,7 @@ public final class TherosBeyondDeath extends ExpansionSet {
         cards.add(new SetCardInfo("Vexing Gull", 79, Rarity.COMMON, mage.cards.v.VexingGull.class));
         cards.add(new SetCardInfo("Victory's Envoy", 289, Rarity.RARE, mage.cards.v.VictorysEnvoy.class));
         cards.add(new SetCardInfo("Voracious Typhon", 203, Rarity.COMMON, mage.cards.v.VoraciousTyphon.class));
+        cards.add(new SetCardInfo("Warbriar Blessing", 204, Rarity.COMMON, mage.cards.w.WarbriarBlessing.class));
         cards.add(new SetCardInfo("Warden of the Chained", 230, Rarity.UNCOMMON, mage.cards.w.WardenOfTheChained.class));
         cards.add(new SetCardInfo("Wavebreak Hippocamp", 80, Rarity.RARE, mage.cards.w.WavebreakHippocamp.class));
         cards.add(new SetCardInfo("Whirlwind Denial", 81, Rarity.UNCOMMON, mage.cards.w.WhirlwindDenial.class));
