@@ -57,6 +57,7 @@ public final class TherosBeyondDeath extends ExpansionSet {
         cards.add(new SetCardInfo("Daybreak Chimera", 10, Rarity.COMMON, mage.cards.d.DaybreakChimera.class));
         cards.add(new SetCardInfo("Deathbellow War Cry", 294, Rarity.RARE, mage.cards.d.DeathbellowWarCry.class));
         cards.add(new SetCardInfo("Demon of Loathing", 292, Rarity.RARE, mage.cards.d.DemonOfLoathing.class));
+        cards.add(new SetCardInfo("Deny the Divine", 47, Rarity.COMMON, mage.cards.d.DenyTheDivine.class));
         cards.add(new SetCardInfo("Destiny Spinner", 168, Rarity.UNCOMMON, mage.cards.d.DestinySpinner.class));
         cards.add(new SetCardInfo("Devourer of Memory", 213, Rarity.UNCOMMON, mage.cards.d.DevourerOfMemory.class));
         cards.add(new SetCardInfo("Discordant Piper", 88, Rarity.COMMON, mage.cards.d.DiscordantPiper.class));
