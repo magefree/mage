@@ -146,6 +146,7 @@ public final class TherosBeyondDeath extends ExpansionSet {
         cards.add(new SetCardInfo("Medomai's Prophecy", 53, Rarity.UNCOMMON, mage.cards.m.MedomaisProphecy.class));
         cards.add(new SetCardInfo("Memory Drain", 54, Rarity.COMMON, mage.cards.m.MemoryDrain.class));
         cards.add(new SetCardInfo("Mindwrack Harpy", 276, Rarity.COMMON, mage.cards.m.MindwrackHarpy.class));
+        cards.add(new SetCardInfo("Minion's Return", 104, Rarity.UNCOMMON, mage.cards.m.MinionsReturn.class));
         cards.add(new SetCardInfo("Mire Triton", 105, Rarity.UNCOMMON, mage.cards.m.MireTriton.class));
         cards.add(new SetCardInfo("Mire's Grasp", 106, Rarity.COMMON, mage.cards.m.MiresGrasp.class));
         cards.add(new SetCardInfo("Mischievous Chimera", 223, Rarity.UNCOMMON, mage.cards.m.MischievousChimera.class));
