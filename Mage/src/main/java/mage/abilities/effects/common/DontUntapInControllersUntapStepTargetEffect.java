@@ -1,5 +1,3 @@
-
-
 package mage.abilities.effects.common;
 
 import java.util.UUID;
@@ -15,7 +13,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
 /**
- * 
+ *
  * @author BetaSteward_at_googlemail.com
  */
 public class DontUntapInControllersUntapStepTargetEffect extends ContinuousRuleModifyingEffectImpl {
@@ -43,7 +41,7 @@ public class DontUntapInControllersUntapStepTargetEffect extends ContinuousRuleM
         MageObject mageObject = game.getObject(source.getSourceId());
         Permanent permanentToUntap = game.getPermanent((event.getTargetId()));
         if (permanentToUntap != null && mageObject != null) {
-            return permanentToUntap.getLogName() + " doesn't untap (" + mageObject.getLogName() + ')';
+            return permanentToUntap.getIdName() + " doesn't untap (" + mageObject.getIdName() + ')';
         }
         return null;
     }
@@ -52,7 +50,7 @@ public class DontUntapInControllersUntapStepTargetEffect extends ContinuousRuleM
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.UNTAP;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (game.getTurn().getStepType() == PhaseStep.UNTAP) {
@@ -70,11 +68,11 @@ public class DontUntapInControllersUntapStepTargetEffect extends ContinuousRuleM
 
     @Override
     public String getText(Mode mode) {
-            if (staticText != null) {
-                return staticText;
-            }
-            return "Target " + mode.getTargets().get(0).getTargetName()
-                    + " doesn't untap during its controller's untap step" + (getDuration().toString().isEmpty() ? "":" " + getDuration());
+        if (staticText != null) {
+            return staticText;
+        }
+        return "Target " + mode.getTargets().get(0).getTargetName()
+                + " doesn't untap during its controller's untap step" + (getDuration().toString().isEmpty() ? "" : " " + getDuration());
     }
 
 }

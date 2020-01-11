@@ -125,6 +125,7 @@ public enum CounterType {
     STORAGE("storage"),
     STRIFE("strife"),
     STUDY("study"),
+    TASK("task"),
     THEFT("theft"),
     TIDE("tide"),
     TIME("time"),

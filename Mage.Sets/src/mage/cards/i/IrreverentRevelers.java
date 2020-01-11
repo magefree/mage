@@ -1,5 +1,6 @@
 package mage.cards.i;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -13,8 +14,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.target.common.TargetArtifactPermanent;
-
-import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -37,6 +36,7 @@ public final class IrreverentRevelers extends CardImpl {
         ability.addMode(new Mode(new GainAbilitySourceEffect(
                 HasteAbility.getInstance(), Duration.EndOfTurn
         )));
+        this.addAbility(ability);
     }
 
     private IrreverentRevelers(final IrreverentRevelers card) {
