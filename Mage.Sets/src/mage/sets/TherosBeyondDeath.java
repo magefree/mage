@@ -190,6 +190,7 @@ public final class TherosBeyondDeath extends ExpansionSet {
         cards.add(new SetCardInfo("Sphinx Mindbreaker", 290, Rarity.RARE, mage.cards.s.SphinxMindbreaker.class));
         cards.add(new SetCardInfo("Staggering Insight", 228, Rarity.UNCOMMON, mage.cards.s.StaggeringInsight.class));
         cards.add(new SetCardInfo("Stampede Rider", 155, Rarity.COMMON, mage.cards.s.StampedeRider.class));
+        cards.add(new SetCardInfo("Stern Dismissal", 68, Rarity.COMMON, mage.cards.s.SternDismissal.class));
         cards.add(new SetCardInfo("Stinging Lionfish", 69, Rarity.UNCOMMON, mage.cards.s.StingingLionfish.class));
         cards.add(new SetCardInfo("Storm's Wrath", 157, Rarity.RARE, mage.cards.s.StormsWrath.class));
         cards.add(new SetCardInfo("Sunlit Hoplite", 273, Rarity.COMMON, mage.cards.s.SunlitHoplite.class));
