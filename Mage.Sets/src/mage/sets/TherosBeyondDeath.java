@@ -75,6 +75,7 @@ public final class TherosBeyondDeath extends ExpansionSet {
         cards.add(new SetCardInfo("Elspeth's Nightmare", 91, Rarity.UNCOMMON, mage.cards.e.ElspethsNightmare.class));
         cards.add(new SetCardInfo("Elspeth, Sun's Nemesis", 14, Rarity.MYTHIC, mage.cards.e.ElspethSunsNemesis.class));
         cards.add(new SetCardInfo("Elspeth, Undaunted Hero", 270, Rarity.MYTHIC, mage.cards.e.ElspethUndauntedHero.class));
+        cards.add(new SetCardInfo("Enemy of Enlightenment", 92, Rarity.UNCOMMON, mage.cards.e.EnemyOfEnlightenment.class));
         cards.add(new SetCardInfo("Enigmatic Incarnation", 215, Rarity.RARE, mage.cards.e.EnigmaticIncarnation.class));
         cards.add(new SetCardInfo("Entrancing Lyre", 233, Rarity.UNCOMMON, mage.cards.e.EntrancingLyre.class));
         cards.add(new SetCardInfo("Erebos's Intervention", 94, Rarity.RARE, mage.cards.e.ErebossIntervention.class));
