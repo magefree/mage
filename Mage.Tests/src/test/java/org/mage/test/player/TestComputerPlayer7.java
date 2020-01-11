@@ -42,7 +42,7 @@ public class TestComputerPlayer7 extends ComputerPlayer7 {
                 if (!this.testPlayerLink.getChoices().isEmpty()) {
                     MageObject object = game.getObject(ability.getSourceId());
                     if (object != null) {
-                        LinkedHashMap<UUID, ActivatedAbility> useableAbilities = this.getSpellAbilities(object, game.getState().getZone(object.getId()), game);
+                        LinkedHashMap<UUID, ActivatedAbility> useableAbilities = getSpellAbilities(playerId, object, game.getState().getZone(object.getId()), game);
 
                         // left, right or fused cast
                         for (String choose : this.testPlayerLink.getChoices()) {

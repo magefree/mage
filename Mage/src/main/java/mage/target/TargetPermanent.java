@@ -1,8 +1,5 @@
 package mage.target;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.constants.Zone;
@@ -11,8 +8,11 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class TargetPermanent extends TargetObject {
@@ -85,11 +85,11 @@ public class TargetPermanent extends TargetObject {
 
     /**
      * Checks if there are enough {@link Permanent} that can be chosen.
-     *
+     * <p>
      * Takes into account notTarget parameter, in case it's true doesn't check
      * for protection, shroud etc.
      *
-     * @param sourceId the target event source
+     * @param sourceId           the target event source
      * @param sourceControllerId controller of the target event source
      * @param game
      * @return true if enough valid {@link Permanent} exist
@@ -146,6 +146,7 @@ public class TargetPermanent extends TargetObject {
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+        // TODO: check if possible targets works with setTargetController from some cards like Nicol Bolas, Dragon-God
         Set<UUID> possibleTargets = new HashSet<>();
         MageObject targetSource = game.getObject(sourceId);
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game)) {

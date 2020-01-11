@@ -1,13 +1,12 @@
-
 package org.mage.test.cards.continuous;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 public class BoostEnchantedTest extends CardTestPlayerBase {
@@ -35,12 +34,11 @@ public class BoostEnchantedTest extends CardTestPlayerBase {
      * return Ghitu Firebreathing to your hand, the +1/0 goes away on the
      * creature. If you re-cast Ghitu Firebreathing onto the creature, the boost
      * returns.
-     *
+     * <p>
      * Gatherer Rulings: 9/25/2006 If you return Ghitu Firebreathing to its
      * owner's hand while the +1/+0 ability is on the stack, that ability will
      * still give the creature that was last enchanted by Ghitu Firebreathing
      * +1/+0.
-     *
      */
     @Test
     public void testFirebreathingReturnToHand() {
@@ -54,7 +52,7 @@ public class BoostEnchantedTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Firebreathing", "Silvercoat Lion");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Boomerang", "Firebreathing");
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{R}: Enchanted creature", NO_TARGET, "Boomerang");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{R}: Enchanted creature", TestPlayer.NO_TARGET, "Boomerang");
 
         setStopAt(1, PhaseStep.END_COMBAT);
         execute();

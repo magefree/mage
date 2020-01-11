@@ -1,13 +1,12 @@
-
 package org.mage.test.cards.abilities.other;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 public class EndTurnEffectTest extends CardTestPlayerBase {
@@ -16,9 +15,8 @@ public class EndTurnEffectTest extends CardTestPlayerBase {
      * Additional bug: Days Undoing and Sphinx's Tutelage are broken. You
      * shouldn't get triggers off of Tutelage, since the turn ends, but it has
      * you resolve them in your cleanup step.
-     *
+     * <p>
      * http://tabakrules.tumblr.com/post/122350751009/days-undoing-has-been-officially-spoiled-on
-     *
      */
     @Test
     public void testSpellsAffinity() {
@@ -69,7 +67,7 @@ public class EndTurnEffectTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Ice", "Silvercoat Lion");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Time Stop", NO_TARGET, "Ice");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Time Stop", TestPlayer.NO_TARGET, "Ice");
 
         setStopAt(2, PhaseStep.UPKEEP);
         execute();
@@ -105,7 +103,7 @@ public class EndTurnEffectTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Injury", "Silvercoat Lion");
         addTarget(playerA, playerB);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Glorious End", NO_TARGET, "Injury");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Glorious End", TestPlayer.NO_TARGET, "Injury");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -137,7 +135,7 @@ public class EndTurnEffectTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sundial of the Infinite");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Disenchant", "Sundial of the Infinite");
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1},", NO_TARGET, "Disenchant");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1},", TestPlayer.NO_TARGET, "Disenchant");
 
         setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
         execute();

@@ -1969,7 +1969,7 @@ public class HumanPlayer extends PlayerImpl {
             case SPLIT_AFTERMATH:
                 MageObject object = game.getObject(ability.getSourceId());
                 if (object != null) {
-                    LinkedHashMap<UUID, ActivatedAbility> useableAbilities = getSpellAbilities(object, game.getState().getZone(object.getId()), game);
+                    LinkedHashMap<UUID, ActivatedAbility> useableAbilities = getSpellAbilities(playerId, object, game.getState().getZone(object.getId()), game);
                     if (useableAbilities != null
                             && useableAbilities.size() == 1) {
                         return (SpellAbility) useableAbilities.values().iterator().next();
@@ -2009,7 +2009,7 @@ public class HumanPlayer extends PlayerImpl {
 
         MageObject object = game.getObject(card.getId());
         if (object != null) {
-            LinkedHashMap<UUID, ActivatedAbility> useableAbilities = getSpellAbilities(object, game.getState().getZone(object.getId()), game);
+            LinkedHashMap<UUID, ActivatedAbility> useableAbilities = getSpellAbilities(playerId, object, game.getState().getZone(object.getId()), game);
             if (useableAbilities != null
                     && useableAbilities.size() == 1) {
                 return (SpellAbility) useableAbilities.values().iterator().next();

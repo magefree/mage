@@ -1,14 +1,13 @@
-
 package org.mage.test.cards.enchantments;
 
 import mage.constants.PhaseStep;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 public class SpreadingSeasTest extends CardTestPlayerBase {
@@ -17,7 +16,7 @@ public class SpreadingSeasTest extends CardTestPlayerBase {
      * Played Spreading Seas on opps manland (e.g. Blinkmoth Nexus) . He
      * activated it on response, seas resolves but the manland loses creature
      * type what should not happened.
-     *
+     * <p>
      * 305.7. If an effect changes a land's subtype to one or more of the basic
      * land types, the land no longer has its old land type. It loses all
      * abilities generated from its rules text and its old land types, and it
@@ -28,7 +27,6 @@ public class SpreadingSeasTest extends CardTestPlayerBase {
      * snow) the land may have. If a land gains one or more land types in
      * addition to its own, it keeps its land types and rules text, and it gains
      * the new land types and mana abilities.
-     *
      */
     @Test
     public void testCreatureTypeStays() {
@@ -46,7 +44,7 @@ public class SpreadingSeasTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spreading Seas", "Blinkmoth Nexus");
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}:", NO_TARGET, "Spreading Seas");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}:", TestPlayer.NO_TARGET, "Spreading Seas");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

@@ -251,13 +251,15 @@ public class SpellskiteTest extends CardTestPlayerBase {
 
         // Cast Fiery Justice
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fiery Justice");
-        addTarget(playerA, playerB); // 5 life to B
-        addTargetAmount(playerA, "Scute Mob" , 1); // target 1
+        addTargetAmount(playerA, "Scute Mob", 1); // target 1
         addTargetAmount(playerA, "Spellskite", 4); // target 2
+        addTarget(playerA, playerB); // 5 life to B
+
         // B activate Spellskite, but can't change any targets cause it's already targeted
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{U/P}: Change a target", "Fiery Justice", "Fiery Justice");
         setChoice(playerB, "Yes"); // pay 2 life
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
         assertAllCommandsUsed();
@@ -319,9 +321,9 @@ public class SpellskiteTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Fiery Justice");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fiery Justice"); // 5 damage distributed to any number of targets
-        addTargetAmount(playerA, "Royal Assassin",1);
-        addTargetAmount(playerA, "Blinking Spirit",2);
-        addTargetAmount(playerA, "Pearled Unicorn",2);
+        addTargetAmount(playerA, "Royal Assassin", 1);
+        addTargetAmount(playerA, "Blinking Spirit", 2);
+        addTargetAmount(playerA, "Pearled Unicorn", 2);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{U/P}: Change a target", "Fiery Justice", "Fiery Justice");
         setChoice(playerB, "Yes"); // pay 2 life

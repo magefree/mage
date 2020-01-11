@@ -6,6 +6,7 @@ import mage.filter.Filter;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -100,7 +101,7 @@ public class MorphTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pine Walker");
         setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Icefeather Aven", NO_TARGET, "Pine Walker", StackClause.WHILE_NOT_ON_STACK);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Icefeather Aven", TestPlayer.NO_TARGET, "Pine Walker", StackClause.WHILE_NOT_ON_STACK);
         setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
 
         attack(3, playerA, EmptyNames.FACE_DOWN_CREATURE.toString());
@@ -359,7 +360,7 @@ public class MorphTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sagu Mauler");
         setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sagu Mauler", NO_TARGET, "Sagu Mauler", StackClause.WHILE_NOT_ON_STACK);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sagu Mauler", TestPlayer.NO_TARGET, "Sagu Mauler", StackClause.WHILE_NOT_ON_STACK);
         setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
 
         // showBattlefield("A battle", 1, PhaseStep.POSTCOMBAT_MAIN, playerA);

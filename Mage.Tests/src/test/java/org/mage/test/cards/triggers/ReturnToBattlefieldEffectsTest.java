@@ -1,13 +1,12 @@
-
 package org.mage.test.cards.triggers;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 public class ReturnToBattlefieldEffectsTest extends CardTestPlayerBase {
@@ -149,7 +148,7 @@ public class ReturnToBattlefieldEffectsTest extends CardTestPlayerBase {
         attack(2, playerB, "Reassembling Skeleton");
         block(2, playerA, "Necroskitter", "Reassembling Skeleton");
 
-        activateAbility(2, PhaseStep.COMBAT_DAMAGE, playerB, "{1}{B}: Return", NO_TARGET, "Whenever a creature");
+        activateAbility(2, PhaseStep.COMBAT_DAMAGE, playerB, "{1}{B}: Return", TestPlayer.NO_TARGET, "Whenever a creature");
 
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
 

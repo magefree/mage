@@ -1,13 +1,12 @@
-
 package org.mage.test.cards.replacement;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 public class HallowedMoonlightTest extends CardTestPlayerBase {
@@ -72,7 +71,7 @@ public class HallowedMoonlightTest extends CardTestPlayerBase {
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Rally the Ancestors");
         setChoice(playerB, "X=4");
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Hallowed Moonlight", NO_TARGET, "Rally the Ancestors");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Hallowed Moonlight", TestPlayer.NO_TARGET, "Rally the Ancestors");
 
         setStopAt(2, PhaseStep.END_TURN);
         execute();

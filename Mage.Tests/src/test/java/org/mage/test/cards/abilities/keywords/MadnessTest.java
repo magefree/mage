@@ -1,4 +1,3 @@
-
 package org.mage.test.cards.abilities.keywords;
 
 import mage.abilities.keyword.HasteAbility;
@@ -8,7 +7,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author BetaSteward
  */
 public class MadnessTest extends CardTestPlayerBase {
@@ -37,7 +35,6 @@ public class MadnessTest extends CardTestPlayerBase {
      * Raven's Crime B Sorcery Target player discards a card. Retrace (You may
      * cast this card from your graveyard by discarding a land card in addition
      * to paying its other costs.)
-     *
      */
     @Test
     public void testMadness() {
@@ -47,10 +44,13 @@ public class MadnessTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Raven's Crime");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Raven's Crime", playerA);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, "Yes"); // use madness triggered ability
+        setChoice(playerA, "Yes"); // use madness cast
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Arrogant Wurm", 1);
         assertGraveyardCount(playerA, "Raven's Crime", 1);
@@ -68,8 +68,10 @@ public class MadnessTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Raven's Crime", playerA);
         setChoice(playerA, "No");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Arrogant Wurm", 0);
         assertGraveyardCount(playerA, "Raven's Crime", 1);
@@ -93,10 +95,13 @@ public class MadnessTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Haunting Hymn");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Haunting Hymn", playerA);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, "Yes"); // use madness triggered ability
+        setChoice(playerA, "Yes"); // use madness cast
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
+        setStrictChooseMode(true);
 
         assertGraveyardCount(playerB, "Haunting Hymn", 1);
         assertGraveyardCount(playerB, "Haunting Hymn", 1);
@@ -119,12 +124,15 @@ public class MadnessTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Haunting Hymn");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Haunting Hymn", playerA);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, "Yes"); // use madness triggered ability
+        setChoice(playerA, "Yes"); // use madness cast
         setChoice(playerA, "X=4");
-        addTarget(playerA, "Pillarfield Ox");
+        addTargetAmount(playerA, "Pillarfield Ox", 4);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertGraveyardCount(playerB, "Haunting Hymn", 1);
         assertGraveyardCount(playerA, "Avacyn's Judgment", 1);
@@ -137,7 +145,7 @@ public class MadnessTest extends CardTestPlayerBase {
      * Madness) + Olivia, Mobilized for War - Haste part of the triggered effect
      * may not affect entering Vampire properly, please read further for more
      * details.
-     *
+     * <p>
      * When I cast Falkenrath Gorger and then discarded Asylum Visitor with
      * Olivia, Mobilized for War 's triggered ability, two Madness pop-ups
      * appeared, I have used the first one, Asylum Visitor entered the
@@ -147,7 +155,7 @@ public class MadnessTest extends CardTestPlayerBase {
      * from what I have tested, the choice at this point does not matter).
      * Asylum Visitor lost Haste and was both visually and functionally affected
      * by Summoning Sickness.
-     *
+     * <p>
      * I was able to avoid this issue by cancelling the first Madness pop-up and
      * then using only the second one.
      */
@@ -171,13 +179,17 @@ public class MadnessTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Falkenrath Gorger");
         setChoice(playerA, "Yes"); // Discard a card and put a +1/+1 counter on that creature, it gains haste until end of turn, and it becomes a Vampire in addition to its other types?
         setChoice(playerA, "Asylum Visitor");
-        setChoice(playerA, "Yes"); // When this card is exiled this way, you may cast it by paying {1}{B} instead of putting it into your graveyard.
-        setChoice(playerA, "Yes"); // Cast Asylum Visitor by madness?
+        setChoice(playerA, "Asylum Visitor: Madness {1}{B}"); // choose replacement effect (TODO: 2 same madness effetcs: one from Asylum Visitor, one from Falkenrath -- is that ok?!)
+        //
+        setChoice(playerA, "Yes"); // use madness triggered ability
+        setChoice(playerA, "Yes"); // use madness cast
         setChoice(playerA, "Yes"); // Discard a card and put a +1/+1 counter on that creature, it gains haste until end of turn, and it becomes a Vampire in addition to its other types?
         setChoice(playerA, "Forest");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Falkenrath Gorger", 1);
         assertPermanentCount(playerA, "Asylum Visitor", 1);
@@ -189,6 +201,5 @@ public class MadnessTest extends CardTestPlayerBase {
         assertAbility(playerA, "Asylum Visitor", HasteAbility.getInstance(), true);
 
         assertGraveyardCount(playerA, "Forest", 1);
-
     }
 }

@@ -1,13 +1,12 @@
-
 package org.mage.test.cards.single.lrw;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author Kranken, LevelX2
  */
 
@@ -23,12 +22,12 @@ public class BurrentonForgeTenderTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", "Soldier of the Pantheon");
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sacrifice {this}: Prevent all damage a red source of your choice would deal this turn.", NO_TARGET, "Cast Lightning Bolt");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sacrifice {this}: Prevent all damage a red source of your choice would deal this turn.", TestPlayer.NO_TARGET, "Cast Lightning Bolt");
         playerA.addChoice("Lightning Bolt");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        
+
         assertGraveyardCount(playerB, "Lightning Bolt", 1);
 
         assertGraveyardCount(playerA, "Burrenton Forge-Tender", 1);
@@ -46,15 +45,15 @@ public class BurrentonForgeTenderTest extends CardTestPlayerBase {
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Flametongue Kavu");
         addTarget(playerB, "Soldier of the Pantheon");
-        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Sacrifice {this}: Prevent all damage a red source of your choice would deal this turn.", 
-                NO_TARGET, "When {this} enters the battlefield, {source} deals 4 damage to target creature.");
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Sacrifice {this}: Prevent all damage a red source of your choice would deal this turn.",
+                TestPlayer.NO_TARGET, "When {this} enters the battlefield, {source} deals 4 damage to target creature.");
         playerA.addChoice("Flametongue Kavu");
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertPermanentCount(playerB, "Flametongue Kavu", 1);
-        
+
         assertGraveyardCount(playerA, "Burrenton Forge-Tender", 1);
         assertPermanentCount(playerA, "Soldier of the Pantheon", 1);
     }
@@ -73,24 +72,24 @@ public class BurrentonForgeTenderTest extends CardTestPlayerBase {
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Flametongue Kavu");
         addTarget(playerB, "Soldier of the Pantheon");
-        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Sacrifice {this}: Prevent all damage a red source of your choice would deal this turn.", 
-                NO_TARGET, "When {this} enters the battlefield, {source} deals 4 damage to target creature.");
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Sacrifice {this}: Prevent all damage a red source of your choice would deal this turn.",
+                TestPlayer.NO_TARGET, "When {this} enters the battlefield, {source} deals 4 damage to target creature.");
         playerA.addChoice("Flametongue Kavu");
-        
+
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Cloudshift", "Flametongue Kavu");
         addTarget(playerB, "Soldier of the Pantheon"); // now the damage may not be prevented because it's a new object
-        
+
         setStopAt(2, PhaseStep.END_TURN);
         execute();
 
         assertPermanentCount(playerB, "Flametongue Kavu", 1);
         assertGraveyardCount(playerB, "Cloudshift", 1);
-        
+
         assertGraveyardCount(playerA, "Burrenton Forge-Tender", 1);
         assertGraveyardCount(playerA, "Soldier of the Pantheon", 1);
-    }    
-    
-    
+    }
+
+
     @Test
     public void testPreventDamageFromToken() {
         addCard(Zone.BATTLEFIELD, playerA, "Burrenton Forge-Tender");
@@ -111,26 +110,26 @@ public class BurrentonForgeTenderTest extends CardTestPlayerBase {
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Rite of Replication", "Mogg Fanatic");
         setChoice(playerB, "No"); // no kicker
-        
+
         castSpell(2, PhaseStep.BEGIN_COMBAT, playerA, "Orzhov Charm", "Mogg Fanatic");
         setModeChoice(playerA, "1");
-        
+
         activateAbility(2, PhaseStep.END_COMBAT, playerA, "Sacrifice {this}: Prevent all damage a red source of your choice would deal this turn.");
         playerA.addChoice("Mogg Fanatic");
 
-        activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Sacrifice {this}: {source} deals 1 damage to ","Soldier of the Pantheon");
-        
+        activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Sacrifice {this}: {source} deals 1 damage to ", "Soldier of the Pantheon");
+
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        
+
         assertPermanentCount(playerB, "Mogg Fanatic", 0);
         assertGraveyardCount(playerA, "Orzhov Charm", 1);
         assertHandCount(playerA, "Mogg Fanatic", 1);
         assertGraveyardCount(playerB, "Rite of Replication", 1);
-        
+
         assertGraveyardCount(playerA, "Burrenton Forge-Tender", 1);
         assertPermanentCount(playerA, "Soldier of the Pantheon", 1);
-    }    
-    
+    }
+
 
 }

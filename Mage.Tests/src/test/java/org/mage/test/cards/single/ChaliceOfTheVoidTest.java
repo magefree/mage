@@ -48,14 +48,17 @@ public class ChaliceOfTheVoidTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Chalice of the Void", 1);
 
         addCard(Zone.BATTLEFIELD, playerB, "Island", 1);
+        // Counter target spell with converted mana cost 1.
         addCard(Zone.HAND, playerB, "Mental Misstep", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Chalice of the Void");
         setChoice(playerA, "X=1");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Mental Misstep", "Chalice of the Void", "Chalice of the Void");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
+        // assertAllCommandsUsed(); // cast Mental Misstep must be ignored
 
         assertHandCount(playerB, "Mental Misstep", 1); // cannot be cast because no legal target exists
         assertPermanentCount(playerA, "Chalice of the Void", 1); // was not countered
@@ -81,10 +84,13 @@ public class ChaliceOfTheVoidTest extends CardTestPlayerBase {
 
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Flashback {R}{R}");
         setChoice(playerB, "X=1");
-        addTarget(playerB, playerA);
+        addTargetAmount(playerB, playerA, 1);
+        setChoice(playerB, "Mountain"); // discard 1 card
 
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertExileCount(playerB, "Conflagrate", 1);
         //TODO: Apparently there are two mountains in the graveyard at the end of the test now.

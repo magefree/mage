@@ -1,13 +1,12 @@
-
 package org.mage.test.cards.abilities.activated;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 public class PutToGraveyardTest extends CardTestPlayerBase {
@@ -32,7 +31,7 @@ public class PutToGraveyardTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Stasis Snare");
         addTarget(playerA, "Silvercoat Lion");
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}{G},", NO_TARGET, "");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}{G},", TestPlayer.NO_TARGET, "");
         addTarget(playerA, "Silvercoat Lion");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

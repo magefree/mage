@@ -46,9 +46,6 @@ import java.util.stream.Collectors;
  * @author ayratn
  */
 public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implements CardTestAPI {
-   
-    // Defines the constant if for activate ability is not target but a ability on the stack to define
-    public static final String NO_TARGET = "NO_TARGET";
 
     // TODO: add target player param to commands
     public static final String CHECK_COMMAND_PT = "PT";
@@ -1395,7 +1392,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param player
      * @param cardName
      * @param targetName for modes you can add "mode=3" before target name,
-     *                   multiple targets can be seperated by ^
+     *                   multiple targets can be seperated by ^, not target marks as TestPlayer.NO_TARGET
      */
     public void castSpell(int turnNum, PhaseStep step, TestPlayer player, String cardName, String targetName) {
         //Assert.assertNotEquals("", cardName);
@@ -1604,11 +1601,29 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         player.addTarget("targetPlayer=" + targetPlayer.getName());
     }
 
+    /**
+     * @param player
+     * @param target use TestPlayer.TARGET_SKIP to 0 targets selects or to stop "up two xxx" selection
+     * @param amount
+     */
     public void addTargetAmount(TestPlayer player, String target, int amount) {
-        player.addTargetAmount(target, amount);
+        if (target.equals(TestPlayer.TARGET_SKIP)) {
+            player.addTarget(target);
+        } else {
+            player.addTarget(target + "^X=" + amount);
+        }
     }
-    
-    
+
+    public void addTargetAmount(TestPlayer player, Player targetPlayer, int amount) {
+        addTargetAmount(player, "targetPlayer=" + targetPlayer.getName(), amount);
+    }
+
+
+    public void addTargetAmount(TestPlayer player, String target) {
+        Assert.assertTrue("Only skip command allows here", target.equals(TestPlayer.TARGET_SKIP));
+        addTargetAmount(player, target, 0);
+    }
+
     public void setDecknamePlayerA(String deckname) {
         deckNameA = deckname;
     }
