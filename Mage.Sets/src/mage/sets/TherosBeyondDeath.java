@@ -229,6 +229,7 @@ public final class TherosBeyondDeath extends ExpansionSet {
         cards.add(new SetCardInfo("Thryx, the Sudden Storm", 76, Rarity.RARE, mage.cards.t.ThryxTheSuddenStorm.class));
         cards.add(new SetCardInfo("Thundering Chariot", 239, Rarity.UNCOMMON, mage.cards.t.ThunderingChariot.class));
         cards.add(new SetCardInfo("Towering-Wave Mystic", 77, Rarity.COMMON, mage.cards.t.ToweringWaveMystic.class));
+        cards.add(new SetCardInfo("Transcendent Envoy", 40, Rarity.COMMON, mage.cards.t.TranscendentEnvoy.class));
         cards.add(new SetCardInfo("Traveler's Amulet", 240, Rarity.COMMON, mage.cards.t.TravelersAmulet.class));
         cards.add(new SetCardInfo("Treacherous Blessing", 117, Rarity.RARE, mage.cards.t.TreacherousBlessing.class));
         cards.add(new SetCardInfo("Treeshaker Chimera", 297, Rarity.RARE, mage.cards.t.TreeshakerChimera.class));
