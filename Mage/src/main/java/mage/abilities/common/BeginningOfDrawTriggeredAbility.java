@@ -1,4 +1,3 @@
-
 package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
@@ -86,6 +85,7 @@ public class BeginningOfDrawTriggeredAbility extends TriggeredAbilityImpl {
                 }
                 break;
             case ANY:
+            case ACTIVE:
                 if (getTargets().isEmpty()) {
                     this.getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
                 }
@@ -97,6 +97,8 @@ public class BeginningOfDrawTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         switch (targetController) {
+            case ACTIVE:
+                return "At the beginning of your draw step, " + generateZoneString() + getEffects().getText(modes.getMode());
             case YOU:
                 return "At the beginning of your draw step, " + generateZoneString() + getEffects().getText(modes.getMode());
             case OPPONENT:

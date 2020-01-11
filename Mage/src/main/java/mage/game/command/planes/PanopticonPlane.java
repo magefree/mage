@@ -1,4 +1,3 @@
-
 package mage.game.command.planes;
 
 import java.util.ArrayList;
@@ -22,6 +21,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.Target;
+import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.PlanarRollWatcher;
 
 /**
@@ -36,11 +36,13 @@ public class PanopticonPlane extends Plane {
         this.setName("Plane - Panopticon");
         this.setExpansionSetCodeForImage("PCA");
 
-        // At the beginning of your draw step, draw an additional card.
-        Ability ability = new BeginningOfDrawTriggeredAbility(new DrawCardTargetEffect(1), TargetController.ANY, false);
-        this.getAbilities().add(ability);
+        // When you planeswalk to Panopticon, draw a card
         Ability pwability = new PanopticonTriggeredAbility(new DrawCardTargetEffect(1));
         this.getAbilities().add(pwability);
+
+        // At the beginning of your draw step, draw an additional card.
+        Ability ability = new BeginningOfDrawTriggeredAbility(Zone.COMMAND, new DrawCardTargetEffect(1), TargetController.ACTIVE, false);
+        this.getAbilities().add(ability);
 
         // Active player can roll the planar die: Whenever you roll {CHAOS}, draw a card
         Effect chaosEffect = new DrawCardSourceControllerEffect(1);
@@ -84,7 +86,7 @@ class PanopticonTriggeredAbility extends TriggeredAbilityImpl {
 
         Player activePlayer = game.getPlayer(game.getActivePlayerId());
         if (activePlayer != null) {
-            activePlayer.drawCards(1, game);
+            getEffects().setTargetPointer(new FixedTarget(activePlayer.getId()));
             return true;
         }
         return false;

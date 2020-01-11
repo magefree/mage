@@ -1,15 +1,13 @@
-
 package mage.constants;
 
 /**
  *
  * @author spjspj
  */
-
 public enum PlanarDieRoll {
-    NIL_ROLL ("Nil Roll"),
+    NIL_ROLL("Blank Roll"),
     CHAOS_ROLL("Chaos Roll"),
-    PLANAR_ROLL ("Planar Roll");
+    PLANAR_ROLL("Planar Roll");
 
     private final String text;
 

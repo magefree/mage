@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import java.util.List;
@@ -102,7 +101,6 @@ public class RollPlanarDieEffect extends OneShotEffect {
                 // Steps: 1) Remove the last plane and set its effects to discarded
                 for (CommandObject cobject : game.getState().getCommand()) {
                     if (cobject instanceof Plane) {
-                        game.getState().addSeenPlane((Plane) cobject, game, id);
                         if (((Plane) cobject).getAbilities() != null) {
                             for (Ability ability : ((Plane) cobject).getAbilities()) {
                                 for (Effect effect : ability.getEffects()) {
@@ -153,7 +151,7 @@ public class RollPlanarDieEffect extends OneShotEffect {
         for (int i = 0; i < chaosEffects.size(); i++) {
             Effect effect = chaosEffects.get(i);
             if (effect != null) {
-                try { 
+                try {
                     String emode = effect.getText(mode);
                     emode = emode.substring(0, 1).toLowerCase() + emode.substring(1);
                     sb.append(emode);
