@@ -1,5 +1,6 @@
 package mage.cards.n;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
@@ -7,6 +8,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -17,16 +19,13 @@ import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreatureOrPlaneswalker;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.UUID;
-import mage.MageObject;
-import mage.cards.Card;
+import java.util.*;
 
 /**
  * @author TheElk801
@@ -141,24 +140,47 @@ class NicolBolasDragonGodPlusOneEffect extends OneShotEffect {
             if (opponent == null) {
                 continue;
             }
-            if (opponent.getHand().isEmpty()
-                    || !opponent.chooseUse(outcome, "Exile a card in your hand or a permanent you control?",
-                            null, "Card in hand", "Permanent", source, game)) {
-                TargetPermanent target = new TargetControlledPermanent();
-                target.setNotTarget(true);
-                target.setTargetController(opponentId);
-                if (opponent.choose(outcome, target, source.getSourceId(), game)) {
-                    MageObject mageObject = game.getObject(target.getFirstTarget());
-                    if (mageObject != null
-                            && mageObject instanceof Permanent) {
-                        cardsOnBattlefield.add((Card) mageObject);
+
+            List<Target> possibleTargetTypes = new ArrayList<>();
+            // hand
+            TargetCardInHand targetHand = new TargetCardInHand();
+            if (!opponent.getHand().isEmpty()) {
+                possibleTargetTypes.add(targetHand);
+            }
+            // permanent
+            TargetPermanent targetPermanent = new TargetControlledPermanent();
+            targetPermanent.setNotTarget(true);
+            targetPermanent.setTargetController(opponentId);
+            if (!targetPermanent.possibleTargets(opponentId, game).isEmpty()) {
+                possibleTargetTypes.add(targetPermanent);
+            }
+
+            // choose target type first, AI must use hand first (benefit)
+            if (possibleTargetTypes.size() > 1
+                    && !opponent.chooseUse(Outcome.Benefit, "Exile a card in your hand or a permanent you control?",
+                    null, "Card in hand", "Permanent", source, game)) {
+                Collections.reverse(possibleTargetTypes); // change order (permanent goes first)
+            }
+
+            // choose target
+            for (Target target : possibleTargetTypes) {
+                // hand
+                if (target.equals(targetHand)) {
+                    if (opponent.choose(Outcome.Exile, opponent.getHand(), targetHand, game)
+                            && game.getCard(targetHand.getFirstTarget()) != null) {
+                        cards.add(game.getCard(targetHand.getFirstTarget()));
+                        break;
                     }
                 }
-            } else {
-                TargetCardInHand target = new TargetCardInHand();
-                if (opponent.choose(outcome, opponent.getHand(), target, game)
-                        && game.getCard(target.getFirstTarget()) != null) {
-                    cards.add(game.getCard(target.getFirstTarget()));
+                // permanent
+                if (target.equals(targetPermanent)) {
+                    if (opponent.choose(Outcome.Exile, targetPermanent, source.getSourceId(), game)) {
+                        MageObject mageObject = game.getObject(targetPermanent.getFirstTarget());
+                        if (mageObject instanceof Permanent) {
+                            cardsOnBattlefield.add((Card) mageObject);
+                            break;
+                        }
+                    }
                 }
             }
         }
