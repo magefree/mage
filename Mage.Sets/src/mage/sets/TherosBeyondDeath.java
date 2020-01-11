@@ -149,6 +149,7 @@ public final class TherosBeyondDeath extends ExpansionSet {
         cards.add(new SetCardInfo("Minion's Return", 104, Rarity.UNCOMMON, mage.cards.m.MinionsReturn.class));
         cards.add(new SetCardInfo("Mire Triton", 105, Rarity.UNCOMMON, mage.cards.m.MireTriton.class));
         cards.add(new SetCardInfo("Mire's Grasp", 106, Rarity.COMMON, mage.cards.m.MiresGrasp.class));
+        cards.add(new SetCardInfo("Mirror Shield", 234, Rarity.UNCOMMON, mage.cards.m.MirrorShield.class));
         cards.add(new SetCardInfo("Mischievous Chimera", 223, Rarity.UNCOMMON, mage.cards.m.MischievousChimera.class));
         cards.add(new SetCardInfo("Mogis's Favor", 107, Rarity.COMMON, mage.cards.m.MogissFavor.class));
         cards.add(new SetCardInfo("Moss Viper", 179, Rarity.COMMON, mage.cards.m.MossViper.class));
