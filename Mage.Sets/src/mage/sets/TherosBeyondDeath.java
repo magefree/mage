@@ -123,6 +123,7 @@ public final class TherosBeyondDeath extends ExpansionSet {
         cards.add(new SetCardInfo("Kunoros, Hound of Athreos", 222, Rarity.RARE, mage.cards.k.KunorosHoundOfAthreos.class));
         cards.add(new SetCardInfo("Labyrinth of Skophos", 243, Rarity.RARE, mage.cards.l.LabyrinthOfSkophos.class));
         cards.add(new SetCardInfo("Lagonna-Band Storyteller", 27, Rarity.UNCOMMON, mage.cards.l.LagonnaBandStoryteller.class));
+        cards.add(new SetCardInfo("Lampad of Death's Vigil", 103, Rarity.COMMON, mage.cards.l.LampadOfDeathsVigil.class));
         cards.add(new SetCardInfo("Leonin of the Lost Pride", 28, Rarity.COMMON, mage.cards.l.LeoninOfTheLostPride.class));
         cards.add(new SetCardInfo("Loathsome Chimera", 177, Rarity.COMMON, mage.cards.l.LoathsomeChimera.class));
         cards.add(new SetCardInfo("Mantle of the Wolf", 178, Rarity.RARE, mage.cards.m.MantleOfTheWolf.class));
