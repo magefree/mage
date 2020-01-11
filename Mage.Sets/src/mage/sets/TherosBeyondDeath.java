@@ -48,6 +48,7 @@ public final class TherosBeyondDeath extends ExpansionSet {
         cards.add(new SetCardInfo("Bronze Sword", 232, Rarity.COMMON, mage.cards.b.BronzeSword.class));
         cards.add(new SetCardInfo("Callaphe, Beloved of the Sea", 45, Rarity.UNCOMMON, mage.cards.c.CallapheBelovedOfTheSea.class));
         cards.add(new SetCardInfo("Careless Celebrant", 129, Rarity.UNCOMMON, mage.cards.c.CarelessCelebrant.class));
+        cards.add(new SetCardInfo("Chain to Memory", 46, Rarity.COMMON, mage.cards.c.ChainToMemory.class));
         cards.add(new SetCardInfo("Chainweb Aracnir", 167, Rarity.UNCOMMON, mage.cards.c.ChainwebAracnir.class));
         cards.add(new SetCardInfo("Cling to Dust", 87, Rarity.UNCOMMON, mage.cards.c.ClingToDust.class));
         cards.add(new SetCardInfo("Commanding Presence", 7, Rarity.UNCOMMON, mage.cards.c.CommandingPresence.class));
