@@ -10,6 +10,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -56,7 +57,7 @@ public final class AhnCropInvader extends CardImpl {
                         "As long as it's your turn, "
                                 + "{this} has first strike."
                 )
-        ));
+        ).addHint(MyTurnHint.instance));
 
         // {1}, Sacrifice another creature: Ahn-Crop Invader gets +2/+0 until end of turn.
         Ability ability = new SimpleActivatedAbility(

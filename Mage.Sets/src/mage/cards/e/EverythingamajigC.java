@@ -11,6 +11,7 @@ import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
+import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -36,10 +37,11 @@ public final class EverythingamajigC extends CardImpl {
         this.addAbility(new ManaScrewAbility());
 
         // Disrupting Scepter
-        // 3, T: Target player discards a card. Activate this ability only during your turn.
+        // 3, {T}: Target player discards a card. Activate this ability only during your turn.
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(1), new GenericManaCost(3), MyTurnCondition.instance);
         ability.addTarget(new TargetPlayer());
         ability.addCost(new TapSourceCost());
+        ability.addHint(MyTurnHint.instance);
         this.addAbility(ability);
 
         // Chimeric Staff

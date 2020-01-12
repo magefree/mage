@@ -1,7 +1,5 @@
 package mage.cards.c;
 
-import java.util.Objects;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.AttacksAllTriggeredAbility;
@@ -12,6 +10,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
+import mage.abilities.hint.common.MyTurnHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -25,8 +24,10 @@ import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.Objects;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class CrownOfDoom extends CardImpl {
@@ -51,6 +52,7 @@ public final class CrownOfDoom extends CardImpl {
                 true));
 
         //TODO: Make ability properly copiable
+
         // {2}: Target player other than Crown of Doom's owner gains control of it. Activate this ability only during your turn.
         Ability ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD,
@@ -58,6 +60,7 @@ public final class CrownOfDoom extends CardImpl {
                 new ManaCostsImpl("{2}"),
                 MyTurnCondition.instance);
         ability.addTarget(new TargetPlayer(1, 1, false, filter));
+        ability.addHint(MyTurnHint.instance);
         this.addAbility(ability);
     }
 

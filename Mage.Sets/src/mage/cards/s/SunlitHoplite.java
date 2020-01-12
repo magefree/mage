@@ -8,6 +8,8 @@ import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.hint.ConditionHint;
+import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -39,13 +41,13 @@ public final class SunlitHoplite extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield),
                 MyTurnCondition.instance, "As long as it's your turn, {this} has first strike."
-        )));
+        )).addHint(MyTurnHint.instance));
 
         // Sunlit Hoplite gets +1/+0 as long as you control an Elspeth planeswalker.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(1, 0, Duration.EndOfTurn),
                 condition, "{this} gets +1/+0 as long as you control an Elspeth planeswalker"
-        )));
+        )).addHint(new ConditionHint(condition, "You control an Elspeth planeswalker")));
     }
 
     private SunlitHoplite(final SunlitHoplite card) {

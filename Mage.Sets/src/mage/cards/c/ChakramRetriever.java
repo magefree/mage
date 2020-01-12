@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import mage.MageInt;
@@ -7,6 +6,7 @@ import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.UntapTargetEffect;
+import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.PartnerWithAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -17,7 +17,6 @@ import mage.target.common.TargetCreaturePermanent;
 import java.util.UUID;
 
 /**
- *
  * @author TheElk801
  */
 public final class ChakramRetriever extends CardImpl {
@@ -38,7 +37,7 @@ public final class ChakramRetriever extends CardImpl {
                 new SpellCastControllerTriggeredAbility(new UntapTargetEffect(), false),
                 MyTurnCondition.instance,
                 "Whenever you cast a spell during your turn, untap target creature."
-        );
+        ).addHint(MyTurnHint.instance);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
