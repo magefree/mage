@@ -1,5 +1,6 @@
 package mage.cards.g;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
@@ -17,8 +18,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -45,6 +44,7 @@ public final class GalliaOfTheEndlessDance extends CardImpl {
         ability.addEffect(new GainAbilityControlledEffect(
                 HasteAbility.getInstance(), Duration.WhileOnBattlefield, filter, true
         ).setText("and have haste"));
+        this.addAbility(ability);
 
         // Whenever you attack with three or more creatures, you may discard a card at random. If you do, draw two cards.
         this.addAbility(new AttacksWithCreaturesTriggeredAbility(new DoIfCostPaid(
