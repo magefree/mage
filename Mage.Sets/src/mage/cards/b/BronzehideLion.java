@@ -1,5 +1,7 @@
 package mage.cards.b;
 
+import java.util.ArrayList;
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -22,9 +24,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
-
-import java.util.ArrayList;
-import java.util.UUID;
 
 /**
  * @author LevelX2, TheElk801
@@ -63,8 +62,8 @@ class BronzehideLionReturnEffect extends OneShotEffect {
 
     BronzehideLionReturnEffect() {
         super(Outcome.PutCardInPlay);
-        this.staticText = "return it to the battlefield. It's an Aura enchantment with enchant creature you control " +
-                "and \"{G}{W}: Enchanted creature gains indestructible until end of turn,\" and it loses all other abilities.";
+        this.staticText = "return it to the battlefield. It's an Aura enchantment with enchant creature you control "
+                + "and \"{G}{W}: Enchanted creature gains indestructible until end of turn,\" and it loses all other abilities.";
     }
 
     private BronzehideLionReturnEffect(final BronzehideLionReturnEffect effect) {
@@ -107,9 +106,9 @@ class BronzehideLionReturnEffect extends OneShotEffect {
 
 class BronzehideLionContinuousEffect extends ContinuousEffectImpl {
 
-    private int zoneChangeCounter;
+    private final int zoneChangeCounter;
     private final Ability activatedAbility = new SimpleActivatedAbility(new GainAbilityAttachedEffect(
-            IndestructibleAbility.getInstance(), AttachmentType.AURA, Duration.EndOfTurn
+            IndestructibleAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield
     ), new ManaCostsImpl("{G}{W}"));
 
     BronzehideLionContinuousEffect(int zoneChangeCounter) {
@@ -168,6 +167,7 @@ class BronzehideLionContinuousEffect extends ContinuousEffectImpl {
                 lion.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
                 // add the activated ability
+                activatedAbility.setControllerId(source.getControllerId());
                 lion.addAbility(activatedAbility);
         }
         return true;
