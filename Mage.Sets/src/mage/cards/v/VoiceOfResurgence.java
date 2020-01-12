@@ -7,6 +7,7 @@ import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.hint.common.CreaturesYouControlHint;
+import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.meta.OrTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -38,6 +39,7 @@ public final class VoiceOfResurgence extends CardImpl {
                         "Whenever an opponent casts a spell during your turn, "),
                 new DiesTriggeredAbility(null, false));
         ability.setLeavesTheBattlefieldTrigger(true);
+        ability.addHint(MyTurnHint.instance);
         ability.addHint(CreaturesYouControlHint.instance);
         this.addAbility(ability);
 

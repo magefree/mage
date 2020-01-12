@@ -1,12 +1,12 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
+import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -15,8 +15,9 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class StreetRiot extends CardImpl {
@@ -32,7 +33,7 @@ public final class StreetRiot extends CardImpl {
                                 1, 0, Duration.WhileOnBattlefield
                         ), MyTurnCondition.instance,
                         "As long as it's your turn, "
-                        + "creatures you control get +1/+0"
+                                + "creatures you control get +1/+0"
                 ));
         ability.addEffect(new ConditionalContinuousEffect(
                 new GainAbilityControlledEffect(
@@ -41,6 +42,7 @@ public final class StreetRiot extends CardImpl {
                         StaticFilters.FILTER_CONTROLLED_CREATURES
                 ), MyTurnCondition.instance, "and have trample"
         ));
+        ability.addHint(MyTurnHint.instance);
         this.addAbility(ability);
     }
 

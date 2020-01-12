@@ -9,6 +9,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.mana.AddManaToManaPoolTargetControllerEffect;
+import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.mana.TriggeredManaAbility;
 import mage.cards.CardImpl;
@@ -50,6 +51,7 @@ public final class WolfwillowHaven extends CardImpl {
                 new ManaCostsImpl("{4}{G}"), MyTurnCondition.instance
         );
         ability.addCost(new SacrificeSourceCost());
+        ability.addHint(MyTurnHint.instance);
         this.addAbility(ability);
     }
 

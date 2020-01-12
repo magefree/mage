@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
 import mage.abilities.condition.common.MyTurnCondition;
@@ -18,8 +16,9 @@ import mage.constants.TurnPhase;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author emerald000
  */
 public final class SavageBeating extends CardImpl {

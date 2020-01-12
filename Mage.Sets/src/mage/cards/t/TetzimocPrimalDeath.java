@@ -1,7 +1,5 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
@@ -11,21 +9,19 @@ import mage.abilities.costs.common.RevealSourceFromYourHandCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
+import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.CounterPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class TetzimocPrimalDeath extends CardImpl {
@@ -53,6 +49,7 @@ public final class TetzimocPrimalDeath extends CardImpl {
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.HAND, new AddCountersTargetEffect(CounterType.PREY.createInstance()), new ManaCostsImpl("{B}"), MyTurnCondition.instance);
         ability.addTarget(new TargetCreaturePermanent());
         ability.addCost(new RevealSourceFromYourHandCost());
+        ability.addHint(MyTurnHint.instance);
         this.addAbility(ability);
 
         // When Tetzimoc, Primal Death enters the battlefield, destroy each creature your opponents control with a prey counter on it.
