@@ -51,6 +51,7 @@ public final class TherosBeyondDeath extends ExpansionSet {
         cards.add(new SetCardInfo("Blood Aspirant", 128, Rarity.UNCOMMON, mage.cards.b.BloodAspirant.class));
         cards.add(new SetCardInfo("Brine Giant", 44, Rarity.COMMON, mage.cards.b.BrineGiant.class));
         cards.add(new SetCardInfo("Bronze Sword", 232, Rarity.COMMON, mage.cards.b.BronzeSword.class));
+        cards.add(new SetCardInfo("Bronzehide Lion", 210, Rarity.RARE, mage.cards.b.BronzehideLion.class));
         cards.add(new SetCardInfo("Calix, Destiny's Hand", 211, Rarity.MYTHIC, mage.cards.c.CalixDestinysHand.class));
         cards.add(new SetCardInfo("Callaphe, Beloved of the Sea", 45, Rarity.UNCOMMON, mage.cards.c.CallapheBelovedOfTheSea.class));
         cards.add(new SetCardInfo("Captivating Unicorn", 6, Rarity.COMMON, mage.cards.c.CaptivatingUnicorn.class));
