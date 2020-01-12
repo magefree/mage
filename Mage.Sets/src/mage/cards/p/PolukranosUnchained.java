@@ -1,8 +1,5 @@
 package mage.cards.p;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -25,6 +22,10 @@ import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -92,11 +93,12 @@ class PolukranosUnchainedEffect extends OneShotEffect {
             return false;
         }
         SpellAbility spellAbility = (SpellAbility) getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
-        int counters = (spellAbility instanceof EscapeAbility) ? 12 : 6;
-        if (!spellAbility.getSourceId().equals(source.getSourceId())
+        int counters = 12;
+        if (!(spellAbility instanceof EscapeAbility)
+                || !spellAbility.getSourceId().equals(source.getSourceId())
                 || permanent.getZoneChangeCounter(game) != spellAbility.getSourceObjectZoneChangeCounter()
                 || !spellAbility.getSourceId().equals(source.getSourceId())) {
-            return false;
+            counters = 6;
         }
         List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects");
         permanent.addCounters(CounterType.P1P1.createInstance(counters), source, game, appliedEffects);
