@@ -9,6 +9,7 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
+import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
@@ -57,7 +58,7 @@ public final class FeastingTrollKing extends CardImpl {
                 new ReturnSourceFromGraveyardToBattlefieldEffect(),
                 new SacrificeTargetCost(new TargetControlledPermanent(3, filter)),
                 MyTurnCondition.instance
-        ));
+        ).addHint(MyTurnHint.instance));
     }
 
     private FeastingTrollKing(final FeastingTrollKing card) {

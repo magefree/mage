@@ -5,7 +5,7 @@ import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.condition.common.NotMyTurnCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.hint.ConditionHint;
+import mage.abilities.hint.common.NotMyTurnHint;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -37,7 +37,7 @@ public final class BrinebornCutthroat extends CardImpl {
                         new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false
                 ), NotMyTurnCondition.instance, "Whenever you cast a spell during an opponent's turn, " +
                 "put a +1/+1 counter on {this}."
-        ).addHint(new ConditionHint(NotMyTurnCondition.instance, "It's not my turn"))); // TODO: replace to opponent's turn condition (team mode support in future)
+        ).addHint(NotMyTurnHint.instance)); // TODO: replace to opponent's turn condition (team mode support in future)
     }
 
     private BrinebornCutthroat(final BrinebornCutthroat card) {
