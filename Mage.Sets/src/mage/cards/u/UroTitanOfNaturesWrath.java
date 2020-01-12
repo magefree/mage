@@ -46,7 +46,7 @@ public final class UroTitanOfNaturesWrath extends CardImpl {
         this.addAbility(ability);
 
         // Escape-{G}{G}{U}{U}, Exile five other cards from your graveyard.
-        this.addAbility(new EscapeAbility(this, "{G}{G}{U}{U}", 1));
+        this.addAbility(new EscapeAbility(this, "{G}{G}{U}{U}", 5));
     }
 
     private UroTitanOfNaturesWrath(final UroTitanOfNaturesWrath card) {

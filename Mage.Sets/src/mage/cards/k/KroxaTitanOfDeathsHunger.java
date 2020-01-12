@@ -48,7 +48,7 @@ public final class KroxaTitanOfDeathsHunger extends CardImpl {
         this.addAbility(new EntersBattlefieldOrAttacksSourceTriggeredAbility(new KroxaTitanOfDeathsHungerDiscardEffect()));
 
         // Escape—{B}{B}{R}{R}, Exile five other cards from your graveyard.
-        this.addAbility(new EscapeAbility(this, "{B}{B}{R}{R}", 1));
+        this.addAbility(new EscapeAbility(this, "{B}{B}{R}{R}", 5));
     }
 
     private KroxaTitanOfDeathsHunger(final KroxaTitanOfDeathsHunger card) {
