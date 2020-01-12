@@ -16,7 +16,7 @@ import mage.util.CardUtil;
  */
 public class EscapeAbility extends SpellAbility {
 
-    private static final FilterCard filter = new FilterCard();
+    private static final FilterCard filter = new FilterCard("card to exile");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -28,8 +28,10 @@ public class EscapeAbility extends SpellAbility {
     public EscapeAbility(Card card, String manaCost, int exileCount) {
         super(card.getSpellAbility());
         this.newId();
+        this.setCardName(card.getName() + " with Escape");
         this.zone = Zone.GRAVEYARD;
         this.spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
+
         this.manaCost = manaCost;
         this.exileCount = exileCount;
         this.getManaCosts().clear();
