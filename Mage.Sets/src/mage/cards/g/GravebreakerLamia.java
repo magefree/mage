@@ -1,6 +1,5 @@
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -20,11 +19,18 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class GravebreakerLamia extends CardImpl {
+
+    private static final FilterCard filter = new FilterCard();
+
+    static {
+        filter.add(new CastFromZonePredicate(Zone.GRAVEYARD));
+    }
 
     public GravebreakerLamia(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{4}{B}");
@@ -42,9 +48,8 @@ public final class GravebreakerLamia extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GravebreakerLamiaSearchEffect(), false));
 
         // Spells you cast from your graveyard cost {1} less to cast.
-        FilterCard filter = new FilterCard("Spells you cast from your graveyard");
-        filter.add(new CastFromZonePredicate(Zone.GRAVEYARD));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)
+                .setText("Spells you cast from your graveyard cost {1} less to cast.")));
     }
 
     private GravebreakerLamia(final GravebreakerLamia card) {
@@ -85,5 +90,4 @@ class GravebreakerLamiaSearchEffect extends SearchEffect {
         controller.shuffleLibrary(source, game);
         return true;
     }
-
 }
