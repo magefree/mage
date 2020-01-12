@@ -1,6 +1,5 @@
 package mage.player.human;
 
-import jdk.nashorn.internal.objects.NativeError;
 import mage.MageObject;
 import mage.abilities.*;
 import mage.abilities.costs.VariableCost;
@@ -2399,7 +2398,7 @@ public class HumanPlayer extends PlayerImpl {
     private boolean gameInCheckPlayableState(Game game, boolean ignoreWarning) {
         if (game.inCheckPlayableState()) {
             if (!ignoreWarning) {
-                logger.warn("Player interaction in checkPlayableState./n" + NativeError.printStackTrace(this));
+                logger.warn("Player interaction in checkPlayableState", new Throwable());
             }
             return true;
         }

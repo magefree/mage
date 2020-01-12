@@ -53,10 +53,8 @@ public class TappedForManaFromMultipleEffects extends CardTestPlayerBase {
 
         // cast nyx 2
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nyxbloom Ancient");
-        // real choice must be called one time only (from playManaAbility) after fix, see above to-do
-        // TODO: TAPPED_FOR_MANA replace event called from checkTappedForManaReplacement and start to choose replace events, if logs enabled then it cause the error
-        // use case 1 (human game only): do not ignore check playable logs in chooseReplacementEffect for HumanPlayer - you will get rollback error on second Nyxbloom Ancient cast
-        // use case 2 (that test): comment one 1-2 choices to fail in 1-2 calls
+        // TODO: TAPPED_FOR_MANA replace event called from checkTappedForManaReplacement and start to choose replace events (is that problem?)
+        // use case (that test): comment one 1-2 choices to fail in 1-2 calls
         setChoice(playerA, "Nyxbloom Ancient: If you tap a permanent"); // getPlayable... checkTappedForManaReplacement... chooseReplacementEffect
         setChoice(playerA, "Nyxbloom Ancient: If you tap a permanent"); // playManaAbility... resolve... checkToFirePossibleEvents... chooseReplacementEffect
 
