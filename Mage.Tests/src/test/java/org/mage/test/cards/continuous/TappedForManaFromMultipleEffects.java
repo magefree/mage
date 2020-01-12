@@ -69,4 +69,68 @@ public class TappedForManaFromMultipleEffects extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Nyxbloom Ancient", 2);
         assertPermanentCount(playerA, "Chlorophant", 1);
     }
+
+    @Test
+    public void test_ChromeMox_Direct() {
+        // Imprint — When Chrome Mox enters the battlefield, you may exile a nonartifact, nonland card from your hand.
+        // {T}: Add one mana of any of the exiled card’s colors.
+        addCard(Zone.HAND, playerA, "Chrome Mox", 1); // {0}
+        addCard(Zone.HAND, playerA, "Balduvian Bears", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Chrome Mox");
+        setChoice(playerA, "Yes"); // use imprint
+        setChoice(playerA, "Balduvian Bears"); // discard
+
+        activateManaAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: Add one");
+        checkManaPool("must produce green", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "G", 1);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Chrome Mox", 1);
+        assertExileCount(playerA, "Balduvian Bears", 1);
+    }
+
+    @Test
+    public void test_ManaReflect_Direct() {
+        // If you tap a permanent for mana, it produces twice as much of that mana instead.
+        addCard(Zone.BATTLEFIELD, playerA, "Mana Reflection", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G}");
+        checkManaPool("must produce green", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "G", 2); // double by reflection
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+    }
+
+    @Test
+    public void test_ChromeMox_WithManaReflect() {
+        // Imprint — When Chrome Mox enters the battlefield, you may exile a nonartifact, nonland card from your hand.
+        // {T}: Add one mana of any of the exiled card’s colors.
+        addCard(Zone.HAND, playerA, "Chrome Mox", 1); // {0}
+        addCard(Zone.HAND, playerA, "Balduvian Bears", 1);
+        //
+        // If you tap a permanent for mana, it produces twice as much of that mana instead.
+        addCard(Zone.BATTLEFIELD, playerA, "Mana Reflection", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Chrome Mox");
+        setChoice(playerA, "Yes"); // use imprint
+        setChoice(playerA, "Balduvian Bears"); // discard
+
+        activateManaAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: Add one");
+        checkManaPool("must produce green", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "G", 2); // double by reflection
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Chrome Mox", 1);
+        assertExileCount(playerA, "Balduvian Bears", 1);
+    }
 }

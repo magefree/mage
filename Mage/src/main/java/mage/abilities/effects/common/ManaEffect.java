@@ -72,7 +72,8 @@ public abstract class ManaEffect extends OneShotEffect {
     }
 
     /**
-     * Produced the mana the effect can produce
+     * Produced the mana the effect can produce (DO NOT add it to mana pool -- return all added as mana object to process by replace events)
+     * <p>
      * WARNING, produceMana can be called multiple times for mana and spell available calculations
      * if you don't want it then overide getNetMana to return max possible mana values
      * (if you have choose dialogs or extra effects like new counters in produceMana)
