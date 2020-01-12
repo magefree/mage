@@ -14,8 +14,6 @@ import mage.filter.common.FilterNonlandCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
-import mage.target.common.TargetCardInGraveyard;
-import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetOpponent;
 
 import java.util.UUID;
@@ -71,11 +69,11 @@ class AgonizingRemorseEffect extends OneShotEffect {
         TargetCard target;
         Cards cards;
         if (controller.chooseUse(outcome, "Exile a card from hand or graveyard?", null, "Hand", "Graveyard", source, game)) {
-            target = new TargetCardInHand(new FilterNonlandCard("nonland card in " + opponent.getName() + "'s hand"));
+            target = new TargetCard(Zone.HAND, new FilterNonlandCard("nonland card in " + opponent.getName() + "'s hand"));
             target.setNotTarget(true);
             cards = opponent.getHand();
         } else {
-            target = new TargetCardInGraveyard(new FilterCard("card in " + opponent.getName() + "'s graveyard"));
+            target = new TargetCard(Zone.GRAVEYARD, new FilterCard("card in " + opponent.getName() + "'s graveyard"));
             target.setNotTarget(true);
             cards = opponent.getGraveyard();
         }
