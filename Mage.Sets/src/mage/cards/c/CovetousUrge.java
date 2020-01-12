@@ -14,8 +14,6 @@ import mage.game.Game;
 import mage.players.ManaPoolItem;
 import mage.players.Player;
 import mage.target.TargetCard;
-import mage.target.common.TargetCardInGraveyard;
-import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
@@ -82,10 +80,10 @@ class CovetousUrgeEffect extends OneShotEffect {
             if (player.getHand().isEmpty()) {
                 return true;
             }
-            target = new TargetCardInHand(StaticFilters.FILTER_CARD_A_NON_LAND);
+            target = new TargetCard(Zone.HAND, StaticFilters.FILTER_CARD_A_NON_LAND);
             controller.choose(outcome, player.getHand(), target, game);
         } else {
-            target = new TargetCardInGraveyard(StaticFilters.FILTER_CARD_A_NON_LAND);
+            target = new TargetCard(Zone.GRAVEYARD, StaticFilters.FILTER_CARD_A_NON_LAND);
             controller.choose(outcome, player.getGraveyard(), target, game);
         }
         Card card = game.getCard(target.getFirstTarget());
