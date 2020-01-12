@@ -139,6 +139,7 @@ public final class TherosBeyondDeath extends ExpansionSet {
         cards.add(new SetCardInfo("Kiora Bests the Sea God", 52, Rarity.MYTHIC, mage.cards.k.KioraBestsTheSeaGod.class));
         cards.add(new SetCardInfo("Klothys's Design", 176, Rarity.UNCOMMON, mage.cards.k.KlothyssDesign.class));
         cards.add(new SetCardInfo("Klothys, God of Destiny", 220, Rarity.MYTHIC, mage.cards.k.KlothysGodOfDestiny.class));
+        cards.add(new SetCardInfo("Kroxa, Titan of Death's Hunger", 221, Rarity.MYTHIC, mage.cards.k.KroxaTitanOfDeathsHunger.class));
         cards.add(new SetCardInfo("Kunoros, Hound of Athreos", 222, Rarity.RARE, mage.cards.k.KunorosHoundOfAthreos.class));
         cards.add(new SetCardInfo("Labyrinth of Skophos", 243, Rarity.RARE, mage.cards.l.LabyrinthOfSkophos.class));
         cards.add(new SetCardInfo("Lagonna-Band Storyteller", 27, Rarity.UNCOMMON, mage.cards.l.LagonnaBandStoryteller.class));
