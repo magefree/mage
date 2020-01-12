@@ -1,10 +1,5 @@
 package mage.cards.o;
 
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -25,8 +20,9 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.*;
+
 /**
- *
  * @author LevelX2
  */
 public final class OrcishLumberjack extends CardImpl {
@@ -76,6 +72,7 @@ class OrcishLumberjackManaEffect extends ManaEffect {
 
     public OrcishLumberjackManaEffect(final OrcishLumberjackManaEffect effect) {
         super(effect);
+        netMana.addAll(effect.netMana);
     }
 
     @Override

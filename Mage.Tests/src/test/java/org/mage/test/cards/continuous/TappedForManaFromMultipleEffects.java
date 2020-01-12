@@ -133,4 +133,45 @@ public class TappedForManaFromMultipleEffects extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Chrome Mox", 1);
         assertExileCount(playerA, "Balduvian Bears", 1);
     }
+
+    @Test
+    public void test_GoblinClearcutter_Direct() {
+        // {T}, Sacrifice a Forest: Add three mana in any combination of {R} and/or {G}.
+        addCard(Zone.BATTLEFIELD, playerA, "Goblin Clearcutter", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}, Sacrifice a Fo");
+        setChoice(playerA, "Forest"); // sacrifice
+        setChoice(playerA, "Green");
+        setChoice(playerA, "Green");
+        setChoice(playerA, "Green");
+        checkManaPool("must produce green", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "G", 3);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+    }
+
+    @Test
+    public void test_GoblinClearcutter_WithManaReflect() {
+        // {T}, Sacrifice a Forest: Add three mana in any combination of {R} and/or {G}.
+        addCard(Zone.BATTLEFIELD, playerA, "Goblin Clearcutter", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        //
+        // If you tap a permanent for mana, it produces twice as much of that mana instead.
+        addCard(Zone.BATTLEFIELD, playerA, "Mana Reflection", 1);
+
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}, Sacrifice a Fo");
+        setChoice(playerA, "Forest"); // sacrifice
+        setChoice(playerA, "Green");
+        setChoice(playerA, "Green");
+        setChoice(playerA, "Green");
+        checkManaPool("must produce green", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "G", 3 * 2); // double by mana reflect
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+    }
 }
