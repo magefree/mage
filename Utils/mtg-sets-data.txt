@@ -188,7 +188,6 @@ Theros|THS|
 Theros Beyond Death|THB|
 Tempest|TMP|
 Throne of Eldraine|ELD|
-Throne of Eldraine Collector's Edition|CELD|
 Torment|TOR|
 Tempest Remastered|TPR|
 Time Spiral "Timeshifted"|TSB|

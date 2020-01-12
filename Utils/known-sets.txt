@@ -190,7 +190,6 @@ The Dark|TheDark|
 Theros|Theros|
 Theros Beyond Death|TherosBeyondDeath|
 Throne of Eldraine|ThroneOfEldraine|
-Throne of Eldraine Collector's Edition|ThroneOfEldraineCollectorsEdition|
 Time Spiral|TimeSpiral|
 Time Spiral "Timeshifted"|TimeSpiralTimeshifted|
 Torment|Torment|
