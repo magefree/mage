@@ -143,14 +143,18 @@ class KioraRevealEffect extends OneShotEffect {
         if (creatureCardFound) {
             TargetCard target = new TargetCardInLibrary(0, 1, creatureFilter);
             controller.chooseTarget(Outcome.DrawCard, cards, target, source, game);
-            cards.remove(target.getFirstTarget());
-            cardsToHand.add(target.getFirstTarget());
+            if (target.getFirstTarget() != null) {
+                cards.remove(target.getFirstTarget());
+                cardsToHand.add(target.getFirstTarget());
+            }
         }
         if (landCardFound) {
             TargetCard target = new TargetCardInLibrary(0, 1, landFilter);
             controller.chooseTarget(Outcome.DrawCard, cards, target, source, game);
-            cards.remove(target.getFirstTarget());
-            cardsToHand.add(target.getFirstTarget());
+            if (target.getFirstTarget() != null) {
+                cards.remove(target.getFirstTarget());
+                cardsToHand.add(target.getFirstTarget());
+            }
         }
         controller.moveCards(cardsToHand, Zone.HAND, source, game);
         controller.moveCards(cards, Zone.GRAVEYARD, source, game);
