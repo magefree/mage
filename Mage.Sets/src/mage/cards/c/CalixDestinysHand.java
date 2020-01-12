@@ -1,5 +1,7 @@
 package mage.cards.c;
 
+import java.util.UUID;
+import java.util.stream.Collectors;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -13,6 +15,7 @@ import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetE
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import static mage.constants.Outcome.Benefit;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledEnchantmentPermanent;
@@ -26,12 +29,6 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
 
-import java.util.List;
-import java.util.UUID;
-import java.util.stream.Collectors;
-
-import static mage.constants.Outcome.Benefit;
-
 /**
  * @author TheElk801
  */
@@ -42,8 +39,8 @@ public final class CalixDestinysHand extends CardImpl {
             = new FilterPermanent("creature or enchantment you don't control");
 
     static {
-        filter.add(TargetController.NOT_YOU.getControllerPredicate());
-        filter.add(Predicates.or(
+        filter2.add(TargetController.NOT_YOU.getControllerPredicate());
+        filter2.add(Predicates.or(
                 CardType.CREATURE.getPredicate(),
                 CardType.ENCHANTMENT.getPredicate()
         ));
@@ -63,9 +60,9 @@ public final class CalixDestinysHand extends CardImpl {
                 StaticValue.get(4), false, StaticValue.get(1), filter,
                 Zone.LIBRARY, false, true, false,
                 Zone.HAND, true, false, false
-        ).setBackInRandomOrder(true).setText("Look at the top four cards of your library. " +
-                "You may reveal an enchantment card from among them and put that card into your hand. " +
-                "Put the rest on the bottom of your library in a random order."), 1
+        ).setBackInRandomOrder(true).setText("Look at the top four cards of your library. "
+                + "You may reveal an enchantment card from among them and put that card into your hand. "
+                + "Put the rest on the bottom of your library in a random order."), 1
         ));
 
         // −3: Exile target creature or enchantment you don't control until target enchantment you control leaves the battlefield.
@@ -92,8 +89,8 @@ class CalixDestinysHandExileEffect extends OneShotEffect {
 
     CalixDestinysHandExileEffect() {
         super(Benefit);
-        staticText = "Exile target creature or enchantment you don't control " +
-                "until target enchantment you control leaves the battlefield.";
+        staticText = "Exile target creature or enchantment you don't control "
+                + "until target enchantment you control leaves the battlefield.";
     }
 
     private CalixDestinysHandExileEffect(final CalixDestinysHandExileEffect effect) {
@@ -108,9 +105,12 @@ class CalixDestinysHandExileEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        List<UUID> targets = this.getTargetPointer().getTargets(game, source);
-        Permanent theirPerm = game.getPermanent(targets.get(0));
-        Permanent myPerm = game.getPermanent(targets.get(1));
+        if (source.getTargets().size() > 2) {
+            return false;
+        }
+        source.getTargets();
+        Permanent theirPerm = game.getPermanent(source.getTargets().get(0).getFirstTarget());
+        Permanent myPerm = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (player == null || theirPerm == null || myPerm == null) {
             return false;
         }
