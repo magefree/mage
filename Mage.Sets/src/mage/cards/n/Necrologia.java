@@ -1,7 +1,5 @@
-
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
 import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.costs.common.PayVariableLifeCost;
@@ -12,14 +10,15 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class Necrologia extends CardImpl {
 
     public Necrologia(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{B}{B}");
 
         // Cast Necrologia only during your end step.
         this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(null, PhaseStep.END_TURN, MyTurnCondition.instance,

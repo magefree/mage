@@ -1,7 +1,5 @@
-
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -9,6 +7,7 @@ import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.hint.common.MyTurnHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -16,8 +15,9 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class HardyVeteran extends CardImpl {
@@ -36,6 +36,7 @@ public final class HardyVeteran extends CardImpl {
                 MyTurnCondition.instance,
                 "As long as it's your turn, {this} gets +0/+2");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, boostEffect);
+        ability.addHint(MyTurnHint.instance);
         this.addAbility(ability);
     }
 

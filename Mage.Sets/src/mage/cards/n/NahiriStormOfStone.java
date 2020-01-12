@@ -14,6 +14,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.common.cost.AbilitiesCostReductionControllerEffect;
+import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
@@ -62,6 +63,7 @@ public final class NahiriStormOfStone extends CardImpl {
                         EquipAbility.class, "Equip"
                 ), MyTurnCondition.instance, "and equip abilities you activate cost {1} less to activate"
         ));
+        ability.addHint(MyTurnHint.instance);
         this.addAbility(ability);
 
         // -X: Nahiri, Storm of Stone deals X damage to target tapped creature.

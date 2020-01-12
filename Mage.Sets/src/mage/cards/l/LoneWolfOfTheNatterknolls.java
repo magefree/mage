@@ -1,7 +1,5 @@
-
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -12,6 +10,7 @@ import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
+import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -20,14 +19,15 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterSpell;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class LoneWolfOfTheNatterknolls extends CardImpl {
 
     public LoneWolfOfTheNatterknolls(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
         this.subtype.add(SubType.WEREWOLF);
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
@@ -41,7 +41,7 @@ public final class LoneWolfOfTheNatterknolls extends CardImpl {
                 new SpellCastOpponentTriggeredAbility(new DrawCardSourceControllerEffect(2), new FilterSpell("a spell"), true),
                 MyTurnCondition.instance,
                 "Whenever an opponent casts a spell during your turn, draw two cards."
-        ));
+        ).addHint(MyTurnHint.instance));
 
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Lone Wolf of the Natterknolls.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(false), TargetController.ANY, false);

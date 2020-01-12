@@ -1,4 +1,3 @@
-
 package mage.abilities.common;
 
 import mage.abilities.ActivatedAbilityImpl;
@@ -11,7 +10,6 @@ import mage.game.Game;
 import mage.util.CardUtil;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class LimitedTimesPerTurnActivatedAbility extends ActivatedAbilityImpl {
@@ -24,6 +22,7 @@ public class LimitedTimesPerTurnActivatedAbility extends ActivatedAbilityImpl {
         this(zone, effect, cost, maxActivationsPerTurn, null);
     }
 
+    // TODO: add card hint about times activated, see https://github.com/magefree/mage/issues/5497
     public LimitedTimesPerTurnActivatedAbility(Zone zone, Effect effect, Cost cost, int maxActivationsPerTurn, Condition condition) {
         super(zone, effect, cost);
         this.maxActivationsPerTurn = maxActivationsPerTurn;

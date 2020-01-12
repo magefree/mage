@@ -1,7 +1,5 @@
-
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
@@ -13,12 +11,13 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.UntapEnchantedEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
+import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -28,8 +27,9 @@ import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class NaturesChosen extends CardImpl {
@@ -44,7 +44,7 @@ public final class NaturesChosen extends CardImpl {
     }
 
     private static final FilterCreaturePermanent filterWhiteUntappedCreature = new FilterCreaturePermanent(" if enchanted creature is white and is untapped");
-    
+
     static {
         filterWhiteUntappedCreature.add(new ColorPredicate(ObjectColor.WHITE));
         filterWhiteUntappedCreature.add(Predicates.not(TappedPredicate.instance));
@@ -62,7 +62,8 @@ public final class NaturesChosen extends CardImpl {
         this.addAbility(ability);
 
         // {0}: Untap enchanted creature. Activate this ability only during your turn and only once each turn.
-        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new UntapEnchantedEffect(), new GenericManaCost(0), 1, MyTurnCondition.instance));
+        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new UntapEnchantedEffect(), new GenericManaCost(0), 1, MyTurnCondition.instance)
+                .addHint(MyTurnHint.instance));
 
         // Tap enchanted creature: Untap target artifact, creature, or land. Activate this ability only if enchanted creature is white and is untapped and only once each turn.
         Effect effect = new UntapTargetEffect();

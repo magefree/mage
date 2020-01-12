@@ -1,6 +1,5 @@
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
@@ -9,6 +8,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.RevealHandTargetEffect;
+import mage.abilities.hint.common.MyTurnHint;
 import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -18,6 +18,8 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
+
+import java.util.UUID;
 
 /**
  * @author Quercitron
@@ -32,11 +34,12 @@ public final class RagMan extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // {B}{B}{B}, {tap}: Target opponent reveals their hand and discards a creature card at random. Activate this ability only during your turn.
+        // {B}{B}{B}, {T}: Target opponent reveals their hand and discards a creature card at random. Activate this ability only during your turn.
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new RevealHandTargetEffect(), new ManaCostsImpl("{B}{B}{B}"), MyTurnCondition.instance);
         ability.addCost(new TapSourceCost());
         ability.addEffect(new RagManDiscardEffect());
         ability.addTarget(new TargetOpponent());
+        ability.addHint(MyTurnHint.instance);
         this.addAbility(ability);
     }
 

@@ -1,4 +1,3 @@
-
 package mage.cards.m;
 
 import mage.abilities.Ability;
@@ -14,6 +13,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.RemoveFromCombatTargetEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
+import mage.abilities.hint.ConditionHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -42,7 +42,8 @@ public final class Melee extends CardImpl {
         Condition condition = new CompoundCondition(BeforeBlockersAreDeclaredCondition.instance,
                 new IsPhaseCondition(TurnPhase.COMBAT),
                 MyTurnCondition.instance);
-        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(null, null, condition, "Cast this spell only during your turn and only during combat before blockers are declared"));
+        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(null, null, condition, "Cast this spell only during your turn and only during combat before blockers are declared")
+                .addHint(new ConditionHint(condition, "Can cast melee (it's combat phase on your turn)")));
 
         // You choose which creatures block this combat and how those creatures block.
         // (only the last resolved Melee spell's blocking effect applies)
