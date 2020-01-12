@@ -281,6 +281,7 @@ public final class TherosBeyondDeath extends ExpansionSet {
         cards.add(new SetCardInfo("Underworld Rage-Hound", 163, Rarity.COMMON, mage.cards.u.UnderworldRageHound.class));
         cards.add(new SetCardInfo("Underworld Sentinel", 293, Rarity.RARE, mage.cards.u.UnderworldSentinel.class));
         cards.add(new SetCardInfo("Unknown Shores", 249, Rarity.COMMON, mage.cards.u.UnknownShores.class));
+        cards.add(new SetCardInfo("Uro, Titan of Nature's Wrath", 229, Rarity.MYTHIC, mage.cards.u.UroTitanOfNaturesWrath.class));
         cards.add(new SetCardInfo("Venomous Hierophant", 122, Rarity.COMMON, mage.cards.v.VenomousHierophant.class));
         cards.add(new SetCardInfo("Vexing Gull", 79, Rarity.COMMON, mage.cards.v.VexingGull.class));
         cards.add(new SetCardInfo("Victory's Envoy", 289, Rarity.RARE, mage.cards.v.VictorysEnvoy.class));
