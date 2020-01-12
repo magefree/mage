@@ -597,6 +597,10 @@ public class ContinuousEffects implements Serializable {
         return asThoughEffectsList;
     }
 
+    public Set<Ability> getAsThoughEffectsAbility(AsThoughEffect effect) {
+        return asThoughEffectsMap.get(effect.getAsThoughEffectType()).getAbility(effect.getId());
+    }
+
     /**
      * 601.2e The player determines the total cost of the spell. Usually this is
      * just the mana cost. Some spells have additional or alternative costs.
