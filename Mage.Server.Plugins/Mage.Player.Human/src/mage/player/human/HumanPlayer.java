@@ -351,7 +351,7 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public int chooseReplacementEffect(Map<String, String> rEffects, Game game) {
-        if (gameInCheckPlayableState(game)) {
+        if (gameInCheckPlayableState(game, true)) { // ignore warning logs until double call for TAPPED_FOR_MANA will be fix
             return 0;
         }
 
@@ -2393,8 +2393,14 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     private boolean gameInCheckPlayableState(Game game) {
+        return gameInCheckPlayableState(game, false);
+    }
+
+    private boolean gameInCheckPlayableState(Game game, boolean ignoreWarning) {
         if (game.inCheckPlayableState()) {
-            logger.warn("Player interaction in checkPlayableState./n" + NativeError.printStackTrace(this));
+            if (!ignoreWarning) {
+                logger.warn("Player interaction in checkPlayableState./n" + NativeError.printStackTrace(this));
+            }
             return true;
         }
         return false;
