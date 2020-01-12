@@ -55,6 +55,8 @@ public final class TheFirstIroanGames extends CardImpl {
 
         // IV — Create a Gold token.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_IV, new CreateTokenEffect(new GoldToken()));
+
+        this.addAbility(sagaAbility);
     }
 
     private TheFirstIroanGames(final TheFirstIroanGames card) {

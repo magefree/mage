@@ -50,6 +50,7 @@ public final class TheBirthOfMeletis extends CardImpl {
 
         // III — You gain 2 life.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III, new GainLifeEffect(2));
+        this.addAbility(sagaAbility);
     }
 
     private TheBirthOfMeletis(final TheBirthOfMeletis card) {

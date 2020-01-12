@@ -62,6 +62,7 @@ public final class ElspethsNightmare extends CardImpl {
                         .setText("exile target opponent's graveyard"),
                 new TargetOpponent()
         );
+        this.addAbility(sagaAbility);
     }
 
     private ElspethsNightmare(final ElspethsNightmare card) {

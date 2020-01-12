@@ -66,6 +66,7 @@ public final class ElspethConquersDeath extends CardImpl {
                 this, SagaChapter.CHAPTER_III, SagaChapter.CHAPTER_III,
                 new ElspethConquersDeathReturnEffect(), new TargetCardInYourGraveyard(filter2)
         );
+        this.addAbility(sagaAbility);
     }
 
     private ElspethConquersDeath(final ElspethConquersDeath card) {

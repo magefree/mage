@@ -64,6 +64,7 @@ public final class TheTriumphOfAnax extends CardImpl {
                         new TargetPermanent(0, 1, filter, false)
                 )
         );
+        this.addAbility(sagaAbility);
     }
 
     private TheTriumphOfAnax(final TheTriumphOfAnax card) {

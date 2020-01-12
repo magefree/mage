@@ -63,6 +63,7 @@ public final class KioraBestsTheSeaGod extends CardImpl {
                         new UntapTargetEffect().setText("Untap it.")
                 ), new TargetPermanent(filter)
         );
+        this.addAbility(sagaAbility);
     }
 
     private KioraBestsTheSeaGod(final KioraBestsTheSeaGod card) {

@@ -44,6 +44,7 @@ public final class MedomaisProphecy extends CardImpl {
 
         // IV — Look at the top card of each player's library.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_IV, new MedomaisProphecyLookEffect());
+        this.addAbility(sagaAbility);
     }
 
     private MedomaisProphecy(final MedomaisProphecy card) {

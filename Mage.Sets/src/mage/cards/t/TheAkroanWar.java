@@ -58,6 +58,7 @@ public final class TheAkroanWar extends CardImpl {
 
         // III — Each tapped creature deals damage to itself equal to its power.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III, new TheAkroanWarEffect());
+        this.addAbility(sagaAbility);
     }
 
     private TheAkroanWar(final TheAkroanWar card) {
