@@ -55,7 +55,8 @@ public class SpellsCostReductionControllerEffect extends CostModificationEffectI
         this.filter = filter;
         this.amount = amount;
         this.upTo = upTo;
-        this.staticText = filter.getMessage() + " you cast cost " + (upTo ? "up to " : "") + '{' + amount + "} less to cast";
+        this.staticText = (filter.getMessage().contains("you cast") ? filter.getMessage() : filter.getMessage() + " you cast")
+                + " cost " + (upTo ? "up to " : "") + '{' + amount + "} less to cast";
     }
 
     protected SpellsCostReductionControllerEffect(final SpellsCostReductionControllerEffect effect) {

@@ -1,5 +1,6 @@
 package mage.cards.t;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
@@ -23,8 +24,6 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.TargetPermanent;
-
-import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -54,7 +53,7 @@ public final class ThassaDeepDwelling extends CardImpl {
 
         // At the beginning of your end step, exile up to one other target creature you control, then return that card to the battlefield under your control.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new ExileTargetForSourceEffect().setText("exile up to one other target creature you control,"),
+                new ExileTargetForSourceEffect().setText("exile up to one other target creature you control, then "),
                 TargetController.YOU, false
         );
         ability.addEffect(new ReturnToBattlefieldUnderYourControlTargetEffect(true));
