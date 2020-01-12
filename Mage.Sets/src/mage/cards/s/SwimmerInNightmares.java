@@ -7,8 +7,12 @@ import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.decorator.ConditionalRestrictionEffect;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.hint.ConditionHint;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -43,13 +47,13 @@ public final class SwimmerInNightmares extends CardImpl {
                 new BoostSourceEffect(3, 0, Duration.WhileOnBattlefield),
                 SwimmerInNightmaresCondition.instance,
                 "{this} +3/+0 as long as there are ten or more cards in a single graveyard"
-        )));
+        )).addHint(new ValueHint("Max cards in single graveyard", SwimmerInNightmaresCardsInSingleGraveyardValue.instance)));
 
         // Swimmer in Nightmares can't be blocked as long as you control an Ashiok planeswalker.
         this.addAbility(new SimpleStaticAbility(new ConditionalRestrictionEffect(
                 new CantBeBlockedSourceEffect(), condition,
                 "{this} can't be blocked as long as you control an Ashiok planeswalker"
-        )));
+        )).addHint(new ConditionHint(condition, "You control an Ashiok planeswalker")));
     }
 
     private SwimmerInNightmares(final SwimmerInNightmares card) {
@@ -62,17 +66,42 @@ public final class SwimmerInNightmares extends CardImpl {
     }
 }
 
+enum SwimmerInNightmaresCardsInSingleGraveyardValue implements DynamicValue {
+
+    instance;
+
+    @Override
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        return game.getState()
+                .getPlayersInRange(sourceAbility.getControllerId(), game)
+                .stream()
+                .map(game::getPlayer)
+                .map(Player::getGraveyard)
+                .map(HashSet::size)
+                .mapToInt(x -> x).max().orElse(0);
+    }
+
+    @Override
+    public DynamicValue copy() {
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        return "X";
+    }
+
+    @Override
+    public String getMessage() {
+        return "";
+    }
+}
+
 enum SwimmerInNightmaresCondition implements Condition {
     instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return game.getState()
-                .getPlayersInRange(source.getControllerId(), game)
-                .stream()
-                .map(game::getPlayer)
-                .map(Player::getGraveyard)
-                .map(HashSet::size)
-                .anyMatch(x -> x >= 10);
+        return SwimmerInNightmaresCardsInSingleGraveyardValue.instance.calculate(game, source, null) >= 10;
     }
 }
