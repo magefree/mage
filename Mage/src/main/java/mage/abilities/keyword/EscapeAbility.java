@@ -1,7 +1,6 @@
 package mage.abilities.keyword;
 
 import mage.abilities.SpellAbility;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.cards.Card;
@@ -27,16 +26,16 @@ public class EscapeAbility extends SpellAbility {
     private final int exileCount;
 
     public EscapeAbility(Card card, String manaCost, int exileCount) {
-        super(new ManaCostsImpl(manaCost), card.getName() + " with escape");
+        super(card.getSpellAbility());
         this.newId();
         this.zone = Zone.GRAVEYARD;
         this.spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
         this.manaCost = manaCost;
         this.exileCount = exileCount;
-
-        Cost cost = new ExileFromGraveCost(new TargetCardInYourGraveyard(exileCount, filter));
-        cost.setText("");
-        this.addCost(cost);
+        this.getManaCosts().clear();
+        this.getManaCostsToPay().clear();
+        this.addManaCost(new ManaCostsImpl(manaCost));
+        this.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(exileCount, filter)));
     }
 
     private EscapeAbility(final EscapeAbility ability) {
