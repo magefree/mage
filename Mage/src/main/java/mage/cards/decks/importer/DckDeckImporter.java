@@ -1,18 +1,17 @@
-
 package mage.cards.decks.importer;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLayout;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
- *
  * @author North
  */
 public class DckDeckImporter extends PlainTextDeckImporter {
@@ -23,7 +22,7 @@ public class DckDeckImporter extends PlainTextDeckImporter {
 
     private static final Pattern layoutStackPattern = Pattern.compile("\\(([^)]*)\\)");
 
-    private static final Pattern layoutStackEntryPattern = Pattern.compile("\\[(\\w+[^:]*\\w*):(\\d+\\w*)]"); // [JR:64ab],[JR:64],[MPSAK1321:43],[MPSAKH:9],[MPS123-AKH:32],[MPS-13AKH:30],[MPS-AKH:49],[MPS-AKH:11]
+    private static final Pattern layoutStackEntryPattern = Pattern.compile("\\[(\\w+[^:]*\\w*):(\\w+\\w*)]"); // test cases: [JR:64ab],[JR:64],[MPSAK1321:43],[MPSAKH:9],[MPS123-AKH:32],[MPS-13AKH:30],[MPS-AKH:49],[MPS-AKH:11], [PUMA:U16]
 
     @Override
     protected void readLine(String line, DeckCardLists deckList) {
@@ -55,7 +54,7 @@ public class DckDeckImporter extends PlainTextDeckImporter {
             // search by number
             CardInfo foundedCard = CardRepository.instance.findCard(setCode, cardNum);
             boolean wasOutdated = false;
-            if ((foundedCard != null) && !foundedCard.getName().equals(cardName)){
+            if ((foundedCard != null) && !foundedCard.getName().equals(cardName)) {
                 sbMessage.append("Line ").append(lineCount).append(": ").append("found outdated card number or name, will try to replace: ").append(line).append('\n');
                 wasOutdated = true;
                 foundedCard = null;
@@ -63,7 +62,7 @@ public class DckDeckImporter extends PlainTextDeckImporter {
 
             // search by name
             if (foundedCard == null) {
-                if(!wasOutdated){
+                if (!wasOutdated) {
                     sbMessage.append("Line ").append(lineCount).append(": ").append("can't find card by number, will try ro replace: ").append(line).append('\n');
                 }
 
@@ -75,7 +74,7 @@ public class DckDeckImporter extends PlainTextDeckImporter {
                     sbMessage.append("Line ").append(lineCount).append(": ")
                             .append("replaced to [").append(foundedCard.getSetCode()).append(":").append(foundedCard.getCardNumberAsInt()).append("] ")
                             .append(foundedCard.getName()).append('\n');
-                }else{
+                } else {
                     sbMessage.append("Line ").append(lineCount).append(": ").append("ERROR, can't find card [").append(cardName).append("]").append('\n');
                 }
             }
@@ -93,9 +92,9 @@ public class DckDeckImporter extends PlainTextDeckImporter {
                 }
             }
         } else if (line.startsWith("NAME:")) {
-            deckList.setName(line.substring(5, line.length()));
+            deckList.setName(line.substring(5));
         } else if (line.startsWith("AUTHOR:")) {
-            deckList.setAuthor(line.substring(7, line.length()));
+            deckList.setAuthor(line.substring(7));
         } else if (line.startsWith("LAYOUT")) {
             Matcher m2 = layoutPattern.matcher(line);
             if (m2.find()) {
