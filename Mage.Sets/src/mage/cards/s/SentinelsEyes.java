@@ -41,6 +41,7 @@ public final class SentinelsEyes extends CardImpl {
         ability.addEffect(new GainAbilityAttachedEffect(
                 VigilanceAbility.getInstance(), AttachmentType.AURA
         ).setText("and has vigilance"));
+        this.addAbility(ability);
 
         // Escape—{W}, Exile two other cards from your graveyard.
         this.addAbility(new EscapeAbility(this, "{W}", 2));
