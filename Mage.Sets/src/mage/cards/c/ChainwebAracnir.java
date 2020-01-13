@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.EscapesWithAbility;
-import mage.abilities.effects.common.DamageWithPowerTargetEffect;
+import mage.abilities.effects.common.DamageWithPowerFromSourceToAnotherTargetEffect;
 import mage.abilities.keyword.EscapeAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ReachAbility;
@@ -41,9 +41,8 @@ public final class ChainwebAracnir extends CardImpl {
         // Reach
         this.addAbility(ReachAbility.getInstance());
 
-        // When CHainweb Aracnir enters the battlefield, it deals damage equal to its power to target creature with flying an opponent controls.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageWithPowerTargetEffect()
-                .setText("it deals damage equal to its power to target creature with flying an opponent controls"));
+        // When Chainweb Aracnir enters the battlefield, it deals damage equal to its power to target creature with flying an opponent controls.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageWithPowerFromSourceToAnotherTargetEffect("it"));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
