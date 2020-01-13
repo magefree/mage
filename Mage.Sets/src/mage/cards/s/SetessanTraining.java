@@ -44,7 +44,7 @@ public final class SetessanTraining extends CardImpl {
         ability = new SimpleStaticAbility(new BoostEnchantedEffect(1, 0));
         ability.addEffect(new GainAbilityAttachedEffect(
                 TrampleAbility.getInstance(), AttachmentType.AURA
-        ).setText("and hasd trample"));
+        ).setText("and has trample"));
         this.addAbility(ability);
     }
 
