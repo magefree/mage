@@ -1,5 +1,6 @@
 package mage.cards.p;
 
+import mage.abilities.Mode;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -25,10 +26,11 @@ public final class PharikasLibation extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
 
         // • Target opponent sacrifices an enchantment.
-        this.getSpellAbility().addEffect(new SacrificeEffect(
+        Mode mode = new Mode(new SacrificeEffect(
                 StaticFilters.FILTER_ENCHANTMENT_PERMANENT, 1, "Target opponent"
         ));
-        this.getSpellAbility().addTarget(new TargetOpponent());
+        mode.addTarget(new TargetOpponent());
+        this.getSpellAbility().addMode(mode);
     }
 
     private PharikasLibation(final PharikasLibation card) {
