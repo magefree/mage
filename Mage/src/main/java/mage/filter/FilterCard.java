@@ -1,10 +1,8 @@
 package mage.filter;
 
 import mage.cards.Card;
-import mage.filter.predicate.ObjectPlayer;
-import mage.filter.predicate.ObjectPlayerPredicate;
-import mage.filter.predicate.ObjectSourcePlayer;
-import mage.filter.predicate.Predicates;
+import mage.constants.TargetController;
+import mage.filter.predicate.*;
 import mage.game.Game;
 
 import java.util.ArrayList;
@@ -71,6 +69,9 @@ public class FilterCard extends FilterObject<Card> {
         if (isLockedFilter()) {
             throw new UnsupportedOperationException("You may not modify a locked filter");
         }
+
+        checkPredicateIsSuitableForCardFilter(predicate);
+
         extraPredicates.add(predicate);
     }
 
@@ -85,5 +86,14 @@ public class FilterCard extends FilterObject<Card> {
     @Override
     public FilterCard copy() {
         return new FilterCard(this);
+    }
+
+    public static void checkPredicateIsSuitableForCardFilter(Predicate predicate) {
+        // card filter can't contain controller predicate (only permanents on battlefield have controller)
+        List<Predicate> list = new ArrayList<>();
+        Predicates.collectAllComponents(predicate, list);
+        if (list.stream().anyMatch(p -> p instanceof TargetController.ControllerPredicate)) {
+            throw new IllegalArgumentException("Card filter doesn't support controller predicate");
+        }
     }
 }
