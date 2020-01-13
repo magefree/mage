@@ -28,7 +28,7 @@ public final class DaybreakChimera extends CardImpl {
         this.toughness = new MageInt(3);
 
         // This spell costs {X} less to cast, where X is your devotion to white.
-        this.addAbility(new SimpleStaticAbility(new DaybreakChimeraEffect()).addHint(DevotionCount.W.getHint()));
+        this.addAbility(new SimpleStaticAbility(Zone.STACK, new DaybreakChimeraEffect()).addHint(DevotionCount.W.getHint()));
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
