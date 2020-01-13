@@ -1,4 +1,3 @@
-
 package mage.abilities.keyword;
 
 import java.util.ArrayList;
@@ -81,8 +80,10 @@ public class ProtectionAbility extends StaticAbility {
         }
 
         if (filter instanceof FilterCard) {
-            if (source instanceof Card) {
-                return !filter.match(source, game);
+            if (source instanceof Permanent) {
+                return !((FilterCard) filter).match((Card) source, getSourceId(), ((Permanent) source).getControllerId(), game);
+            } else if (source instanceof Card) {
+                return !((FilterCard) filter).match((Card) source, getSourceId(), ((Card) source).getOwnerId(), game);
             }
             return true;
         }
@@ -120,7 +121,9 @@ public class ProtectionAbility extends StaticAbility {
         return removeAuras;
     }
 
-    public List<ObjectColor> getColors() { return colors; }
+    public List<ObjectColor> getColors() {
+        return colors;
+    }
 
     public UUID getAuraIdNotToBeRemoved() {
         return auraIdNotToBeRemoved;

@@ -1,5 +1,6 @@
 package mage.cards.h;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -13,15 +14,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
-import mage.filter.predicate.ObjectPlayerPredicate;
 import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
 import mage.util.RandomUtil;
-
-import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -96,13 +95,13 @@ class HaktosTheUnscarredChooseEffect extends OneShotEffect {
         }
         int number = 2 + RandomUtil.nextInt(3);
         game.informPlayers(permanent.getLogName() + ": " + controller.getLogName() + " has chosen " + number + " at random");
-        game.getState().setValue(permanent.getId() + "" + permanent.getZoneChangeCounter(game) + "_haktos_number", number);
+        game.getState().setValue(permanent.getId() + "" + (permanent.getZoneChangeCounter(game) + 1) + "_haktos_number", number);
         permanent.addInfo("chosen number", CardUtil.addToolTipMarkTags("Chosen number: " + number), game);
         return true;
     }
 }
 
-enum HaktosTheUnscarredPredicate implements ObjectPlayerPredicate<ObjectSourcePlayer<Card>> {
+enum HaktosTheUnscarredPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Card>> {
     instance;
 
     @Override

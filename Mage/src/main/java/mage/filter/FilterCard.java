@@ -1,15 +1,14 @@
 package mage.filter;
 
-import mage.cards.Card;
-import mage.constants.TargetController;
-import mage.filter.predicate.*;
-import mage.game.Game;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
+import mage.cards.Card;
+import mage.constants.TargetController;
+import mage.filter.predicate.*;
+import mage.game.Game;
 
 /**
  * @author BetaSteward_at_googlemail.com
