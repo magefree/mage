@@ -1,40 +1,34 @@
-
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
-import mage.abilities.effects.common.DamageWithPowerTargetEffect;
+import mage.abilities.effects.common.DamageWithPowerFromOneToAnotherTargetEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.TargetController;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class HuatliDinosaurKnight extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Dinosaur you control");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creature you don't control");
-    private static final FilterCreaturePermanent filter3 = new FilterCreaturePermanent("Dinosaurs you control");
+    private static final FilterCreaturePermanent filter3 = new FilterCreaturePermanent("Dinosaurs");
 
     static {
         filter.add(SubType.DINOSAUR.getPredicate());
         filter.add(TargetController.YOU.getControllerPredicate());
         filter2.add(TargetController.NOT_YOU.getControllerPredicate());
         filter3.add(SubType.DINOSAUR.getPredicate());
-        filter3.add(TargetController.YOU.getControllerPredicate());
     }
 
     public HuatliDinosaurKnight(UUID ownerId, CardSetInfo setInfo) {
@@ -53,7 +47,7 @@ public final class HuatliDinosaurKnight extends CardImpl {
         this.addAbility(ability);
 
         // -3: Target Dinosaur you control deals damage equal to its power to target creature you don't control.
-        ability = new LoyaltyAbility(new DamageWithPowerTargetEffect(), -3);
+        ability = new LoyaltyAbility(new DamageWithPowerFromOneToAnotherTargetEffect(), -3);
         ability.addTarget(new TargetCreaturePermanent(filter));
         ability.addTarget(new TargetCreaturePermanent(filter2));
         this.addAbility(ability);
