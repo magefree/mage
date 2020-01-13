@@ -1,7 +1,6 @@
 package mage.cards.h;
 
 import mage.MageInt;
-import mage.MageItem;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.LifelinkAbility;
@@ -13,6 +12,7 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.EnchantedPredicate;
+import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -88,7 +88,7 @@ class HatefulEidolonTriggeredAbility extends TriggeredAbilityImpl {
                 .map(game::getPermanentOrLKIBattlefield)
                 .filter(Objects::nonNull)
                 .filter(permanent -> permanent.hasSubtype(SubType.AURA, game))
-                .map(MageItem::getId)
+                .map(Controllable::getControllerId)
                 .filter(this.getControllerId()::equals)
                 .mapToInt(x -> 1)
                 .sum();
