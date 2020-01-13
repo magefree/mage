@@ -39,7 +39,8 @@ public final class SerraTheBenevolent extends CardImpl {
         this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
 
         // +2: Creatures you control with flying get +1/+1 until end of turn.
-        this.addAbility(new LoyaltyAbility(new BoostControlledEffect(1, 1, Duration.EndOfTurn, filter), 2));
+        this.addAbility(new LoyaltyAbility(new BoostControlledEffect(1, 1, Duration.EndOfTurn, filter)
+                .setText("Creatures you control with flying get +1/+1 until end of turn"), 2));
 
         // -3: Create a 4/4 white Angel creature token with flying and vigilance.
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new AngelVigilanceToken()), -3));
