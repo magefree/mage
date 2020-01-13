@@ -1,5 +1,6 @@
 package mage.cards.h;
 
+import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
@@ -23,6 +24,8 @@ public final class HeroesOfTheRevel extends CardImpl {
 
         this.subtype.add(SubType.SATYR);
         this.subtype.add(SubType.SOLDIER);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
 
         // When Heroes of the Revel enters the battlefield, create a 1/1 red Satyr creature token with "This creature can't block."
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new SatyrCantBlockToken())));
