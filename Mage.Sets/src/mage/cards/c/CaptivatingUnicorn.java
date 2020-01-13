@@ -2,7 +2,7 @@ package mage.cards.c;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.abilityword.ConstellationAbility;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -25,7 +25,7 @@ public final class CaptivatingUnicorn extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Constellation — Whenever an enchantment enters the battlefield under your control, tap target creature an opponent controls.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new TapTargetEffect(), false, false);
+        Ability ability = new ConstellationAbility(new TapTargetEffect(), false, false);
         ability.addTarget(new TargetOpponentsCreaturePermanent());
         this.addAbility(ability);
     }
