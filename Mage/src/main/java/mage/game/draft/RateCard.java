@@ -144,7 +144,9 @@ public final class RateCard {
                 return 1;
             }
         }
-        if (effect instanceof FightTargetsEffect || effect instanceof DamageWithPowerTargetEffect) {
+        if (effect instanceof FightTargetsEffect
+                || effect instanceof DamageWithPowerFromOneToAnotherTargetEffect
+                || effect instanceof DamageWithPowerFromSourceToAnotherTargetEffect) {
             return 1;
         }
         if (effect.getOutcome() == Outcome.Damage || effect instanceof DamageTargetEffect) {

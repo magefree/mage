@@ -3,7 +3,7 @@ package mage.cards.v;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
-import mage.abilities.effects.common.DamageWithPowerTargetEffect;
+import mage.abilities.effects.common.DamageWithPowerFromOneToAnotherTargetEffect;
 import mage.abilities.effects.common.WishEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.counter.DistributeCountersEffect;
@@ -16,13 +16,13 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
+import mage.game.Game;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreatureOrPlaneswalker;
 import mage.target.common.TargetCreaturePermanentAmount;
+import mage.target.targetadjustment.TargetAdjuster;
 
 import java.util.UUID;
-import mage.game.Game;
-import mage.target.targetadjustment.TargetAdjuster;
 
 /**
  * @author TheElk801
@@ -45,17 +45,14 @@ public final class VivienArkbowRanger extends CardImpl {
         ));
         TargetCreaturePermanentAmount target = new TargetCreaturePermanentAmount(2);
         target.setMinNumberOfTargets(0);
-        target.setMaxNumberOfTargets(2);        
+        target.setMaxNumberOfTargets(2);
         ability.addTarget(target);
-        
-       // ability.setTargetAdjuster(VivienArkbowRangerAdjuster.instance);
+
+        // ability.setTargetAdjuster(VivienArkbowRangerAdjuster.instance);
         this.addAbility(ability);
 
         // −3: Target creature you control deals damage equal to its power to target creature or planeswalker.
-        ability = new LoyaltyAbility(
-                new DamageWithPowerTargetEffect().setText("Target creature you control deals damage "
-                        + "equal to its power to target creature or planeswalker."), -3
-        );
+        ability = new LoyaltyAbility(new DamageWithPowerFromOneToAnotherTargetEffect(), -3);
         ability.addTarget(new TargetControlledCreaturePermanent());
         ability.addTarget(new TargetCreatureOrPlaneswalker());
         this.addAbility(ability);

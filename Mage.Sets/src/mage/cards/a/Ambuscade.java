@@ -1,9 +1,7 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.DamageWithPowerTargetEffect;
+import mage.abilities.effects.common.DamageWithPowerFromOneToAnotherTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -14,8 +12,9 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author ciaccona007
  */
 public final class Ambuscade extends CardImpl {
@@ -31,14 +30,12 @@ public final class Ambuscade extends CardImpl {
 
         // Target creature you control gets +1/+0 until end of turn.
         Effect effect = new BoostTargetEffect(1, 0, Duration.EndOfTurn);
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
 
         // It deals damage equal to its power to target creature you don't control.
-        effect = new DamageWithPowerTargetEffect();
-        effect.setText("It deals damage equal to its power to target creature you don't control");
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
-        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addEffect(new DamageWithPowerFromOneToAnotherTargetEffect("It"));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter)); // second target for effect
     }
 
     public Ambuscade(final Ambuscade card) {

@@ -1,8 +1,6 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
-import mage.abilities.effects.common.DamageWithPowerTargetEffect;
+import mage.abilities.effects.common.DamageWithPowerFromOneToAnotherTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -11,8 +9,9 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class TailSlash extends CardImpl {
@@ -27,9 +26,9 @@ public final class TailSlash extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}");
 
         // Target creature you control deals damage equal to its power to target creature you don't control.
+        this.getSpellAbility().addEffect(new DamageWithPowerFromOneToAnotherTargetEffect());
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
-        this.getSpellAbility().addEffect(new DamageWithPowerTargetEffect());
     }
 
     public TailSlash(final TailSlash card) {

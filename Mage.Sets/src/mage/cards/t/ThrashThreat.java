@@ -1,7 +1,7 @@
 package mage.cards.t;
 
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.DamageWithPowerTargetEffect;
+import mage.abilities.effects.common.DamageWithPowerFromOneToAnotherTargetEffect;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
@@ -32,11 +32,7 @@ public final class ThrashThreat extends SplitCard {
 
         // Thrash
         // Target creature you control deals damage equal to its power to target creature or planeswalker you don't control.
-        this.getLeftHalfCard().getSpellAbility().addEffect(
-                new DamageWithPowerTargetEffect()
-                        .setText("Target creature you control deals damage equal to its power " +
-                                "to target creature or planeswalker you don't control.")
-        );
+        this.getLeftHalfCard().getSpellAbility().addEffect(new DamageWithPowerFromOneToAnotherTargetEffect());
         this.getLeftHalfCard().getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getLeftHalfCard().getSpellAbility().addTarget(new TargetPermanent(filter));
 

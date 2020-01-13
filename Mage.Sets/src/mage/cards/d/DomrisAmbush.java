@@ -2,7 +2,8 @@ package mage.cards.d;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DamageWithPowerTargetEffect;
+import mage.abilities.effects.common.DamageWithPowerFromOneToAnotherTargetEffect;
+import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -33,9 +34,12 @@ public final class DomrisAmbush extends CardImpl {
     public DomrisAmbush(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{R}{G}");
 
-        // Put a +1/+1 counter on target creature you control. Then that creature deals damage equal to its power to target creature or planeswalker you don't control.
-        this.getSpellAbility().addEffect(new DomrisAmbushEffect());
+        // Put a +1/+1 counter on target creature you control.
+        this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
+
+        // Then that creature deals damage equal to its power to target creature or planeswalker you don't control.
+        this.getSpellAbility().addEffect(new DamageWithPowerFromOneToAnotherTargetEffect("that creature").concatBy("Then"));
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
@@ -75,6 +79,6 @@ class DomrisAmbushEffect extends OneShotEffect {
         }
         permanent.addCounters(CounterType.P1P1.createInstance(), source, game);
         game.applyEffects();
-        return new DamageWithPowerTargetEffect().apply(game, source);
+        return new DamageWithPowerFromOneToAnotherTargetEffect().apply(game, source);
     }
 }

@@ -921,7 +921,12 @@ public class VerifyCardDataTest {
         CardSetInfo testSet = new CardSetInfo(cardName, "test", "123", Rarity.COMMON);
         CardInfo cardInfo = CardRepository.instance.findCard(cardName);
         Card card = CardImpl.createCard(cardInfo.getClassName(), testSet);
-        card.getRules().stream().forEach(System.out::println);
+        System.out.println(card.getName());
+        if (card instanceof SplitCard) {
+            card.getAbilities().getRules(card.getName()).stream().forEach(System.out::println);
+        } else {
+            card.getRules().stream().forEach(System.out::println);
+        }
     }
 
     private void checkWrongAbilitiesText(Card card, JsonCard ref) {
