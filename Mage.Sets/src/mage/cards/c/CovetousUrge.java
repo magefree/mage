@@ -70,24 +70,25 @@ class CovetousUrgeEffect extends OneShotEffect {
             return false;
         }
         player.revealCards(source, player.getHand(), game);
-        if (!controller.chooseUse(outcome, "Choose a nonland card to exile?", source, game)) {
-            return false;
-        }
-        TargetCard target;
-        if (player.getGraveyard().isEmpty() || controller.chooseUse(outcome,
+
+        TargetCard target; // TODO: fix skip exile on wrong place (see Nicol Bolas, Dragon-God)
+        if (player.getGraveyard().isEmpty() || controller.chooseUse(Outcome.Benefit, // AI must use hand first
                 "Exile a nonland card from " + player.getName() + "'s hand or graveyard",
                 "", "Hand", "Graveyard", source, game)) {
             if (player.getHand().isEmpty()) {
                 return true;
             }
             target = new TargetCard(Zone.HAND, StaticFilters.FILTER_CARD_A_NON_LAND);
-            controller.choose(outcome, player.getHand(), target, game);
+            controller.choose(Outcome.Exile, player.getHand(), target, game);
         } else {
             target = new TargetCard(Zone.GRAVEYARD, StaticFilters.FILTER_CARD_A_NON_LAND);
-            controller.choose(outcome, player.getGraveyard(), target, game);
+            controller.choose(Outcome.Exile, player.getGraveyard(), target, game);
         }
+
+        // use same player's zone for all Covetous Urge instances
+        UUID exileZone = CardUtil.getExileZoneId(controller.getId() + " - Covetous Urge", game);
         Card card = game.getCard(target.getFirstTarget());
-        if (card == null || !controller.moveCards(card, Zone.EXILED, source, game)) {
+        if (card == null || !controller.moveCardsToExile(card, source, game, true, exileZone, "Covetous Urge - can cast with any mana")) {
             return false;
         }
         if (card.getSpellAbility() == null) {
