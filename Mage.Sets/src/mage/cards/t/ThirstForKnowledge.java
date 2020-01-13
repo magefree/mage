@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import mage.abilities.costs.common.DiscardCardCost;
@@ -24,9 +23,13 @@ public final class ThirstForKnowledge extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}");
 
         // Draw three cards. Then discard two cards unless you discard an artifact card.
+        DiscardCardCost cost = new DiscardCardCost(filter);
+        cost.setText("discard one artifact card instead two cards");
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));
         this.getSpellAbility().addEffect(new DoIfCostPaid(
-                null, new DiscardControllerEffect(2), new DiscardCardCost(filter)
+                null,
+                new DiscardControllerEffect(2),
+                cost
         ).setText("Then discard two cards unless you discard an artifact card"));
     }
 

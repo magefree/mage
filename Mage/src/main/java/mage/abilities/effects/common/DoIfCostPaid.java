@@ -23,27 +23,27 @@ public class DoIfCostPaid extends OneShotEffect {
     private String chooseUseText;
     private boolean optional;
 
-    public DoIfCostPaid(Effect effect, Cost cost) {
-        this(effect, cost, null);
+    public DoIfCostPaid(Effect effectOnPaid, Cost cost) {
+        this(effectOnPaid, cost, null);
     }
 
-    public DoIfCostPaid(Effect effect, Effect effect2, Cost cost) {
-        this(effect, effect2, cost, true);
+    public DoIfCostPaid(Effect effectOnPaid, Effect effectOnNotPaid, Cost cost) {
+        this(effectOnPaid, effectOnNotPaid, cost, true);
     }
 
-    public DoIfCostPaid(Effect effect, Effect effect2, Cost cost, boolean optional) {
-        this(effect, cost, null, optional);
-        this.otherwiseEffects.add(effect2);
+    public DoIfCostPaid(Effect effectOnPaid, Effect effectOnNotPaid, Cost cost, boolean optional) {
+        this(effectOnPaid, cost, null, optional);
+        this.otherwiseEffects.add(effectOnNotPaid);
     }
 
-    public DoIfCostPaid(Effect effect, Cost cost, String chooseUseText) {
-        this(effect, cost, chooseUseText, true);
+    public DoIfCostPaid(Effect effectOnPaid, Cost cost, String chooseUseText) {
+        this(effectOnPaid, cost, chooseUseText, true);
     }
 
-    public DoIfCostPaid(Effect effect, Cost cost, String chooseUseText, boolean optional) {
+    public DoIfCostPaid(Effect effectOnPaid, Cost cost, String chooseUseText, boolean optional) {
         super(Outcome.Benefit);
-        if (effect != null) {
-            this.executingEffects.add(effect);
+        if (effectOnPaid != null) {
+            this.executingEffects.add(effectOnPaid);
         }
         this.cost = cost;
         this.chooseUseText = chooseUseText;
@@ -83,7 +83,7 @@ public class DoIfCostPaid extends OneShotEffect {
                 if (!effectText.isEmpty() && effectText.charAt(effectText.length() - 1) == '.') {
                     effectText = effectText.substring(0, effectText.length() - 1);
                 }
-                message = getCostText() + " and " + effectText + '?';
+                message = getCostText() + (effectText.isEmpty() ? "" : " and " + effectText) + "?";
                 message = Character.toUpperCase(message.charAt(0)) + message.substring(1);
                 CardUtil.replaceSourceName(message, mageObject.getName());
             } else {
@@ -91,8 +91,9 @@ public class DoIfCostPaid extends OneShotEffect {
             }
             message = CardUtil.replaceSourceName(message, mageObject.getLogName());
             boolean result = true;
+            Outcome payOutcome = executingEffects.size() > 0 ? executingEffects.get(0).getOutcome() : this.outcome;
             if (cost.canPay(source, source.getSourceId(), player.getId(), game)
-                    && executingEffects.size() > 0 && (!optional || player.chooseUse(executingEffects.get(0).getOutcome(), message, source, game))) {
+                    && (!optional || player.chooseUse(payOutcome, message, source, game))) {
                 cost.clearPaid();
                 int bookmark = game.bookmarkState();
                 if (cost.pay(source, game, source.getSourceId(), player.getId(), false)) {
