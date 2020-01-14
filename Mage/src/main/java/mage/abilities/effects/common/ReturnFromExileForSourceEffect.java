@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import mage.MageObject;
@@ -14,7 +13,6 @@ import mage.util.CardUtil;
 import org.apache.log4j.Logger;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class ReturnFromExileForSourceEffect extends OneShotEffect {
@@ -22,9 +20,10 @@ public class ReturnFromExileForSourceEffect extends OneShotEffect {
     private Zone returnToZone;
     private boolean tapped;
     private boolean previousZone;
+    private String returnName = "cards";
+    private String returnControlName;
 
     /**
-     *
      * @param zone Zone the card should return to
      */
     public ReturnFromExileForSourceEffect(Zone zone) {
@@ -36,18 +35,28 @@ public class ReturnFromExileForSourceEffect extends OneShotEffect {
     }
 
     /**
-     *
      * @param zone
      * @param tapped
      * @param previousZone if this is used from a dies leave battlefield or
-     * destroyed trigger, the exile zone is based on previous zone of the object
+     *                     destroyed trigger, the exile zone is based on previous zone of the object
      */
     public ReturnFromExileForSourceEffect(Zone zone, boolean tapped, boolean previousZone) {
         super(Outcome.PutCardInPlay);
         this.returnToZone = zone;
         this.tapped = tapped;
         this.previousZone = previousZone;
-        setText();
+
+        // different default name for zones
+        switch (zone) {
+            case BATTLEFIELD:
+                this.returnControlName = "its owner's";
+                break;
+            default:
+                this.returnControlName = "their owner's";
+                break;
+        }
+
+        updateText();
     }
 
     public ReturnFromExileForSourceEffect(final ReturnFromExileForSourceEffect effect) {
@@ -55,6 +64,10 @@ public class ReturnFromExileForSourceEffect extends OneShotEffect {
         this.returnToZone = effect.returnToZone;
         this.tapped = effect.tapped;
         this.previousZone = effect.previousZone;
+        this.returnName = effect.returnName;
+        this.returnControlName = effect.returnControlName;
+
+        updateText();
     }
 
     @Override
@@ -85,24 +98,30 @@ public class ReturnFromExileForSourceEffect extends OneShotEffect {
         return false;
     }
 
-    private void setText() {
+    private void updateText() {
         StringBuilder sb = new StringBuilder();
-        sb.append("return the exiled cards ");
+        sb.append("return the exiled " + this.returnName + " ");
         switch (returnToZone) {
             case BATTLEFIELD:
-                sb.append("to the battlefield under its owner's control");
+                sb.append("to the battlefield under " + this.returnControlName + " control");
                 if (tapped) {
                     sb.append(" tapped");
                 }
                 break;
             case HAND:
-                sb.append("to their owner's hand");
+                sb.append("to " + this.returnControlName + " hand");
                 break;
             case GRAVEYARD:
-                sb.append("to their owner's graveyard");
+                sb.append("to " + this.returnControlName + " graveyard");
                 break;
         }
         staticText = sb.toString();
     }
 
+    public ReturnFromExileForSourceEffect withReturnName(String returnName, String returnControlName) {
+        this.returnName = returnName;
+        this.returnControlName = returnControlName;
+        updateText();
+        return this;
+    }
 }

@@ -1,7 +1,5 @@
-
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -21,13 +19,14 @@ import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LoneFox
  */
 public final class FacelessDevourer extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature with shadow");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -35,7 +34,7 @@ public final class FacelessDevourer extends CardImpl {
     }
 
     public FacelessDevourer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.subtype.add(SubType.NIGHTMARE);
         this.subtype.add(SubType.HORROR);
         this.power = new MageInt(2);
@@ -43,15 +42,17 @@ public final class FacelessDevourer extends CardImpl {
 
         // Shadow
         this.addAbility(ShadowAbility.getInstance());
+
         // When Faceless Devourer enters the battlefield, exile another target creature with shadow.
         Effect effect = new ExileTargetForSourceEffect();
-        effect.setText("exile another target creature with shadow");
         Ability ability = new EntersBattlefieldTriggeredAbility(effect, false);
         Target target = new TargetPermanent(filter);
         ability.addTarget(target);
         this.addAbility(ability);
+
         // When Faceless Devourer leaves the battlefield, return the exiled card to the battlefield under its owner's control.
-        ability = new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD), false);
+        ability = new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD)
+                .withReturnName("card", "its owner's"), false);
         this.addAbility(ability);
     }
 

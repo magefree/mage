@@ -23,6 +23,8 @@ public class ReturnToBattlefieldUnderYourControlTargetEffect extends OneShotEffe
     private boolean fromExileZone;
     private boolean tapped;
     private boolean attacking;
+    private String returnName = "that card";
+    private String returnUnderControlName = "your";
 
     public ReturnToBattlefieldUnderYourControlTargetEffect() {
         this(false);
@@ -50,12 +52,14 @@ public class ReturnToBattlefieldUnderYourControlTargetEffect extends OneShotEffe
         this.fromExileZone = effect.fromExileZone;
         this.tapped = effect.tapped;
         this.attacking = effect.attacking;
+        this.returnName = effect.returnName;
+        this.returnUnderControlName = effect.returnUnderControlName;
 
         updateText();
     }
 
     private void updateText() {
-        this.staticText = "return that card to the battlefield under your control"
+        this.staticText = "return " + returnName + " to the battlefield under " + returnUnderControlName + " control"
                 + (tapped ? " tapped" : "")
                 + (tapped && attacking ? " and" : "")
                 + (attacking ? " attacking" : "");
@@ -110,5 +114,12 @@ public class ReturnToBattlefieldUnderYourControlTargetEffect extends OneShotEffe
             return true;
         }
         return false;
+    }
+
+    public ReturnToBattlefieldUnderYourControlTargetEffect withReturnNames(String returnName, String returnUnderControlName) {
+        this.returnName = returnName;
+        this.returnUnderControlName = returnUnderControlName;
+        updateText();
+        return this;
     }
 }

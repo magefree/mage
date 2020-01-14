@@ -1,9 +1,5 @@
-
 package mage.abilities.effects.common;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -16,8 +12,11 @@ import mage.target.Target;
 import mage.target.targetpointer.FirstTargetPointer;
 import mage.util.CardUtil;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class ExileTargetForSourceEffect extends OneShotEffect {
@@ -70,12 +69,24 @@ public class ExileTargetForSourceEffect extends OneShotEffect {
             return staticText;
         }
 
+        String amountText = "";
+        if (mode.getTargets().get(0).getMinNumberOfTargets() < mode.getTargets().get(0).getMaxNumberOfTargets()) {
+            amountText = "up to " + CardUtil.numberToText(mode.getTargets().get(0).getMaxNumberOfTargets()) + " ";
+        } else if (mode.getTargets().get(0).getMinNumberOfTargets() > 1) {
+            amountText = CardUtil.numberToText(mode.getTargets().get(0).getMinNumberOfTargets()) + " ";
+        }
+
+        String targetText = "";
+        if (mode.getTargets().get(0).getTargetName().contains("target ")) {
+            targetText = "";
+        } else {
+            targetText = "target ";
+        }
+
         if (mode.getTargets().isEmpty()) {
             return "exile it";
-        } else if (mode.getTargets().get(0).getTargetName().startsWith("another")) {
-            return "exile " + mode.getTargets().get(0).getTargetName();
         } else {
-            return "exile target " + mode.getTargets().get(0).getTargetName();
+            return "exile " + amountText + targetText + mode.getTargets().get(0).getTargetName();
         }
     }
 }

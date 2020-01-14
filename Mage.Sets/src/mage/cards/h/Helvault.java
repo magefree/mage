@@ -1,7 +1,5 @@
-
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -18,8 +16,9 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class Helvault extends CardImpl {
@@ -31,19 +30,21 @@ public final class Helvault extends CardImpl {
     }
 
     public Helvault(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
         addSuperType(SuperType.LEGENDARY);
 
-        // {1}, {tap}: Exile target creature you control.
+        // {1}, {T}: Exile target creature you control.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetForSourceEffect(), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
-        // {7}, {tap}: Exile target creature you don't control.
+
+        // {7}, {T}: Exile target creature you don't control.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetForSourceEffect(), new GenericManaCost(7));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
+
         // When Helvault is put into a graveyard from the battlefield, return all cards exiled with it to the battlefield under their owners' control.
         this.addAbility(new DiesTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD)));
     }

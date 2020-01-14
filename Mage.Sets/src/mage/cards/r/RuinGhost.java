@@ -1,7 +1,5 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -17,20 +15,21 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.target.TargetPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class RuinGhost extends CardImpl {
 
     public RuinGhost(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {W}, {tap}: Exile target land you control, then return it to the battlefield under your control.
+        // {W}, {T}: Exile target land you control, then return it to the battlefield under your control.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetForSourceEffect(), new ManaCostsImpl("{W"));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new ReturnToBattlefieldUnderYourControlTargetEffect(true));

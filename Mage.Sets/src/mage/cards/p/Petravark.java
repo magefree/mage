@@ -1,7 +1,5 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -15,14 +13,15 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetLandPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LoneFox
  */
 public final class Petravark extends CardImpl {
 
     public Petravark(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.subtype.add(SubType.NIGHTMARE);
         this.subtype.add(SubType.BEAST);
         this.power = new MageInt(2);
@@ -32,6 +31,7 @@ public final class Petravark extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExileTargetForSourceEffect(), false);
         ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);
+
         // When Petravark leaves the battlefield, return the exiled card to the battlefield under its owner's control.
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD), false));
     }

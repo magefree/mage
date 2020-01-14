@@ -1,7 +1,5 @@
-
 package mage.abilities.effects.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -15,14 +13,17 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public class ReturnToBattlefieldUnderOwnerControlTargetEffect extends OneShotEffect {
 
     private boolean tapped;
     protected boolean fromExileZone;
+    private String returnName = "that card";
+    private String returnUnderControlName = "its owner's";
 
     public ReturnToBattlefieldUnderOwnerControlTargetEffect() {
         this(false);
@@ -34,15 +35,26 @@ public class ReturnToBattlefieldUnderOwnerControlTargetEffect extends OneShotEff
 
     public ReturnToBattlefieldUnderOwnerControlTargetEffect(boolean tapped, boolean fromExileZone) {
         super(Outcome.Benefit);
-        staticText = "return that card to the battlefield under its owner's control";
         this.tapped = tapped;
         this.fromExileZone = fromExileZone;
+
+        updateText();
     }
 
     public ReturnToBattlefieldUnderOwnerControlTargetEffect(final ReturnToBattlefieldUnderOwnerControlTargetEffect effect) {
         super(effect);
         this.tapped = effect.tapped;
         this.fromExileZone = effect.fromExileZone;
+        this.returnName = effect.returnName;
+        this.returnUnderControlName = effect.returnUnderControlName;
+
+        updateText();
+    }
+
+    private void updateText() {
+        this.staticText = "return " + this.returnName
+                + " to the battlefield" + (tapped ? " tapped" : "")
+                + " under " + this.returnUnderControlName + " control";
     }
 
     @Override
@@ -63,8 +75,7 @@ public class ReturnToBattlefieldUnderOwnerControlTargetEffect extends OneShotEff
                         for (UUID targetId : this.getTargetPointer().getTargets(game, source)) {
                             if (exileZone.contains(targetId)) {
                                 cardsToBattlefield.add(targetId);
-                            }
-                            else {
+                            } else {
                                 Card card = game.getCard(targetId);
                                 if (card instanceof MeldCard) {
                                     MeldCard meldCard = (MeldCard) card;
@@ -90,5 +101,12 @@ public class ReturnToBattlefieldUnderOwnerControlTargetEffect extends OneShotEff
             return true;
         }
         return false;
+    }
+
+    public ReturnToBattlefieldUnderOwnerControlTargetEffect withReturnNames(String returnName, String returnUnderControlName) {
+        this.returnName = returnName;
+        this.returnUnderControlName = returnUnderControlName;
+        updateText();
+        return this;
     }
 }

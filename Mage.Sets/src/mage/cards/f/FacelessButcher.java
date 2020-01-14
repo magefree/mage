@@ -1,7 +1,5 @@
-
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -19,32 +17,29 @@ import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 
+import java.util.UUID;
+
 
 /**
- *
  * @author Temba21
  */
 public final class FacelessButcher extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature other than Faceless Butcher");
 
     static {
-         filter.add(AnotherPredicate.instance);
+        filter.add(AnotherPredicate.instance);
     }
 
-
     public FacelessButcher(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
         this.subtype.add(SubType.NIGHTMARE);
         this.subtype.add(SubType.HORROR);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-
         // When Faceless Butcher enters the battlefield, exile target creature other than Faceless Butcher.
         Effect effect = new ExileTargetForSourceEffect();
-        effect.setText("exile target creature other than {this}");
         Ability ability1 = new EntersBattlefieldTriggeredAbility(effect, false);
         Target target = new TargetPermanent(filter);
         ability1.addTarget(target);
