@@ -1,4 +1,3 @@
-
 package mage.cards.w;
 
 import java.util.UUID;
@@ -29,8 +28,11 @@ public final class WildEvocation extends CardImpl {
     public WildEvocation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{5}{R}");
 
-        //At the beginning of each player's upkeep, that player reveals a card at random from their hand. If it's a land card, the player puts it onto the battlefield. Otherwise, the player casts it without paying its mana cost if able.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new WildEvocationEffect(), TargetController.ANY, false));
+        //At the beginning of each player's upkeep, that player reveals a card at 
+        // random from their hand. If it's a land card, the player puts it onto 
+        // the battlefield. Otherwise, the player casts it without paying its mana cost if able.
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, 
+                new WildEvocationEffect(), TargetController.ANY, false));
     }
 
     public WildEvocation(final WildEvocation card) {
@@ -61,18 +63,23 @@ class WildEvocationEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         MageObject sourceObject = source.getSourceObject(game);
-        if (player != null && sourceObject != null) {
+        if (player != null 
+                && sourceObject != null) {
             Card card = player.getHand().getRandom(game);
             if (card != null) {
                 Cards cards = new CardsImpl(card);
-                player.revealCards(sourceObject.getIdName() + " Turn: " + game.getTurnNum(), cards, game);
+                player.revealCards(sourceObject.getIdName() + " Turn: " 
+                        + game.getTurnNum(), cards, game);
                 if (card.isLand()) {
                     player.moveCards(card, Zone.BATTLEFIELD, source, game);
-                } else if (card.getSpellAbility() != null
-                        && card.getSpellAbility().getTargets().canChoose(player.getId(), game)) {
-                    player.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
+                } else if (card.getSpellAbility() != null) {
+                    game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+                    player.cast(player.chooseAbilityForCast(card, game, true),
+                            game, true, new MageObjectReference(source.getSourceObject(game), game));
+                    game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
                 } else {
-                    game.informPlayers(GameLog.getColoredObjectName(card) + " can't be cast now by " + player.getLogName());
+                    game.informPlayers(GameLog.getColoredObjectName(card) 
+                            + " can't be cast now by " + player.getLogName());
                 }
             }
             return true;
