@@ -425,6 +425,22 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             return false;
         }
 
+        if (target.getOriginalTarget() instanceof TargetCardInExile) {
+            List<UUID> alreadyTargeted = target.getTargets();
+            TargetCard originalTarget = (TargetCard) target.getOriginalTarget();
+            List<Card> cards = game.getExile().getCards(originalTarget.getFilter(), game);
+            while (!cards.isEmpty()) {
+                Card card = pickTarget(abilityControllerId, cards, outcome, target, null, game);
+                if (card != null && alreadyTargeted != null && !alreadyTargeted.contains(card.getId())) {
+                    target.add(card.getId(), game);
+                    if (target.isChosen()) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
         if (target.getOriginalTarget() instanceof TargetSource) {
             Set<UUID> targets;
             targets = target.possibleTargets(sourceId, abilityControllerId, game);
