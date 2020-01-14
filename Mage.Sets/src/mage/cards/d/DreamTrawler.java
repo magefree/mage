@@ -52,6 +52,7 @@ public final class DreamTrawler extends CardImpl {
                 HexproofAbility.getInstance(), Duration.EndOfTurn
         ), new DiscardCardCost());
         ability.addEffect(new TapSourceEffect().setText("Tap it"));
+        this.addAbility(ability);
     }
 
     private DreamTrawler(final DreamTrawler card) {
