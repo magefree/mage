@@ -145,6 +145,12 @@
             <artifactId>balloontip</artifactId>
             <version>1.2.4.1</version>
         </dependency>
+        <dependency>
+  			<groupId>org.openjfx</groupId>
+  			<artifactId>javafx</artifactId>
+  			<version>14-ea+7</version>
+  			<type>pom</type>
+  		</dependency>
         <!-- svg support start -->
         <!--
             for "SAX2 driver class org.apache.crimson.parser.XMLReaderImpl not found" error looks here:
