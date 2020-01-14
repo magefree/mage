@@ -1,5 +1,6 @@
 package mage.cards.t;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -14,8 +15,6 @@ import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
-
-import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -52,6 +51,7 @@ public final class ThryxTheSuddenStorm extends CardImpl {
         ability.addEffect(new CantBeCounteredControlledEffect(
                 filter2, null, Duration.WhileOnBattlefield
         ).setText("and can't be countered"));
+        this.addAbility(ability);
     }
 
     private ThryxTheSuddenStorm(final ThryxTheSuddenStorm card) {
