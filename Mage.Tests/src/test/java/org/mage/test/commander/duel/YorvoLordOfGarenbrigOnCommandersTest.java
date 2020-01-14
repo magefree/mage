@@ -38,7 +38,7 @@ public class YorvoLordOfGarenbrigOnCommandersTest extends CardTestCommanderDuelB
     }
 
     @Test
-    public void test_TriggerOnUroTitalOfNaturesWrath() {
+    public void test_TriggerOnUroTitanOfNaturesWrath() {
         // Yorvo, Lord of Garenbrig enters the battlefield with four +1/+1 counters on it.
         // Whenever another green creature enters the battlefield under your control, put a +1/+1 counter on Yorvo. Then if that creature’s power is greater than Yorvo’s power, put another +1/+1 counter on Yorvo.
         addCard(Zone.HAND, playerA, "Yorvo, Lord of Garenbrig", 5); // {G}{G}{G}

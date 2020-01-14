@@ -1,6 +1,5 @@
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
@@ -20,20 +19,24 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  * @author TheElk801
  */
 public final class ThassaDeepDwelling extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent("another target creature");
+    private static final FilterPermanent filterAnother = new FilterCreaturePermanent("another target creature");
+    private static final FilterPermanent filterOther = new FilterControlledCreaturePermanent("other target creature you control");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filterAnother.add(AnotherPredicate.instance);
+        filterOther.add(AnotherPredicate.instance);
     }
 
     public ThassaDeepDwelling(UUID ownerId, CardSetInfo setInfo) {
@@ -53,12 +56,12 @@ public final class ThassaDeepDwelling extends CardImpl {
 
         // At the beginning of your end step, exile up to one other target creature you control, then return that card to the battlefield under your control.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new ExileTargetForSourceEffect().setText("exile up to one other target creature you control, then "),
+                new ExileTargetForSourceEffect()/*.setText("exile up to one other target creature you control")*/,
                 TargetController.YOU, false
         );
-        ability.addEffect(new ReturnToBattlefieldUnderYourControlTargetEffect(true));
+        ability.addEffect(new ReturnToBattlefieldUnderYourControlTargetEffect(true).concatBy(", then"));
         ability.addTarget(new TargetPermanent(
-                0, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, false
+                0, 1, filterOther, false
         ));
         this.addAbility(ability);
 
@@ -66,7 +69,7 @@ public final class ThassaDeepDwelling extends CardImpl {
         ability = new SimpleActivatedAbility(
                 new TapTargetEffect("another target creature"), new ManaCostsImpl("{3}{U}")
         );
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(filterAnother));
         this.addAbility(ability);
     }
 
