@@ -57,7 +57,7 @@ public class MageVersion implements Serializable, Comparable<MageVersion> {
     }
 
     public String toString(boolean showBuildTime) {
-        // 1.4.32-betaV0 (build: time)
+        // 1.4.32V1-beta2 (build: time)
         String res = major + "." + minor + '.' + patch + minorPatch + editionInfo;
         if (showBuildTime && !this.buildTime.isEmpty()) {
             res += " (build: " + this.buildTime + ")";

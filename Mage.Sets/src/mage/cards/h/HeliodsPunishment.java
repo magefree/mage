@@ -1,6 +1,5 @@
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -14,22 +13,16 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class HeliodsPunishment extends CardImpl {
@@ -90,7 +83,7 @@ class HeliodsPunishmentLoseAllAbilitiesEnchantedEffect extends ContinuousEffectI
                 attachedTo.removeAllAbilities(source.getSourceId(), game);
                 HeliodsPunishmentEffect effect = new HeliodsPunishmentEffect(sourceEnchantment.getName());
                 Ability ability = new SimpleActivatedAbility(effect, new TapSourceCost());
-                effect.setSourceEnchantment(sourceEnchantment);
+                effect.setSourceEnchantment(sourceEnchantment.getId());
                 attachedTo.addAbility(ability, source.getSourceId(), game);
             }
         }
@@ -101,17 +94,17 @@ class HeliodsPunishmentLoseAllAbilitiesEnchantedEffect extends ContinuousEffectI
 
 class HeliodsPunishmentEffect extends OneShotEffect {
 
-    Permanent sourceEnchantment;
+    UUID sourceEnchantmentId;
 
     public HeliodsPunishmentEffect(String sourceName) {
         super(Outcome.Benefit);
         this.staticText = "Remove a task counter from " + sourceName + ". Then if it has no task counters on it, destroy " + sourceName + ".";
-        sourceEnchantment = null;
+        sourceEnchantmentId = null;
     }
 
     public HeliodsPunishmentEffect(final HeliodsPunishmentEffect effect) {
         super(effect);
-        this.sourceEnchantment = effect.sourceEnchantment.copy();
+        this.sourceEnchantmentId = effect.sourceEnchantmentId;
     }
 
     @Override
@@ -121,6 +114,7 @@ class HeliodsPunishmentEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Permanent sourceEnchantment = game.getPermanent(this.sourceEnchantmentId);
         if (sourceEnchantment != null) {
             if (sourceEnchantment.getCounters(game).getCount(CounterType.TASK) > 0) {
                 sourceEnchantment.removeCounters(CounterType.TASK.createInstance(1), game);
@@ -136,8 +130,8 @@ class HeliodsPunishmentEffect extends OneShotEffect {
         return false;
     }
 
-    public void setSourceEnchantment(Permanent sourceEnchantment) {
-        this.sourceEnchantment = sourceEnchantment;
+    public void setSourceEnchantment(UUID sourceEnchantment) {
+        this.sourceEnchantmentId = sourceEnchantment;
     }
 
 }
