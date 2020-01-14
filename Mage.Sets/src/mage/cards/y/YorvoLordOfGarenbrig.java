@@ -17,6 +17,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -88,7 +89,7 @@ class YorvoLordOfGarenbrigEffect extends OneShotEffect {
             return false;
         }
         sourcePerm.addCounters(CounterType.P1P1.createInstance(), source, game);
-        Permanent permanent = game.getPermanentOrLKIBattlefield(targetPointer.getFirst(game, source));
+        Permanent permanent = ((FixedTarget) targetPointer).getTargetedPermanentOrLKIBattlefield(game);
         if (permanent == null) {
             return true;
         }
