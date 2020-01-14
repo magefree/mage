@@ -56,7 +56,7 @@ public final class ThassaDeepDwelling extends CardImpl {
 
         // At the beginning of your end step, exile up to one other target creature you control, then return that card to the battlefield under your control.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new ExileTargetForSourceEffect()/*.setText("exile up to one other target creature you control")*/,
+                new ExileTargetForSourceEffect(),
                 TargetController.YOU, false
         );
         ability.addEffect(new ReturnToBattlefieldUnderYourControlTargetEffect(true).concatBy(", then"));

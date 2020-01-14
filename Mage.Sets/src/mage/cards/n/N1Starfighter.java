@@ -1,12 +1,9 @@
-
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.ExileTargetForSourceEffect;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
@@ -19,13 +16,14 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Styxo
  */
 public final class N1Starfighter extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another target creature you control");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -40,12 +38,14 @@ public final class N1Starfighter extends CardImpl {
         // Spaceflight
         this.addAbility(SpaceflightAbility.getInstance());
 
-        // Whenever N-1 Starfighter deals combat damage to a player, you may pay {1}{W/U}. If you do, exile another creature you control, then return that card to the battlefield under its owner's control.
-        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new DoIfCostPaid(new ExileTargetForSourceEffect(), new ManaCostsImpl("{1}{W/U}")), false);
-        Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, true);
-        effect.setText(", then return the card to the battlefield under their owner's control");
-        ability.addEffect(effect);
+        // Whenever N-1 Starfighter deals combat damage to a player, you may pay {1}{W/U}. If you do,
+        // exile another target creature you control, then return that card to the battlefield under its owner's control.
+        // P.S. original card have error with missing target word (another target creature)
+        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new DoIfCostPaid(
+                new ExileTargetForSourceEffect(), new ManaCostsImpl("{1}{W/U}")), false);
+        ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, true).concatBy(", then"));
         ability.addTarget(new TargetControlledCreaturePermanent(filter));
+        ability.getRule();
         this.addAbility(ability);
     }
 

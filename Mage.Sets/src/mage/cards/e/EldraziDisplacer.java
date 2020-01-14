@@ -1,7 +1,5 @@
-
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -19,8 +17,9 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class EldraziDisplacer extends CardImpl {
@@ -42,10 +41,9 @@ public final class EldraziDisplacer extends CardImpl {
 
         // {2}{C}: Exile another target creature, then return it to the battlefield tapped under its owner's control.
         Effect effect = new ExileTargetForSourceEffect();
-        effect.setText("Exile another target creature");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{2}{C}"));
-        effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(true);
-        effect.setText(", then return it to the battlefield tapped under its owner's control");
+        effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(true)
+                .withReturnNames("it", "its owner's").concatBy(", then");
         ability.addEffect(effect);
         ability.addTarget(new TargetCreaturePermanent(FILTER));
         this.addAbility(ability);
