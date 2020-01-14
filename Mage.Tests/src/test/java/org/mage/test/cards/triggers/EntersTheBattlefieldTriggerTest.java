@@ -1,4 +1,3 @@
-
 package org.mage.test.cards.triggers;
 
 import mage.constants.PhaseStep;
@@ -8,7 +7,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 public class EntersTheBattlefieldTriggerTest extends CardTestPlayerBase {
@@ -74,7 +72,6 @@ public class EntersTheBattlefieldTriggerTest extends CardTestPlayerBase {
      * Scion of Vitu-Ghazi if it is NOT cast from the hand, it will still allow
      * the Populate effect. It should only allow these when it is cast from
      * hand.
-     *
      */
     @Test
     public void testScionOfVituGhaziConditionNotTrue() {
@@ -108,7 +105,7 @@ public class EntersTheBattlefieldTriggerTest extends CardTestPlayerBase {
 
     /**
      * Dread Cacodemon's abilities should only trigger when cast from hand.
-     *
+     * <p>
      * Testing when cast from hand abilities take effect. Cast from hand
      * destroys opponents creatures and taps all other creatures owner controls.
      */
@@ -141,7 +138,7 @@ public class EntersTheBattlefieldTriggerTest extends CardTestPlayerBase {
 
     /**
      * Dread Cacodemon's abilities should only trigger when cast from hand.
-     *
+     * <p>
      * Testing when card is not cast from hand, abilities do not take effect.
      * All opponents creatures remain alive and owner's creatures are not
      * tapped.
@@ -181,7 +178,6 @@ public class EntersTheBattlefieldTriggerTest extends CardTestPlayerBase {
 
     /**
      * Test that the cast from hand condition works for target permanent
-     *
      */
     @Test
     public void testWildPair() {
@@ -284,24 +280,24 @@ public class EntersTheBattlefieldTriggerTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Noxious Ghoul");
         /*
-        * playerA's Carnivorous Plant will get -1/-1 from Noxious Ghoul -> 3/4
-        * playerB's Carnivorous Plant will get -1/-1 from Noxious Ghoul -> 3/4
+         * playerA's Carnivorous Plant will get -1/-1 from Noxious Ghoul -> 3/4
+         * playerB's Carnivorous Plant will get -1/-1 from Noxious Ghoul -> 3/4
          */
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Clone");
         setChoice(playerA, "Noxious Ghoul");
         /*
-        * playerA's Carnivorous Plant will get -1/-1 from Clone -> 2/3
-        * playerB's Carnivorous Plant will get -1/-1 from Clone -> 2/3
+         * playerA's Carnivorous Plant will get -1/-1 from Clone -> 2/3
+         * playerB's Carnivorous Plant will get -1/-1 from Clone -> 2/3
          */
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Ego Erasure", "targetPlayer=PlayerA", "Whenever");
         /*
-        * playerA' Noxious Ghoul will get -2/0 -> 1/3
-        * playerA's Carnivorous Plant will get -2/0 > 0/3
-        * playerA' Noxious Ghoul will get -1/-1 from Clone -> 0/2
-        * playerA' Noxious Ghoul will get -1/-1 from itself -> -1/1
-        * playerA's Carnivorous Plant will get -1/-1 from Noxious Ghoul -> -1/2
-        * playerB's Carnivorous Plant will get -1/-1 from Noxious Ghoul -> 1/2
+         * playerA' Noxious Ghoul will get -2/0 -> 1/3
+         * playerA's Carnivorous Plant will get -2/0 > 0/3
+         * playerA' Noxious Ghoul will get -1/-1 from Clone -> 0/2
+         * playerA' Noxious Ghoul will get -1/-1 from itself -> -1/1
+         * playerA's Carnivorous Plant will get -1/-1 from Noxious Ghoul -> -1/2
+         * playerB's Carnivorous Plant will get -1/-1 from Noxious Ghoul -> 1/2
          */
         setStopAt(1, PhaseStep.END_TURN);
 
@@ -379,5 +375,33 @@ public class EntersTheBattlefieldTriggerTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Juggernaut", 1);
 
         assertLife(playerA, 15);
+    }
+
+    @Test
+    public void test_MultiTriggersAndSpellLKI() {
+        // getSpellOrLKIStack can return last triggered ability (e.g. null) instead real spell
+        // need to fix it (always return last spell)
+
+        // When Uro enters the battlefield, sacrifice it unless it escaped.
+        // Whenever Uro enters the battlefield or attacks, you gain 3 life and draw a card, then you may put a land card from your hand onto the battlefield.
+        // Escape-{G}{G}{U}{U}, Exile five other cards from your graveyard. (You may cast this card from your graveyard for its escape cost.)
+        addCard(Zone.GRAVEYARD, playerA, "Uro, Titan of Nature's Wrath");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.GRAVEYARD, playerA, "Balduvian Bears", 5);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Uro, Titan of Nature's Wrath");
+        setChoice(playerA, "Balduvian Bears^Balduvian Bears^Balduvian Bears^Balduvian Bears^Balduvian Bears");
+        setChoice(playerA, "When {this} enters the battlefield, sacrifice it"); // sacrifice trigger must go first
+        setChoice(playerA, "No"); // do not put land to battlefield
+
+        // sacrifice trigger must found escape ability by getSpellOrLKIStack and keep uro on battlefield
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Uro, Titan of Nature's Wrath", 1);
     }
 }
