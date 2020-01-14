@@ -45,7 +45,6 @@ public final class N1Starfighter extends CardImpl {
                 new ExileTargetForSourceEffect(), new ManaCostsImpl("{1}{W/U}")), false);
         ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, true).concatBy(", then"));
         ability.addTarget(new TargetControlledCreaturePermanent(filter));
-        ability.getRule();
         this.addAbility(ability);
     }
 

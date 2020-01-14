@@ -1,8 +1,5 @@
-
-
 package mage.abilities.effects.common.continuous;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -15,8 +12,9 @@ import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class SetPowerToughnessTargetEffect extends ContinuousEffectImpl {
@@ -48,7 +46,7 @@ public class SetPowerToughnessTargetEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         boolean result = false;
-        for (UUID targetId: this.getTargetPointer().getTargets(game, source)) {
+        for (UUID targetId : this.getTargetPointer().getTargets(game, source)) {
             Permanent target = game.getPermanent(targetId);
             if (target != null) {
                 if (power != null) {
@@ -69,7 +67,10 @@ public class SetPowerToughnessTargetEffect extends ContinuousEffectImpl {
             return staticText;
         }
         StringBuilder sb = new StringBuilder();
-        sb.append("target ").append(mode.getTargets().get(0).getTargetName()).append(" has base power and toughness ");
+        if (!mode.getTargets().get(0).getTargetName().contains("target")) {
+            sb.append("target ");
+        }
+        sb.append(mode.getTargets().get(0).getTargetName()).append(" has base power and toughness ");
         sb.append(power).append('/').append(toughness).append(' ').append(duration.toString());
         return sb.toString();
     }

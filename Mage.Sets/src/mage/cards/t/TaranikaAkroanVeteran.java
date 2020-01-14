@@ -26,7 +26,7 @@ import java.util.UUID;
  */
 public final class TaranikaAkroanVeteran extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("another creature you control");
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("another target creature you control");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -45,9 +45,7 @@ public final class TaranikaAkroanVeteran extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Whenever Taranika, Akroan Veteran attacks, untap another target creature you control. Until end of turn, that creature has base power and toughness 4/4 and gains indestructible.
-        Ability ability = new AttacksTriggeredAbility(
-                new UntapTargetEffect().setText("untap another target creature you control."), false
-        );
+        Ability ability = new AttacksTriggeredAbility(new UntapTargetEffect(), false);
         ability.addEffect(new SetPowerToughnessTargetEffect(4, 4, Duration.EndOfTurn)
                 .setText("Until end of turn, that creature has base power and toughness 4/4"));
         ability.addEffect(new GainAbilityTargetEffect(

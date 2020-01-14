@@ -1,7 +1,5 @@
-
 package mage.abilities.effects.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
@@ -11,8 +9,9 @@ import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class UntapTargetEffect extends OneShotEffect {
@@ -67,7 +66,7 @@ public class UntapTargetEffect extends OneShotEffect {
         }
 
         if (mode.getTargets().isEmpty()) {
-            return "untap target permanent";
+            return "untap target permanent"; // TODO: add exeption about missing targets setup?
         }
 
         Target target = mode.getTargets().get(0);
@@ -77,12 +76,13 @@ public class UntapTargetEffect extends OneShotEffect {
             sb.append("up to ");
         }
 
+        boolean haveTargetWord = target.getTargetName().contains("target");
         if (target.getMaxNumberOfTargets() > 1 || target.getNumberOfTargets() == 0) {
-            sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" target ").append(target.getTargetName()).append('s');
+            sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets()));
+            sb.append(haveTargetWord ? " " : " target ");
+            sb.append(target.getTargetName()).append('s');
         } else {
-            if (!target.getTargetName().startsWith("another")) {
-                sb.append("target ");
-            }
+            sb.append(haveTargetWord ? "" : "target ");
             sb.append(target.getTargetName());
         }
 
