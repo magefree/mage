@@ -138,7 +138,7 @@ class BombSquadDamgeEffect extends OneShotEffect {
         if (creature != null) {
             Player controller = game.getPlayer(creature.getControllerId());
             if (controller != null) {
-                controller.damage(4, source.getSourceId(), game, false, true);
+                controller.damage(4, source.getSourceId(), game);
                 return true;
             }
         }

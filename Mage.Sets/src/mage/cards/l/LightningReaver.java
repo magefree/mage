@@ -1,7 +1,5 @@
-
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
@@ -15,26 +13,26 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class LightningReaver extends CardImpl {
 
     public LightningReaver(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{R}");
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.BEAST);
 
 
-        
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
@@ -76,7 +74,7 @@ class DamageOpponentsEffect extends OneShotEffect {
         for (UUID playerId : game.getOpponents(source.getControllerId())) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                player.damage(amount.calculate(game, source, this), source.getSourceId(), game, false, true);
+                player.damage(amount.calculate(game, source, this), source.getSourceId(), game);
             }
         }
         return true;

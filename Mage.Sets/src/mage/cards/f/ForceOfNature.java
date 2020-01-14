@@ -1,7 +1,5 @@
-
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -12,20 +10,21 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class ForceOfNature extends CardImpl {
 
     public ForceOfNature(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}{G}{G}");
         this.subtype.add(SubType.ELEMENTAL);
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
@@ -72,7 +71,7 @@ class ForceOfNatureEffect extends OneShotEffect {
             String message = "Would you like to pay {G}{G}{G}{G} to prevent taking 8 damage from {this}?";
             if (!(controller.chooseUse(Outcome.Benefit, message, source, game)
                     && cost.pay(source, game, source.getSourceId(), controller.getId(), false, null))) {
-                controller.damage(8, source.getSourceId(), game, false, true);
+                controller.damage(8, source.getSourceId(), game);
             }
             return true;
         }

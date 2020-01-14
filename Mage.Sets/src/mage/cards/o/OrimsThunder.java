@@ -1,4 +1,3 @@
-
 package mage.cards.o;
 
 import mage.MageObject;
@@ -85,7 +84,7 @@ class OrimsThunderEffect2 extends OneShotEffect {
         }
         boolean kicked = KickedCondition.instance.apply(game, source);
         if (kicked && secondTarget != null) {
-            secondTarget.damage(damage, source.getSourceId(), game, false, true);
+            secondTarget.damage(damage, source.getSourceId(), game);
             return true;
         }
         return false;

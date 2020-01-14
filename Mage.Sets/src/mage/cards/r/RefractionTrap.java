@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import mage.MageObject;
@@ -131,7 +130,7 @@ class RefractionTrapPreventDamageEffect extends PreventionEffectImpl {
             Player player = game.getPlayer(damageTarget);
             if (player != null) {
                 game.informPlayers("Dealing " + preventionData.getPreventedDamage() + " to " + player.getLogName());
-                player.damage(preventionData.getPreventedDamage(), source.getSourceId(), game, false, true);
+                player.damage(preventionData.getPreventedDamage(), source.getSourceId(), game);
             }
         }
 
@@ -166,10 +165,8 @@ class RefractionTrapPreventDamageEffect extends PreventionEffectImpl {
             //   check player
             Player player = game.getPlayer(event.getTargetId());
             if (player != null) {
-                if (player.getId().equals(source.getControllerId())) {
-                    // it is you
-                    return true;
-                }
+                // it is you
+                return player.getId().equals(source.getControllerId());
             }
         }
         return false;

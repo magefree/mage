@@ -1,9 +1,7 @@
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -13,8 +11,9 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetSpell;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class Ionize extends CardImpl {
@@ -63,7 +62,7 @@ class IonizeEffect extends OneShotEffect {
 
             result = game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game);
             if (spellController != null) {
-                spellController.damage(2, source.getSourceId(), game, false, true);
+                spellController.damage(2, source.getSourceId(), game);
             }
         }
         return result;

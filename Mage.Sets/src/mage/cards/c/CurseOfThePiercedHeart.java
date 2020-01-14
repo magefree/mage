@@ -1,8 +1,8 @@
-
 package mage.cards.c;
 
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
@@ -11,22 +11,20 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.filter.common.FilterPlaneswalkerPermanent;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
-import mage.abilities.effects.OneShotEffect;
-import mage.filter.common.FilterPlaneswalkerPermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
-import mage.target.TargetPermanent;
 
 /**
- *
  * @author BetaSteward
  */
 public final class CurseOfThePiercedHeart extends CardImpl {
@@ -138,7 +136,7 @@ class CurseOfThePiercedHeartEffect extends OneShotEffect {
                 }
             }
         }
-        opponent.damage(1, source.getSourceId(), game, false, true);
+        opponent.damage(1, source.getSourceId(), game);
         return true;
     }
 }

@@ -1,6 +1,5 @@
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.JumpStartAbility;
@@ -12,8 +11,9 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class RiskFactor extends CardImpl {
@@ -65,7 +65,7 @@ class RiskFactorEffect extends OneShotEffect {
             return false;
         }
         if (opponent.chooseUse(outcome, "Do you choose to take the damage?", source, game)) {
-            opponent.damage(4, source.getSourceId(), game, false, true);
+            opponent.damage(4, source.getSourceId(), game);
         } else {
             controller.drawCards(3, game);
         }

@@ -1,8 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -29,8 +26,10 @@ import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetDiscard;
 
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class ChandraAblaze extends CardImpl {
@@ -130,7 +129,7 @@ class ChandraAblazeEffect2 extends OneShotEffect {
 
             Player player = game.getPlayer(targetPointer.getFirst(game, source));
             if (player != null) {
-                player.damage(4, source.getSourceId(), game, false, true);
+                player.damage(4, source.getSourceId(), game);
                 return true;
             }
         }

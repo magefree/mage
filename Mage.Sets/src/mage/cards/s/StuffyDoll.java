@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -23,8 +21,9 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class StuffyDoll extends CardImpl {
@@ -111,7 +110,7 @@ class StuffyDollGainLifeEffect extends OneShotEffect {
         UUID playerId = (UUID) game.getState().getValue(source.getSourceId() + "_player");
         Player player = game.getPlayer(playerId);
         if (player != null && player.canRespond()) {
-            player.damage((Integer) this.getValue("damageAmount"), source.getSourceId(), game, false, true);
+            player.damage((Integer) this.getValue("damageAmount"), source.getSourceId(), game);
         }
         return true;
     }

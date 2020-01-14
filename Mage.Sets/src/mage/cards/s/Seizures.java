@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesTappedAttachedTriggeredAbility;
 import mage.abilities.costs.Cost;
@@ -12,22 +10,23 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LoneFox
  */
 public final class Seizures extends CardImpl {
 
     public Seizures(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
         this.subtype.add(SubType.AURA);
 
         // Enchant creature
@@ -70,24 +69,24 @@ class SeizuresEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if(enchantment == null) {
+        if (enchantment == null) {
             return false;
         }
         Permanent enchanted = game.getPermanentOrLKIBattlefield(enchantment.getAttachedTo());
-        if(enchanted == null) {
+        if (enchanted == null) {
             return false;
         }
         Player player = game.getPlayer(enchanted.getControllerId());
-        if(player != null) {
+        if (player != null) {
             Cost cost = new ManaCostsImpl("{3}");
-            if(cost.canPay(source, source.getSourceId(), player.getId(), game)
-                && player.chooseUse(Outcome.Benefit, "Pay " + cost.getText() + " to avoid damage?", source, game)) {
+            if (cost.canPay(source, source.getSourceId(), player.getId(), game)
+                    && player.chooseUse(Outcome.Benefit, "Pay " + cost.getText() + " to avoid damage?", source, game)) {
                 cost.clearPaid();
-                if(cost.pay(source, game, source.getSourceId(), player.getId(), false, null)) {
+                if (cost.pay(source, game, source.getSourceId(), player.getId(), false, null)) {
                     return true;
                 }
             }
-            player.damage(3, source.getSourceId(), game, false, true);
+            player.damage(3, source.getSourceId(), game);
             return true;
         }
         return false;

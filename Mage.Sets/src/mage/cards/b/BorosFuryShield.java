@@ -1,7 +1,5 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.ManaWasSpentCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -20,20 +18,21 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Dilnu
  */
 public final class BorosFuryShield extends CardImpl {
     private static final FilterAttackingOrBlockingCreature filter = new FilterAttackingOrBlockingCreature();
 
     public BorosFuryShield(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{W}");
 
         // Prevent all combat damage that would be dealt by target attacking or blocking creature this turn.
         this.getSpellAbility().addEffect(new PreventDamageByTargetEffect(Duration.EndOfTurn, true));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
-        
+
         // If {R} was spent to cast Boros Fury-Shield, it deals damage to that creature's controller equal to the creature's power.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new BorosFuryShieldDamageEffect(),
@@ -48,7 +47,7 @@ public final class BorosFuryShield extends CardImpl {
     public BorosFuryShield copy() {
         return new BorosFuryShield(this);
     }
-    
+
     static class BorosFuryShieldDamageEffect extends OneShotEffect {
         BorosFuryShieldDamageEffect() {
             super(Outcome.Damage);
@@ -63,12 +62,12 @@ public final class BorosFuryShield extends CardImpl {
         public boolean apply(Game game, Ability source) {
             Permanent target = game.getPermanent(targetPointer.getFirst(game, source));
             if (target != null) {
-              Player player = game.getPlayer(target.getControllerId());
-              if (player != null) {
-                int power = target.getPower().getValue();
-                player.damage(power, source.getId(), game, false, true);
-              }
-              
+                Player player = game.getPlayer(target.getControllerId());
+                if (player != null) {
+                    int power = target.getPower().getValue();
+                    player.damage(power, source.getId(), game);
+                }
+
             }
             return false;
         }
@@ -77,6 +76,6 @@ public final class BorosFuryShield extends CardImpl {
         public Effect copy() {
             return new BorosFuryShieldDamageEffect(this);
         }
-    
+
     }
 }

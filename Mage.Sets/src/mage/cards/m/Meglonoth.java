@@ -1,7 +1,5 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BlocksTriggeredAbility;
@@ -11,13 +9,14 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class Meglonoth extends CardImpl {
@@ -71,7 +70,7 @@ class MeglonothEffect extends OneShotEffect {
         Permanent meglonoth = game.getPermanent(source.getSourceId());
         Permanent blocked = game.getPermanent(targetPointer.getFirst(game, source));
         if (blocked != null && meglonoth != null) {
-            game.getPlayer(blocked.getControllerId()).damage(meglonoth.getPower().getValue(), source.getSourceId(), game, false, true);
+            game.getPlayer(blocked.getControllerId()).damage(meglonoth.getPower().getValue(), source.getSourceId(), game);
             return true;
         }
         return false;

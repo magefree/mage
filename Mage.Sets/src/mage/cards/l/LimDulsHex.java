@@ -1,7 +1,5 @@
-
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.OrCost;
@@ -16,8 +14,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class LimDulsHex extends CardImpl {
@@ -45,16 +44,16 @@ class LimDulsHexEffect extends OneShotEffect {
         super(Outcome.Damage);
         this.staticText = "for each player, {this} deals 1 damage to that player unless they pay {B} or {3}";
     }
-    
+
     public LimDulsHexEffect(final LimDulsHexEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public LimDulsHexEffect copy() {
         return new LimDulsHexEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
@@ -67,7 +66,7 @@ class LimDulsHexEffect extends OneShotEffect {
                     String message = "Would you like to pay " + costToPay.getText() + " to prevent 1 damage from " + sourcePermanent.getLogName() + "?";
                     if (!(player.chooseUse(Outcome.Benefit, message, source, game) && costToPay.pay(source, game, source.getSourceId(), player.getId(), false, null))) {
                         game.informPlayers(player.getLogName() + " chooses not to pay " + costToPay.getText() + " to prevent 1 damage from " + sourcePermanent.getLogName());
-                        player.damage(1, sourcePermanent.getId(), game, false, true);
+                        player.damage(1, sourcePermanent.getId(), game);
                     } else {
                         game.informPlayers(player.getLogName() + " chooses to pay " + costToPay.getText() + " to prevent 1 damage from " + sourcePermanent.getLogName());
                     }

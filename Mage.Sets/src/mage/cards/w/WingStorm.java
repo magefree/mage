@@ -1,7 +1,5 @@
-
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -14,14 +12,15 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2 & L_J
  */
 public final class WingStorm extends CardImpl {
 
     public WingStorm(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");
 
         // Wing Storm deals damage to each player equal to twice the number of creatures with flying that player controls.
         this.getSpellAbility().addEffect(new WingStormEffect());
@@ -68,7 +67,7 @@ class WingStormEffect extends OneShotEffect {
                 if (amount > 0) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
-                        player.damage(amount * 2, source.getSourceId(), game, false, true);
+                        player.damage(amount * 2, source.getSourceId(), game);
                     }
                 }
             }

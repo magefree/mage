@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -15,14 +13,15 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public final class CerebralEruption extends CardImpl {
 
     public CerebralEruption(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}{R}");
 
         // Target opponent reveals the top card of their library. Cerebral Eruption deals damage equal to the revealed card's converted mana cost to that player and each creature they control. If a land card is revealed this way, return Cerebral Eruption to its owner's hand.
         this.getSpellAbility().addTarget(new TargetOpponent());
@@ -61,7 +60,7 @@ class CerebralEruptionEffect extends OneShotEffect {
             player.revealCards(sourceObject.getIdName(), cards, game);
             game.getState().setValue(source.getSourceId().toString(), card);
             int damage = card.getConvertedManaCost();
-            player.damage(damage, source.getSourceId(), game, false, true);
+            player.damage(damage, source.getSourceId(), game);
             for (Permanent perm : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURES, player.getId(), game)) {
                 perm.damage(damage, source.getSourceId(), game, false, true);
             }

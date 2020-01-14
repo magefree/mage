@@ -1,7 +1,5 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
 import mage.abilities.common.OnEventTriggeredAbility;
@@ -24,14 +22,15 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class TortureChamber extends CardImpl {
 
     public TortureChamber(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // At the beginning of your upkeep, put a pain counter on Torture Chamber.
         this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new AddCountersSourceEffect(CounterType.PAIN.createInstance())));
@@ -120,7 +119,7 @@ class TortureChamberEffect1 extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (player != null && permanent != null) {
             int painCounters = permanent.getCounters(game).getCount(CounterType.PAIN);
-            player.damage(painCounters, source.getSourceId(), game, false, true);
+            player.damage(painCounters, source.getSourceId(), game);
             return true;
         }
         return false;

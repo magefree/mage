@@ -1,7 +1,5 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -18,8 +16,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author Plopman
  */
 public final class GoblinCharbelcher extends CardImpl {
@@ -100,7 +99,7 @@ class GoblinCharbelcherEffect extends OneShotEffect {
         } else {
             Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
             if (targetPlayer != null) {
-                targetPlayer.damage(damage, source.getSourceId(), game, false, true);
+                targetPlayer.damage(damage, source.getSourceId(), game);
             }
         }
         controller.putCardsOnBottomOfLibrary(cards, game, source, true);

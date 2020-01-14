@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -15,8 +14,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class StenchOfEvil extends CardImpl {
@@ -71,7 +71,7 @@ class StenchOfEvilEffect extends OneShotEffect {
                 if (landController != null
                         && cost.canPay(source, source.getSourceId(), landControllerId, game)
                         && !cost.pay(source, game, source.getSourceId(), landControllerId, false)) {
-                    landController.damage(1, source.getSourceId(), game, false, true);
+                    landController.damage(1, source.getSourceId(), game);
                 }
             }
         }

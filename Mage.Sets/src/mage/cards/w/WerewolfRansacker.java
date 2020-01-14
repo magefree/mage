@@ -1,7 +1,5 @@
-
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
@@ -14,11 +12,7 @@ import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -26,14 +20,15 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetArtifactPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward
  */
 public final class WerewolfRansacker extends CardImpl {
 
     public WerewolfRansacker(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
         this.subtype.add(SubType.WEREWOLF);
         this.color.setRed(true);
 
@@ -89,9 +84,7 @@ class WerewolfRansackerAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getTargetId().equals(sourceId)) {
             Permanent permanent = game.getPermanent(sourceId);
-            if (permanent != null && permanent.isTransformed()) {
-                return true;
-            }
+            return permanent != null && permanent.isTransformed();
         }
         return false;
     }
@@ -129,7 +122,7 @@ class WerewolfRansackerEffect extends OneShotEffect {
                         if (game.getState().getZone(permanent.getId()) == Zone.GRAVEYARD) {
                             Player player = game.getPlayer(permanent.getControllerId());
                             if (player != null) {
-                                player.damage(3, source.getSourceId(), game, false, true);
+                                player.damage(3, source.getSourceId(), game);
                             }
                         }
                     }

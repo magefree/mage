@@ -1,8 +1,5 @@
-
 package mage.cards.h;
 
-import java.util.Objects;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -11,19 +8,21 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.Objects;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class HydraOmnivore extends CardImpl {
 
     public HydraOmnivore(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
         this.subtype.add(SubType.HYDRA);
 
         this.power = new MageInt(8);
@@ -65,11 +64,11 @@ class HydraOmnivoreEffect extends OneShotEffect {
         int amount = (Integer) getValue("damage");
         MageObject object = game.getObject(source.getSourceId());
         if (object != null && amount > 0 && damagedOpponent != null) {
-            for (UUID playerId :game.getOpponents(source.getControllerId())) {
+            for (UUID playerId : game.getOpponents(source.getControllerId())) {
                 if (!Objects.equals(playerId, damagedOpponent)) {
                     Player opponent = game.getPlayer(playerId);
                     if (opponent != null) {
-                        int dealtDamage = opponent.damage(amount, source.getSourceId(), game, false, true);
+                        int dealtDamage = opponent.damage(amount, source.getSourceId(), game);
                         game.informPlayers(object.getLogName() + " deals " + dealtDamage + " damage to " + opponent.getLogName());
                     }
                 }

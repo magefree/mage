@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeAllCost;
@@ -16,8 +14,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class Soulblast extends CardImpl {
@@ -72,7 +71,7 @@ class SoulblastEffect extends OneShotEffect {
         if (power > 0) {
             Player player = game.getPlayer(this.getTargetPointer().getFirst(game, source));
             if (player != null) {
-                player.damage(power, source.getSourceId(), game, false, true);
+                player.damage(power, source.getSourceId(), game);
             } else {
                 Permanent creature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
                 if (creature != null) {

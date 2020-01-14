@@ -392,7 +392,7 @@ public class RandomPlayer extends ComputerPlayer {
             } else {
                 Player player = game.getPlayer(targetId);
                 if (player != null) {
-                    player.damage(amount, sourceId, game, false, true);
+                    player.damage(amount, sourceId, game);
                     remainingDamage -= amount;
                 }
             }

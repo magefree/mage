@@ -1,7 +1,5 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -14,12 +12,7 @@ import mage.abilities.effects.common.PreventDamageByTargetEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -27,8 +20,9 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetEnchantmentPermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class PowerLeak extends CardImpl {
@@ -100,7 +94,7 @@ class PowerLeakEffect extends OneShotEffect {
             effect.setTargetPointer(new FixedTarget(permanent.getId()));
             game.addEffect(effect, source);
         }
-        player.damage(2, source.getSourceId(), game, false, true);
+        player.damage(2, source.getSourceId(), game);
         effect.discard();
         return true;
     }

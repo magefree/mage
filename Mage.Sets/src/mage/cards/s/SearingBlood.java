@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -21,14 +19,15 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class SearingBlood extends CardImpl {
 
     public SearingBlood(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}{R}");
 
         // Searing Blood deals 2 damage to target creature. When that creature dies this turn, Searing Blood deals 3 damage to that creature's controller.
         this.getSpellAbility().addEffect(new SearingBloodEffect());
@@ -93,9 +92,7 @@ class SearingBloodDelayedTriggeredAbility extends DelayedTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getTargetId().equals(target)) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.isDiesEvent()) {
-                return true;
-            }
+            return zEvent.isDiesEvent();
         }
         return false;
     }
@@ -137,7 +134,7 @@ class SearingBloodDelayedEffect extends OneShotEffect {
             Player player = game.getPlayer(permanent.getControllerId());
             if (player != null) {
                 MageObject sourceObject = source.getSourceObject(game);
-                player.damage(3, source.getSourceId(), game, false, true);
+                player.damage(3, source.getSourceId(), game);
                 return true;
             }
         }

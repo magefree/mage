@@ -1,7 +1,5 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -14,14 +12,15 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetLandPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class RoilingTerrain extends CardImpl {
 
     public RoilingTerrain(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}{R}");
 
         // Destroy target land, then Roiling Terrain deals damage to that land's controller equal to the number of land cards in that player's graveyard.
         this.getSpellAbility().addEffect(new RoilingTerrainEffect());
@@ -62,7 +61,7 @@ class RoilingTerrainEffect extends OneShotEffect {
             Player targetController = game.getPlayer(targetedLand.getControllerId());
             if (targetController != null) {
                 int landsInGraveyard = targetController.getGraveyard().count(new FilterLandCard(), game);
-                targetController.damage(landsInGraveyard, source.getSourceId(), game, false, true);
+                targetController.damage(landsInGraveyard, source.getSourceId(), game);
             }
             return true;
         }

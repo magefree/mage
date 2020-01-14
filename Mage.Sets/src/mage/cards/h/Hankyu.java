@@ -1,7 +1,5 @@
-
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -14,25 +12,22 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class Hankyu extends CardImpl {
 
     public Hankyu(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
         this.subtype.add(SubType.EQUIPMENT);
 
         /* Equipped creature has "{T}: Put an aim counter on Hankyu" and */
@@ -40,8 +35,8 @@ public final class Hankyu extends CardImpl {
         ability1.setSourceId(this.getId()); // to know where to put the counters on
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability1, AttachmentType.EQUIPMENT)));
 
-        /* "{T}, Remove all aim counters from Hankyu: This creature deals 
-         * damage to any target equal to the number of 
+        /* "{T}, Remove all aim counters from Hankyu: This creature deals
+         * damage to any target equal to the number of
          * aim counters removed this way." */
         SimpleActivatedAbility ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HankyuDealsDamageEffect(), new TapSourceCost());
         ability2.addCost(new HankyuCountersSourceCost(this.getId()));
@@ -64,7 +59,7 @@ public final class Hankyu extends CardImpl {
 
 class HankyuAddCounterEffect extends OneShotEffect {
 
-        private UUID effectGivingEquipmentId;
+    private UUID effectGivingEquipmentId;
 
     public HankyuAddCounterEffect(UUID effectGivingEquipmentId) {
         super(Outcome.Benefit);
@@ -74,7 +69,7 @@ class HankyuAddCounterEffect extends OneShotEffect {
 
     public HankyuAddCounterEffect(final HankyuAddCounterEffect effect) {
         super(effect);
-                this.effectGivingEquipmentId = effect.effectGivingEquipmentId;
+        this.effectGivingEquipmentId = effect.effectGivingEquipmentId;
     }
 
     @Override
@@ -119,14 +114,14 @@ class HankyuDealsDamageEffect extends OneShotEffect {
             int damageAmount = cost.getRemovedCounters();
             if (damageAmount > 0) {
 
-                    Permanent permanent = game.getPermanent(source.getFirstTarget());
-                    if (permanent != null) {
-                        permanent.damage(damageAmount, source.getSourceId(), game, false, true);
-                    }
-                    Player player = game.getPlayer(source.getFirstTarget());
-                    if (player != null) {
-                        player.damage(damageAmount, source.getSourceId(), game, false, true);
-                    }
+                Permanent permanent = game.getPermanent(source.getFirstTarget());
+                if (permanent != null) {
+                    permanent.damage(damageAmount, source.getSourceId(), game, false, true);
+                }
+                Player player = game.getPlayer(source.getFirstTarget());
+                if (player != null) {
+                    player.damage(damageAmount, source.getSourceId(), game);
+                }
             }
             return true;
         }
@@ -137,37 +132,37 @@ class HankyuDealsDamageEffect extends OneShotEffect {
 
 class HankyuCountersSourceCost extends CostImpl {
 
-        private int removedCounters;
-        private UUID effectGivingEquipmentId;
+    private int removedCounters;
+    private UUID effectGivingEquipmentId;
 
-        public HankyuCountersSourceCost(UUID effectGivingEquipmentId) {
-                super();
-                this.removedCounters = 0;
-                this.effectGivingEquipmentId = effectGivingEquipmentId;
-            this.text = "Remove all aim counters from Hankyu";
+    public HankyuCountersSourceCost(UUID effectGivingEquipmentId) {
+        super();
+        this.removedCounters = 0;
+        this.effectGivingEquipmentId = effectGivingEquipmentId;
+        this.text = "Remove all aim counters from Hankyu";
     }
 
     public HankyuCountersSourceCost(HankyuCountersSourceCost cost) {
         super(cost);
-                this.effectGivingEquipmentId = cost.effectGivingEquipmentId;
-                this.removedCounters = cost.removedCounters;
+        this.effectGivingEquipmentId = cost.effectGivingEquipmentId;
+        this.removedCounters = cost.removedCounters;
     }
 
     @Override
     public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-            return true;
+        return true;
     }
 
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
         Permanent equipment = game.getPermanent(this.effectGivingEquipmentId);
-                if (equipment != null ) {
-                    this.removedCounters = equipment.getCounters(game).getCount(CounterType.AIM);
-                    if (this.removedCounters > 0) {
-                            equipment.removeCounters("aim", this.removedCounters, game);
-                    }
-                }
-                this.paid = true;
+        if (equipment != null) {
+            this.removedCounters = equipment.getCounters(game).getCount(CounterType.AIM);
+            if (this.removedCounters > 0) {
+                equipment.removeCounters("aim", this.removedCounters, game);
+            }
+        }
+        this.paid = true;
         return true;
     }
 
@@ -176,7 +171,7 @@ class HankyuCountersSourceCost extends CostImpl {
         return new HankyuCountersSourceCost(this);
     }
 
-        public int getRemovedCounters() {
-            return this.removedCounters;
-        }
+    public int getRemovedCounters() {
+        return this.removedCounters;
+    }
 }

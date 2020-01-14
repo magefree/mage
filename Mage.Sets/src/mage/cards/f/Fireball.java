@@ -1,4 +1,3 @@
-
 package mage.cards.f;
 
 import mage.abilities.Ability;
@@ -78,7 +77,7 @@ class FireballEffect extends OneShotEffect {
                     } else {
                         Player player = game.getPlayer(targetId);
                         if (player != null) {
-                            player.damage(damagePer, source.getSourceId(), game, false, true);
+                            player.damage(damagePer, source.getSourceId(), game);
                         }
                     }
                 }

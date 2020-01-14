@@ -1,7 +1,5 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksEachCombatStaticAbility;
@@ -12,24 +10,21 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class PrimordialOoze extends CardImpl {
 
     public PrimordialOoze(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");
         this.subtype.add(SubType.OOZE);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
@@ -78,7 +73,7 @@ class PrimordialOozeEffect extends OneShotEffect {
             if (!(controller.chooseUse(Outcome.Benefit, "Pay " + cost.getText() + " to prevent taking " + counter + " damage from " + sourceObject.getLogName() + "?", source, game)
                     && cost.pay(source, game, source.getSourceId(), controller.getId(), false, null))) {
                 sourceObject.tap(game);
-                controller.damage(counter, source.getSourceId(), game, false, true);
+                controller.damage(counter, source.getSourceId(), game);
             }
             return true;
         }

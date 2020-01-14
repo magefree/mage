@@ -1,7 +1,5 @@
-
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -21,8 +19,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 
+import java.util.UUID;
+
 /**
- *
  * @author emerald000 & L_J
  */
 public final class HeartOfBogardan extends CardImpl {
@@ -102,7 +101,7 @@ class HeartOfBogardanEffect extends OneShotEffect {
         if (player != null && sourcePermanent != null) {
             int damage = sourcePermanent.getCounters(game).getCount(CounterType.AGE) * 2 - 2;
             if (damage > 0) {
-                player.damage(damage, source.getSourceId(), game, false, true);
+                player.damage(damage, source.getSourceId(), game);
                 for (Permanent perm : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId(), game)) {
                     perm.damage(damage, source.getSourceId(), game, false, true);
                 }

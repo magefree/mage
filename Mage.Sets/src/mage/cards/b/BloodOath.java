@@ -1,9 +1,5 @@
-
 package mage.cards.b;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -19,8 +15,11 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class BloodOath extends CardImpl {
@@ -112,7 +111,7 @@ class BloodOathEffect extends OneShotEffect {
                         }
                     }
                     game.informPlayers(sourceObject.getLogName() + " deals " + (damageToDeal == 0 ? "no" : "" + damageToDeal) + " damage to " + opponent.getLogName());
-                    opponent.damage(damageToDeal, source.getSourceId(), game, false, true);
+                    opponent.damage(damageToDeal, source.getSourceId(), game);
                     return true;
                 }
             }

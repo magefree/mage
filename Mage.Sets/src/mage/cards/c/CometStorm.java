@@ -1,6 +1,5 @@
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.MultikickerCount;
 import mage.abilities.effects.OneShotEffect;
@@ -15,8 +14,9 @@ import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 import mage.target.targetadjustment.TargetAdjuster;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class CometStorm extends CardImpl {
@@ -77,7 +77,7 @@ class CometStormEffect extends OneShotEffect {
                     permanent.damage(damage, source.getSourceId(), game, false, true);
                 }
                 if (player != null) {
-                    player.damage(damage, source.getSourceId(), game, false, true);
+                    player.damage(damage, source.getSourceId(), game);
                 }
             }
             return true;

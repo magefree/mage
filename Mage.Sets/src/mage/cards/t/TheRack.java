@@ -1,7 +1,5 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -17,14 +15,15 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class TheRack extends CardImpl {
 
     public TheRack(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
         // As The Rack enters the battlefield, choose an opponent.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseOpponentEffect(Outcome.Detriment)));
@@ -97,7 +96,7 @@ class TheRackEffect extends OneShotEffect {
         if (chosenPlayer != null) {
             int damage = 3 - chosenPlayer.getHand().size();
             if (damage > 0) {
-                chosenPlayer.damage(damage, source.getSourceId(), game, false, true);
+                chosenPlayer.damage(damage, source.getSourceId(), game);
             }
             return true;
         }

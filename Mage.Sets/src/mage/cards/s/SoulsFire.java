@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -12,17 +10,18 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author North
  */
 public final class SoulsFire extends CardImpl {
 
     public SoulsFire(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}");
 
 
         // Target creature you control on the battlefield deals damage equal to its power to any target.
@@ -78,7 +77,7 @@ class SoulsFireEffect extends OneShotEffect {
 
         Player player = game.getPlayer(targetId);
         if (player != null) {
-            player.damage(damage, sourcePermanent.getId(), game, false, true);
+            player.damage(damage, sourcePermanent.getId(), game);
             return true;
         }
 

@@ -1,7 +1,5 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.InfectAbility;
@@ -14,14 +12,15 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author ayratn
  */
 public final class BurnTheImpure extends CardImpl {
 
     public BurnTheImpure(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}");
 
         // Burn the Impure deals 3 damage to target creature. If that creature has infect, Burn the Impure deals 3 damage to that creature’s controller.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
@@ -63,7 +62,7 @@ class BurnTheImpureEffect extends OneShotEffect {
             if (permanent.getAbilities().contains(InfectAbility.getInstance())) {
                 Player controller = game.getPlayer(permanent.getControllerId());
                 if (controller != null) {
-                    controller.damage(3, source.getSourceId(), game, false, true);
+                    controller.damage(3, source.getSourceId(), game);
                 }
             }
             return true;

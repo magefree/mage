@@ -1,9 +1,5 @@
-
 package mage.cards.m;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -22,8 +18,11 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author Loki
  */
 public final class Mindblaze extends CardImpl {
@@ -94,7 +93,7 @@ class MindblazeEffect extends OneShotEffect {
             filter.add(new NamePredicate(cardChoice.getChoice()));
             int count = Integer.parseInt(numberChoice.getChoice());
             if (player.getLibrary().count(filter, game) == count) {
-                player.damage(8, source.getSourceId(), game.copy(), false, true);
+                player.damage(8, source.getSourceId(), game.copy());
             }
             player.shuffleLibrary(source, game);
             return true;

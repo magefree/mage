@@ -1,7 +1,5 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -14,8 +12,9 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class MadcapExperiment extends CardImpl {
@@ -73,7 +72,7 @@ class MadcapExperimentEffect extends OneShotEffect {
             int damage = toReveal.size();
             toReveal.remove(toBattlefield);
             controller.putCardsOnBottomOfLibrary(toReveal, game, source, false);
-            controller.damage(damage, source.getSourceId(), game, false, true);
+            controller.damage(damage, source.getSourceId(), game);
 
             return true;
         }

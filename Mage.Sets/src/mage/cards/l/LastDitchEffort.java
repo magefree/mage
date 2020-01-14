@@ -1,7 +1,5 @@
-
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -13,17 +11,18 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author BursegSardaukar
  */
 public final class LastDitchEffort extends CardImpl {
 
     public LastDitchEffort(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");
 
         // Sacrifice any number of creatures. Last-Ditch Effort deals that much damage to any target.
         this.getSpellAbility().addEffect(new LastDitchEffortEffect());
@@ -80,7 +79,7 @@ class LastDitchEffortEffect extends OneShotEffect {
                     permanent.damage(damage, source.getSourceId(), game, false, true);
                 }
                 if (opponent != null) {
-                    opponent.damage(damage, source.getSourceId(), game, false, true);
+                    opponent.damage(damage, source.getSourceId(), game);
                 }
             }
             return true;

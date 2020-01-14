@@ -1,18 +1,17 @@
-
 package mage.abilities.effects.common;
 
-import java.util.UUID;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class DamagePlayersEffect extends OneShotEffect {
@@ -58,18 +57,18 @@ public class DamagePlayersEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         switch (controller) {
             case ANY:
-                for (UUID playerId: game.getState().getPlayersInRange(source.getControllerId(), game)) {
+                for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
-                        player.damage(amount.calculate(game, source, this), source.getSourceId(), game, false, true);
+                        player.damage(amount.calculate(game, source, this), source.getSourceId(), game);
                     }
                 }
                 break;
             case OPPONENT:
-                for (UUID playerId: game.getOpponents(source.getControllerId())) {
+                for (UUID playerId : game.getOpponents(source.getControllerId())) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
-                        player.damage(amount.calculate(game, source, this), source.getSourceId(), game, false, true);
+                        player.damage(amount.calculate(game, source, this), source.getSourceId(), game);
                     }
                 }
                 break;
@@ -84,8 +83,7 @@ public class DamagePlayersEffect extends OneShotEffect {
         return new DamagePlayersEffect(this);
     }
 
-    private void setText()
-    {
+    private void setText() {
         StringBuilder sb = new StringBuilder().append(this.sourceName).append(" deals ").append(amount.toString());
         switch (controller) {
             case ANY:

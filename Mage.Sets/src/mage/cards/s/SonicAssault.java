@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.JumpStartAbility;
@@ -13,8 +12,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class SonicAssault extends CardImpl {
@@ -68,7 +68,7 @@ class SonicAssaultEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        player.damage(2, source.getSourceId(), game, false, true);
+        player.damage(2, source.getSourceId(), game);
         return true;
     }
 }

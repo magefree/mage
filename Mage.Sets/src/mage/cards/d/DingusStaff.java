@@ -1,7 +1,5 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -14,8 +12,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author ciaccona007
  */
 public final class DingusStaff extends CardImpl {
@@ -36,6 +35,7 @@ public final class DingusStaff extends CardImpl {
         return new DingusStaff(this);
     }
 }
+
 class DingusStaffEffect extends OneShotEffect {
 
     public DingusStaffEffect() {
@@ -58,7 +58,7 @@ class DingusStaffEffect extends OneShotEffect {
         if (permanent != null) {
             Player controller = game.getPlayer(permanent.getControllerId());
             if (controller != null) {
-                controller.damage(2,source.getSourceId(), game, false, true);
+                controller.damage(2, source.getSourceId(), game);
                 return true;
             }
         }

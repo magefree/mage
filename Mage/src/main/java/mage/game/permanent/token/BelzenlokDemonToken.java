@@ -1,9 +1,5 @@
-
 package mage.game.permanent.token;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -21,13 +17,17 @@ import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
- *
  * @author LoneFox
  */
 public final class BelzenlokDemonToken extends TokenImpl {
 
     static final private List<String> tokenImageSets = new ArrayList<>();
+
     static {
         tokenImageSets.addAll(Arrays.asList("DOM"));
     }
@@ -95,7 +95,7 @@ class BelzenlokDemonTokenEffect extends OneShotEffect {
         } else {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
-                controller.damage(6, source.getSourceId(), game, false, true);
+                controller.damage(6, source.getSourceId(), game);
             }
         }
         return true;

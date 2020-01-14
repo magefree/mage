@@ -1,7 +1,5 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -19,8 +17,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class RazorBoomerang extends CardImpl {
@@ -74,7 +73,7 @@ class RazorBoomerangEffect extends OneShotEffect {
             }
             Player player = game.getPlayer(target);
             if (player != null) {
-                player.damage(1, attachmentid, game, false, true);
+                player.damage(1, attachmentid, game);
             }
         }
         Permanent razor = game.getPermanent(attachmentid);

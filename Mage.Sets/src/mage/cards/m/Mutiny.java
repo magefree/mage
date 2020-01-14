@@ -1,7 +1,5 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -19,8 +17,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class Mutiny extends CardImpl {
@@ -74,7 +73,7 @@ class MutinyEffect extends OneShotEffect {
             int damage = firstTarget.getPower().getValue();
             Permanent secondTarget = game.getPermanent(source.getTargets().get(1).getFirstTarget());
             if (damage > 0 && secondTarget != null) {
-                secondTarget.damage(damage, firstTarget.getId(), game, false, true);
+                secondTarget.damage(damage, firstTarget.getId(), game);
             }
         }
         return true;

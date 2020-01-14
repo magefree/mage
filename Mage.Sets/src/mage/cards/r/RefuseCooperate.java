@@ -1,12 +1,9 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.abilities.keyword.AftermathAbility;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
@@ -18,8 +15,9 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetSpell;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class RefuseCooperate extends SplitCard {
@@ -74,7 +72,7 @@ class RefuseEffect extends OneShotEffect {
             if (spell != null) {
                 Player spellController = game.getPlayer(spell.getControllerId());
                 if (spellController != null) {
-                    spellController.damage(spell.getConvertedManaCost(), source.getSourceId(), game, false, true);
+                    spellController.damage(spell.getConvertedManaCost(), source.getSourceId(), game);
                     return true;
                 }
             }

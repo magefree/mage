@@ -1,7 +1,5 @@
-
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -17,8 +15,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class FormOfTheDinosaur extends CardImpl {
@@ -68,7 +67,7 @@ class FormOfTheDinosaurEffect extends OneShotEffect {
             Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (targetCreature != null) {
                 targetCreature.damage(15, source.getSourceId(), game, false, true);
-                controller.damage(targetCreature.getPower().getValue(), targetCreature.getId(), game, false, true);
+                controller.damage(targetCreature.getPower().getValue(), targetCreature.getId(), game);
             }
             return true;
         }

@@ -1,7 +1,5 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageToACreatureTriggeredAbility;
@@ -18,15 +16,15 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
-/**
- *
- * @author LoneFox
+import java.util.UUID;
 
+/**
+ * @author LoneFox
  */
 public final class BellowingFiend extends CardImpl {
 
     public BellowingFiend(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}");
         this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -55,7 +53,8 @@ class BellowingFiendEffect extends OneShotEffect {
 
     public BellowingFiendEffect() {
         super(Outcome.Detriment);
-        this.staticText = "{this} deals 3 damage to that creature's controller";                                                                                          }
+        this.staticText = "{this} deals 3 damage to that creature's controller";
+    }
 
     public BellowingFiendEffect(final BellowingFiendEffect effect) {
         super(effect);
@@ -70,10 +69,11 @@ class BellowingFiendEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         boolean applied = false;
         Permanent damagedCreature = game.getPermanentOrLKIBattlefield(targetPointer.getFirst(game, source));
-        if(damagedCreature != null) {
+        if (damagedCreature != null) {
             Player controller = game.getPlayer(damagedCreature.getControllerId());
-            if(controller != null) {
-                controller.damage(3, source.getSourceId(), game, false, true);                                                                                                       applied = true;
+            if (controller != null) {
+                controller.damage(3, source.getSourceId(), game);
+                applied = true;
             }
         }
         return applied;

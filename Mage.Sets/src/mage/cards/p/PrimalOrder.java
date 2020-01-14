@@ -1,7 +1,5 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -16,14 +14,15 @@ import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class PrimalOrder extends CardImpl {
 
     public PrimalOrder(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
 
         // At the beginning of each player's upkeep, Primal Order deals damage to that player equal to the number of nonbasic lands they control.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new PrimalOrderDamageTargetEffect(), TargetController.ANY, false, true));
@@ -39,20 +38,18 @@ public final class PrimalOrder extends CardImpl {
     }
 }
 
-class PrimalOrderDamageTargetEffect extends OneShotEffect{
-    
+class PrimalOrderDamageTargetEffect extends OneShotEffect {
+
     private static final FilterLandPermanent filter = FilterLandPermanent.nonbasicLands();
-    
-    public PrimalOrderDamageTargetEffect()
-    {
+
+    public PrimalOrderDamageTargetEffect() {
         super(Outcome.Damage);
     }
-    
-    public PrimalOrderDamageTargetEffect(PrimalOrderDamageTargetEffect copy)
-    {
+
+    public PrimalOrderDamageTargetEffect(PrimalOrderDamageTargetEffect copy) {
         super(copy);
     }
-        
+
     @Override
     public String getText(Mode mode) {
         return "{this} deals damage to that player equal to the number of nonbasic lands they control";
@@ -63,7 +60,7 @@ class PrimalOrderDamageTargetEffect extends OneShotEffect{
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (player != null) {
             int damage = game.getBattlefield().getAllActivePermanents(filter, targetPointer.getFirst(game, source), game).size();
-            player.damage(damage, source.getSourceId(), game, false, true);
+            player.damage(damage, source.getSourceId(), game);
             return true;
         }
         return false;

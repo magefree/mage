@@ -1,7 +1,5 @@
-
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -11,20 +9,20 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.players.Player;
 
-/**
- *
- * @author LoneFox
+import java.util.UUID;
 
+/**
+ * @author LoneFox
  */
 public final class HasranOgress extends CardImpl {
 
     public HasranOgress(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{B}");
         this.subtype.add(SubType.OGRE);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
@@ -67,7 +65,7 @@ class HasranOgressEffect extends OneShotEffect {
             String message = "Would you like to pay {2} to prevent taking 3 damage from Hasran Ogress?";
             if (!(controller.chooseUse(Outcome.Benefit, message, source, game)
                     && cost.pay(source, game, source.getSourceId(), controller.getId(), false, null))) {
-                controller.damage(3, source.getSourceId(), game, false, true);
+                controller.damage(3, source.getSourceId(), game);
             }
             return true;
         }

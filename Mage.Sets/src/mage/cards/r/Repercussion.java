@@ -1,7 +1,5 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
@@ -18,14 +16,15 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author cbrianhill
  */
 public final class Repercussion extends CardImpl {
 
     public Repercussion(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{R}");
 
         // Whenever a creature is dealt damage, Repercussion deals that much damage to that creature's controller.
         this.addAbility(new RepercussionTriggeredAbility(new RepercussionEffect()));
@@ -42,32 +41,32 @@ public final class Repercussion extends CardImpl {
 }
 
 class RepercussionTriggeredAbility extends TriggeredAbilityImpl {
-    
+
     static final String PLAYER_DAMAGE_AMOUNT_KEY = "playerDamage";
     static final String TRIGGERING_CREATURE_KEY = "triggeringCreature";
-    
+
     public RepercussionTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);
     }
-    
+
     public RepercussionTriggeredAbility(final RepercussionTriggeredAbility ability) {
         super(ability);
     }
-    
+
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DAMAGED_CREATURE;
     }
-    
+
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        for(Effect effect : getEffects()) {
+        for (Effect effect : getEffects()) {
             effect.setValue(PLAYER_DAMAGE_AMOUNT_KEY, event.getAmount());
             effect.setValue(TRIGGERING_CREATURE_KEY, new MageObjectReference(event.getTargetId(), game));
         }
         return true;
     }
-    
+
     @Override
     public String getRule() {
         return "Whenever a creature is dealt damage, {this} deals that much damage to that creature's controller.";
@@ -80,25 +79,25 @@ class RepercussionTriggeredAbility extends TriggeredAbilityImpl {
 }
 
 class RepercussionEffect extends OneShotEffect {
-    
+
     public RepercussionEffect() {
         super(Outcome.Damage);
     }
-    
+
     public RepercussionEffect(final RepercussionEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Integer playerDamage = (Integer)this.getValue(RepercussionTriggeredAbility.PLAYER_DAMAGE_AMOUNT_KEY);
-        MageObjectReference mor = (MageObjectReference)this.getValue(RepercussionTriggeredAbility.TRIGGERING_CREATURE_KEY);        
+        Integer playerDamage = (Integer) this.getValue(RepercussionTriggeredAbility.PLAYER_DAMAGE_AMOUNT_KEY);
+        MageObjectReference mor = (MageObjectReference) this.getValue(RepercussionTriggeredAbility.TRIGGERING_CREATURE_KEY);
         if (playerDamage != null && mor != null) {
             Permanent creature = mor.getPermanentOrLKIBattlefield(game);
             if (creature != null) {
                 Player player = game.getPlayer(creature.getControllerId());
                 if (player != null) {
-                    player.damage(playerDamage, source.getSourceId(), game, false, true);
+                    player.damage(playerDamage, source.getSourceId(), game);
                 }
             }
             return true;
@@ -110,5 +109,5 @@ class RepercussionEffect extends OneShotEffect {
     public Effect copy() {
         return new RepercussionEffect(this);
     }
-    
+
 }

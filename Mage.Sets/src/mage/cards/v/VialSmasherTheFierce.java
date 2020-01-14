@@ -1,10 +1,5 @@
-
 package mage.cards.v;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -14,8 +9,8 @@ import mage.abilities.keyword.PartnerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterPlaneswalkerPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
@@ -28,8 +23,12 @@ import mage.target.TargetPermanent;
 import mage.util.RandomUtil;
 import mage.watchers.common.SpellsCastWatcher;
 
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class VialSmasherTheFierce extends CardImpl {
@@ -147,7 +146,7 @@ class VialSmasherTheFierceEffect extends OneShotEffect {
                             }
                         }
                     }
-                    opponent.damage(damage, source.getSourceId(), game, false, true);
+                    opponent.damage(damage, source.getSourceId(), game);
                 }
             }
             return true;

@@ -1,7 +1,5 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
@@ -18,14 +16,15 @@ import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetArtifactPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class RakdosCharm extends CardImpl {
 
     public RakdosCharm(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}{R}");
 
         // Choose one — Exile all cards from target player's graveyard;
         this.getSpellAbility().addEffect(new ExileGraveyardAllTargetPlayerEffect());
@@ -54,7 +53,7 @@ public final class RakdosCharm extends CardImpl {
 
     private static class RakdosCharmDamageEffect extends OneShotEffect {
 
-    public RakdosCharmDamageEffect() {
+        public RakdosCharmDamageEffect() {
             super(Outcome.Detriment);
             staticText = "each creature deals 1 damage to its controller";
         }
@@ -72,7 +71,7 @@ public final class RakdosCharm extends CardImpl {
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
                 Player controller = game.getPlayer(permanent.getControllerId());
                 if (controller != null) {
-                    controller.damage(1, permanent.getId(), game, false, true);
+                    controller.damage(1, permanent.getId(), game);
                     game.informPlayers("1 damage to " + controller.getLogName() + " from " + permanent.getName());
                 }
             }

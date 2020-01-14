@@ -1,7 +1,5 @@
-
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -14,8 +12,9 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetSpell;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class EssenceBacklash extends CardImpl {
@@ -63,7 +62,7 @@ class EssenceBacklashEffect extends OneShotEffect {
 
             result = game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game);
             if (spellController != null) {
-                spellController.damage(spell.getPower().getValue(), source.getSourceId(), game, false, true);
+                spellController.damage(spell.getPower().getValue(), source.getSourceId(), game);
             }
         }
         return result;

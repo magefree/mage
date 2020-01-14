@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import mage.MageInt;
@@ -22,13 +21,12 @@ import mage.target.common.TargetControlledPermanent;
 import java.util.UUID;
 
 /**
- *
  * @author MarcoMarin
  */
 public final class SerendibDjinn extends CardImpl {
 
     public SerendibDjinn(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
         this.subtype.add(SubType.DJINN);
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);
@@ -80,7 +78,7 @@ class SerendibDjinnEffect extends OneShotEffect {
                 if (permanent != null) {
                     permanent.sacrifice(source.getSourceId(), game);
                     if (permanent.hasSubtype(SubType.ISLAND, game)) {
-                        controller.damage(3, source.getSourceId(), game, false, true);
+                        controller.damage(3, source.getSourceId(), game);
                     }
                 }
             }

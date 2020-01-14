@@ -1,7 +1,5 @@
-
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -13,19 +11,20 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
  */
 public final class HatchetBully extends CardImpl {
@@ -115,7 +114,7 @@ class HatchetBullyEffect extends OneShotEffect {
         }
         Player player = game.getPlayer(source.getFirstTarget());
         if (player != null) {
-            player.damage(2, source.getSourceId(), game, false, true);
+            player.damage(2, source.getSourceId(), game);
         }
         return true;
     }

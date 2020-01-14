@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.TriggeredAbility;
@@ -20,8 +18,9 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author Alexsandr0x
  */
 public final class CitadelOfPain extends CardImpl {
@@ -72,7 +71,7 @@ class CitadelOfPainEffect extends OneShotEffect {
         Player player = game.getPlayer(game.getActivePlayerId());
         if (player != null) {
             int damage = game.getBattlefield().countAll(filter, game.getActivePlayerId(), game);
-            player.damage(damage, source.getSourceId(), game, false, true);
+            player.damage(damage, source.getSourceId(), game);
             return true;
         }
         return false;

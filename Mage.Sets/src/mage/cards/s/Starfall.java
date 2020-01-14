@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -13,14 +11,15 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class Starfall extends CardImpl {
 
     public Starfall(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{R}");
 
 
         // Starfall deals 3 damage to target creature. If that creature is an enchantment, Starfall deals 3 damage to that creature's controller.
@@ -63,7 +62,7 @@ class StarfallEffect extends OneShotEffect {
             if (permanent.isEnchantment()) {
                 Player targetController = game.getPlayer(permanent.getControllerId());
                 if (targetController != null) {
-                    targetController.damage(3, source.getSourceId(), game, false, true);
+                    targetController.damage(3, source.getSourceId(), game);
                 }
             }
             return true;

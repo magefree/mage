@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
@@ -12,11 +10,7 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -24,8 +18,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class ScourgeOfValkas extends CardImpl {
@@ -101,7 +96,7 @@ class ScourgeOfValkasDamageEffect extends OneShotEffect {
                     Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
                     if (player != null
                             && player.isInGame()) {
-                        player.damage(dragons, enteringDragon.getId(), game, false, true);
+                        player.damage(dragons, enteringDragon.getId(), game);
                     }
                 }
             }

@@ -1,24 +1,23 @@
-
 package mage.cards.g;
 
-import java.util.Objects;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageToOpponentTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.constants.SubType;
 import mage.abilities.keyword.MeleeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.Objects;
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class GrenzosRuffians extends CardImpl {
@@ -73,7 +72,7 @@ class GrenzosRuffiansEffect extends OneShotEffect {
                 if (!Objects.equals(playerId, damagedOpponent)) {
                     Player opponent = game.getPlayer(playerId);
                     if (opponent != null) {
-                        int dealtDamage = opponent.damage(amount, source.getSourceId(), game, false, true);
+                        int dealtDamage = opponent.damage(amount, source.getSourceId(), game);
                         game.informPlayers(object.getLogName() + " deals " + dealtDamage + " damage to " + opponent.getLogName());
                     }
                 }

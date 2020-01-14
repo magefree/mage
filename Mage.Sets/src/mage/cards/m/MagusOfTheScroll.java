@@ -84,7 +84,7 @@ class MagusOfTheScrollEffect extends OneShotEffect {
                     }
                     Player player = game.getPlayer(targetPointer.getFirst(game, source));
                     if (player != null) {
-                        player.damage(2, source.getSourceId(), game, false, true);
+                        player.damage(2, source.getSourceId(), game);
                         return true;
                     }
                     return false;

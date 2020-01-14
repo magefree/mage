@@ -80,7 +80,7 @@ class ThoughtHemorrhageEffect extends OneShotEffect {
                     }
                 }
                 if (cardsFound > 0) {
-                    targetPlayer.damage(3 * cardsFound, source.getSourceId(), game, false, true);
+                    targetPlayer.damage(3 * cardsFound, source.getSourceId(), game);
                 }
                 // Exile all cards with the same name
                 // Building a card filter with the name

@@ -1,7 +1,5 @@
 package mage.cards.v;
 
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -18,8 +16,10 @@ import mage.players.Player;
 import mage.target.common.TargetLandPermanent;
 import mage.target.targetadjustment.TargetAdjuster;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
 public final class VolcanicEruption extends CardImpl {
@@ -94,7 +94,7 @@ class VolcanicEruptionEffect extends OneShotEffect {
             for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    player.damage(destroyedCount, source.getSourceId(), game, false, true);
+                    player.damage(destroyedCount, source.getSourceId(), game);
                 }
             }
         }

@@ -1,7 +1,5 @@
-
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -9,21 +7,21 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
-/**
- *
- * @author noxx
+import java.util.UUID;
 
+/**
+ * @author noxx
  */
 public final class VexingDevil extends CardImpl {
 
     public VexingDevil(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");
         this.subtype.add(SubType.DEVIL);
 
         this.power = new MageInt(4);
@@ -63,7 +61,7 @@ class VexingDevilEffect extends OneShotEffect {
                 Player opponent = game.getPlayer(opponentUuid);
                 if (opponent != null && opponent.chooseUse(Outcome.LoseLife, "Make " + permanent.getLogName() + " deal 4 damage to you?", source, game)) {
                     game.informPlayers(opponent.getLogName() + " has chosen to receive 4 damage from " + permanent.getLogName());
-                    opponent.damage(4, permanent.getId(), game, false, true);
+                    opponent.damage(4, permanent.getId(), game);
                     permanent.sacrifice(source.getSourceId(), game);
                     return true;
                 }

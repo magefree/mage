@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -16,14 +14,15 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author Loki
  */
 public final class SpikeshotGoblin extends CardImpl {
 
     public SpikeshotGoblin(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.subtype.add(SubType.GOBLIN);
         this.subtype.add(SubType.SHAMAN);
 
@@ -76,7 +75,7 @@ class SpikeshotGoblinEffect extends OneShotEffect {
         }
         Player player = game.getPlayer(source.getFirstTarget());
         if (player != null) {
-            player.damage(damage, sourcePermanent.getId(), game, false, true);
+            player.damage(damage, sourcePermanent.getId(), game);
             return true;
         }
         return false;

@@ -1,7 +1,5 @@
-
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -14,18 +12,15 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class LobeLobber extends CardImpl {
@@ -77,7 +72,7 @@ class LobeLobberEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getFirstTarget());
 
         if (controller != null && equipment != null && player != null) {
-            player.damage(1, source.getSourceId(), game, false, true);        
+            player.damage(1, source.getSourceId(), game);
             int amount = controller.rollDice(game, 6);
             if (amount >= 5) {
                 new UntapSourceEffect().apply(game, source);

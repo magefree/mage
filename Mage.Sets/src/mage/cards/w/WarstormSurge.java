@@ -111,7 +111,7 @@ class WarstormSurgeEffect extends OneShotEffect {
             }
             Player player = game.getPlayer(target);
             if (player != null) {
-                player.damage(amount, creature.getId(), game, false, true);
+                player.damage(amount, creature.getId(), game);
                 return true;
             }
         }

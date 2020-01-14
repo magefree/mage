@@ -1,7 +1,5 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -13,14 +11,15 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author Loki
  */
 public final class PsionicBlast extends CardImpl {
 
     public PsionicBlast(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}");
 
 
         // Psionic Blast deals 4 damage to any target and 2 damage to you.
@@ -53,7 +52,7 @@ class PsionicBlastEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            player.damage(2, source.getSourceId(), game, false, true);
+            player.damage(2, source.getSourceId(), game);
             return true;
         }
         return false;

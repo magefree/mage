@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import mage.MageInt;
@@ -120,9 +119,9 @@ class AkoumHellkiteDamageEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getFirstTarget());
         if (land != null && player != null) {
             if (land.hasSubtype(SubType.MOUNTAIN, game)) {
-                player.damage(2, source.getSourceId(), game, false, true);
+                player.damage(2, source.getSourceId(), game);
             } else {
-                player.damage(1, source.getSourceId(), game, false, true);
+                player.damage(1, source.getSourceId(), game);
             }
             return true;
         }

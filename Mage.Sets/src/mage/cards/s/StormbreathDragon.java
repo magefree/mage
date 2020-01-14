@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -14,19 +12,20 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class StormbreathDragon extends CardImpl {
 
     public StormbreathDragon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
         this.subtype.add(SubType.DRAGON);
 
         this.power = new MageInt(4);
@@ -39,7 +38,7 @@ public final class StormbreathDragon extends CardImpl {
         // protection from white
         this.addAbility(ProtectionAbility.from(ObjectColor.WHITE));
         // {5}{R}{R}: Monstrosity 3.
-        this.addAbility(new MonstrosityAbility("{5}{R}{R}",3));
+        this.addAbility(new MonstrosityAbility("{5}{R}{R}", 3));
         // When Stormbreath Dragon becomes monstrous, it deals damage to each opponent equal to the number of cards in that player's hand.
         this.addAbility(new BecomesMonstrousSourceTriggeredAbility(new StormbreathDragonDamageEffect()));
     }
@@ -77,7 +76,7 @@ class StormbreathDragonDamageEffect extends OneShotEffect {
             if (opponent != null) {
                 int damage = opponent.getHand().size();
                 if (damage > 0) {
-                    opponent.damage(damage, source.getSourceId(), game, false, true);
+                    opponent.damage(damage, source.getSourceId(), game);
                 }
             }
         }

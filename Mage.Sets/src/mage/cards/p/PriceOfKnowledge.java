@@ -1,7 +1,5 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -11,22 +9,19 @@ import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect;
 import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect.HandSizeModification;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class PriceOfKnowledge extends CardImpl {
 
     public PriceOfKnowledge(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{6}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{6}{B}");
 
 
         // Players have no maximum hand size.
@@ -65,7 +60,7 @@ class PriceOfKnowledgeEffect extends OneShotEffect {
         if (targetPlayer != null) {
             int xValue = targetPlayer.getHand().size();
             if (xValue > 0) {
-                targetPlayer.damage(xValue, source.getSourceId(), game, false, true);
+                targetPlayer.damage(xValue, source.getSourceId(), game);
             }
             return true;
         }

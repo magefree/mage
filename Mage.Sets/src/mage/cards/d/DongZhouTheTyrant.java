@@ -1,30 +1,25 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.TargetController;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class DongZhouTheTyrant extends CardImpl {
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
 
     static {
@@ -32,8 +27,8 @@ public final class DongZhouTheTyrant extends CardImpl {
     }
 
     public DongZhouTheTyrant(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");
-       addSuperType(SuperType.LEGENDARY);
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(3);
@@ -73,7 +68,7 @@ class DongZhouTheTyrantEffect extends OneShotEffect {
             int amount = creature.getPower().getValue();
             Player controller = game.getPlayer(creature.getControllerId());
             if (controller != null) {
-                controller.damage(amount, creature.getId(), game, false, true);
+                controller.damage(amount, creature.getId(), game);
                 return true;
             }
         }

@@ -1,7 +1,5 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.PreventionEffectData;
@@ -18,14 +16,15 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetSource;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class DeflectingPalm extends CardImpl {
 
     public DeflectingPalm(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}{W}");
 
         // The next time a source of your choice would deal damage to you this turn, prevent that damage. If damage is prevented this way, Deflecting Palm deals that much damage to that source's controller.
         this.getSpellAbility().addEffect(new DeflectingPalmEffect());
@@ -44,7 +43,7 @@ public final class DeflectingPalm extends CardImpl {
 class DeflectingPalmEffect extends PreventionEffectImpl {
 
     private final TargetSource target;
-    
+
     public DeflectingPalmEffect() {
         super(Duration.EndOfTurn, Integer.MAX_VALUE, false, false);
         this.staticText = "The next time a source of your choice would deal damage to you this turn, prevent that damage. If damage is prevented this way, {this} deals that much damage to that source's controller";
@@ -68,7 +67,7 @@ class DeflectingPalmEffect extends PreventionEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {        
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         PreventionEffectData preventionData = preventDamageAction(event, source, game);
         this.used = true;
         this.discard(); // only one use
@@ -85,19 +84,17 @@ class DeflectingPalmEffect extends PreventionEffectImpl {
             if (objectControllerId != null) {
                 Player objectController = game.getPlayer(objectControllerId);
                 if (objectController != null) {
-                    objectController.damage(preventionData.getPreventedDamage(), source.getSourceId(), game, false, true);
+                    objectController.damage(preventionData.getPreventedDamage(), source.getSourceId(), game);
                 }
             }
-        }        
+        }
         return true;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (!this.used && super.applies(event, source, game)) {
-            if (event.getTargetId().equals(source.getControllerId()) && event.getSourceId().equals(target.getFirstTarget())) {
-                return true;
-            }
+            return event.getTargetId().equals(source.getControllerId()) && event.getSourceId().equals(target.getFirstTarget());
         }
         return false;
     }

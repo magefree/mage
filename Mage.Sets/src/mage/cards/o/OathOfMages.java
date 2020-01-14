@@ -111,7 +111,7 @@ class OathOfMagesEffect extends OneShotEffect {
             return false;
         }
         if (firstPlayer.chooseUse(Outcome.Benefit, "Deal one damage to " + secondPlayer.getLogName() + "?", source, game)) {
-            secondPlayer.damage(1, source.getSourceId(), game, false, true);
+            secondPlayer.damage(1, source.getSourceId(), game);
         }
         return true;
     }

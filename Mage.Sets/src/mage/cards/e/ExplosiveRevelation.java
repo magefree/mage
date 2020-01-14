@@ -1,7 +1,5 @@
-
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -18,8 +16,9 @@ import mage.players.Library;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class ExplosiveRevelation extends CardImpl {
@@ -86,7 +85,7 @@ class ExplosiveRevelationEffect extends OneShotEffect {
                     } else {
                         Player targetedPlayer = game.getPlayer(targetId);
                         if (targetedPlayer != null) {
-                            targetedPlayer.damage(damage, source.getSourceId(), game, false, true);
+                            targetedPlayer.damage(damage, source.getSourceId(), game);
                         }
                     }
                 }

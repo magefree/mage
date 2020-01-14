@@ -1,7 +1,5 @@
-
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -13,8 +11,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetNonBasicLandPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Styxo
  */
 public final class LavaBlister extends CardImpl {
@@ -61,7 +60,7 @@ class LavaBlisterEffect extends OneShotEffect {
             if (player != null) {
                 String message = "Have Lava Blister do 6 damage to you?";
                 if (player.chooseUse(Outcome.Damage, message, source, game)) {
-                    player.damage(6, source.getSourceId(), game, false, true);
+                    player.damage(6, source.getSourceId(), game);
                 } else {
                     permanent.destroy(source.getId(), game, false);
                 }

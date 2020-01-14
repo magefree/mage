@@ -138,10 +138,10 @@ class WormsOfTheEarthDestroyEffect extends OneShotEffect {
                         if (cost.canPay(source, source.getSourceId(), player.getId(), game)
                                 && player.chooseUse(Outcome.Sacrifice, "Will you sacrifice two lands? (otherwise you'll be dealt 5 damage)", source, game)) {
                             if (!cost.pay(source, game, source.getSourceId(), player.getId(), false, null)) {
-                                player.damage(5, source.getSourceId(), game, false, true);
+                                player.damage(5, source.getSourceId(), game);
                             }
                         } else {
-                            player.damage(5, source.getSourceId(), game, false, true);
+                            player.damage(5, source.getSourceId(), game);
                         }
                         sourcePermanent = game.getPermanent(source.getSourceId());
                         if (sourcePermanent != null) {

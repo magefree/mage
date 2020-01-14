@@ -1,7 +1,5 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
@@ -15,11 +13,12 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
  */
 public final class MorgueBurst extends CardImpl {
@@ -73,7 +72,7 @@ class MorgueBurstEffect extends OneShotEffect {
                 }
                 Player targetPlayer = game.getPlayer(source.getTargets().get(1).getTargets().get(0));
                 if (targetPlayer != null) {
-                    targetPlayer.damage(damage, source.getSourceId(), game, false, true);
+                    targetPlayer.damage(damage, source.getSourceId(), game);
                     return true;
                 }
             }

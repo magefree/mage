@@ -1,7 +1,5 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -10,16 +8,17 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class GoblinPsychopath extends CardImpl {
@@ -99,7 +98,7 @@ class GoblinPsychopathEffect extends ReplacementEffectImpl {
             return false;
         }
         // TODO: make this redirect damage from all blockers
-        controller.damage(event.getAmount(), source.getSourceId(), game, false, true);
+        controller.damage(event.getAmount(), source.getSourceId(), game);
         String sourceLogName = game.getObject(source.getSourceId()).getLogName() + ": ";
         game.informPlayers(sourceLogName + "Redirected " + event.getAmount() + " damage to " + controller.getLogName());
         this.discard();

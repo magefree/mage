@@ -78,7 +78,7 @@ class VexingArcanixEffect extends OneShotEffect {
                     player.moveCards(cards, Zone.HAND, source, game);
                 } else {
                     player.moveCards(cards, Zone.GRAVEYARD, source, game);
-                    player.damage(2, source.getSourceId(), game, false, true);
+                    player.damage(2, source.getSourceId(), game);
                 }
             }
             return true;

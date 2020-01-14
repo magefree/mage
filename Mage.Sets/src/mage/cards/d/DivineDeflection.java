@@ -1,7 +1,5 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.PreventionEffectImpl;
@@ -15,13 +13,15 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 
+import java.util.UUID;
+
 /**
  * @author noxx
  */
 public final class DivineDeflection extends CardImpl {
 
     public DivineDeflection(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{W}");
 
 
         // Prevent the next X damage that would be dealt to you and/or permanents you control this turn. If damage is prevented this way, Divine Deflection deals that much damage to any target.
@@ -103,7 +103,7 @@ class DivineDeflectionPreventDamageTargetEffect extends PreventionEffectImpl {
             Player player = game.getPlayer(dealDamageTo);
             if (player != null) {
                 game.informPlayers("Dealing " + prevented + " to " + player.getLogName() + " instead");
-                player.damage(prevented, source.getSourceId(), game, false, true);
+                player.damage(prevented, source.getSourceId(), game);
             }
         }
         return false;
@@ -123,9 +123,7 @@ class DivineDeflectionPreventDamageTargetEffect extends PreventionEffectImpl {
                 }
             }
             //   check player
-            if (source.isControlledBy(event.getTargetId())) {
-                return true;
-            }
+            return source.isControlledBy(event.getTargetId());
         }
         return false;
     }

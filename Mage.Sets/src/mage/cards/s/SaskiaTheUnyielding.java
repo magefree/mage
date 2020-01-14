@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -12,17 +10,14 @@ import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.SetTargetPointer;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class SaskiaTheUnyielding extends CardImpl {
@@ -85,7 +80,7 @@ class SaskiaTheUnyieldingEffect extends OneShotEffect {
                 Integer damage = (Integer) this.getValue("damage");
                 UUID sourceId = (UUID) this.getValue("sourceId");
                 if (sourceId != null && damage > 0) {
-                    player.damage(damage, sourceId, game, false, true);
+                    player.damage(damage, sourceId, game);
                 }
             }
             return true;

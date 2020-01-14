@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -15,14 +13,15 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author fenhl
  */
 public final class CleansingBeam extends CardImpl {
 
     public CleansingBeam(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{R}");
 
         // Radiance — Cleansing Beam deals 2 damage to target creature and each other creature that shares a color with it.
         this.getSpellAbility().addEffect(new CleansingBeamEffect());
@@ -62,7 +61,7 @@ class CleansingBeamEffect extends OneShotEffect {
         Permanent target = game.getPermanent(targetPointer.getFirst(game, source));
         if (target != null) {
             ObjectColor color = target.getColor(game);
-            target.damage(2, source.getSourceId(), game, false, true);
+            target.damage(2, source.getSourceId(), game);
             for (Permanent p : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
                 if (!target.getId().equals(p.getId()) && p.getColor(game).shares(color)) {
                     p.damage(2, source.getSourceId(), game, false, true);

@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealtDamageToSourceTriggeredAbility;
@@ -9,13 +7,14 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author vereena42
  */
 public final class CoalhaulerSwine extends CardImpl {
@@ -62,7 +61,7 @@ public final class CoalhaulerSwine extends CardImpl {
             for (UUID playerId : game.getPlayers().keySet()) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    player.damage((Integer) this.getValue("damage"), source.getSourceId(), game, false, true);
+                    player.damage((Integer) this.getValue("damage"), source.getSourceId(), game);
                 }
             }
             return true;

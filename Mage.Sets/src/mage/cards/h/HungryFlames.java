@@ -1,7 +1,5 @@
-
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -13,6 +11,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetPlayerOrPlaneswalker;
+
+import java.util.UUID;
 
 /**
  * @author JRHerlehy
@@ -58,7 +58,7 @@ public final class HungryFlames extends CardImpl {
             }
 
             if (player != null) {
-                player.damage(2, source.getSourceId(), game, false, true);
+                player.damage(2, source.getSourceId(), game);
             }
 
             return true;

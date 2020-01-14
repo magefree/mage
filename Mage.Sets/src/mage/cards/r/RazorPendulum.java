@@ -64,7 +64,7 @@ class RazorPendulumEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        return player.damage(2, source.getSourceId(), game, false, true) > 0;
+        return player.damage(2, source.getSourceId(), game) > 0;
     }
 }
 

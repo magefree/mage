@@ -1,6 +1,5 @@
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.JumpStartAbility;
@@ -14,8 +13,9 @@ import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class GraviticPunch extends CardImpl {
@@ -67,7 +67,7 @@ class GraviticPunchEffect extends OneShotEffect {
         if (player == null || controlledCreature == null) {
             return false;
         }
-        player.damage(controlledCreature.getPower().getValue(), controlledCreature.getId(), game, false, true);
+        player.damage(controlledCreature.getPower().getValue(), controlledCreature.getId(), game);
         return true;
     }
 }

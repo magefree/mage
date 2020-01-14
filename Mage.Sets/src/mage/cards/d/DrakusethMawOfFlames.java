@@ -1,6 +1,5 @@
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -19,6 +18,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetAnyTarget;
+
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -96,7 +97,7 @@ class DrakusethMawOfFlamesEffect extends OneShotEffect {
         }
         Player player = game.getPlayer(targetId);
         if (player != null) {
-            player.damage(damage, source.getSourceId(), game, false, true);
+            player.damage(damage, source.getSourceId(), game);
         }
     }
 }

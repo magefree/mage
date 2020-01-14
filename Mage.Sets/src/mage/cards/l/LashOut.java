@@ -1,7 +1,5 @@
-
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ClashEffect;
@@ -14,14 +12,15 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class LashOut extends CardImpl {
 
     public LashOut(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}");
 
 
         // Lash Out deals 3 damage to target creature. Clash with an opponent. If you win, Lash Out deals 3 damage to that creature's controller.
@@ -64,7 +63,7 @@ class LashOutEffect extends OneShotEffect {
             if (ClashEffect.getInstance().apply(game, source)) {
                 Player creaturesController = game.getPlayer(creature.getControllerId());
                 if (creaturesController != null) {
-                    creaturesController.damage(3, source.getSourceId(), game, false, true);
+                    creaturesController.damage(3, source.getSourceId(), game);
                 }
             }
             return true;

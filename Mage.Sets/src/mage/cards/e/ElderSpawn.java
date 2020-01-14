@@ -1,7 +1,5 @@
-
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -12,11 +10,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
+import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -25,8 +19,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class ElderSpawn extends CardImpl {
@@ -36,7 +31,7 @@ public final class ElderSpawn extends CardImpl {
     static {
         filter.add(new ColorPredicate(ObjectColor.RED));
     }
-    
+
     public ElderSpawn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{U}{U}");
         this.subtype.add(SubType.SPAWN);
@@ -49,11 +44,11 @@ public final class ElderSpawn extends CardImpl {
         // Elder Spawn can't be blocked by red creatures.
         this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
     }
-    
+
     public ElderSpawn(final ElderSpawn card) {
         super(card);
     }
-    
+
     @Override
     public ElderSpawn copy() {
         return new ElderSpawn(this);
@@ -63,10 +58,11 @@ public final class ElderSpawn extends CardImpl {
 class ElderSpawnEffect extends OneShotEffect {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an Island");
+
     static {
         filter.add(SubType.ISLAND.getPredicate());
     }
-    
+
     public ElderSpawnEffect() {
         super(Outcome.Sacrifice);
         staticText = "unless you sacrifice an Island, sacrifice {this} and it deals 6 damage to you";
@@ -92,7 +88,7 @@ class ElderSpawnEffect extends OneShotEffect {
                     || !cost.canPay(source, source.getSourceId(), source.getControllerId(), game)
                     || !cost.pay(source, game, source.getSourceId(), source.getControllerId(), true)) {
                 sourcePermanent.sacrifice(source.getSourceId(), game);
-                controller.damage(6, sourcePermanent.getId(), game, false, true);
+                controller.damage(6, sourcePermanent.getId(), game);
             }
             return true;
         }

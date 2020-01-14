@@ -12,10 +12,10 @@ public class MageVersion implements Serializable, Comparable<MageVersion> {
     public static final int MAGE_VERSION_MAJOR = 1;
     public static final int MAGE_VERSION_MINOR = 4;
     public static final int MAGE_VERSION_PATCH = 42;
-    public static final String MAGE_EDITION_INFO = ""; // set "-beta" for 1.4.32-betaV0
-    public static final String MAGE_VERSION_MINOR_PATCH = "V0"; // default
+    public static final String MAGE_EDITION_INFO = "-beta5"; // set "-beta2" for 1.4.32V1-beta2
+    public static final String MAGE_VERSION_MINOR_PATCH = "V1"; // default
     // strict mode
-    private static final boolean MAGE_VERSION_MINOR_PATCH_MUST_BE_SAME = false; // set true on uncompatible github changes, set false after new major release (after MAGE_VERSION_PATCH changes)
+    private static final boolean MAGE_VERSION_MINOR_PATCH_MUST_BE_SAME = true; // set true on uncompatible github changes, set false after new major release (after MAGE_VERSION_PATCH changes)
 
     public static final boolean MAGE_VERSION_SHOW_BUILD_TIME = true;
     private final int major;
@@ -58,7 +58,7 @@ public class MageVersion implements Serializable, Comparable<MageVersion> {
 
     public String toString(boolean showBuildTime) {
         // 1.4.32-betaV0 (build: time)
-        String res = major + "." + minor + '.' + patch + editionInfo + minorPatch;
+        String res = major + "." + minor + '.' + patch + minorPatch + editionInfo;
         if (showBuildTime && !this.buildTime.isEmpty()) {
             res += " (build: " + this.buildTime + ")";
         }

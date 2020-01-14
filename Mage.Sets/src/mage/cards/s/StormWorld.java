@@ -1,22 +1,17 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class StormWorld extends CardImpl {
@@ -63,7 +58,7 @@ class StormWorldEffect extends OneShotEffect {
         if (player != null) {
             int damage = 4 - player.getHand().size();
             if (damage > 0) {
-                player.damage(damage, source.getSourceId(), game, false, true);
+                player.damage(damage, source.getSourceId(), game);
             }
             return true;
         }

@@ -1,7 +1,5 @@
-
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -9,20 +7,21 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class Viseling extends CardImpl {
 
     public Viseling(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
         this.subtype.add(SubType.CONSTRUCT);
 
         this.power = new MageInt(2);
@@ -65,7 +64,7 @@ class ViselingEffect extends OneShotEffect {
         if (opponent != null) {
             int xValue = opponent.getHand().size() - 4;
             if (xValue > 0) {
-                opponent.damage(xValue, source.getSourceId(), game, false,  true);
+                opponent.damage(xValue, source.getSourceId(), game);
             }
             return true;
         }

@@ -1,7 +1,5 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -16,8 +14,9 @@ import mage.game.Game;
 import mage.game.permanent.token.DjinnToken;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author KholdFuzion
  */
 public final class BottleOfSuleiman extends CardImpl {
@@ -66,7 +65,7 @@ class BottleOfSuleimanEffect extends OneShotEffect {
                 token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
                 return true;
             } else {
-                you.damage(5, source.getSourceId(), game, false, true);
+                you.damage(5, source.getSourceId(), game);
                 return true;
             }
 

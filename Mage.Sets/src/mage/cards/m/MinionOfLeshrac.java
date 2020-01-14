@@ -1,7 +1,5 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -14,11 +12,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -29,21 +23,22 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class MinionOfLeshrac extends CardImpl {
-    
+
     private static final FilterPermanent filterCreatureOrLand = new FilterPermanent("creature or land");
-    
+
     static {
         filterCreatureOrLand.add(Predicates.or(CardType.CREATURE.getPredicate(), CardType.LAND.getPredicate()));
     }
-    
+
     public MinionOfLeshrac(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}{B}");
-        
+
         this.subtype.add(SubType.DEMON);
         this.subtype.add(SubType.MINION);
         this.power = new MageInt(5);
@@ -59,13 +54,13 @@ public final class MinionOfLeshrac extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapSourceCost());
         ability.addTarget(new TargetPermanent(filterCreatureOrLand));
         this.addAbility(ability);
-        
+
     }
-    
+
     public MinionOfLeshrac(final MinionOfLeshrac card) {
         super(card);
     }
-    
+
     @Override
     public MinionOfLeshrac copy() {
         return new MinionOfLeshrac(this);
@@ -73,16 +68,16 @@ public final class MinionOfLeshrac extends CardImpl {
 }
 
 class MinionLeshracEffect extends OneShotEffect {
-    
+
     public MinionLeshracEffect() {
         super(Outcome.Sacrifice);
         staticText = "{this} deals 5 damage to you unless you sacrifice a creature other than {this}. If {this} deals damage to you this way, tap it";
     }
-    
+
     public MinionLeshracEffect(final MinionLeshracEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
@@ -99,14 +94,14 @@ class MinionLeshracEffect extends OneShotEffect {
                     && cost.pay(source, game, source.getSourceId(), source.getControllerId(), true)) {
                 return true;
             }
-            if (controller.damage(5, minionLeshrac.getId(), game, false, true) > 0) {
+            if (controller.damage(5, minionLeshrac.getId(), game) > 0) {
                 minionLeshrac.tap(game);
                 return true;
             }
         }
         return false;
     }
-    
+
     @Override
     public MinionLeshracEffect copy() {
         return new MinionLeshracEffect(this);

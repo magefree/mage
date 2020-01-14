@@ -1,5 +1,3 @@
-
-
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
@@ -13,7 +11,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
- *
  * @author LoneFox
  */
 public class DamageAttachedControllerEffect extends OneShotEffect {
@@ -24,7 +21,7 @@ public class DamageAttachedControllerEffect extends OneShotEffect {
         super(Outcome.Damage);
         this.amount = StaticValue.get(amount);
     }
-    
+
     public DamageAttachedControllerEffect(DynamicValue amount) {
         super(Outcome.Damage);
         this.amount = amount;
@@ -43,16 +40,16 @@ public class DamageAttachedControllerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if(enchantment == null) {
+        if (enchantment == null) {
             return false;
         }
         Permanent enchanted = game.getPermanentOrLKIBattlefield(enchantment.getAttachedTo());
-        if(enchanted == null) {
+        if (enchanted == null) {
             return false;
         }
         Player player = game.getPlayer(enchanted.getControllerId());
-        if(player != null) {
-            player.damage(amount.calculate(game, source, this), source.getSourceId(), game, false, true);
+        if (player != null) {
+            player.damage(amount.calculate(game, source, this), source.getSourceId(), game);
             return true;
         }
         return false;
@@ -66,6 +63,6 @@ public class DamageAttachedControllerEffect extends OneShotEffect {
         if ("equal to".equals(amount.toString())) {
             return "{this} deals damage " + amount + " that creatures toughness to that creature's controller";
         }
-         return "{this} deals " + amount + " damage to that creature's controller";
+        return "{this} deals " + amount + " damage to that creature's controller";
     }
 }

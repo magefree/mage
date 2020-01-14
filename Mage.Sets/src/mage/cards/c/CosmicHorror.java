@@ -1,8 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.Locale;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -20,8 +17,10 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.Locale;
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class CosmicHorror extends CardImpl {
@@ -80,7 +79,7 @@ class CosmicHorrorEffect extends OneShotEffect {
                 }
             }
             if (cosmicHorror.destroy(source.getSourceId(), game, false)) {
-                controller.damage(7, source.getSourceId(), game, false, true);
+                controller.damage(7, source.getSourceId(), game);
                 return true;
             }
         }

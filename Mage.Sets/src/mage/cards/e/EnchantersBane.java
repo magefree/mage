@@ -1,6 +1,5 @@
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -14,8 +13,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetEnchantmentPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class EnchantersBane extends CardImpl {
@@ -72,7 +72,7 @@ class EnchantersBaneEffect extends OneShotEffect {
         if (player.chooseUse(Outcome.GainLife, "Sacrifice " + permanent.getLogName() + "?", source, game)) {
             permanent.sacrifice(source.getSourceId(), game);
         } else {
-            player.damage(permanent.getConvertedManaCost(), permanent.getId(), game, false, true);
+            player.damage(permanent.getConvertedManaCost(), permanent.getId(), game);
         }
         return true;
     }

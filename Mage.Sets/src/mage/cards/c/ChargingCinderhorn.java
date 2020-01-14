@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
@@ -12,19 +10,16 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.watchers.common.AttackedThisTurnWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class ChargingCinderhorn extends CardImpl {
@@ -102,7 +97,7 @@ class ChargingCinderhornDamageTargetEffect extends OneShotEffect {
         DynamicValue amount = new CountersSourceCount(CounterType.FURY);
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (player != null) {
-            player.damage(amount.calculate(game, source, this), source.getSourceId(), game, false, true);
+            player.damage(amount.calculate(game, source, this), source.getSourceId(), game);
             return true;
         }
         return false;

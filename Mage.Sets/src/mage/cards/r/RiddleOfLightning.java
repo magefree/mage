@@ -1,7 +1,5 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -17,8 +15,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class RiddleOfLightning extends CardImpl {
@@ -75,7 +74,7 @@ class RiddleOfLightningEffect extends OneShotEffect {
                 }
                 Player targetPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
                 if (targetPlayer != null) {
-                    targetPlayer.damage(card.getConvertedManaCost(), source.getSourceId(), game, false, true);
+                    targetPlayer.damage(card.getConvertedManaCost(), source.getSourceId(), game);
                     return true;
                 }
             }

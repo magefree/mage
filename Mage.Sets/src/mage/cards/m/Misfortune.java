@@ -79,7 +79,7 @@ class MisfortuneEffect extends OneShotEffect {
                 Effect putM1M1CounterOnEachOpponentCreature = new AddCountersAllEffect(
                         CounterType.M1M1.createInstance(), filterOpponentCreatures);
                 putM1M1CounterOnEachOpponentCreature.apply(game, source);
-                chosenOpponent.damage(4, source.getSourceId(), game, false, true);
+                chosenOpponent.damage(4, source.getSourceId(), game);
             }
             return true;
         }

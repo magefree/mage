@@ -1,12 +1,10 @@
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.continuous.DamageCantBePreventedEffect;
 import mage.abilities.keyword.AftermathAbility;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
@@ -20,6 +18,8 @@ import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  * @author Stravant
@@ -115,7 +115,7 @@ class InjuryEffect extends OneShotEffect {
         }
 
         if (player != null) {
-            player.damage(2, source.getSourceId(), game, false, true);
+            player.damage(2, source.getSourceId(), game);
         }
 
         return true;

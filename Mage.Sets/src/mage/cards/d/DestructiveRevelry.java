@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import mage.abilities.Ability;
@@ -17,13 +16,12 @@ import mage.target.TargetPermanent;
 import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class DestructiveRevelry extends CardImpl {
 
     public DestructiveRevelry(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}{G}");
 
         // Destroy target artifact or enchantment. Destructive Revelry deals 2 damage to that permanent's controller.
         this.getSpellAbility().addEffect(new DestructiveRevelryEffect());
@@ -64,7 +62,7 @@ class DestructiveRevelryEffect extends OneShotEffect {
             permanent.destroy(source.getSourceId(), game, false);
             Player permController = game.getPlayer(permanent.getControllerId());
             if (permController != null) {
-                permController.damage(2, source.getSourceId(), game, false, true);
+                permController.damage(2, source.getSourceId(), game);
                 return true;
             }
         }

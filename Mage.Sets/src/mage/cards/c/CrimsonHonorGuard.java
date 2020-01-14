@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -12,16 +10,17 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.CommanderPredicate;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class CrimsonHonorGuard extends CardImpl {
@@ -74,7 +73,7 @@ class CrimsonHonorGuardEffect extends OneShotEffect {
         if (player != null) {
             int numCommanders = game.getBattlefield().getAllActivePermanents(filter, player.getId(), game).size();
             if (numCommanders == 0) {
-                player.damage(4, source.getSourceId(), game, false, true);
+                player.damage(4, source.getSourceId(), game);
                 return true;
             }
         }

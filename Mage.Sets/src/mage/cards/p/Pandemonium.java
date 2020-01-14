@@ -1,4 +1,3 @@
-
 package mage.cards.p;
 
 import mage.abilities.Ability;
@@ -89,7 +88,7 @@ class PandemoniumEffect extends OneShotEffect {
                 } else {
                     Player targetPlayer = game.getPlayer(source.getTargets().getFirstTarget());
                     if (targetPlayer != null) {
-                        targetPlayer.damage(enteringCreature.getPower().getValue(), enteringCreature.getId(), game, false, true);
+                        targetPlayer.damage(enteringCreature.getPower().getValue(), enteringCreature.getId(), game);
                     }
                 }
                 return true;

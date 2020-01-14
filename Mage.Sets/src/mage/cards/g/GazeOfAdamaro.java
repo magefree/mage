@@ -1,26 +1,25 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class GazeOfAdamaro extends CardImpl {
 
     public GazeOfAdamaro(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}{R}");
         this.subtype.add(SubType.ARCANE);
 
 
@@ -59,7 +58,7 @@ class GazeOfAdamaroEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (targetPlayer != null) {
-            targetPlayer.damage(targetPlayer.getHand().size(), source.getSourceId(), game, false, true);
+            targetPlayer.damage(targetPlayer.getHand().size(), source.getSourceId(), game);
             return true;
         }
         return false;

@@ -1,7 +1,5 @@
-
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -13,22 +11,23 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetLandPermanent;
 
+import java.util.UUID;
+
 
 /**
- *
  * @author fireshoes
  */
 public final class Icequake extends CardImpl {
 
     public Icequake(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
 
         // Destroy target land.
         // If that land was a snow land, Icequake deals 1 damage to that land's controller.
         this.getSpellAbility().addEffect(new IcequakeEffect());
         this.getSpellAbility().addTarget(new TargetLandPermanent());
-        
-        
+
+
     }
 
     public Icequake(final Icequake card) {
@@ -62,10 +61,10 @@ class IcequakeEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent != null) {
             Player controller = game.getPlayer(permanent.getControllerId());
-            if(controller != null) {
+            if (controller != null) {
                 permanent.destroy(source.getSourceId(), game, false);
                 if (permanent.isSnow()) {
-                    controller.damage(1, source.getSourceId(), game, false, true);
+                    controller.damage(1, source.getSourceId(), game);
                 }
                 return true;
             }

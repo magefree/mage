@@ -1,7 +1,5 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -21,8 +19,9 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author FenrisulfrX
  */
 public final class DarigaazTheIgniter extends CardImpl {
@@ -82,7 +81,7 @@ class DarigaazTheIgniterEffect extends OneShotEffect {
                 filter.add(new ColorPredicate(choice.getColor()));
                 int damage = damagedPlayer.getHand().count(filter, source.getSourceId(), source.getControllerId(), game);
                 if (damage > 0) {
-                    damagedPlayer.damage(damage, source.getSourceId(), game, false, true);
+                    damagedPlayer.damage(damage, source.getSourceId(), game);
                 }
             }
             return true;

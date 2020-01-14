@@ -1,7 +1,5 @@
-
 package mage.cards.j;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -9,7 +7,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
@@ -17,14 +14,15 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Backfir3
  */
 public final class JovialEvil extends CardImpl {
 
     public JovialEvil(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");
 
         // Jovial Evil deals X damage to target opponent, where X is twice the number of white creatures that player controls.
         this.getSpellAbility().addEffect(new JovialEvilEffect());
@@ -42,9 +40,10 @@ public final class JovialEvil extends CardImpl {
 }
 
 class JovialEvilEffect extends OneShotEffect {
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-    static{
+
+    static {
         filter.add(new ColorPredicate(ObjectColor.WHITE));
     }
 
@@ -66,7 +65,7 @@ class JovialEvilEffect extends OneShotEffect {
                 amount++;
             }
             if (amount > 0) {
-                opponent.damage(amount * 2, source.getSourceId(), game, false, true);
+                opponent.damage(amount * 2, source.getSourceId(), game);
             }
             return true;
         }

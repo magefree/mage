@@ -1,7 +1,5 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -21,8 +19,9 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class RumblingAftershocks extends CardImpl {
@@ -34,7 +33,7 @@ public final class RumblingAftershocks extends CardImpl {
     }
 
     public RumblingAftershocks(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}");
 
 
         // Whenever you cast a kicked spell, you may have Rumbling Aftershocks deal damage to any target equal to the number of times that spell was kicked.
@@ -79,7 +78,7 @@ class RumblingAftershocksTriggeredAbility extends TriggeredAbilityImpl {
         Spell spell = game.getStack().getSpell(event.getTargetId());
         if (spell != null && spell.isControlledBy(controllerId)) {
             int damageAmount = 0;
-            for (Ability ability: spell.getAbilities()) {
+            for (Ability ability : spell.getAbilities()) {
                 if (ability instanceof KickerAbility) {
                     damageAmount += ((KickerAbility) ability).getKickedCounter(game, spell.getSpellAbility());
                 }
@@ -121,8 +120,8 @@ class RumblingAftershocksDealDamageEffect extends OneShotEffect {
         if (player != null && damageAmount > 0) {
             Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
             if (targetPlayer != null) {
-               targetPlayer.damage(damageAmount, source.getSourceId(), game, false, true);
-               return true;
+                targetPlayer.damage(damageAmount, source.getSourceId(), game);
+                return true;
             }
             Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
             if (permanent != null) {

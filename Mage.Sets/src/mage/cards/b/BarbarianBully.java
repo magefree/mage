@@ -1,25 +1,21 @@
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class BarbarianBully extends CardImpl {
@@ -76,7 +72,7 @@ class BarbarianBullyEffect extends OneShotEffect {
                 continue;
             }
             if (player.chooseUse(Outcome.UnboostCreature, "Have " + permanent.getName() + " deal 4 damage to you?", source, game)) {
-                player.damage(4, permanent.getId(), game, false, true);
+                player.damage(4, permanent.getId(), game);
                 costPaid = true;
             }
         }

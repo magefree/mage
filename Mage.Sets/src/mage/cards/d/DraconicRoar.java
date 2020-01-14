@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import mage.abilities.Ability;
@@ -97,7 +96,7 @@ class DraconicRoarEffect extends OneShotEffect {
                 if (permanent != null) {
                     Player player = game.getPlayer(permanent.getControllerId());
                     if (player != null) {
-                        player.damage(3, source.getSourceId(), game, false, true);
+                        player.damage(3, source.getSourceId(), game);
                     }
                 }
             }

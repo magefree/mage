@@ -110,7 +110,7 @@ class AcolytesRewardEffect extends PreventionEffectImpl {
 
         Player targetPlayer = game.getPlayer(source.getTargets().get(1).getFirstTarget());
         if (targetPlayer != null) {
-            targetPlayer.damage(toPrevent, source.getSourceId(), game, false, true);
+            targetPlayer.damage(toPrevent, source.getSourceId(), game);
             game.informPlayers("Acolyte's Reward deals " + toPrevent + " damage to " + targetPlayer.getLogName());
             return result;
         }

@@ -1,8 +1,5 @@
-
 package mage.cards.h;
 
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -18,8 +15,10 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward
  */
 public final class HereticsPunishment extends CardImpl {
@@ -74,7 +73,7 @@ class HereticsPunishmentEffect extends OneShotEffect {
             }
             Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
             if (targetPlayer != null) {
-                targetPlayer.damage(maxCost, source.getSourceId(), game, false, true);
+                targetPlayer.damage(maxCost, source.getSourceId(), game);
                 return true;
             }
         }

@@ -1,7 +1,5 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -12,14 +10,15 @@ import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class PriceOfProgress extends CardImpl {
 
     public PriceOfProgress(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}");
 
 
         // Price of Progress deals damage to each player equal to twice the number of nonbasic lands that player controls.
@@ -59,11 +58,11 @@ class PriceOfProgressEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                int amount = game.getBattlefield().countAll(filter , playerId, game);
+                int amount = game.getBattlefield().countAll(filter, playerId, game);
                 if (amount > 0) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
-                        player.damage(amount * 2, source.getSourceId(), game, false, true);
+                        player.damage(amount * 2, source.getSourceId(), game);
                     }
                 }
             }

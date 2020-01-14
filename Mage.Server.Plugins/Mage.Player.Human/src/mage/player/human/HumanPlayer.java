@@ -1779,7 +1779,7 @@ public class HumanPlayer extends PlayerImpl {
                 } else {
                     Player player = game.getPlayer(target.getFirstTarget());
                     if (player != null) {
-                        player.damage(damageAmount, sourceId, game, false, true);
+                        player.damage(damageAmount, sourceId, game);
                         remainingDamage -= damageAmount;
                     }
                 }

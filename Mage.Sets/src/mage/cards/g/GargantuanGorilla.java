@@ -92,7 +92,7 @@ class GargantuanGorillaSacrificeEffect extends OneShotEffect {
                     || !cost.canPay(source, source.getSourceId(), source.getControllerId(), game)
                     || !cost.pay(source, game, source.getSourceId(), source.getControllerId(), true)) {
                 sourcePermanent.sacrifice(source.getSourceId(), game);
-                controller.damage(7, sourcePermanent.getId(), game, false, true);
+                controller.damage(7, sourcePermanent.getId(), game);
             } else if (cost.isPaid()) {
                 for (Permanent permanent : cost.getPermanents()) {
                     if (filterSnow.match(permanent, game)) {

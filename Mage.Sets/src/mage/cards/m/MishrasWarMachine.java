@@ -1,7 +1,5 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -11,21 +9,22 @@ import mage.abilities.keyword.BandingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth & L_J
  */
 public final class MishrasWarMachine extends CardImpl {
-    
+
     public MishrasWarMachine(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");        
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");
         this.subtype.add(SubType.JUGGERNAUT);
 
         this.power = new MageInt(5);
@@ -36,13 +35,13 @@ public final class MishrasWarMachine extends CardImpl {
 
         // At the beginning of your upkeep, Mishra's War Machine deals 3 damage to you unless you discard a card. If Mishra's War Machine deals damage to you this way, tap it.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new MishrasWarMachineEffect(), TargetController.YOU, false));
-        
+
     }
-    
+
     public MishrasWarMachine(final MishrasWarMachine card) {
         super(card);
     }
-    
+
     @Override
     public MishrasWarMachine copy() {
         return new MishrasWarMachine(this);
@@ -50,16 +49,16 @@ public final class MishrasWarMachine extends CardImpl {
 }
 
 class MishrasWarMachineEffect extends OneShotEffect {
-    
+
     public MishrasWarMachineEffect() {
         super(Outcome.Sacrifice);
         staticText = "{this} deals 3 damage to you unless you discard a card. If Mishra's War Machine deals damage to you this way, tap it";
     }
-    
+
     public MishrasWarMachineEffect(final MishrasWarMachineEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
@@ -72,14 +71,14 @@ class MishrasWarMachineEffect extends OneShotEffect {
                     && cost.pay(source, game, source.getSourceId(), source.getControllerId(), true)) {
                 return true;
             }
-            if (controller.damage(3, sourcePermanent.getId(), game, false, true) > 0) {
+            if (controller.damage(3, sourcePermanent.getId(), game) > 0) {
                 sourcePermanent.tap(game);
                 return true;
             }
         }
         return false;
     }
-    
+
     @Override
     public MishrasWarMachineEffect copy() {
         return new MishrasWarMachineEffect(this);

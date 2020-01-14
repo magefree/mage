@@ -1,7 +1,5 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
@@ -10,12 +8,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.SetTargetPointer;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
@@ -23,15 +16,16 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class ThelonsChant extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("a Swamp");
 
-    static{
+    static {
         filter.add(SubType.SWAMP.getPredicate());
     }
 
@@ -42,7 +36,7 @@ public final class ThelonsChant extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{G}")), TargetController.YOU, false));
 
         // Whenever a player puts a Swamp onto the battlefield, Thelon's Chant deals 3 damage to that player unless they put a -1/-1 counter on a creature they control.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new ThelonsChantEffect(), filter, false, SetTargetPointer.PLAYER, 
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new ThelonsChantEffect(), filter, false, SetTargetPointer.PLAYER,
                 "Whenever a player puts a Swamp onto the battlefield, {this} deals 3 damage to that player unless they put a -1/-1 counter on a creature they control."));
     }
 
@@ -89,7 +83,7 @@ class ThelonsChantEffect extends OneShotEffect {
                 }
             }
             if (!paid) {
-                player.damage(3, source.getSourceId(), game, false, true);
+                player.damage(3, source.getSourceId(), game);
             }
             return true;
         }

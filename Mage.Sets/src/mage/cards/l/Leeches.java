@@ -1,7 +1,5 @@
-
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -13,14 +11,15 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class Leeches extends CardImpl {
 
     public Leeches(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{W}{W}");
 
         // Target player loses all poison counters. Leeches deals that much damage to that player.
         this.getSpellAbility().addTarget(new TargetPlayer());
@@ -64,7 +63,7 @@ class LeechesEffect extends OneShotEffect {
         int countPoisonCounters = targetPlayer.getCounters().getCount(CounterType.POISON);
         if (countPoisonCounters > 0) {
             targetPlayer.removeCounters(CounterType.POISON.getName(), countPoisonCounters, source, game);
-            targetPlayer.damage(countPoisonCounters, source.getSourceId(), game, false, true);
+            targetPlayer.damage(countPoisonCounters, source.getSourceId(), game);
             return true;
         }
         return false;

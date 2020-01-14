@@ -1,7 +1,5 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -14,8 +12,9 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetSpell;
 
+import java.util.UUID;
+
 /**
- *
  * @author cbt33, LevelX2 (Quash)
  */
 public final class MoltenInfluence extends CardImpl {
@@ -62,7 +61,7 @@ class MoltenInfluenceEffect extends OneShotEffect {
             Player player = game.getPlayer(spell.getControllerId());
             String message = "Have Molten Influence do 4 damage to you?";
             if (player != null && player.chooseUse(Outcome.Damage, message, source, game)) {
-                player.damage(4, source.getSourceId(), game, false, true);
+                player.damage(4, source.getSourceId(), game);
                 return true;
             } else {
                 return game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game);

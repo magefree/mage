@@ -1,10 +1,7 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -15,14 +12,15 @@ import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J (based on code by dustinconrad)
  */
 public final class Skullscorch extends CardImpl {
 
     public Skullscorch(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{R}{R}");
 
         // Target player discards two cards at random unless that player has Skullscorch deal 4 damage to them.
         this.getSpellAbility().addEffect(new SkullscorchDiscardEffect());
@@ -62,18 +60,18 @@ class SkullscorchDiscardEffect extends OneShotEffect {
             return false;
         }
         StackObject spell = null;
-        for(StackObject object : game.getStack()){
-            if(object instanceof Spell && object.getSourceId().equals(source.getSourceId())){
+        for (StackObject object : game.getStack()) {
+            if (object instanceof Spell && object.getSourceId().equals(source.getSourceId())) {
                 spell = object;
             }
         }
-        if(spell != null){
+        if (spell != null) {
             boolean discardCards = true;
             Player player = game.getPlayer(targetPointer.getFirst(game, source));
-            if (player != null) { 
-                if (player.chooseUse(Outcome.Detriment, "Have " + spell.getLogName() + " deal 4 damage to you?", source, game)){
+            if (player != null) {
+                if (player.chooseUse(Outcome.Detriment, "Have " + spell.getLogName() + " deal 4 damage to you?", source, game)) {
                     discardCards = false;
-                    player.damage(4, source.getSourceId(), game, false, true);
+                    player.damage(4, source.getSourceId(), game);
                     game.informPlayers(player.getLogName() + " has " + spell.getLogName() + " deal 4 to them");
                 }
                 if (discardCards) {

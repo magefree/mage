@@ -1,7 +1,5 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
@@ -19,8 +17,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.watchers.common.AttackedThisTurnWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class AngelsTrumpet extends CardImpl {
@@ -81,7 +80,7 @@ class AngelsTrumpetTapEffect extends OneShotEffect {
                 count++;
             }
             if (count > 0) {
-                player.damage(count, source.getSourceId(), game, false, true);
+                player.damage(count, source.getSourceId(), game);
             }
             return true;
         }

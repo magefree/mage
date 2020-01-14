@@ -1,6 +1,5 @@
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -16,8 +15,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.watchers.Watcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class MindstormCrown extends CardImpl {
@@ -68,7 +68,7 @@ class MindstormCrownEffect extends OneShotEffect {
             controller.drawCards(1, game);
         } else {
             if (permanent != null) {
-                controller.damage(1, permanent.getId(), game, false, true);
+                controller.damage(1, permanent.getId(), game);
             }
         }
         return true;

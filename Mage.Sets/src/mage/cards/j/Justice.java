@@ -1,7 +1,5 @@
-
 package mage.cards.j;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -24,19 +22,20 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class Justice extends CardImpl {
 
     public Justice(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
 
 
         // At the beginning of your upkeep, sacrifice Justice unless you pay {W}{W}.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{W}{W}")), TargetController.YOU, false));
-        
+
         // Whenever a red creature or spell deals damage, Justice deals that much damage to that creature's or spell's controller.
         this.addAbility(new JusticeTriggeredAbility(new JusticeEffect()));
     }
@@ -115,8 +114,8 @@ class JusticeEffect extends OneShotEffect {
         if (damageAmount != null && targetId != null) {
             Player player = game.getPlayer(targetId);
             if (player != null) {
-                    player.damage(damageAmount, targetId, game, false, true);
-                    return true;
+                player.damage(damageAmount, targetId, game);
+                return true;
             }
         }
         return false;

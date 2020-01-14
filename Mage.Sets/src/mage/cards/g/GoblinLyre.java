@@ -70,7 +70,7 @@ class GoblinLyreEffect extends OneShotEffect {
                 }
             } else {
                 int damage = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), opponent.getId(), game).size();
-                return controller.damage(damage, source.getSourceId(), game, false, true) > 0;
+                return controller.damage(damage, source.getSourceId(), game) > 0;
             }
         }
         return false;

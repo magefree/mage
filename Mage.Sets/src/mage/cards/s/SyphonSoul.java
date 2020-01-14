@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -10,14 +8,15 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
 
+import java.util.UUID;
+
 /**
- *
  * @author Loki
  */
 public final class SyphonSoul extends CardImpl {
 
     public SyphonSoul(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");
 
 
         // Syphon Soul deals 2 damage to each other player. You gain life equal to the damage dealt this way.
@@ -49,7 +48,7 @@ class SyphonSoulEffect extends OneShotEffect {
         int damageDealt = 0;
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             if (!playerId.equals(source.getControllerId())) {
-                damageDealt += game.getPlayer(playerId).damage(2, source.getSourceId(), game, false, true);
+                damageDealt += game.getPlayer(playerId).damage(2, source.getSourceId(), game);
             }
         }
         if (damageDealt > 0) {

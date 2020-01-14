@@ -1,7 +1,5 @@
-
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.keyword.ScryEffect;
@@ -14,8 +12,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author Styxo
  */
 public final class ForceDrain extends CardImpl {
@@ -69,7 +68,7 @@ class ForceDrainEffect extends OneShotEffect {
 
             Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
             if (player != null) {
-                if (player.damage(2, source.getId(), game, false, true) > 0) {
+                if (player.damage(2, source.getId(), game) > 0) {
                     controller.gainLife(2, game, source);
                 }
                 return true;

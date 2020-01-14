@@ -1,7 +1,5 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.Effect;
@@ -20,8 +18,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class DragonTempest extends CardImpl {
@@ -99,7 +98,7 @@ class DragonTempestDamageEffect extends OneShotEffect {
                 } else {
                     Player player = game.getPlayer(source.getTargets().getFirstTarget());
                     if (player != null) {
-                        player.damage(amount, damageSource.getId(), game, false, true);
+                        player.damage(amount, damageSource.getId(), game);
                     }
                 }
             }

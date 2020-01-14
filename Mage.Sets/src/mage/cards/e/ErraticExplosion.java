@@ -1,7 +1,5 @@
-
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -15,8 +13,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author nigelzor
  */
 public final class ErraticExplosion extends CardImpl {
@@ -77,7 +76,7 @@ class ErraticExplosionEffect extends OneShotEffect {
                 } else {
                     Player targetPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
                     if (targetPlayer != null) {
-                        targetPlayer.damage(nonLandCard.getConvertedManaCost(), source.getSourceId(), game, false, true);
+                        targetPlayer.damage(nonLandCard.getConvertedManaCost(), source.getSourceId(), game);
                     }
                 }
             }

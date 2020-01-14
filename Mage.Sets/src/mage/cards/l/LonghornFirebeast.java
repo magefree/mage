@@ -1,7 +1,5 @@
-
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -9,21 +7,21 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
-/**
- *
- * @author noxx & L_J
+import java.util.UUID;
 
+/**
+ * @author noxx & L_J
  */
 public final class LonghornFirebeast extends CardImpl {
 
     public LonghornFirebeast(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.subtype.add(SubType.ELEMENTAL);
         this.subtype.add(SubType.OX);
         this.subtype.add(SubType.BEAST);
@@ -65,7 +63,7 @@ class LonghornFirebeastEffect extends OneShotEffect {
                 Player opponent = game.getPlayer(opponentUuid);
                 if (opponent != null && opponent.chooseUse(Outcome.LoseLife, "Make " + permanent.getLogName() + " deal 5 damage to you?", source, game)) {
                     game.informPlayers(opponent.getLogName() + " has chosen to receive 5 damage from " + permanent.getLogName());
-                    opponent.damage(5, permanent.getId(), game, false, true);
+                    opponent.damage(5, permanent.getId(), game);
                     permanent.sacrifice(source.getSourceId(), game);
                     return true;
                 }

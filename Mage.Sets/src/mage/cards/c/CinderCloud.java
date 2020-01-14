@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import mage.ObjectColor;
@@ -69,7 +68,7 @@ class CinderCloudEffect extends OneShotEffect {
             Player permanentController = game.getPlayer(permanent.getControllerId());
             if (permanentController != null) {
                 int damage = permanent.getPower().getValue();
-                permanentController.damage(damage, source.getSourceId(), game, false, true);
+                permanentController.damage(damage, source.getSourceId(), game);
             }
         }
         return false;

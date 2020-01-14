@@ -1,7 +1,5 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -16,10 +14,10 @@ import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.players.Player;
 
-/**
- *
- * @author LoneFox
+import java.util.UUID;
 
+/**
+ * @author LoneFox
  */
 public final class Disorder extends CardImpl {
 
@@ -30,7 +28,7 @@ public final class Disorder extends CardImpl {
     }
 
     public Disorder(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}");
 
         // Disorder deals 2 damage to each white creature and each player who controls a white creature.
         this.getSpellAbility().addEffect(new DamageAllEffect(2, filter));
@@ -57,7 +55,8 @@ class DisorderEffect extends OneShotEffect {
 
     public DisorderEffect() {
         super(Outcome.Damage);
-        this.staticText = "and each player who controls a white creature";                                                                                            }
+        this.staticText = "and each player who controls a white creature";
+    }
 
     public DisorderEffect(final DisorderEffect effect) {
         super(effect);
@@ -70,12 +69,12 @@ class DisorderEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for(Player player : game.getPlayers().values()) {
+        for (Player player : game.getPlayers().values()) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent();
             filter.add(new ControllerIdPredicate(player.getId()));
             filter.add(new ColorPredicate(ObjectColor.WHITE));
-            if(game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) > 0) {
-                player.damage(2, source.getSourceId(), game, false, true);
+            if (game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) > 0) {
+                player.damage(2, source.getSourceId(), game);
             }
         }
         return true;

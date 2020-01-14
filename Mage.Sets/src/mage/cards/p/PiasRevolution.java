@@ -1,7 +1,5 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -22,8 +20,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Styxo
  */
 public final class PiasRevolution extends CardImpl {
@@ -75,7 +74,7 @@ class PiasRevolutionReturnEffect extends OneShotEffect {
                     if (opponent.chooseUse(outcome,
                             "Have Pia's Revolution deal 3 damage to you to prevent that " + permanent.getIdName() + " returns to " + controller.getName() + "'s hand?",
                             source, game)) {
-                        opponent.damage(3, source.getSourceId(), game, false, true);
+                        opponent.damage(3, source.getSourceId(), game);
                     } else if (game.getState().getZone(permanent.getId()) == Zone.GRAVEYARD) {
                         controller.moveCards(game.getCard(permanentId), Zone.HAND, source, game);
                     }

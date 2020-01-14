@@ -1,7 +1,5 @@
-
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -18,14 +16,15 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author emerald000
  */
 public final class WordsOfWar extends CardImpl {
 
     public WordsOfWar(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
 
 
         // {1}: The next time you would draw a card this turn, Words of War deals 2 damage to any target instead.
@@ -45,57 +44,57 @@ public final class WordsOfWar extends CardImpl {
 }
 
 class WordsOfWarEffect extends ReplacementEffectImpl {
-    
+
     WordsOfWarEffect() {
         super(Duration.EndOfTurn, Outcome.Damage);
         staticText = "The next time you would draw a card this turn, {this} deals 2 damage to any target instead.";
     }
-    
+
     WordsOfWarEffect(final WordsOfWarEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public WordsOfWarEffect copy() {
         return new WordsOfWarEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         return true;
     }
-    
+
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Player player = game.getPlayer(targetPointer.getFirst(game, source));
             if (player != null) {
-                player.damage(2, source.getSourceId(), game, false, true);
-				this.used = true;
+                player.damage(2, source.getSourceId(), game);
+                this.used = true;
                 discard();
                 return true;
             }
             Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
             if (permanent != null) {
                 permanent.damage(2, source.getSourceId(), game, false, true);
-				this.used = true;
+                this.used = true;
                 discard();
                 return true;
             }
         }
         return false;
     }
-    
+
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DRAW_CARD;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (!this.used) {
-			return source.isControlledBy(event.getPlayerId());
+            return source.isControlledBy(event.getPlayerId());
         }
         return false;
     }

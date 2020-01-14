@@ -1,7 +1,5 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -13,11 +11,7 @@ import mage.abilities.effects.common.DestroySourceEffect;
 import mage.abilities.effects.common.DoUnlessControllerPaysEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -27,8 +21,9 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class PsychicAllergy extends CardImpl {
@@ -40,7 +35,7 @@ public final class PsychicAllergy extends CardImpl {
     }
 
     public PsychicAllergy(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
 
         // As Psychic Allergy enters the battlefield, choose a color.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Damage)));
@@ -49,11 +44,11 @@ public final class PsychicAllergy extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new PsychicAllergyEffect(), TargetController.OPPONENT, false));
 
         // At the beginning of your upkeep, destroy Psychic Allergy unless you sacrifice two Islands.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, 
-            new DoUnlessControllerPaysEffect(new DestroySourceEffect(), 
-            new SacrificeTargetCost(new TargetControlledPermanent(2, 2, filter, false))).setText("destroy {this} unless you sacrifice two Islands"), 
-            TargetController.YOU, 
-            false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
+                new DoUnlessControllerPaysEffect(new DestroySourceEffect(),
+                        new SacrificeTargetCost(new TargetControlledPermanent(2, 2, filter, false))).setText("destroy {this} unless you sacrifice two Islands"),
+                TargetController.YOU,
+                false));
     }
 
     public PsychicAllergy(final PsychicAllergy card) {
@@ -67,12 +62,12 @@ public final class PsychicAllergy extends CardImpl {
 }
 
 class PsychicAllergyEffect extends OneShotEffect {
-    
+
     public PsychicAllergyEffect() {
         super(Outcome.Damage);
         this.staticText = "{this} deals X damage to that player, where X is the number of nontoken permanents of the chosen color they control";
     }
-    
+
     public PsychicAllergyEffect(PsychicAllergyEffect copy) {
         super(copy);
     }
@@ -85,7 +80,7 @@ class PsychicAllergyEffect extends OneShotEffect {
             filter.add(new ColorPredicate((ObjectColor) game.getState().getValue(source.getSourceId() + "_color")));
             filter.add(Predicates.not(TokenPredicate.instance));
             int damage = game.getBattlefield().countAll(filter, player.getId(), game);
-            player.damage(damage, source.getSourceId(), game, false, true);
+            player.damage(damage, source.getSourceId(), game);
             return true;
         }
         return false;

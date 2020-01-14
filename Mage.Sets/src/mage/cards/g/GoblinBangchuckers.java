@@ -1,7 +1,5 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -10,22 +8,23 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author nantuko
  */
 public final class GoblinBangchuckers extends CardImpl {
 
     public GoblinBangchuckers(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
         this.subtype.add(SubType.GOBLIN);
         this.subtype.add(SubType.WARRIOR);
 
@@ -71,7 +70,7 @@ class GoblinBangchuckersEffect extends OneShotEffect {
                 }
                 Player player = game.getPlayer(targetPointer.getFirst(game, source));
                 if (player != null) {
-                    player.damage(2, source.getSourceId(), game, false, true);
+                    player.damage(2, source.getSourceId(), game);
                     return true;
                 }
             } else {

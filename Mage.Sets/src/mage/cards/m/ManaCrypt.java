@@ -1,7 +1,5 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -17,14 +15,15 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class ManaCrypt extends CardImpl {
 
     public ManaCrypt(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{0}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{0}");
 
         // At the beginning of your upkeep, flip a coin. If you lose the flip, Mana Crypt deals 3 damage to you.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ManaCryptEffect(), TargetController.YOU, false));
@@ -59,7 +58,7 @@ class ManaCryptEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             if (!player.flipCoin(source, game, true)) {
-                player.damage(3, source.getSourceId(), game, false, true);
+                player.damage(3, source.getSourceId(), game);
             }
             return true;
         }

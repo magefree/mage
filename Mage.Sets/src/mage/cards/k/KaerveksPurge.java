@@ -1,4 +1,3 @@
-
 package mage.cards.k;
 
 import mage.abilities.Ability;
@@ -89,7 +88,7 @@ class KaerveksPurgeEffect extends OneShotEffect {
             Player creatureController = game.getPlayer(targetCreature.getControllerId());
             int power = targetCreature.getPower().getValue();
             if (creatureController != null) {
-                creatureController.damage(power, source.getSourceId(), game, false, true);
+                creatureController.damage(power, source.getSourceId(), game);
             }
         }
         return true;

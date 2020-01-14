@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -11,16 +9,13 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class SinProdder extends CardImpl {
@@ -79,7 +74,7 @@ class SinProdderEffect extends OneShotEffect {
                     Player opponent = game.getPlayer(opponentUuid);
                     if (opponent != null && !putInGraveyard && opponent.chooseUse(Outcome.Damage, message, source, game)) {
                         putInGraveyard = true;
-                        opponent.damage(card.getConvertedManaCost(), source.getSourceId(), game, false, true);
+                        opponent.damage(card.getConvertedManaCost(), source.getSourceId(), game);
                         // 4/8/2016: Each opponent in turn order, starting with the one after you in turn order, may choose to have you put that card into your graveyard.
                         // Once a player does so, Sin Prodder deals damage equal to that card's converted mana cost to that player immediately
                         // and Sin Prodder's trigger has no further action.

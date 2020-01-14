@@ -1,7 +1,5 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -10,22 +8,23 @@ import mage.abilities.keyword.PersistAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author jonubuu
  */
 public final class MurderousRedcap extends CardImpl {
 
     public MurderousRedcap(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B/R}{B/R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B/R}{B/R}");
         this.subtype.add(SubType.GOBLIN);
         this.subtype.add(SubType.ASSASSIN);
 
@@ -74,7 +73,7 @@ class MurderousRedcapEffect extends OneShotEffect {
         }
         Player player = game.getPlayer(source.getFirstTarget());
         if (sourcePermanent != null && player != null) {
-            player.damage(sourcePermanent.getPower().getValue(), sourcePermanent.getId(), game, false, true);
+            player.damage(sourcePermanent.getPower().getValue(), sourcePermanent.getId(), game);
             return true;
         }
         return false;

@@ -1,7 +1,5 @@
-
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -12,11 +10,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.PhaseStep;
-import mage.constants.TurnPhase;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.game.Game;
@@ -27,8 +21,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.watchers.common.PlayerAttackedStepWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2 & L_J
  */
 public final class HarshJustice extends CardImpl {
@@ -134,7 +129,7 @@ class HarshJusticeEffect extends OneShotEffect {
                 Player controller = game.getPlayer(targetObject.getControllerId());
                 if (controller != null) {
                     game.informPlayers(sourceObject.getLogName() + ": " + targetObject.getLogName() + " deals " + damage + " damage to " + controller.getLogName());
-                    controller.damage(damage, sourceId, game, false, true);
+                    controller.damage(damage, sourceId, game);
                     return true;
                 }
             }

@@ -1,7 +1,5 @@
-
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -12,14 +10,15 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class HidetsugusSecondRite extends CardImpl {
 
     public HidetsugusSecondRite(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{R}");
 
 
         // If target player has exactly 10 life, Hidetsugu's Second Rite deals 10 damage to that player.
@@ -58,7 +57,7 @@ class HidetsugusSecondRiteEffect extends OneShotEffect {
         Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
         if (targetPlayer != null) {
             if (targetPlayer.getLife() == 10) {
-                targetPlayer.damage(10, source.getSourceId(), game, false, true);
+                targetPlayer.damage(10, source.getSourceId(), game);
             }
             return true;
         }

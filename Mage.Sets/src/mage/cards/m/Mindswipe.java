@@ -1,7 +1,5 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
@@ -18,14 +16,15 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetSpell;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class Mindswipe extends CardImpl {
 
     public Mindswipe(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{U}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{U}{R}");
 
 
         // Counter target spell unless its controller pays {X}.  Mindswipe deals X damage to that spell's controller.
@@ -75,7 +74,7 @@ class MindswipeEffect extends OneShotEffect {
                 Player spellController = game.getPlayer(spell.getControllerId());
                 if (spellController != null) {
                     int damage = ManacostVariableValue.instance.calculate(game, source, this);
-                    spellController.damage(damage, source.getSourceId(), game, false, true);
+                    spellController.damage(damage, source.getSourceId(), game);
                 }
                 return true;
             }

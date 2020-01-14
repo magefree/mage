@@ -1,9 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -22,21 +18,24 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
- *
  * @author L_J
  */
 public final class SwordOfTheAges extends CardImpl {
 
     public SwordOfTheAges(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");
-        
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");
+
         // Sword of the Ages enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        
+
         // {T}, Sacrifice Sword of the Ages and any number of creatures you control: Sword of the Ages deals X damage to any target, where X is the total power of the creatures sacrificed this way, then exile Sword of the Ages and those creature cards.
         Cost cost = new SacrificeSourceCost();
         cost.setText("Sacrifice {this} and any number of creatures you control");
@@ -100,7 +99,7 @@ class SwordOfTheAgesEffect extends OneShotEffect {
             if (totalPower > 0) {
                 Player player = game.getPlayer(this.getTargetPointer().getFirst(game, source));
                 if (player != null) {
-                    player.damage(totalPower, source.getSourceId(), game, false, true);
+                    player.damage(totalPower, source.getSourceId(), game);
                 } else {
                     Permanent creature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
                     if (creature != null) {

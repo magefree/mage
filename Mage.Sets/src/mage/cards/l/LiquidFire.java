@@ -1,7 +1,5 @@
-
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.VariableCostImpl;
@@ -18,14 +16,15 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Dilnu
  */
 public final class LiquidFire extends CardImpl {
 
     public LiquidFire(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");
 
         // As an additional cost to cast Liquid Fire, choose a number between 0 and 5.
         this.getSpellAbility().addCost(new LiquidFireCost());
@@ -33,7 +32,7 @@ public final class LiquidFire extends CardImpl {
         DynamicValue choiceValue = GetXValue.instance;
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new LiquidFireEffect(choiceValue));
-        
+
     }
 
     public LiquidFire(final LiquidFire card) {
@@ -53,7 +52,7 @@ public final class LiquidFire extends CardImpl {
             this.staticText = "{this} deals X damage to target creature and 5 minus X damage to that creature's controller, where X is the chosen number.";
             this.choiceValue = choiceValue;
         }
-        
+
         public LiquidFireEffect(LiquidFireEffect effect) {
             super(effect);
             this.choiceValue = effect.choiceValue;
@@ -65,10 +64,10 @@ public final class LiquidFire extends CardImpl {
             int creatureDamage = choiceValue.calculate(game, source, this);
             int playerDamage = 5 - creatureDamage;
             if (target != null) {
-                target.damage(creatureDamage, source.getSourceId(), game, false, true);
+                target.damage(creatureDamage, source.getSourceId(), game);
                 Player controller = game.getPlayer(target.getControllerId());
                 if (controller != null) {
-                    controller.damage(playerDamage, source.getSourceId(), game, false, true);
+                    controller.damage(playerDamage, source.getSourceId(), game);
                 }
                 return true;
             }
@@ -80,13 +79,13 @@ public final class LiquidFire extends CardImpl {
             return new LiquidFireEffect(this);
         }
     }
-    
+
     static class LiquidFireCost extends VariableCostImpl {
         public LiquidFireCost() {
             super("Choose a Number");
             this.text = "as an additional cost to cast this spell, choose a number between 0 and 5";
         }
-        
+
         public LiquidFireCost(final LiquidFireCost cost) {
             super(cost);
         }
@@ -100,7 +99,7 @@ public final class LiquidFire extends CardImpl {
         public Cost getFixedCostsFromAnnouncedValue(int xValue) {
             return null;
         }
-        
+
         @Override
         public int getMaxValue(Ability source, Game game) {
             return 5;

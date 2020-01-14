@@ -1,7 +1,5 @@
-
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
@@ -15,17 +13,18 @@ import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 
 /**
- *
  * @author jeffwadsworth
- *
  */
 public final class FieryBombardment extends CardImpl {
 
@@ -83,7 +82,7 @@ class FieryBombardmentEffect extends OneShotEffect {
         if (damage > 0) {
             Player player = game.getPlayer(this.getTargetPointer().getFirst(game, source));
             if (player != null) {
-                player.damage(damage, source.getSourceId(), game, false, true);
+                player.damage(damage, source.getSourceId(), game);
             } else {
                 Permanent creature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
                 if (creature != null) {

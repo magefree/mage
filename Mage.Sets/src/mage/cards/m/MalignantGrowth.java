@@ -80,6 +80,6 @@ class MalignantGrowthEffect extends OneShotEffect {
         if (counters == 0) {
             return true;
         }
-        return player.damage(player.drawCards(counters, game), source.getSourceId(), game, false, true) > 0;
+        return player.damage(player.drawCards(counters, game), source.getSourceId(), game) > 0;
     }
 }

@@ -1535,7 +1535,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         game.fireEvent(GameEvent.getEvent(GameEvent.EventType.FIGHTED_PERMANENT, fightTarget.getId(), getId(), source.getControllerId()));
         game.fireEvent(GameEvent.getEvent(GameEvent.EventType.FIGHTED_PERMANENT, getId(), fightTarget.getId(), source.getControllerId()));
         damage(fightTarget.getPower().getValue(), fightTarget.getId(), game, false, true);
-        fightTarget.damage(getPower().getValue(), getId(), game, false, true);
+        fightTarget.damage(getPower().getValue(), getId(), game);
         return true;
     }
 

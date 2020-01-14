@@ -1,7 +1,5 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -16,19 +14,21 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author michael.napoleon@gmail.com
  */
 public final class Backlash extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("untapped creature");
+
     static {
         filter.add(Predicates.not(TappedPredicate.instance));
     }
-    
+
     public Backlash(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}{R}");
 
         // Tap target untapped creature. That creature deals damage equal to its power to its controller.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
@@ -46,33 +46,33 @@ public final class Backlash extends CardImpl {
 }
 
 class BacklashEffect extends OneShotEffect {
-  
-  public BacklashEffect() {
-    super(Outcome.Detriment);
-    this.staticText = "Tap target untapped creature. That creature deals damage equal to its power to its controller.";
-  }
-  
-  public BacklashEffect(final BacklashEffect effect) {
-    super(effect);
-  }
-  
-  @Override
-  public BacklashEffect copy () {
-    return new BacklashEffect(this);
-  }
-  
-  @Override
-  public boolean apply(Game game, Ability source) {
-    boolean applied = false;
-    Permanent targetCreature = game.getPermanent(targetPointer.getFirst(game, source));
-    if (targetCreature != null) {
-      applied = targetCreature.tap(game);
-      Player controller = game.getPlayer(targetCreature.getControllerId());
-      if (controller != null) {
-        controller.damage(targetCreature.getPower().getValue(), source.getSourceId(), game, false, true);
-        applied = true;
-      }
+
+    public BacklashEffect() {
+        super(Outcome.Detriment);
+        this.staticText = "Tap target untapped creature. That creature deals damage equal to its power to its controller.";
     }
-    return applied;
-  }
+
+    public BacklashEffect(final BacklashEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public BacklashEffect copy() {
+        return new BacklashEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        boolean applied = false;
+        Permanent targetCreature = game.getPermanent(targetPointer.getFirst(game, source));
+        if (targetCreature != null) {
+            applied = targetCreature.tap(game);
+            Player controller = game.getPlayer(targetCreature.getControllerId());
+            if (controller != null) {
+                controller.damage(targetCreature.getPower().getValue(), source.getSourceId(), game);
+                applied = true;
+            }
+        }
+        return applied;
+    }
 }

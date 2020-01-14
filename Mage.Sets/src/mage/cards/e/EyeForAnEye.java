@@ -1,7 +1,5 @@
-
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
@@ -15,14 +13,15 @@ import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.TargetSource;
 
+import java.util.UUID;
+
 /**
- * 
  * @author L_J
  */
 public final class EyeForAnEye extends CardImpl {
 
     public EyeForAnEye(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}{W}");
 
         // The next time a source of your choice would deal damage to you this turn, instead that source deals that much damage to you and Eye for an Eye deals that much damage to that source's controller.
         this.getSpellAbility().addEffect(new EyeForAnEyeEffect());
@@ -84,7 +83,7 @@ class EyeForAnEyeEffect extends ReplacementEffectImpl {
             if (sourceControllerId != null) {
                 Player sourceController = game.getPlayer(sourceControllerId);
                 if (sourceController != null) {
-                    sourceController.damage(damageEvent.getAmount(), source.getSourceId(), game, false, true);
+                    sourceController.damage(damageEvent.getAmount(), source.getSourceId(), game);
                     return true;
                 }
             }

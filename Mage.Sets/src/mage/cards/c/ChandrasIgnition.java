@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -14,8 +12,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class ChandrasIgnition extends CardImpl {
@@ -66,7 +65,7 @@ class ChandrasIgnitionEffect extends OneShotEffect {
             for (UUID opponentId : game.getOpponents(source.getControllerId())) {
                 Player opponent = game.getPlayer(opponentId);
                 if (opponent != null) {
-                    opponent.damage(targetCreature.getPower().getValue(), targetCreature.getId(), game, false, true);
+                    opponent.damage(targetCreature.getPower().getValue(), targetCreature.getId(), game);
                 }
             }
         }

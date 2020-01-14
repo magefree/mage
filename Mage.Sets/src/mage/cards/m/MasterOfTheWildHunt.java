@@ -1,9 +1,5 @@
-
 package mage.cards.m;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.OnEventTriggeredAbility;
@@ -27,8 +23,11 @@ import mage.game.permanent.token.WolfToken;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public final class MasterOfTheWildHunt extends CardImpl {
@@ -36,7 +35,7 @@ public final class MasterOfTheWildHunt extends CardImpl {
     private static WolfToken wolfToken = new WolfToken();
 
     public MasterOfTheWildHunt(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SHAMAN);
 
@@ -92,11 +91,11 @@ class MasterOfTheWildHuntEffect extends OneShotEffect {
         if (target != null && game.getBattlefield().countAll(filter, source.getControllerId(), game) > 0) {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
                 permanent.tap(game);
-                target.damage(permanent.getToughness().getValue(), permanent.getId(), game, false, true);
+                target.damage(permanent.getToughness().getValue(), permanent.getId(), game);
                 wolves.add(permanent.getId());
             }
             Player player = game.getPlayer(target.getControllerId());
-            if(player != null) {
+            if (player != null) {
                 player.assignDamage(target.getPower().getValue(), wolves, "Wolf", target.getId(), game);
                 return true;
             }

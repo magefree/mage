@@ -1,8 +1,5 @@
-
 package mage.cards.l;
 
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
@@ -18,8 +15,10 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class Lavalanche extends CardImpl {
@@ -69,7 +68,7 @@ class LavalancheEffect extends OneShotEffect {
         if (targetPlayer == null) {
             return false;
         }
-        targetPlayer.damage(amount.calculate(game, source, this), source.getSourceId(), game, false, true);
+        targetPlayer.damage(amount.calculate(game, source, this), source.getSourceId(), game);
         FilterPermanent filter = new FilterPermanent("and each creature that player or that planeswalker's controller controls");
         filter.add(CardType.CREATURE.getPredicate());
         filter.add(new ControllerIdPredicate(targetPlayer.getId()));

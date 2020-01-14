@@ -1,7 +1,5 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
@@ -25,20 +23,21 @@ import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetOpponent;
 
-/**
- *
- * @author LoneFox
+import java.util.UUID;
 
+/**
+ * @author LoneFox
  */
 public final class AnaBattlemage extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("untapped creature");
+
     static {
         filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     public AnaBattlemage(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(2);
@@ -52,12 +51,12 @@ public final class AnaBattlemage extends CardImpl {
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DiscardTargetEffect(3));
         ability.addTarget(new TargetOpponent());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new KickedCostCondition("{2}{U}"),
-            "When {this} enters the battlefield, if it was kicked with its {2}{U} kicker, target player discards three cards."));
+                "When {this} enters the battlefield, if it was kicked with its {2}{U} kicker, target player discards three cards."));
         // When Ana Battlemage enters the battlefield, if it was kicked with its {1}{B} kicker, tap target untapped creature and that creature deals damage equal to its power to its controller.
         ability = new EntersBattlefieldTriggeredAbility(new AnaBattlemageKickerEffect());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new KickedCostCondition("{1}{B}"),
-            "When {this} enters the battlefield, if it was kicked with its {1}{B} kicker, tap target untapped creature and that creature deals damage equal to its power to its controller."));
+                "When {this} enters the battlefield, if it was kicked with its {1}{B} kicker, tap target untapped creature and that creature deals damage equal to its power to its controller."));
     }
 
     public AnaBattlemage(final AnaBattlemage card) {
@@ -94,7 +93,7 @@ class AnaBattlemageKickerEffect extends OneShotEffect {
             applied = targetCreature.tap(game);
             Player controller = game.getPlayer(targetCreature.getControllerId());
             if (controller != null) {
-                controller.damage(targetCreature.getPower().getValue(), source.getSourceId(), game, false, true);
+                controller.damage(targetCreature.getPower().getValue(), source.getSourceId(), game);
                 applied = true;
             }
         }

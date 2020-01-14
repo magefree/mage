@@ -1,7 +1,5 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.ConspireAbility;
@@ -17,8 +15,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class TraitorsRoar extends CardImpl {
@@ -75,7 +74,7 @@ class TraitorsRoarEffect extends OneShotEffect {
             applied = targetCreature.tap(game);
             Player controller = game.getPlayer(targetCreature.getControllerId());
             if (controller != null) {
-                controller.damage(targetCreature.getPower().getValue(), targetCreature.getId(), game, false, true);
+                controller.damage(targetCreature.getPower().getValue(), targetCreature.getId(), game);
                 applied = true;
             }
         }

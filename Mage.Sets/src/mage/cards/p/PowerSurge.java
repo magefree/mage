@@ -1,18 +1,12 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.WatcherScope;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.Predicates;
@@ -22,8 +16,9 @@ import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.watchers.Watcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author MTGfan
  */
 public final class PowerSurge extends CardImpl {
@@ -65,9 +60,9 @@ class PowerSurgeDamageEffect extends OneShotEffect {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (player != null) {
             PowerSurgeWatcher watcher = game.getState().getWatcher(PowerSurgeWatcher.class);
-            if(watcher != null) {
+            if (watcher != null) {
                 int damage = watcher.getUntappedLandCount();
-                player.damage(damage, source.getSourceId(), game, false, true);
+                player.damage(damage, source.getSourceId(), game);
                 return true;
             }
         }

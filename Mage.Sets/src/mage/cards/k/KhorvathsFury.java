@@ -1,9 +1,5 @@
-
 package mage.cards.k;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -14,8 +10,11 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class KhorvathsFury extends CardImpl {
@@ -81,7 +80,7 @@ class KhorvathsFuryEffect extends OneShotEffect {
         }
         for (Player player : choice.getFoes()) {
             if (player != null) {
-                player.damage(player.getHand().size(), source.getSourceId(), game, false, true);
+                player.damage(player.getHand().size(), source.getSourceId(), game);
             }
         }
         return true;

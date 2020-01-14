@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -16,14 +14,15 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author emerald000
  */
 public final class ChainLightning extends CardImpl {
 
     public ChainLightning(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{R}");
 
         // Chain Lightning deals 3 damage to any target. Then that player or that creature's controller may pay {R}{R}. If the player does, they may copy this spell and may choose a new target for that copy.
         this.getSpellAbility().addEffect(new ChainLightningEffect());
@@ -64,7 +63,7 @@ class ChainLightningEffect extends OneShotEffect {
             Player affectedPlayer = null;
             Player player = game.getPlayer(targetId);
             if (player != null) {
-                player.damage(3, source.getSourceId(), game, false, true);
+                player.damage(3, source.getSourceId(), game);
                 affectedPlayer = player;
             } else {
                 Permanent permanent = game.getPermanent(targetId);

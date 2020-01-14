@@ -1,7 +1,5 @@
-
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -12,20 +10,21 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class HellholeRats extends CardImpl {
 
     public HellholeRats(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{R}");
         this.subtype.add(SubType.RAT);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
@@ -76,7 +75,7 @@ class HellholeRatsEffect extends OneShotEffect {
                 for (Card card : cards.getCards(game)) {
                     damage = card.getConvertedManaCost();
                 }
-                targetPlayer.damage(damage, source.getSourceId(), game, false, true);
+                targetPlayer.damage(damage, source.getSourceId(), game);
             }
             return true;
         }

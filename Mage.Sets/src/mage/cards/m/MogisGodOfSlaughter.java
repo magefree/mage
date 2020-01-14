@@ -84,7 +84,7 @@ class MogisGodOfSlaughterEffect extends OneShotEffect {
         target.setNotTarget(true);
         if (!player.chooseUse(Outcome.Detriment, "Sacrifice a creature to prevent 2 damage?", source, game)
                 || !player.choose(Outcome.Sacrifice, target, source.getSourceId(), game)) {
-            return player.damage(2, source.getSourceId(), game, false, true) > 0;
+            return player.damage(2, source.getSourceId(), game) > 0;
         }
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         return permanent != null && permanent.sacrifice(source.getSourceId(), game);

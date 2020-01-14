@@ -1,7 +1,5 @@
-
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -17,16 +15,16 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author Plopman
  */
 public final class Karma extends CardImpl {
 
 
-    
     public Karma(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
 
 
         // At the beginning of each player's upkeep, Karma deals damage to that player equal to the number of Swamps they control.
@@ -43,23 +41,22 @@ public final class Karma extends CardImpl {
     }
 }
 
-class KarmaDamageTargetEffect extends OneShotEffect{
-    
+class KarmaDamageTargetEffect extends OneShotEffect {
+
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("Swamps");
-    static{
+
+    static {
         filter.add(SubType.SWAMP.getPredicate());
     }
-    
-    public KarmaDamageTargetEffect()
-    {
+
+    public KarmaDamageTargetEffect() {
         super(Outcome.Damage);
     }
-    
-    public KarmaDamageTargetEffect(KarmaDamageTargetEffect copy)
-    {
+
+    public KarmaDamageTargetEffect(KarmaDamageTargetEffect copy) {
         super(copy);
     }
-        
+
     @Override
     public String getText(Mode mode) {
         return "{this} deals damage to that player equal to the number of Swamps they control";
@@ -69,8 +66,8 @@ class KarmaDamageTargetEffect extends OneShotEffect{
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (player != null) {
-            int damage = game.getBattlefield().getAllActivePermanents(filter,targetPointer.getFirst(game, source) , game).size();
-            player.damage(damage, source.getSourceId(), game, false, true);
+            int damage = game.getBattlefield().getAllActivePermanents(filter, targetPointer.getFirst(game, source), game).size();
+            player.damage(damage, source.getSourceId(), game);
             return true;
         }
         return false;

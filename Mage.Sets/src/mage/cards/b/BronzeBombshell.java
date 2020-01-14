@@ -1,7 +1,5 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -18,8 +16,9 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class BronzeBombshell extends CardImpl {
@@ -107,7 +106,7 @@ class BronzeBombshellEffect extends OneShotEffect {
             Player newController = game.getPlayer(bronzeBombshell.getControllerId());
             if (newController != null) {
                 if (bronzeBombshell.sacrifice(source.getId(), game)) {//sacrificed by the new controlling player
-                    newController.damage(7, source.getSourceId(), game, false, true);//bronze bombshell does 7 damage to the controller
+                    newController.damage(7, source.getSourceId(), game);//bronze bombshell does 7 damage to the controller
                     return true;
                 }
             }

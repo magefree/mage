@@ -1,7 +1,5 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -19,15 +17,16 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class DwarvenShrine extends CardImpl {
 
     public DwarvenShrine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{R}");
-        
+
 
         // Whenever a player casts a spell, Dwarven Shrine deals X damage to that player, where X is twice the number of cards in all graveyards with the same name as that spell.
         this.addAbility(new DwarvenShrineTriggeredAbility());
@@ -90,7 +89,7 @@ class DwarvenShrineEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int count = 0;
         MageObject mageObject = game.getObject(source.getSourceId());
-        if(mageObject != null) {
+        if (mageObject != null) {
             Spell spell = (Spell) game.getState().getValue("dwarvenShrine" + mageObject);
             if (spell != null) {
                 Player controller = game.getPlayer(spell.getControllerId());
@@ -104,7 +103,7 @@ class DwarvenShrineEffect extends OneShotEffect {
                             count += player.getGraveyard().count(filterCardName, game);
                         }
                     }
-                    controller.damage(count * 2, mageObject.getId(), game, false, true);
+                    controller.damage(count * 2, mageObject.getId(), game);
                     return true;
                 }
             }

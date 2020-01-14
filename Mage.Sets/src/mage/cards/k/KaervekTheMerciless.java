@@ -1,7 +1,5 @@
-
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
@@ -16,10 +14,10 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
- *
  */
 public final class KaervekTheMerciless extends CardImpl {
 
@@ -72,7 +70,7 @@ class KaervekTheMercilessEffect extends OneShotEffect {
             int cost = spell.getConvertedManaCost();
             Player target = game.getPlayer(source.getFirstTarget());
             if (target != null) {
-                target.damage(cost, source.getSourceId(), game, false, true);
+                target.damage(cost, source.getSourceId(), game);
                 return true;
             }
             Permanent targetCreature = game.getPermanent(source.getFirstTarget());

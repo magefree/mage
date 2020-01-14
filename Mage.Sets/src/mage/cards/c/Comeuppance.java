@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.PreventionEffectData;
@@ -19,14 +17,15 @@ import mage.game.stack.StackObject;
 import mage.players.Player;
 import org.apache.log4j.Logger;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class Comeuppance extends CardImpl {
 
     public Comeuppance(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{W}");
 
 
         // Prevent all damage that would be dealt to you and planeswalkers you control this turn by sources you don't control. If damage from a creature source is prevented this way, Comeuppance deals that much damage to that creature. If damage from a noncreature source is prevented this way, Comeuppance deals that much damage to the source's controller.
@@ -43,6 +42,7 @@ public final class Comeuppance extends CardImpl {
         return new Comeuppance(this);
     }
 }
+
 class ComeuppanceEffect extends PreventionEffectImpl {
 
     public ComeuppanceEffect() {
@@ -72,7 +72,7 @@ class ComeuppanceEffect extends PreventionEffectImpl {
             UUID objectControllerId = null;
             if (damageDealingObject instanceof Permanent) {
                 if (damageDealingObject.isCreature()) {
-                    ((Permanent) damageDealingObject).damage(preventionData.getPreventedDamage(), source.getSourceId(), game, false, true);
+                    ((Permanent) damageDealingObject).damage(preventionData.getPreventedDamage(), source.getSourceId(), game);
                 } else {
                     objectControllerId = ((Permanent) damageDealingObject).getControllerId();
                 }
@@ -84,7 +84,7 @@ class ComeuppanceEffect extends PreventionEffectImpl {
             if (objectControllerId != null) {
                 Player objectController = game.getPlayer(objectControllerId);
                 if (objectController != null) {
-                    objectController.damage(preventionData.getPreventedDamage(), source.getSourceId(), game, false, true);
+                    objectController.damage(preventionData.getPreventedDamage(), source.getSourceId(), game);
                 }
             }
         }
@@ -94,7 +94,7 @@ class ComeuppanceEffect extends PreventionEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (!super.applies(event, source, game)) {
-            return  false;
+            return false;
         }
         boolean catched = false;
         if (event.getTargetId().equals(source.getControllerId())) {
@@ -116,7 +116,7 @@ class ComeuppanceEffect extends PreventionEffectImpl {
             } else if (damageSource instanceof Card) {
                 return !((Card) damageSource).isOwnedBy(source.getControllerId());
             }
-            Logger.getLogger(Comeuppance.class).error("Comeuppance: could not define source objects controller - " + (damageSource != null ? damageSource.getName(): "null"));
+            Logger.getLogger(Comeuppance.class).error("Comeuppance: could not define source objects controller - " + (damageSource != null ? damageSource.getName() : "null"));
         }
         return false;
     }

@@ -78,7 +78,7 @@ class FlameblastDragonEffect extends OneShotEffect {
                     }
                     Player targetPlayer = game.getPlayer(source.getFirstTarget());
                     if (targetPlayer != null) {
-                        targetPlayer.damage(costX, source.getSourceId(), game, false, true);
+                        targetPlayer.damage(costX, source.getSourceId(), game);
                         return true;
                     }
                     return false;

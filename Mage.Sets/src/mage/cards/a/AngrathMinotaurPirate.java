@@ -1,7 +1,5 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
@@ -27,8 +25,9 @@ import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetOpponent;
 import mage.target.common.TargetOpponentOrPlaneswalker;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class AngrathMinotaurPirate extends CardImpl {
@@ -100,7 +99,7 @@ class AngrathMinotaurPirateThirdAbilityEffect extends OneShotEffect {
                 powerSum += permanent.getPower().getValue();
             }
             game.applyEffects();
-            targetOpponent.damage(powerSum, source.getSourceId(), game, false, true);
+            targetOpponent.damage(powerSum, source.getSourceId(), game);
         }
         return true;
     }

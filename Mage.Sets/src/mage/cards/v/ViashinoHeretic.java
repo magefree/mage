@@ -1,7 +1,5 @@
-
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -12,22 +10,23 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetArtifactPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Plopman
  */
 public final class ViashinoHeretic extends CardImpl {
 
     public ViashinoHeretic(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.subtype.add(SubType.VIASHINO);
 
         this.power = new MageInt(1);
@@ -52,7 +51,7 @@ public final class ViashinoHeretic extends CardImpl {
 
 class ViashinoHereticEffect extends OneShotEffect {
 
-    
+
     public ViashinoHereticEffect() {
         super(Outcome.DestroyPermanent);
     }
@@ -68,15 +67,14 @@ class ViashinoHereticEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        
+
         Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if(permanent != null)
-        {
+        if (permanent != null) {
             int couvertedManaCost = permanent.getConvertedManaCost();
             Player player = game.getPlayer(permanent.getControllerId());
             permanent.destroy(source.getSourceId(), game, false);
-            if(player != null){
-                player.damage(couvertedManaCost, source.getSourceId(), game, false, true);
+            if (player != null) {
+                player.damage(couvertedManaCost, source.getSourceId(), game);
             }
             return true;
         }

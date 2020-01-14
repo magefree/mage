@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.DiscardCardCost;
@@ -16,8 +14,9 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class ChainOfPlasma extends CardImpl {
@@ -64,7 +63,7 @@ class ChainOfPlasmaEffect extends OneShotEffect {
             Player affectedPlayer = null;
             Player player = game.getPlayer(targetId);
             if (player != null) {
-                player.damage(3, source.getSourceId(), game, false, true);
+                player.damage(3, source.getSourceId(), game);
                 affectedPlayer = player;
             } else {
                 Permanent permanent = game.getPermanent(targetId);

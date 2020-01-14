@@ -1,25 +1,24 @@
-
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class FleshReaver extends CardImpl {
@@ -113,7 +112,7 @@ class FleshReaverEffect extends OneShotEffect {
         }
         int damageToDeal = (Integer) getValue("damage");
         if (damageToDeal > 0) {
-            controller.damage(damageToDeal, source.getSourceId(), game, false, true);
+            controller.damage(damageToDeal, source.getSourceId(), game);
         }
         return true;
     }

@@ -1,4 +1,3 @@
-
 package mage.cards.m;
 
 import mage.MageObject;
@@ -96,7 +95,7 @@ class MindBombEffect extends OneShotEffect {
                 if (player != null) {
                     Cards cardsPlayer = cardsToDiscard.get(playerId);
                     if (cardsPlayer != null) {
-                        player.damage(3 - cardsPlayer.size(), source.getId(), game, false, true);
+                        player.damage(3 - cardsPlayer.size(), source.getId(), game);
                     }
                 }
             }

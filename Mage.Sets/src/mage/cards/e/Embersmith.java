@@ -68,7 +68,7 @@ class EmbersmithEffect extends OneShotEffect {
             }
             Player player = game.getPlayer(source.getFirstTarget());
             if (player != null) {
-                player.damage(1, source.getSourceId(), game, false, true);
+                player.damage(1, source.getSourceId(), game);
                 return true;
             }
             return false;
