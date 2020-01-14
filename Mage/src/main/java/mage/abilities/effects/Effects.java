@@ -71,7 +71,18 @@ public class Effects extends ArrayList<Effect> {
                         nextRule = Character.toUpperCase(nextRule.charAt(0)) + nextRule.substring(1);
                     }
                 }
-                sbText.append(endString).append(nextRule);
+
+                String currentRule = endString + nextRule;
+                // fix dot in the combined effect like IfDoCost
+                if (sbText.length() > 0 && currentRule.length() > 0) {
+                    boolean prevTextEndsWithDot = sbText.charAt(sbText.length() - 1) == '.';
+                    boolean currentTextStartsWithDot = currentRule.startsWith(",") || currentRule.startsWith(".");
+                    if (prevTextEndsWithDot && currentTextStartsWithDot) {
+                        sbText.delete(sbText.length() - 1, sbText.length());
+                    }
+                }
+
+                sbText.append(currentRule);
             }
             lastRule = nextRule;
         }
