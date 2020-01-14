@@ -17,13 +17,13 @@ public final class FuneralRites extends CardImpl {
     public FuneralRites(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");
 
-        // You draw two cards, lose 2 life, and put the top two cards of your library into your graveyard,
+        // You draw two cards, lose 2 life, and put the top two cards of your library into your graveyard
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2)
-                .setText("you draw two cards,"));
+                .setText("You draw two cards"));
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(2)
-                .setText("lose 2 life,"));
+                .setText(", lose 2 life"));
         this.getSpellAbility().addEffect(new PutTopCardOfLibraryIntoGraveControllerEffect(2)
-                .concatBy("and"));
+                .concatBy(", and"));
     }
 
     private FuneralRites(final FuneralRites card) {
