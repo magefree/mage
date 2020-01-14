@@ -1,7 +1,5 @@
-
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -14,8 +12,9 @@ import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author Plopman
  */
 public final class WheelOfTorture extends CardImpl {
@@ -54,7 +53,7 @@ class WheelOfTortureEffect extends OneShotEffect {
         if (player != null) {
             int amount = 3 - player.getHand().size();
             if (amount > 0) {
-                player.damage(amount, source.getSourceId(), game, false, true);
+                player.damage(amount, source.getSourceId(), game);
                 return true;
             }
         }

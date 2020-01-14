@@ -1,7 +1,5 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -15,11 +13,11 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetPlayer;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 
+import java.util.UUID;
+
 /**
- *
  * @author noxx
  */
 public final class BonfireOfTheDamned extends CardImpl {
@@ -64,9 +62,9 @@ class BonfireOfTheDamnedEffect extends OneShotEffect {
         if (player != null) {
             int damage = source.getManaCostsToPay().getX();
             if (damage > 0) {
-                player.damage(damage, source.getSourceId(), game, false, true);
+                player.damage(damage, source.getSourceId(), game);
                 for (Permanent perm : game.getBattlefield().getAllActivePermanents(filter, player.getId(), game)) {
-                    perm.damage(damage, source.getSourceId(), game, false, true);
+                    perm.damage(damage, source.getSourceId(), game);
                 }
             }
             return true;

@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -18,25 +16,26 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetLandPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class ChokingSands extends CardImpl {
-    
+
     private static final FilterLandPermanent filter = new FilterLandPermanent("non-Swamp land");
-    
+
     static {
         filter.add(Predicates.not(SubType.SWAMP.getPredicate()));
     }
 
     public ChokingSands(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
 
         // Destroy target non-Swamp land.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetLandPermanent(filter));
-        
+
         // If that land was nonbasic, Choking Sands deals 2 damage to the land's controller.
         this.getSpellAbility().addEffect(new ChokingSandsEffect());
     }
@@ -73,7 +72,7 @@ class ChokingSandsEffect extends OneShotEffect {
         if (permanent != null && !permanent.isBasic()) {
             Player player = game.getPlayer(permanent.getControllerId());
             if (player != null) {
-                player.damage(2, source.getSourceId(), game, false, true);
+                player.damage(2, source.getSourceId(), game);
                 return true;
             }
         }

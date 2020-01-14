@@ -1,42 +1,30 @@
-
 package mage.cards.f;
 
-import java.util.UUID;
-
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ChooseOpponentEffect;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.cards.Card;
-import mage.constants.*;
-import mage.counters.Counter;
-import mage.counters.CounterType;
-import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.common.TargetCardInHand;
-import mage.target.common.TargetCreaturePermanent;
 import mage.abilities.Ability;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.target.TargetPermanent;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
+import mage.counters.CounterType;
+import mage.game.Game;
+import mage.players.Player;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author ciaccona007
  */
 public final class FesteringWound extends CardImpl {
 
     public FesteringWound(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
-        
+
         this.subtype.add(SubType.AURA);
 
         // Enchant creature
@@ -61,6 +49,7 @@ public final class FesteringWound extends CardImpl {
         return new FesteringWound(this);
     }
 }
+
 class FesteringWoundEffect extends OneShotEffect {
 
     public FesteringWoundEffect() {
@@ -83,8 +72,8 @@ class FesteringWoundEffect extends OneShotEffect {
         int amount = game.getPermanent(sourceId).getCounters(game).getCount(CounterType.INFECTION);
         UUID id = this.getTargetPointer().getFirst(game, source);
         Player player = game.getPlayer(id);
-        if(player != null) {
-            player.damage(amount, source.getSourceId(), game, false, true);
+        if (player != null) {
+            player.damage(amount, source.getSourceId(), game);
             return true;
         }
         return false;

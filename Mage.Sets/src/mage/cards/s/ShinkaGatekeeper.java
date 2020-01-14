@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealtDamageToSourceTriggeredAbility;
@@ -9,13 +7,14 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class ShinkaGatekeeper extends CardImpl {
@@ -64,7 +63,7 @@ class ShinkaGatekeeperDealDamageEffect extends OneShotEffect {
         if (amount > 0) {
             Player player = game.getPlayer(source.getControllerId());
             if (player != null) {
-                player.damage(amount, source.getSourceId(), game, false, true);
+                player.damage(amount, source.getSourceId(), game);
                 return true;
             }
         }

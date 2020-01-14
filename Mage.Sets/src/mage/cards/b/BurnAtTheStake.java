@@ -1,7 +1,5 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.TapVariableTargetCost;
 import mage.abilities.dynamicvalue.common.GetXValue;
@@ -18,8 +16,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class BurnAtTheStake extends CardImpl {
@@ -31,7 +30,7 @@ public final class BurnAtTheStake extends CardImpl {
     }
 
     public BurnAtTheStake(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}{R}{R}");
 
 
         // As an additional cost to cast Burn at the Stake, tap any number of untapped creatures you control.
@@ -79,7 +78,7 @@ class BurnAtTheStakeEffect extends OneShotEffect {
 
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (player != null) {
-            player.damage(amount, source.getSourceId(), game, false, true);
+            player.damage(amount, source.getSourceId(), game);
             return true;
         }
 

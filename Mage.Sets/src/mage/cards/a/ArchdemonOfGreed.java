@@ -1,7 +1,5 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.OnEventTriggeredAbility;
@@ -21,8 +19,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author anonymous
  */
 public final class ArchdemonOfGreed extends CardImpl {
@@ -35,7 +34,7 @@ public final class ArchdemonOfGreed extends CardImpl {
     }
 
     public ArchdemonOfGreed(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
         this.subtype.add(SubType.DEMON);
         this.color.setBlack(true);
 
@@ -93,10 +92,9 @@ public final class ArchdemonOfGreed extends CardImpl {
                             // sacrifice the chosen card
                             return humanSacrifice.sacrifice(source.getSourceId(), game);
                         }
-                    }         
-                    else {
+                    } else {
                         permanent.tap(game);
-                        player.damage(9, source.getSourceId(), game, false, true);
+                        player.damage(9, source.getSourceId(), game);
                     }
                 }
                 return true;

@@ -1,7 +1,5 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -15,8 +13,9 @@ import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetDiscard;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class BlastOfGenius extends CardImpl {
@@ -75,7 +74,7 @@ class BlastOfGeniusEffect extends OneShotEffect {
                     }
                     Player targetPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
                     if (targetPlayer != null) {
-                        targetPlayer.damage(damage, source.getSourceId(), game, false, true);
+                        targetPlayer.damage(damage, source.getSourceId(), game);
                         return true;
                     }
                 }

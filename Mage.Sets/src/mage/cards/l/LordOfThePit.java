@@ -1,7 +1,5 @@
-
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -19,14 +17,15 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author dustinconrad
  */
 public final class LordOfThePit extends CardImpl {
 
     public LordOfThePit(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}{B}");
         this.subtype.add(SubType.DEMON);
 
         this.power = new MageInt(7);
@@ -89,7 +88,7 @@ class LordOfThePitEffect extends OneShotEffect {
                 return true;
             }
         } else {
-            player.damage(7, source.getSourceId(), game, false, true);
+            player.damage(7, source.getSourceId(), game);
             return true;
         }
         return false;

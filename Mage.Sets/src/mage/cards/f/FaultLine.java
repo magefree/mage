@@ -1,7 +1,5 @@
-
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -16,14 +14,15 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class FaultLine extends CardImpl {
 
     public FaultLine(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{R}{R}");
 
         // Fault Line deals X damage to each creature without flying and each player.
         this.getSpellAbility().addEffect(new FaultLineEffect());
@@ -64,13 +63,13 @@ class FaultLineEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int amount = source.getManaCostsToPay().getX();
-        for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
             permanent.damage(amount, source.getSourceId(), game, false, true);
         }
-        for (UUID playerId: game.getState().getPlayersInRange(source.getControllerId(), game)) {
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null)
-                player.damage(amount, source.getSourceId(), game, false, true);
+                player.damage(amount, source.getSourceId(), game);
         }
         return true;
     }

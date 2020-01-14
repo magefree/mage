@@ -1,7 +1,5 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -16,14 +14,15 @@ import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class AncientRunes extends CardImpl {
 
     public AncientRunes(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
 
         // At the beginning of each player's upkeep, Ancient Runes deals damage to that player equal to the number of artifacts they control.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new AncientRunesDamageTargetEffect(), TargetController.ANY, false, true));
@@ -39,18 +38,16 @@ public final class AncientRunes extends CardImpl {
     }
 }
 
-class AncientRunesDamageTargetEffect extends OneShotEffect{
-    
-    public AncientRunesDamageTargetEffect()
-    {
+class AncientRunesDamageTargetEffect extends OneShotEffect {
+
+    public AncientRunesDamageTargetEffect() {
         super(Outcome.Damage);
     }
-    
-    public AncientRunesDamageTargetEffect(AncientRunesDamageTargetEffect copy)
-    {
+
+    public AncientRunesDamageTargetEffect(AncientRunesDamageTargetEffect copy) {
         super(copy);
     }
-        
+
     @Override
     public String getText(Mode mode) {
         return "{this} deals damage to that player equal to the number of artifacts they control";
@@ -61,7 +58,7 @@ class AncientRunesDamageTargetEffect extends OneShotEffect{
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (player != null) {
             int damage = game.getBattlefield().getAllActivePermanents(new FilterControlledArtifactPermanent("artifacts"), targetPointer.getFirst(game, source), game).size();
-            player.damage(damage, source.getSourceId(), game, false, true);
+            player.damage(damage, source.getSourceId(), game);
             return true;
         }
         return false;

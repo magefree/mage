@@ -1,7 +1,5 @@
-
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealtDamageToSourceTriggeredAbility;
@@ -13,16 +11,13 @@ import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class FiredrinkerSatyr extends CardImpl {
@@ -77,7 +72,7 @@ class FiredrinkerSatyrDealDamageEffect extends OneShotEffect {
         if (amount > 0) {
             Player player = game.getPlayer(source.getControllerId());
             if (player != null) {
-                player.damage(amount, source.getSourceId(), game, false, true);
+                player.damage(amount, source.getSourceId(), game);
                 return true;
             }
         }

@@ -1,6 +1,5 @@
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.DiscardXTargetCost;
 import mage.abilities.dynamicvalue.common.GetXValue;
@@ -17,8 +16,9 @@ import mage.target.Target;
 import mage.target.common.TargetAnyTarget;
 import mage.target.targetadjustment.TargetAdjuster;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class Firestorm extends CardImpl {
@@ -80,7 +80,7 @@ class FirestormEffect extends OneShotEffect {
                     } else {
                         Player player = game.getPlayer(targetId);
                         if (player != null) {
-                            player.damage(amount, source.getSourceId(), game, false, true);
+                            player.damage(amount, source.getSourceId(), game);
                         }
                     }
                 }

@@ -1,7 +1,4 @@
-
 package mage.cards.b;
-
-import java.util.UUID;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -14,6 +11,8 @@ import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  * @author dustinconrad
@@ -72,7 +71,7 @@ class BrowbeatDrawEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if (player != null && player.chooseUse(Outcome.Detriment, "Have " + spell.getLogName() + " deal 5 damage to you?", source, game)) {
                     drawCards = false;
-                    player.damage(5, source.getSourceId(), game, false, true);
+                    player.damage(5, source.getSourceId(), game);
                     game.informPlayers(player.getLogName() + " has " + spell.getLogName() + " deal 5 to them");
                 }
             }

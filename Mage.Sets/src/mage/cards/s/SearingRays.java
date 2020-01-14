@@ -1,7 +1,5 @@
 package mage.cards.s;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -9,15 +7,14 @@ import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author noahg
  */
 public final class SearingRays extends CardImpl {
@@ -61,14 +58,14 @@ class SearingRaysEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         ChoiceColor choice = new ChoiceColor();
         if (controller != null && controller.choose(outcome, choice, game) && choice.getColor() != null) {
-            FilterCreaturePermanent filter = new FilterCreaturePermanent(choice.getColor().getDescription()+" creatures");
+            FilterCreaturePermanent filter = new FilterCreaturePermanent(choice.getColor().getDescription() + " creatures");
             filter.add(new ColorPredicate(choice.getColor()));
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                int amount = game.getBattlefield().countAll(filter , playerId, game);
+                int amount = game.getBattlefield().countAll(filter, playerId, game);
                 if (amount > 0) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
-                        player.damage(amount, source.getSourceId(), game, false, true);
+                        player.damage(amount, source.getSourceId(), game);
                     }
                 }
             }

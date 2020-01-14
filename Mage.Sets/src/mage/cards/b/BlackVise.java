@@ -1,7 +1,5 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -17,14 +15,15 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author dustinconrad
  */
 public final class BlackVise extends CardImpl {
 
     public BlackVise(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
         // As Black Vise enters the battlefield, choose an opponent.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseOpponentEffect(Outcome.Detriment)));
@@ -96,7 +95,7 @@ class BlackViseEffect extends OneShotEffect {
         if (chosenPlayer != null) {
             int damage = chosenPlayer.getHand().size() - 4;
             if (damage > 0) {
-                chosenPlayer.damage(damage, source.getSourceId(), game, false, true);
+                chosenPlayer.damage(damage, source.getSourceId(), game);
             }
             return true;
         }

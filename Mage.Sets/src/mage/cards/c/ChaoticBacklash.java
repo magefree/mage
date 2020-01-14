@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -16,20 +14,21 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class ChaoticBacklash extends CardImpl {
 
     public ChaoticBacklash(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{R}");
 
 
         // Chaotic Backlash deals damage to target player equal to twice the number of white and/or blue permanents they control.
         this.getSpellAbility().addEffect(new ChaoticBacklashEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
-        
+
     }
 
     public ChaoticBacklash(final ChaoticBacklash card) {
@@ -43,9 +42,9 @@ public final class ChaoticBacklash extends CardImpl {
 }
 
 class ChaoticBacklashEffect extends OneShotEffect {
-    
+
     private static final FilterPermanent filter = new FilterPermanent("white and/or blue permanents they control");
-    
+
     static {
         filter.add(Predicates.or(
                 new ColorPredicate(ObjectColor.WHITE),
@@ -71,7 +70,7 @@ class ChaoticBacklashEffect extends OneShotEffect {
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
         if (targetPlayer != null) {
             int amount = 2 * game.getBattlefield().countAll(filter, targetPlayer.getId(), game);
-            targetPlayer.damage(amount, source.getSourceId(), game, false, true);
+            targetPlayer.damage(amount, source.getSourceId(), game);
             return true;
         }
         return false;

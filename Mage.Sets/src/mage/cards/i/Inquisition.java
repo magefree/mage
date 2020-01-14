@@ -1,7 +1,5 @@
-
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -17,8 +15,9 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth & L_J
  */
 public final class Inquisition extends CardImpl {
@@ -42,9 +41,10 @@ public final class Inquisition extends CardImpl {
 }
 
 class InquisitionEffect extends OneShotEffect {
-    
+
     private static final FilterCard filter = new FilterCard();
-    static{
+
+    static {
         filter.add(new ColorPredicate(ObjectColor.WHITE));
     }
 
@@ -72,7 +72,7 @@ class InquisitionEffect extends OneShotEffect {
                     }
                 }
                 if (cardsFound > 0) {
-                    targetPlayer.damage(cardsFound, source.getSourceId(), game, false, true);
+                    targetPlayer.damage(cardsFound, source.getSourceId(), game);
                 }
                 return true;
             }

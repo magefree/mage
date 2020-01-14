@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SagaAbility;
 import mage.abilities.effects.Effects;
@@ -9,20 +7,17 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.GainLifeEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SagaChapter;
-import mage.constants.TargetController;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.ChainersTormentNightmareToken;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class ChainersTorment extends CardImpl {
@@ -84,7 +79,7 @@ class ChainersTormentEffect extends OneShotEffect {
             for (UUID tokenId : effect.getLastAddedTokenIds()) {
                 Permanent token = game.getPermanentOrLKIBattlefield(tokenId);
                 if (token != null) {
-                    player.damage(xValue, tokenId, game, false, true);
+                    player.damage(xValue, tokenId, game);
                 }
             }
         }

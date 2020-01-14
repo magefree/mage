@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import mage.abilities.Ability;
@@ -93,7 +92,7 @@ class BuildersBaneEffect extends OneShotEffect {
         for (Map.Entry<UUID, Integer> entry : destroyedArtifactPerPlayer.entrySet()) {
             Player player = game.getPlayer(entry.getKey());
             if (player != null) {
-                player.damage(entry.getValue(), source.getSourceId(), game, false, true);
+                player.damage(entry.getValue(), source.getSourceId(), game);
             }
         }
 

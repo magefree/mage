@@ -1,7 +1,5 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealtDamageToSourceTriggeredAbility;
@@ -18,8 +16,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class BorosReckoner extends CardImpl {
@@ -73,7 +72,7 @@ class BorosReckonerDealDamageEffect extends OneShotEffect {
         if (amount > 0) {
             Player player = game.getPlayer(targetPointer.getFirst(game, source));
             if (player != null) {
-                player.damage(amount, source.getSourceId(), game, false, true);
+                player.damage(amount, source.getSourceId(), game);
                 return true;
             }
             Permanent creature = game.getPermanent(targetPointer.getFirst(game, source));

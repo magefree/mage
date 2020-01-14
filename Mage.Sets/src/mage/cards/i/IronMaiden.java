@@ -1,7 +1,5 @@
-
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -14,8 +12,9 @@ import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author Plopman
  */
 public final class IronMaiden extends CardImpl {
@@ -55,7 +54,7 @@ class IronMaidenEffect extends OneShotEffect {
         if (player != null) {
             int amount = player.getHand().size() - 4;
             if (amount > 0) {
-                player.damage(amount, source.getSourceId(), game, false, true);
+                player.damage(amount, source.getSourceId(), game);
                 return true;
             }
         }

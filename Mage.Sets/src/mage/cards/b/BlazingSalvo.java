@@ -1,7 +1,5 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -13,14 +11,15 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author cbt33
  */
 public final class BlazingSalvo extends CardImpl {
 
     public BlazingSalvo(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");
 
         // Blazing Salvo deals 3 damage to target creature unless that creature's controller has Blazing Salvo deal 5 damage to them.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
@@ -61,9 +60,9 @@ class BlazingSalvoEffect extends OneShotEffect {
             if (player != null) {
                 String message = "Have Blazing Salvo do 5 damage to you?";
                 if (player.chooseUse(Outcome.Damage, message, source, game)) {
-                    player.damage(5, source.getSourceId(), game, false, true);
+                    player.damage(5, source.getSourceId(), game);
                 } else {
-                    permanent.damage(3, source.getSourceId(), game, false, true);
+                    permanent.damage(3, source.getSourceId(), game);
                 }
                 return true;
             }

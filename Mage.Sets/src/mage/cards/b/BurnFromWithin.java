@@ -1,7 +1,5 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
@@ -20,8 +18,9 @@ import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class BurnFromWithin extends CardImpl {
@@ -80,7 +79,7 @@ class BurnFromWithinEffect extends OneShotEffect {
             }
             Player targetPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
             if (targetPlayer != null) {
-                targetPlayer.damage(amount, source.getSourceId(), game, false, true);
+                targetPlayer.damage(amount, source.getSourceId(), game);
                 return true;
             }
         }

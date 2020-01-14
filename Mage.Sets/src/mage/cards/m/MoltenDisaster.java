@@ -1,8 +1,5 @@
-
 package mage.cards.m;
 
-import java.util.Optional;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.KickedCondition;
@@ -25,18 +22,20 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.Optional;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class MoltenDisaster extends CardImpl {
 
     public MoltenDisaster(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{R}{R}");
 
 
         // If Molten Disaster was kicked, it has split second.
-        Ability ability = new SimpleStaticAbility(Zone.STACK,  new MoltenDisasterSplitSecondEffect());
+        Ability ability = new SimpleStaticAbility(Zone.STACK, new MoltenDisasterSplitSecondEffect());
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);
         // Kicker {R}
@@ -59,7 +58,7 @@ class MoltenDisasterSplitSecondEffect extends ContinuousRuleModifyingEffectImpl 
 
     MoltenDisasterSplitSecondEffect() {
         super(Duration.WhileOnStack, Outcome.Detriment);
-        staticText ="if this spell was kicked, it has split second <i>(As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)</i>";
+        staticText = "if this spell was kicked, it has split second <i>(As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)</i>";
     }
 
     MoltenDisasterSplitSecondEffect(final MoltenDisasterSplitSecondEffect effect) {
@@ -70,12 +69,12 @@ class MoltenDisasterSplitSecondEffect extends ContinuousRuleModifyingEffectImpl 
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         return "You can't cast spells or activate abilities that aren't mana abilities (Split second).";
     }
-    
+
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.CAST_SPELL || event.getType() == GameEvent.EventType.ACTIVATE_ABILITY;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.CAST_SPELL) {
@@ -86,9 +85,7 @@ class MoltenDisasterSplitSecondEffect extends ContinuousRuleModifyingEffectImpl 
         if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY) {
             Optional<Ability> ability = game.getAbility(event.getTargetId(), event.getSourceId());
             if (ability.isPresent() && !(ability.get() instanceof ActivatedManaAbilityImpl)) {
-                if (KickedCondition.instance.apply(game, source)) {
-                    return true;
-                }
+                return KickedCondition.instance.apply(game, source);
             }
         }
         return false;
@@ -130,13 +127,13 @@ class MoltenDisasterEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int amount = source.getManaCostsToPay().getX();
-        for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
             permanent.damage(amount, source.getSourceId(), game, false, true);
         }
-        for (UUID playerId: game.getState().getPlayersInRange(source.getControllerId(), game)) {
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                player.damage(amount, source.getSourceId(), game, false, true);
+                player.damage(amount, source.getSourceId(), game);
             }
         }
         return true;

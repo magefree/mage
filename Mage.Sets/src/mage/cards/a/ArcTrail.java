@@ -1,8 +1,5 @@
-
 package mage.cards.a;
 
-import java.io.ObjectStreamException;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -18,8 +15,10 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetAnyTarget;
 
+import java.io.ObjectStreamException;
+import java.util.UUID;
+
 /**
- *
  * @author maurer.it_at_gmail.com
  */
 public final class ArcTrail extends CardImpl {
@@ -91,7 +90,7 @@ class ArcTrailEffect extends OneShotEffect {
             }
             Player player = game.getPlayer(target.getFirstTarget());
             if (player != null) {
-                applied |= (player.damage(damage, source.getSourceId(), game, false, true) > 0);
+                applied |= (player.damage(damage, source.getSourceId(), game) > 0);
             }
 
             twoDamageDone = true;

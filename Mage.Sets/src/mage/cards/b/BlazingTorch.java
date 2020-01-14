@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import mage.abilities.Ability;
@@ -9,11 +8,14 @@ import mage.abilities.costs.CostImpl;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesAttachedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -21,22 +23,19 @@ import mage.target.common.TargetAnyTarget;
 
 import java.util.List;
 import java.util.UUID;
-import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesAttachedEffect;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 
 /**
- *
  * @author North
  */
 public final class BlazingTorch extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Vampires or Zombies");
+
     static {
         filter.add(Predicates.or(SubType.VAMPIRE.getPredicate(),
-                                 SubType.ZOMBIE.getPredicate()));
+                SubType.ZOMBIE.getPredicate()));
     }
-    
+
     public BlazingTorch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
         this.subtype.add(SubType.EQUIPMENT);
@@ -45,13 +44,13 @@ public final class BlazingTorch extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new CantBeBlockedByCreaturesAttachedEffect(Duration.WhileOnBattlefield, filter, AttachmentType.EQUIPMENT)));
 
-        
+
         // Equipped creature has "{tap}, Sacrifice Blazing Torch: Blazing Torch deals 2 damage to any target.")
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BlazingTorchDamageEffect(), new TapSourceCost());
         ability.addCost(new BlazingTorchCost());
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability, AttachmentType.EQUIPMENT)));
-        
+
         // Equip {1}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1)));
     }
@@ -129,7 +128,7 @@ class BlazingTorchDamageEffect extends OneShotEffect {
         }
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (player != null && sourceId != null) {
-            player.damage(2, sourceId, game, false, true);
+            player.damage(2, sourceId, game);
             return true;
         }
         return false;

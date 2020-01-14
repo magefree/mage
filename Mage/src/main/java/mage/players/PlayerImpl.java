@@ -2102,7 +2102,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public int damage(int damage, UUID sourceId, Game game) {
-        return doDamage(damage, sourceId, game, true, false, null);
+        return doDamage(damage, sourceId, game, false, true, null);
     }
 
     @Override

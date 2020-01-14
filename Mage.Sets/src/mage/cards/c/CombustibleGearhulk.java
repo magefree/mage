@@ -1,7 +1,5 @@
 package mage.cards.c;
 
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -12,16 +10,18 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
 
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class CombustibleGearhulk extends CardImpl {
@@ -117,7 +117,7 @@ class CombustibleGearhulkMillAndDamageEffect extends OneShotEffect {
             controller.moveCards(cardList, Zone.GRAVEYARD, source, game);
             Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
             if (targetPlayer != null) {
-                targetPlayer.damage(sumCMC, source.getSourceId(), game, false, true);
+                targetPlayer.damage(sumCMC, source.getSourceId(), game);
                 return true;
             }
         }

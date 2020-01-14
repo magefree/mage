@@ -151,7 +151,7 @@ class SoulBurnEffect extends OneShotEffect {
                 return false;
             }
             lifetogain = Math.min(player.getLife(), lifetogain);
-            player.damage(totalXAmount, source.getSourceId(), game);
+            player.damage(totalXAmount, source.getSourceId(), game, false, true);
         }
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null) {

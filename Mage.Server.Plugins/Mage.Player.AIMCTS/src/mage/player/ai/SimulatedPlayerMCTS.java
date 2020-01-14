@@ -1,13 +1,6 @@
-
 package mage.player.ai;
 
-import java.io.Serializable;
-import java.util.*;
-import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
-import mage.abilities.Mode;
-import mage.abilities.Modes;
-import mage.abilities.TriggeredAbility;
+import mage.abilities.*;
 import mage.abilities.common.PassAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.cards.Card;
@@ -26,8 +19,10 @@ import mage.target.TargetCard;
 import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
 
+import java.io.Serializable;
+import java.util.*;
+
 /**
- *
  * plays randomly
  *
  * @author BetaSteward_at_googlemail.com
@@ -428,7 +423,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
                 } else {
                     Player player = game.getPlayer(targetId);
                     if (player != null) {
-                        player.damage(amount, sourceId, game, false, true);
+                        player.damage(amount, sourceId, game);
                         remainingDamage -= amount;
                     }
                 }

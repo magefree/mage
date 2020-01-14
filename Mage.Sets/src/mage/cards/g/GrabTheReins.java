@@ -1,7 +1,5 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.Effect;
@@ -23,10 +21,10 @@ import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LoneFox
- *
  */
 public final class GrabTheReins extends CardImpl {
 
@@ -104,7 +102,7 @@ class GrabTheReinsEffect extends OneShotEffect {
                 }
                 player = game.getPlayer(source.getFirstTarget());
                 if (player != null) {
-                    player.damage(amount, source.getSourceId(), game, false, true);
+                    player.damage(amount, source.getSourceId(), game);
                     return true;
                 }
             } else {

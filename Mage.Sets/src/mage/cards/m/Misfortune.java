@@ -1,6 +1,5 @@
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -17,8 +16,9 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class Misfortune extends CardImpl {
@@ -79,7 +79,7 @@ class MisfortuneEffect extends OneShotEffect {
                 Effect putM1M1CounterOnEachOpponentCreature = new AddCountersAllEffect(
                         CounterType.M1M1.createInstance(), filterOpponentCreatures);
                 putM1M1CounterOnEachOpponentCreature.apply(game, source);
-                chosenOpponent.damage(4, source.getSourceId(), game);
+                chosenOpponent.damage(4, source.getSourceId(), game, false, true);
             }
             return true;
         }

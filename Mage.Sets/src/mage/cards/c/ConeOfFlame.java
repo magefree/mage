@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -16,8 +14,9 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetAnyTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author Quercitron
  */
 public final class ConeOfFlame extends CardImpl {
@@ -89,7 +88,7 @@ class ConeOfFlameEffect extends OneShotEffect {
             }
             Player player = game.getPlayer(target.getFirstTarget());
             if (player != null) {
-                applied |= (player.damage(damage, source.getSourceId(), game, false, true) > 0);
+                applied |= (player.damage(damage, source.getSourceId(), game) > 0);
             }
             damage++;
         }

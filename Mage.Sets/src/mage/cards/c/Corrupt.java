@@ -1,8 +1,5 @@
-
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -17,14 +14,15 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public final class Corrupt extends CardImpl {
 
     public Corrupt(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{B}");
 
         // Corrupt deals damage to any target equal to the number of Swamps you control. You gain life equal to the damage dealt this way.
         this.getSpellAbility().addTarget(new TargetAnyTarget());
@@ -68,13 +66,11 @@ class CorruptEffect extends OneShotEffect {
             Permanent permanent = game.getPermanent(source.getFirstTarget());
             if (permanent != null) {
                 damageDealt = permanent.damage(amount, source.getSourceId(), game, false, true);
-            }
-            else {
+            } else {
                 Player player = game.getPlayer(source.getFirstTarget());
                 if (player != null) {
-                    damageDealt = player.damage(amount, source.getSourceId(), game, false, true);
-                }
-                else
+                    damageDealt = player.damage(amount, source.getSourceId(), game);
+                } else
                     return false;
             }
             Player you = game.getPlayer(source.getControllerId());

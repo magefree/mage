@@ -1,8 +1,5 @@
-
 package mage.cards.a;
 
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -14,14 +11,16 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author Backfir3
  */
 public final class AcidicSoil extends CardImpl {
 
     public AcidicSoil(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}");
 
 
         //Acidic Soil deals damage to each player equal to the number of lands they control.
@@ -62,7 +61,7 @@ class AcidicSoilEffect extends OneShotEffect {
                     }
                 }
                 if (amount > 0) {
-                    player.damage(amount, source.getSourceId(), game, false, true);
+                    player.damage(amount, source.getSourceId(), game);
                 }
             }
         }
