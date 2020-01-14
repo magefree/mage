@@ -1552,7 +1552,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     /**
      * For use choices set "Yes" or "No" the the choice string. For X values set
      * "X=[xValue]" example: for X=3 set choice string to "X=3".
-     *
+     * <br>For ColorChoice use "Red", "Green", "Blue", "Black" or "White"
+     * 
      * @param player
      * @param choice
      */

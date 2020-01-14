@@ -119,4 +119,54 @@ public class SpellCastTriggerTest extends CardTestPlayerBase {
         assertHandCount(playerA, 5); // one normally drawn + 4 from Read the Bones
 
     }
+    
+    @Test
+    public void testDiamondKnightTrigger() {
+        addCard(Zone.BATTLEFIELD, playerA, "Volcanic Island", 6);
+
+        // Vigilance
+        // As Diamond Knight enters the battlefield, choose a color.
+        // Whenever you cast a spell of the chosen color, put a +1/+1 counter on Diamond Knight.        
+        addCard(Zone.HAND, playerA, "Diamond Knight", 1); // Creature 1/1 - {3}
+        
+        // Target 3 damage
+        addCard(Zone.HAND, playerA, "Lightning Bolt", 1); // {R}
+        // Draw a card.
+        // Escape—{2}{U}, Exile five other cards from your graveyard.
+        addCard(Zone.HAND, playerA, "Glimpse of Freedom", 1); // Instant {1}{U}
+        addCard(Zone.GRAVEYARD, playerA, "Mountain", 5); // Instant {1}{U}
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Diamond Knight");      
+        setChoice(playerA, "Blue");
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Glimpse of Freedom");
+        
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Glimpse of Freedom");
+        setChoice(playerA,"Mountain");
+        setChoice(playerA,"Mountain");
+        setChoice(playerA,"Mountain");
+        setChoice(playerA,"Mountain");
+        setChoice(playerA,"Mountain");
+        
+        
+
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+        setStrictChooseMode(true);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Diamond Knight", 1);
+        assertPowerToughness(playerA, "Diamond Knight", 3, 3);
+        assertGraveyardCount(playerA, "Lightning Bolt", 1);        
+        assertLife(playerB, 17);        
+        assertGraveyardCount(playerA, "Glimpse of Freedom", 1);
+        assertExileCount(playerA, 5);
+        assertHandCount(playerA, 3); 
+
+    }
+    
+    
+    
+    
 }

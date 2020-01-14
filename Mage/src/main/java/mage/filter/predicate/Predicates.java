@@ -195,7 +195,7 @@ public final class Predicates {
     }
 
     static <T> List<T> defensiveCopy(Iterable<T> iterable) {
-        ArrayList<T> list = new ArrayList<T>();
+        ArrayList<T> list = new ArrayList<>();
         for (T element : iterable) {
             list.add(checkNotNull(element));
         }

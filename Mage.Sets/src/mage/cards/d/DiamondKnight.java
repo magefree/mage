@@ -15,11 +15,11 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.ObjectPlayerPredicate;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.game.Game;
 
 import java.util.UUID;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 
 /**
  * @author TheElk801
@@ -59,7 +59,7 @@ public final class DiamondKnight extends CardImpl {
     }
 }
 
-enum DiamondKnightPredicate implements ObjectPlayerPredicate<ObjectSourcePlayer<MageObject>> {
+enum DiamondKnightPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageObject>> {
     instance;
 
     @Override
