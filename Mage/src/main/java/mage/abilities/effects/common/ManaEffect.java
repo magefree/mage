@@ -39,7 +39,7 @@ public abstract class ManaEffect extends OneShotEffect {
             return false;
         }
         Mana manaToAdd = produceMana(game, source);
-        if (manaToAdd.count() > 0) {
+        if (manaToAdd != null && manaToAdd.count() > 0) {
             checkToFirePossibleEvents(manaToAdd, game, source);
             addManaToPool(player, manaToAdd, game, source);
         }
@@ -65,7 +65,7 @@ public abstract class ManaEffect extends OneShotEffect {
     public List<Mana> getNetMana(Game game, Ability source) {
         List<Mana> netMana = new ArrayList<>();
         Mana mana = produceMana(game, source);
-        if (mana != null) {
+        if (mana != null && mana.count() > 0) {
             netMana.add(mana);
         }
         return netMana;
@@ -80,7 +80,7 @@ public abstract class ManaEffect extends OneShotEffect {
      *
      * @param game
      * @param source
-     * @return
+     * @return can return null or empty mana
      */
     public abstract Mana produceMana(Game game, Ability source);
 
