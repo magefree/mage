@@ -52,7 +52,7 @@ public class FightTargetSourceEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return new StringBuilder("{this} fight another target ").append(mode.getTargets().get(0).getTargetName()).toString();
+        return new StringBuilder("{this} fights another target ").append(mode.getTargets().get(0).getTargetName()).toString();
     }
 
 }
