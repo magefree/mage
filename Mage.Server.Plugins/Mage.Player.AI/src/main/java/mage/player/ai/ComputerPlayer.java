@@ -724,9 +724,10 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             }
         }
 
-        if (target.getOriginalTarget() instanceof TargetPlayerOrPlaneswalker) {
+        if (target.getOriginalTarget() instanceof TargetPlayerOrPlaneswalker
+                || target.getOriginalTarget() instanceof TargetOpponentOrPlaneswalker) {
             List<Permanent> targets;
-            TargetPlayerOrPlaneswalker origTarget = ((TargetPlayerOrPlaneswalker) target.getOriginalTarget());
+            TargetPermanentOrPlayer origTarget = ((TargetPermanentOrPlayer) target.getOriginalTarget());
 
             // TODO: if effect is bad and no opponent's targets available then AI can't target yourself but must by rules
             /*
