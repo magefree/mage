@@ -65,7 +65,7 @@ public class ScryfallImageSupportCards {
             add("G99");
             add("G00");
             add("G01");
-            
+
             // Other promo sets
             add("PWOR");
             add("PWOS");
