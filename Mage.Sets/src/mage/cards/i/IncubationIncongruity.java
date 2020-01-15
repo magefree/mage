@@ -71,7 +71,10 @@ class IncongruityEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(targetPointer.getFirst(game, source));
+        // If the target creature is an illegal target by the time Incongruity tries to resolve, the spell doesn’t resolve.
+        // No player creates a Frog Lizard token.
+        // (2019-01-25)
+        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
         if (permanent != null) {
             FrogLizardToken token = new FrogLizardToken();
             token.putOntoBattlefield(1, game, source.getSourceId(), permanent.getControllerId());

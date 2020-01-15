@@ -73,8 +73,8 @@ class LesserWerewolfEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        Permanent targetPermanent = game.getPermanentOrLKIBattlefield(targetPointer.getFirst(game, source));
+        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent targetPermanent = game.getPermanent(targetPointer.getFirst(game, source)); // must be valid target
         if (controller != null && sourcePermanent != null && targetPermanent != null) {
             if (sourcePermanent.getPower().getValue() >= 1) {
                 game.addEffect(new BoostSourceEffect(-1, 0, Duration.EndOfTurn), source);

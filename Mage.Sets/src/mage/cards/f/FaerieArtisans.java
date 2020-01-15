@@ -1,7 +1,5 @@
 package mage.cards.f;
 
-import java.util.StringTokenizer;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
@@ -21,8 +19,10 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.StringTokenizer;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class FaerieArtisans extends CardImpl {
@@ -79,7 +79,7 @@ class FaerieArtisansEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanentToCopy = game.getPermanentOrLKIBattlefield(getTargetPointer().getFixedTarget(game, source).getTarget());
+        Permanent permanentToCopy = game.getPermanentOrLKIBattlefield(targetPointer.getFixedTarget(game, source).getTarget());
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && permanentToCopy != null) {
             CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(null, CardType.ARTIFACT, false);

@@ -1,7 +1,5 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
@@ -20,9 +18,11 @@ import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.MyrToken;
+import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
- *
  * @author Plopman
  */
 public final class GenesisChamber extends CardImpl {
@@ -41,8 +41,8 @@ public final class GenesisChamber extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability,
                 SourceUntappedCondition.instance,
                 "Whenever a nontoken creature enters the battlefield, "
-                + "if {this} is untapped, "
-                + "that creature's controller creates a 1/1 colorless Myr artifact creature token"));
+                        + "if {this} is untapped, "
+                        + "that creature's controller creates a 1/1 colorless Myr artifact creature token"));
     }
 
     public GenesisChamber(final GenesisChamber card) {
@@ -92,7 +92,7 @@ class GenesisChamberEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(targetPointer.getFirst(game, source));
+        Permanent permanent = ((FixedTarget) targetPointer).getTargetedPermanentOrLKIBattlefield(game);
         if (permanent != null) {
             MyrToken token = new MyrToken();
             token.putOntoBattlefield(1, game, source.getSourceId(), permanent.getControllerId());
