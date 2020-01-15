@@ -60,6 +60,20 @@ public class ScryfallImageSupportCards {
             add("DD3GVL");
             add("DD3JVC");
 
+            // Judge gift sets
+            add("JGP");
+            add("G99");
+            add("G00");
+            add("G01");
+            
+            // Other promo sets
+            add("PWOR");
+            add("PWOS");
+            add("PDRC");
+            add("PHPR");
+            add("PLGM");
+
+            add("MGB");
             add("ULG");
             add("6ED");
             add("UDS");
