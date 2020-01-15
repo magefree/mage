@@ -65,7 +65,7 @@ public class UnequipEventTest extends CardTestPlayerBase {
         // Equipped creature gets +2/+0 and has indestructible.
         // Equip {4}
         addCard(Zone.LIBRARY, playerA, "Hammer of Nazahn");
-        addCard(Zone.BATTLEFIELD, playerA, "Forest", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 6);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
 
         // Destroy target permanent. Its controller creates a 3/3 green Beast creature token.
@@ -73,17 +73,25 @@ public class UnequipEventTest extends CardTestPlayerBase {
         // Equipped creature gets +2/+2 and has infect.
         // Whenever Grafted Exoskeleton becomes unattached from a permanent, sacrifice that permanent.
         // Equip {2}
-        addCard(Zone.BATTLEFIELD, playerA, "Grafted Exoskeleton", 1);
+        addCard(Zone.HAND, playerA, "Grafted Exoskeleton", 1); // Artifact Equipment - {4}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nazahn, Revered Bladesmith");
-        setChoice(playerA, "Hammer of Nazahn");
+        addTarget(playerA, "Hammer of Nazahn");
+        setChoice(playerA, "Yes"); // Put the hammer on the battlefield
+        setChoice(playerA, "Yes"); // Attach the hammer to a creature
+        addTarget(playerA, "Nazahn, Revered Bladesmith");
 
-        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {2}");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Grafted Exoskeleton");
+        setChoice(playerA, "Yes"); // Attach the Grafted Exoskeleton to a creature
+        addTarget(playerA, "Nazahn, Revered Bladesmith");
+        
         castSpell(3, PhaseStep.BEGIN_COMBAT, playerA, "Beast Within", "Grafted Exoskeleton");
 
         setStopAt(3, PhaseStep.END_COMBAT);
+        setStrictChooseMode(true);
         execute();
-
+        assertAllCommandsUsed();
+        
         assertLife(playerA, 20);
         assertLife(playerB, 20);
 
