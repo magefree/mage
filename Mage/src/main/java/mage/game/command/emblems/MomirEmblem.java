@@ -32,12 +32,13 @@ public final class MomirEmblem extends Emblem {
     public MomirEmblem() {
         setName("Emblem Momir Vig, Simic Visionary");
         setExpansionSetCodeForImage("DIS");
-        // {X}, Discard a card: Put a token into play as a copy of a random creature card with converted mana cost X. Play this ability only any time you could play a sorcery and only once each turn.
+
+        // {X}, Discard a card: Create a token that's a copy of a creature card with converted mana cost X chosen at random.
+        // Activate this ability only any time you could cast a sorcery and only once each turn.
         LimitedTimesPerTurnActivatedAbility ability = new LimitedTimesPerTurnActivatedAbility(Zone.COMMAND, new MomirEffect(), new VariableManaCost());
         ability.addCost(new DiscardCardCost());
         ability.setTiming(TimingRule.SORCERY);
         this.getAbilities().add(ability);
-
     }
 }
 
@@ -49,7 +50,7 @@ class MomirEffect extends OneShotEffect {
 
     public MomirEffect(MomirEffect effect) {
         super(effect);
-        staticText = "Put a token into play as a copy of a random creature card with converted mana cost X";
+        staticText = "Create a token that's a copy of a creature card with converted mana cost X chosen at random";
     }
 
     @Override
@@ -60,7 +61,8 @@ class MomirEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int value = source.getManaCostsToPay().getX();
-        // should this be random across card names, or card printings?
+
+        // should this be random across card names
         CardCriteria criteria = new CardCriteria().types(CardType.CREATURE).convertedManaCost(value);
         List<CardInfo> options = CardRepository.instance.findCards(criteria);
         if (options == null || options.isEmpty()) {

@@ -1,8 +1,5 @@
-
 package mage.cards.d;
 
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -11,8 +8,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
@@ -30,8 +27,10 @@ import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class DanceOfMany extends CardImpl {
@@ -43,7 +42,7 @@ public final class DanceOfMany extends CardImpl {
     }
 
     public DanceOfMany(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}{U}");
 
         // When Dance of Many enters the battlefield, create a token that's a copy of target nontoken creature.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DanceOfManyCreateTokenCopyEffect(), false);
@@ -84,7 +83,11 @@ class DanceOfManyCreateTokenCopyEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+        // The ability is targeted and checks the validity of the target when put on the stack and when resolving.
+        // If the creature is not still there when the copy ability resolves, the ability doesn’t resolve and no token
+        // is put onto the battlefield. This card remains on the battlefield as an enchantment with no token.
+        // (2004-10-04)
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         Permanent sourceObject = game.getPermanent(source.getSourceId());
         if (permanent != null && sourceObject != null) {
 

@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -14,19 +12,20 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetArtifactPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class Crumble extends CardImpl {
 
     public Crumble(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}");
 
         // Destroy target artifact. It can't be regenerated.
         this.getSpellAbility().addTarget(new TargetArtifactPermanent());
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
-        
+
         // That artifact's controller gains life equal to its converted mana cost.
         this.getSpellAbility().addEffect(new CrumbleEffect());
     }
@@ -59,7 +58,8 @@ class CrumbleEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+        // If the target artifact becomes illegal before resolution, the player does not gain any life. (2004-10-04)
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent != null) {
             int cost = permanent.getConvertedManaCost();
             Player player = game.getPlayer(permanent.getControllerId());

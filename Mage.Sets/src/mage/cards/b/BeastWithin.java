@@ -1,7 +1,5 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -14,8 +12,9 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.BeastToken;
 import mage.target.TargetPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author North, Loki
  */
 public final class BeastWithin extends CardImpl {
@@ -57,7 +56,10 @@ class BeastWithinEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+        // If the permanent is an illegal target when Beast Within tries to resolve, the spell won’t resolve and none
+        // of its effects will happen. The permanent’s controller won’t get a Beast token.
+        // (2011-06-01)
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent != null) {
             new BeastToken().putOntoBattlefield(1, game, source.getSourceId(), permanent.getControllerId());
         }

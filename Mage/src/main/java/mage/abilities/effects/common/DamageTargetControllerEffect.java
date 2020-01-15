@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
@@ -12,7 +11,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
- *
  * @author LoneFox
  */
 public class DamageTargetControllerEffect extends OneShotEffect {
@@ -51,10 +49,10 @@ public class DamageTargetControllerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
-        if(permanent != null) {
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (permanent != null) {
             Player targetController = game.getPlayer(permanent.getControllerId());
-            if(targetController != null) {
+            if (targetController != null) {
                 targetController.damage(amount.calculate(game, source, this), source.getSourceId(), game, false, preventable);
             }
             return true;
@@ -68,8 +66,8 @@ public class DamageTargetControllerEffect extends OneShotEffect {
             return staticText;
         }
         String text = "{this} deals " + amount.getMessage() + " damage to target "
-            + mode.getTargets().get(0).getTargetName() + "'s controller";
-        if(!preventable) {
+                + mode.getTargets().get(0).getTargetName() + "'s controller";
+        if (!preventable) {
             text += ". The damage can't be prevented";
         }
         return text;

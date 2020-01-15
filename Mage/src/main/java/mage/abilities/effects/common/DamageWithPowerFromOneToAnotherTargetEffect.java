@@ -35,7 +35,7 @@ public class DamageWithPowerFromOneToAnotherTargetEffect extends OneShotEffect {
             throw new IllegalStateException("It must have two targets, but found " + source.getTargets().size());
         }
 
-        Permanent myPermanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+        Permanent myPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         Permanent anotherPermanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         Player anotherPlayer = game.getPlayer(source.getTargets().get(1).getFirstTarget());
 

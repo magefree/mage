@@ -1,7 +1,5 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -21,20 +19,21 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAttackingCreature;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class AvengerEnDal extends CardImpl {
 
     public AvengerEnDal(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SPELLSHAPER);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {2}{W}, {tap}, Discard a card: Exile target attacking creature. Its controller gains life equal to its toughness.
+        // {2}{W}, {T}, Discard a card: Exile target attacking creature. Its controller gains life equal to its toughness.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl("{2}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
@@ -71,7 +70,7 @@ class AvengerEnDalEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent != null) {
             Player player = game.getPlayer(permanent.getControllerId());
             if (player != null) {
