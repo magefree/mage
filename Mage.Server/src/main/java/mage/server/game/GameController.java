@@ -1212,9 +1212,12 @@ public class GameController implements GameCallback {
 
         Player activePlayer = game.getPlayer(state.getActivePlayerId());
 
+        List<String> fixActions = new ArrayList<>(); // for logs info
+
         // fix active
         sb.append("<br>Checking active player: " + getName(activePlayer));
         if (activePlayer != null && activePlayer.hasLeft()) {
+            fixActions.add("active player");
             sb.append("<br>Found disconnected player! Concede...");
             activePlayer.concede(game);
             activePlayer.leave(); // abort any wait response actions
@@ -1234,6 +1237,7 @@ public class GameController implements GameCallback {
         sb.append("<br>Checking choosing player: " + getName(game.getPlayer(state.getChoosingPlayerId())));
         if (state.getChoosingPlayerId() != null) {
             if (game.getPlayer(state.getChoosingPlayerId()).hasLeft()) {
+                fixActions.add("choosing player");
                 sb.append("<br>Found disconnected player! Concede...");
                 Player p = game.getPlayer(state.getChoosingPlayerId());
                 if (p != null) {
@@ -1257,6 +1261,7 @@ public class GameController implements GameCallback {
         sb.append("<br>Checking priority player: " + getName(game.getPlayer(state.getPriorityPlayerId())));
         if (p != null) {
             if (p.hasLeft()) {
+                fixActions.add("priority player");
                 sb.append("<br>Found disconnected player! Concede...");
                 p.concede(game);
                 p.leave(); // abort any wait response actions
@@ -1281,6 +1286,7 @@ public class GameController implements GameCallback {
             sb.append(",,,GetDelay?=");
             sb.append((int) futureTimeout.getDelay(TimeUnit.SECONDS));
             if ((int) futureTimeout.getDelay(TimeUnit.SECONDS) < 25) {
+                fixActions.add("future timeout");
                 PassAbility pass = new PassAbility();
                 game.endTurn(pass);
                 sb.append("<br>Forcibly passing the turn!");
@@ -1290,6 +1296,10 @@ public class GameController implements GameCallback {
         }
         sb.append("</font>");
 
+        if (fixActions.isEmpty()) {
+            fixActions.add("none actions");
+        }
+        logger.warn("FIX command result for game " + game.getId() + ": " + fixActions.stream().collect(Collectors.joining(", ")));
 
         return sb.toString();
     }
