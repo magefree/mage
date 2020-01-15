@@ -126,7 +126,6 @@ public class OldSchool9394CFB extends Constructed {
         banned.add("Garruk Wildspeaker");
         banned.add("Gaze of Granite");
         banned.add("Genesis Hydra");
-        banned.add("Giant Badger");
         banned.add("Gideon of the Trials");
         banned.add("Gideon, Ally of Zendikar");
         banned.add("Gideon, Battle-Forged");
@@ -166,7 +165,6 @@ public class OldSchool9394CFB extends Constructed {
         banned.add("Liliana Vess");
         banned.add("Liliana Vess");
         banned.add("Magister of Worth");
-        banned.add("Mana Crypt");
         banned.add("Markov Dreadknight");
         banned.add("Memoricide");
         banned.add("Merfolk Mesmerist");
@@ -242,7 +240,6 @@ public class OldSchool9394CFB extends Constructed {
         banned.add("Warmonger");
         banned.add("Wash Out");
         banned.add("Wildfire Eternal");
-        banned.add("Windseeker Centaur");
         banned.add("Xathrid Necromancer");
         
         restricted.add("Ancestral Recall");

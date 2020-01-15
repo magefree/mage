@@ -89,7 +89,6 @@ public final class MediaInserts extends ExpansionSet {
         cards.add(new SetCardInfo("Garruk Wildspeaker", 16, Rarity.RARE, mage.cards.g.GarrukWildspeaker.class));
         cards.add(new SetCardInfo("Gaze of Granite", 81, Rarity.RARE, mage.cards.g.GazeOfGranite.class));
         cards.add(new SetCardInfo("Genesis Hydra", 142, Rarity.SPECIAL, mage.cards.g.GenesisHydra.class));
-        cards.add(new SetCardInfo("Giant Badger", 8, Rarity.SPECIAL, mage.cards.g.GiantBadger.class));
         cards.add(new SetCardInfo("Gideon of the Trials", 177, Rarity.MYTHIC, mage.cards.g.GideonOfTheTrials.class));
         cards.add(new SetCardInfo("Gideon, Ally of Zendikar", 172, Rarity.MYTHIC, mage.cards.g.GideonAllyOfZendikar.class));
         cards.add(new SetCardInfo("Gideon, Battle-Forged", 994, Rarity.SPECIAL, mage.cards.g.GideonBattleForged.class));
@@ -130,7 +129,6 @@ public final class MediaInserts extends ExpansionSet {
         cards.add(new SetCardInfo("Liliana Vess", 30, Rarity.RARE, mage.cards.l.LilianaVess.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Liliana Vess", 101, Rarity.MYTHIC, mage.cards.l.LilianaVess.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Magister of Worth", 86, Rarity.SPECIAL, mage.cards.m.MagisterOfWorth.class));
-        cards.add(new SetCardInfo("Mana Crypt", 6, Rarity.RARE, mage.cards.m.ManaCrypt.class));
         cards.add(new SetCardInfo("Markov Dreadknight", 151, Rarity.RARE, mage.cards.m.MarkovDreadknight.class));
         cards.add(new SetCardInfo("Memoricide", 29, Rarity.RARE, mage.cards.m.Memoricide.class));
         cards.add(new SetCardInfo("Merfolk Mesmerist", 45, Rarity.COMMON, mage.cards.m.MerfolkMesmerist.class));
@@ -207,7 +205,6 @@ public final class MediaInserts extends ExpansionSet {
         cards.add(new SetCardInfo("Warmonger", 12, Rarity.SPECIAL, mage.cards.w.Warmonger.class));
         cards.add(new SetCardInfo("Wash Out", 82, Rarity.UNCOMMON, mage.cards.w.WashOut.class));
         cards.add(new SetCardInfo("Wildfire Eternal", 166, Rarity.RARE, mage.cards.w.WildfireEternal.class));
-        cards.add(new SetCardInfo("Windseeker Centaur", 7, Rarity.SPECIAL, mage.cards.w.WindseekerCentaur.class));
         cards.add(new SetCardInfo("Xathrid Necromancer", 91, Rarity.SPECIAL, mage.cards.x.XathridNecromancer.class));
     }
 }
