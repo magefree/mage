@@ -164,7 +164,7 @@ public class Library implements Serializable {
      * @return
      */
     public List<Card> getCards(Game game) {
-        return library.stream().map(game::getCard).collect(Collectors.toList());
+        return library.stream().map(game::getCard).filter(Objects::nonNull).collect(Collectors.toList());
     }
 
     public Set<Card> getTopCards(Game game, int amount) {

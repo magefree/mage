@@ -99,6 +99,7 @@ class DanceOfTheManseEffect extends OneShotEffect {
                 .map(Target::getTargets)
                 .flatMap(Collection::stream)
                 .map(game::getCard)
+                .filter(Objects::nonNull)
                 .collect(Collectors.toSet()));
         player.moveCards(cards, Zone.BATTLEFIELD, source, game);
         if (source.getManaCostsToPay().getX() < 6) {

@@ -129,7 +129,7 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
 
     @Override
     public Set<Card> getCards(FilterCard filter, Game game) {
-        return stream().map(game::getCard).filter(card -> filter.match(card, game)).collect(Collectors.toSet());
+        return stream().map(game::getCard).filter(Objects::nonNull).filter(card -> filter.match(card, game)).collect(Collectors.toSet());
     }
 
     @Override

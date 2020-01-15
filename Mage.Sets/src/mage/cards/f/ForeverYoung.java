@@ -15,6 +15,7 @@ import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.Collection;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -74,6 +75,7 @@ class ForeverYoungEffect extends OneShotEffect {
                         .map(Target::getTargets)
                         .flatMap(Collection::stream)
                         .map(game::getCard)
+                        .filter(Objects::nonNull)
                         .collect(Collectors.toSet())
         ), game, source, true);
     }

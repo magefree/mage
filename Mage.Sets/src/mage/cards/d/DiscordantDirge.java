@@ -1,6 +1,5 @@
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -8,7 +7,6 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -23,8 +21,10 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
 
+import java.util.Objects;
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class DiscordantDirge extends CardImpl {
@@ -81,9 +81,9 @@ class DiscordantDirgeEffect extends OneShotEffect {
                 TargetCard target = new TargetCard(0, verseCounters, Zone.HAND, new FilterCard());
                 target.setNotTarget(true);
                 if (controller.choose(Outcome.Benefit, targetOpponent.getHand(), target, game)) {
-                    target.getTargets().stream().map(game::getCard).filter((card) -> (card != null
-                            &&  targetOpponent.getHand().contains(card.getId()))).forEachOrdered((card) -> {
-                                targetOpponent.discard(card, source, game);
+                    target.getTargets().stream().map(game::getCard).filter(Objects::nonNull).filter((card) -> (card != null
+                            && targetOpponent.getHand().contains(card.getId()))).forEachOrdered((card) -> {
+                        targetOpponent.discard(card, source, game);
                     });
                     return true;
                 }

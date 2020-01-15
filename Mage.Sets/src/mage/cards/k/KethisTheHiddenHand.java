@@ -18,6 +18,7 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -88,6 +89,7 @@ class KethisTheHiddenHandEffect extends ContinuousEffectImpl {
         player.getGraveyard()
                 .stream()
                 .map(game::getCard)
+                .filter(Objects::nonNull)
                 .filter(Card::isLegendary)
                 .forEach(card -> affectedObjectList.add(new MageObjectReference(card, game)));
     }

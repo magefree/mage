@@ -12,6 +12,7 @@ import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -70,6 +71,7 @@ class SharedSummonsTarget extends TargetCardInLibrary {
                 .getTargets()
                 .stream()
                 .map(game::getCard)
+                .filter(Objects::nonNull)
                 .noneMatch(c -> c != null && c.getName().equals(card.getName()));
     }
 }
