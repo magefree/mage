@@ -136,7 +136,6 @@ public final class MediaInserts extends ExpansionSet {
         cards.add(new SetCardInfo("Merfolk Mesmerist", 45, Rarity.COMMON, mage.cards.m.MerfolkMesmerist.class));
         cards.add(new SetCardInfo("Mirran Crusader", 32, Rarity.RARE, mage.cards.m.MirranCrusader.class));
         cards.add(new SetCardInfo("Munda's Vanguard", 143, Rarity.RARE, mage.cards.m.MundasVanguard.class));
-        cards.add(new SetCardInfo("Nalathni Dragon", 3, Rarity.SPECIAL, mage.cards.n.NalathniDragon.class));
         cards.add(new SetCardInfo("Necromaster Dragon", 114, Rarity.SPECIAL, mage.cards.n.NecromasterDragon.class));
         cards.add(new SetCardInfo("Nephalia Moondrakes", 150, Rarity.RARE, mage.cards.n.NephaliaMoondrakes.class));
         cards.add(new SetCardInfo("Niblis of Frost", 158, Rarity.RARE, mage.cards.n.NiblisOfFrost.class));

@@ -172,7 +172,6 @@ public class OldSchool9394CFB extends Constructed {
         banned.add("Merfolk Mesmerist");
         banned.add("Mirran Crusader");
         banned.add("Munda's Vanguard");
-        banned.add("Nalathni Dragon");
         banned.add("Necromaster Dragon");
         banned.add("Nephalia Moondrakes");
         banned.add("Niblis of Frost");
