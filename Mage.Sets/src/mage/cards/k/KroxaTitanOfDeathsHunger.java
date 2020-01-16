@@ -83,8 +83,7 @@ class KroxaTitanOfDeathsHungerEntersEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        Spell spell = game.getSpellOrLKIStack(source.getSourceId());
-        if (spell != null && spell.getSpellAbility() instanceof EscapeAbility) {
+        if (EscapeAbility.wasCastedWithEscape(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter())) {
             return false;
         }
         return permanent.sacrifice(source.getSourceId(), game);
