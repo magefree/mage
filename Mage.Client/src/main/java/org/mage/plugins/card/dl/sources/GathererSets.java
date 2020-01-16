@@ -61,7 +61,7 @@ public class GathererSets implements Iterable<DownloadJob> {
             "POR", "P02", "PTK",
             "ARC", "DD3EVG",
             "W16", "W17",
-            // "APAC" -- gatherer do not have that set, scryfall has PALP
+            // "PALP" -- Gatherer does not have the set Asia Pacific Land Program
             // "ARENA" -- is't many set with different codes, not one
             // "ATH" -- has cards from many sets, symbol does not exist on gatherer
             // "CLASH", "CP", "DPA", "EURO", "FNMP", "GPX", "GRC", "GUR", "H17", "JR", "MBP", "MGDC", "MLP", "MPRP", "PTC", "SUS", "SWS", "WMCQ", // need to fix

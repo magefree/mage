@@ -1508,7 +1508,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         pimpedSets.put("ARENA", 1);
         pimpedSets.put("UGIN", 1);
         pimpedSets.put("WMCQ", 1);
-        pimpedSets.put("APAC", 1);
+        pimpedSets.put("PALP", 1);
         pimpedSets.put("EURO", 1);
         pimpedSets.put("FNMP", 1);
         pimpedSets.put("MGDC", 1);

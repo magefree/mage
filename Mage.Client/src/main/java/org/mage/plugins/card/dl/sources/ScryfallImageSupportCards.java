@@ -258,7 +258,8 @@ public class ScryfallImageSupportCards {
             add("ELD");
             add("THB");
             //
-            add("EURO");
+            add("PALP");
+            add("PELP");
             add("GPX");
             add("ATH");
             add("GRC");
