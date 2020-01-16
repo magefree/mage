@@ -1,8 +1,7 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Gender;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
@@ -14,8 +13,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class ConquerorsGalleon extends CardImpl {
@@ -34,7 +34,7 @@ public final class ConquerorsGalleon extends CardImpl {
         this.addAbility(new TransformAbility());
         this.addAbility(new AttacksTriggeredAbility(
                 new CreateDelayedTriggeredAbilityEffect(
-                        new AtTheEndOfCombatDelayedTriggeredAbility(new ExileAndReturnTransformedSourceEffect())),
+                        new AtTheEndOfCombatDelayedTriggeredAbility(new ExileAndReturnTransformedSourceEffect(Gender.NEUTRAL, null, true))),
                 false,
                 "When {this} attacks, exile it at the end of combat, then return it to the battlefield transformed under your control."));
 

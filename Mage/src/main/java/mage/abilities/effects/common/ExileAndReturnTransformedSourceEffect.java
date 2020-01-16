@@ -24,6 +24,7 @@ import mage.players.Player;
 public class ExileAndReturnTransformedSourceEffect extends OneShotEffect {
 
     protected Effect additionalEffect;
+    protected boolean returnUnderYourControl;
 
     public ExileAndReturnTransformedSourceEffect() {
         this(Gender.NEUTRAL);
@@ -33,20 +34,28 @@ public class ExileAndReturnTransformedSourceEffect extends OneShotEffect {
         this(gender, null);
     }
 
+    public ExileAndReturnTransformedSourceEffect(Gender gender, Effect additionalEffect) {
+        this(gender, additionalEffect, false);
+    }
+
     /**
      * @param gender
-     * @param additionalEffect that effect is applies as source is exiled
+     * @param additionalEffect       that effect is applies as source is exiled
+     * @param returnUnderYourControl return under your or owner control
      */
-    public ExileAndReturnTransformedSourceEffect(Gender gender, Effect additionalEffect) {
+    public ExileAndReturnTransformedSourceEffect(Gender gender, Effect additionalEffect, boolean returnUnderYourControl) {
         super(Outcome.Benefit);
         this.additionalEffect = additionalEffect;
+        this.returnUnderYourControl = returnUnderYourControl;
         this.staticText = "exile {this}, then return " + gender.getPersonalPronoun()
-                + " to the battlefield transformed under " + gender.getPossesivePronoun() + " owner's control";
+                + " to the battlefield transformed under " + gender.getPossesivePronoun()
+                + " " + (this.returnUnderYourControl ? "your" : "owner's") + " control";
     }
 
     public ExileAndReturnTransformedSourceEffect(final ExileAndReturnTransformedSourceEffect effect) {
         super(effect);
         this.additionalEffect = effect.additionalEffect;
+        this.returnUnderYourControl = effect.returnUnderYourControl;
     }
 
     @Override
@@ -64,7 +73,7 @@ public class ExileAndReturnTransformedSourceEffect extends OneShotEffect {
                 game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
                 Card cardFromExile = game.getCard(source.getSourceId());
                 if (cardFromExile != null) {
-                    controller.moveCards(cardFromExile, Zone.BATTLEFIELD, source, game, false, false, true, null);
+                    controller.moveCards(cardFromExile, Zone.BATTLEFIELD, source, game, false, false, !this.returnUnderYourControl, null);
                     if (additionalEffect != null) {
                         if (additionalEffect instanceof ContinuousEffect) {
                             game.addEffect((ContinuousEffect) additionalEffect, source);
