@@ -48,6 +48,7 @@ public class ScryfallImageSupportCards {
             add("VIS");
             add("5ED");
             add("POR");
+            add("PPOD");
             add("WTH");
             add("TMP");
             add("STH");
