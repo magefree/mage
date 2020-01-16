@@ -81,7 +81,7 @@ public class ScryfallImageSupportCards {
             add("PTK");
             add("S99");
             add("MMQ");
-            // add("BRB");Battle Royale Box Set
+            add("BRB");
             add("NEM");
             add("S00");
             add("PCY");
