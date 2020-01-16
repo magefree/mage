@@ -85,7 +85,7 @@ public class ScryfallImageSupportCards {
             add("S00");
             add("PCY");
             add("INV");
-            // add("BTD"); // Beatdown Boxset
+            add("BTD");
             add("PLS");
             add("7ED");
             add("APC");
