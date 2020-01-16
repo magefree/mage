@@ -13,6 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.token.YoungPyromancerElementalToken;
@@ -38,6 +39,7 @@ public final class SeasonedPyromancer extends CardImpl {
 
         // {3}{R}{R}, Exile Seasoned Pyromancer from your graveyard: Create two 1/1 red Elemental creature tokens.
         Ability ability = new SimpleActivatedAbility(
+                Zone.GRAVEYARD,
                 new CreateTokenEffect(new YoungPyromancerElementalToken(), 2),
                 new ManaCostsImpl("{3}{R}{R}")
         );
