@@ -152,7 +152,6 @@ public enum UserManager {
                     -> USER_EXECUTOR.execute(
                     () -> {
                         try {
-                            logger.info("INFORM OPPONENTS by " + user.getName() + ": " + message);
                             ChatManager.instance.sendMessageToUserChats(user.getId(), message);
                         } catch (Exception ex) {
                             handleException(ex);

@@ -20,6 +20,7 @@ import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -320,13 +321,24 @@ public enum ChatManager {
         UserManager.instance.getUser(userId).ifPresent(user -> sendMessageToUserChats(userId, user.getName() + " " + reason.getMessage()));
     }
 
+    /**
+     * Send message to all active waiting/tourney/game chats (but not in main lobby)
+     *
+     * @param userId
+     * @param message
+     */
     public void sendMessageToUserChats(UUID userId, String message) {
-        UserManager.instance.getUser(userId).ifPresent(user
-                -> getChatSessions()
-                .stream()
-                .filter(chat -> !chat.getChatId().equals(GamesRoomManager.instance.getMainChatId())) // ignore main lobby
-                .filter(chat -> chat.hasUser(userId))
-                .forEach(chatSession -> chatSession.broadcast(null, message, MessageColor.BLUE, true, MessageType.STATUS, null)));
+        UserManager.instance.getUser(userId).ifPresent(user -> {
+            List<ChatSession> chatSessions = getChatSessions().stream()
+                    .filter(chat -> !chat.getChatId().equals(GamesRoomManager.instance.getMainChatId())) // ignore main lobby
+                    .filter(chat -> chat.hasUser(userId))
+                    .collect(Collectors.toList());
+
+            if (chatSessions.size() > 0) {
+                logger.info("INFORM OPPONENTS by " + user.getName() + ": " + message);
+                chatSessions.forEach(chatSession -> chatSession.broadcast(null, message, MessageColor.BLUE, true, MessageType.STATUS, null));
+            }
+        });
     }
 
     public void removeUser(UUID userId, DisconnectReason reason) {
