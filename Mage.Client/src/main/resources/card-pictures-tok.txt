@@ -1342,3 +1342,17 @@
 |Generate|TOK:ELD|Mouse|||MouseToken|
 |Generate|TOK:ELD|Rat|||RatToken|
 |Generate|TOK:ELD|Wolf|||GarrukCursedHuntsmanToken|
+|Generate|TOK:THB|Goat|||GoatToken|
+|Generate|TOK:THB|Human Soldier|||HumanSoldierToken|
+|Generate|TOK:THB|Pegasus|||PegasusToken2|
+|Generate|TOK:THB|Kraken|||KrakenHexproofToken|
+|Generate|TOK:THB|Reflection|||ReflectionBlueToken|
+|Generate|TOK:THB|Tentacle|||TentacleToken|
+|Generate|TOK:THB|Zombie|||ZombieToken|
+|Generate|TOK:THB|Elemental|||PurphorossInterventionToken|
+|Generate|TOK:THB|Satyr|||SatyrCantBlockToken|
+|Generate|TOK:THB|Spider|||SpiderToken|
+|Generate|TOK:THB|Wolf|||WolfToken|
+|Generate|TOK:THB|Nightmare|||AshiokNightmareMuseToken|
+|Generate|TOK:THB|GoldToken|||Gold|
+|Generate|TOK:THB|ArtifactWallToken|||Wall|
