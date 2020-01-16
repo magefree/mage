@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mage.game.permanent.token;
 
 import mage.MageInt;
@@ -22,7 +17,7 @@ public final class SpiderToken extends TokenImpl {
     static final private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("ISD", "EMN", "C15", "SHM", "MH1"));
+        tokenImageSets.addAll(Arrays.asList("ISD", "EMN", "C15", "SHM", "MH1", "THB"));
     }
 
     public SpiderToken() {

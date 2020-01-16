@@ -334,6 +334,22 @@ public class ScryfallImageSupportTokens {
             put("ELD/Rat", "https://api.scryfall.com/cards/teld/6/en?format=image");
             put("ELD/Wolf", "https://api.scryfall.com/cards/teld/14/en?format=image");
 
+            // THB
+            put("THB/Elemental", "https://api.scryfall.com/cards/tthb/8/en?format=image");
+            put("THB/Goat", "https://api.scryfall.com/cards/tthb/1/en?format=image");
+            put("THB/Gold", "https://api.scryfall.com/cards/tthb/13/en?format=image");
+            put("THB/Human Soldier", "https://api.scryfall.com/cards/tthb/2/en?format=image");
+            put("THB/Kraken", "https://api.scryfall.com/cards/tthb/4/en?format=image");
+            put("THB/Nightmare", "https://api.scryfall.com/cards/tthb/12/en?format=image");
+            put("THB/Pegasus", "https://api.scryfall.com/cards/tthb/3/en?format=image");
+            put("THB/Reflection", "https://api.scryfall.com/cards/tthb/5/en?format=image");
+            put("THB/Satyr", "https://api.scryfall.com/cards/tthb/9/en?format=image");
+            put("THB/Spider", "https://api.scryfall.com/cards/tthb/10/en?format=image");
+            put("THB/Tentacle", "https://api.scryfall.com/cards/tthb/6/en?format=image");
+            put("THB/Wall", "https://api.scryfall.com/cards/tthb/14/en?format=image");
+            put("THB/Wolf", "https://api.scryfall.com/cards/tthb/11/en?format=image");
+            put("THB/Zombie", "https://api.scryfall.com/cards/tthb/7/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
