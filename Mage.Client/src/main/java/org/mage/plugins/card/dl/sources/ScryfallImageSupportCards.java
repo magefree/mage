@@ -73,7 +73,7 @@ public class ScryfallImageSupportCards {
             add("PDRC");
             add("PHPR");
             add("PLGM");
-
+            
             add("MGB");
             add("ULG");
             add("6ED");
