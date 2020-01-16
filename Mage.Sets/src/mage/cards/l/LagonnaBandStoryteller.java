@@ -18,6 +18,8 @@ import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
+import mage.cards.Cards;
+import mage.constants.Zone;
 
 /**
  * @author TheElk801
@@ -34,7 +36,9 @@ public final class LagonnaBandStoryteller extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 
-        // When Lagonna-Band Storyteller enters the battlefield, you may put target enchantment card from your graveyard on top of your library. If you do, you gain life equal to its converted mana cost.
+        // When Lagonna-Band Storyteller enters the battlefield, you may put target 
+        // enchantment card from your graveyard on top of your library. 
+        // If you do, you gain life equal to its converted mana cost.
         Ability ability = new EntersBattlefieldTriggeredAbility(new LagonnaBandStorytellerEffect(), true);
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
@@ -54,8 +58,8 @@ class LagonnaBandStorytellerEffect extends OneShotEffect {
 
     LagonnaBandStorytellerEffect() {
         super(Outcome.Benefit);
-        staticText = "put target enchantment card from your graveyard on top of your library. " +
-                "If you do, you gain life equal to its converted mana cost.";
+        staticText = "put target enchantment card from your graveyard on top of your library. "
+                + "If you do, you gain life equal to its converted mana cost.";
     }
 
     private LagonnaBandStorytellerEffect(final LagonnaBandStorytellerEffect effect) {
@@ -69,16 +73,19 @@ class LagonnaBandStorytellerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getSourceId());
+        Player controller = game.getPlayer(source.getControllerId());
         Card card = game.getCard(source.getFirstTarget());
-        if (player == null || card == null) {
+        if (controller == null
+                || card == null
+                || !card.isEnchantment()
+                || game.getState().getZone(card.getId()) != Zone.GRAVEYARD) {
             return false;
         }
         int cmc = card.getConvertedManaCost();
-        if (!player.putCardsOnTopOfLibrary(new CardsImpl(card), game, source, false)) {
-            return false;
+        if (controller.putCardsOnTopOfLibrary(new CardsImpl(card), game, source, false)) {
+            controller.gainLife(cmc, game, source);
+            return true;
         }
-        player.gainLife(cmc, game, source);
-        return true;
+        return false;
     }
 }
