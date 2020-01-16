@@ -8,8 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -33,7 +32,7 @@ public final class BonfireOfTheDamned extends CardImpl {
         this.addAbility(new MiracleAbility(this, new ManaCostsImpl("{X}{R}")));
     }
 
-    public BonfireOfTheDamned(final BonfireOfTheDamned card) {
+    private BonfireOfTheDamned(final BonfireOfTheDamned card) {
         super(card);
     }
 
@@ -45,31 +44,35 @@ public final class BonfireOfTheDamned extends CardImpl {
 
 class BonfireOfTheDamnedEffect extends OneShotEffect {
 
-    private static FilterPermanent filter = new FilterCreaturePermanent();
-
-    public BonfireOfTheDamnedEffect() {
+    BonfireOfTheDamnedEffect() {
         super(Outcome.Damage);
-        staticText = "{this} deals X damage to target player or planeswalker and each creature that player or that planeswalker's controller controls";
+        staticText = "{this} deals X damage to target player or planeswalker " +
+                "and each creature that player or that planeswalker's controller controls";
     }
 
-    public BonfireOfTheDamnedEffect(final BonfireOfTheDamnedEffect effect) {
+    private BonfireOfTheDamnedEffect(final BonfireOfTheDamnedEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
+        int damage = source.getManaCostsToPay().getX();
+        if (damage < 1) {
+            return false;
+        }
+        game.damagePlayerOrPlaneswalker(
+                source.getFirstTarget(), damage, source.getSourceId(), game, false, true
+        );
         Player player = game.getPlayerOrPlaneswalkerController(source.getFirstTarget());
-        if (player != null) {
-            int damage = source.getManaCostsToPay().getX();
-            if (damage > 0) {
-                player.damage(damage, source.getSourceId(), game);
-                for (Permanent perm : game.getBattlefield().getAllActivePermanents(filter, player.getId(), game)) {
-                    perm.damage(damage, source.getSourceId(), game);
-                }
-            }
+        if (player == null) {
             return true;
         }
-        return false;
+        for (Permanent perm : game.getBattlefield().getAllActivePermanents(
+                StaticFilters.FILTER_PERMANENT_CREATURE, player.getId(), game
+        )) {
+            perm.damage(damage, source.getSourceId(), game);
+        }
+        return true;
     }
 
     @Override
