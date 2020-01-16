@@ -66,7 +66,7 @@ class TectonicGiantTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DECLARED_ATTACKERS
-                && event.getType() == GameEvent.EventType.TARGETED;
+                || event.getType() == GameEvent.EventType.TARGETED;
     }
 
     @Override
