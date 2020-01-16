@@ -1,7 +1,5 @@
-
 package mage.abilities.effects.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -13,8 +11,9 @@ import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public class ExileCardFromOwnGraveyardControllerEffect extends OneShotEffect {
@@ -39,10 +38,10 @@ public class ExileCardFromOwnGraveyardControllerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if(player != null){
+        if (player != null) {
             TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(Math.min(amount, player.getGraveyard().size()), new FilterCard());
             if (player.chooseTarget(outcome, target, source, game)) {
-                for (UUID targetId: target.getTargets()) {
+                for (UUID targetId : target.getTargets()) {
                     Card card = player.getGraveyard().get(targetId, game);
                     if (card != null) {
                         card.moveToZone(Zone.EXILED, source.getSourceId(), game, false);
@@ -57,9 +56,9 @@ public class ExileCardFromOwnGraveyardControllerEffect extends OneShotEffect {
     private String setText() {
         StringBuilder sb = new StringBuilder("exile ");
         if (amount == 1) {
-            sb.append(" a card ");
+            sb.append("a card ");
         } else {
-            sb.append(CardUtil.numberToText(amount)). append(" cards ");
+            sb.append(CardUtil.numberToText(amount)).append(" cards ");
         }
         sb.append("from your graveyard");
         return sb.toString();

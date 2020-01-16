@@ -165,7 +165,7 @@ public final class ZonesHandler {
                     game.getPermanentsEntering().remove(permanent.getId());
                     break;
                 default:
-                    throw new UnsupportedOperationException("to Zone" + toZone.toString() + " not supported yet");
+                    throw new UnsupportedOperationException("to Zone " + toZone.toString() + " not supported yet");
             }
         }
         game.setZone(event.getTargetId(), event.getToZone());

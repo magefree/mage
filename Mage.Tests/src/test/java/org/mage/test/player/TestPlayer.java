@@ -62,7 +62,6 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import static org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl.*;
 
@@ -2035,7 +2034,7 @@ public class TestPlayer implements Player {
             Assert.fail(message);
         }
 
-        this.chooseStrictModeFailed("target", game,getInfo(source, game) + "\n" + getInfo(target));
+        this.chooseStrictModeFailed("target", game, getInfo(source, game) + "\n" + getInfo(target));
         return computerPlayer.chooseTarget(outcome, target, source, game);
     }
 
@@ -2128,7 +2127,8 @@ public class TestPlayer implements Player {
             }
         }
 
-        this.chooseStrictModeFailed("choice", game, getInfo(ability, game) + "; " + message);
+        this.chooseStrictModeFailed("choice", game, getInfo(ability, game)
+                + "\nMessage: " + message);
         return computerPlayer.announceXMana(min, max, multiplier, message, game, ability);
     }
 
@@ -2142,7 +2142,8 @@ public class TestPlayer implements Player {
             }
         }
 
-        this.chooseStrictModeFailed("choice", game, getInfo(ability, game) + "; " + message);
+        this.chooseStrictModeFailed("choice", game, getInfo(ability, game)
+                + "\nMessage: " + message);
         return computerPlayer.announceXCost(min, max, message, game, ability, null);
     }
 
