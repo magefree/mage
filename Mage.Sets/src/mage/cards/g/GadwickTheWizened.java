@@ -105,7 +105,7 @@ enum GadwickTheWizenedValue implements DynamicValue {
 class GadwickTheWizenedWatcher extends Watcher {
 
     GadwickTheWizenedWatcher() {
-        super(WatcherScope.GAME);
+        super(WatcherScope.CARD);
     }
 
     @Override
