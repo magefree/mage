@@ -59,7 +59,7 @@ class BeastWithinEffect extends OneShotEffect {
         // If the permanent is an illegal target when Beast Within tries to resolve, the spell won’t resolve and none
         // of its effects will happen. The permanent’s controller won’t get a Beast token.
         // (2011-06-01)
-        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        Permanent permanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source)); // must use LKI
         if (permanent != null) {
             new BeastToken().putOntoBattlefield(1, game, source.getSourceId(), permanent.getControllerId());
         }

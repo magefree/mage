@@ -44,6 +44,7 @@ public final class FaerieArtisans extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+
         // Whenever a nontoken creature enters the battlefield under an opponent's control, create a token that's a copy of that creature except it's an artifact in addition to its other types. Then exile all other tokens created with Faerie Artisans.
         Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new FaerieArtisansEffect(), filterNontoken, false, SetTargetPointer.PERMANENT,
                 "Whenever a nontoken creature enters the battlefield under an opponent's control, create a token that's a copy of that creature except it's an artifact in addition to its other types. Then exile all other tokens created with {this}.");

@@ -58,8 +58,9 @@ class CrumbleEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        // If the target artifact becomes illegal before resolution, the player does not gain any life. (2004-10-04)
-        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        // If the target artifact becomes illegal before resolution, the player does not gain any life.
+        // (2004-10-04)
+        Permanent permanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source)); // must use LKI
         if (permanent != null) {
             int cost = permanent.getConvertedManaCost();
             Player player = game.getPlayer(permanent.getControllerId());
