@@ -126,11 +126,13 @@ class MizzixsMasteryOverloadEffect extends OneShotEffect {
                         copiedCards.add(game.copyCard(card, source, source.getControllerId()));
                     }
                     boolean continueCasting = true;
-                    while (continueCasting && controller.isInGame()) {
-                        TargetCard targetCard = new TargetCard(0, 1, Zone.EXILED,
+                    while (continueCasting
+                            && controller.isInGame()
+                            && !copiedCards.isEmpty()) {
+                        TargetCard targetCard = new TargetCard(0, 1, Zone.OUTSIDE,
                                 new FilterCard("copied card to cast without paying its mana cost?"));
                         targetCard.setNotTarget(true);
-                        if (controller.choose(Outcome.PlayForFree, copiedCards, targetCard, game)) {
+                        if (controller.chooseTarget(Outcome.PlayForFree, copiedCards, targetCard, source, game)) {
                             Card selectedCard = game.getCard(targetCard.getFirstTarget());
                             if (selectedCard != null
                                     && selectedCard.getSpellAbility().canChooseTarget(game)) {
@@ -144,8 +146,7 @@ class MizzixsMasteryOverloadEffect extends OneShotEffect {
                             }
                         }
                         continueCasting = !copiedCards.isEmpty()
-                                && controller.chooseUse(Outcome.PlayForFree, "Cast one of the copied "
-                                        + "cards without paying its mana cost?", source, game);
+                                && controller.chooseUse(Outcome.Benefit, "Continue to choose copies and cast?", source, game);
                     }
                 }
             }
