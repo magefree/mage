@@ -90,7 +90,10 @@ class RashmiEternitiesCrafterTriggeredAbility extends SpellCastControllerTrigger
 
     @Override
     public String getRule() {
-        return "Whenever you cast your first spell each turn, reveal the top card of your library. If it's a nonland card with converted mana cost less than that spell's, you may cast it without paying its mana cost. If you don't cast the revealed card, put it into your hand.";
+        return "Whenever you cast your first spell each turn, reveal the top card "
+                + "of your library. If it's a nonland card with converted mana "
+                + "cost less than that spell's, you may cast it without paying "
+                + "its mana cost. If you don't cast the revealed card, put it into your hand.";
     }
 }
 
@@ -98,7 +101,10 @@ class RashmiEternitiesCrafterEffect extends OneShotEffect {
 
     RashmiEternitiesCrafterEffect() {
         super(Outcome.PlayForFree);
-        this.staticText = "reveal the top card of your library. If it's a nonland card with converted mana cost less than that spell's, you may cast it without paying its mana cost. If you don't cast the revealed card, put it into your hand";
+        this.staticText = "reveal the top card of your library. If it's a nonland"
+                + " card with converted mana cost less than that spell's, you may "
+                + "cast it without paying its mana cost. If you don't cast the "
+                + "revealed card, put it into your hand";
     }
 
     RashmiEternitiesCrafterEffect(final RashmiEternitiesCrafterEffect effect) {
@@ -112,26 +118,31 @@ class RashmiEternitiesCrafterEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Boolean cardWasCast = false;
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Card card = controller.getLibrary().getFromTop(game);
             if (card != null) {
                 controller.revealCards("Rashmi, Eternities Crafter", new CardsImpl(card), game);
+                if (card.isLand()) {
+                    controller.moveCards(card, Zone.HAND, source, game);
+                    return true;
+                }
                 Object cmcObject = this.getValue("RashmiEternitiesCrafterCMC");
-                if (cmcObject == null
-                        || card.isLand()
-                        || card.getConvertedManaCost() >= (int) cmcObject
-                        || !controller.chooseUse(Outcome.PlayForFree, "Cast " + card.getName() + " without paying its mana cost?", source, game)) {
+                if (cmcObject != null
+                        && card.getConvertedManaCost() < (int) cmcObject
+                        && controller.chooseUse(Outcome.PlayForFree, "Cast " + card.getName()
+                                + " without paying its mana cost?", source, game)) {
                     game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
-                    Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
+                    cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
                             game, true, new MageObjectReference(source.getSourceObject(game), game));
                     game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
-                    if (!cardWasCast) {
-                        controller.moveCards(card, Zone.HAND, source, game);
-                    }
                 }
+                if (!cardWasCast) {
+                    controller.moveCards(card, Zone.HAND, source, game);
+                }
+                return true;
             }
-            return true;
         }
         return false;
     }
