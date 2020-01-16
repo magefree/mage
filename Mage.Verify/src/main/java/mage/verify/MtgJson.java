@@ -36,7 +36,7 @@ public final class MtgJson {
         mtgJsonToXMageCodes.put("pGRU", "GUR");
         mtgJsonToXMageCodes.put("pGPX", "GPX");
         mtgJsonToXMageCodes.put("pFNM", "FNMP");
-        mtgJsonToXMageCodes.put("pELP", "EURO");
+        mtgJsonToXMageCodes.put("pELP", "PELP");
         mtgJsonToXMageCodes.put("pARL", "ARENA");
         mtgJsonToXMageCodes.put("pALP", "PALP");
         mtgJsonToXMageCodes.put("PO2", "P02");

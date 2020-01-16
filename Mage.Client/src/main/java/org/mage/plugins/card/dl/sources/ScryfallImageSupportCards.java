@@ -20,7 +20,6 @@ public class ScryfallImageSupportCards {
             put("MPS-AKH", "mp2").
             put("MBP", "pmei").
             put("WMCQ", "pwcq").
-            put("EURO", "pelp").
             put("GPX", "pgpx").
             put("MED", "me1").
             put("MEDM", "med").
