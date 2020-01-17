@@ -28,7 +28,7 @@ public final class RiseToGlory extends CardImpl {
 
         // Choose one or both —
         this.getSpellAbility().getModes().setMinModes(1);
-        this.getSpellAbility().getModes().setMinModes(2);
+        this.getSpellAbility().getModes().setMaxModes(2);
 
         // • Return target creature card from your graveyard to the battlefield.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
