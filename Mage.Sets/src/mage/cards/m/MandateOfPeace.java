@@ -29,10 +29,13 @@ public final class MandateOfPeace extends CardImpl {
 
     public MandateOfPeace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");
+
         // Cast this spell only during combat.
         this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(TurnPhase.COMBAT));
+
         // Your opponents can't cast spells this turn.
         this.getSpellAbility().addEffect(new MandateOfPeaceOpponentsCantCastSpellsEffect());
+
         // End the combat phase.
         this.getSpellAbility().addEffect(new MandateOfPeaceEndCombatEffect());
     }
@@ -93,7 +96,9 @@ class MandateOfPeaceEndCombatEffect extends OneShotEffect {
 
     public MandateOfPeaceEndCombatEffect() {
         super(Outcome.Benefit);
-        this.staticText = "End the combat phase. <i>(Remove all attackers and blockers from combat. Exile all spells and abilities from the stack, including this spell.)</i>";
+        this.staticText = "End the combat phase. <i>(Remove all attackers "
+                + "and blockers from combat. Exile all spells and abilities "
+                + "from the stack, including this spell.)</i>";
     }
 
     public MandateOfPeaceEndCombatEffect(OneShotEffect effect) {
@@ -109,16 +114,16 @@ class MandateOfPeaceEndCombatEffect extends OneShotEffect {
                 .map(id -> game.getPermanent(id))
                 .filter(e -> e != null)
                 .forEach(permanent -> permanent.removeFromCombat(game));
-
-        game.getStack().stream()
-                .filter(stackObject -> stackObject instanceof Spell)
-                .forEach(stackObject -> ((Spell) stackObject).moveToExile(null, "", null, game));
-
-        game.getStack().stream()
-                .filter(stackObject -> stackObject instanceof Ability)
-                .forEach(stackObject -> game.getStack().counter(stackObject.getId(), source.getSourceId(), game));
-
         combat.endCombat(game);
+        if (!game.getStack().isEmpty()) {
+            game.getStack().stream()
+                    .filter(stackObject -> stackObject instanceof Spell)
+                    .forEach(stackObject -> ((Spell) stackObject).moveToExile(null, "", null, game));
+
+            game.getStack().stream()
+                    .filter(stackObject -> stackObject instanceof Ability)
+                    .forEach(stackObject -> game.getStack().remove(stackObject, game));
+        }
         return true;
     }
 
