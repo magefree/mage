@@ -79,21 +79,22 @@ class CollectedConjuringEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
-        if (controller == null 
+        if (controller == null
                 || sourceObject == null) {
             return false;
         }
         Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 6));
+        Cards cardsToChoose = new CardsImpl(cards);
         controller.moveCards(cards, Zone.EXILED, source, game);
         int cardsCast = 0;
-        while (!cards.getCards(filter, source.getSourceId(), source.getControllerId(), game).isEmpty() 
+        while (!cardsToChoose.getCards(filter, source.getSourceId(), source.getControllerId(), game).isEmpty()
                 && cardsCast < 2) {
             if (!controller.chooseUse(Outcome.PlayForFree, "Cast a card exiled with "
                     + sourceObject.getLogName() + " without paying its mana cost?", source, game)) {
                 break;
             }
             TargetCard targetCard = new TargetCard(1, Zone.EXILED, filter2);
-            if (!controller.choose(Outcome.PlayForFree, cards, targetCard, game)) {
+            if (!controller.choose(Outcome.PlayForFree, cardsToChoose, targetCard, game)) {
                 continue;
             }
             Card card = game.getCard(targetCard.getFirstTarget());
@@ -104,11 +105,12 @@ class CollectedConjuringEffect extends OneShotEffect {
             Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
                     game, true, new MageObjectReference(source.getSourceObject(game), game));
             game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
+            cardsToChoose.remove(card); // remove on non cast too (infinite freeze fix)
             if (cardWasCast) {
                 cards.remove(card);
                 cardsCast++;
             } else {
-                game.informPlayer(controller, "You're not able to cast " 
+                game.informPlayer(controller, "You're not able to cast "
                         + card.getIdName() + " or you canceled the casting.");
             }
         }

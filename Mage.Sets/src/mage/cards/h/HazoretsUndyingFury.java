@@ -1,22 +1,12 @@
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepAllEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.cards.*;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.Predicates;
@@ -26,8 +16,9 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 
+import java.util.UUID;
+
 /**
- *
  * @author ciaccona007
  */
 public final class HazoretsUndyingFury extends CardImpl {
@@ -87,7 +78,7 @@ class HazoretsUndyingFuryEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
-        if (controller != null 
+        if (controller != null
                 && sourceObject != null) {
             controller.shuffleLibrary(source, game);
             // move cards from library to exile
@@ -101,13 +92,13 @@ class HazoretsUndyingFuryEffect extends OneShotEffect {
             }
             cardsToCast.addAll(hazoretsUndyingFuryExileZone.getCards(filter,
                     source.getSourceId(), source.getControllerId(), game));
-            while (!cardsToCast.isEmpty()) {
+            while (controller.canRespond() && !cardsToCast.isEmpty()) {
                 if (!controller.chooseUse(Outcome.PlayForFree,
                         "Cast (another) a card exiled with "
-                        + sourceObject.getLogName() + " without paying its mana cost?", source, game)) {
+                                + sourceObject.getLogName() + " without paying its mana cost?", source, game)) {
                     break;
                 }
-                TargetCard targetCard = new TargetCard(1, Zone.EXILED, 
+                TargetCard targetCard = new TargetCard(1, Zone.EXILED,
                         new FilterCard("nonland card to cast for free"));
                 if (controller.choose(Outcome.PlayForFree, cardsToCast, targetCard, game)) {
                     Card card = game.getCard(targetCard.getFirstTarget());
@@ -116,10 +107,9 @@ class HazoretsUndyingFuryEffect extends OneShotEffect {
                         Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
                                 game, true, new MageObjectReference(source.getSourceObject(game), game));
                         game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
-                        if (cardWasCast) {
-                            cardsToCast.remove(card);
-                        } else {
-                            game.informPlayer(controller, "You're not able to cast " 
+                        cardsToCast.remove(card);
+                        if (!cardWasCast) {
+                            game.informPlayer(controller, "You're not able to cast "
                                     + card.getIdName() + " or you canceled the casting.");
                         }
                     }

@@ -1,6 +1,5 @@
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -19,8 +18,9 @@ import mage.target.common.TargetCardInExile;
 import mage.target.common.TargetOpponent;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class VillainousWealth extends CardImpl {
@@ -85,7 +85,8 @@ class VillainousWealthEffect extends OneShotEffect {
                         }
                         TargetCardInExile target = new TargetCardInExile(0, 1, filter, exileId, false);
                         target.setNotTarget(true);
-                        while (cardsToExile.count(filter, game) > 0 
+                        while (controller.canRespond()
+                                && cardsToExile.count(filter, game) > 0
                                 && controller.choose(Outcome.PlayForFree, cardsToExile, target, game)) {
                             Card card = game.getCard(target.getFirstTarget());
                             if (card != null) {

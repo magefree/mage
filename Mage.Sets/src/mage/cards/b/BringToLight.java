@@ -1,6 +1,5 @@
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.ColorsOfManaSpentToCastCount;
@@ -20,8 +19,9 @@ import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import org.apache.log4j.Logger;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class BringToLight extends CardImpl {
@@ -86,8 +86,7 @@ class BringToLightEffect extends OneShotEffect {
                     Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
                             game, true, new MageObjectReference(source.getSourceObject(game), game));
                     game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
-                    if (cardWasCast) {
-                    } else {
+                    if (!cardWasCast) {
                         Logger.getLogger(BringToLightEffect.class).error("Bring to Light: spellAbility == null " + card.getName());
                     }
                 }

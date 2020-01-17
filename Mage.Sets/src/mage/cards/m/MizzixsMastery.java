@@ -81,7 +81,7 @@ class MizzixsMasteryEffect extends OneShotEffect {
                     Card cardCopy = game.copyCard(card, source, source.getControllerId());
                     if (cardCopy.getSpellAbility().canChooseTarget(game)
                             && controller.chooseUse(outcome, "Cast copy of "
-                                    + card.getName() + " without paying its mana cost?", source, game)) {
+                            + card.getName() + " without paying its mana cost?", source, game)) {
                         game.getState().setValue("PlayFromNotOwnHandZone" + cardCopy.getId(), Boolean.TRUE);
                         controller.cast(controller.chooseAbilityForCast(cardCopy, game, true),
                                 game, true, new MageObjectReference(source.getSourceObject(game), game));
@@ -126,8 +126,8 @@ class MizzixsMasteryOverloadEffect extends OneShotEffect {
                         copiedCards.add(game.copyCard(card, source, source.getControllerId()));
                     }
                     boolean continueCasting = true;
-                    while (continueCasting
-                            && controller.isInGame()
+                    while (controller.canRespond()
+                            && continueCasting
                             && !copiedCards.isEmpty()) {
                         TargetCard targetCard = new TargetCard(0, 1, Zone.OUTSIDE,
                                 new FilterCard("copied card to cast without paying its mana cost?"));
@@ -137,13 +137,11 @@ class MizzixsMasteryOverloadEffect extends OneShotEffect {
                             if (selectedCard != null
                                     && selectedCard.getSpellAbility().canChooseTarget(game)) {
                                 game.getState().setValue("PlayFromNotOwnHandZone" + selectedCard.getId(), Boolean.TRUE);
-                                Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(selectedCard, game, true),
+                                controller.cast(controller.chooseAbilityForCast(selectedCard, game, true),
                                         game, true, new MageObjectReference(source.getSourceObject(game), game));
                                 game.getState().setValue("PlayFromNotOwnHandZone" + selectedCard.getId(), null);
-                                if (cardWasCast) {
-                                    copiedCards.remove(selectedCard);
-                                }
                             }
+                            copiedCards.remove(selectedCard);
                         }
                         continueCasting = !copiedCards.isEmpty()
                                 && controller.chooseUse(Outcome.Benefit, "Continue to choose copies and cast?", source, game);

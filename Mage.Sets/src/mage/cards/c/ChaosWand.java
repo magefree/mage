@@ -1,17 +1,12 @@
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -19,8 +14,9 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class ChaosWand extends CardImpl {
@@ -79,7 +75,7 @@ class ChaosWandEffect extends OneShotEffect {
             return false;
         }
         Cards cardsToShuffle = new CardsImpl();
-        while (opponent.getLibrary().hasCards()) {
+        while (opponent.canRespond() && opponent.getLibrary().hasCards()) {
             Card card = opponent.getLibrary().getFromTop(game);
             if (card == null) {
                 break;

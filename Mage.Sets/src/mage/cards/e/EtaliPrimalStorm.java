@@ -1,32 +1,24 @@
 package mage.cards.e;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.cards.*;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterNonlandCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author ciaccona007 & L_J
  */
 public final class EtaliPrimalStorm extends CardImpl {
@@ -99,7 +91,7 @@ class EtaliPrimalStormEffect extends OneShotEffect {
             Cards cardsToCast = new CardsImpl();
             cardsToCast.addAll(currentExiledCards);
             boolean alreadyCast = false;
-            while (!cardsToCast.isEmpty()) {
+            while (controller.canRespond() && !cardsToCast.isEmpty()) {
                 if (!controller.chooseUse(Outcome.PlayForFree, "Cast a"
                         + (alreadyCast ? "nother" : "") + " card exiled with "
                         + sourceObject.getLogName() + " without paying its mana cost?", source, game)) {
@@ -119,7 +111,7 @@ class EtaliPrimalStormEffect extends OneShotEffect {
                             game, true, new MageObjectReference(source.getSourceObject(game), game));
                     game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
                     if (!cardWasCast) {
-                        game.informPlayer(controller, "You're not able to cast " 
+                        game.informPlayer(controller, "You're not able to cast "
                                 + card.getIdName() + " or you canceled the casting.");
                     }
                     cardsToCast.remove(card);

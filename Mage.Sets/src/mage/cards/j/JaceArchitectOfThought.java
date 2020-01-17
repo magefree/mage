@@ -1,10 +1,5 @@
 package mage.cards.j;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -12,17 +7,8 @@ import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.cards.*;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.FilterPlayer;
 import mage.filter.common.FilterNonlandCard;
@@ -42,9 +28,9 @@ import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
+import java.util.*;
+
 /**
- *
- *
  * @author LevelX2
  */
 public final class JaceArchitectOfThought extends CardImpl {
@@ -141,7 +127,7 @@ class JaceArchitectOfThoughtDelayedTriggeredAbility extends DelayedTriggeredAbil
 
     @Override
     public boolean isInactive(Game game) {
-        return game.isActivePlayer(getControllerId()) 
+        return game.isActivePlayer(getControllerId())
                 && game.getTurnNum() != startingTurn;
     }
 
@@ -304,15 +290,18 @@ class JaceArchitectOfThoughtEffect3 extends OneShotEffect {
         }
         FilterCard filter = new FilterCard("card to cast without mana costs");
         TargetCardInExile target = new TargetCardInExile(filter, source.getSourceId());
-        while (jaceExileZone.count(filter, game) > 0
+        Cards cardsToChoose = new CardsImpl(jaceExileZone.getCards(game));
+        while (controller.canRespond()
+                && cardsToChoose.count(filter, game) > 0
                 && controller.chooseUse(Outcome.Benefit, "Cast another spell from exile zone for free?", source, game)) {
-            controller.choose(Outcome.PlayForFree, jaceExileZone, target, game);
+            controller.choose(Outcome.PlayForFree, cardsToChoose, target, game);
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
                 game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
                 Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
                         game, true, new MageObjectReference(source.getSourceObject(game), game));
                 game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
+                cardsToChoose.remove(card);
                 if (cardWasCast) {
                     game.getExile().removeCard(card, game);
                 }

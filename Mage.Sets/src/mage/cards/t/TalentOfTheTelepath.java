@@ -1,17 +1,11 @@
 package mage.cards.t;
 
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.SpellMasteryCondition;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -22,8 +16,10 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
 
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class TalentOfTheTelepath extends CardImpl {
@@ -98,13 +94,13 @@ class TalentOfTheTelepathEffect extends OneShotEffect {
                 }
                 Player controller = game.getPlayer(source.getControllerId());
                 if (controller != null) {
-
                     TargetCard target = new TargetCard(Zone.LIBRARY, filter); // zone should be ignored here
                     target.setNotTarget(true);
-                    while (numberOfSpells > 0
+                    while (controller.canRespond()
+                            && numberOfSpells > 0
                             && !cardsToCast.isEmpty()
                             && controller.chooseUse(outcome, "Cast an instant or sorcery card "
-                                    + "from among them for free?", source, game)
+                            + "from among them for free?", source, game)
                             && controller.choose(Outcome.PlayForFree, cardsToCast, target, game)) {
                         Card card = cardsToCast.get(target.getFirstTarget(), game);
                         if (card != null) {
@@ -112,11 +108,13 @@ class TalentOfTheTelepathEffect extends OneShotEffect {
                             Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
                                     game, true, new MageObjectReference(source.getSourceObject(game), game));
                             game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
+                            cardsToCast.remove(card);
                             if (cardWasCast) {
                                 numberOfSpells--;
-                                cardsToCast.remove(card);
                                 allCards.remove(card);
                             }
+                        } else {
+                            break;
                         }
                         if (!controller.canRespond()) {
                             return false;

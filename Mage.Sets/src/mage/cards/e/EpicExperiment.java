@@ -1,6 +1,5 @@
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -18,8 +17,9 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class EpicExperiment extends CardImpl {
@@ -79,7 +79,7 @@ class EpicExperimentEffect extends OneShotEffect {
             }
             cardsToCast.addAll(epicExperimentExileZone.getCards(filter, source.getSourceId(),
                     source.getControllerId(), game));
-            while (!cardsToCast.isEmpty()) {
+            while (controller.canRespond() && !cardsToCast.isEmpty()) {
                 if (!controller.chooseUse(Outcome.PlayForFree, "Cast (another) a card exiled with "
                         + sourceObject.getLogName() + " without paying its mana cost?", source, game)) {
                     break;
@@ -94,7 +94,7 @@ class EpicExperimentEffect extends OneShotEffect {
                                 game, true, new MageObjectReference(source.getSourceObject(game), game));
                         game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
                         if (!cardWasCast) {
-                            game.informPlayer(controller, "You're not able to cast " 
+                            game.informPlayer(controller, "You're not able to cast "
                                     + card.getIdName() + " or you canceled the casting.");
                         }
                         cardsToCast.remove(card);
