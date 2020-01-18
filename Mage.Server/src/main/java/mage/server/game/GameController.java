@@ -332,25 +332,26 @@ public class GameController implements GameCallback {
                     User user = requestedUser.get();
                     // TODO: workaround to fix not started games in tourneys, need to find out real reason
                     if (gameSessions.get(player.getId()) == null) {
-                        // join the game because player has not joined are was removed because of disconnect
+                        // join the game because player has not joined or was removed because of disconnect
+                        user.removeConstructing(player.getId());
+                        GameManager.instance.joinGame(game.getId(), user.getId());
+                        logger.warn("Forced join of player " + player.getName() + " (" + user.getUserState() + ") to gameId: " + game.getId());
                         if (user.isConnected()) {
+                            logger.warn("Send forced game start event for player " + player.getName() + " in gameId: " + game.getId());
                             user.ccGameStarted(game.getId(), player.getId());
-                            logger.warn("Player " + player.getName() + " (missed message) has joined gameId: " + game.getId());
-                        } else {
-                            user.removeConstructing(player.getId());
-                            GameManager.instance.joinGame(game.getId(), user.getId());
-                            logger.warn("Forced join of player " + player.getName() + " (" + user.getUserState() + ") to gameId: " + game.getId());
                         }
+
                         ChatManager.instance.broadcast(chatId, player.getName(), user.getPingInfo()
                                         + " is forced to join the game (waiting ends after "
                                         + GAME_TIMEOUTS_CANCEL_PLAYER_GAME_JOINING_AFTER_INACTIVE_SECS + " secs)",
                                 MessageColor.BLUE, true, ChatMessage.MessageType.STATUS, null);
-                        if (!user.isConnected() && user.getSecondsDisconnected() > GAME_TIMEOUTS_CANCEL_PLAYER_GAME_JOINING_AFTER_INACTIVE_SECS) {
-                            // Cancel player join possibility lately
-                            logger.debug("Player " + player.getName() + " - canceled joining game (after "
-                                    + user.getSecondsDisconnected() + " secs of inactivity) gameId: " + game.getId());
-                            player.leave();
-                        }
+                    }
+
+                    if (!user.isConnected() && user.getSecondsDisconnected() > GAME_TIMEOUTS_CANCEL_PLAYER_GAME_JOINING_AFTER_INACTIVE_SECS) {
+                        // Cancel player join possibility lately
+                        logger.debug("Player " + player.getName() + " - canceled joining game (after "
+                                + user.getSecondsDisconnected() + " secs of inactivity) gameId: " + game.getId());
+                        player.leave();
                     }
                 } else if (!player.hasLeft()) {
                     logger.debug("Player " + player.getName() + " canceled game (no user) gameId: " + game.getId());
