@@ -1973,6 +1973,7 @@ public class HumanPlayer extends PlayerImpl {
             case SPLIT_AFTERMATH:
                 MageObject object = game.getObject(ability.getSourceId());
                 if (object != null) {
+                    String message = "Choose ability to cast" + (noMana ? " for FREE" : "") + "<br>" + object.getLogName();
                     LinkedHashMap<UUID, ActivatedAbility> useableAbilities = getSpellAbilities(playerId, object, game.getState().getZone(object.getId()), game);
                     if (useableAbilities != null
                             && useableAbilities.size() == 1) {
@@ -1983,7 +1984,7 @@ public class HumanPlayer extends PlayerImpl {
                         updateGameStatePriority("chooseSpellAbilityForCast", game);
                         prepareForResponse(game);
                         if (!isExecutingMacro()) {
-                            game.fireGetChoiceEvent(playerId, name, object, new ArrayList<>(useableAbilities.values()));
+                            game.fireGetChoiceEvent(playerId, message, object, new ArrayList<>(useableAbilities.values()));
                         }
                         waitForResponse(game);
 
@@ -2014,7 +2015,6 @@ public class HumanPlayer extends PlayerImpl {
         MageObject object = game.getObject(card.getId());
         if (object != null) {
             String message = "Choose ability to cast" + (nonMana ? " for FREE" : "") + "<br>" + object.getLogName();
-
             LinkedHashMap<UUID, ActivatedAbility> useableAbilities = getSpellAbilities(playerId, object, game.getState().getZone(object.getId()), game);
             if (useableAbilities != null
                     && useableAbilities.size() == 1) {
