@@ -18,17 +18,22 @@ public class AbilityPickerView implements Serializable {
     private Map<UUID, String> choices = new LinkedHashMap<>();
     private String message = null;
 
-    public AbilityPickerView(String objectName, List<? extends Ability> abilities) {
+    public AbilityPickerView(String objectName, List<? extends Ability> abilities, String message) {
+        this.message = message;
+
+        int num = 0;
         for (Ability ability : abilities) {
+            num++;
+            String rule;
             if (objectName == null) {
-                choices.put(ability.getId(), ability.getRule(true));
+                rule = ability.getRule(true);
             } else {
-                String rule = ability.getRule(objectName);
+                rule = ability.getRule(objectName);
                 if (rule.isEmpty()) {
                     rule = ability.toString();
                 }
-                choices.put(ability.getId(), rule);
             }
+            choices.put(ability.getId(), num + ". " + rule);
         }
     }
 

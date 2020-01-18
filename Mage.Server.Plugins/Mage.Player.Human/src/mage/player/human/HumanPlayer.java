@@ -1923,10 +1923,15 @@ public class HumanPlayer extends PlayerImpl {
             }
         }
 
+        String message = "Choose spell or ability to play";
+        if (object != null) {
+            message = message + "<br>" + object.getLogName();
+        }
+
         // TODO: add canRespond cycle?
         prepareForResponse(game);
         if (!isExecutingMacro()) {
-            game.fireGetChoiceEvent(playerId, name, object, new ArrayList<>(abilities.values()));
+            game.fireGetChoiceEvent(playerId, message, object, new ArrayList<>(abilities.values()));
         }
         waitForResponse(game);
 

@@ -494,6 +494,14 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
                 break;
             }
         }
+
+        // old cancel style (just close dialog)
+        for (Object obj : choices) {
+            AbilityPickerAction action = (AbilityPickerAction) obj;
+            if (action.id == null) {
+                cancel();
+            }
+        }
     }
 
     private void tryChoiceOption(int choiceNumber) {

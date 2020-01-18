@@ -201,7 +201,7 @@ public class GameController implements GameCallback {
                                 if (event.getChoices() != null && !event.getChoices().isEmpty()) {
                                     objectName = event.getChoices().iterator().next();
                                 }
-                                chooseAbility(event.getPlayerId(), objectName, event.getAbilities());
+                                chooseAbility(event.getPlayerId(), objectName, event.getAbilities(), event.getMessage());
                                 break;
                             case CHOOSE_PILE:
                                 choosePile(event.getPlayerId(), event.getMessage(), event.getPile1(), event.getPile2());
@@ -761,8 +761,8 @@ public class GameController implements GameCallback {
 
     }
 
-    private synchronized void chooseAbility(UUID playerId, final String objectName, final List<? extends Ability> choices) throws MageException {
-        perform(playerId, playerId1 -> getGameSession(playerId1).chooseAbility(new AbilityPickerView(objectName, choices)));
+    private synchronized void chooseAbility(UUID playerId, final String objectName, final List<? extends Ability> choices, String message) throws MageException {
+        perform(playerId, playerId1 -> getGameSession(playerId1).chooseAbility(new AbilityPickerView(objectName, choices, message)));
     }
 
     private synchronized void choosePile(UUID playerId, final String message, final List<? extends Card> pile1, final List<? extends Card> pile2) throws MageException {
