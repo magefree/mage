@@ -394,7 +394,6 @@ public final class GamePanel extends javax.swing.JPanel {
         this.feedbackPanel.init(gameId);
         this.feedbackPanel.clear();
         this.abilityPicker.init(gameId);
-
         this.btnConcede.setVisible(true);
         this.btnStopWatching.setVisible(false);
         this.btnSwitchHands.setVisible(false);
@@ -1399,6 +1398,8 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     public void select(String message, GameView gameView, int messageId, Map<String, Serializable> options) {
+        this.abilityPicker.setVisible(false);
+
         holdingPriority = false;
         txtHoldPriority.setVisible(false);
         setMenuStates(
@@ -1464,6 +1465,7 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     private void hideAll() {
+        this.abilityPicker.setVisible(false);
         ActionCallback callback = Plugins.instance.getActionCallback();
         ((MageActionCallback) callback).hideGameUpdate(gameId);
     }
@@ -1900,6 +1902,9 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         });
 
+        // special hotkeys for custom rendered dialogs without focus
+        this.abilityPicker.injectHotkeys(this, "ABILITY_PICKER");
+
         final BasicSplitPaneUI myUi = (BasicSplitPaneUI) jSplitPane0.getUI();
         final BasicSplitPaneDivider divider = myUi.getDivider();
         final JButton upArrowButton = (JButton) divider.getComponent(0);
@@ -2267,6 +2272,10 @@ public final class GamePanel extends javax.swing.JPanel {
 
         for (ComponentListener cl : this.getComponentListeners()) {
             this.removeComponentListener(cl);
+        }
+
+        for (KeyListener kl : this.getKeyListeners()) {
+            this.removeKeyListener(kl);
         }
     }
 
@@ -2711,5 +2720,4 @@ class ReplayTask extends SwingWorker<Void, Collection<MatchView>> {
         } catch (CancellationException ex) {
         }
     }
-
 }

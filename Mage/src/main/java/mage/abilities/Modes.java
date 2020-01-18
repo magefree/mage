@@ -18,6 +18,10 @@ import java.util.*;
  */
 public class Modes extends LinkedHashMap<UUID, Mode> {
 
+    // choose ID for options in ability/mode picker dialogs
+    public static final UUID CHOOSE_OPTION_DONE_ID = UUID.fromString("33e72ad6-17ae-4bfb-a097-6e7aa06b49e9");
+    public static final UUID CHOOSE_OPTION_CANCEL_ID = UUID.fromString("0125bd0c-5610-4eba-bc80-fc6d0a7b9de6");
+
     private Mode currentMode; // the current mode of the selected modes
     private final List<UUID> selectedModes = new ArrayList<>(); // all selected modes (this + duplicate)
     private final Map<UUID, Mode> duplicateModes = new LinkedHashMap<>(); // for 2x selects: copy mode and put it to duplicate list

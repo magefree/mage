@@ -2040,10 +2040,14 @@ public class HumanPlayer extends PlayerImpl {
         }
 
         if (modes.size() > 1) {
+            // done option for up to choices
+            boolean canEndChoice = modes.getSelectedModes().size() >= modes.getMinModes();
             MageObject obj = game.getObject(source.getSourceId());
             Map<UUID, String> modeMap = new LinkedHashMap<>();
+            int modeIndex = 0;
             AvailableModes:
             for (Mode mode : modes.getAvailableModes(source, game)) {
+                modeIndex++;
                 int timesSelected = modes.getSelectedStats(mode.getId());
                 for (UUID selectedModeId : modes.getSelectedModes()) {
                     Mode selectedMode = modes.get(selectedModeId);
@@ -2068,18 +2072,31 @@ public class HumanPlayer extends PlayerImpl {
                             modeText = "(selected " + timesSelected + "x) " + modeText;
                         }
                     }
-                    modeMap.put(mode.getId(), modeText);
+                    modeMap.put(mode.getId(), modeIndex + ". " + modeText);
                 }
             }
 
             if (!modeMap.isEmpty()) {
+
+                // can done for up to
+                if (canEndChoice) {
+                    modeMap.put(Modes.CHOOSE_OPTION_DONE_ID, "Done");
+                }
+                modeMap.put(Modes.CHOOSE_OPTION_CANCEL_ID, "Cancel");
+
                 boolean done = false;
                 while (!done && canRespond()) {
+
+                    String message = "Choose mode (selected " + modes.getSelectedModes().size() + " of " + modes.getMaxModes()
+                            + ", min " + modes.getMinModes() + ")";
+                    if (obj != null) {
+                        message = message + "<br>" + obj.getLogName();
+                    }
 
                     updateGameStatePriority("chooseMode", game);
                     prepareForResponse(game);
                     if (!isExecutingMacro()) {
-                        game.fireGetModeEvent(playerId, "Choose Mode", modeMap);
+                        game.fireGetModeEvent(playerId, message, modeMap);
                     }
                     waitForResponse(game);
 
@@ -2091,9 +2108,21 @@ public class HumanPlayer extends PlayerImpl {
                                 return mode;
                             }
                         }
-                    } else if (modes.getSelectedModes().size() >= modes.getMinModes()) {
-                        /* let the player cancel mode selection if they do not need to select any further modes */
-                        done = true;
+
+                        // end choice by done option in ability pickup dialog
+                        if (canEndChoice && Modes.CHOOSE_OPTION_DONE_ID.equals(response.getUUID())) {
+                            done = true;
+                        }
+
+                        // cancel choice (remove all selections)
+                        if (Modes.CHOOSE_OPTION_CANCEL_ID.equals(response.getUUID())) {
+                            modes.getSelectedModes().clear();
+                            return null;
+                        }
+                    } else if (canEndChoice) {
+                        // end choice by done button in feedback panel
+                        // disable after done option implemented
+                        // done = true;
                     }
                     if (source.getAbilityType() != AbilityType.TRIGGERED) {
                         done = true;

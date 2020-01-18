@@ -1,7 +1,9 @@
 package mage.client.components.ability;
 
+import mage.abilities.Modes;
 import mage.client.SessionHandler;
 import mage.client.dialog.MageDialog;
+import mage.client.game.GamePanel;
 import mage.client.util.ImageHelper;
 import mage.remote.Session;
 import mage.view.AbilityPickerView;
@@ -22,7 +24,7 @@ import java.util.*;
 /**
  * Dialog for choosing abilities.
  *
- * @author nantuko
+ * @author nantuko, JayDi85
  */
 public class AbilityPicker extends JXPanel implements MouseWheelListener {
 
@@ -41,7 +43,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
 
     private BackgroundPainter mwPanelPainter;
     private JScrollPane jScrollPane2;
-    private JTextField title;
+    private JLabel title;
 
     private Image rightImage;
     private Image rightImageHovered;
@@ -68,9 +70,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
     public AbilityPicker(List<Object> choices, String message) {
         this.choices = choices;
         setSize(DIALOG_WIDTH, DIALOG_HEIGHT);
-        if (message != null) {
-            this.message = message + " (single-click)";
-        }
+        setMessageAndPrepare(message);
         initComponents();
         jScrollPane2.setOpaque(false);
         jScrollPane2.getViewport().setOpaque(false);
@@ -80,7 +80,6 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
     }
 
     public void init(UUID gameId) {
-
         this.gameId = gameId;
     }
 
@@ -93,11 +92,17 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
     public void show(AbilityPickerView choices, Point p) {
         this.choices = new ArrayList<>();
         this.selected = true; // to stop previous modal
+        setMessageAndPrepare(choices.getMessage());
 
+        // if not cancel from server then add own
+        boolean wasCancelButton = false;
         for (Map.Entry<UUID, String> choice : choices.getChoices().entrySet()) {
+            wasCancelButton = wasCancelButton || choice.getKey().equals(Modes.CHOOSE_OPTION_CANCEL_ID);
             this.choices.add(new AbilityPickerAction(choice.getKey(), choice.getValue()));
         }
-        this.choices.add(new AbilityPickerAction(null, "Cancel"));
+        if (!wasCancelButton) {
+            this.choices.add(new AbilityPickerAction(null, "Cancel"));
+        }
 
         show(this.choices);
     }
@@ -109,6 +114,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
         rows.setListData(this.choices.toArray());
         this.rows.setSelectedIndex(0);
         this.selected = false; // back to false - waiting for selection
+        this.title.setText(this.message);
         setVisible(true);
 
         MageDialog.makeWindowCentered(this, DIALOG_WIDTH, DIALOG_HEIGHT);
@@ -116,30 +122,17 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
     }
 
     private void initComponents() {
-        JLabel jLabel1;
-        JLabel jLabel3;
-
         Color textColor = Color.white;
-
         mwPanelPainter = new BackgroundPainter();
-        jLabel1 = new JLabel();
-        jLabel3 = new JLabel();
-
-        title = new JTextField();
         jScrollPane2 = new JScrollPane();
 
         setBackground(textColor);
         setBackgroundPainter(mwPanelPainter);
-        jLabel1.setFont(new Font("Times New Roman", 1, 18));
-        jLabel1.setForeground(textColor);
-        jLabel1.setText(message);
 
-        jLabel3.setForeground(textColor);
-        jLabel3.setHorizontalAlignment(SwingConstants.TRAILING);
-        jLabel3.setText("Selected:");
-
-        title.setFont(new Font("Tahoma", 1, 11));
-        title.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
+        title = new JLabel();
+        title.setFont(new Font("Times New Roman", 1, 15));
+        title.setForeground(textColor);
+        title.setText(message);
 
         jScrollPane2.setBorder(null);
         jScrollPane2.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -161,6 +154,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
         rows.setMinimumSize(new Dimension(67, 16));
         rows.setOpaque(false);
 
+        // mouse actions
         rows.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent evt) {
@@ -174,6 +168,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
         rows.setBorder(BorderFactory.createEmptyBorder());
         rows.addMouseWheelListener(this);
 
+
         jScrollPane2.setViewportView(rows);
         jScrollPane2.setViewportBorder(BorderFactory.createEmptyBorder());
 
@@ -184,7 +179,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
                 GroupLayout.TRAILING,
                 layout.createSequentialGroup().addContainerGap().add(
                         layout.createParallelGroup(GroupLayout.TRAILING).add(GroupLayout.LEADING, jScrollPane2, GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE).add(GroupLayout.LEADING,
-                                layout.createSequentialGroup().add(jLabel1).addPreferredGap(LayoutStyle.RELATED, 175, Short.MAX_VALUE).add(1, 1, 1)).add(
+                                layout.createSequentialGroup().add(title).addPreferredGap(LayoutStyle.RELATED, 175, Short.MAX_VALUE).add(1, 1, 1)).add(
                                 GroupLayout.LEADING,
                                 layout.createSequentialGroup().add(layout.createParallelGroup(GroupLayout.LEADING)
                                 )
@@ -197,7 +192,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
         layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.LEADING).add(
                 layout.createSequentialGroup().add(
                         layout.createParallelGroup(GroupLayout.LEADING).add(
-                                layout.createSequentialGroup().add(jLabel1, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)
+                                layout.createSequentialGroup().add(title, GroupLayout.PREFERRED_SIZE, 72, GroupLayout.PREFERRED_SIZE)
                                         .add(5, 5, 5)
                                         .add(
                                                 layout.createParallelGroup(GroupLayout.BASELINE)
@@ -462,5 +457,103 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
         } catch (Exception e) {
             log.error("Couldn't cancel choose dialog: " + e, e);
         }
+    }
+
+    private void setMessageAndPrepare(String message) {
+        if (message != null) {
+            this.message = message + " (single-click or hotkeys)";
+        } else {
+            this.message = DEFAULT_MESSAGE;
+        }
+        this.message = "<html>" + this.message;
+    }
+
+    private void tryChoiceDone() {
+        // done by keyboard
+        if (!isVisible() || choices == null) {
+            return;
+        }
+        for (Object obj : choices) {
+            AbilityPickerAction action = (AbilityPickerAction) obj;
+            if (Modes.CHOOSE_OPTION_DONE_ID.equals(action.id)) {
+                action.actionPerformed(null);
+                break;
+            }
+        }
+    }
+
+    private void tryChoiceCancel() {
+        // cancel by keyboard
+        if (!isVisible() || choices == null) {
+            return;
+        }
+        for (Object obj : choices) {
+            AbilityPickerAction action = (AbilityPickerAction) obj;
+            if (Modes.CHOOSE_OPTION_DONE_ID.equals(action.id)) {
+                action.actionPerformed(null);
+                break;
+            }
+        }
+    }
+
+    private void tryChoiceOption(int choiceNumber) {
+        // choice by keyboard
+        if (!isVisible() || choices == null) {
+            return;
+        }
+        String need = choiceNumber + ".";
+        for (Object obj : choices) {
+            AbilityPickerAction action = (AbilityPickerAction) obj;
+            if (action.toString().startsWith(need)) {
+                action.actionPerformed(null);
+                break;
+            }
+        }
+    }
+
+    public void injectHotkeys(GamePanel panel, String commandsPrefix) {
+        // TODO: fix that GamePanel recive imput from any place, not only active (e.g. F9 works from lobby)
+        int c = JComponent.WHEN_IN_FOCUSED_WINDOW;
+
+        // choice keys
+        Map<Integer, Integer> numbers = new HashMap<>();
+        numbers.put(KeyEvent.VK_1, 1);
+        numbers.put(KeyEvent.VK_2, 2);
+        numbers.put(KeyEvent.VK_3, 3);
+        numbers.put(KeyEvent.VK_4, 4);
+        numbers.put(KeyEvent.VK_5, 5);
+        numbers.put(KeyEvent.VK_6, 6);
+        numbers.put(KeyEvent.VK_7, 7);
+        numbers.put(KeyEvent.VK_8, 8);
+        numbers.put(KeyEvent.VK_9, 9);
+        numbers.forEach((vk, num) -> {
+            KeyStroke ks = KeyStroke.getKeyStroke(vk, 0);
+            panel.getInputMap(c).put(ks, commandsPrefix + "_CHOOSE_" + num);
+            panel.getActionMap().put(commandsPrefix + "_CHOOSE_" + num, new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    tryChoiceOption(num);
+                }
+            });
+        });
+
+        // done key (space, enter)
+        panel.getInputMap(c).put(KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, 0), commandsPrefix + "_CHOOSE_DONE");
+        panel.getInputMap(c).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), commandsPrefix + "_CHOOSE_DONE");
+        panel.getActionMap().put(commandsPrefix + "_CHOOSE_DONE", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                tryChoiceDone();
+            }
+        });
+
+        // cancel key (esc)
+        panel.getInputMap(c).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), commandsPrefix + "_CHOOSE_CANCEL");
+        panel.getActionMap().put(commandsPrefix + "_CHOOSE_CANCEL", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                tryChoiceCancel();
+            }
+        });
     }
 }
