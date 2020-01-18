@@ -45,6 +45,8 @@ public class VerifyCardDataTest {
 
     private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
+    private static final String FULL_ABILITIES_CHECK_SET_CODE = "THB"; // check all abilities and output cards with wrong abilities texts;
+
     // right now this is very noisy, and not useful enough to make any assertions on
     private static final boolean CHECK_SOURCE_TOKENS = false;
 
@@ -146,13 +148,15 @@ public class VerifyCardDataTest {
 
     @Test
     public void verifyCards() throws IOException {
+        int cardIndex = 0;
         for (Card card : CardScanner.getAllCards()) {
+            cardIndex++;
             Set<String> tokens = findSourceTokens(card.getClass());
             if (card.isSplitCard()) {
-                check(((SplitCard) card).getLeftHalfCard(), null);
-                check(((SplitCard) card).getRightHalfCard(), null);
+                check(((SplitCard) card).getLeftHalfCard(), null, cardIndex);
+                check(((SplitCard) card).getRightHalfCard(), null, cardIndex);
             } else {
-                check(card, tokens);
+                check(card, tokens, cardIndex);
             }
         }
 
@@ -720,13 +724,13 @@ public class VerifyCardDataTest {
         }
     }
 
-    private void check(Card card, Set<String> tokens) {
+    private void check(Card card, Set<String> tokens, int cardIndex) {
         JsonCard ref = MtgJson.card(card.getName());
         if (ref == null) {
             warn(card, "Missing card reference");
             return;
         }
-        checkAll(card, ref);
+        checkAll(card, ref, cardIndex);
         if (tokens != null) {
             JsonCard ref2 = null;
             if (card.isFlipCard()) {
@@ -754,7 +758,7 @@ public class VerifyCardDataTest {
         return options != null && options.contains(value);
     }
 
-    private void checkAll(Card card, JsonCard ref) {
+    private void checkAll(Card card, JsonCard ref, int cardIndex) {
         checkCost(card, ref);
         checkPT(card, ref);
         checkSubtypes(card, ref);
@@ -765,7 +769,7 @@ public class VerifyCardDataTest {
         checkBasicLands(card, ref);
         checkMissingAbilities(card, ref);
         checkWrongSymbolsInRules(card);
-        checkWrongAbilitiesText(card, ref);
+        checkWrongAbilitiesText(card, ref, cardIndex);
     }
 
     private void checkColors(Card card, JsonCard ref) {
@@ -902,6 +906,7 @@ public class VerifyCardDataTest {
                 .replace("{this}", cardName)
                 .replace("{source}", cardName)
                 .replace("−", "-")
+                .replace("—", "-")
                 .replace("&mdash;", "-");
 
         // remove html marks
@@ -929,9 +934,9 @@ public class VerifyCardDataTest {
         }
     }
 
-    private void checkWrongAbilitiesText(Card card, JsonCard ref) {
+    private void checkWrongAbilitiesText(Card card, JsonCard ref, int cardIndex) {
         // checks missing or wrong text
-        if (!card.getExpansionSetCode().equals("M20")) {
+        if (!card.getExpansionSetCode().equals(FULL_ABILITIES_CHECK_SET_CODE)) {
             return;
         }
 
@@ -943,6 +948,10 @@ public class VerifyCardDataTest {
         // lands fix
         if (refText.startsWith("(") && refText.endsWith(")")) {
             refText = refText.substring(1, refText.length() - 1);
+        }
+        // planeswalker fix [-7]: xxx
+        if (refText.contains("[") && refText.contains("]")) {
+            refText = refText.replace("[", "").replace("]", "");
         }
 
         String[] refRules = refText.split("[\\$\\\n]"); // ref card's abilities can be splited by \n or $ chars
@@ -956,10 +965,11 @@ public class VerifyCardDataTest {
         }
 
         boolean isFine = true;
-        for (String cardRule : cardRules) {
+        for (int i = 0; i <= cardRules.length - 1; i++) {
             boolean isAbilityFounded = false;
             for (String refRule : refRules) {
-                if (cardRule.equals(refRule)) {
+                if (cardRules[i].equals(refRule)) {
+                    cardRules[i] = "+ " + cardRules[i];
                     isAbilityFounded = true;
                     break;
                 }
@@ -967,7 +977,8 @@ public class VerifyCardDataTest {
 
             if (!isAbilityFounded) {
                 isFine = false;
-                warn(card, "card ability can't be found in ref [" + card.getName() + ": " + cardRule + "]");
+                warn(card, "card ability can't be found in ref [" + card.getName() + ": " + cardRules[i] + "]");
+                cardRules[i] = "- " + cardRules[i];
             }
         }
 
@@ -975,7 +986,7 @@ public class VerifyCardDataTest {
         if (!isFine) {
             System.out.println();
 
-            System.out.println("Wrong card " + card.getName());
+            System.out.println("Wrong card " + cardIndex + ": " + card.getName());
             Arrays.sort(cardRules);
             for (String s : cardRules) {
                 System.out.println(s);
@@ -984,7 +995,7 @@ public class VerifyCardDataTest {
             System.out.println("ref:");
             Arrays.sort(refRules);
             for (String s : refRules) {
-                System.out.println(s);
+                System.out.println("  " + s);
             }
 
             System.out.println();
