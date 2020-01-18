@@ -77,7 +77,6 @@ public class CardInfoWindowDialog extends MageDialog {
         }
         this.setTitelBarToolTip(name);
         setGUISize();
-
     }
 
     public void cleanUp() {

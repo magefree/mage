@@ -500,6 +500,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
             AbilityPickerAction action = (AbilityPickerAction) obj;
             if (action.id == null) {
                 cancel();
+                break;
             }
         }
     }
@@ -555,8 +556,8 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
             }
         });
 
-        // cancel key (esc)
-        panel.getInputMap(c).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), commandsPrefix + "_CHOOSE_CANCEL");
+        // cancel key (esc can be lost by focus on exile window popup)
+        panel.getInputMap(c).put(KeyStroke.getKeyStroke(KeyEvent.VK_BACK_SPACE, 0), commandsPrefix + "_CHOOSE_CANCEL");
         panel.getActionMap().put(commandsPrefix + "_CHOOSE_CANCEL", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
