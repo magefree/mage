@@ -489,7 +489,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
         }
         for (Object obj : choices) {
             AbilityPickerAction action = (AbilityPickerAction) obj;
-            if (Modes.CHOOSE_OPTION_DONE_ID.equals(action.id)) {
+            if (Modes.CHOOSE_OPTION_CANCEL_ID.equals(action.id)) {
                 action.actionPerformed(null);
                 break;
             }
