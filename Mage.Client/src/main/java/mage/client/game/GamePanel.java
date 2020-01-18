@@ -1822,6 +1822,10 @@ public final class GamePanel extends javax.swing.JPanel {
 
         // HOTKEYS
 
+        // special hotkeys for custom rendered dialogs without focus
+        // call it before any user defined hotkeys
+        this.abilityPicker.injectHotkeys(this, "ABILITY_PICKER");
+
         KeyStroke ks2 = getCachedKeystroke(KEY_CONTROL_CONFIRM);
         this.getInputMap(c).put(ks2, "F2_PRESS");
         this.getActionMap().put("F2_PRESS", new AbstractAction() {
@@ -1901,9 +1905,6 @@ public final class GamePanel extends javax.swing.JPanel {
                         holdingPriority);
             }
         });
-
-        // special hotkeys for custom rendered dialogs without focus
-        this.abilityPicker.injectHotkeys(this, "ABILITY_PICKER");
 
         final BasicSplitPaneUI myUi = (BasicSplitPaneUI) jSplitPane0.getUI();
         final BasicSplitPaneDivider divider = myUi.getDivider();
