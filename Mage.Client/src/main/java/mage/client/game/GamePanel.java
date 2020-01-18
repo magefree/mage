@@ -1650,7 +1650,13 @@ public final class GamePanel extends javax.swing.JPanel {
 
         bigCard.setBorder(new LineBorder(Color.black, 1, true));
 
+        // HOTKEYS
+
         int c = JComponent.WHEN_IN_FOCUSED_WINDOW;
+
+        // special hotkeys for custom rendered dialogs without focus
+        // call it before any user defined hotkeys
+        this.abilityPicker.injectHotkeys(this, "ABILITY_PICKER");
 
         btnToggleMacro.setContentAreaFilled(false);
         btnToggleMacro.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
@@ -1821,10 +1827,6 @@ public final class GamePanel extends javax.swing.JPanel {
         updateSkipButtons();
 
         // HOTKEYS
-
-        // special hotkeys for custom rendered dialogs without focus
-        // call it before any user defined hotkeys
-        this.abilityPicker.injectHotkeys(this, "ABILITY_PICKER");
 
         KeyStroke ks2 = getCachedKeystroke(KEY_CONTROL_CONFIRM);
         this.getInputMap(c).put(ks2, "F2_PRESS");
