@@ -1,6 +1,5 @@
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
@@ -21,6 +20,8 @@ import mage.game.Game;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+
 /**
  * @author TheElk801
  */
@@ -37,7 +38,7 @@ public final class AshiokSculptorOfFears extends CardImpl {
 
         // +2: Draw a card. Each player puts the top two cards of their library into their graveyard.
         Ability ability = new LoyaltyAbility(
-                new DrawCardSourceControllerEffect(1).setText("draw a card."), 2
+                new DrawCardSourceControllerEffect(1).setText("draw a card"), 2
         );
         ability.addEffect(new PutTopCardOfLibraryIntoGraveEachPlayerEffect(2, TargetController.ANY));
         this.addAbility(ability);

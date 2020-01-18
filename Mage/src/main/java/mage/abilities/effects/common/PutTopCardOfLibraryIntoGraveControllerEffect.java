@@ -1,14 +1,11 @@
-
-
 package mage.abilities.effects.common;
 
-import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
-
 import mage.util.CardUtil;
 
 /**
@@ -45,10 +42,11 @@ public class PutTopCardOfLibraryIntoGraveControllerEffect extends OneShotEffect 
     }
 
     private String setText() {
-        StringBuilder sb = new StringBuilder("put the top ");
+        StringBuilder sb = new StringBuilder("put the top");
         if (numberCards == 1) {
             sb.append(" card");
         } else {
+            sb.append(" ");
             sb.append(CardUtil.numberToText(numberCards));
             sb.append(" cards");
         }

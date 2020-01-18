@@ -20,7 +20,6 @@ import mage.target.Target;
 import mage.target.Targets;
 
 /**
- *
  * @author LevelX2
  */
 public class SagaAbility extends SimpleStaticAbility {
@@ -101,7 +100,7 @@ public class SagaAbility extends SimpleStaticAbility {
 
     public static boolean isChapterAbility(StackObject stackObject) {
         if (stackObject instanceof StackAbility) {
-            return ((StackAbility) stackObject).getStackAbility() instanceof ChapterTriggeredAbility;
+            return stackObject.getStackAbility() instanceof ChapterTriggeredAbility;
         }
         return false;
     }
@@ -181,7 +180,7 @@ class ChapterTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         String text = super.getRule();
-        sb.append(": ").append(Character.toUpperCase(text.charAt(0))).append(text.substring(1));
+        sb.append(" - ").append(Character.toUpperCase(text.charAt(0))).append(text.substring(1));
         return sb.toString();
     }
 }

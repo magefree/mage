@@ -26,7 +26,7 @@ public final class DreamstalkerManticore extends CardImpl {
 
         // Whenever you cast your first spell during each opponent's turn, Dreamstalker Manticore deals 1 damage to any target.
         Ability ability = new FirstSpellOpponentsTurnTriggeredAbility(
-                new DamageTargetEffect(1, "it"), false
+                new DamageTargetEffect(1), false
         );
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

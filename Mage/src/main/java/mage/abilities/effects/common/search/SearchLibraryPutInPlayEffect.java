@@ -1,7 +1,5 @@
 package mage.abilities.effects.common.search;
 
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.SearchEffect;
 import mage.cards.CardsImpl;
@@ -12,8 +10,10 @@ import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.util.CardUtil;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class SearchLibraryPutInPlayEffect extends SearchEffect {
@@ -84,11 +84,11 @@ public class SearchLibraryPutInPlayEffect extends SearchEffect {
             } else {
                 sb.append("up to ").append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(' ');
             }
-            sb.append(target.getTargetName()).append(" and put them onto the battlefield");
+            sb.append(target.getTargetName()).append(", put them onto the battlefield");
         } else {
             sb.append(target.getTargetName().startsWith("a ") || target.getTargetName().startsWith("an ") ? "" : "a ")
                     .append(target.getTargetName())
-                    .append(" and put it onto the battlefield");
+                    .append(", put it onto the battlefield");
         }
         if (tapped) {
             sb.append(" tapped");

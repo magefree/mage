@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common.continuous;
 
 import mage.MageObject;
@@ -16,7 +15,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class GainProtectionFromColorTargetEffect extends GainAbilityTargetEffect {
@@ -78,6 +76,20 @@ public class GainProtectionFromColorTargetEffect extends GainAbilityTargetEffect
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return "target creature you control gains protection from the color of your choice " + duration.toString();
+
+        StringBuilder sb = new StringBuilder();
+        if (!mode.getTargets().isEmpty()) {
+            if (mode.getTargets().get(0).getTargetName().contains("target")) {
+                sb.append(mode.getTargets().get(0).getTargetName());
+            } else {
+                sb.append("target ").append(mode.getTargets().get(0).getTargetName());
+            }
+        }
+        if (sb.length() > 0) {
+            sb.append(" ");
+        }
+        sb.append("gains protection from the color of your choice " + duration.toString());
+
+        return sb.toString();
     }
 }

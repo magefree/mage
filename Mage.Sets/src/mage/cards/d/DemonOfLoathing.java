@@ -33,7 +33,7 @@ public final class DemonOfLoathing extends CardImpl {
 
         // Whenever Demon of Loathing deals combat damage to a player, that player sacrifices a creature.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new SacrificeEffect(
-                StaticFilters.FILTER_PERMANENT_A_CREATURE, 1, "that player"
+                StaticFilters.FILTER_PERMANENT_CREATURE, 1, "that player"
         ), false, true));
     }
 
