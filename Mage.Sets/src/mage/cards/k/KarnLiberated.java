@@ -1,5 +1,8 @@
 package mage.cards.k;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -22,10 +25,6 @@ import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInHand;
 import mage.util.CardUtil;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 /**
  * @author bunchOfDevs
@@ -111,7 +110,7 @@ class KarnLiberatedEffect extends OneShotEffect {
                             && !cards.contains(card)) { // not the exiled cards
                         if (game.getCommandersIds(player).contains(card.getId())) {
                             game.addCommander(new Commander(card)); // TODO: check restart and init
-                            // no needs in initCommander call -- it's uses on game startup (init)
+                            // no needs in initCommander call -- it's used on game startup (init)
                             game.setZone(card.getId(), Zone.COMMAND);
                         } else {
                             player.getLibrary().putOnTop(card, game);
@@ -124,10 +123,7 @@ class KarnLiberatedEffect extends OneShotEffect {
         }
         for (Card card : cards) {
             game.getState().setZone(card.getId(), Zone.EXILED);
-            if (card.isPermanent()
-                    && !card.hasSubtype(SubType.AURA, game)) {
-                game.getExile().add(exileId, sourceObject.getIdName(), card);
-            }
+            game.getExile().add(exileId, sourceObject.getIdName(), card);
         }
         game.addDelayedTriggeredAbility(new KarnLiberatedDelayedTriggeredAbility(exileId), source);
         game.setStartingPlayerId(source.getControllerId());

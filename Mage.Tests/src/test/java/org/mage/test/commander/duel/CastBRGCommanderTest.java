@@ -1,4 +1,3 @@
-
 package org.mage.test.commander.duel;
 
 import java.io.FileNotFoundException;
@@ -6,6 +5,8 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.GameException;
+import mage.watchers.common.CommanderInfoWatcher;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestCommanderDuelBase;
 
@@ -21,7 +22,7 @@ public class CastBRGCommanderTest extends CardTestCommanderDuelBase {
         // When you cast Prossh, Skyraider of Kher, put X 0/1 red Kobold creature tokens named Kobolds of Kher Keep onto the battlefield, where X is the amount of mana spent to cast Prossh.
         // Sacrifice another creature: Prossh gets +1/+0 until end of turn.
         setDecknamePlayerA("Power Hungry.dck"); // Commander = Prosssh, Skyrider of Kher {3}{B}{R}{G}
-        setDecknamePlayerB("CommanderDuel_UW.dck"); //  Daxos of Meletis {1}{W}{U}
+        setDecknamePlayerB("CommanderDuel_UW.dck"); // Commander = Daxos of Meletis {1}{W}{U}
         return super.createNewGameAndPlayers();
     }
 
@@ -38,7 +39,10 @@ public class CastBRGCommanderTest extends CardTestCommanderDuelBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Savage Summoning");
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Prossh, Skyraider of Kher"); // 5/5
         setStopAt(1, PhaseStep.END_COMBAT);
+
+        setStrictChooseMode(true);
         execute();
+        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Savage Summoning", 1);
         assertPermanentCount(playerA, "Prossh, Skyraider of Kher", 1);
@@ -66,12 +70,64 @@ public class CastBRGCommanderTest extends CardTestCommanderDuelBase {
         activateAbility(5, PhaseStep.PRECOMBAT_MAIN, playerA, "-14: Restart");
 
         setStopAt(5, PhaseStep.BEGIN_COMBAT);
+
+        setStrictChooseMode(true);
         execute();
+        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Karn Liberated", 0);
         assertPermanentCount(playerA, "Silvercoat Lion", 2);
         assertCommandZoneCount(playerA, "Prossh, Skyraider of Kher", 1);
         assertCommandZoneCount(playerB, "Daxos of Meletis", 1);
+
+    }
+
+    /**
+     * If the commander is exiled by Karn (and not returned to the command
+     * zone), it needs to restart the game in play and not the command zone.
+     */
+    @Test
+    public void testCommanderRestoredToBattlefieldAfterKarnUltimate() {
+        // +4: Target player exiles a card from their hand.
+        // -3: Exile target permanent.
+        // -14: Restart the game, leaving in exile all non-Aura permanent cards exiled with Karn Liberated. Then put those cards onto the battlefield under your control.
+        addCard(Zone.BATTLEFIELD, playerA, "Karn Liberated", 1); // Planeswalker (6)
+        addCard(Zone.HAND, playerA, "Silvercoat Lion", 3);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 1);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+4: Target player", playerA);
+        addTarget(playerA, "Silvercoat Lion");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Daxos of Meletis");
+
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "+4: Target player", playerA);
+        addTarget(playerA, "Silvercoat Lion");
+
+        attack(4, playerB, "Daxos of Meletis");
+
+        activateAbility(5, PhaseStep.PRECOMBAT_MAIN, playerA, "-3: Exile target permanent", "Daxos of Meletis");
+        setChoice(playerB, "No"); // Move commander NOT to command zone
+
+        activateAbility(7, PhaseStep.PRECOMBAT_MAIN, playerA, "+4: Target player", playerA);
+        addTarget(playerA, "Silvercoat Lion");
+        activateAbility(9, PhaseStep.PRECOMBAT_MAIN, playerA, "-14: Restart");
+
+        setStopAt(9, PhaseStep.BEGIN_COMBAT);
+
+        setStrictChooseMode(true);
+        execute();
+        assertAllCommandsUsed();
+
+        assertGraveyardCount(playerA, "Karn Liberated", 0);
+        assertPermanentCount(playerA, "Silvercoat Lion", 3);
+        assertCommandZoneCount(playerA, "Prossh, Skyraider of Kher", 1);
+        assertCommandZoneCount(playerB, "Daxos of Meletis", 0);
+        assertPermanentCount(playerA, "Daxos of Meletis", 1); // Karn brings back the cards under the control of Karn's controller
+
+        CommanderInfoWatcher watcher = currentGame.getState().getWatcher(CommanderInfoWatcher.class, playerB.getCommandersIds().iterator().next());
+        Assert.assertEquals("Watcher is reset to 0 commander damage", 0, (int) watcher.getDamageToPlayer().size());
 
     }
 
@@ -92,9 +148,14 @@ public class CastBRGCommanderTest extends CardTestCommanderDuelBase {
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Daxos of Meletis");
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Mogg Infestation");
+        addTarget(playerA, playerB);
+        setChoice(playerB, "Yes"); // Move commander to command zone
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
+
+        setStrictChooseMode(true);
         execute();
+        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Mogg Infestation", 1);
         assertCommandZoneCount(playerB, "Daxos of Meletis", 1);
