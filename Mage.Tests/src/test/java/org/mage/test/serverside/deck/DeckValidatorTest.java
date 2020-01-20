@@ -150,7 +150,7 @@ public class DeckValidatorTest extends MageTestBase {
         Assert.assertFalse("Counterspell not allowed in modern", testDeckValid(new Modern(), deckList));
 
         deckList.clear();
-        deckList.add(new CardNameAmount("FNMP", 66, 4));
+        deckList.add(new CardNameAmount("F05", 11, 4));
         deckList.add(new CardNameAmount("Mountain", 56));
         Assert.assertFalse("Counterspell not allowed in modern", testDeckValid(new Modern(), deckList));
 

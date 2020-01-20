@@ -17,7 +17,6 @@ public enum MagidexImageSource implements CardImageSource {
     MagidexImageSource() {
         supportedSets = new LinkedHashSet<>();
         // supportedSets.add("PTC"); // Prerelease Events
-        // supportedSets.add("FNMP");
         supportedSets.add("JR");
         supportedSets.add("LEA");
         supportedSets.add("LEB");

@@ -334,7 +334,7 @@ public enum WizardCardsImageSource implements CardImageSource {
         setsAliases.put("EVG", "Duel Decks: Elves vs. Goblins");
         setsAliases.put("EXO", "Exodus");
         setsAliases.put("FEM", "Fallen Empires");
-//        setsAliases.put("FNMP", "Friday Night Magic");
+//        setsAliases.put("FNM", "Friday Night Magic");
         setsAliases.put("FRF", "Fate Reforged");
         setsAliases.put("FUT", "Future Sight");
         setsAliases.put("GPT", "Guildpact");

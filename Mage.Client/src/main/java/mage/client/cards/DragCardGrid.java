@@ -1505,6 +1505,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         pimpedSets.put("JR", 1);
         pimpedSets.put("MPS", 1);
         pimpedSets.put("CLASH", 1);
+        // Arena League
         pimpedSets.put("PARL", 1);
         pimpedSets.put("PAL99", 1);
         pimpedSets.put("PAL00", 1);
@@ -1518,7 +1519,28 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         pimpedSets.put("WMCQ", 1);
         pimpedSets.put("PALP", 1);
         pimpedSets.put("PELP", 1);
-        pimpedSets.put("FNMP", 1);
+
+        //Friday Night Magic
+        pimpedSets.put("FNM", 1);
+        pimpedSets.put("F01", 1);
+        pimpedSets.put("F02", 1);
+        pimpedSets.put("F03", 1);
+        pimpedSets.put("F04", 1);
+        pimpedSets.put("F05", 1);
+        pimpedSets.put("F06", 1);
+        pimpedSets.put("F07", 1);
+        pimpedSets.put("F08", 1);
+        pimpedSets.put("F09", 1);
+        pimpedSets.put("F10", 1);
+        pimpedSets.put("F11", 1);
+        pimpedSets.put("F12", 1);
+        pimpedSets.put("F13", 1);
+        pimpedSets.put("F14", 1);
+        pimpedSets.put("F15", 1);
+        pimpedSets.put("F16", 1);
+        pimpedSets.put("F17", 1);
+        pimpedSets.put("F18", 1);
+
         pimpedSets.put("MGDC", 1);
         pimpedSets.put("MPRP", 1);
         pimpedSets.put("EXP", 1);
