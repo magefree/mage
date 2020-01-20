@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
-
 import java.util.Objects;
 import java.util.UUID;
 
@@ -40,8 +39,8 @@ class WhirlwindDenialEffect extends OneShotEffect {
 
     WhirlwindDenialEffect() {
         super(Outcome.Benefit);
-        staticText = "For each spell and ability your opponents control, " +
-                "counter it unless its controller pays {4}.";
+        staticText = "For each spell and ability your opponents control, "
+                + "counter it unless its controller pays {4}.";
     }
 
     private WhirlwindDenialEffect(final WhirlwindDenialEffect effect) {
@@ -59,7 +58,7 @@ class WhirlwindDenialEffect extends OneShotEffect {
                 .stream()
                 .filter(Objects::nonNull)
                 .forEachOrdered(stackObject -> {
-                    if (!game.getOpponents(stackObject.getControllerId()).contains(source.getControllerId())) {
+                    if (!game.getOpponents(source.getControllerId()).contains(stackObject.getControllerId())) {
                         return;
                     }
                     Player player = game.getPlayer(stackObject.getControllerId());
@@ -67,9 +66,10 @@ class WhirlwindDenialEffect extends OneShotEffect {
                         return;
                     }
                     Cost cost = new GenericManaCost(4);
-                    if (cost.canPay(source, source.getSourceId(), source.getControllerId(), game)
-                            && player.chooseUse(outcome, "Pay {4} to prevent " + stackObject.getIdName() + " from being countered?", source, game)
-                            && cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
+                    if (cost.canPay(source, source.getSourceId(), stackObject.getControllerId(), game)
+                            && player.chooseUse(outcome, "Pay {4} to prevent "
+                                    + stackObject.getIdName() + " from being countered?", source, game)
+                            && cost.pay(source, game, source.getSourceId(), stackObject.getControllerId(), false)) {
                         return;
                     }
                     stackObject.counter(source.getSourceId(), game);
