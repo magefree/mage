@@ -2,23 +2,18 @@ package mage.cards.h;
 
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.EnchantedPredicate;
-import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
-
-import java.util.Objects;
 import java.util.UUID;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.game.permanent.Permanent;
 
 /**
  * @author TheElk801
@@ -35,7 +30,8 @@ public final class HatefulEidolon extends CardImpl {
         // Lifelink
         this.addAbility(LifelinkAbility.getInstance());
 
-        // Whenever an enchanted creature dies, draw a card for each Aura you controlled that was attached to it.
+        // Whenever an enchanted creature dies, draw a card for each 
+        // Aura you controlled that was attached to it.
         this.addAbility(new HatefulEidolonTriggeredAbility());
     }
 
@@ -50,12 +46,6 @@ public final class HatefulEidolon extends CardImpl {
 }
 
 class HatefulEidolonTriggeredAbility extends TriggeredAbilityImpl {
-
-    private static final FilterPermanent filter = new FilterCreaturePermanent();
-
-    static {
-        filter.add(EnchantedPredicate.instance);
-    }
 
     HatefulEidolonTriggeredAbility() {
         super(Zone.BATTLEFIELD, null, false);
@@ -77,21 +67,21 @@ class HatefulEidolonTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
+        int auraCount = 0;
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (!zEvent.isDiesEvent() || !filter.match(zEvent.getTarget(), game)) {
+        if (!zEvent.isDiesEvent()) {
             return false;
         }
-        int auraCount = zEvent
-                .getTarget()
-                .getAttachments()
-                .stream()
-                .map(game::getPermanentOrLKIBattlefield)
-                .filter(Objects::nonNull)
-                .filter(permanent -> permanent.hasSubtype(SubType.AURA, game))
-                .map(Controllable::getControllerId)
-                .filter(this.getControllerId()::equals)
-                .mapToInt(x -> 1)
-                .sum();
+        Permanent deadCreature = game.getPermanentOrLKIBattlefield(event.getTargetId());
+        if (deadCreature.getAttachments().isEmpty()) {
+            return false;
+        }
+        for (UUID auraId : deadCreature.getAttachments()) {
+            Permanent aura = game.getPermanentOrLKIBattlefield(auraId);
+            if (aura.getControllerId().equals(controllerId)) {
+                auraCount += 1;
+            }
+        }
         this.getEffects().clear();
         this.addEffect(new DrawCardSourceControllerEffect(auraCount));
         return true;
@@ -99,6 +89,7 @@ class HatefulEidolonTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever an enchanted creature dies, draw a card for each Aura you controlled that was attached to it.";
+        return "Whenever an enchanted creature dies, draw a card for each "
+                + "Aura you controlled that was attached to it.";
     }
 }
