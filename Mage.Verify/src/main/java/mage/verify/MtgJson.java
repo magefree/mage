@@ -37,7 +37,7 @@ public final class MtgJson {
         mtgJsonToXMageCodes.put("pGPX", "GPX");
         mtgJsonToXMageCodes.put("pFNM", "FNMP");
         mtgJsonToXMageCodes.put("pELP", "PELP");
-        mtgJsonToXMageCodes.put("pARL", "ARENA");
+        mtgJsonToXMageCodes.put("pARL", "PARL"); // TODO: What about the other Arena League sets (1999-2006)?
         mtgJsonToXMageCodes.put("pALP", "PALP");
         mtgJsonToXMageCodes.put("PO2", "P02");
         mtgJsonToXMageCodes.put("DD3_JVC", "DD3JVC");

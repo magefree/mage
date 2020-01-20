@@ -65,7 +65,18 @@ public class ScryfallImageSupportCards {
             add("G99");
             add("G00");
             add("G01");
-            
+
+            // Arena League
+            add("PARL");
+            add("PAL99");
+            add("PAL00");
+            add("PAL01");
+            add("PAL02");
+            add("PAL03");
+            add("PAL04");
+            add("PAL05");
+            add("PAL06");
+
             // Other promo sets
             add("PWOR");
             add("PWOS");
