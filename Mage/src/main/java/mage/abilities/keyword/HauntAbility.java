@@ -1,5 +1,3 @@
- 
-
 package mage.abilities.keyword;
 
 import mage.MageObject;
@@ -21,27 +19,29 @@ import mage.target.targetpointer.FixedTarget;
 /**
  * 702.53. Haunt
  *
- * 702.53a Haunt is a triggered ability. "Haunt" on a permanent means "When this permanent is put
- * into a graveyard from the battlefield, exile it haunting target creature."
- * "Haunt" on an instant or sorcery spell means "When this spell is put into a graveyard during
- * its resolution, exile it haunting target creature."
+ * 702.53a Haunt is a triggered ability. "Haunt" on a permanent means "When this
+ * permanent is put into a graveyard from the battlefield, exile it haunting
+ * target creature." "Haunt" on an instant or sorcery spell means "When this
+ * spell is put into a graveyard during its resolution, exile it haunting target
+ * creature."
  *
- * 702.53b Cards that are in the exile zone as the result of a haunt ability "haunt" the creature
- * targeted by that ability. The phrase "creature it haunts" refers to the object targeted by the
- * haunt ability, regardless of whether or not that object is still a creature.
+ * 702.53b Cards that are in the exile zone as the result of a haunt ability
+ * "haunt" the creature targeted by that ability. The phrase "creature it
+ * haunts" refers to the object targeted by the haunt ability, regardless of
+ * whether or not that object is still a creature.
  *
- * 702.53c Triggered abilities of cards with haunt that refer to the haunted creature can trigger in the exile zone.
+ * 702.53c Triggered abilities of cards with haunt that refer to the haunted
+ * creature can trigger in the exile zone.
  *
  * @author LevelX2
  */
-
 public class HauntAbility extends TriggeredAbilityImpl {
 
     private boolean usedFromExile = false;
-    private boolean creatureHaunt; 
-    
+    private boolean creatureHaunt;
+
     public HauntAbility(Card card, Effect effect) {
-        super(Zone.ALL, effect , false);
+        super(Zone.ALL, effect, false);
         creatureHaunt = card.isCreature();
         addSubAbility(new HauntExileAbility(creatureHaunt));
     }
@@ -66,7 +66,7 @@ public class HauntAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
-    
+
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         switch (event.getType()) {
@@ -76,16 +76,24 @@ public class HauntAbility extends TriggeredAbilityImpl {
                 }
                 break;
             case ZONE_CHANGE:
-                if (!usedFromExile && game.getState().getZone(getSourceId()) == Zone.EXILED) {
+                if (!usedFromExile
+                        && game.getState().getZone(getSourceId()) == Zone.EXILED) {
                     ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
                     if (zEvent.isDiesEvent()) {
                         Card card = game.getCard(getSourceId());
-                        if (card != null) {
-                            String key = new StringBuilder("Haunting_").append(getSourceId().toString()).append('_').append(card.getZoneChangeCounter(game)).toString();
+                        if (card != null
+                                && game.getCard(event.getTargetId()) != null) {
+                            String key = new StringBuilder("Haunting_")
+                                    .append(getSourceId().toString())
+                                    .append(card.getZoneChangeCounter(game)
+                                            + (game.getPermanentOrLKIBattlefield(event.getTargetId()))
+                                                    .getZoneChangeCounter(game)).toString();
                             Object object = game.getState().getValue(key);
                             if (object instanceof FixedTarget) {
                                 FixedTarget target = (FixedTarget) object;
-                                if (target.getTarget() != null &&  target.getTarget().equals(event.getTargetId())) {
+                                if (target.getTarget() != null
+                                        && target.getTarget()
+                                                .equals(event.getTargetId())) {
                                     usedFromExile = true;
                                     return true;
                                 }
@@ -102,23 +110,24 @@ public class HauntAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return (creatureHaunt ? "When {this} enters the battlefield or the creature it haunts dies, " :
-                                "When the creature {this} haunts dies, ")
+        return (creatureHaunt ? "When {this} enters the battlefield or the creature it haunts dies, "
+                : "When the creature {this} haunts dies, ")
                 + super.getRule();
     }
 }
 
 class HauntExileAbility extends ZoneChangeTriggeredAbility {
 
-    private static final String RULE_TEXT_CREATURE = "Haunt <i>(When this creature dies, exile it haunting target creature.)</i>";
-    private static final String RULE_TEXT_SPELL = "Haunt <i>(When this spell card is put into a graveyard after resolving, exile it haunting target creature.)</i>";
-    
+    private static final String RULE_TEXT_CREATURE = "Haunt <i>(When this creature dies, "
+            + "exile it haunting target creature.)</i>";
+    private static final String RULE_TEXT_SPELL = "Haunt <i>(When this spell card is put "
+            + "into a graveyard after resolving, exile it haunting target creature.)</i>";
+
     private boolean creatureHaunt;
-    
+
     // TODO: It's not checked yet, if the Haunt spell has resolved (and was not countered or removed from stack).
-    
     public HauntExileAbility(boolean creatureHaunt) {
-        super(creatureHaunt ? Zone.BATTLEFIELD: Zone.STACK, Zone.GRAVEYARD, new HauntEffect(), null, false);
+        super(creatureHaunt ? Zone.BATTLEFIELD : Zone.STACK, Zone.GRAVEYARD, new HauntEffect(), null, false);
         this.creatureHaunt = creatureHaunt;
         this.setRuleAtTheTop(creatureHaunt);
         this.addTarget(new TargetCreaturePermanent());
@@ -131,19 +140,22 @@ class HauntExileAbility extends ZoneChangeTriggeredAbility {
     }
 
     @Override
-    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {       
+    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
         boolean fromOK = true;
         Permanent sourcePermanent = (Permanent) game.getLastKnownInformation(sourceId, Zone.BATTLEFIELD);
-        if (creatureHaunt && sourcePermanent == null) {
+        if (creatureHaunt
+                && sourcePermanent == null) {
             // check it was previously on battlefield
             fromOK = false;
-        } 
+        }
         if (!this.hasSourceObjectAbility(game, sourcePermanent, event)) {
             return false;
-        }         
+        }
         // check now it is in graveyard
         Zone after = game.getState().getZone(sourceId);
-        return fromOK && after != null && Zone.GRAVEYARD.match(after);
+        return fromOK
+                && after != null
+                && Zone.GRAVEYARD.match(after);
     }
 
     @Override
@@ -182,7 +194,10 @@ class HauntEffect extends OneShotEffect {
             if (hauntedCreature != null) {
                 if (card.moveToExile(source.getSourceId(), "Haunting", source.getSourceId(), game)) {
                     // remember the haunted creature
-                    String key = new StringBuilder("Haunting_").append(source.getSourceId().toString()).append('_').append(card.getZoneChangeCounter(game)).toString();
+                    String key = new StringBuilder("Haunting_")
+                            .append(source.getSourceId().toString())
+                            .append(card.getZoneChangeCounter(game)
+                                    + hauntedCreature.getZoneChangeCounter(game)).toString();  // in case it is blinked
                     game.getState().setValue(key, new FixedTarget(targetPointer.getFirst(game, source)));
                     card.addInfo("hauntinfo", new StringBuilder("Haunting ").append(hauntedCreature.getLogName()).toString(), game);
                     hauntedCreature.addInfo("hauntinfo", new StringBuilder("Haunted by ").append(card.getLogName()).toString(), game);
