@@ -28,20 +28,26 @@ public final class DrivenDespair extends SplitCard {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, new CardType[]{CardType.SORCERY}, "{1}{G}", "{1}{B}", SpellAbilityType.SPLIT_AFTERMATH);
 
         // Until end of turn, creatures you control gain trample and "Whenever this creature deals combat damage to a player, draw a card."
-        getLeftHalfCard().getSpellAbility().addEffect(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
+        getLeftHalfCard().getSpellAbility().addEffect(new GainAbilityControlledEffect(
+                TrampleAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES)
+                .setText("Until end of turn, creatures you control gain trample"));
         TriggeredAbility ability = new DealsCombatDamageToAPlayerTriggeredAbility(new DrawCardSourceControllerEffect(1), false);
         getLeftHalfCard().getSpellAbility().addEffect(new GainAbilityControlledEffect(ability, Duration.EndOfTurn)
-                .setText("and \"Whenever this creature deals combat damage to a player, draw a card.\""));
+                .setText("\"Whenever this creature deals combat damage to a player, draw a card.\"")
+                .concatBy("and"));
 
         // Despair {1}{B}
         // Sorcery
         // Aftermath
         getRightHalfCard().addAbility(new AftermathAbility().setRuleAtTheTop(true));
         // Until end of turn, creatures you control gain menace and "Whenever this creature deals combat damage to a player, that player discards a card."
-        getRightHalfCard().getSpellAbility().addEffect(new GainAbilityControlledEffect(new MenaceAbility(), Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES));
+        getRightHalfCard().getSpellAbility().addEffect(new GainAbilityControlledEffect(
+                new MenaceAbility(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES)
+                .setText("Until end of turn, creatures you control gain menace"));
         ability = new DealsCombatDamageToAPlayerTriggeredAbility(new DiscardTargetEffect(1), false, true);
         getRightHalfCard().getSpellAbility().addEffect(new GainAbilityControlledEffect(ability, Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES)
-                .setText("and \"Whenever this creature deals combat damage to a player, that player discards a card.\""));
+                .setText("\"Whenever this creature deals combat damage to a player, that player discards a card.\"")
+                .concatBy("and"));
 
     }
 
