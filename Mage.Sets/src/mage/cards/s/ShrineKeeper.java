@@ -14,7 +14,7 @@ import java.util.UUID;
 public final class ShrineKeeper extends CardImpl {
 
     public ShrineKeeper(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{W}");
         this.subtype.add(SubType.HUMAN, SubType.CLERIC);
 
         this.power = new MageInt(2);
