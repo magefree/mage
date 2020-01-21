@@ -60,7 +60,9 @@ public class HideawayAbility extends StaticAbility {
 
     @Override
     public String getRule() {
-        return "Hideaway <i>(This " + this.name + " enters the battlefield tapped. When it does, look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library.)</i>";
+        return "Hideaway <i>(This " + this.name + " enters the battlefield tapped. "
+                + "When it does, look at the top four cards of your library, exile "
+                + "one face down, then put the rest on the bottom of your library.)</i>";
     }
 
     @Override
@@ -75,7 +77,8 @@ class HideawayExileEffect extends OneShotEffect {
 
     public HideawayExileEffect() {
         super(Outcome.Benefit);
-        this.staticText = "look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library";
+        this.staticText = "look at the top four cards of your library, "
+                + "exile one face down, then put the rest on the bottom of your library";
     }
 
     public HideawayExileEffect(final HideawayExileEffect effect) {
@@ -90,11 +93,19 @@ class HideawayExileEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent hideawaySource = game.getPermanent(source.getSourceId());
-        if (hideawaySource == null || controller == null) {
+        
+        // LKI is required for this ruling
+        /*
+        If Watcher for Tomorrow leaves the battlefield before its 
+        triggered ability from hideaway resolves, its leaves-the-battlefield 
+        ability resolves and does nothing. Then its enters-the-battlefield 
+        ability resolves and you exile a card with no way to return it to your hand.
+        */
+        Permanent hideawaySource = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        if (hideawaySource == null 
+                || controller == null) {
             return false;
         }
-
         Cards cards = new CardsImpl();
         cards.addAll(controller.getLibrary().getTopCards(game, 4));
         if (!cards.isEmpty()) {
