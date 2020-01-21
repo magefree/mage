@@ -765,7 +765,7 @@ public class VerifyCardDataTest {
         checkSupertypes(card, ref);
         checkTypes(card, ref);
         checkColors(card, ref);
-        //checkNumbers(card, ref); // TODO: load data from allsets.json and check it (allcards.json do not have card numbers)
+        //checkNumbers(card, ref); // TODO: load data from AllPrintings.json and check it (allcards.json do not have card numbers)
         checkBasicLands(card, ref);
         checkMissingAbilities(card, ref);
         checkWrongSymbolsInRules(card);

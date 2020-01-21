@@ -113,7 +113,7 @@ public final class MtgJson {
     }
 
     private static Map<String, JsonSet> loadAllSets() throws IOException {
-        return readFromZip("AllSets.json.zip", new TypeReference<Map<String, JsonSet>>() {
+        return readFromZip("AllPrintings.json.zip", new TypeReference<Map<String, JsonSet>>() {
         });
     }
 
@@ -122,7 +122,7 @@ public final class MtgJson {
         if (stream == null) {
             File file = new File(filename);
             if (!file.exists()) {
-                URLConnection connection = new URL("https://mtgjson.com/json/" + filename).openConnection();
+                URLConnection connection = new URL("https://mtgjson.com/files/" + filename).openConnection();
                 connection.setRequestProperty("user-agent", "xmage");
                 InputStream download = connection.getInputStream();
                 Files.copy(download, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
