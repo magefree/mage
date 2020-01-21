@@ -1,26 +1,7 @@
 package org.mage.plugins.card.images;
 
-import java.awt.*;
-import java.awt.geom.RoundRectangle2D;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javax.annotation.Nullable;
-import javax.imageio.ImageIO;
-
-import org.apache.log4j.Logger;
-import org.mage.plugins.card.dl.sources.DirectLinksForDownload;
-import org.mage.plugins.card.utils.CardImageUtils;
-
 import com.google.common.base.Function;
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
-import com.google.common.cache.LoadingCache;
 import com.google.common.collect.ComputationException;
-
 import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.SoftValuesLoadingCache;
@@ -29,6 +10,17 @@ import mage.view.CardView;
 import net.java.truevfs.access.TFile;
 import net.java.truevfs.access.TFileInputStream;
 import net.java.truevfs.access.TFileOutputStream;
+import org.apache.log4j.Logger;
+import org.mage.plugins.card.dl.sources.DirectLinksForDownload;
+import org.mage.plugins.card.utils.CardImageUtils;
+
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.geom.RoundRectangle2D;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * This class stores ALL card images in a cache with soft values. this means
@@ -97,7 +89,8 @@ public final class ImageCache {
                             path = CardImageUtils.generateTokenImagePath(info);
                             if (path == null) {
                                 cardback = true;
-                                path = DirectLinksForDownload.outDir + File.separator + DirectLinksForDownload.cardbackFilename; // TODO: replace empty token by other default card, not cardback
+                                // TODO: replace empty token by other default card, not cardback
+                                path = CardImageUtils.buildImagePathToDefault(DirectLinksForDownload.cardbackFilename);
                             }
                         } else {
                             path = CardImageUtils.buildImagePathToCard(info);
@@ -256,7 +249,8 @@ public final class ImageCache {
                 info.setToken(true);
                 path = CardImageUtils.generateFullTokenImagePath(info);
                 if (path == null) {
-                    path = DirectLinksForDownload.outDir + File.separator + DirectLinksForDownload.cardbackFilename; // TODO: replace empty token by other default card, not cardback
+                    // TODO: replace empty token by other default card, not cardback
+                    path = CardImageUtils.buildImagePathToDefault(DirectLinksForDownload.cardbackFilename);
                 }
             } else {
                 path = CardImageUtils.buildImagePathToCard(info);
@@ -275,12 +269,13 @@ public final class ImageCache {
     }
 
     public static BufferedImage getCardbackImage() {
-        BufferedImage image = ImageCache.loadImage(new TFile(DirectLinksForDownload.outDir + File.separator + DirectLinksForDownload.cardbackFilename));
+        BufferedImage image = ImageCache.loadImage(new TFile(CardImageUtils.buildImagePathToDefault(DirectLinksForDownload.cardbackFilename)));
         image = getRoundCorner(image);
         return image;
     }
 
     public static BufferedImage getMorphImage() {
+        // TODO: replace by morth image
         CardDownloadData info = new CardDownloadData("Morph", "KTK", "0", false, 0, "KTK", "");
         info.setToken(true);
         String path = CardImageUtils.generateTokenImagePath(info);
@@ -295,6 +290,7 @@ public final class ImageCache {
     }
 
     public static BufferedImage getManifestImage() {
+        // TODO: replace by manifestest image
         CardDownloadData info = new CardDownloadData("Manifest", "FRF", "0", false, 0, "FRF", "");
         info.setToken(true);
         String path = CardImageUtils.generateTokenImagePath(info);
@@ -367,10 +363,7 @@ public final class ImageCache {
         if (file == null) {
             return false;
         }
-        if (file.exists()) {
-            return true;
-        }
-        return false;
+        return file.exists();
     }
 
     public static BufferedImage getThumbnail(CardView card) {

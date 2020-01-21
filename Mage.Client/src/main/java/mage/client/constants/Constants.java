@@ -1,10 +1,9 @@
-
 package mage.client.constants;
 
+import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.io.File;
-import javax.swing.BorderFactory;
-import javax.swing.border.Border;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -55,7 +54,7 @@ public final class Constants {
     public static final Rectangle THUMBNAIL_SIZE_FULL = new Rectangle(102, 146);
 
     // resources - default images
-    public static final String RESOURCE_PATH_DEFAUL_IMAGES = File.separator + "default";
+    public static final String RESOURCE_PATH_DEFAULT_IMAGES = File.separator + "default";
 
     // resources - symbols
     public static final String RESOURCE_PATH_SYMBOLS = File.separator + "symbols";
@@ -64,6 +63,7 @@ public final class Constants {
     public static final String RESOURCE_SYMBOL_FOLDER_LARGE = "large";
     public static final String RESOURCE_SYMBOL_FOLDER_SVG = "svg";
     public static final String RESOURCE_SYMBOL_FOLDER_PNG = "png";
+
     public enum ResourceSymbolSize {
         SMALL,
         MEDIUM,
@@ -77,6 +77,7 @@ public final class Constants {
     public static final String RESOURCE_SET_FOLDER_SMALL = "small";
     public static final String RESOURCE_SET_FOLDER_MEDIUM = ""; // empty, medium images laydown in "sets" folder, TODO: delete that and auto gen, use png for html, not gif
     public static final String RESOURCE_SET_FOLDER_SVG = "svg";
+
     public enum ResourceSetSize {
         SMALL,
         MEDIUM,

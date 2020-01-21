@@ -126,6 +126,11 @@ public final class CardImageUtils {
         return path;
     }
 
+    public static String buildImagePathToDefault(String defaultFileName) {
+        // default downloadable images like card back
+        return getImagesDir() + Constants.RESOURCE_PATH_DEFAULT_IMAGES + File.separator + defaultFileName;
+    }
+
     public static String fixSetNameForWindows(String set) {
         // windows can't create con folders
         if (set.equals("CON") || set.equals("con")) {
