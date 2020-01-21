@@ -92,6 +92,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private static final String DEBUG_ARG = "-debug";
 
     private static final String NOT_CONNECTED_TEXT = "<not connected>";
+    private static final String NOT_CONNECTED_BUTTON = "CONNECT TO SERVER";
     private static MageFrame instance;
 
     private final ConnectDialog connectDialog;
@@ -318,7 +319,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         }
 
         setGUISize();
-        setConnectButtonText(NOT_CONNECTED_TEXT);
+        setConnectButtonText(NOT_CONNECTED_BUTTON);
         SwingUtilities.invokeLater(() -> {
             disableButtons();
             updateMemUsageTask.execute();
@@ -1437,7 +1438,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         if (SwingUtilities.isEventDispatchThread()) { // Returns true if the current thread is an AWT event dispatching thread.
             // REMOTE task, e.g. connecting
             LOGGER.info("Disconnected from remote task");
-            setConnectButtonText(NOT_CONNECTED_TEXT);
+            setConnectButtonText(NOT_CONNECTED_BUTTON);
             disableButtons();
             hideGames();
             hideTables();
@@ -1446,7 +1447,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             LOGGER.info("Disconnected from user mode");
             SwingUtilities.invokeLater(() -> {
                         SessionHandler.disconnect(false); // user already disconnected, can't do any online actions like quite chat
-                        setConnectButtonText(NOT_CONNECTED_TEXT);
+                        setConnectButtonText(NOT_CONNECTED_BUTTON);
                         disableButtons();
                         hideGames();
                         hideTables();
