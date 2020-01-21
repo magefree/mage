@@ -20,9 +20,11 @@ import java.util.UUID;
  */
 public interface CardPlugin extends Plugin {
 
-    MagePermanent getMagePermanent(PermanentView permanent, Dimension dimension, UUID gameId, ActionCallback callback, boolean canBeFoil, boolean loadImage, int renderMode);
+    MagePermanent getMagePermanent(PermanentView permanent, Dimension dimension, UUID gameId, ActionCallback callback,
+                                   boolean canBeFoil, boolean loadImage, int renderMode, boolean needFullPermanentRender);
 
-    MagePermanent getMageCard(CardView permanent, Dimension dimension, UUID gameId, ActionCallback callback, boolean canBeFoil, boolean loadImage, int renderMode);
+    MagePermanent getMageCard(CardView permanent, Dimension dimension, UUID gameId, ActionCallback callback,
+                              boolean canBeFoil, boolean loadImage, int renderMode, boolean needFullPermanentRender);
 
     int sortPermanents(Map<String, JComponent> ui, Map<UUID, MagePermanent> cards, boolean nonPermanentsOwnRow, boolean topPanel);
 

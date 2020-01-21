@@ -231,9 +231,10 @@ public class CardPanelRenderImpl extends CardPanel {
     private BufferedImage cardImage;
     private CardRenderer cardRenderer;
 
-    public CardPanelRenderImpl(CardView newGameCard, UUID gameId, final boolean loadImage, ActionCallback callback, final boolean foil, Dimension dimension) {
+    public CardPanelRenderImpl(CardView newGameCard, UUID gameId, final boolean loadImage, ActionCallback callback,
+                               final boolean foil, Dimension dimension, boolean needFullPermanentRender) {
         // Call to super
-        super(newGameCard, gameId, loadImage, callback, foil, dimension);
+        super(newGameCard, gameId, loadImage, callback, foil, dimension, needFullPermanentRender);
 
         // Renderer
         cardRenderer = cardRendererFactory.create(getGameCard(), isTransformed());

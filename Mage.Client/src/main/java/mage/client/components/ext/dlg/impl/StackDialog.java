@@ -120,7 +120,7 @@ public class StackDialog extends IDialogPanel {
                 card = tmp;
             }
 
-            MageCard cardImg = Plugins.instance.getMageCard(card, bigCard, getCardDimension(), gameId, true, true, PreferencesDialog.getRenderMode());
+            MageCard cardImg = Plugins.instance.getMageCard(card, bigCard, getCardDimension(), gameId, true, true, PreferencesDialog.getRenderMode(), true);
             //cardImg.setBorder(BorderFactory.createLineBorder(Color.red));
             cardImg.setLocation(dx, dy);
 

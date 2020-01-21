@@ -1,12 +1,10 @@
-
-
 package mage.view;
 
-import java.io.Serializable;
 import mage.counters.Counter;
 
+import java.io.Serializable;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class CounterView implements Serializable {
@@ -20,6 +18,11 @@ public class CounterView implements Serializable {
         this.count = counter.getCount();
     }
 
+    public CounterView(final CounterView view) {
+        this.name = view.name;
+        this.count = view.count;
+    }
+
     public String getName() {
         return name;
     }
@@ -27,7 +30,7 @@ public class CounterView implements Serializable {
     public int getCount() {
         return count;
     }
-    
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -39,9 +42,9 @@ public class CounterView implements Serializable {
         if (!(other instanceof CounterView)) {
             return false;
         }
-        CounterView oth = (CounterView)other;
+        CounterView oth = (CounterView) other;
         return
                 (count == oth.count) &&
-                (name.equals(oth.name));
+                        (name.equals(oth.name));
     }
 }

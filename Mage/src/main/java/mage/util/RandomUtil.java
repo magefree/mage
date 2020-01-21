@@ -1,5 +1,6 @@
 package mage.util;
 
+import java.awt.*;
 import java.util.Random;
 
 /**
@@ -30,6 +31,10 @@ public final class RandomUtil {
 
     public static double nextDouble() {
         return random.nextDouble();
+    }
+
+    public static Color nextColor() {
+        return new Color(RandomUtil.nextInt(256), RandomUtil.nextInt(256), RandomUtil.nextInt(256));
     }
 
     public static void setSeed(long newSeed) {

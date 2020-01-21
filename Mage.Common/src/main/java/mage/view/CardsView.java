@@ -1,6 +1,5 @@
 package mage.view;
 
-import java.util.*;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
@@ -15,12 +14,25 @@ import mage.game.permanent.PermanentToken;
 import mage.target.targetpointer.TargetPointer;
 import mage.util.GameLog;
 
+import java.util.*;
+
 /**
  * @author BetaSteward_at_googlemail.com
  */
 public class CardsView extends LinkedHashMap<UUID, CardView> {
 
     public CardsView() {
+    }
+
+    /**
+     * Uses for card render tests
+     *
+     * @param cardViews
+     */
+    public CardsView(List<CardView> cardViews) {
+        for (CardView view : cardViews) {
+            this.put(view.getId(), view);
+        }
     }
 
     public CardsView(Collection<? extends Card> cards) {

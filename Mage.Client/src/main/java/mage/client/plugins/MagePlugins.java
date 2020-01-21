@@ -23,9 +23,9 @@ public interface MagePlugins {
 
     JComponent updateTablePanel(Map<String, JComponent> ui);
 
-    MagePermanent getMagePermanent(PermanentView card, BigCard bigCard, Dimension dimension, UUID gameId, boolean loadImage, int renderMode);
+    MagePermanent getMagePermanent(PermanentView card, BigCard bigCard, Dimension dimension, UUID gameId, boolean loadImage, int renderMode, boolean needFullPermanentRender);
 
-    MageCard getMageCard(CardView card, BigCard bigCard, Dimension dimension, UUID gameId, boolean loadImage, boolean previewable, int renderMode);
+    MageCard getMageCard(CardView card, BigCard bigCard, Dimension dimension, UUID gameId, boolean loadImage, boolean previewable, int renderMode, boolean needFullPermanentRender);
 
     boolean isThemePluginLoaded();
 

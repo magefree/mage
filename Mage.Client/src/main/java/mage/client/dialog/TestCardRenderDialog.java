@@ -26,10 +26,14 @@ import mage.players.Player;
 import mage.players.StubPlayer;
 import mage.view.*;
 import org.apache.log4j.Logger;
+import org.mage.card.arcane.CardPanel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -70,7 +74,7 @@ public class TestCardRenderDialog extends MageDialog {
         this.removeDialog();
     }
 
-    private PermanentView createCard(Game game, UUID controllerId, String code, String cardNumber, int power, int toughness, int damage) {
+    private PermanentView createPermanentCard(Game game, UUID controllerId, String code, String cardNumber, int power, int toughness, int damage, boolean tapped) {
         CardInfo cardInfo = CardRepository.instance.findCard(code, cardNumber);
         ExpansionInfo setInfo = ExpansionRepository.instance.getSetByCode(code);
         CardSetInfo testSet = new CardSetInfo(cardInfo.getName(), setInfo.getCode(), cardNumber, cardInfo.getRarity(),
@@ -86,16 +90,42 @@ public class TestCardRenderDialog extends MageDialog {
         if (power > 0) perm.getPower().setValue(power);
         if (toughness > 0) perm.getToughness().setValue(toughness);
         perm.removeSummoningSickness();
+        perm.setTapped(tapped);
         if (perm.isTransformable()) {
             perm.setTransformed(true);
         }
         PermanentView cardView = new PermanentView(perm, card, controllerId, game);
-        cardView.setInViewerOnly(true);
+        //cardView.setInViewerOnly(true);
 
         return cardView;
     }
 
-    private CardView createHandCard(Game game, UUID controllerId, String code, String cardNumber, int power, int toughness, int damage) {
+    private CardView createFaceDownCard(Game game, UUID controllerId, String code, String cardNumber, boolean isMorphed, boolean isManifested, boolean tapped) {
+        CardInfo cardInfo = CardRepository.instance.findCard(code, cardNumber);
+        ExpansionInfo setInfo = ExpansionRepository.instance.getSetByCode(code);
+        CardSetInfo testSet = new CardSetInfo(cardInfo.getName(), setInfo.getCode(), cardNumber, cardInfo.getRarity(),
+                new CardGraphicInfo(cardInfo.getFrameStyle(), cardInfo.usesVariousArt()));
+        Card card = CardImpl.createCard(cardInfo.getClassName(), testSet);
+
+        Set<Card> cardsList = new HashSet<>();
+        cardsList.add(card);
+        game.loadCards(cardsList, controllerId);
+
+        PermanentCard perm = new PermanentCard(card, controllerId, game);
+        perm.setFaceDown(true, game);
+        perm.setMorphed(isMorphed);
+        perm.setManifested(isManifested);
+        perm.removeSummoningSickness();
+        perm.setTapped(tapped);
+        if (perm.isTransformable()) {
+            perm.setTransformed(true);
+        }
+        PermanentView cardView = new PermanentView(perm, card, controllerId, game);
+        cardView.setInViewerOnly(false); // must false for face down
+        return cardView;
+    }
+
+    private CardView createHandCard(Game game, UUID controllerId, String code, String cardNumber) {
         CardInfo cardInfo = CardRepository.instance.findCard(code, cardNumber);
         ExpansionInfo setInfo = ExpansionRepository.instance.getSetByCode(code);
         CardSetInfo testSet = new CardSetInfo(cardInfo.getName(), setInfo.getCode(), cardNumber, cardInfo.getRarity(),
@@ -125,45 +155,89 @@ public class TestCardRenderDialog extends MageDialog {
     private void reloadCards() {
         cardsPanel.cleanUp();
         cardsPanel.setCustomRenderMode(comboRenderMode.getSelectedIndex());
+        cardsPanel.setCustomNeedFullPermanentRender(false); // to fix cropped/position bugged with PermanentView (CardArean do not support it as normal, see CardArea for info)
+        cardsPanel.setCustomCardSize(new Dimension(getCardWidth(), getCardHeight()));
+        cardsPanel.setCustomXOffsetBetweenCardsOrColumns(10);
+        cardsPanel.changeGUISize(); // reload new settings
+
+        // create custom mouse listener
+        cardsPanel.setCustomMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                cardsPanel.mouseClicked(e); // default
+
+                // make cards chooseable or not
+                if (e.getSource() instanceof CardPanel) {
+                    CardPanel panel = (CardPanel) e.getSource();
+                    panel.setChoosable(!panel.isChoosable());
+                    cardsPanel.redraw();
+                }
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                cardsPanel.mousePressed(e); // default
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                cardsPanel.mouseReleased(e); // default
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                cardsPanel.mouseEntered(e); // default
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                cardsPanel.mouseExited(e); // default
+            }
+        });
 
         Game game = new TestGame(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 20);
-        Player player = new StubPlayer("player1", RangeOfInfluence.ALL);
         Deck deck = new Deck();
-        game.addPlayer(player, deck);
+        Player playerYou = new StubPlayer("player1", RangeOfInfluence.ALL);
+        game.addPlayer(playerYou, deck);
+        Player playerOpponent = new StubPlayer("player2", RangeOfInfluence.ALL);
+        game.addPlayer(playerOpponent, deck);
+
+        ArrayList<CardView> cardViews = new ArrayList<>();
+        ///*
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "263", 0, 0, 0, false)); // mountain
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "185", 0, 0, 0, true)); // Judith, the Scourge Diva
+        //*/
+        cardViews.add(createHandCard(game, playerYou.getId(), "DIS", "153")); // Odds // Ends (split card)
+        cardViews.add(createHandCard(game, playerYou.getId(), "ELD", "38")); // Animating Faerie (adventure card)
+        cardViews.add(createFaceDownCard(game, playerOpponent.getId(), "ELD", "38", false, false, false)); // face down
+        cardViews.add(createFaceDownCard(game, playerOpponent.getId(), "ELD", "38", true, false, true)); // morphed
+        cardViews.add(createFaceDownCard(game, playerOpponent.getId(), "ELD", "38", false, true, false)); // manifested
+
+        // duplicate cards
+        if (checkBoxGenerateManyCards.isSelected()) {
+            while (cardViews.size() < 30) {
+                int addingCount = cardViews.size();
+                for (int i = 0; i < addingCount; i++) {
+                    CardView view = cardViews.get(i);
+                    CardView newView = new CardView(view);
+                    cardViews.add(newView);
+                }
+            }
+        }
+
+        /*
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "78", 125, 89, 0, false)); // Noxious Groodion
+
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "14", 3, 5, 2, false)); // Knight of Sorrows
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "DKA", "140", 5, 2, 2, false)); // Huntmaster of the Fells, transforms
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "221", 0, 0, 0, false)); // Bedeck // Bedazzle
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "XLN", "234", 0, 0, 0, false)); // Conqueror's Galleon
+        cardViews.add(createEmblem(new AjaniAdversaryOfTyrantsEmblem())); // Emblem Ajani
+        cardViews.add(createPlane(new AkoumPlane())); // Plane - Akoum
+        //*/
 
         BigCard big = new BigCard();
-        CardsView view = new CardsView();
-        CardView card;
-        /*
-        card = createCard(game, player.getId(), "RNA", "263", 0, 0, 0); // mountain
-        view.put(card.getId(), card);
-        card = createCard(game, player.getId(), "RNA", "185", 0, 0, 0); // Judith, the Scourge Diva
-        view.put(card.getId(), card);
-        //*/
-        card = createHandCard(game, player.getId(), "DIS", "153", 0, 0, 0); // Odds // Ends (split card)
-        view.put(card.getId(), card);
-        card = createHandCard(game, player.getId(), "ELD", "38", 2, 2, 0); // Animating Faerie (adventure card)
-        view.put(card.getId(), card);
-        /*
-        card = createCard(game, player.getId(), "RNA", "78", 125, 89, 0); // Noxious Groodion
-        view.put(card.getId(), card);
-        card = createCard(game, player.getId(), "RNA", "14", 3, 5, 2); // Knight of Sorrows
-        view.put(card.getId(), card);
-        card = createCard(game, player.getId(), "DKA", "140", 5, 2, 2); // Huntmaster of the Fells, transforms
-        view.put(card.getId(), card);
-        card = createCard(game, player.getId(), "RNA", "221", 0, 0, 0); // Bedeck // Bedazzle
-        view.put(card.getId(), card);
-        card = createCard(game, player.getId(), "XLN", "234", 0, 0, 0); // Conqueror's Galleon
-        view.put(card.getId(), card);
-        card = createEmblem(new AjaniAdversaryOfTyrantsEmblem()); // Emblem Ajani
-        view.put(card.getId(), card);
-        card = createPlane(new AkoumPlane()); // Plane - Akoum
-        view.put(card.getId(), card);
-        //*/
-
-        cardsPanel.setCustomCardSize(new Dimension(getCardWidth(), getCardHeight()));
-        cardsPanel.changeGUISize();
-
+        CardsView view = new CardsView(cardViews);
         cardsPanel.loadCards(view, big, game.getId());
     }
 
@@ -195,6 +269,7 @@ public class TestCardRenderDialog extends MageDialog {
         comboRenderMode = new javax.swing.JComboBox<>();
         sliderSize = new javax.swing.JSlider();
         labelSize = new javax.swing.JLabel();
+        checkBoxGenerateManyCards = new javax.swing.JCheckBox();
 
         buttonCancel.setText("Close");
         buttonCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -227,6 +302,13 @@ public class TestCardRenderDialog extends MageDialog {
 
         labelSize.setText("Card size:");
 
+        checkBoxGenerateManyCards.setText("Generate many cards");
+        checkBoxGenerateManyCards.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                checkBoxGenerateManyCardsItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -235,7 +317,7 @@ public class TestCardRenderDialog extends MageDialog {
                                 .addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addGap(0, 578, Short.MAX_VALUE)
+                                                .addGap(0, 748, Short.MAX_VALUE)
                                                 .addComponent(buttonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addComponent(cardsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGroup(layout.createSequentialGroup()
@@ -248,6 +330,8 @@ public class TestCardRenderDialog extends MageDialog {
                                                 .addComponent(labelSize)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(sliderSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(checkBoxGenerateManyCards)
                                                 .addGap(0, 0, Short.MAX_VALUE)))
                                 .addContainerGap())
         );
@@ -261,7 +345,8 @@ public class TestCardRenderDialog extends MageDialog {
                                                 .addComponent(labelRenderMode)
                                                 .addComponent(comboRenderMode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(labelSize))
-                                        .addComponent(sliderSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(sliderSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(checkBoxGenerateManyCards))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cardsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 421, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -293,10 +378,15 @@ public class TestCardRenderDialog extends MageDialog {
         reloadCards();
     }//GEN-LAST:event_sliderSizeStateChanged
 
+    private void checkBoxGenerateManyCardsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_checkBoxGenerateManyCardsItemStateChanged
+        reloadCards();
+    }//GEN-LAST:event_checkBoxGenerateManyCardsItemStateChanged
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonCancel;
     private javax.swing.JButton buttonReloadCards;
     private mage.client.cards.CardArea cardsPanel;
+    private javax.swing.JCheckBox checkBoxGenerateManyCards;
     private javax.swing.JComboBox<String> comboRenderMode;
     private javax.swing.JLabel labelRenderMode;
     private javax.swing.JLabel labelSize;

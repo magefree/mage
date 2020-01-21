@@ -103,7 +103,7 @@ public class DraftGrid extends javax.swing.JPanel implements MouseListener {
             List<CardView> sortedCards = new ArrayList<>(booster.values());
             sortedCards.sort(new CardViewRarityComparator());
             for (CardView card : sortedCards) {
-                MageCard cardImg = Plugins.instance.getMageCard(card, bigCard, dimension, null, true, true, PreferencesDialog.getRenderMode());
+                MageCard cardImg = Plugins.instance.getMageCard(card, bigCard, dimension, null, true, true, PreferencesDialog.getRenderMode(), true);
                 cardImg.addMouseListener(this);
                 add(cardImg);
                 cardImg.update(card);

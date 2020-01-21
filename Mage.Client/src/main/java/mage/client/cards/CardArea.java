@@ -24,15 +24,21 @@ public class CardArea extends JPanel implements MouseListener {
 
     protected final CardEventSource cardEventSource = new CardEventSource();
 
+    private static int MAX_CARDS_PER_COLUMN = 20; // max cards amount in one column
+
     private boolean reloaded = false;
     private final javax.swing.JLayeredPane cardArea;
     private final javax.swing.JScrollPane scrollPane;
     private int yCardCaptionOffsetPercent = 0; // card caption offset (use for moving card caption view center, below mana icons -- for more good UI)
+    private int xOffsetBetweenCardsOrColumns = 0; // x offset between cards or columns (in many mode)
     private Dimension cardDimension;
     private int verticalCardOffset;
 
     private int customRenderMode = -1; // custom render mode tests
-    private Dimension customCardSize = null; // custom size for tests
+    private Dimension customCardSize = null; // custom card size for tests
+    private boolean customNeedFullPermanentRender = false; // disable permanent render mode, see CardArea for more info
+    private int customXOffsetBetweenCardsOrColumns = 0;
+    private MouseListener customMouseListener = null;
 
     /**
      * Create the panel.
@@ -71,6 +77,9 @@ public class CardArea extends JPanel implements MouseListener {
         } else {
             setCardDimension(GUISizeHelper.otherZonesCardDimension, GUISizeHelper.otherZonesCardVerticalOffset);
         }
+        if (customXOffsetBetweenCardsOrColumns > 0) {
+            xOffsetBetweenCardsOrColumns = customXOffsetBetweenCardsOrColumns;
+        }
     }
 
     public void setCardDimension(Dimension dimension, int verticalCardOffset) {
@@ -96,12 +105,16 @@ public class CardArea extends JPanel implements MouseListener {
             yCardCaptionOffsetPercent = 0;
             loadCardsMany(showCards, bigCard, gameId);
         }
-        cardArea.revalidate();
 
-        this.revalidate();
-        this.repaint();
+        redraw();
 
         fixDialogSize();
+    }
+
+    public void redraw() {
+        cardArea.revalidate();
+        this.revalidate();
+        this.repaint();
     }
 
     public void loadCardsNarrow(CardsView showCards, BigCard bigCard, UUID gameId) {
@@ -121,11 +134,18 @@ public class CardArea extends JPanel implements MouseListener {
 
     private void loadCardsFew(CardsView showCards, BigCard bigCard, UUID gameId) {
         Rectangle rectangle = new Rectangle(cardDimension.width, cardDimension.height);
+        int cardsAdded = 0;
         for (CardView card : showCards.values()) {
+            if (cardsAdded > 0) {
+                rectangle.translate(cardDimension.width + xOffsetBetweenCardsOrColumns, 0);
+            }
             addCard(card, bigCard, gameId, rectangle);
-            rectangle.translate(cardDimension.width, 0);
+            cardsAdded++;
         }
-        cardArea.setPreferredSize(new Dimension(cardDimension.width * showCards.size(), cardDimension.height + verticalCardOffset));
+        cardArea.setPreferredSize(new Dimension(
+                cardDimension.width * showCards.size() + (cardsAdded * xOffsetBetweenCardsOrColumns),
+                cardDimension.height + verticalCardOffset
+        ));
     }
 
     private void addCard(CardView card, BigCard bigCard, UUID gameId, Rectangle rectangle) {
@@ -138,31 +158,28 @@ public class CardArea extends JPanel implements MouseListener {
             card = tmp;
         }
         MageCard cardPanel = Plugins.instance.getMageCard(card, bigCard, cardDimension, gameId, true, true,
-                customRenderMode != -1 ? customRenderMode : PreferencesDialog.getRenderMode());
-
+                customRenderMode != -1 ? customRenderMode : PreferencesDialog.getRenderMode(), customNeedFullPermanentRender);
         cardPanel.setBounds(rectangle);
-        cardPanel.addMouseListener(this);
-        cardArea.add(cardPanel);
-        cardArea.moveToFront(cardPanel);
+        cardPanel.addMouseListener(customMouseListener != null ? customMouseListener : this);
         cardPanel.update(card);
         cardPanel.setCardBounds(rectangle.x, rectangle.y, cardDimension.width, cardDimension.height);
+        cardArea.add(cardPanel);
+        cardArea.moveToFront(cardPanel);
 
         // new card have same settings as current view
         cardPanel.setCardCaptionTopOffset(yCardCaptionOffsetPercent);
-
         cardPanel.showCardTitle();
     }
 
     private void loadCardsMany(CardsView showCards, BigCard bigCard, UUID gameId) {
-        int rowsOfCards = 20;
         int columns = 1;
         if (showCards != null && !showCards.isEmpty()) {
             Rectangle rectangle = new Rectangle(cardDimension.width, cardDimension.height);
             int count = 0;
             for (CardView card : showCards.values()) {
                 addCard(card, bigCard, gameId, rectangle);
-                if (count >= rowsOfCards) {
-                    rectangle.translate(cardDimension.width, -(rowsOfCards * verticalCardOffset));
+                if (count >= MAX_CARDS_PER_COLUMN) {
+                    rectangle.translate(cardDimension.width + xOffsetBetweenCardsOrColumns, -(MAX_CARDS_PER_COLUMN * verticalCardOffset));
                     columns++;
                     count = 0;
                 } else {
@@ -171,7 +188,7 @@ public class CardArea extends JPanel implements MouseListener {
                 }
             }
         }
-        cardArea.setPreferredSize(new Dimension(cardDimension.width * columns, cardDimension.height + (rowsOfCards * verticalCardOffset)));
+        cardArea.setPreferredSize(new Dimension(cardDimension.width * columns + xOffsetBetweenCardsOrColumns * (columns - 1), cardDimension.height + (MAX_CARDS_PER_COLUMN * verticalCardOffset)));
     }
 
     public boolean isReloaded() {
@@ -278,8 +295,20 @@ public class CardArea extends JPanel implements MouseListener {
         this.customRenderMode = customRenderMode;
     }
 
+    public void setCustomNeedFullPermanentRender(boolean customNeedFullPermanentRender) {
+        this.customNeedFullPermanentRender = customNeedFullPermanentRender;
+    }
+
     public void setCustomCardSize(Dimension customCardSize) {
         this.customCardSize = customCardSize;
+    }
+
+    public void setCustomXOffsetBetweenCardsOrColumns(int customXOffsetBetweenCardsOrColumns) {
+        this.customXOffsetBetweenCardsOrColumns = customXOffsetBetweenCardsOrColumns;
+    }
+
+    public void setCustomMouseListener(MouseListener customMouseListener) {
+        this.customMouseListener = customMouseListener;
     }
 
     @Override

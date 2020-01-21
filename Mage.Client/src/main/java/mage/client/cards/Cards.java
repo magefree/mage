@@ -228,7 +228,7 @@
      }
 
      private void addCard(CardView card, BigCard bigCard, UUID gameId) {
-         MageCard mageCard = Plugins.instance.getMageCard(card, bigCard, getCardDimension(), gameId, true, true, PreferencesDialog.getRenderMode());
+         MageCard mageCard = Plugins.instance.getMageCard(card, bigCard, getCardDimension(), gameId, true, true, PreferencesDialog.getRenderMode(), true);
          if (zone != null) {
              mageCard.setZone(zone);
          }

@@ -240,9 +240,9 @@ public class CardPanelComponentImpl extends CardPanel {
         }
     }
 
-    public CardPanelComponentImpl(CardView newGameCard, UUID gameId, final boolean loadImage, ActionCallback callback, final boolean foil, Dimension dimension) {
+    public CardPanelComponentImpl(CardView newGameCard, UUID gameId, final boolean loadImage, ActionCallback callback, final boolean foil, Dimension dimension, boolean needFullPermanentRender) {
         // Call to super
-        super(newGameCard, gameId, loadImage, callback, foil, dimension);
+        super(newGameCard, gameId, loadImage, callback, foil, dimension, needFullPermanentRender);
 
         // Counter panel
         if (!newGameCard.isAbility()) {
@@ -750,6 +750,7 @@ public class CardPanelComponentImpl extends CardPanel {
     }
 
     private BufferedImage getFaceDownImage() {
+        // TODO: add download default images
         if (isPermanent()) {
             if (((PermanentView) getGameCard()).isMorphed()) {
                 return ImageCache.getMorphImage();

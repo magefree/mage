@@ -1,11 +1,11 @@
 package mage.cards;
 
-import java.awt.Image;
-import java.util.UUID;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
 import mage.cards.action.ActionCallback;
 import mage.view.CardView;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.UUID;
 
 public abstract class MageCard extends JPanel {
 
@@ -57,5 +57,4 @@ public abstract class MageCard extends JPanel {
     public abstract void setPopupMenu(JPopupMenu popupMenu);
 
     public abstract JPopupMenu getPopupMenu();
-
 }

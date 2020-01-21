@@ -163,7 +163,7 @@ public class ChoiceDialog extends IDialogPanel {
             }
 
             CardView card = cardList.get(i);
-            MageCard cardImg = Plugins.instance.getMageCard(card, bigCard, getCardDimension(), gameId, true, true, PreferencesDialog.getRenderMode());
+            MageCard cardImg = Plugins.instance.getMageCard(card, bigCard, getCardDimension(), gameId, true, true, PreferencesDialog.getRenderMode(), true);
 
             cardImg.setLocation(dx, dy + j * (height + 30));
             add(cardImg);

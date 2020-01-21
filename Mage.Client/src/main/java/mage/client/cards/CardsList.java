@@ -389,7 +389,7 @@
      }
 
      private MageCard addCard(CardView card, BigCard bigCard, UUID gameId) {
-         MageCard cardImg = Plugins.instance.getMageCard(card, bigCard, cardDimension, gameId, true, true, PreferencesDialog.getRenderMode());
+         MageCard cardImg = Plugins.instance.getMageCard(card, bigCard, cardDimension, gameId, true, true, PreferencesDialog.getRenderMode(), true);
          cardArea.add(cardImg);
          cardImg.update(card);
          cardImg.addMouseListener(this);

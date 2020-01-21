@@ -228,7 +228,7 @@
          if (cardDimension == null) {
              cardDimension = new Dimension(Config.dimensions.getFrameWidth(), Config.dimensions.getFrameHeight());
          }
-         final MagePermanent perm = Plugins.instance.getMagePermanent(permanent, bigCard, cardDimension, gameId, true, PreferencesDialog.getRenderMode());
+         final MagePermanent perm = Plugins.instance.getMagePermanent(permanent, bigCard, cardDimension, gameId, true, PreferencesDialog.getRenderMode(), true);
 
          permanents.put(permanent.getId(), perm);
 

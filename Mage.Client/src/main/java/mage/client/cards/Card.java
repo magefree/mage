@@ -35,7 +35,6 @@ import static mage.client.constants.Constants.*;
 @SuppressWarnings("serial")
 public class Card extends MagePermanent implements MouseMotionListener, MouseListener, FocusListener, ComponentListener {
 
-
     protected Point p;
     protected final CardDimensions dimension;
 

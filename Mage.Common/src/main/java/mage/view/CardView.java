@@ -137,83 +137,76 @@ public class CardView extends SimpleCardView {
 
     public CardView(CardView cardView) {
         super(cardView);
-        this.originalCard = cardView.originalCard;
 
-        // generetate new ID
+        // generetate new ID (TODO: why new ID?)
         this.id = UUID.randomUUID();
-
         this.parentId = cardView.parentId;
+
         this.name = cardView.name;
         this.displayName = cardView.displayName;
         this.displayFullName = cardView.displayFullName;
-        this.rules = cardView.rules;
+        this.rules = new ArrayList<>(cardView.rules);
+
         this.power = cardView.power;
         this.toughness = cardView.toughness;
         this.loyalty = cardView.loyalty;
         this.startingLoyalty = cardView.startingLoyalty;
-        this.cardTypes = cardView.cardTypes;
-        this.subTypes = cardView.subTypes;
+        this.cardTypes = new HashSet<>(cardView.cardTypes);
+        this.subTypes = new SubTypeList(cardView.subTypes);
         this.superTypes = cardView.superTypes;
+
         this.color = cardView.color;
         this.frameColor = cardView.frameColor;
         this.frameStyle = cardView.frameStyle;
-        this.manaCostLeft = cardView.manaCostLeft;
-        this.manaCostRight = cardView.manaCostRight;
+        this.manaCostLeft = new ArrayList<>(cardView.manaCostLeft);
+        this.manaCostRight = new ArrayList<>(cardView.manaCostRight);
         this.convertedManaCost = cardView.convertedManaCost;
         this.rarity = cardView.rarity;
 
         this.mageObjectType = cardView.mageObjectType;
-
         this.isAbility = cardView.isAbility;
         this.abilityType = cardView.abilityType;
         this.isToken = cardView.isToken;
-
-        this.ability = null;
+        this.ability = cardView.ability; // reference, not copy
         this.type = cardView.type;
 
         this.transformable = cardView.transformable;
-        if (cardView.secondCardFace != null) {
-            this.secondCardFace = new CardView(cardView.secondCardFace);
-        } else {
-            this.secondCardFace = null;
-        }
+        this.secondCardFace = cardView.secondCardFace == null ? null : new CardView(cardView.secondCardFace);
         this.transformed = cardView.transformed;
-
         this.flipCard = cardView.flipCard;
         this.faceDown = cardView.faceDown;
-
         this.alternateName = cardView.alternateName;
         this.originalName = cardView.originalName;
-        this.artRect = cardView.artRect;
 
         this.isSplitCard = cardView.isSplitCard;
         this.leftSplitName = cardView.leftSplitName;
-        this.leftSplitCosts = cardView.leftSplitCosts;
-        this.leftSplitRules = null;
+        this.leftSplitCosts = cardView.leftSplitCosts == null ? null : cardView.leftSplitCosts.copy();
+        this.leftSplitRules = cardView.leftSplitRules == null ? null : new ArrayList<>(cardView.leftSplitRules);
         this.leftSplitTypeLine = cardView.leftSplitTypeLine;
         this.rightSplitName = cardView.rightSplitName;
-        this.rightSplitCosts = cardView.rightSplitCosts;
-        this.rightSplitRules = null;
+        this.rightSplitCosts = cardView.rightSplitCosts == null ? null : cardView.rightSplitCosts.copy();
+        this.rightSplitRules = cardView.rightSplitRules == null ? null : new ArrayList<>(cardView.rightSplitRules);
         this.rightSplitTypeLine = cardView.rightSplitTypeLine;
 
-        this.targets = null;
-
+        this.artRect = cardView.artRect;
+        this.targets = cardView.targets == null ? null : new ArrayList<>(cardView.targets);
         this.pairedCard = cardView.pairedCard;
-        this.bandedCards = null;
+        this.bandedCards = cardView.bandedCards == null ? null : new ArrayList<>(cardView.bandedCards);
         this.paid = cardView.paid;
-        this.counters = null;
+        if (cardView.counters != null) {
+            this.counters = new ArrayList<>();
+            cardView.counters.forEach(c -> this.counters.add(new CounterView(c)));
+        }
 
         this.controlledByOwner = cardView.controlledByOwner;
-
         this.zone = cardView.zone;
-
         this.rotate = cardView.rotate;
         this.hideInfo = cardView.hideInfo;
 
         this.canAttack = cardView.canAttack;
         this.canBlock = cardView.canBlock;
         this.inViewerOnly = cardView.inViewerOnly;
-        this.originalCard = cardView.originalCard.copy();
+        this.originalCard = cardView.originalCard == null ? null : cardView.originalCard.copy();
     }
 
     /**

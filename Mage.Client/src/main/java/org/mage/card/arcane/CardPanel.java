@@ -84,6 +84,12 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
     private boolean hasSickness;
     private String zone;
 
+    // Permanent and card renders are different (another sizes and positions of panel, tapped, etc -- that's weird)
+    // Some card view components support only permanents (BattlefieldPanel), but another support only cards (CardArea)
+    // TODO: remove crop/size logic from CardPanel to viewers panels or make compatible for all panels
+    // But testing render needs both cards and permanents. That's settings allows to disable different render logic
+    private boolean needFullPermanentRender = true;
+
     public double transformAngle = 1;
 
     private boolean transformed;
@@ -97,13 +103,27 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
     // if this is set, it's opened if the user right clicks on the card panel
     private JPopupMenu popupMenu;
 
-    public CardPanel(CardView newGameCard, UUID gameId, final boolean loadImage, ActionCallback callback, final boolean foil, Dimension dimension) {
+    public CardPanel(CardView newGameCard, UUID gameId, final boolean loadImage, ActionCallback callback, final boolean foil, Dimension dimension, boolean needFullPermanentRender) {
         // Store away params
         this.setGameCard(newGameCard);
         this.callback = callback;
         this.gameId = gameId;
+        this.needFullPermanentRender = needFullPermanentRender;
 
-        // Gather info about the card
+        /*
+        this.setFocusable(true);
+        this.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(FocusEvent e) {
+                //LOGGER.warn("focus gained " + getCard().getName());
+            }
+
+            public void focusLost(FocusEvent e) {
+                //LOGGER.warn("focus lost " + getCard().getName());
+            }
+        });
+         */
+
+        // Gather info about the card (all card maniputations possible with permanents only, also render can be different)
         this.isPermanent = this.getGameCard() instanceof PermanentView && !this.getGameCard().inViewerOnly();
         if (isPermanent) {
             this.hasSickness = ((PermanentView) this.getGameCard()).hasSummoningSickness();
@@ -204,7 +224,7 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
             updateArtImage();
         }
     }
-    
+
     public void setIsPermanent(boolean isPermanent) {
         this.isPermanent = isPermanent;
     }
@@ -360,7 +380,7 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
         this.cardWidth = cardWidth;
         this.symbolWidth = cardWidth / 7;
         this.cardHeight = cardHeight;
-        if (this.isPermanent) {
+        if (this.isPermanent && needFullPermanentRender) {
             int rotCenterX = Math.round(cardWidth / 2f);
             int rotCenterY = cardHeight - rotCenterX;
             int rotCenterToTopCorner = Math.round(cardWidth * CardPanel.ROT_CENTER_TO_TOP_CORNER);
@@ -382,7 +402,7 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
     }
 
     public int getXOffset(int cardWidth) {
-        if (this.isPermanent) {
+        if (this.isPermanent && needFullPermanentRender) {
             int rotCenterX = Math.round(cardWidth / 2f);
             int rotCenterToBottomCorner = Math.round(cardWidth * CardPanel.ROT_CENTER_TO_BOTTOM_CORNER);
             int xOffset = rotCenterX - rotCenterToBottomCorner;
@@ -393,7 +413,7 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
     }
 
     public final int getYOffset(int cardWidth, int cardHeight) {
-        if (this.isPermanent) {
+        if (this.isPermanent && needFullPermanentRender) {
             int rotCenterX = Math.round(cardWidth / 2f);
             int rotCenterY = cardHeight - rotCenterX;
             int rotCenterToTopCorner = Math.round(cardWidth * CardPanel.ROT_CENTER_TO_TOP_CORNER);
@@ -625,7 +645,7 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
         if (getGameCard().hideInfo()) {
             return;
         }
-        
+
         if (tooltipShowing) {
             synchronized (this) {
                 if (tooltipShowing) {
