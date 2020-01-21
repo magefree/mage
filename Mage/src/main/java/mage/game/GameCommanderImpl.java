@@ -1,5 +1,7 @@
 package mage.game;
 
+import java.util.Map;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.InfoEffect;
@@ -15,9 +17,6 @@ import mage.game.turn.TurnMod;
 import mage.players.Player;
 import mage.watchers.common.CommanderInfoWatcher;
 import mage.watchers.common.CommanderPlaysCountWatcher;
-
-import java.util.Map;
-import java.util.UUID;
 
 public abstract class GameCommanderImpl extends GameImpl {
 
@@ -78,7 +77,9 @@ public abstract class GameCommanderImpl extends GameImpl {
     }
 
     public void initCommander(Card commander, Player player) {
-        commander.moveToZone(Zone.COMMAND, null, this, true);
+        if (!Zone.EXILED.equals(getState().getZone(commander.getId()))) { // Exile check needed for Karn Liberated restart
+            commander.moveToZone(Zone.COMMAND, null, this, true);
+        }
         commander.getAbilities().setControllerId(player.getId());
 
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, new InfoEffect("Commander effects"));

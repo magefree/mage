@@ -635,7 +635,7 @@ public class HumanPlayer extends PlayerImpl {
         }
 
         // choose one or multiple cards
-        if (cards == null) {
+        if (cards == null || cards.isEmpty()) {
             return false;
         }
 
@@ -664,6 +664,11 @@ public class HumanPlayer extends PlayerImpl {
             }
             if (!choosable.isEmpty()) {
                 options.put("choosable", (Serializable) choosable);
+            }
+
+            // if nothing to choose then show window (user must see non selectable items and click on any of them)
+            if (required && choosable.isEmpty()) {
+                required = false;
             }
 
             updateGameStatePriority("choose(4)", game);
@@ -704,7 +709,7 @@ public class HumanPlayer extends PlayerImpl {
             return true;
         }
 
-        if (cards == null) {
+        if (cards == null || cards.isEmpty()) {
             return false;
         }
 
@@ -733,6 +738,11 @@ public class HumanPlayer extends PlayerImpl {
             }
             if (!choosable.isEmpty()) {
                 options.put("choosable", (Serializable) choosable);
+            }
+
+            // if nothing to choose then show window (user must see non selectable items and click on any of them)
+            if (required && choosable.isEmpty()) {
+                required = false;
             }
 
             updateGameStatePriority("chooseTarget(5)", game);
