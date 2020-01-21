@@ -650,6 +650,12 @@ public class NewTableDialog extends MageDialog {
                     return false;
                 }
                 break;
+            case "Variant Magic - Freeform Unlimited Commander":
+                if (!options.getGameType().startsWith("Freeform Unlimited Commander")) {
+                    JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Deck type Freeform+ Commander needs also a Freeform Unlimited Commander game type", "Error", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+                break;
             case "Variant Magic - Brawl":
             case "Variant Magic - Duel Brawl":
                 if (!options.getGameType().startsWith("Brawl")) {
@@ -695,6 +701,12 @@ public class NewTableDialog extends MageDialog {
             case "Freeform Commander Free For All":
                 if (!options.getDeckType().equals("Variant Magic - Freeform Commander")) {
                     JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Deck type Freeform Commander needs also a Freeform Commander game type", "Error", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+                break;
+            case "Freeform Unlimited Commander":
+                if (!options.getDeckType().equals("Variant Magic - Freeform Unlimited Commander")) {
+                    JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Deck type Freeform Unlimited Commander needs also a Freeform Unlimited Commander game type", "Error", JOptionPane.ERROR_MESSAGE);
                     return false;
                 }
                 break;

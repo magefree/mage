@@ -75,6 +75,7 @@
         <gameType name="Penny Dreadful Commander Free For All" jar="mage-game-pennydreadfulcommanderfreeforall-${project.version}.jar" className="mage.game.PennyDreadfulCommanderFreeForAllMatch" typeName="mage.game.PennyDreadfulCommanderFreeForAllType"/>
         <gameType name="Freeform Commander Two Player Duel" jar="mage-game-freeformcommanderduel-${project.version}.jar" className="mage.game.FreeformCommanderDuelMatch" typeName="mage.game.FreeformCommanderDuelType"/>
         <gameType name="Freeform Commander Free For All" jar="mage-game-freeformcommanderfreeforall-${project.version}.jar" className="mage.game.FreeformCommanderFreeForAllMatch" typeName="mage.game.FreeformCommanderFreeForAllType"/>
+        <gameType name="Freeform Unlimited Commander" jar="mage-game-freeformunlimitedcommander-${project.version}.jar" className="mage.game.FreeformUnlimitedCommanderMatch" typeName="mage.game.FreeformUnlimitedCommanderType"/>
         <gameType name="Oathbreaker Two Player Duel" jar="mage-game-oathbreakerduel-${project.version}.jar" className="mage.game.OathbreakerDuelMatch" typeName="mage.game.OathbreakerDuelType"/>
         <gameType name="Oathbreaker Free For All" jar="mage-game-oathbreakerfreeforall-${project.version}.jar" className="mage.game.OathbreakerFreeForAllMatch" typeName="mage.game.OathbreakerFreeForAllType"/>
         <gameType name="Brawl Two Player Duel" jar="mage-game-brawlduel-${project.version}.jar" className="mage.game.BrawlDuelMatch" typeName="mage.game.BrawlDuelType"/>
@@ -170,6 +171,7 @@
         <deckType name="Variant Magic - Momir Basic" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.Momir"/>
         <deckType name="Variant Magic - Penny Dreadful Commander" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.PennyDreadfulCommander"/>
         <deckType name="Variant Magic - Freeform Commander" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.FreeformCommander"/>
+        <deckType name="Variant Magic - Freeform Unlimited Commander" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.FreeformUnlimitedCommander"/>
         <deckType name="Variant Magic - Brawl" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.Brawl"/>
         <deckType name="Variant Magic - Oathbreaker" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.Oathbreaker"/>
         <deckType name="Block Constructed - Amonkhet" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.AmonkhetBlock"/>
