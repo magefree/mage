@@ -88,7 +88,7 @@ class IsochronScepterImprintEffect extends OneShotEffect {
                         && controller.choose(Outcome.Benefit, controller.getHand(), target, game)) {
                     Card card = controller.getHand().get(target.getFirstTarget(), game);
                     if (card != null) {
-                        controller.moveCardsToExile(card, source, game, true, source.getSourceId(), 
+                        controller.moveCardsToExile(card, source, game, true, source.getSourceId(),
                                 sourcePermanent.getIdName() + " (Imprint)");
                         Permanent permanent = game.getPermanent(source.getSourceId());
                         if (permanent != null) {
@@ -134,8 +134,8 @@ class IsochronScepterCopyEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Permanent scepter = game.getPermanentOrLKIBattlefield(source.getSourceId());
-            if (scepter != null 
-                    && scepter.getImprinted() != null 
+            if (scepter != null
+                    && scepter.getImprinted() != null
                     && !scepter.getImprinted().isEmpty()) {
                 Card imprintedInstant = game.getCard(scepter.getImprinted().get(0));
                 if (imprintedInstant != null
@@ -143,6 +143,9 @@ class IsochronScepterCopyEffect extends OneShotEffect {
                     if (controller.chooseUse(outcome, "Create a copy of " + imprintedInstant.getName() + '?', source, game)) {
                         Card copiedCard = game.copyCard(imprintedInstant, source, source.getControllerId());
                         if (copiedCard != null) {
+                            // Need to record the sourceObject info for the copy (example Arcane Denial)
+                            // TODO implement this within the codebase.  See Bug #5437
+                            game.getState().setValue("RememberSourceObject" + copiedCard.getId(), imprintedInstant);
                             game.getExile().add(source.getSourceId(), "", copiedCard);
                             game.getState().setZone(copiedCard.getId(), Zone.EXILED);
                             if (controller.chooseUse(outcome, "Cast the copied card without paying mana cost?", source, game)) {

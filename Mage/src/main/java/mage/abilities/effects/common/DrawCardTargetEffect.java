@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import java.util.UUID;
@@ -63,12 +62,14 @@ public class DrawCardTargetEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         for (UUID playerId : getTargetPointer().getTargets(game, source)) {
             Player player = game.getPlayer(playerId);
-            if (player != null) {
+            if (player != null
+                    && player.isInGame()) {
                 int cardsToDraw = amount.calculate(game, source, this);
                 if (upTo) {
                     cardsToDraw = player.getAmount(0, cardsToDraw, "Draw how many cards?", game);
                 }
-                if (!optional || player.chooseUse(outcome, "Use draw effect?", source, game)) {
+                if (!optional
+                        || player.chooseUse(outcome, "Use draw effect?", source, game)) {
                     player.drawCards(cardsToDraw, game);
                 }
             }
