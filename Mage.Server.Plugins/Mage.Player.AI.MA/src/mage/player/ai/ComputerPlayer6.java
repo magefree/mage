@@ -54,8 +54,11 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
     protected Combat combat;
     protected int currentScore;
     protected SimulationNode2 root;
-    private static final String FILE_WITH_INSTRUCTIONS = "config/ai.please.cast.this.txt";
-    private final List<String> suggested = new ArrayList<>();
+
+    private static final boolean AI_SUGGEST_BY_FILE_ENABLE = true; // old method to instruct AI to play cards (use cheat commands instead now)
+    private static final String AI_SUGGEST_BY_FILE_SOURCE = "config/ai.please.cast.this.txt";
+    private final List<String> suggestedActions = new ArrayList<>();
+
     protected Set<String> actionCache;
     private static final List<TreeOptimizer> optimizers = new ArrayList<>();
     protected int lastLoggedTurn = 0;
@@ -165,8 +168,8 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                 if (ability.isUsesStack()) {
                     usedStack = true;
                 }
-                if (!suggested.isEmpty() && !(ability instanceof PassAbility)) {
-                    Iterator<String> it = suggested.iterator();
+                if (!suggestedActions.isEmpty() && !(ability instanceof PassAbility)) {
+                    Iterator<String> it = suggestedActions.iterator();
                     while (it.hasNext()) {
                         String action = it.next();
                         Card card = game.getCard(ability.getSourceId());
@@ -286,7 +289,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                 root = root.children.get(0);
             }
             logger.trace("Sim getNextAction -- game value:" + game.getState().getValue(true) + " test value:" + test.gameValue);
-            if (!suggested.isEmpty()) {
+            if (!suggestedActions.isEmpty()) {
                 return false;
             }
             if (root.playerId.equals(playerId)
@@ -915,10 +918,10 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
         sim.setSimulation(true);
         for (Player copyPlayer : sim.getState().getPlayers().values()) {
             Player origPlayer = game.getState().getPlayers().get(copyPlayer.getId()).copy();
-            if (!suggested.isEmpty()) {
-                logger.debug(origPlayer.getName() + " suggested: " + suggested);
+            if (!suggestedActions.isEmpty()) {
+                logger.debug(origPlayer.getName() + " suggested: " + suggestedActions);
             }
-            SimulatedPlayer2 newPlayer = new SimulatedPlayer2(copyPlayer.getId(), copyPlayer.getId().equals(playerId), suggested);
+            SimulatedPlayer2 newPlayer = new SimulatedPlayer2(copyPlayer.getId(), copyPlayer.getId().equals(playerId), suggestedActions);
             newPlayer.restore(origPlayer);
             sim.getState().getPlayers().put(copyPlayer.getId(), newPlayer);
         }
@@ -954,21 +957,24 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
     }
 
     protected final void getSuggestedActions() {
+        if (!AI_SUGGEST_BY_FILE_ENABLE) {
+            return;
+        }
         Scanner scanner = null;
         try {
-            File file = new File(FILE_WITH_INSTRUCTIONS);
+            File file = new File(AI_SUGGEST_BY_FILE_SOURCE);
             if (file.exists()) {
                 scanner = new Scanner(file);
                 while (scanner.hasNextLine()) {
                     String line = scanner.nextLine();
                     if (line.startsWith("cast:")
                             || line.startsWith("play:")) {
-                        suggested.add(line.substring(5));
+                        suggestedActions.add(line.substring(5));
                     }
                 }
                 System.out.println("suggested::");
-                for (int i = 0; i < suggested.size(); i++) {
-                    System.out.println("    " + suggested.get(i));
+                for (int i = 0; i < suggestedActions.size(); i++) {
+                    System.out.println("    " + suggestedActions.get(i));
                 }
             }
         } catch (Exception e) {
@@ -986,13 +992,13 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
         if (action != null
                 && (action.startsWith("cast:")
                 || action.startsWith("play:"))) {
-            suggested.add(action.substring(5));
+            suggestedActions.add(action.substring(5));
         }
     }
 
     @Override
     public int getActionCount() {
-        return suggested.size();
+        return suggestedActions.size();
     }
 
     protected String listTargets(Game game, Targets targets) {
