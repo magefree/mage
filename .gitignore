@@ -6,13 +6,13 @@ Mage.Client/db
 Mage.Client/gamelogs
 Mage.Client/gamelogsJson
 Mage.Client/*.log
+Mage.Client/game-*.json
 Mage.Client/plugins/images
 Mage.Client/plugins/plugin.data
 Mage.Client/target
+
+# Mage.Common
 Mage.Common/target
-/db
-/gamelogs
-/mageclient.log
 
 # Mage.Plugins
 Mage.Plugins/Mage.Card.Plugin/target
@@ -22,6 +22,7 @@ Mage.Plugins/Mage.Rating.Plugin/target
 
 # Mage.Server
 Mage.Server/config/init.txt
+Mage.Server/config/ai.please.cast.this.txt
 Mage.Server/saved
 Mage.Server/target
 Mage.Server/db
@@ -29,15 +30,12 @@ Mage.Server/cache
 Mage.Server/mageserver.log
 Mage.Server/magediag.log
 Mage.Server/extensions
-/saved
-/db
-/cache
-/mageserver.log
-/magediag.log
-/extensions
 
+# Mage.Server.Console
 Mage.Server.Console/target/
 Mage.Server.Console/mageadmin.log
+
+# Mage.Server.Plugins
 Mage.Server.Plugins/Mage.Deck.Constructed/target
 Mage.Server.Plugins/Mage.Deck.Limited/target
 Mage.Server.Plugins/Mage.Game.BrawlDuel/target/
@@ -53,6 +51,7 @@ Mage.Server.Plugins/Mage.Game.OathbreakerFreeForAll/target/
 Mage.Server.Plugins/Mage.Game.PennyDreadfulCommanderFreeForAll/target
 Mage.Server.Plugins/Mage.Game.FreeformCommanderDuel/target/
 Mage.Server.Plugins/Mage.Game.FreeformCommanderFreeForAll/target/
+Mage.Server.Plugins/Mage.Game.FreeformUnlimitedCommander/target/
 Mage.Server.Plugins/Mage.Game.TinyLeadersDuel/target
 Mage.Server.Plugins/Mage.Game.TwoPlayerDuel/target
 Mage.Server.Plugins/Mage.Player.AI.DraftBot/target
@@ -69,20 +68,18 @@ Mage.Server.Plugins/Mage.Tournament.Sealed/target
 Mage.Sets/target
 
 # Mage.Stats
-Mage.Stats/server.log
-Mage.Stats/mageserver.log
-Mage.Stats/magediag.log
+Mage.Stats/target
+Mage.Stats/*.log
 
 # Mage.Tests
 Mage.Tests/target
 Mage.Tests/cache
 Mage.Tests/db
-Mage.Tests/Mage.log
-Mage.Tests/watchdog.log
+Mage.Tests/*.log
 
 # Mage
-*.log
 Mage/target
+Mage/*.log
 
 # Mage.Updater
 Mage.Updater/target
@@ -90,15 +87,12 @@ mage.updater.client/target
 
 # Mage.Verify
 Mage.Verify/target
-Mage.Verify/mageclient.log
-Mage.Verify/AllCards.json.zip
-Mage.Verify/AllSets.json.zip
-Mage.Verify/AllCards.json
-Mage.Verify/AllSets.json
-Mage.Verify/AllPrintings.json
-Mage.Verify/AllPrintings.json.zip
+Mage.Verify/*.log
+Mage.Verify/*.zip
+Mage.Verify/*.json
 Mage.Verify/db
 
+# Utils
 releases
 Utils/author.txt
 Utils/*_tracker.txt
@@ -118,26 +112,21 @@ syntax: regexp
 nbactions.xml
 nbactions-*.xml
 nb-configuration.xml
-glob:Mage.Client/cheat.dck
-glob:Mage.Client/test.dck
 mage-bundle.zip
+xmage_*.zip
 mage-stats-ws.war
 
-Mage.Server.Plugins/Mage.Draft.8PlayerBooster/target
 \.orig\..*$
 \.orig$
 \.chg\..*$
 \.rej$
 \.conflict\~$
-/Mage.Server.Plugins/Mage.Player.AIMCTS/target/
 
 *.classpath
 *.iml
 hs_err*.log
 /submitted
 
-/Mage.Server/config/ai.please.cast.this.txt
-/Mage.Stats/target/
 /Utils/*_unimplemented.txt
 *.netbeans_automatic_build
 Mage.Client/serverlist.txt
@@ -149,7 +138,6 @@ client_secrets.json
 
 dependency-reduced-pom.xml
 mage-bundle
-/Mage.Client/game-*.json
 
 # build-tools config and log files when building client/server with Atom
 .build-tools.cson
