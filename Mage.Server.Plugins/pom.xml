@@ -28,6 +28,7 @@
         <module>Mage.Game.PennyDreadfulCommanderFreeForAll</module>
         <module>Mage.Game.FreeformCommanderDuel</module>
         <module>Mage.Game.FreeformCommanderFreeForAll</module>
+        <module>Mage.Game.FreeformUnlimitedCommander</module>
         <module>Mage.Game.BrawlDuel</module>
         <module>Mage.Game.BrawlFreeForAll</module>
         <module>Mage.Game.OathbreakerDuel</module>
