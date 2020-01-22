@@ -60,9 +60,6 @@ public abstract class CardRenderer {
     // The card to be rendered
     protected final CardView cardView;
 
-    // Is the card transformed?
-    protected final boolean isTransformed;
-
     // The card image
     protected BufferedImage artImage;
 
@@ -123,10 +120,9 @@ public abstract class CardRenderer {
     // without knowing the dimensions that the card will be rendered at.
     // Then, the CardRenderer can be called on multiple times to render the
     // card at various sizes (for instance, during animation)
-    public CardRenderer(CardView card, boolean isTransformed) {
+    public CardRenderer(CardView card) {
         // Set base parameters
         this.cardView = card;
-        this.isTransformed = isTransformed;
 
         if (card.getArtRect() == ArtRect.SPLIT_FUSED) {
             parseRules(card.getLeftSplitRules(), textboxKeywords, textboxRules);
@@ -218,7 +214,7 @@ public abstract class CardRenderer {
         drawBorder(g);
         drawBackground(g);
         drawArt(g);
-        drawFrame(g, image);
+        drawFrame(g, attribs, image);
         if (!cardView.isAbility()) {
             drawOverlays(g);
             drawCounters(g);
@@ -233,7 +229,7 @@ public abstract class CardRenderer {
 
     protected abstract void drawArt(Graphics2D g);
 
-    protected abstract void drawFrame(Graphics2D g, BufferedImage image);
+    protected abstract void drawFrame(Graphics2D g, CardPanelAttributes attribs, BufferedImage image);
 
     // Template methods that are possible to override, but unlikely to be
     // overridden.

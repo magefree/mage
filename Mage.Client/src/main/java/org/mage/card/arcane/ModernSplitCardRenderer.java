@@ -47,8 +47,8 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
     private boolean isFuse = false;
     private boolean isAftermath = false;
 
-    public ModernSplitCardRenderer(CardView view, boolean isTransformed) {
-        super(view, isTransformed);
+    public ModernSplitCardRenderer(CardView view) {
+        super(view);
 
         rightHalf.manaCostString = ManaSymbols.getStringManaCost(cardView.getRightSplitCosts().getSymbols());
         leftHalf.manaCostString = ManaSymbols.getStringManaCost(cardView.getLeftSplitCosts().getSymbols());
@@ -227,9 +227,9 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
         }
     }
 
-    protected void drawSplitHalfFrame(Graphics2D g, HalfCardProps half, int typeLineY) {
+    protected void drawSplitHalfFrame(Graphics2D g, CardPanelAttributes attribs, HalfCardProps half, int typeLineY) {
         // Get the border paint
-        Color boxColor = getBoxColor(half.color, cardView.getCardTypes(), isTransformed);
+        Color boxColor = getBoxColor(half.color, cardView.getCardTypes(), attribs.isTransformed);
         Paint textboxPaint = getTextboxPaint(half.color, cardView.getCardTypes(), cardWidth);
         Paint borderPaint = getBorderPaint(half.color, cardView.getCardTypes(), cardWidth);
 
@@ -260,12 +260,12 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
                 borderPaint, boxColor);
 
         // Draw the name line
-        drawNameLine(g, half.name, half.manaCostString,
+        drawNameLine(g, attribs, half.name, half.manaCostString,
                 0, 0,
                 half.cw, boxHeight);
 
         // Draw the type line
-        drawTypeLine(g, half.typeLineString,
+        drawTypeLine(g, attribs, half.typeLineString,
                 0, typeLineY,
                 half.cw, boxHeight - 4, true);
 
@@ -306,13 +306,13 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
     }
 
     @Override
-    protected void drawFrame(Graphics2D g, BufferedImage image) {
+    protected void drawFrame(Graphics2D g, CardPanelAttributes attribs, BufferedImage image) {
         if (isAftermath()) {
-            drawSplitHalfFrame(getUnmodifiedHalfContext(g), leftHalf, (int) (leftHalf.ch * TYPE_LINE_Y_FRAC));
-            drawSplitHalfFrame(getAftermathHalfContext(g), rightHalf, (rightHalf.ch - boxHeight) / 2);
+            drawSplitHalfFrame(getUnmodifiedHalfContext(g), attribs, leftHalf, (int) (leftHalf.ch * TYPE_LINE_Y_FRAC));
+            drawSplitHalfFrame(getAftermathHalfContext(g), attribs, rightHalf, (rightHalf.ch - boxHeight) / 2);
         } else {
-            drawSplitHalfFrame(getLeftHalfContext(g), leftHalf, (int) (leftHalf.ch * TYPE_LINE_Y_FRAC));
-            drawSplitHalfFrame(getRightHalfContext(g), rightHalf, (int) (rightHalf.ch * TYPE_LINE_Y_FRAC));
+            drawSplitHalfFrame(getLeftHalfContext(g), attribs, leftHalf, (int) (leftHalf.ch * TYPE_LINE_Y_FRAC));
+            drawSplitHalfFrame(getRightHalfContext(g), attribs, rightHalf, (int) (rightHalf.ch * TYPE_LINE_Y_FRAC));
             if (isFuse()) {
                 Graphics2D g2 = getRightHalfContext(g);
                 int totalFuseBoxWidth = rightHalf.cw * 2 + 2 * borderWidth + dividerSize;
@@ -323,7 +323,7 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
                         totalFuseBoxWidth, boxHeight,
                         contentInset,
                         borderPaint, boxColor);
-                drawNameLine(g2, "Fuse (You may cast both halves from your hand)", "",
+                drawNameLine(g2, attribs, "Fuse (You may cast both halves from your hand)", "",
                         0, rightHalf.ch,
                         totalFuseBoxWidth - 2 * borderWidth, boxHeight);
             }

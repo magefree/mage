@@ -31,7 +31,7 @@ public class CardPanelRenderImpl extends CardPanel {
         if (a.getClass() != b.getClass()) {
             return false;
         }
-        if (!a.getName().equals(b.getName())) {
+        if (!a.getDisplayName().equals(b.getDisplayName())) {
             return false;
         }
         if (!a.getPower().equals(b.getPower())) {
@@ -117,16 +117,18 @@ public class CardPanelRenderImpl extends CardPanel {
         final int height;
         final boolean isChoosable;
         final boolean isSelected;
+        final boolean isTransformed;
         final CardView view;
         final int hashCode;
 
-        public ImageKey(CardView view, BufferedImage artImage, int width, int height, boolean isChoosable, boolean isSelected) {
+        public ImageKey(CardView view, BufferedImage artImage, int width, int height, boolean isChoosable, boolean isSelected, boolean isTransformed) {
             this.view = view;
             this.artImage = artImage;
             this.width = width;
             this.height = height;
             this.isChoosable = isChoosable;
             this.isSelected = isSelected;
+            this.isTransformed = isTransformed;
             this.hashCode = hashCodeImpl();
         }
 
@@ -137,6 +139,7 @@ public class CardPanelRenderImpl extends CardPanel {
             sb.append((char) height);
             sb.append((char) (isSelected ? 1 : 0));
             sb.append((char) (isChoosable ? 1 : 0));
+            sb.append((char) (isTransformed ? 1 : 0));
             sb.append((char) (this.view.isPlayable() ? 1 : 0));
             sb.append((char) (this.view.isCanAttack() ? 1 : 0));
             sb.append((char) (this.view.isCanBlock() ? 1 : 0));
@@ -146,7 +149,7 @@ public class CardPanelRenderImpl extends CardPanel {
                 sb.append((char) (((PermanentView) this.view).hasSummoningSickness() ? 1 : 0));
                 sb.append((char) (((PermanentView) this.view).getDamage()));
             }
-            sb.append(this.view.getName());
+            sb.append(this.view.getDisplayName());
             sb.append(this.view.getPower());
             sb.append(this.view.getToughness());
             sb.append(this.view.getLoyalty());
@@ -237,7 +240,7 @@ public class CardPanelRenderImpl extends CardPanel {
         super(newGameCard, gameId, loadImage, callback, foil, dimension, needFullPermanentRender);
 
         // Renderer
-        cardRenderer = cardRendererFactory.create(getGameCard(), isTransformed());
+        cardRenderer = cardRendererFactory.create(getGameCard());
 
         // Draw the parts
         initialDraw();
@@ -261,11 +264,12 @@ public class CardPanelRenderImpl extends CardPanel {
     protected void paintCard(Graphics2D g) {
         // Render the card if we don't have an image ready to use
         if (cardImage == null) {
+            LOGGER.warn("new image: " + getGameCard().getDisplayName() + "; transformed " + (isTransformed() ? "yes" : "no"));
+
             // Try to get card image from cache based on our card characteristics
-            ImageKey key
-                    = new ImageKey(getGameCard(), artImage,
+            ImageKey key = new ImageKey(getGameCard(), artImage,
                     getCardWidth(), getCardHeight(),
-                    isChoosable(), isSelected());
+                    isChoosable(), isSelected(), isTransformed());
             try {
                 cardImage = IMAGE_CACHE.get(key, this::renderCard);
             } catch (ExecutionException e) {
@@ -301,16 +305,16 @@ public class CardPanelRenderImpl extends CardPanel {
         g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 
-        // Attributes
-        CardPanelAttributes attribs
-                = new CardPanelAttributes(cardWidth, cardHeight, isChoosable(), isSelected());
-
         // Draw card itself
-        cardRenderer.draw(g2d, attribs, image);
+        cardRenderer.draw(g2d, getAttributes(), image);
 
         // Done
         g2d.dispose();
         return image;
+    }
+
+    private CardPanelAttributes getAttributes() {
+        return new CardPanelAttributes(getCardWidth(), getCardHeight(), isChoosable(), isSelected(), isTransformed());
     }
 
     private int updateArtImageStamp;
@@ -382,7 +386,7 @@ public class CardPanelRenderImpl extends CardPanel {
 
         // Update renderer
         cardImage = null;
-        cardRenderer = cardRendererFactory.create(getGameCard(), isTransformed());
+        cardRenderer = cardRendererFactory.create(getGameCard());
         cardRenderer.setArtImage(artImage);
         cardRenderer.setFaceArtImage(faceArtImage);
 

@@ -15,11 +15,13 @@ public class CardPanelAttributes {
     public final int cardHeight;
     public final boolean isSelected;
     public final boolean isChoosable;
-    
-    public CardPanelAttributes(int cardWidth, int cardHeight, boolean isChoosable, boolean isSelected) {
+    public final boolean isTransformed;
+
+    public CardPanelAttributes(int cardWidth, int cardHeight, boolean isChoosable, boolean isSelected, boolean isTransformed) {
         this.cardWidth = cardWidth;
         this.cardHeight = cardHeight;
         this.isChoosable = isChoosable;
         this.isSelected = isSelected;
+        this.isTransformed = isTransformed;
     }
 }

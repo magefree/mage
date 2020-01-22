@@ -775,11 +775,12 @@ public class CardPanelComponentImpl extends CardPanel {
         // Super
         super.update(card);
 
-        updatePTTexts(card);
-        setTitle(card);
+        // real card to show stores in getGameCard (e.g. after user clicks on night icon -- night card must be rendered)
+        updatePTTexts(getGameCard());
+        setTitle(getGameCard());
 
         // Summoning Sickness overlay
-        if (hasSickness() && card.isCreature() && isPermanent()) {
+        if (hasSickness() && getGameCard().isCreature() && isPermanent()) {
             getOverlayPanel().setVisible(true);
         } else {
             getOverlayPanel().setVisible(false);
