@@ -264,8 +264,6 @@ public class CardPanelRenderImpl extends CardPanel {
     protected void paintCard(Graphics2D g) {
         // Render the card if we don't have an image ready to use
         if (cardImage == null) {
-            LOGGER.warn("new image: " + getGameCard().getDisplayName() + "; transformed " + (isTransformed() ? "yes" : "no"));
-
             // Try to get card image from cache based on our card characteristics
             ImageKey key = new ImageKey(getGameCard(), artImage,
                     getCardWidth(), getCardHeight(),

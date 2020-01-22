@@ -170,7 +170,7 @@ public enum ScryfallImageSource implements CardImageSource {
                 try {
                     url = getFaceImageUrl(proxy, card, card.isToken(), localizedCode);
                 } catch (Exception e) {
-                    logger.warn("Failed to prepare image URL for " + card.getName() + " (" + card.getSet() + ") #" + card.getCollectorId());
+                    logger.warn("Failed to prepare image URL (back face) for " + card.getName() + " (" + card.getSet() + ") #" + card.getCollectorId());
                     downloadServiceInfo.incErrorCount();
                     continue;
                 }
@@ -190,7 +190,7 @@ public enum ScryfallImageSource implements CardImageSource {
                 try {
                     url = searchCard(proxy, "6ED", card.getName());
                 } catch (Exception e) {
-                    logger.warn("Failed to prepare image URL for " + card.getName() + " (" + card.getSet() + ") #" + card.getCollectorId());
+                    logger.warn("Failed to prepare image URL (S00) for " + card.getName() + " (" + card.getSet() + ") #" + card.getCollectorId());
                     downloadServiceInfo.incErrorCount();
                     continue;
                 }
@@ -205,7 +205,7 @@ public enum ScryfallImageSource implements CardImageSource {
                 try {
                     url = searchCard(proxy, "AKH", card.getName());
                 } catch (Exception e) {
-                    logger.warn("Failed to prepare image URL for " + card.getName() + " (" + card.getSet() + ") #" + card.getCollectorId());
+                    logger.warn("Failed to prepare image URL (E01) for " + card.getName() + " (" + card.getSet() + ") #" + card.getCollectorId());
                     downloadServiceInfo.incErrorCount();
                     continue;
                 }
