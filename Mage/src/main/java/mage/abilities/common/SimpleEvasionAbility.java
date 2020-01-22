@@ -5,13 +5,12 @@ import mage.abilities.effects.Effect;
 import mage.constants.Zone;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class SimpleEvasionAbility extends EvasionAbility {
 
     public SimpleEvasionAbility(Effect effect) {
-        this(effect, Zone.ALL);
+        this(effect, Zone.BATTLEFIELD);
     }
 
     public SimpleEvasionAbility(Effect effect, Zone zone) {

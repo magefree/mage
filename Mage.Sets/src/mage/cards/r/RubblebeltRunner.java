@@ -34,9 +34,7 @@ public final class RubblebeltRunner extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Rubblebelt Runner can't be blocked by creature tokens.
-        this.addAbility(new SimpleEvasionAbility(
-                new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)
-        ));
+        this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
     }
 
     private RubblebeltRunner(final RubblebeltRunner card) {

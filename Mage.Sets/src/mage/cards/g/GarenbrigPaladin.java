@@ -47,9 +47,7 @@ public final class GarenbrigPaladin extends CardImpl {
         ), new ManaSpentToCastWatcher());
 
         // Garenbrig Paladin can't be blocked by creatures with power 2 or less.
-        this.addAbility(new SimpleEvasionAbility(
-                new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)
-        ));
+        this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
     }
 
     private GarenbrigPaladin(final GarenbrigPaladin card) {

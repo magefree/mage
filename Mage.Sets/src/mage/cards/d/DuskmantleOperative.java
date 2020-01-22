@@ -35,9 +35,7 @@ public final class DuskmantleOperative extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Duskmantle Operative can't be blocked by creatures with power 4 or greater.
-        this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(
-                filter, Duration.WhileOnBattlefield
-        )));
+        this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
     }
 
     private DuskmantleOperative(final DuskmantleOperative card) {

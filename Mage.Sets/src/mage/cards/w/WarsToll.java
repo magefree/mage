@@ -1,6 +1,5 @@
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleEvasionAbility;
 import mage.abilities.common.TapForManaAllTriggeredAbility;
@@ -8,11 +7,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SetTargetPointer;
-import mage.constants.TargetController;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterLandPermanent;
@@ -20,8 +15,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class WarsToll extends CardImpl {
@@ -42,7 +38,6 @@ public final class WarsToll extends CardImpl {
 
         // If a creature an opponent controls attacks, all creatures that opponent controls attack if able.
         this.addAbility(new SimpleEvasionAbility(new WarsTollAttackRestrictionEffect()));
-
     }
 
     public WarsToll(final WarsToll card) {
@@ -97,7 +92,10 @@ class WarsTollAttackRestrictionEffect extends RestrictionEffect {
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         Player controller = game.getPlayer(permanent.getControllerId());
-        return controller != null && controller.hasOpponent(source.getControllerId(), game);
+        if (controller != null) {
+            return controller.hasOpponent(source.getControllerId(), game);
+        }
+        return false;
     }
 
     @Override

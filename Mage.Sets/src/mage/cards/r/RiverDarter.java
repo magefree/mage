@@ -1,7 +1,5 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleEvasionAbility;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
@@ -12,8 +10,9 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class RiverDarter extends CardImpl {
@@ -27,8 +26,7 @@ public final class RiverDarter extends CardImpl {
         this.toughness = new MageInt(3);
 
         // River Darter can't be blocked by Dinosaurs.
-        this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(
-                new FilterCreaturePermanent(SubType.DINOSAUR, "Dinosaurs"), Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(new FilterCreaturePermanent(SubType.DINOSAUR, "Dinosaurs"), Duration.WhileOnBattlefield)));
     }
 
     public RiverDarter(final RiverDarter card) {

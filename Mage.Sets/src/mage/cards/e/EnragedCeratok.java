@@ -34,9 +34,7 @@ public final class EnragedCeratok extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Enraged Ceratok can't be blocked by creatures with power 2 or less.
-        this.addAbility(new SimpleEvasionAbility(
-                new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)
-        ));
+        this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
     }
 
     private EnragedCeratok(final EnragedCeratok card) {

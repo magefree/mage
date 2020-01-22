@@ -34,9 +34,7 @@ public final class ArlinnsWolf extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Arlinn's Wolf can't be blocked by creatures with power 2 or less.
-        this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(
-                filter, Duration.WhileOnBattlefield
-        )));
+        this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
     }
 
     private ArlinnsWolf(final ArlinnsWolf card) {

@@ -1,6 +1,5 @@
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleEvasionAbility;
@@ -8,14 +7,9 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
@@ -25,8 +19,9 @@ import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class RavenousSlime extends CardImpl {
@@ -46,11 +41,7 @@ public final class RavenousSlime extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Ravenous Slime can't be blocked by creatures with power 2 or less.
-        this.addAbility(new SimpleEvasionAbility(
-                new CantBeBlockedByCreaturesSourceEffect(
-                        filter, Duration.WhileOnBattlefield
-                )
-        ));
+        this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
 
         // If a creature an opponent controls would die, instead exile it and put a number of +1/+1 counters equal to that creature's power on Ravenous Slime.
         this.addAbility(new SimpleStaticAbility(
@@ -130,12 +121,7 @@ class RavenousSlimeEffect extends ReplacementEffectImpl {
             return false;
         }
         if (zEvent.getTarget() != null) { // if it comes from permanent, check if it was a creature on the battlefield
-            if (zEvent.getTarget().isCreature()) {
-                return true;
-            }
-        } else if (permanent.isCreature()) {
-            return true;
-        }
-        return false;
+            return zEvent.getTarget().isCreature();
+        } else return permanent.isCreature();
     }
 }
