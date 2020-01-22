@@ -1,12 +1,11 @@
 package mage.abilities.effects;
 
-import java.io.Serializable;
-import java.util.*;
-import java.util.Map.Entry;
-import java.util.stream.Collectors;
 import mage.MageObject;
 import mage.MageObjectReference;
-import mage.abilities.*;
+import mage.abilities.Ability;
+import mage.abilities.MageSingleton;
+import mage.abilities.SpellAbility;
+import mage.abilities.StaticAbility;
 import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
 import mage.abilities.effects.common.continuous.CommanderReplacementEffect;
 import mage.cards.*;
@@ -26,6 +25,11 @@ import mage.players.ManaPoolItem;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 import org.apache.log4j.Logger;
+
+import java.io.Serializable;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -334,7 +338,7 @@ public class ContinuousEffects implements Serializable {
         }
         // boolean checkLKI = event.getType().equals(EventType.ZONE_CHANGE) || event.getType().equals(EventType.DESTROYED_PERMANENT);
         //get all applicable transient Replacement effects
-        for (Iterator<ReplacementEffect> iterator = replacementEffects.iterator(); iterator.hasNext();) {
+        for (Iterator<ReplacementEffect> iterator = replacementEffects.iterator(); iterator.hasNext(); ) {
             ReplacementEffect effect = iterator.next();
             if (!effect.checksEventType(event, game)) {
                 continue;
@@ -367,7 +371,7 @@ public class ContinuousEffects implements Serializable {
             }
         }
 
-        for (Iterator<PreventionEffect> iterator = preventionEffects.iterator(); iterator.hasNext();) {
+        for (Iterator<PreventionEffect> iterator = preventionEffects.iterator(); iterator.hasNext(); ) {
             PreventionEffect effect = iterator.next();
             if (!effect.checksEventType(event, game)) {
                 continue;
@@ -507,8 +511,7 @@ public class ContinuousEffects implements Serializable {
             if (affectedAbility != null && affectedAbility.getSourceObject(game) instanceof SplitCardHalf) {
                 idToCheck = ((SplitCardHalf) affectedAbility.getSourceObject(game)).getParentCard().getId();
             } else if (affectedAbility != null && affectedAbility.getSourceObject(game) instanceof AdventureCardSpell
-                    && type != AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE
-                    && type != AsThoughEffectType.CAST_AS_INSTANT) {
+                    && !type.needPlayCardAbility()) {
                 // adventure spell uses alternative characteristics for spell/stack
                 idToCheck = ((AdventureCardSpell) affectedAbility.getSourceObject(game)).getParentCard().getId();
             } else {
@@ -516,23 +519,33 @@ public class ContinuousEffects implements Serializable {
                 if (card instanceof SplitCardHalf) {
                     idToCheck = ((SplitCardHalf) card).getParentCard().getId();
                 } else if (card instanceof AdventureCardSpell
-                        && type != AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE
-                        && type != AsThoughEffectType.CAST_AS_INSTANT) {
+                        && !type.needPlayCardAbility()) {
                     // adventure spell uses alternative characteristics for spell/stack
                     idToCheck = ((AdventureCardSpell) card).getParentCard().getId();
                 } else {
                     idToCheck = objectId;
                 }
             }
+
             for (AsThoughEffect effect : asThoughEffectsList) {
                 Set<Ability> abilities = asThoughEffectsMap.get(type).getAbility(effect.getId());
                 for (Ability ability : abilities) {
                     if (affectedAbility == null) {
+                        // applies to own ability (one effect can be used in multiple abilities)
                         if (effect.applies(idToCheck, ability, controllerId, game)) {
                             return new MageObjectReference(ability.getSourceObject(game), game);
                         }
-                    } else if (effect.applies(idToCheck, affectedAbility, ability, game, controllerId)) {
-                        return new MageObjectReference(ability.getSourceObject(game), game);
+                    } else {
+                        // applies to affected ability
+
+                        // filter play abilities (no need to check it in every effect's code)
+                        if (type.needPlayCardAbility() && !affectedAbility.getAbilityType().isPlayCardAbility()) {
+                            continue;
+                        }
+
+                        if (effect.applies(idToCheck, affectedAbility, ability, game, controllerId)) {
+                            return new MageObjectReference(ability.getSourceObject(game), game);
+                        }
                     }
                 }
             }
@@ -725,10 +738,10 @@ public class ContinuousEffects implements Serializable {
      * Checks if an event won't happen because of an rule modifying effect
      *
      * @param event
-     * @param targetAbility ability the event is attached to. can be null.
+     * @param targetAbility     ability the event is attached to. can be null.
      * @param game
      * @param checkPlayableMode true if the event does not really happen but
-     * it's checked if the event would be replaced
+     *                          it's checked if the event would be replaced
      * @return
      */
     public boolean preventedByRuleModification(GameEvent event, Ability targetAbility, Game game, boolean checkPlayableMode) {
@@ -772,7 +785,7 @@ public class ContinuousEffects implements Serializable {
         do {
             Map<ReplacementEffect, Set<Ability>> rEffects = getApplicableReplacementEffects(event, game);
             // Remove all consumed effects (ability dependant)
-            for (Iterator<ReplacementEffect> it1 = rEffects.keySet().iterator(); it1.hasNext();) {
+            for (Iterator<ReplacementEffect> it1 = rEffects.keySet().iterator(); it1.hasNext(); ) {
                 ReplacementEffect entry = it1.next();
                 if (consumed.containsKey(entry.getId()) /*&& !(entry instanceof CommanderReplacementEffect) */) { // 903.9.
                     Set<UUID> consumedAbilitiesIds = consumed.get(entry.getId());
@@ -963,7 +976,7 @@ public class ContinuousEffects implements Serializable {
 
                     if (!waitingEffects.isEmpty()) {
                         // check if waiting effects can be applied now
-                        for (Iterator<Map.Entry<ContinuousEffect, Set<UUID>>> iterator = waitingEffects.entrySet().iterator(); iterator.hasNext();) {
+                        for (Iterator<Map.Entry<ContinuousEffect, Set<UUID>>> iterator = waitingEffects.entrySet().iterator(); iterator.hasNext(); ) {
                             Map.Entry<ContinuousEffect, Set<UUID>> entry = iterator.next();
                             if (appliedEffects.containsAll(entry.getValue())) { // all dependent to effects are applied now so apply the effect itself
                                 appliedAbilities = appliedEffectAbilities.get(entry.getKey());

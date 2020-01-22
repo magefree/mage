@@ -67,7 +67,6 @@ public class BolassCitadelTest extends CardTestPlayerBase {
         addCard(Zone.LIBRARY, playerA, "Fellwar Stone");
 
         // cast from top library for 2 life
-        //showAvaileableAbilities("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fellwar Stone");
 
         setStrictChooseMode(true);
@@ -77,5 +76,57 @@ public class BolassCitadelTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Fellwar Stone", 1);
         assertLife(playerA, 20 - 2);
+    }
+
+    @Test
+    public void testCardWithCycling() {
+        // bug: can't cast cards with cycling, see https://github.com/magefree/mage/issues/6215
+        // bug active only in GUI (HumanPlayer)
+        removeAllCardsFromLibrary(playerA);
+
+        // You may play the top card of your library. If you cast a spell this way, pay life equal to its converted mana cost rather than pay its mana cost.
+        addCard(Zone.BATTLEFIELD, playerA, "Bolas's Citadel");
+        // Cycling {2} ({2}, Discard this card: Draw a card.)
+        addCard(Zone.LIBRARY, playerA, "Archfiend of Ifnir"); // {3}{B}{B}
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Archfiend of Ifnir");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Archfiend of Ifnir", 1);
+        assertLife(playerA, 20 - 5);
+    }
+
+    @Test
+    public void testCardWithAdventure() {
+        removeAllCardsFromLibrary(playerA);
+
+        // You may play the top card of your library. If you cast a spell this way, pay life equal to its converted mana cost rather than pay its mana cost.
+        addCard(Zone.BATTLEFIELD, playerA, "Bolas's Citadel");
+        // Adventure spell: Chop Down {2}{W}  - Destroy target creature with power 4 or greater.
+        addCard(Zone.LIBRARY, playerA, "Giant Killer"); // {W}
+        addCard(Zone.BATTLEFIELD, playerA, "Ferocious Zheng"); // 4/4
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+
+        // cast adventure
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Chop Down", "Ferocious Zheng");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("must kill", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Ferocious Zheng", 0);
+        checkExileCount("on adventure", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Giant Killer", 1);
+
+        // cast normal
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Giant Killer");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Giant Killer", 1);
+        assertGraveyardCount(playerA, "Ferocious Zheng", 1);
+        assertLife(playerA, 20 - 3);
     }
 }

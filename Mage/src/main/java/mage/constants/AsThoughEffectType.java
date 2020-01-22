@@ -24,8 +24,8 @@ public enum AsThoughEffectType {
     // 2. All effects in "applies" must checks affectedControllerId.equals(source.getControllerId()) (if not then all players will be able to play it)
     // 3. Target points to mainCard, but card's characteristics from objectId (split, adventure)
     // TODO: search all PLAY_FROM_NOT_OWN_HAND_ZONE and CAST_AS_INSTANT effects and add support of mainCard and objectId
-    PLAY_FROM_NOT_OWN_HAND_ZONE,
-    CAST_AS_INSTANT,
+    PLAY_FROM_NOT_OWN_HAND_ZONE(true),
+    CAST_AS_INSTANT(true),
 
     ACTIVATE_AS_INSTANT,
     DAMAGE,
@@ -42,5 +42,19 @@ public enum AsThoughEffectType {
     SPEND_OTHER_MANA,
 
     SPEND_ONLY_MANA,
-    TARGET
+    TARGET;
+
+    private final boolean needPlayCardAbility; // mark effect type as compatible with play/cast abilities
+
+    AsThoughEffectType() {
+        this(false);
+    }
+
+    AsThoughEffectType(boolean needPlayCardAbility) {
+        this.needPlayCardAbility = needPlayCardAbility;
+    }
+
+    public boolean needPlayCardAbility() {
+        return needPlayCardAbility;
+    }
 }
