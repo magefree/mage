@@ -1,9 +1,5 @@
 package mage.game;
 
-import java.io.IOException;
-import java.io.Serializable;
-import java.util.*;
-import java.util.Map.Entry;
 import mage.MageException;
 import mage.MageObject;
 import mage.abilities.*;
@@ -67,6 +63,11 @@ import mage.util.RandomUtil;
 import mage.util.functions.ApplyToPermanent;
 import mage.watchers.common.*;
 import org.apache.log4j.Logger;
+
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.*;
+import java.util.Map.Entry;
 
 public abstract class GameImpl implements Game, Serializable {
 
@@ -515,6 +516,13 @@ public abstract class GameImpl implements Game, Serializable {
         if (card == null) {
             card = this.getMeldCard(cardId);
         }
+
+        // copied cards removes, but delayed triggered possible from it, see https://github.com/magefree/mage/issues/5437
+        // TODO: remove that workround after LKI rework, see GameState.copyCard
+        if (card == null) {
+            card = (Card) state.getValue(GameState.COPIED_FROM_CARD_KEY + cardId.toString());
+        }
+
         return card;
     }
 
@@ -1502,7 +1510,7 @@ public abstract class GameImpl implements Game, Serializable {
     /**
      * @param emblem
      * @param sourceObject
-     * @param toPlayerId controller and owner of the emblem
+     * @param toPlayerId   controller and owner of the emblem
      */
     @Override
     public void addEmblem(Emblem emblem, MageObject sourceObject, UUID toPlayerId) {
@@ -1520,8 +1528,8 @@ public abstract class GameImpl implements Game, Serializable {
     /**
      * @param plane
      * @param sourceObject
-     * @param toPlayerId controller and owner of the plane (may only be one per
-     * game..)
+     * @param toPlayerId   controller and owner of the plane (may only be one per
+     *                     game..)
      * @return boolean - whether the plane was added successfully or not
      */
     @Override
@@ -1750,7 +1758,7 @@ public abstract class GameImpl implements Game, Serializable {
                     break;
                 }
                 // triggered abilities that don't use the stack have to be executed first (e.g. Banisher Priest Return exiled creature
-                for (Iterator<TriggeredAbility> it = abilities.iterator(); it.hasNext();) {
+                for (Iterator<TriggeredAbility> it = abilities.iterator(); it.hasNext(); ) {
                     TriggeredAbility triggeredAbility = it.next();
                     if (!triggeredAbility.isUsesStack()) {
                         state.removeTriggeredAbility(triggeredAbility);
@@ -1806,10 +1814,11 @@ public abstract class GameImpl implements Game, Serializable {
         while (copiedCards.hasNext()) {
             Card card = copiedCards.next();
             if (card instanceof SplitCardHalf || card instanceof AdventureCardSpell) {
-                continue; // only the main card is moves, not the halves
+                continue; // only the main card is moves, not the halves (cause halfes is not copied - it uses original card -- TODO: need to fix (bugs with same card copy)?
             }
             Zone zone = state.getZone(card.getId());
             if (zone != Zone.BATTLEFIELD && zone != Zone.STACK) {
+                // TODO: remember LKI of copied cards here after LKI rework
                 switch (zone) {
                     case GRAVEYARD:
                         for (Player player : getPlayers().values()) {
@@ -2484,7 +2493,7 @@ public abstract class GameImpl implements Game, Serializable {
         }
         //20100423 - 800.4a
         Set<Card> toOutside = new HashSet<>();
-        for (Iterator<Permanent> it = getBattlefield().getAllPermanents().iterator(); it.hasNext();) {
+        for (Iterator<Permanent> it = getBattlefield().getAllPermanents().iterator(); it.hasNext(); ) {
             Permanent perm = it.next();
             if (perm.isOwnedBy(playerId)) {
                 if (perm.getAttachedTo() != null) {
@@ -2526,7 +2535,7 @@ public abstract class GameImpl implements Game, Serializable {
         player.moveCards(toOutside, Zone.OUTSIDE, null, this);
         // triggered abilities that don't use the stack have to be executed
         List<TriggeredAbility> abilities = state.getTriggered(player.getId());
-        for (Iterator<TriggeredAbility> it = abilities.iterator(); it.hasNext();) {
+        for (Iterator<TriggeredAbility> it = abilities.iterator(); it.hasNext(); ) {
             TriggeredAbility triggeredAbility = it.next();
             if (!triggeredAbility.isUsesStack()) {
                 state.removeTriggeredAbility(triggeredAbility);
@@ -2546,7 +2555,7 @@ public abstract class GameImpl implements Game, Serializable {
 
         // Remove cards from the player in all exile zones
         for (ExileZone exile : this.getExile().getExileZones()) {
-            for (Iterator<UUID> it = exile.iterator(); it.hasNext();) {
+            for (Iterator<UUID> it = exile.iterator(); it.hasNext(); ) {
                 Card card = this.getCard(it.next());
                 if (card != null && card.isOwnedBy(playerId)) {
                     it.remove();
@@ -2556,7 +2565,7 @@ public abstract class GameImpl implements Game, Serializable {
 
         //Remove all commander/emblems/plane the player controls
         boolean addPlaneAgain = false;
-        for (Iterator<CommandObject> it = this.getState().getCommand().iterator(); it.hasNext();) {
+        for (Iterator<CommandObject> it = this.getState().getCommand().iterator(); it.hasNext(); ) {
             CommandObject obj = it.next();
             if (obj.isControlledBy(playerId)) {
                 if (obj instanceof Emblem) {
@@ -2779,9 +2788,7 @@ public abstract class GameImpl implements Game, Serializable {
             Map<UUID, CardState> lkiCardStateMap = lkiCardState.get(zone);
             if (lkiCardStateMap != null) {
                 CardState cardState = lkiCardStateMap.get(objectId);
-                if (cardState != null) {
-                    return cardState;
-                }
+                return cardState;
             }
         }
         return null;

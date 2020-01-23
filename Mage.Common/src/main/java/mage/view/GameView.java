@@ -2,11 +2,6 @@ package mage.view;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.costs.Cost;
 import mage.cards.Card;
@@ -29,6 +24,12 @@ import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.watchers.common.CastSpellLastTurnWatcher;
 import org.apache.log4j.Logger;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -124,7 +125,6 @@ public class GameView implements Serializable {
                         } else {
                             LOGGER.fatal("Designation object not found: " + object.getName() + ' ' + object.toString() + ' ' + object.getClass().toString());
                         }
-
                     } else if (object instanceof StackAbility) {
                         StackAbility stackAbility = ((StackAbility) object);
                         stackAbility.newId();

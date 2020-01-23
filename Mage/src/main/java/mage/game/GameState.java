@@ -1,8 +1,5 @@
 package mage.game;
 
-import java.io.Serializable;
-import java.util.*;
-import java.util.stream.Collectors;
 import mage.MageObject;
 import mage.abilities.*;
 import mage.abilities.effects.ContinuousEffect;
@@ -37,6 +34,10 @@ import mage.util.ThreadLocalStringBuilder;
 import mage.watchers.Watcher;
 import mage.watchers.Watchers;
 
+import java.io.Serializable;
+import java.util.*;
+import java.util.stream.Collectors;
+
 /**
  * @author BetaSteward_at_googlemail.com
  * <p>
@@ -48,6 +49,8 @@ import mage.watchers.Watchers;
 public class GameState implements Serializable, Copyable<GameState> {
 
     private static final ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(1024);
+
+    public static final String COPIED_FROM_CARD_KEY = "CopiedFromCard";
 
     private final Players players;
     private final PlayerList playerList;
@@ -601,6 +604,7 @@ public class GameState implements Serializable, Copyable<GameState> {
 //    public void addMessage(String message) {
 //        this.messages.add(message);
 //    }
+
     /**
      * Returns a list of all players of the game ignoring range or if a player
      * has lost or left the game.
@@ -774,7 +778,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         for (Map.Entry<ZoneChangeData, List<GameEvent>> entry : eventsByKey.entrySet()) {
             Set<Card> movedCards = new LinkedHashSet<>();
             Set<PermanentToken> movedTokens = new LinkedHashSet<>();
-            for (Iterator<GameEvent> it = entry.getValue().iterator(); it.hasNext();) {
+            for (Iterator<GameEvent> it = entry.getValue().iterator(); it.hasNext(); ) {
                 GameEvent event = it.next();
                 ZoneChangeEvent castEvent = (ZoneChangeEvent) event;
                 UUID targetId = castEvent.getTargetId();
@@ -1007,7 +1011,7 @@ public class GameState implements Serializable, Copyable<GameState> {
      * @param attachedTo
      * @param ability
      * @param copyAbility copies non MageSingleton abilities before adding to
-     * state
+     *                    state
      */
     public void addOtherAbility(Card attachedTo, Ability ability, boolean copyAbility) {
         Ability newAbility;
@@ -1165,7 +1169,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         copiedCards.put(copiedCard.getId(), copiedCard);
         addCard(copiedCard);
         if (copiedCard.isSplitCard()) {
-            Card leftCard = ((SplitCard) copiedCard).getLeftHalfCard();
+            Card leftCard = ((SplitCard) copiedCard).getLeftHalfCard(); // TODO: must be new ID (bugs with same card copy)?
             copiedCards.put(leftCard.getId(), leftCard);
             addCard(leftCard);
             Card rightCard = ((SplitCard) copiedCard).getRightHalfCard();
@@ -1177,6 +1181,11 @@ public class GameState implements Serializable, Copyable<GameState> {
             copiedCards.put(spellCard.getId(), spellCard);
             addCard(spellCard);
         }
+
+        // copied cards removes from game after battlefield/stack leaves, so remember it here as workaround to fix freeze, see https://github.com/magefree/mage/issues/5437
+        // TODO: remove that workaround after LKI will be rewritten to support cross-steps/turns data transition and support copied cards
+        this.setValue(COPIED_FROM_CARD_KEY + copiedCard.getId(), cardToCopy.copy());
+
         return copiedCard;
     }
 
