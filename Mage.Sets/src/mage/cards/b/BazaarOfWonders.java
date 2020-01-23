@@ -36,8 +36,10 @@ public final class BazaarOfWonders extends CardImpl {
         // When Bazaar of Wonders enters the battlefield, exile all cards from all graveyards.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ExileGraveyardAllPlayersEffect()));
 
-        // Whenever a player casts a spell, counter it if a card with the same name is in a graveyard or a nontoken permanent with the same name is on the battlefield.
-        this.addAbility(new SpellCastAllTriggeredAbility(new BazaarOfWondersEffect(), StaticFilters.FILTER_SPELL_A, false, SetTargetPointer.SPELL));
+        // Whenever a player casts a spell, counter it if a card with the same name is in 
+        // a graveyard or a nontoken permanent with the same name is on the battlefield.
+        this.addAbility(new SpellCastAllTriggeredAbility(new BazaarOfWondersEffect(),
+                StaticFilters.FILTER_SPELL_A, false, SetTargetPointer.SPELL));
     }
 
     public BazaarOfWonders(final BazaarOfWonders card) {
@@ -77,8 +79,9 @@ class BazaarOfWondersEffect extends OneShotEffect {
         FilterPermanent filter1 = new FilterPermanent();
         filter1.add(new NamePredicate(spellName));
         filter1.add(Predicates.not(TokenPredicate.instance));
-        if (!game.getBattlefield().getActivePermanents(filter1, source.getControllerId(), game).isEmpty()) {
-            spell.counter(source.getControllerId(), game);
+        if (!game.getBattlefield().getActivePermanents(filter1, 
+                source.getControllerId(), game).isEmpty()) {
+            game.getStack().counter(spell.getId(), source.getSourceId(), game);
             return true;
         }
         FilterCard filter2 = new FilterCard();

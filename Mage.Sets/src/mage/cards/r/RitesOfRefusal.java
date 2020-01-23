@@ -24,7 +24,8 @@ public final class RitesOfRefusal extends CardImpl {
     public RitesOfRefusal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
-        // Discard any number of cards. Counter target spell unless its controller pays {3} for each card discarded this way.
+        // Discard any number of cards. Counter target spell unless its 
+        // controller pays {3} for each card discarded this way.
         this.getSpellAbility().addEffect(new RitesOfRefusalEffect());
         this.getSpellAbility().addTarget(new TargetSpell());
 
@@ -44,7 +45,8 @@ class RitesOfRefusalEffect extends OneShotEffect {
 
     RitesOfRefusalEffect() {
         super(Outcome.AIDontUseIt);
-        this.staticText = "Discard any number of cards. Counter target spell unless its controller pays {3} for each card discarded this way";
+        this.staticText = "Discard any number of cards. Counter target "
+                + "spell unless its controller pays {3} for each card discarded this way";
     }
 
     RitesOfRefusalEffect(final RitesOfRefusalEffect effect) {
@@ -63,16 +65,23 @@ class RitesOfRefusalEffect extends OneShotEffect {
         if (targetSpell != null) {
             Player controllerOfTargetedSpell = game.getPlayer(targetSpell.getControllerId());
             if (controller != null && controllerOfTargetedSpell != null) {
-                int numToDiscard = controller.getAmount(0, controller.getHand().size(), "How many cards do you want to discard?", game);
+                int numToDiscard = controller.getAmount(0,
+                        controller.getHand().size(), "How many cards do you want to discard?", game);
                 Cards discardedCards = controller.discard(numToDiscard, false, source, game);
                 int actualNumberDiscarded = discardedCards.size();
                 if (actualNumberDiscarded > 0) {
                     Cost cost = ManaUtil.createManaCost(actualNumberDiscarded * 3, false);
-                    if (controllerOfTargetedSpell.chooseUse(Outcome.Benefit, "Do you want to pay " + cost.getText() + " to prevent " + targetSpell.getName() + " from gettting countered?", source, game)
-                            && cost.pay(source, game, source.getSourceId(), controllerOfTargetedSpell.getId(), false)) {
+                    if (controllerOfTargetedSpell.chooseUse(Outcome.Benefit,
+                            "Do you want to pay "
+                            + cost.getText()
+                            + " to prevent "
+                            + targetSpell.getName()
+                            + " from gettting countered?", source, game)
+                            && cost.pay(source, game, source.getSourceId(),
+                                    controllerOfTargetedSpell.getId(), false)) {
                         return true;
                     }
-                    targetSpell.counter(source.getSourceId(), game);
+                    game.getStack().counter(targetSpell.getId(), source.getSourceId(), game);
                     return true;
                 }
             }

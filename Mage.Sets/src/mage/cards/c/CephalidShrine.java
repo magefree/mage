@@ -29,7 +29,8 @@ public final class CephalidShrine extends CardImpl {
     public CephalidShrine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}{U}");
 
-        // Whenever a player casts a spell, counter that spell unless that player pays {X}, where X is the number of cards in all graveyards with the same name as the spell.
+        // Whenever a player casts a spell, counter that spell unless that player 
+        // pays {X}, where X is the number of cards in all graveyards with the same name as the spell.
         this.addAbility(new CephalidShrineTriggeredAbility());
     }
 
@@ -67,7 +68,8 @@ class CephalidShrineTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Spell spell = game.getStack().getSpell(event.getTargetId());
         MageObject mageObject = game.getObject(sourceId);
-        if (spell != null && mageObject != null) {
+        if (spell != null
+                && mageObject != null) {
             game.getState().setValue("cephalidShrine" + mageObject, spell);
             return true;
         }
@@ -80,7 +82,10 @@ class CephalidShrineEffect extends OneShotEffect {
 
     public CephalidShrineEffect() {
         super(Outcome.Detriment);
-        staticText = "Whenever a player casts a spell, counter that spell unless that player pays {X}, where X is the number of cards in all graveyards with the same name as the spell";
+        staticText = "Whenever a player casts a spell, counter that "
+                + "spell unless that player pays {X}, where X is the "
+                + "number of cards in all graveyards with the same name "
+                + "as the spell";
     }
 
     public CephalidShrineEffect(final CephalidShrineEffect effect) {
@@ -109,13 +114,15 @@ class CephalidShrineEffect extends OneShotEffect {
                     Cost cost = ManaUtil.createManaCost(count, true);
                     if (game.getStack().contains(spell)
                             && cost.canPay(source, source.getSourceId(), controller.getId(), game)
-                            && controller.chooseUse(outcome, "Pay " + cost.getText() + " to prevent countering " + spell.getName() + "?", source, game)
+                            && controller.chooseUse(outcome, "Pay " + cost.getText()
+                                    + " to prevent countering " + spell.getName() + "?", source, game)
                             && cost.pay(source, game, source.getSourceId(), controller.getId(), false)
                             && cost.isPaid()) {
                         return false;
                     } else {
-                        spell.counter(source.getId(), game);
-                        game.informPlayers(spell.getName() + " has been countered due to " + controller.getName() + " not paying " + cost.getText());
+                        game.getStack().counter(spell.getId(), source.getSourceId(), game);
+                        game.informPlayers(spell.getName() + " has been countered due to "
+                                + controller.getName() + " not paying " + cost.getText());
                         return true;
                     }
                 }

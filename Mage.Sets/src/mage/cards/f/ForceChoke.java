@@ -1,4 +1,3 @@
-
 package mage.cards.f;
 
 import java.util.UUID;
@@ -27,7 +26,8 @@ public final class ForceChoke extends CardImpl {
     public ForceChoke(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}{B}");
 
-        // Counter target spell. Its controller may pay life equal to that spell's cmc to return it to its owner's hand.
+        // Counter target spell. Its controller may pay life equal to that 
+        // spell's cmc to return it to its owner's hand.
         this.getSpellAbility().addTarget(new TargetSpell());
         this.getSpellAbility().addEffect(new ForceChokeEffect());
 
@@ -49,7 +49,8 @@ class ForceChokeEffect extends OneShotEffect {
 
     public ForceChokeEffect() {
         super(Outcome.ReturnToHand);
-        this.staticText = "Counter target spell. Its controller may pay life equal to that spell's converted mana cost to return it to its owner's hand";
+        this.staticText = "Counter target spell. Its controller may pay life "
+                + "equal to that spell's converted mana cost to return it to its owner's hand";
     }
 
     public ForceChokeEffect(final ForceChokeEffect effect) {
@@ -69,11 +70,12 @@ class ForceChokeEffect extends OneShotEffect {
         if (player != null) {
             Cost cost = new PayLifeCost(stackObject.getConvertedManaCost());
             if (cost.canPay(source, source.getSourceId(), objectController.getId(), game)
-                    && objectController.chooseUse(Outcome.LoseLife, "Pay " + stackObject.getConvertedManaCost() + " life?", source, game)
+                    && objectController.chooseUse(Outcome.LoseLife, "Pay "
+                            + stackObject.getConvertedManaCost() + " life?", source, game)
                     && cost.pay(source, game, source.getSourceId(), objectController.getId(), false, null)) {
                 objectController.moveCards((Card) stackObject, Zone.HAND, source, game);
             } else {
-                stackObject.counter(source.getId(), game);
+                game.getStack().counter(stackObject.getId(), source.getSourceId(), game);
             }
             return true;
         }

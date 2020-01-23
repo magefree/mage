@@ -72,7 +72,7 @@ class WhirlwindDenialEffect extends OneShotEffect {
                             && cost.pay(source, game, source.getSourceId(), stackObject.getControllerId(), false)) {
                         return;
                     }
-                    stackObject.counter(source.getSourceId(), game);
+                    game.getStack().counter(stackObject.getId(), source.getSourceId(), game);
                 });
         return true;
     }

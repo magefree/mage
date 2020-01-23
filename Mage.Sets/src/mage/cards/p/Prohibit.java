@@ -1,4 +1,3 @@
-
 package mage.cards.p;
 
 import java.util.UUID;
@@ -27,7 +26,9 @@ public final class Prohibit extends CardImpl {
         // Kicker {2}
         this.addAbility(new KickerAbility("{2}"));
 
-        // Counter target spell if its converted mana cost is 2 or less. If Prohibit was kicked, counter that spell if its converted mana cost is 4 or less instead.
+        // Counter target spell if its converted mana cost is 2 or less. 
+        // If Prohibit was kicked, counter that spell if its 
+        // converted mana cost is 4 or less instead.
         this.getSpellAbility().addEffect(new ProhibitEffect());
         this.getSpellAbility().addTarget(new TargetSpell());
     }
@@ -46,7 +47,9 @@ class ProhibitEffect extends OneShotEffect {
 
     ProhibitEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "Counter target spell if its converted mana cost is 2 or less. if this spell was kicked, counter that spell if its converted mana cost is 4 or less instead.";
+        this.staticText = "Counter target spell if its converted mana cost "
+                + "is 2 or less. if this spell was kicked, counter that "
+                + "spell if its converted mana cost is 4 or less instead.";
     }
 
     ProhibitEffect(final ProhibitEffect effect) {
@@ -65,8 +68,9 @@ class ProhibitEffect extends OneShotEffect {
             Spell targetSpell = game.getSpell(this.getTargetPointer().getFirst(game, source));
             if (targetSpell != null) {
                 int cmc = targetSpell.getConvertedManaCost();
-                if (cmc <= 2 || (KickedCondition.instance.apply(game, source) && cmc <= 4)) {
-                    targetSpell.counter(source.getSourceId(), game);
+                if (cmc <= 2
+                        || (KickedCondition.instance.apply(game, source) && cmc <= 4)) {
+                    game.getStack().counter(targetSpell.getId(), source.getSourceId(), game);
                 }
             }
             return true;

@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import java.util.HashSet;
@@ -34,22 +33,26 @@ public final class GrimoireThief extends CardImpl {
     protected static final String VALUE_PREFIX = "ExileZones";
 
     public GrimoireThief(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{U}");
         this.subtype.add(SubType.MERFOLK);
         this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever Grimoire Thief becomes tapped, exile the top three cards of target opponent's library face down.
-        Ability ability = new BecomesTappedSourceTriggeredAbility(new GrimoireThiefExileEffect(), false);
+        // Whenever Grimoire Thief becomes tapped, exile the top three 
+        // cards of target opponent's library face down.
+        Ability ability = new BecomesTappedSourceTriggeredAbility(
+                new GrimoireThiefExileEffect(), false);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
 
         // You may look at cards exiled with Grimoire Thief.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new GrimoireThiefLookEffect()));
 
-        // {U}, Sacrifice Grimoire Thief: Turn all cards exiled with Grimoire Thief face up. Counter all spells with those names.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GrimoireThiefCounterspellEffect(), new ManaCostsImpl("{U}"));
+        // {U}, Sacrifice Grimoire Thief: Turn all cards exiled with 
+        //Grimoire Thief face up. Counter all spells with those names.
+        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new GrimoireThiefCounterspellEffect(), new ManaCostsImpl("{U}"));
         ability2.addCost(new SacrificeSourceCost());
         this.addAbility(ability2);
 
@@ -86,15 +89,19 @@ class GrimoireThiefExileEffect extends OneShotEffect {
                 for (Card card : cards) {
                     card.setFaceDown(true, game);
                 }
-                UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
-                targetOpponent.moveCardsToExile(cards, source, game, false, exileZoneId, sourceObject.getIdName());
+                UUID exileZoneId = CardUtil.getExileZoneId(game,
+                        source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+                targetOpponent.moveCardsToExile(cards, source, game, false,
+                        exileZoneId, sourceObject.getIdName());
                 for (Card card : cards) {
                     card.setFaceDown(true, game);
                 }
-                Set<UUID> exileZones = (Set<UUID>) game.getState().getValue(GrimoireThief.VALUE_PREFIX + source.getSourceId().toString());
+                Set<UUID> exileZones = (Set<UUID>) game.getState().getValue(
+                        GrimoireThief.VALUE_PREFIX + source.getSourceId().toString());
                 if (exileZones == null) {
                     exileZones = new HashSet<>();
-                    game.getState().setValue(GrimoireThief.VALUE_PREFIX + source.getSourceId().toString(), exileZones);
+                    game.getState().setValue(GrimoireThief.VALUE_PREFIX
+                            + source.getSourceId().toString(), exileZones);
                 }
                 exileZones.add(exileZoneId);
                 return true;
@@ -132,13 +139,17 @@ class GrimoireThiefLookEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (affectedControllerId.equals(source.getControllerId()) && game.getState().getZone(objectId) == Zone.EXILED) {
+        if (affectedControllerId.equals(source.getControllerId())
+                && game.getState().getZone(objectId) == Zone.EXILED) {
             Player controller = game.getPlayer(source.getControllerId());
             MageObject sourceObject = source.getSourceObject(game);
-            if (controller != null && sourceObject != null) {
+            if (controller != null
+                    && sourceObject != null) {
                 Card card = game.getCard(objectId);
-                if (card != null && card.isFaceDown(game)) {
-                    Set<UUID> exileZones = (Set<UUID>) game.getState().getValue(GrimoireThief.VALUE_PREFIX + source.getSourceId().toString());
+                if (card != null
+                        && card.isFaceDown(game)) {
+                    Set<UUID> exileZones = (Set<UUID>) game.getState().
+                            getValue(GrimoireThief.VALUE_PREFIX + source.getSourceId().toString());
                     if (exileZones != null) {
                         for (ExileZone exileZone : game.getExile().getExileZones()) {
                             if (exileZone.contains(objectId)) {
@@ -160,7 +171,8 @@ class GrimoireThiefCounterspellEffect extends OneShotEffect {
 
     public GrimoireThiefCounterspellEffect() {
         super(Outcome.Discard);
-        staticText = "Turn all cards exiled with {this} face up. Counter all spells with those names";
+        staticText = "Turn all cards exiled with {this} face up. "
+                + "Counter all spells with those names";
     }
 
     public GrimoireThiefCounterspellEffect(final GrimoireThiefCounterspellEffect effect) {
@@ -171,7 +183,8 @@ class GrimoireThiefCounterspellEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Cards cards = new CardsImpl();
         MageObject sourceObject = game.getObject(source.getSourceId());
-        Set<UUID> exileZones = (Set<UUID>) game.getState().getValue(GrimoireThief.VALUE_PREFIX + source.getSourceId().toString());
+        Set<UUID> exileZones = (Set<UUID>) game.getState().getValue(
+                GrimoireThief.VALUE_PREFIX + source.getSourceId().toString());
         if (exileZones != null && sourceObject != null) {
             for (ExileZone exileZone : game.getExile().getExileZones()) {
                 if (!exileZone.isEmpty()) {
@@ -190,18 +203,24 @@ class GrimoireThiefCounterspellEffect extends OneShotEffect {
                     // handle split cards
                     if (mageObject instanceof SplitCard) {
                         if (stackObject instanceof Spell
-                                && (stackObject.getName().contains(((SplitCard)mageObject).getLeftHalfCard().getName())
-                                || stackObject.getName().contains(((SplitCard)mageObject).getRightHalfCard().getName()))) {
+                                && (stackObject.getName().contains(((SplitCard) mageObject).getLeftHalfCard().getName())
+                                || stackObject.getName().contains(((SplitCard) mageObject).getRightHalfCard().getName()))) {
                             Spell spell = (Spell) stackObject;
-                            spell.counter(source.getSourceId(), game);
-                            game.informPlayers(sourceObject.getLogName() + ": the split-card spell named " + spell.getName() + " was countered.");
+                            game.getStack().counter(stackObject.getId(), source.getSourceId(), game);
+                            game.informPlayers(sourceObject.getLogName()
+                                    + ": the split-card spell named "
+                                    + spell.getName()
+                                    + " was countered.");
                         }
                     }
                     if (stackObject instanceof Spell
                             && stackObject.getName().contains(card.getName())) {
                         Spell spell = (Spell) stackObject;
-                        spell.counter(source.getSourceId(), game);
-                        game.informPlayers(sourceObject.getLogName() + ": the spell named " + spell.getName() + " was countered.");
+                        game.getStack().counter(spell.getId(), source.getSourceId(), game);
+                        game.informPlayers(sourceObject.getLogName()
+                                + ": the spell named "
+                                + spell.getName()
+                                + " was countered.");
                     }
                 }
             }
