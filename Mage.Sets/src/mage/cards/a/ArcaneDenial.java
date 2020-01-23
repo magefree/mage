@@ -68,22 +68,8 @@ class ArcaneDenialEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card originalSourceCard; // needed for copies of Arcane Denial See Bug #5437
         Player controller = null;
         boolean countered = false;
-        // If the source originates from a copy (Isochron Scepter for example),
-        // then we set the source's sourceId to the original card, otherwise it 
-        // uses the spell on the stack as its sourceObject which won't work
-        // correctly with any cards that make use of Delayed Triggers.
-        // see Bug #5437
-        Card cardToCheck = game.getCard(source.getSourceId());
-        if (cardToCheck != null
-                && cardToCheck.isCopy()) { // Isochron Scepter imprinted card for example
-            originalSourceCard = (Card) game.getState().getValue("RememberSourceObject" + source.getSourceId());
-            if (originalSourceCard != null) {
-                source.setSourceId(originalSourceCard.getId());
-            }
-        }
         UUID targetId = this.getTargetPointer().getFirst(game, source);
         if (targetId != null) {
             controller = game.getPlayer(game.getControllerId(targetId));

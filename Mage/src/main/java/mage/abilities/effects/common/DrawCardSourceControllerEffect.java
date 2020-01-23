@@ -53,7 +53,7 @@ public class DrawCardSourceControllerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null
-                && player.isInGame()) {
+                && player.canRespond()) {
             player.drawCards(amount.calculate(game, source, this), game);
             return true;
         }
