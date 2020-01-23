@@ -35,6 +35,7 @@ public final class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Assembly Hall", 286, Rarity.RARE, mage.cards.a.AssemblyHall.class));
         cards.add(new SetCardInfo("Ballista Squad", 5, Rarity.UNCOMMON, mage.cards.b.BallistaSquad.class));
         cards.add(new SetCardInfo("Balloon Peddler", 59, Rarity.COMMON, mage.cards.b.BalloonPeddler.class));
+        cards.add(new SetCardInfo("Barbed Wire", 287, Rarity.UNCOMMON, mage.cards.b.BarbedWire.class));
         cards.add(new SetCardInfo("Battle Rampart", 173, Rarity.COMMON, mage.cards.b.BattleRampart.class));
         cards.add(new SetCardInfo("Battle Squadron", 174, Rarity.RARE, mage.cards.b.BattleSquadron.class));
         cards.add(new SetCardInfo("Bifurcate", 230, Rarity.RARE, mage.cards.b.Bifurcate.class));
