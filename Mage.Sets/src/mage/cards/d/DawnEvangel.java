@@ -78,7 +78,7 @@ class DawnEvangelAbility extends DiesCreatureTriggeredAbility {
                 .map(game::getPermanentOrLKIBattlefield)
                 .filter(Objects::nonNull)
                 .filter(permanent -> permanent.hasSubtype(SubType.AURA, game))
-                .map(Permanent::getId)
+                .map(Permanent::getControllerId)
                 .anyMatch(getControllerId()::equals);
     }
 
