@@ -4,7 +4,7 @@ package mage.cards.c;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
-import mage.MageObject;
+import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -18,7 +18,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SpellAbilityCastMode;
 import mage.constants.Zone;
-import static mage.filter.predicate.permanent.ControllerControlsIslandPredicate.filter;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -63,22 +62,34 @@ class CatalystStoneCostReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        Player controller = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(abilityToModify.getControllerId());
         if (controller != null) {
-            int generic = abilityToModify.getManaCostsToPay().getMana().getGeneric();
-            if (generic > 0) {
-                ChoiceImpl choice = new ChoiceImpl(false);
-                Set<String> set = new LinkedHashSet<>();
-                for (int i = 0; i <= Math.min(2, generic); i++) {
-                    set.add(String.valueOf(i));
+            Mana mana = abilityToModify.getManaCostsToPay().getMana();
+            int reduceMax = mana.getGeneric();
+            if (reduceMax > 2) {
+                reduceMax = 2;
+            }
+            if (reduceMax > 0) {
+                int reduce;
+                if (game.inCheckPlayableState()) {
+                    reduce = reduceMax;
+                } else {
+                    ChoiceImpl choice = new ChoiceImpl(true);
+                    Set<String> set = new LinkedHashSet<>();
+
+                    for (int i = 0; i <= reduceMax; i++) {
+                        set.add(String.valueOf(i));
+                    }
+                    choice.setChoices(set);
+                    choice.setMessage("Reduce flashback cost");
+
+                    if (controller.choose(Outcome.Benefit, choice, game)) {
+                        reduce = Integer.parseInt(choice.getChoice());
+                    } else {
+                        return false;
+                    }
                 }
-                choice.setChoices(set);
-                MageObject mageObject = game.getObject(abilityToModify.getSourceId());
-                choice.setMessage("Reduce cost of " + (mageObject != null ? mageObject.getIdName() : filter.getMessage()));
-                if (controller.choose(Outcome.Benefit, choice, game)) {
-                    generic = Integer.parseInt(choice.getChoice());
-                }
-                CardUtil.reduceCost(abilityToModify, generic);
+                CardUtil.reduceCost(abilityToModify, reduce);
             }
             return true;
         }
