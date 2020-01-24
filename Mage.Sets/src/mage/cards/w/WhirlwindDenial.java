@@ -70,8 +70,18 @@ class WhirlwindDenialEffect extends OneShotEffect {
                             && player.chooseUse(outcome, "Pay {4} to prevent "
                                     + stackObject.getIdName() + " from being countered?", source, game)
                             && cost.pay(source, game, source.getSourceId(), stackObject.getControllerId(), false)) {
+                        game.informPlayers("The cost was paid by " 
+                                + player.getLogName() 
+                                + " to prevent " 
+                                + stackObject.getIdName() 
+                                + " from being countered.");
                         return;
                     }
+                    game.informPlayers("The cost was not paid by " 
+                            + player.getLogName() 
+                            + " to prevent " 
+                            + stackObject.getIdName() 
+                            + " from being countered.");
                     game.getStack().counter(stackObject.getId(), source.getSourceId(), game);
                 });
         return true;
