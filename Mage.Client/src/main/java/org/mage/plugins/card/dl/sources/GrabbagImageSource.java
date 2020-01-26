@@ -7,7 +7,6 @@ import org.mage.plugins.card.images.CardDownloadData;
 import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
 
 /**
  * @author spjspj
@@ -15,7 +14,7 @@ import java.util.logging.Level;
 public enum GrabbagImageSource implements CardImageSource {
 
     instance;
-    private static final Logger logger = Logger.getLogger(GrabbagImageSource.class);
+    private static final Logger LOGGER = Logger.getLogger(GrabbagImageSource.class);
 
     private static final Set<String> supportedSets = new LinkedHashSet<String>() {
         {
@@ -454,7 +453,7 @@ public enum GrabbagImageSource implements CardImageSource {
         try {
             return generateCardUrl(card);
         } catch (Exception ex) {
-            java.util.logging.Logger.getLogger(GrabbagImageSource.class.getName()).log(Level.SEVERE, null, ex);
+            LOGGER.error(ex.getMessage(), ex);
         }
         return null;
     }
