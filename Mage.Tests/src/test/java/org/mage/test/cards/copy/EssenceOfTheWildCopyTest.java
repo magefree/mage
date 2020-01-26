@@ -100,7 +100,7 @@ public class EssenceOfTheWildCopyTest extends CardTestPlayerBase {
     }
 
     @Test
-    //@Ignore // TODO: enable and fix random failes with replace effects
+    @Ignore // TODO: enable and fix random failes with replace effects
     public void test_CopyManyTokens() {
         // https://github.com/magefree/mage/issues/6222
         addCard(Zone.BATTLEFIELD, playerA, "Essence of the Wild", 1);
