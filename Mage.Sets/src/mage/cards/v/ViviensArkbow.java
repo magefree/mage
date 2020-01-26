@@ -14,7 +14,7 @@ import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
-import mage.target.common.TargetCardInHand;
+import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
 
@@ -77,7 +77,7 @@ class ViviensArkbowEffect extends OneShotEffect {
 
         FilterCard filter = new FilterCreatureCard("creature card with converted mana cost " + xValue + " or less");
         filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, xValue + 1));
-        TargetCard target = new TargetCardInHand(0, 1, filter);
+        TargetCard target = new TargetCardInLibrary(0, 1, filter);
 
         if (player.choose(outcome, cards, target, game)) {
             Card card = game.getCard(target.getFirstTarget());

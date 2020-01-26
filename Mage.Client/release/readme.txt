@@ -17,7 +17,7 @@ Extact the client and the server to separate folders.
 To play a game you can either connect to a server or start your own server.  To
 connect to a server you will need to know the server name or IP address and the port.
 To start a server run the startServer.bat command.  If you want to use a different 
-port or change the timeout setting then modify the config.properties file in the 
+port or change the timeout setting then modify the config.xml file in the
 config folder.
 
 To launch the client run the startClient.bat command.  Click on the connect button on

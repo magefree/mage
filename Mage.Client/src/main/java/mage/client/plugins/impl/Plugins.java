@@ -10,7 +10,7 @@ import mage.client.cards.Permanent;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.plugins.MagePlugins;
 import mage.client.plugins.adapters.MageActionCallback;
-import mage.client.util.Config;
+import mage.client.util.ClientDefaultSettings;
 import mage.interfaces.PluginException;
 import mage.interfaces.plugin.CardPlugin;
 import mage.interfaces.plugin.CounterPlugin;
@@ -99,7 +99,7 @@ public enum Plugins implements MagePlugins {
             mageActionCallback.setCardPreviewComponent(bigCard);
             return cardPlugin.getMagePermanent(card, dimension, gameId, mageActionCallback, false, !MageFrame.isLite() && loadImage, renderMode, needFullPermanentRender);
         } else {
-            return new Permanent(card, bigCard, Config.dimensions, gameId);
+            return new Permanent(card, bigCard, ClientDefaultSettings.dimensions, gameId);
         }
     }
 
@@ -112,7 +112,7 @@ public enum Plugins implements MagePlugins {
             }
             return cardPlugin.getMageCard(card, dimension, gameId, mageActionCallback, false, !MageFrame.isLite() && loadImage, renderMode, needFullPermanentRender);
         } else {
-            return new Card(card, bigCard, Config.dimensions, gameId);
+            return new Card(card, bigCard, ClientDefaultSettings.dimensions, gameId);
         }
     }
 

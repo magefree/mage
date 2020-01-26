@@ -7,7 +7,7 @@ import mage.client.cards.ICardGrid;
 import mage.client.deckeditor.SortSetting;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.ClientEventType;
-import mage.client.util.Config;
+import mage.client.util.ClientDefaultSettings;
 import mage.client.util.Event;
 import mage.client.util.Listener;
 import mage.client.util.gui.GuiDisplayUtil;
@@ -249,8 +249,8 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
 
     private void addCard(CardView card, BigCard bigCard, UUID gameId) {
         if (cardDimension == null) {
-            cardDimension = new Dimension(Config.dimensions.getFrameWidth(),
-                    Config.dimensions.getFrameHeight());
+            cardDimension = new Dimension(ClientDefaultSettings.dimensions.getFrameWidth(),
+                    ClientDefaultSettings.dimensions.getFrameHeight());
         }
         cards.put(card.getId(), card);
 

@@ -11,7 +11,7 @@
  import mage.client.dialog.PreferencesDialog;
  import mage.client.plugins.impl.Plugins;
  import mage.client.util.CardsViewUtil;
- import mage.client.util.Config;
+ import mage.client.util.ClientDefaultSettings;
  import mage.client.util.GUISizeHelper;
  import mage.view.*;
  import org.apache.log4j.Logger;
@@ -212,7 +212,7 @@
 
      private Dimension getCardDimension() {
          if (cardDimension == null) {
-             cardDimension = new Dimension(Config.dimensions.getFrameWidth(), Config.dimensions.getFrameHeight());
+             cardDimension = new Dimension(ClientDefaultSettings.dimensions.getFrameWidth(), ClientDefaultSettings.dimensions.getFrameHeight());
          }
          return cardDimension;
      }

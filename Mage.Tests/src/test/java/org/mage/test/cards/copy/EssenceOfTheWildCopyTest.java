@@ -9,6 +9,12 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
 /**
  * @author JayDi85
  */
@@ -91,6 +97,45 @@ public class EssenceOfTheWildCopyTest extends CardTestPlayerBase {
         Assert.assertEquals("copy 1 must have 6 p/t", 6, copy1.getToughness().getValue());
         Assert.assertEquals("copy 2 must have 6 p/t", 6, copy2.getPower().getValue());
         Assert.assertEquals("copy 2 must have 6 p/t", 6, copy2.getToughness().getValue());
+    }
+
+    @Test
+    @Ignore // TODO: enable and fix random failes with replace effects
+    public void test_CopyManyTokens() {
+        // https://github.com/magefree/mage/issues/6222
+        addCard(Zone.BATTLEFIELD, playerA, "Essence of the Wild", 1);
+        //
+        // Create X 1/1 white Soldier creature tokens with lifelink.
+        addCard(Zone.HAND, playerA, "March of the Multitudes", 1); // {X}{G}{W}{W}
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 5 + 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+
+        // create multiple tokens
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "March of the Multitudes");
+        setChoice(playerA, "X=5");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Soldier", 0);
+        assertPermanentCount(playerA, "Essence of the Wild", 1 + 5);
+
+        List<Permanent> list = new ArrayList<>();
+        list.add(findCopyPermanent(currentGame, 1));
+        list.add(findCopyPermanent(currentGame, 2));
+        list.add(findCopyPermanent(currentGame, 3));
+        list.add(findCopyPermanent(currentGame, 4));
+        list.add(findCopyPermanent(currentGame, 5));
+
+        Set<UUID> uniq = list.stream().map(Permanent::getId).collect(Collectors.toSet());
+        Assert.assertEquals("All tokens must be copied", list.size(), uniq.size());
+
+        list.stream().forEach(permanent -> {
+            Assert.assertEquals("copy must have 6 p/t", 6, permanent.getPower().getValue());
+            Assert.assertEquals("copy must have 6 p/t", 6, permanent.getToughness().getValue());
+        });
     }
 
     @Test

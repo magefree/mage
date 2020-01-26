@@ -1,7 +1,7 @@
 package mage.client.components.ext.dlg;
 
 import mage.client.components.ImageButton;
-import mage.client.util.Config;
+import mage.client.util.ClientDefaultSettings;
 import org.jdesktop.swingx.JXPanel;
 
 import javax.swing.*;
@@ -71,7 +71,7 @@ public abstract class IDialogPanel extends JXPanel {
 
     protected Dimension getCardDimension() {
         if (cardDimension == null) {
-            cardDimension = new Dimension(Config.dimensions.getFrameWidth(), Config.dimensions.getFrameHeight());
+            cardDimension = new Dimension(ClientDefaultSettings.dimensions.getFrameWidth(), ClientDefaultSettings.dimensions.getFrameHeight());
         }
         return cardDimension;
     }

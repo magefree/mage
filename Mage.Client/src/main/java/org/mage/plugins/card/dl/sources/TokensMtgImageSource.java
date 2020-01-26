@@ -15,7 +15,6 @@ import java.net.Proxy;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.*;
-import java.util.logging.Level;
 
 /**
  * @author Quercitron
@@ -23,7 +22,7 @@ import java.util.logging.Level;
 public enum TokensMtgImageSource implements CardImageSource {
 
     instance;
-    private static final Logger logger = Logger.getLogger(TokensMtgImageSource.class);
+    private static final Logger LOGGER = Logger.getLogger(TokensMtgImageSource.class);
 
     // [[EXP/Name, TokenData>
     private HashMap<String, List<TokenData>> tokensData;
@@ -99,14 +98,14 @@ public enum TokensMtgImageSource implements CardImageSource {
         // We don't know these numbers, but we can take them from a file
         // with tokens information that can be downloaded from the site.
         if (tokensData.isEmpty()) {
-            logger.info("Source " + getSourceName() + " provides no token data.");
+            LOGGER.info("Source " + getSourceName() + " provides no token data.");
             return null;
         }
 
         String key = set + "/" + name;
         List<TokenData> list = tokensData.get(key);
         if (list == null) {
-            logger.warn("Could not find data for token " + name + ", set " + set + ".");
+            LOGGER.warn("Could not find data for token " + name + ", set " + set + ".");
             return null;
         }
 
@@ -115,7 +114,7 @@ public enum TokensMtgImageSource implements CardImageSource {
             tokenData = list.get(0);
         } else {
             if (type > list.size()) {
-                logger.warn("Not enough images variants for token with type number " + type + ", name " + name + ", set " + set + '.');
+                LOGGER.warn("Not enough images variants for token with type number " + type + ", name " + name + ", set " + set + '.');
                 return null;
             }
             tokenData = list.get(card.getType() - 1);
@@ -137,7 +136,7 @@ public enum TokensMtgImageSource implements CardImageSource {
         try {
             getTokensData();
         } catch (IOException ex) {
-            logger.error(getSourceName() + ": Loading available data failed. " + ex.getMessage());
+            LOGGER.error(getSourceName() + ": Loading available data failed. " + ex.getMessage());
         }
         return tokensData.size();
     }
@@ -172,7 +171,7 @@ public enum TokensMtgImageSource implements CardImageSource {
         try {
             getTokensData();
         } catch (IOException ex) {
-            java.util.logging.Logger.getLogger(TokensMtgImageSource.class.getName()).log(Level.SEVERE, null, ex);
+            LOGGER.error(ex.getMessage(), ex);
         }
         String key = setCode + "/" + searchName;
         return (tokensData.containsKey(key));
@@ -199,12 +198,12 @@ public enum TokensMtgImageSource implements CardImageSource {
                             list = new ArrayList<>();
                             tokensData.put(key, list);
                             supportedSets.add(tokenData.getExpansionSetCode());
-                            logger.debug("Added key: " + key);
+                            LOGGER.debug("Added key: " + key);
                         }
                         list.add(tokenData);
                     }
                 } catch (Exception exception) {
-                    logger.warn("Failed to get tokens description from resource file tokens-mtg-onl-list.csv", exception);
+                    LOGGER.warn("Failed to get tokens description from resource file tokens-mtg-onl-list.csv", exception);
                 }
 
                 String urlString = "http://tokens.mtg.onl/data/SetsWithTokens.csv";
@@ -240,7 +239,7 @@ public enum TokensMtgImageSource implements CardImageSource {
                     DownloadPicturesService.getInstance().updateMessage("");
                     DownloadPicturesService.getInstance().showDownloadControls(true);
                 } catch (Exception ex) {
-                    logger.warn("Failed to get tokens description from tokens.mtg.onl", ex);
+                    LOGGER.warn("Failed to get tokens description from tokens.mtg.onl", ex);
                     DownloadPicturesService.getInstance().updateMessage(ex.getMessage());
                 }
             }

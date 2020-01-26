@@ -1,7 +1,6 @@
 package mage.abilities.effects.common;
 
 import java.util.List;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -24,8 +23,6 @@ import mage.target.targetpointer.FixedTarget;
  * @author spjspj
  */
 public class RollPlanarDieEffect extends OneShotEffect {
-
-    private static final Logger log = Logger.getLogger("Roll Planar Die");
 
     protected List<Effect> chaosEffects = null;
     protected List<Target> chaosTargets = null;

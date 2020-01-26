@@ -74,7 +74,8 @@ enum GadwickTheWizenedValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        GadwickTheWizenedWatcher watcher = game.getState().getWatcher(GadwickTheWizenedWatcher.class);
+        // watcher in card's scope
+        GadwickTheWizenedWatcher watcher = game.getState().getWatcher(GadwickTheWizenedWatcher.class, sourceAbility.getSourceId());
         if (watcher == null) {
             return 0;
         }

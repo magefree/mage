@@ -6,7 +6,7 @@ import mage.choices.ChoiceImpl;
 import mage.client.MageFrame;
 import mage.client.SessionHandler;
 import mage.client.preference.MagePreferences;
-import mage.client.util.Config;
+import mage.client.util.ClientDefaultSettings;
 import mage.client.util.gui.countryBox.CountryItemEditor;
 import mage.client.util.sets.ConstructedFormats;
 import mage.remote.Connection;
@@ -59,9 +59,9 @@ public class ConnectDialog extends MageDialog {
     }
 
     public void showDialog() {
-        String serverAddress = MagePreferences.getServerAddressWithDefault(Config.serverName);
+        String serverAddress = MagePreferences.getServerAddressWithDefault(ClientDefaultSettings.serverName);
         this.txtServer.setText(serverAddress);
-        this.txtPort.setText(Integer.toString(MagePreferences.getServerPortWithDefault(Config.port)));
+        this.txtPort.setText(Integer.toString(MagePreferences.getServerPortWithDefault(ClientDefaultSettings.port)));
         this.txtUserName.setText(MagePreferences.getUserName(serverAddress));
         this.txtPassword.setText(MagePreferences.getPassword(serverAddress));
         this.chkAutoConnect.setSelected(Boolean.parseBoolean(MageFrame.getPreferences().get(KEY_CONNECT_AUTO_CONNECT, "false")));
@@ -512,9 +512,9 @@ public class ConnectDialog extends MageDialog {
             return;
         }
         // txtPassword is not checked here, because authentication might be disabled by the server config.
-        if (Integer.valueOf(txtPort.getText()) < 1 || Integer.valueOf(txtPort.getText()) > 65535) {
+        if (Integer.parseInt(txtPort.getText()) < 1 || Integer.parseInt(txtPort.getText()) > 65535) {
             JOptionPane.showMessageDialog(rootPane, "Invalid port number");
-            txtPort.setText(Integer.toString(MagePreferences.getServerPortWithDefault(Config.port)));
+            txtPort.setText(Integer.toString(MagePreferences.getServerPortWithDefault(ClientDefaultSettings.port)));
             return;
         }
 
@@ -522,7 +522,7 @@ public class ConnectDialog extends MageDialog {
         try {
             connection = new Connection();
             connection.setHost(this.txtServer.getText().trim());
-            connection.setPort(Integer.valueOf(this.txtPort.getText().trim()));
+            connection.setPort(Integer.parseInt(this.txtPort.getText().trim()));
             connection.setUsername(this.txtUserName.getText().trim());
             connection.setPassword(String.valueOf(this.txtPassword.getPassword()).trim());
             connection.setForceDBComparison(this.chkForceUpdateDB.isSelected() || RepositoryUtil.isDatabaseEmpty());

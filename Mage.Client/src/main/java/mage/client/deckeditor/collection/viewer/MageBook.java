@@ -10,7 +10,7 @@ import mage.client.cards.BigCard;
 import mage.client.components.HoverButton;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.plugins.impl.Plugins;
-import mage.client.util.Config;
+import mage.client.util.ClientDefaultSettings;
 import mage.client.util.ImageHelper;
 import mage.client.util.NaturalOrderCardNumberComparator;
 import mage.client.util.audio.AudioManager;
@@ -405,7 +405,7 @@ public class MageBook extends JComponent {
 
     private void addCard(CardView card, BigCard bigCard, UUID gameId, Rectangle rectangle) {
         if (cardDimension == null) {
-            cardDimension = new Dimension(Config.dimensions.getFrameWidth(), Config.dimensions.getFrameHeight());
+            cardDimension = new Dimension(ClientDefaultSettings.dimensions.getFrameWidth(), ClientDefaultSettings.dimensions.getFrameHeight());
         }
         final MageCard cardImg = Plugins.instance.getMageCard(card, bigCard, cardDimension, gameId, true, true, PreferencesDialog.getRenderMode(), true);
         cardImg.setBounds(rectangle);
@@ -442,7 +442,7 @@ public class MageBook extends JComponent {
 
     private void addToken(Token token, BigCard bigCard, UUID gameId, Rectangle rectangle) {
         if (cardDimension == null) {
-            cardDimension = new Dimension(Config.dimensions.getFrameWidth(), Config.dimensions.getFrameHeight());
+            cardDimension = new Dimension(ClientDefaultSettings.dimensions.getFrameWidth(), ClientDefaultSettings.dimensions.getFrameHeight());
         }
         PermanentToken newToken = new PermanentToken(token, null, token.getOriginalExpansionSetCode(), null);
         newToken.removeSummoningSickness();

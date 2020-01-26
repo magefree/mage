@@ -1315,7 +1315,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 if (startPort > 0) {
                     instance.currentConnection.setPort(startPort);
                 } else {
-                    instance.currentConnection.setPort(MagePreferences.getServerPortWithDefault(Config.port));
+                    instance.currentConnection.setPort(MagePreferences.getServerPortWithDefault(ClientDefaultSettings.port));
                 }
                 PreferencesDialog.setProxyInformation(instance.currentConnection);
                 instance.currentConnection.setPassword(startPassword);

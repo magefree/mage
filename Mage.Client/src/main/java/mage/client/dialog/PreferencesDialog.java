@@ -4,7 +4,7 @@ import mage.client.MageFrame;
 import mage.client.SessionHandler;
 import mage.client.components.KeyBindButton;
 import mage.client.util.CardLanguage;
-import mage.client.util.Config;
+import mage.client.util.ClientDefaultSettings;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.ImageHelper;
 import mage.client.util.gui.BufferedImageBuilder;
@@ -3475,8 +3475,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private static void loadProxySettings(Preferences prefs) {
         dialog.cbProxyType.setSelectedItem(Connection.ProxyType.valueOf(MageFrame.getPreferences().get(KEY_PROXY_TYPE, "NONE").toUpperCase(Locale.ENGLISH)));
 
-        load(prefs, dialog.txtProxyServer, KEY_PROXY_ADDRESS, Config.serverName);
-        load(prefs, dialog.txtProxyPort, KEY_PROXY_PORT, Integer.toString(Config.port));
+        load(prefs, dialog.txtProxyServer, KEY_PROXY_ADDRESS, ClientDefaultSettings.serverName);
+        load(prefs, dialog.txtProxyPort, KEY_PROXY_PORT, Integer.toString(ClientDefaultSettings.port));
         load(prefs, dialog.txtProxyUserName, KEY_PROXY_USERNAME, "");
         load(prefs, dialog.rememberPswd, KEY_PROXY_REMEMBER, "true", "false");
         if (dialog.rememberPswd.isSelected()) {

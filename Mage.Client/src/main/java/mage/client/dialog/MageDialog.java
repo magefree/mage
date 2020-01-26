@@ -11,7 +11,6 @@ import java.awt.event.InvocationEvent;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyVetoException;
 import java.lang.reflect.InvocationTargetException;
-import java.util.logging.Level;
 
 /**
  * @author BetaSteward_at_googlemail.com, JayDi85
@@ -215,7 +214,7 @@ public class MageDialog extends javax.swing.JInternalFrame {
         try {
             this.setClosed(true);
         } catch (PropertyVetoException ex) {
-            java.util.logging.Logger.getLogger(MageDialog.class.getName()).log(Level.SEVERE, "setClosed(false) failed", ex);
+            LOGGER.error("setClosed(false) failed", ex);
         }
         MageFrame.getDesktop().remove(this);
     }

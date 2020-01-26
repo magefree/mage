@@ -49,7 +49,7 @@ class ThassasOracleEffect extends OneShotEffect {
     ThassasOracleEffect() {
         super(Outcome.Benefit);
         staticText = "look at the top X cards of your library, where X is your devotion to blue. " +
-                "Put one of them on top of your library and the rest on the bottom of your library in a random order. " +
+                "Put up to one of them on top of your library and the rest on the bottom of your library in a random order. " +
                 "If X is greater than or equal to the number of cards in your library, you win the game";
     }
 

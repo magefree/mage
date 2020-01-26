@@ -7,7 +7,7 @@ import mage.cards.TextPopup;
 import mage.cards.action.ActionCallback;
 import mage.client.MageFrame;
 import mage.client.game.PlayAreaPanel;
-import mage.client.util.Config;
+import mage.client.util.ClientDefaultSettings;
 import mage.client.util.DefaultActionCallback;
 import mage.client.util.ImageHelper;
 import mage.client.util.gui.ArrowBuilder;
@@ -68,7 +68,7 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
         this.gameId = gameId;
         this.card = card;
         this.bigCard = bigCard;
-        small = new BufferedImage(Config.dimensions.getFrameWidth(), Config.dimensions.getFrameHeight(), BufferedImage.TYPE_INT_RGB);
+        small = new BufferedImage(ClientDefaultSettings.dimensions.getFrameWidth(), ClientDefaultSettings.dimensions.getFrameHeight(), BufferedImage.TYPE_INT_RGB);
         backgroundName = getBackgroundName();
         background = ImageHelper.getBackground(card, backgroundName);
 
@@ -120,7 +120,7 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
 
         gSmall.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         gSmall.setColor(Color.BLACK);
-        gSmall.drawImage(ImageHelper.scaleImage(image, Config.dimensions.getFrameWidth(), Config.dimensions.getFrameHeight()), 0, 0, this);
+        gSmall.drawImage(ImageHelper.scaleImage(image, ClientDefaultSettings.dimensions.getFrameWidth(), ClientDefaultSettings.dimensions.getFrameHeight()), 0, 0, this);
 
         gImage.setFont(new Font("Arial", Font.PLAIN, NAME_FONT_MAX_SIZE));
         gImage.drawString(card.getName() + "TEST", CONTENT_MAX_XOFFSET, NAME_MAX_YOFFSET);
@@ -136,16 +136,16 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
 
         gImage.dispose();
 
-        gSmall.setFont(new Font("Arial", Font.PLAIN, Config.dimensions.getNameFontSize()));
-        gSmall.drawString(card.getName() + "TEST2", Config.dimensions.getContentXOffset(), Config.dimensions.getNameYOffset());
+        gSmall.setFont(new Font("Arial", Font.PLAIN, ClientDefaultSettings.dimensions.getNameFontSize()));
+        gSmall.drawString(card.getName() + "TEST2", ClientDefaultSettings.dimensions.getContentXOffset(), ClientDefaultSettings.dimensions.getNameYOffset());
         if (card.isCreature()) {
-            gSmall.drawString(card.getPower() + "/-/" + card.getToughness(), Config.dimensions.getPowBoxTextLeft(), Config.dimensions.getPowBoxTextTop());
+            gSmall.drawString(card.getPower() + "/-/" + card.getToughness(), ClientDefaultSettings.dimensions.getPowBoxTextLeft(), ClientDefaultSettings.dimensions.getPowBoxTextTop());
         } else if (card.isPlanesWalker()) {
-            gSmall.drawString(card.getLoyalty(), Config.dimensions.getPowBoxTextLeft(), Config.dimensions.getPowBoxTextTop());
+            gSmall.drawString(card.getLoyalty(), ClientDefaultSettings.dimensions.getPowBoxTextLeft(), ClientDefaultSettings.dimensions.getPowBoxTextTop());
         }
 
         if (!card.getCardTypes().isEmpty()) {
-            gSmall.drawString(cardType, Config.dimensions.getContentXOffset(), Config.dimensions.getTypeYOffset());
+            gSmall.drawString(cardType, ClientDefaultSettings.dimensions.getContentXOffset(), ClientDefaultSettings.dimensions.getTypeYOffset());
         }
         drawText();
 
@@ -346,11 +346,11 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
                 tooltipPopup.hide();
             }
             PopupFactory factory = PopupFactory.getSharedInstance();
-            tooltipPopup = factory.getPopup(this, tooltipText, (int) this.getLocationOnScreen().getX() + Config.dimensions.getFrameWidth(), (int) this.getLocationOnScreen().getY() + 40);
+            tooltipPopup = factory.getPopup(this, tooltipText, (int) this.getLocationOnScreen().getX() + ClientDefaultSettings.dimensions.getFrameWidth(), (int) this.getLocationOnScreen().getY() + 40);
             tooltipPopup.show();
             //hack to get tooltipPopup to resize to fit text
             tooltipPopup.hide();
-            tooltipPopup = factory.getPopup(this, tooltipText, (int) this.getLocationOnScreen().getX() + Config.dimensions.getFrameWidth(), (int) this.getLocationOnScreen().getY() + 40);
+            tooltipPopup = factory.getPopup(this, tooltipText, (int) this.getLocationOnScreen().getX() + ClientDefaultSettings.dimensions.getFrameWidth(), (int) this.getLocationOnScreen().getY() + 40);
             tooltipPopup.show();
             tooltipShowing = true;
 
