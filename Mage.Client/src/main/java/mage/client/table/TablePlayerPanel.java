@@ -10,7 +10,7 @@ package mage.client.table;
 
 import mage.cards.decks.importer.DeckImporter;
 import mage.client.SessionHandler;
-import mage.client.util.Config;
+import mage.client.util.ClientDefaultSettings;
 import mage.client.util.Event;
 import mage.client.util.Listener;
 import mage.players.PlayerType;
@@ -38,11 +38,11 @@ public class TablePlayerPanel extends javax.swing.JPanel {
     public void init(int playerNum, PlayerType playerType) {
         cbPlayerType.setModel(new DefaultComboBoxModel(SessionHandler.getPlayerTypes()));
         this.lblPlayerNum.setText("Player " + playerNum);
-        if (Config.defaultOtherPlayerIndex != null) {
-            if (Integer.valueOf(Config.defaultOtherPlayerIndex) >= cbPlayerType.getItemCount()) {
+        if (ClientDefaultSettings.otherPlayerIndex != null) {
+            Integer index = Integer.parseInt(ClientDefaultSettings.otherPlayerIndex);
+            if (index >= cbPlayerType.getItemCount()) {
                 cbPlayerType.setSelectedIndex(cbPlayerType.getItemCount() - 1);
             } else {
-                Integer index = Integer.parseInt(Config.defaultOtherPlayerIndex);
                 cbPlayerType.setSelectedIndex(index);
             }
         }

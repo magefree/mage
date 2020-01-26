@@ -9,14 +9,12 @@ package mage.client.table;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Locale;
 import javax.swing.*;
-import javax.swing.filechooser.FileFilter;
 
 import mage.cards.decks.DeckFileFilter;
 import mage.client.MageFrame;
 import mage.client.deck.generator.DeckGenerator;
-import mage.client.util.Config;
+import mage.client.util.ClientDefaultSettings;
 
 /**
  *
@@ -36,14 +34,10 @@ public class NewPlayerPanel extends javax.swing.JPanel {
         fcSelectDeck.addChoosableFileFilter(new DeckFileFilter("dck", "XMage's deck files (*.dck)"));
         String deckPath = MageFrame.getPreferences().get("defaultDeckPath", "");
         if (deckPath.isEmpty()) {
-            if (Config.defaultDeckPath != null) {
-                deckPath = Config.defaultDeckPath;
-            }
+            deckPath = ClientDefaultSettings.deckPath;
         }
         this.txtPlayerDeck.setText(deckPath);
-        if (Config.defaultComputerName != null) {
-            this.txtPlayerName.setText(Config.defaultComputerName);
-        }
+        this.txtPlayerName.setText(ClientDefaultSettings.computerName);
     }
 
     public void setPlayerName(String playerName) {

@@ -2,7 +2,7 @@ package mage.client.preference;
 
 import com.google.common.collect.Sets;
 import mage.client.MageFrame;
-import mage.client.util.Config;
+import mage.client.util.ClientDefaultSettings;
 
 import java.util.Set;
 import java.util.prefs.BackingStoreException;
@@ -144,8 +144,8 @@ public final class MagePreferences {
     }
 
     public static void saveLastServer() {
-        lastServerAddress = getServerAddressWithDefault(Config.serverName);
-        lastServerPort = getServerPortWithDefault(Config.port);
+        lastServerAddress = getServerAddressWithDefault(ClientDefaultSettings.serverName);
+        lastServerPort = getServerPortWithDefault(ClientDefaultSettings.port);
         lastServerUser = getUserName(lastServerAddress);
         lastServerPassword = getPassword(lastServerAddress);
     }

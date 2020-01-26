@@ -10,7 +10,7 @@ package mage.client.unusedFiles;
 //package mage.client.game;
 import java.util.UUID;
 import mage.client.cards.BigCard;
-import mage.client.util.Config;
+import mage.client.util.ClientDefaultSettings;
 import mage.client.util.GUISizeHelper;
 import mage.view.CombatGroupView;
 
@@ -61,9 +61,9 @@ public class CombatGroup extends javax.swing.JPanel {
         attackers = new mage.client.cards.Cards();
         lblDefender = new javax.swing.JLabel();
 
-        blockers.setPreferredSize(new java.awt.Dimension(Config.dimensions.getFrameWidth() + 8, Config.dimensions.getFrameHeight() + 25));
+        blockers.setPreferredSize(new java.awt.Dimension(ClientDefaultSettings.dimensions.getFrameWidth() + 8, ClientDefaultSettings.dimensions.getFrameHeight() + 25));
 
-        attackers.setPreferredSize(new java.awt.Dimension(Config.dimensions.getFrameWidth() + 8, Config.dimensions.getFrameHeight() + 25));
+        attackers.setPreferredSize(new java.awt.Dimension(ClientDefaultSettings.dimensions.getFrameWidth() + 8, ClientDefaultSettings.dimensions.getFrameHeight() + 25));
 
         lblDefender.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblDefender.setText("Defender");

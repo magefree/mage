@@ -12,7 +12,7 @@
  import mage.client.cards.Permanent;
  import mage.client.dialog.PreferencesDialog;
  import mage.client.plugins.impl.Plugins;
- import mage.client.util.Config;
+ import mage.client.util.ClientDefaultSettings;
  import mage.client.util.GUISizeHelper;
  import mage.client.util.audio.AudioManager;
  import mage.client.util.layout.CardLayoutStrategy;
@@ -226,7 +226,7 @@
 
      private void addPermanent(PermanentView permanent, final int count) {
          if (cardDimension == null) {
-             cardDimension = new Dimension(Config.dimensions.getFrameWidth(), Config.dimensions.getFrameHeight());
+             cardDimension = new Dimension(ClientDefaultSettings.dimensions.getFrameWidth(), ClientDefaultSettings.dimensions.getFrameHeight());
          }
          final MagePermanent perm = Plugins.instance.getMagePermanent(permanent, bigCard, cardDimension, gameId, true, PreferencesDialog.getRenderMode(), true);
 
