@@ -201,6 +201,7 @@ public final class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Slashing Tiger", 133, Rarity.COMMON, mage.cards.s.SlashingTiger.class));
         cards.add(new SetCardInfo("Sol Grail", 201, Rarity.COMMON, mage.cards.s.SolGrail.class));
         cards.add(new SetCardInfo("Sorrow's Path", 211, Rarity.RARE, mage.cards.s.SorrowsPath.class));
+        cards.add(new SetCardInfo("Spectral Shield", 176, Rarity.UNCOMMON, mage.cards.s.SpectralShield.class));
         cards.add(new SetCardInfo("Spirit Shackle", 74, Rarity.COMMON, mage.cards.s.SpiritShackle.class));
         cards.add(new SetCardInfo("Spoils of Victory", 134, Rarity.COMMON, mage.cards.s.SpoilsOfVictory.class));
         cards.add(new SetCardInfo("Stangg", 177, Rarity.UNCOMMON, mage.cards.s.Stangg.class));
