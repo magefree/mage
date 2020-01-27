@@ -1,8 +1,5 @@
-
 package mage.cards.m;
 
-import java.util.Iterator;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -11,28 +8,26 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 
+import java.util.Iterator;
+import java.util.UUID;
+
 /**
- *
  * @author HCrescent
  */
 public final class MagusOfTheJar extends CardImpl {
 
     public MagusOfTheJar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
-        
+
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(3);
@@ -42,7 +37,7 @@ public final class MagusOfTheJar extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MagusoftheJarEffect(), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
-    
+
     }
 
     public MagusOfTheJar(final MagusOfTheJar card) {
@@ -73,9 +68,9 @@ class MagusoftheJarEffect extends OneShotEffect {
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                Cards hand = player.getHand();
-                while (!hand.isEmpty()) {
-                    Card card = hand.get(hand.iterator().next(), game);
+                Cards handCards = new CardsImpl(player.getHand());
+                for (UUID cardId : handCards) {
+                    Card card = handCards.get(cardId, game);
                     if (card != null) {
                         card.moveToExile(getId(), "Magus of the Jar", source.getSourceId(), game);
                         card.setFaceDown(true, game);
@@ -133,7 +128,7 @@ class MagusoftheJarDelayedEffect extends OneShotEffect {
                 }
             }
             //Return to hand
-            for (Iterator<Card> it = cards.getCards(game).iterator(); it.hasNext();) {
+            for (Iterator<Card> it = cards.getCards(game).iterator(); it.hasNext(); ) {
                 Card card = it.next();
                 card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
             }

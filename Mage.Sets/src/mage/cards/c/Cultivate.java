@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -16,8 +14,10 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public final class Cultivate extends CardImpl {
@@ -79,12 +79,14 @@ class CultivateEffect extends OneShotEffect {
                         controller.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
                         revealed.remove(card);
                     }
-                    card = revealed.getCards(game).iterator().next();
+                    Set<Card> cards = revealed.getCards(game);
+                    card = cards.isEmpty() ? null : cards.iterator().next();
                     if (card != null) {
                         controller.moveCards(card, Zone.HAND, source, game);
                     }
                 } else if (target.getTargets().size() == 1) {
-                    Card card = revealed.getCards(game).iterator().next();
+                    Set<Card> cards = revealed.getCards(game);
+                    Card card = cards.isEmpty() ? null : cards.iterator().next();
                     if (card != null) {
                         controller.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
                     }

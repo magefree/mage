@@ -127,7 +127,7 @@ class GodEternalKefnetDrawCardReplacementEffect extends ReplacementEffectImpl {
             return false;
         }
 
-        Card topCard = you.getLibrary().getTopCards(game, 1).iterator().next();
+        Card topCard = you.getLibrary().getFromTop(game);
         if (topCard == null) {
             return false;
         }

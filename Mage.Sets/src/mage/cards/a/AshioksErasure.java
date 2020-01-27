@@ -25,6 +25,7 @@ import mage.players.Player;
 import mage.target.TargetSpell;
 import mage.util.CardUtil;
 
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -133,10 +134,17 @@ class AshioksErasureReplacementEffect extends ContinuousRuleModifyingEffectImpl 
                 exile = game.getExile().getExileZone(exileZone);
             }
         }
+
         if (exile == null) {
             return false;
         }
-        Card exiledCard = exile.getCards(game).iterator().next();
+
+        Set<Card> cards = exile.getCards(game);
+        if (cards.isEmpty()) {
+            return false;
+        }
+
+        Card exiledCard = cards.iterator().next();
         if (exiledCard != null) {
             return exiledCard.getName().equals(card.getName());
         }

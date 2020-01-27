@@ -1,7 +1,5 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -19,8 +17,10 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class AugurOfBolas extends CardImpl {
@@ -81,9 +81,12 @@ class AugurOfBolasEffect extends OneShotEffect {
                 int number = topCards.count(new FilterInstantOrSorceryCard(), source.getSourceId(), source.getControllerId(), game);
                 if (number > 0) {
                     if (controller.chooseUse(outcome, "Reveal an instant or sorcery card from the looked at cards and put it into your hand?", source, game)) {
-                        Card card;
+                        Card card = null;
                         if (number == 1) {
-                            card = topCards.getCards(new FilterInstantOrSorceryCard(), source.getSourceId(), source.getControllerId(), game).iterator().next();
+                            Set<Card> cards = topCards.getCards(new FilterInstantOrSorceryCard(), source.getSourceId(), source.getControllerId(), game);
+                            if (!cards.isEmpty()) {
+                                card = cards.iterator().next();
+                            }
                         } else {
                             TargetCard target = new TargetCard(Zone.LIBRARY, new FilterInstantOrSorceryCard());
                             controller.chooseTarget(outcome, topCards, target, source, game);
