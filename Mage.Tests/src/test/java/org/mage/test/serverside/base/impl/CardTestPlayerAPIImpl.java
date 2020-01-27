@@ -34,6 +34,7 @@ import org.mage.test.serverside.base.MageTestPlayerBase;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 import java.util.regex.Matcher;
@@ -43,9 +44,32 @@ import java.util.stream.Collectors;
 /**
  * API for test initialization and asserting the test results.
  *
- * @author ayratn
+ * @author ayratn, JayDi85
  */
 public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implements CardTestAPI {
+
+    public static final String ALIASE_PREFIX = "@"; // don't change -- it uses in user's tests
+    public static final String CHECK_PARAM_DELIMETER = "#";
+    public static final String CHECK_PREFIX = "check:"; // prefix for all check commands
+
+    static {
+        // aliases can be used in check commands, so all prefixes and delimeters must be unique
+        // already uses by targets: ^ $ [ ]
+        Assert.assertFalse("prefix must be unique", CHECK_PARAM_DELIMETER.contains(ALIASE_PREFIX));
+        Assert.assertFalse("prefix must be unique", CHECK_PREFIX.contains(ALIASE_PREFIX));
+        Assert.assertFalse("prefix must be unique", ALIASE_PREFIX.contains(CHECK_PREFIX));
+    }
+
+    // prefix for activate commands
+    public static final String ACTIVATE_ABILITY = "activate:";
+    public static final String ACTIVATE_PLAY = "activate:Play ";
+    public static final String ACTIVATE_CAST = "activate:Cast ";
+
+    static {
+        // cards can be played/casted by activate ability command too
+        Assert.assertTrue("musts contains activate ability part", ACTIVATE_PLAY.startsWith(ACTIVATE_ABILITY));
+        Assert.assertTrue("musts contains activate ability part", ACTIVATE_CAST.startsWith(ACTIVATE_ABILITY));
+    }
 
     // TODO: add target player param to commands
     public static final String CHECK_COMMAND_PT = "PT";
@@ -287,9 +311,9 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     // check commands
 
     private void check(String checkName, int turnNum, PhaseStep step, TestPlayer player, String command, String... params) {
-        String res = "check:" + command;
+        String res = CHECK_PREFIX + command;
         for (String param : params) {
-            res += "@" + param;
+            res += CHECK_PARAM_DELIMETER + param;
         }
         player.addAction(checkName, turnNum, step, res);
     }
@@ -386,7 +410,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     private void show(String showName, int turnNum, PhaseStep step, TestPlayer player, String command, String... params) {
         String res = "show:" + command;
         for (String param : params) {
-            res += "@" + param;
+            res += CHECK_PARAM_DELIMETER + param;
         }
         player.addAction(showName, turnNum, step, res);
     }
@@ -494,9 +518,9 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         // aliases for mage objects
         String aliasName = "";
         boolean useAliasMultiNames = (count != 1);
-        if (cardName.contains("@")) {
-            aliasName = cardName.substring(cardName.indexOf("@") + 1);
-            cardName = cardName.substring(0, cardName.indexOf("@"));
+        if (cardName.contains(ALIASE_PREFIX)) {
+            aliasName = cardName.substring(cardName.indexOf(ALIASE_PREFIX) + ALIASE_PREFIX.length());
+            cardName = cardName.substring(0, cardName.indexOf(ALIASE_PREFIX));
         }
 
         // one card = one aliase, massive adds can use auto-name
@@ -1339,23 +1363,27 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     public void playLand(int turnNum, PhaseStep step, TestPlayer player, String cardName) {
         //Assert.assertNotEquals("", cardName);
-        player.addAction(turnNum, step, "activate:Play " + cardName);
+        assertAliaseSupportInActivateCommand(cardName, false);
+        player.addAction(turnNum, step, ACTIVATE_PLAY + cardName);
     }
 
     public void castSpell(int turnNum, PhaseStep step, TestPlayer player, String cardName) {
         //Assert.assertNotEquals("", cardName);
-        player.addAction(turnNum, step, "activate:Cast " + cardName);
+        assertAliaseSupportInActivateCommand(cardName, false);
+        player.addAction(turnNum, step, ACTIVATE_CAST + cardName);
     }
 
     public void castSpell(int turnNum, PhaseStep step, TestPlayer player, String cardName, Player target) {
         //Assert.assertNotEquals("", cardName);
         // warning, target in spell cast command setups without choose target call
-        player.addAction(turnNum, step, "activate:Cast " + cardName + "$targetPlayer=" + target.getName());
+        assertAliaseSupportInActivateCommand(cardName, false);
+        player.addAction(turnNum, step, ACTIVATE_CAST + cardName + "$targetPlayer=" + target.getName());
     }
 
     public void castSpell(int turnNum, PhaseStep step, TestPlayer player, String cardName, Player target, int manaInPool) {
         //Assert.assertNotEquals("", cardName);
-        player.addAction(turnNum, step, "activate:Cast " + cardName + "$targetPlayer=" + target.getName() + "$manaInPool=" + manaInPool);
+        assertAliaseSupportInActivateCommand(cardName, false);
+        player.addAction(turnNum, step, ACTIVATE_CAST + cardName + "$targetPlayer=" + target.getName() + "$manaInPool=" + manaInPool);
     }
 
     public void waitStackResolved(int turnNum, PhaseStep step, TestPlayer player) {
@@ -1396,7 +1424,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      */
     public void castSpell(int turnNum, PhaseStep step, TestPlayer player, String cardName, String targetName) {
         //Assert.assertNotEquals("", cardName);
-        player.addAction(turnNum, step, "activate:Cast " + cardName + "$target=" + targetName);
+        assertAliaseSupportInActivateCommand(cardName, false);
+        player.addAction(turnNum, step, ACTIVATE_CAST + cardName + "$target=" + targetName);
     }
 
     public enum StackClause {
@@ -1435,12 +1464,15 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      */
     public void castSpell(int turnNum, PhaseStep step, TestPlayer player, String cardName, String targetName, String spellOnStack, StackClause clause) {
         //Assert.assertNotEquals("", cardName);
+        assertAliaseSupportInActivateCommand(cardName, false);
+        assertAliaseSupportInActivateCommand(targetName, false);
+        assertAliaseSupportInActivateCommand(spellOnStack, false);
         if (StackClause.WHILE_ON_STACK == clause) {
-            player.addAction(turnNum, step, "activate:Cast " + cardName
+            player.addAction(turnNum, step, ACTIVATE_CAST + cardName
                     + '$' + (targetName != null && targetName.startsWith("target") ? targetName : "target=" + targetName)
                     + "$spellOnStack=" + spellOnStack);
         } else {
-            player.addAction(turnNum, step, "activate:Cast " + cardName
+            player.addAction(turnNum, step, ACTIVATE_CAST + cardName
                     + '$' + (targetName != null && targetName.startsWith("target") ? targetName : "target=" + targetName)
                     + "$!spellOnStack=" + spellOnStack);
         }
@@ -1448,7 +1480,11 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     public void castSpell(int turnNum, PhaseStep step, TestPlayer player, String cardName, String targetName, String spellOnStack, String spellOnTopOfStack) {
         //Assert.assertNotEquals("", cardName);
-        String action = "activate:Cast " + cardName + "$target=" + targetName;
+        assertAliaseSupportInActivateCommand(cardName, false);
+        assertAliaseSupportInActivateCommand(targetName, false);
+        assertAliaseSupportInActivateCommand(spellOnStack, false);
+        assertAliaseSupportInActivateCommand(spellOnTopOfStack, false);
+        String action = ACTIVATE_CAST + cardName + "$target=" + targetName;
         if (spellOnStack != null && !spellOnStack.isEmpty()) {
             action += "$spellOnStack=" + spellOnStack;
         }
@@ -1464,17 +1500,23 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     public void activateAbility(int turnNum, PhaseStep step, TestPlayer player, String ability) {
         // TODO: it's uses computerPlayer to execute, only ability target will work, but choices and targets commands aren't
-        player.addAction(turnNum, step, "activate:" + ability);
+        assertAliaseSupportInActivateCommand(ability, false);
+        player.addAction(turnNum, step, ACTIVATE_ABILITY + ability);
     }
 
     public void activateAbility(int turnNum, PhaseStep step, TestPlayer player, String ability, Player target) {
         // TODO: it's uses computerPlayer to execute, only ability target will work, but choices and targets commands aren't
-        player.addAction(turnNum, step, "activate:" + ability + "$targetPlayer=" + target.getName());
+        assertAliaseSupportInActivateCommand(ability, false);
+        player.addAction(turnNum, step, ACTIVATE_ABILITY + ability + "$targetPlayer=" + target.getName());
     }
 
     public void activateAbility(int turnNum, PhaseStep step, TestPlayer player, String ability, String... targetNames) {
         // TODO: it's uses computerPlayer to execute, only ability target will work, but choices and targets commands aren't
-        player.addAction(turnNum, step, "activate:" + ability + "$target=" + String.join("^", targetNames));
+        assertAliaseSupportInActivateCommand(ability, false);
+        Arrays.stream(targetNames).forEach(n -> {
+            assertAliaseSupportInActivateCommand(n, false);
+        });
+        player.addAction(turnNum, step, ACTIVATE_ABILITY + ability + "$target=" + String.join("^", targetNames));
     }
 
     public void activateAbility(int turnNum, PhaseStep step, TestPlayer player, String ability, String targetName, String spellOnStack) {
@@ -1493,7 +1535,9 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param clause
      */
     public void activateAbility(int turnNum, PhaseStep step, TestPlayer player, String ability, String targetName, String spellOnStack, StackClause clause) {
-        StringBuilder sb = new StringBuilder("activate:").append(ability);
+        assertAliaseSupportInActivateCommand(ability, false);
+        assertAliaseSupportInActivateCommand(targetName, false);
+        StringBuilder sb = new StringBuilder(ACTIVATE_ABILITY).append(ability);
         if (targetName != null && !targetName.isEmpty()) {
             sb.append("$target=").append(targetName);
         }
@@ -1553,7 +1597,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * For use choices set "Yes" or "No" the the choice string. For X values set
      * "X=[xValue]" example: for X=3 set choice string to "X=3".
      * <br>For ColorChoice use "Red", "Green", "Blue", "Black" or "White"
-     * 
+     *
      * @param player
      * @param choice
      */
@@ -1675,5 +1719,14 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         if (playerB != null) waitStackResolved(turnNum, step, playerB);
         if (playerC != null) waitStackResolved(turnNum, step, playerC);
         if (playerD != null) waitStackResolved(turnNum, step, playerD);
+    }
+
+    private void assertAliaseSupportInActivateCommand(String targetName, boolean methodSupportAliases) {
+        // TODO: add alias support for all false methods (replace name compare by isObjectHaveTargetNameOrAliase in activate code)
+        if (!methodSupportAliases) {
+            if (targetName != null && targetName.contains(ALIASE_PREFIX)) {
+                Assert.fail("That activate command do not support aliases, but found " + targetName);
+            }
+        }
     }
 }

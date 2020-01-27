@@ -1,4 +1,3 @@
-
 package org.mage.test.cards.copy;
 
 import mage.constants.PhaseStep;
@@ -8,7 +7,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 public class IdentityThiefTest extends CardTestPlayerBase {
@@ -33,10 +31,13 @@ public class IdentityThiefTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Molten Sentry");
 
         attack(2, playerB, "Identity Thief");
+        setChoice(playerB, "Yes");
         addTarget(playerB, "Molten Sentry");
 
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
+        assertAllCommandsUsed();
 
         assertExileCount(playerA, 1);
         assertExileCount("Molten Sentry", 1);
@@ -76,7 +77,7 @@ public class IdentityThiefTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Sylvan Advocate", 1); // {1}{G} 2/3 vigilance
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
         addCard(Zone.HAND, playerA, "Battlegrowth"); // {G} instant - Put a +1/+1 counter on target creature.
-        
+
         // Whenever Identity Thief attacks, you may exile another target nontoken creature.
         //   If you do, Identity Thief becomes a copy of that creature until end of turn.
         //   Return the exiled card to the battlefield under its owner's control at the beginning of the next end step.
@@ -84,7 +85,7 @@ public class IdentityThiefTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Battlegrowth");
         addTarget(playerA, "Sylvan Advocate");
-        
+
         attack(2, playerB, "Identity Thief");
         addTarget(playerB, "Sylvan Advocate");
 
