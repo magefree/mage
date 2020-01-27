@@ -580,7 +580,7 @@ public class TestPlayer implements Player {
                     command = command.substring(command.indexOf("addCounters:") + 12);
                     String[] groups = command.split("\\$");
                     for (Permanent permanent : game.getBattlefield().getAllActivePermanents()) {
-                        if (permanent.getName().equals(groups[0])) {
+                        if (isObjectHaveTargetNameOrAlias(permanent, groups[0])) {
                             CounterType counterType = CounterType.findByName(groups[1]);
                             Assert.assertNotNull("Invalid counter type " + groups[1], counterType);
                             Counter counter = counterType.createInstance(Integer.parseInt(groups[2]));
@@ -908,6 +908,22 @@ public class TestPlayer implements Player {
         }
     }
 
+    private String getPrintableAliases(String prefix, UUID objectId, String postfix) {
+        // [@al.1, @al.2, @al.3]
+        List<String> aliases = new ArrayList<>();
+        this.aliases.forEach((name, id) -> {
+            if (id.equals(objectId)) {
+                aliases.add(ALIAS_PREFIX + name);
+            }
+        });
+
+        if (aliases.size() > 0) {
+            return prefix + String.join(", ", aliases) + postfix;
+        } else {
+            return "";
+        }
+    }
+
     private void printPermanents(Game game, List<Permanent> cards) {
         System.out.println("Total permanents: " + cards.size());
 
@@ -918,6 +934,7 @@ public class TestPlayer implements Player {
                         + " - " + c.getPower().getValue() + "/" + c.getToughness().getValue()
                         + (c.isPlaneswalker() ? " - L" + c.getCounters(game).getCount(CounterType.LOYALTY) : "")
                         + ", " + (c.isTapped() ? "Tapped" : "Untapped")
+                        + getPrintableAliases(", [", c.getId(), "]")
                         + (c.getAttachedTo() == null ? "" : ", attached to " + game.getPermanent(c.getAttachedTo()).getIdName())))
                 .sorted()
                 .collect(Collectors.toList());
@@ -1063,7 +1080,7 @@ public class TestPlayer implements Player {
     private void assertPermanentCount(PlayerAction action, Game game, Player player, String permanentName, int count) {
         int foundedCount = 0;
         for (Permanent perm : game.getBattlefield().getAllPermanents()) {
-            if (perm.getName().equals(permanentName) && perm.getControllerId().equals(player.getId())) {
+            if (isObjectHaveTargetNameOrAlias(perm, permanentName) && perm.getControllerId().equals(player.getId())) {
                 foundedCount++;
             }
         }
@@ -1074,7 +1091,7 @@ public class TestPlayer implements Player {
     private void assertPermanentCounters(PlayerAction action, Game game, Player player, String permanentName, CounterType counterType, int count) {
         int foundedCount = 0;
         for (Permanent perm : game.getBattlefield().getAllPermanents()) {
-            if (perm.getName().equals(permanentName) && perm.getControllerId().equals(player.getId())) {
+            if (isObjectHaveTargetNameOrAlias(perm, permanentName) && perm.getControllerId().equals(player.getId())) {
                 foundedCount = perm.getCounters(game).getCount(counterType);
             }
         }
@@ -1085,7 +1102,7 @@ public class TestPlayer implements Player {
     private void assertExileCount(PlayerAction action, Game game, Player player, String permanentName, int count) {
         int foundedCount = 0;
         for (Card card : game.getExile().getAllCards(game)) {
-            if (card.getName().equals(permanentName) && card.isOwnedBy(player.getId())) {
+            if (isObjectHaveTargetNameOrAlias(card, permanentName) && card.isOwnedBy(player.getId())) {
                 foundedCount++;
             }
         }
@@ -1101,7 +1118,7 @@ public class TestPlayer implements Player {
         int realCount = 0;
         for (UUID cardId : player.getHand()) {
             Card card = game.getCard(cardId);
-            if (card != null && card.getName().equals(cardName)) {
+            if (isObjectHaveTargetNameOrAlias(card, cardName)) {
                 realCount++;
             }
         }
@@ -1113,7 +1130,7 @@ public class TestPlayer implements Player {
         int realCount = 0;
         for (UUID cardId : game.getCommandersIds(player)) {
             Card card = game.getCard(cardId);
-            if (card != null && card.getName().equals(cardName) && Zone.COMMAND.equals(game.getState().getZone(cardId))) {
+            if (isObjectHaveTargetNameOrAlias(card, cardName) && Zone.COMMAND.equals(game.getState().getZone(cardId))) {
                 realCount++;
             }
         }
@@ -1320,7 +1337,7 @@ public class TestPlayer implements Player {
                     if (group.startsWith("planeswalker=")) {
                         String planeswalkerName = group.substring(group.indexOf("planeswalker=") + 13);
                         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_PLANESWALKER, game)) {
-                            if (permanent.getName().equals(planeswalkerName)) {
+                            if (isObjectHaveTargetNameOrAlias(permanent, planeswalkerName)) {
                                 defenderId = permanent.getId();
                             }
                         }
@@ -1502,7 +1519,7 @@ public class TestPlayer implements Player {
         if (strictChooseMode) {
             Assert.fail("Missing " + choiceType + " def for"
                     + " turn " + game.getTurnNum()
-                    + ", step " + game.getStep().getType().name()
+                    + ", step " + (game.getStep() != null ? game.getStep().getType().name() : "not started")
                     + ", " + this.getName()
                     + "\n" + reason);
         }
@@ -1571,7 +1588,7 @@ public class TestPlayer implements Player {
             //Assert.fail("wrong choice");
         }
 
-        this.chooseStrictModeFailed("choice", game, String.join("; ", rEffects.values()));
+        this.chooseStrictModeFailed("choice", game, String.join("\n", rEffects.values()));
         return computerPlayer.chooseReplacementEffect(rEffects, game);
     }
 
@@ -2047,7 +2064,6 @@ public class TestPlayer implements Player {
 
         // wrong target settings by addTarget
         // how to fix: implement target class processing above
-        assertAliasSupportInTargets(false);
         if (!targets.isEmpty()) {
             String message;
 
@@ -2079,7 +2095,7 @@ public class TestPlayer implements Player {
                 boolean targetFound = false;
                 for (String targetName : targetList) {
                     for (Card card : cards.getCards(game)) {
-                        if (card.getName().equals(targetName) && !target.getTargets().contains(card.getId())) {
+                        if (isObjectHaveTargetNameOrAlias(card, targetName) && !target.getTargets().contains(card.getId())) {
                             target.add(card.getId(), game);
                             targetFound = true;
                             break;
@@ -3317,7 +3333,7 @@ public class TestPlayer implements Player {
                         if (target.getTargets().contains(card.getId())) {
                             continue;
                         }
-                        if (card.getName().equals(targetName)) {
+                        if (isObjectHaveTargetNameOrAlias(card, targetName)) {
                             if (target.isNotTarget() || target.canTarget(card.getId(), game)) {
                                 target.add(card.getId(), game);
                                 targetFound = true;
