@@ -78,11 +78,13 @@ class EtaliPrimalStormEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     if (!player.getLibrary().getTopCards(game, 1).isEmpty()) {
-                        Card topCard = player.getLibrary().getTopCards(game, 1).iterator().next();
-                        if (filter.match(topCard, source.getSourceId(), source.getControllerId(), game)) {
-                            currentExiledCards.add(topCard);
+                        Card topCard = player.getLibrary().getFromTop(game);
+                        if (topCard != null) {
+                            if (filter.match(topCard, source.getSourceId(), source.getControllerId(), game)) {
+                                currentExiledCards.add(topCard);
+                            }
+                            controller.moveCardsToExile(topCard, source, game, true, source.getSourceId(), sourceObject.getIdName());
                         }
-                        controller.moveCardsToExile(topCard, source, game, true, source.getSourceId(), sourceObject.getIdName());
                     }
                 }
             }
