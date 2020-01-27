@@ -48,16 +48,18 @@ import java.util.stream.Collectors;
  */
 public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implements CardTestAPI {
 
-    public static final String ALIASE_PREFIX = "@"; // don't change -- it uses in user's tests
+    private static final boolean FAST_SCAN_WITHOUT_DATABASE_CREATE = false; // DEBUG only, enable it to fast startup tests without database create
+
+    public static final String ALIAS_PREFIX = "@"; // don't change -- it uses in user's tests
     public static final String CHECK_PARAM_DELIMETER = "#";
     public static final String CHECK_PREFIX = "check:"; // prefix for all check commands
 
     static {
         // aliases can be used in check commands, so all prefixes and delimeters must be unique
         // already uses by targets: ^ $ [ ]
-        Assert.assertFalse("prefix must be unique", CHECK_PARAM_DELIMETER.contains(ALIASE_PREFIX));
-        Assert.assertFalse("prefix must be unique", CHECK_PREFIX.contains(ALIASE_PREFIX));
-        Assert.assertFalse("prefix must be unique", ALIASE_PREFIX.contains(CHECK_PREFIX));
+        Assert.assertFalse("prefix must be unique", CHECK_PARAM_DELIMETER.contains(ALIAS_PREFIX));
+        Assert.assertFalse("prefix must be unique", CHECK_PREFIX.contains(ALIAS_PREFIX));
+        Assert.assertFalse("prefix must be unique", ALIAS_PREFIX.contains(CHECK_PREFIX));
     }
 
     // prefix for activate commands
@@ -123,6 +125,9 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public CardTestPlayerAPIImpl() {
         // load all cards to db from class list
         ArrayList<String> errorsList = new ArrayList<>();
+        if (FAST_SCAN_WITHOUT_DATABASE_CREATE) {
+            CardScanner.scanned = true;
+        }
         CardScanner.scan(errorsList);
 
         if (errorsList.size() > 0) {
@@ -518,9 +523,9 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         // aliases for mage objects
         String aliasName = "";
         boolean useAliasMultiNames = (count != 1);
-        if (cardName.contains(ALIASE_PREFIX)) {
-            aliasName = cardName.substring(cardName.indexOf(ALIASE_PREFIX) + ALIASE_PREFIX.length());
-            cardName = cardName.substring(0, cardName.indexOf(ALIASE_PREFIX));
+        if (cardName.contains(ALIAS_PREFIX)) {
+            aliasName = cardName.substring(cardName.indexOf(ALIAS_PREFIX) + ALIAS_PREFIX.length());
+            cardName = cardName.substring(0, cardName.indexOf(ALIAS_PREFIX));
         }
 
         // one card = one aliase, massive adds can use auto-name
@@ -1724,7 +1729,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     private void assertAliaseSupportInActivateCommand(String targetName, boolean methodSupportAliases) {
         // TODO: add alias support for all false methods (replace name compare by isObjectHaveTargetNameOrAliase in activate code)
         if (!methodSupportAliases) {
-            if (targetName != null && targetName.contains(ALIASE_PREFIX)) {
+            if (targetName != null && targetName.contains(ALIAS_PREFIX)) {
                 Assert.fail("That activate command do not support aliases, but found " + targetName);
             }
         }
