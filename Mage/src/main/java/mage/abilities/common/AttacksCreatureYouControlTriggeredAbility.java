@@ -1,4 +1,3 @@
-
 package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
@@ -11,7 +10,6 @@ import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author noxx
  */
 public class AttacksCreatureYouControlTriggeredAbility extends TriggeredAbilityImpl {
@@ -76,6 +74,17 @@ public class AttacksCreatureYouControlTriggeredAbility extends TriggeredAbilityI
 
     @Override
     public String getRule() {
-        return "When" + (once ? "" : "ever") + " a" + (filter.getMessage().startsWith("a") ? "n " : " ") + filter.getMessage() + " attacks, " + super.getRule();
+        String an;
+        String who = filter.getMessage();
+        if (who.startsWith("another")) {
+            an = "";
+        } else if (who.startsWith("a")) {
+            an = "an";
+        } else {
+            an = "a";
+        }
+
+        return "When" + (once ? "" : "ever")
+                + " " + an + who + " attacks, " + super.getRule();
     }
 }
