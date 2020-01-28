@@ -1,9 +1,5 @@
 package mage.cards.s;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -19,11 +15,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
@@ -39,8 +31,12 @@ import mage.target.TargetCard;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTargets;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class StormHerald extends CardImpl {
@@ -113,7 +109,7 @@ class StormHeraldEffect extends OneShotEffect {
                         targetCreature.setNotTarget(true);
                         if (controller.choose(Outcome.PutCardInPlay, targetCreature, source.getSourceId(), game)) {
                             Permanent targetPermanent = game.getPermanent(targetCreature.getFirstTarget());
-                            if (!targetPermanent.cantBeAttachedBy(auraCard, game)) {
+                            if (!targetPermanent.cantBeAttachedBy(auraCard, game, true)) {
                                 game.getState().setValue("attachTo:" + auraCard.getId(), targetPermanent);
                                 controller.moveCards(auraCard, Zone.BATTLEFIELD, source, game);
                                 targetPermanent.addAttachment(auraCard.getId(), game);
@@ -175,13 +171,10 @@ class StormHeraldReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE
                 && ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD
                 && ((ZoneChangeEvent) event).getToZone() != Zone.EXILED
-                && getTargetPointer().getTargets(game, source).contains(event.getTargetId())) {
-            return true;
-        }
-        return false;
+                && getTargetPointer().getTargets(game, source).contains(event.getTargetId());
     }
 
     @Override

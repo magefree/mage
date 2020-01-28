@@ -1,9 +1,5 @@
-
 package mage.cards.r;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
@@ -25,8 +21,11 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class ReinsOfTheVinesteed extends CardImpl {
@@ -97,7 +96,7 @@ class ReinsOfTheVinesteedEffect extends OneShotEffect {
             if (controller != null
                     && controller.choose(Outcome.PutCardInPlay, target, source.getSourceId(), game)) {
                 Permanent targetPermanent = game.getPermanent(target.getFirstTarget());
-                if (!targetPermanent.cantBeAttachedBy(aura, game)) {
+                if (!targetPermanent.cantBeAttachedBy(aura, game, false)) {
                     game.getState().setValue("attachTo:" + aura.getId(), targetPermanent);
                     controller.moveCards(aura, Zone.BATTLEFIELD, source, game);
                     return targetPermanent.addAttachment(aura.getId(), game);

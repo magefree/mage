@@ -1,4 +1,3 @@
-
 package mage.game.permanent;
 
 import mage.MageObject;
@@ -94,14 +93,20 @@ public interface Permanent extends Card, Controllable {
 
     void unattach(Game game);
 
-//    boolean addAttachment(UUID permanentId, Game game);
+    //    boolean addAttachment(UUID permanentId, Game game);
 //
 //    boolean removeAttachment(UUID permanentId, Game game);
     boolean canBeTargetedBy(MageObject source, UUID controllerId, Game game);
 
     boolean hasProtectionFrom(MageObject source, Game game);
 
-    boolean cantBeAttachedBy(MageObject source, Game game);
+    /**
+     * @param source
+     * @param game
+     * @param silentMode - use it to ignore warning message for users (e.g. for checking only)
+     * @return
+     */
+    boolean cantBeAttachedBy(MageObject source, Game game, boolean silentMode);
 
     boolean wasControlledFromStartOfControllerTurn();
 
@@ -210,9 +215,8 @@ public interface Permanent extends Card, Controllable {
     void setMaxBlockedBy(int maxBlockedBy);
 
     /**
-     *
      * @param defenderId id of planeswalker or player to attack - can be empty
-     * to check generally
+     *                   to check generally
      * @param game
      * @return
      */
@@ -282,7 +286,7 @@ public interface Permanent extends Card, Controllable {
 
     /**
      * Get card that was imprinted on this one.
-     *
+     * <p>
      * Can be null if no card was imprinted.
      *
      * @return Imprinted card UUID.
@@ -358,8 +362,8 @@ public interface Permanent extends Card, Controllable {
 
     void setCreateOrder(int createOrder);
 
-    default boolean isAttachedTo(UUID otherId){
-        if(getAttachedTo() == null){
+    default boolean isAttachedTo(UUID otherId) {
+        if (getAttachedTo() == null) {
             return false;
         }
         return getAttachedTo().equals(otherId);

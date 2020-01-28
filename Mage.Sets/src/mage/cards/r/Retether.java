@@ -1,10 +1,5 @@
-
 package mage.cards.r;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -23,8 +18,12 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class Retether extends CardImpl {
@@ -105,7 +104,7 @@ class RetetherEffect extends OneShotEffect {
                             target.setTargetName("creature to enchant (" + aura.getLogName() + ')');
                             if (controller.choose(Outcome.PutCardInPlay, target, source.getSourceId(), game)) {
                                 Permanent permanent = game.getPermanent(target.getFirstTarget());
-                                if (permanent != null && !permanent.cantBeAttachedBy(aura, game)) {
+                                if (permanent != null && !permanent.cantBeAttachedBy(aura, game, true)) {
                                     auraMap.put(aura, permanent);
                                     game.getState().setValue("attachTo:" + aura.getId(), permanent);
                                     continue auraCardsInGraveyard;

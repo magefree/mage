@@ -1076,7 +1076,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public boolean cantBeAttachedBy(MageObject source, Game game) {
+    public boolean cantBeAttachedBy(MageObject source, Game game, boolean silentMode) {
         for (ProtectionAbility ability : this.getAbilities(game).getProtectionAbilities()) {
             if (!(source.hasSubtype(SubType.AURA, game)
                     && !ability.removesAuras())
@@ -1085,7 +1085,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 return true;
             }
         }
-        return game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(EventType.STAY_ATTACHED, objectId, source.getId(), null), null, game, false);
+        return game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(EventType.STAY_ATTACHED, objectId, source.getId(), null), null, game, silentMode);
     }
 
     protected boolean canDamage(MageObject source, Game game) {

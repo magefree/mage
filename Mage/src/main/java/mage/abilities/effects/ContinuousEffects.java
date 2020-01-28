@@ -738,13 +738,13 @@ public class ContinuousEffects implements Serializable {
      * Checks if an event won't happen because of an rule modifying effect
      *
      * @param event
-     * @param targetAbility     ability the event is attached to. can be null.
+     * @param targetAbility ability the event is attached to. can be null.
      * @param game
-     * @param checkPlayableMode true if the event does not really happen but
-     *                          it's checked if the event would be replaced
+     * @param silentMode    true if the event does not really happen but
+     *                      it's checked if the event would be replaced
      * @return
      */
-    public boolean preventedByRuleModification(GameEvent event, Ability targetAbility, Game game, boolean checkPlayableMode) {
+    public boolean preventedByRuleModification(GameEvent event, Ability targetAbility, Game game, boolean silentMode) {
         for (ContinuousRuleModifyingEffect effect : continuousRuleModifyingEffects) {
             if (!effect.checksEventType(event, game)) {
                 continue;
@@ -755,7 +755,7 @@ public class ContinuousEffects implements Serializable {
                         if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
                             effect.setValue("targetAbility", targetAbility);
                             if (effect.applies(event, sourceAbility, game)) {
-                                if (!game.inCheckPlayableState()) {
+                                if (!game.inCheckPlayableState() && !silentMode) {
                                     String message = effect.getInfoMessage(sourceAbility, event, game);
                                     if (message != null && !message.isEmpty()) {
                                         if (effect.sendMessageToUser()) {
