@@ -135,7 +135,7 @@ class TravelingPlagueEffect extends OneShotEffect {
                 target.setNotTarget(true);
                 if (controllerOfEnchantedCreature.choose(Outcome.Detriment, target, source.getSourceId(), game)) {
                     Permanent targetPermanent = game.getPermanent(target.getFirstTarget());
-                    if (!targetPermanent.cantBeAttachedBy(travelingPlague, game)) {
+                    if (!targetPermanent.cantBeAttachedBy(travelingPlague, game, false)) {
                         game.getState().setValue("attachTo:" + travelingPlague.getId(), targetPermanent);
                         controllerOfEnchantedCreature.moveCards(travelingPlague, Zone.BATTLEFIELD, source, game);
                         return targetPermanent.addAttachment(travelingPlague.getId(), game);

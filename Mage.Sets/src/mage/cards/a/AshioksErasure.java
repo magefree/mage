@@ -25,6 +25,7 @@ import mage.players.Player;
 import mage.target.TargetSpell;
 import mage.util.CardUtil;
 
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -83,7 +84,9 @@ class AshioksErasureExileEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
-        if (controller == null || sourceObject == null || spell == null) {
+        if (controller == null
+                || sourceObject == null
+                || spell == null) {
             return false;
         }
         UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
@@ -114,10 +117,12 @@ class AshioksErasureReplacementEffect extends ContinuousRuleModifyingEffectImpl 
             return false;
         }
         Card card = game.getCard(event.getSourceId());
-        if (sourcePermanent == null || card == null) {
+        if (sourcePermanent == null
+                || card == null) {
             return false;
         }
         UUID exileZone = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+
         if (exileZone == null) {
             return false;
         }
@@ -129,10 +134,21 @@ class AshioksErasureReplacementEffect extends ContinuousRuleModifyingEffectImpl 
                 exile = game.getExile().getExileZone(exileZone);
             }
         }
+
         if (exile == null) {
             return false;
         }
-        return exile.getCards(game).stream().anyMatch(card.getName()::equals);
+
+        Set<Card> cards = exile.getCards(game);
+        if (cards.isEmpty()) {
+            return false;
+        }
+
+        Card exiledCard = cards.iterator().next();
+        if (exiledCard != null) {
+            return exiledCard.getName().equals(card.getName());
+        }
+        return false;
     }
 
     @Override

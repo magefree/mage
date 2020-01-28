@@ -1,22 +1,17 @@
 package mage.cards.p;
 
-import java.util.Arrays;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -26,8 +21,11 @@ import mage.target.common.TargetCardInLibrary;
 import mage.util.CardUtil;
 import mage.util.RandomUtil;
 
+import java.util.Arrays;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class ParallelThoughts extends CardImpl {
@@ -131,10 +129,11 @@ class ParallelThoughtsReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null
-                && !game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source)).getCards(game).isEmpty()) {
+        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
+        Set<Card> cards = exileZone != null ? exileZone.getCards(game) : null;
+        if (controller != null && cards != null && !cards.isEmpty()) {
             if (controller.chooseUse(outcome, "Draw a card from the pile you exiled instead drawing from your library?", source, game)) {
-                Card card = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source)).getCards(game).iterator().next();
+                Card card = cards.iterator().next();
                 if (card != null) {
                     controller.moveCards(card, Zone.HAND, source, game);
                 }

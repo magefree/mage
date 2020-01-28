@@ -1971,12 +1971,12 @@ public abstract class GameImpl implements Game, Serializable {
                                 Filter auraFilter = spellAbility.getTargets().get(0).getFilter();
                                 if (auraFilter instanceof FilterControlledPermanent) {
                                     if (!((FilterControlledPermanent) auraFilter).match(attachedTo, perm.getId(), perm.getControllerId(), this)
-                                            || attachedTo.cantBeAttachedBy(perm, this)) {
+                                            || attachedTo.cantBeAttachedBy(perm, this, true)) {
                                         if (movePermanentToGraveyardWithInfo(perm)) {
                                             somethingHappened = true;
                                         }
                                     }
-                                } else if (!auraFilter.match(attachedTo, this) || attachedTo.cantBeAttachedBy(perm, this)) {
+                                } else if (!auraFilter.match(attachedTo, this) || attachedTo.cantBeAttachedBy(perm, this, true)) {
                                     // handle bestow unattachment
                                     Card card = this.getCard(perm.getId());
                                     if (card != null && card.isCreature()) {

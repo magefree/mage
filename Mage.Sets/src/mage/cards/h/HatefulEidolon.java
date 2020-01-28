@@ -12,8 +12,10 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import java.util.UUID;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  * @author TheElk801
@@ -82,9 +84,16 @@ class HatefulEidolonTriggeredAbility extends TriggeredAbilityImpl {
                 auraCount += 1;
             }
         }
-        this.getEffects().clear();
-        this.addEffect(new DrawCardSourceControllerEffect(auraCount));
-        return true;
+        Player controller = game.getPlayer(controllerId);
+        if (controller != null
+                && controller.canRespond()) {
+            this.getEffects().clear();
+            DrawCardTargetEffect drawCard = new DrawCardTargetEffect(auraCount);
+            drawCard.setTargetPointer(new FixedTarget(controllerId));
+            this.addEffect(drawCard);
+            return true;
+        }
+        return false;
     }
 
     @Override

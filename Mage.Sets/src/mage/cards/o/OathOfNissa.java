@@ -17,6 +17,7 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.util.CardUtil;
 
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -83,7 +84,8 @@ class OathOfNissaEffect extends OneShotEffect {
                     if (controller.chooseUse(outcome, "Reveal a creature, land, or planeswalker card from the looked at cards and put it into your hand?", source, game)) {
                         Card card;
                         if (number == 1) {
-                            card = topCards.getCards(filter, source.getSourceId(), source.getControllerId(), game).iterator().next();
+                            Set<Card> cards = topCards.getCards(filter, source.getSourceId(), source.getControllerId(), game);
+                            card = cards.isEmpty() ? null : cards.iterator().next();
                         } else {
                             TargetCard target = new TargetCard(Zone.LIBRARY, filter);
                             controller.choose(outcome, topCards, target, game);

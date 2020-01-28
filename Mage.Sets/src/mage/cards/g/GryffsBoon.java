@@ -1,7 +1,5 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -23,8 +21,9 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
 public final class GryffsBoon extends CardImpl {
@@ -81,7 +80,7 @@ class GryffsBoonEffect extends OneShotEffect {
         if (aura != null && controller != null
                 && game.getState().getZone(aura.getId()) == Zone.GRAVEYARD) {
             Permanent targetPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-            if (!targetPermanent.cantBeAttachedBy(aura, game)) {
+            if (!targetPermanent.cantBeAttachedBy(aura, game, false)) {
                 game.getState().setValue("attachTo:" + aura.getId(), targetPermanent);
                 controller.moveCards(aura, Zone.BATTLEFIELD, source, game);
                 return targetPermanent.addAttachment(aura.getId(), game);

@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageItem;
 import mage.abilities.Ability;
@@ -32,8 +30,9 @@ import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author anonymous
  */
 public final class SimicGuildmage extends CardImpl {
@@ -197,7 +196,7 @@ class MoveAuraEffect extends OneShotEffect {
                 Permanent permanentToAttachAura = game.getPermanent(chosenPermanentToAttachAuras.getFirstTarget());
                 if (permanentToAttachAura != null) {
                     // Check for protection
-                    if (permanentToAttachAura.cantBeAttachedBy(aura, game)) {
+                    if (permanentToAttachAura.cantBeAttachedBy(aura, game, true)) {
                         passed = false;
                     }
                     if (passed) {

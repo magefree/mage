@@ -1,14 +1,8 @@
-
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -18,8 +12,10 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class FinalParting extends CardImpl {
@@ -78,10 +74,12 @@ class FinalPartingEffect extends OneShotEffect {
                         Card card = searched.get(target2.getFirstTarget(), game);
                         controller.moveCards(card, Zone.HAND, source, game);
                         searched.remove(card);
-                        card = searched.getCards(game).iterator().next();
+                        Set<Card> cards = searched.getCards(game);
+                        card = cards.isEmpty() ? null : cards.iterator().next();
                         controller.moveCards(card, Zone.GRAVEYARD, source, game);
                     } else if (target.getTargets().size() == 1) {
-                        Card card = searched.getCards(game).iterator().next();
+                        Set<Card> cards = searched.getCards(game);
+                        Card card = cards.isEmpty() ? null : cards.iterator().next();
                         controller.moveCards(card, Zone.HAND, source, game);
                     }
 

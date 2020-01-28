@@ -1,4 +1,3 @@
-
 package mage.cards.k;
 
 import mage.MageObject;
@@ -16,16 +15,16 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.Set;
 import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class KodamasReach extends CardImpl {
 
     public KodamasReach(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");
         this.subtype.add(SubType.ARCANE);
 
         // Search your library for up to two basic land cards, reveal those cards, and put one onto the battlefield tapped and the other into your hand. Then shuffle your library.
@@ -84,12 +83,14 @@ class KodamasReachEffect extends OneShotEffect {
                         controller.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
                         revealed.remove(card);
                     }
-                    card = revealed.getCards(game).iterator().next();
+                    Set<Card> cards = revealed.getCards(game);
+                    card = cards.isEmpty() ? null : cards.iterator().next();
                     if (card != null) {
                         controller.moveCards(card, Zone.HAND, source, game);
                     }
                 } else if (target.getTargets().size() == 1) {
-                    Card card = revealed.getCards(game).iterator().next();
+                    Set<Card> cards = revealed.getCards(game);
+                    Card card = cards.isEmpty() ? null : cards.iterator().next();
                     if (card != null) {
                         controller.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
                     }

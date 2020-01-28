@@ -1,8 +1,5 @@
-
 package mage.cards.g;
 
-import java.util.LinkedList;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -13,8 +10,8 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
@@ -25,14 +22,16 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 
+import java.util.LinkedList;
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class GlamerSpinners extends CardImpl {
 
     public GlamerSpinners(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W/U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W/U}");
         this.subtype.add(SubType.FAERIE);
         this.subtype.add(SubType.WIZARD);
 
@@ -117,8 +116,8 @@ class GlamerSpinnersEffect extends OneShotEffect {
                             }
                             // Check for protection
                             MageObject auraObject = game.getObject(auraId);
-                            if(auraObject != null) {
-                                if (permanentToAttachAuras.cantBeAttachedBy(auraObject, game)) {
+                            if (auraObject != null) {
+                                if (permanentToAttachAuras.cantBeAttachedBy(auraObject, game, true)) {
                                     passed = false;
                                 }
                             }

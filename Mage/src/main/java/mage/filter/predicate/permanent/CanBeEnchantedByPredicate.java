@@ -1,4 +1,3 @@
-
 package mage.filter.predicate.permanent;
 
 import mage.MageObject;
@@ -13,13 +12,13 @@ public class CanBeEnchantedByPredicate implements Predicate<Permanent> {
 
     private final MageObject auraEnchantment;
 
-    public CanBeEnchantedByPredicate(MageObject auraEnchantment){
+    public CanBeEnchantedByPredicate(MageObject auraEnchantment) {
         this.auraEnchantment = auraEnchantment;
     }
 
     @Override
     public boolean apply(Permanent input, Game game) {
-        return !input.cantBeAttachedBy(auraEnchantment, game);
+        return !input.cantBeAttachedBy(auraEnchantment, game, true);
     }
 
     @Override

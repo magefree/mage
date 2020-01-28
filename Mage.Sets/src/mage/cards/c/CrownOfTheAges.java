@@ -1,7 +1,4 @@
-
 package mage.cards.c;
-
-import java.util.UUID;
 
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -25,6 +22,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  * @author spjspj
@@ -106,7 +105,7 @@ class CrownOfTheAgesEffect extends OneShotEffect {
                     }
                     // Check for protection
                     MageObject auraObject = game.getObject(aura.getId());
-                    if (auraObject != null && creatureToAttachAura.cantBeAttachedBy(auraObject, game)) {
+                    if (auraObject != null && creatureToAttachAura.cantBeAttachedBy(auraObject, game, true)) {
                         passed = false;
                     }
                 }

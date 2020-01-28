@@ -1,7 +1,5 @@
-
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -23,8 +21,9 @@ import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class NomadMythmaker extends CardImpl {
@@ -91,7 +90,7 @@ class NomadMythmakerEffect extends OneShotEffect {
         if (controller.choose(Outcome.PutCardInPlay, target, source.getSourceId(), game)) {
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null
-                    && !permanent.cantBeAttachedBy(aura, game)) {
+                    && !permanent.cantBeAttachedBy(aura, game, false)) {
                 game.getState().setValue("attachTo:" + aura.getId(), permanent);
                 controller.moveCards(aura, Zone.BATTLEFIELD, source, game);
                 return permanent.addAttachment(aura.getId(), game);

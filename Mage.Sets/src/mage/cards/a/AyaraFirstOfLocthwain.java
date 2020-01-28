@@ -23,6 +23,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
+import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  * @author TheElk801
@@ -37,6 +38,7 @@ public final class AyaraFirstOfLocthwain extends CardImpl {
     static {
         filter.add(new ColorPredicate(ObjectColor.BLACK));
         filter2.add(new ColorPredicate(ObjectColor.BLACK));
+        filter2.add(AnotherPredicate.instance);
     }
 
     public AyaraFirstOfLocthwain(UUID ownerId, CardSetInfo setInfo) {
