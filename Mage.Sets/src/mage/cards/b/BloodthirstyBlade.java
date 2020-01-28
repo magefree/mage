@@ -30,16 +30,17 @@ public final class BloodthirstyBlade extends CardImpl {
         // Equipped creature gets +2/+0 and is goaded.
         Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(2, 0));
         ability.addEffect(new AttacksIfAbleAttachedEffect(
-                Duration.WhileOnBattlefield, AttachmentType.EQUIPMENT
-        ).setText("and is"));
-        ability.addEffect(new BloodthirstyBladeAttackEffect());
+                Duration.WhileOnBattlefield, AttachmentType.EQUIPMENT)
+                .setText(""));
+        ability.addEffect(new BloodthirstyBladeAttackEffect()
+                .setText("goaded <i>(It attacks each combat if able and attacks a player other than you if able.)</i>").concatBy(" is"));
         this.addAbility(ability);
 
         // {1}: Attach Bloodthirsty Blade to target creature an opponent controls. Active this ability only any time you could cast a sorcery.
         ability = new ActivateAsSorceryActivatedAbility(
                 Zone.BATTLEFIELD,
                 new AttachEffect(
-                        Outcome.Benefit, "Attach {this} to target creature an opponent controls"
+                        Outcome.Detriment, "Attach {this} to target creature an opponent controls"
                 ), new GenericManaCost(1)
         );
         ability.addTarget(new TargetOpponentsCreaturePermanent());
@@ -60,7 +61,6 @@ class BloodthirstyBladeAttackEffect extends RestrictionEffect {
 
     BloodthirstyBladeAttackEffect() {
         super(Duration.WhileOnBattlefield);
-        staticText = "goaded";
     }
 
     private BloodthirstyBladeAttackEffect(final BloodthirstyBladeAttackEffect effect) {
