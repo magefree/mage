@@ -418,6 +418,7 @@ public class ManifestTest extends CardTestPlayerBase {
         activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Sacrifice a creature");
         setChoice(playerB, EmptyNames.FACE_DOWN_CREATURE.toString());
 
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
         assertAllCommandsUsed();

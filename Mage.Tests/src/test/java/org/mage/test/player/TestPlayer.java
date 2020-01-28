@@ -364,9 +364,14 @@ public class TestPlayer implements Player {
             return true;
         }
 
-        // must search any names, even empty
+        // must search any names, even empty (face down cards)
         if (CardUtil.haveSameNames(nameOrAlias, object.getName(), true)) {
             return true;
+        }
+
+        // no more empty names needs
+        if (nameOrAlias.isEmpty()) {
+            return false;
         }
 
         return object.getName().startsWith(nameOrAlias);
