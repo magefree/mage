@@ -92,6 +92,9 @@ Mage.Verify/*.zip
 Mage.Verify/*.json
 Mage.Verify/db
 
+# Logs rotation
+*.log.*
+
 # Utils
 releases
 Utils/author.txt
