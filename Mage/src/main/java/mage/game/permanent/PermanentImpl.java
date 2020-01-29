@@ -8,6 +8,7 @@ import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.HintUtils;
@@ -28,6 +29,7 @@ import mage.game.command.CommandObject;
 import mage.game.events.*;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.token.SquirrelToken;
+import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
@@ -268,29 +270,45 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             // restrict hints
             List<String> restrictHints = new ArrayList<>();
             if (game != null && HintUtils.RESTRICT_HINTS_ENABLE) {
+                // restrict
                 for (Map.Entry<RestrictionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(this, game).entrySet()) {
                     for (Ability ability : entry.getValue()) {
                         if (!entry.getKey().canAttack(game, false) || !entry.getKey().canAttack(this, null, ability, game, false)) {
                             restrictHints.add(HintUtils.prepareText("Can't attack" + addSourceObjectName(game, ability), null, HintUtils.HINT_ICON_RESTRICT));
                         }
-
                         if (!entry.getKey().canBlock(null, this, ability, game, false)) {
                             restrictHints.add(HintUtils.prepareText("Can't block" + addSourceObjectName(game, ability), null, HintUtils.HINT_ICON_RESTRICT));
                         }
-
                         if (!entry.getKey().canBeUntapped(this, ability, game, false)) {
                             restrictHints.add(HintUtils.prepareText("Can't untapped" + addSourceObjectName(game, ability), null, HintUtils.HINT_ICON_RESTRICT));
                         }
-
                         if (!entry.getKey().canUseActivatedAbilities(this, ability, game, false)) {
                             restrictHints.add(HintUtils.prepareText("Can't use activated abilities" + addSourceObjectName(game, ability), null, HintUtils.HINT_ICON_RESTRICT));
                         }
-
                         if (!entry.getKey().canTransform(this, ability, game, false)) {
                             restrictHints.add(HintUtils.prepareText("Can't transform" + addSourceObjectName(game, ability), null, HintUtils.HINT_ICON_RESTRICT));
                         }
                     }
                 }
+
+                // requirement
+                for (Map.Entry<RequirementEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRequirementEffects(this, false, game).entrySet()) {
+                    for (Ability ability : entry.getValue()) {
+                        if (entry.getKey().mustAttack(game)) {
+                            restrictHints.add(HintUtils.prepareText("Must attack" + addSourceObjectName(game, ability), null, HintUtils.HINT_ICON_REQUIRE));
+                        }
+                        if (entry.getKey().mustBlock(game)) {
+                            restrictHints.add(HintUtils.prepareText("Must block" + addSourceObjectName(game, ability), null, HintUtils.HINT_ICON_REQUIRE));
+                        }
+                        if (entry.getKey().mustBlockAny(game)) {
+                            restrictHints.add(HintUtils.prepareText("Must block any" + addSourceObjectName(game, ability), null, HintUtils.HINT_ICON_REQUIRE));
+                        }
+                        if (entry.getKey().mustBlockAllAttackers(game)) {
+                            restrictHints.add(HintUtils.prepareText("Must block all attackers" + addSourceObjectName(game, ability), null, HintUtils.HINT_ICON_REQUIRE));
+                        }
+                    }
+                }
+
                 restrictHints.sort(String::compareTo);
             }
 
