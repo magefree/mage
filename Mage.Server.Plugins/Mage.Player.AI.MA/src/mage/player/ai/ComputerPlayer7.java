@@ -108,7 +108,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
     protected void calculateActions(Game game) {
         if (!getNextAction(game)) {
             Date startTime = new Date();
-            currentScore = GameStateEvaluator2.evaluate(playerId, game);
+            currentScore = GameStateEvaluator2.evaluate(playerId, game).getTotalScore();
             Game sim = createSimulation(game);
             SimulationNode2.resetCount();
             root = new SimulationNode2(null, sim, maxDepth, playerId);

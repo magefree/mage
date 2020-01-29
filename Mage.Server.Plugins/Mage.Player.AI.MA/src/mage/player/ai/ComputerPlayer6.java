@@ -118,7 +118,12 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
         }
 
         Player player = game.getPlayer(playerId);
-        logger.info(new StringBuilder("[").append(game.getPlayer(playerId).getName()).append("], life = ").append(player.getLife()).toString());
+        GameStateEvaluator2.PlayerEvaluateScore score = GameStateEvaluator2.evaluate(playerId, game);
+        logger.info(new StringBuilder("[").append(game.getPlayer(playerId).getName()).append("]")
+                .append(", life = ").append(player.getLife())
+                .append(", score = ").append(score.getTotalScore())
+                .append(" (").append(score.getPlayerInfoFull()).append(")")
+                .toString());
         StringBuilder sb = new StringBuilder("-> Hand: [");
         for (Card card : player.getHand().getCards(game)) {
             sb.append(card.getName()).append(';');
@@ -135,6 +140,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                 if (permanent.isAttacking()) {
                     sb.append("(attacking)");
                 }
+                sb.append(':' + String.valueOf(GameStateEvaluator2.evaluatePermanent(permanent, game)));
                 sb.append(';');
             }
         }
@@ -200,13 +206,13 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                 && Thread.interrupted()) {
             Thread.currentThread().interrupt();
             logger.debug("interrupted");
-            return GameStateEvaluator2.evaluate(playerId, game);
+            return GameStateEvaluator2.evaluate(playerId, game).getTotalScore();
         }
         // Condition to stop deeper simulation
         if (depth <= 0
                 || SimulationNode2.nodeCount > maxNodes
                 || game.checkIfGameIsOver()) {
-            val = GameStateEvaluator2.evaluate(playerId, game);
+            val = GameStateEvaluator2.evaluate(playerId, game).getTotalScore();
             if (logger.isTraceEnabled()) {
                 StringBuilder sb = new StringBuilder("Add Actions -- reached end state  <").append(val).append('>');
                 SimulationNode2 logNode = node;
@@ -240,20 +246,20 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
             }
 
             if (game.checkIfGameIsOver()) {
-                val = GameStateEvaluator2.evaluate(playerId, game);
+                val = GameStateEvaluator2.evaluate(playerId, game).getTotalScore();
             } else if (stepFinished) {
                 logger.debug("Step finished");
-                int testScore = GameStateEvaluator2.evaluate(playerId, game);
+                int testScore = GameStateEvaluator2.evaluate(playerId, game).getTotalScore();
                 if (game.isActivePlayer(playerId)) {
                     if (testScore < currentScore) {
                         // if score at end of step is worse than original score don't check further
                         //logger.debug("Add Action -- abandoning check, no immediate benefit");
                         val = testScore;
                     } else {
-                        val = GameStateEvaluator2.evaluate(playerId, game);
+                        val = GameStateEvaluator2.evaluate(playerId, game).getTotalScore();
                     }
                 } else {
-                    val = GameStateEvaluator2.evaluate(playerId, game);
+                    val = GameStateEvaluator2.evaluate(playerId, game).getTotalScore();
                 }
             } else if (!node.getChildren().isEmpty()) {
                 if (logger.isDebugEnabled()) {
@@ -445,7 +451,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                 && Thread.interrupted()) {
             Thread.currentThread().interrupt();
             logger.info("interrupted");
-            return GameStateEvaluator2.evaluate(playerId, game);
+            return GameStateEvaluator2.evaluate(playerId, game).getTotalScore();
         }
         node.setGameValue(game.getState().getValue(true).hashCode());
         SimulatedPlayer2 currentPlayer = (SimulatedPlayer2) game.getPlayer(game.getPlayerList().get());
@@ -490,7 +496,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                 int val;
                 if (action instanceof PassAbility && sim.getStack().isEmpty()) {
                     // Stop to simulate deeper if PassAbility and stack is empty
-                    val = GameStateEvaluator2.evaluate(this.getId(), sim);
+                    val = GameStateEvaluator2.evaluate(this.getId(), sim).getTotalScore();
                 } else {
                     val = addActions(newNode, depth - 1, alpha, beta);
                 }
@@ -533,7 +539,9 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                             bestNode.setCombat(newNode.getChildren().get(0).getCombat());
                         }
                         if (depth == maxDepth) {
-                            logger.info("Sim Prio [" + depth + "] -- Saved best node yet <" + bestNode.getScore() + "> " + bestNode.getAbilities().toString());
+                            GameStateEvaluator2.PlayerEvaluateScore score = GameStateEvaluator2.evaluate(this.getId(), bestNode.game);
+                            String scoreInfo = " [" + score.getPlayerInfoShort() + "-" + score.getOpponentInfoShort() + "]";
+                            logger.info("Sim Prio [" + depth + "] -- Saved best node yet <" + bestNode.getScore() + scoreInfo + "> " + bestNode.getAbilities().toString());
                             node.children.clear();
                             node.children.add(bestNode);
                             node.setScore(bestNode.getScore());
@@ -933,7 +941,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
         if (action instanceof PassAbility || action instanceof SpellAbility || action.getAbilityType() == AbilityType.MANA) {
             return false;
         }
-        int newVal = GameStateEvaluator2.evaluate(playerId, sim);
+        int newVal = GameStateEvaluator2.evaluate(playerId, sim).getTotalScore();
         SimulationNode2 test = node.getParent();
         while (test != null) {
             if (test.getPlayerId().equals(playerId)) {
@@ -942,7 +950,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                         if (test.getParent() != null) {
                             Game prevGame = node.getGame();
                             if (prevGame != null) {
-                                int oldVal = GameStateEvaluator2.evaluate(playerId, prevGame);
+                                int oldVal = GameStateEvaluator2.evaluate(playerId, prevGame).getTotalScore();
                                 if (oldVal >= newVal) {
                                     return true;
                                 }

@@ -38,13 +38,13 @@ public final class MagicAbility {
         // gatecrash
         put(new EvolveAbility().getRule(), 50);
         put(new ExtortAbility().getRule(), 30);
-        
+
 
     }};
 
     public static int getAbilityScore(Ability ability) {
         if (!scores.containsKey(ability.getRule())) {
-            //System.err.println("Couldn't find ability score: " + ability.getRule());
+            //System.err.println("Couldn't find ability score: " + ability.getClass().getSimpleName() + " - " + ability.toString());
             //TODO: add handling protection from ..., levelup, kicker, etc. abilities
             return 0;
         }

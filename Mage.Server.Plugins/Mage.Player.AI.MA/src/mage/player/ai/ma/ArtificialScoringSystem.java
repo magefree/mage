@@ -1,16 +1,16 @@
 package mage.player.ai.ma;
 
-import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.effects.Effect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  * @author ubeefx, nantuko
@@ -20,7 +20,7 @@ public final class ArtificialScoringSystem {
     public static final int WIN_GAME_SCORE = 100000000;
     public static final int LOSE_GAME_SCORE = -WIN_GAME_SCORE;
 
-    private static final int LIFE_SCORES[] = {0, 1000, 2000, 3000, 4000, 4500, 5000, 5500, 6000, 6500, 7000, 7400, 7800, 8200, 8600, 9000, 9200, 9400, 9600, 9800, 10000};
+    private static final int[] LIFE_SCORES = {0, 1000, 2000, 3000, 4000, 4500, 5000, 5500, 6000, 6500, 7000, 7400, 7800, 8200, 8600, 9000, 9200, 9400, 9600, 9800, 10000};
     private static final int MAX_LIFE = LIFE_SCORES.length - 1;
     private static final int UNKNOWN_CARD_SCORE = 300;
     private static final int PERMANENT_SCORE = 300;
@@ -79,29 +79,21 @@ public final class ArtificialScoringSystem {
                 abilityScore += MagicAbility.getAbilityScore(ability);
             }
             score += power * 300 + getPositive(toughness) * 200 + abilityScore * (getPositive(power) + 1) / 2;
-            //TODO: it can be improved
-            //score += permanent.getEquipmentPermanents().size() * 50 + permanent.getAuraPermanents().size() * 100;
             int enchantments = 0;
             int equipments = 0;
             for (UUID uuid : permanent.getAttachments()) {
-                Card card = game.getCard(uuid);
-                if (card != null) {
+                MageObject object = game.getObject(uuid);
+                if (object instanceof Card) {
+                    Card card = (Card) object;
+                    int outcomeScore = object.getAbilities().getOutcomeTotal();
                     if (card.getCardType().contains(CardType.ENCHANTMENT)) {
-                        Effect effect = card.getSpellAbility().getEffects().get(0);
-                        if (effect != null) {
-                            Outcome outcome = effect.getOutcome();
-                            if (outcome.isGood()) {
-                                enchantments++;
-                            } else if (outcome != Outcome.Detriment) {
-                                enchantments--;
-                            }
-                        }
+                        enchantments = enchantments + outcomeScore * 100;
                     } else {
-                        equipments++;
+                        equipments = equipments + outcomeScore * 50;
                     }
                 }
             }
-            score += equipments * 50 + enchantments * 100;
+            score += equipments + enchantments;
 
             if (!permanent.canAttack(null, game)) {
                 score -= 100;
