@@ -22,6 +22,7 @@ import mage.game.GameOptions;
 import mage.game.command.CommandObject;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
+import mage.player.ai.ComputerPlayer7;
 import mage.players.ManaPool;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -53,6 +54,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public static final String ALIAS_PREFIX = "@"; // don't change -- it uses in user's tests
     public static final String CHECK_PARAM_DELIMETER = "#";
     public static final String CHECK_PREFIX = "check:"; // prefix for all check commands
+    public static final String SHOW_PREFIX = "show:"; // prefix for all show commands
+    public static final String AI_PREFIX = "ai:"; // prefix for all ai commands
 
     static {
         // aliases can be used in check commands, so all prefixes and delimeters must be unique
@@ -66,6 +69,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public static final String ACTIVATE_ABILITY = "activate:";
     public static final String ACTIVATE_PLAY = "activate:Play ";
     public static final String ACTIVATE_CAST = "activate:Cast ";
+
+    // commands for AI
+    public static final String AI_COMMAND_PLAY_PRIORITY = "play priority";
+    public static final String AI_COMMAND_PLAY_STEP = "play step";
 
     static {
         // cards can be played/casted by activate ability command too
@@ -1389,6 +1396,28 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         //Assert.assertNotEquals("", cardName);
         assertAliaseSupportInActivateCommand(cardName, false);
         player.addAction(turnNum, step, ACTIVATE_CAST + cardName + "$targetPlayer=" + target.getName() + "$manaInPool=" + manaInPool);
+    }
+
+    /**
+     * AI play one PRIORITY with multi game simulations (calcs and play ONE best action, can be called with stack)
+     */
+    public void aiPlayPriority(int turnNum, PhaseStep step, TestPlayer player) {
+        assertAiPlayAndGameCompatible(player);
+        player.addAction(turnNum, step, AI_PREFIX + AI_COMMAND_PLAY_PRIORITY);
+    }
+
+    /**
+     * AI play STEP to the end with multi game simulations (calcs and play best actions until step ends, can be called in the middle of the step)
+     */
+    public void aiPlayStep(int turnNum, PhaseStep step, TestPlayer player) {
+        assertAiPlayAndGameCompatible(player);
+        player.addAction(turnNum, step, AI_PREFIX + AI_COMMAND_PLAY_STEP);
+    }
+
+    private void assertAiPlayAndGameCompatible(TestPlayer player) {
+        if (player.isAIPlayer() || !(player.getComputerPlayer() instanceof ComputerPlayer7)) {
+            Assert.fail("AI commands supported by CardTestPlayerBaseWithAIHelps only");
+        }
     }
 
     public void waitStackResolved(int turnNum, PhaseStep step, TestPlayer player) {
