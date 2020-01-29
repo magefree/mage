@@ -4,19 +4,18 @@
  */
 package mage.player.ai;
 
-import java.util.UUID;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.player.ai.ma.ArtificialScoringSystem;
 import mage.players.Player;
 import org.apache.log4j.Logger;
 
+import java.util.UUID;
+
 /**
- *
  * @author nantuko
- *
+ * <p>
  * This evaluator is only good for two player games
- *
  */
 public final class GameStateEvaluator2 {
 
@@ -25,43 +24,47 @@ public final class GameStateEvaluator2 {
     public static final int WIN_GAME_SCORE = 100000000;
     public static final int LOSE_GAME_SCORE = -WIN_GAME_SCORE;
 
-    public static int evaluate(UUID playerId, Game game) {
+    public static PlayerEvaluateScore evaluate(UUID playerId, Game game) {
         Player player = game.getPlayer(playerId);
-        Player opponent = game.getPlayer(game.getOpponents(playerId).iterator().next());
+        Player opponent = game.getPlayer(game.getOpponents(playerId).iterator().next()); // TODO: add multi opponent support?
         if (game.checkIfGameIsOver()) {
-            if (player.hasLost() 
+            if (player.hasLost()
                     || opponent.hasWon()) {
-                return LOSE_GAME_SCORE;
+                return new PlayerEvaluateScore(LOSE_GAME_SCORE);
             }
-            if (opponent.hasLost() 
+            if (opponent.hasLost()
                     || player.hasWon()) {
-                return WIN_GAME_SCORE;
+                return new PlayerEvaluateScore(WIN_GAME_SCORE);
             }
         }
-        int lifeScore = 0;
+
+        int playerLifeScore = 0;
+        int opponentLifeScore = 0;
         if (player.getLife() <= 0) { // we don't want a tie
-            lifeScore = ArtificialScoringSystem.LOSE_GAME_SCORE;
+            playerLifeScore = ArtificialScoringSystem.LOSE_GAME_SCORE;
         } else if (opponent.getLife() <= 0) {
-            lifeScore = ArtificialScoringSystem.WIN_GAME_SCORE;
+            playerLifeScore = ArtificialScoringSystem.WIN_GAME_SCORE;
         } else {
-            lifeScore = ArtificialScoringSystem.getLifeScore(player.getLife()) - ArtificialScoringSystem.getLifeScore(opponent.getLife());
+            playerLifeScore = ArtificialScoringSystem.getLifeScore(player.getLife());
+            opponentLifeScore = ArtificialScoringSystem.getLifeScore(opponent.getLife()); // TODO: minus
         }
-        int permanentScore = 0;
-        int playerScore = 0;
-        int opponentScore = 0;
+
+        int playerPermanentsScore = 0;
+        int opponentPermanentsScore = 0;
         try {
             StringBuilder sbPlayer = new StringBuilder();
             StringBuilder sbOpponent = new StringBuilder();
+
             // add values of player
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(playerId)) {
                 int onePermScore = evaluatePermanent(permanent, game);
-                playerScore += onePermScore;
+                playerPermanentsScore += onePermScore;
                 if (logger.isDebugEnabled()) {
                     sbPlayer.append(permanent.getName()).append('[').append(onePermScore).append("] ");
                 }
             }
             if (logger.isDebugEnabled()) {
-                sbPlayer.insert(0, playerScore + " - ");
+                sbPlayer.insert(0, playerPermanentsScore + " - ");
                 sbPlayer.insert(0, "Player..: ");
                 logger.debug(sbPlayer);
             }
@@ -69,27 +72,32 @@ public final class GameStateEvaluator2 {
             // add values of opponent
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(opponent.getId())) {
                 int onePermScore = evaluatePermanent(permanent, game);
-                opponentScore += onePermScore;
+                opponentPermanentsScore += onePermScore;
                 if (logger.isDebugEnabled()) {
                     sbOpponent.append(permanent.getName()).append('[').append(onePermScore).append("] ");
                 }
             }
             if (logger.isDebugEnabled()) {
-                sbOpponent.insert(0, opponentScore + " - ");
+                sbOpponent.insert(0, opponentPermanentsScore + " - ");
                 sbOpponent.insert(0, "Opponent: ");
-
                 logger.debug(sbOpponent);
             }
-            permanentScore = playerScore - opponentScore;
         } catch (Throwable t) {
         }
-        int handScore;
-        handScore = player.getHand().size() - opponent.getHand().size();
-        handScore *= 5;
 
-        int score = lifeScore + permanentScore + handScore;
-        logger.debug(score + " total Score (life:" + lifeScore + " permanents:" + permanentScore + " hand:" + handScore + ')');
-        return score;
+        int playerHandScore = player.getHand().size() * 5;
+        int opponentHandScore = opponent.getHand().size() * 5;
+
+        int score = (playerLifeScore - opponentLifeScore)
+                + (playerPermanentsScore - opponentPermanentsScore)
+                + (playerHandScore - opponentHandScore);
+        logger.debug(score
+                + " total Score (life:" + (playerLifeScore - opponentLifeScore)
+                + " permanents:" + (playerPermanentsScore - opponentPermanentsScore)
+                + " hand:" + (playerHandScore - opponentHandScore) + ')');
+        return new PlayerEvaluateScore(
+                playerLifeScore, playerHandScore, playerPermanentsScore,
+                opponentLifeScore, opponentHandScore, opponentPermanentsScore);
     }
 
     public static int evaluatePermanent(Permanent permanent, Game game) {
@@ -104,4 +112,81 @@ public final class GameStateEvaluator2 {
         return value;
     }
 
+    public static class PlayerEvaluateScore {
+        private int playerLifeScore = 0;
+        private int playerHandScore = 0;
+        private int playerPermanentsScore = 0;
+
+        private int opponentLifeScore = 0;
+        private int opponentHandScore = 0;
+        private int opponentPermanentsScore = 0;
+
+        private int specialScore = 0; // special score (ignore all other)
+
+        public PlayerEvaluateScore(int specialScore) {
+            this.specialScore = specialScore;
+        }
+
+        public PlayerEvaluateScore(int playerLifeScore, int playerHandScore, int playerPermanentsScore,
+                                   int opponentLifeScore, int opponentHandScore, int opponentPermanentsScore) {
+            this.playerLifeScore = playerLifeScore;
+            this.playerHandScore = playerHandScore;
+            this.playerPermanentsScore = playerPermanentsScore;
+            this.opponentLifeScore = opponentLifeScore;
+            this.opponentHandScore = opponentHandScore;
+            this.opponentPermanentsScore = opponentPermanentsScore;
+        }
+
+        public int getPlayerScore() {
+            return playerLifeScore + playerHandScore + playerPermanentsScore;
+        }
+
+        public int getOpponentScore() {
+            return opponentLifeScore + opponentHandScore + opponentPermanentsScore;
+        }
+
+        public int getTotalScore() {
+            if (specialScore != 0) {
+                return specialScore;
+            } else {
+                return getPlayerScore() - getOpponentScore();
+            }
+        }
+
+        public int getPlayerLifeScore() {
+            return playerLifeScore;
+        }
+
+        public int getPlayerHandScore() {
+            return playerHandScore;
+        }
+
+        public int getPlayerPermanentsScore() {
+            return playerPermanentsScore;
+        }
+
+        public String getPlayerInfoFull() {
+            return "Life:" + playerLifeScore +
+                    ", Hand:" + playerHandScore +
+                    ", Perm:" + playerPermanentsScore;
+        }
+
+        public String getPlayerInfoShort() {
+            return "L:" + playerLifeScore +
+                    ",H:" + playerHandScore +
+                    ",P:" + playerPermanentsScore;
+        }
+
+        public String getOpponentInfoFull() {
+            return "Life:" + opponentLifeScore +
+                    ", Hand:" + opponentHandScore +
+                    ", Perm:" + opponentPermanentsScore;
+        }
+
+        public String getOpponentInfoShort() {
+            return "L:" + opponentLifeScore +
+                    ",H:" + opponentHandScore +
+                    ",P:" + opponentPermanentsScore;
+        }
+    }
 }

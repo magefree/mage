@@ -163,7 +163,7 @@ public abstract class StackObjImpl implements StackObject {
                 targetAmount = " (amount: " + target.getTargetAmount(targetId) + ")";
             }
             // change the target?
-            Outcome outcome = mode.getEffects().isEmpty() ? Outcome.Detriment : mode.getEffects().get(0).getOutcome();
+            Outcome outcome = mode.getEffects().getOutcome(ability);
 
             if (targetNames != null
                     && (forceChange || targetController.chooseUse(outcome, "Change this target: " + targetNames + targetAmount + '?', ability, game))) {

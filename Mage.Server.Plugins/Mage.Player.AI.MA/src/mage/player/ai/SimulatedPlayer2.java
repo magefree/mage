@@ -264,6 +264,8 @@ public class SimulatedPlayer2 extends ComputerPlayer {
         Iterator<Ability> iterator = options.iterator();
         boolean bad = true;
         boolean good = true;
+
+        // TODO: add custom outcome from ability?
         for (Effect effect : ability.getEffects()) {
             if (effect.getOutcome().isGood()) {
                 bad = false;

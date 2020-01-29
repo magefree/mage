@@ -132,6 +132,7 @@ public final class RateCard {
     }
 
     private static int isEffectRemoval(Card card, Ability ability, Effect effect) {
+        // it's effect relates score, do not use custom outcome from ability
         if (effect.getOutcome() == Outcome.Removal) {
             // found removal
             return 1;

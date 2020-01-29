@@ -84,6 +84,7 @@ public class TestPlayer implements Player {
     private int foundNoAction = 0;
     private boolean AIPlayer;
     private final List<PlayerAction> actions = new ArrayList<>();
+    private final Map<PlayerAction, PhaseStep> actionsToRemovesLater = new HashMap<>(); // remove actions later, on next step (e.g. for AI commands)
     private final List<String> choices = new ArrayList<>(); // choices stack for choice
     private final List<String> targets = new ArrayList<>(); // targets stack for choose (it's uses on empty direct target by cast command)
     private final Map<String, UUID> aliases = new HashMap<>(); // aliases for game objects/players (use it for cards with same name to save and use)
@@ -499,6 +500,18 @@ public class TestPlayer implements Player {
 
     @Override
     public boolean priority(Game game) {
+        // later remove actions (ai commands related)
+        if (actionsToRemovesLater.size() > 0) {
+            List<PlayerAction> removed = new ArrayList<>();
+            actionsToRemovesLater.forEach((action, step) -> {
+                if (game.getStep().getType() != step) {
+                    actions.remove(action);
+                    removed.add(action);
+                }
+            });
+            removed.forEach(actionsToRemovesLater::remove);
+        }
+
         int numberOfActions = actions.size();
         List<PlayerAction> tempActions = new ArrayList<>();
         tempActions.addAll(actions);
@@ -622,6 +635,25 @@ public class TestPlayer implements Player {
                             actions.remove(action);
                         }
                     }
+                } else if (action.getAction().startsWith(AI_PREFIX)) {
+                    String command = action.getAction();
+                    command = command.substring(command.indexOf(AI_PREFIX) + AI_PREFIX.length());
+
+                    // play priority
+                    if (command.equals(AI_COMMAND_PLAY_PRIORITY)) {
+                        computerPlayer.priority(game);
+                        actions.remove(action);
+                        return true;
+                    }
+
+                    // play step
+                    if (command.equals(AI_COMMAND_PLAY_STEP)) {
+                        actionsToRemovesLater.put(action, game.getStep().getType());
+                        computerPlayer.priority(game);
+                        return true;
+                    }
+
+                    Assert.fail("Unknow ai command: " + command);
                 } else if (action.getAction().startsWith(CHECK_PREFIX)) {
                     String command = action.getAction();
                     command = command.substring(command.indexOf(CHECK_PREFIX) + CHECK_PREFIX.length());
@@ -752,9 +784,9 @@ public class TestPlayer implements Player {
                     if (!wasProccessed) {
                         Assert.fail("Unknow check command or params: " + command);
                     }
-                } else if (action.getAction().startsWith("show:")) {
+                } else if (action.getAction().startsWith(SHOW_PREFIX)) {
                     String command = action.getAction();
-                    command = command.substring(command.indexOf("show:") + "show:".length());
+                    command = command.substring(command.indexOf(SHOW_PREFIX) + SHOW_PREFIX.length());
 
                     String[] params = command.split(CHECK_PARAM_DELIMETER);
                     boolean wasProccessed = false;
@@ -3639,5 +3671,9 @@ public class TestPlayer implements Player {
 
         this.chooseStrictModeFailed("choice", game, getInfo(card) + " - can't select ability to cast.\n" + "Card's abilities:\n" + allInfo);
         return computerPlayer.chooseAbilityForCast(card, game, noMana);
+    }
+
+    public ComputerPlayer getComputerPlayer() {
+        return computerPlayer;
     }
 }

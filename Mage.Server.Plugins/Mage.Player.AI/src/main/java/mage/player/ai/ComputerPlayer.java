@@ -1160,12 +1160,12 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                     if (!playableAbilities.isEmpty()) {
                         for (ActivatedAbility ability : playableAbilities) {
                             if (ability.canActivate(playerId, game).canActivate()) {
-                                if (ability.getEffects().hasOutcome(Outcome.PutLandInPlay)) {
+                                if (ability.getEffects().hasOutcome(ability, Outcome.PutLandInPlay)) {
                                     if (this.activateAbility(ability, game)) {
                                         return true;
                                     }
                                 }
-                                if (ability.getEffects().hasOutcome(Outcome.PutCreatureInPlay)) {
+                                if (ability.getEffects().hasOutcome(ability, Outcome.PutCreatureInPlay)) {
                                     if (getOpponentBlockers(opponentId, game).size() <= 1) {
                                         if (this.activateAbility(ability, game)) {
                                             return true;

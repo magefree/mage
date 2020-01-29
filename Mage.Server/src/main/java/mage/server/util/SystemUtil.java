@@ -1,15 +1,8 @@
 package mage.server.util;
 
-import java.io.File;
-import java.lang.reflect.Constructor;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.concurrent.TimeUnit;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
+import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.ActivatedAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.cards.Card;
@@ -30,6 +23,16 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.RandomUtil;
 
+import java.io.File;
+import java.lang.reflect.Constructor;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+
 /**
  * @author JayDi85
  */
@@ -43,25 +46,28 @@ public final class SystemUtil {
     private static final String INIT_FILE_PATH = "config" + File.separator + "init.txt";
     private static final org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(SystemUtil.class);
 
-    private static final String COMMAND_MANA_ADD = "@mana add";
-    private static final String COMMAND_LANDS_ADD = "@lands add";
-    private static final String COMMAND_RUN_CUSTOM_CODE = "@run custom code";
-    private static final String COMMAND_CLEAR_BATTLEFIELD = "@clear battlefield";
+    // transform special group names from init.txt to special commands in choose dialog:
+    // [@mana add] -> MANA ADD
+    private static final String COMMAND_MANA_ADD = "@mana add"; // TODO: not implemented
+    private static final String COMMAND_LANDS_ADD = "@lands add"; // TODO: not implemented
+    private static final String COMMAND_RUN_CUSTOM_CODE = "@run custom code"; // TODO: not implemented
     private static final String COMMAND_SHOW_OPPONENT_HAND = "@show opponent hand";
     private static final String COMMAND_SHOW_OPPONENT_LIBRARY = "@show opponent library";
     private static final String COMMAND_SHOW_MY_HAND = "@show my hand";
     private static final String COMMAND_SHOW_MY_LIBRARY = "@show my library";
+    private static final String COMMAND_ACTIVATE_OPPONENT_ABILITY = "@activate opponent ability";
     private static final Map<String, String> supportedCommands = new HashMap<>();
 
     static {
+        // special commands names in choose dialog
         supportedCommands.put(COMMAND_MANA_ADD, "MANA ADD");
         supportedCommands.put(COMMAND_LANDS_ADD, "LANDS ADD");
         supportedCommands.put(COMMAND_RUN_CUSTOM_CODE, "RUN CUSTOM CODE");
-        supportedCommands.put(COMMAND_CLEAR_BATTLEFIELD, "CLAR BATTLEFIELD");
         supportedCommands.put(COMMAND_SHOW_OPPONENT_HAND, "SHOW OPPONENT HAND");
         supportedCommands.put(COMMAND_SHOW_OPPONENT_LIBRARY, "SHOW OPPONENT LIBRARY");
         supportedCommands.put(COMMAND_SHOW_MY_HAND, "SHOW MY HAND");
         supportedCommands.put(COMMAND_SHOW_MY_LIBRARY, "SHOW MY LIBRARY");
+        supportedCommands.put(COMMAND_ACTIVATE_OPPONENT_ABILITY, "ACTIVATE OPPONENT ABILITY");
     }
 
     private static final Pattern patternGroup = Pattern.compile("\\[(.+)\\]"); // [test new card]
@@ -392,6 +398,54 @@ public final class SystemUtil {
                             game.informPlayer(feedbackPlayer, info);
                         }
                         break;
+
+                    case COMMAND_ACTIVATE_OPPONENT_ABILITY:
+                        // WARNING, maybe very bugged if called in wrong priority
+                        // uses choose triggered ability dialog to select it
+                        if (feedbackPlayer != null) {
+                            UUID savedPriorityPlayer = null;
+                            if (game.getActivePlayerId() != opponent.getId()) {
+                                savedPriorityPlayer = game.getActivePlayerId();
+                            }
+
+                            // change active player to find and play selected abilities (it's danger and buggy code)
+                            if (savedPriorityPlayer != null) {
+                                game.getState().setPriorityPlayerId(opponent.getId());
+                                game.firePriorityEvent(opponent.getId());
+                            }
+
+                            List<Ability> abilities = opponent.getPlayable(game, true);
+                            Map<String, String> choices = new HashMap<>();
+                            abilities.forEach(ability -> {
+                                MageObject object = ability.getSourceObject(game);
+                                choices.put(ability.getId().toString(), object.getName() + ": " + ability.toString());
+                            });
+                            // TODO: set priority for us?
+                            Choice choice = new ChoiceImpl();
+                            choice.setMessage("Choose playable ability to active by opponent " + opponent.getName());
+                            choice.setKeyChoices(choices);
+                            if (feedbackPlayer.choose(Outcome.Detriment, choice, game) && choice.getChoiceKey() != null) {
+                                String needId = choice.getChoiceKey();
+                                Optional<Ability> ability = abilities.stream().filter(a -> a.getId().toString().equals(needId)).findFirst();
+                                if (ability.isPresent()) {
+                                    // TODO: set priority for player?
+                                    ActivatedAbility activatedAbility = (ActivatedAbility) ability.get();
+                                    game.informPlayers(feedbackPlayer.getLogName() + " as another player " + opponent.getLogName()
+                                            + " trying to force an activate ability: " + activatedAbility.getGameLogMessage(game));
+                                    if (opponent.activateAbility(activatedAbility, game)) {
+                                        game.informPlayers("Force to activate ability: DONE");
+                                    } else {
+                                        game.informPlayers("Force to activate ability: FAIL");
+                                    }
+                                }
+                            }
+                            // restore original priority player
+                            if (savedPriorityPlayer != null) {
+                                game.getState().setPriorityPlayerId(savedPriorityPlayer);
+                                game.firePriorityEvent(savedPriorityPlayer);
+                            }
+                        }
+                        break;
                 }
 
                 return;
@@ -438,8 +492,8 @@ public final class SystemUtil {
                     // Steps: 1) Remove the last plane and set its effects to discarded
                     for (CommandObject cobject : game.getState().getCommand()) {
                         if (cobject instanceof Plane) {
-                            if (((Plane) cobject).getAbilities() != null) {
-                                for (Ability ability : ((Plane) cobject).getAbilities()) {
+                            if (cobject.getAbilities() != null) {
+                                for (Ability ability : cobject.getAbilities()) {
                                     for (Effect effect : ability.getEffects()) {
                                         if (effect instanceof ContinuousEffect) {
                                             ((ContinuousEffect) effect).discard();
@@ -447,7 +501,7 @@ public final class SystemUtil {
                                     }
                                 }
                             }
-                            game.getState().removeTriggersOfSourceId(((Plane) cobject).getId());
+                            game.getState().removeTriggersOfSourceId(cobject.getId());
                             game.getState().getCommand().remove(cobject);
                             break;
                         }
@@ -629,8 +683,8 @@ public final class SystemUtil {
     /**
      * Get a diff between two dates
      *
-     * @param date1 the oldest date
-     * @param date2 the newest date
+     * @param date1    the oldest date
+     * @param date2    the newest date
      * @param timeUnit the unit in which you want the diff
      * @return the diff value, in the provided unit
      */
