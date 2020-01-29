@@ -1,9 +1,5 @@
 package mage.abilities;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.costs.*;
 import mage.abilities.costs.common.PayLifeCost;
@@ -32,6 +28,11 @@ import mage.util.GameLog;
 import mage.util.ThreadLocalStringBuilder;
 import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -68,6 +69,7 @@ public abstract class AbilityImpl implements Ability {
     protected TargetAdjuster targetAdjuster = null;
     protected CostAdjuster costAdjuster = null;
     protected List<Hint> hints = new ArrayList<>();
+    protected Outcome customOutcome = null; // uses for AI decisions instead effects
 
     public AbilityImpl(AbilityType abilityType, Zone zone) {
         this.id = UUID.randomUUID();
@@ -117,6 +119,7 @@ public abstract class AbilityImpl implements Ability {
         for (Hint hint : ability.getHints()) {
             this.hints.add(hint.copy());
         }
+        this.customOutcome = ability.customOutcome;
     }
 
     @Override
@@ -321,7 +324,7 @@ public abstract class AbilityImpl implements Ability {
                 sourceObject.adjustTargets(this, game);
             }
             if (!getTargets().isEmpty()) {
-                Outcome outcome = getEffects().isEmpty() ? Outcome.Detriment : getEffects().get(0).getOutcome();
+                Outcome outcome = getEffects().getOutcome(this);
                 // only activated abilities can be canceled by user (not triggered)
                 if (!getTargets().chooseTargets(outcome, this.controllerId, this, noMana, game, this instanceof ActivatedAbility)) {
                     // was canceled during targer selection
@@ -948,10 +951,7 @@ public abstract class AbilityImpl implements Ability {
                 }
                 return ((Permanent) object).isPhasedIn();
             } else if (object instanceof Card) {
-                if (!((Card) object).getAbilities(game).contains(this)) {
-                    return false;
-                }
-                return true;
+                return ((Card) object).getAbilities(game).contains(this);
             } else if (!object.getAbilities().contains(this)) { // not sure which object it can still be
                 // check if it's an ability that is temporary gained to a card
                 Abilities<Ability> otherAbilities = game.getState().getAllOtherAbilities(this.getSourceId());
@@ -1249,5 +1249,16 @@ public abstract class AbilityImpl implements Ability {
     public Ability addHint(Hint hint) {
         this.hints.add(hint);
         return this;
+    }
+
+    @Override
+    public Ability addCustomOutcome(Outcome customOutcome) {
+        this.customOutcome = customOutcome;
+        return this;
+    }
+
+    @Override
+    public Outcome getCustomOutcome() {
+        return this.customOutcome;
     }
 }

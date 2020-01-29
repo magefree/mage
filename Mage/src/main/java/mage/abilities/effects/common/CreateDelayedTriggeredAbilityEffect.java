@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
@@ -6,11 +5,9 @@ import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.Mode;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.constants.Outcome;
 import mage.game.Game;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class CreateDelayedTriggeredAbilityEffect extends OneShotEffect {
@@ -28,7 +25,7 @@ public class CreateDelayedTriggeredAbilityEffect extends OneShotEffect {
     }
 
     public CreateDelayedTriggeredAbilityEffect(DelayedTriggeredAbility ability, boolean copyTargets, boolean initAbility) {
-        super(ability.getEffects().isEmpty() ? Outcome.Detriment : ability.getEffects().get(0).getOutcome());
+        super(ability.getEffects().getOutcome(ability));
         this.ability = ability;
         this.copyTargets = copyTargets;
         this.initAbility = initAbility;

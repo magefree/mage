@@ -91,7 +91,7 @@ public class DoIfCostPaid extends OneShotEffect {
             }
             message = CardUtil.replaceSourceName(message, mageObject.getLogName());
             boolean result = true;
-            Outcome payOutcome = executingEffects.size() > 0 ? executingEffects.get(0).getOutcome() : this.outcome;
+            Outcome payOutcome = executingEffects.getOutcome(source, this.outcome);
             if (cost.canPay(source, source.getSourceId(), player.getId(), game)
                     && (!optional || player.chooseUse(payOutcome, message, source, game))) {
                 cost.clearPaid();

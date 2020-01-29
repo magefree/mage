@@ -3,7 +3,6 @@ package mage.abilities;
 import mage.MageObject;
 import mage.abilities.effects.Effect;
 import mage.constants.AbilityType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -61,7 +60,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
             MageObject object = game.getObject(getSourceId());
             Player player = game.getPlayer(this.getControllerId());
             if (player != null && object != null) {
-                if (!player.chooseUse(getEffects().isEmpty() ? Outcome.Detriment : getEffects().get(0).getOutcome(), this.getRule(object.getLogName()), this, game)) {
+                if (!player.chooseUse(getEffects().getOutcome(this), this.getRule(object.getLogName()), this, game)) {
                     return false;
                 }
             } else {

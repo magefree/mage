@@ -39,8 +39,7 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
     }
 
     public GainAbilityTargetEffect(Ability ability, Duration duration, String rule, boolean onCard, Layer layer, SubLayer subLayer) {
-        super(duration, layer, subLayer,
-                !ability.getEffects().isEmpty() ? ability.getEffects().get(0).getOutcome() : Outcome.AddAbility);
+        super(duration, layer, subLayer, ability.getEffects().getOutcome(ability, Outcome.AddAbility));
         this.ability = ability;
         staticText = rule;
         this.onCard = onCard;

@@ -1,7 +1,5 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.Mode;
@@ -29,34 +27,34 @@ import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetControlledCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * Once you announce you're casting Rescue from the Underworld, no player may
  * attempt to stop you from casting the spell by removing the creature you want
  * to sacrifice.
- *
+ * <p>
  * If you sacrifice a creature token to cast Rescue from the Underworld, it
  * won't return to the battlefield, although the target creature card will.
- *
+ * <p>
  * If either the sacrificed creature or the target creature card leaves the
  * graveyard before the delayed triggered ability resolves during your next
  * upkeep, it won't return.
- *
+ * <p>
  * However, if the sacrificed creature is put into another public zone instead
  * of the graveyard, perhaps because it's your commander or because of another
  * replacement effect, it will return to the battlefield from the zone it went
  * to.
- *
+ * <p>
  * Rescue from the Underworld is exiled as it resolves, not later as its delayed
  * trigger resolves.
- *
  *
  * @author LevelX2
  */
 public final class RescueFromTheUnderworld extends CardImpl {
 
     public RescueFromTheUnderworld(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{B}");
 
         // As an additional cost to cast Rescue from the Underworld, sacrifice a creature.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, new FilterControlledCreaturePermanent("a creature"), false)));
@@ -106,7 +104,7 @@ class RescueFromTheUnderworldCreateDelayedTriggeredAbilityEffect extends OneShot
     protected DelayedTriggeredAbility ability;
 
     public RescueFromTheUnderworldCreateDelayedTriggeredAbilityEffect(DelayedTriggeredAbility ability) {
-        super(ability.getEffects().get(0).getOutcome());
+        super(ability.getEffects().getOutcome(ability));
         this.ability = ability;
     }
 

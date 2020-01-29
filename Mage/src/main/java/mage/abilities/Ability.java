@@ -1,8 +1,5 @@
 package mage.abilities;
 
-import java.io.Serializable;
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostAdjuster;
@@ -12,10 +9,7 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.hint.Hint;
-import mage.constants.AbilityType;
-import mage.constants.AbilityWord;
-import mage.constants.EffectType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -25,6 +19,10 @@ import mage.target.Target;
 import mage.target.Targets;
 import mage.target.targetadjustment.TargetAdjuster;
 import mage.watchers.Watcher;
+
+import java.io.Serializable;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * Practically everything in the game is started from an Ability. This interface
@@ -46,10 +44,8 @@ public interface Ability extends Controllable, Serializable {
      *
      * @see mage.players.PlayerImpl#playAbility(mage.abilities.ActivatedAbility,
      * mage.game.Game)
-     * @see
-     * mage.game.GameImpl#addTriggeredAbility(mage.abilities.TriggeredAbility)
-     * @see
-     * mage.game.GameImpl#addDelayedTriggeredAbility(mage.abilities.DelayedTriggeredAbility)
+     * @see mage.game.GameImpl#addTriggeredAbility(mage.abilities.TriggeredAbility)
+     * @see mage.game.GameImpl#addDelayedTriggeredAbility(mage.abilities.DelayedTriggeredAbility)
      */
     void newId();
 
@@ -58,10 +54,8 @@ public interface Ability extends Controllable, Serializable {
      *
      * @see mage.players.PlayerImpl#playAbility(mage.abilities.ActivatedAbility,
      * mage.game.Game)
-     * @see
-     * mage.game.GameImpl#addTriggeredAbility(mage.abilities.TriggeredAbility)
-     * @see
-     * mage.game.GameImpl#addDelayedTriggeredAbility(mage.abilities.DelayedTriggeredAbility)
+     * @see mage.game.GameImpl#addTriggeredAbility(mage.abilities.TriggeredAbility)
+     * @see mage.game.GameImpl#addDelayedTriggeredAbility(mage.abilities.DelayedTriggeredAbility)
      */
     void newOriginalId();
 
@@ -267,16 +261,15 @@ public interface Ability extends Controllable, Serializable {
     /**
      * Activates this ability prompting the controller to pay any mandatory
      *
-     * @param game A reference the {@link Game} for which this ability should be
-     * activated within.
+     * @param game   A reference the {@link Game} for which this ability should be
+     *               activated within.
      * @param noMana Whether or not {@link ManaCosts} have to be paid.
      * @return True if this ability was successfully activated.
      * @see mage.players.PlayerImpl#cast(mage.abilities.SpellAbility,
      * mage.game.Game, boolean)
      * @see mage.players.PlayerImpl#playAbility(mage.abilities.ActivatedAbility,
      * mage.game.Game)
-     * @see
-     * mage.players.PlayerImpl#triggerAbility(mage.abilities.TriggeredAbility,
+     * @see mage.players.PlayerImpl#triggerAbility(mage.abilities.TriggeredAbility,
      * mage.game.Game)
      */
     boolean activate(Game game, boolean noMana);
@@ -290,8 +283,7 @@ public interface Ability extends Controllable, Serializable {
      *
      * @param game The {@link Game} for which this ability resolves within.
      * @return Whether or not this ability successfully resolved.
-     * @see
-     * mage.players.PlayerImpl#playManaAbility(mage.abilities.mana.ManaAbility,
+     * @see mage.players.PlayerImpl#playManaAbility(mage.abilities.mana.ManaAbility,
      * mage.game.Game)
      * @see mage.players.PlayerImpl#specialAction(mage.abilities.SpecialAction,
      * mage.game.Game)
@@ -526,4 +518,8 @@ public interface Ability extends Controllable, Serializable {
     List<Hint> getHints();
 
     Ability addHint(Hint hint);
+
+    Ability addCustomOutcome(Outcome customOutcome);
+
+    Outcome getCustomOutcome();
 }

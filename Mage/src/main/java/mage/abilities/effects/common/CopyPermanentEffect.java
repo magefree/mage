@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import mage.MageObject;
@@ -103,11 +102,11 @@ public class CopyPermanentEffect extends OneShotEffect {
                     // attach - search effect in spell ability (example: cast Utopia Sprawl, cast Estrid's Invocation on it)
                     for (Ability ability : bluePrintPermanent.getAbilities()) {
                         if (ability instanceof SpellAbility) {
+                            auraOutcome = ability.getEffects().getOutcome(ability);
                             for (Effect effect : ability.getEffects()) {
                                 if (effect instanceof AttachEffect) {
                                     if (bluePrintPermanent.getSpellAbility().getTargets().size() > 0) {
                                         auraTarget = bluePrintPermanent.getSpellAbility().getTargets().get(0);
-                                        auraOutcome = effect.getOutcome();
                                     }
                                 }
                             }
@@ -118,12 +117,9 @@ public class CopyPermanentEffect extends OneShotEffect {
                     if (auraTarget == null) {
                         for (Ability ability : bluePrintPermanent.getAbilities()) {
                             if (ability instanceof EnchantAbility) {
+                                auraOutcome = ability.getEffects().getOutcome(ability);
                                 if (ability.getTargets().size() > 0) { // Animate Dead don't have targets
                                     auraTarget = ability.getTargets().get(0);
-                                    for (Effect effect : ability.getEffects()) {
-                                        // first outcome
-                                        auraOutcome = effect.getOutcome();
-                                    }
                                 }
                             }
                         }

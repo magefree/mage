@@ -1,7 +1,5 @@
-
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -20,8 +18,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 
+import java.util.UUID;
+
 /**
- *
  * @author Backfir3
  */
 public final class KaaliaOfTheVast extends CardImpl {
@@ -73,9 +72,7 @@ class KaaliaOfTheVastAttacksAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getSourceId().equals(this.getSourceId())) {
             Player opponent = game.getPlayer(event.getTargetId());
-            if (opponent != null) {
-                return true;
-            }
+            return opponent != null;
         }
         return false;
     }
@@ -123,7 +120,7 @@ class KaaliaOfTheVastEffect extends OneShotEffect {
             return false;
         }
         TargetCardInHand target = new TargetCardInHand(filter);
-        if (target.canChoose(controller.getId(), game) && target.choose(getOutcome(), controller.getId(), source.getSourceId(), game)) {
+        if (target.canChoose(controller.getId(), game) && target.choose(outcome, controller.getId(), source.getSourceId(), game)) {
             if (!target.getTargets().isEmpty()) {
                 UUID cardId = target.getFirstTarget();
                 Card card = game.getCard(cardId);
