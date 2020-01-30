@@ -97,7 +97,7 @@ class GargosViciousWatcherTriggeredAbility extends TriggeredAbilityImpl {
                 || !permanent.isCreature()) {
             return false;
         }
-        return object.isInstantOrSorcery(); // must specify a type of spell
+        return object.isInstantOrSorcery() || object.isEnchantment(); // must be a type of spell (instant, sorcery, or aura)
         
     }
 
