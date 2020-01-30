@@ -17,6 +17,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
+import mage.game.stack.Spell;
 
 import java.util.UUID;
 
@@ -97,7 +98,7 @@ class GargosViciousWatcherTriggeredAbility extends TriggeredAbilityImpl {
                 || !permanent.isCreature()) {
             return false;
         }
-        return object.isInstantOrSorcery(); // must specify a type of spell
+        return object instanceof Spell; // must be a type of spell (instant, sorcery, or aura)
         
     }
 
