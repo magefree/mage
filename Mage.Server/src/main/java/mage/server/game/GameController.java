@@ -1188,6 +1188,29 @@ public class GameController implements GameCallback {
         return player != null ? player.getName() : "-";
     }
 
+    public String getPingsInfo() {
+        List<String> usersInfo = new ArrayList<>();
+        for (Map.Entry<UUID, UUID> entry : userPlayerMap.entrySet()) {
+            Optional<User> user = UserManager.instance.getUser(entry.getKey());
+            user.ifPresent(u -> usersInfo.add(u.getName() + ": " + u.getPingInfo()));
+        }
+        Collections.sort(usersInfo);
+        usersInfo.add(0, "Players ping:");
+
+        List<String> watchersinfo = new ArrayList<>();
+        for (Map.Entry<UUID, GameSessionWatcher> entry : watchers.entrySet()) {
+            Optional<User> user = UserManager.instance.getUser(entry.getValue().userId);
+            user.ifPresent(u -> watchersinfo.add(u.getName() + ": " + u.getPingInfo()));
+        }
+        Collections.sort(watchersinfo);
+        if (watchersinfo.size() > 0) {
+            watchersinfo.add(0, "Watchers ping:");
+        }
+
+        usersInfo.addAll(watchersinfo);
+        return String.join("<br>", usersInfo);
+    }
+
     public String attemptToFixGame() {
         // try to fix disconnects
 
