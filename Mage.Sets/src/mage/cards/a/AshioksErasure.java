@@ -146,7 +146,7 @@ class AshioksErasureReplacementEffect extends ContinuousRuleModifyingEffectImpl 
 
         Card exiledCard = cards.iterator().next();
         if (exiledCard != null) {
-            return exiledCard.getName().equals(card.getName());
+            return CardUtil.haveSameNames(exiledCard, card);
         }
         return false;
     }

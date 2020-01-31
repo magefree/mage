@@ -12,6 +12,7 @@ import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.target.common.TargetCardInLibrary;
+import mage.util.CardUtil;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -71,6 +72,6 @@ class DeathbellowWarCryTarget extends TargetCardInLibrary {
                 .map(game::getCard)
                 .filter(Objects::nonNull)
                 .map(Card::getName)
-                .noneMatch(card.getName()::equals);
+                .noneMatch(n -> CardUtil.haveSameNames(n, card.getName()));
     }
 }
