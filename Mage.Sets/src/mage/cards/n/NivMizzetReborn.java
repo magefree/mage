@@ -86,7 +86,7 @@ class NivMizzetRebornEffect extends OneShotEffect {
         }
 
         private TargetCard getTarget() {
-            return new TargetCardInLibrary(makeFilter());
+            return new TargetCard(Zone.LIBRARY, makeFilter());
         }
 
         private String getDescription() {
@@ -134,6 +134,8 @@ class NivMizzetRebornEffect extends OneShotEffect {
             return false;
         }
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 10));
+        game.informPlayers(player.getName() + " reveals " +
+                cards.getCards(game).stream().map(card -> card.getName() + " ").reduce((a, b) -> a + b));
         Cards cards2 = new CardsImpl();
         if (cards.isEmpty()) {
             return false;
