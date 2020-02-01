@@ -3286,9 +3286,22 @@ public abstract class PlayerImpl implements Player, Serializable {
             boolean isPlayLand = (ability instanceof PlayLandAbility);
 
             // as original controller
-            // land restrictions
+
+            // play land restrictions
             if (isPlayLand && game.getContinuousEffects().preventedByRuleModification(
                     GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, ability.getSourceId(),
+                            ability.getSourceId(), this.getId()), ability, game, true)) {
+                continue;
+            }
+            // cast spell restrictions 1
+            if (isPlaySpell && game.getContinuousEffects().preventedByRuleModification(
+                    GameEvent.getEvent(EventType.CAST_SPELL, ability.getSourceId(),
+                            ability.getSourceId(), this.getId()), ability, game, true)) {
+                continue;
+            }
+            // cast spell restrictions 2
+            if (isPlaySpell && game.getContinuousEffects().preventedByRuleModification(
+                    GameEvent.getEvent(EventType.CAST_SPELL_LATE, ability.getSourceId(),
                             ability.getSourceId(), this.getId()), ability, game, true)) {
                 continue;
             }
@@ -3307,6 +3320,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     || (fromZone == Zone.GRAVEYARD && canPlayCardsFromGraveyard());
 
             // as affected controller
+
             UUID savedControllerId = ability.getControllerId();
             ability.setControllerId(this.getId());
             try {
@@ -3351,19 +3365,37 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
 
             boolean fromAll = fromZone.equals(Zone.ALL);
-
             if (hidden && (fromAll || fromZone == Zone.HAND)) {
                 for (Card card : hand.getCards(game)) {
                     for (Ability ability : card.getAbilities(game)) { // gets this activated ability from hand? (Morph?)
                         if (ability.getZone().match(Zone.HAND)) {
+                            boolean isPlaySpell = (ability instanceof SpellAbility);
+                            boolean isPlayLand = (ability instanceof PlayLandAbility);
+
+                            // play land restrictions
+                            if (isPlayLand && game.getContinuousEffects().preventedByRuleModification(
+                                    GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, ability.getSourceId(),
+                                            ability.getSourceId(), this.getId()), ability, game, true)) {
+                                continue;
+                            }
+                            // cast spell restrictions 1
+                            if (isPlaySpell && game.getContinuousEffects().preventedByRuleModification(
+                                    GameEvent.getEvent(EventType.CAST_SPELL, ability.getSourceId(),
+                                            ability.getSourceId(), this.getId()), ability, game, true)) {
+                                continue;
+                            }
+                            // cast spell restrictions 2
+                            if (isPlaySpell && game.getContinuousEffects().preventedByRuleModification(
+                                    GameEvent.getEvent(EventType.CAST_SPELL_LATE, ability.getSourceId(),
+                                            ability.getSourceId(), this.getId()), ability, game, true)) {
+                                continue;
+                            }
+
+                            // if have alternative cost
                             if (ability instanceof ActivatedAbility) {
-                                if (!(ability instanceof PlayLandAbility)
-                                        || !game.getContinuousEffects().preventedByRuleModification(
-                                        GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, ability.getSourceId(),
-                                                ability.getSourceId(), playerId), ability, game, true)) {
-                                    if (canPlay((ActivatedAbility) ability, availableMana, card, game)) {
-                                        playable.add(ability);
-                                    }
+                                // normal ability
+                                if (canPlay((ActivatedAbility) ability, availableMana, card, game)) {
+                                    playable.add(ability);
                                 }
                             } else if (ability instanceof AlternativeSourceCosts) {
                                 if (card.isLand()) {
@@ -3377,6 +3409,8 @@ public abstract class PlayerImpl implements Player, Serializable {
                                         }
                                     }
                                 }
+                            } else {
+                                // unknown type
                             }
                         }
                     }
