@@ -756,7 +756,11 @@ public class ContinuousEffects implements Serializable {
                             effect.setValue("targetAbility", targetAbility);
                             if (effect.applies(event, sourceAbility, game)) {
                                 if (!game.inCheckPlayableState() && !silentMode) {
+                                    MageObject sourceObject = sourceAbility.getSourceObject(game);
                                     String message = effect.getInfoMessage(sourceAbility, event, game);
+                                    if (sourceObject != null) {
+                                        message = sourceObject.getIdName() + ": " + message;
+                                    }
                                     if (message != null && !message.isEmpty()) {
                                         if (effect.sendMessageToUser()) {
                                             Player player = game.getPlayer(event.getPlayerId());
