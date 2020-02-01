@@ -127,4 +127,29 @@ public class AttackPlaneswalkerTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Silent Skimmer", 1);
         assertCounterCount("Kiora, the Crashing Wave", CounterType.LOYALTY, 2);
     }
+
+    @Test
+    public void testAttackedPlaneswalkerDestroyed() {
+        addCard(Zone.BATTLEFIELD, playerA, "Kiora, the Crashing Wave");
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears");
+        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears");
+        addCard(Zone.BATTLEFIELD, playerB, "Plains");
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp");
+        addCard(Zone.HAND, playerB, "Despark");
+
+        attack(2, playerB, "Grizzly Bears", "Kiora, the Crashing Wave");
+        castSpell(2, PhaseStep.DECLARE_ATTACKERS, playerB, "Despark");
+        setChoice(playerB, "Kiora, the Crashing Wave");
+        block(2, playerA, "Grizzly Bears", "Grizzly Bears");
+
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+        assertExileCount(playerA, "Kiora, the Crashing Wave", 1);
+        assertGraveyardCount(playerA, "Grizzly Bears", 1);
+        assertGraveyardCount(playerB, "Grizzly Bears", 1);
+    }
 }

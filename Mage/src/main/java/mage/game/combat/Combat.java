@@ -1607,6 +1607,8 @@ public class Combat implements Serializable, Copyable<Combat> {
                 Permanent permanent = game.getPermanent(group.getDefenderId());
                 if (permanent != null) {
                     playerDefenders.add(permanent.getControllerId());
+                } else {
+                    playerDefenders.add(group.getDefendingPlayerId());
                 }
             } else {
                 playerDefenders.add(group.getDefenderId());
