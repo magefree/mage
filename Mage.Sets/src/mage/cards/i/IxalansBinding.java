@@ -90,8 +90,8 @@ class IxalansBindingReplacementEffect extends ContinuousRuleModifyingEffectImpl 
                     }
                 }
                 if (exile != null) {
-                    for (Card crad : exile.getCards(game)) {
-                        if (crad.getName().equals(card.getName())) {
+                    for (Card e : exile.getCards(game)) {
+                        if (CardUtil.haveSameNames(e, card)) {
                             return true;
                         }
                     }
