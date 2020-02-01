@@ -27,7 +27,6 @@ public final class DivineVisitation extends CardImpl {
     public DivineVisitation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{W}");
 
-        // TODO: This implementation is not entirely correct, see https://twitter.com/EliShffrn/status/1042145606582591490
         // If one or more creature tokens would be created under your control, that many 4/4 white Angel creature tokens with flying and vigilance are created instead.
         this.addAbility(new SimpleStaticAbility(
                 Zone.BATTLEFIELD, new DivineVisitationEffect()
@@ -59,21 +58,17 @@ class DivineVisitationEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
+        return event.getType() == GameEvent.EventType.CREATE_TOKEN;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent perm = ((EntersTheBattlefieldEvent) event).getTarget();
-        return perm != null
-                && perm.isCreature()
-                && perm instanceof PermanentToken
-                && perm.isControlledBy(source.getControllerId());
+        return event.getPlayerId().equals(source.getControllerId());
     }
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        game.addEffect(new CopyEffect(Duration.Custom, new AngelVigilanceToken(), event.getTargetId()), source);
+        event.setToken(new AngelVigilanceToken());
         return false;
     }
 

@@ -76,7 +76,7 @@ class GatherSpecimensReplacementEffect extends ReplacementEffectImpl {
                 }
             }
         }
-        if (event.getType() == GameEvent.EventType.CREATE_TOKEN && event.getFlag()) { // flag indicates if it's a creature token
+        if (event.getType() == GameEvent.EventType.CREATE_TOKEN && event.getToken().isCreature()) {
             Player controller = game.getPlayer(source.getControllerId());
             return controller != null && controller.hasOpponent(event.getPlayerId(), game);
         }
