@@ -66,12 +66,7 @@ class TargetCardInLibrarySharingLandType extends TargetCardInLibrary {
     private static final FilterCard filterBasicLandCard = new FilterCard("basic land card");
 
     static {
-        filterBasicLandCard.add(Predicates.or(
-                SubType.getLandTypes()
-                        .stream()
-                        .map(SubType::getPredicate)
-                        .collect(Collectors.toSet())
-        ));
+        filterBasicLandCard.add(CardType.LAND.getPredicate());
         filterBasicLandCard.add(SuperType.BASIC.getPredicate());
     }
 
