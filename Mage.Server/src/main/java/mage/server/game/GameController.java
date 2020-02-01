@@ -1192,7 +1192,7 @@ public class GameController implements GameCallback {
         List<String> usersInfo = new ArrayList<>();
         for (Map.Entry<UUID, UUID> entry : userPlayerMap.entrySet()) {
             Optional<User> user = UserManager.instance.getUser(entry.getKey());
-            user.ifPresent(u -> usersInfo.add(u.getName() + ": " + u.getPingInfo()));
+            user.ifPresent(u -> usersInfo.add("* " + u.getName() + ": " + u.getPingInfo()));
         }
         Collections.sort(usersInfo);
         usersInfo.add(0, "Players ping:");
@@ -1200,7 +1200,7 @@ public class GameController implements GameCallback {
         List<String> watchersinfo = new ArrayList<>();
         for (Map.Entry<UUID, GameSessionWatcher> entry : watchers.entrySet()) {
             Optional<User> user = UserManager.instance.getUser(entry.getValue().userId);
-            user.ifPresent(u -> watchersinfo.add(u.getName() + ": " + u.getPingInfo()));
+            user.ifPresent(u -> watchersinfo.add("* " + u.getName() + ": " + u.getPingInfo()));
         }
         Collections.sort(watchersinfo);
         if (watchersinfo.size() > 0) {

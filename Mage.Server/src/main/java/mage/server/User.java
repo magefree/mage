@@ -193,10 +193,11 @@ public class User {
     }
 
     public String getDisconnectDuration() {
-        long secondsDisconnected = getSecondsDisconnected();
-        int minutes = (int) secondsDisconnected / 60;
-        int seconds = (int) secondsDisconnected % 60;
-        return Integer.toString(minutes) + ':' + (seconds > 9 ? seconds : '0' + Integer.toString(seconds));
+        //long secondsDisconnected = getSecondsDisconnected();
+        //int minutes = (int) secondsDisconnected / 60;
+        //int seconds = (int) secondsDisconnected % 60;
+        //return Integer.toString(minutes) + ':' + (seconds > 9 ? seconds : '0' + Integer.toString(seconds));
+        return getSecondsDisconnected() + " secs";
     }
 
     public long getSecondsDisconnected() {
@@ -218,7 +219,11 @@ public class User {
             hours = minutes / 60;
             minutes = minutes - (hours * 60);
         }
-        return hours + ":" + (minutes > 9 ? Integer.toString(minutes) : '0' + Integer.toString(minutes));
+        String connTime = hours + ":" + (minutes > 9 ? Integer.toString(minutes) : '0' + Integer.toString(minutes));
+
+        int lastSecs = (int) SystemUtil.getDateDiff(lastActivity, new Date(), TimeUnit.SECONDS);
+
+        return " (online: " + connTime + "; seen: " + lastSecs + " sec ago)";
     }
 
     public void fireCallback(final ClientCallback call) {
