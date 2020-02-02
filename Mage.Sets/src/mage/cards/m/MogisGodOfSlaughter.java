@@ -77,8 +77,11 @@ class MogisGodOfSlaughterEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(game.getActivePlayerId());
-        if (player == null || game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, game.getActivePlayerId(), game) == 0) {
+        if (player == null) {
             return false;
+        }
+        if (game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, game.getActivePlayerId(), game) == 0) {
+            return player.damage(2, source.getSourceId(), game) > 0;
         }
         TargetPermanent target = new TargetControlledCreaturePermanent(1);
         target.setNotTarget(true);
