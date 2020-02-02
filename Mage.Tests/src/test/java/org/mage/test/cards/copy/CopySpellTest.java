@@ -77,6 +77,68 @@ public class CopySpellTest extends CardTestPlayerBase {
         assertAbility(playerB, "Silvercoat Lion", FlyingAbility.getInstance(), false);
     }
 
+    @Test
+    public void BonecrusherGiantChangeTargetsTo() {
+        addCard(Zone.BATTLEFIELD, playerA, "Bonecrusher Giant");
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears");
+        addCard(Zone.BATTLEFIELD, playerA, "Savannah Lions");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains");
+        addCard(Zone.HAND, playerA, "Barkshell Blessing");
+
+        castSpell(1, PhaseStep.UPKEEP, playerA, "Barkshell Blessing");
+        setChoice(playerA, "Yes");
+        setChoice(playerA, "Yes");
+        addTarget(playerA, "Grizzly Bears");
+        addTarget(playerA, "Bonecrusher Giant");
+
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertPowerToughness(playerA, "Bonecrusher Giant", 6, 5);
+        assertPowerToughness(playerA, "Grizzly Bears", 4, 4);
+        assertPowerToughness(playerA, "Savannah Lions", 2, 1);
+        assertLife(playerA, 18);
+    }
+
+    @Test
+    public void BonecrusherGiantChangeTargetsFrom() {
+        addCard(Zone.BATTLEFIELD, playerA, "Bonecrusher Giant");
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears");
+        addCard(Zone.BATTLEFIELD, playerA, "Savannah Lions");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains");
+        addCard(Zone.HAND, playerA, "Barkshell Blessing");
+
+        castSpell(1, PhaseStep.UPKEEP, playerA, "Barkshell Blessing");
+        setChoice(playerA, "Yes");
+        setChoice(playerA, "Yes");
+        addTarget(playerA, "Bonecrusher Giant");
+        addTarget(playerA, "Grizzly Bears");
+
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertPowerToughness(playerA, "Bonecrusher Giant", 6, 5);
+        assertPowerToughness(playerA, "Grizzly Bears", 4, 4);
+        assertPowerToughness(playerA, "Savannah Lions", 2, 1);
+        assertLife(playerA, 18);
+    }
+
+    @Test
+    public void BonecrusherGiantControl() {
+        addCard(Zone.BATTLEFIELD, playerA, "Bonecrusher Giant");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains");
+        addCard(Zone.HAND, playerA, "Barkshell Blessing");
+
+        castSpell(1, PhaseStep.UPKEEP, playerA, "Barkshell Blessing");
+        addTarget(playerA, "Bonecrusher Giant");
+
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertPowerToughness(playerA, "Bonecrusher Giant", 6, 5);
+        assertLife(playerA, 18);
+    }
+
     /*
      * Reported bug: "Silverfur Partisan and fellow wolves did not trigger off
      * of copies of Strength of Arms made by Zada, Hedron Grinder. Not sure
