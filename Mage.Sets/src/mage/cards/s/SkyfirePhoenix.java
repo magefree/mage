@@ -64,7 +64,7 @@ class SkyfirePhoenixTriggeredAbility extends SpellCastControllerTriggeredAbility
     public boolean checkTrigger(GameEvent event, Game game) {
         return super.checkTrigger(event, game) && game.getCommandersIds(
                 game.getPlayer(getControllerId()), CommanderCardType.COMMANDER_OR_OATHBREAKER
-        ).contains(event.getTargetId());
+        ).contains(event.getSourceId());
     }
 
     @Override
