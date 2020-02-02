@@ -136,4 +136,6 @@ public interface Target extends Serializable {
     void setTargetAmount(UUID targetId, int amount, Game game);
 
     Target withChooseHint(String chooseHint);
+
+    void setEventReporting(boolean shouldReport);
 }
