@@ -101,7 +101,7 @@ public class ScryfallImageSupportCards {
             add("7ED");
             add("APC");
             add("ODY");
-            // add("DKM"); // Deckmasters 2001
+            add("DKM");
             add("TOR");
             add("JUD");
             add("ONS");
