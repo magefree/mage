@@ -139,11 +139,13 @@ public class AttackPlaneswalkerTest extends CardTestPlayerBase {
 
         attack(2, playerB, "Grizzly Bears", "Kiora, the Crashing Wave");
         castSpell(2, PhaseStep.DECLARE_ATTACKERS, playerB, "Despark");
-        setChoice(playerB, "Kiora, the Crashing Wave");
+        addTarget(playerB, "Kiora, the Crashing Wave");
         block(2, playerA, "Grizzly Bears", "Grizzly Bears");
 
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
+        assertAllCommandsUsed();
 
         assertLife(playerA, 20);
         assertLife(playerB, 20);
