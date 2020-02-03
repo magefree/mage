@@ -79,20 +79,32 @@ public class CopySpellTest extends CardTestPlayerBase {
 
     @Test
     public void BonecrusherGiantChangeTargets() {
+        // 4/3 Creature
+        // Whenever Bonecrusher Giant becomes the target of a spell, Bonecrusher Giant deals 2 damage to that spell's
+        // controller.
         addCard(Zone.BATTLEFIELD, playerA, "Bonecrusher Giant");
+        // 2/2 Creature
         addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears");
+        // 2/1 Creature
         addCard(Zone.BATTLEFIELD, playerA, "Savannah Lions");
         addCard(Zone.BATTLEFIELD, playerA, "Plains");
+        // Target creature gets +2/+2 until end of turn.
+        // Conspire (As you cast this spell, you may tap two untapped creatures you control that share a color with it.
+        // When you do, copy it and you may choose a new target for the copy.)
         addCard(Zone.HAND, playerA, "Barkshell Blessing");
 
         castSpell(1, PhaseStep.UPKEEP, playerA, "Barkshell Blessing");
-        setChoice(playerA, "Yes");
-        setChoice(playerA, "Yes");
         addTarget(playerA, "Grizzly Bears");
+        setChoice(playerA, "Yes");
+        setChoice(playerA, "Grizzly Bears");
+        setChoice(playerA, "Savannah Lions");
+        setChoice(playerA, "Yes");
         addTarget(playerA, "Bonecrusher Giant");
 
-        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Bonecrusher Giant", 6, 5);
         assertPowerToughness(playerA, "Grizzly Bears", 4, 4);
