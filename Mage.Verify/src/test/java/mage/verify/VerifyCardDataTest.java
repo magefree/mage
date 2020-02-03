@@ -102,9 +102,11 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_COST, "KTK", "Erase");
         skipListAddName(SKIP_LIST_COST, "M13", "Erase");
         skipListAddName(SKIP_LIST_COST, "ULG", "Erase");
+        skipListAddName(SKIP_LIST_COST, "WC00", "Erase");
         skipListAddName(SKIP_LIST_COST, "H17", "Grimlock, Dinobot Leader");
         skipListAddName(SKIP_LIST_COST, "UST", "Everythingamajig");
         skipListAddName(SKIP_LIST_COST, "THB", "Anax, Hardened in the Forge"); // until it's been corrected in MTGJSON
+        skipListAddName(SKIP_LIST_COST, "ANA", "Shrine Keeper"); // until it's been corrected in MTGJSON
 
         // supertype
         skipListCreate(SKIP_LIST_SUPERTYPE);
