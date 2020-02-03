@@ -24,14 +24,12 @@ public class CenturionCommander extends Commander {
         banned.add("Emrakul, the Aeons Torn");
         banned.add("Emrakul, the Promised End");
         banned.add("Entomb");
-        banned.add("Erayo, Soratami Ascendant");
         banned.add("Falling Star");
         banned.add("Fastbond");
         banned.add("Food Chain");
         banned.add("Gaea's Cradle");
         banned.add("Gifts Ungiven");
         banned.add("Grim Monolith");
-        banned.add("Grindstone");
         banned.add("Hermit Druid");
         banned.add("High Tide");
         banned.add("Humility");
@@ -53,6 +51,7 @@ public class CenturionCommander extends Commander {
         banned.add("Natural Order");
         banned.add("Necropotence");
         banned.add("Oath of Druids");
+        banned.add("Parallax Tide");
         banned.add("Protean Hulk");
         banned.add("Sensei's Diving Top");
         banned.add("Serra Ascendant");
@@ -76,6 +75,7 @@ public class CenturionCommander extends Commander {
         bannedCommander.add("Edgar Markov");
         bannedCommander.add("Kess, Dissident Mage");
         bannedCommander.add("Rofellos, Llanowar Emissary");
+        bannedCommander.add("Erayo, Soratami Ascendant");
 
         bannedPartner.add("Rowan Kenrith");
         bannedPartner.add("Tymna the Weaver");
