@@ -65,6 +65,25 @@ public class ScryfallImageSupportCards {
             add("G99");
             add("G00");
             add("G01");
+            add("G02");
+            add("G03");
+            add("G04");
+            add("G05");
+            add("G06");
+            add("G07");
+            add("G08");
+            add("G09");
+            add("G10");
+            add("G11");
+            add("J12");
+            add("J13");
+            add("J14");
+            add("J15");
+            add("J16");
+            add("J17");
+            add("J18");
+            add("J19");
+            add("J20");
 
             // Arena League
             add("PARL");
@@ -104,6 +123,7 @@ public class ScryfallImageSupportCards {
             add("DKM");
             add("TOR");
             add("JUD");
+            add("PRM");
             add("ONS");
             add("LGN");
             add("SCG");
