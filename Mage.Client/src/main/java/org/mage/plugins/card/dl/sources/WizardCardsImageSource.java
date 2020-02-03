@@ -350,7 +350,7 @@ public enum WizardCardsImageSource implements CardImageSource {
         setsAliases.put("INV", "Invasion");
         setsAliases.put("ISD", "Innistrad");
         setsAliases.put("JOU", "Journey into Nyx");
-        setsAliases.put("JR", "Judge Promo");
+        // setsAliases.put("JR", "Judge Promo");  // TODO: Set was split into the individual sets as listed on Scryfall
         setsAliases.put("JUD", "Judgment");
         setsAliases.put("KLD", "Kaladesh");
         setsAliases.put("KTK", "Khans of Tarkir");

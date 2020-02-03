@@ -1502,9 +1502,34 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         Map<String, Integer> pimpedSets = new HashMap<>();
         Map<CardView, Integer> pimpedCards = new HashMap<>();
         pimpedSets.put("CP", 1);
-        pimpedSets.put("JR", 1);
         pimpedSets.put("MPS", 1);
         pimpedSets.put("CLASH", 1);
+
+        // Judge Reward Gifts
+        pimpedSets.put("JGP", 1);
+        pimpedSets.put("G99", 1);
+        pimpedSets.put("G00", 1);
+        pimpedSets.put("G01", 1);
+        pimpedSets.put("G02", 1);
+        pimpedSets.put("G03", 1);
+        pimpedSets.put("G04", 1);
+        pimpedSets.put("G05", 1);
+        pimpedSets.put("G06", 1);
+        pimpedSets.put("G07", 1);
+        pimpedSets.put("G08", 1);
+        pimpedSets.put("G09", 1);
+        pimpedSets.put("G10", 1);
+        pimpedSets.put("G11", 1);
+        pimpedSets.put("J12", 1);
+        pimpedSets.put("J13", 1);
+        pimpedSets.put("J14", 1);
+        pimpedSets.put("J15", 1);
+        pimpedSets.put("J16", 1);
+        pimpedSets.put("J17", 1);
+        pimpedSets.put("J18", 1);
+        pimpedSets.put("J19", 1);
+        pimpedSets.put("J20", 1);
+
         // Arena League
         pimpedSets.put("PARL", 1);
         pimpedSets.put("PAL99", 1);
@@ -1515,6 +1540,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         pimpedSets.put("PAL04", 1);
         pimpedSets.put("PAL05", 1);
         pimpedSets.put("PAL06", 1);
+
         pimpedSets.put("UGIN", 1);
         pimpedSets.put("WMCQ", 1);
         pimpedSets.put("PALP", 1);
