@@ -3653,17 +3653,18 @@ public class TestPlayer implements Player {
     @Override
     public SpellAbility chooseAbilityForCast(Card card, Game game, boolean noMana) {
         String allInfo = "";
+
+        Map<UUID, ActivatedAbility> useable = PlayerImpl.getSpellAbilities(this.getId(), card, game.getState().getZone(card.getId()), game);
+        allInfo = useable.values().stream().map(Object::toString).collect(Collectors.joining("\n"));
+
         assertAliasSupportInChoices(false);
         if (!choices.isEmpty()) {
-            Map<UUID, ActivatedAbility> useable = PlayerImpl.getSpellAbilities(this.getId(), card, game.getState().getZone(card.getId()), game);
             for (ActivatedAbility ability : useable.values()) {
                 if (ability.toString().startsWith(choices.get(0))) {
                     choices.remove(0);
                     return (SpellAbility) ability;
                 }
             }
-
-            allInfo = useable.values().stream().map(Object::toString).collect(Collectors.joining("\n"));
 
             // TODO: enable fail checks and fix tests
             //Assert.fail("Wrong choice");
