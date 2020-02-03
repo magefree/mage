@@ -145,7 +145,7 @@ public class CopyPasteImageSourceDialog extends JDialog {
                 txtDeckList.setMinimumSize(new Dimension(250, 400));
                 txtDeckList.setPreferredSize(new Dimension(550, 400));
 
-                txtDeckList.setText("// Example follows. \nNB: **DELETE ALL TEXT AND GO SELECT THIS SOURCE AGAIN TO SEE THE NAMES CARDS YOU'RE MISSING IMAGES FOR!!!***\n\"SWS/Might of the Wild\", \"http://i.imgur.com/eNXOdxp.jpg\"\n\"PTC/Wolf of Devil's Breach\", \"https://img.scryfall.com/cards/large/en/psoi/192s.jpg\"\n\nExpected columns: Name of Card (Set Trigraph\\Name), URL of image\n\n\n");
+                txtDeckList.setText("// Example follows. \nNB: **DELETE ALL TEXT AND GO SELECT THIS SOURCE AGAIN TO SEE THE NAMES CARDS YOU'RE MISSING IMAGES FOR!!!***\n\"SWS/Might of the Wild\", \"http://i.imgur.com/eNXOdxp.jpg\"\n\"PPRE/Wolf of Devil's Breach\", \"https://img.scryfall.com/cards/large/en/psoi/192s.jpg\"\n\nExpected columns: Name of Card (Set Trigraph\\Name), URL of image\n\n\n");
 
                 JScrollPane txtScrollableDeckList = new JScrollPane(txtDeckList);
                 panel3.add(txtScrollableDeckList, new GridBagConstraints(0, 0, 1, 1, 1.0, 0.0,

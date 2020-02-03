@@ -18,7 +18,7 @@ public enum GrabbagImageSource implements CardImageSource {
 
     private static final Set<String> supportedSets = new LinkedHashSet<String>() {
         {
-            add("PTC");
+            add("PPRE");
             add("SWS");
         }
     };
@@ -76,15 +76,15 @@ public enum GrabbagImageSource implements CardImageSource {
             return;
         }
         singleLinks = new HashMap<>();
-        singleLinks.put("PTC/Arbiter of the Ideal", "MTG/BNG/en/promo/ArbiterOfTheIdeal.jpg");
-        singleLinks.put("PTC/Courser of Kruphix", "MTG/BNG/en/promo/CourserOfKruphix.jpg");
-        singleLinks.put("PTC/Eater of Hope", "MTG/BNG/en/promo/EaterOfHope.jpg");
-        singleLinks.put("PTC/Fated Return", "MTG/BNG/en/promo/FatedReturn.jpg");
-        singleLinks.put("PTC/Forgestoker Dragon", "MTG/BNG/en/promo/ForgestokerDragon.jpg");
-        singleLinks.put("PTC/Nessian Wilds Ravager", "MTG/BNG/en/promo/NessianWildsRavager.jpg");
-        singleLinks.put("PTC/Pain Seer", "MTG/BNG/en/promo/PainSeer.jpg");
-        singleLinks.put("PTC/Silent Sentinel", "MTG/BNG/en/promo/SilentSentinel.jpg");
-        singleLinks.put("PTC/Tromokratis", "MTG/BNG/en/promo/Tromokratis.jpg");
+        singleLinks.put("PPRE/Arbiter of the Ideal", "MTG/BNG/en/promo/ArbiterOfTheIdeal.jpg");
+        singleLinks.put("PPRE/Courser of Kruphix", "MTG/BNG/en/promo/CourserOfKruphix.jpg");
+        singleLinks.put("PPRE/Eater of Hope", "MTG/BNG/en/promo/EaterOfHope.jpg");
+        singleLinks.put("PPRE/Fated Return", "MTG/BNG/en/promo/FatedReturn.jpg");
+        singleLinks.put("PPRE/Forgestoker Dragon", "MTG/BNG/en/promo/ForgestokerDragon.jpg");
+        singleLinks.put("PPRE/Nessian Wilds Ravager", "MTG/BNG/en/promo/NessianWildsRavager.jpg");
+        singleLinks.put("PPRE/Pain Seer", "MTG/BNG/en/promo/PainSeer.jpg");
+        singleLinks.put("PPRE/Silent Sentinel", "MTG/BNG/en/promo/SilentSentinel.jpg");
+        singleLinks.put("PPRE/Tromokratis", "MTG/BNG/en/promo/Tromokratis.jpg");
 
         singleLinks.put("SWS/AAT-1", "CqmDY8V.jpg");
         singleLinks.put("SWS/Acklay of the Arena", "ESVRm6F.jpg");

@@ -25,10 +25,12 @@ public final class MtgJson {
 
     public static final boolean MTGJSON_IGNORE_NEW_PROPERTIES = true; // set it to false for full mtgjson checks and research (new fields finds or mtgjson updates)
 
+    // TODO: MtgJson now seems to use upper case set codes only.
+    //  Review the ones beginning with a lower case "p" and remove the redundant entries.
     static {
         mtgJsonToXMageCodes.put("pWCQ", "WMCQ");
         mtgJsonToXMageCodes.put("pSUS", "SUS");
-        mtgJsonToXMageCodes.put("pPRE", "PTC");
+        mtgJsonToXMageCodes.put("pPRE", "PPRE");
         mtgJsonToXMageCodes.put("pMPR", "MPRP");
         mtgJsonToXMageCodes.put("pMEI", "MBP");
         mtgJsonToXMageCodes.put("pGTW", "GRC"); // pGTW - Gateway = GRC (WPN + Gateway in one inner set)

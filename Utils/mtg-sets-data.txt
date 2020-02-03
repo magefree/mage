@@ -168,7 +168,7 @@ Premium Deck Series: Graveborn|PD3|
 Planar Chaos|PLC|
 Planeshift|PLS|
 Portal|POR|
-Prerelease Events|PTC|
+Prerelease Events|PPRE|
 Portal Three Kingdoms|PTK|
 Ravnica Allegiance|RNA|
 Ravnica: City of Guilds|RAV|

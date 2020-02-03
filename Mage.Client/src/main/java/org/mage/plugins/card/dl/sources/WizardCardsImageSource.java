@@ -55,7 +55,7 @@ public enum WizardCardsImageSource implements CardImageSource {
         languageAliases.put(CardLanguage.CHINES_TRADITION, "Chinese Traditional ");
 
         supportedSets = new LinkedHashSet<>();
-        // supportedSets.add("PTC"); // Prerelease Events
+        // supportedSets.add("PPRE"); // Prerelease Events
         supportedSets.add("LEA");
         supportedSets.add("LEB");
         supportedSets.add("2ED");
@@ -395,7 +395,7 @@ public enum WizardCardsImageSource implements CardImageSource {
         setsAliases.put("PLS", "Planeshift");
         setsAliases.put("PO2", "Portal Second Age");
         setsAliases.put("POR", "Portal");
-        setsAliases.put("PTC", "Prerelease Events");
+        setsAliases.put("PPRE", "Prerelease Events");
         setsAliases.put("PTK", "Portal Three Kingdoms");
         setsAliases.put("RAV", "Ravnica: City of Guilds");
         setsAliases.put("ROE", "Rise of the Eldrazi");

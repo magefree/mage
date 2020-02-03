@@ -28,7 +28,7 @@ public class ScryfallImageSupportCards {
     private static final Set<String> supportedSets = new ArraySet<String>() {
         {
             // xmage set codes
-            add("PTC");
+            add("PPRE");
             add("LEA");
             add("LEB");
             add("2ED");

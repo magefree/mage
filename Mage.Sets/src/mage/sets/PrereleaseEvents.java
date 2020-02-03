@@ -13,7 +13,7 @@ public final class PrereleaseEvents extends ExpansionSet {
     }
 
     private PrereleaseEvents() {
-        super("Prerelease Events", "PTC", ExpansionSet.buildDate(1990, 1, 1), SetType.PROMOTIONAL);
+        super("Prerelease Events", "PPRE", ExpansionSet.buildDate(1990, 1, 1), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = true;
 
