@@ -104,6 +104,7 @@ public class ScryfallImageSupportCards {
             add("PLGM");
             add("OVNT"); // Vintage Championship
             add("PREL"); // Release Events
+            add("PJSE"); // Junior Series Europe
             
             add("MGB");
             add("ULG");
