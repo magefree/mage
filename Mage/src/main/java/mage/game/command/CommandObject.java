@@ -2,7 +2,6 @@
 package mage.game.command;
 
 import java.util.UUID;
-
 import mage.MageObject;
 import mage.game.Controllable;
 

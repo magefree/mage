@@ -1,8 +1,6 @@
 
 package mage.abilities.costs;
 
-import java.util.Iterator;
-
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
@@ -16,6 +14,8 @@ import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
+
+import java.util.Iterator;
 
 /**
  * @author LevelX2

@@ -3,7 +3,6 @@
 package mage.cards;
 
 import java.util.UUID;
-
 import mage.constants.CardType;
 
 /**

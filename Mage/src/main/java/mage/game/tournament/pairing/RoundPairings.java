@@ -2,11 +2,11 @@
 
 package mage.game.tournament.pairing;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import mage.game.tournament.TournamentPairing;
 import mage.game.tournament.TournamentPlayer;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *

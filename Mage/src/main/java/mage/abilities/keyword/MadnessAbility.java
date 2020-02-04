@@ -1,7 +1,6 @@
 package mage.abilities.keyword;
 
 import java.util.UUID;
-
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;

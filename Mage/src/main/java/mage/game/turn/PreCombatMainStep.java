@@ -2,7 +2,6 @@
 package mage.game.turn;
 
 import java.util.UUID;
-
 import mage.constants.PhaseStep;
 import mage.constants.SubType;
 import mage.counters.CounterType;

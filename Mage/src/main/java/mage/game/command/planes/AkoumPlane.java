@@ -3,7 +3,6 @@ package mage.game.command.planes;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MainPhaseStackEmptyCondition;

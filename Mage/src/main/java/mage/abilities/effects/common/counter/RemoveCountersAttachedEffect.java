@@ -1,8 +1,6 @@
 
 package mage.abilities.effects.common.counter;
 
-import java.util.Locale;
-
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
@@ -12,6 +10,8 @@ import mage.counters.Counter;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
+
+import java.util.Locale;
 
 /**
  *

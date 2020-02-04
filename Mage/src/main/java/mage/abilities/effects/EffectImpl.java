@@ -1,15 +1,15 @@
 package mage.abilities.effects;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-
 import mage.abilities.MageSingleton;
 import mage.abilities.Mode;
 import mage.constants.EffectType;
 import mage.constants.Outcome;
 import mage.target.targetpointer.FirstTargetPointer;
 import mage.target.targetpointer.TargetPointer;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com

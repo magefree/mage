@@ -4,7 +4,6 @@ package mage.watchers.common;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
-
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;

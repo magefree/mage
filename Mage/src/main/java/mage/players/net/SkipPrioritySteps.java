@@ -2,7 +2,6 @@
 package mage.players.net;
 
 import java.io.Serializable;
-
 import mage.constants.PhaseStep;
 
 /**

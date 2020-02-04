@@ -1,38 +1,22 @@
 package mage.cards.repository;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import org.apache.log4j.Logger;
-
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
-
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
-import mage.cards.AdventureCard;
-import mage.cards.Card;
-import mage.cards.CardGraphicInfo;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.FrameStyle;
-import mage.cards.SplitCard;
+import mage.cards.*;
 import mage.cards.mock.MockCard;
 import mage.cards.mock.MockSplitCard;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.SpellAbilityType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.util.CardUtil;
 import mage.util.SubTypeList;
+import org.apache.log4j.Logger;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author North

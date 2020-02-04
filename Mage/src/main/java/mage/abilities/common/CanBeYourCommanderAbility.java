@@ -2,7 +2,6 @@
 package mage.abilities.common;
 
 import java.io.ObjectStreamException;
-
 import mage.abilities.MageSingleton;
 import mage.abilities.StaticAbility;
 import mage.abilities.effects.common.InfoEffect;

@@ -1,10 +1,11 @@
 package mage.cards.decks.importer;
 
-import static org.junit.Assert.assertEquals;
-
+import mage.cards.decks.DeckCardLists;
 import org.junit.Test;
 
-import mage.cards.decks.DeckCardLists;
+import java.io.File;
+
+import static org.junit.Assert.*;
 
 public class MtgaImporterTest {
 

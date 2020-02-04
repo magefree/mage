@@ -1,12 +1,15 @@
 package mage.cards.decks.importer;
 
+import org.apache.log4j.Logger;
 import java.io.File;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.Scanner;
 
-import org.apache.log4j.Logger;
 
 import mage.cards.decks.DeckCardLists;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
 
 public abstract class DeckImporter {
 

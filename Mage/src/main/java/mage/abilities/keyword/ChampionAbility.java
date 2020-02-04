@@ -4,7 +4,6 @@ package mage.abilities.keyword;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.UUID;
-
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.StaticAbility;

@@ -1,6 +1,6 @@
 package mage.abilities.hint;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.HashSet;
 import java.util.List;
 

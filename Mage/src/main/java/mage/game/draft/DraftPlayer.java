@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
-
 import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.players.Player;

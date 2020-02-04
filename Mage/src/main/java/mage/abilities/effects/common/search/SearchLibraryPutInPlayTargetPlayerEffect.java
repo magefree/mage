@@ -7,7 +7,6 @@ package mage.abilities.effects.common.search;
 
 import java.util.List;
 import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.effects.SearchEffect;
 import mage.cards.CardsImpl;

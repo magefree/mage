@@ -1,11 +1,11 @@
 package mage.game.events;
 
-import java.util.Set;
-import java.util.UUID;
-
 import mage.cards.Card;
 import mage.constants.Zone;
 import mage.game.permanent.PermanentToken;
+
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * @author LevelX2

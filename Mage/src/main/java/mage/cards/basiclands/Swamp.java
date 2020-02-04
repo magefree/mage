@@ -3,7 +3,6 @@
 package mage.cards.basiclands;
 
 import java.util.UUID;
-
 import mage.ObjectColor;
 import mage.abilities.mana.BlackManaAbility;
 import mage.cards.Card;

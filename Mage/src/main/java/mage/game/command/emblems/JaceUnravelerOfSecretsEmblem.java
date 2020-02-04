@@ -1,7 +1,5 @@
 package mage.game.command.emblems;
 
-import java.util.List;
-
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.effects.Effect;
@@ -14,6 +12,8 @@ import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.SpellsCastWatcher;
+
+import java.util.List;
 
 /**
  * @author spjspj

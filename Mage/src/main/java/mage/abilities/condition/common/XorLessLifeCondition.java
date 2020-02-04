@@ -1,13 +1,13 @@
 
 package mage.abilities.condition.common;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.game.Game;
 import mage.players.Player;
 import mage.players.PlayerList;
+
+import java.util.UUID;
 
 /**
  *

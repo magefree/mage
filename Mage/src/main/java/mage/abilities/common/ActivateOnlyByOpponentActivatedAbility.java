@@ -4,8 +4,8 @@ package mage.abilities.common;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.Effect;
-import mage.constants.TargetController;
 import mage.constants.Zone;
+import mage.constants.TargetController;
 
 /**
  *

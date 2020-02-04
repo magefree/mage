@@ -2,7 +2,6 @@ package mage.abilities.effects.common.cost;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
-
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;

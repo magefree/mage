@@ -1,9 +1,9 @@
 package mage.cards.repository;
 
+import mage.game.events.ExternalEvent;
+
 import java.io.Serializable;
 import java.util.EventObject;
-
-import mage.game.events.ExternalEvent;
 
 /**
  * @author JayDi85

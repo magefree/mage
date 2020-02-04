@@ -1,9 +1,9 @@
 package mage.game.mulligan;
 
-import java.util.UUID;
-
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 public class ParisMulligan extends Mulligan {
 

@@ -1,11 +1,11 @@
 package mage.util.functions;
 
-import java.io.Serializable;
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.io.Serializable;
+import java.util.UUID;
 
 /**
  * @author noxx

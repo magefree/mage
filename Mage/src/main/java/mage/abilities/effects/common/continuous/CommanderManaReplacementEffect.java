@@ -2,7 +2,6 @@
 package mage.abilities.effects.common.continuous;
 
 import java.util.UUID;
-
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;

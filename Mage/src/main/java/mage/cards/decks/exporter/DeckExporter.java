@@ -1,14 +1,13 @@
 package mage.cards.decks.exporter;
 
+import mage.cards.decks.DeckCardLists;
+import mage.cards.decks.DeckFormats;
+
+import javax.swing.filechooser.FileFilter;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-
-import javax.swing.filechooser.FileFilter;
-
-import mage.cards.decks.DeckCardLists;
-import mage.cards.decks.DeckFormats;
 
 public abstract class DeckExporter {
 

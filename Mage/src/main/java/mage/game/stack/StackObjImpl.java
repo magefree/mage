@@ -1,8 +1,5 @@
 package mage.game.stack;
 
-import java.util.Set;
-import java.util.UUID;
-
 import mage.MageObject;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
@@ -16,6 +13,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetAmount;
+
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * @author LevelX2

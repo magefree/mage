@@ -3,7 +3,6 @@
 package mage.filter.predicate.other;
 
 import java.util.UUID;
-
 import mage.cards.Card;
 import mage.filter.Filter;
 import mage.filter.predicate.Predicate;

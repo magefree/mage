@@ -2,7 +2,6 @@ package mage.filter;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;

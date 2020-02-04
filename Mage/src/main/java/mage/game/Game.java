@@ -1,16 +1,8 @@
 package mage.game;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
-
 import mage.MageItem;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -26,12 +18,7 @@ import mage.cards.Cards;
 import mage.cards.MeldCard;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
-import mage.constants.CommanderCardType;
-import mage.constants.Duration;
-import mage.constants.MultiplayerAttackOption;
-import mage.constants.PlayerAction;
-import mage.constants.RangeOfInfluence;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.Counters;
 import mage.game.combat.Combat;
 import mage.game.command.Commander;

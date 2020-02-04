@@ -1,10 +1,10 @@
 package mage.abilities.keyword;
 
-import java.io.ObjectStreamException;
-
 import mage.abilities.MageSingleton;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.constants.Zone;
+
+import java.io.ObjectStreamException;
 
 /**
  * Hexproof from Monocolored (This creature or player can't be the target of monocolored

@@ -2,7 +2,6 @@ package mage.abilities.effects.common;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;

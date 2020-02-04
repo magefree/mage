@@ -1,13 +1,12 @@
 package mage.cards.repository;
 
-import java.util.Date;
-
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
-
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
+
+import java.util.Date;
 
 /**
  * @author North

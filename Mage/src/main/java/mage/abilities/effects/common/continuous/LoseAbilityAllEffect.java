@@ -3,7 +3,6 @@ package mage.abilities.effects.common.continuous;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.UUID;
-
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;

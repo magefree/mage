@@ -2,7 +2,6 @@
 package mage.abilities.keyword;
 
 import java.util.Iterator;
-
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;

@@ -1,7 +1,6 @@
 package mage.abilities.keyword;
 
 import java.util.UUID;
-
 import mage.abilities.common.BecomesBlockedTriggeredAbility;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.game.Game;

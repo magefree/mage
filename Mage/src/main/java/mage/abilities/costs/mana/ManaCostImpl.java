@@ -1,9 +1,5 @@
 package mage.abilities.costs.mana;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
@@ -17,6 +13,10 @@ import mage.game.Game;
 import mage.players.ManaPool;
 import mage.players.Player;
 import mage.util.ManaUtil;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 public abstract class ManaCostImpl extends CostImpl implements ManaCost {
 

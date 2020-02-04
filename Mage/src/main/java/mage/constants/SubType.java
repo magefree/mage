@@ -1,14 +1,14 @@
 package mage.constants;
 
-import java.util.Arrays;
-import java.util.EnumSet;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import mage.MageObject;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.util.SubTypeList;
+
+import java.util.Arrays;
+import java.util.EnumSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public enum SubType {
 

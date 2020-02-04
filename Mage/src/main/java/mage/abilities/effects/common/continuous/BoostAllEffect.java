@@ -2,7 +2,6 @@
 package mage.abilities.effects.common.continuous;
 
 import java.util.Iterator;
-
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;

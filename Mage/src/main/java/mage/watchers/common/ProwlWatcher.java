@@ -1,13 +1,6 @@
 
 package mage.watchers.common;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
-
 import mage.abilities.keyword.ChangelingAbility;
 import mage.constants.SubType;
 import mage.constants.WatcherScope;
@@ -17,6 +10,9 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.watchers.Watcher;
+
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * Watcher stores with which creature subtypes a player made combat damage to

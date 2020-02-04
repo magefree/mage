@@ -1,11 +1,7 @@
 
 package mage.abilities.keyword;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;

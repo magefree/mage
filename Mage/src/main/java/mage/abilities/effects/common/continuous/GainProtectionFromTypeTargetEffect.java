@@ -2,9 +2,9 @@
 
 package mage.abilities.effects.common.continuous;
 
+import mage.constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.keyword.ProtectionAbility;
-import mage.constants.Duration;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;

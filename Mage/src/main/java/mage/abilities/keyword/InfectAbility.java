@@ -2,11 +2,11 @@
 
 package mage.abilities.keyword;
 
-import java.io.ObjectStreamException;
-
+import mage.constants.Zone;
 import mage.abilities.MageSingleton;
 import mage.abilities.StaticAbility;
-import mage.constants.Zone;
+
+import java.io.ObjectStreamException;
 
 /**
  *   702.87. Infect

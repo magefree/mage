@@ -1,9 +1,5 @@
 package mage.abilities.mana;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
@@ -17,6 +13,10 @@ import mage.constants.Zone;
 import mage.filter.FilterMana;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author LevelX2

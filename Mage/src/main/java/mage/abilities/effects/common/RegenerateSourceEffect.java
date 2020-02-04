@@ -2,10 +2,10 @@
 
 package mage.abilities.effects.common;
 
-import mage.abilities.Ability;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.abilities.Ability;
+import mage.abilities.effects.ReplacementEffectImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;

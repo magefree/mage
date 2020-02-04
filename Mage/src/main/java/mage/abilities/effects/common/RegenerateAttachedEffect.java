@@ -3,7 +3,6 @@ package mage.abilities.effects.common;
 
 import java.util.Locale;
 import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.constants.AttachmentType;

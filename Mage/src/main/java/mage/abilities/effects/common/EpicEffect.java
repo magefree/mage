@@ -5,7 +5,6 @@
 package mage.abilities.effects.common;
 
 import java.util.Objects;
-
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;

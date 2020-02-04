@@ -3,7 +3,6 @@ package mage.abilities.keyword;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;

@@ -1,11 +1,11 @@
 package mage.choices;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import mage.MageObject;
 import mage.Mana;
 import mage.ObjectColor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author BetaSteward_at_googlemail.com, JayDi85

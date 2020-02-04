@@ -4,10 +4,9 @@ package mage.game.permanent.token;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
+import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.keyword.DeathtouchAbility;
-import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**

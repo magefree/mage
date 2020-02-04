@@ -1,9 +1,5 @@
 package mage.game.mulligan;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.Outcome;
@@ -12,6 +8,10 @@ import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public class LondonMulligan extends Mulligan {
 

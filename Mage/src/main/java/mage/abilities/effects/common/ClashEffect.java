@@ -1,7 +1,5 @@
 package mage.abilities.effects.common;
 
-import java.io.ObjectStreamException;
-
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.MageSingleton;
@@ -19,6 +17,8 @@ import mage.players.Player;
 import mage.players.PlayerList;
 import mage.target.Target;
 import mage.target.common.TargetOpponent;
+
+import java.io.ObjectStreamException;
 
 /**
  * 1. The controller of the spell or ability chooses an opponent. (This doesn't

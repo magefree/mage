@@ -2,7 +2,6 @@ package mage.abilities.mana;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import mage.Mana;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;

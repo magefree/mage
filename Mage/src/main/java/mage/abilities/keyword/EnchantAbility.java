@@ -1,8 +1,8 @@
 
 package mage.abilities.keyword;
 
-import mage.abilities.StaticAbility;
 import mage.constants.Zone;
+import mage.abilities.StaticAbility;
 
 /**
  *

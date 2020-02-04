@@ -1,7 +1,6 @@
 package mage.abilities.effects.keyword;
 
 import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;

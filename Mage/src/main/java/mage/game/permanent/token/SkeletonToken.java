@@ -5,8 +5,8 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
 import mage.constants.SubType;
+import mage.constants.ColoredManaSymbol;
 import mage.constants.Zone;
 
 public final class SkeletonToken extends TokenImpl {

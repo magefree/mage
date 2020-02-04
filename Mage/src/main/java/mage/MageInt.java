@@ -1,10 +1,10 @@
 package mage;
 
-import java.io.Serializable;
-import java.util.Objects;
-
 import mage.util.CardUtil;
 import mage.util.Copyable;
+
+import java.io.Serializable;
+import java.util.Objects;
 
 public class MageInt implements Serializable, Copyable<MageInt> {
 

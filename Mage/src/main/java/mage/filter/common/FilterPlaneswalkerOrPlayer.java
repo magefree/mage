@@ -4,7 +4,6 @@ package mage.filter.common;
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.UUID;
-
 import mage.filter.FilterImpl;
 import mage.filter.FilterPlayer;
 import mage.filter.predicate.Predicate;

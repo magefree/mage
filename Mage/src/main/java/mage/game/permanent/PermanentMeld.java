@@ -2,7 +2,6 @@
 package mage.game.permanent;
 
 import java.util.UUID;
-
 import mage.cards.Card;
 import mage.game.Game;
 

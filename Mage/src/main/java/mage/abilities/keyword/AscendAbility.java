@@ -1,11 +1,10 @@
 
 package mage.abilities.keyword;
 
-import static mage.abilities.keyword.AscendAbility.ASCEND_RULE;
-
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
+import static mage.abilities.keyword.AscendAbility.ASCEND_RULE;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;

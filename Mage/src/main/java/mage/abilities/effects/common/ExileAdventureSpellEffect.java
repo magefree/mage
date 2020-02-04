@@ -1,7 +1,5 @@
 package mage.abilities.effects.common;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.MageSingleton;
 import mage.abilities.effects.AsThoughEffectImpl;
@@ -18,6 +16,8 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  * @author phulin

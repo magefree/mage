@@ -2,7 +2,6 @@
 package mage.abilities;
 
 import java.util.UUID;
-
 import mage.game.Game;
 import mage.game.events.GameEvent;
 

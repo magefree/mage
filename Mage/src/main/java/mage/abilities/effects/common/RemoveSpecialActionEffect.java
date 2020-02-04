@@ -3,11 +3,10 @@
 package mage.abilities.effects.common;
 
 import java.util.UUID;
-
+import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.SpecialAction;
 import mage.abilities.effects.OneShotEffect;
-import mage.constants.Outcome;
 import mage.game.Game;
 
 /**

@@ -5,9 +5,6 @@
  */
 package mage.abilities.effects.mana;
 
-import java.util.List;
-import java.util.UUID;
-
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -18,6 +15,10 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author LevelX2

@@ -5,8 +5,6 @@
  */
 package mage.abilities.effects.common;
 
-import java.util.stream.Collectors;
-
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -18,6 +16,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
+
+import java.util.stream.Collectors;
 
 /**
  * @author fireshoes

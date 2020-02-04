@@ -1,13 +1,13 @@
 package mage.filter.predicate.permanent;
 
-import java.util.UUID;
-
 import mage.constants.TargetController;
 import mage.filter.predicate.ObjectPlayer;
 import mage.filter.predicate.ObjectPlayerPredicate;
 import mage.game.Controllable;
 import mage.game.Game;
 import mage.watchers.common.PlayerDamagedBySourceWatcher;
+
+import java.util.UUID;
 
 /**
  * @author LevelX2

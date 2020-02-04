@@ -1,13 +1,13 @@
 
 
 package mage.game.permanent.token;
+import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TrampleAbility;
-import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.TargetController;
 
 /**

@@ -2,7 +2,6 @@
 package mage.abilities.effects.common.ruleModifying;
 
 import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.constants.Duration;

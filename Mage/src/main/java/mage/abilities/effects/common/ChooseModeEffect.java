@@ -4,7 +4,6 @@ package mage.abilities.effects.common;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.choices.Choice;

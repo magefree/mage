@@ -1,8 +1,5 @@
 package mage.abilities.effects.mana;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.ManaEffect;
@@ -11,6 +8,9 @@ import mage.choices.ChoiceColor;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author LevelX2

@@ -4,15 +4,12 @@ package mage.abilities.keyword;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
-import org.apache.log4j.Logger;
-
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
+import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
 import mage.game.Game;
@@ -20,6 +17,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.target.targetpointer.FixedTargets;
+import org.apache.log4j.Logger;
 
 public class MyriadAbility extends AttacksTriggeredAbility {
 

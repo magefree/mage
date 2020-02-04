@@ -1,7 +1,5 @@
 package mage.constants;
 
-import java.util.UUID;
-
 import mage.cards.Card;
 import mage.filter.predicate.ObjectPlayer;
 import mage.filter.predicate.ObjectPlayerPredicate;
@@ -10,6 +8,8 @@ import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Controllable;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  * @author North

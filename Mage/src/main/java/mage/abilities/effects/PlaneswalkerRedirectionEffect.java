@@ -3,7 +3,6 @@ package mage.abilities.effects;
 
 import java.util.List;
 import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.constants.Duration;
 import mage.constants.Outcome;

@@ -1,11 +1,10 @@
 
 package mage.watchers;
 
-import org.apache.log4j.Logger;
-
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.game.Game;
+import org.apache.log4j.Logger;
 
 /**
  *

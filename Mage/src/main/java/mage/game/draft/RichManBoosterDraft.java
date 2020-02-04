@@ -4,11 +4,9 @@ package mage.game.draft;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
-
-import org.apache.log4j.Logger;
-
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
+import org.apache.log4j.Logger;
 
 /**
  *

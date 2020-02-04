@@ -30,7 +30,6 @@
 package mage.abilities.effects.common.continuous;
 
 import java.util.UUID;
-
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;

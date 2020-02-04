@@ -3,7 +3,6 @@ package mage.filter;
 
 import java.io.Serializable;
 import java.util.List;
-
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 

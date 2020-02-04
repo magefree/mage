@@ -2,7 +2,6 @@ package mage.abilities.keyword;
 
 import java.util.ArrayList;
 import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
 import mage.abilities.common.DiesTriggeredAbility;

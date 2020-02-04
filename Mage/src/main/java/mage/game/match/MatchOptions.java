@@ -1,12 +1,6 @@
 
 package mage.game.match;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import mage.constants.MatchTimeLimit;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
@@ -14,6 +8,12 @@ import mage.constants.SkillLevel;
 import mage.game.mulligan.MulliganType;
 import mage.game.result.ResultProtos;
 import mage.players.PlayerType;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  *

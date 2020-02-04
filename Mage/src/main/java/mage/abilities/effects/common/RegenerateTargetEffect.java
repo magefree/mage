@@ -2,7 +2,6 @@
 package mage.abilities.effects.common;
 
 import java.util.Locale;
-
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ReplacementEffectImpl;

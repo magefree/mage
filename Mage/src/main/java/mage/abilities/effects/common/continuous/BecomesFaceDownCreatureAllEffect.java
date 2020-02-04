@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-
 import mage.MageObjectReference;
 import mage.ObjectColor;
 import mage.abilities.Ability;

@@ -1,19 +1,13 @@
 package mage.cards.decks.exporter;
 
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-
-import javax.swing.filechooser.FileFilter;
-
 import com.google.common.collect.ImmutableMap;
-
 import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.DeckFileFilter;
+
+import javax.swing.filechooser.FileFilter;
+import java.io.PrintWriter;
+import java.util.*;
 
 /**
  * @author JayDi85

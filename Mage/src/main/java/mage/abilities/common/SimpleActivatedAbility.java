@@ -1,12 +1,12 @@
 
 package mage.abilities.common;
 
+import mage.constants.Zone;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.Effect;
-import mage.constants.Zone;
 
 /**
  *

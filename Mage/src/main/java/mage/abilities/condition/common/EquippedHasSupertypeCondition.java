@@ -1,14 +1,14 @@
 
 package mage.abilities.condition.common;
 
-import java.util.EnumSet;
-
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.EnumSet;
 
 /**
  *

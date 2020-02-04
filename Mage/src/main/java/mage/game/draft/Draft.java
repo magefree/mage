@@ -7,7 +7,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
-
 import mage.MageItem;
 import mage.cards.ExpansionSet;
 import mage.game.events.Listener;

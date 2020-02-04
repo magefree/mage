@@ -1,9 +1,8 @@
 package mage.actions.score;
 
-import org.apache.log4j.Logger;
-
 import mage.cards.Card;
 import mage.game.Game;
+import org.apache.log4j.Logger;
 
 /**
  * @author ayratn

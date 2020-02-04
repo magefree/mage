@@ -2,7 +2,6 @@
 package mage.abilities.keyword;
 
 import java.util.Locale;
-
 import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
 import mage.abilities.TriggeredAbilityImpl;

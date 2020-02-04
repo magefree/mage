@@ -1,17 +1,9 @@
 package mage.game.command;
 
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
-
 import mage.MageInt;
 import mage.MageObject;
 import mage.ObjectColor;
-import mage.abilities.Abilities;
-import mage.abilities.AbilitiesImpl;
-import mage.abilities.Ability;
-import mage.abilities.PlayLandAbility;
-import mage.abilities.SpellAbility;
+import mage.abilities.*;
 import mage.abilities.common.CastCommanderAbility;
 import mage.abilities.common.PlayLandAsCommanderAbility;
 import mage.abilities.costs.mana.ManaCost;
@@ -27,6 +19,10 @@ import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.util.GameLog;
 import mage.util.SubTypeList;
+
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 public class Commander implements CommandObject {
 

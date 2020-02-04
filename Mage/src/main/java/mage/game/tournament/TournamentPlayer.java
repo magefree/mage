@@ -1,7 +1,5 @@
 package mage.game.tournament;
 
-import java.util.Set;
-
 import mage.cards.decks.Deck;
 import mage.constants.TournamentPlayerState;
 import mage.game.result.ResultProtos.TourneyPlayerProto;
@@ -9,6 +7,8 @@ import mage.game.result.ResultProtos.TourneyQuitStatus;
 import mage.players.Player;
 import mage.players.PlayerType;
 import mage.util.TournamentUtil;
+
+import java.util.Set;
 
 /**
  * @author BetaSteward_at_googlemail.com

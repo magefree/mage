@@ -3,7 +3,6 @@
 package mage.game.draft;
 
 import java.io.Serializable;
-
 import mage.game.tournament.LimitedOptions;
 
 /**

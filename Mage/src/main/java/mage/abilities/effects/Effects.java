@@ -1,11 +1,11 @@
 package mage.abilities.effects;
 
-import java.util.ArrayList;
-
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.constants.Outcome;
 import mage.target.targetpointer.TargetPointer;
+
+import java.util.ArrayList;
 
 /**
  * @author BetaSteward_at_googlemail.com

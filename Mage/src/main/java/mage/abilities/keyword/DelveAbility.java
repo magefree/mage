@@ -1,7 +1,5 @@
 package mage.abilities.keyword;
 
-import java.util.List;
-
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.SpecialAction;
@@ -23,6 +21,8 @@ import mage.players.ManaPool;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.util.CardUtil;
+
+import java.util.List;
 
 /**
  * 702.65. Delve 702.65a Delve is a static ability that functions while the

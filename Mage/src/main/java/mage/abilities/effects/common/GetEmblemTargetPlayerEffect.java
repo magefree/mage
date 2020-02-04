@@ -1,7 +1,5 @@
 package mage.abilities.effects.common;
 
-import java.util.stream.Collectors;
-
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -10,6 +8,8 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.players.Player;
+
+import java.util.stream.Collectors;
 
 /**
  * @author LevelX2

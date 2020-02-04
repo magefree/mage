@@ -2,6 +2,9 @@
 
 package mage.abilities.keyword;
 
+import mage.constants.Outcome;
+import mage.constants.TimingRule;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.common.ExileSourceFromGraveCost;
@@ -10,9 +13,6 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.Card;
-import mage.constants.Outcome;
-import mage.constants.TimingRule;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;

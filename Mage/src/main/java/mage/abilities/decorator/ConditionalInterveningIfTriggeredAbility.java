@@ -1,7 +1,5 @@
 package mage.abilities.decorator;
 
-import java.util.List;
-
 import mage.abilities.Modes;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
@@ -12,6 +10,8 @@ import mage.constants.EffectType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.watchers.Watcher;
+
+import java.util.List;
 
 /**
  * Adds condition to {@link mage.abilities.effects.ContinuousEffect}. Acts as

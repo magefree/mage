@@ -4,7 +4,6 @@ package mage.game.turn;
 
 import java.io.Serializable;
 import java.util.UUID;
-
 import mage.constants.PhaseStep;
 import mage.constants.TurnPhase;
 

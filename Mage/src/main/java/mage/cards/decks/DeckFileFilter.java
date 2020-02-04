@@ -1,9 +1,8 @@
 package mage.cards.decks;
 
+import javax.swing.filechooser.FileFilter;
 import java.io.File;
 import java.util.Locale;
-
-import javax.swing.filechooser.FileFilter;
 
 /**
  * @author JayDi85

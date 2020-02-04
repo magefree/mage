@@ -1,9 +1,9 @@
 package mage.abilities.hint;
 
-import java.io.Serializable;
-
 import mage.abilities.Ability;
 import mage.game.Game;
+
+import java.io.Serializable;
 
 /**
  * @author JayDi85

@@ -2,9 +2,9 @@
 
 package mage.abilities.mana;
 
+import mage.constants.Zone;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.ManaEffect;
-import mage.constants.Zone;
 
 /**
  *

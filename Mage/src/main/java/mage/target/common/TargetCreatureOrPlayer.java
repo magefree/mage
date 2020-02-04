@@ -1,19 +1,19 @@
 
 package mage.target.common;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-
+import mage.constants.Zone;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreatureOrPlayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetImpl;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
