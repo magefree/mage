@@ -1584,6 +1584,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         pimpedSets.put("PJSE", 1); // Junior Series Europe
         pimpedSets.put("P2HG", 1); // Two-Headed Giant Tournament
         pimpedSets.put("PGTW", 1); // Gateway 2006
+        pimpedSets.put("PJAS", 1); // Junior APAC Series
 
         pimpedSets.put("MGDC", 1);
         pimpedSets.put("EXP", 1);
