@@ -8,6 +8,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterNonlandPermanent;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -16,6 +18,8 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class StingingLionfish extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterNonlandPermanent("nonland permanent");
 
     public StingingLionfish(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{U}");
@@ -28,7 +32,7 @@ public final class StingingLionfish extends CardImpl {
         Ability ability = new FirstSpellOpponentsTurnTriggeredAbility(
                 new MayTapOrUntapTargetEffect(), false
         );
-        ability.addTarget(new TargetPermanent());
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 
