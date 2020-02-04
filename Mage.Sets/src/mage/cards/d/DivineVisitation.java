@@ -12,6 +12,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.CreateTokenEvent;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -68,7 +69,7 @@ class DivineVisitationEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setToken(new AngelVigilanceToken());
+        ((CreateTokenEvent) event).setToken(new AngelVigilanceToken());
         return false;
     }
 

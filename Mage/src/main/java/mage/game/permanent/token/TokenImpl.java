@@ -7,6 +7,7 @@ import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.CreateTokenEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
@@ -165,7 +166,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         }
         lastAddedTokenIds.clear();
 
-        GameEvent event = new GameEvent(EventType.CREATE_TOKEN, sourceId, controllerId, amount, this);
+        CreateTokenEvent event = new CreateTokenEvent(sourceId, controllerId, amount, this);
         if (!game.replaceEvent(event)) {
             putOntoBattlefieldHelper(event, game, tapped, attacking, attackedPlayer);
             return true;
@@ -173,7 +174,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         return false;
     }
 
-    private static void putOntoBattlefieldHelper(GameEvent event, Game game, boolean tapped, boolean attacking, UUID attackedPlayer) {
+    private static void putOntoBattlefieldHelper(CreateTokenEvent event, Game game, boolean tapped, boolean attacking, UUID attackedPlayer) {
         Player controller = game.getPlayer(event.getPlayerId());
         Token token = event.getToken();
         int amount = event.getAmount();

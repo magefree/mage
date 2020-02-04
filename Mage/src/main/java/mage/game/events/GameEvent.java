@@ -2,7 +2,6 @@ package mage.game.events;
 
 import mage.MageObjectReference;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -14,7 +13,6 @@ import java.util.UUID;
  */
 public class GameEvent implements Serializable {
 
-    protected Token token;
     protected EventType type;
     protected UUID targetId;
     protected UUID sourceId;
@@ -341,15 +339,11 @@ public class GameEvent implements Serializable {
     }
 
     public GameEvent(EventType type, UUID targetId, UUID sourceId, UUID playerId, MageObjectReference reference) {
-        this(type, null, targetId, sourceId, playerId, 0, false, reference, null);
+        this(type, null, targetId, sourceId, playerId, 0, false, reference);
     }
 
     public GameEvent(EventType type, UUID targetId, UUID sourceId, UUID playerId, int amount, boolean flag) {
         this(type, null, targetId, sourceId, playerId, amount, flag);
-    }
-
-    public GameEvent(EventType type, UUID sourceId, UUID playerId, int amount, Token token) {
-        this(type, null, null, sourceId, playerId, amount, false, null, token);
     }
 
     public GameEvent(UUID customEventType, UUID targetId, UUID sourceId, UUID playerId) {
@@ -404,11 +398,11 @@ public class GameEvent implements Serializable {
 
     private GameEvent(EventType type, UUID customEventType,
                       UUID targetId, UUID sourceId, UUID playerId, int amount, boolean flag) {
-        this(type, customEventType, targetId, sourceId, playerId, amount, flag, null, null);
+        this(type, customEventType, targetId, sourceId, playerId, amount, flag, null);
     }
 
     private GameEvent(EventType type, UUID customEventType,
-                      UUID targetId, UUID sourceId, UUID playerId, int amount, boolean flag, MageObjectReference reference, Token token) {
+                      UUID targetId, UUID sourceId, UUID playerId, int amount, boolean flag, MageObjectReference reference) {
         this.type = type;
         this.customEventType = customEventType;
         this.targetId = targetId;
@@ -417,7 +411,6 @@ public class GameEvent implements Serializable {
         this.playerId = playerId;
         this.flag = flag;
         this.reference = reference;
-        this.token = token;
     }
 
     public EventType getType() {
@@ -451,10 +444,6 @@ public class GameEvent implements Serializable {
     public void setAmount(int amount) {
         this.amount = amount;
     }
-
-    public Token getToken() { return token; }
-
-    public void setToken(Token token) { this.token = token; }
 
     public void setAmountForCounters(int amount, boolean isEffect) {
         this.amount = amount;
