@@ -1498,7 +1498,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                 JOptionPane.YES_NO_OPTION) == JOptionPane.NO_OPTION) {
             return;
         }
-
+        // TODO: Why are these a HashMap? It can be a HashSet<String> instead, as the value is never used in the code.
         Map<String, Integer> pimpedSets = new HashMap<>();
         Map<CardView, Integer> pimpedCards = new HashMap<>();
         pimpedSets.put("CP", 1);
@@ -1567,8 +1567,19 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         pimpedSets.put("F17", 1);
         pimpedSets.put("F18", 1);
 
+        // Magic Player Rewards 2001-2011, except for 2002 (P02), which only contains tokens
+        pimpedSets.put("MPR", 1);
+        pimpedSets.put("P03", 1);
+        pimpedSets.put("P04", 1);
+        pimpedSets.put("P05", 1);
+        pimpedSets.put("P06", 1);
+        pimpedSets.put("P07", 1);
+        pimpedSets.put("P08", 1);
+        pimpedSets.put("P09", 1);
+        pimpedSets.put("P10", 1);
+        pimpedSets.put("P11", 1);
+
         pimpedSets.put("MGDC", 1);
-        pimpedSets.put("MPRP", 1);
         pimpedSets.put("EXP", 1);
         pimpedSets.put("GPX", 1);
         pimpedSets.put("GRC", 1);

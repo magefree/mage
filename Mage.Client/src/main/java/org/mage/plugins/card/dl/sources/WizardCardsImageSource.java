@@ -379,7 +379,7 @@ public enum WizardCardsImageSource implements CardImageSource {
         setsAliases.put("MM3", "Modern Masters 2017");
         setsAliases.put("MMQ", "Mercadian Masques");
         setsAliases.put("MOR", "Morningtide");
-        setsAliases.put("MPRP", "Magic Player Rewards");
+        // setsAliases.put("MPRP", "Magic Player Rewards");
         setsAliases.put("MPS", "Masterpiece Series");
         setsAliases.put("MRD", "Mirrodin");
         setsAliases.put("NEM", "Nemesis");
