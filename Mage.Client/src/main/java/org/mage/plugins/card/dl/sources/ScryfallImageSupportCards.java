@@ -105,6 +105,7 @@ public class ScryfallImageSupportCards {
             add("OVNT"); // Vintage Championship
             add("PREL"); // Release Events
             add("PJSE"); // Junior Series Europe
+            add("P2HG"); // Two-Headed Giant Tournament
             
             add("MGB");
             add("ULG");
