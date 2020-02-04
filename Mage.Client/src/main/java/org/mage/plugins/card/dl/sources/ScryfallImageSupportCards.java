@@ -103,6 +103,7 @@ public class ScryfallImageSupportCards {
             add("PHPR");
             add("PLGM");
             add("OVNT"); // Vintage Championship
+            add("PREL"); // Release Events
             
             add("MGB");
             add("ULG");
