@@ -144,6 +144,7 @@ public class ScryfallImageSupportCards {
             add("SOK");
             add("9ED");
             add("RAV");
+            add("PHUK");
             add("GPT");
             add("DIS");
             add("CSP");
