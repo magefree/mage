@@ -4,7 +4,6 @@ package mage.target.common;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.constants.Zone;

@@ -1,13 +1,13 @@
 package mage.game.permanent.token;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import mage.MageInt;
 import mage.abilities.keyword.HasteAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author North

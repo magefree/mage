@@ -8,8 +8,8 @@ import java.util.UUID;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.players.PlayerList;
 import mage.watchers.Watcher;
+import mage.players.PlayerList;
 
 /**
  * @author spjspj

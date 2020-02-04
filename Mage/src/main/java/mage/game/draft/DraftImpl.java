@@ -1,24 +1,12 @@
 
 package mage.game.draft;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
-
+import java.util.*;
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.game.draft.DraftOptions.TimingOption;
-import mage.game.events.Listener;
-import mage.game.events.PlayerQueryEvent;
-import mage.game.events.PlayerQueryEventSource;
-import mage.game.events.TableEvent;
+import mage.game.events.*;
 import mage.game.events.TableEvent.EventType;
-import mage.game.events.TableEventSource;
 import mage.players.Player;
 import mage.players.PlayerList;
 

@@ -1,9 +1,9 @@
 package mage.players;
 
-import java.util.UUID;
-
 import mage.game.Game;
 import mage.util.CircularList;
+
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com

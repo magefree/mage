@@ -29,11 +29,11 @@
  */
 package mage.abilities.effects.common;
 
+import mage.constants.Outcome;
+import mage.constants.PhaseStep;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
-import mage.constants.Outcome;
-import mage.constants.PhaseStep;
 import mage.game.Game;
 import mage.game.turn.TurnMod;
 import mage.players.Player;

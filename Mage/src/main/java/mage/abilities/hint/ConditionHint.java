@@ -1,10 +1,10 @@
 package mage.abilities.hint;
 
-import java.awt.Color;
-
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.game.Game;
+
+import java.awt.*;
 
 /**
  * @author JayDi85

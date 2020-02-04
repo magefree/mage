@@ -1,9 +1,9 @@
 
 package mage.abilities.common;
 
+import mage.constants.ComparisonType;
 import mage.abilities.StateTriggeredAbility;
 import mage.abilities.effects.Effect;
-import mage.constants.ComparisonType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.game.Game;

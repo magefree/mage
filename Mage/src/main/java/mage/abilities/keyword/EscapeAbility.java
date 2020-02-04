@@ -1,7 +1,5 @@
 package mage.abilities.keyword;
 
-import java.util.UUID;
-
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -13,6 +11,8 @@ import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  * @author TheElk801

@@ -3,7 +3,6 @@ package mage.abilities.common;
 
 import java.util.ArrayList;
 import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.SpecialAction;

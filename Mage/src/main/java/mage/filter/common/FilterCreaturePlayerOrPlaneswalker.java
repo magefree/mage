@@ -3,6 +3,7 @@ package mage.filter.common;
 import java.util.UUID;
 
 import mage.MageItem;
+import mage.filter.FilterPlayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;

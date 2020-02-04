@@ -1,11 +1,11 @@
 package mage.filter.predicate.mageobject;
 
-import java.util.Objects;
-
 import mage.constants.SubType;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.Objects;
 
 /**
  * @author TheElk801

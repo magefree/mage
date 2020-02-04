@@ -2,12 +2,13 @@
 
 package mage.abilities.costs.mana;
 
-import java.util.ArrayList;
-import java.util.EnumMap;
-import java.util.Map;
-
 import mage.ManaSymbol;
 import mage.constants.ColoredManaSymbol;
+
+import java.util.ArrayList;
+import java.util.EnumMap;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Represents the mana symbols on a card.

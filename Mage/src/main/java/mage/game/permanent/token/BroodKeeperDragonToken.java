@@ -1,14 +1,14 @@
 
 
 package mage.game.permanent.token;
+import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**

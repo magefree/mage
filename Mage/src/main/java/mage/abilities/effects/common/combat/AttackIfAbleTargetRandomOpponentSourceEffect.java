@@ -1,9 +1,5 @@
 package mage.abilities.effects.common.combat;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -13,6 +9,10 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.RandomUtil;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 public class AttackIfAbleTargetRandomOpponentSourceEffect extends OneShotEffect {
 

@@ -2,7 +2,6 @@
 package mage.filter.predicate.other;
 
 import java.util.UUID;
-
 import mage.MageObject;
 import mage.abilities.Mode;
 import mage.filter.FilterPermanent;

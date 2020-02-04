@@ -2,7 +2,6 @@
 package mage.abilities.effects.keyword;
 
 import java.util.Set;
-
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCosts;

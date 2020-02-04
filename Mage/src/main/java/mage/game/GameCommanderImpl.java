@@ -2,7 +2,6 @@ package mage.game;
 
 import java.util.Map;
 import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.InfoEffect;

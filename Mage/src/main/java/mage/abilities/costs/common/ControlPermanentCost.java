@@ -1,12 +1,12 @@
 package mage.abilities.costs.common;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
+
+import java.util.UUID;
+import mage.abilities.costs.Cost;
 
 public class ControlPermanentCost extends CostImpl {
     private FilterControlledPermanent filter;

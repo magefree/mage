@@ -1,8 +1,8 @@
 
 package mage.game.permanent.token;
 
-import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
+import mage.abilities.keyword.FlyingAbility;
 import mage.constants.SubType;
 
 /**

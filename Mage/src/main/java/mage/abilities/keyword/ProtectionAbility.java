@@ -3,7 +3,6 @@ package mage.abilities.keyword;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.StaticAbility;

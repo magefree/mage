@@ -1,19 +1,5 @@
 package mage.game.permanent;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
-
-import org.apache.log4j.Logger;
-
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.ObjectColor;
@@ -26,33 +12,11 @@ import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.HintUtils;
-import mage.abilities.keyword.BestowAbility;
-import mage.abilities.keyword.DeathtouchAbility;
-import mage.abilities.keyword.DefenderAbility;
-import mage.abilities.keyword.HasteAbility;
-import mage.abilities.keyword.HexproofAbility;
-import mage.abilities.keyword.HexproofFromBlackAbility;
-import mage.abilities.keyword.HexproofFromBlueAbility;
-import mage.abilities.keyword.HexproofFromMonocoloredAbility;
-import mage.abilities.keyword.HexproofFromWhiteAbility;
-import mage.abilities.keyword.IndestructibleAbility;
-import mage.abilities.keyword.InfectAbility;
-import mage.abilities.keyword.LifelinkAbility;
-import mage.abilities.keyword.MorphAbility;
-import mage.abilities.keyword.ProtectionAbility;
-import mage.abilities.keyword.ShroudAbility;
-import mage.abilities.keyword.SquirrellinkAbility;
-import mage.abilities.keyword.WitherAbility;
+import mage.abilities.keyword.*;
 import mage.abilities.text.TextPart;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.constants.AsThoughEffectType;
-import mage.constants.EffectType;
-import mage.constants.EmptyNames;
-import mage.constants.EnterEventType;
-import mage.constants.Rarity;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.counters.Counters;
@@ -62,17 +26,10 @@ import mage.game.ZoneChangeInfo;
 import mage.game.ZonesHandler;
 import mage.game.combat.CombatGroup;
 import mage.game.command.CommandObject;
-import mage.game.events.DamageCreatureEvent;
-import mage.game.events.DamageEvent;
-import mage.game.events.DamagePlaneswalkerEvent;
-import mage.game.events.DamagedCreatureEvent;
-import mage.game.events.DamagedPlaneswalkerEvent;
-import mage.game.events.EntersTheBattlefieldEvent;
-import mage.game.events.GameEvent;
+import mage.game.events.*;
 import mage.game.events.GameEvent.EventType;
-import mage.game.events.PreventDamageEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.token.SquirrelToken;
+import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
@@ -80,6 +37,10 @@ import mage.target.TargetCard;
 import mage.util.CardUtil;
 import mage.util.GameLog;
 import mage.util.ThreadLocalStringBuilder;
+import org.apache.log4j.Logger;
+
+import java.io.Serializable;
+import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com

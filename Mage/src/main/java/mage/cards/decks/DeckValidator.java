@@ -1,11 +1,11 @@
 package mage.cards.decks;
 
+import mage.cards.Card;
+
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-
-import mage.cards.Card;
 
 /**
  * @author BetaSteward_at_googlemail.com

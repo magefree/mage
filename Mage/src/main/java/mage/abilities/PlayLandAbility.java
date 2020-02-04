@@ -1,7 +1,6 @@
 package mage.abilities;
 
 import java.util.UUID;
-
 import mage.MageObjectReference;
 import mage.constants.AbilityType;
 import mage.constants.AsThoughEffectType;

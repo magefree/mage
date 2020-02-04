@@ -1,7 +1,6 @@
 package mage.abilities.effects.common;
 
 import java.util.Set;
-
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;

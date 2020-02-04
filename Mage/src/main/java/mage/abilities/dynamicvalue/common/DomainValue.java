@@ -1,13 +1,13 @@
 package mage.abilities.dynamicvalue.common;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  * @author Loki

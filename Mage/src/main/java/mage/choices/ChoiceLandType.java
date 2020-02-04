@@ -1,8 +1,8 @@
 package mage.choices;
 
-import java.util.stream.Collectors;
-
 import mage.constants.SubType;
+
+import java.util.stream.Collectors;
 
 /**
  * @author tre3qwerty

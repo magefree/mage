@@ -2,7 +2,6 @@
 package mage.filter.common;
 
 import java.util.UUID;
-
 import mage.MageItem;
 import mage.filter.FilterImpl;
 import mage.filter.FilterInPlay;

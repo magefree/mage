@@ -1,8 +1,6 @@
 
 package mage.abilities.keyword;
 
-import java.util.UUID;
-
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
@@ -13,6 +11,8 @@ import mage.abilities.effects.keyword.EchoEffect;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+
+import java.util.UUID;
 
 /**
  *

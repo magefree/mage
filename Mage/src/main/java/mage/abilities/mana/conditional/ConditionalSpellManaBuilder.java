@@ -6,7 +6,6 @@
 package mage.abilities.mana.conditional;
 
 import java.util.UUID;
-
 import mage.ConditionalMana;
 import mage.MageObject;
 import mage.Mana;

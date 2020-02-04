@@ -3,7 +3,6 @@ package mage.abilities.dynamicvalue;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.game.Game;

@@ -1,7 +1,5 @@
 package mage.abilities.costs.common;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
@@ -9,6 +7,8 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com

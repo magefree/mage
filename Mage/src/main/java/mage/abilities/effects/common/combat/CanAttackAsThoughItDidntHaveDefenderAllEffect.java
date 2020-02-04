@@ -1,8 +1,6 @@
 
 package mage.abilities.effects.common.combat;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.constants.AsThoughEffectType;
@@ -12,6 +10,8 @@ import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  * @author Quercitron

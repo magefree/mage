@@ -2,7 +2,6 @@
 package mage.abilities.effects.common.counter;
 
 import java.util.Locale;
-
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;

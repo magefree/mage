@@ -1,13 +1,5 @@
 package mage.players;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
-
 import mage.ConditionalMana;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -22,6 +14,9 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ManaEvent;
 import mage.game.stack.Spell;
+
+import java.io.Serializable;
+import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com

@@ -2,14 +2,8 @@
 
 package mage.abilities;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-
 import mage.MageObject;
 import mage.constants.Zone;
 import mage.game.Game;

@@ -1,8 +1,5 @@
 package mage.abilities.keyword;
 
-import java.util.ArrayList;
-import java.util.UUID;
-
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.dynamicvalue.common.OpponentsLostLifeCount;
@@ -11,6 +8,9 @@ import mage.cards.Card;
 import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.game.Game;
+
+import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * @author TheElk801

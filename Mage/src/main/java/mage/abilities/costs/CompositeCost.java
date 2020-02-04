@@ -1,7 +1,6 @@
 package mage.abilities.costs;
 
 import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.game.Game;
 import mage.target.Targets;

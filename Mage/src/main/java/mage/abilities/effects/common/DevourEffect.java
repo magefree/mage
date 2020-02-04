@@ -1,10 +1,5 @@
 package mage.abilities.effects.common;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -21,6 +16,11 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.util.SubTypeList;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * Effect for the DevourAbility

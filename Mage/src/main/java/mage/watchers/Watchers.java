@@ -1,12 +1,11 @@
 package mage.watchers;
 
-import java.util.HashMap;
-
+import mage.game.Game;
+import mage.game.events.GameEvent;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import mage.game.Game;
-import mage.game.events.GameEvent;
+import java.util.HashMap;
 
 /**
  * @author BetaSteward_at_googlemail.com

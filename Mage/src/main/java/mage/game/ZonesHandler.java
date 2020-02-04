@@ -1,14 +1,5 @@
 package mage.game;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
-
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
@@ -26,6 +17,8 @@ import mage.game.permanent.PermanentToken;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetCard;
+
+import java.util.*;
 
 /**
  * Created by samuelsandeen on 9/6/16.

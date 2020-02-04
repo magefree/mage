@@ -1,11 +1,11 @@
 package mage.game.tournament;
 
+import mage.cards.decks.Deck;
+import mage.game.draft.DraftCube;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import mage.cards.decks.Deck;
-import mage.game.draft.DraftCube;
 
 /**
  * @author BetaSteward_at_googlemail.com

@@ -2,7 +2,6 @@ package mage.cards;
 
 import java.util.List;
 import java.util.UUID;
-
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Abilities;

@@ -1,7 +1,6 @@
 package mage.abilities;
 
 import java.util.UUID;
-
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.condition.Condition;

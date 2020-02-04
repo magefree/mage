@@ -2,9 +2,7 @@
 package mage.abilities.effects.common;
 
 import static java.lang.Integer.min;
-
 import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;

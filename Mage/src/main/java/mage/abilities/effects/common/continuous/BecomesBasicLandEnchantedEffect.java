@@ -1,23 +1,15 @@
 package mage.abilities.effects.common.continuous;
 
+import mage.abilities.Ability;
+import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.mana.*;
+import mage.constants.*;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.mana.BlackManaAbility;
-import mage.abilities.mana.BlueManaAbility;
-import mage.abilities.mana.GreenManaAbility;
-import mage.abilities.mana.RedManaAbility;
-import mage.abilities.mana.WhiteManaAbility;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.SubType;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 public class BecomesBasicLandEnchantedEffect extends ContinuousEffectImpl {
 

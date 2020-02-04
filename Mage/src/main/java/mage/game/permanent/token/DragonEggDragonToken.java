@@ -7,8 +7,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
+import mage.constants.Duration;
 import mage.constants.Zone;
 
 /**

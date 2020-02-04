@@ -3,7 +3,6 @@ package mage.abilities.dynamicvalue.common;
 
 import java.io.ObjectStreamException;
 import java.util.UUID;
-
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.MageSingleton;

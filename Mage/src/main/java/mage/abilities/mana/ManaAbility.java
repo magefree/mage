@@ -6,7 +6,6 @@
 package mage.abilities.mana;
 
 import java.util.List;
-
 import mage.Mana;
 import mage.game.Game;
 

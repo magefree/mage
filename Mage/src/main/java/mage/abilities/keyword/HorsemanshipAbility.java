@@ -1,7 +1,5 @@
 package mage.abilities.keyword;
 
-import java.io.ObjectStreamException;
-
 import mage.abilities.Ability;
 import mage.abilities.EvasionAbility;
 import mage.abilities.MageSingleton;
@@ -9,6 +7,8 @@ import mage.abilities.effects.RestrictionEffect;
 import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.io.ObjectStreamException;
 
 /**
  * @author LevelX2

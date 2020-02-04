@@ -1,12 +1,12 @@
 
 package mage.game.permanent.token;
 
-import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.keyword.CumulativeUpkeepAbility;
-import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.MageInt;
+import mage.abilities.keyword.CumulativeUpkeepAbility;
+import mage.abilities.keyword.FlyingAbility;
 
 /**
  *

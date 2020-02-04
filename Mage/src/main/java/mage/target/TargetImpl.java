@@ -1,14 +1,5 @@
 package mage.target;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
-
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.cards.Card;
@@ -20,6 +11,8 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.util.RandomUtil;
+
+import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com

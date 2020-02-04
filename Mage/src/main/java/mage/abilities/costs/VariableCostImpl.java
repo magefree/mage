@@ -1,7 +1,5 @@
 package mage.abilities.costs;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.mana.ManaAbility;
 import mage.game.Game;
@@ -9,6 +7,8 @@ import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.Targets;
+
+import java.util.UUID;
 
 /**
  * @author LevelX2

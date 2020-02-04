@@ -1,13 +1,13 @@
 
 package mage.target.common;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  * @author LevelX2

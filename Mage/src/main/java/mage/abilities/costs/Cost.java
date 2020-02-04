@@ -1,11 +1,11 @@
 package mage.abilities.costs;
 
-import java.io.Serializable;
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.game.Game;
 import mage.target.Targets;
+
+import java.io.Serializable;
+import java.util.UUID;
 
 public interface Cost extends Serializable {
 

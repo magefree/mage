@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.game.Game;

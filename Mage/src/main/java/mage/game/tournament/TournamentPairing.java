@@ -3,7 +3,6 @@
 package mage.game.tournament;
 
 import java.util.UUID;
-
 import mage.constants.TournamentPlayerState;
 import mage.game.match.Match;
 import mage.game.match.MatchPlayer;

@@ -1,13 +1,13 @@
 package mage.cards.decks.importer;
 
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
+
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class DraftLogImporter extends PlainTextDeckImporter {
 

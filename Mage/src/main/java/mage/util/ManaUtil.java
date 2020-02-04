@@ -1,38 +1,23 @@
 package mage.util;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.Set;
-import java.util.UUID;
-
 import mage.MageObject;
 import mage.Mana;
 import mage.ManaSymbol;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.mana.AlternateManaPaymentAbility;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.costs.mana.ManaCost;
-import mage.abilities.costs.mana.ManaSymbols;
-import mage.abilities.costs.mana.VariableManaCost;
+import mage.abilities.costs.mana.*;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.mana.ActivatedManaAbilityImpl;
-import mage.abilities.mana.AnyColorManaAbility;
-import mage.abilities.mana.BasicManaAbility;
-import mage.abilities.mana.BlackManaAbility;
-import mage.abilities.mana.BlueManaAbility;
-import mage.abilities.mana.GreenManaAbility;
-import mage.abilities.mana.RedManaAbility;
-import mage.abilities.mana.WhiteManaAbility;
+import mage.abilities.mana.*;
 import mage.cards.Card;
 import mage.choices.Choice;
 import mage.constants.ColoredManaSymbol;
 import mage.filter.FilterMana;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.*;
 
 /**
  * @author noxx

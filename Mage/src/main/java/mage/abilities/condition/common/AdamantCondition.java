@@ -1,7 +1,5 @@
 package mage.abilities.condition.common;
 
-import java.util.Arrays;
-
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
@@ -9,6 +7,8 @@ import mage.constants.AbilityType;
 import mage.constants.ColoredManaSymbol;
 import mage.game.Game;
 import mage.watchers.common.ManaSpentToCastWatcher;
+
+import java.util.Arrays;
 
 /**
  * @author TheElk801

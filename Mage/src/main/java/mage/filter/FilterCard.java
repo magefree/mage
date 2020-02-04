@@ -5,14 +5,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
-
 import mage.cards.Card;
 import mage.constants.TargetController;
-import mage.filter.predicate.ObjectPlayer;
-import mage.filter.predicate.ObjectPlayerPredicate;
-import mage.filter.predicate.ObjectSourcePlayer;
-import mage.filter.predicate.Predicate;
-import mage.filter.predicate.Predicates;
+import mage.filter.predicate.*;
 import mage.game.Game;
 
 /**

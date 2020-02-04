@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
-
 import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Ability;

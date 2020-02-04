@@ -2,11 +2,11 @@
 
 package mage.game.permanent.token;
 
+import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.common.LoseGameTargetPlayerEffect;
-import mage.constants.CardType;
-import mage.constants.SubType;
 
 /**
  *

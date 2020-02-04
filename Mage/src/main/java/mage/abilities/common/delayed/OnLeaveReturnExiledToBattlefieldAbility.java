@@ -2,7 +2,6 @@ package mage.abilities.common.delayed;
 
 import java.util.LinkedHashSet;
 import java.util.UUID;
-
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;

@@ -1,11 +1,6 @@
 package mage.game.stack;
 
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
-
+import java.util.*;
 import mage.MageInt;
 import mage.MageObject;
 import mage.Mana;
@@ -21,20 +16,8 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.keyword.BestowAbility;
 import mage.abilities.keyword.MorphAbility;
 import mage.abilities.text.TextPart;
-import mage.cards.AdventureCard;
-import mage.cards.AdventureCardSpell;
-import mage.cards.Card;
-import mage.cards.CardsImpl;
-import mage.cards.FrameStyle;
-import mage.cards.SplitCard;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.SpellAbilityType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
-import mage.constants.ZoneDetail;
+import mage.cards.*;
+import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.filter.FilterMana;

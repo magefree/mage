@@ -1,8 +1,6 @@
 
 package mage.game.command.emblems;
 
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT;
-
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.Effect;
@@ -12,6 +10,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.constants.Zone;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT;
 import mage.game.command.Emblem;
 import mage.target.TargetPermanent;
 

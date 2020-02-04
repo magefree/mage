@@ -1,10 +1,10 @@
 
 package mage.abilities.effects.common.counter;
 
+import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
-import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.players.Player;

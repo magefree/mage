@@ -5,7 +5,6 @@ package mage.game.events;
 import java.io.Serializable;
 import java.util.EventObject;
 import java.util.UUID;
-
 import mage.cards.Cards;
 import mage.cards.decks.Deck;
 import mage.game.Game;

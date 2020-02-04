@@ -1,9 +1,9 @@
 
 
 package mage.game.permanent.token;
-import mage.abilities.keyword.DeathtouchAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.abilities.keyword.DeathtouchAbility;
 
 /**
  *

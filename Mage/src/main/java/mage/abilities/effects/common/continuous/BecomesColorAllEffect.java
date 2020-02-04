@@ -29,19 +29,20 @@
  */
 package mage.abilities.effects.common.continuous;
 
+import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.choices.ChoiceColor;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  * @author LevelX

@@ -5,9 +5,6 @@
  */
 package mage.abilities.effects.common.ruleModifying;
 
-import java.util.List;
-import java.util.UUID;
-
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
@@ -23,6 +20,9 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.Target;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  * 6/8/2016 If a spell or ability's targets are changed, or if a copy of a spell

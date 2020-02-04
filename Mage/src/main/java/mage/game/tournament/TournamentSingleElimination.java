@@ -4,7 +4,6 @@ package mage.game.tournament;
 
 import java.util.Map;
 import java.util.UUID;
-
 import mage.constants.MultiplayerAttackOption;
 import mage.game.events.TableEvent;
 

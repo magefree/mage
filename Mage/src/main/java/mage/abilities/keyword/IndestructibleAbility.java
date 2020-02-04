@@ -2,9 +2,8 @@
 package mage.abilities.keyword;
 
 import java.io.ObjectStreamException;
-
-import mage.abilities.StaticAbility;
 import mage.constants.Zone;
+import mage.abilities.StaticAbility;
 
 /**
  * OLD RULES: 700.4. If a permanent is indestructible, rules and effects can't

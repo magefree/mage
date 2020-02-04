@@ -1,9 +1,5 @@
 package mage.abilities.keyword;
 
-import java.util.UUID;
-
-import org.apache.log4j.Logger;
-
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -15,12 +11,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.Card;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SpellAbilityType;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
@@ -29,6 +20,9 @@ import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
+import org.apache.log4j.Logger;
+
+import java.util.UUID;
 
 /**
  * @author LevelX2

@@ -5,9 +5,6 @@
  */
 package mage.abilities.effects.common;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -25,6 +22,9 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Effect for the AmplifyAbility

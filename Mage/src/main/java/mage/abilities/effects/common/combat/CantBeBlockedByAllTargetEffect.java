@@ -1,13 +1,13 @@
 package mage.abilities.effects.common.combat;
 
-import static mage.constants.Duration.EndOfTurn;
-
 import mage.abilities.Ability;
 import mage.abilities.effects.RestrictionEffect;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import static mage.constants.Duration.EndOfTurn;
 
 /**
  * @author LevelX2

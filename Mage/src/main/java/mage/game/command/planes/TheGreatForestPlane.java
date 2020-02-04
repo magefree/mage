@@ -3,7 +3,6 @@ package mage.game.command.planes;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -14,6 +13,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.RollPlanarDieEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.constants.Duration;
 import mage.constants.Layer;

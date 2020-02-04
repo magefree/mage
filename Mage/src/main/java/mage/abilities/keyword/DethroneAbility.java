@@ -2,7 +2,6 @@
 package mage.abilities.keyword;
 
 import java.util.UUID;
-
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.constants.Zone;

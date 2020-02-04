@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
-
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;

@@ -3,7 +3,6 @@ package mage.actions;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
 import mage.actions.impl.MageAction;
 import mage.actions.score.ArtificialScoringSystem;
 import mage.cards.Card;

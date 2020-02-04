@@ -3,7 +3,6 @@ package mage.target.targetpointer;
 import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.game.Game;
 

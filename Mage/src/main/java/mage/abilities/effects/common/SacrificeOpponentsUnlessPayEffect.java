@@ -1,9 +1,5 @@
 package mage.abilities.effects.common;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -20,6 +16,10 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.util.CardUtil;
 import mage.util.ManaUtil;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author Eirkei

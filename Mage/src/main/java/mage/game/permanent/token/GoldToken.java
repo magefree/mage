@@ -1,14 +1,14 @@
 package mage.game.permanent.token;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author LevelX2

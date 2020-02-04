@@ -1,8 +1,8 @@
 package mage.cards;
 
-import java.io.Serializable;
-
 import mage.ObjectColor;
+
+import java.io.Serializable;
 
 public final class CardGraphicInfo implements Serializable {
 

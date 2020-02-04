@@ -7,14 +7,12 @@ import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
-
-import org.apache.log4j.Logger;
-
 import mage.cards.Card;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.game.GameException;
 import mage.util.DeckUtil;
+import org.apache.log4j.Logger;
 
 public class Deck implements Serializable {
 

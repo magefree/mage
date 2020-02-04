@@ -5,6 +5,10 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  *
  * @author BetaSteward_at_googlemail.com

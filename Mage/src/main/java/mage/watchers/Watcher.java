@@ -1,27 +1,15 @@
 
 package mage.watchers;
 
-import java.io.Serializable;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Modifier;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
-
-import org.apache.log4j.Logger;
-
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import org.apache.log4j.Logger;
 import sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl;
+
+import java.io.Serializable;
+import java.lang.reflect.*;
+import java.util.*;
 
 /**
  * watches for certain game events to occur and flags condition

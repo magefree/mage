@@ -6,7 +6,6 @@
 package mage.abilities.keyword;
 
 import java.util.UUID;
-
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.SpecialAction;

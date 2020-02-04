@@ -1,13 +1,13 @@
 package mage.abilities.costs.common;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.game.Game;
 import mage.util.ManaUtil;
+
+import java.util.UUID;
 
 public class DynamicValueGenericManaCost extends CostImpl {
 

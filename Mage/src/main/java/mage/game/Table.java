@@ -2,12 +2,7 @@
 package mage.game;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
-
+import java.util.*;
 import mage.cards.decks.DeckValidator;
 import mage.constants.TableState;
 import mage.game.events.Listener;

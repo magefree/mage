@@ -1,7 +1,5 @@
 package mage.cards.mock;
 
-import java.util.List;
-
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.cards.CardSetInfo;
@@ -11,6 +9,8 @@ import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.constants.CardType;
 import mage.constants.SpellAbilityType;
+
+import java.util.List;
 
 /**
  * @author North

@@ -5,14 +5,13 @@
  */
 package mage.abilities.effects.common;
 
-import static mage.constants.Outcome.Benefit;
-
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import static mage.constants.Outcome.Benefit;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;

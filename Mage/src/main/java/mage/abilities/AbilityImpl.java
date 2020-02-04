@@ -1,26 +1,9 @@
 package mage.abilities;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
-
-import org.apache.log4j.Logger;
-
 import mage.MageObject;
-import mage.abilities.costs.AlternativeSourceCosts;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.CostAdjuster;
-import mage.abilities.costs.Costs;
-import mage.abilities.costs.CostsImpl;
-import mage.abilities.costs.OptionalAdditionalSourceCosts;
-import mage.abilities.costs.VariableCost;
+import mage.abilities.costs.*;
 import mage.abilities.costs.common.PayLifeCost;
-import mage.abilities.costs.mana.ManaCost;
-import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.costs.mana.PhyrexianManaCost;
-import mage.abilities.costs.mana.VariableManaCost;
+import mage.abilities.costs.mana.*;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
@@ -29,12 +12,7 @@ import mage.abilities.hint.Hint;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.Card;
 import mage.cards.SplitCard;
-import mage.constants.AbilityType;
-import mage.constants.AbilityWord;
-import mage.constants.EffectType;
-import mage.constants.Outcome;
-import mage.constants.SpellAbilityType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.game.command.Plane;
@@ -49,6 +27,12 @@ import mage.target.targetadjustment.TargetAdjuster;
 import mage.util.GameLog;
 import mage.util.ThreadLocalStringBuilder;
 import mage.watchers.Watcher;
+import org.apache.log4j.Logger;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com

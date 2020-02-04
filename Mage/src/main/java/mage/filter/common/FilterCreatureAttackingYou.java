@@ -2,7 +2,7 @@
 package mage.filter.common;
 
 import java.util.UUID;
-
+import mage.filter.common.FilterAttackingCreature;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 

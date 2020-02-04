@@ -1,10 +1,10 @@
 package mage.filter.predicate;
 
+import mage.game.Game;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import mage.game.Game;
 
 /**
  * Static utility methods pertaining to {@code Predicate} instances.

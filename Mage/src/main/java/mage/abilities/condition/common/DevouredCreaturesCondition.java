@@ -2,11 +2,11 @@
 package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
+import mage.constants.ComparisonType;
 import mage.abilities.condition.IntCompareCondition;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DevourEffect;
 import mage.abilities.keyword.DevourAbility;
-import mage.constants.ComparisonType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 

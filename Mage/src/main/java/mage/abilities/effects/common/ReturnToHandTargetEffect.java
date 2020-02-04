@@ -1,11 +1,5 @@
 package mage.abilities.effects.common;
 
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
-
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -18,6 +12,8 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.Target;
 import mage.util.CardUtil;
+
+import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com

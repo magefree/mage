@@ -1,14 +1,13 @@
 package mage.cards.decks.exporter;
 
-import static org.junit.Assert.assertEquals;
+import mage.cards.decks.DeckCardInfo;
+import mage.cards.decks.DeckCardLists;
+import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-import org.junit.Test;
-
-import mage.cards.decks.DeckCardInfo;
-import mage.cards.decks.DeckCardLists;
+import static org.junit.Assert.assertEquals;
 
 public class XmageDeckExporterTest {
 

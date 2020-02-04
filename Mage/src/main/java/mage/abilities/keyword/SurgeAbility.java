@@ -1,8 +1,5 @@
 package mage.abilities.keyword;
 
-import java.util.ArrayList;
-import java.util.UUID;
-
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.cards.Card;
@@ -11,6 +8,9 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.watchers.common.CastSpellLastTurnWatcher;
+
+import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * @author LevelX2

@@ -1,13 +1,13 @@
 package mage.abilities.effects.common;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.constants.AsThoughEffectType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
+
+import java.util.UUID;
 
 public class CanBlockAsThoughtItHadShadowEffect extends AsThoughEffectImpl {
 

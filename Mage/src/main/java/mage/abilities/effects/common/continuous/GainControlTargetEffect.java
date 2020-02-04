@@ -1,7 +1,6 @@
 package mage.abilities.effects.common.continuous;
 
 import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.Mode;

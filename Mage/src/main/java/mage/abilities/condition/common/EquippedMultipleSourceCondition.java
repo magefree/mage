@@ -1,13 +1,13 @@
 
 package mage.abilities.condition.common;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  * Describes condition when creature is equipped with more than one Equipment.

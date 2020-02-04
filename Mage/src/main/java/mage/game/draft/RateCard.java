@@ -1,26 +1,9 @@
 package mage.game.draft;
 
-import java.io.InputStream;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.Set;
-
-import org.apache.log4j.Logger;
-
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.DamageWithPowerFromOneToAnotherTargetEffect;
-import mage.abilities.effects.common.DamageWithPowerFromSourceToAnotherTargetEffect;
-import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
-import mage.abilities.effects.common.FightTargetsEffect;
+import mage.abilities.effects.common.*;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.Card;
@@ -31,6 +14,10 @@ import mage.constants.SubType;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetPlayerOrPlaneswalker;
+import org.apache.log4j.Logger;
+
+import java.io.InputStream;
+import java.util.*;
 
 /**
  * Class responsible for reading ratings from resources and rating given cards.

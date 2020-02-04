@@ -2,7 +2,6 @@
 package mage.filter.predicate.permanent;
 
 import java.util.UUID;
-
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;

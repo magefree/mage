@@ -1,11 +1,11 @@
 package mage.abilities;
 
-import java.util.UUID;
-
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com

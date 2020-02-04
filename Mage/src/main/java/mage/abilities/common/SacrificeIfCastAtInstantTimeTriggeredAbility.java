@@ -8,8 +8,8 @@ import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 
 /**

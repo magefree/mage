@@ -1,13 +1,13 @@
 package mage.abilities.costs.mana;
 
-import java.util.List;
-import java.util.UUID;
-import java.util.stream.Collectors;
-
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.VariableCost;
 import mage.game.Game;
+
+import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @param <T>

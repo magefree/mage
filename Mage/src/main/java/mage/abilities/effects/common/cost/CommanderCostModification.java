@@ -1,7 +1,5 @@
 package mage.abilities.effects.common.cost;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.CastCommanderAbility;
 import mage.abilities.common.PlayLandAsCommanderAbility;
@@ -11,6 +9,8 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.util.ManaUtil;
 import mage.watchers.common.CommanderPlaysCountWatcher;
+
+import java.util.UUID;
 
 /**
  * @author Plopman

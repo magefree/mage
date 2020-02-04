@@ -2,13 +2,13 @@
 
 package mage.abilities.effects.common.continuous;
 
-import mage.abilities.Ability;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.effects.WhileConditionContinuousEffect;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
+import mage.abilities.Ability;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.effects.WhileConditionContinuousEffect;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;

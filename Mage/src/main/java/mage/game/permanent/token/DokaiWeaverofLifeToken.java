@@ -1,14 +1,14 @@
 
 
 package mage.game.permanent.token;
+import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;

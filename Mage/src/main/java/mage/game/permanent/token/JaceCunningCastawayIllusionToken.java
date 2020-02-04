@@ -1,12 +1,12 @@
 
 package mage.game.permanent.token;
 
+import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.SacrificeSourceEffect;
-import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;

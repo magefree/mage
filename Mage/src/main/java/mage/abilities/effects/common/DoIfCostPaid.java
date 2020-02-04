@@ -1,7 +1,5 @@
 package mage.abilities.effects.common;
 
-import java.util.Locale;
-
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -14,6 +12,8 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
+
+import java.util.Locale;
 
 public class DoIfCostPaid extends OneShotEffect {
 

@@ -1,13 +1,13 @@
 
 package mage.abilities.condition.common;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
-import mage.abilities.condition.IntCompareCondition;
 import mage.constants.ComparisonType;
+import mage.abilities.condition.IntCompareCondition;
 import mage.game.Game;
 import mage.watchers.common.PlayerLostLifeWatcher;
+
+import java.util.UUID;
 
 /**
  * Describes condition when an opponent has lost an amount of life

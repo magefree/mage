@@ -1,9 +1,6 @@
 
 package mage.abilities.effects.mana;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -13,6 +10,9 @@ import mage.choices.ChoiceColor;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *

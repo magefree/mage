@@ -2,7 +2,6 @@
 package mage.abilities.keyword;
 
 import java.util.UUID;
-
 import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.RevealSourceFromYourHandCost;

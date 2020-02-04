@@ -1,7 +1,5 @@
 package mage.abilities.effects.common.combat;
 
-import static mage.constants.Duration.EndOfTurn;
-
 import mage.abilities.Ability;
 import mage.abilities.effects.RestrictionEffect;
 import mage.constants.AttachmentType;
@@ -10,6 +8,8 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+
+import static mage.constants.Duration.EndOfTurn;
 
 /**
  * @author North

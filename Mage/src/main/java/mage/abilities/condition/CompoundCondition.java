@@ -1,11 +1,11 @@
 
 package mage.abilities.condition;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import mage.abilities.Ability;
 import mage.game.Game;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Combines conditions to one compound conditon, all single conditons must be

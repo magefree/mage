@@ -1,7 +1,5 @@
 package mage.abilities.costs.common;
 
-import java.util.UUID;
-
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
@@ -10,6 +8,8 @@ import mage.abilities.effects.common.ChooseSecretOpponentEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *

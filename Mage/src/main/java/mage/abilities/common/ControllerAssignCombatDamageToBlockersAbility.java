@@ -1,10 +1,11 @@
 
 package mage.abilities.common;
 
-import java.io.ObjectStreamException;
-
 import mage.abilities.MageSingleton;
 import mage.abilities.StaticAbility;
+
+import java.io.ObjectStreamException;
+
 import mage.constants.AbilityType;
 import mage.constants.Zone;
 

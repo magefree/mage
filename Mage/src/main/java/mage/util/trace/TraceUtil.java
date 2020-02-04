@@ -1,11 +1,5 @@
 package mage.util.trace;
 
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
-
-import org.apache.log4j.Logger;
-
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
@@ -20,6 +14,9 @@ import mage.game.Game;
 import mage.game.combat.Combat;
 import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
+import org.apache.log4j.Logger;
+
+import java.util.*;
 
 /**
  * @author magenoxx_at_gmail.com

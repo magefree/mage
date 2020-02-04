@@ -1,8 +1,6 @@
 
 package mage.abilities.keyword;
 
-import java.util.UUID;
-
 import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbilityImpl;
@@ -12,6 +10,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.target.Target;
+
+import java.util.UUID;
 
 /**
  * Heroic

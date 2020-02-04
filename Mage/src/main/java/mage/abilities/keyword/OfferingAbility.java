@@ -1,7 +1,6 @@
 package mage.abilities.keyword;
 
 import java.util.UUID;
-
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -9,12 +8,7 @@ import mage.abilities.StaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.Card;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CostModificationType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;

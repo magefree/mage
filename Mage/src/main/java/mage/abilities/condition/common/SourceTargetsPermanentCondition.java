@@ -1,7 +1,5 @@
 package mage.abilities.condition.common;
 
-import java.util.Iterator;
-
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.filter.FilterPermanent;
@@ -9,6 +7,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 import mage.target.Target;
+
+import java.util.Iterator;
 
 /**
  * @author TheElk801

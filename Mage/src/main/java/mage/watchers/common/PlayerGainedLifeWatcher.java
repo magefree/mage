@@ -3,6 +3,7 @@ package mage.watchers.common;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.UUID;
 
 import mage.constants.WatcherScope;

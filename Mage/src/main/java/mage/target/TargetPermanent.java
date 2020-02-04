@@ -1,9 +1,5 @@
 package mage.target;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.constants.Zone;
@@ -11,6 +7,10 @@ import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com

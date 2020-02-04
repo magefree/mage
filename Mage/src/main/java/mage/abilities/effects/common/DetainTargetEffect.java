@@ -1,7 +1,5 @@
 package mage.abilities.effects.common;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
@@ -15,6 +13,8 @@ import mage.game.turn.Step;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  * @author LevelX2

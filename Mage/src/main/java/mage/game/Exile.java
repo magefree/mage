@@ -1,18 +1,13 @@
 package mage.game;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.UUID;
-import java.util.stream.Collectors;
-
 import mage.cards.Card;
 import mage.filter.FilterCard;
 import mage.util.Copyable;
+
+import java.io.Serializable;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com

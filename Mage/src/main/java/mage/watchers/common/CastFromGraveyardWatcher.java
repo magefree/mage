@@ -1,18 +1,14 @@
 
 package mage.watchers.common;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
-
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.watchers.Watcher;
+
+import java.util.*;
 
 /**
  *

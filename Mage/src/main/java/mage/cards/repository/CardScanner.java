@@ -1,17 +1,11 @@
 package mage.cards.repository;
 
+import mage.cards.*;
+import org.apache.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
-import org.apache.log4j.Logger;
-
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.ExpansionSet;
-import mage.cards.Sets;
-import mage.cards.SplitCard;
 
 /**
  * @author North

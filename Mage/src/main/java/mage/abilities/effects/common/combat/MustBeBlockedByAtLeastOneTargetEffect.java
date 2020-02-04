@@ -2,7 +2,6 @@
 package mage.abilities.effects.common.combat;
 
 import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.effects.RequirementEffect;
 import mage.constants.Duration;

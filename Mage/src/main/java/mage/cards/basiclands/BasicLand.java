@@ -3,10 +3,10 @@ package mage.cards.basiclands;
 
 import java.util.UUID;
 
-import mage.abilities.mana.ActivatedManaAbilityImpl;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.abilities.mana.ActivatedManaAbilityImpl;
+import mage.cards.CardImpl;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 

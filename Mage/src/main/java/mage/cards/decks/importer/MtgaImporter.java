@@ -1,6 +1,11 @@
 package mage.cards.decks.importer;
 
-import static mage.cards.decks.CardNameUtil.CARD_NAME_PATTERN;
+import com.google.common.collect.ImmutableMap;
+import mage.cards.decks.CardNameUtil;
+import mage.cards.decks.DeckCardInfo;
+import mage.cards.decks.DeckCardLists;
+import mage.cards.repository.CardCriteria;
+import mage.cards.repository.CardInfo;
 
 import java.util.Collections;
 import java.util.List;
@@ -9,12 +14,7 @@ import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.google.common.collect.ImmutableMap;
-
-import mage.cards.decks.CardNameUtil;
-import mage.cards.decks.DeckCardInfo;
-import mage.cards.decks.DeckCardLists;
-import mage.cards.repository.CardInfo;
+import static mage.cards.decks.CardNameUtil.CARD_NAME_PATTERN;
 
 public class MtgaImporter extends PlainTextDeckImporter {
 

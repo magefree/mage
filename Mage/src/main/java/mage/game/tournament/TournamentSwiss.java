@@ -4,8 +4,8 @@ package mage.game.tournament;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.UUID;
-
 import mage.constants.MultiplayerAttackOption;
+
 import mage.constants.TournamentPlayerState;
 import mage.game.events.TableEvent;
 import mage.game.tournament.pairing.RoundPairings;

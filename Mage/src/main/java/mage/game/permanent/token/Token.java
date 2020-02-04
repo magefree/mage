@@ -1,13 +1,12 @@
 
 package mage.game.permanent.token;
 
-import java.util.ArrayList;
-import java.util.UUID;
-
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.game.Game;
+import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  *

@@ -1,7 +1,5 @@
 package mage.abilities.effects.common.continuous;
 
-import java.util.UUID;
-
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.condition.CompoundCondition;
@@ -11,16 +9,14 @@ import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
 import mage.cards.SplitCardHalf;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
+
+import java.util.UUID;
 
 public class CastFromHandWithoutPayingManaCostEffect extends ContinuousEffectImpl {
 

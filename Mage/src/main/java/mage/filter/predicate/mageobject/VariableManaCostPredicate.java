@@ -2,6 +2,7 @@
 package mage.filter.predicate.mageobject;
 
 import mage.MageObject;
+import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;

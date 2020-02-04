@@ -2,7 +2,6 @@
 package mage.abilities.costs;
 
 import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.constants.Outcome;
