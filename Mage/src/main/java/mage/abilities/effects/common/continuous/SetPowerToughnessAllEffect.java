@@ -4,6 +4,7 @@ package mage.abilities.effects.common.continuous;
 
 import java.util.Iterator;
 import java.util.Locale;
+
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;

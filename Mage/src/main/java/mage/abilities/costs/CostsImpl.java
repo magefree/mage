@@ -4,6 +4,7 @@ package mage.abilities.costs;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.VariableManaCost;

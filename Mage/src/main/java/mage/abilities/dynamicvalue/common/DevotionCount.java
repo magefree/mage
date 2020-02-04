@@ -1,5 +1,10 @@
 package mage.abilities.dynamicvalue.common;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.stream.Collectors;
+
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -11,11 +16,6 @@ import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
 import mage.constants.ColoredManaSymbol;
 import mage.game.Game;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.stream.Collectors;
 
 /**
  * Each colored mana symbol (e.g. {U}) in the mana costs of permanents you

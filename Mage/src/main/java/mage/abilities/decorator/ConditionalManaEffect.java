@@ -1,6 +1,7 @@
 package mage.abilities.decorator;
 
 import java.util.List;
+
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;

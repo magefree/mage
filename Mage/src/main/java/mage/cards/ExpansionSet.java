@@ -1,8 +1,18 @@
 package mage.cards;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.EnumMap;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
+
+import org.apache.log4j.Logger;
+
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.keyword.PartnerWithAbility;
@@ -13,7 +23,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 import mage.util.CardUtil;
 import mage.util.RandomUtil;
-import org.apache.log4j.Logger;
 
 /**
  * @author BetaSteward_at_googlemail.com

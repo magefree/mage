@@ -3,6 +3,7 @@ package mage.abilities.condition.common;
 
 import java.util.Objects;
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.game.Game;

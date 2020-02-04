@@ -2,6 +2,7 @@
 package mage.filter.predicate.permanent;
 
 import java.util.List;
+
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;

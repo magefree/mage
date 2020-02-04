@@ -5,6 +5,11 @@
  */
 package mage.cards;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
 import mage.abilities.Modes;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.common.ExileAdventureSpellEffect;
@@ -14,11 +19,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.ExileZone;
 import mage.game.Game;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author phulin

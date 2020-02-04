@@ -1,5 +1,13 @@
 package mage.game.match;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
+
+import org.apache.log4j.Logger;
+
 import mage.cards.decks.Deck;
 import mage.game.Game;
 import mage.game.GameException;
@@ -13,9 +21,6 @@ import mage.game.result.ResultProtos.MatchQuitStatus;
 import mage.players.Player;
 import mage.util.DateFormat;
 import mage.util.RandomUtil;
-import org.apache.log4j.Logger;
-
-import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com

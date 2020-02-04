@@ -1,17 +1,23 @@
 package mage.abilities.effects.common.continuous;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.SubLayer;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
-
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * @author LevelX2

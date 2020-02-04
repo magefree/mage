@@ -3,6 +3,7 @@ package mage.abilities.effects.common.continuous;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import mage.MageObjectReference;
 import mage.ObjectColor;
 import mage.abilities.Ability;

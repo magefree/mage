@@ -1,16 +1,16 @@
 
 package mage.target.common;
 
-import mage.constants.Zone;
+import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.cards.Card;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.game.Game;
-import mage.target.TargetCard;
-
-import java.util.UUID;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.other.OwnerIdPredicate;
+import mage.game.Game;
+import mage.target.TargetCard;
 
 /**
  *

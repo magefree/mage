@@ -2,18 +2,18 @@
 
 package mage.abilities.keyword;
 
-import mage.constants.ComparisonType;
+import java.util.UUID;
+
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
-
-import java.util.UUID;
 
 /**
  *

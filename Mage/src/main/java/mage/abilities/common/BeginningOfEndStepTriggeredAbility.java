@@ -1,6 +1,7 @@
 package mage.abilities.common;
 
 import java.util.Locale;
+
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.Effect;

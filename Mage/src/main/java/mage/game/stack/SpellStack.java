@@ -4,12 +4,14 @@ package mage.game.stack;
 import java.util.ArrayDeque;
 import java.util.Date;
 import java.util.UUID;
+
+import org.apache.log4j.Logger;
+
 import mage.MageObject;
 import mage.constants.Zone;
 import mage.constants.ZoneDetail;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import org.apache.log4j.Logger;
 
 /**
  *

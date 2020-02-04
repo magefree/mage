@@ -2,6 +2,7 @@
 package mage.abilities.decorator;
 
 import java.util.UUID;
+
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;

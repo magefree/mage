@@ -2,6 +2,7 @@
 package mage.filter.predicate.mageobject;
 
 import java.util.UUID;
+
 import mage.MageItem;
 import mage.abilities.Mode;
 import mage.filter.predicate.ObjectSourcePlayer;

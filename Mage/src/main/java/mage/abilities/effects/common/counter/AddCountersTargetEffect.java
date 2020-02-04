@@ -1,5 +1,8 @@
 package mage.abilities.effects.common.counter;
 
+import java.util.Locale;
+import java.util.UUID;
+
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -15,9 +18,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.util.CardUtil;
-
-import java.util.Locale;
-import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com

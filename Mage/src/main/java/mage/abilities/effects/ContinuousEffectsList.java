@@ -1,5 +1,15 @@
 package mage.abilities.effects;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
+
+import org.apache.log4j.Logger;
+
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.MageSingleton;
@@ -8,9 +18,6 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
-import org.apache.log4j.Logger;
-
-import java.util.*;
 
 /**
  * @param <T>

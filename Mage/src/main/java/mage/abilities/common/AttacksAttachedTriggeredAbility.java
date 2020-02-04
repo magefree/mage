@@ -2,6 +2,7 @@
 package mage.abilities.common;
 
 import java.util.Locale;
+
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.AttachmentType;

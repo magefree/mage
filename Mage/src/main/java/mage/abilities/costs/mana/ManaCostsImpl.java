@@ -1,5 +1,12 @@
 package mage.abilities.costs.mana;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
@@ -18,8 +25,6 @@ import mage.players.ManaPool;
 import mage.players.Player;
 import mage.target.Targets;
 import mage.util.ManaUtil;
-
-import java.util.*;
 
 /**
  * @param <T>

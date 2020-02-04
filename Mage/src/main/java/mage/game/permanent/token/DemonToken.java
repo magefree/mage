@@ -3,6 +3,7 @@
 package mage.game.permanent.token;
 
 import java.util.Arrays;
+
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;

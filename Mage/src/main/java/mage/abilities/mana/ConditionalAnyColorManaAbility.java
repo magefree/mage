@@ -2,6 +2,7 @@
 package mage.abilities.mana;
 
 import java.util.List;
+
 import mage.Mana;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;

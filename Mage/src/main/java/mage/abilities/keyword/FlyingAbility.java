@@ -1,5 +1,7 @@
 package mage.abilities.keyword;
 
+import java.io.ObjectStreamException;
+
 import mage.abilities.Ability;
 import mage.abilities.EvasionAbility;
 import mage.abilities.MageSingleton;
@@ -9,8 +11,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-
-import java.io.ObjectStreamException;
 
 /**
  * @author BetaSteward_at_googlemail.com

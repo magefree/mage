@@ -2,6 +2,7 @@
 package mage.abilities.effects.common.discard;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;

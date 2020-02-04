@@ -1,12 +1,18 @@
 package mage.abilities.effects;
 
+import java.util.UUID;
+
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
-import mage.constants.*;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.SpellAbilityType;
+import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -16,8 +22,6 @@ import mage.game.stack.StackAbility;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
-
-import java.util.UUID;
 
 /**
  * Cards with the Aura subtype don't change the zone they are in, if there is no

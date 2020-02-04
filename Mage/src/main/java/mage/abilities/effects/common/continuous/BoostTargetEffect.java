@@ -1,6 +1,9 @@
 
 package mage.abilities.effects.common.continuous;
 
+import java.util.Locale;
+import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -14,9 +17,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.util.CardUtil;
-
-import java.util.Locale;
-import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com

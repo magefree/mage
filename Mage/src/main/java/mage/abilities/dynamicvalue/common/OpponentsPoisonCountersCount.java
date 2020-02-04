@@ -1,14 +1,14 @@
 package mage.abilities.dynamicvalue.common;
 
+import java.util.Set;
+import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.players.Player;
-
-import java.util.Set;
-import java.util.UUID;
 
 public enum OpponentsPoisonCountersCount implements DynamicValue {
     instance;

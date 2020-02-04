@@ -1,5 +1,7 @@
 package mage.abilities.effects.common.cost;
 
+import org.apache.log4j.Logger;
+
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -15,7 +17,6 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInHand;
-import org.apache.log4j.Logger;
 
 /**
  * @author fireshoes - Original Code

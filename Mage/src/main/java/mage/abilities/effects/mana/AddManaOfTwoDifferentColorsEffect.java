@@ -1,15 +1,15 @@
 package mage.abilities.effects.mana;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.ManaEffect;
 import mage.choices.ManaChoice;
 import mage.game.Game;
 import mage.players.Player;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class AddManaOfTwoDifferentColorsEffect extends ManaEffect {
 

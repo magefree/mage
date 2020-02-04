@@ -1,6 +1,8 @@
 
 package mage.abilities.common;
 
+import java.util.Locale;
+
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.TargetController;
@@ -9,8 +11,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
-
-import java.util.Locale;
 
 /**
  * @author Loki

@@ -1,5 +1,8 @@
 package mage.abilities.effects.common.continuous;
 
+import java.util.Locale;
+import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
@@ -12,9 +15,6 @@ import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
-
-import java.util.Locale;
-import java.util.UUID;
 
 /**
  * @author Plopman, JayDi85

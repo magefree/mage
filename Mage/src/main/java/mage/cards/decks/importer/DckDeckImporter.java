@@ -1,15 +1,15 @@
 package mage.cards.decks.importer;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLayout;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * @author North

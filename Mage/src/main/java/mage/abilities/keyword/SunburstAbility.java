@@ -3,6 +3,7 @@ package mage.abilities.keyword;
 
 import java.util.ArrayList;
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.dynamicvalue.DynamicValue;

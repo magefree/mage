@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+
 import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.constants.Zone;

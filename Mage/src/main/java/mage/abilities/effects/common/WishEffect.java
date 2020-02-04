@@ -1,5 +1,8 @@
 package mage.abilities.effects.common;
 
+import java.util.List;
+import java.util.Set;
+
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -12,9 +15,6 @@ import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
-
-import java.util.List;
-import java.util.Set;
 
 /**
  * @author Styxo

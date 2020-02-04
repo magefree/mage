@@ -1,5 +1,7 @@
 package mage.abilities.effects.common;
 
+import java.util.UUID;
+
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -18,8 +20,6 @@ import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.util.functions.ApplyToPermanent;
 import mage.util.functions.EmptyApplyToPermanent;
-
-import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com

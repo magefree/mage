@@ -1,5 +1,7 @@
 package mage.game.command.emblems;
 
+import java.util.List;
+
 import mage.abilities.Ability;
 import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.costs.common.DiscardCardCost;
@@ -20,8 +22,6 @@ import mage.game.command.Emblem;
 import mage.game.permanent.token.EmptyToken;
 import mage.util.CardUtil;
 import mage.util.RandomUtil;
-
-import java.util.List;
 
 /**
  * @author spjspj

@@ -1,13 +1,18 @@
 package mage.cards.decks;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import org.apache.log4j.Logger;
+
 import mage.cards.Card;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.constants.Rarity;
-import org.apache.log4j.Logger;
-
-import java.util.*;
-import java.util.Map.Entry;
 
 /**
  * @author BetaSteward_at_googlemail.com

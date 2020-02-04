@@ -1,5 +1,9 @@
 package mage.abilities;
 
+import java.io.Serializable;
+import java.util.List;
+import java.util.UUID;
+
 import mage.MageObject;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostAdjuster;
@@ -9,7 +13,11 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.hint.Hint;
-import mage.constants.*;
+import mage.constants.AbilityType;
+import mage.constants.AbilityWord;
+import mage.constants.EffectType;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -19,10 +27,6 @@ import mage.target.Target;
 import mage.target.Targets;
 import mage.target.targetadjustment.TargetAdjuster;
 import mage.watchers.Watcher;
-
-import java.io.Serializable;
-import java.util.List;
-import java.util.UUID;
 
 /**
  * Practically everything in the game is started from an Ability. This interface

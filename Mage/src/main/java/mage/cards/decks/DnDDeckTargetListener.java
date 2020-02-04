@@ -1,8 +1,5 @@
 package mage.cards.decks;
 
-import org.apache.log4j.Logger;
-
-import javax.swing.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.dnd.DropTargetAdapter;
@@ -13,6 +10,10 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+
+import javax.swing.TransferHandler;
+
+import org.apache.log4j.Logger;
 
 public class DnDDeckTargetListener extends DropTargetAdapter {
 

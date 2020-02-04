@@ -1,12 +1,12 @@
 
 package mage.abilities.effects.common.combat;
 
+import mage.abilities.Ability;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
-import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;

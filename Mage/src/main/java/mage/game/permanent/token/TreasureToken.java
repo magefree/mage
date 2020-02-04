@@ -1,5 +1,9 @@
 package mage.game.permanent.token;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import mage.abilities.Ability;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -8,10 +12,6 @@ import mage.abilities.mana.SimpleManaAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * @author TheElk801

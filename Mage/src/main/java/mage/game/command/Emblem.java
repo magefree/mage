@@ -1,5 +1,9 @@
 package mage.game.command;
 
+import java.util.EnumSet;
+import java.util.List;
+import java.util.UUID;
+
 import mage.MageInt;
 import mage.MageObject;
 import mage.ObjectColor;
@@ -21,10 +25,6 @@ import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.util.GameLog;
 import mage.util.SubTypeList;
-
-import java.util.EnumSet;
-import java.util.List;
-import java.util.UUID;
 
 /**
  * @author nantuko

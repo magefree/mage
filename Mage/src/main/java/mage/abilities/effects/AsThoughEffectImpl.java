@@ -1,13 +1,13 @@
 package mage.abilities.effects;
 
+import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.constants.AsThoughEffectType;
 import mage.constants.Duration;
 import mage.constants.EffectType;
 import mage.constants.Outcome;
 import mage.game.Game;
-
-import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com

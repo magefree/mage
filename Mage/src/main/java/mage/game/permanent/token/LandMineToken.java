@@ -1,13 +1,13 @@
 
 
 package mage.game.permanent.token;
-import mage.constants.CardType;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
+import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.predicate.Predicates;

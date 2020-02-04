@@ -3,6 +3,7 @@ package mage.game;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;

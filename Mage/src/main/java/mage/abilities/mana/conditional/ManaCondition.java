@@ -2,6 +2,7 @@
 package mage.abilities.mana.conditional;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;

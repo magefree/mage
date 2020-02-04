@@ -1,12 +1,12 @@
 
 package mage.game.tournament;
 
-import mage.game.match.MatchOptions;
-import mage.players.PlayerType;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import mage.game.match.MatchOptions;
+import mage.players.PlayerType;
 
 /**
  *

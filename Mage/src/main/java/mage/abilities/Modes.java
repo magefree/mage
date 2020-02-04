@@ -1,5 +1,13 @@
 package mage.abilities;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
+
 import mage.abilities.costs.OptionalAdditionalModeSourceCosts;
 import mage.cards.Card;
 import mage.constants.Outcome;
@@ -10,8 +18,6 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
 import mage.util.RandomUtil;
-
-import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com

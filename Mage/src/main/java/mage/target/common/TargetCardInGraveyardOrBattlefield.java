@@ -1,5 +1,8 @@
 package mage.target.common;
 
+import java.util.Set;
+import java.util.UUID;
+
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.constants.Zone;
@@ -8,9 +11,6 @@ import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetCard;
-
-import java.util.Set;
-import java.util.UUID;
 
 /**
  * @author LevelX2

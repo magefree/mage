@@ -1,5 +1,7 @@
 package mage.abilities.effects.common;
 
+import org.apache.log4j.Logger;
+
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -10,7 +12,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
-import org.apache.log4j.Logger;
 
 /**
  * @author BetaSteward_at_googlemail.com

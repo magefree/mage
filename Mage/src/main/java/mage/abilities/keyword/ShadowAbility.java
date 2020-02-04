@@ -1,5 +1,7 @@
 package mage.abilities.keyword;
 
+import java.io.ObjectStreamException;
+
 import mage.abilities.Ability;
 import mage.abilities.EvasionAbility;
 import mage.abilities.MageSingleton;
@@ -8,8 +10,6 @@ import mage.constants.AsThoughEffectType;
 import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-
-import java.io.ObjectStreamException;
 
 /**
  * "Shadow" keyword

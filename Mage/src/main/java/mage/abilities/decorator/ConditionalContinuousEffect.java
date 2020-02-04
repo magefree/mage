@@ -1,5 +1,12 @@
 package mage.abilities.decorator;
 
+import java.util.EnumSet;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+
+import org.junit.Assert;
+
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.condition.Condition;
@@ -7,14 +14,12 @@ import mage.abilities.condition.FixedCondition;
 import mage.abilities.condition.LockedInCondition;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.constants.*;
+import mage.constants.DependencyType;
+import mage.constants.Duration;
+import mage.constants.EffectType;
+import mage.constants.Layer;
+import mage.constants.SubLayer;
 import mage.game.Game;
-import org.junit.Assert;
-
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  * Adds condition to {@link ContinuousEffect}. Acts as decorator.

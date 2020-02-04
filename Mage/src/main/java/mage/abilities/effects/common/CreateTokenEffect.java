@@ -1,6 +1,10 @@
 
 package mage.abilities.effects.common;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
@@ -14,10 +18,6 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com

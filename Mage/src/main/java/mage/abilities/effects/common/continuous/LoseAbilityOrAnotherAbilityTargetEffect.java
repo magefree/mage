@@ -3,6 +3,7 @@ package mage.abilities.effects.common.continuous;
 
 import java.util.HashSet;
 import java.util.Set;
+
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.choices.ChoiceImpl;

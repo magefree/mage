@@ -1,5 +1,17 @@
 package mage.game.combat;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
+
+import org.apache.log4j.Logger;
+
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.RequirementEffect;
@@ -31,10 +43,6 @@ import mage.target.common.TargetDefender;
 import mage.util.CardUtil;
 import mage.util.Copyable;
 import mage.util.trace.TraceUtil;
-import org.apache.log4j.Logger;
-
-import java.io.Serializable;
-import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com

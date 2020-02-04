@@ -1,15 +1,15 @@
 
 package mage.abilities.condition.common;
 
-import mage.abilities.Ability;
-import mage.constants.ComparisonType;
-import mage.abilities.condition.Condition;
-import mage.counters.CounterType;
-import mage.game.Game;
-import mage.filter.FilterPermanent;
-import mage.game.permanent.Permanent;
-
 import java.util.List;
+
+import mage.abilities.Ability;
+import mage.abilities.condition.Condition;
+import mage.constants.ComparisonType;
+import mage.counters.CounterType;
+import mage.filter.FilterPermanent;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
  * @author jeffwadsworth

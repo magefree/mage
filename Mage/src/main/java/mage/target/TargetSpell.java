@@ -1,6 +1,11 @@
 
 package mage.target;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
 import mage.abilities.Ability;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
@@ -8,11 +13,6 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  *

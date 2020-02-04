@@ -1,5 +1,8 @@
 package mage.abilities.effects.common.discard;
 
+import java.util.List;
+import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
@@ -17,9 +20,6 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInHand;
 import mage.util.CardUtil;
-
-import java.util.List;
-import java.util.UUID;
 
 /**
  * @author noxx

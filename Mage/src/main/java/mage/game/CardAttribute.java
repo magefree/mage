@@ -6,6 +6,7 @@
 package mage.game;
 
 import java.io.Serializable;
+
 import mage.ObjectColor;
 import mage.cards.Card;
 import mage.util.SubTypeList;

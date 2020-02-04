@@ -1,5 +1,9 @@
 package mage.watchers.common;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.RevealTargetFromHandCost;
 import mage.constants.SubType;
@@ -9,10 +13,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.watchers.Watcher;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  * @author LevelX2

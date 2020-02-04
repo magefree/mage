@@ -32,6 +32,7 @@ package mage.target.common;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.constants.Zone;

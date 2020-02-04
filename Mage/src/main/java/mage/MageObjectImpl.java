@@ -1,5 +1,12 @@
 package mage;
 
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
@@ -14,14 +21,16 @@ import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.text.TextPart;
 import mage.abilities.text.TextPartSubType;
 import mage.cards.FrameStyle;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SubLayer;
+import mage.constants.SubType;
+import mage.constants.SubTypeSet;
+import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.util.GameLog;
 import mage.util.SubTypeList;
-
-import java.util.*;
 
 public abstract class MageObjectImpl implements MageObject {
 

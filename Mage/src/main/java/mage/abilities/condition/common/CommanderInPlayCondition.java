@@ -1,13 +1,13 @@
 package mage.abilities.condition.common;
 
+import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.constants.CommanderCardType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-
-import java.util.UUID;
 
 /**
  * Checks if the player has its commander in play and controls it

@@ -1,6 +1,10 @@
 
 package mage.abilities.effects.common;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.EntersBattlefieldEffect;
@@ -10,10 +14,6 @@ import mage.constants.Outcome;
 import mage.counters.Counter;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 /**
  * Use this effect only (I guess) with EntersBattlefieldAbility like abilities

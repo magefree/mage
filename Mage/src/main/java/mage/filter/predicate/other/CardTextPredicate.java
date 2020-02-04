@@ -1,5 +1,8 @@
 package mage.filter.predicate.other;
 
+import java.util.HashMap;
+import java.util.Locale;
+
 import mage.cards.AdventureCard;
 import mage.cards.Card;
 import mage.cards.SplitCard;
@@ -8,9 +11,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
-
-import java.util.HashMap;
-import java.util.Locale;
 
 /**
  * Special predicate to search cards in deck editor

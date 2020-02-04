@@ -2,6 +2,7 @@
 package mage.abilities.effects.common.continuous;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;

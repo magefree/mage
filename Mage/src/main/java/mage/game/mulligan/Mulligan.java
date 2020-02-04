@@ -1,10 +1,14 @@
 package mage.game.mulligan;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
-
-import java.util.*;
 
 public abstract class Mulligan {
 

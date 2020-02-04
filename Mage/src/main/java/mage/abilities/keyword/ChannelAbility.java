@@ -2,12 +2,12 @@
 
 package mage.abilities.keyword;
 
-import mage.constants.Zone;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.common.DiscardSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.TimingRule;
+import mage.constants.Zone;
 
 
 

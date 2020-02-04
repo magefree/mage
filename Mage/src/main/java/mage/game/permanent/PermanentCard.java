@@ -1,5 +1,7 @@
 package mage.game.permanent;
 
+import java.util.UUID;
+
 import mage.MageObject;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
@@ -10,8 +12,6 @@ import mage.cards.Card;
 import mage.cards.LevelerCard;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
-
-import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com

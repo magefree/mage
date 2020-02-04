@@ -1,5 +1,9 @@
 package mage.game.permanent;
 
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -9,10 +13,6 @@ import mage.constants.Zone;
 import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.GameState;
-
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 
 public interface Permanent extends Card, Controllable {
 

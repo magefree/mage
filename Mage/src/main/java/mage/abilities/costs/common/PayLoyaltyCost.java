@@ -1,14 +1,14 @@
 
 package mage.abilities.costs.common;
 
+import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-
-import java.util.UUID;
 
 /**
  *

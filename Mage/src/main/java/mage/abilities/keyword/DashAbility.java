@@ -4,6 +4,7 @@ package mage.abilities.keyword;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.SpellAbility;

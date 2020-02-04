@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import org.apache.log4j.Logger;
+
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
@@ -11,7 +14,6 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ManaEvent;
-import org.apache.log4j.Logger;
 
 /**
  *

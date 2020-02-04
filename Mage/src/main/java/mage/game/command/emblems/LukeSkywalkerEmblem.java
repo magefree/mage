@@ -1,19 +1,14 @@
 package mage.game.command.emblems;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.PreventionEffectImpl;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
-import mage.abilities.effects.common.PreventAllDamageToPlayersEffect;
-import mage.constants.*;
+import mage.constants.Duration;
+import mage.constants.TurnPhase;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.game.events.GameEvent;
-import mage.game.permanent.token.CatToken2;
-import mage.game.turn.Phase;
 import mage.players.Player;
 
 /**

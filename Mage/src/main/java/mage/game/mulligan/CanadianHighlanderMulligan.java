@@ -1,11 +1,11 @@
 package mage.game.mulligan;
 
-import mage.game.Game;
-import mage.players.Player;
-
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.UUID;
+
+import mage.game.Game;
+import mage.players.Player;
 
 public class CanadianHighlanderMulligan extends VancouverMulligan {
 

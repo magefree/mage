@@ -1,5 +1,14 @@
 package mage.cards.repository;
 
+import java.io.File;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.dao.GenericRawResults;
@@ -8,15 +17,8 @@ import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.SelectArg;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
-import mage.game.events.Listener;
-import org.apache.log4j.Logger;
 
-import java.io.File;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import mage.game.events.Listener;
 
 /**
  * @author North, JayDi85

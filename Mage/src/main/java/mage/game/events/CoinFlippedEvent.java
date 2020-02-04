@@ -1,8 +1,8 @@
 package mage.game.events;
 
-import mage.util.CardUtil;
-
 import java.util.UUID;
+
+import mage.util.CardUtil;
 
 /**
  * @author TheElk801

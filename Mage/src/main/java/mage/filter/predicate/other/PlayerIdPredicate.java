@@ -2,6 +2,7 @@
 package mage.filter.predicate.other;
 
 import java.util.UUID;
+
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.players.Player;

@@ -3,6 +3,7 @@ package mage.game.turn;
 
 import java.io.Serializable;
 import java.util.UUID;
+
 import mage.constants.PhaseStep;
 import mage.game.Game;
 import mage.game.events.GameEvent;

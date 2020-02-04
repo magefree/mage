@@ -3,6 +3,7 @@ package mage.abilities.text;
 
 import java.io.Serializable;
 import java.util.UUID;
+
 import mage.util.Copyable;
 
 /**

@@ -4,6 +4,7 @@ package mage.watchers.common;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+
 import mage.cards.Card;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;

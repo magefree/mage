@@ -1,11 +1,11 @@
 package mage.util;
 
-import mage.constants.SubType;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.stream.Collectors;
+
+import mage.constants.SubType;
 
 public class SubTypeList extends ArrayList<SubType> {
 

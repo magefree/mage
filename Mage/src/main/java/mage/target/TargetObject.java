@@ -1,6 +1,7 @@
 package mage.target;
 
 import java.util.UUID;
+
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.constants.Zone;

@@ -1,14 +1,14 @@
 package mage.abilities.effects;
 
+import java.io.Serializable;
+import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.constants.EffectType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.target.targetpointer.TargetPointer;
-
-import java.io.Serializable;
-import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com

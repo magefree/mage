@@ -1,9 +1,9 @@
 
 
 package mage.game.permanent.token;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.ObjectColor;
+import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**

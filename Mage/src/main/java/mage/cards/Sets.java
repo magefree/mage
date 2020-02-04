@@ -1,5 +1,14 @@
 package mage.cards;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import org.apache.log4j.Logger;
+import org.junit.Assert;
+
 import mage.Mana;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
@@ -10,10 +19,6 @@ import mage.constants.Rarity;
 import mage.filter.FilterMana;
 import mage.util.ClassScanner;
 import mage.util.RandomUtil;
-import org.apache.log4j.Logger;
-import org.junit.Assert;
-
-import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com, JayDi85

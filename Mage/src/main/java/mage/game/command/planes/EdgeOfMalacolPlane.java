@@ -5,16 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MainPhaseStackEmptyCondition;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.RollPlanarDieEffect;
-import mage.abilities.effects.common.SkipUntapStepEffect;
 import mage.abilities.effects.common.UntapAllControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.constants.Duration;

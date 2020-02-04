@@ -1,5 +1,9 @@
 package mage.abilities.costs.common;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
@@ -13,10 +17,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.util.CardUtil;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  * @author LevelX

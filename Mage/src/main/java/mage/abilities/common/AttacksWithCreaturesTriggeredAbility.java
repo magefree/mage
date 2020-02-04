@@ -6,6 +6,7 @@
 package mage.abilities.common;
 
 import java.util.UUID;
+
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;

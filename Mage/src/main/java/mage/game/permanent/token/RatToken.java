@@ -1,12 +1,12 @@
 package mage.game.permanent.token;
 
-import mage.MageInt;
-import mage.constants.CardType;
-import mage.constants.SubType;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import mage.MageInt;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  * @author LevelX2

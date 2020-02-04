@@ -1,9 +1,10 @@
 package mage.abilities.effects.common.combat;
 
 import java.util.UUID;
-import mage.constants.Duration;
+
 import mage.abilities.Ability;
 import mage.abilities.effects.RequirementEffect;
+import mage.constants.Duration;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;

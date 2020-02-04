@@ -2,6 +2,8 @@
 
 package mage.abilities.effects.common.continuous;
 
+import org.apache.log4j.Logger;
+
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -13,7 +15,6 @@ import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import org.apache.log4j.Logger;
 
 /**
  *

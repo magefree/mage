@@ -2,6 +2,7 @@
 package mage.filter;
 
 import java.util.UUID;
+
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;

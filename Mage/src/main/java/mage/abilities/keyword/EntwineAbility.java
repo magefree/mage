@@ -1,17 +1,21 @@
 
 package mage.abilities.keyword;
 
+import java.util.Iterator;
+
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
-import mage.abilities.costs.*;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.Costs;
+import mage.abilities.costs.OptionalAdditionalCost;
+import mage.abilities.costs.OptionalAdditionalCostImpl;
+import mage.abilities.costs.OptionalAdditionalModeSourceCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
-
-import java.util.Iterator;
 
 /**
  * 702.40. Entwine

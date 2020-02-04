@@ -7,7 +7,6 @@ import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
-import mage.cards.repository.CardRepository;
 import mage.util.RandomUtil;
 
 /**

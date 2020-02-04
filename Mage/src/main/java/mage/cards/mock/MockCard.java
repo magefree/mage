@@ -1,5 +1,9 @@
 package mage.cards.mock;
 
+import java.util.List;
+
+import org.apache.log4j.Logger;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
@@ -8,9 +12,6 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.cards.CardImpl;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
-import org.apache.log4j.Logger;
-
-import java.util.List;
 
 /**
  * Mock card for GUI (deck editor and panels)

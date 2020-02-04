@@ -3,6 +3,7 @@ package mage.game.command.planes;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;

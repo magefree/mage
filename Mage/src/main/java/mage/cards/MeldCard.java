@@ -1,6 +1,9 @@
 
 package mage.cards;
 
+import java.util.List;
+import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.constants.CardType;
 import mage.constants.Zone;
@@ -8,9 +11,6 @@ import mage.counters.Counter;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
-
-import java.util.List;
-import java.util.UUID;
 
 /**
  *

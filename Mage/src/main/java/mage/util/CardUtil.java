@@ -1,20 +1,5 @@
 package mage.util;
 
-import mage.MageObject;
-import mage.Mana;
-import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
-import mage.abilities.costs.VariableCost;
-import mage.abilities.costs.mana.*;
-import mage.cards.Card;
-import mage.constants.EmptyNames;
-import mage.filter.Filter;
-import mage.game.CardState;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
-import mage.util.functions.CopyTokenFunction;
-
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -23,6 +8,28 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
+
+import mage.MageObject;
+import mage.Mana;
+import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
+import mage.abilities.costs.VariableCost;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.mana.HybridManaCost;
+import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.costs.mana.MonoHybridManaCost;
+import mage.abilities.costs.mana.SnowManaCost;
+import mage.abilities.costs.mana.VariableManaCost;
+import mage.cards.Card;
+import mage.constants.EmptyNames;
+import mage.filter.Filter;
+import mage.game.CardState;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.game.permanent.token.Token;
+import mage.util.functions.CopyTokenFunction;
 
 /**
  * @author nantuko

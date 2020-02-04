@@ -2,12 +2,12 @@
 
 package mage.game.permanent.token;
 
+import java.util.Collections;
+
 import mage.MageInt;
 import mage.abilities.keyword.MonstrosityAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
-
-import java.util.Collections;
 
 /**
  *

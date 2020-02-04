@@ -2,6 +2,7 @@
 package mage.abilities.effects.common;
 
 import java.util.List;
+
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;

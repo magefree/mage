@@ -4,6 +4,7 @@ package mage.abilities.effects.common;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;

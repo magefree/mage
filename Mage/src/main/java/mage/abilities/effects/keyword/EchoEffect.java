@@ -1,5 +1,7 @@
 package mage.abilities.effects.keyword;
 
+import java.util.Locale;
+
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.costs.Cost;
@@ -12,8 +14,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-
-import java.util.Locale;
 
 public class EchoEffect extends OneShotEffect {
 

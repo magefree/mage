@@ -1,5 +1,7 @@
 package mage.abilities.effects.common;
 
+import java.util.UUID;
+
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.PreventionEffectImpl;
@@ -11,8 +13,6 @@ import mage.filter.predicate.other.PlayerIdPredicate;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-
-import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com

@@ -3,9 +3,10 @@
 package mage.game.permanent.token;
 
 import java.util.Arrays;
+
+import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.MageInt;
 
 /**
  *

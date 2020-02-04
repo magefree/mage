@@ -1,10 +1,10 @@
 package mage.cards.repository;
 
+import java.io.Serializable;
+
 import mage.game.events.EventDispatcher;
 import mage.game.events.EventSource;
 import mage.game.events.Listener;
-
-import java.io.Serializable;
 
 /**
  * @author JayDi85

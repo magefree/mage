@@ -1,16 +1,17 @@
 package mage;
 
-import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.constants.DependencyType;
-import mage.constants.Duration;
-import org.junit.Assert;
-import org.junit.Test;
+import static org.hamcrest.CoreMatchers.is;
 
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.UUID;
 
-import static org.hamcrest.CoreMatchers.is;
+import org.junit.Assert;
+import org.junit.Test;
+
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.constants.DependencyType;
+import mage.constants.Duration;
 
 /**
  * Created by IGOUDT on 25-2-2017.

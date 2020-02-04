@@ -2,8 +2,8 @@
 package mage.game.events;
 
 import java.util.UUID;
+
 import mage.constants.EnterEventType;
-import static mage.constants.EnterEventType.SELF;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
 

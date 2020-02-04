@@ -1,15 +1,15 @@
 package mage.target;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.constants.Zone;
 import mage.filter.FilterStackObject;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.stack.StackObject;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com

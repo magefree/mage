@@ -1,11 +1,12 @@
 
 package mage.abilities.effects.common;
 
+import static mage.constants.Duration.EndOfTurn;
+
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.constants.Duration;
-import static mage.constants.Duration.EndOfTurn;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;

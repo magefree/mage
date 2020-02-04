@@ -1,5 +1,7 @@
 package mage.abilities.effects.common;
 
+import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
@@ -10,8 +12,6 @@ import mage.target.Target;
 import mage.target.targetpointer.FirstTargetPointer;
 import mage.target.targetpointer.SecondTargetPointer;
 import mage.util.CardUtil;
-
-import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com

@@ -4,6 +4,7 @@ package mage.target.common;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
+
 import mage.abilities.Ability;
 import mage.constants.AbilityType;
 import mage.constants.Zone;

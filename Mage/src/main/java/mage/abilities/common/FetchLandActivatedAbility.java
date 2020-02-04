@@ -2,6 +2,11 @@
 
 package mage.abilities.common;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import mage.MageObject;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.common.PayLifeCost;
@@ -16,11 +21,6 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
 import mage.target.common.TargetCardInLibrary;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  *

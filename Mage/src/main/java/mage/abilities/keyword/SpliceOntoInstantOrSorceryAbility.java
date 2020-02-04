@@ -1,5 +1,7 @@
 package mage.abilities.keyword;
 
+import java.util.Iterator;
+
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -17,8 +19,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
-
-import java.util.Iterator;
 
 /**
  * 702.45. Splice

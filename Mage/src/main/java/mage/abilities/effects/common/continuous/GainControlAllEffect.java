@@ -1,6 +1,7 @@
 package mage.abilities.effects.common.continuous;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;

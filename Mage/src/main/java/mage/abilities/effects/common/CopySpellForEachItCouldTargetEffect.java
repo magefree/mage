@@ -1,5 +1,14 @@
 package mage.abilities.effects.common;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
+
 import mage.MageItem;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -16,8 +25,6 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetImpl;
 import mage.util.TargetAddress;
-
-import java.util.*;
 
 /**
  * @param <T>

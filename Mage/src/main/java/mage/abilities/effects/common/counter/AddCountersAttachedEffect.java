@@ -1,6 +1,7 @@
 package mage.abilities.effects.common.counter;
 
 import java.util.Locale;
+
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;

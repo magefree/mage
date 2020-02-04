@@ -1,5 +1,11 @@
 package mage.game.turn;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.constants.PhaseStep;
 import mage.constants.TurnPhase;
@@ -11,12 +17,6 @@ import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.util.ThreadLocalStringBuilder;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com

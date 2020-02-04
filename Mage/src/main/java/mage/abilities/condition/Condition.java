@@ -1,9 +1,9 @@
 package mage.abilities.condition;
 
+import java.io.Serializable;
+
 import mage.abilities.Ability;
 import mage.game.Game;
-
-import java.io.Serializable;
 
 
 /**

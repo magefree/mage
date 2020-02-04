@@ -4,6 +4,7 @@ package mage.game.command.emblems;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.SpellAbility;

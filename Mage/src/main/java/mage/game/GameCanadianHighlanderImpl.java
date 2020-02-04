@@ -1,13 +1,13 @@
 
 package mage.game;
 
+import java.util.UUID;
+
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.PhaseStep;
 import mage.constants.RangeOfInfluence;
 import mage.game.mulligan.Mulligan;
 import mage.game.turn.TurnMod;
-
-import java.util.UUID;
 
 public abstract class GameCanadianHighlanderImpl extends GameImpl {
 

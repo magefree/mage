@@ -2,6 +2,7 @@
 package mage.abilities.keyword;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;

@@ -3,6 +3,7 @@ package mage.abilities.costs.mana;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
