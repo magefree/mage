@@ -106,6 +106,7 @@ public class ScryfallImageSupportCards {
             add("PREL"); // Release Events
             add("PJSE"); // Junior Series Europe
             add("P2HG"); // Two-Headed Giant Tournament
+            add("PGTW"); // Gateway 2006
             
             add("MGB");
             add("ULG");
