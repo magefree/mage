@@ -1,10 +1,10 @@
 
 package mage.game;
 
+import java.io.Serializable;
+
 import mage.players.Player;
 import mage.players.PlayerType;
-
-import java.io.Serializable;
 
 /**
  *

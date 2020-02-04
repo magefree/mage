@@ -3,6 +3,7 @@ package mage.abilities.effects.common.counter;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;

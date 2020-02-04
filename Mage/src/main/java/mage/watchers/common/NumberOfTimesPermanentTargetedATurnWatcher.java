@@ -4,6 +4,7 @@ package mage.watchers.common;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import mage.MageObjectReference;
 import mage.constants.WatcherScope;
 import mage.game.Game;

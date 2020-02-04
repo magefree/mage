@@ -1,9 +1,15 @@
 package mage.game.permanent;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
+
 import mage.abilities.keyword.PhasingAbility;
 import mage.constants.CardType;
 import mage.constants.RangeOfInfluence;

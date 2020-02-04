@@ -1,10 +1,10 @@
 
 
 package mage.game.permanent.token;
-import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.TrampleAbility;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *

@@ -4,6 +4,7 @@ package mage.abilities.costs.common;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;

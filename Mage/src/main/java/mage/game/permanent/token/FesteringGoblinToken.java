@@ -1,13 +1,13 @@
 
 
 package mage.game.permanent.token;
-import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
 
 /**

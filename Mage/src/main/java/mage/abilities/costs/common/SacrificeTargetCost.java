@@ -1,6 +1,10 @@
 
 package mage.abilities.costs.common;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
@@ -11,10 +15,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.util.CardUtil;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com

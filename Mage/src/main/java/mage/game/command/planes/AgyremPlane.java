@@ -1,5 +1,9 @@
 package mage.game.command.planes;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
@@ -28,10 +32,6 @@ import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.PlanarRollWatcher;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 /**
  * @author spjspj

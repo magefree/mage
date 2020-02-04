@@ -1,5 +1,10 @@
 package mage.abilities.effects.common.continuous;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Locale;
+import java.util.UUID;
+
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -7,15 +12,14 @@ import mage.abilities.Mode;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.constants.*;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.SubLayer;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Locale;
-import java.util.UUID;
 
 /**
  * @author Loki

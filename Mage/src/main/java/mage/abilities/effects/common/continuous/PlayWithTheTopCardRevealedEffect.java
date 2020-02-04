@@ -1,5 +1,7 @@
 package mage.abilities.effects.common.continuous;
 
+import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
@@ -8,8 +10,6 @@ import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.players.Player;
-
-import java.util.UUID;
 
 /**
  * @author nantuko

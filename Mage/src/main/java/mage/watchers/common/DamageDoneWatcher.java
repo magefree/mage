@@ -5,15 +5,15 @@
  */
 package mage.watchers.common;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 import mage.MageObjectReference;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.watchers.Watcher;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 
 /**
  * @author LevelX2

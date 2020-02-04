@@ -1,5 +1,9 @@
 package mage.game;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -11,16 +15,18 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.MultiplayerAttackOption;
+import mage.constants.PhaseStep;
+import mage.constants.RangeOfInfluence;
+import mage.constants.Rarity;
+import mage.constants.SuperType;
+import mage.constants.Zone;
 import mage.game.mulligan.Mulligan;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
 import mage.watchers.common.CommanderInfoWatcher;
 import mage.watchers.common.CommanderPlaysCountWatcher;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  * @author JRHerlehy

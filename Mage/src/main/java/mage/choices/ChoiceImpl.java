@@ -1,9 +1,13 @@
 package mage.choices;
 
-import mage.util.RandomUtil;
-
 import java.io.Serializable;
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import mage.util.RandomUtil;
 
 /**
  * @author BetaSteward_at_googlemail.com, JayDi85

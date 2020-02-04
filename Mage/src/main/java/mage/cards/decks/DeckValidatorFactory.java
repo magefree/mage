@@ -1,11 +1,11 @@
 package mage.cards.decks;
 
-import org.apache.log4j.Logger;
-
 import java.lang.reflect.Constructor;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
+
+import org.apache.log4j.Logger;
 
 /**
  * @author BetaSteward_at_googlemail.com

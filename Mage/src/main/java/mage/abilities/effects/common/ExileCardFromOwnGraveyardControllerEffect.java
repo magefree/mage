@@ -1,5 +1,7 @@
 package mage.abilities.effects.common;
 
+import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -10,8 +12,6 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.util.CardUtil;
-
-import java.util.UUID;
 
 /**
  * @author LevelX2

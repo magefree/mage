@@ -6,6 +6,7 @@
 package mage.abilities.keyword;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;

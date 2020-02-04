@@ -2,6 +2,7 @@
 package mage.filter.predicate;
 
 import java.io.Serializable;
+
 import mage.game.Game;
 
 /**

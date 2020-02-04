@@ -1,5 +1,9 @@
 package mage.game.permanent.token;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -10,10 +14,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * @author spjspj

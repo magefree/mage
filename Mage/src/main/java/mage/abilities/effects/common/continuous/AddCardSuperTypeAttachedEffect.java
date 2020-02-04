@@ -2,9 +2,15 @@
 package mage.abilities.effects.common.continuous;
 
 import java.util.Locale;
+
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.constants.*;
+import mage.constants.AttachmentType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.SubLayer;
+import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 

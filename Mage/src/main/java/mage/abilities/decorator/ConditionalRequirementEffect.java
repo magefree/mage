@@ -1,5 +1,7 @@
 package mage.abilities.decorator;
 
+import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.FixedCondition;
@@ -9,8 +11,6 @@ import mage.constants.Duration;
 import mage.constants.EffectType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-
-import java.util.UUID;
 
 /**
  * @author LevelX2

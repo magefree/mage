@@ -1,6 +1,10 @@
 
 package mage.abilities.keyword;
 
+import java.awt.Color;
+import java.util.Objects;
+import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
@@ -19,10 +23,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
-
-import java.awt.*;
-import java.util.Objects;
-import java.util.UUID;
 
 /**
  * @author emerald000

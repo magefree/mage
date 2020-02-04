@@ -1,5 +1,7 @@
 package mage.target.common;
 
+import java.util.UUID;
+
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.constants.Outcome;
@@ -8,8 +10,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-
-import java.util.UUID;
 
 /**
  * @author Mael

@@ -6,6 +6,7 @@
 package mage.game.command.emblems;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;

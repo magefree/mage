@@ -1,8 +1,8 @@
 package mage.game;
 
-import mage.cards.CardsImpl;
-
 import java.util.UUID;
+
+import mage.cards.CardsImpl;
 
 /**
  * @author BetaSteward_at_googlemail.com

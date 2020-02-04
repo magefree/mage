@@ -6,6 +6,7 @@
 package mage.abilities.dynamicvalue.common;
 
 import java.io.ObjectStreamException;
+
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;

@@ -1,5 +1,9 @@
 package mage.abilities.effects.common;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.RestrictionEffect;
@@ -11,10 +15,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.turn.Step;
 import mage.target.targetpointer.FixedTarget;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 /**
  * @author LevelX2

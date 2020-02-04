@@ -1,6 +1,10 @@
 package mage.abilities.effects.common.continuous;
 
 import java.util.Iterator;
+import java.util.Set;
+import java.util.UUID;
+
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
@@ -10,10 +14,6 @@ import mage.constants.SubLayer;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-
-import java.util.Set;
-import java.util.UUID;
-import mage.MageObjectReference;
 
 public class BoostOpponentsEffect extends ContinuousEffectImpl {
     protected int power;

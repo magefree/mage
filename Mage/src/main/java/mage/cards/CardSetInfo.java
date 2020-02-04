@@ -1,9 +1,9 @@
 package mage.cards;
 
+import java.io.Serializable;
+
 import mage.constants.Rarity;
 import mage.util.Copyable;
-
-import java.io.Serializable;
 
 public final class CardSetInfo implements Serializable, Copyable<CardSetInfo> {
 

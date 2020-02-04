@@ -2,14 +2,9 @@ package mage.cards.decks.importer;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.Collections;
-import java.util.List;
-
 import org.junit.Test;
 
 import mage.cards.decks.DeckCardLists;
-import mage.cards.repository.CardCriteria;
-import mage.cards.repository.CardInfo;
 
 public class MwsDeckImportTest {
 

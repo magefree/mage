@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;

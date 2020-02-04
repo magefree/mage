@@ -1,12 +1,12 @@
 package mage.abilities;
 
+import java.io.Serializable;
+import java.util.UUID;
+
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.target.Target;
 import mage.target.Targets;
-
-import java.io.Serializable;
-import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com

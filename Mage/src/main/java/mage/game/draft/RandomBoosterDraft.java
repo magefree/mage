@@ -3,9 +3,10 @@
 package mage.game.draft;
 
 import java.util.ArrayList;
-import java.util.List;
-import mage.cards.ExpansionSet;
 import java.util.Collections;
+import java.util.List;
+
+import mage.cards.ExpansionSet;
 
 /**
  *

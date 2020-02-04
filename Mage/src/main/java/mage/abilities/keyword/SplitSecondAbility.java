@@ -1,5 +1,7 @@
 package mage.abilities.keyword;
 
+import java.util.Optional;
+
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
@@ -9,8 +11,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-
-import java.util.Optional;
 
 /**
  * Split Second

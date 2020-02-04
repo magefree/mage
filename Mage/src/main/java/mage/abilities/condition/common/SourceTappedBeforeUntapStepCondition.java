@@ -2,6 +2,8 @@
  
 package mage.abilities.condition.common;
 
+import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.constants.PhaseStep;
@@ -9,8 +11,6 @@ import mage.constants.TurnPhase;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.turn.Step;
-
-import java.util.UUID;
 
 /**
  *

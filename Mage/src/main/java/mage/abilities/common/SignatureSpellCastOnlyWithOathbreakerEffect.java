@@ -1,5 +1,7 @@
 package mage.abilities.common;
 
+import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
@@ -7,8 +9,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-
-import java.util.UUID;
 
 /**
  * For oathbreaker game mode

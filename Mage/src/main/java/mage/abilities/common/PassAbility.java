@@ -2,6 +2,7 @@
 package mage.abilities.common;
 
 import java.util.UUID;
+
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.effects.common.PassEffect;
 import mage.constants.Zone;

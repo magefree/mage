@@ -2,13 +2,13 @@ package mage.abilities.keyword;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.constants.ComparisonType;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.TimingRule;
 import mage.constants.Zone;

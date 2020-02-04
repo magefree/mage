@@ -7,7 +7,6 @@ import mage.abilities.effects.Effect;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 
 /**
  * @author Styxo

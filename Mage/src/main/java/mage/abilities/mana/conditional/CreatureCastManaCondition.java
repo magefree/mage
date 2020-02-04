@@ -2,6 +2,7 @@
 package mage.abilities.mana.conditional;
 
 import java.util.UUID;
+
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;

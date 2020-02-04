@@ -1,11 +1,11 @@
 package mage.constants;
 
+import java.util.Arrays;
+import java.util.EnumSet;
+
 import mage.MageObject;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
-
-import java.util.Arrays;
-import java.util.EnumSet;
 
 /**
  * @author North

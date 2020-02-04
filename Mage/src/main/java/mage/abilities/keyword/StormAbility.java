@@ -1,5 +1,7 @@
 package mage.abilities.keyword;
 
+import org.apache.log4j.Logger;
+
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -13,7 +15,6 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.watchers.common.CastSpellLastTurnWatcher;
-import org.apache.log4j.Logger;
 
 /**
  *

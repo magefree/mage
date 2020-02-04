@@ -1,5 +1,10 @@
 package mage.target;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
 import mage.MageItem;
 import mage.abilities.Ability;
 import mage.cards.Card;
@@ -9,11 +14,6 @@ import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com

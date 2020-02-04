@@ -4,6 +4,7 @@ package mage.util;
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.UUID;
+
 import mage.abilities.Mode;
 import mage.abilities.Modes;
 import mage.abilities.SpellAbility;

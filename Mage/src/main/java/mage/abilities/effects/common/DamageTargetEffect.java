@@ -1,5 +1,7 @@
 package mage.abilities.effects.common;
 
+import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -11,8 +13,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-
-import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com

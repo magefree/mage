@@ -3,6 +3,7 @@
 package mage.game.draft;
 
 import java.util.List;
+
 import mage.cards.ExpansionSet;
 
 /**

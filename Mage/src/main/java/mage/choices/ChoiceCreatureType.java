@@ -1,10 +1,10 @@
 package mage.choices;
 
-import mage.MageObject;
-import mage.constants.SubType;
-
 import java.util.LinkedHashSet;
 import java.util.stream.Collectors;
+
+import mage.MageObject;
+import mage.constants.SubType;
 
 public class ChoiceCreatureType extends ChoiceImpl {
 

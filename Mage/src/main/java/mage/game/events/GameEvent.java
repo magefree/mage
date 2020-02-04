@@ -1,12 +1,12 @@
 package mage.game.events;
 
-import mage.MageObjectReference;
-import mage.constants.Zone;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
+import mage.MageObjectReference;
+import mage.constants.Zone;
 
 /**
  * @author BetaSteward_at_googlemail.com

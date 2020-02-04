@@ -1,11 +1,11 @@
 
 
 package mage.game.permanent.token;
-import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *

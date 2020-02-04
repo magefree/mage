@@ -1,6 +1,7 @@
 package mage.abilities.effects.common;
 
 import java.util.List;
+
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;

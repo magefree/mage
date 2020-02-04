@@ -1,9 +1,10 @@
 package mage.cards.decks.importer;
 
-import mage.cards.decks.DeckCardLists;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import mage.cards.decks.DeckCardLists;
 
 public class DraftLogImporterTest {
 

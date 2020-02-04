@@ -2,6 +2,7 @@
 package mage.abilities.keyword;
 
 import java.io.ObjectStreamException;
+
 import mage.abilities.MageSingleton;
 import mage.abilities.OpeningHandAction;
 import mage.abilities.StaticAbility;

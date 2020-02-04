@@ -4,6 +4,7 @@ package mage.abilities.effects.common;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;

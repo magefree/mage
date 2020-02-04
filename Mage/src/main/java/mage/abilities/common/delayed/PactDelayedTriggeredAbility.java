@@ -1,11 +1,11 @@
 
 package mage.abilities.common.delayed;
 
-import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;

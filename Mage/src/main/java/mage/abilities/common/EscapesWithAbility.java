@@ -1,5 +1,9 @@
 package mage.abilities.common;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.SpellAbility;
@@ -12,10 +16,6 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 /**
  * @author TheElk801

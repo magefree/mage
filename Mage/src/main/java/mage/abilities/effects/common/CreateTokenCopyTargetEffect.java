@@ -1,5 +1,9 @@
 package mage.abilities.effects.common;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -11,7 +15,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.EmptyToken;
@@ -19,10 +27,6 @@ import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 import mage.util.functions.ApplyToPermanent;
 import mage.util.functions.EmptyApplyToPermanent;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 /**
  * @author LevelX2

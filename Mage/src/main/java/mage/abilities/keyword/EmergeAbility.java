@@ -1,5 +1,7 @@
 package mage.abilities.keyword;
 
+import java.util.UUID;
+
 import mage.Mana;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -18,8 +20,6 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.util.CardUtil;
-
-import java.util.UUID;
 
 /**
  * @author emerald000

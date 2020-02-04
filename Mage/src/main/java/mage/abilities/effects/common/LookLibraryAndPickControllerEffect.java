@@ -29,6 +29,10 @@
  */
 package mage.abilities.effects.common;
 
+import static java.lang.Integer.min;
+
+import java.util.Locale;
+
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -42,10 +46,6 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.util.CardUtil;
-
-import java.util.Locale;
-
-import static java.lang.Integer.min;
 
 /**
  * @author LevelX

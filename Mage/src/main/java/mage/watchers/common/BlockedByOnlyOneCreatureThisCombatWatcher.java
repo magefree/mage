@@ -1,7 +1,12 @@
 
 package mage.watchers.common;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.UUID;
 
 import mage.constants.WatcherScope;
 import mage.game.Game;

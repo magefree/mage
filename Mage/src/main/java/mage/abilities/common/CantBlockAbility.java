@@ -1,9 +1,9 @@
 
 package mage.abilities.common;
 
+import mage.abilities.effects.common.combat.CantBlockSourceEffect;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.abilities.effects.common.combat.CantBlockSourceEffect;
 
 /**
  *

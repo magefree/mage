@@ -1,10 +1,10 @@
 package mage.cards.decks;
 
-import org.junit.Assert;
-import org.junit.Test;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author JayDi85

@@ -2,6 +2,7 @@ package mage.abilities.effects.common.asthought;
 
 import java.util.List;
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.constants.AsThoughEffectType;

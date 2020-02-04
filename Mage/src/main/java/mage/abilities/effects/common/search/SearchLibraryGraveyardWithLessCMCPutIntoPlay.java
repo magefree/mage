@@ -2,10 +2,10 @@ package mage.abilities.effects.common.search;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.constants.ComparisonType;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardsImpl;
+import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;

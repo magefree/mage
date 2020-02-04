@@ -3,6 +3,7 @@ package mage.players;
 
 import java.io.Serializable;
 import java.util.UUID;
+
 import mage.ConditionalMana;
 import mage.MageObject;
 import mage.Mana;

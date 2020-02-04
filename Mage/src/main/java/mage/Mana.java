@@ -2,11 +2,13 @@ package mage;
 
 import java.io.Serializable;
 import java.util.Objects;
+
+import org.apache.log4j.Logger;
+
 import mage.constants.ColoredManaSymbol;
 import mage.constants.ManaType;
 import mage.filter.FilterMana;
 import mage.util.Copyable;
-import org.apache.log4j.Logger;
 
 /**
  * @author BetaSteward_at_googlemail.com

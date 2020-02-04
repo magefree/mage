@@ -3,6 +3,7 @@ package mage.abilities.effects.common;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
+
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;

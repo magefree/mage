@@ -1,6 +1,7 @@
 package mage.abilities.effects.common.asthought;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.cards.Card;

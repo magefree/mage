@@ -1,13 +1,13 @@
 
 
 package mage.game.permanent.token;
-import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.AttacksIfAbleAllEffect;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;

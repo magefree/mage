@@ -2,14 +2,14 @@
 
 package mage.abilities.costs.common;
 
+import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.cards.Card;
 import mage.game.Game;
 import mage.players.Player;
-
-import java.util.UUID;
 
 /**
  *

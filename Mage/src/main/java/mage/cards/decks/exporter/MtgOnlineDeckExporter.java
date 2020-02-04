@@ -1,15 +1,16 @@
 package mage.cards.decks.exporter;
 
-import mage.cards.decks.DeckCardInfo;
-import mage.cards.decks.DeckCardLists;
-import mage.cards.decks.DeckFileFilter;
-
-import javax.swing.filechooser.FileFilter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.swing.filechooser.FileFilter;
+
+import mage.cards.decks.DeckCardInfo;
+import mage.cards.decks.DeckCardLists;
+import mage.cards.decks.DeckFileFilter;
 
 public class MtgOnlineDeckExporter extends DeckExporter {
 

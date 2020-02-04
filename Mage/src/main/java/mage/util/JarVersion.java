@@ -1,13 +1,13 @@
 package mage.util;
 
-import org.apache.log4j.Logger;
-
 import java.net.URL;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAccessor;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
+
+import org.apache.log4j.Logger;
 
 /**
  * @author JayDi85

@@ -1,16 +1,20 @@
 package mage.abilities.effects.common.continuous;
 
+import java.util.Locale;
+import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
-import mage.constants.*;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.PhaseStep;
+import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
-
-import java.util.Locale;
-import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com

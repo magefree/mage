@@ -1,5 +1,7 @@
 package mage.abilities.effects.keyword;
 
+import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
@@ -17,8 +19,6 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.util.CardUtil;
-
-import java.util.UUID;
 
 /**
  * @author TheElk801

@@ -1,5 +1,10 @@
 package mage.abilities.effects.mana;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+
 import mage.ConditionalMana;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -11,10 +16,6 @@ import mage.choices.ChoiceColor;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
-import org.apache.log4j.Logger;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author noxx

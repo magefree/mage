@@ -1,8 +1,6 @@
 
 
 package mage.game.permanent.token;
-import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -12,8 +10,10 @@ import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.constants.AttachmentType;
+import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**

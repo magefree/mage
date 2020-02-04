@@ -2,13 +2,13 @@
 
 package mage.abilities.effects.common.cost;
 
-import mage.constants.Duration;
-import mage.constants.EffectType;
-import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.CostModificationEffect;
 import mage.constants.CostModificationType;
+import mage.constants.Duration;
+import mage.constants.EffectType;
+import mage.constants.Outcome;
 import mage.game.Game;
 
 /**

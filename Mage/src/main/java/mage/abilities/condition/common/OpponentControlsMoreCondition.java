@@ -3,6 +3,7 @@
 package mage.abilities.condition.common;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.filter.FilterPermanent;

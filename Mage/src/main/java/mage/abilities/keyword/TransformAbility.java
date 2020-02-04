@@ -5,7 +5,14 @@ import mage.abilities.Mode;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.SubLayer;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 

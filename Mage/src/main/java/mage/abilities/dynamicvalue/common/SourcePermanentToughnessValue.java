@@ -2,14 +2,14 @@
 
 package mage.abilities.dynamicvalue.common;
 
+import java.io.ObjectStreamException;
+
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-
-import java.io.ObjectStreamException;
 
 /**
  *

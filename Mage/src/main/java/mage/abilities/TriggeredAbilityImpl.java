@@ -1,5 +1,8 @@
 package mage.abilities;
 
+import java.util.Locale;
+import java.util.UUID;
+
 import mage.MageObject;
 import mage.abilities.effects.Effect;
 import mage.constants.AbilityType;
@@ -10,9 +13,6 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 import mage.util.CardUtil;
-
-import java.util.Locale;
-import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com

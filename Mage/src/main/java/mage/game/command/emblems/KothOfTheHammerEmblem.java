@@ -7,8 +7,13 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.constants.*;
-
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.SubLayer;
+import mage.constants.SubType;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.command.Emblem;

@@ -1,8 +1,8 @@
 package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
-import mage.constants.ComparisonType;
 import mage.abilities.condition.IntCompareCondition;
+import mage.constants.ComparisonType;
 import mage.game.Game;
 import mage.watchers.common.PlayerGainedLifeWatcher;
 

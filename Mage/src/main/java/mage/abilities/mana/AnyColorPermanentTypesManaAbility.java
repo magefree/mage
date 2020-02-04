@@ -5,6 +5,9 @@
  */
 package mage.abilities.mana;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -19,9 +22,6 @@ import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author CountAndromalius

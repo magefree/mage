@@ -3,8 +3,8 @@
 package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
-import mage.constants.ComparisonType;
 import mage.abilities.condition.Condition;
+import mage.constants.ComparisonType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;

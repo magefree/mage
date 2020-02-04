@@ -1,6 +1,6 @@
 package mage.util;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.Random;
 
 /**

@@ -1,5 +1,7 @@
 package mage.abilities.effects.common;
 
+import java.util.Locale;
+
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.costs.Cost;
@@ -12,8 +14,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.ManaUtil;
-
-import java.util.Locale;
 
 /**
  * Created by IntelliJ IDEA. User: Loki Date: 21.12.10 Time: 9:21

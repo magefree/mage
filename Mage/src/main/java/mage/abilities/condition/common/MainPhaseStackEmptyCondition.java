@@ -4,9 +4,9 @@ package mage.abilities.condition.common;
 import java.util.EnumSet;
 import java.util.Set;
 
-import mage.constants.TurnPhase;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
+import mage.constants.TurnPhase;
 import mage.game.Game;
 
 /**

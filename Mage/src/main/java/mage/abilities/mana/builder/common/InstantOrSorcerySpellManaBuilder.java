@@ -1,5 +1,7 @@
 package mage.abilities.mana.builder.common;
 
+import java.util.UUID;
+
 import mage.ConditionalMana;
 import mage.MageObject;
 import mage.Mana;
@@ -10,8 +12,6 @@ import mage.abilities.costs.Cost;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.abilities.mana.conditional.ManaCondition;
 import mage.game.Game;
-
-import java.util.UUID;
 
 /**
  * @author LevelX2

@@ -1,12 +1,12 @@
 package mage.abilities.effects.common;
 
+import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.effects.RequirementEffect;
 import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-
-import java.util.UUID;
 
 public class AttacksIfAbleTargetPlayerSourceEffect extends RequirementEffect {
 

@@ -1,13 +1,13 @@
 
 package mage.game.permanent.token;
 
-import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.keyword.FlankingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.ProtectionAbility;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *

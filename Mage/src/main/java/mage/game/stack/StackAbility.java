@@ -1,9 +1,20 @@
 package mage.game.stack;
 
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.UUID;
+
 import mage.MageInt;
 import mage.MageObject;
 import mage.ObjectColor;
-import mage.abilities.*;
+import mage.abilities.Abilities;
+import mage.abilities.AbilitiesImpl;
+import mage.abilities.Ability;
+import mage.abilities.MageSingleton;
+import mage.abilities.Mode;
+import mage.abilities.Modes;
+import mage.abilities.StateTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostAdjuster;
 import mage.abilities.costs.Costs;
@@ -17,7 +28,15 @@ import mage.abilities.hint.Hint;
 import mage.abilities.text.TextPart;
 import mage.cards.Card;
 import mage.cards.FrameStyle;
-import mage.constants.*;
+import mage.constants.AbilityType;
+import mage.constants.AbilityWord;
+import mage.constants.CardType;
+import mage.constants.EffectType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.constants.Zone;
+import mage.constants.ZoneDetail;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -29,11 +48,6 @@ import mage.target.targetadjustment.TargetAdjuster;
 import mage.util.GameLog;
 import mage.util.SubTypeList;
 import mage.watchers.Watcher;
-
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com

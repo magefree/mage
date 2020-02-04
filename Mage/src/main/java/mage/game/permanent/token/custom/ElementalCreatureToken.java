@@ -5,7 +5,6 @@ import mage.ObjectColor;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.game.permanent.token.TokenImpl;
-import mage.util.SubTypeList;
 
 /**
  *

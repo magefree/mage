@@ -1,6 +1,11 @@
 
 package mage.abilities.effects.common;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
@@ -13,11 +18,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.util.CardUtil;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com

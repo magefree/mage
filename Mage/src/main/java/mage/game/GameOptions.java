@@ -1,10 +1,10 @@
 package mage.game;
 
-import mage.constants.PhaseStep;
-
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.Set;
+
+import mage.constants.PhaseStep;
 
 /**
  * Game options for Mage game. Mainly used in tests to configure

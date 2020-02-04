@@ -1,14 +1,14 @@
 
 package mage.abilities.mana.conditional;
 
+import java.util.UUID;
+
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
 import mage.game.Game;
-
-import java.util.UUID;
 
 /**
  * @author jgray1206

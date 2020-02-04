@@ -3,6 +3,7 @@ package mage.abilities.meta;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
 import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;

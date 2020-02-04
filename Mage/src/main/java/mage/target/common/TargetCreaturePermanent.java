@@ -1,8 +1,9 @@
 
 package mage.target.common;
 
-import mage.filter.StaticFilters;
 import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURE;
+
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPermanent;
 

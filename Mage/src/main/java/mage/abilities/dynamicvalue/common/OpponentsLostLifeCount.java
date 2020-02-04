@@ -1,12 +1,12 @@
 package mage.abilities.dynamicvalue.common;
 
+import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
 import mage.watchers.common.PlayerLostLifeWatcher;
-
-import java.util.UUID;
 
 /**
  * @author LevelX2

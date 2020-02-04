@@ -2,11 +2,11 @@
 
 package mage.abilities.keyword;
 
-import mage.constants.Zone;
+import java.io.ObjectStreamException;
+
 import mage.abilities.MageSingleton;
 import mage.abilities.StaticAbility;
-
-import java.io.ObjectStreamException;
+import mage.constants.Zone;
 
 /**
  *

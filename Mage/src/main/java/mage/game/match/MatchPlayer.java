@@ -1,11 +1,11 @@
 package mage.game.match;
 
+import java.io.Serializable;
+
 import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckValidator;
 import mage.players.Player;
-
-import java.io.Serializable;
 
 /**
  * @author BetaSteward_at_googlemail.com

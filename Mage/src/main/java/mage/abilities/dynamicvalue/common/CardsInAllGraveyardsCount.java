@@ -1,6 +1,7 @@
 package mage.abilities.dynamicvalue.common;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
