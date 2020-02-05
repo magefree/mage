@@ -10,6 +10,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.CreateTokenEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
@@ -76,7 +77,7 @@ class GatherSpecimensReplacementEffect extends ReplacementEffectImpl {
                 }
             }
         }
-        if (event.getType() == GameEvent.EventType.CREATE_TOKEN && event.getFlag()) { // flag indicates if it's a creature token
+        if (event.getType() == GameEvent.EventType.CREATE_TOKEN && ((CreateTokenEvent) event).getToken().isCreature()) {
             Player controller = game.getPlayer(source.getControllerId());
             return controller != null && controller.hasOpponent(event.getPlayerId(), game);
         }

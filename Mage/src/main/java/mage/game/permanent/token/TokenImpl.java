@@ -2,10 +2,12 @@ package mage.game.permanent.token;
 
 import mage.MageObject;
 import mage.MageObjectImpl;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.CreateTokenEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
@@ -31,7 +33,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
     private boolean expansionSetCodeChecked;
     private Card copySourceCard; // the card the Token is a copy from
 
-    // list of set codes tokene images are available for
+    // list of set codes token images are available for
     protected List<String> availableImageSetCodes = new ArrayList<>();
 
     public enum Type {
@@ -131,14 +133,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         return putOntoBattlefield(amount, game, sourceId, controllerId, tapped, attacking, null);
     }
 
-    @Override
-    public boolean putOntoBattlefield(int amount, Game game, UUID sourceId, UUID controllerId, boolean tapped, boolean attacking, UUID attackedPlayer) {
-        Player controller = game.getPlayer(controllerId);
-        if (controller == null) {
-            return false;
-        }
-        lastAddedTokenIds.clear();
-
+    private String getSetCode(Game game, UUID sourceId) {
         // moved here from CreateTokenEffect because not all cards that create tokens use CreateTokenEffect
         // they use putOntoBattlefield directly
         // TODO: Check this setCode handling because it makes no sense if token put into play with e.g. "Feldon of the third Path"
@@ -156,53 +151,74 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
                 }
             }
         }
+
         if (!expansionSetCodeChecked) {
             expansionSetCodeChecked = this.updateExpansionSetCode(setCode);
         }
+        return setCode;
+    }
 
-        GameEvent event = new GameEvent(EventType.CREATE_TOKEN, null, sourceId, controllerId, amount, this.isCreature());
+    @Override
+    public boolean putOntoBattlefield(int amount, Game game, UUID sourceId, UUID controllerId, boolean tapped, boolean attacking, UUID attackedPlayer) {
+        Player controller = game.getPlayer(controllerId);
+        if (controller == null) {
+            return false;
+        }
+        lastAddedTokenIds.clear();
+
+        CreateTokenEvent event = new CreateTokenEvent(sourceId, controllerId, amount, this);
         if (!game.replaceEvent(event)) {
-            amount = event.getAmount();
-
-            List<Permanent> permanents = new ArrayList<>();
-            List<Permanent> permanentsEntered = new ArrayList<>();
-
-            for (int i = 0; i < amount; i++) {
-                PermanentToken newToken = new PermanentToken(this, event.getPlayerId(), setCode, game); // use event.getPlayerId() because it can be replaced by replacement effect
-                game.getState().addCard(newToken);
-                permanents.add(newToken);
-                game.getPermanentsEntering().put(newToken.getId(), newToken);
-                newToken.setTapped(tapped);
-            }
-            game.setScopeRelevant(true);
-            for (Permanent permanent : permanents) {
-                if (permanent.entersBattlefield(sourceId, game, Zone.OUTSIDE, true)) {
-                    permanentsEntered.add(permanent);
-                } else {
-                    game.getPermanentsEntering().remove(permanent.getId());
-                }
-            }
-            game.setScopeRelevant(false);
-            for (Permanent permanent : permanentsEntered) {
-                game.addPermanent(permanent);
-                permanent.setZone(Zone.BATTLEFIELD, game);
-                game.getPermanentsEntering().remove(permanent.getId());
-
-                this.lastAddedTokenIds.add(permanent.getId());
-                this.lastAddedTokenId = permanent.getId();
-                game.addSimultaneousEvent(new ZoneChangeEvent(permanent, permanent.getControllerId(), Zone.OUTSIDE, Zone.BATTLEFIELD));
-                if (attacking && game.getCombat() != null && game.getActivePlayerId().equals(permanent.getControllerId())) {
-                    game.getCombat().addAttackingCreature(permanent.getId(), game, attackedPlayer);
-                }
-                if (!game.isSimulation()) {
-                    game.informPlayers(controller.getLogName() + " creates a " + permanent.getLogName() + " token");
-                }
-
-            }
-            game.getState().applyEffects(game); // Needed to do it here without LKIReset i.e. do get SwordOfTheMeekTest running correctly.
+            putOntoBattlefieldHelper(event, game, tapped, attacking, attackedPlayer);
             return true;
         }
         return false;
+    }
+
+    private static void putOntoBattlefieldHelper(CreateTokenEvent event, Game game, boolean tapped, boolean attacking, UUID attackedPlayer) {
+        Player controller = game.getPlayer(event.getPlayerId());
+        Token token = event.getToken();
+        int amount = event.getAmount();
+
+        List<Permanent> permanents = new ArrayList<>();
+        List<Permanent> permanentsEntered = new ArrayList<>();
+
+        String setCode = token instanceof TokenImpl ? ((TokenImpl) token).getSetCode(game, event.getSourceId()) : null;
+
+        for (int i = 0; i < amount; i++) {
+            PermanentToken newToken = new PermanentToken(token, event.getPlayerId(), setCode, game); // use event.getPlayerId() because it can be replaced by replacement effect
+            game.getState().addCard(newToken);
+            permanents.add(newToken);
+            game.getPermanentsEntering().put(newToken.getId(), newToken);
+            newToken.setTapped(tapped);
+        }
+        game.setScopeRelevant(true);
+        for (Permanent permanent : permanents) {
+            if (permanent.entersBattlefield(event.getSourceId(), game, Zone.OUTSIDE, true)) {
+                permanentsEntered.add(permanent);
+            } else {
+                game.getPermanentsEntering().remove(permanent.getId());
+            }
+        }
+        game.setScopeRelevant(false);
+        for (Permanent permanent : permanentsEntered) {
+            game.addPermanent(permanent);
+            permanent.setZone(Zone.BATTLEFIELD, game);
+            game.getPermanentsEntering().remove(permanent.getId());
+
+            if (token instanceof TokenImpl) {
+                ((TokenImpl) token).lastAddedTokenIds.add(permanent.getId());
+                ((TokenImpl) token).lastAddedTokenId = permanent.getId();
+            }
+            game.addSimultaneousEvent(new ZoneChangeEvent(permanent, permanent.getControllerId(), Zone.OUTSIDE, Zone.BATTLEFIELD));
+            if (attacking && game.getCombat() != null && game.getActivePlayerId().equals(permanent.getControllerId())) {
+                game.getCombat().addAttackingCreature(permanent.getId(), game, attackedPlayer);
+            }
+            if (!game.isSimulation()) {
+                game.informPlayers(controller.getLogName() + " creates a " + permanent.getLogName() + " token");
+            }
+
+        }
+        game.getState().applyEffects(game); // Needed to do it here without LKIReset i.e. do get SwordOfTheMeekTest running correctly.
     }
 
     @Override
