@@ -12,6 +12,7 @@ import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
+import java.util.Collections;
 import java.util.UUID;
 
 /**
@@ -49,10 +50,14 @@ public class PreventAllDamageToAllEffect extends PreventionEffectImpl {
     }
 
     private static FilterPermanentOrPlayer createFilter(FilterPermanent filterPermanent, FilterPlayer filterPlayer) {
-        String message = String.join(
-                " and ",
-                filterPermanent != null ? filterPermanent.getMessage() : "",
-                filterPlayer != null ? filterPlayer.getMessage() : "");
+        String mes1 = filterPermanent != null ? filterPermanent.getMessage() : "";
+        String mes2 = filterPlayer != null ? filterPlayer.getMessage() : "";
+        String message;
+        if (!mes1.isEmpty() && !mes2.isEmpty()) {
+            message = mes1 + " and " + mes2;
+        } else {
+            message = mes1 + mes2;
+        }
         FilterPermanent filter1 = filterPermanent;
         if (filter1 == null) {
             filter1 = new FilterPermanent();
