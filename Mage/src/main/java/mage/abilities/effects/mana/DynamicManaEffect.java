@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.mana;
 
 import mage.Mana;
@@ -15,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author North
  */
 public class DynamicManaEffect extends ManaEffect {
@@ -39,14 +37,13 @@ public class DynamicManaEffect extends ManaEffect {
     }
 
     /**
-     *
      * @param mana
      * @param amount
      * @param text
      * @param oneChoice is all mana from the same colour or if false the
-     * player can choose different colours
+     *                  player can choose different colours
      * @param netAmount a dynamic value that calculates the possible available
-     * mana (e.g. if you have to pay by removing counters from source)
+     *                  mana (e.g. if you have to pay by removing counters from source)
      */
     public DynamicManaEffect(Mana mana, DynamicValue amount, String text, boolean oneChoice, DynamicValue netAmount) {
         super();
@@ -80,7 +77,7 @@ public class DynamicManaEffect extends ManaEffect {
         if (text != null && !text.isEmpty()) {
             return text;
         }
-        return super.getText(mode) + " for each " + amount.getMessage();
+        return "add " + baseMana.toString() + " for each " + amount.getMessage();
     }
 
     @Override
