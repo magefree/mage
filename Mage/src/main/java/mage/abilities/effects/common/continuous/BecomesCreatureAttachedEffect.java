@@ -30,6 +30,13 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
         this.loseType = loseType;
         staticText = text;
     }
+    
+    public BecomesCreatureAttachedEffect(Token token, String text, Duration duration, LoseType loseType, Outcome outcome) {
+        super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, outcome);
+        this.token = token;
+        this.loseType = loseType;
+        staticText = text;
+    }
 
     public BecomesCreatureAttachedEffect(final BecomesCreatureAttachedEffect effect) {
         super(effect);

@@ -4,11 +4,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.mana.BlackManaAbility;
-import mage.abilities.mana.BlueManaAbility;
-import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.RedManaAbility;
-import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -38,73 +34,56 @@ public final class BloodMoon extends CardImpl {
     public BloodMoon copy() {
         return new BloodMoon(this);
     }
-}
 
-class BloodMoonEffect extends ContinuousEffectImpl {
+    static class BloodMoonEffect extends ContinuousEffectImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent();
+        private static final FilterLandPermanent filter = new FilterLandPermanent();
 
-    static {
-        filter.add(Predicates.not(SuperType.BASIC.getPredicate()));
-    }
-
-    BloodMoonEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        this.staticText = "Nonbasic lands are Mountains";
-    }
-
-    BloodMoonEffect(final BloodMoonEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public BloodMoonEffect copy() {
-        return new BloodMoonEffect(this);
-    }
-
-    @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        for (Permanent land : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
-            switch (layer) {
-                case TypeChangingEffects_4:
-                    // 305.7 Note that this doesn't remove any abilities that were granted to the land by other effects
-                    // So the ability removing has to be done before Layer 6
-                    //land.getSubtype(game).removeAll(SubType.getLandTypes(false));
-                    land.getSubtype(game).clear();
-                    land.getSubtype(game).add(SubType.MOUNTAIN);
-                    land.removeAllAbilities(source.getSourceId(), game);
-                    break;
-                case AbilityAddingRemovingEffects_6:
-                    land.removeAllAbilities(source.getSourceId(), game);
-                    if (land.getSubtype(game).contains(SubType.FOREST)) {
-                        land.addAbility(new GreenManaAbility(), source.getSourceId(), game);
-                    }
-                    if (land.getSubtype(game).contains(SubType.PLAINS)) {
-                        land.addAbility(new WhiteManaAbility(), source.getSourceId(), game);
-                    }
-                    if (land.getSubtype(game).contains(SubType.MOUNTAIN)) {
-                        land.addAbility(new RedManaAbility(), source.getSourceId(), game);
-                    }
-                    if (land.getSubtype(game).contains(SubType.ISLAND)) {
-                        land.addAbility(new BlueManaAbility(), source.getSourceId(), game);
-                    }
-                    if (land.getSubtype(game).contains(SubType.SWAMP)) {
-                        land.addAbility(new BlackManaAbility(), source.getSourceId(), game);
-                    }
-                    break;
-            }
+        static {
+            filter.add(Predicates.not(SuperType.BASIC.getPredicate()));
         }
-        return true;
-    }
 
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.AbilityAddingRemovingEffects_6 
-                || layer == Layer.TypeChangingEffects_4;
+        BloodMoonEffect() {
+            super(Duration.WhileOnBattlefield, Outcome.Detriment);
+            this.staticText = "Nonbasic lands are Mountains";
+            this.dependencyTypes.add(DependencyType.BecomeMountain);
+        }
+
+        BloodMoonEffect(final BloodMoonEffect effect) {
+            super(effect);
+        }
+
+        @Override
+        public boolean apply(Game game, Ability source) {
+            return false;
+        }
+
+        @Override
+        public BloodMoonEffect copy() {
+            return new BloodMoonEffect(this);
+        }
+
+        @Override
+        public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+            for (Permanent land : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
+                switch (layer) {
+                    case TypeChangingEffects_4:
+                        // 305.7 Note that this doesn't remove any abilities that were granted to the land by other effects
+                        // So the ability removing has to be done before Layer 6
+                        // Lands have their mana ability intrinsically, so that is added in layer 4
+                        land.getSubtype(game).removeAll(SubType.getLandTypes());
+                        land.getSubtype(game).add(SubType.MOUNTAIN);
+                        land.removeAllAbilities(source.getSourceId(), game);
+                        land.addAbility(new RedManaAbility(), source.getSourceId(), game);
+                        break;
+                }
+            }
+            return true;
+        }
+
+        @Override
+        public boolean hasLayer(Layer layer) {
+            return layer == Layer.TypeChangingEffects_4;
+        }
     }
 }

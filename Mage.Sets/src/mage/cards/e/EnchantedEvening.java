@@ -39,7 +39,7 @@ public final class EnchantedEvening extends CardImpl {
     }
 
     // need to be enclosed class for dependent check of continuous effects
-    class EnchangedEveningEffect extends ContinuousEffectImpl {
+    static class EnchangedEveningEffect extends ContinuousEffectImpl {
 
         private final CardType addedCardType;
         private final FilterPermanent filter;
@@ -48,7 +48,8 @@ public final class EnchantedEvening extends CardImpl {
             super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
             this.addedCardType = addedCardType;
             this.filter = filter;
-            dependencyTypes.add(DependencyType.EnchantmentAddingRemoving);
+            this.dependencyTypes.add(DependencyType.EnchantmentAddingRemoving);
+            this.dependencyTypes.add(DependencyType.AuraAddingRemoving);
         }
 
         public EnchangedEveningEffect(final EnchangedEveningEffect effect) {

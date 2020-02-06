@@ -13,7 +13,6 @@ import mage.abilities.effects.common.continuous.BecomesBasicLandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.DependencyType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -81,7 +80,9 @@ class QuicksilverFountainEffect extends OneShotEffect {
 
     public QuicksilverFountainEffect() {
         super(Outcome.Neutral);
-        staticText = "that player puts a flood counter on target non-Island land they control of their choice. That land is an Island for as long as it has a flood counter on it";
+        staticText = "that player puts a flood counter on target non-Island land "
+                + "they control of their choice. That land is an Island for as "
+                + "long as it has a flood counter on it";
     }
 
     public QuicksilverFountainEffect(final QuicksilverFountainEffect effect) {
@@ -94,9 +95,11 @@ class QuicksilverFountainEffect extends OneShotEffect {
         if (player != null) {
             Permanent landChosen = game.getPermanent(source.getFirstTarget());
             landChosen.addCounters(CounterType.FLOOD.createInstance(), source, game);
-            ContinuousEffect becomesBasicLandTargetEffect = new BecomesBasicLandTargetEffect(Duration.OneUse, SubType.ISLAND);
-            becomesBasicLandTargetEffect.addDependencyType(DependencyType.BecomeIsland);
-            ConditionalContinuousEffect effect = new ConditionalContinuousEffect(becomesBasicLandTargetEffect, new LandHasFloodCounterCondition(this), staticText);
+            ContinuousEffect becomesBasicLandTargetEffect
+                    = new BecomesBasicLandTargetEffect(Duration.OneUse, false, SubType.ISLAND);
+            ConditionalContinuousEffect effect
+                    = new ConditionalContinuousEffect(becomesBasicLandTargetEffect,
+                            new LandHasFloodCounterCondition(this), staticText);
             this.setTargetPointer(new FixedTarget(landChosen, game));
             effect.setTargetPointer(new FixedTarget(landChosen, game));
             game.addEffect(effect, source);

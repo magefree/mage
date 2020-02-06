@@ -338,7 +338,7 @@ public class ContinuousEffects implements Serializable {
         }
         // boolean checkLKI = event.getType().equals(EventType.ZONE_CHANGE) || event.getType().equals(EventType.DESTROYED_PERMANENT);
         //get all applicable transient Replacement effects
-        for (Iterator<ReplacementEffect> iterator = replacementEffects.iterator(); iterator.hasNext(); ) {
+        for (Iterator<ReplacementEffect> iterator = replacementEffects.iterator(); iterator.hasNext();) {
             ReplacementEffect effect = iterator.next();
             if (!effect.checksEventType(event, game)) {
                 continue;
@@ -371,7 +371,7 @@ public class ContinuousEffects implements Serializable {
             }
         }
 
-        for (Iterator<PreventionEffect> iterator = preventionEffects.iterator(); iterator.hasNext(); ) {
+        for (Iterator<PreventionEffect> iterator = preventionEffects.iterator(); iterator.hasNext();) {
             PreventionEffect effect = iterator.next();
             if (!effect.checksEventType(event, game)) {
                 continue;
@@ -740,8 +740,8 @@ public class ContinuousEffects implements Serializable {
      * @param event
      * @param targetAbility ability the event is attached to. can be null.
      * @param game
-     * @param silentMode    true if the event does not really happen but
-     *                      it's checked if the event would be replaced
+     * @param silentMode true if the event does not really happen but it's
+     * checked if the event would be replaced
      * @return
      */
     public boolean preventedByRuleModification(GameEvent event, Ability targetAbility, Game game, boolean silentMode) {
@@ -789,7 +789,7 @@ public class ContinuousEffects implements Serializable {
         do {
             Map<ReplacementEffect, Set<Ability>> rEffects = getApplicableReplacementEffects(event, game);
             // Remove all consumed effects (ability dependant)
-            for (Iterator<ReplacementEffect> it1 = rEffects.keySet().iterator(); it1.hasNext(); ) {
+            for (Iterator<ReplacementEffect> it1 = rEffects.keySet().iterator(); it1.hasNext();) {
                 ReplacementEffect entry = it1.next();
                 if (consumed.containsKey(entry.getId()) /*&& !(entry instanceof CommanderReplacementEffect) */) { // 903.9.
                     Set<UUID> consumedAbilitiesIds = consumed.get(entry.getId());
@@ -980,7 +980,7 @@ public class ContinuousEffects implements Serializable {
 
                     if (!waitingEffects.isEmpty()) {
                         // check if waiting effects can be applied now
-                        for (Iterator<Map.Entry<ContinuousEffect, Set<UUID>>> iterator = waitingEffects.entrySet().iterator(); iterator.hasNext(); ) {
+                        for (Iterator<Map.Entry<ContinuousEffect, Set<UUID>>> iterator = waitingEffects.entrySet().iterator(); iterator.hasNext();) {
                             Map.Entry<ContinuousEffect, Set<UUID>> entry = iterator.next();
                             if (appliedEffects.containsAll(entry.getValue())) { // all dependent to effects are applied now so apply the effect itself
                                 appliedAbilities = appliedEffectAbilities.get(entry.getKey());
@@ -1060,26 +1060,50 @@ public class ContinuousEffects implements Serializable {
 
     private void applyLayer(List<ContinuousEffect> activeLayerEffects, Layer currentLayer, Game game) {
         List<ContinuousEffect> layer = filterLayeredEffects(activeLayerEffects, currentLayer);
+        // layer is a list of all effects at the current layer
         if (!layer.isEmpty()) {
             int numberOfEffects = layer.size();
+            // appliedEffects holds the list of effects currently applied to the layer
             Set<UUID> appliedEffects = new HashSet<>();
+            // waitingEffects holds the list of dependent effects and their independent counterparts
             Map<ContinuousEffect, Set<UUID>> waitingEffects = new LinkedHashMap<>();
             for (ContinuousEffect effect : layer) {
-                if (numberOfEffects > 1) { // If an effect is dependent to not applied effects yet of this layer, so wait to apply this effect
+                if (numberOfEffects > 1) {
+                    // If an effect is dependent to not applied effects yet of this layer, so wait to apply this effect
+                    // check to see if any effect is dependent to other cards indirectly due to the independent card being dependent, etc.
                     Set<UUID> dependentTo = effect.isDependentTo(layer);
                     if (!appliedEffects.containsAll(dependentTo)) {
                         waitingEffects.put(effect, dependentTo);
                         continue;
                     }
                 }
+                // apply the effect
                 applyContinuousEffect(effect, currentLayer, game);
+                // add it to the applied effects list
                 appliedEffects.add(effect.getId());
+                layer = getLayeredEffects(game);
+
+                // check waiting effects to see if it has anything to check
                 if (!waitingEffects.isEmpty()) {
                     // check if waiting effects can be applied now
                     for (Entry<ContinuousEffect, Set<UUID>> entry : waitingEffects.entrySet()) {
-                        if (appliedEffects.containsAll(entry.getValue())) { // all dependent to effects are applied now so apply the effect itself
+                        // all dependent to effects are applied now so apply the effect itself
+                        if (appliedEffects.containsAll(entry.getValue())) {
                             applyContinuousEffect(entry.getKey(), currentLayer, game);
+                            // add it to the applied effects list
                             appliedEffects.add(entry.getKey().getId());
+                            layer = getLayeredEffects(game);
+                        }
+                    }
+                }
+                if (numberOfEffects != appliedEffects.size()) {
+                    for (Entry<ContinuousEffect, Set<UUID>> entry : waitingEffects.entrySet()) {
+                        // all dependent to effects are applied now so apply the effect itself
+                        if (appliedEffects.containsAll(entry.getValue())) {
+                            applyContinuousEffect(entry.getKey(), currentLayer, game);
+                            // add it to the applied effects list
+                            appliedEffects.add(entry.getKey().getId());
+                            layer = getLayeredEffects(game);
                         }
                     }
                 }

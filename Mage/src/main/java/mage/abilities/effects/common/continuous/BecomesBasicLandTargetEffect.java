@@ -112,7 +112,8 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
                             land.addCardType(CardType.LAND);
                         }
                         if (loseOther) {
-                            // 305.7 Note that this doesn't remove any abilities that were granted to the land by other effects
+                            // 305.7 Note that this doesn't remove any abilities 
+                            // that were granted to the land by other effects
                             // So the ability removing has to be done before Layer 6
                             land.removeAllAbilities(source.getSourceId(), game);
                             // 305.7
@@ -127,8 +128,7 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
                                 }
                             }
                         }
-                        break;
-                    case AbilityAddingRemovingEffects_6:
+                        // add intrinsic land abilities here not in layer 6
                         for (SubType landType : landTypesToAdd) {
                             switch (landType) {
                                 case SWAMP:
@@ -157,7 +157,7 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean hasLayer(Layer layer) {
-        return layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.TypeChangingEffects_4;
+        return layer == Layer.TypeChangingEffects_4;
     }
 
     private String setText() {

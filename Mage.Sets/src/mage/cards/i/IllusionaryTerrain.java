@@ -20,9 +20,9 @@ import mage.cards.CardSetInfo;
 import mage.choices.ChoiceBasicLandType;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
+import mage.constants.DependencyType;
 import mage.constants.Duration;
 import mage.constants.Layer;
-import static mage.constants.Layer.AbilityAddingRemovingEffects_6;
 import static mage.constants.Layer.TypeChangingEffects_4;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
@@ -92,43 +92,33 @@ class IllusionaryTerrainEffect extends ContinuousEffectImpl {
                 if (land.isBasic()) {
                     switch (layer) {
                         case TypeChangingEffects_4:
+                            // the land mana ability is intrinsic, so add it here, not layer 6
                             if (land.getSubtype(game).contains(firstChoice)) {
-                                land.getSubtype(game).clear();
+                                land.getSubtype(game).removeAll(SubType.getLandTypes());
                                 land.getSubtype(game).add(secondChoice);
-                                game.getState().setValue("illusionaryTerrain"
-                                        + source.getId()
-                                        + land.getId()
-                                        + land.getZoneChangeCounter(game),
-                                        "true");
-                            }
-                            break;
-                        case AbilityAddingRemovingEffects_6:
-                            if (game.getState().getValue("illusionaryTerrain"
-                                    + source.getId()
-                                    + land.getId()
-                                    + land.getZoneChangeCounter(game)) != null
-                                    && game.getState().getValue("illusionaryTerrain"
-                                            + source.getId()
-                                            + land.getId()
-                                            + land.getZoneChangeCounter(game)).equals("true")) {
                                 land.removeAllAbilities(source.getSourceId(), game);
                                 if (land.getSubtype(game).contains(SubType.FOREST)) {
+                                    this.dependencyTypes.add(DependencyType.BecomeForest);
                                     land.addAbility(new GreenManaAbility(), source.getSourceId(), game);
                                 }
                                 if (land.getSubtype(game).contains(SubType.PLAINS)) {
+                                    this.dependencyTypes.add(DependencyType.BecomePlains);
                                     land.addAbility(new WhiteManaAbility(), source.getSourceId(), game);
                                 }
                                 if (land.getSubtype(game).contains(SubType.MOUNTAIN)) {
+                                    this.dependencyTypes.add(DependencyType.BecomeMountain);
                                     land.addAbility(new RedManaAbility(), source.getSourceId(), game);
                                 }
                                 if (land.getSubtype(game).contains(SubType.ISLAND)) {
+                                    this.dependencyTypes.add(DependencyType.BecomeIsland);
                                     land.addAbility(new BlueManaAbility(), source.getSourceId(), game);
                                 }
                                 if (land.getSubtype(game).contains(SubType.SWAMP)) {
+                                    this.dependencyTypes.add(DependencyType.BecomeSwamp);
                                     land.addAbility(new BlackManaAbility(), source.getSourceId(), game);
                                 }
-                                break;
                             }
+                            break;
                     }
                 }
             }
@@ -144,9 +134,7 @@ class IllusionaryTerrainEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean hasLayer(Layer layer) {
-        return layer == Layer.TypeChangingEffects_4
-                || layer == Layer.AbilityAddingRemovingEffects_6;
-
+        return layer == Layer.TypeChangingEffects_4;
     }
 }
 
@@ -180,19 +168,26 @@ class ChooseTwoBasicLandTypesEffect extends OneShotEffect {
                 && mageObject != null) {
             ChoiceImpl choices = new ChoiceBasicLandType();
             if (controller.choose(Outcome.Neutral, choices, game)) {
-                game.informPlayers(mageObject.getName() + ":  First chosen basic land type is " + choices.getChoice());
-                game.getState().setValue(mageObject.getId().toString() + "firstChoice", choices.getChoice());
-                choiceOne = SubType.byDescription((String) game.getState().getValue(source.getSourceId().toString() + "firstChoice")).getDescription();
+                game.informPlayers(mageObject.getName()
+                        + ":  First chosen basic land type is " + choices.getChoice());
+                game.getState().setValue(mageObject.getId().toString()
+                        + "firstChoice", choices.getChoice());
+                choiceOne = SubType.byDescription((String) game.getState().getValue(
+                        source.getSourceId().toString() + "firstChoice")).getDescription();
             }
             if (controller.choose(Outcome.Neutral, choices, game)) {
-                game.informPlayers(mageObject.getName() + ":  Second chosen basic land type is " + choices.getChoice());
-                game.getState().setValue(mageObject.getId().toString() + "secondChoice", choices.getChoice());
-                choiceTwo = SubType.byDescription((String) game.getState().getValue(source.getSourceId().toString() + "secondChoice")).getDescription();
+                game.informPlayers(mageObject.getName()
+                        + ":  Second chosen basic land type is " + choices.getChoice());
+                game.getState().setValue(mageObject.getId().toString()
+                        + "secondChoice", choices.getChoice());
+                choiceTwo = SubType.byDescription((String) game.getState().getValue(
+                        source.getSourceId().toString() + "secondChoice")).getDescription();
                 if (mageObject instanceof Permanent
                         && choiceOne != null
                         && choiceTwo != null) {
-                    ((Permanent) mageObject).addInfo("Chosen Types", CardUtil.addToolTipMarkTags("First chosen basic land type: " + choiceOne
-                            + "\n Second chosen basic land type: " + choiceTwo), game);
+                    ((Permanent) mageObject).addInfo("Chosen Types", CardUtil
+                            .addToolTipMarkTags("First chosen basic land type: " + choiceOne
+                                    + "\n Second chosen basic land type: " + choiceTwo), game);
                 }
                 return true;
             }

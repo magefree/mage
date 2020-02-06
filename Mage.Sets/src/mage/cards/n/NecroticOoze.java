@@ -31,7 +31,8 @@ public final class NecroticOoze extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 
-        // As long as Necrotic Ooze is on the battlefield, it has all activated abilities of all creature cards in all graveyards
+        // As long as Necrotic Ooze is on the battlefield, it has all 
+        // activated abilities of all creature cards in all graveyards
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new NecroticOozeEffect()));
     }
 
@@ -47,8 +48,10 @@ public final class NecroticOoze extends CardImpl {
     static class NecroticOozeEffect extends ContinuousEffectImpl {
 
         public NecroticOozeEffect() {
-            super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-            staticText = "As long as {this} is on the battlefield, it has all activated abilities of all creature cards in all graveyards";
+            super(Duration.WhileOnBattlefield,
+                    Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+            staticText = "As long as {this} is on the battlefield, "
+                    + "it has all activated abilities of all creature cards in all graveyards";
         }
 
         public NecroticOozeEffect(final NecroticOozeEffect effect) {
@@ -65,8 +68,11 @@ public final class NecroticOoze extends CardImpl {
                         for (Card card : player.getGraveyard().getCards(game)) {
                             if (card.isCreature()) {
                                 for (Ability ability : card.getAbilities(game)) {
-                                    if (ability instanceof ActivatedAbility) {
-                                        perm.addAbility(ability, source.getSourceId(), game);
+                                    if (ability instanceof ActivatedAbility
+                                            && !perm.getAbilities().contains(ability)) {
+                                        if (!perm.getAbilities().contains(ability)) {
+                                            perm.addAbility(ability, source.getSourceId(), game);
+                                        }
                                     }
                                 }
                             }

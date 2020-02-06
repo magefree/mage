@@ -168,8 +168,12 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
                     case PTChangingEffects_7:
                         this.affectedObjectsSet = true;
                 }
-            } else if (hasLayer(Layer.CopyEffects_1) || hasLayer(Layer.ControlChangingEffects_2) || hasLayer(Layer.TextChangingEffects_3)
-                    || hasLayer(Layer.TypeChangingEffects_4) || hasLayer(Layer.ColorChangingEffects_5) || hasLayer(Layer.AbilityAddingRemovingEffects_6)
+            } else if (hasLayer(Layer.CopyEffects_1)
+                    || hasLayer(Layer.ControlChangingEffects_2)
+                    || hasLayer(Layer.TextChangingEffects_3)
+                    || hasLayer(Layer.TypeChangingEffects_4)
+                    || hasLayer(Layer.ColorChangingEffects_5)
+                    || hasLayer(Layer.AbilityAddingRemovingEffects_6)
                     || hasLayer(Layer.PTChangingEffects_7)) {
                 this.affectedObjectsSet = true;
             }
@@ -185,7 +189,8 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     @Override
     public void setStartingControllerAndTurnNum(Game game, UUID startingController, UUID activePlayerId) {
         this.startingControllerId = startingController;
-        this.startingTurnWasActive = activePlayerId != null && activePlayerId.equals(startingController); // you can't use "game" for active player cause it's called from tests/cheat too
+        this.startingTurnWasActive = activePlayerId != null
+                && activePlayerId.equals(startingController); // you can't use "game" for active player cause it's called from tests/cheat too
         this.yourTurnNumPlayed = 0;
     }
 
@@ -197,9 +202,11 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     @Override
     public boolean isYourNextTurn(Game game) {
         if (this.startingTurnWasActive) {
-            return yourTurnNumPlayed == 1 && game.isActivePlayer(startingControllerId);
+            return yourTurnNumPlayed == 1
+                    && game.isActivePlayer(startingControllerId);
         } else {
-            return yourTurnNumPlayed == 0 && game.isActivePlayer(startingControllerId);
+            return yourTurnNumPlayed == 0
+                    && game.isActivePlayer(startingControllerId);
         }
     }
 
@@ -231,14 +238,18 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         switch (duration) {
             case UntilYourNextTurn:
             case UntilEndOfYourNextTurn:
-                canDelete = player == null || (!player.isInGame() && player.hasReachedNextTurnAfterLeaving());
+                canDelete = player == null
+                        || (!player.isInGame()
+                        && player.hasReachedNextTurnAfterLeaving());
         }
 
         // discard on another conditions (start of your turn)
         switch (duration) {
             case UntilYourNextTurn:
-                if (player != null && player.isInGame()) {
-                    canDelete = canDelete || this.isYourNextTurn(game);
+                if (player != null
+                        && player.isInGame()) {
+                    canDelete = canDelete
+                            || this.isYourNextTurn(game);
                 }
         }
 
@@ -305,7 +316,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
 
     @Override
     public Set<UUID> isDependentTo(List<ContinuousEffect> allEffectsInLayer) {
-        Set<UUID> dependentToEffects = new HashSet<UUID>();
+        Set<UUID> dependentToEffects = new HashSet<>();
         if (dependendToTypes != null) {
             for (ContinuousEffect effect : allEffectsInLayer) {
                 if (!effect.getId().equals(this.getId())) {
@@ -354,7 +365,8 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     }
 
     /**
-     * Auto-generates dependencies on different effects (what's apply first and what's apply second)
+     * Auto-generates dependencies on different effects (what's apply first and
+     * what's apply second)
      */
     public void generateGainAbilityDependencies(Ability abilityToGain, Filter filterToSearch) {
         this.addDependencyType(DependencyType.AddingAbility);
@@ -369,14 +381,18 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     }
 
     private void generateGainAbilityDependenciesFromAbility(CompoundAbility compoundAbility) {
-        if (compoundAbility == null) return;
+        if (compoundAbility == null) {
+            return;
+        }
         for (Ability ability : compoundAbility) {
             generateGainAbilityDependenciesFromAbility(ability);
         }
     }
 
     private void generateGainAbilityDependenciesFromAbility(Ability ability) {
-        if (ability == null) return;
+        if (ability == null) {
+            return;
+        }
 
         // 1. "Is all type" ability (changeling)
         // make dependency
@@ -386,7 +402,9 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     }
 
     private void generateGainAbilityDependenciesFromFilter(Filter filter) {
-        if (filter == null) return;
+        if (filter == null) {
+            return;
+        }
 
         // 1. "Is all type" ability (changeling)
         // wait dependency

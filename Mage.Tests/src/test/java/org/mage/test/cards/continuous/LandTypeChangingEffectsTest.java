@@ -198,11 +198,14 @@ public class LandTypeChangingEffectsTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Kormus Bell");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Quicksilver Fountain");
+        
         addTarget(playerA, "Mountain");
-
+        
+        setStrictChooseMode(true);
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-
+        assertAllCommandsUsed();
+        
         assertPermanentCount(playerA, urborgtoy, 1);
         assertPermanentCount(playerA, "Kormus Bell", 1);
         assertPermanentCount(playerB, "Quicksilver Fountain", 1);

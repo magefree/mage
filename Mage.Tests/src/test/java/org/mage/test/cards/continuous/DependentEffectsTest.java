@@ -21,7 +21,8 @@ public class DependentEffectsTest extends CardTestPlayerBase {
      */
     @Test
     public void testLandsAreDestroyed() {
-        // Each other non-Aura enchantment is a creature in addition to its other types and has base power and base toughness each equal to its converted mana cost.
+        // Each other non-Aura enchantment is a creature in addition to its other types 
+        // and has base power and base toughness each equal to its converted mana cost.
         addCard(Zone.HAND, playerA, "Opalescence", 1); // {2}{W}{W}
 
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 9);
@@ -34,9 +35,10 @@ public class DependentEffectsTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Opalescence");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Enchanted Evening");
-
+        
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Enchanted Evening", 5, 5);
         assertPowerToughness(playerA, "War Horn", 3, 3);
@@ -46,7 +48,7 @@ public class DependentEffectsTest extends CardTestPlayerBase {
     }
 
     /**
-     * Opalescense is dependent on Enchanted Evening, so it will be applied
+     * Opalescence is dependent on Enchanted Evening, so it will be applied
      * after it regardless of timestamp.
      *
      * Tokens can also have mana costs, and as a consequence of that, converted
@@ -81,6 +83,7 @@ public class DependentEffectsTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Enchanted Evening");
         setStopAt(1, PhaseStep.END_TURN);
         execute();
+        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Rite of Replication", 1);
         assertGraveyardCount(playerB, "Raise the Alarm", 1);
@@ -132,8 +135,11 @@ public class DependentEffectsTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Yixlid Jailer", 1); // Creature - {1}{B}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Yixlid Jailer");
+        
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Yixlid Jailer", 1);
 

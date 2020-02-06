@@ -38,9 +38,8 @@ public final class Frogify extends CardImpl {
         Effect effect = new BecomesCreatureAttachedEffect(
                 new CreatureToken(1, 1, "", SubType.FROG).withColor("U"),
                 "Enchanted creature loses all abilities and is a blue Frog creature with base power and toughness 1/1",
-                Duration.WhileOnBattlefield, BecomesCreatureAttachedEffect.LoseType.ALL
+                Duration.WhileOnBattlefield, BecomesCreatureAttachedEffect.LoseType.ALL, Outcome.Detriment
         );
-        effect.setOutcome(Outcome.Detriment);
         this.addAbility(new SimpleStaticAbility(effect));
 
     }

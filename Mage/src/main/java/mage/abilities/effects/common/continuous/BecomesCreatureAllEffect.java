@@ -25,15 +25,18 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
     private boolean loseTypes = false;
     protected boolean loseName = false;
 
-    public BecomesCreatureAllEffect(Token token, String theyAreStillType, FilterPermanent filter, Duration duration, boolean loseColor) {
+    public BecomesCreatureAllEffect(Token token, String theyAreStillType, 
+            FilterPermanent filter, Duration duration, boolean loseColor) {
         this(token, theyAreStillType, filter, duration, loseColor, false, false);
     }
 
-    public BecomesCreatureAllEffect(Token token, String theyAreStillType, FilterPermanent filter, Duration duration, boolean loseColor, boolean loseName) {
+    public BecomesCreatureAllEffect(Token token, String theyAreStillType, 
+            FilterPermanent filter, Duration duration, boolean loseColor, boolean loseName) {
         this(token, theyAreStillType, filter, duration, loseColor, loseName, false);
     }
 
-    public BecomesCreatureAllEffect(Token token, String theyAreStillType, FilterPermanent filter, Duration duration, boolean loseColor, boolean loseName, boolean loseTypes) {
+    public BecomesCreatureAllEffect(Token token, String theyAreStillType, 
+            FilterPermanent filter, Duration duration, boolean loseColor, boolean loseName, boolean loseTypes) {
         super(duration, Outcome.BecomeCreature);
         this.token = token;
         this.theyAreStillType = theyAreStillType;
@@ -57,7 +60,8 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
     public void init(Ability source, Game game) {
         super.init(source, game);
         if (this.affectedObjectsSet) {
-            for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent perm : game.getBattlefield().getActivePermanents(
+                    filter, source.getControllerId(), source.getSourceId(), game)) {
                 affectedObjectList.add(new MageObjectReference(perm, game));
             }
         }
@@ -76,7 +80,8 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
                 affectedPermanents.add(ref.getPermanent(game));
             }
         } else {
-            affectedPermanents = new HashSet<>(game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game));
+            affectedPermanents = new HashSet<>(game.getBattlefield()
+                    .getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game));
         }
 
         for (Permanent permanent : affectedPermanents) {

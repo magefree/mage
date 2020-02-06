@@ -1,4 +1,3 @@
-
 package mage.cards.m;
 
 import java.util.UUID;
@@ -30,8 +29,10 @@ public final class MycosynthLattice extends CardImpl {
 
         // All permanents are artifacts in addition to their other types.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PermanentsAreArtifactsEffect()));
+
         // All cards that aren't on the battlefield, spells, and permanents are colorless.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EverythingIsColorlessEffect()));
+
         // Players may spend mana as though it were mana of any color.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ManaCanBeSpentAsAnyColorEffect()));
     }
@@ -51,6 +52,7 @@ class PermanentsAreArtifactsEffect extends ContinuousEffectImpl {
     public PermanentsAreArtifactsEffect() {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Neutral);
         staticText = "All permanents are artifacts in addition to their other types";
+        this.dependencyTypes.add(DependencyType.ArtifactAddingRemoving); // March of the Machines
     }
 
     @Override

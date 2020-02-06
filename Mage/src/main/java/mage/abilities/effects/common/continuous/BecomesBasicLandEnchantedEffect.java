@@ -43,12 +43,15 @@ public class BecomesBasicLandEnchantedEffect extends ContinuousEffectImpl {
             Permanent permanent = game.getPermanent(enchantment.getAttachedTo());
             if (permanent != null) {
                 switch (layer) {
-                    case AbilityAddingRemovingEffects_6:
+                    case TypeChangingEffects_4:
+                        // lands intrictically have the mana ability associated with their type, so added here in layer 4
+                        permanent.getSubtype(game).removeAll(SubType.getLandTypes());
+                        permanent.getSubtype(game).addAll(landTypes);
                         permanent.removeAllAbilities(source.getSourceId(), game);
                         for (SubType landType : landTypes) {
                             switch (landType) {
                                 case SWAMP:
-                                    if (permanent.hasSubtype(SubType.SWAMP, game)) { // type can be removed by other effect with newer timestamp, so no ability adding
+                                    if (permanent.hasSubtype(SubType.SWAMP, game)) {
                                         permanent.addAbility(new BlackManaAbility(), source.getSourceId(), game);
                                     }
                                     break;
@@ -75,11 +78,6 @@ public class BecomesBasicLandEnchantedEffect extends ContinuousEffectImpl {
                             }
                         }
                         break;
-                    case TypeChangingEffects_4:
-                        // subtypes are all removed by changing the subtype to a land type.
-                        permanent.getSubtype(game).removeAll(SubType.getLandTypes());
-                        permanent.getSubtype(game).addAll(landTypes);
-                        break;
                 }
                 return true;
             }
@@ -89,7 +87,7 @@ public class BecomesBasicLandEnchantedEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean hasLayer(Layer layer) {
-        return layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.TypeChangingEffects_4;
+        return layer == Layer.TypeChangingEffects_4;
     }
 
     private String setText() {
