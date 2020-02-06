@@ -1883,7 +1883,7 @@ public class TestPlayer implements Player {
                         for (Player player : game.getPlayers().values()) {
                             if (player.getName().equals(playerName)
                                     && target.canTarget(computerPlayer.getId(), player.getId(), source, game)) {
-                                target.add(player.getId(), game);
+                                target.addTarget(player.getId(), source, game);
                                 targets.remove(targetDefinition);
                                 return true;
                             }
@@ -1932,7 +1932,7 @@ public class TestPlayer implements Player {
                             if (isObjectHaveTargetNameOrAlias(permanent, targetName) || (permanent.getName() + '-' + permanent.getExpansionSetCode()).equals(targetName)) { // TODO: remove exp code search?
                                 if (target.canTarget(abilityControllerId, permanent.getId(), source, game) && !target.getTargets().contains(permanent.getId())) {
                                     if ((permanent.isCopy() && !originOnly) || (!permanent.isCopy() && !copyOnly)) {
-                                        target.add(permanent.getId(), game);
+                                        target.addTarget(permanent.getId(), source, game);
                                         targetFound = true;
                                         break; // return to for (String targetName
                                     }
@@ -1957,7 +1957,7 @@ public class TestPlayer implements Player {
                         for (Card card : computerPlayer.getHand().getCards(((TargetCardInHand) target.getOriginalTarget()).getFilter(), game)) {
                             if (isObjectHaveTargetNameOrAlias(card, targetName) || (card.getName() + '-' + card.getExpansionSetCode()).equals(targetName)) { // TODO: remove set code search?
                                 if (target.canTarget(abilityControllerId, card.getId(), source, game) && !target.getTargets().contains(card.getId())) {
-                                    target.add(card.getId(), game);
+                                    target.addTarget(card.getId(), source, game);
                                     targetFound = true;
                                     break; // return to for (String targetName
                                 }
@@ -1982,7 +1982,7 @@ public class TestPlayer implements Player {
                         for (Card card : game.getExile().getCards(targetFull.getFilter(), game)) {
                             if (isObjectHaveTargetNameOrAlias(card, targetName) || (card.getName() + '-' + card.getExpansionSetCode()).equals(targetName)) { // TODO: remove set code search?
                                 if (target.canTarget(abilityControllerId, card.getId(), source, game) && !target.getTargets().contains(card.getId())) {
-                                    target.add(card.getId(), game);
+                                    target.addTarget(card.getId(), source, game);
                                     targetFound = true;
                                     break; // return to for (String targetName
                                 }
@@ -2057,7 +2057,7 @@ public class TestPlayer implements Player {
                             for (Card card : player.getGraveyard().getCards(targetFull.getFilter(), game)) {
                                 if (isObjectHaveTargetNameOrAlias(card, targetName) || (card.getName() + '-' + card.getExpansionSetCode()).equals(targetName)) { // TODO: remove set code search?
                                     if (target.canTarget(abilityControllerId, card.getId(), source, game) && !target.getTargets().contains(card.getId())) {
-                                        target.add(card.getId(), game);
+                                        target.addTarget(card.getId(), source, game);
                                         targetFound = true;
                                         break IterateGraveyards;  // return to for (String targetName
                                     }
@@ -2084,7 +2084,7 @@ public class TestPlayer implements Player {
                         for (StackObject stackObject : game.getStack()) {
                             if (isObjectHaveTargetNameOrAlias(stackObject, targetName)) {
                                 if (target.canTarget(abilityControllerId, stackObject.getId(), source, game) && !target.getTargets().contains(stackObject.getId())) {
-                                    target.add(stackObject.getId(), game);
+                                    target.addTarget(stackObject.getId(), source, game);
                                     targetFound = true;
                                     break; // return to for (String targetName
                                 }
@@ -2133,7 +2133,7 @@ public class TestPlayer implements Player {
                 for (String targetName : targetList) {
                     for (Card card : cards.getCards(game)) {
                         if (isObjectHaveTargetNameOrAlias(card, targetName) && !target.getTargets().contains(card.getId())) {
-                            target.add(card.getId(), game);
+                            target.addTarget(card.getId(), source, game);
                             targetFound = true;
                             break;
                         }
