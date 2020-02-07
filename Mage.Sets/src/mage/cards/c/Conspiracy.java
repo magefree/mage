@@ -19,11 +19,7 @@ import mage.players.Player;
 import mage.util.SubTypeList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collectors;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
 
 /**
  * @author bunchOfDevs
@@ -58,6 +54,8 @@ public final class Conspiracy extends CardImpl {
             staticText = "Creatures you control are the chosen type. The same is "
                     + "true for creature spells you control and creature cards "
                     + "you own that aren't on the battlefield.";
+            
+            this.dependendToTypes.add(DependencyType.BecomeCreature);  // Opalescence and Starfield of Nyx
         }
 
         public ConspiracyEffect(final ConspiracyEffect effect) {
@@ -148,7 +146,8 @@ public final class Conspiracy extends CardImpl {
         }
 
         private void setChosenSubtype(SubTypeList subtype, SubType choice) {
-            if (subtype.size() != 1 || !subtype.contains(choice)) {
+            if (subtype.size() != 1 
+                    || !subtype.contains(choice)) {
                 subtype.clear();
                 subtype.add(choice);
             }
@@ -162,17 +161,6 @@ public final class Conspiracy extends CardImpl {
         @Override
         public boolean hasLayer(Layer layer) {
             return layer == Layer.TypeChangingEffects_4;
-        }
-
-        @Override
-        public Set<UUID> isDependentTo(List<ContinuousEffect> allEffectsInLayer) {
-            // the dependent classes needs to be an enclosed class for dependent check of continuous effects
-            return allEffectsInLayer.stream()
-                    .filter(effect
-                            -> mage.cards.s.StarfieldOfNyx.class.equals(effect.getClass().getEnclosingClass())
-                    || mage.cards.o.Opalescence.class.equals(effect.getClass().getEnclosingClass()))
-                    .map(Effect::getId)
-                    .collect(Collectors.toSet());
         }
     }
 }

@@ -1,16 +1,11 @@
 package mage.cards.n;
 
-import java.util.List;
-import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collectors;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.Effect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -52,6 +47,8 @@ public final class NecroticOoze extends CardImpl {
                     Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
             staticText = "As long as {this} is on the battlefield, "
                     + "it has all activated abilities of all creature cards in all graveyards";
+
+            this.dependendToTypes.add(DependencyType.AddingAbility); // Yixlid Jailer
         }
 
         public NecroticOozeEffect(final NecroticOozeEffect effect) {
@@ -87,16 +84,6 @@ public final class NecroticOoze extends CardImpl {
         @Override
         public NecroticOozeEffect copy() {
             return new NecroticOozeEffect(this);
-        }
-
-        @Override
-        public Set<UUID> isDependentTo(List<ContinuousEffect> allEffectsInLayer) {
-            // the dependent classes needs to be an enclosed class for dependent check of continuous effects
-            return allEffectsInLayer.stream()
-                    .filter(effect -> mage.cards.y.YixlidJailer.class.equals(effect.getClass().getEnclosingClass()))
-                    .map(Effect::getId)
-                    .collect(Collectors.toSet());
-
         }
     }
 

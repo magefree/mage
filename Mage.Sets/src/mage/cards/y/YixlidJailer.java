@@ -44,6 +44,8 @@ public final class YixlidJailer extends CardImpl {
         YixlidJailerEffect() {
             super(Duration.WhileOnBattlefield, Outcome.LoseAbility);
             staticText = "Cards in graveyards lose all abilities.";
+
+            this.dependencyTypes.add(DependencyType.AddingAbility); // Necrotic Ooze
         }
 
         YixlidJailerEffect(final YixlidJailerEffect effect) {

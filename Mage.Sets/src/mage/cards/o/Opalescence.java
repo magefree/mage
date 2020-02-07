@@ -57,6 +57,11 @@ public final class Opalescence extends CardImpl {
             super(Duration.WhileOnBattlefield, Outcome.BecomeCreature);
             staticText = "Each other non-Aura enchantment is a creature in addition to its other "
                     + "types and has base power and base toughness each equal to its converted mana cost";
+            
+            this.dependendToTypes.add(DependencyType.EnchantmentAddingRemoving); // Enchanted Evening
+            this.dependendToTypes.add(DependencyType.AuraAddingRemoving); // Cloudform
+            
+            this.dependencyTypes.add(DependencyType.BecomeCreature);  // Conspiracy
         }
 
         public OpalescenceEffect(final OpalescenceEffect effect) {
@@ -70,7 +75,8 @@ public final class Opalescence extends CardImpl {
 
         @Override
         public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, 
+                    source.getControllerId(), source.getSourceId(), game)) {
                 switch (layer) {
                     case TypeChangingEffects_4:
                         if (sublayer == SubLayer.NA) {
@@ -101,16 +107,6 @@ public final class Opalescence extends CardImpl {
         public boolean hasLayer(Layer layer) {
             return layer == Layer.PTChangingEffects_7
                     || layer == Layer.TypeChangingEffects_4;
-        }
-
-        @Override
-        public Set<UUID> isDependentTo(List<ContinuousEffect> allEffectsInLayer) {
-            // the dependent classes needs to be an enclosed class for dependent check of continuous effects
-            return allEffectsInLayer.stream()
-                    .filter(effect -> effect.getDependencyTypes().contains(DependencyType.EnchantmentAddingRemoving)
-                    || effect.getDependencyTypes().contains(DependencyType.AuraAddingRemoving)) // Cloudform
-                    .map(Effect::getId)
-                    .collect(Collectors.toSet());
         }
     }
 }
