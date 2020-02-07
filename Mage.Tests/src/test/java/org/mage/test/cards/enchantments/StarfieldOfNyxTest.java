@@ -25,7 +25,8 @@ public class StarfieldOfNyxTest extends CardTestPlayerBase {
      */
     @Test
     public void testCloudform() {
-        // At the beginning of your upkeep, if you control an artifact, put a 1/1 colorless Thopter artifact creature token with flying onto the battlefield.
+        // At the beginning of your upkeep, if you control an artifact, put a 1/1 
+        // colorless Thopter artifact creature token with flying onto the battlefield.
         // Whenever one or more artifact creatures you control deal combat damage to a player, draw a card.
         addCard(Zone.BATTLEFIELD, playerA, "Thopter Spy Network", 2); // {2}{U}{U}  - added to come to 5 enchantments on the battlefield
         addCard(Zone.BATTLEFIELD, playerA, "Island", 8);
@@ -34,7 +35,8 @@ public class StarfieldOfNyxTest extends CardTestPlayerBase {
         // As long as you control five or more enchantments, each other non-Aura enchantment you control is a creature in
         // addition to its other types and has base power and base toughness each equal to its converted mana cost.
         addCard(Zone.HAND, playerA, "Starfield of Nyx"); // "{4}{W}"
-        // When Cloudform enters the battlefield, it becomes an Aura with enchant creature. Manifest the top card of your library and attach Cloudform to it.
+        // When Cloudform enters the battlefield, it becomes an Aura with enchant creature. 
+        // Manifest the top card of your library and attach Cloudform to it.
         // Enchanted creature has flying and hexproof.
         addCard(Zone.HAND, playerA, "Cloudform"); // {1}{U}{U}
         addCard(Zone.GRAVEYARD, playerA, "Cloudform");
@@ -46,9 +48,11 @@ public class StarfieldOfNyxTest extends CardTestPlayerBase {
 
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
+        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Thopter Spy Network", 0);
-        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 2, Filter.ComparisonScope.All); // the manifested cards
+        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 
+                2, 2, Filter.ComparisonScope.All); // the manifested cards
         assertPermanentCount(playerA, "Starfield of Nyx", 1);
         assertPowerToughness(playerA, "Thopter Spy Network", 4, 4, Filter.ComparisonScope.All);
         assertPermanentCount(playerA, "Cloudform", 2);
@@ -62,7 +66,8 @@ public class StarfieldOfNyxTest extends CardTestPlayerBase {
      */
     @Test
     public void testHexproof() {
-        // At the beginning of your upkeep, if you control an artifact, put a 1/1 colorless Thopter artifact creature token with flying onto the battlefield.
+        // At the beginning of your upkeep, if you control an artifact, put a 1/1 colorless 
+        // Thopter artifact creature token with flying onto the battlefield.
         // Whenever one or more artifact creatures you control deal combat damage to a player, draw a card.
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
         // At the beginning of your upkeep, you may return target enchantment card from your graveyard to the battlefield.
@@ -102,14 +107,15 @@ public class StarfieldOfNyxTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerA, "Starfield of Nyx"); // enchantments you control become creatures
         addCard(Zone.BATTLEFIELD, playerA, "Humility"); // creatures lose all abilities and are 1/1
-        addCard(Zone.BATTLEFIELD, playerA, "Pharika, God of Affliction"); // enchantment
+        addCard(Zone.BATTLEFIELD, playerA, "Master of the Feast"); // enchantment creature 5/5
         addCard(Zone.BATTLEFIELD, playerA, "Emrakul, the Aeons Torn"); //15/15 creature
         addCard(Zone.BATTLEFIELD, playerA, "Crusade", 4); // enchantments to fulfill requirement of Starfield of Nyx
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-
-        assertPowerToughness(playerA, "Pharika, God of Affliction", 3, 3, Filter.ComparisonScope.All);
+        assertAllCommandsUsed();
+        
+        assertPowerToughness(playerA, "Master of the Feast", 3, 3, Filter.ComparisonScope.All);
         assertPowerToughness(playerA, "Humility", 4, 4, Filter.ComparisonScope.All);
         // Humility loses its ability in layer 6.  Layer 7 never gets Humility's effect
         assertPowerToughness(playerA, "Emrakul, the Aeons Torn", 15, 15, Filter.ComparisonScope.All); // PT not affected

@@ -4,7 +4,8 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
@@ -56,7 +57,9 @@ public final class StarfieldOfNyx extends CardImpl {
         // As long as you control five or more enchantments, each other non-Aura enchantment 
         // you control is a creature in addition to its other types and has base power and 
         // base toughness each equal to its converted mana cost.
-        ContinuousEffect effect = new StarfieldOfNyxEffect();
+        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(
+                new StarfieldOfNyxEffect(), new PermanentsOnTheBattlefieldCondition(
+                        filterEnchantmentYouControl, ComparisonType.MORE_THAN, 4), rule1);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
@@ -106,34 +109,31 @@ public final class StarfieldOfNyx extends CardImpl {
             filter.add(CardType.ENCHANTMENT.getPredicate());
             filter.add(Predicates.not(SubType.AURA.getPredicate()));
             filter.add(AnotherPredicate.instance);
-            if (game.getState().getBattlefield().getActivePermanents(filter2,
-                    source.getControllerId(), source.getSourceId(), game).size() > 4) {
-                for (Permanent permanent : game.getBattlefield().getActivePermanents(filter,
-                        source.getControllerId(), source.getSourceId(), game)) {
-                    switch (layer) {
-                        case TypeChangingEffects_4:
-                            if (sublayer == SubLayer.NA) {
-                                if (!permanent.isCreature()
-                                        && !permanent.getSubtype(game).contains(SubType.AURA)) {
-                                    permanent.addCardType(CardType.CREATURE);
-                                }
-                            }
-                            break;
-
-                        case PTChangingEffects_7:
-                            if (sublayer == SubLayer.SetPT_7b
-                                    && permanent.isCreature()
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter,
+                    source.getControllerId(), source.getSourceId(), game)) {
+                switch (layer) {
+                    case TypeChangingEffects_4:
+                        if (sublayer == SubLayer.NA) {
+                            if (!permanent.isCreature()
                                     && !permanent.getSubtype(game).contains(SubType.AURA)) {
-                                int manaCost = permanent.getConvertedManaCost();
-                                permanent.getPower().setValue(manaCost);
-                                permanent.getToughness().setValue(manaCost);
+                                permanent.addCardType(CardType.CREATURE);
                             }
-                    }
+                        }
+                        break;
 
+                    case PTChangingEffects_7:
+                        if (sublayer == SubLayer.SetPT_7b
+                                && permanent.isCreature()
+                                && !permanent.getSubtype(game).contains(SubType.AURA)) {
+                            int manaCost = permanent.getConvertedManaCost();
+                            permanent.getPower().setValue(manaCost);
+                            permanent.getToughness().setValue(manaCost);
+                        }
+                        break;
                 }
-                return true;
+
             }
-            return false;
+            return true;
         }
 
         @Override
