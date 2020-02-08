@@ -97,6 +97,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected List<UUID> bandedCards = new ArrayList<>();
     protected Counters counters;
     protected List<MarkedDamageInfo> markedDamage;
+    protected int markedLifelink;
     protected int timesLoyaltyUsed = 0;
     protected Map<String, String> info;
     protected int createOrder;
@@ -133,6 +134,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.blocking = permanent.blocking;
         this.maxBlocks = permanent.maxBlocks;
         this.deathtouched = permanent.deathtouched;
+        this.markedLifelink = permanent.markedLifelink;
 
         for (Map.Entry<String, List<UUID>> entry : permanent.connectedCards.entrySet()) {
             this.connectedCards.put(entry.getKey(), entry.getValue());
@@ -886,8 +888,12 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 }
                 if (source != null && sourceAbilities != null) {
                     if (sourceAbilities.containsKey(LifelinkAbility.getInstance().getId())) {
-                        Player player = game.getPlayer(sourceControllerId);
-                        player.gainLife(damageDone, game, sourceId);
+                        if (markDamage) {
+                            game.getPermanent(sourceId).markLifelink(damageDone);
+                        } else {
+                            Player player = game.getPlayer(sourceControllerId);
+                            player.gainLife(damageDone, game, sourceId);
+                        }
                     }
                     if (sourceAbilities.containsKey(DeathtouchAbility.getInstance().getId())) {
                         deathtouched = true;
@@ -913,12 +919,22 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
+    public void markLifelink(int damage) {
+        markedLifelink += damage;
+    }
+
+    @Override
     public int markDamage(int damageAmount, UUID sourceId, Game game, boolean preventable, boolean combat) {
         return damage(damageAmount, sourceId, game, preventable, combat, true, null);
     }
 
     @Override
     public int applyDamage(Game game) {
+        if (markedLifelink > 0) {
+            Player player = game.getPlayer(this.getControllerId());
+            player.gainLife(markedLifelink, game, this.getId());
+            markedLifelink = 0;
+        }
         if (markedDamage == null) {
             return 0;
         }

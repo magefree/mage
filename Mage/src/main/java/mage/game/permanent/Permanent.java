@@ -132,6 +132,8 @@ public interface Permanent extends Card, Controllable {
      */
     int markDamage(int damage, UUID sourceId, Game game, boolean preventable, boolean combat);
 
+    void markLifelink(int damage);
+
     int applyDamage(Game game);
 
     void removeAllDamage(Game game);
