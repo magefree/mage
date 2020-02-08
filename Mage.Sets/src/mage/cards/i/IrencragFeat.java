@@ -2,6 +2,7 @@ package mage.cards.i;
 
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -26,6 +27,7 @@ public final class IrencragFeat extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}{R}{R}");
 
         // Add seven {R}. You can cast only one more spell this turn.
+        this.getSpellAbility().addEffect(new BasicManaEffect(Mana.RedMana(7)));
         this.getSpellAbility().addEffect(new IrencragFeatEffect());
     }
 
@@ -40,8 +42,6 @@ public final class IrencragFeat extends CardImpl {
 }
 
 class IrencragFeatEffect extends OneShotEffect {
-
-    private static final Effect effect = new BasicManaEffect(Mana.RedMana(7));
 
     IrencragFeatEffect() {
         super(Outcome.Benefit);
@@ -63,24 +63,24 @@ class IrencragFeatEffect extends OneShotEffect {
         if (watcher == null) {
             return false;
         }
-        int spellsCast = watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(source.getControllerId());
-        game.addEffect(new IrencragFeatCantCastEffect(spellsCast), source);
-        return effect.apply(game, source);
+        int start = watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(source.getControllerId());
+        game.addEffect(new IrencragFeatCantCastEffect(start), source);
+        return true;
     }
 }
 
 class IrencragFeatCantCastEffect extends ContinuousRuleModifyingEffectImpl {
 
-    private final int spellsCast;
+    private final int start;
 
-    IrencragFeatCantCastEffect(int spellsCast) {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        this.spellsCast = spellsCast;
+    IrencragFeatCantCastEffect(int start) {
+        super(Duration.EndOfTurn, Outcome.Detriment);
+        this.start = start;
     }
 
     private IrencragFeatCantCastEffect(final IrencragFeatCantCastEffect effect) {
         super(effect);
-        this.spellsCast = effect.spellsCast;
+        this.start = effect.start;
     }
 
     @Override
@@ -96,7 +96,9 @@ class IrencragFeatCantCastEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         CastSpellLastTurnWatcher watcher = game.getState().getWatcher(CastSpellLastTurnWatcher.class);
-        return event.getPlayerId().equals(source.getControllerId())
-                && watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(event.getPlayerId()) > spellsCast + 1;
+        int spellsCast = watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(source.getControllerId());
+        // start is the spell index of IrencragFeat.
+        // If spellsCast is greater the player has already cast a spell after Irencrag Feat
+        return event.getPlayerId().equals(source.getControllerId()) && spellsCast > start;
     }
 }
