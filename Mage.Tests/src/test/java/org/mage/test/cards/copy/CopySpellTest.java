@@ -77,6 +77,101 @@ public class CopySpellTest extends CardTestPlayerBase {
         assertAbility(playerB, "Silvercoat Lion", FlyingAbility.getInstance(), false);
     }
 
+    @Test
+    public void BonecrusherGiantChangeTargets_BoneTargetBoth() {
+        // Whenever Bonecrusher Giant becomes the target of a spell, Bonecrusher Giant deals 2 damage to that spell’s controller.
+        addCard(Zone.BATTLEFIELD, playerA, "Bonecrusher Giant");
+        //
+        // Target creature gets +2/+2 until end of turn.
+        // Conspire (As you cast this spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it and you may choose a new target for the copy.)
+        addCard(Zone.HAND, playerA, "Barkshell Blessing");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains");
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears");
+        addCard(Zone.BATTLEFIELD, playerA, "Savannah Lions");
+
+        castSpell(1, PhaseStep.UPKEEP, playerA, "Barkshell Blessing");
+        setChoice(playerA, "Yes"); // use Conspire
+        addTarget(playerA, "Bonecrusher Giant"); // target bone
+        setChoice(playerA, "Grizzly Bears"); // pay for conspire
+        setChoice(playerA, "Savannah Lions"); // pay for conspire
+        setChoice(playerA, "When you pay"); // Put Conspire on the stack first.
+        setChoice(playerA, "No"); // both spells target bone
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPowerToughness(playerA, "Bonecrusher Giant", 4 + 2 * 2, 3 + 2 * 2);
+        assertPowerToughness(playerA, "Grizzly Bears", 2, 2);
+        assertPowerToughness(playerA, "Savannah Lions", 2, 1);
+        assertLife(playerA, 20 - 2 * 2); // bone trigger from both spells
+    }
+
+    @Test
+    public void BonecrusherGiantChangeTargets_BoneTargetFirst() {
+        // Whenever Bonecrusher Giant becomes the target of a spell, Bonecrusher Giant deals 2 damage to that spell’s controller.
+        addCard(Zone.BATTLEFIELD, playerA, "Bonecrusher Giant");
+        //
+        // Target creature gets +2/+2 until end of turn.
+        // Conspire (As you cast this spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it and you may choose a new target for the copy.)
+        addCard(Zone.HAND, playerA, "Barkshell Blessing");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains");
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears");
+        addCard(Zone.BATTLEFIELD, playerA, "Savannah Lions");
+
+        castSpell(1, PhaseStep.UPKEEP, playerA, "Barkshell Blessing");
+        setChoice(playerA, "Yes"); // use Conspire
+        addTarget(playerA, "Bonecrusher Giant"); // target bone
+        setChoice(playerA, "Grizzly Bears"); // pay for conspire
+        setChoice(playerA, "Savannah Lions"); // pay for conspire
+        setChoice(playerA, "When you pay"); // Put Conspire on the stack first.
+        setChoice(playerA, "Yes"); // new target for copy: bear
+        addTarget(playerA, "Grizzly Bears");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPowerToughness(playerA, "Bonecrusher Giant", 4 + 2, 3 + 2);
+        assertPowerToughness(playerA, "Grizzly Bears", 2 + 2, 2 + 2);
+        assertPowerToughness(playerA, "Savannah Lions", 2, 1);
+        assertLife(playerA, 20 - 2); // one trigger
+    }
+
+    @Test
+    public void BonecrusherGiantChangeTargets_BoneTargetSecond() {
+        // Whenever Bonecrusher Giant becomes the target of a spell, Bonecrusher Giant deals 2 damage to that spell’s controller.
+        addCard(Zone.BATTLEFIELD, playerA, "Bonecrusher Giant");
+        //
+        // Target creature gets +2/+2 until end of turn.
+        // Conspire (As you cast this spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it and you may choose a new target for the copy.)
+        addCard(Zone.HAND, playerA, "Barkshell Blessing");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains");
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears");
+        addCard(Zone.BATTLEFIELD, playerA, "Savannah Lions");
+
+        castSpell(1, PhaseStep.UPKEEP, playerA, "Barkshell Blessing");
+        setChoice(playerA, "Yes"); // use Conspire
+        addTarget(playerA, "Grizzly Bears"); // target bear
+        setChoice(playerA, "Grizzly Bears"); // pay for conspire
+        setChoice(playerA, "Savannah Lions"); // pay for conspire
+        setChoice(playerA, "Yes"); // new target for copy: bone
+        addTarget(playerA, "Bonecrusher Giant");
+        // setChoice(playerA, "When {this} becomes the target of a spell"); // must be one trigger from bone, not two
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPowerToughness(playerA, "Bonecrusher Giant", 4 + 2, 3 + 2);
+        assertPowerToughness(playerA, "Grizzly Bears", 2 + 2, 2 + 2);
+        assertPowerToughness(playerA, "Savannah Lions", 2, 1);
+        assertLife(playerA, 20 - 2); // one trigger
+    }
+
     /*
      * Reported bug: "Silverfur Partisan and fellow wolves did not trigger off
      * of copies of Strength of Arms made by Zada, Hedron Grinder. Not sure
