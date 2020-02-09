@@ -146,9 +146,8 @@ class MedomaisProphecyLookEffect extends OneShotEffect {
                 .getPlayersInRange(source.getControllerId(), game)
                 .stream()
                 .map(game::getPlayer)
-                .map(Player::getLibrary)
-                .forEachOrdered(library -> controller.lookAtCards(
-                        sourceObject.getIdName(), library.getFromTop(game), game
+                .forEachOrdered(player -> controller.lookAtCards(
+                        sourceObject.getIdName() + " " + player.getName(), player.getLibrary().getFromTop(game), game
                 ));
         return true;
     }
