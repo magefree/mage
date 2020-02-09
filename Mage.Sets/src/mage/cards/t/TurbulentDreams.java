@@ -52,7 +52,7 @@ enum TurbulentDreamsAdjuster implements TargetAdjuster {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        Target target = new TargetPermanent(0, ability.getManaCostsToPay().getX(), filter, false);
+        Target target = new TargetPermanent(ability.getCosts().getVariableCosts().get(0).getAmount(), filter);
         ability.addTarget(target);
     }
 }
