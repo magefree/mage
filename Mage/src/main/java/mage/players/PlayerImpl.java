@@ -2161,8 +2161,12 @@ public abstract class PlayerImpl implements Player, Serializable {
                             }
                         }
                         if (sourceAbilities != null && sourceAbilities.containsKey(LifelinkAbility.getInstance().getId())) {
-                            Player player = game.getPlayer(sourceControllerId);
-                            player.gainLife(actualDamage, game, sourceId);
+                            if (combatDamage) {
+                                game.getPermanent(sourceId).markLifelink(actualDamage);
+                            } else {
+                                Player player = game.getPlayer(sourceControllerId);
+                                player.gainLife(actualDamage, game, sourceId);
+                            }
                         }
                         // Unstable ability - Earl of Squirrel
                         if (sourceAbilities != null && sourceAbilities.containsKey(SquirrellinkAbility.getInstance().getId())) {
