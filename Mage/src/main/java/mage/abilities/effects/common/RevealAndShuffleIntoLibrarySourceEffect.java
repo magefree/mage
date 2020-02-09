@@ -34,7 +34,7 @@ public class RevealAndShuffleIntoLibrarySourceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
         Player controller = game.getPlayer(source.getControllerId());
         if (sourceObject != null && controller != null) {
             Player owner = null;
