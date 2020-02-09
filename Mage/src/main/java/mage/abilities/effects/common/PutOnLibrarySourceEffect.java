@@ -1,6 +1,7 @@
 
 package mage.abilities.effects.common;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
@@ -43,25 +44,23 @@ public class PutOnLibrarySourceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        boolean result = false;
-        switch (game.getState().getZone(source.getSourceId())) {
-            case BATTLEFIELD:
-                Permanent permanent = game.getPermanent(source.getSourceId());
-                if (permanent != null) {
-                    result |= permanent.moveToZone(Zone.LIBRARY, source.getSourceId(), game, onTop);
-                }
-            case GRAVEYARD:
-                Card card = game.getCard(source.getSourceId());
-                if (card != null) {
-                    for (Player player : game.getPlayers().values()) {
-                        if (player.getGraveyard().contains(card.getId())) {
-                            player.getGraveyard().remove(card);
-                            result |= card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, onTop);
-                        }
-                    }
-                }
+        MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
+        if (sourceObject == null) {
+            return false;
         }
-        return result;
+        if (sourceObject instanceof Permanent) {
+            ((Permanent) sourceObject).moveToZone(Zone.LIBRARY, source.getSourceId(), game, onTop);
+            return true;
+        } else if (sourceObject instanceof Card && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
+            for (Player player : game.getPlayers().values()) {
+                if (player.getGraveyard().contains(sourceObject.getId())) {
+                    player.getGraveyard().remove(((Card) sourceObject));
+                    ((Card) sourceObject).moveToZone(Zone.LIBRARY, source.getSourceId(), game, onTop);
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @Override
