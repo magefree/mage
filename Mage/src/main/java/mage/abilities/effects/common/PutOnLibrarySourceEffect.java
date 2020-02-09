@@ -47,12 +47,12 @@ public class PutOnLibrarySourceEffect extends OneShotEffect {
         switch (game.getState().getZone(source.getSourceId())) {
             case BATTLEFIELD:
                 Permanent permanent = game.getPermanent(source.getSourceId());
-                if (permanent != null) {
+                if (permanent != null && source.getSourceObjectZoneChangeCounter() == permanent.getZoneChangeCounter(game)) {
                     result |= permanent.moveToZone(Zone.LIBRARY, source.getSourceId(), game, onTop);
                 }
             case GRAVEYARD:
                 Card card = game.getCard(source.getSourceId());
-                if (card != null) {
+                if (card != null && source.getSourceObjectZoneChangeCounter() == card.getZoneChangeCounter(game)) {
                     for (Player player : game.getPlayers().values()) {
                         if (player.getGraveyard().contains(card.getId())) {
                             player.getGraveyard().remove(card);
