@@ -113,10 +113,16 @@ public class SpellStack extends ArrayDeque<StackObject> {
     }
 
     public Spell getSpell(UUID id) {
+        return getSpell(id, true);
+    }
+
+    public Spell getSpell(UUID id, boolean allowCopies) {
         for (StackObject stackObject : this) {
             if (stackObject instanceof Spell) {
                 if (stackObject.getId().equals(id) || stackObject.getSourceId().equals(id)) {
-                    return (Spell) stackObject;
+                    if (allowCopies || !stackObject.isCopy()) {
+                        return (Spell) stackObject;
+                    }
                 }
             }
         }
