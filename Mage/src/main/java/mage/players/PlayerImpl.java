@@ -3935,7 +3935,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                         }
                     }
                 }
-                game.applyEffects();
+                game.getState().applyEffects(game);
                 break;
             case HAND:
                 for (Card card : cards) {
