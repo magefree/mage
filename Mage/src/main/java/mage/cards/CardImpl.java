@@ -499,21 +499,21 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             case STACK:
                 StackObject stackObject;
                 if (getSpellAbility() != null) {
-                    stackObject = game.getStack().getSpell(getSpellAbility().getId());
+                    stackObject = game.getStack().getSpell(getSpellAbility().getId(), false);
                 } else {
-                    stackObject = game.getStack().getSpell(this.getId());
+                    stackObject = game.getStack().getSpell(this.getId(), false);
                 }
                 if (stackObject == null && (this instanceof SplitCard)) { // handle if half of Split cast is on the stack
-                    stackObject = game.getStack().getSpell(((SplitCard) this).getLeftHalfCard().getId());
+                    stackObject = game.getStack().getSpell(((SplitCard) this).getLeftHalfCard().getId(), false);
                     if (stackObject == null) {
-                        stackObject = game.getStack().getSpell(((SplitCard) this).getRightHalfCard().getId());
+                        stackObject = game.getStack().getSpell(((SplitCard) this).getRightHalfCard().getId(), false);
                     }
                 }
                 if (stackObject == null && (this instanceof AdventureCard)) {
-                    stackObject = game.getStack().getSpell(((AdventureCard) this).getSpellCard().getId());
+                    stackObject = game.getStack().getSpell(((AdventureCard) this).getSpellCard().getId(), false);
                 }
                 if (stackObject == null) {
-                    stackObject = game.getStack().getSpell(getId());
+                    stackObject = game.getStack().getSpell(getId(), false);
                 }
                 if (stackObject != null) {
                     removed = game.getStack().remove(stackObject, game);

@@ -34,9 +34,11 @@ public final class SevinnesReclamation extends CardImpl {
     public SevinnesReclamation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{W}");
 
-        // Return target permanent card with converted mana cost 3 or less from your graveyard to the battlefield. If this spell was cast from a graveyard, you may copy this spell and may choose a new target for the copy.
-        this.getSpellAbility().addEffect(new SevinnesReclamationEffect());
+        // Return target permanent card with converted mana cost 3 or less from your graveyard to the battlefield.
+        this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
+        // If this spell was cast from a graveyard, you may copy this spell and may choose a new target for the copy.
+        this.getSpellAbility().addEffect(new SevinnesReclamationEffect());
 
         // Flashback {4}{W}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{4}{W}"), TimingRule.SORCERY));
@@ -54,12 +56,9 @@ public final class SevinnesReclamation extends CardImpl {
 
 class SevinnesReclamationEffect extends OneShotEffect {
 
-    private static final Effect effect = new ReturnFromGraveyardToBattlefieldTargetEffect();
-
     SevinnesReclamationEffect() {
         super(Outcome.Benefit);
-        staticText = "Return target permanent card with converted mana cost 3 or less " +
-                "from your graveyard to the battlefield. If this spell was cast from a graveyard, " +
+        staticText = "If this spell was cast from a graveyard, " +
                 "you may copy this spell and may choose a new target for the copy.";
     }
 
@@ -74,12 +73,12 @@ class SevinnesReclamationEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = (Spell) game.getStack().getStackObject(source.getSourceId());
+        // If a spell is a copy it wasn't cast from the graveyard.
+        Spell spell = game.getStack().getSpell(source.getSourceId(), false);
         Player player = game.getPlayer(source.getControllerId());
         if (spell == null || player == null) {
             return false;
         }
-        effect.apply(game, source);
         if (spell.getFromZone() == Zone.GRAVEYARD
                 && player.chooseUse(outcome, "Copy this spell?", source, game)) {
             spell.createCopyOnStack(game, source, source.getControllerId(), true);

@@ -375,4 +375,33 @@ public class CopySpellTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Flame Slash", 1);
 
     }
+
+    /**
+     * Sevinne's Reclamation is almost unique in that the original spell resolves before the copy.
+     * As a result when resolving the original the copy was being removed from the stack instead.
+     */
+    @Test
+    public void testSevinnesReclamation() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
+        // Return target permanent card with converted mana cost 3 or less from your graveyard to the battlefield.
+        // If this spell was cast from a graveyard, you may copy this spell and may choose a new target for the copy.
+        // Flashback 4W
+        addCard(Zone.GRAVEYARD, playerA, "Sevinne's Reclamation");
+        addCard(Zone.GRAVEYARD, playerA, "Mountain");
+        addCard(Zone.GRAVEYARD, playerA, "Island");
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback");
+        addTarget(playerA, "Mountain");
+        setChoice(playerA, "Yes"); // Copy
+        setChoice(playerA, "Yes"); // Choose new target
+        addTarget(playerA, "Island");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        setStrictChooseMode(true);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Mountain", 1);
+        assertPermanentCount(playerA, "Island", 1);
+    }
 }

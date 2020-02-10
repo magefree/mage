@@ -198,7 +198,7 @@ public abstract class AbilityImpl implements Ability {
             /**
              * game.applyEffects() has to be done at least for every effect that
              * moves cards/permanent between zones, or changes control of
-             * objects so Static effects work as intened if dependant from the
+             * objects so Static effects work as intended if dependant from the
              * moved objects zone it is in Otherwise for example were static
              * abilities with replacement effects deactivated too late Example:
              * {@link org.mage.test.cards.replacement.DryadMilitantTest#testDiesByDestroy testDiesByDestroy}
@@ -924,7 +924,7 @@ public abstract class AbilityImpl implements Ability {
         } else {
             parameterSourceId = getSourceId();
         }
-        // check agains shortLKI for effects that move multiple object at the same time (e.g. destroy all)
+        // check against shortLKI for effects that move multiple object at the same time (e.g. destroy all)
         if (game.getShortLivingLKI(getSourceId(), getZone())) {
             return true;
         }
