@@ -2,6 +2,7 @@
 package mage.abilities.effects.common.continuous;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -45,7 +46,7 @@ public class PlayWithHandRevealedEffect extends ContinuousEffectImpl {
                     affectedPlayers = game.getOpponents(source.getControllerId());
                     break;
                 case YOU:
-                    ArrayList<UUID> tmp = new ArrayList<>();
+                    List<UUID> tmp = new ArrayList<>();
                     tmp.add(source.getControllerId());
                     affectedPlayers = tmp;
                     break;

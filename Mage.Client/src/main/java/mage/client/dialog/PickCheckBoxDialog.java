@@ -10,6 +10,7 @@ import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
+import java.util.List;
 
 /**
  * @author JayDi85
@@ -19,7 +20,7 @@ import java.util.*;
 public class PickCheckBoxDialog extends MageDialog {
 
     Choice choice;
-    ArrayList<KeyValueItem> allItems = new ArrayList<>();
+    List<KeyValueItem> allItems = new ArrayList<>();
     DefaultListModel<KeyValueItem> dataModel = new DefaultListModel();
     CheckBoxList.CheckBoxListModel m_dataModel;
 

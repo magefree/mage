@@ -15,7 +15,7 @@ public class ChoiceColor extends ChoiceImpl {
     private static final List<String> colorChoices = getBaseColors();
 
     public static List<String> getBaseColors() {
-        ArrayList<String> arr = new ArrayList<>();
+        List<String> arr = new ArrayList<>();
         arr.add("Green");
         arr.add("Blue");
         arr.add("Black");

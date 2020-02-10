@@ -3,6 +3,7 @@ package mage.cards.e;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -85,7 +86,7 @@ class ElementalResonanceEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        ArrayList<String> manaOptions = new ArrayList<>();
+        List<String> manaOptions = new ArrayList<>();
 //      TODO: Phyrexian mana gives multiple choices when there should only be one (e.g. Slash Panther is {4} or {4}{R}).
         for (Mana mana : permanent.getManaCost().getOptions()) {
             String manaString = mana.toString();

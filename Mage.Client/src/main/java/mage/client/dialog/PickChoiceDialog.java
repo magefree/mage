@@ -10,6 +10,7 @@ import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
+import java.util.List;
 
 /**
  * @author JayDi85
@@ -18,8 +19,8 @@ import java.util.*;
 public class PickChoiceDialog extends MageDialog {
 
     Choice choice;
-    ArrayList<KeyValueItem> allItems = new ArrayList<>();
-    DefaultListModel<KeyValueItem> dataModel = new DefaultListModel();
+    List<KeyValueItem> allItems = new ArrayList<>();
+    DefaultListModel<KeyValueItem> dataModel = new DefaultListModel<>();
 
     final private static String HTML_TEMPLATE = "<html><div style='text-align: center;'>%s</div></html>";
 

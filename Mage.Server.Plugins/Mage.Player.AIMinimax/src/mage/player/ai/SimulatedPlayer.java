@@ -53,7 +53,7 @@ public class SimulatedPlayer extends ComputerPlayer {
 
         simulateOptions(sim, pass);
 
-        ArrayList<Ability> list = new ArrayList<>(allActions);
+        List<Ability> list = new ArrayList<>(allActions);
         //Collections.shuffle(list);
         Collections.reverse(list);
         return list;

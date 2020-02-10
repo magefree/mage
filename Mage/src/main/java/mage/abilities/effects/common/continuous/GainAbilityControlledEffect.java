@@ -13,6 +13,7 @@ import mage.game.permanent.Permanent;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -104,7 +105,7 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl {
                 }
             }
             // still as long as the prev. permanent is known to the LKI (e.g. Mikaeus, the Unhallowed) so gained dies triggered ability will trigger
-            HashMap<UUID, MageObject> LKIBattlefield = game.getLKI().get(Zone.BATTLEFIELD);
+            Map<UUID, MageObject> LKIBattlefield = game.getLKI().get(Zone.BATTLEFIELD);
             if (LKIBattlefield != null) {
                 for (MageObject mageObject : LKIBattlefield.values()) {
                     Permanent perm = (Permanent) mageObject;

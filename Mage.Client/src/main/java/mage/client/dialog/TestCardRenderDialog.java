@@ -202,7 +202,7 @@ public class TestCardRenderDialog extends MageDialog {
         Player playerOpponent = new StubPlayer("player2", RangeOfInfluence.ALL);
         game.addPlayer(playerOpponent, deck);
 
-        ArrayList<CardView> cardViews = new ArrayList<>();
+        java.util.List<CardView> cardViews = new ArrayList<>();
         ///*
         cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "263", 0, 0, 0, false)); // mountain
         cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "185", 0, 0, 0, true)); // Judith, the Scourge Diva

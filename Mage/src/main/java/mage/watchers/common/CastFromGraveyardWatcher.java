@@ -17,7 +17,7 @@ import java.util.*;
 public class CastFromGraveyardWatcher extends Watcher {
 
     // holds which spell with witch zone change counter was cast from graveyard
-    private final Map<UUID, HashSet<Integer>> spellsCastFromGraveyard = new HashMap<>();
+    private final Map<UUID, Set<Integer>> spellsCastFromGraveyard = new HashMap<>();
 
     public CastFromGraveyardWatcher() {
         super(WatcherScope.GAME);

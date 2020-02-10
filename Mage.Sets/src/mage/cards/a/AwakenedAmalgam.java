@@ -2,6 +2,7 @@
 package mage.cards.a;
 
 import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -56,7 +57,7 @@ class AwakenedAmalgamLandNamesCount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        HashSet<String> landNames = new HashSet<>();
+        Set<String> landNames = new HashSet<>();
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(sourceAbility.getControllerId())) {
             if (permanent.isLand()) {
                 landNames.add(permanent.getName());

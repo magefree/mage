@@ -7,6 +7,7 @@ import org.mage.plugins.card.images.CardDownloadData;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author spjspj
@@ -69,9 +70,9 @@ public enum AltMtgOnlTokensImageSource implements CardImageSource {
         return null;
     }
 
-    HashMap<String, String> copyUrlToImage = null;
-    HashMap<String, String> copyImageToUrl = null;
-    HashMap<String, Integer> copyUrlToImageDone = null;
+    Map<String, String> copyUrlToImage = null;
+    Map<String, String> copyImageToUrl = null;
+    Map<String, Integer> copyUrlToImageDone = null;
 
     private void setupLinks() {
         if (copyUrlToImage != null) {

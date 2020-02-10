@@ -2,6 +2,7 @@
 package mage.cards.s;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -112,7 +113,7 @@ class StanggExileTokenEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            ArrayList<UUID> tokenIds = (ArrayList<UUID>) game.getState().getValue(source.getSourceId() + "_token");
+            List<UUID> tokenIds = (ArrayList<UUID>) game.getState().getValue(source.getSourceId() + "_token");
             if (tokenIds != null) {
                 Cards cards = new CardsImpl();
                 for (UUID tokenId : tokenIds) {

@@ -45,7 +45,7 @@ public abstract class TriggeredManaAbility extends TriggeredAbilityImpl implemen
     @Override
     public List<Mana> getNetMana(Game game) {
         if (game != null) {
-            ArrayList<Mana> newNetMana = new ArrayList<>();
+            List<Mana> newNetMana = new ArrayList<>();
             for (Effect effect : getEffects()) {
                 if (effect instanceof ManaEffect) {
                     newNetMana.addAll(((ManaEffect) effect).getNetMana(game, this));

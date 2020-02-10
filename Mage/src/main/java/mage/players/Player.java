@@ -396,17 +396,17 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean flipCoin(Ability source, Game game, boolean winnable);
 
-    boolean flipCoin(Ability source, Game game, boolean winnable, ArrayList<UUID> appliedEffects);
+    boolean flipCoin(Ability source, Game game, boolean winnable, List<UUID> appliedEffects);
 
     int rollDice(Game game, int numSides);
 
-    int rollDice(Game game, ArrayList<UUID> appliedEffects, int numSides);
+    int rollDice(Game game, List<UUID> appliedEffects, int numSides);
 
     PlanarDieRoll rollPlanarDie(Game game);
 
-    PlanarDieRoll rollPlanarDie(Game game, ArrayList<UUID> appliedEffects);
+    PlanarDieRoll rollPlanarDie(Game game, List<UUID> appliedEffects);
 
-    PlanarDieRoll rollPlanarDie(Game game, ArrayList<UUID> appliedEffects, int numberChaosSides, int numberPlanarSides);
+    PlanarDieRoll rollPlanarDie(Game game, List<UUID> appliedEffects, int numberChaosSides, int numberPlanarSides);
 
     Card discardOne(boolean random, Ability source, Game game);
 

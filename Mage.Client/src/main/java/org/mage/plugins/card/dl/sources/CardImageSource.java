@@ -49,7 +49,7 @@ public interface CardImageSource {
 
     void doPause(String httpImageUrl);
 
-    default ArrayList<String> getSupportedSets() {
+    default List<String> getSupportedSets() {
         return new ArrayList<>();
     }
 

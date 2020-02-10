@@ -56,7 +56,7 @@ public class Log {
     }
 
     public List<String> getArguments() {
-        ArrayList<String> arguments = new ArrayList<>();
+        List<String> arguments = new ArrayList<>();
         if (arg0 != null) {
             arguments.add(arg0);
         }

@@ -1,6 +1,7 @@
 package mage.client.util;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author JayDi85
@@ -41,7 +42,7 @@ public enum CardLanguage {
     }
 
     public static String[] toList() {
-        ArrayList<String> res = new ArrayList<>();
+        List<String> res = new ArrayList<>();
         for (CardLanguage l : values()) {
             res.add(l.toString());
         }

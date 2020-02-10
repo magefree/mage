@@ -37,7 +37,7 @@ public class SecondTargetPointer implements TargetPointer {
 
     @Override
     public List<UUID> getTargets(Game game, Ability source) {
-        ArrayList<UUID> target = new ArrayList<>();
+        List<UUID> target = new ArrayList<>();
         if (source.getTargets().size() > 1) {
             for (UUID targetId : source.getTargets().get(1).getTargets()) {
                 Card card = game.getCard(targetId);

@@ -1,6 +1,7 @@
 package mage.abilities.effects.common.counter;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -79,7 +80,7 @@ public class AddCountersSourceEffect extends OneShotEffect {
                             countersToAdd--;
                         }
                         newCounter.add(countersToAdd);
-                        ArrayList<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects");
+                        List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects");
                         card.addCounters(newCounter, source, game, appliedEffects);
                         if (informPlayers && !game.isSimulation()) {
                             Player player = game.getPlayer(source.getControllerId());
@@ -107,7 +108,7 @@ public class AddCountersSourceEffect extends OneShotEffect {
                             }
                             newCounter.add(countersToAdd);
                             int before = permanent.getCounters(game).getCount(newCounter.getName());
-                            ArrayList<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects");
+                            List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects");
                             permanent.addCounters(newCounter, source, game, appliedEffects); // if used from a replacement effect, the basic event determines if an effect was already applied to an event
                             if (informPlayers && !game.isSimulation()) {
                                 int amountAdded = permanent.getCounters(game).getCount(newCounter.getName()) - before;

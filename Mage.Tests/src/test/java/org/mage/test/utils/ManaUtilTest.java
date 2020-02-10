@@ -2,6 +2,7 @@ package org.mage.test.utils;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -188,7 +189,7 @@ public class ManaUtilTest extends CardTestPlayerBase {
         Card card = CardRepository.instance.findCard(landName).getCard();
         Assert.assertNotNull(card);
 
-        HashMap<UUID, ActivatedManaAbilityImpl> useableAbilities = getManaAbilities(card);
+        Map<UUID, ActivatedManaAbilityImpl> useableAbilities = getManaAbilities(card);
         Assert.assertEquals(expected1, useableAbilities.size());
 
         useableAbilities = ManaUtil.tryToAutoPay(unpaid, (LinkedHashMap<UUID, ActivatedManaAbilityImpl>) useableAbilities);
@@ -216,7 +217,7 @@ public class ManaUtilTest extends CardTestPlayerBase {
         Card card = CardRepository.instance.findCard(landName).getCard();
         Assert.assertNotNull(card);
 
-        HashMap<UUID, ActivatedManaAbilityImpl> useableAbilities = getManaAbilities(card);
+        Map<UUID, ActivatedManaAbilityImpl> useableAbilities = getManaAbilities(card);
         Assert.assertEquals(expected1, useableAbilities.size());
 
         useableAbilities = ManaUtil.tryToAutoPay(unpaid, (LinkedHashMap<UUID, ActivatedManaAbilityImpl>) useableAbilities);
@@ -251,8 +252,8 @@ public class ManaUtilTest extends CardTestPlayerBase {
      * @param card Card to extract mana abilities from.
      * @return
      */
-    private HashMap<UUID, ActivatedManaAbilityImpl> getManaAbilities(Card card) {
-        HashMap<UUID, ActivatedManaAbilityImpl> useableAbilities = new LinkedHashMap<>();
+    private Map<UUID, ActivatedManaAbilityImpl> getManaAbilities(Card card) {
+        Map<UUID, ActivatedManaAbilityImpl> useableAbilities = new LinkedHashMap<>();
         for (Ability ability : card.getAbilities()) {
             if (ability instanceof ActivatedManaAbilityImpl) {
                 ability.newId(); // we need to assign id manually as we are not in game

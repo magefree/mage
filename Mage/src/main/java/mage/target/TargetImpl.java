@@ -451,9 +451,7 @@ public abstract class TargetImpl implements Target {
 
     @Override
     public List<UUID> getTargets() {
-        ArrayList<UUID> newList = new ArrayList<>();
-        newList.addAll(targets.keySet());
-        return newList;
+        return new ArrayList<>(targets.keySet());
     }
 
     @Override

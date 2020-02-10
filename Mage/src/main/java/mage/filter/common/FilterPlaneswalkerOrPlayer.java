@@ -2,6 +2,7 @@
 package mage.filter.common;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import mage.filter.FilterImpl;
@@ -26,14 +27,14 @@ public class FilterPlaneswalkerOrPlayer extends FilterImpl<Object> {
     public FilterPlaneswalkerOrPlayer(Set<UUID> defenders) {
         super("planeswalker or player");
 
-        ArrayList<Predicate<Permanent>> permanentPredicates = new ArrayList<>();
+        List<Predicate<Permanent>> permanentPredicates = new ArrayList<>();
         for (UUID defenderId : defenders) {
             permanentPredicates.add(new ControllerIdPredicate(defenderId));
         }
         planeswalkerFilter = new FilterPlaneswalkerPermanent();
         planeswalkerFilter.add(Predicates.or(permanentPredicates));
 
-        ArrayList<Predicate<Player>> playerPredicates = new ArrayList<>();
+        List<Predicate<Player>> playerPredicates = new ArrayList<>();
         for (UUID defenderId : defenders) {
             playerPredicates.add(new PlayerIdPredicate(defenderId));
         }

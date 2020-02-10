@@ -52,7 +52,7 @@ public class ScryfallSymbolsSource implements Iterable<DownloadJob> {
 
     @Override
     public Iterator<DownloadJob> iterator() {
-        ArrayList<DownloadJob> jobs = new ArrayList<>();
+        List<DownloadJob> jobs = new ArrayList<>();
 
         // all symbols on one page
         jobs.add(generateDownloadJob());

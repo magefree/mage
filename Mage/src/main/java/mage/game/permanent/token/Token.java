@@ -6,6 +6,7 @@ import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.game.Game;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -23,7 +24,7 @@ public interface Token extends MageObject {
 
     UUID getLastAddedToken();
 
-    ArrayList<UUID> getLastAddedTokenIds();
+    List<UUID> getLastAddedTokenIds();
 
     void addAbility(Ability ability);
 

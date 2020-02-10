@@ -2,6 +2,7 @@
 package mage.abilities.keyword;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -71,14 +72,12 @@ class SunburstEffect extends OneShotEffect {
             } else {
                 counter = CounterType.CHARGE.createInstance(amount.calculate(game, source, this));
             }
-            if (counter != null) {
-                ArrayList<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects"); // the basic event is the EntersBattlefieldEvent, so use already applied replacement effects from that event
-                permanent.addCounters(counter, source, game, appliedEffects);
-                if (!game.isSimulation()) {
-                    Player player = game.getPlayer(source.getControllerId());
-                    if (player != null) {
-                        game.informPlayers(player.getLogName() + " puts " + counter.getCount() + ' ' + counter.getName() + " counter on " + permanent.getName());
-                    }
+            List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects"); // the basic event is the EntersBattlefieldEvent, so use already applied replacement effects from that event
+            permanent.addCounters(counter, source, game, appliedEffects);
+            if (!game.isSimulation()) {
+                Player player = game.getPlayer(source.getControllerId());
+                if (player != null) {
+                    game.informPlayers(player.getLogName() + " puts " + counter.getCount() + ' ' + counter.getName() + " counter on " + permanent.getName());
                 }
             }
         }

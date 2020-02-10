@@ -89,8 +89,8 @@ public abstract class GameImpl implements Game, Serializable {
     protected Map<UUID, Card> gameCards = new HashMap<>();
     protected Map<UUID, MeldCard> meldCards = new HashMap<>(0);
 
-    protected Map<Zone, HashMap<UUID, MageObject>> lki = new EnumMap<>(Zone.class);
-    protected Map<Zone, HashMap<UUID, CardState>> lkiCardState = new EnumMap<>(Zone.class);
+    protected Map<Zone, Map<UUID, MageObject>> lki = new EnumMap<>(Zone.class);
+    protected Map<Zone, Map<UUID, CardState>> lkiCardState = new EnumMap<>(Zone.class);
     protected Map<UUID, Map<Integer, MageObject>> lkiExtended = new HashMap<>();
     // Used to check if an object was moved by the current effect in resolution (so Wrath like effect can be handled correctly)
     protected Map<Zone, Set<UUID>> shortLivingLKI = new EnumMap<>(Zone.class);
@@ -2819,7 +2819,7 @@ public abstract class GameImpl implements Game, Serializable {
             if (lkiMap != null) {
                 lkiMap.put(objectId, copy);
             } else {
-                HashMap<UUID, MageObject> newMap = new HashMap<>();
+                Map<UUID, MageObject> newMap = new HashMap<>();
                 newMap.put(objectId, copy);
                 lki.put(zone, newMap);
             }
@@ -2844,7 +2844,7 @@ public abstract class GameImpl implements Game, Serializable {
             if (lkiMap != null) {
                 lkiMap.put(objectId, getState().getCardState(objectId));
             } else {
-                HashMap<UUID, CardState> newMap = new HashMap<>();
+                Map<UUID, CardState> newMap = new HashMap<>();
                 newMap.put(objectId, getState().getCardState(objectId).copy());
                 lkiCardState.put(zone, newMap);
             }
@@ -2908,7 +2908,7 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public Map<Zone, HashMap<UUID, MageObject>> getLKI() {
+    public Map<Zone, Map<UUID, MageObject>> getLKI() {
         return lki;
     }
 

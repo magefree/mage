@@ -1,6 +1,7 @@
 package mage.cards.b;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
@@ -151,7 +152,7 @@ class BronzehideLionContinuousEffect extends ContinuousEffectImpl {
                 lion.getSubtype(game).add(SubType.AURA);
                 break;
             case AbilityAddingRemovingEffects_6:
-                ArrayList<Ability> toRemove = new ArrayList<>();
+                List<Ability> toRemove = new ArrayList<>();
                 for (Ability ability : lion.getAbilities(game)) {
                     if (!lion.getSpellAbility().equals(ability)) {
                         toRemove.add(ability);

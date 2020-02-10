@@ -4,6 +4,8 @@ package org.mage.plugins.card.dl.sources;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+
 import org.mage.plugins.card.dl.DownloadJob;
 import static org.mage.plugins.card.dl.DownloadJob.fromURL;
 import static org.mage.plugins.card.dl.DownloadJob.toFile;
@@ -40,7 +42,7 @@ public class CardFrames implements Iterable<DownloadJob> {
     
     @Override
     public Iterator<DownloadJob> iterator() {
-        ArrayList<DownloadJob> jobs = new ArrayList<>();
+        List<DownloadJob> jobs = new ArrayList<>();
         for (String texture : TEXTURES) {
             jobs.add(generateDownloadJob(TEXTURES_FOLDER, texture));
         }

@@ -705,7 +705,7 @@ public class ContinuousEffects implements Serializable {
                 Cards cardsToReveal = new CardsImpl();
                 do {
                     FilterCard filter = new FilterCard("a card to splice");
-                    ArrayList<Predicate<MageObject>> idPredicates = new ArrayList<>();
+                    List<Predicate<MageObject>> idPredicates = new ArrayList<>();
                     for (Ability ability : spliceAbilities) {
                         idPredicates.add(new CardIdPredicate((ability.getSourceId())));
                     }

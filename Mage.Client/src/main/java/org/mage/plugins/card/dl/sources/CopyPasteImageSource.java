@@ -23,10 +23,10 @@ public enum CopyPasteImageSource implements CardImageSource {
 
     private Set<String> supportedSets = new LinkedHashSet<String>();
     private Set<String> missingCards = new LinkedHashSet<String>();
-    HashMap<String, String> singleLinks = null;
+    Map<String, String> singleLinks = null;
     boolean loadedFromDialog = false;
     boolean viewMissingCards = true;
-    HashMap<String, Integer> singleLinksDone = null;
+    Map<String, Integer> singleLinksDone = null;
     private static int maxTimes = 2;
 
     @Override
@@ -225,13 +225,11 @@ public enum CopyPasteImageSource implements CardImageSource {
     }
 
     @Override
-    public ArrayList<String> getSupportedSets() {
+    public List<String> getSupportedSets() {
         setupLinks();
-        ArrayList<String> supportedSetsCopy = new ArrayList<>();
+        List<String> supportedSetsCopy = new ArrayList<>();
         if (supportedSets.isEmpty()) {
-            for (String setCode : Sets.getInstance().keySet()) {
-                supportedSets.add(setCode);
-            }
+            supportedSets.addAll(Sets.getInstance().keySet());
         }
 
         supportedSetsCopy.addAll(supportedSets);

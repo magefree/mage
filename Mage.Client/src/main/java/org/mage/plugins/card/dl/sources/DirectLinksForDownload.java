@@ -10,10 +10,7 @@ import mage.client.constants.Constants;
 import org.mage.plugins.card.dl.DownloadJob;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 import static org.mage.plugins.card.dl.DownloadJob.fromURL;
 import static org.mage.plugins.card.dl.DownloadJob.toFile;
@@ -48,7 +45,7 @@ public class DirectLinksForDownload implements Iterable<DownloadJob> {
 
     @Override
     public Iterator<DownloadJob> iterator() {
-        ArrayList<DownloadJob> jobs = new ArrayList<>();
+        List<DownloadJob> jobs = new ArrayList<>();
 
         for (Map.Entry<String, String> url : directLinks.entrySet()) {
             File dst = new File(outDir, url.getKey());

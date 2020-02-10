@@ -190,7 +190,7 @@ public final class GuiDisplayUtil {
 
         // counters
         if (card.getMageObjectType().canHaveCounters()) {
-            ArrayList<CounterView> counters = new ArrayList<>();
+            java.util.List<CounterView> counters = new ArrayList<>();
             if (card instanceof PermanentView) {
                 if (card.getCounters() != null) {
                     counters = new ArrayList<>(card.getCounters());

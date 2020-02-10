@@ -2,6 +2,7 @@
 package mage.cards.j;
 
 import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
@@ -82,7 +83,7 @@ class JeskaiInfiltratorEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            HashSet<Card> cardsToManifest = new HashSet<>();
+            Set<Card> cardsToManifest = new HashSet<>();
             cardsToManifest.add(source.getSourcePermanentIfItStillExists(game));
             cardsToManifest.add(controller.getLibrary().getFromTop(game));
             UUID exileId = UUID.randomUUID();

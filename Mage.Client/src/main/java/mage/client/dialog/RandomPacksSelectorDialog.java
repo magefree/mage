@@ -7,6 +7,7 @@ package mage.client.dialog;
 
 import java.awt.Component;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 import mage.cards.repository.ExpansionInfo;
@@ -58,7 +59,7 @@ public class RandomPacksSelectorDialog extends javax.swing.JDialog {
         this.setModal(true);
     }
 
-    public void setSelectedPacks(ArrayList<String> packs) {
+    public void setSelectedPacks(List<String> packs) {
         if (!boxesCreated) {
             createCheckboxes();
         }
@@ -72,8 +73,8 @@ public class RandomPacksSelectorDialog extends javax.swing.JDialog {
         }
     }
 
-    public ArrayList<String> getSelectedPacks() {
-        ArrayList<String> returnVal = new ArrayList<>();
+    public List<String> getSelectedPacks() {
+        List<String> returnVal = new ArrayList<>();
         for (Component pack : pnlPacks.getComponents()) {
             JCheckBox thePack = (JCheckBox) pack;
             if (thePack.isSelected()) {

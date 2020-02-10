@@ -50,7 +50,7 @@ public class ThirdTargetPointer implements TargetPointer {
 
     @Override
     public List<UUID> getTargets(Game game, Ability source) {
-        ArrayList<UUID> target = new ArrayList<>();
+        List<UUID> target = new ArrayList<>();
         if (source.getTargets().size() > 2) {
             for (UUID targetId : source.getTargets().get(2).getTargets()) {
                 Card card = game.getCard(targetId);

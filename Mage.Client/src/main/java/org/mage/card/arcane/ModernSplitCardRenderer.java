@@ -25,8 +25,8 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
         String typeLineString;
         String manaCostString;
         ObjectColor color;
-        ArrayList<TextboxRule> rules = new ArrayList<>();
-        ArrayList<TextboxRule> keywords = new ArrayList<>();
+        List<TextboxRule> rules = new ArrayList<>();
+        List<TextboxRule> keywords = new ArrayList<>();
     }
 
     private static ArrayList<CardType> ONLY_LAND_TYPE = new ArrayList<CardType>() {

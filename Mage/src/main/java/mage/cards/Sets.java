@@ -30,7 +30,7 @@ public class Sets extends HashMap<String, ExpansionSet> {
     private Set<String> customSets = new HashSet<>();
 
     private Sets() {
-        ArrayList<String> packages = new ArrayList<>();
+        List<String> packages = new ArrayList<>();
         packages.add("mage.sets");
         for (Class c : ClassScanner.findClasses(null, packages, ExpansionSet.class)) {
             try {

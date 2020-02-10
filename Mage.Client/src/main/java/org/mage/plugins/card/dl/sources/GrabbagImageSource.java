@@ -69,7 +69,7 @@ public enum GrabbagImageSource implements CardImageSource {
         return null;
     }
 
-    HashMap<String, String> singleLinks = null;
+    Map<String, String> singleLinks = null;
 
     private void setupLinks() {
         if (singleLinks != null) {
@@ -485,10 +485,8 @@ public enum GrabbagImageSource implements CardImageSource {
     }
 
     @Override
-    public ArrayList<String> getSupportedSets() {
-        ArrayList<String> supportedSetsCopy = new ArrayList<>();
-        supportedSetsCopy.addAll(supportedSets);
-        return supportedSetsCopy;
+    public List<String> getSupportedSets() {
+        return new ArrayList<>(supportedSets);
     }
 
     @Override

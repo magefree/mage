@@ -448,8 +448,7 @@ public class Combat implements Serializable, Copyable<Combat> {
             }
             if (mustAttack) {
                 // check which defenders the forced to attack creature can attack without paying a cost
-                HashSet<UUID> defendersCostlessAttackable = new HashSet<>();
-                defendersCostlessAttackable.addAll(defenders);
+                Set<UUID> defendersCostlessAttackable = new HashSet<>(defenders);
                 for (UUID defenderId : defenders) {
                     if (game.getContinuousEffects().checkIfThereArePayCostToAttackBlockEffects(
                             GameEvent.getEvent(GameEvent.EventType.DECLARE_ATTACKER,

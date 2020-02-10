@@ -75,7 +75,7 @@ public class FixedTargets implements TargetPointer {
     @Override
     public List<UUID> getTargets(Game game, Ability source) {
         // check target not changed zone
-        ArrayList<UUID> list = new ArrayList<>(1);
+        List<UUID> list = new ArrayList<>(1);
         for (MageObjectReference mor : targets) {
             if (game.getState().getZoneChangeCounter(mor.getSourceId()) == mor.getZoneChangeCounter()) {
                 list.add(mor.getSourceId());

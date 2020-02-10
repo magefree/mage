@@ -277,7 +277,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
 
     private Object[] getSetsForCurrentImageSource() {
         // Set the available sets to the combo box
-        ArrayList<String> supportedSets = selectedSource.getSupportedSets();
+        List<String> supportedSets = selectedSource.getSupportedSets();
         List<String> setNames = new ArrayList<>();
 
         // multiple sets selection
@@ -490,8 +490,8 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         return Collections.synchronizedList(new ArrayList<>(cardsToDownload));
     }
 
-    public static ArrayList<CardDownloadData> getTokenCardUrls() throws RuntimeException {
-        ArrayList<CardDownloadData> list = new ArrayList<>();
+    public static List<CardDownloadData> getTokenCardUrls() throws RuntimeException {
+        List<CardDownloadData> list = new ArrayList<>();
         InputStream in = DownloadPicturesService.class.getClassLoader().getResourceAsStream("card-pictures-tok.txt");
 
         if (in == null) {

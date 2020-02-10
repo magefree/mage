@@ -111,10 +111,8 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
     }
 
     @Override
-    public ArrayList<UUID> getLastAddedTokenIds() {
-        ArrayList<UUID> ids = new ArrayList<>();
-        ids.addAll(lastAddedTokenIds);
-        return ids;
+    public List<UUID> getLastAddedTokenIds() {
+        return new ArrayList<>(lastAddedTokenIds);
     }
 
     @Override

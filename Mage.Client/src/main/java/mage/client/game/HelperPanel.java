@@ -308,7 +308,7 @@ public class HelperPanel extends JPanel {
         this.buttonGrid.setLayout(new FlowLayout(FlowLayout.CENTER, BUTTONS_H_GAP, 0));
         this.buttonGrid.setPreferredSize(null);
 
-        ArrayList<JButton> buttons = new ArrayList<>();
+        java.util.List<JButton> buttons = new ArrayList<>();
         if (this.btnSpecial.isVisible()) {
             buttons.add(this.btnSpecial);
         }

@@ -15,6 +15,7 @@ import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -79,7 +80,7 @@ class NissasEncouragementEffect extends OneShotEffect {
                 searchGY = true;
             }
 
-            HashMap<String, Integer> foundCards = new HashMap<>();
+            Map<String, Integer> foundCards = new HashMap<>();
             foundCards.put("Forest", 0);
             foundCards.put("Brambleweft Behemoth", 0);
             foundCards.put("Nissa, Genesis Mage", 0);

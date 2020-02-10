@@ -309,11 +309,10 @@ public enum ScryfallImageSource implements CardImageSource {
     }
 
     @Override
-    public ArrayList<String> getSupportedSets() {
-        ArrayList<String> supportedSetsCopy = new ArrayList<>();
+    public List<String> getSupportedSets() {
 
         // cards
-        supportedSetsCopy.addAll(ScryfallImageSupportCards.getSupportedSets());
+        List<String> supportedSetsCopy = new ArrayList<>(ScryfallImageSupportCards.getSupportedSets());
 
         // tokens
         for (String code : ScryfallImageSupportTokens.getSupportedSets().keySet()) {

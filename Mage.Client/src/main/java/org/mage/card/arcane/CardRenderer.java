@@ -132,7 +132,7 @@ public abstract class CardRenderer {
         }
     }
 
-    protected void parseRules(List<String> stringRules, ArrayList<TextboxRule> keywords, ArrayList<TextboxRule> rules) {
+    protected void parseRules(List<String> stringRules, List<TextboxRule> keywords, List<TextboxRule> rules) {
         // Translate the textbox text and remove card hints
         for (String rule : stringRules) {
             // remove all card hints

@@ -541,8 +541,8 @@ public class MageBook extends JComponent {
     }
 
     private List<Token> getTokens(int page, String set) {
-        ArrayList<CardDownloadData> allTokens = getTokenCardUrls();
-        ArrayList<Token> tokens = new ArrayList<>();
+        List<CardDownloadData> allTokens = getTokenCardUrls();
+        List<Token> tokens = new ArrayList<>();
 
         for (CardDownloadData token : allTokens) {
             if (token.getSet().equals(set)) {
@@ -715,7 +715,7 @@ public class MageBook extends JComponent {
     }
 
     private int getTotalNumTokens(String set) {
-        ArrayList<CardDownloadData> allTokens = getTokenCardUrls();
+        List<CardDownloadData> allTokens = getTokenCardUrls();
         int numTokens = 0;
 
         for (CardDownloadData token : allTokens) {
@@ -732,7 +732,7 @@ public class MageBook extends JComponent {
     }
 
     private int getTotalNumEmblems(String set) {
-        ArrayList<CardDownloadData> allEmblems = getTokenCardUrls();
+        List<CardDownloadData> allEmblems = getTokenCardUrls();
         int numEmblems = 0;
 
         for (CardDownloadData emblem : allEmblems) {
@@ -749,7 +749,7 @@ public class MageBook extends JComponent {
     }
 
     private int getTotalNumPlanes(String set) {
-        ArrayList<CardDownloadData> allPlanes = getTokenCardUrls();
+        List<CardDownloadData> allPlanes = getTokenCardUrls();
         int numPlanes = 0;
 
         for (CardDownloadData plane : allPlanes) {

@@ -183,7 +183,7 @@ public class CardInfo {
         }
         if (length > MAX_RULE_LENGTH) {
             length = 0;
-            ArrayList<String> shortRules = new ArrayList<>();
+            List<String> shortRules = new ArrayList<>();
             for (String rule : rulesList) {
                 if (length + rule.length() + 3 <= MAX_RULE_LENGTH) {
                     shortRules.add(rule);

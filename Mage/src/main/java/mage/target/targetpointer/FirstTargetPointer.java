@@ -42,7 +42,7 @@ public class FirstTargetPointer implements TargetPointer {
 
     @Override
     public List<UUID> getTargets(Game game, Ability source) {
-        ArrayList<UUID> target = new ArrayList<>();
+        List<UUID> target = new ArrayList<>();
         if (!source.getTargets().isEmpty()) {
             for (UUID targetId : source.getTargets().get(0).getTargets()) {
                 Card card = game.getCard(targetId);

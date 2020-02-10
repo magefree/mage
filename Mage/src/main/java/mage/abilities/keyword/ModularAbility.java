@@ -1,6 +1,7 @@
 package mage.abilities.keyword;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
@@ -160,7 +161,7 @@ class ModularDistributeCounterEffect extends OneShotEffect {
         if (sourcePermanent != null && targetArtifact != null && player != null) {
             int numberOfCounters = sourcePermanent.getCounters(game).getCount(CounterType.P1P1);
             if (numberOfCounters > 0) {
-                ArrayList<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects"); // the basic event is the EntersBattlefieldEvent, so use already applied replacement effects from that event
+                List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects"); // the basic event is the EntersBattlefieldEvent, so use already applied replacement effects from that event
                 targetArtifact.addCounters(CounterType.P1P1.createInstance(numberOfCounters), source, game, appliedEffects);
             }
             return true;

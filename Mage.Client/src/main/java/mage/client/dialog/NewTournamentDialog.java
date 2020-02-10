@@ -3,6 +3,7 @@ package mage.client.dialog;
 import java.awt.*;
 import java.io.File;
 import java.util.*;
+import java.util.List;
 import java.util.stream.Collectors;
 import javax.swing.*;
 import mage.cards.decks.Deck;
@@ -951,7 +952,7 @@ public class NewTournamentDialog extends MageDialog {
 
     private void loadRandomPacks(int version) {
         String versionStr = prepareVersionStr(version, false);
-        ArrayList<String> packList;
+        List<String> packList;
         String packNames;
         String randomPrefs = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_RANDOM_DRAFT + versionStr, "");
         if (!randomPrefs.isEmpty()) {
@@ -1219,7 +1220,7 @@ public class NewTournamentDialog extends MageDialog {
                 this.isRandom = tournamentType.isRandom();
                 this.isRichMan = tournamentType.isRichMan();
                 tOptions.getLimitedOptions().getSetCodes().clear();
-                ArrayList<String> selected = randomPackSelector.getSelectedPacks();
+                List<String> selected = randomPackSelector.getSelectedPacks();
                 Collections.shuffle(selected);
                 int maxPacks = 3 * (players.size() + 1);
                 if (tournamentType.isRichMan()) {

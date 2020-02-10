@@ -37,7 +37,7 @@ public class AddConditionalManaOfTwoDifferentColorsEffect extends ManaEffect {
 
     @Override
     public List<Mana> getNetMana(Game game, Ability source) {
-        ArrayList<Mana> netMana = new ArrayList<>();
+        List<Mana> netMana = new ArrayList<>();
         netMana.add(Mana.AnyMana(2));
         return netMana;
     }

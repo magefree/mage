@@ -1784,7 +1784,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public void untap(Game game) {
         // create list of all "notMoreThan" effects to track which one are consumed
-        HashMap<Entry<RestrictionUntapNotMoreThanEffect, Set<Ability>>, Integer> notMoreThanEffectsUsage = new HashMap<>();
+        Map<Entry<RestrictionUntapNotMoreThanEffect, Set<Ability>>, Integer> notMoreThanEffectsUsage = new HashMap<>();
         for (Entry<RestrictionUntapNotMoreThanEffect, Set<Ability>> restrictionEffect
                 : game.getContinuousEffects().getApplicableRestrictionUntapNotMoreThanEffects(this, game).entrySet()) {
             notMoreThanEffectsUsage.put(restrictionEffect, restrictionEffect.getKey().getNumber());
@@ -1908,6 +1908,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
         } else {
             //20091005 - 502.2
+
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(playerId)) {
                 boolean untap = true;
                 for (RestrictionEffect effect : game.getContinuousEffects().getApplicableRestrictionEffects(permanent, game).keySet()) {
@@ -2788,7 +2789,7 @@ public abstract class PlayerImpl implements Player, Serializable {
      * for heads and false for tails
      */
     @Override
-    public boolean flipCoin(Ability source, Game game, boolean winnable, ArrayList<UUID> appliedEffects) {
+    public boolean flipCoin(Ability source, Game game, boolean winnable, List<UUID> appliedEffects) {
         boolean chosen = false;
         if (winnable) {
             chosen = this.chooseUse(Outcome.Benefit, "Heads or tails?", "", "Heads", "Tails", source, game);
@@ -2843,7 +2844,7 @@ public abstract class PlayerImpl implements Player, Serializable {
      * @return the number that the player rolled
      */
     @Override
-    public int rollDice(Game game, ArrayList<UUID> appliedEffects, int numSides) {
+    public int rollDice(Game game, List<UUID> appliedEffects, int numSides) {
         int result = RandomUtil.nextInt(numSides) + 1;
         if (!game.isSimulation()) {
             game.informPlayers("[Roll a die] " + getLogName() + " rolled a "
@@ -2869,7 +2870,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public PlanarDieRoll rollPlanarDie(Game game, ArrayList<UUID> appliedEffects) {
+    public PlanarDieRoll rollPlanarDie(Game game, List<UUID> appliedEffects) {
         return rollPlanarDie(game, appliedEffects, 2, 2);
     }
 
@@ -2884,7 +2885,7 @@ public abstract class PlayerImpl implements Player, Serializable {
      * or NilRoll
      */
     @Override
-    public PlanarDieRoll rollPlanarDie(Game game, ArrayList<UUID> appliedEffects, int numberChaosSides,
+    public PlanarDieRoll rollPlanarDie(Game game, List<UUID> appliedEffects, int numberChaosSides,
                                        int numberPlanarSides) {
         int result = RandomUtil.nextInt(9) + 1;
         PlanarDieRoll roll = PlanarDieRoll.NIL_ROLL;

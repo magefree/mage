@@ -187,7 +187,7 @@ public enum UserManager {
             calendarRemove.add(Calendar.SECOND, -1 * SERVER_TIMEOUTS_USER_REMOVE_FROM_SERVER_AFTER_SECS);
             List<User> toRemove = new ArrayList<>();
             logger.debug("Start Check Expired");
-            ArrayList<User> userList = new ArrayList<>();
+            List<User> userList = new ArrayList<>();
             final Lock r = lock.readLock();
             r.lock();
             try {

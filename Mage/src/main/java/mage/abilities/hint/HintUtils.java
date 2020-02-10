@@ -3,6 +3,7 @@ package mage.abilities.hint;
 import java.awt.*;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author JayDi85
@@ -46,7 +47,7 @@ public class HintUtils {
 
     public static void appendHints(List<String> destList, List<String> newHints) {
         // append only unique hints
-        HashSet<String> used = new HashSet<>();
+        Set<String> used = new HashSet<>();
         for (String s : newHints) {
             if (!used.contains(s)) {
                 destList.add(s);

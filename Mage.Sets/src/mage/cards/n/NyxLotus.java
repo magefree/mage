@@ -70,7 +70,7 @@ class NyxLotusManaAbility extends ActivatedManaAbilityImpl {
 
     @Override
     public List<Mana> getNetMana(Game game) {
-        ArrayList<Mana> netManaCopy = new ArrayList<>();
+        List<Mana> netManaCopy = new ArrayList<>();
         if (game == null) {
             return netManaCopy;
         }

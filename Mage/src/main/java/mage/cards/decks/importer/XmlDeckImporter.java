@@ -25,7 +25,7 @@ public abstract class XmlDeckImporter extends DeckImporter {
 
   protected List<Node> getNodes(Document doc, String xpathExpression) throws XPathExpressionException {
     NodeList nodes =  (NodeList) xpathFactory.newXPath().evaluate(xpathExpression, doc, NODESET);
-    ArrayList<Node> list = new ArrayList<>();
+    List<Node> list = new ArrayList<>();
     for (int i = 0; i < nodes.getLength(); i++) {
       list.add(nodes.item(i));
     }

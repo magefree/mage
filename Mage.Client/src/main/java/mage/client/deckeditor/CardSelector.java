@@ -38,6 +38,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
+import java.util.List;
 import java.util.Map.Entry;
 
 import static mage.client.dialog.PreferencesDialog.*;
@@ -228,7 +229,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         filter.add(new CardTextPredicate(name, chkNames.isSelected(), chkTypes.isSelected(), chkRules.isSelected(), chkUnique.isSelected()));
 
         if (limited) {
-            ArrayList<Predicate<MageObject>> predicates = new ArrayList<>();
+            List<Predicate<MageObject>> predicates = new ArrayList<>();
 
             if (this.tbGreen.isSelected()) {
                 predicates.add(new ColorPredicate(ObjectColor.GREEN));
@@ -277,7 +278,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             if (this.cbExpansionSet.isVisible()) {
                 String expansionSelection = this.cbExpansionSet.getSelectedItem().toString();
                 if (!expansionSelection.equals("- All Sets")) {
-                    ArrayList<Predicate<Card>> expansionPredicates = new ArrayList<>();
+                    List<Predicate<Card>> expansionPredicates = new ArrayList<>();
                     for (String setCode : ConstructedFormats.getSetsByFormat(expansionSelection)) {
                         expansionPredicates.add(new ExpansionSetPredicate(setCode));
                     }

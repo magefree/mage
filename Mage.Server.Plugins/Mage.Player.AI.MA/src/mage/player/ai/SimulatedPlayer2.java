@@ -66,7 +66,7 @@ public class SimulatedPlayer2 extends ComputerPlayer {
         forced = false;
         simulateOptions(sim);
 
-        ArrayList<Ability> list = new ArrayList<>(allActions);
+        List<Ability> list = new ArrayList<>(allActions);
         Collections.reverse(list);
 
         if (!forced) {

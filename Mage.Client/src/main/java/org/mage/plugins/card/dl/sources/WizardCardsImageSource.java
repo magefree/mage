@@ -625,7 +625,7 @@ public enum WizardCardsImageSource implements CardImageSource {
         }
 
         String languageName = languageAliases.get(preferredLanguage);
-        HashMap<String, Integer> localizedLanguageIds = getlocalizedMultiverseIds(multiverseId);
+        Map<String, Integer> localizedLanguageIds = getlocalizedMultiverseIds(multiverseId);
         if (localizedLanguageIds.containsKey(languageName)) {
             return localizedLanguageIds.get(languageName);
         } else {
@@ -633,11 +633,11 @@ public enum WizardCardsImageSource implements CardImageSource {
         }
     }
 
-    private HashMap<String, Integer> getlocalizedMultiverseIds(Integer englishMultiverseId) throws IOException {
+    private Map<String, Integer> getlocalizedMultiverseIds(Integer englishMultiverseId) throws IOException {
         String cardLanguagesUrl = "https://gatherer.wizards.com/Pages/Card/Languages.aspx?multiverseid=" + englishMultiverseId;
         Document cardLanguagesDoc = CardImageUtils.downloadHtmlDocument(cardLanguagesUrl);
         Elements languageTableRows = cardLanguagesDoc.select("tr.cardItem");
-        HashMap<String, Integer> localizedIds = new HashMap<>();
+        Map<String, Integer> localizedIds = new HashMap<>();
         if (!languageTableRows.isEmpty()) {
             for (Element languageTableRow : languageTableRows) {
                 Elements languageTableColumns = languageTableRow.select("td");
@@ -714,10 +714,8 @@ public enum WizardCardsImageSource implements CardImageSource {
     }
 
     @Override
-    public ArrayList<String> getSupportedSets() {
-        ArrayList<String> supportedSetsCopy = new ArrayList<>();
-        supportedSetsCopy.addAll(supportedSets);
-        return supportedSetsCopy;
+    public List<String> getSupportedSets() {
+        return new ArrayList<>(supportedSets);
     }
 
 }

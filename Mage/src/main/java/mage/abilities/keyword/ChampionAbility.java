@@ -3,6 +3,7 @@ package mage.abilities.keyword;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
+import java.util.List;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -74,7 +75,7 @@ public class ChampionAbility extends StaticAbility {
 
         this.subtypes = subtypes;
         StringBuilder sb = new StringBuilder("another ");
-        ArrayList<Predicate<MageObject>> subtypesPredicates = new ArrayList<>();
+        List<Predicate<MageObject>> subtypesPredicates = new ArrayList<>();
         if (!subtypes.isEmpty()) {
             int i = 0;
             for (SubType subtype : this.subtypes) {

@@ -1,11 +1,7 @@
 package org.mage.plugins.card.dl.sources;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
+import java.util.*;
 
 import mage.cards.ExpansionSet;
 import mage.cards.Sets;
@@ -286,7 +282,7 @@ public class GathererSets implements Iterable<DownloadJob> {
         c.setTime(new Date());
         c.add(Calendar.DATE, DAYS_BEFORE_RELEASE_TO_DOWNLOAD);
         Date compareDate = c.getTime();
-        ArrayList<DownloadJob> jobs = new ArrayList<>();
+        List<DownloadJob> jobs = new ArrayList<>();
         boolean canDownload;
 
         setsToDownload.clear();

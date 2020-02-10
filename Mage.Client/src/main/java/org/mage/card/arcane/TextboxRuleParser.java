@@ -30,7 +30,7 @@ public final class TextboxRuleParser {
     // the textbox of a card.
     public static TextboxRule parse(CardView source, String rule) {
         // List of regions to apply
-        ArrayList<TextboxRule.AttributeRegion> regions = new ArrayList<>();
+        java.util.List<TextboxRule.AttributeRegion> regions = new ArrayList<>();
 
         // Leveler / loyalty / basic
         boolean isLeveler = false;

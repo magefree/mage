@@ -1170,7 +1170,7 @@ public class ModernCardRenderer extends CardRenderer {
         return layout;
     }
 
-    protected void drawRulesText(Graphics2D g, ArrayList<TextboxRule> keywords, ArrayList<TextboxRule> rules, int x, int y, int w, int h, boolean forceRules) {
+    protected void drawRulesText(Graphics2D g, List<TextboxRule> keywords, List<TextboxRule> rules, int x, int y, int w, int h, boolean forceRules) {
         // Gather all rules to render
         List<TextboxRule> allRules = new ArrayList<>(rules);
 
@@ -1271,7 +1271,7 @@ public class ModernCardRenderer extends CardRenderer {
     }
 
     // Get the first line of the textbox, the keyword string
-    private static String getKeywordRulesString(ArrayList<TextboxRule> keywords) {
+    private static String getKeywordRulesString(List<TextboxRule> keywords) {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < keywords.size(); ++i) {
             builder.append(keywords.get(i).text);

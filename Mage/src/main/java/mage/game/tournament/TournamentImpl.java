@@ -405,7 +405,7 @@ public abstract class TournamentImpl implements Tournament {
     }
 
     public void resetBufferedCards() {
-        HashSet<ExpansionSet> setsDone = new HashSet<>();
+        Set<ExpansionSet> setsDone = new HashSet<>();
         for (ExpansionSet set : sets) {
             if (!setsDone.contains(set)) {
                 set.removeSavedCards();

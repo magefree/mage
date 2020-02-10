@@ -43,7 +43,7 @@ public class ManaBarChart extends JComponent {
 
     void drawBar(Graphics2D g, Rectangle area) {
         Pattern regex = Pattern.compile("^([0-9]+)##(.)}");
-        HashMap<Integer, Integer> totals_at_cmcs = new HashMap<Integer, Integer>();
+        Map<Integer, Integer> totals_at_cmcs = new HashMap<Integer, Integer>();
         int max_num_pips = 0;
         int max_cmc = 0;
 
@@ -112,7 +112,7 @@ public class ManaBarChart extends JComponent {
 
         }
 
-        HashMap<Integer, Integer> running_totals_at_cmcs = new HashMap<Integer, Integer>();
+        Map<Integer, Integer> running_totals_at_cmcs = new HashMap<Integer, Integer>();
         for (String key : pips_at_cmcs.keySet()) {
             Matcher regexMatcher = regex.matcher(key);
             int num_pips = pips_at_cmcs.get(key);

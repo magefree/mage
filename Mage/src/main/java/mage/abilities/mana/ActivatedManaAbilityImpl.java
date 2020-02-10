@@ -70,7 +70,7 @@ public abstract class ActivatedManaAbilityImpl extends ActivatedAbilityImpl impl
     @Override
     public List<Mana> getNetMana(Game game) {
         if (netMana.isEmpty()) {
-            ArrayList<Mana> dynamicNetMana = new ArrayList<>();
+            List<Mana> dynamicNetMana = new ArrayList<>();
             for (Effect effect : getEffects()) {
                 if (effect instanceof ManaEffect) {
                     List<Mana> effectNetMana = ((ManaEffect) effect).getNetMana(game, this);
@@ -81,7 +81,7 @@ public abstract class ActivatedManaAbilityImpl extends ActivatedAbilityImpl impl
             }
             return dynamicNetMana;
         }
-        ArrayList<Mana> netManaCopy = new ArrayList<>();
+        List<Mana> netManaCopy = new ArrayList<>();
         for (Mana mana : netMana) {
             netManaCopy.add(mana.copy());
         }

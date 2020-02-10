@@ -85,7 +85,7 @@ public final class SystemUtil {
 
         String name;
         boolean isSpecialCommand;
-        ArrayList<String> commands = new ArrayList<>();
+        List<String> commands = new ArrayList<>();
 
         public CommandGroup(String name) {
             this(name, false);
@@ -114,14 +114,14 @@ public final class SystemUtil {
         }
     }
 
-    private static String getCardsListForSpecialInform(Game game, Set<UUID> cardsList, ArrayList<String> commandParams) {
+    private static String getCardsListForSpecialInform(Game game, Set<UUID> cardsList, List<String> commandParams) {
         return getCardsListForSpecialInform(game, cardsList.stream().collect(Collectors.toList()), commandParams);
     }
 
-    private static String getCardsListForSpecialInform(Game game, List<UUID> cardsList, ArrayList<String> commandParams) {
+    private static String getCardsListForSpecialInform(Game game, List<UUID> cardsList, List<String> commandParams) {
         // cards list with ext info
 
-        ArrayList<String> res = new ArrayList<>();
+        List<String> res = new ArrayList<>();
 
         for (UUID cardID : cardsList) {
             Card card = game.getCard(cardID);
@@ -276,7 +276,7 @@ public final class SystemUtil {
             // 3. process system commands
             // 4. run commands from selected group
             // 1. parse
-            ArrayList<CommandGroup> groups = new ArrayList<>();
+            List<CommandGroup> groups = new ArrayList<>();
 
             try (Scanner scanner = new Scanner(f)) {
 

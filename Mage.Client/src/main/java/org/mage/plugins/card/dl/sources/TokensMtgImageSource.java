@@ -151,10 +151,8 @@ public enum TokensMtgImageSource implements CardImageSource {
     }
 
     @Override
-    public ArrayList<String> getSupportedSets() {
-        ArrayList<String> supportedSetsCopy = new ArrayList<>();
-        supportedSetsCopy.addAll(supportedSets);
-        return supportedSetsCopy;
+    public List<String> getSupportedSets() {
+        return new ArrayList<>(supportedSets);
     }
 
     @Override

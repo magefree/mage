@@ -628,7 +628,7 @@ public class VerifyCardDataTest {
         }
 
         // tok file's data
-        ArrayList<CardDownloadData> tokFileTokens = DownloadPicturesService.getTokenCardUrls();
+        List<CardDownloadData> tokFileTokens = DownloadPicturesService.getTokenCardUrls();
         LinkedHashMap<String, String> tokDataClassesIndex = new LinkedHashMap<>();
         LinkedHashMap<String, String> tokDataNamesIndex = new LinkedHashMap<>();
         for (CardDownloadData tokData : tokFileTokens) {

@@ -2,6 +2,7 @@
 package mage.cards.s;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -61,7 +62,7 @@ class StrongarmTacticsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         // Store for each player the cards to discard, that's important because all discard shall happen at the same time
-        HashMap<UUID, Cards> cardsToDiscard = new HashMap<>();
+        Map<UUID, Cards> cardsToDiscard = new HashMap<>();
         if (controller != null) {
             // choose cards to discard
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {

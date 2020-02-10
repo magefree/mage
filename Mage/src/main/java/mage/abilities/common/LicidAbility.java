@@ -2,6 +2,7 @@
 package mage.abilities.common;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
@@ -120,7 +121,7 @@ class LicidContinuousEffect extends ContinuousEffectImpl {
                     licid.getSubtype(game).add(SubType.AURA);
                     break;
                 case AbilityAddingRemovingEffects_6:
-                    ArrayList<Ability> toRemove = new ArrayList<>();
+                    List<Ability> toRemove = new ArrayList<>();
                     for (Ability ability : licid.getAbilities(game)) {
                         for (Effect effect : ability.getEffects()) {
                             if (effect instanceof LicidEffect) {

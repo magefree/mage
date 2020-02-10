@@ -2973,7 +2973,7 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean flipCoin(Ability source, Game game, boolean winnable, ArrayList<UUID> appliedEffects) {
+    public boolean flipCoin(Ability source, Game game, boolean winnable, List<UUID> appliedEffects) {
         return computerPlayer.flipCoin(source, game, true, appliedEffects);
     }
 
@@ -2983,7 +2983,7 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public int rollDice(Game game, ArrayList<UUID> appliedEffects, int numSides) {
+    public int rollDice(Game game, List<UUID> appliedEffects, int numSides) {
         return computerPlayer.rollDice(game, appliedEffects, numSides);
     }
 
@@ -3604,12 +3604,12 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public PlanarDieRoll rollPlanarDie(Game game, ArrayList<UUID> appliedEffects) {
+    public PlanarDieRoll rollPlanarDie(Game game, List<UUID> appliedEffects) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public PlanarDieRoll rollPlanarDie(Game game, ArrayList<UUID> appliedEffects, int numberChaosSides, int numberPlanarSides) {
+    public PlanarDieRoll rollPlanarDie(Game game, List<UUID> appliedEffects, int numberChaosSides, int numberPlanarSides) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

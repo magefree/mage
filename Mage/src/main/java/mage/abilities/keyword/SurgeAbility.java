@@ -10,6 +10,7 @@ import mage.players.Player;
 import mage.watchers.common.CastSpellLastTurnWatcher;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -66,7 +67,7 @@ public class SurgeAbility extends SpellAbility {
     @SuppressWarnings("unchecked")
     public boolean activate(Game game, boolean noMana) {
         if (super.activate(game, noMana)) {
-            ArrayList<Integer> surgeActivations = (ArrayList) game.getState().getValue(SURGE_ACTIVATION_VALUE_KEY + getSourceId());
+            List<Integer> surgeActivations = (ArrayList) game.getState().getValue(SURGE_ACTIVATION_VALUE_KEY + getSourceId());
             if (surgeActivations == null) {
                 surgeActivations = new ArrayList<>(); // zoneChangeCounter
                 game.getState().setValue(SURGE_ACTIVATION_VALUE_KEY + getSourceId(), surgeActivations);

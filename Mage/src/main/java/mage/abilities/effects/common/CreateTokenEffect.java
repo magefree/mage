@@ -29,7 +29,7 @@ public class CreateTokenEffect extends OneShotEffect {
     private boolean tapped;
     private boolean attacking;
     private UUID lastAddedTokenId;
-    private ArrayList<UUID> lastAddedTokenIds = new ArrayList<>();
+    private List<UUID> lastAddedTokenIds = new ArrayList<>();
 
     public CreateTokenEffect(Token token) {
         this(token, StaticValue.get(1));

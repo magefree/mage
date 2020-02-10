@@ -259,7 +259,7 @@ public enum MythicspoilerComSource implements CardImageSource {
         cardNameAliases.put("RIX-tetzimocdeathprimordial", "tetzimocprimaldeath");
         // <card name, card link>
         manualLinks = new HashMap<>();
-        HashMap<String, String> links = new HashMap<>();
+        Map<String, String> links = new HashMap<>();
         links.put("templeofaclazotz", "templeofaclazotz");
         links.put("conquerorsfoothold", "conquerorsfoothold");
         links.put("primalwellspring", "primalwellspring");
@@ -272,7 +272,7 @@ public enum MythicspoilerComSource implements CardImageSource {
         links.put("spitfirebastion", "spitfirebastion");
         manualLinks.put("XLN", links);
 
-        HashMap<String, String> linksRix = new HashMap<>();
+        Map<String, String> linksRix = new HashMap<>();
         linksRix.put("vaultofcatlacan", "vaultofcatlacan");
         linksRix.put("atzalcaveofeternity", "atzalcaveofeternity");
         linksRix.put("wingedtempleoforazca", "wingedtempleoforazca");
@@ -283,7 +283,7 @@ public enum MythicspoilerComSource implements CardImageSource {
         manualLinks.put("RIX", linksRix);
 
         cardNameAliasesStart = new HashMap<>();
-        HashSet<String> names = new HashSet<>();
+        Set<String> names = new HashSet<>();
         names.add("eldrazidevastator.jpg");
         cardNameAliasesStart.put("BFZ", names);
     }
@@ -450,10 +450,8 @@ public enum MythicspoilerComSource implements CardImageSource {
     }
 
     @Override
-    public ArrayList<String> getSupportedSets() {
-        ArrayList<String> supportedSetsCopy = new ArrayList<>();
-        supportedSetsCopy.addAll(supportedSets);
-        return supportedSetsCopy;
+    public List<String> getSupportedSets() {
+        return new ArrayList<>(supportedSets);
     }
 
 }

@@ -1241,7 +1241,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                 if (button.isSelected()) {
                     // Special case - "Multiples"  (CONSPIRACY type)
                     if (cardType == CardType.CONSPIRACY) {
-                        HashMap<String, CardView> cardNames = new HashMap<>();
+                        Map<String, CardView> cardNames = new HashMap<>();
 
                         for (List<List<CardView>> gridRow : cardGrid) {
                             for (List<CardView> stack : gridRow) {
@@ -1334,11 +1334,11 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
     private static final Pattern pattern = Pattern.compile(".*Add(.*)(\\{[WUBRGXC]\\})");
 
     public void analyseDeck() {
-        HashMap<String, Integer> qtys = new HashMap<>();
-        HashMap<String, Integer> pips = new HashMap<>();
-        HashMap<String, Integer> pips_at_cmcs = new HashMap<>();
-        HashMap<String, Integer> sourcePips = new HashMap<>();
-        HashMap<String, Integer> manaCounts = new HashMap<>();
+        Map<String, Integer> qtys = new HashMap<>();
+        Map<String, Integer> pips = new HashMap<>();
+        Map<String, Integer> pips_at_cmcs = new HashMap<>();
+        Map<String, Integer> sourcePips = new HashMap<>();
+        Map<String, Integer> manaCounts = new HashMap<>();
         pips.put("#w}", 0);
         pips.put("#u}", 0);
         pips.put("#b}", 0);
@@ -1651,7 +1651,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                 int thisMaxStackSize = 0;
                 cardGrid.add(gridRow);
                 for (List<DeckCardInfo> stack : row) {
-                    ArrayList<CardView> gridStack = new ArrayList<>();
+                    List<CardView> gridStack = new ArrayList<>();
                     gridRow.add(gridStack);
                     for (DeckCardInfo info : stack) {
                         if (trackedCards.containsKey(info.getSetCode()) && trackedCards.get(info.getSetCode()).containsKey(info.getCardNum())) {
