@@ -73,12 +73,13 @@ class SevinnesReclamationEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = (Spell) game.getStack().getStackObject(source.getSourceId());
+        // If a spell is a copy it wasn't cast from the graveyard.
+        Spell spell = game.getStack().getSpell(source.getSourceId(), false);
         Player player = game.getPlayer(source.getControllerId());
         if (spell == null || player == null) {
             return false;
         }
-        if (!spell.isCopy() && spell.getFromZone() == Zone.GRAVEYARD
+        if (spell.getFromZone() == Zone.GRAVEYARD
                 && player.chooseUse(outcome, "Copy this spell?", source, game)) {
             spell.createCopyOnStack(game, source, source.getControllerId(), true);
         }
