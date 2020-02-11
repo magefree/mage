@@ -356,7 +356,7 @@ public class TestPlayer implements Player {
         }
     }
 
-    private boolean isObjectHaveTargetNameOrAlias(MageObject object, String nameOrAlias) {
+    public boolean isObjectHaveTargetNameOrAlias(MageObject object, String nameOrAlias) {
         if (object == null || nameOrAlias == null) {
             return false;
         }
@@ -375,7 +375,12 @@ public class TestPlayer implements Player {
             return false;
         }
 
-        return object.getName().startsWith(nameOrAlias);
+        // two search mode: for cards/permanents (strict) and for abilities (like)
+        if (object instanceof Ability) {
+            return object.getName().startsWith(nameOrAlias);
+        } else {
+            return object.getName().equals(nameOrAlias);
+        }
     }
 
     private boolean handleNonPlayerTargetTarget(String target, Ability ability, Game game) {
@@ -3471,6 +3476,42 @@ public class TestPlayer implements Player {
                             String promptText, Game game
     ) {
         groupsForTargetHandling = null;
+
+        if (!computerPlayer.getManaPool().isAutoPayment()) {
+            // manual pay by mana clicks/commands
+            if (!choices.isEmpty()) {
+                String needColor = choices.get(0);
+                switch (needColor) {
+                    case "White":
+                        Assert.assertTrue("pool must have white mana", computerPlayer.getManaPool().getWhite() > 0);
+                        computerPlayer.getManaPool().unlockManaType(ManaType.WHITE);
+                        break;
+                    case "Blue":
+                        Assert.assertTrue("pool must have blue mana", computerPlayer.getManaPool().getBlue() > 0);
+                        computerPlayer.getManaPool().unlockManaType(ManaType.BLUE);
+                        break;
+                    case "Black":
+                        Assert.assertTrue("pool must have black mana", computerPlayer.getManaPool().getBlack() > 0);
+                        computerPlayer.getManaPool().unlockManaType(ManaType.BLACK);
+                        break;
+                    case "Red":
+                        Assert.assertTrue("pool must have red mana", computerPlayer.getManaPool().getRed() > 0);
+                        computerPlayer.getManaPool().unlockManaType(ManaType.RED);
+                        break;
+                    case "Green":
+                        Assert.assertTrue("pool must have green mana", computerPlayer.getManaPool().getGreen() > 0);
+                        computerPlayer.getManaPool().unlockManaType(ManaType.GREEN);
+                        break;
+                    default:
+                        Assert.fail("Unknown choice command for mana unlock: " + needColor);
+                        break;
+                }
+                choices.remove(0);
+                return true;
+            }
+            Assert.fail(this.getName() + " disabled mana auto-payment, but no choices found for color unlock in pool for unpaid cost: " + unpaid.getText());
+        }
+
         return computerPlayer.playMana(ability, unpaid, promptText, game);
     }
 

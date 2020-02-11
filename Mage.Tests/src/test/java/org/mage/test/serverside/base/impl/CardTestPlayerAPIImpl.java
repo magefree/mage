@@ -1,5 +1,6 @@
 package org.mage.test.serverside.base.impl;
 
+import mage.MageObject;
 import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -486,6 +487,16 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     /**
+     * Disable auto-payment from mana pool, you must manually fill pool by activateManaAbility and unlock color by setChoice
+     * Use it for pay color order testing (e.g. simulate user clicks on mana pool to pay)
+     *
+     * @param player
+     */
+    public void disableManaAutoPayment(TestPlayer player) {
+        player.getManaPool().setAutoPayment(false);
+    }
+
+    /**
      * Add a card to specified zone of specified player.
      *
      * @param gameZone {@link mage.constants.Zone} to add cards to.
@@ -716,8 +727,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         int foundToughness = 0;
         int found = 0;
         for (Permanent permanent : currentGame.getBattlefield().getAllPermanents()) {
-
-            if (permanent.getName().equals(cardName) && permanent.getControllerId().equals(player.getId())) {
+            if (isObjectHaveTargetNameOrAlias(player, permanent, cardName) && permanent.getControllerId().equals(player.getId())) {
                 count++;
                 if (scope == Filter.ComparisonScope.All) {
                     Assert.assertEquals("Power is not the same (" + power + " vs. " + permanent.getPower().getValue() + ')',
@@ -768,7 +778,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         int count = 0;
         Permanent found = null;
         for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents(player.getId())) {
-            if (permanent.getName().equals(cardName)) {
+            if (isObjectHaveTargetNameOrAlias(player, permanent, cardName)) {
                 found = permanent;
                 count++;
             }
@@ -804,7 +814,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         int foundCount = 0;
         Permanent found = null;
         for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents(player.getId())) {
-            if (permanent.getName().equals(cardName)) {
+            if (isObjectHaveTargetNameOrAlias(player, permanent, cardName)) {
                 found = permanent;
                 foundCount++;
             }
@@ -855,7 +865,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         int actualCount = 0;
         for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents()) {
             if (permanent.getControllerId().equals(player.getId())) {
-                if (permanent.getName().equals(cardName)) {
+                if (isObjectHaveTargetNameOrAlias(player, permanent, cardName)) {
                     actualCount++;
                 }
             }
@@ -868,7 +878,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         //Assert.assertNotEquals("", commandZoneObjectName);
         int actualCount = 0;
         for (CommandObject commandObject : currentGame.getState().getCommand()) {
-            if (commandObject.getControllerId().equals(player.getId()) && commandObject.getName().equals(commandZoneObjectName)) {
+            if (commandObject.getControllerId().equals(player.getId()) && isObjectHaveTargetNameOrAlias(player, commandObject, commandZoneObjectName)) {
                 actualCount++;
             }
         }
@@ -908,7 +918,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         //Assert.assertNotEquals("", cardName);
         Permanent found = null;
         for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents()) {
-            if (permanent.getName().equals(cardName) && (player == null || permanent.getControllerId().equals(player.getId()))) {
+            if (isObjectHaveTargetNameOrAlias(player, permanent, cardName) && (player == null || permanent.getControllerId().equals(player.getId()))) {
                 found = permanent;
                 break;
             }
@@ -961,6 +971,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      */
     public void assertType(String cardName, CardType type, boolean mustHave) throws AssertionError {
         //Assert.assertNotEquals("", cardName);
+        assertAliaseSupportInActivateCommand(cardName, false);
         Permanent found = null;
         for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents()) {
             if (permanent.getName().equals(cardName)) {
@@ -1062,6 +1073,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      */
     public void assertTapped(String cardName, boolean tapped) throws AssertionError {
         //Assert.assertNotEquals("", cardName);
+        assertAliaseSupportInActivateCommand(cardName, false);
         Permanent found = null;
         for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents()) {
             if (permanent.getName().equals(cardName)) {
@@ -1088,6 +1100,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      */
     public void assertTappedCount(String cardName, boolean tapped, int count) throws AssertionError {
         //Assert.assertNotEquals("", cardName);
+        assertAliaseSupportInActivateCommand(cardName, false);
         int tappedAmount = 0;
         Permanent found = null;
         for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents()) {
@@ -1110,6 +1123,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      */
     public void assertAttacking(String cardName, boolean attacking) throws AssertionError {
         //Assert.assertNotEquals("", cardName);
+        assertAliaseSupportInActivateCommand(cardName, false);
         Permanent found = null;
         for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents()) {
             if (permanent.getName().equals(cardName)) {
@@ -1242,6 +1256,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      */
     public void assertExileCount(Player owner, String cardName, int count) throws AssertionError {
         //Assert.assertNotEquals("", cardName);
+        assertAliaseSupportInActivateCommand(cardName, false);
         int actualCount = 0;
         for (ExileZone exile : currentGame.getExile().getExileZones()) {
             for (Card card : exile.getCards(currentGame)) {
@@ -1341,6 +1356,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     public Permanent getPermanent(String cardName, UUID controller) {
+        assertAliaseSupportInActivateCommand(cardName, false);
         Permanent found = null;
         Pattern indexedName = Pattern.compile("^([\\w| ]+):(\\d+)$"); // Ends with <:number>
         Matcher indexedMatcher = indexedName.matcher(cardName);
@@ -1529,7 +1545,13 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     public void activateManaAbility(int turnNum, PhaseStep step, TestPlayer player, String ability) {
-        player.addAction(turnNum, step, "manaActivate:" + ability);
+        activateManaAbility(turnNum, step, player, ability, 1);
+    }
+
+    public void activateManaAbility(int turnNum, PhaseStep step, TestPlayer player, String ability, int timesToActivate) {
+        for (int i = 0; i < timesToActivate; i++) {
+            player.addAction(turnNum, step, "manaActivate:" + ability);
+        }
     }
 
     public void activateAbility(int turnNum, PhaseStep step, TestPlayer player, String ability) {
@@ -1636,7 +1658,13 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param choice
      */
     public void setChoice(TestPlayer player, String choice) {
-        player.addChoice(choice);
+        setChoice(player, choice, 1);
+    }
+
+    public void setChoice(TestPlayer player, String choice, int timesToChoose) {
+        for (int i = 0; i < timesToChoose; i++) {
+            player.addChoice(choice);
+        }
     }
 
     /**
@@ -1723,26 +1751,9 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         gameOptions.skipInitShuffling = true;
     }
 
-    protected void checkPermanentPT(Player player, String cardName, int power, int toughness, Filter.ComparisonScope scope) {
-        if (currentGame == null) {
-            throw new IllegalStateException("Current game is null");
-        }
-        if (scope == Filter.ComparisonScope.All) {
-            throw new UnsupportedOperationException("ComparisonScope.All is not implemented.");
-        }
-
-        for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents(player.getId())) {
-            if (permanent.getName().equals(cardName)) {
-                Assert.assertEquals("Power is not the same", power, permanent.getPower().getValue());
-                Assert.assertEquals("Toughness is not the same", toughness, permanent.getToughness().getValue());
-                break;
-            }
-        }
-    }
-
     public void assertDamageReceived(Player player, String cardName, int expected) {
         //Assert.assertNotEquals("", cardName);
-        Permanent p = getPermanent(cardName, player.getId());
+        Permanent p = getPermanent(cardName, player);
         if (p != null) {
             Assert.assertEquals("Wrong damage received: ", expected, p.getDamage());
         }
@@ -1763,4 +1774,14 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
             }
         }
     }
+
+    private boolean isObjectHaveTargetNameOrAlias(Player player, MageObject object, String nameOrAlias) {
+        TestPlayer testPlayer = (TestPlayer) player;
+        if (player != null) { // TODO: remove null check and replace all null-player calls in tests by player
+            return testPlayer.isObjectHaveTargetNameOrAlias(object, nameOrAlias);
+        } else {
+            return object.getName().equals(nameOrAlias);
+        }
+    }
+
 }
