@@ -107,7 +107,7 @@ public final class CardUtil {
         if (reduceCount > 0) {
             int restToReduce = reduceCount;
 
-            // first run - priority single option costs (generic)
+            // first run - priority for single option costs (generic)
             for (ManaCost manaCost : manaCosts) {
                 if (manaCost instanceof SnowManaCost) {
                     adjustedCost.add(manaCost);
@@ -156,7 +156,7 @@ public final class CardUtil {
                 }
 
                 if (manaCost instanceof MonoHybridManaCost) {
-                    // current implemention supports only 1 hybrid cost per object
+                    // current implemention supports reduce from left to right hybrid cost without cost parts announce
                     MonoHybridManaCost mono = (MonoHybridManaCost) manaCost;
                     int colorless = mono.getOptions().get(1).getGeneric();
                     if (restToReduce != 0 && colorless > 0) {

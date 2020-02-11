@@ -34,7 +34,7 @@ public interface ManaCosts<T extends ManaCost> extends List<T>, ManaCost {
     }
 
     /**
-     * @param mana                          mana in strinct like "{2}{R}" or "{2/W}"
+     * @param mana
      * @param extractMonoHybridGenericValue for tests only, extract generic mana value from mono hybrid string
      */
     void load(String mana, boolean extractMonoHybridGenericValue);
