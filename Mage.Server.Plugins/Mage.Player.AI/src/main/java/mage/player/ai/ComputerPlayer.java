@@ -1389,10 +1389,12 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     public boolean playMana(Ability ability, ManaCost unpaid, String promptText, Game game) {
         payManaMode = true;
         currentUnpaidMana = unpaid;
-        boolean result = playManaHandling(ability, unpaid, game);
-        currentUnpaidMana = null;
-        payManaMode = false;
-        return result;
+        try {
+            return playManaHandling(ability, unpaid, game);
+        } finally {
+            currentUnpaidMana = null;
+            payManaMode = false;
+        }
     }
 
     protected boolean playManaHandling(Ability ability, ManaCost unpaid, final Game game) {

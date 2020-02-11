@@ -29,7 +29,15 @@ public interface ManaCosts<T extends ManaCost> extends List<T>, ManaCost {
      */
     void setX(int xValue, int xPay);
 
-    void load(String mana);
+    default void load(String mana) {
+        load(mana, false);
+    }
+
+    /**
+     * @param mana                          mana in strinct like "{2}{R}" or "{2/W}"
+     * @param extractMonoHybridGenericValue for tests only, extract generic mana value from mono hybrid string
+     */
+    void load(String mana, boolean extractMonoHybridGenericValue);
 
     List<String> getSymbols();
 

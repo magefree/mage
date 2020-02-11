@@ -456,4 +456,23 @@ public class ManaPool implements Serializable {
             manaItems.addAll(itemsCopy);
         }
     }
+
+    public int getColoredAmount(ManaType manaType) {
+        switch (manaType) {
+            case BLACK:
+                return getBlack();
+            case BLUE:
+                return getBlue();
+            case GREEN:
+                return getGreen();
+            case RED:
+                return getRed();
+            case WHITE:
+                return getWhite();
+            case GENERIC:
+            case COLORLESS:
+            default:
+                throw new IllegalArgumentException("Wrong mana type " + manaType);
+        }
+    }
 }

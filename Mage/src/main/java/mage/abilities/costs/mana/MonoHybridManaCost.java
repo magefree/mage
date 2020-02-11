@@ -12,46 +12,53 @@ import java.util.List;
 
 public class MonoHybridManaCost extends ManaCostImpl {
 
-    private final ColoredManaSymbol mana;
-    private int mana2 = 2;
+    private final ColoredManaSymbol manaColor;
+    private int manaGeneric;
 
-    public MonoHybridManaCost(ColoredManaSymbol mana) {
-        this.mana = mana;
-        this.cost = new Mana(mana);
-        this.cost.add(Mana.GenericMana(2));
-        addColoredOption(mana);
-        options.add(Mana.GenericMana(2));
+    public MonoHybridManaCost(ColoredManaSymbol manaColor) {
+        this(manaColor, 2);
+    }
+
+    public MonoHybridManaCost(ColoredManaSymbol manaColor, int genericAmount) {
+        this.manaColor = manaColor;
+        this.manaGeneric = genericAmount;
+        this.cost = new Mana(manaColor);
+        this.cost.add(Mana.GenericMana(genericAmount));
+        addColoredOption(manaColor);
+        options.add(Mana.GenericMana(genericAmount));
     }
 
     public MonoHybridManaCost(MonoHybridManaCost manaCost) {
         super(manaCost);
-        this.mana = manaCost.mana;
-        this.mana2 = manaCost.mana2;
+        this.manaColor = manaCost.manaColor;
+        this.manaGeneric = manaCost.manaGeneric;
     }
 
     @Override
     public int convertedManaCost() {
-        return 2;
+        // from wiki: A card with monocolored hybrid mana symbols in its mana cost has a converted mana cost equal to
+        // the highest possible cost it could be played for. Its converted mana cost never changes.
+        return Math.max(manaGeneric, 1);
     }
 
     @Override
     public boolean isPaid() {
-        if (paid || isColoredPaid(this.mana)) {
+        if (paid || isColoredPaid(this.manaColor)) {
             return true;
         }
-        return isColorlessPaid(this.mana2);
+        return isColorlessPaid(this.manaGeneric);
     }
 
     @Override
     public void assignPayment(Game game, Ability ability, ManaPool pool, Cost costToPay) {
-        if (!assignColored(ability, game, pool, mana, costToPay)) {
-            assignGeneric(ability, game, pool, mana2, null, costToPay);
+        if (!assignColored(ability, game, pool, manaColor, costToPay)) {
+            assignGeneric(ability, game, pool, manaGeneric, null, costToPay);
         }
     }
 
     @Override
     public String getText() {
-        return "{2/" + mana.toString() + '}';
+        return "{" + manaGeneric + "/" + manaColor.toString() + '}';
     }
 
     @Override
@@ -61,7 +68,7 @@ public class MonoHybridManaCost extends ManaCostImpl {
 
     @Override
     public boolean testPay(Mana testMana) {
-        switch (mana) {
+        switch (manaColor) {
             case B:
                 if (testMana.getBlack() > 0) {
                     return true;
@@ -93,18 +100,18 @@ public class MonoHybridManaCost extends ManaCostImpl {
 
     @Override
     public boolean containsColor(ColoredManaSymbol coloredManaSymbol) {
-        return mana == coloredManaSymbol;
+        return manaColor == coloredManaSymbol;
     }
 
     public ColoredManaSymbol getManaColor() {
-        return mana;
+        return manaColor;
     }
 
     @Override
     public List<Mana> getManaOptions() {
         List<Mana> manaList = new ArrayList<>();
-        manaList.add(new Mana(mana));
-        manaList.add(Mana.GenericMana(2));
+        manaList.add(new Mana(manaColor));
+        manaList.add(Mana.GenericMana(manaGeneric));
         return manaList;
     }
 }
