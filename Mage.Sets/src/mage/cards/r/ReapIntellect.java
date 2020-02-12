@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import mage.MageObject;
@@ -14,13 +13,12 @@ import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
-import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetOpponent;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.target.TargetCard;
 
 /**
  *
@@ -31,7 +29,10 @@ public final class ReapIntellect extends CardImpl {
     public ReapIntellect(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{2}{U}{B}");
 
-        // Target opponent reveals their hand. You choose up to X nonland cards from it and exile them. For each card exiled this way, search that player's graveyard, hand, and library for any number of cards with the same name as that card and exile them. Then that player shuffles their library.
+        // Target opponent reveals their hand. You choose up to X nonland cards 
+        // from it and exile them. For each card exiled this way, search that 
+        // player's graveyard, hand, and library for any number of cards with the 
+        // same name as that card and exile them. Then that player shuffles their library.
         this.getSpellAbility().addEffect(new ReapIntellectEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
 
@@ -56,8 +57,12 @@ class ReapIntellectEffect extends OneShotEffect {
     }
 
     public ReapIntellectEffect() {
-        super(Outcome.Benefit);
-        staticText = "Target opponent reveals their hand. You choose up to X nonland cards from it and exile them. For each card exiled this way, search that player's graveyard, hand, and library for any number of cards with the same name as that card and exile them. Then that player shuffles their library";
+        super(Outcome.Exile);
+        staticText = "Target opponent reveals their hand. You choose up to X "
+                + "nonland cards from it and exile them. For each card exiled "
+                + "this way, search that player's graveyard, hand, and library "
+                + "for any number of cards with the same name as that card and "
+                + "exile them. Then that player shuffles their library";
     }
 
     public ReapIntellectEffect(final ReapIntellectEffect effect) {
@@ -77,9 +82,9 @@ class ReapIntellectEffect extends OneShotEffect {
             // Chose cards to exile from hand
             Cards exiledCards = new CardsImpl();
             int xCost = Math.min(source.getManaCostsToPay().getX(), targetPlayer.getHand().size());
-            TargetCardInHand target = new TargetCardInHand(0, xCost, filterNonLands);
+            TargetCard target = new TargetCard(0, xCost, Zone.HAND, filterNonLands);
             target.setNotTarget(true);
-            controller.choose(Outcome.Benefit, targetPlayer.getHand(), target, game);
+            controller.chooseTarget(Outcome.Benefit, targetPlayer.getHand(), target, source, game);
             for (UUID cardId : target.getTargets()) {
                 Card chosenCard = game.getCard(cardId);
                 if (chosenCard != null) {
@@ -96,9 +101,11 @@ class ReapIntellectEffect extends OneShotEffect {
                 FilterCard filterNamedCards = new FilterCard();
                 for (Card card : exiledCards.getCards(game)) {
                     if (exiledCards.size() == 1) {
-                        filterNamedCards.add(new NamePredicate(card.isSplitCard() ? ((SplitCard) card).getLeftHalfCard().getName() : card.getName()));
+                        filterNamedCards.add(new NamePredicate(card.isSplitCard()
+                                ? ((SplitCard) card).getLeftHalfCard().getName() : card.getName()));
                     } else {
-                        names.add(new NamePredicate(card.isSplitCard() ? ((SplitCard) card).getLeftHalfCard().getName() : card.getName()));
+                        names.add(new NamePredicate(card.isSplitCard()
+                                ? ((SplitCard) card).getLeftHalfCard().getName() : card.getName()));
                     }
                 }
                 if (exiledCards.size() > 1) {
@@ -116,8 +123,8 @@ class ReapIntellectEffect extends OneShotEffect {
                 }
 
                 // search cards in hand
-                TargetCardInHand targetCardsHand = new TargetCardInHand(0, Integer.MAX_VALUE, filterNamedCards);
-                controller.chooseTarget(outcome, targetPlayer.getGraveyard(), targetCardsHand, source, game);
+                TargetCard targetCardsHand = new TargetCard(0, Integer.MAX_VALUE, Zone.HAND, filterNamedCards);
+                controller.chooseTarget(Outcome.Benefit, targetPlayer.getGraveyard(), targetCardsHand, source, game);
                 for (UUID cardId : targetCardsHand.getTargets()) {
                     Card card = game.getCard(cardId);
                     if (card != null) {
