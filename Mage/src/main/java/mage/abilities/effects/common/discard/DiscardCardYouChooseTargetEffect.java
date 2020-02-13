@@ -15,9 +15,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
-import mage.target.common.TargetCardInHand;
 import mage.util.CardUtil;
-
 import java.util.List;
 import java.util.UUID;
 
@@ -74,7 +72,8 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
         this(StaticValue.get(1), filter, targetController);
     }
 
-    public DiscardCardYouChooseTargetEffect(DynamicValue numberCardsToDiscard, FilterCard filter, TargetController targetController) {
+    public DiscardCardYouChooseTargetEffect(DynamicValue numberCardsToDiscard, 
+            FilterCard filter, TargetController targetController) {
         super(Outcome.Discard);
         this.targetController = targetController;
         this.filter = filter;
@@ -112,9 +111,11 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
         Cards revealedCards = new CardsImpl();
         numberToReveal = Math.min(player.getHand().size(), numberToReveal);
         if (player.getHand().size() > numberToReveal) {
-            TargetCardInHand chosenCards = new TargetCardInHand(numberToReveal, numberToReveal, new FilterCard("card in " + player.getName() + "'s hand"));
+            TargetCard chosenCards = new TargetCard(numberToReveal, numberToReveal, 
+                    Zone.HAND, new FilterCard("card in " + player.getName() + "'s hand"));
             chosenCards.setNotTarget(true);
-            if (chosenCards.canChoose(player.getId(), game) && player.chooseTarget(Outcome.Discard, player.getHand(), chosenCards, source, game)) {
+            if (chosenCards.canChoose(player.getId(), game) 
+                    && player.chooseTarget(Outcome.Discard, player.getHand(), chosenCards, source, game)) {
                 if (!chosenCards.getTargets().isEmpty()) {
                     List<UUID> targets = chosenCards.getTargets();
                     for (UUID targetid : targets) {
@@ -130,7 +131,8 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
         }
 
         Card sourceCard = game.getCard(source.getSourceId());
-        player.revealCards(sourceCard != null ? sourceCard.getIdName() + " (" + sourceCard.getZoneChangeCounter(game) + ')' : "Discard", revealedCards, game);
+        player.revealCards(sourceCard != null ? sourceCard.getIdName() + " (" 
+                + sourceCard.getZoneChangeCounter(game) + ')' : "Discard", revealedCards, game);
 
         boolean result = true;
         int filteredCardsCount = revealedCards.count(filter, source.getSourceId(), source.getControllerId(), game);

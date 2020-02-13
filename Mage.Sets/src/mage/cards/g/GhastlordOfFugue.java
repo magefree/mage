@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import java.util.UUID;
@@ -20,7 +19,7 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.common.TargetCardInHand;
+import mage.target.TargetCard;
 
 /**
  *
@@ -29,7 +28,7 @@ import mage.target.common.TargetCardInHand;
 public final class GhastlordOfFugue extends CardImpl {
 
     public GhastlordOfFugue(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U/B}{U/B}{U/B}{U/B}{U/B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U/B}{U/B}{U/B}{U/B}{U/B}");
         this.subtype.add(SubType.SPIRIT);
         this.subtype.add(SubType.AVATAR);
 
@@ -37,9 +36,11 @@ public final class GhastlordOfFugue extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Ghastlord of Fugue can't be blocked.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedSourceEffect(Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new CantBeBlockedSourceEffect(Duration.WhileOnBattlefield)));
 
-        // Whenever Ghastlord of Fugue deals combat damage to a player, that player reveals their hand. You choose a card from it. That player exiles that card.
+        // Whenever Ghastlord of Fugue deals combat damage to a player, 
+        // that player reveals their hand. You choose a card from it. That player exiles that card.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new GhastlordOfFugueEffect(), false, true));
 
     }
@@ -78,10 +79,10 @@ class GhastlordOfFugueEffect extends OneShotEffect {
             targetPlayer.revealCards(sourceObject.getName(), targetPlayer.getHand(), game);
 
             // You choose a card from it
-            TargetCardInHand target = new TargetCardInHand(new FilterCard());
+            TargetCard target = new TargetCard(Zone.HAND, new FilterCard());
             target.setNotTarget(true);
             Card chosenCard = null;
-            if (controller.choose(Outcome.Benefit, targetPlayer.getHand(), target, game)) {
+            if (controller.chooseTarget(Outcome.Benefit, targetPlayer.getHand(), target, source, game)) {
                 chosenCard = game.getCard(target.getFirstTarget());
             }
             if (chosenCard != null) {

@@ -15,7 +15,6 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetCardInHand;
 
 import java.util.List;
 import java.util.UUID;
@@ -56,7 +55,9 @@ class DiscipleOfPhenaxEffect extends OneShotEffect {
 
     DiscipleOfPhenaxEffect() {
         super(Outcome.Discard);
-        staticText = "target player reveals a number of cards from their hand equal to your devotion to black. You choose one of them. That player discards that card";
+        staticText = "target player reveals a number of cards from their hand "
+                + "equal to your devotion to black. You choose one of "
+                + "them. That player discards that card";
     }
 
     private DiscipleOfPhenaxEffect(final DiscipleOfPhenaxEffect effect) {
@@ -79,9 +80,10 @@ class DiscipleOfPhenaxEffect extends OneShotEffect {
         int amount = Math.min(targetPlayer.getHand().size(), devotion);
         if (targetPlayer.getHand().size() > amount) {
             FilterCard filter = new FilterCard("card in target player's hand");
-            TargetCardInHand chosenCards = new TargetCardInHand(amount, amount, filter);
+            TargetCard chosenCards = new TargetCard(amount, amount, Zone.HAND, filter);
             chosenCards.setNotTarget(true);
-            if (chosenCards.canChoose(targetPlayer.getId(), game) && targetPlayer.choose(Outcome.Discard, targetPlayer.getHand(), chosenCards, game)) {
+            if (chosenCards.canChoose(targetPlayer.getId(), game)
+                    && targetPlayer.choose(Outcome.Discard, targetPlayer.getHand(), chosenCards, game)) {
                 if (!chosenCards.getTargets().isEmpty()) {
                     List<UUID> targets = chosenCards.getTargets();
                     for (UUID targetid : targets) {
