@@ -1,4 +1,3 @@
-
 package mage.cards.e;
 
 import java.util.List;
@@ -20,8 +19,8 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.TargetCard;
 import mage.target.common.TargetCardInGraveyard;
-import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -29,27 +28,29 @@ import mage.target.common.TargetCardInLibrary;
  * @author jonubuu
  */
 public final class Extirpate extends CardImpl {
-
+    
     private static final FilterCard filter = new FilterCard("card in a graveyard other than a basic land card");
-
+    
     static {
         filter.add(Predicates.not(Predicates.and(CardType.LAND.getPredicate(), SuperType.BASIC.getPredicate())));
     }
-
+    
     public Extirpate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}");
 
         // Split second
         this.addAbility(new SplitSecondAbility());
-        // Choose target card in a graveyard other than a basic land card. Search its owner's graveyard, hand, and library for all cards with the same name as that card and exile them. Then that player shuffles their library.
+        // Choose target card in a graveyard other than a basic land card. 
+        // Search its owner's graveyard, hand, and library for all cards with 
+        // the same name as that card and exile them. Then that player shuffles their library.
         this.getSpellAbility().addEffect(new ExtirpateEffect());
         this.getSpellAbility().addTarget(new TargetCardInGraveyard(filter));
     }
-
+    
     public Extirpate(final Extirpate card) {
         super(card);
     }
-
+    
     @Override
     public Extirpate copy() {
         return new Extirpate(this);
@@ -57,21 +58,24 @@ public final class Extirpate extends CardImpl {
 }
 
 class ExtirpateEffect extends OneShotEffect {
-
+    
     public ExtirpateEffect() {
         super(Outcome.Exile);
-        this.staticText = "Choose target card in a graveyard other than a basic land card. Search its owner's graveyard, hand, and library for any number of cards with the same name as that card and exile them. Then that player shuffles their library";
+        this.staticText = "Choose target card in a graveyard other than "
+                + "a basic land card. Search its owner's graveyard, hand, "
+                + "and library for any number of cards with the same name "
+                + "as that card and exile them. Then that player shuffles their library";
     }
-
+    
     public ExtirpateEffect(final ExtirpateEffect effect) {
         super(effect);
     }
-
+    
     @Override
     public ExtirpateEffect copy() {
         return new ExtirpateEffect(this);
     }
-
+    
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
@@ -100,8 +104,9 @@ class ExtirpateEffect extends OneShotEffect {
 
             // search cards in hand
             filterNamedCard.setMessage("card named " + chosenCard.getLogName() + " in the hand of " + owner.getLogName());
-            TargetCardInHand targetCardInHand = new TargetCardInHand(0, Integer.MAX_VALUE, filterNamedCard);
-            if (controller.choose(Outcome.Exile, owner.getHand(), targetCardInHand, game)) {
+            TargetCard targetCardInHand = new TargetCard(0, Integer.MAX_VALUE, Zone.HAND, filterNamedCard);
+            targetCardInHand.setNotTarget(true);
+            if (controller.chooseTarget(Outcome.Exile, owner.getHand(), targetCardInHand, source, game)) {
                 List<UUID> targets = targetCardInHand.getTargets();
                 for (UUID targetId : targets) {
                     Card targetCard = owner.getHand().get(targetId, game);
@@ -128,5 +133,5 @@ class ExtirpateEffect extends OneShotEffect {
         }
         return false;
     }
-
+    
 }
