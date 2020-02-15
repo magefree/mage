@@ -1,9 +1,5 @@
-
 package mage.abilities.keyword;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -17,8 +13,11 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author Plopman
  */
 public class SunburstAbility extends EntersBattlefieldAbility {
@@ -66,18 +65,21 @@ class SunburstEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanentEntering(source.getSourceId());
         if (permanent != null) {
-            Counter counter;
-            if (permanent.isCreature()) {
-                counter = CounterType.P1P1.createInstance(amount.calculate(game, source, this));
-            } else {
-                counter = CounterType.CHARGE.createInstance(amount.calculate(game, source, this));
-            }
-            List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects"); // the basic event is the EntersBattlefieldEvent, so use already applied replacement effects from that event
-            permanent.addCounters(counter, source, game, appliedEffects);
-            if (!game.isSimulation()) {
-                Player player = game.getPlayer(source.getControllerId());
-                if (player != null) {
-                    game.informPlayers(player.getLogName() + " puts " + counter.getCount() + ' ' + counter.getName() + " counter on " + permanent.getName());
+            int countersAmount = amount.calculate(game, source, this);
+            if (countersAmount > 0) {
+                Counter counter;
+                if (permanent.isCreature()) {
+                    counter = CounterType.P1P1.createInstance(countersAmount);
+                } else {
+                    counter = CounterType.CHARGE.createInstance(countersAmount);
+                }
+                List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects"); // the basic event is the EntersBattlefieldEvent, so use already applied replacement effects from that event
+                permanent.addCounters(counter, source, game, appliedEffects);
+                if (!game.isSimulation()) {
+                    Player player = game.getPlayer(source.getControllerId());
+                    if (player != null) {
+                        game.informPlayers(player.getLogName() + " puts " + counter.getCount() + ' ' + counter.getName() + " counter on " + permanent.getName());
+                    }
                 }
             }
         }
