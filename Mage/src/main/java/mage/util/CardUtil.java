@@ -184,7 +184,6 @@ public final class CardUtil {
 
         // increase cost (add to first generic or add new)
         if (reduceCount < 0) {
-            Assert.assertEquals("must be empty", 0, adjustedCost.size());
             boolean added = false;
             for (ManaCost manaCost : manaCosts) {
                 if (reduceCount != 0 && manaCost instanceof GenericManaCost) {
