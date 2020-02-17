@@ -1,7 +1,5 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -24,8 +22,9 @@ import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author emerald000
  */
 public final class MangarasTome extends CardImpl {
@@ -77,7 +76,7 @@ class MangarasTomeSearchEffect extends OneShotEffect {
                 for (UUID targetId : target.getTargets()) {
                     Card card = controller.getLibrary().getCard(targetId, game);
                     if (card != null) {
-                        controller.moveCardsToExile(card, source, game, false, CardUtil.getCardExileZoneId(game, source), permanent.getLogName());
+                        controller.moveCardsToExile(card, source, game, false, CardUtil.getCardExileZoneId(game, source), permanent.getName());
                         card.setFaceDown(true, game);
                     }
                 }
