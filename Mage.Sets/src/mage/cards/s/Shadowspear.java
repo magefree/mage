@@ -48,7 +48,7 @@ public final class Shadowspear extends CardImpl {
         ).setText("Permanents your opponents control lose hexproof"), new GenericManaCost(1));
         ability.addEffect(new LoseAbilityAllEffect(
                 IndestructibleAbility.getInstance(), Duration.EndOfTurn, filter
-        ).setText("indestructible until end of turn"));
+        ).setText("and indestructible until end of turn"));
         this.addAbility(ability);
 
         // Equip {2}
