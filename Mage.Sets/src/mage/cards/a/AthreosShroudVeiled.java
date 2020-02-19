@@ -27,6 +27,7 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
+import mage.game.permanent.PermanentToken;
 
 /**
  * @author TheElk801
@@ -62,7 +63,8 @@ public final class AthreosShroudVeiled extends CardImpl {
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
-        // Whenever a creature with a coin counter on it dies or is put into exile, return that card to the battlefield under your control.
+        // Whenever a creature with a coin counter on it dies or is put into exile, 
+        // return that card to the battlefield under your control.
         this.addAbility(new AthreosShroudVeiledTriggeredAbility());
     }
 
@@ -118,8 +120,8 @@ class AthreosShroudVeiledTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a creature with a coin counter on it dies or is put into exile, " +
-                "return that card to the battlefield under your control.";
+        return "Whenever a creature with a coin counter on it dies or is put into exile, "
+                + "return that card to the battlefield under your control.";
     }
 }
 
@@ -149,7 +151,8 @@ class AthreosShroudVeiledEffect extends OneShotEffect {
             return false;
         }
         Card card = game.getCard(mor.getSourceId());
-        return card.getZoneChangeCounter(game) - 1 == mor.getZoneChangeCounter()
+        return card != null
+                && card.getZoneChangeCounter(game) - 1 == mor.getZoneChangeCounter()
                 && player.moveCards(card, Zone.BATTLEFIELD, source, game);
     }
 }
