@@ -1388,8 +1388,6 @@ public class GameController implements GameCallback {
 
         logger.warn("FIX command result for game " + game.getId() + ": " + appliedFixes);
 
-        System.out.println(sb.toString());
-
         return sb.toString();
     }
 }
