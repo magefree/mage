@@ -399,7 +399,8 @@ public class CallbackClientImpl implements CallbackClient {
         }
         switch (usedPanel.getChatType()) {
             case GAME:
-                usedPanel.receiveMessage("", new StringBuilder("You may use hot keys to play faster:")
+                usedPanel.receiveMessage("", new StringBuilder()
+                                .append("HOTKEYS:")
                                 .append("<br/>Turn mousewheel up (ALT-e) - enlarge image of card the mousepointer hovers over")
                                 .append("<br/>Turn mousewheel down (ALT-s) - enlarge original/alternate image of card the mousepointer hovers over")
                                 .append("<br/><b>")
@@ -429,12 +430,19 @@ public class CallbackClientImpl implements CallbackClient {
                                 .append("<br/><b>")
                                 .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_SWITCH_CHAT)))
                                 .append("</b> - Switth in/out to chat text field")
+                                /*
                                 .append("<br/><b>")
                                 .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_TOGGLE_MACRO)))
                                 .append("</b> - Toggle recording a sequence of actions to repeat. Will not pause if interrupted and can fail if a selected card changes such as when scrying top card to bottom.")
                                 .append("<br/><b>").append(System.getProperty("os.name").contains("Mac OS X") ? "Cmd" : "Ctrl").append(" + click</b> - Hold priority while casting a spell or activating an ability")
-                                .append("<br/>").append("Type <b>/fix</b> message in chat to fix freezed game")
-                                .append("<br/>").append("Type <b>/pings</b> message in chat to show players and watchers ping")
+                                 */
+                                .append("<br/>")
+                                .append("<br/>")
+                                .append("CHAT COMMANDS:")
+                                .append("<br/>").append("<b>/h username </b> - show player's stats (history)")
+                                .append("<br/>").append("<b>/w username message</b> - send private message to player (whisper)")
+                                .append("<br/>").append("<b>/pings</b> - show players and watchers ping")
+                                .append("<br/>").append("<b>/fix</b> - fix freezed game")
                                 .toString(),
                         null, MessageType.USER_INFO, ChatMessage.MessageColor.BLUE);
                 break;

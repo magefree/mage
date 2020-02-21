@@ -232,7 +232,7 @@ public enum ChatManager {
                         if (entry.getKey().equals(id)) {
                             GameController controller = entry.getValue();
                             if (controller != null) {
-                                message += controller.attemptToFixGame();
+                                message += controller.attemptToFixGame(user);
                                 chatSessions.get(chatId).broadcastInfoToUser(user, message);
                             }
                         }

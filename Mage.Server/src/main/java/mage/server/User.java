@@ -37,7 +37,6 @@ public class User {
     private static final Logger logger = Logger.getLogger(User.class);
 
     public enum UserState {
-
         Created, // Used if user is created an not connected to the session
         Connected, // Used if user is correctly connected
         Disconnected, // Used if the user lost connection
