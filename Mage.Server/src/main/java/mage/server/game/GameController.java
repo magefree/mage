@@ -226,7 +226,7 @@ public class GameController implements GameCallback {
         );
         joinWaitingExecutor.scheduleAtFixedRate(() -> {
             try {
-                sendInfoAboutPlayersNotJoinedYet();
+                sendInfoAboutPlayersNotJoinedYetAndTryToFixIt();
             } catch (Exception ex) {
                 logger.fatal("Send info about player not joined yet:", ex);
             }
@@ -323,27 +323,44 @@ public class GameController implements GameCallback {
         }
     }
 
-    private void sendInfoAboutPlayersNotJoinedYet() {
+    private void sendInfoAboutPlayersNotJoinedYetAndTryToFixIt() {
         // runs every 5 secs untill all players join
         for (Player player : game.getPlayers().values()) {
-            if (!player.hasLeft() && player.isHuman()) {
+            if (player.isInGame() && player.isHuman()) {
                 Optional<User> requestedUser = getUserByPlayerId(player.getId());
                 if (requestedUser.isPresent()) {
                     User user = requestedUser.get();
                     // TODO: workaround to fix not started games in tourneys, need to find out real reason
                     if (gameSessions.get(player.getId()) == null) {
                         // join the game because player has not joined or was removed because of disconnect
+                        String problemPlayerFixes;
                         user.removeConstructing(player.getId());
                         GameManager.instance.joinGame(game.getId(), user.getId());
                         logger.warn("Forced join of player " + player.getName() + " (" + user.getUserState() + ") to gameId: " + game.getId());
                         if (user.isConnected()) {
-                            logger.warn("Send forced game start event for player " + player.getName() + " in gameId: " + game.getId());
-                            user.ccGameStarted(game.getId(), player.getId());
+                            // init game session, see reconnect()
+                            GameSessionPlayer session = gameSessions.get(player.getId());
+                            if (session != null) {
+                                problemPlayerFixes = "re-send start game event";
+                                logger.warn("Send forced game start event for player " + player.getName() + " in gameId: " + game.getId());
+                                user.ccGameStarted(session.getGameId(), player.getId());
+                                session.init();
+                                GameManager.instance.sendPlayerString(session.getGameId(), user.getId(), "");
+                            } else {
+                                problemPlayerFixes = "leave on broken game session";
+                                logger.error("Can't find game session for forced join, leave it: player " + player.getName() + " in gameId: " + game.getId());
+                                player.leave();
+                            }
+                        } else {
+                            problemPlayerFixes = "leave on disconnected";
+                            logger.warn("User disconnected, leave him after forced join: player " + player.getName() + " in gameId: " + game.getId());
+                            player.leave();
                         }
 
                         ChatManager.instance.broadcast(chatId, player.getName(), user.getPingInfo()
                                         + " is forced to join the game (waiting ends after "
-                                        + GAME_TIMEOUTS_CANCEL_PLAYER_GAME_JOINING_AFTER_INACTIVE_SECS + " secs)",
+                                        + GAME_TIMEOUTS_CANCEL_PLAYER_GAME_JOINING_AFTER_INACTIVE_SECS
+                                        + " secs, applied fixes: " + problemPlayerFixes + ")",
                                 MessageColor.BLUE, true, ChatMessage.MessageType.STATUS, null);
                     }
 
@@ -1359,7 +1376,6 @@ public class GameController implements GameCallback {
         }
 
         // TODO: fix non started game (send game started event to user?)
-        
 
         // ALL DONE
         if (fixActions.isEmpty()) {
