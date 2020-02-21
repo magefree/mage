@@ -45,7 +45,7 @@ public final class SunlitHoplite extends CardImpl {
 
         // Sunlit Hoplite gets +1/+0 as long as you control an Elspeth planeswalker.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
-                new BoostSourceEffect(1, 0, Duration.EndOfTurn),
+                new BoostSourceEffect(1, 0, Duration.WhileOnBattlefield),
                 condition, "{this} gets +1/+0 as long as you control an Elspeth planeswalker"
         )).addHint(new ConditionHint(condition, "You control an Elspeth planeswalker")));
     }
