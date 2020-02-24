@@ -1,10 +1,7 @@
-
 package mage.cards.m;
 
 import mage.abilities.Ability;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.SearchEffect;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -25,16 +22,11 @@ import java.util.UUID;
 public final class ManipulateFate extends CardImpl {
 
     public ManipulateFate(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{U}");
 
         // Search your library for three cards, exile them, then shuffle your library.
         this.getSpellAbility().addEffect(new ManipulateFateEffect());
-        
-        // Draw a card.
-        Effect effect = new DrawCardSourceControllerEffect(1);
-        effect.setText("Draw a card.");
-        this.getSpellAbility().addEffect(effect);
+
     }
 
     public ManipulateFate(final ManipulateFate card) {
@@ -51,7 +43,8 @@ class ManipulateFateEffect extends SearchEffect {
 
     ManipulateFateEffect() {
         super(new TargetCardInLibrary(3, new FilterCard()), Outcome.Benefit);
-        staticText = "Search your library for three cards, exile them, then shuffle your library.";
+        staticText = "Search your library for three cards, exile them, "
+                + "then shuffle your library.  Draw a card";
     }
 
     ManipulateFateEffect(final ManipulateFateEffect effect) {
@@ -66,7 +59,7 @@ class ManipulateFateEffect extends SearchEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if(player != null) {
+        if (player != null) {
             if (player.searchLibrary(target, source, game)) {
                 for (UUID targetId : getTargets()) {
                     Card card = player.getLibrary().getCard(targetId, game);
@@ -74,9 +67,10 @@ class ManipulateFateEffect extends SearchEffect {
                         card.moveToExile(null, null, targetId, game);
                     }
                 }
-                return true;
             }
             player.shuffleLibrary(source, game);
+            player.drawCards(1, game);
+            return true;
         }
         return false;
     }
