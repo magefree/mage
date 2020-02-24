@@ -79,10 +79,14 @@ class HatefulEidolonTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         for (UUID auraId : deadCreature.getAttachments()) {
-            Permanent aura = game.getPermanentOrLKIBattlefield(auraId);
-            if (aura.getControllerId().equals(controllerId)) {
+            Permanent attachment = game.getPermanentOrLKIBattlefield(auraId);
+            if (attachment.getControllerId().equals(controllerId)
+                    && attachment.isEnchantment()) {  // Shadowspear or any other equipment does not count
                 auraCount += 1;
             }
+        }
+        if (auraCount == 0) {  // just equipment not aura's
+            return false;
         }
         Player controller = game.getPlayer(controllerId);
         if (controller != null
