@@ -31,8 +31,12 @@ public class AddManaOfTwoDifferentColorsEffect extends ManaEffect {
 
     @Override
     public Mana produceMana(Game game, Ability source) {
-        Player player = getPlayer(game, source);
-        return ManaChoice.chooseTwoDifferentColors(player, game);
+        if (game != null) {
+            Player player = getPlayer(game, source);
+            return ManaChoice.chooseTwoDifferentColors(player, game);
+        } else {
+            return new Mana();
+        }
     }
 
     @Override

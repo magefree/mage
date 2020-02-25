@@ -204,6 +204,10 @@ class IceCauldronAddManaEffect extends ManaEffect {
 
     @Override
     public Mana produceMana(Game game, Ability source) {
+        Mana mana = new Mana();
+        if (game == null) {
+            return mana;
+        }
         Permanent iceCauldron = game.getPermanent(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
         if (iceCauldron != null && controller != null) {
@@ -222,7 +226,7 @@ class IceCauldronAddManaEffect extends ManaEffect {
                 }
             }
         }
-        return null;
+        return mana;
     }
 
 }

@@ -1,6 +1,5 @@
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -25,8 +24,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class GauntletOfPower extends CardImpl {
@@ -189,14 +189,16 @@ class GauntletOfPowerEffectEffect2 extends ManaEffect {
 
     @Override
     public Mana produceMana(Game game, Ability source) {
-        Permanent land = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
-        if (land != null) {
-            Mana mana = (Mana) getValue("mana");
-            if (mana != null) {
-                return mana.copy();
+        if (game != null) {
+            Permanent land = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+            if (land != null) {
+                Mana mana = (Mana) getValue("mana");
+                if (mana != null) {
+                    return mana.copy();
+                }
             }
         }
-        return null;
+        return new Mana();
     }
 
     @Override

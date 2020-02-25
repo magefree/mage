@@ -20,6 +20,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -101,6 +102,9 @@ class CharmedPendantManaEffect extends ManaEffect {
 
     @Override
     public List<Mana> getNetMana(Game game, Ability source) {
+        if (game == null) {
+            return new ArrayList<>();
+        }
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             if (controller.isTopCardRevealed()) {
@@ -115,14 +119,17 @@ class CharmedPendantManaEffect extends ManaEffect {
                 }
             }
         }
-        return null;
+        return new ArrayList<>();
     }
 
     @Override
     public Mana produceMana(Game game, Ability source) {
+        Mana mana = new Mana();
+        if (game == null) {
+            return mana;
+        }
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Mana mana = new Mana();
             for (Cost cost : source.getCosts()) {
                 if (cost instanceof PutTopCardOfYourLibraryToGraveyardCost) {
                     Set<Card> cards = ((PutTopCardOfYourLibraryToGraveyardCost) cost).getCardsMovedToGraveyard();
@@ -161,11 +168,8 @@ class CharmedPendantManaEffect extends ManaEffect {
                         }
                     }
                 }
-
             }
-            return mana;
         }
-
-        return null;
+        return mana;
     }
 }

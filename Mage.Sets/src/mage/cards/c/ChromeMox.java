@@ -124,27 +124,29 @@ class ChromeMoxManaEffect extends ManaEffect {
     @Override
     public List<Mana> getNetMana(Game game, Ability source) {
         List<Mana> netMana = new ArrayList<>();
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            List<UUID> imprinted = permanent.getImprinted();
-            if (imprinted != null && !imprinted.isEmpty()) {
-                Card imprintedCard = game.getCard(imprinted.get(0));
-                if (imprintedCard != null) {
-                    ObjectColor color = imprintedCard.getColor(game);
-                    if (color.isBlack()) {
-                        netMana.add(Mana.BlackMana(1));
-                    }
-                    if (color.isRed()) {
-                        netMana.add(Mana.RedMana(1));
-                    }
-                    if (color.isBlue()) {
-                        netMana.add(Mana.BlueMana(1));
-                    }
-                    if (color.isGreen()) {
-                        netMana.add(Mana.GreenMana(1));
-                    }
-                    if (color.isWhite()) {
-                        netMana.add(Mana.WhiteMana(1));
+        if (game != null) {
+            Permanent permanent = game.getPermanent(source.getSourceId());
+            if (permanent != null) {
+                List<UUID> imprinted = permanent.getImprinted();
+                if (imprinted != null && !imprinted.isEmpty()) {
+                    Card imprintedCard = game.getCard(imprinted.get(0));
+                    if (imprintedCard != null) {
+                        ObjectColor color = imprintedCard.getColor(game);
+                        if (color.isBlack()) {
+                            netMana.add(Mana.BlackMana(1));
+                        }
+                        if (color.isRed()) {
+                            netMana.add(Mana.RedMana(1));
+                        }
+                        if (color.isBlue()) {
+                            netMana.add(Mana.BlueMana(1));
+                        }
+                        if (color.isGreen()) {
+                            netMana.add(Mana.GreenMana(1));
+                        }
+                        if (color.isWhite()) {
+                            netMana.add(Mana.WhiteMana(1));
+                        }
                     }
                 }
             }
@@ -154,6 +156,10 @@ class ChromeMoxManaEffect extends ManaEffect {
 
     @Override
     public Mana produceMana(Game game, Ability source) {
+        Mana mana = new Mana();
+        if (game == null) {
+            return mana;
+        }
         Permanent permanent = game.getPermanent(source.getSourceId());
         Player player = game.getPlayer(source.getControllerId());
         if (permanent != null && player != null) {
@@ -180,14 +186,13 @@ class ChromeMoxManaEffect extends ManaEffect {
                     if (color.isWhite()) {
                         choice.getChoices().add("White");
                     }
-                    Mana mana = new Mana();
                     if (!choice.getChoices().isEmpty()) {
 
                         if (choice.getChoices().size() == 1) {
                             choice.setChoice(choice.getChoices().iterator().next());
                         } else {
                             if (!player.choose(outcome, choice, game)) {
-                                return null;
+                                return mana;
                             }
                         }
                         switch (choice.getChoice()) {
@@ -215,11 +220,10 @@ class ChromeMoxManaEffect extends ManaEffect {
                                 break;
                         }
                     }
-                    return mana;
                 }
             }
         }
-        return null;
+        return mana;
     }
 
 }

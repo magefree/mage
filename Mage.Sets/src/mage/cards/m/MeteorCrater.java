@@ -86,6 +86,10 @@ class MeteorCraterEffect extends ManaEffect {
 
     @Override
     public Mana produceMana(Game game, Ability source) {
+        Mana mana = new Mana();
+        if (game == null) {
+            return mana;
+        }
         Mana types = getManaTypes(game, source);
         Choice choice = new ChoiceColor(true);
         choice.getChoices().clear();
@@ -121,7 +125,6 @@ class MeteorCraterEffect extends ManaEffect {
                 player.choose(outcome, choice, game);
             }
             if (choice.getChoice() != null) {
-                Mana mana = new Mana();
                 switch (choice.getChoice()) {
                     case "Black":
                         mana.setBlack(1);
@@ -139,31 +142,32 @@ class MeteorCraterEffect extends ManaEffect {
                         mana.setWhite(1);
                         break;
                 }
-                return mana;
             }
         }
-        return null;
+        return mana;
     }
 
     private Mana getManaTypes(Game game, Ability source) {
-        List<Permanent> controlledPermanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game);
         Mana types = new Mana();
-        for (Permanent permanent : controlledPermanents) {
-            ObjectColor color = permanent.getColor(game);
-            if (color.isBlack()) {
-                types.add(Mana.BlackMana(1));
-            }
-            if (color.isBlue()) {
-                types.add(Mana.BlueMana(1));
-            }
-            if (color.isGreen()) {
-                types.add(Mana.GreenMana(1));
-            }
-            if (color.isRed()) {
-                types.add(Mana.RedMana(1));
-            }
-            if (color.isWhite()) {
-                types.add(Mana.WhiteMana(1));
+        if (game != null) {
+            List<Permanent> controlledPermanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game);
+            for (Permanent permanent : controlledPermanents) {
+                ObjectColor color = permanent.getColor(game);
+                if (color.isBlack()) {
+                    types.add(Mana.BlackMana(1));
+                }
+                if (color.isBlue()) {
+                    types.add(Mana.BlueMana(1));
+                }
+                if (color.isGreen()) {
+                    types.add(Mana.GreenMana(1));
+                }
+                if (color.isRed()) {
+                    types.add(Mana.RedMana(1));
+                }
+                if (color.isWhite()) {
+                    types.add(Mana.WhiteMana(1));
+                }
             }
         }
         return types;

@@ -88,6 +88,10 @@ class SquanderedResourcesEffect extends ManaEffect {
 
     @Override
     public Mana produceMana(Game game, Ability source) {
+        Mana mana = new Mana();
+        if (game == null) {
+            return mana;
+        }
         Mana types = getManaTypes(game, source);
         Choice choice = new ChoiceColor(true);
         choice.getChoices().clear();
@@ -118,7 +122,6 @@ class SquanderedResourcesEffect extends ManaEffect {
             choice.getChoices().add("White");
             choice.getChoices().add("Colorless");
         }
-        Mana mana = new Mana();
         if (!choice.getChoices().isEmpty()) {
             Player player = game.getPlayer(source.getControllerId());
             if (player == null) {
@@ -128,7 +131,7 @@ class SquanderedResourcesEffect extends ManaEffect {
                 choice.setChoice(choice.getChoices().iterator().next());
             } else {
                 if (!player.choose(outcome, choice, game)) {
-                    return null;
+                    return mana;
                 }
             }
             switch (choice.getChoice()) {
@@ -151,7 +154,6 @@ class SquanderedResourcesEffect extends ManaEffect {
                     mana.setColorless(1);
                     break;
             }
-
         }
         return mana;
     }

@@ -82,6 +82,10 @@ public class DynamicManaEffect extends ManaEffect {
 
     @Override
     public List<Mana> getNetMana(Game game, Ability source) {
+        List<Mana> netMana = new ArrayList<>();
+        if (game == null) {
+            return netMana;
+        }
         Mana computedMana = new Mana();
         int count;
         if (netAmount != null) {
@@ -108,7 +112,6 @@ public class DynamicManaEffect extends ManaEffect {
         } else {
             computedMana.setGeneric(count);
         }
-        List<Mana> netMana = new ArrayList<>();
         netMana.add(computedMana);
         return netMana;
     }
@@ -116,8 +119,10 @@ public class DynamicManaEffect extends ManaEffect {
     @Override
     public Mana produceMana(Game game, Ability source) {
         Mana computedMana = new Mana();
+        if (game == null) {
+            return computedMana;
+        }
         int count = amount.calculate(game, source, this);
-
         if (baseMana.getBlack() > 0) {
             computedMana.setBlack(count);
         } else if (baseMana.getBlue() > 0) {

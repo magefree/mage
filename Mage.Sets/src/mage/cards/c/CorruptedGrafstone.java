@@ -64,7 +64,11 @@ class CorruptedGrafstoneManaAbility extends ActivatedManaAbilityImpl {
 
     @Override
     public List<Mana> getNetMana(Game game) {
-        return ((CorruptedGrafstoneManaEffect) getEffects().get(0)).getNetMana(game, this);
+        List<Mana> netMana = new ArrayList<>();
+        if (game != null) {
+            return ((CorruptedGrafstoneManaEffect) getEffects().get(0)).getNetMana(game, this);
+        }
+        return netMana;
     }
 }
 
@@ -115,6 +119,10 @@ class CorruptedGrafstoneManaEffect extends ManaEffect {
 
     @Override
     public Mana produceMana(Game game, Ability source) {
+        Mana mana = new Mana();
+        if (game == null) {
+            return mana;
+        }
         Mana types = getManaTypesInGraveyard(game, source);
         Choice choice = new ChoiceColor(true);
         choice.getChoices().clear();
@@ -141,39 +149,35 @@ class CorruptedGrafstoneManaEffect extends ManaEffect {
                     choice.setChoice(choice.getChoices().iterator().next());
                 } else {
                     if (!player.choose(outcome, choice, game)) {
-                        return null;
+                        return mana;
                     }
                 }
-                Mana computedManaHere = new Mana();
                 switch (choice.getChoice()) {
                     case "Black":
-                        computedManaHere.setBlack(1);
+                        mana.setBlack(1);
                         break;
                     case "Blue":
-                        computedManaHere.setBlue(1);
+                        mana.setBlue(1);
                         break;
                     case "Red":
-                        computedManaHere.setRed(1);
+                        mana.setRed(1);
                         break;
                     case "Green":
-                        computedManaHere.setGreen(1);
+                        mana.setGreen(1);
                         break;
                     case "White":
-                        computedManaHere.setWhite(1);
+                        mana.setWhite(1);
                         break;
                 }
-                return computedManaHere;
             }
         }
-        return null;
+        return mana;
     }
 
     private Mana getManaTypesInGraveyard(Game game, Ability source) {
-
-        if (source != null && source.getControllerId() != null) {
+        if (game != null && source != null && source.getControllerId() != null) {
             Player controller = game.getPlayer(source.getControllerId());
             Mana types = new Mana();
-
             if (controller != null) {
                 for (Card card : controller.getGraveyard().getCards(game)) {
                     if (card != null) {

@@ -94,6 +94,10 @@ class StarCompassManaEffect extends ManaEffect {
 
     @Override
     public Mana produceMana(Game game, Ability source) {
+        Mana mana = new Mana();
+        if (game == null) {
+            return mana;
+        }
         Mana types = getManaTypes(game, source);
         Choice choice = new ChoiceColor(true);
         choice.getChoices().clear();
@@ -133,11 +137,10 @@ class StarCompassManaEffect extends ManaEffect {
                 choice.setChoice(choice.getChoices().iterator().next());
             } else {
                 if (!player.choose(outcome, choice, game)) {
-                    return null;
+                    return mana;
                 }
             }
             if (choice.getChoice() != null) {
-                Mana mana = new Mana();
                 switch (choice.getChoice()) {
                     case "Black":
                         mana.setBlack(1);
@@ -158,21 +161,22 @@ class StarCompassManaEffect extends ManaEffect {
                         mana.setColorless(1);
                         break;
                 }
-                return mana;
             }
         }
-        return null;
+        return mana;
     }
 
     private Mana getManaTypes(Game game, Ability source) {
-        List<Permanent> lands = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game);
         Mana types = new Mana();
-        for (Permanent land : lands) {
-            Abilities<ActivatedManaAbilityImpl> manaAbilities = land.getAbilities().getActivatedManaAbilities(Zone.BATTLEFIELD);
-            for (ActivatedManaAbilityImpl ability : manaAbilities) {
-                if (!ability.equals(source) && ability.definesMana(game)) {
-                    for (Mana netMana : ability.getNetMana(game)) {
-                        types.add(netMana);
+        if (game != null) {
+            List<Permanent> lands = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game);
+            for (Permanent land : lands) {
+                Abilities<ActivatedManaAbilityImpl> manaAbilities = land.getAbilities().getActivatedManaAbilities(Zone.BATTLEFIELD);
+                for (ActivatedManaAbilityImpl ability : manaAbilities) {
+                    if (!ability.equals(source) && ability.definesMana(game)) {
+                        for (Mana netMana : ability.getNetMana(game)) {
+                            types.add(netMana);
+                        }
                     }
                 }
             }

@@ -5,8 +5,6 @@
  */
 package mage.abilities.effects.mana;
 
-import java.util.ArrayList;
-import java.util.List;
 import mage.ConditionalMana;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -16,14 +14,16 @@ import mage.choices.ManaChoice;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * @author jeffwadsworth
  */
 public class AddConditionalManaOfTwoDifferentColorsEffect extends ManaEffect {
-    
+
     private final ConditionalManaBuilder manaBuilder;
-    
+
     public AddConditionalManaOfTwoDifferentColorsEffect(ConditionalManaBuilder manaBuilder) {
         super();
         this.manaBuilder = manaBuilder;
@@ -44,11 +44,14 @@ public class AddConditionalManaOfTwoDifferentColorsEffect extends ManaEffect {
 
     @Override
     public Mana produceMana(Game game, Ability source) {
-        Player player = getPlayer(game, source);
-        Mana mana = new ConditionalMana(manaBuilder.setMana(
-                ManaChoice.chooseTwoDifferentColors(
-                        player, game), source, game).build());
-        return mana;
+        if (game != null) {
+            Player player = getPlayer(game, source);
+            Mana mana = new ConditionalMana(manaBuilder.setMana(
+                    ManaChoice.chooseTwoDifferentColors(
+                            player, game), source, game).build());
+            return mana;
+        }
+        return new Mana();
     }
 
     @Override

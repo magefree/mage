@@ -26,6 +26,7 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TokenImpl;
 import mage.players.Player;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -132,16 +133,19 @@ class SasayasEssenceManaEffect extends ManaEffect {
 
     @Override
     public List<Mana> getNetMana(Game game, Ability source) {
-        return null;
+        return new ArrayList<>();
     }
 
     @Override
     public Mana produceMana(Game game, Ability source) {
+        Mana newMana = new Mana();
+        if (game == null) {
+            return newMana;
+        }
         Player controller = game.getPlayer(source.getControllerId());
         Mana mana = (Mana) this.getValue("mana");
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (controller != null && mana != null && permanent != null) {
-            Mana newMana = new Mana();
             FilterPermanent filter = new FilterLandPermanent();
             filter.add(Predicates.not(new PermanentIdPredicate(permanent.getId())));
             filter.add(new NamePredicate(permanent.getName()));
@@ -177,7 +181,7 @@ class SasayasEssenceManaEffect extends ManaEffect {
                             choice.setChoice(choice.getChoices().iterator().next());
                         } else {
                             if (!controller.choose(outcome, choice, game)) {
-                                return null;
+                                return newMana;
                             }
                         }
                         switch (choice.getChoice()) {
@@ -204,8 +208,7 @@ class SasayasEssenceManaEffect extends ManaEffect {
 
                 }
             }
-            return newMana;
         }
-        return null;
+        return newMana;
     }
 }

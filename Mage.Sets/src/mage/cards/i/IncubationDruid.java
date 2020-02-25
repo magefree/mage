@@ -103,8 +103,11 @@ class AnyColorLandsProduceManaEffect extends ManaEffect {
 
     @Override
     public Mana produceMana(Game game, Ability source) {
-        int manaAmount = getManaAmount(game, source);
         Mana mana = new Mana();
+        if (game == null) {
+            return mana;
+        }
+        int manaAmount = getManaAmount(game, source);
         Mana types = getManaTypes(game, source);
         Choice choice = new ChoiceColor(true);
         choice.getChoices().clear();
@@ -140,7 +143,7 @@ class AnyColorLandsProduceManaEffect extends ManaEffect {
             if (choice.getChoices().size() == 1) {
                 choice.setChoice(choice.getChoices().iterator().next());
             } else if (player == null || !player.choose(outcome, choice, game)) {
-                return null;
+                return mana;
             }
             if (choice.getChoice() != null) {
                 switch (choice.getChoice()) {
@@ -174,9 +177,11 @@ class AnyColorLandsProduceManaEffect extends ManaEffect {
     }
 
     private int getManaAmount(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null && permanent.getCounters(game).getCount(CounterType.P1P1) > 0) {
-            return 3;
+        if (game != null) {
+            Permanent permanent = game.getPermanent(source.getSourceId());
+            if (permanent != null && permanent.getCounters(game).getCount(CounterType.P1P1) > 0) {
+                return 3;
+            }
         }
         return 1;
     }

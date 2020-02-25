@@ -101,8 +101,11 @@ class RhysticCaveManaEffect extends ManaEffect {
 
     @Override
     public Mana produceMana(Game game, Ability source) {
-        Player controller = getPlayer(game, source);
-        return ManaChoice.chooseAnyColor(controller, game, 1);
+        if (game != null) {
+            Player controller = getPlayer(game, source);
+            return ManaChoice.chooseAnyColor(controller, game, 1);
+        }
+        return new Mana();
     }
 
     @Override

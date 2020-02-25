@@ -71,12 +71,11 @@ class NykthosShrineToNyxManaAbility extends ActivatedManaAbilityImpl {
 
     @Override
     public List<Mana> getNetMana(Game game) {
-        List<Mana> netManaCopy = new ArrayList<>();
-        if (game == null) {
-            return netManaCopy;
+        List<Mana> netMana = new ArrayList<>();
+        if (game != null) {
+            netMana.addAll(((ManaEffect) this.getEffects().get(0)).getNetMana(game, this));
         }
-        netManaCopy.addAll(((ManaEffect) this.getEffects().get(0)).getNetMana(game, this));
-        return netManaCopy;
+        return netMana;
     }
 }
 
@@ -98,30 +97,38 @@ class NykthosDynamicManaEffect extends ManaEffect {
 
     @Override
     public List<Mana> getNetMana(Game game, Ability source) {
-        return ChoiceColor.getBaseColors()
-                .stream()
-                .map(s -> computeMana(s, game, source))
-                .filter(mana -> mana.count() > 0)
-                .collect(Collectors.toList());
+        if (game != null) {
+            return ChoiceColor.getBaseColors()
+                    .stream()
+                    .map(s -> computeMana(s, game, source))
+                    .filter(mana -> mana.count() > 0)
+                    .collect(Collectors.toList());
+        } else {
+            return new ArrayList<>();
+        }
     }
 
     @Override
     public Mana produceMana(Game game, Ability source) {
+        Mana mana = new Mana();
+        if (game == null) {
+            return mana;
+        }
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null) {
-            return null;
+            return mana;
         }
         ChoiceColor choice = new ChoiceColor();
         choice.setMessage("Choose a color for devotion of Nykthos");
         if (!controller.choose(outcome, choice, game)) {
-            return null;
+            return mana;
         }
         return computeMana(choice.getChoice(), game, source);
     }
 
     private Mana computeMana(String color, Game game, Ability source) {
         Mana mana = new Mana();
-        if (color == null || color.isEmpty()) {
+        if (game == null || color == null || color.isEmpty()) {
             return mana;
         }
         switch (color) {

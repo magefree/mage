@@ -80,17 +80,23 @@ public final class KyrenToy extends CardImpl {
 
         @Override
         public List<Mana> getNetMana(Game game, Ability source) {
-            Permanent sourceObject = game.getPermanent(source.getSourceId());
-            if (sourceObject != null) {
-                List<Mana> netMana = new ArrayList<>();
-                netMana.add(Mana.ColorlessMana(sourceObject.getCounters(game).getCount(CounterType.CHARGE) + 1));
-                return netMana;
+            List<Mana> netMana = new ArrayList<>();
+            if (game != null) {
+                Permanent sourceObject = game.getPermanent(source.getSourceId());
+                if (sourceObject != null) {
+                    netMana.add(Mana.ColorlessMana(sourceObject.getCounters(game).getCount(CounterType.CHARGE) + 1));
+                    return netMana;
+                }
             }
-            return null;
+            return netMana;
         }
 
         @Override
         public Mana produceMana(Game game, Ability source) {
+            Mana mana = new Mana();
+            if (game == null) {
+                return mana;
+            }
             Player player = game.getPlayer(source.getControllerId());
             if (player != null) {
                 int numberOfMana = 0;
@@ -101,7 +107,7 @@ public final class KyrenToy extends CardImpl {
                 }
                 return new Mana(Mana.ColorlessMana(numberOfMana + 1));
             }
-            return null;
+            return mana;
         }
 
         @Override

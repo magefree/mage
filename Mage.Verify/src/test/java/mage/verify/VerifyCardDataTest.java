@@ -507,16 +507,19 @@ public class VerifyCardDataTest {
             }
         }
 
-        // 2. all planeswalkers must be legendary
         for (ExpansionSet set : sets) {
             for (ExpansionSet.SetCardInfo cardInfo : set.getSetCardInfo()) {
                 Card card = CardImpl.createCard(cardInfo.getCardClass(), new CardSetInfo(cardInfo.getName(), set.getCode(),
                         cardInfo.getCardNumber(), cardInfo.getRarity(), cardInfo.getGraphicInfo()));
                 Assert.assertNotNull(card);
 
+                // 2. all planeswalkers must be legendary
                 if (card.getCardType().contains(CardType.PLANESWALKER) && !card.getSuperType().contains(SuperType.LEGENDARY)) {
                     errorsList.add("error, planeswalker must have legendary type: " + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
                 }
+
+                // 3. check that getMana works without NPE errors (it uses getNetMana with empty game param for AI score calcs)
+                card.getMana();
             }
         }
 

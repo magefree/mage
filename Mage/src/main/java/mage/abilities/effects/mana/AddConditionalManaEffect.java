@@ -39,7 +39,11 @@ public class AddConditionalManaEffect extends ManaEffect {
 
     @Override
     public Mana produceMana(Game game, Ability source) {
-        return manaBuilder.setMana(mana, source, game).build();
+        if (game != null) {
+            return manaBuilder.setMana(mana, source, game).build();
+        } else {
+            return new Mana();
+        }
     }
 
     public Mana getMana() {

@@ -28,12 +28,13 @@ public class AddManaChosenColorEffect extends ManaEffect {
 
     @Override
     public Mana produceMana(Game game, Ability source) {
-        ObjectColor color = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");
-        if (color != null) {
-            return new Mana(ColoredManaSymbol.lookup(color.toString().charAt(0)));
-        } else {
-            return null;
+        if (game != null) {
+            ObjectColor color = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");
+            if (color != null) {
+                return new Mana(ColoredManaSymbol.lookup(color.toString().charAt(0)));
+            }
         }
+        return new Mana();
     }
 
     @Override

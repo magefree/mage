@@ -58,7 +58,7 @@ public abstract class ManaEffect extends OneShotEffect {
      * Returns the currently available max mana variations the effect can
      * produce
      *
-     * @param game
+     * @param game   warning, can be NULL for card score calcs (AI games)
      * @param source
      * @return
      */
@@ -78,7 +78,7 @@ public abstract class ManaEffect extends OneShotEffect {
      * if you don't want it then overide getNetMana to return max possible mana values
      * (if you have choose dialogs or extra effects like new counters in produceMana)
      *
-     * @param game
+     * @param game   warning, can be NULL for AI score calcs (game == null)
      * @param source
      * @return can return null or empty mana
      */

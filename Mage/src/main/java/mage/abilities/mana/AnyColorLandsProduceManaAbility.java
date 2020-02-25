@@ -115,6 +115,9 @@ class AnyColorLandsProduceManaEffect extends ManaEffect {
     @Override
     public Mana produceMana(Game game, Ability source) {
         Mana mana = new Mana();
+        if (game == null) {
+            return mana;
+        }
         Mana types = getManaTypes(game, source);
         Choice choice = new ChoiceColor(true);
         choice.getChoices().clear();

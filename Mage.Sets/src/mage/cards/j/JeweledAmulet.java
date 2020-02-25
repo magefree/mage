@@ -1,7 +1,5 @@
-
 package mage.cards.j;
 
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.SourceHasCounterCondition;
@@ -24,8 +22,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class JeweledAmulet extends CardImpl {
@@ -113,6 +112,10 @@ class JeweledAmuletAddManaEffect extends ManaEffect {
 
     @Override
     public Mana produceMana(Game game, Ability source) {
+        Mana mana = new Mana();
+        if (game == null) {
+            return mana;
+        }
         Permanent jeweledAmulet = game.getPermanent(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
         if (jeweledAmulet != null && controller != null) {
@@ -121,7 +124,7 @@ class JeweledAmuletAddManaEffect extends ManaEffect {
                 return storedMana.copy();
             }
         }
-        return null;
+        return mana;
     }
 
 }

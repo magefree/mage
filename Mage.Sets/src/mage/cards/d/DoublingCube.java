@@ -1,7 +1,5 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.ConditionalMana;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -17,8 +15,9 @@ import mage.game.Game;
 import mage.players.ManaPool;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class DoublingCube extends CardImpl {
@@ -56,27 +55,28 @@ class DoublingCubeEffect extends ManaEffect {
 
     @Override
     public Mana produceMana(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return null;
+        if (game != null) {
+            Player controller = game.getPlayer(source.getControllerId());
+            if (controller != null) {
+                ManaPool pool = controller.getManaPool();
+                int blackMana = pool.getBlack();
+                int whiteMana = pool.getWhite();
+                int blueMana = pool.getBlue();
+                int greenMana = pool.getGreen();
+                int redMana = pool.getRed();
+                int colorlessMana = pool.getColorless();
+                for (ConditionalMana conditionalMana : pool.getConditionalMana()) {
+                    blackMana += conditionalMana.getBlack();
+                    whiteMana += conditionalMana.getWhite();
+                    blueMana += conditionalMana.getBlue();
+                    greenMana += conditionalMana.getGreen();
+                    redMana += conditionalMana.getRed();
+                    colorlessMana += conditionalMana.getColorless();
+                }
+                return new Mana(redMana, greenMana, blueMana, whiteMana, blackMana, 0, 0, colorlessMana);
+            }
         }
-        ManaPool pool = controller.getManaPool();
-        int blackMana = pool.getBlack();
-        int whiteMana = pool.getWhite();
-        int blueMana = pool.getBlue();
-        int greenMana = pool.getGreen();
-        int redMana = pool.getRed();
-        int colorlessMana = pool.getColorless();
-
-        for (ConditionalMana conditionalMana : pool.getConditionalMana()) {
-            blackMana += conditionalMana.getBlack();
-            whiteMana += conditionalMana.getWhite();
-            blueMana += conditionalMana.getBlue();
-            greenMana += conditionalMana.getGreen();
-            redMana += conditionalMana.getRed();
-            colorlessMana += conditionalMana.getColorless();
-        }
-        return new Mana(redMana, greenMana, blueMana, whiteMana, blackMana, 0, 0, colorlessMana);
+        return new Mana();
     }
 
     @Override

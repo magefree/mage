@@ -65,45 +65,45 @@ public class AddConditionalManaOfAnyColorEffect extends ManaEffect {
     @Override
     public List<Mana> getNetMana(Game game, Ability source) {
         List<Mana> netMana = new ArrayList<>();
-
-        int value = amount.calculate(game, source, this);
-        if (value > 0) {
-            netMana.add(Mana.AnyMana(value));
+        if (game != null) {
+            int value = amount.calculate(game, source, this);
+            if (value > 0) {
+                netMana.add(Mana.AnyMana(value));
+            }
         }
-
         return netMana;
     }
 
     @Override
     public Mana produceMana(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return null;
-        }
-        ConditionalMana mana = null;
-        int value = amount.calculate(game, source, this);
-        ChoiceColor choice = new ChoiceColor(true);
-        for (int i = 0; i < value; i++) {
-            if (choice.getChoice() == null) {
-                controller.choose(outcome, choice, game);
-            }
-            if (choice.getChoice() == null) {
-                return null;
-            }
-            if (oneChoice) {
-                mana = new ConditionalMana(manaBuilder.setMana(choice.getMana(value), source, game).build());
-                break;
-            } else {
-                if (mana == null) {
-                    mana = new ConditionalMana(manaBuilder.setMana(choice.getMana(1), source, game).build());
-                } else {
-                    mana.add(choice.getMana(1));
+        if (game != null) {
+            Player controller = game.getPlayer(source.getControllerId());
+            if (controller != null) {
+                ConditionalMana mana = null;
+                int value = amount.calculate(game, source, this);
+                ChoiceColor choice = new ChoiceColor(true);
+                for (int i = 0; i < value; i++) {
+                    if (choice.getChoice() == null) {
+                        controller.choose(outcome, choice, game);
+                    }
+                    if (choice.getChoice() == null) {
+                        return null;
+                    }
+                    if (oneChoice) {
+                        mana = new ConditionalMana(manaBuilder.setMana(choice.getMana(value), source, game).build());
+                        break;
+                    } else {
+                        if (mana == null) {
+                            mana = new ConditionalMana(manaBuilder.setMana(choice.getMana(1), source, game).build());
+                        } else {
+                            mana.add(choice.getMana(1));
+                        }
+                        choice.clearChoice();
+                    }
                 }
-                choice.clearChoice();
+                return mana;
             }
         }
-
-        return mana;
-
+        return new Mana();
     }
 }

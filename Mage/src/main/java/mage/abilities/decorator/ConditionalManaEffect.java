@@ -1,6 +1,5 @@
 package mage.abilities.decorator;
 
-import java.util.List;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
@@ -10,8 +9,10 @@ import mage.choices.ChoiceColor;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * @author LevelX2
  */
 public class ConditionalManaEffect extends ManaEffect {
@@ -48,17 +49,23 @@ public class ConditionalManaEffect extends ManaEffect {
 
     @Override
     public List<Mana> getNetMana(Game game, Ability source) {
-        if (condition.apply(game, source)) {
-            return effect.getNetMana(game, source);
-        } else if (otherwiseEffect != null) {
-            return otherwiseEffect.getNetMana(game, source);
+        List<Mana> netMana = new ArrayList<>();
+        if (game != null) {
+            if (condition.apply(game, source)) {
+                return effect.getNetMana(game, source);
+            } else if (otherwiseEffect != null) {
+                return otherwiseEffect.getNetMana(game, source);
+            }
         }
-        return null;
+        return netMana;
     }
 
     @Override
     public Mana produceMana(Game game, Ability source) {
         Mana mana = new Mana();
+        if (game == null) {
+            return mana;
+        }
         if (condition.apply(game, source)) {
             mana = effect.getManaTemplate().copy();
         } else if (otherwiseEffect != null) {

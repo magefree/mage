@@ -16,7 +16,6 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -49,20 +48,23 @@ public class DoUnlessAnyPlayerPaysManaEffect extends ManaEffect {
 
     @Override
     public Mana produceMana(Game game, Ability source) {
-        Player controller = getPlayer(game, source);
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        String message = CardUtil.replaceSourceName(chooseUseText, sourceObject.getName());
-        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-            Player player = game.getPlayer(playerId);
-            if (player != null && player.canRespond()
-                    && cost.canPay(source, source.getSourceId(), player.getId(), game)
-                    && player.chooseUse(Outcome.Detriment, message, source, game)) {
-                cost.clearPaid();
-                if (cost.pay(source, game, source.getSourceId(), player.getId(), false, null)) {
-                    if (!game.isSimulation()) {
-                        game.informPlayers(player.getLogName() + " pays the cost to prevent the effect");
+        Mana mana = new Mana();
+        if (game != null) {
+            Player controller = getPlayer(game, source);
+            MageObject sourceObject = game.getObject(source.getSourceId());
+            String message = CardUtil.replaceSourceName(chooseUseText, sourceObject.getName());
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+                Player player = game.getPlayer(playerId);
+                if (player != null && player.canRespond()
+                        && cost.canPay(source, source.getSourceId(), player.getId(), game)
+                        && player.chooseUse(Outcome.Detriment, message, source, game)) {
+                    cost.clearPaid();
+                    if (cost.pay(source, game, source.getSourceId(), player.getId(), false, null)) {
+                        if (!game.isSimulation()) {
+                            game.informPlayers(player.getLogName() + " pays the cost to prevent the effect");
+                        }
+                        return mana;
                     }
-                    return null;
                 }
             }
         }

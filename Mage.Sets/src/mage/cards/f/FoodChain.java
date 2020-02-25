@@ -1,8 +1,5 @@
 package mage.cards.f;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.ConditionalMana;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -25,8 +22,11 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author emerald000
  */
 public final class FoodChain extends CardImpl {
@@ -83,24 +83,30 @@ class FoodChainManaEffect extends ManaEffect {
     @Override
     public List<Mana> getNetMana(Game game, Ability source) {
         List<Mana> netMana = new ArrayList<>();
-        int cmc = -1;
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(source.getControllerId())) {
-            if (permanent.isCreature()) {
-                cmc = Math.max(cmc, permanent.getManaCost().convertedManaCost());
+        if (game != null) {
+            int cmc = -1;
+            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(source.getControllerId())) {
+                if (permanent.isCreature()) {
+                    cmc = Math.max(cmc, permanent.getManaCost().convertedManaCost());
+                }
             }
-        }
-        if (cmc != -1) {
-            netMana.add(manaBuilder.setMana(Mana.BlackMana(cmc + 1), source, game).build());
-            netMana.add(manaBuilder.setMana(Mana.BlueMana(cmc + 1), source, game).build());
-            netMana.add(manaBuilder.setMana(Mana.RedMana(cmc + 1), source, game).build());
-            netMana.add(manaBuilder.setMana(Mana.GreenMana(cmc + 1), source, game).build());
-            netMana.add(manaBuilder.setMana(Mana.WhiteMana(cmc + 1), source, game).build());
+            if (cmc != -1) {
+                netMana.add(manaBuilder.setMana(Mana.BlackMana(cmc + 1), source, game).build());
+                netMana.add(manaBuilder.setMana(Mana.BlueMana(cmc + 1), source, game).build());
+                netMana.add(manaBuilder.setMana(Mana.RedMana(cmc + 1), source, game).build());
+                netMana.add(manaBuilder.setMana(Mana.GreenMana(cmc + 1), source, game).build());
+                netMana.add(manaBuilder.setMana(Mana.WhiteMana(cmc + 1), source, game).build());
+            }
         }
         return netMana;
     }
 
     @Override
     public Mana produceMana(Game game, Ability source) {
+        Mana mana = new Mana();
+        if (game == null) {
+            return mana;
+        }
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             int manaCostExiled = 0;
@@ -113,13 +119,12 @@ class FoodChainManaEffect extends ManaEffect {
             }
             ChoiceColor choice = new ChoiceColor();
             if (!controller.choose(Outcome.PutManaInPool, choice, game)) {
-                return null;
+                return mana;
             }
             Mana chosen = choice.getMana(manaCostExiled + 1);
             return manaBuilder.setMana(chosen, source, game).build();
         }
-
-        return null;
+        return mana;
     }
 
 }

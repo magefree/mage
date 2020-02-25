@@ -130,19 +130,24 @@ class CarpetOfFlowersEffect extends ManaEffect {
     @Override
     public List<Mana> getNetMana(Game game, Ability source) {
         List<Mana> netMana = new ArrayList<>();
-        int count = game.getBattlefield().count(filter, source.getSourceId(), source.getTargets().getFirstTarget(), game);
-        if (count > 0) {
-            netMana.add(Mana.AnyMana(count));
+        if (game != null) {
+            int count = game.getBattlefield().count(filter, source.getSourceId(), source.getTargets().getFirstTarget(), game);
+            if (count > 0) {
+                netMana.add(Mana.AnyMana(count));
+            }
         }
         return netMana;
     }
 
     @Override
     public Mana produceMana(Game game, Ability source) {
+        Mana mana = new Mana();
+        if (game == null) {
+            return mana;
+        }
         Player controller = game.getPlayer(source.getControllerId());
         ChoiceColor choice = new ChoiceColor();
         if (controller != null && controller.choose(Outcome.Benefit, choice, game)) {
-            Mana mana = new Mana();
             int count = game.getBattlefield().count(filter, source.getSourceId(), source.getTargets().getFirstTarget(), game);
             if (count > 0) {
                 switch (choice.getChoice()) {
@@ -165,9 +170,8 @@ class CarpetOfFlowersEffect extends ManaEffect {
                         break;
                 }
             }
-            return mana;
         }
-        return null;
+        return mana;
     }
 
     @Override

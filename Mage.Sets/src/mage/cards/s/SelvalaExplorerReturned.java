@@ -16,6 +16,7 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -69,16 +70,19 @@ class SelvalaExplorerReturnedEffect extends ManaEffect {
 
     @Override
     public List<Mana> getNetMana(Game game, Ability source) {
-        return null;
+        return new ArrayList<>();
     }
 
     @Override
     public Mana produceMana(Game game, Ability source) {
-        int parleyCount = ParleyCount.getInstance().calculate(game, source, this);
-        Player player = getPlayer(game, source);
-        if (player != null) {
-            player.gainLife(parleyCount, game, source);
+        if (game != null) {
+            int parleyCount = ParleyCount.getInstance().calculate(game, source, this);
+            Player player = getPlayer(game, source);
+            if (player != null) {
+                player.gainLife(parleyCount, game, source);
+            }
+            return Mana.GreenMana(parleyCount);
         }
-        return Mana.GreenMana(parleyCount);
+        return new Mana();
     }
 }

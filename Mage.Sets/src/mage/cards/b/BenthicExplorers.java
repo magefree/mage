@@ -148,6 +148,9 @@ class BenthicExplorersManaEffect extends ManaEffect {
     @Override
     public Mana produceMana(Game game, Ability source) {
         Mana mana = new Mana();
+        if (game == null) {
+            return mana;
+        }
         Mana types = getManaTypes(game, source);
         Choice choice = new ChoiceColor(true);
         choice.getChoices().clear();
@@ -186,7 +189,7 @@ class BenthicExplorersManaEffect extends ManaEffect {
             } else {
                 if (player == null
                         || !player.choose(Outcome.Neutral, choice, game)) {
-                    return null;
+                    return mana;
                 }
             }
             if (choice.getChoice() != null) {

@@ -66,9 +66,11 @@ public class AddManaInAnyCombinationEffect extends ManaEffect {
     @Override
     public List<Mana> getNetMana(Game game, Ability source) {
         List<Mana> netMana = new ArrayList<>();
-        int amountOfManaLeft = amount.calculate(game, source, this);
-        if (amountOfManaLeft > 0) {
-            netMana.add(Mana.AnyMana(amountOfManaLeft));
+        if (game != null) {
+            int amountOfManaLeft = amount.calculate(game, source, this);
+            if (amountOfManaLeft > 0) {
+                netMana.add(Mana.AnyMana(amountOfManaLeft));
+            }
         }
         return netMana;
     }

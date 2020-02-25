@@ -1,8 +1,5 @@
 package mage.abilities.mana;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
@@ -14,8 +11,11 @@ import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.game.Game;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class ActivatedManaAbilityImpl extends ActivatedAbilityImpl implements ManaAbility {
@@ -63,6 +63,8 @@ public abstract class ActivatedManaAbilityImpl extends ActivatedAbilityImpl impl
     /**
      * Used to check the possible mana production to determine which spells
      * and/or abilities can be used. (player.getPlayable()).
+     * <p>
+     * Also used for deck's card mana cycle with game = null (score system, etc)
      *
      * @param game
      * @return

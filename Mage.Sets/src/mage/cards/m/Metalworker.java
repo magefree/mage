@@ -67,23 +67,28 @@ class MetalworkerManaEffect extends ManaEffect {
 
     @Override
     public List<Mana> getNetMana(Game game, Ability source) {
-        Player controller = getPlayer(game, source);
-        if (controller == null) {
-            return null;
-        }
         List<Mana> netMana = new ArrayList<>();
-        int artifacts = controller.getHand().count(StaticFilters.FILTER_CARD_ARTIFACT, game);
-        if (artifacts > 0) {
-            netMana.add(Mana.ColorlessMana(artifacts * 2));
+        if (game != null) {
+            Player controller = getPlayer(game, source);
+            if (controller != null) {
+                int artifacts = controller.getHand().count(StaticFilters.FILTER_CARD_ARTIFACT, game);
+                if (artifacts > 0) {
+                    netMana.add(Mana.ColorlessMana(artifacts * 2));
+                }
+            }
         }
         return netMana;
     }
 
     @Override
     public Mana produceMana(Game game, Ability source) {
+        Mana mana = new Mana();
+        if (game == null) {
+            return mana;
+        }
         Player controller = getPlayer(game, source);
         if (controller == null) {
-            return null;
+            return mana;
         }
         int artifacts = controller.getHand().count(StaticFilters.FILTER_CARD_ARTIFACT, game);
         if (artifacts > 0) {
@@ -94,6 +99,6 @@ class MetalworkerManaEffect extends ManaEffect {
                 return Mana.ColorlessMana(target.getTargets().size() * 2);
             }
         }
-        return new Mana();
+        return mana;
     }
 }

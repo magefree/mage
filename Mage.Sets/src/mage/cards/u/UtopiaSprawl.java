@@ -1,7 +1,5 @@
-
 package mage.cards.u;
 
-import java.util.UUID;
 import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -23,8 +21,9 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Plopman
  */
 public final class UtopiaSprawl extends CardImpl {
@@ -114,12 +113,13 @@ class UtopiaSprawlEffect extends ManaEffect {
 
     @Override
     public Mana produceMana(Game game, Ability source) {
-        ObjectColor color = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");
-        if (color != null) {
-            return new Mana(ColoredManaSymbol.lookup(color.toString().charAt(0)));
-        } else {
-            return null;
+        if (game != null) {
+            ObjectColor color = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");
+            if (color != null) {
+                return new Mana(ColoredManaSymbol.lookup(color.toString().charAt(0)));
+            }
         }
+        return new Mana();
     }
 
     @Override

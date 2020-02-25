@@ -87,6 +87,10 @@ class OrcishLumberjackManaEffect extends ManaEffect {
 
     @Override
     public Mana produceMana(Game game, Ability source) {
+        Mana mana = new Mana();
+        if (game == null) {
+            return mana;
+        }
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             Choice manaChoice = new ChoiceImpl();
@@ -95,11 +99,9 @@ class OrcishLumberjackManaEffect extends ManaEffect {
             choices.add("Green");
             manaChoice.setChoices(choices);
             manaChoice.setMessage("Select color of mana to add");
-
-            Mana mana = new Mana();
             for (int i = 0; i < 3; i++) {
                 if (!player.choose(Outcome.Benefit, manaChoice, game)) {
-                    return null;
+                    return mana;
                 }
                 switch (manaChoice.getChoice()) {
                     case "Green":
@@ -110,9 +112,8 @@ class OrcishLumberjackManaEffect extends ManaEffect {
                         break;
                 }
             }
-            return mana;
         }
-        return null;
+        return mana;
     }
 
 }

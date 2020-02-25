@@ -66,6 +66,9 @@ class CommanderIdentityManaEffect extends ManaEffect {
     @Override
     public List<Mana> getNetMana(Game game, Ability source) {
         List<Mana> netMana = new ArrayList<>();
+        if (game == null) {
+            return netMana;
+        }
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             for (UUID commanderId : game.getCommandersIds(controller)) {
@@ -96,6 +99,9 @@ class CommanderIdentityManaEffect extends ManaEffect {
     @Override
     public Mana produceMana(Game game, Ability source) {
         Mana mana = new Mana();
+        if (game == null) {
+            return mana;
+        }
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Choice choice = new ChoiceImpl();

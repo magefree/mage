@@ -1,7 +1,5 @@
 package mage.abilities.mana;
 
-import java.util.ArrayList;
-import java.util.List;
 import mage.Mana;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -9,6 +7,9 @@ import mage.abilities.effects.common.ManaEffect;
 import mage.constants.AbilityType;
 import mage.constants.Zone;
 import mage.game.Game;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * see 20110715 - 605.1b
@@ -53,7 +54,7 @@ public abstract class TriggeredManaAbility extends TriggeredAbilityImpl implemen
             }
             return newNetMana;
         }
-        return new ArrayList<Mana>(netMana);
+        return new ArrayList<>(netMana);
     }
 
     /**

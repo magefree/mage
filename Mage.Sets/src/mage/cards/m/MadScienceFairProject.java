@@ -13,6 +13,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -56,20 +57,22 @@ class MadScienceFairManaEffect extends ManaEffect {
 
     @Override
     public List<Mana> getNetMana(Game game, Ability source) {
-        return null;
+        return new ArrayList<>();
     }
 
     @Override
     public Mana produceMana(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            int amount = controller.rollDice(game, 6);
-            if (amount <= 3) {
-                return Mana.ColorlessMana(1);
-            } else {
-                return ManaChoice.chooseAnyColor(controller, game, 1);
+        if (game != null) {
+            Player controller = game.getPlayer(source.getControllerId());
+            if (controller != null) {
+                int amount = controller.rollDice(game, 6);
+                if (amount <= 3) {
+                    return Mana.ColorlessMana(1);
+                } else {
+                    return ManaChoice.chooseAnyColor(controller, game, 1);
+                }
             }
         }
-        return null;
+        return new Mana();
     }
 }

@@ -11,10 +11,7 @@ import mage.constants.*;
 import mage.game.Game;
 import org.junit.Assert;
 
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Adds condition to {@link ContinuousEffect}. Acts as decorator.
@@ -34,7 +31,7 @@ public class ConditionalContinuousEffect extends ContinuousEffectImpl {
     }
 
     /**
-     * Only use this if both effects have the same layers
+     * Only use this if both effects have the same layers (TODO: add tests to search it?)
      *
      * @param effect
      * @param otherwiseEffect
@@ -178,4 +175,13 @@ public class ConditionalContinuousEffect extends ContinuousEffectImpl {
         return super.isDependentTo(allEffectsInLayer);
     }
 
+    /**
+     * Return all effects list, for tests only
+     */
+    public List<ContinuousEffect> getAllEffects() {
+        List<ContinuousEffect> res = new ArrayList<>();
+        if (this.effect != null) res.add(this.effect);
+        if (this.otherwiseEffect != null) res.add(this.otherwiseEffect);
+        return res;
+    }
 }

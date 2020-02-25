@@ -21,6 +21,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -107,17 +108,18 @@ class ManaScrewEffect extends ManaEffect {
 
     @Override
     public List<Mana> getNetMana(Game game, Ability source) {
-        return null;
+        return new ArrayList<>();
     }
 
     @Override
     public Mana produceMana(Game game, Ability source) {
-        Player player = getPlayer(game, source);
-        if (player != null && player.flipCoin(source, game, true)) {
-            return Mana.ColorlessMana(2);
-        } else {
-            return new Mana();
+        if (game != null) {
+            Player player = getPlayer(game, source);
+            if (player != null && player.flipCoin(source, game, true)) {
+                return Mana.ColorlessMana(2);
+            }
         }
+        return new Mana();
     }
 }
 

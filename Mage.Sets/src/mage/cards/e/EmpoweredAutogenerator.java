@@ -70,21 +70,24 @@ class EmpoweredAutogeneratorManaEffect extends ManaEffect {
     @Override
     public List<Mana> getNetMana(Game game, Ability source) {
         List<Mana> netMana = new ArrayList<>();
-
-        Permanent sourcePermanent = game.getState().getPermanent(source.getSourceId());
-        if (sourcePermanent != null) {
-            int counters = sourcePermanent.getCounters(game).getCount(CounterType.CHARGE) + 1; // one counter will be added on real mana call
-            if (counters > 0) {
-                netMana.add(Mana.AnyMana(counters));
+        if (game != null) {
+            Permanent sourcePermanent = game.getState().getPermanent(source.getSourceId());
+            if (sourcePermanent != null) {
+                int counters = sourcePermanent.getCounters(game).getCount(CounterType.CHARGE) + 1; // one counter will be added on real mana call
+                if (counters > 0) {
+                    netMana.add(Mana.AnyMana(counters));
+                }
             }
         }
-
         return netMana;
     }
 
     @Override
     public Mana produceMana(Game game, Ability source) {
         Mana mana = new Mana();
+        if (game == null) {
+            return mana;
+        }
         game.applyEffects();
         Permanent sourcePermanent = game.getState().getPermanent(source.getSourceId());
         if (sourcePermanent == null) {
@@ -126,7 +129,6 @@ class EmpoweredAutogeneratorManaEffect extends ManaEffect {
                 mana.setGreen(counters);
                 break;
         }
-
         return mana;
     }
 

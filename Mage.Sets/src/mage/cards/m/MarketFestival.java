@@ -120,8 +120,11 @@ class MarketFestivalManaEffect extends ManaEffect {
 
     @Override
     public Mana produceMana(Game game, Ability source) {
-        Player controller = getPlayer(game, source);
-        return ManaChoice.chooseAnyColor(controller, game, 2);
+        if (game != null) {
+            Player controller = getPlayer(game, source);
+            return ManaChoice.chooseAnyColor(controller, game, 2);
+        }
+        return new Mana();
     }
 
 }

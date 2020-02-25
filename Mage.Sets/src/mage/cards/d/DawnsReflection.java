@@ -123,7 +123,10 @@ class DawnsReflectionManaEffect extends ManaEffect {
 
     @Override
     public Mana produceMana(Game game, Ability source) {
-        Player player = getPlayer(game, source);
-        return ManaChoice.chooseAnyColor(player, game, 2);
+        if (game != null) {
+            Player player = getPlayer(game, source);
+            return ManaChoice.chooseAnyColor(player, game, 2);
+        }
+        return new Mana();
     }
 }

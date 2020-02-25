@@ -107,6 +107,9 @@ class FaeburrowElderManaEffect extends ManaEffect {
     @Override
     public Mana produceMana(Game game, Ability source) {
         Mana mana = new Mana();
+        if (game == null) {
+            return mana;
+        }
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(source.getControllerId())) {
             if (mana.getBlack() == 0 && permanent.getColor(game).isBlack()) {
                 mana.increaseBlack();

@@ -4,11 +4,11 @@ import mage.Mana;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.constants.ColoredManaSymbol;
+import mage.constants.SubType;
 import mage.interfaces.rate.RateCallback;
 import mage.util.RandomUtil;
 
 import java.util.*;
-import mage.constants.SubType;
 
 /**
  * Builds deck from provided card pool.
@@ -17,14 +17,14 @@ import mage.constants.SubType;
  */
 public final class DeckBuilder {
 
-    private static final int DECK_COUNT40[] = {3, 6, 6, 4, 3, 2};
-    private static final int DECK_COUNT60[] = {4, 9, 9, 5, 5, 3};
-    private static final int DECK_COST[] = {1, 2, 3, 4, 6, 10};
+    private static final int[] DECK_COUNT40 = {3, 6, 6, 4, 3, 2};
+    private static final int[] DECK_COUNT60 = {4, 9, 9, 5, 5, 3};
+    private static final int[] DECK_COST = {1, 2, 3, 4, 6, 10};
     private static final int MIN_CARD_SCORE = 25;
     private static final int MIN_SOURCE = 3; // minmal number of sources for a mana color, will be taken also if ratio would give a lower number
     private static Deck deck;
 
-    private static int deckCount[];
+    private static int[] deckCount;
     private static int deckSize;
     private static int deckSpells;
     private static int deckLands;
@@ -87,26 +87,6 @@ public final class DeckBuilder {
     }
 
     /**
-     * Checks that chosen card can produce mana of specific color.
-     *
-     * @param card
-     * @param allowedColors
-     * @return
-     */
-    private static boolean cardCardProduceChosenColors(Card card, List<ColoredManaSymbol> allowedColors) {
-        int score = 0;
-        for (Mana mana : card.getMana()) {
-            for (ColoredManaSymbol color : allowedColors) {
-                score = score + mana.getColor(color);
-            }
-        }
-        if (score > 1) {
-            return true;
-        }
-        return false;
-    }
-
-    /**
      * Chosed best scored card and adds it to the deck.
      *
      * @param remainingCards
@@ -115,7 +95,7 @@ public final class DeckBuilder {
      * @param count
      */
     private static void addCardsToDeck(final Collection<MageScoredCard> remainingCards, final int minCost, final int maxCost,
-            final int count) {
+                                       final int count) {
 
         for (int c = count; c > 0; c--) {
 
@@ -231,7 +211,7 @@ public final class DeckBuilder {
         private Card card;
         private final int score;
 
-        private static final int SINGLE_PENALTY[] = {0, 1, 1, 3, 6, 9};
+        private static final int[] SINGLE_PENALTY = {0, 1, 1, 3, 6, 9};
         //private static final int DOUBLE_PENALTY[] = { 0, 0, 1, 2, 4, 6 };
 
         public MageScoredCard(Card card, List<ColoredManaSymbol> allowedColors, RateCallback cardRater) {
@@ -253,8 +233,8 @@ public final class DeckBuilder {
             this.score
                     = // 5*card.getValue() + // not possible now
                     3 * cardRater.rateCard(card)
-                    + // 3*card.getRemoval() + // not possible now
-                    type + getManaCostScore(card, allowedColors);
+                            + // 3*card.getRemoval() + // not possible now
+                            type + getManaCostScore(card, allowedColors);
         }
 
         private int getManaCostScore(Card card, List<ColoredManaSymbol> allowedColors) {

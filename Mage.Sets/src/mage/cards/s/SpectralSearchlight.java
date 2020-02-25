@@ -70,8 +70,11 @@ class SpectralSearchlightManaEffect extends ManaEffect {
 
     @Override
     public Mana produceMana(Game game, Ability source) {
-        Player player = getPlayer(game, source);
-        return ManaChoice.chooseAnyColor(player, game, 1);
+        if (game != null) {
+            Player player = getPlayer(game, source);
+            return ManaChoice.chooseAnyColor(player, game, 1);
+        }
+        return new Mana();
     }
 
     @Override

@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -19,10 +17,10 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
+
+import java.util.UUID;
 
 /**
- *
  * @author BetaSteward
  */
 public final class CagedSun extends CardImpl {
@@ -110,9 +108,7 @@ class CagedSunTriggeredAbility extends TriggeredManaAbility {
             Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
             if (permanent != null && permanent.isLand()) {
                 ObjectColor color = (ObjectColor) game.getState().getValue(this.sourceId + "_color");
-                if (color != null && event.getData().contains(color.toString())) {
-                    return true;
-                }
+                return color != null && event.getData().contains(color.toString());
             }
         }
         return false;
@@ -141,12 +137,13 @@ class CagedSunEffect extends ManaEffect {
 
     @Override
     public Mana produceMana(Game game, Ability source) {
-        ObjectColor color = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");
-        if (color != null) {
-            return new Mana(ColoredManaSymbol.lookup(color.toString().charAt(0)));
-        } else {
-            return null;
+        if (game != null) {
+            ObjectColor color = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");
+            if (color != null) {
+                return new Mana(ColoredManaSymbol.lookup(color.toString().charAt(0)));
+            }
         }
+        return new Mana();
     }
 
     @Override
