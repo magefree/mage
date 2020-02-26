@@ -34,8 +34,8 @@ public final class IgnoreList {
     public static String getIgnoreListInfo(String serverAddress) {
         List<String> list = new ArrayList<>(getIgnoredUsers(serverAddress));
         Collections.sort(list);
-        return "<font color=yellow>Current ignore list on " + serverAddress + " (" + list.size() + "): "
-                + String.join(", ", list)
+        return "<font color=yellow>Current ignore list on " + serverAddress + " (total: " + list.size() + "): "
+                + "[" + String.join(", ", list) + "]"
                 + "</font>";
     }
 
