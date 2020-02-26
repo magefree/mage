@@ -10,6 +10,7 @@ public class DuelCommander extends Commander {
     public DuelCommander() {
         super("Duel Commander");
         banned.add("Ancestral Recall");
+        banned.add("Ancient Tomb");
         banned.add("Back to Basics");
         banned.add("Black Lotus");
         banned.add("Channel");
@@ -37,6 +38,7 @@ public class DuelCommander extends Commander {
         banned.add("Mox Diamond");
         banned.add("Mox Emerald");
         banned.add("Mox Jet");
+        banned.add("Mox Opal");
         banned.add("Mox Pearl");
         banned.add("Mox Ruby");
         banned.add("Mox Sapphire");
@@ -49,10 +51,9 @@ public class DuelCommander extends Commander {
         banned.add("Protean Hulk");
         banned.add("Scapeshift");
         banned.add("Sensei's Divining Top");
-        banned.add("Shahrazad");
         banned.add("Sol Ring");
         banned.add("Strip Mine");
-        banned.add("Sulfuric Vortex");
+        banned.add("Thassa's Oracle");
         banned.add("The Tabernacle at Pendrell Vale");
         banned.add("Time Vault");
         banned.add("Time Walk");
@@ -63,6 +64,7 @@ public class DuelCommander extends Commander {
         banned.add("Vampiric Tutor");
 
         bannedCommander.add("Arahbo, Roar of the World");
+        bannedCommander.add("Baral, Chief of Compliance");
         bannedCommander.add("Breya, Etherium Shaper");
         bannedCommander.add("Bruse Tarl, Boorish Herder");
         bannedCommander.add("Derevi, Empyrial Tactician");
@@ -74,6 +76,7 @@ public class DuelCommander extends Commander {
         bannedCommander.add("Marath, Will of the Wild");
         bannedCommander.add("Najeela, the Blade-Blossom");
         bannedCommander.add("Oloro, Ageless Ascetic");
+        bannedCommander.add("Prime Speaker Vannifar");
         bannedCommander.add("Rofellos, Llanowar Emissary");
         bannedCommander.add("Tasigur, the Golden Fang");
         bannedCommander.add("Teferi, Temporal Archmage");
