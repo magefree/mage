@@ -46,6 +46,16 @@ public final class SystemUtil {
     private static final String INIT_FILE_PATH = "config" + File.separator + "init.txt";
     private static final org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(SystemUtil.class);
 
+    // replace ref group command like @group by real commands from that group
+    // example:
+    // [my group]
+    // command 1
+    // @another group
+    // [another group]
+    // command 2
+    // command 3
+    private static final String COMMAND_REF_PREFIX = "@";
+
     // transform special group names from init.txt to special commands in choose dialog:
     // [@mana add] -> MANA ADD
     private static final String COMMAND_MANA_ADD = "@mana add"; // TODO: not implemented
@@ -449,6 +459,28 @@ public final class SystemUtil {
                 }
 
                 return;
+            }
+
+            // insert group refs as extra commands (only user defined groups allowed, no special)
+            Map<String, CommandGroup> otherGroupRefs = new HashMap<>();
+            for (CommandGroup group : groups) {
+                if (group != runGroup) {
+                    otherGroupRefs.putIfAbsent(COMMAND_REF_PREFIX + group.name, group);
+                }
+            }
+            for (int i = runGroup.commands.size() - 1; i >= 0; i--) {
+                String line = runGroup.commands.get(i);
+                // replace ref by real commands from another group
+                if (line.startsWith(COMMAND_REF_PREFIX)) {
+                    CommandGroup other = otherGroupRefs.getOrDefault(line, null);
+                    if (other != null && !other.isSpecialCommand) {
+                        logger.info("Replace ref group " + line + " by " + other.commands.size() + " commands");
+                        runGroup.commands.remove(i);
+                        runGroup.commands.addAll(i, other.commands);
+                    } else {
+                        logger.error("Can't find ref group: " + line);
+                    }
+                }
             }
 
             // 4. run commands
