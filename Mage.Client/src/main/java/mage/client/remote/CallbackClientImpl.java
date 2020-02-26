@@ -451,10 +451,11 @@ public class CallbackClientImpl implements CallbackClient {
                         null, MessageType.USER_INFO, ChatMessage.MessageColor.BLUE);
                 break;
             case TABLES:
-                usedPanel.receiveMessage("", new StringBuilder("Download card images by using the \"Images\" menu to the top right .")
-                                .append("<br/>Download icons and symbols by using the \"Symbols\" menu to the top right.")
-                                .append("<br/>\\list - Show a list of available chat commands.")
-                                .append("<br/>").append(IgnoreList.usage())
+                String serverAddress = SessionHandler.getSession().getServerHostname().orElseGet(() -> "");
+                usedPanel.receiveMessage("", new StringBuilder("Download card images by using the \"Images\" main menu.")
+                                .append("<br/>Download icons and symbols by using the \"Symbols\" main menu.")
+                                .append("<br/>\\list - show a list of available chat commands.")
+                                .append("<br/>").append(IgnoreList.usage(serverAddress))
                                 .append("<br/>Type <font color=green>\\w yourUserName profanity 0 (or 1 or 2)</font> to turn off/on the profanity filter").toString(),
                         null, MessageType.USER_INFO, ChatMessage.MessageColor.BLUE);
                 break;

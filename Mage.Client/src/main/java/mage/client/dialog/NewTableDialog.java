@@ -619,7 +619,7 @@ public class NewTableDialog extends MageDialog {
         options.setEdhPowerLevel((Integer) this.spnEdhPowerLevel.getValue());
         options.setMullgianType((MulliganType) this.cbMulligan.getSelectedItem());
         String serverAddress = SessionHandler.getSession().getServerHostname().orElseGet(() -> "");
-        options.setBannedUsers(IgnoreList.ignoreList(serverAddress));
+        options.setBannedUsers(IgnoreList.getIgnoredUsers(serverAddress));
 
         return options;
     }

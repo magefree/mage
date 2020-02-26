@@ -1,11 +1,5 @@
 package mage.client.dialog;
 
-import java.awt.*;
-import java.io.File;
-import java.util.*;
-import java.util.List;
-import java.util.stream.Collectors;
-import javax.swing.*;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckFileFilter;
 import mage.cards.decks.importer.DeckImporter;
@@ -31,6 +25,13 @@ import mage.view.GameTypeView;
 import mage.view.TableView;
 import mage.view.TournamentTypeView;
 import org.apache.log4j.Logger;
+
+import javax.swing.*;
+import java.awt.*;
+import java.io.File;
+import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com, JayDi85
@@ -1259,7 +1260,7 @@ public class NewTournamentDialog extends MageDialog {
         }
 
         String serverAddress = SessionHandler.getSession().getServerHostname().orElseGet(() -> "");
-        tOptions.getMatchOptions().setBannedUsers(IgnoreList.ignoreList(serverAddress));
+        tOptions.getMatchOptions().setBannedUsers(IgnoreList.getIgnoredUsers(serverAddress));
 
         tOptions.getMatchOptions().setMatchTimeLimit((MatchTimeLimit) this.cbTimeLimit.getSelectedItem());
         tOptions.getMatchOptions().setSkillLevel((SkillLevel) this.cbSkillLevel.getSelectedItem());
