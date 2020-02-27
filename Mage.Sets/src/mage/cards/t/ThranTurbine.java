@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import mage.ConditionalMana;
@@ -33,8 +32,10 @@ public final class ThranTurbine extends CardImpl {
     public ThranTurbine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
-        // At the beginning of your upkeep, you may add {C} or {C}{C}. You can't spend this mana to cast spells.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ThranTurbineEffect(), TargetController.YOU, true));
+        // At the beginning of your upkeep, you may add {C} or {C}{C}. 
+        // You can't spend this mana to cast spells.
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
+                new ThranTurbineEffect(), TargetController.YOU, true));
     }
 
     public ThranTurbine(final ThranTurbine card) {
@@ -101,10 +102,6 @@ class ThranTurbineManaCondition extends ManaCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source, UUID originalId, Cost costToPay) {
-        if (!(source instanceof Spell)) {
-            Permanent permanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-            return permanent != null;
-        }
-        return false;
+        return !(source instanceof Spell);
     }
 }
