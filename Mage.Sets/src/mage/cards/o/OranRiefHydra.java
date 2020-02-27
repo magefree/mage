@@ -1,4 +1,3 @@
-
 package mage.cards.o;
 
 import java.util.UUID;
@@ -27,7 +26,7 @@ import mage.target.targetpointer.FixedTarget;
 public final class OranRiefHydra extends CardImpl {
 
     public OranRiefHydra(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
         this.subtype.add(SubType.HYDRA);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
@@ -35,7 +34,8 @@ public final class OranRiefHydra extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
 
-        // <i>Landfall</i> &mdash; Whenever a land enters the battlefield under your control, put a +1/+1 counter on Oran-Rief Hydra.
+        // <i>Landfall</i> &mdash; Whenever a land enters the battlefield 
+        // under your control, put a +1/+1 counter on Oran-Rief Hydra.
         // If that land is a Forest, put two +1/+1 counters on Oran-Rief Hydra instead.
         this.addAbility(new OranRiefHydraTriggeredAbility());
     }
@@ -52,7 +52,8 @@ public final class OranRiefHydra extends CardImpl {
 
 class OranRiefHydraTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String text = "<i>Landfall</i> &mdash; Whenever a land enters the battlefield under your control, put a +1/+1 counter on {this}. "
+    private static final String text = "<i>Landfall</i> &mdash; Whenever a "
+            + "land enters the battlefield under your control, put a +1/+1 counter on {this}. "
             + "If that land is a Forest, put two +1/+1 counters on {this} instead.";
 
     public OranRiefHydraTriggeredAbility() {
@@ -115,10 +116,15 @@ class OranRiefHydraEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent land = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+        // the LKI of the land to verify the last-known land type
+        Permanent landLKI = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+        Permanent land = game.getPermanent(getTargetPointer().getFirst(game, source));
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if (land != null && sourcePermanent != null) {
-            if (land.hasSubtype(SubType.FOREST, game)) {
+        // the land must be on the battlefield when the trigger resolves
+        if (land != null
+                && landLKI != null
+                && sourcePermanent != null) {
+            if (landLKI.hasSubtype(SubType.FOREST, game)) {
                 sourcePermanent.addCounters(CounterType.P1P1.createInstance(2), source, game);
             } else {
                 sourcePermanent.addCounters(CounterType.P1P1.createInstance(), source, game);
