@@ -1,5 +1,13 @@
-
 package mage.server;
+
+import mage.game.Game;
+import mage.interfaces.callback.ClientCallback;
+import mage.interfaces.callback.ClientCallbackMethod;
+import mage.view.ChatMessage;
+import mage.view.ChatMessage.MessageColor;
+import mage.view.ChatMessage.MessageType;
+import mage.view.ChatMessage.SoundToPlay;
+import org.apache.log4j.Logger;
 
 import java.text.DateFormat;
 import java.util.*;
@@ -8,13 +16,6 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
-import mage.interfaces.callback.ClientCallback;
-import mage.interfaces.callback.ClientCallbackMethod;
-import mage.view.ChatMessage;
-import mage.view.ChatMessage.MessageColor;
-import mage.view.ChatMessage.MessageType;
-import mage.view.ChatMessage.SoundToPlay;
-import org.apache.log4j.Logger;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -48,7 +49,7 @@ public class ChatSession {
                 } finally {
                     w.unlock();
                 }
-                broadcast(null, userName + " has joined (" + user.getClientVersion() + ')', MessageColor.BLUE, true, MessageType.STATUS, null);
+                broadcast(null, userName + " has joined (" + user.getClientVersion() + ')', MessageColor.BLUE, true, null, MessageType.STATUS, null);
                 logger.trace(userName + " joined chat " + chatId);
             }
         });
@@ -76,7 +77,7 @@ public class ChatSession {
                 String message = reason.getMessage();
 
                 if (!message.isEmpty()) {
-                    broadcast(null, userName + message, MessageColor.BLUE, true, MessageType.STATUS, null);
+                    broadcast(null, userName + message, MessageColor.BLUE, true, null, MessageType.STATUS, null);
                 }
             }
         } catch (Exception ex) {
@@ -86,7 +87,8 @@ public class ChatSession {
 
     public boolean broadcastInfoToUser(User toUser, String message) {
         if (clients.containsKey(toUser.getId())) {
-            toUser.fireCallback(new ClientCallback(ClientCallbackMethod.CHATMESSAGE, chatId, new ChatMessage(null, message, new Date(), MessageColor.BLUE, MessageType.USER_INFO, null)));
+            toUser.fireCallback(new ClientCallback(ClientCallbackMethod.CHATMESSAGE, chatId,
+                    new ChatMessage(null, message, new Date(), null, MessageColor.BLUE, MessageType.USER_INFO, null)));
             return true;
         }
         return false;
@@ -95,20 +97,21 @@ public class ChatSession {
     public boolean broadcastWhisperToUser(User fromUser, User toUser, String message) {
         if (clients.containsKey(toUser.getId())) {
             toUser.fireCallback(new ClientCallback(ClientCallbackMethod.CHATMESSAGE, chatId,
-                    new ChatMessage(fromUser.getName(), message, new Date(), MessageColor.YELLOW, MessageType.WHISPER_FROM, SoundToPlay.PlayerWhispered)));
+                    new ChatMessage(fromUser.getName(), message, new Date(), null, MessageColor.YELLOW, MessageType.WHISPER_FROM, SoundToPlay.PlayerWhispered)));
             if (clients.containsKey(fromUser.getId())) {
                 fromUser.fireCallback(new ClientCallback(ClientCallbackMethod.CHATMESSAGE, chatId,
-                        new ChatMessage(toUser.getName(), message, new Date(), MessageColor.YELLOW, MessageType.WHISPER_TO, null)));
+                        new ChatMessage(toUser.getName(), message, new Date(), null, MessageColor.YELLOW, MessageType.WHISPER_TO, null)));
                 return true;
             }
         }
         return false;
     }
 
-    public void broadcast(String userName, String message, MessageColor color, boolean withTime, MessageType messageType, SoundToPlay soundToPlay) {
+    public void broadcast(String userName, String message, MessageColor color, boolean withTime, Game game, MessageType messageType, SoundToPlay soundToPlay) {
         if (!message.isEmpty()) {
             Set<UUID> clientsToRemove = new HashSet<>();
-            ClientCallback clientCallback = new ClientCallback(ClientCallbackMethod.CHATMESSAGE, chatId, new ChatMessage(userName, message, (withTime ? new Date() : null), color, messageType, soundToPlay));
+            ClientCallback clientCallback = new ClientCallback(ClientCallbackMethod.CHATMESSAGE, chatId,
+                    new ChatMessage(userName, message, (withTime ? new Date() : null), game, color, messageType, soundToPlay));
             List<UUID> chatUserIds = new ArrayList<>();
             final Lock r = lock.readLock();
             r.lock();

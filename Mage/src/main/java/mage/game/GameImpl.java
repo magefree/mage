@@ -921,7 +921,7 @@ public abstract class GameImpl implements Game, Serializable {
         if (startMessage == null || startMessage.isEmpty()) {
             startMessage = "Game has started";
         }
-        fireStatusEvent(startMessage, false);
+        fireStatusEvent(startMessage, false, false);
 
         saveState(false);
 
@@ -2369,11 +2369,11 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public void fireStatusEvent(String message, boolean withTime) {
+    public void fireStatusEvent(String message, boolean withTime, boolean withTurnInfo) {
         if (simulation) {
             return;
         }
-        tableEventSource.fireTableEvent(EventType.STATUS, message, withTime, this);
+        tableEventSource.fireTableEvent(EventType.STATUS, message, withTime, withTurnInfo, this);
     }
 
     @Override

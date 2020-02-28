@@ -1,8 +1,4 @@
-
 package mage.client.chat;
-
-import java.awt.Font;
-import java.util.Date;
 
 import mage.client.SessionHandler;
 import mage.client.components.ColorPane;
@@ -10,8 +6,10 @@ import mage.client.util.GUISizeHelper;
 import mage.view.ChatMessage;
 import org.mage.card.arcane.ManaSymbols;
 
+import java.awt.*;
+import java.util.Date;
+
 /**
- *
  * @author LevelX2
  */
 public class ChatPanelSeparated extends ChatPanelBasic {
@@ -22,42 +20,42 @@ public class ChatPanelSeparated extends ChatPanelBasic {
      * Display message in the chat. Use different colors for timestamp, username
      * and message.
      *
-     * @param username message sender
-     * @param message message itself
-     * @param time timestamp
+     * @param username    message sender
+     * @param message     message itself
+     * @param time        timestamp
+     * @param turnInfo    game turn info, can be null for non game messages
      * @param messageType
-     * @param color Preferred color. Not used.
+     * @param color       Preferred color. Not used.
      */
     @Override
-    public void receiveMessage(String username, String message, Date time, ChatMessage.MessageType messageType, ChatMessage.MessageColor color) {
+    public void receiveMessage(String username, String message, Date time, String turnInfo, ChatMessage.MessageType messageType, ChatMessage.MessageColor color) {
+        String userColor;
+        String textColor;
+        String userSeparator = " ";
+        StringBuilder text = new StringBuilder();
         switch (messageType) {
             case TALK:
             case WHISPER_TO:
             case WHISPER_FROM:
             case USER_INFO:
-                super.receiveMessage(username, message, time, messageType, color);
+                // message in main chat
+                super.receiveMessage(username, message, time, turnInfo, messageType, color);
                 return;
-        }
-        StringBuilder text = new StringBuilder();
-        if (time != null) {
-            text.append(getColoredText(TIMESTAMP_COLOR, timeFormatter.format(time) + ": "));
-        }
-        String userColor;
-        String textColor;
-        String userSeparator = " ";
-        switch (messageType) {
-            case STATUS: // a message to all chat user
+            case STATUS:
                 textColor = STATUS_COLOR;
                 userColor = STATUS_COLOR;
                 break;
-            case USER_INFO: // a personal message
-                textColor = USER_INFO_COLOR;
-                userColor = USER_INFO_COLOR;
-                break;
             default:
+            case GAME:
                 userColor = SessionHandler.getUserName().equals(username) ? MY_COLOR : OPPONENT_COLOR;
                 textColor = MESSAGE_COLOR;
                 userSeparator = ": ";
+                break;
+        }
+
+        // message in game log
+        if (time != null) {
+            text.append(getColoredText(TIMESTAMP_COLOR, timeFormatter.format(time) + (turnInfo == null ? "" : ", " + turnInfo) + ": "));
         }
         if (color == ChatMessage.MessageColor.ORANGE) {
             textColor = "Orange";

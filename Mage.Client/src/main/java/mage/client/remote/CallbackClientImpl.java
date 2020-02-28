@@ -109,9 +109,9 @@ public class CallbackClientImpl implements CallbackClient {
                             }
                             // send the message to subchat if exists and it's not a game message
                             if (message.getMessageType() != MessageType.GAME && panel.getConnectedChat() != null) {
-                                panel.getConnectedChat().receiveMessage(message.getUsername(), message.getMessage(), message.getTime(), message.getMessageType(), ChatMessage.MessageColor.BLACK);
+                                panel.getConnectedChat().receiveMessage(message.getUsername(), message.getMessage(), message.getTime(), message.getTurnInfo(), message.getMessageType(), ChatMessage.MessageColor.BLACK);
                             } else {
-                                panel.receiveMessage(message.getUsername(), message.getMessage(), message.getTime(), message.getMessageType(), message.getColor());
+                                panel.receiveMessage(message.getUsername(), message.getMessage(), message.getTime(), message.getTurnInfo(), message.getMessageType(), message.getColor());
                             }
 
                         }
@@ -444,11 +444,11 @@ public class CallbackClientImpl implements CallbackClient {
                                 .append("<br/>").append("<b>/pings</b> - show players and watchers ping")
                                 .append("<br/>").append("<b>/fix</b> - fix freezed game")
                                 .toString(),
-                        null, MessageType.USER_INFO, ChatMessage.MessageColor.BLUE);
+                        null, null, MessageType.USER_INFO, ChatMessage.MessageColor.BLUE);
                 break;
             case TOURNAMENT:
                 usedPanel.receiveMessage("", "On this panel you can see the players, their state and the results of the games of the tournament. Also you can chat with the competitors of the tournament.",
-                        null, MessageType.USER_INFO, ChatMessage.MessageColor.BLUE);
+                        null, null, MessageType.USER_INFO, ChatMessage.MessageColor.BLUE);
                 break;
             case TABLES:
                 String serverAddress = SessionHandler.getSession().getServerHostname().orElseGet(() -> "");
@@ -457,7 +457,7 @@ public class CallbackClientImpl implements CallbackClient {
                                 .append("<br/>\\list - show a list of available chat commands.")
                                 .append("<br/>").append(IgnoreList.usage(serverAddress))
                                 .append("<br/>Type <font color=green>\\w yourUserName profanity 0 (or 1 or 2)</font> to turn off/on the profanity filter").toString(),
-                        null, MessageType.USER_INFO, ChatMessage.MessageColor.BLUE);
+                        null, null, MessageType.USER_INFO, ChatMessage.MessageColor.BLUE);
                 break;
             default:
                 break;

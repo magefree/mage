@@ -2,6 +2,7 @@ package mage.server;
 
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.game.Game;
 import mage.server.exceptions.UserNotFoundException;
 import mage.server.game.GameController;
 import mage.server.game.GameManager;
@@ -81,17 +82,9 @@ public enum ChatManager {
         }
     }
 
-    public void broadcast(UUID chatId, String userName, String message, MessageColor color, boolean withTime) {
-        this.broadcast(chatId, userName, message, color, withTime, MessageType.TALK);
-    }
-
-    public void broadcast(UUID chatId, String userName, String message, MessageColor color, boolean withTime, MessageType messageType) {
-        this.broadcast(chatId, userName, message, color, withTime, messageType, null);
-    }
-
     final Pattern cardNamePattern = Pattern.compile("\\[(.*?)\\]");
 
-    public void broadcast(UUID chatId, String userName, String message, MessageColor color, boolean withTime, MessageType messageType, SoundToPlay soundToPlay) {
+    public void broadcast(UUID chatId, String userName, String message, MessageColor color, boolean withTime, Game game, MessageType messageType, SoundToPlay soundToPlay) {
         ChatSession chatSession = chatSessions.get(chatId);
         if (chatSession != null) {
             if (message.startsWith("\\") || message.startsWith("/")) {
@@ -163,7 +156,7 @@ public enum ChatManager {
 
                 }
             }
-            chatSession.broadcast(userName, message, color, withTime, messageType, soundToPlay);
+            chatSession.broadcast(userName, message, color, withTime, game, messageType, soundToPlay);
         }
     }
 
@@ -324,7 +317,7 @@ public enum ChatManager {
             getChatSessions()
                     .stream()
                     .filter(chat -> chat.hasUser(userId))
-                    .forEach(session -> session.broadcast(user.getName(), message, color, true, MessageType.TALK, null));
+                    .forEach(session -> session.broadcast(user.getName(), message, color, true, null, MessageType.TALK, null));
 
         });
     }
@@ -334,7 +327,7 @@ public enum ChatManager {
                 -> getChatSessions()
                 .stream()
                 .filter(chat -> chat.hasUser(userId))
-                .forEach(chatSession -> chatSession.broadcast(null, user.getName() + " has reconnected", MessageColor.BLUE, true, MessageType.STATUS, null)));
+                .forEach(chatSession -> chatSession.broadcast(null, user.getName() + " has reconnected", MessageColor.BLUE, true, null, MessageType.STATUS, null)));
 
     }
 
@@ -357,7 +350,7 @@ public enum ChatManager {
 
             if (chatSessions.size() > 0) {
                 logger.info("INFORM OPPONENTS by " + user.getName() + ": " + message);
-                chatSessions.forEach(chatSession -> chatSession.broadcast(null, message, MessageColor.BLUE, true, MessageType.STATUS, null));
+                chatSessions.forEach(chatSession -> chatSession.broadcast(null, message, MessageColor.BLUE, true, null, MessageType.STATUS, null));
             }
         });
     }

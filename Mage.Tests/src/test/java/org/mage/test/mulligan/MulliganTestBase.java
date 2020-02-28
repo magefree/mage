@@ -61,8 +61,8 @@ public class MulliganTestBase {
             Mulligan mulligan = mulliganType.getMulligan(freeMulligans);
             Game game = new TwoPlayerDuel(LEFT, ONE, mulligan, 20) {
                 @Override
-                public void fireStatusEvent(String message, boolean withTime) {
-                    super.fireStatusEvent(message, withTime);
+                public void fireStatusEvent(String message, boolean withTime, boolean withTurnInfo) {
+                    super.fireStatusEvent(message, withTime, withTurnInfo);
                 }
 
                 @Override

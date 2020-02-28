@@ -1,5 +1,3 @@
-
-
 package mage.game.events;
 
 import mage.cards.Cards;
@@ -8,19 +6,19 @@ import mage.game.Game;
 import mage.game.draft.Draft;
 import mage.game.events.TableEvent.EventType;
 import mage.game.match.MatchOptions;
+import mage.game.tournament.MultiplayerRound;
 import mage.game.tournament.TournamentPairing;
 
 import java.io.Serializable;
 import java.util.UUID;
-import mage.game.tournament.MultiplayerRound;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class TableEventSource implements EventSource<TableEvent>, Serializable {
 
-    protected final EventDispatcher<TableEvent> dispatcher = new EventDispatcher<TableEvent>() {};
+    protected final EventDispatcher<TableEvent> dispatcher = new EventDispatcher<TableEvent>() {
+    };
 
     @Override
     public void addListener(Listener<TableEvent> listener) {
@@ -31,7 +29,7 @@ public class TableEventSource implements EventSource<TableEvent>, Serializable {
     public void removeAllListener() {
         dispatcher.removeAllListener();
     }
-        
+
 
     public void fireTableEvent(EventType eventType) {
         dispatcher.fireEvent(new TableEvent(eventType));
@@ -41,8 +39,8 @@ public class TableEventSource implements EventSource<TableEvent>, Serializable {
         dispatcher.fireEvent(new TableEvent(eventType, message, game));
     }
 
-    public void fireTableEvent(EventType eventType, String message, boolean withTime, Game game) {
-        dispatcher.fireEvent(new TableEvent(eventType, message, withTime, game));
+    public void fireTableEvent(EventType eventType, String message, boolean withTime, boolean withTurnInfo, Game game) {
+        dispatcher.fireEvent(new TableEvent(eventType, message, withTime, withTurnInfo, game));
     }
 
     public void fireTableEvent(EventType eventType, UUID playerId, String message, Game game) {
@@ -68,7 +66,7 @@ public class TableEventSource implements EventSource<TableEvent>, Serializable {
     public void fireTableEvent(EventType eventType, TournamentPairing pair, MatchOptions options) {
         dispatcher.fireEvent(new TableEvent(eventType, pair, options));
     }
-    
+
     public void fireTableEvent(EventType eventType, MultiplayerRound round, MatchOptions options) {
         dispatcher.fireEvent(new TableEvent(eventType, round, options));
     }

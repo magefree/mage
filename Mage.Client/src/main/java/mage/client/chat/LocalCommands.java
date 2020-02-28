@@ -68,7 +68,7 @@ public final class LocalCommands {
     private static void displayLocalCommandResponse(UUID chatId, String response) {
         final String text = new StringBuilder().append("<font color=yellow>").append(response).append("</font>").toString();
         ClientCallback chatMessage = new ClientCallback(ClientCallbackMethod.CHATMESSAGE, chatId,
-                new ChatMessage("", text, new Date(), ChatMessage.MessageColor.BLUE));
+                new ChatMessage("", text, new Date(), null, ChatMessage.MessageColor.BLUE));
         MageFrame.getInstance().processCallback(chatMessage);
     }
 }

@@ -1,4 +1,3 @@
-
 package mage.server.util;
 
 import mage.utils.StreamUtils;
@@ -122,7 +121,7 @@ public enum ServerMessagesUtil {
         }
 
         List<String> newMessages = new ArrayList<>();
-        try(Scanner scanner = new Scanner(is)) {
+        try (Scanner scanner = new Scanner(is)) {
             while (scanner.hasNextLine()) {
                 String message = scanner.nextLine();
                 if (!message.trim().isEmpty()) {
@@ -130,7 +129,7 @@ public enum ServerMessagesUtil {
                 }
             }
         } catch (Exception e) {
-            log.error(e, e);
+            log.error(e.getMessage(), e);
         } finally {
             StreamUtils.closeQuietly(is);
         }

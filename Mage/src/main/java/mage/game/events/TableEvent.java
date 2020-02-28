@@ -1,10 +1,5 @@
-
-
 package mage.game.events;
 
-import java.io.Serializable;
-import java.util.EventObject;
-import java.util.UUID;
 import mage.cards.Cards;
 import mage.cards.decks.Deck;
 import mage.game.Game;
@@ -13,8 +8,11 @@ import mage.game.match.MatchOptions;
 import mage.game.tournament.MultiplayerRound;
 import mage.game.tournament.TournamentPairing;
 
+import java.io.Serializable;
+import java.util.EventObject;
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class TableEvent extends EventObject implements ExternalEvent, Serializable {
@@ -37,6 +35,7 @@ public class TableEvent extends EventObject implements ExternalEvent, Serializab
     private MatchOptions options;
     private int timeout;
     private boolean withTime;
+    private boolean withTurnInfo;
 
     public TableEvent(EventType eventType) {
         super(eventType);
@@ -48,11 +47,16 @@ public class TableEvent extends EventObject implements ExternalEvent, Serializab
     }
 
     public TableEvent(EventType eventType, String message, boolean withTime, Game game) {
+        this(eventType, message, withTime, withTime, game); // turn info with time always (exception: start turn message)
+    }
+
+    public TableEvent(EventType eventType, String message, boolean withTime, boolean withTurnInfo, Game game) {
         super(game);
         this.game = game;
         this.message = message;
         this.eventType = eventType;
         this.withTime = withTime;
+        this.withTurnInfo = withTurnInfo;
     }
 
     public TableEvent(EventType eventType, String message, Cards cards, Game game) {
@@ -91,7 +95,7 @@ public class TableEvent extends EventObject implements ExternalEvent, Serializab
         this.options = options;
         this.eventType = eventType;
     }
-    
+
     public TableEvent(EventType eventType, MultiplayerRound round, MatchOptions options) {
         super(options);
         this.round = round;
@@ -134,7 +138,7 @@ public class TableEvent extends EventObject implements ExternalEvent, Serializab
     public TournamentPairing getPair() {
         return pair;
     }
-    
+
     public MultiplayerRound getMultiplayerRound() {
         return round;
     }
@@ -149,5 +153,9 @@ public class TableEvent extends EventObject implements ExternalEvent, Serializab
 
     public boolean getWithTime() {
         return withTime;
+    }
+
+    public boolean getWithTurnInfo() {
+        return withTurnInfo;
     }
 }

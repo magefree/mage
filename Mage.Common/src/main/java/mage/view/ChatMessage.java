@@ -1,12 +1,11 @@
-
-
 package mage.view;
+
+import mage.game.Game;
 
 import java.io.Serializable;
 import java.util.Date;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class ChatMessage implements Serializable {
@@ -14,6 +13,7 @@ public class ChatMessage implements Serializable {
 
     private String username;
     private Date time;
+    private String turnInfo;
     private String message;
     private MessageColor color;
     private SoundToPlay soundToPlay;
@@ -31,21 +31,37 @@ public class ChatMessage implements Serializable {
         PlayerLeft, PlayerQuitTournament, PlayerSubmittedDeck, PlayerWhispered
     }
 
-    public ChatMessage(String username, String message, Date time, MessageColor color) {
-        this(username, message, time, color, null);
+    public ChatMessage(String username, String message, Date time, Game game, MessageColor color) {
+        this(username, message, time, game, color, null);
     }
 
-    public ChatMessage(String username, String message, Date time, MessageColor color, SoundToPlay soundToPlay) {
-        this(username, message, time, color, MessageType.TALK, soundToPlay);
+    public ChatMessage(String username, String message, Date time, Game game, MessageColor color, SoundToPlay soundToPlay) {
+        this(username, message, time, null, color, MessageType.TALK, soundToPlay);
     }
-    
-    public ChatMessage(String username, String message, Date time, MessageColor color, MessageType messageType, SoundToPlay soundToPlay) {
+
+    public ChatMessage(String username, String message, Date time, Game game, MessageColor color, MessageType messageType, SoundToPlay soundToPlay) {
         this.username = username;
         this.message = message;
         this.time = time;
+        this.turnInfo = prepareTurnInfo(game);
         this.color = color;
         this.messageType = messageType;
         this.soundToPlay = soundToPlay;
+    }
+
+    private String prepareTurnInfo(Game game) {
+        // no turn info
+        if (game == null) {
+            return null;
+        }
+
+        // not started game
+        if (game.getStep() == null) {
+            return "T0";
+        }
+
+        // normal game
+        return "T" + game.getTurnNum() + "." + game.getStep().getType().getStepShortText();
     }
 
     public String getMessage() {
@@ -57,11 +73,11 @@ public class ChatMessage implements Serializable {
     }
 
     public boolean isUserMessage() {
-        return color != null && (color==MessageColor.BLUE || color==MessageColor.YELLOW);
+        return color != null && (color == MessageColor.BLUE || color == MessageColor.YELLOW);
     }
 
     public boolean isStatusMessage() {
-        return color != null && color== MessageColor.ORANGE;
+        return color != null && color == MessageColor.ORANGE;
     }
 
     public String getUsername() {
@@ -70,6 +86,10 @@ public class ChatMessage implements Serializable {
 
     public Date getTime() {
         return time;
+    }
+
+    public String getTurnInfo() {
+        return turnInfo;
     }
 
     public SoundToPlay getSoundToPlay() {

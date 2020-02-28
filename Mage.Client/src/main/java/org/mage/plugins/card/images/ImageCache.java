@@ -470,7 +470,7 @@ public final class ImageCache {
                 image = ImageIO.read(inputStream);
             }
         } catch (Exception e) {
-            LOGGER.error(e, e);
+            LOGGER.error(e.getMessage(), e);
         }
 
         return image;
@@ -488,7 +488,7 @@ public final class ImageCache {
                 ImageIO.write(image, format, outputStream);
             }
         } catch (IOException e) {
-            LOGGER.error(e, e);
+            LOGGER.error(e.getMessage(), e);
             imageFile.delete();
         }
         return image;

@@ -3826,7 +3826,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
             addAvatar(jPanel32, 32, false, false);
 
         } catch (Exception e) {
-            logger.error(e, e);
+            logger.error(e.getMessage(), e);
         }
     }
 

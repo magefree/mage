@@ -333,6 +333,6 @@ public class Turn implements Serializable {
             }
         }
         sb.append(')');
-        game.fireStatusEvent(sb.toString(), true);
+        game.fireStatusEvent(sb.toString(), true, false);
     }
 }

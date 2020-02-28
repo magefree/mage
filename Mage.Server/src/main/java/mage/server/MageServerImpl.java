@@ -10,7 +10,6 @@ import mage.cards.repository.ExpansionRepository;
 import mage.constants.ManaType;
 import mage.constants.PlayerAction;
 import mage.constants.TableState;
-import mage.game.GameException;
 import mage.game.Table;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.TournamentOptions;
@@ -494,7 +493,7 @@ public class MageServerImpl implements MageServer {
     public void sendChatMessage(final UUID chatId, final String userName, final String message) throws MageException {
         try {
             callExecutor.execute(
-                    () -> ChatManager.instance.broadcast(chatId, userName, StringEscapeUtils.escapeHtml4(message), MessageColor.BLUE, true, ChatMessage.MessageType.TALK, null)
+                    () -> ChatManager.instance.broadcast(chatId, userName, StringEscapeUtils.escapeHtml4(message), MessageColor.BLUE, true, null, ChatMessage.MessageType.TALK, null)
             );
         } catch (Exception ex) {
             handleException(ex);
@@ -1129,9 +1128,9 @@ public class MageServerImpl implements MageServer {
             execute("sendBroadcastMessage", sessionId, () -> {
                 for (User user : UserManager.instance.getUsers()) {
                     if (message.toLowerCase(Locale.ENGLISH).startsWith("warn")) {
-                        user.fireCallback(new ClientCallback(ClientCallbackMethod.SERVER_MESSAGE, null, new ChatMessage("SERVER", message, null, MessageColor.RED)));
+                        user.fireCallback(new ClientCallback(ClientCallbackMethod.SERVER_MESSAGE, null, new ChatMessage("SERVER", message, null, null, MessageColor.RED)));
                     } else {
-                        user.fireCallback(new ClientCallback(ClientCallbackMethod.SERVER_MESSAGE, null, new ChatMessage("SERVER", message, null, MessageColor.BLUE)));
+                        user.fireCallback(new ClientCallback(ClientCallbackMethod.SERVER_MESSAGE, null, new ChatMessage("SERVER", message, null, null, MessageColor.BLUE)));
                     }
                 }
             }, true);
