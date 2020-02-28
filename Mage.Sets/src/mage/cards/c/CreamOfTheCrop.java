@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -16,7 +15,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
-import mage.target.common.TargetCardInHand;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -28,11 +26,18 @@ public final class CreamOfTheCrop extends CardImpl {
     public CreamOfTheCrop(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
 
-        // Whenever a creature enters the battlefield under your control, you may look at the top X cards of your library, where X is that creature's power. If you do, put one of those cards on top of your library and the rest on the bottom of your library in any order.
+        // Whenever a creature enters the battlefield under your control, 
+        // you may look at the top X cards of your library, where X is that 
+        // creature's power. If you do, put one of those cards on top of your 
+        // library and the rest on the bottom of your library in any order.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD, new CreamOfTheCropEffect(),
                 StaticFilters.FILTER_PERMANENT_CREATURE, true, SetTargetPointer.PERMANENT,
-                "Whenever a creature enters the battlefield under your control, you may look at the top X cards of your library, where X is that creature's power. If you do, put one of those cards on top of your library and the rest on the bottom of your library in any order"));
+                "Whenever a creature enters the battlefield under your control, "
+                + "you may look at the top X cards of your library, where X "
+                + "is that creature's power. If you do, put one of those cards "
+                + "on top of your library and the rest on the bottom of "
+                + "your library in any order"));
     }
 
     public CreamOfTheCrop(final CreamOfTheCrop card) {
@@ -49,7 +54,10 @@ class CreamOfTheCropEffect extends OneShotEffect {
 
     CreamOfTheCropEffect() {
         super(Outcome.Benefit);
-        this.staticText = "look at the top X cards of your library, where X is that creature's power. If you do, put one of those cards on top of your library and the rest on the bottom of your library in any order";
+        this.staticText = "look at the top X cards of your library, "
+                + "where X is that creature's power. If you do, put "
+                + "one of those cards on top of your library and the "
+                + "rest on the bottom of your library in any order";
     }
 
     CreamOfTheCropEffect(final CreamOfTheCropEffect effect) {
@@ -68,8 +76,9 @@ class CreamOfTheCropEffect extends OneShotEffect {
         if (controller != null && permanent != null) {
             Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, permanent.getPower().getValue()));
             if (!cards.isEmpty()) {
-                TargetCard target = new TargetCardInHand(new FilterCard("card to put on top of your library"));
-                controller.choose(Outcome.Benefit, cards, target, game);
+                TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put on top of your library"));
+                target.setNotTarget(true);
+                controller.chooseTarget(Outcome.Benefit, cards, target, source, game);
                 Card card = cards.get(target.getFirstTarget(), game);
                 if (card != null) {
                     cards.remove(card);
