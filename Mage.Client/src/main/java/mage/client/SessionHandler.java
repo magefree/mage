@@ -35,7 +35,7 @@ public final class SessionHandler {
     public static void startSession(MageFrame mageFrame) {
 
         session = new SessionImpl(mageFrame);
-        session.setJsonLogActive("true".equals(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_LOG_AUTO_SAVE, "true")));
+        session.setJsonLogActive("true".equals(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_JSON_GAME_LOG_AUTO_SAVE, "true")));
     }
 
     public static void ping() {
