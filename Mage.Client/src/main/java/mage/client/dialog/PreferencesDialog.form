@@ -98,7 +98,7 @@
                       <Component id="main_gamelog" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="main_battlefield" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="39" max="32767" attributes="0"/>
+                      <EmptySpace pref="23" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -117,43 +117,23 @@
                 </Property>
               </Properties>
 
-              <Layout>
-                <DimensionLayout dim="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="cbDraftLogAutoSave" min="-2" max="-2" attributes="0"/>
-                              <Component id="cbGameJsonLogAutoSave" min="-2" max="-2" attributes="0"/>
-                              <Component id="cbGameLogAutoSave" alignment="0" min="-2" pref="505" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-                </DimensionLayout>
-                <DimensionLayout dim="1">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Component id="cbGameLogAutoSave" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="cbDraftLogAutoSave" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="cbGameJsonLogAutoSave" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-                </DimensionLayout>
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                <Property name="axis" type="int" value="3"/>
               </Layout>
               <SubComponents>
+                <Component class="javax.swing.JCheckBox" name="cbGameLogShowTurnInfo">
+                  <Properties>
+                    <Property name="selected" type="boolean" value="true"/>
+                    <Property name="text" type="java.lang.String" value="Show turn info in game logs (19:01 T2.DA: message)"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Add turn number and step info after time in game logs"/>
+                  </Properties>
+                </Component>
                 <Component class="javax.swing.JCheckBox" name="cbGameLogAutoSave">
                   <Properties>
                     <Property name="selected" type="boolean" value="true"/>
                     <Property name="text" type="java.lang.String" value="Save game logs     (to &quot;../Mage.Client/gamelogs/&quot; directory)"/>
                     <Property name="toolTipText" type="java.lang.String" value="The logs of all your games will be saved to the mentioned folder if this option is switched on."/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbGameLogAutoSaveActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbDraftLogAutoSave">
                   <Properties>
@@ -161,19 +141,12 @@
                     <Property name="text" type="java.lang.String" value="Save draft logs     (to &quot;../Mage.Client/gamelogs/&quot; directory)"/>
                     <Property name="toolTipText" type="java.lang.String" value="The logs of all your games will be saved to the mentioned folder if this option is switched on."/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbDraftLogAutoSaveActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbGameJsonLogAutoSave">
                   <Properties>
-                    <Property name="selected" type="boolean" value="true"/>
                     <Property name="text" type="java.lang.String" value="Save JSON game logs     (to &quot;../Mage.Client/gamelogsJson/&quot; directory)"/>
                     <Property name="toolTipText" type="java.lang.String" value="The JSON logs of all your games will be saved to the mentioned folder if this option is switched on."/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbGameJsonLogAutoSaveActionPerformed"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>

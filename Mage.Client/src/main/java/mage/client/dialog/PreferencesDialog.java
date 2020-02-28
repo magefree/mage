@@ -13,7 +13,6 @@ import mage.players.net.UserGroup;
 import mage.players.net.UserSkipPrioritySteps;
 import mage.remote.Connection;
 import mage.remote.Connection.ProxyType;
-import mage.remote.Session;
 import mage.view.UserRequestMessage;
 import org.apache.log4j.Logger;
 
@@ -71,6 +70,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_GUI_CARD_BATTLEFIELD_MIN_SIZE = "guiCardBattlefieldMinSize";
     public static final String KEY_GUI_CARD_BATTLEFIELD_MAX_SIZE = "guiCardBattlefieldMaxSize";
 
+    public static final String KEY_GAME_LOG_SHOW_TURN_INFO = "gameLogShowTurnInfo";
     public static final String KEY_GAME_LOG_AUTO_SAVE = "gameLogAutoSave";
     public static final String KEY_DRAFT_LOG_AUTO_SAVE = "draftLogAutoSave";
     public static final String KEY_JSON_GAME_LOG_AUTO_SAVE = "gameLogJsonAutoSave";
@@ -378,6 +378,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         tabsPanel = new javax.swing.JTabbedPane();
         tabMain = new javax.swing.JPanel();
         main_gamelog = new javax.swing.JPanel();
+        cbGameLogShowTurnInfo = new javax.swing.JCheckBox();
         cbGameLogAutoSave = new javax.swing.JCheckBox();
         cbDraftLogAutoSave = new javax.swing.JCheckBox();
         cbGameJsonLogAutoSave = new javax.swing.JCheckBox();
@@ -576,56 +577,26 @@ public class PreferencesDialog extends javax.swing.JDialog {
         tabsPanel.setMinimumSize(new java.awt.Dimension(532, 451));
 
         main_gamelog.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Game log"));
+        main_gamelog.setLayout(new javax.swing.BoxLayout(main_gamelog, javax.swing.BoxLayout.PAGE_AXIS));
+
+        cbGameLogShowTurnInfo.setSelected(true);
+        cbGameLogShowTurnInfo.setText("Show turn info in game logs (19:01 T2.DA: message)");
+        cbGameLogShowTurnInfo.setToolTipText("Add turn number and step info after time in game logs");
+        main_gamelog.add(cbGameLogShowTurnInfo);
 
         cbGameLogAutoSave.setSelected(true);
         cbGameLogAutoSave.setText("Save game logs     (to \"../Mage.Client/gamelogs/\" directory)");
         cbGameLogAutoSave.setToolTipText("The logs of all your games will be saved to the mentioned folder if this option is switched on.");
-        cbGameLogAutoSave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbGameLogAutoSaveActionPerformed(evt);
-            }
-        });
+        main_gamelog.add(cbGameLogAutoSave);
 
         cbDraftLogAutoSave.setSelected(true);
         cbDraftLogAutoSave.setText("Save draft logs     (to \"../Mage.Client/gamelogs/\" directory)");
         cbDraftLogAutoSave.setToolTipText("The logs of all your games will be saved to the mentioned folder if this option is switched on.");
-        cbDraftLogAutoSave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbDraftLogAutoSaveActionPerformed(evt);
-            }
-        });
+        main_gamelog.add(cbDraftLogAutoSave);
 
-        cbGameJsonLogAutoSave.setSelected(true);
         cbGameJsonLogAutoSave.setText("Save JSON game logs     (to \"../Mage.Client/gamelogsJson/\" directory)");
         cbGameJsonLogAutoSave.setToolTipText("The JSON logs of all your games will be saved to the mentioned folder if this option is switched on.");
-        cbGameJsonLogAutoSave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbGameJsonLogAutoSaveActionPerformed(evt);
-            }
-        });
-
-        org.jdesktop.layout.GroupLayout main_gamelogLayout = new org.jdesktop.layout.GroupLayout(main_gamelog);
-        main_gamelog.setLayout(main_gamelogLayout);
-        main_gamelogLayout.setHorizontalGroup(
-                main_gamelogLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(main_gamelogLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .add(main_gamelogLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                        .add(cbDraftLogAutoSave)
-                                        .add(cbGameJsonLogAutoSave)
-                                        .add(cbGameLogAutoSave, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 505, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        main_gamelogLayout.setVerticalGroup(
-                main_gamelogLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(main_gamelogLayout.createSequentialGroup()
-                                .add(cbGameLogAutoSave)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(cbDraftLogAutoSave)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(cbGameJsonLogAutoSave)
-                                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        main_gamelog.add(cbGameJsonLogAutoSave);
 
         main_card.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Card"));
 
@@ -869,7 +840,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                                 .add(main_gamelog, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(main_battlefield, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(39, Short.MAX_VALUE))
+                                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         main_card.getAccessibleContext().setAccessibleName("Game panel");
@@ -2758,6 +2729,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.cbShowStormCounter, KEY_GAME_SHOW_STORM_COUNTER, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbConfirmEmptyManaPool, KEY_GAME_CONFIRM_EMPTY_MANA_POOL, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbAskMoveToGraveOrder, KEY_GAME_ASK_MOVE_TO_GRAVE_ORDER, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.cbGameLogShowTurnInfo, KEY_GAME_LOG_SHOW_TURN_INFO, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbGameLogAutoSave, KEY_GAME_LOG_AUTO_SAVE, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbDraftLogAutoSave, KEY_DRAFT_LOG_AUTO_SAVE, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbGameJsonLogAutoSave, KEY_JSON_GAME_LOG_AUTO_SAVE, "true", "false", UPDATE_CACHE_POLICY);
@@ -3078,10 +3050,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnBattlefieldBGMBrowseActionPerformed
 
-    private void cbGameLogAutoSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbGameLogAutoSaveActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbGameLogAutoSaveActionPerformed
-
     private void nonLandPermanentsInOnePileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nonLandPermanentsInOnePileActionPerformed
 
     }//GEN-LAST:event_nonLandPermanentsInOnePileActionPerformed
@@ -3142,10 +3110,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbAskMoveToGraveOrderActionPerformed
 
-    private void cbDraftLogAutoSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDraftLogAutoSaveActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbDraftLogAutoSaveActionPerformed
-
     private void cbPassPriorityCastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPassPriorityCastActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbPassPriorityCastActionPerformed
@@ -3186,13 +3150,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private void cbBattlefieldFeedbackColorizingModeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbBattlefieldFeedbackColorizingModeActionPerformed
 
     }//GEN-LAST:event_cbBattlefieldFeedbackColorizingModeActionPerformed
-
-    private void cbGameJsonLogAutoSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbGameJsonLogAutoSaveActionPerformed
-        Session session = SessionHandler.getSession();
-        if (session != null) {
-            session.setJsonLogActive(cbGameJsonLogAutoSave.isSelected());
-        }
-    }//GEN-LAST:event_cbGameJsonLogAutoSaveActionPerformed
 
     private void displayLifeOnAvatarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_displayLifeOnAvatarActionPerformed
         // TODO add your handling code here:
@@ -3340,6 +3297,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         load(prefs, dialog.cbConfirmEmptyManaPool, KEY_GAME_CONFIRM_EMPTY_MANA_POOL, "true");
         load(prefs, dialog.cbAskMoveToGraveOrder, KEY_GAME_ASK_MOVE_TO_GRAVE_ORDER, "true");
 
+        load(prefs, dialog.cbGameLogShowTurnInfo, KEY_GAME_LOG_SHOW_TURN_INFO, "true");
         load(prefs, dialog.cbGameLogAutoSave, KEY_GAME_LOG_AUTO_SAVE, "true");
         load(prefs, dialog.cbDraftLogAutoSave, KEY_DRAFT_LOG_AUTO_SAVE, "true");
         load(prefs, dialog.cbGameJsonLogAutoSave, KEY_JSON_GAME_LOG_AUTO_SAVE, "true", "false");
@@ -3944,6 +3902,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox cbEnableSkipButtonsSounds;
     private javax.swing.JCheckBox cbGameJsonLogAutoSave;
     private javax.swing.JCheckBox cbGameLogAutoSave;
+    private javax.swing.JCheckBox cbGameLogShowTurnInfo;
     private javax.swing.JComboBox cbNumberOfDownloadThreads;
     private javax.swing.JCheckBox cbPassPriorityActivation;
     private javax.swing.JCheckBox cbPassPriorityCast;

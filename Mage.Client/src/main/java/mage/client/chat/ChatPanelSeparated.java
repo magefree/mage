@@ -55,7 +55,7 @@ public class ChatPanelSeparated extends ChatPanelBasic {
 
         // message in game log
         if (time != null) {
-            text.append(getColoredText(TIMESTAMP_COLOR, timeFormatter.format(time) + (turnInfo == null ? "" : ", " + turnInfo) + ": "));
+            text.append(getColoredText(TIMESTAMP_COLOR, timeFormatter.format(time) + getTurnInfoPart(turnInfo) + ": "));
         }
         if (color == ChatMessage.MessageColor.ORANGE) {
             textColor = "Orange";

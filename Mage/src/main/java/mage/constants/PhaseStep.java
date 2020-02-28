@@ -7,14 +7,14 @@ public enum PhaseStep {
     UNTAP("Untap", 0, "untap step", "UN"),
     UPKEEP("Upkeep", 1, "upkeep", "UP"), // card texts don't use the word "step" for this phase step
     DRAW("Draw", 2, "draw step", "DR"),
-    PRECOMBAT_MAIN("Precombat Main", 3, "precombat main step", "PM"),
+    PRECOMBAT_MAIN("Precombat Main", 3, "precombat main step", "M1"),
     BEGIN_COMBAT("Begin Combat", 4, "begin combat step", "BC"),
     DECLARE_ATTACKERS("Declare Attackers", 5, "declare attackers step", "DA"),
     DECLARE_BLOCKERS("Declare Blockers", 6, "declare blockers step", "DB"),
     FIRST_COMBAT_DAMAGE("First Combat Damage", 7, "first combat damage", "FCD"),
     COMBAT_DAMAGE("Combat Damage", 8, "combat damage step", "CD"),
     END_COMBAT("End Combat", 9, "end combat step", "EC"),
-    POSTCOMBAT_MAIN("Postcombat Main", 10, "postcombat main step", "PM"),
+    POSTCOMBAT_MAIN("Postcombat Main", 10, "postcombat main step", "M2"),
     END_TURN("End Turn", 11, "end turn step", "ET"),
     CLEANUP("Cleanup", 12, "cleanup step", "CL");
 
