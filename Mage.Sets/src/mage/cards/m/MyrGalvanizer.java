@@ -1,5 +1,3 @@
-
-
 package mage.cards.m;
 
 import java.util.UUID;
@@ -23,27 +21,31 @@ import mage.game.permanent.Permanent;
  * @author Loki
  */
 public final class MyrGalvanizer extends CardImpl {
+
     static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Myr creatures");
 
     static {
         filter.add(SubType.MYR.getPredicate());
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
-    public MyrGalvanizer (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");
+    public MyrGalvanizer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
         this.subtype.add(SubType.MYR);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         // Other Myr creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
-        
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
+
         // {1}, {T}: Untap each other Myr you control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MyrGalvanizerEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new MyrGalvanizerEffect(), new TapSourceCost());
         ability.addCost(new GenericManaCost(1));
         this.addAbility(ability);
     }
 
-    public MyrGalvanizer (final MyrGalvanizer card) {
+    public MyrGalvanizer(final MyrGalvanizer card) {
         super(card);
     }
 
@@ -66,8 +68,9 @@ class MyrGalvanizerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent permanent: game.getBattlefield().getActivePermanents(MyrGalvanizer.filter, source.getControllerId(), game)) {
-           if (!permanent.getId().equals(source.getSourceId())) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(
+                MyrGalvanizer.filter, source.getControllerId(), game)) {
+            if (!permanent.getId().equals(source.getSourceId())) {
                 permanent.untap(game);
             }
         }
