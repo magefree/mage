@@ -25,7 +25,8 @@ public final class Abeyance extends CardImpl {
     public Abeyance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");
 
-        // Until end of turn, target player can't cast instant or sorcery spells, and that player can't activate abilities that aren't mana abilities.
+        // Until end of turn, target player can't cast instant or sorcery 
+        // spells, and that player can't activate abilities that aren't mana abilities.
         this.getSpellAbility().addEffect(new AbeyanceEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
 
@@ -47,8 +48,8 @@ class AbeyanceEffect extends ContinuousRuleModifyingEffectImpl {
 
     AbeyanceEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment);
-        staticText = "Until end of turn, target player can't cast instant or sorcery spells, " +
-                "and that player can't activate abilities that aren't mana abilities";
+        staticText = "Until end of turn, target player can't cast instant or sorcery spells, "
+                + "and that player can't activate abilities that aren't mana abilities";
     }
 
     private AbeyanceEffect(final AbeyanceEffect effect) {
@@ -69,8 +70,8 @@ class AbeyanceEffect extends ContinuousRuleModifyingEffectImpl {
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject mageObject = game.getObject(source.getSourceId());
         if (mageObject != null) {
-            return "You can't cast instant or sorcery spells or activate abilities " +
-                    "that aren't mana abilities this turn (" + mageObject.getIdName() + ").";
+            return "You can't cast instant or sorcery spells or activate abilities "
+                    + "that aren't mana abilities this turn (" + mageObject.getIdName() + ").";
         }
         return null;
     }
@@ -78,7 +79,7 @@ class AbeyanceEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (source.getFirstTarget() != null
-                && source.getFirstTarget().equals(event.getPlayerId())) {
+                && !source.getFirstTarget().equals(event.getPlayerId())) {
             return false;
         }
         MageObject object = game.getObject(event.getSourceId());
@@ -91,7 +92,8 @@ class AbeyanceEffect extends ContinuousRuleModifyingEffectImpl {
         }
         if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY) {
             Optional<Ability> ability = game.getAbility(event.getTargetId(), event.getSourceId());
-            return ability.isPresent() && !(ability.get() instanceof ActivatedManaAbilityImpl);
+            return ability.isPresent()
+                    && !(ability.get() instanceof ActivatedManaAbilityImpl);
         }
         return false;
     }
