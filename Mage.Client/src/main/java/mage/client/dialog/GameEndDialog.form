@@ -19,7 +19,9 @@
     </Container>
   </NonVisualComponents>
   <Properties>
-    <Property name="title" type="java.lang.String" value="Game end information"/>
+    <Property name="title" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+      <Connection code="Localizer.getInstance().getMessage(&quot;lblGameEndInfo&quot;)" type="code"/>
+    </Property>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -69,8 +71,10 @@
         <Container class="javax.swing.JLayeredPane" name="tabResult">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Result">
-                <Property name="tabTitle" type="java.lang.String" value="Result"/>
+              <JTabbedPaneConstraints tabName="&lt;&#x7528;&#x6237;&#x4ee3;&#x7801;&gt;">
+                <Property name="tabTitle" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="Localizer.getInstance().getMessage(&quot;lblResult&quot;)" type="code"/>
+                </Property>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -107,7 +111,9 @@
                       <Font name="Tahoma" size="18" style="3"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="gameInfo"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="Localizer.getInstance().getMessage(&quot;lblGameInfo&quot;)" type="code"/>
+                    </Property>
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -121,7 +127,9 @@
                       <Font name="Tahoma" size="18" style="3"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="matchInfo"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="Localizer.getInstance().getMessage(&quot;lblMatchInfo&quot;)" type="code"/>
+                    </Property>
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -135,7 +143,9 @@
                       <Font name="Tahoma" size="18" style="3"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="additionalInfo"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="Localizer.getInstance().getMessage(&quot;lblAdditionalInfo&quot;)" type="code"/>
+                    </Property>
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -163,8 +173,10 @@
         <Container class="javax.swing.JPanel" name="tabStatistics">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Statistics">
-                <Property name="tabTitle" type="java.lang.String" value="Statistics"/>
+              <JTabbedPaneConstraints tabName="&lt;&#x7528;&#x6237;&#x4ee3;&#x7801;&gt;">
+                <Property name="tabTitle" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="Localizer.getInstance().getMessage(&quot;lblStatistics&quot;)" type="code"/>
+                </Property>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -228,12 +240,16 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="lblDurationGame">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Duration game:"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="Localizer.getInstance().getMessage(&quot;lblDurationGame&quot;) + &quot;:&quot;" type="code"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="txtDurationGame">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Duration Game"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="Localizer.getInstance().getMessage(&quot;lblDurationGame&quot;)" type="code"/>
+                </Property>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                     <EtchetBorder/>
@@ -243,7 +259,9 @@
             </Component>
             <Component class="javax.swing.JLabel" name="lblLife">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Life at end:"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="Localizer.getInstance().getMessage(&quot;lblLifeAtEnd&quot;)" type="code"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="txtLife">
@@ -257,7 +275,9 @@
             </Component>
             <Component class="javax.swing.JLabel" name="lblDurationMatch">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Duration match:"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="Localizer.getInstance().getMessage(&quot;lblDurationMatch&quot;)" type="code"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="txtDurationMatch">
@@ -271,7 +291,9 @@
             </Component>
             <Component class="javax.swing.JLabel" name="lblMatchScore">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Match score:"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="Localizer.getInstance().getMessage(&quot;lblMatchScore&quot;)" type="code"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="txtMatchScore">
@@ -285,7 +307,9 @@
             </Component>
             <Component class="javax.swing.JLabel" name="lblPlayerInfo">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Player info:"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="Localizer.getInstance().getMessage(&quot;lblPlayerInfo&quot;)" type="code"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="txtPlayerInfo">
@@ -303,7 +327,9 @@
     </Container>
     <Component class="javax.swing.JButton" name="btnOk">
       <Properties>
-        <Property name="text" type="java.lang.String" value="OK"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="Localizer.getInstance().getMessage(&quot;lblOK&quot;)" type="code"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOkActionPerformed"/>
