@@ -1,7 +1,7 @@
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleEvasionAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -17,8 +17,9 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
+import java.util.UUID;
+
 /**
- *
  * @author MarcoMarin
  */
 public final class ArgothianPixies extends CardImpl {
@@ -40,7 +41,7 @@ public final class ArgothianPixies extends CardImpl {
                 new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
 
         // Prevent all damage that would be dealt to Argothian Pixies by artifact creatures.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new ArgothianPixiesPreventDamageFromArtifactsEffect(Duration.WhileOnBattlefield)));
 
     }
@@ -74,7 +75,8 @@ class ArgothianPixiesPreventDamageFromArtifactsEffect extends PreventionEffectIm
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (super.applies(event, source, game)) {
-            if (game.getObject(event.getSourceId()).getCardType().contains(CardType.ARTIFACT)) {
+            MageObject sourceObject = game.getObject(event.getSourceId());
+            if (sourceObject != null && sourceObject.getCardType().contains(CardType.ARTIFACT)) {
                 return (event.getTargetId().equals(source.getSourceId()));
             }
         }

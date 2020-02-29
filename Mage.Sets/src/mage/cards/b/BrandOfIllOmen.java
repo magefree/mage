@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import mage.MageObject;
@@ -22,14 +21,13 @@ import java.util.Objects;
 import java.util.UUID;
 
 /**
- *
  * @author ciaccona007
  */
 public final class BrandOfIllOmen extends CardImpl {
 
     public BrandOfIllOmen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
-        
+
         this.subtype.add(SubType.AURA);
 
         // Enchant creature
@@ -95,11 +93,10 @@ class BrandOfIllOmenEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent brand = game.getPermanent(source.getSourceId());
-        if (brand != null && brand.getAttachedTo() != null) {
+        MageObject sourceObject = game.getObject(event.getSourceId());
+        if (sourceObject != null && brand != null && brand.getAttachedTo() != null) {
             UUID enchantedController = game.getPermanent(brand.getAttachedTo()).getControllerId();
-            if(Objects.equals(enchantedController, event.getPlayerId()) && game.getObject(event.getSourceId()).isCreature()) {
-                return true;
-            }
+            return Objects.equals(enchantedController, event.getPlayerId()) && sourceObject.isCreature();
         }
         return false;
     }

@@ -1,23 +1,24 @@
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.PreventAllDamageToSourceEffect;
 import mage.abilities.effects.common.combat.MustBeBlockedByAllSourceEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class MarblePriest extends CardImpl {
@@ -66,9 +67,11 @@ class MarblePriestPreventionEffect extends PreventAllDamageToSourceEffect {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
+        MageObject sourceObject = game.getObject(event.getSourceId());
         return super.applies(event, source, game)
                 && event.getFlag()
-                && game.getObject(event.getSourceId()).hasSubtype(SubType.WALL, game)
+                && sourceObject != null
+                && sourceObject.hasSubtype(SubType.WALL, game)
                 && event.getTargetId().equals(source.getSourceId());
     }
 }
