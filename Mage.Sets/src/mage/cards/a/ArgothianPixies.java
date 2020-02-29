@@ -60,7 +60,7 @@ class ArgothianPixiesPreventDamageFromArtifactsEffect extends PreventionEffectIm
 
     public ArgothianPixiesPreventDamageFromArtifactsEffect(Duration duration) {
         super(duration);
-        staticText = "Prevent all combat damage that would be dealt to {this} by artifact creatures";
+        staticText = "Prevent all damage that would be dealt to {this} by artifact creatures";
     }
 
     public ArgothianPixiesPreventDamageFromArtifactsEffect(final ArgothianPixiesPreventDamageFromArtifactsEffect effect) {
