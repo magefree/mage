@@ -1,10 +1,9 @@
 
-
- /*
- * DraftPane.java
- *
- * Created on Jan 7, 2011, 2:11:44 PM
- */
+/*
+* DraftPane.java
+*
+* Created on Jan 7, 2011, 2:11:44 PM
+*/
 package mage.client.draft;
 
 import java.awt.Component;
@@ -14,6 +13,7 @@ import java.util.UUID;
 import javax.swing.JComponent;
 import mage.client.MagePane;
 import mage.client.plugins.impl.Plugins;
+import mage.client.util.Localizer;
 
 /**
  *
@@ -50,7 +50,7 @@ public class DraftPane extends MagePane {
     }
 
     public void showDraft(UUID draftId) {
-        this.setTitle("Draft - " + draftId);
+        this.setTitle(Localizer.getInstance().getMessage("lblDraft") + " - " + draftId);
         this.draftPanel1.showDraft(draftId);
     }
 

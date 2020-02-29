@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import mage.client.MageFrame;
+import mage.client.util.Localizer;
 import mage.utils.MageVersion;
 import org.apache.log4j.Logger;
 import org.w3c.dom.events.EventListener;
@@ -373,14 +374,14 @@ public class WhatsNewDialog extends MageDialog {
         buttonRefresh = new javax.swing.JButton();
         panelData = new javax.swing.JPanel();
 
-        buttonCancel.setText("Close");
+        buttonCancel.setText(Localizer.getInstance().getMessage("lblClose"));
         buttonCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonCancelActionPerformed(evt);
             }
         });
 
-        buttonRefresh.setText("Refresh");
+        buttonRefresh.setText(Localizer.getInstance().getMessage("lblRefresh"));
         buttonRefresh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonRefreshActionPerformed(evt);

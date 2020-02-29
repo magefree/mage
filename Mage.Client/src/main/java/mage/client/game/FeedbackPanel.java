@@ -1,10 +1,9 @@
 
-
- /*
- * FeedbackPanel.java
- *
- * Created on 23-Dec-2009, 9:54:01 PM
- */
+/*
+* FeedbackPanel.java
+*
+* Created on 23-Dec-2009, 9:54:01 PM
+*/
 package mage.client.game;
 
 import java.awt.Component;
@@ -20,6 +19,7 @@ import mage.client.SessionHandler;
 import mage.client.chat.ChatPanelBasic;
 import mage.client.dialog.MageDialog;
 import mage.client.util.GUISizeHelper;
+import mage.client.util.Localizer;
 import mage.client.util.audio.AudioManager;
 import mage.client.util.gui.ArrowBuilder;
 import static mage.constants.Constants.Option.ORIGINAL_ID;
@@ -91,23 +91,23 @@ public class FeedbackPanel extends javax.swing.JPanel {
                 setButtonState("", "", mode);
                 break;
             case QUESTION:
-                setButtonState("Yes", "No", mode);
+                setButtonState(Localizer.getInstance().getMessage("lblYes"), Localizer.getInstance().getMessage("lblNo"), mode);
                 if (options != null && options.containsKey(ORIGINAL_ID)) {
                     this.helper.setOriginalId((UUID) options.get(ORIGINAL_ID));
                 }
                 break;
             case CONFIRM:
-                setButtonState("OK", "Cancel", mode);
+                setButtonState(Localizer.getInstance().getMessage("lblOK"), Localizer.getInstance().getMessage("lblCancel"), mode);
                 break;
             case CANCEL:
-                setButtonState("", "Cancel", mode);
+                setButtonState("", Localizer.getInstance().getMessage("lblCancel"), mode);
                 this.helper.setUndoEnabled(false);
                 break;
             case SELECT:
-                setButtonState("", "Done", mode);
+                setButtonState("", Localizer.getInstance().getMessage("lblDone"), mode);
                 break;
             case END:
-                setButtonState("", "Close game", mode);
+                setButtonState("", Localizer.getInstance().getMessage("lblCloseGame"), mode);
                 ArrowBuilder.getBuilder().removeAllArrows(gameId);
                 endWithTimeout();
                 break;
@@ -229,16 +229,16 @@ public class FeedbackPanel extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(0, 0, 0, 80));
 
-        btnRight.setText("Cancel");
+        btnRight.setText(Localizer.getInstance().getMessage("lblCancel"));
         btnRight.addActionListener(evt -> btnRightActionPerformed(evt));
 
-        btnLeft.setText("OK");
+        btnLeft.setText(Localizer.getInstance().getMessage("lblOK"));
         btnLeft.addActionListener(evt -> btnLeftActionPerformed(evt));
 
-        btnSpecial.setText("Special");
+        btnSpecial.setText(Localizer.getInstance().getMessage("lblSpecial"));
         btnSpecial.addActionListener(evt -> btnSpecialActionPerformed(evt));
 
-        btnUndo.setText("Undo");
+        btnUndo.setText(Localizer.getInstance().getMessage("lblUndo"));
         btnUndo.addActionListener(evt -> btnUndoActionPerformed(evt));
 
     }
@@ -287,9 +287,9 @@ public class FeedbackPanel extends javax.swing.JPanel {
     }
 
     public void pressOKYesOrDone() {
-        if (btnLeft.getText().equals("OK") || btnLeft.getText().equals("Yes")) {
+        if (btnLeft.getText().equals(Localizer.getInstance().getMessage("lblOK")) || btnLeft.getText().equals(Localizer.getInstance().getMessage("lblYes"))) {
             btnLeft.doClick();
-        } else if (btnRight.getText().equals("OK") || btnRight.getText().equals("Yes") || btnRight.getText().equals("Done")) {
+        } else if (btnRight.getText().equals(Localizer.getInstance().getMessage("lblOK")) || btnRight.getText().equals(Localizer.getInstance().getMessage("lblYes")) || btnRight.getText().equals(Localizer.getInstance().getMessage("lblDone"))) {
             btnRight.doClick();
         }
     }

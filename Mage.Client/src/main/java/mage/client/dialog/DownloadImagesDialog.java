@@ -1,6 +1,7 @@
 package mage.client.dialog;
 
 import mage.client.MageFrame;
+import mage.client.util.Localizer;
 import mage.client.util.gui.FastSearchUtil;
 import mage.client.util.gui.MageDialogState;
 
@@ -43,7 +44,7 @@ public class DownloadImagesDialog extends MageDialog {
         sizeModeMessageOnly.width = sizeModeMessageOnly.width / 2;
 
         // Close the dialog when Esc is pressed
-        String cancelName = "cancel";
+        String cancelName = Localizer.getInstance().getMessage("lblCancel");
         InputMap inputMap = getRootPane().getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), cancelName);
         ActionMap actionMap = getRootPane().getActionMap();
@@ -175,8 +176,8 @@ public class DownloadImagesDialog extends MageDialog {
         //this.setLocationRelativeTo(null); // center screen //FIX
 
         // icons on tabs left side
-        setTabTitle(0, "Standard download", "/buttons/card_panel.png");
-        setTabTitle(1, "Custom download", "/buttons/list_panel.png");
+        setTabTitle(0, Localizer.getInstance().getMessage("lblStandardDownload"), "/buttons/card_panel.png");
+        setTabTitle(1, Localizer.getInstance().getMessage("lblCustomDownload"), "/buttons/list_panel.png");
 
         // TODO: add manual mode as tab
         this.tabsList.getTabComponentAt(1).setEnabled(false);
@@ -238,18 +239,18 @@ public class DownloadImagesDialog extends MageDialog {
         buttonOK = new javax.swing.JButton();
         buttonCancel = new javax.swing.JButton();
 
-        setTitle("Downloading images");
+        setTitle(Localizer.getInstance().getMessage("lblDownloadingImages"));
         setPreferredSize(new java.awt.Dimension(600, 400));
         getContentPane().setLayout(new java.awt.BorderLayout());
 
         panelGlobal.setLayout(new javax.swing.BoxLayout(panelGlobal, javax.swing.BoxLayout.Y_AXIS));
         panelGlobal.add(fillerGlobal1);
 
-        labelGlobal.setText("Initializing image download...");
+        labelGlobal.setText(Localizer.getInstance().getMessage("lblInitializingImageDownload"));
         labelGlobal.setAlignmentX(0.5F);
         panelGlobal.add(labelGlobal);
 
-        buttonStop.setText("Cancel");
+        buttonStop.setText(Localizer.getInstance().getMessage("lblCancel"));
         buttonStop.setAlignmentX(0.5F);
         buttonStop.setPreferredSize(new java.awt.Dimension(65, 30));
         buttonStop.addActionListener(new java.awt.event.ActionListener() {
@@ -284,7 +285,7 @@ public class DownloadImagesDialog extends MageDialog {
         panelSourceLeft.setMinimumSize(new java.awt.Dimension(430, 30));
         panelSourceLeft.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING));
 
-        labelSource.setText("Images source to download:");
+        labelSource.setText(Localizer.getInstance().getMessage("lblDownloadImageSource"));
         panelSourceLeft.add(labelSource);
 
         comboSource.setMaximumRowCount(15);
@@ -301,7 +302,7 @@ public class DownloadImagesDialog extends MageDialog {
         panelSourceRight.setPreferredSize(new java.awt.Dimension(130, 100));
         panelSourceRight.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING));
 
-        labelLanguage.setText("Language:");
+        labelLanguage.setText(Localizer.getInstance().getMessage("lblLanguages"));
         panelSourceRight.add(labelLanguage);
 
         comboLanguage.setMaximumRowCount(15);
@@ -321,7 +322,7 @@ public class DownloadImagesDialog extends MageDialog {
         panelModeInner.setMinimumSize(new java.awt.Dimension(430, 43));
         panelModeInner.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        labelMode.setText("Sets to download:");
+        labelMode.setText(Localizer.getInstance().getMessage("lblSetsToDownload"));
         labelMode.setAlignmentY(0.0F);
         panelModeInner.add(labelMode);
 
@@ -354,7 +355,7 @@ public class DownloadImagesDialog extends MageDialog {
         panelRedownload.setPreferredSize(new java.awt.Dimension(130, 100));
         panelRedownload.setLayout(new java.awt.BorderLayout());
 
-        checkboxRedownload.setText("<html>Re-download selected images");
+        checkboxRedownload.setText(Localizer.getInstance().getMessage("htmlReDownloadSelectedImages"));
         checkboxRedownload.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         panelRedownload.add(checkboxRedownload, java.awt.BorderLayout.CENTER);
         panelRedownload.add(filler1, java.awt.BorderLayout.PAGE_END);
@@ -380,22 +381,22 @@ public class DownloadImagesDialog extends MageDialog {
         tabMain.add(panelProgress);
         tabMain.add(fillerMain2);
 
-        tabsList.addTab("Standard download", new javax.swing.ImageIcon(getClass().getResource("/buttons/card_panel.png")), tabMain); // NOI18N
+        tabsList.addTab(Localizer.getInstance().getMessage("lblStandardDownload"), new javax.swing.ImageIcon(getClass().getResource("/buttons/card_panel.png")), tabMain); // NOI18N
 
         tabCustom.setLayout(new javax.swing.BoxLayout(tabCustom, javax.swing.BoxLayout.Y_AXIS));
-        tabsList.addTab("Custom download", new javax.swing.ImageIcon(getClass().getResource("/buttons/list_panel.png")), tabCustom); // NOI18N
+        tabsList.addTab(Localizer.getInstance().getMessage("lblCustomDownload"), new javax.swing.ImageIcon(getClass().getResource("/buttons/list_panel.png")), tabCustom); // NOI18N
 
         getContentPane().add(tabsList, java.awt.BorderLayout.CENTER);
 
         panelCommands.setAlignmentX(0.0F);
         panelCommands.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.TRAILING));
 
-        buttonOK.setText("Start download");
+        buttonOK.setText(Localizer.getInstance().getMessage("lblStartDownload"));
         buttonOK.setPreferredSize(new java.awt.Dimension(120, 30));
         panelCommands.add(buttonOK);
         getRootPane().setDefaultButton(buttonOK);
 
-        buttonCancel.setText("Cancel");
+        buttonCancel.setText(Localizer.getInstance().getMessage("lblCancel"));
         buttonCancel.setPreferredSize(new java.awt.Dimension(80, 30));
         panelCommands.add(buttonCancel);
 

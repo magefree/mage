@@ -7,6 +7,7 @@ import mage.client.MageFrame;
 import mage.client.SessionHandler;
 import mage.client.preference.MagePreferences;
 import mage.client.util.ClientDefaultSettings;
+import mage.client.util.Localizer;
 import mage.client.util.gui.countryBox.CountryItemEditor;
 import mage.client.util.sets.ConstructedFormats;
 import mage.remote.Connection;
@@ -136,49 +137,49 @@ public class ConnectDialog extends MageDialog {
         btnWhatsNew = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
-        setTitle("Connect to server");
+        setTitle(Localizer.getInstance().getMessage("lblConnectToServer"));
 
         lblServer.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblServer.setLabelFor(txtServer);
-        lblServer.setText("Server name:");
+        lblServer.setText(Localizer.getInstance().getMessage("lblServerName") + ":");
 
         lblUserName.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblUserName.setLabelFor(txtUserName);
-        lblUserName.setText("Username:");
+        lblUserName.setText(Localizer.getInstance().getMessage("lblUserName") + ":");
 
         lblPassword.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblPassword.setLabelFor(txtPassword);
-        lblPassword.setText("Password:");
+        lblPassword.setText(Localizer.getInstance().getMessage("lblPassword") + ":");
 
         lblFlag.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblFlag.setLabelFor(txtUserName);
-        lblFlag.setText("User's flag:");
+        lblFlag.setText(Localizer.getInstance().getMessage("lblUserFlag") + ":");
 
-        chkAutoConnect.setText("Automatically connect to this server next time");
-        chkAutoConnect.setToolTipText("<HTML>If active this connect dialog will not be shown if you choose to connect.<br>\nInstead XMage tries to connect to the last server you were connected to.");
+        chkAutoConnect.setText(Localizer.getInstance().getMessage("lblNextTimeAutomaticallyConnectToServer"));
+        chkAutoConnect.setToolTipText(Localizer.getInstance().getMessage("htmlAutomaticallyConnectDest"));
         chkAutoConnect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 chkAutoConnectActionPerformed(evt);
             }
         });
 
-        chkForceUpdateDB.setText("Force update of card database");
-        chkForceUpdateDB.setToolTipText("<HTML>If active the comparison of the server cards database to the client database will be enforced.<br>If not, the comparison will only done if the database version of the client is lower than the version of the server.");
+        chkForceUpdateDB.setText(Localizer.getInstance().getMessage("lblForceUpdateCardDatabase"));
+        chkForceUpdateDB.setToolTipText(Localizer.getInstance().getMessage("htmlForceUpdateCardDatabaseDest"));
         chkForceUpdateDB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 chkForceUpdateDBActionPerformed(evt);
             }
         });
 
-        jProxySettingsButton.setText("Proxy Settings...");
+        jProxySettingsButton.setText(Localizer.getInstance().getMessage("lblProxySettings"));
         jProxySettingsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jProxySettingsButtonActionPerformed(evt);
             }
         });
 
-        btnConnect.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnConnect.setText("Connect to server");
+        btnConnect.setFont(new java.awt.Font("Microsoft YaHei", 1, 11)); // NOI18N
+        btnConnect.setText(Localizer.getInstance().getMessage("lblConnectToServer"));
         btnConnect.setMargin(new java.awt.Insets(2, 2, 2, 2));
         btnConnect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -186,7 +187,7 @@ public class ConnectDialog extends MageDialog {
             }
         });
 
-        btnCancel.setText("Cancel");
+        btnCancel.setText(Localizer.getInstance().getMessage("lblCancel"));
         btnCancel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnCancel.setMargin(new java.awt.Insets(2, 2, 2, 2));
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -195,8 +196,8 @@ public class ConnectDialog extends MageDialog {
             }
         });
 
-        btnRegister.setText("Register new user...");
-        btnRegister.setToolTipText("<html>XMage now supports user authentication.<br>Register your account before you log in.<html>");
+        btnRegister.setText(Localizer.getInstance().getMessage("lblRegisterNewUser"));
+        btnRegister.setToolTipText(Localizer.getInstance().getMessage("htmlRegisterNewUserDest"));
         btnRegister.setMargin(new java.awt.Insets(2, 2, 2, 2));
         btnRegister.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -204,8 +205,8 @@ public class ConnectDialog extends MageDialog {
             }
         });
 
-        btnForgotPassword.setText("Forgot password...");
-        btnForgotPassword.setToolTipText("<html>You can reset your password if you have registered<br>your account with an email address.</html>");
+        btnForgotPassword.setText(Localizer.getInstance().getMessage("lblForgotPassword"));
+        btnForgotPassword.setToolTipText(Localizer.getInstance().getMessage("htmlForgotPasswordDest"));
         btnForgotPassword.setMargin(new java.awt.Insets(2, 2, 2, 2));
         btnForgotPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -215,7 +216,7 @@ public class ConnectDialog extends MageDialog {
 
         lblFastConnect.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblFastConnect.setLabelFor(btnFindMain);
-        lblFastConnect.setText("Connect to:");
+        lblFastConnect.setText(Localizer.getInstance().getMessage("lblConnectTo") + ":");
         lblFastConnect.setName(""); // NOI18N
 
         panelFlag.setMinimumSize(new java.awt.Dimension(50, 33));
@@ -242,7 +243,7 @@ public class ConnectDialog extends MageDialog {
 
         btnFindMain.setIcon(new javax.swing.ImageIcon(getClass().getResource("/flags/de.png"))); // NOI18N
         btnFindMain.setText("X");
-        btnFindMain.setToolTipText("Connect to xmage.de (Europe, most popular, registration needs)");
+        btnFindMain.setToolTipText(Localizer.getInstance().getMessage("lblDeServerDest"));
         btnFindMain.setActionCommand("connectXmageDe");
         btnFindMain.setAlignmentY(0.0F);
         btnFindMain.setMargin(new java.awt.Insets(2, 2, 2, 2));
@@ -257,7 +258,7 @@ public class ConnectDialog extends MageDialog {
         });
 
         btnFindLocal.setText("LOCAL, AI");
-        btnFindLocal.setToolTipText("Connect to localhost, AI enabled (run local server from launcher)");
+        btnFindLocal.setToolTipText(Localizer.getInstance().getMessage("lblLocalhostServerDest"));
         btnFindLocal.setActionCommand("connectLocalhost");
         btnFindLocal.setAlignmentY(0.0F);
         btnFindLocal.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -271,7 +272,7 @@ public class ConnectDialog extends MageDialog {
         });
 
         btnFindBeta.setText("BETA, AI");
-        btnFindBeta.setToolTipText("Connect to BETA server, AI enabled (use any username without registration)");
+        btnFindBeta.setToolTipText(Localizer.getInstance().getMessage("lblBetaServerDest"));
         btnFindBeta.setAlignmentY(0.0F);
         btnFindBeta.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnFindBeta.setMargin(new java.awt.Insets(2, 2, 2, 2));
@@ -284,7 +285,7 @@ public class ConnectDialog extends MageDialog {
 
         btnFindUs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/flags/us.png"))); // NOI18N
         btnFindUs.setText("US");
-        btnFindUs.setToolTipText("Connect to us.xmage.today (USA, use any username without registration)");
+        btnFindUs.setToolTipText(Localizer.getInstance().getMessage("lblUSServerDest"));
         btnFindUs.setActionCommand("connectXmageus");
         btnFindUs.setAlignmentY(0.0F);
         btnFindUs.setMargin(new java.awt.Insets(2, 2, 2, 2));
@@ -296,8 +297,8 @@ public class ConnectDialog extends MageDialog {
             }
         });
 
-        btnFindOther.setText("Other servers...");
-        btnFindOther.setToolTipText("Choose server from full servers list");
+        btnFindOther.setText(Localizer.getInstance().getMessage("lblOtherServers"));
+        btnFindOther.setToolTipText(Localizer.getInstance().getMessage("lblOtherServersDest"));
         btnFindOther.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnFindOther.setName("findServerBtn"); // NOI18N
         btnFindOther.addActionListener(new java.awt.event.ActionListener() {
@@ -343,11 +344,11 @@ public class ConnectDialog extends MageDialog {
         });
 
         lblPort.setLabelFor(txtPort);
-        lblPort.setText("Port:");
+        lblPort.setText(Localizer.getInstance().getMessage("lblPort") + ":");
 
         btnCheckStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/flags/world.png"))); // NOI18N
-        btnCheckStatus.setText("Check online status");
-        btnCheckStatus.setToolTipText("Go to servers online statuses page");
+        btnCheckStatus.setText(Localizer.getInstance().getMessage("lblCheckOnlineStatus"));
+        btnCheckStatus.setToolTipText(Localizer.getInstance().getMessage("lblOnlineCheckDest"));
         btnCheckStatus.setAlignmentY(0.0F);
         btnCheckStatus.setMargin(new java.awt.Insets(2, 2, 2, 2));
         btnCheckStatus.setPreferredSize(new java.awt.Dimension(23, 23));
@@ -382,14 +383,14 @@ public class ConnectDialog extends MageDialog {
                     .addComponent(btnCheckStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
-        btnWhatsNew.setText("Show what's new");
+        btnWhatsNew.setText(Localizer.getInstance().getMessage("lblShowNews"));
         btnWhatsNew.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnWhatsNewActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("(use empty password for servers without registration)");
+        jLabel1.setText(Localizer.getInstance().getMessage("lblUseEmptyPWIfNoNeedRegistration"));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -652,7 +653,7 @@ public class ConnectDialog extends MageDialog {
             }
 
             if (p == null) {
-                JOptionPane.showMessageDialog(null, "Couldn't configure Proxy object!", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, Localizer.getInstance().getMessage("lblCouldntConfigureProxy"), Localizer.getInstance().getMessage("lblError"), JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
@@ -691,12 +692,12 @@ public class ConnectDialog extends MageDialog {
                 }
             }
             if (servers.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Couldn't find any server.");
+                JOptionPane.showMessageDialog(null, Localizer.getInstance().getMessage("lblCouldntFindAnyServer"));
                 return;
             }
 
             String selectedServer = (String) JOptionPane.showInputDialog(null,
-                    "Choose XMage Public Server:", "Input",
+            Localizer.getInstance().getMessage("lblChooseXMagePublicServer"), Localizer.getInstance().getMessage("lblInput"),
                     JOptionPane.INFORMATION_MESSAGE, null, servers.toArray(),
                     servers.get(0));
             if (selectedServer != null) {
@@ -709,7 +710,7 @@ public class ConnectDialog extends MageDialog {
                     this.txtUserName.setText(MagePreferences.getUserName(serverAddress));
                     this.txtPassword.setText(MagePreferences.getPassword(serverAddress));
                 } else {
-                    JOptionPane.showMessageDialog(null, "Wrong server data format.");
+                    JOptionPane.showMessageDialog(null, Localizer.getInstance().getMessage("lblWrongServerDataFormat"));
                 }
             }
 

@@ -4,6 +4,7 @@ package mage.client.dialog;
 import mage.cards.decks.importer.DeckImporter;
 import mage.client.MageFrame;
 import mage.client.SessionHandler;
+import mage.client.util.Localizer;
 import mage.players.PlayerType;
 import mage.remote.Session;
 import org.apache.log4j.Logger;
@@ -58,17 +59,17 @@ public class JoinTableDialog extends MageDialog {
         lblPassword = new javax.swing.JLabel();
         txtPassword = new javax.swing.JTextField();
 
-        setTitle("Join Table");
+        setTitle(Localizer.getInstance().getMessage("lblJoinTable"));
 
-        btnCancel.setText("Cancel");
+        btnCancel.setText(Localizer.getInstance().getMessage("lblCancel"));
         btnCancel.addActionListener(evt -> btnCancelActionPerformed(evt));
 
-        btnOK.setText("OK");
+        btnOK.setText(Localizer.getInstance().getMessage("lblOK"));
         btnOK.addActionListener(evt -> btnOKActionPerformed(evt));
 
-        lblPassword.setText("Password:");
+        lblPassword.setText(Localizer.getInstance().getMessage("lblPassword") + ":");
 
-        txtPassword.setText("password");
+        txtPassword.setText(Localizer.getInstance().getMessage("lblPassword"));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -139,7 +140,7 @@ public class JoinTableDialog extends MageDialog {
 
     private void handleError(Exception ex) {
         logger.fatal("Error loading deck", ex);
-        JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error loading deck.", "Error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(MageFrame.getDesktop(), Localizer.getInstance().getMessage("lblErrorLoadingDeck") + ".", Localizer.getInstance().getMessage("lblError"), JOptionPane.ERROR_MESSAGE);
     }
 
 

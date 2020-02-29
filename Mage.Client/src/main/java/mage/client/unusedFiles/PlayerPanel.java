@@ -1,10 +1,9 @@
 
-
- /*
- * PlayerPanel.java
- *
- * Created on Nov 18, 2009, 3:01:31 PM
- */
+/*
+* PlayerPanel.java
+*
+* Created on Nov 18, 2009, 3:01:31 PM
+*/
 package mage.client.unusedFiles;
 //package mage.client.game;
 
@@ -14,6 +13,7 @@ import java.util.UUID;
 import mage.client.SessionHandler;
 import mage.client.cards.BigCard;
 import mage.client.dialog.ShowCardsDialog;
+import mage.client.util.Localizer;
 import mage.view.PlayerView;
 
 /**
@@ -79,20 +79,20 @@ public class PlayerPanel extends javax.swing.JPanel {
 
         setName("Form"); // NOI18N
 
-        btnPlayerName.setText("Player Name"); // NOI18N
+        btnPlayerName.setText(Localizer.getInstance().getMessage("lblPlayerName")); // NOI18N
         btnPlayerName.setName("btnPlayerName"); // NOI18N
         btnPlayerName.addActionListener(evt -> btnPlayerNameActionPerformed(evt));
 
         lblLife.setLabelFor(txtLife);
-        lblLife.setText("Life:"); // NOI18N
+        lblLife.setText(Localizer.getInstance().getMessage("lblLife") + ":"); // NOI18N
         lblLife.setName("lblLife"); // NOI18N
 
         lblLibrary.setLabelFor(txtLibrary);
-        lblLibrary.setText("Library:"); // NOI18N
+        lblLibrary.setText(Localizer.getInstance().getMessage("lblLibrary") + ":"); // NOI18N
         lblLibrary.setName("lblLibrary"); // NOI18N
 
         lblHand.setLabelFor(txtHand);
-        lblHand.setText("Hand:"); // NOI18N
+        lblHand.setText(Localizer.getInstance().getMessage("lblHand") + ":"); // NOI18N
         lblHand.setName("lblHand"); // NOI18N
 
         txtLife.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -105,7 +105,7 @@ public class PlayerPanel extends javax.swing.JPanel {
         txtHand.setName("txtHand"); // NOI18N
 
         lblGrave.setLabelFor(btnGrave);
-        lblGrave.setText("Grave:"); // NOI18N
+        lblGrave.setText(Localizer.getInstance().getMessage("lblGrave") + ":"); // NOI18N
         lblGrave.setName("lblGrave"); // NOI18N
 
         btnGrave.setName("btnGrave"); // NOI18N

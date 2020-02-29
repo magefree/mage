@@ -1,6 +1,7 @@
 package mage.client.dialog;
 
 import mage.client.MageFrame;
+import mage.client.util.Localizer;
 import mage.utils.MageVersion;
 
 import javax.swing.*;
@@ -65,22 +66,22 @@ public class AboutDialog extends MageDialog {
         labelDevs = new javax.swing.JLabel();
 
         setMaximizable(true);
-        setTitle("About XMage");
+        setTitle(Localizer.getInstance().getMessage("lblAboutXMage"));
 
-        btnOk.setText("Close");
+        btnOk.setText(Localizer.getInstance().getMessage("lblClose"));
         btnOk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOkActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("XMage client");
+        jLabel1.setText(Localizer.getInstance().getMessage("lblXMageClient"));
 
         lblVersion.setText("0.0.0");
 
         jLabel2.setText("Courtesy: BetaSteward@googlemail.com. Site: http://xmage.de/");
 
-        btnWhatsNew.setText("What's new");
+        btnWhatsNew.setText(Localizer.getInstance().getMessage("lblShowNews"));
         btnWhatsNew.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnWhatsNewActionPerformed(evt);
@@ -92,7 +93,7 @@ public class AboutDialog extends MageDialog {
         panelDevs.setEditable(false);
         scrollDevs.setViewportView(panelDevs);
 
-        labelDevs.setText("Developers:");
+        labelDevs.setText(Localizer.getInstance().getMessage("lblDevelopers") + ":");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

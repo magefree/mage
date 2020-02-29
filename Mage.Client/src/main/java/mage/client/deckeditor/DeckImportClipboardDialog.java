@@ -2,6 +2,7 @@ package mage.client.deckeditor;
 
 import mage.client.MageFrame;
 import mage.client.dialog.MageDialog;
+import mage.client.util.Localizer;
 import mage.util.DeckUtil;
 
 import javax.swing.*;
@@ -100,7 +101,7 @@ public class DeckImportClipboardDialog extends MageDialog {
         buttonCancel = new javax.swing.JButton();
         buttonPaste = new javax.swing.JButton();
 
-        setTitle("Import from clipboard");
+        setTitle(Localizer.getInstance().getMessage("lblImportFromClipboard"));
         setMinimumSize(new java.awt.Dimension(400, 400));
 
         panelData.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -108,17 +109,17 @@ public class DeckImportClipboardDialog extends MageDialog {
         panelData.setViewportView(editData);
 
         labelData.setLabelFor(editData);
-        labelData.setText("Deck in text format to import:");
+        labelData.setText(Localizer.getInstance().getMessage("lblDeckTextFormatToImport"));
 
-        buttonOK.setText("Import");
-        buttonOK.setToolTipText("Import deck from current text");
+        buttonOK.setText(Localizer.getInstance().getMessage("lblImportDeck"));
+        buttonOK.setToolTipText(Localizer.getInstance().getMessage("lblImportDeckFromCurrentText"));
         buttonOK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonOKActionPerformed(evt);
             }
         });
 
-        buttonCancel.setText("Close");
+        buttonCancel.setText(Localizer.getInstance().getMessage("lblClose"));
         buttonCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonCancelActionPerformed(evt);
@@ -126,7 +127,7 @@ public class DeckImportClipboardDialog extends MageDialog {
         });
 
         buttonPaste.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/paste_24.png"))); // NOI18N
-        buttonPaste.setToolTipText("Paste text from clipboard");
+        buttonPaste.setToolTipText(Localizer.getInstance().getMessage("lblPasteTextFromClipboard"));
         buttonPaste.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonPasteActionPerformed(evt);

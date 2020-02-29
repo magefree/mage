@@ -1,6 +1,7 @@
 package mage.client.table;
 
 import mage.client.SessionHandler;
+import mage.client.util.Localizer;
 import mage.constants.SkillLevel;
 import mage.remote.MageRemoteException;
 import mage.view.TableView;
@@ -16,13 +17,13 @@ public class TablesTableModel extends AbstractTableModel {
     final ImageIcon tourneyIcon = new ImageIcon(getClass().getResource("/tables/tourney_icon.png")) {
         @Override
         public String toString() {
-            return "Tourney";
+            return Localizer.getInstance().getMessage("lblTournament");
         }
     };
     final ImageIcon matchIcon = new ImageIcon(getClass().getResource("/tables/match_icon.png")) {
         @Override
         public String toString() {
-            return "Match";
+            return Localizer.getInstance().getMessage("lblMatch");
         }
     };
 
@@ -42,12 +43,12 @@ public class TablesTableModel extends AbstractTableModel {
     public static final int COLUMN_MINIMUM_RATING = 13;
     public static final int ACTION_COLUMN = 14; // column the action is located (starting with 0)
 
-    public static final String RATED_VALUE_YES = "YES";
+    public static final String RATED_VALUE_YES = Localizer.getInstance().getMessage("lblYes");
     public static final String RATED_VALUE_NO = "";
 
-    public static final String PASSWORD_VALUE_YES = "YES";
+    public static final String PASSWORD_VALUE_YES = Localizer.getInstance().getMessage("lblYes");
 
-    private final String[] columnNames = new String[]{"M/T", "Deck Type", "Name", "Seats", "Owner / Players", "Game Type", "Info", "Status", "Password", "Created / Started", "Skill Level", "Rated", "Quit %", "Min Rating", "Action"};
+    private final String[] columnNames = new String[]{"M/T", Localizer.getInstance().getMessage("lblDeckType"), Localizer.getInstance().getMessage("lblName"), Localizer.getInstance().getMessage("lblSeats"), Localizer.getInstance().getMessage("lblOwnerOrPlayers"), Localizer.getInstance().getMessage("lblGameType"), Localizer.getInstance().getMessage("lblInformation"), Localizer.getInstance().getMessage("lblState"), Localizer.getInstance().getMessage("lblPassword"), Localizer.getInstance().getMessage("lblCreatedOrStarted"), Localizer.getInstance().getMessage("lblSkillLevel"), Localizer.getInstance().getMessage("lblRated"), Localizer.getInstance().getMessage("lblQuitPercent"), Localizer.getInstance().getMessage("lblMinRating"), Localizer.getInstance().getMessage("lblAction")};
 
     private TableView[] tables = new TableView[0];
 
@@ -155,22 +156,22 @@ public class TablesTableModel extends AbstractTableModel {
                         if (SessionHandler.getSession() != null && owner.equals(SessionHandler.getUserName())) {
                             return "";
                         }
-                        return "Join";
+                        return Localizer.getInstance().getMessage("lblJoin");
                     case CONSTRUCTING:
                     case DRAFTING:
                         if (tables[rowIndex].isTournament()) {
-                            return "Show";
+                            return Localizer.getInstance().getMessage("lblShow");
                         }
                     case DUELING:
                         if (tables[rowIndex].isTournament()) {
-                            return "Show";
+                            return Localizer.getInstance().getMessage("lblShow");
                         } else {
                             owner = tables[rowIndex].getControllerName();
                             if (SessionHandler.getSession() != null && owner.equals(SessionHandler.getUserName())) {
                                 return "";
                             }
                             if (tables[rowIndex].getSpectatorsAllowed()) {
-                                return "Watch";
+                                return Localizer.getInstance().getMessage("lblWatch");
                             }
                             return "";
                         }

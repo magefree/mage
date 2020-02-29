@@ -1,5 +1,6 @@
 package mage.client.table;
 
+import mage.client.util.Localizer;
 import mage.remote.MageRemoteException;
 import mage.view.MatchView;
 
@@ -10,7 +11,7 @@ import java.util.UUID;
 
 public class MatchesTableModel extends AbstractTableModel {
 
-    private final String[] columnNames = new String[]{"Deck Type", "Players", "Game Type", "Rating", "Result", "Duration", "Start Time", "End Time", "Action"};
+    private final String[] columnNames = new String[]{Localizer.getInstance().getMessage("lblDeckType"), Localizer.getInstance().getMessage("lblPlayer"), Localizer.getInstance().getMessage("lblGameType"), Localizer.getInstance().getMessage("lblRating"), Localizer.getInstance().getMessage("lblPoints"), Localizer.getInstance().getMessage("lblDuration"), Localizer.getInstance().getMessage("lblStartTime"), Localizer.getInstance().getMessage("lblEndTime"), Localizer.getInstance().getMessage("lblAction")};
     public static final int COLUMN_DURATION = 5;
     public static final int COLUMN_START = 6;
     public static final int COLUMN_END = 7;
@@ -84,9 +85,9 @@ public class MatchesTableModel extends AbstractTableModel {
                 return matches[arg0].getEndTime();
             case 8:
                 if (matches[arg0].isTournament()) {
-                    return "Show";
+                    return Localizer.getInstance().getMessage("lblShow");
                 } else if (matches[arg0].isReplayAvailable()) {
-                    return "Replay";
+                    return Localizer.getInstance().getMessage("lblReplay");
                 } else {
                     return "None";
                 }

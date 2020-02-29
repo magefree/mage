@@ -8,6 +8,7 @@ import mage.client.table.TablePlayerPanel;
 import mage.client.util.Event;
 import mage.client.util.IgnoreList;
 import mage.client.util.Listener;
+import mage.client.util.Localizer;
 import mage.constants.MatchTimeLimit;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
@@ -123,7 +124,7 @@ public class NewTableDialog extends MageDialog {
         btnSettingsSave = new javax.swing.JButton();
         lblSettings = new javax.swing.JLabel();
 
-        menuSaveSettings1.setText("Save to config 1");
+        menuSaveSettings1.setText(Localizer.getInstance().getMessage("lblSaveToConfig1"));
         menuSaveSettings1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuSaveSettings1ActionPerformed(evt);
@@ -131,7 +132,7 @@ public class NewTableDialog extends MageDialog {
         });
         popupSaveSettings.add(menuSaveSettings1);
 
-        menuSaveSettings2.setText("Save to config 2");
+        menuSaveSettings2.setText(Localizer.getInstance().getMessage("lblSaveToConfig2"));
         menuSaveSettings2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuSaveSettings2ActionPerformed(evt);
@@ -139,7 +140,7 @@ public class NewTableDialog extends MageDialog {
         });
         popupSaveSettings.add(menuSaveSettings2);
 
-        menuLoadSettingsLast.setText("Load from last time");
+        menuLoadSettingsLast.setText(Localizer.getInstance().getMessage("lblLastTimeLoad"));
         menuLoadSettingsLast.setToolTipText("");
         menuLoadSettingsLast.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -149,7 +150,7 @@ public class NewTableDialog extends MageDialog {
         popupLoadSettings.add(menuLoadSettingsLast);
         popupLoadSettings.add(separator1);
 
-        menuLoadSettings1.setText("Load from config 1");
+        menuLoadSettings1.setText(Localizer.getInstance().getMessage("lblLoadFromConfig1"));
         menuLoadSettings1.setToolTipText("");
         menuLoadSettings1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -158,7 +159,7 @@ public class NewTableDialog extends MageDialog {
         });
         popupLoadSettings.add(menuLoadSettings1);
 
-        menuLoadSettings2.setText("Load from config 2");
+        menuLoadSettings2.setText(Localizer.getInstance().getMessage("lblLoadFromConfig2"));
         menuLoadSettings2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuLoadSettings2ActionPerformed(evt);
@@ -167,7 +168,7 @@ public class NewTableDialog extends MageDialog {
         popupLoadSettings.add(menuLoadSettings2);
         popupLoadSettings.add(separator2);
 
-        menuLoadSettingsDefault.setText("Load default settings");
+        menuLoadSettingsDefault.setText(Localizer.getInstance().getMessage("lblLoadDefaultSettings"));
         menuLoadSettingsDefault.setToolTipText("");
         menuLoadSettingsDefault.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -176,20 +177,20 @@ public class NewTableDialog extends MageDialog {
         });
         popupLoadSettings.add(menuLoadSettingsDefault);
 
-        setTitle("New Table");
+        setTitle(Localizer.getInstance().getMessage("lblNewTable"));
 
         lblName.setLabelFor(txtName);
-        lblName.setText("Name:");
+        lblName.setText(Localizer.getInstance().getMessage("lblName") + ":");
 
         lblPassword.setLabelFor(txtPassword);
-        lblPassword.setText("Password:");
+        lblPassword.setText(Localizer.getInstance().getMessage("lblPassword") + ":");
 
-        lbDeckType.setText("Deck Type:");
+        lbDeckType.setText(Localizer.getInstance().getMessage("lblDeckType") + ":");
 
-        lbTimeLimit.setText("Time Limit:");
-        lbTimeLimit.setToolTipText("The active time a player may use to finish the match. If their time runs out, the player looses the current game.");
+        lbTimeLimit.setText(Localizer.getInstance().getMessage(Localizer.getInstance().getMessage("lblTimeLimit") + ":"));
+        lbTimeLimit.setToolTipText(Localizer.getInstance().getMessage("lblTimeLimitDest"));
 
-        lblGameType.setText("Game Type:");
+        lblGameType.setText(Localizer.getInstance().getMessage("lblGameType") + ":");
 
         cbGameType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -197,21 +198,21 @@ public class NewTableDialog extends MageDialog {
             }
         });
 
-        chkRollbackTurnsAllowed.setText("Rollbacks");
-        chkRollbackTurnsAllowed.setToolTipText("<HTML>Allow to rollback to the start of previous turns<br>\nif all players agree.\n");
+        chkRollbackTurnsAllowed.setText(Localizer.getInstance().getMessage("lblRollbacks"));
+        chkRollbackTurnsAllowed.setToolTipText(Localizer.getInstance().getMessage("htmlRollbacksDest"));
 
         lblFreeMulligans.setLabelFor(spnFreeMulligans);
-        lblFreeMulligans.setText("Free Mulligans:");
-        lblFreeMulligans.setToolTipText("The number of mulligans a player can use without decreasing the number of drawn cards.");
+        lblFreeMulligans.setText(Localizer.getInstance().getMessage("lblFreeMulligans"));
+        lblFreeMulligans.setToolTipText(Localizer.getInstance().getMessage("lblFreeMulligansDest"));
 
-        chkSpectatorsAllowed.setText("Spectators allowed");
-        chkSpectatorsAllowed.setToolTipText("Allow spectators to view your game.");
+        chkSpectatorsAllowed.setText(Localizer.getInstance().getMessage("lblSpectatorsAllowed"));
+        chkSpectatorsAllowed.setToolTipText(Localizer.getInstance().getMessage(Localizer.getInstance().getMessage("lblSpectatorsAllowedDest")));
 
-        chkPlaneChase.setText("PlaneChase");
-        chkPlaneChase.setToolTipText("Use the PlaneChase variant for your game.");
+        chkPlaneChase.setText(Localizer.getInstance().getMessage("lblPlaneChase"));
+        chkPlaneChase.setToolTipText(Localizer.getInstance().getMessage("lblPlaneChaseDest"));
 
         lblNumPlayers.setLabelFor(spnNumPlayers);
-        lblNumPlayers.setText("Players:");
+        lblNumPlayers.setText(Localizer.getInstance().getMessage(Localizer.getInstance().getMessage("lblPlayers") + ":"));
 
         spnNumPlayers.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -220,81 +221,80 @@ public class NewTableDialog extends MageDialog {
         });
 
         lblRange.setLabelFor(cbRange);
-        lblRange.setText("Range of Influence:");
+        lblRange.setText(Localizer.getInstance().getMessage("lblRangeOfInfluence"));
 
-        cbRange.setToolTipText("<HTML>An option for multiplayer games.\nA player's range of influence is the maximum distance from that player, measured in player seats,<br>\nthat the player can affect. Players within that many seats of the player are within that player's range<br>\nof influence. Objects controlled by players within a player's range of influence are also within that<br>\nplayer's range of influence. Range of influence covers spells, abilities, effects, damage dealing, attacking,<nr>\nmaking choices, and winning the game.");
+        cbRange.setToolTipText(Localizer.getInstance().getMessage("htmlRangeOfInfluenceDest"));
 
         lblAttack.setLabelFor(cbAttackOption);
-        lblAttack.setText("Attack Option:");
+        lblAttack.setText(Localizer.getInstance().getMessage("lblAttackOption"));
 
-        cbAttackOption.setToolTipText("<HTML>An option for multiplayer games that defines<br>\nwhich opponents can be attacked from a player.");
+        cbAttackOption.setToolTipText(Localizer.getInstance().getMessage("lblAttackOptionDest"));
 
         lblSkillLevel.setLabelFor(cbAttackOption);
-        lblSkillLevel.setText("Skill Level:");
+        lblSkillLevel.setText(Localizer.getInstance().getMessage("lblSkillLevel") + ":");
         lblSkillLevel.setToolTipText("");
 
-        cbSkillLevel.setToolTipText("<HTML>This option can be used to make it easier to find matches<br>\nwith opponents of the appropriate skill level.");
+        cbSkillLevel.setToolTipText(Localizer.getInstance().getMessage("htmlSkillLevelDest"));
 
         lblNumWins.setLabelFor(spnNumWins);
-        lblNumWins.setText("Wins:");
-        lblNumWins.setToolTipText("How many games has a player to win to win the match.");
+        lblNumWins.setText(Localizer.getInstance().getMessage("lblWins"));
+        lblNumWins.setToolTipText(Localizer.getInstance().getMessage("lblWinsDest"));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel1.setText("Player 1 (You)");
+        jLabel1.setFont(new java.awt.Font("Microsoft YaHei", 1, 11)); // NOI18N
+        jLabel1.setText(Localizer.getInstance().getMessage("lblPlayer1You"));
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel2.setText("Other Players");
+        jLabel2.setFont(new java.awt.Font("Microsoft YaHei", 1, 11)); // NOI18N
+        jLabel2.setText(Localizer.getInstance().getMessage("lblOtherPlayers"));
 
         pnlOtherPlayers.setLayout(new java.awt.GridLayout(0, 1));
 
-        btnOK.setText("Create");
+        btnOK.setText(Localizer.getInstance().getMessage("lblCreate"));
         btnOK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOKActionPerformed(evt);
             }
         });
 
-        btnCancel.setText("Cancel");
+        btnCancel.setText(Localizer.getInstance().getMessage("lblCancel"));
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelActionPerformed(evt);
             }
         });
 
-        lblQuitRatio.setText("Allowed quit %");
+        lblQuitRatio.setText(Localizer.getInstance().getMessage("lblAllowedQuitPercent"));
 
-        lblEdhPowerLevel.setText("EDH power level:");
+        lblEdhPowerLevel.setText(Localizer.getInstance().getMessage("lblEDHPowerLevel"));
 
-        cbMulligan.setToolTipText("Selections the type of mulligan for games.");
+        cbMulligan.setToolTipText(Localizer.getInstance().getMessage("lblMulliganTypeDest"));
 
         lblMullgian.setLabelFor(cbMulligan);
-        lblMullgian.setText("Mulligan type:");
-        lblMullgian.setToolTipText("What style of mulligan?");
+        lblMullgian.setText(Localizer.getInstance().getMessage("lblMulliganType"));
 
         lblMinimumRating.setLabelFor(spnMinimumRating);
-        lblMinimumRating.setText("Minimum rating:");
-        lblMinimumRating.setToolTipText("Players with rating less than this value can't join this table");
+        lblMinimumRating.setText(Localizer.getInstance().getMessage("lblMinimumRating"));
+        lblMinimumRating.setToolTipText(Localizer.getInstance().getMessage("lblMinimumRatingDest"));
 
-        chkRated.setText("Rated game");
-        chkRated.setToolTipText("Indicates if matche will be rated");
+        chkRated.setText(Localizer.getInstance().getMessage("lblRatedGame"));
+        chkRated.setToolTipText(Localizer.getInstance().getMessage("lblRatedGameDest"));
 
-        btnSettingsLoad.setText("Load...");
-        btnSettingsLoad.setToolTipText("Load settings");
+        btnSettingsLoad.setText(Localizer.getInstance().getMessage("lblLoadDeck"));
+        btnSettingsLoad.setToolTipText(Localizer.getInstance().getMessage("lblLoadSettings"));
         btnSettingsLoad.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnSettingsLoadMouseClicked(evt);
             }
         });
 
-        btnSettingsSave.setText("Save...");
-        btnSettingsSave.setToolTipText("Save settings");
+        btnSettingsSave.setText(Localizer.getInstance().getMessage("lblSave"));
+        btnSettingsSave.setToolTipText(Localizer.getInstance().getMessage(Localizer.getInstance().getMessage("lblSaveSettings")));
         btnSettingsSave.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnSettingsSaveMouseClicked(evt);
             }
         });
 
-        lblSettings.setText("Settings");
+        lblSettings.setText(Localizer.getInstance().getMessage(Localizer.getInstance().getMessage("lblSettings")));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -516,7 +516,7 @@ public class NewTableDialog extends MageDialog {
         // run
         table = SessionHandler.createTable(roomId, options);
         if (table == null) {
-            JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error creating table.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(MageFrame.getDesktop(), Localizer.getInstance().getMessage("lblErrorCreatingTable"), Localizer.getInstance().getMessage("lblError"), JOptionPane.ERROR_MESSAGE);
             return;
         }
         try {
@@ -785,7 +785,7 @@ public class NewTableDialog extends MageDialog {
 
     private void handleError(Exception ex) {
         logger.fatal("Error loading deck", ex);
-        MageFrame.getInstance().showErrorDialog("Error loading deck", ex.getMessage());
+        MageFrame.getInstance().showErrorDialog(Localizer.getInstance().getMessage("lblErrorLoadingDeck"), ex.getMessage());
     }
 
     public void showDialog(UUID roomId) {

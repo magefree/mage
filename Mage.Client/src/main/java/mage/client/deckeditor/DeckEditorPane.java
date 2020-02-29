@@ -4,6 +4,7 @@ import mage.cards.decks.Deck;
 import mage.client.MagePane;
 import mage.client.constants.Constants.DeckEditorMode;
 import mage.client.plugins.impl.Plugins;
+import mage.client.util.Localizer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -46,13 +47,13 @@ public class DeckEditorPane extends MagePane {
 
     public void show(DeckEditorMode mode, Deck deck, String name, UUID tableId, int time) {
         if (mode == DeckEditorMode.SIDEBOARDING || mode == DeckEditorMode.LIMITED_BUILDING) {
-            this.setTitle("Deck Editor - " + tableId.toString());
+            this.setTitle(Localizer.getInstance().getMessage("lblDeckEditor") + " - " + tableId.toString());
         } else if (mode == DeckEditorMode.VIEW_LIMITED_DECK) {
-            this.setTitle("Deck Editor - Current Deck");
+            this.setTitle(Localizer.getInstance().getMessage("lblDeckEditor") +" - " + Localizer.getInstance().getMessage("lblCurrentDeck"));
         } else if (deck != null) {
-            this.setTitle("Deck Editor - " + deck.getName());
+            this.setTitle(Localizer.getInstance().getMessage("lblDeckEditor") + " - " + deck.getName());
         } else {
-            this.setTitle("Deck Editor");
+            this.setTitle(Localizer.getInstance().getMessage("lblDeckEditor"));
         }
         this.deckEditorPanel1.showDeckEditor(mode, deck, tableId, time);
         this.repaint();

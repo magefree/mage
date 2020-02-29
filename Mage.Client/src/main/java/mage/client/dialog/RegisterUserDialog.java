@@ -3,6 +3,7 @@ package mage.client.dialog;
 import mage.client.MageFrame;
 import mage.client.SessionHandler;
 import mage.client.preference.MagePreferences;
+import mage.client.util.Localizer;
 import mage.remote.Connection;
 import org.apache.log4j.Logger;
 
@@ -66,43 +67,43 @@ public class RegisterUserDialog extends MageDialog {
         lblEmailReasoning = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Register");
+        setTitle(Localizer.getInstance().getMessage("lblRegister"));
 
         lblServer.setLabelFor(txtServer);
-        lblServer.setText("Server:");
+        lblServer.setText(Localizer.getInstance().getMessage("lblServer") + ":");
 
         lblPort.setLabelFor(txtPort);
-        lblPort.setText("Port:");
+        lblPort.setText(Localizer.getInstance().getMessage("lblPort") + ":");
 
         lblUserName.setLabelFor(txtUserName);
-        lblUserName.setText("User name:");
+        lblUserName.setText(Localizer.getInstance().getMessage("lblUserName") + ":");
 
         lblPassword.setLabelFor(txtPassword);
-        lblPassword.setText("Password:");
+        lblPassword.setText(Localizer.getInstance().getMessage("lblPassword") + ":");
 
         txtUserName.addActionListener(evt -> txtUserNameActionPerformed(evt));
 
-        btnRegister.setText("Register");
+        btnRegister.setText(Localizer.getInstance().getMessage("lblRegister"));
         btnRegister.addActionListener(evt -> btnRegisterActionPerformed(evt));
 
-        btnCancel.setText("Cancel");
+        btnCancel.setText(Localizer.getInstance().getMessage("lblCancel"));
         btnCancel.addActionListener(evt -> btnCancelActionPerformed(evt));
 
         lblStatus.setToolTipText("");
 
         lblPasswordConfirmation.setLabelFor(txtPasswordConfirmation);
-        lblPasswordConfirmation.setText("Password:");
+        lblPasswordConfirmation.setText(Localizer.getInstance().getMessage("lblPassword") + ":");
 
         lblEmail.setLabelFor(txtEmail);
-        lblEmail.setText("Email:");
+        lblEmail.setText(Localizer.getInstance().getMessage("lblEmail") + ":");
 
-        lblPasswordConfirmationReasoning.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
+        lblPasswordConfirmationReasoning.setFont(new java.awt.Font("Microsoft YaHei", 0, 10)); // NOI18N
         lblPasswordConfirmationReasoning.setLabelFor(txtPasswordConfirmation);
-        lblPasswordConfirmationReasoning.setText("(confirmation)");
+        lblPasswordConfirmationReasoning.setText("(" + Localizer.getInstance().getMessage("lblConfirmation") + ")");
 
-        lblEmailReasoning.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
+        lblEmailReasoning.setFont(new java.awt.Font("Microsoft YaHei", 0, 10)); // NOI18N
         lblEmailReasoning.setLabelFor(txtEmail);
-        lblEmailReasoning.setText("(used for password reset and sending initial password)");
+        lblEmailReasoning.setText(Localizer.getInstance().getMessage("lblEmailFunction"));
         lblEmailReasoning.setToolTipText("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -190,7 +191,7 @@ public class RegisterUserDialog extends MageDialog {
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         if (!Arrays.equals(this.txtPassword.getPassword(), this.txtPasswordConfirmation.getPassword())) {
-            MageFrame.getInstance().showError("Passwords don't match.");
+            MageFrame.getInstance().showError(Localizer.getInstance().getMessage("lblPasswordsDontMatch"));
             return;
         }
         connection = new Connection();
@@ -212,7 +213,7 @@ public class RegisterUserDialog extends MageDialog {
 
         @Override
         protected Boolean doInBackground() throws Exception {
-            lblStatus.setText("Connecting...");
+            lblStatus.setText(Localizer.getInstance().getMessage("lblConnecting"));
             btnRegister.setEnabled(false);
             result = SessionHandler.register(connection);
             return result;
@@ -230,20 +231,20 @@ public class RegisterUserDialog extends MageDialog {
                     MagePreferences.setPassword(connection.getHost(), connection.getPassword());
                     MagePreferences.setEmail(connection.getHost(), connection.getEmail());
 
-                    String message = "Registration succeeded";
+                    String message = Localizer.getInstance().getMessage("lblRegistrationSucceeded");
                     lblStatus.setText(message);
                     MageFrame.getInstance().showMessage(message);
                     hideDialog();
                 } else {
-                    lblStatus.setText("Could not register");
+                    lblStatus.setText(Localizer.getInstance().getMessage("lblCouldNotRegister"));
                 }
             } catch (InterruptedException | ExecutionException ex) {
                 logger.fatal("Registration task error", ex);
             } catch (CancellationException ex) {
                 logger.info("Registration was canceled");
-                lblStatus.setText("Registration was canceled (but an account might have been actually created)");
+                lblStatus.setText(Localizer.getInstance().getMessage("lblRegistrationWasCanceled"));
             } catch (TimeoutException ex) {
-                logger.fatal("Registration timeout: ", ex);
+                logger.fatal(Localizer.getInstance().getMessage("lblRegistrationTimeout") + ": ", ex);
             } finally {
                 MageFrame.stopConnecting();
                 btnRegister.setEnabled(true);

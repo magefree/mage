@@ -2,6 +2,7 @@ package mage.client.table;
 
 import mage.client.chat.ChatPanelBasic;
 import mage.client.util.GUISizeHelper;
+import mage.client.util.Localizer;
 import mage.client.util.MageTableRowSorter;
 import mage.client.util.gui.TableUtil;
 import mage.client.util.gui.countryBox.CountryCellRenderer;
@@ -233,7 +234,7 @@ public class PlayersChatPanel extends javax.swing.JPanel {
         jScrollPanePlayers.setBorder(null);
 
         jTablePlayers.setModel(this.userTableModel);
-        jTablePlayers.setToolTipText("Connected players");
+        jTablePlayers.setToolTipText(Localizer.getInstance().getMessage("lblConnectedPlayers"));
         jTablePlayers.setAutoscrolls(false);
         jTablePlayers.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jTablePlayers.setOpaque(false);
@@ -249,7 +250,7 @@ public class PlayersChatPanel extends javax.swing.JPanel {
         jSplitPane1.setTopComponent(jScrollPanePlayers);
 
         jTabbedPaneText.setTabPlacement(javax.swing.JTabbedPane.BOTTOM);
-        jTabbedPaneText.addTab("Talk", jScrollPaneTalk);
+        jTabbedPaneText.addTab(Localizer.getInstance().getMessage("lblChat"), jScrollPaneTalk);
 
         jScrollPaneSystem.setBorder(null);
         jScrollPaneSystem.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -260,12 +261,12 @@ public class PlayersChatPanel extends javax.swing.JPanel {
         colorPaneSystem.setEditable(false);
         colorPaneSystem.setBackground(new java.awt.Color(0, 0, 0));
         colorPaneSystem.setBorder(null);
-        colorPaneSystem.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        colorPaneSystem.setFont(new java.awt.Font("Microsoft YaHei", 0, 14)); // NOI18N
         colorPaneSystem.setMargin(new java.awt.Insets(0, 0, 0, 0));
         colorPaneSystem.setOpaque(false);
         jScrollPaneSystem.setViewportView(colorPaneSystem);
 
-        jTabbedPaneText.addTab("System", jScrollPaneSystem);
+        jTabbedPaneText.addTab(Localizer.getInstance().getMessage("lblSystemMessage"), jScrollPaneSystem);
 
         jSplitPane1.setRightComponent(jTabbedPaneText);
 

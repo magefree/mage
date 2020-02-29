@@ -7,6 +7,7 @@ import mage.cards.decks.Deck;
 import mage.cards.repository.*;
 import mage.client.MageFrame;
 import mage.client.constants.Constants.DeckEditorMode;
+import mage.client.util.Localizer;
 import mage.client.util.gui.FastSearchUtil;
 import mage.constants.Rarity;
 import mage.util.RandomUtil;
@@ -181,7 +182,7 @@ public class AddLandDialog extends MageDialog {
         }
 
         if (foundNoneAfter >= 1000 && useFullArt) {
-            MageFrame.getInstance().showMessage("Unable to add enough " + landName + "s.  You encountered an error in adding chosen lands.  Unable to find enough full art lands in the set " + landSetName + ".");
+            MageFrame.getInstance().showMessage(Localizer.getInstance().getMessage("lblUnableAddEnoughLands", landName, landSetName));
         }
     }
 
@@ -247,11 +248,11 @@ public class AddLandDialog extends MageDialog {
 
         jLabel1.setText("jLabel1");
 
-        setTitle("Add Land");
+        setTitle(Localizer.getInstance().getMessage("lblAddLand"));
 
-        lblLandSet.setText("From set:");
+        lblLandSet.setText(Localizer.getInstance().getMessage("lblFromSetAdd"));
 
-        lblForest.setText("Forest:");
+        lblForest.setText(Localizer.getInstance().getMessage("lblForest") + ":");
 
         spnForest.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
@@ -260,7 +261,7 @@ public class AddLandDialog extends MageDialog {
         lblForestIcon.setMinimumSize(new java.awt.Dimension(22, 20));
         lblForestIcon.setPreferredSize(new java.awt.Dimension(22, 20));
 
-        lblIsland.setText("Island:");
+        lblIsland.setText(Localizer.getInstance().getMessage("lblIsland") + ":");
 
         spnIsland.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
@@ -268,7 +269,7 @@ public class AddLandDialog extends MageDialog {
         lblIslandIcon.setMinimumSize(new java.awt.Dimension(22, 20));
         lblIslandIcon.setPreferredSize(new java.awt.Dimension(22, 20));
 
-        lblMountain.setText("Mountain:");
+        lblMountain.setText(Localizer.getInstance().getMessage("lblMountain") + ":");
 
         spnMountain.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
@@ -276,7 +277,7 @@ public class AddLandDialog extends MageDialog {
         lblMountainIcon.setMinimumSize(new java.awt.Dimension(22, 20));
         lblMountainIcon.setPreferredSize(new java.awt.Dimension(22, 20));
 
-        lblPains.setText("Plains:");
+        lblPains.setText(Localizer.getInstance().getMessage("lblPlains") + ":");
 
         spnPlains.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
@@ -284,7 +285,7 @@ public class AddLandDialog extends MageDialog {
         lblPlainsIcon.setMinimumSize(new java.awt.Dimension(22, 20));
         lblPlainsIcon.setPreferredSize(new java.awt.Dimension(22, 20));
 
-        lblSwamp.setText("Swamp:");
+        lblSwamp.setText(Localizer.getInstance().getMessage("lblSwamp") + ":");
 
         spnSwamp.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
@@ -292,27 +293,27 @@ public class AddLandDialog extends MageDialog {
         lblSwampIcon.setMinimumSize(new java.awt.Dimension(22, 20));
         lblSwampIcon.setPreferredSize(new java.awt.Dimension(22, 20));
 
-        lblDeckSize.setText("Deck size:");
+        lblDeckSize.setText(Localizer.getInstance().getMessage("lblDeckSize") + ":");
 
         spnDeckSize.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
-        btnAutoAdd.setText("Suggest lands");
-        btnAutoAdd.setToolTipText("<HTML>Propose related to the mana costs of the cards in the deck<br>\nthe number of lands to add to get to the set deck size.");
+        btnAutoAdd.setText(Localizer.getInstance().getMessage("lblSuggestLands"));
+        btnAutoAdd.setToolTipText(Localizer.getInstance().getMessage("htmlSuggestLandsDest"));
         btnAutoAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAutoAddActionPerformed(evt);
             }
         });
 
-        btnOK.setText("Add lands");
-        btnOK.setToolTipText("Add the selected number of basic lands to the deck.");
+        btnOK.setText(Localizer.getInstance().getMessage("lblAddLand"));
+        btnOK.setToolTipText(Localizer.getInstance().getMessage("lblAddLandDest"));
         btnOK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOKActionPerformed(evt);
             }
         });
 
-        btnCancel.setText("Cancel");
+        btnCancel.setText(Localizer.getInstance().getMessage("lblCancel"));
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelActionPerformed(evt);
@@ -326,7 +327,7 @@ public class AddLandDialog extends MageDialog {
         panelSet.add(cbLandSet);
 
         btnSetFastSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/search_24.png"))); // NOI18N
-        btnSetFastSearch.setToolTipText("Search for set");
+        btnSetFastSearch.setToolTipText(Localizer.getInstance().getMessage("lblSearchForSet"));
         btnSetFastSearch.setAlignmentX(1.0F);
         btnSetFastSearch.setPreferredSize(new java.awt.Dimension(23, 23));
         btnSetFastSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -336,8 +337,8 @@ public class AddLandDialog extends MageDialog {
         });
         panelSet.add(btnSetFastSearch);
 
-        ckbFullArtLands.setText("Only full art lands");
-        ckbFullArtLands.setToolTipText("For example, lands from ZEN/UST/HOU");
+        ckbFullArtLands.setText(Localizer.getInstance().getMessage("lblOnlyFullArtLands"));
+        ckbFullArtLands.setToolTipText(Localizer.getInstance().getMessage("lblOnlyFullArtLandsDest"));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

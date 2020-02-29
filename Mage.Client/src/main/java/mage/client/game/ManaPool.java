@@ -9,6 +9,7 @@
 package mage.client.game;
 
 import mage.view.ManaPoolView;
+import mage.client.util.Localizer;
 
 /**
  *
@@ -53,34 +54,34 @@ public class ManaPool extends javax.swing.JPanel {
         lblRed = new javax.swing.JLabel();
 
         lblBlack.setLabelFor(btnBlack);
-        lblBlack.setText("Black");
+        lblBlack.setText(Localizer.getInstance().getMessage("lblBlack"));
 
         btnBlack.setText("0");
 
         btnBlue.setText("0");
 
         lblBlue.setLabelFor(btnBlack);
-        lblBlue.setText("Blue");
+        lblBlue.setText(Localizer.getInstance().getMessage("lblBlue"));
 
         lblGreen.setLabelFor(btnBlack);
-        lblGreen.setText("Green");
+        lblGreen.setText(Localizer.getInstance().getMessage("lblGreen"));
 
         btnGreen.setText("0");
 
         btnColorless.setText("0");
 
         lblWhite.setLabelFor(btnBlack);
-        lblWhite.setText("White");
+        lblWhite.setText(Localizer.getInstance().getMessage("lblWhite"));
 
         lblColorless.setLabelFor(btnBlack);
-        lblColorless.setText("Colorless");
+        lblColorless.setText(Localizer.getInstance().getMessage("lblColorless"));
 
         btnWhite.setText("0");
 
         btnRed.setText("0");
 
         lblRed.setLabelFor(btnBlack);
-        lblRed.setText("Red");
+        lblRed.setText(Localizer.getInstance().getMessage("lblRed"));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

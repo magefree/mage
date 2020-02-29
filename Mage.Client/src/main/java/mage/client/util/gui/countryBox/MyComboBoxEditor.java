@@ -24,7 +24,7 @@ public class MyComboBoxEditor extends BasicComboBoxEditor {
         panel = new JPanel();
                  
         label.setOpaque(false);
-        label.setFont(new Font("Arial", Font.BOLD, 14));
+        label.setFont(new Font("Microsoft YaHei", Font.BOLD, 14));
         label.setForeground(Color.BLACK);
          
         panel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 2));

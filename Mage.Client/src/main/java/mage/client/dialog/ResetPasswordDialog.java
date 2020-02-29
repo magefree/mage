@@ -3,6 +3,7 @@ package mage.client.dialog;
 import mage.client.MageFrame;
 import mage.client.SessionHandler;
 import mage.client.preference.MagePreferences;
+import mage.client.util.Localizer;
 import mage.remote.Connection;
 import org.apache.log4j.Logger;
 
@@ -73,28 +74,28 @@ public class ResetPasswordDialog extends MageDialog {
         lblPort = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Reset password");
+        setTitle(Localizer.getInstance().getMessage("lblResetPassword"));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel6.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jLabel6.setText("Step 2:");
+        jLabel6.setFont(new java.awt.Font("Microsoft YaHei", 1, 13)); // NOI18N
+        jLabel6.setText(Localizer.getInstance().getMessage("lblStepN", String.valueOf(2)) + ":");
 
         lblAuthToken.setLabelFor(txtAuthToken);
-        lblAuthToken.setText("Auth token:");
+        lblAuthToken.setText(Localizer.getInstance().getMessage("lblAuthToken"));
 
         lblPassword.setLabelFor(txtPassword);
-        lblPassword.setText("New password:");
+        lblPassword.setText(Localizer.getInstance().getMessage("lblNewPassword"));
 
         lblPasswordConfirmation.setLabelFor(txtPasswordConfirmation);
-        lblPasswordConfirmation.setText("New password:");
+        lblPasswordConfirmation.setText(Localizer.getInstance().getMessage("lblNewPassword"));
 
-        btnSubmitNewPassword.setText("Submit a new password");
+        btnSubmitNewPassword.setText(Localizer.getInstance().getMessage("lblSubmitNewPassword"));
         btnSubmitNewPassword.addActionListener(evt -> btnSubmitNewPasswordActionPerformed(evt));
 
-        lblPasswordConfirmationReasoning.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
+        lblPasswordConfirmationReasoning.setFont(new java.awt.Font("Microsoft YaHei", 0, 10)); // NOI18N
         lblPasswordConfirmationReasoning.setLabelFor(txtPasswordConfirmation);
-        lblPasswordConfirmationReasoning.setText("(confirmation)");
+        lblPasswordConfirmationReasoning.setText("(" + Localizer.getInstance().getMessage("lblConfirmation") + ")");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -148,13 +149,13 @@ public class ResetPasswordDialog extends MageDialog {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel5.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jLabel5.setText("Step 1:");
+        jLabel5.setFont(new java.awt.Font("Microsoft YaHei", 1, 13)); // NOI18N
+        jLabel5.setText(Localizer.getInstance().getMessage("lblStepN", String.valueOf(1)) + ":");
 
         lblEmail.setLabelFor(txtEmail);
-        lblEmail.setText("Email:");
+        lblEmail.setText(Localizer.getInstance().getMessage("lblEmail") + ":");
 
-        btnGetAuthToken.setText("Email an auth token");
+        btnGetAuthToken.setText(Localizer.getInstance().getMessage("lblAuthEmailFunction"));
         btnGetAuthToken.addActionListener(evt -> btnGetAuthTokenActionPerformed(evt));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -189,14 +190,14 @@ public class ResetPasswordDialog extends MageDialog {
                                 .addContainerGap())
         );
 
-        btnCancel.setText("Cancel");
+        btnCancel.setText(Localizer.getInstance().getMessage("lblCancel"));
         btnCancel.addActionListener(evt -> btnCancelActionPerformed(evt));
 
         lblServer.setLabelFor(txtServer);
-        lblServer.setText("Server:");
+        lblServer.setText(Localizer.getInstance().getMessage("lblServer") + ":");
 
         lblPort.setLabelFor(txtPort);
-        lblPort.setText("Port:");
+        lblPort.setText(Localizer.getInstance().getMessage("lblPort") + ":");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -248,7 +249,7 @@ public class ResetPasswordDialog extends MageDialog {
 
     private void btnGetAuthTokenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetAuthTokenActionPerformed
         if (this.txtEmail.getText().isEmpty()) {
-            MageFrame.getInstance().showError("Please enter an email address.");
+            MageFrame.getInstance().showError(Localizer.getInstance().getMessage("lblPleaseEnterEmailAddress"));
             return;
         }
 
@@ -264,19 +265,19 @@ public class ResetPasswordDialog extends MageDialog {
 
     private void btnSubmitNewPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitNewPasswordActionPerformed
         if (this.txtEmail.getText().isEmpty()) {
-            MageFrame.getInstance().showError("Please enter an email address.");
+            MageFrame.getInstance().showError(Localizer.getInstance().getMessage("lblPleaseEnterEmailAddress"));
             return;
         }
         if (this.txtAuthToken.getText().isEmpty()) {
-            MageFrame.getInstance().showError("Please enter an auth token.");
+            MageFrame.getInstance().showError(Localizer.getInstance().getMessage("lblPleaseEnterAuthToken"));
             return;
         }
         if (String.valueOf(this.txtPassword.getPassword()).trim().isEmpty()) {
-            MageFrame.getInstance().showError("Please enter a new password.");
+            MageFrame.getInstance().showError(Localizer.getInstance().getMessage("lblPleaseEnterNewWassword"));
             return;
         }
         if (!Arrays.equals(this.txtPassword.getPassword(), this.txtPasswordConfirmation.getPassword())) {
-            MageFrame.getInstance().showError("Passwords don't match.");
+            MageFrame.getInstance().showError(Localizer.getInstance().getMessage("lblPasswordsDontMatch"));
             return;
         }
 
@@ -314,7 +315,7 @@ public class ResetPasswordDialog extends MageDialog {
 
         @Override
         protected Boolean doInBackground() throws Exception {
-            lblStatus.setText("Connecting...");
+            lblStatus.setText(Localizer.getInstance().getMessage("lblConnecting"));
             disableButtons();
             result = SessionHandler.emailAuthToken(connection);
             return result;
@@ -328,17 +329,17 @@ public class ResetPasswordDialog extends MageDialog {
                     // Save settings.
                     MagePreferences.setEmail(connection.getHost(), connection.getEmail());
 
-                    String message = "Auth token is emailed. Please check your inbox.";
+                    String message = Localizer.getInstance().getMessage("lblAuthTokenIsEmailed");
                     lblStatus.setText(message);
                     MageFrame.getInstance().showMessage(message);
                 } else {
-                    lblStatus.setText("There was an issue while requesting an auth token.");
+                    lblStatus.setText(Localizer.getInstance().getMessage("lblRequestingAuthTokenError"));
                 }
             } catch (InterruptedException | ExecutionException ex) {
                 logger.fatal("Get Auth Token Task error", ex);
             } catch (CancellationException ex) {
                 logger.info("Canceled");
-                lblStatus.setText("Canceled");
+                lblStatus.setText(Localizer.getInstance().getMessage("lblCanceled"));
             } catch (TimeoutException ex) {
                 logger.fatal("Timeout: ", ex);
             } finally {
@@ -356,7 +357,7 @@ public class ResetPasswordDialog extends MageDialog {
 
         @Override
         protected Boolean doInBackground() throws Exception {
-            lblStatus.setText("Connecting...");
+            lblStatus.setText(Localizer.getInstance().getMessage("lblConnecting"));
             disableButtons();
             result = SessionHandler.resetPassword(connection);
             return result;
@@ -370,18 +371,18 @@ public class ResetPasswordDialog extends MageDialog {
                     // Save settings.
                     MagePreferences.setPassword(connection.getHost(), connection.getPassword());
 
-                    String message = "Password is reset successfully.";
+                    String message = Localizer.getInstance().getMessage("lblResetPasswordSuccessfully");
                     lblStatus.setText(message);
                     MageFrame.getInstance().showMessage(message);
                     hideDialog();
                 } else {
-                    lblStatus.setText("There was an issue while resetting password.");
+                    lblStatus.setText(Localizer.getInstance().getMessage("lblResettingPassWordError"));
                 }
             } catch (InterruptedException | ExecutionException ex) {
                 logger.fatal("Reset Password Task error", ex);
             } catch (CancellationException ex) {
                 logger.info("Canceled");
-                lblStatus.setText("Canceled");
+                lblStatus.setText(Localizer.getInstance().getMessage("lblCanceled"));
             } catch (TimeoutException ex) {
                 logger.fatal("Timeout: ", ex);
             } finally {

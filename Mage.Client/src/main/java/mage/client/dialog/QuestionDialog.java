@@ -1,6 +1,4 @@
 
-
-
 /*
  * QuestionDialog.java
  *
@@ -8,6 +6,8 @@
  */
 
 package mage.client.dialog;
+
+import mage.client.util.Localizer;
 
 /**
  *
@@ -46,12 +46,12 @@ public class QuestionDialog extends MageDialog {
         btnYes = new javax.swing.JButton();
 
         lblQuestion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblQuestion.setText("question");
+        lblQuestion.setText(Localizer.getInstance().getMessage("lblQuestion"));
 
-        btnNo.setText("No");
+        btnNo.setText(Localizer.getInstance().getMessage("lblNo"));
         btnNo.addActionListener(evt -> btnNoActionPerformed(evt));
 
-        btnYes.setText("Yes");
+        btnYes.setText(Localizer.getInstance().getMessage("lblYes"));
         btnYes.addActionListener(evt -> btnYesActionPerformed(evt));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

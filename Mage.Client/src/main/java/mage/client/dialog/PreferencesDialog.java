@@ -7,6 +7,7 @@ import mage.client.util.CardLanguage;
 import mage.client.util.ClientDefaultSettings;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.ImageHelper;
+import mage.client.util.Localizer;
 import mage.client.util.gui.BufferedImageBuilder;
 import mage.players.net.UserData;
 import mage.players.net.UserGroup;
@@ -293,6 +294,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_CONNECT_AUTO_CONNECT = "autoConnect";
     public static final String KEY_CONNECT_FLAG = "connectFlag";
 
+    // languages
+    public static final String KEY_GUI_LANGUAGES = "languages";
+
     private static final Map<String, String> CACHE = new HashMap<>();
 
     private static final Boolean UPDATE_CACHE_POLICY = Boolean.TRUE;
@@ -570,39 +574,43 @@ public class PreferencesDialog extends javax.swing.JDialog {
         keySwitchChat = new KeyBindButton(this, KEY_CONTROL_SWITCH_CHAT);
         saveButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
+        tabLanguages = new javax.swing.JPanel();
+        cbPreferedGUILanguage = new javax.swing.JComboBox<>();
+        lblGUILanguages = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Preferences");
+        setTitle(Localizer.getInstance().getMessage("lblPreferences"));
 
         tabsPanel.setMinimumSize(new java.awt.Dimension(532, 451));
 
-        main_gamelog.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Game log"));
+        main_gamelog.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), Localizer.getInstance().getMessage("lblGameLog")));
         main_gamelog.setLayout(new javax.swing.BoxLayout(main_gamelog, javax.swing.BoxLayout.PAGE_AXIS));
 
         cbGameLogShowTurnInfo.setSelected(true);
-        cbGameLogShowTurnInfo.setText("Show turn info in game logs (19:01 T2.DA: message)");
-        cbGameLogShowTurnInfo.setToolTipText("Add turn number and step info after time in game logs");
+        cbGameLogShowTurnInfo.setText(Localizer.getInstance().getMessage("lblGameLogShowTurnInfo"));
+        cbGameLogShowTurnInfo.setToolTipText(Localizer.getInstance().getMessage("lblGameLogShowTurnInfoDest"));
         main_gamelog.add(cbGameLogShowTurnInfo);
 
         cbGameLogAutoSave.setSelected(true);
-        cbGameLogAutoSave.setText("Save game logs     (to \"../Mage.Client/gamelogs/\" directory)");
-        cbGameLogAutoSave.setToolTipText("The logs of all your games will be saved to the mentioned folder if this option is switched on.");
+        cbGameLogAutoSave.setText(Localizer.getInstance().getMessage("lblSaveGameLogTo"));
+        cbGameLogAutoSave.setToolTipText(Localizer.getInstance().getMessage("lblSaveGameLogToDest"));
         main_gamelog.add(cbGameLogAutoSave);
 
         cbDraftLogAutoSave.setSelected(true);
-        cbDraftLogAutoSave.setText("Save draft logs     (to \"../Mage.Client/gamelogs/\" directory)");
-        cbDraftLogAutoSave.setToolTipText("The logs of all your games will be saved to the mentioned folder if this option is switched on.");
+        cbDraftLogAutoSave.setText(Localizer.getInstance().getMessage("lblSaveDraftLogTo"));
+        cbDraftLogAutoSave.setToolTipText(Localizer.getInstance().getMessage("lblSaveGameLogToDest"));
         main_gamelog.add(cbDraftLogAutoSave);
 
-        cbGameJsonLogAutoSave.setText("Save JSON game logs     (to \"../Mage.Client/gamelogsJson/\" directory)");
-        cbGameJsonLogAutoSave.setToolTipText("The JSON logs of all your games will be saved to the mentioned folder if this option is switched on.");
+        cbGameJsonLogAutoSave.setSelected(true);
+        cbGameJsonLogAutoSave.setText(Localizer.getInstance().getMessage("lblSaveJsonGameLogTo"));
+        cbGameJsonLogAutoSave.setToolTipText(Localizer.getInstance().getMessage("lblSaveJsonGameLogToDest"));
         main_gamelog.add(cbGameJsonLogAutoSave);
 
-        main_card.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Card"));
+        main_card.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), Localizer.getInstance().getMessage("lblCard")));
 
         showCardName.setSelected(true);
-        showCardName.setText("Show card name on card panel");
-        showCardName.setToolTipText("Write the card's name on the card to make the card name more recognizable.");
+        showCardName.setText(Localizer.getInstance().getMessage("lblShowCardNameOnCardPanel"));
+        showCardName.setToolTipText(Localizer.getInstance().getMessage("lblShowCardNameOnCardPanelDest"));
         showCardName.setActionCommand("");
         showCardName.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         showCardName.addActionListener(new java.awt.event.ActionListener() {
@@ -612,8 +620,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         });
 
         tooltipDelayLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        tooltipDelayLabel.setText("Delay in milliseconds for showing the card tooltip text (0 value will disable tooltip)");
-        tooltipDelayLabel.setToolTipText("<HTML>The time the appearance of the tooltip window for a card is delayed.<br>\nIf set to zero, the tooltip window won't be shown at all.");
+        tooltipDelayLabel.setText(Localizer.getInstance().getMessage("lblCardToolTipTextShowingTimeout"));
+        tooltipDelayLabel.setToolTipText(Localizer.getInstance().getMessage("htmlCardToolTipTextShowingTimeoutDest"));
 
         tooltipDelay.setMajorTickSpacing(1000);
         tooltipDelay.setMaximum(5000);
@@ -621,13 +629,13 @@ public class PreferencesDialog extends javax.swing.JDialog {
         tooltipDelay.setPaintLabels(true);
         tooltipDelay.setPaintTicks(true);
         tooltipDelay.setSnapToTicks(true);
-        tooltipDelay.setToolTipText("<HTML>The time the appearance of the tooltip window for a card is delayed.<br>\nIf set to zero, the tooltip window won't be shown at all.");
+        tooltipDelay.setToolTipText(Localizer.getInstance().getMessage("htmlCardToolTipTextShowingTimeoutDest"));
         tooltipDelay.setValue(300);
 
         showFullImagePath.setSelected(true);
-        showFullImagePath.setToolTipText("Show the path Xmage is expecting for this card's image (only displays if missing)");
+        showFullImagePath.setToolTipText(Localizer.getInstance().getMessage("lblShowMissingCardImagePath"));
         showFullImagePath.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        showFullImagePath.setLabel("Display image path for missing images");
+        showFullImagePath.setLabel(Localizer.getInstance().getMessage("lblShowMissingCardImagePathDest"));
         showFullImagePath.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 showFullImagePathActionPerformed(evt);
@@ -662,11 +670,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
                                 .add(tooltipDelay, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        main_game.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Game"));
+        main_game.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), Localizer.getInstance().getMessage("lblGame")));
 
         nonLandPermanentsInOnePile.setSelected(true);
-        nonLandPermanentsInOnePile.setText("Put non-land permanents in same row as creatures");
-        nonLandPermanentsInOnePile.setToolTipText("<html>If activated, all non land permanents are shown in one row.<br>\nFirst creatures than other permanents. If not activated, creatures are<br>\nshown in a separate row.");
+        nonLandPermanentsInOnePile.setText(Localizer.getInstance().getMessage("lblNonLandPermanentsSameRow"));
+        nonLandPermanentsInOnePile.setToolTipText(Localizer.getInstance().getMessage("htmlNonLandPermanentsSameRowDest"));
         nonLandPermanentsInOnePile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nonLandPermanentsInOnePileActionPerformed(evt);
@@ -674,8 +682,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         });
 
         showPlayerNamesPermanently.setSelected(true);
-        showPlayerNamesPermanently.setText("Show player names on avatar permanently");
-        showPlayerNamesPermanently.setToolTipText("Instead showing the names only if you hover over the avatar with the mouse, the name is shown all the time.");
+        showPlayerNamesPermanently.setText(Localizer.getInstance().getMessage("lblShowPlayerNamesOnAvatar"));
+        showPlayerNamesPermanently.setToolTipText(Localizer.getInstance().getMessage("lblShowPlayerNamesOnAvatarDest"));
         showPlayerNamesPermanently.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         showPlayerNamesPermanently.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -684,8 +692,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         });
 
         displayLifeOnAvatar.setSelected(true);
-        displayLifeOnAvatar.setText("Display life on avatar image");
-        displayLifeOnAvatar.setToolTipText("Display the player's life over its avatar image.");
+        displayLifeOnAvatar.setText(Localizer.getInstance().getMessage("lblShowLifeOnAvatar"));
+        displayLifeOnAvatar.setToolTipText(Localizer.getInstance().getMessage("lblShowLifeOnAvatarDest"));
         displayLifeOnAvatar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         displayLifeOnAvatar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -694,8 +702,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         });
 
         showAbilityPickerForced.setSelected(true);
-        showAbilityPickerForced.setText("Show ability picker for abilities or spells without costs");
-        showAbilityPickerForced.setToolTipText("This prevents you from accidently activating abilities without other costs than tapping or casting spells with 0 mana costs.");
+        showAbilityPickerForced.setText(Localizer.getInstance().getMessage("lblShoWAbilityPickerForWithoutCosts"));
+        showAbilityPickerForced.setToolTipText(Localizer.getInstance().getMessage("lblShoWAbilityPickerForWithoutCostsDest"));
         showAbilityPickerForced.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         showAbilityPickerForced.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -704,8 +712,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         });
 
         cbAllowRequestToShowHandCards.setSelected(true);
-        cbAllowRequestToShowHandCards.setText("Allow requests from players and spectators to show your hand cards");
-        cbAllowRequestToShowHandCards.setToolTipText("<html>This is the default setting used for your matches. If activated other players or spectators<br>\nof your match can send a request so you can allow them to see your hand cards.");
+        cbAllowRequestToShowHandCards.setText(Localizer.getInstance().getMessage("lblAllowRequestsShowYourHand"));
+        cbAllowRequestToShowHandCards.setToolTipText(Localizer.getInstance().getMessage("htmlAllowRequestsShowYourHandDest"));
         cbAllowRequestToShowHandCards.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         cbAllowRequestToShowHandCards.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -714,8 +722,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         });
 
         cbShowStormCounter.setSelected(true);
-        cbShowStormCounter.setText("Show the number of spell casts during the current turn");
-        cbShowStormCounter.setToolTipText("<html>Adds a little box left to the short keys line with the number<br>\nof spells already cast during the current turn (storm counter).");
+        cbShowStormCounter.setText(Localizer.getInstance().getMessage("lblShowStormCounter"));
+        cbShowStormCounter.setToolTipText(Localizer.getInstance().getMessage("htmlShowStormCounterDest"));
         cbShowStormCounter.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         cbShowStormCounter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -724,8 +732,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         });
 
         cbConfirmEmptyManaPool.setSelected(true);
-        cbConfirmEmptyManaPool.setText("Confirm if you want to pass a phase/step but there is still mana in your mana pool");
-        cbConfirmEmptyManaPool.setToolTipText("<html>If activated you get a confirm message if you pass priority while stack is empty<br>\n and you still have mana in your mana pool.");
+        cbConfirmEmptyManaPool.setText(Localizer.getInstance().getMessage("lblStillManaInPollPassConfirm"));
+        cbConfirmEmptyManaPool.setToolTipText(Localizer.getInstance().getMessage("htmlStillManaInPollPassConfirmDest"));
         cbConfirmEmptyManaPool.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         cbConfirmEmptyManaPool.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -734,8 +742,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         });
 
         cbAskMoveToGraveOrder.setSelected(true);
-        cbAskMoveToGraveOrder.setText("Ask player for setting order cards go to graveyard");
-        cbAskMoveToGraveOrder.setToolTipText("<html>If activated and multiple cards go to the graveyard at the same time<br>\nthe player is asked to set the order of the cards.");
+        cbAskMoveToGraveOrder.setText(Localizer.getInstance().getMessage("lblSelectGoToGraveyardOrder"));
+        cbAskMoveToGraveOrder.setToolTipText(Localizer.getInstance().getMessage("htmlSelectGoToGraveyardOrderDest"));
         cbAskMoveToGraveOrder.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         cbAskMoveToGraveOrder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -785,10 +793,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         nonLandPermanentsInOnePile.getAccessibleContext().setAccessibleName("nonLandPermanentsInOnePile");
 
-        main_battlefield.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Battlefield"));
+        main_battlefield.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), Localizer.getInstance().getMessage("lblBattlefield")));
 
         cbBattlefieldFeedbackColorizingMode.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Disable colorizing", "Enable one color for all phases", "Enable multicolor for different phases"}));
-        cbBattlefieldFeedbackColorizingMode.setToolTipText("Battlefield feedback panel colorizing on your turn (e.g. use green color if you must select card or answer to request)");
+        cbBattlefieldFeedbackColorizingMode.setToolTipText(Localizer.getInstance().getMessage("lblFeedbackPanelColorizingDest"));
         cbBattlefieldFeedbackColorizingMode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbBattlefieldFeedbackColorizingModeActionPerformed(evt);
@@ -796,7 +804,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         });
 
         lblBattlefieldFeedbackColorizingMode.setLabelFor(cbBattlefieldFeedbackColorizingMode);
-        lblBattlefieldFeedbackColorizingMode.setText("Feedback panel colorizing:");
+        lblBattlefieldFeedbackColorizingMode.setText(Localizer.getInstance().getMessage("lblFeedbackPanelColorizing"));
 
         org.jdesktop.layout.GroupLayout main_battlefieldLayout = new org.jdesktop.layout.GroupLayout(main_battlefield);
         main_battlefield.setLayout(main_battlefieldLayout);
@@ -845,7 +853,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         main_card.getAccessibleContext().setAccessibleName("Game panel");
 
-        tabsPanel.addTab("Main", tabMain);
+        tabsPanel.addTab(Localizer.getInstance().getMessage("lblMainTable"), tabMain);
 
         tabGuiSize.setMaximumSize(new java.awt.Dimension(527, 423));
         tabGuiSize.setMinimumSize(new java.awt.Dimension(527, 423));
@@ -856,7 +864,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         tabGuiSizeLayout.rowWeights = new double[]{1.0, 0.0, 1.0};
         tabGuiSize.setLayout(tabGuiSizeLayout);
 
-        guiSizeBasic.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Size basic elements"));
+        guiSizeBasic.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), Localizer.getInstance().getMessage("lblBasicElementsSize")));
         guiSizeBasic.setMinimumSize(new java.awt.Dimension(600, 180));
         guiSizeBasic.setPreferredSize(new java.awt.Dimension(600, 180));
         java.awt.GridBagLayout guiSizeBasicLayout = new java.awt.GridBagLayout();
@@ -871,7 +879,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         sliderFontSize.setPaintLabels(true);
         sliderFontSize.setPaintTicks(true);
         sliderFontSize.setSnapToTicks(true);
-        sliderFontSize.setToolTipText("<HTML>The size of the font used to display table text.");
+        sliderFontSize.setToolTipText(Localizer.getInstance().getMessage("htmlTablesSizeDest"));
         sliderFontSize.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         sliderFontSize.setMinimumSize(new java.awt.Dimension(150, 40));
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -883,8 +891,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         guiSizeBasic.add(sliderFontSize, gridBagConstraints);
 
         fontSizeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        fontSizeLabel.setText("Tables");
-        fontSizeLabel.setToolTipText("<HTML>The size of the font used to display table text.");
+        fontSizeLabel.setText(Localizer.getInstance().getMessage("lblTables"));
+        fontSizeLabel.setToolTipText(Localizer.getInstance().getMessage("htmlTablesSizeDest"));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -900,7 +908,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         sliderChatFontSize.setPaintLabels(true);
         sliderChatFontSize.setPaintTicks(true);
         sliderChatFontSize.setSnapToTicks(true);
-        sliderChatFontSize.setToolTipText("<HTML>The size of the font used to display the chat text");
+        sliderChatFontSize.setToolTipText(Localizer.getInstance().getMessage("htmlChatTextSizeDest"));
         sliderChatFontSize.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         sliderChatFontSize.setMinimumSize(new java.awt.Dimension(150, 40));
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -912,8 +920,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         guiSizeBasic.add(sliderChatFontSize, gridBagConstraints);
 
         chatFontSizeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        chatFontSizeLabel.setText("Chat");
-        chatFontSizeLabel.setToolTipText("<HTML>The size of the font used to display the chat text");
+        chatFontSizeLabel.setText(Localizer.getInstance().getMessage("lblChat"));
+        chatFontSizeLabel.setToolTipText(Localizer.getInstance().getMessage("htmlChatTextSizeDest"));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
@@ -929,7 +937,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         sliderDialogFont.setPaintLabels(true);
         sliderDialogFont.setPaintTicks(true);
         sliderDialogFont.setSnapToTicks(true);
-        sliderDialogFont.setToolTipText("<HTML>The size of the font of messages and menues");
+        sliderDialogFont.setToolTipText(Localizer.getInstance().getMessage("htmlMessagesAndMenusSizeDest"));
         sliderDialogFont.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         sliderDialogFont.setMinimumSize(new java.awt.Dimension(150, 40));
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -941,8 +949,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         guiSizeBasic.add(sliderDialogFont, gridBagConstraints);
 
         labelDialogFont.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelDialogFont.setText("Messages and menus");
-        labelDialogFont.setToolTipText("<HTML>The size of the font of messages and menus");
+        labelDialogFont.setText(Localizer.getInstance().getMessage("lblMessagesAndMenusSize"));
+        labelDialogFont.setToolTipText(Localizer.getInstance().getMessage("htmlMessagesAndMenusSizeDest"));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -950,7 +958,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         gridBagConstraints.ipady = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         guiSizeBasic.add(labelDialogFont, gridBagConstraints);
-        labelDialogFont.getAccessibleContext().setAccessibleDescription("<HTML>The size of the font used to display messages or menus.");
+        labelDialogFont.getAccessibleContext().setAccessibleDescription(Localizer.getInstance().getMessage("htmlMessagesAndMenusSizeDest"));
 
         sliderEditorCardSize.setMajorTickSpacing(5);
         sliderEditorCardSize.setMaximum(50);
@@ -959,7 +967,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         sliderEditorCardSize.setPaintLabels(true);
         sliderEditorCardSize.setPaintTicks(true);
         sliderEditorCardSize.setSnapToTicks(true);
-        sliderEditorCardSize.setToolTipText("<HTML>The size of the card in editor and the picked zone of the draft panel");
+        sliderEditorCardSize.setToolTipText(Localizer.getInstance().getMessage("htmlCardSizeInEditorAndDraftPanelDest"));
         sliderEditorCardSize.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         sliderEditorCardSize.setMinimumSize(new java.awt.Dimension(150, 40));
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -971,8 +979,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         guiSizeBasic.add(sliderEditorCardSize, gridBagConstraints);
 
         labelEditorCardSize.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelEditorCardSize.setText("Cards in editor and draft panel");
-        labelEditorCardSize.setToolTipText("<HTML>The size of the card in editor and the picked zone of the draft panel\n");
+        labelEditorCardSize.setText(Localizer.getInstance().getMessage("lblCardSizeInEditorAndDraftPanel"));
+        labelEditorCardSize.setToolTipText(Localizer.getInstance().getMessage("htmlCardSizeInEditorAndDraftPanelDest"));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -988,7 +996,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         sliderEditorCardOffset.setPaintLabels(true);
         sliderEditorCardOffset.setPaintTicks(true);
         sliderEditorCardOffset.setSnapToTicks(true);
-        sliderEditorCardOffset.setToolTipText("<HTML>The size of the card in editor and the picked zone of the draft panel");
+        sliderEditorCardOffset.setToolTipText(Localizer.getInstance().getMessage("htmlCardSizeInEditorAndDraftPanelDest"));
         sliderEditorCardOffset.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         sliderEditorCardOffset.setMinimumSize(new java.awt.Dimension(150, 40));
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1000,8 +1008,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         guiSizeBasic.add(sliderEditorCardOffset, gridBagConstraints);
 
         labelEditorCardOffset.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelEditorCardOffset.setText("Card offset editor and draft");
-        labelEditorCardOffset.setToolTipText("<HTML>The vertical offset of card images in editor areas\n");
+        labelEditorCardOffset.setText(Localizer.getInstance().getMessage("lblCardOffSetInEditor"));
+        labelEditorCardOffset.setToolTipText(Localizer.getInstance().getMessage("htmlCardOffSetInEditorDest"));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
@@ -1017,7 +1025,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         sliderEnlargedImageSize.setPaintLabels(true);
         sliderEnlargedImageSize.setPaintTicks(true);
         sliderEnlargedImageSize.setSnapToTicks(true);
-        sliderEnlargedImageSize.setToolTipText("<HTML>The size of the image shown for the card your mouse pointer<br>is located over while you turn the mouse wheel ");
+        sliderEnlargedImageSize.setToolTipText(Localizer.getInstance().getMessage("htmlEnlargedImageDest"));
         sliderEnlargedImageSize.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         sliderEnlargedImageSize.setMinimumSize(new java.awt.Dimension(150, 40));
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1029,8 +1037,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         guiSizeBasic.add(sliderEnlargedImageSize, gridBagConstraints);
 
         labelEnlargedImageSize.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelEnlargedImageSize.setText("Enlarged image (mouse wheel)");
-        labelEnlargedImageSize.setToolTipText("<HTML>The size of the image shown for the card your mouse pointer<br>is located over while you turn the mouse wheel\n");
+        labelEnlargedImageSize.setText(Localizer.getInstance().getMessage("lblEnlargedImage"));
+        labelEnlargedImageSize.setToolTipText(Localizer.getInstance().getMessage("htmlEnlargedImageDest"));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 3;
@@ -1046,7 +1054,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         tabGuiSize.add(guiSizeBasic, gridBagConstraints);
 
-        guiSizeGame.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Size game elements"));
+        guiSizeGame.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), Localizer.getInstance().getMessage("lblGameElementSize")));
         guiSizeGame.setMinimumSize(new java.awt.Dimension(600, 180));
         guiSizeGame.setPreferredSize(new java.awt.Dimension(600, 180));
         java.awt.GridBagLayout guiSizeGameLayout = new java.awt.GridBagLayout();
@@ -1061,7 +1069,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         sliderCardSizeHand.setPaintLabels(true);
         sliderCardSizeHand.setPaintTicks(true);
         sliderCardSizeHand.setSnapToTicks(true);
-        sliderCardSizeHand.setToolTipText("<HTML>The size of the card images in hand and on the stack");
+        sliderCardSizeHand.setToolTipText(Localizer.getInstance().getMessage("htmlCardInHandStackSizeDest"));
         sliderCardSizeHand.setValue(14);
         sliderCardSizeHand.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         sliderCardSizeHand.setMinimumSize(new java.awt.Dimension(150, 40));
@@ -1074,8 +1082,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         guiSizeGame.add(sliderCardSizeHand, gridBagConstraints);
 
         labelCardSizeHand.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelCardSizeHand.setText("Hand cards and stack objects");
-        labelCardSizeHand.setToolTipText("<HTML>The size of the card images in hand and on the stack");
+        labelCardSizeHand.setText(Localizer.getInstance().getMessage("lblCardInHandStackSize"));
+        labelCardSizeHand.setToolTipText(Localizer.getInstance().getMessage("htmlCardInHandStackSizeDest"));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -1091,7 +1099,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         sliderCardSizeOtherZones.setPaintLabels(true);
         sliderCardSizeOtherZones.setPaintTicks(true);
         sliderCardSizeOtherZones.setSnapToTicks(true);
-        sliderCardSizeOtherZones.setToolTipText("<HTML>The size of card in other game zone (e.g. graveyard, revealed cards etc.)");
+        sliderCardSizeOtherZones.setToolTipText(Localizer.getInstance().getMessage("htmlOtherZonesCardSizeDest"));
         sliderCardSizeOtherZones.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         sliderCardSizeOtherZones.setMinimumSize(new java.awt.Dimension(150, 40));
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1103,8 +1111,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         guiSizeGame.add(sliderCardSizeOtherZones, gridBagConstraints);
 
         labelCardSizeOtherZones.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelCardSizeOtherZones.setText("Cards other zones");
-        labelCardSizeOtherZones.setToolTipText("<HTML>The size of card in other game zone (e.g. graveyard, revealed cards etc.)");
+        labelCardSizeOtherZones.setText(Localizer.getInstance().getMessage("lblOtherZonesCardSize"));
+        labelCardSizeOtherZones.setToolTipText(Localizer.getInstance().getMessage("htmlOtherZonesCardSizeDest"));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -1120,7 +1128,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         sliderCardSizeMinBattlefield.setPaintLabels(true);
         sliderCardSizeMinBattlefield.setPaintTicks(true);
         sliderCardSizeMinBattlefield.setSnapToTicks(true);
-        sliderCardSizeMinBattlefield.setToolTipText("<HTML>The maximum size of permanents on the battlefield");
+        sliderCardSizeMinBattlefield.setToolTipText(Localizer.getInstance().getMessage("htmlPermanentsMinSizeDest"));
         sliderCardSizeMinBattlefield.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         sliderCardSizeMinBattlefield.setMinimumSize(new java.awt.Dimension(150, 40));
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1132,8 +1140,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         guiSizeGame.add(sliderCardSizeMinBattlefield, gridBagConstraints);
 
         labelCardSizeMinBattlefield.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelCardSizeMinBattlefield.setText("Permanents min size");
-        labelCardSizeMinBattlefield.setToolTipText("<HTML>The minimum size of permanents on the battlefield");
+        labelCardSizeMinBattlefield.setText(Localizer.getInstance().getMessage("lblPermanentsMinSize"));
+        labelCardSizeMinBattlefield.setToolTipText(Localizer.getInstance().getMessage("htmlPermanentsMinSizeDest"));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
@@ -1149,7 +1157,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         sliderCardSizeMaxBattlefield.setPaintLabels(true);
         sliderCardSizeMaxBattlefield.setPaintTicks(true);
         sliderCardSizeMaxBattlefield.setSnapToTicks(true);
-        sliderCardSizeMaxBattlefield.setToolTipText("<HTML>The maximum size of permanents on the battlefield");
+        sliderCardSizeMaxBattlefield.setToolTipText(Localizer.getInstance().getMessage("htmlPermanentsMaxSizeDest"));
         sliderCardSizeMaxBattlefield.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         sliderCardSizeMaxBattlefield.setMinimumSize(new java.awt.Dimension(150, 40));
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1161,8 +1169,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         guiSizeGame.add(sliderCardSizeMaxBattlefield, gridBagConstraints);
 
         labelCardSizeMaxBattlefield.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelCardSizeMaxBattlefield.setText("Permanents max size");
-        labelCardSizeMaxBattlefield.setToolTipText("<HTML>The maximum size of permanents on the battlefield");
+        labelCardSizeMaxBattlefield.setText(Localizer.getInstance().getMessage("lblPermanentsMaxSize"));
+        labelCardSizeMaxBattlefield.setToolTipText(Localizer.getInstance().getMessage("htmlPermanentsMaxSizeDest"));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 1;
@@ -1178,7 +1186,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         sliderStackWidth.setPaintLabels(true);
         sliderStackWidth.setPaintTicks(true);
         sliderStackWidth.setSnapToTicks(true);
-        sliderStackWidth.setToolTipText("<HTML>The % size of the stack object area in relation to the hand card area size.");
+        sliderStackWidth.setToolTipText(Localizer.getInstance().getMessage("htmlStackRelatedHandDest"));
         sliderStackWidth.setValue(30);
         sliderStackWidth.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         sliderStackWidth.setMinimumSize(new java.awt.Dimension(150, 40));
@@ -1189,11 +1197,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         guiSizeGame.add(sliderStackWidth, gridBagConstraints);
-        sliderStackWidth.getAccessibleContext().setAccessibleDescription("<HTML>The stack width in relation to the hand area width");
+        sliderStackWidth.getAccessibleContext().setAccessibleDescription(Localizer.getInstance().getMessage("htmlStackRelatedHandDest"));
 
         labelStackWidth.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelStackWidth.setText("Stack %width related to hand");
-        labelStackWidth.setToolTipText("<HTML>The % size of the stack object area in relation to the hand card area size.");
+        labelStackWidth.setText(Localizer.getInstance().getMessage("lblStackRelatedHand"));
+        labelStackWidth.setToolTipText(Localizer.getInstance().getMessage("htmlStackRelatedHandDest"));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -1201,7 +1209,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         gridBagConstraints.ipady = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         guiSizeGame.add(labelStackWidth, gridBagConstraints);
-        labelStackWidth.getAccessibleContext().setAccessibleDescription("<HTML>The stack width in relation to the hand area width");
+        labelStackWidth.getAccessibleContext().setAccessibleDescription(Localizer.getInstance().getMessage("htmlStackRelatedHandDest"));
 
         sliderGameFeedbackArea.setMajorTickSpacing(5);
         sliderGameFeedbackArea.setMaximum(50);
@@ -1210,7 +1218,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         sliderGameFeedbackArea.setPaintLabels(true);
         sliderGameFeedbackArea.setPaintTicks(true);
         sliderGameFeedbackArea.setSnapToTicks(true);
-        sliderGameFeedbackArea.setToolTipText("<HTML>The size of the game feedback area (buttons and messages above the hand area)");
+        sliderGameFeedbackArea.setToolTipText(Localizer.getInstance().getMessage("htmlDialogAreaSizeDest"));
         sliderGameFeedbackArea.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         sliderGameFeedbackArea.setMinimumSize(new java.awt.Dimension(150, 40));
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1222,8 +1230,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         guiSizeGame.add(sliderGameFeedbackArea, gridBagConstraints);
 
         labelGameFeedback.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelGameFeedback.setText("Dialog area");
-        labelGameFeedback.setToolTipText("<HTML>The size of the game feedback area (buttons and messages above the hand area)");
+        labelGameFeedback.setText(Localizer.getInstance().getMessage("lblDialogAreaSize"));
+        labelGameFeedback.setToolTipText(Localizer.getInstance().getMessage("htmlDialogAreaSizeDest"));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
@@ -1240,7 +1248,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         sliderTooltipSize.setPaintLabels(true);
         sliderTooltipSize.setPaintTicks(true);
         sliderTooltipSize.setSnapToTicks(true);
-        sliderTooltipSize.setToolTipText("<HTML>The size of the tooltip window for cards or permanents");
+        sliderTooltipSize.setToolTipText(Localizer.getInstance().getMessage("htmlTooltipWindowSizeDest"));
         sliderTooltipSize.setValue(14);
         sliderTooltipSize.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         sliderTooltipSize.setMinimumSize(new java.awt.Dimension(150, 40));
@@ -1253,8 +1261,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         guiSizeGame.add(sliderTooltipSize, gridBagConstraints);
 
         labelTooltipSize.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelTooltipSize.setText("Tooltip window");
-        labelTooltipSize.setToolTipText("<HTML>The size of the tooltip window for cards or permanents");
+        labelTooltipSize.setText(Localizer.getInstance().getMessage("lblTooltipWindowSize"));
+        labelTooltipSize.setToolTipText(Localizer.getInstance().getMessage("htmlTooltipWindowSizeDest"));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 3;
@@ -1270,33 +1278,33 @@ public class PreferencesDialog extends javax.swing.JDialog {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         tabGuiSize.add(guiSizeGame, gridBagConstraints);
 
-        tabsPanel.addTab("GUI Size", tabGuiSize);
+        tabsPanel.addTab(Localizer.getInstance().getMessage("lblGUISize"), tabGuiSize);
 
-        jLabelHeadLine.setText("Default stop steps if not skip buttons activated (e.g. F6):");
+        jLabelHeadLine.setText(Localizer.getInstance().getMessage("lblDefaultIfNotSkipStopSteps"));
 
-        jLabelYourTurn.setText("Your turn");
+        jLabelYourTurn.setText(Localizer.getInstance().getMessage("lblYourTurn"));
 
-        jLabelOpponentsTurn.setText("Opponent(s) turn");
+        jLabelOpponentsTurn.setText(Localizer.getInstance().getMessage("lblOpponentsTurn"));
 
-        jLabelUpkeep.setText("Upkeep:");
+        jLabelUpkeep.setText(Localizer.getInstance().getMessage("lblUpkeep") + ":");
 
-        jLabelDraw.setText("Draw:");
+        jLabelDraw.setText(Localizer.getInstance().getMessage("lblDraw") + ":");
 
-        jLabelMain1.setText("Main 1:");
+        jLabelMain1.setText(Localizer.getInstance().getMessage("lblMain1") + ":");
 
-        jLabelBeforeCombat.setText("Before combat:");
+        jLabelBeforeCombat.setText(Localizer.getInstance().getMessage("lblBeginningCombat") + ":");
 
-        jLabelEndofCombat.setText("End of combat:");
+        jLabelEndofCombat.setText(Localizer.getInstance().getMessage("lblEndOfCombat") + ":");
 
-        jLabelMain2.setText("Main 2:");
+        jLabelMain2.setText(Localizer.getInstance().getMessage("lblMain2") + ":");
 
-        jLabelEndOfTurn.setText("End of turn:");
+        jLabelEndOfTurn.setText(Localizer.getInstance().getMessage("lblEndOfTurn") + ":");
 
-        phases_stopSettings.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "SKIP settings"));
+        phases_stopSettings.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), Localizer.getInstance().getMessage("lblSKIPSettings")));
         phases_stopSettings.setLayout(new java.awt.GridLayout(9, 1));
 
         cbStopAttack.setSelected(true);
-        cbStopAttack.setText("STOP skips on declare attackers if attackers are available");
+        cbStopAttack.setText(Localizer.getInstance().getMessage("lblStopSkipsOnAvailbleAttackers"));
         cbStopAttack.setToolTipText("");
         cbStopAttack.setActionCommand("");
         cbStopAttack.addActionListener(new java.awt.event.ActionListener() {
@@ -1307,7 +1315,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         phases_stopSettings.add(cbStopAttack);
 
         cbStopBlockWithAny.setSelected(true);
-        cbStopBlockWithAny.setText("STOP skips on declare blockers if ANY blockers are available");
+        cbStopBlockWithAny.setText(Localizer.getInstance().getMessage("lblStopSkipsOnAvailbleBlockers"));
         cbStopBlockWithAny.setToolTipText("");
         cbStopBlockWithAny.setActionCommand("");
         cbStopBlockWithAny.addActionListener(new java.awt.event.ActionListener() {
@@ -1317,7 +1325,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         });
         phases_stopSettings.add(cbStopBlockWithAny);
 
-        cbStopBlockWithZero.setText("STOP skips on declare blockers if ZERO blockers are available");
+        cbStopBlockWithZero.setText(Localizer.getInstance().getMessage("lblStopSkipsOnNoAvailbleBlockers"));
         cbStopBlockWithZero.setToolTipText("");
         cbStopBlockWithZero.setActionCommand("");
         cbStopBlockWithZero.addActionListener(new java.awt.event.ActionListener() {
@@ -1327,7 +1335,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         });
         phases_stopSettings.add(cbStopBlockWithZero);
 
-        cbStopOnNewStackObjects.setText("Skip to STACK resolved (F10): stop on new objects added (on) or stop until empty (off)");
+        cbStopOnNewStackObjects.setText(Localizer.getInstance().getMessage("lblSkipToStackAddedObjectOrUntilEmpty"));
         cbStopOnNewStackObjects.setToolTipText("");
         cbStopOnNewStackObjects.setActionCommand("");
         cbStopOnNewStackObjects.setPreferredSize(new java.awt.Dimension(300, 25));
@@ -1338,7 +1346,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         });
         phases_stopSettings.add(cbStopOnNewStackObjects);
 
-        cbStopOnAllMain.setText("Skip to MAIN step (F7): stop on any main steps (on) or stop on your main step (off)");
+        cbStopOnAllMain.setText(Localizer.getInstance().getMessage("lblSkipToAnyOrYourMainStep"));
         cbStopOnAllMain.setToolTipText("");
         cbStopOnAllMain.setActionCommand("");
         cbStopOnAllMain.addActionListener(new java.awt.event.ActionListener() {
@@ -1348,7 +1356,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         });
         phases_stopSettings.add(cbStopOnAllMain);
 
-        cbStopOnAllEnd.setText("Skip to END step (F5): stop on any end steps (on) or stop on opponents end step (off)");
+        cbStopOnAllEnd.setText(Localizer.getInstance().getMessage("lblSkipToAnyOrOpponentsEndStep"));
         cbStopOnAllEnd.setToolTipText("");
         cbStopOnAllEnd.setActionCommand("");
         cbStopOnAllEnd.setPreferredSize(new java.awt.Dimension(300, 25));
@@ -1359,8 +1367,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         });
         phases_stopSettings.add(cbStopOnAllEnd);
 
-        cbPassPriorityCast.setText("Pass priority automatically after you have put a spell on the stack");
-        cbPassPriorityCast.setToolTipText("If activated the system passes priority automatically for you if you have put a spell on the stack.");
+        cbPassPriorityCast.setText(Localizer.getInstance().getMessage("lblAutoPassAfterSpellOnStack"));
+        cbPassPriorityCast.setToolTipText(Localizer.getInstance().getMessage("lblAutoPassAfterSpellOnStackDest"));
         cbPassPriorityCast.setActionCommand("");
         cbPassPriorityCast.setPreferredSize(new java.awt.Dimension(300, 25));
         cbPassPriorityCast.addActionListener(new java.awt.event.ActionListener() {
@@ -1370,8 +1378,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         });
         phases_stopSettings.add(cbPassPriorityCast);
 
-        cbPassPriorityActivation.setText("Pass priority automatically after you have put an activated ability on the stack");
-        cbPassPriorityActivation.setToolTipText("If activated the system passes priority for you automatically after you have put an activated ability on the stack.");
+        cbPassPriorityActivation.setText(Localizer.getInstance().getMessage("lblAutoPassAfterAbilityOnStack"));
+        cbPassPriorityActivation.setToolTipText(Localizer.getInstance().getMessage("lblAutoPassAfterAbilityOnStackDest"));
         cbPassPriorityActivation.setActionCommand("");
         cbPassPriorityActivation.setPreferredSize(new java.awt.Dimension(300, 25));
         cbPassPriorityActivation.addActionListener(new java.awt.event.ActionListener() {
@@ -1381,8 +1389,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         });
         phases_stopSettings.add(cbPassPriorityActivation);
 
-        cbAutoOrderTrigger.setText("Set order for your triggers automatically if all have the same text");
-        cbAutoOrderTrigger.setToolTipText("<HTML>If activated the order to put on the stack your triggers that trigger at the same time<br/>\nis set automatically if all have the same text.");
+        cbAutoOrderTrigger.setText(Localizer.getInstance().getMessage("lblIfSameTextAutoSetTriggersOrder"));
+        cbAutoOrderTrigger.setToolTipText(Localizer.getInstance().getMessage("htmlIfSameTextAutoSetTriggersOrderDest"));
         cbAutoOrderTrigger.setActionCommand("");
         cbAutoOrderTrigger.setPreferredSize(new java.awt.Dimension(300, 25));
         cbAutoOrderTrigger.addActionListener(new java.awt.event.ActionListener() {
@@ -1506,27 +1514,27 @@ public class PreferencesDialog extends javax.swing.JDialog {
                                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        tabsPanel.addTab("Phases & Priority", tabPhases);
+        tabsPanel.addTab(Localizer.getInstance().getMessage("lblPhasesAndPriority"), tabPhases);
 
-        panelCardImages.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Card images"));
+        panelCardImages.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), Localizer.getInstance().getMessage("lblCardImages")));
 
-        cbUseDefaultImageFolder.setText("Use default location to save images");
+        cbUseDefaultImageFolder.setText(Localizer.getInstance().getMessage("lblUseDefaultImageLocation"));
         cbUseDefaultImageFolder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbUseDefaultImageFolderActionPerformed(evt);
             }
         });
 
-        txtImageFolderPath.setToolTipText("The selected image will be used as background picture. You have to restart MAGE to view a changed background image.");
+        txtImageFolderPath.setToolTipText(Localizer.getInstance().getMessage("lblBGImageDest"));
 
-        btnBrowseImageLocation.setText("Browse...");
+        btnBrowseImageLocation.setText(Localizer.getInstance().getMessage("lblBrowseFileSystem"));
         btnBrowseImageLocation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBrowseImageLocationActionPerformed(evt);
             }
         });
 
-        cbSaveToZipFiles.setText("Store images in zip files");
+        cbSaveToZipFiles.setText(Localizer.getInstance().getMessage("lblStoreImagesInZIPFile"));
         cbSaveToZipFiles.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbSaveToZipFilesActionPerformed(evt);
@@ -1536,15 +1544,15 @@ public class PreferencesDialog extends javax.swing.JDialog {
         cbPreferedImageLanguage.setMaximumRowCount(20);
         cbPreferedImageLanguage.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
 
-        labelPreferedImageLanguage.setText("Default images language:");
+        labelPreferedImageLanguage.setText(Localizer.getInstance().getMessage("lblDefaultImagesLang"));
         labelPreferedImageLanguage.setFocusable(false);
 
-        labelNumberOfDownloadThreads.setText("Number of download threads:");
+        labelNumberOfDownloadThreads.setText(Localizer.getInstance().getMessage("lblDwonloadThreadsNumber"));
 
         cbNumberOfDownloadThreads.setMaximumRowCount(20);
         cbNumberOfDownloadThreads.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
 
-        labelHint1.setText("(change it to 1-3 if image source bans your IP for too many connections)");
+        labelHint1.setText(Localizer.getInstance().getMessage("lblDwonloadThreadsNumberDest"));
 
         org.jdesktop.layout.GroupLayout panelCardImagesLayout = new org.jdesktop.layout.GroupLayout(panelCardImages);
         panelCardImages.setLayout(panelCardImagesLayout);
@@ -1595,23 +1603,23 @@ public class PreferencesDialog extends javax.swing.JDialog {
                                         .add(cbPreferedImageLanguage, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
         );
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Card styles (restart xmage to apply new settings)"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), Localizer.getInstance().getMessage("lblCardStyles")));
 
-        cbCardRenderImageFallback.setText("Render mode: MTGO style (off) or IMAGE style (on)");
+        cbCardRenderImageFallback.setText(Localizer.getInstance().getMessage("lblRenderMode"));
         cbCardRenderImageFallback.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbCardRenderImageFallbackActionPerformed(evt);
             }
         });
 
-        cbCardRenderShowReminderText.setText("Show reminder text in rendered card textboxes");
+        cbCardRenderShowReminderText.setText(Localizer.getInstance().getMessage("lblShowReminderText"));
         cbCardRenderShowReminderText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbCardRenderShowReminderTextActionPerformed(evt);
             }
         });
 
-        cbCardRenderHideSetSymbol.setText("Hide set symbols on cards (more space on the type line for card types)");
+        cbCardRenderHideSetSymbol.setText(Localizer.getInstance().getMessage("lblHideSetSymbolsOnCards"));
         cbCardRenderHideSetSymbol.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbCardRenderHideSetSymbolActionPerformed(evt);
@@ -1640,9 +1648,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
                                 .add(0, 0, Short.MAX_VALUE))
         );
 
-        panelBackgroundImages.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Background images"));
+        panelBackgroundImages.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), Localizer.getInstance().getMessage("lblBackgroundImages")));
 
-        cbUseDefaultBackground.setText("Use default location for backgrounds");
+        cbUseDefaultBackground.setText(Localizer.getInstance().getMessage("lblBGImageUseDefaultLocation"));
         cbUseDefaultBackground.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbUseDefaultBackgroundActionPerformed(evt);
@@ -1655,7 +1663,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
             }
         });
 
-        btnBrowseBackgroundImage.setText("Browse...");
+        btnBrowseBackgroundImage.setText(Localizer.getInstance().getMessage("lblBrowseFileSystem"));
         btnBrowseBackgroundImage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBrowseBackgroundImageActionPerformed(evt);
@@ -1668,21 +1676,21 @@ public class PreferencesDialog extends javax.swing.JDialog {
             }
         });
 
-        btnBrowseBattlefieldImage.setText("Browse...");
+        btnBrowseBattlefieldImage.setText(Localizer.getInstance().getMessage("lblBrowseFileSystem"));
         btnBrowseBattlefieldImage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBrowseBattlefieldImageActionPerformed(evt);
             }
         });
 
-        cbUseDefaultBattleImage.setText("Use default battlefield image");
+        cbUseDefaultBattleImage.setText(Localizer.getInstance().getMessage("lblUseDefaultBattlefieldImage"));
         cbUseDefaultBattleImage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbUseDefaultBattleImageActionPerformed(evt);
             }
         });
 
-        cbUseRandomBattleImage.setText("Use random background");
+        cbUseRandomBattleImage.setText(Localizer.getInstance().getMessage("lblUseRandomBackground"));
         cbUseRandomBattleImage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbUseRandomBattleImageActionPerformed(evt);
@@ -1753,13 +1761,13 @@ public class PreferencesDialog extends javax.swing.JDialog {
                                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        tabsPanel.addTab("Images", tabImages);
+        tabsPanel.addTab(Localizer.getInstance().getMessage("lblImages"), tabImages);
 
-        sounds_clips.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Clips"));
+        sounds_clips.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), Localizer.getInstance().getMessage("lblClips")));
         sounds_clips.setLayout(new java.awt.GridLayout(4, 0));
 
-        cbEnableGameSounds.setText("Enable game sounds");
-        cbEnableGameSounds.setToolTipText("Sounds that will be played for certain actions (e.g. play land, attack, etc.) during the game.");
+        cbEnableGameSounds.setText(Localizer.getInstance().getMessage("lblEnableGameSounds"));
+        cbEnableGameSounds.setToolTipText(Localizer.getInstance().getMessage("lblEnableGameSoundsDest"));
         cbEnableGameSounds.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbEnableGameSoundsActionPerformed(evt);
@@ -1767,8 +1775,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         });
         sounds_clips.add(cbEnableGameSounds);
 
-        cbEnableDraftSounds.setText("Enable draft sounds");
-        cbEnableDraftSounds.setToolTipText("Sounds that will be played during drafting for card picking or warining if time runs out.");
+        cbEnableDraftSounds.setText(Localizer.getInstance().getMessage("lblEnableDraftSounds"));
+        cbEnableDraftSounds.setToolTipText(Localizer.getInstance().getMessage("lblEnableDraftSoundsDest"));
         cbEnableDraftSounds.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbEnableDraftSoundsActionPerformed(evt);
@@ -1776,8 +1784,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         });
         sounds_clips.add(cbEnableDraftSounds);
 
-        cbEnableSkipButtonsSounds.setText("Enable skip button sounds");
-        cbEnableSkipButtonsSounds.setToolTipText("Sounds that will be played if a priority skip action (F4/F5/F7/F9) or cancel skip action (F3) is used.");
+        cbEnableSkipButtonsSounds.setText(Localizer.getInstance().getMessage("lblEnableSkipButtonSounds"));
+        cbEnableSkipButtonsSounds.setToolTipText(Localizer.getInstance().getMessage("lblEnableSkipButtonSoundsDest"));
         cbEnableSkipButtonsSounds.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbEnableSkipButtonsSoundsActionPerformed(evt);
@@ -1785,8 +1793,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         });
         sounds_clips.add(cbEnableSkipButtonsSounds);
 
-        cbEnableOtherSounds.setText("Enable other sounds");
-        cbEnableOtherSounds.setToolTipText("Sounds that will be played for actions outside of games (e.g. whisper, player joins your game, player submits a deck ...).");
+        cbEnableOtherSounds.setText(Localizer.getInstance().getMessage("lblEnableOtherSounds"));
+        cbEnableOtherSounds.setToolTipText(Localizer.getInstance().getMessage("lblEnableOtherSoundsDest"));
         cbEnableOtherSounds.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbEnableOtherSoundsActionPerformed(evt);
@@ -1794,10 +1802,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
         });
         sounds_clips.add(cbEnableOtherSounds);
 
-        sounds_backgroundMusic.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Music"));
+        sounds_backgroundMusic.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), Localizer.getInstance().getMessage("lblMusic")));
 
-        cbEnableBattlefieldBGM.setText("Play music during match");
-        cbEnableBattlefieldBGM.setToolTipText("During your matches music will be played from the seleced folder.");
+        cbEnableBattlefieldBGM.setText(Localizer.getInstance().getMessage("lblPlayMusicDuringMatch"));
+        cbEnableBattlefieldBGM.setToolTipText(Localizer.getInstance().getMessage("lblPlayMusicDuringMatchDest"));
         cbEnableBattlefieldBGM.setActionCommand("Play automatically during matches");
         cbEnableBattlefieldBGM.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1805,7 +1813,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
             }
         });
 
-        jLabel16.setText("Playing from folder:");
+        jLabel16.setText(Localizer.getInstance().getMessage("lblPlayingFromFolder"));
         jLabel16.setToolTipText("");
 
         txtBattlefieldIBGMPath.addActionListener(new java.awt.event.ActionListener() {
@@ -1814,7 +1822,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
             }
         });
 
-        btnBattlefieldBGMBrowse.setText("Browse...");
+        btnBattlefieldBGMBrowse.setText(Localizer.getInstance().getMessage("lblBrowseFileSystem"));
         btnBattlefieldBGMBrowse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBattlefieldBGMBrowseActionPerformed(evt);
@@ -1870,7 +1878,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         sounds_clips.getAccessibleContext().setAccessibleDescription("");
 
-        tabsPanel.addTab("Sounds", tabSounds);
+        tabsPanel.addTab(Localizer.getInstance().getMessage("lblSounds"), tabSounds);
 
         avatarPane.setMaximumSize(new java.awt.Dimension(508, 772));
         avatarPane.setMinimumSize(new java.awt.Dimension(508, 772));
@@ -2329,21 +2337,21 @@ public class PreferencesDialog extends javax.swing.JDialog {
                                 .addContainerGap())
         );
 
-        tabsPanel.addTab("Avatars", tabAvatars);
+        tabsPanel.addTab(Localizer.getInstance().getMessage("lblAvatars"), tabAvatars);
 
-        connection_servers.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Servers"));
+        connection_servers.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), Localizer.getInstance().getMessage("lblServer")));
 
         lblURLServerList.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblURLServerList.setText("URL server list:");
+        lblURLServerList.setText(Localizer.getInstance().getMessage("lblServerListURL"));
         lblURLServerList.setToolTipText("");
         lblURLServerList.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         lblURLServerList.setPreferredSize(new java.awt.Dimension(110, 16));
         lblURLServerList.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        txtURLServerList.setToolTipText("The URL XMage tries to read a server list from.");
+        txtURLServerList.setToolTipText(Localizer.getInstance().getMessage("lblServerListURLDest"));
         txtURLServerList.setPreferredSize(new java.awt.Dimension(300, 22));
 
-        jLabel17.setFont(new java.awt.Font("Tahoma", 2, 10)); // NOI18N
+        jLabel17.setFont(new java.awt.Font("Microsoft YaHei", 2, 10)); // NOI18N
         jLabel17.setText("e.g.: http://XMage.de/files/server-list.txt");
 
         org.jdesktop.layout.GroupLayout connection_serversLayout = new org.jdesktop.layout.GroupLayout(connection_servers);
@@ -2372,7 +2380,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                                 .add(jLabel17))
         );
 
-        lblProxyType.setText("Proxy:");
+        lblProxyType.setText(Localizer.getInstance().getMessage("lblProxy") + ":");
 
         cbProxyType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2382,9 +2390,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         pnlProxySettings.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        lblProxyServer.setText("Server:");
+        lblProxyServer.setText(Localizer.getInstance().getMessage("lblServer") + ":");
 
-        lblProxyPort.setText("Port:");
+        lblProxyPort.setText(Localizer.getInstance().getMessage("lblPort") + ":");
 
         txtProxyPort.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -2392,9 +2400,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
             }
         });
 
-        lblProxyUserName.setText("User Name:");
+        lblProxyUserName.setText(Localizer.getInstance().getMessage("lblUserName") + ":");
 
-        lblProxyPassword.setText("Password:");
+        lblProxyPassword.setText(Localizer.getInstance().getMessage("lblPassword") + ":");
 
         txtPasswordField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2402,15 +2410,15 @@ public class PreferencesDialog extends javax.swing.JDialog {
             }
         });
 
-        rememberPswd.setText("Remember Password");
+        rememberPswd.setText(Localizer.getInstance().getMessage("lblRememberPassword"));
         rememberPswd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rememberPswdActionPerformed(evt);
             }
         });
 
-        jLabel11.setFont(new java.awt.Font("Tahoma", 2, 10)); // NOI18N
-        jLabel11.setText("Note: password won't be encrypted!");
+        jLabel11.setFont(new java.awt.Font("Microsoft YaHei", 2, 10)); // NOI18N
+        jLabel11.setText(Localizer.getInstance().getMessage("lblPasswordWontBeEncrypted"));
 
         org.jdesktop.layout.GroupLayout pnlProxyLayout = new org.jdesktop.layout.GroupLayout(pnlProxy);
         pnlProxy.setLayout(pnlProxyLayout);
@@ -2512,21 +2520,21 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         pnlProxySettings.getAccessibleContext().setAccessibleDescription("");
 
-        tabsPanel.addTab("Connection", tabConnection);
+        tabsPanel.addTab(Localizer.getInstance().getMessage("lblConnection"), tabConnection);
 
-        labelNextTurn.setText("Next Turn:");
+        labelNextTurn.setText(Localizer.getInstance().getMessage("lblNextTurn") + ":");
 
-        labelEndStep.setText("End Step:");
+        labelEndStep.setText(Localizer.getInstance().getMessage("lblEndStep") + ":");
 
-        labelMainStep.setText("Main Step:");
+        labelMainStep.setText(Localizer.getInstance().getMessage("lblMainStep") + ":");
 
-        labelYourTurn.setText("Your Turn:");
+        labelYourTurn.setText(Localizer.getInstance().getMessage("lblYourTurn") + ":");
 
-        lebelSkip.setText("Skip Stack:");
+        lebelSkip.setText(Localizer.getInstance().getMessage("lblSkipStack") + ":");
 
-        labelPriorEnd.setText("Prior End:");
+        labelPriorEnd.setText(Localizer.getInstance().getMessage("lblPriorEnd") + ":");
 
-        labelCancel.setText("Cancel Skip:");
+        labelCancel.setText(Localizer.getInstance().getMessage("lblCancelSkip") + ":");
 
         keyCancelSkip.setText("keyBindButton1");
 
@@ -2544,27 +2552,27 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         keySkipStep.setText("keyBindButton1");
 
-        labelSkipStep.setText("Skip Step:");
+        labelSkipStep.setText(Localizer.getInstance().getMessage("lblSkipStep") + ":");
 
         keyConfirm.setText("keyBindButton1");
 
-        labelConfirm.setText("Confirm:");
+        labelConfirm.setText(Localizer.getInstance().getMessage("lblConfirm") + ":");
 
-        controlsDescriptionLabel.setText("<html>Click on a button and press a KEY or a combination of CTRL/ALT/SHIF + KEY to change a keybind.\n<br>\nPress SPACE to clear binging.\n<br>\nPress ESC to cancel binding.\n<br>\nNew changes will be applied after new game start.");
+        controlsDescriptionLabel.setText(Localizer.getInstance().getMessage("htmlControlDest"));
         controlsDescriptionLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
-        bttnResetControls.setText("Reset to default");
+        bttnResetControls.setText(Localizer.getInstance().getMessage("lblResetToDefault"));
         bttnResetControls.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bttnResetControlsActionPerformed(evt);
             }
         });
 
-        labelToggleRecordMacro.setText("Record Macro (unsupported):");
+        labelToggleRecordMacro.setText(Localizer.getInstance().getMessage("lblRecordMacro"));
 
         keyToggleRecordMacro.setText("keyBindButton1");
 
-        labelSwitchChat.setText("Go in/out to chat:");
+        labelSwitchChat.setText(Localizer.getInstance().getMessage("lblGoInOutChat"));
 
         keySwitchChat.setText("keyBindButton1");
 
@@ -2661,9 +2669,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
                                 .addContainerGap())
         );
 
-        tabsPanel.addTab("Controls", tabControls);
+        tabsPanel.addTab(Localizer.getInstance().getMessage("lblControls"), tabControls);
 
-        saveButton.setLabel("Save");
+        saveButton.setLabel(Localizer.getInstance().getMessage("lblSave"));
         saveButton.setMaximumSize(new java.awt.Dimension(100, 30));
         saveButton.setMinimumSize(new java.awt.Dimension(100, 30));
         saveButton.setPreferredSize(new java.awt.Dimension(100, 30));
@@ -2674,7 +2682,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
             }
         });
 
-        exitButton.setLabel("Exit");
+        exitButton.setLabel(Localizer.getInstance().getMessage("lblExit"));
         exitButton.setMaximumSize(new java.awt.Dimension(100, 30));
         exitButton.setMinimumSize(new java.awt.Dimension(100, 30));
         exitButton.setPreferredSize(new java.awt.Dimension(100, 30));
@@ -2684,6 +2692,18 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 exitButtonActionPerformed(evt);
             }
         });
+
+        tabsPanel.addTab(Localizer.getInstance().getMessage("lblLanguages"), tabLanguages);
+        lblGUILanguages.setText(Localizer.getInstance().getMessage("lblUILanguages"));
+        cbPreferedGUILanguage.setModel(new DefaultComboBoxModel<>(new String[]{"en-US", "zh-CN"}));
+        cbPreferedGUILanguage.setSelectedItem(MageFrame.getPreferences().get(KEY_GUI_LANGUAGES, "en-US"));
+        cbPreferedGUILanguage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                setGUILanguages(evt);
+            }
+        });
+        tabLanguages.add(lblGUILanguages);
+        tabLanguages.add(cbPreferedGUILanguage);
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -2891,8 +2911,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
             prefs.flush();
         } catch (BackingStoreException ex) {
             logger.error("Error: couldn't save preferences", ex);
-            UserRequestMessage message = new UserRequestMessage("Error", "Error: couldn't save preferences. Please try once again.");
-            message.setButton1("OK", null);
+            UserRequestMessage message = new UserRequestMessage(Localizer.getInstance().getMessage("lblError"), Localizer.getInstance().getMessage("lblCouldntSavePreferences"));
+            message.setButton1(Localizer.getInstance().getMessage("lblOK"), null);
             MageFrame.getInstance().showUserRequestDialog(message);
         }
 
@@ -2903,6 +2923,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
         dialog.setVisible(false);
     }//GEN-LAST:event_exitButtonActionPerformed
 
+    private void setGUILanguages(java.awt.event.ActionEvent evt) {
+        Preferences prefs = MageFrame.getPreferences();
+        save(prefs, dialog.cbPreferedGUILanguage, KEY_GUI_LANGUAGES);
+    }
     private void useDefaultPath() {
         txtImageFolderPath.setText("./plugins/images/");
         txtImageFolderPath.setEnabled(false);
@@ -3752,7 +3776,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
             prefs.flush();
         } catch (BackingStoreException ex) {
             ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error: couldn't save preferences. Please try once again.");
+            JOptionPane.showMessageDialog(null, Localizer.getInstance().getMessage("lblCouldntSavePreferences"));
         }
         updateCache(key, value);
     }
@@ -4074,6 +4098,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JTextField txtProxyServer;
     private javax.swing.JTextField txtProxyUserName;
     private javax.swing.JTextField txtURLServerList;
+    private javax.swing.JPanel tabLanguages;
+    private javax.swing.JComboBox<String> cbPreferedGUILanguage;
+    private javax.swing.JLabel lblGUILanguages;
     // End of variables declaration//GEN-END:variables
 
     private static final PreferencesDialog dialog = new PreferencesDialog(new javax.swing.JFrame(), true);

@@ -16,7 +16,7 @@ public class MyComboBoxRenderer extends JLabel implements ListCellRenderer {
  
     public MyComboBoxRenderer() {
         setOpaque(true);
-        setFont(new Font("Arial", Font.BOLD /*| Font.ITALIC*/, 14));
+        setFont(new Font("Microsoft YaHei", Font.BOLD /*| Font.ITALIC*/, 14));
         setBackground(Color.BLUE);
         setForeground(Color.YELLOW);
     }

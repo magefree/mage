@@ -649,9 +649,9 @@ public final class GamePanel extends javax.swing.JPanel {
                 if (change) {
                     handCardsOfOpponentAvailable = !handCardsOfOpponentAvailable;
                     if (handCardsOfOpponentAvailable) {
-                        MageFrame.getInstance().showMessage("You control other player's turn. \nUse \"Switch Hand\" button to switch between cards in different hands.");
+                        MageFrame.getInstance().showMessage(Localizer.getInstance().getMessage("lblYouControlOtherPlayerTurn"));
                     } else {
-                        MageFrame.getInstance().showMessage("You lost control on other player's turn.");
+                        MageFrame.getInstance().showMessage(Localizer.getInstance().getMessage("lblYouLostOtherPlayerTurnControl"));
                     }
                 }
             } else {
@@ -2080,7 +2080,7 @@ public final class GamePanel extends javax.swing.JPanel {
         };
         String[] phases = {"Untap", "Upkeep", "Draw", "Main1",
                 "Combat_Start", "Combat_Attack", "Combat_Block", "Combat_Damage", "Combat_End",
-                "Main2", "Cleanup", "Next_Turn"};
+                "Main2", "Cleanup", "Next_Turn"}; //don't I18N
         for (String name : phases) {
             createPhaseButton(name, phasesMouseAdapter);
         }
@@ -2283,9 +2283,9 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     private void btnConcedeActionPerformed(java.awt.event.ActionEvent evt) {
-        UserRequestMessage message = new UserRequestMessage("Confirm concede", "Are you sure you want to concede?");
-        message.setButton1("No", null);
-        message.setButton2("Yes", PlayerAction.CLIENT_CONCEDE_GAME);
+        UserRequestMessage message = new UserRequestMessage(Localizer.getInstance().getMessage("lblConfirmConcede"), Localizer.getInstance().getMessage("lblAreYouSureConcede"));
+        message.setButton1(Localizer.getInstance().getMessage("lblNo"), null);
+        message.setButton2(Localizer.getInstance().getMessage("lblYes"), PlayerAction.CLIENT_CONCEDE_GAME);
         message.setGameId(gameId);
         MageFrame.getInstance().showUserRequestDialog(message);
     }
@@ -2408,9 +2408,9 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     private void btnStopWatchingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStopWatchingActionPerformed
-        UserRequestMessage message = new UserRequestMessage("Stop watching", "Are you sure you want to stop watching?");
-        message.setButton1("No", null);
-        message.setButton2("Yes", PlayerAction.CLIENT_STOP_WATCHING);
+        UserRequestMessage message = new UserRequestMessage(Localizer.getInstance().getMessage("lblStopWatching"), Localizer.getInstance().getMessage("lblAreYouSureStopWatching"));
+        message.setButton1(Localizer.getInstance().getMessage("lblNo"), null);
+        message.setButton2(Localizer.getInstance().getMessage("lblYes"), PlayerAction.CLIENT_STOP_WATCHING);
         message.setGameId(gameId);
         MageFrame.getInstance().showUserRequestDialog(message);
     }//GEN-LAST:event_btnStopWatchingActionPerformed
@@ -2419,9 +2419,9 @@ public final class GamePanel extends javax.swing.JPanel {
         if (replayTask != null && !replayTask.isDone()) {
             replayTask.cancel(true);
         } else {
-            UserRequestMessage message = new UserRequestMessage("Stop replay", "Are you sure you want to stop replay?");
-            message.setButton1("No", null);
-            message.setButton2("Yes", PlayerAction.CLIENT_REPLAY_ACTION);
+            UserRequestMessage message = new UserRequestMessage(Localizer.getInstance().getMessage("lblStopReplay"), Localizer.getInstance().getMessage("lblAreYouSureStopReplay"));
+            message.setButton1(Localizer.getInstance().getMessage("lblNo"), null);
+            message.setButton2(Localizer.getInstance().getMessage("lblYes"), PlayerAction.CLIENT_REPLAY_ACTION);
             message.setGameId(gameId);
             MageFrame.getInstance().showUserRequestDialog(message);
         }
@@ -2537,27 +2537,27 @@ public final class GamePanel extends javax.swing.JPanel {
 
         // String tooltipText = "";
         JMenuItem menuItem;
-        menuItem = new JMenuItem("Put this ability always first on the stack");
+        menuItem = new JMenuItem(Localizer.getInstance().getMessage("lblAlwayFirstPutThisAbilityOnStack"));
         menuItem.setActionCommand(CMD_AUTO_ORDER_FIRST);
         menuItem.addActionListener(actionListener);
         popupMenuTriggerOrder.add(menuItem);
 
-        menuItem = new JMenuItem("Put this ability always last on the stack");
+        menuItem = new JMenuItem(Localizer.getInstance().getMessage("lblAlwayLastPutThisAbilityOnStack"));
         menuItem.setActionCommand(CMD_AUTO_ORDER_LAST);
         menuItem.addActionListener(actionListener);
         popupMenuTriggerOrder.add(menuItem);
 
-        menuItem = new JMenuItem("Put all abilities with that rule text always first on the stack");
+        menuItem = new JMenuItem(Localizer.getInstance().getMessage("lblAlwayFirstPutWithThatRuleAbilityOnStack"));
         menuItem.setActionCommand(CMD_AUTO_ORDER_NAME_FIRST);
         menuItem.addActionListener(actionListener);
         popupMenuTriggerOrder.add(menuItem);
 
-        menuItem = new JMenuItem("Put all abilities with that rule text always last on the stack");
+        menuItem = new JMenuItem(Localizer.getInstance().getMessage("lblAlwayLastPutWithThatRuleAbilityOnStack"));
         menuItem.setActionCommand(CMD_AUTO_ORDER_NAME_LAST);
         menuItem.addActionListener(actionListener);
         popupMenuTriggerOrder.add(menuItem);
 
-        menuItem = new JMenuItem("Reset all order settings for triggered abilities");
+        menuItem = new JMenuItem(Localizer.getInstance().getMessage("lblResetAllTriggeredAbilitiesOrder"));
         menuItem.setActionCommand(CMD_AUTO_ORDER_RESET_ALL);
         menuItem.addActionListener(actionListener);
         popupMenuTriggerOrder.add(menuItem);

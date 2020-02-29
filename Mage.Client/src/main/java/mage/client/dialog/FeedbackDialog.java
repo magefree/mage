@@ -4,6 +4,8 @@ package mage.client.dialog;
 import java.util.Locale;
 import javax.swing.*;
 import mage.client.SessionHandler;
+import mage.client.util.Localizer;
+
 import org.apache.log4j.Logger;
 
 /**
@@ -57,27 +59,27 @@ public class FeedbackDialog extends javax.swing.JDialog {
         cancelButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Feedback");
+        setTitle(Localizer.getInstance().getMessage("lblFeedback"));
 
-        lblProxyServer.setText("Enter your idea*");
+        lblProxyServer.setText(Localizer.getInstance().getMessage("lblEnterYourIdea"));
 
-        lblProxyPort.setText("Your email:");
+        lblProxyPort.setText(Localizer.getInstance().getMessage("lblYourEmail"));
 
-        lblProxyUserName.setText("Describe your idea*");
+        lblProxyUserName.setText(Localizer.getInstance().getMessage("lblDescribeYourIdea"));
 
-        lblProxyType.setText("Category");
+        lblProxyType.setText(Localizer.getInstance().getMessage("lblCategory"));
 
         txtFeedbackMessage.setColumns(20);
-        txtFeedbackMessage.setFont(new java.awt.Font("Tahoma", 0, 11));
+        txtFeedbackMessage.setFont(new java.awt.Font("Microsoft YaHei", 0, 11));
         txtFeedbackMessage.setRows(5);
-        txtFeedbackMessage.setText("(300 characters max)");
+        txtFeedbackMessage.setText(Localizer.getInstance().getMessage("lbl300CharacterMax"));
         jScrollPane1.setViewportView(txtFeedbackMessage);
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 2, 11));
-        jLabel2.setText("(optional)");
+        jLabel2.setFont(new java.awt.Font("Microsoft YaHei", 2, 11));
+        jLabel2.setText(Localizer.getInstance().getMessage("lblOptional"));
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 2, 11));
-        jLabel3.setText("(optional)");
+        jLabel3.setFont(new java.awt.Font("Microsoft YaHei", 2, 11));
+        jLabel3.setText(Localizer.getInstance().getMessage("lblOptional"));
 
         javax.swing.GroupLayout pnlProxyLayout = new javax.swing.GroupLayout(pnlProxy);
         pnlProxy.setLayout(pnlProxyLayout);
@@ -132,9 +134,9 @@ public class FeedbackDialog extends javax.swing.JDialog {
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
-        jLabel1.setFont(new java.awt.Font("Arial", 1, 14));
+        jLabel1.setFont(new java.awt.Font("Microsoft YaHei", 1, 14));
         jLabel1.setForeground(new java.awt.Color(255, 153, 51));
-        jLabel1.setText("I suggest you...");
+        jLabel1.setText(Localizer.getInstance().getMessage("lblISuggestYou"));
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -157,12 +159,12 @@ public class FeedbackDialog extends javax.swing.JDialog {
                 .addContainerGap(41, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Give feedback", jPanel6);
+        jTabbedPane1.addTab(Localizer.getInstance().getMessage("lblGiveFeedback"), jPanel6);
 
-        sendButton.setText("Send");
+        sendButton.setText(Localizer.getInstance().getMessage("lblSend"));
         sendButton.addActionListener(evt -> sendButtonActionPerformed(evt));
 
-        cancelButton.setText("Cancel");
+        cancelButton.setText(Localizer.getInstance().getMessage("lblCancel"));
         cancelButton.addActionListener(evt -> cancelButtonActionPerformed(evt));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -201,32 +203,32 @@ public class FeedbackDialog extends javax.swing.JDialog {
     private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendButtonActionPerformed
         String title = txtIdeaTitle.getText().trim();
         if (title.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "\"Enter your idea\" is a mandatory field", "Warning", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, Localizer.getInstance().getMessage("lblEnterYourIdeaMandatory"), Localizer.getInstance().getMessage("lblWarning"), JOptionPane.INFORMATION_MESSAGE);
             return;
         }
         if (title.length() > 100) {
-            JOptionPane.showMessageDialog(null, "\"Enter your idea\" value is too long (100 characters max)", "Warning", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, Localizer.getInstance().getMessage("lblEnterYourIdeaTooLong"), Localizer.getInstance().getMessage("lblWarning"), JOptionPane.INFORMATION_MESSAGE);
             return;
         }
         String type = cleanUpType(cbFeedbackType.getSelectedItem().toString());
         String message = txtFeedbackMessage.getText().trim();
         if (message.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "\"Describe your idea\" is a mandatory field.", "Warning", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, Localizer.getInstance().getMessage("lblDescribeYourIdeaMandatory"), Localizer.getInstance().getMessage("lblWarning"), JOptionPane.INFORMATION_MESSAGE);
             return;
         }
         if (message.length() > 300) {
-            JOptionPane.showMessageDialog(null, "\"Describe your idea\" value is too long (300 characters max)", "Warning", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, Localizer.getInstance().getMessage("lblDescribeYourIdeaTooLong"), Localizer.getInstance().getMessage("lblWarning"), JOptionPane.INFORMATION_MESSAGE);
         }
         String email = txtEmail.getText().trim();
         if (email.length() > 100) {
             email = email.substring(0, 100);
         }
         if (SessionHandler.sendFeedback(title, type, message, email)) {
-            JOptionPane.showMessageDialog(null, "Feedback was sent. Thank you!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, Localizer.getInstance().getMessage("lblFeedbackWasSent"), Localizer.getInstance().getMessage("lblSuccess"), JOptionPane.INFORMATION_MESSAGE);
             reset();
             dialog.setVisible(false);
         } else {
-            JOptionPane.showMessageDialog(null, "Couldn't sent feedback.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, Localizer.getInstance().getMessage("lblCouldntSentFeedback"), Localizer.getInstance().getMessage("lblError"), JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_sendButtonActionPerformed
 

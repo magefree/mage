@@ -90,7 +90,7 @@ public class TablePlayerPanel extends javax.swing.JPanel {
 
         cbPlayerType.addActionListener(evt -> cbPlayerTypeActionPerformed(evt));
 
-        lblPlayerNum.setFont(new java.awt.Font("Tahoma", 1, 11));
+        lblPlayerNum.setFont(new java.awt.Font("Microsoft YaHei", 1, 11));
         lblPlayerNum.setText("Player #");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

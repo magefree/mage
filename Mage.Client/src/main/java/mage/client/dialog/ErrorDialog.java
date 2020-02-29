@@ -1,6 +1,4 @@
 
-
-
 /*
  * ErrorDialog.java
  *
@@ -8,6 +6,8 @@
  */
 
 package mage.client.dialog;
+
+import mage.client.util.Localizer;
 
 /**
  *
@@ -47,14 +47,14 @@ public class ErrorDialog extends MageDialog {
         jTextArea1 = new javax.swing.JTextArea();
 
         setResizable(true);
-        setTitle("Error");
+        setTitle(Localizer.getInstance().getMessage("lblError"));
 
-        btnOK.setText("OK");
+        btnOK.setText(Localizer.getInstance().getMessage("lblOK"));
         btnOK.addActionListener(this::btnOKActionPerformed);
 
         lblMessage.setColumns(20);
         lblMessage.setEditable(false);
-        lblMessage.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        lblMessage.setFont(new java.awt.Font("Microsoft YaHei", 0, 10)); // NOI18N
         lblMessage.setLineWrap(true);
         lblMessage.setRows(5);
         lblMessage.setWrapStyleWord(true);
@@ -62,9 +62,9 @@ public class ErrorDialog extends MageDialog {
 
         jTextArea1.setColumns(20);
         jTextArea1.setEditable(false);
-        jTextArea1.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        jTextArea1.setFont(new java.awt.Font("Microsoft YaHei", 0, 10)); // NOI18N
         jTextArea1.setRows(2);
-        jTextArea1.setText("An error has occurred on the MAGE server. Your last action will be rollbacked.\nPlease post the following report here: http://www.slightlymagic.net/forum/posting.php?mode=reply&f=70&t=3116");
+        jTextArea1.setText(Localizer.getInstance().getMessage("lblXmageServerErrorActionWillRollBack" , "http://www.slightlymagic.net/forum/posting.php?mode=reply&f=70&t=3116"));
         jScrollPane2.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

@@ -268,7 +268,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
         private StringBuilder getHtmlForText(boolean isSelected, String text) {
             int fontSize = 16;
 
-            String fontFamily = "arial";
+            String fontFamily = "Microsoft YaHei";
 
             final StringBuilder buffer = new StringBuilder(512);
             buffer.append("<html><body style='font-family:");

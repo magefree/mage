@@ -1,10 +1,9 @@
 
-
- /*
- * NewPlayerPanel.java
- *
- * Created on 15-Dec-2009, 10:09:46 PM
- */
+/*
+* NewPlayerPanel.java
+*
+* Created on 15-Dec-2009, 10:09:46 PM
+*/
 package mage.client.table;
 
 import java.io.File;
@@ -15,6 +14,7 @@ import mage.cards.decks.DeckFileFilter;
 import mage.client.MageFrame;
 import mage.client.deck.generator.DeckGenerator;
 import mage.client.util.ClientDefaultSettings;
+import mage.client.util.Localizer;
 
 /**
  *
@@ -51,7 +51,7 @@ public class NewPlayerPanel extends javax.swing.JPanel {
         if (!lastFolder.isEmpty()) {
             fcSelectDeck.setCurrentDirectory(new File(lastFolder));
         }
-        int ret = fcSelectDeck.showDialog(this, "Select Deck");
+        int ret = fcSelectDeck.showDialog(this, Localizer.getInstance().getMessage("lblSelectDeck"));
         if (ret == JFileChooser.APPROVE_OPTION) {
             File file = fcSelectDeck.getSelectedFile();
             this.txtPlayerDeck.setText(file.getPath());
@@ -117,17 +117,17 @@ public class NewPlayerPanel extends javax.swing.JPanel {
         lblLevel = new javax.swing.JLabel();
         spnLevel = new javax.swing.JSpinner();
 
-        lblPlayerName.setText("Name:");
+        lblPlayerName.setText(Localizer.getInstance().getMessage("lblName") + ":");
 
-        lblPlayerDeck.setText("Deck:");
+        lblPlayerDeck.setText(Localizer.getInstance().getMessage("lblDeck") + ":");
 
         btnPlayerDeck.setText("...");
         btnPlayerDeck.addActionListener(evt -> btnPlayerDeckActionPerformed(evt));
 
-        btnGenerate.setText("Generate");
+        btnGenerate.setText(Localizer.getInstance().getMessage("lblGenerate"));
         btnGenerate.addActionListener(evt -> btnGenerateActionPerformed(evt));
 
-        lblLevel.setText("Skill:");
+        lblLevel.setText(Localizer.getInstance().getMessage("lblSkill") + ":");
 
         spnLevel.setModel(new javax.swing.SpinnerNumberModel(6, 1, 10, 1));
 

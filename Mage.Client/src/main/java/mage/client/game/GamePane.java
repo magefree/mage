@@ -1,10 +1,9 @@
 
-
- /*
- * GamePane.java
- *
- * Created on Dec 17, 2009, 9:34:10 AM
- */
+/*
+* GamePane.java
+*
+* Created on Dec 17, 2009, 9:34:10 AM
+*/
 package mage.client.game;
 
 import java.awt.AWTEvent;
@@ -12,6 +11,7 @@ import java.util.UUID;
 import javax.swing.*;
 
 import mage.client.MagePane;
+import mage.client.util.Localizer;
 
 /**
  *
@@ -32,7 +32,7 @@ public class GamePane extends MagePane {
     }
 
     public void showGame(UUID gameId, UUID playerId) {
-        this.setTitle("Game " + gameId);
+        this.setTitle(Localizer.getInstance().getMessage("lblGame") + " " + gameId);
         this.gameId = gameId;
         gamePanel.showGame(gameId, playerId, this);
     }
@@ -55,13 +55,13 @@ public class GamePane extends MagePane {
     }
 
     public void watchGame(UUID gameId) {
-        this.setTitle("Watching " + gameId);
+        this.setTitle(Localizer.getInstance().getMessage("lblWatch") + " " + gameId);
         this.gameId = gameId;
         gamePanel.watchGame(gameId, this);
     }
 
     public void replayGame(UUID gameId) {
-        this.setTitle("Replaying " + gameId);
+        this.setTitle(Localizer.getInstance().getMessage("lblReplay") + " " + gameId);
         this.gameId = gameId;
         gamePanel.replayGame(gameId);
     }

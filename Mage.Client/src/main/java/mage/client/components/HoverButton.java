@@ -62,10 +62,10 @@ public class HoverButton extends JPanel implements MouseListener {
     private Color origCenterTextColor = new Color(200, 210, 0, 200);
     private final Color textBGColor = Color.black;
 
-    static final Font textFont = new Font("Arial", Font.PLAIN, 12);
-    static final Font textFontMini = new Font("Arial", Font.PLAIN, 11);
-    static final Font textSetFontBoldMini = new Font("Arial", Font.BOLD, 12);
-    static final Font textSetFontBold = new Font("Arial", Font.BOLD, 14);
+    static final Font textFont = new Font("Microsoft YaHei", Font.PLAIN, 12);
+    static final Font textFontMini = new Font("Microsoft YaHei", Font.PLAIN, 11);
+    static final Font textSetFontBoldMini = new Font("Microsoft YaHei", Font.BOLD, 12);
+    static final Font textSetFontBold = new Font("Microsoft YaHei", Font.BOLD, 14);
 
     private boolean useMiniFont = false;
 
@@ -173,7 +173,7 @@ public class HoverButton extends JPanel implements MouseListener {
             } else if (val > 99) {
                 fontSize = 34;
             }
-            drawCenteredStringWOutline(g2d, centerText, centerTextArea, new Font("Arial", Font.BOLD, fontSize));
+            drawCenteredStringWOutline(g2d, centerText, centerTextArea, new Font("Microsoft YaHei", Font.BOLD, fontSize));
         }
         g2d.setColor(textColor);
         if (overlayImage != null) {

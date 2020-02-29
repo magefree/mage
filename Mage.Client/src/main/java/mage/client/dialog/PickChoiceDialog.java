@@ -2,6 +2,7 @@ package mage.client.dialog;
 
 import mage.choices.Choice;
 import mage.client.MageFrame;
+import mage.client.util.Localizer;
 import mage.client.util.gui.MageDialogState;
 
 import javax.swing.*;
@@ -134,7 +135,7 @@ public class PickChoiceDialog extends MageDialog {
 
         // listeners for ESC close
         if (!choice.isRequired()) {
-            String cancelName = "cancel";
+            String cancelName = Localizer.getInstance().getMessage("lblCancel");
             InputMap inputMap = getRootPane().getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
             inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), cancelName);
             ActionMap actionMap = getRootPane().getActionMap();
@@ -338,7 +339,7 @@ public class PickChoiceDialog extends MageDialog {
                                 .addComponent(labelSubMessage))
         );
 
-        labelSearch.setText("Search:");
+        labelSearch.setText(Localizer.getInstance().getMessage("lblSearch") + ":");
 
         editSearch.setText("sample search text");
 
@@ -376,14 +377,14 @@ public class PickChoiceDialog extends MageDialog {
         });
         scrollList.setViewportView(listChoices);
 
-        btOK.setText("Choose");
+        btOK.setText(Localizer.getInstance().getMessage("lblChoose"));
         btOK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btOKActionPerformed(evt);
             }
         });
 
-        btCancel.setText("Cancel");
+        btCancel.setText(Localizer.getInstance().getMessage("lblCancel"));
         btCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btCancelActionPerformed(evt);

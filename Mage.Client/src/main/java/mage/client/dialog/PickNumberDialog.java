@@ -1,6 +1,7 @@
 package mage.client.dialog;
 
 import mage.client.MageFrame;
+import mage.client.util.Localizer;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
@@ -103,14 +104,14 @@ public class PickNumberDialog extends MageDialog {
 
         spnAmount.setModel(new javax.swing.SpinnerNumberModel(1, null, null, 1));
 
-        btnOk.setText("Choose");
+        btnOk.setText(Localizer.getInstance().getMessage("lblChoose"));
         btnOk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOkActionPerformed(evt);
             }
         });
 
-        btnCancel.setText("Cancel");
+        btnCancel.setText(Localizer.getInstance().getMessage("lblCancel"));
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelActionPerformed(evt);

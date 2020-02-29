@@ -246,7 +246,7 @@ public final class GuiDisplayUtil {
             symbolCount++;
         }
 
-        String fontFamily = "tahoma";
+        String fontFamily = "Microsoft YaHei";
         int fontSize = GUISizeHelper.cardTooltipFontSize;
 
         /*if (prefs.fontFamily == CardFontFamily.arial)

@@ -5,6 +5,7 @@ import mage.cards.decks.DeckFormats;
 import mage.cards.decks.exporter.DeckExporter;
 import mage.client.MageFrame;
 import mage.client.dialog.MageDialog;
+import mage.client.util.Localizer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -114,24 +115,24 @@ public class DeckExportClipboardDialog extends MageDialog {
         buttonCopy = new javax.swing.JButton();
         comboFormats = new javax.swing.JComboBox<>();
 
-        setTitle("Export to clipboard");
+        setTitle(Localizer.getInstance().getMessage("lblExportToClipboard"));
         setMinimumSize(new java.awt.Dimension(400, 400));
 
         panelData.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         panelData.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         panelData.setViewportView(editData);
 
-        labelData.setText("Choose deck format:");
+        labelData.setText(Localizer.getInstance().getMessage("lblChooseDeckFormat"));
 
-        buttonOK.setText("Copy");
-        buttonOK.setToolTipText("Import deck from current text");
+        buttonOK.setText(Localizer.getInstance().getMessage("lblCopy"));
+        buttonOK.setToolTipText(Localizer.getInstance().getMessage("lblImportDeckFromCurrentText"));
         buttonOK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonOKActionPerformed(evt);
             }
         });
 
-        buttonCancel.setText("Close");
+        buttonCancel.setText(Localizer.getInstance().getMessage("lblClose"));
         buttonCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonCancelActionPerformed(evt);
@@ -139,7 +140,7 @@ public class DeckExportClipboardDialog extends MageDialog {
         });
 
         buttonCopy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/copy_24.png"))); // NOI18N
-        buttonCopy.setToolTipText("Copy current text to clipboard");
+        buttonCopy.setToolTipText(Localizer.getInstance().getMessage("lblCopyCurrentTextToClipboard"));
         buttonCopy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonCopyActionPerformed(evt);

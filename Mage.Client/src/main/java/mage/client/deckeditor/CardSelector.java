@@ -17,6 +17,7 @@ import mage.client.constants.Constants.SortBy;
 import mage.client.deckeditor.table.TableModel;
 import mage.client.dialog.CheckBoxList;
 import mage.client.util.GUISizeHelper;
+import mage.client.util.Localizer;
 import mage.client.util.gui.FastSearchUtil;
 import mage.client.util.sets.ConstructedFormats;
 import mage.constants.CardType;
@@ -711,7 +712,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         });
         tbColor.add(chkPennyDreadful);
 
-        btnBooster.setText("Open Booster");
+        btnBooster.setText(Localizer.getInstance().getMessage("lblOpenBooster"));
         btnBooster.setToolTipText("(CURRENTLY NOT WORKING) Generates a booster of the selected set and adds the cards to the card selector.");
         btnBooster.setFocusable(false);
         btnBooster.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -723,7 +724,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         });
         tbColor.add(btnBooster);
 
-        btnClear.setText("Clear");
+        btnClear.setText(Localizer.getInstance().getMessage("lblClear"));
         btnClear.setFocusable(false);
         btnClear.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnClear.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -845,7 +846,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         tbTypes.add(tbPlaneswalkers);
         tbTypes.add(jSeparator6);
 
-        chkPiles.setText("Piles");
+        chkPiles.setText(Localizer.getInstance().getMessage("lblPiles"));
         chkPiles.setToolTipText("Shows the card in piles by the selected sort.");
         chkPiles.setFocusable(false);
         chkPiles.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -1044,7 +1045,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         jTextFieldSearch.setToolTipText("Searches for card names and in the rule text of the card.");
 
         chkNames.setSelected(true);
-        chkNames.setText("Names");
+        chkNames.setText(Localizer.getInstance().getMessage("lblName"));
         chkNames.setToolTipText("Search in card names.");
         chkNames.setFocusable(false);
         chkNames.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -1059,7 +1060,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         });
 
         chkTypes.setSelected(true);
-        chkTypes.setText("Types");
+        chkTypes.setText(Localizer.getInstance().getMessage("lblTypes"));
         chkTypes.setToolTipText("Search in card types.");
         chkTypes.setFocusable(false);
         chkTypes.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -1074,7 +1075,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         });
 
         chkRules.setSelected(true);
-        chkRules.setText("Rules");
+        chkRules.setText(Localizer.getInstance().getMessage("lblRules"));
         chkRules.setToolTipText("Search in card rules.");
         chkRules.setFocusable(false);
         chkRules.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -1089,7 +1090,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         });
 
         chkUnique.setSelected(false);
-        chkUnique.setText("Unique");
+        chkUnique.setText(Localizer.getInstance().getMessage("lblUnique"));
         chkUnique.setToolTipText("Show only the first found card of every card name.");
         chkUnique.setFocusable(false);
         chkUnique.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -1103,7 +1104,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             }
         });
 
-        jButtonSearch.setText("Search");
+        jButtonSearch.setText(Localizer.getInstance().getMessage("lblSearch"));
         jButtonSearch.setToolTipText("Performs the search.");
         jButtonSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1111,7 +1112,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             }
         });
 
-        jButtonClean.setText("Clear");
+        jButtonClean.setText(Localizer.getInstance().getMessage("lblClear"));
         jButtonClean.setToolTipText("Clears the search field.");
         jButtonClean.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1119,7 +1120,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             }
         });
 
-        cardCountLabel.setText("Card count:");
+        cardCountLabel.setText(Localizer.getInstance().getMessage("lblCardCount"));
         cardCountLabel.setToolTipText("Number of cards currently shown.");
 
         cardCount.setText("0");

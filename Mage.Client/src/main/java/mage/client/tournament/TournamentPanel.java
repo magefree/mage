@@ -9,6 +9,7 @@ import mage.client.table.TablesUtil;
 import mage.client.table.TournamentMatchesTableModel;
 import mage.client.util.Format;
 import mage.client.util.GUISizeHelper;
+import mage.client.util.Localizer;
 import mage.client.util.gui.TableUtil;
 import mage.client.util.gui.countryBox.CountryCellRenderer;
 import mage.constants.PlayerAction;
@@ -209,7 +210,7 @@ public class TournamentPanel extends javax.swing.JPanel {
                 c = c.getParent();
             }
             if (c != null) {
-                ((TournamentPane) c).setTitle("Tournament [" + tournament.getTournamentName() + ']');
+                ((TournamentPane) c).setTitle(Localizer.getInstance().getMessage("lblTournament") + " [" + tournament.getTournamentName() + ']');
             }
             txtName.setText(tournament.getTournamentName());
             txtType.setText(tournament.getTournamentType());
@@ -314,7 +315,7 @@ public class TournamentPanel extends javax.swing.JPanel {
 
         setPreferredSize(new java.awt.Dimension(908, 580));
 
-        actionPanel.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        actionPanel.setFont(new java.awt.Font("Microsoft YaHei", 0, 10)); // NOI18N
 
         txtName.setEditable(false);
         txtName.setHorizontalAlignment(javax.swing.JTextField.LEFT);
@@ -353,28 +354,28 @@ public class TournamentPanel extends javax.swing.JPanel {
         txtTournamentState.setOpaque(false);
         txtTournamentState.setRequestFocusEnabled(false);
 
-        btnQuitTournament.setText("Quit Tournament");
+        btnQuitTournament.setText(Localizer.getInstance().getMessage("lblQuitTournament"));
         btnQuitTournament.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnQuitTournament.addActionListener(evt -> btnQuitTournamentActionPerformed(evt));
 
-        btnCloseWindow.setText("Close Window");
+        btnCloseWindow.setText(Localizer.getInstance().getMessage("lblCloseWindow"));
         btnCloseWindow.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnCloseWindow.addActionListener(evt -> btnCloseWindowActionPerformed(evt));
 
-        lblName.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        lblName.setText("Name:");
+        lblName.setFont(new java.awt.Font("Microsoft YaHei", 0, 10)); // NOI18N
+        lblName.setText(Localizer.getInstance().getMessage("lblName") + ":");
 
-        lblType.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        lblType.setText("Type:");
+        lblType.setFont(new java.awt.Font("Microsoft YaHei", 0, 10)); // NOI18N
+        lblType.setText(Localizer.getInstance().getMessage("lblType") + ":");
 
-        lblState.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        lblState.setText("State:");
+        lblState.setFont(new java.awt.Font("Microsoft YaHei", 0, 10)); // NOI18N
+        lblState.setText(Localizer.getInstance().getMessage("lblState") + ":");
 
-        lblStartTime.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        lblStartTime.setText("Start time:");
+        lblStartTime.setFont(new java.awt.Font("Microsoft YaHei", 0, 10)); // NOI18N
+        lblStartTime.setText(Localizer.getInstance().getMessage("lblStartTime") + ":");
 
-        lblEndTime.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        lblEndTime.setText("End time:");
+        lblEndTime.setFont(new java.awt.Font("Microsoft YaHei", 0, 10)); // NOI18N
+        lblEndTime.setText(Localizer.getInstance().getMessage("lblEndTime") + ":");
 
         javax.swing.GroupLayout actionPanelLayout = new javax.swing.GroupLayout(actionPanel);
         actionPanel.setLayout(actionPanelLayout);
@@ -489,9 +490,9 @@ public class TournamentPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCloseWindowActionPerformed
 
     private void btnQuitTournamentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitTournamentActionPerformed
-        UserRequestMessage message = new UserRequestMessage("Confirm quit tournament", "Are you sure you want to quit the tournament?");
-        message.setButton1("No", null);
-        message.setButton2("Yes", PlayerAction.CLIENT_QUIT_TOURNAMENT);
+        UserRequestMessage message = new UserRequestMessage(Localizer.getInstance().getMessage("lblTournamentQuitConfirm"), Localizer.getInstance().getMessage("lblAreYouSureQuitTournament"));
+        message.setButton1(Localizer.getInstance().getMessage("lblNo"), null);
+        message.setButton2(Localizer.getInstance().getMessage("lblYes"), PlayerAction.CLIENT_QUIT_TOURNAMENT);
         message.setTournamentId(tournamentId);
         MageFrame.getInstance().showUserRequestDialog(message);
     }//GEN-LAST:event_btnQuitTournamentActionPerformed
@@ -527,7 +528,7 @@ public class TournamentPanel extends javax.swing.JPanel {
 
 class TournamentPlayersTableModel extends AbstractTableModel {
 
-    private final String[] columnNames = new String[]{"Loc", "Player Name", "State", "Points", "Results", "History"};
+    private final String[] columnNames = new String[]{Localizer.getInstance().getMessage("lblLocale"), Localizer.getInstance().getMessage("lblPlayerName"), Localizer.getInstance().getMessage("lblState"), Localizer.getInstance().getMessage("lblPoints"), Localizer.getInstance().getMessage("lblPoints"), Localizer.getInstance().getMessage("lblHistory")};
     private TournamentPlayerView[] players = new TournamentPlayerView[0];
 
     public void loadData(TournamentView tournament) {
