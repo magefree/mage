@@ -137,49 +137,50 @@ public class ConnectDialog extends MageDialog {
         btnWhatsNew = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
-        setTitle(Localizer.getInstance().getMessage("lblConnectToServer"));
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("SwingMessage"); // NOI18N
+        setTitle(bundle.getString("ConnectDialog.title")); // NOI18N
 
         lblServer.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblServer.setLabelFor(txtServer);
-        lblServer.setText(Localizer.getInstance().getMessage("lblServerName") + ":");
+        lblServer.setText(bundle.getString("ConnectDialog.lblServer.text")); // NOI18N
 
         lblUserName.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblUserName.setLabelFor(txtUserName);
-        lblUserName.setText(Localizer.getInstance().getMessage("lblUserName") + ":");
+        lblUserName.setText(bundle.getString("ConnectDialog.lblUserName.text")); // NOI18N
 
         lblPassword.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblPassword.setLabelFor(txtPassword);
-        lblPassword.setText(Localizer.getInstance().getMessage("lblPassword") + ":");
+        lblPassword.setText(bundle.getString("ConnectDialog.lblPassword.text")); // NOI18N
 
         lblFlag.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblFlag.setLabelFor(txtUserName);
-        lblFlag.setText(Localizer.getInstance().getMessage("lblUserFlag") + ":");
+        lblFlag.setText(bundle.getString("ConnectDialog.lblFlag.text")); // NOI18N
 
-        chkAutoConnect.setText(Localizer.getInstance().getMessage("lblNextTimeAutomaticallyConnectToServer"));
-        chkAutoConnect.setToolTipText(Localizer.getInstance().getMessage("htmlAutomaticallyConnectDest"));
+        chkAutoConnect.setText(bundle.getString("ConnectDialog.chkAutoConnect.text")); // NOI18N
+        chkAutoConnect.setToolTipText(bundle.getString("ConnectDialog.chkAutoConnect.toolTipText")); // NOI18N
         chkAutoConnect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 chkAutoConnectActionPerformed(evt);
             }
         });
 
-        chkForceUpdateDB.setText(Localizer.getInstance().getMessage("lblForceUpdateCardDatabase"));
-        chkForceUpdateDB.setToolTipText(Localizer.getInstance().getMessage("htmlForceUpdateCardDatabaseDest"));
+        chkForceUpdateDB.setText(bundle.getString("ConnectDialog.chkForceUpdateDB.text")); // NOI18N
+        chkForceUpdateDB.setToolTipText(bundle.getString("ConnectDialog.chkForceUpdateDB.toolTipText")); // NOI18N
         chkForceUpdateDB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 chkForceUpdateDBActionPerformed(evt);
             }
         });
 
-        jProxySettingsButton.setText(Localizer.getInstance().getMessage("lblProxySettings"));
+        jProxySettingsButton.setText(bundle.getString("ConnectDialog.jProxySettingsButton.text")); // NOI18N
         jProxySettingsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jProxySettingsButtonActionPerformed(evt);
             }
         });
 
-        btnConnect.setFont(new java.awt.Font("Microsoft YaHei", 1, 11)); // NOI18N
-        btnConnect.setText(Localizer.getInstance().getMessage("lblConnectToServer"));
+        btnConnect.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnConnect.setText(bundle.getString("ConnectDialog.btnConnect.text")); // NOI18N
         btnConnect.setMargin(new java.awt.Insets(2, 2, 2, 2));
         btnConnect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -187,7 +188,7 @@ public class ConnectDialog extends MageDialog {
             }
         });
 
-        btnCancel.setText(Localizer.getInstance().getMessage("lblCancel"));
+        btnCancel.setText(bundle.getString("ConnectDialog.btnCancel.text")); // NOI18N
         btnCancel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnCancel.setMargin(new java.awt.Insets(2, 2, 2, 2));
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -196,8 +197,8 @@ public class ConnectDialog extends MageDialog {
             }
         });
 
-        btnRegister.setText(Localizer.getInstance().getMessage("lblRegisterNewUser"));
-        btnRegister.setToolTipText(Localizer.getInstance().getMessage("htmlRegisterNewUserDest"));
+        btnRegister.setText(bundle.getString("ConnectDialog.btnRegister.text")); // NOI18N
+        btnRegister.setToolTipText(bundle.getString("ConnectDialog.btnRegister.toolTipText")); // NOI18N
         btnRegister.setMargin(new java.awt.Insets(2, 2, 2, 2));
         btnRegister.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -205,8 +206,8 @@ public class ConnectDialog extends MageDialog {
             }
         });
 
-        btnForgotPassword.setText(Localizer.getInstance().getMessage("lblForgotPassword"));
-        btnForgotPassword.setToolTipText(Localizer.getInstance().getMessage("htmlForgotPasswordDest"));
+        btnForgotPassword.setText(bundle.getString("ConnectDialog.btnForgotPassword.text")); // NOI18N
+        btnForgotPassword.setToolTipText(bundle.getString("ConnectDialog.btnForgotPassword.toolTipText")); // NOI18N
         btnForgotPassword.setMargin(new java.awt.Insets(2, 2, 2, 2));
         btnForgotPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -216,7 +217,7 @@ public class ConnectDialog extends MageDialog {
 
         lblFastConnect.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblFastConnect.setLabelFor(btnFindMain);
-        lblFastConnect.setText(Localizer.getInstance().getMessage("lblConnectTo") + ":");
+        lblFastConnect.setText(bundle.getString("ConnectDialog.lblFastConnect.text")); // NOI18N
         lblFastConnect.setName(""); // NOI18N
 
         panelFlag.setMinimumSize(new java.awt.Dimension(50, 33));
@@ -231,7 +232,7 @@ public class ConnectDialog extends MageDialog {
         panelFlag.add(filler1);
 
         btnFlagSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/search_24.png"))); // NOI18N
-        btnFlagSearch.setToolTipText("Fast search your flag");
+        btnFlagSearch.setToolTipText(bundle.getString("ConnectDialog.btnFlagSearch.toolTipText")); // NOI18N
         btnFlagSearch.setAlignmentX(1.0F);
         btnFlagSearch.setPreferredSize(new java.awt.Dimension(23, 23));
         btnFlagSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -242,9 +243,9 @@ public class ConnectDialog extends MageDialog {
         panelFlag.add(btnFlagSearch);
 
         btnFindMain.setIcon(new javax.swing.ImageIcon(getClass().getResource("/flags/de.png"))); // NOI18N
-        btnFindMain.setText("X");
-        btnFindMain.setToolTipText(Localizer.getInstance().getMessage("lblDeServerDest"));
-        btnFindMain.setActionCommand("connectXmageDe");
+        btnFindMain.setText(bundle.getString("ConnectDialog.btnFindMain.text")); // NOI18N
+        btnFindMain.setToolTipText(bundle.getString("ConnectDialog.btnFindMain.toolTipText")); // NOI18N
+        btnFindMain.setActionCommand(bundle.getString("ConnectDialog.btnFindMain.actionCommand")); // NOI18N
         btnFindMain.setAlignmentY(0.0F);
         btnFindMain.setMargin(new java.awt.Insets(2, 2, 2, 2));
         btnFindMain.setMaximumSize(new java.awt.Dimension(42, 23));
@@ -257,9 +258,9 @@ public class ConnectDialog extends MageDialog {
             }
         });
 
-        btnFindLocal.setText("LOCAL, AI");
-        btnFindLocal.setToolTipText(Localizer.getInstance().getMessage("lblLocalhostServerDest"));
-        btnFindLocal.setActionCommand("connectLocalhost");
+        btnFindLocal.setText(bundle.getString("ConnectDialog.btnFindLocal.text")); // NOI18N
+        btnFindLocal.setToolTipText(bundle.getString("ConnectDialog.btnFindLocal.toolTipText")); // NOI18N
+        btnFindLocal.setActionCommand(bundle.getString("ConnectDialog.btnFindLocal.actionCommand")); // NOI18N
         btnFindLocal.setAlignmentY(0.0F);
         btnFindLocal.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnFindLocal.setMargin(new java.awt.Insets(2, 2, 2, 2));
@@ -271,8 +272,8 @@ public class ConnectDialog extends MageDialog {
             }
         });
 
-        btnFindBeta.setText("BETA, AI");
-        btnFindBeta.setToolTipText(Localizer.getInstance().getMessage("lblBetaServerDest"));
+        btnFindBeta.setText(bundle.getString("ConnectDialog.btnFindBeta.text")); // NOI18N
+        btnFindBeta.setToolTipText(bundle.getString("ConnectDialog.btnFindBeta.toolTipText")); // NOI18N
         btnFindBeta.setAlignmentY(0.0F);
         btnFindBeta.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnFindBeta.setMargin(new java.awt.Insets(2, 2, 2, 2));
@@ -284,9 +285,9 @@ public class ConnectDialog extends MageDialog {
         });
 
         btnFindUs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/flags/us.png"))); // NOI18N
-        btnFindUs.setText("US");
-        btnFindUs.setToolTipText(Localizer.getInstance().getMessage("lblUSServerDest"));
-        btnFindUs.setActionCommand("connectXmageus");
+        btnFindUs.setText(bundle.getString("ConnectDialog.btnFindUs.text")); // NOI18N
+        btnFindUs.setToolTipText(bundle.getString("ConnectDialog.btnFindUs.toolTipText")); // NOI18N
+        btnFindUs.setActionCommand(bundle.getString("ConnectDialog.btnFindUs.actionCommand")); // NOI18N
         btnFindUs.setAlignmentY(0.0F);
         btnFindUs.setMargin(new java.awt.Insets(2, 2, 2, 2));
         btnFindUs.setName("connectXmageusBtn"); // NOI18N
@@ -297,8 +298,8 @@ public class ConnectDialog extends MageDialog {
             }
         });
 
-        btnFindOther.setText(Localizer.getInstance().getMessage("lblOtherServers"));
-        btnFindOther.setToolTipText(Localizer.getInstance().getMessage("lblOtherServersDest"));
+        btnFindOther.setText(bundle.getString("ConnectDialog.btnFindOther.text")); // NOI18N
+        btnFindOther.setToolTipText(bundle.getString("ConnectDialog.btnFindOther.toolTipText")); // NOI18N
         btnFindOther.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnFindOther.setName("findServerBtn"); // NOI18N
         btnFindOther.addActionListener(new java.awt.event.ActionListener() {
@@ -344,11 +345,11 @@ public class ConnectDialog extends MageDialog {
         });
 
         lblPort.setLabelFor(txtPort);
-        lblPort.setText(Localizer.getInstance().getMessage("lblPort") + ":");
+        lblPort.setText(bundle.getString("ConnectDialog.lblPort.text")); // NOI18N
 
         btnCheckStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/flags/world.png"))); // NOI18N
-        btnCheckStatus.setText(Localizer.getInstance().getMessage("lblCheckOnlineStatus"));
-        btnCheckStatus.setToolTipText(Localizer.getInstance().getMessage("lblOnlineCheckDest"));
+        btnCheckStatus.setText(bundle.getString("ConnectDialog.btnCheckStatus.text")); // NOI18N
+        btnCheckStatus.setToolTipText(bundle.getString("ConnectDialog.btnCheckStatus.toolTipText")); // NOI18N
         btnCheckStatus.setAlignmentY(0.0F);
         btnCheckStatus.setMargin(new java.awt.Insets(2, 2, 2, 2));
         btnCheckStatus.setPreferredSize(new java.awt.Dimension(23, 23));
@@ -383,14 +384,14 @@ public class ConnectDialog extends MageDialog {
                     .addComponent(btnCheckStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
-        btnWhatsNew.setText(Localizer.getInstance().getMessage("lblShowNews"));
+        btnWhatsNew.setText(bundle.getString("ConnectDialog.btnWhatsNew.text")); // NOI18N
         btnWhatsNew.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnWhatsNewActionPerformed(evt);
             }
         });
 
-        jLabel1.setText(Localizer.getInstance().getMessage("lblUseEmptyPWIfNoNeedRegistration"));
+        jLabel1.setText(bundle.getString("ConnectDialog.jLabel1.text")); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -483,7 +484,7 @@ public class ConnectDialog extends MageDialog {
                 .addGap(23, 23, 23))
         );
 
-        lblFastConnect.getAccessibleContext().setAccessibleName("Fast connect to:");
+        lblFastConnect.getAccessibleContext().setAccessibleName(bundle.getString("ConnectDialog.lblFastConnect.AccessibleContext.accessibleName")); // NOI18N
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

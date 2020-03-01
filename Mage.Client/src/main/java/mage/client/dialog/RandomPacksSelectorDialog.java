@@ -119,7 +119,8 @@ public class RandomPacksSelectorDialog extends javax.swing.JDialog {
         btnApply = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle(Localizer.getInstance().getMessage("lblRandomPacksSekector"));
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("SwingMessage"); // NOI18N
+        setTitle(bundle.getString("RandomPacksSelectorDialog.title")); // NOI18N
         setModal(true);
         setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
         setPreferredSize(new java.awt.Dimension(600, 450));
@@ -134,8 +135,8 @@ public class RandomPacksSelectorDialog extends javax.swing.JDialog {
 
         pnlSelect.setLayout(new javax.swing.BoxLayout(pnlSelect, javax.swing.BoxLayout.LINE_AXIS));
 
-        btnNone.setText(Localizer.getInstance().getMessage("lblSelectNone"));
-        btnNone.setActionCommand("none");
+        btnNone.setText(bundle.getString("RandomPacksSelectorDialog.btnNone.text")); // NOI18N
+        btnNone.setActionCommand(bundle.getString("RandomPacksSelectorDialog.btnNone.actionCommand")); // NOI18N
         btnNone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNoneActionPerformed(evt);
@@ -143,7 +144,7 @@ public class RandomPacksSelectorDialog extends javax.swing.JDialog {
         });
         pnlSelect.add(btnNone);
 
-        btnAll.setText(Localizer.getInstance().getMessage("lblSelectAll"));
+        btnAll.setText(bundle.getString("RandomPacksSelectorDialog.btnAll.text")); // NOI18N
         btnAll.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAllActionPerformed(evt);
@@ -153,8 +154,8 @@ public class RandomPacksSelectorDialog extends javax.swing.JDialog {
 
         pnlApply.setLayout(new javax.swing.BoxLayout(pnlApply, javax.swing.BoxLayout.LINE_AXIS));
 
-        btnApply.setText(Localizer.getInstance().getMessage("lblApply"));
-        btnApply.setToolTipText(Localizer.getInstance().getMessage("lblAtLeastSelecteTwoPacks"));
+        btnApply.setText(bundle.getString("RandomPacksSelectorDialog.btnApply.text")); // NOI18N
+        btnApply.setToolTipText(bundle.getString("RandomPacksSelectorDialog.btnApply.toolTipText")); // NOI18N
         btnApply.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnApplyActionPerformed(evt);

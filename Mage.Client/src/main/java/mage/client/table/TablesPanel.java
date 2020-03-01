@@ -1008,7 +1008,8 @@ public class TablesPanel extends javax.swing.JPanel {
         jPanelTop.setOpaque(false);
 
         btnNewTable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/match_new.png"))); // NOI18N
-        btnNewTable.setToolTipText("Creates a new match table.");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("SwingMessage"); // NOI18N
+        btnNewTable.setToolTipText(bundle.getString("TablesPanel.btnNewTable.toolTipText")); // NOI18N
         btnNewTable.setMargin(new java.awt.Insets(2, 2, 2, 2));
         btnNewTable.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1017,7 +1018,7 @@ public class TablesPanel extends javax.swing.JPanel {
         });
 
         btnNewTournament.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/tourney_new.png"))); // NOI18N
-        btnNewTournament.setToolTipText("Creates a new tourney table.");
+        btnNewTournament.setToolTipText(bundle.getString("TablesPanel.btnNewTournament.toolTipText")); // NOI18N
         btnNewTournament.setMargin(new java.awt.Insets(2, 2, 2, 2));
         btnNewTournament.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1031,8 +1032,8 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar1.setOpaque(false);
 
         btnStateWaiting.setSelected(true);
-        btnStateWaiting.setToolTipText("Shows all tables waiting for players.");
-        btnStateWaiting.setActionCommand("stateWait");
+        btnStateWaiting.setToolTipText(bundle.getString("TablesPanel.btnStateWaiting.toolTipText")); // NOI18N
+        btnStateWaiting.setActionCommand(bundle.getString("TablesPanel.btnStateWaiting.actionCommand")); // NOI18N
         btnStateWaiting.setFocusPainted(false);
         btnStateWaiting.setFocusable(false);
         btnStateWaiting.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1047,8 +1048,8 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar1.add(btnStateWaiting);
 
         btnStateActive.setSelected(true);
-        btnStateActive.setToolTipText("Shows all tables with active matches.");
-        btnStateActive.setActionCommand("stateActive");
+        btnStateActive.setToolTipText(bundle.getString("TablesPanel.btnStateActive.toolTipText")); // NOI18N
+        btnStateActive.setActionCommand(bundle.getString("TablesPanel.btnStateActive.actionCommand")); // NOI18N
         btnStateActive.setFocusPainted(false);
         btnStateActive.setFocusable(false);
         btnStateActive.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1063,8 +1064,8 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar1.add(btnStateActive);
 
         btnStateFinished.setSelected(true);
-        btnStateFinished.setToolTipText("<HTML>Toggles the visibility of the table of completed <br>matches and tournaments in the lower area.\n<br>Showing the last 50 finished matches.");
-        btnStateFinished.setActionCommand("stateFinished");
+        btnStateFinished.setToolTipText(bundle.getString("TablesPanel.btnStateFinished.toolTipText")); // NOI18N
+        btnStateFinished.setActionCommand(bundle.getString("TablesPanel.btnStateFinished.actionCommand")); // NOI18N
         btnStateFinished.setFocusPainted(false);
         btnStateFinished.setFocusable(false);
         btnStateFinished.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1080,9 +1081,9 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar1.add(jSeparator1);
 
         btnTypeMatch.setSelected(true);
-        btnTypeMatch.setText(Localizer.getInstance().getMessage("lblMatch"));
-        btnTypeMatch.setToolTipText(Localizer.getInstance().getMessage("lblShowAllNonTournamentTables"));
-        btnTypeMatch.setActionCommand("typeMatch");
+        btnTypeMatch.setText(bundle.getString("TablesPanel.btnTypeMatch.text")); // NOI18N
+        btnTypeMatch.setToolTipText(bundle.getString("TablesPanel.btnTypeMatch.toolTipText")); // NOI18N
+        btnTypeMatch.setActionCommand(bundle.getString("TablesPanel.btnTypeMatch.actionCommand")); // NOI18N
         btnTypeMatch.setFocusPainted(false);
         btnTypeMatch.setFocusable(false);
         btnTypeMatch.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1097,9 +1098,9 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar1.add(btnTypeMatch);
 
         btnTypeTourneyConstructed.setSelected(true);
-        btnTypeTourneyConstructed.setText(Localizer.getInstance().getMessage("lblConstructedTournament"));
-        btnTypeTourneyConstructed.setToolTipText(Localizer.getInstance().getMessage("lblShowAllConstructedTournamentTables"));
-        btnTypeTourneyConstructed.setActionCommand("typeTourneyConstructed");
+        btnTypeTourneyConstructed.setText(bundle.getString("TablesPanel.btnTypeTourneyConstructed.text")); // NOI18N
+        btnTypeTourneyConstructed.setToolTipText(bundle.getString("TablesPanel.btnTypeTourneyConstructed.toolTipText")); // NOI18N
+        btnTypeTourneyConstructed.setActionCommand(bundle.getString("TablesPanel.btnTypeTourneyConstructed.actionCommand")); // NOI18N
         btnTypeTourneyConstructed.setFocusPainted(false);
         btnTypeTourneyConstructed.setFocusable(false);
         btnTypeTourneyConstructed.setRequestFocusEnabled(false);
@@ -1112,9 +1113,9 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar1.add(btnTypeTourneyConstructed);
 
         btnTypeTourneyLimited.setSelected(true);
-        btnTypeTourneyLimited.setText(Localizer.getInstance().getMessage("lblLimitedTournament"));
-        btnTypeTourneyLimited.setToolTipText(Localizer.getInstance().getMessage("lblShowAllLimitedTournamentTables"));
-        btnTypeTourneyLimited.setActionCommand("typeTourneyLimited");
+        btnTypeTourneyLimited.setText(bundle.getString("TablesPanel.btnTypeTourneyLimited.text")); // NOI18N
+        btnTypeTourneyLimited.setToolTipText(bundle.getString("TablesPanel.btnTypeTourneyLimited.toolTipText")); // NOI18N
+        btnTypeTourneyLimited.setActionCommand(bundle.getString("TablesPanel.btnTypeTourneyLimited.actionCommand")); // NOI18N
         btnTypeTourneyLimited.setFocusPainted(false);
         btnTypeTourneyLimited.setFocusable(false);
         btnTypeTourneyLimited.setMaximumSize(new java.awt.Dimension(72, 20));
@@ -1129,9 +1130,9 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar1.add(jSeparator4);
 
         btnSkillBeginner.setSelected(true);
-        btnSkillBeginner.setText(Localizer.getInstance().getMessage("lblBeginner"));
-        btnSkillBeginner.setToolTipText(Localizer.getInstance().getMessage("lblShowAllBeginnerTables"));
-        btnSkillBeginner.setActionCommand("typeMatch");
+        btnSkillBeginner.setText(bundle.getString("TablesPanel.btnSkillBeginner.text")); // NOI18N
+        btnSkillBeginner.setToolTipText(bundle.getString("TablesPanel.btnSkillBeginner.toolTipText")); // NOI18N
+        btnSkillBeginner.setActionCommand(bundle.getString("TablesPanel.btnSkillBeginner.actionCommand")); // NOI18N
         btnSkillBeginner.setFocusPainted(false);
         btnSkillBeginner.setFocusable(false);
         btnSkillBeginner.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1146,9 +1147,9 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar1.add(btnSkillBeginner);
 
         btnSkillCasual.setSelected(true);
-        btnSkillCasual.setText(Localizer.getInstance().getMessage("lblCasual"));
-        btnSkillCasual.setToolTipText(Localizer.getInstance().getMessage("lblShowAllCasualTables"));
-        btnSkillCasual.setActionCommand("typeMatch");
+        btnSkillCasual.setText(bundle.getString("TablesPanel.btnSkillCasual.text")); // NOI18N
+        btnSkillCasual.setToolTipText(bundle.getString("TablesPanel.btnSkillCasual.toolTipText")); // NOI18N
+        btnSkillCasual.setActionCommand(bundle.getString("TablesPanel.btnSkillCasual.actionCommand")); // NOI18N
         btnSkillCasual.setFocusPainted(false);
         btnSkillCasual.setFocusable(false);
         btnSkillCasual.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1163,9 +1164,9 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar1.add(btnSkillCasual);
 
         btnSkillSerious.setSelected(true);
-        btnSkillSerious.setText(Localizer.getInstance().getMessage("lblSerious"));
-        btnSkillSerious.setToolTipText(Localizer.getInstance().getMessage("lblShowAllSeriousTables"));
-        btnSkillSerious.setActionCommand("typeMatch");
+        btnSkillSerious.setText(bundle.getString("TablesPanel.btnSkillSerious.text")); // NOI18N
+        btnSkillSerious.setToolTipText(bundle.getString("TablesPanel.btnSkillSerious.toolTipText")); // NOI18N
+        btnSkillSerious.setActionCommand(bundle.getString("TablesPanel.btnSkillSerious.actionCommand")); // NOI18N
         btnSkillSerious.setFocusPainted(false);
         btnSkillSerious.setFocusable(false);
         btnSkillSerious.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1181,9 +1182,9 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar1.add(jSeparator6);
 
         btnRated.setSelected(true);
-        btnRated.setText(Localizer.getInstance().getMessage("lblRated"));
-        btnRated.setToolTipText(Localizer.getInstance().getMessage("lblShowAllRated"));
-        btnRated.setActionCommand("typeMatch");
+        btnRated.setText(bundle.getString("TablesPanel.btnRated.text")); // NOI18N
+        btnRated.setToolTipText(bundle.getString("TablesPanel.btnRated.toolTipText")); // NOI18N
+        btnRated.setActionCommand(bundle.getString("TablesPanel.btnRated.actionCommand")); // NOI18N
         btnRated.setFocusPainted(false);
         btnRated.setFocusable(false);
         btnRated.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1198,9 +1199,9 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar1.add(btnRated);
 
         btnUnrated.setSelected(true);
-        btnUnrated.setText(Localizer.getInstance().getMessage("lblUnrated"));
-        btnUnrated.setToolTipText(Localizer.getInstance().getMessage("lblShowAllUnrated"));
-        btnUnrated.setActionCommand("typeMatch");
+        btnUnrated.setText(bundle.getString("TablesPanel.btnUnrated.text")); // NOI18N
+        btnUnrated.setToolTipText(bundle.getString("TablesPanel.btnUnrated.toolTipText")); // NOI18N
+        btnUnrated.setActionCommand(bundle.getString("TablesPanel.btnUnrated.actionCommand")); // NOI18N
         btnUnrated.setFocusPainted(false);
         btnUnrated.setFocusable(false);
         btnUnrated.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1219,8 +1220,8 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar2.setOpaque(false);
 
         btnFormatBlock.setSelected(true);
-        btnFormatBlock.setText(Localizer.getInstance().getMessage("lblBlockFormat"));
-        btnFormatBlock.setToolTipText(Localizer.getInstance().getMessage("lblBlockConstructedFormats"));
+        btnFormatBlock.setText(bundle.getString("TablesPanel.btnFormatBlock.text")); // NOI18N
+        btnFormatBlock.setToolTipText(bundle.getString("TablesPanel.btnFormatBlock.toolTipText")); // NOI18N
         btnFormatBlock.setFocusPainted(false);
         btnFormatBlock.setFocusable(false);
         btnFormatBlock.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1235,8 +1236,8 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar2.add(btnFormatBlock);
 
         btnFormatStandard.setSelected(true);
-        btnFormatStandard.setText(Localizer.getInstance().getMessage("lblStandardFormat"));
-        btnFormatStandard.setToolTipText(Localizer.getInstance().getMessage("lblStandardFormat"));
+        btnFormatStandard.setText(bundle.getString("TablesPanel.btnFormatStandard.text")); // NOI18N
+        btnFormatStandard.setToolTipText(bundle.getString("TablesPanel.btnFormatStandard.toolTipText")); // NOI18N
         btnFormatStandard.setFocusPainted(false);
         btnFormatStandard.setFocusable(false);
         btnFormatStandard.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1251,8 +1252,8 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar2.add(btnFormatStandard);
 
         btnFormatModern.setSelected(true);
-        btnFormatModern.setText(Localizer.getInstance().getMessage("lblModernFormat"));
-        btnFormatModern.setToolTipText(Localizer.getInstance().getMessage("lblModernFormat"));
+        btnFormatModern.setText(bundle.getString("TablesPanel.btnFormatModern.text")); // NOI18N
+        btnFormatModern.setToolTipText(bundle.getString("TablesPanel.btnFormatModern.toolTipText")); // NOI18N
         btnFormatModern.setFocusPainted(false);
         btnFormatModern.setFocusable(false);
         btnFormatModern.setRequestFocusEnabled(false);
@@ -1265,8 +1266,8 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar2.add(btnFormatModern);
 
         btnFormatPioneer.setSelected(true);
-        btnFormatPioneer.setText(Localizer.getInstance().getMessage("lblPioneerFormat"));
-        btnFormatPioneer.setToolTipText(Localizer.getInstance().getMessage("lblPioneerFormat"));
+        btnFormatPioneer.setText(bundle.getString("TablesPanel.btnFormatPioneer.text")); // NOI18N
+        btnFormatPioneer.setToolTipText(bundle.getString("TablesPanel.btnFormatPioneer.toolTipText")); // NOI18N
         btnFormatPioneer.setFocusPainted(false);
         btnFormatPioneer.setFocusable(false);
         btnFormatPioneer.setRequestFocusEnabled(false);
@@ -1279,8 +1280,8 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar2.add(btnFormatPioneer);
 
         btnFormatLegacy.setSelected(true);
-        btnFormatLegacy.setText(Localizer.getInstance().getMessage("lblLegacyFormat"));
-        btnFormatLegacy.setToolTipText(Localizer.getInstance().getMessage("lblLegacyFormat"));
+        btnFormatLegacy.setText(bundle.getString("TablesPanel.btnFormatLegacy.text")); // NOI18N
+        btnFormatLegacy.setToolTipText(bundle.getString("TablesPanel.btnFormatLegacy.toolTipText")); // NOI18N
         btnFormatLegacy.setFocusPainted(false);
         btnFormatLegacy.setFocusable(false);
         btnFormatLegacy.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1295,8 +1296,8 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar2.add(btnFormatLegacy);
 
         btnFormatVintage.setSelected(true);
-        btnFormatVintage.setText(Localizer.getInstance().getMessage("lblVintageFormat"));
-        btnFormatVintage.setToolTipText(Localizer.getInstance().getMessage("lblVintageFormat"));
+        btnFormatVintage.setText(bundle.getString("TablesPanel.btnFormatVintage.text")); // NOI18N
+        btnFormatVintage.setToolTipText(bundle.getString("TablesPanel.btnFormatVintage.toolTipText")); // NOI18N
         btnFormatVintage.setFocusPainted(false);
         btnFormatVintage.setFocusable(false);
         btnFormatVintage.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1311,8 +1312,8 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar2.add(btnFormatVintage);
 
         btnFormatPremodern.setSelected(true);
-        btnFormatPremodern.setText(Localizer.getInstance().getMessage("lblPremodernFormat"));
-        btnFormatPremodern.setToolTipText(Localizer.getInstance().getMessage("lblPremodernFormat"));
+        btnFormatPremodern.setText(bundle.getString("TablesPanel.btnFormatPremodern.text")); // NOI18N
+        btnFormatPremodern.setToolTipText(bundle.getString("TablesPanel.btnFormatPremodern.toolTipText")); // NOI18N
         btnFormatPremodern.setFocusPainted(false);
         btnFormatPremodern.setFocusable(false);
         btnFormatPremodern.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1328,8 +1329,8 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar2.add(jSeparator3);
 
         btnFormatCommander.setSelected(true);
-        btnFormatCommander.setText(Localizer.getInstance().getMessage("lblCommanderFormat"));
-        btnFormatCommander.setToolTipText(Localizer.getInstance().getMessage("lblCommanderFormat"));
+        btnFormatCommander.setText(bundle.getString("TablesPanel.btnFormatCommander.text")); // NOI18N
+        btnFormatCommander.setToolTipText(bundle.getString("TablesPanel.btnFormatCommander.toolTipText")); // NOI18N
         btnFormatCommander.setFocusPainted(false);
         btnFormatCommander.setFocusable(false);
         btnFormatCommander.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1344,8 +1345,8 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar2.add(btnFormatCommander);
 
         btnFormatOathbreaker.setSelected(true);
-        btnFormatOathbreaker.setText(Localizer.getInstance().getMessage("lblOathbreakerFormat"));
-        btnFormatOathbreaker.setToolTipText(Localizer.getInstance().getMessage("lblOathbreakerFormat"));
+        btnFormatOathbreaker.setText(bundle.getString("TablesPanel.btnFormatOathbreaker.text")); // NOI18N
+        btnFormatOathbreaker.setToolTipText(bundle.getString("TablesPanel.btnFormatOathbreaker.toolTipText")); // NOI18N
         btnFormatOathbreaker.setFocusPainted(false);
         btnFormatOathbreaker.setFocusable(false);
         btnFormatOathbreaker.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1360,8 +1361,8 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar2.add(btnFormatOathbreaker);
 
         btnFormatTinyLeader.setSelected(true);
-        btnFormatTinyLeader.setText(Localizer.getInstance().getMessage("lblTinyLeaderFormat"));
-        btnFormatTinyLeader.setToolTipText(Localizer.getInstance().getMessage("lblTinyLeaderFormat"));
+        btnFormatTinyLeader.setText(bundle.getString("TablesPanel.btnFormatTinyLeader.text")); // NOI18N
+        btnFormatTinyLeader.setToolTipText(bundle.getString("TablesPanel.btnFormatTinyLeader.toolTipText")); // NOI18N
         btnFormatTinyLeader.setFocusPainted(false);
         btnFormatTinyLeader.setFocusable(false);
         btnFormatTinyLeader.setRequestFocusEnabled(false);
@@ -1375,8 +1376,8 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar2.add(jSeparator2);
 
         btnFormatLimited.setSelected(true);
-        btnFormatLimited.setText(Localizer.getInstance().getMessage("lblLimitedFormat"));
-        btnFormatLimited.setToolTipText(Localizer.getInstance().getMessage("lblLimitedFormat"));
+        btnFormatLimited.setText(bundle.getString("TablesPanel.btnFormatLimited.text")); // NOI18N
+        btnFormatLimited.setToolTipText(bundle.getString("TablesPanel.btnFormatLimited.toolTipText")); // NOI18N
         btnFormatLimited.setFocusPainted(false);
         btnFormatLimited.setFocusable(false);
         btnFormatLimited.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1391,8 +1392,8 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar2.add(btnFormatLimited);
 
         btnFormatOther.setSelected(true);
-        btnFormatOther.setText(Localizer.getInstance().getMessage("lblOtherFormat"));
-        btnFormatOther.setToolTipText(Localizer.getInstance().getMessage("lblOtherFormatDest"));
+        btnFormatOther.setText(bundle.getString("TablesPanel.btnFormatOther.text")); // NOI18N
+        btnFormatOther.setToolTipText(bundle.getString("TablesPanel.btnFormatOther.toolTipText")); // NOI18N
         btnFormatOther.setFocusPainted(false);
         btnFormatOther.setFocusable(false);
         btnFormatOther.setRequestFocusEnabled(false);
@@ -1406,8 +1407,8 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar2.add(jSeparator5);
 
         btnOpen.setSelected(true);
-        btnOpen.setText(Localizer.getInstance().getMessage("lblOpenTables"));
-        btnOpen.setToolTipText(Localizer.getInstance().getMessage("lblShowOpenGames"));
+        btnOpen.setText(bundle.getString("TablesPanel.btnOpen.text")); // NOI18N
+        btnOpen.setToolTipText(bundle.getString("TablesPanel.btnOpen.toolTipText")); // NOI18N
         btnOpen.setFocusPainted(false);
         btnOpen.setFocusable(false);
         btnOpen.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1422,8 +1423,8 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar2.add(btnOpen);
 
         btnPassword.setSelected(true);
-        btnPassword.setText(Localizer.getInstance().getMessage("lblPasswordTables"));
-        btnPassword.setToolTipText(Localizer.getInstance().getMessage("lblShowPasswordGames"));
+        btnPassword.setText(bundle.getString("TablesPanel.btnPassword.text")); // NOI18N
+        btnPassword.setToolTipText(bundle.getString("TablesPanel.btnPassword.toolTipText")); // NOI18N
         btnPassword.setFocusPainted(false);
         btnPassword.setFocusable(false);
         btnPassword.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1437,7 +1438,7 @@ public class TablesPanel extends javax.swing.JPanel {
         });
         filterBar2.add(btnPassword);
 
-        btnQuickStartDuel.setText(Localizer.getInstance().getMessage("lblQuickStartDuel"));
+        btnQuickStartDuel.setText(bundle.getString("TablesPanel.btnQuickStartDuel.text")); // NOI18N
         btnQuickStartDuel.setFocusable(false);
         btnQuickStartDuel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnQuickStartDuel.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -1447,7 +1448,7 @@ public class TablesPanel extends javax.swing.JPanel {
             }
         });
 
-        btnQuickStartCommander.setText(Localizer.getInstance().getMessage("lblQuickStartCommander"));
+        btnQuickStartCommander.setText(bundle.getString("TablesPanel.btnQuickStartCommander.text")); // NOI18N
         btnQuickStartCommander.setFocusable(false);
         btnQuickStartCommander.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnQuickStartCommander.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -1460,41 +1461,41 @@ public class TablesPanel extends javax.swing.JPanel {
         javax.swing.GroupLayout jPanelTopLayout = new javax.swing.GroupLayout(jPanelTop);
         jPanelTop.setLayout(jPanelTopLayout);
         jPanelTopLayout.setHorizontalGroup(
-                jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanelTopLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(btnNewTable)
-                                .addGap(6, 6, 6)
-                                .addComponent(btnNewTournament)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(filterBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(filterBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(btnQuickStartDuel)
-                                        .addComponent(btnQuickStartCommander))
-                                .addContainerGap(667, Short.MAX_VALUE))
+            jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelTopLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnNewTable)
+                .addGap(6, 6, 6)
+                .addComponent(btnNewTournament)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(filterBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(filterBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnQuickStartDuel)
+                    .addComponent(btnQuickStartCommander))
+                .addContainerGap(667, Short.MAX_VALUE))
         );
         jPanelTopLayout.setVerticalGroup(
-                jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanelTopLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                .addComponent(btnNewTable)
-                                                .addComponent(btnNewTournament))
-                                        .addGroup(jPanelTopLayout.createSequentialGroup()
-                                                .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(filterBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(btnQuickStartDuel))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(filterBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addGroup(jPanelTopLayout.createSequentialGroup()
-                                                                .addComponent(btnQuickStartCommander)
-                                                                .addGap(0, 0, Short.MAX_VALUE)))))
-                                .addContainerGap())
+            jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelTopLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnNewTable)
+                        .addComponent(btnNewTournament))
+                    .addGroup(jPanelTopLayout.createSequentialGroup()
+                        .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(filterBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnQuickStartDuel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(filterBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanelTopLayout.createSequentialGroup()
+                                .addComponent(btnQuickStartCommander)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addContainerGap())
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1503,11 +1504,9 @@ public class TablesPanel extends javax.swing.JPanel {
         add(jPanelTop, gridBagConstraints);
 
         jSplitPane1.setBorder(null);
-        jSplitPane1.setDividerSize(10);
         jSplitPane1.setResizeWeight(1.0);
 
         jSplitPaneTables.setBorder(null);
-        jSplitPaneTables.setDividerSize(10);
         jSplitPaneTables.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
         jSplitPaneTables.setResizeWeight(0.5);
 
@@ -1531,12 +1530,12 @@ public class TablesPanel extends javax.swing.JPanel {
         javax.swing.GroupLayout jPanelTablesLayout = new javax.swing.GroupLayout(jPanelTables);
         jPanelTables.setLayout(jPanelTablesLayout);
         jPanelTablesLayout.setHorizontalGroup(
-                jPanelTablesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jSplitPaneTables, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+            jPanelTablesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSplitPaneTables, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
         );
         jPanelTablesLayout.setVerticalGroup(
-                jPanelTablesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jSplitPaneTables, javax.swing.GroupLayout.DEFAULT_SIZE, 672, Short.MAX_VALUE)
+            jPanelTablesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSplitPaneTables, javax.swing.GroupLayout.DEFAULT_SIZE, 672, Short.MAX_VALUE)
         );
 
         jSplitPane1.setLeftComponent(jPanelTables);
@@ -1554,7 +1553,7 @@ public class TablesPanel extends javax.swing.JPanel {
         jPanelBottom.setPreferredSize(new java.awt.Dimension(516, 37));
         jPanelBottom.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        buttonWhatsNew.setText(Localizer.getInstance().getMessage("lblShowNews"));
+        buttonWhatsNew.setText(bundle.getString("TablesPanel.buttonWhatsNew.text")); // NOI18N
         buttonWhatsNew.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         buttonWhatsNew.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttonWhatsNew.setOpaque(false);
@@ -1565,7 +1564,7 @@ public class TablesPanel extends javax.swing.JPanel {
         });
         jPanelBottom.add(buttonWhatsNew);
 
-        buttonNextMessage.setText(Localizer.getInstance().getMessage("lblNextMessage"));
+        buttonNextMessage.setText(bundle.getString("TablesPanel.buttonNextMessage.text")); // NOI18N
         buttonNextMessage.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         buttonNextMessage.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttonNextMessage.setOpaque(false);
@@ -1576,14 +1575,14 @@ public class TablesPanel extends javax.swing.JPanel {
         });
         jPanelBottom.add(buttonNextMessage);
 
-        labelMessageHeader.setFont(new java.awt.Font("Microsoft YaHei", 1, 11)); // NOI18N
+        labelMessageHeader.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         labelMessageHeader.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        labelMessageHeader.setText(Localizer.getInstance().getMessage("lblMessageOfTheDay"));
+        labelMessageHeader.setText(bundle.getString("TablesPanel.labelMessageHeader.text")); // NOI18N
         labelMessageHeader.setAlignmentY(0.3F);
         jPanelBottom.add(labelMessageHeader);
 
         labelMessageText.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        labelMessageText.setText("You are playing Mage version 0.7.5. Welcome! -- Mage dev team --");
+        labelMessageText.setText(bundle.getString("TablesPanel.labelMessageText.text")); // NOI18N
         jPanelBottom.add(labelMessageText);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1692,9 +1691,9 @@ public class TablesPanel extends javax.swing.JPanel {
     private javax.swing.JToggleButton btnFormatLegacy;
     private javax.swing.JToggleButton btnFormatLimited;
     private javax.swing.JToggleButton btnFormatModern;
-    private javax.swing.JToggleButton btnFormatPioneer;
     private javax.swing.JToggleButton btnFormatOathbreaker;
     private javax.swing.JToggleButton btnFormatOther;
+    private javax.swing.JToggleButton btnFormatPioneer;
     private javax.swing.JToggleButton btnFormatPremodern;
     private javax.swing.JToggleButton btnFormatStandard;
     private javax.swing.JToggleButton btnFormatTinyLeader;

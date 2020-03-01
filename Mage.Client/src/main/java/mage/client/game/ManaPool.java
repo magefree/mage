@@ -54,34 +54,35 @@ public class ManaPool extends javax.swing.JPanel {
         lblRed = new javax.swing.JLabel();
 
         lblBlack.setLabelFor(btnBlack);
-        lblBlack.setText(Localizer.getInstance().getMessage("lblBlack"));
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("SwingMessage"); // NOI18N
+        lblBlack.setText(bundle.getString("ManaPool.lblBlack.text")); // NOI18N
 
-        btnBlack.setText("0");
+        btnBlack.setText(bundle.getString("ManaPool.btnBlack.text")); // NOI18N
 
-        btnBlue.setText("0");
+        btnBlue.setText(bundle.getString("ManaPool.btnBlue.text")); // NOI18N
 
         lblBlue.setLabelFor(btnBlack);
-        lblBlue.setText(Localizer.getInstance().getMessage("lblBlue"));
+        lblBlue.setText(bundle.getString("ManaPool.lblBlue.text")); // NOI18N
 
         lblGreen.setLabelFor(btnBlack);
-        lblGreen.setText(Localizer.getInstance().getMessage("lblGreen"));
+        lblGreen.setText(bundle.getString("ManaPool.lblGreen.text")); // NOI18N
 
-        btnGreen.setText("0");
+        btnGreen.setText(bundle.getString("ManaPool.btnGreen.text")); // NOI18N
 
-        btnColorless.setText("0");
+        btnColorless.setText(bundle.getString("ManaPool.btnColorless.text")); // NOI18N
 
         lblWhite.setLabelFor(btnBlack);
-        lblWhite.setText(Localizer.getInstance().getMessage("lblWhite"));
+        lblWhite.setText(bundle.getString("ManaPool.lblWhite.text")); // NOI18N
 
         lblColorless.setLabelFor(btnBlack);
-        lblColorless.setText(Localizer.getInstance().getMessage("lblColorless"));
+        lblColorless.setText(bundle.getString("ManaPool.lblColorless.text")); // NOI18N
 
-        btnWhite.setText("0");
+        btnWhite.setText(bundle.getString("ManaPool.btnWhite.text")); // NOI18N
 
-        btnRed.setText("0");
+        btnRed.setText(bundle.getString("ManaPool.btnRed.text")); // NOI18N
 
         lblRed.setLabelFor(btnBlack);
-        lblRed.setText(Localizer.getInstance().getMessage("lblRed"));
+        lblRed.setText(bundle.getString("ManaPool.lblRed.text")); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -92,25 +93,25 @@ public class ManaPool extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblGreen)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnGreen, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblColorless)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 477, Short.MAX_VALUE)
                         .addComponent(btnColorless, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblWhite)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnWhite, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblRed)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnRed, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblBlack)
                             .addComponent(lblBlue))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnBlack, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnBlue, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -141,7 +142,8 @@ public class ManaPool extends javax.swing.JPanel {
                 .addGap(1, 1, 1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblColorless)
-                    .addComponent(btnColorless, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnColorless, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(218, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

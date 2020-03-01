@@ -79,20 +79,24 @@ public class PlayerPanel extends javax.swing.JPanel {
 
         setName("Form"); // NOI18N
 
-        btnPlayerName.setText(Localizer.getInstance().getMessage("lblPlayerName")); // NOI18N
+        btnPlayerName.setText("Player Name"); // NOI18N
         btnPlayerName.setName("btnPlayerName"); // NOI18N
-        btnPlayerName.addActionListener(evt -> btnPlayerNameActionPerformed(evt));
+        btnPlayerName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPlayerNameActionPerformed(evt);
+            }
+        });
 
         lblLife.setLabelFor(txtLife);
-        lblLife.setText(Localizer.getInstance().getMessage("lblLife") + ":"); // NOI18N
+        lblLife.setText("Life:"); // NOI18N
         lblLife.setName("lblLife"); // NOI18N
 
         lblLibrary.setLabelFor(txtLibrary);
-        lblLibrary.setText(Localizer.getInstance().getMessage("lblLibrary") + ":"); // NOI18N
+        lblLibrary.setText("Library:"); // NOI18N
         lblLibrary.setName("lblLibrary"); // NOI18N
 
         lblHand.setLabelFor(txtHand);
-        lblHand.setText(Localizer.getInstance().getMessage("lblHand") + ":"); // NOI18N
+        lblHand.setText("Hand:"); // NOI18N
         lblHand.setName("lblHand"); // NOI18N
 
         txtLife.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -105,11 +109,15 @@ public class PlayerPanel extends javax.swing.JPanel {
         txtHand.setName("txtHand"); // NOI18N
 
         lblGrave.setLabelFor(btnGrave);
-        lblGrave.setText(Localizer.getInstance().getMessage("lblGrave") + ":"); // NOI18N
+        lblGrave.setText("Grave:"); // NOI18N
         lblGrave.setName("lblGrave"); // NOI18N
 
         btnGrave.setName("btnGrave"); // NOI18N
-        btnGrave.addActionListener(evt -> btnGraveActionPerformed(evt));
+        btnGrave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGraveActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -118,18 +126,18 @@ public class PlayerPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblLife, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
-                    .addComponent(lblGrave, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
-                    .addComponent(lblHand, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
-                    .addComponent(lblLibrary, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE))
+                    .addComponent(lblLife, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
+                    .addComponent(lblGrave, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
+                    .addComponent(lblHand, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
+                    .addComponent(lblLibrary, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtLife, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
-                    .addComponent(txtLibrary, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
-                    .addComponent(txtHand, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
-                    .addComponent(btnGrave, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE))
+                    .addComponent(txtLife, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
+                    .addComponent(txtLibrary, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
+                    .addComponent(txtHand, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
+                    .addComponent(btnGrave, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE))
                 .addContainerGap())
-            .addComponent(btnPlayerName, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
+            .addComponent(btnPlayerName, javax.swing.GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,10 +150,10 @@ public class PlayerPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtLibrary, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblLibrary, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblLibrary, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtHand, javax.swing.GroupLayout.DEFAULT_SIZE, 14, Short.MAX_VALUE)
+                    .addComponent(txtHand, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
                     .addComponent(lblHand))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)

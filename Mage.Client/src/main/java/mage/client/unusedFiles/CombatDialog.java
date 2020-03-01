@@ -17,7 +17,6 @@ import java.beans.PropertyVetoException;
 import java.util.List;
 import java.util.UUID;
 import mage.client.dialog.MageDialog;
-import mage.client.util.Localizer;
 
 import org.apache.log4j.Logger;
 
@@ -108,7 +107,8 @@ public class CombatDialog extends MageDialog {
         combatArea = new javax.swing.JPanel();
 
         setResizable(true);
-        setTitle(Localizer.getInstance().getMessage("lblCombat"));
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("SwingMessage"); // NOI18N
+        setTitle(bundle.getString("CombatDialog.title")); // NOI18N
         setNormalBounds(new java.awt.Rectangle(400, 200, 410, 307));
         setVisible(true);
         getContentPane().setLayout(new java.awt.BorderLayout());

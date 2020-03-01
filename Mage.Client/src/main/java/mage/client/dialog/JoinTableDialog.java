@@ -59,17 +59,26 @@ public class JoinTableDialog extends MageDialog {
         lblPassword = new javax.swing.JLabel();
         txtPassword = new javax.swing.JTextField();
 
-        setTitle(Localizer.getInstance().getMessage("lblJoinTable"));
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("SwingMessage"); // NOI18N
+        setTitle(bundle.getString("JoinTableDialog.title")); // NOI18N
 
-        btnCancel.setText(Localizer.getInstance().getMessage("lblCancel"));
-        btnCancel.addActionListener(evt -> btnCancelActionPerformed(evt));
+        btnCancel.setText(bundle.getString("JoinTableDialog.btnCancel.text")); // NOI18N
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
 
-        btnOK.setText(Localizer.getInstance().getMessage("lblOK"));
-        btnOK.addActionListener(evt -> btnOKActionPerformed(evt));
+        btnOK.setText(bundle.getString("JoinTableDialog.btnOK.text")); // NOI18N
+        btnOK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOKActionPerformed(evt);
+            }
+        });
 
-        lblPassword.setText(Localizer.getInstance().getMessage("lblPassword") + ":");
+        lblPassword.setText(bundle.getString("JoinTableDialog.lblPassword.text")); // NOI18N
 
-        txtPassword.setText(Localizer.getInstance().getMessage("lblPassword"));
+        txtPassword.setText(bundle.getString("JoinTableDialog.txtPassword.text")); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

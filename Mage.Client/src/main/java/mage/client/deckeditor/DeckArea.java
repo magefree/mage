@@ -41,11 +41,11 @@ public class DeckArea extends javax.swing.JPanel {
     private static final boolean isLimitedBuildingOrientation = false;
 
     public DeckCardLayout getCardLayout() {
-        return deckList.getCardLayout();
+        return dragCardGrid1.getCardLayout();
     }
 
     public DeckCardLayout getSideboardLayout() {
-        return sideboardList.getCardLayout();
+        return dragCardGrid2.getCardLayout();
     }
 
     public static class Settings {
@@ -83,16 +83,16 @@ public class DeckArea extends javax.swing.JPanel {
     public DeckArea() {
         initComponents();
         //deckAreaSplitPane.setOpaque(false);
-        //deckList.setOpaque(false);
-        //sideboardList.setOpaque(false);
-        deckList.setRole(DragCardGrid.Role.MAINDECK);
-        sideboardList.setRole(DragCardGrid.Role.SIDEBOARD);
+        //dragCardGrid1.setOpaque(false);
+        //dragCardGrid2.setOpaque(false);
+        dragCardGrid1.setRole(DragCardGrid.Role.MAINDECK);
+        dragCardGrid2.setRole(DragCardGrid.Role.SIDEBOARD);
 
         // When a selection happens in one pane, deselect the selection in the other
-        deckList.addDragCardGridListener(new DragCardGrid.DragCardGridListener() {
+        dragCardGrid1.addDragCardGridListener(new DragCardGrid.DragCardGridListener() {
             @Override
             public void cardsSelected() {
-                sideboardList.deselectAll();
+                dragCardGrid2.deselectAll();
             }
 
             @Override
@@ -114,10 +114,10 @@ public class DeckArea extends javax.swing.JPanel {
 
             @Override
             public void duplicateCards(Collection<CardView> cards) {
-                sideboardList.deselectAll();
+                dragCardGrid2.deselectAll();
                 for (CardView card : cards) {
                     CardView newCard = new CardView(card);
-                    deckList.addCardView(newCard, true);
+                    dragCardGrid1.addCardView(newCard, true);
                 }
             }
 
@@ -129,10 +129,10 @@ public class DeckArea extends javax.swing.JPanel {
                 }
             }
         });
-        sideboardList.addDragCardGridListener(new DragCardGrid.DragCardGridListener() {
+        dragCardGrid2.addDragCardGridListener(new DragCardGrid.DragCardGridListener() {
             @Override
             public void cardsSelected() {
-                deckList.deselectAll();
+                dragCardGrid1.deselectAll();
             }
 
             @Override
@@ -152,10 +152,10 @@ public class DeckArea extends javax.swing.JPanel {
 
             @Override
             public void duplicateCards(Collection<CardView> cards) {
-                deckList.deselectAll();
+                dragCardGrid1.deselectAll();
                 for (CardView card : cards) {
                     CardView newCard = new CardView(card);
-                    sideboardList.addCardView(newCard, true);
+                    dragCardGrid2.addCardView(newCard, true);
                 }                
             }
 
@@ -172,8 +172,8 @@ public class DeckArea extends javax.swing.JPanel {
 
     public Settings saveSettings() {
         Settings settings = new Settings();
-        settings.maindeckSettings = deckList.saveSettings();
-        settings.sideboardSetings = sideboardList.saveSettings();
+        settings.maindeckSettings = dragCardGrid1.saveSettings();
+        settings.sideboardSetings = dragCardGrid2.saveSettings();
         if (isLimitedBuildingOrientation) {
             dividerLocationLimited = deckAreaSplitPane.getDividerLocation();
         } else {
@@ -186,8 +186,8 @@ public class DeckArea extends javax.swing.JPanel {
 
     public void loadSettings(Settings s) {
         if (s != null) {
-            deckList.loadSettings(s.maindeckSettings);
-            sideboardList.loadSettings(s.sideboardSetings);
+            dragCardGrid1.loadSettings(s.maindeckSettings);
+            dragCardGrid2.loadSettings(s.sideboardSetings);
             dividerLocationLimited = s.dividerLocationLimited;
             dividerLocationNormal = s.dividerLocationNormal;
             if (isLimitedBuildingOrientation) {
@@ -201,14 +201,14 @@ public class DeckArea extends javax.swing.JPanel {
     }
 
     public void cleanUp() {
-        deckList.cleanUp();
-        sideboardList.cleanUp();
+        dragCardGrid1.cleanUp();
+        dragCardGrid2.cleanUp();
     }
 
     public void changeGUISize() {
         setGUISize();
-        deckList.changeGUISize();
-        sideboardList.changeGUISize();
+        dragCardGrid1.changeGUISize();
+        dragCardGrid2.changeGUISize();
         deckAreaSplitPane.setDividerSize(GUISizeHelper.dividerBarSize);
     }
 
@@ -230,12 +230,12 @@ public class DeckArea extends javax.swing.JPanel {
     }
 
     public void showSideboard(boolean show) {
-        this.sideboardList.setVisible(show);
+        this.dragCardGrid2.setVisible(show);
     }
 
     public void setDeckEditorMode(DeckEditorMode mode) {
-        this.deckList.setDeckEditorMode(mode);
-        this.sideboardList.setDeckEditorMode(mode);
+        this.dragCardGrid1.setDeckEditorMode(mode);
+        this.dragCardGrid2.setDeckEditorMode(mode);
     }
 
     private Set<Card> filterHidden(Set<Card> cards) {
@@ -255,12 +255,12 @@ public class DeckArea extends javax.swing.JPanel {
     public void loadDeck(Deck deck, boolean useLayout, BigCard bigCard) {
         lastDeck = deck;
         lastBigCard = bigCard;
-        deckList.setCards(
+        dragCardGrid1.setCards(
                 new CardsView(filterHidden(lastDeck.getCards())),
                 useLayout ? deck.getCardsLayout() : null,
                 lastBigCard);
-        if (sideboardList.isVisible()) {
-            sideboardList.setCards(
+        if (dragCardGrid2.isVisible()) {
+            dragCardGrid2.setCards(
                     new CardsView(filterHidden(lastDeck.getSideboard())),
                     useLayout ? deck.getSideboardLayout() : null,
                     lastBigCard);
@@ -268,21 +268,21 @@ public class DeckArea extends javax.swing.JPanel {
     }
 
     public void addDeckEventListener(Listener<Event> listener) {
-        deckList.addCardEventListener(listener);
+        dragCardGrid1.addCardEventListener(listener);
         maindeckVirtualEvent.addListener(listener);
     }
 
     public void clearDeckEventListeners() {
-        deckList.clearCardEventListeners();
+        dragCardGrid1.clearCardEventListeners();
     }
 
     public void addSideboardEventListener(Listener<Event> listener) {
-        sideboardList.addCardEventListener(listener);
+        dragCardGrid2.addCardEventListener(listener);
         sideboardVirtualEvent.addListener(listener);
     }
 
     public void clearSideboardEventListeners() {
-        sideboardList.clearCardEventListeners();
+        dragCardGrid2.clearCardEventListeners();
     }
 
     /**
@@ -295,19 +295,19 @@ public class DeckArea extends javax.swing.JPanel {
     private void initComponents() {
 
         deckAreaSplitPane = new javax.swing.JSplitPane();
-        deckList = new mage.client.cards.DragCardGrid();
-        sideboardList = new mage.client.cards.DragCardGrid();
+        dragCardGrid1 = new mage.client.cards.DragCardGrid();
+        dragCardGrid2 = new mage.client.cards.DragCardGrid();
 
         deckAreaSplitPane.setBorder(null);
         deckAreaSplitPane.setResizeWeight(0.6);
-        deckAreaSplitPane.setLeftComponent(deckList);
-        deckAreaSplitPane.setRightComponent(sideboardList);
+        deckAreaSplitPane.setLeftComponent(dragCardGrid1);
+        deckAreaSplitPane.setRightComponent(dragCardGrid2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(deckAreaSplitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 918, Short.MAX_VALUE)
+            .addComponent(deckAreaSplitPane, javax.swing.GroupLayout.PREFERRED_SIZE, 918, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -316,17 +316,17 @@ public class DeckArea extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     public DragCardGrid getDeckList() {
-        return deckList;
+        return dragCardGrid1;
     }
 
     public DragCardGrid getSideboardList() {
-        return sideboardList;
+        return dragCardGrid2;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSplitPane deckAreaSplitPane;
-    private mage.client.cards.DragCardGrid deckList;
-    private mage.client.cards.DragCardGrid sideboardList;
+    private mage.client.cards.DragCardGrid dragCardGrid1;
+    private mage.client.cards.DragCardGrid dragCardGrid2;
     // End of variables declaration//GEN-END:variables
 
 }

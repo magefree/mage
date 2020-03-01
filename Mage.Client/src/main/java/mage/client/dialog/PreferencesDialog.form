@@ -3,18 +3,21 @@
 <Form version="1.8" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
-    <Property name="title" type="java.lang.String" value="Preferences"/>
+    <Property name="title" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.title" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+    </Property>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
   <AuxValues>
-    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="1"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_formBundle" type="java.lang.String" value="SwingMessage"/>
     <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
     <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
-    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="true"/>
     <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="2"/>
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
@@ -67,7 +70,9 @@
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="Main">
-                <Property name="tabTitle" type="java.lang.String" value="Main"/>
+                <Property name="tabTitle" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.tabMain.TabConstraints.tabTitle" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -98,7 +103,7 @@
                       <Component id="main_gamelog" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="main_battlefield" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="23" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -112,6 +117,7 @@
                       <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                         <EtchetBorder/>
                       </Border>
+                      <ResourceString PropertyName="titleX" bundle="SwingMessage.properties" key="PreferencesDialog.main_gamelog.border.title" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -124,28 +130,44 @@
                 <Component class="javax.swing.JCheckBox" name="cbGameLogShowTurnInfo">
                   <Properties>
                     <Property name="selected" type="boolean" value="true"/>
-                    <Property name="text" type="java.lang.String" value="Show turn info in game logs (19:01 T2.DA: message)"/>
-                    <Property name="toolTipText" type="java.lang.String" value="Add turn number and step info after time in game logs"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbGameLogShowTurnInfo.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbGameLogShowTurnInfo.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbGameLogAutoSave">
                   <Properties>
                     <Property name="selected" type="boolean" value="true"/>
-                    <Property name="text" type="java.lang.String" value="Save game logs     (to &quot;../Mage.Client/gamelogs/&quot; directory)"/>
-                    <Property name="toolTipText" type="java.lang.String" value="The logs of all your games will be saved to the mentioned folder if this option is switched on."/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbGameLogAutoSave.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbGameLogAutoSave.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbDraftLogAutoSave">
                   <Properties>
                     <Property name="selected" type="boolean" value="true"/>
-                    <Property name="text" type="java.lang.String" value="Save draft logs     (to &quot;../Mage.Client/gamelogs/&quot; directory)"/>
-                    <Property name="toolTipText" type="java.lang.String" value="The logs of all your games will be saved to the mentioned folder if this option is switched on."/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbDraftLogAutoSave.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbDraftLogAutoSave.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbGameJsonLogAutoSave">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Save JSON game logs     (to &quot;../Mage.Client/gamelogsJson/&quot; directory)"/>
-                    <Property name="toolTipText" type="java.lang.String" value="The JSON logs of all your games will be saved to the mentioned folder if this option is switched on."/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbGameJsonLogAutoSave.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbGameJsonLogAutoSave.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -158,12 +180,15 @@
                       <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                         <EtchetBorder/>
                       </Border>
+                      <ResourceString PropertyName="titleX" bundle="SwingMessage.properties" key="PreferencesDialog.main_card.border.title" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                     </TitledBorder>
                   </Border>
                 </Property>
               </Properties>
               <AccessibilityProperties>
-                <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Game panel"/>
+                <Property name="AccessibleContext.accessibleName" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.main_card.AccessibleContext.accessibleName" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </AccessibilityProperties>
 
               <Layout>
@@ -205,11 +230,17 @@
                 <Component class="javax.swing.JCheckBox" name="showCardName">
                   <Properties>
                     <Property name="selected" type="boolean" value="true"/>
-                    <Property name="text" type="java.lang.String" value="Show card name on card panel"/>
-                    <Property name="toolTipText" type="java.lang.String" value="Write the card&apos;s name on the card to make the card name more recognizable."/>
-                    <Property name="actionCommand" type="java.lang.String" value=""/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.showCardName.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.showCardName.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="actionCommand" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.showCardName.actionCommand" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                      <Color id="Default Cursor"/>
+                      <Color id="&#x9ed8;&#x8ba4;&#x5149;&#x6807;"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -219,8 +250,12 @@
                 <Component class="javax.swing.JLabel" name="tooltipDelayLabel">
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="Delay in milliseconds for showing the card tooltip text (0 value will disable tooltip)"/>
-                    <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;The time the appearance of the tooltip window for a card is delayed.&lt;br&gt;&#xa;If set to zero, the tooltip window won&apos;t be shown at all."/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.tooltipDelayLabel.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.tooltipDelayLabel.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JSlider" name="tooltipDelay">
@@ -231,18 +266,24 @@
                     <Property name="paintLabels" type="boolean" value="true"/>
                     <Property name="paintTicks" type="boolean" value="true"/>
                     <Property name="snapToTicks" type="boolean" value="true"/>
-                    <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;The time the appearance of the tooltip window for a card is delayed.&lt;br&gt;&#xa;If set to zero, the tooltip window won&apos;t be shown at all."/>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.tooltipDelay.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                     <Property name="value" type="int" value="300"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="showFullImagePath">
                   <Properties>
                     <Property name="selected" type="boolean" value="true"/>
-                    <Property name="toolTipText" type="java.lang.String" value="Show the path Xmage is expecting for this card&apos;s image (only displays if missing)"/>
-                    <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                      <Color id="Default Cursor"/>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.showFullImagePath.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                     </Property>
-                    <Property name="label" type="java.lang.String" value="Display image path for missing images"/>
+                    <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                      <Color id="&#x9ed8;&#x8ba4;&#x5149;&#x6807;"/>
+                    </Property>
+                    <Property name="label" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.showFullImagePath.label" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="showFullImagePathActionPerformed"/>
@@ -258,6 +299,7 @@
                       <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                         <EtchetBorder/>
                       </Border>
+                      <ResourceString PropertyName="titleX" bundle="SwingMessage.properties" key="PreferencesDialog.main_game.border.title" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -313,11 +355,17 @@
                 <Component class="javax.swing.JCheckBox" name="nonLandPermanentsInOnePile">
                   <Properties>
                     <Property name="selected" type="boolean" value="true"/>
-                    <Property name="text" type="java.lang.String" value="Put non-land permanents in same row as creatures"/>
-                    <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;If activated, all non land permanents are shown in one row.&lt;br&gt;&#xa;First creatures than other permanents. If not activated, creatures are&lt;br&gt;&#xa;shown in a separate row."/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.nonLandPermanentsInOnePile.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.nonLandPermanentsInOnePile.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </Properties>
                   <AccessibilityProperties>
-                    <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="nonLandPermanentsInOnePile"/>
+                    <Property name="AccessibleContext.accessibleName" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.nonLandPermanentsInOnePile.AccessibleContext.accessibleName" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </AccessibilityProperties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nonLandPermanentsInOnePileActionPerformed"/>
@@ -326,8 +374,12 @@
                 <Component class="javax.swing.JCheckBox" name="showPlayerNamesPermanently">
                   <Properties>
                     <Property name="selected" type="boolean" value="true"/>
-                    <Property name="text" type="java.lang.String" value="Show player names on avatar permanently"/>
-                    <Property name="toolTipText" type="java.lang.String" value="Instead showing the names only if you hover over the avatar with the mouse, the name is shown all the time."/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.showPlayerNamesPermanently.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.showPlayerNamesPermanently.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                   </Properties>
                   <Events>
@@ -337,8 +389,12 @@
                 <Component class="javax.swing.JCheckBox" name="displayLifeOnAvatar">
                   <Properties>
                     <Property name="selected" type="boolean" value="true"/>
-                    <Property name="text" type="java.lang.String" value="Display life on avatar image"/>
-                    <Property name="toolTipText" type="java.lang.String" value="Display the player&apos;s life over its avatar image."/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.displayLifeOnAvatar.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.displayLifeOnAvatar.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                   </Properties>
                   <Events>
@@ -348,8 +404,12 @@
                 <Component class="javax.swing.JCheckBox" name="showAbilityPickerForced">
                   <Properties>
                     <Property name="selected" type="boolean" value="true"/>
-                    <Property name="text" type="java.lang.String" value="Show ability picker for abilities or spells without costs"/>
-                    <Property name="toolTipText" type="java.lang.String" value="This prevents you from accidently activating abilities without other costs than tapping or casting spells with 0 mana costs."/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.showAbilityPickerForced.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.showAbilityPickerForced.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                   </Properties>
                   <Events>
@@ -359,8 +419,12 @@
                 <Component class="javax.swing.JCheckBox" name="cbAllowRequestToShowHandCards">
                   <Properties>
                     <Property name="selected" type="boolean" value="true"/>
-                    <Property name="text" type="java.lang.String" value="Allow requests from players and spectators to show your hand cards"/>
-                    <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;This is the default setting used for your matches. If activated other players or spectators&lt;br&gt;&#xa;of your match can send a request so you can allow them to see your hand cards."/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbAllowRequestToShowHandCards.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbAllowRequestToShowHandCards.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                   </Properties>
                   <Events>
@@ -370,8 +434,12 @@
                 <Component class="javax.swing.JCheckBox" name="cbShowStormCounter">
                   <Properties>
                     <Property name="selected" type="boolean" value="true"/>
-                    <Property name="text" type="java.lang.String" value="Show the number of spell casts during the current turn"/>
-                    <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Adds a little box left to the short keys line with the number&lt;br&gt;&#xa;of spells already cast during the current turn (storm counter)."/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbShowStormCounter.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbShowStormCounter.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                   </Properties>
                   <Events>
@@ -381,8 +449,12 @@
                 <Component class="javax.swing.JCheckBox" name="cbConfirmEmptyManaPool">
                   <Properties>
                     <Property name="selected" type="boolean" value="true"/>
-                    <Property name="text" type="java.lang.String" value="Confirm if you want to pass a phase/step but there is still mana in your mana pool"/>
-                    <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;If activated you get a confirm message if you pass priority while stack is empty&lt;br&gt;&#xa; and you still have mana in your mana pool."/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbConfirmEmptyManaPool.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbConfirmEmptyManaPool.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                   </Properties>
                   <Events>
@@ -392,8 +464,12 @@
                 <Component class="javax.swing.JCheckBox" name="cbAskMoveToGraveOrder">
                   <Properties>
                     <Property name="selected" type="boolean" value="true"/>
-                    <Property name="text" type="java.lang.String" value="Ask player for setting order cards go to graveyard"/>
-                    <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;If activated and multiple cards go to the graveyard at the same time&lt;br&gt;&#xa;the player is asked to set the order of the cards."/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbAskMoveToGraveOrder.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbAskMoveToGraveOrder.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                   </Properties>
                   <Events>
@@ -410,6 +486,7 @@
                       <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                         <EtchetBorder/>
                       </Border>
+                      <ResourceString PropertyName="titleX" bundle="SwingMessage.properties" key="PreferencesDialog.main_battlefield.border.title" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -446,7 +523,9 @@
                         <StringItem index="2" value="Enable multicolor for different phases"/>
                       </StringArray>
                     </Property>
-                    <Property name="toolTipText" type="java.lang.String" value="Battlefield feedback panel colorizing on your turn (e.g. use green color if you must select card or answer to request)"/>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbBattlefieldFeedbackColorizingMode.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbBattlefieldFeedbackColorizingModeActionPerformed"/>
@@ -460,7 +539,9 @@
                     <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
                       <ComponentRef name="cbBattlefieldFeedbackColorizingMode"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Feedback panel colorizing:"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.lblBattlefieldFeedbackColorizingMode.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -479,7 +560,9 @@
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="GUI Size">
-                <Property name="tabTitle" type="java.lang.String" value="GUI Size"/>
+                <Property name="tabTitle" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.tabGuiSize.TabConstraints.tabTitle" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -492,6 +575,7 @@
                       <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                         <EtchetBorder/>
                       </Border>
+                      <ResourceString PropertyName="titleX" bundle="SwingMessage.properties" key="PreferencesDialog.guiSizeBasic.border.title" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -517,7 +601,9 @@
                     <Property name="paintLabels" type="boolean" value="true"/>
                     <Property name="paintTicks" type="boolean" value="true"/>
                     <Property name="snapToTicks" type="boolean" value="true"/>
-                    <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;The size of the font used to display table text."/>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.sliderFontSize.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                         <EtchetBorder/>
@@ -536,8 +622,12 @@
                 <Component class="javax.swing.JLabel" name="fontSizeLabel">
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="Tables"/>
-                    <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;The size of the font used to display table text."/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.fontSizeLabel.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.fontSizeLabel.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -554,7 +644,9 @@
                     <Property name="paintLabels" type="boolean" value="true"/>
                     <Property name="paintTicks" type="boolean" value="true"/>
                     <Property name="snapToTicks" type="boolean" value="true"/>
-                    <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;The size of the font used to display the chat text"/>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.sliderChatFontSize.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                         <EtchetBorder/>
@@ -573,8 +665,12 @@
                 <Component class="javax.swing.JLabel" name="chatFontSizeLabel">
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="Chat"/>
-                    <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;The size of the font used to display the chat text"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.chatFontSizeLabel.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.chatFontSizeLabel.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -591,7 +687,9 @@
                     <Property name="paintLabels" type="boolean" value="true"/>
                     <Property name="paintTicks" type="boolean" value="true"/>
                     <Property name="snapToTicks" type="boolean" value="true"/>
-                    <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;The size of the font of messages and menues"/>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.sliderDialogFont.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                         <EtchetBorder/>
@@ -610,11 +708,17 @@
                 <Component class="javax.swing.JLabel" name="labelDialogFont">
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="Messages and menus"/>
-                    <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;The size of the font of messages and menus"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.labelDialogFont.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.labelDialogFont.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </Properties>
                   <AccessibilityProperties>
-                    <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value="&lt;HTML&gt;The size of the font used to display messages or menus."/>
+                    <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.labelDialogFont.AccessibleContext.accessibleDescription" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </AccessibilityProperties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -631,7 +735,9 @@
                     <Property name="paintLabels" type="boolean" value="true"/>
                     <Property name="paintTicks" type="boolean" value="true"/>
                     <Property name="snapToTicks" type="boolean" value="true"/>
-                    <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;The size of the card in editor and the picked zone of the draft panel"/>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.sliderEditorCardSize.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                         <EtchetBorder/>
@@ -650,8 +756,12 @@
                 <Component class="javax.swing.JLabel" name="labelEditorCardSize">
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="Cards in editor and draft panel"/>
-                    <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;The size of the card in editor and the picked zone of the draft panel&#xa;"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.labelEditorCardSize.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.labelEditorCardSize.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -668,7 +778,9 @@
                     <Property name="paintLabels" type="boolean" value="true"/>
                     <Property name="paintTicks" type="boolean" value="true"/>
                     <Property name="snapToTicks" type="boolean" value="true"/>
-                    <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;The size of the card in editor and the picked zone of the draft panel"/>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.sliderEditorCardOffset.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                         <EtchetBorder/>
@@ -687,8 +799,12 @@
                 <Component class="javax.swing.JLabel" name="labelEditorCardOffset">
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="Card offset editor and draft"/>
-                    <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;The vertical offset of card images in editor areas&#xa;"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.labelEditorCardOffset.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.labelEditorCardOffset.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -705,7 +821,9 @@
                     <Property name="paintLabels" type="boolean" value="true"/>
                     <Property name="paintTicks" type="boolean" value="true"/>
                     <Property name="snapToTicks" type="boolean" value="true"/>
-                    <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;The size of the image shown for the card your mouse pointer&lt;br&gt;is located over while you turn the mouse wheel "/>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.sliderEnlargedImageSize.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                         <EtchetBorder/>
@@ -724,8 +842,12 @@
                 <Component class="javax.swing.JLabel" name="labelEnlargedImageSize">
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="Enlarged image (mouse wheel)"/>
-                    <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;The size of the image shown for the card your mouse pointer&lt;br&gt;is located over while you turn the mouse wheel&#xa;"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.labelEnlargedImageSize.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.labelEnlargedImageSize.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -1956,6 +2078,7 @@
                       <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                         <EtchetBorder/>
                       </Border>
+                      <ResourceString PropertyName="titleX" bundle="SwingMessage.properties" key="PreferencesDialog.guiSizeGame.border.title" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -1981,7 +2104,9 @@
                     <Property name="paintLabels" type="boolean" value="true"/>
                     <Property name="paintTicks" type="boolean" value="true"/>
                     <Property name="snapToTicks" type="boolean" value="true"/>
-                    <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;The size of the card images in hand and on the stack"/>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.sliderCardSizeHand.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                     <Property name="value" type="int" value="14"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
@@ -2001,8 +2126,12 @@
                 <Component class="javax.swing.JLabel" name="labelCardSizeHand">
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="Hand cards and stack objects"/>
-                    <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;The size of the card images in hand and on the stack"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.labelCardSizeHand.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.labelCardSizeHand.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -2019,7 +2148,9 @@
                     <Property name="paintLabels" type="boolean" value="true"/>
                     <Property name="paintTicks" type="boolean" value="true"/>
                     <Property name="snapToTicks" type="boolean" value="true"/>
-                    <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;The size of card in other game zone (e.g. graveyard, revealed cards etc.)"/>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.sliderCardSizeOtherZones.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                         <EtchetBorder/>
@@ -2038,8 +2169,12 @@
                 <Component class="javax.swing.JLabel" name="labelCardSizeOtherZones">
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="Cards other zones"/>
-                    <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;The size of card in other game zone (e.g. graveyard, revealed cards etc.)"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.labelCardSizeOtherZones.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.labelCardSizeOtherZones.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -2056,7 +2191,9 @@
                     <Property name="paintLabels" type="boolean" value="true"/>
                     <Property name="paintTicks" type="boolean" value="true"/>
                     <Property name="snapToTicks" type="boolean" value="true"/>
-                    <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;The maximum size of permanents on the battlefield"/>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.sliderCardSizeMinBattlefield.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                         <EtchetBorder/>
@@ -2075,8 +2212,12 @@
                 <Component class="javax.swing.JLabel" name="labelCardSizeMinBattlefield">
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="Permanents min size"/>
-                    <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;The minimum size of permanents on the battlefield"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.labelCardSizeMinBattlefield.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.labelCardSizeMinBattlefield.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -2093,7 +2234,9 @@
                     <Property name="paintLabels" type="boolean" value="true"/>
                     <Property name="paintTicks" type="boolean" value="true"/>
                     <Property name="snapToTicks" type="boolean" value="true"/>
-                    <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;The maximum size of permanents on the battlefield"/>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.sliderCardSizeMaxBattlefield.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                         <EtchetBorder/>
@@ -2112,8 +2255,12 @@
                 <Component class="javax.swing.JLabel" name="labelCardSizeMaxBattlefield">
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="Permanents max size"/>
-                    <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;The maximum size of permanents on the battlefield"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.labelCardSizeMaxBattlefield.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.labelCardSizeMaxBattlefield.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -2130,7 +2277,9 @@
                     <Property name="paintLabels" type="boolean" value="true"/>
                     <Property name="paintTicks" type="boolean" value="true"/>
                     <Property name="snapToTicks" type="boolean" value="true"/>
-                    <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;The % size of the stack object area in relation to the hand card area size."/>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.sliderStackWidth.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                     <Property name="value" type="int" value="30"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
@@ -2142,7 +2291,9 @@
                     </Property>
                   </Properties>
                   <AccessibilityProperties>
-                    <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value="&lt;HTML&gt;The stack width in relation to the hand area width"/>
+                    <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.sliderStackWidth.AccessibleContext.accessibleDescription" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </AccessibilityProperties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -2153,11 +2304,17 @@
                 <Component class="javax.swing.JLabel" name="labelStackWidth">
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="Stack %width related to hand"/>
-                    <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;The % size of the stack object area in relation to the hand card area size."/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.labelStackWidth.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.labelStackWidth.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </Properties>
                   <AccessibilityProperties>
-                    <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value="&lt;HTML&gt;The stack width in relation to the hand area width"/>
+                    <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.labelStackWidth.AccessibleContext.accessibleDescription" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </AccessibilityProperties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -2174,7 +2331,9 @@
                     <Property name="paintLabels" type="boolean" value="true"/>
                     <Property name="paintTicks" type="boolean" value="true"/>
                     <Property name="snapToTicks" type="boolean" value="true"/>
-                    <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;The size of the game feedback area (buttons and messages above the hand area)"/>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.sliderGameFeedbackArea.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                         <EtchetBorder/>
@@ -2193,11 +2352,17 @@
                 <Component class="javax.swing.JLabel" name="labelGameFeedback">
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="Dialog area"/>
-                    <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;The size of the game feedback area (buttons and messages above the hand area)"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.labelGameFeedback.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.labelGameFeedback.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </Properties>
                   <AccessibilityProperties>
-                    <Property name="AccessibleContext.accessibleName" type="java.lang.String" value=""/>
+                    <Property name="AccessibleContext.accessibleName" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.labelGameFeedback.AccessibleContext.accessibleName" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </AccessibilityProperties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -2214,7 +2379,9 @@
                     <Property name="paintLabels" type="boolean" value="true"/>
                     <Property name="paintTicks" type="boolean" value="true"/>
                     <Property name="snapToTicks" type="boolean" value="true"/>
-                    <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;The size of the tooltip window for cards or permanents"/>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.sliderTooltipSize.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                     <Property name="value" type="int" value="14"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
@@ -2234,8 +2401,12 @@
                 <Component class="javax.swing.JLabel" name="labelTooltipSize">
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="Tooltip window"/>
-                    <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;The size of the tooltip window for cards or permanents"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.labelTooltipSize.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.labelTooltipSize.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -3897,7 +4068,9 @@
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="Phases &amp; Priority">
-                <Property name="tabTitle" type="java.lang.String" value="Phases &amp; Priority"/>
+                <Property name="tabTitle" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.tabPhases.TabConstraints.tabTitle" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -4052,22 +4225,30 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabelHeadLine">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Default stop steps if not skip buttons activated (e.g. F6):"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.jLabelHeadLine.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabelYourTurn">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Your turn"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.jLabelYourTurn.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabelOpponentsTurn">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Opponent(s) turn"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.jLabelOpponentsTurn.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabelUpkeep">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Upkeep:"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.jLabelUpkeep.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JCheckBox" name="checkBoxUpkeepYou">
@@ -4076,7 +4257,9 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabelDraw">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Draw:"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.jLabelDraw.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JCheckBox" name="checkBoxDrawYou">
@@ -4085,7 +4268,9 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabelMain1">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Main 1:"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.jLabelMain1.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JCheckBox" name="checkBoxMainYou">
@@ -4094,7 +4279,9 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabelBeforeCombat">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Before combat:"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.jLabelBeforeCombat.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JCheckBox" name="checkBoxBeforeCYou">
@@ -4103,7 +4290,9 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabelEndofCombat">
               <Properties>
-                <Property name="text" type="java.lang.String" value="End of combat:"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.jLabelEndofCombat.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JCheckBox" name="checkBoxEndOfCYou">
@@ -4112,7 +4301,9 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabelMain2">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Main 2:"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.jLabelMain2.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JCheckBox" name="checkBoxMain2You">
@@ -4121,7 +4312,9 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabelEndOfTurn">
               <Properties>
-                <Property name="text" type="java.lang.String" value="End of turn:"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.jLabelEndOfTurn.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JCheckBox" name="checkBoxEndTurnYou">
@@ -4136,6 +4329,7 @@
                       <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                         <EtchetBorder/>
                       </Border>
+                      <ResourceString PropertyName="titleX" bundle="SwingMessage.properties" key="PreferencesDialog.phases_stopSettings.border.title" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -4149,9 +4343,15 @@
                 <Component class="javax.swing.JCheckBox" name="cbStopAttack">
                   <Properties>
                     <Property name="selected" type="boolean" value="true"/>
-                    <Property name="text" type="java.lang.String" value="STOP skips on declare attackers if attackers are available"/>
-                    <Property name="toolTipText" type="java.lang.String" value=""/>
-                    <Property name="actionCommand" type="java.lang.String" value=""/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbStopAttack.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbStopAttack.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="actionCommand" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbStopAttack.actionCommand" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbStopAttackActionPerformed"/>
@@ -4160,9 +4360,15 @@
                 <Component class="javax.swing.JCheckBox" name="cbStopBlockWithAny">
                   <Properties>
                     <Property name="selected" type="boolean" value="true"/>
-                    <Property name="text" type="java.lang.String" value="STOP skips on declare blockers if ANY blockers are available"/>
-                    <Property name="toolTipText" type="java.lang.String" value=""/>
-                    <Property name="actionCommand" type="java.lang.String" value=""/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbStopBlockWithAny.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbStopBlockWithAny.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="actionCommand" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbStopBlockWithAny.actionCommand" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbStopBlockWithAnyActionPerformed"/>
@@ -4170,9 +4376,15 @@
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbStopBlockWithZero">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="STOP skips on declare blockers if ZERO blockers are available"/>
-                    <Property name="toolTipText" type="java.lang.String" value=""/>
-                    <Property name="actionCommand" type="java.lang.String" value=""/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbStopBlockWithZero.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbStopBlockWithZero.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="actionCommand" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbStopBlockWithZero.actionCommand" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbStopBlockWithZeroActionPerformed"/>
@@ -4180,9 +4392,15 @@
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbStopOnNewStackObjects">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Skip to STACK resolved (F10): stop on new objects added (on) or stop until empty (off)"/>
-                    <Property name="toolTipText" type="java.lang.String" value=""/>
-                    <Property name="actionCommand" type="java.lang.String" value=""/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbStopOnNewStackObjects.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbStopOnNewStackObjects.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="actionCommand" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbStopOnNewStackObjects.actionCommand" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[300, 25]"/>
                     </Property>
@@ -4193,9 +4411,15 @@
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbStopOnAllMain">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Skip to MAIN step (F7): stop on any main steps (on) or stop on your main step (off)"/>
-                    <Property name="toolTipText" type="java.lang.String" value=""/>
-                    <Property name="actionCommand" type="java.lang.String" value=""/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbStopOnAllMain.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbStopOnAllMain.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="actionCommand" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbStopOnAllMain.actionCommand" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbStopOnAllMainActionPerformed"/>
@@ -4203,9 +4427,15 @@
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbStopOnAllEnd">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Skip to END step (F5): stop on any end steps (on) or stop on opponents end step (off)"/>
-                    <Property name="toolTipText" type="java.lang.String" value=""/>
-                    <Property name="actionCommand" type="java.lang.String" value=""/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbStopOnAllEnd.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbStopOnAllEnd.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="actionCommand" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbStopOnAllEnd.actionCommand" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[300, 25]"/>
                     </Property>
@@ -4216,9 +4446,15 @@
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbPassPriorityCast">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Pass priority automatically after you have put a spell on the stack"/>
-                    <Property name="toolTipText" type="java.lang.String" value="If activated the system passes priority automatically for you if you have put a spell on the stack."/>
-                    <Property name="actionCommand" type="java.lang.String" value=""/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbPassPriorityCast.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbPassPriorityCast.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="actionCommand" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbPassPriorityCast.actionCommand" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[300, 25]"/>
                     </Property>
@@ -4229,9 +4465,15 @@
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbPassPriorityActivation">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Pass priority automatically after you have put an activated ability on the stack"/>
-                    <Property name="toolTipText" type="java.lang.String" value="If activated the system passes priority for you automatically after you have put an activated ability on the stack."/>
-                    <Property name="actionCommand" type="java.lang.String" value=""/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbPassPriorityActivation.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbPassPriorityActivation.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="actionCommand" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbPassPriorityActivation.actionCommand" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[300, 25]"/>
                     </Property>
@@ -4242,9 +4484,15 @@
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbAutoOrderTrigger">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Set order for your triggers automatically if all have the same text"/>
-                    <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;If activated the order to put on the stack your triggers that trigger at the same time&lt;br/&gt;&#xa;is set automatically if all have the same text."/>
-                    <Property name="actionCommand" type="java.lang.String" value=""/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbAutoOrderTrigger.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbAutoOrderTrigger.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="actionCommand" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbAutoOrderTrigger.actionCommand" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[300, 25]"/>
                     </Property>
@@ -4261,7 +4509,9 @@
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="Images">
-                <Property name="tabTitle" type="java.lang.String" value="Images"/>
+                <Property name="tabTitle" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.tabImages.TabConstraints.tabTitle" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -4303,6 +4553,7 @@
                       <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                         <EtchetBorder/>
                       </Border>
+                      <ResourceString PropertyName="titleX" bundle="SwingMessage.properties" key="PreferencesDialog.panelCardImages.border.title" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -4374,7 +4625,9 @@
               <SubComponents>
                 <Component class="javax.swing.JCheckBox" name="cbUseDefaultImageFolder">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Use default location to save images"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbUseDefaultImageFolder.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbUseDefaultImageFolderActionPerformed"/>
@@ -4382,12 +4635,16 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtImageFolderPath">
                   <Properties>
-                    <Property name="toolTipText" type="java.lang.String" value="The selected image will be used as background picture. You have to restart MAGE to view a changed background image."/>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.txtImageFolderPath.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnBrowseImageLocation">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Browse..."/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.btnBrowseImageLocation.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBrowseImageLocationActionPerformed"/>
@@ -4395,7 +4652,9 @@
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbSaveToZipFiles">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Store images in zip files"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbSaveToZipFiles.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbSaveToZipFilesActionPerformed"/>
@@ -4419,13 +4678,17 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="labelPreferedImageLanguage">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Default images language:"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.labelPreferedImageLanguage.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                     <Property name="focusable" type="boolean" value="false"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="labelNumberOfDownloadThreads">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Number of download threads:"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.labelNumberOfDownloadThreads.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JComboBox" name="cbNumberOfDownloadThreads">
@@ -4443,7 +4706,9 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="labelHint1">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="(change it to 1-3 if image source bans your IP for too many connections)"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.labelHint1.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -4456,6 +4721,7 @@
                       <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                         <EtchetBorder/>
                       </Border>
+                      <ResourceString PropertyName="titleX" bundle="SwingMessage.properties" key="PreferencesDialog.jPanel1.border.title" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -4490,7 +4756,9 @@
               <SubComponents>
                 <Component class="javax.swing.JCheckBox" name="cbCardRenderImageFallback">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Render mode: MTGO style (off) or IMAGE style (on)"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbCardRenderImageFallback.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbCardRenderImageFallbackActionPerformed"/>
@@ -4498,7 +4766,9 @@
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbCardRenderShowReminderText">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Show reminder text in rendered card textboxes"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbCardRenderShowReminderText.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbCardRenderShowReminderTextActionPerformed"/>
@@ -4506,7 +4776,9 @@
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbCardRenderHideSetSymbol">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Hide set symbols on cards (more space on the type line for card types)"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbCardRenderHideSetSymbol.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbCardRenderHideSetSymbolActionPerformed"/>
@@ -4522,6 +4794,7 @@
                       <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                         <EtchetBorder/>
                       </Border>
+                      <ResourceString PropertyName="titleX" bundle="SwingMessage.properties" key="PreferencesDialog.panelBackgroundImages.border.title" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -4579,7 +4852,9 @@
               <SubComponents>
                 <Component class="javax.swing.JCheckBox" name="cbUseDefaultBackground">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Use default location for backgrounds"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbUseDefaultBackground.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbUseDefaultBackgroundActionPerformed"/>
@@ -4592,7 +4867,9 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="btnBrowseBackgroundImage">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Browse..."/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.btnBrowseBackgroundImage.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBrowseBackgroundImageActionPerformed"/>
@@ -4605,7 +4882,9 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="btnBrowseBattlefieldImage">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Browse..."/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.btnBrowseBattlefieldImage.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBrowseBattlefieldImageActionPerformed"/>
@@ -4613,7 +4892,9 @@
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbUseDefaultBattleImage">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Use default battlefield image"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbUseDefaultBattleImage.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbUseDefaultBattleImageActionPerformed"/>
@@ -4621,7 +4902,9 @@
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbUseRandomBattleImage">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Use random background"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbUseRandomBattleImage.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbUseRandomBattleImageActionPerformed"/>
@@ -4635,7 +4918,9 @@
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="Sounds">
-                <Property name="tabTitle" type="java.lang.String" value="Sounds"/>
+                <Property name="tabTitle" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.tabSounds.TabConstraints.tabTitle" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -4674,12 +4959,15 @@
                       <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                         <EtchetBorder/>
                       </Border>
+                      <ResourceString PropertyName="titleX" bundle="SwingMessage.properties" key="PreferencesDialog.sounds_clips.border.title" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                     </TitledBorder>
                   </Border>
                 </Property>
               </Properties>
               <AccessibilityProperties>
-                <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value=""/>
+                <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.sounds_clips.AccessibleContext.accessibleDescription" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </AccessibilityProperties>
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
@@ -4689,8 +4977,12 @@
               <SubComponents>
                 <Component class="javax.swing.JCheckBox" name="cbEnableGameSounds">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Enable game sounds"/>
-                    <Property name="toolTipText" type="java.lang.String" value="Sounds that will be played for certain actions (e.g. play land, attack, etc.) during the game."/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbEnableGameSounds.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbEnableGameSounds.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbEnableGameSoundsActionPerformed"/>
@@ -4698,8 +4990,12 @@
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbEnableDraftSounds">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Enable draft sounds"/>
-                    <Property name="toolTipText" type="java.lang.String" value="Sounds that will be played during drafting for card picking or warining if time runs out."/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbEnableDraftSounds.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbEnableDraftSounds.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbEnableDraftSoundsActionPerformed"/>
@@ -4707,8 +5003,12 @@
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbEnableSkipButtonsSounds">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Enable skip button sounds"/>
-                    <Property name="toolTipText" type="java.lang.String" value="Sounds that will be played if a priority skip action (F4/F5/F7/F9) or cancel skip action (F3) is used."/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbEnableSkipButtonsSounds.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbEnableSkipButtonsSounds.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbEnableSkipButtonsSoundsActionPerformed"/>
@@ -4716,8 +5016,12 @@
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbEnableOtherSounds">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Enable other sounds"/>
-                    <Property name="toolTipText" type="java.lang.String" value="Sounds that will be played for actions outside of games (e.g. whisper, player joins your game, player submits a deck ...)."/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbEnableOtherSounds.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbEnableOtherSounds.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbEnableOtherSoundsActionPerformed"/>
@@ -4733,6 +5037,7 @@
                       <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                         <EtchetBorder/>
                       </Border>
+                      <ResourceString PropertyName="titleX" bundle="SwingMessage.properties" key="PreferencesDialog.sounds_backgroundMusic.border.title" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -4772,9 +5077,15 @@
               <SubComponents>
                 <Component class="javax.swing.JCheckBox" name="cbEnableBattlefieldBGM">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Play music during match"/>
-                    <Property name="toolTipText" type="java.lang.String" value="During your matches music will be played from the seleced folder."/>
-                    <Property name="actionCommand" type="java.lang.String" value="Play automatically during matches"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbEnableBattlefieldBGM.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbEnableBattlefieldBGM.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="actionCommand" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.cbEnableBattlefieldBGM.actionCommand" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbEnableBattlefieldBGMActionPerformed"/>
@@ -4782,8 +5093,12 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel16">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Playing from folder:"/>
-                    <Property name="toolTipText" type="java.lang.String" value=""/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.jLabel16.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.jLabel16.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtBattlefieldIBGMPath">
@@ -4793,7 +5108,9 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="btnBattlefieldBGMBrowse">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Browse..."/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.btnBattlefieldBGMBrowse.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBattlefieldBGMBrowseActionPerformed"/>
@@ -4807,7 +5124,9 @@
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="Avatars">
-                <Property name="tabTitle" type="java.lang.String" value="Avatars"/>
+                <Property name="tabTitle" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.tabAvatars.TabConstraints.tabTitle" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -4861,9 +5180,9 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
                     <Property name="columns" type="int" value="4"/>
+                    <Property name="verticalGap" type="int" value="20"/>
                     <Property name="horizontalGap" type="int" value="20"/>
                     <Property name="rows" type="int" value="6"/>
-                    <Property name="verticalGap" type="int" value="20"/>
                   </Layout>
                   <SubComponents>
                     <Container class="javax.swing.JPanel" name="jPanel10">
@@ -5665,7 +5984,9 @@
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="Connection">
-                <Property name="tabTitle" type="java.lang.String" value="Connection"/>
+                <Property name="tabTitle" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.tabConnection.TabConstraints.tabTitle" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -5714,6 +6035,7 @@
                       <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                         <EtchetBorder/>
                       </Border>
+                      <ResourceString PropertyName="titleX" bundle="SwingMessage.properties" key="PreferencesDialog.connection_servers.border.title" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -5756,8 +6078,12 @@
                 <Component class="javax.swing.JLabel" name="lblURLServerList">
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="2"/>
-                    <Property name="text" type="java.lang.String" value="URL server list:"/>
-                    <Property name="toolTipText" type="java.lang.String" value=""/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.lblURLServerList.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.lblURLServerList.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                     <Property name="horizontalTextPosition" type="int" value="10"/>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[110, 16]"/>
@@ -5767,7 +6093,9 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtURLServerList">
                   <Properties>
-                    <Property name="toolTipText" type="java.lang.String" value="The URL XMage tries to read a server list from."/>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.txtURLServerList.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[300, 22]"/>
                     </Property>
@@ -5778,14 +6106,18 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="10" style="2"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="e.g.: http://XMage.de/files/server-list.txt"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.jLabel17.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </Properties>
                 </Component>
               </SubComponents>
             </Container>
             <Component class="javax.swing.JLabel" name="lblProxyType">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Proxy:"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.lblProxyType.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="cbProxyType">
@@ -5805,7 +6137,9 @@
                 </Property>
               </Properties>
               <AccessibilityProperties>
-                <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value=""/>
+                <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.pnlProxySettings.AccessibleContext.accessibleDescription" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </AccessibilityProperties>
 
               <Layout>
@@ -5900,14 +6234,18 @@
                   <SubComponents>
                     <Component class="javax.swing.JLabel" name="lblProxyServer">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Server:"/>
+                        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                          <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.lblProxyServer.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                        </Property>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtProxyServer">
                     </Component>
                     <Component class="javax.swing.JLabel" name="lblProxyPort">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Port:"/>
+                        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                          <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.lblProxyPort.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                        </Property>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtProxyPort">
@@ -5917,14 +6255,18 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="lblProxyUserName">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="User Name:"/>
+                        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                          <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.lblProxyUserName.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                        </Property>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtProxyUserName">
                     </Component>
                     <Component class="javax.swing.JLabel" name="lblProxyPassword">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Password:"/>
+                        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                          <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.lblProxyPassword.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                        </Property>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JPasswordField" name="txtPasswordField">
@@ -5934,7 +6276,9 @@
                     </Component>
                     <Component class="javax.swing.JCheckBox" name="rememberPswd">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Remember Password"/>
+                        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                          <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.rememberPswd.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                        </Property>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rememberPswdActionPerformed"/>
@@ -5945,7 +6289,9 @@
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Tahoma" size="10" style="2"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Note: password won&apos;t be encrypted!"/>
+                        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                          <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.jLabel11.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                        </Property>
                       </Properties>
                     </Component>
                   </SubComponents>
@@ -5958,7 +6304,9 @@
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="Controls">
-                <Property name="tabTitle" type="java.lang.String" value="Controls"/>
+                <Property name="tabTitle" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.tabControls.TabConstraints.tabTitle" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -6079,42 +6427,58 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="labelNextTurn">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Next Turn:"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.labelNextTurn.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="labelEndStep">
               <Properties>
-                <Property name="text" type="java.lang.String" value="End Step:"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.labelEndStep.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="labelMainStep">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Main Step:"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.labelMainStep.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="labelYourTurn">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Your Turn:"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.labelYourTurn.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lebelSkip">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Skip Stack:"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.lebelSkip.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="labelPriorEnd">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Prior End:"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.labelPriorEnd.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="labelCancel">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Cancel Skip:"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.labelCancel.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="mage.client.components.KeyBindButton" name="keyCancelSkip">
               <Properties>
-                <Property name="text" type="java.lang.String" value="keyBindButton1"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.keyCancelSkip.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new KeyBindButton(this, KEY_CONTROL_CANCEL_SKIP)"/>
@@ -6122,7 +6486,9 @@
             </Component>
             <Component class="mage.client.components.KeyBindButton" name="keyNextTurn">
               <Properties>
-                <Property name="text" type="java.lang.String" value="keyBindButton1"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.keyNextTurn.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new KeyBindButton(this, KEY_CONTROL_NEXT_TURN)"/>
@@ -6130,7 +6496,9 @@
             </Component>
             <Component class="mage.client.components.KeyBindButton" name="keyMainStep">
               <Properties>
-                <Property name="text" type="java.lang.String" value="keyBindButton1"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.keyMainStep.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new KeyBindButton(this, KEY_CONTROL_MAIN_STEP)"/>
@@ -6138,7 +6506,9 @@
             </Component>
             <Component class="mage.client.components.KeyBindButton" name="keyEndStep">
               <Properties>
-                <Property name="text" type="java.lang.String" value="keyBindButton1"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.keyEndStep.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new KeyBindButton(this, KEY_CONTROL_END_STEP)"/>
@@ -6146,7 +6516,9 @@
             </Component>
             <Component class="mage.client.components.KeyBindButton" name="keyYourTurn">
               <Properties>
-                <Property name="text" type="java.lang.String" value="keyBindButton1"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.keyYourTurn.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new KeyBindButton(this, KEY_CONTROL_YOUR_TURN)"/>
@@ -6154,7 +6526,9 @@
             </Component>
             <Component class="mage.client.components.KeyBindButton" name="keySkipStack">
               <Properties>
-                <Property name="text" type="java.lang.String" value="keyBindButton1"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.keySkipStack.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new KeyBindButton(this, KEY_CONTROL_SKIP_STACK)"/>
@@ -6162,7 +6536,9 @@
             </Component>
             <Component class="mage.client.components.KeyBindButton" name="keyPriorEnd">
               <Properties>
-                <Property name="text" type="java.lang.String" value="keyBindButton1"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.keyPriorEnd.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new KeyBindButton(this, KEY_CONTROL_PRIOR_END)"/>
@@ -6170,7 +6546,9 @@
             </Component>
             <Component class="mage.client.components.KeyBindButton" name="keySkipStep">
               <Properties>
-                <Property name="text" type="java.lang.String" value="keyBindButton1"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.keySkipStep.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new KeyBindButton(this, KEY_CONTROL_SKIP_STEP)"/>
@@ -6178,12 +6556,16 @@
             </Component>
             <Component class="javax.swing.JLabel" name="labelSkipStep">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Skip Step:"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.labelSkipStep.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="mage.client.components.KeyBindButton" name="keyConfirm">
               <Properties>
-                <Property name="text" type="java.lang.String" value="keyBindButton1"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.keyConfirm.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new KeyBindButton(this, KEY_CONTROL_CONFIRM)"/>
@@ -6191,18 +6573,24 @@
             </Component>
             <Component class="javax.swing.JLabel" name="labelConfirm">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Confirm:"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.labelConfirm.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="controlsDescriptionLabel">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&lt;html&gt;Click on a button and press a KEY or a combination of CTRL/ALT/SHIF + KEY to change a keybind.&#xa;&lt;br&gt;&#xa;Press SPACE to clear binging.&#xa;&lt;br&gt;&#xa;Press ESC to cancel binding.&#xa;&lt;br&gt;&#xa;New changes will be applied after new game start."/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.controlsDescriptionLabel.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
                 <Property name="verticalAlignment" type="int" value="1"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="bttnResetControls">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Reset to default"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.bttnResetControls.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bttnResetControlsActionPerformed"/>
@@ -6210,12 +6598,16 @@
             </Component>
             <Component class="javax.swing.JLabel" name="labelToggleRecordMacro">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Record Macro (unsupported):"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.labelToggleRecordMacro.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="mage.client.components.KeyBindButton" name="keyToggleRecordMacro">
               <Properties>
-                <Property name="text" type="java.lang.String" value="keyBindButton1"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.keyToggleRecordMacro.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new KeyBindButton(this, KEY_CONTROL_TOGGLE_MACRO)"/>
@@ -6223,12 +6615,16 @@
             </Component>
             <Component class="javax.swing.JLabel" name="labelSwitchChat">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Go in/out to chat:"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.labelSwitchChat.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="mage.client.components.KeyBindButton" name="keySwitchChat">
               <Properties>
-                <Property name="text" type="java.lang.String" value="keyBindButton1"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.keySwitchChat.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new KeyBindButton(this, KEY_CONTROL_SWITCH_CHAT)"/>
@@ -6240,7 +6636,9 @@
     </Container>
     <Component class="javax.swing.JButton" name="saveButton">
       <Properties>
-        <Property name="label" type="java.lang.String" value="Save"/>
+        <Property name="label" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.saveButton.label" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[100, 30]"/>
         </Property>
@@ -6258,7 +6656,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="exitButton">
       <Properties>
-        <Property name="label" type="java.lang.String" value="Exit"/>
+        <Property name="label" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="SwingMessage.properties" key="PreferencesDialog.exitButton.label" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[100, 30]"/>
         </Property>

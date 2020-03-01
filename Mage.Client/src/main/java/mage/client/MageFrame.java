@@ -854,7 +854,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         separatorDebug = new javax.swing.JToolBar.Separator();
         jMemUsageLabel = new javax.swing.JLabel();
 
-        menuDebugTestModalDialog.setText(Localizer.getInstance().getMessage("lblTestModalDialogs"));
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("SwingMessage"); // NOI18N
+        menuDebugTestModalDialog.setText(bundle.getString("MageFrame.menuDebugTestModalDialog.text")); // NOI18N
         menuDebugTestModalDialog.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuDebugTestModalDialogActionPerformed(evt);
@@ -862,7 +863,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         });
         popupDebug.add(menuDebugTestModalDialog);
 
-        menuDebugTestCardRenderModesDialog.setText(Localizer.getInstance().getMessage("lblTestCardRenderModes"));
+        menuDebugTestCardRenderModesDialog.setText(bundle.getString("MageFrame.menuDebugTestCardRenderModesDialog.text")); // NOI18N
         menuDebugTestCardRenderModesDialog.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuDebugTestCardRenderModesDialogActionPerformed(evt);
@@ -877,14 +878,14 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
         mageToolbar.setFloatable(false);
         mageToolbar.setRollover(true);
-        mageToolbar.setFont(new java.awt.Font("Microsoft YaHei", 0, 48)); // NOI18N
+        mageToolbar.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         mageToolbar.setMaximumSize(new java.awt.Dimension(614, 60));
         mageToolbar.setMinimumSize(new java.awt.Dimension(566, 60));
         mageToolbar.setPreferredSize(new java.awt.Dimension(614, 60));
 
         btnPreferences.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/preferences.png"))); // NOI18N
-        btnPreferences.setText(Localizer.getInstance().getMessage("lblPreferences"));
-        btnPreferences.setToolTipText(Localizer.getInstance().getMessage("lblPreferencesFunction"));
+        btnPreferences.setText(bundle.getString("MageFrame.btnPreferences.text")); // NOI18N
+        btnPreferences.setToolTipText(bundle.getString("MageFrame.btnPreferences.toolTipText")); // NOI18N
         btnPreferences.setFocusable(false);
         btnPreferences.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnPreferences.addActionListener(new java.awt.event.ActionListener() {
@@ -896,7 +897,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         mageToolbar.add(jSeparator4);
 
         btnConnect.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/connect.png"))); // NOI18N
-        btnConnect.setToolTipText(Localizer.getInstance().getMessage("lblConnectOrDisconnectFromServer"));
+        btnConnect.setToolTipText(bundle.getString("MageFrame.btnConnect.toolTipText")); // NOI18N
         btnConnect.setFocusable(false);
         btnConnect.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnConnect.addActionListener(new java.awt.event.ActionListener() {
@@ -908,8 +909,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         mageToolbar.add(jSeparator1);
 
         btnDeckEditor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/deck_editor.png"))); // NOI18N
-        btnDeckEditor.setText(Localizer.getInstance().getMessage("lblDeckEditor"));
-        btnDeckEditor.setToolTipText(Localizer.getInstance().getMessage("lblDeckEditorFunction"));
+        btnDeckEditor.setText(bundle.getString("MageFrame.btnDeckEditor.text")); // NOI18N
+        btnDeckEditor.setToolTipText(bundle.getString("MageFrame.btnDeckEditor.toolTipText")); // NOI18N
         btnDeckEditor.setFocusable(false);
         btnDeckEditor.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnDeckEditor.addActionListener(new java.awt.event.ActionListener() {
@@ -921,8 +922,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         mageToolbar.add(jSeparator2);
 
         btnCollectionViewer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/collection.png"))); // NOI18N
-        btnCollectionViewer.setText(Localizer.getInstance().getMessage("lblCardViewer"));
-        btnCollectionViewer.setToolTipText(Localizer.getInstance().getMessage("lblShowCardsOfSets"));
+        btnCollectionViewer.setText(bundle.getString("MageFrame.btnCollectionViewer.text")); // NOI18N
+        btnCollectionViewer.setToolTipText(bundle.getString("MageFrame.btnCollectionViewer.toolTipText")); // NOI18N
         btnCollectionViewer.setFocusable(false);
         btnCollectionViewer.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnCollectionViewer.addActionListener(new java.awt.event.ActionListener() {
@@ -934,8 +935,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         mageToolbar.add(jSeparator5);
 
         btnSendFeedback.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/feedback.png"))); // NOI18N
-        btnSendFeedback.setText(Localizer.getInstance().getMessage("lblFeedback"));
-        btnSendFeedback.setToolTipText(Localizer.getInstance().getMessage("lblSendSomeFeedbackToDevelopers"));
+        btnSendFeedback.setText(bundle.getString("MageFrame.btnSendFeedback.text")); // NOI18N
+        btnSendFeedback.setToolTipText(bundle.getString("MageFrame.btnSendFeedback.toolTipText")); // NOI18N
         btnSendFeedback.setFocusable(false);
         btnSendFeedback.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnSendFeedback.addActionListener(new java.awt.event.ActionListener() {
@@ -947,8 +948,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         mageToolbar.add(jSeparator6);
 
         btnSymbols.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/symbol.png"))); // NOI18N
-        btnSymbols.setText(Localizer.getInstance().getMessage("lblSymbols"));
-        btnSymbols.setToolTipText(Localizer.getInstance().getMessage("htmlLoadSymbolsFromInternet"));
+        btnSymbols.setText(bundle.getString("MageFrame.btnSymbols.text")); // NOI18N
+        btnSymbols.setToolTipText(bundle.getString("MageFrame.btnSymbols.toolTipText")); // NOI18N
         btnSymbols.setFocusable(false);
         btnSymbols.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnSymbols.addActionListener(new java.awt.event.ActionListener() {
@@ -960,8 +961,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         mageToolbar.add(jSeparatorSymbols);
 
         btnImages.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/images.png"))); // NOI18N
-        btnImages.setText(Localizer.getInstance().getMessage("lblImages"));
-        btnImages.setToolTipText(Localizer.getInstance().getMessage("htmlLoadCardImageFromExternal"));
+        btnImages.setText(bundle.getString("MageFrame.btnImages.text")); // NOI18N
+        btnImages.setToolTipText(bundle.getString("MageFrame.btnImages.toolTipText")); // NOI18N
         btnImages.setFocusable(false);
         btnImages.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnImages.addActionListener(new java.awt.event.ActionListener() {
@@ -973,8 +974,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         mageToolbar.add(jSeparatorImages);
 
         btnAbout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/about.png"))); // NOI18N
-        btnAbout.setText(Localizer.getInstance().getMessage("lblAbout"));
-        btnAbout.setToolTipText(Localizer.getInstance().getMessage("lblAboutApp"));
+        btnAbout.setText(bundle.getString("MageFrame.btnAbout.text")); // NOI18N
+        btnAbout.setToolTipText(bundle.getString("MageFrame.btnAbout.toolTipText")); // NOI18N
         btnAbout.setFocusable(false);
         btnAbout.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnAbout.addActionListener(new java.awt.event.ActionListener() {
@@ -986,12 +987,11 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         mageToolbar.add(jSeparator7);
 
         btnDebug.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/connect.png"))); // NOI18N
-        btnDebug.setText(Localizer.getInstance().getMessage("lblDebug"));
-        btnDebug.setToolTipText(Localizer.getInstance().getMessage("lblShowDebugTools"));
+        btnDebug.setText(bundle.getString("MageFrame.btnDebug.text")); // NOI18N
+        btnDebug.setToolTipText(bundle.getString("MageFrame.btnDebug.toolTipText")); // NOI18N
         btnDebug.setFocusable(false);
         btnDebug.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnDebug.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnDebugMouseClicked(evt);
             }
@@ -1001,7 +1001,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
         jMemUsageLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jMemUsageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/memory.png"))); // NOI18N
-        jMemUsageLabel.setText("100% Free mem");
+        jMemUsageLabel.setText(bundle.getString("MageFrame.jMemUsageLabel.text")); // NOI18N
         jMemUsageLabel.setFocusable(false);
         jMemUsageLabel.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         mageToolbar.add(jMemUsageLabel);
@@ -1009,16 +1009,16 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 838, Short.MAX_VALUE)
-                        .addComponent(mageToolbar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 838, Short.MAX_VALUE)
+            .addComponent(mageToolbar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addComponent(mageToolbar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(2, 2, 2)
-                                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE))
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(mageToolbar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
+                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE))
         );
 
         pack();

@@ -46,13 +46,22 @@ public class QuestionDialog extends MageDialog {
         btnYes = new javax.swing.JButton();
 
         lblQuestion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblQuestion.setText(Localizer.getInstance().getMessage("lblQuestion"));
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("SwingMessage"); // NOI18N
+        lblQuestion.setText(bundle.getString("QuestionDialog.lblQuestion.text")); // NOI18N
 
-        btnNo.setText(Localizer.getInstance().getMessage("lblNo"));
-        btnNo.addActionListener(evt -> btnNoActionPerformed(evt));
+        btnNo.setText(bundle.getString("QuestionDialog.btnNo.text")); // NOI18N
+        btnNo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNoActionPerformed(evt);
+            }
+        });
 
-        btnYes.setText(Localizer.getInstance().getMessage("lblYes"));
-        btnYes.addActionListener(evt -> btnYesActionPerformed(evt));
+        btnYes.setText(bundle.getString("QuestionDialog.btnYes.text")); // NOI18N
+        btnYes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnYesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -72,7 +81,7 @@ public class QuestionDialog extends MageDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblQuestion, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                .addComponent(lblQuestion, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNo)

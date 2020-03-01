@@ -1,11 +1,11 @@
-<?xml version="1.1" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.5" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <Properties>
     <Property name="name" type="java.lang.String" value="Form" noResource="true"/>
   </Properties>
   <AuxValues>
-    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="2"/>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="1"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="true"/>
     <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
     <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
@@ -22,21 +22,21 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="lblLife" alignment="1" pref="42" max="32767" attributes="1"/>
-                  <Component id="lblGrave" alignment="0" pref="42" max="32767" attributes="0"/>
-                  <Component id="lblHand" alignment="0" pref="42" max="32767" attributes="0"/>
-                  <Component id="lblLibrary" alignment="0" pref="42" max="32767" attributes="1"/>
+                  <Component id="lblLife" alignment="1" pref="262" max="32767" attributes="1"/>
+                  <Component id="lblGrave" alignment="0" pref="262" max="32767" attributes="0"/>
+                  <Component id="lblHand" alignment="0" pref="262" max="32767" attributes="0"/>
+                  <Component id="lblLibrary" alignment="0" pref="262" max="32767" attributes="1"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="txtLife" alignment="1" pref="48" max="32767" attributes="2"/>
-                  <Component id="txtLibrary" alignment="1" pref="48" max="32767" attributes="2"/>
-                  <Component id="txtHand" alignment="1" pref="48" max="32767" attributes="2"/>
-                  <Component id="btnGrave" alignment="1" pref="48" max="32767" attributes="0"/>
+                  <Component id="txtLife" alignment="1" pref="267" max="32767" attributes="2"/>
+                  <Component id="txtLibrary" alignment="1" pref="267" max="32767" attributes="2"/>
+                  <Component id="txtHand" alignment="1" pref="267" max="32767" attributes="2"/>
+                  <Component id="btnGrave" alignment="1" pref="267" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
-          <Component id="btnPlayerName" alignment="0" pref="116" max="32767" attributes="0"/>
+          <Component id="btnPlayerName" alignment="0" pref="565" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -51,11 +51,11 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="txtLibrary" min="-2" pref="14" max="-2" attributes="1"/>
-                  <Component id="lblLibrary" alignment="1" max="32767" attributes="1"/>
+                  <Component id="lblLibrary" alignment="1" pref="76" max="32767" attributes="1"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="txtHand" pref="14" max="32767" attributes="1"/>
+                  <Component id="txtHand" pref="76" max="32767" attributes="1"/>
                   <Component id="lblHand" min="-2" max="-2" attributes="1"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>

@@ -117,17 +117,26 @@ public class NewPlayerPanel extends javax.swing.JPanel {
         lblLevel = new javax.swing.JLabel();
         spnLevel = new javax.swing.JSpinner();
 
-        lblPlayerName.setText(Localizer.getInstance().getMessage("lblName") + ":");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("SwingMessage"); // NOI18N
+        lblPlayerName.setText(bundle.getString("NewPlayerPanel.lblPlayerName.text")); // NOI18N
 
-        lblPlayerDeck.setText(Localizer.getInstance().getMessage("lblDeck") + ":");
+        lblPlayerDeck.setText(bundle.getString("NewPlayerPanel.lblPlayerDeck.text")); // NOI18N
 
-        btnPlayerDeck.setText("...");
-        btnPlayerDeck.addActionListener(evt -> btnPlayerDeckActionPerformed(evt));
+        btnPlayerDeck.setText(bundle.getString("NewPlayerPanel.btnPlayerDeck.text")); // NOI18N
+        btnPlayerDeck.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPlayerDeckActionPerformed(evt);
+            }
+        });
 
-        btnGenerate.setText(Localizer.getInstance().getMessage("lblGenerate"));
-        btnGenerate.addActionListener(evt -> btnGenerateActionPerformed(evt));
+        btnGenerate.setText(bundle.getString("NewPlayerPanel.btnGenerate.text")); // NOI18N
+        btnGenerate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerateActionPerformed(evt);
+            }
+        });
 
-        lblLevel.setText(Localizer.getInstance().getMessage("lblSkill") + ":");
+        lblLevel.setText(bundle.getString("NewPlayerPanel.lblLevel.text")); // NOI18N
 
         spnLevel.setModel(new javax.swing.SpinnerNumberModel(6, 1, 10, 1));
 

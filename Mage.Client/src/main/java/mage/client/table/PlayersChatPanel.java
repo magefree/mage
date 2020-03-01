@@ -220,21 +220,21 @@ public class PlayersChatPanel extends javax.swing.JPanel {
         jSpinner1 = new javax.swing.JSpinner();
         jSplitPane1 = new javax.swing.JSplitPane();
         jScrollPanePlayers = new javax.swing.JScrollPane();
-        jTablePlayers = new MageTable(tableInfo);
+        jTablePlayers = new javax.swing.JTable();
         jTabbedPaneText = new javax.swing.JTabbedPane();
         jScrollPaneTalk = new mage.client.chat.ChatPanelSeparated();
         jScrollPaneSystem = new javax.swing.JScrollPane();
         colorPaneSystem = new mage.client.components.ColorPane();
 
         jSplitPane1.setBorder(null);
-        jSplitPane1.setDividerSize(10);
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
         jSplitPane1.setResizeWeight(0.25);
 
         jScrollPanePlayers.setBorder(null);
 
         jTablePlayers.setModel(this.userTableModel);
-        jTablePlayers.setToolTipText(Localizer.getInstance().getMessage("lblConnectedPlayers"));
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("SwingMessage"); // NOI18N
+        jTablePlayers.setToolTipText(bundle.getString("PlayersChatPanel.jTablePlayers.toolTipText")); // NOI18N
         jTablePlayers.setAutoscrolls(false);
         jTablePlayers.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jTablePlayers.setOpaque(false);
@@ -245,12 +245,12 @@ public class PlayersChatPanel extends javax.swing.JPanel {
         jTablePlayers.setUpdateSelectionOnSort(false);
         jTablePlayers.setVerifyInputWhenFocusTarget(false);
         jScrollPanePlayers.setViewportView(jTablePlayers);
-        jTablePlayers.getAccessibleContext().setAccessibleDescription("");
+        jTablePlayers.getAccessibleContext().setAccessibleDescription(bundle.getString("PlayersChatPanel.jTablePlayers.AccessibleContext.accessibleDescription")); // NOI18N
 
         jSplitPane1.setTopComponent(jScrollPanePlayers);
 
         jTabbedPaneText.setTabPlacement(javax.swing.JTabbedPane.BOTTOM);
-        jTabbedPaneText.addTab(Localizer.getInstance().getMessage("lblChat"), jScrollPaneTalk);
+        jTabbedPaneText.addTab(bundle.getString("PlayersChatPanel.jScrollPaneTalk.TabConstraints.tabTitle"), jScrollPaneTalk); // NOI18N
 
         jScrollPaneSystem.setBorder(null);
         jScrollPaneSystem.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -261,26 +261,26 @@ public class PlayersChatPanel extends javax.swing.JPanel {
         colorPaneSystem.setEditable(false);
         colorPaneSystem.setBackground(new java.awt.Color(0, 0, 0));
         colorPaneSystem.setBorder(null);
-        colorPaneSystem.setFont(new java.awt.Font("Microsoft YaHei", 0, 14)); // NOI18N
+        colorPaneSystem.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         colorPaneSystem.setMargin(new java.awt.Insets(0, 0, 0, 0));
         colorPaneSystem.setOpaque(false);
         jScrollPaneSystem.setViewportView(colorPaneSystem);
 
-        jTabbedPaneText.addTab(Localizer.getInstance().getMessage("lblSystemMessage"), jScrollPaneSystem);
+        jTabbedPaneText.addTab(bundle.getString("PlayersChatPanel.jScrollPaneSystem.TabConstraints.tabTitle"), jScrollPaneSystem); // NOI18N
 
         jSplitPane1.setRightComponent(jTabbedPaneText);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jSplitPane1)
-                                .addGap(0, 0, 0))
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jSplitPane1)
+                .addGap(0, 0, 0))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -300,6 +300,6 @@ public class PlayersChatPanel extends javax.swing.JPanel {
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JTabbedPane jTabbedPaneText;
-    private MageTable jTablePlayers;
+    private javax.swing.JTable jTablePlayers;
     // End of variables declaration//GEN-END:variables
 }

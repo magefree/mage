@@ -875,26 +875,27 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
         lblDeckName.setForeground(new java.awt.Color(255, 255, 255));
         lblDeckName.setLabelFor(txtDeckName);
-        lblDeckName.setText(Localizer.getInstance().getMessage("lblDeckName"));
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("SwingMessage"); // NOI18N
+        lblDeckName.setText(bundle.getString("DeckEditorPanel.lblDeckName.text")); // NOI18N
 
         javax.swing.GroupLayout panelDeckNameLayout = new javax.swing.GroupLayout(panelDeckName);
         panelDeckName.setLayout(panelDeckNameLayout);
         panelDeckNameLayout.setHorizontalGroup(
-                panelDeckNameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(panelDeckNameLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(lblDeckName)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtDeckName, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
-                                .addContainerGap())
+            panelDeckNameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDeckNameLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblDeckName)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtDeckName, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                .addContainerGap())
         );
         panelDeckNameLayout.setVerticalGroup(
-                panelDeckNameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(panelDeckNameLayout.createSequentialGroup()
-                                .addGroup(panelDeckNameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(txtDeckName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(lblDeckName))
-                                .addGap(0, 0, 0))
+            panelDeckNameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDeckNameLayout.createSequentialGroup()
+                .addGroup(panelDeckNameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtDeckName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblDeckName))
+                .addGap(0, 0, 0))
         );
 
         panelDeck.add(panelDeckName);
@@ -902,7 +903,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         panelDeckCreate.setOpaque(false);
 
         btnNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/state_active.png"))); // NOI18N
-        btnNew.setText(Localizer.getInstance().getMessage("lblNewDeck"));
+        btnNew.setText(bundle.getString("DeckEditorPanel.btnNew.text")); // NOI18N
         btnNew.setIconTextGap(2);
         btnNew.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -911,7 +912,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         });
 
         btnGenDeck.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/card_panel.png"))); // NOI18N
-        btnGenDeck.setText(Localizer.getInstance().getMessage("lblRandom"));
+        btnGenDeck.setText(bundle.getString("DeckEditorPanel.btnGenDeck.text")); // NOI18N
         btnGenDeck.setIconTextGap(1);
         btnGenDeck.setName("btnGenDeck"); // NOI18N
         btnGenDeck.addActionListener(new java.awt.event.ActionListener() {
@@ -923,21 +924,21 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         javax.swing.GroupLayout panelDeckCreateLayout = new javax.swing.GroupLayout(panelDeckCreate);
         panelDeckCreate.setLayout(panelDeckCreateLayout);
         panelDeckCreateLayout.setHorizontalGroup(
-                panelDeckCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(panelDeckCreateLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(btnNew, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnGenDeck, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(40, Short.MAX_VALUE))
+            panelDeckCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDeckCreateLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnNew, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnGenDeck, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         panelDeckCreateLayout.setVerticalGroup(
-                panelDeckCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(panelDeckCreateLayout.createSequentialGroup()
-                                .addGap(5, 5, 5)
-                                .addGroup(panelDeckCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(btnGenDeck, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                                        .addComponent(btnNew, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)))
+            panelDeckCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDeckCreateLayout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addGroup(panelDeckCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnGenDeck, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(btnNew, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)))
         );
 
         panelDeck.add(panelDeckCreate);
@@ -945,7 +946,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         panelDeckLoad.setOpaque(false);
 
         btnLoad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/search_24.png"))); // NOI18N
-        btnLoad.setText(Localizer.getInstance().getMessage("lblLoadDeck"));
+        btnLoad.setText(bundle.getString("DeckEditorPanel.btnLoad.text")); // NOI18N
         btnLoad.setIconTextGap(2);
         btnLoad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -954,7 +955,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         });
 
         btnImport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/deck_in.png"))); // NOI18N
-        btnImport.setText(Localizer.getInstance().getMessage("lblImportDeck"));
+        btnImport.setText(bundle.getString("DeckEditorPanel.btnImport.text")); // NOI18N
         btnImport.setIconTextGap(2);
         btnImport.setName("btnImport"); // NOI18N
         btnImport.addActionListener(new java.awt.event.ActionListener() {
@@ -966,21 +967,21 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         javax.swing.GroupLayout panelDeckLoadLayout = new javax.swing.GroupLayout(panelDeckLoad);
         panelDeckLoad.setLayout(panelDeckLoadLayout);
         panelDeckLoadLayout.setHorizontalGroup(
-                panelDeckLoadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(panelDeckLoadLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(btnLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnImport, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(40, Short.MAX_VALUE))
+            panelDeckLoadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDeckLoadLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnImport, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         panelDeckLoadLayout.setVerticalGroup(
-                panelDeckLoadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(panelDeckLoadLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(panelDeckLoadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(btnLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                        .addComponent(btnImport, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)))
+            panelDeckLoadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDeckLoadLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelDeckLoadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(btnImport, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)))
         );
 
         panelDeck.add(panelDeckLoad);
@@ -988,7 +989,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         panelDeckSave.setOpaque(false);
 
         btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/sideboard_out.png"))); // NOI18N
-        btnSave.setText(Localizer.getInstance().getMessage("lblSave"));
+        btnSave.setText(bundle.getString("DeckEditorPanel.btnSave.text")); // NOI18N
         btnSave.setIconTextGap(2);
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -997,7 +998,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         });
 
         btnExport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/deck_out.png"))); // NOI18N
-        btnExport.setText(Localizer.getInstance().getMessage("lblExport"));
+        btnExport.setText(bundle.getString("DeckEditorPanel.btnExport.text")); // NOI18N
         btnExport.setIconTextGap(2);
         btnExport.setName("btnImport"); // NOI18N
         btnExport.addActionListener(new java.awt.event.ActionListener() {
@@ -1009,21 +1010,21 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         javax.swing.GroupLayout panelDeckSaveLayout = new javax.swing.GroupLayout(panelDeckSave);
         panelDeckSave.setLayout(panelDeckSaveLayout);
         panelDeckSaveLayout.setHorizontalGroup(
-                panelDeckSaveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(panelDeckSaveLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnExport, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(40, Short.MAX_VALUE))
+            panelDeckSaveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDeckSaveLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnExport, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         panelDeckSaveLayout.setVerticalGroup(
-                panelDeckSaveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(panelDeckSaveLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(panelDeckSaveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(btnSave, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                                        .addComponent(btnExport, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)))
+            panelDeckSaveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDeckSaveLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelDeckSaveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnSave, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(btnExport, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)))
         );
 
         panelDeck.add(panelDeckSave);
@@ -1031,7 +1032,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         panelDeckDraft.setOpaque(false);
 
         btnSubmit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/state_finished.png"))); // NOI18N
-        btnSubmit.setText(Localizer.getInstance().getMessage("lblSubmitDeck"));
+        btnSubmit.setText(bundle.getString("DeckEditorPanel.btnSubmit.text")); // NOI18N
         btnSubmit.setIconTextGap(2);
         btnSubmit.setName("btnSubmit"); // NOI18N
         btnSubmit.addActionListener(new java.awt.event.ActionListener() {
@@ -1040,9 +1041,9 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             }
         });
 
-        btnSubmitTimer.setFont(new java.awt.Font("Microsoft YaHei", 0, 9)); // NOI18N
+        btnSubmitTimer.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
         btnSubmitTimer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/state_finished.png"))); // NOI18N
-        btnSubmitTimer.setText("<html>Submit<br>in 1 min");
+        btnSubmitTimer.setText(bundle.getString("DeckEditorPanel.btnSubmitTimer.text")); // NOI18N
         btnSubmitTimer.setIconTextGap(2);
         btnSubmitTimer.setName("btnSubmitTimer"); // NOI18N
         btnSubmitTimer.addActionListener(new java.awt.event.ActionListener() {
@@ -1054,24 +1055,24 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         javax.swing.GroupLayout panelDeckDraftLayout = new javax.swing.GroupLayout(panelDeckDraft);
         panelDeckDraft.setLayout(panelDeckDraftLayout);
         panelDeckDraftLayout.setHorizontalGroup(
-                panelDeckDraftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(panelDeckDraftLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnSubmitTimer, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(40, Short.MAX_VALUE))
+            panelDeckDraftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDeckDraftLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnSubmitTimer, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         panelDeckDraftLayout.setVerticalGroup(
-                panelDeckDraftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(panelDeckDraftLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(panelDeckDraftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(panelDeckDraftLayout.createSequentialGroup()
-                                                .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(0, 0, Short.MAX_VALUE))
-                                        .addComponent(btnSubmitTimer, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                                .addGap(0, 0, 0))
+            panelDeckDraftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDeckDraftLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelDeckDraftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelDeckDraftLayout.createSequentialGroup()
+                        .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(btnSubmitTimer, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(0, 0, 0))
         );
 
         panelDeck.add(panelDeckDraft);
@@ -1079,7 +1080,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         panelDeckLands.setOpaque(false);
 
         btnAddLand.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/type_land.png"))); // NOI18N
-        btnAddLand.setText(Localizer.getInstance().getMessage("lblLands"));
+        btnAddLand.setText(bundle.getString("DeckEditorPanel.btnAddLand.text")); // NOI18N
         btnAddLand.setIconTextGap(2);
         btnAddLand.setName("btnAddLand"); // NOI18N
         btnAddLand.addActionListener(new java.awt.event.ActionListener() {
@@ -1091,25 +1092,25 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         javax.swing.GroupLayout panelDeckLandsLayout = new javax.swing.GroupLayout(panelDeckLands);
         panelDeckLands.setLayout(panelDeckLandsLayout);
         panelDeckLandsLayout.setHorizontalGroup(
-                panelDeckLandsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(panelDeckLandsLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(btnAddLand, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(146, Short.MAX_VALUE))
+            panelDeckLandsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDeckLandsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnAddLand, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(146, Short.MAX_VALUE))
         );
         panelDeckLandsLayout.setVerticalGroup(
-                panelDeckLandsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(panelDeckLandsLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(btnAddLand, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                                .addGap(0, 0, 0))
+            panelDeckLandsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDeckLandsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnAddLand, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
 
         panelDeck.add(panelDeckLands);
 
         panelDeckExit.setOpaque(false);
 
-        btnExit.setText(Localizer.getInstance().getMessage("lblExit"));
+        btnExit.setText(bundle.getString("DeckEditorPanel.btnExit.text")); // NOI18N
         btnExit.setIconTextGap(2);
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1126,21 +1127,21 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         javax.swing.GroupLayout panelDeckExitLayout = new javax.swing.GroupLayout(panelDeckExit);
         panelDeckExit.setLayout(panelDeckExitLayout);
         panelDeckExitLayout.setHorizontalGroup(
-                panelDeckExitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(panelDeckExitLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtTimeRemaining, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(40, Short.MAX_VALUE))
+            panelDeckExitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDeckExitLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtTimeRemaining, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         panelDeckExitLayout.setVerticalGroup(
-                panelDeckExitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDeckExitLayout.createSequentialGroup()
-                                .addGap(0, 11, Short.MAX_VALUE)
-                                .addGroup(panelDeckExitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtTimeRemaining, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            panelDeckExitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDeckExitLayout.createSequentialGroup()
+                .addGap(0, 11, Short.MAX_VALUE)
+                .addGroup(panelDeckExitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTimeRemaining, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         panelDeck.add(panelDeckExit);
@@ -1148,35 +1149,35 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         javax.swing.GroupLayout panelLeftLayout = new javax.swing.GroupLayout(panelLeft);
         panelLeft.setLayout(panelLeftLayout);
         panelLeftLayout.setHorizontalGroup(
-                panelLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(panelLeftLayout.createSequentialGroup()
-                                .addGap(0, 0, 0)
-                                .addGroup(panelLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(panelDeck, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(bigCard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            panelLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelLeftLayout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addGroup(panelLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelDeck, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bigCard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         panelLeftLayout.setVerticalGroup(
-                panelLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(panelLeftLayout.createSequentialGroup()
-                                .addComponent(panelDeck, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(bigCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())
+            panelLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelLeftLayout.createSequentialGroup()
+                .addComponent(panelDeck, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(bigCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addComponent(panelLeft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(panelRight, javax.swing.GroupLayout.DEFAULT_SIZE, 890, Short.MAX_VALUE))
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panelLeft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(panelRight, javax.swing.GroupLayout.PREFERRED_SIZE, 890, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(panelLeft, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(panelRight, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 808, Short.MAX_VALUE)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelLeft, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelRight, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 808, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

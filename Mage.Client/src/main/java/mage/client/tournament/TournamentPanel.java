@@ -315,7 +315,7 @@ public class TournamentPanel extends javax.swing.JPanel {
 
         setPreferredSize(new java.awt.Dimension(908, 580));
 
-        actionPanel.setFont(new java.awt.Font("Microsoft YaHei", 0, 10)); // NOI18N
+        actionPanel.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
 
         txtName.setEditable(false);
         txtName.setHorizontalAlignment(javax.swing.JTextField.LEFT);
@@ -324,7 +324,11 @@ public class TournamentPanel extends javax.swing.JPanel {
         txtName.setMaximumSize(new java.awt.Dimension(50, 22));
         txtName.setOpaque(false);
         txtName.setRequestFocusEnabled(false);
-        txtName.addActionListener(evt -> txtNameActionPerformed(evt));
+        txtName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNameActionPerformed(evt);
+            }
+        });
 
         txtType.setEditable(false);
         txtType.setHorizontalAlignment(javax.swing.JTextField.LEFT);
@@ -354,97 +358,106 @@ public class TournamentPanel extends javax.swing.JPanel {
         txtTournamentState.setOpaque(false);
         txtTournamentState.setRequestFocusEnabled(false);
 
-        btnQuitTournament.setText(Localizer.getInstance().getMessage("lblQuitTournament"));
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("SwingMessage"); // NOI18N
+        btnQuitTournament.setText(bundle.getString("TournamentPanel.btnQuitTournament.text")); // NOI18N
         btnQuitTournament.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnQuitTournament.addActionListener(evt -> btnQuitTournamentActionPerformed(evt));
+        btnQuitTournament.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuitTournamentActionPerformed(evt);
+            }
+        });
 
-        btnCloseWindow.setText(Localizer.getInstance().getMessage("lblCloseWindow"));
+        btnCloseWindow.setText(bundle.getString("TournamentPanel.btnCloseWindow.text")); // NOI18N
         btnCloseWindow.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnCloseWindow.addActionListener(evt -> btnCloseWindowActionPerformed(evt));
+        btnCloseWindow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCloseWindowActionPerformed(evt);
+            }
+        });
 
-        lblName.setFont(new java.awt.Font("Microsoft YaHei", 0, 10)); // NOI18N
-        lblName.setText(Localizer.getInstance().getMessage("lblName") + ":");
+        lblName.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblName.setText(bundle.getString("TournamentPanel.lblName.text")); // NOI18N
 
-        lblType.setFont(new java.awt.Font("Microsoft YaHei", 0, 10)); // NOI18N
-        lblType.setText(Localizer.getInstance().getMessage("lblType") + ":");
+        lblType.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblType.setText(bundle.getString("TournamentPanel.lblType.text")); // NOI18N
 
-        lblState.setFont(new java.awt.Font("Microsoft YaHei", 0, 10)); // NOI18N
-        lblState.setText(Localizer.getInstance().getMessage("lblState") + ":");
+        lblState.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblState.setText(bundle.getString("TournamentPanel.lblState.text")); // NOI18N
 
-        lblStartTime.setFont(new java.awt.Font("Microsoft YaHei", 0, 10)); // NOI18N
-        lblStartTime.setText(Localizer.getInstance().getMessage("lblStartTime") + ":");
+        lblStartTime.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblStartTime.setText(bundle.getString("TournamentPanel.lblStartTime.text")); // NOI18N
 
-        lblEndTime.setFont(new java.awt.Font("Microsoft YaHei", 0, 10)); // NOI18N
-        lblEndTime.setText(Localizer.getInstance().getMessage("lblEndTime") + ":");
+        lblEndTime.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblEndTime.setText(bundle.getString("TournamentPanel.lblEndTime.text")); // NOI18N
 
         javax.swing.GroupLayout actionPanelLayout = new javax.swing.GroupLayout(actionPanel);
         actionPanel.setLayout(actionPanelLayout);
         actionPanelLayout.setHorizontalGroup(
-                actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(actionPanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(lblName)
-                                        .addComponent(lblState)
-                                        .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
-                                        .addComponent(txtTournamentState))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(lblType)
-                                        .addComponent(txtType, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(actionPanelLayout.createSequentialGroup()
-                                                .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(txtStartTime, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(lblStartTime))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(lblEndTime)
-                                                        .addComponent(txtEndTime))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
-                                .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(btnQuitTournament, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(btnCloseWindow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addContainerGap())
+            actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(actionPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblName)
+                    .addComponent(lblState)
+                    .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+                    .addComponent(txtTournamentState))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblType)
+                    .addComponent(txtType, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(actionPanelLayout.createSequentialGroup()
+                        .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtStartTime, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblStartTime))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblEndTime)
+                            .addComponent(txtEndTime))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
+                .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnQuitTournament, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCloseWindow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         actionPanelLayout.setVerticalGroup(
-                actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(actionPanelLayout.createSequentialGroup()
-                                .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(actionPanelLayout.createSequentialGroup()
-                                                .addGap(7, 7, 7)
-                                                .addComponent(lblName))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, actionPanelLayout.createSequentialGroup()
-                                                .addContainerGap()
-                                                .addComponent(lblType)))
-                                .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(actionPanelLayout.createSequentialGroup()
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(txtType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(btnQuitTournament))
-                                                .addGap(13, 13, 13)
-                                                .addComponent(btnCloseWindow))
-                                        .addGroup(actionPanelLayout.createSequentialGroup()
-                                                .addGap(6, 6, 6)
-                                                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                        .addComponent(lblState)
-                                                        .addComponent(lblStartTime)
-                                                        .addComponent(lblEndTime))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addGroup(actionPanelLayout.createSequentialGroup()
-                                                                .addComponent(txtTournamentState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addGap(0, 0, Short.MAX_VALUE))
-                                                        .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                                .addComponent(txtStartTime)
-                                                                .addComponent(txtEndTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                                .addContainerGap())
+            actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(actionPanelLayout.createSequentialGroup()
+                .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(actionPanelLayout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addComponent(lblName))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, actionPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblType)))
+                .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(actionPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnQuitTournament))
+                        .addGap(13, 13, 13)
+                        .addComponent(btnCloseWindow))
+                    .addGroup(actionPanelLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblState)
+                            .addComponent(lblStartTime)
+                            .addComponent(lblEndTime))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(actionPanelLayout.createSequentialGroup()
+                                .addComponent(txtTournamentState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtStartTime)
+                                .addComponent(txtEndTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap())
         );
 
         jSplitPane2.setResizeWeight(1.0);
-        jSplitPane2.setToolTipText("");
+        jSplitPane2.setToolTipText(bundle.getString("TournamentPanel.jSplitPane2.toolTipText")); // NOI18N
 
         jSplitPane1.setDividerLocation(230);
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
@@ -471,17 +484,17 @@ public class TournamentPanel extends javax.swing.JPanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(actionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jSplitPane2, javax.swing.GroupLayout.Alignment.TRAILING)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(actionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jSplitPane2, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addComponent(actionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jSplitPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
-                                .addContainerGap())
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(actionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSplitPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
