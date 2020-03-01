@@ -185,7 +185,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
      * Creates new form MageFrame
      */
     public MageFrame() {
-        Localizer.getInstance().initialize(PREFS.get(PreferencesDialog.KEY_GUI_LANGUAGES, "en-US"), Constants.RESOURCE_PATH_LANGUAGES);
+        final Locale defaultLocale = Locale.getDefault();
+        Localizer.getInstance().initialize(defaultLocale, Constants.RESOURCE_PATH_LANGUAGES);
         setWindowTitle();
 
         EDTExceptionHandler.registerExceptionHandler();

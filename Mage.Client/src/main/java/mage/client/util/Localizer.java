@@ -29,8 +29,8 @@ public class Localizer {
 	private Localizer() {
 	}
 
-	public void initialize(String localeID, String languagesDirectory) {
-		setLanguage(localeID, languagesDirectory);
+	public void initialize(Locale locale, String languagesDirectory) {
+		setLanguage(locale, languagesDirectory);
 	}
 
 	public String convert(String value, String fromEncoding, String toEncoding) throws UnsupportedEncodingException {
@@ -99,12 +99,10 @@ public class Localizer {
 		return formattedMessage;
 	}
 
-	public void setLanguage(final String languageRegionID, final String languagesDirectory) {
-
-		String[] splitLocale = languageRegionID.split("-");
+	public void setLanguage(final Locale newLocale, final String languagesDirectory) {
 
 		Locale oldLocale = locale;
-		locale = new Locale(splitLocale[0], splitLocale[1]);
+		locale = newLocale;
 
 		// Don't reload the language if nothing changed
 		if (oldLocale == null || !oldLocale.equals(locale)) {
@@ -121,7 +119,7 @@ public class Localizer {
 			ClassLoader loader = new URLClassLoader(urls);
 
 			try {
-				resourceBundle = ResourceBundle.getBundle(languageRegionID, new Locale(splitLocale[0], splitLocale[1]),
+				resourceBundle = ResourceBundle.getBundle(newLocale.toLanguageTag(), newLocale,
 						loader);
 			} catch (NullPointerException | MissingResourceException e) {
 				// If the language can't be loaded, default to US English
