@@ -161,7 +161,7 @@
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("languages/Bundle"); // NOI18N
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("SwingMessage"); // NOI18N
         setTitle(bundle.getString("GameEndDialog.title")); // NOI18N
 
         pnlText.setBackground(new java.awt.Color(200, 100, 100));

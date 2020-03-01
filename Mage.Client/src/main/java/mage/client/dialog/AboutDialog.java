@@ -65,7 +65,7 @@ public class AboutDialog extends MageDialog {
         labelDevs = new javax.swing.JLabel();
 
         setMaximizable(true);
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("languages/Bundle"); // NOI18N
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("SwingMessage"); // NOI18N
         setTitle(bundle.getString("AboutDialog.title")); // NOI18N
 
         btnOk.setText(bundle.getString("AboutDialog.btnOk.text")); // NOI18N
@@ -115,7 +115,7 @@ public class AboutDialog extends MageDialog {
                                 .addComponent(lblVersion))
                             .addComponent(jLabel2)
                             .addComponent(labelDevs))
-                        .addGap(0, 86, Short.MAX_VALUE)))
+                        .addGap(0, 394, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -130,7 +130,7 @@ public class AboutDialog extends MageDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labelDevs)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollDevs, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
+                .addComponent(scrollDevs, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnOk, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)

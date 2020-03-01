@@ -7,7 +7,6 @@ import mage.cards.decks.Deck;
 import mage.cards.repository.*;
 import mage.client.MageFrame;
 import mage.client.constants.Constants.DeckEditorMode;
-import mage.client.util.Localizer;
 import mage.client.util.gui.FastSearchUtil;
 import mage.constants.Rarity;
 import mage.util.RandomUtil;
@@ -182,7 +181,7 @@ public class AddLandDialog extends MageDialog {
         }
 
         if (foundNoneAfter >= 1000 && useFullArt) {
-            MageFrame.getInstance().showMessage(Localizer.getInstance().getMessage("lblUnableAddEnoughLands", landName, landSetName));
+            MageFrame.getInstance().showMessage("Unable to add enough " + landName + "s.  You encountered an error in adding chosen lands.  Unable to find enough full art lands in the set " + landSetName + ".");
         }
     }
 
@@ -244,7 +243,7 @@ public class AddLandDialog extends MageDialog {
         btnSetFastSearch = new javax.swing.JButton();
         ckbFullArtLands = new javax.swing.JCheckBox();
 
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("languages/Bundle"); // NOI18N
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("SwingMessage"); // NOI18N
         jButton2.setText(bundle.getString("AddLandDialog.jButton2.text")); // NOI18N
 
         jLabel1.setText(bundle.getString("AddLandDialog.jLabel1.text")); // NOI18N
@@ -346,15 +345,16 @@ public class AddLandDialog extends MageDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(70, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblForest)
-                    .addComponent(lblLandSet)
-                    .addComponent(lblIsland)
-                    .addComponent(lblPains)
-                    .addComponent(lblSwamp)
-                    .addComponent(lblDeckSize)
-                    .addComponent(lblMountain))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lblMountain)
+                        .addComponent(lblForest, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(lblLandSet, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(lblIsland, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(lblPains, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(lblSwamp, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(lblDeckSize))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
