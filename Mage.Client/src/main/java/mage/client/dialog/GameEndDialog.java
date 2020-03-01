@@ -1,30 +1,30 @@
 
-/*
- * GameEndDialog.java
- *
- * Created on Jul 31, 2013, 9:41:00 AM
- */
-package mage.client.dialog;
 
-import mage.client.MageFrame;
-import mage.client.game.GamePanel;
-import mage.client.util.Format;
-import mage.client.util.ImageHelper;
-import mage.client.util.Localizer;
-import mage.client.util.audio.AudioManager;
-import mage.client.util.gui.BufferedImageBuilder;
-import mage.view.GameEndView;
-import mage.view.PlayerView;
+ /*
+  * GameEndDialog.java
+  *
+  * Created on Jul 31, 2013, 9:41:00 AM
+  */
+ package mage.client.dialog;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
+ import mage.client.MageFrame;
+ import mage.client.game.GamePanel;
+ import mage.client.util.Format;
+ import mage.client.util.ImageHelper;
+ import mage.client.util.audio.AudioManager;
+ import mage.client.util.gui.BufferedImageBuilder;
+ import mage.view.GameEndView;
+ import mage.view.PlayerView;
+
+ import javax.swing.*;
+ import java.awt.*;
+ import java.awt.image.BufferedImage;
+ import java.io.File;
+ import java.io.FileNotFoundException;
+ import java.io.PrintWriter;
+ import java.text.DateFormat;
+ import java.text.SimpleDateFormat;
+ import java.util.Calendar;
 
  /**
   * @author LevelX2
@@ -161,7 +161,8 @@ import java.util.Calendar;
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        setTitle(Localizer.getInstance().getMessage("lblGameEndInfo"));
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("languages/Bundle"); // NOI18N
+        setTitle(bundle.getString("GameEndDialog.title")); // NOI18N
 
         pnlText.setBackground(new java.awt.Color(200, 100, 100));
         pnlText.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -169,19 +170,19 @@ import java.util.Calendar;
 
         lblGameInfo.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         lblGameInfo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblGameInfo.setText(Localizer.getInstance().getMessage("lblGameInfo"));
+        lblGameInfo.setText(bundle.getString("GameEndDialog.lblGameInfo.text")); // NOI18N
         pnlText.add(lblGameInfo);
         lblGameInfo.setBounds(11, 1, 550, 25);
 
         lblMatchInfo.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         lblMatchInfo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblMatchInfo.setText(Localizer.getInstance().getMessage("lblMatchInfo"));
+        lblMatchInfo.setText(bundle.getString("GameEndDialog.lblMatchInfo.text")); // NOI18N
         pnlText.add(lblMatchInfo);
         lblMatchInfo.setBounds(10, 30, 550, 25);
 
         lblAdditionalInfo.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         lblAdditionalInfo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblAdditionalInfo.setText(Localizer.getInstance().getMessage("lblAdditionalInfo"));
+        lblAdditionalInfo.setText(bundle.getString("GameEndDialog.lblAdditionalInfo.text")); // NOI18N
         pnlText.add(lblAdditionalInfo);
         lblAdditionalInfo.setBounds(10, 60, 550, 25);
 
@@ -193,26 +194,26 @@ import java.util.Calendar;
         tabResult.add(lblResultImage);
         lblResultImage.setBounds(0, 0, 610, 250);
 
-        tabPane.addTab(Localizer.getInstance().getMessage("lblResult"), tabResult);
+        tabPane.addTab(bundle.getString("GameEndDialog.tabResult.TabConstraints.tabTitle"), tabResult); // NOI18N
 
-        lblDurationGame.setText(Localizer.getInstance().getMessage("lblDurationGame") + ":");
+        lblDurationGame.setText(bundle.getString("GameEndDialog.lblDurationGame.text")); // NOI18N
 
-        txtDurationGame.setText(Localizer.getInstance().getMessage("lblDurationGame"));
+        txtDurationGame.setText(bundle.getString("GameEndDialog.txtDurationGame.text")); // NOI18N
         txtDurationGame.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        lblLife.setText(Localizer.getInstance().getMessage("lblLifeAtEnd"));
+        lblLife.setText(bundle.getString("GameEndDialog.lblLife.text")); // NOI18N
 
         txtLife.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        lblDurationMatch.setText(Localizer.getInstance().getMessage("lblDurationMatch"));
+        lblDurationMatch.setText(bundle.getString("GameEndDialog.lblDurationMatch.text")); // NOI18N
 
         txtDurationMatch.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        lblMatchScore.setText(Localizer.getInstance().getMessage("lblMatchScore"));
+        lblMatchScore.setText(bundle.getString("GameEndDialog.lblMatchScore.text")); // NOI18N
 
         txtMatchScore.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        lblPlayerInfo.setText(Localizer.getInstance().getMessage("lblPlayerInfo"));
+        lblPlayerInfo.setText(bundle.getString("GameEndDialog.lblPlayerInfo.text")); // NOI18N
 
         txtPlayerInfo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -262,9 +263,9 @@ import java.util.Calendar;
                 .addContainerGap(105, Short.MAX_VALUE))
         );
 
-        tabPane.addTab(Localizer.getInstance().getMessage("lblStatistics"), tabStatistics);
+        tabPane.addTab(bundle.getString("GameEndDialog.tabStatistics.TabConstraints.tabTitle"), tabStatistics); // NOI18N
 
-        btnOk.setText(Localizer.getInstance().getMessage("lblOK"));
+        btnOk.setText(bundle.getString("GameEndDialog.btnOk.text")); // NOI18N
         btnOk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOkActionPerformed(evt);

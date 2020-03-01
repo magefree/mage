@@ -1,7 +1,6 @@
 package mage.client.dialog;
 
 import mage.client.MageFrame;
-import mage.client.util.Localizer;
 import mage.utils.MageVersion;
 
 import javax.swing.*;
@@ -66,22 +65,23 @@ public class AboutDialog extends MageDialog {
         labelDevs = new javax.swing.JLabel();
 
         setMaximizable(true);
-        setTitle(Localizer.getInstance().getMessage("lblAboutXMage"));
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("languages/Bundle"); // NOI18N
+        setTitle(bundle.getString("AboutDialog.title")); // NOI18N
 
-        btnOk.setText(Localizer.getInstance().getMessage("lblClose"));
+        btnOk.setText(bundle.getString("AboutDialog.btnOk.text")); // NOI18N
         btnOk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOkActionPerformed(evt);
             }
         });
 
-        jLabel1.setText(Localizer.getInstance().getMessage("lblXMageClient"));
+        jLabel1.setText(bundle.getString("AboutDialog.jLabel1.text")); // NOI18N
 
-        lblVersion.setText("0.0.0");
+        lblVersion.setText(bundle.getString("AboutDialog.lblVersion.text")); // NOI18N
 
-        jLabel2.setText("Courtesy: BetaSteward@googlemail.com. Site: http://xmage.de/");
+        jLabel2.setText(bundle.getString("AboutDialog.jLabel2.text")); // NOI18N
 
-        btnWhatsNew.setText(Localizer.getInstance().getMessage("lblShowNews"));
+        btnWhatsNew.setText(bundle.getString("AboutDialog.btnWhatsNew.text")); // NOI18N
         btnWhatsNew.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnWhatsNewActionPerformed(evt);
@@ -93,7 +93,7 @@ public class AboutDialog extends MageDialog {
         panelDevs.setEditable(false);
         scrollDevs.setViewportView(panelDevs);
 
-        labelDevs.setText(Localizer.getInstance().getMessage("lblDevelopers") + ":");
+        labelDevs.setText(bundle.getString("AboutDialog.labelDevs.text")); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -115,7 +115,7 @@ public class AboutDialog extends MageDialog {
                                 .addComponent(lblVersion))
                             .addComponent(jLabel2)
                             .addComponent(labelDevs))
-                        .addGap(0, 80, Short.MAX_VALUE)))
+                        .addGap(0, 86, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
