@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 
@@ -21,7 +20,7 @@ import java.util.UUID;
  */
 public final class VindictiveVampire extends CardImpl {
 
-    private static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
+    private static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature you control");
 
     static {
         filter.add(AnotherPredicate.instance);

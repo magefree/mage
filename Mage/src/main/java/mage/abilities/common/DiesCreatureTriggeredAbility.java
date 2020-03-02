@@ -1,5 +1,6 @@
 package mage.abilities.common;
 
+import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
@@ -9,6 +10,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -40,7 +42,8 @@ public class DiesCreatureTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     public DiesCreatureTriggeredAbility(Effect effect, boolean optional, FilterPermanent filter, boolean setTargetPointer) {
-        this(Zone.BATTLEFIELD, effect, optional, filter, setTargetPointer);
+        // Needs "Zone.ALL" if the source itself should trigger or multiple (incl. source go to grave)
+        this(Zone.ALL, effect, optional, filter, setTargetPointer);
     }
 
     public DiesCreatureTriggeredAbility(Zone zone, Effect effect, boolean optional, FilterPermanent filter, boolean setTargetPointer) {
@@ -61,21 +64,40 @@ public class DiesCreatureTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
+        Permanent sourcePermanent;
+        if (game.getState().getZone(getSourceId()) == Zone.BATTLEFIELD) {
+            sourcePermanent = game.getPermanent(getSourceId());
+        } else {
+            sourcePermanent = (Permanent) game.getPermanentOrLKIBattlefield(getSourceId());
+        }
+        if (sourcePermanent == null) {
+            return false;
+        }
+        return hasSourceObjectAbility(game, sourcePermanent, event);
+    }
+
+    @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.ZONE_CHANGE;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
+        if (game.getPermanentOrLKIBattlefield(getSourceId()) == null) {
+            return false;
+        }
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.isDiesEvent()) {
-            if (filter.match(zEvent.getTarget(), sourceId, controllerId, game) && zEvent.getTarget().isCreature()) {
-                if (setTargetPointer) {
-                    for (Effect effect : this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getTargetId(), game));
+            if (zEvent.getTarget() != null) {
+                if (filter.match(zEvent.getTarget(), getSourceId(), getControllerId(), game)) {
+                    if (setTargetPointer) {
+                        for (Effect effect : this.getEffects()) {
+                            effect.setTargetPointer(new FixedTarget(event.getTargetId(), game));
+                        }
                     }
+                    return true;
                 }
-                return true;
             }
         }
         return false;
