@@ -9,7 +9,6 @@ package mage.client.table;
 
 import mage.cards.decks.DeckCardLists;
 import mage.client.SessionHandler;
-import mage.client.util.Localizer;
 import mage.players.PlayerType;
 
 import javax.swing.*;
@@ -31,7 +30,7 @@ public class TournamentPlayerPanel extends javax.swing.JPanel {
 
     public void init(int playerNum) {
         cbPlayerType.setModel(new DefaultComboBoxModel(SessionHandler.getPlayerTypes()));
-        this.lblPlayerNum.setText(Localizer.getInstance().getMessage("lblPlayer") + " " + playerNum);
+        this.lblPlayerNum.setText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblPlayer") + " " + playerNum);
     }
 
     public JComboBox getPlayerType() {
@@ -73,17 +72,17 @@ public class TournamentPlayerPanel extends javax.swing.JPanel {
         spnLevel = new javax.swing.JSpinner();
 
         jLabel1.setLabelFor(cbPlayerType);
-        jLabel1.setText(Localizer.getInstance().getMessage("lblType") + ":");
+        jLabel1.setText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblType") + ":");
 
         cbPlayerType.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
         cbPlayerType.addActionListener(evt -> cbPlayerTypeActionPerformed(evt));
 
         lblPlayerNum.setFont(new java.awt.Font("Microsoft YaHei", 1, 11)); // NOI18N
-        lblPlayerNum.setText(Localizer.getInstance().getMessage("lblPlayerNum") + ":");
+        lblPlayerNum.setText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblPlayerNum") + ":");
 
-        jLabel2.setText(Localizer.getInstance().getMessage("lblName") + ":");
+        jLabel2.setText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblName") + ":");
 
-        jLabel3.setText(Localizer.getInstance().getMessage("lblSkill") + ":");
+        jLabel3.setText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblSkill") + ":");
 
         spnLevel.setModel(new javax.swing.SpinnerNumberModel(6, 1, 10, 1));
         spnLevel.setRequestFocusEnabled(false);
@@ -137,7 +136,7 @@ public class TournamentPlayerPanel extends javax.swing.JPanel {
         if (this.cbPlayerType.getSelectedItem() != PlayerType.HUMAN) {
             this.pnlPlayerName.setVisible(true);
             if (this.txtPlayerName.getText().isEmpty()) {
-                this.txtPlayerName.setText(Localizer.getInstance().getMessage("lblComputer") + " " + this.lblPlayerNum.getText());
+                this.txtPlayerName.setText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblComputer") + " " + this.lblPlayerNum.getText());
             }
         } else {
             this.pnlPlayerName.setVisible(false);

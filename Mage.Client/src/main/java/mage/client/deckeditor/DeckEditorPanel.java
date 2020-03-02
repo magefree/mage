@@ -17,7 +17,6 @@ import mage.client.dialog.PreferencesDialog;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.Event;
 import mage.client.util.Listener;
-import mage.client.util.Localizer;
 import mage.client.util.audio.AudioManager;
 import mage.components.CardInfoPane;
 import mage.game.GameException;
@@ -607,8 +606,8 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         }
         if (timeToSubmit > 0) {
             timeToSubmit--;
-            btnSubmitTimer.setText(Localizer.getInstance().getMessage("lblSubmitTimeout", String.valueOf(timeToSubmit)));
-            btnSubmitTimer.setToolTipText(Localizer.getInstance().getMessage("lblSubmitTimeoutDest", String.valueOf(timeToSubmit)));
+            btnSubmitTimer.setText(String.format(java.util.ResourceBundle.getBundle("otherMessage").getString("lblSubmitTimeout"), String.valueOf(timeToSubmit)));
+            btnSubmitTimer.setToolTipText(String.format(java.util.ResourceBundle.getBundle("otherMessage").getString("lblSubmitTimeoutDest"), String.valueOf(timeToSubmit)));
         }
     }
 
@@ -673,7 +672,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                     }
 
                 } else {
-                    JOptionPane.showMessageDialog(MageFrame.getDesktop(), Localizer.getInstance().getMessage("lblUnknownDeckFormat"), Localizer.getInstance().getMessage("lblErrorImportingDeck"), JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(MageFrame.getDesktop(), java.util.ResourceBundle.getBundle("otherMessage").getString("lblUnknownDeckFormat"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblErrorImportingDeck"), JOptionPane.ERROR_MESSAGE);
                 }
             } catch (Exception ex) {
                 logger.fatal(ex);
@@ -711,7 +710,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                     refreshDeck();
                 }
             } catch (GameException e1) {
-                JOptionPane.showMessageDialog(MageFrame.getDesktop(), e1.getMessage(), Localizer.getInstance().getMessage("lblErrorLoadingDeck"), JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(MageFrame.getDesktop(), e1.getMessage(), java.util.ResourceBundle.getBundle("otherMessage").getString("lblErrorLoadingDeck"), JOptionPane.ERROR_MESSAGE);
             } finally {
                 MageFrame.getDesktop().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
             }
@@ -811,7 +810,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             }
 
         } catch (GameException e1) {
-            JOptionPane.showMessageDialog(MageFrame.getDesktop(), e1.getMessage(), Localizer.getInstance().getMessage("lblErrorLoadingDeck"), JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(MageFrame.getDesktop(), e1.getMessage(), java.util.ResourceBundle.getBundle("otherMessage").getString("lblErrorLoadingDeck"), JOptionPane.ERROR_MESSAGE);
         } finally {
             MageFrame.getDesktop().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }
@@ -1225,7 +1224,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                     XMAGE_INFO.getExporter().writeDeck(fileName, cardLists);
                 }
             } catch (IOException ex) {
-                JOptionPane.showMessageDialog(MageFrame.getDesktop(), ex.getMessage() + Localizer.getInstance().getMessage("lblTrySelectedDirectoryWitable"), Localizer.getInstance().getMessage("lblErrorSavingDeck"), JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(MageFrame.getDesktop(), ex.getMessage() + java.util.ResourceBundle.getBundle("otherMessage").getString("lblTrySelectedDirectoryWitable"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblErrorSavingDeck"), JOptionPane.ERROR_MESSAGE);
             } finally {
                 MageFrame.getDesktop().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
             }
@@ -1284,7 +1283,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 }
 
             } catch (GameException ex) {
-                JOptionPane.showMessageDialog(MageFrame.getDesktop(), ex.getMessage(), Localizer.getInstance().getMessage("lblErrorLoadingDeck"), JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(MageFrame.getDesktop(), ex.getMessage(), java.util.ResourceBundle.getBundle("otherMessage").getString("lblErrorLoadingDeck"), JOptionPane.ERROR_MESSAGE);
             } finally {
                 MageFrame.getDesktop().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
             }
@@ -1321,9 +1320,9 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             String path = DeckGenerator.generateDeck();
             deck = Deck.load(DeckImporter.importDeckFromFile(path), true, true);
         } catch (GameException ex) {
-            JOptionPane.showMessageDialog(MageFrame.getDesktop(), ex.getMessage(), Localizer.getInstance().getMessage("lblErrorLoadinGeneratedDeck"), JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(MageFrame.getDesktop(), ex.getMessage(), java.util.ResourceBundle.getBundle("otherMessage").getString("lblErrorLoadinGeneratedDeck"), JOptionPane.ERROR_MESSAGE);
         } catch (DeckGeneratorException ex) {
-            JOptionPane.showMessageDialog(MageFrame.getDesktop(), ex.getMessage(), Localizer.getInstance().getMessage("lblGeneratorError"), JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(MageFrame.getDesktop(), ex.getMessage(), java.util.ResourceBundle.getBundle("otherMessage").getString("lblGeneratorError"), JOptionPane.ERROR_MESSAGE);
         } finally {
             MageFrame.getDesktop().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }

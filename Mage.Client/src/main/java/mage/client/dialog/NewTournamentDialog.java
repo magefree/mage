@@ -9,7 +9,6 @@ import mage.client.MageFrame;
 import mage.client.SessionHandler;
 import mage.client.table.TournamentPlayerPanel;
 import mage.client.util.IgnoreList;
-import mage.client.util.Localizer;
 import mage.client.util.gui.FastSearchUtil;
 import mage.constants.MatchTimeLimit;
 import mage.constants.MultiplayerAttackOption;
@@ -59,7 +58,7 @@ public class NewTournamentDialog extends MageDialog {
     public NewTournamentDialog() {
         initComponents();
         lastSessionId = "";
-        txtName.setText(Localizer.getInstance().getMessage("lblTournament"));
+        txtName.setText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblTournament"));
         this.spnNumWins.setModel(new SpinnerNumberModel(2, 1, 5, 1));
         this.spnFreeMulligans.setModel(new SpinnerNumberModel(0, 0, 5, 1));
         this.cbMulligan.setModel(new DefaultComboBoxModel(MulliganType.values()));
@@ -670,7 +669,7 @@ public class NewTournamentDialog extends MageDialog {
         TournamentTypeView tournamentType = (TournamentTypeView) cbTournamentType.getSelectedItem();
         if (tournamentType.isRandom() || tournamentType.isRichMan()) {
             if (tOptions.getLimitedOptions().getSetCodes().isEmpty()) {
-                JOptionPane.showMessageDialog(MageFrame.getDesktop(), Localizer.getInstance().getMessage("lblYouMustSelectPacksForPool"), Localizer.getInstance().getMessage("lblWarning"), JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(MageFrame.getDesktop(), java.util.ResourceBundle.getBundle("otherMessage").getString("lblYouMustSelectPacksForPool"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblWarning"), JOptionPane.WARNING_MESSAGE);
                 return;
             }
         }
@@ -704,7 +703,7 @@ public class NewTournamentDialog extends MageDialog {
             this.hideDialog();
             return;
         }
-        JOptionPane.showMessageDialog(MageFrame.getDesktop(), Localizer.getInstance().getMessage("lblErrorJoiningTournament"), Localizer.getInstance().getMessage("lblError"), JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(MageFrame.getDesktop(), java.util.ResourceBundle.getBundle("otherMessage").getString("lblErrorJoiningTournament"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblError"), JOptionPane.ERROR_MESSAGE);
         SessionHandler.removeTable(roomId, table.getTableId());
         table = null;
     }//GEN-LAST:event_btnOkActionPerformed
@@ -773,7 +772,7 @@ public class NewTournamentDialog extends MageDialog {
         if (!lastFolder.isEmpty()) {
             fcSelectDeck.setCurrentDirectory(new File(lastFolder));
         }
-        int ret = fcSelectDeck.showDialog(this, Localizer.getInstance().getMessage("lblSelectDeck"));
+        int ret = fcSelectDeck.showDialog(this, java.util.ResourceBundle.getBundle("otherMessage").getString("lblSelectDeck"));
         if (ret == JFileChooser.APPROVE_OPTION) {
             File file = fcSelectDeck.getSelectedFile();
             return (file.getPath());
@@ -986,7 +985,7 @@ public class NewTournamentDialog extends MageDialog {
             pnlRandomPacks.add(txtRandomPacks);
             JButton btnSelectRandomPacks = new JButton();
             btnSelectRandomPacks.setAlignmentX(Component.LEFT_ALIGNMENT);
-            btnSelectRandomPacks.setText(Localizer.getInstance().getMessage("lblSelectPackToBeIncludedInPool"));
+            btnSelectRandomPacks.setText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblSelectPackToBeIncludedInPool"));
             btnSelectRandomPacks.setToolTipText(RandomPacksSelectorDialog.randomDraftDescription);
             btnSelectRandomPacks.addActionListener(evt -> showRandomPackSelectorDialog());
             pnlRandomPacks.add(btnSelectRandomPacks);
@@ -1212,7 +1211,7 @@ public class NewTournamentDialog extends MageDialog {
                     try {
                         cubeFromDeck = Deck.load(DeckImporter.importDeckFromFile(cubeFromDeckFilename), true, true);
                     } catch (GameException e1) {
-                        JOptionPane.showMessageDialog(MageFrame.getDesktop(), e1.getMessage(), Localizer.getInstance().getMessage("lblErrorLoadingDeck"), JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(MageFrame.getDesktop(), e1.getMessage(), java.util.ResourceBundle.getBundle("otherMessage").getString("lblErrorLoadingDeck"), JOptionPane.ERROR_MESSAGE);
                     }
                     if (cubeFromDeck != null) {
                         cubeFromDeck.clearLayouts();
@@ -1280,7 +1279,7 @@ public class NewTournamentDialog extends MageDialog {
     private void onLoadSettings(int version) {
         String versionStr = prepareVersionStr(version, false);
         int numPlayers;
-        txtName.setText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_NAME + versionStr, Localizer.getInstance().getMessage("lblTournament")));
+        txtName.setText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_NAME + versionStr, java.util.ResourceBundle.getBundle("otherMessage").getString("lblTournament")));
         txtPassword.setText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PASSWORD + versionStr, ""));
         int timeLimit = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_TIME_LIMIT + versionStr, "1500"));
         for (MatchTimeLimit mtl : MatchTimeLimit.values()) {

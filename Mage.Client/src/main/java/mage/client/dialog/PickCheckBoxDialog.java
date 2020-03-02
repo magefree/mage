@@ -2,7 +2,6 @@ package mage.client.dialog;
 
 import mage.choices.Choice;
 import mage.client.MageFrame;
-import mage.client.util.Localizer;
 import mage.client.util.gui.MageDialogState;
 
 import javax.swing.*;
@@ -171,7 +170,7 @@ public class PickCheckBoxDialog extends MageDialog {
 
         // listeners for ESC close
         if (!choice.isRequired()) {
-            String cancelName = Localizer.getInstance().getMessage("lblCancel");
+            String cancelName = java.util.ResourceBundle.getBundle("otherMessage").getString("lblCancel");
             InputMap inputMap = getRootPane().getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
             inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), cancelName);
             ActionMap actionMap = getRootPane().getActionMap();

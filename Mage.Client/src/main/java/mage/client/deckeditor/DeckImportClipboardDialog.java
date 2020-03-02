@@ -2,7 +2,6 @@ package mage.client.deckeditor;
 
 import mage.client.MageFrame;
 import mage.client.dialog.MageDialog;
-import mage.client.util.Localizer;
 import mage.util.DeckUtil;
 
 import javax.swing.*;

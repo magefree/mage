@@ -7,7 +7,6 @@
 
 package mage.client.dialog;
 
-import mage.client.util.Localizer;
 
 /**
  *

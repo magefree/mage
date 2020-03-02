@@ -13,7 +13,6 @@ import java.util.UUID;
 import mage.client.SessionHandler;
 import mage.client.cards.BigCard;
 import mage.client.dialog.ShowCardsDialog;
-import mage.client.util.Localizer;
 import mage.view.PlayerView;
 
 /**

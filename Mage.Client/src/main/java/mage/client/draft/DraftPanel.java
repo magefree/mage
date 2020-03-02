@@ -146,9 +146,9 @@ public class DraftPanel extends javax.swing.JPanel {
     public void updateDraft(DraftView draftView) {
         if (draftView.getSets().size() != 3) {
             // Random draft
-            this.txtPack1.setText(Localizer.getInstance().getMessage("lblRandomBoosters"));
-            this.txtPack2.setText(Localizer.getInstance().getMessage("lblRandomBoosters"));
-            this.txtPack3.setText(Localizer.getInstance().getMessage("lblRandomBoosters"));
+            this.txtPack1.setText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblRandomBoosters"));
+            this.txtPack2.setText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblRandomBoosters"));
+            this.txtPack3.setText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblRandomBoosters"));
         } else {
             this.txtPack1.setText(draftView.getSets().get(0));
             this.txtPack2.setText(draftView.getSets().get(1));
@@ -275,7 +275,7 @@ public class DraftPanel extends javax.swing.JPanel {
                             loadCardsToPickedCardsArea(view.getPicks());
                             draftBooster.loadBooster(EMPTY_VIEW, bigCard);
                             Plugins.instance.getActionCallback().hideOpenComponents();
-                            setMessage(Localizer.getInstance().getMessage("lblWaitingOtherPlayers"));
+                            setMessage(java.util.ResourceBundle.getBundle("otherMessage").getString("lblWaitingOtherPlayers"));
                         }
                     }
                     if (event.getEventType() == ClientEventType.MARK_A_CARD) {
@@ -284,9 +284,9 @@ public class DraftPanel extends javax.swing.JPanel {
                     }
                 }
         );
-        setMessage(Localizer.getInstance().getMessage("lblPickACard"));
+        setMessage(java.util.ResourceBundle.getBundle("otherMessage").getString("lblPickACard"));
         if (!MageFrame.getInstance().isActive()) {
-            MageTray.instance.displayMessage(Localizer.getInstance().getMessage("lblPickNextCard"));
+            MageTray.instance.displayMessage(java.util.ResourceBundle.getBundle("otherMessage").getString("lblPickNextCard"));
             MageTray.instance.blink();
         }
         countdown.stop();
@@ -355,7 +355,7 @@ public class DraftPanel extends javax.swing.JPanel {
 
         JMenuItem menuItem;
 
-        menuItem = new JMenuItem(Localizer.getInstance().getMessage("lblF9ShowAllHihhenCards"));
+        menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblF9ShowAllHihhenCards"));
         popupMenuPickedArea.add(menuItem);
 
         // Confirm (F9)
@@ -368,7 +368,7 @@ public class DraftPanel extends javax.swing.JPanel {
 
         JMenuItem menuItem;
 
-        menuItem = new JMenuItem(Localizer.getInstance().getMessage("lblHideThisCard"));
+        menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblHideThisCard"));
         popupMenuCardPanel.add(menuItem);
 
         // Hide Card
@@ -816,9 +816,9 @@ public class DraftPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnQuitTournamentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitTournamentActionPerformed
-        UserRequestMessage message = new UserRequestMessage(Localizer.getInstance().getMessage("lblTournamentQuitConfirm"), Localizer.getInstance().getMessage("lblAreYouSureQuitDraftTournament"));
-        message.setButton1(Localizer.getInstance().getMessage("lblNo"), null);
-        message.setButton2(Localizer.getInstance().getMessage("lblYes"), PlayerAction.CLIENT_QUIT_DRAFT_TOURNAMENT);
+        UserRequestMessage message = new UserRequestMessage(java.util.ResourceBundle.getBundle("otherMessage").getString("lblTournamentQuitConfirm"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblAreYouSureQuitDraftTournament"));
+        message.setButton1(java.util.ResourceBundle.getBundle("otherMessage").getString("lblNo"), null);
+        message.setButton2(java.util.ResourceBundle.getBundle("otherMessage").getString("lblYes"), PlayerAction.CLIENT_QUIT_DRAFT_TOURNAMENT);
         message.setTournamentId(draftId);
         MageFrame.getInstance().showUserRequestDialog(message);
     }//GEN-LAST:event_btnQuitTournamentActionPerformed

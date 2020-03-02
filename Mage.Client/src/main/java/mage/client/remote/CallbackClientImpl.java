@@ -12,7 +12,6 @@ import mage.client.plugins.impl.Plugins;
 import mage.client.util.DeckUtil;
 import mage.client.util.GameManager;
 import mage.client.util.IgnoreList;
-import mage.client.util.Localizer;
 import mage.client.util.audio.AudioManager;
 import mage.client.util.object.SaveObjectUtil;
 import mage.interfaces.callback.CallbackClient;
@@ -122,9 +121,9 @@ public class CallbackClientImpl implements CallbackClient {
                         if (callback.getData() != null) {
                             ChatMessage message = (ChatMessage) callback.getData();
                             if (message.getColor() == ChatMessage.MessageColor.RED) {
-                                JOptionPane.showMessageDialog(null, message.getMessage(), Localizer.getInstance().getMessage("lblServerMessage"), JOptionPane.WARNING_MESSAGE);
+                                JOptionPane.showMessageDialog(null, message.getMessage(), java.util.ResourceBundle.getBundle("otherMessage").getString("lblServerMessage"), JOptionPane.WARNING_MESSAGE);
                             } else {
-                                JOptionPane.showMessageDialog(null, message.getMessage(), Localizer.getInstance().getMessage("lblServerMessage"), JOptionPane.INFORMATION_MESSAGE);
+                                JOptionPane.showMessageDialog(null, message.getMessage(), java.util.ResourceBundle.getBundle("otherMessage").getString("lblServerMessage"), JOptionPane.INFORMATION_MESSAGE);
                             }
                         }
                         break;

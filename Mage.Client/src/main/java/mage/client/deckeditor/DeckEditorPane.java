@@ -4,7 +4,6 @@ import mage.cards.decks.Deck;
 import mage.client.MagePane;
 import mage.client.constants.Constants.DeckEditorMode;
 import mage.client.plugins.impl.Plugins;
-import mage.client.util.Localizer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -47,13 +46,13 @@ public class DeckEditorPane extends MagePane {
 
     public void show(DeckEditorMode mode, Deck deck, String name, UUID tableId, int time) {
         if (mode == DeckEditorMode.SIDEBOARDING || mode == DeckEditorMode.LIMITED_BUILDING) {
-            this.setTitle(Localizer.getInstance().getMessage("lblDeckEditor") + " - " + tableId.toString());
+            this.setTitle(java.util.ResourceBundle.getBundle("otherMessage").getString("lblDeckEditor") + " - " + tableId.toString());
         } else if (mode == DeckEditorMode.VIEW_LIMITED_DECK) {
-            this.setTitle(Localizer.getInstance().getMessage("lblDeckEditor") +" - " + Localizer.getInstance().getMessage("lblCurrentDeck"));
+            this.setTitle(java.util.ResourceBundle.getBundle("otherMessage").getString("lblDeckEditor") +" - " + java.util.ResourceBundle.getBundle("otherMessage").getString("lblCurrentDeck"));
         } else if (deck != null) {
-            this.setTitle(Localizer.getInstance().getMessage("lblDeckEditor") + " - " + deck.getName());
+            this.setTitle(java.util.ResourceBundle.getBundle("otherMessage").getString("lblDeckEditor") + " - " + deck.getName());
         } else {
-            this.setTitle(Localizer.getInstance().getMessage("lblDeckEditor"));
+            this.setTitle(java.util.ResourceBundle.getBundle("otherMessage").getString("lblDeckEditor"));
         }
         this.deckEditorPanel1.showDeckEditor(mode, deck, tableId, time);
         this.repaint();

@@ -2,7 +2,6 @@ package mage.client.table;
 
 import mage.client.chat.ChatPanelBasic;
 import mage.client.util.GUISizeHelper;
-import mage.client.util.Localizer;
 import mage.client.util.MageTableRowSorter;
 import mage.client.util.gui.TableUtil;
 import mage.client.util.gui.countryBox.CountryCellRenderer;

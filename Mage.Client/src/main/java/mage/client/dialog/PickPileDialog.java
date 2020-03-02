@@ -3,7 +3,6 @@ package mage.client.dialog;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.cards.CardArea;
-import mage.client.util.Localizer;
 import mage.view.CardsView;
 import org.mage.card.arcane.CardPanel;
 
@@ -34,7 +33,7 @@ public class PickPileDialog extends MageDialog {
         pile1 = new CardArea();
         panel.add(pile1, BorderLayout.CENTER);
 
-        JButton btnChoosePile1 = new JButton(Localizer.getInstance().getMessage("lblPileN", String.valueOf(1)));
+        JButton btnChoosePile1 = new JButton(String.format(java.util.ResourceBundle.getBundle("otherMessage").getString("lblPileN"), String.valueOf(1)));
         btnChoosePile1.addActionListener(e -> btnPile1ActionPerformed(e));
         panel.add(btnChoosePile1, BorderLayout.NORTH);
 
@@ -45,7 +44,7 @@ public class PickPileDialog extends MageDialog {
         pile2 = new CardArea();
         panel_1.add(pile2, BorderLayout.CENTER);
 
-        JButton btnChoosePile2 = new JButton(Localizer.getInstance().getMessage("lblPileN", String.valueOf(2)));
+        JButton btnChoosePile2 = new JButton(String.format(java.util.ResourceBundle.getBundle("otherMessage").getString("lblPileN"), String.valueOf(2)));
         btnChoosePile2.addActionListener(e -> btnPile2ActionPerformed(e));
         panel_1.add(btnChoosePile2, BorderLayout.NORTH);
     }

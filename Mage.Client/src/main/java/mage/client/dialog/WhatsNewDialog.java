@@ -12,7 +12,6 @@ import javafx.scene.Scene;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import mage.client.MageFrame;
-import mage.client.util.Localizer;
 import mage.utils.MageVersion;
 import org.apache.log4j.Logger;
 import org.w3c.dom.events.EventListener;

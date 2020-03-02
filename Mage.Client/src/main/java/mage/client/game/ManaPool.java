@@ -9,7 +9,6 @@
 package mage.client.game;
 
 import mage.view.ManaPoolView;
-import mage.client.util.Localizer;
 
 /**
  *

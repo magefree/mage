@@ -17,7 +17,6 @@ import mage.client.constants.Constants.SortBy;
 import mage.client.deckeditor.table.TableModel;
 import mage.client.dialog.CheckBoxList;
 import mage.client.util.GUISizeHelper;
-import mage.client.util.Localizer;
 import mage.client.util.gui.FastSearchUtil;
 import mage.client.util.sets.ConstructedFormats;
 import mage.constants.CardType;

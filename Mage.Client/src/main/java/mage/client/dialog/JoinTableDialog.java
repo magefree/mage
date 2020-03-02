@@ -4,7 +4,6 @@ package mage.client.dialog;
 import mage.cards.decks.importer.DeckImporter;
 import mage.client.MageFrame;
 import mage.client.SessionHandler;
-import mage.client.util.Localizer;
 import mage.players.PlayerType;
 import mage.remote.Session;
 import org.apache.log4j.Logger;
@@ -149,7 +148,7 @@ public class JoinTableDialog extends MageDialog {
 
     private void handleError(Exception ex) {
         logger.fatal("Error loading deck", ex);
-        JOptionPane.showMessageDialog(MageFrame.getDesktop(), Localizer.getInstance().getMessage("lblErrorLoadingDeck") + ".", Localizer.getInstance().getMessage("lblError"), JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(MageFrame.getDesktop(), java.util.ResourceBundle.getBundle("otherMessage").getString("lblErrorLoadingDeck") + ".", java.util.ResourceBundle.getBundle("otherMessage").getString("lblError"), JOptionPane.ERROR_MESSAGE);
     }
 
 

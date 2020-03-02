@@ -10,7 +10,6 @@ import mage.client.components.ext.dlg.DialogManager;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.CardsViewUtil;
 import mage.client.util.ImageHelper;
-import mage.client.util.Localizer;
 import mage.client.util.gui.BufferedImageBuilder;
 import mage.client.util.gui.countryBox.CountryUtil;
 import mage.components.ImagePanel;
@@ -236,7 +235,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
         Color graveColor = isCardsPlayable(player.getGraveyard().values(), game, possibleTargets) ? activeValueColor : Color.BLACK;
         setTextForLabel(graveLabel, graveCards, false, graveColor);
-        graveLabel.setToolTipText(Localizer.getInstance().getMessage("lblCardTypes") + ": " + qtyCardTypes(player.getGraveyard()));
+        graveLabel.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblCardTypes") + ": " + qtyCardTypes(player.getGraveyard()));
 
         Color commandColor = Color.BLACK;
         for (CommandObjectView com : player.getCommandObjectList()) {
@@ -348,7 +347,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
             if (countryname == null) {
                 countryname = "Unknown";
             }
-            basicTooltipText = Localizer.getInstance().getMessage("htnlPlayerAvatarTooltipText",
+            basicTooltipText = String.format(java.util.ResourceBundle.getBundle("otherMessage").getString("htnlPlayerAvatarTooltipText"),
                                 player.getName(), countryname, String.valueOf(player.getUserData().getConstructedRating()), String.valueOf(player.getUserData().getLimitedRating()),
                                 String.valueOf(player.getDeckHashCode()), String.valueOf(player.getWins()) + " of " + player.getWinsNeeded() + " (to win the match)"
                     + (player.getUserData() == null ? "" : "<br/>History: " + player.getUserData().getHistory()));
@@ -461,66 +460,66 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         avatar.setObserver(() -> SessionHandler.sendPlayerUUID(gameId, playerId));
 
         // timer area /small layout)
-        timerLabel.setToolTipText(Localizer.getInstance().getMessage("lblTimeLeft"));
+        timerLabel.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblTimeLeft"));
         timerLabel.setSize(80, 12);
         timerLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
         // life area
         r = new Rectangle(18, 18);
-        lifeLabel.setToolTipText(Localizer.getInstance().getMessage("lblLife"));
+        lifeLabel.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblLife"));
         Image imageLife = ImageHelper.getImageFromResources("/info/life.png");
         BufferedImage resizedLife = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(imageLife, BufferedImage.TYPE_INT_ARGB), r);
         life = new ImagePanel(resizedLife, ImagePanelStyle.ACTUAL);
-        life.setToolTipText(Localizer.getInstance().getMessage("lblLife"));
+        life.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblLife"));
         life.setOpaque(false);
         // hand area
         r = new Rectangle(18, 18);
-        handLabel.setToolTipText(Localizer.getInstance().getMessage("lblHand"));
+        handLabel.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblHand"));
         Image imageHand = ImageHelper.getImageFromResources("/info/hand.png");
         BufferedImage resizedHand = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(imageHand, BufferedImage.TYPE_INT_ARGB), r);
         hand = new ImagePanel(resizedHand, ImagePanelStyle.ACTUAL);
-        hand.setToolTipText(Localizer.getInstance().getMessage("lblHand"));
+        hand.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblHand"));
         hand.setOpaque(false);
 
         // Poison count
         setTextForLabel(poisonLabel, 0, false);
         r = new Rectangle(18, 18);
-        poisonLabel.setToolTipText(Localizer.getInstance().getMessage("lblPoison"));
+        poisonLabel.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblPoison"));
         Image imagePoison = ImageHelper.getImageFromResources("/info/poison.png");
         BufferedImage resizedPoison = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(imagePoison, BufferedImage.TYPE_INT_ARGB), r);
         poison = new ImagePanel(resizedPoison, ImagePanelStyle.ACTUAL);
-        poison.setToolTipText(Localizer.getInstance().getMessage("lblPoison"));
+        poison.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblPoison"));
         poison.setOpaque(false);
 
         // Library
         r = new Rectangle(19, 19);
-        libraryLabel.setToolTipText(Localizer.getInstance().getMessage("lblLibrary"));
+        libraryLabel.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblLibrary"));
         Image imageLibrary = ImageHelper.getImageFromResources("/info/library.png");
         BufferedImage resizedLibrary = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(imageLibrary, BufferedImage.TYPE_INT_ARGB), r);
 
         library = new HoverButton(null, resizedLibrary, resizedLibrary, resizedLibrary, r);
-        library.setToolTipText(Localizer.getInstance().getMessage("lblLibrary"));
+        library.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblLibrary"));
         library.setOpaque(false);
         library.setObserver(() -> btnLibraryActionPerformed(null));
 
         // Grave count and open graveyard button
         r = new Rectangle(21, 21);
-        graveLabel.setToolTipText(Localizer.getInstance().getMessage("lblCardTypes") + ": 0");
+        graveLabel.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblCardTypes") + ": 0");
         Image imageGrave = ImageHelper.getImageFromResources("/info/grave.png");
         BufferedImage resizedGrave = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(imageGrave, BufferedImage.TYPE_INT_ARGB), r);
 
         grave = new HoverButton(null, resizedGrave, resizedGrave, resizedGrave, r);
-        grave.setToolTipText(Localizer.getInstance().getMessage("lblGrave"));
+        grave.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblGrave"));
         grave.setOpaque(false);
         grave.setObserver(() -> btnGraveActionPerformed(null));
 
         exileLabel = new JLabel();
-        exileLabel.setToolTipText(Localizer.getInstance().getMessage("lblExileZone"));
+        exileLabel.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblExileZone"));
         image = ImageHelper.getImageFromResources("/info/exile.png");
         r = new Rectangle(21, 21);
         resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
         exileZone = new HoverButton(null, resized, resized, resized, r);
-        exileZone.setToolTipText(Localizer.getInstance().getMessage("lblExileZone"));
+        exileZone.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblExileZone"));
         exileZone.setOpaque(false);
         exileZone.setObserver(() -> btnExileZoneActionPerformed(null));
         exileZone.setBounds(25, 0, 21, 21);
@@ -531,7 +530,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
         cheat = new JButton();
         cheat.setIcon(new ImageIcon(resized));
-        cheat.setToolTipText(Localizer.getInstance().getMessage("lblCheatButton"));
+        cheat.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblCheatButton"));
         cheat.addActionListener(e -> btnCheatActionPerformed(e));
 
         zonesPanel = new JPanel();
@@ -545,13 +544,13 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         r = new Rectangle(21, 21);
         resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
         commandZone = new HoverButton(null, resized, resized, resized, r);
-        commandZone.setToolTipText(Localizer.getInstance().getMessage("lblCommandZoneDest"));
+        commandZone.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblCommandZoneDest"));
         commandZone.setOpaque(false);
         commandZone.setObserver(() -> btnCommandZoneActionPerformed(null));
         commandZone.setBounds(3, 0, 21, 21);
         zonesPanel.add(commandZone);
 
-        commandLabel.setToolTipText(Localizer.getInstance().getMessage("lblCommandZone"));
+        commandLabel.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblCommandZone"));
         commandLabel.setBounds(25, 0, 21, 21);
         zonesPanel.add(commandLabel);
 
@@ -567,27 +566,27 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         // Energy count
         setTextForLabel(energyLabel, 0, false);
         r = new Rectangle(18, 18);
-        energyLabel.setToolTipText(Localizer.getInstance().getMessage("lblEnergy"));
+        energyLabel.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblEnergy"));
         Image imageEnergy = ImageHelper.getImageFromResources("/info/energy.png");
         BufferedImage resizedEnergy = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(imageEnergy, BufferedImage.TYPE_INT_ARGB), r);
         energy = new ImagePanel(resizedEnergy, ImagePanelStyle.ACTUAL);
-        energy.setToolTipText(Localizer.getInstance().getMessage("lblEnergy"));
+        energy.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblEnergy"));
         energy.setOpaque(false);
 
         // Experience count
         setTextForLabel(experienceLabel, 0, false);
         r = new Rectangle(18, 18);
-        experienceLabel.setToolTipText(Localizer.getInstance().getMessage("lblExperienceCounter"));
+        experienceLabel.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblExperienceCounter"));
         Image imageExperience = ImageHelper.getImageFromResources("/info/experience.png");
         BufferedImage resizedExperience = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(imageExperience, BufferedImage.TYPE_INT_ARGB), r);
         experience = new ImagePanel(resizedExperience, ImagePanelStyle.ACTUAL);
-        experience.setToolTipText(Localizer.getInstance().getMessage("lblExperienceCounter"));
+        experience.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblExperienceCounter"));
         experience.setOpaque(false);
 
         btnPlayer = new JButton();
-        btnPlayer.setText(Localizer.getInstance().getMessage("lblPlayer"));
+        btnPlayer.setText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblPlayer"));
         btnPlayer.setVisible(false);
-        btnPlayer.setToolTipText(Localizer.getInstance().getMessage("lblPlayer"));
+        btnPlayer.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblPlayer"));
         btnPlayer.addActionListener(e -> SessionHandler.sendPlayerUUID(gameId, playerId));
 
         // Add mana symbols
@@ -613,74 +612,74 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
         ///*
         JLabel manaCountLabelW = new JLabel();
-        manaCountLabelW.setToolTipText(Localizer.getInstance().getMessage("lblWhiteMana"));
+        manaCountLabelW.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblWhiteMana"));
         setTextForLabel(manaCountLabelW, 0, false);
         manaLabels.put(manaCountLabelW, ManaType.WHITE);
         r = new Rectangle(15, 15);
         BufferedImage imageManaW = ManaSymbols.getSizedManaSymbol("W", 15);
         HoverButton btnWhiteMana = new HoverButton(null, imageManaW, imageManaW, imageManaW, r);
-        btnWhiteMana.setToolTipText(Localizer.getInstance().getMessage("lblWhiteMana"));
+        btnWhiteMana.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblWhiteMana"));
         btnWhiteMana.setOpaque(false);
         btnWhiteMana.setObserver(() -> btnManaActionPerformed(ManaType.WHITE));
         manaButtons.put(manaCountLabelW, btnWhiteMana);
         //*/
 
         JLabel manaCountLabelU = new JLabel();
-        manaCountLabelU.setToolTipText(Localizer.getInstance().getMessage("lblBlueMana"));
+        manaCountLabelU.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblBlueMana"));
         setTextForLabel(manaCountLabelU, 0, false);
         manaLabels.put(manaCountLabelU, ManaType.BLUE);
         r = new Rectangle(15, 15);
         BufferedImage imageManaU = ManaSymbols.getSizedManaSymbol("U", 15);
         HoverButton btnBlueMana = new HoverButton(null, imageManaU, imageManaU, imageManaU, r);
-        btnBlueMana.setToolTipText(Localizer.getInstance().getMessage("lblBlueMana"));
+        btnBlueMana.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblBlueMana"));
         btnBlueMana.setOpaque(false);
         btnBlueMana.setObserver(() -> btnManaActionPerformed(ManaType.BLUE));
         manaButtons.put(manaCountLabelU, btnBlueMana);
 
         JLabel manaCountLabelB = new JLabel();
-        manaCountLabelB.setToolTipText(Localizer.getInstance().getMessage("lblBlackMana"));
+        manaCountLabelB.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblBlackMana"));
         setTextForLabel(manaCountLabelB, 0, false);
         manaLabels.put(manaCountLabelB, ManaType.BLACK);
         r = new Rectangle(15, 15);
         BufferedImage imageManaB = ManaSymbols.getSizedManaSymbol("B", 15);
         HoverButton btnBlackMana = new HoverButton(null, imageManaB, imageManaB, imageManaB, r);
-        btnBlackMana.setToolTipText(Localizer.getInstance().getMessage("lblBlackMana"));
+        btnBlackMana.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblBlackMana"));
         btnBlackMana.setOpaque(false);
         btnBlackMana.setObserver(() -> btnManaActionPerformed(ManaType.BLACK));
         manaButtons.put(manaCountLabelB, btnBlackMana);
 
         JLabel manaCountLabelR = new JLabel();
-        manaCountLabelR.setToolTipText(Localizer.getInstance().getMessage("lblRedMana"));
+        manaCountLabelR.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblRedMana"));
         setTextForLabel(manaCountLabelR, 0, false);
         manaLabels.put(manaCountLabelR, ManaType.RED);
         r = new Rectangle(15, 15);
         BufferedImage imageManaR = ManaSymbols.getSizedManaSymbol("R", 15);
         HoverButton btnRedMana = new HoverButton(null, imageManaR, imageManaR, imageManaR, r);
-        btnRedMana.setToolTipText(Localizer.getInstance().getMessage("lblRedMana"));
+        btnRedMana.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblRedMana"));
         btnRedMana.setOpaque(false);
         btnRedMana.setObserver(() -> btnManaActionPerformed(ManaType.RED));
         manaButtons.put(manaCountLabelR, btnRedMana);
 
         JLabel manaCountLabelG = new JLabel();
-        manaCountLabelG.setToolTipText(Localizer.getInstance().getMessage("lblGreenMana"));
+        manaCountLabelG.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblGreenMana"));
         setTextForLabel(manaCountLabelG, 0, false);
         manaLabels.put(manaCountLabelG, ManaType.GREEN);
         r = new Rectangle(15, 15);
         BufferedImage imageManaG = ManaSymbols.getSizedManaSymbol("G", 15);
         HoverButton btnGreenMana = new HoverButton(null, imageManaG, imageManaG, imageManaG, r);
-        btnGreenMana.setToolTipText(Localizer.getInstance().getMessage("lblGreenMana"));
+        btnGreenMana.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblGreenMana"));
         btnGreenMana.setOpaque(false);
         btnGreenMana.setObserver(() -> btnManaActionPerformed(ManaType.GREEN));
         manaButtons.put(manaCountLabelG, btnGreenMana);
 
         JLabel manaCountLabelX = new JLabel();
-        manaCountLabelX.setToolTipText(Localizer.getInstance().getMessage("lblColorlessMana"));
+        manaCountLabelX.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblColorlessMana"));
         setTextForLabel(manaCountLabelX, 0, false);
         manaLabels.put(manaCountLabelX, ManaType.COLORLESS);
         r = new Rectangle(15, 15);
         BufferedImage imageManaX = ManaSymbols.getSizedManaSymbol("C", 15);
         HoverButton btnColorlessMana = new HoverButton(null, imageManaX, imageManaX, imageManaX, r);
-        btnColorlessMana.setToolTipText(Localizer.getInstance().getMessage("lblColorlessMana"));
+        btnColorlessMana.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblColorlessMana"));
         btnColorlessMana.setOpaque(false);
         btnColorlessMana.setObserver(() -> btnManaActionPerformed(ManaType.COLORLESS));
         manaButtons.put(manaCountLabelX, btnColorlessMana);

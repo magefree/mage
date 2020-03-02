@@ -5,7 +5,6 @@ import mage.cards.decks.DeckFormats;
 import mage.cards.decks.exporter.DeckExporter;
 import mage.client.MageFrame;
 import mage.client.dialog.MageDialog;
-import mage.client.util.Localizer;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,6 +1,5 @@
 package mage.client.table;
 
-import mage.client.util.Localizer;
 import mage.view.RoundView;
 import mage.view.TournamentGameView;
 import mage.view.TournamentView;
@@ -15,7 +14,7 @@ import java.util.List;
 public class TournamentMatchesTableModel extends AbstractTableModel {
     public static final int ACTION_COLUMN = 4; // column the action is located
 
-    private final String[] columnNames = new String[]{Localizer.getInstance().getMessage("lblRoundNumber"), Localizer.getInstance().getMessage("lblPlayer"), Localizer.getInstance().getMessage("lblState"), Localizer.getInstance().getMessage("lblPoints"), Localizer.getInstance().getMessage("lblAction")};
+    private final String[] columnNames = new String[]{java.util.ResourceBundle.getBundle("otherMessage").getString("lblRoundNumber"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblPlayer"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblState"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblPoints"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblAction")};
     private TournamentGameView[] games = new TournamentGameView[0];
     private boolean watchingAllowed;
 
@@ -79,7 +78,7 @@ public class TournamentMatchesTableModel extends AbstractTableModel {
 //                    return "Replay";
 //                }
                 if (watchingAllowed && games[arg0].getState().startsWith("Dueling")) {
-                    return Localizer.getInstance().getMessage("lblWatch");
+                    return java.util.ResourceBundle.getBundle("otherMessage").getString("lblWatch");
                 }
                 return "";
             case 5:

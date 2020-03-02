@@ -19,7 +19,6 @@ import mage.client.SessionHandler;
 import mage.client.chat.ChatPanelBasic;
 import mage.client.dialog.MageDialog;
 import mage.client.util.GUISizeHelper;
-import mage.client.util.Localizer;
 import mage.client.util.audio.AudioManager;
 import mage.client.util.gui.ArrowBuilder;
 import static mage.constants.Constants.Option.ORIGINAL_ID;
@@ -91,23 +90,23 @@ public class FeedbackPanel extends javax.swing.JPanel {
                 setButtonState("", "", mode);
                 break;
             case QUESTION:
-                setButtonState(Localizer.getInstance().getMessage("lblYes"), Localizer.getInstance().getMessage("lblNo"), mode);
+                setButtonState(java.util.ResourceBundle.getBundle("otherMessage").getString("lblYes"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblNo"), mode);
                 if (options != null && options.containsKey(ORIGINAL_ID)) {
                     this.helper.setOriginalId((UUID) options.get(ORIGINAL_ID));
                 }
                 break;
             case CONFIRM:
-                setButtonState(Localizer.getInstance().getMessage("lblOK"), Localizer.getInstance().getMessage("lblCancel"), mode);
+                setButtonState(java.util.ResourceBundle.getBundle("otherMessage").getString("lblOK"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblCancel"), mode);
                 break;
             case CANCEL:
-                setButtonState("", Localizer.getInstance().getMessage("lblCancel"), mode);
+                setButtonState("", java.util.ResourceBundle.getBundle("otherMessage").getString("lblCancel"), mode);
                 this.helper.setUndoEnabled(false);
                 break;
             case SELECT:
-                setButtonState("", Localizer.getInstance().getMessage("lblDone"), mode);
+                setButtonState("", java.util.ResourceBundle.getBundle("otherMessage").getString("lblDone"), mode);
                 break;
             case END:
-                setButtonState("", Localizer.getInstance().getMessage("lblCloseGame"), mode);
+                setButtonState("", java.util.ResourceBundle.getBundle("otherMessage").getString("lblCloseGame"), mode);
                 ArrowBuilder.getBuilder().removeAllArrows(gameId);
                 endWithTimeout();
                 break;
@@ -229,16 +228,16 @@ public class FeedbackPanel extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(0, 0, 0, 80));
 
-        btnRight.setText(Localizer.getInstance().getMessage("lblCancel"));
+        btnRight.setText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblCancel"));
         btnRight.addActionListener(evt -> btnRightActionPerformed(evt));
 
-        btnLeft.setText(Localizer.getInstance().getMessage("lblOK"));
+        btnLeft.setText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblOK"));
         btnLeft.addActionListener(evt -> btnLeftActionPerformed(evt));
 
-        btnSpecial.setText(Localizer.getInstance().getMessage("lblSpecial"));
+        btnSpecial.setText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblSpecial"));
         btnSpecial.addActionListener(evt -> btnSpecialActionPerformed(evt));
 
-        btnUndo.setText(Localizer.getInstance().getMessage("lblUndo"));
+        btnUndo.setText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblUndo"));
         btnUndo.addActionListener(evt -> btnUndoActionPerformed(evt));
 
     }
@@ -287,9 +286,9 @@ public class FeedbackPanel extends javax.swing.JPanel {
     }
 
     public void pressOKYesOrDone() {
-        if (btnLeft.getText().equals(Localizer.getInstance().getMessage("lblOK")) || btnLeft.getText().equals(Localizer.getInstance().getMessage("lblYes"))) {
+        if (btnLeft.getText().equals(java.util.ResourceBundle.getBundle("otherMessage").getString("lblOK")) || btnLeft.getText().equals(java.util.ResourceBundle.getBundle("otherMessage").getString("lblYes"))) {
             btnLeft.doClick();
-        } else if (btnRight.getText().equals(Localizer.getInstance().getMessage("lblOK")) || btnRight.getText().equals(Localizer.getInstance().getMessage("lblYes")) || btnRight.getText().equals(Localizer.getInstance().getMessage("lblDone"))) {
+        } else if (btnRight.getText().equals(java.util.ResourceBundle.getBundle("otherMessage").getString("lblOK")) || btnRight.getText().equals(java.util.ResourceBundle.getBundle("otherMessage").getString("lblYes")) || btnRight.getText().equals(java.util.ResourceBundle.getBundle("otherMessage").getString("lblDone"))) {
             btnRight.doClick();
         }
     }

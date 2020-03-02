@@ -1,7 +1,6 @@
 package mage.client.dialog;
 
 import mage.client.MageFrame;
-import mage.client.util.Localizer;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;

@@ -4,7 +4,6 @@ package mage.client.dialog;
 import java.util.Locale;
 import javax.swing.*;
 import mage.client.SessionHandler;
-import mage.client.util.Localizer;
 
 import org.apache.log4j.Logger;
 
@@ -212,32 +211,32 @@ public class FeedbackDialog extends javax.swing.JDialog {
     private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendButtonActionPerformed
         String title = txtIdeaTitle.getText().trim();
         if (title.isEmpty()) {
-            JOptionPane.showMessageDialog(null, Localizer.getInstance().getMessage("lblEnterYourIdeaMandatory"), Localizer.getInstance().getMessage("lblWarning"), JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, java.util.ResourceBundle.getBundle("otherMessage").getString("lblEnterYourIdeaMandatory"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblWarning"), JOptionPane.INFORMATION_MESSAGE);
             return;
         }
         if (title.length() > 100) {
-            JOptionPane.showMessageDialog(null, Localizer.getInstance().getMessage("lblEnterYourIdeaTooLong"), Localizer.getInstance().getMessage("lblWarning"), JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, java.util.ResourceBundle.getBundle("otherMessage").getString("lblEnterYourIdeaTooLong"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblWarning"), JOptionPane.INFORMATION_MESSAGE);
             return;
         }
         String type = cleanUpType(cbFeedbackType.getSelectedItem().toString());
         String message = txtFeedbackMessage.getText().trim();
         if (message.isEmpty()) {
-            JOptionPane.showMessageDialog(null, Localizer.getInstance().getMessage("lblDescribeYourIdeaMandatory"), Localizer.getInstance().getMessage("lblWarning"), JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, java.util.ResourceBundle.getBundle("otherMessage").getString("lblDescribeYourIdeaMandatory"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblWarning"), JOptionPane.INFORMATION_MESSAGE);
             return;
         }
         if (message.length() > 300) {
-            JOptionPane.showMessageDialog(null, Localizer.getInstance().getMessage("lblDescribeYourIdeaTooLong"), Localizer.getInstance().getMessage("lblWarning"), JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, java.util.ResourceBundle.getBundle("otherMessage").getString("lblDescribeYourIdeaTooLong"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblWarning"), JOptionPane.INFORMATION_MESSAGE);
         }
         String email = txtEmail.getText().trim();
         if (email.length() > 100) {
             email = email.substring(0, 100);
         }
         if (SessionHandler.sendFeedback(title, type, message, email)) {
-            JOptionPane.showMessageDialog(null, Localizer.getInstance().getMessage("lblFeedbackWasSent"), Localizer.getInstance().getMessage("lblSuccess"), JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, java.util.ResourceBundle.getBundle("otherMessage").getString("lblFeedbackWasSent"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblSuccess"), JOptionPane.INFORMATION_MESSAGE);
             reset();
             dialog.setVisible(false);
         } else {
-            JOptionPane.showMessageDialog(null, Localizer.getInstance().getMessage("lblCouldntSentFeedback"), Localizer.getInstance().getMessage("lblError"), JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, java.util.ResourceBundle.getBundle("otherMessage").getString("lblCouldntSentFeedback"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblError"), JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_sendButtonActionPerformed
 

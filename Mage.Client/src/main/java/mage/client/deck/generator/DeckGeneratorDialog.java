@@ -3,7 +3,6 @@ package mage.client.deck.generator;
 import mage.cards.decks.Deck;
 import mage.client.MageFrame;
 import mage.client.dialog.PreferencesDialog;
-import mage.client.util.Localizer;
 import mage.client.util.gui.ColorsChooser;
 import mage.client.util.gui.FastSearchUtil;
 import mage.client.util.sets.ConstructedFormats;
@@ -123,7 +122,7 @@ public class DeckGeneratorDialog {
         c.gridx = 0;
         c.gridy = 2;
         c.weightx = 0.10;
-        JLabel textDeckSize = new JLabel(Localizer.getInstance().getMessage("lblDeckSize") + ":");
+        JLabel textDeckSize = new JLabel(java.util.ResourceBundle.getBundle("otherMessage").getString("lblDeckSize") + ":");
         mainPanel.add(textDeckSize, c);
 
         // Deck size dropdown

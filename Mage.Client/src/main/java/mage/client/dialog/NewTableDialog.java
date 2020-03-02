@@ -8,7 +8,6 @@ import mage.client.table.TablePlayerPanel;
 import mage.client.util.Event;
 import mage.client.util.IgnoreList;
 import mage.client.util.Listener;
-import mage.client.util.Localizer;
 import mage.constants.MatchTimeLimit;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
@@ -518,7 +517,7 @@ public class NewTableDialog extends MageDialog {
         // run
         table = SessionHandler.createTable(roomId, options);
         if (table == null) {
-            JOptionPane.showMessageDialog(MageFrame.getDesktop(), Localizer.getInstance().getMessage("lblErrorCreatingTable"), Localizer.getInstance().getMessage("lblError"), JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(MageFrame.getDesktop(), java.util.ResourceBundle.getBundle("otherMessage").getString("lblErrorCreatingTable"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblError"), JOptionPane.ERROR_MESSAGE);
             return;
         }
         try {
@@ -787,7 +786,7 @@ public class NewTableDialog extends MageDialog {
 
     private void handleError(Exception ex) {
         logger.fatal("Error loading deck", ex);
-        MageFrame.getInstance().showErrorDialog(Localizer.getInstance().getMessage("lblErrorLoadingDeck"), ex.getMessage());
+        MageFrame.getInstance().showErrorDialog(java.util.ResourceBundle.getBundle("otherMessage").getString("lblErrorLoadingDeck"), ex.getMessage());
     }
 
     public void showDialog(UUID roomId) {

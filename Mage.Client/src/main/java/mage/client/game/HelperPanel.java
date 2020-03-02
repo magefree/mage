@@ -7,7 +7,6 @@ import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.game.FeedbackPanel.FeedbackMode;
 import mage.client.util.GUISizeHelper;
-import mage.client.util.Localizer;
 import mage.constants.TurnPhase;
 
 import javax.swing.*;
@@ -151,19 +150,19 @@ public class HelperPanel extends JPanel {
         buttonGrid.setOpaque(false);
         buttonContainer.add(buttonGrid);
 
-        btnSpecial = new JButton(Localizer.getInstance().getMessage("lblSpecial"));
+        btnSpecial = new JButton(java.util.ResourceBundle.getBundle("otherMessage").getString("lblSpecial"));
         btnSpecial.setVisible(false);
         buttonGrid.add(btnSpecial);
 
-        btnLeft = new JButton(Localizer.getInstance().getMessage("lblOK"));
+        btnLeft = new JButton(java.util.ResourceBundle.getBundle("otherMessage").getString("lblOK"));
         btnLeft.setVisible(false);
         buttonGrid.add(btnLeft);
 
-        btnRight = new JButton(Localizer.getInstance().getMessage("lblCancel"));
+        btnRight = new JButton(java.util.ResourceBundle.getBundle("otherMessage").getString("lblCancel"));
         btnRight.setVisible(false);
         buttonGrid.add(btnRight);
 
-        btnUndo = new JButton(Localizer.getInstance().getMessage("lblUndo"));
+        btnUndo = new JButton(java.util.ResourceBundle.getBundle("otherMessage").getString("lblUndo"));
         btnUndo.setVisible(false);
         buttonGrid.add(btnUndo);
 
@@ -440,15 +439,15 @@ public class HelperPanel extends JPanel {
 
         // String tooltipText = "";
         JMenuItem menuItem;
-        menuItem = new JMenuItem(Localizer.getInstance().getMessage("lblAlwaysYesForSameTextAbility"));
+        menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblAlwaysYesForSameTextAbility"));
         menuItem.setActionCommand(CMD_AUTO_ANSWER_ID_YES);
         menuItem.addActionListener(actionListener);
-        menuItem.setToolTipText(Localizer.getInstance().getMessage("htmlAlwaysYesForSameTextAbilityDest"));
+        menuItem.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("htmlAlwaysYesForSameTextAbilityDest"));
         popupMenuAskYes.add(menuItem);
 
-        menuItem = new JMenuItem(Localizer.getInstance().getMessage("lblAlwaysNoForSameTextAbility"));
+        menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblAlwaysNoForSameTextAbility"));
         menuItem.setActionCommand(CMD_AUTO_ANSWER_ID_NO);
-        menuItem.setToolTipText(Localizer.getInstance().getMessage("htmlAlwaysNoForSameTextAbilityDest"));
+        menuItem.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("htmlAlwaysNoForSameTextAbilityDest"));
         menuItem.addActionListener(actionListener);
         popupMenuAskNo.add(menuItem);
 
@@ -458,18 +457,18 @@ public class HelperPanel extends JPanel {
         menuItem.addActionListener(actionListener);
         popupMenuAskYes.add(menuItem);
 
-        menuItem = new JMenuItem(Localizer.getInstance().getMessage("lblAlwaysNoForSameText"));
+        menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblAlwaysNoForSameText"));
         menuItem.setActionCommand(CMD_AUTO_ANSWER_NAME_NO);
-        menuItem.setToolTipText(Localizer.getInstance().getMessage("htmlAlwaysNoForSameTextDest"));
+        menuItem.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("htmlAlwaysNoForSameTextDest"));
         menuItem.addActionListener(actionListener);
         popupMenuAskNo.add(menuItem);
 
-        menuItem = new JMenuItem(Localizer.getInstance().getMessage("lblDeleteAllAutomaticYesSettings"));
+        menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblDeleteAllAutomaticYesSettings"));
         menuItem.setActionCommand(CMD_AUTO_ANSWER_RESET_ALL);
         menuItem.addActionListener(actionListener);
         popupMenuAskYes.add(menuItem);
 
-        menuItem = new JMenuItem(Localizer.getInstance().getMessage("lblDeleteAllAutomaticNoSettings"));
+        menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblDeleteAllAutomaticNoSettings"));
         menuItem.setActionCommand(CMD_AUTO_ANSWER_RESET_ALL);
         menuItem.addActionListener(actionListener);
         popupMenuAskNo.add(menuItem);

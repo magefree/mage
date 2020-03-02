@@ -7,7 +7,6 @@ import mage.client.util.CardLanguage;
 import mage.client.util.ClientDefaultSettings;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.ImageHelper;
-import mage.client.util.Localizer;
 import mage.client.util.gui.BufferedImageBuilder;
 import mage.players.net.UserData;
 import mage.players.net.UserGroup;
@@ -2896,8 +2895,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
             prefs.flush();
         } catch (BackingStoreException ex) {
             logger.error("Error: couldn't save preferences", ex);
-            UserRequestMessage message = new UserRequestMessage(Localizer.getInstance().getMessage("lblError"), Localizer.getInstance().getMessage("lblCouldntSavePreferences"));
-            message.setButton1(Localizer.getInstance().getMessage("lblOK"), null);
+            UserRequestMessage message = new UserRequestMessage(java.util.ResourceBundle.getBundle("otherMessage").getString("lblError"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblCouldntSavePreferences"));
+            message.setButton1(java.util.ResourceBundle.getBundle("otherMessage").getString("lblOK"), null);
             MageFrame.getInstance().showUserRequestDialog(message);
         }
 
@@ -3757,7 +3756,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
             prefs.flush();
         } catch (BackingStoreException ex) {
             ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, Localizer.getInstance().getMessage("lblCouldntSavePreferences"));
+            JOptionPane.showMessageDialog(null, java.util.ResourceBundle.getBundle("otherMessage").getString("lblCouldntSavePreferences"));
         }
         updateCache(key, value);
     }

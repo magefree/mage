@@ -12,7 +12,6 @@ import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 import mage.cards.repository.ExpansionInfo;
 import mage.cards.repository.ExpansionRepository;
-import mage.client.util.Localizer;
 
 /**
  *
@@ -27,7 +26,7 @@ public class RandomPacksSelectorDialog extends javax.swing.JDialog {
     private boolean isRandomDraft;
     private boolean isRichManDraft;
     private String title = "";
-    public static final String randomDraftDescription = Localizer.getInstance().getMessage("lblRandomPacksSekectorDest");
+    public static final String randomDraftDescription = java.util.ResourceBundle.getBundle("otherMessage").getString("lblRandomPacksSekectorDest");
 
     public RandomPacksSelectorDialog(boolean isRandomDraft, boolean isRichManDraft) {
         initComponents();
@@ -41,9 +40,9 @@ public class RandomPacksSelectorDialog extends javax.swing.JDialog {
         this.isRandomDraft = isRandomDraft;
         this.isRichManDraft = isRichManDraft;
         if (this.isRandomDraft) {
-            title = Localizer.getInstance().getMessage("lblRandomPacksSekector");
+            title = java.util.ResourceBundle.getBundle("otherMessage").getString("lblRandomPacksSekector");
         } else if (this.isRichManDraft) {
-            title = Localizer.getInstance().getMessage("lblRichManPacksSekector");
+            title = java.util.ResourceBundle.getBundle("otherMessage").getString("lblRichManPacksSekector");
         }
         setTitle(title);
     }
@@ -212,9 +211,9 @@ public class RandomPacksSelectorDialog extends javax.swing.JDialog {
 
     public void doApply() {
         if (getSelectedPacks().size() < 2 && isRandomDraft) {
-            JOptionPane.showMessageDialog(this, Localizer.getInstance().getMessage("lblAtLeastSelecteNSets", String.valueOf(2)), Localizer.getInstance().getMessage("lblError"), JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, String.format(java.util.ResourceBundle.getBundle("otherMessage").getString("lblAtLeastSelecteNSets"), String.valueOf(2)), java.util.ResourceBundle.getBundle("otherMessage").getString("lblError"), JOptionPane.ERROR_MESSAGE);
         } else if (getSelectedPacks().isEmpty() && isRichManDraft) {
-            JOptionPane.showMessageDialog(this, Localizer.getInstance().getMessage("lblAtLeastSelecteNSets", String.valueOf(1)), Localizer.getInstance().getMessage("lblError"), JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, String.format(java.util.ResourceBundle.getBundle("otherMessage").getString("lblAtLeastSelecteNSets"), String.valueOf(1)), java.util.ResourceBundle.getBundle("otherMessage").getString("lblError"), JOptionPane.ERROR_MESSAGE);
         } else {
             this.setVisible(false);
         }

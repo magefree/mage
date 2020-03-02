@@ -1,6 +1,5 @@
 package mage.client.table;
 
-import mage.client.util.Localizer;
 import mage.remote.MageRemoteException;
 import mage.view.MatchView;
 
@@ -11,7 +10,7 @@ import java.util.UUID;
 
 public class MatchesTableModel extends AbstractTableModel {
 
-    private final String[] columnNames = new String[]{Localizer.getInstance().getMessage("lblDeckType"), Localizer.getInstance().getMessage("lblPlayer"), Localizer.getInstance().getMessage("lblGameType"), Localizer.getInstance().getMessage("lblRating"), Localizer.getInstance().getMessage("lblPoints"), Localizer.getInstance().getMessage("lblDuration"), Localizer.getInstance().getMessage("lblStartTime"), Localizer.getInstance().getMessage("lblEndTime"), Localizer.getInstance().getMessage("lblAction")};
+    private final String[] columnNames = new String[]{java.util.ResourceBundle.getBundle("otherMessage").getString("lblDeckType"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblPlayer"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblGameType"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblRating"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblPoints"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblDuration"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblStartTime"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblEndTime"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblAction")};
     public static final int COLUMN_DURATION = 5;
     public static final int COLUMN_START = 6;
     public static final int COLUMN_END = 7;
@@ -85,9 +84,9 @@ public class MatchesTableModel extends AbstractTableModel {
                 return matches[arg0].getEndTime();
             case 8:
                 if (matches[arg0].isTournament()) {
-                    return Localizer.getInstance().getMessage("lblShow");
+                    return java.util.ResourceBundle.getBundle("otherMessage").getString("lblShow");
                 } else if (matches[arg0].isReplayAvailable()) {
-                    return Localizer.getInstance().getMessage("lblReplay");
+                    return java.util.ResourceBundle.getBundle("otherMessage").getString("lblReplay");
                 } else {
                     return "None";
                 }

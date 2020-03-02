@@ -7,7 +7,6 @@ import javax.swing.JComponent;
 import mage.client.MagePane;
 import mage.client.SessionHandler;
 import mage.client.plugins.impl.Plugins;
-import mage.client.util.Localizer;
 
 /**
  *
@@ -48,7 +47,7 @@ public class TablesPane extends MagePane {
     public void showTables() {
         UUID roomId = SessionHandler.getSession().getMainRoomId();
         if (roomId != null) {
-            this.setTitle(Localizer.getInstance().getMessage("lblTables"));
+            this.setTitle(java.util.ResourceBundle.getBundle("otherMessage").getString("lblTables"));
             tablesPanel.showTables(roomId);
             this.repaint();
         }

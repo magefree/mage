@@ -1,7 +1,6 @@
 package mage.client.table;
 
 import mage.client.SessionHandler;
-import mage.client.util.Localizer;
 import mage.constants.SkillLevel;
 import mage.remote.MageRemoteException;
 import mage.view.TableView;
@@ -17,13 +16,13 @@ public class TablesTableModel extends AbstractTableModel {
     final ImageIcon tourneyIcon = new ImageIcon(getClass().getResource("/tables/tourney_icon.png")) {
         @Override
         public String toString() {
-            return Localizer.getInstance().getMessage("lblTournament");
+            return java.util.ResourceBundle.getBundle("otherMessage").getString("lblTournament");
         }
     };
     final ImageIcon matchIcon = new ImageIcon(getClass().getResource("/tables/match_icon.png")) {
         @Override
         public String toString() {
-            return Localizer.getInstance().getMessage("lblMatch");
+            return java.util.ResourceBundle.getBundle("otherMessage").getString("lblMatch");
         }
     };
 
@@ -43,12 +42,12 @@ public class TablesTableModel extends AbstractTableModel {
     public static final int COLUMN_MINIMUM_RATING = 13;
     public static final int ACTION_COLUMN = 14; // column the action is located (starting with 0)
 
-    public static final String RATED_VALUE_YES = Localizer.getInstance().getMessage("lblYes");
+    public static final String RATED_VALUE_YES = java.util.ResourceBundle.getBundle("otherMessage").getString("lblYes");
     public static final String RATED_VALUE_NO = "";
 
-    public static final String PASSWORD_VALUE_YES = Localizer.getInstance().getMessage("lblYes");
+    public static final String PASSWORD_VALUE_YES = java.util.ResourceBundle.getBundle("otherMessage").getString("lblYes");
 
-    private final String[] columnNames = new String[]{"M/T", Localizer.getInstance().getMessage("lblDeckType"), Localizer.getInstance().getMessage("lblName"), Localizer.getInstance().getMessage("lblSeats"), Localizer.getInstance().getMessage("lblOwnerOrPlayers"), Localizer.getInstance().getMessage("lblGameType"), Localizer.getInstance().getMessage("lblInformation"), Localizer.getInstance().getMessage("lblState"), Localizer.getInstance().getMessage("lblPassword"), Localizer.getInstance().getMessage("lblCreatedOrStarted"), Localizer.getInstance().getMessage("lblSkillLevel"), Localizer.getInstance().getMessage("lblRated"), Localizer.getInstance().getMessage("lblQuitPercent"), Localizer.getInstance().getMessage("lblMinRating"), Localizer.getInstance().getMessage("lblAction")};
+    private final String[] columnNames = new String[]{"M/T", java.util.ResourceBundle.getBundle("otherMessage").getString("lblDeckType"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblName"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblSeats"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblOwnerOrPlayers"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblGameType"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblInformation"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblState"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblPassword"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblCreatedOrStarted"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblSkillLevel"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblRated"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblQuitPercent"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblMinRating"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblAction")};
 
     private TableView[] tables = new TableView[0];
 
@@ -156,22 +155,22 @@ public class TablesTableModel extends AbstractTableModel {
                         if (SessionHandler.getSession() != null && owner.equals(SessionHandler.getUserName())) {
                             return "";
                         }
-                        return Localizer.getInstance().getMessage("lblJoin");
+                        return java.util.ResourceBundle.getBundle("otherMessage").getString("lblJoin");
                     case CONSTRUCTING:
                     case DRAFTING:
                         if (tables[rowIndex].isTournament()) {
-                            return Localizer.getInstance().getMessage("lblShow");
+                            return java.util.ResourceBundle.getBundle("otherMessage").getString("lblShow");
                         }
                     case DUELING:
                         if (tables[rowIndex].isTournament()) {
-                            return Localizer.getInstance().getMessage("lblShow");
+                            return java.util.ResourceBundle.getBundle("otherMessage").getString("lblShow");
                         } else {
                             owner = tables[rowIndex].getControllerName();
                             if (SessionHandler.getSession() != null && owner.equals(SessionHandler.getUserName())) {
                                 return "";
                             }
                             if (tables[rowIndex].getSpectatorsAllowed()) {
-                                return Localizer.getInstance().getMessage("lblWatch");
+                                return java.util.ResourceBundle.getBundle("otherMessage").getString("lblWatch");
                             }
                             return "";
                         }

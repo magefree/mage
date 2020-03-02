@@ -14,7 +14,6 @@ import mage.cards.decks.DeckFileFilter;
 import mage.client.MageFrame;
 import mage.client.deck.generator.DeckGenerator;
 import mage.client.util.ClientDefaultSettings;
-import mage.client.util.Localizer;
 
 /**
  *
@@ -51,7 +50,7 @@ public class NewPlayerPanel extends javax.swing.JPanel {
         if (!lastFolder.isEmpty()) {
             fcSelectDeck.setCurrentDirectory(new File(lastFolder));
         }
-        int ret = fcSelectDeck.showDialog(this, Localizer.getInstance().getMessage("lblSelectDeck"));
+        int ret = fcSelectDeck.showDialog(this, java.util.ResourceBundle.getBundle("otherMessage").getString("lblSelectDeck"));
         if (ret == JFileChooser.APPROVE_OPTION) {
             File file = fcSelectDeck.getSelectedFile();
             this.txtPlayerDeck.setText(file.getPath());

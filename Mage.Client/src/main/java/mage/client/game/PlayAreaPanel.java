@@ -6,7 +6,6 @@ import mage.client.SessionHandler;
 import mage.client.cards.BigCard;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.GUISizeHelper;
-import mage.client.util.Localizer;
 import mage.constants.PlayerAction;
 import mage.view.GameView;
 import mage.view.PlayerView;
@@ -161,21 +160,21 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             }
         };
 
-        menuItem = new JMenuItem(Localizer.getInstance().getMessage("htmlF2ConfirmRequest"));
+        menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("htmlF2ConfirmRequest"));
         menuItem.setActionCommand("F2");
         menuItem.setMnemonic(KeyEvent.VK_O);
         popupMenu.add(menuItem);
         menuItem.addActionListener(skipListener);
 
-        menuItem = new JMenuItem(Localizer.getInstance().getMessage("htmlF3CancelSkipAction"));
+        menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("htmlF3CancelSkipAction"));
         menuItem.setActionCommand("F3");
         menuItem.setMnemonic(KeyEvent.VK_N);
         popupMenu.add(menuItem);
         menuItem.addActionListener(skipListener);
 
-        holdPriorityMenuItem = new JCheckBoxMenuItem("<html><b>" + (System.getProperty("os.name").contains("Mac OS X") ? "Cmd" : "Ctrl") + "+click</b> - " + Localizer.getInstance().getMessage("lblHoldPriority"));
+        holdPriorityMenuItem = new JCheckBoxMenuItem("<html><b>" + (System.getProperty("os.name").contains("Mac OS X") ? "Cmd" : "Ctrl") + "+click</b> - " + java.util.ResourceBundle.getBundle("otherMessage").getString("lblHoldPriority"));
         holdPriorityMenuItem.setMnemonic(KeyEvent.VK_P);
-        holdPriorityMenuItem.setToolTipText(Localizer.getInstance().getMessage("htmlHoldPriorityDest"));
+        holdPriorityMenuItem.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("htmlHoldPriorityDest"));
         popupMenu.add(holdPriorityMenuItem);
         holdPriorityMenuItem.addActionListener(e -> {
             boolean holdPriority = ((JCheckBoxMenuItem) e.getSource()).getState();
@@ -183,48 +182,48 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             gamePanel.holdPriority(holdPriority);
         });
 
-        JMenu skipMenu = new JMenu(Localizer.getInstance().getMessage("lblSkip"));
+        JMenu skipMenu = new JMenu(java.util.ResourceBundle.getBundle("otherMessage").getString("lblSkip"));
         skipMenu.setMnemonic(KeyEvent.VK_S);
         popupMenu.add(skipMenu);
 
-        String tooltipText = Localizer.getInstance().getMessage("htmlSkipButtonDest");
-        String everythingTooltipText = Localizer.getInstance().getMessage("htmlEverythingSkipButtonDest");
-        menuItem = new JMenuItem(Localizer.getInstance().getMessage("htmlF4SkipUntilNextTurn"));
+        String tooltipText = java.util.ResourceBundle.getBundle("otherMessage").getString("htmlSkipButtonDest");
+        String everythingTooltipText = java.util.ResourceBundle.getBundle("otherMessage").getString("htmlEverythingSkipButtonDest");
+        menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("htmlF4SkipUntilNextTurn"));
         menuItem.setActionCommand("F4");
         menuItem.setToolTipText(tooltipText);
         menuItem.setMnemonic(KeyEvent.VK_T);
         skipMenu.add(menuItem);
         menuItem.addActionListener(skipListener);
 
-        menuItem = new JMenuItem(Localizer.getInstance().getMessage("htmlF5SkipUntilNextEndStep"));
+        menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("htmlF5SkipUntilNextEndStep"));
         menuItem.setActionCommand("F5");
         menuItem.setToolTipText(tooltipText);
         menuItem.setMnemonic(KeyEvent.VK_E);
         skipMenu.add(menuItem);
         menuItem.addActionListener(skipListener);
 
-        menuItem = new JMenuItem(Localizer.getInstance().getMessage("htmlF6SkipEverythingUntilNextTurn"));
+        menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("htmlF6SkipEverythingUntilNextTurn"));
         menuItem.setActionCommand("F6");
         menuItem.setToolTipText(everythingTooltipText);
         menuItem.setMnemonic(KeyEvent.VK_U);
         skipMenu.add(menuItem);
         menuItem.addActionListener(skipListener);
 
-        menuItem = new JMenuItem(Localizer.getInstance().getMessage("htmlF7SkipUntilNextMainBegin"));
+        menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("htmlF7SkipUntilNextMainBegin"));
         menuItem.setToolTipText(tooltipText);
         menuItem.setActionCommand("F7");
         menuItem.setMnemonic(KeyEvent.VK_M);
         skipMenu.add(menuItem);
         menuItem.addActionListener(skipListener);
 
-        menuItem = new JMenuItem(Localizer.getInstance().getMessage("htmlF9SkipEverythingUntilYourNextTurn"));
+        menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("htmlF9SkipEverythingUntilYourNextTurn"));
         menuItem.setActionCommand("F9");
         menuItem.setToolTipText(everythingTooltipText);
         menuItem.setMnemonic(KeyEvent.VK_V);
         skipMenu.add(menuItem);
         menuItem.addActionListener(skipListener);
 
-        menuItem = new JMenuItem(Localizer.getInstance().getMessage("htmlF11SkipUntilYourNextTurnProirEndStep"));
+        menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("htmlF11SkipUntilYourNextTurnProirEndStep"));
         menuItem.setActionCommand("F11");
         menuItem.setToolTipText(everythingTooltipText);
         menuItem.setMnemonic(KeyEvent.VK_P);
@@ -233,13 +232,13 @@ public class PlayAreaPanel extends javax.swing.JPanel {
 
         popupMenu.addSeparator();
 
-        JMenu manaPoolMenu = new JMenu(Localizer.getInstance().getMessage("lblManaPayment"));
+        JMenu manaPoolMenu = new JMenu(java.util.ResourceBundle.getBundle("otherMessage").getString("lblManaPayment"));
         manaPoolMenu.setMnemonic(KeyEvent.VK_M);
         popupMenu.add(manaPoolMenu);
 
-        manaPoolMenuItem1 = new JCheckBoxMenuItem(Localizer.getInstance().getMessage("lblAutoPay"), true);
+        manaPoolMenuItem1 = new JCheckBoxMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblAutoPay"), true);
         manaPoolMenuItem1.setMnemonic(KeyEvent.VK_A);
-        manaPoolMenuItem1.setToolTipText(Localizer.getInstance().getMessage("htmlAutomaticallyPayDest"));
+        manaPoolMenuItem1.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("htmlAutomaticallyPayDest"));
         manaPoolMenu.add(manaPoolMenuItem1);
 
         // Auto pay mana from mana pool
@@ -250,9 +249,9 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             SessionHandler.sendPlayerAction(manaPoolAutomatic ? PlayerAction.MANA_AUTO_PAYMENT_ON : PlayerAction.MANA_AUTO_PAYMENT_OFF, gameId, null);
         });
 
-        manaPoolMenuItem2 = new JCheckBoxMenuItem(Localizer.getInstance().getMessage("lblNoAlreadyAutoPayMana"), true);
+        manaPoolMenuItem2 = new JCheckBoxMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblNoAlreadyAutoPayMana"), true);
         manaPoolMenuItem2.setMnemonic(KeyEvent.VK_N);
-        manaPoolMenuItem2.setToolTipText(Localizer.getInstance().getMessage("htmlNoAlreadyAutoPayManaDest"));
+        manaPoolMenuItem2.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("htmlNoAlreadyAutoPayManaDest"));
         manaPoolMenu.add(manaPoolMenuItem2);
 
         // Auto pay mana from mana pool
@@ -263,9 +262,9 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             SessionHandler.sendPlayerAction(manaPoolAutomaticRestricted ? PlayerAction.MANA_AUTO_PAYMENT_RESTRICTED_ON : PlayerAction.MANA_AUTO_PAYMENT_RESTRICTED_OFF, gameId, null);
         });
 
-        useFirstManaAbilityItem = new JCheckBoxMenuItem(Localizer.getInstance().getMessage("lblFirstUseManaAbilityWhenTapLands"), false);
+        useFirstManaAbilityItem = new JCheckBoxMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblFirstUseManaAbilityWhenTapLands"), false);
         useFirstManaAbilityItem.setMnemonic(KeyEvent.VK_F);
-        useFirstManaAbilityItem.setToolTipText(Localizer.getInstance().getMessage("htmlFirstUseManaAbilityWhenTapLandsDest"));
+        useFirstManaAbilityItem.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("htmlFirstUseManaAbilityWhenTapLandsDest"));
         manaPoolMenu.add(useFirstManaAbilityItem);
 
         // Use first mana ability of lands
@@ -276,46 +275,46 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             SessionHandler.sendPlayerAction(useFirstManaAbility ? PlayerAction.USE_FIRST_MANA_ABILITY_ON : PlayerAction.USE_FIRST_MANA_ABILITY_OFF, gameId, null);
         });
 
-        JMenu automaticConfirmsMenu = new JMenu(Localizer.getInstance().getMessage("lblAutoConfirms"));
+        JMenu automaticConfirmsMenu = new JMenu(java.util.ResourceBundle.getBundle("otherMessage").getString("lblAutoConfirms"));
         automaticConfirmsMenu.setMnemonic(KeyEvent.VK_U);
         popupMenu.add(automaticConfirmsMenu);
 
-        menuItem = new JMenuItem(Localizer.getInstance().getMessage("lblResetAutoSelectReplacementEffects"));
+        menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblResetAutoSelectReplacementEffects"));
         menuItem.setMnemonic(KeyEvent.VK_R);
-        menuItem.setToolTipText(Localizer.getInstance().getMessage("lblResetAutoSelectReplacementEffectsDest"));
+        menuItem.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblResetAutoSelectReplacementEffectsDest"));
         automaticConfirmsMenu.add(menuItem);
         // Reset the replacement effcts that were auto selected for the game
         menuItem.addActionListener(e -> SessionHandler.sendPlayerAction(PlayerAction.RESET_AUTO_SELECT_REPLACEMENT_EFFECTS, gameId, null));
 
-        menuItem = new JMenuItem(Localizer.getInstance().getMessage("lblResetAutoSelectTriggeredAbilitiesOrder"));
+        menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblResetAutoSelectTriggeredAbilitiesOrder"));
         menuItem.setMnemonic(KeyEvent.VK_T);
-        menuItem.setToolTipText(Localizer.getInstance().getMessage("lblResetAutoSelectTriggeredAbilitiesOrderDest"));
+        menuItem.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblResetAutoSelectTriggeredAbilitiesOrderDest"));
         automaticConfirmsMenu.add(menuItem);
         // Reset the replacement effcts that were auto selected for the game
         menuItem.addActionListener(e -> SessionHandler.sendPlayerAction(PlayerAction.TRIGGER_AUTO_ORDER_RESET_ALL, gameId, null));
 
-        menuItem = new JMenuItem(Localizer.getInstance().getMessage("lblResetAutoAnswersRequests"));
+        menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblResetAutoAnswersRequests"));
         menuItem.setMnemonic(KeyEvent.VK_T);
-        menuItem.setToolTipText(Localizer.getInstance().getMessage("lblResetAutoAnswersRequestsDest"));
+        menuItem.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblResetAutoAnswersRequestsDest"));
         automaticConfirmsMenu.add(menuItem);
         // Reset the replacement effcts that were auto selected for the game
         menuItem.addActionListener(e -> SessionHandler.sendPlayerAction(PlayerAction.REQUEST_AUTO_ANSWER_RESET_ALL, gameId, null));
 
-        JMenu handCardsMenu = new JMenu(Localizer.getInstance().getMessage("lblHand"));
+        JMenu handCardsMenu = new JMenu(java.util.ResourceBundle.getBundle("otherMessage").getString("lblHand"));
         handCardsMenu.setMnemonic(KeyEvent.VK_H);
         popupMenu.add(handCardsMenu);
 
         if (!options.playerItself) {
-            menuItem = new JMenuItem(Localizer.getInstance().getMessage("lblRequestSeeHandPermission"));
+            menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblRequestSeeHandPermission"));
             menuItem.setMnemonic(KeyEvent.VK_P);
             handCardsMenu.add(menuItem);
 
             // Request to see hand cards
             menuItem.addActionListener(e -> SessionHandler.sendPlayerAction(PlayerAction.REQUEST_PERMISSION_TO_SEE_HAND_CARDS, gameId, playerId));
         } else {
-            allowViewHandCardsMenuItem = new JCheckBoxMenuItem(Localizer.getInstance().getMessage("lblAllowSeeHandRequests"), allowRequestToShowHandCards);
+            allowViewHandCardsMenuItem = new JCheckBoxMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblAllowSeeHandRequests"), allowRequestToShowHandCards);
             allowViewHandCardsMenuItem.setMnemonic(KeyEvent.VK_A);
-            allowViewHandCardsMenuItem.setToolTipText(Localizer.getInstance().getMessage("lblAllowSeeHandRequestsDest"));
+            allowViewHandCardsMenuItem.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblAllowSeeHandRequestsDest"));
             handCardsMenu.add(allowViewHandCardsMenuItem);
 
             // requests allowed (disable -> enable to reset requested list)
@@ -325,9 +324,9 @@ public class PlayAreaPanel extends javax.swing.JPanel {
                 SessionHandler.sendPlayerAction(requestsAllowed ? PlayerAction.PERMISSION_REQUESTS_ALLOWED_ON : PlayerAction.PERMISSION_REQUESTS_ALLOWED_OFF, gameId, null);
             });
 
-            menuItem = new JMenuItem(Localizer.getInstance().getMessage("lblRevokeAllSeeHandPermission"));
+            menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblRevokeAllSeeHandPermission"));
             menuItem.setMnemonic(KeyEvent.VK_R);
-            menuItem.setToolTipText(Localizer.getInstance().getMessage("lblRevokeAllAllowRequests"));
+            menuItem.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblRevokeAllAllowRequests"));
             handCardsMenu.add(menuItem);
 
             // revoke permissions to see hand cards
@@ -340,30 +339,30 @@ public class PlayAreaPanel extends javax.swing.JPanel {
                 SessionHandler.sendPlayerAction(PlayerAction.ROLLBACK_TURNS, gameId, turnsToRollBack);
             };
 
-            JMenu rollbackMainItem = new JMenu(Localizer.getInstance().getMessage("lblRollbacks"));
+            JMenu rollbackMainItem = new JMenu(java.util.ResourceBundle.getBundle("otherMessage").getString("lblRollbacks"));
             rollbackMainItem.setMnemonic(KeyEvent.VK_R);
-            rollbackMainItem.setToolTipText(Localizer.getInstance().getMessage("lblRollbackDest"));
+            rollbackMainItem.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblRollbackDest"));
             popupMenu.add(rollbackMainItem);
 
-            menuItem = new JMenuItem(Localizer.getInstance().getMessage("lblToCurrentTurnStart"));
+            menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblToCurrentTurnStart"));
             menuItem.setMnemonic(KeyEvent.VK_C);
             menuItem.setActionCommand("0");
             menuItem.addActionListener(rollBackActionListener);
             rollbackMainItem.add(menuItem);
 
-            menuItem = new JMenuItem(Localizer.getInstance().getMessage("lblToPreviousTurnStart"));
+            menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblToPreviousTurnStart"));
             menuItem.setMnemonic(KeyEvent.VK_P);
             menuItem.setActionCommand("1");
             menuItem.addActionListener(rollBackActionListener);
             rollbackMainItem.add(menuItem);
 
-            menuItem = new JMenuItem(Localizer.getInstance().getMessage("lblToBefore2TurnStart"));
+            menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblToBefore2TurnStart"));
             menuItem.setMnemonic(KeyEvent.VK_2);
             menuItem.setActionCommand("2");
             menuItem.addActionListener(rollBackActionListener);
             rollbackMainItem.add(menuItem);
 
-            menuItem = new JMenuItem(Localizer.getInstance().getMessage("lblToBefore3TurnStart"));
+            menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblToBefore3TurnStart"));
             menuItem.setMnemonic(KeyEvent.VK_3);
             menuItem.setActionCommand("3");
             menuItem.addActionListener(rollBackActionListener);
@@ -371,24 +370,24 @@ public class PlayAreaPanel extends javax.swing.JPanel {
 
         }
 
-        JMenu concedeMenu = new JMenu(Localizer.getInstance().getMessage("lblConcede"));
+        JMenu concedeMenu = new JMenu(java.util.ResourceBundle.getBundle("otherMessage").getString("lblConcede"));
         concedeMenu.setMnemonic(KeyEvent.VK_C);
         popupMenu.add(concedeMenu);
 
         ActionListener concedeListener = e -> {
             switch (e.getActionCommand()) {
                 case "Game": {
-                    UserRequestMessage message = new UserRequestMessage(Localizer.getInstance().getMessage("lblConfirmConcedeGame"), Localizer.getInstance().getMessage("lblAreYouSureConcedeGame"));
-                    message.setButton1(Localizer.getInstance().getMessage("lblNo"), null);
-                    message.setButton2(Localizer.getInstance().getMessage("lblYes"), PlayerAction.CLIENT_CONCEDE_GAME);
+                    UserRequestMessage message = new UserRequestMessage(java.util.ResourceBundle.getBundle("otherMessage").getString("lblConfirmConcedeGame"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblAreYouSureConcedeGame"));
+                    message.setButton1(java.util.ResourceBundle.getBundle("otherMessage").getString("lblNo"), null);
+                    message.setButton2(java.util.ResourceBundle.getBundle("otherMessage").getString("lblYes"), PlayerAction.CLIENT_CONCEDE_GAME);
                     message.setGameId(gameId);
                     MageFrame.getInstance().showUserRequestDialog(message);
                     break;
                 }
                 case "Match": {
-                    UserRequestMessage message = new UserRequestMessage(Localizer.getInstance().getMessage("lblConfirmConcedeMatch"), Localizer.getInstance().getMessage("lblAreYouSureConcedeMatch"));
-                    message.setButton1(Localizer.getInstance().getMessage("lblNo"), null);
-                    message.setButton2(Localizer.getInstance().getMessage("lblYes"), PlayerAction.CLIENT_CONCEDE_MATCH);
+                    UserRequestMessage message = new UserRequestMessage(java.util.ResourceBundle.getBundle("otherMessage").getString("lblConfirmConcedeMatch"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblAreYouSureConcedeMatch"));
+                    message.setButton1(java.util.ResourceBundle.getBundle("otherMessage").getString("lblNo"), null);
+                    message.setButton2(java.util.ResourceBundle.getBundle("otherMessage").getString("lblYes"), PlayerAction.CLIENT_CONCEDE_MATCH);
                     message.setGameId(gameId);
                     MageFrame.getInstance().showUserRequestDialog(message);
                     break;
@@ -399,18 +398,18 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         };
 
         // Concede Game
-        menuItem = new JMenuItem(Localizer.getInstance().getMessage("lblGame"));
+        menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblGame"));
         menuItem.setMnemonic(KeyEvent.VK_G);
         menuItem.setActionCommand("Game");
-        menuItem.setToolTipText(Localizer.getInstance().getMessage("lblConcedeGameDest"));
+        menuItem.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblConcedeGameDest"));
         concedeMenu.add(menuItem);
         menuItem.addActionListener(concedeListener);
 
         // Concede Match
-        menuItem = new JMenuItem(Localizer.getInstance().getMessage("lblMatch"));
+        menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblMatch"));
         menuItem.setMnemonic(KeyEvent.VK_M);
         menuItem.setActionCommand("Match");
-        menuItem.setToolTipText(Localizer.getInstance().getMessage("lblConcedeMatchDest"));
+        menuItem.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblConcedeMatchDest"));
         concedeMenu.add(menuItem);
         menuItem.addActionListener(concedeListener);
 
@@ -436,7 +435,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
 
         popupMenu.addSeparator();
 
-        menuItem = new JMenuItem(Localizer.getInstance().getMessage("htmlViewCurrentDeck"));
+        menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("htmlViewCurrentDeck"));
         menuItem.setMnemonic(KeyEvent.VK_V);
         popupMenu.add(menuItem);
 
@@ -449,19 +448,19 @@ public class PlayAreaPanel extends javax.swing.JPanel {
     private void addPopupMenuWatcher() {
         JMenuItem menuItem;
 
-        menuItem = new JMenuItem(Localizer.getInstance().getMessage("lblStopWatching"));
+        menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblStopWatching"));
         popupMenu.add(menuItem);
 
         // Stop watching
         menuItem.addActionListener(e -> {
-            UserRequestMessage message = new UserRequestMessage(Localizer.getInstance().getMessage("lblConfirmStopWatching"), Localizer.getInstance().getMessage("lblAreYouSureStopWatching"));
-            message.setButton1(Localizer.getInstance().getMessage("lblNo"), null);
-            message.setButton2(Localizer.getInstance().getMessage("lblYes"), PlayerAction.CLIENT_STOP_WATCHING);
+            UserRequestMessage message = new UserRequestMessage(java.util.ResourceBundle.getBundle("otherMessage").getString("lblConfirmStopWatching"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblAreYouSureStopWatching"));
+            message.setButton1(java.util.ResourceBundle.getBundle("otherMessage").getString("lblNo"), null);
+            message.setButton2(java.util.ResourceBundle.getBundle("otherMessage").getString("lblYes"), PlayerAction.CLIENT_STOP_WATCHING);
             message.setGameId(gameId);
             MageFrame.getInstance().showUserRequestDialog(message);
         });
 
-        menuItem = new JMenuItem(Localizer.getInstance().getMessage("lblRequestSeeHandPermission"));
+        menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblRequestSeeHandPermission"));
         popupMenu.add(menuItem);
 
         // Request to see hand cards

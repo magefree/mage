@@ -13,7 +13,6 @@ import java.util.UUID;
 import javax.swing.JComponent;
 import mage.client.MagePane;
 import mage.client.plugins.impl.Plugins;
-import mage.client.util.Localizer;
 
 /**
  *
@@ -50,7 +49,7 @@ public class DraftPane extends MagePane {
     }
 
     public void showDraft(UUID draftId) {
-        this.setTitle(Localizer.getInstance().getMessage("lblDraft") + " - " + draftId);
+        this.setTitle(java.util.ResourceBundle.getBundle("otherMessage").getString("lblDraft") + " - " + draftId);
         this.draftPanel1.showDraft(draftId);
     }
 

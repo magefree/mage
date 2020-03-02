@@ -8,7 +8,6 @@ package mage.client.tournament;
 
 import java.util.UUID;
 import mage.client.MagePane;
-import mage.client.util.Localizer;
 
 /**
  *
@@ -24,7 +23,7 @@ public class TournamentPane extends MagePane {
     }
 
     public void showTournament(UUID tournamentId) {
-        this.setTitle(Localizer.getInstance().getMessage("lblTournament") + " " + tournamentId);
+        this.setTitle(java.util.ResourceBundle.getBundle("otherMessage").getString("lblTournament") + " " + tournamentId);
         this.tournamentPanel.showTournament(tournamentId);
         this.repaint();
     }

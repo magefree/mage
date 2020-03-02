@@ -1,7 +1,6 @@
 package mage.client.dialog;
 
 import mage.client.MageFrame;
-import mage.client.util.Localizer;
 import mage.client.util.gui.FastSearchUtil;
 import mage.client.util.gui.MageDialogState;
 
@@ -44,7 +43,7 @@ public class DownloadImagesDialog extends MageDialog {
         sizeModeMessageOnly.width = sizeModeMessageOnly.width / 2;
 
         // Close the dialog when Esc is pressed
-        String cancelName = Localizer.getInstance().getMessage("lblCancel");
+        String cancelName = java.util.ResourceBundle.getBundle("otherMessage").getString("lblCancel");
         InputMap inputMap = getRootPane().getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), cancelName);
         ActionMap actionMap = getRootPane().getActionMap();
@@ -176,8 +175,8 @@ public class DownloadImagesDialog extends MageDialog {
         //this.setLocationRelativeTo(null); // center screen //FIX
 
         // icons on tabs left side
-        setTabTitle(0, Localizer.getInstance().getMessage("lblStandardDownload"), "/buttons/card_panel.png");
-        setTabTitle(1, Localizer.getInstance().getMessage("lblCustomDownload"), "/buttons/list_panel.png");
+        setTabTitle(0, java.util.ResourceBundle.getBundle("otherMessage").getString("lblStandardDownload"), "/buttons/card_panel.png");
+        setTabTitle(1, java.util.ResourceBundle.getBundle("otherMessage").getString("lblCustomDownload"), "/buttons/list_panel.png");
 
         // TODO: add manual mode as tab
         this.tabsList.getTabComponentAt(1).setEnabled(false);

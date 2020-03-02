@@ -3,7 +3,6 @@ package mage.client.dialog;
 import mage.client.MageFrame;
 import mage.client.SessionHandler;
 import mage.client.preference.MagePreferences;
-import mage.client.util.Localizer;
 import mage.remote.Connection;
 import org.apache.log4j.Logger;
 
@@ -203,7 +202,7 @@ public class RegisterUserDialog extends MageDialog {
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         if (!Arrays.equals(this.txtPassword.getPassword(), this.txtPasswordConfirmation.getPassword())) {
-            MageFrame.getInstance().showError(Localizer.getInstance().getMessage("lblPasswordsDontMatch"));
+            MageFrame.getInstance().showError(java.util.ResourceBundle.getBundle("otherMessage").getString("lblPasswordsDontMatch"));
             return;
         }
         connection = new Connection();
@@ -225,7 +224,7 @@ public class RegisterUserDialog extends MageDialog {
 
         @Override
         protected Boolean doInBackground() throws Exception {
-            lblStatus.setText(Localizer.getInstance().getMessage("lblConnecting"));
+            lblStatus.setText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblConnecting"));
             btnRegister.setEnabled(false);
             result = SessionHandler.register(connection);
             return result;
@@ -243,20 +242,20 @@ public class RegisterUserDialog extends MageDialog {
                     MagePreferences.setPassword(connection.getHost(), connection.getPassword());
                     MagePreferences.setEmail(connection.getHost(), connection.getEmail());
 
-                    String message = Localizer.getInstance().getMessage("lblRegistrationSucceeded");
+                    String message = java.util.ResourceBundle.getBundle("otherMessage").getString("lblRegistrationSucceeded");
                     lblStatus.setText(message);
                     MageFrame.getInstance().showMessage(message);
                     hideDialog();
                 } else {
-                    lblStatus.setText(Localizer.getInstance().getMessage("lblCouldNotRegister"));
+                    lblStatus.setText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblCouldNotRegister"));
                 }
             } catch (InterruptedException | ExecutionException ex) {
                 logger.fatal("Registration task error", ex);
             } catch (CancellationException ex) {
                 logger.info("Registration was canceled");
-                lblStatus.setText(Localizer.getInstance().getMessage("lblRegistrationWasCanceled"));
+                lblStatus.setText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblRegistrationWasCanceled"));
             } catch (TimeoutException ex) {
-                logger.fatal(Localizer.getInstance().getMessage("lblRegistrationTimeout") + ": ", ex);
+                logger.fatal(java.util.ResourceBundle.getBundle("otherMessage").getString("lblRegistrationTimeout") + ": ", ex);
             } finally {
                 MageFrame.stopConnecting();
                 btnRegister.setEnabled(true);

@@ -9,7 +9,6 @@ import mage.client.table.TablesUtil;
 import mage.client.table.TournamentMatchesTableModel;
 import mage.client.util.Format;
 import mage.client.util.GUISizeHelper;
-import mage.client.util.Localizer;
 import mage.client.util.gui.TableUtil;
 import mage.client.util.gui.countryBox.CountryCellRenderer;
 import mage.constants.PlayerAction;
@@ -210,7 +209,7 @@ public class TournamentPanel extends javax.swing.JPanel {
                 c = c.getParent();
             }
             if (c != null) {
-                ((TournamentPane) c).setTitle(Localizer.getInstance().getMessage("lblTournament") + " [" + tournament.getTournamentName() + ']');
+                ((TournamentPane) c).setTitle(java.util.ResourceBundle.getBundle("otherMessage").getString("lblTournament") + " [" + tournament.getTournamentName() + ']');
             }
             txtName.setText(tournament.getTournamentName());
             txtType.setText(tournament.getTournamentType());
@@ -503,9 +502,9 @@ public class TournamentPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCloseWindowActionPerformed
 
     private void btnQuitTournamentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitTournamentActionPerformed
-        UserRequestMessage message = new UserRequestMessage(Localizer.getInstance().getMessage("lblTournamentQuitConfirm"), Localizer.getInstance().getMessage("lblAreYouSureQuitTournament"));
-        message.setButton1(Localizer.getInstance().getMessage("lblNo"), null);
-        message.setButton2(Localizer.getInstance().getMessage("lblYes"), PlayerAction.CLIENT_QUIT_TOURNAMENT);
+        UserRequestMessage message = new UserRequestMessage(java.util.ResourceBundle.getBundle("otherMessage").getString("lblTournamentQuitConfirm"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblAreYouSureQuitTournament"));
+        message.setButton1(java.util.ResourceBundle.getBundle("otherMessage").getString("lblNo"), null);
+        message.setButton2(java.util.ResourceBundle.getBundle("otherMessage").getString("lblYes"), PlayerAction.CLIENT_QUIT_TOURNAMENT);
         message.setTournamentId(tournamentId);
         MageFrame.getInstance().showUserRequestDialog(message);
     }//GEN-LAST:event_btnQuitTournamentActionPerformed
@@ -541,7 +540,7 @@ public class TournamentPanel extends javax.swing.JPanel {
 
 class TournamentPlayersTableModel extends AbstractTableModel {
 
-    private final String[] columnNames = new String[]{Localizer.getInstance().getMessage("lblLocale"), Localizer.getInstance().getMessage("lblPlayerName"), Localizer.getInstance().getMessage("lblState"), Localizer.getInstance().getMessage("lblPoints"), Localizer.getInstance().getMessage("lblPoints"), Localizer.getInstance().getMessage("lblHistory")};
+    private final String[] columnNames = new String[]{java.util.ResourceBundle.getBundle("otherMessage").getString("lblLocale"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblPlayerName"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblState"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblPoints"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblPoints"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblHistory")};
     private TournamentPlayerView[] players = new TournamentPlayerView[0];
 
     public void loadData(TournamentView tournament) {

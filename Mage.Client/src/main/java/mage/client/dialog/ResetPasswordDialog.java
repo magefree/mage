@@ -3,7 +3,6 @@ package mage.client.dialog;
 import mage.client.MageFrame;
 import mage.client.SessionHandler;
 import mage.client.preference.MagePreferences;
-import mage.client.util.Localizer;
 import mage.remote.Connection;
 import org.apache.log4j.Logger;
 
@@ -262,7 +261,7 @@ public class ResetPasswordDialog extends MageDialog {
 
     private void btnGetAuthTokenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetAuthTokenActionPerformed
         if (this.txtEmail.getText().isEmpty()) {
-            MageFrame.getInstance().showError(Localizer.getInstance().getMessage("lblPleaseEnterEmailAddress"));
+            MageFrame.getInstance().showError(java.util.ResourceBundle.getBundle("otherMessage").getString("lblPleaseEnterEmailAddress"));
             return;
         }
 
@@ -278,19 +277,19 @@ public class ResetPasswordDialog extends MageDialog {
 
     private void btnSubmitNewPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitNewPasswordActionPerformed
         if (this.txtEmail.getText().isEmpty()) {
-            MageFrame.getInstance().showError(Localizer.getInstance().getMessage("lblPleaseEnterEmailAddress"));
+            MageFrame.getInstance().showError(java.util.ResourceBundle.getBundle("otherMessage").getString("lblPleaseEnterEmailAddress"));
             return;
         }
         if (this.txtAuthToken.getText().isEmpty()) {
-            MageFrame.getInstance().showError(Localizer.getInstance().getMessage("lblPleaseEnterAuthToken"));
+            MageFrame.getInstance().showError(java.util.ResourceBundle.getBundle("otherMessage").getString("lblPleaseEnterAuthToken"));
             return;
         }
         if (String.valueOf(this.txtPassword.getPassword()).trim().isEmpty()) {
-            MageFrame.getInstance().showError(Localizer.getInstance().getMessage("lblPleaseEnterNewWassword"));
+            MageFrame.getInstance().showError(java.util.ResourceBundle.getBundle("otherMessage").getString("lblPleaseEnterNewWassword"));
             return;
         }
         if (!Arrays.equals(this.txtPassword.getPassword(), this.txtPasswordConfirmation.getPassword())) {
-            MageFrame.getInstance().showError(Localizer.getInstance().getMessage("lblPasswordsDontMatch"));
+            MageFrame.getInstance().showError(java.util.ResourceBundle.getBundle("otherMessage").getString("lblPasswordsDontMatch"));
             return;
         }
 
@@ -328,7 +327,7 @@ public class ResetPasswordDialog extends MageDialog {
 
         @Override
         protected Boolean doInBackground() throws Exception {
-            lblStatus.setText(Localizer.getInstance().getMessage("lblConnecting"));
+            lblStatus.setText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblConnecting"));
             disableButtons();
             result = SessionHandler.emailAuthToken(connection);
             return result;
@@ -342,17 +341,17 @@ public class ResetPasswordDialog extends MageDialog {
                     // Save settings.
                     MagePreferences.setEmail(connection.getHost(), connection.getEmail());
 
-                    String message = Localizer.getInstance().getMessage("lblAuthTokenIsEmailed");
+                    String message = java.util.ResourceBundle.getBundle("otherMessage").getString("lblAuthTokenIsEmailed");
                     lblStatus.setText(message);
                     MageFrame.getInstance().showMessage(message);
                 } else {
-                    lblStatus.setText(Localizer.getInstance().getMessage("lblRequestingAuthTokenError"));
+                    lblStatus.setText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblRequestingAuthTokenError"));
                 }
             } catch (InterruptedException | ExecutionException ex) {
                 logger.fatal("Get Auth Token Task error", ex);
             } catch (CancellationException ex) {
                 logger.info("Canceled");
-                lblStatus.setText(Localizer.getInstance().getMessage("lblCanceled"));
+                lblStatus.setText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblCanceled"));
             } catch (TimeoutException ex) {
                 logger.fatal("Timeout: ", ex);
             } finally {
@@ -370,7 +369,7 @@ public class ResetPasswordDialog extends MageDialog {
 
         @Override
         protected Boolean doInBackground() throws Exception {
-            lblStatus.setText(Localizer.getInstance().getMessage("lblConnecting"));
+            lblStatus.setText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblConnecting"));
             disableButtons();
             result = SessionHandler.resetPassword(connection);
             return result;
@@ -384,18 +383,18 @@ public class ResetPasswordDialog extends MageDialog {
                     // Save settings.
                     MagePreferences.setPassword(connection.getHost(), connection.getPassword());
 
-                    String message = Localizer.getInstance().getMessage("lblResetPasswordSuccessfully");
+                    String message = java.util.ResourceBundle.getBundle("otherMessage").getString("lblResetPasswordSuccessfully");
                     lblStatus.setText(message);
                     MageFrame.getInstance().showMessage(message);
                     hideDialog();
                 } else {
-                    lblStatus.setText(Localizer.getInstance().getMessage("lblResettingPassWordError"));
+                    lblStatus.setText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblResettingPassWordError"));
                 }
             } catch (InterruptedException | ExecutionException ex) {
                 logger.fatal("Reset Password Task error", ex);
             } catch (CancellationException ex) {
                 logger.info("Canceled");
-                lblStatus.setText(Localizer.getInstance().getMessage("lblCanceled"));
+                lblStatus.setText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblCanceled"));
             } catch (TimeoutException ex) {
                 logger.fatal("Timeout: ", ex);
             } finally {

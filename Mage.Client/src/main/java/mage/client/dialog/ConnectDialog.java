@@ -7,7 +7,6 @@ import mage.client.MageFrame;
 import mage.client.SessionHandler;
 import mage.client.preference.MagePreferences;
 import mage.client.util.ClientDefaultSettings;
-import mage.client.util.Localizer;
 import mage.client.util.gui.countryBox.CountryItemEditor;
 import mage.client.util.sets.ConstructedFormats;
 import mage.remote.Connection;
@@ -179,7 +178,7 @@ public class ConnectDialog extends MageDialog {
             }
         });
 
-        btnConnect.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnConnect.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         btnConnect.setText(bundle.getString("ConnectDialog.btnConnect.text")); // NOI18N
         btnConnect.setMargin(new java.awt.Insets(2, 2, 2, 2));
         btnConnect.addActionListener(new java.awt.event.ActionListener() {
@@ -654,7 +653,7 @@ public class ConnectDialog extends MageDialog {
             }
 
             if (p == null) {
-                JOptionPane.showMessageDialog(null, Localizer.getInstance().getMessage("lblCouldntConfigureProxy"), Localizer.getInstance().getMessage("lblError"), JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, java.util.ResourceBundle.getBundle("otherMessage").getString("lblCouldntConfigureProxy"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblError"), JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
@@ -693,12 +692,12 @@ public class ConnectDialog extends MageDialog {
                 }
             }
             if (servers.isEmpty()) {
-                JOptionPane.showMessageDialog(null, Localizer.getInstance().getMessage("lblCouldntFindAnyServer"));
+                JOptionPane.showMessageDialog(null, java.util.ResourceBundle.getBundle("otherMessage").getString("lblCouldntFindAnyServer"));
                 return;
             }
 
             String selectedServer = (String) JOptionPane.showInputDialog(null,
-            Localizer.getInstance().getMessage("lblChooseXMagePublicServer"), Localizer.getInstance().getMessage("lblInput"),
+            java.util.ResourceBundle.getBundle("otherMessage").getString("lblChooseXMagePublicServer"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblInput"),
                     JOptionPane.INFORMATION_MESSAGE, null, servers.toArray(),
                     servers.get(0));
             if (selectedServer != null) {
@@ -711,7 +710,7 @@ public class ConnectDialog extends MageDialog {
                     this.txtUserName.setText(MagePreferences.getUserName(serverAddress));
                     this.txtPassword.setText(MagePreferences.getPassword(serverAddress));
                 } else {
-                    JOptionPane.showMessageDialog(null, Localizer.getInstance().getMessage("lblWrongServerDataFormat"));
+                    JOptionPane.showMessageDialog(null, java.util.ResourceBundle.getBundle("otherMessage").getString("lblWrongServerDataFormat"));
                 }
             }
 

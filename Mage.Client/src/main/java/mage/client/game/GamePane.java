@@ -11,7 +11,6 @@ import java.util.UUID;
 import javax.swing.*;
 
 import mage.client.MagePane;
-import mage.client.util.Localizer;
 
 /**
  *
@@ -32,7 +31,7 @@ public class GamePane extends MagePane {
     }
 
     public void showGame(UUID gameId, UUID playerId) {
-        this.setTitle(Localizer.getInstance().getMessage("lblGame") + " " + gameId);
+        this.setTitle(java.util.ResourceBundle.getBundle("otherMessage").getString("lblGame") + " " + gameId);
         this.gameId = gameId;
         gamePanel.showGame(gameId, playerId, this);
     }
@@ -55,13 +54,13 @@ public class GamePane extends MagePane {
     }
 
     public void watchGame(UUID gameId) {
-        this.setTitle(Localizer.getInstance().getMessage("lblWatch") + " " + gameId);
+        this.setTitle(java.util.ResourceBundle.getBundle("otherMessage").getString("lblWatch") + " " + gameId);
         this.gameId = gameId;
         gamePanel.watchGame(gameId, this);
     }
 
     public void replayGame(UUID gameId) {
-        this.setTitle(Localizer.getInstance().getMessage("lblReplay") + " " + gameId);
+        this.setTitle(java.util.ResourceBundle.getBundle("otherMessage").getString("lblReplay") + " " + gameId);
         this.gameId = gameId;
         gamePanel.replayGame(gameId);
     }

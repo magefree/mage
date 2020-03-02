@@ -9,7 +9,6 @@ import mage.client.components.MageComponents;
 import mage.client.dialog.*;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.IgnoreList;
-import mage.client.util.Localizer;
 import mage.client.util.MageTableRowSorter;
 import mage.client.util.URLHandler;
 import mage.client.util.gui.GuiDisplayUtil;
@@ -406,9 +405,9 @@ public class TablesPanel extends javax.swing.JPanel {
                         }
                         break;
                     case "Remove":
-                        UserRequestMessage message = new UserRequestMessage(Localizer.getInstance().getMessage("lblRemovingTable"), Localizer.getInstance().getMessage("lblAreYouSureRemoveTable"));
-                        message.setButton1(Localizer.getInstance().getMessage("lblNo"), null);
-                        message.setButton2(Localizer.getInstance().getMessage("lblYes"), PlayerAction.CLIENT_REMOVE_TABLE);
+                        UserRequestMessage message = new UserRequestMessage(java.util.ResourceBundle.getBundle("otherMessage").getString("lblRemovingTable"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblAreYouSureRemoveTable"));
+                        message.setButton1(java.util.ResourceBundle.getBundle("otherMessage").getString("lblNo"), null);
+                        message.setButton2(java.util.ResourceBundle.getBundle("otherMessage").getString("lblYes"), PlayerAction.CLIENT_REMOVE_TABLE);
                         MageFrame.getInstance().showUserRequestDialog(message);
                         break;
                     case "Show":

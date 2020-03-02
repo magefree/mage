@@ -93,8 +93,6 @@ public final class Constants {
     public static final int BATTLEFIELD_FEEDBACK_COLORIZING_MODE_ENABLE_BY_ONE_COLOR = 1;
     public static final int BATTLEFIELD_FEEDBACK_COLORIZING_MODE_ENABLE_BY_MULTICOLOR = 2;
 
-    // languages
-    public static final String RESOURCE_PATH_LANGUAGES = "languages" + File.separator;
 
     public interface IO {
         String DEFAULT_IMAGES_DIR = "plugins" + File.separator + "images" + File.separator;
