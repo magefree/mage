@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import mage.MageInt;
@@ -14,13 +13,12 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.game.Game;
-import mage.game.permanent.token.GiantChickenToken;
+import mage.game.permanent.token.GiantBirdToken;
 import mage.players.Player;
 
 import java.util.UUID;
 
 /**
- *
  * @author ciaccona007
  */
 
@@ -33,7 +31,7 @@ public final class ChickenEgg extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 
-        // At the beginning of your upkeep, roll a six-sided die. If you roll a 6, sacrifice Chicken Egg and create a 4/4 red Giant Chicken creature token.
+        // At the beginning of your upkeep, roll a six-sided die. If you roll a 6, sacrifice Chicken Egg and create a 4/4 red Giant Bird creature token.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ChickenEggEffect(), TargetController.YOU, false));
     }
 
@@ -51,7 +49,7 @@ class ChickenEggEffect extends OneShotEffect {
 
     ChickenEggEffect() {
         super(Outcome.Benefit);
-        this.staticText = "roll a six-sided die. If you roll a 6, sacrifice {this} and create a 4/4 red Giant Chicken creature token";
+        this.staticText = "roll a six-sided die. If you roll a 6, sacrifice {this} and create a 4/4 red Giant Bird creature token";
     }
 
     ChickenEggEffect(final ChickenEggEffect effect) {
@@ -65,7 +63,7 @@ class ChickenEggEffect extends OneShotEffect {
             int result = controller.rollDice(game, 6);
             if (result == 6) {
                 new SacrificeSourceEffect().apply(game, source);
-                return (new CreateTokenEffect(new GiantChickenToken(), 1)).apply(game, source);
+                return (new CreateTokenEffect(new GiantBirdToken(), 1)).apply(game, source);
             }
         }
         return false;

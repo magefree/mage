@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -23,30 +21,31 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class ChickenALaKing extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Chicken you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Bird you control");
 
     static {
         filter.add(Predicates.not(TappedPredicate.instance));
-        filter.add(SubType.CHICKEN.getPredicate());
+        filter.add(SubType.BIRD.getPredicate());
     }
 
     public ChickenALaKing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
 
-        this.subtype.add(SubType.CHICKEN);
+        this.subtype.add(SubType.BIRD);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever a 6 is rolled on a six-sided die, put a +1/+1 counter on each Chicken.
+        // Whenever a 6 is rolled on a six-sided die, put a +1/+1 counter on each Bird.
         this.addAbility(new ChickenALaKingTriggeredAbility());
 
-        // Tap an untapped Chicken you control: Roll a six-sided die.
+        // Tap an untapped Bird you control: Roll a six-sided die.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RollDiceEffect(null, Outcome.Benefit, 6), new TapTargetCost(new TargetControlledPermanent(1, 1, filter, false))));
     }
 
@@ -62,10 +61,10 @@ public final class ChickenALaKing extends CardImpl {
 
 class ChickenALaKingTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each Chicken");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each Bird");
 
     static {
-        filter.add(SubType.CHICKEN.getPredicate());
+        filter.add(SubType.BIRD.getPredicate());
     }
 
     public ChickenALaKingTriggeredAbility() {
@@ -93,9 +92,7 @@ class ChickenALaKingTriggeredAbility extends TriggeredAbilityImpl {
             String data = event.getData();
             if (data != null) {
                 int numSides = Integer.parseInt(data);
-                if (event.getAmount() == 6 && numSides == 6) {
-                    return true;
-                }
+                return event.getAmount() == 6 && numSides == 6;
             }
         }
         return false;
@@ -103,6 +100,6 @@ class ChickenALaKingTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a 6 is rolled on a six-sided die, put a +1/+1 counter on each Chicken";
+        return "Whenever a 6 is rolled on a six-sided die, put a +1/+1 counter on each Bird";
     }
 }
