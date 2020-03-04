@@ -160,13 +160,13 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             }
         };
 
-        menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("htmlF2ConfirmRequest"));
+        menuItem = new JMenuItem("<html><b>F2</b> - " + java.util.ResourceBundle.getBundle("otherMessage").getString("lblConfirmRequest"));
         menuItem.setActionCommand("F2");
         menuItem.setMnemonic(KeyEvent.VK_O);
         popupMenu.add(menuItem);
         menuItem.addActionListener(skipListener);
 
-        menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("htmlF3CancelSkipAction"));
+        menuItem = new JMenuItem("<html><b>F3</b> - " + java.util.ResourceBundle.getBundle("otherMessage").getString("lblCancelSkipAction"));
         menuItem.setActionCommand("F3");
         menuItem.setMnemonic(KeyEvent.VK_N);
         popupMenu.add(menuItem);
@@ -188,42 +188,42 @@ public class PlayAreaPanel extends javax.swing.JPanel {
 
         String tooltipText = java.util.ResourceBundle.getBundle("otherMessage").getString("htmlSkipButtonDest");
         String everythingTooltipText = java.util.ResourceBundle.getBundle("otherMessage").getString("htmlEverythingSkipButtonDest");
-        menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("htmlF4SkipUntilNextTurn"));
+        menuItem = new JMenuItem("<html><b>F4</b> - " + java.util.ResourceBundle.getBundle("otherMessage").getString("lblSkipUntilNextTurn"));
         menuItem.setActionCommand("F4");
         menuItem.setToolTipText(tooltipText);
         menuItem.setMnemonic(KeyEvent.VK_T);
         skipMenu.add(menuItem);
         menuItem.addActionListener(skipListener);
 
-        menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("htmlF5SkipUntilNextEndStep"));
+        menuItem = new JMenuItem("<html><b>F5</b> - " + java.util.ResourceBundle.getBundle("otherMessage").getString("lblSkipUntilNextEndStep"));
         menuItem.setActionCommand("F5");
         menuItem.setToolTipText(tooltipText);
         menuItem.setMnemonic(KeyEvent.VK_E);
         skipMenu.add(menuItem);
         menuItem.addActionListener(skipListener);
 
-        menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("htmlF6SkipEverythingUntilNextTurn"));
+        menuItem = new JMenuItem("<html><b>F6</b> - " + java.util.ResourceBundle.getBundle("otherMessage").getString("lblSkipEverythingUntilNextTurn"));
         menuItem.setActionCommand("F6");
         menuItem.setToolTipText(everythingTooltipText);
         menuItem.setMnemonic(KeyEvent.VK_U);
         skipMenu.add(menuItem);
         menuItem.addActionListener(skipListener);
 
-        menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("htmlF7SkipUntilNextMainBegin"));
+        menuItem = new JMenuItem("<html><b>F7</b> - " + java.util.ResourceBundle.getBundle("otherMessage").getString("lblSkipUntilNextMainBegin"));
         menuItem.setToolTipText(tooltipText);
         menuItem.setActionCommand("F7");
         menuItem.setMnemonic(KeyEvent.VK_M);
         skipMenu.add(menuItem);
         menuItem.addActionListener(skipListener);
 
-        menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("htmlF9SkipEverythingUntilYourNextTurn"));
+        menuItem = new JMenuItem("<html><b>F9</b> - " + java.util.ResourceBundle.getBundle("otherMessage").getString("lblSkipEverythingUntilYourNextTurn"));
         menuItem.setActionCommand("F9");
         menuItem.setToolTipText(everythingTooltipText);
         menuItem.setMnemonic(KeyEvent.VK_V);
         skipMenu.add(menuItem);
         menuItem.addActionListener(skipListener);
 
-        menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("htmlF11SkipUntilYourNextTurnProirEndStep"));
+        menuItem = new JMenuItem("<html><b>F11</b> - " + java.util.ResourceBundle.getBundle("otherMessage").getString("lblSkipUntilYourNextTurnProirEndStep"));
         menuItem.setActionCommand("F11");
         menuItem.setToolTipText(everythingTooltipText);
         menuItem.setMnemonic(KeyEvent.VK_P);
