@@ -91,8 +91,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private static final String PORT_ARG = "-port";
     private static final String DEBUG_ARG = "-debug";
 
-    private static final String NOT_CONNECTED_TEXT = java.util.ResourceBundle.getBundle("otherMessage").getString("lblNotConnected");
-    private static final String NOT_CONNECTED_BUTTON = java.util.ResourceBundle.getBundle("otherMessage").getString("lblCONNECTTOSERVER");
+    private String NOT_CONNECTED_TEXT = java.util.ResourceBundle.getBundle("otherMessage").getString("lblNotConnected");
+    private String NOT_CONNECTED_BUTTON = java.util.ResourceBundle.getBundle("otherMessage").getString("lblCONNECTTOSERVER");
     private static MageFrame instance;
 
     private final ConnectDialog connectDialog;
