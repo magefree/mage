@@ -42,10 +42,10 @@ public class TablesTableModel extends AbstractTableModel {
     public static final int COLUMN_MINIMUM_RATING = 13;
     public static final int ACTION_COLUMN = 14; // column the action is located (starting with 0)
 
-    public String RATED_VALUE_YES = java.util.ResourceBundle.getBundle("otherMessage").getString("lblYes");
+    public static final String RATED_VALUE_YES = "Yes";
     public static final String RATED_VALUE_NO = "";
 
-    public String PASSWORD_VALUE_YES = java.util.ResourceBundle.getBundle("otherMessage").getString("lblYes");
+    public static final String PASSWORD_VALUE_YES = "Yes";
 
     private final String[] columnNames = new String[]{"M/T", java.util.ResourceBundle.getBundle("otherMessage").getString("lblDeckType"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblName"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblSeats"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblOwnerOrPlayers"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblGameType"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblInformation"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblState"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblPassword"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblCreatedOrStarted"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblSkillLevel"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblRated"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblQuitPercent"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblMinRating"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblAction")};
 

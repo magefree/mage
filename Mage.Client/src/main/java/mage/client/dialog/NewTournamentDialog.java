@@ -986,7 +986,7 @@ public class NewTournamentDialog extends MageDialog {
             JButton btnSelectRandomPacks = new JButton();
             btnSelectRandomPacks.setAlignmentX(Component.LEFT_ALIGNMENT);
             btnSelectRandomPacks.setText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblSelectPackToBeIncludedInPool"));
-            btnSelectRandomPacks.setToolTipText(RandomPacksSelectorDialog.randomDraftDescription);
+            btnSelectRandomPacks.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblRandomPacksSekectorDest"));
             btnSelectRandomPacks.addActionListener(evt -> showRandomPackSelectorDialog());
             pnlRandomPacks.add(btnSelectRandomPacks);
             this.pnlRandomPacks.setMinimumSize(new Dimension(784, 150));

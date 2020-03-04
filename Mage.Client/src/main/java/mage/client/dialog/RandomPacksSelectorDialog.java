@@ -26,7 +26,7 @@ public class RandomPacksSelectorDialog extends javax.swing.JDialog {
     private boolean isRandomDraft;
     private boolean isRichManDraft;
     private String title = "";
-    public randomDraftDescription = java.util.ResourceBundle.getBundle("otherMessage").getString("lblRandomPacksSekectorDest");
+    public String randomDraftDescription = java.util.ResourceBundle.getBundle("otherMessage").getString("lblRandomPacksSekectorDest");
 
     public RandomPacksSelectorDialog(boolean isRandomDraft, boolean isRichManDraft) {
         initComponents();
