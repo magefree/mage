@@ -91,8 +91,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private static final String PORT_ARG = "-port";
     private static final String DEBUG_ARG = "-debug";
 
-    private String NOT_CONNECTED_TEXT = java.util.ResourceBundle.getBundle("otherMessage").getString("lblNotConnected");
-    private String NOT_CONNECTED_BUTTON = java.util.ResourceBundle.getBundle("otherMessage").getString("lblCONNECTTOSERVER");
     private static MageFrame instance;
 
     private final ConnectDialog connectDialog;
@@ -319,7 +317,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         }
 
         setGUISize();
-        setConnectButtonText(NOT_CONNECTED_BUTTON);
+        setConnectButtonText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblCONNECTTOSERVER"));
         SwingUtilities.invokeLater(() -> {
             disableButtons();
             updateMemUsageTask.execute();
@@ -346,6 +344,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     private void setWindowTitle() {
+        String NOT_CONNECTED_TEXT = java.util.ResourceBundle.getBundle("otherMessage").getString("lblNotConnected");
         setTitle(TITLE_NAME + java.util.ResourceBundle.getBundle("otherMessage").getString("lblClient") + ": "
                 + (VERSION == null ? "<" + java.util.ResourceBundle.getBundle("otherMessage").getString("lblNotAvailable") + ">" : VERSION.toString()) + "  " + java.util.ResourceBundle.getBundle("otherMessage").getString("lblServer") + ": "
                 + ((SessionHandler.getSession() != null && SessionHandler.isConnected()) ? SessionHandler.getVersionInfo() : NOT_CONNECTED_TEXT));
@@ -1435,6 +1434,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     @Override
     public void disconnected(final boolean askToReconnect) {
+        String NOT_CONNECTED_BUTTON = java.util.ResourceBundle.getBundle("otherMessage").getString("lblCONNECTTOSERVER");
         if (SwingUtilities.isEventDispatchThread()) { // Returns true if the current thread is an AWT event dispatching thread.
             // REMOTE task, e.g. connecting
             LOGGER.info("Disconnected from remote task");

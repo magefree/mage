@@ -26,11 +26,11 @@ public class RandomPacksSelectorDialog extends javax.swing.JDialog {
     private boolean isRandomDraft;
     private boolean isRichManDraft;
     private String title = "";
-    public String randomDraftDescription = java.util.ResourceBundle.getBundle("otherMessage").getString("lblRandomPacksSekectorDest");
 
     public RandomPacksSelectorDialog(boolean isRandomDraft, boolean isRichManDraft) {
         initComponents();
         setType(isRandomDraft, isRichManDraft);
+        String randomDraftDescription = java.util.ResourceBundle.getBundle("otherMessage").getString("lblRandomPacksSekectorDest");
         this.pnlApply.setToolTipText(randomDraftDescription);
         this.pnlSelect.setToolTipText(randomDraftDescription);
         boxesCreated = false;
