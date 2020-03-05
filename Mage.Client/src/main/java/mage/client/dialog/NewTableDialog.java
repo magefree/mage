@@ -240,10 +240,10 @@ public class NewTableDialog extends MageDialog {
         lblNumWins.setText(bundle.getString("NewTableDialog.lblNumWins.text")); // NOI18N
         lblNumWins.setToolTipText(bundle.getString("NewTableDialog.lblNumWins.toolTipText")); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         jLabel1.setText(bundle.getString("NewTableDialog.jLabel1.text")); // NOI18N
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         jLabel2.setText(bundle.getString("NewTableDialog.jLabel2.text")); // NOI18N
 
         pnlOtherPlayers.setLayout(new java.awt.GridLayout(0, 1));
@@ -398,7 +398,7 @@ public class NewTableDialog extends MageDialog {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jSeparator3, javax.swing.GroupLayout.DEFAULT_SIZE, 863, Short.MAX_VALUE)
+                    .addComponent(jSeparator3, javax.swing.GroupLayout.DEFAULT_SIZE, 1256, Short.MAX_VALUE)
                     .addContainerGap()))
         );
         layout.setVerticalGroup(
@@ -472,7 +472,7 @@ public class NewTableDialog extends MageDialog {
                 .addGap(16, 16, 16)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlOtherPlayers, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+                .addComponent(pnlOtherPlayers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(9, 9, 9)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)

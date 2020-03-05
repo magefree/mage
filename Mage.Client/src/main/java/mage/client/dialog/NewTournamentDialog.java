@@ -303,7 +303,7 @@ public class NewTournamentDialog extends MageDialog {
             }
         });
 
-        lblPacks.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblPacks.setFont(lblPacks.getFont().deriveFont(lblPacks.getFont().getSize()-1f));
         lblPacks.setText(bundle.getString("NewTournamentDialog.lblPacks.text")); // NOI18N
 
         pnlPacks.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -360,7 +360,7 @@ public class NewTournamentDialog extends MageDialog {
         cbPlaneChase.setText(bundle.getString("NewTournamentDialog.cbPlaneChase.text")); // NOI18N
         cbPlaneChase.setToolTipText(bundle.getString("NewTournamentDialog.cbPlaneChase.toolTipText")); // NOI18N
 
-        lblPlayer1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblPlayer1.setFont(lblPlayer1.getFont().deriveFont(lblPlayer1.getFont().getSize()-1f));
         lblPlayer1.setText(bundle.getString("NewTournamentDialog.lblPlayer1.text")); // NOI18N
 
         lblConstructionTime.setText(bundle.getString("NewTournamentDialog.lblConstructionTime.text")); // NOI18N
@@ -383,7 +383,7 @@ public class NewTournamentDialog extends MageDialog {
         );
         pnlPlayersLayout.setVerticalGroup(
             pnlPlayersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlOtherPlayers, javax.swing.GroupLayout.DEFAULT_SIZE, 5, Short.MAX_VALUE)
+            .addComponent(pnlOtherPlayers, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
 
         btnOk.setText(bundle.getString("NewTournamentDialog.btnOk.text")); // NOI18N
@@ -492,7 +492,7 @@ public class NewTournamentDialog extends MageDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 20, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -616,7 +616,7 @@ public class NewTournamentDialog extends MageDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(pnlPacks, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pnlRandomPacks, javax.swing.GroupLayout.DEFAULT_SIZE, 10, Short.MAX_VALUE)
+                        .addComponent(pnlRandomPacks, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)

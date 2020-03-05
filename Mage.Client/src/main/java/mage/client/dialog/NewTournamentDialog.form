@@ -171,7 +171,7 @@
                       <Component id="btnCancel" min="-2" pref="100" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="20" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
@@ -326,7 +326,7 @@
                   <Group type="102" attributes="0">
                       <Component id="pnlPacks" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="pnlRandomPacks" pref="10" max="32767" attributes="0"/>
+                      <Component id="pnlRandomPacks" pref="83" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                           <Group type="103" alignment="1" groupAlignment="3" attributes="0">
@@ -559,8 +559,10 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblPacks">
       <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="11" style="1"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.editors2.FontEditor">
+          <FontInfo relative="true">
+            <Font component="lblPacks" property="font" relativeSize="true" size="-1"/>
+          </FontInfo>
         </Property>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
           <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.lblPacks.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
@@ -679,8 +681,10 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblPlayer1">
       <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="11" style="1"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.editors2.FontEditor">
+          <FontInfo relative="true">
+            <Font component="lblPlayer1" property="font" relativeSize="true" size="-1"/>
+          </FontInfo>
         </Property>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
           <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.lblPlayer1.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
@@ -728,7 +732,7 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="pnlOtherPlayers" alignment="0" pref="5" max="32767" attributes="0"/>
+              <Component id="pnlOtherPlayers" alignment="0" pref="30" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
