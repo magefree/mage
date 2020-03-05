@@ -6,8 +6,8 @@ import mage.client.cards.CardEventSource;
 import mage.client.cards.ICardGrid;
 import mage.client.deckeditor.SortSetting;
 import mage.client.plugins.impl.Plugins;
-import mage.client.util.ClientEventType;
 import mage.client.util.ClientDefaultSettings;
+import mage.client.util.ClientEventType;
 import mage.client.util.Event;
 import mage.client.util.Listener;
 import mage.client.util.gui.GuiDisplayUtil;
@@ -235,7 +235,7 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
                 return c.isCreature() ? c.getPower() + '/'
                         + c.getToughness() : "-";
             case 6:
-                return c.getRarity().toString();
+                return c.getRarity() == null ? "" : c.getRarity().toString();
             case 7:
                 return c.getExpansionSetCode();
             case 8:

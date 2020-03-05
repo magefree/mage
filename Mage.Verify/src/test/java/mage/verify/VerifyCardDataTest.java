@@ -245,7 +245,7 @@ public class VerifyCardDataTest {
             Map<String, Integer> cardsList = new HashMap<>();
             for (ExpansionSet.SetCardInfo checkCard : set.getSetCardInfo()) {
                 // only rare cards must have double versions
-                if (!checkCard.getRarity().equals(Rarity.RARE) && !checkCard.getRarity().equals(Rarity.MYTHIC)) {
+                if (!Objects.equals(checkCard.getRarity(), Rarity.RARE) && !Objects.equals(checkCard.getRarity(), Rarity.MYTHIC)) {
                     continue;
                 }
 
@@ -519,6 +519,7 @@ public class VerifyCardDataTest {
                 }
 
                 // 3. check that getMana works without NPE errors (it uses getNetMana with empty game param for AI score calcs)
+                // https://github.com/magefree/mage/issues/6300
                 card.getMana();
             }
         }

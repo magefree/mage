@@ -750,7 +750,7 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
             if (card.getExpansionSetCode() != null && !card.getExpansionSetCode().isEmpty()) {
                 sb.append('\n').append(card.getCardNumber()).append(" - ");
                 sb.append(card.getExpansionSetCode()).append(" - ");
-                sb.append(card.getRarity().toString());
+                sb.append(card.getRarity() == null ? "none" : card.getRarity().toString());
             }
         }
         return sb.toString();

@@ -1,10 +1,5 @@
 package org.mage.test.sets;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.keyword.PartnerWithAbility;
@@ -13,16 +8,16 @@ import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardScanner;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-
 import mage.sets.*;
-
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mage.test.serverside.base.MageTestBase;
+
+import java.util.*;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author nigelzor, JayDi85
@@ -141,7 +136,7 @@ public class BoosterGenerationTest extends MageTestBase {
             allCards.addAll(booster);
         }
         // check that some dual lands were generated
-        assertTrue(allCards.stream().anyMatch(card -> card.getCardType().contains(CardType.LAND) && card.getRarity().equals(Rarity.COMMON)));
+        assertTrue(allCards.stream().anyMatch(card -> card.getCardType().contains(CardType.LAND) && Objects.equals(card.getRarity(), Rarity.COMMON)));
     }
 
     @Test

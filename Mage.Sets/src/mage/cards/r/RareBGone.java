@@ -1,7 +1,5 @@
-
 package mage.cards.r;
 
-import java.util.*;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -19,8 +17,11 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.Objects;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class RareBGone extends CardImpl {
@@ -109,7 +110,7 @@ class RarityPredicate implements Predicate<Card> {
 
     @Override
     public boolean apply(Card input, Game game) {
-        return input.getRarity().equals(rarity);
+        return Objects.equals(input.getRarity(), rarity);
     }
 
     @Override
