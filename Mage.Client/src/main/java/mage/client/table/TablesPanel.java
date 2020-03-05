@@ -365,8 +365,8 @@ public class TablesPanel extends javax.swing.JPanel {
                 boolean isTournament = (Boolean) tableModel.getValueAt(modelRow, TablesTableModel.ACTION_COLUMN + 1);
                 String owner = (String) tableModel.getValueAt(modelRow, TablesTableModel.COLUMN_OWNER);
                 String pwdColumn = (String) tableModel.getValueAt(modelRow, TablesTableModel.COLUMN_PASSWORD);
-                switch (action) {
-                    case "Join":
+                switch (TableAction.toAction(action)) {
+                    case Join:
                         if (owner.equals(SessionHandler.getUserName()) || owner.startsWith(SessionHandler.getUserName() + ',')) {
                             try {
                                 JDesktopPane desktopPane = (JDesktopPane) MageFrame.getUI().getComponent(MageComponents.DESKTOP_PANE);
@@ -404,27 +404,29 @@ public class TablesPanel extends javax.swing.JPanel {
                             joinTableDialog.showDialog(roomId, tableId, false, false);
                         }
                         break;
-                    case "Remove":
+                    case Remove:
                         UserRequestMessage message = new UserRequestMessage(java.util.ResourceBundle.getBundle("otherMessage").getString("lblRemovingTable"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblAreYouSureRemoveTable"));
                         message.setButton1(java.util.ResourceBundle.getBundle("otherMessage").getString("lblNo"), null);
                         message.setButton2(java.util.ResourceBundle.getBundle("otherMessage").getString("lblYes"), PlayerAction.CLIENT_REMOVE_TABLE);
                         MageFrame.getInstance().showUserRequestDialog(message);
                         break;
-                    case "Show":
+                    case Show:
                         if (isTournament) {
                             LOGGER.info("Showing tournament table " + tableId);
                             SessionHandler.watchTable(roomId, tableId);
                         }
                         break;
-                    case "Watch":
+                    case Watch:
                         if (!isTournament) {
                             LOGGER.info("Watching table " + tableId);
                             SessionHandler.watchTable(roomId, tableId);
                         }
                         break;
-                    case "Replay":
+                    case Replay:
                         LOGGER.info("Replaying game " + gameId);
                         SessionHandler.replayGame(gameId);
+                        break;
+                    case None:
                         break;
                 }
             }

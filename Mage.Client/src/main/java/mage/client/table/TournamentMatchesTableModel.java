@@ -78,7 +78,7 @@ public class TournamentMatchesTableModel extends AbstractTableModel {
 //                    return "Replay";
 //                }
                 if (watchingAllowed && games[arg0].getState().startsWith("Dueling")) {
-                    return java.util.ResourceBundle.getBundle("otherMessage").getString("lblWatch");
+                    return TableAction.getName(TableAction.Watch);
                 }
                 return "";
             case 5:

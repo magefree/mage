@@ -84,11 +84,11 @@ public class MatchesTableModel extends AbstractTableModel {
                 return matches[arg0].getEndTime();
             case 8:
                 if (matches[arg0].isTournament()) {
-                    return java.util.ResourceBundle.getBundle("otherMessage").getString("lblShow");
+                    return TableAction.getName(TableAction.Show);
                 } else if (matches[arg0].isReplayAvailable()) {
-                    return java.util.ResourceBundle.getBundle("otherMessage").getString("lblReplay");
+                    return TableAction.getName(TableAction.Replay);
                 } else {
-                    return "None";
+                    return TableAction.getName(TableAction.None);
                 }
             case 9:
                 return matches[arg0].getGames();

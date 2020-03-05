@@ -155,22 +155,22 @@ public class TablesTableModel extends AbstractTableModel {
                         if (SessionHandler.getSession() != null && owner.equals(SessionHandler.getUserName())) {
                             return "";
                         }
-                        return java.util.ResourceBundle.getBundle("otherMessage").getString("lblJoin");
+                        return TableAction.getName(TableAction.Join);
                     case CONSTRUCTING:
                     case DRAFTING:
                         if (tables[rowIndex].isTournament()) {
-                            return java.util.ResourceBundle.getBundle("otherMessage").getString("lblShow");
+                            return TableAction.getName(TableAction.Show);
                         }
                     case DUELING:
                         if (tables[rowIndex].isTournament()) {
-                            return java.util.ResourceBundle.getBundle("otherMessage").getString("lblShow");
+                            return TableAction.getName(TableAction.Show);
                         } else {
                             owner = tables[rowIndex].getControllerName();
                             if (SessionHandler.getSession() != null && owner.equals(SessionHandler.getUserName())) {
                                 return "";
                             }
                             if (tables[rowIndex].getSpectatorsAllowed()) {
-                                return java.util.ResourceBundle.getBundle("otherMessage").getString("lblWatch");
+                                return TableAction.getName(TableAction.Watch);
                             }
                             return "";
                         }
