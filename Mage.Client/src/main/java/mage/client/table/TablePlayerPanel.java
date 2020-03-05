@@ -83,8 +83,10 @@ public class TablePlayerPanel extends javax.swing.JPanel {
 
         lbPlayerType = new javax.swing.JLabel();
         cbPlayerType = new javax.swing.JComboBox();
-        newPlayerPanel = new mage.client.table.NewPlayerPanel();
         lblPlayerNum = new javax.swing.JLabel();
+        newPlayerPanel = new mage.client.table.NewPlayerPanel();
+
+        setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("SwingMessage"); // NOI18N
         lbPlayerType.setText(bundle.getString("TablePlayerPanel.lbPlayerType.text")); // NOI18N
@@ -97,9 +99,10 @@ public class TablePlayerPanel extends javax.swing.JPanel {
         });
         add(cbPlayerType);
 
-        lblPlayerNum.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblPlayerNum.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         lblPlayerNum.setText(bundle.getString("TablePlayerPanel.lblPlayerNum.text")); // NOI18N
         add(lblPlayerNum);
+        add(newPlayerPanel);
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbPlayerTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPlayerTypeActionPerformed
