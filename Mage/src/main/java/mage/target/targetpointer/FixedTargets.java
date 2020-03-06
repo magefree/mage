@@ -5,10 +5,6 @@
  */
 package mage.target.targetpointer;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.cards.Card;
@@ -16,8 +12,12 @@ import mage.cards.Cards;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public class FixedTargets implements TargetPointer {
@@ -75,9 +75,9 @@ public class FixedTargets implements TargetPointer {
     @Override
     public List<UUID> getTargets(Game game, Ability source) {
         // check target not changed zone
-        List<UUID> list = new ArrayList<>(1);
+        List<UUID> list = new ArrayList<>();
         for (MageObjectReference mor : targets) {
-            if (game.getState().getZoneChangeCounter(mor.getSourceId()) == mor.getZoneChangeCounter()) {
+            if (mor.getSourceId() != null && game.getState().getZoneChangeCounter(mor.getSourceId()) == mor.getZoneChangeCounter()) {
                 list.add(mor.getSourceId());
             }
         }

@@ -90,8 +90,10 @@ public class FixedTarget implements TargetPointer {
             }
         }
 
-        List<UUID> list = new ArrayList<>(1);
-        list.add(targetId);
+        List<UUID> list = new ArrayList<>();
+        if (targetId != null) {
+            list.add(targetId);
+        }
         return list;
     }
 
