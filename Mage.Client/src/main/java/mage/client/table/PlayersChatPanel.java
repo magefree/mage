@@ -31,37 +31,37 @@ public class PlayersChatPanel extends javax.swing.JPanel {
     private final List<String> players = new ArrayList<>();
     private final UserTableModel userTableModel;
     private static final TableInfo tableInfo = new TableInfo()
-            .addColumn(0, 20, Icon.class, "Flag", null)
-            .addColumn(1, 100, String.class, "Players",
+            .addColumn(0, 20, Icon.class, java.util.ResourceBundle.getBundle("otherMessage").getString("lblFlag"), null)
+            .addColumn(1, 100, String.class, java.util.ResourceBundle.getBundle("otherMessage").getString("lblPlayers"),
                     "<b>User name</b>"
-                            + "<br>(the number behind the header text is the number of users online)")
-            .addColumn(2, 40, Integer.class, "Constructed Rating", null)
-            .addColumn(3, 40, Integer.class, "Limited Rating", null)
-            .addColumn(4, 40, String.class, "Matches",
+                    + "<br>(the number behind the header text is the number of users online)")
+            .addColumn(2, 40, Integer.class, java.util.ResourceBundle.getBundle("otherMessage").getString("lblConstructedRating"), null)
+            .addColumn(3, 40, Integer.class, java.util.ResourceBundle.getBundle("otherMessage").getString("lblLimitedRating"), null)
+            .addColumn(4, 40, String.class, java.util.ResourceBundle.getBundle("otherMessage").getString("lblMatches"),
                     "<b>Number of matches the user played so far</b>"
-                            + "<br>Q = number of matches quit"
-                            + "<br>I = number of matches lost because of idle timeout"
-                            + "<br>T = number of matches lost because of match timeout")
-            .addColumn(5, 100, Integer.class, "MQP",
+                    + "<br>Q = number of matches quit"
+                    + "<br>I = number of matches lost because of idle timeout"
+                    + "<br>T = number of matches lost because of match timeout")
+            .addColumn(5, 100, Integer.class, java.util.ResourceBundle.getBundle("otherMessage").getString("lblMQP"),
                     "<b>Percent-Ratio of matches played related to matches quit</b>"
-                            + "<br>this calculation does not include tournament matches")
-            .addColumn(6, 40, String.class, "Tourneys",
+                    + "<br>this calculation does not include tournament matches")
+            .addColumn(6, 40, String.class, java.util.ResourceBundle.getBundle("otherMessage").getString("lblTournaments"),
                     "<b>Number of tournaments the user played so far</b>"
-                            + "<br>D = number of tournaments left during draft phase"
-                            + "<br>C = number of tournaments left during constructing phase"
-                            + "<br>R = number of tournaments left during rounds")
-            .addColumn(7, 100, Integer.class, "TQP",
+                    + "<br>D = number of tournaments left during draft phase"
+                    + "<br>C = number of tournaments left during constructing phase"
+                    + "<br>R = number of tournaments left during rounds")
+            .addColumn(7, 100, Integer.class, java.util.ResourceBundle.getBundle("otherMessage").getString("lblTQP"),
                     "<b>Percent-Ratio of tournament matches played related to tournament matches quit</b>"
-                            + "<br>this calculation does not include non tournament matches")
-            .addColumn(8, 80, String.class, "Games",
+                    + "<br>this calculation does not include non tournament matches")
+            .addColumn(8, 80, String.class, java.util.ResourceBundle.getBundle("otherMessage").getString("lblGames"),
                     "<b>Current activities of the player</b>"
-                            + "<BR>the header itself shows the number of currently active games"
-                            + "<BR>T: = number of games threads "
-                            + "<BR><i>(that can vary from active games because of sideboarding or crashed games)</i>"
-                            + "<BR>limt: the maximum of games the server is configured to"
-                            + "<BR><i>(if the number of started games exceed that limit, the games have to wait"
-                            + "<BR>until active games end)</i>")
-            .addColumn(9, 80, String.class, "Ping", null);
+                    + "<BR>the header itself shows the number of currently active games"
+                    + "<BR>T: = number of games threads "
+                    + "<BR><i>(that can vary from active games because of sideboarding or crashed games)</i>"
+                    + "<BR>limt: the maximum of games the server is configured to"
+                    + "<BR><i>(if the number of started games exceed that limit, the games have to wait"
+                    + "<BR>until active games end)</i>")
+            .addColumn(9, 80, String.class, java.util.ResourceBundle.getBundle("otherMessage").getString("lblPing"), null);
 
     public PlayersChatPanel() {
         userTableModel = new UserTableModel(); // needs to be set before initComponents();
@@ -143,11 +143,25 @@ public class PlayersChatPanel extends javax.swing.JPanel {
             JTableHeader th = jTablePlayers.getTableHeader();
             TableColumnModel tcm = th.getColumnModel();
 
-            tcm.getColumn(jTablePlayers.convertColumnIndexToView(tableInfo.getColumnByName("Players").getIndex())).setHeaderValue("Players (" + this.players.length + ')');
-            tcm.getColumn(jTablePlayers.convertColumnIndexToView(tableInfo.getColumnByName("Games").getIndex())).setHeaderValue("Games "
-                    + roomUserInfo.getNumberActiveGames()
-                    + (roomUserInfo.getNumberActiveGames() != roomUserInfo.getNumberGameThreads() ? " (T:" + roomUserInfo.getNumberGameThreads() : " (")
-                    + " limit: " + roomUserInfo.getNumberMaxGames() + ')');
+            tcm.getColumn(jTablePlayers.convertColumnIndexToView(
+                    tableInfo.getColumnByName(java.util.ResourceBundle.getBundle("otherMessage").getString("lblPlayers")).getIndex())
+            ).setHeaderValue(java.text.MessageFormat.format(
+                    java.util.ResourceBundle.getBundle("otherMessage").getString("lblPlayersOfN"), new Object[]{this.players.length})
+            );
+            
+            String gamesHeaderValue;
+            if (roomUserInfo.getNumberActiveGames() != roomUserInfo.getNumberGameThreads()) {
+                gamesHeaderValue = java.text.MessageFormat.format(
+                    java.util.ResourceBundle.getBundle("otherMessage").getString("lblGamesXThreadYLimitZ"),
+                    new Object[]{roomUserInfo.getNumberActiveGames(), roomUserInfo.getNumberGameThreads(), roomUserInfo.getNumberMaxGames()}
+                );
+            } else {
+                gamesHeaderValue = java.text.MessageFormat.format(
+                    java.util.ResourceBundle.getBundle("otherMessage").getString("lblGamesNLimitM"),
+                    new Object[]{roomUserInfo.getNumberActiveGames(), roomUserInfo.getNumberMaxGames()}
+                );
+            }
+            tcm.getColumn(jTablePlayers.convertColumnIndexToView(tableInfo.getColumnByName(java.util.ResourceBundle.getBundle("otherMessage").getString("lblGames")).getIndex())).setHeaderValue(gamesHeaderValue);
             th.repaint();
             this.fireTableDataChanged();
         }
