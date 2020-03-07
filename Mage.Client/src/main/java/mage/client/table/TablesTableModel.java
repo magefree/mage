@@ -47,7 +47,7 @@ public class TablesTableModel extends AbstractTableModel {
 
     public static final String PASSWORD_VALUE_YES = "Yes";
 
-    private final String[] columnNames = new String[]{"M/T", java.util.ResourceBundle.getBundle("otherMessage").getString("lblDeckType"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblName"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblSeats"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblOwnerOrPlayers"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblGameType"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblInformation"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblState"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblPassword"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblCreatedOrStarted"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblSkillLevel"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblRated"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblQuitPercent"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblMinRating"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblAction")};
+    private final String[] columnNames = new String[]{"lblMatchOrTournament", "lblDeckType", "lblName", "lblSeats", "lblOwnerOrPlayers", "lblGameType", "lblInformation", "lblState", "lblPassword", "lblCreatedOrStarted", "lblSkillLevel", "lblRated", "lblQuitPercent", "lblMinRating", "lblAction"};
 
     private TableView[] tables = new TableView[0];
 
@@ -195,7 +195,7 @@ public class TablesTableModel extends AbstractTableModel {
         String colName = "";
 
         if (columnIndex <= getColumnCount()) {
-            colName = columnNames[columnIndex];
+            colName = java.util.ResourceBundle.getBundle("otherMessage").getString(columnNames[columnIndex]);
         }
 
         return colName;

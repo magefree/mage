@@ -14,7 +14,7 @@ import java.util.List;
 public class TournamentMatchesTableModel extends AbstractTableModel {
     public static final int ACTION_COLUMN = 4; // column the action is located
 
-    private final String[] columnNames = new String[]{java.util.ResourceBundle.getBundle("otherMessage").getString("lblRoundNumber"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblPlayer"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblState"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblPoints"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblAction")};
+    private final String[] columnNames = new String[]{"lblRoundNumber", "lblPlayer", "lblState", "lblPoints", "lblAction"};
     private TournamentGameView[] games = new TournamentGameView[0];
     private boolean watchingAllowed;
 
@@ -97,7 +97,7 @@ public class TournamentMatchesTableModel extends AbstractTableModel {
         String colName = "";
 
         if (columnIndex <= getColumnCount()) {
-            colName = columnNames[columnIndex];
+            colName = java.util.ResourceBundle.getBundle("otherMessage").getString(columnNames[columnIndex]);
         }
 
         return colName;

@@ -10,7 +10,7 @@ import java.util.UUID;
 
 public class MatchesTableModel extends AbstractTableModel {
 
-    private final String[] columnNames = new String[]{java.util.ResourceBundle.getBundle("otherMessage").getString("lblDeckType"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblPlayer"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblGameType"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblRating"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblPoints"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblDuration"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblStartTime"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblEndTime"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblAction")};
+    private final String[] columnNames = new String[]{"lblDeckType", "lblPlayer", "lblGameType", "lblRating", "lblPoints", "lblDuration", "lblStartTime", "lblEndTime", "lblAction"};
     public static final int COLUMN_DURATION = 5;
     public static final int COLUMN_START = 6;
     public static final int COLUMN_END = 7;
@@ -118,7 +118,7 @@ public class MatchesTableModel extends AbstractTableModel {
         String colName = "";
 
         if (columnIndex <= getColumnCount()) {
-            colName = columnNames[columnIndex];
+            colName = java.util.ResourceBundle.getBundle("otherMessage").getString(columnNames[columnIndex]);
         }
 
         return colName;
