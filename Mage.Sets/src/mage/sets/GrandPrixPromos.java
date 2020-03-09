@@ -17,7 +17,7 @@ public final class GrandPrixPromos extends ExpansionSet {
     }
 
     private GrandPrixPromos() {
-        super("Grand Prix Promos", "GPX", ExpansionSet.buildDate(2011, 6, 17), SetType.PROMOTIONAL);
+        super("Grand Prix Promos", "PGPX", ExpansionSet.buildDate(2011, 6, 17), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = true;
 

@@ -36,7 +36,6 @@ public final class MtgJson {
         mtgJsonToXMageCodes.put("pGTW", "GRC"); // pGTW - Gateway = GRC (WPN + Gateway in one inner set)
         mtgJsonToXMageCodes.put("pWPN", "GRC"); // pWPN - Wizards Play Network = GRC (WPN + Gateway in one inner set)
         mtgJsonToXMageCodes.put("pGRU", "GUR");
-        mtgJsonToXMageCodes.put("pGPX", "GPX");
         mtgJsonToXMageCodes.put("pFNM", "FNMP");
         mtgJsonToXMageCodes.put("pELP", "PELP");
         mtgJsonToXMageCodes.put("pARL", "PARL"); // TODO: What about the other Arena League sets (1999-2006)?

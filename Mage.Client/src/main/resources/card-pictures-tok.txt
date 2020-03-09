@@ -12,8 +12,8 @@
 #|Generate|TOK:CHK|Dragon Spirit||
 #|Generate|TOK:FNMP|Centaur||
 #|Generate|TOK:FNMP|Wurm||
-#|Generate|TOK:GPX|Elephant||
-#|Generate|TOK:GPX|Germ||
+#|Generate|TOK:PGPX|Elephant||
+#|Generate|TOK:PGPX|Germ||
 #|Generate|TOK:GRC|Bird||
 #|Generate|TOK:GRC|Golem||
 #|Generate|TOK:GRC|Human||

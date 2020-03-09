@@ -338,7 +338,7 @@ public enum WizardCardsImageSource implements CardImageSource {
         setsAliases.put("FRF", "Fate Reforged");
         setsAliases.put("FUT", "Future Sight");
         setsAliases.put("GPT", "Guildpact");
-        setsAliases.put("GPX", "Grand Prix");
+        setsAliases.put("PGPX", "Grand Prix");
         setsAliases.put("GRC", "WPN Gateway");
         setsAliases.put("GTC", "Gatecrash");
         setsAliases.put("H09", "Premium Deck Series: Slivers");
