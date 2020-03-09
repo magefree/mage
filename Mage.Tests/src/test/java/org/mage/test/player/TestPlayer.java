@@ -82,7 +82,8 @@ public class TestPlayer implements Player {
 
     private int maxCallsWithoutAction = 400;
     private int foundNoAction = 0;
-    private boolean AIPlayer;
+    private boolean AIPlayer; // full playable AI
+    private boolean AICanChooseInStrictMode = false; // AI can choose in custom aiXXX commands (e.g. on one priority or step)
     private final List<PlayerAction> actions = new ArrayList<>();
     private final Map<PlayerAction, PhaseStep> actionsToRemovesLater = new HashMap<>(); // remove actions later, on next step (e.g. for AI commands)
     private final List<String> choices = new ArrayList<>(); // choices stack for choice
@@ -113,6 +114,7 @@ public class TestPlayer implements Player {
 
     public TestPlayer(final TestPlayer testPlayer) {
         this.AIPlayer = testPlayer.AIPlayer;
+        this.AICanChooseInStrictMode = testPlayer.AICanChooseInStrictMode;
         this.foundNoAction = testPlayer.foundNoAction;
         this.actions.addAll(testPlayer.actions);
         this.choices.addAll(testPlayer.choices);
@@ -687,16 +689,26 @@ public class TestPlayer implements Player {
 
                     // play priority
                     if (command.equals(AI_COMMAND_PLAY_PRIORITY)) {
-                        computerPlayer.priority(game);
-                        actions.remove(action);
-                        return true;
+                        AICanChooseInStrictMode = true;
+                        try {
+                            computerPlayer.priority(game);
+                            actions.remove(action);
+                            return true;
+                        } finally {
+                            AICanChooseInStrictMode = false;
+                        }
                     }
 
                     // play step
                     if (command.equals(AI_COMMAND_PLAY_STEP)) {
-                        actionsToRemovesLater.put(action, game.getStep().getType());
-                        computerPlayer.priority(game);
-                        return true;
+                        AICanChooseInStrictMode = true;
+                        try {
+                            actionsToRemovesLater.put(action, game.getStep().getType());
+                            computerPlayer.priority(game);
+                            return true;
+                        } finally {
+                            AICanChooseInStrictMode = false;
+                        }
                     }
 
                     Assert.fail("Unknow ai command: " + command);
@@ -1599,7 +1611,7 @@ public class TestPlayer implements Player {
     }
 
     private void chooseStrictModeFailed(String choiceType, Game game, String reason) {
-        if (strictChooseMode) {
+        if (strictChooseMode && !AICanChooseInStrictMode) {
             Assert.fail("Missing " + choiceType + " def for"
                     + " turn " + game.getTurnNum()
                     + ", step " + (game.getStep() != null ? game.getStep().getType().name() : "not started")

@@ -1420,6 +1420,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     /**
      * AI play one PRIORITY with multi game simulations (calcs and play ONE best action, can be called with stack)
+     * All choices must be made by AI (e.g. strict mode possible)
      */
     public void aiPlayPriority(int turnNum, PhaseStep step, TestPlayer player) {
         assertAiPlayAndGameCompatible(player);
@@ -1428,6 +1429,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     /**
      * AI play STEP to the end with multi game simulations (calcs and play best actions until step ends, can be called in the middle of the step)
+     * All choices must be made by AI (e.g. strict mode possible)
      */
     public void aiPlayStep(int turnNum, PhaseStep step, TestPlayer player) {
         assertAiPlayAndGameCompatible(player);
