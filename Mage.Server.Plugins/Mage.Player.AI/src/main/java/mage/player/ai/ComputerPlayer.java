@@ -819,10 +819,13 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             return target.isChosen();
         }
 
-        if (target.getOriginalTarget() instanceof TargetSpell) {
+        if (target.getOriginalTarget() instanceof TargetSpell
+                || target.getOriginalTarget() instanceof TargetStackObject) {
             if (!game.getStack().isEmpty()) {
                 for (StackObject o : game.getStack()) {
-                    if (o instanceof Spell && !source.getId().equals(o.getStackAbility().getId())) {
+                    if (o instanceof Spell
+                            && !source.getId().equals(o.getStackAbility().getId())
+                            && target.canTarget(abilityControllerId, o.getStackAbility().getId(), source, game)) {
                         return tryAddTarget(target, o.getId(), source, game);
                     }
                 }

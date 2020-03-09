@@ -1,7 +1,5 @@
-
 package mage.filter.predicate.other;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Mode;
 import mage.filter.FilterPermanent;
@@ -12,8 +10,9 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 import mage.target.Target;
 
+import java.util.UUID;
+
 /**
- *
  * @author LoneFox
  */
 public class TargetsPermanentPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageObject>> {
@@ -31,6 +30,9 @@ public class TargetsPermanentPredicate implements ObjectSourcePlayerPredicate<Ob
             for (UUID modeId : object.getStackAbility().getModes().getSelectedModes()) {
                 Mode mode = object.getStackAbility().getModes().get(modeId);
                 for (Target target : mode.getTargets()) {
+                    if (target.isNotTarget()) {
+                        continue;
+                    }
                     for (UUID targetId : target.getTargets()) {
                         Permanent permanent = game.getPermanentOrLKIBattlefield(targetId);
                         if (permanent != null && targetFilter.match(permanent, input.getSourceId(), input.getPlayerId(), game)) {
