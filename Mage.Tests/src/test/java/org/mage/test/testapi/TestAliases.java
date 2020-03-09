@@ -53,7 +53,6 @@ public class TestAliases extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp@battle", 1);
         addCard(Zone.GRAVEYARD, playerA, "Swamp@grave", 1);
 
-//        showAliases("A aliases", 1, PhaseStep.UPKEEP, playerA);
         checkAliasZone("lib", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "lib", Zone.LIBRARY);
         checkAliasZone("hand", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "hand", Zone.HAND);
         checkAliasZone("battle", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "battle", Zone.BATTLEFIELD);
@@ -76,8 +75,6 @@ public class TestAliases extends CardTestPlayerBase {
         checkPermanentCount("Plains must exists", 1, PhaseStep.UPKEEP, playerB, "Plains", 5);
         checkPermanentCount("Mountain must exists", 1, PhaseStep.UPKEEP, playerB, "Mountain", 5);
         //
-//        showAliases("A aliases", 1, PhaseStep.UPKEEP, playerA);
-//        showAliases("B aliases", 1, PhaseStep.UPKEEP, playerB);
         // A
         checkAliasZone("Swamp must not", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Swamp", Zone.BATTLEFIELD, false);
         checkAliasZone("Swamp.1 must not", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Swamp.1", Zone.BATTLEFIELD, false);
@@ -110,7 +107,6 @@ public class TestAliases extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "@lion.3");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "@lion.5");
 
-//        showAliases("A aliases", 1, PhaseStep.POSTCOMBAT_MAIN, playerA);
         checkAliasZone("1", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "lion.1", Zone.BATTLEFIELD, false);
         checkAliasZone("2", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "lion.2", Zone.BATTLEFIELD, true);
         checkAliasZone("3", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "lion.3", Zone.BATTLEFIELD, false);
@@ -123,5 +119,95 @@ public class TestAliases extends CardTestPlayerBase {
 
         assertGraveyardCount(playerA, "Lightning Bolt", 3);
         assertGraveyardCount(playerA, "Silvercoat Lion", 3);
+    }
+
+    @Test
+    public void test_CastSpell_Normal() {
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.HAND, playerA, "Lightning Bolt", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Silvercoat Lion");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertGraveyardCount(playerA, "Lightning Bolt", 1);
+        assertGraveyardCount(playerA, "Silvercoat Lion", 1);
+    }
+
+    @Test
+    public void test_CastSpell_Alias() {
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion@lion", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.HAND, playerA, "Lightning Bolt@bolt", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "@bolt", "@lion");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertGraveyardCount(playerA, "@bolt", 1);
+        assertGraveyardCount(playerA, "@lion", 1);
+    }
+
+    @Test
+    public void test_ActivateAbility_Normal() {
+        // {T}: Embermage Goblin deals 1 damage to any target.
+        addCard(Zone.BATTLEFIELD, playerA, "Embermage Goblin", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
+
+        showAvaileableAbilities("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {source} deals", "Silvercoat Lion");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {source} deals", "Silvercoat Lion");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Embermage Goblin", 2);
+        assertGraveyardCount(playerA, "Silvercoat Lion", 1);
+    }
+
+    @Test
+    public void test_ActivateAbility_Alias() {
+        // {T}: Embermage Goblin deals 1 damage to any target.
+        addCard(Zone.BATTLEFIELD, playerA, "Embermage Goblin@goblin", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion@lion", 1);
+
+        showAvaileableAbilities("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {source} deals", "@lion");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {source} deals", "@lion");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "@goblin.1", 1);
+        assertPermanentCount(playerA, "@goblin.2", 1);
+        assertGraveyardCount(playerA, "@lion", 1);
+    }
+
+    @Test
+    public void test_ActivateManaAbility_Alias() {
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion@lion", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain@mana", 3);
+        addCard(Zone.HAND, playerA, "Lightning Bolt@bolt", 1);
+
+        // testing alias for ability
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "@mana.2 {T}: Add {R}");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "@bolt", "@lion");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertTapped("@mana.1", false);
+        assertTapped("@mana.2", true);
+        assertTapped("@mana.3", false);
+        assertGraveyardCount(playerA, "@bolt", 1);
+        assertGraveyardCount(playerA, "@lion", 1);
     }
 }

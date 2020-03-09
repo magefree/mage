@@ -356,6 +356,46 @@ public class TestPlayer implements Player {
         }
     }
 
+    public boolean isAbilityHaveTargetNameOrAlias(Game game, Ability ability, String nameOrAlias) {
+        // use cases:
+        // * Cast cardName with extra
+        // * Cast @ref
+        // * Ability text
+        // * @ref ability text from ref object
+        boolean foundObject;
+        boolean foundAbility;
+        if (nameOrAlias.startsWith("Cast ")) {
+            // object name:
+            // Cast cardName with extra
+            // Cast @ref
+            String searchObject = nameOrAlias.substring("Cast ".length());
+            if (searchObject.contains(" with ")
+                    || searchObject.contains(" using ")
+                    || searchObject.contains("fused ")) {
+                Assert.assertFalse("alternative spell don't support alias", searchObject.startsWith(ALIAS_PREFIX));
+                foundObject = true;
+                foundAbility = ability.toString().startsWith(nameOrAlias);
+            } else {
+                foundObject = isObjectHaveTargetNameOrAlias(game.getObject(ability.getSourceId()), searchObject);
+                foundAbility = searchObject.startsWith(ALIAS_PREFIX) || ability.toString().startsWith(nameOrAlias);
+            }
+        } else if (nameOrAlias.startsWith(ALIAS_PREFIX)) {
+            // object alias with ability text:
+            // @ref ability text from ref object
+            Assert.assertTrue("ability alias must contains space", nameOrAlias.contains(" "));
+            String searchObject = nameOrAlias.substring(0, nameOrAlias.indexOf(" "));
+            String searchAbility = nameOrAlias.substring(nameOrAlias.indexOf(" ") + 1);
+            foundObject = isObjectHaveTargetNameOrAlias(game.getObject(ability.getSourceId()), searchObject);
+            foundAbility = ability.toString().startsWith(searchAbility);
+        } else {
+            // ability text
+            foundObject = true;
+            foundAbility = ability.toString().startsWith(nameOrAlias);
+        }
+
+        return foundObject && foundAbility;
+    }
+
     public boolean isObjectHaveTargetNameOrAlias(MageObject object, String nameOrAlias) {
         if (object == null || nameOrAlias == null) {
             return false;
@@ -532,7 +572,7 @@ public class TestPlayer implements Player {
                         break;
                     }
                     for (Ability ability : computerPlayer.getPlayable(game, true)) { // add wrong action log?
-                        if (ability.toString().startsWith(groups[0])) {
+                        if (isAbilityHaveTargetNameOrAlias(game, ability, groups[0])) {
                             int bookmark = game.bookmarkState();
                             Ability newAbility = ability.copy();
                             if (groups.length > 1 && !groups[1].equals("target=" + NO_TARGET)) {
@@ -551,16 +591,16 @@ public class TestPlayer implements Player {
                     }
                     // TODO: fix wrong commands (on non existing card), it's HUGE (350+ failed tests with wrong commands)
                     //Assert.fail("Can't find ability to activate command: " + command);
-                } else if (action.getAction().startsWith("manaActivate:")) {
+                } else if (action.getAction().startsWith(ACTIVATE_MANA)) {
                     String command = action.getAction();
-                    command = command.substring(command.indexOf("manaActivate:") + 13);
+                    command = command.substring(command.indexOf(ACTIVATE_MANA) + ACTIVATE_MANA.length());
                     String[] groups = command.split("\\$");
                     List<MageObject> manaObjects = computerPlayer.getAvailableManaProducers(game);
 
                     for (MageObject mageObject : manaObjects) {
                         if (mageObject instanceof Permanent) {
                             for (Ability manaAbility : ((Permanent) mageObject).getAbilities(game).getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, game)) {
-                                if (manaAbility.toString().startsWith(groups[0])) {
+                                if (isAbilityHaveTargetNameOrAlias(game, manaAbility, groups[0])) {
                                     Ability newManaAbility = manaAbility.copy();
                                     computerPlayer.activateAbility((ActivatedAbility) newManaAbility, game);
                                     actions.remove(action);
@@ -569,7 +609,7 @@ public class TestPlayer implements Player {
                             }
                         } else if (mageObject instanceof Card) {
                             for (Ability manaAbility : ((Card) mageObject).getAbilities(game).getAvailableActivatedManaAbilities(game.getState().getZone(mageObject.getId()), game)) {
-                                if (manaAbility.toString().startsWith(groups[0])) {
+                                if (isAbilityHaveTargetNameOrAlias(game, manaAbility, groups[0])) {
                                     Ability newManaAbility = manaAbility.copy();
                                     computerPlayer.activateAbility((ActivatedAbility) newManaAbility, game);
                                     actions.remove(action);
@@ -578,7 +618,7 @@ public class TestPlayer implements Player {
                             }
                         } else {
                             for (Ability manaAbility : mageObject.getAbilities().getAvailableActivatedManaAbilities(game.getState().getZone(mageObject.getId()), game)) {
-                                if (manaAbility.toString().startsWith(groups[0])) {
+                                if (isAbilityHaveTargetNameOrAlias(game, manaAbility, groups[0])) {
                                     Ability newManaAbility = manaAbility.copy();
                                     computerPlayer.activateAbility((ActivatedAbility) newManaAbility, game);
                                     actions.remove(action);
@@ -590,7 +630,8 @@ public class TestPlayer implements Player {
                     List<Permanent> manaPermsWithCost = computerPlayer.getAvailableManaProducersWithCost(game);
                     for (Permanent perm : manaPermsWithCost) {
                         for (ActivatedManaAbilityImpl manaAbility : perm.getAbilities().getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, game)) {
-                            if (manaAbility.toString().startsWith(groups[0]) && manaAbility.canActivate(computerPlayer.getId(), game).canActivate()) {
+                            if (isAbilityHaveTargetNameOrAlias(game, manaAbility, groups[0])
+                                    && manaAbility.canActivate(computerPlayer.getId(), game).canActivate()) {
                                 Ability newManaAbility = manaAbility.copy();
                                 computerPlayer.activateAbility((ActivatedAbility) newManaAbility, game);
                                 actions.remove(action);
