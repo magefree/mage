@@ -54,18 +54,16 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
                 pass(game);
                 return false;
             case PRECOMBAT_MAIN:
-                if (game.isActivePlayer(playerId)) {
-                    printOutState(game);
-                    if (actions.isEmpty()) {
-                        logger.info("Sim Calculate pre combat actions ----------------------------------------------------- ");
-                        calculateActions(game);
-                    }
-                    act(game);
-                    return true;
-                } else {
-                    pass(game);
+                // 09.03.2020:
+                // in old version it passes opponent's pre-combat step (game.isActivePlayer(playerId) -> pass(game))
+                // why?!
+                printOutState(game);
+                if (actions.isEmpty()) {
+                    logger.info("Sim Calculate pre combat main actions ----------------------------------------------------- ");
+                    calculateActions(game);
                 }
-                return false;
+                act(game);
+                return true;
             case BEGIN_COMBAT:
                 pass(game);
                 return false;
