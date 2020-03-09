@@ -22,11 +22,7 @@ public final class Starter2000 extends ExpansionSet {
         this.blockName = "Beginner";
         this.hasBasicLands = true;
         this.hasBoosters = false;
-        this.numBoosterLands = 1;
-        this.numBoosterCommon = 10;
-        this.numBoosterUncommon = 3;
-        this.numBoosterRare = 1;
-        this.ratioBoosterMythic = 0;
+
         cards.add(new SetCardInfo("Angelic Blessing", 1, Rarity.COMMON, mage.cards.a.AngelicBlessing.class));
         cards.add(new SetCardInfo("Armored Pegasus", 2, Rarity.COMMON, mage.cards.a.ArmoredPegasus.class));
         cards.add(new SetCardInfo("Bog Imp", 22, Rarity.COMMON, mage.cards.b.BogImp.class));
