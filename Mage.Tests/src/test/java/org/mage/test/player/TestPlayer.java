@@ -176,6 +176,10 @@ public class TestPlayer implements Player {
         actions.add(new PlayerAction(actionName, turnNum, step, action));
     }
 
+    public void addAction(PlayerAction playerAction) {
+        actions.add(playerAction);
+    }
+
     public List<PlayerAction> getActions() {
         return actions;
     }
@@ -552,6 +556,7 @@ public class TestPlayer implements Player {
             List<PlayerAction> removed = new ArrayList<>();
             actionsToRemovesLater.forEach((action, step) -> {
                 if (game.getStep().getType() != step) {
+                    action.onActionRemovedLater(game, this);
                     actions.remove(action);
                     removed.add(action);
                 }
@@ -689,26 +694,18 @@ public class TestPlayer implements Player {
 
                     // play priority
                     if (command.equals(AI_COMMAND_PLAY_PRIORITY)) {
-                        AICanChooseInStrictMode = true;
-                        try {
-                            computerPlayer.priority(game);
-                            actions.remove(action);
-                            return true;
-                        } finally {
-                            AICanChooseInStrictMode = false;
-                        }
+                        AICanChooseInStrictMode = true; // disable on action's remove
+                        computerPlayer.priority(game);
+                        actions.remove(action);
+                        return true;
                     }
 
                     // play step
                     if (command.equals(AI_COMMAND_PLAY_STEP)) {
-                        AICanChooseInStrictMode = true;
-                        try {
-                            actionsToRemovesLater.put(action, game.getStep().getType());
-                            computerPlayer.priority(game);
-                            return true;
-                        } finally {
-                            AICanChooseInStrictMode = false;
-                        }
+                        AICanChooseInStrictMode = true; // disable on action's remove
+                        actionsToRemovesLater.put(action, game.getStep().getType());
+                        computerPlayer.priority(game);
+                        return true;
                     }
 
                     Assert.fail("Unknow ai command: " + command);
@@ -3770,5 +3767,9 @@ public class TestPlayer implements Player {
 
     public ComputerPlayer getComputerPlayer() {
         return computerPlayer;
+    }
+
+    public void setAICanChooseInStrictMode(boolean AICanChooseInStrictMode) {
+        this.AICanChooseInStrictMode = AICanChooseInStrictMode;
     }
 }

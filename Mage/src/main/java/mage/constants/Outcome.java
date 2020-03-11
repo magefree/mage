@@ -46,7 +46,7 @@ public enum Outcome {
     // AI sorting targets by priorities (own or opponents) and selects most valueable or weakest
     private final boolean good;
 
-    // no different between own or opponent targets (example: copy must choose from all permanents) // TODO: copy must choose most valueable from opponent too
+    // no different between own or opponent targets (example: copy must choose from all permanents)
     private boolean canTargetAll;
 
     Outcome(boolean good) {

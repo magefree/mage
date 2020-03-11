@@ -490,13 +490,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             required = false;
         }
 
-        // temp lists
         List<Permanent> goodList = new ArrayList<>();
         List<Permanent> badList = new ArrayList<>();
         List<Permanent> allList = new ArrayList<>();
-        List<Permanent> goodList2 = new ArrayList<>();
-        List<Permanent> badList2 = new ArrayList<>();
-        List<Permanent> allList2 = new ArrayList<>();
 
         // TODO: improve to process multiple opponents instead random
         UUID randomOpponentId;
@@ -2541,6 +2537,18 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
         allList.addAll(goodList);
         allList.addAll(badList);
+
+        // "can target all mode" don't need your/opponent lists -- all targets goes with same value
+        if (outcome.isCanTargetAll()) {
+            allList.sort(comparator); // bad sort
+            if (outcome.isGood()) {
+                Collections.reverse(allList); // good sort
+            }
+            goodList.clear();
+            goodList.addAll(allList);
+            badList.clear();
+            badList.addAll(allList);
+        }
     }
 
 

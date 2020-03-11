@@ -1424,7 +1424,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      */
     public void aiPlayPriority(int turnNum, PhaseStep step, TestPlayer player) {
         assertAiPlayAndGameCompatible(player);
-        player.addAction(turnNum, step, AI_PREFIX + AI_COMMAND_PLAY_PRIORITY);
+        player.addAction(createAIPlayerAction(turnNum, step, AI_COMMAND_PLAY_PRIORITY));
     }
 
     /**
@@ -1433,7 +1433,17 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      */
     public void aiPlayStep(int turnNum, PhaseStep step, TestPlayer player) {
         assertAiPlayAndGameCompatible(player);
-        player.addAction(turnNum, step, AI_PREFIX + AI_COMMAND_PLAY_STEP);
+        player.addAction(createAIPlayerAction(turnNum, step, AI_COMMAND_PLAY_STEP));
+    }
+
+    public PlayerAction createAIPlayerAction(int turnNum, PhaseStep step, String aiCommand) {
+        // AI actions must disable and enable strict mode
+        return new PlayerAction("", turnNum, step, AI_PREFIX + aiCommand) {
+            @Override
+            public void onActionRemovedLater(Game game, TestPlayer player) {
+                player.setAICanChooseInStrictMode(false);
+            }
+        };
     }
 
     private void assertAiPlayAndGameCompatible(TestPlayer player) {
