@@ -17,7 +17,7 @@ public enum Outcome {
     PutCreatureInPlay(true),
     PutCardInPlay(true),
     PutLandInPlay(true),
-    GainControl(true),
+    GainControl(false),
     DrawCard(true),
     Discard(false),
     Sacrifice(false),
@@ -27,9 +27,9 @@ public enum Outcome {
     Protect(true),
     PutManaInPool(true),
     Regenerate(true),
-    PreventDamage(true),
-    PreventCast(false),
-    RedirectDamage(true),
+    PreventDamage(true), // TODO: check good or bad
+    PreventCast(false), // TODO: check good or bad
+    RedirectDamage(true), // TODO: check good or bad
     Tap(false),
     Transform(true),
     Untap(true),
@@ -40,9 +40,13 @@ public enum Outcome {
     Neutral(true),
     Removal(false),
     AIDontUseIt(false),
-    Vote(true);
+    Vote(true); // TODO: check good or bad
 
-    private final boolean good; // good or bad effect for targeting player (for AI usage)
+    // good or bad effect for TARGET, not targeting player (for AI usage)
+    // AI sorting targets by priorities (own or opponents) and selects most valueable or weakest
+    private final boolean good;
+
+    // no different between own or opponent targets (example: copy must choose from all permanents) // TODO: copy must choose most valueable from opponent too
     private boolean canTargetAll;
 
     Outcome(boolean good) {
@@ -63,7 +67,7 @@ public enum Outcome {
     }
 
     public static Outcome inverse(Outcome outcome) {
-        // inverse bad/good effect (as example, after controlling player change)
+        // inverse bad/good effect
         if (outcome.isGood()) {
             return Outcome.Detriment;
         } else {

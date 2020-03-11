@@ -70,8 +70,8 @@ public class TargetOpponentsChoicePermanent extends TargetPermanent {
             return false;
         }
 
-        // opponent choose real targets (outcome must be inversed)
-        return super.chooseTarget(Outcome.inverse(outcome), opponentId, source, game);
+        // opponent choose real targets
+        return super.chooseTarget(outcome, opponentId, source, game);
     }
 
     @Override
