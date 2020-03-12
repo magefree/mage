@@ -105,16 +105,26 @@ class MindsDesireCastFromExileEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (affectedControllerId.equals(source.getControllerId()) && getTargetPointer().getTargets(game, source).contains(objectId)) {
-            Card card = game.getCard(objectId);
-            if (card != null && !card.isLand() && card.getSpellAbility().getCosts() != null) {
-                Player player = game.getPlayer(affectedControllerId);
-                if (player != null) {
-                    player.setCastSourceIdWithAlternateMana(objectId, null, card.getSpellAbility().getCosts());
-                }
-            }
+        return applies(objectId, null, source, game, affectedControllerId);
+    }
+
+    @Override
+    public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
+        Card cardToCheck = game.getCard(objectId);
+        objectId = CardUtil.getMainCardId(game, objectId); // for split cards
+
+        if (!isAbilityAppliedForAlternateCast(cardToCheck, affectedAbility, playerId, source)) {
+            return false;
+        }
+
+        Player controller = game.getPlayer(cardToCheck.getOwnerId());
+        if (controller != null
+                && getTargetPointer().getTargets(game, source).contains(objectId)) {
+            controller.setCastSourceIdWithAlternateMana(affectedAbility.getSourceId(), null, affectedAbility.getCosts());
             return true;
         }
+
+
         return false;
     }
 }

@@ -19,7 +19,7 @@ public class PlayTopCardFromLibraryTest extends CardTestPlayerBase {
      */
 
     @Test
-    public void test_CreaturePlay() {
+    public void test_BolassCitadel_CreaturePlay() {
         removeAllCardsFromLibrary(playerA);
         addCard(Zone.LIBRARY, playerA, "Balduvian Bears", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Bolas's Citadel", 1);
@@ -36,7 +36,7 @@ public class PlayTopCardFromLibraryTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void test_CreaturePlay2() {
+    public void test_Vizier_CreaturePlay() {
         removeAllCardsFromLibrary(playerA);
         addCard(Zone.LIBRARY, playerA, "Balduvian Bears", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
@@ -75,7 +75,7 @@ public class PlayTopCardFromLibraryTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void test_SplitRightPlay() {
+    public void test_BolassCitadel_SplitRightPlay() {
         // https://github.com/magefree/mage/issues/5912
         // Bolas's citadel requires you to pay mana instead of life for a split card on top of library.
         //
@@ -106,7 +106,7 @@ public class PlayTopCardFromLibraryTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void test_SplitLeftPlay() {
+    public void test_BolassCitadel_SplitLeftPlay() {
         removeAllCardsFromLibrary(playerA);
         addCard(Zone.LIBRARY, playerA, "Revival // Revenge", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Bolas's Citadel", 1);
@@ -121,6 +121,106 @@ public class PlayTopCardFromLibraryTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertLife(playerA, 20 - 2);
+        assertLife(playerB, 20);
+        assertGraveyardCount(playerA, "Balduvian Bears", 0);
+        assertPermanentCount(playerA, "Balduvian Bears", 1);
+    }
+
+    @Test
+    public void test_MindsDesire_CreaturePlay() {
+        removeAllCardsFromLibrary(playerA);
+
+        addCard(Zone.HAND, playerA, "Mind's Desire", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
+        //
+        addCard(Zone.LIBRARY, playerA, "Balduvian Bears", 1);
+
+        // prepare mind
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mind's Desire");
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Balduvian Bears");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Balduvian Bears", 1);
+        assertLife(playerA, 20);
+    }
+
+    @Test
+    public void test_MindsDesire_LandPlay() {
+        removeAllCardsFromLibrary(playerA);
+        removeAllCardsFromHand(playerA);
+
+        addCard(Zone.HAND, playerA, "Mind's Desire", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
+        //
+        addCard(Zone.LIBRARY, playerA, "Swamp", 1);
+
+        // prepare mind
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mind's Desire");
+
+        playLand(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Swamp");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Swamp", 1);
+        assertLife(playerA, 20);
+    }
+
+    @Test
+    public void test_MindsDesire_SplitRightPlay() {
+        removeAllCardsFromLibrary(playerA);
+
+        // Shuffle your library. Then exile the top card of your library. Until end of turn, you may play that card without paying its mana cost.
+        // Storm (When you cast this spell, copy it for each spell cast before it this turn.)
+        addCard(Zone.HAND, playerA, "Mind's Desire", 1); // {4}{U}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
+        //
+        addCard(Zone.LIBRARY, playerA, "Revival // Revenge", 1);
+
+        // prepare mind
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mind's Desire");
+
+        // Double your life total. Target opponent loses half their life, rounded up.
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Revenge", playerB);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertLife(playerA, 20 * 2);
+        assertLife(playerB, 20 / 2);
+    }
+
+    @Test
+    public void test_MindsDesire_SplitLeftPlay() {
+        removeAllCardsFromLibrary(playerA);
+
+        addCard(Zone.HAND, playerA, "Mind's Desire", 1); // {4}{U}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
+        //
+        addCard(Zone.LIBRARY, playerA, "Revival // Revenge", 1);
+        addCard(Zone.GRAVEYARD, playerA, "Balduvian Bears", 1);
+
+        // prepare mind
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mind's Desire");
+
+        // Return target creature card with converted mana cost 3 or less from your graveyard to the battlefield.
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Revival", "Balduvian Bears"); // {W/B}{W/B} = 2 life
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertLife(playerA, 20);
         assertLife(playerB, 20);
         assertGraveyardCount(playerA, "Balduvian Bears", 0);
         assertPermanentCount(playerA, "Balduvian Bears", 1);
