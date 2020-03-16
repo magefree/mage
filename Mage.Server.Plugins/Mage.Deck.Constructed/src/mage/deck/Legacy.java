@@ -85,6 +85,7 @@ public class Legacy extends Constructed {
         banned.add("Tinker");
         banned.add("Tolarian Academy");
         banned.add("Treasure Cruise");
+        banned.add("Underworld Breach");
         banned.add("Unexpected Potential");
         banned.add("Vampiric Tutor");
         banned.add("Wheel of Fortune");
