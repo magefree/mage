@@ -16,7 +16,7 @@ public class DuelDecksMirrodinPureVsNewPhyrexia extends ExpansionSet {
     }
 
     private DuelDecksMirrodinPureVsNewPhyrexia() {
-        super("Duel Decks: Mirrodin Pure vs. New Phyrexia", "TD2", ExpansionSet.buildDate(2011, 5, 14), SetType.SUPPLEMENTAL);
+        super("Duel Decks: Mirrodin Pure vs. New Phyrexia", "TD2", ExpansionSet.buildDate(2011, 5, 14), SetType.MAGIC_ONLINE);
         this.hasBoosters = false;
         this.hasBasicLands = true;
 
