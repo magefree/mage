@@ -36,7 +36,8 @@ public class KaladeshPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Cataclysmic Gearhulk", "9s", Rarity.MYTHIC, mage.cards.c.CataclysmicGearhulk.class));
         cards.add(new SetCardInfo("Chandra, Torch of Defiance", "110s", Rarity.MYTHIC, mage.cards.c.ChandraTorchOfDefiance.class));
         cards.add(new SetCardInfo("Chief of the Foundry", 200, Rarity.UNCOMMON, mage.cards.c.ChiefOfTheFoundry.class));
-        cards.add(new SetCardInfo("Combustible Gearhulk", "112s", Rarity.MYTHIC, mage.cards.c.CombustibleGearhulk.class));
+        cards.add(new SetCardInfo("Combustible Gearhulk", "112p", Rarity.MYTHIC, mage.cards.c.CombustibleGearhulk.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Combustible Gearhulk", "112s", Rarity.MYTHIC, mage.cards.c.CombustibleGearhulk.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Concealed Courtyard", "245s", Rarity.RARE, mage.cards.c.ConcealedCourtyard.class));
         cards.add(new SetCardInfo("Confiscation Coup", "41s", Rarity.RARE, mage.cards.c.ConfiscationCoup.class));
         cards.add(new SetCardInfo("Cultivator of Blades", 151, Rarity.RARE, mage.cards.c.CultivatorOfBlades.class, NON_FULL_USE_VARIOUS));
@@ -71,7 +72,8 @@ public class KaladeshPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Midnight Oil", "92s", Rarity.RARE, mage.cards.m.MidnightOil.class));
         cards.add(new SetCardInfo("Multiform Wonder", "223s", Rarity.RARE, mage.cards.m.MultiformWonder.class));
         cards.add(new SetCardInfo("Nissa, Vital Force", "163s", Rarity.MYTHIC, mage.cards.n.NissaVitalForce.class));
-        cards.add(new SetCardInfo("Noxious Gearhulk", "96s", Rarity.MYTHIC, mage.cards.n.NoxiousGearhulk.class));
+        cards.add(new SetCardInfo("Noxious Gearhulk", "96p", Rarity.MYTHIC, mage.cards.n.NoxiousGearhulk.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Noxious Gearhulk", "96s", Rarity.MYTHIC, mage.cards.n.NoxiousGearhulk.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Oviya Pashiri, Sage Lifecrafter", "165s", Rarity.RARE, mage.cards.o.OviyaPashiriSageLifecrafter.class));
         cards.add(new SetCardInfo("Padeem, Consul of Innovation", "59s", Rarity.RARE, mage.cards.p.PadeemConsulOfInnovation.class));
         cards.add(new SetCardInfo("Panharmonicon", "226s", Rarity.RARE, mage.cards.p.Panharmonicon.class));
