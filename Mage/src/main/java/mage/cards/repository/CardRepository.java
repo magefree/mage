@@ -179,6 +179,7 @@ public enum CardRepository {
     public Boolean haveSnowLands(String setCode) {
         return setCode.equals("CSP")
                 || setCode.equals("MH1")
+                || setCode.equals("SLD")
                 || setCode.equals("ME2")
                 || setCode.equals("ICE");
     }
