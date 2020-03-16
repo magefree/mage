@@ -47,6 +47,7 @@ public class Modern extends Constructed {
         banned.add("Mox Opal");
         banned.add("Mycosynth Lattice");
         banned.add("Oko, Thief of Crowns");
+        banned.add("Once Upon a Time");
         banned.add("Ponder");
         banned.add("Preordain");
         banned.add("Punishing Fire");
