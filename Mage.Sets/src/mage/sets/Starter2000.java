@@ -6,7 +6,8 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
+ * Somehow, Scryfall only lists 20 cards in this set.
+ * https://scryfall.com/sets/s00
  * @author LevelX2
  */
 public final class Starter2000 extends ExpansionSet {

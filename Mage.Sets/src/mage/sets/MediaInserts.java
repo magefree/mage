@@ -5,6 +5,10 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
+/**
+ * This looks like it is an aggregate set
+ * @deprecated
+ */
 public final class MediaInserts extends ExpansionSet {
 
     private static final MediaInserts instance = new MediaInserts();
