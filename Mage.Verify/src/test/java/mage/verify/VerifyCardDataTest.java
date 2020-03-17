@@ -92,7 +92,6 @@ public class VerifyCardDataTest {
         skipListCreate(SKIP_LIST_PT);
         skipListAddName(SKIP_LIST_PT, "UST", "Garbage Elemental");
         skipListAddName(SKIP_LIST_PT, "UST", "Infinity Elemental");
-        skipListAddName(SKIP_LIST_PT, "UNH", "Old Fogey");
 
         // color
         skipListCreate(SKIP_LIST_COLOR);
@@ -105,7 +104,6 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_COST, "WC00", "Erase");
         skipListAddName(SKIP_LIST_COST, "H17", "Grimlock, Dinobot Leader");
         skipListAddName(SKIP_LIST_COST, "UST", "Everythingamajig");
-        skipListAddName(SKIP_LIST_COST, "THB", "Anax, Hardened in the Forge"); // until it's been corrected in MTGJSON
         skipListAddName(SKIP_LIST_COST, "ANA", "Shrine Keeper"); // until it's been corrected in MTGJSON
 
         // supertype
@@ -114,6 +112,7 @@ public class VerifyCardDataTest {
         // type
         skipListCreate(SKIP_LIST_TYPE);
         skipListAddName(SKIP_LIST_TYPE, "UNH", "Old Fogey");
+        skipListAddName(SKIP_LIST_TYPE, "UND", "Old Fogey");
         skipListAddName(SKIP_LIST_TYPE, "UST", "capital offense");
 
         // subtype
@@ -124,7 +123,12 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_SUBTYPE, "AER", "Ridgescale Tusker");
         skipListAddName(SKIP_LIST_SUBTYPE, "ME3", "Lady Caleria");
         skipListAddName(SKIP_LIST_SUBTYPE, "LEG", "Lady Caleria");
-
+        // Errata: Chicken -> Bird (2020). Remove thene, when it's been corrected in MTGJSON
+        skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Chicken a la King");
+        skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Free-Range Chicken");
+        skipListAddName(SKIP_LIST_SUBTYPE, "UND", "Free-Range Chicken");
+        skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Poultrygeist");
+        skipListAddName(SKIP_LIST_SUBTYPE, "UND", "Poultrygeist");
 
         // number
         skipListCreate(SKIP_LIST_NUMBER);
