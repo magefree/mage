@@ -18,7 +18,7 @@ public final class MasterpieceSeriesAmonkhet extends ExpansionSet {
     }
 
     private MasterpieceSeriesAmonkhet() {
-        super("Masterpiece Series Amonkhet", "MPS-AKH", ExpansionSet.buildDate(2017, 4, 28), SetType.PROMOTIONAL);
+        super("Masterpiece Series Amonkhet", "MP2", ExpansionSet.buildDate(2017, 4, 28), SetType.PROMOTIONAL);
         this.blockName = "Masterpiece Series";
         this.hasBoosters = false;
         this.hasBasicLands = false;
