@@ -47,10 +47,10 @@ Conflux|CON|
 Champs|CP|
 Coldsnap|CSP|
 Duel Decks: Jace vs. Chandra|DD2|
-Duel Decks: Anthology, Divine vs. Demonic|DD3DVD|
-Duel Decks: Anthology, Elves vs. Goblins|DD3EVG|
-Duel Decks: Anthology, Garruk vs. Liliana|DD3GVL|
-Duel Decks: Anthology, Jace vs. Chandra|DD3JVC|
+Duel Decks: Anthology, Divine vs. Demonic|DVD|
+Duel Decks: Anthology, Elves vs. Goblins|EVG|
+Duel Decks: Anthology, Garruk vs. Liliana|GVL|
+Duel Decks: Anthology, Jace vs. Chandra|JVC|
 Duel Decks: Divine vs. Demonic|DDC|
 Duel Decks: Garruk vs. Liliana|DDD|
 Duel Decks: Phyrexia vs. the Coalition|DDE|

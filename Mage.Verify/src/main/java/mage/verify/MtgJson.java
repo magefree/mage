@@ -28,7 +28,6 @@ public final class MtgJson {
     // TODO: MtgJson now seems to use upper case set codes only.
     //  Review the ones beginning with a lower case "p" and remove the redundant entries.
     static {
-        mtgJsonToXMageCodes.put("pWCQ", "WMCQ");
         mtgJsonToXMageCodes.put("pSUS", "SUS");
         mtgJsonToXMageCodes.put("pPRE", "PPRE");
         // mtgJsonToXMageCodes.put("pMPR", "MPRP"); // TODO: The set was split into the individual sets
@@ -41,9 +40,9 @@ public final class MtgJson {
         mtgJsonToXMageCodes.put("pARL", "PARL"); // TODO: What about the other Arena League sets (1999-2006)?
         mtgJsonToXMageCodes.put("pALP", "PALP");
         mtgJsonToXMageCodes.put("PO2", "P02");
-        mtgJsonToXMageCodes.put("DD3_JVC", "DD3JVC");
+        mtgJsonToXMageCodes.put("DD3_JVC", "JVC");
         mtgJsonToXMageCodes.put("DD3_GVL", "DDD");
-        mtgJsonToXMageCodes.put("DD3_EVG", "DD3EVG");
+        mtgJsonToXMageCodes.put("DD3_EVG", "EVG");
         mtgJsonToXMageCodes.put("DD3_DVD", "DDC");
         mtgJsonToXMageCodes.put("NMS", "NEM");
         mtgJsonToXMageCodes.put("MPS_AKH", "MPS-AKH");

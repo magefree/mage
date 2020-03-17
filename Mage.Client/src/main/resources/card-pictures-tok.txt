@@ -502,18 +502,18 @@
 |Generate|TOK:DD3C|Beast|1|
 |Generate|TOK:DD3C|Beast|2|
 |Generate|TOK:DD3C|Elephant||
-|Generate|TOK:DD3DVD|Demon|||ReignOfThePitToken|
-|Generate|TOK:DD3DVD|Spirit|||SpiritWhiteToken|
-|Generate|TOK:DD3DVD|Thrull|||BreedingPitBlackInsectToken|
+|Generate|TOK:DVD|Demon|||ReignOfThePitToken|
+|Generate|TOK:DVD|Spirit|||SpiritWhiteToken|
+|Generate|TOK:DVD|Thrull|||BreedingPitBlackInsectToken|
 |Generate|TOK:DD3D|Elemental Shaman||
-|Generate|TOK:DD3EVG|Elf Warrior|||ElfToken|
-|Generate|TOK:DD3EVG|Goblin|||GoblinToken|
-|Generate|TOK:DD3GVL|Ape|||PongifyApeToken|
-|Generate|TOK:DD3GVL|Bat|||BatToken|
-|Generate|TOK:DD3GVL|Beast|||BeastToken2|
-|Generate|TOK:DD3GVL|Beast|||BeastToken|
-|Generate|TOK:DD3GVL|Elephant|||ElephantToken|
-|Generate|TOK:DD3JVC|Elemental Shaman|||ElementalShamanToken|
+|Generate|TOK:EVG|Elf Warrior|||ElfToken|
+|Generate|TOK:EVG|Goblin|||GoblinToken|
+|Generate|TOK:GVL|Ape|||PongifyApeToken|
+|Generate|TOK:GVL|Bat|||BatToken|
+|Generate|TOK:GVL|Beast|||BeastToken2|
+|Generate|TOK:GVL|Beast|||BeastToken|
+|Generate|TOK:GVL|Elephant|||ElephantToken|
+|Generate|TOK:JVC|Elemental Shaman|||ElementalShamanToken|
 |Generate|TOK:DDC|Demon|||ReignOfThePitToken|
 |Generate|TOK:DDC|Spirit|||SpiritWhiteToken|
 |Generate|TOK:DDC|Thrull|||BreedingPitBlackInsectToken|

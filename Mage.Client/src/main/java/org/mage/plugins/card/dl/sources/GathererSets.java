@@ -64,13 +64,13 @@ public class GathererSets implements Iterable<DownloadJob> {
             // "PALP" -- Gatherer does not have the set Asia Pacific Land Program
             // "ATH" -- has cards from many sets, symbol does not exist on gatherer
             // "CLASH", "CP", "DPA", "PELP", "PGPX", "GRC", "GUR", "H17", "JR", "MBP", "MGDC", "MLP", "PPRE", "SUS", "SWS", "WMCQ", // need to fix
-            "H09", "PD2", "PD3", "UNH", "CM1", "V11", "A25", "UST", "IMA", "DD2", "EVG", "DDC", "DDE", "DDD", "8EB", "9EB", "CHR", "G18", "DD3GVL", "S00", "S99", "UGL" // ok
+            "H09", "PD2", "PD3", "UNH", "CM1", "V11", "A25", "UST", "IMA", "DD2", "EVG", "DDC", "DDE", "DDD", "8EB", "9EB", "CHR", "G18", "GVL", "S00", "S99", "UGL" // ok
             // current testing
     };
 
     private static final String[] symbolsBasicWithMyth = {"M10", "M11", "M12", "M13", "M14", "M15", "ORI",
             "DDF", "DDG", "DDH", "DDI", "DDJ", "DDK", "DDL", "DDM", "DDN",
-            "DD3DVD", "DD3JVC", "DDO", "DDP", "DDQ", "DDR", "DDS", "DDT", "DDU",
+            "DVD", "JVC", "DDO", "DDP", "DDQ", "DDR", "DDS", "DDT", "DDU",
             "ALA", "CON", "ARB",
             "ZEN", "WWK", "ROE",
             "SOM", "MBS", "NPH",
@@ -98,11 +98,11 @@ public class GathererSets implements Iterable<DownloadJob> {
     };
 
     private static final String[] symbolsOnlyMyth = {
-            "DRB", "V09", "V10", "V12", "V13", "V14", "V15", "V16", "V17", "EXP", "MEDM"
+            "DRB", "V09", "V10", "V12", "V13", "V14", "V15", "V16", "V17", "EXP", "MED"
             // "HTR" does not exist
     };
     private static final String[] symbolsOnlySpecial = {
-            "MPS", "MPS-AKH"
+            "MPS", "MP2"
     };
 
     private static final HashMap<String, String> codeReplacements = new HashMap<>();
@@ -120,10 +120,10 @@ public class GathererSets implements Iterable<DownloadJob> {
         codeReplacements.put("ATQ", "AQ");
         codeReplacements.put("CMA", "CM1");
         codeReplacements.put("CHR", "CH");
-        codeReplacements.put("DD3DVD", "DD3_DVD");
-        codeReplacements.put("DD3EVG", "DD3_EVG");
-        codeReplacements.put("DD3GVL", "DD3_GVL");
-        codeReplacements.put("DD3JVC", "DD3_JVC");
+        codeReplacements.put("DVD", "DD3_DVD");
+        codeReplacements.put("EVG", "DD3_EVG");
+        codeReplacements.put("GVL", "DD3_GVL");
+        codeReplacements.put("JVC", "DD3_JVC");
         codeReplacements.put("DRK", "DK");
         codeReplacements.put("EXO", "EX");
         codeReplacements.put("FEM", "FE");
@@ -133,9 +133,9 @@ public class GathererSets implements Iterable<DownloadJob> {
         codeReplacements.put("LEA", "1E");
         codeReplacements.put("LEB", "2E");
         codeReplacements.put("LEG", "LE");
-        codeReplacements.put("MEDM", "MPS_WAR");
+        codeReplacements.put("MED", "MPS_WAR");
         codeReplacements.put("MPS", "MPS_KLD");
-        codeReplacements.put("MPS-AKH", "MPS_AKH");
+        codeReplacements.put("MP2", "MPS_AKH");
         codeReplacements.put("MIR", "MI");
         codeReplacements.put("MMQ", "MM");
         codeReplacements.put("NEM", "NE");
