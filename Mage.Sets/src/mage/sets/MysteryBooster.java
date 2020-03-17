@@ -2,19 +2,30 @@ package mage.sets;
 
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
+import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 import mage.util.RandomUtil;
 
+import static java.util.Arrays.asList;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
+ * https://mtg.gamepedia.com/Mystery_Booster
+ * https://magic.wizards.com/en/articles/archive/feature/unraveling-mystery-booster-2019-11-14
+ * https://scryfall.com/sets/mb1
+ * Print sheets used for booster construction sourced from http://www.lethe.xyz/mtg/collation/mb1.html
+ *
+ * This set has a very special booster layout: Each slot draws from it’s own distinct print sheet and
+ * all cards have an equal probability. Therefore, this class implements booster construction by using 14 card lists.
  * @author TheElk801
  */
-public final class MysteryBooster extends ExpansionSet {
+public class MysteryBooster extends ExpansionSet {
 
     private static final MysteryBooster instance = new MysteryBooster();
 
@@ -22,8 +33,15 @@ public final class MysteryBooster extends ExpansionSet {
         return instance;
     }
 
+    /**
+     * This map defines which cards can go into which booster slot.
+     * Will be populated when the first booster is requested.
+     */
+    protected final Map<Integer, List<CardInfo>> possibleCardsPerBoosterSlot = new HashMap<>();
+
+
     private MysteryBooster() {
-        super("Mystery Booster", "MB1", ExpansionSet.buildDate(2020, 3, 13), SetType.SUPPLEMENTAL);
+        super("Mystery Booster", "MB1", ExpansionSet.buildDate(2019, 11, 7), SetType.SUPPLEMENTAL);
         this.hasBoosters = true;
         this.hasBasicLands = false;
 
@@ -94,8 +112,8 @@ public final class MysteryBooster extends ExpansionSet {
         cards.add(new SetCardInfo("Angelic Gift", 17, Rarity.COMMON, mage.cards.a.AngelicGift.class));
         cards.add(new SetCardInfo("Angelic Purge", 18, Rarity.COMMON, mage.cards.a.AngelicPurge.class));
         cards.add(new SetCardInfo("Angelsong", 22, Rarity.COMMON, mage.cards.a.Angelsong.class));
-        cards.add(new SetCardInfo("Anger of the Gods", 840, Rarity.RARE, mage.cards.a.AngerOfTheGods.class));
         cards.add(new SetCardInfo("Anger", 839, Rarity.UNCOMMON, mage.cards.a.Anger.class));
+        cards.add(new SetCardInfo("Anger of the Gods", 840, Rarity.RARE, mage.cards.a.AngerOfTheGods.class));
         cards.add(new SetCardInfo("Animar, Soul of Elements", 1387, Rarity.MYTHIC, mage.cards.a.AnimarSoulOfElements.class));
         cards.add(new SetCardInfo("Animate Dead", 566, Rarity.UNCOMMON, mage.cards.a.AnimateDead.class));
         cards.add(new SetCardInfo("Annihilate", 567, Rarity.UNCOMMON, mage.cards.a.Annihilate.class));
@@ -331,6 +349,7 @@ public final class MysteryBooster extends ExpansionSet {
         cards.add(new SetCardInfo("Citadel Castellan", 1408, Rarity.UNCOMMON, mage.cards.c.CitadelCastellan.class));
         cards.add(new SetCardInfo("Citanul Woodreaders", 1162, Rarity.COMMON, mage.cards.c.CitanulWoodreaders.class));
         cards.add(new SetCardInfo("Citywatch Sphinx", 318, Rarity.UNCOMMON, mage.cards.c.CitywatchSphinx.class));
+        cards.add(new SetCardInfo("Claim // Fame", 1536, Rarity.UNCOMMON, mage.cards.c.ClaimFame.class));
         cards.add(new SetCardInfo("Claustrophobia", 319, Rarity.COMMON, mage.cards.c.Claustrophobia.class));
         cards.add(new SetCardInfo("Cleansing Screech", 889, Rarity.COMMON, mage.cards.c.CleansingScreech.class));
         cards.add(new SetCardInfo("Clear the Mind", 320, Rarity.COMMON, mage.cards.c.ClearTheMind.class));
@@ -352,6 +371,7 @@ public final class MysteryBooster extends ExpansionSet {
         cards.add(new SetCardInfo("Collective Brutality", 600, Rarity.RARE, mage.cards.c.CollectiveBrutality.class));
         cards.add(new SetCardInfo("Colossal Dreadmaw", 1164, Rarity.COMMON, mage.cards.c.ColossalDreadmaw.class));
         cards.add(new SetCardInfo("Combo Attack", 1165, Rarity.COMMON, mage.cards.c.ComboAttack.class));
+        cards.add(new SetCardInfo("Commit // Memory", 1537, Rarity.RARE, mage.cards.c.CommitMemory.class));
         cards.add(new SetCardInfo("Commune with Nature", 1166, Rarity.COMMON, mage.cards.c.CommuneWithNature.class));
         cards.add(new SetCardInfo("Commune with the Gods", 1167, Rarity.COMMON, mage.cards.c.CommuneWithTheGods.class));
         cards.add(new SetCardInfo("Compelling Argument", 326, Rarity.COMMON, mage.cards.c.CompellingArgument.class));
@@ -645,6 +665,7 @@ public final class MysteryBooster extends ExpansionSet {
         cards.add(new SetCardInfo("Fiery Temper", 925, Rarity.COMMON, mage.cards.f.FieryTemper.class));
         cards.add(new SetCardInfo("Filigree Familiar", 1582, Rarity.UNCOMMON, mage.cards.f.FiligreeFamiliar.class));
         cards.add(new SetCardInfo("Fill with Fright", 661, Rarity.COMMON, mage.cards.f.FillWithFright.class));
+        cards.add(new SetCardInfo("Fire // Ice", 1538, Rarity.COMMON, mage.cards.f.FireIce.class));
         cards.add(new SetCardInfo("Fire Elemental", 929, Rarity.COMMON, mage.cards.f.FireElemental.class));
         cards.add(new SetCardInfo("Fireball", 926, Rarity.UNCOMMON, mage.cards.f.Fireball.class));
         cards.add(new SetCardInfo("Firebolt", 927, Rarity.COMMON, mage.cards.f.Firebolt.class));
@@ -664,8 +685,8 @@ public final class MysteryBooster extends ExpansionSet {
         cards.add(new SetCardInfo("Flesh to Dust", 663, Rarity.COMMON, mage.cards.f.FleshToDust.class));
         cards.add(new SetCardInfo("Fling", 934, Rarity.COMMON, mage.cards.f.Fling.class));
         cards.add(new SetCardInfo("Floodgate", 381, Rarity.UNCOMMON, mage.cards.f.Floodgate.class));
-        cards.add(new SetCardInfo("Fog Bank", 382, Rarity.UNCOMMON, mage.cards.f.FogBank.class));
         cards.add(new SetCardInfo("Fog", 1213, Rarity.COMMON, mage.cards.f.Fog.class));
+        cards.add(new SetCardInfo("Fog Bank", 382, Rarity.UNCOMMON, mage.cards.f.FogBank.class));
         cards.add(new SetCardInfo("Fogwalker", 383, Rarity.COMMON, mage.cards.f.Fogwalker.class));
         cards.add(new SetCardInfo("Foil", 384, Rarity.COMMON, mage.cards.f.Foil.class));
         cards.add(new SetCardInfo("Font of Mythos", 1584, Rarity.RARE, mage.cards.f.FontOfMythos.class));
@@ -944,6 +965,7 @@ public final class MysteryBooster extends ExpansionSet {
         cards.add(new SetCardInfo("Lead by Example", 1258, Rarity.COMMON, mage.cards.l.LeadByExample.class));
         cards.add(new SetCardInfo("Lead the Stampede", 1259, Rarity.COMMON, mage.cards.l.LeadTheStampede.class));
         cards.add(new SetCardInfo("Leapfrog", 418, Rarity.COMMON, mage.cards.l.Leapfrog.class));
+        cards.add(new SetCardInfo("Leaping Master", 999, Rarity.COMMON, mage.cards.l.LeapingMaster.class));
         cards.add(new SetCardInfo("Leonin Relic-Warder", 158, Rarity.UNCOMMON, mage.cards.l.LeoninRelicWarder.class));
         cards.add(new SetCardInfo("Leopard-Spotted Jiao", 1000, Rarity.COMMON, mage.cards.l.LeopardSpottedJiao.class));
         cards.add(new SetCardInfo("Lethal Sting", 700, Rarity.COMMON, mage.cards.l.LethalSting.class));
@@ -1061,8 +1083,8 @@ public final class MysteryBooster extends ExpansionSet {
         cards.add(new SetCardInfo("Mother of Runes", 183, Rarity.UNCOMMON, mage.cards.m.MotherOfRunes.class));
         cards.add(new SetCardInfo("Mulch", 1271, Rarity.COMMON, mage.cards.m.Mulch.class));
         cards.add(new SetCardInfo("Mulldrifter", 437, Rarity.COMMON, mage.cards.m.Mulldrifter.class));
-        cards.add(new SetCardInfo("Murder of Crows", 438, Rarity.UNCOMMON, mage.cards.m.MurderOfCrows.class));
         cards.add(new SetCardInfo("Murder", 717, Rarity.COMMON, mage.cards.m.Murder.class));
+        cards.add(new SetCardInfo("Murder of Crows", 438, Rarity.UNCOMMON, mage.cards.m.MurderOfCrows.class));
         cards.add(new SetCardInfo("Murderous Compulsion", 718, Rarity.COMMON, mage.cards.m.MurderousCompulsion.class));
         cards.add(new SetCardInfo("Mutiny", 1018, Rarity.COMMON, mage.cards.m.Mutiny.class));
         cards.add(new SetCardInfo("Mycoloth", 1272, Rarity.RARE, mage.cards.m.Mycoloth.class));
@@ -1437,6 +1459,9 @@ public final class MysteryBooster extends ExpansionSet {
         cards.add(new SetCardInfo("Spire Monitor", 503, Rarity.COMMON, mage.cards.s.SpireMonitor.class));
         cards.add(new SetCardInfo("Spreading Rot", 779, Rarity.COMMON, mage.cards.s.SpreadingRot.class));
         cards.add(new SetCardInfo("Sprouting Thrinax", 1489, Rarity.UNCOMMON, mage.cards.s.SproutingThrinax.class));
+        // Card not implemented. BEWARE: When enabling this entry, add it to the appropriate booster slot!
+        // It belongs into the Artifact/Land booster. Just uncomment the relevant entry down there.
+        //cards.add(new SetCardInfo("Spy Kit", 1635, Rarity.UNCOMMON, mage.cards.s.SpyKit.class));
         cards.add(new SetCardInfo("Squirrel Wrangler", 1340, Rarity.RARE, mage.cards.s.SquirrelWrangler.class));
         cards.add(new SetCardInfo("Stab Wound", 780, Rarity.UNCOMMON, mage.cards.s.StabWound.class));
         cards.add(new SetCardInfo("Staggershock", 1067, Rarity.UNCOMMON, mage.cards.s.Staggershock.class));
@@ -1716,1989 +1741,1777 @@ public final class MysteryBooster extends ExpansionSet {
         cards.add(new SetCardInfo("Zendikar's Roil", 1382, Rarity.UNCOMMON, mage.cards.z.ZendikarsRoil.class));
         cards.add(new SetCardInfo("Zhur-Taa Druid", 1517, Rarity.COMMON, mage.cards.z.ZhurTaaDruid.class));
         cards.add(new SetCardInfo("Zulaport Chainmage", 830, Rarity.COMMON, mage.cards.z.ZulaportChainmage.class));
-        cards.add(new SetCardInfo("Alchemist's Refuge", 1811, Rarity.RARE, mage.cards.a.AlchemistsRefuge.class));
-        cards.add(new SetCardInfo("Allosaurus Rider", 1755, Rarity.RARE, mage.cards.a.AllosaurusRider.class));
-        cards.add(new SetCardInfo("Amulet of Vigor", 1792, Rarity.RARE, mage.cards.a.AmuletOfVigor.class));
-        cards.add(new SetCardInfo("Archetype of Endurance", 1756, Rarity.UNCOMMON, mage.cards.a.ArchetypeOfEndurance.class));
-        cards.add(new SetCardInfo("Aurelia's Fury", 1777, Rarity.MYTHIC, mage.cards.a.AureliasFury.class));
-        cards.add(new SetCardInfo("Balduvian Rage", 1740, Rarity.UNCOMMON, mage.cards.b.BalduvianRage.class));
-        cards.add(new SetCardInfo("Balefire Liege", 1787, Rarity.RARE, mage.cards.b.BalefireLiege.class));
-        cards.add(new SetCardInfo("Blasting Station", 1793, Rarity.UNCOMMON, mage.cards.b.BlastingStation.class));
-        cards.add(new SetCardInfo("Blighted Agent", 1714, Rarity.COMMON, mage.cards.b.BlightedAgent.class));
-        cards.add(new SetCardInfo("Boreal Druid", 1757, Rarity.COMMON, mage.cards.b.BorealDruid.class));
-        cards.add(new SetCardInfo("Boundless Realms", 1758, Rarity.RARE, mage.cards.b.BoundlessRealms.class));
-        cards.add(new SetCardInfo("Braid of Fire", 1741, Rarity.RARE, mage.cards.b.BraidOfFire.class));
-        cards.add(new SetCardInfo("Bramblewood Paragon", 1759, Rarity.UNCOMMON, mage.cards.b.BramblewoodParagon.class));
-        cards.add(new SetCardInfo("Bringer of the Black Dawn", 1727, Rarity.RARE, mage.cards.b.BringerOfTheBlackDawn.class));
-        cards.add(new SetCardInfo("Burning Inquiry", 1742, Rarity.COMMON, mage.cards.b.BurningInquiry.class));
-        cards.add(new SetCardInfo("Celestial Dawn", 1696, Rarity.RARE, mage.cards.c.CelestialDawn.class));
-        cards.add(new SetCardInfo("Celestial Kirin", 1697, Rarity.RARE, mage.cards.c.CelestialKirin.class));
-        cards.add(new SetCardInfo("Changeling Hero", 1698, Rarity.UNCOMMON, mage.cards.c.ChangelingHero.class));
-        cards.add(new SetCardInfo("Chimney Imp", 1728, Rarity.COMMON, mage.cards.c.ChimneyImp.class));
-        cards.add(new SetCardInfo("Codex Shredder", 1794, Rarity.UNCOMMON, mage.cards.c.CodexShredder.class));
-        cards.add(new SetCardInfo("Conspiracy", 1729, Rarity.RARE, mage.cards.c.Conspiracy.class));
-        cards.add(new SetCardInfo("Council Guardian", 1699, Rarity.UNCOMMON, mage.cards.c.CouncilGuardian.class));
-        cards.add(new SetCardInfo("Delay", 1715, Rarity.UNCOMMON, mage.cards.d.Delay.class));
-        cards.add(new SetCardInfo("Drogskol Captain", 1778, Rarity.UNCOMMON, mage.cards.d.DrogskolCaptain.class));
-        cards.add(new SetCardInfo("Echoing Decay", 1730, Rarity.COMMON, mage.cards.e.EchoingDecay.class));
-        cards.add(new SetCardInfo("Eidolon of Rhetoric", 1700, Rarity.UNCOMMON, mage.cards.e.EidolonOfRhetoric.class));
-        cards.add(new SetCardInfo("Fatespinner", 1716, Rarity.RARE, mage.cards.f.Fatespinner.class));
-        cards.add(new SetCardInfo("Fiery Gambit", 1743, Rarity.RARE, mage.cards.f.FieryGambit.class));
-        cards.add(new SetCardInfo("Flamekin Harbinger", 1744, Rarity.UNCOMMON, mage.cards.f.FlamekinHarbinger.class));
-        cards.add(new SetCardInfo("Form of the Dragon", 1745, Rarity.RARE, mage.cards.f.FormOfTheDragon.class));
-        cards.add(new SetCardInfo("Frozen Aether", 1717, Rarity.UNCOMMON, mage.cards.f.FrozenAether.class));
-        cards.add(new SetCardInfo("Funeral Charm", 1731, Rarity.RARE, mage.cards.f.FuneralCharm.class));
-        cards.add(new SetCardInfo("Fungusaur", 1760, Rarity.RARE, mage.cards.f.Fungusaur.class));
-        cards.add(new SetCardInfo("Game-Trail Changeling", 1761, Rarity.COMMON, mage.cards.g.GameTrailChangeling.class));
-        cards.add(new SetCardInfo("Geth's Grimoire", 1795, Rarity.UNCOMMON, mage.cards.g.GethsGrimoire.class));
-        cards.add(new SetCardInfo("Gilder Bairn", 1788, Rarity.UNCOMMON, mage.cards.g.GilderBairn.class));
-        cards.add(new SetCardInfo("Gleeful Sabotage", 1762, Rarity.COMMON, mage.cards.g.GleefulSabotage.class));
-        cards.add(new SetCardInfo("Glittering Wish", 1779, Rarity.RARE, mage.cards.g.GlitteringWish.class));
-        cards.add(new SetCardInfo("Goblin Bushwhacker", 1746, Rarity.COMMON, mage.cards.g.GoblinBushwhacker.class));
-        cards.add(new SetCardInfo("Grand Architect", 1718, Rarity.RARE, mage.cards.g.GrandArchitect.class));
-        cards.add(new SetCardInfo("Greater Mossdog", 1763, Rarity.COMMON, mage.cards.g.GreaterMossdog.class));
-        cards.add(new SetCardInfo("Guerrilla Tactics", 1747, Rarity.UNCOMMON, mage.cards.g.GuerrillaTactics.class));
-        cards.add(new SetCardInfo("Harmonic Sliver", 1780, Rarity.UNCOMMON, mage.cards.h.HarmonicSliver.class));
-        cards.add(new SetCardInfo("Helix Pinnacle", 1764, Rarity.RARE, mage.cards.h.HelixPinnacle.class));
-        cards.add(new SetCardInfo("Herald of Leshrac", 1732, Rarity.RARE, mage.cards.h.HeraldOfLeshrac.class));
-        cards.add(new SetCardInfo("Hornet Sting", 1765, Rarity.COMMON, mage.cards.h.HornetSting.class));
-        cards.add(new SetCardInfo("Intruder Alarm", 1719, Rarity.RARE, mage.cards.i.IntruderAlarm.class));
-        cards.add(new SetCardInfo("Iron Myr", 1796, Rarity.COMMON, mage.cards.i.IronMyr.class));
-        cards.add(new SetCardInfo("Isamaru, Hound of Konda", 1701, Rarity.RARE, mage.cards.i.IsamaruHoundOfKonda.class));
-        cards.add(new SetCardInfo("Karrthus, Tyrant of Jund", 1781, Rarity.MYTHIC, mage.cards.k.KarrthusTyrantOfJund.class));
-        cards.add(new SetCardInfo("Knowledge Pool", 1797, Rarity.RARE, mage.cards.k.KnowledgePool.class));
-        cards.add(new SetCardInfo("Kulrath Knight", 1789, Rarity.UNCOMMON, mage.cards.k.KulrathKnight.class));
-        cards.add(new SetCardInfo("Lantern of Insight", 1798, Rarity.UNCOMMON, mage.cards.l.LanternOfInsight.class));
-        cards.add(new SetCardInfo("Lapse of Certainty", 1702, Rarity.COMMON, mage.cards.l.LapseOfCertainty.class));
-        cards.add(new SetCardInfo("Leveler", 1799, Rarity.RARE, mage.cards.l.Leveler.class));
-        cards.add(new SetCardInfo("Lich's Mirror", 1800, Rarity.MYTHIC, mage.cards.l.LichsMirror.class));
-        cards.add(new SetCardInfo("Lightning Storm", 1748, Rarity.UNCOMMON, mage.cards.l.LightningStorm.class));
-        cards.add(new SetCardInfo("Lumithread Field", 1703, Rarity.COMMON, mage.cards.l.LumithreadField.class));
-        cards.add(new SetCardInfo("Maelstrom Nexus", 1782, Rarity.MYTHIC, mage.cards.m.MaelstromNexus.class));
-        cards.add(new SetCardInfo("Magewright's Stone", 1801, Rarity.UNCOMMON, mage.cards.m.MagewrightsStone.class));
-        cards.add(new SetCardInfo("Manaweft Sliver", 1766, Rarity.UNCOMMON, mage.cards.m.ManaweftSliver.class));
-        cards.add(new SetCardInfo("Maro", 1767, Rarity.RARE, mage.cards.m.Maro.class));
-        cards.add(new SetCardInfo("Marrow-Gnawer", 1733, Rarity.RARE, mage.cards.m.MarrowGnawer.class));
-        cards.add(new SetCardInfo("Memnite", 1802, Rarity.UNCOMMON, mage.cards.m.Memnite.class));
-        cards.add(new SetCardInfo("Minamo, School at Water's Edge", 1812, Rarity.RARE, mage.cards.m.MinamoSchoolAtWatersEdge.class));
-        cards.add(new SetCardInfo("Mind Funeral", 1783, Rarity.UNCOMMON, mage.cards.m.MindFuneral.class));
-        cards.add(new SetCardInfo("Mindslaver", 1803, Rarity.RARE, mage.cards.m.Mindslaver.class));
-        cards.add(new SetCardInfo("Mirrodin's Core", 1813, Rarity.UNCOMMON, mage.cards.m.MirrodinsCore.class));
-        cards.add(new SetCardInfo("Misthollow Griffin", 1720, Rarity.MYTHIC, mage.cards.m.MisthollowGriffin.class));
-        cards.add(new SetCardInfo("Myojin of Life's Web", 1768, Rarity.RARE, mage.cards.m.MyojinOfLifesWeb.class));
-        cards.add(new SetCardInfo("Nezumi Shortfang", 1734, Rarity.RARE, mage.cards.n.NezumiShortfang.class));
-        cards.add(new SetCardInfo("Noggle Bandit", 1790, Rarity.COMMON, mage.cards.n.NoggleBandit.class));
-        cards.add(new SetCardInfo("Norin the Wary", 1749, Rarity.RARE, mage.cards.n.NorinTheWary.class));
-        cards.add(new SetCardInfo("Norn's Annex", 1704, Rarity.RARE, mage.cards.n.NornsAnnex.class));
-        cards.add(new SetCardInfo("Not of This World", 1695, Rarity.UNCOMMON, mage.cards.n.NotOfThisWorld.class));
-        cards.add(new SetCardInfo("Ogre Gatecrasher", 1750, Rarity.COMMON, mage.cards.o.OgreGatecrasher.class));
-        cards.add(new SetCardInfo("One with Nothing", 1735, Rarity.RARE, mage.cards.o.OneWithNothing.class));
-        cards.add(new SetCardInfo("Panglacial Wurm", 1769, Rarity.RARE, mage.cards.p.PanglacialWurm.class));
-        cards.add(new SetCardInfo("Paradox Haze", 1721, Rarity.UNCOMMON, mage.cards.p.ParadoxHaze.class));
-        cards.add(new SetCardInfo("Patron of the Moon", 1722, Rarity.RARE, mage.cards.p.PatronOfTheMoon.class));
-        cards.add(new SetCardInfo("Pili-Pala", 1804, Rarity.COMMON, mage.cards.p.PiliPala.class));
-        cards.add(new SetCardInfo("Proclamation of Rebirth", 1705, Rarity.RARE, mage.cards.p.ProclamationOfRebirth.class));
-        cards.add(new SetCardInfo("Puca's Mischief", 1723, Rarity.RARE, mage.cards.p.PucasMischief.class));
-        cards.add(new SetCardInfo("Pull from Eternity", 1706, Rarity.UNCOMMON, mage.cards.p.PullFromEternity.class));
-        cards.add(new SetCardInfo("Pyretic Ritual", 1751, Rarity.COMMON, mage.cards.p.PyreticRitual.class));
-        cards.add(new SetCardInfo("Ravenous Trap", 1736, Rarity.UNCOMMON, mage.cards.r.RavenousTrap.class));
-        cards.add(new SetCardInfo("Reaper King", 1805, Rarity.RARE, mage.cards.r.ReaperKing.class));
-        cards.add(new SetCardInfo("Reki, the History of Kamigawa", 1770, Rarity.RARE, mage.cards.r.RekiTheHistoryOfKamigawa.class));
-        cards.add(new SetCardInfo("Rescue from the Underworld", 1737, Rarity.UNCOMMON, mage.cards.r.RescueFromTheUnderworld.class));
-        cards.add(new SetCardInfo("Rhox", 1771, Rarity.RARE, mage.cards.r.Rhox.class));
-        cards.add(new SetCardInfo("Rune-Tail, Kitsune Ascendant", 1707, Rarity.RARE, mage.cards.r.RuneTailKitsuneAscendant.class));
-        cards.add(new SetCardInfo("Sakura-Tribe Scout", 1772, Rarity.COMMON, mage.cards.s.SakuraTribeScout.class));
-        cards.add(new SetCardInfo("Sarkhan the Mad", 1784, Rarity.MYTHIC, mage.cards.s.SarkhanTheMad.class));
-        cards.add(new SetCardInfo("Scourge of the Throne", 1752, Rarity.MYTHIC, mage.cards.s.ScourgeOfTheThrone.class));
-        cards.add(new SetCardInfo("Scryb Ranger", 1773, Rarity.UNCOMMON, mage.cards.s.ScrybRanger.class));
-        cards.add(new SetCardInfo("Sen Triplets", 1785, Rarity.MYTHIC, mage.cards.s.SenTriplets.class));
-        cards.add(new SetCardInfo("Sheltering Ancient", 1774, Rarity.UNCOMMON, mage.cards.s.ShelteringAncient.class));
-        cards.add(new SetCardInfo("Shizo, Death's Storehouse", 1814, Rarity.RARE, mage.cards.s.ShizoDeathsStorehouse.class));
-        cards.add(new SetCardInfo("Sinew Sliver", 1708, Rarity.COMMON, mage.cards.s.SinewSliver.class));
-        cards.add(new SetCardInfo("Sosuke, Son of Seshiro", 1775, Rarity.UNCOMMON, mage.cards.s.SosukeSonOfSeshiro.class));
-        cards.add(new SetCardInfo("Soul's Attendant", 1709, Rarity.COMMON, mage.cards.s.SoulsAttendant.class));
-        cards.add(new SetCardInfo("Spelltithe Enforcer", 1710, Rarity.RARE, mage.cards.s.SpelltitheEnforcer.class));
-        cards.add(new SetCardInfo("Spellweaver Volute", 1724, Rarity.RARE, mage.cards.s.SpellweaverVolute.class));
-        cards.add(new SetCardInfo("Spike Feeder", 1776, Rarity.RARE, mage.cards.s.SpikeFeeder.class));
-        cards.add(new SetCardInfo("Springjack Shepherd", 1711, Rarity.UNCOMMON, mage.cards.s.SpringjackShepherd.class));
-        cards.add(new SetCardInfo("Stalking Stones", 1815, Rarity.UNCOMMON, mage.cards.s.StalkingStones.class));
-        cards.add(new SetCardInfo("Stigma Lasher", 1753, Rarity.RARE, mage.cards.s.StigmaLasher.class));
-        cards.add(new SetCardInfo("Storm Crow", 1725, Rarity.COMMON, mage.cards.s.StormCrow.class));
-        cards.add(new SetCardInfo("Sundial of the Infinite", 1806, Rarity.RARE, mage.cards.s.SundialOfTheInfinite.class));
-        cards.add(new SetCardInfo("Teferi's Puzzle Box", 1807, Rarity.RARE, mage.cards.t.TeferisPuzzleBox.class));
-        cards.add(new SetCardInfo("Trailblazer's Boots", 1808, Rarity.UNCOMMON, mage.cards.t.TrailblazersBoots.class));
-        cards.add(new SetCardInfo("Treasonous Ogre", 1754, Rarity.UNCOMMON, mage.cards.t.TreasonousOgre.class));
-        cards.add(new SetCardInfo("Triskelion", 1809, Rarity.RARE, mage.cards.t.Triskelion.class));
-        cards.add(new SetCardInfo("Undead Warchief", 1738, Rarity.RARE, mage.cards.u.UndeadWarchief.class));
-        cards.add(new SetCardInfo("Viscera Seer", 1739, Rarity.COMMON, mage.cards.v.VisceraSeer.class));
-        cards.add(new SetCardInfo("Wall of Shards", 1712, Rarity.UNCOMMON, mage.cards.w.WallOfShards.class));
-        cards.add(new SetCardInfo("White Knight", 1713, Rarity.UNCOMMON, mage.cards.w.WhiteKnight.class));
-        cards.add(new SetCardInfo("Witchbane Orb", 1810, Rarity.RARE, mage.cards.w.WitchbaneOrb.class));
-        cards.add(new SetCardInfo("Yore-Tiller Nephilim", 1786, Rarity.RARE, mage.cards.y.YoreTillerNephilim.class));
-        cards.add(new SetCardInfo("Zur's Weirding", 1726, Rarity.RARE, mage.cards.z.ZursWeirding.class));
+    }
+
+    private void populateBoosterSlotMap() {
+        for(int i = 1; i < 16; ++i)
+            this.possibleCardsPerBoosterSlot.put(i, new ArrayList<>());
+        this.populateSlot(1, asList(  // White A
+            "Abzan Falconer",
+            "Abzan Runemark",
+            "Acrobatic Maneuver",
+            "Affa Protector",
+            "Ainok Bond-Kin",
+            "Alley Evasion",
+            "Angelic Purge",
+            "Angelsong",
+            "Apostle's Blessing",
+            "Arrester's Zeal",
+            "Artful Maneuver",
+            "Aura of Silence",
+            "Bartered Cow",
+            "Bonds of Faith",
+            "Borrowed Grace",
+            "Bulwark Giant",
+            "Caravan Escort",
+            "Caught in the Brights",
+            "Celestial Crusader",
+            "Celestial Flare",
+            "Center Soul",
+            "Cliffside Lookout",
+            "Conviction",
+            "Countless Gears Renegade",
+            "Court Street Denizen",
+            "Crib Swap",
+            "Danitha Capashen, Paragon",
+            "Daring Skyjek",
+            "Decommission",
+            "Defiant Strike",
+            "Desperate Sentry",
+            "Devilthorn Fox",
+            "Disposal Mummy",
+            "Divine Favor",
+            "Dragon's Eye Sentry",
+            "Dragon's Presence",
+            "Eddytrail Hawk",
+            "Enduring Victory",
+            "Enlightened Ascetic",
+            "Ephemeral Shields",
+            "Ephemerate",
+            "Excoriate",
+            "Expose Evil",
+            "Eyes in the Skies",
+            "Faith's Fetters",
+            "Feat of Resistance",
+            "Felidar Umbra",
+            "Firehoof Cavalry",
+            "Ghostblade Eidolon",
+            "Gift of Estates",
+            "Glaring Aegis",
+            "Glint-Sleeve Artisan",
+            "God-Pharaoh's Faithful",
+            "Grasp of the Hieromancer",
+            "Gust Walker",
+            "Gustcloak Skirmisher",
+            "Healing Hands",
+            "Hyena Umbra",
+            "Infantry Veteran",
+            "Inquisitor's Ox",
+            "Isolation Zone",
+            "Knight of Old Benalia",
+            "Knight of Sorrows",
+            "Kor Skyfisher",
+            "Leonin Relic-Warder",
+            "Lightform",
+            "Lone Missionary",
+            "Lonesome Unicorn",
+            "Lotus-Eye Mystics",
+            "Loxodon Partisan",
+            "Mardu Hordechief",
+            "Marked by Honor",
+            "Meditation Puzzle",
+            "Mortal's Ardor",
+            "Mother of Runes",
+            "Ninth Bridge Patrol",
+            "Ondu Greathorn",
+            "Ondu War Cleric",
+            "Oreskos Swiftclaw",
+            "Oust",
+            "Palace Jailer",
+            "Path to Exile",
+            "Peace of Mind",
+            "Prowling Caracal",
+            "Resurrection",
+            "Rhet-Crop Spearmaster",
+            "Righteous Cause",
+            "Savannah Lions",
+            "Searing Light",
+            "Serra's Embrace",
+            "Sheer Drop",
+            "Shining Aerosaur",
+            "Shining Armor",
+            "Siegecraft",
+            "Skymarcher Aspirant",
+            "Skyspear Cavalry",
+            "Snubhorn Sentry",
+            "Soul Parry",
+            "Soul Summons",
+            "Soul-Strike Technique",
+            "Soulmender",
+            "Sparring Mummy",
+            "Spectral Gateguards",
+            "Stave Off",
+            "Steadfast Sentinel",
+            "Stone Haven Medic",
+            "Suppression Bonds",
+            "Survive the Night",
+            "Territorial Hammerskull",
+            "Thraben Inspector",
+            "Thraben Standard Bearer",
+            "Topan Freeblade",
+            "Veteran Swordsmith",
+            "Village Bell-Ringer",
+            "Voice of the Provinces",
+            "Wall of One Thousand Cuts",
+            "Wandering Champion",
+            "War Behemoth",
+            "Windborne Charge",
+            "Wing Shards",
+            "Winged Shepherd"
+        ));
+        this.populateSlot(2, asList(  // White B
+            "Adanto Vanguard",
+            "Ajani's Pridemate",
+            "Angel of Mercy",
+            "Angel of Renewal",
+            "Angelic Gift",
+            "Arrest",
+            "Aven Battle Priest",
+            "Aven Sentry",
+            "Ballynock Cohort",
+            "Battle Mastery",
+            "Benevolent Ancestor",
+            "Blade Instructor",
+            "Blessed Spirits",
+            "Built to Last",
+            "Candlelight Vigil",
+            "Cartouche of Solidarity",
+            "Cast Out",
+            "Cathar's Companion",
+            "Champion of Arashin",
+            "Charge",
+            "Cloudshift",
+            "Coalition Honor Guard",
+            "Collar the Culprit",
+            "Congregate",
+            "Court Homunculus",
+            "Darksteel Mutation",
+            "Dauntless Cathar",
+            "Dawnglare Invoker",
+            "Disenchant",
+            "Dismantling Blow",
+            "Djeru's Renunciation",
+            "Djeru's Resolve",
+            "Doomed Traveler",
+            "Dragon Bell Monk",
+            "Emerge Unscathed",
+            "Encampment Keeper",
+            "Encircling Fissure",
+            "Excavation Elephant",
+            "Expedition Raptor",
+            "Exultant Skymarcher",
+            "Faithbearer Paladin",
+            "Felidar Guardian",
+            "Fencing Ace",
+            "Fiend Hunter",
+            "Forsake the Worldly",
+            "Fortify",
+            "Fragmentize",
+            "Geist of the Moors",
+            "Gideon's Lawkeeper",
+            "Gleam of Resistance",
+            "Gods Willing",
+            "Great-Horn Krushok",
+            "Guided Strike",
+            "Healer's Hawk",
+            "Healing Grace",
+            "Heavy Infantry",
+            "Humble",
+            "Inspired Charge",
+            "Intrusive Packbeast",
+            "Iona's Judgment",
+            "Jubilant Mascot",
+            "Knight of Cliffhaven",
+            "Knight of the Skyward Eye",
+            "Knight of the Tusk",
+            "Kor Bladewhirl",
+            "Kor Firewalker",
+            "Kor Hookmaster",
+            "Kor Sky Climber",
+            "Lieutenants of the Guard",
+            "Lightwalker",
+            "Lingering Souls",
+            "Looming Altisaur",
+            "Loyal Sentry",
+            "Lunarch Mantle",
+            "Midnight Guard",
+            "Momentary Blink",
+            "Moonlit Strider",
+            "Nyx-Fleece Ram",
+            "Pacifism",
+            "Palace Sentinels",
+            "Paladin of the Bloodstained",
+            "Path of Peace",
+            "Pegasus Courser",
+            "Pentarch Ward",
+            "Pitfall Trap",
+            "Pressure Point",
+            "Promise of Bunrei",
+            "Rally the Peasants",
+            "Raptor Companion",
+            "Refurbish",
+            "Renewed Faith",
+            "Retreat to Emeria",
+            "Reviving Dose",
+            "Rootborn Defenses",
+            "Sacred Cat",
+            "Sanctum Gargoyle",
+            "Sandstorm Charger",
+            "Seal of Cleansing",
+            "Seeker of the Way",
+            "Sensor Splicer",
+            "Seraph of the Suns",
+            "Serra Disciple",
+            "Shoulder to Shoulder",
+            "Silverchase Fox",
+            "Skyhunter Skirmisher",
+            "Slash of Talons",
+            "Soul Warden",
+            "Stalwart Aven",
+            "Star-Crowned Stag",
+            "Sunlance",
+            "Sunrise Seeker",
+            "Swords to Plowshares",
+            "Take Vengeance",
+            "Tandem Tactics",
+            "Terashi's Grasp",
+            "Unwavering Initiate",
+            "Wake the Reflections",
+            "Wall of Omens",
+            "Wild Griffin",
+            "Youthful Knight",
+            "Zealous Strike"
+        ));
+        this.populateSlot(3, asList(  // Blue A
+            "Amass the Components",
+            "Anticipate",
+            "Artificer's Assistant",
+            "Augury Owl",
+            "Befuddle",
+            "Benthic Giant",
+            "Calculated Dismissal",
+            "Call to Heel",
+            "Caller of Gales",
+            "Cancel",
+            "Capture Sphere",
+            "Catalog",
+            "Chart a Course",
+            "Chillbringer",
+            "Chronostutter",
+            "Circular Logic",
+            "Clear the Mind",
+            "Cloak of Mists",
+            "Cloudkin Seer",
+            "Clutch of Currents",
+            "Compelling Argument",
+            "Condescend",
+            "Containment Membrane",
+            "Contingency Plan",
+            "Contradict",
+            "Crashing Tide",
+            "Crush Dissent",
+            "Curio Vendor",
+            "Daze",
+            "Decision Paralysis",
+            "Deep Freeze",
+            "Dispel",
+            "Displace",
+            "Drag Under",
+            "Dragon's Eye Savants",
+            "Dreadwaters",
+            "Embodiment of Spring",
+            "Ensoul Artifact",
+            "Everdream",
+            "Failed Inspection",
+            "Flashfreeze",
+            "Fledgling Mawcor",
+            "Fleeting Distraction",
+            "Fogwalker",
+            "Foil",
+            "Frantic Search",
+            "Frilled Sea Serpent",
+            "Gaseous Form",
+            "Glint",
+            "Gone Missing",
+            "Grasp of Phantoms",
+            "Guard Gomazoa",
+            "Gurmag Drowner",
+            "Gush",
+            "Hightide Hermit",
+            "Hinterland Drake",
+            "Humongulus",
+            "Inkfathom Divers",
+            "Invisibility",
+            "Jeering Homunculus",
+            "Jeskai Sage",
+            "Kiora's Dambreaker",
+            "Laboratory Brute",
+            "Laboratory Maniac",
+            "Labyrinth Guardian",
+            "Messenger Jays",
+            "Mind Sculpt",
+            "Mist Raven",
+            "Mnemonic Wall",
+            "Monastery Loremaster",
+            "Murder of Crows",
+            "Nagging Thoughts",
+            "Niblis of Dusk",
+            "Nine-Tail White Fox",
+            "Ojutai's Breath",
+            "Phyrexian Ingester",
+            "Pondering Mage",
+            "Predict",
+            "Purple-Crystal Crab",
+            "Refocus",
+            "Riftwing Cloudskate",
+            "River Darter",
+            "Sailor of Means",
+            "Scroll Thief",
+            "Send to Sleep",
+            "Shipwreck Looter",
+            "Silent Observer",
+            "Silvergill Adept",
+            "Singing Bell Strike",
+            "Skaab Goliath",
+            "Skitter Eel",
+            "Sleep",
+            "Slipstream Eel",
+            "Slither Blade",
+            "Sphinx's Tutelage",
+            "Stream of Thought",
+            "Surrakar Banisher",
+            "Syr Elenora, the Discerning",
+            "Thought Collapse",
+            "Thunder Drake",
+            "Tidal Warrior",
+            "Trail of Evidence",
+            "Treasure Cruise",
+            "Treasure Mage",
+            "Trinket Mage",
+            "Turn Aside",
+            "Uncomfortable Chill",
+            "Wall of Frost",
+            "Warden of Evos Isle",
+            "Watercourser",
+            "Weldfast Wingsmith",
+            "Welkin Tern",
+            "Wind Drake",
+            "Wind Strider",
+            "Wind-Kin Raiders",
+            "Windcaller Aven",
+            "Wishcoin Crab",
+            "Wishful Merfolk",
+            "Wretched Gryff",
+            "Write into Being",
+            "Youthful Scholar"
+        ));
+        this.populateSlot(4, asList(  // Blue B
+            "Academy Journeymage",
+            "Aether Tradewinds",
+            "Aethersnipe",
+            "Amphin Pathmage",
+            "Arcane Denial",
+            "Archaeomancer",
+            "Archetype of Imagination",
+            "Augur of Bolas",
+            "Bastion Inventor",
+            "Bewilder",
+            "Blue Elemental Blast",
+            "Borrowing 100,000 Arrows",
+            "Brainstorm",
+            "Brilliant Spectrum",
+            "Brine Elemental",
+            "Cartouche of Knowledge",
+            "Castaway's Despair",
+            "Choking Tethers",
+            "Citywatch Sphinx",
+            "Claustrophobia",
+            "Cloud Elemental",
+            "Cloudreader Sphinx",
+            "Concentrate",
+            "Convolute",
+            "Coral Trickster",
+            "Coralhelm Guide",
+            "Counterspell",
+            "Court Hussar",
+            "Curiosity",
+            "Dazzling Lights",
+            "Deep Analysis",
+            "Diminish",
+            "Dirgur Nemesis",
+            "Distortion Strike",
+            "Divination",
+            "Doorkeeper",
+            "Dream Cache",
+            "Dream Twist",
+            "Eel Umbra",
+            "Enlightened Maniac",
+            "Errant Ephemeron",
+            "Essence Scatter",
+            "Exclude",
+            "Fact or Fiction",
+            "Faerie Invaders",
+            "Faerie Mechanist",
+            "Fascination",
+            "Fathom Seer",
+            "Fog Bank",
+            "Forbidden Alchemy",
+            "Frost Lynx",
+            "Ghost Ship",
+            "Glacial Crasher",
+            "Hieroglyphic Illumination",
+            "Horseshoe Crab",
+            "Impulse",
+            "Ior Ruin Expedition",
+            "Jace's Phantasm",
+            "Jwar Isle Avenger",
+            "Lay Claim",
+            "Leapfrog",
+            "Mahamoti Djinn",
+            "Man-o'-War",
+            "Mana Leak",
+            "Maximize Altitude",
+            "Memory Lapse",
+            "Merfolk Looter",
+            "Metallic Rebuke",
+            "Mulldrifter",
+            "Mystic of the Hidden Way",
+            "Mystical Teachings",
+            "Negate",
+            "Ninja of the Deep Hours",
+            "Ojutai Interceptor",
+            "Omenspeaker",
+            "Opportunity",
+            "Opt",
+            "Peel from Reality",
+            "Phantasmal Bear",
+            "Portent",
+            "Preordain",
+            "Prodigal Sorcerer",
+            "Propaganda",
+            "Prosperous Pirates",
+            "Repulse",
+            "Retraction Helix",
+            "Ringwarden Owl",
+            "River Serpent",
+            "Riverwheel Aerialists",
+            "Sage of Lat-Nam",
+            "Sea Gate Oracle",
+            "Sealock Monster",
+            "Secrets of the Golden City",
+            "Shaper Parasite",
+            "Shimmerscale Drake",
+            "Sigiled Starfish",
+            "Skittering Crustacean",
+            "Snap",
+            "Snapping Drake",
+            "Somber Hoverguard",
+            "Spire Monitor",
+            "Steady Progress",
+            "Stitched Drake",
+            "Storm Sculptor",
+            "Strategic Planning",
+            "Syncopate",
+            "Tandem Lookout",
+            "Temporal Fissure",
+            "Thornwind Faeries",
+            "Thought Scour",
+            "Thoughtcast",
+            "Thrummingbird",
+            "Tidal Wave",
+            "Totally Lost",
+            "Treasure Hunt",
+            "Triton Tactics",
+            "Vapor Snag",
+            "Vigean Graftmage",
+            "Wave-Wing Elemental",
+            "Whiplash Trap",
+            "Windrider Eel"
+        ));
+        this.populateSlot(5, asList(  // Black A
+            "Aid the Fallen",
+            "Alesha's Vanguard",
+            "Alley Strangler",
+            "Ambitious Aetherborn",
+            "Ancestral Vengeance",
+            "Annihilate",
+            "Bala Ged Scorpion",
+            "Bitter Revelation",
+            "Bladebrand",
+            "Blighted Bat",
+            "Blistergrub",
+            "Bone Splinters",
+            "Boon of Emrakul",
+            "Breeding Pit",
+            "Butcher's Glee",
+            "Cabal Therapy",
+            "Cackling Imp",
+            "Cadaver Imp",
+            "Catacomb Slug",
+            "Certain Death",
+            "Coat with Venom",
+            "Corpsehatch",
+            "Covenant of Blood",
+            "Crow of Dark Tidings",
+            "Dark Dabbling",
+            "Dark Withering",
+            "Darkblast",
+            "Dead Reveler",
+            "Deadeye Tormentor",
+            "Defeat",
+            "Demon's Grasp",
+            "Demonic Tutor",
+            "Demonic Vigor",
+            "Dismember",
+            "Disowned Ancestor",
+            "Doomed Dissenter",
+            "Douse in Gloom",
+            "Dread Return",
+            "Dregscape Zombie",
+            "Dukhara Scavenger",
+            "Dune Beetle",
+            "Duress",
+            "Farbog Revenant",
+            "Fetid Imp",
+            "First-Sphere Gargantua",
+            "Flesh to Dust",
+            "Fretwork Colony",
+            "Genju of the Fens",
+            "Ghoulcaller's Accomplice",
+            "Grasping Scoundrel",
+            "Gravepurge",
+            "Grim Discovery",
+            "Hideous End",
+            "Induce Despair",
+            "Infernal Scarring",
+            "Infest",
+            "Instill Infection",
+            "Kalastria Nightwatch",
+            "Krumar Bond-Kin",
+            "Lazotep Behemoth",
+            "Macabre Waltz",
+            "Marauding Boneslasher",
+            "Mark of the Vampire",
+            "Marsh Hulk",
+            "Merciless Resolve",
+            "Miasmic Mummy",
+            "Mind Rake",
+            "Mire's Malice",
+            "Murder",
+            "Murderous Compulsion",
+            "Nantuko Husk",
+            "Never Happened",
+            "Nirkana Assassin",
+            "Plaguecrafter",
+            "Prowling Pangolin",
+            "Rakshasa's Secret",
+            "Read the Bones",
+            "Reaper of Night",
+            "Reassembling Skeleton",
+            "Reckless Imp",
+            "Reckless Spite",
+            "Returned Centaur",
+            "Revenant",
+            "Rite of the Serpent",
+            "Ruin Rat",
+            "Scrounger of Souls",
+            "Sengir Vampire",
+            "Shambling Attendants",
+            "Shambling Goblin",
+            "Shriekmaw",
+            "Silumgar Butcher",
+            "Skeleton Archer",
+            "Stab Wound",
+            "Stallion of Ashmouth",
+            "Stinkweed Imp",
+            "Stromkirk Patrol",
+            "Subtle Strike",
+            "Sultai Runemark",
+            "Tar Snare",
+            "Thallid Omnivore",
+            "The Eldest Reborn",
+            "Thornbow Archer",
+            "Thraben Foulbloods",
+            "Torment of Venom",
+            "Touch of Moonglove",
+            "Twins of Maurer Estate",
+            "Undercity's Embrace",
+            "Untamed Hunger",
+            "Unyielding Krumar",
+            "Vampire Champion",
+            "Vampire Envoy",
+            "Vampire Nighthawk",
+            "Vessel of Malignity",
+            "Voracious Null",
+            "Vraska's Finisher",
+            "Walk the Plank",
+            "Warteye Witch",
+            "Weight of the Underworld",
+            "Weirded Vampire",
+            "Yargle, Glutton of Urborg",
+            "Zulaport Chainmage"
+        ));
+        this.populateSlot(6, asList(  // Black B
+            "Absorb Vis",
+            "Accursed Spirit",
+            "Altar's Reap",
+            "Animate Dead",
+            "Baleful Ammit",
+            "Balustrade Spy",
+            "Bartizan Bats",
+            "Black Cat",
+            "Blessing of Belzenlok",
+            "Blightsoil Druid",
+            "Blood Artist",
+            "Bloodrite Invoker",
+            "Caligo Skin-Witch",
+            "Carrion Feeder",
+            "Carrion Imp",
+            "Catacomb Crocodile",
+            "Caustic Tar",
+            "Child of Night",
+            "Costly Plunder",
+            "Cower in Fear",
+            "Crippling Blight",
+            "Cursed Minotaur",
+            "Daring Demolition",
+            "Dark Ritual",
+            "Deadbridge Shaman",
+            "Death Denied",
+            "Desperate Castaways",
+            "Diabolic Edict",
+            "Die Young",
+            "Dinosaur Hunter",
+            "Dirge of Dread",
+            "Dread Drone",
+            "Dreadbringer Lampads",
+            "Driver of the Dead",
+            "Drudge Sentinel",
+            "Dusk Charger",
+            "Dusk Legion Zealot",
+            "Epicure of Blood",
+            "Erg Raiders",
+            "Eternal Thirst",
+            "Evincar's Justice",
+            "Executioner's Capsule",
+            "Eyeblight's Ending",
+            "Fallen Angel",
+            "Fatal Push",
+            "Fen Hauler",
+            "Feral Abomination",
+            "Festercreep",
+            "Festering Newt",
+            "Fill with Fright",
+            "Fungal Infection",
+            "Ghostly Changeling",
+            "Gifted Aetherborn",
+            "Go for the Throat",
+            "Gravedigger",
+            "Gray Merchant of Asphodel",
+            "Grim Affliction",
+            "Grixis Slavedriver",
+            "Grotesque Mutation",
+            "Gruesome Fate",
+            "Gurmag Angler",
+            "Hired Blade",
+            "Hound of the Farbogs",
+            "Innocent Blood",
+            "Inquisition of Kozilek",
+            "Lawless Broker",
+            "Lethal Sting",
+            "Lord of the Accursed",
+            "March of the Drowned",
+            "Mephitic Vapors",
+            "Mind Rot",
+            "Moment of Craving",
+            "Nameless Inversion",
+            "Night's Whisper",
+            "Noxious Dragon",
+            "Okiba-Gang Shinobi",
+            "Painful Lesson",
+            "Phyrexian Rager",
+            "Phyrexian Reclamation",
+            "Pit Keeper",
+            "Plague Wight",
+            "Plagued Rusalka",
+            "Prakhata Club Security",
+            "Queen's Agent",
+            "Quest for the Gravelord",
+            "Rabid Bloodsucker",
+            "Rakdos Drake",
+            "Ravenous Chupacabra",
+            "Recover",
+            "Renegade Demon",
+            "Renegade's Getaway",
+            "Rotfeaster Maggot",
+            "Scarab Feast",
+            "Scuttling Death",
+            "Seal of Doom",
+            "Shadowcloak Vampire",
+            "Skeletal Scrying",
+            "Skulking Ghost",
+            "Smiting Helix",
+            "Spreading Rot",
+            "Street Wraith",
+            "Tavern Swindler",
+            "Tendrils of Corruption",
+            "Thorn of the Black Rose",
+            "Tidy Conclusion",
+            "Tragic Slip",
+            "Trespasser's Curse",
+            "Trial of Ambition",
+            "Typhoid Rats",
+            "Unburden",
+            "Urborg Uprising",
+            "Vampire Hexmage",
+            "Vampire Lacerator",
+            "Virulent Swipe",
+            "Wake of Vultures",
+            "Walking Corpse",
+            "Wander in Death",
+            "Wight of Precinct Six",
+            "Will-o'-the-Wisp",
+            "Windgrace Acolyte",
+            "Wrench Mind"
+        ));
+        this.populateSlot(7, asList(  // Red A
+            "Act on Impulse",
+            "Ainok Tracker",
+            "Alchemist's Greeting",
+            "Ancient Grudge",
+            "Arc Trail",
+            "Arrow Storm",
+            "Azra Bladeseeker",
+            "Balduvian Horde",
+            "Barrage of Boulders",
+            "Beetleback Chief",
+            "Bellows Lizard",
+            "Blastfire Bolt",
+            "Blazing Volley",
+            "Blindblast",
+            "Blood Ogre",
+            "Bloodfire Expert",
+            "Bloodlust Inciter",
+            "Bloodstone Goblin",
+            "Blow Your House Down",
+            "Bombard",
+            "Bomber Corps",
+            "Borrowed Hostility",
+            "Brazen Buccaneers",
+            "Brazen Wolves",
+            "Bring Low",
+            "Brute Strength",
+            "Built to Smash",
+            "Burst Lightning",
+            "Canyon Lurkers",
+            "Chandra's Pyrohelix",
+            "Charging Monstrosaur",
+            "Cobblebrute",
+            "Crowd's Favor",
+            "Crown-Hunter Hireling",
+            "Curse of Opulence",
+            "Destructive Tampering",
+            "Direct Current",
+            "Dragon Fodder",
+            "Dynacharge",
+            "Erratic Explosion",
+            "Expedite",
+            "Falkenrath Reaver",
+            "Fireball",
+            "Flame Jab",
+            "Forge Devil",
+            "Foundry Street Denizen",
+            "Frontline Rebel",
+            "Furnace Whelp",
+            "Galvanic Blast",
+            "Generator Servant",
+            "Geomancer's Gambit",
+            "Ghitu Lavarunner",
+            "Giant Spectacle",
+            "Goblin Assault",
+            "Goblin Bombardment",
+            "Goblin Fireslinger",
+            "Goblin Matron",
+            "Goblin Roughrider",
+            "Goblin War Paint",
+            "Gore Swine",
+            "Gorehorn Minotaurs",
+            "Granitic Titan",
+            "Grapeshot",
+            "Gravitic Punch",
+            "Guttersnipe",
+            "Hammerhand",
+            "Hardened Berserker",
+            "Hyena Pack",
+            "Ill-Tempered Cyclops",
+            "Impact Tremors",
+            "Incorrigible Youths",
+            "Inferno Fist",
+            "Inferno Jet",
+            "Ingot Chewer",
+            "Keldon Halberdier",
+            "Kiln Fiend",
+            "Krenko's Enforcer",
+            "Leaping Master",
+            "Leopard-Spotted Jiao",
+            "Madcap Skills",
+            "Mardu Warshrieker",
+            "Maximize Velocity",
+            "Miner's Bane",
+            "Mogg Flunkies",
+            "Molten Rain",
+            "Monastery Swiftspear",
+            "Ondu Champion",
+            "Outnumber",
+            "Price of Progress",
+            "Pyrotechnics",
+            "Quakefoot Cyclops",
+            "Reckless Fireweaver",
+            "Reckless Wurm",
+            "Rivals' Duel",
+            "Ruinous Gremlin",
+            "Samut's Sprint",
+            "Sarkhan's Rage",
+            "Screamreach Brawler",
+            "Seismic Shift",
+            "Shattering Spree",
+            "Shenanigans",
+            "Smelt",
+            "Sparkmage Apprentice",
+            "Sparkspitter",
+            "Staggershock",
+            "Stormblood Berserker",
+            "Swift Kick",
+            "Tectonic Rift",
+            "Temur Battle Rage",
+            "Thrill of Possibility",
+            "Tibalt's Rager",
+            "Torch Courier",
+            "Valakut Invoker",
+            "Valakut Predator",
+            "Valley Dasher",
+            "Vandalize",
+            "Volcanic Dragon",
+            "Volcanic Rush",
+            "Wall of Fire",
+            "Wayward Giant",
+            "Wojek Bodyguard"
+        ));
+        this.populateSlot(8, asList(  // Red B
+            "Act of Treason",
+            "Ahn-Crop Crasher",
+            "Akroan Sergeant",
+            "Anger",
+            "Atarka Efreet",
+            "Avarax",
+            "Barging Sergeant",
+            "Battle Rampart",
+            "Battle-Rattle Shaman",
+            "Blades of Velis Vel",
+            "Bloodmad Vampire",
+            "Blur of Blades",
+            "Boggart Brute",
+            "Boiling Earth",
+            "Boulder Salvo",
+            "Browbeat",
+            "Cartouche of Zeal",
+            "Cathartic Reunion",
+            "Chandra's Revolution",
+            "Chartooth Cougar",
+            "Cinder Hellion",
+            "Cleansing Screech",
+            "Cosmotronic Wave",
+            "Crash Through",
+            "Curse of the Nightly Hunt",
+            "Death by Dragons",
+            "Defiant Ogre",
+            "Demolish",
+            "Desert Cerodon",
+            "Desperate Ravings",
+            "Distemper of the Blood",
+            "Dragon Breath",
+            "Dragon Egg",
+            "Dragon Whelp",
+            "Dragonsoul Knight",
+            "Dual Shot",
+            "Earth Elemental",
+            "Emrakul's Hatcher",
+            "Enthralling Victor",
+            "Faithless Looting",
+            "Fall of the Hammer",
+            "Fervent Strike",
+            "Fierce Invocation",
+            "Fiery Hellhound",
+            "Fiery Temper",
+            "Fire Elemental",
+            "Firebolt",
+            "Firebrand Archer",
+            "Flametongue Kavu",
+            "Flamewave Invoker",
+            "Fling",
+            "Frenzied Raptor",
+            "Frilled Deathspitter",
+            "Frontline Devastator",
+            "Fury Charm",
+            "Genju of the Spires",
+            "Goblin Balloon Brigade",
+            "Goblin Locksmith",
+            "Goblin Motivator",
+            "Goblin Oriflamme",
+            "Goblin Warchief",
+            "Gut Shot",
+            "Hanweir Lancer",
+            "Hijack",
+            "Hulking Devil",
+            "Insolent Neonate",
+            "Jackal Pup",
+            "Keldon Overseer",
+            "Khenra Scrapper",
+            "Kird Ape",
+            "Kolaghan Stormsinger",
+            "Krenko's Command",
+            "Lightning Bolt",
+            "Lightning Javelin",
+            "Lightning Shrieker",
+            "Lightning Talons",
+            "Magma Spray",
+            "Makindi Sliderunner",
+            "Mark of Mutiny",
+            "Mogg Fanatic",
+            "Mogg War Marshal",
+            "Mutiny",
+            "Nimble-Blade Khenra",
+            "Orcish Cannonade",
+            "Orcish Oriflamme",
+            "Pillage",
+            "Prickleboar",
+            "Prophetic Ravings",
+            "Rampaging Cyclops",
+            "Renegade Tactics",
+            "Roast",
+            "Rolling Thunder",
+            "Rubblebelt Maaka",
+            "Rummaging Goblin",
+            "Run Amok",
+            "Rush of Adrenaline",
+            "Salivating Gremlins",
+            "Seismic Stomp",
+            "Shatter",
+            "Shock",
+            "Skirk Commando",
+            "Skirk Prospector",
+            "Smash to Smithereens",
+            "Sparktongue Dragon",
+            "Spikeshot Goblin",
+            "Sulfurous Blast",
+            "Summit Prowler",
+            "Sun-Crowned Hunters",
+            "Swashbuckling",
+            "Sweatworks Brawler",
+            "Tarfire",
+            "Thresher Lizard",
+            "Uncaged Fury",
+            "Undying Rage",
+            "Vent Sentinel",
+            "Vessel of Volatility",
+            "Voldaren Duelist",
+            "Wildfire Emissary",
+            "Young Pyromancer",
+            "Zada's Commando",
+            "Zealot of the God-Pharaoh"
+        ));
+        this.populateSlot(9, asList(  // Green A
+            "Affectionate Indrik",
+            "Ancestral Mask",
+            "Ancient Brontodon",
+            "Arbor Armament",
+            "Beastbreaker of Bala Ged",
+            "Become Immense",
+            "Blanchwood Armor",
+            "Blastoderm",
+            "Borderland Explorer",
+            "Briarhorn",
+            "Broodhunter Wurm",
+            "Byway Courier",
+            "Centaur Courser",
+            "Creeping Mold",
+            "Destructor Dragon",
+            "Domesticated Hydra",
+            "Dragon-Scarred Bear",
+            "Elemental Uprising",
+            "Elvish Fury",
+            "Eternal Witness",
+            "Feral Prowler",
+            "Fierce Empath",
+            "Frontier Mastodon",
+            "Gaea's Blessing",
+            "Gaea's Protector",
+            "Gift of Growth",
+            "Glade Watcher",
+            "Grapple with the Past",
+            "Greater Basilisk",
+            "Greater Sandwurm",
+            "Hamlet Captain",
+            "Hooded Brawler",
+            "Hooting Mandrills",
+            "Jungle Delver",
+            "Jungle Wayfinder",
+            "Kin-Tree Warden",
+            "Kraul Foragers",
+            "Krosan Druid",
+            "Lead by Example",
+            "Lead the Stampede",
+            "Lifespring Druid",
+            "Lignify",
+            "Llanowar Elves",
+            "Llanowar Empath",
+            "Lure",
+            "Mantle of Webs",
+            "Map the Wastes",
+            "Mulch",
+            "Natural Connection",
+            "Naturalize",
+            "Nature's Lore",
+            "Nest Invader",
+            "Nettle Sentinel",
+            "New Horizons",
+            "Nimble Mongoose",
+            "Ondu Giant",
+            "Oran-Rief Invoker",
+            "Overgrown Armasaur",
+            "Pack's Favor",
+            "Penumbra Spider",
+            "Pierce the Sky",
+            "Plummet",
+            "Prey Upon",
+            "Prey's Vengeance",
+            "Pulse of Murasa",
+            "Quiet Disrepair",
+            "Rampant Growth",
+            "Ranger's Guile",
+            "Ravenous Leucrocota",
+            "Reclaim",
+            "Revive",
+            "Rhox Maulers",
+            "Riparian Tiger",
+            "Roar of the Wurm",
+            "Root Out",
+            "Rosethorn Halberd",
+            "Runeclaw Bear",
+            "Sagu Archer",
+            "Sakura-Tribe Elder",
+            "Saproling Migration",
+            "Savage Punch",
+            "Seal of Strength",
+            "Search for Tomorrow",
+            "Seek the Horizon",
+            "Seek the Wilds",
+            "Shape the Sands",
+            "Siege Wurm",
+            "Silhana Ledgewalker",
+            "Silkweaver Elite",
+            "Snake Umbra",
+            "Snapping Sailback",
+            "Spider Spawning",
+            "Stoic Builder",
+            "Strength in Numbers",
+            "Sylvan Bounty",
+            "Tajuru Pathwarden",
+            "Take Down",
+            "Talons of Wildwood",
+            "Territorial Baloth",
+            "Thornhide Wolves",
+            "Thornweald Archer",
+            "Thrive",
+            "Timberwatch Elf",
+            "Time to Feed",
+            "Titanic Growth",
+            "Tukatongue Thallid",
+            "Turntimber Basilisk",
+            "Vastwood Gorger",
+            "Watcher in the Web",
+            "Wellwisher",
+            "Wild Growth",
+            "Wild Mongrel",
+            "Wildsize",
+            "Wolfkin Bond",
+            "Woodborn Behemoth",
+            "Woolly Loxodon",
+            "Wren's Run Vanquisher",
+            "Yavimaya Elder",
+            "Yavimaya Sapherd",
+            "Yeva's Forcemage",
+            "Zendikar's Roil"
+        ));
+        this.populateSlot(10, asList(  // Green B
+            "Abundant Growth",
+            "Acidic Slime",
+            "Adventurous Impulse",
+            "Aerie Bowmasters",
+            "Aggressive Instinct",
+            "Aggressive Urge",
+            "Ainok Survivalist",
+            "Alpine Grizzly",
+            "Ambassador Oak",
+            "Ancient Stirrings",
+            "Arachnus Web",
+            "Arbor Elf",
+            "Aura Gnarlid",
+            "Avacyn's Pilgrim",
+            "Backwoods Survivalists",
+            "Baloth Gorger",
+            "Basking Rootwalla",
+            "Beast Within",
+            "Beneath the Sands",
+            "Bestial Menace",
+            "Bitterblade Warrior",
+            "Bitterbow Sharpshooters",
+            "Blossom Dryad",
+            "Borderland Ranger",
+            "Bristling Boar",
+            "Broken Bond",
+            "Canopy Spider",
+            "Carnivorous Moss-Beast",
+            "Caustic Caterpillar",
+            "Charging Rhino",
+            "Citanul Woodreaders",
+            "Clip Wings",
+            "Colossal Dreadmaw",
+            "Combo Attack",
+            "Commune with Nature",
+            "Commune with the Gods",
+            "Conifer Strider",
+            "Crop Rotation",
+            "Crossroads Consecrator",
+            "Crowned Ceratok",
+            "Crushing Canopy",
+            "Cultivate",
+            "Daggerback Basilisk",
+            "Dawn's Reflection",
+            "Death-Hood Cobra",
+            "Desert Twister",
+            "Dissenter's Deliverance",
+            "Dragonscale Boon",
+            "Durkwood Baloth",
+            "Earthen Arms",
+            "Elephant Guide",
+            "Elves of Deep Shadow",
+            "Elvish Visionary",
+            "Elvish Warrior",
+            "Ember Weaver",
+            "Epic Confrontation",
+            "Essence Warden",
+            "Experiment One",
+            "Explore",
+            "Explosive Vegetation",
+            "Ezuri's Archers",
+            "Fade into Antiquity",
+            "Farseek",
+            "Feed the Clan",
+            "Feral Krushok",
+            "Ferocious Zheng",
+            "Fertile Ground",
+            "Fog",
+            "Formless Nurturing",
+            "Giant Growth",
+            "Giant Spider",
+            "Gift of Paradise",
+            "Gnarlid Pack",
+            "Grazing Gladehart",
+            "Greenwood Sentinel",
+            "Groundswell",
+            "Guardian Shield-Bearer",
+            "Hardy Veteran",
+            "Harmonize",
+            "Harrow",
+            "Hunt the Weak",
+            "Hunter's Ambush",
+            "Imperious Perfect",
+            "Invigorate",
+            "Ivy Lane Denizen",
+            "Kavu Climber",
+            "Kavu Primarch",
+            "Khalni Heart Expedition",
+            "Kozilek's Predator",
+            "Kraul Warrior",
+            "Krosan Tusker",
+            "Larger Than Life",
+            "Lay of the Land",
+            "Longshot Squad",
+            "Manglehorn",
+            "Might of the Masses",
+            "Nature's Claim",
+            "Oakgnarl Warrior",
+            "Overgrown Battlement",
+            "Overrun",
+            "Peema Outrider",
+            "Pelakka Wurm",
+            "Pinion Feast",
+            "Pouncing Cheetah",
+            "Priest of Titania",
+            "Rain of Thorns",
+            "Rancor",
+            "Reclaiming Vines",
+            "Regrowth",
+            "Relic Crush",
+            "Return to the Earth",
+            "Roots",
+            "Scatter the Seeds",
+            "Stalking Tiger",
+            "Sylvan Scrying",
+            "Tajuru Warcaller",
+            "Terrain Elemental",
+            "The Crowd Goes Wild",
+            "Thornscape Battlemage",
+            "Thrashing Brontodon",
+            "Venom Sliver"
+        ));
+        this.populateSlot(11, asList(  // Multicolored
+            "Abzan Charm",
+            "Abzan Guide",
+            "Agony Warp",
+            "Akroan Hoplite",
+            "Armadillo Cloak",
+            "Armament Corps",
+            "Azorius Charm",
+            "Azra Oddsmaker",
+            "Baleful Strix",
+            "Baloth Null",
+            "Bear's Companion",
+            "Belligerent Brontodon",
+            "Bituminous Blast",
+            "Bladewing the Risen",
+            "Blightning",
+            "Bloodbraid Elf",
+            "Boros Challenger",
+            "Bounding Krasis",
+            "Call of the Nightwing",
+            "Campaign of Vengeance",
+            "Cauldron Dance",
+            "Citadel Castellan",
+            "Claim // Fame",
+            "Coiling Oracle",
+            "Contraband Kingpin",
+            "Corpsejack Menace",
+            "Crosis's Charm",
+            "Cunning Breezedancer",
+            "Deathreap Ritual",
+            "Deny Reality",
+            "Draconic Disciple",
+            "Drana's Emissary",
+            "Engineered Might",
+            "Esper Charm",
+            "Ethercaste Knight",
+            "Ethereal Ambush",
+            "Extract from Darkness",
+            "Fire // Ice",
+            "Fires of Yavimaya",
+            "Flame-Kin Zealot",
+            "Fusion Elemental",
+            "Gelectrode",
+            "Ghor-Clan Rampager",
+            "Giantbaiting",
+            "Gift of Orzhova",
+            "Goblin Deathraiders",
+            "Grim Contest",
+            "Gwyllion Hedge-Mage",
+            "Hammer Dropper",
+            "Hidden Stockpile",
+            "Highspire Mantis",
+            "Hypothesizzle",
+            "Iroas's Champion",
+            "Join Shields",
+            "Jungle Barrier",
+            "Kathari Remnant",
+            "Kin-Tree Invocation",
+            "Kiora's Follower",
+            "Kiss of the Amesha",
+            "Lawmage's Binding",
+            "Lightning Helix",
+            "Mardu Roughrider",
+            "Martial Glory",
+            "Maverick Thopterist",
+            "Mercurial Geists",
+            "Migratory Route",
+            "Mistmeadow Witch",
+            "Mortify",
+            "Naya Charm",
+            "Nucklavee",
+            "Obelisk Spider",
+            "Ochran Assassin",
+            "Pillory of the Sleepless",
+            "Plaxcaster Frogling",
+            "Pollenbright Wings",
+            "Putrefy",
+            "Qasali Pridemage",
+            "Raff Capashen, Ship's Mage",
+            "Raging Swordtooth",
+            "Reclusive Artificer",
+            "Reflector Mage",
+            "Rhox War Monk",
+            "Riptide Crab",
+            "River Hoopoe",
+            "Rosemane Centaur",
+            "Rosheen Meanderer",
+            "Satyr Enchanter",
+            "Savage Twister",
+            "Sedraxis Specter",
+            "Selesnya Guildmage",
+            "Shambling Remains",
+            "Shardless Agent",
+            "Shipwreck Singer",
+            "Shrewd Hatchling",
+            "Skyward Eye Prophets",
+            "Slave of Bolas",
+            "Soul Manipulation",
+            "Sprouting Thrinax",
+            "Stormchaser Chimera",
+            "Sultai Charm",
+            "Sultai Soothsayer",
+            "Tatyova, Benthic Druid",
+            "Terminate",
+            "Thopter Foundry",
+            "Thought Erasure",
+            "Tithe Drinker",
+            "Tower Gargoyle",
+            "Treacherous Terrain",
+            "Underworld Coinsmith",
+            "Unflinching Courage",
+            "Unlicensed Disintegration",
+            "Urban Evolution",
+            "Vengeful Rebirth",
+            "Warden of the Eye",
+            "Wayfaring Temple",
+            "Weapons Trainer",
+            "Wee Dragonauts",
+            "Winding Constrictor",
+            "Woolly Thoctar",
+            "Zealous Persecution",
+            "Zhur-Taa Druid"
+        ));
+        this.populateSlot(12, asList(  // Artifact/Land
+            "Aether Hub",
+            "Aether Spellbomb",
+            "Akoum Refuge",
+            "Alchemist's Vial",
+            "Alloy Myr",
+            "Arcane Sanctum",
+            "Armillary Sphere",
+            "Artisan of Kozilek",
+            "Ash Barrens",
+            "Ashnod's Altar",
+            "Benthic Infiltrator",
+            "Blasted Landscape",
+            "Blighted Fen",
+            "Blinding Souleater",
+            "Blossoming Sands",
+            "Bojuka Bog",
+            "Bomat Bazaar Barge",
+            "Bone Saw",
+            "Bottle Gnomes",
+            "Breaker of Armies",
+            "Burnished Hart",
+            "Call the Scions",
+            "Cathodion",
+            "Coldsteel Heart",
+            "Consulate Dreadnought",
+            "Copper Carapace",
+            "Crumbling Necropolis",
+            "Crystal Ball",
+            "Crystal Chimes",
+            "Darksteel Citadel",
+            "Diamond Mare",
+            "Dismal Backwater",
+            "Dreadship Reef",
+            "Eldrazi Devastator",
+            "Emmessi Tome",
+            "Etched Oracle",
+            "Evolving Wilds",
+            "Faerie Conclave",
+            "Farmstead Gleaner",
+            "Field of Ruin",
+            "Filigree Familiar",
+            "Flayer Husk",
+            "Forgotten Cave",
+            "Foundry Inspector",
+            "Fountain of Renewal",
+            "Frogmite",
+            "Frontier Bivouac",
+            "Gateway Plaza",
+            "Ghost Quarter",
+            "Goblin Burrows",
+            "Graypelt Refuge",
+            "Great Furnace",
+            "Gruul Signet",
+            "Guardians of Meletis",
+            "Heavy Arbalest",
+            "Herald's Horn",
+            "Hexplate Golem",
+            "Hot Soup",
+            "Icy Manipulator",
+            "Implement of Malice",
+            "Irontread Crusher",
+            "Juggernaut",
+            "Jungle Hollow",
+            "Jungle Shrine",
+            "Kazandu Refuge",
+            "Krosan Verge",
+            "Lightning Greaves",
+            "Loxodon Warhammer",
+            "Mask of Memory",
+            "Meteorite",
+            "Millikin",
+            "Millstone",
+            "Mind Stone",
+            "Mishra's Bauble",
+            "Mishra's Factory",
+            "Moonglove Extract",
+            "Mortarpod",
+            "Myr Retriever",
+            "Myr Sire",
+            "New Benalia",
+            "Ornithopter",
+            "Orzhov Basilica",
+            "Palladium Myr",
+            "Peace Strider",
+            "Perilous Myr",
+            "Pilgrim's Eye",
+            "Prophetic Prism",
+            "Reliquary Tower",
+            "Renegade Map",
+            "Rhonas's Monument",
+            "Rogue's Passage",
+            "Sandsteppe Citadel",
+            "Sandstone Oracle",
+            "Scoured Barrens",
+            "Sejiri Refuge",
+            "Serrated Arrows",
+            "Short Sword",
+            "Sigil of Valor",
+            "Simic Locket",
+            "Skarrg, the Rage Pits",
+            "Skullclamp",
+            "Skyscanner",
+            "Sol Ring",
+            "Sorcerer's Broom",
+            //"Spy Kit",
+            "Sunset Pyramid",
+            "Suspicious Bookcase",
+            "Swiftwater Cliffs",
+            "Tectonic Edge",
+            "Temple of the False God",
+            "Thornwood Falls",
+            "Thought Vessel",
+            "Thran Dynamo",
+            "Thran Golem",
+            "Tormod's Crypt",
+            "Trepanation Blade",
+            "Unclaimed Territory",
+            "Universal Automaton",
+            "Universal Solvent",
+            "Whispersilk Cloak",
+            "Wirewood Lodge"
+        ));
+        this.populateSlot(13, asList(  // Pre-M15, sourced from magic.wizards.com
+            "Avalanche Riders",
+            "Belbe's Portal",
+            "Black Knight",
+            "Dauthi Mindripper",
+            "Knight of Dawn",
+            "Maelstrom Archangel",
+            "Mana Tithe",
+            "Oracle of Nectars",
+            "Perish",
+            "Pestilence",
+            "Tower of Eons",
+            "Ana Sanctuary",
+            "Ancient Den",
+            "Ancient Ziggurat",
+            "Angelic Destiny",
+            "Archangel",
+            "Asceticism",
+            "Assemble the Legion",
+            "Athreos, God of Passage",
+            "Aura Shards",
+            "Bear Cub",
+            "Bloom Tender",
+            "Bonesplitter",
+            "Bow of Nylea",
+            "Brimstone Dragon",
+            "Brimstone Mage",
+            "Cairn Wanderer",
+            "Carpet of Flowers",
+            "Centaur Glade",
+            "Chancellor of the Annex",
+            "Chatter of the Squirrel",
+            "Chromatic Star",
+            "Contagion Clasp",
+            "Corrupted Conscience",
+            "Cragganwick Cremator",
+            "Crenellated Wall",
+            "Crystal Shard",
+            "Darksteel Garrison",
+            "Defense of the Heart",
+            "Dictate of Erebos",
+            "Dolmen Gate",
+            "Dominus of Fealty",
+            "Doomgape",
+            "Draco",
+            "Dragon Broodmother",
+            "Dragon Mask",
+            "Dungrove Elder",
+            "Eater of Days",
+            "Elixir of Immortality",
+            "Empyrial Armor",
+            "Enchanted Evening",
+            "Energy Field",
+            "Exsanguinate",
+            "Flameshot",
+            "Floodgate",
+            "Font of Mythos",
+            "Ghitu War Cry",
+            "Gilt-Leaf Palace",
+            "Goblin Game",
+            "Greater Gargadon",
+            "Guided Passage",
+            "Haakon, Stromgald Scourge",
+            "Hedron Crab",
+            "Helm of Awakening",
+            "Hunter of Eyeblights",
+            "Hurricane",
+            "Hypnotic Specter",
+            "Impending Disaster",
+            "Jushi Apprentice",
+            "Kaervek's Torch",
+            "Kargan Dragonlord",
+            "Knollspine Dragon",
+            "Kor Chant",
+            "Kruphix, God of Horizons",
+            "Lashknife Barrier",
+            "Lotus Petal",
+            "Magus of the Moat",
+            "Manamorphose",
+            "Martyr's Bond",
+            "Martyr's Cause",
+            "Master Transmuter",
+            "Meddling Mage",
+            "Mistform Shrieker",
+            "Nemesis of Reason",
+            "Pathrazer of Ulamog",
+            "Phantasmal Dragon",
+            "Phantom Centaur",
+            "Phyrexian Metamorph",
+            "Phyrexian Soulgorger",
+            "Purphoros, God of the Forge",
+            "Questing Phelddagrif",
+            "Rage Reflection",
+            "Recoup",
+            "Release the Ants",
+            "Rhys the Redeemed",
+            "Rhystic Study",
+            "Rishadan Footpad",
+            "Rith, the Awakener",
+            "River Boa",
+            "Sadistic Hypnotist",
+            "Sakashima the Impostor",
+            "Sapphire Charm",
+            "Shrouded Lore",
+            "Soothsaying",
+            "Sorin Markov",
+            "Squirrel Wrangler",
+            "Thieving Magpie",
+            "Thrun, the Last Troll",
+            "Time Sieve",
+            "Timely Reinforcements",
+            "Tinker",
+            "Toxin Sliver",
+            "Triumph of the Hordes",
+            "Umbral Mantle",
+            "Viashino Sandstalker",
+            "Violent Ultimatum",
+            "Volunteer Reserves",
+            "Wargate",
+            "Weathered Wayfarer",
+            "Wild Nacatl",
+            "Yavimaya's Embrace"
+        ));
+        this.populateSlot(14, asList(  // Post-M15 rare / mythic, sourced from magic.wizards.com
+            "Adorned Pouncer",
+            "Aetherflux Reservoir",
+            "Akroan Horse",
+            "Alesha, Who Smiles at Death",
+            "Alhammarret's Archive",
+            "All Is Dust",
+            "Aminatou's Augury",
+            "Angel of the Dire Hour",
+            "Anger of the Gods",
+            "Animar, Soul of Elements",
+            "Approach of the Second Sun",
+            "Arch of Orazca",
+            "Basilisk Collar",
+            "Beacon of Immortality",
+            "Beastmaster Ascension",
+            "Birds of Paradise",
+            "Black Market",
+            "Boompile",
+            "Boros Reckoner",
+            "Caged Sun",
+            "Cauldron of Souls",
+            "Champion of the Parish",
+            "Chaos Warp",
+            "Chasm Skulker",
+            "Chromatic Lantern",
+            "Coat of Arms",
+            "Collective Brutality",
+            "Commit // Memory",
+            "Courser of Kruphix",
+            "Coveted Jewel",
+            "Daretti, Scrap Savant",
+            "Deadly Tempest",
+            "Debtors' Knell",
+            "Decree of Justice",
+            "Deepglow Skate",
+            "Desolation Twin",
+            "Dictate of Heliod",
+            "Djinn of Wishes",
+            "Dragonlord Ojutai",
+            "Drana, Kalastria Bloodchief",
+            "Eldrazi Monument",
+            "Eldritch Evolution",
+            "Elesh Norn, Grand Cenobite",
+            "Evra, Halcyon Witness",
+            "Expropriate",
+            "Fblthp, the Lost",
+            "Felidar Sovereign",
+            "Gideon Jura",
+            "Goblin Charbelcher",
+            "Goblin Piledriver",
+            "Gonti, Lord of Luxury",
+            "Grasp of Fate",
+            "Grave Titan",
+            "Gravecrawler",
+            "Greenbelt Rampager",
+            "Hornet Nest",
+            "Kiki-Jiki, Mirror Breaker",
+            "Kolaghan's Command",
+            "Krenko, Mob Boss",
+            "Liliana, Death's Majesty",
+            "Living Death",
+            "Mana Crypt",
+            "Meandering Towershell",
+            "Memory Erosion",
+            "Meren of Clan Nel Toth",
+            "Mimic Vat",
+            "Mind Shatter",
+            "Mind Spring",
+            "Mirran Crusader",
+            "Mirror Entity",
+            "Misdirection",
+            "Mizzix's Mastery",
+            "Mycoloth",
+            "Mystic Confluence",
+            "Nighthowler",
+            "Nin, the Pain Artist",
+            "Nissa, Voice of Zendikar",
+            "Odric, Lunarch Marshal",
+            "Phyrexian Arena",
+            "Phyrexian Plaguelord",
+            "Precursor Golem",
+            "Preyseizer Dragon",
+            "Queen Marchesa",
+            "Reality Scramble",
+            "Recruiter of the Guard",
+            "Release the Gremlins",
+            "Revel in Riches",
+            "Rune-Scarred Demon",
+            "Savage Knuckleblade",
+            "Selvala, Heart of the Wilds",
+            "Serendib Efreet",
+            "Sewer Nemesis",
+            "Shamanic Revelation",
+            "Sliver Hivelord",
+            "Solemn Simulacrum",
+            "Spawning Grounds",
+            "Star of Extinction",
+            "Steamflogger Boss",
+            "Stunt Double",
+            "Sudden Demise",
+            "Supreme Verdict",
+            "Sword of the Animist",
+            "Talrand, Sky Summoner",
+            "Taurean Mauler",
+            "Teferi, Temporal Archmage",
+            "Teferi's Protection",
+            "Temporal Mastery",
+            "Tempt with Discovery",
+            "Thalia's Lancers",
+            "The Gitrog Monster",
+            "The Mirari Conjecture",
+            "Tireless Tracker",
+            "Torment of Hailfire",
+            "Trading Post",
+            "Two-Headed Giant",
+            "Urza's Rage",
+            "Vigor",
+            "Wheel of Fate",
+            "Whelming Wave",
+            "Whir of Invention",
+            "Yuriko, the Tiger's Shadow"
+        ));
+        this.populateBoosterSpecialSlot();
+    }
+
+    /**
+     * Populate the given booster slot.
+     * @param slotNumber booster slot number. 1-indexed, valid range is 1-14, as 15 is the special slot
+     * @param cardNames List of English card names found on the given slot
+     */
+    private void populateSlot(int slotNumber, List<String> cardNames) {
+        final List<CardInfo> cardInfoList = this.possibleCardsPerBoosterSlot.get(slotNumber);
+        for(String name : cardNames) {
+            final CardInfo cardWithGivenName = CardRepository.instance.findCardWPreferredSet(name, this.code, false);
+            cardInfoList.add(cardWithGivenName);
+        }
+    }
+
+    /**
+     * Populate the special slot. Defined as protected to allow overwriting this if the playtest cards
+     * from the convention edition are ever implemented.
+     */
+    protected void populateBoosterSpecialSlot() {
+        CardCriteria criteria = new CardCriteria();
+        criteria.setCodes("FMB1");
+        this.possibleCardsPerBoosterSlot.get(15).addAll(CardRepository.instance.findCards(criteria));
     }
 
     @Override
     public List<Card> createBooster() {
-        List<Card> booster = new ArrayList();
-        for (List<String> cardSheet : cardSheets) {
-            String cardName = cardSheet.get(RandomUtil.nextInt(121));
-            List<CardInfo> cardInfo = new ArrayList();
-            cardInfo.add(CardRepository.instance.findCard(this.code, cardName));
-            addToBooster(booster, cardInfo);
+        if(this.possibleCardsPerBoosterSlot.isEmpty()) {
+            // Generate the map only once
+            this.populateBoosterSlotMap();
+        }
+        final List<Card> booster = new ArrayList<>(15);
+        for(int slot = 1; slot < 16; ++slot) {
+            final List<CardInfo> availableCards = this.possibleCardsPerBoosterSlot.get(slot);
+            final int printSheetCardNumber = RandomUtil.nextInt(availableCards.size());
+            final Card chosenCard = availableCards.get(printSheetCardNumber).getCard();
+            booster.add(chosenCard);
         }
         return booster;
     }
 
-    private static final List<List<String>> cardSheets = new ArrayList();
-
-    static {
-        // Sheet data comes from http://www.lethe.xyz/mtg/collation/mb1.html
-        List<String> sheet;
-        sheet = new ArrayList();
-        sheet.add("Abzan Falconer");
-        sheet.add("Abzan Runemark");
-        sheet.add("Acrobatic Maneuver");
-        sheet.add("Affa Protector");
-        sheet.add("Ainok Bond-Kin");
-        sheet.add("Alley Evasion");
-        sheet.add("Angelic Purge");
-        sheet.add("Angelsong");
-        sheet.add("Apostle's Blessing");
-        sheet.add("Arrester's Zeal");
-        sheet.add("Artful Maneuver");
-        sheet.add("Aura of Silence");
-        sheet.add("Bartered Cow");
-        sheet.add("Bonds of Faith");
-        sheet.add("Borrowed Grace");
-        sheet.add("Bulwark Giant");
-        sheet.add("Caravan Escort");
-        sheet.add("Caught in the Brights");
-        sheet.add("Celestial Crusader");
-        sheet.add("Celestial Flare");
-        sheet.add("Center Soul");
-        sheet.add("Cliffside Lookout");
-        sheet.add("Conviction");
-        sheet.add("Countless Gears Renegade");
-        sheet.add("Court Street Denizen");
-        sheet.add("Crib Swap");
-        sheet.add("Danitha Capashen, Paragon");
-        sheet.add("Daring Skyjek");
-        sheet.add("Decommission");
-        sheet.add("Defiant Strike");
-        sheet.add("Desperate Sentry");
-        sheet.add("Devilthorn Fox");
-        sheet.add("Disposal Mummy");
-        sheet.add("Divine Favor");
-        sheet.add("Dragon's Eye Sentry");
-        sheet.add("Dragon's Presence");
-        sheet.add("Eddytrail Hawk");
-        sheet.add("Enduring Victory");
-        sheet.add("Enlightened Ascetic");
-        sheet.add("Ephemeral Shields");
-        sheet.add("Ephemerate");
-        sheet.add("Excoriate");
-        sheet.add("Expose Evil");
-        sheet.add("Eyes in the Skies");
-        sheet.add("Faith's Fetters");
-        sheet.add("Feat of Resistance");
-        sheet.add("Felidar Umbra");
-        sheet.add("Firehoof Cavalry");
-        sheet.add("Ghostblade Eidolon");
-        sheet.add("Gift of Estates");
-        sheet.add("Glaring Aegis");
-        sheet.add("Glint-Sleeve Artisan");
-        sheet.add("God-Pharaoh's Faithful");
-        sheet.add("Grasp of the Hieromancer");
-        sheet.add("Gust Walker");
-        sheet.add("Gustcloak Skirmisher");
-        sheet.add("Healing Hands");
-        sheet.add("Hyena Umbra");
-        sheet.add("Infantry Veteran");
-        sheet.add("Inquisitor's Ox");
-        sheet.add("Isolation Zone");
-        sheet.add("Knight of Old Benalia");
-        sheet.add("Knight of Sorrows");
-        sheet.add("Kor Skyfisher");
-        sheet.add("Leonin Relic-Warder");
-        sheet.add("Lightform");
-        sheet.add("Lone Missionary");
-        sheet.add("Lonesome Unicorn // Rider in Need");
-        sheet.add("Lotus-Eye Mystics");
-        sheet.add("Loxodon Partisan");
-        sheet.add("Mardu Hordechief");
-        sheet.add("Marked by Honor");
-        sheet.add("Meditation Puzzle");
-        sheet.add("Mortal's Ardor");
-        sheet.add("Mother of Runes");
-        sheet.add("Ninth Bridge Patrol");
-        sheet.add("Ondu Greathorn");
-        sheet.add("Ondu War Cleric");
-        sheet.add("Oreskos Swiftclaw");
-        sheet.add("Oust");
-        sheet.add("Palace Jailer");
-        sheet.add("Path to Exile");
-        sheet.add("Peace of Mind");
-        sheet.add("Prowling Caracal");
-        sheet.add("Resurrection");
-        sheet.add("Rhet-Crop Spearmaster");
-        sheet.add("Righteous Cause");
-        sheet.add("Savannah Lions");
-        sheet.add("Searing Light");
-        sheet.add("Serra's Embrace");
-        sheet.add("Sheer Drop");
-        sheet.add("Shining Aerosaur");
-        sheet.add("Shining Armor");
-        sheet.add("Siegecraft");
-        sheet.add("Skymarcher Aspirant");
-        sheet.add("Skyspear Cavalry");
-        sheet.add("Snubhorn Sentry");
-        sheet.add("Soul Parry");
-        sheet.add("Soul Summons");
-        sheet.add("Soul-Strike Technique");
-        sheet.add("Soulmender");
-        sheet.add("Sparring Mummy");
-        sheet.add("Spectral Gateguards");
-        sheet.add("Stave Off");
-        sheet.add("Steadfast Sentinel");
-        sheet.add("Stone Haven Medic");
-        sheet.add("Suppression Bonds");
-        sheet.add("Survive the Night");
-        sheet.add("Territorial Hammerskull");
-        sheet.add("Thraben Inspector");
-        sheet.add("Thraben Standard Bearer");
-        sheet.add("Topan Freeblade");
-        sheet.add("Veteran Swordsmith");
-        sheet.add("Village Bell-Ringer");
-        sheet.add("Voice of the Provinces");
-        sheet.add("Wall of One Thousand Cuts");
-        sheet.add("Wandering Champion");
-        sheet.add("War Behemoth");
-        sheet.add("Windborne Charge");
-        sheet.add("Wing Shards");
-        sheet.add("Winged Shepherd");
-        cardSheets.add(sheet);
-        sheet = new ArrayList();
-        sheet.add("Adanto Vanguard");
-        sheet.add("Ajani's Pridemate");
-        sheet.add("Angel of Mercy");
-        sheet.add("Angel of Renewal");
-        sheet.add("Angelic Gift");
-        sheet.add("Arrest");
-        sheet.add("Aven Battle Priest");
-        sheet.add("Aven Sentry");
-        sheet.add("Ballynock Cohort");
-        sheet.add("Battle Mastery");
-        sheet.add("Benevolent Ancestor");
-        sheet.add("Blade Instructor");
-        sheet.add("Blessed Spirits");
-        sheet.add("Built to Last");
-        sheet.add("Candlelight Vigil");
-        sheet.add("Cartouche of Solidarity");
-        sheet.add("Cast Out");
-        sheet.add("Cathar's Companion");
-        sheet.add("Champion of Arashin");
-        sheet.add("Charge");
-        sheet.add("Cloudshift");
-        sheet.add("Coalition Honor Guard");
-        sheet.add("Collar the Culprit");
-        sheet.add("Congregate");
-        sheet.add("Court Homunculus");
-        sheet.add("Darksteel Mutation");
-        sheet.add("Dauntless Cathar");
-        sheet.add("Dawnglare Invoker");
-        sheet.add("Disenchant");
-        sheet.add("Dismantling Blow");
-        sheet.add("Djeru's Renunciation");
-        sheet.add("Djeru's Resolve");
-        sheet.add("Doomed Traveler");
-        sheet.add("Dragon Bell Monk");
-        sheet.add("Emerge Unscathed");
-        sheet.add("Encampment Keeper");
-        sheet.add("Encircling Fissure");
-        sheet.add("Excavation Elephant");
-        sheet.add("Expedition Raptor");
-        sheet.add("Exultant Skymarcher");
-        sheet.add("Faithbearer Paladin");
-        sheet.add("Felidar Guardian");
-        sheet.add("Fencing Ace");
-        sheet.add("Fiend Hunter");
-        sheet.add("Forsake the Worldly");
-        sheet.add("Fortify");
-        sheet.add("Fragmentize");
-        sheet.add("Geist of the Moors");
-        sheet.add("Gideon's Lawkeeper");
-        sheet.add("Gleam of Resistance");
-        sheet.add("Gods Willing");
-        sheet.add("Great-Horn Krushok");
-        sheet.add("Guided Strike");
-        sheet.add("Healer's Hawk");
-        sheet.add("Healing Grace");
-        sheet.add("Heavy Infantry");
-        sheet.add("Humble");
-        sheet.add("Inspired Charge");
-        sheet.add("Intrusive Packbeast");
-        sheet.add("Iona's Judgment");
-        sheet.add("Jubilant Mascot");
-        sheet.add("Knight of Cliffhaven");
-        sheet.add("Knight of the Skyward Eye");
-        sheet.add("Knight of the Tusk");
-        sheet.add("Kor Bladewhirl");
-        sheet.add("Kor Firewalker");
-        sheet.add("Kor Hookmaster");
-        sheet.add("Kor Sky Climber");
-        sheet.add("Lieutenants of the Guard");
-        sheet.add("Lightwalker");
-        sheet.add("Lingering Souls");
-        sheet.add("Looming Altisaur");
-        sheet.add("Loyal Sentry");
-        sheet.add("Lunarch Mantle");
-        sheet.add("Midnight Guard");
-        sheet.add("Momentary Blink");
-        sheet.add("Moonlit Strider");
-        sheet.add("Nyx-Fleece Ram");
-        sheet.add("Pacifism");
-        sheet.add("Palace Sentinels");
-        sheet.add("Paladin of the Bloodstained");
-        sheet.add("Path of Peace");
-        sheet.add("Pegasus Courser");
-        sheet.add("Pentarch Ward");
-        sheet.add("Pitfall Trap");
-        sheet.add("Pressure Point");
-        sheet.add("Promise of Bunrei");
-        sheet.add("Rally the Peasants");
-        sheet.add("Raptor Companion");
-        sheet.add("Refurbish");
-        sheet.add("Renewed Faith");
-        sheet.add("Retreat to Emeria");
-        sheet.add("Reviving Dose");
-        sheet.add("Rootborn Defenses");
-        sheet.add("Sacred Cat");
-        sheet.add("Sanctum Gargoyle");
-        sheet.add("Sandstorm Charger");
-        sheet.add("Seal of Cleansing");
-        sheet.add("Seeker of the Way");
-        sheet.add("Sensor Splicer");
-        sheet.add("Seraph of the Suns");
-        sheet.add("Serra Disciple");
-        sheet.add("Shoulder to Shoulder");
-        sheet.add("Silverchase Fox");
-        sheet.add("Skyhunter Skirmisher");
-        sheet.add("Slash of Talons");
-        sheet.add("Soul Warden");
-        sheet.add("Stalwart Aven");
-        sheet.add("Star-Crowned Stag");
-        sheet.add("Sunlance");
-        sheet.add("Sunrise Seeker");
-        sheet.add("Swords to Plowshares");
-        sheet.add("Take Vengeance");
-        sheet.add("Tandem Tactics");
-        sheet.add("Terashi's Grasp");
-        sheet.add("Unwavering Initiate");
-        sheet.add("Wake the Reflections");
-        sheet.add("Wall of Omens");
-        sheet.add("Wild Griffin");
-        sheet.add("Youthful Knight");
-        sheet.add("Zealous Strike");
-        cardSheets.add(sheet);
-        sheet = new ArrayList();
-        sheet.add("Amass the Components");
-        sheet.add("Anticipate");
-        sheet.add("Artificer's Assistant");
-        sheet.add("Augury Owl");
-        sheet.add("Befuddle");
-        sheet.add("Benthic Giant");
-        sheet.add("Calculated Dismissal");
-        sheet.add("Call to Heel");
-        sheet.add("Caller of Gales");
-        sheet.add("Cancel");
-        sheet.add("Capture Sphere");
-        sheet.add("Catalog");
-        sheet.add("Chart a Course");
-        sheet.add("Chillbringer");
-        sheet.add("Chronostutter");
-        sheet.add("Circular Logic");
-        sheet.add("Clear the Mind");
-        sheet.add("Cloak of Mists");
-        sheet.add("Cloudkin Seer");
-        sheet.add("Clutch of Currents");
-        sheet.add("Compelling Argument");
-        sheet.add("Condescend");
-        sheet.add("Containment Membrane");
-        sheet.add("Contingency Plan");
-        sheet.add("Contradict");
-        sheet.add("Crashing Tide");
-        sheet.add("Crush Dissent");
-        sheet.add("Curio Vendor");
-        sheet.add("Daze");
-        sheet.add("Decision Paralysis");
-        sheet.add("Deep Freeze");
-        sheet.add("Dispel");
-        sheet.add("Displace");
-        sheet.add("Drag Under");
-        sheet.add("Dragon's Eye Savants");
-        sheet.add("Dreadwaters");
-        sheet.add("Embodiment of Spring");
-        sheet.add("Ensoul Artifact");
-        sheet.add("Everdream");
-        sheet.add("Failed Inspection");
-        sheet.add("Flashfreeze");
-        sheet.add("Fledgling Mawcor");
-        sheet.add("Fleeting Distraction");
-        sheet.add("Fogwalker");
-        sheet.add("Foil");
-        sheet.add("Frantic Search");
-        sheet.add("Frilled Sea Serpent");
-        sheet.add("Gaseous Form");
-        sheet.add("Glint");
-        sheet.add("Gone Missing");
-        sheet.add("Grasp of Phantoms");
-        sheet.add("Guard Gomazoa");
-        sheet.add("Gurmag Drowner");
-        sheet.add("Gush");
-        sheet.add("Hightide Hermit");
-        sheet.add("Hinterland Drake");
-        sheet.add("Humongulus");
-        sheet.add("Inkfathom Divers");
-        sheet.add("Invisibility");
-        sheet.add("Jeering Homunculus");
-        sheet.add("Jeskai Sage");
-        sheet.add("Kiora's Dambreaker");
-        sheet.add("Laboratory Brute");
-        sheet.add("Laboratory Maniac");
-        sheet.add("Labyrinth Guardian");
-        sheet.add("Messenger Jays");
-        sheet.add("Mind Sculpt");
-        sheet.add("Mist Raven");
-        sheet.add("Mnemonic Wall");
-        sheet.add("Monastery Loremaster");
-        sheet.add("Murder of Crows");
-        sheet.add("Nagging Thoughts");
-        sheet.add("Niblis of Dusk");
-        sheet.add("Nine-Tail White Fox");
-        sheet.add("Ojutai's Breath");
-        sheet.add("Phyrexian Ingester");
-        sheet.add("Pondering Mage");
-        sheet.add("Predict");
-        sheet.add("Purple-Crystal Crab");
-        sheet.add("Refocus");
-        sheet.add("Riftwing Cloudskate");
-        sheet.add("River Darter");
-        sheet.add("Sailor of Means");
-        sheet.add("Scroll Thief");
-        sheet.add("Send to Sleep");
-        sheet.add("Shipwreck Looter");
-        sheet.add("Silent Observer");
-        sheet.add("Silvergill Adept");
-        sheet.add("Singing Bell Strike");
-        sheet.add("Skaab Goliath");
-        sheet.add("Skitter Eel");
-        sheet.add("Sleep");
-        sheet.add("Slipstream Eel");
-        sheet.add("Slither Blade");
-        sheet.add("Sphinx's Tutelage");
-        sheet.add("Stream of Thought");
-        sheet.add("Surrakar Banisher");
-        sheet.add("Syr Elenora, the Discerning");
-        sheet.add("Thought Collapse");
-        sheet.add("Thunder Drake");
-        sheet.add("Tidal Warrior");
-        sheet.add("Trail of Evidence");
-        sheet.add("Treasure Cruise");
-        sheet.add("Treasure Mage");
-        sheet.add("Trinket Mage");
-        sheet.add("Turn Aside");
-        sheet.add("Uncomfortable Chill");
-        sheet.add("Wall of Frost");
-        sheet.add("Warden of Evos Isle");
-        sheet.add("Watercourser");
-        sheet.add("Weldfast Wingsmith");
-        sheet.add("Welkin Tern");
-        sheet.add("Wind Drake");
-        sheet.add("Wind Strider");
-        sheet.add("Wind-Kin Raiders");
-        sheet.add("Windcaller Aven");
-        sheet.add("Wishcoin Crab");
-        sheet.add("Wishful Merfolk");
-        sheet.add("Wretched Gryff");
-        sheet.add("Write into Being");
-        sheet.add("Youthful Scholar");
-        cardSheets.add(sheet);
-        sheet = new ArrayList();
-        sheet.add("Academy Journeymage");
-        sheet.add("Aether Tradewinds");
-        sheet.add("Aethersnipe");
-        sheet.add("Amphin Pathmage");
-        sheet.add("Arcane Denial");
-        sheet.add("Archaeomancer");
-        sheet.add("Archetype of Imagination");
-        sheet.add("Augur of Bolas");
-        sheet.add("Bastion Inventor");
-        sheet.add("Bewilder");
-        sheet.add("Blue Elemental Blast");
-        sheet.add("Borrowing 100,000 Arrows");
-        sheet.add("Brainstorm");
-        sheet.add("Brilliant Spectrum");
-        sheet.add("Brine Elemental");
-        sheet.add("Cartouche of Knowledge");
-        sheet.add("Castaway's Despair");
-        sheet.add("Choking Tethers");
-        sheet.add("Citywatch Sphinx");
-        sheet.add("Claustrophobia");
-        sheet.add("Cloud Elemental");
-        sheet.add("Cloudreader Sphinx");
-        sheet.add("Concentrate");
-        sheet.add("Convolute");
-        sheet.add("Coral Trickster");
-        sheet.add("Coralhelm Guide");
-        sheet.add("Counterspell");
-        sheet.add("Court Hussar");
-        sheet.add("Curiosity");
-        sheet.add("Dazzling Lights");
-        sheet.add("Deep Analysis");
-        sheet.add("Diminish");
-        sheet.add("Dirgur Nemesis");
-        sheet.add("Distortion Strike");
-        sheet.add("Divination");
-        sheet.add("Doorkeeper");
-        sheet.add("Dream Cache");
-        sheet.add("Dream Twist");
-        sheet.add("Eel Umbra");
-        sheet.add("Enlightened Maniac");
-        sheet.add("Errant Ephemeron");
-        sheet.add("Essence Scatter");
-        sheet.add("Exclude");
-        sheet.add("Fact or Fiction");
-        sheet.add("Faerie Invaders");
-        sheet.add("Faerie Mechanist");
-        sheet.add("Fascination");
-        sheet.add("Fathom Seer");
-        sheet.add("Fog Bank");
-        sheet.add("Forbidden Alchemy");
-        sheet.add("Frost Lynx");
-        sheet.add("Ghost Ship");
-        sheet.add("Glacial Crasher");
-        sheet.add("Hieroglyphic Illumination");
-        sheet.add("Horseshoe Crab");
-        sheet.add("Impulse");
-        sheet.add("Ior Ruin Expedition");
-        sheet.add("Jace's Phantasm");
-        sheet.add("Jwar Isle Avenger");
-        sheet.add("Lay Claim");
-        sheet.add("Leapfrog");
-        sheet.add("Mahamoti Djinn");
-        sheet.add("Man-o'-War");
-        sheet.add("Mana Leak");
-        sheet.add("Maximize Altitude");
-        sheet.add("Memory Lapse");
-        sheet.add("Merfolk Looter");
-        sheet.add("Metallic Rebuke");
-        sheet.add("Mulldrifter");
-        sheet.add("Mystic of the Hidden Way");
-        sheet.add("Mystical Teachings");
-        sheet.add("Negate");
-        sheet.add("Ninja of the Deep Hours");
-        sheet.add("Ojutai Interceptor");
-        sheet.add("Omenspeaker");
-        sheet.add("Opportunity");
-        sheet.add("Opt");
-        sheet.add("Peel from Reality");
-        sheet.add("Phantasmal Bear");
-        sheet.add("Portent");
-        sheet.add("Preordain");
-        sheet.add("Prodigal Sorcerer");
-        sheet.add("Propaganda");
-        sheet.add("Prosperous Pirates");
-        sheet.add("Repulse");
-        sheet.add("Retraction Helix");
-        sheet.add("Ringwarden Owl");
-        sheet.add("River Serpent");
-        sheet.add("Riverwheel Aerialists");
-        sheet.add("Sage of Lat-Nam");
-        sheet.add("Sea Gate Oracle");
-        sheet.add("Sealock Monster");
-        sheet.add("Secrets of the Golden City");
-        sheet.add("Shaper Parasite");
-        sheet.add("Shimmerscale Drake");
-        sheet.add("Sigiled Starfish");
-        sheet.add("Skittering Crustacean");
-        sheet.add("Snap");
-        sheet.add("Snapping Drake");
-        sheet.add("Somber Hoverguard");
-        sheet.add("Spire Monitor");
-        sheet.add("Steady Progress");
-        sheet.add("Stitched Drake");
-        sheet.add("Storm Sculptor");
-        sheet.add("Strategic Planning");
-        sheet.add("Syncopate");
-        sheet.add("Tandem Lookout");
-        sheet.add("Temporal Fissure");
-        sheet.add("Thornwind Faeries");
-        sheet.add("Thought Scour");
-        sheet.add("Thoughtcast");
-        sheet.add("Thrummingbird");
-        sheet.add("Tidal Wave");
-        sheet.add("Totally Lost");
-        sheet.add("Treasure Hunt");
-        sheet.add("Triton Tactics");
-        sheet.add("Vapor Snag");
-        sheet.add("Vigean Graftmage");
-        sheet.add("Wave-Wing Elemental");
-        sheet.add("Whiplash Trap");
-        sheet.add("Windrider Eel");
-        cardSheets.add(sheet);
-        sheet = new ArrayList();
-        sheet.add("Aid the Fallen");
-        sheet.add("Alesha's Vanguard");
-        sheet.add("Alley Strangler");
-        sheet.add("Ambitious Aetherborn");
-        sheet.add("Ancestral Vengeance");
-        sheet.add("Annihilate");
-        sheet.add("Bala Ged Scorpion");
-        sheet.add("Bitter Revelation");
-        sheet.add("Bladebrand");
-        sheet.add("Blighted Bat");
-        sheet.add("Blistergrub");
-        sheet.add("Bone Splinters");
-        sheet.add("Boon of Emrakul");
-        sheet.add("Breeding Pit");
-        sheet.add("Butcher's Glee");
-        sheet.add("Cabal Therapy");
-        sheet.add("Cackling Imp");
-        sheet.add("Cadaver Imp");
-        sheet.add("Catacomb Slug");
-        sheet.add("Certain Death");
-        sheet.add("Coat with Venom");
-        sheet.add("Corpsehatch");
-        sheet.add("Covenant of Blood");
-        sheet.add("Crow of Dark Tidings");
-        sheet.add("Dark Dabbling");
-        sheet.add("Dark Withering");
-        sheet.add("Darkblast");
-        sheet.add("Dead Reveler");
-        sheet.add("Deadeye Tormentor");
-        sheet.add("Defeat");
-        sheet.add("Demon's Grasp");
-        sheet.add("Demonic Tutor");
-        sheet.add("Demonic Vigor");
-        sheet.add("Dismember");
-        sheet.add("Disowned Ancestor");
-        sheet.add("Doomed Dissenter");
-        sheet.add("Douse in Gloom");
-        sheet.add("Dread Return");
-        sheet.add("Dregscape Zombie");
-        sheet.add("Dukhara Scavenger");
-        sheet.add("Dune Beetle");
-        sheet.add("Duress");
-        sheet.add("Farbog Revenant");
-        sheet.add("Fetid Imp");
-        sheet.add("First-Sphere Gargantua");
-        sheet.add("Flesh to Dust");
-        sheet.add("Fretwork Colony");
-        sheet.add("Genju of the Fens");
-        sheet.add("Ghoulcaller's Accomplice");
-        sheet.add("Grasping Scoundrel");
-        sheet.add("Gravepurge");
-        sheet.add("Grim Discovery");
-        sheet.add("Hideous End");
-        sheet.add("Induce Despair");
-        sheet.add("Infernal Scarring");
-        sheet.add("Infest");
-        sheet.add("Instill Infection");
-        sheet.add("Kalastria Nightwatch");
-        sheet.add("Krumar Bond-Kin");
-        sheet.add("Lazotep Behemoth");
-        sheet.add("Macabre Waltz");
-        sheet.add("Marauding Boneslasher");
-        sheet.add("Mark of the Vampire");
-        sheet.add("Marsh Hulk");
-        sheet.add("Merciless Resolve");
-        sheet.add("Miasmic Mummy");
-        sheet.add("Mind Rake");
-        sheet.add("Mire's Malice");
-        sheet.add("Murder");
-        sheet.add("Murderous Compulsion");
-        sheet.add("Nantuko Husk");
-        sheet.add("Never Happened");
-        sheet.add("Nirkana Assassin");
-        sheet.add("Plaguecrafter");
-        sheet.add("Prowling Pangolin");
-        sheet.add("Rakshasa's Secret");
-        sheet.add("Read the Bones");
-        sheet.add("Reaper of Night // Harvest Fear");
-        sheet.add("Reassembling Skeleton");
-        sheet.add("Reckless Imp");
-        sheet.add("Reckless Spite");
-        sheet.add("Returned Centaur");
-        sheet.add("Revenant");
-        sheet.add("Rite of the Serpent");
-        sheet.add("Ruin Rat");
-        sheet.add("Scrounger of Souls");
-        sheet.add("Sengir Vampire");
-        sheet.add("Shambling Attendants");
-        sheet.add("Shambling Goblin");
-        sheet.add("Shriekmaw");
-        sheet.add("Silumgar Butcher");
-        sheet.add("Skeleton Archer");
-        sheet.add("Stab Wound");
-        sheet.add("Stallion of Ashmouth");
-        sheet.add("Stinkweed Imp");
-        sheet.add("Stromkirk Patrol");
-        sheet.add("Subtle Strike");
-        sheet.add("Sultai Runemark");
-        sheet.add("Tar Snare");
-        sheet.add("Thallid Omnivore");
-        sheet.add("The Eldest Reborn");
-        sheet.add("Thornbow Archer");
-        sheet.add("Thraben Foulbloods");
-        sheet.add("Torment of Venom");
-        sheet.add("Touch of Moonglove");
-        sheet.add("Twins of Maurer Estate");
-        sheet.add("Undercity's Embrace");
-        sheet.add("Untamed Hunger");
-        sheet.add("Unyielding Krumar");
-        sheet.add("Vampire Champion");
-        sheet.add("Vampire Envoy");
-        sheet.add("Vampire Nighthawk");
-        sheet.add("Vessel of Malignity");
-        sheet.add("Voracious Null");
-        sheet.add("Vraska's Finisher");
-        sheet.add("Walk the Plank");
-        sheet.add("Warteye Witch");
-        sheet.add("Weight of the Underworld");
-        sheet.add("Weirded Vampire");
-        sheet.add("Yargle, Glutton of Urborg");
-        sheet.add("Zulaport Chainmage");
-        cardSheets.add(sheet);
-        sheet = new ArrayList();
-        sheet.add("Absorb Vis");
-        sheet.add("Accursed Spirit");
-        sheet.add("Altar's Reap");
-        sheet.add("Animate Dead");
-        sheet.add("Baleful Ammit");
-        sheet.add("Balustrade Spy");
-        sheet.add("Bartizan Bats");
-        sheet.add("Black Cat");
-        sheet.add("Blessing of Belzenlok");
-        sheet.add("Blightsoil Druid");
-        sheet.add("Blood Artist");
-        sheet.add("Bloodrite Invoker");
-        sheet.add("Caligo Skin-Witch");
-        sheet.add("Carrion Feeder");
-        sheet.add("Carrion Imp");
-        sheet.add("Catacomb Crocodile");
-        sheet.add("Caustic Tar");
-        sheet.add("Child of Night");
-        sheet.add("Costly Plunder");
-        sheet.add("Cower in Fear");
-        sheet.add("Crippling Blight");
-        sheet.add("Cursed Minotaur");
-        sheet.add("Daring Demolition");
-        sheet.add("Dark Ritual");
-        sheet.add("Deadbridge Shaman");
-        sheet.add("Death Denied");
-        sheet.add("Desperate Castaways");
-        sheet.add("Diabolic Edict");
-        sheet.add("Die Young");
-        sheet.add("Dinosaur Hunter");
-        sheet.add("Dirge of Dread");
-        sheet.add("Dread Drone");
-        sheet.add("Dreadbringer Lampads");
-        sheet.add("Driver of the Dead");
-        sheet.add("Drudge Sentinel");
-        sheet.add("Dusk Charger");
-        sheet.add("Dusk Legion Zealot");
-        sheet.add("Epicure of Blood");
-        sheet.add("Erg Raiders");
-        sheet.add("Eternal Thirst");
-        sheet.add("Evincar's Justice");
-        sheet.add("Executioner's Capsule");
-        sheet.add("Eyeblight's Ending");
-        sheet.add("Fallen Angel");
-        sheet.add("Fatal Push");
-        sheet.add("Fen Hauler");
-        sheet.add("Feral Abomination");
-        sheet.add("Festercreep");
-        sheet.add("Festering Newt");
-        sheet.add("Fill with Fright");
-        sheet.add("Fungal Infection");
-        sheet.add("Ghostly Changeling");
-        sheet.add("Gifted Aetherborn");
-        sheet.add("Go for the Throat");
-        sheet.add("Gravedigger");
-        sheet.add("Gray Merchant of Asphodel");
-        sheet.add("Grim Affliction");
-        sheet.add("Grixis Slavedriver");
-        sheet.add("Grotesque Mutation");
-        sheet.add("Gruesome Fate");
-        sheet.add("Gurmag Angler");
-        sheet.add("Hired Blade");
-        sheet.add("Hound of the Farbogs");
-        sheet.add("Innocent Blood");
-        sheet.add("Inquisition of Kozilek");
-        sheet.add("Lawless Broker");
-        sheet.add("Lethal Sting");
-        sheet.add("Lord of the Accursed");
-        sheet.add("March of the Drowned");
-        sheet.add("Mephitic Vapors");
-        sheet.add("Mind Rot");
-        sheet.add("Moment of Craving");
-        sheet.add("Nameless Inversion");
-        sheet.add("Night's Whisper");
-        sheet.add("Noxious Dragon");
-        sheet.add("Okiba-Gang Shinobi");
-        sheet.add("Painful Lesson");
-        sheet.add("Phyrexian Rager");
-        sheet.add("Phyrexian Reclamation");
-        sheet.add("Pit Keeper");
-        sheet.add("Plague Wight");
-        sheet.add("Plagued Rusalka");
-        sheet.add("Prakhata Club Security");
-        sheet.add("Queen's Agent");
-        sheet.add("Quest for the Gravelord");
-        sheet.add("Rabid Bloodsucker");
-        sheet.add("Rakdos Drake");
-        sheet.add("Ravenous Chupacabra");
-        sheet.add("Recover");
-        sheet.add("Renegade Demon");
-        sheet.add("Renegade's Getaway");
-        sheet.add("Rotfeaster Maggot");
-        sheet.add("Scarab Feast");
-        sheet.add("Scuttling Death");
-        sheet.add("Seal of Doom");
-        sheet.add("Shadowcloak Vampire");
-        sheet.add("Skeletal Scrying");
-        sheet.add("Skulking Ghost");
-        sheet.add("Smiting Helix");
-        sheet.add("Spreading Rot");
-        sheet.add("Street Wraith");
-        sheet.add("Tavern Swindler");
-        sheet.add("Tendrils of Corruption");
-        sheet.add("Thorn of the Black Rose");
-        sheet.add("Tidy Conclusion");
-        sheet.add("Tragic Slip");
-        sheet.add("Trespasser's Curse");
-        sheet.add("Trial of Ambition");
-        sheet.add("Typhoid Rats");
-        sheet.add("Unburden");
-        sheet.add("Urborg Uprising");
-        sheet.add("Vampire Hexmage");
-        sheet.add("Vampire Lacerator");
-        sheet.add("Virulent Swipe");
-        sheet.add("Wake of Vultures");
-        sheet.add("Walking Corpse");
-        sheet.add("Wander in Death");
-        sheet.add("Wight of Precinct Six");
-        sheet.add("Will-o'-the-Wisp");
-        sheet.add("Windgrace Acolyte");
-        sheet.add("Wrench Mind");
-        cardSheets.add(sheet);
-        sheet = new ArrayList();
-        sheet.add("Act on Impulse");
-        sheet.add("Ainok Tracker");
-        sheet.add("Alchemist's Greeting");
-        sheet.add("Ancient Grudge");
-        sheet.add("Arc Trail");
-        sheet.add("Arrow Storm");
-        sheet.add("Azra Bladeseeker");
-        sheet.add("Balduvian Horde");
-        sheet.add("Barrage of Boulders");
-        sheet.add("Beetleback Chief");
-        sheet.add("Bellows Lizard");
-        sheet.add("Blastfire Bolt");
-        sheet.add("Blazing Volley");
-        sheet.add("Blindblast");
-        sheet.add("Blood Ogre");
-        sheet.add("Bloodfire Expert");
-        sheet.add("Bloodlust Inciter");
-        sheet.add("Bloodstone Goblin");
-        sheet.add("Blow Your House Down");
-        sheet.add("Bombard");
-        sheet.add("Bomber Corps");
-        sheet.add("Borrowed Hostility");
-        sheet.add("Brazen Buccaneers");
-        sheet.add("Brazen Wolves");
-        sheet.add("Bring Low");
-        sheet.add("Brute Strength");
-        sheet.add("Built to Smash");
-        sheet.add("Burst Lightning");
-        sheet.add("Canyon Lurkers");
-        sheet.add("Chandra's Pyrohelix");
-        sheet.add("Charging Monstrosaur");
-        sheet.add("Cobblebrute");
-        sheet.add("Crowd's Favor");
-        sheet.add("Crown-Hunter Hireling");
-        sheet.add("Curse of Opulence");
-        sheet.add("Destructive Tampering");
-        sheet.add("Direct Current");
-        sheet.add("Dragon Fodder");
-        sheet.add("Dynacharge");
-        sheet.add("Erratic Explosion");
-        sheet.add("Expedite");
-        sheet.add("Falkenrath Reaver");
-        sheet.add("Fireball");
-        sheet.add("Flame Jab");
-        sheet.add("Forge Devil");
-        sheet.add("Foundry Street Denizen");
-        sheet.add("Frontline Rebel");
-        sheet.add("Furnace Whelp");
-        sheet.add("Galvanic Blast");
-        sheet.add("Generator Servant");
-        sheet.add("Geomancer's Gambit");
-        sheet.add("Ghitu Lavarunner");
-        sheet.add("Giant Spectacle");
-        sheet.add("Goblin Assault");
-        sheet.add("Goblin Bombardment");
-        sheet.add("Goblin Fireslinger");
-        sheet.add("Goblin Matron");
-        sheet.add("Goblin Roughrider");
-        sheet.add("Goblin War Paint");
-        sheet.add("Gore Swine");
-        sheet.add("Gorehorn Minotaurs");
-        sheet.add("Granitic Titan");
-        sheet.add("Grapeshot");
-        sheet.add("Gravitic Punch");
-        sheet.add("Guttersnipe");
-        sheet.add("Hammerhand");
-        sheet.add("Hardened Berserker");
-        sheet.add("Hyena Pack");
-        sheet.add("Ill-Tempered Cyclops");
-        sheet.add("Impact Tremors");
-        sheet.add("Incorrigible Youths");
-        sheet.add("Inferno Fist");
-        sheet.add("Inferno Jet");
-        sheet.add("Ingot Chewer");
-        sheet.add("Keldon Halberdier");
-        sheet.add("Kiln Fiend");
-        sheet.add("Krenko's Enforcer");
-        sheet.add("Leaping Master");
-        sheet.add("Leopard-Spotted Jiao");
-        sheet.add("Madcap Skills");
-        sheet.add("Mardu Warshrieker");
-        sheet.add("Maximize Velocity");
-        sheet.add("Miner's Bane");
-        sheet.add("Mogg Flunkies");
-        sheet.add("Molten Rain");
-        sheet.add("Monastery Swiftspear");
-        sheet.add("Ondu Champion");
-        sheet.add("Outnumber");
-        sheet.add("Price of Progress");
-        sheet.add("Pyrotechnics");
-        sheet.add("Quakefoot Cyclops");
-        sheet.add("Reckless Fireweaver");
-        sheet.add("Reckless Wurm");
-        sheet.add("Rivals' Duel");
-        sheet.add("Ruinous Gremlin");
-        sheet.add("Samut's Sprint");
-        sheet.add("Sarkhan's Rage");
-        sheet.add("Screamreach Brawler");
-        sheet.add("Seismic Shift");
-        sheet.add("Shattering Spree");
-        sheet.add("Shenanigans");
-        sheet.add("Smelt");
-        sheet.add("Sparkmage Apprentice");
-        sheet.add("Sparkspitter");
-        sheet.add("Staggershock");
-        sheet.add("Stormblood Berserker");
-        sheet.add("Swift Kick");
-        sheet.add("Tectonic Rift");
-        sheet.add("Temur Battle Rage");
-        sheet.add("Thrill of Possibility");
-        sheet.add("Tibalt's Rager");
-        sheet.add("Torch Courier");
-        sheet.add("Valakut Invoker");
-        sheet.add("Valakut Predator");
-        sheet.add("Valley Dasher");
-        sheet.add("Vandalize");
-        sheet.add("Volcanic Dragon");
-        sheet.add("Volcanic Rush");
-        sheet.add("Wall of Fire");
-        sheet.add("Wayward Giant");
-        sheet.add("Wojek Bodyguard");
-        cardSheets.add(sheet);
-        sheet = new ArrayList();
-        sheet.add("Act of Treason");
-        sheet.add("Ahn-Crop Crasher");
-        sheet.add("Akroan Sergeant");
-        sheet.add("Anger");
-        sheet.add("Atarka Efreet");
-        sheet.add("Avarax");
-        sheet.add("Barging Sergeant");
-        sheet.add("Battle Rampart");
-        sheet.add("Battle-Rattle Shaman");
-        sheet.add("Blades of Velis Vel");
-        sheet.add("Bloodmad Vampire");
-        sheet.add("Blur of Blades");
-        sheet.add("Boggart Brute");
-        sheet.add("Boiling Earth");
-        sheet.add("Boulder Salvo");
-        sheet.add("Browbeat");
-        sheet.add("Cartouche of Zeal");
-        sheet.add("Cathartic Reunion");
-        sheet.add("Chandra's Revolution");
-        sheet.add("Chartooth Cougar");
-        sheet.add("Cinder Hellion");
-        sheet.add("Cleansing Screech");
-        sheet.add("Cosmotronic Wave");
-        sheet.add("Crash Through");
-        sheet.add("Curse of the Nightly Hunt");
-        sheet.add("Death by Dragons");
-        sheet.add("Defiant Ogre");
-        sheet.add("Demolish");
-        sheet.add("Desert Cerodon");
-        sheet.add("Desperate Ravings");
-        sheet.add("Distemper of the Blood");
-        sheet.add("Dragon Breath");
-        sheet.add("Dragon Egg");
-        sheet.add("Dragon Whelp");
-        sheet.add("Dragonsoul Knight");
-        sheet.add("Dual Shot");
-        sheet.add("Earth Elemental");
-        sheet.add("Emrakul's Hatcher");
-        sheet.add("Enthralling Victor");
-        sheet.add("Faithless Looting");
-        sheet.add("Fall of the Hammer");
-        sheet.add("Fervent Strike");
-        sheet.add("Fierce Invocation");
-        sheet.add("Fiery Hellhound");
-        sheet.add("Fiery Temper");
-        sheet.add("Fire Elemental");
-        sheet.add("Firebolt");
-        sheet.add("Firebrand Archer");
-        sheet.add("Flametongue Kavu");
-        sheet.add("Flamewave Invoker");
-        sheet.add("Fling");
-        sheet.add("Frenzied Raptor");
-        sheet.add("Frilled Deathspitter");
-        sheet.add("Frontline Devastator");
-        sheet.add("Fury Charm");
-        sheet.add("Genju of the Spires");
-        sheet.add("Goblin Balloon Brigade");
-        sheet.add("Goblin Locksmith");
-        sheet.add("Goblin Motivator");
-        sheet.add("Goblin Oriflamme");
-        sheet.add("Goblin Warchief");
-        sheet.add("Gut Shot");
-        sheet.add("Hanweir Lancer");
-        sheet.add("Hijack");
-        sheet.add("Hulking Devil");
-        sheet.add("Insolent Neonate");
-        sheet.add("Jackal Pup");
-        sheet.add("Keldon Overseer");
-        sheet.add("Khenra Scrapper");
-        sheet.add("Kird Ape");
-        sheet.add("Kolaghan Stormsinger");
-        sheet.add("Krenko's Command");
-        sheet.add("Lightning Bolt");
-        sheet.add("Lightning Javelin");
-        sheet.add("Lightning Shrieker");
-        sheet.add("Lightning Talons");
-        sheet.add("Magma Spray");
-        sheet.add("Makindi Sliderunner");
-        sheet.add("Mark of Mutiny");
-        sheet.add("Mogg Fanatic");
-        sheet.add("Mogg War Marshal");
-        sheet.add("Mutiny");
-        sheet.add("Nimble-Blade Khenra");
-        sheet.add("Orcish Cannonade");
-        sheet.add("Orcish Oriflamme");
-        sheet.add("Pillage");
-        sheet.add("Prickleboar");
-        sheet.add("Prophetic Ravings");
-        sheet.add("Rampaging Cyclops");
-        sheet.add("Renegade Tactics");
-        sheet.add("Roast");
-        sheet.add("Rolling Thunder");
-        sheet.add("Rubblebelt Maaka");
-        sheet.add("Rummaging Goblin");
-        sheet.add("Run Amok");
-        sheet.add("Rush of Adrenaline");
-        sheet.add("Salivating Gremlins");
-        sheet.add("Seismic Stomp");
-        sheet.add("Shatter");
-        sheet.add("Shock");
-        sheet.add("Skirk Commando");
-        sheet.add("Skirk Prospector");
-        sheet.add("Smash to Smithereens");
-        sheet.add("Sparktongue Dragon");
-        sheet.add("Spikeshot Goblin");
-        sheet.add("Sulfurous Blast");
-        sheet.add("Summit Prowler");
-        sheet.add("Sun-Crowned Hunters");
-        sheet.add("Swashbuckling");
-        sheet.add("Sweatworks Brawler");
-        sheet.add("Tarfire");
-        sheet.add("Thresher Lizard");
-        sheet.add("Uncaged Fury");
-        sheet.add("Undying Rage");
-        sheet.add("Vent Sentinel");
-        sheet.add("Vessel of Volatility");
-        sheet.add("Voldaren Duelist");
-        sheet.add("Wildfire Emissary");
-        sheet.add("Young Pyromancer");
-        sheet.add("Zada's Commando");
-        sheet.add("Zealot of the God-Pharaoh");
-        cardSheets.add(sheet);
-        sheet = new ArrayList();
-        sheet.add("Affectionate Indrik");
-        sheet.add("Ancestral Mask");
-        sheet.add("Ancient Brontodon");
-        sheet.add("Arbor Armament");
-        sheet.add("Beastbreaker of Bala Ged");
-        sheet.add("Become Immense");
-        sheet.add("Blanchwood Armor");
-        sheet.add("Blastoderm");
-        sheet.add("Borderland Explorer");
-        sheet.add("Briarhorn");
-        sheet.add("Broodhunter Wurm");
-        sheet.add("Byway Courier");
-        sheet.add("Centaur Courser");
-        sheet.add("Creeping Mold");
-        sheet.add("Destructor Dragon");
-        sheet.add("Domesticated Hydra");
-        sheet.add("Dragon-Scarred Bear");
-        sheet.add("Elemental Uprising");
-        sheet.add("Elvish Fury");
-        sheet.add("Eternal Witness");
-        sheet.add("Feral Prowler");
-        sheet.add("Fierce Empath");
-        sheet.add("Frontier Mastodon");
-        sheet.add("Gaea's Blessing");
-        sheet.add("Gaea's Protector");
-        sheet.add("Gift of Growth");
-        sheet.add("Glade Watcher");
-        sheet.add("Grapple with the Past");
-        sheet.add("Greater Basilisk");
-        sheet.add("Greater Sandwurm");
-        sheet.add("Hamlet Captain");
-        sheet.add("Hooded Brawler");
-        sheet.add("Hooting Mandrills");
-        sheet.add("Jungle Delver");
-        sheet.add("Jungle Wayfinder");
-        sheet.add("Kin-Tree Warden");
-        sheet.add("Kraul Foragers");
-        sheet.add("Krosan Druid");
-        sheet.add("Lead by Example");
-        sheet.add("Lead the Stampede");
-        sheet.add("Lifespring Druid");
-        sheet.add("Lignify");
-        sheet.add("Llanowar Elves");
-        sheet.add("Llanowar Empath");
-        sheet.add("Lure");
-        sheet.add("Mantle of Webs");
-        sheet.add("Map the Wastes");
-        sheet.add("Mulch");
-        sheet.add("Natural Connection");
-        sheet.add("Naturalize");
-        sheet.add("Nature's Lore");
-        sheet.add("Nest Invader");
-        sheet.add("Nettle Sentinel");
-        sheet.add("New Horizons");
-        sheet.add("Nimble Mongoose");
-        sheet.add("Ondu Giant");
-        sheet.add("Oran-Rief Invoker");
-        sheet.add("Overgrown Armasaur");
-        sheet.add("Pack's Favor");
-        sheet.add("Penumbra Spider");
-        sheet.add("Pierce the Sky");
-        sheet.add("Plummet");
-        sheet.add("Prey Upon");
-        sheet.add("Prey's Vengeance");
-        sheet.add("Pulse of Murasa");
-        sheet.add("Quiet Disrepair");
-        sheet.add("Rampant Growth");
-        sheet.add("Ranger's Guile");
-        sheet.add("Ravenous Leucrocota");
-        sheet.add("Reclaim");
-        sheet.add("Revive");
-        sheet.add("Rhox Maulers");
-        sheet.add("Riparian Tiger");
-        sheet.add("Roar of the Wurm");
-        sheet.add("Root Out");
-        sheet.add("Rosethorn Halberd");
-        sheet.add("Runeclaw Bear");
-        sheet.add("Sagu Archer");
-        sheet.add("Sakura-Tribe Elder");
-        sheet.add("Saproling Migration");
-        sheet.add("Savage Punch");
-        sheet.add("Seal of Strength");
-        sheet.add("Search for Tomorrow");
-        sheet.add("Seek the Horizon");
-        sheet.add("Seek the Wilds");
-        sheet.add("Shape the Sands");
-        sheet.add("Siege Wurm");
-        sheet.add("Silhana Ledgewalker");
-        sheet.add("Silkweaver Elite");
-        sheet.add("Snake Umbra");
-        sheet.add("Snapping Sailback");
-        sheet.add("Spider Spawning");
-        sheet.add("Stoic Builder");
-        sheet.add("Strength in Numbers");
-        sheet.add("Sylvan Bounty");
-        sheet.add("Tajuru Pathwarden");
-        sheet.add("Take Down");
-        sheet.add("Talons of Wildwood");
-        sheet.add("Territorial Baloth");
-        sheet.add("Thornhide Wolves");
-        sheet.add("Thornweald Archer");
-        sheet.add("Thrive");
-        sheet.add("Timberwatch Elf");
-        sheet.add("Time to Feed");
-        sheet.add("Titanic Growth");
-        sheet.add("Tukatongue Thallid");
-        sheet.add("Turntimber Basilisk");
-        sheet.add("Vastwood Gorger");
-        sheet.add("Watcher in the Web");
-        sheet.add("Wellwisher");
-        sheet.add("Wild Growth");
-        sheet.add("Wild Mongrel");
-        sheet.add("Wildsize");
-        sheet.add("Wolfkin Bond");
-        sheet.add("Woodborn Behemoth");
-        sheet.add("Woolly Loxodon");
-        sheet.add("Wren's Run Vanquisher");
-        sheet.add("Yavimaya Elder");
-        sheet.add("Yavimaya Sapherd");
-        sheet.add("Yeva's Forcemage");
-        sheet.add("Zendikar's Roil");
-        cardSheets.add(sheet);
-        sheet = new ArrayList();
-        sheet.add("Abundant Growth");
-        sheet.add("Acidic Slime");
-        sheet.add("Adventurous Impulse");
-        sheet.add("Aerie Bowmasters");
-        sheet.add("Aggressive Instinct");
-        sheet.add("Aggressive Urge");
-        sheet.add("Ainok Survivalist");
-        sheet.add("Alpine Grizzly");
-        sheet.add("Ambassador Oak");
-        sheet.add("Ancient Stirrings");
-        sheet.add("Arachnus Web");
-        sheet.add("Arbor Elf");
-        sheet.add("Aura Gnarlid");
-        sheet.add("Avacyn's Pilgrim");
-        sheet.add("Backwoods Survivalists");
-        sheet.add("Baloth Gorger");
-        sheet.add("Basking Rootwalla");
-        sheet.add("Beast Within");
-        sheet.add("Beneath the Sands");
-        sheet.add("Bestial Menace");
-        sheet.add("Bitterblade Warrior");
-        sheet.add("Bitterbow Sharpshooters");
-        sheet.add("Blossom Dryad");
-        sheet.add("Borderland Ranger");
-        sheet.add("Bristling Boar");
-        sheet.add("Broken Bond");
-        sheet.add("Canopy Spider");
-        sheet.add("Carnivorous Moss-Beast");
-        sheet.add("Caustic Caterpillar");
-        sheet.add("Charging Rhino");
-        sheet.add("Citanul Woodreaders");
-        sheet.add("Clip Wings");
-        sheet.add("Colossal Dreadmaw");
-        sheet.add("Combo Attack");
-        sheet.add("Commune with Nature");
-        sheet.add("Commune with the Gods");
-        sheet.add("Conifer Strider");
-        sheet.add("Crop Rotation");
-        sheet.add("Crossroads Consecrator");
-        sheet.add("Crowned Ceratok");
-        sheet.add("Crushing Canopy");
-        sheet.add("Cultivate");
-        sheet.add("Daggerback Basilisk");
-        sheet.add("Dawn's Reflection");
-        sheet.add("Death-Hood Cobra");
-        sheet.add("Desert Twister");
-        sheet.add("Dissenter's Deliverance");
-        sheet.add("Dragonscale Boon");
-        sheet.add("Durkwood Baloth");
-        sheet.add("Earthen Arms");
-        sheet.add("Elephant Guide");
-        sheet.add("Elves of Deep Shadow");
-        sheet.add("Elvish Visionary");
-        sheet.add("Elvish Warrior");
-        sheet.add("Ember Weaver");
-        sheet.add("Epic Confrontation");
-        sheet.add("Essence Warden");
-        sheet.add("Experiment One");
-        sheet.add("Explore");
-        sheet.add("Explosive Vegetation");
-        sheet.add("Ezuri's Archers");
-        sheet.add("Fade into Antiquity");
-        sheet.add("Farseek");
-        sheet.add("Feed the Clan");
-        sheet.add("Feral Krushok");
-        sheet.add("Ferocious Zheng");
-        sheet.add("Fertile Ground");
-        sheet.add("Fog");
-        sheet.add("Formless Nurturing");
-        sheet.add("Giant Growth");
-        sheet.add("Giant Spider");
-        sheet.add("Gift of Paradise");
-        sheet.add("Gnarlid Pack");
-        sheet.add("Grazing Gladehart");
-        sheet.add("Greenwood Sentinel");
-        sheet.add("Groundswell");
-        sheet.add("Guardian Shield-Bearer");
-        sheet.add("Hardy Veteran");
-        sheet.add("Harmonize");
-        sheet.add("Harrow");
-        sheet.add("Hunt the Weak");
-        sheet.add("Hunter's Ambush");
-        sheet.add("Imperious Perfect");
-        sheet.add("Invigorate");
-        sheet.add("Ivy Lane Denizen");
-        sheet.add("Kavu Climber");
-        sheet.add("Kavu Primarch");
-        sheet.add("Khalni Heart Expedition");
-        sheet.add("Kozilek's Predator");
-        sheet.add("Kraul Warrior");
-        sheet.add("Krosan Tusker");
-        sheet.add("Larger Than Life");
-        sheet.add("Lay of the Land");
-        sheet.add("Longshot Squad");
-        sheet.add("Manglehorn");
-        sheet.add("Might of the Masses");
-        sheet.add("Nature's Claim");
-        sheet.add("Oakgnarl Warrior");
-        sheet.add("Overgrown Battlement");
-        sheet.add("Overrun");
-        sheet.add("Peema Outrider");
-        sheet.add("Pelakka Wurm");
-        sheet.add("Pinion Feast");
-        sheet.add("Pouncing Cheetah");
-        sheet.add("Priest of Titania");
-        sheet.add("Rain of Thorns");
-        sheet.add("Rancor");
-        sheet.add("Reclaiming Vines");
-        sheet.add("Regrowth");
-        sheet.add("Relic Crush");
-        sheet.add("Return to the Earth");
-        sheet.add("Roots");
-        sheet.add("Scatter the Seeds");
-        sheet.add("Stalking Tiger");
-        sheet.add("Sylvan Scrying");
-        sheet.add("Tajuru Warcaller");
-        sheet.add("Terrain Elemental");
-        sheet.add("The Crowd Goes Wild");
-        sheet.add("Thornscape Battlemage");
-        sheet.add("Thrashing Brontodon");
-        sheet.add("Venom Sliver");
-        cardSheets.add(sheet);
-        sheet = new ArrayList();
-        sheet.add("Abzan Charm");
-        sheet.add("Abzan Guide");
-        sheet.add("Agony Warp");
-        sheet.add("Akroan Hoplite");
-        sheet.add("Armadillo Cloak");
-        sheet.add("Armament Corps");
-        sheet.add("Azorius Charm");
-        sheet.add("Azra Oddsmaker");
-        sheet.add("Baleful Strix");
-        sheet.add("Baloth Null");
-        sheet.add("Bear's Companion");
-        sheet.add("Belligerent Brontodon");
-        sheet.add("Bituminous Blast");
-        sheet.add("Bladewing the Risen");
-        sheet.add("Blightning");
-        sheet.add("Bloodbraid Elf");
-        sheet.add("Boros Challenger");
-        sheet.add("Bounding Krasis");
-        sheet.add("Call of the Nightwing");
-        sheet.add("Campaign of Vengeance");
-        sheet.add("Cauldron Dance");
-        sheet.add("Citadel Castellan");
-        sheet.add("Claim // Fame");
-        sheet.add("Coiling Oracle");
-        sheet.add("Contraband Kingpin");
-        sheet.add("Corpsejack Menace");
-        sheet.add("Crosis's Charm");
-        sheet.add("Cunning Breezedancer");
-        sheet.add("Deathreap Ritual");
-        sheet.add("Deny Reality");
-        sheet.add("Draconic Disciple");
-        sheet.add("Drana's Emissary");
-        sheet.add("Engineered Might");
-        sheet.add("Esper Charm");
-        sheet.add("Ethercaste Knight");
-        sheet.add("Ethereal Ambush");
-        sheet.add("Extract from Darkness");
-        sheet.add("Fire // Ice");
-        sheet.add("Fires of Yavimaya");
-        sheet.add("Flame-Kin Zealot");
-        sheet.add("Fusion Elemental");
-        sheet.add("Gelectrode");
-        sheet.add("Ghor-Clan Rampager");
-        sheet.add("Giantbaiting");
-        sheet.add("Gift of Orzhova");
-        sheet.add("Goblin Deathraiders");
-        sheet.add("Grim Contest");
-        sheet.add("Gwyllion Hedge-Mage");
-        sheet.add("Hammer Dropper");
-        sheet.add("Hidden Stockpile");
-        sheet.add("Highspire Mantis");
-        sheet.add("Hypothesizzle");
-        sheet.add("Iroas's Champion");
-        sheet.add("Join Shields");
-        sheet.add("Jungle Barrier");
-        sheet.add("Kathari Remnant");
-        sheet.add("Kin-Tree Invocation");
-        sheet.add("Kiora's Follower");
-        sheet.add("Kiss of the Amesha");
-        sheet.add("Lawmage's Binding");
-        sheet.add("Lightning Helix");
-        sheet.add("Mardu Roughrider");
-        sheet.add("Martial Glory");
-        sheet.add("Maverick Thopterist");
-        sheet.add("Mercurial Geists");
-        sheet.add("Migratory Route");
-        sheet.add("Mistmeadow Witch");
-        sheet.add("Mortify");
-        sheet.add("Naya Charm");
-        sheet.add("Nucklavee");
-        sheet.add("Obelisk Spider");
-        sheet.add("Ochran Assassin");
-        sheet.add("Pillory of the Sleepless");
-        sheet.add("Plaxcaster Frogling");
-        sheet.add("Pollenbright Wings");
-        sheet.add("Putrefy");
-        sheet.add("Qasali Pridemage");
-        sheet.add("Raff Capashen, Ship's Mage");
-        sheet.add("Raging Swordtooth");
-        sheet.add("Reclusive Artificer");
-        sheet.add("Reflector Mage");
-        sheet.add("Rhox War Monk");
-        sheet.add("Riptide Crab");
-        sheet.add("River Hoopoe");
-        sheet.add("Rosemane Centaur");
-        sheet.add("Rosheen Meanderer");
-        sheet.add("Satyr Enchanter");
-        sheet.add("Savage Twister");
-        sheet.add("Sedraxis Specter");
-        sheet.add("Selesnya Guildmage");
-        sheet.add("Shambling Remains");
-        sheet.add("Shardless Agent");
-        sheet.add("Shipwreck Singer");
-        sheet.add("Shrewd Hatchling");
-        sheet.add("Skyward Eye Prophets");
-        sheet.add("Slave of Bolas");
-        sheet.add("Soul Manipulation");
-        sheet.add("Sprouting Thrinax");
-        sheet.add("Stormchaser Chimera");
-        sheet.add("Sultai Charm");
-        sheet.add("Sultai Soothsayer");
-        sheet.add("Tatyova, Benthic Druid");
-        sheet.add("Terminate");
-        sheet.add("Thopter Foundry");
-        sheet.add("Thought Erasure");
-        sheet.add("Tithe Drinker");
-        sheet.add("Tower Gargoyle");
-        sheet.add("Treacherous Terrain");
-        sheet.add("Underworld Coinsmith");
-        sheet.add("Unflinching Courage");
-        sheet.add("Unlicensed Disintegration");
-        sheet.add("Urban Evolution");
-        sheet.add("Vengeful Rebirth");
-        sheet.add("Warden of the Eye");
-        sheet.add("Wayfaring Temple");
-        sheet.add("Weapons Trainer");
-        sheet.add("Wee Dragonauts");
-        sheet.add("Winding Constrictor");
-        sheet.add("Woolly Thoctar");
-        sheet.add("Zealous Persecution");
-        sheet.add("Zhur-Taa Druid");
-        cardSheets.add(sheet);
-        sheet = new ArrayList();
-        sheet.add("Aether Hub");
-        sheet.add("Aether Spellbomb");
-        sheet.add("Akoum Refuge");
-        sheet.add("Alchemist's Vial");
-        sheet.add("Alloy Myr");
-        sheet.add("Arcane Sanctum");
-        sheet.add("Armillary Sphere");
-        sheet.add("Artisan of Kozilek");
-        sheet.add("Ash Barrens");
-        sheet.add("Ashnod's Altar");
-        sheet.add("Benthic Infiltrator");
-        sheet.add("Blasted Landscape");
-        sheet.add("Blighted Fen");
-        sheet.add("Blinding Souleater");
-        sheet.add("Blossoming Sands");
-        sheet.add("Bojuka Bog");
-        sheet.add("Bomat Bazaar Barge");
-        sheet.add("Bone Saw");
-        sheet.add("Bottle Gnomes");
-        sheet.add("Breaker of Armies");
-        sheet.add("Burnished Hart");
-        sheet.add("Call the Scions");
-        sheet.add("Cathodion");
-        sheet.add("Coldsteel Heart");
-        sheet.add("Consulate Dreadnought");
-        sheet.add("Copper Carapace");
-        sheet.add("Crumbling Necropolis");
-        sheet.add("Crystal Ball");
-        sheet.add("Crystal Chimes");
-        sheet.add("Darksteel Citadel");
-        sheet.add("Diamond Mare");
-        sheet.add("Dismal Backwater");
-        sheet.add("Dreadship Reef");
-        sheet.add("Eldrazi Devastator");
-        sheet.add("Emmessi Tome");
-        sheet.add("Etched Oracle");
-        sheet.add("Evolving Wilds");
-        sheet.add("Faerie Conclave");
-        sheet.add("Farmstead Gleaner");
-        sheet.add("Field of Ruin");
-        sheet.add("Filigree Familiar");
-        sheet.add("Flayer Husk");
-        sheet.add("Forgotten Cave");
-        sheet.add("Foundry Inspector");
-        sheet.add("Fountain of Renewal");
-        sheet.add("Frogmite");
-        sheet.add("Frontier Bivouac");
-        sheet.add("Gateway Plaza");
-        sheet.add("Ghost Quarter");
-        sheet.add("Goblin Burrows");
-        sheet.add("Graypelt Refuge");
-        sheet.add("Great Furnace");
-        sheet.add("Gruul Signet");
-        sheet.add("Guardians of Meletis");
-        sheet.add("Heavy Arbalest");
-        sheet.add("Herald's Horn");
-        sheet.add("Hexplate Golem");
-        sheet.add("Hot Soup");
-        sheet.add("Icy Manipulator");
-        sheet.add("Implement of Malice");
-        sheet.add("Irontread Crusher");
-        sheet.add("Juggernaut");
-        sheet.add("Jungle Hollow");
-        sheet.add("Jungle Shrine");
-        sheet.add("Kazandu Refuge");
-        sheet.add("Krosan Verge");
-        sheet.add("Lightning Greaves");
-        sheet.add("Loxodon Warhammer");
-        sheet.add("Mask of Memory");
-        sheet.add("Meteorite");
-        sheet.add("Millikin");
-        sheet.add("Millstone");
-        sheet.add("Mind Stone");
-        sheet.add("Mishra's Bauble");
-        sheet.add("Mishra's Factory");
-        sheet.add("Moonglove Extract");
-        sheet.add("Mortarpod");
-        sheet.add("Myr Retriever");
-        sheet.add("Myr Sire");
-        sheet.add("New Benalia");
-        sheet.add("Ornithopter");
-        sheet.add("Orzhov Basilica");
-        sheet.add("Palladium Myr");
-        sheet.add("Peace Strider");
-        sheet.add("Perilous Myr");
-        sheet.add("Pilgrim's Eye");
-        sheet.add("Prophetic Prism");
-        sheet.add("Reliquary Tower");
-        sheet.add("Renegade Map");
-        sheet.add("Rhonas's Monument");
-        sheet.add("Rogue's Passage");
-        sheet.add("Sandsteppe Citadel");
-        sheet.add("Sandstone Oracle");
-        sheet.add("Scoured Barrens");
-        sheet.add("Sejiri Refuge");
-        sheet.add("Serrated Arrows");
-        sheet.add("Short Sword");
-        sheet.add("Sigil of Valor");
-        sheet.add("Simic Locket");
-        sheet.add("Skarrg, the Rage Pits");
-        sheet.add("Skullclamp");
-        sheet.add("Skyscanner");
-        sheet.add("Sol Ring");
-        sheet.add("Sorcerer's Broom");
-        sheet.add("Spy Kit");
-        sheet.add("Sunset Pyramid");
-        sheet.add("Suspicious Bookcase");
-        sheet.add("Swiftwater Cliffs");
-        sheet.add("Tectonic Edge");
-        sheet.add("Temple of the False God");
-        sheet.add("Thornwood Falls");
-        sheet.add("Thought Vessel");
-        sheet.add("Thran Dynamo");
-        sheet.add("Thran Golem");
-        sheet.add("Tormod's Crypt");
-        sheet.add("Trepanation Blade");
-        sheet.add("Unclaimed Territory");
-        sheet.add("Universal Automaton");
-        sheet.add("Universal Solvent");
-        sheet.add("Whispersilk Cloak");
-        sheet.add("Wirewood Lodge");
-        cardSheets.add(sheet);
-        sheet = new ArrayList();
-        sheet.add("Ana Sanctuary");
-        sheet.add("Ancient Den");
-        sheet.add("Ancient Ziggurat");
-        sheet.add("Angelic Destiny");
-        sheet.add("Archangel");
-        sheet.add("Asceticism");
-        sheet.add("Assemble the Legion");
-        sheet.add("Athreos, God of Passage");
-        sheet.add("Aura Shards");
-        sheet.add("Avalanche Riders");
-        sheet.add("Bear Cub");
-        sheet.add("Belbe's Portal");
-        sheet.add("Black Knight");
-        sheet.add("Bloom Tender");
-        sheet.add("Bonesplitter");
-        sheet.add("Bow of Nylea");
-        sheet.add("Brimstone Dragon");
-        sheet.add("Brimstone Mage");
-        sheet.add("Cairn Wanderer");
-        sheet.add("Carpet of Flowers");
-        sheet.add("Centaur Glade");
-        sheet.add("Chancellor of the Annex");
-        sheet.add("Chatter of the Squirrel");
-        sheet.add("Chromatic Star");
-        sheet.add("Contagion Clasp");
-        sheet.add("Corrupted Conscience");
-        sheet.add("Cragganwick Cremator");
-        sheet.add("Crenellated Wall");
-        sheet.add("Crystal Shard");
-        sheet.add("Darksteel Garrison");
-        sheet.add("Dauthi Mindripper");
-        sheet.add("Defense of the Heart");
-        sheet.add("Dictate of Erebos");
-        sheet.add("Dolmen Gate");
-        sheet.add("Dominus of Fealty");
-        sheet.add("Doomgape");
-        sheet.add("Draco");
-        sheet.add("Dragon Broodmother");
-        sheet.add("Dragon Mask");
-        sheet.add("Dungrove Elder");
-        sheet.add("Eater of Days");
-        sheet.add("Elixir of Immortality");
-        sheet.add("Empyrial Armor");
-        sheet.add("Enchanted Evening");
-        sheet.add("Energy Field");
-        sheet.add("Exsanguinate");
-        sheet.add("Flameshot");
-        sheet.add("Floodgate");
-        sheet.add("Font of Mythos");
-        sheet.add("Ghitu War Cry");
-        sheet.add("Gilt-Leaf Palace");
-        sheet.add("Goblin Game");
-        sheet.add("Greater Gargadon");
-        sheet.add("Guided Passage");
-        sheet.add("Haakon, Stromgald Scourge");
-        sheet.add("Hedron Crab");
-        sheet.add("Helm of Awakening");
-        sheet.add("Hunter of Eyeblights");
-        sheet.add("Hurricane");
-        sheet.add("Hypnotic Specter");
-        sheet.add("Impending Disaster");
-        sheet.add("Jushi Apprentice // Tomoya the Revealer");
-        sheet.add("Kaervek's Torch");
-        sheet.add("Kargan Dragonlord");
-        sheet.add("Knight of Dawn");
-        sheet.add("Knollspine Dragon");
-        sheet.add("Kor Chant");
-        sheet.add("Kruphix, God of Horizons");
-        sheet.add("Lashknife Barrier");
-        sheet.add("Lotus Petal");
-        sheet.add("Maelstrom Archangel");
-        sheet.add("Magus of the Moat");
-        sheet.add("Mana Tithe");
-        sheet.add("Manamorphose");
-        sheet.add("Martyr's Bond");
-        sheet.add("Martyr's Cause");
-        sheet.add("Master Transmuter");
-        sheet.add("Meddling Mage");
-        sheet.add("Mistform Shrieker");
-        sheet.add("Nemesis of Reason");
-        sheet.add("Oracle of Nectars");
-        sheet.add("Pathrazer of Ulamog");
-        sheet.add("Perish");
-        sheet.add("Pestilence");
-        sheet.add("Phantasmal Dragon");
-        sheet.add("Phantom Centaur");
-        sheet.add("Phyrexian Metamorph");
-        sheet.add("Phyrexian Soulgorger");
-        sheet.add("Purphoros, God of the Forge");
-        sheet.add("Questing Phelddagrif");
-        sheet.add("Rage Reflection");
-        sheet.add("Recoup");
-        sheet.add("Release the Ants");
-        sheet.add("Rhys the Redeemed");
-        sheet.add("Rhystic Study");
-        sheet.add("Rishadan Footpad");
-        sheet.add("Rith, the Awakener");
-        sheet.add("River Boa");
-        sheet.add("Sadistic Hypnotist");
-        sheet.add("Sakashima the Impostor");
-        sheet.add("Sapphire Charm");
-        sheet.add("Shrouded Lore");
-        sheet.add("Soothsaying");
-        sheet.add("Sorin Markov");
-        sheet.add("Squirrel Wrangler");
-        sheet.add("Thieving Magpie");
-        sheet.add("Thrun, the Last Troll");
-        sheet.add("Time Sieve");
-        sheet.add("Timely Reinforcements");
-        sheet.add("Tinker");
-        sheet.add("Tower of Eons");
-        sheet.add("Toxin Sliver");
-        sheet.add("Triumph of the Hordes");
-        sheet.add("Umbral Mantle");
-        sheet.add("Viashino Sandstalker");
-        sheet.add("Violent Ultimatum");
-        sheet.add("Volunteer Reserves");
-        sheet.add("Wargate");
-        sheet.add("Weathered Wayfarer");
-        sheet.add("Wild Nacatl");
-        sheet.add("Yavimaya's Embrace");
-        cardSheets.add(sheet);
-        sheet = new ArrayList();
-        sheet.add("Adorned Pouncer");
-        sheet.add("Aetherflux Reservoir");
-        sheet.add("Akroan Horse");
-        sheet.add("Alesha, Who Smiles at Death");
-        sheet.add("Alhammarret's Archive");
-        sheet.add("All Is Dust");
-        sheet.add("Aminatou's Augury");
-        sheet.add("Angel of the Dire Hour");
-        sheet.add("Anger of the Gods");
-        sheet.add("Animar, Soul of Elements");
-        sheet.add("Approach of the Second Sun");
-        sheet.add("Arch of Orazca");
-        sheet.add("Basilisk Collar");
-        sheet.add("Beacon of Immortality");
-        sheet.add("Beastmaster Ascension");
-        sheet.add("Birds of Paradise");
-        sheet.add("Black Market");
-        sheet.add("Boompile");
-        sheet.add("Boros Reckoner");
-        sheet.add("Caged Sun");
-        sheet.add("Cauldron of Souls");
-        sheet.add("Champion of the Parish");
-        sheet.add("Chaos Warp");
-        sheet.add("Chasm Skulker");
-        sheet.add("Chromatic Lantern");
-        sheet.add("Coat of Arms");
-        sheet.add("Collective Brutality");
-        sheet.add("Commit // Memory");
-        sheet.add("Courser of Kruphix");
-        sheet.add("Coveted Jewel");
-        sheet.add("Daretti, Scrap Savant");
-        sheet.add("Deadly Tempest");
-        sheet.add("Debtors' Knell");
-        sheet.add("Decree of Justice");
-        sheet.add("Deepglow Skate");
-        sheet.add("Desolation Twin");
-        sheet.add("Dictate of Heliod");
-        sheet.add("Djinn of Wishes");
-        sheet.add("Dragonlord Ojutai");
-        sheet.add("Drana, Kalastria Bloodchief");
-        sheet.add("Eldrazi Monument");
-        sheet.add("Eldritch Evolution");
-        sheet.add("Elesh Norn, Grand Cenobite");
-        sheet.add("Evra, Halcyon Witness");
-        sheet.add("Expropriate");
-        sheet.add("Fblthp, the Lost");
-        sheet.add("Felidar Sovereign");
-        sheet.add("Gideon Jura");
-        sheet.add("Goblin Charbelcher");
-        sheet.add("Goblin Piledriver");
-        sheet.add("Gonti, Lord of Luxury");
-        sheet.add("Grasp of Fate");
-        sheet.add("Grave Titan");
-        sheet.add("Gravecrawler");
-        sheet.add("Greenbelt Rampager");
-        sheet.add("Hornet Nest");
-        sheet.add("Kiki-Jiki, Mirror Breaker");
-        sheet.add("Kolaghan's Command");
-        sheet.add("Krenko, Mob Boss");
-        sheet.add("Liliana, Death's Majesty");
-        sheet.add("Living Death");
-        sheet.add("Mana Crypt");
-        sheet.add("Meandering Towershell");
-        sheet.add("Memory Erosion");
-        sheet.add("Meren of Clan Nel Toth");
-        sheet.add("Mimic Vat");
-        sheet.add("Mind Shatter");
-        sheet.add("Mind Spring");
-        sheet.add("Mirran Crusader");
-        sheet.add("Mirror Entity");
-        sheet.add("Misdirection");
-        sheet.add("Mizzix's Mastery");
-        sheet.add("Mycoloth");
-        sheet.add("Mystic Confluence");
-        sheet.add("Nighthowler");
-        sheet.add("Nin, the Pain Artist");
-        sheet.add("Nissa, Voice of Zendikar");
-        sheet.add("Odric, Lunarch Marshal");
-        sheet.add("Phyrexian Arena");
-        sheet.add("Phyrexian Plaguelord");
-        sheet.add("Precursor Golem");
-        sheet.add("Preyseizer Dragon");
-        sheet.add("Queen Marchesa");
-        sheet.add("Reality Scramble");
-        sheet.add("Recruiter of the Guard");
-        sheet.add("Release the Gremlins");
-        sheet.add("Revel in Riches");
-        sheet.add("Rune-Scarred Demon");
-        sheet.add("Savage Knuckleblade");
-        sheet.add("Selvala, Heart of the Wilds");
-        sheet.add("Serendib Efreet");
-        sheet.add("Sewer Nemesis");
-        sheet.add("Shamanic Revelation");
-        sheet.add("Sliver Hivelord");
-        sheet.add("Solemn Simulacrum");
-        sheet.add("Spawning Grounds");
-        sheet.add("Star of Extinction");
-        sheet.add("Steamflogger Boss");
-        sheet.add("Stunt Double");
-        sheet.add("Sudden Demise");
-        sheet.add("Supreme Verdict");
-        sheet.add("Sword of the Animist");
-        sheet.add("Talrand, Sky Summoner");
-        sheet.add("Taurean Mauler");
-        sheet.add("Teferi's Protection");
-        sheet.add("Teferi, Temporal Archmage");
-        sheet.add("Temporal Mastery");
-        sheet.add("Tempt with Discovery");
-        sheet.add("Thalia's Lancers");
-        sheet.add("The Gitrog Monster");
-        sheet.add("The Mirari Conjecture");
-        sheet.add("Tireless Tracker");
-        sheet.add("Torment of Hailfire");
-        sheet.add("Trading Post");
-        sheet.add("Two-Headed Giant");
-        sheet.add("Urza's Rage");
-        sheet.add("Vigor");
-        sheet.add("Wheel of Fate");
-        sheet.add("Whelming Wave");
-        sheet.add("Whir of Invention");
-        sheet.add("Yuriko, the Tiger's Shadow");
-        cardSheets.add(sheet);
-        sheet = new ArrayList();
-        sheet.add("Alchemist's Refuge");
-        sheet.add("Allosaurus Rider");
-        sheet.add("Amulet of Vigor");
-        sheet.add("Archetype of Endurance");
-        sheet.add("Aurelia's Fury");
-        sheet.add("Balduvian Rage");
-        sheet.add("Balefire Liege");
-        sheet.add("Blasting Station");
-        sheet.add("Blighted Agent");
-        sheet.add("Boreal Druid");
-        sheet.add("Boundless Realms");
-        sheet.add("Braid of Fire");
-        sheet.add("Bramblewood Paragon");
-        sheet.add("Bringer of the Black Dawn");
-        sheet.add("Burning Inquiry");
-        sheet.add("Celestial Dawn");
-        sheet.add("Celestial Kirin");
-        sheet.add("Changeling Hero");
-        sheet.add("Chimney Imp");
-        sheet.add("Codex Shredder");
-        sheet.add("Conspiracy");
-        sheet.add("Council Guardian");
-        sheet.add("Delay");
-        sheet.add("Drogskol Captain");
-        sheet.add("Echoing Decay");
-        sheet.add("Eidolon of Rhetoric");
-        sheet.add("Fatespinner");
-        sheet.add("Fiery Gambit");
-        sheet.add("Flamekin Harbinger");
-        sheet.add("Form of the Dragon");
-        sheet.add("Frozen Aether");
-        sheet.add("Funeral Charm");
-        sheet.add("Fungusaur");
-        sheet.add("Game-Trail Changeling");
-        sheet.add("Geth's Grimoire");
-        sheet.add("Gilder Bairn");
-        sheet.add("Gleeful Sabotage");
-        sheet.add("Glittering Wish");
-        sheet.add("Goblin Bushwhacker");
-        sheet.add("Grand Architect");
-        sheet.add("Greater Mossdog");
-        sheet.add("Guerrilla Tactics");
-        sheet.add("Harmonic Sliver");
-        sheet.add("Helix Pinnacle");
-        sheet.add("Herald of Leshrac");
-        sheet.add("Hornet Sting");
-        sheet.add("Intruder Alarm");
-        sheet.add("Iron Myr");
-        sheet.add("Isamaru, Hound of Konda");
-        sheet.add("Karrthus, Tyrant of Jund");
-        sheet.add("Knowledge Pool");
-        sheet.add("Kulrath Knight");
-        sheet.add("Lantern of Insight");
-        sheet.add("Lapse of Certainty");
-        sheet.add("Leveler");
-        sheet.add("Lich's Mirror");
-        sheet.add("Lightning Storm");
-        sheet.add("Lumithread Field");
-        sheet.add("Maelstrom Nexus");
-        sheet.add("Magewright's Stone");
-        sheet.add("Manaweft Sliver");
-        sheet.add("Maro");
-        sheet.add("Marrow-Gnawer");
-        sheet.add("Memnite");
-        sheet.add("Minamo, School at Water's Edge");
-        sheet.add("Mind Funeral");
-        sheet.add("Mindslaver");
-        sheet.add("Mirrodin's Core");
-        sheet.add("Misthollow Griffin");
-        sheet.add("Myojin of Life's Web");
-        sheet.add("Nezumi Shortfang // Stabwhisker the Odious");
-        sheet.add("Noggle Bandit");
-        sheet.add("Norin the Wary");
-        sheet.add("Norn's Annex");
-        sheet.add("Not of This World");
-        sheet.add("Ogre Gatecrasher");
-        sheet.add("One with Nothing");
-        sheet.add("Panglacial Wurm");
-        sheet.add("Paradox Haze");
-        sheet.add("Patron of the Moon");
-        sheet.add("Pili-Pala");
-        sheet.add("Proclamation of Rebirth");
-        sheet.add("Puca's Mischief");
-        sheet.add("Pull from Eternity");
-        sheet.add("Pyretic Ritual");
-        sheet.add("Ravenous Trap");
-        sheet.add("Reaper King");
-        sheet.add("Reki, the History of Kamigawa");
-        sheet.add("Rescue from the Underworld");
-        sheet.add("Rhox");
-        sheet.add("Rune-Tail, Kitsune Ascendant // Rune-Tail's Essence");
-        sheet.add("Sakura-Tribe Scout");
-        sheet.add("Sarkhan the Mad");
-        sheet.add("Scourge of the Throne");
-        sheet.add("Scryb Ranger");
-        sheet.add("Sen Triplets");
-        sheet.add("Sheltering Ancient");
-        sheet.add("Shizo, Death's Storehouse");
-        sheet.add("Sinew Sliver");
-        sheet.add("Sosuke, Son of Seshiro");
-        sheet.add("Soul's Attendant");
-        sheet.add("Spelltithe Enforcer");
-        sheet.add("Spellweaver Volute");
-        sheet.add("Spike Feeder");
-        sheet.add("Springjack Shepherd");
-        sheet.add("Stalking Stones");
-        sheet.add("Stigma Lasher");
-        sheet.add("Storm Crow");
-        sheet.add("Sundial of the Infinite");
-        sheet.add("Teferi's Puzzle Box");
-        sheet.add("Trailblazer's Boots");
-        sheet.add("Treasonous Ogre");
-        sheet.add("Triskelion");
-        sheet.add("Undead Warchief");
-        sheet.add("Viscera Seer");
-        sheet.add("Wall of Shards");
-        sheet.add("Wear // Tear");
-        sheet.add("White Knight");
-        sheet.add("Witchbane Orb");
-        sheet.add("Yore-Tiller Nephilim");
-        sheet.add("Zur's Weirding");
-        cardSheets.add(sheet);
+    @Override
+    public List<Card> create15CardBooster() {
+        return this.createBooster();
     }
 }
