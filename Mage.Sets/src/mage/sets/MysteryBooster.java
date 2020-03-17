@@ -1,8 +1,15 @@
 package mage.sets;
 
+import mage.cards.Card;
 import mage.cards.ExpansionSet;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+import mage.util.RandomUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author TheElk801
@@ -1949,4 +1956,18 @@ public final class MysteryBooster extends ExpansionSet {
         cards.add(new SetCardInfo("Yore-Tiller Nephilim", 1786, Rarity.RARE, mage.cards.y.YoreTillerNephilim.class));
         cards.add(new SetCardInfo("Zur's Weirding", 1726, Rarity.RARE, mage.cards.z.ZursWeirding.class));
     }
+
+    @Override
+    public List<Card> createBooster() {
+        List<Card> booster = new ArrayList();
+        for (List<String> cardSheet : cardSheets) {
+            String cardName = cardSheet.get(RandomUtil.nextInt(121));
+            List<CardInfo> cardInfo = new ArrayList();
+            cardInfo.add(CardRepository.instance.findCard(this.code, cardName));
+            addToBooster(booster, cardInfo);
+        }
+        return booster;
+    }
+
+    private static final List<List<String>> cardSheets = new ArrayList();
 }
