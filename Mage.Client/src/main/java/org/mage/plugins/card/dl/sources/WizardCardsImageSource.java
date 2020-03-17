@@ -436,7 +436,6 @@ public enum WizardCardsImageSource implements CardImageSource {
         setsAliases.put("VMA", "Vintage Masters");
         setsAliases.put("W16", "Welcome Deck 2016");
         setsAliases.put("W17", "Welcome Deck 2017");
-        setsAliases.put("WMCQ", "World Magic Cup Qualifier");
         setsAliases.put("WTH", "Weatherlight");
         setsAliases.put("WWK", "Worldwake");
         setsAliases.put("ZEN", "Zendikar");

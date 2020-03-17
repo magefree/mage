@@ -14,7 +14,7 @@ import java.util.Set;
  */
 public class ScryfallImageSupportCards {
 
-    private static final Map<String, String> xmageSetsToScryfall = ImmutableMap.<String, String>builder().put("DD3GVL", "gvl").
+    private static final Map<String, String> xmageSetsToScryfall = ImmutableMap.<String, String>builder().
             put("MBP", "pmei").
             build();
 
@@ -411,9 +411,9 @@ public class ScryfallImageSupportCards {
             add("PM19"); // Core Set 2019 Promos
             add("PSS3"); // M19 Standard Showdown
             add("M19"); // Core Set 2019
-            //add("ANA"); // Arena New Player Experience
+            add("ANA"); // Arena New Player Experience
             add("PS18"); // San Diego Comic-Con 2018
-            //add("HTR17"); // 2017 Heroes of the Realm
+            //add("HTR17"); // Heroes of the Realm 2017
             add("C18"); // Commander 2018
             add("PGRN"); // Guilds of Ravnica Promos
             add("PRWK"); // GRN Ravnica Weekend
@@ -450,7 +450,7 @@ public class ScryfallImageSupportCards {
             //add("CMB1"); // Mystery Booster Playtest Cards
             add("MB1"); // Mystery Booster
             add("GN2"); // Game Night 2019
-            //add("HA1"); // Historic Anthology 1
+            add("HA1"); // Historic Anthology 1
             //add("HHO"); // Happy Holidays
             add("OVNT"); // Vintage Championship
             add("OLGC"); // Legacy Championship
@@ -464,22 +464,15 @@ public class ScryfallImageSupportCards {
             add("PSLD"); // Secret Lair Drop Promos
             add("UND"); // Unsanctioned
             add("FMB1"); // Mystery Booster Retail Edition Foils
-            //add("HA2"); // Historic Anthology 2
+            add("HA2"); // Historic Anthology 2
             add("SLD"); // Secret Lair Drop
             add("PMEI"); // Magazine Inserts
             add("SLU"); // Secret Lair: Ultimate Edition
-            add("SS3"); // Signature Spellbook: Chandra
-
-
-
-
-
+            //add("SS3"); // Signature Spellbook: Chandra
 
             // TODO: DuelsOfThePlaneswalkersPromos
             add("DPAP");
-            add("MEDM");
             add("GRC");
-            add("ANA");
         }
     };
 
