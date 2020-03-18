@@ -25,6 +25,7 @@ public final class MysteryBooster extends ExpansionSet {
     private MysteryBooster() {
         super("Mystery Booster", "MB1", ExpansionSet.buildDate(2020, 3, 13), SetType.SUPPLEMENTAL);
         this.hasBoosters = true;
+        this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Absorb Vis", 558, Rarity.COMMON, mage.cards.a.AbsorbVis.class));
         cards.add(new SetCardInfo("Abundant Growth", 1108, Rarity.COMMON, mage.cards.a.AbundantGrowth.class));
