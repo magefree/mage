@@ -4,6 +4,9 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
+/**
+ * https://scryfall.com/sets/pgru
+ */
 public final class Guru extends ExpansionSet {
 
     private static final Guru instance = new Guru();
@@ -13,7 +16,10 @@ public final class Guru extends ExpansionSet {
     }
 
     private Guru() {
-        super("Guru", "GUR", ExpansionSet.buildDate(1990, 1, 2), SetType.PROMOTIONAL);
+        super("Guru", "PGRU", ExpansionSet.buildDate(1990, 1, 2), SetType.PROMOTIONAL);
+        this.hasBasicLands = true;
+        this.hasBoosters = false;
+
         cards.add(new SetCardInfo("Forest", 1, Rarity.LAND, mage.cards.basiclands.Forest.class));
         cards.add(new SetCardInfo("Island", 2, Rarity.LAND, mage.cards.basiclands.Island.class));
         cards.add(new SetCardInfo("Mountain", 3, Rarity.LAND, mage.cards.basiclands.Mountain.class));

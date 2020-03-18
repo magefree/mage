@@ -101,7 +101,7 @@ Guilds of Ravnica|GRN|
 Grand Prix|PGPX|
 WPN Gateway|GRC|
 Gatecrash|GTC|
-Guru|GUR|
+Guru|PGRU|
 Premium Deck Series: Slivers|H09|
 Homelands|HML|
 Heroes of the Realm|HOTR|
