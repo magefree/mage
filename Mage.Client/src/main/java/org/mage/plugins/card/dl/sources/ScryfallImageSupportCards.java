@@ -478,11 +478,9 @@ public class ScryfallImageSupportCards {
 
     private static final Map<String, String> directDownloadLinks = new HashMap<String, String>() {
         {
-            // xmage card -> direct or api link:
+            // xmage card -> api link:
             // examples:
-            //   direct example: https://img.scryfall.com/cards/large/en/trix/6.jpg
-            //   api example: https://api.scryfall.com/cards/trix/6/en?format=image
-            //   api example: https://api.scryfall.com/cards/trix/6?format=image
+            //   api example: https://api.scryfall.com/cards/trix/6/
             // api format is primary
             //
             // code form for one card:
@@ -492,27 +490,42 @@ public class ScryfallImageSupportCards {
             //   set/card_name/card_number
             //   set/card_name/card_number
 
+            // Cards with non-ASCII collector numbers
+            put("J14/Plains/1*", "https://api.scryfall.com/cards/j14/1★/");
+            put("J14/Island/2*", "https://api.scryfall.com/cards/j14/2★/");
+            put("J14/Swamp/3*", "https://api.scryfall.com/cards/j14/3★/");
+            put("J14/Mountain/4*", "https://api.scryfall.com/cards/j14/4★/");
+            put("J14/Forest/5*", "https://api.scryfall.com/cards/j14/5★/");
+            put("PLS/Tahngarth, Talruum Hero/74*", "https://api.scryfall.com/cards/pls/74★/");
+            put("PLS/Ertai, the Corrupted/107*", "https://api.scryfall.com/cards/pls/107★/");
+            put("PLS/Skyship Weatherlight/133*", "https://api.scryfall.com/cards/pls/133★/");
+            put("PROE/Emrakul, the Aeons Torn/*4", "https://api.scryfall.com/cards/proe/★4/");
+            put("PROE/Lord of Shatterskull Pass/*156", "https://api.scryfall.com/cards/proe/★156/");
+
+            put("PAL99/Island/3+", "https://api.scryfall.com/cards/pal99/3†/");
+            put("PSOI/Tamiyo's Journal/265s+", "https://api.scryfall.com/cards/psoi/265s†/");
+
             // Duels of the Planeswalkers Promos -- xmage uses one set (DPAP), but scryfall store it by years
             // 2009 - https://scryfall.com/sets/pdtp
-            put("DPAP/Garruk Wildspeaker", "https://api.scryfall.com/cards/pdtp/1/en?format=image");
+            put("DPAP/Garruk Wildspeaker", "https://api.scryfall.com/cards/pdtp/1/");
             // 2010 - https://scryfall.com/sets/pdp10
-            put("DPAP/Liliana Vess", "https://api.scryfall.com/cards/pdp10/1/en?format=image");
-            put("DPAP/Nissa Revane", "https://api.scryfall.com/cards/pdp10/2/en?format=image");
+            put("DPAP/Liliana Vess", "https://api.scryfall.com/cards/pdp10/1/");
+            put("DPAP/Nissa Revane", "https://api.scryfall.com/cards/pdp10/2/");
             // 2011 - https://scryfall.com/sets/pdp11
-            put("DPAP/Frost Titan", "https://api.scryfall.com/cards/pdp11/1/en?format=image");
-            put("DPAP/Grave Titan", "https://api.scryfall.com/cards/pdp11/2/en?format=image");
-            put("DPAP/Inferno Titan", "https://api.scryfall.com/cards/pdp11/3/en?format=image");
+            put("DPAP/Frost Titan", "https://api.scryfall.com/cards/pdp11/1/");
+            put("DPAP/Grave Titan", "https://api.scryfall.com/cards/pdp11/2/");
+            put("DPAP/Inferno Titan", "https://api.scryfall.com/cards/pdp11/3/");
             // 2012 - https://scryfall.com/sets/pdp12
-            put("DPAP/Primordial Hydra", "https://api.scryfall.com/cards/pdp12/1/en?format=image");
-            put("DPAP/Serra Avatar", "https://api.scryfall.com/cards/pdp12/2/en?format=image");
-            put("DPAP/Vampire Nocturnus", "https://api.scryfall.com/cards/pdp12/3/en?format=image");
+            put("DPAP/Primordial Hydra", "https://api.scryfall.com/cards/pdp12/1/");
+            put("DPAP/Serra Avatar", "https://api.scryfall.com/cards/pdp12/2/");
+            put("DPAP/Vampire Nocturnus", "https://api.scryfall.com/cards/pdp12/3/");
             // 2013 - https://scryfall.com/sets/pdp13
-            put("DPAP/Bonescythe Sliver", "https://api.scryfall.com/cards/pdp13/1/en?format=image");
-            put("DPAP/Ogre Battledriver", "https://api.scryfall.com/cards/pdp13/2/en?format=image");
-            put("DPAP/Scavenging Ooze", "https://api.scryfall.com/cards/pdp13/3/en?format=image");
+            put("DPAP/Bonescythe Sliver", "https://api.scryfall.com/cards/pdp13/1/");
+            put("DPAP/Ogre Battledriver", "https://api.scryfall.com/cards/pdp13/2/");
+            put("DPAP/Scavenging Ooze", "https://api.scryfall.com/cards/pdp13/3/");
             // 2014 - https://scryfall.com/sets/pdp14
-            put("DPAP/Soul of Ravnica", "https://api.scryfall.com/cards/pdp14/1/en?format=image");
-            put("DPAP/Soul of Zendikar", "https://api.scryfall.com/cards/pdp14/2/en?format=image");
+            put("DPAP/Soul of Ravnica", "https://api.scryfall.com/cards/pdp14/1/");
+            put("DPAP/Soul of Zendikar", "https://api.scryfall.com/cards/pdp14/2/");
         }
     };
 

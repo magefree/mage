@@ -75,27 +75,22 @@ public enum ScryfallImageSource implements CardImageSource {
 
         // CARDS TRY
 
-        // direct links to images (non localization)
+        // direct links to images via hardcoded API path. Used for cards with non-ASCII collector numbers.
         if (baseUrl == null) {
             baseUrl = ScryfallImageSupportCards.findDirectDownloadLink(card.getSet(), card.getName(), card.getCollectorId());
-            alternativeUrl = null;
+            if (baseUrl != null) {
+                alternativeUrl = baseUrl + defaultCode + "?format=image";
+                baseUrl += localizedCode + "?format=image";
+            }
         }
 
-        // art variation cards
-        // ARN and POR use † notation
-        // PLS uses ★ notation
-        if (baseUrl == null && card.getUsesVariousArt() && card.getSet().matches("ARN|POR|PLS")) {
-            String scryfallCollectorId = card.getCollectorIdAsInt().toString();
+        // ARN and POR uses † notation for art variation cards
+        if (baseUrl == null && card.getUsesVariousArt() && card.getSet().matches("ARN|POR")) {
+            String collectorId = card.getCollectorId();
+            if (collectorId.endsWith("b"))
+                collectorId = collectorId.replace("b", "†");
 
-            if (card.getCollectorId().endsWith("b")) {
-                if (card.getSet().matches("ARN|POR")) {
-                    scryfallCollectorId += "†";
-                } else if (card.getSet().matches("PLS")) {
-                    scryfallCollectorId += "★";
-                }
-            }
-
-            scryfallCollectorId = CardUtil.urlEncode(scryfallCollectorId);
+            final String scryfallCollectorId = CardUtil.urlEncode(collectorId);
             baseUrl = "https://api.scryfall.com/cards/" + formatSetName(card.getSet(), isToken) + "/"
                     + scryfallCollectorId + "/" + localizedCode + "?format=image";
             alternativeUrl = "https://api.scryfall.com/cards/" + formatSetName(card.getSet(), isToken) + "/"
@@ -107,9 +102,9 @@ public enum ScryfallImageSource implements CardImageSource {
         // the back face is prepared beforehand
         if (baseUrl == null && card.isTwoFacedCard() && !card.isSecondSide()) {
             baseUrl = "https://api.scryfall.com/cards/" + formatSetName(card.getSet(), isToken) + "/"
-                    + card.getCollectorIdAsInt() + "/" + localizedCode + "?format=image";
+                    + card.getCollectorId() + "/" + localizedCode + "?format=image";
             alternativeUrl = "https://api.scryfall.com/cards/" + formatSetName(card.getSet(), isToken) + "/"
-                    + card.getCollectorIdAsInt() + "/" + defaultCode + "?format=image";
+                    + card.getCollectorId() + "/" + defaultCode + "?format=image";
         }
 
         // basic cards by api call (redirect to img link)
