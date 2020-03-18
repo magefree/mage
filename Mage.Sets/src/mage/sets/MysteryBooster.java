@@ -1852,6 +1852,7 @@ public final class MysteryBooster extends ExpansionSet {
     private static final List<List<String>> cardSheets = new ArrayList();
 
     static {
+        // Sheet data comes from http://www.lethe.xyz/mtg/collation/mb1.html
         List<String> sheet;
         sheet = new ArrayList();
         sheet.add("Abzan Falconer");
