@@ -76,15 +76,6 @@ public enum GrabbagImageSource implements CardImageSource {
             return;
         }
         singleLinks = new HashMap<>();
-        singleLinks.put("PPRE/Arbiter of the Ideal", "MTG/BNG/en/promo/ArbiterOfTheIdeal.jpg");
-        singleLinks.put("PPRE/Courser of Kruphix", "MTG/BNG/en/promo/CourserOfKruphix.jpg");
-        singleLinks.put("PPRE/Eater of Hope", "MTG/BNG/en/promo/EaterOfHope.jpg");
-        singleLinks.put("PPRE/Fated Return", "MTG/BNG/en/promo/FatedReturn.jpg");
-        singleLinks.put("PPRE/Forgestoker Dragon", "MTG/BNG/en/promo/ForgestokerDragon.jpg");
-        singleLinks.put("PPRE/Nessian Wilds Ravager", "MTG/BNG/en/promo/NessianWildsRavager.jpg");
-        singleLinks.put("PPRE/Pain Seer", "MTG/BNG/en/promo/PainSeer.jpg");
-        singleLinks.put("PPRE/Silent Sentinel", "MTG/BNG/en/promo/SilentSentinel.jpg");
-        singleLinks.put("PPRE/Tromokratis", "MTG/BNG/en/promo/Tromokratis.jpg");
 
         singleLinks.put("SWS/AAT-1", "CqmDY8V.jpg");
         singleLinks.put("SWS/Acklay of the Arena", "ESVRm6F.jpg");
