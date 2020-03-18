@@ -152,8 +152,6 @@ public enum ScryfallImageSource implements CardImageSource {
 
         preparedUrls.clear();
 
-        final List<ExpansionSet.SetCardInfo> sixthEditionCards = Sets.findSet("6ED").getSetCardInfo();
-
         for (CardDownloadData card : downloadList) {
             // need cancel
             if (downloadServiceInfo.isNeedCancel()) {
@@ -179,50 +177,11 @@ public enum ScryfallImageSource implements CardImageSource {
                 preparedUrls.put(card, url);
             }
 
-            // if a S00 card is in 6ED, it's actually a 6ED card
-            if (card.getSet().equals("S00") && sixthEditionCards.stream().anyMatch(sixthEditionCard -> sixthEditionCard.getName().equals(card.getName()))) {
-                // we have direct links for the lands because there are multiple search results
-                if (card.getUsesVariousArt()) { // lands are the only defined multiple art cards in S00 in XMage
-                    continue;
-                }
-
-                String url = null;
-
-                try {
-                    url = searchCard(proxy, "6ED", card.getName());
-                } catch (Exception e) {
-                    logger.warn("Failed to prepare image URL (S00) for " + card.getName() + " (" + card.getSet() + ") #" + card.getCollectorId());
-                    downloadServiceInfo.incErrorCount();
-                    continue;
-                }
-
-                preparedUrls.put(card, url);
-            }
-
-
             // inc error count to stop on too many errors
             // downloadServiceInfo.incErrorCount();
         }
 
         return true;
-    }
-
-    private String searchCard(Proxy proxy, String set, String name) throws Exception {
-        final URL searchUrl = new URL("https://api.scryfall.com/cards/search?q=s:" + CardUtil.urlEncode(set + " " + name));
-        URLConnection request = proxy == null ? searchUrl.openConnection() : searchUrl.openConnection(proxy);
-        request.connect();
-
-        // parse the response and return the image URI from the correct card face
-        JsonParser jp = new JsonParser();
-        JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent()));
-        JsonObject searchResult = root.getAsJsonObject();
-        if (searchResult.get("total_cards").getAsInt() != 1) {
-            throw new Exception("Card not found in Scryfall.");
-        }
-        JsonObject jsonCard = searchResult.getAsJsonArray("data").get(0).getAsJsonObject();
-        JsonObject jsonImageUris = jsonCard.getAsJsonObject("image_uris");
-
-        return jsonImageUris.get("large").getAsString();
     }
 
     @Override
