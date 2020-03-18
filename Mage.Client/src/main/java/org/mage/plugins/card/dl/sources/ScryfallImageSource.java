@@ -127,7 +127,7 @@ public enum ScryfallImageSource implements CardImageSource {
     private String getFaceImageUrl(Proxy proxy, CardDownloadData card, boolean isToken, String localizationCode) throws Exception {
         // connect to Scryfall API
         final URL cardUrl = new URL("https://api.scryfall.com/cards/" + formatSetName(card.getSet(), isToken) + "/"
-                + (card.getCollectorIdAsInt() % 1000) + "/" + localizationCode);
+                + card.getCollectorId() + "/" + localizationCode);
         URLConnection request = proxy == null ? cardUrl.openConnection() : cardUrl.openConnection(proxy);
         request.connect();
 
@@ -136,7 +136,7 @@ public enum ScryfallImageSource implements CardImageSource {
         JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent()));
         JsonObject jsonCard = root.getAsJsonObject();
         if (!jsonCard.has("card_faces")) {
-            throw new Exception("Couldn't find card_faces in Card JSON.");
+            throw new Exception("Couldn't find card_faces in Card JSON.: " + cardUrl.toString());
         }
         JsonArray jsonCardFaces = jsonCard.getAsJsonArray("card_faces");
         JsonObject jsonCardFace = jsonCardFaces.get(card.isSecondSide() ? 1 : 0).getAsJsonObject();
@@ -170,7 +170,8 @@ public enum ScryfallImageSource implements CardImageSource {
                 try {
                     url = getFaceImageUrl(proxy, card, card.isToken(), localizedCode);
                 } catch (Exception e) {
-                    logger.warn("Failed to prepare image URL (back face) for " + card.getName() + " (" + card.getSet() + ") #" + card.getCollectorId());
+                    logger.warn("Failed to prepare image URL (back face) for " + card.getName() + " (" + card.getSet() + ") #"
+                            + card.getCollectorId() + ", Error Message: " + e.getMessage());
                     downloadServiceInfo.incErrorCount();
                     continue;
                 }
