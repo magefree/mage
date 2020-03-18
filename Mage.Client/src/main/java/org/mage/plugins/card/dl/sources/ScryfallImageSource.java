@@ -198,20 +198,6 @@ public enum ScryfallImageSource implements CardImageSource {
                 preparedUrls.put(card, url);
             }
 
-            // if an E01 card number is above 106, it's actually an AKH card
-            if (card.getSet().equals("E01") && card.getCollectorIdAsInt() > 106) {
-                String url = null;
-
-                try {
-                    url = searchCard(proxy, "AKH", card.getName());
-                } catch (Exception e) {
-                    logger.warn("Failed to prepare image URL (E01) for " + card.getName() + " (" + card.getSet() + ") #" + card.getCollectorId());
-                    downloadServiceInfo.incErrorCount();
-                    continue;
-                }
-
-                preparedUrls.put(card, url);
-            }
 
             // inc error count to stop on too many errors
             // downloadServiceInfo.incErrorCount();
