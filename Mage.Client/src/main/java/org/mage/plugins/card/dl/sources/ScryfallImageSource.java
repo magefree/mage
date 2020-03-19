@@ -207,7 +207,8 @@ public enum ScryfallImageSource implements CardImageSource {
 
     @Override
     public float getAverageSize() {
-        return 90;
+        // March 2020: 46_354 image files with total size 9_545_168 KiB
+        return 206;
     }
 
     @Override
