@@ -18,7 +18,6 @@ public enum GrabbagImageSource implements CardImageSource {
 
     private static final Set<String> supportedSets = new LinkedHashSet<String>() {
         {
-            add("PPRE");
             add("SWS");
         }
     };
