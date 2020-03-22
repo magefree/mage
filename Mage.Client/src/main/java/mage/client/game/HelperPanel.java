@@ -14,6 +14,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import static mage.client.game.FeedbackPanel.FeedbackMode.QUESTION;
@@ -308,7 +309,7 @@ public class HelperPanel extends JPanel {
         this.buttonGrid.setLayout(new FlowLayout(FlowLayout.CENTER, BUTTONS_H_GAP, 0));
         this.buttonGrid.setPreferredSize(null);
 
-        java.util.List<JButton> buttons = new ArrayList<>();
+        List<JButton> buttons = new ArrayList<>();
         if (this.btnSpecial.isVisible()) {
             buttons.add(this.btnSpecial);
         }

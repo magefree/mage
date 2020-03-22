@@ -8,6 +8,7 @@ import java.awt.*;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,7 +31,7 @@ public final class TextboxRuleParser {
     // the textbox of a card.
     public static TextboxRule parse(CardView source, String rule) {
         // List of regions to apply
-        java.util.List<TextboxRule.AttributeRegion> regions = new ArrayList<>();
+        List<TextboxRule.AttributeRegion> regions = new ArrayList<>();
 
         // Leveler / loyalty / basic
         boolean isLeveler = false;
