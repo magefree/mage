@@ -460,7 +460,7 @@ public class ScryfallImageSupportCards {
             add("PTHB"); // Theros Beyond Death Promos
             add("THB"); // Theros Beyond Death
             add("PWOR"); // World Championship Promos
-            //add("PANA"); // MTG Arena Promos
+            add("PANA"); // MTG Arena Promos
             add("PSLD"); // Secret Lair Drop Promos
             add("UND"); // Unsanctioned
             add("FMB1"); // Mystery Booster Retail Edition Foils
