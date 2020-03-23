@@ -15,6 +15,7 @@ import org.mage.card.arcane.UI;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import static mage.client.dialog.PreferencesDialog.KEY_MAGE_PANEL_LAST_SIZE;
@@ -38,7 +39,7 @@ public final class GuiDisplayUtil {
             this.basicTextLength = basicTextLength;
         }
 
-        public java.util.List<String> getLines() {
+        public List<String> getLines() {
             return lines;
         }
 

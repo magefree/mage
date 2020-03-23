@@ -35,6 +35,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -202,7 +203,7 @@ public class TestCardRenderDialog extends MageDialog {
         Player playerOpponent = new StubPlayer("player2", RangeOfInfluence.ALL);
         game.addPlayer(playerOpponent, deck);
 
-        java.util.List<CardView> cardViews = new ArrayList<>();
+        List<CardView> cardViews = new ArrayList<>();
         ///*
         cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "263", 0, 0, 0, false)); // mountain
         cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "185", 0, 0, 0, true)); // Judith, the Scourge Diva
