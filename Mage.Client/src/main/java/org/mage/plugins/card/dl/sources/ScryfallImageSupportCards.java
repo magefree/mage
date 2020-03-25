@@ -526,6 +526,25 @@ public class ScryfallImageSupportCards {
             // 2014 - https://scryfall.com/sets/pdp14
             put("DPAP/Soul of Ravnica", "https://api.scryfall.com/cards/pdp14/1/");
             put("DPAP/Soul of Zendikar", "https://api.scryfall.com/cards/pdp14/2/");
+
+            // 8th Edition box set and 9th Edition box set
+            put("8EB/Eager Cadet", "https://api.scryfall.com/cards/8ed/S1");
+            put("8EB/Vengeance", "https://api.scryfall.com/cards/8ed/S2");
+            put("8EB/Giant Octopus", "https://api.scryfall.com/cards/8ed/S3");
+            put("8EB/Sea Eagle", "https://api.scryfall.com/cards/8ed/S4");
+            put("8EB/Vizzerdrix", "https://api.scryfall.com/cards/8ed/S5");
+            put("8EB/Enormous Baloth", "https://api.scryfall.com/cards/8ed/S6");
+            put("8EB/Silverback Ape", "https://api.scryfall.com/cards/8ed/S7");
+            put("9EB/Eager Cadet", "https://api.scryfall.com/cards/9ed/S1");
+            put("9EB/Vengeance", "https://api.scryfall.com/cards/9ed/S3");
+            put("9EB/Coral Eel", "https://api.scryfall.com/cards/9ed/S3");
+            put("9EB/Giant Octopus", "https://api.scryfall.com/cards/9ed/S4");
+            put("9EB/Index", "https://api.scryfall.com/cards/9ed/S5");
+            put("9EB/Vizzerdrix", "https://api.scryfall.com/cards/9ed/S7");
+            put("9EB/Goblin Raider", "https://api.scryfall.com/cards/9ed/S8");
+            put("9EB/Enormous Baloth", "https://api.scryfall.com/cards/9ed/S9");
+            put("9EB/Spined Wurm", "https://api.scryfall.com/cards/9ed/S10");
+
         }
     };
 
