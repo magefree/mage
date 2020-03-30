@@ -10,7 +10,7 @@ import java.util.UUID;
 
 public class MatchesTableModel extends AbstractTableModel {
 
-    private final String[] columnNames = new String[]{"lblDeckType", "lblPlayer", "lblGameType", "lblRating", "lblPoints", "lblDuration", "lblStartTime", "lblEndTime", "lblAction"};
+    private final String[] columnNames = new String[]{"lblDeckType", "lblPlayer", "lblGameType", "lblRating", "lblResult", "lblDuration", "lblStartTime", "lblEndTime", "lblAction"};
     public static final int COLUMN_DURATION = 5;
     public static final int COLUMN_START = 6;
     public static final int COLUMN_END = 7;
