@@ -112,11 +112,11 @@ public abstract class Watcher implements Serializable {
 
                     field.setAccessible(true);
                     if (field.getType() == Set.class) {
-                        field.set(watcher, new HashSet<>());
+                        ((Set) field.get(watcher)).clear();
                         ((Set) field.get(watcher)).addAll((Set) field.get(this));
                     } else if (field.getType() == Map.class) {
-                        HashMap<Object, Object> target = new HashMap<>();
-                        field.set(watcher, target);
+                        Map target = ((Map) field.get(watcher));
+                        target.clear();
                         Map source = (Map) field.get(this);
 
                         ParameterizedType parameterizedType = (ParameterizedType) field.getGenericType();
