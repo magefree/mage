@@ -5,7 +5,6 @@ import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import org.apache.log4j.Logger;
-import sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl;
 
 import java.io.Serializable;
 import java.lang.reflect.*;
@@ -122,7 +121,7 @@ public abstract class Watcher implements Serializable {
 
                         ParameterizedType parameterizedType = (ParameterizedType) field.getGenericType();
                         Type valueType = parameterizedType.getActualTypeArguments()[1];
-                        if (valueType instanceof ParameterizedTypeImpl && ((ParameterizedTypeImpl) valueType).getRawType().getSimpleName().contains("Set")) {
+                        if (valueType.getClass().getSimpleName().contains("Set")) {
                             source.entrySet().forEach(kv -> {
                                 Object key = ((Map.Entry) kv).getKey();
                                 Set value = (Set) ((Map.Entry) kv).getValue();
