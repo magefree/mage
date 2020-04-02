@@ -1,5 +1,7 @@
 package mage.counters;
 
+import mage.abilities.keyword.TrampleAbility;
+
 /**
  * Enum for counters, names and instances.
  *
@@ -131,6 +133,7 @@ public enum CounterType {
     TIME("time"),
     TOWER("tower"),
     TRAINING("training"),
+    TRAMPLE("trample"),
     TRAP("trap"),
     TREASURE("treasure"),
     UNITY("unity"),
@@ -192,6 +195,8 @@ public enum CounterType {
                 return new BoostCounter(-2, -1, amount);
             case M2M2:
                 return new BoostCounter(-2, -2, amount);
+            case TRAMPLE:
+                return new AbilityCounter(TrampleAbility.getInstance());
             default:
                 return new Counter(name, amount);
         }

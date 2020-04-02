@@ -96,9 +96,18 @@ public class Counters extends HashMap<String, Counter> implements Serializable {
     }
 
     public List<BoostCounter> getBoostCounters() {
-        return values().stream().
-                filter(counter -> counter instanceof BoostCounter).
-                map(counter -> (BoostCounter) counter).
-                collect(Collectors.toList());
+        return values()
+                .stream()
+                .filter(BoostCounter.class::isInstance)
+                .map(BoostCounter.class::cast)
+                .collect(Collectors.toList());
+    }
+
+    public List<AbilityCounter> getAbilityCounters() {
+        return values()
+                .stream()
+                .filter(AbilityCounter.class::isInstance)
+                .map(AbilityCounter.class::cast)
+                .collect(Collectors.toList());
     }
 }
