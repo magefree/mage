@@ -1,5 +1,6 @@
 package mage.counters;
 
+import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.TrampleAbility;
 
 /**
@@ -30,6 +31,7 @@ public enum CounterType {
     CUBE("cube"),
     CURRENCY("currency"),
     DEATH("death"),
+    DEATHTOUCH("deathtouch"),
     DELAY("delay"),
     DEPLETION("depletion"),
     DESPAIR("despair"),
@@ -195,6 +197,8 @@ public enum CounterType {
                 return new BoostCounter(-2, -1, amount);
             case M2M2:
                 return new BoostCounter(-2, -2, amount);
+            case DEATHTOUCH:
+                return new AbilityCounter(DeathtouchAbility.getInstance());
             case TRAMPLE:
                 return new AbilityCounter(TrampleAbility.getInstance());
             default:
