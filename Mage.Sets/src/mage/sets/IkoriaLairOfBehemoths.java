@@ -32,6 +32,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Gloom Pangolin", 89, Rarity.COMMON, mage.cards.g.GloomPangolin.class));
         cards.add(new SetCardInfo("Mosscoat Goriak", 167, Rarity.COMMON, mage.cards.m.MosscoatGoriak.class));
         cards.add(new SetCardInfo("Pacifism", 25, Rarity.COMMON, mage.cards.p.Pacifism.class));
+        cards.add(new SetCardInfo("Titanoth Rex", 377, Rarity.UNCOMMON, mage.cards.t.TitanothRex.class));
         cards.add(new SetCardInfo("Void Beckoner", 373, Rarity.UNCOMMON, mage.cards.v.VoidBeckoner.class));
     }
 }
