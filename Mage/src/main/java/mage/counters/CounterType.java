@@ -1,6 +1,8 @@
 package mage.counters;
 
 import mage.abilities.keyword.DeathtouchAbility;
+import mage.abilities.keyword.LifelinkAbility;
+import mage.abilities.keyword.MenaceAbility;
 import mage.abilities.keyword.TrampleAbility;
 
 /**
@@ -76,12 +78,14 @@ public enum CounterType {
     KI("ki"),
     LANDMARK("landmark"),
     LEVEL("level"),
+    LIFELINK("lifelink"),
     LORE("lore"),
     LUCK("luck"),
     LOYALTY("loyalty"),
     MANIFESTATION("manifestation"),
     MANNEQUIN("mannequin"),
     MATRIX("matrix"),
+    MENACE("menace"),
     M1M1(new BoostCounter(-1, -1).name),
     M2M1(new BoostCounter(-2, -1).name),
     M2M2(new BoostCounter(-2, -2).name),
@@ -199,6 +203,10 @@ public enum CounterType {
                 return new BoostCounter(-2, -2, amount);
             case DEATHTOUCH:
                 return new AbilityCounter(DeathtouchAbility.getInstance());
+            case LIFELINK:
+                return new AbilityCounter(LifelinkAbility.getInstance());
+            case MENACE:
+                return new AbilityCounter(new MenaceAbility());
             case TRAMPLE:
                 return new AbilityCounter(TrampleAbility.getInstance());
             default:
