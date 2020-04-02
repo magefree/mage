@@ -105,6 +105,7 @@ Homelands|Homelands|
 Hour of Devastation|HourOfDevastation|
 Ice Age|IceAge|
 IconicMasters|IconicMasters|
+Ikoria: Lair of Behemoths|IkoriaLairOfBehemoths|
 Innistrad|Innistrad|
 Invasion|Invasion|
 Ixalan|Ixalan|

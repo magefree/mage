@@ -109,6 +109,7 @@ Planechase|HOP|
 Hour of Devastation|HOU|
 Ice Age|ICE|
 Iconic Masters|IMA|
+Ikoria: Lair of Behemoths|IKO|
 Invasion|INV|
 Innistrad|ISD|
 Journey into Nyx|JOU|
