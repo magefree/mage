@@ -33,6 +33,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Fully Grown", 154, Rarity.COMMON, mage.cards.f.FullyGrown.class));
         cards.add(new SetCardInfo("Gloom Pangolin", 89, Rarity.COMMON, mage.cards.g.GloomPangolin.class));
         cards.add(new SetCardInfo("Grimdancer", 90, Rarity.UNCOMMON, mage.cards.g.Grimdancer.class));
+        cards.add(new SetCardInfo("Indatha Crystal", 235, Rarity.COMMON, mage.cards.i.IndathaCrystal.class));
         cards.add(new SetCardInfo("Kogla, the Titan Ape", 328, Rarity.RARE, mage.cards.k.KoglaTheTitanApe.class));
         cards.add(new SetCardInfo("Mosscoat Goriak", 167, Rarity.COMMON, mage.cards.m.MosscoatGoriak.class));
         cards.add(new SetCardInfo("Pacifism", 25, Rarity.COMMON, mage.cards.p.Pacifism.class));
