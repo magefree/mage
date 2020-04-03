@@ -308,6 +308,7 @@ public enum SubType {
     SHADE("Shade", SubTypeSet.CreatureType),
     SHAMAN("Shaman", SubTypeSet.CreatureType),
     SHAPESHIFTER("Shapeshifter", SubTypeSet.CreatureType),
+    SHARK("Shark", SubTypeSet.CreatureType),
     SHEEP("Sheep", SubTypeSet.CreatureType),
     SIREN("Siren", SubTypeSet.CreatureType),
     SITH("Sith", SubTypeSet.CreatureType),
