@@ -127,6 +127,7 @@ public enum CounterType {
     SLIME("slime"),
     SLUMBER("slumber"),
     SOOT("soot"),
+    SOUL("soul"),
     SPITE("spite"),
     SPORE("spore"),
     STORAGE("storage"),
