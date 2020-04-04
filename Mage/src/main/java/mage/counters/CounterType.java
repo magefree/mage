@@ -1,9 +1,6 @@
 package mage.counters;
 
-import mage.abilities.keyword.DeathtouchAbility;
-import mage.abilities.keyword.LifelinkAbility;
-import mage.abilities.keyword.MenaceAbility;
-import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.keyword.*;
 
 /**
  * Enum for counters, names and instances.
@@ -53,6 +50,7 @@ public enum CounterType {
     FEATHER("feather"),
     FILIBUSTER("filibuster"),
     FLOOD("flood"),
+    FLYING("flying"),
     FUNK("funk"),
     FURY("fury"),
     FUNGUS("fungus"),
@@ -64,6 +62,7 @@ public enum CounterType {
     GROWTH("growth"),
     HATCHLING("hatchling"),
     HEALING("healing"),
+    HEXPROOF("hexproof"),
     HIT("hit"),
     HOOFPRINT("hoofprint"),
     HOUR("hour"),
@@ -203,6 +202,10 @@ public enum CounterType {
                 return new BoostCounter(-2, -2, amount);
             case DEATHTOUCH:
                 return new AbilityCounter(DeathtouchAbility.getInstance());
+            case FLYING:
+                return new AbilityCounter(FlyingAbility.getInstance());
+            case HEXPROOF:
+                return new AbilityCounter(HexproofAbility.getInstance());
             case LIFELINK:
                 return new AbilityCounter(LifelinkAbility.getInstance());
             case MENACE:
