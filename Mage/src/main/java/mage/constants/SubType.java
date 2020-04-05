@@ -258,6 +258,7 @@ public enum SubType {
     ORC("Orc", SubTypeSet.CreatureType),
     ORGG("Orgg", SubTypeSet.CreatureType),
     ORTOLAN("Ortolan", SubTypeSet.CreatureType, true),
+    OTTER("Otter", SubTypeSet.CreatureType),
     OUPHE("Ouphe", SubTypeSet.CreatureType),
     OX("Ox", SubTypeSet.CreatureType),
     OYSTER("Oyster", SubTypeSet.CreatureType),
