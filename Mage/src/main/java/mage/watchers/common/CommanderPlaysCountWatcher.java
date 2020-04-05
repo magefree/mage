@@ -5,9 +5,9 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.players.Player;
 import mage.watchers.Watcher;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -21,6 +21,7 @@ import java.util.UUID;
 public class CommanderPlaysCountWatcher extends Watcher {
 
     private final Map<UUID, Integer> playsCount = new HashMap<>();
+    private final Map<UUID, Integer> playerCount = new HashMap<>();
 
     public CommanderPlaysCountWatcher() {
         super(WatcherScope.GAME);
@@ -28,27 +29,31 @@ public class CommanderPlaysCountWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() != EventType.LAND_PLAYED && event.getType() != EventType.SPELL_CAST) {
+        if (event.getType() != EventType.LAND_PLAYED
+                && event.getType() != EventType.SPELL_CAST) {
             return;
         }
-
-        UUID possibleCommanderId = event.getSourceId();
-        boolean isCommanderObject = false;
-        for (Player player : game.getPlayers().values()) {
-            if (game.getCommandersIds(player).contains(possibleCommanderId)) {
-                isCommanderObject = true;
-                break;
-            }
+        boolean isCommanderObject = game
+                .getPlayerList()
+                .stream()
+                .map(game::getPlayer)
+                .map(game::getCommandersIds)
+                .flatMap(Collection::stream)
+                .anyMatch(event.getSourceId()::equals);
+        if (!isCommanderObject || event.getZone() != Zone.COMMAND) {
+            return;
         }
-
-        if (isCommanderObject && event.getZone() == Zone.COMMAND) {
-            int count = playsCount.getOrDefault(possibleCommanderId, 0);
-            count++;
-            playsCount.put(possibleCommanderId, count);
-        }
+        playsCount.putIfAbsent(event.getSourceId(), 0);
+        playsCount.computeIfPresent(event.getSourceId(), (u, i) -> i + 1);
+        playerCount.putIfAbsent(event.getPlayerId(), 0);
+        playerCount.compute(event.getPlayerId(), (u, i) -> i + 1);
     }
 
     public int getPlaysCount(UUID commanderId) {
         return this.playsCount.getOrDefault(commanderId, 0);
+    }
+
+    public int getPlayerCount(UUID playerId) {
+        return this.playerCount.getOrDefault(playerId, 0);
     }
 }
