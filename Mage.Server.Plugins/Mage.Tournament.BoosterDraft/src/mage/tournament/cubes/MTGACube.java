@@ -3,9 +3,9 @@ package mage.tournament.cubes;
 
 import mage.game.draft.DraftCube;
 
-public class AdamStyborskisPauperCube extends DraftCube {
+public class MTGACube extends DraftCube {
 
-    public AdamStyborskisPauperCube() {
+    public MTGACube() {
         super("MTGA Cube"); // https://magic.wizards.com/en/articles/archive/magic-digital/mtg-arena-cube-sealed-card-list-2020-04-03
 
         cubeCards.add(new CardIdentity("Adanto Vanguard", ""));
