@@ -18,6 +18,7 @@ public final class Commander2020Edition extends ExpansionSet {
     private Commander2020Edition() {
         super("Commander 2020 Edition", "C20", ExpansionSet.buildDate(2020, 4, 24), SetType.SUPPLEMENTAL);
         this.blockName = "Command Zone";
+        this.hasBasicLands = false; // remove when basics are available
 
         cards.add(new SetCardInfo("Ajani Unyielding", 201, Rarity.MYTHIC, mage.cards.a.AjaniUnyielding.class));
         cards.add(new SetCardInfo("Alesha, Who Smiles at Death", 143, Rarity.RARE, mage.cards.a.AleshaWhoSmilesAtDeath.class));

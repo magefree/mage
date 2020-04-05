@@ -25,6 +25,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
         this.maxCardNumberInBooster = 274;
+        this.hasBasicLands = false; // remove when basics are available
 
         cards.add(new SetCardInfo("Boon of the Wish-Giver", 43, Rarity.UNCOMMON, mage.cards.b.BoonOfTheWishGiver.class));
         cards.add(new SetCardInfo("Bristling Boar", 146, Rarity.COMMON, mage.cards.b.BristlingBoar.class));
