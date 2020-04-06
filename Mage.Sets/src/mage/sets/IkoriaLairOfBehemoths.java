@@ -35,6 +35,8 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Boon of the Wish-Giver", 43, Rarity.UNCOMMON, mage.cards.b.BoonOfTheWishGiver.class));
         cards.add(new SetCardInfo("Bristling Boar", 146, Rarity.COMMON, mage.cards.b.BristlingBoar.class));
         cards.add(new SetCardInfo("Call of the Death-Dweller", 78, Rarity.UNCOMMON, mage.cards.c.CallOfTheDeathDweller.class));
+        cards.add(new SetCardInfo("Capture Sphere", 44, Rarity.COMMON, mage.cards.c.CaptureSphere.class));
+        cards.add(new SetCardInfo("Cathartic Reunion", 110, Rarity.COMMON, mage.cards.c.CatharticReunion.class));
         cards.add(new SetCardInfo("Cavern Whisperer", 79, Rarity.COMMON, mage.cards.c.CavernWhisperer.class));
         cards.add(new SetCardInfo("Chittering Harvester", 80, Rarity.UNCOMMON, mage.cards.c.ChitteringHarvester.class));
         cards.add(new SetCardInfo("Cloudpiercer", 112, Rarity.COMMON, mage.cards.c.Cloudpiercer.class));
@@ -95,27 +97,30 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
     }
 
     static final List<String> mutateNames = Arrays.asList(
-            "Otrimi, the Ever-Playful",
-            "Souvenir Snatcher",
-            "Mindleecher",
-            "Huntmaster Liger",
             "Archipelagore",
-            "Dreamtail Heron",
-            "Pollywog Symbiote",
-            "Pouncing Shoreshark",
+            "Auspicious Starrix",
+            "Brokkos, Apex of Forever",
             "Cavern Whisperer",
             "Chittering Harvester",
-            "Dirge Bat",
-            "Insatiable Hemophage",
             "Cloudpiercer",
+            "Cubwarden",
+            "Dirge Bat",
+            "Dreamtail Heron",
             "Everquill Phoenix",
-            "Auspicious Starrix",
             "Gemrazer",
             "Glowstone Recluse",
-            "Brokkos, Apex of Forever",
+            "Huntmaster Liger",
             "Illuna, Apex of Wishes",
+            "Insatiable Hemophage",
+            "Lore Drakkis",
+            "Migratory Greathorn",
+            "Mindleecher",
             "Nethroi, Apex of Death",
+            "Otrimi, the Ever-Playful",
+            "Pouncing Shoreshark",
+            "Sea-Dasher Octopus",
             "Snapdax, Apex of the Hunt",
+            "Souvenir Snatcher",
             "Trumpeting Gnarr",
             "Vadrok, Apex of Thunder"
     );
