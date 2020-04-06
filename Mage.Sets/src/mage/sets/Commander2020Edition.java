@@ -46,6 +46,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Masked Admirers", 163, Rarity.RARE, mage.cards.m.MaskedAdmirers.class));
         cards.add(new SetCardInfo("Nahiri, the Harbinger", 223, Rarity.MYTHIC, mage.cards.n.NahiriTheHarbinger.class));
         cards.add(new SetCardInfo("Netherborn Altar", 45, Rarity.RARE, mage.cards.n.NetherbornAltar.class));
+        cards.add(new SetCardInfo("Nikara, Lair Scavenger", 3, Rarity.MYTHIC, mage.cards.n.NikaraLairScavenger.class));
         cards.add(new SetCardInfo("Nissa, Steward of Elements", 224, Rarity.MYTHIC, mage.cards.n.NissaStewardOfElements.class));
         cards.add(new SetCardInfo("Obscuring Haze", 61, Rarity.RARE, mage.cards.o.ObscuringHaze.class));
         cards.add(new SetCardInfo("Otrimi, the Ever-Playful", 12, Rarity.COMMON, mage.cards.o.OtrimiTheEverPlayful.class));
