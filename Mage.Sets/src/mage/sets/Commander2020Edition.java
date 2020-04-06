@@ -27,6 +27,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Astral Drift", 76, Rarity.RARE, mage.cards.a.AstralDrift.class));
         cards.add(new SetCardInfo("Boneyard Mycodrax", 40, Rarity.RARE, mage.cards.b.BoneyardMycodrax.class));
         cards.add(new SetCardInfo("Brallin, Skyshark Rider", 4, Rarity.MYTHIC, mage.cards.b.BrallinSkysharkRider.class));
+        cards.add(new SetCardInfo("Call the Coppercoats", 23, Rarity.RARE, mage.cards.c.CallTheCoppercoats.class));
         cards.add(new SetCardInfo("Command Tower", 264, Rarity.COMMON, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Commander's Sphere", 240, Rarity.COMMON, mage.cards.c.CommandersSphere.class));
         cards.add(new SetCardInfo("Crop Rotation", 169, Rarity.COMMON, mage.cards.c.CropRotation.class));
