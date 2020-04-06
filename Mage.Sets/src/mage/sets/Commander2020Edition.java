@@ -35,6 +35,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Curious Herd", 59, Rarity.RARE, mage.cards.c.CuriousHerd.class));
         cards.add(new SetCardInfo("Daring Fiendbonder", 41, Rarity.RARE, mage.cards.d.DaringFiendbonder.class));
         cards.add(new SetCardInfo("Deadly Tempest", 131, Rarity.RARE, mage.cards.d.DeadlyTempest.class));
+        cards.add(new SetCardInfo("Deflecting Swat", 50, Rarity.RARE, mage.cards.d.DeflectingSwat.class));
         cards.add(new SetCardInfo("Dismantling Wave", 25, Rarity.RARE, mage.cards.d.DismantlingWave.class));
         cards.add(new SetCardInfo("Eternal Dragon", 88, Rarity.RARE, mage.cards.e.EternalDragon.class));
         cards.add(new SetCardInfo("Flawless Maneuver", 26, Rarity.RARE, mage.cards.f.FlawlessManeuver.class));
