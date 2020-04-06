@@ -12,6 +12,35 @@ import java.util.List;
  */
 public final class Commander2020Edition extends ExpansionSet {
 
+    private static final List<String> mutateNames = Arrays.asList(
+            "Archipelagore",
+            "Auspicious Starrix",
+            "Brokkos, Apex of Forever",
+            "Cavern Whisperer",
+            "Chittering Harvester",
+            "Cloudpiercer",
+            "Cubwarden",
+            "Dirge Bat",
+            "Dreamtail Heron",
+            "Everquill Phoenix",
+            "Gemrazer",
+            "Glowstone Recluse",
+            "Huntmaster Liger",
+            "Illuna, Apex of Wishes",
+            "Insatiable Hemophage",
+            "Lore Drakkis",
+            "Migratory Greathorn",
+            "Mindleecher",
+            "Nethroi, Apex of Death",
+            "Otrimi, the Ever-Playful",
+            "Pouncing Shoreshark",
+            "Sea-Dasher Octopus",
+            "Snapdax, Apex of the Hunt",
+            "Souvenir Snatcher",
+            "Trumpeting Gnarr",
+            "Vadrok, Apex of Thunder"
+    );
+
     private static final Commander2020Edition instance = new Commander2020Edition();
 
     public static Commander2020Edition getInstance() {
@@ -70,33 +99,4 @@ public final class Commander2020Edition extends ExpansionSet {
 
         cards.removeIf(setCardInfo -> mutateNames.contains(setCardInfo.getName())); // remove when mutate is implemented
     }
-
-    private static final List<String> mutateNames = Arrays.asList(
-            "Archipelagore",
-            "Auspicious Starrix",
-            "Brokkos, Apex of Forever",
-            "Cavern Whisperer",
-            "Chittering Harvester",
-            "Cloudpiercer",
-            "Cubwarden",
-            "Dirge Bat",
-            "Dreamtail Heron",
-            "Everquill Phoenix",
-            "Gemrazer",
-            "Glowstone Recluse",
-            "Huntmaster Liger",
-            "Illuna, Apex of Wishes",
-            "Insatiable Hemophage",
-            "Lore Drakkis",
-            "Migratory Greathorn",
-            "Mindleecher",
-            "Nethroi, Apex of Death",
-            "Otrimi, the Ever-Playful",
-            "Pouncing Shoreshark",
-            "Sea-Dasher Octopus",
-            "Snapdax, Apex of the Hunt",
-            "Souvenir Snatcher",
-            "Trumpeting Gnarr",
-            "Vadrok, Apex of Thunder"
-    );
 }
