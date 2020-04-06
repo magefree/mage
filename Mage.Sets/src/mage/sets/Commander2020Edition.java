@@ -31,6 +31,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Command Tower", 264, Rarity.COMMON, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Commander's Sphere", 240, Rarity.COMMON, mage.cards.c.CommandersSphere.class));
         cards.add(new SetCardInfo("Crop Rotation", 169, Rarity.COMMON, mage.cards.c.CropRotation.class));
+        cards.add(new SetCardInfo("Cryptic Trilobite", 21, Rarity.RARE, mage.cards.c.CrypticTrilobite.class));
         cards.add(new SetCardInfo("Curious Herd", 59, Rarity.RARE, mage.cards.c.CuriousHerd.class));
         cards.add(new SetCardInfo("Daring Fiendbonder", 41, Rarity.RARE, mage.cards.d.DaringFiendbonder.class));
         cards.add(new SetCardInfo("Deadly Tempest", 131, Rarity.RARE, mage.cards.d.DeadlyTempest.class));
