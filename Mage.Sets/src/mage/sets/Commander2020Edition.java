@@ -35,7 +35,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Dismantling Wave", 25, Rarity.RARE, mage.cards.d.DismantlingWave.class));
         cards.add(new SetCardInfo("Eternal Dragon", 88, Rarity.RARE, mage.cards.e.EternalDragon.class));
         cards.add(new SetCardInfo("Flawless Maneuver", 26, Rarity.RARE, mage.cards.f.FlawlessManeuver.class));
-        cards.add(new SetCardInfo("Fluctuator", 241, Rarity.COMMON, mage.cards.f.Fluctuator.class));
+        cards.add(new SetCardInfo("Fluctuator", 241, Rarity.RARE, mage.cards.f.Fluctuator.class));
         cards.add(new SetCardInfo("Jace, Architect of Thought", 114, Rarity.MYTHIC, mage.cards.j.JaceArchitectOfThought.class));
         cards.add(new SetCardInfo("Jirina Kudro", 8, Rarity.MYTHIC, mage.cards.j.JirinaKudro.class));
         cards.add(new SetCardInfo("Kathril, Aspect Warper", 10, Rarity.MYTHIC, mage.cards.k.KathrilAspectWarper.class));
@@ -43,6 +43,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Masked Admirers", 163, Rarity.RARE, mage.cards.m.MaskedAdmirers.class));
         cards.add(new SetCardInfo("Nahiri, the Harbinger", 223, Rarity.MYTHIC, mage.cards.n.NahiriTheHarbinger.class));
         cards.add(new SetCardInfo("Netherborn Altar", 45, Rarity.RARE, mage.cards.n.NetherbornAltar.class));
+        cards.add(new SetCardInfo("Nissa, Steward of Elements", 224, Rarity.MYTHIC, mage.cards.n.NissaStewardOfElements.class));
         cards.add(new SetCardInfo("Obscuring Haze", 61, Rarity.RARE, mage.cards.o.ObscuringHaze.class));
         cards.add(new SetCardInfo("Otrimi, the Ever-Playful", 12, Rarity.COMMON, mage.cards.o.OtrimiTheEverPlayful.class));
         cards.add(new SetCardInfo("Path of Ancestry", 298, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
