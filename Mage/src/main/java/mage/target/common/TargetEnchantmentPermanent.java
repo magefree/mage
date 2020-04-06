@@ -1,18 +1,16 @@
-
-
 package mage.target.common;
 
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.target.TargetPermanent;
 
 /**
- *
  * @author LevelX2
  */
 public class TargetEnchantmentPermanent extends TargetPermanent {
-    
+
     public TargetEnchantmentPermanent() {
-        this(1, 1, new FilterEnchantmentPermanent(), false);
+        this(1);
     }
 
     public TargetEnchantmentPermanent(FilterEnchantmentPermanent filter) {
@@ -20,7 +18,11 @@ public class TargetEnchantmentPermanent extends TargetPermanent {
     }
 
     public TargetEnchantmentPermanent(int numTargets) {
-        this(numTargets, numTargets, new FilterEnchantmentPermanent(), false);
+        this(numTargets, numTargets);
+    }
+
+    public TargetEnchantmentPermanent(int minNumTargets, int maxNumTargets) {
+        this(minNumTargets, maxNumTargets, StaticFilters.FILTER_ENCHANTMENT_PERMANENT, false);
     }
 
     public TargetEnchantmentPermanent(int minNumTargets, int maxNumTargets, FilterEnchantmentPermanent filter, boolean notTarget) {

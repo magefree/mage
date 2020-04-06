@@ -30,6 +30,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         this.maxCardNumberInBooster = 274;
         this.hasBasicLands = false; // remove when basics are available
 
+        cards.add(new SetCardInfo("Barrier Breach", 145, Rarity.UNCOMMON, mage.cards.b.BarrierBreach.class));
         cards.add(new SetCardInfo("Bastion of Remembrance", 73, Rarity.UNCOMMON, mage.cards.b.BastionOfRemembrance.class));
         cards.add(new SetCardInfo("Blood Curdle", 75, Rarity.COMMON, mage.cards.b.BloodCurdle.class));
         cards.add(new SetCardInfo("Boon of the Wish-Giver", 43, Rarity.UNCOMMON, mage.cards.b.BoonOfTheWishGiver.class));
