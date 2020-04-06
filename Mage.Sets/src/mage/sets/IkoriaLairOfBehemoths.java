@@ -103,7 +103,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.removeIf(setCardInfo -> mutateNames.contains(setCardInfo.getName())); // remove when mutate is implemented
     }
 
-    static final List<String> mutateNames = Arrays.asList(
+    private static final List<String> mutateNames = Arrays.asList(
             "Archipelagore",
             "Auspicious Starrix",
             "Brokkos, Apex of Forever",

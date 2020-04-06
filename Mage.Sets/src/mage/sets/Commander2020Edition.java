@@ -4,6 +4,9 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * @author TheElk801
  */
@@ -65,6 +68,35 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Trynn, Champion of Freedom", 1, Rarity.MYTHIC, mage.cards.t.TrynnChampionOfFreedom.class));
         cards.add(new SetCardInfo("Villainous Wealth", 233, Rarity.RARE, mage.cards.v.VillainousWealth.class));
 
-        cards.removeIf(setCardInfo -> IkoriaLairOfBehemoths.mutateNames.contains(setCardInfo.getName())); // remove when mutate is implemented
+        cards.removeIf(setCardInfo -> mutateNames.contains(setCardInfo.getName())); // remove when mutate is implemented
     }
+
+    private static final List<String> mutateNames = Arrays.asList(
+            "Archipelagore",
+            "Auspicious Starrix",
+            "Brokkos, Apex of Forever",
+            "Cavern Whisperer",
+            "Chittering Harvester",
+            "Cloudpiercer",
+            "Cubwarden",
+            "Dirge Bat",
+            "Dreamtail Heron",
+            "Everquill Phoenix",
+            "Gemrazer",
+            "Glowstone Recluse",
+            "Huntmaster Liger",
+            "Illuna, Apex of Wishes",
+            "Insatiable Hemophage",
+            "Lore Drakkis",
+            "Migratory Greathorn",
+            "Mindleecher",
+            "Nethroi, Apex of Death",
+            "Otrimi, the Ever-Playful",
+            "Pouncing Shoreshark",
+            "Sea-Dasher Octopus",
+            "Snapdax, Apex of the Hunt",
+            "Souvenir Snatcher",
+            "Trumpeting Gnarr",
+            "Vadrok, Apex of Thunder"
+    );
 }
