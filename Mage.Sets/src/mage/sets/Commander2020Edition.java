@@ -61,5 +61,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("The Locust God", 219, Rarity.MYTHIC, mage.cards.t.TheLocustGod.class));
         cards.add(new SetCardInfo("Trynn, Champion of Freedom", 1, Rarity.MYTHIC, mage.cards.t.TrynnChampionOfFreedom.class));
         cards.add(new SetCardInfo("Villainous Wealth", 233, Rarity.RARE, mage.cards.v.VillainousWealth.class));
+
+        cards.removeIf(setCardInfo -> IkoriaLairOfBehemoths.mutateNames.contains(setCardInfo.getName())); // remove when mutate is implemented
     }
 }

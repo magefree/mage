@@ -4,6 +4,9 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * @author TheElk801
  */
@@ -87,5 +90,33 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Wingfold Pteron", 71, Rarity.COMMON, mage.cards.w.WingfoldPteron.class));
         cards.add(new SetCardInfo("Zagoth Crystal", 242, Rarity.UNCOMMON, mage.cards.z.ZagothCrystal.class));
         cards.add(new SetCardInfo("Zagoth Mamba", 106, Rarity.UNCOMMON, mage.cards.z.ZagothMamba.class));
+
+        cards.removeIf(setCardInfo -> mutateNames.contains(setCardInfo.getName())); // remove when mutate is implemented
     }
+
+    static final List<String> mutateNames = Arrays.asList(
+            "Otrimi, the Ever-Playful",
+            "Souvenir Snatcher",
+            "Mindleecher",
+            "Huntmaster Liger",
+            "Archipelagore",
+            "Dreamtail Heron",
+            "Pollywog Symbiote",
+            "Pouncing Shoreshark",
+            "Cavern Whisperer",
+            "Chittering Harvester",
+            "Dirge Bat",
+            "Insatiable Hemophage",
+            "Cloudpiercer",
+            "Everquill Phoenix",
+            "Auspicious Starrix",
+            "Gemrazer",
+            "Glowstone Recluse",
+            "Brokkos, Apex of Forever",
+            "Illuna, Apex of Wishes",
+            "Nethroi, Apex of Death",
+            "Snapdax, Apex of the Hunt",
+            "Trumpeting Gnarr",
+            "Vadrok, Apex of Thunder"
+    );
 }
