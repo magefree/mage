@@ -76,6 +76,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Fierce Guardianship", 35, Rarity.RARE, mage.cards.f.FierceGuardianship.class));
         cards.add(new SetCardInfo("Flawless Maneuver", 26, Rarity.RARE, mage.cards.f.FlawlessManeuver.class));
         cards.add(new SetCardInfo("Fluctuator", 241, Rarity.RARE, mage.cards.f.Fluctuator.class));
+        cards.add(new SetCardInfo("Glademuse", 60, Rarity.RARE, mage.cards.g.Glademuse.class));
         cards.add(new SetCardInfo("Herald of the Forgotten", 27, Rarity.RARE, mage.cards.h.HeraldOfTheForgotten.class));
         cards.add(new SetCardInfo("Jace, Architect of Thought", 114, Rarity.MYTHIC, mage.cards.j.JaceArchitectOfThought.class));
         cards.add(new SetCardInfo("Jirina Kudro", 8, Rarity.MYTHIC, mage.cards.j.JirinaKudro.class));
