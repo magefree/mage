@@ -442,8 +442,8 @@ public class TablesPanel extends javax.swing.JPanel {
                     return;
                 }
                 String action = (String) matchesModel.getValueAt(modelRow, MatchesTableModel.COLUMN_ACTION);
-                switch (action) {
-                    case "Replay":
+                switch (TableAction.toAction(action)) {
+                    case Replay:
                         java.util.List<UUID> gameList = matchesModel.getListofGames(modelRow);
                         if (gameList != null && !gameList.isEmpty()) {
                             if (gameList.size() == 1) {
@@ -454,7 +454,7 @@ public class TablesPanel extends javax.swing.JPanel {
                         }
                         // MageFrame.getDesktop().showTournament(tournamentId);
                         break;
-                    case "Show":
+                    case Show:
                         if (matchesModel.isTournament(modelRow)) {
                             LOGGER.info("Showing tournament table " + matchesModel.getTableId(modelRow));
                             SessionHandler.watchTable(roomId, matchesModel.getTableId(modelRow));
