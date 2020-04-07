@@ -57,6 +57,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Animist's Awakening", 166, Rarity.RARE, mage.cards.a.AnimistsAwakening.class));
         cards.add(new SetCardInfo("Arcane Signet", 237, Rarity.COMMON, mage.cards.a.ArcaneSignet.class));
         cards.add(new SetCardInfo("Astral Drift", 76, Rarity.RARE, mage.cards.a.AstralDrift.class));
+        cards.add(new SetCardInfo("Avenging Huntbonder", 22, Rarity.RARE, mage.cards.a.AvengingHuntbonder.class));
         cards.add(new SetCardInfo("Boneyard Mycodrax", 40, Rarity.RARE, mage.cards.b.BoneyardMycodrax.class));
         cards.add(new SetCardInfo("Brallin, Skyshark Rider", 4, Rarity.MYTHIC, mage.cards.b.BrallinSkysharkRider.class));
         cards.add(new SetCardInfo("Call the Coppercoats", 23, Rarity.RARE, mage.cards.c.CallTheCoppercoats.class));
