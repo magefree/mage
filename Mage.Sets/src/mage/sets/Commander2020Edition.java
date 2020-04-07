@@ -30,10 +30,12 @@ public final class Commander2020Edition extends ExpansionSet {
             "Illuna, Apex of Wishes",
             "Insatiable Hemophage",
             "Lore Drakkis",
+            "Majestic Auricorn",
             "Migratory Greathorn",
             "Mindleecher",
             "Nethroi, Apex of Death",
             "Otrimi, the Ever-Playful",
+            "Parcelbeast",
             "Pouncing Shoreshark",
             "Sawtusk Demolisher",
             "Sea-Dasher Octopus",
@@ -84,6 +86,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Jirina Kudro", 8, Rarity.MYTHIC, mage.cards.j.JirinaKudro.class));
         cards.add(new SetCardInfo("Kathril, Aspect Warper", 10, Rarity.MYTHIC, mage.cards.k.KathrilAspectWarper.class));
         cards.add(new SetCardInfo("Lifecrafter's Bestiary", 244, Rarity.RARE, mage.cards.l.LifecraftersBestiary.class));
+        cards.add(new SetCardInfo("Lightning Rift", 155, Rarity.UNCOMMON, mage.cards.l.LightningRift.class));
         cards.add(new SetCardInfo("Masked Admirers", 183, Rarity.RARE, mage.cards.m.MaskedAdmirers.class));
         cards.add(new SetCardInfo("Nahiri, the Harbinger", 223, Rarity.MYTHIC, mage.cards.n.NahiriTheHarbinger.class));
         cards.add(new SetCardInfo("Netherborn Altar", 45, Rarity.RARE, mage.cards.n.NetherbornAltar.class));
