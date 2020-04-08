@@ -32,15 +32,11 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
             "Lore Drakkis",
             "Majestic Auricorn",
             "Migratory Greathorn",
-            "Mindleecher",
             "Nethroi, Apex of Death",
-            "Otrimi, the Ever-Playful",
             "Parcelbeast",
             "Pouncing Shoreshark",
-            "Sawtusk Demolisher",
             "Sea-Dasher Octopus",
             "Snapdax, Apex of the Hunt",
-            "Souvenir Snatcher",
             "Trumpeting Gnarr",
             "Vadrok, Apex of Thunder"
     );

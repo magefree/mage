@@ -13,36 +13,10 @@ import java.util.List;
 public final class Commander2020Edition extends ExpansionSet {
 
     private static final List<String> mutateNames = Arrays.asList(
-            "Archipelagore",
-            "Auspicious Starrix",
-            "Boneyard Lurker",
-            "Brokkos, Apex of Forever",
-            "Cavern Whisperer",
-            "Chittering Harvester",
-            "Cloudpiercer",
-            "Cubwarden",
-            "Dirge Bat",
-            "Dreamtail Heron",
-            "Everquill Phoenix",
-            "Gemrazer",
-            "Glowstone Recluse",
-            "Huntmaster Liger",
-            "Illuna, Apex of Wishes",
-            "Insatiable Hemophage",
-            "Lore Drakkis",
-            "Majestic Auricorn",
-            "Migratory Greathorn",
             "Mindleecher",
-            "Nethroi, Apex of Death",
             "Otrimi, the Ever-Playful",
-            "Parcelbeast",
-            "Pouncing Shoreshark",
             "Sawtusk Demolisher",
-            "Sea-Dasher Octopus",
-            "Snapdax, Apex of the Hunt",
-            "Souvenir Snatcher",
-            "Trumpeting Gnarr",
-            "Vadrok, Apex of Thunder"
+            "Souvenir Snatcher"
     );
 
     private static final Commander2020Edition instance = new Commander2020Edition();
@@ -109,6 +83,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Comet Storm", 148, Rarity.MYTHIC, mage.cards.c.CometStorm.class));
         cards.add(new SetCardInfo("Command Tower", 264, Rarity.COMMON, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Commander's Sphere", 240, Rarity.COMMON, mage.cards.c.CommandersSphere.class));
+        cards.add(new SetCardInfo("Commune with Lava", 149, Rarity.RARE, mage.cards.c.CommuneWithLava.class));
         cards.add(new SetCardInfo("Crackling Doom", 205, Rarity.RARE, mage.cards.c.CracklingDoom.class));
         cards.add(new SetCardInfo("Crackling Drake", 206, Rarity.UNCOMMON, mage.cards.c.CracklingDrake.class));
         cards.add(new SetCardInfo("Crop Rotation", 169, Rarity.COMMON, mage.cards.c.CropRotation.class));
@@ -148,9 +123,10 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Evolution Charm", 171, Rarity.COMMON, mage.cards.e.EvolutionCharm.class));
         cards.add(new SetCardInfo("Exotic Orchard", 273, Rarity.RARE, mage.cards.e.ExoticOrchard.class));
         cards.add(new SetCardInfo("Fierce Guardianship", 35, Rarity.RARE, mage.cards.f.FierceGuardianship.class));
+        cards.add(new SetCardInfo("Find // Finality", 225, Rarity.RARE, mage.cards.f.FindFinality.class));
         cards.add(new SetCardInfo("Flawless Maneuver", 26, Rarity.RARE, mage.cards.f.FlawlessManeuver.class));
         cards.add(new SetCardInfo("Fluctuator", 241, Rarity.RARE, mage.cards.f.Fluctuator.class));
-        cards.add(new SetCardInfo("Forgotten Cave", 274, Rarity.COMMON, mage.cards.f.ForgottenCave.class));
+        cards.add(new SetCardInfo("Forgotten Cave", 274, Rarity.UNCOMMON, mage.cards.f.ForgottenCave.class));
         cards.add(new SetCardInfo("Frantic Search", 111, Rarity.COMMON, mage.cards.f.FranticSearch.class));
         cards.add(new SetCardInfo("Frontier Bivouac", 275, Rarity.UNCOMMON, mage.cards.f.FrontierBivouac.class));
         cards.add(new SetCardInfo("Frontline Medic", 89, Rarity.RARE, mage.cards.f.FrontlineMedic.class));
@@ -274,27 +250,36 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Shriekmaw", 136, Rarity.UNCOMMON, mage.cards.s.Shriekmaw.class));
         cards.add(new SetCardInfo("Silent Arbiter", 250, Rarity.RARE, mage.cards.s.SilentArbiter.class));
         cards.add(new SetCardInfo("Silvar, Devourer of the Free", 15, Rarity.MYTHIC, mage.cards.s.SilvarDevourerOfTheFree.class));
+        cards.add(new SetCardInfo("Simic Growth Chamber", 311, Rarity.UNCOMMON, mage.cards.s.SimicGrowthChamber.class));
         cards.add(new SetCardInfo("Skullclamp", 251, Rarity.UNCOMMON, mage.cards.s.Skullclamp.class));
         cards.add(new SetCardInfo("Skullwinder", 189, Rarity.UNCOMMON, mage.cards.s.Skullwinder.class));
+        cards.add(new SetCardInfo("Skycloud Expanse", 312, Rarity.RARE, mage.cards.s.SkycloudExpanse.class));
         cards.add(new SetCardInfo("Slice and Dice", 159, Rarity.UNCOMMON, mage.cards.s.SliceAndDice.class));
         cards.add(new SetCardInfo("Slice in Twain", 190, Rarity.UNCOMMON, mage.cards.s.SliceInTwain.class));
+        cards.add(new SetCardInfo("Smoldering Crater", 313, Rarity.COMMON, mage.cards.s.SmolderingCrater.class));
+        cards.add(new SetCardInfo("Smoldering Marsh", 314, Rarity.RARE, mage.cards.s.SmolderingMarsh.class));
+        cards.add(new SetCardInfo("Soaring Seacliff", 315, Rarity.COMMON, mage.cards.s.SoaringSeacliff.class));
         cards.add(new SetCardInfo("Sol Ring", 252, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
         cards.add(new SetCardInfo("Solemn Recruit", 99, Rarity.RARE, mage.cards.s.SolemnRecruit.class));
         cards.add(new SetCardInfo("Solemn Simulacrum", 253, Rarity.RARE, mage.cards.s.SolemnSimulacrum.class));
         cards.add(new SetCardInfo("Soul of Innistrad", 137, Rarity.MYTHIC, mage.cards.s.SoulOfInnistrad.class));
         cards.add(new SetCardInfo("Soulflayer", 138, Rarity.RARE, mage.cards.s.Soulflayer.class));
         cards.add(new SetCardInfo("Souvenir Snatcher", 38, Rarity.RARE, mage.cards.s.SouvenirSnatcher.class));
+        cards.add(new SetCardInfo("Spinerock Knoll", 316, Rarity.RARE, mage.cards.s.SpinerockKnoll.class));
         cards.add(new SetCardInfo("Spirit Cairn", 100, Rarity.UNCOMMON, mage.cards.s.SpiritCairn.class));
         cards.add(new SetCardInfo("Splinterfright", 191, Rarity.RARE, mage.cards.s.Splinterfright.class));
         cards.add(new SetCardInfo("Starstorm", 160, Rarity.RARE, mage.cards.s.Starstorm.class));
         cards.add(new SetCardInfo("Strength of the Tajuru", 192, Rarity.RARE, mage.cards.s.StrengthOfTheTajuru.class));
         cards.add(new SetCardInfo("Sun Titan", 101, Rarity.MYTHIC, mage.cards.s.SunTitan.class));
         cards.add(new SetCardInfo("Sunblast Angel", 102, Rarity.RARE, mage.cards.s.SunblastAngel.class));
+        cards.add(new SetCardInfo("Sungrass Prairie", 317, Rarity.RARE, mage.cards.s.SungrassPrairie.class));
+        cards.add(new SetCardInfo("Sunken Hollow", 318, Rarity.RARE, mage.cards.s.SunkenHollow.class));
         cards.add(new SetCardInfo("Surreal Memoir", 161, Rarity.UNCOMMON, mage.cards.s.SurrealMemoir.class));
         cards.add(new SetCardInfo("Swarm Intelligence", 124, Rarity.RARE, mage.cards.s.SwarmIntelligence.class));
         cards.add(new SetCardInfo("Swiftfoot Boots", 254, Rarity.UNCOMMON, mage.cards.s.SwiftfootBoots.class));
         cards.add(new SetCardInfo("Talrand, Sky Summoner", 125, Rarity.RARE, mage.cards.t.TalrandSkySummoner.class));
         cards.add(new SetCardInfo("Tectonic Reformation", 162, Rarity.RARE, mage.cards.t.TectonicReformation.class));
+        cards.add(new SetCardInfo("Temple of the False God", 319, Rarity.UNCOMMON, mage.cards.t.TempleOfTheFalseGod.class));
         cards.add(new SetCardInfo("Temur Charm", 230, Rarity.UNCOMMON, mage.cards.t.TemurCharm.class));
         cards.add(new SetCardInfo("Terminate", 231, Rarity.UNCOMMON, mage.cards.t.Terminate.class));
         cards.add(new SetCardInfo("Thalia's Lieutenant", 103, Rarity.RARE, mage.cards.t.ThaliasLieutenant.class));
@@ -306,6 +291,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Trygon Predator", 232, Rarity.UNCOMMON, mage.cards.t.TrygonPredator.class));
         cards.add(new SetCardInfo("Trynn, Champion of Freedom", 1, Rarity.MYTHIC, mage.cards.t.TrynnChampionOfFreedom.class));
         cards.add(new SetCardInfo("Unburial Rites", 139, Rarity.UNCOMMON, mage.cards.u.UnburialRites.class));
+        cards.add(new SetCardInfo("Unclaimed Territory", 320, Rarity.UNCOMMON, mage.cards.u.UnclaimedTerritory.class));
         cards.add(new SetCardInfo("Unexpectedly Absent", 106, Rarity.RARE, mage.cards.u.UnexpectedlyAbsent.class));
         cards.add(new SetCardInfo("Vampire Nighthawk", 140, Rarity.UNCOMMON, mage.cards.v.VampireNighthawk.class));
         cards.add(new SetCardInfo("Vastwood Hydra", 194, Rarity.RARE, mage.cards.v.VastwoodHydra.class));
@@ -315,10 +301,12 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Vorapede", 195, Rarity.MYTHIC, mage.cards.v.Vorapede.class));
         cards.add(new SetCardInfo("Whiplash Trap", 127, Rarity.COMMON, mage.cards.w.WhiplashTrap.class));
         cards.add(new SetCardInfo("Wilderness Reclamation", 196, Rarity.UNCOMMON, mage.cards.w.WildernessReclamation.class));
+        cards.add(new SetCardInfo("Windbrisk Heights", 321, Rarity.RARE, mage.cards.w.WindbriskHeights.class));
         cards.add(new SetCardInfo("Windfall", 128, Rarity.UNCOMMON, mage.cards.w.Windfall.class));
         cards.add(new SetCardInfo("Wort, the Raidmother", 234, Rarity.RARE, mage.cards.w.WortTheRaidmother.class));
         cards.add(new SetCardInfo("Wydwen, the Biting Gale", 235, Rarity.RARE, mage.cards.w.WydwenTheBitingGale.class));
         cards.add(new SetCardInfo("Xathrid Necromancer", 141, Rarity.RARE, mage.cards.x.XathridNecromancer.class));
+        cards.add(new SetCardInfo("Yavimaya Coast", 322, Rarity.RARE, mage.cards.y.YavimayaCoast.class));
         cards.add(new SetCardInfo("Yavimaya Dryad", 197, Rarity.UNCOMMON, mage.cards.y.YavimayaDryad.class));
         cards.add(new SetCardInfo("Zetalpa, Primal Dawn", 107, Rarity.RARE, mage.cards.z.ZetalpaPrimalDawn.class));
         cards.add(new SetCardInfo("Zulaport Cutthroat", 142, Rarity.UNCOMMON, mage.cards.z.ZulaportCutthroat.class));
