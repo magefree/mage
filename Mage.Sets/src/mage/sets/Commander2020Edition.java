@@ -97,6 +97,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Obscuring Haze", 61, Rarity.RARE, mage.cards.o.ObscuringHaze.class));
         cards.add(new SetCardInfo("Otrimi, the Ever-Playful", 12, Rarity.MYTHIC, mage.cards.o.OtrimiTheEverPlayful.class));
         cards.add(new SetCardInfo("Path of Ancestry", 298, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
+        cards.add(new SetCardInfo("Psychic Impetus", 37, Rarity.UNCOMMON, mage.cards.p.PsychicImpetus.class));
         cards.add(new SetCardInfo("Rashmi, Eternities Crafter", 229, Rarity.RARE, mage.cards.r.RashmiEternitiesCrafter.class));
         cards.add(new SetCardInfo("Shabraz, the Skyshark", 14, Rarity.MYTHIC, mage.cards.s.ShabrazTheSkyshark.class));
         cards.add(new SetCardInfo("Shared Animosity", 158, Rarity.RARE, mage.cards.s.SharedAnimosity.class));
