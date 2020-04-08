@@ -28,7 +28,7 @@ public final class DrannithStinger extends CardImpl {
 
         // Whenever you cycle another card, Drannith Stinger deals 1 damage to each opponent.
         this.addAbility(new CycleControllerTriggeredAbility(
-                new DamagePlayersEffect(1, TargetController.OPPONENT)
+                new DamagePlayersEffect(1, TargetController.OPPONENT), false, true
         ));
 
         // Cycling {1}
