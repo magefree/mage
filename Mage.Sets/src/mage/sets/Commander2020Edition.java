@@ -95,6 +95,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Daring Fiendbonder", 41, Rarity.RARE, mage.cards.d.DaringFiendbonder.class));
         cards.add(new SetCardInfo("Darkwater Catacombs", 265, Rarity.RARE, mage.cards.d.DarkwaterCatacombs.class));
         cards.add(new SetCardInfo("Deadbridge Chant", 207, Rarity.MYTHIC, mage.cards.d.DeadbridgeChant.class));
+        cards.add(new SetCardInfo("Deadly Rollick", 42, Rarity.RARE, mage.cards.d.DeadlyRollick.class));
         cards.add(new SetCardInfo("Deadly Tempest", 131, Rarity.RARE, mage.cards.d.DeadlyTempest.class));
         cards.add(new SetCardInfo("Dearly Departed", 84, Rarity.RARE, mage.cards.d.DearlyDeparted.class));
         cards.add(new SetCardInfo("Deathsprout", 208, Rarity.UNCOMMON, mage.cards.d.Deathsprout.class));
