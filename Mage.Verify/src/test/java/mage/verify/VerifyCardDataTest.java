@@ -93,6 +93,8 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_PT, "UST", "Garbage Elemental");
         skipListAddName(SKIP_LIST_PT, "UST", "Infinity Elemental");
         skipListAddName(SKIP_LIST_PT, "UNH", "Old Fogey");
+        // the following is temporary
+        skipListAddName(SKIP_LIST_PT, "IKO", "Chevill, Bane of Monsters");
 
         // color
         skipListCreate(SKIP_LIST_COLOR);
@@ -117,12 +119,6 @@ public class VerifyCardDataTest {
         // subtype
         skipListCreate(SKIP_LIST_SUBTYPE);
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Miss Demeanor");
-        // the following are temporary
-        subtypesToIgnore.add("Noble");
-        skipListAddName(SKIP_LIST_SUBTYPE, "AER", "Ridgescale Tusker");
-        skipListAddName(SKIP_LIST_SUBTYPE, "ME3", "Lady Caleria");
-        skipListAddName(SKIP_LIST_SUBTYPE, "LEG", "Lady Caleria");
-
 
         // number
         skipListCreate(SKIP_LIST_NUMBER);
