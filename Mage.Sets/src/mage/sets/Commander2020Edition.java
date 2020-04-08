@@ -101,6 +101,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Rashmi, Eternities Crafter", 229, Rarity.RARE, mage.cards.r.RashmiEternitiesCrafter.class));
         cards.add(new SetCardInfo("Shabraz, the Skyshark", 14, Rarity.MYTHIC, mage.cards.s.ShabrazTheSkyshark.class));
         cards.add(new SetCardInfo("Shared Animosity", 158, Rarity.RARE, mage.cards.s.SharedAnimosity.class));
+        cards.add(new SetCardInfo("Shiny Impetus", 55, Rarity.UNCOMMON, mage.cards.s.ShinyImpetus.class));
         cards.add(new SetCardInfo("Silent Arbiter", 250, Rarity.RARE, mage.cards.s.SilentArbiter.class));
         cards.add(new SetCardInfo("Silvar, Devourer of the Free", 15, Rarity.MYTHIC, mage.cards.s.SilvarDevourerOfTheFree.class));
         cards.add(new SetCardInfo("Sol Ring", 252, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
