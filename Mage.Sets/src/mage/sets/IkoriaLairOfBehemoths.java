@@ -32,6 +32,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
             "Lore Drakkis",
             "Majestic Auricorn",
             "Migratory Greathorn",
+            "Necropanther",
             "Nethroi, Apex of Death",
             "Parcelbeast",
             "Pouncing Shoreshark",
