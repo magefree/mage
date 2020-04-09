@@ -72,6 +72,7 @@ public final class Unstable extends ExpansionSet {
         cards.add(new SetCardInfo("Steamflogger Boss", 93, Rarity.RARE, mage.cards.s.SteamfloggerBoss.class));
         cards.add(new SetCardInfo("Steel Squirrel", 162, Rarity.UNCOMMON, mage.cards.s.SteelSquirrel.class));
         cards.add(new SetCardInfo("Summon the Pack", 74, Rarity.MYTHIC, mage.cards.s.SummonThePack.class));
+        cards.add(new SetCardInfo("Super-Duper Death Ray", 97, Rarity.UNCOMMON, mage.cards.s.SuperDuperDeathRay.class));
         cards.add(new SetCardInfo("Swamp", 214, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(FrameStyle.UST_FULL_ART_BASIC, false)));
         cards.add(new SetCardInfo("Sword of Dungeons & Dragons", 163, Rarity.MYTHIC, mage.cards.s.SwordOfDungeonsAndDragons.class));
         cards.add(new SetCardInfo("Target Minotaur", "98a", Rarity.COMMON, mage.cards.t.TargetMinotaur.class, NON_FULL_USE_VARIOUS));
