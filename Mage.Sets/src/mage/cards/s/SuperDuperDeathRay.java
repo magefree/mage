@@ -27,7 +27,7 @@ public final class SuperDuperDeathRay extends CardImpl {
 
         // Trample
         this.addAbility(new SimpleStaticAbility(new InfoEffect(
-                "Trample <i>(This spell can deal excess damage to its target’s controller.)</i>"
+                "Trample <i>(This spell can deal excess damage to its target's controller.)</i>"
         )));
 
         // Super-Duper Death Ray deals 4 damage to target creature.
