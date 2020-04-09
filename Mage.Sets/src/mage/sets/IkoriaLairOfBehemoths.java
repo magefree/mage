@@ -68,6 +68,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Boneyard Lurker", 178, Rarity.UNCOMMON, mage.cards.b.BoneyardLurker.class));
         cards.add(new SetCardInfo("Boon of the Wish-Giver", 43, Rarity.UNCOMMON, mage.cards.b.BoonOfTheWishGiver.class));
         cards.add(new SetCardInfo("Bristling Boar", 146, Rarity.COMMON, mage.cards.b.BristlingBoar.class));
+        cards.add(new SetCardInfo("Bushmeat Poacher", 77, Rarity.COMMON, mage.cards.b.BushmeatPoacher.class));
         cards.add(new SetCardInfo("Call of the Death-Dweller", 78, Rarity.UNCOMMON, mage.cards.c.CallOfTheDeathDweller.class));
         cards.add(new SetCardInfo("Capture Sphere", 44, Rarity.COMMON, mage.cards.c.CaptureSphere.class));
         cards.add(new SetCardInfo("Cathartic Reunion", 110, Rarity.COMMON, mage.cards.c.CatharticReunion.class));
