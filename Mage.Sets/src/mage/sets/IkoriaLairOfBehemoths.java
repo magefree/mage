@@ -81,6 +81,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Colossification", 148, Rarity.RARE, mage.cards.c.Colossification.class));
         cards.add(new SetCardInfo("Crystalline Giant", 234, Rarity.RARE, mage.cards.c.CrystallineGiant.class));
         cards.add(new SetCardInfo("Cubwarden", 7, Rarity.RARE, mage.cards.c.Cubwarden.class));
+        cards.add(new SetCardInfo("Cunning Nightbonder", 219, Rarity.UNCOMMON, mage.cards.c.CunningNightbonder.class));
         cards.add(new SetCardInfo("Death's Oasis", 182, Rarity.RARE, mage.cards.d.DeathsOasis.class));
         cards.add(new SetCardInfo("Dire Tactics", 183, Rarity.UNCOMMON, mage.cards.d.DireTactics.class));
         cards.add(new SetCardInfo("Dirge Bat", 84, Rarity.RARE, mage.cards.d.DirgeBat.class));
