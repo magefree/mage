@@ -94,6 +94,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Colossification", 148, Rarity.RARE, mage.cards.c.Colossification.class));
         cards.add(new SetCardInfo("Convolute", 45, Rarity.COMMON, mage.cards.c.Convolute.class));
         cards.add(new SetCardInfo("Corpse Churn", 81, Rarity.COMMON, mage.cards.c.CorpseChurn.class));
+        cards.add(new SetCardInfo("Crystacean", 46, Rarity.COMMON, mage.cards.c.Crystacean.class));
         cards.add(new SetCardInfo("Crystalline Giant", 234, Rarity.RARE, mage.cards.c.CrystallineGiant.class));
         cards.add(new SetCardInfo("Cubwarden", 7, Rarity.RARE, mage.cards.c.Cubwarden.class));
         cards.add(new SetCardInfo("Cunning Nightbonder", 219, Rarity.UNCOMMON, mage.cards.c.CunningNightbonder.class));
