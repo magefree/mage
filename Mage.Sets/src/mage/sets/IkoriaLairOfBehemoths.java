@@ -251,6 +251,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Voracious Greatshark", 70, Rarity.RARE, mage.cards.v.VoraciousGreatshark.class));
         cards.add(new SetCardInfo("Vulpikeet", 37, Rarity.COMMON, mage.cards.v.Vulpikeet.class));
         cards.add(new SetCardInfo("Weaponize the Monsters", 140, Rarity.UNCOMMON, mage.cards.w.WeaponizeTheMonsters.class));
+        cards.add(new SetCardInfo("Whirlwind of Thought", 215, Rarity.RARE, mage.cards.w.WhirlwindOfThought.class));
         cards.add(new SetCardInfo("Will of the All-Hunter", 38, Rarity.UNCOMMON, mage.cards.w.WillOfTheAllHunter.class));
         cards.add(new SetCardInfo("Wilt", 176, Rarity.COMMON, mage.cards.w.Wilt.class));
         cards.add(new SetCardInfo("Wind-Scarred Crag", 258, Rarity.COMMON, mage.cards.w.WindScarredCrag.class));
