@@ -152,6 +152,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Honey Mammoth", 158, Rarity.COMMON, mage.cards.h.HoneyMammoth.class));
         cards.add(new SetCardInfo("Hornbash Mentor", 159, Rarity.UNCOMMON, mage.cards.h.HornbashMentor.class));
         cards.add(new SetCardInfo("Huntmaster Liger", 16, Rarity.UNCOMMON, mage.cards.h.HuntmasterLiger.class));
+        cards.add(new SetCardInfo("Imposing Vantasaur", 17, Rarity.COMMON, mage.cards.i.ImposingVantasaur.class));
         cards.add(new SetCardInfo("Indatha Crystal", 235, Rarity.UNCOMMON, mage.cards.i.IndathaCrystal.class));
         cards.add(new SetCardInfo("Indatha Triome", 248, Rarity.RARE, mage.cards.i.IndathaTriome.class));
         cards.add(new SetCardInfo("Insatiable Hemophage", 93, Rarity.UNCOMMON, mage.cards.i.InsatiableHemophage.class));
