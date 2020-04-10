@@ -567,56 +567,56 @@ public class DraftPanel extends javax.swing.JPanel {
         pnlLeft.setVerifyInputWhenFocusTarget(false);
         pnlLeft.setLayout(new java.awt.GridLayout(8, 1));
 
-        lblPlayer01.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblPlayer01.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblPlayer01.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblPlayer01.setFocusable(false);
         lblPlayer01.setRequestFocusEnabled(false);
         lblPlayer01.setVerifyInputWhenFocusTarget(false);
         pnlLeft.add(lblPlayer01);
 
-        lblPlayer02.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblPlayer02.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblPlayer02.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblPlayer02.setFocusable(false);
         lblPlayer02.setRequestFocusEnabled(false);
         lblPlayer02.setVerifyInputWhenFocusTarget(false);
         pnlLeft.add(lblPlayer02);
 
-        lblPlayer03.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblPlayer03.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblPlayer03.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblPlayer03.setFocusable(false);
         lblPlayer03.setRequestFocusEnabled(false);
         lblPlayer03.setVerifyInputWhenFocusTarget(false);
         pnlLeft.add(lblPlayer03);
 
-        lblPlayer04.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblPlayer04.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblPlayer04.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblPlayer04.setFocusable(false);
         lblPlayer04.setRequestFocusEnabled(false);
         lblPlayer04.setVerifyInputWhenFocusTarget(false);
         pnlLeft.add(lblPlayer04);
 
-        lblPlayer05.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblPlayer05.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblPlayer05.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblPlayer05.setFocusable(false);
         lblPlayer05.setRequestFocusEnabled(false);
         lblPlayer05.setVerifyInputWhenFocusTarget(false);
         pnlLeft.add(lblPlayer05);
 
-        lblPlayer06.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblPlayer06.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblPlayer06.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblPlayer06.setFocusable(false);
         lblPlayer06.setRequestFocusEnabled(false);
         lblPlayer06.setVerifyInputWhenFocusTarget(false);
         pnlLeft.add(lblPlayer06);
 
-        lblPlayer07.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblPlayer07.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblPlayer07.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblPlayer07.setFocusable(false);
         lblPlayer07.setRequestFocusEnabled(false);
         lblPlayer07.setVerifyInputWhenFocusTarget(false);
         pnlLeft.add(lblPlayer07);
 
-        lblPlayer08.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblPlayer08.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblPlayer08.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblPlayer08.setFocusable(false);
         lblPlayer08.setRequestFocusEnabled(false);
@@ -647,56 +647,56 @@ public class DraftPanel extends javax.swing.JPanel {
         pnlRight.setVerifyInputWhenFocusTarget(false);
         pnlRight.setLayout(new java.awt.GridLayout(8, 1));
 
-        lblPlayer09.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblPlayer09.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblPlayer09.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblPlayer09.setFocusable(false);
         lblPlayer09.setRequestFocusEnabled(false);
         lblPlayer09.setVerifyInputWhenFocusTarget(false);
         pnlRight.add(lblPlayer09);
 
-        lblPlayer10.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblPlayer10.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblPlayer10.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblPlayer10.setFocusable(false);
         lblPlayer10.setRequestFocusEnabled(false);
         lblPlayer10.setVerifyInputWhenFocusTarget(false);
         pnlRight.add(lblPlayer10);
 
-        lblPlayer11.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblPlayer11.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblPlayer11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblPlayer11.setFocusable(false);
         lblPlayer11.setRequestFocusEnabled(false);
         lblPlayer11.setVerifyInputWhenFocusTarget(false);
         pnlRight.add(lblPlayer11);
 
-        lblPlayer12.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblPlayer12.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblPlayer12.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblPlayer12.setFocusable(false);
         lblPlayer12.setRequestFocusEnabled(false);
         lblPlayer12.setVerifyInputWhenFocusTarget(false);
         pnlRight.add(lblPlayer12);
 
-        lblPlayer13.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblPlayer13.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblPlayer13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblPlayer13.setFocusable(false);
         lblPlayer13.setRequestFocusEnabled(false);
         lblPlayer13.setVerifyInputWhenFocusTarget(false);
         pnlRight.add(lblPlayer13);
 
-        lblPlayer14.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblPlayer14.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblPlayer14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblPlayer14.setFocusable(false);
         lblPlayer14.setRequestFocusEnabled(false);
         lblPlayer14.setVerifyInputWhenFocusTarget(false);
         pnlRight.add(lblPlayer14);
 
-        lblPlayer15.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblPlayer15.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblPlayer15.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblPlayer15.setFocusable(false);
         lblPlayer15.setRequestFocusEnabled(false);
         lblPlayer15.setVerifyInputWhenFocusTarget(false);
         pnlRight.add(lblPlayer15);
 
-        lblPlayer16.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblPlayer16.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblPlayer16.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblPlayer16.setFocusable(false);
         lblPlayer16.setRequestFocusEnabled(false);

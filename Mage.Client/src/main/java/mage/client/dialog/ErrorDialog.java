@@ -56,17 +56,17 @@ public class ErrorDialog extends MageDialog {
             }
         });
 
-        lblMessage.setColumns(20);
         lblMessage.setEditable(false);
-        lblMessage.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        lblMessage.setColumns(20);
+        lblMessage.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblMessage.setLineWrap(true);
         lblMessage.setRows(5);
         lblMessage.setWrapStyleWord(true);
         jScrollPane1.setViewportView(lblMessage);
 
-        jTextArea1.setColumns(20);
         jTextArea1.setEditable(false);
-        jTextArea1.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         jTextArea1.setRows(2);
         jTextArea1.setText(bundle.getString("ErrorDialog.jTextArea1.text")); // NOI18N
         jScrollPane2.setViewportView(jTextArea1);
@@ -87,9 +87,9 @@ public class ErrorDialog extends MageDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(6, 6, 6)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnOK)
                 .addGap(12, 12, 12))

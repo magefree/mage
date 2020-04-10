@@ -374,19 +374,19 @@ public class TournamentPanel extends javax.swing.JPanel {
             }
         });
 
-        lblName.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblName.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblName.setText(bundle.getString("TournamentPanel.lblName.text")); // NOI18N
 
-        lblType.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblType.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblType.setText(bundle.getString("TournamentPanel.lblType.text")); // NOI18N
 
-        lblState.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblState.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblState.setText(bundle.getString("TournamentPanel.lblState.text")); // NOI18N
 
-        lblStartTime.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblStartTime.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblStartTime.setText(bundle.getString("TournamentPanel.lblStartTime.text")); // NOI18N
 
-        lblEndTime.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblEndTime.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblEndTime.setText(bundle.getString("TournamentPanel.lblEndTime.text")); // NOI18N
 
         javax.swing.GroupLayout actionPanelLayout = new javax.swing.GroupLayout(actionPanel);
@@ -412,7 +412,7 @@ public class TournamentPanel extends javax.swing.JPanel {
                         .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblEndTime)
                             .addComponent(txtEndTime))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnQuitTournament, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnCloseWindow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
