@@ -99,6 +99,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Cubwarden", 7, Rarity.RARE, mage.cards.c.Cubwarden.class));
         cards.add(new SetCardInfo("Cunning Nightbonder", 219, Rarity.UNCOMMON, mage.cards.c.CunningNightbonder.class));
         cards.add(new SetCardInfo("Dark Bargain", 82, Rarity.COMMON, mage.cards.d.DarkBargain.class));
+        cards.add(new SetCardInfo("Daysquad Marshal", 8, Rarity.COMMON, mage.cards.d.DaysquadMarshal.class));
         cards.add(new SetCardInfo("Dead Weight", 83, Rarity.COMMON, mage.cards.d.DeadWeight.class));
         cards.add(new SetCardInfo("Death's Oasis", 182, Rarity.RARE, mage.cards.d.DeathsOasis.class));
         cards.add(new SetCardInfo("Dire Tactics", 183, Rarity.UNCOMMON, mage.cards.d.DireTactics.class));
