@@ -141,6 +141,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Gemrazer", 155, Rarity.RARE, mage.cards.g.Gemrazer.class));
         cards.add(new SetCardInfo("General Kudro of Drannith", 187, Rarity.MYTHIC, mage.cards.g.GeneralKudroOfDrannith.class));
         cards.add(new SetCardInfo("General's Enforcer", 188, Rarity.UNCOMMON, mage.cards.g.GeneralsEnforcer.class));
+        cards.add(new SetCardInfo("Glimmerbell", 53, Rarity.COMMON, mage.cards.g.Glimmerbell.class));
         cards.add(new SetCardInfo("Gloom Pangolin", 89, Rarity.COMMON, mage.cards.g.GloomPangolin.class));
         cards.add(new SetCardInfo("Glowstone Recluse", 156, Rarity.UNCOMMON, mage.cards.g.GlowstoneRecluse.class));
         cards.add(new SetCardInfo("Go for Blood", 122, Rarity.COMMON, mage.cards.g.GoForBlood.class));
