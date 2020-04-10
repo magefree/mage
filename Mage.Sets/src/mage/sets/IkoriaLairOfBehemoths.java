@@ -71,6 +71,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Archipelagore", 41, Rarity.UNCOMMON, mage.cards.a.Archipelagore.class));
         cards.add(new SetCardInfo("Barrier Breach", 145, Rarity.UNCOMMON, mage.cards.b.BarrierBreach.class));
         cards.add(new SetCardInfo("Bastion of Remembrance", 73, Rarity.UNCOMMON, mage.cards.b.BastionOfRemembrance.class));
+        cards.add(new SetCardInfo("Blade Banish", 4, Rarity.COMMON, mage.cards.b.BladeBanish.class));
         cards.add(new SetCardInfo("Blazing Volley", 107, Rarity.COMMON, mage.cards.b.BlazingVolley.class));
         cards.add(new SetCardInfo("Blitz of the Thunder-Raptor", 109, Rarity.UNCOMMON, mage.cards.b.BlitzOfTheThunderRaptor.class));
         cards.add(new SetCardInfo("Blood Curdle", 75, Rarity.COMMON, mage.cards.b.BloodCurdle.class));
