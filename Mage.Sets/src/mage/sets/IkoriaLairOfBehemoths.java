@@ -62,6 +62,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         this.ratioBoosterMythic = 8;
         this.maxCardNumberInBooster = 274;
 
+        cards.add(new SetCardInfo("Adaptive Shimmerer", 1, Rarity.COMMON, mage.cards.a.AdaptiveShimmerer.class));
         cards.add(new SetCardInfo("Adventurous Impulse", 142, Rarity.COMMON, mage.cards.a.AdventurousImpulse.class));
         cards.add(new SetCardInfo("Alert Heedbonder", 218, Rarity.UNCOMMON, mage.cards.a.AlertHeedbonder.class));
         cards.add(new SetCardInfo("Almighty Brushwagg", 143, Rarity.COMMON, mage.cards.a.AlmightyBrushwagg.class));
