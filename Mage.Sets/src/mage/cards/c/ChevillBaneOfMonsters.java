@@ -7,6 +7,7 @@ import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.DeathtouchAbility;
@@ -73,7 +74,7 @@ public final class ChevillBaneOfMonsters extends CardImpl {
 
         // Whenever a permanent an opponent controls with a bounty counter on it dies, you gain 3 life and draw card.
         ability = new DiesCreatureTriggeredAbility(new GainLifeEffect(3), false, filter3);
-        ability.addEffect(new GainLifeEffect(1).concatBy("and"));
+        ability.addEffect(new DrawCardSourceControllerEffect(1).concatBy("and"));
         this.addAbility(ability);
     }
 
