@@ -145,6 +145,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Primal Empathy", 200, Rarity.UNCOMMON, mage.cards.p.PrimalEmpathy.class));
         cards.add(new SetCardInfo("Proud Wildbonder", 229, Rarity.UNCOMMON, mage.cards.p.ProudWildbonder.class));
         cards.add(new SetCardInfo("Raugrin Crystal", 238, Rarity.UNCOMMON, mage.cards.r.RaugrinCrystal.class));
+        cards.add(new SetCardInfo("Raugrin Triome", 251, Rarity.RARE, mage.cards.r.RaugrinTriome.class));
         cards.add(new SetCardInfo("Reconnaissance Mission", 65, Rarity.UNCOMMON, mage.cards.r.ReconnaissanceMission.class));
         cards.add(new SetCardInfo("Ruinous Ultimatum", 204, Rarity.RARE, mage.cards.r.RuinousUltimatum.class));
         cards.add(new SetCardInfo("Sanctuary Lockdown", 28, Rarity.UNCOMMON, mage.cards.s.SanctuaryLockdown.class));
