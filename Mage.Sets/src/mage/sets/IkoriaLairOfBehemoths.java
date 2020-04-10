@@ -35,11 +35,14 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
             "Necropanther",
             "Nethroi, Apex of Death",
             "Parcelbeast",
+            "Porcuparrot",
             "Pouncing Shoreshark",
+            "Regal Leosaur",
             "Sea-Dasher Octopus",
             "Snapdax, Apex of the Hunt",
             "Trumpeting Gnarr",
-            "Vadrok, Apex of Thunder"
+            "Vadrok, Apex of Thunder",
+            "Vulpikeet"
     );
 
     private static final IkoriaLairOfBehemoths instance = new IkoriaLairOfBehemoths();
@@ -121,6 +124,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Keep Safe", 56, Rarity.COMMON, mage.cards.k.KeepSafe.class));
         cards.add(new SetCardInfo("Ketria Crystal", 236, Rarity.UNCOMMON, mage.cards.k.KetriaCrystal.class));
         cards.add(new SetCardInfo("Kogla, the Titan Ape", 162, Rarity.RARE, mage.cards.k.KoglaTheTitanApe.class));
+        cards.add(new SetCardInfo("Lead the Stampede", 163, Rarity.UNCOMMON, mage.cards.l.LeadTheStampede.class));
         cards.add(new SetCardInfo("Lore Drakkis", 194, Rarity.UNCOMMON, mage.cards.l.LoreDrakkis.class));
         cards.add(new SetCardInfo("Majestic Auricorn", 22, Rarity.UNCOMMON, mage.cards.m.MajesticAuricorn.class));
         cards.add(new SetCardInfo("Migration Path", 164, Rarity.UNCOMMON, mage.cards.m.MigrationPath.class));
