@@ -176,6 +176,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Wingfold Pteron", 71, Rarity.COMMON, mage.cards.w.WingfoldPteron.class));
         cards.add(new SetCardInfo("Zagoth Crystal", 242, Rarity.UNCOMMON, mage.cards.z.ZagothCrystal.class));
         cards.add(new SetCardInfo("Zagoth Mamba", 106, Rarity.UNCOMMON, mage.cards.z.ZagothMamba.class));
+        cards.add(new SetCardInfo("Zagoth Triome", 259, Rarity.RARE, mage.cards.z.ZagothTriome.class));
         cards.add(new SetCardInfo("Zenith Flare", 217, Rarity.UNCOMMON, mage.cards.z.ZenithFlare.class));
 
         cards.removeIf(setCardInfo -> mutateNames.contains(setCardInfo.getName())); // remove when mutate is implemented
