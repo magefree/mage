@@ -116,6 +116,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Essence Scatter", 49, Rarity.COMMON, mage.cards.e.EssenceScatter.class));
         cards.add(new SetCardInfo("Everquill Phoenix", 114, Rarity.RARE, mage.cards.e.EverquillPhoenix.class));
         cards.add(new SetCardInfo("Evolving Wilds", 247, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
+        cards.add(new SetCardInfo("Excavation Mole", 150, Rarity.COMMON, mage.cards.e.ExcavationMole.class));
         cards.add(new SetCardInfo("Extinction Event", 88, Rarity.RARE, mage.cards.e.ExtinctionEvent.class));
         cards.add(new SetCardInfo("Exuberant Wolfbear", 151, Rarity.UNCOMMON, mage.cards.e.ExuberantWolfbear.class));
         cards.add(new SetCardInfo("Farfinder", 2, Rarity.COMMON, mage.cards.f.Farfinder.class));
