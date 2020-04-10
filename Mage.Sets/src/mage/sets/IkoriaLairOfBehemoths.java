@@ -168,6 +168,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Kogla, the Titan Ape", 162, Rarity.RARE, mage.cards.k.KoglaTheTitanApe.class));
         cards.add(new SetCardInfo("Lava Serpent", 124, Rarity.COMMON, mage.cards.l.LavaSerpent.class));
         cards.add(new SetCardInfo("Lead the Stampede", 163, Rarity.UNCOMMON, mage.cards.l.LeadTheStampede.class));
+        cards.add(new SetCardInfo("Light of Hope", 20, Rarity.COMMON, mage.cards.l.LightOfHope.class));
         cards.add(new SetCardInfo("Lore Drakkis", 194, Rarity.UNCOMMON, mage.cards.l.LoreDrakkis.class));
         cards.add(new SetCardInfo("Majestic Auricorn", 22, Rarity.UNCOMMON, mage.cards.m.MajesticAuricorn.class));
         cards.add(new SetCardInfo("Migration Path", 164, Rarity.UNCOMMON, mage.cards.m.MigrationPath.class));
