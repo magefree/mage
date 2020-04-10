@@ -244,6 +244,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Tranquil Cove", 257, Rarity.COMMON, mage.cards.t.TranquilCove.class));
         cards.add(new SetCardInfo("Trumpeting Gnarr", 213, Rarity.UNCOMMON, mage.cards.t.TrumpetingGnarr.class));
         cards.add(new SetCardInfo("Unbreakable Bond", 101, Rarity.UNCOMMON, mage.cards.u.UnbreakableBond.class));
+        cards.add(new SetCardInfo("Unexpected Fangs", 102, Rarity.COMMON, mage.cards.u.UnexpectedFangs.class));
         cards.add(new SetCardInfo("Unlikely Aid", 103, Rarity.COMMON, mage.cards.u.UnlikelyAid.class));
         cards.add(new SetCardInfo("Vadrok, Apex of Thunder", 214, Rarity.MYTHIC, mage.cards.v.VadrokApexOfThunder.class));
         cards.add(new SetCardInfo("Void Beckoner", 104, Rarity.UNCOMMON, mage.cards.v.VoidBeckoner.class));
