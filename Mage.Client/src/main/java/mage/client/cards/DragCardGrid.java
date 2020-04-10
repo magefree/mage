@@ -709,10 +709,10 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         this.mode = Constants.DeckEditorMode.LIMITED_BUILDING;
 
         // Toolbar
-        sortButton = new JButton("Sort");
-        filterButton = new JButton("Filter");
+        sortButton = new JButton(java.util.ResourceBundle.getBundle("otherMessage").getString("lblSort"));
+        filterButton = new JButton(java.util.ResourceBundle.getBundle("otherMessage").getString("lblFilter"));
         visibilityButton = new JButton("V"); // "Visibility" button
-        selectByButton = new JButton("Select By");
+        selectByButton = new JButton(java.util.ResourceBundle.getBundle("otherMessage").getString("lblSelectBy"));
         analyseButton = new JButton("M"); // "Mana" button
         blingButton = new JButton("B"); // "Bling" button
 
@@ -721,9 +721,9 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
         // Count labels
         landCountLabel = new JLabel("", new ImageIcon(getClass().getResource("/buttons/type_land.png")), SwingConstants.LEFT);
-        landCountLabel.setToolTipText("Number of lands in deck");
+        landCountLabel.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblDeckLandsNumber"));
         creatureCountLabel = new JLabel("", new ImageIcon(getClass().getResource("/buttons/type_creatures.png")), SwingConstants.LEFT);
-        creatureCountLabel.setToolTipText("Number of creatures in deck");
+        creatureCountLabel.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblDeckCreaturesNumber"));
 
         JPanel toolbar = new JPanel(new BorderLayout());
         JPanel toolbarInner = new JPanel();
@@ -756,7 +756,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                 cardContent.repaint();
             }
         });
-        cardSizeSliderLabel = new JLabel("Card Size:");
+        cardSizeSliderLabel = new JLabel(java.util.ResourceBundle.getBundle("otherMessage").getString("lblCardSize"));
         sliderPanel.add(cardSizeSliderLabel);
         sliderPanel.add(cardSizeSlider);
         toolbar.add(sliderPanel, BorderLayout.EAST);
@@ -828,7 +828,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
             JPanel sortMode = new JPanel();
             sortMode.setLayout(new GridLayout(Sort.values().length, 1, 0, 2));
-            sortMode.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Sort by..."));
+            sortMode.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), java.util.ResourceBundle.getBundle("otherMessage").getString("lblSortBy")));
             GridBagConstraints sortModeC = new GridBagConstraints();
             sortModeC.gridx = 0;
             sortModeC.gridy = 0;
@@ -855,7 +855,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
             JPanel sortOptions = new JPanel();
             sortOptions.setLayout(new BoxLayout(sortOptions, BoxLayout.Y_AXIS));
-            sortOptions.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Sort options"));
+            sortOptions.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), java.util.ResourceBundle.getBundle("otherMessage").getString("lblSortOptions")));
             GridBagConstraints sortOptionsC = new GridBagConstraints();
             sortOptionsC.gridx = 0;
             sortOptionsC.gridy = 1;
@@ -864,7 +864,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             sortPopup.add(sortOptions, sortOptionsC);
 
             separateCreaturesCb = new JCheckBox();
-            separateCreaturesCb.setText("Creatures in separate row");
+            separateCreaturesCb.setText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblSeparateCreaturesRow"));
             separateCreaturesCb.setSelected(separateCreatures);
             separateCreaturesCb.addItemListener(e -> {
                 setSeparateCreatures(separateCreaturesCb.isSelected());
@@ -880,13 +880,13 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         // Visibility popup
         {
             final JPopupMenu visPopup = new JPopupMenu();
-            JMenuItem hideSelected = new JMenuItem("Hide selected");
+            JMenuItem hideSelected = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblHideSelected"));
             hideSelected.addActionListener(e -> hideSelection());
             visPopup.add(hideSelected);
-            JMenuItem showAll = new JMenuItem("Show all");
+            JMenuItem showAll = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblShowAll"));
             showAll.addActionListener(e -> showAll());
             visPopup.add(showAll);
-            visibilityButton.setToolTipText("Visibility of cards.  Right click to get the same options this provides");
+            visibilityButton.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblShowAllDesc"));
             visibilityButton.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
@@ -902,7 +902,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
             JPanel selectByTypeMode = new JPanel();
             selectByTypeMode.setLayout(new GridLayout(CardType.values().length, 1, 0, 2));
-            selectByTypeMode.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Select by Type"));
+            selectByTypeMode.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), java.util.ResourceBundle.getBundle("otherMessage").getString("lblSelectByType")));
             GridBagConstraints selectByTypeModeC = new GridBagConstraints();
             selectByTypeModeC.gridx = 0;
             selectByTypeModeC.gridy = 0;
@@ -915,7 +915,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             for (final CardType cardType : CardType.values()) {
 
                 if (cardType == CardType.CONSPIRACY) {
-                    multiplesButton = new JToggleButton("Multiples");
+                    multiplesButton = new JToggleButton(java.util.ResourceBundle.getBundle("otherMessage").getString("lblMultiples"));
                     selectByTypeButtons.put(cardType, multiplesButton);
                     selectByTypeMode.add(multiplesButton);
                     selectByTypeModeGroup.add(multiplesButton);
@@ -940,7 +940,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             JPanel selectBySearchPanel = new JPanel();
             selectBySearchPanel.setPreferredSize(new Dimension(150, 60));
             selectBySearchPanel.setLayout(new GridLayout(1, 1));
-            selectBySearchPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Search:"));
+            selectBySearchPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), java.util.ResourceBundle.getBundle("otherMessage").getString("lblSearch")));
             GridBagConstraints selectBySearchPanelC = new GridBagConstraints();
             selectBySearchPanelC.gridx = 0;
             selectBySearchPanelC.gridy = 1;
@@ -950,7 +950,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             selectBySearchPanelC.fill = GridBagConstraints.VERTICAL;
 
             searchByTextField = new JTextField();
-            searchByTextField.setToolTipText("Searches for card names, types, rarity, casting cost and rules text.  NB: Mana symbols are written like {W},{U},{C} etc");
+            searchByTextField.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblSearchDesc"));
             searchByTextField.addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyReleased(KeyEvent e) {
@@ -972,12 +972,12 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         }
 
         // Analyse Mana (aka #blue pips, #islands, #white pips, #plains etc.)
-        analyseButton.setToolTipText("Mana Analyser! Counts coloured/colourless mana costs. Counts land types.");
+        analyseButton.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblManaAnalyserDesc"));
 
         analyseButton.addActionListener(evt -> analyseDeck());
 
         // Bling button - aka Add in a premium 'JR', 'MBP', 'CS' etc card
-        blingButton.setToolTipText("Bling your deck! Select the original and added cards by selecting 'Multiples' in the selection options");
+        blingButton.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblBlingDeckDesc"));
 
         blingButton.addActionListener(evt -> blingDeck());
 
@@ -997,15 +997,15 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
     public void initCardAreaPopup() {
         final JPopupMenu menu = new JPopupMenu();
 
-        final JMenuItem hideSelected = new JMenuItem("Hide selected");
+        final JMenuItem hideSelected = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblHideSelected"));
         hideSelected.addActionListener(e -> hideSelection());
         menu.add(hideSelected);
 
-        JMenuItem showAll = new JMenuItem("Show all");
+        JMenuItem showAll = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblShowAll"));
         showAll.addActionListener(e -> showAll());
         menu.add(showAll);
 
-        JMenu sortMenu = new JMenu("Sort by...");
+        JMenu sortMenu = new JMenu(java.util.ResourceBundle.getBundle("otherMessage").getString("lblSelectBy"));
         final Map<Sort, JMenuItem> sortMenuItems = new LinkedHashMap<>();
         for (final Sort sort : Sort.values()) {
             JMenuItem subSort = new JCheckBoxMenuItem(sort.getText());
@@ -1017,7 +1017,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             sortMenu.add(subSort);
         }
         sortMenu.add(new JPopupMenu.Separator());
-        final JCheckBoxMenuItem separateButton = new JCheckBoxMenuItem("Separate creatures");
+        final JCheckBoxMenuItem separateButton = new JCheckBoxMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblSeparateCreatures"));
         separateButton.addActionListener(e -> {
             setSeparateCreatures(!separateCreatures);
             resort();
@@ -1452,28 +1452,28 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         panel2.setLayout(new BoxLayout(panel2, BoxLayout.Y_AXIS));
         ManaPieChart chart = new ManaPieChart(pips.get("#w}"), pips.get("#u}"), pips.get("#b}"), pips.get("#r}"), pips.get("#g}"), pips.get("#c}"));
         chart.setMinimumSize(new Dimension(200, 200));
-        panel2.add(new JLabel("Casting Costs found:"));
+        panel2.add(new JLabel(java.util.ResourceBundle.getBundle("otherMessage").getString("lblCastingCostsFound")));
         panel2.add(chart);
 
         JPanel panel3 = new JPanel();
         panel3.setLayout(new BoxLayout(panel3, BoxLayout.Y_AXIS));
         ManaPieChart chart2 = new ManaPieChart(qtys.get("plains"), qtys.get("island"), qtys.get("swamp"), qtys.get("mountain"), qtys.get("forest"), qtys.get("wastes"));
         chart2.setMinimumSize(new Dimension(200, 200));
-        panel3.add(new JLabel("Basic Land types found:"));
+        panel3.add(new JLabel(java.util.ResourceBundle.getBundle("otherMessage").getString("lblBasicLandTypeFound")));
         panel3.add(chart2);
 
         JPanel panel4 = new JPanel();
         panel4.setLayout(new BoxLayout(panel4, BoxLayout.Y_AXIS));
         ManaPieChart chart3 = new ManaPieChart(manaCounts.get("{W}"), manaCounts.get("{U}"), manaCounts.get("{B}"), manaCounts.get("{R}"), manaCounts.get("{G}"), manaCounts.get("{C}"));
         chart3.setMinimumSize(new Dimension(200, 200));
-        panel4.add(new JLabel("Mana sources found:"));
+        panel4.add(new JLabel(java.util.ResourceBundle.getBundle("otherMessage").getString("lblManaSourcesFound")));
         panel4.add(chart3);
 
         JPanel panel5 = new JPanel();
         panel5.setLayout(new BoxLayout(panel5, BoxLayout.Y_AXIS));
         ManaBarChart chart4 = new ManaBarChart(pips_at_cmcs);
         chart4.setMinimumSize(new Dimension(200, 200));
-        panel5.add(new JLabel("Mana distribution:"));
+        panel5.add(new JLabel(java.util.ResourceBundle.getBundle("otherMessage").getString("lblManaDistribution")));
         panel5.add(chart4);
 
         panel.add(panel2);
@@ -1482,7 +1482,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         panel.add(panel5);
 
         JFrame frame = new JFrame("JOptionPane showMessageDialog component example");
-        JOptionPane.showMessageDialog(frame, panel, "This is the distribution of colors found", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(frame, panel, java.util.ResourceBundle.getBundle("otherMessage").getString("lblDistributionOfColorsFound"), JOptionPane.INFORMATION_MESSAGE);
     }
 
     public void blingDeck() {
@@ -1490,7 +1490,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             return;
         }
 
-        if (JOptionPane.showConfirmDialog(null, "Are you sure you want to bling your deck?  This process will add cards!", "WARNING",
+        if (JOptionPane.showConfirmDialog(null, java.util.ResourceBundle.getBundle("otherMessage").getString("lblBlingDeckWarning"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblWARNING"),
                 JOptionPane.YES_NO_OPTION) == JOptionPane.NO_OPTION) {
             return;
         }
@@ -1558,7 +1558,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                 layoutGrid();
                 cardScroll.revalidate();
                 repaint();
-                JOptionPane.showMessageDialog(null, "Added " + pimpedCards.size() + " cards.  You can select them and the originals by choosing 'Multiples'");
+                JOptionPane.showMessageDialog(null, java.text.MessageFormat.format(java.util.ResourceBundle.getBundle("otherMessage").getString("lblAddedNCards"), new Object[] {pimpedCards.size()}));
             }
         }
     }
@@ -1741,21 +1741,21 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
     private void showCardRightClickMenu(@SuppressWarnings("unused") final CardView card, MouseEvent e) {
         JPopupMenu menu = new JPopupMenu();
-        JMenuItem hide = new JMenuItem("Hide");
+        JMenuItem hide = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblHide"));
         hide.addActionListener(e2 -> hideSelection());
         menu.add(hide);
 
-        JMenuItem invertSelection = new JMenuItem("Invert Selection");
+        JMenuItem invertSelection = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblInvertSelection"));
         invertSelection.addActionListener(e2 -> invertSelection());
         menu.add(invertSelection);
 
-        JMenuItem chooseMatching = new JMenuItem("Choose Matching");
+        JMenuItem chooseMatching = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblChooseMatching"));
         chooseMatching.addActionListener(e2 -> chooseMatching());
         menu.add(chooseMatching);
 
         // Show 'Duplicate Selection' for FREE_BUILDING
         if (this.mode == Constants.DeckEditorMode.FREE_BUILDING) {
-            JMenuItem duplicateSelection = new JMenuItem("Duplicate Selection");
+            JMenuItem duplicateSelection = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblDuplicateSelection"));
             duplicateSelection.addActionListener(e2 -> duplicateSelection());
             menu.add(duplicateSelection);
         }
