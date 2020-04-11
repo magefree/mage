@@ -8,6 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.Zone;
 
 import java.util.UUID;
 
@@ -25,7 +26,7 @@ public final class DurableCoilbug extends CardImpl {
 
         // {4}{B}: Return Durable Coilbug from your graveyard to your hand.
         this.addAbility(new SimpleActivatedAbility(
-                new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl("{4}{B}")
+                Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl("{4}{B}")
         ));
     }
 
