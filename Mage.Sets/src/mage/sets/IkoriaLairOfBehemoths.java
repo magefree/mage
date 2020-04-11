@@ -26,6 +26,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         this.ratioBoosterMythic = 8;
         this.maxCardNumberInBooster = 274;
 
+        cards.add(new SetCardInfo("Back for More", 177, Rarity.UNCOMMON, mage.cards.b.BackForMore.class));
         cards.add(new SetCardInfo("Boon of the Wish-Giver", 43, Rarity.UNCOMMON, mage.cards.b.BoonOfTheWishGiver.class));
         cards.add(new SetCardInfo("Bristling Boar", 146, Rarity.COMMON, mage.cards.b.BristlingBoar.class));
         cards.add(new SetCardInfo("Cavern Whisperer", 79, Rarity.COMMON, mage.cards.c.CavernWhisperer.class));
