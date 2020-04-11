@@ -158,6 +158,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Go for Blood", 122, Rarity.COMMON, mage.cards.g.GoForBlood.class));
         cards.add(new SetCardInfo("Greater Sandwurm", 157, Rarity.COMMON, mage.cards.g.GreaterSandwurm.class));
         cards.add(new SetCardInfo("Grimdancer", 90, Rarity.UNCOMMON, mage.cards.g.Grimdancer.class));
+        cards.add(new SetCardInfo("Gust of Wind", 54, Rarity.COMMON, mage.cards.g.GustOfWind.class));
         cards.add(new SetCardInfo("Heartless Act", 91, Rarity.UNCOMMON, mage.cards.h.HeartlessAct.class));
         cards.add(new SetCardInfo("Helica Glider", 15, Rarity.COMMON, mage.cards.h.HelicaGlider.class));
         cards.add(new SetCardInfo("Honey Mammoth", 158, Rarity.COMMON, mage.cards.h.HoneyMammoth.class));
