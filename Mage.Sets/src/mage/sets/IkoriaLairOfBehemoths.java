@@ -90,6 +90,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Capture Sphere", 44, Rarity.COMMON, mage.cards.c.CaptureSphere.class));
         cards.add(new SetCardInfo("Cathartic Reunion", 110, Rarity.COMMON, mage.cards.c.CatharticReunion.class));
         cards.add(new SetCardInfo("Cavern Whisperer", 79, Rarity.COMMON, mage.cards.c.CavernWhisperer.class));
+        cards.add(new SetCardInfo("Channeled Force", 180, Rarity.UNCOMMON, mage.cards.c.ChanneledForce.class));
         cards.add(new SetCardInfo("Charge of the Forever-Beast", 147, Rarity.UNCOMMON, mage.cards.c.ChargeOfTheForeverBeast.class));
         cards.add(new SetCardInfo("Checkpoint Officer", 5, Rarity.COMMON, mage.cards.c.CheckpointOfficer.class));
         cards.add(new SetCardInfo("Chevill, Bane of Monsters", 181, Rarity.MYTHIC, mage.cards.c.ChevillBaneOfMonsters.class));
