@@ -205,6 +205,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Pacifism", 25, Rarity.COMMON, mage.cards.p.Pacifism.class));
         cards.add(new SetCardInfo("Parcelbeast", 199, Rarity.UNCOMMON, mage.cards.p.Parcelbeast.class));
         cards.add(new SetCardInfo("Patagia Tiger", 26, Rarity.COMMON, mage.cards.p.PatagiaTiger.class));
+        cards.add(new SetCardInfo("Perimeter Sergeant", 27, Rarity.COMMON, mage.cards.p.PerimeterSergeant.class));
         cards.add(new SetCardInfo("Phase Dolphin", 62, Rarity.COMMON, mage.cards.p.PhaseDolphin.class));
         cards.add(new SetCardInfo("Plains", 260, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 261, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
