@@ -1,5 +1,6 @@
 package mage.cards.f;
 
+import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -41,6 +42,8 @@ public final class FrillscareMentor extends CardImpl {
 
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARRIOR);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(2);
 
         // When Frillscare Mentor enters the battlefield, put a menace counter on target non-Human creature you control.
         Ability ability = new EntersBattlefieldTriggeredAbility(
