@@ -176,6 +176,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 264, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 265, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ivy Elemental", 161, Rarity.UNCOMMON, mage.cards.i.IvyElemental.class));
+        cards.add(new SetCardInfo("Jubilant Skybonder", 223, Rarity.UNCOMMON, mage.cards.j.JubilantSkybonder.class));
         cards.add(new SetCardInfo("Jungle Hollow", 249, Rarity.COMMON, mage.cards.j.JungleHollow.class));
         cards.add(new SetCardInfo("Keensight Mentor", 18, Rarity.UNCOMMON, mage.cards.k.KeensightMentor.class));
         cards.add(new SetCardInfo("Keep Safe", 56, Rarity.COMMON, mage.cards.k.KeepSafe.class));
