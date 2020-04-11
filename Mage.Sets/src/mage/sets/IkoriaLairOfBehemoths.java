@@ -242,6 +242,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Skull Prophet", 206, Rarity.UNCOMMON, mage.cards.s.SkullProphet.class));
         cards.add(new SetCardInfo("Skycat Sovereign", 207, Rarity.RARE, mage.cards.s.SkycatSovereign.class));
         cards.add(new SetCardInfo("Sleeper Dart", 240, Rarity.COMMON, mage.cards.s.SleeperDart.class));
+        cards.add(new SetCardInfo("Slitherwisp", 208, Rarity.RARE, mage.cards.s.Slitherwisp.class));
         cards.add(new SetCardInfo("Snapdax, Apex of the Hunt", 209, Rarity.MYTHIC, mage.cards.s.SnapdaxApexOfTheHunt.class));
         cards.add(new SetCardInfo("Snare Tactician", 30, Rarity.COMMON, mage.cards.s.SnareTactician.class));
         cards.add(new SetCardInfo("Song of Creation", 210, Rarity.RARE, mage.cards.s.SongOfCreation.class));
