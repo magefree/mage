@@ -215,6 +215,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 262, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plummet", 169, Rarity.COMMON, mage.cards.p.Plummet.class));
         cards.add(new SetCardInfo("Pollywog Symbiote", 63, Rarity.UNCOMMON, mage.cards.p.PollywogSymbiote.class));
+        cards.add(new SetCardInfo("Porcuparrot", 128, Rarity.UNCOMMON, mage.cards.p.Porcuparrot.class));
         cards.add(new SetCardInfo("Pouncing Shoreshark", 64, Rarity.UNCOMMON, mage.cards.p.PouncingShoreshark.class));
         cards.add(new SetCardInfo("Prickly Marmoset", 129, Rarity.COMMON, mage.cards.p.PricklyMarmoset.class));
         cards.add(new SetCardInfo("Primal Empathy", 200, Rarity.UNCOMMON, mage.cards.p.PrimalEmpathy.class));
