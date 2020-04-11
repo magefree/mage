@@ -134,6 +134,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Fire Prophecy", 116, Rarity.COMMON, mage.cards.f.FireProphecy.class));
         cards.add(new SetCardInfo("Flame Spill", 117, Rarity.UNCOMMON, mage.cards.f.FlameSpill.class));
         cards.add(new SetCardInfo("Flourishing Fox", 13, Rarity.UNCOMMON, mage.cards.f.FlourishingFox.class));
+        cards.add(new SetCardInfo("Flycatcher Giraffid", 153, Rarity.COMMON, mage.cards.f.FlycatcherGiraffid.class));
         cards.add(new SetCardInfo("Footfall Crater", 118, Rarity.UNCOMMON, mage.cards.f.FootfallCrater.class));
         cards.add(new SetCardInfo("Forbidden Friendship", 119, Rarity.COMMON, mage.cards.f.ForbiddenFriendship.class));
         cards.add(new SetCardInfo("Forest", 272, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
