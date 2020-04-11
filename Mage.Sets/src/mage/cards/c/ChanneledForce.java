@@ -65,7 +65,7 @@ class ChanneledForceEffect extends OneShotEffect {
         if (xValue == 0) {
             return false;
         }
-        Player player = game.getPlayer(source.getFirstTarget());
+        Player player = game.getPlayer(source.getTargets().get(0).getFirstTarget());
         if (player != null) {
             player.drawCards(xValue, game);
         }
