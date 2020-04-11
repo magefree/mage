@@ -114,6 +114,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Drannith Magistrate", 11, Rarity.RARE, mage.cards.d.DrannithMagistrate.class));
         cards.add(new SetCardInfo("Drannith Stinger", 113, Rarity.COMMON, mage.cards.d.DrannithStinger.class));
         cards.add(new SetCardInfo("Dreamtail Heron", 47, Rarity.COMMON, mage.cards.d.DreamtailHeron.class));
+        cards.add(new SetCardInfo("Durable Coilbug", 85, Rarity.COMMON, mage.cards.d.DurableCoilbug.class));
         cards.add(new SetCardInfo("Duskfang Mentor", 86, Rarity.UNCOMMON, mage.cards.d.DuskfangMentor.class));
         cards.add(new SetCardInfo("Easy Prey", 87, Rarity.UNCOMMON, mage.cards.e.EasyPrey.class));
         cards.add(new SetCardInfo("Eerie Ultimatum", 184, Rarity.RARE, mage.cards.e.EerieUltimatum.class));
