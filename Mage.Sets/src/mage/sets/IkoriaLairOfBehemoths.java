@@ -202,6 +202,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Migration Path", 164, Rarity.UNCOMMON, mage.cards.m.MigrationPath.class));
         cards.add(new SetCardInfo("Migratory Greathorn", 165, Rarity.COMMON, mage.cards.m.MigratoryGreathorn.class));
         cards.add(new SetCardInfo("Momentum Rumbler", 126, Rarity.UNCOMMON, mage.cards.m.MomentumRumbler.class));
+        cards.add(new SetCardInfo("Monstrous Step", 166, Rarity.UNCOMMON, mage.cards.m.MonstrousStep.class));
         cards.add(new SetCardInfo("Mosscoat Goriak", 167, Rarity.COMMON, mage.cards.m.MosscoatGoriak.class));
         cards.add(new SetCardInfo("Mountain", 269, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 270, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
