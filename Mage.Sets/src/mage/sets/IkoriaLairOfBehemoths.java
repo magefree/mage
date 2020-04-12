@@ -193,6 +193,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Lurking Deadeye", 94, Rarity.COMMON, mage.cards.l.LurkingDeadeye.class));
         cards.add(new SetCardInfo("Majestic Auricorn", 22, Rarity.UNCOMMON, mage.cards.m.MajesticAuricorn.class));
         cards.add(new SetCardInfo("Maned Serval", 23, Rarity.COMMON, mage.cards.m.ManedServal.class));
+        cards.add(new SetCardInfo("Memory Leak", 95, Rarity.COMMON, mage.cards.m.MemoryLeak.class));
         cards.add(new SetCardInfo("Migration Path", 164, Rarity.UNCOMMON, mage.cards.m.MigrationPath.class));
         cards.add(new SetCardInfo("Migratory Greathorn", 165, Rarity.COMMON, mage.cards.m.MigratoryGreathorn.class));
         cards.add(new SetCardInfo("Momentum Rumbler", 126, Rarity.UNCOMMON, mage.cards.m.MomentumRumbler.class));
