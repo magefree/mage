@@ -259,6 +259,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Scoured Barrens", 254, Rarity.COMMON, mage.cards.s.ScouredBarrens.class));
         cards.add(new SetCardInfo("Sea-Dasher Octopus", 66, Rarity.RARE, mage.cards.s.SeaDasherOctopus.class));
         cards.add(new SetCardInfo("Serrated Scorpion", 99, Rarity.COMMON, mage.cards.s.SerratedScorpion.class));
+        cards.add(new SetCardInfo("Shark Typhoon", 67, Rarity.RARE, mage.cards.s.SharkTyphoon.class));
         cards.add(new SetCardInfo("Shredded Sails", 136, Rarity.COMMON, mage.cards.s.ShreddedSails.class));
         cards.add(new SetCardInfo("Skull Prophet", 206, Rarity.UNCOMMON, mage.cards.s.SkullProphet.class));
         cards.add(new SetCardInfo("Skycat Sovereign", 207, Rarity.RARE, mage.cards.s.SkycatSovereign.class));
