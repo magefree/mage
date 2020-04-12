@@ -50,6 +50,7 @@ public class Commander extends Constructed {
         banned.add("Leovold, Emissary of Trest");
         banned.add("Library of Alexandria");
         banned.add("Limited Resources");
+        banned.add("Lutri, the Spellchaser");
         banned.add("Mox Emerald");
         banned.add("Mox Jet");
         banned.add("Mox Pearl");
