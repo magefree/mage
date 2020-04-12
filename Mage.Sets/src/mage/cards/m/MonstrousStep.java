@@ -18,7 +18,7 @@ import mage.watchers.common.BlockedAttackerWatcher;
 
 /**
  *
-
+ * @author drowinternet
  */
 public final class MonstrousStep extends CardImpl {
 
