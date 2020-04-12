@@ -201,6 +201,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 270, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 271, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mysterious Egg", 3, Rarity.COMMON, mage.cards.m.MysteriousEgg.class));
+        cards.add(new SetCardInfo("Mystic Subdual", 57, Rarity.UNCOMMON, mage.cards.m.MysticSubdual.class));
         cards.add(new SetCardInfo("Mythos of Nethroi", 97, Rarity.RARE, mage.cards.m.MythosOfNethroi.class));
         cards.add(new SetCardInfo("Necropanther", 196, Rarity.UNCOMMON, mage.cards.n.Necropanther.class));
         cards.add(new SetCardInfo("Nethroi, Apex of Death", 197, Rarity.MYTHIC, mage.cards.n.NethroiApexOfDeath.class));
