@@ -42,7 +42,7 @@ public final class KerugaTheMacrosage extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Companion — Your starting deck contains only cards with converted mana cost 3 or greater and land cards.
-        this.addAbility(new CompanionAbility(new KerugaCondition()));
+        this.addAbility(new CompanionAbility(KerugaCondition.instance));
         // When Keruga, the Macrosage enters the battlefield, draw a card for each other permanent you control with converted mana cost 3 or greater.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(filter))));
     }
@@ -57,7 +57,8 @@ public final class KerugaTheMacrosage extends CardImpl {
     }
 }
 
-class KerugaCondition implements CompanionCondition {
+enum KerugaCondition implements CompanionCondition {
+    instance;
 
     @Override
     public String getRule() {

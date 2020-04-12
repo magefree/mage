@@ -214,6 +214,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Nethroi, Apex of Death", 197, Rarity.MYTHIC, mage.cards.n.NethroiApexOfDeath.class));
         cards.add(new SetCardInfo("Neutralize", 59, Rarity.UNCOMMON, mage.cards.n.Neutralize.class));
         cards.add(new SetCardInfo("Nightsquad Commando", 98, Rarity.COMMON, mage.cards.n.NightsquadCommando.class));
+        cards.add(new SetCardInfo("Obosh, the Preypiercer", 228, Rarity.RARE, mage.cards.o.OboshThePreypiercer.class));
         cards.add(new SetCardInfo("Of One Mind", 60, Rarity.COMMON, mage.cards.o.OfOneMind.class));
         cards.add(new SetCardInfo("Offspring's Revenge", 198, Rarity.RARE, mage.cards.o.OffspringsRevenge.class));
         cards.add(new SetCardInfo("Ominous Seas", 61, Rarity.UNCOMMON, mage.cards.o.OminousSeas.class));

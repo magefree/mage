@@ -36,7 +36,7 @@ public final class UmoriTheCollector extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Companion — Each nonland card in your starting deck shares a card type.
-        this.addAbility(new CompanionAbility(new UmoriCondition()));
+        this.addAbility(new CompanionAbility(UmoriCondition.instance));
 
         // As Umori, the Collector enters the battlefield, choose a card type.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseCardTypeEffect(Outcome.Benefit)));
@@ -55,7 +55,8 @@ public final class UmoriTheCollector extends CardImpl {
     }
 }
 
-class UmoriCondition implements CompanionCondition {
+enum UmoriCondition implements CompanionCondition {
+    instance;
 
     @Override
     public String getRule() {
