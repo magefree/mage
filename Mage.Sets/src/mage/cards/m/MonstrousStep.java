@@ -22,8 +22,8 @@ import mage.watchers.common.BlockedAttackerWatcher;
  */
 public final class MonstrousStep extends CardImpl {
 
-    private static final FilterCreaturePermanent filterMustBlock = new FilterCreaturePermanent("Up to one target creature");
-    private static final FilterCreaturePermanent filterToBeBlocked = new FilterCreaturePermanent("must block this creature if able");
+    private static final FilterCreaturePermanent filterMustBlock = new FilterCreaturePermanent("Target creature that must block");
+    private static final FilterCreaturePermanent filterToBeBlocked = new FilterCreaturePermanent("Creature that will be blocked");
 
     public MonstrousStep(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{G}");
@@ -33,7 +33,9 @@ public final class MonstrousStep extends CardImpl {
         this.getSpellAbility().addEffect(new BoostTargetEffect(7,7, Duration.EndOfTurn));
 
         //Up to one target creature blocks it this turn if able.
-        this.getSpellAbility().addEffect(new MonstrousStepEffect());
+        this.getSpellAbility().addEffect(new MonstrousStepEffect()
+            .setText("Up to one target creature blocks it this turn if able.")
+        );
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filterMustBlock));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filterToBeBlocked));
         this.getSpellAbility().addWatcher(new BlockedAttackerWatcher());
