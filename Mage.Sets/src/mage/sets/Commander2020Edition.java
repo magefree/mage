@@ -309,6 +309,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Xathrid Necromancer", 141, Rarity.RARE, mage.cards.x.XathridNecromancer.class));
         cards.add(new SetCardInfo("Yavimaya Coast", 322, Rarity.RARE, mage.cards.y.YavimayaCoast.class));
         cards.add(new SetCardInfo("Yavimaya Dryad", 197, Rarity.UNCOMMON, mage.cards.y.YavimayaDryad.class));
+        cards.add(new SetCardInfo("Zaxara, the Exemplary", 20, Rarity.MYTHIC, mage.cards.z.ZaxaraTheExemplary.class));
         cards.add(new SetCardInfo("Zetalpa, Primal Dawn", 107, Rarity.RARE, mage.cards.z.ZetalpaPrimalDawn.class));
         cards.add(new SetCardInfo("Zulaport Cutthroat", 142, Rarity.UNCOMMON, mage.cards.z.ZulaportCutthroat.class));
 
