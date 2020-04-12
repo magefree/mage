@@ -37,7 +37,7 @@ public final class XyrisTheWrithingStorm extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever an opponent draws a card except the first one they draw in each of their draw steps, create a 1/1 green Snake creature token.
-        this.addAbility(new XyrisTheWrithingStormDrawEffect());
+        this.addAbility(new XyrisTheWrithingStormDrawAbility());
         // Whenever Xyris, the Writhing Storm deals combat damage to a player, you and that player each draw that many cards.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new XyrisTheWrithingStormCombatDamageEffect(), false, true));
     }
@@ -52,13 +52,13 @@ public final class XyrisTheWrithingStorm extends CardImpl {
     }
 }
 
-class XyrisTheWrithingStormDrawEffect extends TriggeredAbilityImpl  {
+class XyrisTheWrithingStormDrawAbility extends TriggeredAbilityImpl  {
 
-    public XyrisTheWrithingStormDrawEffect() {
+    public XyrisTheWrithingStormDrawAbility() {
         super(Zone.BATTLEFIELD, new XyrisTheWrithingStormTokenEffect(), false);
     }
 
-    public XyrisTheWrithingStormDrawEffect(final XyrisTheWrithingStormDrawEffect ability) {
+    public XyrisTheWrithingStormDrawAbility(final XyrisTheWrithingStormDrawAbility ability) {
         super(ability);
     }
 
@@ -85,7 +85,7 @@ class XyrisTheWrithingStormDrawEffect extends TriggeredAbilityImpl  {
 
     @Override
     public TriggeredAbility copy() {
-        return new XyrisTheWrithingStormDrawEffect(this);
+        return new XyrisTheWrithingStormDrawAbility(this);
     }
 
     @Override
