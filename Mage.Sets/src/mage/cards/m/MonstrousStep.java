@@ -22,16 +22,17 @@ import mage.watchers.common.BlockedAttackerWatcher;
  */
 public final class MonstrousStep extends CardImpl {
 
-    private static final FilterCreaturePermanent filterMustBlock = new FilterCreaturePermanent("Creature that must block");
-    private static final FilterCreaturePermanent filterToBeBlocked = new FilterCreaturePermanent("Creature that is to be blocked");
+    private static final FilterCreaturePermanent filterMustBlock = new FilterCreaturePermanent("Up to one target creature");
+    private static final FilterCreaturePermanent filterToBeBlocked = new FilterCreaturePermanent("must block this creature if able");
 
     public MonstrousStep(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{G}");
 
 
-        // Target creature gets +7/+7 until end of turn. Up to one target creature blocks it this turn if able.
+        // Target creature gets +7/+7 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(7,7, Duration.EndOfTurn));
 
+        //Up to one target creature blocks it this turn if able.
         this.getSpellAbility().addEffect(new MonstrousStepEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filterMustBlock));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filterToBeBlocked));
