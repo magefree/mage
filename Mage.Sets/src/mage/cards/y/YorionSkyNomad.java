@@ -1,27 +1,42 @@
 package mage.cards.y;
 
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
 import mage.abilities.keyword.CompanionAbility;
 import mage.abilities.keyword.CompanionCondition;
-import mage.cards.Card;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
+import mage.cards.*;
+import mage.constants.*;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.game.Game;
+import mage.game.permanent.PermanentCard;
+import mage.game.permanent.PermanentMeld;
+import mage.players.Player;
+import mage.target.TargetPermanent;
+import mage.target.targetpointer.FixedTargets;
+import mage.util.CardUtil;
+
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
- *
  * @author TheElk801
  */
 public final class YorionSkyNomad extends CardImpl {
 
     public YorionSkyNomad(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W/U}{W/U}");
-        
+
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.BIRD);
         this.subtype.add(SubType.SERPENT);
@@ -35,6 +50,7 @@ public final class YorionSkyNomad extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Yorion enters the battlefield, exile any number of other nonland permanents you own and control. Return those cards to the battlefield at the beginning of the next end step.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new YorionSkyNomadEffect()));
     }
 
     private YorionSkyNomad(final YorionSkyNomad card) {
@@ -46,7 +62,9 @@ public final class YorionSkyNomad extends CardImpl {
         return new YorionSkyNomad(this);
     }
 }
-enum YorionSkyNomadCompanionCondition implements CompanionCondition{instance;
+
+enum YorionSkyNomadCompanionCondition implements CompanionCondition {
+    instance;
 
     @Override
     public String getRule() {
@@ -55,6 +73,69 @@ enum YorionSkyNomadCompanionCondition implements CompanionCondition{instance;
 
     @Override
     public boolean isLegal(Set<Card> deck, int startingSize) {
-        return deck.size()>=startingSize+20;
+        return deck.size() >= startingSize + 20;
+    }
+}
+
+class YorionSkyNomadEffect extends OneShotEffect {
+
+    private static final FilterPermanent filter
+            = new FilterControlledPermanent("other nonland permanents you own and control");
+
+    static {
+        filter.add(Predicates.not(CardType.LAND.getPredicate()));
+        filter.add(TargetController.YOU.getOwnerPredicate());
+        filter.add(AnotherPredicate.instance);
+    }
+
+    YorionSkyNomadEffect() {
+        super(Outcome.Benefit);
+        staticText = "exile any number of other nonland permanents you own and control. " +
+                "Return those cards to the battlefield at the beginning of the next end step.";
+    }
+
+    private YorionSkyNomadEffect(final YorionSkyNomadEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public YorionSkyNomadEffect copy() {
+        return new YorionSkyNomadEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = source.getSourceObject(game);
+        if (sourceObject == null || controller == null) {
+            return false;
+        }
+        TargetPermanent target = new TargetPermanent(0, Integer.MAX_VALUE, filter, true);
+        controller.choose(outcome, target, source.getSourceId(), game);
+        Set<Card> toExile = target.getTargets().stream().map(game::getPermanent).collect(Collectors.toSet());
+        UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+        controller.moveCardsToExile(toExile, source, game, true, exileId, sourceObject.getIdName());
+
+        Cards cardsToReturn = new CardsImpl();
+        for (Card exiled : toExile) {
+            if (exiled instanceof PermanentMeld) {
+                MeldCard meldCard = (MeldCard) ((PermanentCard) exiled).getCard();
+                Card topCard = meldCard.getTopHalfCard();
+                Card bottomCard = meldCard.getBottomHalfCard();
+                if (topCard.getZoneChangeCounter(game) == meldCard.getTopLastZoneChangeCounter()) {
+                    cardsToReturn.add(topCard);
+                }
+                if (bottomCard.getZoneChangeCounter(game) == meldCard.getBottomLastZoneChangeCounter()) {
+                    cardsToReturn.add(bottomCard);
+                }
+            } else if (exiled.getZoneChangeCounter(game) == game.getState().getZoneChangeCounter(exiled.getId()) - 1) {
+                cardsToReturn.add(exiled);
+            }
+        }
+        Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect();
+        effect.setTargetPointer(new FixedTargets(cardsToReturn, game));
+        AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
+        game.addDelayedTriggeredAbility(delayedAbility, source);
+        return true;
     }
 }
