@@ -1,6 +1,8 @@
 package mage.deck;
 
+import mage.abilities.Ability;
 import mage.abilities.common.CanBeYourCommanderAbility;
+import mage.abilities.keyword.CompanionAbility;
 import mage.cards.Card;
 import mage.cards.decks.Constructed;
 import mage.cards.decks.Deck;
@@ -39,9 +41,50 @@ public class Brawl extends Constructed {
     @Override
     public boolean validate(Deck deck) {
         boolean valid = true;
+        Card brawler = null;
+        Card companion = null;
         FilterMana colorIdentity = new FilterMana();
 
-        if (deck.getCards().size() + deck.getSideboard().size() != getDeckMinSize()) {
+        if (deck.getSideboard().size() == 1) {
+            for (Card card : deck.getSideboard()) {
+                brawler = card;
+            }
+        } else if (deck.getSideboard().size() == 2) {
+            Iterator<Card> iter = deck.getSideboard().iterator();
+            Card card1 = iter.next();
+            Card card2 = iter.next();
+            if (card1.getAbilities().stream().anyMatch(ability -> ability instanceof CompanionAbility)) {
+                companion = card1;
+                brawler = card2;
+            } else if (card2.getAbilities().stream().anyMatch(ability -> ability instanceof CompanionAbility)) {
+                companion = card2;
+                brawler = card1;
+            } else {
+                invalid.put("Brawl", "Sideboard must contain only the brawler and up to 1 companion");
+                valid = false;
+            }
+        } else {
+            invalid.put("Brawl", "Sideboard must contain only the brawler and up to 1 companion");
+            valid = false;
+        }
+
+        if (brawler != null) {
+            ManaUtil.collectColorIdentity(colorIdentity, brawler.getColorIdentity());
+            if (bannedCommander.contains(brawler.getName())) {
+                invalid.put("Brawl", "Brawler banned (" + brawler.getName() + ')');
+                valid = false;
+            }
+            if (!((brawler.isCreature() && brawler.isLegendary())
+                    || brawler.isPlaneswalker() || brawler.getAbilities().contains(CanBeYourCommanderAbility.getInstance()))) {
+                invalid.put("Brawl", "Invalid Brawler (" + brawler.getName() + ')');
+                valid = false;
+            }
+        }
+
+        if (companion != null && deck.getCards().size() + deck.getSideboard().size() != getDeckMinSize() + 1) {
+            invalid.put("Deck", "Must contain " + (getDeckMinSize() + 1) + " cards (companion doesn't count in deck size requirement): has " + (deck.getCards().size() + deck.getSideboard().size()) + " cards");
+            valid = false;
+        } else if (companion == null && deck.getCards().size() + deck.getSideboard().size() != getDeckMinSize()) {
             invalid.put("Deck", "Must contain " + getDeckMinSize() + " cards: has " + (deck.getCards().size() + deck.getSideboard().size()) + " cards");
             valid = false;
         }
@@ -58,23 +101,6 @@ public class Brawl extends Constructed {
             }
         }
 
-        if (deck.getSideboard().size() != 1) {
-            invalid.put("Brawl", "Sideboard must contain only the commander)");
-            valid = false;
-        } else {
-            for (Card commander : deck.getSideboard()) {
-                if (bannedCommander.contains(commander.getName())) {
-                    invalid.put("Brawl", "Brawl banned (" + commander.getName() + ')');
-                    valid = false;
-                }
-                if (!((commander.isCreature() && commander.isLegendary())
-                        || commander.isPlaneswalker() || commander.getAbilities().contains(CanBeYourCommanderAbility.getInstance()))) {
-                    invalid.put("Brawl", "Invalid Commander (" + commander.getName() + ')');
-                    valid = false;
-                }
-                ManaUtil.collectColorIdentity(colorIdentity, commander.getColorIdentity());
-            }
-        }
         Set<String> basicsInDeck = new HashSet<>();
         if (colorIdentity.isColorless()) {
             for (Card card : deck.getCards()) {
@@ -84,6 +110,15 @@ public class Brawl extends Constructed {
             }
         }
         for (Card card : deck.getCards()) {
+            if (!ManaUtil.isColorIdentityCompatible(colorIdentity, card.getColorIdentity())
+                    && !(colorIdentity.isColorless()
+                    && basicsInDeck.size() == 1
+                    && basicsInDeck.contains(card.getName()))) {
+                invalid.put(card.getName(), "Invalid color (" + colorIdentity.toString() + ')');
+                valid = false;
+            }
+        }
+        for (Card card : deck.getSideboard()) {
             if (!ManaUtil.isColorIdentityCompatible(colorIdentity, card.getColorIdentity())
                     && !(colorIdentity.isColorless()
                     && basicsInDeck.size() == 1
@@ -108,7 +143,22 @@ public class Brawl extends Constructed {
                 }
             }
         }
+        // Check for companion legality
+        if (companion != null) {
+            Set<Card> cards = new HashSet<>(deck.getCards());
+            cards.add(brawler);
+            for (Ability ability : companion.getAbilities()) {
+                if (ability instanceof CompanionAbility) {
+                    CompanionAbility companionAbility = (CompanionAbility) ability;
+                    if (!companionAbility.isLegal(cards)) {
+                        invalid.put(companion.getName(), "Deck invalid for companion");
+                        valid = false;
+                    }
+                    break;
+                }
+            }
+        }
+
         return valid;
     }
-
 }

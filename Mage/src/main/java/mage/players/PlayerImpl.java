@@ -3446,6 +3446,15 @@ public abstract class PlayerImpl implements Player, Serializable {
                 }
             }
 
+            // check to play companion cards
+            if (fromAll || fromZone == Zone.OUTSIDE) {
+                for (Cards companionCards : game.getState().getCompanion().values()) {
+                    for (Card card : companionCards.getCards(game)) {
+                        getPlayableFromNonHandCardAll(game, Zone.OUTSIDE, card, availableMana, playable);
+                    }
+                }
+            }
+
             // check if it's possible to play the top card of a library
             if (fromAll || fromZone == Zone.LIBRARY) {
                 for (UUID playerInRangeId : game.getState().getPlayersInRange(getId(), game)) {
