@@ -182,6 +182,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Jungle Hollow", 249, Rarity.COMMON, mage.cards.j.JungleHollow.class));
         cards.add(new SetCardInfo("Keensight Mentor", 18, Rarity.UNCOMMON, mage.cards.k.KeensightMentor.class));
         cards.add(new SetCardInfo("Keep Safe", 56, Rarity.COMMON, mage.cards.k.KeepSafe.class));
+        cards.add(new SetCardInfo("Keruga, the Macrosage", 354, Rarity.RARE, mage.cards.k.KerugaTheMacrosage.class));
         cards.add(new SetCardInfo("Ketria Crystal", 236, Rarity.UNCOMMON, mage.cards.k.KetriaCrystal.class));
         cards.add(new SetCardInfo("Ketria Triome", 250, Rarity.RARE, mage.cards.k.KetriaTriome.class));
         cards.add(new SetCardInfo("Kogla, the Titan Ape", 162, Rarity.RARE, mage.cards.k.KoglaTheTitanApe.class));
@@ -279,6 +280,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Titanoth Rex", 174, Rarity.UNCOMMON, mage.cards.t.TitanothRex.class));
         cards.add(new SetCardInfo("Tranquil Cove", 257, Rarity.COMMON, mage.cards.t.TranquilCove.class));
         cards.add(new SetCardInfo("Trumpeting Gnarr", 213, Rarity.UNCOMMON, mage.cards.t.TrumpetingGnarr.class));
+        cards.add(new SetCardInfo("Umori, the Collector", 231, Rarity.RARE, mage.cards.u.UmoriTheCollector.class));
         cards.add(new SetCardInfo("Unbreakable Bond", 101, Rarity.UNCOMMON, mage.cards.u.UnbreakableBond.class));
         cards.add(new SetCardInfo("Unexpected Fangs", 102, Rarity.COMMON, mage.cards.u.UnexpectedFangs.class));
         cards.add(new SetCardInfo("Unlikely Aid", 103, Rarity.COMMON, mage.cards.u.UnlikelyAid.class));
