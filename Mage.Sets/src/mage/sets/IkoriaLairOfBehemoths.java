@@ -241,6 +241,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Reptilian Reflection", 132, Rarity.UNCOMMON, mage.cards.r.ReptilianReflection.class));
         cards.add(new SetCardInfo("Rugged Highlands", 252, Rarity.COMMON, mage.cards.r.RuggedHighlands.class));
         cards.add(new SetCardInfo("Ruinous Ultimatum", 204, Rarity.RARE, mage.cards.r.RuinousUltimatum.class));
+        cards.add(new SetCardInfo("Rumbling Rockslide", 134, Rarity.COMMON, mage.cards.r.RumblingRockslide.class));
         cards.add(new SetCardInfo("Sanctuary Lockdown", 28, Rarity.UNCOMMON, mage.cards.s.SanctuaryLockdown.class));
         cards.add(new SetCardInfo("Sanctuary Smasher", 135, Rarity.UNCOMMON, mage.cards.s.SanctuarySmasher.class));
         cards.add(new SetCardInfo("Savai Crystal", 239, Rarity.UNCOMMON, mage.cards.s.SavaiCrystal.class));

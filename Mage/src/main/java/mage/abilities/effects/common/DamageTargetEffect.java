@@ -26,7 +26,7 @@ public class DamageTargetEffect extends OneShotEffect {
     protected boolean useOnlyTargetPointer;
     protected String sourceName = "{source}";
 
-    public DamageTargetEffect(int amount) {
+    public \DamageTargetEffect(int amount) {
         this(StaticValue.get(amount), true);
     }
 
