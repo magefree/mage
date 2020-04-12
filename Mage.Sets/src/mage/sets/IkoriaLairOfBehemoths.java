@@ -254,6 +254,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Sanctuary Smasher", 135, Rarity.UNCOMMON, mage.cards.s.SanctuarySmasher.class));
         cards.add(new SetCardInfo("Savai Crystal", 239, Rarity.UNCOMMON, mage.cards.s.SavaiCrystal.class));
         cards.add(new SetCardInfo("Savai Sabertooth", 29, Rarity.COMMON, mage.cards.s.SavaiSabertooth.class));
+        cards.add(new SetCardInfo("Savai Thundermane", 205, Rarity.UNCOMMON, mage.cards.s.SavaiThundermane.class));
         cards.add(new SetCardInfo("Savai Triome", 253, Rarity.RARE, mage.cards.s.SavaiTriome.class));
         cards.add(new SetCardInfo("Scoured Barrens", 254, Rarity.COMMON, mage.cards.s.ScouredBarrens.class));
         cards.add(new SetCardInfo("Sea-Dasher Octopus", 66, Rarity.RARE, mage.cards.s.SeaDasherOctopus.class));
