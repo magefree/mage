@@ -61,7 +61,7 @@ class MonstrousStepEffect extends RequirementEffect {
 
     public MonstrousStepEffect(Duration duration) {
         super(duration);
-        staticText = "Target creature blocks target creature this turn if able";
+        staticText = "Up to one target creature blocks it this turn if able.";
     }
 
     public MonstrousStepEffect(final MonstrousStepEffect effect) {
