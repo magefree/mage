@@ -13,7 +13,7 @@ import java.util.UUID;
 public class TwoPlayerDuel extends GameImpl {
 
     public TwoPlayerDuel(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
-        super(attackOption, range, mulligan, startLife);
+        super(attackOption, range, mulligan, startLife, 60);
     }
 
     public TwoPlayerDuel(final TwoPlayerDuel game) {
