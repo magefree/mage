@@ -30,7 +30,7 @@ public final class SirenReaver extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
-        // <i>Raid</i> — Siren Reaver costs {1} less to cast if you attacked with a creature this turn.
+        // <i>Raid</i> — Siren Reaver costs {1} less to cast if you attacked this turn.
         Ability ability = new SimpleStaticAbility(Zone.STACK, new SpellCostReductionSourceEffect(1, RaidCondition.instance));
         ability.setAbilityWord(AbilityWord.RAID);
         ability.setRuleAtTheTop(true);
