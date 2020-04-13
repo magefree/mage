@@ -27,7 +27,7 @@ public final class HalcyonGlaze extends CardImpl {
 
         // Whenever you cast a creature spell, Halcyon Glaze becomes a 4/4 Illusion creature with flying in addition to its other types until end of turn.
         Effect effect = new BecomesCreatureSourceEffect(new HalcyonGlazeToken(), "enchantment", Duration.EndOfTurn);
-        effect.setText("Whenever you cast a creature spell, {this} becomes a 4/4 Illusion creature with flying in addition to its other types until end of turn");
+        effect.setText("{this} becomes a 4/4 Illusion creature with flying in addition to its other types until end of turn");
         this.addAbility(new SpellCastControllerTriggeredAbility(effect, StaticFilters.FILTER_SPELL_A_CREATURE, false));
     }
 

@@ -12,6 +12,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.common.CopyEffect;
 import mage.abilities.keyword.BestowAbility;
+import mage.abilities.keyword.CompanionAbility;
 import mage.abilities.keyword.MorphAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.abilities.mana.DelayedTriggeredManaAbility;
@@ -928,6 +929,39 @@ public abstract class GameImpl implements Game, Serializable {
         if (checkIfGameIsOver()) {
             return;
         }
+
+        // Handle companions
+        Map<Player, Card> playerCompanionMap = new HashMap<>();
+        for (Player player : state.getPlayers().values()) {
+            // Make a list of legal companions present in the sideboard
+            Set<Card> potentialCompanions = new HashSet<>();
+            for (Card card : player.getSideboard().getUniqueCards(this)) {
+                for (Ability ability : card.getAbilities(this)) {
+                    if (ability instanceof CompanionAbility) {
+                        CompanionAbility companionAbility = (CompanionAbility) ability;
+                        if (companionAbility.isLegal(new HashSet<>(player.getLibrary().getCards(this)))) {
+                            potentialCompanions.add(card);
+                            break;
+                        }
+                    }
+                }
+            }
+            // Choose a companion from the list of legal companions
+            for (Card card : potentialCompanions) {
+                if (player.chooseUse(Outcome.Benefit, "Use " + card.getName() + " as your companion?", null, this)) {
+                    playerCompanionMap.put(player, card);
+                    break;
+                }
+            }
+        }
+
+        // Announce companions and set the companion effect
+        playerCompanionMap.forEach((player, companion) -> {
+            if (companion != null) {
+                this.informPlayers(player.getLogName() + " has chosen " + companion.getLogName() + " as their companion.");
+                this.getState().getCompanion().update(player.getName() + "'s companion", new CardsImpl(companion));
+            }
+        });
 
         //20091005 - 103.1
         if (!gameOptions.skipInitShuffling) { //don't shuffle in test mode for card injection on top of player's libraries

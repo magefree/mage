@@ -8,7 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterInstantOrSorceryCard;
-import mage.target.common.TargetPlayerOrPlaneswalker;
+import mage.target.common.TargetCreatureOrPlaneswalker;
 
 import java.util.UUID;
 
@@ -30,7 +30,7 @@ public final class BlitzOfTheThunderRaptor extends CardImpl {
                         "equal to the number of instant and sorcery cards in your graveyard."));
         this.getSpellAbility().addEffect(new ExileTargetIfDiesEffect()
                 .setText("If that creature or planeswalker would die this turn, exile it instead."));
-        this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker());
     }
 
     private BlitzOfTheThunderRaptor(final BlitzOfTheThunderRaptor card) {

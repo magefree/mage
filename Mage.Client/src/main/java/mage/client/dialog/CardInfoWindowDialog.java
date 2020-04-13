@@ -30,7 +30,7 @@ public class CardInfoWindowDialog extends MageDialog {
     private static final Logger LOGGER = Logger.getLogger(CardInfoWindowDialog.class);
 
     public enum ShowType {
-        REVEAL, REVEAL_TOP_LIBRARY, LOOKED_AT, EXILE, GRAVEYARD, OTHER
+        REVEAL, REVEAL_TOP_LIBRARY, LOOKED_AT, EXILE, GRAVEYARD, COMPANION, OTHER
     }
 
     private final ShowType showType;
@@ -71,6 +71,10 @@ public class CardInfoWindowDialog extends MageDialog {
                 break;
             case EXILE:
                 this.setFrameIcon(new ImageIcon(ImageManagerImpl.instance.getExileImage()));
+                break;
+            case COMPANION:
+                this.setFrameIcon(new ImageIcon(ImageManagerImpl.instance.getTokenIconImage()));
+                this.setClosable(false);
                 break;
             default:
                 // no icon yet
