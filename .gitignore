@@ -104,7 +104,9 @@ Utils/*implemented.txt
 .metadata
 .project
 .settings
-.idea
+.idea/
+.vscode/
+.factorypath
 syntax: regexp
 \.class
 \.jar
