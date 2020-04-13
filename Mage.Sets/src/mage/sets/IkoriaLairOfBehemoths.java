@@ -171,6 +171,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Humble Naturalist", 160, Rarity.COMMON, mage.cards.h.HumbleNaturalist.class));
         cards.add(new SetCardInfo("Hunted Nightmare", 92, Rarity.RARE, mage.cards.h.HuntedNightmare.class));
         cards.add(new SetCardInfo("Huntmaster Liger", 16, Rarity.UNCOMMON, mage.cards.h.HuntmasterLiger.class));
+        cards.add(new SetCardInfo("Illuna, Apex of Wishes", 190, Rarity.MYTHIC, mage.cards.i.IllunaApexOfWishes.class));
         cards.add(new SetCardInfo("Imposing Vantasaur", 17, Rarity.COMMON, mage.cards.i.ImposingVantasaur.class));
         cards.add(new SetCardInfo("Indatha Crystal", 235, Rarity.UNCOMMON, mage.cards.i.IndathaCrystal.class));
         cards.add(new SetCardInfo("Indatha Triome", 248, Rarity.RARE, mage.cards.i.IndathaTriome.class));
