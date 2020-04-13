@@ -275,6 +275,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Spontaneous Flight", 33, Rarity.COMMON, mage.cards.s.SpontaneousFlight.class));
         cards.add(new SetCardInfo("Springjaw Trap", 241, Rarity.COMMON, mage.cards.s.SpringjawTrap.class));
         cards.add(new SetCardInfo("Sprite Dragon", 211, Rarity.UNCOMMON, mage.cards.s.SpriteDragon.class));
+        cards.add(new SetCardInfo("Startling Development", 68, Rarity.COMMON, mage.cards.s.StartlingDevelopment.class));
         cards.add(new SetCardInfo("Sudden Spinnerets", 171, Rarity.COMMON, mage.cards.s.SuddenSpinnerets.class));
         cards.add(new SetCardInfo("Suffocating Fumes", 100, Rarity.COMMON, mage.cards.s.SuffocatingFumes.class));
         cards.add(new SetCardInfo("Survivors' Bond", 172, Rarity.COMMON, mage.cards.s.SurvivorsBond.class));
