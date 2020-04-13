@@ -27,7 +27,7 @@ public final class FlourishingFox extends CardImpl {
 
         // Whenever you cycle another card, put a +1/+1 counter on Flourishing Fox.
         this.addAbility(new CycleControllerTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance())
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, true
         ));
 
         // Cycling {1}

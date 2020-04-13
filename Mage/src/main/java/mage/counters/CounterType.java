@@ -53,6 +53,7 @@ public enum CounterType {
     FIRST_STRIKE("first strike"),
     FLOOD("flood"),
     FLYING("flying"),
+    FORESHADOW("foreshadow"),
     FUNK("funk"),
     FURY("fury"),
     FUNGUS("fungus"),

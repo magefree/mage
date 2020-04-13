@@ -59,6 +59,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     // revealed cards <Name, <Cards>>, will be reset if all players pass priority
     private final Revealed revealed;
     private final Map<UUID, LookedAt> lookedAt = new HashMap<>();
+    private final Revealed companion;
 
     private DelayedTriggeredAbilities delayed;
     private SpecialActions specialActions;
@@ -106,6 +107,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         command = new Command();
         exile = new Exile();
         revealed = new Revealed();
+        companion = new Revealed();
         battlefield = new Battlefield();
         effects = new ContinuousEffects();
         triggers = new TriggeredAbilities();
@@ -123,6 +125,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.choosingPlayerId = state.choosingPlayerId;
         this.revealed = state.revealed.copy();
         this.lookedAt.putAll(state.lookedAt);
+        this.companion = state.companion.copy();
         this.gameOver = state.gameOver;
         this.paused = state.paused;
 
@@ -473,12 +476,20 @@ public class GameState implements Serializable, Copyable<GameState> {
         return lookedAt.get(playerId);
     }
 
+    public Revealed getCompanion() {
+        return companion;
+    }
+
     public void clearRevealed() {
         revealed.clear();
     }
 
     public void clearLookedAt() {
         lookedAt.clear();
+    }
+
+    public void clearCompanion() {
+        companion.clear();
     }
 
     public Turn getTurn() {
@@ -1067,6 +1078,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         isPlaneChase = false;
         revealed.clear();
         lookedAt.clear();
+        companion.clear();
         turnNum = 0;
         stepNum = 0;
         extraTurn = false;

@@ -21,7 +21,7 @@ public final class FullyGrown extends CardImpl {
         // Target creature gets +3/+3 until end of turn. Put a trample counter on it.
         this.getSpellAbility().addEffect(new BoostTargetEffect(3, 3));
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.TRAMPLE.createInstance())
-                .setText("Put a +1/+1 counter on it"));
+                .setText("Put a trample counter on it"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

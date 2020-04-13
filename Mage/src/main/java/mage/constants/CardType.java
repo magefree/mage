@@ -17,9 +17,13 @@ public enum CardType {
     ENCHANTMENT("Enchantment", true),
     INSTANT("Instant", false),
     LAND("Land", true),
+    PHENOMENON("Phenomenon", false),
+    PLANE("Plane", false),
     PLANESWALKER("Planeswalker", true),
+    SCHEME("Scheme", false),
     SORCERY("Sorcery", false),
-    TRIBAL("Tribal", false);
+    TRIBAL("Tribal", false),
+    VANGUARD("Vanguard", false);
 
     private final String text;
     private final boolean permanentType;

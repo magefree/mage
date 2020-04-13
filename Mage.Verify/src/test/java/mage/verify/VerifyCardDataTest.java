@@ -93,6 +93,10 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_PT, "UST", "Garbage Elemental");
         skipListAddName(SKIP_LIST_PT, "UST", "Infinity Elemental");
         skipListAddName(SKIP_LIST_PT, "UNH", "Old Fogey");
+        // the following are temporary
+        skipListAddName(SKIP_LIST_PT, "IKO", "Chevill, Bane of Monsters");
+        skipListAddName(SKIP_LIST_PT, "IKO", "General Kudro of Drannith");
+        skipListAddName(SKIP_LIST_PT, "IKO", "Frillscare Mentor");
 
         // color
         skipListCreate(SKIP_LIST_COLOR);
@@ -104,7 +108,6 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_COST, "ULG", "Erase");
         skipListAddName(SKIP_LIST_COST, "H17", "Grimlock, Dinobot Leader");
         skipListAddName(SKIP_LIST_COST, "UST", "Everythingamajig");
-        skipListAddName(SKIP_LIST_COST, "THB", "Anax, Hardened in the Forge"); // until it's been corrected in MTGJSON
 
         // supertype
         skipListCreate(SKIP_LIST_SUPERTYPE);
@@ -117,12 +120,6 @@ public class VerifyCardDataTest {
         // subtype
         skipListCreate(SKIP_LIST_SUBTYPE);
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Miss Demeanor");
-        // the following are temporary
-        subtypesToIgnore.add("Noble");
-        skipListAddName(SKIP_LIST_SUBTYPE, "AER", "Ridgescale Tusker");
-        skipListAddName(SKIP_LIST_SUBTYPE, "ME3", "Lady Caleria");
-        skipListAddName(SKIP_LIST_SUBTYPE, "LEG", "Lady Caleria");
-
 
         // number
         skipListCreate(SKIP_LIST_NUMBER);
