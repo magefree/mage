@@ -1075,7 +1075,7 @@ public abstract class GameImpl implements Game, Serializable {
 
         // 20180408 - 901.5
         if (gameOptions.planeChase) {
-            Plane plane = Plane.getRandomPlane();
+            Plane plane = Plane.createRandomPlane();
             plane.setControllerId(startingPlayerId);
             addPlane(plane, null, startingPlayerId);
             state.setPlaneChase(this, gameOptions.planeChase);
@@ -2619,7 +2619,7 @@ public abstract class GameImpl implements Game, Serializable {
             for (Player aplayer : state.getPlayers().values()) {
                 if (!aplayer.hasLeft() && !addedAgain) {
                     addedAgain = true;
-                    Plane plane = Plane.getRandomPlane();
+                    Plane plane = Plane.createRandomPlane();
                     plane.setControllerId(aplayer.getId());
                     addPlane(plane, null, aplayer.getId());
                 }

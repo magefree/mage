@@ -1,10 +1,5 @@
-
 package mage.game.command.planes;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -16,13 +11,7 @@ import mage.abilities.effects.common.RollPlanarDieEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.abilities.keyword.ReboundAbility;
 import mage.cards.Card;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.filter.predicate.Predicates;
@@ -35,8 +24,12 @@ import mage.target.Target;
 import mage.target.common.TargetCardInLibrary;
 import mage.watchers.common.PlanarRollWatcher;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public class TrailOfTheMageRingsPlane extends Plane {
@@ -48,7 +41,7 @@ public class TrailOfTheMageRingsPlane extends Plane {
     }
 
     public TrailOfTheMageRingsPlane() {
-        this.setName("Plane - Trail of the Mage-Rings");
+        this.setPlaneType(Planes.PLANE_TRAIL_OF_THE_MAGE_RINGS);
         this.setExpansionSetCodeForImage("PCA");
 
         // Instant and sorcery spells have rebound
@@ -100,7 +93,7 @@ class TrailOfTheMageRingsReboundEffect extends ContinuousEffectImpl {
         if (cPlane == null) {
             return false;
         }
-        if (!cPlane.getName().equalsIgnoreCase("Plane - Trail of the Mage-Rings")) {
+        if (!cPlane.getPlaneType().equals(Planes.PLANE_TRAIL_OF_THE_MAGE_RINGS)) {
             return false;
         }
 
@@ -110,7 +103,7 @@ class TrailOfTheMageRingsReboundEffect extends ContinuousEffectImpl {
                 for (Card card : player.getHand().getCards(filter, game)) {
                     addReboundAbility(card, source, game);
                 }
-                for (Iterator<StackObject> iterator = game.getStack().iterator(); iterator.hasNext();) {
+                for (Iterator<StackObject> iterator = game.getStack().iterator(); iterator.hasNext(); ) {
                     StackObject stackObject = iterator.next();
                     if (stackObject instanceof Spell && stackObject.isControlledBy(source.getControllerId())) {
                         Spell spell = (Spell) stackObject;
