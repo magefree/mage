@@ -189,6 +189,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Keruga, the Macrosage", 354, Rarity.RARE, mage.cards.k.KerugaTheMacrosage.class));
         cards.add(new SetCardInfo("Ketria Crystal", 236, Rarity.UNCOMMON, mage.cards.k.KetriaCrystal.class));
         cards.add(new SetCardInfo("Ketria Triome", 250, Rarity.RARE, mage.cards.k.KetriaTriome.class));
+        cards.add(new SetCardInfo("Kinnan, Bonder Prodigy", 192, Rarity.MYTHIC, mage.cards.k.KinnanBonderProdigy.class));
         cards.add(new SetCardInfo("Kogla, the Titan Ape", 162, Rarity.RARE, mage.cards.k.KoglaTheTitanApe.class));
         cards.add(new SetCardInfo("Labyrinth Raptor", 193, Rarity.RARE, mage.cards.l.LabyrinthRaptor.class));
         cards.add(new SetCardInfo("Lava Serpent", 124, Rarity.COMMON, mage.cards.l.LavaSerpent.class));
