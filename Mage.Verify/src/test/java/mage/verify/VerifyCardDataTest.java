@@ -11,6 +11,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SubType;
 import mage.constants.SuperType;
+import mage.game.command.Plane;
 import mage.game.draft.RateCard;
 import mage.game.permanent.token.Token;
 import mage.game.permanent.token.TokenImpl;
@@ -394,7 +395,7 @@ public class VerifyCardDataTest {
 
         Collection<ExpansionSet> sets = Sets.getInstance().values();
 
-        // 1. wrong set class names
+        // CHECK: wrong set class names
         for (ExpansionSet set : sets) {
             String className = extractShortClass(set.getClass());
             String needClassName = set.getName()
@@ -417,7 +418,7 @@ public class VerifyCardDataTest {
             }
         }
 
-        // 2. wrong basic lands settings (it's for lands search, not booster construct)
+        // CHECK: wrong basic lands settings (it's for lands search, not booster construct)
         Map<String, Boolean> skipLandCheck = new HashMap<>();
         for (ExpansionSet set : sets) {
             if (skipLandCheck.containsKey(set.getName())) {
@@ -450,7 +451,7 @@ public class VerifyCardDataTest {
             // TODO: add test to check num cards (hasBasicLands and numLand > 0)
         }
 
-        // 3. wrong snow land info
+        // CHECK: wrong snow land info
         for (ExpansionSet set : sets) {
             boolean needSnow = CardRepository.instance.haveSnowLands(set.getCode());
             boolean haveSnow = false;
@@ -701,6 +702,53 @@ public class VerifyCardDataTest {
         printMessages(errorsList);
         if (errorsList.size() > 0) {
             Assert.fail("Found token errors: " + errorsList.size());
+        }
+    }
+
+    @Test
+    public void checkMissingPlanesData() {
+        Collection<String> errorsList = new ArrayList<>();
+
+        Reflections reflections = new Reflections("mage.");
+        Set<Class<? extends Plane>> planesClassesList = reflections.getSubTypesOf(Plane.class);
+
+
+        // 1. correct class name
+        for (Class<? extends Plane> planeClass : planesClassesList) {
+            if (!planeClass.getName().endsWith("Plane")) {
+                String className = extractShortClass(planeClass);
+                errorsList.add("error, plane class must ends with Plane: " + className + " from " + planeClass.getName());
+            }
+        }
+
+        // 2. correct package
+        for (Class<? extends Plane> planeClass : planesClassesList) {
+            String fullClass = planeClass.getName();
+            if (!fullClass.startsWith("mage.game.command.planes.")) {
+                String className = extractShortClass(planeClass);
+                errorsList.add("error, plane must be stored in mage.game.command.planes package: " + className + " from " + planeClass.getName());
+            }
+        }
+
+        // 3. correct constructor
+        for (Class<? extends Plane> planeClass : planesClassesList) {
+            String className = extractShortClass(planeClass);
+            Plane plane;
+            try {
+                plane = (Plane) createNewObject(planeClass);
+
+                // 4. must have type/name
+                if (plane.getPlaneType() == null) {
+                    errorsList.add("error, plane must have plane type: " + className + " from " + planeClass.getName());
+                }
+            } catch (Throwable e) {
+                errorsList.add("error, can't create plane with default constructor: " + className + " from " + planeClass.getName());
+            }
+        }
+
+        printMessages(errorsList);
+        if (errorsList.size() > 0) {
+            Assert.fail("Found plane errors: " + errorsList.size());
         }
     }
 
