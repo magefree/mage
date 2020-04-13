@@ -42,7 +42,7 @@ public final class ZirdaTheDawnwaker extends CardImpl {
         this.addAbility(new CompanionAbility(ZirdaTheDawnwakerCompanionCondition.instance));
 
         // Abilities you activate that aren't mana abilities cost {2} less to activate. This effect can't reduce the mana in that cost to less than one mana.
-        this.addAbility(new SimpleStaticAbility(new TrainingGroundsEffect()));
+        this.addAbility(new SimpleStaticAbility(new ZirdaTheDawnwakerEffect()));
 
         // {1}, {T}: Target creature can't block this turn.
         Ability ability = new SimpleActivatedAbility(
@@ -84,15 +84,15 @@ enum ZirdaTheDawnwakerCompanionCondition implements CompanionCondition {
     }
 }
 
-class TrainingGroundsEffect extends CostModificationEffectImpl {
+class ZirdaTheDawnwakerEffect extends CostModificationEffectImpl {
 
-    TrainingGroundsEffect() {
+    ZirdaTheDawnwakerEffect() {
         super(Duration.Custom, Outcome.Benefit, CostModificationType.REDUCE_COST);
         staticText = "Abilities you activate that aren't mana abilities cost {2} less to activate. " +
                 "This effect can't reduce the mana in that cost to less than one mana.";
     }
 
-    private TrainingGroundsEffect(final TrainingGroundsEffect effect) {
+    private ZirdaTheDawnwakerEffect(final ZirdaTheDawnwakerEffect effect) {
         super(effect);
     }
 
@@ -103,7 +103,7 @@ class TrainingGroundsEffect extends CostModificationEffectImpl {
         if (reduceMax > 0 && mana.count() == mana.getGeneric()) {
             reduceMax--;
         }
-        reduceMax=Math.min(reduceMax,2);
+        reduceMax = Math.min(reduceMax, 2);
         if (reduceMax <= 0) {
             return true;
         }
@@ -119,7 +119,7 @@ class TrainingGroundsEffect extends CostModificationEffectImpl {
     }
 
     @Override
-    public TrainingGroundsEffect copy() {
-        return new TrainingGroundsEffect(this);
+    public ZirdaTheDawnwakerEffect copy() {
+        return new ZirdaTheDawnwakerEffect(this);
     }
 }
