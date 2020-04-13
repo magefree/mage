@@ -121,6 +121,11 @@ public class VerifyCardDataTest {
         // subtype
         skipListCreate(SKIP_LIST_SUBTYPE);
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Miss Demeanor");
+        // the following are temporary
+        skipListAddName(SKIP_LIST_SUBTYPE, "THB", "Dryad of the Ilysian Grove");
+        skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Chicken a la King");
+        subtypesToIgnore.add("Shark");
+        subtypesToIgnore.add("Fish");
 
         // number
         skipListCreate(SKIP_LIST_NUMBER);

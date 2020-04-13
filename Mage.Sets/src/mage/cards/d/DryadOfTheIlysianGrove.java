@@ -21,6 +21,7 @@ public final class DryadOfTheIlysianGrove extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{G}");
 
         this.subtype.add(SubType.NYMPH);
+        this.subtype.add(SubType.DRYAD);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 
