@@ -300,6 +300,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Thornwood Falls", 256, Rarity.COMMON, mage.cards.t.ThornwoodFalls.class));
         cards.add(new SetCardInfo("Thwart the Enemy", 173, Rarity.COMMON, mage.cards.t.ThwartTheEnemy.class));
         cards.add(new SetCardInfo("Titanoth Rex", 174, Rarity.UNCOMMON, mage.cards.t.TitanothRex.class));
+        cards.add(new SetCardInfo("Titans' Nest", 212, Rarity.RARE, mage.cards.t.TitansNest.class));
         cards.add(new SetCardInfo("Tranquil Cove", 257, Rarity.COMMON, mage.cards.t.TranquilCove.class));
         cards.add(new SetCardInfo("Trumpeting Gnarr", 213, Rarity.UNCOMMON, mage.cards.t.TrumpetingGnarr.class));
         cards.add(new SetCardInfo("Umori, the Collector", 231, Rarity.RARE, mage.cards.u.UmoriTheCollector.class));
