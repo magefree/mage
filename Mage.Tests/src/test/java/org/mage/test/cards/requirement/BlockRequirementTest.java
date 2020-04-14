@@ -1,4 +1,3 @@
-
 package org.mage.test.cards.requirement;
 
 import mage.constants.PhaseStep;
@@ -10,7 +9,6 @@ import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.fail;
 
 /**
- *
  * @author LevelX2, icetc
  */
 public class BlockRequirementTest extends CardTestPlayerBase {
@@ -91,7 +89,7 @@ public class BlockRequirementTest extends CardTestPlayerBase {
 
     /**
      * Elemental Uprising - "it must be blocked this turn if able", not working
-     *
+     * <p>
      * The bug just happened for me today as well - the problem is "must be
      * blocked" is not being enforced correctly. During opponent's main phase
      * they cast Elemental Uprising targeting an untapped land. They attacked
@@ -186,7 +184,7 @@ public class BlockRequirementTest extends CardTestPlayerBase {
         attack(1, playerA, "Breaker of Armies");
 
         // not allowed due to Breaker of Armies having menace
-        block(1, playerB, "Hill Giant", "Breaker of Armies");
+        //block(1, playerB, "Hill Giant", "Breaker of Armies"); // auto-block from requrement effect must add blocker without command
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
 
@@ -197,7 +195,7 @@ public class BlockRequirementTest extends CardTestPlayerBase {
             assertEquals("Breaker of Armies is blocked by 1 creature(s). It has to be blocked by 2 or more.", e.getMessage());
         }
     }
-    
+
     /*
     Reported bug: Slayer's Cleaver did not force Wretched Gryff (an eldrazi) to block 
     */
@@ -225,7 +223,7 @@ public class BlockRequirementTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Dimensional Infiltrator", 1);
         assertGraveyardCount(playerB, "Llanowar Elves", 1);
     }
-    
+
     /*
      Reported bug: Challenger Troll on field not enforcing block restrictions
     */
@@ -237,30 +235,30 @@ public class BlockRequirementTest extends CardTestPlayerBase {
         Each creature you control with power 4 or greater can’t be blocked by more than one creature.
         */
         String cTroll = "Challenger Troll";
-        
+
         String bSable = "Bronze Sable"; // {2} 2/1
         String hGiant = "Hill Giant"; // {3}{R} 3/3
-        
+
         addCard(Zone.BATTLEFIELD, playerA, cTroll);
         addCard(Zone.BATTLEFIELD, playerB, bSable);
         addCard(Zone.BATTLEFIELD, playerB, hGiant);
-        
+
         attack(1, playerA, cTroll);
 
         // only 1 should be able to block it since Troll >=4 power block restriction
         block(1, playerB, bSable, cTroll);
         block(1, playerB, hGiant, cTroll);
-        
+
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
-                
+
         try {
             execute();
             fail("Expected exception not thrown");
         } catch (UnsupportedOperationException e) {
             assertEquals("Challenger Troll is blocked by 2 creature(s). It can only be blocked by 1 or less.", e.getMessage());
-        }        
+        }
     }
-    
+
     /*
      Reported bug: Challenger Troll on field not enforcing block restrictions
     */
@@ -273,29 +271,29 @@ public class BlockRequirementTest extends CardTestPlayerBase {
         */
         String cTroll = "Challenger Troll";
         String bHulk = "Bloom Hulk"; // {3}{G} 4/4 ETB: proliferate
-        
+
         String bSable = "Bronze Sable"; // {2} 2/1
         String hGiant = "Hill Giant"; // {3}{R} 3/3
-        
+
         addCard(Zone.BATTLEFIELD, playerA, cTroll);
         addCard(Zone.BATTLEFIELD, playerA, bHulk);
         addCard(Zone.BATTLEFIELD, playerB, bSable);
         addCard(Zone.BATTLEFIELD, playerB, hGiant);
-        
+
         attack(1, playerA, cTroll);
         attack(1, playerA, bHulk);
 
         // only 1 should be able to block Bloom Hulk since >=4 power and Troll on field
         block(1, playerB, bSable, bHulk);
         block(1, playerB, hGiant, bHulk);
-        
+
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
-                
+
         try {
             execute();
             fail("Expected exception not thrown");
         } catch (UnsupportedOperationException e) {
             assertEquals("Bloom Hulk is blocked by 2 creature(s). It can only be blocked by 1 or less.", e.getMessage());
-        }        
+        }
     }
 }

@@ -53,6 +53,40 @@ public class TestFrameworkCanPlayAITest extends CardTestPlayerBaseWithAIHelps {
     }
 
     @Test
+    public void test_AI_Attack() {
+        addCard(Zone.BATTLEFIELD, playerA, "Balduvian Bears", 1);
+
+        // AI must attack
+        aiPlayStep(1, PhaseStep.DECLARE_ATTACKERS, playerA);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+        assertAllCommandsUsed();
+
+        assertLife(playerB, 20 - 2);
+    }
+
+    @Test
+    public void test_AI_Block() {
+        addCard(Zone.BATTLEFIELD, playerA, "Balduvian Bears", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Balduvian Bears", 1);
+
+        // AI must block
+        attack(1, playerA, "Balduvian Bears");
+        aiPlayStep(1, PhaseStep.DECLARE_BLOCKERS, playerB);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+        assertAllCommandsUsed();
+
+        assertGraveyardCount(playerA, 1);
+        assertGraveyardCount(playerB, 1);
+        assertLife(playerB, 20);
+    }
+
+    @Test
     @Ignore // AI can't play blade cause score system give priority for boost instead restriction effects like goad
     public void test_AI_GoadedByBloodthirstyBlade_Normal() {
         // Equipped creature gets +2/+0 and is goaded
