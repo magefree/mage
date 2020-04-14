@@ -82,7 +82,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Blood Curdle", 75, Rarity.COMMON, mage.cards.b.BloodCurdle.class));
         cards.add(new SetCardInfo("Bloodfell Caves", 243, Rarity.COMMON, mage.cards.b.BloodfellCaves.class));
         cards.add(new SetCardInfo("Blossoming Sands", 244, Rarity.COMMON, mage.cards.b.BlossomingSands.class));
-        cards.add(new SetCardInfo("Bonder's Enclave", 245, Rarity.RARE, mage.cards.b.BondersEnclave.class));
+        cards.add(new SetCardInfo("Bonders' Enclave", 245, Rarity.RARE, mage.cards.b.BondersEnclave.class));
         cards.add(new SetCardInfo("Boneyard Lurker", 178, Rarity.UNCOMMON, mage.cards.b.BoneyardLurker.class));
         cards.add(new SetCardInfo("Boon of the Wish-Giver", 43, Rarity.UNCOMMON, mage.cards.b.BoonOfTheWishGiver.class));
         cards.add(new SetCardInfo("Boot Nipper", 76, Rarity.COMMON, mage.cards.b.BootNipper.class));
