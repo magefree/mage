@@ -29,7 +29,7 @@ public final class RepeatingBarrage extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
 
-        // Raid — {3}{R}{R}: Return Repeating Barrage from your graveyard to your hand. Activate this ability only if you attacked with a creature this turn.
+        // Raid — {3}{R}{R}: Return Repeating Barrage from your graveyard to your hand. Activate this ability only if you attacked this turn.
         Ability ability = new ConditionalActivatedAbility(Zone.GRAVEYARD,
                 new ReturnSourceFromGraveyardToHandEffect(),
                 new ManaCostsImpl("{3}{R}{R}"),

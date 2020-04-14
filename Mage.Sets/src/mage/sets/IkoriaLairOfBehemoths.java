@@ -69,7 +69,9 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Almighty Brushwagg", 143, Rarity.COMMON, mage.cards.a.AlmightyBrushwagg.class));
         cards.add(new SetCardInfo("Anticipate", 40, Rarity.COMMON, mage.cards.a.Anticipate.class));
         cards.add(new SetCardInfo("Archipelagore", 41, Rarity.UNCOMMON, mage.cards.a.Archipelagore.class));
+        cards.add(new SetCardInfo("Auspicious Starrix", 144, Rarity.UNCOMMON, mage.cards.a.AuspiciousStarrix.class));
         cards.add(new SetCardInfo("Avian Oddity", 42, Rarity.UNCOMMON, mage.cards.a.AvianOddity.class));
+        cards.add(new SetCardInfo("Back for More", 177, Rarity.UNCOMMON, mage.cards.b.BackForMore.class));
         cards.add(new SetCardInfo("Barrier Breach", 145, Rarity.UNCOMMON, mage.cards.b.BarrierBreach.class));
         cards.add(new SetCardInfo("Bastion of Remembrance", 73, Rarity.UNCOMMON, mage.cards.b.BastionOfRemembrance.class));
         cards.add(new SetCardInfo("Blade Banish", 4, Rarity.COMMON, mage.cards.b.BladeBanish.class));
@@ -80,7 +82,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Blood Curdle", 75, Rarity.COMMON, mage.cards.b.BloodCurdle.class));
         cards.add(new SetCardInfo("Bloodfell Caves", 243, Rarity.COMMON, mage.cards.b.BloodfellCaves.class));
         cards.add(new SetCardInfo("Blossoming Sands", 244, Rarity.COMMON, mage.cards.b.BlossomingSands.class));
-        cards.add(new SetCardInfo("Bonder's Enclave", 245, Rarity.RARE, mage.cards.b.BondersEnclave.class));
+        cards.add(new SetCardInfo("Bonders' Enclave", 245, Rarity.RARE, mage.cards.b.BondersEnclave.class));
         cards.add(new SetCardInfo("Boneyard Lurker", 178, Rarity.UNCOMMON, mage.cards.b.BoneyardLurker.class));
         cards.add(new SetCardInfo("Boon of the Wish-Giver", 43, Rarity.UNCOMMON, mage.cards.b.BoonOfTheWishGiver.class));
         cards.add(new SetCardInfo("Boot Nipper", 76, Rarity.COMMON, mage.cards.b.BootNipper.class));
@@ -121,6 +123,8 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Duskfang Mentor", 86, Rarity.UNCOMMON, mage.cards.d.DuskfangMentor.class));
         cards.add(new SetCardInfo("Easy Prey", 87, Rarity.UNCOMMON, mage.cards.e.EasyPrey.class));
         cards.add(new SetCardInfo("Eerie Ultimatum", 184, Rarity.RARE, mage.cards.e.EerieUltimatum.class));
+        cards.add(new SetCardInfo("Emergent Ultimatum", 185, Rarity.RARE, mage.cards.e.EmergentUltimatum.class));
+        cards.add(new SetCardInfo("Escape Protocol", 48, Rarity.UNCOMMON, mage.cards.e.EscapeProtocol.class));
         cards.add(new SetCardInfo("Essence Scatter", 49, Rarity.COMMON, mage.cards.e.EssenceScatter.class));
         cards.add(new SetCardInfo("Everquill Phoenix", 114, Rarity.RARE, mage.cards.e.EverquillPhoenix.class));
         cards.add(new SetCardInfo("Evolving Wilds", 247, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
@@ -170,6 +174,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Humble Naturalist", 160, Rarity.COMMON, mage.cards.h.HumbleNaturalist.class));
         cards.add(new SetCardInfo("Hunted Nightmare", 92, Rarity.RARE, mage.cards.h.HuntedNightmare.class));
         cards.add(new SetCardInfo("Huntmaster Liger", 16, Rarity.UNCOMMON, mage.cards.h.HuntmasterLiger.class));
+        cards.add(new SetCardInfo("Illuna, Apex of Wishes", 190, Rarity.MYTHIC, mage.cards.i.IllunaApexOfWishes.class));
         cards.add(new SetCardInfo("Imposing Vantasaur", 17, Rarity.COMMON, mage.cards.i.ImposingVantasaur.class));
         cards.add(new SetCardInfo("Indatha Crystal", 235, Rarity.UNCOMMON, mage.cards.i.IndathaCrystal.class));
         cards.add(new SetCardInfo("Indatha Triome", 248, Rarity.RARE, mage.cards.i.IndathaTriome.class));
@@ -187,6 +192,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Keruga, the Macrosage", 354, Rarity.RARE, mage.cards.k.KerugaTheMacrosage.class));
         cards.add(new SetCardInfo("Ketria Crystal", 236, Rarity.UNCOMMON, mage.cards.k.KetriaCrystal.class));
         cards.add(new SetCardInfo("Ketria Triome", 250, Rarity.RARE, mage.cards.k.KetriaTriome.class));
+        cards.add(new SetCardInfo("Kinnan, Bonder Prodigy", 192, Rarity.MYTHIC, mage.cards.k.KinnanBonderProdigy.class));
         cards.add(new SetCardInfo("Kogla, the Titan Ape", 162, Rarity.RARE, mage.cards.k.KoglaTheTitanApe.class));
         cards.add(new SetCardInfo("Labyrinth Raptor", 193, Rarity.RARE, mage.cards.l.LabyrinthRaptor.class));
         cards.add(new SetCardInfo("Lava Serpent", 124, Rarity.COMMON, mage.cards.l.LavaSerpent.class));
@@ -218,6 +224,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Mythos of Nethroi", 97, Rarity.RARE, mage.cards.m.MythosOfNethroi.class));
         cards.add(new SetCardInfo("Mythos of Snapdax", 24, Rarity.RARE, mage.cards.m.MythosOfSnapdax.class));
         cards.add(new SetCardInfo("Mythos of Vadrok", 127, Rarity.RARE, mage.cards.m.MythosOfVadrok.class));
+        cards.add(new SetCardInfo("Narset of the Ancient Way", 195, Rarity.MYTHIC, mage.cards.n.NarsetOfTheAncientWay.class));
         cards.add(new SetCardInfo("Necropanther", 196, Rarity.UNCOMMON, mage.cards.n.Necropanther.class));
         cards.add(new SetCardInfo("Nethroi, Apex of Death", 197, Rarity.MYTHIC, mage.cards.n.NethroiApexOfDeath.class));
         cards.add(new SetCardInfo("Neutralize", 59, Rarity.UNCOMMON, mage.cards.n.Neutralize.class));
@@ -293,6 +300,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Thornwood Falls", 256, Rarity.COMMON, mage.cards.t.ThornwoodFalls.class));
         cards.add(new SetCardInfo("Thwart the Enemy", 173, Rarity.COMMON, mage.cards.t.ThwartTheEnemy.class));
         cards.add(new SetCardInfo("Titanoth Rex", 174, Rarity.UNCOMMON, mage.cards.t.TitanothRex.class));
+        cards.add(new SetCardInfo("Titans' Nest", 212, Rarity.RARE, mage.cards.t.TitansNest.class));
         cards.add(new SetCardInfo("Tranquil Cove", 257, Rarity.COMMON, mage.cards.t.TranquilCove.class));
         cards.add(new SetCardInfo("Trumpeting Gnarr", 213, Rarity.UNCOMMON, mage.cards.t.TrumpetingGnarr.class));
         cards.add(new SetCardInfo("Umori, the Collector", 231, Rarity.RARE, mage.cards.u.UmoriTheCollector.class));

@@ -30,11 +30,11 @@ public final class StormFleetPyromancer extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
-        // Raid - When Storm Fleet Pyromancer enters the battlefield, if you attacked with a creature this turn, Storm Fleet Pyromancer deals 2 damage to any target.
+        // Raid - When Storm Fleet Pyromancer enters the battlefield, if you attacked this turn, Storm Fleet Pyromancer deals 2 damage to any target.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(2)),
                 RaidCondition.instance,
-                "<i>Raid</i> &mdash; When {this} enters the battlefield, if you attacked with a creature this turn, {this} deals 2 damage to any target.");
+                "<i>Raid</i> &mdash; When {this} enters the battlefield, if you attacked this turn, {this} deals 2 damage to any target.");
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability, new PlayerAttackedWatcher());
     }

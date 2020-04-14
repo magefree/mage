@@ -34,7 +34,7 @@ public final class EstridsInvocation extends CardImpl {
         // You may have Estrid's Invocation enter the battlefield as a copy of any enchantment you control, except it gains "At the beginning of your upkeep, you may exile this enchantment. If you do, return it to the battlefield under its owner's control."
         this.addAbility(new EntersBattlefieldAbility(new CopyPermanentEffect(
                 filter, new EstridsInvocationApplier()
-        ).setText("as a copy of any enchantment you control, except it gains "
+        ).setText("as a copy of an enchantment you control, except it gains "
                 + "\"At the beginning of your upkeep, "
                 + "you may exile this enchantment. "
                 + "If you do, return it to the battlefield "
