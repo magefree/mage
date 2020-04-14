@@ -44,10 +44,14 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="btnQuickStartDuel" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="btnQuickStartDuel" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="btnQuickStartMCTS" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <Component id="btnQuickStartCommander" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="667" max="32767" attributes="0"/>
+                  <EmptySpace pref="540" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -63,7 +67,13 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="filterBar1" max="32767" attributes="0"/>
-                              <Component id="btnQuickStartDuel" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="btnQuickStartDuel" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnQuickStartMCTS" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -367,7 +377,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFilterActionPerformed"/>
               </Events>
             </Component>
-			<Component class="javax.swing.JToggleButton" name="btnFormatPioneer">
+            <Component class="javax.swing.JToggleButton" name="btnFormatPioneer">
               <Properties>
                 <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="Pioneer"/>
@@ -565,6 +575,14 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnQuickStartCommanderActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnQuickStartMCTS">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Quick start MCTS"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnQuickStartMCTSActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
