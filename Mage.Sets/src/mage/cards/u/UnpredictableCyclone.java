@@ -75,7 +75,7 @@ class UnpredictableCycloneReplacementEffect extends ReplacementEffectImpl {
             return false;
         }
         Card sourceCard = game.getCard(stackObject.getSourceId());
-        if (sourceCard == null ) {
+        if (sourceCard == null) {
             return false;
         }
         Cards cards = new CardsImpl();
@@ -108,7 +108,7 @@ class UnpredictableCycloneReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getPlayerId().equals(source.getControllerId())) {
+        if (!event.getPlayerId().equals(source.getControllerId())) {
             return false;
         }
         Player player = game.getPlayer(event.getPlayerId());
@@ -119,6 +119,6 @@ class UnpredictableCycloneReplacementEffect extends ReplacementEffectImpl {
             return false;
         }
         Card sourceCard = game.getCard(stackObject.getSourceId());
-        return sourceCard == null || sourceCard.isLand();
+        return sourceCard != null && !sourceCard.isLand();
     }
 }
