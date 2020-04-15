@@ -72,7 +72,7 @@ class VanishIntoMemoryEffect extends OneShotEffect {
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (controller != null && permanent != null && sourceObject != null) {
             if (controller.moveCardsToExile(permanent, source, game, true, source.getSourceId(), sourceObject.getIdName())) {
-                controller.drawCards(permanent.getPower().getValue(), game);
+                controller.drawCards(permanent.getPower().getValue(), source.getSourceId(), game);
                 ExileZone exile = game.getExile().getExileZone(source.getSourceId());
                 // only if permanent is in exile (tokens would be stop to exist)
                 if (exile != null && !exile.isEmpty()) {

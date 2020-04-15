@@ -88,7 +88,7 @@ class IndulgentTormentorEffect extends OneShotEffect {
                     return true;
                 }
             }
-            game.getPlayer(source.getControllerId()).drawCards(1, game);
+            game.getPlayer(source.getControllerId()).drawCards(1, source.getSourceId(), game);
             return true;
         }
         return false;

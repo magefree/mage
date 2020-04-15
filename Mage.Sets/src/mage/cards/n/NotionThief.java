@@ -76,7 +76,7 @@ class NotionThiefReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            player.drawCards(1, game, event.getAppliedEffects());
+            player.drawCards(1, event.getSourceId(), game, event.getAppliedEffects());
         }
         return true;
     }

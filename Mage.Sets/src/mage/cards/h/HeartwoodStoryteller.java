@@ -106,7 +106,7 @@ class HeartwoodStorytellerEffect extends OneShotEffect {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 if (player.chooseUse(outcome, "Draw a card?", source, game)) {
-                    player.drawCards(1, game);
+                    player.drawCards(1, source.getSourceId(), game);
                 }
             }
         }

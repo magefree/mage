@@ -75,7 +75,7 @@ class KhorvathsFuryEffect extends OneShotEffect {
         }
         for (Player player : choice.getFriends()) {
             if (player != null) {
-                player.drawCards(cardsToDraw.get(player.getId()) + 1, game);
+                player.drawCards(cardsToDraw.get(player.getId()) + 1, source.getSourceId(), game);
             }
         }
         for (Player player : choice.getFoes()) {

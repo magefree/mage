@@ -78,7 +78,7 @@ class MoltenPsycheEffect extends OneShotEffect {
             for (UUID playerId : cardsToDraw.keySet()) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    player.drawCards(cardsToDraw.get(playerId), game);
+                    player.drawCards(cardsToDraw.get(playerId), source.getSourceId(), game);
                 }
             }
             if (MetalcraftCondition.instance.apply(game, source)) {

@@ -73,7 +73,7 @@ class ForeshadowEffect extends OneShotEffect {
             if (card != null) {
                 controller.moveCards(card, Zone.GRAVEYARD, source, game);
                 if (CardUtil.haveSameNames(card.getName(), cardName)) {
-                    controller.drawCards(1, game);
+                    controller.drawCards(1, source.getSourceId(), game);
                 }
             }
             return true;

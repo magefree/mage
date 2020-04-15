@@ -67,7 +67,7 @@ class RiskFactorEffect extends OneShotEffect {
         if (opponent.chooseUse(outcome, "Do you choose to take the damage?", source, game)) {
             opponent.damage(4, source.getSourceId(), game);
         } else {
-            controller.drawCards(3, game);
+            controller.drawCards(3, source.getSourceId(), game);
         }
         return true;
     }

@@ -97,7 +97,7 @@ class StandstillEffect extends OneShotEffect {
                 for (UUID uuid : game.getOpponents(this.getTargetPointer().getFirst(game, source))) {
                     Player player = game.getPlayer(uuid);
                     if (player != null) {
-                        player.drawCards(3, game);
+                        player.drawCards(3, source.getSourceId(), game);
                     }
                 }
                 return true;
