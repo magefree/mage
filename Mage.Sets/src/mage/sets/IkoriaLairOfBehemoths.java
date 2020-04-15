@@ -250,6 +250,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Primal Empathy", 200, Rarity.UNCOMMON, mage.cards.p.PrimalEmpathy.class));
         cards.add(new SetCardInfo("Proud Wildbonder", 229, Rarity.UNCOMMON, mage.cards.p.ProudWildbonder.class));
         cards.add(new SetCardInfo("Pyroceratops", 130, Rarity.COMMON, mage.cards.p.Pyroceratops.class));
+        cards.add(new SetCardInfo("Quartzwood Crasher", 201, Rarity.RARE, mage.cards.q.QuartzwoodCrasher.class));
         cards.add(new SetCardInfo("Raking Claws", 131, Rarity.COMMON, mage.cards.r.RakingClaws.class));
         cards.add(new SetCardInfo("Ram Through", 170, Rarity.COMMON, mage.cards.r.RamThrough.class));
         cards.add(new SetCardInfo("Raugrin Crystal", 238, Rarity.UNCOMMON, mage.cards.r.RaugrinCrystal.class));
