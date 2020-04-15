@@ -22,12 +22,12 @@ public final class FirecannonBlast extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");
 
         // Firecannon Blast deals 3 damage to target creature.
-        // Raid - Firecannon Blast deals 6 damage to that creature instead if you attacked with a creature this turn.
+        // Raid - Firecannon Blast deals 6 damage to that creature instead if you attacked this turn.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DamageTargetEffect(6),
                 new DamageTargetEffect(3),
                 RaidCondition.instance,
-                "{this} deals 3 damage to target creature.<br><i>Raid</i> &mdash; {this} deals 6 damage instead if you attacked with a creature this turn"));
+                "{this} deals 3 damage to target creature.<br><i>Raid</i> &mdash; {this} deals 6 damage instead if you attacked this turn"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addWatcher(new PlayerAttackedWatcher());
     }

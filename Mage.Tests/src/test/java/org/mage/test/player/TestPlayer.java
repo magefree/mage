@@ -112,6 +112,12 @@ public class TestPlayer implements Player {
         computerPlayer.setTestPlayerLink(this);
     }
 
+    public TestPlayer(TestComputerPlayerMonteCarlo computerPlayer) {
+        this.computerPlayer = computerPlayer;
+        AIPlayer = false;
+        computerPlayer.setTestPlayerLink(this);
+    }
+
     public TestPlayer(final TestPlayer testPlayer) {
         this.AIPlayer = testPlayer.AIPlayer;
         this.AICanChooseInStrictMode = testPlayer.AICanChooseInStrictMode;
@@ -1411,6 +1417,16 @@ public class TestPlayer implements Player {
         boolean madeAttackByAction = false;
         for (Iterator<org.mage.test.player.PlayerAction> it = actions.iterator(); it.hasNext(); ) {
             PlayerAction action = it.next();
+
+            // aiXXX commands
+            if (action.getTurnNum() == game.getTurnNum() && action.getAction().equals(AI_PREFIX + AI_COMMAND_PLAY_STEP)) {
+                mustAttackByAction = true;
+                madeAttackByAction = true;
+                this.computerPlayer.selectAttackers(game, attackingPlayerId);
+                it.remove();
+                break;
+            }
+
             if (action.getTurnNum() == game.getTurnNum() && action.getAction().startsWith("attack:")) {
                 mustAttackByAction = true;
                 String command = action.getAction();
@@ -1473,7 +1489,7 @@ public class TestPlayer implements Player {
             this.chooseStrictModeFailed("attacker", game, "select attackers must use attack command but don't");
         }
 
-        // AI play if no actions available
+        // AI FULL play if no actions available
         if (!mustAttackByAction && this.AIPlayer) {
             this.computerPlayer.selectAttackers(game, attackingPlayerId);
         }
@@ -1486,14 +1502,22 @@ public class TestPlayer implements Player {
 
     @Override
     public void selectBlockers(Game game, UUID defendingPlayerId) {
-
         List<PlayerAction> tempActions = new ArrayList<>(actions);
 
         UUID opponentId = game.getOpponents(computerPlayer.getId()).iterator().next();
-        // Map of Blocker reference -> list of creatures blocked
-        Map<MageObjectReference, List<MageObjectReference>> blockedCreaturesByCreature = new HashMap<>();
+        Map<MageObjectReference, List<MageObjectReference>> blockedCreaturesList = getBlockedCreaturesByCreatureList(game);
+
         boolean mustBlockByAction = false;
         for (PlayerAction action : tempActions) {
+
+            // aiXXX commands
+            if (action.getTurnNum() == game.getTurnNum() && action.getAction().equals(AI_PREFIX + AI_COMMAND_PLAY_STEP)) {
+                mustBlockByAction = true;
+                this.computerPlayer.selectBlockers(game, defendingPlayerId);
+                actions.remove(action);
+                break;
+            }
+
             if (action.getTurnNum() == game.getTurnNum() && action.getAction().startsWith("block:")) {
                 mustBlockByAction = true;
                 String command = action.getAction();
@@ -1510,7 +1534,8 @@ public class TestPlayer implements Player {
                 String attackerName = groups[1];
                 Permanent attacker = findPermanent(new FilterAttackingCreature(), attackerName, opponentId, game);
                 Permanent blocker = findPermanent(new FilterControlledPermanent(), blockerName, computerPlayer.getId(), game);
-                if (canBlockAnother(game, blocker, attacker, blockedCreaturesByCreature)) {
+
+                if (canBlockAnother(game, blocker, attacker, blockedCreaturesList)) {
                     computerPlayer.declareBlocker(defendingPlayerId, blocker.getId(), attacker.getId(), game);
                     actions.remove(action);
                 } else {
@@ -1518,40 +1543,74 @@ public class TestPlayer implements Player {
                 }
             }
         }
-        checkMultipleBlockers(game, blockedCreaturesByCreature);
+        checkMultipleBlockers(game, blockedCreaturesList);
 
-        // AI play if no actions available
+        // AI FULL play if no actions available
         if (!mustBlockByAction && this.AIPlayer) {
             this.computerPlayer.selectBlockers(game, defendingPlayerId);
         }
     }
 
-    // Checks if a creature can block at least one more creature
-    private boolean canBlockAnother(Game game, Permanent blocker, Permanent attacker, Map<MageObjectReference, List<MageObjectReference>> blockedCreaturesByCreature) {
+    private Map<MageObjectReference, List<MageObjectReference>> getBlockedCreaturesByCreatureList(Game game) {
+        // collect already declared blockers info (e.g. after auto-adding on block requirements)
+        // blocker -> blocked attackers
+        Map<MageObjectReference, List<MageObjectReference>> blockedCreaturesByCreature = new HashMap<>();
+        for (CombatGroup combatGroup : game.getCombat().getGroups()) {
+            for (UUID combatBlockerId : combatGroup.getBlockers()) {
+                Permanent blocker = game.getPermanent(combatBlockerId);
+                if (blocker != null) {
+                    // collect all blocked attackers
+                    List<MageObjectReference> blocked = getBlockedAttackers(game, blocker, blockedCreaturesByCreature);
+                    for (UUID combatAttackerId : combatGroup.getAttackers()) {
+                        Permanent combatAttacker = game.getPermanent(combatAttackerId);
+                        if (combatAttacker != null) {
+                            blocked.add(new MageObjectReference(combatAttacker, game));
+                        }
+                    }
+                }
+            }
+        }
+        return blockedCreaturesByCreature;
+    }
+
+    private List<MageObjectReference> getBlockedAttackers(Game game, Permanent blocker, Map<MageObjectReference, List<MageObjectReference>> blockedCreaturesByCreature) {
+        // finds creatures list blocked by blocker permanent
         MageObjectReference blockerRef = new MageObjectReference(blocker, game);
-        // See if we already reference this blocker
         for (MageObjectReference r : blockedCreaturesByCreature.keySet()) {
             if (r.equals(blockerRef)) {
-                // Use the existing reference if we do
+                // already exist
                 blockerRef = r;
             }
         }
+
+        if (!blockedCreaturesByCreature.containsKey(blockerRef)) {
+            blockedCreaturesByCreature.put(blockerRef, new ArrayList<>());
+        }
         List<MageObjectReference> blocked = blockedCreaturesByCreature.getOrDefault(blockerRef, new ArrayList<>());
+        return blocked;
+    }
+
+    private boolean canBlockAnother(Game game, Permanent blocker, Permanent attacker, Map<MageObjectReference, List<MageObjectReference>> blockedCreaturesByCreature) {
+        // check if blocker can block one more attacker and adds it
+        List<MageObjectReference> blocked = getBlockedAttackers(game, blocker, blockedCreaturesByCreature);
         int numBlocked = blocked.size();
+
         // Can't block any more creatures
         if (++numBlocked > blocker.getMaxBlocks()) {
             return false;
         }
+
         // Add the attacker reference to the list of creatures this creature is blocking
         blocked.add(new MageObjectReference(attacker, game));
-        blockedCreaturesByCreature.put(blockerRef, blocked);
         return true;
     }
 
-    // Check for Menace type abilities - if creatures can be blocked by >X or <Y only
     private void checkMultipleBlockers(Game game, Map<MageObjectReference, List<MageObjectReference>> blockedCreaturesByCreature) {
+        // Check for Menace type abilities - if creatures can be blocked by >X or <Y only
+
         // Stores the total number of blockers for each attacker
         Map<MageObjectReference, Integer> blockersForAttacker = new HashMap<>();
+
         // Calculate the number of blockers each attacker has
         for (List<MageObjectReference> attackers : blockedCreaturesByCreature.values()) {
             for (MageObjectReference mr : attackers) {
@@ -1559,6 +1618,7 @@ public class TestPlayer implements Player {
                 blockersForAttacker.put(mr, blockers + 1);
             }
         }
+
         // Check each attacker is blocked by an allowed amount of creatures
         for (Map.Entry<MageObjectReference, Integer> entry : blockersForAttacker.entrySet()) {
             Permanent attacker = entry.getKey().getPermanent(game);

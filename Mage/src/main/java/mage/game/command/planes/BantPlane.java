@@ -1,9 +1,5 @@
-
 package mage.game.command.planes;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
@@ -21,11 +17,7 @@ import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.ExaltedAbility;
 import mage.abilities.keyword.IndestructibleAbility;
-import mage.constants.CostModificationType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
@@ -39,8 +31,11 @@ import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
 import mage.watchers.common.PlanarRollWatcher;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public class BantPlane extends Plane {
@@ -56,15 +51,15 @@ public class BantPlane extends Plane {
     private static final String exaltedRule = "All creatures have exalted";
 
     public BantPlane() {
-        this.setName("Plane - Bant");
+        this.setPlaneType(Planes.PLANE_BANT);
         this.setExpansionSetCodeForImage("PCA");
 
         // All creatures have exalted
         SimpleStaticAbility ability
                 = new SimpleStaticAbility(Zone.COMMAND, new ConditionalContinuousEffect(
-                        new GainAbilityAllEffect(new ExaltedAbility(), Duration.Custom, StaticFilters.FILTER_PERMANENT_CREATURE),
-                        new IsStillOnPlaneCondition(this.getName()),
-                        exaltedRule));
+                new GainAbilityAllEffect(new ExaltedAbility(), Duration.Custom, StaticFilters.FILTER_PERMANENT_CREATURE),
+                new IsStillOnPlaneCondition(this.getName()),
+                exaltedRule));
 
         this.getAbilities().add(ability);
 

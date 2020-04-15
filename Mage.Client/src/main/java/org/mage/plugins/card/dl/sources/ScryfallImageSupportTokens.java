@@ -350,6 +350,30 @@ public class ScryfallImageSupportTokens {
             put("THB/Wolf", "https://api.scryfall.com/cards/tthb/11/en?format=image");
             put("THB/Zombie", "https://api.scryfall.com/cards/tthb/7/en?format=image");
 
+            // PCA (planes)
+            put("PCA/Eldrazi", "https://api.scryfall.com/cards/tpca/1/en?format=image");
+            put("PCA/Plane - Academy at Tolaria West", "https://api.scryfall.com/cards/opca/9/en?format=image");
+            put("PCA/Plane - Agyrem", "https://api.scryfall.com/cards/opca/11/en?format=image");
+            put("PCA/Plane - Akoum", "https://api.scryfall.com/cards/opca/12/en?format=image");
+            put("PCA/Plane - Astral Arena", "https://api.scryfall.com/cards/opca/14/en?format=image");
+            put("PCA/Plane - Bant", "https://api.scryfall.com/cards/opca/15/en?format=image");
+            put("PCA/Plane - Edge of Malacol", "https://api.scryfall.com/cards/opca/20/en?format=image");
+            put("PCA/Plane - Feeding Grounds", "https://api.scryfall.com/cards/opca/23/en?format=image");
+            put("PCA/Plane - Fields of Summer", "https://api.scryfall.com/cards/opca/24/en?format=image");
+            put("PCA/Plane - Hedron Fields of Agadeem", "https://api.scryfall.com/cards/opca/35/en?format=image");
+            put("PCA/Plane - Lethe Lake", "https://api.scryfall.com/cards/opca/47/en?format=image");
+            put("PCA/Plane - Naya", "https://api.scryfall.com/cards/opca/55/en?format=image");
+            put("PCA/Plane - Panopticon", "https://api.scryfall.com/cards/opca/62/en?format=image");
+            put("PCA/Plane - Tazeem", "https://api.scryfall.com/cards/opca/78/en?format=image");
+            put("PCA/Plane - The Dark Barony", "https://api.scryfall.com/cards/opca/19/en?format=image");
+            put("PCA/Plane - The Eon Fog", "https://api.scryfall.com/cards/opca/22/en?format=image");
+            put("PCA/Plane - The Great Forest", "https://api.scryfall.com/cards/opca/32/en?format=image");
+            put("PCA/Plane - The Zephyr Maze", "https://api.scryfall.com/cards/opca/86/en?format=image");
+            put("PCA/Plane - Truga Jungle", "https://api.scryfall.com/cards/opca/81/en?format=image");
+            put("PCA/Plane - Trail of the Mage-Rings", "https://api.scryfall.com/cards/opca/80/en?format=image");
+            put("PCA/Plane - Turri Island", "https://api.scryfall.com/cards/opca/82/en?format=image");
+            put("PCA/Plane - Undercity Reaches", "https://api.scryfall.com/cards/opca/83/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

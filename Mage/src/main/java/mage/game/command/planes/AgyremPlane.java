@@ -15,10 +15,7 @@ import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
 import mage.abilities.effects.common.RollPlanarDieEffect;
 import mage.cards.Card;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -47,7 +44,7 @@ public class AgyremPlane extends Plane {
     }
 
     public AgyremPlane() {
-        this.setName("Plane - Agyrem");
+        this.setPlaneType(Planes.PLANE_AGYREM);
         this.setExpansionSetCodeForImage("PCA");
 
         // Whenever a white creature dies, return it to the battlefield under its owner's control at the beginning of the next end step
@@ -156,7 +153,7 @@ class AgyremRestrictionEffect extends RestrictionEffect {
         }
 
         Plane cPlane = game.getState().getCurrentPlane();
-        if (cPlane != null && cPlane.getName().equalsIgnoreCase("Plane - Agyrem")) {
+        if (cPlane != null && cPlane.getPlaneType().equals(Planes.PLANE_AGYREM)) {
             return !defenderId.equals(source.getControllerId());
         }
         return true;
