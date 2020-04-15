@@ -161,9 +161,4 @@ class QuartzwoodCrasherWatcher extends Watcher {
         }
         return damageMap.get(damagedPlayerId).getOrDefault(controllerId, 0);
     }
-
-    @Override
-    public QuartzwoodCrasherWatcher copy() {
-        return new QuartzwoodCrasherWatcher(this);
-    }
 }
