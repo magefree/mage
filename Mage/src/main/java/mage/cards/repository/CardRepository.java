@@ -41,7 +41,7 @@ public enum CardRepository {
     private RepositoryEventSource eventSource = new RepositoryEventSource();
 
     CardRepository() {
-        File file = new File("db");
+        File file = new File("db").getAbsoluteFile();
         if (!file.exists()) {
             file.mkdirs();
         }

@@ -53,8 +53,8 @@ public final class Main {
     private static final String fastDBModeArg = "-fastDbMode=";
     private static final String adminPasswordArg = "-adminPassword=";
 
-    private static final File pluginFolder = new File("plugins");
-    private static final File extensionFolder = new File("extensions");
+    private static final File pluginFolder = new File("./plugins").getAbsoluteFile();
+    private static final File extensionFolder = new File("./extensions").getAbsoluteFile();
 
     public static final PluginClassLoader classLoader = new PluginClassLoader();
     private static TransporterServer server;
@@ -97,7 +97,13 @@ public final class Main {
         logger.info("Loading extension packages...");
         if (!extensionFolder.exists()) {
             if (!extensionFolder.mkdirs()) {
-                logger.error("Could not create extensions directory.");
+                String folderPath = "";
+                try {
+                    folderPath = extensionFolder.getCanonicalPath();
+                } catch (IOException e) {
+                    folderPath = extensionFolder.getAbsolutePath();
+                }
+                logger.error("Could not create extensions directory \"" + folderPath + "\" (exists=" + extensionFolder.exists() + ", writable=" + extensionFolder.canWrite() + ", directory=" + extensionFolder.isDirectory() + ")!");
             }
         }
         File[] extensionDirectories = extensionFolder.listFiles();

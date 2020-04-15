@@ -36,6 +36,8 @@ import mage.view.ChatMessage.MessageType;
 import org.apache.log4j.Logger;
 
 import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.*;
@@ -55,6 +57,8 @@ public class GameController implements GameCallback {
 
     private static final ExecutorService gameExecutor = ThreadExecutor.instance.getGameExecutor();
     private static final Logger logger = Logger.getLogger(GameController.class);
+
+    private static final Path savePath = Paths.get("saved").toAbsolutePath();
 
     protected final ScheduledExecutorService joinWaitingExecutor = Executors.newSingleThreadScheduledExecutor();
 
@@ -911,8 +915,10 @@ public class GameController implements GameCallback {
         OutputStream file = null;
         ObjectOutput output = null;
         OutputStream buffer = null;
+        Path path = null;
         try {
-            file = new FileOutputStream("saved/" + game.getId().toString() + ".game");
+            path = savePath.resolve(game.getId().toString() + ".game");
+            file = new FileOutputStream(path.toFile().getAbsoluteFile());
             buffer = new BufferedOutputStream(file);
             output = new ObjectOutputStream(new GZIPOutputStream(buffer));
             output.writeObject(game);
@@ -920,7 +926,8 @@ public class GameController implements GameCallback {
             logger.debug("Saved game:" + game.getId());
             return true;
         } catch (IOException ex) {
-            logger.fatal("Cannot save game.", ex);
+            File folder = path.getParent().toFile().getAbsoluteFile();
+            logger.fatal("Cannot save game to path \"" + path.toString() + "\" (folder exists=" + folder.exists() + ", writable=" + folder.canWrite() + ", directory=" + folder.isDirectory() + ")!", ex);
         } finally {
             StreamUtils.closeQuietly(file);
             StreamUtils.closeQuietly(output);

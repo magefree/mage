@@ -37,7 +37,7 @@ public enum ExpansionRepository {
     public boolean instanceInitialized = false;
 
     ExpansionRepository() {
-        File file = new File("db");
+        File file = new File("db").getAbsoluteFile();
         if (!file.exists()) {
             file.mkdirs();
         }

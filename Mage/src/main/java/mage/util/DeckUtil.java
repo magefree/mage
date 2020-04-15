@@ -31,7 +31,7 @@ public final class DeckUtil {
     public static String writeTextToTempFile(String filePrefix, String fileSuffix, String text) {
         BufferedWriter bw = null;
         try {
-            File temp = File.createTempFile(filePrefix, fileSuffix);
+            File temp = File.createTempFile(filePrefix, fileSuffix).getAbsoluteFile();
             bw = new BufferedWriter(new FileWriter(temp));
             bw.write(text);
             return temp.getPath();
