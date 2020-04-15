@@ -322,6 +322,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Wind-Scarred Crag", 258, Rarity.COMMON, mage.cards.w.WindScarredCrag.class));
         cards.add(new SetCardInfo("Wingfold Pteron", 71, Rarity.COMMON, mage.cards.w.WingfoldPteron.class));
         cards.add(new SetCardInfo("Wingspan Mentor", 72, Rarity.UNCOMMON, mage.cards.w.WingspanMentor.class));
+        cards.add(new SetCardInfo("Winota, Joiner of Forces", 216, Rarity.MYTHIC, mage.cards.w.WinotaJoinerOfForces.class));
         cards.add(new SetCardInfo("Yidaro, Wandering Monster", 141, Rarity.RARE, mage.cards.y.YidaroWanderingMonster.class));
         cards.add(new SetCardInfo("Zagoth Crystal", 242, Rarity.UNCOMMON, mage.cards.z.ZagothCrystal.class));
         cards.add(new SetCardInfo("Zagoth Mamba", 106, Rarity.UNCOMMON, mage.cards.z.ZagothMamba.class));
