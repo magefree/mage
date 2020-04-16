@@ -85,7 +85,7 @@ class LichsMirrorEffect extends ReplacementEffectImpl {
             }
             player.shuffleLibrary(source, game);
             
-            player.drawCards(7, game);
+            player.drawCards(7, source.getSourceId(), game);
             
             player.setLife(20, game, source);
         }

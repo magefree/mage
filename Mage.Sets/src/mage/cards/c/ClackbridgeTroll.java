@@ -114,7 +114,7 @@ class ClackbridgeTrollEffect extends OneShotEffect {
                 sourcePerm.tap(game);
             }
             controller.gainLife(3, game, source);
-            controller.drawCards(1, game);
+            controller.drawCards(1, source.getSourceId(), game);
         }
         return true;
     }

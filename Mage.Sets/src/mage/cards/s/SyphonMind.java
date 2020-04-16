@@ -76,7 +76,7 @@ class SyphonMindEffect extends OneShotEffect {
                     }
                 }
             }
-            you.drawCards(amount, game);
+            you.drawCards(amount, source.getSourceId(), game);
         }
         return result;
     }

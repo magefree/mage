@@ -80,7 +80,7 @@ class BountyOfTheLuxaEffect extends OneShotEffect {
                 if (bountyOfLuxa != null) {
                     new AddCountersSourceEffect(CounterType.FLOOD.createInstance()).apply(game, source);
                 }
-                controller.drawCards(1, game);
+                controller.drawCards(1, source.getSourceId(), game);
             }
             return true;
         }

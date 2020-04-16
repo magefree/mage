@@ -84,7 +84,7 @@ class AzraBladeseekerEffect extends OneShotEffect {
         }
         for (PlayerCard playerCard : playerCardList) {
             if (playerCard.getPlayer().discard(playerCard.getCard(), source, game)) {
-                playerCard.getPlayer().drawCards(1, game);
+                playerCard.getPlayer().drawCards(1, source.getSourceId(), game);
             }
         }
         return true;

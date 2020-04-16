@@ -408,7 +408,7 @@ public interface Game extends MageItem, Serializable {
 
     boolean endTurn(Ability source);
 
-    int doAction(MageAction action);
+    int doAction(MageAction action, UUID sourceId);
 
     //game transaction methods
     void saveState(boolean bookmark);

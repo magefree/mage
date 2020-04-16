@@ -91,7 +91,7 @@ class KozilekDrawEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            controller.drawCards(7 - controller.getHand().size(), game);
+            controller.drawCards(7 - controller.getHand().size(), source.getSourceId(), game);
             return true;
         }
         return false;

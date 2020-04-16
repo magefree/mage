@@ -75,7 +75,7 @@ class NinThePainArtistEffect extends OneShotEffect {
             permanent.damage(source.getManaCostsToPay().getX(), source.getSourceId(), game, false, true);
             Player player = game.getPlayer(permanent.getControllerId());
             if (player != null) {
-                player.drawCards(source.getManaCostsToPay().getX(), game);
+                player.drawCards(source.getManaCostsToPay().getX(), source.getSourceId(), game);
             }
             return true;
         }

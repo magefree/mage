@@ -28,7 +28,7 @@ public class DiscardHandDrawSameNumberSourceEffect extends OneShotEffect {
         if (player != null) {
             int amount = player.getHand().getCards(game).size();
             player.discard(amount, false, source, game);
-            player.drawCards(amount, game);
+            player.drawCards(amount, source.getSourceId(), game);
             return true;
         }
         return false;

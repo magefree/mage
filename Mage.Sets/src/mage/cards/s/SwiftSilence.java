@@ -66,7 +66,7 @@ class SwiftSilenceEffect extends OneShotEffect {
         }
         Player controller = game.getPlayer(source.getControllerId());
         if (toDraw > 0 && controller != null){
-            controller.drawCards(toDraw, game);
+            controller.drawCards(toDraw, source.getSourceId(), game);
         }
         return true;
     }

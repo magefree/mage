@@ -87,7 +87,7 @@ class JayaBallardDiscardDrawEffect extends OneShotEffect {
                     count++;
                 }
             }
-            controller.drawCards(count, game);
+            controller.drawCards(count, source.getSourceId(), game);
             return true;
         }
         return false;

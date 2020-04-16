@@ -70,7 +70,7 @@ class DreamFractureEffect extends OneShotEffect {
             countered = true;
         }
         if (controller != null) {
-            controller.drawCards(1, game);
+            controller.drawCards(1, source.getSourceId(), game);
         }
         return countered;
     }

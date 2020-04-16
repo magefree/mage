@@ -168,7 +168,7 @@ class AzorTheLawbringerAttacksEffect extends OneShotEffect {
                 if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
                     controller.resetStoredBookmark(game); // otherwise you can undo the payment
                     controller.gainLife(costX, game, source);
-                    controller.drawCards(costX, game);
+                    controller.drawCards(costX, source.getSourceId(), game);
                     return true;
                 }
             }

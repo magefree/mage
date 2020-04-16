@@ -69,7 +69,7 @@ class UrgorosTheEmptyOneEffect extends OneShotEffect {
         Player attackedPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (controller != null && attackedPlayer != null) {
             if (attackedPlayer.getHand().isEmpty()) {
-                controller.drawCards(1, game);
+                controller.drawCards(1, source.getSourceId(), game);
             } else {
                 attackedPlayer.discardOne(true, source, game);
             }

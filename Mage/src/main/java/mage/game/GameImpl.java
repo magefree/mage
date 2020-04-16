@@ -1026,7 +1026,7 @@ public abstract class GameImpl implements Game, Serializable {
                 player.initLife(this.getLife());
             }
             if (!gameOptions.testMode) {
-                player.drawCards(startingHandSize, this);
+                player.drawCards(startingHandSize, null, this);
             }
         }
 
@@ -3021,9 +3021,9 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public int doAction(MageAction action) {
+    public int doAction(MageAction action, UUID sourceId) {
         //actions.add(action);
-        int value = action.doAction(this);
+        int value = action.doAction(sourceId, this);
 //        score += action.getScore(scorePlayer);
         return value;
     }

@@ -78,7 +78,7 @@ class ReprocessEffect extends OneShotEffect {
                     amount++;
                 }
             }
-            player.drawCards(amount, game);
+            player.drawCards(amount, source.getSourceId(), game);
         }
         return true;
     }

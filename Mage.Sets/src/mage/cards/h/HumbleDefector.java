@@ -69,7 +69,7 @@ class HumbleDefectorEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            controller.drawCards(2, game);
+            controller.drawCards(2, source.getSourceId(), game);
         }
         Permanent humbleDefector = (Permanent) source.getSourceObjectIfItStillExists(game);
         Player targetOpponent = game.getPlayer(getTargetPointer().getFirst(game, source));

@@ -57,7 +57,7 @@ class AnvilOfBogardanEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
         if (targetPlayer != null) {
-            targetPlayer.drawCards(1, game);
+            targetPlayer.drawCards(1, source.getSourceId(), game);
             targetPlayer.discard(1, false, source, game);
             return true;
         }

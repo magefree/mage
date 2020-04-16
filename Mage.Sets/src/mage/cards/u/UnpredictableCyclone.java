@@ -13,6 +13,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.stack.StackObject;
 import mage.players.Player;
 
 import java.util.UUID;
@@ -26,7 +27,7 @@ public final class UnpredictableCyclone extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{R}");
 
         // If a cycling ability of another nonland card would cause you to draw a card, instead exile cards from the top of your library until you exile a card that shares a card type with the cycled card. You may cast that card without paying its mana cost. Then put the exiled cards that weren't cast this way on the bottom of your library in a random order.
-        this.addAbility(new SimpleStaticAbility(new ArchmageAscensionReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new UnpredictableCycloneReplacementEffect()));
 
         // Cycling {2}
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
@@ -42,9 +43,9 @@ public final class UnpredictableCyclone extends CardImpl {
     }
 }
 
-class ArchmageAscensionReplacementEffect extends ReplacementEffectImpl {
+class UnpredictableCycloneReplacementEffect extends ReplacementEffectImpl {
 
-    ArchmageAscensionReplacementEffect() {
+    UnpredictableCycloneReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If a cycling ability of another nonland card would cause you to draw a card, " +
                 "instead exile cards from the top of your library until you exile a card " +
@@ -52,13 +53,13 @@ class ArchmageAscensionReplacementEffect extends ReplacementEffectImpl {
                 "Then put the exiled cards that weren't cast this way on the bottom of your library in a random order.";
     }
 
-    private ArchmageAscensionReplacementEffect(final ArchmageAscensionReplacementEffect effect) {
+    private UnpredictableCycloneReplacementEffect(final UnpredictableCycloneReplacementEffect effect) {
         super(effect);
     }
 
     @Override
-    public ArchmageAscensionReplacementEffect copy() {
-        return new ArchmageAscensionReplacementEffect(this);
+    public UnpredictableCycloneReplacementEffect copy() {
+        return new UnpredictableCycloneReplacementEffect(this);
     }
 
     @Override
@@ -69,8 +70,12 @@ class ArchmageAscensionReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(event.getPlayerId());
-        Card sourceCard = game.getCard(event.getSourceId());
-        if (player == null || sourceCard == null || sourceCard.isLand()) {
+        StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
+        if (player == null || stackObject == null) {
+            return false;
+        }
+        Card sourceCard = game.getCard(stackObject.getSourceId());
+        if (sourceCard == null) {
             return false;
         }
         Cards cards = new CardsImpl();
@@ -98,11 +103,22 @@ class ArchmageAscensionReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.CYCLE_DRAW;
+        return event.getType() == GameEvent.EventType.DRAW_CARD;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getPlayerId().equals(source.getControllerId());
+        if (!event.getPlayerId().equals(source.getControllerId())) {
+            return false;
+        }
+        Player player = game.getPlayer(event.getPlayerId());
+        StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
+        if (player == null || stackObject == null
+                || stackObject.getStackAbility() == null
+                || !(stackObject.getStackAbility() instanceof CyclingAbility)) {
+            return false;
+        }
+        Card sourceCard = game.getCard(stackObject.getSourceId());
+        return sourceCard != null && !sourceCard.isLand();
     }
 }

@@ -68,7 +68,7 @@ class NantukoCultivatorEffect extends OneShotEffect {
                 if(permanent != null) {
                     permanent.addCounters(CounterType.P1P1.createInstance(count), source, game);
                 }
-                player.drawCards(count, game);
+                player.drawCards(count, source.getSourceId(), game);
             }
             return true;
         }
