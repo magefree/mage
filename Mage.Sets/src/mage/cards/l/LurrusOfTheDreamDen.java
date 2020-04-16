@@ -72,7 +72,7 @@ enum LurrusOfTheDreamDenCompanionCondition implements CompanionCondition {
     }
 
     @Override
-    public boolean isLegal(Set<Card> deck) {
+    public boolean isLegal(Set<Card> deck, int startingSize) {
         return deck.stream()
                 .filter(MageObject::isPermanent)
                 .mapToInt(MageObject::getConvertedManaCost)
