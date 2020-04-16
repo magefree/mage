@@ -169,6 +169,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Kalemne's Captain", 92, Rarity.RARE, mage.cards.k.KalemnesCaptain.class));
         cards.add(new SetCardInfo("Karametra, God of Harvests", 218, Rarity.MYTHIC, mage.cards.k.KarametraGodOfHarvests.class));
         cards.add(new SetCardInfo("Kathril, Aspect Warper", 10, Rarity.MYTHIC, mage.cards.k.KathrilAspectWarper.class));
+        cards.add(new SetCardInfo("Kelsien, the Plague", 11, Rarity.MYTHIC, mage.cards.k.KelsienThePlague.class));
         cards.add(new SetCardInfo("Kessig Wolf Run", 284, Rarity.RARE, mage.cards.k.KessigWolfRun.class));
         cards.add(new SetCardInfo("Knight of the White Orchid", 93, Rarity.RARE, mage.cards.k.KnightOfTheWhiteOrchid.class));
         cards.add(new SetCardInfo("Kodama's Reach", 180, Rarity.COMMON, mage.cards.k.KodamasReach.class));
