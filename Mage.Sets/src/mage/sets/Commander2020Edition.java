@@ -241,6 +241,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Sakura-Tribe Elder", 187, Rarity.COMMON, mage.cards.s.SakuraTribeElder.class));
         cards.add(new SetCardInfo("Sandsteppe Citadel", 305, Rarity.UNCOMMON, mage.cards.s.SandsteppeCitadel.class));
         cards.add(new SetCardInfo("Satyr Wayfinder", 188, Rarity.COMMON, mage.cards.s.SatyrWayfinder.class));
+        cards.add(new SetCardInfo("Sawtusk Demolisher", 64, Rarity.RARE, mage.cards.s.SawtuskDemolisher.class));
         cards.add(new SetCardInfo("Scavenger Grounds", 306, Rarity.RARE, mage.cards.s.ScavengerGrounds.class));
         cards.add(new SetCardInfo("Secluded Steppe", 307, Rarity.UNCOMMON, mage.cards.s.SecludedSteppe.class));
         cards.add(new SetCardInfo("Selesnya Sanctuary", 308, Rarity.COMMON, mage.cards.s.SelesnyaSanctuary.class));
