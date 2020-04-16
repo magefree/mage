@@ -132,11 +132,6 @@ class QuartzwoodCrasherWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    private QuartzwoodCrasherWatcher(final QuartzwoodCrasherWatcher watcher) {
-        super(watcher);
-        this.damageMap.putAll(watcher.damageMap);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_POST) {
