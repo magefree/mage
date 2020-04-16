@@ -96,11 +96,10 @@ public class ConnectDialog extends MageDialog {
     private void setServerSettings(String address, String port, boolean needRegistration) {
         this.txtServer.setText(address);
         this.txtPort.setText(port);
+        this.txtUserName.setText(MagePreferences.getUserName(address));
         if (needRegistration) {
-            this.txtUserName.setText(MagePreferences.getUserName(address));
             this.txtPassword.setText(MagePreferences.getPassword(address));
         } else {
-            this.txtUserName.setText("");
             this.txtPassword.setText("");
         }
     }

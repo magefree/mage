@@ -582,6 +582,7 @@ public class TablesPanel extends javax.swing.JPanel {
         Dimension newDimension = new Dimension((int) jPanelBottom.getPreferredSize().getWidth(), GUISizeHelper.menuFont.getSize() + 28);
         jPanelBottom.setMinimumSize(newDimension);
         jPanelBottom.setPreferredSize(newDimension);
+        buttonWhatsNew.setFont(GUISizeHelper.menuFont);
         buttonNextMessage.setFont(GUISizeHelper.menuFont);
         labelMessageHeader.setFont(new Font(GUISizeHelper.menuFont.getName(), Font.BOLD, GUISizeHelper.menuFont.getSize()));
         labelMessageText.setFont(GUISizeHelper.menuFont);
@@ -1569,7 +1570,7 @@ public class TablesPanel extends javax.swing.JPanel {
         jPanelBottom.setPreferredSize(new java.awt.Dimension(516, 37));
         jPanelBottom.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        buttonWhatsNew.setText("Show that's new");
+        buttonWhatsNew.setText("Show what's new");
         buttonWhatsNew.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         buttonWhatsNew.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttonWhatsNew.setOpaque(false);
