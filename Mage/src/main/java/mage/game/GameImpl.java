@@ -1,6 +1,7 @@
 package mage.game;
 
 import mage.MageException;
+import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.*;
 import mage.abilities.common.AttachableToRestrictedAbility;
@@ -31,6 +32,7 @@ import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.combat.Combat;
@@ -69,6 +71,9 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
+
+import static java.util.Collections.emptyList;
 
 public abstract class GameImpl implements Game, Serializable {
 
@@ -143,6 +148,8 @@ public abstract class GameImpl implements Game, Serializable {
 
     // temporary store for income concede commands, don't copy
     private final LinkedList<UUID> concedingPlayers = new LinkedList<>();
+
+    private Map<UUID, FilterCreaturePermanent> usePowerInsteadOfToughnessForDamageLethalityFilters = new HashMap<>();
 
     public GameImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
         this.id = UUID.randomUUID();
@@ -1888,6 +1895,7 @@ public abstract class GameImpl implements Game, Serializable {
 
         List<Permanent> legendary = new ArrayList<>();
         List<Permanent> worldEnchantment = new ArrayList<>();
+        List<FilterCreaturePermanent> usePowerInsteadOfToughnessForDamageLethalityFilters = getActiveUsePowerInsteadOfToughnessForDamageLethalityFilters();
         for (Permanent perm : getBattlefield().getAllActivePermanents()) {
             if (perm.isCreature()) {
                 //20091005 - 704.5f
@@ -1897,10 +1905,19 @@ public abstract class GameImpl implements Game, Serializable {
                         continue;
                     }
                 } //20091005 - 704.5g/704.5h
-                else if (perm.getToughness().getValue() <= perm.getDamage() || perm.isDeathtouched()) {
-                    if (perm.destroy(null, this, false)) {
-                        somethingHappened = true;
-                        continue;
+                else {
+                    /*
+                     * for handling Zilortha, Strength Incarnate:
+                     * Any time the game is checking whether damage is lethal or if a creature should be destroyed for having lethal damage marked on it, use the power of your creatures rather than their toughness to check the damage against. This includes being assigned trample damage, damage from Flame Spill, and so on.
+                     */
+                    boolean usePowerInsteadOfToughnessForDamageLethality = usePowerInsteadOfToughnessForDamageLethalityFilters.stream()
+                            .anyMatch(filter -> filter.match(perm, this));
+                    MageInt lethalDamageThreshold = usePowerInsteadOfToughnessForDamageLethality ? perm.getPower() : perm.getToughness();
+                    if (lethalDamageThreshold.getValue() <= perm.getDamage() || perm.isDeathtouched()) {
+                        if (perm.destroy(null, this, false)) {
+                            somethingHappened = true;
+                            continue;
+                        }
                     }
                 }
                 if (perm.getPairedCard() != null) {
@@ -3300,4 +3317,17 @@ public abstract class GameImpl implements Game, Serializable {
         return player.getCommandersIds();
     }
 
+    @Override
+    public void addUsePowerInsteadOfToughnessForDamageLethalityFilter(UUID source, FilterCreaturePermanent filter) {
+        usePowerInsteadOfToughnessForDamageLethalityFilters.putIfAbsent(source, filter);
+    }
+
+    @Override
+    public List<FilterCreaturePermanent> getActiveUsePowerInsteadOfToughnessForDamageLethalityFilters() {
+        return usePowerInsteadOfToughnessForDamageLethalityFilters.isEmpty() ? emptyList() : getBattlefield().getAllActivePermanents().stream()
+                .map(Card::getId)
+                .filter(usePowerInsteadOfToughnessForDamageLethalityFilters::containsKey)
+                .map(usePowerInsteadOfToughnessForDamageLethalityFilters::get)
+                .collect(Collectors.toList());
+    }
 }

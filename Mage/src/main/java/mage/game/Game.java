@@ -17,6 +17,9 @@ import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.constants.*;
 import mage.counters.Counters;
+import mage.filter.Filter;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicate;
 import mage.game.combat.Combat;
 import mage.game.command.Commander;
 import mage.game.command.Emblem;
@@ -485,4 +488,9 @@ public interface Game extends MageItem, Serializable {
     default Set<UUID> getCommandersIds(Player player) {
         return getCommandersIds(player, CommanderCardType.ANY);
     }
+
+    void addUsePowerInsteadOfToughnessForDamageLethalityFilter(UUID source, FilterCreaturePermanent filter);
+
+    List<FilterCreaturePermanent> getActiveUsePowerInsteadOfToughnessForDamageLethalityFilters();
+
 }

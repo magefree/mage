@@ -18,6 +18,8 @@ import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
+import static mage.game.combat.CombatGroup.getLethalDamage;
+
 /**
  * @author TheElk801
  */
@@ -85,7 +87,7 @@ class RamThroughEffect extends OneShotEffect {
         if (!myPermanent.getAbilities().containsKey(TrampleAbility.getInstance().getId())) {
             return anotherPermanent.damage(power, myPermanent.getId(), game, false, true) > 0;
         }
-        int lethal = Math.max(anotherPermanent.getToughness().getValue() - anotherPermanent.getDamage(), 0);
+        int lethal = getLethalDamage(anotherPermanent, game);
         if (myPermanent.getAbilities().containsKey(DeathtouchAbility.getInstance().getId())) {
             lethal = Math.min(lethal, 1);
         }
