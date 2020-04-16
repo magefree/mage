@@ -80,21 +80,21 @@ class SwansOfBrynArgollEffect extends PreventionEffectImpl {
                 if (spell != null) {
                     Player controllerOfSpell = game.getPlayer(spell.getControllerId());
                     if(controllerOfSpell != null) {
-                        controllerOfSpell.drawCards(preventionEffectData.getPreventedDamage(), game);
+                        controllerOfSpell.drawCards(preventionEffectData.getPreventedDamage(), source.getSourceId(), game);
                         passed = true;
                     }
                 }
                 if (permanent != null) {
                     Player controllerOfPermanent = game.getPlayer(permanent.getControllerId());
                     if(controllerOfPermanent != null) {
-                        controllerOfPermanent.drawCards(preventionEffectData.getPreventedDamage(), game);
+                        controllerOfPermanent.drawCards(preventionEffectData.getPreventedDamage(), source.getSourceId(), game);
                         passed = true;
                     }
                 }
                 if (emblem != null) {
                     Player controllerOfEmblem = game.getPlayer(emblem.getControllerId());
                     if(controllerOfEmblem != null) {
-                        controllerOfEmblem.drawCards(preventionEffectData.getPreventedDamage(), game);
+                        controllerOfEmblem.drawCards(preventionEffectData.getPreventedDamage(), source.getSourceId(), game);
                     }
                     passed = true;
                 }
@@ -104,7 +104,7 @@ class SwansOfBrynArgollEffect extends PreventionEffectImpl {
                     if (cardSource != null) {
                         Player owner = game.getPlayer(cardSource.getOwnerId());
                         if (owner != null) {
-                            owner.drawCards(preventionEffectData.getPreventedDamage(), game);
+                            owner.drawCards(preventionEffectData.getPreventedDamage(), source.getSourceId(), game);
                         }
                     }
                 }

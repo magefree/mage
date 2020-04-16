@@ -4,9 +4,10 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 
+import java.io.Serializable;
 import java.util.*;
 
-public abstract class Mulligan {
+public abstract class Mulligan implements Serializable {
 
     protected final int freeMulligans;
     protected final Map<UUID, Integer> usedFreeMulligans = new HashMap<>();

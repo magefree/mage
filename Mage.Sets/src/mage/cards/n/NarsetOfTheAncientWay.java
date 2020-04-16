@@ -133,7 +133,7 @@ class NarsetOfTheAncientWayDrawEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        player.drawCards(1, game);
+        player.drawCards(1, source.getSourceId(), game);
         if (player.getHand().isEmpty() || !player.chooseUse(Outcome.Discard, "Discard a card?", source, game)) {
             return false;
         }

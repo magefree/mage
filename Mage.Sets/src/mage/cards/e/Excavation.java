@@ -67,7 +67,7 @@ class ExcavationEffect extends OneShotEffect {
         if (source instanceof ActivatedAbilityImpl) {
             Player activator = game.getPlayer(((ActivatedAbilityImpl) source).getActivatorId());
             if (activator != null) {
-                activator.drawCards(1, game);
+                activator.drawCards(1, source.getSourceId(), game);
                 return true;
             }
 

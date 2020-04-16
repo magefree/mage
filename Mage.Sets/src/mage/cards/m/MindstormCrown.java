@@ -65,7 +65,7 @@ class MindstormCrownEffect extends OneShotEffect {
         MindstormCrownWatcher watcher = game.getState().getWatcher(MindstormCrownWatcher.class);
         if (watcher != null
                 && watcher.getCardsInHandCount() == 0) {
-            controller.drawCards(1, game);
+            controller.drawCards(1, source.getSourceId(), game);
         } else {
             if (permanent != null) {
                 controller.damage(1, permanent.getId(), game);

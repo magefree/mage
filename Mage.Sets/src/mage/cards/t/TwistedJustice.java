@@ -69,7 +69,7 @@ class TwistedJusticeEffect extends OneShotEffect {
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null) {
                 permanent.sacrifice(source.getSourceId(), game);
-                controller.drawCards(permanent.getPower().getValue(), game);
+                controller.drawCards(permanent.getPower().getValue(), source.getSourceId(), game);
             }
             return true;
         }

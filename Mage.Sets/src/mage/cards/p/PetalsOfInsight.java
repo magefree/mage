@@ -71,7 +71,7 @@ class PetalsOfInsightEffect extends OneShotEffect {
                 controller.moveCards(spellCard, Zone.HAND, source, game);
             }
         } else {
-            controller.drawCards(3, game);
+            controller.drawCards(3, source.getSourceId(), game);
         }
         return true;
     }

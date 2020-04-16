@@ -95,7 +95,7 @@ class IncendiaryCommandDrawEffect extends OneShotEffect {
             for (Map.Entry<UUID, Integer> toDrawByPlayer : cardsToDraw.entrySet()) {
                 Player player = game.getPlayer(toDrawByPlayer.getKey());
                 if (player != null) {
-                    player.drawCards(toDrawByPlayer.getValue(), game);
+                    player.drawCards(toDrawByPlayer.getValue(), source.getSourceId(), game);
                 }
             }
             return true;

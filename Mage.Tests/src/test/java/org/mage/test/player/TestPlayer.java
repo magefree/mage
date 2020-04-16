@@ -2511,13 +2511,13 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public int drawCards(int num, Game game) {
-        return computerPlayer.drawCards(num, game);
+    public int drawCards(int num, UUID sourceId, Game game) {
+        return computerPlayer.drawCards(num, sourceId, game);
     }
 
     @Override
-    public int drawCards(int num, Game game, List<UUID> appliedEffects) {
-        return computerPlayer.drawCards(num, game, appliedEffects);
+    public int drawCards(int num, UUID sourceId, Game game, List<UUID> appliedEffects) {
+        return computerPlayer.drawCards(num, sourceId, game, appliedEffects);
     }
 
     @Override

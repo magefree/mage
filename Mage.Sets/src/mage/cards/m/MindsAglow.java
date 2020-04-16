@@ -70,7 +70,7 @@ class MindsAglowEffect extends OneShotEffect {
                 for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
-                        player.drawCards(xSum, game);
+                        player.drawCards(xSum, source.getSourceId(), game);
                     }
                 }
 

@@ -96,6 +96,6 @@ class GodEternalBontuEffect extends OneShotEffect {
                 counter++;
             }
         }
-        return player.drawCards(counter, game) > 0;
+        return player.drawCards(counter, source.getSourceId(), game) > 0;
     }
 }

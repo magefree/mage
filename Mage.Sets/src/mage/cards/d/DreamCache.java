@@ -58,7 +58,7 @@ class DreamCacheEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            controller.drawCards(3, game);
+            controller.drawCards(3, source.getSourceId(), game);
             boolean putOnTop = controller.chooseUse(Outcome.Neutral, "Put cards on top?", source, game);
             TargetCardInHand target = new TargetCardInHand(2, 2, new FilterCard());
             controller.chooseTarget(Outcome.Detriment, target, source, game);

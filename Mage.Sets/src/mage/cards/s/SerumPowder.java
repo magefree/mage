@@ -69,7 +69,7 @@ class SerumPowderReplaceEffect extends ReplacementEffectImpl {
                 for (Card card: cards.getCards(game)) {
                     card.moveToExile(null, null, source.getSourceId(), game);
                 }
-                controller.drawCards(cardsHand, game);
+                controller.drawCards(cardsHand, source.getSourceId(), game);
             }
             game.informPlayers(sourceCard.getLogName() +": " + controller.getLogName() + " exiles hand and draws " + cardsHand + " card(s)");
             return true;

@@ -20,7 +20,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.token.TokenImpl;
-import mage.game.permanent.token.Token;
 import mage.players.Player;
 
 /**
@@ -71,7 +70,7 @@ public final class IzzetKeyrune extends CardImpl {
         public boolean apply(Game game, Ability source) {
             Player player = game.getPlayer(source.getControllerId());
             if (player != null && player.chooseUse(Outcome.DrawCard, "Do you wish to draw a card? If you do, discard a card.", source, game)) {
-                if (player.drawCards(1, game) > 0) {
+                if (player.drawCards(1, source.getSourceId(), game) > 0) {
                     player.discard(1, false, source, game);
                 }
                 return true;

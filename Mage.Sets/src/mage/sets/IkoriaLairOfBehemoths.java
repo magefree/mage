@@ -250,6 +250,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Primal Empathy", 200, Rarity.UNCOMMON, mage.cards.p.PrimalEmpathy.class));
         cards.add(new SetCardInfo("Proud Wildbonder", 229, Rarity.UNCOMMON, mage.cards.p.ProudWildbonder.class));
         cards.add(new SetCardInfo("Pyroceratops", 130, Rarity.COMMON, mage.cards.p.Pyroceratops.class));
+        cards.add(new SetCardInfo("Quartzwood Crasher", 201, Rarity.RARE, mage.cards.q.QuartzwoodCrasher.class));
         cards.add(new SetCardInfo("Raking Claws", 131, Rarity.COMMON, mage.cards.r.RakingClaws.class));
         cards.add(new SetCardInfo("Ram Through", 170, Rarity.COMMON, mage.cards.r.RamThrough.class));
         cards.add(new SetCardInfo("Raugrin Crystal", 238, Rarity.UNCOMMON, mage.cards.r.RaugrinCrystal.class));
@@ -323,6 +324,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Wind-Scarred Crag", 258, Rarity.COMMON, mage.cards.w.WindScarredCrag.class));
         cards.add(new SetCardInfo("Wingfold Pteron", 71, Rarity.COMMON, mage.cards.w.WingfoldPteron.class));
         cards.add(new SetCardInfo("Wingspan Mentor", 72, Rarity.UNCOMMON, mage.cards.w.WingspanMentor.class));
+        cards.add(new SetCardInfo("Yorion, Sky Nomad", 232, Rarity.RARE, mage.cards.y.YorionSkyNomad.class));
         cards.add(new SetCardInfo("Winota, Joiner of Forces", 216, Rarity.MYTHIC, mage.cards.w.WinotaJoinerOfForces.class));
         cards.add(new SetCardInfo("Yidaro, Wandering Monster", 141, Rarity.RARE, mage.cards.y.YidaroWanderingMonster.class));
         cards.add(new SetCardInfo("Zagoth Crystal", 242, Rarity.UNCOMMON, mage.cards.z.ZagothCrystal.class));

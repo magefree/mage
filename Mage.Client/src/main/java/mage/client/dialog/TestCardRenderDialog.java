@@ -400,7 +400,7 @@ class TestGame extends GameImpl {
     private int numPlayers;
 
     public TestGame(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
-        super(attackOption, range, mulligan, startLife);
+        super(attackOption, range, mulligan, startLife, 60);
     }
 
     public TestGame(final TestGame game) {

@@ -58,7 +58,7 @@ public class DrawDiscardControllerEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             if (!optional || player.chooseUse(outcome, "Use draw, then discard effect?", source, game)) {
-                player.drawCards(cardsToDraw, game);
+                player.drawCards(cardsToDraw, source.getSourceId(), game);
                 player.discard(cardsToDiscard, false, source, game);
             }
             return true;

@@ -87,7 +87,7 @@ class ChanceEffect extends OneShotEffect {
                     }
                 }
                 game.applyEffects();
-                controller.drawCards(target.getTargets().size(), game);
+                controller.drawCards(target.getTargets().size(), source.getSourceId(), game);
             }
             return true;
         }
