@@ -288,6 +288,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Thalia's Lieutenant", 103, Rarity.RARE, mage.cards.t.ThaliasLieutenant.class));
         cards.add(new SetCardInfo("The Locust God", 219, Rarity.MYTHIC, mage.cards.t.TheLocustGod.class));
         cards.add(new SetCardInfo("Thraben Doomsayer", 104, Rarity.RARE, mage.cards.t.ThrabenDoomsayer.class));
+        cards.add(new SetCardInfo("Titan Hunter", 48, Rarity.RARE, mage.cards.t.TitanHunter.class));
         cards.add(new SetCardInfo("Titan of Eternal Fire", 163, Rarity.RARE, mage.cards.t.TitanOfEternalFire.class));
         cards.add(new SetCardInfo("Together Forever", 105, Rarity.RARE, mage.cards.t.TogetherForever.class));
         cards.add(new SetCardInfo("Tribute to the Wild", 193, Rarity.UNCOMMON, mage.cards.t.TributeToTheWild.class));
