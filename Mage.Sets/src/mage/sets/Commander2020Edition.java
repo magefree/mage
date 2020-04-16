@@ -306,6 +306,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Vastwood Hydra", 194, Rarity.RARE, mage.cards.v.VastwoodHydra.class));
         cards.add(new SetCardInfo("Vigilante Justice", 164, Rarity.UNCOMMON, mage.cards.v.VigilanteJustice.class));
         cards.add(new SetCardInfo("Villainous Wealth", 233, Rarity.RARE, mage.cards.v.VillainousWealth.class));
+        cards.add(new SetCardInfo("Vitality Hunter", 30, Rarity.RARE, mage.cards.v.VitalityHunter.class));
         cards.add(new SetCardInfo("Vizier of Tumbling Sands", 126, Rarity.UNCOMMON, mage.cards.v.VizierOfTumblingSands.class));
         cards.add(new SetCardInfo("Vorapede", 195, Rarity.MYTHIC, mage.cards.v.Vorapede.class));
         cards.add(new SetCardInfo("Whiplash Trap", 127, Rarity.COMMON, mage.cards.w.WhiplashTrap.class));
