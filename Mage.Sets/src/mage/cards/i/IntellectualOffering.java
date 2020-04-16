@@ -64,10 +64,10 @@ class IntellectualOfferingDrawEffect extends OneShotEffect {
         if (player != null) {
             Target target = new TargetOpponent(true);
             target.choose(Outcome.DrawCard, source.getControllerId(), source.getSourceId(), game);
-            player.drawCards(3, game);
+            player.drawCards(3, source.getSourceId(), game);
             Player opponent = game.getPlayer(target.getFirstTarget());
             if (opponent != null) {
-                opponent.drawCards(3, game);
+                opponent.drawCards(3, source.getSourceId(), game);
                 return true;
             }
         }

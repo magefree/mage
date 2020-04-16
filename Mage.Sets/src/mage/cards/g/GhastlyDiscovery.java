@@ -58,7 +58,7 @@ class GhastlyDiscoveryEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            controller.drawCards(2, game);
+            controller.drawCards(2, source.getSourceId(), game);
             controller.discard(1, false, source, game);
             return true;
         }

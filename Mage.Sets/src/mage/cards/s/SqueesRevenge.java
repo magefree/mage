@@ -60,7 +60,7 @@ class SqueesRevengeEffect extends OneShotEffect {
                     return true;
                 }
             }
-            player.drawCards(2 * number, game);
+            player.drawCards(2 * number, source.getSourceId(), game);
             return true;
         }
         return false;

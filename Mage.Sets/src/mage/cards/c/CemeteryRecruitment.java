@@ -64,7 +64,7 @@ class CemeteryRecruitmentEffect extends OneShotEffect {
             if (card != null) {
                 if (controller.moveCards(card, Zone.HAND, source, game)
                         && card.hasSubtype(SubType.ZOMBIE, game)) {
-                    controller.drawCards(1, game);
+                    controller.drawCards(1, source.getSourceId(), game);
                 }
             }
             return true;

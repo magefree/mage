@@ -67,7 +67,7 @@ class MartyrsCryEffect extends OneShotEffect {
         for (UUID playerId : game.getPlayerList().toList()) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                player.drawCards(playerCrtCount.getOrDefault(playerId, 0), game);
+                player.drawCards(playerCrtCount.getOrDefault(playerId, 0), source.getSourceId(), game);
             }
         }
         return true;

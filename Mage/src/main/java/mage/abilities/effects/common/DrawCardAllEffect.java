@@ -59,7 +59,7 @@ public class DrawCardAllEffect extends OneShotEffect {
                 for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
-                        player.drawCards(amount.calculate(game, source, this), game);
+                        player.drawCards(amount.calculate(game, source, this), source.getSourceId(), game);
                     }
                 }
                 break;
@@ -67,7 +67,7 @@ public class DrawCardAllEffect extends OneShotEffect {
                 for (UUID playerId : game.getOpponents(controller.getId())) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
-                        player.drawCards(amount.calculate(game, source, this), game);
+                        player.drawCards(amount.calculate(game, source, this), source.getSourceId(), game);
                     }
                 }
                 break;

@@ -1,12 +1,12 @@
 package mage.player.ai;
 
-import mage.constants.PhaseStep;
-import mage.constants.RangeOfInfluence;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.common.PassAbility;
 import mage.cards.Card;
+import mage.constants.PhaseStep;
+import mage.constants.RangeOfInfluence;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.combat.Combat;
 import mage.game.combat.CombatGroup;
@@ -23,7 +23,6 @@ import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.TimeUnit;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
@@ -59,6 +58,7 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
     }
 
     protected String lastPhase = "";
+
     @Override
     public boolean priority(Game game) {
         if (game.getStep().getType() == PhaseStep.UPKEEP) {
@@ -78,7 +78,7 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
         Ability ability = root.getAction();
         if (ability == null)
             logger.fatal("null ability");
-        activateAbility((ActivatedAbility)ability, game);
+        activateAbility((ActivatedAbility) ability, game);
         if (ability instanceof PassAbility)
             return false;
         logLife(game);
@@ -104,8 +104,7 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
             newRoot = root.getMatchingState(game.getState().getValue(game, playerId));
             if (newRoot != null) {
                 newRoot.emancipate();
-            }
-            else
+            } else
                 logger.info("unable to find matching state");
             root = newRoot;
         }
@@ -186,7 +185,7 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
         getNextAction(game, NextAction.SELECT_ATTACKERS);
         Combat combat = root.getCombat();
         UUID opponentId = game.getCombat().getDefenders().iterator().next();
-        for (UUID attackerId: combat.getAttackers()) {
+        for (UUID attackerId : combat.getAttackers()) {
             this.declareAttacker(attackerId, opponentId, game, false);
             sb.append(game.getPermanent(attackerId).getName()).append(',');
         }
@@ -199,14 +198,19 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
         StringBuilder sb = new StringBuilder();
         sb.append(game.getTurn().getValue(game.getTurnNum())).append(" player ").append(name).append(" blocking: ");
         getNextAction(game, NextAction.SELECT_BLOCKERS);
-        Combat combat = root.getCombat();
-        List<CombatGroup> groups = game.getCombat().getGroups();
-        for (int i = 0; i < groups.size(); i++) {
-            if (i < combat.getGroups().size()) {
-                sb.append(game.getPermanent(groups.get(i).getAttackers().get(0)).getName()).append(" with: ");
-                for (UUID blockerId: combat.getGroups().get(i).getBlockers()) {
-                    this.declareBlocker(this.getId(), blockerId, groups.get(i).getAttackers().get(0), game);
-                    sb.append(game.getPermanent(blockerId).getName()).append(',');
+        Combat simulatedCombat = root.getCombat();
+        List<CombatGroup> currentGroups = game.getCombat().getGroups();
+        for (int i = 0; i < currentGroups.size(); i++) {
+            if (i < simulatedCombat.getGroups().size()) {
+                CombatGroup currentGroup = currentGroups.get(i);
+                CombatGroup simulatedGroup = simulatedCombat.getGroups().get(i);
+                sb.append(game.getPermanent(currentGroup.getAttackers().get(0)).getName()).append(" with: ");
+                for (UUID blockerId : simulatedGroup.getBlockers()) {
+                    // blockers can be added automaticly by requirement effects, so we must add only missing blockers
+                    if (!currentGroup.getBlockers().contains(blockerId)) {
+                        this.declareBlocker(this.getId(), blockerId, currentGroup.getAttackers().get(0), game);
+                        sb.append(game.getPermanent(blockerId).getName()).append(',');
+                    }
                 }
                 sb.append('|');
             }
@@ -252,10 +256,11 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
 
     protected long totalThinkTime = 0;
     protected long totalSimulations = 0;
+
     protected void applyMCTS(final Game game, final NextAction action) {
-        
+
         int thinkTime = calculateThinkTime(game, action);
-        
+
         if (thinkTime > 0) {
             if (USE_MULTIPLE_THREADS) {
                 ExecutorService pool = Executors.newFixedThreadPool(poolSize);
@@ -275,9 +280,9 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
                 } catch (InterruptedException | RejectedExecutionException ex) {
                     logger.warn("applyMCTS interrupted");
                 }
-                
+
                 int simCount = 0;
-                for (MCTSExecutor task: tasks) {
+                for (MCTSExecutor task : tasks) {
                     simCount += task.getSimCount();
                     root.merge(task.getRoot());
                     task.clear();
@@ -286,10 +291,9 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
                 totalThinkTime += thinkTime;
                 totalSimulations += simCount;
                 logger.info("Player: " + name + " Simulated " + simCount + " games in " + thinkTime + " seconds - nodes in tree: " + root.size());
-                logger.info("Total: Simulated " + totalSimulations + " games in " + totalThinkTime + " seconds - Average: " + totalSimulations/totalThinkTime);
+                logger.info("Total: Simulated " + totalSimulations + " games in " + totalThinkTime + " seconds - Average: " + totalSimulations / totalThinkTime);
                 MCTSNode.logHitMiss();
-            }
-            else {
+            } else {
                 long startTime = System.nanoTime();
                 long endTime = startTime + (thinkTime * 1000000000l);
                 MCTSNode current;
@@ -314,9 +318,8 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
                         current = current.select(this.playerId);
                         result = current.simulate(this.playerId);
                         simCount++;
-                    }
-                    else {
-                        result = current.isWinner(this.playerId)?1:-1;
+                    } else {
+                        result = current.isWinner(this.playerId) ? 1 : -1;
                     }
                     // Backpropagation
                     current.backpropagate(result);
@@ -339,30 +342,23 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
         if (action == NextAction.SELECT_ATTACKERS || action == NextAction.SELECT_BLOCKERS) {
             if (nodeSizeRatio < THINK_MIN_RATIO) {
                 thinkTime = maxThinkTime;
-            }
-            else if (nodeSizeRatio >= THINK_MAX_RATIO) {
+            } else if (nodeSizeRatio >= THINK_MAX_RATIO) {
                 thinkTime = 0;
-            }
-            else {
+            } else {
                 thinkTime = maxThinkTime / 2;
             }
-        }
-        else if (game.isActivePlayer(playerId) && (curStep == PhaseStep.PRECOMBAT_MAIN || curStep == PhaseStep.POSTCOMBAT_MAIN) && game.getStack().isEmpty()) {
+        } else if (game.isActivePlayer(playerId) && (curStep == PhaseStep.PRECOMBAT_MAIN || curStep == PhaseStep.POSTCOMBAT_MAIN) && game.getStack().isEmpty()) {
             if (nodeSizeRatio < THINK_MIN_RATIO) {
                 thinkTime = maxThinkTime;
-            }
-            else if (nodeSizeRatio >= THINK_MAX_RATIO) {
+            } else if (nodeSizeRatio >= THINK_MAX_RATIO) {
                 thinkTime = 0;
-            }
-            else {
+            } else {
                 thinkTime = maxThinkTime / 2;
             }
-        }
-        else {
+        } else {
             if (nodeSizeRatio < THINK_MIN_RATIO) {
                 thinkTime = maxThinkTime / 2;
-            }
-            else {
+            } else {
                 thinkTime = 0;
             }
         }
@@ -382,7 +378,7 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
     protected Game createMCTSGame(Game game) {
         Game mcts = game.copy();
 
-        for (Player copyPlayer: mcts.getState().getPlayers().values()) {
+        for (Player copyPlayer : mcts.getState().getPlayers().values()) {
             Player origPlayer = game.getState().getPlayers().get(copyPlayer.getId());
             MCTSPlayer newPlayer = new MCTSPlayer(copyPlayer.getId());
             newPlayer.restore(origPlayer);
@@ -396,9 +392,8 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
                     card.setZone(Zone.HAND, mcts);
                     newPlayer.getHand().add(card);
                 }
-            }
-            else {
-                newPlayer.getLibrary().shuffle();                
+            } else {
+                newPlayer.getLibrary().shuffle();
             }
             mcts.getState().getPlayers().put(copyPlayer.getId(), newPlayer);
         }
@@ -414,16 +409,16 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
         long heapUsedSize = heapSize - heapFreeSize;
         long mb = 1024 * 1024;
 
-        logger.info("Max heap size: " + heapMaxSize/mb + " Heap size: " + heapSize/mb + " Used: " + heapUsedSize/mb);
+        logger.info("Max heap size: " + heapMaxSize / mb + " Heap size: " + heapSize / mb + " Used: " + heapUsedSize / mb);
     }
-    
+
     protected void logLife(Game game) {
         StringBuilder sb = new StringBuilder();
         sb.append(game.getTurn().getValue(game.getTurnNum()));
-        for (Player player: game.getPlayers().values()) {
+        for (Player player : game.getPlayers().values()) {
             sb.append("[player ").append(player.getName()).append(':').append(player.getLife()).append(']');
         }
-        logger.info(sb.toString());        
+        logger.info(sb.toString());
     }
 
 }

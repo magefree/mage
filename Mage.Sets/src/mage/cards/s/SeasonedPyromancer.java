@@ -84,7 +84,7 @@ class SeasonedPyromancerEffect extends OneShotEffect {
         int nonlands = player
                 .discard(2, false, source, game)
                 .count(StaticFilters.FILTER_CARD_NON_LAND, game);
-        player.drawCards(2, game);
+        player.drawCards(2, source.getSourceId(), game);
         if (nonlands == 0) {
             return true;
         }

@@ -1,15 +1,13 @@
-
-
 package mage.game.turn;
 
-import java.util.UUID;
 import mage.constants.PhaseStep;
 import mage.game.Game;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class DrawStep extends Step {
@@ -29,7 +27,7 @@ public class DrawStep extends Step {
     public void beginStep(Game game, UUID activePlayerId) {
         Player activePlayer = game.getPlayer(activePlayerId);
         //20091005 - 504.1/703.4c
-        activePlayer.drawCards(1, game);
+        activePlayer.drawCards(1, null, game);
 //        game.saveState();
         game.applyEffects();
         super.beginStep(game, activePlayerId);

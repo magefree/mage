@@ -1,7 +1,5 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BlocksOrBecomesBlockedTriggeredAbility;
@@ -14,19 +12,15 @@ import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.permanent.WasDealtDamageThisTurnPredicate;
 
+import java.util.UUID;
+
 /**
- *
  * @author KholdFuzion & L_J
- *
  */
 public final class GiantShark extends CardImpl {
 
@@ -39,8 +33,8 @@ public final class GiantShark extends CardImpl {
     }
 
     public GiantShark(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}");
-        this.subtype.add(SubType.FISH);
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}");
+        this.subtype.add(SubType.SHARK);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

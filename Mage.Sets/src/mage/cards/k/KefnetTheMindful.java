@@ -115,7 +115,7 @@ class KefnetTheMindfulEffect extends OneShotEffect {
         filterControlledLand.add(CardType.LAND.getPredicate());
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            controller.drawCards(1, game);
+            controller.drawCards(1, source.getSourceId(), game);
             if (controller.chooseUse(Outcome.AIDontUseIt, "Do you want to return a land you control to its owner's hand?", null, "Yes", "No", source, game)) {
                 Effect effect = new ReturnToHandChosenControlledPermanentEffect(filterControlledLand);
                 effect.apply(game, source);

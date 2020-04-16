@@ -118,7 +118,7 @@ public class CanadianHighlanderMulligan extends VancouverMulligan {
                 .append(" mulligans to ")
                 .append(Integer.toString(numToMulliganTo))
                 .append(numToMulliganTo == 1 ? " card" : " cards").toString());
-        player.drawCards(numToMulliganTo, game);
+        player.drawCards(numToMulliganTo, null, game);
     }
 
 }

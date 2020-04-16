@@ -94,7 +94,7 @@ class SoulRansomEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        controller.drawCards(2, game);
+        controller.drawCards(2, source.getSourceId(), game);
         return true;
     }
 }

@@ -83,7 +83,7 @@ class MagusoftheJarEffect extends OneShotEffect {
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                player.drawCards(7, game);
+                player.drawCards(7, source.getSourceId(), game);
             }
         }
         //Delayed ability

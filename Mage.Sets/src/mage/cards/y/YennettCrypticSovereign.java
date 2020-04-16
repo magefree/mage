@@ -99,10 +99,10 @@ class YennettCrypticSovereignEffect extends OneShotEffect {
                 choose not to cast it, you draw a card. Keep in mind that revealing a card doesn’t cause it to change 
                 zones. This means that the card you draw will be the card you revealed.
                  */
-                player.drawCards(1, game);
+                player.drawCards(1, source.getSourceId(), game);
             }
         } else {
-            player.drawCards(1, game);
+            player.drawCards(1, source.getSourceId(), game);
         }
         return true;
     }

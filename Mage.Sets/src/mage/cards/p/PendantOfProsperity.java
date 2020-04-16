@@ -5,25 +5,19 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.PutCardFromHandOntoBattlefieldEffect;
-import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.common.TargetCardInHand;
-import mage.target.common.TargetOpponent;
-import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 import mage.abilities.effects.common.EntersBattlefieldUnderControlOfOpponentOfChoiceEffect;
@@ -85,7 +79,7 @@ class PendantOfProsperityEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        player.drawCards(1, game);
+        player.drawCards(1, source.getSourceId(), game);
         if (!player.chooseUse(outcome, "Put a land into play from your hand?", source, game)) {
             return true;
         }

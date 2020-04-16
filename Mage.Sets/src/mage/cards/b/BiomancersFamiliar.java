@@ -58,7 +58,7 @@ public final class BiomancersFamiliar extends CardImpl {
 class BiomancersFamiliarCostReductionEffect extends CostModificationEffectImpl {
 
     private static final String effectText = "Activated abilities of creatures you control cost {2} less to activate. " +
-            "This effect can't reduce the amount of mana an ability costs to activate to less than one mana";
+            "This effect can't reduce the mana in that cost to less than one mana";
 
     BiomancersFamiliarCostReductionEffect() {
         super(Duration.Custom, Outcome.Benefit, CostModificationType.REDUCE_COST);

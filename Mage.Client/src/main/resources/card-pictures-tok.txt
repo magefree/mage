@@ -101,12 +101,12 @@
 |Generate|EMBLEM:DOM|Teferi, Hero of Dominaria||Emblem Teferi|TeferiHeroOfDominariaEmblem|
 |Generate|EMBLEM:AER|Tezzeret the Schemer||Emblem Tezzeret|TezzeretTheSchemerEmblem|
 |Generate|EMBLEM:ELD|Garruk, Cursed Huntsman||Emblem Garruk|GarrukCursedHuntsmanEmblem|
-|Generate|PLANE:PCA|Plane - Academy At Tolaria West|||AcademyAtTolariaWestPlane|
+|Generate|PLANE:PCA|Plane - Academy at Tolaria West|||AcademyAtTolariaWestPlane|
 |Generate|PLANE:PCA|Plane - Agyrem|||AgyremPlane|
 |Generate|PLANE:PCA|Plane - Akoum|||AkoumPlane|
 |Generate|PLANE:PCA|Plane - Astral Arena|||AstralArenaPlane|
 |Generate|PLANE:PCA|Plane - Bant|||BantPlane|
-|Generate|PLANE:PCA|Plane - Edge Of Malacol|||EdgeOfMalacolPlane|
+|Generate|PLANE:PCA|Plane - Edge of Malacol|||EdgeOfMalacolPlane|
 |Generate|PLANE:PCA|Plane - Feeding Grounds|||FeedingGroundsPlane|
 |Generate|PLANE:PCA|Plane - Fields of Summer|||FieldsOfSummerPlane|
 |Generate|PLANE:PCA|Plane - Hedron Fields of Agadeem|||HedronFieldsOfAgadeemPlane|
@@ -120,6 +120,8 @@
 |Generate|PLANE:PCA|Plane - Truga Jungle|||TrugaJunglePlane|
 |Generate|PLANE:PCA|Plane - Turri Island|||TurriIslandPlane|
 |Generate|PLANE:PCA|Plane - Undercity Reaches|||UndercityReachesPlane|
+|Generate|PLANE:PCA|Plane - The Zephyr Maze|||TheZephyrMazePlane|
+|Generate|PLANE:PCA|Plane - Trail of the Mage-Rings|||TrailOfTheMageRingsPlane|
 |Generate|TOK:ANA|Goblin|||GoblinToken|
 |Generate|TOK:ANA|Spirit|||SpiritWhiteToken|
 |Generate|TOK:PCA|Eldrazi|||EldraziAnnihilatorToken|

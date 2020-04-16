@@ -69,7 +69,7 @@ class ManipulateFateEffect extends SearchEffect {
                 }
             }
             player.shuffleLibrary(source, game);
-            player.drawCards(1, game);
+            player.drawCards(1, source.getSourceId(), game);
             return true;
         }
         return false;
