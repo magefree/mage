@@ -123,7 +123,7 @@ class MysticRemoraEffect extends OneShotEffect {
                         && cost.pay(source, game, source.getSourceId(), opponent.getId(), false, null)) {
                     return true;
                 }
-                controller.drawCards(1, game);
+                controller.drawCards(1, source.getSourceId(), game);
             }
             return true;
         }

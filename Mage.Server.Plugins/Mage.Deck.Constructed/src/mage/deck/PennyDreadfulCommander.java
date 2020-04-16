@@ -189,7 +189,7 @@ public class PennyDreadfulCommander extends Constructed {
             for (Ability ability : companion.getAbilities()) {
                 if (ability instanceof CompanionAbility) {
                     CompanionAbility companionAbility = (CompanionAbility) ability;
-                    if (!companionAbility.isLegal(cards)) {
+                    if (!companionAbility.isLegal(cards, getDeckMinSize())) {
                         invalid.put(companion.getName(), "Deck invalid for companion");
                         valid = false;
                     }

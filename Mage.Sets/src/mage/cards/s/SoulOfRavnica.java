@@ -95,7 +95,7 @@ class SoulOfRavnicaEffect extends OneShotEffect {
                     colors.add(ObjectColor.WHITE);
                 }
             }
-            controller.drawCards(colors.size(), game);
+            controller.drawCards(colors.size(), source.getSourceId(), game);
             return true;
         }
         return false;

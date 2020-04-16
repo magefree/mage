@@ -135,6 +135,7 @@ public abstract class GameImpl implements Game, Serializable {
     private int priorityTime;
 
     private final int startLife;
+    private final int startingSize;
     protected PlayerList playerList; // auto-generated from state, don't copy
 
     // infinite loop check (no copy of this attributes neccessary)
@@ -151,7 +152,7 @@ public abstract class GameImpl implements Game, Serializable {
 
     private Map<UUID, FilterCreaturePermanent> usePowerInsteadOfToughnessForDamageLethalityFilters = new HashMap<>();
 
-    public GameImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
+    public GameImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife, int startingSize) {
         this.id = UUID.randomUUID();
         this.range = range;
         this.mulligan = mulligan;
@@ -159,6 +160,7 @@ public abstract class GameImpl implements Game, Serializable {
         this.state = new GameState();
         this.startLife = startLife;
         this.executingRollback = false;
+        this.startingSize = startingSize;
         initGameDefaultWatchers();
     }
 
@@ -188,6 +190,7 @@ public abstract class GameImpl implements Game, Serializable {
         this.saveGame = game.saveGame;
         this.startLife = game.startLife;
         this.enterWithCounters.putAll(game.enterWithCounters);
+        this.startingSize = game.startingSize;
     }
 
     @Override
@@ -946,7 +949,7 @@ public abstract class GameImpl implements Game, Serializable {
                 for (Ability ability : card.getAbilities(this)) {
                     if (ability instanceof CompanionAbility) {
                         CompanionAbility companionAbility = (CompanionAbility) ability;
-                        if (companionAbility.isLegal(new HashSet<>(player.getLibrary().getCards(this)))) {
+                        if (companionAbility.isLegal(new HashSet<>(player.getLibrary().getCards(this)), startingSize)) {
                             potentialCompanions.add(card);
                             break;
                         }
@@ -1033,7 +1036,7 @@ public abstract class GameImpl implements Game, Serializable {
                 player.initLife(this.getLife());
             }
             if (!gameOptions.testMode) {
-                player.drawCards(startingHandSize, this);
+                player.drawCards(startingHandSize, null, this);
             }
         }
 
@@ -3038,9 +3041,9 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public int doAction(MageAction action) {
+    public int doAction(MageAction action, UUID sourceId) {
         //actions.add(action);
-        int value = action.doAction(this);
+        int value = action.doAction(sourceId, this);
 //        score += action.getScore(scorePlayer);
         return value;
     }

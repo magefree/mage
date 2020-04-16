@@ -67,7 +67,7 @@ class IllusoryAmbusherDealtDamageEffect extends OneShotEffect {
         if (player != null) {
             int amount = (Integer) getValue("damage");
             if (amount > 0) {
-                player.drawCards(amount, game);
+                player.drawCards(amount, source.getSourceId(), game);
             }
             return true;
         }

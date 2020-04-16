@@ -673,16 +673,16 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public int drawCards(int num, Game game) {
+    public int drawCards(int num, UUID sourceId, Game game) {
         if (num > 0) {
-            return game.doAction(new MageDrawAction(this, num, null));
+            return game.doAction(new MageDrawAction(this, num, null), sourceId);
         }
         return 0;
     }
 
     @Override
-    public int drawCards(int num, Game game, List<UUID> appliedEffects) {
-        return game.doAction(new MageDrawAction(this, num, appliedEffects));
+    public int drawCards(int num, UUID sourceId, Game game, List<UUID> appliedEffects) {
+        return game.doAction(new MageDrawAction(this, num, appliedEffects), sourceId);
     }
 
     @Override

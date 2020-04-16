@@ -129,7 +129,7 @@ class UginTheSpiritDragonEffect3 extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             controller.gainLife(7, game, source);
-            controller.drawCards(7, game);
+            controller.drawCards(7, source.getSourceId(), game);
             TargetCardInHand target = new TargetCardInHand(0, 7, new FilterPermanentCard("permanent cards"));
             if (controller.choose(Outcome.PutCardInPlay, target, source.getSourceId(), game)) {
                 controller.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, source, game);

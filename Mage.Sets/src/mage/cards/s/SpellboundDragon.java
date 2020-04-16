@@ -71,7 +71,7 @@ class SpellboundDragonEffect extends OneShotEffect {
         Player you = game.getPlayer(source.getControllerId());
         Permanent dragon = game.getPermanent(source.getSourceId());
         if(you != null) {
-            you.drawCards(1, game);
+            you.drawCards(1, source.getSourceId(), game);
             TargetDiscard target = new TargetDiscard(you.getId());
             you.choose(Outcome.Discard, target, source.getSourceId(), game);
             Card card = you.getHand().get(target.getFirstTarget(), game);

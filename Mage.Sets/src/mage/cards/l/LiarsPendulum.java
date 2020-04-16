@@ -102,7 +102,7 @@ class LiarsPendulumEffect extends OneShotEffect {
             if (controller.chooseUse(outcome, "Reveal your hand?", source, game)) {
                 controller.revealCards("hand of " + controller.getName(), controller.getHand(), game);
                 if (!rightGuess) {
-                    controller.drawCards(1, game);
+                    controller.drawCards(1, source.getSourceId(), game);
                 }
             }
             return true;

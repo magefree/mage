@@ -96,7 +96,7 @@ class DoomForetoldEffect extends OneShotEffect {
         }
         player.discard(1, false, source, game);
         player.loseLife(2, game, false);
-        controller.drawCards(1, game);
+        controller.drawCards(1, source.getSourceId(), game);
         controller.gainLife(2, game, source);
         effect1.apply(game, source);
         effect2.apply(game, source);

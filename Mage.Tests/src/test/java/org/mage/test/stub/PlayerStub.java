@@ -528,12 +528,12 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public int drawCards(int num, Game game) {
+    public int drawCards(int num, UUID sourceId, Game game) {
         return 0;
     }
 
     @Override
-    public int drawCards(int num, Game game, List<UUID> appliedEffects) {
+    public int drawCards(int num, UUID sourceId, Game game, List<UUID> appliedEffects) {
         return 0;
     }
 

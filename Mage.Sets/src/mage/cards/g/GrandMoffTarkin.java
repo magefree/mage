@@ -137,7 +137,7 @@ class GrandMoffTarkinEffect extends OneShotEffect {
             game.informPlayers(player.getLogName() + " pays 2 life to prevent " + targetCreature.getName() + " being destroyed");
             Player sourceController = game.getPlayer(source.getControllerId());
             if (sourceController != null) {
-                sourceController.drawCards(1, game);
+                sourceController.drawCards(1, source.getSourceId(), game);
             }
 
             return true;

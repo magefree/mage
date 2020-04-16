@@ -34,8 +34,8 @@ public class CompanionAbility extends StaticAbility {
         return "Companion &mdash; " + condition.getRule();
     }
 
-    public boolean isLegal(Set<Card> cards) {
-        return condition.isLegal(cards);
+    public boolean isLegal(Set<Card> cards, int startingSize) {
+        return condition.isLegal(cards, startingSize);
     }
 }
 

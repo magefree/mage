@@ -112,7 +112,7 @@ class ChandraDrawEffect extends OneShotEffect {
             for (Card card : cardsInHand) {
                 player.discard(card, source, game);
             }
-            player.drawCards(amount + 1, game);
+            player.drawCards(amount + 1, source.getSourceId(), game);
             return true;
         }
         return false;

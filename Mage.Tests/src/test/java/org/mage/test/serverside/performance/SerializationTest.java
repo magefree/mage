@@ -3,7 +3,11 @@ package org.mage.test.serverside.performance;
 import mage.abilities.keyword.InfectAbility;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.game.Game;
+import mage.game.mulligan.LondonMulligan;
 import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentImpl;
 import mage.remote.traffic.ZippedObjectImpl;
@@ -50,4 +54,25 @@ public class SerializationTest extends CardTestPlayerBase {
         Assert.assertEquals("Must get infected counter", 1, permanent.getCounters(currentGame).getCount(CounterType.M1M1));
     }
 
+    @Test
+    public void test_LondonMulligan() {
+        LondonMulligan mulligan = new LondonMulligan(15);
+        Object compressed = CompressUtil.compress(mulligan);
+        Assert.assertTrue("Must be zip", compressed instanceof ZippedObjectImpl);
+        LondonMulligan uncompressed = (LondonMulligan) CompressUtil.decompress(compressed);
+        Assert.assertEquals("Must be same", mulligan.getFreeMulligans(), uncompressed.getFreeMulligans());
+    }
+
+    @Test
+    public void test_Game() {
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears", 1);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        Object compressed = CompressUtil.compress(currentGame);
+        Assert.assertTrue("Must be zip", compressed instanceof ZippedObjectImpl);
+        Game uncompressed = (Game) CompressUtil.decompress(compressed);
+        Assert.assertEquals("Must be same", 1, uncompressed.getBattlefield().getAllActivePermanents().size());
+    }
 }

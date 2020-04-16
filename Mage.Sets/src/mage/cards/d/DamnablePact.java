@@ -52,7 +52,7 @@ class DamnablePactEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
         if (targetPlayer != null) {
-            targetPlayer.drawCards(source.getManaCostsToPay().getX(), game);
+            targetPlayer.drawCards(source.getManaCostsToPay().getX(), source.getSourceId(), game);
             targetPlayer.loseLife(source.getManaCostsToPay().getX(), game, false);
             return true;
         }

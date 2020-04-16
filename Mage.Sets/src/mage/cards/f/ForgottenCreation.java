@@ -67,7 +67,7 @@ class ForgottenCreationEffect extends OneShotEffect {
         if (controller != null) {
             int cardsInHand = controller.getHand().size();
             controller.discard(cardsInHand, false, source, game);
-            controller.drawCards(cardsInHand, game);
+            controller.drawCards(cardsInHand, source.getSourceId(), game);
             return true;
         }
         return false;

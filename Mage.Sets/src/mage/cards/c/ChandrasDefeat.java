@@ -84,7 +84,7 @@ class ChandrasDefeatEffect extends OneShotEffect {
             if (filter.match(permanent, game) && controller != null
                     && controller.chooseUse(outcome, "Discard a card and draw a card?", source, game)) {
                 controller.discard(1, false, source, game);
-                controller.drawCards(1, game);
+                controller.drawCards(1, source.getSourceId(), game);
             }
             return true;
         }

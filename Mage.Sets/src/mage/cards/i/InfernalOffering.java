@@ -99,7 +99,7 @@ class InfernalOfferingSacrificeEffect extends OneShotEffect {
                 for (UUID playerId : toDraw) {
                     Player playerToDraw = game.getPlayer(playerId);
                     if (playerToDraw != null) {
-                        playerToDraw.drawCards(2, game);
+                        playerToDraw.drawCards(2, source.getSourceId(), game);
                     }
                 }
                 return true;

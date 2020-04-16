@@ -93,7 +93,7 @@ class DrawCardsActivePlayerEffect extends OneShotEffect {
         }
         Player player = game.getPlayer(game.getActivePlayerId());
         if (player != null) {
-            player.drawCards(amount.calculate(game, source, this), game);
+            player.drawCards(amount.calculate(game, source, this), source.getSourceId(), game);
             return true;
         }
         return false;

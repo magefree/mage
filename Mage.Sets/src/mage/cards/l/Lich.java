@@ -86,7 +86,7 @@ class LichLifeGainReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(event.getPlayerId());
         if (controller != null) {
-            controller.drawCards(event.getAmount(), game);
+            controller.drawCards(event.getAmount(), source.getSourceId(), game);
         }
         return true;
     }

@@ -79,7 +79,7 @@ class ObNixilisTheHateTwistedEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        player.drawCards(2, game);
+        player.drawCards(2, source.getSourceId(), game);
         return true;
     }
 }

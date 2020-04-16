@@ -63,7 +63,7 @@ class FiligreeFractureEffect extends OneShotEffect {
             permanent.destroy(source.getSourceId(), game, true);
             game.applyEffects();
             if (permanent.getColor(game).isBlack() || permanent.getColor(game).isBlue()) {
-                player.drawCards(1, game);
+                player.drawCards(1, source.getSourceId(), game);
             }
             return true;
         }

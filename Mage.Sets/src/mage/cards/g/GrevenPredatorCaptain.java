@@ -124,7 +124,7 @@ class GrevenPredatorCaptainEffect extends OneShotEffect {
         if (!permanent.sacrifice(source.getSourceId(), game)) {
             return false;
         }
-        player.drawCards(power, game);
+        player.drawCards(power, source.getSourceId(), game);
         player.loseLife(toughness, game, false);
         return true;
     }
