@@ -25,6 +25,7 @@ public class UnpredictableCycloneTest extends CardTestPlayerBase {
         setChoice(playerA, "Yes");
 
         setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
         execute();
         assertAllCommandsUsed();
         assertPermanentCount(playerA, "Goblin Piker", 1);
@@ -43,6 +44,7 @@ public class UnpredictableCycloneTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cycling");
 
         setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
         execute();
         assertAllCommandsUsed();
         assertHandCount(playerA, "Swamp", 1);
@@ -64,6 +66,7 @@ public class UnpredictableCycloneTest extends CardTestPlayerBase {
         setChoice(playerA, "Thought Reflection"); // apply doubling first
 
         setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
         execute();
         assertAllCommandsUsed();
         assertPermanentCount(playerA, "Goblin Piker", 2);
@@ -85,6 +88,7 @@ public class UnpredictableCycloneTest extends CardTestPlayerBase {
         setChoice(playerA, "Thought Reflection", 3); // apply doubling first
 
         setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
         execute();
         assertAllCommandsUsed();
         assertPermanentCount(playerA, "Goblin Piker", 4);
@@ -107,6 +111,7 @@ public class UnpredictableCycloneTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Cycling");
 
         setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
         execute();
         assertAllCommandsUsed();
         assertPermanentCount(playerA, "Goblin Piker", 1);
