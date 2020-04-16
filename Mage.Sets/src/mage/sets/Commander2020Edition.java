@@ -223,6 +223,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Portal Mage", 122, Rarity.RARE, mage.cards.p.PortalMage.class));
         cards.add(new SetCardInfo("Prairie Stream", 299, Rarity.RARE, mage.cards.p.PrairieStream.class));
         cards.add(new SetCardInfo("Predator Ooze", 185, Rarity.RARE, mage.cards.p.PredatorOoze.class));
+        cards.add(new SetCardInfo("Predatory Impetus", 62, Rarity.UNCOMMON, mage.cards.p.PredatoryImpetus.class));
         cards.add(new SetCardInfo("Profane Command", 135, Rarity.RARE, mage.cards.p.ProfaneCommand.class));
         cards.add(new SetCardInfo("Propaganda", 123, Rarity.UNCOMMON, mage.cards.p.Propaganda.class));
         cards.add(new SetCardInfo("Prophetic Bolt", 227, Rarity.RARE, mage.cards.p.PropheticBolt.class));
