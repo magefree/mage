@@ -235,6 +235,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Rakdos Carnarium", 300, Rarity.COMMON, mage.cards.r.RakdosCarnarium.class));
         cards.add(new SetCardInfo("Rakdos Signet", 249, Rarity.UNCOMMON, mage.cards.r.RakdosSignet.class));
         cards.add(new SetCardInfo("Rashmi, Eternities Crafter", 229, Rarity.MYTHIC, mage.cards.r.RashmiEternitiesCrafter.class));
+        cards.add(new SetCardInfo("Ravenous Gigantotherium", 63, Rarity.RARE, mage.cards.r.RavenousGigantotherium.class));
         cards.add(new SetCardInfo("Reclamation Sage", 186, Rarity.UNCOMMON, mage.cards.r.ReclamationSage.class));
         cards.add(new SetCardInfo("Reliquary Tower", 301, Rarity.UNCOMMON, mage.cards.r.ReliquaryTower.class));
         cards.add(new SetCardInfo("Remote Isle", 302, Rarity.COMMON, mage.cards.r.RemoteIsle.class));
