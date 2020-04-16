@@ -2,14 +2,14 @@
 
 package mage.game;
 
-import java.util.UUID;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
 import mage.game.match.MatchType;
 import mage.game.mulligan.Mulligan;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public class CommanderFreeForAll extends GameCommanderImpl {
@@ -17,7 +17,7 @@ public class CommanderFreeForAll extends GameCommanderImpl {
     private int numPlayers;
 
     public CommanderFreeForAll(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
-        super(attackOption, range, mulligan, startLife);
+        super(attackOption, range, mulligan, startLife, 100);
     }
 
     public CommanderFreeForAll(final CommanderFreeForAll game) {
@@ -28,7 +28,7 @@ public class CommanderFreeForAll extends GameCommanderImpl {
     @Override
     protected void init(UUID choosingPlayerId) {
         startingPlayerSkipsDraw = false;
-        super.init(choosingPlayerId); 
+        super.init(choosingPlayerId);
     }
 
     @Override

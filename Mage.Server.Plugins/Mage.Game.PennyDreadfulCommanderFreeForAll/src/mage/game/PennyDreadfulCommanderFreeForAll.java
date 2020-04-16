@@ -17,7 +17,7 @@ public class PennyDreadfulCommanderFreeForAll extends GameCommanderImpl {
     private int numPlayers;
 
     public PennyDreadfulCommanderFreeForAll(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
-        super(attackOption, range, mulligan, startLife);
+        super(attackOption, range, mulligan, startLife, 60);
     }
 
     public PennyDreadfulCommanderFreeForAll(final PennyDreadfulCommanderFreeForAll game) {

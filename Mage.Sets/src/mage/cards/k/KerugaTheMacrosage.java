@@ -66,7 +66,7 @@ enum KerugaCondition implements CompanionCondition {
     }
 
     @Override
-    public boolean isLegal(Set<Card> deck) {
+    public boolean isLegal(Set<Card> deck, int startingSize) {
         return deck.stream().allMatch(card -> card.isLand() || card.getConvertedManaCost() >= 3);
     }
 }

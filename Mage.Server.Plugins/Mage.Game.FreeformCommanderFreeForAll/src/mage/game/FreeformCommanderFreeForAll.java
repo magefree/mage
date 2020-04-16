@@ -17,7 +17,7 @@ public class FreeformCommanderFreeForAll extends GameCommanderImpl {
     private int numPlayers;
 
     public FreeformCommanderFreeForAll(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
-        super(attackOption, range, mulligan, startLife);
+        super(attackOption, range, mulligan, startLife, 60);
     }
 
     public FreeformCommanderFreeForAll(final FreeformCommanderFreeForAll game) {
