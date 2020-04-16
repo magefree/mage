@@ -218,6 +218,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Otrimi, the Ever-Playful", 12, Rarity.MYTHIC, mage.cards.o.OtrimiTheEverPlayful.class));
         cards.add(new SetCardInfo("Outpost Siege", 157, Rarity.RARE, mage.cards.o.OutpostSiege.class));
         cards.add(new SetCardInfo("Painful Truths", 134, Rarity.RARE, mage.cards.p.PainfulTruths.class));
+        cards.add(new SetCardInfo("Parasitic Impetus", 46, Rarity.UNCOMMON, mage.cards.p.ParasiticImpetus.class));
         cards.add(new SetCardInfo("Path of Ancestry", 298, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
         cards.add(new SetCardInfo("Portal Mage", 122, Rarity.RARE, mage.cards.p.PortalMage.class));
         cards.add(new SetCardInfo("Prairie Stream", 299, Rarity.RARE, mage.cards.p.PrairieStream.class));
