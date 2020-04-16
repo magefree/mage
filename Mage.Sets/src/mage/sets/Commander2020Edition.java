@@ -67,6 +67,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Call the Coppercoats", 23, Rarity.RARE, mage.cards.c.CallTheCoppercoats.class));
         cards.add(new SetCardInfo("Canopy Vista", 261, Rarity.RARE, mage.cards.c.CanopyVista.class));
         cards.add(new SetCardInfo("Captivating Crew", 144, Rarity.RARE, mage.cards.c.CaptivatingCrew.class));
+        cards.add(new SetCardInfo("Cartographer's Hawk", 24, Rarity.RARE, mage.cards.c.CartographersHawk.class));
         cards.add(new SetCardInfo("Cast Out", 79, Rarity.UNCOMMON, mage.cards.c.CastOut.class));
         cards.add(new SetCardInfo("Cataclysmic Gearhulk", 80, Rarity.MYTHIC, mage.cards.c.CataclysmicGearhulk.class));
         cards.add(new SetCardInfo("Cavalry Pegasus", 81, Rarity.COMMON, mage.cards.c.CavalryPegasus.class));
