@@ -67,7 +67,7 @@ class BrainPryEffect extends OneShotEffect {
                 }
             }
             if (!hasDiscarded) {
-                controller.drawCards(1, game);
+                controller.drawCards(1, source.getSourceId(), game);
             }
             controller.lookAtCards(sourceObject.getName() + " Hand", targetPlayer.getHand(), game);
         }

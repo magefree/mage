@@ -1,22 +1,19 @@
-
 package mage.cards.j;
 
-import java.util.UUID;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
+import mage.target.TargetSpell;
+
+import java.util.UUID;
 
 /**
- *
  * @author TheElk801
  */
 public final class JadedResponse extends CardImpl {
@@ -26,9 +23,10 @@ public final class JadedResponse extends CardImpl {
 
         // Counter target spell if it shares a color with a creature you control.
         this.getSpellAbility().addEffect(new JadedResponseEffect());
+        this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public JadedResponse(final JadedResponse card) {
+    private JadedResponse(final JadedResponse card) {
         super(card);
     }
 
@@ -45,7 +43,7 @@ class JadedResponseEffect extends OneShotEffect {
         this.staticText = "Counter target spell if it shares a color with a creature you control";
     }
 
-    JadedResponseEffect(final JadedResponseEffect effect) {
+    private JadedResponseEffect(final JadedResponseEffect effect) {
         super(effect);
     }
 
@@ -60,13 +58,12 @@ class JadedResponseEffect extends OneShotEffect {
         if (stackObject == null) {
             return false;
         }
-        ObjectColor creatureColors = new ObjectColor();
-        for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_CONTROLLED_CREATURES, source.getControllerId(), game)) {
-            creatureColors = creatureColors.union(creature.getColor(game));
-            if (!creatureColors.intersection(stackObject.getColor(game)).isColorless()) {
-                return new CounterTargetEffect().apply(game, source);
-            }
-        }
-        return false;
+        boolean matches = game.getBattlefield()
+                .getAllActivePermanents(
+                        StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game
+                ).stream()
+                .map(permanent -> permanent.getColor(game))
+                .anyMatch(stackObject.getColor(game)::shares);
+        return matches && game.getStack().counter(stackObject.getId(), source.getSourceId(), game);
     }
 }

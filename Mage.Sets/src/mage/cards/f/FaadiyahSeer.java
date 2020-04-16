@@ -71,7 +71,7 @@ class FaadiyahSeerEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Card card = controller.getLibrary().getFromTop(game);
-            controller.drawCards(1, game);
+            controller.drawCards(1, source.getSourceId(), game);
             controller.revealCards("Fa'adiyah Seer", new CardsImpl(card), game);
             if (!filter.match(card, game)) {
                 controller.discard(card, source, game);

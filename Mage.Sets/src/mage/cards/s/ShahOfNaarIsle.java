@@ -106,7 +106,7 @@ class ShahOfNaarIsleEffect extends OneShotEffect {
                 Player opponent = game.getPlayer(playerId);
                 if (opponent != null) {
                     int number = opponent.getAmount(0, 3, "Draw how many cards?", game);
-                    opponent.drawCards(number, game);
+                    opponent.drawCards(number, source.getSourceId(), game);
                 }
             }
             return true;

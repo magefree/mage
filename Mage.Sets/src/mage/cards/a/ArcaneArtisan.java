@@ -90,7 +90,7 @@ class ArcaneArtisanCreateTokenEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        player.drawCards(1, game);
+        player.drawCards(1, source.getSourceId(), game);
         TargetCard target = new TargetCardInHand(1, StaticFilters.FILTER_CARD);
         if (!player.chooseTarget(Outcome.Exile, player.getHand(), target, source, game)) {
             return false;

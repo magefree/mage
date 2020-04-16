@@ -87,6 +87,6 @@ class WickedGuardianEffect extends OneShotEffect {
             return false;
         }
         permanent.damage(2, source.getSourceId(), game);
-        return player.drawCards(1, game) > 0;
+        return player.drawCards(1, source.getSourceId(), game) > 0;
     }
 }

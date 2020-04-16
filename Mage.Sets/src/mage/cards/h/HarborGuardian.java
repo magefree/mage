@@ -67,7 +67,7 @@ class HarborGuardianEffect extends OneShotEffect {
         Player defender = game.getPlayer(defenderId);
         if (defender != null) {
             if (defender.chooseUse(outcome, "Draw a card?", source, game)) {
-                defender.drawCards(1, game);
+                defender.drawCards(1, source.getSourceId(), game);
             }
         }
         return false;

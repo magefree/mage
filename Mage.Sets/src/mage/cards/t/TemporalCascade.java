@@ -63,7 +63,7 @@ class TemporalCascadeDrawEffect extends OneShotEffect {
         for (UUID playerId : game.getState().getPlayersInRange(sourcePlayer.getId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                player.drawCards(7, game);
+                player.drawCards(7, source.getSourceId(), game);
             }
         }
         return true;

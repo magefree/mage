@@ -71,7 +71,7 @@ class CranialArchiveEffect extends OneShotEffect {
                 }
                 targetPlayer.shuffleLibrary(source, game);
             }
-            controller.drawCards(1, game);
+            controller.drawCards(1, source.getSourceId(), game);
             return true;
         }
         return false;

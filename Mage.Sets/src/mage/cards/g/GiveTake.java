@@ -72,7 +72,7 @@ class TakeEffect extends OneShotEffect {
                 creature.removeCounters(CounterType.P1P1.getName(), numberCounters, game);
                 Player controller = game.getPlayer(source.getControllerId());
                 if (controller != null) {
-                    controller.drawCards(numberCounters, game);
+                    controller.drawCards(numberCounters, source.getSourceId(), game);
                 } else {
                     throw new UnsupportedOperationException("Controller missing");
                 }

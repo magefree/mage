@@ -60,7 +60,7 @@ class MiseEffect extends OneShotEffect {
             if (card != null) {
                 player.revealCards("Mise", cards, game, true);
                 if (card.getName().equals(namedCard)) {
-                    player.drawCards(3, game);
+                    player.drawCards(3, source.getSourceId(), game);
                 }
             }
             return true;

@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.RaidCondition;
 import mage.abilities.effects.OneShotEffect;
@@ -14,8 +12,9 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.watchers.common.PlayerAttackedWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class ChartACourse extends CardImpl {
@@ -29,7 +28,7 @@ public final class ChartACourse extends CardImpl {
         this.getSpellAbility().addWatcher(new PlayerAttackedWatcher());
     }
 
-    public ChartACourse(final ChartACourse card) {
+    private ChartACourse(final ChartACourse card) {
         super(card);
     }
 
@@ -43,10 +42,10 @@ class ChartACourseEffect extends OneShotEffect {
 
     ChartACourseEffect() {
         super(Outcome.Neutral);
-        this.staticText = "Then discard a card unless you attacked with a creature this turn.";
+        this.staticText = "Then discard a card unless you attacked this turn.";
     }
 
-    ChartACourseEffect(final ChartACourseEffect effect) {
+    private ChartACourseEffect(final ChartACourseEffect effect) {
         super(effect);
     }
 

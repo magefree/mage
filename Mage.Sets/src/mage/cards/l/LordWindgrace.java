@@ -103,9 +103,9 @@ class LordWindgraceEffect extends OneShotEffect {
         }
         Card card = player.discardOne(false, source, game);
         if (card == null || !card.isLand()) {
-            player.drawCards(1, game);
+            player.drawCards(1, source.getSourceId(), game);
         } else {
-            player.drawCards(2, game);
+            player.drawCards(2, source.getSourceId(), game);
         }
         return true;
     }

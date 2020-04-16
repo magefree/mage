@@ -63,7 +63,7 @@ enum OboshThePreypiercerCompanionCondition implements CompanionCondition {
                 .stream()
                 .filter(card -> !card.isLand())
                 .mapToInt(MageObject::getConvertedManaCost)
-                .map(i -> i & 1)
+                .map(i -> i % 2)
                 .allMatch(i -> i == 1);
     }
 }

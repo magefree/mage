@@ -103,7 +103,7 @@ class LudevicNecroAlchemistEffect extends OneShotEffect {
         Player player = game.getPlayer(game.getActivePlayerId());
         if (player != null
                 && player.chooseUse(Outcome.DrawCard, "Draw a card?", source, game)) {
-            player.drawCards(1, game);
+            player.drawCards(1, source.getSourceId(), game);
             return true;
         }
         return false;

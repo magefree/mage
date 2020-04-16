@@ -92,6 +92,118 @@ public class ConnectDialog extends MageDialog {
         // last settings for reconnect
         MagePreferences.saveLastServer();
     }
+    
+    private void setServerSettings(String address, String port, boolean needRegistration) {
+        this.txtServer.setText(address);
+        this.txtPort.setText(port);
+        this.txtUserName.setText(MagePreferences.getUserName(address));
+        if (needRegistration) {
+            this.txtPassword.setText(MagePreferences.getPassword(address));
+        } else {
+            this.txtPassword.setText("");
+        }
+    }
+    
+    private void chooseAndSetServerSettingsFromOther() {
+        BufferedReader in = null;
+        Writer output = null;
+        try {
+            String serverUrl = PreferencesDialog.getCachedValue(KEY_CONNECTION_URL_SERVER_LIST, "http://xmage.de/files/server-list.txt");
+            if (serverUrl.contains("xmage.info/files/")) {
+                serverUrl = serverUrl.replace("xmage.info/files/", "xmage.de/files/"); // replace old URL if still saved
+                PreferencesDialog.saveValue(KEY_CONNECTION_URL_SERVER_LIST, serverUrl);
+            }
+            URL serverListURL = new URL(serverUrl);
+
+            Connection.ProxyType configProxyType = Connection.ProxyType.valueByText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_TYPE, "None"));
+            Proxy p = null;
+            Proxy.Type type = Proxy.Type.DIRECT;
+            switch (configProxyType) {
+                case HTTP:
+                    type = Proxy.Type.HTTP;
+                    break;
+                case SOCKS:
+                    type = Proxy.Type.SOCKS;
+                    break;
+                case NONE:
+                default:
+                    p = Proxy.NO_PROXY;
+                    break;
+            }
+
+            if (p == null || !p.equals(Proxy.NO_PROXY)) {
+                try {
+                    String address = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_ADDRESS, "");
+                    Integer port = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_PORT, "80"));
+                    p = new Proxy(type, new InetSocketAddress(address, port));
+                } catch (Exception ex) {
+                    throw new RuntimeException("Gui_DownloadPictures : error 1 - " + ex);
+                }
+            }
+
+            if (p == null) {
+                JOptionPane.showMessageDialog(null, "Couldn't configure Proxy object!", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            boolean URLNotFound = false;
+            try {
+                in = new BufferedReader(new InputStreamReader(serverListURL.openConnection(p).getInputStream()));
+            } catch (SocketTimeoutException | FileNotFoundException | UnknownHostException ex) {
+                logger.warn("Could not read serverlist from: " + serverListURL.toString());
+                File f = new File("serverlist.txt");
+                if (f.exists() && !f.isDirectory()) {
+                    logger.info("Using buffered serverlist: serverlist.txt");
+                    URLNotFound = true;
+                    in = new BufferedReader(new FileReader("serverlist.txt"));
+                }
+            }
+            List<String> servers = new ArrayList<>();
+            if (in != null) {
+
+                if (!URLNotFound) {
+                    // write serverlist to be able to read if URL is not available
+                    File file = new File("serverlist.txt");
+                    if (file.exists() && !file.isDirectory()) {
+                        file.delete();
+                    }
+                    output = new BufferedWriter(new FileWriter(file));
+                }
+
+                String inputLine;
+                while ((inputLine = in.readLine()) != null) {
+                    logger.debug("Found server: " + inputLine);
+                    servers.add(inputLine);
+                    if (output != null) {
+                        output.append(inputLine).append('\n');
+
+                    }
+                }
+            }
+            if (servers.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Couldn't find any server.");
+                return;
+            }
+
+            String selectedServer = (String) JOptionPane.showInputDialog(null,
+                    "Choose XMage Public Server:", "Input",
+                    JOptionPane.INFORMATION_MESSAGE, null, servers.toArray(),
+                    servers.get(0));
+            if (selectedServer != null) {
+                String[] params = selectedServer.split(":");
+                if (params.length == 3) {
+                    setServerSettings(params[1], params[2], true);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Wrong server data format.");
+                }
+            }
+        } catch (Exception ex) {
+            logger.error(ex, ex);
+        } finally {
+            StreamUtils.closeQuietly(in);
+            StreamUtils.closeQuietly(output);
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -127,6 +239,7 @@ public class ConnectDialog extends MageDialog {
         btnFindBeta = new javax.swing.JButton();
         btnFindUs = new javax.swing.JButton();
         btnFindOther = new javax.swing.JButton();
+        btnFindEU = new javax.swing.JButton();
         panelServer = new javax.swing.JPanel();
         txtServer = new javax.swing.JTextField();
         txtPort = new javax.swing.JTextField();
@@ -242,31 +355,27 @@ public class ConnectDialog extends MageDialog {
 
         btnFindMain.setIcon(new javax.swing.ImageIcon(getClass().getResource("/flags/de.png"))); // NOI18N
         btnFindMain.setText("X");
-        btnFindMain.setToolTipText("Connect to xmage.de (Europe, most popular, registration needs)");
-        btnFindMain.setActionCommand("connectXmageDe");
+        btnFindMain.setToolTipText("Connect to xmage.de (first Europe server, most popular, registration needs)");
         btnFindMain.setAlignmentY(0.0F);
         btnFindMain.setMargin(new java.awt.Insets(2, 2, 2, 2));
         btnFindMain.setMaximumSize(new java.awt.Dimension(42, 23));
         btnFindMain.setMinimumSize(new java.awt.Dimension(42, 23));
-        btnFindMain.setName("connectXmageDeBtn"); // NOI18N
         btnFindMain.setPreferredSize(new java.awt.Dimension(23, 23));
         btnFindMain.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                connectXmageDe(evt);
+                btnFindMainActionPerformed(evt);
             }
         });
 
         btnFindLocal.setText("LOCAL, AI");
         btnFindLocal.setToolTipText("Connect to localhost, AI enabled (run local server from launcher)");
-        btnFindLocal.setActionCommand("connectLocalhost");
         btnFindLocal.setAlignmentY(0.0F);
         btnFindLocal.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnFindLocal.setMargin(new java.awt.Insets(2, 2, 2, 2));
-        btnFindLocal.setName("connectLocalhostBtn"); // NOI18N
         btnFindLocal.setPreferredSize(new java.awt.Dimension(23, 23));
         btnFindLocal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                connectLocalhost(evt);
+                btnFindLocalActionPerformed(evt);
             }
         });
 
@@ -278,31 +387,42 @@ public class ConnectDialog extends MageDialog {
         btnFindBeta.setPreferredSize(new java.awt.Dimension(23, 23));
         btnFindBeta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFindBetaconnectLocalhost(evt);
+                btnFindBetaActionPerformed(evt);
             }
         });
 
         btnFindUs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/flags/us.png"))); // NOI18N
         btnFindUs.setText("US");
         btnFindUs.setToolTipText("Connect to us.xmage.today (USA, use any username without registration)");
-        btnFindUs.setActionCommand("connectXmageus");
         btnFindUs.setAlignmentY(0.0F);
         btnFindUs.setMargin(new java.awt.Insets(2, 2, 2, 2));
-        btnFindUs.setName("connectXmageusBtn"); // NOI18N
         btnFindUs.setPreferredSize(new java.awt.Dimension(23, 23));
         btnFindUs.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                connectXmageus(evt);
+                btnFindUsActionPerformed(evt);
             }
         });
 
-        btnFindOther.setText("Other servers...");
+        btnFindOther.setText("Other...");
         btnFindOther.setToolTipText("Choose server from full servers list");
         btnFindOther.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnFindOther.setName("findServerBtn"); // NOI18N
         btnFindOther.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                findPublicServerActionPerformed(evt);
+                btnFindOtherActionPerformed(evt);
+            }
+        });
+
+        btnFindEU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/flags/europeanunion.png"))); // NOI18N
+        btnFindEU.setText("EU");
+        btnFindEU.setToolTipText("Connect to eu.xmage.today (second Europe server, use any username without registration)");
+        btnFindEU.setAlignmentY(0.0F);
+        btnFindEU.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        btnFindEU.setMaximumSize(new java.awt.Dimension(42, 23));
+        btnFindEU.setMinimumSize(new java.awt.Dimension(42, 23));
+        btnFindEU.setPreferredSize(new java.awt.Dimension(23, 23));
+        btnFindEU.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFindEUActionPerformed(evt);
             }
         });
 
@@ -312,9 +432,11 @@ public class ConnectDialog extends MageDialog {
             panelFastLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelFastLayout.createSequentialGroup()
                 .addGap(0, 0, 0)
-                .addComponent(btnFindMain, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnFindMain, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnFindUs, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnFindEU, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnFindUs, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnFindBeta, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -332,7 +454,8 @@ public class ConnectDialog extends MageDialog {
                     .addComponent(btnFindLocal, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnFindUs, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnFindBeta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnFindOther, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnFindOther, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnFindEU, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, 0))
         );
 
@@ -368,7 +491,7 @@ public class ConnectDialog extends MageDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtPort, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCheckStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
+                .addComponent(btnCheckStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
         panelServerLayout.setVerticalGroup(
@@ -615,110 +738,7 @@ public class ConnectDialog extends MageDialog {
     }//GEN-LAST:event_chkAutoConnectActionPerformed
 
     private void findPublicServerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        BufferedReader in = null;
-        Writer output = null;
-        try {
-            String serverUrl = PreferencesDialog.getCachedValue(KEY_CONNECTION_URL_SERVER_LIST, "http://xmage.de/files/server-list.txt");
-            if (serverUrl.contains("xmage.info/files/")) {
-                serverUrl = serverUrl.replace("xmage.info/files/", "xmage.de/files/"); // replace old URL if still saved
-                PreferencesDialog.saveValue(KEY_CONNECTION_URL_SERVER_LIST, serverUrl);
-            }
-            URL serverListURL = new URL(serverUrl);
-
-            Connection.ProxyType configProxyType = Connection.ProxyType.valueByText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_TYPE, "None"));
-            Proxy p = null;
-            Proxy.Type type = Proxy.Type.DIRECT;
-            switch (configProxyType) {
-                case HTTP:
-                    type = Proxy.Type.HTTP;
-                    break;
-                case SOCKS:
-                    type = Proxy.Type.SOCKS;
-                    break;
-                case NONE:
-                default:
-                    p = Proxy.NO_PROXY;
-                    break;
-            }
-
-            if (p == null || !p.equals(Proxy.NO_PROXY)) {
-                try {
-                    String address = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_ADDRESS, "");
-                    Integer port = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_PORT, "80"));
-                    p = new Proxy(type, new InetSocketAddress(address, port));
-                } catch (Exception ex) {
-                    throw new RuntimeException("Gui_DownloadPictures : error 1 - " + ex);
-                }
-            }
-
-            if (p == null) {
-                JOptionPane.showMessageDialog(null, "Couldn't configure Proxy object!", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-
-            boolean URLNotFound = false;
-            try {
-                in = new BufferedReader(new InputStreamReader(serverListURL.openConnection(p).getInputStream()));
-            } catch (SocketTimeoutException | FileNotFoundException | UnknownHostException ex) {
-                logger.warn("Could not read serverlist from: " + serverListURL.toString());
-                File f = new File("serverlist.txt");
-                if (f.exists() && !f.isDirectory()) {
-                    logger.info("Using buffered serverlist: serverlist.txt");
-                    URLNotFound = true;
-                    in = new BufferedReader(new FileReader("serverlist.txt"));
-                }
-            }
-            List<String> servers = new ArrayList<>();
-            if (in != null) {
-
-                if (!URLNotFound) {
-                    // write serverlist to be able to read if URL is not available
-                    File file = new File("serverlist.txt");
-                    if (file.exists() && !file.isDirectory()) {
-                        file.delete();
-                    }
-                    output = new BufferedWriter(new FileWriter(file));
-                }
-
-                String inputLine;
-                while ((inputLine = in.readLine()) != null) {
-                    logger.debug("Found server: " + inputLine);
-                    servers.add(inputLine);
-                    if (output != null) {
-                        output.append(inputLine).append('\n');
-
-                    }
-                }
-            }
-            if (servers.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Couldn't find any server.");
-                return;
-            }
-
-            String selectedServer = (String) JOptionPane.showInputDialog(null,
-                    "Choose XMage Public Server:", "Input",
-                    JOptionPane.INFORMATION_MESSAGE, null, servers.toArray(),
-                    servers.get(0));
-            if (selectedServer != null) {
-                String[] params = selectedServer.split(":");
-                if (params.length == 3) {
-                    String serverAddress = params[1];
-                    this.txtServer.setText(serverAddress);
-                    this.txtPort.setText(params[2]);
-                    // Update userName and password according to the chosen server.
-                    this.txtUserName.setText(MagePreferences.getUserName(serverAddress));
-                    this.txtPassword.setText(MagePreferences.getPassword(serverAddress));
-                } else {
-                    JOptionPane.showMessageDialog(null, "Wrong server data format.");
-                }
-            }
-
-        } catch (Exception ex) {
-            logger.error(ex, ex);
-        } finally {
-            StreamUtils.closeQuietly(in);
-            StreamUtils.closeQuietly(output);
-        }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jProxySettingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jProxySettingsButtonActionPerformed
@@ -786,10 +806,6 @@ public class ConnectDialog extends MageDialog {
         doFastFlagSearch();
     }//GEN-LAST:event_btnFlagSearchActionPerformed
 
-    private void btnFindBetaconnectLocalhost(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindBetaconnectLocalhost
-        connectBeta(evt);
-    }//GEN-LAST:event_btnFindBetaconnectLocalhost
-
     private void btnCheckStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckStatusActionPerformed
         if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
             try {
@@ -803,6 +819,30 @@ public class ConnectDialog extends MageDialog {
     private void btnWhatsNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWhatsNewActionPerformed
         MageFrame.getInstance().showWhatsNewDialog(true);
     }//GEN-LAST:event_btnWhatsNewActionPerformed
+
+    private void btnFindMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindMainActionPerformed
+        setServerSettings("xmage.de", "17171", true);
+    }//GEN-LAST:event_btnFindMainActionPerformed
+
+    private void btnFindEUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindEUActionPerformed
+        setServerSettings("eu.xmage.today", "17171", false);
+    }//GEN-LAST:event_btnFindEUActionPerformed
+
+    private void btnFindUsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindUsActionPerformed
+        setServerSettings("us.xmage.today", "17171", false);
+    }//GEN-LAST:event_btnFindUsActionPerformed
+
+    private void btnFindBetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindBetaActionPerformed
+        setServerSettings("beta.xmage.today", "17171", false);
+    }//GEN-LAST:event_btnFindBetaActionPerformed
+
+    private void btnFindLocalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindLocalActionPerformed
+        setServerSettings("localhost", "17171", false);
+    }//GEN-LAST:event_btnFindLocalActionPerformed
+
+    private void btnFindOtherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindOtherActionPerformed
+        chooseAndSetServerSettingsFromOther();
+    }//GEN-LAST:event_btnFindOtherActionPerformed
 
     private void doFastFlagSearch() {
         Choice choice = new ChoiceImpl(false);
@@ -852,6 +892,7 @@ public class ConnectDialog extends MageDialog {
     private javax.swing.JButton btnCheckStatus;
     private javax.swing.JButton btnConnect;
     private javax.swing.JButton btnFindBeta;
+    private javax.swing.JButton btnFindEU;
     private javax.swing.JButton btnFindLocal;
     private javax.swing.JButton btnFindMain;
     private javax.swing.JButton btnFindOther;

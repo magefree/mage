@@ -39,6 +39,7 @@ public final class ChickenALaKing extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
 
         this.subtype.add(SubType.BIRD);
+        this.subtype.add(SubType.NOBLE);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

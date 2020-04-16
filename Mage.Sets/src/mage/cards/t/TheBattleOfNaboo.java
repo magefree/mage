@@ -74,7 +74,7 @@ class TheBattleOfNabooEffect extends OneShotEffect {
         if (player != null) {
             int x = source.getManaCostsToPay().getX();
             if (x > 0) {
-                player.drawCards(2 * x, game);
+                player.drawCards(2 * x, source.getSourceId(), game);
             }
             return true;
         }

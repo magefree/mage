@@ -62,7 +62,7 @@ class WellOfLostDreamsEffect extends OneShotEffect {
                 if (xValue > 0) {
                     if (new GenericManaCost(xValue).pay(source, game, source.getSourceId(), controller.getId(), false)) {
                         game.informPlayers(controller.getLogName() + " payed {" + xValue + '}');
-                        controller.drawCards(xValue, game);
+                        controller.drawCards(xValue, source.getSourceId(), game);
                     } else {
                         return false;
                     }

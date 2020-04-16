@@ -52,7 +52,7 @@ class StandOrFallEffect extends OneShotEffect {
 
     public StandOrFallEffect() {
         super(Outcome.Detriment);
-        this.staticText = "separate all creatures defending player controls into two piles. Only creatures in the pile of that player's choice can block this turn";
+        this.staticText = "separate all creatures that player controls into two piles and that player chooses one. Only creatures in the chosen piles can block this turn";
     }
 
     public StandOrFallEffect(final StandOrFallEffect effect) {

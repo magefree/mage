@@ -1,7 +1,5 @@
 package mage.abilities.effects.common;
 
-import java.util.List;
-import java.util.stream.Collectors;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -18,8 +16,10 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
- *
  * @author spjspj
  */
 public class RollPlanarDieEffect extends OneShotEffect {
@@ -98,8 +98,8 @@ public class RollPlanarDieEffect extends OneShotEffect {
                 // Steps: 1) Remove the last plane and set its effects to discarded
                 for (CommandObject cobject : game.getState().getCommand()) {
                     if (cobject instanceof Plane) {
-                        if (((Plane) cobject).getAbilities() != null) {
-                            for (Ability ability : ((Plane) cobject).getAbilities()) {
+                        if (cobject.getAbilities() != null) {
+                            for (Ability ability : cobject.getAbilities()) {
                                 for (Effect effect : ability.getEffects()) {
                                     if (effect instanceof ContinuousEffect) {
                                         ((ContinuousEffect) effect).discard();
@@ -107,7 +107,7 @@ public class RollPlanarDieEffect extends OneShotEffect {
                                 }
                             }
                         }
-                        game.getState().removeTriggersOfSourceId(((Plane) cobject).getId());
+                        game.getState().removeTriggersOfSourceId(cobject.getId());
                         game.getState().getCommand().remove(cobject);
                         break;
                     }
@@ -123,7 +123,7 @@ public class RollPlanarDieEffect extends OneShotEffect {
 
                 boolean foundNextPlane = false;
                 while (!foundNextPlane) {
-                    Plane plane = Plane.getRandomPlane();
+                    Plane plane = Plane.createRandomPlane();
                     try {
                         if (plane != null && !planesVisited.contains(plane.getName())) {
                             foundNextPlane = true;

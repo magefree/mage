@@ -52,17 +52,20 @@ public final class LavabrinkVenturer extends CardImpl {
 
 class LavabrinkVenturerEffect extends GainAbilitySourceEffect {
 
+    private static final FilterObject nullFilter = new FilterObject("nothing");
     private static final FilterObject oddFilter = new FilterObject("odd converted mana costs");
     private static final FilterObject evenFilter = new FilterObject("even converted mana costs");
 
     static {
+        nullFilter.add(ConvertedManaCostParityPredicate.ODD);
+        nullFilter.add(ConvertedManaCostParityPredicate.EVEN);
         oddFilter.add(ConvertedManaCostParityPredicate.ODD);
         evenFilter.add(ConvertedManaCostParityPredicate.EVEN);
     }
 
     LavabrinkVenturerEffect() {
-        super((Ability) null);
-        this.addDependedToType(DependencyType.AddingAbility);
+        super(new ProtectionAbility(nullFilter));
+        this.ability.setRuleVisible(false);
         staticText = "{this} has protection from each converted mana cost of the chosen value.";
     }
 

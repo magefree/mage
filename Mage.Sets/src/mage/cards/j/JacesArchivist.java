@@ -77,7 +77,7 @@ class JacesArchivistEffect extends OneShotEffect {
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    player.drawCards(maxDiscarded, game);
+                    player.drawCards(maxDiscarded, source.getSourceId(), game);
                 }
             }
         }

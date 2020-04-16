@@ -67,7 +67,7 @@ class ChanneledForceEffect extends OneShotEffect {
         }
         Player player = game.getPlayer(source.getTargets().get(0).getFirstTarget());
         if (player != null) {
-            player.drawCards(xValue, game);
+            player.drawCards(xValue, source.getSourceId(), game);
         }
         game.damagePlayerOrPlaneswalker(
                 source.getTargets().get(1).getFirstTarget(), xValue,

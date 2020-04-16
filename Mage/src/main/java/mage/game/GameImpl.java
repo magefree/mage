@@ -1029,7 +1029,7 @@ public abstract class GameImpl implements Game, Serializable {
                 player.initLife(this.getLife());
             }
             if (!gameOptions.testMode) {
-                player.drawCards(startingHandSize, this);
+                player.drawCards(startingHandSize, null, this);
             }
         }
 
@@ -1078,7 +1078,7 @@ public abstract class GameImpl implements Game, Serializable {
 
         // 20180408 - 901.5
         if (gameOptions.planeChase) {
-            Plane plane = Plane.getRandomPlane();
+            Plane plane = Plane.createRandomPlane();
             plane.setControllerId(startingPlayerId);
             addPlane(plane, null, startingPlayerId);
             state.setPlaneChase(this, gameOptions.planeChase);
@@ -2622,7 +2622,7 @@ public abstract class GameImpl implements Game, Serializable {
             for (Player aplayer : state.getPlayers().values()) {
                 if (!aplayer.hasLeft() && !addedAgain) {
                     addedAgain = true;
-                    Plane plane = Plane.getRandomPlane();
+                    Plane plane = Plane.createRandomPlane();
                     plane.setControllerId(aplayer.getId());
                     addPlane(plane, null, aplayer.getId());
                 }
@@ -3024,9 +3024,9 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public int doAction(MageAction action) {
+    public int doAction(MageAction action, UUID sourceId) {
         //actions.add(action);
-        int value = action.doAction(this);
+        int value = action.doAction(sourceId, this);
 //        score += action.getScore(scorePlayer);
         return value;
     }

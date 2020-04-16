@@ -64,7 +64,7 @@ class ConchHornEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            player.drawCards(2, game);
+            player.drawCards(2, source.getSourceId(), game);
             putOnLibrary(player, source, game);
             return true;
         }
