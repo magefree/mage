@@ -273,6 +273,8 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Soul of Innistrad", 137, Rarity.MYTHIC, mage.cards.s.SoulOfInnistrad.class));
         cards.add(new SetCardInfo("Soulflayer", 138, Rarity.RARE, mage.cards.s.Soulflayer.class));
         cards.add(new SetCardInfo("Souvenir Snatcher", 38, Rarity.RARE, mage.cards.s.SouvenirSnatcher.class));
+        cards.add(new SetCardInfo("Species Specialist", 47, Rarity.RARE, mage.cards.s.SpeciesSpecialist.class));
+        cards.add(new SetCardInfo("Spellpyre Phoenix", 56, Rarity.RARE, mage.cards.s.SpellpyrePhoenix.class));
         cards.add(new SetCardInfo("Spinerock Knoll", 316, Rarity.RARE, mage.cards.s.SpinerockKnoll.class));
         cards.add(new SetCardInfo("Spirit Cairn", 100, Rarity.UNCOMMON, mage.cards.s.SpiritCairn.class));
         cards.add(new SetCardInfo("Splinterfright", 191, Rarity.RARE, mage.cards.s.Splinterfright.class));
@@ -282,6 +284,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Sunblast Angel", 102, Rarity.RARE, mage.cards.s.SunblastAngel.class));
         cards.add(new SetCardInfo("Sungrass Prairie", 317, Rarity.RARE, mage.cards.s.SungrassPrairie.class));
         cards.add(new SetCardInfo("Sunken Hollow", 318, Rarity.RARE, mage.cards.s.SunkenHollow.class));
+        cards.add(new SetCardInfo("Surly Badgersaur", 57, Rarity.RARE, mage.cards.s.SurlyBadgersaur.class));
         cards.add(new SetCardInfo("Surreal Memoir", 161, Rarity.UNCOMMON, mage.cards.s.SurrealMemoir.class));
         cards.add(new SetCardInfo("Swarm Intelligence", 124, Rarity.RARE, mage.cards.s.SwarmIntelligence.class));
         cards.add(new SetCardInfo("Swiftfoot Boots", 254, Rarity.UNCOMMON, mage.cards.s.SwiftfootBoots.class));
@@ -300,6 +303,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Tribute to the Wild", 193, Rarity.UNCOMMON, mage.cards.t.TributeToTheWild.class));
         cards.add(new SetCardInfo("Trygon Predator", 232, Rarity.UNCOMMON, mage.cards.t.TrygonPredator.class));
         cards.add(new SetCardInfo("Trynn, Champion of Freedom", 1, Rarity.MYTHIC, mage.cards.t.TrynnChampionOfFreedom.class));
+        cards.add(new SetCardInfo("Ukkima, Stalking Shadow", 17, Rarity.MYTHIC, mage.cards.u.UkkimaStalkingShadow.class));
         cards.add(new SetCardInfo("Unburial Rites", 139, Rarity.UNCOMMON, mage.cards.u.UnburialRites.class));
         cards.add(new SetCardInfo("Unclaimed Territory", 320, Rarity.UNCOMMON, mage.cards.u.UnclaimedTerritory.class));
         cards.add(new SetCardInfo("Unexpectedly Absent", 106, Rarity.RARE, mage.cards.u.UnexpectedlyAbsent.class));
