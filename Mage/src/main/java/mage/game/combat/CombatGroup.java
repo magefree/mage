@@ -1,22 +1,11 @@
 
 package mage.game.combat;
 
-import java.io.Serializable;
-import java.util.*;
-import java.util.stream.Stream;
-
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ControllerAssignCombatDamageToBlockersAbility;
 import mage.abilities.common.ControllerDivideCombatDamageAbility;
 import mage.abilities.common.DamageAsThoughNotBlockedAbility;
-import mage.abilities.keyword.BandingAbility;
-import mage.abilities.keyword.BandsWithOtherAbility;
-import mage.abilities.keyword.CantBlockAloneAbility;
-import mage.abilities.keyword.DeathtouchAbility;
-import mage.abilities.keyword.DoubleStrikeAbility;
-import mage.abilities.keyword.FirstStrikeAbility;
-import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.keyword.*;
 import mage.constants.AsThoughEffectType;
 import mage.constants.Outcome;
 import mage.filter.StaticFilters;
@@ -27,7 +16,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.Copyable;
 
-import static java.util.Collections.emptyList;
+import java.io.Serializable;
+import java.util.*;
+import java.util.stream.Stream;
 
 /**
  *
@@ -937,14 +928,17 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
     }
 
     public static int getLethalDamage(Permanent damagedPermanent, Game game) {
-        List<FilterCreaturePermanent> usePowerInsteadOfToughnessForDamageLethalityFilters = game.getActiveUsePowerInsteadOfToughnessForDamageLethalityFilters();
+        List<FilterCreaturePermanent> usePowerInsteadOfToughnessForDamageLethalityFilters = game.getActivePowerInsteadOfToughnessForDamageLethalityFilters();
         /*
          * for handling Zilortha, Strength Incarnate:
+         * 2020-04-17
          * Any time the game is checking whether damage is lethal or if a creature should be destroyed for having lethal damage marked on it, use the power of your creatures rather than their toughness to check the damage against. This includes being assigned trample damage, damage from Flame Spill, and so on.
          */
         boolean usePowerInsteadOfToughnessForDamageLethality = usePowerInsteadOfToughnessForDamageLethalityFilters.stream()
                 .anyMatch(filter -> filter.match(damagedPermanent, game));
-        MageInt lethalDamageThreshold = usePowerInsteadOfToughnessForDamageLethality? damagedPermanent.getPower() : damagedPermanent.getToughness();
-        return Math.max(lethalDamageThreshold.getValue() - damagedPermanent.getDamage(), 0);
+        int lethalDamageThreshold = usePowerInsteadOfToughnessForDamageLethality ?
+                // Zilortha, Strength Incarnate, 2020-04-17: A creature with 0 power isn’t destroyed unless it has at least 1 damage marked on it.
+                Math.max(damagedPermanent.getPower().getValue(), 1) : damagedPermanent.getToughness().getValue();
+        return Math.max(lethalDamageThreshold - damagedPermanent.getDamage(), 0);
     }
 }

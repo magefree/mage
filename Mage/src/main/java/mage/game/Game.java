@@ -489,8 +489,8 @@ public interface Game extends MageItem, Serializable {
         return getCommandersIds(player, CommanderCardType.ANY);
     }
 
-    void addUsePowerInsteadOfToughnessForDamageLethalityFilter(UUID source, FilterCreaturePermanent filter);
+    void addPowerInsteadOfToughnessForDamageLethalityFilter(UUID source, FilterCreaturePermanent filter);
 
-    List<FilterCreaturePermanent> getActiveUsePowerInsteadOfToughnessForDamageLethalityFilters();
+    List<FilterCreaturePermanent> getActivePowerInsteadOfToughnessForDamageLethalityFilters();
 
 }

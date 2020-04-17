@@ -1,7 +1,6 @@
 package mage.game;
 
 import mage.MageException;
-import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.*;
 import mage.abilities.common.AttachableToRestrictedAbility;
@@ -1898,7 +1897,7 @@ public abstract class GameImpl implements Game, Serializable {
 
         List<Permanent> legendary = new ArrayList<>();
         List<Permanent> worldEnchantment = new ArrayList<>();
-        List<FilterCreaturePermanent> usePowerInsteadOfToughnessForDamageLethalityFilters = getActiveUsePowerInsteadOfToughnessForDamageLethalityFilters();
+        List<FilterCreaturePermanent> usePowerInsteadOfToughnessForDamageLethalityFilters = getActivePowerInsteadOfToughnessForDamageLethalityFilters();
         for (Permanent perm : getBattlefield().getAllActivePermanents()) {
             if (perm.isCreature()) {
                 //20091005 - 704.5f
@@ -1911,12 +1910,14 @@ public abstract class GameImpl implements Game, Serializable {
                 else {
                     /*
                      * for handling Zilortha, Strength Incarnate:
-                     * Any time the game is checking whether damage is lethal or if a creature should be destroyed for having lethal damage marked on it, use the power of your creatures rather than their toughness to check the damage against. This includes being assigned trample damage, damage from Flame Spill, and so on.
+                     * 2020-04-17: Any time the game is checking whether damage is lethal or if a creature should be destroyed for having lethal damage marked on it, use the power of your creatures rather than their toughness to check the damage against. This includes being assigned trample damage, damage from Flame Spill, and so on.
                      */
                     boolean usePowerInsteadOfToughnessForDamageLethality = usePowerInsteadOfToughnessForDamageLethalityFilters.stream()
                             .anyMatch(filter -> filter.match(perm, this));
-                    MageInt lethalDamageThreshold = usePowerInsteadOfToughnessForDamageLethality ? perm.getPower() : perm.getToughness();
-                    if (lethalDamageThreshold.getValue() <= perm.getDamage() || perm.isDeathtouched()) {
+                    int lethalDamageThreshold = usePowerInsteadOfToughnessForDamageLethality ?
+                            // Zilortha, Strength Incarnate, 2020-04-17: A creature with 0 power isn’t destroyed unless it has at least 1 damage marked on it.
+                            Math.max(perm.getPower().getValue(), 1) : perm.getToughness().getValue();
+                    if (lethalDamageThreshold <= perm.getDamage() || perm.isDeathtouched()) {
                         if (perm.destroy(null, this, false)) {
                             somethingHappened = true;
                             continue;
@@ -3321,12 +3322,12 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public void addUsePowerInsteadOfToughnessForDamageLethalityFilter(UUID source, FilterCreaturePermanent filter) {
+    public void addPowerInsteadOfToughnessForDamageLethalityFilter(UUID source, FilterCreaturePermanent filter) {
         usePowerInsteadOfToughnessForDamageLethalityFilters.putIfAbsent(source, filter);
     }
 
     @Override
-    public List<FilterCreaturePermanent> getActiveUsePowerInsteadOfToughnessForDamageLethalityFilters() {
+    public List<FilterCreaturePermanent> getActivePowerInsteadOfToughnessForDamageLethalityFilters() {
         return usePowerInsteadOfToughnessForDamageLethalityFilters.isEmpty() ? emptyList() : getBattlefield().getAllActivePermanents().stream()
                 .map(Card::getId)
                 .filter(usePowerInsteadOfToughnessForDamageLethalityFilters::containsKey)

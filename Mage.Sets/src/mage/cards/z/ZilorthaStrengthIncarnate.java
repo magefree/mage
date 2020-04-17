@@ -61,7 +61,7 @@ class ZilorthaStrengthIncarnateEffect extends ContinuousEffectImpl {
         // Change the rule
         FilterCreaturePermanent filter = StaticFilters.FILTER_PERMANENT_CREATURE.copy();
         filter.add(new ControllerIdPredicate(source.getControllerId()));
-        game.addUsePowerInsteadOfToughnessForDamageLethalityFilter(source.getSourceId(), filter);
+        game.addPowerInsteadOfToughnessForDamageLethalityFilter(source.getSourceId(), filter);
         return true;
     }
 
