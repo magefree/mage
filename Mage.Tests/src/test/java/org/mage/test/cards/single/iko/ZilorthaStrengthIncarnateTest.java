@@ -6,6 +6,9 @@ import org.junit.After;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
+/**
+ * @author htrajan
+ */
 public class ZilorthaStrengthIncarnateTest extends CardTestPlayerBase {
 
     @After
