@@ -2434,7 +2434,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
         simulations = new TreeNode<>(combat);
         addBlockSimulations(blockers, simulations, game);
-        combat.simulate();
+        combat.simulate(game);
 
         return getWorstSimulation(simulations);
 
@@ -2452,7 +2452,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                     TreeNode<CombatSimulator> child = new TreeNode<>(combat);
                     node.addChild(child);
                     addBlockSimulations(subList, child, game);
-                    combat.simulate();
+                    combat.simulate(game);
                 }
             }
         }
