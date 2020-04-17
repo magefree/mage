@@ -273,6 +273,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Soul of Innistrad", 137, Rarity.MYTHIC, mage.cards.s.SoulOfInnistrad.class));
         cards.add(new SetCardInfo("Soulflayer", 138, Rarity.RARE, mage.cards.s.Soulflayer.class));
         cards.add(new SetCardInfo("Souvenir Snatcher", 38, Rarity.RARE, mage.cards.s.SouvenirSnatcher.class));
+        cards.add(new SetCardInfo("Spellpyre Phoenix", 56, Rarity.RARE, mage.cards.s.SpellpyrePhoenix.class));
         cards.add(new SetCardInfo("Spinerock Knoll", 316, Rarity.RARE, mage.cards.s.SpinerockKnoll.class));
         cards.add(new SetCardInfo("Spirit Cairn", 100, Rarity.UNCOMMON, mage.cards.s.SpiritCairn.class));
         cards.add(new SetCardInfo("Splinterfright", 191, Rarity.RARE, mage.cards.s.Splinterfright.class));
