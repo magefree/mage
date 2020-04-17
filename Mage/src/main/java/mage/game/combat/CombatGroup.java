@@ -1,10 +1,6 @@
 
 package mage.game.combat;
 
-import java.io.Serializable;
-import java.util.*;
-import java.util.stream.Stream;
-
 import mage.abilities.Ability;
 import mage.abilities.common.ControllerAssignCombatDamageToBlockersAbility;
 import mage.abilities.common.ControllerDivideCombatDamageAbility;
@@ -19,11 +15,16 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.constants.AsThoughEffectType;
 import mage.constants.Outcome;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.Copyable;
+
+import java.io.Serializable;
+import java.util.*;
+import java.util.stream.Stream;
 
 /**
  *
@@ -271,12 +272,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
             if (blocked && canDamage(attacker, first)) {
                 int damage = getDamageValueFromPermanent(attacker, game);
                 if (hasTrample(attacker)) {
-                    int lethalDamage;
-                    if (attacker.getAbilities().containsKey(DeathtouchAbility.getInstance().getId())) {
-                        lethalDamage = 1;
-                    } else {
-                        lethalDamage = Math.max(blocker.getToughness().getValue() - blocker.getDamage(), 0);
-                    }
+                    int lethalDamage = getLethalDamage(blocker, attacker, game);
                     if (lethalDamage >= damage) {
                         blocker.markDamage(damage, attacker.getId(), game, true, true);
                     } else {
@@ -325,12 +321,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 for (UUID blockerId : new ArrayList<>(blockerOrder)) { // prevent ConcurrentModificationException
                     Permanent blocker = game.getPermanent(blockerId);
                     if (blocker != null) {
-                        int lethalDamage;
-                        if (attacker.getAbilities().containsKey(DeathtouchAbility.getInstance().getId())) {
-                            lethalDamage = 1;
-                        } else {
-                            lethalDamage = Math.max(blocker.getToughness().getValue() - blocker.getDamage(), 0);
-                        }
+                        int lethalDamage = getLethalDamage(blocker, attacker, game);
                         if (lethalDamage >= damage) {
                             if (!oldRuleDamage) {
                                 assigned.put(blockerId, damage);
@@ -521,12 +512,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
             for (UUID attackerId : attackerOrder) {
                 Permanent attacker = game.getPermanent(attackerId);
                 if (attacker != null) {
-                    int lethalDamage;
-                    if (blocker.getAbilities().containsKey(DeathtouchAbility.getInstance().getId())) {
-                        lethalDamage = 1;
-                    } else {
-                        lethalDamage = Math.max(attacker.getToughness().getValue() - attacker.getDamage(), 0);
-                    }
+                    int lethalDamage = getLethalDamage(attacker, blocker, game);
                     if (lethalDamage >= damage) {
                         if (!oldRuleDamage) {
                             assigned.put(attackerId, damage);
@@ -935,5 +921,30 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
             }
         }
         return false;
+    }
+
+    private static int getLethalDamage(Permanent blocker, Permanent attacker, Game game) {
+        int lethalDamage;
+        if (attacker.getAbilities().containsKey(DeathtouchAbility.getInstance().getId())) {
+            lethalDamage = 1;
+        } else {
+            lethalDamage = getLethalDamage(blocker, game);
+        }
+        return lethalDamage;
+    }
+
+    public static int getLethalDamage(Permanent damagedPermanent, Game game) {
+        List<FilterCreaturePermanent> usePowerInsteadOfToughnessForDamageLethalityFilters = game.getState().getActivePowerInsteadOfToughnessForDamageLethalityFilters();
+        /*
+         * for handling Zilortha, Strength Incarnate:
+         * 2020-04-17
+         * Any time the game is checking whether damage is lethal or if a creature should be destroyed for having lethal damage marked on it, use the power of your creatures rather than their toughness to check the damage against. This includes being assigned trample damage, damage from Flame Spill, and so on.
+         */
+        boolean usePowerInsteadOfToughnessForDamageLethality = usePowerInsteadOfToughnessForDamageLethalityFilters.stream()
+                .anyMatch(filter -> filter.match(damagedPermanent, game));
+        int lethalDamageThreshold = usePowerInsteadOfToughnessForDamageLethality ?
+                // Zilortha, Strength Incarnate, 2020-04-17: A creature with 0 power isn’t destroyed unless it has at least 1 damage marked on it.
+                Math.max(damagedPermanent.getPower().getValue(), 1) : damagedPermanent.getToughness().getValue();
+        return Math.max(lethalDamageThreshold - damagedPermanent.getDamage(), 0);
     }
 }
