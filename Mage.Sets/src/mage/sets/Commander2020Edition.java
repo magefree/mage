@@ -303,6 +303,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Tribute to the Wild", 193, Rarity.UNCOMMON, mage.cards.t.TributeToTheWild.class));
         cards.add(new SetCardInfo("Trygon Predator", 232, Rarity.UNCOMMON, mage.cards.t.TrygonPredator.class));
         cards.add(new SetCardInfo("Trynn, Champion of Freedom", 1, Rarity.MYTHIC, mage.cards.t.TrynnChampionOfFreedom.class));
+        cards.add(new SetCardInfo("Ukkima, Stalking Shadow", 17, Rarity.MYTHIC, mage.cards.u.UkkimaStalkingShadow.class));
         cards.add(new SetCardInfo("Unburial Rites", 139, Rarity.UNCOMMON, mage.cards.u.UnburialRites.class));
         cards.add(new SetCardInfo("Unclaimed Territory", 320, Rarity.UNCOMMON, mage.cards.u.UnclaimedTerritory.class));
         cards.add(new SetCardInfo("Unexpectedly Absent", 106, Rarity.RARE, mage.cards.u.UnexpectedlyAbsent.class));
