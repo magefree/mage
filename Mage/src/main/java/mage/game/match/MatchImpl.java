@@ -420,7 +420,11 @@ public abstract class MatchImpl implements Match {
         }
         sb.append("   Mulligan type: ").append(options.getMulliganType().toString()).append("<br/>");
         sb.append("   Free mulligans: ").append(options.getFreeMulligans()).append("<br/>");
-        sb.append("<br/>").append("Match is ").append(this.getOptions().isRated() ? "" : "not ").append("rated<br/>");
+        if (options.isPlaneChase()) {
+            sb.append("   Planechase mode activated").append("<br/>");
+        }
+        sb.append("<br/>");
+        sb.append("Match is ").append(this.getOptions().isRated() ? "" : "not ").append("rated<br/>");
         sb.append("You have to win ").append(this.getWinsNeeded()).append(this.getWinsNeeded() == 1 ? " game" : " games").append(" to win the complete match<br/>");
         sb.append("<br/>Game has started<br/><br/>");
         return sb.toString();

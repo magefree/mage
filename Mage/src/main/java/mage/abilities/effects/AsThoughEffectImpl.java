@@ -1,10 +1,9 @@
 package mage.abilities.effects;
 
 import mage.abilities.Ability;
-import mage.constants.AsThoughEffectType;
-import mage.constants.Duration;
-import mage.constants.EffectType;
-import mage.constants.Outcome;
+import mage.abilities.ActivatedAbility;
+import mage.cards.Card;
+import mage.constants.*;
 import mage.game.Game;
 
 import java.util.UUID;
@@ -42,4 +41,15 @@ public abstract class AsThoughEffectImpl extends ContinuousEffectImpl implements
         return type;
     }
 
+    /**
+     * Helper to check that affectedAbility is compatible for alternative cast modifications by setCastSourceIdWithAlternateMana
+     */
+    public boolean isAbilityAppliedForAlternateCast(Card cardToCheck, Ability affectedAbilityToCheck, UUID playerToCheck, Ability source) {
+        return cardToCheck != null
+                && playerToCheck.equals(source.getControllerId())
+                && cardToCheck.isOwnedBy(source.getControllerId())
+                && affectedAbilityToCheck instanceof ActivatedAbility
+                && (affectedAbilityToCheck.getAbilityType() == AbilityType.SPELL
+                || affectedAbilityToCheck.getAbilityType() == AbilityType.PLAY_LAND);
+    }
 }

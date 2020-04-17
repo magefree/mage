@@ -70,7 +70,7 @@ class BloodScrivenerReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(event.getPlayerId());
         if (player != null) {
-            player.drawCards(2, game, event.getAppliedEffects());
+            player.drawCards(2, event.getSourceId(), game, event.getAppliedEffects());
             player.loseLife(1, game, false);
         }
         return true;

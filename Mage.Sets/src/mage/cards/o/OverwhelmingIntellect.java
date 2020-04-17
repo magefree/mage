@@ -61,7 +61,7 @@ class OverwhelmingIntellectEffect extends OneShotEffect {
         Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
         if (controller != null && spell != null) {
             game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game);
-            controller.drawCards(spell.getConvertedManaCost(), game);
+            controller.drawCards(spell.getConvertedManaCost(), source.getSourceId(), game);
             return true;
         }
         return false;

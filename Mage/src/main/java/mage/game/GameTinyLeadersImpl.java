@@ -32,7 +32,7 @@ public abstract class GameTinyLeadersImpl extends GameImpl {
     protected boolean startingPlayerSkipsDraw = true;
 
     public GameTinyLeadersImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
-        super(attackOption, range, mulligan, startLife);
+        super(attackOption, range, mulligan, startLife, 50);
     }
 
     public GameTinyLeadersImpl(final GameTinyLeadersImpl game) {

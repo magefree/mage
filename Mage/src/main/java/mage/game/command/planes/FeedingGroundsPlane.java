@@ -1,8 +1,5 @@
-
 package mage.game.command.planes;
 
-import java.util.ArrayList;
-import java.util.List;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -17,11 +14,7 @@ import mage.abilities.effects.common.RollPlanarDieEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.Card;
-import mage.constants.CostModificationType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
@@ -35,8 +28,10 @@ import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
 import mage.watchers.common.PlanarRollWatcher;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * @author spjspj
  */
 public class FeedingGroundsPlane extends Plane {
@@ -45,7 +40,7 @@ public class FeedingGroundsPlane extends Plane {
     private static final String rule = "put X +1/+1 counters on target creature, where X is that creature's converted mana cost";
 
     public FeedingGroundsPlane() {
-        this.setName("Plane - Feeding Grounds");
+        this.setPlaneType(Planes.PLANE_FEEDING_GROUNDS);
         this.setExpansionSetCodeForImage("PCA");
 
         // Red spells cost {1} less to cast.  Green spells cost {1} less to cast
@@ -133,7 +128,7 @@ class FeedingGroundsEffect extends CostModificationEffectImpl {
             if (cPlane == null) {
                 return false;
             }
-            if (!cPlane.getName().equalsIgnoreCase("Plane - Feeding Grounds")) {
+            if (!cPlane.getPlaneType().equals(Planes.PLANE_FEEDING_GROUNDS)) {
                 return false;
             }
 

@@ -4,7 +4,6 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.CopyEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -13,10 +12,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.CreateTokenEvent;
-import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.AngelVigilanceToken;
 
 /**
@@ -28,7 +24,9 @@ public final class DivineVisitation extends CardImpl {
     public DivineVisitation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{W}");
 
-        // If one or more creature tokens would be created under your control, that many 4/4 white Angel creature tokens with flying and vigilance are created instead.
+        // If one or more creature tokens would be created under your control, 
+        // that many 4/4 white Angel creature tokens with flying and 
+        // vigilance are created instead.
         this.addAbility(new SimpleStaticAbility(
                 Zone.BATTLEFIELD, new DivineVisitationEffect()
         ));
@@ -47,7 +45,7 @@ public final class DivineVisitation extends CardImpl {
 class DivineVisitationEffect extends ReplacementEffectImpl {
 
     public DivineVisitationEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Copy, false);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit, false);
         staticText = "If one or more creature tokens would be created "
                 + "under your control, that many 4/4 white Angel creature "
                 + "tokens with flying and vigilance are created instead.";
@@ -64,7 +62,8 @@ class DivineVisitationEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getPlayerId().equals(source.getControllerId());
+        return event.getPlayerId().equals(source.getControllerId())
+                && ((CreateTokenEvent) event).getToken().isCreature();
     }
 
     @Override

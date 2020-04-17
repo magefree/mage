@@ -58,7 +58,7 @@ class HoardersGreedEffect extends OneShotEffect {
         if (controller != null) {
             do {
                 controller.loseLife(2, game, false);
-                controller.drawCards(2, game);
+                controller.drawCards(2, source.getSourceId(), game);
             } while (controller.canRespond() && ClashEffect.getInstance().apply(game, source));
             return true;
         }

@@ -30,11 +30,11 @@ public final class StormFleetArsonist extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // Raid - When Storm Fleet Arsonist enters the battlefield, if you attacked with a creature this turn, target opponent sacrifices a permanent.
+        // Raid - When Storm Fleet Arsonist enters the battlefield, if you attacked this turn, target opponent sacrifices a permanent.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new SacrificeEffect(new FilterPermanent(), 1, "Target opponent")),
                 RaidCondition.instance,
-                "<i>Raid</i> &mdash; When {this} enters the battlefield, if you attacked with a creature this turn, target opponent sacrifices a permanent.");
+                "<i>Raid</i> &mdash; When {this} enters the battlefield, if you attacked this turn, target opponent sacrifices a permanent.");
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability, new PlayerAttackedWatcher());
     }

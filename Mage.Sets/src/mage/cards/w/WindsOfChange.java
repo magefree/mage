@@ -69,7 +69,7 @@ class WindsOfChangeEffect extends OneShotEffect {
             for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null && permanentsCount.containsKey(playerId)) {
-                    player.drawCards(permanentsCount.get(playerId), game);
+                    player.drawCards(permanentsCount.get(playerId), source.getSourceId(), game);
                 }
             }
             return true;

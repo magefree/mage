@@ -490,13 +490,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             required = false;
         }
 
-        // temp lists
         List<Permanent> goodList = new ArrayList<>();
         List<Permanent> badList = new ArrayList<>();
         List<Permanent> allList = new ArrayList<>();
-        List<Permanent> goodList2 = new ArrayList<>();
-        List<Permanent> badList2 = new ArrayList<>();
-        List<Permanent> allList2 = new ArrayList<>();
 
         // TODO: improve to process multiple opponents instead random
         UUID randomOpponentId;
@@ -819,10 +815,13 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             return target.isChosen();
         }
 
-        if (target.getOriginalTarget() instanceof TargetSpell) {
+        if (target.getOriginalTarget() instanceof TargetSpell
+                || target.getOriginalTarget() instanceof TargetStackObject) {
             if (!game.getStack().isEmpty()) {
                 for (StackObject o : game.getStack()) {
-                    if (o instanceof Spell && !source.getId().equals(o.getStackAbility().getId())) {
+                    if (o instanceof Spell
+                            && !source.getId().equals(o.getStackAbility().getId())
+                            && target.canTarget(abilityControllerId, o.getStackAbility().getId(), source, game)) {
                         return tryAddTarget(target, o.getId(), source, game);
                     }
                 }
@@ -2435,7 +2434,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
         simulations = new TreeNode<>(combat);
         addBlockSimulations(blockers, simulations, game);
-        combat.simulate();
+        combat.simulate(game);
 
         return getWorstSimulation(simulations);
 
@@ -2453,7 +2452,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                     TreeNode<CombatSimulator> child = new TreeNode<>(combat);
                     node.addChild(child);
                     addBlockSimulations(subList, child, game);
-                    combat.simulate();
+                    combat.simulate(game);
                 }
             }
         }
@@ -2538,6 +2537,18 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
         allList.addAll(goodList);
         allList.addAll(badList);
+
+        // "can target all mode" don't need your/opponent lists -- all targets goes with same value
+        if (outcome.isCanTargetAll()) {
+            allList.sort(comparator); // bad sort
+            if (outcome.isGood()) {
+                Collections.reverse(allList); // good sort
+            }
+            goodList.clear();
+            goodList.addAll(allList);
+            badList.clear();
+            badList.addAll(allList);
+        }
     }
 
 

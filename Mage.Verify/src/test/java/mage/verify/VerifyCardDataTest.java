@@ -11,6 +11,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SubType;
 import mage.constants.SuperType;
+import mage.game.command.Plane;
 import mage.game.draft.RateCard;
 import mage.game.permanent.token.Token;
 import mage.game.permanent.token.TokenImpl;
@@ -93,6 +94,10 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_PT, "UST", "Garbage Elemental");
         skipListAddName(SKIP_LIST_PT, "UST", "Infinity Elemental");
         skipListAddName(SKIP_LIST_PT, "UNH", "Old Fogey");
+        // the following are temporary
+        skipListAddName(SKIP_LIST_PT, "IKO", "Chevill, Bane of Monsters");
+        skipListAddName(SKIP_LIST_PT, "IKO", "General Kudro of Drannith");
+        skipListAddName(SKIP_LIST_PT, "IKO", "Frillscare Mentor");
 
         // color
         skipListCreate(SKIP_LIST_COLOR);
@@ -104,7 +109,6 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_COST, "ULG", "Erase");
         skipListAddName(SKIP_LIST_COST, "H17", "Grimlock, Dinobot Leader");
         skipListAddName(SKIP_LIST_COST, "UST", "Everythingamajig");
-        skipListAddName(SKIP_LIST_COST, "THB", "Anax, Hardened in the Forge"); // until it's been corrected in MTGJSON
 
         // supertype
         skipListCreate(SKIP_LIST_SUPERTYPE);
@@ -118,11 +122,10 @@ public class VerifyCardDataTest {
         skipListCreate(SKIP_LIST_SUBTYPE);
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Miss Demeanor");
         // the following are temporary
-        subtypesToIgnore.add("Noble");
-        skipListAddName(SKIP_LIST_SUBTYPE, "AER", "Ridgescale Tusker");
-        skipListAddName(SKIP_LIST_SUBTYPE, "ME3", "Lady Caleria");
-        skipListAddName(SKIP_LIST_SUBTYPE, "LEG", "Lady Caleria");
-
+        skipListAddName(SKIP_LIST_SUBTYPE, "THB", "Dryad of the Ilysian Grove");
+        skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Chicken a la King");
+        subtypesToIgnore.add("Shark");
+        subtypesToIgnore.add("Fish");
 
         // number
         skipListCreate(SKIP_LIST_NUMBER);
@@ -245,7 +248,7 @@ public class VerifyCardDataTest {
             Map<String, Integer> cardsList = new HashMap<>();
             for (ExpansionSet.SetCardInfo checkCard : set.getSetCardInfo()) {
                 // only rare cards must have double versions
-                if (!checkCard.getRarity().equals(Rarity.RARE) && !checkCard.getRarity().equals(Rarity.MYTHIC)) {
+                if (!Objects.equals(checkCard.getRarity(), Rarity.RARE) && !Objects.equals(checkCard.getRarity(), Rarity.MYTHIC)) {
                     continue;
                 }
 
@@ -397,7 +400,7 @@ public class VerifyCardDataTest {
 
         Collection<ExpansionSet> sets = Sets.getInstance().values();
 
-        // 1. wrong set class names
+        // CHECK: wrong set class names
         for (ExpansionSet set : sets) {
             String className = extractShortClass(set.getClass());
             String needClassName = set.getName()
@@ -420,7 +423,7 @@ public class VerifyCardDataTest {
             }
         }
 
-        // 2. wrong basic lands settings (it's for lands search, not booster construct)
+        // CHECK: wrong basic lands settings (it's for lands search, not booster construct)
         Map<String, Boolean> skipLandCheck = new HashMap<>();
         for (ExpansionSet set : sets) {
             if (skipLandCheck.containsKey(set.getName())) {
@@ -453,7 +456,7 @@ public class VerifyCardDataTest {
             // TODO: add test to check num cards (hasBasicLands and numLand > 0)
         }
 
-        // 3. wrong snow land info
+        // CHECK: wrong snow land info
         for (ExpansionSet set : sets) {
             boolean needSnow = CardRepository.instance.haveSnowLands(set.getCode());
             boolean haveSnow = false;
@@ -519,6 +522,7 @@ public class VerifyCardDataTest {
                 }
 
                 // 3. check that getMana works without NPE errors (it uses getNetMana with empty game param for AI score calcs)
+                // https://github.com/magefree/mage/issues/6300
                 card.getMana();
             }
         }
@@ -703,6 +707,53 @@ public class VerifyCardDataTest {
         printMessages(errorsList);
         if (errorsList.size() > 0) {
             Assert.fail("Found token errors: " + errorsList.size());
+        }
+    }
+
+    @Test
+    public void checkMissingPlanesData() {
+        Collection<String> errorsList = new ArrayList<>();
+
+        Reflections reflections = new Reflections("mage.");
+        Set<Class<? extends Plane>> planesClassesList = reflections.getSubTypesOf(Plane.class);
+
+
+        // 1. correct class name
+        for (Class<? extends Plane> planeClass : planesClassesList) {
+            if (!planeClass.getName().endsWith("Plane")) {
+                String className = extractShortClass(planeClass);
+                errorsList.add("error, plane class must ends with Plane: " + className + " from " + planeClass.getName());
+            }
+        }
+
+        // 2. correct package
+        for (Class<? extends Plane> planeClass : planesClassesList) {
+            String fullClass = planeClass.getName();
+            if (!fullClass.startsWith("mage.game.command.planes.")) {
+                String className = extractShortClass(planeClass);
+                errorsList.add("error, plane must be stored in mage.game.command.planes package: " + className + " from " + planeClass.getName());
+            }
+        }
+
+        // 3. correct constructor
+        for (Class<? extends Plane> planeClass : planesClassesList) {
+            String className = extractShortClass(planeClass);
+            Plane plane;
+            try {
+                plane = (Plane) createNewObject(planeClass);
+
+                // 4. must have type/name
+                if (plane.getPlaneType() == null) {
+                    errorsList.add("error, plane must have plane type: " + className + " from " + planeClass.getName());
+                }
+            } catch (Throwable e) {
+                errorsList.add("error, can't create plane with default constructor: " + className + " from " + planeClass.getName());
+            }
+        }
+
+        printMessages(errorsList);
+        if (errorsList.size() > 0) {
+            Assert.fail("Found plane errors: " + errorsList.size());
         }
     }
 

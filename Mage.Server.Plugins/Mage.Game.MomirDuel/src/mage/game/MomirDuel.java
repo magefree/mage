@@ -24,7 +24,7 @@ import mage.players.Player;
 public class MomirDuel extends GameImpl {
 
     public MomirDuel(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
-        super(attackOption, range, mulligan, startLife);
+        super(attackOption, range, mulligan, startLife, 60);
     }
 
     public MomirDuel(final MomirDuel game) {

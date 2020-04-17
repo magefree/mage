@@ -1,6 +1,5 @@
 package mage.cards.r;
 
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.CanBeYourCommanderAbility;
@@ -46,7 +45,8 @@ public final class RowanKenrith extends CardImpl {
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
 
-        // -8: Target player gets an emblem with "Whenever you activate an ability that isn't a mana ability, copy it. You may choose new targets for the copy."
+        // -8: Target player gets an emblem with "Whenever you activate an ability that isn't 
+        // a mana ability, copy it. You may choose new targets for the copy."
         Effect effect = new GetEmblemTargetPlayerEffect(new RowanKenrithEmblem());
         ability = new LoyaltyAbility(effect, -8);
         ability.addTarget(new TargetPlayer());
@@ -71,8 +71,6 @@ public final class RowanKenrith extends CardImpl {
 
 class RowanKenrithAttackEffect extends RequirementEffect {
 
-    protected MageObjectReference creatingPermanent;
-
     public RowanKenrithAttackEffect() {
         super(Duration.Custom);
         staticText = "During target player's next turn, creatures that player controls attack if able";
@@ -80,7 +78,6 @@ class RowanKenrithAttackEffect extends RequirementEffect {
 
     public RowanKenrithAttackEffect(final RowanKenrithAttackEffect effect) {
         super(effect);
-        this.creatingPermanent = effect.creatingPermanent;
     }
 
     @Override
@@ -89,24 +86,15 @@ class RowanKenrithAttackEffect extends RequirementEffect {
     }
 
     @Override
-    public void init(Ability source, Game game) {
-        super.init(source, game);
-        creatingPermanent = new MageObjectReference(source.getSourceId(), game);
-        setStartingControllerAndTurnNum(game, source.getFirstTarget(), game.getActivePlayerId()); // setup startingController to calc isYourTurn calls
-    }
-
-    @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return permanent.isControlledBy(source.getFirstTarget()) && this.isYourNextTurn(game);
+        return permanent.isControlledBy(source.getFirstTarget())
+                && game.isActivePlayer(source.getFirstTarget());
     }
 
     @Override
     public boolean isInactive(Ability source, Game game) {
-        return (game.getPhase().getType() == TurnPhase.END && this.isYourNextTurn(game))
-                // 6/15/2010: If a creature controlled by the affected player can't attack Gideon Jura
-                // (because he's no longer on the battlefield, for example), that player may have it attack you,
-                // another one of your planeswalkers, or nothing at all.
-                || creatingPermanent.getPermanent(game) == null;
+        return (game.getPhase().getType() == TurnPhase.END
+                && this.isYourNextTurn(game));
     }
 
     @Override

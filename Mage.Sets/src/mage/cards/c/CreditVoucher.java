@@ -79,7 +79,7 @@ class CreditVoucherEffect extends OneShotEffect {
             }
             controller.shuffleLibrary(source, game);
             if (amountShuffled > 0) {
-                controller.drawCards(amountShuffled, game);
+                controller.drawCards(amountShuffled, source.getSourceId(), game);
             }
             return true;
         }

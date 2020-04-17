@@ -38,7 +38,7 @@ public final class Preacher extends CardImpl {
         // You may choose not to untap Preacher during your untap step.
         this.addAbility(new SkipUntapOptionalAbility());
 
-        // {tap}: Gain control of target creature of an opponent's choice that they control for as long as Preacher remains tapped.
+        // {T}: Gain control of target creature of an opponent's choice that they control for as long as Preacher remains tapped.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreacherEffect(), new TapSourceCost());
         ability.addTarget(new TargetOpponentsChoicePermanent(1, 1, new FilterControlledCreaturePermanent(), false));
         this.addAbility(ability);

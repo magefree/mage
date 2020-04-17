@@ -1,7 +1,5 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -17,16 +15,17 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.util.functions.AbilityApplier;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class MercurialPretender extends CardImpl {
 
-    private static final String effectText = "as a copy of any creature you control, except it has \"{2}{U}{U}: Return this creature to its owner's hand.\"";
+    private static final String effectText = "as a copy of a creature you control, except it has \"{2}{U}{U}: Return this creature to its owner's hand.\"";
 
     public MercurialPretender(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}");
         this.subtype.add(SubType.SHAPESHIFTER);
 
         this.color.setBlue(true);
@@ -41,7 +40,7 @@ public final class MercurialPretender extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(effect, true));
     }
 
-    public MercurialPretender(final MercurialPretender card) {
+    private MercurialPretender(final MercurialPretender card) {
         super(card);
     }
 

@@ -36,11 +36,11 @@ public final class RuinRaider extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
-        // <i>Raid</i> &mdash; At the beginning of your end step, if you attacked with a creature this turn, reveal the top card of your library and put that card into your hand. You lose life equal to the card's converted mana cost.
+        // <i>Raid</i> &mdash; At the beginning of your end step, if you attacked this turn, reveal the top card of your library and put that card into your hand. You lose life equal to the card's converted mana cost.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(new RuinRaiderEffect(), TargetController.YOU, false),
                 RaidCondition.instance,
-                "<i>Raid</i> &mdash; At the beginning of your end step, if you attacked with a creature this turn, "
+                "<i>Raid</i> &mdash; At the beginning of your end step, if you attacked this turn, "
                 + "reveal the top card of your library and put that card into your hand. "
                 + "You lose life equal to the card's converted mana cost.");
         this.addAbility(ability, new PlayerAttackedWatcher());

@@ -1,9 +1,10 @@
 package mage.abilities.keyword;
 
-import java.io.ObjectStreamException;
 import mage.abilities.MageSingleton;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.constants.Zone;
+
+import java.io.ObjectStreamException;
 
 /**
  * Hexproof from black (This creature or player can't be the target of black
@@ -11,7 +12,7 @@ import mage.constants.Zone;
  *
  * @author igoudt
  */
-public class HexproofFromBlackAbility extends SimpleStaticAbility implements MageSingleton {
+public class HexproofFromBlackAbility extends SimpleStaticAbility implements MageSingleton, HexproofInterface {
 
     private static final HexproofFromBlackAbility instance;
 

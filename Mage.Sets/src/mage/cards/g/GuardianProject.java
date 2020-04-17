@@ -21,7 +21,6 @@ import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
@@ -145,7 +144,7 @@ class GuardianProjectEffect extends OneShotEffect {
         if (GuardianProjectTriggeredAbility.checkCondition(
                 mor.getPermanentOrLKIBattlefield(game), source.getControllerId(), game)
         ) {
-            player.drawCards(1, game);
+            player.drawCards(1, source.getSourceId(), game);
             return true;
         }
         return false;

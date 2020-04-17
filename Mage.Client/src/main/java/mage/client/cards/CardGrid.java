@@ -15,6 +15,7 @@
  import mage.client.util.Event;
  import mage.client.util.GUISizeHelper;
  import mage.client.util.Listener;
+ import mage.constants.Rarity;
  import mage.utils.CardColorUtil;
  import mage.view.CardView;
  import mage.view.CardsView;
@@ -362,7 +363,14 @@
 
      @Override
      public int compare(MageCard o1, MageCard o2) {
-         int val = o1.getOriginal().getRarity().compareTo(o2.getOriginal().getRarity());
+         Rarity r1 = o1.getOriginal().getRarity();
+         Rarity r2 = o2.getOriginal().getRarity();
+
+         int val = Integer.compare(
+                 r1 == null ? 0 : r1.getSorting(),
+                 r2 == null ? 0 : r2.getSorting()
+         );
+
          if (val == 0) {
              return o1.getOriginal().getName().compareTo(o2.getOriginal().getName());
          } else {

@@ -1,8 +1,7 @@
-
-
 package org.mage.test.player;
 
 import mage.constants.PhaseStep;
+import mage.game.Game;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -35,5 +34,12 @@ public class PlayerAction {
 
     public String getActionName() {
         return this.actionName;
+    }
+
+    /**
+     * Calls after action removed from commands queue later (for multi steps action, e.g. AI related)
+     */
+    public void onActionRemovedLater(Game game, TestPlayer player) {
+        //
     }
 }

@@ -1,4 +1,3 @@
-
 package mage.cards.p;
 
 import mage.MageInt;
@@ -20,14 +19,14 @@ import mage.players.Player;
 import java.util.UUID;
 
 /**
- *
  * @author ciaccona007
  */
 public final class Poultrygeist extends CardImpl {
 
     public Poultrygeist(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
-        this.subtype.add(SubType.CHICKEN);
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
+        this.subtype.add(SubType.BIRD);
+        this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

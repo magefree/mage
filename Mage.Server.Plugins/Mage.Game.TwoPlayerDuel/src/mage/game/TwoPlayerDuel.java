@@ -1,4 +1,3 @@
-
 package mage.game;
 
 import mage.constants.MultiplayerAttackOption;
@@ -13,7 +12,11 @@ import java.util.UUID;
 public class TwoPlayerDuel extends GameImpl {
 
     public TwoPlayerDuel(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
-        super(attackOption, range, mulligan, startLife);
+        this(attackOption, range, mulligan, startLife, 60);
+    }
+
+    public TwoPlayerDuel(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife, int startingSize) {
+        super(attackOption, range, mulligan, startLife, startingSize);
     }
 
     public TwoPlayerDuel(final TwoPlayerDuel game) {

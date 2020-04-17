@@ -92,7 +92,7 @@ class NehebDreadhordeChampionEffect extends OneShotEffect {
         if (counter == 0) {
             return true;
         }
-        player.drawCards(counter, game);
+        player.drawCards(counter, source.getSourceId(), game);
         player.getManaPool().addMana(mana, game, source, true);
         return true;
     }

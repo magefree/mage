@@ -43,7 +43,7 @@ public final class ArtificialScoringSystem {
         if (card.getCardType().contains(CardType.CREATURE)) {
             return score + (card.getPower().getValue() + card.getToughness().getValue()) * 10;
         } else {
-            return score + (/*card.getRemoval()*50*/+card.getRarity().getRating() * 30);
+            return score + (/*card.getRemoval()*50*/+(card.getRarity() == null ? 0 : card.getRarity().getRating() * 30));
         }
     }
 

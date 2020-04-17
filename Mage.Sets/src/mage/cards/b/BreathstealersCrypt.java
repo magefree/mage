@@ -68,7 +68,7 @@ class BreathstealersCryptEffect extends ReplacementEffectImpl {
         Player player = game.getPlayer(event.getPlayerId());
         if (player != null) {
             Cards oldHand = player.getHand().copy();
-            if (player.drawCards(1, game, event.getAppliedEffects()) > 0) {
+            if (player.drawCards(1, event.getSourceId(), game, event.getAppliedEffects()) > 0) {
                 Cards drawnCards = player.getHand().copy();
                 drawnCards.removeAll(oldHand);
                 player.revealCards(source, "The card drawn from " + player.getName() + "'s library.", drawnCards, game);

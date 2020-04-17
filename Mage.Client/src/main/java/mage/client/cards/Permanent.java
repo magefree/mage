@@ -28,7 +28,6 @@ import static mage.client.constants.Constants.DAMAGE_MAX_LEFT;
 import static mage.client.constants.Constants.POWBOX_TEXT_MAX_TOP;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class Permanent extends Card {
@@ -40,11 +39,14 @@ public class Permanent extends Card {
     protected final BufferedImage tappedImage;
     protected BufferedImage flippedImage;
 
-    /** Creates new form Permanent
+    /**
+     * Creates new form Permanent
+     *
      * @param permanent
      * @param bigCard
      * @param dimensions
-     * @param gameId */
+     * @param gameId
+     */
     public Permanent(PermanentView permanent, BigCard bigCard, CardDimensions dimensions, UUID gameId) {
         super(permanent, bigCard, dimensions, gameId);
         this.setSize(this.getPreferredSize());
@@ -74,29 +76,28 @@ public class Permanent extends Card {
         StringBuilder sb = new StringBuilder();
         sb.append(super.getText(cardType));
         if (permanent.getOriginal() != null) {
-        sb.append("\n----- Originally -------\n");
-        sb.append(permanent.getOriginal().getName());
-        if (!permanent.getOriginal().getManaCost().isEmpty()) {
-            sb.append('\n').append(permanent.getOriginal().getManaCost());
-        }
-        sb.append('\n').append(getType(permanent.getOriginal()));
-        if (permanent.getOriginal().getColor().hasColor()) {
-            sb.append('\n').append(permanent.getOriginal().getColor().toString());
-        }
-        if (permanent.getOriginal().isCreature()) {
-            sb.append('\n').append(permanent.getOriginal().getPower()).append('/').append(permanent.getOriginal().getToughness());
-        }
-        else if (permanent.getOriginal().isPlanesWalker()) {
-            sb.append('\n').append(permanent.getOriginal().getLoyalty());
-        }
-        for (String rule: getRules()) {
-            sb.append('\n').append(rule);
-        }
-        if (!permanent.getOriginal().getExpansionSetCode().isEmpty()) {
-            sb.append('\n').append(permanent.getCardNumber()).append(" - ");
-            sb.append('\n').append(Sets.getInstance().get(permanent.getOriginal().getExpansionSetCode()).getName()).append(" - ");
-            sb.append(permanent.getOriginal().getRarity().toString());
-        }
+            sb.append("\n----- Originally -------\n");
+            sb.append(permanent.getOriginal().getName());
+            if (!permanent.getOriginal().getManaCost().isEmpty()) {
+                sb.append('\n').append(permanent.getOriginal().getManaCost());
+            }
+            sb.append('\n').append(getType(permanent.getOriginal()));
+            if (permanent.getOriginal().getColor().hasColor()) {
+                sb.append('\n').append(permanent.getOriginal().getColor().toString());
+            }
+            if (permanent.getOriginal().isCreature()) {
+                sb.append('\n').append(permanent.getOriginal().getPower()).append('/').append(permanent.getOriginal().getToughness());
+            } else if (permanent.getOriginal().isPlanesWalker()) {
+                sb.append('\n').append(permanent.getOriginal().getLoyalty());
+            }
+            for (String rule : getRules()) {
+                sb.append('\n').append(rule);
+            }
+            if (!permanent.getOriginal().getExpansionSetCode().isEmpty()) {
+                sb.append('\n').append(permanent.getCardNumber()).append(" - ");
+                sb.append('\n').append(Sets.getInstance().get(permanent.getOriginal().getExpansionSetCode()).getName()).append(" - ");
+                sb.append(permanent.getOriginal().getRarity() == null ? "none" : permanent.getOriginal().getRarity().toString());
+            }
 //        sb.append("\n").append(card.getId());
         }
         return sb.toString();
@@ -107,12 +108,11 @@ public class Permanent extends Card {
     protected List<String> getRules() {
         if (permanent.getCounters() != null) {
             List<String> rules = new ArrayList<>(permanent.getRules());
-            for (CounterView counter: permanent.getCounters()) {
+            for (CounterView counter : permanent.getCounters()) {
                 rules.add(counter.getCount() + " x " + counter.getName());
             }
             return rules;
-        }
-        else {
+        } else {
             return permanent.getRules();
         }
     }
@@ -139,7 +139,7 @@ public class Permanent extends Card {
             }
             this.setBounds(r);
             this.repaint();
-            for (MagePermanent perm: links) {
+            for (MagePermanent perm : links) {
                 r.x += 20;
                 r.y += 20;
                 perm.setBounds(r);
@@ -160,22 +160,20 @@ public class Permanent extends Card {
         if (permanent.isTapped()) {
             this.getText().setVisible(false);
             g2.drawImage(tappedImage, 0, 0, this);
-        }
-        else {
+        } else {
             this.getText().setVisible(true);
             g2.drawImage(small, 0, 0, this);
         }
 
         //Add a border, red if card currently has focus
         if (isFocusOwner()) {
-          g2.setColor(Color.RED);
+            g2.setColor(Color.RED);
         } else {
-          g2.setColor(Color.BLACK);
+            g2.setColor(Color.BLACK);
         }
         if (permanent.isTapped()) {
             g2.drawRect(0, 0, ClientDefaultSettings.dimensions.getFrameHeight() - 1, ClientDefaultSettings.dimensions.getFrameWidth() - 1);
-        }
-        else {
+        } else {
             g2.drawRect(0, 0, ClientDefaultSettings.dimensions.getFrameWidth() - 1, ClientDefaultSettings.dimensions.getFrameHeight() - 1);
         }
 
@@ -207,8 +205,7 @@ public class Permanent extends Card {
     public Dimension getPreferredSize() {
         if (permanent != null && permanent.isTapped()) {
             return new Dimension(ClientDefaultSettings.dimensions.getFrameHeight(), ClientDefaultSettings.dimensions.getFrameWidth());
-        }
-        else {
+        } else {
             return new Dimension(ClientDefaultSettings.dimensions.getFrameWidth(), ClientDefaultSettings.dimensions.getFrameHeight());
         }
     }
@@ -229,7 +226,7 @@ public class Permanent extends Card {
                 tooltipPopup.hide();
             }
             PopupFactory factory = PopupFactory.getSharedInstance();
-            int x = (int) this.getLocationOnScreen().getX() + (permanent.isTapped()? ClientDefaultSettings.dimensions.getFrameHeight() : ClientDefaultSettings.dimensions.getFrameWidth());
+            int x = (int) this.getLocationOnScreen().getX() + (permanent.isTapped() ? ClientDefaultSettings.dimensions.getFrameHeight() : ClientDefaultSettings.dimensions.getFrameWidth());
             int y = (int) this.getLocationOnScreen().getY() + 40;
             tooltipPopup = factory.getPopup(this, tooltipText, x, y);
             tooltipPopup.show();
@@ -246,7 +243,8 @@ public class Permanent extends Card {
         return permanent;
     }
 
-    /** This method is called from within the constructor to
+    /**
+     * This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
      * always regenerated by the Form Editor.

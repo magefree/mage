@@ -12,6 +12,7 @@ import mage.client.dialog.PreferencesDialog;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.*;
 import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.util.RandomUtil;
@@ -1295,7 +1296,10 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                         }
                         // Rarity
                         if (!s) {
-                            s |= card.getRarity().toString().toLowerCase(Locale.ENGLISH).contains(searchStr);
+                            Rarity r = card.getRarity();
+                            if (r != null) {
+                                s |= r.toString().toLowerCase(Locale.ENGLISH).contains(searchStr);
+                            }
                         }
                         // Type line
                         if (!s) {

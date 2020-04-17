@@ -32,7 +32,7 @@ public class OathbreakerFreeForAll extends GameCommanderImpl {
     private static final String COMMANDER_NAME_SIGNATURE_SPELL = "Signature Spell";
 
     public OathbreakerFreeForAll(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
-        super(attackOption, range, mulligan, startLife);
+        super(attackOption, range, mulligan, startLife, 100);
         this.startingPlayerSkipsDraw = false;
     }
 

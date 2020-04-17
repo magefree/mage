@@ -1,27 +1,20 @@
-
 package mage.cards.f;
 
-import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureAttachedEffect;
-import mage.constants.Outcome;
-import mage.game.permanent.token.custom.CreatureToken;
-import mage.target.TargetPermanent;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.game.permanent.token.TokenImpl;
+import mage.constants.*;
+import mage.game.permanent.token.custom.CreatureToken;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class FowlPlay extends CardImpl {
@@ -38,10 +31,10 @@ public final class FowlPlay extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // Enchanted creature is a Chicken with base power and toughness 1/1 and loses all abilities.
+        // Enchanted creature is a Bird with base power and toughness 1/1 and loses all abilities.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new BecomesCreatureAttachedEffect(new CreatureToken(1, 1, "1/1 Chicken creature", SubType.CHICKEN),
-                        "Enchanted creature is a Chicken with base power and toughness 1/1 and loses all abilities",
+                new BecomesCreatureAttachedEffect(new CreatureToken(1, 1, "1/1 Bird creature", SubType.BIRD),
+                        "Enchanted creature is a Bird with base power and toughness 1/1 and loses all abilities",
                         Duration.WhileOnBattlefield, BecomesCreatureAttachedEffect.LoseType.ABILITIES_SUBTYPE)));
     }
 

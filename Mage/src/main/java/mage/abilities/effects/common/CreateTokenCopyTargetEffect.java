@@ -21,6 +21,7 @@ import mage.util.functions.ApplyToPermanent;
 import mage.util.functions.EmptyApplyToPermanent;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -46,6 +47,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
     private ObjectColor color;
     private boolean useLKI = false;
     private boolean isntLegendary = false;
+    private final List<Ability> additionalAbilities = new ArrayList();
 
     public CreateTokenCopyTargetEffect(boolean useLKI) {
         this();
@@ -202,6 +204,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         if (color != null) {
             token.getColor(game).setColor(color);
         }
+        additionalAbilities.stream().forEach(token::addAbility);
 
         token.putOntoBattlefield(number, game, source.getSourceId(), playerId == null ? source.getControllerId() : playerId, tapped, attacking, attackedPlayer);
         for (UUID tokenId : token.getLastAddedTokenIds()) { // by cards like Doubling Season multiple tokens can be added to the battlefield
@@ -301,5 +304,9 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
             exileEffect.setTargetPointer(new FixedTarget(tokenPermanent, game));
             game.addDelayedTriggeredAbility(new AtTheEndOfCombatDelayedTriggeredAbility(exileEffect), source);
         }
+    }
+
+    public void addAdditionalAbilities(Ability... abilities) {
+        Arrays.stream(abilities).forEach(this.additionalAbilities::add);
     }
 }

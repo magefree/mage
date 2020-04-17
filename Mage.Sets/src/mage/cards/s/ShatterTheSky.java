@@ -75,7 +75,7 @@ class ShatterTheSkyEffect extends OneShotEffect {
                 .distinct()
                 .map(game::getPlayer)
                 .filter(Objects::nonNull)
-                .forEach(player -> player.drawCards(1, game));
+                .forEach(player -> player.drawCards(1, source.getSourceId(), game));
         effect.apply(game, source);
         return true;
     }

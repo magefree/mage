@@ -1,5 +1,7 @@
 package mage.counters;
 
+import mage.abilities.keyword.*;
+
 /**
  * Enum for counters, names and instances.
  *
@@ -28,12 +30,14 @@ public enum CounterType {
     CUBE("cube"),
     CURRENCY("currency"),
     DEATH("death"),
+    DEATHTOUCH("deathtouch"),
     DELAY("delay"),
     DEPLETION("depletion"),
     DESPAIR("despair"),
     DEVOTION("devotion"),
     DIVINITY("divinity"),
     DOOM("doom"),
+    DOUBLE_STRIKE("double strike"),
     DREAM("dream"),
     ECHO("echo"),
     EGG("egg"),
@@ -46,7 +50,10 @@ public enum CounterType {
     FATE("fate"),
     FEATHER("feather"),
     FILIBUSTER("filibuster"),
+    FIRST_STRIKE("first strike"),
     FLOOD("flood"),
+    FLYING("flying"),
+    FORESHADOW("foreshadow"),
     FUNK("funk"),
     FURY("fury"),
     FUNGUS("fungus"),
@@ -58,12 +65,14 @@ public enum CounterType {
     GROWTH("growth"),
     HATCHLING("hatchling"),
     HEALING("healing"),
+    HEXPROOF("hexproof"),
     HIT("hit"),
     HOOFPRINT("hoofprint"),
     HOUR("hour"),
     HOURGLASS("hourglass"),
     HUNGER("hunger"),
     ICE("ice"),
+    INDESTRUCTIBLE("indestructible"),
     INFECTION("infection"),
     INTERVENTION("intervention"),
     ISOLATION("isolation"),
@@ -72,12 +81,14 @@ public enum CounterType {
     KI("ki"),
     LANDMARK("landmark"),
     LEVEL("level"),
+    LIFELINK("lifelink"),
     LORE("lore"),
     LUCK("luck"),
     LOYALTY("loyalty"),
     MANIFESTATION("manifestation"),
     MANNEQUIN("mannequin"),
     MATRIX("matrix"),
+    MENACE("menace"),
     M1M1(new BoostCounter(-1, -1).name),
     M2M1(new BoostCounter(-2, -1).name),
     M2M2(new BoostCounter(-2, -2).name),
@@ -108,6 +119,7 @@ public enum CounterType {
     PRESSURE("pressure"),
     PREY("prey"),
     PUPA("pupa"),
+    REACH("reach"),
     REPAIR("repair"),
     RUST("rust"),
     QUEST("quest"),
@@ -120,6 +132,7 @@ public enum CounterType {
     SLIME("slime"),
     SLUMBER("slumber"),
     SOOT("soot"),
+    SOUL("soul"),
     SPITE("spite"),
     SPORE("spore"),
     STORAGE("storage"),
@@ -131,11 +144,13 @@ public enum CounterType {
     TIME("time"),
     TOWER("tower"),
     TRAINING("training"),
+    TRAMPLE("trample"),
     TRAP("trap"),
     TREASURE("treasure"),
     UNITY("unity"),
     VELOCITY("velocity"),
     VERSE("verse"),
+    VIGILANCE("vigilance"),
     VITALITY("vitality"),
     VORTEX("vortex"),
     WAGE("wage"),
@@ -192,6 +207,28 @@ public enum CounterType {
                 return new BoostCounter(-2, -1, amount);
             case M2M2:
                 return new BoostCounter(-2, -2, amount);
+            case DEATHTOUCH:
+                return new AbilityCounter(DeathtouchAbility.getInstance());
+            case DOUBLE_STRIKE:
+                return new AbilityCounter(DoubleStrikeAbility.getInstance());
+            case FIRST_STRIKE:
+                return new AbilityCounter(FirstStrikeAbility.getInstance());
+            case FLYING:
+                return new AbilityCounter(FlyingAbility.getInstance());
+            case HEXPROOF:
+                return new AbilityCounter(HexproofAbility.getInstance());
+            case INDESTRUCTIBLE:
+                return new AbilityCounter(IndestructibleAbility.getInstance());
+            case LIFELINK:
+                return new AbilityCounter(LifelinkAbility.getInstance());
+            case MENACE:
+                return new AbilityCounter(new MenaceAbility());
+            case REACH:
+                return new AbilityCounter(ReachAbility.getInstance());
+            case TRAMPLE:
+                return new AbilityCounter(TrampleAbility.getInstance());
+            case VIGILANCE:
+                return new AbilityCounter(VigilanceAbility.getInstance());
             default:
                 return new Counter(name, amount);
         }

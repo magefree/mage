@@ -17,7 +17,7 @@ public class BrawlFreeForAll extends GameCommanderImpl {
     private int numPlayers;
 
     public BrawlFreeForAll(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
-        super(attackOption, range, mulligan, startLife);
+        super(attackOption, range, mulligan, startLife, 60);
     }
 
     public BrawlFreeForAll(final BrawlFreeForAll game) {

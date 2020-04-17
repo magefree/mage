@@ -64,7 +64,7 @@ class ShockerEffect extends OneShotEffect {
                 for (Card card : targetPlayer.getHand().getCards(game)) {
                     targetPlayer.discard(card, source, game);
                 }
-                targetPlayer.drawCards(count, game);
+                targetPlayer.drawCards(count, source.getSourceId(), game);
                 return false;
             }
         return true;

@@ -82,7 +82,8 @@ public class TestPlayer implements Player {
 
     private int maxCallsWithoutAction = 400;
     private int foundNoAction = 0;
-    private boolean AIPlayer;
+    private boolean AIPlayer; // full playable AI
+    private boolean AICanChooseInStrictMode = false; // AI can choose in custom aiXXX commands (e.g. on one priority or step)
     private final List<PlayerAction> actions = new ArrayList<>();
     private final Map<PlayerAction, PhaseStep> actionsToRemovesLater = new HashMap<>(); // remove actions later, on next step (e.g. for AI commands)
     private final List<String> choices = new ArrayList<>(); // choices stack for choice
@@ -111,8 +112,15 @@ public class TestPlayer implements Player {
         computerPlayer.setTestPlayerLink(this);
     }
 
+    public TestPlayer(TestComputerPlayerMonteCarlo computerPlayer) {
+        this.computerPlayer = computerPlayer;
+        AIPlayer = false;
+        computerPlayer.setTestPlayerLink(this);
+    }
+
     public TestPlayer(final TestPlayer testPlayer) {
         this.AIPlayer = testPlayer.AIPlayer;
+        this.AICanChooseInStrictMode = testPlayer.AICanChooseInStrictMode;
         this.foundNoAction = testPlayer.foundNoAction;
         this.actions.addAll(testPlayer.actions);
         this.choices.addAll(testPlayer.choices);
@@ -172,6 +180,10 @@ public class TestPlayer implements Player {
 
     public void addAction(String actionName, int turnNum, PhaseStep step, String action) {
         actions.add(new PlayerAction(actionName, turnNum, step, action));
+    }
+
+    public void addAction(PlayerAction playerAction) {
+        actions.add(playerAction);
     }
 
     public List<PlayerAction> getActions() {
@@ -356,6 +368,46 @@ public class TestPlayer implements Player {
         }
     }
 
+    public boolean isAbilityHaveTargetNameOrAlias(Game game, Ability ability, String nameOrAlias) {
+        // use cases:
+        // * Cast cardName with extra
+        // * Cast @ref
+        // * Ability text
+        // * @ref ability text from ref object
+        boolean foundObject;
+        boolean foundAbility;
+        if (nameOrAlias.startsWith("Cast ")) {
+            // object name:
+            // Cast cardName with extra
+            // Cast @ref
+            String searchObject = nameOrAlias.substring("Cast ".length());
+            if (searchObject.contains(" with ")
+                    || searchObject.contains(" using ")
+                    || searchObject.contains("fused ")) {
+                Assert.assertFalse("alternative spell don't support alias", searchObject.startsWith(ALIAS_PREFIX));
+                foundObject = true;
+                foundAbility = ability.toString().startsWith(nameOrAlias);
+            } else {
+                foundObject = isObjectHaveTargetNameOrAlias(game.getObject(ability.getSourceId()), searchObject);
+                foundAbility = searchObject.startsWith(ALIAS_PREFIX) || ability.toString().startsWith(nameOrAlias);
+            }
+        } else if (nameOrAlias.startsWith(ALIAS_PREFIX)) {
+            // object alias with ability text:
+            // @ref ability text from ref object
+            Assert.assertTrue("ability alias must contains space", nameOrAlias.contains(" "));
+            String searchObject = nameOrAlias.substring(0, nameOrAlias.indexOf(" "));
+            String searchAbility = nameOrAlias.substring(nameOrAlias.indexOf(" ") + 1);
+            foundObject = isObjectHaveTargetNameOrAlias(game.getObject(ability.getSourceId()), searchObject);
+            foundAbility = ability.toString().startsWith(searchAbility);
+        } else {
+            // ability text
+            foundObject = true;
+            foundAbility = ability.toString().startsWith(nameOrAlias);
+        }
+
+        return foundObject && foundAbility;
+    }
+
     public boolean isObjectHaveTargetNameOrAlias(MageObject object, String nameOrAlias) {
         if (object == null || nameOrAlias == null) {
             return false;
@@ -510,6 +562,7 @@ public class TestPlayer implements Player {
             List<PlayerAction> removed = new ArrayList<>();
             actionsToRemovesLater.forEach((action, step) -> {
                 if (game.getStep().getType() != step) {
+                    action.onActionRemovedLater(game, this);
                     actions.remove(action);
                     removed.add(action);
                 }
@@ -532,7 +585,7 @@ public class TestPlayer implements Player {
                         break;
                     }
                     for (Ability ability : computerPlayer.getPlayable(game, true)) { // add wrong action log?
-                        if (ability.toString().startsWith(groups[0])) {
+                        if (isAbilityHaveTargetNameOrAlias(game, ability, groups[0])) {
                             int bookmark = game.bookmarkState();
                             Ability newAbility = ability.copy();
                             if (groups.length > 1 && !groups[1].equals("target=" + NO_TARGET)) {
@@ -551,16 +604,16 @@ public class TestPlayer implements Player {
                     }
                     // TODO: fix wrong commands (on non existing card), it's HUGE (350+ failed tests with wrong commands)
                     //Assert.fail("Can't find ability to activate command: " + command);
-                } else if (action.getAction().startsWith("manaActivate:")) {
+                } else if (action.getAction().startsWith(ACTIVATE_MANA)) {
                     String command = action.getAction();
-                    command = command.substring(command.indexOf("manaActivate:") + 13);
+                    command = command.substring(command.indexOf(ACTIVATE_MANA) + ACTIVATE_MANA.length());
                     String[] groups = command.split("\\$");
                     List<MageObject> manaObjects = computerPlayer.getAvailableManaProducers(game);
 
                     for (MageObject mageObject : manaObjects) {
                         if (mageObject instanceof Permanent) {
                             for (Ability manaAbility : ((Permanent) mageObject).getAbilities(game).getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, game)) {
-                                if (manaAbility.toString().startsWith(groups[0])) {
+                                if (isAbilityHaveTargetNameOrAlias(game, manaAbility, groups[0])) {
                                     Ability newManaAbility = manaAbility.copy();
                                     computerPlayer.activateAbility((ActivatedAbility) newManaAbility, game);
                                     actions.remove(action);
@@ -569,7 +622,7 @@ public class TestPlayer implements Player {
                             }
                         } else if (mageObject instanceof Card) {
                             for (Ability manaAbility : ((Card) mageObject).getAbilities(game).getAvailableActivatedManaAbilities(game.getState().getZone(mageObject.getId()), game)) {
-                                if (manaAbility.toString().startsWith(groups[0])) {
+                                if (isAbilityHaveTargetNameOrAlias(game, manaAbility, groups[0])) {
                                     Ability newManaAbility = manaAbility.copy();
                                     computerPlayer.activateAbility((ActivatedAbility) newManaAbility, game);
                                     actions.remove(action);
@@ -578,7 +631,7 @@ public class TestPlayer implements Player {
                             }
                         } else {
                             for (Ability manaAbility : mageObject.getAbilities().getAvailableActivatedManaAbilities(game.getState().getZone(mageObject.getId()), game)) {
-                                if (manaAbility.toString().startsWith(groups[0])) {
+                                if (isAbilityHaveTargetNameOrAlias(game, manaAbility, groups[0])) {
                                     Ability newManaAbility = manaAbility.copy();
                                     computerPlayer.activateAbility((ActivatedAbility) newManaAbility, game);
                                     actions.remove(action);
@@ -590,7 +643,8 @@ public class TestPlayer implements Player {
                     List<Permanent> manaPermsWithCost = computerPlayer.getAvailableManaProducersWithCost(game);
                     for (Permanent perm : manaPermsWithCost) {
                         for (ActivatedManaAbilityImpl manaAbility : perm.getAbilities().getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, game)) {
-                            if (manaAbility.toString().startsWith(groups[0]) && manaAbility.canActivate(computerPlayer.getId(), game).canActivate()) {
+                            if (isAbilityHaveTargetNameOrAlias(game, manaAbility, groups[0])
+                                    && manaAbility.canActivate(computerPlayer.getId(), game).canActivate()) {
                                 Ability newManaAbility = manaAbility.copy();
                                 computerPlayer.activateAbility((ActivatedAbility) newManaAbility, game);
                                 actions.remove(action);
@@ -646,6 +700,7 @@ public class TestPlayer implements Player {
 
                     // play priority
                     if (command.equals(AI_COMMAND_PLAY_PRIORITY)) {
+                        AICanChooseInStrictMode = true; // disable on action's remove
                         computerPlayer.priority(game);
                         actions.remove(action);
                         return true;
@@ -653,6 +708,7 @@ public class TestPlayer implements Player {
 
                     // play step
                     if (command.equals(AI_COMMAND_PLAY_STEP)) {
+                        AICanChooseInStrictMode = true; // disable on action's remove
                         actionsToRemovesLater.put(action, game.getStep().getType());
                         computerPlayer.priority(game);
                         return true;
@@ -1361,6 +1417,16 @@ public class TestPlayer implements Player {
         boolean madeAttackByAction = false;
         for (Iterator<org.mage.test.player.PlayerAction> it = actions.iterator(); it.hasNext(); ) {
             PlayerAction action = it.next();
+
+            // aiXXX commands
+            if (action.getTurnNum() == game.getTurnNum() && action.getAction().equals(AI_PREFIX + AI_COMMAND_PLAY_STEP)) {
+                mustAttackByAction = true;
+                madeAttackByAction = true;
+                this.computerPlayer.selectAttackers(game, attackingPlayerId);
+                it.remove();
+                break;
+            }
+
             if (action.getTurnNum() == game.getTurnNum() && action.getAction().startsWith("attack:")) {
                 mustAttackByAction = true;
                 String command = action.getAction();
@@ -1423,7 +1489,7 @@ public class TestPlayer implements Player {
             this.chooseStrictModeFailed("attacker", game, "select attackers must use attack command but don't");
         }
 
-        // AI play if no actions available
+        // AI FULL play if no actions available
         if (!mustAttackByAction && this.AIPlayer) {
             this.computerPlayer.selectAttackers(game, attackingPlayerId);
         }
@@ -1436,14 +1502,22 @@ public class TestPlayer implements Player {
 
     @Override
     public void selectBlockers(Game game, UUID defendingPlayerId) {
-
         List<PlayerAction> tempActions = new ArrayList<>(actions);
 
         UUID opponentId = game.getOpponents(computerPlayer.getId()).iterator().next();
-        // Map of Blocker reference -> list of creatures blocked
-        Map<MageObjectReference, List<MageObjectReference>> blockedCreaturesByCreature = new HashMap<>();
+        Map<MageObjectReference, List<MageObjectReference>> blockedCreaturesList = getBlockedCreaturesByCreatureList(game);
+
         boolean mustBlockByAction = false;
         for (PlayerAction action : tempActions) {
+
+            // aiXXX commands
+            if (action.getTurnNum() == game.getTurnNum() && action.getAction().equals(AI_PREFIX + AI_COMMAND_PLAY_STEP)) {
+                mustBlockByAction = true;
+                this.computerPlayer.selectBlockers(game, defendingPlayerId);
+                actions.remove(action);
+                break;
+            }
+
             if (action.getTurnNum() == game.getTurnNum() && action.getAction().startsWith("block:")) {
                 mustBlockByAction = true;
                 String command = action.getAction();
@@ -1460,7 +1534,8 @@ public class TestPlayer implements Player {
                 String attackerName = groups[1];
                 Permanent attacker = findPermanent(new FilterAttackingCreature(), attackerName, opponentId, game);
                 Permanent blocker = findPermanent(new FilterControlledPermanent(), blockerName, computerPlayer.getId(), game);
-                if (canBlockAnother(game, blocker, attacker, blockedCreaturesByCreature)) {
+
+                if (canBlockAnother(game, blocker, attacker, blockedCreaturesList)) {
                     computerPlayer.declareBlocker(defendingPlayerId, blocker.getId(), attacker.getId(), game);
                     actions.remove(action);
                 } else {
@@ -1468,40 +1543,74 @@ public class TestPlayer implements Player {
                 }
             }
         }
-        checkMultipleBlockers(game, blockedCreaturesByCreature);
+        checkMultipleBlockers(game, blockedCreaturesList);
 
-        // AI play if no actions available
+        // AI FULL play if no actions available
         if (!mustBlockByAction && this.AIPlayer) {
             this.computerPlayer.selectBlockers(game, defendingPlayerId);
         }
     }
 
-    // Checks if a creature can block at least one more creature
-    private boolean canBlockAnother(Game game, Permanent blocker, Permanent attacker, Map<MageObjectReference, List<MageObjectReference>> blockedCreaturesByCreature) {
+    private Map<MageObjectReference, List<MageObjectReference>> getBlockedCreaturesByCreatureList(Game game) {
+        // collect already declared blockers info (e.g. after auto-adding on block requirements)
+        // blocker -> blocked attackers
+        Map<MageObjectReference, List<MageObjectReference>> blockedCreaturesByCreature = new HashMap<>();
+        for (CombatGroup combatGroup : game.getCombat().getGroups()) {
+            for (UUID combatBlockerId : combatGroup.getBlockers()) {
+                Permanent blocker = game.getPermanent(combatBlockerId);
+                if (blocker != null) {
+                    // collect all blocked attackers
+                    List<MageObjectReference> blocked = getBlockedAttackers(game, blocker, blockedCreaturesByCreature);
+                    for (UUID combatAttackerId : combatGroup.getAttackers()) {
+                        Permanent combatAttacker = game.getPermanent(combatAttackerId);
+                        if (combatAttacker != null) {
+                            blocked.add(new MageObjectReference(combatAttacker, game));
+                        }
+                    }
+                }
+            }
+        }
+        return blockedCreaturesByCreature;
+    }
+
+    private List<MageObjectReference> getBlockedAttackers(Game game, Permanent blocker, Map<MageObjectReference, List<MageObjectReference>> blockedCreaturesByCreature) {
+        // finds creatures list blocked by blocker permanent
         MageObjectReference blockerRef = new MageObjectReference(blocker, game);
-        // See if we already reference this blocker
         for (MageObjectReference r : blockedCreaturesByCreature.keySet()) {
             if (r.equals(blockerRef)) {
-                // Use the existing reference if we do
+                // already exist
                 blockerRef = r;
             }
         }
+
+        if (!blockedCreaturesByCreature.containsKey(blockerRef)) {
+            blockedCreaturesByCreature.put(blockerRef, new ArrayList<>());
+        }
         List<MageObjectReference> blocked = blockedCreaturesByCreature.getOrDefault(blockerRef, new ArrayList<>());
+        return blocked;
+    }
+
+    private boolean canBlockAnother(Game game, Permanent blocker, Permanent attacker, Map<MageObjectReference, List<MageObjectReference>> blockedCreaturesByCreature) {
+        // check if blocker can block one more attacker and adds it
+        List<MageObjectReference> blocked = getBlockedAttackers(game, blocker, blockedCreaturesByCreature);
         int numBlocked = blocked.size();
+
         // Can't block any more creatures
         if (++numBlocked > blocker.getMaxBlocks()) {
             return false;
         }
+
         // Add the attacker reference to the list of creatures this creature is blocking
         blocked.add(new MageObjectReference(attacker, game));
-        blockedCreaturesByCreature.put(blockerRef, blocked);
         return true;
     }
 
-    // Check for Menace type abilities - if creatures can be blocked by >X or <Y only
     private void checkMultipleBlockers(Game game, Map<MageObjectReference, List<MageObjectReference>> blockedCreaturesByCreature) {
+        // Check for Menace type abilities - if creatures can be blocked by >X or <Y only
+
         // Stores the total number of blockers for each attacker
         Map<MageObjectReference, Integer> blockersForAttacker = new HashMap<>();
+
         // Calculate the number of blockers each attacker has
         for (List<MageObjectReference> attackers : blockedCreaturesByCreature.values()) {
             for (MageObjectReference mr : attackers) {
@@ -1509,6 +1618,7 @@ public class TestPlayer implements Player {
                 blockersForAttacker.put(mr, blockers + 1);
             }
         }
+
         // Check each attacker is blocked by an allowed amount of creatures
         for (Map.Entry<MageObjectReference, Integer> entry : blockersForAttacker.entrySet()) {
             Permanent attacker = entry.getKey().getPermanent(game);
@@ -1558,7 +1668,7 @@ public class TestPlayer implements Player {
     }
 
     private void chooseStrictModeFailed(String choiceType, Game game, String reason) {
-        if (strictChooseMode) {
+        if (strictChooseMode && !AICanChooseInStrictMode) {
             Assert.fail("Missing " + choiceType + " def for"
                     + " turn " + game.getTurnNum()
                     + ", step " + (game.getStep() != null ? game.getStep().getType().name() : "not started")
@@ -2401,13 +2511,13 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public int drawCards(int num, Game game) {
-        return computerPlayer.drawCards(num, game);
+    public int drawCards(int num, UUID sourceId, Game game) {
+        return computerPlayer.drawCards(num, sourceId, game);
     }
 
     @Override
-    public int drawCards(int num, Game game, List<UUID> appliedEffects) {
-        return computerPlayer.drawCards(num, game, appliedEffects);
+    public int drawCards(int num, UUID sourceId, Game game, List<UUID> appliedEffects) {
+        return computerPlayer.drawCards(num, sourceId, game, appliedEffects);
     }
 
     @Override
@@ -3717,5 +3827,9 @@ public class TestPlayer implements Player {
 
     public ComputerPlayer getComputerPlayer() {
         return computerPlayer;
+    }
+
+    public void setAICanChooseInStrictMode(boolean AICanChooseInStrictMode) {
+        this.AICanChooseInStrictMode = AICanChooseInStrictMode;
     }
 }

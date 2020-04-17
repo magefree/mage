@@ -29,10 +29,10 @@ public final class RaidersWake extends CardImpl {
         // Whenever an opponent discards a card, that player loses 2 life.
         this.addAbility(new DiscardsACardOpponentTriggeredAbility(new LoseLifeTargetEffect(2), false, SetTargetPointer.PLAYER));
 
-        // Raid — At the beginning of your end step, if you attacked with a creature this turn, target opponent discards a card.
+        // Raid — At the beginning of your end step, if you attacked this turn, target opponent discards a card.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(new DiscardTargetEffect(1), TargetController.YOU, false), RaidCondition.instance,
-                "<i>Raid</i> &mdash; At the beginning of your end step, if you attacked with a creature this turn, target opponent discards a card.");
+                "<i>Raid</i> &mdash; At the beginning of your end step, if you attacked this turn, target opponent discards a card.");
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability, new PlayerAttackedWatcher());
     }

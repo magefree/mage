@@ -1,9 +1,5 @@
-
 package mage.cards.v;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.MageObjectReference;
@@ -26,8 +22,12 @@ import mage.game.permanent.PermanentToken;
 import mage.util.functions.ApplyToPermanent;
 import mage.watchers.Watcher;
 
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class VizierOfManyFaces extends CardImpl {
@@ -75,7 +75,7 @@ class VizierOfManyFacesApplyToPermanent extends ApplyToPermanent {
                 EmbalmedThisTurnWatcher watcher = game.getState().getWatcher(EmbalmedThisTurnWatcher.class);
                 if (watcher != null) {
                     for (MageObjectReference mor : watcher.getEmbalmedThisTurnCards()) {
-                        if (mor.getSourceId().equals(originalCardId) && game.getState().getZoneChangeCounter(originalCardId) == mor.getZoneChangeCounter()) {
+                        if (Objects.equals(mor.getSourceId(), originalCardId) && game.getState().getZoneChangeCounter(originalCardId) == mor.getZoneChangeCounter()) {
                             permanent.getManaCost().clear();
                             if (!permanent.hasSubtype(SubType.ZOMBIE, game)) {
                                 permanent.getSubtype(game).add(SubType.ZOMBIE);

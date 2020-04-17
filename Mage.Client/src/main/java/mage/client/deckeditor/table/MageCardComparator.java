@@ -97,8 +97,8 @@ public class MageCardComparator implements Comparator<CardView> {
                 break;
             // Rarity
             case 6:
-                aCom = a.getRarity().getSorting();
-                bCom = b.getRarity().getSorting();
+                aCom = a.getRarity() == null ? 0 : a.getRarity().getSorting();
+                bCom = b.getRarity() == null ? 0 : b.getRarity().getSorting();
                 break;
             // Set name
             case 7:

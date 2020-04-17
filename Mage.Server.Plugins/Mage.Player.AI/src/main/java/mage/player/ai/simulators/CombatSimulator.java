@@ -1,5 +1,3 @@
-
-
 package mage.player.ai.simulators;
 
 import mage.counters.CounterType;
@@ -52,9 +50,9 @@ public class CombatSimulator implements Serializable {
         attackerId = null;
     }
 
-    public void simulate() {
+    public void simulate(Game game) {
         for (CombatGroupSimulator group: groups) {
-            group.simulateCombat();
+            group.simulateCombat(game);
         }
     }
 

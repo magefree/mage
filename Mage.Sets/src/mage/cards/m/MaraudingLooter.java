@@ -29,12 +29,12 @@ public final class MaraudingLooter extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 
-        // Raid - At the beginning of your end step, if you attacked with a creature this turn, you may draw a card. If you do, discard a card.
+        // Raid - At the beginning of your end step, if you attacked this turn, you may draw a card. If you do, discard a card.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(new DrawDiscardControllerEffect(1, 1, true), TargetController.YOU, false),
                 RaidCondition.instance,
                 "<i>Raid</i> &mdash; At the beginning of your end step, "
-                + "if you attacked with a creature this turn, "
+                + "if you attacked this turn, "
                 + "you may draw a card. If you do, discard a card.");
         this.addAbility(ability, new PlayerAttackedWatcher());
     }

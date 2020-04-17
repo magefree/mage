@@ -55,6 +55,6 @@ public class TargetControllerChangeTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Evangelize", 1);
-        assertPermanentCount(playerA, "Balduvian Bears", 1); // AI give smallest permanent to A as bad effect for B
+        assertPermanentCount(playerA, "Balduvian Bears", 1); // AI give smallest permanent to A as bad effect for target (target control change)
     }
 }

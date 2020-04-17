@@ -66,7 +66,7 @@ class PartingThoughtsEffect extends OneShotEffect {
                     numberOfCounters += counter.getCount();
                 }
                 if (numberOfCounters > 0) {
-                    controller.drawCards(numberOfCounters, game);
+                    controller.drawCards(numberOfCounters, source.getSourceId(), game);
                     controller.loseLife(numberOfCounters, game, false);
                 }
             }

@@ -24,6 +24,7 @@ import mage.game.command.CommandObject;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.player.ai.ComputerPlayer7;
+import mage.player.ai.ComputerPlayerMCTS;
 import mage.players.ManaPool;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -67,9 +68,11 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     // prefix for activate commands
+    // can be called with alias, example: @card_ref ability text
     public static final String ACTIVATE_ABILITY = "activate:";
     public static final String ACTIVATE_PLAY = "activate:Play ";
     public static final String ACTIVATE_CAST = "activate:Cast ";
+    public static final String ACTIVATE_MANA = "manaActivate:";
 
     // commands for AI
     public static final String AI_COMMAND_PLAY_PRIORITY = "play priority";
@@ -1073,10 +1076,11 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      */
     public void assertTapped(String cardName, boolean tapped) throws AssertionError {
         //Assert.assertNotEquals("", cardName);
-        assertAliaseSupportInActivateCommand(cardName, false);
+        assertAliaseSupportInActivateCommand(cardName, true);
         Permanent found = null;
         for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents()) {
-            if (permanent.getName().equals(cardName)) {
+            // workaround to find player
+            if (isObjectHaveTargetNameOrAlias(currentGame.getPlayer(permanent.getControllerId()), permanent, cardName)) {
                 if (found == null) {
                     found = permanent;
                 } else if (tapped != found.isTapped()) { // try to find a not correct permanent
@@ -1276,10 +1280,11 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param count    Expected count.
      */
     public void assertGraveyardCount(Player player, String cardName, int count) throws AssertionError {
+        assertAliaseSupportInActivateCommand(cardName, true);
         //Assert.assertNotEquals("", cardName);
         int actualCount = 0;
         for (Card card : player.getGraveyard().getCards(currentGame)) {
-            if (CardUtil.haveSameNames(card.getName(), cardName, true)) {
+            if (isObjectHaveTargetNameOrAlias(player, card, cardName)) {
                 actualCount++;
             }
         }
@@ -1416,23 +1421,36 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     /**
      * AI play one PRIORITY with multi game simulations (calcs and play ONE best action, can be called with stack)
+     * All choices must be made by AI (e.g. strict mode possible)
      */
     public void aiPlayPriority(int turnNum, PhaseStep step, TestPlayer player) {
         assertAiPlayAndGameCompatible(player);
-        player.addAction(turnNum, step, AI_PREFIX + AI_COMMAND_PLAY_PRIORITY);
+        player.addAction(createAIPlayerAction(turnNum, step, AI_COMMAND_PLAY_PRIORITY));
     }
 
     /**
      * AI play STEP to the end with multi game simulations (calcs and play best actions until step ends, can be called in the middle of the step)
+     * All choices must be made by AI (e.g. strict mode possible)
      */
     public void aiPlayStep(int turnNum, PhaseStep step, TestPlayer player) {
         assertAiPlayAndGameCompatible(player);
-        player.addAction(turnNum, step, AI_PREFIX + AI_COMMAND_PLAY_STEP);
+        player.addAction(createAIPlayerAction(turnNum, step, AI_COMMAND_PLAY_STEP));
+    }
+
+    public PlayerAction createAIPlayerAction(int turnNum, PhaseStep step, String aiCommand) {
+        // AI actions must disable and enable strict mode
+        return new PlayerAction("", turnNum, step, AI_PREFIX + aiCommand) {
+            @Override
+            public void onActionRemovedLater(Game game, TestPlayer player) {
+                player.setAICanChooseInStrictMode(false);
+            }
+        };
     }
 
     private void assertAiPlayAndGameCompatible(TestPlayer player) {
-        if (player.isAIPlayer() || !(player.getComputerPlayer() instanceof ComputerPlayer7)) {
-            Assert.fail("AI commands supported by CardTestPlayerBaseWithAIHelps only");
+        boolean aiCompatible = (player.getComputerPlayer() instanceof ComputerPlayer7 || player.getComputerPlayer() instanceof ComputerPlayerMCTS);
+        if (player.isAIPlayer() || !aiCompatible) {
+            Assert.fail("AI commands supported by CardTestPlayerBaseWith***AIHelps only");
         }
     }
 
@@ -1474,7 +1492,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      */
     public void castSpell(int turnNum, PhaseStep step, TestPlayer player, String cardName, String targetName) {
         //Assert.assertNotEquals("", cardName);
-        assertAliaseSupportInActivateCommand(cardName, false);
+        assertAliaseSupportInActivateCommand(cardName, true);
+        assertAliaseSupportInActivateCommand(targetName, true);
         player.addAction(turnNum, step, ACTIVATE_CAST + cardName + "$target=" + targetName);
     }
 
@@ -1514,8 +1533,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      */
     public void castSpell(int turnNum, PhaseStep step, TestPlayer player, String cardName, String targetName, String spellOnStack, StackClause clause) {
         //Assert.assertNotEquals("", cardName);
-        assertAliaseSupportInActivateCommand(cardName, false);
-        assertAliaseSupportInActivateCommand(targetName, false);
+        assertAliaseSupportInActivateCommand(cardName, true);
+        assertAliaseSupportInActivateCommand(targetName, true);
         assertAliaseSupportInActivateCommand(spellOnStack, false);
         if (StackClause.WHILE_ON_STACK == clause) {
             player.addAction(turnNum, step, ACTIVATE_CAST + cardName
@@ -1550,7 +1569,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     public void activateManaAbility(int turnNum, PhaseStep step, TestPlayer player, String ability, int timesToActivate) {
         for (int i = 0; i < timesToActivate; i++) {
-            player.addAction(turnNum, step, "manaActivate:" + ability);
+            player.addAction(turnNum, step, ACTIVATE_MANA + ability);
         }
     }
 
@@ -1570,7 +1589,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         // TODO: it's uses computerPlayer to execute, only ability target will work, but choices and targets commands aren't
         assertAliaseSupportInActivateCommand(ability, false);
         Arrays.stream(targetNames).forEach(n -> {
-            assertAliaseSupportInActivateCommand(n, false);
+            assertAliaseSupportInActivateCommand(n, true);
         });
         player.addAction(turnNum, step, ACTIVATE_ABILITY + ability + "$target=" + String.join("^", targetNames));
     }

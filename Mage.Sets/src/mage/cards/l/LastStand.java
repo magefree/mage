@@ -101,7 +101,7 @@ class LastStandEffect extends OneShotEffect {
             // Draw a card for each Island you control, then discard that many cards
             int islands = game.getBattlefield().count(filterIsland, source.getSourceId(), source.getControllerId(), game);
             if (islands > 0) {
-                controller.drawCards(islands, game);
+                controller.drawCards(islands, source.getSourceId(), game);
                 controller.discard(islands, false, source, game);
             }
 

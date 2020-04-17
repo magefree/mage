@@ -9,7 +9,6 @@ import mage.filter.predicate.Predicate;
 import mage.game.Game;
 
 /**
- *
  * @author North
  */
 public class AbilityPredicate implements Predicate<MageObject> {
@@ -23,12 +22,12 @@ public class AbilityPredicate implements Predicate<MageObject> {
     @Override
     public boolean apply(MageObject input, Game game) {
         Abilities<Ability> abilities;
-        if (input instanceof Card){
-            abilities = ((Card)input).getAbilities(game);
+        if (input instanceof Card) {
+            abilities = ((Card) input).getAbilities(game);
         } else {
             abilities = input.getAbilities();
         }
-        return abilities.stream().anyMatch(ability -> ability.getClass().equals(abilityClass));
+        return abilities.stream().anyMatch(abilityClass::isInstance);
 
     }
 

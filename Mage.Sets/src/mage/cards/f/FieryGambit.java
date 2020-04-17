@@ -81,7 +81,7 @@ class FieryGambitEffect extends OneShotEffect {
                     new DamagePlayersEffect(6, TargetController.OPPONENT).apply(game, source);
                 }
                 if (flipsWon > 2) {
-                    controller.drawCards(9, game);
+                    controller.drawCards(9, source.getSourceId(), game);
                     new UntapAllLandsControllerEffect().apply(game, source);
                 }
             } else {

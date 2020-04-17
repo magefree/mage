@@ -429,7 +429,7 @@ public class CallbackClientImpl implements CallbackClient {
                                 .append("</b> - Undo F4/F5/F7/F9/F11")
                                 .append("<br/><b>")
                                 .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_SWITCH_CHAT)))
-                                .append("</b> - Switth in/out to chat text field")
+                                .append("</b> - Switch in/out to chat text field")
                                 /*
                                 .append("<br/><b>")
                                 .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_TOGGLE_MACRO)))

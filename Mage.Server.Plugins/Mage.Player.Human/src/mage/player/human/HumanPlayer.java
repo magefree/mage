@@ -1633,7 +1633,15 @@ public class HumanPlayer extends PlayerImpl {
         int possibleBlockersCount = game.getBattlefield().count(filter, null, playerId, game);
         boolean canStopOnAny = possibleBlockersCount != 0 && getControllingPlayersUserData(game).getUserSkipPrioritySteps().isStopOnDeclareBlockersWithAnyPermanents();
         boolean canStopOnZero = possibleBlockersCount == 0 && getControllingPlayersUserData(game).getUserSkipPrioritySteps().isStopOnDeclareBlockersWithZeroPermanents();
-        if (!canStopOnAny && !canStopOnZero) {
+
+        // skip declare blocker step
+        // as opposed to declare attacker - it can be skipped by ANY skip button TODO: make same for declare attackers and rework skip buttons (normal and forced)
+        boolean skipButtonActivated = passedAllTurns
+                || passedUntilEndStepBeforeMyTurn
+                || passedTurn
+                || passedUntilEndOfTurn
+                || passedUntilNextMain;
+        if (skipButtonActivated && !canStopOnAny && !canStopOnZero) {
             return;
         }
 

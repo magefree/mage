@@ -62,7 +62,7 @@ class PsychicVortexCost extends CostImpl {
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
-            controller.drawCards(1, game);
+            controller.drawCards(1, sourceId, game);
             this.paid = true;
             return true;
             }

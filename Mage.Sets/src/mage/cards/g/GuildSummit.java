@@ -90,7 +90,7 @@ class GuildSummitEffect extends OneShotEffect {
             }
         }
         if (tappedAmount > 0) {
-            you.drawCards(tappedAmount, game);
+            you.drawCards(tappedAmount, source.getSourceId(), game);
             return true;
         }
         return false;

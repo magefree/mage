@@ -12,7 +12,7 @@ import java.io.ObjectStreamException;
  *
  * @author TheElk801
  */
-public class HexproofFromMonocoloredAbility extends SimpleStaticAbility implements MageSingleton {
+public class HexproofFromMonocoloredAbility extends SimpleStaticAbility implements MageSingleton, HexproofInterface {
 
     private static final HexproofFromMonocoloredAbility instance;
 

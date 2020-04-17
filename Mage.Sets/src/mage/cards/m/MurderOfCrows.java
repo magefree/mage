@@ -63,7 +63,7 @@ class MurderOfCrowsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null && player.chooseUse(Outcome.DrawCard, "Do you wish to draw a card? If you do, discard a card.", source, game)) {
-            if (player.drawCards(1, game) > 0) {
+            if (player.drawCards(1, source.getSourceId(), game) > 0) {
                 player.discard(1, false, source, game);
             }
             return true;
