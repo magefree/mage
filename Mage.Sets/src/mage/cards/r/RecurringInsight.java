@@ -57,7 +57,7 @@ class RecurringInsightEffect extends OneShotEffect {
         if (controller != null) {
             Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
             if (opponent != null) {
-                controller.drawCards(opponent.getHand().size(), game);
+                controller.drawCards(opponent.getHand().size(), source.getSourceId(), game);
             }
             return true;
         }

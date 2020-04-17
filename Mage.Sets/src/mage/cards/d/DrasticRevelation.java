@@ -51,7 +51,7 @@ class DrasticRevelationEffect extends OneShotEffect {
         Player you = game.getPlayer(source.getControllerId());
         if (you != null) {
             you.discard(you.getHand().size(), false, source, game);
-            you.drawCards(7, game);
+            you.drawCards(7, source.getSourceId(), game);
             Cards hand = you.getHand();
             for (int i = 0; i < 3; i++) {
                 Card card = hand.getRandom(game);

@@ -12,7 +12,7 @@ import java.util.UUID;
 public abstract class GameCanadianHighlanderImpl extends GameImpl {
 
     public GameCanadianHighlanderImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
-        super(attackOption, range, mulligan, startLife);
+        super(attackOption, range, mulligan, startLife, 100);
     }
 
     public GameCanadianHighlanderImpl(final GameCanadianHighlanderImpl game) {

@@ -80,7 +80,7 @@ class GarrukPrimalHunterEffect extends OneShotEffect {
                     amount = p.getPower().getValue();
                 }
             }
-            player.drawCards(amount, game);
+            player.drawCards(amount, source.getSourceId(), game);
             return true;
         }
         return false;

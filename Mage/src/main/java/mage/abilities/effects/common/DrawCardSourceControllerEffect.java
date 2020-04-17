@@ -54,7 +54,7 @@ public class DrawCardSourceControllerEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null
                 && player.canRespond()) {
-            player.drawCards(amount.calculate(game, source, this), game);
+            player.drawCards(amount.calculate(game, source, this), source.getSourceId(), game);
             return true;
         }
         return false;

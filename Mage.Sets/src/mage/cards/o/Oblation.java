@@ -65,7 +65,7 @@ class OblationEffect extends OneShotEffect {
 
                 game.applyEffects(); // so effects from creatures that were on the battlefield won't trigger from draw 
 
-                player.drawCards(2, game);
+                player.drawCards(2, source.getSourceId(), game);
                 return true;
             }
         }

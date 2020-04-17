@@ -84,7 +84,7 @@ class SawtoothLoonEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            controller.drawCards(2, game);
+            controller.drawCards(2, source.getSourceId(), game);
             TargetCardInHand target = new TargetCardInHand(2, 2, new FilterCard());
             controller.chooseTarget(Outcome.Detriment, target, source, game);
             Cards cardsToLibrary = new CardsImpl(target.getTargets());

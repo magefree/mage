@@ -63,7 +63,7 @@ class NaturesResurgenceEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     int amount = player.getGraveyard().count(filter, game);
-                    player.drawCards(amount, game);
+                    player.drawCards(amount, source.getSourceId(), game);
                 }
             }
         }

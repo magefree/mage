@@ -62,7 +62,7 @@ class PrecognitivePerceptionEffect extends OneShotEffect {
         if (AddendumCondition.instance.apply(game, source)) {
             controller.scry(3, source, game);
         }
-        controller.drawCards(3, game);
+        controller.drawCards(3, source.getSourceId(), game);
         return true;
     }
 }

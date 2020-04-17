@@ -80,7 +80,7 @@ class BrowbeatDrawEffect extends OneShotEffect {
                 if (targetPlayer != null) {
                     Player player = game.getPlayer(targetPlayer);
                     if (player != null) {
-                        player.drawCards(3, game);
+                        player.drawCards(3, source.getSourceId(), game);
                     }
                 }
             }

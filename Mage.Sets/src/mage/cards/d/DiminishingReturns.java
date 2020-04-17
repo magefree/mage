@@ -72,7 +72,7 @@ class DiminishingReturnsEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     int cardsToDrawCount = player.getAmount(0, 7, "How many cards to draw (up to 7)?", game);
-                    player.drawCards(cardsToDrawCount, game);
+                    player.drawCards(cardsToDrawCount, source.getSourceId(), game);
                 }
             }
         }

@@ -22,6 +22,7 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
     protected boolean addStillALandText;
     protected boolean loseName;
     protected boolean keepAbilities;
+    protected boolean removeSubtypes = false;
 
 
     public BecomesCreatureTargetEffect(Token token, boolean loseAllAbilities, boolean stillALand, Duration duration) {
@@ -41,7 +42,7 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
      * @param duration
      */
     public BecomesCreatureTargetEffect(Token token, boolean loseAllAbilities, boolean stillALand, Duration duration, boolean loseName,
-        boolean keepAbilities) {
+                                       boolean keepAbilities) {
         super(duration, Outcome.BecomeCreature);
         this.token = token;
         this.loseAllAbilities = loseAllAbilities;
@@ -86,6 +87,9 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
                                 permanent.getCardType().clear(); // remove all CardTypes
                                 permanent.getSubtype(game).addAll(token.getSubtype(game));
                             } else {
+                                if (removeSubtypes) {
+                                    permanent.getSubtype(game).clear();
+                                }
                                 for (SubType t : token.getSubtype(game)) {
                                     if (!permanent.hasSubtype(t, game)) {
                                         permanent.getSubtype(game).add(t);
@@ -147,6 +151,11 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
             this.discard();
         }
         return result;
+    }
+
+    public BecomesCreatureTargetEffect setRemoveSubtypes(boolean removeSubtypes) {
+        this.removeSubtypes = removeSubtypes;
+        return this;
     }
 
     @Override

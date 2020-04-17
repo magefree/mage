@@ -59,7 +59,7 @@ class DimirCutpurseEffect extends OneShotEffect {
             damagedPlayer.discard(1, false,source, game);
         }
         if (you != null) {
-            you.drawCards(1, game);
+            you.drawCards(1, source.getSourceId(), game);
         }
         return true;
     }

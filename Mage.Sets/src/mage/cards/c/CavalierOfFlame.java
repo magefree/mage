@@ -109,7 +109,7 @@ class CavalierOfFlameEffect extends OneShotEffect {
                     .map(uuid -> game.getCard(uuid))
                     .mapToInt(card -> card != null && player.discard(card, source, game) ? 1 : 0)
                     .sum();
-            player.drawCards(counter, game);
+            player.drawCards(counter, source.getSourceId(), game);
         }
         return true;
     }

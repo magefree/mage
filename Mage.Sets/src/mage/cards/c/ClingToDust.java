@@ -72,7 +72,7 @@ class ClingToDustEffect extends OneShotEffect {
         if (isCreature) {
             player.gainLife(3, game, source);
         } else {
-            player.drawCards(1, game);
+            player.drawCards(1, source.getSourceId(), game);
         }
         return true;
     }

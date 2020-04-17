@@ -59,7 +59,7 @@ class ReadTheRunesEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int drawnCards = controller.drawCards(source.getManaCostsToPay().getX(), game);
+            int drawnCards = controller.drawCards(source.getManaCostsToPay().getX(), source.getSourceId(), game);
             Target target = new TargetControlledPermanent(0, drawnCards, new FilterControlledPermanent(), true);
             controller.chooseTarget(Outcome.Sacrifice, target, source, game);
             int sacrificedPermanents = 0;

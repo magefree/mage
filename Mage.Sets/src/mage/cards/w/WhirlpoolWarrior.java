@@ -90,7 +90,7 @@ class WhirlpoolWarriorActivatedEffect extends OneShotEffect {
             for (Entry<UUID, Integer> entry : playerCards.entrySet()) {
                 Player player = game.getPlayer(entry.getKey());
                 if (player != null) {
-                    player.drawCards(entry.getValue(), game);
+                    player.drawCards(entry.getValue(), source.getSourceId(), game);
                 }
             }
             return true;

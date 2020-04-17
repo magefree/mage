@@ -26,7 +26,7 @@ public class MomirGame extends GameImpl {
     private int numPlayers;
 
     public MomirGame(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
-        super(attackOption, range, mulligan, startLife);
+        super(attackOption, range, mulligan, startLife, 60);
     }
 
     public MomirGame(final MomirGame game) {

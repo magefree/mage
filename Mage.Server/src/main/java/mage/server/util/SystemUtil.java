@@ -13,6 +13,7 @@ import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Planes;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -538,12 +539,11 @@ public final class SystemUtil {
                             break;
                         }
                     }
-                    Class<?> c = Class.forName("mage.game.command.planes." + command.cardName);
-                    Constructor<?> cons = c.getConstructor();
-                    Object plane = cons.newInstance();
-                    if (plane instanceof mage.game.command.Plane) {
-                        ((mage.game.command.Plane) plane).setControllerId(player.getId());
-                        game.addPlane((mage.game.command.Plane) plane, null, player.getId());
+                    Planes planeType = Planes.fromClassName(command.cardName);
+                    Plane plane = Plane.createPlane(planeType);
+                    if (plane != null) {
+                        plane.setControllerId(player.getId());
+                        game.addPlane(plane, null, player.getId());
                         continue;
                     }
                 } else if ("loyalty".equalsIgnoreCase(command.zone)) {

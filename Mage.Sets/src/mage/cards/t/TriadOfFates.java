@@ -108,7 +108,7 @@ class DrawCardControllerTargetEffect extends OneShotEffect {
         if (creature != null) {
             Player controllerOfTarget = game.getPlayer(creature.getControllerId());
             if (controllerOfTarget != null) {
-                controllerOfTarget.drawCards(2, game);
+                controllerOfTarget.drawCards(2, source.getSourceId(), game);
             }
         }
         return false;

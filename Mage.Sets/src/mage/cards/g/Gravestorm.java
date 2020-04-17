@@ -79,7 +79,7 @@ class GravestormEffect extends OneShotEffect {
             
             if (!opponentExilesACard) {                
                 if (you.chooseUse(Outcome.DrawCard, "Draw a card?", source, game)) {
-                    you.drawCards(1, game);                            
+                    you.drawCards(1, source.getSourceId(), game);
                 }
             }
             return true;

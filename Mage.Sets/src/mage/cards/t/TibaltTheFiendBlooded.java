@@ -86,7 +86,7 @@ class TibaltTheFiendBloodedFirstEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            player.drawCards(1, game);
+            player.drawCards(1, source.getSourceId(), game);
             Card card = player.getHand().getRandom(game);
             player.discard(card, source, game);
             return true;

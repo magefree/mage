@@ -22,7 +22,7 @@ public final class Sharktocrab extends CardImpl {
     public Sharktocrab(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{U}");
 
-        this.subtype.add(SubType.FISH);
+        this.subtype.add(SubType.SHARK);
         this.subtype.add(SubType.OCTOPUS);
         this.subtype.add(SubType.CRAB);
         this.power = new MageInt(4);

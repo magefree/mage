@@ -22,8 +22,8 @@ public final class IndathaTriome extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         this.subtype.add(SubType.PLAINS);
-        this.subtype.add(SubType.FOREST);
         this.subtype.add(SubType.SWAMP);
+        this.subtype.add(SubType.FOREST);
 
         // ({T}: Add {W}, {B}, or {G}.)
         this.addAbility(new WhiteManaAbility());

@@ -311,9 +311,9 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void shuffleLibrary(Ability source, Game game);
 
-    int drawCards(int num, Game game);
+    int drawCards(int num, UUID sourceId, Game game);
 
-    int drawCards(int num, Game game, List<UUID> appliedEffects);
+    int drawCards(int num, UUID sourceId, Game game, List<UUID> appliedEffects);
 
     boolean cast(SpellAbility ability, Game game, boolean noMana, MageObjectReference reference);
 

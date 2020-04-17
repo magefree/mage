@@ -98,7 +98,7 @@ class TheGreatAuroraEffect extends OneShotEffect {
                 if (player != null) {
                     int count = permanentsCount.get(playerId);
                     if (count > 0) {
-                        player.drawCards(count, game);
+                        player.drawCards(count, source.getSourceId(), game);
                     }
                 }
             }

@@ -15,6 +15,8 @@ import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
+import static mage.game.combat.CombatGroup.getLethalDamage;
+
 /**
  * @author TheElk801
  */
@@ -62,7 +64,7 @@ class FlameSpillEffect extends OneShotEffect {
         if (permanent == null || sourceObject == null) {
             return false;
         }
-        int lethal = Math.max(permanent.getToughness().getValue() - permanent.getDamage(), 0);
+        int lethal = getLethalDamage(permanent, game);
         if (sourceObject.getAbilities().containsKey(DeathtouchAbility.getInstance().getId())) {
             lethal = Math.min(lethal, 1);
         }

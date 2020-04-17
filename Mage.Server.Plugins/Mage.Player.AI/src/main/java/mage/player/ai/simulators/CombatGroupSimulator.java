@@ -1,5 +1,3 @@
-
-
 package mage.player.ai.simulators;
 
 import mage.game.Game;
@@ -52,15 +50,15 @@ public class CombatGroupSimulator implements Serializable {
         return blocker.canBlock(attacker.id, game);
     }
 
-    public void simulateCombat() {
+    public void simulateCombat(Game game) {
         unblockedDamage = 0;
 
         if (hasFirstOrDoubleStrike())
-            assignDamage(true);
-        assignDamage(false);
+            assignDamage(true, game);
+        assignDamage(false, game);
     }
 
-    private void assignDamage(boolean first) {
+    private void assignDamage(boolean first, Game game) {
         if (blockers.isEmpty()) {
             if (canDamage(attacker, first))
                 unblockedDamage += attacker.power;
@@ -69,7 +67,7 @@ public class CombatGroupSimulator implements Serializable {
             CreatureSimulator blocker = blockers.get(0);
             if (canDamage(attacker, first)) {
                 if (attacker.hasTrample) {
-                    int lethalDamage = blocker.getLethalDamage();
+                    int lethalDamage = blocker.getLethalDamage(game);
                     if (attacker.power > lethalDamage) {
                         blocker.damage += lethalDamage;
                         unblockedDamage += attacker.power - lethalDamage;
@@ -87,7 +85,7 @@ public class CombatGroupSimulator implements Serializable {
             int damage = attacker.power;
             for (CreatureSimulator blocker: blockers) {
                 if (damage > 0 && canDamage(attacker, first)) {
-                    int lethalDamage = blocker.getLethalDamage();
+                    int lethalDamage = blocker.getLethalDamage(game);
                     if (damage > lethalDamage) {
                         blocker.damage += lethalDamage;
                         damage -= lethalDamage;

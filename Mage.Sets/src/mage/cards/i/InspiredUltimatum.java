@@ -65,7 +65,7 @@ class InspiredUltimatumEffect extends OneShotEffect {
         );
         player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            player.drawCards(5, game);
+            player.drawCards(5, source.getSourceId(), game);
         }
         return true;
     }

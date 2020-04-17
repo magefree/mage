@@ -38,7 +38,7 @@ public class Plane implements CommandObject {
     private static ObjectColor emptyColor = new ObjectColor();
     private static ManaCosts emptyCost = new ManaCostsImpl();
 
-    private String name = "";
+    private Planes planeType = null;
     private UUID id;
     private UUID controllerId;
     private MageObject sourceObject;
@@ -55,7 +55,7 @@ public class Plane implements CommandObject {
 
     public Plane(final Plane plane) {
         this.id = plane.id;
-        this.name = plane.name;
+        this.planeType = plane.planeType;
         this.frameStyle = plane.frameStyle;
         this.controllerId = plane.controllerId;
         this.sourceObject = plane.sourceObject;
@@ -78,9 +78,6 @@ public class Plane implements CommandObject {
     public void setSourceObject(MageObject sourceObject) {
         this.sourceObject = sourceObject;
         if (sourceObject instanceof Card) {
-            if (name.isEmpty()) {
-                name = sourceObject.getSubtype(null).toString();
-            }
             if (expansionSetCodeForImage.isEmpty()) {
                 expansionSetCodeForImage = ((Card) sourceObject).getExpansionSetCode();
             }
@@ -128,7 +125,7 @@ public class Plane implements CommandObject {
 
     @Override
     public String getName() {
-        return name;
+        return planeType != null ? planeType.getFullName() : "";
     }
 
     @Override
@@ -143,12 +140,20 @@ public class Plane implements CommandObject {
 
     @Override
     public String getImageName() {
-        return this.name;
+        return planeType != null ? planeType.getFullName() : "";
     }
 
     @Override
     public void setName(String name) {
-        this.name = name;
+        throw new UnsupportedOperationException("Planes don't use setName, use setPlaneType instead");
+    }
+
+    public void setPlaneType(Planes planeType) {
+        this.planeType = planeType;
+    }
+
+    public Planes getPlaneType() {
+        return this.planeType;
     }
 
     @Override
@@ -288,19 +293,30 @@ public class Plane implements CommandObject {
     public void removePTCDA() {
     }
 
-    public static Plane getRandomPlane() {
-        int pick = RandomUtil.nextInt(Planes.values().length);
-        String planeName = Planes.values()[pick].toString();
-        planeName = "mage.game.command.planes." + planeName;
-        try {
-            Class<?> c = Class.forName(planeName);
-            Constructor<?> cons = c.getConstructor();
-            Object plane = cons.newInstance();
-            if (plane instanceof Plane) {
-                return (Plane) plane;
+    public static Plane createPlane(Planes planeType) {
+        if (planeType != null) {
+            String planeFullClass = "mage.game.command.planes." + planeType.getClassName();
+            try {
+                Class<?> c = Class.forName(planeFullClass);
+                Constructor<?> cons = c.getConstructor();
+                Object plane = cons.newInstance();
+                if (plane instanceof Plane) {
+                    return (Plane) plane;
+                }
+            } catch (Exception ex) {
             }
-        } catch (Exception ex) {
         }
         return null;
+    }
+
+    public static Plane createPlaneByFullName(String fullName) {
+        Planes planeType = Planes.fromFullName(fullName);
+        return createPlane(planeType);
+    }
+
+    public static Plane createRandomPlane() {
+        int pick = RandomUtil.nextInt(Planes.values().length);
+        Planes planeType = Planes.values()[pick];
+        return createPlane(planeType);
     }
 }

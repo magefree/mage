@@ -12,6 +12,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.common.CopyEffect;
 import mage.abilities.keyword.BestowAbility;
+import mage.abilities.keyword.CompanionAbility;
 import mage.abilities.keyword.MorphAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.abilities.mana.DelayedTriggeredManaAbility;
@@ -30,6 +31,7 @@ import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.combat.Combat;
@@ -129,6 +131,7 @@ public abstract class GameImpl implements Game, Serializable {
     private int priorityTime;
 
     private final int startLife;
+    private final int startingSize;
     protected PlayerList playerList; // auto-generated from state, don't copy
 
     // infinite loop check (no copy of this attributes neccessary)
@@ -143,7 +146,7 @@ public abstract class GameImpl implements Game, Serializable {
     // temporary store for income concede commands, don't copy
     private final LinkedList<UUID> concedingPlayers = new LinkedList<>();
 
-    public GameImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
+    public GameImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife, int startingSize) {
         this.id = UUID.randomUUID();
         this.range = range;
         this.mulligan = mulligan;
@@ -151,6 +154,7 @@ public abstract class GameImpl implements Game, Serializable {
         this.state = new GameState();
         this.startLife = startLife;
         this.executingRollback = false;
+        this.startingSize = startingSize;
         initGameDefaultWatchers();
     }
 
@@ -180,6 +184,7 @@ public abstract class GameImpl implements Game, Serializable {
         this.saveGame = game.saveGame;
         this.startLife = game.startLife;
         this.enterWithCounters.putAll(game.enterWithCounters);
+        this.startingSize = game.startingSize;
     }
 
     @Override
@@ -929,6 +934,39 @@ public abstract class GameImpl implements Game, Serializable {
             return;
         }
 
+        // Handle companions
+        Map<Player, Card> playerCompanionMap = new HashMap<>();
+        for (Player player : state.getPlayers().values()) {
+            // Make a list of legal companions present in the sideboard
+            Set<Card> potentialCompanions = new HashSet<>();
+            for (Card card : player.getSideboard().getUniqueCards(this)) {
+                for (Ability ability : card.getAbilities(this)) {
+                    if (ability instanceof CompanionAbility) {
+                        CompanionAbility companionAbility = (CompanionAbility) ability;
+                        if (companionAbility.isLegal(new HashSet<>(player.getLibrary().getCards(this)), startingSize)) {
+                            potentialCompanions.add(card);
+                            break;
+                        }
+                    }
+                }
+            }
+            // Choose a companion from the list of legal companions
+            for (Card card : potentialCompanions) {
+                if (player.chooseUse(Outcome.Benefit, "Use " + card.getName() + " as your companion?", null, this)) {
+                    playerCompanionMap.put(player, card);
+                    break;
+                }
+            }
+        }
+
+        // Announce companions and set the companion effect
+        playerCompanionMap.forEach((player, companion) -> {
+            if (companion != null) {
+                this.informPlayers(player.getLogName() + " has chosen " + companion.getLogName() + " as their companion.");
+                this.getState().getCompanion().update(player.getName() + "'s companion", new CardsImpl(companion));
+            }
+        });
+
         //20091005 - 103.1
         if (!gameOptions.skipInitShuffling) { //don't shuffle in test mode for card injection on top of player's libraries
             for (Player player : state.getPlayers().values()) {
@@ -992,7 +1030,7 @@ public abstract class GameImpl implements Game, Serializable {
                 player.initLife(this.getLife());
             }
             if (!gameOptions.testMode) {
-                player.drawCards(startingHandSize, this);
+                player.drawCards(startingHandSize, null, this);
             }
         }
 
@@ -1041,7 +1079,7 @@ public abstract class GameImpl implements Game, Serializable {
 
         // 20180408 - 901.5
         if (gameOptions.planeChase) {
-            Plane plane = Plane.getRandomPlane();
+            Plane plane = Plane.createRandomPlane();
             plane.setControllerId(startingPlayerId);
             addPlane(plane, null, startingPlayerId);
             state.setPlaneChase(this, gameOptions.planeChase);
@@ -1854,6 +1892,7 @@ public abstract class GameImpl implements Game, Serializable {
 
         List<Permanent> legendary = new ArrayList<>();
         List<Permanent> worldEnchantment = new ArrayList<>();
+        List<FilterCreaturePermanent> usePowerInsteadOfToughnessForDamageLethalityFilters = getState().getActivePowerInsteadOfToughnessForDamageLethalityFilters();
         for (Permanent perm : getBattlefield().getAllActivePermanents()) {
             if (perm.isCreature()) {
                 //20091005 - 704.5f
@@ -1863,10 +1902,21 @@ public abstract class GameImpl implements Game, Serializable {
                         continue;
                     }
                 } //20091005 - 704.5g/704.5h
-                else if (perm.getToughness().getValue() <= perm.getDamage() || perm.isDeathtouched()) {
-                    if (perm.destroy(null, this, false)) {
-                        somethingHappened = true;
-                        continue;
+                else {
+                    /*
+                     * for handling Zilortha, Strength Incarnate:
+                     * 2020-04-17: Any time the game is checking whether damage is lethal or if a creature should be destroyed for having lethal damage marked on it, use the power of your creatures rather than their toughness to check the damage against. This includes being assigned trample damage, damage from Flame Spill, and so on.
+                     */
+                    boolean usePowerInsteadOfToughnessForDamageLethality = usePowerInsteadOfToughnessForDamageLethalityFilters.stream()
+                            .anyMatch(filter -> filter.match(perm, this));
+                    int lethalDamageThreshold = usePowerInsteadOfToughnessForDamageLethality ?
+                            // Zilortha, Strength Incarnate, 2020-04-17: A creature with 0 power isn’t destroyed unless it has at least 1 damage marked on it.
+                            Math.max(perm.getPower().getValue(), 1) : perm.getToughness().getValue();
+                    if (lethalDamageThreshold <= perm.getDamage() || perm.isDeathtouched()) {
+                        if (perm.destroy(null, this, false)) {
+                            somethingHappened = true;
+                            continue;
+                        }
                     }
                 }
                 if (perm.getPairedCard() != null) {
@@ -2585,7 +2635,7 @@ public abstract class GameImpl implements Game, Serializable {
             for (Player aplayer : state.getPlayers().values()) {
                 if (!aplayer.hasLeft() && !addedAgain) {
                     addedAgain = true;
-                    Plane plane = Plane.getRandomPlane();
+                    Plane plane = Plane.createRandomPlane();
                     plane.setControllerId(aplayer.getId());
                     addPlane(plane, null, aplayer.getId());
                 }
@@ -2987,9 +3037,9 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public int doAction(MageAction action) {
+    public int doAction(MageAction action, UUID sourceId) {
         //actions.add(action);
-        int value = action.doAction(this);
+        int value = action.doAction(sourceId, this);
 //        score += action.getScore(scorePlayer);
         return value;
     }
@@ -3265,5 +3315,4 @@ public abstract class GameImpl implements Game, Serializable {
     public Set<UUID> getCommandersIds(Player player, CommanderCardType commanderCardType) {
         return player.getCommandersIds();
     }
-
 }

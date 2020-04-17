@@ -7,9 +7,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.GreatestPowerAmongControlledCreaturesValue;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.effects.mana.AddManaInAnyCombinationEffect;
@@ -18,7 +16,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -102,7 +99,7 @@ class SelvalaHeartOfTheWildsEffect extends OneShotEffect {
                 Player permanentController = game.getPlayer(permanent.getControllerId());
                 if (permanentController != null
                         && permanentController.chooseUse(Outcome.DrawCard, "Would you like to draw a card?", source, game)) {
-                    permanentController.drawCards(1, game);
+                    permanentController.drawCards(1, source.getSourceId(), game);
                 }
             }
             return true;

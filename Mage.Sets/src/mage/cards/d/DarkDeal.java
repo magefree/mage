@@ -5,7 +5,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import com.j256.ormlite.stmt.query.In;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -72,7 +71,7 @@ class DarkDealEffect extends OneShotEffect {
             for (Map.Entry<UUID, Integer> toDrawByPlayer : cardsToDraw.entrySet()) {
                 Player player = game.getPlayer(toDrawByPlayer.getKey());
                 if (player != null) {
-                    player.drawCards(toDrawByPlayer.getValue(), game);
+                    player.drawCards(toDrawByPlayer.getValue(), source.getSourceId(), game);
                 }
             }
             return true;

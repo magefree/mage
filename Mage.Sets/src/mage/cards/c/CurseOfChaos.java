@@ -115,7 +115,7 @@ class CurseOfChaosEffect extends OneShotEffect {
         if (attacker != null) {
             if (!attacker.getHand().isEmpty() && attacker.chooseUse(outcome, "Discard a card and draw a card?", source, game)) {
                 attacker.discard(1, false, source, game);
-                attacker.drawCards(1, game);
+                attacker.drawCards(1, source.getSourceId(), game);
             }
             return true;
         }

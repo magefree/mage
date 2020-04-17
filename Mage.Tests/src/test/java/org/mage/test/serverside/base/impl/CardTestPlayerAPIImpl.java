@@ -24,6 +24,7 @@ import mage.game.command.CommandObject;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.player.ai.ComputerPlayer7;
+import mage.player.ai.ComputerPlayerMCTS;
 import mage.players.ManaPool;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -1447,8 +1448,9 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     private void assertAiPlayAndGameCompatible(TestPlayer player) {
-        if (player.isAIPlayer() || !(player.getComputerPlayer() instanceof ComputerPlayer7)) {
-            Assert.fail("AI commands supported by CardTestPlayerBaseWithAIHelps only");
+        boolean aiCompatible = (player.getComputerPlayer() instanceof ComputerPlayer7 || player.getComputerPlayer() instanceof ComputerPlayerMCTS);
+        if (player.isAIPlayer() || !aiCompatible) {
+            Assert.fail("AI commands supported by CardTestPlayerBaseWith***AIHelps only");
         }
     }
 

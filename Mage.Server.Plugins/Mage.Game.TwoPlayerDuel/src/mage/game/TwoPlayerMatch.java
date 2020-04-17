@@ -6,7 +6,6 @@ import mage.game.match.MatchOptions;
 import mage.game.mulligan.Mulligan;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class TwoPlayerMatch extends MatchImpl {
@@ -18,7 +17,7 @@ public class TwoPlayerMatch extends MatchImpl {
     @Override
     public void startGame() throws GameException {
         Mulligan mulligan = options.getMulliganType().getMulligan(options.getFreeMulligans());
-        TwoPlayerDuel game = new TwoPlayerDuel(options.getAttackOption(), options.getRange(), mulligan, 20);
+        TwoPlayerDuel game = new TwoPlayerDuel(options.getAttackOption(), options.getRange(), mulligan, 20, options.isLimited() ? 40 : 60);
         // Sets a start message about the match score
         game.setStartMessage(this.createGameStartMessage());
         initGame(game);

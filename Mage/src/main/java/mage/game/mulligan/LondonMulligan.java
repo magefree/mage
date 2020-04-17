@@ -103,7 +103,7 @@ public class LondonMulligan extends Mulligan {
                     .append(newHandSize)
                     .append(newHandSize == 1 ? " card" : " cards").toString());
         }
-        player.drawCards(numCards, game);
+        player.drawCards(numCards, null, game);
 
         if (player.getHand().size() > newHandSize) {
             int cardsToDiscard = player.getHand().size() - newHandSize;

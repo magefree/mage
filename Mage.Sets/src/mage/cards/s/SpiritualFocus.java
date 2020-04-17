@@ -106,7 +106,7 @@ class SpiritualFocusDrawCardEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null && permanent != null) {
             if (player.chooseUse(outcome, "Draw a card (" + permanent.getLogName() + ')', source, game)) {
-                player.drawCards(1, game);
+                player.drawCards(1, source.getSourceId(), game);
             }
             return true;
         }

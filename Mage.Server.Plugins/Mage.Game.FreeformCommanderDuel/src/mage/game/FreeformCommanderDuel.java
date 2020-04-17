@@ -11,7 +11,7 @@ import mage.game.mulligan.Mulligan;
 public class FreeformCommanderDuel extends GameCommanderImpl {
 
     public FreeformCommanderDuel(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
-        super(attackOption, range, mulligan, startLife);
+        super(attackOption, range, mulligan, startLife, 60);
     }
 
     public FreeformCommanderDuel(final FreeformCommanderDuel game) {

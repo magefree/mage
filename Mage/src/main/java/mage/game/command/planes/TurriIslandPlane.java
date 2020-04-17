@@ -1,8 +1,5 @@
-
 package mage.game.command.planes;
 
-import java.util.ArrayList;
-import java.util.List;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
@@ -14,12 +11,7 @@ import mage.abilities.effects.common.RevealLibraryPutIntoHandEffect;
 import mage.abilities.effects.common.RollPlanarDieEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.Card;
-import mage.constants.CardType;
-import mage.constants.CostModificationType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
@@ -29,14 +21,16 @@ import mage.target.Target;
 import mage.util.CardUtil;
 import mage.watchers.common.PlanarRollWatcher;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * @author spjspj
  */
 public class TurriIslandPlane extends Plane {
 
     public TurriIslandPlane() {
-        this.setName("Plane - Turri Island");
+        this.setPlaneType(Planes.PLANE_TURRI_ISLAND);
         this.setExpansionSetCodeForImage("PCA");
 
         // Creature spells cost {2} less to cast.
@@ -76,11 +70,11 @@ class TurriIslandEffect extends CostModificationEffectImpl {
         this.amount = 2;
         this.staticText = rule;
     }
-    
+
     protected TurriIslandEffect(TurriIslandEffect effect) {
         super(effect);
-        this.amount = effect.amount;        
-    }    
+        this.amount = effect.amount;
+    }
 
     @Override
     public void init(Ability source, Game game) {
@@ -112,7 +106,7 @@ class TurriIslandEffect extends CostModificationEffectImpl {
             if (cPlane == null) {
                 return false;
             }
-            if (!cPlane.getName().equalsIgnoreCase("Plane - Turri Island")) {
+            if (!cPlane.getPlaneType().equals(Planes.PLANE_TURRI_ISLAND)) {
                 return false;
             }
 

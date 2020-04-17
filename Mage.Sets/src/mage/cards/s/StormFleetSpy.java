@@ -28,11 +28,11 @@ public final class StormFleetSpy extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Raid — When Storm Fleet Spy enters the battlefield, if you attacked with a creature this turn, draw a card.
+        // Raid — When Storm Fleet Spy enters the battlefield, if you attacked this turn, draw a card.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)),
                 RaidCondition.instance,
-                "<i>Raid</i> &mdash; When {this} enters the battlefield, if you attacked with a creature this turn, draw a card.");
+                "<i>Raid</i> &mdash; When {this} enters the battlefield, if you attacked this turn, draw a card.");
         this.addAbility(ability, new PlayerAttackedWatcher());
     }
 

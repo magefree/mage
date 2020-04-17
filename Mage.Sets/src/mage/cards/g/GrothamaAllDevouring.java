@@ -158,7 +158,7 @@ class GrothamaAllDevouringDrawCardsEffect extends OneShotEffect {
             if (player != null) {
                 int toDraw = damageMap.getOrDefault(player.getId(), 0);
                 if (toDraw > 0) {
-                    player.drawCards(toDraw, game);
+                    player.drawCards(toDraw, source.getSourceId(), game);
                 }
             }
         }
