@@ -934,7 +934,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
     }
 
     public static int getLethalDamage(Permanent damagedPermanent, Game game) {
-        List<FilterCreaturePermanent> usePowerInsteadOfToughnessForDamageLethalityFilters = game.getActivePowerInsteadOfToughnessForDamageLethalityFilters();
+        List<FilterCreaturePermanent> usePowerInsteadOfToughnessForDamageLethalityFilters = game.getState().getActivePowerInsteadOfToughnessForDamageLethalityFilters();
         /*
          * for handling Zilortha, Strength Incarnate:
          * 2020-04-17

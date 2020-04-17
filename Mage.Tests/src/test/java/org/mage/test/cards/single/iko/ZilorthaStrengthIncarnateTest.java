@@ -11,11 +11,6 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class ZilorthaStrengthIncarnateTest extends CardTestPlayerBase {
 
-    @After
-    public void after() {
-        assertAllCommandsUsed();
-    }
-
     @Test
     public void testNotPresent_combatDamageResolvesLethalityAsNormal() {
         addCard(Zone.BATTLEFIELD, playerA, "Savai Sabertooth");
@@ -24,7 +19,10 @@ public class ZilorthaStrengthIncarnateTest extends CardTestPlayerBase {
         attack(1, playerA, "Savai Sabertooth");
         block(1, playerB, "Drannith Healer", "Savai Sabertooth");
 
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Savai Sabertooth", 1);
         assertGraveyardCount(playerB, "Drannith Healer", 1);
@@ -39,7 +37,10 @@ public class ZilorthaStrengthIncarnateTest extends CardTestPlayerBase {
         attack(1, playerA, "Savai Sabertooth");
         block(1, playerB, "Drannith Healer", "Savai Sabertooth");
 
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Savai Sabertooth", 0);
         assertGraveyardCount(playerB, "Drannith Healer", 1);
@@ -58,7 +59,10 @@ public class ZilorthaStrengthIncarnateTest extends CardTestPlayerBase {
         attack(1, playerA, "Aegis Turtle");
         block(1, playerB, "Aegis Turtle", "Aegis Turtle");
 
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Aegis Turtle", 0);
         assertGraveyardCount(playerB, "Aegis Turtle", 0);
@@ -72,7 +76,10 @@ public class ZilorthaStrengthIncarnateTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Flame Spill", "Savai Sabertooth");
 
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Savai Sabertooth", 1);
         assertGraveyardCount(playerB, "Flame Spill", 1);
@@ -89,7 +96,10 @@ public class ZilorthaStrengthIncarnateTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Flame Spill", "Savai Sabertooth");
 
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Savai Sabertooth", 1);
         assertGraveyardCount(playerB, "Flame Spill", 1);
@@ -114,7 +124,10 @@ public class ZilorthaStrengthIncarnateTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Murder", "Zilortha, Strength Incarnate");
 
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
+        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Zilortha, Strength Incarnate", 1);
         assertGraveyardCount(playerA, "Savai Sabertooth", 1);
@@ -132,7 +145,10 @@ public class ZilorthaStrengthIncarnateTest extends CardTestPlayerBase {
         attack(1, playerA, "Maned Serval");
         block(1, playerB, "Maned Serval", "Maned Serval");
 
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Maned Serval", 1);
         assertGraveyardCount(playerB, "Maned Serval", 1);
@@ -152,7 +168,10 @@ public class ZilorthaStrengthIncarnateTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Zilortha, Strength Incarnate");
 
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
+        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Maned Serval", 1);
         assertGraveyardCount(playerB, "Maned Serval", 0);

@@ -70,9 +70,6 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 import java.util.Map.Entry;
-import java.util.stream.Collectors;
-
-import static java.util.Collections.emptyList;
 
 public abstract class GameImpl implements Game, Serializable {
 
@@ -148,8 +145,6 @@ public abstract class GameImpl implements Game, Serializable {
 
     // temporary store for income concede commands, don't copy
     private final LinkedList<UUID> concedingPlayers = new LinkedList<>();
-
-    private Map<UUID, FilterCreaturePermanent> usePowerInsteadOfToughnessForDamageLethalityFilters = new HashMap<>();
 
     public GameImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife, int startingSize) {
         this.id = UUID.randomUUID();
@@ -1897,7 +1892,7 @@ public abstract class GameImpl implements Game, Serializable {
 
         List<Permanent> legendary = new ArrayList<>();
         List<Permanent> worldEnchantment = new ArrayList<>();
-        List<FilterCreaturePermanent> usePowerInsteadOfToughnessForDamageLethalityFilters = getActivePowerInsteadOfToughnessForDamageLethalityFilters();
+        List<FilterCreaturePermanent> usePowerInsteadOfToughnessForDamageLethalityFilters = getState().getActivePowerInsteadOfToughnessForDamageLethalityFilters();
         for (Permanent perm : getBattlefield().getAllActivePermanents()) {
             if (perm.isCreature()) {
                 //20091005 - 704.5f
@@ -3319,19 +3314,5 @@ public abstract class GameImpl implements Game, Serializable {
     @Override
     public Set<UUID> getCommandersIds(Player player, CommanderCardType commanderCardType) {
         return player.getCommandersIds();
-    }
-
-    @Override
-    public void addPowerInsteadOfToughnessForDamageLethalityFilter(UUID source, FilterCreaturePermanent filter) {
-        usePowerInsteadOfToughnessForDamageLethalityFilters.putIfAbsent(source, filter);
-    }
-
-    @Override
-    public List<FilterCreaturePermanent> getActivePowerInsteadOfToughnessForDamageLethalityFilters() {
-        return usePowerInsteadOfToughnessForDamageLethalityFilters.isEmpty() ? emptyList() : getBattlefield().getAllActivePermanents().stream()
-                .map(Card::getId)
-                .filter(usePowerInsteadOfToughnessForDamageLethalityFilters::containsKey)
-                .map(usePowerInsteadOfToughnessForDamageLethalityFilters::get)
-                .collect(Collectors.toList());
     }
 }
