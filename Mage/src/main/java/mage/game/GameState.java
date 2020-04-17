@@ -179,6 +179,8 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.copiedCards.putAll(state.copiedCards);
         this.permanentOrderNumber = state.permanentOrderNumber;
         this.applyEffectsCounter = state.applyEffectsCounter;
+        state.usePowerInsteadOfToughnessForDamageLethalityFilters.forEach((uuid, filter) ->
+                this.usePowerInsteadOfToughnessForDamageLethalityFilters.put(uuid, filter.copy()));
     }
 
     public void restoreForRollBack(GameState state) {
@@ -224,6 +226,8 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.copiedCards = state.copiedCards;
         this.permanentOrderNumber = state.permanentOrderNumber;
         this.applyEffectsCounter = state.applyEffectsCounter;
+        state.usePowerInsteadOfToughnessForDamageLethalityFilters.forEach((uuid, filter) ->
+                this.usePowerInsteadOfToughnessForDamageLethalityFilters.put(uuid, filter.copy()));
     }
 
     @Override
@@ -1097,6 +1101,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         zones.clear();
         simultaneousEvents.clear();
         copiedCards.clear();
+        usePowerInsteadOfToughnessForDamageLethalityFilters.clear();
         permanentOrderNumber = 0;
     }
 
