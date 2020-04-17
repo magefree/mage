@@ -417,8 +417,8 @@ public class ConnectDialog extends MageDialog {
         });
 
         btnFindEU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/flags/europeanunion.png"))); // NOI18N
-        btnFindEU.setText("EU");
-        btnFindEU.setToolTipText("Connect to eu.xmage.today (second Europe server, use any username without registration)");
+        btnFindEU.setText(bundle.getString("ConnectDialog.btnFindEU.text")); // NOI18N
+        btnFindEU.setToolTipText(bundle.getString("ConnectDialog.btnFindEU.toolTipText")); // NOI18N
         btnFindEU.setAlignmentY(0.0F);
         btnFindEU.setMargin(new java.awt.Insets(2, 2, 2, 2));
         btnFindEU.setMaximumSize(new java.awt.Dimension(42, 23));
