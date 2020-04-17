@@ -10,6 +10,7 @@ import mage.cards.Card;
 import mage.cards.SplitCard;
 import mage.constants.Zone;
 import mage.designations.Designation;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.combat.Combat;
 import mage.game.combat.CombatGroup;
 import mage.game.command.Command;
@@ -37,6 +38,8 @@ import mage.watchers.Watchers;
 import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
+
+import static java.util.Collections.emptyList;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -96,6 +99,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     private Map<UUID, Integer> zoneChangeCounter = new HashMap<>();
     private Map<UUID, Card> copiedCards = new HashMap<>();
     private int permanentOrderNumber;
+    private Map<UUID, FilterCreaturePermanent> usePowerInsteadOfToughnessForDamageLethalityFilters = new HashMap<>();
 
     private int applyEffectsCounter; // Upcounting number of each applyEffects execution
 
@@ -175,6 +179,8 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.copiedCards.putAll(state.copiedCards);
         this.permanentOrderNumber = state.permanentOrderNumber;
         this.applyEffectsCounter = state.applyEffectsCounter;
+        state.usePowerInsteadOfToughnessForDamageLethalityFilters.forEach((uuid, filter) ->
+                this.usePowerInsteadOfToughnessForDamageLethalityFilters.put(uuid, filter.copy()));
     }
 
     public void restoreForRollBack(GameState state) {
@@ -220,6 +226,8 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.copiedCards = state.copiedCards;
         this.permanentOrderNumber = state.permanentOrderNumber;
         this.applyEffectsCounter = state.applyEffectsCounter;
+        state.usePowerInsteadOfToughnessForDamageLethalityFilters.forEach((uuid, filter) ->
+                this.usePowerInsteadOfToughnessForDamageLethalityFilters.put(uuid, filter.copy()));
     }
 
     @Override
@@ -1093,6 +1101,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         zones.clear();
         simultaneousEvents.clear();
         copiedCards.clear();
+        usePowerInsteadOfToughnessForDamageLethalityFilters.clear();
         permanentOrderNumber = 0;
     }
 
@@ -1209,4 +1218,15 @@ public class GameState implements Serializable, Copyable<GameState> {
         return applyEffectsCounter;
     }
 
+    public void addPowerInsteadOfToughnessForDamageLethalityFilter(UUID source, FilterCreaturePermanent filter) {
+        usePowerInsteadOfToughnessForDamageLethalityFilters.put(source, filter);
+    }
+
+    public List<FilterCreaturePermanent> getActivePowerInsteadOfToughnessForDamageLethalityFilters() {
+        return usePowerInsteadOfToughnessForDamageLethalityFilters.isEmpty() ? emptyList() : getBattlefield().getAllActivePermanents().stream()
+                .map(Card::getId)
+                .filter(usePowerInsteadOfToughnessForDamageLethalityFilters::containsKey)
+                .map(usePowerInsteadOfToughnessForDamageLethalityFilters::get)
+                .collect(Collectors.toList());
+    }
 }

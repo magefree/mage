@@ -485,4 +485,5 @@ public interface Game extends MageItem, Serializable {
     default Set<UUID> getCommandersIds(Player player) {
         return getCommandersIds(player, CommanderCardType.ANY);
     }
+
 }
