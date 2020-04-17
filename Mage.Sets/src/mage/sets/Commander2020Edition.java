@@ -284,6 +284,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Sunblast Angel", 102, Rarity.RARE, mage.cards.s.SunblastAngel.class));
         cards.add(new SetCardInfo("Sungrass Prairie", 317, Rarity.RARE, mage.cards.s.SungrassPrairie.class));
         cards.add(new SetCardInfo("Sunken Hollow", 318, Rarity.RARE, mage.cards.s.SunkenHollow.class));
+        cards.add(new SetCardInfo("Surly Badgersaur", 57, Rarity.RARE, mage.cards.s.SurlyBadgersaur.class));
         cards.add(new SetCardInfo("Surreal Memoir", 161, Rarity.UNCOMMON, mage.cards.s.SurrealMemoir.class));
         cards.add(new SetCardInfo("Swarm Intelligence", 124, Rarity.RARE, mage.cards.s.SwarmIntelligence.class));
         cards.add(new SetCardInfo("Swiftfoot Boots", 254, Rarity.UNCOMMON, mage.cards.s.SwiftfootBoots.class));
