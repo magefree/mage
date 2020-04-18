@@ -115,7 +115,9 @@ class AkimTheSoaringTokenAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        // TODO: Add condition to trigger check
+        if (!AkimTheSoaringWindCondition.instance.apply(game, this)) {
+            return false;
+        }
 
         Permanent permanent = game.getPermanent(event.getTargetId());
         return permanent != null && permanent.isControlledBy(this.getControllerId());
