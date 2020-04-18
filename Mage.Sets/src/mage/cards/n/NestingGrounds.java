@@ -17,10 +17,12 @@ import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.AnotherTargetPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
+import mage.target.common.TargetControlledPermanent;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -28,7 +30,7 @@ import java.util.UUID;
 
 /**
  *
- * @author anonymous
+ * @author ciaccona007
  */
 public final class NestingGrounds extends CardImpl {
 
@@ -42,8 +44,16 @@ public final class NestingGrounds extends CardImpl {
         // {1}, {T}: Move a counter from target permanent you control onto another target permanent. Activate this ability only any time you could cast a sorcery.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new NestingGroundsEffect(), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetPermanent(new FilterControlledPermanent("permanent to remove counter from")));
-        ability.addTarget(new TargetPermanent(new FilterPermanent("permanent to put counter on")));
+        TargetControlledPermanent target1 = new TargetControlledPermanent(new FilterControlledPermanent("permanent to remove counter from"));
+        target1.setTargetTag(1);
+        ability.addTarget(target1);
+
+        FilterPermanent filter = new FilterPermanent("permanent to put counter on");
+        filter.add(new AnotherTargetPredicate(2));
+        TargetPermanent target2 = new TargetPermanent(filter);
+        target2.setTargetTag(2);
+        ability.addTarget(target2);
+
         this.addAbility(ability);
     }
 
