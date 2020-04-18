@@ -175,6 +175,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Kodama's Reach", 180, Rarity.COMMON, mage.cards.k.KodamasReach.class));
         cards.add(new SetCardInfo("Krosan Grip", 181, Rarity.UNCOMMON, mage.cards.k.KrosanGrip.class));
         cards.add(new SetCardInfo("Krosan Verge", 285, Rarity.UNCOMMON, mage.cards.k.KrosanVerge.class));
+        cards.add(new SetCardInfo("Lavabrink Floodgates", 53, Rarity.RARE, mage.cards.l.LavabrinkFloodgates.class));
         cards.add(new SetCardInfo("Lifecrafter's Bestiary", 244, Rarity.RARE, mage.cards.l.LifecraftersBestiary.class));
         cards.add(new SetCardInfo("Lightning Greaves", 245, Rarity.UNCOMMON, mage.cards.l.LightningGreaves.class));
         cards.add(new SetCardInfo("Lightning Rift", 155, Rarity.UNCOMMON, mage.cards.l.LightningRift.class));
