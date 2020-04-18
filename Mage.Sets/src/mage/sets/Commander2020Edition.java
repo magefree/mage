@@ -206,6 +206,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Myriad Landscape", 292, Rarity.UNCOMMON, mage.cards.m.MyriadLandscape.class));
         cards.add(new SetCardInfo("Mystic Monastery", 293, Rarity.UNCOMMON, mage.cards.m.MysticMonastery.class));
         cards.add(new SetCardInfo("Nahiri, the Harbinger", 223, Rarity.MYTHIC, mage.cards.n.NahiriTheHarbinger.class));
+        cards.add(new SetCardInfo("Nascent Metamorph", 36, Rarity.RARE, mage.cards.n.NascentMetamorph.class));
         cards.add(new SetCardInfo("Natural Connection", 184, Rarity.COMMON, mage.cards.n.NaturalConnection.class));
         cards.add(new SetCardInfo("Nesting Grounds", 71, Rarity.RARE, mage.cards.n.NestingGrounds.class));
         cards.add(new SetCardInfo("Netherborn Altar", 45, Rarity.RARE, mage.cards.n.NetherbornAltar.class));
