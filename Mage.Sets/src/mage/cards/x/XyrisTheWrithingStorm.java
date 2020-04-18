@@ -147,8 +147,8 @@ class XyrisTheWrithingStormCombatDamageEffect extends OneShotEffect {
         if (sourceController != null && damagedPlayer != null) {
             int amount = (Integer) getValue("damage");
             if (amount > 0) {
-                sourceController.drawCards(amount, game);
-                damagedPlayer.drawCards(amount, game);
+                sourceController.drawCards(amount, source.getSourceId(), game);
+                damagedPlayer.drawCards(amount, source.getSourceId(), game);
                 return true;
             }
         }
