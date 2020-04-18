@@ -24,7 +24,7 @@ public class SanctuaryBladeTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Savai Sabertooth", 5, 1);
-        assertAbility(playerA, "Savai Sabertooth", new ProtectionAbility(new FilterCard("Black")), true);
+        assertAbility(playerA, "Savai Sabertooth", new ProtectionAbility(new FilterCard("black")), true);
     }
 
 }

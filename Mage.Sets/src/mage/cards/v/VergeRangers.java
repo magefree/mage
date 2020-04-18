@@ -11,13 +11,11 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 
 import java.util.Comparator;
 import java.util.UUID;
-
-import static mage.filter.StaticFilters.FILTER_CARD_LAND;
-import static mage.filter.StaticFilters.FILTER_LAND;
 
 /**
  *
@@ -56,7 +54,7 @@ public final class VergeRangers extends CardImpl {
 class VergeRangersEffect extends PlayTheTopCardEffect {
 
     public VergeRangersEffect() {
-        super(FILTER_CARD_LAND);
+        super(StaticFilters.FILTER_CARD_LAND);
         staticText = "As long as an opponent controls more lands than you, you may play lands from the top of your library.";
     }
 
@@ -72,9 +70,9 @@ class VergeRangersEffect extends PlayTheTopCardEffect {
     @Override
     public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
         if (super.applies(objectId, affectedAbility, source, game, playerId)) {
-            int myLandCount = game.getBattlefield().countAll(FILTER_LAND, playerId, game);
+            int myLandCount = game.getBattlefield().countAll(StaticFilters.FILTER_LAND, playerId, game);
             int maxOpponentLandCount = game.getOpponents(playerId).stream()
-                    .map(opponentId -> game.getBattlefield().countAll(FILTER_LAND, opponentId, game))
+                    .map(opponentId -> game.getBattlefield().countAll(StaticFilters.FILTER_LAND, opponentId, game))
                     .max(Comparator.naturalOrder())
                     .orElse(0);
             return maxOpponentLandCount > myLandCount;

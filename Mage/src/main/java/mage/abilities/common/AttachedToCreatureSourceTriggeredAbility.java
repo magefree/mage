@@ -13,19 +13,21 @@ import static mage.constants.CardType.CREATURE;
  *
  * @author htrajan
  */
-public class AttachedToCreatureTriggeredAbility extends TriggeredAbilityImpl {
+public class AttachedToCreatureSourceTriggeredAbility extends TriggeredAbilityImpl {
 
-    public AttachedToCreatureTriggeredAbility(Effect effect, boolean optional) {
+    public AttachedToCreatureSourceTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
     }
 
-    public AttachedToCreatureTriggeredAbility(final AttachedToCreatureTriggeredAbility ability) {
+    public AttachedToCreatureSourceTriggeredAbility(final AttachedToCreatureSourceTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ATTACHED && event.getSourceId().equals(this.getSourceId());
+        return event.getType() == GameEvent.EventType.ATTACHED
+                && event.getSourceId() != null
+                && event.getSourceId().equals(this.getSourceId());
     }
 
     @Override
@@ -40,7 +42,7 @@ public class AttachedToCreatureTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public AttachedToCreatureTriggeredAbility copy() {
-        return new AttachedToCreatureTriggeredAbility(this);
+    public AttachedToCreatureSourceTriggeredAbility copy() {
+        return new AttachedToCreatureSourceTriggeredAbility(this);
     }
 }
