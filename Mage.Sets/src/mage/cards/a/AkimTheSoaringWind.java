@@ -1,12 +1,15 @@
 package mage.cards.a;
 
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
+import mage.abilities.hint.ConditionHint;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -19,6 +22,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.BirdToken;
+import mage.players.Player;
 import mage.watchers.Watcher;
 
 import java.util.HashMap;
@@ -49,11 +53,14 @@ public final class AkimTheSoaringWind extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever you create one or more tokens for the first time each turn, create a 1/1 white Bird creature token with flying.
-
-        this.addAbility(new AkimTheSoaringTokenAbility(), new AkimTheSoaringWindWatcher());
+        this.addAbility(
+                new AkimTheSoaringTokenAbility()
+                        .addHint(new ConditionHint(AkimTheSoaringWindCondition.instance,
+                                "You create one or more tokens for the first time each turn")),
+                new AkimTheSoaringWindWatcher()
+        );
 
         // {3}{U}{R}{W}: Creature tokens you control gain double strike until end of turn.
-
         this.addAbility(new SimpleActivatedAbility(
                 new GainAbilityControlledEffect(
                         DoubleStrikeAbility.getInstance(),
@@ -74,6 +81,22 @@ public final class AkimTheSoaringWind extends CardImpl {
     }
 }
 
+enum AkimTheSoaringWindCondition implements Condition {
+
+    instance;
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        AkimTheSoaringWindWatcher watcher = game.getState().getWatcher(AkimTheSoaringWindWatcher.class);
+        return watcher != null && watcher.firstToken(controller.getId());
+    }
+
+    @Override
+    public String toString() {
+        return "you create one or more tokens for the first time each turn";
+    }
+}
 
 class AkimTheSoaringTokenAbility extends TriggeredAbilityImpl {
 
@@ -92,10 +115,10 @@ class AkimTheSoaringTokenAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
+        // TODO: Add condition to trigger check
+
         Permanent permanent = game.getPermanent(event.getTargetId());
-        AkimTheSoaringWindWatcher watcher = game.getState().getWatcher(AkimTheSoaringWindWatcher.class);
-        return permanent != null && permanent.isControlledBy(this.getControllerId()) &&
-                watcher != null && watcher.firstToken(event.getPlayerId());
+        return permanent != null && permanent.isControlledBy(this.getControllerId());
     }
 
     @Override
@@ -113,6 +136,7 @@ class AkimTheSoaringTokenAbility extends TriggeredAbilityImpl {
 class AkimTheSoaringWindWatcher extends Watcher {
 
     public enum TokenState {
+        NoToken,
         FirstToken,
         MoreThanOneToken
     }
@@ -144,6 +168,6 @@ class AkimTheSoaringWindWatcher extends Watcher {
     }
 
     boolean firstToken(UUID playerId) {
-        return playerIds.get(playerId) == TokenState.FirstToken;
+        return playerIds.getOrDefault(playerId, TokenState.NoToken) == TokenState.FirstToken;
     }
 }
