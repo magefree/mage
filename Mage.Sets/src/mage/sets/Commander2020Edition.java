@@ -101,6 +101,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Deadly Tempest", 131, Rarity.RARE, mage.cards.d.DeadlyTempest.class));
         cards.add(new SetCardInfo("Dearly Departed", 84, Rarity.RARE, mage.cards.d.DearlyDeparted.class));
         cards.add(new SetCardInfo("Deathsprout", 208, Rarity.UNCOMMON, mage.cards.d.Deathsprout.class));
+        cards.add(new SetCardInfo("Decoy Gambit", 32, Rarity.RARE, mage.cards.d.DecoyGambit.class));
         cards.add(new SetCardInfo("Decree of Justice", 85, Rarity.RARE, mage.cards.d.DecreeOfJustice.class));
         cards.add(new SetCardInfo("Deflecting Swat", 50, Rarity.RARE, mage.cards.d.DeflectingSwat.class));
         cards.add(new SetCardInfo("Descend upon the Sinful", 86, Rarity.MYTHIC, mage.cards.d.DescendUponTheSinful.class));
