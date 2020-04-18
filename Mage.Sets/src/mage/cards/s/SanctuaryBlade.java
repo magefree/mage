@@ -31,12 +31,14 @@ public final class SanctuaryBlade extends CardImpl {
         // As Sanctuary Blade becomes attached to a creature, choose a color.
         this.addAbility(new AttachedToCreatureSourceTriggeredAbility(new ChooseColorEffect(Outcome.Benefit), false));
 
-        // Equipped creature gets +2/+0
+        // Equipped creature gets +2/+0 and has protection from the last chosen color.
         Effect boostEffect = new BoostEquippedEffect(2, 0);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, boostEffect));
-
-        // and has protection from the last chosen color
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ProtectionChosenColorAttachedEffect(false)));
+        boostEffect.concatBy(".");
+        SimpleStaticAbility ability = new SimpleStaticAbility(Zone.BATTLEFIELD, boostEffect);
+        ProtectionChosenColorAttachedEffect protectionEfect = new ProtectionChosenColorAttachedEffect(false);
+        protectionEfect.setText("and has protection from the last chosen color.");
+        ability.addEffect(protectionEfect);
+        this.addAbility(ability);
 
         // Equip {3}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3)));
