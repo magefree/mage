@@ -114,7 +114,7 @@ class ZirdaTheDawnwakerEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        return abilityToModify.getAbilityType() != AbilityType.ACTIVATED
+        return abilityToModify.getAbilityType() == AbilityType.ACTIVATED
                 && abilityToModify.isControlledBy(source.getControllerId());
     }
 
