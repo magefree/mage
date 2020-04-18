@@ -192,6 +192,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Migratory Route", 222, Rarity.UNCOMMON, mage.cards.m.MigratoryRoute.class));
         cards.add(new SetCardInfo("Mimic Vat", 246, Rarity.RARE, mage.cards.m.MimicVat.class));
         cards.add(new SetCardInfo("Mind Spring", 116, Rarity.RARE, mage.cards.m.MindSpring.class));
+        cards.add(new SetCardInfo("Mindleecher", 44, Rarity.RARE, mage.cards.m.Mindleecher.class));
         cards.add(new SetCardInfo("Mortuary Mire", 289, Rarity.COMMON, mage.cards.m.MortuaryMire.class));
         cards.add(new SetCardInfo("Mossfire Valley", 290, Rarity.RARE, mage.cards.m.MossfireValley.class));
         cards.add(new SetCardInfo("Mosswort Bridge", 291, Rarity.RARE, mage.cards.m.MosswortBridge.class));
