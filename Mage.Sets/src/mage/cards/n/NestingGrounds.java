@@ -42,10 +42,11 @@ public final class NestingGrounds extends CardImpl {
         // {1}, {T}: Move a counter from target permanent you control onto another target permanent. Activate this ability only any time you could cast a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new NestingGroundsEffect(), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
+        // target 1
         TargetControlledPermanent target1 = new TargetControlledPermanent(new FilterControlledPermanent("permanent to remove counter from"));
         target1.setTargetTag(1);
         ability.addTarget(target1);
-
+        // target 2
         FilterPermanent filter = new FilterPermanent("permanent to put counter on");
         filter.add(new AnotherTargetPredicate(2));
         TargetPermanent target2 = new TargetPermanent(filter);

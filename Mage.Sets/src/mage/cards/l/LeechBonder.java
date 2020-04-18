@@ -19,6 +19,7 @@ import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AnotherTargetPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -47,8 +48,17 @@ public final class LeechBonder extends CardImpl {
         // {U}, {untap}: Move a counter from target creature onto another target creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LeechBonderEffect(), new ManaCostsImpl("{U}"));
         ability.addCost(new UntapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature to remove counter from")));
-        ability.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature to put counter on")));
+        // target 1
+        TargetCreaturePermanent target1 = new TargetCreaturePermanent(new FilterCreaturePermanent("creature to remove counter from"));
+        target1.setTargetTag(1);
+        ability.addTarget(target1);
+        // target 2
+        FilterCreaturePermanent filter = new FilterCreaturePermanent("creature to put counter on");
+        filter.add(new AnotherTargetPredicate(2));
+        TargetCreaturePermanent target2 = new TargetCreaturePermanent(filter);
+        target2.setTargetTag(2);
+        ability.addTarget(target2);
+
         this.addAbility(ability);
 
     }

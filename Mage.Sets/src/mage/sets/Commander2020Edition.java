@@ -121,6 +121,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Dualcaster Mage", 150, Rarity.RARE, mage.cards.d.DualcasterMage.class));
         cards.add(new SetCardInfo("Duneblast", 211, Rarity.RARE, mage.cards.d.Duneblast.class));
         cards.add(new SetCardInfo("Endless Sands", 272, Rarity.RARE, mage.cards.e.EndlessSands.class));
+        cards.add(new SetCardInfo("Eon Frolicker", 33, Rarity.RARE, mage.cards.e.EonFrolicker.class));
         cards.add(new SetCardInfo("Etali, Primal Storm", 151, Rarity.RARE, mage.cards.e.EtaliPrimalStorm.class));
         cards.add(new SetCardInfo("Eternal Dragon", 88, Rarity.RARE, mage.cards.e.EternalDragon.class));
         cards.add(new SetCardInfo("Ever After", 133, Rarity.RARE, mage.cards.e.EverAfter.class));
