@@ -124,6 +124,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Eon Frolicker", 33, Rarity.RARE, mage.cards.e.EonFrolicker.class));
         cards.add(new SetCardInfo("Etali, Primal Storm", 151, Rarity.RARE, mage.cards.e.EtaliPrimalStorm.class));
         cards.add(new SetCardInfo("Eternal Dragon", 88, Rarity.RARE, mage.cards.e.EternalDragon.class));
+        cards.add(new SetCardInfo("Ethereal Forager", 34, Rarity.RARE, mage.cards.e.EtherealForager.class));
         cards.add(new SetCardInfo("Ever After", 133, Rarity.RARE, mage.cards.e.EverAfter.class));
         cards.add(new SetCardInfo("Evolution Charm", 171, Rarity.COMMON, mage.cards.e.EvolutionCharm.class));
         cards.add(new SetCardInfo("Exotic Orchard", 273, Rarity.RARE, mage.cards.e.ExoticOrchard.class));
