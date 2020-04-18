@@ -9,6 +9,10 @@ import mage.game.permanent.Permanent;
 
 import static mage.constants.CardType.CREATURE;
 
+/**
+ *
+ * @author htrajan
+ */
 public class AttachedToCreatureTriggeredAbility extends TriggeredAbilityImpl {
 
     public AttachedToCreatureTriggeredAbility(Effect effect, boolean optional) {

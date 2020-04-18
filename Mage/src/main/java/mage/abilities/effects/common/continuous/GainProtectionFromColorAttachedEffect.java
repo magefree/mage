@@ -13,7 +13,7 @@ import mage.players.Player;
 
 /**
  *
- * @author LevelX2
+ * @author htrajan
  */
 public class GainProtectionFromColorAttachedEffect extends GainAbilitySourceEffect {
 
