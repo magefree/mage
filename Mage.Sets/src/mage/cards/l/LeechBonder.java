@@ -1,9 +1,5 @@
-
 package mage.cards.l;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -17,8 +13,8 @@ import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.CounterType;
@@ -28,15 +24,17 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
- *
  */
 public final class LeechBonder extends CardImpl {
 
     public LeechBonder(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
         this.subtype.add(SubType.MERFOLK);
         this.subtype.add(SubType.SOLDIER);
 
@@ -91,11 +89,13 @@ class LeechBonderEffect extends OneShotEffect {
                 || controller == null) {
             return false;
         }
-        Choice choice = new ChoiceImpl();
-        Set<String> possibleChoices = new HashSet<>();
-        for (String counterName : fromPermanent.getCounters(game).keySet()) {
-            possibleChoices.add(counterName);
+
+        Set<String> possibleChoices = new HashSet<>(fromPermanent.getCounters(game).keySet());
+        if (possibleChoices.size() == 0) {
+            return false;
         }
+
+        Choice choice = new ChoiceImpl();
         choice.setChoices(possibleChoices);
         if (controller.choose(outcome, choice, game)) {
             String chosen = choice.getChoice();
@@ -103,7 +103,7 @@ class LeechBonderEffect extends OneShotEffect {
                 CounterType counterType = CounterType.findByName(chosen);
                 if (counterType != null) {
                     Counter counter = counterType.createInstance();
-                    fromPermanent.removeCounters(counter, game);
+                    fromPermanent.removeCounters(counterType.getName(), 1, game);
                     toPermanent.addCounters(counter, source, game);
                     return true;
                 }

@@ -1,12 +1,11 @@
-
 package mage.tournament.cubes;
 
 import mage.game.draft.DraftCube;
 
-public class MTGACube extends DraftCube {
+public class MTGACube2020April extends DraftCube {
 
-    public MTGACube() {
-        super("MTGA Cube"); // https://magic.wizards.com/en/articles/archive/magic-digital/mtg-arena-cube-sealed-card-list-2020-04-03
+    public MTGACube2020April() {
+        super("MTGA Cube 2020 April"); // https://magic.wizards.com/en/articles/archive/magic-digital/mtg-arena-cube-sealed-card-list-2020-04-03
 
         cubeCards.add(new CardIdentity("Adanto Vanguard", ""));
         cubeCards.add(new CardIdentity("Admiral's Order", ""));

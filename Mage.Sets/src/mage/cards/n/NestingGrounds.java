@@ -1,7 +1,7 @@
 package mage.cards.n;
 
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
@@ -17,43 +17,31 @@ import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.AnotherTargetPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
 /**
- *
- * @author ciaccona007
+ * @author anonymous
  */
 public final class NestingGrounds extends CardImpl {
 
     public NestingGrounds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
-        
 
         // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
         // {1}, {T}: Move a counter from target permanent you control onto another target permanent. Activate this ability only any time you could cast a sorcery.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new NestingGroundsEffect(), new GenericManaCost(1));
+        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new NestingGroundsEffect(), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
-        TargetControlledPermanent target1 = new TargetControlledPermanent(new FilterControlledPermanent("permanent to remove counter from"));
-        target1.setTargetTag(1);
-        ability.addTarget(target1);
-
-        FilterPermanent filter = new FilterPermanent("permanent to put counter on");
-        filter.add(new AnotherTargetPredicate(2));
-        TargetPermanent target2 = new TargetPermanent(filter);
-        target2.setTargetTag(2);
-        ability.addTarget(target2);
-
+        ability.addTarget(new TargetPermanent(new FilterControlledPermanent("permanent to remove counter from")));
+        ability.addTarget(new TargetPermanent(new FilterPermanent("permanent to put counter on")));
         this.addAbility(ability);
     }
 
@@ -74,13 +62,13 @@ class NestingGroundsEffect extends OneShotEffect {
         this.staticText = "Move a counter from target permanent you control onto another target permanent";
     }
 
-    public NestingGroundsEffect(final mage.cards.n.NestingGroundsEffect effect) {
+    public NestingGroundsEffect(final NestingGroundsEffect effect) {
         super(effect);
     }
 
     @Override
-    public mage.cards.n.NestingGroundsEffect copy() {
-        return new mage.cards.n.NestingGroundsEffect(this);
+    public NestingGroundsEffect copy() {
+        return new NestingGroundsEffect(this);
     }
 
     @Override
@@ -93,11 +81,13 @@ class NestingGroundsEffect extends OneShotEffect {
                 || controller == null) {
             return false;
         }
-        Choice choice = new ChoiceImpl();
-        Set<String> possibleChoices = new HashSet<>();
-        for (String counterName : fromPermanent.getCounters(game).keySet()) {
-            possibleChoices.add(counterName);
+
+        Set<String> possibleChoices = new HashSet<>(fromPermanent.getCounters(game).keySet());
+        if (possibleChoices.size() == 0) {
+            return false;
         }
+
+        Choice choice = new ChoiceImpl();
         choice.setChoices(possibleChoices);
         if (controller.choose(outcome, choice, game)) {
             String chosen = choice.getChoice();
@@ -105,7 +95,7 @@ class NestingGroundsEffect extends OneShotEffect {
                 CounterType counterType = CounterType.findByName(chosen);
                 if (counterType != null) {
                     Counter counter = counterType.createInstance();
-                    fromPermanent.removeCounters(counter, game);
+                    fromPermanent.removeCounters(counterType.getName(), 1, game);
                     toPermanent.addCounters(counter, source, game);
                     return true;
                 }
