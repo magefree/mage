@@ -244,6 +244,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Rogue's Passage", 303, Rarity.UNCOMMON, mage.cards.r.RoguesPassage.class));
         cards.add(new SetCardInfo("Rupture Spire", 304, Rarity.COMMON, mage.cards.r.RuptureSpire.class));
         cards.add(new SetCardInfo("Sakura-Tribe Elder", 187, Rarity.COMMON, mage.cards.s.SakuraTribeElder.class));
+        cards.add(new SetCardInfo("Sanctuary Blade", 69, Rarity.RARE, mage.cards.s.SanctuaryBlade.class));
         cards.add(new SetCardInfo("Sandsteppe Citadel", 305, Rarity.UNCOMMON, mage.cards.s.SandsteppeCitadel.class));
         cards.add(new SetCardInfo("Satyr Wayfinder", 188, Rarity.COMMON, mage.cards.s.SatyrWayfinder.class));
         cards.add(new SetCardInfo("Sawtusk Demolisher", 64, Rarity.RARE, mage.cards.s.SawtuskDemolisher.class));
@@ -309,6 +310,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Unexpectedly Absent", 106, Rarity.RARE, mage.cards.u.UnexpectedlyAbsent.class));
         cards.add(new SetCardInfo("Vampire Nighthawk", 140, Rarity.UNCOMMON, mage.cards.v.VampireNighthawk.class));
         cards.add(new SetCardInfo("Vastwood Hydra", 194, Rarity.RARE, mage.cards.v.VastwoodHydra.class));
+        cards.add(new SetCardInfo("Verge Rangers", 29, Rarity.RARE, mage.cards.v.VergeRangers.class));
         cards.add(new SetCardInfo("Vigilante Justice", 164, Rarity.UNCOMMON, mage.cards.v.VigilanteJustice.class));
         cards.add(new SetCardInfo("Villainous Wealth", 233, Rarity.RARE, mage.cards.v.VillainousWealth.class));
         cards.add(new SetCardInfo("Vitality Hunter", 30, Rarity.RARE, mage.cards.v.VitalityHunter.class));
