@@ -169,6 +169,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Kalemne's Captain", 92, Rarity.RARE, mage.cards.k.KalemnesCaptain.class));
         cards.add(new SetCardInfo("Karametra, God of Harvests", 218, Rarity.MYTHIC, mage.cards.k.KarametraGodOfHarvests.class));
         cards.add(new SetCardInfo("Kathril, Aspect Warper", 10, Rarity.MYTHIC, mage.cards.k.KathrilAspectWarper.class));
+        cards.add(new SetCardInfo("Kelsien, the Plague", 11, Rarity.MYTHIC, mage.cards.k.KelsienThePlague.class));
         cards.add(new SetCardInfo("Kessig Wolf Run", 284, Rarity.RARE, mage.cards.k.KessigWolfRun.class));
         cards.add(new SetCardInfo("Knight of the White Orchid", 93, Rarity.RARE, mage.cards.k.KnightOfTheWhiteOrchid.class));
         cards.add(new SetCardInfo("Kodama's Reach", 180, Rarity.COMMON, mage.cards.k.KodamasReach.class));
@@ -233,7 +234,8 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Putrefy", 228, Rarity.UNCOMMON, mage.cards.p.Putrefy.class));
         cards.add(new SetCardInfo("Rakdos Carnarium", 300, Rarity.COMMON, mage.cards.r.RakdosCarnarium.class));
         cards.add(new SetCardInfo("Rakdos Signet", 249, Rarity.UNCOMMON, mage.cards.r.RakdosSignet.class));
-        cards.add(new SetCardInfo("Rashmi, Eternities Crafter", 229, Rarity.RARE, mage.cards.r.RashmiEternitiesCrafter.class));
+        cards.add(new SetCardInfo("Rashmi, Eternities Crafter", 229, Rarity.MYTHIC, mage.cards.r.RashmiEternitiesCrafter.class));
+        cards.add(new SetCardInfo("Ravenous Gigantotherium", 63, Rarity.RARE, mage.cards.r.RavenousGigantotherium.class));
         cards.add(new SetCardInfo("Reclamation Sage", 186, Rarity.UNCOMMON, mage.cards.r.ReclamationSage.class));
         cards.add(new SetCardInfo("Reliquary Tower", 301, Rarity.UNCOMMON, mage.cards.r.ReliquaryTower.class));
         cards.add(new SetCardInfo("Remote Isle", 302, Rarity.COMMON, mage.cards.r.RemoteIsle.class));
@@ -305,6 +307,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Vastwood Hydra", 194, Rarity.RARE, mage.cards.v.VastwoodHydra.class));
         cards.add(new SetCardInfo("Vigilante Justice", 164, Rarity.UNCOMMON, mage.cards.v.VigilanteJustice.class));
         cards.add(new SetCardInfo("Villainous Wealth", 233, Rarity.RARE, mage.cards.v.VillainousWealth.class));
+        cards.add(new SetCardInfo("Vitality Hunter", 30, Rarity.RARE, mage.cards.v.VitalityHunter.class));
         cards.add(new SetCardInfo("Vizier of Tumbling Sands", 126, Rarity.UNCOMMON, mage.cards.v.VizierOfTumblingSands.class));
         cards.add(new SetCardInfo("Vorapede", 195, Rarity.MYTHIC, mage.cards.v.Vorapede.class));
         cards.add(new SetCardInfo("Whiplash Trap", 127, Rarity.COMMON, mage.cards.w.WhiplashTrap.class));
