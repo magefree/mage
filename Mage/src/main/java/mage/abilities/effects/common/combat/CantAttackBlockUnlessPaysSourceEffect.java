@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common.combat;
 
 import mage.abilities.Ability;
@@ -12,22 +11,19 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 
 /**
- *
  * @author LevelX2
  */
 public class CantAttackBlockUnlessPaysSourceEffect extends PayCostToAttackBlockEffectImpl {
 
     public CantAttackBlockUnlessPaysSourceEffect(Cost cost, RestrictType restrictType) {
         super(Duration.WhileOnBattlefield, Outcome.Detriment, restrictType, cost);
-        staticText = "{this} can't " + restrictType.toString() + " unless you "
-                + cost == null ? "" : cost.getText()
-                        + (restrictType == RestrictType.ATTACK ? " <i>(This cost is paid as attackers are declared.)</i>" : "");
+        staticText = "{this} can't " + restrictType.toString() + " unless you " + (cost == null ? "" : cost.getText())
+                + (restrictType == RestrictType.ATTACK ? " <i>(This cost is paid as attackers are declared.)</i>" : "");
     }
 
     public CantAttackBlockUnlessPaysSourceEffect(ManaCosts manaCosts, RestrictType restrictType) {
         super(Duration.WhileOnBattlefield, Outcome.Detriment, RestrictType.ATTACK_AND_BLOCK, manaCosts);
-        staticText = "{this} can't " + restrictType.toString() + " unless you pay "
-                + manaCosts == null ? "" : manaCosts.getText();
+        staticText = "{this} can't " + restrictType.toString() + " unless you pay " + (manaCosts == null ? "" : manaCosts.getText());
     }
 
     public CantAttackBlockUnlessPaysSourceEffect(CantAttackBlockUnlessPaysSourceEffect effect) {
