@@ -49,7 +49,7 @@ public final class KaheeraTheOrphanguard extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
-        // Companion — Each creature card in your starting deck is a Cat, Elemental, Nightmare, Dinosaur, or Beast card.
+        // Companion — Each creature card in your starting deck is a Cat, Elemental, Nightmare, Dinosaur or Beast card.
         this.addAbility(new CompanionAbility(KaheeraTheOrphanguardCompanionCondition.instance));
 
         // Vigilance
@@ -58,7 +58,7 @@ public final class KaheeraTheOrphanguard extends CardImpl {
         // Each other creature you control that's a Cat, Elemental, Nightmare, Dinosaur, or Beast gets +1/+1 and has vigilance.
         Ability ability = new SimpleStaticAbility(new BoostAllEffect(
                 1, 1, Duration.WhileOnBattlefield, filter, true
-        ).setText("Each other creature you control that's a Cat, Elemental, Nightmare, Dinosaur, or Beast gets +1/+1"));
+        ).setText("Each other creature you control that's a Cat, Elemental, Nightmare, Dinosaur or Beast gets +1/+1"));
         ability.addEffect(new GainAbilityAllEffect(
                 VigilanceAbility.getInstance(), Duration.WhileOnBattlefield, filter, "and has vigilance"
         ));
@@ -80,7 +80,7 @@ enum KaheeraTheOrphanguardCompanionCondition implements CompanionCondition {
 
     @Override
     public String getRule() {
-        return "Each creature card in your starting deck is a Cat, Elemental, Nightmare, Dinosaur, or Beast card";
+        return "Each creature card in your starting deck is a Cat, Elemental, Nightmare, Dinosaur or Beast card.";
     }
 
     private static final SubTypeList subtypes = new SubTypeList(
