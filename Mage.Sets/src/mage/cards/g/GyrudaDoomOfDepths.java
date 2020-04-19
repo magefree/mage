@@ -36,7 +36,7 @@ public final class GyrudaDoomOfDepths extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Companion — Your starting deck contains only cards with even converted mana costs.
-        this.addAbility(new CompanionAbility(OboshThePreypiercerCompanionCondition.instance));
+        this.addAbility(new CompanionAbility(GyrudaDoomOfDepthsCompanionCondition.instance));
 
         // When Gyruda, Doom of Depths enters the battlefield, each player puts the top four cards of the library into their graveyard. Put a creature card with an even converted mana cost from among those cards onto the battlefield under your control.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GyrudaDoomOfDepthsEffect()));
@@ -52,19 +52,18 @@ public final class GyrudaDoomOfDepths extends CardImpl {
     }
 }
 
-enum OboshThePreypiercerCompanionCondition implements CompanionCondition {
+enum GyrudaDoomOfDepthsCompanionCondition implements CompanionCondition {
     instance;
 
     @Override
     public String getRule() {
-        return "Your starting deck contains only cards with odd converted mana costs and land cards.";
+        return "Your starting deck contains only cards with even converted mana costs.";
     }
 
     @Override
     public boolean isLegal(Set<Card> deck, int startingSize) {
         return deck
                 .stream()
-                .filter(card -> !card.isLand())
                 .mapToInt(MageObject::getConvertedManaCost)
                 .map(i -> i % 2)
                 .allMatch(i -> i == 0);
