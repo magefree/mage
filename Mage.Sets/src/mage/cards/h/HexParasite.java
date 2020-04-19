@@ -1,7 +1,5 @@
-
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -10,24 +8,21 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward
  */
 public final class HexParasite extends CardImpl {
 
     public HexParasite(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{1}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}");
         this.subtype.add(SubType.INSECT);
 
         this.power = new MageInt(1);
@@ -76,7 +71,7 @@ class HexParasiteEffect extends OneShotEffect {
             String[] counterNames = permanent.getCounters(game).keySet().toArray(new String[0]);
             for (String counterName : counterNames) {
                 if (player.chooseUse(Outcome.Neutral, "Do you want to remove " + counterName + " counters?", source, game)) {
-                    if (permanent.getCounters(game).get(counterName).getCount() == 1 || toRemove == 1) {
+                    if (permanent.getCounters(game).get(counterName).getCount() == 1 || (toRemove - removed == 1)) {
                         permanent.removeCounters(counterName, 1, game);
                         removed++;
                     } else {
@@ -91,7 +86,9 @@ class HexParasiteEffect extends OneShotEffect {
                     break;
                 }
             }
-            game.addEffect(new BoostSourceEffect(removed, 0, Duration.EndOfTurn), source);
+            if (removed > 0) {
+                game.addEffect(new BoostSourceEffect(removed, 0, Duration.EndOfTurn), source);
+            }
             return true;
         }
         return false;
