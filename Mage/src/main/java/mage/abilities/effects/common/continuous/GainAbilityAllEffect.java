@@ -60,6 +60,7 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
         ability.newId(); // This is needed if the effect is copied e.g. by a clone so the ability can be added multiple times to permanents
         this.filter = effect.filter.copy();
         this.excludeSource = effect.excludeSource;
+        this.forceQuotes = effect.forceQuotes;
     }
 
     @Override
