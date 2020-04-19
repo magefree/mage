@@ -26,6 +26,7 @@ import mage.watchers.Watcher;
 
 import java.util.Set;
 import java.util.UUID;
+import mage.filter.predicate.Predicates;
 
 /**
  * @author TheElk801
@@ -88,6 +89,7 @@ class LurrusOfTheDreamDenContinuousEffect extends ContinuousEffectImpl {
 
     static {
         filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 3));
+        filter.add(Predicates.not(CardType.LAND.getPredicate()));
     }
 
     LurrusOfTheDreamDenContinuousEffect() {
