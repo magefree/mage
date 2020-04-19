@@ -21,7 +21,7 @@ public class DiscardXTargetCost extends VariableCostImpl {
 
     public DiscardXTargetCost(FilterCard filter, boolean additionalCostText) {
         super(filter.getMessage() + " to discard");
-        this.text = (additionalCostText ? "as an additional cost to cast this spell, discard " : "discard ") + xText + ' ' + filter.getMessage();
+        this.text = (additionalCostText ? "as an additional cost to cast this spell, discard " : "Discard ") + xText + ' ' + filter.getMessage();
         this.filter = filter;
     }
 
