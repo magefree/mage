@@ -20,7 +20,7 @@ public class Oathbreaker extends Vintage {
 
     public Oathbreaker() {
         super();
-        this.name = "Oathbreaker";
+        setName("Oathbreaker");
 
         // banned = vintage + oathbreaker's list: https://weirdcards.org/oathbreaker-ban-list
         // last updated 8/2/19 - Primeval Titan unbanned

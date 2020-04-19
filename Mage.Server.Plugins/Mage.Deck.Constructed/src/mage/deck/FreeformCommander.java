@@ -23,7 +23,7 @@ public class FreeformCommander extends Constructed {
     private static final Map<String, Integer> pdAllowed = new HashMap<>();
 
     public FreeformCommander() {
-        this("Freeform Commander");
+        super("Freeform Commander");
         for (ExpansionSet set : Sets.getInstance().values()) {
             setCodes.add(set.getCode());
         }
@@ -34,6 +34,10 @@ public class FreeformCommander extends Constructed {
 
     public FreeformCommander(String name) {
         super(name);
+    }
+
+    public FreeformCommander(String name, String shortName) {
+        super(name, shortName);
     }
 
     @Override

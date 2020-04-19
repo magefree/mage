@@ -36,6 +36,10 @@ public class Constructed extends DeckValidator {
         super(name);
     }
 
+    protected Constructed(String name, String shortName) {
+        super(name, shortName);
+    }
+
     public List<String> getSetCodes() {
         return setCodes;
     }

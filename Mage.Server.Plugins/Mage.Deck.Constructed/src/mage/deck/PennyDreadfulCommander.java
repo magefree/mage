@@ -26,16 +26,12 @@ public class PennyDreadfulCommander extends Constructed {
     private static boolean setupAllowed = false;
 
     public PennyDreadfulCommander() {
-        this("Penny Dreadful Commander");
+        super("Penny Dreadful Commander", "Penny");
         for (ExpansionSet set : Sets.getInstance().values()) {
             if (set.getSetType().isEternalLegal()) {
                 setCodes.add(set.getCode());
             }
         }
-    }
-
-    public PennyDreadfulCommander(String name) {
-        super(name);
     }
 
     @Override

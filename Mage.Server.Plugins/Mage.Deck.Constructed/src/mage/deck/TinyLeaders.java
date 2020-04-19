@@ -22,7 +22,7 @@ public class TinyLeaders extends Constructed {
     protected List<String> bannedCommander = new ArrayList<>();
 
     public TinyLeaders() {
-        this("Tiny Leaders");
+        super("Tiny Leaders");
         for (ExpansionSet set : Sets.getInstance().values()) {
             if (set.getSetType().isEternalLegal()) {
                 setCodes.add(set.getCode());
@@ -84,10 +84,6 @@ public class TinyLeaders extends Constructed {
         bannedCommander.add("Erayo, Soratami Ascendant");
         bannedCommander.add("Rofellos, Llanowar Emissary");
         bannedCommander.add("Derevi, Empyrical Tactician");
-    }
-
-    public TinyLeaders(String name) {
-        super(name);
     }
 
     @Override

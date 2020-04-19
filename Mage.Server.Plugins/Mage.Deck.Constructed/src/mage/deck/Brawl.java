@@ -30,10 +30,6 @@ public class Brawl extends Constructed {
         banned.add("Sorcerous Spyglass");
     }
 
-    public Brawl(String name) {
-        super(name);
-    }
-
     @Override
     public int getSideboardMinSize() {
         return 1;

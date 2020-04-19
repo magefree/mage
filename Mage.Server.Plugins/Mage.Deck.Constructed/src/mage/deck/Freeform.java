@@ -12,6 +12,14 @@ public class Freeform extends DeckValidator {
         super("Constructed - Freeform");
     }
 
+    public Freeform(String name) {
+        super(name);
+    }
+
+    public Freeform(String name, String shortName) {
+        super(name, shortName);
+    }
+
     @Override
     public int getDeckMinSize() {
         return 40;

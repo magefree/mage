@@ -63,16 +63,12 @@ public class CanadianHighlander extends Constructed {
     }
 
     public CanadianHighlander() {
-        this("Canadian Highlander");
+        super("Canadian Highlander");
         for (ExpansionSet set : Sets.getInstance().values()) {
             if (set.getSetType().isEternalLegal()) {
                 setCodes.add(set.getCode());
             }
         }
-    }
-
-    public CanadianHighlander(String name) {
-        super(name);
     }
 
     @Override

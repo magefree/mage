@@ -14,11 +14,7 @@ import java.util.List;
 public class Momir extends DeckValidator {
 
     public Momir() {
-        this("Momir Basic");
-    }
-
-    public Momir(String name) {
-        super(name);
+        super("Momir Basic", "Momir");
     }
 
     @Override

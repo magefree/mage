@@ -27,7 +27,7 @@ public class Commander extends Constructed {
     protected boolean partnerAllowed = true;
 
     public Commander() {
-        this("Commander");
+        super("Commander");
         for (ExpansionSet set : Sets.getInstance().values()) {
             if (set.getSetType().isEternalLegal()) {
                 setCodes.add(set.getCode());
@@ -77,6 +77,10 @@ public class Commander extends Constructed {
 
     public Commander(String name) {
         super(name);
+    }
+
+    public Commander(String name, String shortName) {
+        super(name, shortName);
     }
 
     @Override
