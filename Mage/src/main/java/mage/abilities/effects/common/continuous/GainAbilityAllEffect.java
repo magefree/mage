@@ -12,7 +12,10 @@ import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.Locale;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * @author Loki
@@ -22,6 +25,7 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
     protected Ability ability;
     protected boolean excludeSource;
     protected FilterPermanent filter;
+    protected boolean forceQuotes = false;
 
     public GainAbilityAllEffect(Ability ability, Duration duration) {
         this(ability, duration, new FilterPermanent());
@@ -143,7 +147,7 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
 
         StringBuilder sb = new StringBuilder();
 
-        boolean quotes = (ability instanceof SimpleActivatedAbility) || (ability instanceof TriggeredAbility);
+        boolean quotes = forceQuotes || (ability instanceof SimpleActivatedAbility) || (ability instanceof TriggeredAbility);
         if (excludeSource) {
             sb.append("Other ");
         }
@@ -170,5 +174,13 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
             sb.append(' ').append(duration.toString());
         }
         return sb.toString();
+    }
+
+    /**
+     * Add quotes to gains abilities (by default static abilities don't have it)
+     */
+    public GainAbilityAllEffect withForceQuotes() {
+        this.forceQuotes = true;
+        return this;
     }
 }
