@@ -136,6 +136,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Forgotten Cave", 274, Rarity.UNCOMMON, mage.cards.f.ForgottenCave.class));
         cards.add(new SetCardInfo("Frantic Search", 111, Rarity.COMMON, mage.cards.f.FranticSearch.class));
         cards.add(new SetCardInfo("Frontier Bivouac", 275, Rarity.UNCOMMON, mage.cards.f.FrontierBivouac.class));
+        cards.add(new SetCardInfo("Frontier Warmonger", 52, Rarity.RARE, mage.cards.f.FrontierWarmonger.class));
         cards.add(new SetCardInfo("Frontline Medic", 89, Rarity.RARE, mage.cards.f.FrontlineMedic.class));
         cards.add(new SetCardInfo("Fumiko the Lowblood", 152, Rarity.RARE, mage.cards.f.FumikoTheLowblood.class));
         cards.add(new SetCardInfo("Garna, the Bloodflame", 213, Rarity.UNCOMMON, mage.cards.g.GarnaTheBloodflame.class));
