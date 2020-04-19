@@ -24,7 +24,7 @@ public final class ExtinctionEvent extends CardImpl {
     public ExtinctionEvent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}");
 
-        // Choose odd or even. Exile each creature with a converted mana cost of the chosen value.
+        // Choose odd or even. Exile each creature with converted mana cost of the chosen value.
         this.getSpellAbility().addEffect(new ExtinctionEventEffect());
     }
 
@@ -50,7 +50,7 @@ class ExtinctionEventEffect extends OneShotEffect {
 
     ExtinctionEventEffect() {
         super(Outcome.Benefit);
-        staticText = "Choose odd or even. Exile each creature with a converted mana cost of the chosen value.";
+        staticText = "Choose odd or even. Exile each creature with converted mana cost of the chosen value.";
     }
 
     private ExtinctionEventEffect(final ExtinctionEventEffect effect) {
