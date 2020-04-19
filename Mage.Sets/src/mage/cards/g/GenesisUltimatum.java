@@ -50,7 +50,7 @@ class GenesisUltimatumEffect extends OneShotEffect {
     GenesisUltimatumEffect() {
         super(Outcome.Benefit);
         staticText = "Look at the top five cards of your library. Put any number of permanent cards " +
-                "from among them onto the battlefield and the rest into your hand.";
+                "from among them onto the battlefield and the rest into your hand";
     }
 
     private GenesisUltimatumEffect(final GenesisUltimatumEffect effect) {
