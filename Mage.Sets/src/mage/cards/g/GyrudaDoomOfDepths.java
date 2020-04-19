@@ -112,7 +112,8 @@ class GyrudaDoomOfDepthsEffect extends OneShotEffect {
                 .flatMap(Collection::stream)
                 .forEach(cards::add);
         controller.moveCards(cards, Zone.GRAVEYARD, source, game);
-        cards.removeIf(cardId -> game.getState().getZone(cardId) != Zone.GRAVEYARD);
+        cards.removeIf(cardId -> game.getState().getZone(cardId) != Zone.GRAVEYARD
+                && game.getState().getZone(cardId) != Zone.EXILED);
         if (cards.isEmpty()) {
             return true;
         }
