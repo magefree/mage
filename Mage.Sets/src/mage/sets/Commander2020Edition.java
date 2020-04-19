@@ -260,6 +260,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Sawtusk Demolisher", 64, Rarity.RARE, mage.cards.s.SawtuskDemolisher.class));
         cards.add(new SetCardInfo("Scavenger Grounds", 306, Rarity.RARE, mage.cards.s.ScavengerGrounds.class));
         cards.add(new SetCardInfo("Secluded Steppe", 307, Rarity.UNCOMMON, mage.cards.s.SecludedSteppe.class));
+        cards.add(new SetCardInfo("Selective Adaptation", 65, Rarity.RARE, mage.cards.s.SelectiveAdaptation.class));
         cards.add(new SetCardInfo("Selesnya Sanctuary", 308, Rarity.COMMON, mage.cards.s.SelesnyaSanctuary.class));
         cards.add(new SetCardInfo("Shabraz, the Skyshark", 14, Rarity.MYTHIC, mage.cards.s.ShabrazTheSkyshark.class));
         cards.add(new SetCardInfo("Shadowblood Ridge", 309, Rarity.RARE, mage.cards.s.ShadowbloodRidge.class));
