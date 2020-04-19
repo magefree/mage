@@ -130,6 +130,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Exotic Orchard", 273, Rarity.RARE, mage.cards.e.ExoticOrchard.class));
         cards.add(new SetCardInfo("Fierce Guardianship", 35, Rarity.RARE, mage.cards.f.FierceGuardianship.class));
         cards.add(new SetCardInfo("Find // Finality", 212, Rarity.RARE, mage.cards.f.FindFinality.class));
+        cards.add(new SetCardInfo("Fireflux Squad", 51, Rarity.RARE, mage.cards.f.FirefluxSquad.class));
         cards.add(new SetCardInfo("Flawless Maneuver", 26, Rarity.RARE, mage.cards.f.FlawlessManeuver.class));
         cards.add(new SetCardInfo("Fluctuator", 241, Rarity.RARE, mage.cards.f.Fluctuator.class));
         cards.add(new SetCardInfo("Forgotten Cave", 274, Rarity.UNCOMMON, mage.cards.f.ForgottenCave.class));
