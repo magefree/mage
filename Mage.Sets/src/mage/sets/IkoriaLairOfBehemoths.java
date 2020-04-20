@@ -1,9 +1,14 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.cards.repository.CardCriteria;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
+import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -51,6 +56,8 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         return instance;
     }
 
+    private final List<CardInfo> savedSpecialLand = new ArrayList<>();
+
     private IkoriaLairOfBehemoths() {
         super("Ikoria: Lair of Behemoths", "IKO", ExpansionSet.buildDate(2020, 4, 24), SetType.EXPANSION);
         this.blockName = "Ikoria: Lair of Behemoths";
@@ -61,6 +68,11 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
         this.maxCardNumberInBooster = 274;
+
+        // About half of boosters will have a gainland rather than a basic
+        // Source: https://twitter.com/GavinVerhey/status/1248731315412717568
+        this.ratioBoosterSpecialLand = 2;
+        this.ratioBoosterSpecialLandNumerator = 1;
 
         cards.add(new SetCardInfo("Adaptive Shimmerer", 1, Rarity.COMMON, mage.cards.a.AdaptiveShimmerer.class));
         cards.add(new SetCardInfo("Adventurous Impulse", 142, Rarity.COMMON, mage.cards.a.AdventurousImpulse.class));
@@ -335,5 +347,44 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Zirda, the Dawnwaker", 233, Rarity.RARE, mage.cards.z.ZirdaTheDawnwaker.class));
 
         cards.removeIf(setCardInfo -> mutateNames.contains(setCardInfo.getName())); // remove when mutate is implemented
+    }
+
+    @Override
+    public List<CardInfo> getCardsByRarity(Rarity rarity) {
+        if (rarity != Rarity.COMMON) {
+            return super.getCardsByRarity(rarity);
+        }
+        List<CardInfo> savedCardsInfos = savedCards.get(rarity);
+        if (savedCardsInfos != null) {
+            return new ArrayList(savedCardsInfos);
+        }
+        CardCriteria criteria = new CardCriteria();
+        criteria.setCodes(this.code).notTypes(CardType.LAND);
+        criteria.rarities(rarity).doubleFaced(false);
+        savedCardsInfos = CardRepository.instance.findCards(criteria);
+        if (maxCardNumberInBooster != Integer.MAX_VALUE) {
+            savedCardsInfos.removeIf(next -> next.getCardNumberAsInt() > maxCardNumberInBooster);
+        }
+        criteria = new CardCriteria();
+        criteria.setCodes(this.code).nameExact("Evolving Wilds");
+        savedCardsInfos.addAll(CardRepository.instance.findCards(criteria));
+        savedCards.put(rarity, savedCardsInfos);
+        // Return a copy of the saved cards information, as not to modify the original.
+        return new ArrayList(savedCardsInfos);
+    }
+
+    @Override
+    // the common taplands replacing the basic land
+    public List<CardInfo> getSpecialLand() {
+        if (savedSpecialLand.isEmpty()) {
+            CardCriteria criteria = new CardCriteria();
+            criteria.setCodes(this.code);
+            criteria.rarities(Rarity.COMMON);
+            criteria.types(CardType.LAND);
+            savedSpecialLand.addAll(CardRepository.instance.findCards(criteria));
+            savedSpecialLand.removeIf(cardInfo -> "Evolving Wilds".equals(cardInfo.getName()));
+        }
+
+        return new ArrayList(savedSpecialLand);
     }
 }
