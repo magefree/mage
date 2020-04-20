@@ -1,8 +1,7 @@
 package mage.abilities.keyword;
 
-import mage.abilities.MageSingleton;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.constants.Zone;
+import mage.MageObject;
+import mage.game.Game;
 
 import java.io.ObjectStreamException;
 
@@ -12,7 +11,7 @@ import java.io.ObjectStreamException;
  *
  * @author igoudt
  */
-public class HexproofFromWhiteAbility extends SimpleStaticAbility implements MageSingleton, HexproofInterface {
+public class HexproofFromWhiteAbility extends HexproofBaseAbility {
 
     private static final HexproofFromWhiteAbility instance;
 
@@ -29,7 +28,12 @@ public class HexproofFromWhiteAbility extends SimpleStaticAbility implements Mag
     }
 
     private HexproofFromWhiteAbility() {
-        super(Zone.BATTLEFIELD, null);
+        super();
+    }
+
+    @Override
+    public boolean checkObject(MageObject source, Game game) {
+        return source.getColor(game).isWhite();
     }
 
     @Override
