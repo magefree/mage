@@ -2,14 +2,12 @@
 package mage.cards.d;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
@@ -19,14 +17,13 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.combat.CombatGroup;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTargets;
 
 /**
  *
- * @author jerekwilson
+ * @author jerekwilson, ciaccona007
  */
 public final class DeadIronSledge extends CardImpl {
 
@@ -35,7 +32,7 @@ public final class DeadIronSledge extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Whenever equipped creature blocks or becomes blocked by a creature, destroy both creatures.
-        this.addAbility(new DeadIronSledgeTriggeredAbility());
+        this.addAbility(new DeadIronSledgeTriggeredAbility(new DeadIronSledgeDestroyEffect(), false));
 
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
@@ -54,70 +51,52 @@ public final class DeadIronSledge extends CardImpl {
 
 class DeadIronSledgeTriggeredAbility extends TriggeredAbilityImpl {
 
-    private Set<UUID> possibleTargets = new HashSet<>();
-
-    DeadIronSledgeTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DeadIronSledgeDestroyEffect(), false);
+    public DeadIronSledgeTriggeredAbility(Effect effect, boolean optional) {
+        super(Zone.BATTLEFIELD, effect, optional);
     }
 
-    DeadIronSledgeTriggeredAbility(final DeadIronSledgeTriggeredAbility ability) {
+    public DeadIronSledgeTriggeredAbility(final DeadIronSledgeTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DECLARED_BLOCKERS;
+        return event.getType() == GameEvent.EventType.BLOCKER_DECLARED;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        List<Permanent> targetPermanents = new ArrayList<>();
-        Permanent equipment = game.getPermanentOrLKIBattlefield((this.getSourceId()));
+        Permanent equipment = game.getPermanent(sourceId);
         if (equipment != null && equipment.getAttachedTo() != null) {
-            Permanent equippedPermanent = game.getPermanentOrLKIBattlefield((equipment.getAttachedTo()));
-            if (equippedPermanent != null) {
-                possibleTargets.clear();
-                if (equippedPermanent.isBlocked(game)) {
-                    possibleTargets.add(equippedPermanent.getId()); //add equipped creature to target list
-                }
-                if (equippedPermanent.isAttacking()) {
-                    for (CombatGroup group : game.getCombat().getGroups()) {
-                        if (group.getAttackers().contains(equippedPermanent.getId())) {
-                            possibleTargets.addAll(group.getBlockers());
-                        }
-                    }
-                } else if (equippedPermanent.getBlocking() > 0) {
-                    for (CombatGroup group : game.getCombat().getGroups()) {
-                        if (group.getBlockers().contains(equippedPermanent.getId())) {
-                            possibleTargets.addAll(group.getAttackers());
-                        }
-                    }
-                }
-                if (!possibleTargets.isEmpty()) {
-                    this.getTargets().clear();
+            Permanent equipped = game.getPermanent(equipment.getAttachedTo());
+            if (equipped.getId().equals(event.getTargetId()) || equipped.getId().equals(event.getSourceId())) {
+                List<Permanent> targets = new ArrayList<>();
 
-                    for (UUID creatureId : possibleTargets) {
-                        Permanent target = game.getPermanentOrLKIBattlefield(creatureId);
-                        targetPermanents.add(target);
-                    }
-
-                    this.getEffects().get(0).setTargetPointer(new FixedTargets(targetPermanents, game));
-
-                    return true;
+                Permanent blocker = game.getPermanent(event.getSourceId());
+                if (blocker != null) {
+                    targets.add(blocker);
                 }
+
+                Permanent blocked = game.getPermanent(event.getTargetId());
+                if (blocked != null) {
+                    targets.add(blocked);
+                }
+                this.getEffects().get(0).setTargetPointer(new FixedTargets(targets, game));
+
+                return true;
             }
         }
         return false;
     }
 
     @Override
-    public TriggeredAbility copy() {
-        return new DeadIronSledgeTriggeredAbility(this);
+    public String getRule() {
+        return "Whenever equipped creature blocks or becomes blocked by a creature, " + super.getRule();
     }
 
     @Override
-    public String getRule() {
-        return "Whenever equipped creature blocks or becomes blocked by a creature, destroy both creatures.";
+    public DeadIronSledgeTriggeredAbility copy() {
+        return new DeadIronSledgeTriggeredAbility(this);
     }
 }
 
