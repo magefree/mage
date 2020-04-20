@@ -9,10 +9,6 @@ public class AbilityCounter extends Counter {
 
     private final Ability ability;
 
-    AbilityCounter(Ability ability) {
-        this(ability, 1);
-    }
-
     AbilityCounter(Ability ability, int count) {
         super(ability.getRule(), count);
         this.ability = ability;

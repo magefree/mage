@@ -208,27 +208,27 @@ public enum CounterType {
             case M2M2:
                 return new BoostCounter(-2, -2, amount);
             case DEATHTOUCH:
-                return new AbilityCounter(DeathtouchAbility.getInstance());
+                return new AbilityCounter(DeathtouchAbility.getInstance(), amount);
             case DOUBLE_STRIKE:
-                return new AbilityCounter(DoubleStrikeAbility.getInstance());
+                return new AbilityCounter(DoubleStrikeAbility.getInstance(), amount);
             case FIRST_STRIKE:
-                return new AbilityCounter(FirstStrikeAbility.getInstance());
+                return new AbilityCounter(FirstStrikeAbility.getInstance(), amount);
             case FLYING:
-                return new AbilityCounter(FlyingAbility.getInstance());
+                return new AbilityCounter(FlyingAbility.getInstance(), amount);
             case HEXPROOF:
-                return new AbilityCounter(HexproofAbility.getInstance());
+                return new AbilityCounter(HexproofAbility.getInstance(), amount);
             case INDESTRUCTIBLE:
-                return new AbilityCounter(IndestructibleAbility.getInstance());
+                return new AbilityCounter(IndestructibleAbility.getInstance(), amount);
             case LIFELINK:
-                return new AbilityCounter(LifelinkAbility.getInstance());
+                return new AbilityCounter(LifelinkAbility.getInstance(), amount);
             case MENACE:
-                return new AbilityCounter(new MenaceAbility());
+                return new AbilityCounter(new MenaceAbility(), amount);
             case REACH:
-                return new AbilityCounter(ReachAbility.getInstance());
+                return new AbilityCounter(ReachAbility.getInstance(), amount);
             case TRAMPLE:
-                return new AbilityCounter(TrampleAbility.getInstance());
+                return new AbilityCounter(TrampleAbility.getInstance(), amount);
             case VIGILANCE:
-                return new AbilityCounter(VigilanceAbility.getInstance());
+                return new AbilityCounter(VigilanceAbility.getInstance(), amount);
             default:
                 return new Counter(name, amount);
         }
