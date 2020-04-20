@@ -168,6 +168,13 @@ public class DoIfCostPaid extends OneShotEffect {
     }
 
     @Override
+    public void setValue(String key, Object value) {
+        super.setValue(key, value);
+        this.executingEffects.setValue(key, value);
+        this.otherwiseEffects.setValue(key, value);
+    }
+
+    @Override
     public DoIfCostPaid copy() {
         return new DoIfCostPaid(this);
     }
