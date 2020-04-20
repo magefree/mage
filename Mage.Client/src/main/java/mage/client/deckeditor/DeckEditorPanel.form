@@ -472,7 +472,7 @@
             </Container>
           </SubComponents>
         </Container>
-        <Component class="mage.client.dialog.DeckLegalityPanel" name="deckLegalityDisplay">
+        <Component class="mage.client.deckeditor.DeckLegalityPanel" name="deckLegalityDisplay">
           <Properties>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[245, 32767]"/>

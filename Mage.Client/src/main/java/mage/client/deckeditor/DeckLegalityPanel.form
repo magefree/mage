@@ -24,7 +24,7 @@
     <Property name="alignment" type="int" value="3"/>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="previewUknown">
+    <Component class="javax.swing.JLabel" name="previewUnknown">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ae" green="ae" red="ae" type="rgb"/>
@@ -40,7 +40,7 @@
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[75, 25]"/>
         </Property>
-        <Property name="name" type="java.lang.String" value="previewUknown" noResource="true"/>
+        <Property name="name" type="java.lang.String" value="previewUnknown" noResource="true"/>
         <Property name="opaque" type="boolean" value="true"/>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[75, 25]"/>
