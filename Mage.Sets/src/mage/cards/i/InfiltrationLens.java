@@ -57,7 +57,7 @@ class EquippedBecomesBlockedTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.CREATURE_BLOCKED;
+        return event.getType() == EventType.BLOCKER_DECLARED;
     }
 
     @Override
