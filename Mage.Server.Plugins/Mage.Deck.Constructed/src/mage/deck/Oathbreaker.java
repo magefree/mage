@@ -11,7 +11,7 @@ import mage.util.ManaUtil;
 import java.util.*;
 
 /**
- * @author JayDi85
+ * @author JayDi85, Elandril
  */
 public class Oathbreaker extends Vintage {
 
@@ -81,6 +81,7 @@ public class Oathbreaker extends Vintage {
     @Override
     public boolean validate(Deck deck) {
         boolean valid = true;
+        invalid.clear();
 
         if (deck.getCards().size() + deck.getSideboard().size() != 60) {
             invalid.put("Deck", "Must contain " + 60 + " cards: has " + (deck.getCards().size() + deck.getSideboard().size()) + " cards");

@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author spjspj
+ * @author spjspj, Elandril
  */
 public class AusHighlander extends Constructed {
 
@@ -92,6 +92,7 @@ public class AusHighlander extends Constructed {
     @Override
     public boolean validate(Deck deck) {
         boolean valid = true;
+        invalid.clear();
 
         if (deck.getCards().size() != getDeckMinSize()) {
             invalid.put("Deck", "Must contain " + getDeckMinSize() + " singleton cards: has " + (deck.getCards().size()) + " cards");

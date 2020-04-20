@@ -12,7 +12,7 @@ import mage.util.ManaUtil;
 import java.util.*;
 
 /**
- * @author spjspj
+ * @author spjspj, Elandril
  */
 public class Brawl extends Constructed {
 
@@ -38,6 +38,7 @@ public class Brawl extends Constructed {
     @Override
     public boolean validate(Deck deck) {
         boolean valid = true;
+        invalid.clear();
         Card brawler = null;
         Card companion = null;
         FilterMana colorIdentity = new FilterMana();

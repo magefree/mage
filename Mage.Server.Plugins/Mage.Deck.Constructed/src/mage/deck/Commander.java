@@ -18,7 +18,7 @@ import mage.util.ManaUtil;
 import java.util.*;
 
 /**
- * @author Plopman
+ * @author Plopman, Elandril
  */
 public class Commander extends Constructed {
 
@@ -96,6 +96,7 @@ public class Commander extends Constructed {
     @Override
     public boolean validate(Deck deck) {
         boolean valid = true;
+        invalid.clear();
         FilterMana colorIdentity = new FilterMana();
         Set<Card> commanders = new HashSet<>();
         Card companion = null;

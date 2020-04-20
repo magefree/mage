@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author JRHerlehy
+ * @author JRHerlehy, Elandril
  */
 public class TinyLeaders extends Constructed {
 
@@ -103,6 +103,7 @@ public class TinyLeaders extends Constructed {
     @Override
     public boolean validate(Deck deck) {
         boolean valid = true;
+        invalid.clear();
 
         if (deck.getCards().size() != getDeckMinSize()) {
             invalid.put("Deck", "Must contain " + getDeckMinSize() + " cards: has " + deck.getCards().size() + " cards");

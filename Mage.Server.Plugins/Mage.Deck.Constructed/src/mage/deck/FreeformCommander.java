@@ -15,7 +15,7 @@ import mage.util.ManaUtil;
 import java.util.*;
 
 /**
- * @author spjspj
+ * @author spjspj, Elandril
  */
 public class FreeformCommander extends Constructed {
 
@@ -53,6 +53,7 @@ public class FreeformCommander extends Constructed {
     @Override
     public boolean validate(Deck deck) {
         boolean valid = true;
+        invalid.clear();
         FilterMana colorIdentity = new FilterMana();
         Set<Card> commanders = new HashSet<>();
         Card companion = null;
