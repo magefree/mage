@@ -945,6 +945,7 @@ public class ContinuousEffects implements Serializable {
         Map<ContinuousEffect, Set<UUID>> waitingEffects = new LinkedHashMap<>();
         Set<UUID> appliedEffects = new HashSet<>();
         applyCounters.apply(Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, null, game);
+        activeLayerEffects=getLayeredEffects(game);
 
         while (!done) { // loop needed if a added effect adds again an effect (e.g. Level 5- of Joraga Treespeaker)
             done = true;
