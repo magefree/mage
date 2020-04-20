@@ -1,4 +1,3 @@
-
 package mage.filter.predicate.mageobject;
 
 import mage.MageObject;
@@ -13,9 +12,9 @@ import mage.game.Game;
  */
 public class AbilityPredicate implements Predicate<MageObject> {
 
-    private final Class<?> abilityClass;
+    private final Class<? extends Ability> abilityClass;
 
-    public AbilityPredicate(Class<?> abilityClass) {
+    public AbilityPredicate(Class<? extends Ability> abilityClass) {
         this.abilityClass = abilityClass;
     }
 
