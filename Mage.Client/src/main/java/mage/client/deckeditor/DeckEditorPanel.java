@@ -43,7 +43,7 @@ import static mage.cards.decks.DeckFormats.XMAGE;
 import static mage.cards.decks.DeckFormats.XMAGE_INFO;
 
 /**
- * @author BetaSteward_at_googlemail.com, JayDi85
+ * @author BetaSteward_at_googlemail.com, JayDi85, Elandril
  */
 public class DeckEditorPanel extends javax.swing.JPanel {
 
@@ -862,7 +862,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         panelDeckExit = new javax.swing.JPanel();
         btnExit = new javax.swing.JButton();
         txtTimeRemaining = new javax.swing.JTextField();
-        deckLegalityDisplay = new mage.client.dialog.DeckLegalityPanel();
+        deckLegalityDisplay = new mage.client.deckeditor.DeckLegalityPanel();
 
         panelRight.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
         panelRight.setResizeWeight(0.5);
@@ -1395,7 +1395,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     */
     private mage.client.deckeditor.CardSelector cardSelector;
     private mage.client.deckeditor.DeckArea deckArea;
-    private mage.client.dialog.DeckLegalityPanel deckLegalityDisplay;
+    private mage.client.deckeditor.DeckLegalityPanel deckLegalityDisplay;
     private javax.swing.JLabel lblDeckName;
     private javax.swing.JPanel panelDeck;
     private javax.swing.JPanel panelDeckCreate;
