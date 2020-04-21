@@ -37,6 +37,10 @@ import java.util.UUID;
 
 import static com.google.common.collect.Iterables.getOnlyElement;
 
+/**
+ *
+ * @author htrajan
+ */
 public final class TayamLuminousEnigma extends CardImpl {
 
     public TayamLuminousEnigma(UUID ownerId, CardSetInfo setInfo) {
