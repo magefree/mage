@@ -94,10 +94,6 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_PT, "UST", "Garbage Elemental");
         skipListAddName(SKIP_LIST_PT, "UST", "Infinity Elemental");
         skipListAddName(SKIP_LIST_PT, "UNH", "Old Fogey");
-        // the following are temporary
-        skipListAddName(SKIP_LIST_PT, "IKO", "Chevill, Bane of Monsters");
-        skipListAddName(SKIP_LIST_PT, "IKO", "General Kudro of Drannith");
-        skipListAddName(SKIP_LIST_PT, "IKO", "Frillscare Mentor");
 
         // color
         skipListCreate(SKIP_LIST_COLOR);
