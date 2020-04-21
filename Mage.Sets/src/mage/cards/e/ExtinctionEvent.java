@@ -50,7 +50,7 @@ class ExtinctionEventEffect extends OneShotEffect {
 
     ExtinctionEventEffect() {
         super(Outcome.Benefit);
-        staticText = "Choose odd or even. Exile each creature with converted mana cost of the chosen value.";
+        staticText = "Choose odd or even. Exile each creature with converted mana cost of the chosen value. <i>(Zero is even.)</i>";
     }
 
     private ExtinctionEventEffect(final ExtinctionEventEffect effect) {

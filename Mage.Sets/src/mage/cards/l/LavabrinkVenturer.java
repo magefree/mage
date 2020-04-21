@@ -10,7 +10,6 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.DependencyType;
 import mage.constants.SubType;
 import mage.filter.FilterObject;
 import mage.filter.predicate.mageobject.ConvertedManaCostParityPredicate;
@@ -33,7 +32,8 @@ public final class LavabrinkVenturer extends CardImpl {
 
         // As Lavabrink Venturer enters the battlefield, choose odd or even.
         this.addAbility(new AsEntersBattlefieldAbility(
-                new ChooseModeEffect("Odd or even?", "Odd", "Even")
+                new ChooseModeEffect("Odd or even?", "Odd", "Even"),
+                "choose odd or even. <i>(Zero is even.)</i>"
         ));
 
         // Lavabrink Venturer has protection from each converted mana cost of the chosen value.
@@ -66,7 +66,7 @@ class LavabrinkVenturerEffect extends GainAbilitySourceEffect {
     LavabrinkVenturerEffect() {
         super(new ProtectionAbility(nullFilter));
         this.ability.setRuleVisible(false);
-        staticText = "{this} has protection from each converted mana cost of the chosen value.";
+        staticText = "{this} has protection from each converted mana cost of the chosen value. <i>(Zero is even.)</i>";
     }
 
     private LavabrinkVenturerEffect(final LavabrinkVenturerEffect effect) {
