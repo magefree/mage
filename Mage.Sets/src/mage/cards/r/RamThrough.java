@@ -92,10 +92,10 @@ class RamThroughEffect extends OneShotEffect {
             lethal = Math.min(lethal, 1);
         }
         lethal = Math.min(lethal, power);
-        anotherPermanent.damage(lethal, source.getSourceId(), game);
+        anotherPermanent.damage(lethal, myPermanent.getId(), game);
         Player player = game.getPlayer(anotherPermanent.getControllerId());
         if (player != null && lethal < power) {
-            player.damage(power - lethal, source.getSourceId(), game);
+            player.damage(power - lethal, myPermanent.getId(), game);
         }
         return true;
     }
