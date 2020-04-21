@@ -31,7 +31,7 @@ public final class SharkTyphoon extends CardImpl {
 
         // Whenever you cast a noncreature spell, create an X/X blue Shark creature token with flying, where X is that spell's converted mana cost.
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                new SharkTyphoonCastEffect(), StaticFilters.FILTER_SPELL_A_NON_CREATURE, true
+                new SharkTyphoonCastEffect(), StaticFilters.FILTER_SPELL_A_NON_CREATURE, false
         ));
 
         // Cycling {X}{1}{U}
@@ -81,7 +81,7 @@ class SharkTyphoonCastEffect extends OneShotEffect {
 class SharkTyphoonTriggeredAbility extends ZoneChangeTriggeredAbility {
 
     SharkTyphoonTriggeredAbility() {
-        super(Zone.ALL, null, "When you cycle {this}, ", false);
+        super(Zone.ALL, null, "", false);
     }
 
     private SharkTyphoonTriggeredAbility(SharkTyphoonTriggeredAbility ability) {
@@ -103,12 +103,17 @@ class SharkTyphoonTriggeredAbility extends ZoneChangeTriggeredAbility {
             return false;
         }
         this.getEffects().clear();
-        this.addEffect(new CreateTokenEffect(new SharkToken(object.getManaCost().getX())));
+        this.addEffect(new CreateTokenEffect(new SharkToken(object.getStackAbility().getManaCostsToPay().getX())));
         return true;
     }
 
     @Override
     public SharkTyphoonTriggeredAbility copy() {
         return new SharkTyphoonTriggeredAbility(this);
+    }
+
+    @Override
+    public String getRule() {
+        return "When you cycle {this}, create an X/X blue Shark creature token with flying.";
     }
 }
