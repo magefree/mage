@@ -46,7 +46,8 @@ public final class ChevillBaneOfMonsters extends CardImpl {
         filter3.add(predicate);
     }
 
-    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.EQUAL_TO, 0);
+    private static final Condition condition
+            = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.EQUAL_TO, 0, false);
 
     public ChevillBaneOfMonsters(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{G}");
