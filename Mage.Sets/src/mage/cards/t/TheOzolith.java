@@ -171,9 +171,11 @@ class TheOzolithMoveCountersEffect extends OneShotEffect {
             return false;
         }
         permanent.getCounters(game)
+                .copy()
                 .values()
                 .stream()
-                .forEach(counter -> creature.addCounters(counter, source, game));
+                .filter(counter -> creature.addCounters(counter, source, game))
+                .forEach(counter -> permanent.removeCounters(counter, game));
         return true;
     }
 }
