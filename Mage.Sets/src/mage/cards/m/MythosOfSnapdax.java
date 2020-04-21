@@ -10,23 +10,18 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Outcome;
+import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterArtifactPermanent;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.common.FilterEnchantmentPermanent;
-import mage.filter.common.FilterPlaneswalkerPermanent;
+import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetArtifactPermanent;
 import mage.watchers.common.ManaSpentToCastWatcher;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author Emigara
@@ -56,15 +51,21 @@ class MythosOfSnapdaxEffect extends OneShotEffect {
             new ManaWasSpentCondition(ColoredManaSymbol.R),
             new ManaWasSpentCondition(ColoredManaSymbol.B)
     );
+    private static final List<CardType> cardTypes = Arrays.asList(
+            CardType.ARTIFACT,
+            CardType.CREATURE,
+            CardType.ENCHANTMENT,
+            CardType.PLANESWALKER
+    );
 
-    public MythosOfSnapdaxEffect() {
+    MythosOfSnapdaxEffect() {
         super(Outcome.Benefit);
         this.staticText = "Each player chooses an artifact, a creature, an enchantment, and a planeswalker " +
                 "from among the nonland permanents they control, then sacrifices the rest. " +
                 "If {B}{R} was spent to cast this spell, you choose the permanents for each player instead.";
     }
 
-    public MythosOfSnapdaxEffect(final MythosOfSnapdaxEffect effect) {
+    private MythosOfSnapdaxEffect(final MythosOfSnapdaxEffect effect) {
         super(effect);
     }
 
@@ -79,110 +80,48 @@ class MythosOfSnapdaxEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        Set<Permanent> choosenPermanent = new HashSet<>();
-        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                FilterArtifactPermanent filterArtifactPermanent = new FilterArtifactPermanent("an artifact of " + player.getName());
-                filterArtifactPermanent.add(new ControllerIdPredicate(playerId));
-                Target target1 = new TargetArtifactPermanent(1, 1, filterArtifactPermanent, true);
+        boolean conditionMet = condition.apply(game, source);
 
-                FilterCreaturePermanent filterCreaturePermanent = new FilterCreaturePermanent("a creature of " + player.getName());
-                filterCreaturePermanent.add(new ControllerIdPredicate(playerId));
-                Target target2 = new TargetPermanent(1, 1, filterCreaturePermanent, true);
+        List<Player> playerList = game
+                .getState()
+                .getPlayersInRange(source.getControllerId(), game)
+                .stream()
+                .map(game::getPlayer)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
 
-                FilterEnchantmentPermanent filterEnchantmentPermanent = new FilterEnchantmentPermanent("an enchantment of " + player.getName());
-                filterEnchantmentPermanent.add(new ControllerIdPredicate(playerId));
-                Target target3 = new TargetPermanent(1, 1, filterEnchantmentPermanent, true);
-
-                FilterPlaneswalkerPermanent filterPlaneswalkerPermanent = new FilterPlaneswalkerPermanent("a planeswalker of " + player.getName());
-                filterPlaneswalkerPermanent.add(new ControllerIdPredicate(playerId));
-                Target target4 = new TargetPermanent(1, 1, filterPlaneswalkerPermanent, true);
-
-                //if the mana condition wasn't met
-                if (!condition.apply(game, source)) {
-                    if (target1.canChoose(source.getSourceId(), controller.getId(), game)) {
-                        controller.chooseTarget(Outcome.Benefit, target1, source, game);
-                        Permanent artifact = game.getPermanent(target1.getFirstTarget());
-                        if (artifact != null) {
-                            choosenPermanent.add(artifact);
-                        }
-                        target1.clearChosen();
-                    }
-                    if (target2.canChoose(source.getSourceId(), controller.getId(), game)) {
-                        controller.chooseTarget(Outcome.Benefit, target2, source, game);
-                        Permanent creature = game.getPermanent(target2.getFirstTarget());
-                        if (creature != null) {
-                            choosenPermanent.add(creature);
-                        }
-                        target2.clearChosen();
-                    }
-                    if (target3.canChoose(source.getSourceId(), controller.getId(), game)) {
-                        controller.chooseTarget(Outcome.Benefit, target3, source, game);
-                        Permanent enchantment = game.getPermanent(target3.getFirstTarget());
-                        if (enchantment != null) {
-                            choosenPermanent.add(enchantment);
-                        }
-                        target3.clearChosen();
-                    }
-                    if (target4.canChoose(source.getSourceId(), controller.getId(), game)) {
-                        controller.chooseTarget(Outcome.Benefit, target4, source, game);
-                        Permanent planeswalker = game.getPermanent(target4.getFirstTarget());
-                        if (planeswalker != null) {
-                            choosenPermanent.add(planeswalker);
-                        }
-                        target4.clearChosen();
-                    }
-                    //if the mana condition was met
+        Set<UUID> toKeep = new HashSet();
+        for (Player player : playerList) {
+            for (CardType cardType : cardTypes) {
+                String message = cardType.toString().equals("Artifact") ? "an " : "a ";
+                message += cardType.toString().toLowerCase();
+                message += (conditionMet && player != controller) ? " controlled by " + player.getName() : " you control";
+                FilterPermanent filter = new FilterNonlandPermanent(message);
+                filter.add(cardType.getPredicate());
+                filter.add(new ControllerIdPredicate(player.getId()));
+                if (game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) == 0) {
+                    continue;
+                }
+                TargetPermanent target = new TargetPermanent(filter);
+                target.setNotTarget(true);
+                if (conditionMet) {
+                    controller.choose(outcome, target, source.getSourceId(), game);
                 } else {
-                    if (target1.canChoose(source.getSourceId(), controller.getId(), game)) {
-                        player.chooseTarget(Outcome.Benefit, target1, source, game);
-                        Permanent artifact = game.getPermanent(target1.getFirstTarget());
-                        if (artifact != null) {
-                            choosenPermanent.add(artifact);
-                        }
-                        target1.clearChosen();
-                    }
-                    if (target2.canChoose(source.getSourceId(), controller.getId(), game)) {
-                        player.chooseTarget(Outcome.Benefit, target2, source, game);
-                        Permanent creature = game.getPermanent(target2.getFirstTarget());
-                        if (creature != null) {
-                            choosenPermanent.add(creature);
-                        }
-                        target2.clearChosen();
-                    }
-                    if (target3.canChoose(source.getSourceId(), controller.getId(), game)) {
-                        player.chooseTarget(Outcome.Benefit, target3, source, game);
-                        Permanent enchantment = game.getPermanent(target3.getFirstTarget());
-                        if (enchantment != null) {
-                            choosenPermanent.add(enchantment);
-                        }
-                        target3.clearChosen();
-                    }
-                    if (target4.canChoose(source.getSourceId(), controller.getId(), game)) {
-                        player.chooseTarget(Outcome.Benefit, target4, source, game);
-                        Permanent planeswalker = game.getPermanent(target4.getFirstTarget());
-                        if (planeswalker != null) {
-                            choosenPermanent.add(planeswalker);
-                        }
-                        target4.clearChosen();
-                    }
+                    player.choose(outcome, target, source.getSourceId(), game);
                 }
-            }
-        }
-        // Then each player sacrifices all other nonland permanents they control
-        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENTS_NON_LAND, playerId, game)) {
-                    if (!choosenPermanent.contains(permanent)) {
-                        permanent.sacrifice(playerId, game);
-                    }
-                }
+                toKeep.add(target.getFirstTarget());
             }
         }
 
+        for (Iterator<Permanent> iterator = game.getBattlefield().getActivePermanents(
+                StaticFilters.FILTER_PERMANENT_NON_LAND, source.getControllerId(), game
+        ).iterator(); iterator.hasNext(); ) {
+            Permanent permanent = iterator.next();
+            if (permanent == null || toKeep.contains(permanent.getId())) {
+                continue;
+            }
+            permanent.sacrifice(source.getSourceId(), game);
+        }
         return true;
-
     }
 }
