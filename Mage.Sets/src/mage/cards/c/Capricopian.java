@@ -77,7 +77,7 @@ class CapricopianActivatedAbility extends ActivatedAbilityImpl {
     public String getRule() {
         return "{2}: Put a +1/+1 counter on {this}, then you may reselect which player {this} is attacking. " +
                 "Only the player {this} is attacking may activate this ability " +
-                "and only during the declare attackers step. <i>(It can’t attack its controller.)</i>";
+                "and only during the declare attackers step. <i>(It can't attack its controller.)</i>";
     }
 
     @Override
