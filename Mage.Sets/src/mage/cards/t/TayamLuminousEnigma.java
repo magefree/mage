@@ -4,6 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.RemoveCounterCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
@@ -11,7 +12,10 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.choices.Choice;
+import mage.choices.ChoiceImpl;
 import mage.constants.*;
+import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -27,15 +31,13 @@ import mage.target.TargetCard;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
+import static com.google.common.collect.Iterables.getOnlyElement;
+
 public final class TayamLuminousEnigma extends CardImpl {
-
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("among creatures you control");
-
-    static {
-        filter.add(new CounterPredicate(null));
-    }
 
     public TayamLuminousEnigma(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{B}{G}");
@@ -53,7 +55,7 @@ public final class TayamLuminousEnigma extends CardImpl {
         PutTopCardOfLibraryIntoGraveControllerEffect millEffect = new PutTopCardOfLibraryIntoGraveControllerEffect(3);
         millEffect.concatBy(".");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, millEffect, new GenericManaCost(3));
-        ability.addCost(new RemoveCounterCost(new TargetPermanent(1, 3, filter, true), null, 3));
+        ability.addCost(new TayamLuminousEnigmaCost());
         TayamLuminousEnigmaEffect effect = new TayamLuminousEnigmaEffect();
         effect.setText(", then return a permanent card with converted mana cost 3 or less from your graveyard to the battlefield");
         ability.addEffect(effect);
@@ -67,6 +69,90 @@ public final class TayamLuminousEnigma extends CardImpl {
     @Override
     public TayamLuminousEnigma copy() {
         return new TayamLuminousEnigma(this);
+    }
+}
+
+class TayamLuminousEnigmaCost extends RemoveCounterCost {
+
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a creature with a counter among creatures you control");
+
+    static {
+        filter.add(new CounterPredicate(null));
+    }
+
+    public TayamLuminousEnigmaCost() {
+        super(new TargetPermanent(1, 1, filter, true), null, 3);
+    }
+
+    public TayamLuminousEnigmaCost(TayamLuminousEnigmaCost cost) {
+        super(cost);
+    }
+
+    @Override
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
+        paid = false;
+        int countersRemoved = 0;
+        Player controller = game.getPlayer(controllerId);
+        for (int i = 0; i < countersToRemove; i++) {
+            if (target.choose(Outcome.UnboostCreature, controllerId, sourceId, game)) {
+                UUID targetId = getOnlyElement(target.getTargets());
+                Permanent permanent = game.getPermanent(targetId);
+                if (permanent != null) {
+                    if (!permanent.getCounters(game).isEmpty()) {
+                        String counterName = null;
+                        if (permanent.getCounters(game).size() > 1) {
+                            Choice choice = new ChoiceImpl(true);
+                            Set<String> choices = new HashSet<>();
+                            for (Counter counter : permanent.getCounters(game).values()) {
+                                if (permanent.getCounters(game).getCount(counter.getName()) > 0) {
+                                    choices.add(counter.getName());
+                                }
+                            }
+                            choice.setChoices(choices);
+                            choice.setMessage("Choose a counter to remove from " + permanent.getLogName());
+                            if (!controller.choose(Outcome.UnboostCreature, choice, game)) {
+                                return false;
+                            }
+                            counterName = choice.getChoice();
+                        } else {
+                            for (Counter counter : permanent.getCounters(game).values()) {
+                                if (counter.getCount() > 0) {
+                                    counterName = counter.getName();
+                                }
+                            }
+                        }
+                        if (counterName != null) {
+                            permanent.removeCounters(counterName, 1, game);
+                            target.clearChosen();
+                            if (!game.isSimulation()) {
+                                game.informPlayers(new StringBuilder(controller.getLogName())
+                                        .append(" removes a ")
+                                        .append(counterName).append(" counter from ")
+                                        .append(permanent.getName()).toString());
+                            }
+                            countersRemoved++;
+                            if (countersRemoved == countersToRemove) {
+                                paid = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+            } else {
+                break;
+            }
+        }
+        return paid;
+    }
+
+    @Override
+    public TayamLuminousEnigmaCost copy() {
+        return new TayamLuminousEnigmaCost(this);
+    }
+
+    @Override
+    public String getText() {
+        return "Remove three counters from among creatures you control";
     }
 }
 
