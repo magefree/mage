@@ -18,7 +18,7 @@ public class DiscardHandControllerEffect extends OneShotEffect {
 
     public DiscardHandControllerEffect() {
         super(Outcome.Discard);
-        this.staticText = "Discard your hand";
+        this.staticText = "discard your hand";
     }
 
     public DiscardHandControllerEffect(final DiscardHandControllerEffect effect) {
