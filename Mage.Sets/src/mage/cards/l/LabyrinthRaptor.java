@@ -29,7 +29,7 @@ import java.util.UUID;
  */
 public final class LabyrinthRaptor extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you control with menace");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature you control with menace");
 
     static {
         filter.add(new AbilityPredicate(MenaceAbility.class));
@@ -60,7 +60,7 @@ public final class LabyrinthRaptor extends CardImpl {
 
         // {B}{R}: Creatures you control with menace get +1/+0 until end of turn.
         this.addAbility(new SimpleActivatedAbility(new BoostAllEffect(
-                1, 0, Duration.WhileOnBattlefield, filter2, false
+                1, 0, Duration.EndOfTurn, filter2, false
         ), new ManaCostsImpl("{B}{R}")));
     }
 
