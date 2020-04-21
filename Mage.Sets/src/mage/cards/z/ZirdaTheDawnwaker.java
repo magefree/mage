@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -79,7 +78,9 @@ enum ZirdaTheDawnwakerCompanionCondition implements CompanionCondition {
                 .allMatch(card -> card
                         .getAbilities()
                         .stream()
-                        .anyMatch(ActivatedAbility.class::isInstance)
+                        .map(Ability::getAbilityType)
+                        .anyMatch(abilityType -> abilityType == AbilityType.ACTIVATED
+                                || abilityType == AbilityType.MANA)
                 );
     }
 }
