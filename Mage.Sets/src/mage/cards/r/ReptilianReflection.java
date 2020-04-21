@@ -25,7 +25,8 @@ public final class ReptilianReflection extends CardImpl {
         // Whenever you cycle a card, Reptilian Reflection becomes a 5/4 Dinosaur creature with trample and haste in addition to its other types until end of turn.
         this.addAbility(new CycleControllerTriggeredAbility(new BecomesCreatureSourceEffect(
                 new ReptilianReflectionToken(), "enchantment", Duration.EndOfTurn
-        ).setText("{this} becomes a 5/4 Dinosaur creature with trample and haste in addition to its other types until end of turn")));
+        ).setText("have {this} become a 5/4 Dinosaur creature with trample and haste " +
+                "in addition to its other types until end of turn"), true));
     }
 
     private ReptilianReflection(final ReptilianReflection card) {
