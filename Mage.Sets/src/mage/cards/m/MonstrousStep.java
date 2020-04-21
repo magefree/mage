@@ -1,9 +1,8 @@
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.effects.RequirementEffect;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
@@ -16,8 +15,9 @@ import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.BlockedAttackerWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author drowinternet
  */
 public final class MonstrousStep extends CardImpl {
@@ -30,8 +30,8 @@ public final class MonstrousStep extends CardImpl {
 
 
         // Target creature gets +7/+7 until end of turn.
-        this.getSpellAbility().addEffect(new BoostTargetEffect(7,7, Duration.EndOfTurn)
-                .setText("Target creature gets +7/+7 until end of turn."));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(7, 7, Duration.EndOfTurn)
+                .setText("Target creature gets +7/+7 until end of turn"));
 
         //Up to one target creature blocks it this turn if able.
         this.getSpellAbility().addEffect(new MonstrousStepEffect());
@@ -63,7 +63,7 @@ class MonstrousStepEffect extends RequirementEffect {
 
     public MonstrousStepEffect(Duration duration) {
         super(duration);
-        staticText = "Up to one target creature blocks it this turn if able.";
+        staticText = "Up to one other target creature blocks it this turn if able.";
     }
 
     public MonstrousStepEffect(final MonstrousStepEffect effect) {
