@@ -30,10 +30,8 @@ public final class OminousSeas extends CardImpl {
 
         // Remove eight foreshadow counters from Ominous Seas: Create an 8/8 blue Kraken creature token.
         this.addAbility(new SimpleActivatedAbility(
-                new CreateTokenEffect(new KrakenToken()),
-                new RemoveCountersSourceCost(
-                        CounterType.FORESHADOW.createInstance(8)
-                )
+                new CreateTokenEffect(new KrakenToken()).setText("create an 8/8 blue Kraken creature token"),
+                new RemoveCountersSourceCost(CounterType.FORESHADOW.createInstance(8))
         ));
 
         // Cycling {2}
