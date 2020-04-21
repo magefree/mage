@@ -16,10 +16,10 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.RandomUtil;
 
+import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -89,10 +89,9 @@ class CrystallineGiantEffect extends OneShotEffect {
             return false;
         }
         Counters counters = permanent.getCounters(game);
-        List<CounterType> counterTypes = counterTypeSet
-                .stream()
-                .filter(counterType -> !counters.containsKey(counterType))
-                .collect(Collectors.toList());
+        List<CounterType> counterTypes = new ArrayList();
+        counterTypes.addAll(counterTypeSet);
+        counterTypes.removeIf(counters::containsKey);
         if (counterTypes.size() == 0) {
             return false;
         }
