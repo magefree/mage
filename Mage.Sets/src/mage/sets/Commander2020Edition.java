@@ -142,6 +142,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Frontline Medic", 89, Rarity.RARE, mage.cards.f.FrontlineMedic.class));
         cards.add(new SetCardInfo("Fumiko the Lowblood", 152, Rarity.RARE, mage.cards.f.FumikoTheLowblood.class));
         cards.add(new SetCardInfo("Garna, the Bloodflame", 213, Rarity.UNCOMMON, mage.cards.g.GarnaTheBloodflame.class));
+        cards.add(new SetCardInfo("Gavi, Nest Warden", 7, Rarity.MYTHIC, mage.cards.g.GaviNestWarden.class));
         cards.add(new SetCardInfo("Gavony Township", 276, Rarity.RARE, mage.cards.g.GavonyTownship.class));
         cards.add(new SetCardInfo("Gaze of Granite", 214, Rarity.RARE, mage.cards.g.GazeOfGranite.class));
         cards.add(new SetCardInfo("Genesis Hydra", 172, Rarity.RARE, mage.cards.g.GenesisHydra.class));
