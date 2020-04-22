@@ -16,7 +16,7 @@ import mage.filter.common.FilterPermanentCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
-import mage.target.common.TargetCardInHand;
+import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
 
@@ -45,7 +45,7 @@ public final class GenesisUltimatum extends CardImpl {
 
 class GenesisUltimatumEffect extends OneShotEffect {
 
-    private static final FilterCard filter = new FilterPermanentCard();
+    private static final FilterCard filter = new FilterPermanentCard("any number of permanent cards");
 
     GenesisUltimatumEffect() {
         super(Outcome.Benefit);
@@ -69,8 +69,8 @@ class GenesisUltimatumEffect extends OneShotEffect {
             return false;
         }
         Cards toHand = new CardsImpl(player.getLibrary().getTopCards(game, 5));
-        player.lookAtCards("", toHand, game);
-        TargetCard targetCard = new TargetCardInHand(0, Integer.MAX_VALUE, filter);
+//        player.lookAtCards("", toHand, game);
+        TargetCard targetCard = new TargetCardInLibrary(0, 5, filter);
         player.choose(outcome, toHand, targetCard, game);
         Cards toBattlefield = new CardsImpl(targetCard.getTargets());
         if (player.moveCards(toBattlefield, Zone.BATTLEFIELD, source, game)) {
