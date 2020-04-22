@@ -149,6 +149,7 @@
         <deckType name="Constructed - Pioneer" jar="mage-deck-constructed.jar" className="mage.deck.Pioneer"/>
         <deckType name="Constructed - Modern" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.Modern"/>
         <deckType name="Constructed - Modern - No Banned List" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.ModernNoBannedList"/>
+        <deckType name="Constructed - Classic Modern" jar="mage-deck-constructed.jar" className="mage.deck.ClassicModern"/>
         <deckType name="Constructed - Eternal" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.Eternal"/>
         <deckType name="Constructed - Legacy" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.Legacy"/>
         <deckType name="Constructed - Vintage" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.Vintage"/>
