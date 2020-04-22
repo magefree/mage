@@ -32,7 +32,7 @@ public final class SanctuaryLockdown extends CardImpl {
             = new FilterControlledPermanent(SubType.HUMAN, "untapped Humans you control");
 
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter2.add(Predicates.not(TappedPredicate.instance));
     }
 
     public SanctuaryLockdown(UUID ownerId, CardSetInfo setInfo) {
