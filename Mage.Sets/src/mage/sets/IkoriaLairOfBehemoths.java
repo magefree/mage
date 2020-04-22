@@ -216,7 +216,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Lukka, Coppercoat Outcast", 125, Rarity.MYTHIC, mage.cards.l.LukkaCoppercoatOutcast.class));
         cards.add(new SetCardInfo("Luminous Broodmoth", 316, Rarity.MYTHIC, mage.cards.l.LuminousBroodmoth.class));
         cards.add(new SetCardInfo("Lurking Deadeye", 94, Rarity.COMMON, mage.cards.l.LurkingDeadeye.class));
-        cards.add(new SetCardInfo("Lurrus of the Dream-Den", 226, Rarity.RARE, mage.cards.l.LurrusOfTheDreamDen.class));
+        cards.add(new SetCardInfo("Lurrus of the Dream Den", 226, Rarity.RARE, mage.cards.l.LurrusOfTheDreamDen.class));
         cards.add(new SetCardInfo("Lutri, the Spellchaser", 227, Rarity.RARE, mage.cards.l.LutriTheSpellchaser.class));
         cards.add(new SetCardInfo("Majestic Auricorn", 22, Rarity.UNCOMMON, mage.cards.m.MajesticAuricorn.class));
         cards.add(new SetCardInfo("Maned Serval", 23, Rarity.COMMON, mage.cards.m.ManedServal.class));
