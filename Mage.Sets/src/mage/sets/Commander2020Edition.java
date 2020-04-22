@@ -304,6 +304,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Swarm Intelligence", 124, Rarity.RARE, mage.cards.s.SwarmIntelligence.class));
         cards.add(new SetCardInfo("Swiftfoot Boots", 254, Rarity.UNCOMMON, mage.cards.s.SwiftfootBoots.class));
         cards.add(new SetCardInfo("Talrand, Sky Summoner", 125, Rarity.RARE, mage.cards.t.TalrandSkySummoner.class));
+        cards.add(new SetCardInfo("Tayam, Luminous Enigma", 16, Rarity.MYTHIC, mage.cards.t.TayamLuminousEnigma.class));
         cards.add(new SetCardInfo("Tectonic Reformation", 162, Rarity.RARE, mage.cards.t.TectonicReformation.class));
         cards.add(new SetCardInfo("Temple of the False God", 319, Rarity.UNCOMMON, mage.cards.t.TempleOfTheFalseGod.class));
         cards.add(new SetCardInfo("Temur Charm", 230, Rarity.UNCOMMON, mage.cards.t.TemurCharm.class));
