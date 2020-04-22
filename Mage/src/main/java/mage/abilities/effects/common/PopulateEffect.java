@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
@@ -7,6 +6,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -30,7 +30,7 @@ import mage.target.targetpointer.FixedTarget;
 public class PopulateEffect extends OneShotEffect {
 
     private final boolean tappedAndAttacking;
-    private static final FilterPermanent filter = new FilterPermanent("token for populate");
+    private static final FilterPermanent filter = new FilterCreaturePermanent("creature token for populate");
 
     static {
         filter.add(TokenPredicate.instance);
