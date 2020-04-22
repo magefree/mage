@@ -88,6 +88,7 @@ class CyclingZeroCostEffect extends CostModificationEffectImpl {
 
     public CyclingZeroCostEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.SET_COST);
+        staticText = "You may pay {0} rather than pay the cycling cost of the first card you cycle each turn.";
     }
 
     public CyclingZeroCostEffect(CyclingZeroCostEffect effect) {
@@ -113,10 +114,5 @@ class CyclingZeroCostEffect extends CostModificationEffectImpl {
     @Override
     public CyclingZeroCostEffect copy() {
         return new CyclingZeroCostEffect(this);
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "You may pay {0} rather than pay the cycling cost of the first card you cycle each turn.";
     }
 }
