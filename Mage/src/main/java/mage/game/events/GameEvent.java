@@ -316,7 +316,7 @@ public class GameEvent implements Serializable {
          */
         LOST_CONTROL,
         GAIN_CONTROL, GAINED_CONTROL,
-        CREATE_TOKEN,
+        CREATE_TOKEN, CREATED_TOKEN,
         /* REGENERATE
          targetId    id of the creature to regenerate
          sourceId    sourceId of the effect doing the regeneration

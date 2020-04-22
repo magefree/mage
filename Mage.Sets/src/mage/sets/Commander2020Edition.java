@@ -38,6 +38,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Aerial Responder", 72, Rarity.UNCOMMON, mage.cards.a.AerialResponder.class));
         cards.add(new SetCardInfo("Agitator Ant", 49, Rarity.RARE, mage.cards.a.AgitatorAnt.class));
         cards.add(new SetCardInfo("Ajani Unyielding", 201, Rarity.MYTHIC, mage.cards.a.AjaniUnyielding.class));
+        cards.add(new SetCardInfo("Akim, the Soaring Wind", 6, Rarity.MYTHIC, mage.cards.a.AkimTheSoaringWind.class));
         cards.add(new SetCardInfo("Akroma's Vengeance", 74, Rarity.RARE, mage.cards.a.AkromasVengeance.class));
         cards.add(new SetCardInfo("Akroma, Angel of Wrath", 73, Rarity.MYTHIC, mage.cards.a.AkromaAngelOfWrath.class));
         cards.add(new SetCardInfo("Alesha, Who Smiles at Death", 143, Rarity.RARE, mage.cards.a.AleshaWhoSmilesAtDeath.class));
