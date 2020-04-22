@@ -33,12 +33,10 @@ public class DiscardHandControllerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            for (Card card : player.getHand().getCards(game)) {
-                player.discard(card, source, game);
-            }
-            return true;
+        if (player == null) {
+            return false;
         }
-        return false;
+        player.discard(player.getHand().size(),false,source,game);
+        return true;
     }
 }

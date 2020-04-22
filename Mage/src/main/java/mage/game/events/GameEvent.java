@@ -85,6 +85,7 @@ public class GameEvent implements Serializable {
         CONVOKED,
         DISCARD_CARD,
         DISCARDED_CARD,
+        DISCARDED_CARDS,
         CYCLE_CARD, CYCLED_CARD, CYCLE_DRAW,
         CLASH, CLASHED,
         DAMAGE_PLAYER,
