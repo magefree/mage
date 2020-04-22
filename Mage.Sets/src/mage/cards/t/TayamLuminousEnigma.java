@@ -61,7 +61,6 @@ public final class TayamLuminousEnigma extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, millEffect, new GenericManaCost(3));
         ability.addCost(new TayamLuminousEnigmaCost());
         TayamLuminousEnigmaEffect effect = new TayamLuminousEnigmaEffect();
-        effect.setText(", then return a permanent card with converted mana cost 3 or less from your graveyard to the battlefield");
         ability.addEffect(effect);
         this.addAbility(ability);
     }
@@ -170,6 +169,7 @@ class TayamLuminousEnigmaEffect extends OneShotEffect {
 
     TayamLuminousEnigmaEffect() {
         super(Outcome.Benefit);
+        staticText = ", then return a permanent card with converted mana cost 3 or less from your graveyard to the battlefield";
     }
 
     private TayamLuminousEnigmaEffect(TayamLuminousEnigmaEffect effect) {
