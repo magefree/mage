@@ -162,17 +162,18 @@ class TayamLuminousEnigmaCost extends RemoveCounterCost {
 
 class TayamLuminousEnigmaEffect extends OneShotEffect {
 
-    private final FilterCard filter;
+    private static final FilterCard filter = new FilterPermanentCard("permanent card in your graveyard with converted mana cost 3 or less");
+
+    static {
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
+    }
 
     TayamLuminousEnigmaEffect() {
         super(Outcome.Benefit);
-        this.filter = new FilterPermanentCard("permanent card in your graveyard with converted mana cost 3 or less");
-        this.filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     private TayamLuminousEnigmaEffect(TayamLuminousEnigmaEffect effect) {
         super(effect);
-        this.filter = effect.filter.copy();
     }
 
     @Override
