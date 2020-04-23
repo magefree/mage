@@ -49,6 +49,7 @@ public enum CounterType {
     FADE("fade"),
     FATE("fate"),
     FEATHER("feather"),
+    FETCH("fetch"),
     FILIBUSTER("filibuster"),
     FIRST_STRIKE("first strike"),
     FLOOD("flood"),
