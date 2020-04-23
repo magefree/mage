@@ -42,7 +42,7 @@ public final class MutualDestruction extends CardImpl {
 
         // This spell has flash as long as you control a permanent with flash.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new ConditionalContinuousEffect(
-                new GainAbilitySourceEffect(FlashAbility.getInstance(), Duration.Custom),
+                new GainAbilitySourceEffect(FlashAbility.getInstance(), Duration.Custom, true),
                 condition, "This spell has flash as long as you control a permanent with flash."
         )).setRuleAtTheTop(true));
 
