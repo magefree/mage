@@ -5,21 +5,18 @@ import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.common.ManaEffect;
-import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.keyword.CompanionAbility;
 import mage.abilities.keyword.CompanionCondition;
-import mage.abilities.mana.BasicManaAbility;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.abilities.mana.conditional.ManaCondition;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.game.Game;
 
 import java.util.*;
@@ -42,7 +39,9 @@ public final class JeganthaTheWellspring extends CardImpl {
         this.addAbility(new CompanionAbility(JeganthaTheWellspringCompanionCondition.instance));
 
         // {T}: Add {W}{U}{B}{R}{G}. This mana can't be spent to pay generic mana costs.
-        this.addAbility(new JeganthaTheWellspringManaAbility());
+        this.addAbility(new SimpleManaAbility(
+                Zone.BATTLEFIELD, new JeganthaTheWellspringManaEffect(), new TapSourceCost()
+        ));
     }
 
     private JeganthaTheWellspring(final JeganthaTheWellspring card) {
@@ -79,42 +78,31 @@ enum JeganthaTheWellspringCompanionCondition implements CompanionCondition {
     }
 }
 
-class JeganthaTheWellspringManaAbility extends BasicManaAbility {
+class JeganthaTheWellspringManaEffect extends ManaEffect {
 
-    JeganthaTheWellspringManaAbility() {
-        super(makeManaEffect());
-        this.addEffect(new BasicManaEffect(
-                new JeganthaTheWellspringConditionalMana("U")
-        ).setText("{U}"));
-        this.addEffect(new BasicManaEffect(
-                new JeganthaTheWellspringConditionalMana("B")
-        ).setText("{B}"));
-        this.addEffect(new BasicManaEffect(
-                new JeganthaTheWellspringConditionalMana("R")
-        ).setText("{R}"));
-        this.addEffect(new BasicManaEffect(
-                new JeganthaTheWellspringConditionalMana("G")
-        ).setText("{G}. This mana can't be spent to pay generic mana costs."));
-        this.netMana.add(Mana.WhiteMana(1));
-        this.netMana.add(Mana.BlueMana(1));
-        this.netMana.add(Mana.BlackMana(1));
-        this.netMana.add(Mana.RedMana(1));
-        this.netMana.add(Mana.GreenMana(1));
+    JeganthaTheWellspringManaEffect() {
+        super();
+        staticText = "Add {W}{U}{B}{R}{G}. This mana can't be spent to pay generic mana costs.";
     }
 
-    private JeganthaTheWellspringManaAbility(JeganthaTheWellspringManaAbility ability) {
-        super(ability);
+    private JeganthaTheWellspringManaEffect(final JeganthaTheWellspringManaEffect effect) {
+        super(effect);
     }
 
     @Override
-    public JeganthaTheWellspringManaAbility copy() {
-        return new JeganthaTheWellspringManaAbility(this);
+    public Mana produceMana(Game game, Ability source) {
+        Mana mana = new Mana();
+        mana.add(new JeganthaTheWellspringConditionalMana("W"));
+        mana.add(new JeganthaTheWellspringConditionalMana("U"));
+        mana.add(new JeganthaTheWellspringConditionalMana("B"));
+        mana.add(new JeganthaTheWellspringConditionalMana("R"));
+        mana.add(new JeganthaTheWellspringConditionalMana("G"));
+        return mana;
     }
 
-    private static final ManaEffect makeManaEffect() {
-        return (ManaEffect) new BasicManaEffect(
-                new JeganthaTheWellspringConditionalMana("W")
-        ).setText("{W}");
+    @Override
+    public JeganthaTheWellspringManaEffect copy() {
+        return new JeganthaTheWellspringManaEffect(this);
     }
 }
 
