@@ -37,7 +37,7 @@ public final class HaldanAvidArcanist extends CardImpl {
         // You may play noncreature cards from exile with fetch counters on them if you exiled them, and you may spend mana as though it were mana of any color to cast those spells.
         Ability ability = new SimpleStaticAbility(new HaldanAvidArcanistCastFromExileEffect());
         ability.addEffect(new HaldanAvidArcanistSpendAnyManaEffect());
-        this.addAbility(ability, PakoArcaneRetriever.makeWatcher());
+        this.addAbility(ability, new PakoArcaneRetriever.PakoArcaneRetrieverWatcher());
     }
 
     private HaldanAvidArcanist(final HaldanAvidArcanist card) {

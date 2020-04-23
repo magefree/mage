@@ -54,13 +54,33 @@ public final class PakoArcaneRetriever extends CardImpl {
         return new PakoArcaneRetriever(this);
     }
 
-    public static PakoArcaneRetrieverWatcher makeWatcher() {
-        return new PakoArcaneRetrieverWatcher();
-    }
-
     public static boolean checkWatcher(UUID playerId, Card card, Game game) {
         PakoArcaneRetrieverWatcher watcher = game.getState().getWatcher(PakoArcaneRetrieverWatcher.class);
         return watcher != null && watcher.checkCard(playerId, card, game);
+    }
+
+    public static class PakoArcaneRetrieverWatcher extends Watcher {
+
+        private final Map<UUID, Set<MageObjectReference>> playerMap = new HashMap();
+
+        public PakoArcaneRetrieverWatcher() {
+            super(WatcherScope.GAME);
+        }
+
+        @Override
+        public void watch(GameEvent event, Game game) {
+        }
+
+        void addCard(UUID playerId, Card card, Game game) {
+            playerMap.computeIfAbsent(playerId, u -> new HashSet()).add(new MageObjectReference(card, game));
+        }
+
+        private boolean checkCard(UUID playerId, Card card, Game game) {
+            return playerMap
+                    .computeIfAbsent(playerId, u -> new HashSet())
+                    .stream()
+                    .anyMatch(mageObjectReference -> mageObjectReference.refersTo(card, game));
+        }
     }
 }
 
@@ -107,29 +127,5 @@ class PakoArcaneRetrieverEffect extends OneShotEffect {
             return true;
         }
         return permanent.addCounters(CounterType.P1P1.createInstance(counters), source, game);
-    }
-}
-
-class PakoArcaneRetrieverWatcher extends Watcher {
-
-    private final Map<UUID, Set<MageObjectReference>> playerMap = new HashMap();
-
-    PakoArcaneRetrieverWatcher() {
-        super(WatcherScope.GAME);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-    }
-
-    void addCard(UUID playerId, Card card, Game game) {
-        playerMap.computeIfAbsent(playerId, u -> new HashSet()).add(new MageObjectReference(card, game));
-    }
-
-    boolean checkCard(UUID playerId, Card card, Game game) {
-        return playerMap
-                .computeIfAbsent(playerId, u -> new HashSet())
-                .stream()
-                .anyMatch(mageObjectReference -> mageObjectReference.refersTo(card, game));
     }
 }
