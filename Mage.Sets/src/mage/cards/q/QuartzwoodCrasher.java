@@ -148,8 +148,8 @@ class QuartzwoodCrasherWatcher extends Watcher {
             return;
         }
         damageMap
-                .computeIfAbsent(event.getTargetId(), x -> new HashMap())
-                .compute(creature.getControllerId(), (uuid, i) -> i == null ? event.getAmount() : event.getAmount() + 1);
+                .computeIfAbsent(event.getTargetId(), x -> new HashMap<>())
+                .compute(creature.getControllerId(), (uuid, i) -> i == null ? event.getAmount() : event.getAmount() + i);
     }
 
     public int getDamage(UUID damagedPlayerId, UUID controllerId) {
