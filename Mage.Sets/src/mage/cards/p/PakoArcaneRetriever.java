@@ -40,7 +40,9 @@ public final class PakoArcaneRetriever extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Whenever Pako, Arcane Retriever attacks, exile the top card of each player's library and put a fetch counter on each of them. Put a +1/+1 counter on Pako for each noncreature card exiled this way.
-        this.addAbility(new AttacksTriggeredAbility(new PakoArcaneRetrieverEffect(), false));
+        this.addAbility(new AttacksTriggeredAbility(
+                new PakoArcaneRetrieverEffect(), false
+        ), new PakoArcaneRetrieverWatcher());
     }
 
     private PakoArcaneRetriever(final PakoArcaneRetriever card) {
@@ -50,6 +52,15 @@ public final class PakoArcaneRetriever extends CardImpl {
     @Override
     public PakoArcaneRetriever copy() {
         return new PakoArcaneRetriever(this);
+    }
+
+    public static PakoArcaneRetrieverWatcher makeWatcher() {
+        return new PakoArcaneRetrieverWatcher();
+    }
+
+    public static boolean checkWatcher(UUID playerId, Card card, Game game) {
+        PakoArcaneRetrieverWatcher watcher = game.getState().getWatcher(PakoArcaneRetrieverWatcher.class);
+        return watcher != null && watcher.checkCard(playerId, card, game);
     }
 }
 
@@ -111,11 +122,11 @@ class PakoArcaneRetrieverWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
     }
 
-    public void addCard(UUID playerId, Card card, Game game) {
+    void addCard(UUID playerId, Card card, Game game) {
         playerMap.computeIfAbsent(playerId, u -> new HashSet()).add(new MageObjectReference(card, game));
     }
 
-    public boolean checkCard(UUID playerId, Card card, Game game) {
+    boolean checkCard(UUID playerId, Card card, Game game) {
         return playerMap
                 .computeIfAbsent(playerId, u -> new HashSet())
                 .stream()

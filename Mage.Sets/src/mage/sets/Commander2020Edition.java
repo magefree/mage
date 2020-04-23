@@ -153,6 +153,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Grisly Salvage", 215, Rarity.COMMON, mage.cards.g.GrislySalvage.class));
         cards.add(new SetCardInfo("Growth Spiral", 216, Rarity.COMMON, mage.cards.g.GrowthSpiral.class));
         cards.add(new SetCardInfo("Gruul Turf", 279, Rarity.UNCOMMON, mage.cards.g.GruulTurf.class));
+        cards.add(new SetCardInfo("Haldan, Avid Arcanist", 2, Rarity.MYTHIC, mage.cards.h.HaldanAvidArcanist.class));
         cards.add(new SetCardInfo("Halimar Depths", 280, Rarity.COMMON, mage.cards.h.HalimarDepths.class));
         cards.add(new SetCardInfo("Harmonize", 173, Rarity.UNCOMMON, mage.cards.h.Harmonize.class));
         cards.add(new SetCardInfo("Harrow", 174, Rarity.COMMON, mage.cards.h.Harrow.class));
