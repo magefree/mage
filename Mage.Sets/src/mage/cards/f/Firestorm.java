@@ -27,7 +27,8 @@ public final class Firestorm extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");
 
         // As an additional cost to cast Firestorm, discard X cards.
-        this.getSpellAbility().addCost(new DiscardXTargetCost(new FilterCard("cards"), true));
+        this.getSpellAbility().addCost(new DiscardXTargetCost(new FilterCard("cards"), false));
+
         // Firestorm deals X damage to each of X target creatures and/or players.
         this.getSpellAbility().addEffect(new FirestormEffect());
         this.getSpellAbility().setTargetAdjuster(FirestormAdjuster.instance);

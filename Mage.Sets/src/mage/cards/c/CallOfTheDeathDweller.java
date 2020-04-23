@@ -5,6 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -12,6 +13,7 @@ import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -100,8 +102,8 @@ class CallOfTheDeathDwellerEffect extends OneShotEffect {
                 permanent.addCounters(CounterType.MENACE.createInstance(), source, game);
             }
         }
-        target.clearChosen();
         filter.setMessage("creature to put a deathtouch counter on");
+        target = new TargetPermanent(0, 1, filter, true);
         if (player.choose(outcome, target, source.getSourceId(), game)) {
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null) {
@@ -116,6 +118,10 @@ class CallOfTheDeathDwellerTarget extends TargetCardInYourGraveyard {
 
     private static final FilterCard filter
             = new FilterCreatureCard("creature cards with total converted mana cost 3 or less from your graveyard");
+
+    static {
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
+    }
 
     CallOfTheDeathDwellerTarget() {
         super(0, 2, filter, false);

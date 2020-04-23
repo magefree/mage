@@ -14,7 +14,6 @@ import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.MonocoloredPredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetCard;
 import mage.target.common.TargetCardInExile;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetOpponent;
@@ -50,7 +49,7 @@ class EmergentUltimatumEffect extends OneShotEffect {
         super(Outcome.Benefit);
         staticText = "Search your library for up to three monocolored cards with different names and exile them. " +
                 "An opponent chooses one of those cards. Shuffle that card into your library. " +
-                "You may cast the other cards without paying their mana costs.";
+                "You may cast the other cards without paying their mana costs";
     }
 
     private EmergentUltimatumEffect(final EmergentUltimatumEffect effect) {
@@ -100,7 +99,7 @@ class EmergentUltimatumEffect extends OneShotEffect {
             if (!player.chooseUse(Outcome.PlayForFree, "Cast an exiled card without paying its mana cost?", source, game)) {
                 break;
             }
-             targetCardInExile.clearChosen();
+            targetCardInExile.clearChosen();
             if (!player.choose(Outcome.PlayForFree, cards, targetCardInExile, game)) {
                 continue;
             }

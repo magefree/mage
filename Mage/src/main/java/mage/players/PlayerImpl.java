@@ -743,6 +743,18 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public Cards discard(int amount, boolean random, Ability source, Game game) {
+        Cards discardedCards = doDiscard(amount, random, source, game);
+        if (!discardedCards.isEmpty()) {
+            UUID sourceId = source == null ? null : source.getSourceId();
+            game.fireEvent(GameEvent.getEvent(
+                    GameEvent.EventType.DISCARDED_CARDS, sourceId,
+                    sourceId, playerId, discardedCards.size()
+            ));
+        }
+        return discardedCards;
+    }
+
+    private Cards doDiscard(int amount, boolean random, Ability source, Game game) {
         Cards discardedCards = new CardsImpl();
         if (amount <= 0) {
             return discardedCards;
@@ -752,7 +764,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (this.getHand().size() == 1 || this.getHand().size() == amount) {
             List<UUID> cardsToDiscard = new ArrayList<>(this.getHand());
             for (UUID id : cardsToDiscard) {
-                if (discard(this.getHand().get(id, game), source, game)) {
+                if (doDiscard(this.getHand().get(id, game), source, game, false)) {
                     discardedCards.add(id);
                 }
             }
@@ -762,7 +774,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (random) {
             for (int i = 0; i < amount; i++) {
                 Card card = this.getHand().getRandom(game);
-                if (discard(card, source, game)) {
+                if (doDiscard(card, source, game, false)) {
                     discardedCards.add(card);
                 }
             }
@@ -773,7 +785,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                             + " card" + (possibleAmount > 1 ? "s" : "")), playerId);
             choose(Outcome.Discard, target, source == null ? null : source.getSourceId(), game);
             for (UUID cardId : target.getTargets()) {
-                if (discard(this.getHand().get(cardId, game), source, game)) {
+                if (doDiscard(this.getHand().get(cardId, game), source, game, false)) {
                     discardedCards.add(cardId);
                 }
             }
@@ -783,6 +795,10 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean discard(Card card, Ability source, Game game) {
+        return doDiscard(card, source, game, true);
+    }
+
+    private boolean doDiscard(Card card, Ability source, Game game, boolean fireEvent) {
         //20100716 - 701.7
         /* 701.7. Discard #
          701.7a To discard a card, move it from its owners hand to that players graveyard.
@@ -797,29 +813,36 @@ public abstract class PlayerImpl implements Player, Serializable {
          about the discarded card, that cost payment is illegal; the game returns to
          the moment before the cost was paid (see rule 717, "Handling Illegal Actions").
          */
-        if (card != null) {
-            GameEvent gameEvent = GameEvent.getEvent(GameEvent.EventType.DISCARD_CARD,
-                    card.getId(), source == null
-                            ? null : source.getSourceId(), playerId);
-            gameEvent.setFlag(source != null); // event from effect or from cost (source == null)
-            if (!game.replaceEvent(gameEvent, source)) {
-                // write info to game log first so game log infos from triggered or replacement effects follow in the game log
-                if (!game.isSimulation()) {
-                    game.informPlayers(getLogName() + " discards " + card.getLogName());
-                }
-                /* If a card is discarded while Rest in Peace is on the battlefield, abilities that function
-                 * when a card is discarded (such as madness) still work, even though that card never reaches
-                 * a graveyard. In addition, spells or abilities that check the characteristics of a discarded
-                 * card (such as Chandra Ablaze's first ability) can find that card in exile. */
-                card.moveToZone(Zone.GRAVEYARD, source == null ? null : source.getSourceId(), game, false);
-                // So discard is also successful if card is moved to another zone by replacement effect!
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DISCARDED_CARD,
-                        card.getId(), source == null
-                                ? null : source.getSourceId(), playerId));
-                return true;
-            }
+        if (card == null) {
+            return false;
         }
-        return false;
+        GameEvent gameEvent = GameEvent.getEvent(GameEvent.EventType.DISCARD_CARD,
+                card.getId(), source == null
+                        ? null : source.getSourceId(), playerId);
+        gameEvent.setFlag(source != null); // event from effect or from cost (source == null)
+        if (game.replaceEvent(gameEvent, source)) {
+            return false;
+        }
+        // write info to game log first so game log infos from triggered or replacement effects follow in the game log
+        if (!game.isSimulation()) {
+            game.informPlayers(getLogName() + " discards " + card.getLogName());
+        }
+        /* If a card is discarded while Rest in Peace is on the battlefield, abilities that function
+         * when a card is discarded (such as madness) still work, even though that card never reaches
+         * a graveyard. In addition, spells or abilities that check the characteristics of a discarded
+         * card (such as Chandra Ablaze's first ability) can find that card in exile. */
+        card.moveToZone(Zone.GRAVEYARD, source == null ? null : source.getSourceId(), game, false);
+        // So discard is also successful if card is moved to another zone by replacement effect!
+        UUID sourceId = source == null ? null : source.getSourceId();
+        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DISCARDED_CARD,
+                card.getId(), sourceId, playerId));
+        if (fireEvent) {
+            game.fireEvent(GameEvent.getEvent(
+                    GameEvent.EventType.DISCARDED_CARDS, sourceId,
+                    sourceId, playerId, 1
+            ));
+        }
+        return true;
     }
 
     @Override

@@ -33,7 +33,7 @@ public final class SurvivorsBond extends CardImpl {
 
         // Choose one or both —
         this.getSpellAbility().getModes().setMinModes(1);
-        this.getSpellAbility().getModes().setMinModes(2);
+        this.getSpellAbility().getModes().setMaxModes(2);
 
         // • Return target Human creature card from your graveyard to your hand.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());

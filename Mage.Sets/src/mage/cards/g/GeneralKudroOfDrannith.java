@@ -41,7 +41,7 @@ public final class GeneralKudroOfDrannith extends CardImpl {
             = new FilterCreaturePermanent("creature with power 4 or greater");
 
     static {
-        filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 3));
+        filter5.add(new PowerPredicate(ComparisonType.MORE_THAN, 3));
     }
 
     public GeneralKudroOfDrannith(UUID ownerId, CardSetInfo setInfo) {

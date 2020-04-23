@@ -54,12 +54,12 @@ class StormwildCapridorEffect extends PreventionEffectImpl {
 
     StormwildCapridorEffect() {
         super(Duration.WhileOnBattlefield);
+        staticText = "If damage would be dealt to {this}, prevent that damage. " +
+                "Put a +1/+1 counter on {this} for each 1 damage prevented this way";
     }
 
     private StormwildCapridorEffect(final StormwildCapridorEffect effect) {
         super(effect);
-        staticText = "If damage would be dealt to {this}, prevent that damage. " +
-                "Put a +1/+1 counter on {this} for each 1 damage prevented this way";
     }
 
     @Override

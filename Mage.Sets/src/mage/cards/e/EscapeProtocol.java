@@ -85,7 +85,7 @@ class EscapeProtocolReflexiveTriggeredAbility extends DelayedTriggeredAbility {
     EscapeProtocolReflexiveTriggeredAbility() {
         super(new ExileTargetForSourceEffect(), Duration.OneUse, true);
         this.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect());
-        this.addTarget(new TargetPermanent());
+        this.addTarget(new TargetPermanent(filter));
     }
 
     private EscapeProtocolReflexiveTriggeredAbility(final EscapeProtocolReflexiveTriggeredAbility ability) {

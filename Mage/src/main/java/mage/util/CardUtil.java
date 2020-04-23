@@ -16,7 +16,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.util.functions.CopyTokenFunction;
-import org.junit.Assert;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -746,5 +745,17 @@ public final class CardUtil {
             default:
                 throw new IllegalArgumentException("Wrong mana type " + manaType);
         }
+    }
+
+    public static String getBoostCountAsStr(int power, int toughness) {
+        // sign fix for zero values
+        // -1/+0 must be -1/-0
+        // +0/-1 must be -0/-1
+        String signedP = String.format("%1$+d", power);
+        String signedT = String.format("%1$+d", toughness);
+        if (signedP.equals("+0") && signedT.startsWith("-")) signedP = "-0";
+        if (signedT.equals("+0") && signedP.startsWith("-")) signedT = "-0";
+
+        return signedP + "/" + signedT;
     }
 }

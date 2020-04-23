@@ -151,12 +151,14 @@ public class OathOfLiegesTest extends CardTestPlayerBase {
         // turn 2 - B
         // oath A triggers for B and do nothing
         // copy oath A triggers for B and do nothing
+        setChoice(playerA, "At the beginning of each upkeep"); // two triggers on upkeep
         checkPermanentCount("A have 10 plains", 1, PhaseStep.END_TURN, playerA, "Plains", 10);
         checkPermanentCount("B have 12 plains", 1, PhaseStep.END_TURN, playerB, "Plains", 12);
 
         // turn 3 - A
         // oath A triggers for A and activates
         // copy oath A triggers for A and activates
+        setChoice(playerA, "At the beginning of each upkeep"); // two triggers on upkeep
         // 1
         addTarget(playerA, playerB); // who control more lands
         setChoice(playerA, "Yes"); // search library
@@ -166,6 +168,7 @@ public class OathOfLiegesTest extends CardTestPlayerBase {
         setChoice(playerA, "Yes"); // search library
         addTarget(playerA, "Plains"); // card from library
 
+        setStrictChooseMode(true);
         setStopAt(3, PhaseStep.END_TURN);
         execute();
         assertAllCommandsUsed();

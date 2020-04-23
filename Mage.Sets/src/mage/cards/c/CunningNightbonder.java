@@ -45,7 +45,7 @@ public final class CunningNightbonder extends CardImpl {
 
         // Spells you cast with flash cost {1} less to cast and can't be countered.
         Ability ability = new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)
-                .setText("spells you cast with flash cost {1} less to cast"));
+                .setText("spells with flash you cast cost {1} less to cast"));
         ability.addEffect(new CantBeCounteredControlledEffect(filter2, Duration.WhileOnBattlefield)
                 .setText("and can't be countered"));
         this.addAbility(ability);

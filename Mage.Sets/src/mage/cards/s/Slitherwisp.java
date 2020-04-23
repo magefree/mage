@@ -21,7 +21,7 @@ import java.util.UUID;
  */
 public final class Slitherwisp extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("another spell with flash");
+    private static final FilterSpell filter = new FilterSpell("another spell that has flash");
 
     static {
         filter.add(new AbilityPredicate(FlashAbility.class));

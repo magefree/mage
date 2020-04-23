@@ -138,7 +138,7 @@ class NarsetOfTheAncientWayDrawEffect extends OneShotEffect {
             return false;
         }
         Card card = player.discardOne(false, source, game);
-        if (card == null || card.isCreature()) {
+        if (card == null || card.isLand()) {
             return false;
         }
         game.addDelayedTriggeredAbility(new NarsetOfTheAncientWayReflexiveTriggeredAbility(card.getConvertedManaCost()), source);

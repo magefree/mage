@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -16,8 +14,9 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.permanent.token.SpiritToken;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class SeizeTheSoul extends CardImpl {
@@ -35,7 +34,7 @@ public final class SeizeTheSoul extends CardImpl {
         // Destroy target nonwhite, nonblack creature. Put a 1/1 white Spirit creature token with flying onto the battlefield.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SpiritToken()));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
 
         // Haunt
         // When the creature Seize the Soul haunts dies, destroy target nonwhite, nonblack creature. Put a 1/1 white Spirit creature token with flying onto the battlefield.

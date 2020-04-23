@@ -36,7 +36,9 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Acidic Slime", 165, Rarity.UNCOMMON, mage.cards.a.AcidicSlime.class));
         cards.add(new SetCardInfo("Adriana, Captain of the Guard", 200, Rarity.RARE, mage.cards.a.AdrianaCaptainOfTheGuard.class));
         cards.add(new SetCardInfo("Aerial Responder", 72, Rarity.UNCOMMON, mage.cards.a.AerialResponder.class));
+        cards.add(new SetCardInfo("Agitator Ant", 49, Rarity.RARE, mage.cards.a.AgitatorAnt.class));
         cards.add(new SetCardInfo("Ajani Unyielding", 201, Rarity.MYTHIC, mage.cards.a.AjaniUnyielding.class));
+        cards.add(new SetCardInfo("Akim, the Soaring Wind", 6, Rarity.MYTHIC, mage.cards.a.AkimTheSoaringWind.class));
         cards.add(new SetCardInfo("Akroma's Vengeance", 74, Rarity.RARE, mage.cards.a.AkromasVengeance.class));
         cards.add(new SetCardInfo("Akroma, Angel of Wrath", 73, Rarity.MYTHIC, mage.cards.a.AkromaAngelOfWrath.class));
         cards.add(new SetCardInfo("Alesha, Who Smiles at Death", 143, Rarity.RARE, mage.cards.a.AleshaWhoSmilesAtDeath.class));
@@ -66,6 +68,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Cairn Wanderer", 130, Rarity.RARE, mage.cards.c.CairnWanderer.class));
         cards.add(new SetCardInfo("Call the Coppercoats", 23, Rarity.RARE, mage.cards.c.CallTheCoppercoats.class));
         cards.add(new SetCardInfo("Canopy Vista", 261, Rarity.RARE, mage.cards.c.CanopyVista.class));
+        cards.add(new SetCardInfo("Capricopian", 58, Rarity.RARE, mage.cards.c.Capricopian.class));
         cards.add(new SetCardInfo("Captivating Crew", 144, Rarity.RARE, mage.cards.c.CaptivatingCrew.class));
         cards.add(new SetCardInfo("Cartographer's Hawk", 24, Rarity.RARE, mage.cards.c.CartographersHawk.class));
         cards.add(new SetCardInfo("Cast Out", 79, Rarity.UNCOMMON, mage.cards.c.CastOut.class));
@@ -100,6 +103,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Deadly Tempest", 131, Rarity.RARE, mage.cards.d.DeadlyTempest.class));
         cards.add(new SetCardInfo("Dearly Departed", 84, Rarity.RARE, mage.cards.d.DearlyDeparted.class));
         cards.add(new SetCardInfo("Deathsprout", 208, Rarity.UNCOMMON, mage.cards.d.Deathsprout.class));
+        cards.add(new SetCardInfo("Decoy Gambit", 32, Rarity.RARE, mage.cards.d.DecoyGambit.class));
         cards.add(new SetCardInfo("Decree of Justice", 85, Rarity.RARE, mage.cards.d.DecreeOfJustice.class));
         cards.add(new SetCardInfo("Deflecting Swat", 50, Rarity.RARE, mage.cards.d.DeflectingSwat.class));
         cards.add(new SetCardInfo("Descend upon the Sinful", 86, Rarity.MYTHIC, mage.cards.d.DescendUponTheSinful.class));
@@ -119,21 +123,26 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Dualcaster Mage", 150, Rarity.RARE, mage.cards.d.DualcasterMage.class));
         cards.add(new SetCardInfo("Duneblast", 211, Rarity.RARE, mage.cards.d.Duneblast.class));
         cards.add(new SetCardInfo("Endless Sands", 272, Rarity.RARE, mage.cards.e.EndlessSands.class));
+        cards.add(new SetCardInfo("Eon Frolicker", 33, Rarity.RARE, mage.cards.e.EonFrolicker.class));
         cards.add(new SetCardInfo("Etali, Primal Storm", 151, Rarity.RARE, mage.cards.e.EtaliPrimalStorm.class));
         cards.add(new SetCardInfo("Eternal Dragon", 88, Rarity.RARE, mage.cards.e.EternalDragon.class));
+        cards.add(new SetCardInfo("Ethereal Forager", 34, Rarity.RARE, mage.cards.e.EtherealForager.class));
         cards.add(new SetCardInfo("Ever After", 133, Rarity.RARE, mage.cards.e.EverAfter.class));
         cards.add(new SetCardInfo("Evolution Charm", 171, Rarity.COMMON, mage.cards.e.EvolutionCharm.class));
         cards.add(new SetCardInfo("Exotic Orchard", 273, Rarity.RARE, mage.cards.e.ExoticOrchard.class));
         cards.add(new SetCardInfo("Fierce Guardianship", 35, Rarity.RARE, mage.cards.f.FierceGuardianship.class));
         cards.add(new SetCardInfo("Find // Finality", 212, Rarity.RARE, mage.cards.f.FindFinality.class));
+        cards.add(new SetCardInfo("Fireflux Squad", 51, Rarity.RARE, mage.cards.f.FirefluxSquad.class));
         cards.add(new SetCardInfo("Flawless Maneuver", 26, Rarity.RARE, mage.cards.f.FlawlessManeuver.class));
         cards.add(new SetCardInfo("Fluctuator", 241, Rarity.RARE, mage.cards.f.Fluctuator.class));
         cards.add(new SetCardInfo("Forgotten Cave", 274, Rarity.UNCOMMON, mage.cards.f.ForgottenCave.class));
         cards.add(new SetCardInfo("Frantic Search", 111, Rarity.COMMON, mage.cards.f.FranticSearch.class));
         cards.add(new SetCardInfo("Frontier Bivouac", 275, Rarity.UNCOMMON, mage.cards.f.FrontierBivouac.class));
+        cards.add(new SetCardInfo("Frontier Warmonger", 52, Rarity.RARE, mage.cards.f.FrontierWarmonger.class));
         cards.add(new SetCardInfo("Frontline Medic", 89, Rarity.RARE, mage.cards.f.FrontlineMedic.class));
         cards.add(new SetCardInfo("Fumiko the Lowblood", 152, Rarity.RARE, mage.cards.f.FumikoTheLowblood.class));
         cards.add(new SetCardInfo("Garna, the Bloodflame", 213, Rarity.UNCOMMON, mage.cards.g.GarnaTheBloodflame.class));
+        cards.add(new SetCardInfo("Gavi, Nest Warden", 7, Rarity.MYTHIC, mage.cards.g.GaviNestWarden.class));
         cards.add(new SetCardInfo("Gavony Township", 276, Rarity.RARE, mage.cards.g.GavonyTownship.class));
         cards.add(new SetCardInfo("Gaze of Granite", 214, Rarity.RARE, mage.cards.g.GazeOfGranite.class));
         cards.add(new SetCardInfo("Genesis Hydra", 172, Rarity.RARE, mage.cards.g.GenesisHydra.class));
@@ -144,6 +153,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Grisly Salvage", 215, Rarity.COMMON, mage.cards.g.GrislySalvage.class));
         cards.add(new SetCardInfo("Growth Spiral", 216, Rarity.COMMON, mage.cards.g.GrowthSpiral.class));
         cards.add(new SetCardInfo("Gruul Turf", 279, Rarity.UNCOMMON, mage.cards.g.GruulTurf.class));
+        cards.add(new SetCardInfo("Haldan, Avid Arcanist", 2, Rarity.MYTHIC, mage.cards.h.HaldanAvidArcanist.class));
         cards.add(new SetCardInfo("Halimar Depths", 280, Rarity.COMMON, mage.cards.h.HalimarDepths.class));
         cards.add(new SetCardInfo("Harmonize", 173, Rarity.UNCOMMON, mage.cards.h.Harmonize.class));
         cards.add(new SetCardInfo("Harrow", 174, Rarity.COMMON, mage.cards.h.Harrow.class));
@@ -176,6 +186,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Kodama's Reach", 180, Rarity.COMMON, mage.cards.k.KodamasReach.class));
         cards.add(new SetCardInfo("Krosan Grip", 181, Rarity.UNCOMMON, mage.cards.k.KrosanGrip.class));
         cards.add(new SetCardInfo("Krosan Verge", 285, Rarity.UNCOMMON, mage.cards.k.KrosanVerge.class));
+        cards.add(new SetCardInfo("Lavabrink Floodgates", 53, Rarity.RARE, mage.cards.l.LavabrinkFloodgates.class));
         cards.add(new SetCardInfo("Lifecrafter's Bestiary", 244, Rarity.RARE, mage.cards.l.LifecraftersBestiary.class));
         cards.add(new SetCardInfo("Lightning Greaves", 245, Rarity.UNCOMMON, mage.cards.l.LightningGreaves.class));
         cards.add(new SetCardInfo("Lightning Rift", 155, Rarity.UNCOMMON, mage.cards.l.LightningRift.class));
@@ -194,6 +205,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Mimic Vat", 246, Rarity.RARE, mage.cards.m.MimicVat.class));
         cards.add(new SetCardInfo("Mind Spring", 116, Rarity.RARE, mage.cards.m.MindSpring.class));
         cards.add(new SetCardInfo("Mindleecher", 44, Rarity.RARE, mage.cards.m.Mindleecher.class));
+        cards.add(new SetCardInfo("Molten Echoes", 54, Rarity.RARE, mage.cards.m.MoltenEchoes.class));
         cards.add(new SetCardInfo("Mortuary Mire", 289, Rarity.COMMON, mage.cards.m.MortuaryMire.class));
         cards.add(new SetCardInfo("Mossfire Valley", 290, Rarity.RARE, mage.cards.m.MossfireValley.class));
         cards.add(new SetCardInfo("Mosswort Bridge", 291, Rarity.RARE, mage.cards.m.MosswortBridge.class));
@@ -202,7 +214,9 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Myriad Landscape", 292, Rarity.UNCOMMON, mage.cards.m.MyriadLandscape.class));
         cards.add(new SetCardInfo("Mystic Monastery", 293, Rarity.UNCOMMON, mage.cards.m.MysticMonastery.class));
         cards.add(new SetCardInfo("Nahiri, the Harbinger", 223, Rarity.MYTHIC, mage.cards.n.NahiriTheHarbinger.class));
+        cards.add(new SetCardInfo("Nascent Metamorph", 36, Rarity.RARE, mage.cards.n.NascentMetamorph.class));
         cards.add(new SetCardInfo("Natural Connection", 184, Rarity.COMMON, mage.cards.n.NaturalConnection.class));
+        cards.add(new SetCardInfo("Nesting Grounds", 71, Rarity.RARE, mage.cards.n.NestingGrounds.class));
         cards.add(new SetCardInfo("Netherborn Altar", 45, Rarity.RARE, mage.cards.n.NetherbornAltar.class));
         cards.add(new SetCardInfo("New Perspectives", 119, Rarity.RARE, mage.cards.n.NewPerspectives.class));
         cards.add(new SetCardInfo("Niblis of Frost", 120, Rarity.RARE, mage.cards.n.NiblisOfFrost.class));
@@ -222,6 +236,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Otrimi, the Ever-Playful", 12, Rarity.MYTHIC, mage.cards.o.OtrimiTheEverPlayful.class));
         cards.add(new SetCardInfo("Outpost Siege", 157, Rarity.RARE, mage.cards.o.OutpostSiege.class));
         cards.add(new SetCardInfo("Painful Truths", 134, Rarity.RARE, mage.cards.p.PainfulTruths.class));
+        cards.add(new SetCardInfo("Pako, Arcane Retriever", 13, Rarity.MYTHIC, mage.cards.p.PakoArcaneRetriever.class));
         cards.add(new SetCardInfo("Parasitic Impetus", 46, Rarity.UNCOMMON, mage.cards.p.ParasiticImpetus.class));
         cards.add(new SetCardInfo("Path of Ancestry", 298, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
         cards.add(new SetCardInfo("Portal Mage", 122, Rarity.RARE, mage.cards.p.PortalMage.class));
@@ -246,11 +261,13 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Rogue's Passage", 303, Rarity.UNCOMMON, mage.cards.r.RoguesPassage.class));
         cards.add(new SetCardInfo("Rupture Spire", 304, Rarity.COMMON, mage.cards.r.RuptureSpire.class));
         cards.add(new SetCardInfo("Sakura-Tribe Elder", 187, Rarity.COMMON, mage.cards.s.SakuraTribeElder.class));
+        cards.add(new SetCardInfo("Sanctuary Blade", 69, Rarity.RARE, mage.cards.s.SanctuaryBlade.class));
         cards.add(new SetCardInfo("Sandsteppe Citadel", 305, Rarity.UNCOMMON, mage.cards.s.SandsteppeCitadel.class));
         cards.add(new SetCardInfo("Satyr Wayfinder", 188, Rarity.COMMON, mage.cards.s.SatyrWayfinder.class));
         cards.add(new SetCardInfo("Sawtusk Demolisher", 64, Rarity.RARE, mage.cards.s.SawtuskDemolisher.class));
         cards.add(new SetCardInfo("Scavenger Grounds", 306, Rarity.RARE, mage.cards.s.ScavengerGrounds.class));
         cards.add(new SetCardInfo("Secluded Steppe", 307, Rarity.UNCOMMON, mage.cards.s.SecludedSteppe.class));
+        cards.add(new SetCardInfo("Selective Adaptation", 65, Rarity.RARE, mage.cards.s.SelectiveAdaptation.class));
         cards.add(new SetCardInfo("Selesnya Sanctuary", 308, Rarity.COMMON, mage.cards.s.SelesnyaSanctuary.class));
         cards.add(new SetCardInfo("Shabraz, the Skyshark", 14, Rarity.MYTHIC, mage.cards.s.ShabrazTheSkyshark.class));
         cards.add(new SetCardInfo("Shadowblood Ridge", 309, Rarity.RARE, mage.cards.s.ShadowbloodRidge.class));
@@ -291,6 +308,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Swarm Intelligence", 124, Rarity.RARE, mage.cards.s.SwarmIntelligence.class));
         cards.add(new SetCardInfo("Swiftfoot Boots", 254, Rarity.UNCOMMON, mage.cards.s.SwiftfootBoots.class));
         cards.add(new SetCardInfo("Talrand, Sky Summoner", 125, Rarity.RARE, mage.cards.t.TalrandSkySummoner.class));
+        cards.add(new SetCardInfo("Tayam, Luminous Enigma", 16, Rarity.MYTHIC, mage.cards.t.TayamLuminousEnigma.class));
         cards.add(new SetCardInfo("Tectonic Reformation", 162, Rarity.RARE, mage.cards.t.TectonicReformation.class));
         cards.add(new SetCardInfo("Temple of the False God", 319, Rarity.UNCOMMON, mage.cards.t.TempleOfTheFalseGod.class));
         cards.add(new SetCardInfo("Temur Charm", 230, Rarity.UNCOMMON, mage.cards.t.TemurCharm.class));
@@ -311,6 +329,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Unexpectedly Absent", 106, Rarity.RARE, mage.cards.u.UnexpectedlyAbsent.class));
         cards.add(new SetCardInfo("Vampire Nighthawk", 140, Rarity.UNCOMMON, mage.cards.v.VampireNighthawk.class));
         cards.add(new SetCardInfo("Vastwood Hydra", 194, Rarity.RARE, mage.cards.v.VastwoodHydra.class));
+        cards.add(new SetCardInfo("Verge Rangers", 29, Rarity.RARE, mage.cards.v.VergeRangers.class));
         cards.add(new SetCardInfo("Vigilante Justice", 164, Rarity.UNCOMMON, mage.cards.v.VigilanteJustice.class));
         cards.add(new SetCardInfo("Villainous Wealth", 233, Rarity.RARE, mage.cards.v.VillainousWealth.class));
         cards.add(new SetCardInfo("Vitality Hunter", 30, Rarity.RARE, mage.cards.v.VitalityHunter.class));
@@ -323,6 +342,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Wort, the Raidmother", 234, Rarity.RARE, mage.cards.w.WortTheRaidmother.class));
         cards.add(new SetCardInfo("Wydwen, the Biting Gale", 235, Rarity.RARE, mage.cards.w.WydwenTheBitingGale.class));
         cards.add(new SetCardInfo("Xathrid Necromancer", 141, Rarity.RARE, mage.cards.x.XathridNecromancer.class));
+        cards.add(new SetCardInfo("Yannik, Scavenging Sentinel", 19, Rarity.MYTHIC, mage.cards.y.YannikScavengingSentinel.class));
         cards.add(new SetCardInfo("Xyris, the Writhing Storm", 18, Rarity.MYTHIC, mage.cards.x.XyrisTheWrithingStorm.class));
         cards.add(new SetCardInfo("Yavimaya Coast", 322, Rarity.RARE, mage.cards.y.YavimayaCoast.class));
         cards.add(new SetCardInfo("Yavimaya Dryad", 197, Rarity.UNCOMMON, mage.cards.y.YavimayaDryad.class));

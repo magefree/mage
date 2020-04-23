@@ -85,6 +85,7 @@ public class GameEvent implements Serializable {
         CONVOKED,
         DISCARD_CARD,
         DISCARDED_CARD,
+        DISCARDED_CARDS,
         CYCLE_CARD, CYCLED_CARD, CYCLE_DRAW,
         CLASH, CLASHED,
         DAMAGE_PLAYER,
@@ -315,7 +316,7 @@ public class GameEvent implements Serializable {
          */
         LOST_CONTROL,
         GAIN_CONTROL, GAINED_CONTROL,
-        CREATE_TOKEN,
+        CREATE_TOKEN, CREATED_TOKEN,
         /* REGENERATE
          targetId    id of the creature to regenerate
          sourceId    sourceId of the effect doing the regeneration

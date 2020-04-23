@@ -5,6 +5,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.counters.CounterType;
+import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
@@ -21,6 +22,7 @@ public final class UnexpectedFangs extends CardImpl {
                 .setText("put a +1/+1 counter"));
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.LIFELINK.createInstance())
                 .setText("and a lifelink counter on target creature"));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     private UnexpectedFangs(final UnexpectedFangs card) {

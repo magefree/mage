@@ -79,7 +79,7 @@ enum LutriTheSpellchaserCompanionCondition implements CompanionCondition {
 
     @Override
     public String getRule() {
-        return "Each nonland card in your starting deck has a different name";
+        return "Each nonland card in your starting deck has a different name.";
     }
 
     @Override

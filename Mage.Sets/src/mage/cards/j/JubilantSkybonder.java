@@ -49,7 +49,7 @@ public final class JubilantSkybonder extends CardImpl {
         ContinuousEffect effect = new GainAbilityAllEffect(
                 new SimpleStaticAbility(new JubilantSkybonderEffect()),
                 Duration.WhileOnBattlefield, filter
-        );
+        ).withForceQuotes();
         effect.setDependedToType(DependencyType.AddingAbility);
         this.addAbility(new SimpleStaticAbility(effect));
     }

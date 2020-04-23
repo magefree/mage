@@ -73,10 +73,14 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
                     StringBuilder sbRule = threadLocalBuilder.get();
                     for (Cost cost : ability.getCosts()) {
                         if (cost.getText() != null && !cost.getText().isEmpty()) {
+                            String costText = cost.getText();
                             if (!cost.getText().startsWith("As an additional cost")) {
                                 sbRule.append("As an additional cost to cast this spell, ");
+                                if (!costText.isEmpty()) {
+                                    costText = Character.toLowerCase(costText.charAt(0)) + costText.substring(1);
+                                }
                             }
-                            sbRule.append(cost.getText()).append(".<br>");
+                            sbRule.append(costText).append(".<br>");
                         }
                     }
                     rules.add(sbRule.toString());

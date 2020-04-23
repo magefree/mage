@@ -28,7 +28,7 @@ public final class GustOfWind extends CardImpl {
     private static final FilterPermanent filter
             = new FilterControlledPermanent("you control a creature with flying");
     private static final FilterPermanent filter2
-            = new FilterNonlandPermanent("nonland permanent an opponent controls");
+            = new FilterNonlandPermanent("nonland permanent you don't control");
 
     static {
         filter.add(new AbilityPredicate(FlyingAbility.class));
@@ -47,7 +47,7 @@ public final class GustOfWind extends CardImpl {
 
         // Return target nonland permanent you don't control to its owner's hand.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter2));
 
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

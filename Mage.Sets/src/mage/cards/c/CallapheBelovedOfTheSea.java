@@ -54,8 +54,9 @@ public final class CallapheBelovedOfTheSea extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
                 new SimpleStaticAbility(
                         new CallapheBelovedOfTheSeaEffect()
-                ), Duration.WhileOnBattlefield, filter
-        )));
+                ), Duration.WhileOnBattlefield, filter)
+                .withForceQuotes()
+        ));
     }
 
     private CallapheBelovedOfTheSea(final CallapheBelovedOfTheSea card) {

@@ -43,6 +43,7 @@ public class Commander extends Constructed {
         banned.add("Emrakul, the Aeons Torn");
         banned.add("Erayo, Soratami Ascendant");
         banned.add("Fastbond");
+        banned.add("Flash");
         banned.add("Gifts Ungiven");
         banned.add("Griselbrand");
         banned.add("Iona, Shield of Emeria");

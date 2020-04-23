@@ -8,6 +8,7 @@ import mage.cards.Card;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.CreateTokenEvent;
+import mage.game.events.CreatedTokenEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
@@ -208,6 +209,9 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
                 ((TokenImpl) token).lastAddedTokenId = permanent.getId();
             }
             game.addSimultaneousEvent(new ZoneChangeEvent(permanent, permanent.getControllerId(), Zone.OUTSIDE, Zone.BATTLEFIELD));
+            if (permanent instanceof PermanentToken) {
+                game.addSimultaneousEvent(new CreatedTokenEvent(event.getSourceId(), (PermanentToken) permanent));
+            }
             if (attacking && game.getCombat() != null && game.getActivePlayerId().equals(permanent.getControllerId())) {
                 game.getCombat().addAttackingCreature(permanent.getId(), game, attackedPlayer);
             }

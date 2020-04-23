@@ -37,7 +37,7 @@ public final class LukkaCoppercoatOutcast extends CardImpl {
         this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
 
         // +1: Exile the top three cards of your library. Creature cards exiled this way gain "You may cast this card from exile as long as you control a Lukka planeswalker."
-        this.addAbility(new LoyaltyAbility(new LukkaCoppercoatOutcastCastEffect(), 1));
+        this.addAbility(new LoyaltyAbility(new LukkaCoppercoatOutcastExileEffect(), 1));
 
         // −2: Exile target creature you control, then reveal cards from the top of your library until you reveal a creature card with higher converted mana cost. Put that card onto the battlefield and the rest on the bottom of your library in a random order.
         Ability ability = new LoyaltyAbility(new LukkaCoppercoatOutcastPolymorphEffect(), -2);

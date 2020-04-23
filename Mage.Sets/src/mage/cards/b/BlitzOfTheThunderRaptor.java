@@ -27,9 +27,9 @@ public final class BlitzOfTheThunderRaptor extends CardImpl {
         // Blitz of the Thunder-Raptor deals damage to target creature or planeswalker equal to the number of instant and sorcery cards in your graveyard. If that creature or planeswalker would die this turn, exile it instead.
         this.getSpellAbility().addEffect(new DamageTargetEffect(xValue)
                 .setText("{this} deals damage to target creature or planeswalker " +
-                        "equal to the number of instant and sorcery cards in your graveyard."));
+                        "equal to the number of instant and sorcery cards in your graveyard"));
         this.getSpellAbility().addEffect(new ExileTargetIfDiesEffect()
-                .setText("If that creature or planeswalker would die this turn, exile it instead."));
+                .setText("If that creature or planeswalker would die this turn, exile it instead"));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker());
     }
 

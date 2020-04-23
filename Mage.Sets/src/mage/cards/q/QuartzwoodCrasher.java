@@ -35,7 +35,7 @@ public final class QuartzwoodCrasher extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Whenever one or more creatures you control with trample deal combat damage to a player, create an X/X green Dinosaur Beast creature token with trample, where X is the amount of damage those creatures dealt to that player.
-        this.addAbility(new QuartzwoodCrasherTriggeredAbility(), new QuartzwoodCrasherWatcher());
+        this.addAbility(new QuartzwoodCrasherTriggeredAbility());
     }
 
     private QuartzwoodCrasher(final QuartzwoodCrasher card) {
@@ -54,6 +54,7 @@ class QuartzwoodCrasherTriggeredAbility extends TriggeredAbilityImpl {
 
     QuartzwoodCrasherTriggeredAbility() {
         super(Zone.BATTLEFIELD, new QuartzwoodCrasherEffect(), false);
+        this.addWatcher(new QuartzwoodCrasherWatcher());
     }
 
     private QuartzwoodCrasherTriggeredAbility(final QuartzwoodCrasherTriggeredAbility ability) {
@@ -136,9 +137,10 @@ class QuartzwoodCrasherWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_POST) {
             damageMap.clear();
+            return;
         }
-        if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER
-                || ((DamagedPlayerEvent) event).isCombatDamage()) {
+        if (event.getType() != GameEvent.EventType.DAMAGED_PLAYER
+                || !((DamagedPlayerEvent) event).isCombatDamage()) {
             return;
         }
         Permanent creature = game.getPermanent(event.getSourceId());

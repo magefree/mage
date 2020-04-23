@@ -1,6 +1,7 @@
 package mage.cards.r;
 
 import mage.abilities.Ability;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.DiscardXTargetCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
@@ -8,14 +9,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
+import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetadjustment.TargetAdjuster;
 
 import java.util.UUID;
-import mage.abilities.costs.Cost;
-import mage.filter.common.FilterCreatureCard;
-import mage.target.Target;
 
 /**
  * @author fireshoes
@@ -26,7 +26,8 @@ public final class RestlessDreams extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}");
 
         // As an additional cost to cast Restless Dreams, discard X cards.
-        this.getSpellAbility().addCost(new DiscardXTargetCost(StaticFilters.FILTER_CARD_CARDS, true));
+        this.getSpellAbility().addCost(new DiscardXTargetCost(StaticFilters.FILTER_CARD_CARDS, false));
+
         // Return X target creature cards from your graveyard to your hand.
         Effect effect = new ReturnFromGraveyardToHandTargetEffect();
         effect.setText("Return X target creature cards from your graveyard to your hand");
@@ -57,8 +58,8 @@ enum RestlessDreamsAdjuster implements TargetAdjuster {
                 xValue = ((DiscardXTargetCost) cost).getAmount();
             }
         }
-        Target target = new TargetCardInYourGraveyard(xValue, 
-                new FilterCreatureCard(new StringBuilder(xValue).append(xValue != 1 ? 
+        Target target = new TargetCardInYourGraveyard(xValue,
+                new FilterCreatureCard(new StringBuilder(xValue).append(xValue != 1 ?
                         " creature cards" : "creature card").append(" from your graveyard").toString()));
         ability.addTarget(target);
     }

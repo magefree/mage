@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import mage.abilities.Ability;
@@ -27,7 +26,7 @@ public final class TurbulentDreams extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{U}{U}");
 
         // As an additional cost to cast Turbulent Dreams, discard X cards.
-        this.getSpellAbility().addCost(new DiscardXTargetCost(StaticFilters.FILTER_CARD_CARDS, true));
+        this.getSpellAbility().addCost(new DiscardXTargetCost(StaticFilters.FILTER_CARD_CARDS, false));
 
         // Return X target nonland permanents to their owners' hands.
         Effect effect = new ReturnToHandTargetEffect();

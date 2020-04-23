@@ -44,7 +44,7 @@ public final class MutualDestruction extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(FlashAbility.getInstance(), Duration.Custom),
                 condition, "This spell has flash as long as you control a permanent with flash."
-        )));
+        )).setRuleAtTheTop(true));
 
         // As an additional cost to cast this spell, sacrifice a creature.
         this.getSpellAbility().addCost(new SacrificeTargetCost(
