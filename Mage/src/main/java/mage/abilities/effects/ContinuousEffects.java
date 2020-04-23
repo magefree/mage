@@ -338,7 +338,7 @@ public class ContinuousEffects implements Serializable {
         }
         // boolean checkLKI = event.getType().equals(EventType.ZONE_CHANGE) || event.getType().equals(EventType.DESTROYED_PERMANENT);
         //get all applicable transient Replacement effects
-        for (Iterator<ReplacementEffect> iterator = replacementEffects.iterator(); iterator.hasNext();) {
+        for (Iterator<ReplacementEffect> iterator = replacementEffects.iterator(); iterator.hasNext(); ) {
             ReplacementEffect effect = iterator.next();
             if (!effect.checksEventType(event, game)) {
                 continue;
@@ -371,7 +371,7 @@ public class ContinuousEffects implements Serializable {
             }
         }
 
-        for (Iterator<PreventionEffect> iterator = preventionEffects.iterator(); iterator.hasNext();) {
+        for (Iterator<PreventionEffect> iterator = preventionEffects.iterator(); iterator.hasNext(); ) {
             PreventionEffect effect = iterator.next();
             if (!effect.checksEventType(event, game)) {
                 continue;
@@ -740,8 +740,8 @@ public class ContinuousEffects implements Serializable {
      * @param event
      * @param targetAbility ability the event is attached to. can be null.
      * @param game
-     * @param silentMode true if the event does not really happen but it's
-     * checked if the event would be replaced
+     * @param silentMode    true if the event does not really happen but it's
+     *                      checked if the event would be replaced
      * @return
      */
     public boolean preventedByRuleModification(GameEvent event, Ability targetAbility, Game game, boolean silentMode) {
@@ -789,7 +789,7 @@ public class ContinuousEffects implements Serializable {
         do {
             Map<ReplacementEffect, Set<Ability>> rEffects = getApplicableReplacementEffects(event, game);
             // Remove all consumed effects (ability dependant)
-            for (Iterator<ReplacementEffect> it1 = rEffects.keySet().iterator(); it1.hasNext();) {
+            for (Iterator<ReplacementEffect> it1 = rEffects.keySet().iterator(); it1.hasNext(); ) {
                 ReplacementEffect entry = it1.next();
                 if (consumed.containsKey(entry.getId()) /*&& !(entry instanceof CommanderReplacementEffect) */) { // 903.9.
                     Set<UUID> consumedAbilitiesIds = consumed.get(entry.getId());
@@ -945,7 +945,7 @@ public class ContinuousEffects implements Serializable {
         Map<ContinuousEffect, Set<UUID>> waitingEffects = new LinkedHashMap<>();
         Set<UUID> appliedEffects = new HashSet<>();
         applyCounters.apply(Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, null, game);
-        activeLayerEffects=getLayeredEffects(game);
+        activeLayerEffects = getLayeredEffects(game);
 
         while (!done) { // loop needed if a added effect adds again an effect (e.g. Level 5- of Joraga Treespeaker)
             done = true;
@@ -953,59 +953,84 @@ public class ContinuousEffects implements Serializable {
 
             // debug
             /*
-            System.out.println(game.getTurn() + ", " + game.getPhase() + ": " + "need apply " + layer.stream()
-                    .map((eff) -> {return eff.getClass().getName().replaceAll(".+\\.(.+)", "$1");})
-                    .collect(Collectors.joining(", ")));
+            System.out.println(
+                    game.getTurn()
+                            + ", " + game.getPhase()
+                            + ": need to apply "
+                            + layer.stream()
+                            .map(Object::getClass)
+                            .map(Class::getName)
+                            .map(s -> s.replaceAll(".+\\.(.+)", "$1"))
+                            .collect(Collectors.joining(", "))
+            );
              */
             for (ContinuousEffect effect : layer) {
-                if (activeLayerEffects.contains(effect) && !appliedEffects.contains(effect.getId())) { // Effect does still exist and was not applied yet
-                    Set<UUID> dependentTo = effect.isDependentTo(layer);
-                    if (!appliedEffects.containsAll(dependentTo)) {
+                if (!activeLayerEffects.contains(effect) || appliedEffects.contains(effect.getId())) {
+                    continue;
+                } // Effect does still exist and was not applied yet
+                Set<UUID> dependentTo = effect.isDependentTo(layer);
+                if (!appliedEffects.containsAll(dependentTo)) {
+                    waitingEffects
+                            .entrySet()
+                            .stream()
+                            .filter(entry -> dependentTo.contains(entry.getKey().getId())
+                                    && entry.getValue().contains(effect.getId()))
+                            .forEach(entry -> {
+                                entry.getValue().remove(effect.getId());
+                                dependentTo.remove(entry.getKey().getId());
+                            });
+                    waitingEffects.entrySet().removeIf(x -> x.getValue() == null || x.getValue().isEmpty());
+                    if (!dependentTo.isEmpty() && !waitingEffects.containsKey(effect)) {
+                        // make sure circular dependencies weren't the only dependencies
                         waitingEffects.put(effect, dependentTo);
                         continue;
                     }
-                    List<Ability> appliedAbilities = appliedEffectAbilities.get(effect);
-                    Set<Ability> abilities = layeredEffects.getAbility(effect.getId());
-                    for (Ability ability : abilities) {
-                        if (appliedAbilities == null || !appliedAbilities.contains(ability)) {
-                            if (appliedAbilities == null) {
-                                appliedAbilities = new ArrayList<>();
-                                appliedEffectAbilities.put(effect, appliedAbilities);
-                            }
-                            appliedAbilities.add(ability);
-                            effect.apply(Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, ability, game);
-                            done = false;
-                            // list must be updated after each applied effect (eg. if "Turn to Frog" removes abilities)
-                            activeLayerEffects = getLayeredEffects(game);
-                        }
+                }
+                List<Ability> appliedAbilities = appliedEffectAbilities.get(effect);
+                Set<Ability> abilities = layeredEffects.getAbility(effect.getId());
+                for (Ability ability : abilities) {
+                    if (appliedAbilities != null && appliedAbilities.contains(ability)) {
+                        continue;
                     }
-                    appliedEffects.add(effect.getId());
+                    if (appliedAbilities == null) {
+                        appliedAbilities = new ArrayList<>();
+                        appliedEffectAbilities.put(effect, appliedAbilities);
+                    }
+                    appliedAbilities.add(ability);
+                    effect.apply(Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, ability, game);
+                    done = false;
+                    // list must be updated after each applied effect (eg. if "Turn to Frog" removes abilities)
+                    activeLayerEffects = getLayeredEffects(game);
+                }
+                appliedEffects.add(effect.getId());
 
-                    if (!waitingEffects.isEmpty()) {
-                        // check if waiting effects can be applied now
-                        for (Iterator<Map.Entry<ContinuousEffect, Set<UUID>>> iterator = waitingEffects.entrySet().iterator(); iterator.hasNext();) {
-                            Map.Entry<ContinuousEffect, Set<UUID>> entry = iterator.next();
-                            if (appliedEffects.containsAll(entry.getValue())) { // all dependent to effects are applied now so apply the effect itself
-                                appliedAbilities = appliedEffectAbilities.get(entry.getKey());
-                                abilities = layeredEffects.getAbility(entry.getKey().getId());
-                                for (Ability ability : abilities) {
-                                    if (appliedAbilities == null || !appliedAbilities.contains(ability)) {
-                                        if (appliedAbilities == null) {
-                                            appliedAbilities = new ArrayList<>();
-                                            appliedEffectAbilities.put(entry.getKey(), appliedAbilities);
-                                        }
-                                        appliedAbilities.add(ability);
-                                        entry.getKey().apply(Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, ability, game);
-                                        done = false;
-                                        // list must be updated after each applied effect (eg. if "Turn to Frog" removes abilities)
-                                        activeLayerEffects = getLayeredEffects(game);
-                                    }
-                                }
-                                appliedEffects.add(entry.getKey().getId());
-                                iterator.remove();
-                            }
-                        }
+                if (waitingEffects.isEmpty()) {
+                    continue;
+                }
+                // check if waiting effects can be applied now
+                for (Iterator<Map.Entry<ContinuousEffect, Set<UUID>>> iterator = waitingEffects.entrySet().iterator(); iterator.hasNext(); ) {
+                    Map.Entry<ContinuousEffect, Set<UUID>> entry = iterator.next();
+                    if (!appliedEffects.containsAll(entry.getValue())) { // all dependent to effects are applied now so apply the effect itself
+                        continue;
                     }
+                    appliedAbilities = appliedEffectAbilities.get(entry.getKey());
+                    abilities = layeredEffects.getAbility(entry.getKey().getId());
+                    for (Ability ability : abilities) {
+                        if (appliedAbilities != null && appliedAbilities.contains(ability)) {
+                            continue;
+                        }
+                        if (appliedAbilities == null) {
+                            appliedAbilities = new ArrayList<>();
+                            appliedEffectAbilities.put(entry.getKey(), appliedAbilities);
+                        }
+                        appliedAbilities.add(ability);
+                        entry.getKey().apply(Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, ability, game);
+                        done = false;
+                        // list must be updated after each applied effect (eg. if "Turn to Frog" removes abilities)
+                        activeLayerEffects = getLayeredEffects(game);
+                    }
+                    appliedEffects.add(entry.getKey().getId());
+                    iterator.remove();
                 }
             }
         }
