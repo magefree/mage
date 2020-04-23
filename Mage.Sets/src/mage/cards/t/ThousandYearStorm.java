@@ -22,7 +22,6 @@ import mage.watchers.Watcher;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.UUID;
 
 /**
@@ -114,9 +113,7 @@ class ThousandYearStormEffect extends OneShotEffect {
                     numberOfCopies = (int) game.getState().getValue(stateSearchId);
                 }
                 if (numberOfCopies > 0) {
-                    for (int i = 0; i < numberOfCopies; i++) {
-                        spell.createCopyOnStack(game, source, source.getControllerId(), true);
-                    }
+                    spell.createCopyOnStack(game, source, source.getControllerId(), true, numberOfCopies);
                 }
                 return true;
             }

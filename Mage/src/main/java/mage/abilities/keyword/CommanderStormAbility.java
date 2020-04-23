@@ -101,9 +101,7 @@ class CommanderStormEffect extends OneShotEffect {
             return false;
         }
         game.informPlayers(spell.getLogName() + " will be copied " + stormCount + " time" + (stormCount > 1 ? "s" : ""));
-        for (int i = 0; i < stormCount; i++) {
-            spell.createCopyOnStack(game, source, source.getControllerId(), true);
-        }
+        spell.createCopyOnStack(game, source, source.getControllerId(), true, stormCount);
         return true;
     }
 

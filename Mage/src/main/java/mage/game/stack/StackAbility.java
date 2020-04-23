@@ -573,19 +573,30 @@ public class StackAbility extends StackObjImpl implements Ability {
 
     @Override
     public StackObject createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets) {
-        Ability newAbility = this.copy();
-        newAbility.newId();
-        StackAbility newStackAbility = new StackAbility(newAbility, newControllerId);
-        game.getStack().push(newStackAbility);
-        if (chooseNewTargets && !newAbility.getTargets().isEmpty()) {
-            Player controller = game.getPlayer(newControllerId);
-            Outcome outcome = newAbility.getEffects().getOutcome(newAbility);
-            if (controller.chooseUse(outcome, "Choose new targets?", source, game)) {
-                newAbility.getTargets().clearChosen();
-                newAbility.getTargets().chooseTargets(outcome, newControllerId, newAbility, false, game, false);
-            }
+        return createCopyOnStack(game, source, newControllerId, chooseNewTargets, 1);
+    }
+
+    public StackObject createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets, int amount) {
+        StackAbility newStackAbility = null;
+        GameEvent gameEvent = GameEvent.getEvent(GameEvent.EventType.COPY_STACKOBJECT, this.getId(), source.getSourceId(), newControllerId, amount);
+        if (game.replaceEvent(gameEvent)) {
+            return null;
         }
-        game.fireEvent(new GameEvent(GameEvent.EventType.COPIED_STACKOBJECT, newStackAbility.getId(), this.getId(), newControllerId));
+        for (int i = 0; i < gameEvent.getAmount(); i++) {
+            Ability newAbility = this.copy();
+            newAbility.newId();
+            newStackAbility = new StackAbility(newAbility, newControllerId);
+            game.getStack().push(newStackAbility);
+            if (chooseNewTargets && !newAbility.getTargets().isEmpty()) {
+                Player controller = game.getPlayer(newControllerId);
+                Outcome outcome = newAbility.getEffects().getOutcome(newAbility);
+                if (controller.chooseUse(outcome, "Choose new targets?", source, game)) {
+                    newAbility.getTargets().clearChosen();
+                    newAbility.getTargets().chooseTargets(outcome, newControllerId, newAbility, false, game, false);
+                }
+            }
+            game.fireEvent(new GameEvent(GameEvent.EventType.COPIED_STACKOBJECT, newStackAbility.getId(), this.getId(), newControllerId));
+        }
         return newStackAbility;
     }
 

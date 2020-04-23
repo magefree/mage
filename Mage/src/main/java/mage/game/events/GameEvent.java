@@ -150,7 +150,7 @@ public class GameEvent implements Serializable {
         SPELL_CAST,
         ACTIVATE_ABILITY, ACTIVATED_ABILITY,
         TRIGGERED_ABILITY,
-        COPIED_STACKOBJECT,
+        COPY_STACKOBJECT,COPIED_STACKOBJECT,
         /* ADD_MANA
          targetId    id of the ability that added the mana
          sourceId    sourceId of the ability that added the mana

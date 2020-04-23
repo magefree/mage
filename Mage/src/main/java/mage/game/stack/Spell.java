@@ -1,6 +1,5 @@
 package mage.game.stack;
 
-import java.util.*;
 import mage.MageInt;
 import mage.MageObject;
 import mage.Mana;
@@ -31,6 +30,8 @@ import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.util.GameLog;
 import mage.util.SubTypeList;
+
+import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -992,13 +993,25 @@ public class Spell extends StackObjImpl implements Card {
 
     @Override
     public StackObject createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets) {
-        Spell copy = this.copySpell(newControllerId);
-        game.getState().setZone(copy.getId(), Zone.STACK); // required for targeting ex: Nivmagus Elemental
-        game.getStack().push(copy);
-        if (chooseNewTargets) {
-            copy.chooseNewTargets(game, newControllerId);
+        return createCopyOnStack(game, source, newControllerId, chooseNewTargets, 1);
+    }
+
+    @Override
+    public StackObject createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets, int amount) {
+        Spell copy = null;
+        GameEvent gameEvent = GameEvent.getEvent(EventType.COPY_STACKOBJECT, this.getId(), source.getSourceId(), newControllerId, amount);
+        if (game.replaceEvent(gameEvent)) {
+            return null;
         }
-        game.fireEvent(new GameEvent(EventType.COPIED_STACKOBJECT, copy.getId(), this.getId(), newControllerId));
+        for (int i = 0; i < gameEvent.getAmount(); i++) {
+            copy = this.copySpell(newControllerId);
+            game.getState().setZone(copy.getId(), Zone.STACK); // required for targeting ex: Nivmagus Elemental
+            game.getStack().push(copy);
+            if (chooseNewTargets) {
+                copy.chooseNewTargets(game, newControllerId);
+            }
+            game.fireEvent(new GameEvent(EventType.COPIED_STACKOBJECT, copy.getId(), this.getId(), newControllerId));
+        }
         return copy;
     }
 

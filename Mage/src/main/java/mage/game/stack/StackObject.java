@@ -1,7 +1,5 @@
-
 package mage.game.stack;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.constants.Zone;
@@ -9,6 +7,8 @@ import mage.constants.ZoneDetail;
 import mage.filter.FilterPermanent;
 import mage.game.Controllable;
 import mage.game.Game;
+
+import java.util.UUID;
 
 public interface StackObject extends MageObject, Controllable {
 
@@ -22,13 +22,15 @@ public interface StackObject extends MageObject, Controllable {
 
     Ability getStackAbility();
 
-//     int getConvertedManaCost();
+    //     int getConvertedManaCost();
     boolean chooseNewTargets(Game game, UUID playerId, boolean forceChange, boolean onlyOneTarget, FilterPermanent filterNewTarget);
 
     StackObject createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets);
-    
+
+    StackObject createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets, int amount);
+
     boolean isTargetChanged();
-    
+
     void setTargetChanged(boolean targetChanged);
 
     @Override
