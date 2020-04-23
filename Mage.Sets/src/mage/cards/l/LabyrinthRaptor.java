@@ -16,7 +16,7 @@ import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.filter.predicate.permanent.BlockedByIdPredicate;
+import mage.filter.predicate.permanent.BlockingAttackerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -101,7 +101,7 @@ class LabyrinthRaptorEffect extends OneShotEffect {
             return false;
         }
         FilterPermanent filterPermanent = new FilterPermanent("creature blocking " + permanent.getIdName());
-        filterPermanent.add(new BlockedByIdPredicate(permanent.getId()));
+        filterPermanent.add(new BlockingAttackerIdPredicate(permanent.getId()));
         Effect effect = new SacrificeEffect(filterPermanent, 1, "");
         effect.setTargetPointer(new FixedTarget(player.getId(), game));
         return effect.apply(game, source);
