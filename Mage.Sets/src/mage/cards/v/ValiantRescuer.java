@@ -84,6 +84,12 @@ class ValiantRescuerTriggeredAbility extends TriggeredAbilityImpl {
     public TriggeredAbility copy() {
         return null;
     }
+
+    @Override
+    public String getRule() {
+        return "Whenever you cycle another card for the first time each turn, " +
+                "create a 1/1 white Human Soldier creature token.";
+    }
 }
 
 class ValiantRescuerWatcher extends Watcher {
@@ -96,7 +102,8 @@ class ValiantRescuerWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (game.getState().getStack().isEmpty()) {
+        if (event.getType() != GameEvent.EventType.ACTIVATED_ABILITY
+                || game.getState().getStack().isEmpty()) {
             return;
         }
         StackObject item = game.getState().getStack().getFirst();
