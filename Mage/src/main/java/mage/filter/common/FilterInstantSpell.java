@@ -12,7 +12,7 @@ public class FilterInstantSpell extends FilterSpell {
 
     public FilterInstantSpell(String name) {
         super(name);
-        this.add(Predicates.or(CardType.INSTANT.getPredicate()));
+        this.add(CardType.INSTANT.getPredicate());
     }
 
     public FilterInstantSpell(final FilterInstantSpell filter) {

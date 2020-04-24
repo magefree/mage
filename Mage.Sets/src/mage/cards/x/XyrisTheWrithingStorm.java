@@ -6,6 +6,7 @@ import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -55,7 +56,7 @@ public final class XyrisTheWrithingStorm extends CardImpl {
 class XyrisTheWrithingStormDrawAbility extends TriggeredAbilityImpl  {
 
     public XyrisTheWrithingStormDrawAbility() {
-        super(Zone.BATTLEFIELD, new XyrisTheWrithingStormTokenEffect(), false);
+        super(Zone.BATTLEFIELD, new CreateTokenEffect(new SnakeToken(), 1), false);
     }
 
     public XyrisTheWrithingStormDrawAbility(final XyrisTheWrithingStormDrawAbility ability) {
@@ -90,36 +91,7 @@ class XyrisTheWrithingStormDrawAbility extends TriggeredAbilityImpl  {
 
     @Override
     public String getRule() {
-        return "Whenever an opponent draws a card except the first one they draw in each of their draw steps" + super.getRule();
-    }
-}
-
-
-class XyrisTheWrithingStormTokenEffect extends OneShotEffect {
-    XyrisTheWrithingStormTokenEffect() {
-        super(Outcome.Benefit);
-        this.staticText = ", create a 1/1 green Snake creature token.";
-    }
-
-    XyrisTheWrithingStormTokenEffect(final XyrisTheWrithingStormTokenEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public XyrisTheWrithingStormTokenEffect copy() {
-        return new XyrisTheWrithingStormTokenEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Player controller = game.getPlayer(source.getControllerId());
-        if (player != null && controller != null) {
-            Token snakeToken = new SnakeToken();
-            snakeToken.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
-            return true;
-        }
-        return false;
+        return "Whenever an opponent draws a card except the first one they draw in each of their draw steps, create a 1/1 green Snake creature token.";
     }
 }
 
