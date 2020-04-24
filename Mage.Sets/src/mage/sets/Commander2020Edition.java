@@ -176,6 +176,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Izzet Signet", 243, Rarity.UNCOMMON, mage.cards.i.IzzetSignet.class));
         cards.add(new SetCardInfo("Jace, Architect of Thought", 114, Rarity.MYTHIC, mage.cards.j.JaceArchitectOfThought.class));
         cards.add(new SetCardInfo("Jirina Kudro", 8, Rarity.MYTHIC, mage.cards.j.JirinaKudro.class));
+        cards.add(new SetCardInfo("Kalamax, the Stormsire", 9, Rarity.MYTHIC, mage.cards.k.KalamaxTheStormsire.class));
         cards.add(new SetCardInfo("Kalemne's Captain", 92, Rarity.RARE, mage.cards.k.KalemnesCaptain.class));
         cards.add(new SetCardInfo("Karametra, God of Harvests", 218, Rarity.MYTHIC, mage.cards.k.KarametraGodOfHarvests.class));
         cards.add(new SetCardInfo("Kathril, Aspect Warper", 10, Rarity.MYTHIC, mage.cards.k.KathrilAspectWarper.class));
@@ -343,6 +344,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Wydwen, the Biting Gale", 235, Rarity.RARE, mage.cards.w.WydwenTheBitingGale.class));
         cards.add(new SetCardInfo("Xathrid Necromancer", 141, Rarity.RARE, mage.cards.x.XathridNecromancer.class));
         cards.add(new SetCardInfo("Yannik, Scavenging Sentinel", 19, Rarity.MYTHIC, mage.cards.y.YannikScavengingSentinel.class));
+        cards.add(new SetCardInfo("Xyris, the Writhing Storm", 18, Rarity.MYTHIC, mage.cards.x.XyrisTheWrithingStorm.class));
         cards.add(new SetCardInfo("Yavimaya Coast", 322, Rarity.RARE, mage.cards.y.YavimayaCoast.class));
         cards.add(new SetCardInfo("Yavimaya Dryad", 197, Rarity.UNCOMMON, mage.cards.y.YavimayaDryad.class));
         cards.add(new SetCardInfo("Zaxara, the Exemplary", 20, Rarity.MYTHIC, mage.cards.z.ZaxaraTheExemplary.class));
