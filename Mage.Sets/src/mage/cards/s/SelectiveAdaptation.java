@@ -49,7 +49,7 @@ class SelectiveAdaptationEffect extends OneShotEffect {
         DOUBLE_STRIKE(DoubleStrikeAbility.class, "double strike"),
         DEATHTOUCH(DeathtouchAbility.class, "deathtouch"),
         HASTE(HasteAbility.class, "haste"),
-        HEXPROOF(HexproofInterface.class, "hexproof"),
+        HEXPROOF(HexproofBaseAbility.class, "hexproof"),
         INDESTRUCTIBLE(IndestructibleAbility.class, "indestructible"),
         LIFELINK(LifelinkAbility.class, "lifelink"),
         MENACE(MenaceAbility.class, "menace"),

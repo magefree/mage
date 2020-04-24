@@ -137,7 +137,7 @@ class KathrilAspectWarperEffect extends OneShotEffect {
         if (ability instanceof DeathtouchAbility) {
             return CounterType.DEATHTOUCH;
         }
-        if (ability instanceof HexproofInterface) {
+        if (ability instanceof HexproofBaseAbility) {
             return CounterType.HEXPROOF;
         }
         if (ability instanceof IndestructibleAbility) {

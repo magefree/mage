@@ -107,7 +107,7 @@ class SoulflayerEffect extends ContinuousEffectImpl implements SourceEffect {
                             if (cardAbility instanceof HasteAbility) {
                                 abilitiesToAdd.add(HasteAbility.getInstance());
                             }
-                            if (cardAbility instanceof HexproofInterface) {
+                            if (cardAbility instanceof HexproofBaseAbility) {
                                 abilitiesToAdd.add(HexproofAbility.getInstance());
                             }
                             if (cardAbility instanceof IndestructibleAbility) {

@@ -29,7 +29,6 @@ import mage.game.command.CommandObject;
 import mage.game.events.*;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.token.SquirrelToken;
-import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
@@ -1062,43 +1061,13 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                     return false;
                 }
             }
-            if (abilities.containsKey(HexproofAbility.getInstance().getId())) {
-                if (game.getPlayer(this.getControllerId()).hasOpponent(sourceControllerId, game)
-                        && null == game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, null, sourceControllerId, game)) {
-                    return false;
-                }
-            }
-
-            if (abilities.containsKey(HexproofFromWhiteAbility.getInstance().getId())) {
-                if (game.getPlayer(this.getControllerId()).hasOpponent(sourceControllerId, game)
-                        && null == game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, null, sourceControllerId, game)
-                        && source.getColor(game).isWhite()) {
-                    return false;
-                }
-            }
-
-            if (abilities.containsKey(HexproofFromBlueAbility.getInstance().getId())) {
-                if (game.getPlayer(this.getControllerId()).hasOpponent(sourceControllerId, game)
-                        && null == game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, null, sourceControllerId, game)
-                        && source.getColor(game).isBlue()) {
-                    return false;
-                }
-            }
-
-            if (abilities.containsKey(HexproofFromBlackAbility.getInstance().getId())) {
-                if (game.getPlayer(this.getControllerId()).hasOpponent(sourceControllerId, game)
-                        && null == game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, null, sourceControllerId, game)
-                        && source.getColor(game).isBlack()) {
-                    return false;
-                }
-            }
-
-            if (abilities.containsKey(HexproofFromMonocoloredAbility.getInstance().getId())) {
-                if (game.getPlayer(this.getControllerId()).hasOpponent(sourceControllerId, game)
-                        && null == game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, null, sourceControllerId, game)
-                        && !source.getColor(game).isColorless() && !source.getColor(game).isMulticolored()) {
-                    return false;
-                }
+            if (game.getPlayer(this.getControllerId()).hasOpponent(sourceControllerId, game)
+                    && game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, null, sourceControllerId, game) == null
+                    && abilities.stream()
+                    .filter(HexproofBaseAbility.class::isInstance)
+                    .map(HexproofBaseAbility.class::cast)
+                    .anyMatch(ability -> ability.checkObject(source, game))) {
+                return false;
             }
 
             if (hasProtectionFrom(source, game)) {
