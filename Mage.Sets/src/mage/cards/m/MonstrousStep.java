@@ -75,12 +75,11 @@ class MonstrousStepEffect extends RequirementEffect {
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         BlockedAttackerWatcher watcher = game.getState().getWatcher(BlockedAttackerWatcher.class);
-        if (watcher == null
-                || watcher.creatureHasBlockedAttacker(game.getPermanent(source.getFirstTarget()), permanent, game)
-                || !permanent.getId().equals(source.getTargets().get(1).getFirstTarget())) {
-            return permanent.canBlock(source.getFirstTarget(), game);
-        }
-        return false;
+        return permanent != null
+                && watcher != null
+                && !watcher.creatureHasBlockedAttacker(game.getPermanent(source.getFirstTarget()), permanent, game)
+                && permanent.getId().equals(source.getTargets().get(1).getFirstTarget())
+                && permanent.canBlock(source.getFirstTarget(), game);
     }
 
     @Override
