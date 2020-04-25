@@ -65,7 +65,7 @@ class MonstrousStepEffect extends RequirementEffect {
 
     MonstrousStepEffect() {
         super(Duration.EndOfTurn);
-        staticText = "Another target creature blocks it this turn if able";
+        staticText = "Up to one other target creature blocks it this turn if able";
     }
 
     private MonstrousStepEffect(final MonstrousStepEffect effect) {
@@ -94,7 +94,7 @@ class MonstrousStepEffect extends RequirementEffect {
 
     @Override
     public UUID mustBlockAttacker(Ability source, Game game) {
-        return source.getTargets().get(1).getFirstTarget();
+        return source.getFirstTarget();
     }
 
     @Override
