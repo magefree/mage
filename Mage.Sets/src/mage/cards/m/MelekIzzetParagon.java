@@ -1,4 +1,3 @@
-
 package mage.cards.m;
 
 import mage.MageInt;
@@ -25,21 +24,21 @@ import mage.target.targetpointer.FixedTarget;
 import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
  */
 public final class MelekIzzetParagon extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("instant or sorcery card");
+    private static final FilterCard filter = new FilterCard("cast instant or sorcery spells");
 
     static {
         filter.add(Predicates.or(
                 CardType.INSTANT.getPredicate(),
-                CardType.SORCERY.getPredicate()));
+                CardType.SORCERY.getPredicate()
+        ));
     }
 
     public MelekIzzetParagon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{R}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.WEIRD);
         this.subtype.add(SubType.WIZARD);

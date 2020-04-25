@@ -69,7 +69,7 @@ class BolassCitadelPlayTheTopCardEffect extends AsThoughEffectImpl {
     BolassCitadelPlayTheTopCardEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE,
                 Duration.WhileOnBattlefield, Outcome.AIDontUseIt); // AI will need help with this
-        staticText = "You may play the top card of your library. If you cast a spell this way, "
+        staticText = "You may play lands and cast spells from the top of your library. If you cast a spell this way, "
                 + "pay life equal to its converted mana cost rather than pay its mana cost.";
     }
 
