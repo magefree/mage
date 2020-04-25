@@ -15,7 +15,7 @@ import java.util.Date;
 public class ClassicModern extends Constructed {
 
     public ClassicModern() {
-        super("Constructed - Modern");
+        super("Constructed - Classic Modern");
 
         Date cutoff = EighthEdition.getInstance().getReleaseDate(); // Eighth edition release date
         Date finalCutoff = WarOfTheSpark.getInstance().getReleaseDate(); // WAR release date
