@@ -38,9 +38,9 @@ public final class Reveillark extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // When Reveillark leaves the battlefield, return up to two target creature cards with power 2 or less from your graveyard to the battlefield.
-        Ability ability = new LeavesBattlefieldTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(), false);
+        Ability ability = new LeavesBattlefieldTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(false, false), false);
         ability.addTarget(new TargetCardInYourGraveyard(0,2,filter));
-        this.addAbility(ability);        
+        this.addAbility(ability);
         // Evoke {5}{W}
         this.addAbility(new EvokeAbility(this, "{5}{W}"));
     }

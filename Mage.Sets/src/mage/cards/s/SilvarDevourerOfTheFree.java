@@ -7,6 +7,7 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.HexproofAbility;
+import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.MenaceAbility;
 import mage.abilities.keyword.PartnerWithAbility;
 import mage.cards.CardImpl;
@@ -50,8 +51,8 @@ public final class SilvarDevourerOfTheFree extends CardImpl {
                 new SacrificeTargetCost(new TargetControlledPermanent(filter))
         );
         ability.addEffect(new GainAbilitySourceEffect(
-                HexproofAbility.getInstance(), Duration.EndOfTurn
-        ).setText("It gains hexproof until end of turn"));
+                IndestructibleAbility.getInstance(), Duration.EndOfTurn
+        ).setText("It gains indestructible until end of turn"));
         this.addAbility(ability);
     }
 
