@@ -9,7 +9,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.mana.BasicManaAbility;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -32,12 +32,12 @@ public final class KyrenToy extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // {1}, {T}: Put a charge counter on Kyren Toy.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance(1)), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance(1)), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
         // {T}, Remove X charge counters from Kyren Toy: Add X mana of {C}, and then add {C}.
-        ability = new KyrenToyManaAbility();
+        ability = new SimpleManaAbility(Zone.BATTLEFIELD, new KyrenToyManaEffect(), new TapSourceCost());
         ability.addCost(new RemoveVariableCountersSourceCost(CounterType.CHARGE.createInstance(1)));
         this.addAbility(ability);
     }
@@ -51,30 +51,14 @@ public final class KyrenToy extends CardImpl {
         return new KyrenToy(this);
     }
 
-    private class KyrenToyManaAbility extends BasicManaAbility {
-
-        KyrenToyManaAbility() {
-            super(new KyrenToyManaEffect());
-        }
-
-        KyrenToyManaAbility(final KyrenToyManaAbility ability) {
-            super(ability);
-        }
-
-        @Override
-        public KyrenToyManaAbility copy() {
-            return new KyrenToyManaAbility(this);
-        }
-    }
-
     private static class KyrenToyManaEffect extends ManaEffect {
 
-        KyrenToyManaEffect() {
+        private KyrenToyManaEffect() {
             super();
             staticText = "Add an amount of {C} equal to X plus one";
         }
 
-        KyrenToyManaEffect(final KyrenToyManaEffect effect) {
+        private KyrenToyManaEffect(final KyrenToyManaEffect effect) {
             super(effect);
         }
 
@@ -98,16 +82,16 @@ public final class KyrenToy extends CardImpl {
                 return mana;
             }
             Player player = game.getPlayer(source.getControllerId());
-            if (player != null) {
-                int numberOfMana = 0;
-                for (Cost cost : source.getCosts()) {
-                    if (cost instanceof RemoveVariableCountersSourceCost) {
-                        numberOfMana = ((RemoveVariableCountersSourceCost) cost).getAmount();
-                    }
-                }
-                return new Mana(Mana.ColorlessMana(numberOfMana + 1));
+            if (player == null) {
+                return mana;
             }
-            return mana;
+            int numberOfMana = 0;
+            for (Cost cost : source.getCosts()) {
+                if (cost instanceof RemoveVariableCountersSourceCost) {
+                    numberOfMana = ((RemoveVariableCountersSourceCost) cost).getAmount();
+                }
+            }
+            return new Mana(Mana.ColorlessMana(numberOfMana + 1));
         }
 
         @Override
