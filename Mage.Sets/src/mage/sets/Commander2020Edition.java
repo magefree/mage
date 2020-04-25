@@ -284,6 +284,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Skycloud Expanse", 312, Rarity.RARE, mage.cards.s.SkycloudExpanse.class));
         cards.add(new SetCardInfo("Slice and Dice", 159, Rarity.UNCOMMON, mage.cards.s.SliceAndDice.class));
         cards.add(new SetCardInfo("Slice in Twain", 190, Rarity.UNCOMMON, mage.cards.s.SliceInTwain.class));
+        cards.add(new SetCardInfo("Slippery Bogbonder", 66, Rarity.RARE, mage.cards.s.SlipperyBogbonder.class));
         cards.add(new SetCardInfo("Smoldering Crater", 313, Rarity.COMMON, mage.cards.s.SmolderingCrater.class));
         cards.add(new SetCardInfo("Smoldering Marsh", 314, Rarity.RARE, mage.cards.s.SmolderingMarsh.class));
         cards.add(new SetCardInfo("Soaring Seacliff", 315, Rarity.COMMON, mage.cards.s.SoaringSeacliff.class));
