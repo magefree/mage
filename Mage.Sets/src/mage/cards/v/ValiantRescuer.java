@@ -94,7 +94,7 @@ class ValiantRescuerTriggeredAbility extends TriggeredAbilityImpl {
 
 class ValiantRescuerWatcher extends Watcher {
 
-    private final Map<UUID, Map<UUID, Integer>> playerMap = new HashMap();
+    private final Map<UUID, Map<UUID, Integer>> playerMap = new HashMap<>();
 
     ValiantRescuerWatcher() {
         super(WatcherScope.GAME);
@@ -109,8 +109,10 @@ class ValiantRescuerWatcher extends Watcher {
         StackObject item = game.getState().getStack().getFirst();
         if (item instanceof StackAbility
                 && item.getStackAbility() instanceof CyclingAbility) {
-            playerMap.computeIfAbsent(event.getPlayerId(), u -> new HashMap());
-            playerMap.get(event.getPlayerId()).compute(event.getSourceId(), (u, i) -> i == null ? 1 : i + 1);
+            playerMap.computeIfAbsent(event.getPlayerId(), u -> new HashMap<>());
+            playerMap.get(event.getPlayerId()).compute(
+                    event.getSourceId(), (u, i) -> i == null ? 1 : Integer.sum(i, 1)
+            );
         }
     }
 
