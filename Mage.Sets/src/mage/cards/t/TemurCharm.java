@@ -44,7 +44,7 @@ public final class TemurCharm extends CardImpl {
         Effect effect = new BoostTargetEffect(1, 1, Duration.EndOfTurn);
         this.getSpellAbility().addEffect(effect);
         effect = new FightTargetsEffect();
-        effect.setText("That creature fights target creature you don't control");
+        effect.setText("It fights target creature you don't control");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         Target target = new TargetCreaturePermanent(filter);

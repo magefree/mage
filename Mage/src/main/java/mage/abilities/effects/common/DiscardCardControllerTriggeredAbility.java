@@ -17,7 +17,7 @@ public class DiscardCardControllerTriggeredAbility extends TriggeredAbilityImpl 
     private final FilterCard filter;
 
     public DiscardCardControllerTriggeredAbility(Effect effect, boolean isOptional) {
-        this(effect, isOptional, StaticFilters.FILTER_CARD);
+        this(effect, isOptional, StaticFilters.FILTER_CARD_A);
     }
 
     public DiscardCardControllerTriggeredAbility(Effect effect, boolean isOptional, FilterCard filter) {

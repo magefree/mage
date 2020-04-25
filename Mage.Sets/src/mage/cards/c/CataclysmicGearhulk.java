@@ -1,9 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -13,8 +10,8 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledEnchantmentPermanent;
@@ -26,14 +23,17 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class CataclysmicGearhulk extends CardImpl {
 
     public CataclysmicGearhulk(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{W}{W}");
         this.subtype.add(SubType.CONSTRUCT);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
@@ -80,8 +80,8 @@ class CataclysmicGearhulkEffect extends OneShotEffect {
 
     public CataclysmicGearhulkEffect() {
         super(Outcome.DestroyPermanent);
-        staticText = "Each player chooses from among the non-land permanents they control an artifact, a creature, an enchantment, and a planeswalker, "
-                + "then sacrifices the rest";
+        staticText = "each player chooses an artifact, a creature, an enchantment, and a planeswalker " +
+                "from among the nonland permanents they control then sacrifices the rest";
     }
 
     public CataclysmicGearhulkEffect(CataclysmicGearhulkEffect effect) {

@@ -57,7 +57,7 @@ class LavabrinkFloodgatesEffect extends OneShotEffect {
     LavabrinkFloodgatesEffect() {
         super(Outcome.Benefit);
         staticText = "that player may put a doom counter on {this} or remove a doom counter from it. " +
-                "Then if it has three or more doom counters on it, sacrifice it. " +
+                "Then if it has three or more doom counters on it, sacrifice {this}. " +
                 "When you do, it deals 6 damage to each creature.";
     }
 

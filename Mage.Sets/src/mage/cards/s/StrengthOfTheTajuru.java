@@ -58,7 +58,7 @@ class StrengthOfTheTajuruAddCountersTargetEffect extends OneShotEffect {
 
     public StrengthOfTheTajuruAddCountersTargetEffect() {
         super(Outcome.BoostCreature);
-        staticText = "Choose target creature, then choose another target creature for each time Strength of the Tajuru was kicked. Put X +1/+1 counters on each of them";
+        staticText = "Choose target creature, then choose another target creature for each time this spell was kicked. Put X +1/+1 counters on each of them";
     }
 
     public StrengthOfTheTajuruAddCountersTargetEffect(final StrengthOfTheTajuruAddCountersTargetEffect effect) {

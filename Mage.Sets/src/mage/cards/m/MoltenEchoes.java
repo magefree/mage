@@ -46,7 +46,7 @@ public final class MoltenEchoes extends CardImpl {
                 filter, false, SetTargetPointer.PERMANENT,
                 "Whenever a nontoken creature of the chosen type enters the battlefield under your control, "
                         + "create a token that's a copy of that creature. "
-                        + "That token gains haste. Exile it at the beginning of the next end step");
+                        + "That token gains haste. Exile it at the beginning of the next end step.");
         this.addAbility(ability);
     }
 

@@ -25,7 +25,8 @@ public class GoadAttachedAbility extends StaticAbility {
         }
         this.addEffect(new AttacksIfAbleAttachedEffect(
                 Duration.WhileOnBattlefield, AttachmentType.AURA
-        ).setText("and"));
+        ).setText(", and is"));
+        this.addEffect(new GoadAttackEffect());
     }
 
     private GoadAttachedAbility(final GoadAttachedAbility ability) {
@@ -42,7 +43,7 @@ class GoadAttackEffect extends RestrictionEffect {
 
     GoadAttackEffect() {
         super(Duration.WhileOnBattlefield);
-        staticText = "is goaded. <i>(It attacks each combat if able and attacks a player other than you if able.)</i>";
+        staticText = "goaded. <i>(It attacks each combat if able and attacks a player other than you if able.)</i>";
     }
 
     private GoadAttackEffect(final GoadAttackEffect effect) {

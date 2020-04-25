@@ -39,7 +39,7 @@ public final class PredatoryImpetus extends CardImpl {
         // Enchanted creature gets +3/+3, must be blocked if able, and is goaded.
         this.addAbility(new GoadAttachedAbility(
                 new BoostEnchantedEffect(3, 3)
-                        .setText("Enchanted creature gets +3/+3,"),
+                        .setText("Enchanted creature gets +3/+3"),
                 new PredatoryImpetusEffect()
         ));
     }
@@ -58,7 +58,7 @@ class PredatoryImpetusEffect extends RequirementEffect {
 
     PredatoryImpetusEffect() {
         super(Duration.WhileOnBattlefield);
-        staticText = "must be blocked if able,";
+        staticText = ", must be blocked if able";
     }
 
     private PredatoryImpetusEffect(final PredatoryImpetusEffect effect) {

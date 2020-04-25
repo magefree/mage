@@ -54,7 +54,7 @@ class HaldanAvidArcanistCastFromExileEffect extends AsThoughEffectImpl {
 
     HaldanAvidArcanistCastFromExileEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
-        staticText = "You may play noncreature cards from exile with fetch counters on them if you exiled them, and";
+        staticText = "You may play noncreature cards from exile with fetch counters on them if you exiled them";
     }
 
     private HaldanAvidArcanistCastFromExileEffect(final HaldanAvidArcanistCastFromExileEffect effect) {
@@ -87,7 +87,7 @@ class HaldanAvidArcanistSpendAnyManaEffect extends AsThoughEffectImpl implements
 
     HaldanAvidArcanistSpendAnyManaEffect() {
         super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.Custom, Outcome.Benefit);
-        staticText = "you may spend mana as though it were mana of any color to cast those spells";
+        staticText = ", and you may spend mana as though it were mana of any color to cast those spells";
     }
 
     private HaldanAvidArcanistSpendAnyManaEffect(final HaldanAvidArcanistSpendAnyManaEffect effect) {

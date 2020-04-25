@@ -148,6 +148,12 @@ public final class StaticFilters {
         FILTER_CARD_BASIC_LAND.setLockedFilter(true);
     }
 
+    public static final FilterBasicLandCard FILTER_CARD_BASIC_LANDS = new FilterBasicLandCard("basic land cards");
+
+    static {
+        FILTER_CARD_BASIC_LANDS.setLockedFilter(true);
+    }
+
     public static final FilterBasicLandCard FILTER_CARD_BASIC_LAND_A = new FilterBasicLandCard("a basic land card");
 
     static {

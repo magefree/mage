@@ -37,7 +37,7 @@ public class MeleeAbility extends AttacksTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "Melee <i>(Whenever this creature attacks, it gets +1/+1 until end of turn for each opponent you attacked this combat.)</i>";
+        return "melee <i>(Whenever this creature attacks, it gets +1/+1 until end of turn for each opponent you attacked this combat.)</i>";
     }
 }
 

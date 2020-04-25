@@ -23,7 +23,7 @@ import mage.game.permanent.token.SpiritWhiteToken;
  */
 public final class AbzanAscendancy extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature you control");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a nontoken creature you control");
 
     static {
         filter.add(TargetController.YOU.getControllerPredicate());
