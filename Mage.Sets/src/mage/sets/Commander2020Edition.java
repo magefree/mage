@@ -196,6 +196,7 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Magus of the Disk", 94, Rarity.RARE, mage.cards.m.MagusOfTheDisk.class));
         cards.add(new SetCardInfo("Magus of the Wheel", 156, Rarity.RARE, mage.cards.m.MagusOfTheWheel.class));
         cards.add(new SetCardInfo("Majestic Myriarch", 182, Rarity.MYTHIC, mage.cards.m.MajesticMyriarch.class));
+        cards.add(new SetCardInfo("Manascape Refractor", 68, Rarity.RARE, mage.cards.m.ManascapeRefractor.class));
         cards.add(new SetCardInfo("Martial Impetus", 28, Rarity.UNCOMMON, mage.cards.m.MartialImpetus.class));
         cards.add(new SetCardInfo("Masked Admirers", 183, Rarity.RARE, mage.cards.m.MaskedAdmirers.class));
         cards.add(new SetCardInfo("Melek, Izzet Paragon", 220, Rarity.RARE, mage.cards.m.MelekIzzetParagon.class));
