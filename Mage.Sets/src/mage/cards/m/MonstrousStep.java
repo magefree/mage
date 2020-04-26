@@ -15,7 +15,7 @@ import mage.filter.predicate.mageobject.AnotherTargetPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.BlockedAttackerWatcher;
 
 import java.util.UUID;
@@ -40,7 +40,7 @@ public final class MonstrousStep extends CardImpl {
         this.getSpellAbility().addEffect(new MonstrousStepEffect());
         this.getSpellAbility().addWatcher(new BlockedAttackerWatcher());
 
-        TargetPermanent target = new TargetControlledCreaturePermanent();
+        TargetPermanent target = new TargetCreaturePermanent();
         target.setTargetTag(1);
         this.getSpellAbility().addTarget(target);
         target = new TargetPermanent(0, 1, filter, false);
