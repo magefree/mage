@@ -1,7 +1,5 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -13,11 +11,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class BelbesArmor extends CardImpl {
@@ -26,20 +24,16 @@ public final class BelbesArmor extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // {X}, {tap}: Target creature gets -X/+X until end of turn.
-        Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
-                new BoostTargetEffect(
-                        new MultipliedValue(ManacostVariableValue.instance, -1),
-                        ManacostVariableValue.instance,
-                        Duration.EndOfTurn
-                ),
-                new ManaCostsImpl("{X}"));
+        Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(
+                new MultipliedValue(ManacostVariableValue.instance, -1),
+                ManacostVariableValue.instance, Duration.EndOfTurn
+        ).setText("Target creature gets -X/+X until end of turn"), new ManaCostsImpl("{X}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 
-    public BelbesArmor(final BelbesArmor card) {
+    private BelbesArmor(final BelbesArmor card) {
         super(card);
     }
 
