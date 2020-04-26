@@ -35,14 +35,14 @@ public final class TallAsABeanstalk extends CardImpl {
 
         // Enchanted creature gets +3/+3, has reach, and is a Giant in addition to its other types.
         ability = new SimpleStaticAbility(
-                new BoostEnchantedEffect(3, 3).setText("enchanted creature gets +3/+3,")
+                new BoostEnchantedEffect(3, 3).setText("enchanted creature gets +3/+3")
         );
         ability.addEffect(new GainAbilityAttachedEffect(
                 ReachAbility.getInstance(), AttachmentType.AURA
-        ).setText("has reach,"));
+        ).setText(", has reach"));
         ability.addEffect(new AddCardSubtypeAttachedEffect(
                 SubType.GIANT, Duration.WhileOnBattlefield, AttachmentType.AURA
-        ).setText("and is a Giant in addition to its other types"));
+        ).setText(", and is a Giant in addition to its other types"));
         this.addAbility(ability);
     }
 

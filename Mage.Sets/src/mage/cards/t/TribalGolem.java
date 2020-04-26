@@ -54,22 +54,22 @@ public final class TribalGolem extends CardImpl {
         Effect effect1 = new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(TrampleAbility.getInstance()),
                 new PermanentsOnTheBattlefieldCondition(filter1),
-                "{this} has trample as long as you control a Beast,"
+                "{this} has trample as long as you control a Beast"
         );
         Effect effect2 = new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(HasteAbility.getInstance()),
                 new PermanentsOnTheBattlefieldCondition(filter2),
-                "haste as long as you control a Goblin,"
+                ", haste as long as you control a Goblin"
         );
         Effect effect3 = new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()),
                 new PermanentsOnTheBattlefieldCondition(filter3),
-                "first strike as long as you control a Soldier,"
+                ", first strike as long as you control a Soldier"
         );
         Effect effect4 = new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(FlyingAbility.getInstance()),
                 new PermanentsOnTheBattlefieldCondition(filter4),
-                "flying as long as you control a Wizard,"
+                ", flying as long as you control a Wizard"
         );
         Effect effect5 = new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(new SimpleActivatedAbility(
@@ -78,9 +78,9 @@ public final class TribalGolem extends CardImpl {
                         new ManaCostsImpl("{B}")
                 )),
                 new PermanentsOnTheBattlefieldCondition(filter5),
-                "and \"{B}: Regenerate {this}\" as long as you control a Zombie"
+                ", and \"{B}: Regenerate {this}\" as long as you control a Zombie"
         );
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect1);
+        Ability ability = new SimpleStaticAbility(effect1);
         ability.addEffect(effect2);
         ability.addEffect(effect3);
         ability.addEffect(effect4);

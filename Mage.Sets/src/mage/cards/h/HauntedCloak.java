@@ -1,4 +1,3 @@
-
 package mage.cards.h;
 
 import java.util.UUID;
@@ -31,7 +30,7 @@ public final class HauntedCloak extends CardImpl {
 
         // Equipped creature has vigilance, trample, and haste.
         Effect effect = new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.EQUIPMENT);
-        effect.setText("Equipped creature has vigilance,");
+        effect.setText("Equipped creature has vigilance");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
         effect = new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.EQUIPMENT);
         effect.setText(", trample");
@@ -45,7 +44,7 @@ public final class HauntedCloak extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
     }
 
-    public HauntedCloak(final HauntedCloak card) {
+    private HauntedCloak(final HauntedCloak card) {
         super(card);
     }
 

@@ -1,7 +1,5 @@
-
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -12,25 +10,31 @@ import mage.abilities.effects.common.FlipCoinEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.permanent.token.WireflyToken;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class WireflyHive extends CardImpl {
 
+    private static final FilterPermanent filter = new FilterPermanent("permanents named Wirefly");
+
+    static {
+        filter.add(new NamePredicate("Wirefly"));
+    }
+
     public WireflyHive(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
+
         // {3}, {tap}: Flip a coin. If you win the flip, create a 2/2 colorless Insect artifact creature token with flying named Wirefly.
         // If you lose the flip, destroy all permanents named Wirefly.
-        FilterPermanent filter = new FilterPermanent("permanents named Wirefly");
-        filter.add(new NamePredicate("Wirefly"));
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new FlipCoinEffect(new CreateTokenEffect(new WireflyToken()), new DestroyAllEffect(filter)), new GenericManaCost(3));
+        Ability ability = new SimpleActivatedAbility(new FlipCoinEffect(
+                new CreateTokenEffect(new WireflyToken()), new DestroyAllEffect(filter)
+        ), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

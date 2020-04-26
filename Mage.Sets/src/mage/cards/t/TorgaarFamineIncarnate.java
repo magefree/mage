@@ -42,7 +42,7 @@ public final class TorgaarFamineIncarnate extends CardImpl {
 
         // As an additional cost to cast this spell, you may sacrifice any number of creatures.
         Cost cost = new SacrificeXTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT);
-        cost.setText("As an additional cost to cast this spell, you may sacrifice any number of creatures.");
+        cost.setText("As an additional cost to cast this spell, you may sacrifice any number of creatures");
         this.getSpellAbility().addCost(cost);
         // This spell costs {2} less to cast for each creature sacrificed this way.
         this.addAbility(new SimpleStaticAbility(Zone.STACK, new TorgaarFamineIncarnateEffectCostReductionEffect()));
