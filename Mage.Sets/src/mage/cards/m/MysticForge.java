@@ -14,6 +14,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
 import mage.game.Game;
@@ -26,7 +27,7 @@ import java.util.UUID;
  */
 public final class MysticForge extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("cast artifact spells and colorless spells");
+    private static final FilterCard filter = new FilterNonlandCard("cast artifact spells and colorless spells");
 
     static {
         filter.add(Predicates.or(
