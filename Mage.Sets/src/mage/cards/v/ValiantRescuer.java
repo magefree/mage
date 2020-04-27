@@ -1,7 +1,6 @@
 package mage.cards.v;
 
 import mage.MageInt;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -60,6 +59,10 @@ class ValiantRescuerTriggeredAbility extends TriggeredAbilityImpl {
         this.addWatcher(new ValiantRescuerWatcher());
     }
 
+    private ValiantRescuerTriggeredAbility(final ValiantRescuerTriggeredAbility ability) {
+        super(ability);
+    }
+
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.ACTIVATED_ABILITY;
@@ -81,8 +84,8 @@ class ValiantRescuerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public TriggeredAbility copy() {
-        return null;
+    public ValiantRescuerTriggeredAbility copy() {
+        return new ValiantRescuerTriggeredAbility(this);
     }
 
     @Override
