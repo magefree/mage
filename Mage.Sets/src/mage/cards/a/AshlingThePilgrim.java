@@ -1,7 +1,5 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -11,21 +9,26 @@ import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.watchers.common.AbilityResolvedWatcher;
+
+import java.util.UUID;
 
 /**
- *
- * @author LevelX2
+ * @author TheElk801
  */
 public final class AshlingThePilgrim extends CardImpl {
 
     public AshlingThePilgrim(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELEMENTAL);
         this.subtype.add(SubType.SHAMAN);
@@ -34,12 +37,14 @@ public final class AshlingThePilgrim extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}{R}: Put a +1/+1 counter on Ashling the Pilgrim. If this is the third time this ability has resolved this turn, remove all +1/+1 counters from Ashling the Pilgrim, and it deals that much damage to each creature and each player.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(), true), new ManaCostsImpl("{1}{R}"));
+        Ability ability = new SimpleActivatedAbility(
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl("{1}{R}")
+        );
         ability.addEffect(new AshlingThePilgrimEffect());
-        this.addAbility(ability);
+        this.addAbility(ability, new AbilityResolvedWatcher());
     }
 
-    public AshlingThePilgrim(final AshlingThePilgrim card) {
+    private AshlingThePilgrim(final AshlingThePilgrim card) {
         super(card);
     }
 
@@ -51,19 +56,14 @@ public final class AshlingThePilgrim extends CardImpl {
 
 class AshlingThePilgrimEffect extends OneShotEffect {
 
-    static class ActivationInfo {
-        public int zoneChangeCounter;
-        public int turn;
-        public int activations;
-    }
-
-    public AshlingThePilgrimEffect() {
+    AshlingThePilgrimEffect() {
         super(Outcome.Damage);
-        this.staticText = "If this is the third time this ability has resolved this turn, remove all +1/+1 counters from {this}, and it deals that much damage to each creature and each player";
+        this.staticText = "If this is the third time this ability has resolved this turn, " +
+                "remove all +1/+1 counters from {this}, and it deals that much damage to each creature and each player";
     }
 
-    public AshlingThePilgrimEffect(final AshlingThePilgrimEffect effect) {
-        super(effect);        
+    private AshlingThePilgrimEffect(final AshlingThePilgrimEffect effect) {
+        super(effect);
     }
 
     @Override
@@ -75,32 +75,18 @@ class AshlingThePilgrimEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if (controller != null && sourcePermanent != null) {
-            ActivationInfo info;
-            Object object = game.getState().getValue(source.getSourceId() + "ActivationInfo");
-            if (object instanceof ActivationInfo) {
-                info = (ActivationInfo) object;
-                if (info.turn != game.getTurnNum() || sourcePermanent.getZoneChangeCounter(game) != info.zoneChangeCounter) {
-                    info.turn = game.getTurnNum();
-                    info.zoneChangeCounter = sourcePermanent.getZoneChangeCounter(game);
-                    info.activations = 0;
-                }
-            } else {
-                info = new ActivationInfo();
-                info.turn = game.getTurnNum();
-                info.zoneChangeCounter = sourcePermanent.getZoneChangeCounter(game);
-                game.getState().setValue(source.getSourceId() + "ActivationInfo", info);
-            }
-            info.activations++;
-            if (info.activations == 3) {
-                int damage = sourcePermanent.getCounters(game).getCount(CounterType.P1P1);
-                if (damage > 0) {
-                    sourcePermanent.removeCounters(CounterType.P1P1.getName(), damage, game);
-                    return new DamageEverythingEffect(damage, new FilterCreaturePermanent()).apply(game, source);
-                }
-            }
-            return true;
+        AbilityResolvedWatcher watcher = game.getState().getWatcher(AbilityResolvedWatcher.class);
+        if (controller == null
+                || sourcePermanent == null
+                || watcher == null
+                || !watcher.checkActivations(source, game)) {
+            return false;
         }
-        return false;
+        int counters = sourcePermanent.getCounters(game).getCount(CounterType.P1P1);
+        if (counters < 1) {
+            return false;
+        }
+        sourcePermanent.removeCounters(CounterType.P1P1.createInstance(counters), game);
+        return new DamageEverythingEffect(counters, StaticFilters.FILTER_PERMANENT_CREATURE).apply(game, source);
     }
 }
