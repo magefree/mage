@@ -48,6 +48,16 @@ public final class HaldanAvidArcanist extends CardImpl {
     public HaldanAvidArcanist copy() {
         return new HaldanAvidArcanist(this);
     }
+
+    static boolean checkCard(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
+        if (!PakoArcaneRetriever.checkWatcher(affectedControllerId, game.getCard(sourceId), game)
+                || !source.isControlledBy(affectedControllerId)
+                || game.getState().getZone(sourceId) != Zone.EXILED) {
+            return false;
+        }
+        Card card = game.getCard(sourceId);
+        return card != null && !card.isCreature() && card.getCounters(game).containsKey(CounterType.FETCH);
+    }
 }
 
 class HaldanAvidArcanistCastFromExileEffect extends AsThoughEffectImpl {
@@ -73,13 +83,7 @@ class HaldanAvidArcanistCastFromExileEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        if (!PakoArcaneRetriever.checkWatcher(affectedControllerId, game.getCard(sourceId), game)
-                || !source.isControlledBy(affectedControllerId)
-                || game.getState().getZone(sourceId) != Zone.EXILED) {
-            return false;
-        }
-        Card card = game.getCard(sourceId);
-        return card != null && !card.isCreature() && card.getCounters(game).containsKey(CounterType.FETCH);
+        return HaldanAvidArcanist.checkCard(sourceId, source, affectedControllerId, game);
     }
 }
 
@@ -106,13 +110,7 @@ class HaldanAvidArcanistSpendAnyManaEffect extends AsThoughEffectImpl implements
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (!PakoArcaneRetriever.checkWatcher(affectedControllerId, game.getCard(objectId), game)
-                || !source.isControlledBy(affectedControllerId)
-                || game.getState().getZone(objectId) != Zone.EXILED) {
-            return false;
-        }
-        Card card = game.getCard(objectId);
-        return card != null && !card.isCreature() && card.getCounters(game).containsKey(CounterType.FETCH);
+        return HaldanAvidArcanist.checkCard(objectId, source, affectedControllerId, game);
     }
 
     @Override

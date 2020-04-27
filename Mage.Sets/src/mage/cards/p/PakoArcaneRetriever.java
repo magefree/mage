@@ -80,7 +80,8 @@ class PakoArcaneRetrieverEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
+        PakoArcaneRetrieverWatcher watcher = game.getState().getWatcher(PakoArcaneRetrieverWatcher.class);
+        if (controller == null || watcher == null) {
             return false;
         }
         Cards cards = new CardsImpl();
@@ -97,7 +98,11 @@ class PakoArcaneRetrieverEffect extends OneShotEffect {
         if (cards.isEmpty()) {
             return true;
         }
-        cards.getCards(game).stream().forEach(card -> card.addCounters(CounterType.FETCH.createInstance(), source, game));
+        cards.getCards(game)
+                .stream()
+                .filter(card -> card.addCounters(CounterType.FETCH.createInstance(), source, game))
+                .filter(card -> !card.isCreature())
+                .forEach(card -> watcher.addCard(controller.getId(), card, game));
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent == null || counters == 0) {
             return true;
