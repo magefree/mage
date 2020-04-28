@@ -345,8 +345,8 @@ public final class Commander2020Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Wort, the Raidmother", 234, Rarity.RARE, mage.cards.w.WortTheRaidmother.class));
         cards.add(new SetCardInfo("Wydwen, the Biting Gale", 235, Rarity.RARE, mage.cards.w.WydwenTheBitingGale.class));
         cards.add(new SetCardInfo("Xathrid Necromancer", 141, Rarity.RARE, mage.cards.x.XathridNecromancer.class));
-        cards.add(new SetCardInfo("Yannik, Scavenging Sentinel", 19, Rarity.MYTHIC, mage.cards.y.YannikScavengingSentinel.class));
         cards.add(new SetCardInfo("Xyris, the Writhing Storm", 18, Rarity.MYTHIC, mage.cards.x.XyrisTheWrithingStorm.class));
+        cards.add(new SetCardInfo("Yannik, Scavenging Sentinel", 19, Rarity.MYTHIC, mage.cards.y.YannikScavengingSentinel.class));
         cards.add(new SetCardInfo("Yavimaya Coast", 322, Rarity.RARE, mage.cards.y.YavimayaCoast.class));
         cards.add(new SetCardInfo("Yavimaya Dryad", 197, Rarity.UNCOMMON, mage.cards.y.YavimayaDryad.class));
         cards.add(new SetCardInfo("Zaxara, the Exemplary", 20, Rarity.MYTHIC, mage.cards.z.ZaxaraTheExemplary.class));
