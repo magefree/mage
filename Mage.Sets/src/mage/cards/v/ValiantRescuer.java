@@ -130,6 +130,6 @@ class ValiantRescuerWatcher extends Watcher {
             return true;
         }
         Map<UUID, Integer> cardMap = playerMap.get(playerId);
-        return cardMap.keySet().stream().filter(uuid -> !uuid.equals(cardId)).mapToInt(cardMap::get).sum() < 2;
+        return cardMap.keySet().stream().filter(uuid -> !uuid.equals(cardId)).mapToInt(cardMap::get).sum() < 1;
     }
 }
