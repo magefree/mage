@@ -1,7 +1,5 @@
 package org.mage.test.stub;
 
-import java.io.Serializable;
-import java.util.*;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.*;
@@ -40,6 +38,9 @@ import mage.target.Target;
 import mage.target.TargetAmount;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
+
+import java.io.Serializable;
+import java.util.*;
 
 /**
  * @author Quercitron
@@ -654,6 +655,11 @@ public class PlayerStub implements Player {
     @Override
     public int rollDice(Game game, List<UUID> appliedEffects, int numSides) {
         return 1;
+    }
+
+    @Override
+    public Cards discard(Cards cards, Ability source, Game game) {
+        return null;
     }
 
     @Override

@@ -718,6 +718,24 @@ public abstract class PlayerImpl implements Player, Serializable {
         return discardedCards;
     }
 
+    @Override
+    public Cards discard(Cards cards, Ability source, Game game) {
+        Cards discardedCards = new CardsImpl();
+        for (Card card : cards.getCards(game)) {
+            if (doDiscard(card, source, game, false)) {
+                discardedCards.add(card);
+            }
+        }
+        if (!discardedCards.isEmpty()) {
+            UUID sourceId = source == null ? null : source.getSourceId();
+            game.fireEvent(GameEvent.getEvent(
+                    GameEvent.EventType.DISCARDED_CARDS, sourceId,
+                    sourceId, playerId, discardedCards.size()
+            ));
+        }
+        return discardedCards;
+    }
+
     private Cards doDiscard(int amount, boolean random, Ability source, Game game) {
         Cards discardedCards = new CardsImpl();
         if (amount <= 0) {
