@@ -2,12 +2,10 @@ package mage.abilities.effects.common.discard;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 
-import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -33,12 +31,10 @@ public class DiscardHandAllEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
-            if (player != null) {
-                Set<Card> cards = player.getHand().getCards(game);
-                for (Card card : cards) {
-                    player.discard(card, source, game);
-                }
+            if (player == null) {
+                continue;
             }
+            player.discard(player.getHand(), source, game);
         }
         return true;
     }
