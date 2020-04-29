@@ -7,7 +7,6 @@ import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
@@ -55,7 +54,7 @@ public class DiscardTargetCost extends CostImpl {
             Cards toDiscard = new CardsImpl();
             toDiscard.addAll(targets.get(0).getTargets());
             Cards discarded = player.discard(toDiscard, ability, game);
-            if (discarded != null) {
+            if (!discarded.isEmpty()) {
                 cards.addAll(discarded.getCards(game));
             }
         }

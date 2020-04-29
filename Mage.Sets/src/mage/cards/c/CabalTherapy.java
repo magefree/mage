@@ -65,7 +65,7 @@ class CabalTherapyEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (targetPlayer == null || controller == null || sourceObject == null) {
-            return true;
+            return false;
         }
         String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
         Cards hand = targetPlayer.getHand().copy();

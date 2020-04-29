@@ -60,7 +60,7 @@ class ExtortionEffect extends OneShotEffect {
         you.lookAtCards("Discard", targetPlayer.getHand(), game);
         TargetCard target = new TargetCardInHand(0, 2, StaticFilters.FILTER_CARD_CARDS);
         target.setNotTarget(true);
-        you.choose(Outcome.Benefit, targetPlayer.getHand(), target, game);
+        you.choose(Outcome.Discard, targetPlayer.getHand(), target, game);
         targetPlayer.discard(new CardsImpl(target.getTargets()), source, game);
         return true;
     }

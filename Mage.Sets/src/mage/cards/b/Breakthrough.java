@@ -71,6 +71,7 @@ class BreakthroughEffect extends OneShotEffect {
             target.choose(Outcome.Benefit, player.getId(), source.getSourceId(), game);
             Cards cards = player.getHand().copy();
             cards.removeIf(target.getTargets()::contains);
+            player.discard(cards, source, game);
         }
         return true;
     }
