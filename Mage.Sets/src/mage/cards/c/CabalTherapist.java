@@ -19,7 +19,6 @@ import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledPermanent;
-import mage.target.common.TargetOpponent;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -135,25 +134,30 @@ class CabalTherapistDiscardEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (targetPlayer == null || controller == null || sourceObject == null) {
-            return false;
+            return true;
         }
         String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
-        Cards hand = targetPlayer.getHand();
-
-        for (Card card : hand.getCards(game)) {
+        Cards hand = targetPlayer.getHand().copy();
+        targetPlayer.revealCards(source, hand, game);
+        hand.removeIf(uuid -> {
+            Card card = hand.get(uuid, game);
+            if (card == null) {
+                return true;
+            }
             if (card.isSplitCard()) {
                 SplitCard splitCard = (SplitCard) card;
                 if (CardUtil.haveSameNames(splitCard.getLeftHalfCard().getName(), cardName)) {
-                    targetPlayer.discard(card, source, game);
+                    return false;
                 } else if (CardUtil.haveSameNames(splitCard.getRightHalfCard().getName(), cardName)) {
-                    targetPlayer.discard(card, source, game);
+                    return false;
                 }
             }
             if (CardUtil.haveSameNames(card.getName(), cardName)) {
-                targetPlayer.discard(card, source, game);
+                return false;
             }
-        }
-        targetPlayer.revealCards("Cabal Therapist", hand, game);
+            return true;
+        });
+        targetPlayer.discard(hand, source, game);
         return true;
     }
 
