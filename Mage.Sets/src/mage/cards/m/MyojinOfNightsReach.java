@@ -1,7 +1,5 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -16,7 +14,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -25,13 +22,15 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.watchers.common.CastFromHandWatcher;
 
+import java.util.UUID;
+
 /**
  * @author LevelX
  */
 public final class MyojinOfNightsReach extends CardImpl {
 
     public MyojinOfNightsReach(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{B}{B}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
 
@@ -50,7 +49,7 @@ public final class MyojinOfNightsReach extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MyojinOfNightsReach(final MyojinOfNightsReach card) {
+    private MyojinOfNightsReach(final MyojinOfNightsReach card) {
         super(card);
     }
 
@@ -61,12 +60,13 @@ public final class MyojinOfNightsReach extends CardImpl {
 }
 
 class MyojinOfNightsReachEffect extends OneShotEffect {
-    public MyojinOfNightsReachEffect() {
+
+    MyojinOfNightsReachEffect() {
         super(Outcome.Discard);
         staticText = "Each opponent discards their hand";
     }
 
-    public MyojinOfNightsReachEffect(final MyojinOfNightsReachEffect effect) {
+    private MyojinOfNightsReachEffect(final MyojinOfNightsReachEffect effect) {
         super(effect);
     }
 
@@ -74,10 +74,8 @@ class MyojinOfNightsReachEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
             Player opponent = game.getPlayer(opponentId);
-            if(opponent != null) {
-                for (Card c : opponent.getHand().getCards(game)) {
-                    opponent.discard(c, source, game);
-                }
+            if (opponent != null) {
+                opponent.discard(opponent.getHand(), source, game);
             }
         }
         return true;
@@ -87,5 +85,4 @@ class MyojinOfNightsReachEffect extends OneShotEffect {
     public MyojinOfNightsReachEffect copy() {
         return new MyojinOfNightsReachEffect(this);
     }
-
 }
