@@ -82,7 +82,7 @@ class NascentMetamorphEffect extends OneShotEffect {
             toCopy = card;
             break;
         }
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
+        Permanent permanent = game.getPermanent(source.getSourceId());
         if (toCopy != null && permanent != null) {
             game.copyPermanent(Duration.EndOfTurn, new PermanentCard(
                     toCopy, source.getControllerId(), game
