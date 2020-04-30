@@ -57,9 +57,9 @@ class SelectiveAdaptationEffect extends OneShotEffect {
         TRAMPLE(TrampleAbility.class, "trample"),
         VIGILANCE(VigilanceAbility.class, "vigilance");
 
-        private Class abilityClass;
-        private String abilityName;
-        private FilterCard filter;
+        private final Class abilityClass;
+        private final String abilityName;
+        private final FilterCard filter;
 
         private AbilitySelector(Class abilityClass, String abilityName) {
             this.abilityClass = abilityClass;
@@ -96,7 +96,8 @@ class SelectiveAdaptationEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        Cards toGrave = new CardsImpl(player.getLibrary().getTopCards(game, 7));
+        Cards top7 = new CardsImpl(player.getLibrary().getTopCards(game, 7));
+        Cards toGrave = top7.copy();
         player.revealCards(source, toGrave, game);
         Cards toHand = new CardsImpl();
         if (toGrave.isEmpty()) {
@@ -107,7 +108,7 @@ class SelectiveAdaptationEffect extends OneShotEffect {
                 continue;
             }
             TargetCard target = abilitySelector.makeTarget();
-            player.choose(Outcome.DrawCard, target, source.getSourceId(), game);
+            player.choose(Outcome.DrawCard, top7, target, game);
             toHand.add(target.getFirstTarget());
             toGrave.remove(target.getFirstTarget());
         }
@@ -116,7 +117,7 @@ class SelectiveAdaptationEffect extends OneShotEffect {
         }
         if (toHand.count(filter, game) > 0) {
             TargetCard target = new TargetCardInLibrary(filter);
-            player.choose(Outcome.PutCreatureInPlay, toGrave, target, game);
+            player.choose(Outcome.PutCreatureInPlay, toHand, target, game);
             Card toBattlefield = game.getCard(target.getFirstTarget());
             if (toBattlefield != null
                     && player.moveCards(toBattlefield, Zone.BATTLEFIELD, source, game)
