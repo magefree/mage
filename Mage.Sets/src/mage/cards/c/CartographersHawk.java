@@ -123,6 +123,6 @@ class CartographersHawkEffect extends OneShotEffect {
         if (!player.chooseUse(Outcome.PutLandInPlay, "Search your library for Plains card?", source, game)) {
             return true;
         }
-        return new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)).apply(game, source);
+        return new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), true).apply(game, source);
     }
 }
