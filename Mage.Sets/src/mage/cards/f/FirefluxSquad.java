@@ -26,7 +26,8 @@ import java.util.UUID;
  */
 public final class FirefluxSquad extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("");
+    private static final FilterPermanent filter
+            = new FilterControlledCreaturePermanent("another attacking creature you control");
 
     static {
         filter.add(AnotherPredicate.instance);
