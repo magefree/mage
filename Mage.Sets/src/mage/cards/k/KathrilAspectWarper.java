@@ -14,11 +14,13 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetControlledPermanent;
 
 import java.util.Collection;
 import java.util.Set;
@@ -54,10 +56,6 @@ public final class KathrilAspectWarper extends CardImpl {
 }
 
 class KathrilAspectWarperEffect extends OneShotEffect {
-
-    private static class AbilityTracker {
-
-    }
 
     KathrilAspectWarperEffect() {
         super(Outcome.Benefit);
@@ -100,7 +98,9 @@ class KathrilAspectWarperEffect extends OneShotEffect {
             if (counterType == null) {
                 continue;
             }
-            Target target = new TargetControlledCreaturePermanent();
+            FilterControlledPermanent filter
+                    = new FilterControlledCreaturePermanent("creature to give a " + counterType + " counter");
+            Target target = new TargetControlledPermanent(filter);
             target.setNotTarget(true);
             if (!player.choose(outcome, target, source.getSourceId(), game)) {
                 continue;
