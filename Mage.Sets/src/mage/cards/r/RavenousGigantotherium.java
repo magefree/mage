@@ -72,7 +72,7 @@ class RavenousGigantotheriumAbility extends EntersBattlefieldTriggeredAbility {
         if (permanent == null) {
             return false;
         }
-        int power = Math.min(permanent.getPower().getValue(), 0);
+        int power = Math.max(permanent.getPower().getValue(), 0);
         this.getEffects().clear();
         this.addEffect(new DamageMultiEffect(power));
         this.addEffect(new RavenousGigantotheriumEffect());
