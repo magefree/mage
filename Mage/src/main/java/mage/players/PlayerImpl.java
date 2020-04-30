@@ -3987,7 +3987,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 for (Card card : cards) {
                     if (card instanceof Permanent) {
                         game.getBattlefield().removePermanent(card.getId());
-                        ZoneChangeEvent event = new ZoneChangeEvent(card.getId(),
+                        ZoneChangeEvent event = new ZoneChangeEvent((Permanent)card,
                                 (source == null ? null : source.getSourceId()),
                                 byOwner ? card.getOwnerId() : getId(), Zone.BATTLEFIELD, Zone.OUTSIDE, appliedEffects);
                         game.fireEvent(event);
