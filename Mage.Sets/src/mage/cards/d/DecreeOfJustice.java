@@ -14,7 +14,6 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.token.AngelToken;
 import mage.game.permanent.token.SoldierToken;
-import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.util.ManaUtil;
 
@@ -35,11 +34,11 @@ public final class DecreeOfJustice extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}{W}")));
 
         // When you cycle Decree of Justice, you may pay {X}. If you do, create X 1/1 white Soldier creature tokens.
-        Ability ability = new CycleTriggeredAbility(new DecreeOfJusticeCycleEffect(), true);
+        Ability ability = new CycleTriggeredAbility(new DecreeOfJusticeCycleEffect());
         this.addAbility(ability);
     }
 
-    public DecreeOfJustice(final DecreeOfJustice card) {
+    private DecreeOfJustice(final DecreeOfJustice card) {
         super(card);
     }
 
@@ -56,7 +55,7 @@ class DecreeOfJusticeCycleEffect extends OneShotEffect {
         this.staticText = "you may pay {X}. If you do, create X 1/1 white Soldier creature tokens";
     }
 
-    DecreeOfJusticeCycleEffect(final DecreeOfJusticeCycleEffect effect) {
+    private DecreeOfJusticeCycleEffect(final DecreeOfJusticeCycleEffect effect) {
         super(effect);
     }
 
@@ -68,14 +67,12 @@ class DecreeOfJusticeCycleEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null && player.chooseUse(Outcome.Benefit, "Do you want to pay {X} to create X tokens?", source, game)) {
-            int payCount = ManaUtil.playerPaysXGenericMana(true, "Decree of Justice", player, source, game);
-            if (payCount > 0) {
-                Token token = new SoldierToken();
-                token.putOntoBattlefield(payCount, game, source.getSourceId(), source.getControllerId());
-                return true;
-            }
-
+        if (player == null || !player.chooseUse(Outcome.Benefit, "Pay {X} to create X tokens?", source, game)) {
+            return false;
+        }
+        int payCount = ManaUtil.playerPaysXGenericMana(true, "Decree of Justice", player, source, game);
+        if (payCount > 0) {
+            return new SoldierToken().putOntoBattlefield(payCount, game, source.getSourceId(), source.getControllerId());
         }
         return false;
     }
