@@ -5,17 +5,14 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
+import mage.abilities.hint.Hint;
 import mage.abilities.keyword.CyclingAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.constants.WatcherScope;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -58,13 +55,10 @@ public final class SpellpyrePhoenix extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of each end step, if you cycled two or more cards this turn, return Spellpyre Phoenix from your graveyard to your hand.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfEndStepTriggeredAbility(
-                        new ReturnSourceFromGraveyardToHandEffect(),
-                        TargetController.ANY, false
-                ), SpellpyrePhoenixCondition.instance, "At the beginning of each end step, " +
-                "if you cycled two or more cards this turn, return {this} from your graveyard to your hand."
-        ), new SpellpyrePhoenixWatcher());
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(
+                Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(),
+                TargetController.ANY, SpellpyrePhoenixCondition.instance, false
+        ).addHint(SpellpyrePhoenixHint.instance), new SpellpyrePhoenixWatcher());
     }
 
     private SpellpyrePhoenix(final SpellpyrePhoenix card) {
@@ -85,6 +79,30 @@ enum SpellpyrePhoenixCondition implements Condition {
         SpellpyrePhoenixWatcher watcher = game.getState().getWatcher(SpellpyrePhoenixWatcher.class);
         return watcher != null && watcher.checkCycleCount(source.getControllerId());
     }
+
+    @Override
+    public String toString() {
+        return "if you cycled two or more cards this turn";
+    }
+}
+
+enum SpellpyrePhoenixHint implements Hint {
+    instance;
+
+    @Override
+    public String getText(Game game, Ability ability) {
+        SpellpyrePhoenixWatcher watcher = game.getState().getWatcher(SpellpyrePhoenixWatcher.class);
+        int count = 0;
+        if (watcher != null) {
+            count = watcher.getCycleCount(ability.getControllerId());
+        }
+        return "Cards cycled this turn: " + count;
+    }
+
+    @Override
+    public SpellpyrePhoenixHint copy() {
+        return instance;
+    }
 }
 
 class SpellpyrePhoenixWatcher extends Watcher {
@@ -98,7 +116,7 @@ class SpellpyrePhoenixWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.CYCLED_CARD) {
-            cycleMap.compute(event.getPlayerId(), (u, i) -> i == null ? 1 : i + 1);
+            cycleMap.merge(event.getPlayerId(), 1, Integer::sum);
         }
     }
 
@@ -110,5 +128,9 @@ class SpellpyrePhoenixWatcher extends Watcher {
 
     boolean checkCycleCount(UUID playerId) {
         return cycleMap.getOrDefault(playerId, 0) >= 2;
+    }
+
+    int getCycleCount(UUID playerId) {
+        return cycleMap.getOrDefault(playerId, 0);
     }
 }
