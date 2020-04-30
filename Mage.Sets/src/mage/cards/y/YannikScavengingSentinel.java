@@ -24,6 +24,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanentAmount;
+import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -105,9 +106,9 @@ class YannikScavengingSentinelEffect extends OneShotEffect {
         int power = permanent.getPower().getValue();
         new ExileTargetEffect(CardUtil.getExileZoneId(
                 game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()
-        ), permanent.getIdName()).apply(game, source);
+        ), permanent.getIdName()).setTargetPointer(new FixedTarget(permanent, game)).apply(game, source);
         game.addDelayedTriggeredAbility(new OnLeaveReturnExiledToBattlefieldAbility(), source);
-        if (game.getState().getZone(permanent.getId()) == Zone.EXILED) {
+        if (game.getState().getZone(permanent.getId()) != Zone.BATTLEFIELD) {
             game.addDelayedTriggeredAbility(new YannikScavengingSentinelReflexiveTriggeredAbility(power), source);
             return new SendOptionUsedEventEffect().apply(game, source);
         }
