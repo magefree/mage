@@ -9,6 +9,7 @@ import mage.abilities.costs.Costs;
 import mage.abilities.costs.common.CyclingDiscardCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.hint.Hint;
 import mage.abilities.keyword.CyclingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TrampleAbility;
@@ -50,7 +51,8 @@ public final class YidaroWanderingMonster extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{1}{R}")));
 
         // When you cycle Yidaro, Wandering Monster, shuffle it into your library from your graveyard. If you've cycled a card named Yidaro, Wandering Monster four or more times this game, put it onto the battlefield from your graveyard instead.
-        this.addAbility(new CycleTriggeredAbility(new YidaroWanderingMonsterEffect()), new YidaroWanderingMonsterWatcher());
+        this.addAbility(new CycleTriggeredAbility(new YidaroWanderingMonsterEffect())
+                .addHint(YidaroWanderingMonsterHint.instance), new YidaroWanderingMonsterWatcher());
     }
 
     private YidaroWanderingMonster(final YidaroWanderingMonster card) {
@@ -106,7 +108,6 @@ class YidaroWanderingMonsterEffect extends OneShotEffect {
             return false;
         }
         YidaroWanderingMonsterWatcher watcher = game.getState().getWatcher(YidaroWanderingMonsterWatcher.class);
-        Zone zone;
         if (watcher == null || watcher.getYidaroCount(player.getId()) < 4) {
             player.putCardsOnBottomOfLibrary(card, game, source, true);
             player.shuffleLibrary(source, game);
@@ -117,9 +118,28 @@ class YidaroWanderingMonsterEffect extends OneShotEffect {
     }
 }
 
+enum YidaroWanderingMonsterHint implements Hint {
+    instance;
+
+    @Override
+    public String getText(Game game, Ability ability) {
+        Player player = game.getPlayer(ability.getControllerId());
+        YidaroWanderingMonsterWatcher watcher = game.getState().getWatcher(YidaroWanderingMonsterWatcher.class);
+        if (player == null || watcher == null) {
+            return "";
+        }
+        return player.getName() + " has cycled a card named Yidaro, Wandering Monster " + watcher.getYidaroCount(player.getId()) + " times this game";
+    }
+
+    @Override
+    public Hint copy() {
+        return instance;
+    }
+}
+
 class YidaroWanderingMonsterWatcher extends Watcher {
 
-    private Map<UUID, Integer> countMap = new HashMap();
+    private final Map<UUID, Integer> countMap = new HashMap();
 
     YidaroWanderingMonsterWatcher() {
         super(WatcherScope.GAME);
@@ -136,8 +156,7 @@ class YidaroWanderingMonsterWatcher extends Watcher {
         }
         Card card = game.getCard(object.getSourceId());
         if (card != null && "Yidaro, Wandering Monster".equals(card.getName())) {
-            countMap.putIfAbsent(object.getControllerId(), 0);
-            countMap.compute(object.getControllerId(), (u, i) -> i + 1);
+            countMap.merge(object.getControllerId(), 1, Integer::sum);
         }
     }
 
