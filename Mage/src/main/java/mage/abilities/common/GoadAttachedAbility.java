@@ -25,7 +25,7 @@ public class GoadAttachedAbility extends StaticAbility {
         }
         this.addEffect(new AttacksIfAbleAttachedEffect(
                 Duration.WhileOnBattlefield, AttachmentType.AURA
-        ).setText(", and is goaded."));
+        ).setText(", and is goaded. "));
         this.addEffect(new GoadAttackEffect());
     }
 
