@@ -4,6 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DrawSecondCardTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.common.CyclingDiscardCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
@@ -96,7 +97,7 @@ class CyclingZeroCostEffect extends CostModificationEffectImpl {
             return true;
         }
         abilityToModify.getManaCostsToPay().clear();
-        abilityToModify.getCosts().clear();
+        abilityToModify.getCosts().removeIf(cost -> !CyclingDiscardCost.class.isInstance(cost));
         abilityToModify.getManaCostsToPay().add(new GenericManaCost(0));
         return true;
     }
