@@ -6,6 +6,7 @@ import mage.abilities.*;
 import mage.abilities.common.AttachableToRestrictedAbility;
 import mage.abilities.common.CantHaveMoreThanAmountCountersSourceAbility;
 import mage.abilities.common.SagaAbility;
+import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
 import mage.abilities.effects.Effect;
@@ -1746,6 +1747,13 @@ public abstract class GameImpl implements Game, Serializable {
         // it has to be already initialized so it won't be overwitten as the ability triggers
         getState().addDelayedTriggeredAbility(newAbility);
         return newAbility.getId();
+    }
+
+    @Override
+    public UUID fireReflexiveTriggeredAbility(ReflexiveTriggeredAbility reflexiveAbility, Ability source) {
+        UUID uuid = this.addDelayedTriggeredAbility(reflexiveAbility, source);
+        this.fireEvent(GameEvent.getEvent(GameEvent.EventType.OPTION_USED, source.getOriginalId(), source.getSourceId(), source.getControllerId()));
+        return uuid;
     }
 
     /**
