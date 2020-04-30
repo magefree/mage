@@ -15,8 +15,9 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.CounterAnyPredicate;
+import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -71,7 +72,6 @@ class SlipperyBogbonderEffect extends OneShotEffect {
 
     static {
         filter.add(CounterAnyPredicate.instance);
-        filter.add(AnotherPredicate.instance);
     }
 
     SlipperyBogbonderEffect() {
@@ -92,16 +92,19 @@ class SlipperyBogbonderEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Permanent creature = game.getPermanent(source.getFirstTarget());
+        FilterPermanent filterPermanent = filter.copy();
+        filterPermanent.add(Predicates.not(new PermanentIdPredicate(source.getFirstTarget())));
         if (player == null || creature == null || game.getBattlefield().count(
-                filter, source.getSourceId(), source.getControllerId(), game
+                filterPermanent, source.getSourceId(), source.getControllerId(), game
         ) < 1) {
             return false;
         }
-        TargetPermanent target = new TargetPermanent(0, Integer.MAX_VALUE, filter, true);
+        TargetPermanent target = new TargetPermanent(0, Integer.MAX_VALUE, filterPermanent, true);
         player.choose(outcome, target, source.getSourceId(), game);
         List<Permanent> permanents = target
                 .getTargets()
                 .stream()
+                .filter(uuid -> !creature.getId().equals(uuid))
                 .map(game::getPermanent)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
@@ -119,11 +122,9 @@ class SlipperyBogbonderEffect extends OneShotEffect {
                                 "Choose how many " + entry.getKey()
                                         + " counters to remove from " + permanent.getLogName(), game
                         );
-                        if (num != 0) {
-                            counterMap.computeIfAbsent(
-                                    permanent.getId(), x -> new HashMap<>()
-                            ).put(entry.getKey(), num);
-                        }
+                        counterMap.computeIfAbsent(
+                                permanent.getId(), x -> new HashMap<>()
+                        ).put(entry.getKey(), num);
                     });
         }
         for (Permanent permanent : permanents) {
@@ -131,6 +132,7 @@ class SlipperyBogbonderEffect extends OneShotEffect {
                     .get(permanent.getId())
                     .entrySet()
                     .stream()
+                    .filter(entry -> entry.getValue() > 0)
                     .map(entry -> CounterType.findByName(entry.getKey()).createInstance(entry.getValue()))
                     .filter(counter -> creature.addCounters(counter, source, game))
                     .forEach(counter -> permanent.removeCounters(counter, game));
