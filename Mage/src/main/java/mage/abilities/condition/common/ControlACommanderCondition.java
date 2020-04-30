@@ -24,6 +24,7 @@ public enum ControlACommanderCondition implements Condition {
                 .map(player -> game.getCommandersIds(player, CommanderCardType.COMMANDER_OR_OATHBREAKER))
                 .flatMap(Collection::stream)
                 .map(game::getPermanent)
+                .filter(Objects::nonNull)
                 .map(Permanent::getControllerId)
                 .anyMatch(source.getControllerId()::equals);
     }
