@@ -2,12 +2,11 @@ package mage.cards.y;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
+import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.effects.common.SendOptionUsedEventEffect;
 import mage.abilities.effects.common.counter.DistributeCountersEffect;
 import mage.abilities.keyword.PartnerWithAbility;
 import mage.abilities.keyword.VigilanceAbility;
@@ -19,7 +18,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
@@ -109,43 +107,15 @@ class YannikScavengingSentinelEffect extends OneShotEffect {
         ), permanent.getIdName()).setTargetPointer(new FixedTarget(permanent, game)).apply(game, source);
         game.addDelayedTriggeredAbility(new OnLeaveReturnExiledToBattlefieldAbility(), source);
         if (game.getState().getZone(permanent.getId()) != Zone.BATTLEFIELD) {
-            game.addDelayedTriggeredAbility(new YannikScavengingSentinelReflexiveTriggeredAbility(power), source);
-            return new SendOptionUsedEventEffect().apply(game, source);
+            ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
+                    new DistributeCountersEffect(
+                            CounterType.P1P1, power, false, ""
+                    ), false, "distribute X +1/+1 counters among any number of target creatures, " +
+                    "where X is the exiled creature's power"
+            );
+            ability.addTarget(new TargetCreaturePermanentAmount(power));
+            game.fireReflexiveTriggeredAbility(ability, source);
         }
         return true;
-    }
-}
-
-class YannikScavengingSentinelReflexiveTriggeredAbility extends DelayedTriggeredAbility {
-
-    YannikScavengingSentinelReflexiveTriggeredAbility(int power) {
-        super(new DistributeCountersEffect(CounterType.P1P1, power, false, ""), Duration.OneUse, true);
-        this.addTarget(new TargetCreaturePermanentAmount(power));
-    }
-
-    private YannikScavengingSentinelReflexiveTriggeredAbility(final YannikScavengingSentinelReflexiveTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public YannikScavengingSentinelReflexiveTriggeredAbility copy() {
-        return new YannikScavengingSentinelReflexiveTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.OPTION_USED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getPlayerId().equals(this.getControllerId())
-                && event.getSourceId().equals(this.getSourceId());
-    }
-
-    @Override
-    public String getRule() {
-        return "Distribute X +1/+1 counters among any number of target creatures, " +
-                "where X is the exiled creature's power.";
     }
 }
