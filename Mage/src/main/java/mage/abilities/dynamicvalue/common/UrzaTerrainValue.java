@@ -5,6 +5,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 
 public enum UrzaTerrainValue implements DynamicValue {
@@ -15,9 +16,9 @@ public enum UrzaTerrainValue implements DynamicValue {
     private final int value;
     private final SubType subType;
 
-    private static final FilterPermanent mineFilter = new FilterPermanent(SubType.MINE, "");
-    private static final FilterPermanent towerFilter = new FilterPermanent(SubType.MINE, "");
-    private static final FilterPermanent powerPlantFilter = new FilterPermanent(SubType.POWER_PLANT, "");
+    private static final FilterPermanent mineFilter = new FilterControlledPermanent(SubType.MINE);
+    private static final FilterPermanent towerFilter = new FilterControlledPermanent(SubType.TOWER);
+    private static final FilterPermanent powerPlantFilter = new FilterControlledPermanent(SubType.POWER_PLANT);
 
     static {
         mineFilter.add(SubType.URZAS.getPredicate());
@@ -32,18 +33,18 @@ public enum UrzaTerrainValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        if (subType != SubType.MINE && game.getBattlefield().countAll(
-                mineFilter, sourceAbility.getControllerId(), game
+        if (subType != SubType.MINE && game.getBattlefield().count(
+                mineFilter, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game
         ) < 1) {
             return 1;
         }
-        if (subType != SubType.TOWER && game.getBattlefield().countAll(
-                towerFilter, sourceAbility.getControllerId(), game
+        if (subType != SubType.TOWER && game.getBattlefield().count(
+                towerFilter, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game
         ) < 1) {
             return 1;
         }
-        if (subType != SubType.POWER_PLANT && game.getBattlefield().countAll(
-                powerPlantFilter, sourceAbility.getControllerId(), game
+        if (subType != SubType.POWER_PLANT && game.getBattlefield().count(
+                powerPlantFilter, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game
         ) < 1) {
             return 1;
         }
