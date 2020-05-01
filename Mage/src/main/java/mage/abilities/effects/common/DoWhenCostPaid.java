@@ -71,7 +71,7 @@ public class DoWhenCostPaid extends OneShotEffect {
         if (!staticText.isEmpty()) {
             return staticText;
         }
-        return (optional ? "you may " : "") + getCostText() + ". When you do, " + ability.getRule();
+        return (optional ? "you may " : "") + getCostText() + ". When you do, " + ability.getText();
     }
 
     private String getCostText() {

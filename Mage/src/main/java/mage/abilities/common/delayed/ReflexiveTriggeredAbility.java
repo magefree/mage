@@ -36,6 +36,10 @@ public class ReflexiveTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public String getRule() {
+        return text.substring(0, 1).toUpperCase() + text.substring(1) + '.';
+    }
+
+    public String getText() {
         return text;
     }
 
