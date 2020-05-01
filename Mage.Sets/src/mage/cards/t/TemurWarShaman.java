@@ -1,7 +1,5 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -11,30 +9,24 @@ import mage.abilities.effects.keyword.ManifestEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
+import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class TemurWarShaman extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you don't control");
-
-    static {
-        filter.add(TargetController.NOT_YOU.getControllerPredicate());
-    }
-
     public TemurWarShaman(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(4);
@@ -45,11 +37,11 @@ public final class TemurWarShaman extends CardImpl {
 
         // Whenever a permanent you control is turned face up, if it is a creature, you may have it fight target creature you don't control.
         Ability ability = new TemurWarShamanTriggeredAbility();
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
         this.addAbility(ability);
     }
 
-    public TemurWarShaman(final TemurWarShaman card) {
+    private TemurWarShaman(final TemurWarShaman card) {
         super(card);
     }
 
@@ -61,11 +53,11 @@ public final class TemurWarShaman extends CardImpl {
 
 class TemurWarShamanTriggeredAbility extends TurnedFaceUpAllTriggeredAbility {
 
-    public TemurWarShamanTriggeredAbility() {
+    TemurWarShamanTriggeredAbility() {
         super(Zone.BATTLEFIELD, new TemurWarShamanFightEffect(), new FilterControlledCreaturePermanent(), true, true);
     }
 
-    public TemurWarShamanTriggeredAbility(final TemurWarShamanTriggeredAbility ability) {
+    private TemurWarShamanTriggeredAbility(final TemurWarShamanTriggeredAbility ability) {
         super(ability);
     }
 
@@ -86,7 +78,7 @@ class TemurWarShamanFightEffect extends OneShotEffect {
         super(Outcome.Damage);
     }
 
-    TemurWarShamanFightEffect(final TemurWarShamanFightEffect effect) {
+    private TemurWarShamanFightEffect(final TemurWarShamanFightEffect effect) {
         super(effect);
     }
 

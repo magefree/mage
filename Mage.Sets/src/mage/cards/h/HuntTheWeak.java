@@ -1,31 +1,23 @@
-
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class HuntTheWeak extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you don't control");
-
-    static {
-        filter.add(TargetController.NOT_YOU.getControllerPredicate());
-    }
 
     public HuntTheWeak(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}");
@@ -37,12 +29,11 @@ public final class HuntTheWeak extends CardImpl {
         effect.setText("Then that creature fights target creature you don't control");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        Target target = new TargetCreaturePermanent(filter);
+        Target target = new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL);
         this.getSpellAbility().addTarget(target);
-
     }
 
-    public HuntTheWeak(final HuntTheWeak card) {
+    private HuntTheWeak(final HuntTheWeak card) {
         super(card);
     }
 
@@ -50,5 +41,4 @@ public final class HuntTheWeak extends CardImpl {
     public HuntTheWeak copy() {
         return new HuntTheWeak(this);
     }
-
 }

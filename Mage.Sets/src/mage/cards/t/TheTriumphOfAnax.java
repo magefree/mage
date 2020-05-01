@@ -11,10 +11,12 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SagaChapter;
+import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 import mage.target.Targets;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -28,11 +30,6 @@ import java.util.UUID;
 public final class TheTriumphOfAnax extends CardImpl {
 
     private static final DynamicValue xValue = new CountersSourceCount(CounterType.LORE);
-    private static final FilterPermanent filter = new FilterCreaturePermanent("creature you don't control");
-
-    static {
-        filter.add(TargetController.NOT_YOU.getControllerPredicate());
-    }
 
     public TheTriumphOfAnax(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
@@ -61,7 +58,7 @@ public final class TheTriumphOfAnax extends CardImpl {
                         "Target creature you control fights up to one target creature you don't control"
                 )), new Targets(
                         new TargetControlledCreaturePermanent(),
-                        new TargetPermanent(0, 1, filter, false)
+                        new TargetPermanent(0, 1, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL, false)
                 )
         );
         this.addAbility(sagaAbility);

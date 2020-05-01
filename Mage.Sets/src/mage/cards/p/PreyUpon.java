@@ -1,41 +1,30 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.target.Target;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward
  */
 public final class PreyUpon extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you don't control");
-
-    static {
-        filter.add(TargetController.NOT_YOU.getControllerPredicate());
-    }
-
     public PreyUpon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{G}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{G}");
 
         // Target creature you control fights target creature you don't control.
         this.getSpellAbility().addEffect(new FightTargetsEffect());
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        Target target = new TargetCreaturePermanent(filter);
-        this.getSpellAbility().addTarget(target);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
     }
 
-    public PreyUpon(final PreyUpon card) {
+    private PreyUpon(final PreyUpon card) {
         super(card);
     }
 

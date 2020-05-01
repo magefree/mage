@@ -1,44 +1,35 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class PeelFromReality extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you don't control");
-
-    static {
-        filter.add(TargetController.NOT_YOU.getControllerPredicate());
-    }
-
     public PeelFromReality(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
         // Return target creature you control and target creature you don't control to their owners' hands.
         this.getSpellAbility().addEffect(new PeelFromRealityEffect());
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
     }
 
-    public PeelFromReality(final PeelFromReality card) {
+    private PeelFromReality(final PeelFromReality card) {
         super(card);
     }
 
@@ -50,12 +41,12 @@ public final class PeelFromReality extends CardImpl {
 
 class PeelFromRealityEffect extends OneShotEffect {
 
-    public PeelFromRealityEffect() {
+    PeelFromRealityEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "Return target creature you control and target creature you don't control to their owners' hands";
     }
 
-    public PeelFromRealityEffect(final PeelFromRealityEffect effect) {
+    private PeelFromRealityEffect(final PeelFromRealityEffect effect) {
         super(effect);
     }
 

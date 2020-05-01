@@ -10,12 +10,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
-import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.Predicates;
 import mage.game.permanent.token.TreasureToken;
@@ -29,11 +26,9 @@ import java.util.UUID;
 public final class SurlyBadgersaur extends CardImpl {
 
     private static final FilterCard filter = new FilterNonlandCard("a noncreature, nonland card");
-    private static final FilterPermanent filter2 = new FilterCreaturePermanent("creature you don't control");
 
     static {
         filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
-        filter2.add(TargetController.NOT_YOU.getControllerPredicate());
     }
 
     public SurlyBadgersaur(UUID ownerId, CardSetInfo setInfo) {
@@ -62,7 +57,7 @@ public final class SurlyBadgersaur extends CardImpl {
                         "{this} fights up to one target creature you don't control"
                 ), false, filter
         );
-        ability.addTarget(new TargetPermanent(0, 1, filter2, false));
+        ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL, false));
         this.addAbility(ability);
     }
 

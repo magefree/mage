@@ -17,7 +17,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -31,13 +31,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class KelsienThePlague extends CardImpl {
-
-    private static final FilterCreaturePermanent filter
-            = new FilterCreaturePermanent("creature you don't control");
-
-    static {
-        filter.add(TargetController.NOT_YOU.getControllerPredicate());
-    }
 
     public KelsienThePlague(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{W}{B}");
@@ -62,7 +55,7 @@ public final class KelsienThePlague extends CardImpl {
 
         // {T}: Kelsien deals 1 damage to target creature you don't control. When that creature dies this turn, you get an experience counter.
         Ability ability = new SimpleActivatedAbility(new KelsienThePlagueEffect(), new TapSourceCost());
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
         this.addAbility(ability);
     }
 

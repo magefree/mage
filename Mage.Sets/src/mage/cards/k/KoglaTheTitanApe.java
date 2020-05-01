@@ -13,11 +13,14 @@ import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.DefendingPlayerControlsPredicate;
 import mage.target.TargetPermanent;
 
@@ -29,15 +32,12 @@ import java.util.UUID;
 public final class KoglaTheTitanApe extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterCreaturePermanent("creature you don't control");
-    private static final FilterPermanent filter2
             = new FilterArtifactOrEnchantmentPermanent("artifact or enchantment defending player controls");
-    private static final FilterPermanent filter3
+    private static final FilterPermanent filter2
             = new FilterControlledPermanent(SubType.HUMAN);
 
     static {
-        filter.add(TargetController.NOT_YOU.getControllerPredicate());
-        filter2.add(DefendingPlayerControlsPredicate.instance);
+        filter.add(DefendingPlayerControlsPredicate.instance);
     }
 
     public KoglaTheTitanApe(UUID ownerId, CardSetInfo setInfo) {
@@ -51,18 +51,18 @@ public final class KoglaTheTitanApe extends CardImpl {
         // When Kogla, the Titan Ape enters the battlefield, it fights up to one target creature you don't control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new FightTargetSourceEffect()
                 .setText("it fights up to one target creature you don't control"));
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
         this.addAbility(ability);
 
         // Whenever Kogla attacks, destroy target artifact or enchantment defending player controls.
         ability = new AttacksTriggeredAbility(new DestroyTargetEffect(), false);
-        ability.addTarget(new TargetPermanent(filter2));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
         // {1}{G}: Return target Human you control to its owner's hand. Kogla gains indestructible until end of turn.
         ability = new SimpleActivatedAbility(new ReturnToHandTargetEffect(), new ManaCostsImpl("{1}{G}"));
         ability.addEffect(new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn));
-        ability.addTarget(new TargetPermanent(filter3));
+        ability.addTarget(new TargetPermanent(filter2));
         this.addAbility(ability);
     }
 

@@ -8,6 +8,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
@@ -35,7 +36,7 @@ public final class VolcanicOffering extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(VolcanicOfferingAdjuster.instance);
     }
 
-    public VolcanicOffering(final VolcanicOffering card) {
+    private VolcanicOffering(final VolcanicOffering card) {
         super(card);
     }
 
@@ -48,12 +49,10 @@ public final class VolcanicOffering extends CardImpl {
 enum VolcanicOfferingAdjuster implements TargetAdjuster {
     instance;
     private static final FilterLandPermanent filterLand = new FilterLandPermanent("nonbasic land you don't control");
-    private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("creature you don't control");
 
     static {
         filterLand.add(TargetController.NOT_YOU.getControllerPredicate());
         filterLand.add(Predicates.not(SuperType.BASIC.getPredicate()));
-        filterCreature.add(TargetController.NOT_YOU.getControllerPredicate());
     }
 
     @Override
@@ -69,7 +68,7 @@ enum VolcanicOfferingAdjuster implements TargetAdjuster {
         filterLandForOpponent.add(Predicates.not(new ControllerIdPredicate(controller.getId())));
         ability.addTarget(new TargetOpponentsChoicePermanent(1, 1, filterLandForOpponent, false));
 
-        ability.addTarget(new TargetPermanent(filterCreature));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
         FilterCreaturePermanent filterCreatureForOpponent = new FilterCreaturePermanent("creature not controlled by " + controller.getLogName());
         filterCreatureForOpponent.add(Predicates.not(new ControllerIdPredicate(controller.getId())));
         ability.addTarget(new TargetOpponentsChoicePermanent(1, 1, filterCreatureForOpponent, false));
@@ -78,13 +77,13 @@ enum VolcanicOfferingAdjuster implements TargetAdjuster {
 
 class VolcanicOfferingEffect extends OneShotEffect {
 
-    public VolcanicOfferingEffect() {
+    VolcanicOfferingEffect() {
         super(Outcome.Benefit);
         this.staticText = "Destroy target nonbasic land you don't control and target nonbasic land of an opponent's choice you don't control.<br>" +
                 "{this} deals 7 damage to target creature you don't control and 7 damage to target creature of an opponent's choice you don't control";
     }
 
-    public VolcanicOfferingEffect(final VolcanicOfferingEffect effect) {
+    private VolcanicOfferingEffect(final VolcanicOfferingEffect effect) {
         super(effect);
     }
 
@@ -95,26 +94,22 @@ class VolcanicOfferingEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Permanent permanent = game.getPermanent(source.getFirstTarget());
-            if (permanent != null) {
-                permanent.destroy(source.getSourceId(), game, false);
-            }
-            permanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
-            if (permanent != null) {
-                permanent.destroy(source.getSourceId(), game, false);
-            }
-            permanent = game.getPermanent(source.getTargets().get(2).getFirstTarget());
-            if (permanent != null) {
-                permanent.damage(7, source.getSourceId(), game, false, true);
-            }
-            permanent = game.getPermanent(source.getTargets().get(3).getFirstTarget());
-            if (permanent != null) {
-                permanent.damage(7, source.getSourceId(), game, false, true);
-            }
-            return true;
+        Permanent permanent = game.getPermanent(source.getFirstTarget());
+        if (permanent != null) {
+            permanent.destroy(source.getSourceId(), game, false);
         }
-        return false;
+        permanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
+        if (permanent != null) {
+            permanent.destroy(source.getSourceId(), game, false);
+        }
+        permanent = game.getPermanent(source.getTargets().get(2).getFirstTarget());
+        if (permanent != null) {
+            permanent.damage(7, source.getSourceId(), game, false, true);
+        }
+        permanent = game.getPermanent(source.getTargets().get(3).getFirstTarget());
+        if (permanent != null) {
+            permanent.damage(7, source.getSourceId(), game, false, true);
+        }
+        return true;
     }
 }

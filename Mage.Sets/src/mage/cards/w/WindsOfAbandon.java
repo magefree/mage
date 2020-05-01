@@ -10,11 +10,8 @@ import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -36,7 +33,7 @@ public final class WindsOfAbandon extends CardImpl {
 
         // Exile target creature you don't control. For each creature exiled this way, its controller searches their library for a basic land card. Those players put those cards onto the battlefield tapped, then shuffle their libraries.
         this.getSpellAbility().addEffect(new WindsOfAbandonEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(WindsOfAbandonOverloadEffect.filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
 
         // Overload {4}{W}{W}
         this.addAbility(new OverloadAbility(
@@ -102,12 +99,6 @@ class WindsOfAbandonEffect extends OneShotEffect {
 
 class WindsOfAbandonOverloadEffect extends OneShotEffect {
 
-    static final FilterPermanent filter = new FilterCreaturePermanent("creature you don't control");
-
-    static {
-        filter.add(TargetController.NOT_YOU.getControllerPredicate());
-    }
-
     WindsOfAbandonOverloadEffect() {
         super(Outcome.Exile);
         staticText = "Exile each creature you don't control. For each creature exiled this way, " +
@@ -132,7 +123,7 @@ class WindsOfAbandonOverloadEffect extends OneShotEffect {
         }
         Map<UUID, Integer> playerMap = new HashMap<>();
         CardsImpl cards = new CardsImpl();
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL, source.getControllerId(), source.getSourceId(), game)) {
             int count = playerMap.getOrDefault(permanent.getControllerId(), 0);
             playerMap.put(permanent.getControllerId(), count + 1);
             cards.add(permanent);
