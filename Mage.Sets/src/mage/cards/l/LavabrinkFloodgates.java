@@ -2,22 +2,23 @@ package mage.cards.l;
 
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageAllEffect;
-import mage.abilities.effects.common.SendOptionUsedEventEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
@@ -93,45 +94,17 @@ class LavabrinkFloodgatesEffect extends OneShotEffect {
                 break;
             case "Do nothing":
             default:
-                return false;
+                break;
         }
         if (permanent.getCounters(game).getCount(CounterType.DOOM) < 3
                 || !permanent.sacrifice(source.getSourceId(), game)) {
             return true;
         }
-        game.addDelayedTriggeredAbility(new LavabrinkFloodgatesReflexiveTriggeredAbility(), source);
-        return new SendOptionUsedEventEffect().apply(game, source);
-    }
-}
-
-class LavabrinkFloodgatesReflexiveTriggeredAbility extends DelayedTriggeredAbility {
-
-    LavabrinkFloodgatesReflexiveTriggeredAbility() {
-        super(new DamageAllEffect(6, StaticFilters.FILTER_PERMANENT_CREATURE), Duration.OneUse, true);
-    }
-
-    private LavabrinkFloodgatesReflexiveTriggeredAbility(final LavabrinkFloodgatesReflexiveTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public LavabrinkFloodgatesReflexiveTriggeredAbility copy() {
-        return new LavabrinkFloodgatesReflexiveTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.OPTION_USED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getPlayerId().equals(this.getControllerId())
-                && event.getSourceId().equals(this.getSourceId());
-    }
-
-    @Override
-    public String getRule() {
-        return "It deals 6 damage to each creature.";
+        game.fireReflexiveTriggeredAbility(new ReflexiveTriggeredAbility(
+                new DamageAllEffect(
+                        6, StaticFilters.FILTER_PERMANENT_CREATURE
+                ), false, "it deals 6 damage to each creature."
+        ), source);
+        return true;
     }
 }
