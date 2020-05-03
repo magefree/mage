@@ -54,9 +54,10 @@ class WitsEndEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getFirstTarget());
-        if (player != null) {
-            player.discard(player.getHand(), source, game);
+        if (player == null) {
+            return false;
         }
-        return false;
+        player.discard(player.getHand(), source, game);
+        return true;
     }
 }

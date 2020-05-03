@@ -63,10 +63,11 @@ class RitesOfSpringEffect extends OneShotEffect {
             return false;
         }
         TargetCard target = new TargetDiscard(0, Integer.MAX_VALUE, StaticFilters.FILTER_CARD, controller.getId());
-        controller.choose(outcome, controller.getHand(), target, game);
+        controller.choose(Outcome.AIDontUseIt, controller.getHand(), target, game);
         int numDiscarded = controller.discard(new CardsImpl(target.getTargets()), source, game).size();
-        return numDiscarded > 0 && new SearchLibraryPutInHandEffect(new TargetCardInLibrary(
+        new SearchLibraryPutInHandEffect(new TargetCardInLibrary(
                 0, numDiscarded, StaticFilters.FILTER_CARD_BASIC_LAND
         ), true, true).apply(game, source);
+        return true;
     }
 }

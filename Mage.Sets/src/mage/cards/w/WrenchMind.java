@@ -61,7 +61,7 @@ class WrenchMindEffect extends OneShotEffect {
             return false;
         }
         if (targetPlayer.getHand().count(StaticFilters.FILTER_CARD_ARTIFACT, game) < 1
-                || !targetPlayer.chooseUse(outcome, "Discard an artifact card?", source, game)) {
+                || !targetPlayer.chooseUse(Outcome.Benefit, "Discard an artifact card?", source, game)) {
             return !targetPlayer.discard(2, false, source, game).isEmpty();
         }
         TargetDiscard target = new TargetDiscard(StaticFilters.FILTER_CARD_ARTIFACT_AN, targetPlayer.getId());

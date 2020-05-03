@@ -42,7 +42,7 @@ public final class SacredRites extends CardImpl {
 class SacredRitesEffect extends OneShotEffect {
 
     SacredRitesEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.AIDontUseIt);
         this.staticText = "Discard any number of cards. Creatures you control get +0/+1 until end of turn for each card discarded this way.";
     }
 
@@ -62,7 +62,7 @@ class SacredRitesEffect extends OneShotEffect {
             return false;
         }
         Target target = new TargetDiscard(0, Integer.MAX_VALUE, StaticFilters.FILTER_CARD, controller.getId());
-        target.choose(Outcome.BoostCreature, controller.getId(), source.getSourceId(), game);
+        target.choose(outcome, controller.getId(), source.getSourceId(), game);
         int numDiscarded = controller.discard(new CardsImpl(target.getTargets()), source, game).size();
         if (numDiscarded > 0) {
             game.addEffect(new BoostControlledEffect(0, numDiscarded, Duration.EndOfTurn), source);

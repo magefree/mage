@@ -28,7 +28,9 @@ public final class SireOfInsanity extends CardImpl {
         this.toughness = new MageInt(4);
 
         // At the beginning of each end step, each player discards their hand.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new SireOfInsanityEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(
+                new SireOfInsanityEffect(), TargetController.ANY, false
+        ));
     }
 
     private SireOfInsanity(final SireOfInsanity card) {

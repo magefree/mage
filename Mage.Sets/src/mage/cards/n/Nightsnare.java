@@ -63,7 +63,7 @@ class NightsnareDiscardEffect extends OneShotEffect {
         Card sourceCard = game.getCard(source.getSourceId());
         player.revealCards(sourceCard != null ? sourceCard.getIdName() : "Discard", revealedCards, game);
         // You may choose a nonland card from it.
-        if (!controller.chooseUse(outcome, "Choose a a card to discard? (Otherwise " + player.getLogName() + " has to discard 2 cards).", source, game)) {
+        if (!controller.chooseUse(outcome, "Choose a card to discard? (Otherwise " + player.getLogName() + " has to discard 2 cards).", source, game)) {
             player.discard(2, false, source, game);
             return true;
         }

@@ -59,10 +59,10 @@ class ShockerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
         if (targetPlayer == null) {
-            return true;
+            return false;
         }
         int count = targetPlayer.discard(targetPlayer.getHand(), source, game).size();
         targetPlayer.drawCards(count, source.getSourceId(), game);
-        return false;
+        return true;
     }
 }

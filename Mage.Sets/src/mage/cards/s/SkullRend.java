@@ -9,10 +9,13 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
- * @author LevelX2
+ * @author TheElk801
  */
 public final class SkullRend extends CardImpl {
 
@@ -45,12 +48,15 @@ public final class SkullRend extends CardImpl {
 
         @Override
         public boolean apply(Game game, Ability source) {
-            for (UUID playerId : game.getOpponents(source.getControllerId())) {
-                Player opponent = game.getPlayer(playerId);
-                if (opponent == null) {
-                    continue;
-                }
+            List<Player> opponents = game
+                    .getOpponents(source.getControllerId())
+                    .stream().map(game::getPlayer)
+                    .filter(Objects::nonNull)
+                    .collect(Collectors.toList());
+            for (Player opponent : opponents) {
                 opponent.damage(2, source.getSourceId(), game);
+            }
+            for (Player opponent : opponents) {
                 opponent.discard(2, true, source, game);
             }
             return true;
