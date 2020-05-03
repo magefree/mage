@@ -2581,6 +2581,9 @@ public abstract class GameImpl implements Game, Serializable {
                 }
             }
         }
+        for(Card card : toOutside) {
+            rememberLKI(card.getId(), Zone.BATTLEFIELD, card);
+        }
         // needed to send event that permanent leaves the battlefield to allow non stack effects to execute
         player.moveCards(toOutside, Zone.OUTSIDE, null, this);
         // triggered abilities that don't use the stack have to be executed
