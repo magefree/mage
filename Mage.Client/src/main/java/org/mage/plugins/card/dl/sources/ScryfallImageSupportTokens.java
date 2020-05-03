@@ -350,6 +350,18 @@ public class ScryfallImageSupportTokens {
             put("THB/Wolf", "https://api.scryfall.com/cards/tthb/11/en?format=image");
             put("THB/Zombie", "https://api.scryfall.com/cards/tthb/7/en?format=image");
 
+            // IKO
+            put("IKO/Emblem Narset Of The Ancient Way", "https://api.scryfall.com/cards/tiko/12/en?format=image");
+            put("IKO/Beast", "https://api.scryfall.com/cards/tiko/10/en?format=image");
+            put("IKO/Cat Bird", "https://api.scryfall.com/cards/tiko/2/en?format=image");
+            put("IKO/Cat", "https://api.scryfall.com/cards/tiko/1/en?format=image");
+            put("IKO/Dinosaur Beast", "https://api.scryfall.com/cards/tiko/11/en?format=image");
+            put("IKO/Dinosaur", "https://api.scryfall.com/cards/tiko/8/en?format=image");
+            put("IKO/Feather", "https://api.scryfall.com/cards/tiko/9/en?format=image");
+            put("IKO/Human Soldier", "https://api.scryfall.com/cards/tiko/4/en?format=image");
+            put("IKO/Kraken", "https://api.scryfall.com/cards/tiko/6/en?format=image");
+            put("IKO/Shark", "https://api.scryfall.com/cards/tiko/7/en?format=image");
+
             // PCA (planes)
             put("PCA/Eldrazi", "https://api.scryfall.com/cards/tpca/1/en?format=image");
             put("PCA/Plane - Academy at Tolaria West", "https://api.scryfall.com/cards/opca/9/en?format=image");

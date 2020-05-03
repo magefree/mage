@@ -101,6 +101,7 @@
 |Generate|EMBLEM:DOM|Teferi, Hero of Dominaria||Emblem Teferi|TeferiHeroOfDominariaEmblem|
 |Generate|EMBLEM:AER|Tezzeret the Schemer||Emblem Tezzeret|TezzeretTheSchemerEmblem|
 |Generate|EMBLEM:ELD|Garruk, Cursed Huntsman||Emblem Garruk|GarrukCursedHuntsmanEmblem|
+|Generate|EMBLEM:IKO|Narset Of The Ancient Way||Emblem Narset|NarsetOfTheAncientWayEmblem|
 |Generate|PLANE:PCA|Plane - Academy at Tolaria West|||AcademyAtTolariaWestPlane|
 |Generate|PLANE:PCA|Plane - Agyrem|||AgyremPlane|
 |Generate|PLANE:PCA|Plane - Akoum|||AkoumPlane|
@@ -1358,3 +1359,12 @@
 |Generate|TOK:THB|Nightmare|||AshiokNightmareMuseToken|
 |Generate|TOK:THB|GoldToken|||Gold|
 |Generate|TOK:THB|ArtifactWallToken|||Wall|
+|Generate|TOK:IKO|Beast|||BeastToken|
+|Generate|TOK:IKO|Cat Bird|||CatBirdToken|
+|Generate|TOK:IKO|Cat|||CatToken|
+|Generate|TOK:IKO|Dinosaur Beast|||DinosaurBeastToken|
+|Generate|TOK:IKO|Dinosaur|||DinosaurHasteToken|
+|Generate|TOK:IKO|Feather|||FeatherToken|
+|Generate|TOK:IKO|Human Soldier|||HumanSoldierToken|
+|Generate|TOK:IKO|Kraken|||KrakenToken|
+|Generate|TOK:IKO|Shark|||SharkToken|

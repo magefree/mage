@@ -13,6 +13,7 @@ import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.BeastXToken;
+import mage.game.permanent.token.DinosaurBeastToken;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.Watcher;
 
@@ -119,7 +120,7 @@ class QuartzwoodCrasherEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         QuartzwoodCrasherWatcher watcher = game.getState().getWatcher(QuartzwoodCrasherWatcher.class);
-        return watcher != null && new BeastXToken(
+        return watcher != null && new DinosaurBeastToken(
                 watcher.getDamage(targetPointer.getFirst(game, source), source.getControllerId())
         ).putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
     }
