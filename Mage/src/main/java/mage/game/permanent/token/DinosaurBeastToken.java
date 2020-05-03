@@ -1,13 +1,11 @@
-
 package mage.game.permanent.token;
 
-import mage.constants.CardType;
-import mage.MageInt;
-import mage.abilities.keyword.TrampleAbility;
-import mage.constants.SubType;
+        import mage.MageInt;
+        import mage.abilities.keyword.TrampleAbility;
+        import mage.constants.CardType;
+        import mage.constants.SubType;
 
 /**
- *
  * @author TheElk801
  */
 public final class DinosaurBeastToken extends TokenImpl {
@@ -23,10 +21,11 @@ public final class DinosaurBeastToken extends TokenImpl {
         addAbility(TrampleAbility.getInstance());
     }
 
-    public DinosaurBeastToken(final DinosaurBeastToken token) {
+    private DinosaurBeastToken(final DinosaurBeastToken token) {
         super(token);
     }
 
+    @Override
     public DinosaurBeastToken copy() {
         return new DinosaurBeastToken(this);
     }

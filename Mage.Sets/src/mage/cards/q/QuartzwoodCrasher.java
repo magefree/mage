@@ -12,7 +12,6 @@ import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.BeastXToken;
 import mage.game.permanent.token.DinosaurBeastToken;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.Watcher;

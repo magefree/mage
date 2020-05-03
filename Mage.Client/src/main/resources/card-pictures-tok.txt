@@ -1365,6 +1365,8 @@
 |Generate|TOK:IKO|Dinosaur Beast|||DinosaurBeastToken|
 |Generate|TOK:IKO|Dinosaur|||DinosaurHasteToken|
 |Generate|TOK:IKO|Feather|||FeatherToken|
-|Generate|TOK:IKO|Human Soldier|||HumanSoldierToken|
+|Generate|TOK:IKO|Human Soldier|1||HumanSoldierToken|
+|Generate|TOK:IKO|Human Soldier|2||HumanSoldierToken|
+|Generate|TOK:IKO|Human Soldier|3||HumanSoldierToken|
 |Generate|TOK:IKO|Kraken|||KrakenToken|
 |Generate|TOK:IKO|Shark|||SharkToken|

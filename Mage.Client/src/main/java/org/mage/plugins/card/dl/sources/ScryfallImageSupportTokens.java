@@ -358,7 +358,9 @@ public class ScryfallImageSupportTokens {
             put("IKO/Dinosaur Beast", "https://api.scryfall.com/cards/tiko/11/en?format=image");
             put("IKO/Dinosaur", "https://api.scryfall.com/cards/tiko/8/en?format=image");
             put("IKO/Feather", "https://api.scryfall.com/cards/tiko/9/en?format=image");
-            put("IKO/Human Soldier", "https://api.scryfall.com/cards/tiko/4/en?format=image");
+            put("IKO/Human Soldier/1", "https://api.scryfall.com/cards/tiko/3/en?format=image");
+            put("IKO/Human Soldier/2", "https://api.scryfall.com/cards/tiko/4/en?format=image");
+            put("IKO/Human Soldier/3", "https://api.scryfall.com/cards/tiko/5/en?format=image");
             put("IKO/Kraken", "https://api.scryfall.com/cards/tiko/6/en?format=image");
             put("IKO/Shark", "https://api.scryfall.com/cards/tiko/7/en?format=image");
 
