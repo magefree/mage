@@ -22,7 +22,7 @@ public class AbilityResolvedWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.RESOLVED_ABILITY) {
+        if (event.getType() == GameEvent.EventType.RESOLVING_ABILITY) {
             resolutionMap.merge(event.getTargetId().toString() + game.getState().getZoneChangeCounter(event.getSourceId()), 1, Integer::sum);
         }
     }

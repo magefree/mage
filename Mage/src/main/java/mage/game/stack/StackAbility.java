@@ -82,7 +82,6 @@ public class StackAbility extends StackObjImpl implements Ability {
     @Override
     public boolean resolve(Game game) {
         if (ability.getTargets().stillLegal(ability, game) || !canFizzle()) {
-            game.fireEvent(new GameEvent(GameEvent.EventType.RESOLVED_ABILITY, ability.getOriginalId(), ability.getSourceId(), ability.getControllerId()));
             boolean result = ability.resolve(game);
             game.getStack().remove(this, game);
             return result;
