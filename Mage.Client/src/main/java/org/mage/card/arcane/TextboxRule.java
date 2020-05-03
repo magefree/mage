@@ -7,6 +7,7 @@ package org.mage.card.arcane;
 
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.Paint;
 import java.awt.font.GraphicAttribute;
 import java.awt.font.ImageGraphicAttribute;
 import java.awt.font.TextAttribute;
@@ -43,6 +44,25 @@ public class TextboxRule {
         public void applyToAttributedString(AttributedString str, Font normal, Font italic) {
             if (end > start + 1) {
                 str.addAttribute(TextAttribute.FONT, italic, start, end);
+            }
+        }
+    }
+
+    public static class ColorRegion implements AttributeRegion {
+
+        ColorRegion(int start, int end, Paint color) {
+            this.start = start;
+            this.end = end;
+            this.color = color;
+        }
+        private final int start;
+        private final int end;
+        private final Paint color;
+
+        @Override
+        public void applyToAttributedString(AttributedString str, Font normal, Font italic) {
+            if (end > start + 1) {
+                str.addAttribute(TextAttribute.FOREGROUND, color, start, end);
             }
         }
     }
