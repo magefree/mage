@@ -1,21 +1,26 @@
 package mage.cards.h;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.*;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetCardInHand;
-import mage.util.CardUtil;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
- * @author jeffwadsworth
+ * @author TheElk801
  */
 public final class HintOfInsanity extends CardImpl {
 
@@ -25,10 +30,9 @@ public final class HintOfInsanity extends CardImpl {
         // Target player reveals their hand. That player discards all nonland cards with the same name as another card in their hand.
         this.getSpellAbility().addEffect(new HintOfInsanityEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
-
     }
 
-    public HintOfInsanity(final HintOfInsanity card) {
+    private HintOfInsanity(final HintOfInsanity card) {
         super(card);
     }
 
@@ -40,12 +44,13 @@ public final class HintOfInsanity extends CardImpl {
 
 class HintOfInsanityEffect extends OneShotEffect {
 
-    public HintOfInsanityEffect() {
+    HintOfInsanityEffect() {
         super(Outcome.Discard);
-        this.staticText = "Target player reveals their hand. That player discards all nonland cards with the same name as another card in their hand";
+        this.staticText = "Target player reveals their hand. " +
+                "That player discards all nonland cards with the same name as another card in their hand";
     }
 
-    public HintOfInsanityEffect(final HintOfInsanityEffect effect) {
+    private HintOfInsanityEffect(final HintOfInsanityEffect effect) {
         super(effect);
     }
 
@@ -56,26 +61,26 @@ class HintOfInsanityEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        FilterCard filter = new FilterCard("card from your hand");
-        Player targetPlayer = game.getPlayer(source.getFirstTarget());
-        Card chosenCard;
-        if (targetPlayer != null) {
-            TargetCardInHand targetCard = new TargetCardInHand(filter);
-            targetCard.setNotTarget(true);
-            Cards cardsInHand = new CardsImpl();
-            cardsInHand.addAll(targetPlayer.getHand());
-            targetPlayer.revealCards("Hint of Insanity Reveal", cardsInHand, game);
-            if (!cardsInHand.isEmpty()
-                    && targetPlayer.choose(Outcome.Discard, targetCard, source.getSourceId(), game)) {
-                chosenCard = game.getCard(targetCard.getFirstTarget());
-                for (Card card : cardsInHand.getCards(game)) {
-                    if (CardUtil.haveSameNames(card, chosenCard) && !card.isLand()) {
-                        targetPlayer.discard(card, source, game);
-                    }
-                }
-                return true;
-            }
+        Player player = game.getPlayer(source.getFirstTarget());
+        if (player == null) {
+            return false;
         }
-        return false;
+        Map<String, Integer> nameCounts = new HashMap<>();
+        player.getHand()
+                .getCards(game)
+                .stream()
+                .map(MageObject::getName)
+                .forEach(s -> nameCounts.compute(s, (u, i) -> i == null ? 1 : Integer.sum(i, 1)));
+        Cards cards = new CardsImpl(
+                player.getHand()
+                        .getCards(game)
+                        .stream()
+                        .filter(Objects::nonNull)
+                        .filter(card -> !card.isLand())
+                        .filter(card -> nameCounts.getOrDefault(card.getName(), 0) > 1)
+                        .collect(Collectors.toSet())
+        );
+        player.discard(cards, source, game);
+        return true;
     }
 }

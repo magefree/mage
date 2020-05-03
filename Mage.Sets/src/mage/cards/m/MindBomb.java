@@ -3,7 +3,10 @@ package mage.cards.m;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.*;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
@@ -28,7 +31,7 @@ public final class MindBomb extends CardImpl {
         this.getSpellAbility().addEffect(new MindBombEffect());
     }
 
-    public MindBomb(final MindBomb card) {
+    private MindBomb(final MindBomb card) {
         super(card);
     }
 
@@ -40,13 +43,13 @@ public final class MindBomb extends CardImpl {
 
 class MindBombEffect extends OneShotEffect {
 
-    public MindBombEffect() {
+    MindBombEffect() {
         super(Outcome.Neutral);
         this.staticText = "Each player may discard up to three cards."
                 + " {this} deals damage to each player equal to 3 minus the number of cards they discarded this way";
     }
 
-    public MindBombEffect(final MindBombEffect effect) {
+    private MindBombEffect(final MindBombEffect effect) {
         super(effect);
     }
 
@@ -59,48 +62,44 @@ class MindBombEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
-        if (controller != null && sourceObject != null) {
-            Map<UUID, Cards> cardsToDiscard = new HashMap<>();
-
-            // choose
-            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                Player player = game.getPlayer(playerId);
-                if (player != null) {
-                    Cards cards = new CardsImpl();
-                    Target target = new TargetDiscard(0, 3, new FilterCard(), playerId);
-                    player.chooseTarget(outcome, target, source, game);
-                    cards.addAll(target.getTargets());
-                    cardsToDiscard.put(playerId, cards);
-                }
-            }
-
-            // discard
-            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                Player player = game.getPlayer(playerId);
-                if (player != null) {
-                    Cards cardsPlayer = cardsToDiscard.get(playerId);
-                    if (cardsPlayer != null) {
-                        for (UUID cardId : cardsPlayer) {
-                            Card card = game.getCard(cardId);
-                            player.discard(card, source, game);
-
-                        }
-                    }
-                }
-            }
-
-            // damage
-            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                Player player = game.getPlayer(playerId);
-                if (player != null) {
-                    Cards cardsPlayer = cardsToDiscard.get(playerId);
-                    if (cardsPlayer != null) {
-                        player.damage(3 - cardsPlayer.size(), source.getId(), game);
-                    }
-                }
-            }
-            return true;
+        if (controller == null || sourceObject == null) {
+            return false;
         }
-        return false;
+        Map<UUID, Cards> cardsToDiscard = new HashMap<>();
+
+        // choose
+        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+            Player player = game.getPlayer(playerId);
+            if (player == null) {
+                continue;
+            }
+            Cards cards = new CardsImpl();
+            Target target = new TargetDiscard(0, 3, new FilterCard(), playerId);
+            player.chooseTarget(Outcome.Discard, target, source, game);
+            cards.addAll(target.getTargets());
+            cardsToDiscard.put(playerId, cards);
+        }
+
+        // discard
+        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+            Player player = game.getPlayer(playerId);
+            if (player != null) {
+                Cards cardsPlayer = cardsToDiscard.get(playerId);
+                cardsToDiscard.put(playerId, player.discard(cardsPlayer, source, game));
+            }
+        }
+
+        // damage
+        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+            Player player = game.getPlayer(playerId);
+            if (player == null) {
+                continue;
+            }
+            Cards cardsPlayer = cardsToDiscard.get(playerId);
+            if (cardsPlayer != null) {
+                player.damage(3 - cardsPlayer.size(), source.getId(), game);
+            }
+        }
+        return true;
     }
 }

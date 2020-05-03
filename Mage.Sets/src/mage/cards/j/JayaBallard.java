@@ -1,18 +1,16 @@
-
 package mage.cards.j;
 
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.mana.AddConditionalManaEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
+import mage.abilities.effects.mana.AddConditionalManaEffect;
 import mage.abilities.mana.builder.common.InstantOrSorcerySpellManaBuilder;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -24,8 +22,9 @@ import mage.players.Player;
 import mage.target.common.TargetDiscard;
 import mage.watchers.common.CastFromGraveyardWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class JayaBallard extends CardImpl {
@@ -76,20 +75,13 @@ class JayaBallardDiscardDrawEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            TargetDiscard target = new TargetDiscard(0, 3, new FilterCard(), controller.getId());
-            target.choose(outcome, controller.getId(), source.getSourceId(), game);
-            int count = 0;
-            for (UUID cardId : target.getTargets()) {
-                Card card = game.getCard(cardId);
-                if (card != null) {
-                    controller.discard(card, source, game);
-                    count++;
-                }
-            }
-            controller.drawCards(count, source.getSourceId(), game);
-            return true;
+        if (controller == null) {
+            return false;
         }
-        return false;
+        TargetDiscard target = new TargetDiscard(0, 3, new FilterCard(), controller.getId());
+        target.choose(outcome, controller.getId(), source.getSourceId(), game);
+        int count = controller.discard(new CardsImpl(target.getTargets()), source, game).size();
+        controller.drawCards(count, source.getSourceId(), game);
+        return true;
     }
 }
