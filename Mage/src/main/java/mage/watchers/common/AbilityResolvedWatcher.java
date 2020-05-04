@@ -1,6 +1,5 @@
 package mage.watchers.common;
 
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.constants.WatcherScope;
 import mage.game.Game;
@@ -9,14 +8,13 @@ import mage.watchers.Watcher;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 /**
  * @author TheElk801
  */
 public class AbilityResolvedWatcher extends Watcher {
 
-    private final Map<MageObjectReference, Map<UUID, Integer>> activationMap = new HashMap<>();
+    private final Map<String, Integer> resolutionMap = new HashMap<>();
 
     public AbilityResolvedWatcher() {
         super(WatcherScope.GAME);
@@ -24,17 +22,18 @@ public class AbilityResolvedWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.RESOLVING_ABILITY) {
+            resolutionMap.merge(event.getTargetId().toString() + game.getState().getZoneChangeCounter(event.getSourceId()), 1, Integer::sum);
+        }
     }
 
     @Override
     public void reset() {
         super.reset();
-        activationMap.clear();
+        resolutionMap.clear();
     }
 
-    public boolean checkActivations(Ability source, Game game) {
-        return activationMap.computeIfAbsent(new MageObjectReference(
-                source.getSourceId(), source.getSourceObjectZoneChangeCounter(), game
-        ), x -> new HashMap<>()).compute(source.getOriginalId(), (u, i) -> i == null ? 1 : i + 1).intValue() == 3;
+    public int getResolutionCount(Game game, Ability source) {
+        return resolutionMap.getOrDefault(source.getOriginalId().toString() + game.getState().getZoneChangeCounter(source.getSourceId()), 0);
     }
 }
