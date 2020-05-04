@@ -78,7 +78,7 @@ class WildbornPreserverCreateReflexiveTriggerEffect extends OneShotEffect {
 
     private WildbornPreserverCreateReflexiveTriggerEffect(final WildbornPreserverCreateReflexiveTriggerEffect effect) {
         super(effect);
-        staticText = "you may pay {X}. When you do, put X +1/+1 counters on {this}";
+        staticText = "Whenever another non-Human creature enters the battlefield under your control, you may pay {X}. When you do, put X +1/+1 counters on {this}";
     }
 
     @Override
