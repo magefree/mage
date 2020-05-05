@@ -58,7 +58,9 @@ public class DoWhenCostPaid extends OneShotEffect {
         if (cost.pay(source, game, source.getSourceId(), player.getId(), false)) {
             game.fireReflexiveTriggeredAbility(ability, source);
             player.resetStoredBookmark(game);
+            return true;
         }
+        game.restoreState(bookmark, DoWhenCostPaid.class.getName());
         return true;
     }
 
