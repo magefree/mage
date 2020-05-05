@@ -50,7 +50,7 @@ public final class QuartzwoodCrasher extends CardImpl {
 
 class QuartzwoodCrasherTriggeredAbility extends TriggeredAbilityImpl {
 
-    private final Set<UUID> damagedPlayerIds = new HashSet();
+    private final Set<UUID> damagedPlayerIds = new HashSet<>();
 
     QuartzwoodCrasherTriggeredAbility() {
         super(Zone.BATTLEFIELD, new QuartzwoodCrasherEffect(), false);
@@ -78,17 +78,16 @@ class QuartzwoodCrasherTriggeredAbility extends TriggeredAbilityImpl {
             damagedPlayerIds.clear();
             return false;
         }
-        if (event.getType() != GameEvent.EventType.DAMAGED_PLAYER
-                && !((DamagedPlayerEvent) event).isCombatDamage()) {
-            return false;
-        }
-        Permanent creature = game.getPermanent(event.getSourceId());
-        if (creature != null && creature.isControlledBy(controllerId)
-                && creature.getAbilities(game).containsKey(TrampleAbility.getInstance().getId())
-                && !damagedPlayerIds.contains(event.getTargetId())) {
-            damagedPlayerIds.add(event.getTargetId());
-            this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
-            return true;
+        if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER
+                && ((DamagedPlayerEvent) event).isCombatDamage()) {
+            Permanent creature = game.getPermanent(event.getSourceId());
+            if (creature != null && creature.isControlledBy(controllerId)
+                    && creature.hasAbility(TrampleAbility.getInstance().getId(), game)
+                    && !damagedPlayerIds.contains(event.getTargetId())) {
+                damagedPlayerIds.add(event.getTargetId());
+                this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
+                return true;
+            }
         }
         return false;
     }
@@ -127,7 +126,7 @@ class QuartzwoodCrasherEffect extends OneShotEffect {
 
 class QuartzwoodCrasherWatcher extends Watcher {
 
-    private final Map<UUID, Map<UUID, Integer>> damageMap = new HashMap();
+    private final Map<UUID, Map<UUID, Integer>> damageMap = new HashMap<>();
 
     QuartzwoodCrasherWatcher() {
         super(WatcherScope.GAME);
