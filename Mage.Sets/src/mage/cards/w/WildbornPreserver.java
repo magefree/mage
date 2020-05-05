@@ -72,11 +72,11 @@ class WildbornPreserverCreateReflexiveTriggerEffect extends OneShotEffect {
 
     WildbornPreserverCreateReflexiveTriggerEffect() {
         super(Outcome.Benefit);
+        staticText = "you may pay {X}. When you do, put X +1/+1 counters on {this}";
     }
 
     private WildbornPreserverCreateReflexiveTriggerEffect(final WildbornPreserverCreateReflexiveTriggerEffect effect) {
         super(effect);
-        staticText = "you may pay {X}. When you do, put X +1/+1 counters on {this}";
     }
 
     @Override
