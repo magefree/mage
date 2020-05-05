@@ -2,18 +2,19 @@ package mage.cards.b;
 
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
+import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.SendOptionUsedEventEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
@@ -48,6 +49,12 @@ public final class BackForMore extends CardImpl {
 
 class BackForMoreEffect extends OneShotEffect {
 
+    private static final FilterPermanent filter = new FilterCreaturePermanent("creature you don't control");
+
+    static {
+        filter.add(TargetController.NOT_YOU.getControllerPredicate());
+    }
+
     BackForMoreEffect() {
         super(Outcome.Benefit);
         staticText = "Return target creature card from your graveyard to the battlefield. " +
@@ -75,49 +82,13 @@ class BackForMoreEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        game.addDelayedTriggeredAbility(new BackForMoreReflexiveTriggeredAbility(
-                new MageObjectReference(permanent, game)
-        ), source);
-        return new SendOptionUsedEventEffect().apply(game, source);
-    }
-}
-
-class BackForMoreReflexiveTriggeredAbility extends DelayedTriggeredAbility {
-
-    private static final FilterPermanent filter = new FilterCreaturePermanent("creature you don't control");
-
-    static {
-        filter.add(TargetController.NOT_YOU.getControllerPredicate());
-    }
-
-    BackForMoreReflexiveTriggeredAbility(MageObjectReference mor) {
-        super(new BackForMoreDamageEffect(mor), Duration.OneUse, false);
-        this.addTarget(new TargetPermanent(0, 1, filter, false));
-    }
-
-    private BackForMoreReflexiveTriggeredAbility(final BackForMoreReflexiveTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public BackForMoreReflexiveTriggeredAbility copy() {
-        return new BackForMoreReflexiveTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.OPTION_USED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getPlayerId().equals(this.getControllerId())
-                && event.getSourceId().equals(this.getSourceId());
-    }
-
-    @Override
-    public String getRule() {
-        return "When you do, it fights up to one target creature you don't control.";
+        ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
+                new BackForMoreDamageEffect(new MageObjectReference(permanent, game)),
+                false, "it fights up to one target creature you don't control"
+        );
+        ability.addTarget(new TargetPermanent(0, 1, filter, false));
+        game.fireReflexiveTriggeredAbility(ability, source);
+        return true;
     }
 }
 

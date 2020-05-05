@@ -3,19 +3,20 @@ package mage.cards.c;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.BeginningOfPreCombatMainTriggeredAbility;
+import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ChooseACardNameEffect;
-import mage.abilities.effects.common.DoIfCostPaid;
-import mage.abilities.effects.common.SendOptionUsedEventEffect;
+import mage.abilities.effects.common.DoWhenCostPaid;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.*;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledPermanent;
@@ -39,16 +40,17 @@ public final class CabalTherapist extends CardImpl {
         this.addAbility(new MenaceAbility());
 
         // At the beginning of your precombat main phase, you may sacrifice a creature. When you do, choose a nonland card name, then target player reveals their hand and discards all cards with that name.
+        ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
+                new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.NON_LAND_NAME),
+                false, "choose a nonland card name, then target player " +
+                "reveals their hand and discards all cards with that name."
+        );
+        ability.addEffect(new CabalTherapistDiscardEffect());
+        ability.addTarget(new TargetPlayer());
         this.addAbility(new BeginningOfPreCombatMainTriggeredAbility(
-                new DoIfCostPaid(
-                        new CabalTherapistCreateReflexiveTriggerEffect(),
-                        new SacrificeTargetCost(new TargetControlledPermanent(
-                                StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT
-                        )), "Sacrifice a creature?"
-                ).setText("you may sacrifice a creature. When you do, " +
-                        "choose a nonland card name, then target player reveals their hand " +
-                        "and discards all cards with that name."),
-                TargetController.YOU, false
+                new DoWhenCostPaid(ability, new SacrificeTargetCost(
+                        new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)
+                ), "Sacrifice a creature?"), TargetController.YOU, false
         ));
     }
 
@@ -59,62 +61,6 @@ public final class CabalTherapist extends CardImpl {
     @Override
     public CabalTherapist copy() {
         return new CabalTherapist(this);
-    }
-}
-
-class CabalTherapistCreateReflexiveTriggerEffect extends OneShotEffect {
-
-    CabalTherapistCreateReflexiveTriggerEffect() {
-        super(Outcome.Benefit);
-    }
-
-    private CabalTherapistCreateReflexiveTriggerEffect(final CabalTherapistCreateReflexiveTriggerEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public CabalTherapistCreateReflexiveTriggerEffect copy() {
-        return new CabalTherapistCreateReflexiveTriggerEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        game.addDelayedTriggeredAbility(new CabalTherapistReflexiveTriggeredAbility(), source);
-        return new SendOptionUsedEventEffect().apply(game, source);
-    }
-}
-
-class CabalTherapistReflexiveTriggeredAbility extends DelayedTriggeredAbility {
-
-    CabalTherapistReflexiveTriggeredAbility() {
-        super(new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.NON_LAND_NAME), Duration.OneUse, true);
-        this.addEffect(new CabalTherapistDiscardEffect());
-        this.addTarget(new TargetPlayer());
-    }
-
-    private CabalTherapistReflexiveTriggeredAbility(final CabalTherapistReflexiveTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public CabalTherapistReflexiveTriggeredAbility copy() {
-        return new CabalTherapistReflexiveTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.OPTION_USED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getPlayerId().equals(this.getControllerId())
-                && event.getSourceId().equals(this.getSourceId());
-    }
-
-    @Override
-    public String getRule() {
-        return "Choose a nonland card name, then target player reveals their hand and discards all cards with that name.";
     }
 }
 
@@ -155,9 +101,8 @@ class CabalTherapistDiscardEffect extends OneShotEffect {
             if (CardUtil.haveSameNames(card.getName(), cardName)) {
                 return false;
             }
-            return true;
-        });
-        targetPlayer.discard(hand, source, game);
+        }
+        targetPlayer.revealCards(source, hand, game);
         return true;
     }
 

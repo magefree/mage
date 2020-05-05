@@ -2,8 +2,8 @@ package mage.cards.w;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -14,7 +14,6 @@ import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.counters.CounterType;
@@ -23,7 +22,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.players.Player;
 
 import java.util.UUID;
@@ -74,11 +72,11 @@ class WildbornPreserverCreateReflexiveTriggerEffect extends OneShotEffect {
 
     WildbornPreserverCreateReflexiveTriggerEffect() {
         super(Outcome.Benefit);
+        staticText = "you may pay {X}. When you do, put X +1/+1 counters on {this}";
     }
 
     private WildbornPreserverCreateReflexiveTriggerEffect(final WildbornPreserverCreateReflexiveTriggerEffect effect) {
         super(effect);
-        staticText = "you may pay {X}. When you do, put X +1/+1 counters on {this}";
     }
 
     @Override
@@ -101,40 +99,10 @@ class WildbornPreserverCreateReflexiveTriggerEffect extends OneShotEffect {
         if (!cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
             return false;
         }
-        game.addDelayedTriggeredAbility(new WildbornPreserverReflexiveTriggeredAbility(costX), source);
-        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.OPTION_USED, source.getOriginalId(), source.getSourceId(), source.getControllerId(), 0));
+        game.fireReflexiveTriggeredAbility(new ReflexiveTriggeredAbility(
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(costX)),
+                false, "put X +1/+1 counters on {this}"
+        ), source);
         return true;
-    }
-}
-
-class WildbornPreserverReflexiveTriggeredAbility extends DelayedTriggeredAbility {
-
-    WildbornPreserverReflexiveTriggeredAbility(int counters) {
-        super(new AddCountersSourceEffect(CounterType.P1P1.createInstance(counters)), Duration.OneUse, true);
-    }
-
-    private WildbornPreserverReflexiveTriggeredAbility(final WildbornPreserverReflexiveTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public WildbornPreserverReflexiveTriggeredAbility copy() {
-        return new WildbornPreserverReflexiveTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.OPTION_USED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getPlayerId().equals(this.getControllerId())
-                && event.getSourceId().equals(this.getSourceId());
-    }
-
-    @Override
-    public String getRule() {
-        return "When you do, put X +1/+1 counters on {this}.";
     }
 }

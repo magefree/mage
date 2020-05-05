@@ -3,25 +3,26 @@ package mage.cards.n;
 import mage.ConditionalMana;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
+import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
-import mage.abilities.effects.common.SendOptionUsedEventEffect;
 import mage.abilities.mana.conditional.ManaCondition;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.command.emblems.NarsetOfTheAncientWayEmblem;
-import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlaneswalker;
 
@@ -141,41 +142,12 @@ class NarsetOfTheAncientWayDrawEffect extends OneShotEffect {
         if (card == null || card.isLand()) {
             return false;
         }
-        game.addDelayedTriggeredAbility(new NarsetOfTheAncientWayReflexiveTriggeredAbility(card.getConvertedManaCost()), source);
-        return new SendOptionUsedEventEffect().apply(game, source);
-    }
-}
-
-class NarsetOfTheAncientWayReflexiveTriggeredAbility extends DelayedTriggeredAbility {
-
-    NarsetOfTheAncientWayReflexiveTriggeredAbility(int cmc) {
-        super(new DamageTargetEffect(cmc), Duration.OneUse, true);
-        this.addTarget(new TargetCreatureOrPlaneswalker());
-    }
-
-    private NarsetOfTheAncientWayReflexiveTriggeredAbility(final NarsetOfTheAncientWayReflexiveTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public NarsetOfTheAncientWayReflexiveTriggeredAbility copy() {
-        return new NarsetOfTheAncientWayReflexiveTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.OPTION_USED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getPlayerId().equals(this.getControllerId())
-                && event.getSourceId().equals(this.getSourceId());
-    }
-
-    @Override
-    public String getRule() {
-        return "{this} deals damage to target creature or planeswalker " +
-                "equal to the discarded card's converted mana cost";
+        ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
+                new DamageTargetEffect(card.getConvertedManaCost()), false, "{this} deals damage " +
+                "to target creature or planeswalker equal to the discarded card's converted mana cost"
+        );
+        ability.addTarget(new TargetCreatureOrPlaneswalker());
+        game.fireReflexiveTriggeredAbility(ability, source);
+        return true;
     }
 }
