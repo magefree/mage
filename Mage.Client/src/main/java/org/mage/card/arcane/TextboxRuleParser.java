@@ -23,6 +23,7 @@ public final class TextboxRuleParser {
     private static final Pattern LevelAbilityPattern = Pattern.compile("Level (\\d+)-?(\\d*)(\\+?)");
     private static final Pattern LoyaltyAbilityPattern = Pattern.compile("^(\\+|\\-)(\\d+|X): ");
     private static final Pattern SimpleKeywordPattern = Pattern.compile("^(\\w+( \\w+)?)\\s*(\\([^\\)]*\\))?\\s*$");
+    private static final Pattern FontColorValuePattern = Pattern.compile("color\\s*=\\s*[\"'](\\w+)[\"']");
 
     // Parse a given rule (given as a string) into a TextboxRule, replacing
     // symbol annotations, italics, etc, parsing out information such as
@@ -199,6 +200,11 @@ public final class TextboxRuleParser {
                                             LOGGER.error("Bad leveler levels in rule `" + rule + "`.");
                                         }
                                     }
+                                    break;
+                                case "/font":
+                                    // Font it is an additional info of a card
+                                    // lets make it blue like it is in tooltip
+                                    regions.add(new TextboxRule.ColorRegion(openingIndex, outputIndex, Color.BLUE));
                                     break;
                                 default:
                                     // Unknown

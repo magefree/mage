@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
@@ -17,26 +15,20 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.TurnPhase;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class SpinalEmbrace extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you don't control");
-
-    static {
-        filter.add(TargetController.NOT_YOU.getControllerPredicate());
-    }
 
     public SpinalEmbrace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{U}{U}{B}");
@@ -45,7 +37,7 @@ public final class SpinalEmbrace extends CardImpl {
         this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(TurnPhase.COMBAT));
 
         // Untap target creature you don't control and gain control of it. It gains haste until end of turn. At the beginning of the next end step, sacrifice it. If you do, you gain life equal to its toughness.
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
         this.getSpellAbility().addEffect(new UntapTargetEffect());
         Effect effect = new GainControlTargetEffect(Duration.EndOfTurn);
         effect.setText("and gain control of it");
@@ -54,7 +46,7 @@ public final class SpinalEmbrace extends CardImpl {
         this.getSpellAbility().addEffect(new SpinalEmbraceAddDelayedEffect());
     }
 
-    public SpinalEmbrace(final SpinalEmbrace card) {
+    private SpinalEmbrace(final SpinalEmbrace card) {
         super(card);
     }
 
@@ -66,12 +58,12 @@ public final class SpinalEmbrace extends CardImpl {
 
 class SpinalEmbraceAddDelayedEffect extends OneShotEffect {
 
-    public SpinalEmbraceAddDelayedEffect() {
+    SpinalEmbraceAddDelayedEffect() {
         super(Outcome.Sacrifice);
         staticText = "At the beginning of the next end step, sacrifice it. If you do, you gain life equal to its toughness";
     }
 
-    public SpinalEmbraceAddDelayedEffect(final SpinalEmbraceAddDelayedEffect effect) {
+    private SpinalEmbraceAddDelayedEffect(final SpinalEmbraceAddDelayedEffect effect) {
         super(effect);
     }
 
@@ -92,12 +84,12 @@ class SpinalEmbraceAddDelayedEffect extends OneShotEffect {
 
 class SpinalEmbraceSacrificeEffect extends OneShotEffect {
 
-    public SpinalEmbraceSacrificeEffect() {
+    SpinalEmbraceSacrificeEffect() {
         super(Outcome.Benefit);
         this.staticText = "sacrifice it. If you do, you gain life equal to its toughness";
     }
 
-    public SpinalEmbraceSacrificeEffect(final SpinalEmbraceSacrificeEffect effect) {
+    private SpinalEmbraceSacrificeEffect(final SpinalEmbraceSacrificeEffect effect) {
         super(effect);
     }
 

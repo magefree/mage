@@ -6,7 +6,9 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.IfAbilityHasResolvedXTimesEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.hint.common.AbilityResolutionCountHint;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -37,8 +39,9 @@ public final class SoulbrightFlamekin extends CardImpl {
         Ability ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(
                 TrampleAbility.getInstance(), Duration.EndOfTurn
         ), new ManaCostsImpl("{2}"));
-        ability.addEffect(new SoulbrightFlamekinEffect());
+        ability.addEffect(new IfAbilityHasResolvedXTimesEffect(Outcome.PutManaInPool, 3, new SoulbrightFlamekinEffect()));
         ability.addTarget(new TargetCreaturePermanent());
+        ability.addHint(AbilityResolutionCountHint.instance);
         this.addAbility(ability, new AbilityResolvedWatcher());
     }
 
@@ -56,8 +59,7 @@ class SoulbrightFlamekinEffect extends OneShotEffect {
 
     SoulbrightFlamekinEffect() {
         super(Outcome.Damage);
-        this.staticText = "If this is the third time this ability has resolved this turn, " +
-                "you may add {R}{R}{R}{R}{R}{R}{R}{R}";
+        this.staticText = "you may add {R}{R}{R}{R}{R}{R}{R}{R}";
     }
 
     private SoulbrightFlamekinEffect(final SoulbrightFlamekinEffect effect) {
@@ -72,14 +74,10 @@ class SoulbrightFlamekinEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        AbilityResolvedWatcher watcher = game.getState().getWatcher(AbilityResolvedWatcher.class);
-        if (controller == null
-                || watcher == null
-                || !watcher.checkActivations(source, game)
-                || !controller.chooseUse(Outcome.PutManaInPool, "Add {R}{R}{R}{R}{R}{R}{R}{R}}?", source, game)) {
-            return false;
+        if (controller != null && controller.chooseUse(Outcome.PutManaInPool, "Add {R}{R}{R}{R}{R}{R}{R}{R}?", source, game)) {
+            controller.getManaPool().addMana(Mana.RedMana(8), game, source);
+            return true;
         }
-        controller.getManaPool().addMana(Mana.RedMana(8), game, source);
-        return true;
+        return false;
     }
 }

@@ -10,9 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -21,12 +19,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class ApexAltisaur extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterCreaturePermanent("creature you don't control");
-
-    static {
-        filter.add(TargetController.NOT_YOU.getControllerPredicate());
-    }
 
     public ApexAltisaur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{7}{G}{G}");
@@ -40,12 +32,12 @@ public final class ApexAltisaur extends CardImpl {
 
         // When Apex Altisaur enters the battlefield, it fights up to one target creature you don't control.
         Ability ability = new EntersBattlefieldTriggeredAbility(effect);
-        ability.addTarget(new TargetPermanent(0, 1, filter, false));
+        ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL, false));
         this.addAbility(ability);
 
         // Enrage — Whenever Apex Altisaur is dealt damage, it fights up to one target creature you don't control.
         ability = new DealtDamageToSourceTriggeredAbility(effect, false, true);
-        ability.addTarget(new TargetPermanent(0, 1, filter, false));
+        ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL, false));
         this.addAbility(ability);
     }
 

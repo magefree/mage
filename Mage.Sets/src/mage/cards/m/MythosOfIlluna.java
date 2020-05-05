@@ -14,8 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -53,12 +52,6 @@ class MythosOfIllunaEffect extends OneShotEffect {
             new ManaWasSpentCondition(ColoredManaSymbol.R),
             new ManaWasSpentCondition(ColoredManaSymbol.G)
     );
-    private static final FilterCreaturePermanent filter
-            = new FilterCreaturePermanent("creature you don't control");
-
-    static {
-        filter.add(TargetController.NOT_YOU.getControllerPredicate());
-    }
 
     MythosOfIllunaEffect() {
         super(Outcome.Benefit);
@@ -90,7 +83,7 @@ class MythosOfIllunaEffect extends OneShotEffect {
                     MythosOfIllunaCondition.instance, "When this permanent enters the battlefield, " +
                     "if it's a creature, it fights up to one target creature you don't control."
             );
-            ability.addTarget(new TargetPermanent(0, 1, filter, false));
+            ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL, false));
             effect.addAdditionalAbilities(ability);
         }
         return effect.apply(game, source);

@@ -8,12 +8,11 @@ import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.CounterPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -25,17 +24,14 @@ import java.util.UUID;
  */
 public final class TitanicBrawl extends CardImpl {
 
-    private static final FilterCreaturePermanent filter
-            = new FilterCreaturePermanent("creature you don't control");
-    private static final FilterPermanent filter2
+    private static final FilterPermanent filter
             = new FilterControlledCreaturePermanent("a creature you control with a +1/+1 counter on it");
 
     static {
-        filter.add(TargetController.NOT_YOU.getControllerPredicate());
-        filter2.add(new CounterPredicate(CounterType.P1P1));
+        filter.add(new CounterPredicate(CounterType.P1P1));
     }
 
-    private static final Condition condition = new SourceTargetsPermanentCondition(filter2);
+    private static final Condition condition = new SourceTargetsPermanentCondition(filter);
 
     public TitanicBrawl(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");
@@ -48,7 +44,7 @@ public final class TitanicBrawl extends CardImpl {
         // Target creature you control fights target creature you don't control.
         this.getSpellAbility().addEffect(new FightTargetsEffect());
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
     }
 
     private TitanicBrawl(final TitanicBrawl card) {

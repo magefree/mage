@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.TriggeredAbilityImpl;
@@ -14,7 +12,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -26,24 +24,19 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class CapturedByTheConsulate extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-
-    static {
-        filter.add(TargetController.NOT_YOU.getControllerPredicate());
-    }
-
     public CapturedByTheConsulate(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
         this.subtype.add(SubType.AURA);
 
         // Enchant creature you don't control
-        TargetPermanent auraTarget = new TargetCreaturePermanent(filter);
+        TargetPermanent auraTarget = new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.UnboostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
@@ -54,10 +47,9 @@ public final class CapturedByTheConsulate extends CardImpl {
 
         // Whenever an opponent casts a spell, if it has a single target, change the target to enchanted creature if able.
         this.addAbility(new CapturedByTheConsulateTriggeredAbility(Zone.BATTLEFIELD, new CapturedByTheConsulateEffect()));
-
     }
 
-    public CapturedByTheConsulate(final CapturedByTheConsulate card) {
+    private CapturedByTheConsulate(final CapturedByTheConsulate card) {
         super(card);
     }
 
@@ -70,15 +62,14 @@ public final class CapturedByTheConsulate extends CardImpl {
 class CapturedByTheConsulateTriggeredAbility extends TriggeredAbilityImpl {
 
     /**
-     *
      * @param zone
      * @param effect
      */
-    public CapturedByTheConsulateTriggeredAbility(Zone zone, Effect effect) {
+    CapturedByTheConsulateTriggeredAbility(Zone zone, Effect effect) {
         super(zone, effect, false);
     }
 
-    public CapturedByTheConsulateTriggeredAbility(final CapturedByTheConsulateTriggeredAbility ability) {
+    private CapturedByTheConsulateTriggeredAbility(final CapturedByTheConsulateTriggeredAbility ability) {
         super(ability);
     }
 
@@ -133,12 +124,12 @@ class CapturedByTheConsulateTriggeredAbility extends TriggeredAbilityImpl {
 
 class CapturedByTheConsulateEffect extends OneShotEffect {
 
-    public CapturedByTheConsulateEffect() {
+    CapturedByTheConsulateEffect() {
         super(Outcome.Benefit);
         this.staticText = "change the target to enchanted creature if able";
     }
 
-    public CapturedByTheConsulateEffect(final CapturedByTheConsulateEffect effect) {
+    private CapturedByTheConsulateEffect(final CapturedByTheConsulateEffect effect) {
         super(effect);
     }
 

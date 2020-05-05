@@ -19,6 +19,7 @@ import mage.players.ManaPoolItem;
 import mage.util.CardUtil;
 
 import java.util.Collection;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -60,7 +61,8 @@ class ManascapeRefractorGainAbilitiesEffect extends ContinuousEffectImpl {
 
     ManascapeRefractorGainAbilitiesEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-        staticText = "{this} all activated abilities of all lands on the battlefield.";
+        staticText = "{this} has all activated abilities of all lands on the battlefield.";
+        this.addDependencyType(DependencyType.AddingAbility);
     }
 
     private ManascapeRefractorGainAbilitiesEffect(final ManascapeRefractorGainAbilitiesEffect effect) {
@@ -79,6 +81,9 @@ class ManascapeRefractorGainAbilitiesEffect extends ContinuousEffectImpl {
                 .stream()
                 .map(permanent -> permanent.getAbilities(game))
                 .flatMap(Collection::stream)
+                .filter(Objects::nonNull)
+                .filter(ability -> ability.getAbilityType() == AbilityType.ACTIVATED
+                        || ability.getAbilityType() == AbilityType.MANA)
                 .collect(Collectors.toList())) {
             if (!(ability instanceof BasicManaAbility)
                     || perm.getAbilities(game)

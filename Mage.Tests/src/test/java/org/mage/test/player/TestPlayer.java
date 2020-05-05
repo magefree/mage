@@ -2551,6 +2551,11 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public Cards discard(Cards cards, Ability source, Game game) {
+        return computerPlayer.discard(cards, source, game);
+    }
+
+    @Override
     public boolean discard(Card card, Ability source, Game game) {
         return computerPlayer.discard(card, source, game);
     }

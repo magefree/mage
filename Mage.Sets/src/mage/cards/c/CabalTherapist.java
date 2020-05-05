@@ -83,19 +83,23 @@ class CabalTherapistDiscardEffect extends OneShotEffect {
             return false;
         }
         String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
-        Cards hand = targetPlayer.getHand();
-
-        for (Card card : hand.getCards(game)) {
+        Cards hand = targetPlayer.getHand().copy();
+        targetPlayer.revealCards(source, hand, game);
+        hand.removeIf(uuid -> {
+            Card card = hand.get(uuid, game);
+            if (card == null) {
+                return true;
+            }
             if (card.isSplitCard()) {
                 SplitCard splitCard = (SplitCard) card;
                 if (CardUtil.haveSameNames(splitCard.getLeftHalfCard().getName(), cardName)) {
-                    targetPlayer.discard(card, source, game);
+                    return false;
                 } else if (CardUtil.haveSameNames(splitCard.getRightHalfCard().getName(), cardName)) {
-                    targetPlayer.discard(card, source, game);
+                    return false;
                 }
             }
             if (CardUtil.haveSameNames(card.getName(), cardName)) {
-                targetPlayer.discard(card, source, game);
+                return false;
             }
         }
         targetPlayer.revealCards(source, hand, game);

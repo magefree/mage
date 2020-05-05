@@ -52,32 +52,27 @@ class NightsnareDiscardEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
-        if (player != null && controller != null) {
-            if (!player.getHand().isEmpty()) {
-                Cards revealedCards = new CardsImpl();
-                revealedCards.addAll(player.getHand());
-                Card sourceCard = game.getCard(source.getSourceId());
-                player.revealCards(sourceCard != null ? sourceCard.getIdName() : "Discard", revealedCards, game);
-                // You may choose a nonland card from it.
-                if (controller.chooseUse(outcome, "Choose a a card to discard? (Otherwise " + player.getLogName() + " has to discard 2 cards).", source, game)) {
-                    TargetCard target = new TargetCard(1, Zone.HAND, new FilterNonlandCard());
-                    if (controller.choose(Outcome.Benefit, revealedCards, target, game)) {
-                        for (UUID targetId : target.getTargets()) {
-                            Card card = revealedCards.get(targetId, game);
-                            player.discard(card, source, game);
-
-                        }
-                    }
-
-                } else {
-                    player.discard(2, false, source, game);
-                }
-            }
-            return true;
-
+        if (player == null || controller == null) {
+            return false;
         }
-        return false;
-
+        if (player.getHand().isEmpty()) {
+            return true;
+        }
+        Cards revealedCards = new CardsImpl();
+        revealedCards.addAll(player.getHand());
+        Card sourceCard = game.getCard(source.getSourceId());
+        player.revealCards(sourceCard != null ? sourceCard.getIdName() : "Discard", revealedCards, game);
+        // You may choose a nonland card from it.
+        if (!controller.chooseUse(outcome, "Choose a card to discard? (Otherwise " + player.getLogName() + " has to discard 2 cards).", source, game)) {
+            player.discard(2, false, source, game);
+            return true;
+        }
+        TargetCard target = new TargetCard(1, Zone.HAND, new FilterNonlandCard());
+        if (controller.choose(Outcome.Benefit, revealedCards, target, game)) {
+            Card card = revealedCards.get(target.getFirstTarget(), game);
+            player.discard(card, source, game);
+        }
+        return true;
     }
 
     @Override

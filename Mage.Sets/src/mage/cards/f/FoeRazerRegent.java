@@ -1,7 +1,5 @@
-
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -16,10 +14,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -27,17 +24,12 @@ import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class FoeRazerRegent extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you don't control");
-
-    static {
-        filter.add(TargetController.NOT_YOU.getControllerPredicate());
-    }
 
     public FoeRazerRegent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
@@ -50,14 +42,14 @@ public final class FoeRazerRegent extends CardImpl {
 
         // When Foe-Razer Regent enters the battlefield, you may have it fight target creature you don't control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new FightTargetSourceEffect(), true);
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
         this.addAbility(ability);
 
         // Whenever a creature you control fights, put two +1/+1 counters on it at the beginning of the next end step.
         this.addAbility(new FoeRazerRegentTriggeredAbility());
     }
 
-    public FoeRazerRegent(final FoeRazerRegent card) {
+    private FoeRazerRegent(final FoeRazerRegent card) {
         super(card);
     }
 
@@ -69,11 +61,11 @@ public final class FoeRazerRegent extends CardImpl {
 
 class FoeRazerRegentTriggeredAbility extends TriggeredAbilityImpl {
 
-    public FoeRazerRegentTriggeredAbility() {
+    FoeRazerRegentTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateDelayedTriggeredAbilityEffect(new FoeRazerRegentDelayedTriggeredAbility(), true), false);
     }
 
-    public FoeRazerRegentTriggeredAbility(final FoeRazerRegentTriggeredAbility ability) {
+    private FoeRazerRegentTriggeredAbility(final FoeRazerRegentTriggeredAbility ability) {
         super(ability);
     }
 
@@ -107,11 +99,11 @@ class FoeRazerRegentTriggeredAbility extends TriggeredAbilityImpl {
 
 class FoeRazerRegentDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
-    public FoeRazerRegentDelayedTriggeredAbility() {
+    FoeRazerRegentDelayedTriggeredAbility() {
         super(new AddCountersTargetEffect(CounterType.P1P1.createInstance(2)));
     }
 
-    public FoeRazerRegentDelayedTriggeredAbility(final FoeRazerRegentDelayedTriggeredAbility ability) {
+    private FoeRazerRegentDelayedTriggeredAbility(final FoeRazerRegentDelayedTriggeredAbility ability) {
         super(ability);
     }
 
