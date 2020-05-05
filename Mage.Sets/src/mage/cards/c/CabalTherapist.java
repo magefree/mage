@@ -101,8 +101,9 @@ class CabalTherapistDiscardEffect extends OneShotEffect {
             if (CardUtil.haveSameNames(card.getName(), cardName)) {
                 return false;
             }
-        }
-        targetPlayer.revealCards(source, hand, game);
+            return true;
+        });
+        targetPlayer.discard(hand, source, game);
         return true;
     }
 
