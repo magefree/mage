@@ -2,7 +2,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -20,6 +19,8 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.RatToken;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -51,7 +52,8 @@ public final class MarrowGnawer extends CardImpl {
 
         // {T}, Sacrifice a Rat: create X 1/1 black Rat creature tokens, where X is the number of Rats you control.
         Ability ability;
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new RatToken(),new PermanentsOnBattlefieldCount(filter3)), new SacrificeTargetCost(new TargetControlledPermanent(filterSacrifice)));
+        String abilityText = "create X 1/1 black Rat creature tokens, where X is the number of Rats you control.";
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new RatToken(),new PermanentsOnBattlefieldCount(filter3)).setText(abilityText), new SacrificeTargetCost(new TargetControlledPermanent(filterSacrifice)));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
