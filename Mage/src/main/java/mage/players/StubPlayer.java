@@ -13,6 +13,7 @@ import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.constants.Outcome;
 import mage.constants.RangeOfInfluence;
+import mage.filter.FilterMana;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.draft.Draft;
@@ -25,13 +26,12 @@ import mage.target.TargetCard;
 import mage.target.TargetPlayer;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 import static com.google.common.collect.Iterables.getOnlyElement;
-import static java.util.stream.Collectors.toList;
-import mage.filter.FilterMana;
 
 public class StubPlayer extends PlayerImpl implements Player {
 
@@ -54,15 +54,10 @@ public class StubPlayer extends PlayerImpl implements Player {
 
     @Override
     public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
-        if (target.getFilter().getMessage() != null && target.getFilter().getMessage().endsWith("(Discard for Mulligan)")) {
-            chooseDiscardBottom(game, target.getMinNumberOfTargets(), cards.getCards(game)
-                    .stream().map(MageItem::getId).collect(toList())).forEach(cardId -> target.add(cardId, game));
-        } else {
-            UUID cardId = getOnlyElement(cards.getCards(game)).getId();
-            if (chooseScry(game, cardId)) {
-                target.add(cardId, game);
-                return true;
-            }
+        UUID cardId = getOnlyElement(cards.getCards(game)).getId();
+        if (chooseScry(game, cardId)) {
+            target.add(cardId, game);
+            return true;
         }
         return false;
     }
@@ -111,6 +106,10 @@ public class StubPlayer extends PlayerImpl implements Player {
 
     @Override
     public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
+        if (target.getFilter().getMessage() != null && target.getFilter().getMessage().endsWith(" more) to put on the bottom of your library")) {
+            chooseDiscardBottom(game, target.getMinNumberOfTargets(), new ArrayList<>(target.possibleTargets(null, null, game)))
+                    .forEach(cardId -> target.add(cardId, game));
+        }
         return false;
     }
 
