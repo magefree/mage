@@ -680,9 +680,8 @@ public class VerifyCardDataTest {
         for (Class<? extends TokenImpl> tokenClass : publicTokens) {
             String className = extractShortClass(tokenClass);
             Token token = (Token) createNewObject(tokenClass);
-            //Assert.assertNotNull("Can't create token by default constructor", token);
             if (token == null) {
-                Assert.fail("Can't create token by default constructor: " + className);
+                errorsList.add("error, token must have default constructor with zero params: " + tokenClass.getName());
             } else if (tokDataNamesIndex.getOrDefault(token.getName(), "").isEmpty()) {
                 errorsList.add("error, can't find data in card-pictures-tok.txt for token: " + tokenClass.getName() + " -> " + token.getName());
             }
@@ -963,7 +962,6 @@ public class VerifyCardDataTest {
     }
 
     @Test
-    @Ignore
     public void showCardInfo() throws Exception {
         // debug only: show direct card info (takes it from class file, not from db repository)
         String cardName = "Essence Capture";
