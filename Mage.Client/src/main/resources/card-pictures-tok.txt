@@ -1269,6 +1269,7 @@
 |Generate|TOK:GRN|Soldier|||SoldierLifelinkToken|
 |Generate|TOK:WAR|Angel|||AngelVigilanceToken|
 |Generate|TOK:WAR|Assassin|||AssassinToken2|
+|Generate|TOK:WAR|Citizen|||PlanewideCelebrationToken|
 |Generate|TOK:WAR|Devil|||DevilToken|
 |Generate|TOK:WAR|Dragon|||DragonToken|
 |Generate|TOK:WAR|Goblin|||GoblinToken|
@@ -1357,8 +1358,8 @@
 |Generate|TOK:THB|Spider|||SpiderToken|
 |Generate|TOK:THB|Wolf|||WolfToken|
 |Generate|TOK:THB|Nightmare|||AshiokNightmareMuseToken|
-|Generate|TOK:THB|GoldToken|||Gold|
-|Generate|TOK:THB|ArtifactWallToken|||Wall|
+|Generate|TOK:THB|Gold|||GoldToken|
+|Generate|TOK:THB|Wall|||ArtifactWallToken|
 |Generate|TOK:IKO|Beast|||BeastToken|
 |Generate|TOK:IKO|Cat Bird|||CatBirdToken|
 |Generate|TOK:IKO|Cat|||CatToken|
