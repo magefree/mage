@@ -2106,7 +2106,10 @@ public class HumanPlayer extends PlayerImpl {
                 if (canEndChoice) {
                     modeMap.put(Modes.CHOOSE_OPTION_DONE_ID, "Done");
                 }
-                modeMap.put(Modes.CHOOSE_OPTION_CANCEL_ID, "Cancel");
+                // Cannot cancel a mode selection on a triggered ability
+                if (!(source instanceof TriggeredAbility)) {
+                    modeMap.put(Modes.CHOOSE_OPTION_CANCEL_ID, "Cancel");
+                }
 
                 boolean done = false;
                 while (!done && canRespond()) {

@@ -94,16 +94,9 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
         this.selected = true; // to stop previous modal
         setMessageAndPrepare(choices.getMessage());
 
-        // if not cancel from server then add own
-        boolean wasCancelButton = false;
         for (Map.Entry<UUID, String> choice : choices.getChoices().entrySet()) {
-            wasCancelButton = wasCancelButton || choice.getKey().equals(Modes.CHOOSE_OPTION_CANCEL_ID);
             this.choices.add(new AbilityPickerAction(choice.getKey(), choice.getValue()));
         }
-        if (!wasCancelButton) {
-            this.choices.add(new AbilityPickerAction(null, "Cancel"));
-        }
-
         show(this.choices);
     }
 

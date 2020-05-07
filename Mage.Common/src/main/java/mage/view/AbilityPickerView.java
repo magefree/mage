@@ -1,6 +1,7 @@
 package mage.view;
 
 import mage.abilities.Ability;
+import mage.abilities.Modes;
 
 import java.io.Serializable;
 import java.util.LinkedHashMap;
@@ -35,6 +36,8 @@ public class AbilityPickerView implements Serializable {
             }
             choices.put(ability.getId(), num + ". " + rule);
         }
+        // Add the cancel option.
+        choices.put(Modes.CHOOSE_OPTION_CANCEL_ID, "cancel");
     }
 
     public AbilityPickerView(Map<UUID, String> modes, String message) {
