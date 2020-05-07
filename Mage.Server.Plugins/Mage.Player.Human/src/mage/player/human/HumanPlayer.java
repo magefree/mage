@@ -2141,13 +2141,14 @@ public class HumanPlayer extends PlayerImpl {
                         // cancel choice (remove all selections)
                         if (Modes.CHOOSE_OPTION_CANCEL_ID.equals(response.getUUID())) {
                             modes.getSelectedModes().clear();
-                            return null;
                         }
                     } else if (canEndChoice) {
                         // end choice by done button in feedback panel
                         // disable after done option implemented
                         // done = true;
                     }
+
+                    // triggered abilities can't be skipped by cancel or wrong answer
                     if (source.getAbilityType() != AbilityType.TRIGGERED) {
                         done = true;
                     }
