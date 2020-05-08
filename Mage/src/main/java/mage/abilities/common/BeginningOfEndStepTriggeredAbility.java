@@ -103,6 +103,9 @@ public class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         StringBuilder sb = new StringBuilder(getEffects().getText(modes.getMode()));
+
+        System.out.printf("Beg.OfEndStep getRule called:: ", sb);
+
         if (this.optional) {
             if (sb.substring(0, 6).toLowerCase(Locale.ENGLISH).equals("target")) {
                 sb.insert(0, "you may have ");
@@ -114,6 +117,10 @@ public class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl {
         if (abilityWord != null) {
             abilityWordRule = "<i>" + abilityWord.toString() + "</i> &mdash ";
         }
+
+        System.out.printf("Beg.OfEndStep getRule called:: ", sb);
+
+
         switch (targetController) {
             case YOU:
                 return sb.insert(0, generateConditionString()).insert(0, abilityWordRule + "At the beginning of your end step, ").toString();
@@ -122,6 +129,8 @@ public class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl {
             case OPPONENT:
                 return sb.insert(0, generateConditionString()).insert(0, abilityWordRule + "At the beginning of each opponent's end step, ").toString();
             case ANY:
+                //System.out.print("Beg.EndStep - Final Out::");
+                //m.System.out.println(sb.insert(0, generateConditionString()).insert(0, abilityWordRule + "At the beginning of each end step, ").toString());
                 return sb.insert(0, generateConditionString()).insert(0, abilityWordRule + "At the beginning of each end step, ").toString();
             case EACH_PLAYER:
                 return sb.insert(0, generateConditionString()).insert(0, abilityWordRule + "At the beginning of each player's end step, ").toString();
@@ -132,10 +141,19 @@ public class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     private String generateConditionString() {
+        System.out.println("GenCondString called");
         if (interveningIfClauseCondition != null) {
             if (interveningIfClauseCondition.toString().startsWith("if")) {
+                //System.out.println("GenCondString called 2");
+                //System.out.println(interveningIfClauseCondition.toString());
+
+                if (interveningIfClauseCondition.toString().endsWith(".")){
+                    return interveningIfClauseCondition.toString() + " ";
+                }
+
                 return interveningIfClauseCondition.toString() + ", ";
             } else {
+                //System.out.println("GenCondString called 3");
                 return "if {this} is " + interveningIfClauseCondition.toString() + ", ";
             }
         }

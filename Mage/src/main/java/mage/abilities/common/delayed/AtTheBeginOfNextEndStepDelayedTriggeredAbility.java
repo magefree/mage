@@ -90,16 +90,16 @@ public class AtTheBeginOfNextEndStepDelayedTriggeredAbility extends DelayedTrigg
         StringBuilder sb = new StringBuilder();
         switch (targetController) {
             case YOU:
-                sb.append("At the beginning of your next end step, ");
+                sb.append("at the beginning of your next end step, "); //remove capitalization
                 break;
             case OPPONENT:
-                sb.append("At the beginning of an opponent's next end step, ");
+                sb.append("at the beginning of an opponent's next end step, "); //remove capitalization
                 break;
             case ANY:
-                sb.append("At the beginning of the next end step, ");
+                sb.append("at the beginning of the next end step, "); //remove capitalization
                 break;
             case CONTROLLER_ATTACHED_TO:
-                sb.append("At the beginning of the next end step of enchanted creature's controller, ");
+                sb.append("at the beginning of the next end step of enchanted creature's controller, "); //remove capitalization
                 break;
         }
         sb.append(getEffects().getText(modes.getMode()));
