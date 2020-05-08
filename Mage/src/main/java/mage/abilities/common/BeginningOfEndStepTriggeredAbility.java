@@ -136,7 +136,6 @@ public class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     private String generateConditionString() {
-        System.out.println("GenCondString called");
         if (interveningIfClauseCondition != null) {
             if (interveningIfClauseCondition.toString().startsWith("if")) {
 
