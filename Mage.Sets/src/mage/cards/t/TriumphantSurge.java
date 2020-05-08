@@ -19,7 +19,7 @@ import java.util.UUID;
 public final class TriumphantSurge extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterCreaturePermanent("creature with power 4 or greater.");
+            = new FilterCreaturePermanent("creature with power 4 or greater"); //removed final period
 
     static {
         filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 3));

@@ -54,7 +54,7 @@ class MandateOfPeaceOpponentsCantCastSpellsEffect extends ContinuousRuleModifyin
 
     public MandateOfPeaceOpponentsCantCastSpellsEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "Your opponents can't cast spells this turn.";
+        staticText = "Your opponents can't cast spells this turn"; //removed punctuation
     }
 
     public MandateOfPeaceOpponentsCantCastSpellsEffect(final MandateOfPeaceOpponentsCantCastSpellsEffect effect) {

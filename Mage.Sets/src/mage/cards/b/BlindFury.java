@@ -30,7 +30,7 @@ public final class BlindFury extends CardImpl {
         this.getSpellAbility().addEffect(new LoseAbilityAllEffect(
                 TrampleAbility.getInstance(), Duration.EndOfTurn,
                 StaticFilters.FILTER_PERMANENT_CREATURES
-        ).setText("All creatures lose trample until end of turn."));
+        ).setText("All creatures lose trample until end of turn")); //removed punctuation
         this.getSpellAbility().addEffect(new FurnaceOfRathEffect());
     }
 
