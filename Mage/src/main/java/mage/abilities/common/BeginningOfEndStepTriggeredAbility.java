@@ -104,8 +104,6 @@ public class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl {
     public String getRule() {
         StringBuilder sb = new StringBuilder(getEffects().getText(modes.getMode()));
 
-        System.out.printf("Beg.OfEndStep getRule called:: ", sb);
-
         if (this.optional) {
             if (sb.substring(0, 6).toLowerCase(Locale.ENGLISH).equals("target")) {
                 sb.insert(0, "you may have ");
@@ -117,9 +115,6 @@ public class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl {
         if (abilityWord != null) {
             abilityWordRule = "<i>" + abilityWord.toString() + "</i> &mdash ";
         }
-
-        System.out.printf("Beg.OfEndStep getRule called:: ", sb);
-
 
         switch (targetController) {
             case YOU:
@@ -144,16 +139,15 @@ public class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl {
         System.out.println("GenCondString called");
         if (interveningIfClauseCondition != null) {
             if (interveningIfClauseCondition.toString().startsWith("if")) {
-                //System.out.println("GenCondString called 2");
-                //System.out.println(interveningIfClauseCondition.toString());
 
+                //Fixes punctuation on multiple sentence if, then construction
+                // see -- Colfenor's Urn
                 if (interveningIfClauseCondition.toString().endsWith(".")){
                     return interveningIfClauseCondition.toString() + " ";
                 }
 
                 return interveningIfClauseCondition.toString() + ", ";
             } else {
-                //System.out.println("GenCondString called 3");
                 return "if {this} is " + interveningIfClauseCondition.toString() + ", ";
             }
         }

@@ -76,12 +76,10 @@ public class DistributeCountersEffect extends OneShotEffect {
         }
 
         String name = counterType.getName();
-        //String text = "distribute " + CardUtil.numberToText(amount) + ' ' + name + " counters among " + targetDescription + '.';
-        //removed punctuation
-        String text = "distribute " + CardUtil.numberToText(amount) + ' ' + name + " counters among " + targetDescription;
+        String text = "distribute " + CardUtil.numberToText(amount) + ' ' + name + " counters among " + targetDescription; //removed punctuation
         if (removeAtEndOfTurn) {
             text += " For each " + name + " counter you put on a creature this way, remove a "
-                    + name + " counter from that creature at the beginning of the next cleanup step."; //should this period be removed?
+                    + name + " counter from that creature at the beginning of the next cleanup step.";
         }
         return text;
     }
@@ -96,7 +94,7 @@ class RemoveCountersAtEndOfTurn extends OneShotEffect {
         this.counterType = counterType;
         String name = counterType.getName();
         staticText = "For each " + name + " counter you put on a creature this way, remove a "
-                + name + " counter from that creature at the beginning of the next cleanup step."; //should this period be removed?
+                + name + " counter from that creature at the beginning of the next cleanup step.";
     }
 
     public RemoveCountersAtEndOfTurn(final RemoveCountersAtEndOfTurn effect) {

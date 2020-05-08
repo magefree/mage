@@ -37,19 +37,12 @@ public class Effects extends ArrayList<Effect> {
     }
 
     public String getText(Mode mode) {
-        System.out.println(" -- getText method called -- ");
         StringBuilder sbText = new StringBuilder();
         String lastRule = null;
         int effectNum = 0;
         for (Effect effect : this) {
             String endString = "";
             String nextRule = effect.getText(mode);
-
-            System.out.printf("Effect Num: %d\n", effectNum);
-            System.out.print("nextRule from Effects - getText:: ");
-            System.out.println(nextRule);
-            System.out.print("lastRule from Effects - getText:: ");
-            System.out.println(lastRule);
 
             // ignore empty rules
             if (nextRule == null || nextRule.isEmpty()) {
@@ -59,37 +52,30 @@ public class Effects extends ArrayList<Effect> {
 
             // concat effects (default: each effect with a new sentence)
             String concatPrefix = effect.getConcatPrefix();
-            System.out.print("concatPrefix:");
-            System.out.println(concatPrefix);
 
             if (effectNum > 1 && !concatPrefix.isEmpty() && !concatPrefix.equals(".")) {
                 nextRule = concatPrefix + " " + nextRule;
-                System.out.println("Catch 1!!");
             }
 
             if (nextRule != null) {
+                //check if nextRule is a new sentence or not.
                 if (nextRule.startsWith("and ") || nextRule.startsWith("with ") || nextRule.startsWith("then ")) {
                     endString = " ";
-                    System.out.println("Catch 2!!");
                 } else if (nextRule.startsWith(",") || nextRule.startsWith(" ")) {
                     endString = "";
-                    System.out.println("Catch 3!!");
+                // nextRule determined to be a new sentence, now check ending of lastRule
                 } else if (lastRule != null && lastRule.length() > 3) {
-                    System.out.println("Catch 4!!");
-                    //check if lastRule already has appropriate punctuation, if so, add a space
+                    //check if lastRule already has appropriate punctuation, if so, add a space.
                     if (lastRule.endsWith(".\"") ||
                             lastRule.endsWith(".)") ||
                             lastRule.endsWith(".)</i>") ||
                             lastRule.endsWith(".")){
                         endString = " ";
-                        System.out.println("Catch 9!!");
                      // if lastRule does not have appropriate punctuation, add the default ". "
                     } else if (!lastRule.endsWith(".") && !lastRule.endsWith("<br>")) {
                         endString = ". ";
-                        System.out.println("Catch 5!!");
                     }
                     if (nextRule.length() > 3) {
-                        System.out.println("Catch 6!!");
                         nextRule = Character.toUpperCase(nextRule.charAt(0)) + nextRule.substring(1);
                     }
                 }
@@ -97,35 +83,21 @@ public class Effects extends ArrayList<Effect> {
                 String currentRule = endString + nextRule;
                 // fix dot in the combined effect like IfDoCost
                 if (sbText.length() > 0 && currentRule.length() > 0) {
-                    System.out.println("Catch 7!!");
                     boolean prevTextEndsWithDot = sbText.charAt(sbText.length() - 1) == '.';
                     boolean currentTextStartsWithDot = currentRule.startsWith(",") || currentRule.startsWith(".");
                     if (prevTextEndsWithDot && currentTextStartsWithDot) {
-                        System.out.println("Catch 8!!");
                         sbText.delete(sbText.length() - 1, sbText.length());
                     }
-
-                    /*
-                    if (!prevTextEndsWithDot){
-                        System.out.println("Catch 10!!");
-                        currentRule = currentRule + ".";
-                    }
-                    */
                 }
-
-
 
                 sbText.append(currentRule);
             }
+
             lastRule = nextRule;
-
-
-
-
 
         }
 
-        //add punctuation to last line
+        //add punctuation to very last rule.
         if (lastRule != null && lastRule.length() > 3
                 && !lastRule.endsWith(".")
                 && !lastRule.endsWith("\"")
@@ -135,12 +107,7 @@ public class Effects extends ArrayList<Effect> {
             sbText.append('.');
         }
 
-
-        System.out.print("sbText from Effects - getText ::");
-        System.out.println(sbText);
-
         return sbText.toString();
-
 
     }
 

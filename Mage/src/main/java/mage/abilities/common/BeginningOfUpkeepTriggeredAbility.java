@@ -133,15 +133,15 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl {
                         sb.insert(0, "you may ");
                     }
                 }
-                return sb.insert(0, generateZoneString()).insert(0, "at the beginning of your upkeep, ").toString(); //removed captialization
+                return sb.insert(0, generateZoneString()).insert(0, "at the beginning of your upkeep, ").toString(); //removed capitalization
             case OPPONENT:
-                return sb.insert(0, generateZoneString()).insert(0, "at the beginning of each opponent's upkeep, ").toString(); //removed captialization
+                return sb.insert(0, generateZoneString()).insert(0, "at the beginning of each opponent's upkeep, ").toString(); //removed capitalization
             case ANY:
-                return sb.insert(0, generateZoneString()).insert(0, "at the beginning of each upkeep, ").toString(); //removed captialization
+                return sb.insert(0, generateZoneString()).insert(0, "at the beginning of each upkeep, ").toString(); //removed capitalization
             case ACTIVE:
-                return sb.insert(0, generateZoneString()).insert(0, "at the beginning of each player's upkeep, ").toString(); //removed captialization
+                return sb.insert(0, generateZoneString()).insert(0, "at the beginning of each player's upkeep, ").toString(); //removed capitalization
             case CONTROLLER_ATTACHED_TO:
-                return sb.insert(0, generateZoneString()).insert(0, "at the beginning of the upkeep of enchanted creature's controller, ").toString(); //removed captialization
+                return sb.insert(0, generateZoneString()).insert(0, "at the beginning of the upkeep of enchanted creature's controller, ").toString(); //removed capitalization
         }
         return "";
     }
