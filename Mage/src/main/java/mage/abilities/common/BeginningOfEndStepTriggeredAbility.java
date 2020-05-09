@@ -124,8 +124,6 @@ public class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl {
             case OPPONENT:
                 return sb.insert(0, generateConditionString()).insert(0, abilityWordRule + "At the beginning of each opponent's end step, ").toString();
             case ANY:
-                //System.out.print("Beg.EndStep - Final Out::");
-                //m.System.out.println(sb.insert(0, generateConditionString()).insert(0, abilityWordRule + "At the beginning of each end step, ").toString());
                 return sb.insert(0, generateConditionString()).insert(0, abilityWordRule + "At the beginning of each end step, ").toString();
             case EACH_PLAYER:
                 return sb.insert(0, generateConditionString()).insert(0, abilityWordRule + "At the beginning of each player's end step, ").toString();
@@ -139,7 +137,7 @@ public class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl {
         if (interveningIfClauseCondition != null) {
             if (interveningIfClauseCondition.toString().startsWith("if")) {
 
-                //Fixes punctuation on multiple sentence if, then construction
+                //Fixes punctuation on multiple sentence if-then construction
                 // see -- Colfenor's Urn
                 if (interveningIfClauseCondition.toString().endsWith(".")){
                     return interveningIfClauseCondition.toString() + " ";
