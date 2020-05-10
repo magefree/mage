@@ -60,7 +60,7 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
 
         initComponents();
         try {
-            UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
             session = new SessionImpl(this);
             connectDialog = new ConnectDialog();
         } catch (Exception ex) {
