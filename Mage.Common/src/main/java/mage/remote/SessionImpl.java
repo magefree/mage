@@ -647,7 +647,7 @@ public class SessionImpl implements Session {
     public Optional<UUID> getRoomChatId(UUID roomId) {
         try {
             if (isConnected()) {
-                return server.getRoomChatId(roomId);
+                return Optional.of(server.getRoomChatId(roomId));
             }
         } catch (MageException ex) {
             handleMageException(ex);
@@ -659,7 +659,7 @@ public class SessionImpl implements Session {
     public Optional<UUID> getTableChatId(UUID tableId) {
         try {
             if (isConnected()) {
-                return server.getTableChatId(tableId);
+                return Optional.of(server.getTableChatId(tableId));
             }
         } catch (MageException ex) {
             handleMageException(ex);
@@ -671,7 +671,7 @@ public class SessionImpl implements Session {
     public Optional<UUID> getGameChatId(UUID gameId) {
         try {
             if (isConnected()) {
-                return server.getGameChatId(gameId);
+                return Optional.of(server.getGameChatId(gameId));
             }
         } catch (MageException ex) {
             handleMageException(ex);
@@ -685,7 +685,7 @@ public class SessionImpl implements Session {
     public Optional<TableView> getTable(UUID roomId, UUID tableId) {
         try {
             if (isConnected()) {
-                return server.getTable(roomId, tableId);
+                return Optional.of(server.getTable(roomId, tableId));
             }
         } catch (MageException ex) {
             handleMageException(ex);
@@ -829,7 +829,7 @@ public class SessionImpl implements Session {
     public Optional<UUID> getTournamentChatId(UUID tournamentId) {
         try {
             if (isConnected()) {
-                return server.getTournamentChatId(tournamentId);
+                return Optional.of(server.getTournamentChatId(tournamentId));
             }
         } catch (MageException ex) {
             handleMageException(ex);
