@@ -31,6 +31,24 @@ public class SupportAbility extends EntersBattlefieldTriggeredAbility {
         }
     }
 
+    /*
+     * For enchanments, the text should not include the word "other". This method
+     * allows the otherPermanent choice to be selected in the call to SupportAbility
+     * and removes the "other" text from rule creation.
+     */
+    public SupportAbility(Card card, int amount, boolean otherPermanent) {
+        super(new SupportEffect(card, amount, otherPermanent));
+        if (!card.isInstant() && !card.isSorcery()) {
+            FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures");
+            if (card.isCreature()) {
+                filter.add(AnotherPredicate.instance);
+                filter.setMessage("other target creatures");
+            }
+            addTarget(new TargetCreaturePermanent(0, amount, filter, false));
+        }
+    }
+
+
     public SupportAbility(final SupportAbility ability) {
         super(ability);
     }

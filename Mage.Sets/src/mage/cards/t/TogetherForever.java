@@ -41,7 +41,7 @@ public final class TogetherForever extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}{W}");
 
         // When Together Forever enters the battlefield, support 2. (Put a +1/+1 counter on each of up to two other target creatures.)
-        this.addAbility(new SupportAbility(this, 2));
+        this.addAbility(new SupportAbility(this, 2, false));
 
         // {1}: Choose target creature with a counter on it. When that creature dies this turn, return that card to its owner's hand.
         Ability ability = new SimpleActivatedAbility(new TogetherForeverEffect(), new GenericManaCost(1));
