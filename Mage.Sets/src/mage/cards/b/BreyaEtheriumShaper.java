@@ -1,7 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -21,6 +20,8 @@ import mage.game.permanent.token.ThopterToken;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetPlayerOrPlaneswalker;
+
+import java.util.UUID;
 
 /**
  *
@@ -44,7 +45,7 @@ public final class BreyaEtheriumShaper extends CardImpl {
                 Zone.BATTLEFIELD,
                 new DamageTargetEffect(3),
                 new GenericManaCost(2));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(2, 2, new FilterControlledArtifactPermanent("two artifacts"), true)));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(2, 2, new FilterControlledArtifactPermanent("artifacts"), true)));
         ability.addTarget(new TargetPlayerOrPlaneswalker());
 
         // Target creature gets -4/-4 until end of turn.
