@@ -10,6 +10,16 @@ import mage.constants.SubType;
  */
 public final class SharkToken extends TokenImpl {
 
+    public SharkToken() {
+        super("Shark", "X/X blue Shark creature token with flying");
+        cardType.add(CardType.CREATURE);
+        color.setBlue(true);
+        subtype.add(SubType.SHARK);
+        power = new MageInt(0);
+        toughness = new MageInt(0);
+        addAbility(FlyingAbility.getInstance());
+    }
+
     public SharkToken(int xValue) {
         super("Shark", "X/X blue Shark creature token with flying");
         cardType.add(CardType.CREATURE);

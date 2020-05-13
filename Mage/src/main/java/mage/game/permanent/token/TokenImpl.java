@@ -53,6 +53,8 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         }
     }
 
+    public TokenImpl() { }
+
     public TokenImpl(String name, String description) {
         this.name = name;
         this.description = description;
