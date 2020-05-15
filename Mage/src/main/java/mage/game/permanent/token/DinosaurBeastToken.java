@@ -10,6 +10,9 @@ package mage.game.permanent.token;
  */
 public final class DinosaurBeastToken extends TokenImpl {
 
+    public DinosaurBeastToken() {
+        this(0);
+    }
     public DinosaurBeastToken(int xValue) {
         super("Dinosaur Beast", "X/X green Dinosaur Beast creature token with trample");
         cardType.add(CardType.CREATURE);
