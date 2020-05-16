@@ -721,6 +721,9 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public Cards discard(Cards cards, Ability source, Game game) {
         Cards discardedCards = new CardsImpl();
+        if (cards == null) {
+            return discardedCards;
+        }
         for (Card card : cards.getCards(game)) {
             if (doDiscard(card, source, game, false)) {
                 discardedCards.add(card);
@@ -4005,7 +4008,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 for (Card card : cards) {
                     if (card instanceof Permanent) {
                         game.getBattlefield().removePermanent(card.getId());
-                        ZoneChangeEvent event = new ZoneChangeEvent((Permanent)card,
+                        ZoneChangeEvent event = new ZoneChangeEvent((Permanent) card,
                                 (source == null ? null : source.getSourceId()),
                                 byOwner ? card.getOwnerId() : getId(), Zone.BATTLEFIELD, Zone.OUTSIDE, appliedEffects);
                         game.fireEvent(event);

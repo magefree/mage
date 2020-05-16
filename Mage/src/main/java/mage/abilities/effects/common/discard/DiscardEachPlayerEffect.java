@@ -103,8 +103,7 @@ public class DiscardEachPlayerEffect extends OneShotEffect {
             if (player == null) {
                 continue;
             }
-            Cards cardsPlayer = cardsToDiscard.get(playerId);
-            player.discard(cardsPlayer, source, game);
+            player.discard(cardsToDiscard.get(playerId), source, game);
         }
         return true;
     }
