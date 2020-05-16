@@ -85,7 +85,7 @@ class CrosisThePurgerEffect extends OneShotEffect {
         }
         damagedPlayer.revealCards("hand of " + damagedPlayer.getName(), damagedPlayer.getHand(), game);
         Cards cards = new CardsImpl(
-                player.getHand()
+                damagedPlayer.getHand()
                         .getCards(game)
                         .stream()
                         .filter(card -> card.getColor(game).shares(choice.getColor()))
