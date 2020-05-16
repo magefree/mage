@@ -94,7 +94,6 @@ class NacatlWarPrideEffect extends OneShotEffect {
         }
 
         List<Permanent> copies = new ArrayList<>();    
-        
         Player controller = game.getPlayer(source.getControllerId());
         CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(controller.getId(), null, false, count, true, true);
         effect.setTargetPointer(new FixedTarget(origNactalWarPride, game));
