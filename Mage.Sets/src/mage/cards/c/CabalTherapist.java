@@ -43,7 +43,7 @@ public final class CabalTherapist extends CardImpl {
         ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
                 new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.NON_LAND_NAME),
                 false, "choose a nonland card name, then target player " +
-                "reveals their hand and discards all cards with that name."
+                "reveals their hand and discards all cards with that name"
         );
         ability.addEffect(new CabalTherapistDiscardEffect());
         ability.addTarget(new TargetPlayer());
