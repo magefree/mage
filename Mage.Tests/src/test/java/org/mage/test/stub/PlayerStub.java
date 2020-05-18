@@ -544,11 +544,6 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public SpellAbility chooseSpellAbilityForCast(SpellAbility ability, Game game, boolean noMana) {
-        return null;
-    }
-
-    @Override
     public boolean putInHand(Card card, Game game) {
         return false;
     }

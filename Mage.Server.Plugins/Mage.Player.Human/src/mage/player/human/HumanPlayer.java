@@ -1974,51 +1974,6 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     @Override
-    public SpellAbility chooseSpellAbilityForCast(SpellAbility ability, Game game, boolean noMana) {
-        if (gameInCheckPlayableState(game)) {
-            return null;
-        }
-
-        // TODO: add canRespond cycle?
-        if (!canRespond()) {
-            return null;
-        }
-
-        switch (ability.getSpellAbilityType()) {
-            case SPLIT:
-            case SPLIT_FUSED:
-            case SPLIT_AFTERMATH:
-                MageObject object = game.getObject(ability.getSourceId());
-                if (object != null) {
-                    String message = "Choose ability to cast" + (noMana ? " for FREE" : "") + "<br>" + object.getLogName();
-                    LinkedHashMap<UUID, ActivatedAbility> useableAbilities = getSpellAbilities(playerId, object, game.getState().getZone(object.getId()), game);
-                    if (useableAbilities != null
-                            && useableAbilities.size() == 1) {
-                        return (SpellAbility) useableAbilities.values().iterator().next();
-                    } else if (useableAbilities != null
-                            && !useableAbilities.isEmpty()) {
-
-                        updateGameStatePriority("chooseSpellAbilityForCast", game);
-                        prepareForResponse(game);
-                        if (!isExecutingMacro()) {
-                            game.fireGetChoiceEvent(playerId, message, object, new ArrayList<>(useableAbilities.values()));
-                        }
-                        waitForResponse(game);
-
-                        if (response.getUUID() != null) {
-                            if (useableAbilities.containsKey(response.getUUID())) {
-                                return (SpellAbility) useableAbilities.get(response.getUUID());
-                            }
-                        }
-                    }
-                }
-                return null;
-            default:
-                return ability;
-        }
-    }
-
-    @Override
     public SpellAbility chooseAbilityForCast(Card card, Game game, boolean nonMana) {
         if (gameInCheckPlayableState(game)) {
             return null;

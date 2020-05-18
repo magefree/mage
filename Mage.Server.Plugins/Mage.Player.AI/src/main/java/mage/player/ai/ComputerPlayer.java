@@ -1896,27 +1896,6 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     }
 
     @Override
-    public SpellAbility chooseSpellAbilityForCast(SpellAbility ability, Game game, boolean noMana) {
-        switch (ability.getSpellAbilityType()) {
-            case SPLIT:
-            case SPLIT_FUSED:
-            case SPLIT_AFTERMATH:
-                MageObject object = game.getObject(ability.getSourceId());
-                if (object != null) {
-                    LinkedHashMap<UUID, ActivatedAbility> useableAbilities = getSpellAbilities(playerId, object, game.getState().getZone(object.getId()), game);
-                    if (useableAbilities != null && !useableAbilities.isEmpty()) {
-                        // game.fireGetChoiceEvent(playerId, name, object, new ArrayList<>(useableAbilities.values()));
-                        // TODO: Improve this
-                        return (SpellAbility) useableAbilities.values().iterator().next();
-                    }
-                }
-                return null;
-            default:
-                return ability;
-        }
-    }
-
-    @Override
     public Mode chooseMode(Modes modes, Ability source, Game game) {
         log.debug("chooseMode");
         if (modes.getMode() != null && modes.getMaxModes() == modes.getSelectedModes().size()) {
