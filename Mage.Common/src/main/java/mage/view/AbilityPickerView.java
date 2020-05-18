@@ -49,7 +49,9 @@ public class AbilityPickerView implements Serializable {
         if (rule.isEmpty()) {
             rule = ability.toString();
         }
-        rule = Character.toUpperCase(rule.charAt(0)) + rule.substring(1);
+        if (!rule.isEmpty()) {
+            rule = Character.toUpperCase(rule.charAt(0)) + rule.substring(1);
+        }
         return rule;
     }
 

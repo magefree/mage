@@ -2096,6 +2096,9 @@ public class HumanPlayer extends PlayerImpl {
                             modeText = "(selected " + timesSelected + "x) " + modeText;
                         }
                     }
+                    if (!modeText.isEmpty()) {
+                        modeText = Character.toUpperCase(modeText.charAt(0)) + modeText.substring(1);
+                    }
                     modeMap.put(mode.getId(), modeIndex + ". " + modeText);
                 }
             }
