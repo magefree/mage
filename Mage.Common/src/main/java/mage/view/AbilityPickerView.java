@@ -1,6 +1,7 @@
 package mage.view;
 
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 
 import java.io.Serializable;
 import java.util.LinkedHashMap;
@@ -28,13 +29,28 @@ public class AbilityPickerView implements Serializable {
             if (objectName == null) {
                 rule = ability.getRule(true);
             } else {
-                rule = ability.getRule(objectName);
-                if (rule.isEmpty()) {
-                    rule = ability.toString();
+                // spell abilities must start with "Cast name" (split cards have different names for each spell part)
+                if (ability instanceof SpellAbility) {
+                    SpellAbility spell = (SpellAbility) ability;
+                    rule = getAbilityRules(spell, spell.getCardName());
+                    if (!rule.startsWith("Cast ")) {
+                        rule = spell.toString() + ": " + rule; // spell.toString() must return this.name (example: Cast Armed)
+                    }
+                } else {
+                    rule = getAbilityRules(ability, objectName);
                 }
             }
             choices.put(ability.getId(), num + ". " + rule);
         }
+    }
+
+    private String getAbilityRules(Ability ability, String objectName) {
+        String rule = ability.getRule(objectName);
+        if (rule.isEmpty()) {
+            rule = ability.toString();
+        }
+        rule = Character.toUpperCase(rule.charAt(0)) + rule.substring(1);
+        return rule;
     }
 
     public AbilityPickerView(Map<UUID, String> modes, String message) {
