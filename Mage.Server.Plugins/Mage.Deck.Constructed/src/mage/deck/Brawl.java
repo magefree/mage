@@ -25,9 +25,11 @@ public class Brawl extends Constructed {
         setCodes.addAll(Standard.makeLegalSets());
 
         banned.add("Golos, Tireless Pilgrim");
+        banned.add("Drannith Magistrate");
         banned.add("Lutri, the Spellchaser");
         banned.add("Oko, Thief of Crowns");
         banned.add("Sorcerous Spyglass");
+        banned.add("Winota, Joiner of Forces");
     }
 
     public Brawl(String name) {
