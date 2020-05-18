@@ -317,8 +317,6 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean cast(SpellAbility ability, Game game, boolean noMana, MageObjectReference reference);
 
-    SpellAbility chooseSpellAbilityForCast(SpellAbility ability, Game game, boolean noMana);
-
     SpellAbility chooseAbilityForCast(Card card, Game game, boolean noMana);
 
     boolean putInHand(Card card, Game game);

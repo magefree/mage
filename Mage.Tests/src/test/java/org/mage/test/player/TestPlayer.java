@@ -3457,12 +3457,6 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public SpellAbility chooseSpellAbilityForCast(SpellAbility ability, Game game, boolean noMana) {
-        Assert.fail("That's method must calls only from computerPlayer->cast(), see TestComputerPlayerXXX");
-        return computerPlayer.chooseSpellAbilityForCast(ability, game, noMana);
-    }
-
-    @Override
     public void skip() {
         computerPlayer.skip();
     }
