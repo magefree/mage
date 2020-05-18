@@ -30,7 +30,7 @@ public final class TextboxRuleParser {
     // if the ability is a loyalty ability, and returning an TextboxRule
     // representing that information, which can be used to render the rule in
     // the textbox of a card.
-    public static TextboxRule parse(CardView source, String rule) {
+    public static TextboxRule parse(CardView source, String rule, String cardNameToUse) {
         // List of regions to apply
         List<TextboxRule.AttributeRegion> regions = new ArrayList<>();
 
@@ -104,10 +104,9 @@ public final class TextboxRuleParser {
                         String contents = rule.substring(index + 1, closeIndex);
                         if (contents.equals("this") || contents.equals("source")) {
                             // Replace {this} with the card's name
-                            String cardName = source.getName();
-                            build.append(cardName);
+                            build.append(cardNameToUse);
                             index += contents.length() + 2;
-                            outputIndex += cardName.length();
+                            outputIndex += cardNameToUse.length();
                         } else {
                             Image symbol = ManaSymbols.getSizedManaSymbol(contents.replace("/", ""), 10);
                             if (symbol != null) {
