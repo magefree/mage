@@ -407,8 +407,8 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Thieving Otter", 69, Rarity.COMMON, mage.cards.t.ThievingOtter.class));
         cards.add(new SetCardInfo("Thornwood Falls", 256, Rarity.COMMON, mage.cards.t.ThornwoodFalls.class));
         cards.add(new SetCardInfo("Thwart the Enemy", 173, Rarity.COMMON, mage.cards.t.ThwartTheEnemy.class));
-        cards.add(new SetCardInfo("Titanoth Rex", 174, Rarity.UNCOMMON, mage.cards.t.TitanothRex.class));
-        cards.add(new SetCardInfo("Titanoth Rex", 377, Rarity.UNCOMMON, mage.cards.t.TitanothRex.class));
+        cards.add(new SetCardInfo("Titanoth Rex", 174, Rarity.UNCOMMON, mage.cards.t.TitanothRex.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Titanoth Rex", 377, Rarity.UNCOMMON, mage.cards.t.TitanothRex.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Titans' Nest", 212, Rarity.RARE, mage.cards.t.TitansNest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Titans' Nest", 347, Rarity.RARE, mage.cards.t.TitansNest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tranquil Cove", 257, Rarity.COMMON, mage.cards.t.TranquilCove.class));
@@ -427,8 +427,8 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Valiant Rescuer", 36, Rarity.UNCOMMON, mage.cards.v.ValiantRescuer.class));
         cards.add(new SetCardInfo("Vivien, Monsters' Advocate", 175, Rarity.MYTHIC, mage.cards.v.VivienMonstersAdvocate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vivien, Monsters' Advocate", 277, Rarity.MYTHIC, mage.cards.v.VivienMonstersAdvocate.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Void Beckoner", 104, Rarity.UNCOMMON, mage.cards.v.VoidBeckoner.class));
-        cards.add(new SetCardInfo("Void Beckoner", 373, Rarity.UNCOMMON, mage.cards.v.VoidBeckoner.class));
+        cards.add(new SetCardInfo("Void Beckoner", 104, Rarity.UNCOMMON, mage.cards.v.VoidBeckoner.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Void Beckoner", 373, Rarity.UNCOMMON, mage.cards.v.VoidBeckoner.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Voracious Greatshark", 320, Rarity.RARE, mage.cards.v.VoraciousGreatshark.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Voracious Greatshark", 70, Rarity.RARE, mage.cards.v.VoraciousGreatshark.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vulpikeet", 282, Rarity.COMMON, mage.cards.v.Vulpikeet.class));
