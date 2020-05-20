@@ -115,6 +115,12 @@ public class GameEvent implements Serializable {
          sourceId    sourceId of the creature using the champion ability
          playerId    the id of the controlling player
          */
+        CREATURE_MUTATES,
+        /* CREATURE_MUTATES
+         targetId    the id of the target creature to be mutated
+         sourceId    sourceId of the creature using the mutate ability
+         playerId    the id of the controlling player
+         */
         CREW_VEHICLE,
         /* CREW_VEHICLE
          targetId    the id of the creature that crewed a vehicle

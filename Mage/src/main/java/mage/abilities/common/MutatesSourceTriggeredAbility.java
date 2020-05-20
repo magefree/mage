@@ -30,8 +30,7 @@ public class MutatesSourceTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        // TODO: implement this
-        return false;
+        return event.getType() == GameEvent.EventType.CREATURE_MUTATES;
     }
 
     @Override
