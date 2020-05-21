@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import mage.client.dialog.PreferencesDialog;
+import mage.client.themes.ThemeType;
 import mage.components.ImagePanel;
 import mage.components.ImagePanelStyle;
 import mage.interfaces.plugin.ThemePlugin;
@@ -26,9 +27,11 @@ public class ThemePluginImpl implements ThemePlugin {
     private static BufferedImage background;
     private final List flist = new List();
     private final String BackgroundDir = "backgrounds" + File.separator;
+    private ThemeType currentTheme;
 
     @Init
     public void init() {
+        this.currentTheme = ThemeType.valueByName(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_THEME, "Default Theme"));
     }
 
     @PluginLoaded
@@ -104,8 +107,13 @@ public class ThemePluginImpl implements ThemePlugin {
         }
     }
 
+    // Sets background for in-battle
     private BufferedImage loadbuffer_default() throws IOException {
-        String filename = "/dragon.png";
+        String filename = "/background/dragon.png";
+        // Only apply theme background if no custom user background set
+        if (this.currentTheme != ThemeType.DEFAULT) {
+            filename = "/background/" + this.currentTheme.getPath() + "battle-background.png";
+        }
         BufferedImage res;
         InputStream is = this.getClass().getResourceAsStream(filename);
         res = ImageIO.read(is);
@@ -150,11 +158,17 @@ public class ThemePluginImpl implements ThemePlugin {
         return bgPanel;
     }
 
+    // Sets background for logged in user for tables/deck editor/card viewer/etc
     private synchronized ImagePanel createImagePanelInstance() {
         if (background == null) {
-                String filename = "/background.png";
+                String filename = "/background/background.png";
                 try {
                     if (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_BACKGROUND_IMAGE_DEFAULT, "true").equals("true")) {
+                        // Only apply theme background if no custom user background set
+                        if (this.currentTheme != ThemeType.DEFAULT) {
+                            filename = "/background/" + this.currentTheme.getPath() + "background.png";
+                        }
+
                         InputStream is = this.getClass().getResourceAsStream(filename);
                         if (is == null) {
                             throw new FileNotFoundException("Couldn't find " + filename + " in resources.");
