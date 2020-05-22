@@ -112,7 +112,7 @@ public class ThemePluginImpl implements ThemePlugin {
         String filename = "/background/dragon.png";
         // Only apply theme background if no custom user background set
         if (this.currentTheme != ThemeType.DEFAULT) {
-            filename = "/background/" + this.currentTheme.getPath() + "battle-background.png";
+            filename = "/background/" + this.currentTheme.getPath() + "background.png";
         }
         BufferedImage res;
         InputStream is = this.getClass().getResourceAsStream(filename);
