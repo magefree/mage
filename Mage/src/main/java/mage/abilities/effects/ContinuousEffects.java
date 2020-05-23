@@ -905,11 +905,18 @@ public class ContinuousEffects implements Serializable {
         removeInactiveEffects(game);
         List<ContinuousEffect> activeLayerEffects = getLayeredEffects(game);
 
+
         List<ContinuousEffect> layer = filterLayeredEffects(activeLayerEffects, Layer.CopyEffects_1);
         for (ContinuousEffect effect : layer) {
             Set<Ability> abilities = layeredEffects.getAbility(effect.getId());
             for (Ability ability : abilities) {
-                effect.apply(Layer.CopyEffects_1, SubLayer.NA, ability, game);
+                effect.apply(Layer.CopyEffects_1, SubLayer.CopyingMerging_1a, ability, game);
+            }
+        }
+        for (ContinuousEffect effect : layer) {
+            Set<Ability> abilities = layeredEffects.getAbility(effect.getId());
+            for (Ability ability : abilities) {
+                effect.apply(Layer.PTChangingEffects_7, SubLayer.ModifyFaceDown_1b, ability, game);
             }
         }
         //Reload layerEffect if copy effects were applied
