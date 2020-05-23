@@ -94,6 +94,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected int attachedToZoneChangeCounter;
     protected MageObjectReference pairedPermanent;
     protected List<UUID> bandedCards = new ArrayList<>();
+    protected List<UUID> mergedCards = new ArrayList<>();
     protected Counters counters;
     protected List<MarkedDamageInfo> markedDamage;
     protected int markedLifelink;
@@ -1515,6 +1516,21 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public void setMorphed(boolean value) {
         morphed = value;
+    }
+
+    @Override
+    public void addMergedCard(UUID mergedCard) {
+        mergedCards.add(mergedCard);
+    }
+
+    @Override
+    public List<UUID> getMergedCards() {
+        return mergedCards;
+    }
+
+    @Override
+    public void clearMergedCards() {
+        mergedCards.clear();
     }
 
     @Override

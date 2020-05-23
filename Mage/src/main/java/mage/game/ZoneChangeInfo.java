@@ -3,7 +3,6 @@ package mage.game;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import mage.cards.MeldCard;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.stack.Spell;
 
@@ -138,29 +137,23 @@ public class ZoneChangeInfo {
         }
     }
 
-    public static class Unmelded extends ZoneChangeInfo {
+    // This class records state changes for grouped cards like Meld and Mutate.
+    public static class Group extends ZoneChangeInfo {
 
+        ZoneChangeInfo topInfo;
         List<ZoneChangeInfo> subInfo = new ArrayList<>();
 
-        public Unmelded(ZoneChangeInfo info, Game game) {
-            super(info.event);
-            MeldCard meld = game.getMeldCard(info.event.getTargetId());
-            if (meld != null) {
-                if (meld.hasTopHalf(game)) {
-                    ZoneChangeEvent topEvent = new ZoneChangeEvent(meld.getTopHalfCard().getId(), event.getSourceId(),
-                            event.getPlayerId(), event.getFromZone(), event.getToZone(), event.getAppliedEffects());
-                    ZoneChangeInfo topInfo = info.copy();
-                    topInfo.event = topEvent;
-                    subInfo.add(topInfo);
-                }
-                if (meld.hasBottomHalf(game)) {
-                    ZoneChangeEvent bottomEvent = new ZoneChangeEvent(meld.getBottomHalfCard().getId(), event.getSourceId(),
-                            event.getPlayerId(), event.getFromZone(), event.getToZone(), event.getAppliedEffects());
-                    ZoneChangeInfo bottomInfo = info.copy();
-                    bottomInfo.event = bottomEvent;
-                    subInfo.add(bottomInfo);
-                }
-            }
+        public Group(ZoneChangeInfo parent, Game game) {
+            super(parent.event);
+            topInfo = parent;
+        }
+
+        public void addGroupedCard(UUID groupedCard) {
+            ZoneChangeEvent topEvent = new ZoneChangeEvent(groupedCard, event.getSourceId(),
+                    event.getPlayerId(), event.getFromZone(), event.getToZone(), event.getAppliedEffects());
+            ZoneChangeInfo newSubInfo = topInfo.copy();
+            newSubInfo.event = topEvent;
+            subInfo.add(newSubInfo);
         }
     }
 }
