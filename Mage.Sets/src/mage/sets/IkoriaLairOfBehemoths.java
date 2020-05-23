@@ -9,46 +9,12 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
  * @author TheElk801
  */
 public final class IkoriaLairOfBehemoths extends ExpansionSet {
-
-    private static final List<String> mutateNames = Arrays.asList(
-            "Archipelagore",
-            "Auspicious Starrix",
-            "Boneyard Lurker",
-            "Brokkos, Apex of Forever",
-            "Cavern Whisperer",
-            "Chittering Harvester",
-            "Cloudpiercer",
-            "Cubwarden",
-            "Dirge Bat",
-            "Dreamtail Heron",
-            "Everquill Phoenix",
-            "Gemrazer",
-            "Glowstone Recluse",
-            "Huntmaster Liger",
-            "Illuna, Apex of Wishes",
-            "Insatiable Hemophage",
-            "Lore Drakkis",
-            "Majestic Auricorn",
-            "Migratory Greathorn",
-            "Necropanther",
-            "Nethroi, Apex of Death",
-            "Parcelbeast",
-            "Porcuparrot",
-            "Pouncing Shoreshark",
-            "Regal Leosaur",
-            "Sea-Dasher Octopus",
-            "Snapdax, Apex of the Hunt",
-            "Trumpeting Gnarr",
-            "Vadrok, Apex of Thunder",
-            "Vulpikeet"
-    );
 
     private static final IkoriaLairOfBehemoths instance = new IkoriaLairOfBehemoths();
 
@@ -457,8 +423,6 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Zilortha, Strength Incarnate", 275, Rarity.MYTHIC, mage.cards.z.ZilorthaStrengthIncarnate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Zirda, the Dawnwaker", 233, Rarity.RARE, mage.cards.z.ZirdaTheDawnwaker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Zirda, the Dawnwaker", 360, Rarity.RARE, mage.cards.z.ZirdaTheDawnwaker.class, NON_FULL_USE_VARIOUS));
-
-        cards.removeIf(setCardInfo -> mutateNames.contains(setCardInfo.getName())); // remove when mutate is implemented
     }
 
     @Override
@@ -468,7 +432,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         }
         List<CardInfo> savedCardsInfos = savedCards.get(rarity);
         if (savedCardsInfos != null) {
-            return new ArrayList(savedCardsInfos);
+            return new ArrayList<CardInfo>(savedCardsInfos);
         }
         CardCriteria criteria = new CardCriteria();
         criteria.setCodes(this.code).notTypes(CardType.LAND);
@@ -482,7 +446,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         savedCardsInfos.addAll(CardRepository.instance.findCards(criteria));
         savedCards.put(rarity, savedCardsInfos);
         // Return a copy of the saved cards information, as not to modify the original.
-        return new ArrayList(savedCardsInfos);
+        return new ArrayList<CardInfo>(savedCardsInfos);
     }
 
     @Override
@@ -497,6 +461,6 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
             savedSpecialLand.removeIf(cardInfo -> "Evolving Wilds".equals(cardInfo.getName()));
         }
 
-        return new ArrayList(savedSpecialLand);
+        return new ArrayList<CardInfo>(savedSpecialLand);
     }
 }
