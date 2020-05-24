@@ -57,7 +57,7 @@ public class EmergeAbility extends SpellAbility {
                         new FilterControlledCreaturePermanent(), this.getControllerId(), this.getSourceId(), game)) {
                     ManaCost costToPay = CardUtil.reduceCost(emergeCost.copy(), creature.getConvertedManaCost());
                     if (costToPay.canPay(this, this.getSourceId(), this.getControllerId(), game)) {
-                        return ActivationStatus.getTrue();
+                        return ActivationStatus.getTrue(this, game);
                     }
                 }
             }

@@ -1,6 +1,5 @@
 package mage.abilities.keyword;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.Cost;
@@ -9,21 +8,18 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
 import mage.cards.SplitCard;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SpellAbilityCastMode;
-import mage.constants.SpellAbilityType;
-import mage.constants.TimingRule;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
  * 702.32. Flashback
- *
+ * <p>
  * 702.32a. Flashback appears on some instants and sorceries. It represents two
  * static abilities: one that functions while the card is in a player‘s
  * graveyard and the other that functions while the card is on the stack.
@@ -69,6 +65,7 @@ public class FlashbackAbility extends SpellAbility {
                     return ActivationStatus.getFalse();
                 }
                 // Flashback can never cast a split card by Fuse, because Fuse only works from hand
+                // https://tappedout.net/mtg-questions/snapcaster-mage-and-flashback-on-a-fuse-card-one-or-both-halves-legal-targets/
                 if (card.isSplitCard()) {
                     if (((SplitCard) card).getLeftHalfCard().getName().equals(abilityName)) {
                         return ((SplitCard) card).getLeftHalfCard().getSpellAbility().canActivate(playerId, game);
@@ -218,9 +215,7 @@ class FlashbackReplacementEffect extends ReplacementEffectImpl {
                 && ((ZoneChangeEvent) event).getToZone() != Zone.EXILED) {
 
             int zcc = game.getState().getZoneChangeCounter(source.getSourceId());
-            if (((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1 == zcc) {
-                return true;
-            }
+            return ((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1 == zcc;
 
         }
         return false;

@@ -1,7 +1,5 @@
 package mage.abilities;
 
-import java.util.Optional;
-import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.costs.Cost;
@@ -16,6 +14,9 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
+
+import java.util.Optional;
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -108,8 +109,12 @@ public class SpellAbility extends ActivatedAbilityImpl {
                 if (getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED) {
                     SplitCard splitCard = (SplitCard) game.getCard(getSourceId());
                     if (splitCard != null) {
-                        return new ActivationStatus(splitCard.getLeftHalfCard().getSpellAbility().canChooseTarget(game)
-                                && splitCard.getRightHalfCard().getSpellAbility().canChooseTarget(game), null);
+                        // fused can be called from hand only, so not permitting object allows or other zones checks
+                        // see https://www.mtgsalvation.com/forums/magic-fundamentals/magic-rulings/magic-rulings-archives/251926-snapcaster-mage-and-fuse
+                        if (game.getState().getZone(splitCard.getId()) == Zone.HAND) {
+                            return new ActivationStatus(splitCard.getLeftHalfCard().getSpellAbility().canChooseTarget(game)
+                                    && splitCard.getRightHalfCard().getSpellAbility().canChooseTarget(game), null);
+                        }
                     }
                     return ActivationStatus.getFalse();
 
