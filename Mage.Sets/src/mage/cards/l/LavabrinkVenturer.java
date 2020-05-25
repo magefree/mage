@@ -79,7 +79,6 @@ class LavabrinkVenturerEffect extends GainAbilitySourceEffect {
         if (choosenMode == null) {
             return false;
         }
-        Ability ability;
         switch (choosenMode) {
             case "Odd":
                 this.ability = new ProtectionAbility(oddFilter);

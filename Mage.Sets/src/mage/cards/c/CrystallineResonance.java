@@ -33,7 +33,7 @@ public final class CrystallineResonance extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
 
         // Whenever you cycle a card, you may have Crystalline Resonance become a copy of another target permanent until your next turn, except it has this ability.
-        this.addAbility(this.createAbility());
+        this.addAbility(CrystallineResonance.createAbility());
     }
 
     private CrystallineResonance(final CrystallineResonance card) {

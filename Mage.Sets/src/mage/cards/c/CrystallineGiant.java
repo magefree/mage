@@ -92,8 +92,8 @@ class CrystallineGiantEffect extends OneShotEffect {
         List<CounterType> counterTypes = new ArrayList();
         counterTypes.addAll(counterTypeSet);
         counterTypes.removeIf(counters::containsKey);
-        if (counterTypes.size() == 0) {
-            return false;
+        if (counterTypes.isEmpty()) {
+            return true;
         }
         return permanent.addCounters(counterTypes.get(
                 RandomUtil.nextInt(counterTypes.size())
