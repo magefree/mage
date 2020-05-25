@@ -45,12 +45,6 @@ public class NewPlayerPanel extends javax.swing.JPanel {
         this.txtPlayerName.setEditable(false);
         this.txtPlayerName.setEnabled(false);
     }
-
-    public void setPlayerName(String playerName, boolean editable, boolean enabled) {
-        this.txtPlayerName.setText(playerName);
-        this.txtPlayerName.setEditable(editable);
-        this.txtPlayerName.setEnabled(enabled);
-    }
     
     protected void playerLoadDeck() {
         String lastFolder = MageFrame.getPreferences().get("lastDeckFolder", "");
