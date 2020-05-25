@@ -27,6 +27,8 @@ public final class ApproachOfTheSecondSun extends CardImpl {
     public ApproachOfTheSecondSun(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{6}{W}");
 
+        // If this spell was cast from your hand and you've cast another spell named Approach of the Second Sun this game,
+        // you win the game. Otherwise, put Approach of the Second Sun into its owner's library seventh from the top and you gain 7 life.        
         getSpellAbility().addEffect(new ApproachOfTheSecondSunEffect());
         getSpellAbility().addWatcher(new ApproachOfTheSecondSunWatcher());
     }
@@ -46,7 +48,7 @@ class ApproachOfTheSecondSunEffect extends OneShotEffect {
     public ApproachOfTheSecondSunEffect() {
         super(Outcome.Win);
         this.staticText
-                = "If this spell was cast from your hand and you've cast another spell named Approach of the Second Sun this game, you win the game. "
+                = "If this spell was cast from your hand and you've cast another spell named {this} this game, you win the game. "
                 + "Otherwise, put {this} into its owner's library seventh from the top and you gain 7 life.";
     }
 
@@ -93,7 +95,7 @@ class ApproachOfTheSecondSunEffect extends OneShotEffect {
 
 class ApproachOfTheSecondSunWatcher extends Watcher {
 
-    private Map<UUID, Integer> approachesCast = new HashMap<>();
+    private final Map<UUID, Integer> approachesCast = new HashMap<>();
 
     public ApproachOfTheSecondSunWatcher() {
         super(WatcherScope.GAME);
