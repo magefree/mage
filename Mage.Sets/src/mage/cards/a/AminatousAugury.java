@@ -8,15 +8,19 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.choices.Choice;
+import mage.choices.ChoiceImpl;
 import mage.constants.*;
 import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 import mage.filter.common.FilterLandCard;
 import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 /**
  *
@@ -74,10 +78,17 @@ class AminatousAuguryEffect extends OneShotEffect {
         if (player != null && sourceObject != null) {
             //Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 5));
             Set<Card> cards = player.getLibrary().getTopCards(game, 8);
+
+
+
+
             //Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 8));
 
 
             player.moveCards(cards, Zone.EXILED, source, game);
+
+
+
 
             /*
             if (player.chooseUse(Outcome.PutCardInPlay, "Put a land from among the exiled cards into play?", source, game)) {
@@ -91,15 +102,67 @@ class AminatousAuguryEffect extends OneShotEffect {
             }
 
              */
+            Set<Card> aminatouCards = new HashSet<>();
+
+            System.out.println("Aminatou Cards Initialized With:" + aminatouCards);
+
+            //Set<UUID> aminatouCardIds = new HashSet<>();
+
+            //EnumSet<CardType> castableCardTypes = EnumSet.noneOf(CardType.class);
+            //EnumSet<CardType> usedCardTypes = EnumSet.noneOf(CardType.class);
 
 
             for (Card card : cards) {
                 if (game.getState().getZone(card.getId()) == Zone.EXILED && !card.isLand()) {
+                    aminatouCards.add(card);
+                }
+            }
+
+
+
+            for (Card card : cards) {
+                if (game.getState().getZone(card.getId()) == Zone.EXILED && !card.isLand()) {
+
+                    //aminatouCards.add(card);
+                    //aminatouCardIds.add(card.getMainCard().getId());
+                    //for ( CardType cType: card.getCardType()) {
+                     //   castableCardTypes.add(cType);
+
+                    //}
+
+                    //card.addInfo("ENCHANTMENT", "True", game);
+
                     ContinuousEffect effect = new AminatousAuguryCastFromExileEffect();
                     effect.setTargetPointer(new FixedTarget(card, game));
                     game.addEffect(effect, source);
                 }
             }
+
+
+
+            //System.out.println(castableCardTypes);
+
+            /*
+             * Plan: Figure out active target Ids in applied.
+             *  When target is cast, remove other targets of the same type
+             *  boolean array for each card type
+             *  i.e. was cardType = cast  true? if so, make card castable. If false cannot cast.
+             *  only need to send and retrieve boolean array
+             */
+
+            //System.out.println("HACK");
+            //String testValue = "Sent By Me";
+
+
+
+            //game.getState().setValue("castableCardTypes", castableCardTypes);
+            System.out.println("Source ID: " + source.getSourceId().toString() + "Cards");
+            game.getState().setValue(source.getSourceId().toString() + "Cards", aminatouCards);
+            //game.getState().setValue("aminatouCardIds", aminatouCardIds);
+
+            //System.out.println(game.getState().toString());
+            //System.out.println(game.getState().getValue(game, player.getId()));
+
             return true;
 
             //ContinuousEffect effect = new AminatousAuguryCastFromExileEffect();
@@ -246,77 +309,64 @@ class AminatousAuguryCastFromExileEffect extends AsThoughEffectImpl {
     //track each card type -- 5 types
     //allow casting if not already cast from the 8 cards moved to exile
 
+
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
 
-        if (objectId.equals(getTargetPointer().getFirst(game, source))
-                && affectedControllerId.equals(source.getControllerId())) {
-            Card card = game.getCard(objectId);
-            if (card != null) {
-                Player player = game.getPlayer(affectedControllerId);
-                if (player != null) {
-                    player.setCastSourceIdWithAlternateMana(objectId, null, card.getSpellAbility().getCosts());
-                    return true;
-                }
-            }
-        }
-        return false;
-
         /*
+         * pass boolean array for types via game.getState().get/setValue
+         *
+         * use this information to update fixedtargets
+         * if matches enchantment, set .used = true
+         *  set effect to used
+         * else cast with zero mana
+         *
+         */
 
-        //EnumSet<CardType> usedCardTypesOutside = EnumSet.noneOf(CardType.class);
-        //EnumSet<CardType> unusedCardTypesOutside = EnumSet.noneOf(CardType.class);
+
+        //Some cards have more than one type i.e. artifact creature, this should count as one for both categories.
+
+        //check which cards have been cast
 
 
+        //System.out.println("Used Card Types: " + usedCardTypes);
 
+
+        Set<Card> aminatouCards = (Set<Card>) game.getState().getValue(source.getSourceId().toString() + "Cards");
+
+        //System.out.println("Source ID: " + source.getSourceId().toString() + "Cards");
+
+        Set<CardType> usedCardTypes = new HashSet<>();
+        if (game.getState().getValue(source.getSourceId().toString() + "UsedCardTypes") != null){
+            usedCardTypes = (Set<CardType>) game.getState().getValue(source.getSourceId().toString() + "UsedCardTypes");
+        }
+
+        if (objectId.equals(getTargetPointer().getFirst(game, source))
+                && affectedControllerId.equals(source.getControllerId())) {
+
+            //Set<Card> aminatouCards = (Set<Card>) game.getState().getValue("aminatouCards");
+
+            Iterator<Card> chkCardCastIterator = aminatouCards.iterator();
+            while(chkCardCastIterator.hasNext()){
+                Card chkCardCast = chkCardCastIterator.next();
+
+                //System.out.println("checking cards");
+
+                Spell spell = game.getStack().getSpell(chkCardCast.getId());
+                if (spell != null) {
+                    //System.out.println(chkCardCast.getIdName() + " Was cast -> Removing");
+                    usedCardTypes.addAll(chkCardCast.getCardType());
+                }
+            }
+
+            //System.out.println( "Used Card Types :" + usedCardTypes);
+            game.getState().setValue(source.getSourceId().toString() + "UsedCardTypes", usedCardTypes); //update changes
+        }
 
         if (objectId.equals(getTargetPointer().getFirst(game, source))
                 && affectedControllerId.equals(source.getControllerId())) {
             Card card = game.getCard(objectId);
-            //System.out.println("card type -- " + card.getSuperType().toString());
-            if (card != null) {
-
-
-
-                Thread t = Thread.currentThread();
-                System.out.println("Thread ID --  " + t.getId());
-
-
-                EnumSet<CardType> usedCardTypes = EnumSet.noneOf(CardType.class);
-                EnumSet<CardType> unusedCardTypes = EnumSet.noneOf(CardType.class);
-
-                for (CardType cardT : card.getCardType()) {
-                    //System.out.println("Card Types -- " +  card.getCardType().toString());
-                    if (!usedCardTypes.contains(cardT)) {
-                        unusedCardTypes.add(cardT);
-                    }
-                    if (!usedCardTypesOutside.contains(cardT)) {
-                        unusedCardTypesOutside.add(cardT);
-                    }
-                }
-
-                System.out.print("Used Card Types: ");
-                for ( CardType pCard : usedCardTypes){
-                    System.out.print(pCard.toString() + " ");
-                }
-                System.out.println();
-                System.out.print("Unused Card Types: ");
-                for ( CardType pCard : unusedCardTypes){
-                    System.out.print(pCard.toString() + " ");
-                }
-                System.out.println();
-                System.out.print("UOed Card Types: ");
-                for ( CardType pCard : usedCardTypesOutside){
-                    System.out.print(pCard.toString() + " ");
-                }
-                System.out.println();
-                System.out.print("UOused Card Types: ");
-                for ( CardType pCard : unusedCardTypesOutside){
-                    System.out.print(pCard.toString() + " ");
-                }
-                System.out.println();
-
-
+            if (card != null && Collections.disjoint(usedCardTypes,card.getCardType())) {
                 Player player = game.getPlayer(affectedControllerId);
                 if (player != null) {
                     player.setCastSourceIdWithAlternateMana(objectId, null, card.getSpellAbility().getCosts());
@@ -325,13 +375,11 @@ class AminatousAuguryCastFromExileEffect extends AsThoughEffectImpl {
             }
         }
         return false;
-
-         */
     }
 
-    /*
-    @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
+
+    //@Override
+    public boolean applies_hack(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
 
         //System.out.println("Aminatou Applies Override");
 
@@ -356,7 +404,7 @@ class AminatousAuguryCastFromExileEffect extends AsThoughEffectImpl {
             if (card != null  && game.getState().getZone(sourceId) == Zone.EXILED) {
                 EnumSet<CardType> unusedCardTypes = EnumSet.noneOf(CardType.class);
                 for (CardType cardT : card.getCardType()) {
-                    System.out.println("Card Types -- " +  card.getCardType().toString());
+                    System.out.println("Card Types -- " +  cardT.toString());
                     if (!usedCardTypes.contains(cardT)) {
                         unusedCardTypes.add(cardT);
                     }
@@ -364,6 +412,9 @@ class AminatousAuguryCastFromExileEffect extends AsThoughEffectImpl {
 
                 for ( CardType xCard : unusedCardTypes){
                     System.out.println("Unused card types -- " + xCard.toString());
+                }
+                for ( CardType xCard : usedCardTypes){
+                    System.out.println("--Used card types -- " + xCard.toString());
                 }
 
                 if (!unusedCardTypes.isEmpty()) {
@@ -389,7 +440,7 @@ class AminatousAuguryCastFromExileEffect extends AsThoughEffectImpl {
                         }
                         usedCardTypes.addAll(unusedCardTypes);
                         player.setCastSourceIdWithAlternateMana(sourceId, null, null);
-                        game.getState().setValue(source.getSourceId().toString() + "cardTypes", usedCardTypes);
+                        game.getState().setValue(source.getSourceId().toString() + "cardTypes", usedCardTypes); //add to list of cast cards
                     }
                     return true;
                 }
@@ -397,6 +448,6 @@ class AminatousAuguryCastFromExileEffect extends AsThoughEffectImpl {
         }
         return false;
     }
-    */
+
 
 }
