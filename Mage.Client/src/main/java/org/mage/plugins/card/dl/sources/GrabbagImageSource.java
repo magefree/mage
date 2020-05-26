@@ -18,14 +18,13 @@ public enum GrabbagImageSource implements CardImageSource {
 
     private static final Set<String> supportedSets = new LinkedHashSet<String>() {
         {
-            add("PTC");
             add("SWS");
         }
     };
 
     @Override
     public String getSourceName() {
-        return "";
+        return "Grabbag";
     }
 
     @Override
@@ -76,16 +75,6 @@ public enum GrabbagImageSource implements CardImageSource {
             return;
         }
         singleLinks = new HashMap<>();
-        singleLinks.put("PTC/Arbiter of the Ideal", "MTG/BNG/en/promo/ArbiterOfTheIdeal.jpg");
-        singleLinks.put("PTC/Courser of Kruphix", "MTG/BNG/en/promo/CourserOfKruphix.jpg");
-        singleLinks.put("PTC/Eater of Hope", "MTG/BNG/en/promo/EaterOfHope.jpg");
-        singleLinks.put("PTC/Fated Return", "MTG/BNG/en/promo/FatedReturn.jpg");
-        singleLinks.put("PTC/Forgestoker Dragon", "MTG/BNG/en/promo/ForgestokerDragon.jpg");
-        singleLinks.put("PTC/Nessian Wilds Ravager", "MTG/BNG/en/promo/NessianWildsRavager.jpg");
-        singleLinks.put("PTC/Pain Seer", "MTG/BNG/en/promo/PainSeer.jpg");
-        singleLinks.put("PTC/Silent Sentinel", "MTG/BNG/en/promo/SilentSentinel.jpg");
-        singleLinks.put("PTC/Tromokratis", "MTG/BNG/en/promo/Tromokratis.jpg");
-
         singleLinks.put("SWS/AAT-1", "CqmDY8V.jpg");
         singleLinks.put("SWS/Acklay of the Arena", "ESVRm6F.jpg");
         singleLinks.put("SWS/Acquire Target", "FOskB4q.jpg");
@@ -478,7 +467,7 @@ public enum GrabbagImageSource implements CardImageSource {
         if (card.getSet().equals("MTG")) {
             return "http://static.starcitygames.com/sales/cardscans/";
         } else if (card.getSet().equals("SWS")) {
-            return "http://i.imgur.com/";
+            return "https://i.imgur.com/";
         } else {
             return "http://magiccards.info/scans/en/";
         }
