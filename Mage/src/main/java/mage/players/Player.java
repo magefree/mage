@@ -152,8 +152,6 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean isPassed();
 
-    boolean isEmptyDraw();
-
     void pass(Game game);
 
     void resetPassed();

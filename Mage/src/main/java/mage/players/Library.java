@@ -239,6 +239,8 @@ public class Library implements Serializable {
 
     /**
      * Tests only -- find card position in library
+     * @param cardId
+     * @return 
      */
     public int getCardPosition(UUID cardId) {
         UUID[] list = library.toArray(new UUID[0]);

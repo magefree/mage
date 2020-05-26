@@ -289,11 +289,6 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public boolean isEmptyDraw() {
-        return false;
-    }
-
-    @Override
     public void pass(Game game) {
 
     }

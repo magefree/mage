@@ -2339,11 +2339,6 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean isEmptyDraw() {
-        return library.isEmptyDraw();
-    }
-
-    @Override
     public void resetPassed() {
         this.passed = this.loses || this.hasLeft();
     }

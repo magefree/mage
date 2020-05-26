@@ -1848,7 +1848,7 @@ public abstract class GameImpl implements Game, Serializable {
         for (Player player : state.getPlayers().values()) {
             if (!player.hasLost()
                     && ((player.getLife() <= 0 && player.canLoseByZeroOrLessLife())
-                    || player.isEmptyDraw()
+                    || player.getLibrary().isEmptyDraw()
                     || player.getCounters().getCount(CounterType.POISON) >= 10)) {
                 player.lost(this);
             }

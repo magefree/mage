@@ -2953,11 +2953,6 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean isEmptyDraw() {
-        return computerPlayer.isEmptyDraw();
-    }
-
-    @Override
     public void resetPassed() {
         computerPlayer.resetPassed();
     }
