@@ -2,22 +2,37 @@ package mage.cards.q;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.ActivatedAbilityImpl;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.Ability;
+import mage.abilities.condition.AndCondition;
+import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.AttackedThisStepCondition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.costs.AlternativeCostSourceAbility;
+import mage.abilities.decorator.ConditionalAsThoughEffect;
 import mage.abilities.effects.common.continuous.CastAsThoughItHadFlashSourceEffect;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.game.Game;
-import mage.game.combat.CombatGroup;
+import mage.filter.predicate.Predicates;
+import mage.watchers.common.PlayerAttackedStepWatcher;
 
 /**
  *
  * @author Plopman
  */
 public final class QasaliAmbusher extends CardImpl {
+
+    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent();
+
+    static {
+        filter.add(Predicates.and(SubType.FOREST.getPredicate(), SubType.PLAINS.getPredicate()));
+    }
+
+    private static final Condition condition =
+            new AndCondition("If a creature is attacking you and you control a Forest and a Plains",
+                    AttackedThisStepCondition.instance, new PermanentsOnTheBattlefieldCondition(filter));
 
     public QasaliAmbusher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{W}");
@@ -30,10 +45,13 @@ public final class QasaliAmbusher extends CardImpl {
         // Reach
         this.addAbility(ReachAbility.getInstance());
 
-        // If a creature is attacking you and you control a Forest and a Plains, 
+        // If a creature is attacking you and you control a Forest and a Plains,
         // you may cast Qasali Ambusher without paying its mana cost and as though it had flash.
-        this.addAbility(new QasaliAmbusherAbility());
-
+        Ability ability = new AlternativeCostSourceAbility(null, condition);
+        ability.addEffect(new ConditionalAsThoughEffect(new CastAsThoughItHadFlashSourceEffect(Duration.EndOfGame), condition)
+                .setText("you may cast {this} without paying its mana cost and as though it had flash"));
+        ability.addWatcher(new PlayerAttackedStepWatcher());
+        this.addAbility(ability);
     }
 
     public QasaliAmbusher(final QasaliAmbusher card) {
@@ -43,58 +61,5 @@ public final class QasaliAmbusher extends CardImpl {
     @Override
     public QasaliAmbusher copy() {
         return new QasaliAmbusher(this);
-    }
-}
-
-class QasaliAmbusherAbility extends ActivatedAbilityImpl {
-
-    private static final FilterControlledLandPermanent filterPlains = new FilterControlledLandPermanent();
-    private static final FilterControlledLandPermanent filterForest = new FilterControlledLandPermanent();
-
-    static {
-        filterPlains.add(SubType.PLAINS.getPredicate());
-        filterForest.add(SubType.FOREST.getPredicate());
-    }
-
-    public QasaliAmbusherAbility() {
-        super(Zone.HAND, new CastAsThoughItHadFlashSourceEffect(Duration.EndOfGame), new ManaCostsImpl());
-        this.timing = TimingRule.INSTANT;
-        this.usesStack = false;
-    }
-
-    public QasaliAmbusherAbility(final QasaliAmbusherAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public QasaliAmbusherAbility copy() {
-        return new QasaliAmbusherAbility(this);
-    }
-
-    @Override
-    public ActivationStatus canActivate(UUID playerId, Game game) {
-        if (!game.getBattlefield().getActivePermanents(filterPlains,
-                this.getControllerId(), this.getSourceId(), game).isEmpty()
-                && !game.getBattlefield().getActivePermanents(filterForest,
-                        this.getControllerId(), this.getSourceId(), game).isEmpty()) {
-            for (CombatGroup group : game.getCombat().getGroups()) {
-                if (isControlledBy(group.getDefenderId())) {
-                    return super.canActivate(playerId, game);
-                }
-            }
-        }
-        return ActivationStatus.getFalse();
-    }
-
-    @Override
-    public String getRule(boolean all) {
-        return this.getRule();
-    }
-
-    @Override
-    public String getRule() {
-        return "If a creature is attacking you and you control a Forest and "
-                + "a Plains, you may cast {this} without paying its mana "
-                + "cost and as though it had flash.";
     }
 }
