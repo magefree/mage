@@ -45,7 +45,7 @@ public class NewPlayerPanel extends javax.swing.JPanel {
         this.txtPlayerName.setEditable(false);
         this.txtPlayerName.setEnabled(false);
     }
-
+    
     protected void playerLoadDeck() {
         String lastFolder = MageFrame.getPreferences().get("lastDeckFolder", "");
         if (!lastFolder.isEmpty()) {
