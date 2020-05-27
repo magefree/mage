@@ -171,7 +171,6 @@ class AminatousAuguryCastFromExileEffect extends AsThoughEffectImpl {
             if (card != null && Collections.disjoint(usedCardTypes,card.getCardType())) {
                 Player player = game.getPlayer(affectedControllerId);
                 if (player != null) {
-                    //This still has bug where you can cast spells that require additional non-mana costs
                     player.setCastSourceIdWithAlternateMana(objectId, null, card.getSpellAbility().getCosts());
                     return true;
                 }
