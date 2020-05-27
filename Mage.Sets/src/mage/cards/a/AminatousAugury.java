@@ -77,15 +77,8 @@ class AminatousAuguryEffect extends OneShotEffect {
             Set<Card> cards = player.getLibrary().getTopCards(game, 8);
             player.moveCards(cards, Zone.EXILED, source, game);
 
-            //ExileZone auguryExileZone = game.getExile().get
-             //       getExileZone(source.getSourceId());
-            //if (auguryExileZone == null) {
-            //    return true;
-            //}
-
-            //try method from collected conjuring
+            //you may put a land card from among them onto the battlefield
             Cards aminatouExileGroup = new CardsImpl(cards);
-
             if(aminatouExileGroup.getCards(StaticFilters.FILTER_CARD_LAND, source.getSourceId(), source.getControllerId(), game).size() > 0 ){
                 if (player.chooseUse(Outcome.PutCardInPlay, "Put a land from among exiled cards on to the battlefield?", source, game)) {
                     TargetCard targetLandCard = new TargetCard(1, Zone.EXILED, StaticFilters.FILTER_CARD_LAND);
@@ -93,27 +86,11 @@ class AminatousAuguryEffect extends OneShotEffect {
                         Card landCard = game.getCard(targetLandCard.getFirstTarget());
                         if (landCard == null) {
                             player.moveCards(landCard, Zone.BATTLEFIELD, source, game, false, false, false, null);
-                            //game.getState().setValue("PlayFromNotOwnHandZone" + landCard.getId(), Boolean.TRUE);
                             aminatouExileGroup.remove(landCard);
                         }
                     }
                 }
             }
-
-
-            /*
-            //you may put a land card from among them onto the battlefield
-            TargetCardInExile targetLand = new TargetCardInExile(StaticFilters.FILTER_CARD_LAND_A);
-            if (targetLand!=null &&
-                    player.chooseUse(Outcome.PutCardInPlay, "Put a land from among exiled cards onto the battlefield?", source, game)) {
-                if (player.choose(Outcome.PutCardInPlay, targetLand, source.getSourceId(), game)) {
-                    Card card = game.getCard(targetLand.getFirstTarget());
-                    if (card != null) {
-                        player.moveCards(card, Zone.BATTLEFIELD, source, game, false, false, false, null);
-                    }
-                }
-            }
-           */
 
             // Track all non-land cards put into exile with Aminatou
             Set<Card> aminatouCards = new HashSet<>();
@@ -122,6 +99,7 @@ class AminatousAuguryEffect extends OneShotEffect {
                     aminatouCards.add(card);
                 }
             }
+            //use unique id in case of multiple Aminatou's
             game.getState().setValue(source.getSourceId().toString() + "Cards", aminatouCards);
 
             //apply effect to each card
@@ -164,7 +142,7 @@ class AminatousAuguryCastFromExileEffect extends AsThoughEffectImpl {
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
 
-        //cards put into exile using Aminatou -- from apply
+        //cards put into exile using Aminatou -- created in AminatouAuguryEffect -> Apply
         Set<Card> aminatouCards = (Set<Card>) game.getState().getValue(source.getSourceId().toString() + "Cards");
 
         //Set to track which card types from the Aminatou cards have already been cast
@@ -180,7 +158,7 @@ class AminatousAuguryCastFromExileEffect extends AsThoughEffectImpl {
             Iterator<Card> chkCardCastIterator = aminatouCards.iterator();
             while(chkCardCastIterator.hasNext()){
                 Card chkCardCast = chkCardCastIterator.next();
-                Spell spell = game.getStack().getSpell(chkCardCast.getId());
+                Spell spell = game.getStack().getSpell(chkCardCast.getId()); //check if spell was cast
                 if (spell != null) {
                     usedCardTypes.addAll(chkCardCast.getCardType());
                 }
@@ -188,11 +166,12 @@ class AminatousAuguryCastFromExileEffect extends AsThoughEffectImpl {
             game.getState().setValue(source.getSourceId().toString() + "UsedCardTypes", usedCardTypes); //update changes
 
 
-            // make all eligible card types zero mana to cast
+            // make all eligible cards types zero mana cost
             Card card = game.getCard(objectId);
             if (card != null && Collections.disjoint(usedCardTypes,card.getCardType())) {
                 Player player = game.getPlayer(affectedControllerId);
                 if (player != null) {
+                    //This still has bug where you can cast spells that require additional non-mana costs
                     player.setCastSourceIdWithAlternateMana(objectId, null, card.getSpellAbility().getCosts());
                     return true;
                 }
