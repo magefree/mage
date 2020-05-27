@@ -1,24 +1,56 @@
 package mage.client.themes;
 
-import mage.remote.Connection;
-
 import java.awt.*;
 
 public enum ThemeType {
+    // https://docs.oracle.com/javase/tutorial/uiswing/lookandfeel/_nimbusDefaults.html
     DEFAULT("Default Theme",
             "",
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            new Color(169,176,190), // nimbusBlueGrey
+            new Color(214,217,223), // control
+            new Color(255,255,255), // nimbusLightBackground
+            new Color(242,242,189), // info
+            new Color(51,98,140), // nimbusBase
+            null, // mageToolbar
+            new Color(200, 200, 180, 200), // playerPanel_inactiveBackgroundColor
+            new Color(200, 255, 200, 200), // playerPanel_activeBackgroundColor
+            new Color(131, 94, 83, 200) // playerPanel_deadBackgroundColor
+    ),
+    GREY("GREY",
+            "grey-theme/",
+            false,
+            false,
+            false,
+            false,
+            false,
+            true,
+            true,
+            new Color(158, 158, 158), // nimbusBlueGrey
+            new Color(212, 212, 212), // control
+            new Color(215, 215, 215), // nimbusLightBackground
+            new Color(189, 189, 164), // info
+            new Color(102, 102, 102), // nimbusBase
+            null, // mageToolbar
+            new Color(172, 172, 172, 200), // playerPanel_inactiveBackgroundColor
+            new Color(180, 234, 180, 200), // playerPanel_activeBackgroundColor
+            new Color(99, 99, 99, 200) // playerPanel_deadBackgroundColor
     ),
     SUNSET_VAPORWAVE("Sunset Vaporwave",
             "16bit-theme/",
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            false,
             new Color(246, 136, 158),
             new Color(243, 233, 164),
             new Color(204, 236, 201),
@@ -31,6 +63,13 @@ public enum ThemeType {
     ),
     COFFEE("Coffee",
             "coffee-theme/",
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
             new Color(219, 193, 172), // nimbusBlueGrey
             new Color(182, 157, 135), // control
             new Color(219, 193, 172), // nimbusLightBackground
@@ -43,6 +82,13 @@ public enum ThemeType {
     ),
     ISLAND("Island",
             "island-theme/",
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            false,
             new Color(172, 197, 219), // nimbusBlueGrey
             new Color(135, 158, 182), // control
             new Color(172, 197, 219), // nimbusLightBackground
@@ -56,6 +102,13 @@ public enum ThemeType {
 
     private final String name;
     private final String path;
+    private final boolean hasBackground;
+    private final boolean hasLoginBackground;
+    private final boolean hasBattleBackground;
+    private final boolean hasSkipButtons;
+    private final boolean hasPhaseIcons;
+    private final boolean hasWinLossImages;
+    private final boolean skipShortcutsVisible; // Whether or not to display skip button shortcuts
     private final Color nimbusBlueGrey;  // buttons, scrollbar background, disabled inputs
     private final Color control;  // window bg
     private final Color nimbusLightBackground; // inputs, table rows
@@ -68,6 +121,13 @@ public enum ThemeType {
 
     ThemeType(String name,
               String path,
+              boolean hasBackground,
+              boolean hasLoginBackground,
+              boolean hasBattleBackground,
+              boolean hasSkipButtons,
+              boolean hasPhaseIcons,
+              boolean hasWinLossImages,
+              boolean skipShortcutsVisible,
               Color nimbusBlueGrey,
               Color control,
               Color nimbusLightBackground,
@@ -80,6 +140,13 @@ public enum ThemeType {
     ) {
         this.name = name;
         this.path = path;
+        this.hasBackground = hasBackground;
+        this.hasLoginBackground = hasLoginBackground;
+        this.hasBattleBackground = hasBattleBackground;
+        this.hasSkipButtons = hasSkipButtons;
+        this.hasPhaseIcons = hasPhaseIcons;
+        this.hasWinLossImages = hasWinLossImages;
+        this.skipShortcutsVisible = skipShortcutsVisible;
         this.nimbusBlueGrey = nimbusBlueGrey;
         this.control = control;
         this.nimbusLightBackground = nimbusLightBackground;
@@ -87,7 +154,7 @@ public enum ThemeType {
         this.nimbusBase = nimbusBase;
         this.mageToolbar = mageToolbar;
         this.playerPanel_activeBackgroundColor = playerPanel_activeBackgroundColor;
-        this.playerPanel_deadBackgroundColor = playerPanel_activeBackgroundColor;
+        this.playerPanel_deadBackgroundColor = playerPanel_deadBackgroundColor;
         this.playerPanel_inactiveBackgroundColor = playerPanel_inactiveBackgroundColor;
     }
 
@@ -111,6 +178,34 @@ public enum ThemeType {
 
     public String getName() {
         return name;
+    }
+
+    public boolean hasBackground() {
+        return hasBackground;
+    }
+
+    public boolean hasLoginBackground() {
+        return hasLoginBackground;
+    }
+
+    public boolean hasBattleBackground() {
+        return hasBattleBackground;
+    }
+
+    public boolean hasSkipButtons() {
+        return hasSkipButtons;
+    }
+
+    public boolean hasPhaseIcons() {
+        return hasPhaseIcons;
+    }
+
+    public boolean hasWinLossImages() {
+        return hasWinLossImages;
+    }
+
+    public boolean isSkipShortcutsVisible() {
+        return skipShortcutsVisible;
     }
 
     public Color getNimbusBlueGrey() {

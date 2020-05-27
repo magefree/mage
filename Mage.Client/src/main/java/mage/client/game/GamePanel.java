@@ -1617,7 +1617,7 @@ public final class GamePanel extends javax.swing.JPanel {
         txtHoldPriority.setVisible(false);
 
         // Some themes don't have button text
-        if (!this.currentTheme.equals(ThemeType.DEFAULT)) {
+        if (!this.currentTheme.isSkipShortcutsVisible()) {
             btnToggleMacro = new JButton();
             btnCancelSkip = new JButton();
             btnSkipToNextTurn = new JButton();

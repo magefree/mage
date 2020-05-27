@@ -35,8 +35,16 @@ public enum ImageManagerImpl implements ImageManager {
         LOGGER = Logger.getLogger(ImageManagerImpl.class);
         ThemeType currentTheme = ThemeType.valueByName(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_THEME, "Default Theme"));
         LOGGER.info("themeType: " + currentTheme.toString());
-        this.buttonPath = "/buttons/" + currentTheme.getPath();
-        this.phasePath = "/phases/" + currentTheme.getPath();
+        this.buttonPath = "/buttons/";
+        this.phasePath = "/phases/";
+
+        if (currentTheme.hasSkipButtons()) {
+            this.buttonPath = "/buttons/" + currentTheme.getPath();
+        }
+
+        if (currentTheme.hasPhaseIcons()) {
+            this.phasePath = "/phases/" + currentTheme.getPath();
+        }
 
         String[] phases = {"Untap", "Upkeep", "Draw", "Main1",
             "Combat_Start", "Combat_Attack", "Combat_Block", "Combat_Damage", "Combat_End",

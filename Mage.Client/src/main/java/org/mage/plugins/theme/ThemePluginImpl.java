@@ -108,10 +108,13 @@ public class ThemePluginImpl implements ThemePlugin {
     }
 
     // Sets background for in-battle
+    // loadbuffer_default - Only apply theme background if no custom user background set
     private BufferedImage loadbuffer_default() throws IOException {
-        String filename = "/background/dragon.png";
-        // Only apply theme background if no custom user background set
-        if (this.currentTheme != ThemeType.DEFAULT) {
+        String filename = "/background/battle-background.png";
+        // Use theme's battle background, fallback to theme's default background. If neither, use default theme's bg
+        if (this.currentTheme.hasBattleBackground()) {
+            filename = "/background/" + this.currentTheme.getPath() + "battle-background.png";
+        } else if (this.currentTheme.hasBackground()) {
             filename = "/background/" + this.currentTheme.getPath() + "background.png";
         }
         BufferedImage res;
@@ -165,7 +168,7 @@ public class ThemePluginImpl implements ThemePlugin {
                 try {
                     if (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_BACKGROUND_IMAGE_DEFAULT, "true").equals("true")) {
                         // Only apply theme background if no custom user background set
-                        if (this.currentTheme != ThemeType.DEFAULT) {
+                        if (this.currentTheme.hasBackground()) {
                             filename = "/background/" + this.currentTheme.getPath() + "background.png";
                         }
 

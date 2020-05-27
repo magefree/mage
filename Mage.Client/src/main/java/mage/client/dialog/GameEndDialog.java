@@ -41,7 +41,10 @@
       */
      public GameEndDialog(GameEndView gameEndView) {
          ThemeType currentTheme = ThemeType.valueByName(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_THEME, "Default Theme"));
-         String winlossPath = "/winloss/" + currentTheme.getPath();
+         String winlossPath = "/winloss/";
+         if (currentTheme.hasWinLossImages()) {
+             winlossPath = "/winloss/" + currentTheme.getPath();
+         }
          initComponents();
          this.modal = true;
 
