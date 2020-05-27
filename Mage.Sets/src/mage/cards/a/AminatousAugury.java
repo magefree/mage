@@ -10,12 +10,10 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandCard;
-import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetCard;
-import mage.target.common.TargetCardInExile;
 import mage.target.targetpointer.FixedTarget;
 
 
