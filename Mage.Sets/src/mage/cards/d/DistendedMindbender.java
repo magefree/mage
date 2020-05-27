@@ -24,6 +24,7 @@ import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetOpponent;
 
 import java.util.UUID;
+import mage.constants.Zone;
 
 /**
  * @author fireshoes
@@ -91,13 +92,13 @@ class DistendedMindbenderEffect extends OneShotEffect {
             return false;
         }
         opponent.revealCards(source, opponent.getHand(), game);
-        TargetCard targetThreeOrLess = new TargetCardInHand(1, filterThreeOrLess);
-        TargetCard targetFourOrGreater = new TargetCardInHand(1, filterFourOrGreater);
+        TargetCard targetThreeOrLess = new TargetCard(1, Zone.HAND, filterThreeOrLess);
+        TargetCard targetFourOrGreater = new TargetCard(1, Zone.HAND, filterFourOrGreater);
         Cards toDiscard = new CardsImpl();
-        if (controller.choose(Outcome.Benefit, opponent.getHand(), targetThreeOrLess, game)) {
+        if (controller.chooseTarget(Outcome.Benefit, opponent.getHand(), targetThreeOrLess, source, game)) {
             toDiscard.addAll(targetThreeOrLess.getTargets());
         }
-        if (controller.choose(Outcome.Benefit, opponent.getHand(), targetFourOrGreater, game)) {
+        if (controller.chooseTarget(Outcome.Benefit, opponent.getHand(), targetFourOrGreater, source, game)) {
             toDiscard.addAll(targetFourOrGreater.getTargets());
         }
         opponent.discard(toDiscard, source, game);
