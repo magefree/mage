@@ -38,7 +38,8 @@ public final class BlastZone extends CardImpl {
         // Blast Zone enters the battlefield with a charge counter on it.
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.CHARGE.createInstance(1))
-        ));
+                ,"with a charge counter")
+        );
 
         // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());

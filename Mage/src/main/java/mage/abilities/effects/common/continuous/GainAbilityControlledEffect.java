@@ -26,11 +26,11 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl {
     protected boolean forceQuotes = false;
 
     public GainAbilityControlledEffect(Ability ability, Duration duration) {
-        this(ability, duration, StaticFilters.FILTER_PERMANENT);
+        this(ability, duration, StaticFilters.FILTER_PERMANENTS);
     }
 
     public GainAbilityControlledEffect(CompoundAbility ability, Duration duration) {
-        this(ability, duration, StaticFilters.FILTER_PERMANENT);
+        this(ability, duration, StaticFilters.FILTER_PERMANENTS);
     }
 
     public GainAbilityControlledEffect(Ability ability, Duration duration, FilterPermanent filter) {
@@ -154,6 +154,7 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl {
 
     /**
      * Add quotes to gains abilities (by default static abilities don't have it)
+     * @return 
      */
     public GainAbilityControlledEffect withForceQuotes() {
         this.forceQuotes = true;
