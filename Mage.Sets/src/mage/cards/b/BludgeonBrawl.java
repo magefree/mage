@@ -122,8 +122,8 @@ class BludgeonBrawlGainAbilityEffect extends ContinuousEffectImpl {
                 Permanent permanent = game.getPermanent(permanentId);
                 if (permanent != null) {
                     int convertedManaCost = permanent.getConvertedManaCost();
-                    permanent.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(convertedManaCost)), game);
-                    permanent.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(convertedManaCost, 0)), game);
+                    permanent.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(convertedManaCost)), source.getSourceId(), game);
+                    permanent.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(convertedManaCost, 0)), source.getSourceId(), game);
                 }
             }
             return true;

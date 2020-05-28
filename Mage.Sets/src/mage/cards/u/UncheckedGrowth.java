@@ -63,7 +63,7 @@ public final class UncheckedGrowth extends CardImpl {
             for (UUID permanentId : targetPointer.getTargets(game, source)) {
                 Permanent permanent = game.getPermanent(permanentId);
                 if (permanent != null && permanent.hasSubtype(SubType.SPIRIT, game)) {
-                    permanent.addAbility(TrampleAbility.getInstance(), game);
+                    permanent.addAbility(TrampleAbility.getInstance(), source.getSourceId(), game);
                     affectedTargets++;
                 }
             }

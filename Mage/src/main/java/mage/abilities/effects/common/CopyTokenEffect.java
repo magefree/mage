@@ -41,7 +41,7 @@ public class CopyTokenEffect extends ContinuousEffectImpl {
         }
         permanent.getAbilities().clear();
         for (Ability ability : token.getAbilities()) {
-            permanent.addAbility(ability, game);
+            permanent.addAbility(ability, source.getSourceId(), game);
         }
         permanent.getPower().setValue(token.getPower().getValue());
         permanent.getToughness().setValue(token.getToughness().getValue());

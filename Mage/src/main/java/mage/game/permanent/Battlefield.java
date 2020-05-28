@@ -327,16 +327,16 @@ public class Battlefield implements Serializable {
         }
     }
 
-    public List<Permanent> getPhasedIn(UUID controllerId) {
+    public List<Permanent> getPhasedIn(Game game, UUID controllerId) {
         return field.values()
                 .stream()
-                .filter(perm -> perm.getAbilities().containsKey(PhasingAbility.getInstance().getId())
+                .filter(perm -> perm.hasAbility(PhasingAbility.getInstance(), game)
                 && perm.isPhasedIn()
                 && perm.isControlledBy(controllerId))
                 .collect(Collectors.toList());
     }
 
-    public List<Permanent> getPhasedOut(UUID controllerId) {
+    public List<Permanent> getPhasedOut(Game game, UUID controllerId) {
         return field.values()
                 .stream()
                 .filter(perm -> !perm.isPhasedIn() && perm.isControlledBy(controllerId))

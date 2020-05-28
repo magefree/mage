@@ -59,7 +59,7 @@ public class PermanentToken extends PermanentImpl {
         } else {
             // first time -> create ContinuousEffects only once
             for (Ability ability : token.getAbilities()) {
-                this.addAbility(ability, game);
+                this.addAbility(ability, null, game);
             }
         }
         this.abilities.setControllerId(this.controllerId);
