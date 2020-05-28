@@ -365,7 +365,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    @Deprecated // use addAbility(Ability ability, UUID sourceId, Game game) instead
     public void addAbility(Ability ability, UUID sourceId, Game game, boolean createNewId) {
         // singleton abilities -- only one instance
         // other abilities -- any amount of instances
