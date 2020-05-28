@@ -938,6 +938,10 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public boolean hasSourceObjectAbility(Game game, MageObject source, GameEvent event) {
+        // if source object have this ability
+        // uses for ability.isInUseableZone
+        // replacement and other continues effects can be without source, but active (must return true)
+
         MageObject object = source;
         // for singleton abilities like Flying we can't rely on abilities' source because it's only once in continuous effects
         // so will use the sourceId of the object itself that came as a parameter if it is not null
@@ -949,16 +953,10 @@ public abstract class AbilityImpl implements Ability {
         }
         if (object != null) {
             if (object instanceof Permanent) {
-                if (!((Permanent) object).getAbilities(game).contains(this)) {
-                    return false;
-                }
-                return ((Permanent) object).isPhasedIn();
-            } else if (object instanceof Card) {
-                return ((Card) object).getAbilities(game).contains(this);
-            } else if (!object.getAbilities().contains(this)) { // not sure which object it can still be
-                // check if it's an ability that is temporary gained to a card
-                Abilities<Ability> otherAbilities = game.getState().getAllOtherAbilities(this.getSourceId());
-                return otherAbilities != null && otherAbilities.contains(this);
+                return object.hasAbility(this, game) && ((Permanent) object).isPhasedIn();
+            } else {
+                // cards and other objects
+                return object.hasAbility(this, game);
             }
         }
         return true;
@@ -1263,5 +1261,18 @@ public abstract class AbilityImpl implements Ability {
     @Override
     public Outcome getCustomOutcome() {
         return this.customOutcome;
+    }
+
+    @Override
+    public boolean isSameInstance(Ability ability) {
+        // same instance (by mtg rules) = same object, ID or class+text (you can't check class only cause it can be different by params/text)
+        if (ability == null) {
+            return false;
+        }
+
+        return (this == ability)
+                || (this.getId().equals(ability.getId()))
+                || (this.getOriginalId().equals(ability.getOriginalId()))
+                || (this.getClass() == ability.getClass() && this.getRule(true).equals(ability.getRule(true)));
     }
 }

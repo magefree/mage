@@ -83,7 +83,7 @@ class AnjeFalkenrathTriggeredAbility extends TriggeredAbilityImpl {
         if (card == null) {
             return false;
         }
-        return card.getAbilities(game).stream().anyMatch(ability -> ability instanceof MadnessAbility);
+        return card.getAbilities(game).containsClass(MadnessAbility.class);
     }
 
     @Override

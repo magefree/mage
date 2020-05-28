@@ -133,17 +133,14 @@ class BronzehideLionContinuousEffect extends ContinuousEffectImpl {
         if (game.getState().getZoneChangeCounter(source.getSourceId()) > zoneChangeCounter) {
             discard();
         }
-        MageObject sourceObject = game.getPermanent(source.getSourceId());
+        Permanent sourceObject = game.getPermanent(source.getSourceId());
         if (sourceObject == null) {
             sourceObject = game.getPermanentEntering(source.getSourceId());
         }
         if (sourceObject == null) {
             return false;
         }
-        if (!(sourceObject instanceof Permanent)) {
-            return true;
-        }
-        Permanent lion = (Permanent) sourceObject;
+        Permanent lion = sourceObject;
         switch (layer) {
             case TypeChangingEffects_4:
                 lion.getCardType().clear();
@@ -158,7 +155,7 @@ class BronzehideLionContinuousEffect extends ContinuousEffectImpl {
                         toRemove.add(ability);
                     }
                 }
-                lion.getAbilities(game).removeAll(toRemove);
+                lion.removeAbilities(toRemove, source.getSourceId(), game);
 
                 lion.getSpellAbility().getTargets().clear();
                 lion.getSpellAbility().getEffects().clear();

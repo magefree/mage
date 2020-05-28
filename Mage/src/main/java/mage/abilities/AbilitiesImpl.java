@@ -232,7 +232,8 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
             if (ability.getId().equals(test.getId())) {
                 return true;
             }
-            if (ability.getOriginalId().equals(test.getId())) {
+            if (ability.getOriginalId().equals(test.getOriginalId())) {
+                // on ability resolve: engine creates ability's copy and generates newId(), so you must use originalId to find that ability in card later
                 return true;
             }
             if (ability instanceof MageSingleton && test instanceof MageSingleton && ability.getRule().equals(test.getRule())) {
@@ -243,7 +244,7 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
     }
 
     @Override
-    public boolean containsRule(T ability) {
+    public boolean containsRule(T ability) { // TODO: remove
         return stream().anyMatch(rule -> rule.getRule().equals(ability.getRule()));
     }
 
@@ -262,7 +263,7 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
     }
 
     @Override
-    public boolean containsKey(UUID abilityId) {
+    public boolean containsKey(UUID abilityId) { // TODO: remove
         return stream().anyMatch(ability -> abilityId.equals(ability.getId()));
     }
 
