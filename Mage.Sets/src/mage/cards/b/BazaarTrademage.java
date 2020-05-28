@@ -28,7 +28,7 @@ public final class BazaarTrademage extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Bazaar Trademage enters the battlefield, draw two cards, then discard three cards.
-        this.addAbility(new EntersBattlefieldAbility(new DrawDiscardControllerEffect(2, 3)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawDiscardControllerEffect(2, 3)));
     }
 
     private BazaarTrademage(final BazaarTrademage card) {
