@@ -524,8 +524,8 @@ public class Spell extends StackObjImpl implements Card {
     }
 
     @Override
-    public boolean hasAbility(UUID abilityId, Game game) {
-        return card.hasAbility(abilityId, game);
+    public boolean hasAbility(Ability ability, Game game) {
+        return card.hasAbility(ability, game);
     }
 
     @Override

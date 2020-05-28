@@ -171,8 +171,8 @@ public abstract class Designation implements MageObject {
     }
 
     @Override
-    public boolean hasAbility(UUID abilityId, Game game) {
-        return abilites.containsKey(abilityId);
+    public boolean hasAbility(Ability ability, Game game) {
+        return this.getAbilities().contains(ability);
     }
 
     @Override

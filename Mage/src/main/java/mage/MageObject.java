@@ -41,9 +41,13 @@ public interface MageObject extends MageItem, Serializable {
 
     Set<SuperType> getSuperType();
 
+    /**
+     * For cards: return basic abilities (without dynamic added)
+     * For permanents: return all abilities (dynamic ability inserts into permanent)
+     */
     Abilities<Ability> getAbilities();
 
-    boolean hasAbility(UUID abilityId, Game game);
+    boolean hasAbility(Ability ability, Game game);
 
     ObjectColor getColor(Game game);
 
@@ -180,9 +184,9 @@ public interface MageObject extends MageItem, Serializable {
         }
 
         if (this.isCreature() && otherCard.isCreature()) {
-            if (this.getAbilities().contains(ChangelingAbility.getInstance())
+            if (this.hasAbility(ChangelingAbility.getInstance(), game)
                     || this.isAllCreatureTypes()
-                    || otherCard.getAbilities().contains(ChangelingAbility.getInstance())
+                    || otherCard.hasAbility(ChangelingAbility.getInstance(), game)
                     || otherCard.isAllCreatureTypes()) {
                 return true;
             }

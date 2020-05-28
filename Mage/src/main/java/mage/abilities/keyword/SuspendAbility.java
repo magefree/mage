@@ -213,7 +213,7 @@ public class SuspendAbility extends SpecialAction {
         }
         MageObject object = game.getObject(sourceId);
         return new ActivationStatus(object.isInstant()
-                || object.hasAbility(FlashAbility.getInstance().getId(), game)
+                || object.hasAbility(FlashAbility.getInstance(), game)
                 || null != game.getContinuousEffects().asThough(sourceId, 
                         AsThoughEffectType.CAST_AS_INSTANT, this, playerId, game)
                 || game.canPlaySorcery(playerId), null);
@@ -356,6 +356,13 @@ class SuspendPlayCardEffect extends OneShotEffect {
                     }
                 }
                 // remove the abilities from the card
+                // TODO: will not work with Adventure Cards and another auto-generated abilities list
+                // TODO: is it work after blink or return to hand?
+                /*
+                 bug example:
+                 Epochrasite bug: It comes out of suspend, is cast and enters the battlefield. THEN if it's returned to
+                 its owner's hand from battlefield, the bounced Epochrasite can't be cast for the rest of the game.
+                 */
                 card.getAbilities().removeAll(abilitiesToRemove);
             }
             // cast the card for free

@@ -88,7 +88,7 @@ class ReturnFromExtinctionTarget extends TargetCardInYourGraveyard {
             return false;
         }
         for (Card card : player.getGraveyard().getCards(filter, sourceId, sourceControllerId, game)) {
-            if (card.isAllCreatureTypes() || card.getAbilities(game).contains(ChangelingAbility.getInstance())) {
+            if (card.isAllCreatureTypes() || card.hasAbility(ChangelingAbility.getInstance(), game)) {
                 if (!subTypes.isEmpty()) {
                     return true;
                 } else {

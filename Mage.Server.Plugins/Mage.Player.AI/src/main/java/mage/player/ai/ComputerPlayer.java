@@ -1321,7 +1321,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                         if (ability != null && ability.canActivate(playerId, game).canActivate()
                                 && !game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, ability.getSourceId(), ability.getSourceId(), playerId), ability, game, true)) {
                             if (card.getCardType().contains(CardType.INSTANT)
-                                    || card.hasAbility(FlashAbility.getInstance().getId(), game)) {
+                                    || card.hasAbility(FlashAbility.getInstance(), game)) {
                                 playableInstant.add(card);
                             } else {
                                 playableNonInstant.add(card);

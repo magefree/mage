@@ -306,7 +306,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                 || getAttackers().size() <= 1) {
             return;
         }
-        boolean canBand = attacker.getAbilities().containsKey(BandingAbility.getInstance().getId());
+        boolean canBand = attacker.hasAbility(BandingAbility.getInstance(), game);
         List<Ability> bandsWithOther = new ArrayList<>();
         for (Ability ability : attacker.getAbilities()) {
             if (ability.getClass().equals(BandsWithOtherAbility.class)) {
@@ -390,7 +390,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                         permanent.addBandedCard(creatureId);
                         attacker.addBandedCard(targetId);
                         if (canBand) {
-                            if (!permanent.getAbilities().containsKey(BandingAbility.getInstance().getId())) {
+                            if (!permanent.hasAbility(BandingAbility.getInstance(), game)) {
                                 filter.add(new AbilityPredicate(BandingAbility.class));
                                 canBandWithOther = false;
                             }
@@ -1289,7 +1289,8 @@ public class Combat implements Serializable, Copyable<Combat> {
         if (attacker != null) {
             if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARE_ATTACKER, defenderId, creatureId, playerId))) {
                 if (addAttackerToCombat(creatureId, defenderId, game)) {
-                    if (!attacker.getAbilities().containsKey(VigilanceAbility.getInstance().getId()) && !attacker.getAbilities().containsKey(JohanVigilanceAbility.getInstance().getId())) {
+                    if (!attacker.hasAbility(VigilanceAbility.getInstance(), game)
+                            && !attacker.hasAbility(JohanVigilanceAbility.getInstance(), game)) {
                         if (!attacker.isTapped()) {
                             attacker.setTapped(true);
                             attackersTappedByAttack.add(attacker.getId());

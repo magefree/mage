@@ -285,7 +285,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     /**
      * Gets all current abilities - includes additional abilities added by other
-     * cards or effects
+     * cards or effects. Warning, you can't modify that list.
      *
      * @param game
      * @return A list of {@link Ability} - this collection is not modifiable
@@ -295,15 +295,23 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         if (game == null) {
             return abilities; // deck editor with empty game
         }
+
         CardState cardState = game.getState().getCardState(this.getId());
-        if (!cardState.hasLostAllAbilities() && (cardState.getAbilities() == null || cardState.getAbilities().isEmpty())) {
+        if (cardState == null) {
             return abilities;
         }
+
+        // collects all abilities
         Abilities<Ability> all = new AbilitiesImpl<>();
+
+        // basic
         if (!cardState.hasLostAllAbilities()) {
             all.addAll(abilities);
         }
+
+        // dynamic
         all.addAll(cardState.getAbilities());
+
         return all;
     }
 
@@ -312,6 +320,12 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         CardState cardState = game.getState().getCardState(this.getId());
         cardState.setLostAllAbilities(true);
         cardState.getAbilities().clear();
+    }
+
+    @Override
+    public boolean hasAbility(Ability ability, Game game) {
+        // getAbilities(game) searches all abilities from base and dynamic lists (other)
+        return this.getAbilities(game).contains(ability);
     }
 
     /**

@@ -82,7 +82,7 @@ class QuartzwoodCrasherTriggeredAbility extends TriggeredAbilityImpl {
                 && ((DamagedPlayerEvent) event).isCombatDamage()) {
             Permanent creature = game.getPermanent(event.getSourceId());
             if (creature != null && creature.isControlledBy(controllerId)
-                    && creature.hasAbility(TrampleAbility.getInstance().getId(), game)
+                    && creature.hasAbility(TrampleAbility.getInstance(), game)
                     && !damagedPlayerIds.contains(event.getTargetId())) {
                 damagedPlayerIds.add(event.getTargetId());
                 this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
@@ -143,7 +143,7 @@ class QuartzwoodCrasherWatcher extends Watcher {
             return;
         }
         Permanent creature = game.getPermanent(event.getSourceId());
-        if (creature == null || !creature.getAbilities(game).containsKey(TrampleAbility.getInstance().getId())) {
+        if (creature == null || !creature.hasAbility(TrampleAbility.getInstance(), game)) {
             return;
         }
         damageMap

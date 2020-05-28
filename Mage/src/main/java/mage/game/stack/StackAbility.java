@@ -178,7 +178,7 @@ public class StackAbility extends StackObjImpl implements Ability {
     }
 
     @Override
-    public boolean hasAbility(UUID abilityId, Game game) {
+    public boolean hasAbility(Ability ability, Game game) {
         return false;
     }
 
@@ -671,5 +671,18 @@ public class StackAbility extends StackObjImpl implements Ability {
     @Override
     public Outcome getCustomOutcome() {
         return this.ability.getCustomOutcome();
+    }
+
+    @Override
+    public boolean isSameInstance(Ability ability) {
+        // same instance (by mtg rules) = same object, ID or class+text (you can't check class only cause it can be different by params/text)
+        if (ability == null) {
+            return false;
+        }
+
+        return (this == ability)
+                || (this.getId().equals(ability.getId()))
+                || (this.getOriginalId().equals(ability.getOriginalId()))
+                || (this.getClass() == ability.getClass() && this.getRule().equals(ability.getRule()));
     }
 }

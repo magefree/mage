@@ -113,7 +113,6 @@ public class CommandersCastTest extends CardTestCommander4Players {
         waitStackResolved(5, PhaseStep.POSTCOMBAT_MAIN);
         checkPermanentCount("after cast 2", 5, PhaseStep.POSTCOMBAT_MAIN, playerA, "Academy Ruins", 1);
 
-//        showBattlefield("end battlefield", 5, PhaseStep.END_TURN, playerA);
         setStopAt(5, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
