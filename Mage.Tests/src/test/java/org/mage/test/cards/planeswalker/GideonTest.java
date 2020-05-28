@@ -1,4 +1,3 @@
-
 package org.mage.test.cards.planeswalker;
 
 import mage.abilities.keyword.IndestructibleAbility;
@@ -11,7 +10,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 public class GideonTest extends CardTestPlayerBase {
@@ -116,16 +114,23 @@ public class GideonTest extends CardTestPlayerBase {
         // Equip {2}
         addCard(Zone.BATTLEFIELD, playerB, "Stitcher's Graft", 1);
 
+        // transform
         attack(2, playerB, "Kytheon, Hero of Akros");
         attack(2, playerB, "Silvercoat Lion");
         attack(2, playerB, "Pillarfield Ox");
+        checkPermanentCount("after transform", 2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Gideon, Battle-Forged", 1);
 
+        // become creature and equip
         activateAbility(4, PhaseStep.PRECOMBAT_MAIN, playerB, "0: Until ");
+        waitStackResolved(4, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(4, PhaseStep.PRECOMBAT_MAIN, playerB, "Equip {2}", "Gideon, Battle-Forged");
+
         attack(4, playerB, "Gideon, Battle-Forged"); // 7 damage
 
+        setStrictChooseMode(true);
         setStopAt(5, PhaseStep.PRECOMBAT_MAIN);
         execute();
+        assertAllCommandsUsed();
 
         assertPermanentCount(playerB, "Silvercoat Lion", 1);
         assertLife(playerA, 7);

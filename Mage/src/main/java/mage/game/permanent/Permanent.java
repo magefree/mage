@@ -154,14 +154,13 @@ public interface Permanent extends Card, Controllable {
 
     String getValue(GameState state);
 
-    @Deprecated
-    void addAbility(Ability ability, Game game);
-
     void addAbility(Ability ability, UUID sourceId, Game game);
 
-    void addAbility(Ability ability, UUID sourceId, Game game, boolean createNewId);
-
     void removeAllAbilities(UUID sourceId, Game game);
+
+    void removeAbility(Ability abilityToRemove, UUID sourceId, Game game);
+
+    void removeAbilities(List<Ability> abilitiesToRemove, UUID sourceId, Game game);
 
     void addLoyaltyUsed();
 

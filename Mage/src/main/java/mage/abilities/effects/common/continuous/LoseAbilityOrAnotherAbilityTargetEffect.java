@@ -63,13 +63,9 @@ public class LoseAbilityOrAnotherAbilityTargetEffect extends LoseAbilityTargetEf
             if (player.choose(outcome, chooseAbility, game)) {
                 String chosenAbility = chooseAbility.getChoice();
                 if (chosenAbility.equals(ability.getRule())) {
-                    while (permanent.getAbilities().contains(ability)) {
-                        permanent.getAbilities().remove(ability);
-                    }
+                    permanent.removeAbility(ability, source.getSourceId(), game);
                 } else if (chosenAbility.equals(ability2.getRule())) {
-                    while (permanent.getAbilities().contains(ability2)) {
-                        permanent.getAbilities().remove(ability2);
-                    }
+                    permanent.removeAbility(ability2, source.getSourceId(), game);
                 }
             } else {
                 return false;

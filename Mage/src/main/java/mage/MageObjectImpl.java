@@ -132,12 +132,12 @@ public abstract class MageObjectImpl implements MageObject {
     }
 
     @Override
-    public boolean hasAbility(UUID abilityId, Game game) {
-        if (this.getAbilities().containsKey(abilityId)) {
+    public boolean hasAbility(Ability ability, Game game) {
+        if (this.getAbilities().contains(ability)) {
             return true;
         }
         Abilities<Ability> otherAbilities = game.getState().getAllOtherAbilities(getId());
-        return otherAbilities != null && otherAbilities.containsKey(abilityId);
+        return otherAbilities != null && otherAbilities.contains(ability);
     }
 
     @Override

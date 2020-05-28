@@ -43,7 +43,7 @@ public class GainAbilityPairedEffect extends ContinuousEffectImpl {
             Permanent paired = permanent.getPairedCard().getPermanent(game);
             if (paired != null && paired.getPairedCard() != null && paired.getPairedCard().equals(new MageObjectReference(permanent, game))) {
                 permanent.addAbility(ability, source.getSourceId(), game);
-                paired.addAbility(ability, source.getSourceId(), game, false);
+                paired.addAbility(ability, source.getSourceId(), game);
                 return true;
 
             } else {

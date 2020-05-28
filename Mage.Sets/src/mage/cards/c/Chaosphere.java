@@ -82,7 +82,7 @@ class ChaosphereEffect extends RestrictionEffect {
         if (attacker == null) {
             return true;
         }
-        return attacker.hasAbility(FlyingAbility.getInstance().getId(), game);
+        return attacker.hasAbility(FlyingAbility.getInstance(), game);
     }
 
     @Override

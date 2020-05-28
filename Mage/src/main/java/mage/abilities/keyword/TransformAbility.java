@@ -38,7 +38,7 @@ public class TransformAbility extends SimpleStaticAbility {
         return "";
     }
 
-    public static void transform(Permanent permanent, Card sourceCard, Game game) {
+    public static void transform(Permanent permanent, Card sourceCard, Game game, Ability source) {
 
         if (sourceCard == null) {
             return;
@@ -63,7 +63,7 @@ public class TransformAbility extends SimpleStaticAbility {
         permanent.setExpansionSetCode(sourceCard.getExpansionSetCode());
         permanent.getAbilities().clear();
         for (Ability ability : sourceCard.getAbilities()) {
-            permanent.addAbility(ability, game);
+            permanent.addAbility(ability, source == null ? null : source.getSourceId(), game);
         }
         permanent.getPower().modifyBaseValue(sourceCard.getPower().getValue());
         permanent.getToughness().modifyBaseValue(sourceCard.getToughness().getValue());
@@ -105,7 +105,7 @@ class TransformEffect extends ContinuousEffectImpl {
             return false;
         }
 
-        TransformAbility.transform(permanent, card, game);
+        TransformAbility.transform(permanent, card, game, source);
 
         return true;
 

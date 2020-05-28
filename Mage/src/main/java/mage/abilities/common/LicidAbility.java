@@ -130,7 +130,8 @@ class LicidContinuousEffect extends ContinuousEffectImpl {
                             }
                         }
                     }
-                    licid.getAbilities(game).removeAll(toRemove);
+                    licid.removeAbilities(toRemove, source.getSourceId(), game);
+
                     Ability ability = new EnchantAbility("creature");
                     ability.setRuleAtTheTop(true);
                     licid.addAbility(ability, source.getSourceId(), game);

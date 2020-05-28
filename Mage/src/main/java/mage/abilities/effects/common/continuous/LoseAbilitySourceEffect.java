@@ -56,10 +56,7 @@ public class LoseAbilitySourceEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            // 112.10
-            while (permanent.getAbilities().remove(ability)) {
-
-            }
+            permanent.removeAbility(ability, source.getSourceId(), game);
         }
         return true;
     }

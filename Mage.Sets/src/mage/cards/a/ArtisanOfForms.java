@@ -63,7 +63,7 @@ class ArtisanOfFormsApplyToPermanent extends ApplyToPermanent {
 
     @Override
     public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
-        permanent.addAbility(ArtisanOfForms.createAbility(), game);
+        permanent.addAbility(ArtisanOfForms.createAbility(), source.getSourceId(), game);
         return true;
     }
 }

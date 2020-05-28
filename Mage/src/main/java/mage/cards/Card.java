@@ -26,6 +26,10 @@ public interface Card extends MageObject {
 
     void setOwnerId(UUID ownerId);
 
+    /**
+     * For cards: return all basic and dynamic abilities
+     * For permanents: return all basic and dynamic abilities
+     */
     Abilities<Ability> getAbilities(Game game);
 
     void setSpellAbility(SpellAbility ability);

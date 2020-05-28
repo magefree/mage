@@ -87,7 +87,7 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
             for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext(); ) { // filter may not be used again, because object can have changed filter relevant attributes but still geets boost
                 Permanent permanent = it.next().getPermanentOrLKIBattlefield(game); //LKI is neccessary for "dies triggered abilities" to work given to permanets  (e.g. Showstopper)
                 if (permanent != null) {
-                    permanent.addAbility(ability, source.getSourceId(), game, false);
+                    permanent.addAbility(ability, source.getSourceId(), game);
                 } else {
                     it.remove(); // no longer on the battlefield, remove reference to object
                     if (affectedObjectList.isEmpty()) {
@@ -99,7 +99,7 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
             setRuntimeData(source, game);
             for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
                 if (!(excludeSource && perm.getId().equals(source.getSourceId())) && selectedByRuntimeData(perm, source, game)) {
-                    perm.addAbility(ability, source.getSourceId(), game, false);
+                    perm.addAbility(ability, source.getSourceId(), game);
                 }
             }
             // still as long as the prev. permanent is known to the LKI (e.g. Mikaeus, the Unhallowed) so gained dies triggered ability will trigger
@@ -109,7 +109,7 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
                     Permanent perm = (Permanent) mageObject;
                     if (!(excludeSource && perm.getId().equals(source.getSourceId())) && selectedByRuntimeData(perm, source, game)) {
                         if (filter.match(perm, source.getSourceId(), source.getControllerId(), game)) {
-                            perm.addAbility(ability, source.getSourceId(), game, false);
+                            perm.addAbility(ability, source.getSourceId(), game);
                         }
                     }
                 }

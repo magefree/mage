@@ -182,8 +182,8 @@ public class Plane implements CommandObject {
     }
 
     @Override
-    public boolean hasAbility(UUID abilityId, Game game) {
-        return abilites.containsKey(abilityId);
+    public boolean hasAbility(Ability ability, Game game) {
+        return getAbilities().contains(ability);
     }
 
     @Override

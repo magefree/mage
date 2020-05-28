@@ -69,7 +69,7 @@ class EvilTwinApplyToPermanent extends ApplyToPermanent {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{U}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
-        permanent.addAbility(ability, game);
+        permanent.addAbility(ability, source.getSourceId(), game);
         return true;
     }
 

@@ -351,62 +351,61 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public Abilities<Ability> getAbilities() {
-        return abilities;
+        return super.getAbilities();
     }
 
     @Override
     public Abilities<Ability> getAbilities(Game game) {
-        return abilities;
-    }
-
-    /**
-     * @param ability
-     * @param game
-     */
-    @Override
-    public void addAbility(Ability ability, Game game) {
-        if (!abilities.containsKey(ability.getId())) {
-            Ability copyAbility = ability.copy();
-            copyAbility.setControllerId(controllerId);
-            copyAbility.setSourceId(objectId);
-            if (game != null) {
-                game.getState().addAbility(copyAbility, this);
-            }
-            abilities.add(copyAbility);
-        }
+        return super.getAbilities(game);
     }
 
     @Override
     public void addAbility(Ability ability, UUID sourceId, Game game) {
-        addAbility(ability, sourceId, game, true);
-    }
-
-    @Override
-    public void addAbility(Ability ability, UUID sourceId, Game game, boolean createNewId) {
+        // singleton abilities -- only one instance
+        // other abilities -- any amount of instances
         if (!abilities.containsKey(ability.getId())) {
             Ability copyAbility = ability.copy();
-            if (createNewId) {
-                copyAbility.newId(); // needed so that source can get an ability multiple times (e.g. Raging Ravine)
-            }
+            copyAbility.newId(); // needed so that source can get an ability multiple times (e.g. Raging Ravine)
             copyAbility.setControllerId(controllerId);
             copyAbility.setSourceId(objectId);
+            // triggered abilities must be added to the state().triggers
+            // still as long as the prev. permanent is known to the LKI (e.g. Showstopper) so gained dies triggered ability will trigger
             game.getState().addAbility(copyAbility, sourceId, this);
             abilities.add(copyAbility);
-        } else if (!createNewId) {
-            // triggered abilities must be added to the state().triggerdAbilities
-            // still as long as the prev. permanent is known to the LKI (e.g. Showstopper) so gained dies triggered ability will trigger
-            if (!game.getBattlefield().containsPermanent(this.getId())) {
-                Ability copyAbility = ability.copy();
-                copyAbility.setControllerId(controllerId);
-                copyAbility.setSourceId(objectId);
-                game.getState().addAbility(copyAbility, sourceId, this);
-            }
         }
     }
 
     @Override
     public void removeAllAbilities(UUID sourceId, Game game) {
-        getAbilities().clear();
+        // TODO: what about triggered abilities? See addAbility above -- triggers adds to GameState
+        abilities.clear();
+    }
+
+    @Override
+    public void removeAbility(Ability abilityToRemove, UUID sourceId, Game game) {
+        if (abilityToRemove == null) {
+            return;
+        }
+
+        // 112.10b  Effects that remove an ability remove all instances of it.
+        List<Ability> toRemove = new ArrayList<>();
+        abilities.forEach(a -> {
+            if (a.isSameInstance(abilityToRemove)) {
+                toRemove.add(a);
+            }
+        });
+
+        // TODO: what about triggered abilities? See addAbility above -- triggers adds to GameState
+        toRemove.forEach(r -> abilities.remove(r));
+    }
+
+    @Override
+    public void removeAbilities(List<Ability> abilitiesToRemove, UUID sourceId, Game game){
+        if (abilitiesToRemove == null) {
+            return;
+        }
+
+        abilitiesToRemove.forEach(a -> removeAbility(a, sourceId, game));
     }
 
     @Override
@@ -728,7 +727,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             game.fireEvent(new GameEvent(EventType.GAINED_CONTROL, objectId, objectId, controllerId));
 
             return true;
-        } else if (isCopy()) {// Because the previous copied abilities can be from another controller chnage controller in any case for abilities
+        } else if (isCopy()) {// Because the previous copied abilities can be from another controller - change controller in any case for abilities
             this.getAbilities(game).setControllerId(controllerId);
             game.getContinuousEffects().setController(objectId, controllerId);
         }
