@@ -14,20 +14,17 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 public class LandTypeChangingEffectsTest extends CardTestPlayerBase {
 
     /**
-     *
      * Playing a commander game. Opponent had a Magus of the Moon, and I later
      * dropped a Chromatic Lantern.
-     *
+     * <p>
      * I was not allowed to use the Chromatic Lantern's ability. Since layers
      * are tricky I asked on the Judge's chat to confirm and the user "luma"
      * said it should work on this scenario.
-     *
      */
     @Test
     public void testMagusOfTheMoonAndChromaticLantern() {
@@ -42,8 +39,10 @@ public class LandTypeChangingEffectsTest extends CardTestPlayerBase {
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Chromatic Lantern");
 
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertPermanentCount(playerB, "Chromatic Lantern", 1);
 
@@ -66,8 +65,11 @@ public class LandTypeChangingEffectsTest extends CardTestPlayerBase {
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Chromatic Lantern");
 
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Magus of the Moon");
+
+        setStrictChooseMode(true);
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertPermanentCount(playerB, "Chromatic Lantern", 1);
         assertPermanentCount(playerA, "Magus of the Moon", 1);
@@ -97,8 +99,11 @@ public class LandTypeChangingEffectsTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aquitect's Will", "Forbidding Watchtower");
 
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}{W}:");
+
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Aquitect's Will", 1);
 
@@ -128,8 +133,10 @@ public class LandTypeChangingEffectsTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, bloodmoon);
         playLand(1, PhaseStep.POSTCOMBAT_MAIN, playerA, urborgtoy);
 
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
         execute();
+        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, bloodmoon, 1);
         assertPermanentCount(playerA, urborgtoy, 1);
@@ -157,8 +164,10 @@ public class LandTypeChangingEffectsTest extends CardTestPlayerBase {
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, urborgtoy);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, bloodmoon);
 
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
         execute();
+        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, bloodmoon, 1);
         assertPermanentCount(playerA, urborgtoy, 1);
@@ -176,7 +185,7 @@ public class LandTypeChangingEffectsTest extends CardTestPlayerBase {
        In terms of time-stamp order, Urborg was down first, then Kormus Bell, then Quicksilver.
        When I put a flood counter on a basic swamp, it would become a 0/0 instead of a 1/1 and die.
      */
-    
+
     @Test
     public void testCormusBellAfterUrborg() {
         // Land - Legendary
@@ -198,14 +207,14 @@ public class LandTypeChangingEffectsTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Kormus Bell");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Quicksilver Fountain");
-        
+
         addTarget(playerA, "Mountain");
-        
+
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
         assertAllCommandsUsed();
-        
+
         assertPermanentCount(playerA, urborgtoy, 1);
         assertPermanentCount(playerA, "Kormus Bell", 1);
         assertPermanentCount(playerB, "Quicksilver Fountain", 1);
@@ -245,8 +254,10 @@ public class LandTypeChangingEffectsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Stormtide Leviathan"); // all lands are islands in addition to their other types
         addCard(Zone.BATTLEFIELD, playerA, "Darksteel Citadel");  // land has indestructible ability
 
+        setStrictChooseMode(true);
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
+        assertAllCommandsUsed();
 
         Permanent darksteel = getPermanent("Darksteel Citadel", playerA.getId());
         Assert.assertNotNull(darksteel);
