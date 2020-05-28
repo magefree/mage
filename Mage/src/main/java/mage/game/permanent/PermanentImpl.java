@@ -361,14 +361,8 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public void addAbility(Ability ability, UUID sourceId, Game game) {
-        addAbility(ability, sourceId, game, false);
-    }
-
-    @Override
-    public void addAbility(Ability ability, UUID sourceId, Game game, boolean createNewId) {
         // singleton abilities -- only one instance
         // other abilities -- any amount of instances
-        // TODO: no needs in createNewId, so move code to addAbility(Ability ability, UUID sourceId, Game game)
         if (!abilities.containsKey(ability.getId())) {
             Ability copyAbility = ability.copy();
             copyAbility.newId(); // needed so that source can get an ability multiple times (e.g. Raging Ravine)
@@ -383,7 +377,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public void removeAllAbilities(UUID sourceId, Game game) {
-        // can't use getAbilities() here -- cause it's can be auto-generated list potentially
         // TODO: what about triggered abilities? See addAbility above -- triggers adds to GameState
         abilities.clear();
     }
@@ -402,7 +395,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             }
         });
 
-        // can't use getAbilities() here -- cause it's can be auto-generated list potentially
         // TODO: what about triggered abilities? See addAbility above -- triggers adds to GameState
         toRemove.forEach(r -> abilities.remove(r));
     }

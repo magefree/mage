@@ -88,7 +88,7 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
             }
         }
         if (permanent != null) {
-            permanent.addAbility(ability, source.getSourceId(), game, false);
+            permanent.addAbility(ability, source.getSourceId(), game);
         }
         return true;
     }
