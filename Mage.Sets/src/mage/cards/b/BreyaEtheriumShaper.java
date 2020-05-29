@@ -40,7 +40,7 @@ public final class BreyaEtheriumShaper extends CardImpl {
         // When Breya, Etherium Shaper enters the battlefield, create two 1/1 blue Thopter artifact creature tokens with flying.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ThopterToken(), 2)));
 
-        // {2}, Sacrifice two artifacts: Choose one &mdash; Breya deals 3 damage to target player.
+        // {2}, Sacrifice two artifacts: Choose one &mdash; Breya deals 3 damage to target player or planeswalker.
         Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new DamageTargetEffect(3),
