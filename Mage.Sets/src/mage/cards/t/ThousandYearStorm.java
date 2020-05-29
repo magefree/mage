@@ -1,5 +1,7 @@
 package mage.cards.t;
 
+import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -13,6 +15,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterInstantOrSorcerySpell;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -23,9 +26,11 @@ import mage.watchers.Watcher;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
- * @author LevelX2
+ * @author jasc7636
  */
 public final class ThousandYearStorm extends CardImpl {
 
@@ -33,7 +38,8 @@ public final class ThousandYearStorm extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}{R}");
 
         // Whenever you cast an instant or sorcery spell, copy it for each other instant and sorcery spell you've cast before it this turn. You may choose new targets for the copies.
-        this.addAbility(new ThousandYearStormAbility());
+        this.addAbility(new ThousandYearStormAbility(), new ThousandYearStormWatcher());
+
     }
 
     public ThousandYearStorm(final ThousandYearStorm card) {
@@ -46,14 +52,15 @@ public final class ThousandYearStorm extends CardImpl {
     }
 }
 
+
 class ThousandYearStormAbility extends SpellCastControllerTriggeredAbility {
 
-    String stormCountInfo = null;
+    private String stormCountInfo;
 
     public ThousandYearStormAbility() {
-        super(Zone.BATTLEFIELD, new ThousandYearStormEffect(), new FilterInstantOrSorcerySpell(), false, true);
-        this.addHint(new ValueHint("You've cast instant and sorcery this turn", ThousandYearSpellsCastThatTurnValue.instance));
-        this.addWatcher(new ThousandYearWatcher());
+        super(new ThousandYearStormEffect(), StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, false, true);
+        this.addHint(new ValueHint("You've cast instant and sorcery this turn", ThousandYearStormSpellsCastValue.instance));
+        this.stormCountInfo = null;
     }
 
     public ThousandYearStormAbility(final ThousandYearStormAbility ability) {
@@ -62,12 +69,40 @@ class ThousandYearStormAbility extends SpellCastControllerTriggeredAbility {
     }
 
     @Override
+    public ThousandYearStormAbility copy() {
+        return new ThousandYearStormAbility(this);
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        // save storm count info, real count will be calculated to stack ability in resolve effect only
         if (super.checkTrigger(event, game)) {
-            int stormCount = ThousandYearSpellsCastThatTurnValue.instance.calculate(game, this, null);
-            stormCountInfo = " (<b>storm count: " + Math.max(0, stormCount - 1) + "</b>) ";
-            return true;
+            ThousandYearStormWatcher watcher = game.getState().getWatcher(ThousandYearStormWatcher.class);
+            if (watcher == null) {
+                return false;
+            }
+            UUID playerId = event.getPlayerId();
+            List<MageObjectReference> spellsCast = watcher.getSpellsThisTurn(playerId);
+            MageObject object = game.getObject(event.getTargetId());
+            if (object == null || spellsCast == null) {
+                return false;
+            }
+            int stormCount = 0;
+            for (MageObjectReference mor : spellsCast) {
+                stormCount++;
+                if (mor.refersTo(object, game)) {
+                    break;
+                }
+            }
+            stormCount = Math.max(0, stormCount - 1);
+            stormCountInfo = " (<b>storm count: " + stormCount + "</b>) ";
+            boolean returnVal = false;
+            for (Effect effect : this.getEffects()) {
+                if (effect instanceof ThousandYearStormEffect) {
+                    ((ThousandYearStormEffect) effect).setStormCount(stormCount);
+                    returnVal = true;
+                }
+            }
+            return returnVal;
         }
         return false;
     }
@@ -75,23 +110,23 @@ class ThousandYearStormAbility extends SpellCastControllerTriggeredAbility {
     @Override
     public String getRule() {
         return "Whenever you cast an instant or sorcery spell, copy it for each other instant and sorcery spell you've cast before it this turn"
-                + (stormCountInfo != null ? stormCountInfo : "") + ". You may choose new targets for the copies.";
+                + ((stormCountInfo == null) ? "" : stormCountInfo) + ". You may choose new targets for the copies.";
     }
 
-    @Override
-    public ThousandYearStormAbility copy() {
-        return new ThousandYearStormAbility(this);
-    }
+
 }
 
 class ThousandYearStormEffect extends OneShotEffect {
+    private int stormCount;
 
     public ThousandYearStormEffect() {
         super(Outcome.Benefit);
+        this.stormCount = -1;
     }
 
     public ThousandYearStormEffect(final ThousandYearStormEffect effect) {
         super(effect);
+        this.stormCount = effect.stormCount;
     }
 
     @Override
@@ -102,21 +137,9 @@ class ThousandYearStormEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Spell spell = game.getSpellOrLKIStack(getTargetPointer().getFirst(game, source));
-        Player controller = spell != null ? game.getPlayer(spell.getControllerId()) : null;
-        if (spell != null && controller != null) {
-            ThousandYearWatcher watcher = game.getState().getWatcher(ThousandYearWatcher.class);
-            if (watcher != null) {
-                String stateSearchId = spell.getId().toString() + source.getSourceId().toString();
-                // recall only the spells cast before it
-                int numberOfCopies = 0;
-                if (game.getState().getValue(stateSearchId) != null) {
-                    numberOfCopies = (int) game.getState().getValue(stateSearchId);
-                }
-                if (numberOfCopies > 0) {
-                    spell.createCopyOnStack(game, source, source.getControllerId(), true, numberOfCopies);
-                }
-                return true;
-            }
+        if (stormCount >= 0 && spell != null) {
+            spell.createCopyOnStack(game, source, source.getControllerId(), true, stormCount);
+            return true;
         }
         return false;
     }
@@ -125,59 +148,81 @@ class ThousandYearStormEffect extends OneShotEffect {
     public String getText(Mode mode) {
         return "copy it for each other instant and sorcery spell you've cast before it this turn. You may choose new targets for the copies";
     }
+
+    public void setStormCount(int stormCount) {
+        this.stormCount = stormCount;
+    }
 }
 
-class ThousandYearWatcher extends Watcher {
+class ThousandYearStormWatcher extends Watcher {
 
-    private final Map<UUID, Integer> amountOfInstantSorcerySpellsCastOnCurrentTurn = new HashMap<>();
+    private final HashMap<UUID, List<MageObjectReference>> spellsThisTurn;
 
-    public ThousandYearWatcher() {
+    public ThousandYearStormWatcher() {
         super(WatcherScope.GAME);
+        this.spellsThisTurn = new HashMap<>();
+    }
+
+    public ThousandYearStormWatcher(final ThousandYearStormWatcher watcher) {
+        super(watcher);
+        // deep copy HashMap
+        this.spellsThisTurn = new HashMap<UUID, List<MageObjectReference>>();
+        for (Map.Entry<UUID, List<MageObjectReference>> entry : watcher.spellsThisTurn.entrySet())
+        {
+            this.spellsThisTurn.put(entry.getKey(), new ArrayList<MageObjectReference>(entry.getValue()));
+        }
+    }
+
+    @Override
+    public ThousandYearStormWatcher copy() {
+        return new ThousandYearStormWatcher(this);
     }
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST && !sourceId.equals(event.getTargetId())) {
-            Spell spell = game.getSpellOrLKIStack(event.getTargetId());
-            if (spell != null && spell.isInstantOrSorcery()) {
+        if (event.getType() == GameEvent.EventType.SPELL_CAST) {
+            MageObject object = game.getObject(event.getTargetId());
+            if (object != null && (object.isInstant() || object.isSorcery())) {
                 UUID playerId = event.getPlayerId();
-                if (playerId != null) {
-                    String stateSearchId = spell.getId().toString() + sourceId.toString();
-                    // calc current spell
-                    amountOfInstantSorcerySpellsCastOnCurrentTurn.putIfAbsent(playerId, 0);
-                    amountOfInstantSorcerySpellsCastOnCurrentTurn.compute(playerId, (k, a) -> a + 1);
-                    // remember only the spells cast before it
-                    game.getState().setValue(stateSearchId, amountOfInstantSorcerySpellsCastOnCurrentTurn.get(playerId) - 1);
-                }
+                List<MageObjectReference> spellsCast = spellsThisTurn.getOrDefault(playerId, new ArrayList<MageObjectReference>());
+                spellsCast.add(new MageObjectReference(object, game));
+                spellsThisTurn.put(playerId, spellsCast);
             }
         }
     }
 
     @Override
     public void reset() {
-        amountOfInstantSorcerySpellsCastOnCurrentTurn.clear();
+        for (List<MageObjectReference> mor : spellsThisTurn.values()) {
+            mor.clear();
+        }
     }
 
-    public int getAmountOfSpellsPlayerCastOnCurrentTurn(UUID playerId) {
-        return amountOfInstantSorcerySpellsCastOnCurrentTurn.getOrDefault(playerId, 0);
+    public List<MageObjectReference> getSpellsThisTurn(UUID playerId) {
+        return spellsThisTurn.getOrDefault(playerId, null);
     }
 }
 
-enum ThousandYearSpellsCastThatTurnValue implements DynamicValue {
+
+enum ThousandYearStormSpellsCastValue implements DynamicValue {
 
     instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        ThousandYearWatcher watcher = game.getState().getWatcher(ThousandYearWatcher.class);
+        ThousandYearStormWatcher watcher = game.getState().getWatcher(ThousandYearStormWatcher.class);
         if (watcher == null) {
             return 0;
         }
-        return watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(sourceAbility.getControllerId());
+        List<MageObjectReference> spellsCast = watcher.getSpellsThisTurn(sourceAbility.getControllerId());
+        if (spellsCast == null) {
+            return 0;
+        }
+        return spellsCast.size();
     }
 
     @Override
-    public ThousandYearSpellsCastThatTurnValue copy() {
+    public ThousandYearStormSpellsCastValue copy() {
         return instance;
     }
 
