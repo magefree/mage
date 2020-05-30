@@ -2235,13 +2235,19 @@ public abstract class GameImpl implements Game, Serializable {
                     newestPermanent = null;
                 }
             }
+
+            PlayerList newestPermanentControllerRange = state.getPlayersInRange(newestPermanent.getControllerId(), this);
+
+            // 801.12 The "world rule" applies to a permanent only if other world permanents are within its controller's range of influence.
             for (Permanent permanent : worldEnchantment) {
-                if (!Objects.equals(newestPermanent, permanent)) {
+                if (newestPermanentControllerRange.contains(permanent.getControllerId())
+                        && !Objects.equals(newestPermanent, permanent)) {
                     movePermanentToGraveyardWithInfo(permanent);
                     somethingHappened = true;
                 }
             }
         }
+
         //TODO: implement the rest
 
         return somethingHappened;
