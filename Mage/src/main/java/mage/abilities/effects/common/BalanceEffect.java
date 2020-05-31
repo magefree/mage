@@ -7,6 +7,7 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
+import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledLandPermanent;
@@ -54,72 +55,12 @@ public class BalanceEffect extends OneShotEffect {
             return false;
         }
         //Lands
-        int minLand = Integer.MAX_VALUE;
-        Cards landsToSacrifice = new CardsImpl();
-        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-            Player player = game.getPlayer(playerId);
-            if (player == null) {
-                continue;
-            }
-            int count = game.getBattlefield().countAll(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND, player.getId(), game);
-            if (count < minLand) {
-                minLand = count;
-            }
-        }
+        Cards toSacrifice = getPermanentsToSacrifice(game, source, controller, StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND, filter);
 
-        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-            Player player = game.getPlayer(playerId);
-            if (player == null) {
-                continue;
-            }
-            TargetControlledPermanent target = new TargetControlledPermanent(minLand, minLand, filter, true);
-            if (!target.choose(Outcome.Sacrifice, player.getId(), source.getSourceId(), game)) {
-                continue;
-            }
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND, player.getId(), source.getSourceId(), game)) {
-                if (permanent != null && !target.getTargets().contains(permanent.getId())) {
-                    landsToSacrifice.add(permanent);
-                }
-            }
-        }
+        //creatures
+        toSacrifice.addAll(getPermanentsToSacrifice(game, source, controller, StaticFilters.FILTER_CONTROLLED_CREATURE, filter2).getCards(game));
 
-        for (UUID cardId : landsToSacrifice) {
-            Permanent permanent = game.getPermanent(cardId);
-            if (permanent != null) {
-                permanent.sacrifice(source.getSourceId(), game);
-            }
-        }
-
-        //Creatures
-        int minCreature = Integer.MAX_VALUE;
-        Cards creaturesToSacrifice = new CardsImpl();
-        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-            Player player = game.getPlayer(playerId);
-            if (player == null) {
-            }
-            int count = game.getBattlefield().countAll(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND, player.getId(), game);
-            if (count < minCreature) {
-                minCreature = count;
-            }
-        }
-
-        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-            Player player = game.getPlayer(playerId);
-            if (player == null) {
-                continue;
-            }
-            TargetControlledPermanent target = new TargetControlledPermanent(minCreature, minCreature, filter2, true);
-            if (!target.choose(Outcome.Sacrifice, player.getId(), source.getSourceId(), game)) {
-                continue;
-            }
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_CONTROLLED_CREATURE, player.getId(), source.getSourceId(), game)) {
-                if (permanent != null && !target.getTargets().contains(permanent.getId())) {
-                    creaturesToSacrifice.add(permanent);
-                }
-            }
-        }
-
-        for (UUID cardId : creaturesToSacrifice) {
+        for (UUID cardId : toSacrifice) {
             Permanent permanent = game.getPermanent(cardId);
             if (permanent != null) {
                 permanent.sacrifice(source.getSourceId(), game);
@@ -132,6 +73,7 @@ public class BalanceEffect extends OneShotEffect {
         for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player == null) {
+                continue;
             }
             int count = player.getHand().size();
             if (count < minCard) {
@@ -163,6 +105,41 @@ public class BalanceEffect extends OneShotEffect {
                 player.discard(cardsToDiscard.get(playerId), source, game);
             }
         }
+
         return true;
+    }
+
+    private Cards getPermanentsToSacrifice(Game game, Ability source, Player controller,
+                                           FilterControlledPermanent filterPermanent, FilterControlledPermanent filterPermanentDialog) {
+        int min = Integer.MAX_VALUE;
+        Cards permToSacrifice = new CardsImpl();
+        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+            Player player = game.getPlayer(playerId);
+            if (player == null) {
+                continue;
+            }
+            int count = game.getBattlefield().countAll(filterPermanent, player.getId(), game);
+            if (count < min) {
+                min = count;
+            }
+        }
+
+        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+            Player player = game.getPlayer(playerId);
+            if (player == null) {
+                continue;
+            }
+            TargetControlledPermanent target = new TargetControlledPermanent(min, min, filterPermanentDialog, true);
+            if (!target.choose(Outcome.Sacrifice, player.getId(), source.getSourceId(), game)) {
+                continue;
+            }
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filterPermanent, player.getId(), source.getSourceId(), game)) {
+                if (permanent != null && !target.getTargets().contains(permanent.getId())) {
+                    permToSacrifice.add(permanent);
+                }
+            }
+        }
+
+        return permToSacrifice;
     }
 }
