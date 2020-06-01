@@ -1,8 +1,5 @@
 package mage.cards;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
@@ -12,6 +9,10 @@ import mage.constants.CardType;
 import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.game.Game;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -135,11 +136,13 @@ public abstract class SplitCard extends CardImpl {
     public Abilities<Ability> getAbilities(Game game) {
         Abilities<Ability> allAbilites = new AbilitiesImpl<>();
         for (Ability ability : super.getAbilities(game)) {
+            // ignore split abilities TODO: why it here, for GUI's cleanup in card texts? Maybe it can be removed
             if (ability instanceof SpellAbility
-                    && ((SpellAbility) ability).getSpellAbilityType() != SpellAbilityType.SPLIT
-                    && ((SpellAbility) ability).getSpellAbilityType() != SpellAbilityType.SPLIT_AFTERMATH) {
-                allAbilites.add(ability);
+                    && (((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.SPLIT
+                    || ((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.SPLIT_AFTERMATH)) {
+                continue;
             }
+            allAbilites.add(ability);
         }
         allAbilites.addAll(leftHalfCard.getAbilities(game));
         allAbilites.addAll(rightHalfCard.getAbilities(game));

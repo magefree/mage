@@ -1,4 +1,3 @@
-
 package org.mage.test.cards.abilities.keywords;
 
 import mage.abilities.keyword.HasteAbility;
@@ -9,15 +8,13 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
- * @author LevelX2
+ * @author LevelX2, JayDi85
  */
 public class SuspendTest extends CardTestPlayerBase {
 
     /**
      * Tests Epochrasite works (give suspend to a exiled card) When Epochrasite
      * dies, exile it with three time counters on it and it gains suspend.
-     *
      */
     @Test
     public void testEpochrasite() {
@@ -46,7 +43,6 @@ public class SuspendTest extends CardTestPlayerBase {
      * Tests Jhoira of the Ghitu works (give suspend to a exiled card) {2},
      * Exile a nonland card from your hand: Put four time counters on the exiled
      * card. If it doesn't have suspend, it gains suspend.
-     *
      */
     @Test
     public void testJhoiraOfTheGhitu() {
@@ -71,7 +67,6 @@ public class SuspendTest extends CardTestPlayerBase {
     /**
      * Tests that a spell countered with delay goes to exile with 3 time
      * counters and can be cast after the 3 counters are removed
-     *
      */
     @Test
     public void testDelay() {
@@ -141,7 +136,6 @@ public class SuspendTest extends CardTestPlayerBase {
     /**
      * Suppression Field incorrectly makes suspend cards cost 2 more to suspend.
      * It made my Rift Bolt cost 2R to suspend instead of R
-     *
      */
     @Test
     public void testCostManipulation() {
@@ -164,9 +158,8 @@ public class SuspendTest extends CardTestPlayerBase {
      * Cards cast from other zones that aren't the hand should not trigger
      * Knowledge Pool, as it states that only cards cast from the hand should be
      * exiled afterwards.
-     *
+     * <p>
      * Example: cards coming off suspend shouldn't trigger Knowledge Pool.
-     *
      */
     @Test
     public void testThatNotCastFromHand() {
@@ -198,5 +191,125 @@ public class SuspendTest extends CardTestPlayerBase {
         assertLife(playerB, 17);
         assertPermanentCount(playerA, "Silvercoat Lion", 0);
 
+    }
+
+    /*
+    Delay {1}{U}
+
+    Counter target spell. If the spell is countered this way, exile it with three time counters on it instead of putting
+    it into its owner’s graveyard. If it doesn’t have suspend, it gains suspend. (At the beginning of its owner’s upkeep,
+    remove a time counter from that card. When the last is removed, the player plays it without paying its mana cost.
+    If it’s a creature, it has haste.)
+
+    Bug: Casting Delay on a fused Wear // Tear resulted in time counters never coming off it. It just sat there with
+    three counters every turn. See https://github.com/magefree/mage/issues/6549
+    */
+
+    @Test
+    public void test_Delay_SimpleSpell() {
+        //
+        addCard(Zone.HAND, playerA, "Delay", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        //
+        addCard(Zone.HAND, playerA, "Lightning Bolt", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+
+        // cast spell and counter it with delay
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Delay", "Lightning Bolt", "Lightning Bolt");
+        //
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkLife("after counter", 1, PhaseStep.PRECOMBAT_MAIN, playerB, 20);
+        checkExileCount("after counter", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", 1);
+
+        // 3 time counters removes on upkeep (3, 5, 7) and cast again
+        setChoice(playerA, "Cast");
+        addTarget(playerA, playerB);
+        checkLife("after suspend", 7, PhaseStep.PRECOMBAT_MAIN, playerB, 20 - 3);
+        checkGraveyardCount("after suspend", 7, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", 1);
+
+        setStrictChooseMode(true);
+        setStopAt(7, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+    }
+
+    @Test
+    public void test_Delay_SplitSingle() {
+        addCard(Zone.HAND, playerA, "Delay", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
+        //
+        // Wear {1}{R} Destroy target artifact.
+        // Tear {W} Destroy target enchantment.
+        addCard(Zone.HAND, playerA, "Wear // Tear", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
+        //
+        addCard(Zone.BATTLEFIELD, playerB, "Bident of Thassa", 1); // Legendary Enchantment Artifact
+        addCard(Zone.BATTLEFIELD, playerB, "Bow of Nylea", 1); // Legendary Enchantment Artifact
+
+        // cast spell and counter it with delay
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Wear", "Bident of Thassa");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Delay", "Wear", "Wear");
+        //
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("after counter", 1, PhaseStep.PRECOMBAT_MAIN, playerB, "Bident of Thassa", 1);
+        checkPermanentCount("after counter", 1, PhaseStep.PRECOMBAT_MAIN, playerB, "Bow of Nylea", 1);
+        checkExileCount("after counter", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Wear // Tear", 1);
+
+        // 3 time counters removes on upkeep (3, 5, 7) and cast again
+        setChoice(playerA, "Cast Wear");
+        addTarget(playerA, "Bident of Thassa");
+        checkPermanentCount("after suspend", 7, PhaseStep.PRECOMBAT_MAIN, playerB, "Bident of Thassa", 0);
+        checkPermanentCount("after suspend", 7, PhaseStep.PRECOMBAT_MAIN, playerB, "Bow of Nylea", 1);
+        checkGraveyardCount("after suspend", 7, PhaseStep.PRECOMBAT_MAIN, playerA, "Wear // Tear", 1);
+
+        setStrictChooseMode(true);
+        setStopAt(7, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+    }
+
+    @Test
+    public void test_Delay_SplitFused() {
+        /*
+        Bug: Casting Delay on a fused Wear // Tear resulted in time counters never coming off it. It just sat there with
+        three counters every turn. See https://github.com/magefree/mage/issues/6549
+        */
+
+        //
+        addCard(Zone.HAND, playerA, "Delay", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
+        //
+        // Wear {1}{R} Destroy target artifact.
+        // Tear {W} Destroy target enchantment.
+        addCard(Zone.HAND, playerA, "Wear // Tear", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
+        //
+        addCard(Zone.BATTLEFIELD, playerB, "Bident of Thassa", 1); // Legendary Enchantment Artifact
+        addCard(Zone.BATTLEFIELD, playerB, "Bow of Nylea", 1); // Legendary Enchantment Artifact
+
+        // cast fused spell and counter it with delay
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "fused Wear // Tear");
+        addTarget(playerA, "Bident of Thassa");
+        addTarget(playerA, "Bow of Nylea");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Delay", "Cast fused Wear // Tear", "Cast fused Wear // Tear");
+        //
+        checkPermanentCount("after counter", 1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Bident of Thassa", 1);
+        checkPermanentCount("after counter", 1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Bow of Nylea", 1);
+        checkExileCount("after counter", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Wear // Tear", 1);
+
+        // 3 time counters removes on upkeep (3, 5, 7) and cast again (fused cards can't be played from exile zone, so select split spell only)
+        setChoice(playerA, "Cast Wear");
+        addTarget(playerA, "Bident of Thassa");
+        checkPermanentCount("after suspend", 7, PhaseStep.PRECOMBAT_MAIN, playerB, "Bident of Thassa", 0);
+        checkPermanentCount("after suspend", 7, PhaseStep.PRECOMBAT_MAIN, playerB, "Bow of Nylea", 1);
+        checkGraveyardCount("after suspend", 7, PhaseStep.PRECOMBAT_MAIN, playerA, "Wear // Tear", 1);
+
+        setStrictChooseMode(true);
+        setStopAt(7, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
     }
 }
