@@ -42,6 +42,7 @@ import mage.game.match.Match;
 import mage.game.match.MatchPlayer;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
+import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.game.tournament.Tournament;
 import mage.player.ai.ComputerPlayer;
@@ -430,6 +431,8 @@ public class TestPlayer implements Player {
         // two search mode: for cards/permanents (strict) and for abilities (like)
         if (object instanceof Ability) {
             return object.getName().startsWith(nameOrAlias);
+        } else if (object instanceof Spell) {
+            return ((Spell) object).getSpellAbility().getName().startsWith(nameOrAlias);
         } else {
             return object.getName().equals(nameOrAlias);
         }
@@ -668,11 +671,13 @@ public class TestPlayer implements Player {
                     }
                 } else if (action.getAction().startsWith("waitStackResolved")) {
                     if (game.getStack().isEmpty()) {
-                        // can use next command
+                        // all done, can use next command
                         actions.remove(action);
+                        continue;
                     } else {
-                        // need pass to empty stack
-                        break;
+                        // need to wait (don't remove command)
+                        tryToPlayPriority(game);
+                        return true;
                     }
                 } else if (action.getAction().startsWith("playerAction:")) {
                     String command = action.getAction();
@@ -692,6 +697,7 @@ public class TestPlayer implements Player {
                             game.concede(getId());
                             ((GameImpl) game).checkConcede();
                             actions.remove(action);
+                            return true;
                         }
                     }
                 } else if (action.getAction().startsWith(AI_PREFIX)) {
@@ -786,6 +792,13 @@ public class TestPlayer implements Player {
                             wasProccessed = true;
                         }
 
+                        // check graveyard count: card name, count
+                        if (params[0].equals(CHECK_COMMAND_GRAVEYARD_COUNT) && params.length == 3) {
+                            assertGraveyardCount(action, game, computerPlayer, params[1], Integer.parseInt(params[2]));
+                            actions.remove(action);
+                            wasProccessed = true;
+                        }
+
                         // check hand count: count
                         if (params[0].equals(CHECK_COMMAND_HAND_COUNT) && params.length == 2) {
                             assertHandCount(action, game, computerPlayer, Integer.parseInt(params[1]));
@@ -842,7 +855,9 @@ public class TestPlayer implements Player {
                             wasProccessed = true;
                         }
                     }
-                    if (!wasProccessed) {
+                    if (wasProccessed) {
+                        return true;
+                    } else {
                         Assert.fail("Unknow check command or params: " + command);
                     }
                 } else if (action.getAction().startsWith(SHOW_PREFIX)) {
@@ -938,17 +953,23 @@ public class TestPlayer implements Player {
                         }
                     }
 
-                    if (!wasProccessed) {
+                    if (wasProccessed) {
+                        return true;
+                    } else {
                         Assert.fail("Unknow show command or params: " + command);
                     }
                 }
-            }
+
+                // you don't need to use stack command all the time, so some cast commands can be skiped to next check
+                if (game.getStack().isEmpty()) {
+                    this.chooseStrictModeFailed("cast/activate", game,
+                            "Can't find available command - " + action.getAction() + " (use checkPlayableAbility for non castable checks)", true);
+                }
+            } // turn/step
         }
-        if (AIPlayer) {
-            computerPlayer.priority(game);
-        } else {
-            computerPlayer.pass(game);
-        }
+
+        tryToPlayPriority(game);
+
         // check to prevent endless loops
         if (numberOfActions == actions.size()) {
             foundNoAction++;
@@ -960,6 +981,14 @@ public class TestPlayer implements Player {
             foundNoAction = 0;
         }
         return false;
+    }
+
+    private void tryToPlayPriority(Game game) {
+        if (AIPlayer) {
+            computerPlayer.priority(game);
+        } else {
+            computerPlayer.pass(game);
+        }
     }
 
     private Permanent findPermanentWithAssert(PlayerAction action, Game game, Player player, String cardName) {
@@ -1206,6 +1235,17 @@ public class TestPlayer implements Player {
         }
 
         Assert.assertEquals(action.getActionName() + " - card " + permanentName + " must exists in exile zone with " + count + " instances", count, foundedCount);
+    }
+
+    private void assertGraveyardCount(PlayerAction action, Game game, Player player, String permanentName, int count) {
+        int foundedCount = 0;
+        for (Card card : player.getGraveyard().getCards(game)) {
+            if (isObjectHaveTargetNameOrAlias(card, permanentName) && card.isOwnedBy(player.getId())) {
+                foundedCount++;
+            }
+        }
+
+        Assert.assertEquals(action.getActionName() + " - card " + permanentName + " must exists in graveyard zone with " + count + " instances", count, foundedCount);
     }
 
     private void assertHandCount(PlayerAction action, Game game, Player player, int count) {
@@ -1668,7 +1708,16 @@ public class TestPlayer implements Player {
     }
 
     private void chooseStrictModeFailed(String choiceType, Game game, String reason) {
+        chooseStrictModeFailed(choiceType, game, reason, false);
+    }
+
+    private void chooseStrictModeFailed(String choiceType, Game game, String reason, boolean printAbilities) {
         if (strictChooseMode && !AICanChooseInStrictMode) {
+            if (printAbilities) {
+                printStart("Available abilities for " + computerPlayer.getName());
+                printAbilities(game, computerPlayer.getPlayable(game, true));
+                printEnd();
+            }
             Assert.fail("Missing " + choiceType + " def for"
                     + " turn " + game.getTurnNum()
                     + ", step " + (game.getStep() != null ? game.getStep().getType().name() : "not started")

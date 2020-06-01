@@ -39,14 +39,20 @@ public class AdventureCardsTest extends CardTestPlayerBase {
 
     @Test
     public void testCantCastTreatsToShareTwice() {
-        setStrictChooseMode(true);
-        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
         addCard(Zone.HAND, playerA, "Curious Pair");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+
+        checkPlayableAbility("can play on first", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Treats to Share", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Treats to Share");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Treats to Share");
+
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPlayableAbility("can't play on second", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Treats to Share", false);
+
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertActionsCount(playerA, 1);
+        assertAllCommandsUsed();
+
         assertHandCount(playerA, 0);
         assertPermanentCount(playerA, "Food", 1);
         assertExileCount(playerA, "Curious Pair", 1);
@@ -430,18 +436,21 @@ public class AdventureCardsTest extends CardTestPlayerBase {
 
     @Test
     public void testCantCastCuriousPairWithMelek() {
-        setStrictChooseMode(true);
-        addCard(Zone.BATTLEFIELD, playerA, "Melek, Izzet Paragon");
-        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
         removeAllCardsFromLibrary(playerA);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Melek, Izzet Paragon");
+        //
         addCard(Zone.LIBRARY, playerA, "Curious Pair");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Curious Pair");
+        checkPlayableAbility("can't play", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Curious Pair", false);
+        checkPlayableAbility("can play", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Treats to Share", true);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
-        assertActionsCount(playerA, 1);
         assertPermanentCount(playerA, "Curious Pair", 0);
         assertLibraryCount(playerA, 1);
     }
@@ -477,19 +486,21 @@ public class AdventureCardsTest extends CardTestPlayerBase {
 
     @Test
     public void testCantCastTreatsToShareWithGarruksHorde() {
-        setStrictChooseMode(true);
-        addCard(Zone.BATTLEFIELD, playerA, "Garruk's Horde");
-        addCard(Zone.BATTLEFIELD, playerA, "Forest");
         removeAllCardsFromLibrary(playerA);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Garruk's Horde");
+        //
         addCard(Zone.LIBRARY, playerA, "Curious Pair");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
 
-        // showAvaileableAbilities("abils", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Treats to Share");
+        checkPlayableAbility("can play", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Curious Pair", true);
+        checkPlayableAbility("can't play", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Treats to Share", false);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
-        assertActionsCount(playerA, 1);
         assertPermanentCount(playerA, "Food", 0);
         assertLibraryCount(playerA, 1);
     }

@@ -18,14 +18,23 @@ public class IrencragFeatTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Irencrag Feat", 1);
         addCard(Zone.HAND, playerA, "Dwarven Trader", 2);
 
+        // 1
+        checkPlayableAbility("can cast before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Dwarven Trader", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Irencrag Feat");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // 2
+        checkPlayableAbility("can cast after feat 1", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Dwarven Trader", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dwarven Trader");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dwarven Trader");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // 3
+        checkPlayableAbility("can't cast after feat 2", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Dwarven Trader", false);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        //assertAllCommandsUsed(); // second trader must be restricted to cast
+        assertAllCommandsUsed();
 
         assertHandCount(playerA, "Dwarven Trader", 1);
         assertPermanentCount(playerA, "Dwarven Trader", 1);
@@ -38,16 +47,32 @@ public class IrencragFeatTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Irencrag Feat", 1);
         addCard(Zone.HAND, playerA, "Dwarven Trader", 4);
 
+        // 1
+        checkPlayableAbility("can cast before feat 1", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Dwarven Trader", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dwarven Trader");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // 2
+        checkPlayableAbility("can cast before feat 1", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Dwarven Trader", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dwarven Trader");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // 3
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Irencrag Feat");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // 4
+        checkPlayableAbility("can cast after feat 1", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Dwarven Trader", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dwarven Trader");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dwarven Trader");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // 5
+        checkPlayableAbility("can't cast after feat 2", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Dwarven Trader", false);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        //assertAllCommandsUsed(); // second trader must be restricted to cast
+        assertAllCommandsUsed();
 
         assertHandCount(playerA, "Dwarven Trader", 1);
         assertPermanentCount(playerA, "Dwarven Trader", 3);
@@ -59,6 +84,7 @@ public class IrencragFeatTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Irencrag Feat", 1);
         addCard(Zone.HAND, playerA, "Lightning Bolt", 4);
 
+        // no restrictions for stack
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Irencrag Feat");
@@ -80,17 +106,25 @@ public class IrencragFeatTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Irencrag Feat", 1);
         addCard(Zone.HAND, playerA, "Lightning Bolt", 4);
 
+        // on stack before
+        checkPlayableAbility("can cast before feat 1", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Lightning Bolt", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        checkPlayableAbility("can cast before feat 2", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Lightning Bolt", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+
+        // feat
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Irencrag Feat");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // after resolve
+        checkPlayableAbility("can cast after feat 1", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Lightning Bolt", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        checkPlayableAbility("can't cast after feat 2", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Lightning Bolt", false);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        //assertAllCommandsUsed(0); // second bolt must be restricted to cast
+        assertAllCommandsUsed();
 
         assertHandCount(playerA, "Lightning Bolt", 4 - 3);
         assertLife(playerB, 20 - 3 * 3);
