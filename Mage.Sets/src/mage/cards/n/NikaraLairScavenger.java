@@ -23,6 +23,7 @@ import java.util.UUID;
 
 /**
  * @author TheElk801
+ * @author etpalmer63
  */
 public final class NikaraLairScavenger extends CardImpl {
 
@@ -49,29 +50,12 @@ public final class NikaraLairScavenger extends CardImpl {
         // Menace
         this.addAbility(new MenaceAbility());
 
-        //try using approach from NinthBridgePatrol
-         //sketch
-
-         Ability ability = new ZoneChangeAllTriggeredAbility(
-                 Zone.BATTLEFIELD,
-                 Zone.BATTLEFIELD,
-                 null,
-                 new DrawCardSourceControllerEffect(1),
-                 filter,
-                 "Whenever another creature you control leaves the battlefield, if it had one or more counters on it, ",
-                 false);
-        ability.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
-        this.addAbility(ability);
-
-
         // Whenever another creature you control leaves the battlefield, if it had one or more counters on it, you draw a card and lose 1 life.
-        /*
-        Ability ability = new LeavesBattlefieldAllTriggeredAbility(new DrawCardSourceControllerEffect(1)
-                .setText("if it had one or more counters on it, you draw a card"), filter);
+        Ability ability = new ZoneChangeAllTriggeredAbility(Zone.BATTLEFIELD, Zone.BATTLEFIELD,null,
+                new DrawCardSourceControllerEffect(1), filter,
+                "Whenever another creature you control leaves the battlefield, if it had one or more counters on it, ", false);
         ability.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
         this.addAbility(ability);
-        */
-
     }
 
     private NikaraLairScavenger(final NikaraLairScavenger card) {
