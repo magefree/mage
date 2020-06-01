@@ -3,6 +3,7 @@ package mage.cards.n;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.LeavesBattlefieldAllTriggeredAbility;
+import mage.abilities.common.ZoneChangeAllTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.keyword.MenaceAbility;
@@ -12,6 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -47,11 +49,29 @@ public final class NikaraLairScavenger extends CardImpl {
         // Menace
         this.addAbility(new MenaceAbility());
 
+        //try using approach from NinthBridgePatrol
+         //sketch
+
+         Ability ability = new ZoneChangeAllTriggeredAbility(
+                 Zone.BATTLEFIELD,
+                 Zone.BATTLEFIELD,
+                 null,
+                 new DrawCardSourceControllerEffect(1),
+                 filter,
+                 "Whenever another creature you control leaves the battlefield, if it had one or more counters on it, ",
+                 false);
+        ability.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
+        this.addAbility(ability);
+
+
         // Whenever another creature you control leaves the battlefield, if it had one or more counters on it, you draw a card and lose 1 life.
+        /*
         Ability ability = new LeavesBattlefieldAllTriggeredAbility(new DrawCardSourceControllerEffect(1)
                 .setText("if it had one or more counters on it, you draw a card"), filter);
         ability.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
         this.addAbility(ability);
+        */
+
     }
 
     private NikaraLairScavenger(final NikaraLairScavenger card) {
