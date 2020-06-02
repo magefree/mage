@@ -115,26 +115,33 @@ public abstract class Watcher implements Serializable {
                         ((Set) field.get(watcher)).clear();
                         ((Set) field.get(watcher)).addAll((Set) field.get(this));
                     } else if (field.getType() == Map.class) {
-                        Map target = ((Map) field.get(watcher));
-                        target.clear();
-                        Map source = (Map) field.get(this);
-
                         ParameterizedType parameterizedType = (ParameterizedType) field.getGenericType();
                         Type valueType = parameterizedType.getActualTypeArguments()[1];
-                        if (valueType.getClass().getSimpleName().contains("Set")) {
-                            source.entrySet().forEach(kv -> {
-                                Object key = ((Map.Entry) kv).getKey();
-                                Set value = (Set) ((Map.Entry) kv).getValue();
-                                target.put(key, new HashSet<>(value));
-                            });
+                        if (valueType.getTypeName().contains("Set")) {
+                            Map<Object, Set<Object>> target = (Map<Object, Set<Object>>) field.get(watcher);
+                            Map<Object, Set<Object>> source = (Map<Object, Set<Object>>) field.get(this);
+                            target.clear();
+                            for (Map.Entry<Object, Set<Object>> e : source.entrySet()) {
+                                Set<Object> set = new HashSet<>();
+                                set.addAll(e.getValue());
+                                target.put(e.getKey(), set);
+                            }
                         }
-                        else {
+                        else if (valueType.getTypeName().contains("List")) {
+                            Map<Object, List<Object>> target = (Map<Object, List<Object>>) field.get(watcher);
+                            Map<Object, List<Object>> source = (Map<Object, List<Object>>) field.get(this);
+                            target.clear();
+                            for (Map.Entry<Object, List<Object>> e : source.entrySet()) {
+                                List<Object> list = new ArrayList<>();
+                                list.addAll(e.getValue());
+                                target.put(e.getKey(), list);
+                            }
+                        } else {
                             ((Map) field.get(watcher)).putAll((Map) field.get(this));
                         }
                     } else if (field.getType() == List.class) {
                         ((List) field.get(watcher)).clear();
                         ((List) field.get(watcher)).addAll((List) field.get(this));
-
                     } else {
                         field.set(watcher, field.get(this));
                     }

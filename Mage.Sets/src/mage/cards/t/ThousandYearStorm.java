@@ -156,26 +156,10 @@ class ThousandYearStormEffect extends OneShotEffect {
 
 class ThousandYearStormWatcher extends Watcher {
 
-    private final HashMap<UUID, List<MageObjectReference>> spellsThisTurn;
+    private final Map<UUID, List<MageObjectReference>> spellsThisTurn = new HashMap<>();
 
     public ThousandYearStormWatcher() {
         super(WatcherScope.GAME);
-        this.spellsThisTurn = new HashMap<>();
-    }
-
-    public ThousandYearStormWatcher(final ThousandYearStormWatcher watcher) {
-        super(watcher);
-        // deep copy HashMap
-        this.spellsThisTurn = new HashMap<UUID, List<MageObjectReference>>();
-        for (Map.Entry<UUID, List<MageObjectReference>> entry : watcher.spellsThisTurn.entrySet())
-        {
-            this.spellsThisTurn.put(entry.getKey(), new ArrayList<MageObjectReference>(entry.getValue()));
-        }
-    }
-
-    @Override
-    public ThousandYearStormWatcher copy() {
-        return new ThousandYearStormWatcher(this);
     }
 
     @Override
