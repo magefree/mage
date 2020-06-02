@@ -61,7 +61,10 @@ class CradleOfVitalityEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
-        int lifeGained = (Integer) this.getValue("gainedLife");
+        int lifeGained = 0;
+        if (this.getValue("gainedLife") != null) {
+            lifeGained = (Integer) this.getValue("gainedLife");
+        }
         return permanent != null && lifeGained > 0
                 && permanent.addCounters(CounterType.P1P1.createInstance(lifeGained), source, game);
     }
