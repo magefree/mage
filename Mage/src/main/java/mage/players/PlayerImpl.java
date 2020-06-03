@@ -1499,7 +1499,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public LinkedHashMap<UUID, ActivatedAbility> getUseableActivatedAbilities(MageObject object, Zone zone, Game game) {
+    public LinkedHashMap<UUID, ActivatedAbility> getPlayableActivatedAbilities(MageObject object, Zone zone, Game game) {
         LinkedHashMap<UUID, ActivatedAbility> useable = new LinkedHashMap<>();
         boolean previousState = game.inCheckPlayableState();
         game.setCheckPlayableState(true);
@@ -1510,70 +1510,39 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
 
             // collect and filter playable activated abilities
-            List<Ability> allPlayable = getPlayable(game, true, zone, false);
-            for (Ability ability : allPlayable) {
-                if (ability instanceof ActivatedAbility) {
-                    if (object.hasAbility(ability, game)) {
-                        useable.putIfAbsent(ability.getId(), (ActivatedAbility) ability);
-                    }
+            // GUI: user clicks on card, but it must activate ability from any card's parts (main, left, right)
+            UUID needId1, needId2, needId3;
+            if (object instanceof SplitCard) {
+                needId1 = object.getId();
+                needId2 = ((SplitCard) object).getLeftHalfCard().getId();
+                needId3 = ((SplitCard) object).getRightHalfCard().getId();
+            } else if (object instanceof AdventureCard) {
+                needId1 = object.getId();
+                needId2 = ((AdventureCard) object).getMainCard().getId();
+                needId3 = ((AdventureCard) object).getSpellCard().getId();
+            } else if (object instanceof AdventureCardSpell) {
+                needId1 = object.getId();
+                needId2 = ((AdventureCardSpell) object).getParentCard().getId();
+                needId3 = object.getId();
+            } else {
+                needId1 = object.getId();
+                needId2 = object.getId();
+                needId3 = object.getId();
+            }
+
+            // workaround to find all abilities first and filter it for one object
+            List<ActivatedAbility> allPlayable = getPlayable(game, true, zone, false);
+            for (ActivatedAbility ability : allPlayable) {
+                if (Objects.equals(ability.getSourceId(), needId1)
+                        || Objects.equals(ability.getSourceId(), needId2)
+                        || Objects.equals(ability.getSourceId(), needId3)) {
+                    useable.putIfAbsent(ability.getId(), ability);
                 }
             }
         } finally {
             game.setCheckPlayableState(previousState);
         }
         return useable;
-    }
-
-    // Adds special abilities that are given to non permanents by continuous effects
-    private void getOtherUseableActivatedAbilities(MageObject object, Zone zone, Game game, Map<UUID, ActivatedAbility> useable) {
-        Abilities<ActivatedAbility> otherAbilities = game.getState().getActivatedOtherAbilities(object.getId(), zone);
-        if (otherAbilities != null) {
-            boolean canUse = !(object instanceof Permanent)
-                    || ((Permanent) object).canUseActivatedAbilities(game);
-            for (ActivatedAbility ability : otherAbilities) {
-                if (canUse || ability.getAbilityType() == AbilityType.SPECIAL_ACTION) {
-                    Card card = game.getCard(ability.getSourceId());
-                    if (card != null) {
-                        if (card.isSplitCard() && ability instanceof FlashbackAbility) {
-                            FlashbackAbility flashbackAbility;
-                            // Left Half
-                            if (card.isInstant()) {
-                                flashbackAbility = new FlashbackAbility(((SplitCard) card).getLeftHalfCard().getManaCost(),
-                                        TimingRule.INSTANT);
-                            } else {
-                                flashbackAbility = new FlashbackAbility(((SplitCard) card).getLeftHalfCard().getManaCost(),
-                                        TimingRule.SORCERY);
-                            }
-                            flashbackAbility.setSourceId(card.getId());
-                            flashbackAbility.setControllerId(card.getOwnerId());
-                            flashbackAbility.setSpellAbilityType(SpellAbilityType.SPLIT_LEFT);
-                            flashbackAbility.setAbilityName(((SplitCard) card).getLeftHalfCard().getName());
-                            if (flashbackAbility.canActivate(playerId, game).canActivate()) {
-                                useable.put(flashbackAbility.getId(), flashbackAbility);
-                            }
-                            // Right Half
-                            if (card.isInstant()) {
-                                flashbackAbility = new FlashbackAbility(((SplitCard) card).getRightHalfCard().getManaCost(),
-                                        TimingRule.INSTANT);
-                            } else {
-                                flashbackAbility = new FlashbackAbility(((SplitCard) card).getRightHalfCard().getManaCost(),
-                                        TimingRule.SORCERY);
-                            }
-                            flashbackAbility.setSourceId(card.getId());
-                            flashbackAbility.setControllerId(card.getOwnerId());
-                            flashbackAbility.setSpellAbilityType(SpellAbilityType.SPLIT_RIGHT);
-                            flashbackAbility.setAbilityName(((SplitCard) card).getRightHalfCard().getName());
-                            if (flashbackAbility.canActivate(playerId, game).canActivate()) {
-                                useable.put(flashbackAbility.getId(), flashbackAbility);
-                            }
-
-                        } else {
-                            useable.put(ability.getId(), ability);
-                        }
-                    }
-                }
-            }
-        }
     }
 
     protected LinkedHashMap<UUID, ActivatedManaAbilityImpl> getUseableManaAbilities(MageObject object, Zone zone, Game game) {
@@ -3182,7 +3151,16 @@ public abstract class PlayerImpl implements Player, Serializable {
         return false;
     }
 
-    private void getPlayableFromCardAll(Game game, Zone fromZone, Card card, ManaOptions availableMana, List<Ability> output) {
+    private Abilities<ActivatedAbility> getActivatedOnly(Abilities<Ability> list) {
+        Abilities<ActivatedAbility> res = new AbilitiesImpl<>();
+        list.stream()
+                .filter(a -> a instanceof ActivatedAbility)
+                .map(a -> (ActivatedAbility) a)
+                .forEach(res::add);
+        return res;
+    }
+
+    private void getPlayableFromCardAll(Game game, Zone fromZone, Card card, ManaOptions availableMana, List<ActivatedAbility> output) {
         if (fromZone == null) {
             return;
         }
@@ -3190,41 +3168,22 @@ public abstract class PlayerImpl implements Player, Serializable {
         // BASIC abilities
         if (card instanceof SplitCard) {
             SplitCard splitCard = (SplitCard) card;
-            getPlayableFromCardSingle(game, fromZone, splitCard.getLeftHalfCard(), splitCard.getLeftHalfCard().getAbilities(), availableMana, output);
-            getPlayableFromCardSingle(game, fromZone, splitCard.getRightHalfCard(), splitCard.getRightHalfCard().getAbilities(), availableMana, output);
-            getPlayableFromCardSingle(game, fromZone, splitCard, splitCard.getSharedAbilities(game), availableMana, output);
+            getPlayableFromCardSingle(game, fromZone, splitCard.getLeftHalfCard(), getActivatedOnly(splitCard.getLeftHalfCard().getAbilities(game)), availableMana, output);
+            getPlayableFromCardSingle(game, fromZone, splitCard.getRightHalfCard(), getActivatedOnly(splitCard.getRightHalfCard().getAbilities(game)), availableMana, output);
+            getPlayableFromCardSingle(game, fromZone, splitCard, getActivatedOnly(splitCard.getSharedAbilities(game)), availableMana, output);
         } else if (card instanceof AdventureCard) {
             // adventure must use different card characteristics for different spells (main or adventure)
             AdventureCard adventureCard = (AdventureCard) card;
-            getPlayableFromCardSingle(game, fromZone, adventureCard.getSpellCard(), adventureCard.getSpellCard().getAbilities(), availableMana, output);
-            getPlayableFromCardSingle(game, fromZone, adventureCard, adventureCard.getSharedAbilities(game), availableMana, output);
+            getPlayableFromCardSingle(game, fromZone, adventureCard.getSpellCard(), getActivatedOnly(adventureCard.getSpellCard().getAbilities(game)), availableMana, output);
+            getPlayableFromCardSingle(game, fromZone, adventureCard, getActivatedOnly(adventureCard.getSharedAbilities(game)), availableMana, output);
         } else {
-            getPlayableFromCardSingle(game, fromZone, card, card.getAbilities(game), availableMana, output);
+            getPlayableFromCardSingle(game, fromZone, card, getActivatedOnly(card.getAbilities(game)), availableMana, output);
         }
 
-        // DYNAMIC ADDED abilities
-        if (fromZone != Zone.ALL) { // TODO: test revealed cards with dynamic added abilities
-            // Other activated abilities (added dynamic by effects)
-            LinkedHashMap<UUID, ActivatedAbility> useable;
-            if (card instanceof AdventureCard) {
-                // adventure cards (contains two different cards: main and adventure spell)
-                useable = new LinkedHashMap<>();
-                getOtherUseableActivatedAbilities(((AdventureCard) card).getSpellCard(), fromZone, game, useable);
-                output.addAll(useable.values());
-
-                useable = new LinkedHashMap<>();
-                getOtherUseableActivatedAbilities(card, fromZone, game, useable);
-                output.addAll(useable.values());
-            } else {
-                // all other cards (TODO: check split cards with dynamic added abilities)
-                useable = new LinkedHashMap<>();
-                getOtherUseableActivatedAbilities(card, fromZone, game, useable);
-                output.addAll(useable.values());
-            }
-        }
+        // DYNAMIC ADDED abilities are adds in getAbilities(game)
     }
 
-    private void getPlayableFromCardSingle(Game game, Zone fromZone, Card card, Abilities<Ability> candidateAbilities, ManaOptions availableMana, List<Ability> output) {
+    private void getPlayableFromCardSingle(Game game, Zone fromZone, Card card, Abilities<ActivatedAbility> candidateAbilities, ManaOptions availableMana, List<ActivatedAbility> output) {
         // check "can play" condition as affected controller (BUT play from not own hand zone must be checked as original controller)
         for (ActivatedAbility ability : candidateAbilities.getActivatedAbilities(Zone.ALL)) {
             boolean isPlaySpell = (ability instanceof SpellAbility);
@@ -3300,12 +3259,12 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public List<Ability> getPlayable(Game game, boolean hidden) {
+    public List<ActivatedAbility> getPlayable(Game game, boolean hidden) {
         return getPlayable(game, hidden, Zone.ALL, true);
     }
 
-    public List<Ability> getPlayable(Game game, boolean hidden, Zone fromZone, boolean hideDuplicatedAbilities) {
-        List<Ability> playable = new ArrayList<>();
+    public List<ActivatedAbility> getPlayable(Game game, boolean hidden, Zone fromZone, boolean hideDuplicatedAbilities) {
+        List<ActivatedAbility> playable = new ArrayList<>();
         if (shouldSkipGettingPlayable(game)) {
             return playable;
         }
@@ -3402,19 +3361,17 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
 
             // eliminate duplicate activated abilities (uses for AI plays)
-            Map<String, Ability> activatedUnique = new HashMap<>();
-            List<Ability> activatedAll = new ArrayList<>();
+            Map<String, ActivatedAbility> activatedUnique = new HashMap<>();
+            List<ActivatedAbility> activatedAll = new ArrayList<>();
 
             // activated abilities from battlefield objects
             if (fromAll || fromZone == Zone.BATTLEFIELD) {
                 for (Permanent permanent : game.getBattlefield().getAllActivePermanents(playerId)) {
-                    List<Ability> battlePlayable = new ArrayList<>();
+                    List<ActivatedAbility> battlePlayable = new ArrayList<>();
                     getPlayableFromCardAll(game, Zone.BATTLEFIELD, permanent, availableMana, battlePlayable);
-                    for (Ability ability : battlePlayable) {
-                        if (ability instanceof ActivatedAbility) {
-                            activatedUnique.putIfAbsent(ability.toString(), ability);
-                            activatedAll.add(ability);
-                        }
+                    for (ActivatedAbility ability : battlePlayable) {
+                        activatedUnique.putIfAbsent(ability.toString(), ability);
+                        activatedAll.add(ability);
                     }
                 }
             }
@@ -3467,7 +3424,7 @@ public abstract class PlayerImpl implements Player, Serializable {
      */
     @Override
     public Map<UUID, Integer> getPlayableObjects(Game game, Zone zone) {
-        List<Ability> playableAbilities = getPlayable(game, true, zone, false); // do not hide duplicated abilities/cards
+        List<ActivatedAbility> playableAbilities = getPlayable(game, true, zone, false); // do not hide duplicated abilities/cards
         Map<UUID, Integer> playableObjects = new HashMap<>();
         for (Ability ability : playableAbilities) {
             if (ability.getSourceId() != null) {
@@ -3518,7 +3475,6 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public List<Ability> getPlayableOptions(Ability ability, Game game) {
         List<Ability> options = new ArrayList<>();
-
         if (ability.isModal()) {
             addModeOptions(options, ability, game);
         } else if (!ability.getTargets().getUnchosen().isEmpty()) {

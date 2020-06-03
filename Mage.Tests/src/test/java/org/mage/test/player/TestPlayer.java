@@ -587,14 +587,14 @@ public class TestPlayer implements Player {
                     if (groups.length > 2 && !checkExecuteCondition(groups, game)) {
                         break;
                     }
-                    for (Ability ability : computerPlayer.getPlayable(game, true)) { // add wrong action log?
+                    for (ActivatedAbility ability : computerPlayer.getPlayable(game, true)) { // add wrong action log?
                         if (isAbilityHaveTargetNameOrAlias(game, ability, groups[0])) {
                             int bookmark = game.bookmarkState();
-                            Ability newAbility = ability.copy();
+                            ActivatedAbility newAbility = ability.copy();
                             if (groups.length > 1 && !groups[1].equals("target=" + NO_TARGET)) {
                                 groupsForTargetHandling = groups;
                             }
-                            if (computerPlayer.activateAbility((ActivatedAbility) newAbility, game)) {
+                            if (computerPlayer.activateAbility(newAbility, game)) {
                                 actions.remove(action);
                                 groupsForTargetHandling = null;
                                 foundNoAction = 0; // Reset enless loop check because of no action
@@ -1078,7 +1078,7 @@ public class TestPlayer implements Player {
         });
     }
 
-    private void printAbilities(Game game, List<Ability> abilities) {
+    private void printAbilities(Game game, List<? extends Ability> abilities) {
         System.out.println("Total abilities: " + (abilities != null ? abilities.size() : 0));
         if (abilities == null) {
             return;
@@ -1714,6 +1714,8 @@ public class TestPlayer implements Player {
     private void chooseStrictModeFailed(String choiceType, Game game, String reason, boolean printAbilities) {
         if (strictChooseMode && !AICanChooseInStrictMode) {
             if (printAbilities) {
+                printStart("Available mana for " + computerPlayer.getName());
+                printMana(game, computerPlayer.getManaAvailable(game));
                 printStart("Available abilities for " + computerPlayer.getName());
                 printAbilities(game, computerPlayer.getPlayable(game, true));
                 printEnd();
@@ -2712,8 +2714,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public LinkedHashMap<UUID, ActivatedAbility> getUseableActivatedAbilities(MageObject object, Zone zone, Game game) {
-        return computerPlayer.getUseableActivatedAbilities(object, zone, game);
+    public LinkedHashMap<UUID, ActivatedAbility> getPlayableActivatedAbilities(MageObject object, Zone zone, Game game) {
+        return computerPlayer.getPlayableActivatedAbilities(object, zone, game);
     }
 
     @Override
@@ -3171,12 +3173,8 @@ public class TestPlayer implements Player {
         return computerPlayer.getManaAvailable(game);
     }
 
-    public List<Permanent> getAvailableManaProducersWithCost(Game game) {
-        return computerPlayer.getAvailableManaProducersWithCost(game);
-    }
-
     @Override
-    public List<Ability> getPlayable(Game game, boolean hidden) {
+    public List<ActivatedAbility> getPlayable(Game game, boolean hidden) {
         return computerPlayer.getPlayable(game, hidden);
     }
 

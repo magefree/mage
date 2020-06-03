@@ -1056,7 +1056,7 @@ public class HumanPlayer extends PlayerImpl {
                             actingPlayer = game.getPlayer(game.getPriorityPlayerId());
                         }
                         if (actingPlayer != null) {
-                            useableAbilities = actingPlayer.getUseableActivatedAbilities(object, zone, game);
+                            useableAbilities = actingPlayer.getPlayableActivatedAbilities(object, zone, game);
                         }
 
                         if (object instanceof Card

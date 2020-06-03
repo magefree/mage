@@ -2,6 +2,7 @@
 package mage.player.ai;
 
 import mage.abilities.Ability;
+import mage.abilities.ActivatedAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.PassAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -45,16 +46,16 @@ public class MCTSPlayer extends ComputerPlayer {
         return new MCTSPlayer(this);
     }
 
-    protected List<Ability> getPlayableAbilities(Game game) {
-        List<Ability> playables = getPlayable(game, true);
+    protected List<ActivatedAbility> getPlayableAbilities(Game game) {
+        List<ActivatedAbility> playables = getPlayable(game, true);
         playables.add(pass);
         return playables;
     }
 
     public List<Ability> getPlayableOptions(Game game) {
         List<Ability> all = new ArrayList<>();
-        List<Ability> playables = getPlayableAbilities(game);
-        for (Ability ability: playables) {
+        List<ActivatedAbility> playables = getPlayableAbilities(game);
+        for (ActivatedAbility ability: playables) {
             List<Ability> options = game.getPlayer(playerId).getPlayableOptions(ability, game);
             if (options.isEmpty()) {
                 if (!ability.getManaCosts().getVariableCosts().isEmpty()) {

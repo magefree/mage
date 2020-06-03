@@ -627,13 +627,13 @@ public interface Player extends MageItem, Copyable<Player> {
 
     ManaOptions getManaAvailable(Game game);
 
-    List<Ability> getPlayable(Game game, boolean hidden);
+    List<ActivatedAbility> getPlayable(Game game, boolean hidden);
 
     List<Ability> getPlayableOptions(Ability ability, Game game);
 
     Map<UUID, Integer> getPlayableObjects(Game game, Zone zone);
 
-    LinkedHashMap<UUID, ActivatedAbility> getUseableActivatedAbilities(MageObject object, Zone zone, Game game);
+    LinkedHashMap<UUID, ActivatedAbility> getPlayableActivatedAbilities(MageObject object, Zone zone, Game game);
 
     boolean addCounters(Counter counter, Game game);
 

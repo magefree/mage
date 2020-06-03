@@ -14,6 +14,7 @@ import mage.ObjectColor;
 import mage.abilities.*;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.HintUtils;
+import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.repository.PluginClassloaderRegistery;
 import mage.constants.*;
@@ -311,6 +312,21 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
         // dynamic
         all.addAll(cardState.getAbilities());
+
+        // workaround to add dynamic flashback ability from main card to all parts (example: Snapcaster Mage gives flashback to split card)
+        if (!this.getId().equals(this.getMainCard().getId())) {
+            CardState mainCardState = game.getState().getCardState(this.getMainCard().getId());
+            if (mainCardState != null
+                    && !mainCardState.hasLostAllAbilities()
+                    && mainCardState.getAbilities().containsClass(FlashbackAbility.class)) {
+                FlashbackAbility flash = new FlashbackAbility(this.getManaCost(), this.isInstant() ? TimingRule.INSTANT : TimingRule.SORCERY);
+                flash.setSourceId(this.getId());
+                flash.setControllerId(this.getOwnerId());
+                flash.setSpellAbilityType(this.getSpellAbility().getSpellAbilityType());
+                flash.setAbilityName(this.getName());
+                all.add(flash);
+            }
+        }
 
         return all;
     }
