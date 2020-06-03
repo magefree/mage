@@ -169,6 +169,11 @@ class ArchonOfValorsReachReplacementEffect extends ContinuousRuleModifyingEffect
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
+        
+        if ((String) game.getState().getValue(source.getSourceId().toString() + "_cardtype") == null){
+            return false;
+        }
+        
         CardType cardType = ArchonOfValorsReachChoice.getType((String) game.getState().getValue(source.getSourceId().toString() + "_cardtype"));
         // spell is not on the stack yet, so we have to check the card
         Card card = game.getCard(event.getSourceId());
