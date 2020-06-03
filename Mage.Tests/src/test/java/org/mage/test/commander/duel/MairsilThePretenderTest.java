@@ -38,7 +38,9 @@ public class MairsilThePretenderTest extends CardTestCommanderDuelBase {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
-
+        addCard(Zone.LIBRARY, playerA, "Silvercoat Lion", 3);        
+        skipInitShuffling();
+        
         // Enchant creature
         // Enchanted creature has haste and “At the beginning of your upkeep, destroy this creature. 
         // Reveal cards from the top of your library until you reveal a creature card.
