@@ -1112,14 +1112,18 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public boolean destroy(UUID sourceId, Game game, boolean noRegen) {
+        // Only permanets on the battlefield can be destroyed
+        if (!game.getState().getZone(getId()).equals(Zone.BATTLEFIELD)) {
+            return false;
+        }
         //20091005 - 701.6
         if (abilities.containsKey(IndestructibleAbility.getInstance().getId())) {
             return false;
         }
 
         if (!game.replaceEvent(GameEvent.getEvent(EventType.DESTROY_PERMANENT, objectId, sourceId, controllerId, noRegen ? 1 : 0))) {
-            // this means destroy was successful, if object movement to graveyard will be replaced (e.g. commander to command zone) its still
-            // is handled as successful destroying (but not as sucessful "dies this way" for destroying).
+            // this means destroy was successful, if object movement to graveyard will be replaced (e.g. commander to command zone) it's still
+            // handled as successful destroying (but not as sucessful "dies this way" for destroying).
             if (moveToZone(Zone.GRAVEYARD, sourceId, game, false)) {
                 if (!game.isSimulation()) {
                     String logName;
