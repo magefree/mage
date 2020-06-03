@@ -110,11 +110,13 @@ public abstract class SplitCard extends CardImpl {
     public Abilities<Ability> getAbilities() {
         Abilities<Ability> allAbilites = new AbilitiesImpl<>();
         for (Ability ability : super.getAbilities()) {
+            // ignore split abilities TODO: why it here, for GUI's cleanup in card texts? Maybe it can be removed
             if (ability instanceof SpellAbility
-                    && ((SpellAbility) ability).getSpellAbilityType() != SpellAbilityType.SPLIT
-                    && ((SpellAbility) ability).getSpellAbilityType() != SpellAbilityType.SPLIT_AFTERMATH) {
-                allAbilites.add(ability);
+                    && (((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.SPLIT
+                    || ((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.SPLIT_AFTERMATH)) {
+                continue;
             }
+            allAbilites.add(ability);
         }
         allAbilites.addAll(leftHalfCard.getAbilities());
         allAbilites.addAll(rightHalfCard.getAbilities());

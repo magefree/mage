@@ -31,9 +31,10 @@ public class DoublingCubeTest extends CardTestPlayerBase {
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}, {T}:");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
         assertManaPool(playerA, ManaType.COLORLESS, 4);
-
+        assertAllCommandsUsed();
     }
 }
