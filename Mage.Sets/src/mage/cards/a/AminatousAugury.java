@@ -170,7 +170,8 @@ class AminatousAuguryCastFromExileEffect extends AsThoughEffectImpl {
                 Player player = game.getPlayer(affectedControllerId);
                 if (player != null) {
                     //TODO: Bolass Citadel seems to work, try fix based on that 
-                    player.setCastSourceIdWithAlternateMana(objectId, null, card.getSpellAbility().getCosts());
+                    player.setCastSourceIdWithAlternateMana(objectId, null, source.getCosts());
+                    //player.setCastSourceIdWithAlternateMana(objectId, null, card.getSpellAbility().getCosts());
                     return true;
                 }
             }
