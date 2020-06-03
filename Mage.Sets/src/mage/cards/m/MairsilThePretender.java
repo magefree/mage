@@ -46,10 +46,12 @@ public final class MairsilThePretender extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // When Mairsil, the Pretender enters the battlefield, you may exile an artifact or creature card from your hand or graveyard and put a cage counter on it.
+        // When Mairsil, the Pretender enters the battlefield, you may exile an artifact or creature card from your hand
+        // or graveyard and put a cage counter on it.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new MairsilThePretenderExileEffect(), true));
 
-        // Mairsil, the Pretender has all activated abilities of all cards you own in exile with cage counters on them. You may activate each of those abilities only once each turn.
+        // Mairsil, the Pretender has all activated abilities of all cards you own in exile with cage counters on them. 
+        // You may activate each of those abilities only once each turn.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new MairsilThePretenderGainAbilitiesEffect());
         this.addAbility(ability);
     }

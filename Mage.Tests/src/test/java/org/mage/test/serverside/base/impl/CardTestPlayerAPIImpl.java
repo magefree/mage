@@ -1600,6 +1600,15 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         player.addAction(turnNum, step, ACTIVATE_ABILITY + ability + "$target=" + String.join("^", targetNames));
     }
 
+    /**
+     * 
+     * @param turnNum
+     * @param step
+     * @param player
+     * @param ability
+     * @param targetName  use NO_TARGET if there is no target to set
+     * @param spellOnStack 
+     */
     public void activateAbility(int turnNum, PhaseStep step, TestPlayer player, String ability, String targetName, String spellOnStack) {
         // TODO: it's uses computerPlayer to execute, only ability target will work, but choices and targets commands aren't
         this.activateAbility(turnNum, step, player, ability, targetName, spellOnStack, StackClause.WHILE_ON_STACK);
