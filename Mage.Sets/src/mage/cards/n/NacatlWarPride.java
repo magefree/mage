@@ -23,9 +23,10 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.EmptyToken;
 import mage.target.targetpointer.FixedTargets;
-import mage.util.CardUtil;
+import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
+import mage.players.Player;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -92,20 +93,13 @@ class NacatlWarPrideEffect extends OneShotEffect {
             return false;
         }
 
-        List<Permanent> copies = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            EmptyToken token = new EmptyToken();
-            CardUtil.copyTo(token).from(origNactalWarPride);
-            token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId(), true, true);
-
-            for (UUID tokenId : token.getLastAddedTokenIds()) { // by cards like Doubling Season multiple tokens can be added to the battlefield
-                Permanent tokenPermanent = game.getPermanent(tokenId);
-                if (tokenPermanent != null) {
-                    copies.add(tokenPermanent);
-                }
-            }
-        }
-
+        List<Permanent> copies = new ArrayList<>();    
+        Player controller = game.getPlayer(source.getControllerId());
+        CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(controller.getId(), null, false, count, true, true);
+        effect.setTargetPointer(new FixedTarget(origNactalWarPride, game));
+        effect.apply(game, source);
+        copies.addAll(effect.getAddedPermanent());
+        
         if (!copies.isEmpty()) {
             FixedTargets fixedTargets = new FixedTargets(copies, game);
             ExileTargetEffect exileEffect = new ExileTargetEffect();
