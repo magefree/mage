@@ -963,7 +963,7 @@ public class TestPlayer implements Player {
                 // you don't need to use stack command all the time, so some cast commands can be skiped to next check
                 if (game.getStack().isEmpty()) {
                     this.chooseStrictModeFailed("cast/activate", game,
-                            "Can't find available command - " + action.getAction() + " (use checkPlayableAbility for non castable checks)", true);
+                            "Can't find available command - " + action.getAction() + " (use checkPlayableAbility for \"non available\" checks)", true);
                 }
             } // turn/step
         }
@@ -1088,7 +1088,7 @@ public class TestPlayer implements Player {
                 .map(a -> (a.getZone() + " -> "
                         + a.getSourceObject(game).getIdName() + " -> "
                         + (a.toString().length() > 0
-                        ? a.toString().substring(0, Math.min(20, a.toString().length()) - 1)
+                        ? a.toString().substring(0, Math.min(20, a.toString().length()))
                         : a.getClass().getSimpleName())
                         + "..."))
                 .sorted()

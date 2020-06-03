@@ -1047,8 +1047,9 @@ public class HumanPlayer extends PlayerImpl {
                     Zone zone = game.getState().getZone(object.getId());
                     if (zone != null) {
                         // look at card or try to cast/activate abilities
+                        LinkedHashMap<UUID, ActivatedAbility> useableAbilities = new LinkedHashMap<>();
+
                         Player actingPlayer = null;
-                        LinkedHashMap<UUID, ActivatedAbility> useableAbilities = null;
                         if (playerId.equals(game.getPriorityPlayerId())) {
                             actingPlayer = this;
                         } else if (getPlayersUnderYourControl().contains(game.getPriorityPlayerId())) {
@@ -1060,11 +1061,10 @@ public class HumanPlayer extends PlayerImpl {
 
                         if (object instanceof Card
                                 && ((Card) object).isFaceDown(game)
-                                && lookAtFaceDownCard((Card) object, game, useableAbilities == null ? 0 : useableAbilities.size())) {
+                                && lookAtFaceDownCard((Card) object, game, useableAbilities.size())) {
                             result = true;
                         } else {
-                            if (useableAbilities != null
-                                    && !useableAbilities.isEmpty()) {
+                            if (!useableAbilities.isEmpty()) {
                                 activateAbility(useableAbilities, object, game);
                                 result = true;
                             }
@@ -1347,8 +1347,7 @@ public class HumanPlayer extends PlayerImpl {
         Zone zone = game.getState().getZone(object.getId());
         if (zone != null) {
             LinkedHashMap<UUID, ActivatedManaAbilityImpl> useableAbilities = getUseableManaAbilities(object, zone, game);
-            if (useableAbilities != null
-                    && !useableAbilities.isEmpty()) {
+            if (!useableAbilities.isEmpty()) {
                 useableAbilities = ManaUtil.tryToAutoPay(unpaid, useableAbilities); // eliminates other abilities if one fits perfectly
                 currentlyUnpaidMana = unpaid;
                 activateAbility(useableAbilities, object, game);
