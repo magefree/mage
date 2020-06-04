@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -15,6 +14,8 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
+
+import java.util.UUID;
 
 /**
  * @author Loki
@@ -33,7 +34,7 @@ public final class ClotSliver extends CardImpl {
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new GenericManaCost(2)), Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect("this permanent"), new GenericManaCost(2)), Duration.WhileOnBattlefield, filter, false)));
     }
 
     public ClotSliver(final ClotSliver card) {
