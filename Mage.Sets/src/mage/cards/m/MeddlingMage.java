@@ -8,6 +8,7 @@ import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.ChooseACardNameEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -18,6 +19,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.stack.Spell;
 
 /**
  *
@@ -82,14 +84,23 @@ class MeddlingMageReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.CAST_SPELL;
+        return event.getType() == EventType.CAST_SPELL_LATE;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
+        // Check for Morph spell (no name)
+        Card card = game.getCard(event.getSourceId());
+        if (card != null) {
+            Spell spell = game.getState().getStack().getSpell(event.getSourceId());
+            if (spell != null && spell.isFaceDown(game)) {
+                return false; // Face Down cast spell (Morph creature) has no name
+            }
+        }
         MageObject object = game.getObject(event.getSourceId());
-        // fixes issue #1072
-        return object != null && !object.isCopy() && object.getName().equals(game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY));
-    }
+        return object != null
+                && !object.isCopy()
+                && object.getName().equals(game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY));
 
+    }
 }
