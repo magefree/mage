@@ -11,6 +11,7 @@ import mage.constants.ColoredManaSymbol;
 import mage.constants.EmptyNames;
 import mage.constants.ManaType;
 import mage.filter.Filter;
+import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.CardState;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -655,6 +656,14 @@ public final class CardUtil {
 
     public static boolean haveSameNames(MageObject object1, MageObject object2) {
         return object1 != null && object2 != null && haveSameNames(object1.getName(), object2.getName());
+    }
+
+    public static boolean haveSameNames(MageObject object, String needName, Game game) {
+        return containsName(object, needName, game);
+    }
+
+    public static boolean containsName(MageObject object, String name, Game game) {
+        return new NamePredicate(name).apply(object, game);
     }
 
     public static boolean haveEmptyName(String name) {

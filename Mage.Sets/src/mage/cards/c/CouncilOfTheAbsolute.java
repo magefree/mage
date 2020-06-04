@@ -93,7 +93,7 @@ class CouncilOfTheAbsoluteReplacementEffect extends ContinuousRuleModifyingEffec
         if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
             MageObject object = game.getObject(event.getSourceId());
             String needName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
-            return object != null && CardUtil.haveSameNames(object.getName(), needName);
+            return object != null && CardUtil.haveSameNames(object, needName, game);
         }
         return false;
     }
@@ -123,7 +123,7 @@ class CouncilOfTheAbsoluteCostReductionEffect extends CostModificationEffectImpl
             Card card = game.getCard(abilityToModify.getSourceId());
             if (card != null) {
                 String needName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
-                return CardUtil.haveSameNames(card.getName(), needName);
+                return CardUtil.haveSameNames(card, needName, game);
             }
         }
         return false;

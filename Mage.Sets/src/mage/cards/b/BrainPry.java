@@ -60,7 +60,7 @@ class BrainPryEffect extends OneShotEffect {
         if (targetPlayer != null && controller != null && sourceObject != null && cardName != null) {
             boolean hasDiscarded = false;
             for (Card card : targetPlayer.getHand().getCards(game)) {
-                if (CardUtil.haveSameNames(card.getName(), cardName)) {
+                if (CardUtil.haveSameNames(card, cardName, game)) {
                     targetPlayer.discard(card, source, game);
                     hasDiscarded = true;
                     break;

@@ -67,7 +67,7 @@ class PredictEffect extends OneShotEffect {
             Card card = targetPlayer.getLibrary().getFromTop(game);
             if (card != null) {
                 controller.moveCards(card, Zone.GRAVEYARD, source, game);
-                if (CardUtil.haveSameNames(card.getName(), cardName)) {
+                if (CardUtil.haveSameNames(card, cardName, game)) {
                     amount = 2;
                 }
             }

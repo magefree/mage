@@ -31,11 +31,13 @@ public class NamePredicate implements Predicate<MageObject> {
         // A split card has the chosen name if one of its two names matches the chosen name.
         if (input instanceof SplitCard) {
             return CardUtil.haveSameNames(name, ((SplitCard) input).getLeftHalfCard().getName(), this.ignoreMtgRuleForEmptyNames) ||
-                    CardUtil.haveSameNames(name, ((SplitCard) input).getRightHalfCard().getName(), this.ignoreMtgRuleForEmptyNames);
+                    CardUtil.haveSameNames(name, ((SplitCard) input).getRightHalfCard().getName(), this.ignoreMtgRuleForEmptyNames) ||
+                    CardUtil.haveSameNames(name, input.getName(), this.ignoreMtgRuleForEmptyNames);
         } else if (input instanceof Spell && ((Spell) input).getSpellAbility().getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED) {
             SplitCard card = (SplitCard) ((Spell) input).getCard();
             return CardUtil.haveSameNames(name, card.getLeftHalfCard().getName(), this.ignoreMtgRuleForEmptyNames) ||
-                    CardUtil.haveSameNames(name, card.getRightHalfCard().getName(), this.ignoreMtgRuleForEmptyNames);
+                    CardUtil.haveSameNames(name, card.getRightHalfCard().getName(), this.ignoreMtgRuleForEmptyNames) ||
+                    CardUtil.haveSameNames(name, card.getName(), this.ignoreMtgRuleForEmptyNames);
         } else {
             if (name.contains(" // ")) {
                 String leftName = name.substring(0, name.indexOf(" // "));

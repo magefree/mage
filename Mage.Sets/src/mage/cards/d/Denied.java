@@ -63,7 +63,7 @@ class DeniedEffect extends OneShotEffect {
             player.revealCards("Denied!", player.getHand(), game, true);
             String namedCard = (String) object;
             for (Card card : player.getHand().getCards(game)) {
-                if (card != null && CardUtil.haveSameNames(card.getName(), namedCard)) {
+                if (card != null && CardUtil.haveSameNames(card, namedCard, game)) {
                     game.getStack().counter(targetSpell.getId(), source.getSourceId(), game);
                     break;
                 }

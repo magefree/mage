@@ -76,7 +76,7 @@ class MagusOfTheScrollEffect extends OneShotEffect {
                 }
                 revealed.add(card);
                 you.revealCards(sourceObject.getName(), revealed, game);
-                if (CardUtil.haveSameNames(card.getName(), cardName)) {
+                if (CardUtil.haveSameNames(card, cardName, game)) {
                     Permanent creature = game.getPermanent(targetPointer.getFirst(game, source));
                     if (creature != null) {
                         creature.damage(2, source.getSourceId(), game, false, true);

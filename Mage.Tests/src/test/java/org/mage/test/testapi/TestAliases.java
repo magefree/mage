@@ -1,5 +1,7 @@
 package org.mage.test.testapi;
 
+import mage.cards.Card;
+import mage.cards.repository.CardRepository;
 import mage.constants.EmptyNames;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
@@ -44,6 +46,18 @@ public class TestAliases extends CardTestPlayerBase {
         Assert.assertFalse(CardUtil.haveSameNames("Name", "123", true));
         Assert.assertFalse(CardUtil.haveSameNames("Name", EmptyNames.FACE_DOWN_CREATURE.toString(), true));
         Assert.assertFalse(CardUtil.haveSameNames("Name1", "Name2", true));
+
+        // name with split card
+        Card splitCard1 = CardRepository.instance.findCard("Armed // Dangerous").getCard();
+        Card splitCard2 = CardRepository.instance.findCard("Alive // Well").getCard();
+        Assert.assertTrue(CardUtil.haveSameNames(splitCard1, "Armed", currentGame));
+        Assert.assertTrue(CardUtil.haveSameNames(splitCard1, "Dangerous", currentGame));
+        Assert.assertTrue(CardUtil.haveSameNames(splitCard1, "Armed // Dangerous", currentGame));
+        Assert.assertTrue(CardUtil.haveSameNames(splitCard1, splitCard1));
+        Assert.assertFalse(CardUtil.haveSameNames(splitCard1, "Other", currentGame));
+        Assert.assertFalse(CardUtil.haveSameNames(splitCard1, "Other // Dangerous", currentGame));
+        Assert.assertFalse(CardUtil.haveSameNames(splitCard1, "Armed // Other", currentGame));
+        Assert.assertFalse(CardUtil.haveSameNames(splitCard1, splitCard2));
     }
 
     @Test
