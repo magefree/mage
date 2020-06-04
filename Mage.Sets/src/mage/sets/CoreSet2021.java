@@ -32,5 +32,7 @@ public final class CoreSet2021 extends ExpansionSet {
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
         this.maxCardNumberInBooster = 274;
+
+        cards.add(new SetCardInfo("Mangara, the Diplomat", 27, Rarity.MYTHIC, mage.cards.m.MangaraTheDiplomat.class));
     }
 }
