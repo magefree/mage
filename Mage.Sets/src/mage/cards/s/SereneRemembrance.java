@@ -68,7 +68,6 @@ class SereneRemembranceEffect extends OneShotEffect {
                 for (Player player : game.getPlayers().values()) {
                     if (player.getGraveyard().contains(card.getId())) {
                         graveyardPlayer = player;
-                        player.getGraveyard().remove(card);
                         result |= card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
                     }
                 }

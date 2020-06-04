@@ -54,7 +54,6 @@ public class PutOnLibrarySourceEffect extends OneShotEffect {
         } else if (sourceObject instanceof Card && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
             for (Player player : game.getPlayers().values()) {
                 if (player.getGraveyard().contains(sourceObject.getId())) {
-                    player.getGraveyard().remove(((Card) sourceObject));
                     ((Card) sourceObject).moveToZone(Zone.LIBRARY, source.getSourceId(), game, onTop);
                     return true;
                 }

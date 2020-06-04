@@ -9,6 +9,7 @@ import mage.constants.CardType;
 import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.ZoneChangeEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,6 +76,13 @@ public abstract class SplitCard extends CardImpl {
     }
 
     @Override
+    public void setZone(Zone zone, Game game) {
+        super.setZone(zone, game);
+        game.setZone(getLeftHalfCard().getId(), zone);
+        game.setZone(getRightHalfCard().getId(), zone);
+    }
+
+    @Override
     public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, List<UUID> appliedEffects) {
         if (super.moveToExile(exileId, name, sourceId, game, appliedEffects)) {
             Zone currentZone = game.getState().getZone(getId());
@@ -83,6 +91,23 @@ public abstract class SplitCard extends CardImpl {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean removeFromZone(Game game, Zone fromZone, UUID sourceId) {
+        // zone contains only one main card
+        return super.removeFromZone(game, fromZone, sourceId);
+    }
+
+    @Override
+    public void updateZoneChangeCounter(Game game, ZoneChangeEvent event) {
+        if (isCopy()) { // same as meld cards
+            super.updateZoneChangeCounter(game, event);
+            return;
+        }
+        super.updateZoneChangeCounter(game, event);
+        getLeftHalfCard().updateZoneChangeCounter(game, event);
+        getRightHalfCard().updateZoneChangeCounter(game, event);
     }
 
     @Override
@@ -97,13 +122,6 @@ public abstract class SplitCard extends CardImpl {
                 this.getRightHalfCard().getSpellAbility().setControllerId(controllerId);
                 return super.cast(game, fromZone, ability, controllerId);
         }
-    }
-
-    @Override
-    public void setZone(Zone zone, Game game) {
-        super.setZone(zone, game);
-        game.setZone(getLeftHalfCard().getId(), zone);
-        game.setZone(getRightHalfCard().getId(), zone);
     }
 
     @Override
@@ -168,7 +186,5 @@ public abstract class SplitCard extends CardImpl {
         leftHalfCard.setOwnerId(ownerId);
         rightHalfCard.getAbilities().setControllerId(ownerId);
         rightHalfCard.setOwnerId(ownerId);
-
     }
-
 }

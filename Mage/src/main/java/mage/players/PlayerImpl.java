@@ -691,6 +691,8 @@ public abstract class PlayerImpl implements Player, Serializable {
             return false;
         }
         library.remove(card.getId(), game);
+        // must return true all the time (some cards can be removed directly from library, see getLibrary().removeFromTop)
+        // TODO: replace removeFromTop logic to normal with moveToZone
         return true;
     }
 
@@ -919,8 +921,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean removeFromGraveyard(Card card, Game game) {
-        this.graveyard.remove(card);
-        return true;
+        return this.graveyard.remove(card);
     }
 
     @Override

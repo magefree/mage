@@ -523,7 +523,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             case EXILED:
                 if (game.getExile().getCard(getId(), game) != null) {
                     removed = game.getExile().removeCard(this, game);
-
                 }
                 break;
             case STACK:
@@ -533,15 +532,18 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 } else {
                     stackObject = game.getStack().getSpell(this.getId(), false);
                 }
+
                 if (stackObject == null && (this instanceof SplitCard)) { // handle if half of Split cast is on the stack
                     stackObject = game.getStack().getSpell(((SplitCard) this).getLeftHalfCard().getId(), false);
                     if (stackObject == null) {
                         stackObject = game.getStack().getSpell(((SplitCard) this).getRightHalfCard().getId(), false);
                     }
                 }
+
                 if (stackObject == null && (this instanceof AdventureCard)) {
                     stackObject = game.getStack().getSpell(((AdventureCard) this).getSpellCard().getId(), false);
                 }
+
                 if (stackObject == null) {
                     stackObject = game.getStack().getSpell(getId(), false);
                 }
@@ -589,6 +591,8 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             }
         } else {
             logger.warn("Couldn't find card in fromZone, card=" + getIdName() + ", fromZone=" + fromZone);
+            // possible reason: you to remove card from wrong zone or card already removed,
+            // e.g. you added copy card to wrong graveyard (see owner) or removed card from graveyard before moveToZone call
         }
         return removed;
     }
