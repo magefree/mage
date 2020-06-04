@@ -1,6 +1,5 @@
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -8,21 +7,17 @@ import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.ChooseACardNameEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.game.stack.Spell;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author Plopman
  */
 public final class MeddlingMage extends CardImpl {
@@ -77,7 +72,7 @@ class MeddlingMageReplacementEffect extends ContinuousRuleModifyingEffectImpl {
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject mageObject = game.getObject(source.getSourceId());
         if (mageObject != null) {
-            return "You can't cast a spell with that name (" + mageObject.getLogName() + " in play).";
+            return "You can't cast a spell with that name (" + mageObject.getName() + " in play).";
         }
         return null;
     }
@@ -89,18 +84,11 @@ class MeddlingMageReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        // Check for Morph spell (no name)
-        Card card = game.getCard(event.getSourceId());
-        if (card != null) {
-            Spell spell = game.getState().getStack().getSpell(event.getSourceId());
-            if (spell != null && spell.isFaceDown(game)) {
-                return false; // Face Down cast spell (Morph creature) has no name
-            }
-        }
         MageObject object = game.getObject(event.getSourceId());
+        String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
         return object != null
                 && !object.isCopy()
-                && object.getName().equals(game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY));
+                && CardUtil.haveSameNames(object, cardName, game);
 
     }
 }

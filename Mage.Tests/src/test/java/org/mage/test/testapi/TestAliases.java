@@ -5,6 +5,7 @@ import mage.cards.repository.CardRepository;
 import mage.constants.EmptyNames;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.game.stack.Spell;
 import mage.util.CardUtil;
 import org.junit.Assert;
 import org.junit.Test;
@@ -58,6 +59,22 @@ public class TestAliases extends CardTestPlayerBase {
         Assert.assertFalse(CardUtil.haveSameNames(splitCard1, "Other // Dangerous", currentGame));
         Assert.assertFalse(CardUtil.haveSameNames(splitCard1, "Armed // Other", currentGame));
         Assert.assertFalse(CardUtil.haveSameNames(splitCard1, splitCard2));
+
+        // name with face down spells: face down spells don't have names, see https://github.com/magefree/mage/issues/6569
+        Card bearCard = CardRepository.instance.findCard("Balduvian Bears").getCard();
+        Spell normalSpell = new Spell(bearCard, bearCard.getSpellAbility(), playerA.getId(), Zone.HAND);
+        Spell faceDownSpell = new Spell(bearCard, bearCard.getSpellAbility(), playerA.getId(), Zone.HAND);
+        faceDownSpell.setFaceDown(true, currentGame);
+        // normal spell
+        Assert.assertFalse(CardUtil.haveSameNames(normalSpell, "", currentGame));
+        Assert.assertFalse(CardUtil.haveSameNames(normalSpell, "Other", currentGame));
+        Assert.assertFalse(CardUtil.haveSameNames(normalSpell, EmptyNames.FACE_DOWN_CREATURE.toString(), currentGame));
+        Assert.assertTrue(CardUtil.haveSameNames(normalSpell, "Balduvian Bears", currentGame));
+        // face down spell
+        Assert.assertFalse(CardUtil.haveSameNames(faceDownSpell, "", currentGame));
+        Assert.assertFalse(CardUtil.haveSameNames(faceDownSpell, "Other", currentGame));
+        Assert.assertFalse(CardUtil.haveSameNames(faceDownSpell, EmptyNames.FACE_DOWN_CREATURE.toString(), currentGame));
+        Assert.assertFalse(CardUtil.haveSameNames(faceDownSpell, "Balduvian Bears", currentGame));
     }
 
     @Test

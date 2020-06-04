@@ -1,7 +1,5 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ChooseACardNameEffect;
@@ -13,16 +11,18 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author L_J
  */
 public final class Mise extends CardImpl {
 
     public Mise(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
-        
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
+
         // Choose a nonland card name, then reveal the top card of your library. If that card has the chosen name, you draw three cards.
         this.getSpellAbility().addEffect(new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.NON_LAND_NAME));
         this.getSpellAbility().addEffect(new MiseEffect());
@@ -52,14 +52,13 @@ class MiseEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Object object = game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
-        if (player != null && object instanceof String) {
+        String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
+        if (player != null && cardName != null) {
             Card card = player.getLibrary().getFromTop(game);
-            String namedCard = (String) object;
             CardsImpl cards = new CardsImpl(card);
             if (card != null) {
                 player.revealCards("Mise", cards, game, true);
-                if (card.getName().equals(namedCard)) {
+                if (CardUtil.haveSameNames(card, cardName, game)) {
                     player.drawCards(3, source.getSourceId(), game);
                 }
             }

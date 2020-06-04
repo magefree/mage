@@ -38,10 +38,13 @@ public class NamePredicate implements Predicate<MageObject> {
             return CardUtil.haveSameNames(name, card.getLeftHalfCard().getName(), this.ignoreMtgRuleForEmptyNames) ||
                     CardUtil.haveSameNames(name, card.getRightHalfCard().getName(), this.ignoreMtgRuleForEmptyNames) ||
                     CardUtil.haveSameNames(name, card.getName(), this.ignoreMtgRuleForEmptyNames);
+        } else if (input instanceof Spell && ((Spell) input).isFaceDown(game)) {
+            // face down spells don't have names, so it's not equal, see https://github.com/magefree/mage/issues/6569
+            return false;
         } else {
             if (name.contains(" // ")) {
                 String leftName = name.substring(0, name.indexOf(" // "));
-                String rightName = name.substring(name.indexOf(" // ") + 4, name.length());
+                String rightName = name.substring(name.indexOf(" // ") + 4);
                 return CardUtil.haveSameNames(leftName, input.getName(), this.ignoreMtgRuleForEmptyNames) ||
                         CardUtil.haveSameNames(rightName, input.getName(), this.ignoreMtgRuleForEmptyNames);
             } else {
@@ -52,6 +55,6 @@ public class NamePredicate implements Predicate<MageObject> {
 
     @Override
     public String toString() {
-        return "Name(" + name + ')';
+        return "Name (" + name + ')';
     }
 }

@@ -1,7 +1,5 @@
 package mage.cards.p;
 
-import java.util.Optional;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -11,12 +9,18 @@ import mage.abilities.effects.common.ChooseACardNameEffect;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.util.CardUtil;
+
+import java.util.Optional;
+import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth, nox
  */
 public final class PithingNeedle extends CardImpl {
@@ -70,14 +74,13 @@ class PithingNeedleEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         MageObject object = game.getObject(event.getSourceId());
+        String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
         Optional<Ability> ability = game.getAbility(event.getTargetId(), event.getSourceId());
-        if (ability.isPresent() 
+        if (ability.isPresent()
                 && object != null) {
-            if (game.getState().getPlayersInRange(source.getControllerId(), game).contains(event.getPlayerId()) // controller in range
+            return game.getState().getPlayersInRange(source.getControllerId(), game).contains(event.getPlayerId()) // controller in range
                     && !(ability.get() instanceof ActivatedManaAbilityImpl) // not an activated mana ability
-                    && object.getName().equals(game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY))) {
-                return true;
-            }
+                    && CardUtil.haveSameNames(object, cardName, game);
         }
         return false;
     }
