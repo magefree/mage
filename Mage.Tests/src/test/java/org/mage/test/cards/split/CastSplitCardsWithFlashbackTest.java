@@ -34,6 +34,7 @@ public class CastSplitCardsWithFlashbackTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertLife(playerB, 20 - 3);
+        assertExileCount(playerA, "Lightning Bolt", 1);
     }
 
     @Test
@@ -66,6 +67,7 @@ public class CastSplitCardsWithFlashbackTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerB, "Bident of Thassa", 1);
         assertPermanentCount(playerB, "Bow of Nylea", 1);
+        assertExileCount(playerA, "Wear // Tear", 1);
     }
 
     @Test
@@ -98,5 +100,6 @@ public class CastSplitCardsWithFlashbackTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerB, "Bident of Thassa", 1);
         assertPermanentCount(playerB, "Bow of Nylea", 1);
+        assertExileCount(playerA, "Wear // Tear", 1);
     }
 }
