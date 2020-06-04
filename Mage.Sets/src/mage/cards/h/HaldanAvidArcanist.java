@@ -34,7 +34,8 @@ public final class HaldanAvidArcanist extends CardImpl {
         // Partner with Pako, Arcane Retriever
         this.addAbility(new PartnerWithAbility("Pako, Arcane Retriever"));
 
-        // You may play noncreature cards from exile with fetch counters on them if you exiled them, and you may spend mana as though it were mana of any color to cast those spells.
+        // You may play noncreature cards from exile with fetch counters on them if you 
+        // exiled them, and you may spend mana as though it were mana of any color to cast those spells.
         Ability ability = new SimpleStaticAbility(new HaldanAvidArcanistCastFromExileEffect());
         ability.addEffect(new HaldanAvidArcanistSpendAnyManaEffect());
         this.addAbility(ability);
@@ -56,7 +57,9 @@ public final class HaldanAvidArcanist extends CardImpl {
             return false;
         }
         Card card = game.getCard(sourceId);
-        return card != null && !card.isCreature() && card.getCounters(game).containsKey(CounterType.FETCH);
+        return card != null
+                && !card.isCreature()
+                && card.getCounters(game).containsKey(CounterType.FETCH);
     }
 }
 
@@ -110,7 +113,7 @@ class HaldanAvidArcanistSpendAnyManaEffect extends AsThoughEffectImpl implements
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        return HaldanAvidArcanist.checkCard(objectId, source, affectedControllerId, game);
+        return true;
     }
 
     @Override
