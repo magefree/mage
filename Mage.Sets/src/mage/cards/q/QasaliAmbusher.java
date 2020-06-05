@@ -3,7 +3,7 @@ package mage.cards.q;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.condition.AndCondition;
+import mage.abilities.condition.CompoundCondition;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.AttackedThisStepCondition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -15,6 +15,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.watchers.common.PlayerAttackedStepWatcher;
 
@@ -24,15 +25,17 @@ import mage.watchers.common.PlayerAttackedStepWatcher;
  */
 public final class QasaliAmbusher extends CardImpl {
 
-    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent();
+    private static final FilterControlledPermanent filterForest = new FilterControlledPermanent();
+    private static final FilterControlledPermanent filterPlains = new FilterControlledPermanent();
 
     static {
-        filter.add(Predicates.and(SubType.FOREST.getPredicate(), SubType.PLAINS.getPredicate()));
+        filterForest.add(SubType.FOREST.getPredicate());
+        filterPlains.add(SubType.PLAINS.getPredicate());
     }
 
     private static final Condition condition =
-            new AndCondition("If a creature is attacking you and you control a Forest and a Plains",
-                    AttackedThisStepCondition.instance, new PermanentsOnTheBattlefieldCondition(filter));
+            new CompoundCondition("If a creature is attacking you and you control a Forest and a Plains",
+              AttackedThisStepCondition.instance, new PermanentsOnTheBattlefieldCondition(filterForest), new PermanentsOnTheBattlefieldCondition(filterPlains));
 
     public QasaliAmbusher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{W}");
