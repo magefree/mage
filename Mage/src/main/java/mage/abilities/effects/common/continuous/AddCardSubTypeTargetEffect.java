@@ -14,13 +14,6 @@ import mage.game.permanent.Permanent;
 public class AddCardSubTypeTargetEffect extends ContinuousEffectImpl {
 
     private final SubType addedSubType;
-    private String targetName = "";
-
-    public AddCardSubTypeTargetEffect(SubType addedSubType, Duration duration, String targetName) {
-        super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
-        this.addedSubType = addedSubType;
-        this.targetName = targetName;
-    }
 
     public AddCardSubTypeTargetEffect(SubType addedSubType, Duration duration) {
         super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
@@ -54,10 +47,11 @@ public class AddCardSubTypeTargetEffect extends ContinuousEffectImpl {
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         StringBuilder sb = new StringBuilder();
-        if (!targetName.isEmpty()) {
-            sb.append(targetName);
-        } else if (!mode.getTargets().isEmpty()) {
+        if (!mode.getTargets().isEmpty()) {
             sb.append("Target ").append(mode.getTargets().get(0).getTargetName());
         } else {
             sb.append("It ");
