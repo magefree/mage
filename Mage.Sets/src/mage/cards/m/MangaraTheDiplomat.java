@@ -116,7 +116,7 @@ class MangaraTheDiplomatCastTriggeredAbility extends TriggeredAbilityImpl {
         return player != null
                 && watcher != null
                 && player.hasOpponent(event.getPlayerId(), game)
-                && watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(event.getPlayerId()) == 3;
+                && watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(event.getPlayerId()) == 2;
     }
 
     @Override
