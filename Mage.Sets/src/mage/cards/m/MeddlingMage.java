@@ -70,7 +70,7 @@ class MeddlingMageReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(event.getSourceId());
         if (mageObject != null) {
             return "You can't cast a spell with that name (" + mageObject.getName() + " in play).";
         }
@@ -86,9 +86,8 @@ class MeddlingMageReplacementEffect extends ContinuousRuleModifyingEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         MageObject object = game.getObject(event.getSourceId());
         String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
-        return object != null
-                && !object.isCopy()
-                && CardUtil.haveSameNames(object, cardName, game);
+
+        return object != null && CardUtil.haveSameNames(object, cardName, game);
 
     }
 }
