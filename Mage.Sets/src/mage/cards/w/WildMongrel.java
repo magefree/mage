@@ -24,7 +24,7 @@ public final class WildMongrel extends CardImpl {
 
     public WildMongrel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
-        this.subtype.add(SubType.HOUND);
+        this.subtype.add(SubType.DOG);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

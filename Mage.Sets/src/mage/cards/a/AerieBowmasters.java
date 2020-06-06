@@ -19,7 +19,7 @@ public final class AerieBowmasters extends CardImpl {
 
     public AerieBowmasters(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
-        this.subtype.add(SubType.HOUND);
+        this.subtype.add(SubType.DOG);
         this.subtype.add(SubType.ARCHER);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);

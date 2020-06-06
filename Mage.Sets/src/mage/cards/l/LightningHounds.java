@@ -17,7 +17,7 @@ public final class LightningHounds extends CardImpl {
 
     public LightningHounds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
-        this.subtype.add(SubType.HOUND);
+        this.subtype.add(SubType.DOG);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

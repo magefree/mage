@@ -19,7 +19,7 @@ public final class CausticHound extends CardImpl {
 
     public CausticHound (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}");
-        this.subtype.add(SubType.HOUND);
+        this.subtype.add(SubType.DOG);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

@@ -29,7 +29,7 @@ public final class PakoArcaneRetriever extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELEMENTAL);
-        this.subtype.add(SubType.HOUND);
+        this.subtype.add(SubType.DOG);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

@@ -24,7 +24,7 @@ public final class MortisDogs extends CardImpl {
 
     public MortisDogs(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
-        this.subtype.add(SubType.HOUND);
+        this.subtype.add(SubType.DOG);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

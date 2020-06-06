@@ -20,7 +20,7 @@ public final class HollowDogs extends CardImpl {
     public HollowDogs(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
         this.subtype.add(SubType.ZOMBIE);
-        this.subtype.add(SubType.HOUND);
+        this.subtype.add(SubType.DOG);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

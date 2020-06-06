@@ -28,7 +28,7 @@ public final class PackMastiff extends CardImpl {
     public PackMastiff(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
 
-        this.subtype.add(SubType.HOUND);
+        this.subtype.add(SubType.DOG);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
