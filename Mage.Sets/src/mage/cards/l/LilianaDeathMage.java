@@ -81,7 +81,7 @@ class LilianaDeathMagePlusEffect extends OneShotEffect {
         if (player == null || !player.chooseUse(Outcome.Benefit, "Return a creature card from your graveyard to your hand?", source, game)) {
             return false;
         }
-        Card card = game.getCard(source.getTargets().get(1).getFirstTarget());
+        Card card = game.getCard(source.getTargets().get(0).getFirstTarget());
         if (card == null) {
             return false;
         }
