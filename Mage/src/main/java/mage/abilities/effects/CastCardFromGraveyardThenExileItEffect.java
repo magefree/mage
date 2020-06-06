@@ -1,6 +1,7 @@
 package mage.abilities.effects;
 
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.cards.Card;
 import mage.constants.AsThoughEffectType;
 import mage.constants.Duration;
@@ -48,6 +49,7 @@ class CastCardFromGraveyardEffect extends AsThoughEffectImpl {
 
     CastCardFromGraveyardEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
+        this.staticText = "You may cast target card from your graveyard";
     }
 
     CastCardFromGraveyardEffect(final CastCardFromGraveyardEffect effect) {
