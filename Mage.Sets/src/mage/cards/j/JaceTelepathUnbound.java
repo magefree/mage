@@ -44,7 +44,7 @@ public final class JaceTelepathUnbound extends CardImpl {
         this.addAbility(ability);
 
         // -3: You may cast target instant or sorcery card from your graveyard this turn. If that card would be put into your graveyard this turn, exile it instead.
-        CastCardFromGraveyardEffect minusEffect = new CastCardFromGraveyardEffect();
+        CastCardFromGraveyardThenExileItEffect minusEffect = new CastCardFromGraveyardThenExileItEffect();
         minusEffect.setText("You may cast target instant or sorcery card from your graveyard this turn. If that card would be put into your graveyard this turn, exile it instead");
         ability = new LoyaltyAbility(minusEffect, -3);
         ability.addTarget(new TargetCardInYourGraveyard(new FilterInstantOrSorceryCard()));

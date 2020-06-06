@@ -4,7 +4,7 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
-import mage.abilities.effects.CastCardFromGraveyardEffect;
+import mage.abilities.effects.CastCardFromGraveyardThenExileItEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -45,7 +45,7 @@ public final class ChandraFlamesCatalyst extends CardImpl {
         this.addAbility(new LoyaltyAbility(new DamagePlayersEffect(3, TargetController.OPPONENT), 1));
 
         // −2: You may cast target red instant or sorcery card from your graveyard. If that spell would be put into your graveyard this turn, exile it instead.
-        CastCardFromGraveyardEffect minusEffect = new CastCardFromGraveyardEffect();
+        CastCardFromGraveyardThenExileItEffect minusEffect = new CastCardFromGraveyardThenExileItEffect();
         minusEffect.setText("You may cast target red instant or sorcery card from your graveyard. If that spell would be put into your graveyard this turn, exile it instead.");
         Ability ability = new LoyaltyAbility(minusEffect, -2);
         ability.addTarget(new TargetCardInYourGraveyard(filter));

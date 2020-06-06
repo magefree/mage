@@ -14,26 +14,26 @@ import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
-public class CastCardFromGraveyardEffect extends OneShotEffect {
+public class CastCardFromGraveyardThenExileItEffect extends OneShotEffect {
 
-    public CastCardFromGraveyardEffect() {
+    public CastCardFromGraveyardThenExileItEffect() {
         super(Outcome.Benefit);
     }
 
-    CastCardFromGraveyardEffect(final CastCardFromGraveyardEffect effect) {
+    CastCardFromGraveyardThenExileItEffect(final CastCardFromGraveyardThenExileItEffect effect) {
         super(effect);
     }
 
     @Override
-    public CastCardFromGraveyardEffect copy() {
-        return new CastCardFromGraveyardEffect(this);
+    public CastCardFromGraveyardThenExileItEffect copy() {
+        return new CastCardFromGraveyardThenExileItEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(this.getTargetPointer().getFirst(game, source));
         if (card != null) {
-            ContinuousEffect effect = new CastFromGraveyardEffect();
+            ContinuousEffect effect = new CastCardFromGraveyardEffect();
             effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
             game.addEffect(effect, source);
             effect = new ExileReplacementEffect(card.getId());
@@ -44,13 +44,13 @@ public class CastCardFromGraveyardEffect extends OneShotEffect {
     }
 }
 
-class CastFromGraveyardEffect extends AsThoughEffectImpl {
+class CastCardFromGraveyardEffect extends AsThoughEffectImpl {
 
-    CastFromGraveyardEffect() {
+    CastCardFromGraveyardEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
     }
 
-    CastFromGraveyardEffect(final CastFromGraveyardEffect effect) {
+    CastCardFromGraveyardEffect(final CastCardFromGraveyardEffect effect) {
         super(effect);
     }
 
@@ -60,8 +60,8 @@ class CastFromGraveyardEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public CastFromGraveyardEffect copy() {
-        return new CastFromGraveyardEffect(this);
+    public CastCardFromGraveyardEffect copy() {
+        return new CastCardFromGraveyardEffect(this);
     }
 
     @Override
@@ -77,6 +77,7 @@ class ExileReplacementEffect extends ReplacementEffectImpl {
     ExileReplacementEffect(UUID cardId) {
         super(Duration.EndOfTurn, Outcome.Exile);
         this.cardId = cardId;
+        this.staticText = "If that card would be put into your graveyard this turn, exile it instead";
     }
 
     ExileReplacementEffect(final ExileReplacementEffect effect) {
