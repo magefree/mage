@@ -1,22 +1,21 @@
 package mage.abilities.effects.keyword;
 
 import mage.abilities.Ability;
-import mage.abilities.effects.AsThoughEffectImpl;
-import mage.constants.AsThoughEffectType;
-import mage.constants.Duration;
+import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
-
-import java.util.UUID;
+import mage.players.Player;
 
 /*
  * @author emerald000
  */
-public class CompanionEffect extends AsThoughEffectImpl {
+public class CompanionEffect extends OneShotEffect {
 
     public CompanionEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
-        staticText = "Once during the game, you may cast your chosen companion from your sideboard";
+        super(Outcome.DrawCard);
+        staticText = "put {this} into your hand";
     }
 
     private CompanionEffect(final CompanionEffect effect) {
@@ -29,12 +28,12 @@ public class CompanionEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        return objectId.equals(source.getSourceId()) && affectedControllerId.equals(source.getControllerId());
-    }
-
-    @Override
     public boolean apply(Game game, Ability source) {
-        return true;
+        Player controller = game.getPlayer(source.getControllerId());
+        Card card = (Card) source.getSourceObjectIfItStillExists(game);
+        if (controller != null && card != null && game.getState().getZone(card.getId()) == Zone.OUTSIDE) {
+            return controller.moveCards(card, Zone.HAND, source, game);
+        }
+        return false;
     }
 }
