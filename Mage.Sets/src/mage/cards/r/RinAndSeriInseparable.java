@@ -20,8 +20,8 @@ import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.game.permanent.token.WhiteDogToken;
 import mage.game.permanent.token.GreenCatToken;
+import mage.game.permanent.token.WhiteDogToken;
 import mage.target.common.TargetAnyTarget;
 
 import java.util.UUID;

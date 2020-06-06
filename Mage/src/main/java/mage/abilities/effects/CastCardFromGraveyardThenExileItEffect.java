@@ -1,7 +1,6 @@
 package mage.abilities.effects;
 
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.cards.Card;
 import mage.constants.AsThoughEffectType;
 import mage.constants.Duration;
