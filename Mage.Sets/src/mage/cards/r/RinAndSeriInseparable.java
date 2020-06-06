@@ -18,6 +18,7 @@ import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerIsActivePlayerPredicate;
 import mage.game.Game;
 import mage.game.permanent.token.CatToken3;
 import mage.game.permanent.token.DogToken2;
@@ -42,7 +43,9 @@ public final class RinAndSeriInseparable extends CardImpl {
         catSpellFilter.add(SubType.CAT.getPredicate());
 
         dogPermanentFilter.add(SubType.DOG.getPredicate());
+        dogPermanentFilter.add(new ControllerIsActivePlayerPredicate());
         catPermanentFilter.add(SubType.CAT.getPredicate());
+        catPermanentFilter.add(new ControllerIsActivePlayerPredicate());
     }
 
     public RinAndSeriInseparable(UUID ownerId, CardSetInfo setInfo) {
