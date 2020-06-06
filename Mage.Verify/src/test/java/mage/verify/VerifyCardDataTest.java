@@ -967,7 +967,7 @@ public class VerifyCardDataTest {
     @Test
     public void showCardInfo() throws Exception {
         // debug only: show direct card info (takes it from class file, not from db repository)
-        String cardName = "Garruk, Savage Herald";
+        String cardName = "Essence Capture";
         CardScanner.scan();
         CardSetInfo testSet = new CardSetInfo(cardName, "test", "123", Rarity.COMMON);
         CardInfo cardInfo = CardRepository.instance.findCard(cardName);
