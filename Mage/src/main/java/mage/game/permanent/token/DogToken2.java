@@ -27,4 +27,5 @@ public final class DogToken2 extends TokenImpl {
     public DogToken2 copy() {
         return new DogToken2(this);
     }
+
 }

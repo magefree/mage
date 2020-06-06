@@ -12,11 +12,7 @@ import mage.constants.SubType;
  */
 public final class CatToken3 extends TokenImpl {
 
-    public CatToken3() {
-        this((String)null);
-    }
-
-    public CatToken3(String setCode) {
+     public CatToken3(String setCode) {
         super("Cat", "1/1 green Cat creature token");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.CAT);
