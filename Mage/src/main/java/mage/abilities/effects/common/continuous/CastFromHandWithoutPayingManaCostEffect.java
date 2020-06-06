@@ -28,12 +28,16 @@ public class CastFromHandWithoutPayingManaCostEffect extends ContinuousEffectImp
     }
 
     public CastFromHandWithoutPayingManaCostEffect(FilterCard filter, boolean fromHand) {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        this.filter = filter;
-        this.fromHand = fromHand;
+        this(filter, fromHand, Duration.WhileOnBattlefield);
         staticText = "You may cast " + filter.getMessage()
                 + (fromHand ? " from your hand" : "")
                 + " without paying their mana costs";
+    }
+
+    public CastFromHandWithoutPayingManaCostEffect(FilterCard filter, boolean fromHand, Duration duration) {
+        super(duration, Outcome.Detriment);
+        this.filter = filter;
+        this.fromHand = fromHand;
     }
 
     private CastFromHandWithoutPayingManaCostEffect(final CastFromHandWithoutPayingManaCostEffect effect) {
