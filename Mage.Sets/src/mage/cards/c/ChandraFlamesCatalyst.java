@@ -8,8 +8,10 @@ import mage.abilities.effects.CastCardFromGraveyardEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.DrawCardAllEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.CastFromHandWithoutPayingManaCostEffect;
 import mage.abilities.effects.common.discard.DiscardHandAllEffect;
+import mage.abilities.effects.common.discard.DiscardHandControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -52,8 +54,8 @@ public final class ChandraFlamesCatalyst extends CardImpl {
         this.addAbility(ability);
 
         // −8: Discard your hand, then draw seven cards. Until end of turn, you may cast spells from your hand without paying their mana costs.
-        Effect discardHandEffect = new DiscardHandAllEffect();
-        Effect drawEffect = new DrawCardAllEffect(7);
+        Effect discardHandEffect = new DiscardHandControllerEffect();
+        Effect drawEffect = new DrawCardSourceControllerEffect(7);
         drawEffect.setText(", then draw seven cards");
         Effect castSpellsFromHandEffect = new CastFromHandWithoutPayingManaCostEffect(
                 StaticFilters.FILTER_CARD_NON_LAND, true, Duration.EndOfTurn);
