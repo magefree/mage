@@ -1,12 +1,25 @@
 package mage.cards.g;
 
-import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.LoyaltyAbility;
+import mage.abilities.common.DamageAsThoughNotBlockedAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DamageWithPowerFromOneToAnotherTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
+import mage.cards.CardsImpl;
+import mage.constants.*;
+import mage.filter.StaticFilters;
+import mage.game.Game;
+import mage.players.Player;
+import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -22,8 +35,19 @@ public final class GarrukSavageHerald extends CardImpl {
         this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
 
         // +1: Reveal the top card of your library. If it's a creature card, put it into your hand. Otherwise, put it on the bottom of your library.
+        this.addAbility(new LoyaltyAbility(new GarrukSavageHeraldEffect(), 1));
+
         // −2: Target creature you control deals damage equal to its power to another target creature.
+        Ability minusAbility = new LoyaltyAbility(new DamageWithPowerFromOneToAnotherTargetEffect(), -2);
+        minusAbility.addTarget(new TargetControlledCreaturePermanent());
+        minusAbility.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
+        this.addAbility(minusAbility);
+
         // −7: Until end of turn, creatures you control gain "You may have this creature assign its combat damage as though it weren't blocked."
+        ContinuousEffect ultimateEffect = new GainAbilityControlledEffect(DamageAsThoughNotBlockedAbility.getInstance(), Duration.EndOfTurn);
+        ultimateEffect.setText("Until end of turn, creatures you control gain \"You may have this creature assign its combat damage as though it weren't blocked.\"");
+        ultimateEffect.setDependedToType(DependencyType.AddingAbility);
+        this.addAbility(new LoyaltyAbility(ultimateEffect, -7));
     }
 
     private GarrukSavageHerald(final GarrukSavageHerald card) {
@@ -33,5 +57,40 @@ public final class GarrukSavageHerald extends CardImpl {
     @Override
     public GarrukSavageHerald copy() {
         return new GarrukSavageHerald(this);
+    }
+}
+
+class GarrukSavageHeraldEffect extends OneShotEffect {
+
+    GarrukSavageHeraldEffect() {
+        super(Outcome.Detriment);
+        staticText = "reveal the top card of your library. If it's a creature card, " +
+                "put it into your hand. Otherwise, put it on the bottom of your library";
+    }
+
+    private GarrukSavageHeraldEffect(final GarrukSavageHeraldEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public GarrukSavageHeraldEffect copy() {
+        return new GarrukSavageHeraldEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player == null) {
+            return false;
+        }
+        Card card = player.getLibrary().getFromTop(game);
+        if (card == null) {
+            return false;
+        }
+        player.revealCards(source, new CardsImpl(card), game);
+        if (card.isCreature()) {
+            return player.moveCards(card, Zone.HAND, source, game);
+        }
+        return player.putCardsOnBottomOfLibrary(card, game, source, false);
     }
 }
