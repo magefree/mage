@@ -46,7 +46,7 @@ public final class ChandraFlamesCatalyst extends CardImpl {
 
         // −2: You may cast target red instant or sorcery card from your graveyard. If that spell would be put into your graveyard this turn, exile it instead.
         CastCardFromGraveyardThenExileItEffect minusEffect = new CastCardFromGraveyardThenExileItEffect();
-        minusEffect.setText("You may cast target red instant or sorcery card from your graveyard. If that spell would be put into your graveyard this turn, exile it instead.");
+        minusEffect.setText("You may cast target red instant or sorcery card from your graveyard. If that spell would be put into your graveyard this turn, exile it instead");
         Ability ability = new LoyaltyAbility(minusEffect, -2);
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
@@ -57,7 +57,7 @@ public final class ChandraFlamesCatalyst extends CardImpl {
         drawEffect.setText(", then draw seven cards");
         Effect castSpellsFromHandEffect = new CastFromHandWithoutPayingManaCostEffect(
                 StaticFilters.FILTER_CARD_NON_LAND, true, Duration.EndOfTurn);
-        castSpellsFromHandEffect.setText("Until end of turn, you may cast spells from your hand without paying their mana costs.");
+        castSpellsFromHandEffect.setText("Until end of turn, you may cast spells from your hand without paying their mana costs");
         Ability ultimateAbility = new LoyaltyAbility(discardHandEffect, -8);
         ultimateAbility.addEffect(drawEffect);
         ultimateAbility.addEffect(castSpellsFromHandEffect);
