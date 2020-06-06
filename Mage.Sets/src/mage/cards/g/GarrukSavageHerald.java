@@ -14,6 +14,8 @@ import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.*;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AnotherTargetPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -38,15 +40,24 @@ public final class GarrukSavageHerald extends CardImpl {
         this.addAbility(new LoyaltyAbility(new GarrukSavageHeraldEffect(), 1));
 
         // −2: Target creature you control deals damage equal to its power to another target creature.
-        Ability minusAbility = new LoyaltyAbility(new DamageWithPowerFromOneToAnotherTargetEffect(), -2);
-        minusAbility.addTarget(new TargetControlledCreaturePermanent());
-        minusAbility.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
+        DamageWithPowerFromOneToAnotherTargetEffect effect = new DamageWithPowerFromOneToAnotherTargetEffect();
+        effect.setText("Target creature you control deals damage equal to its power to another target creature");
+
+        Ability minusAbility = new LoyaltyAbility(effect, -2);
+        TargetControlledCreaturePermanent controlledCreature = new TargetControlledCreaturePermanent();
+        controlledCreature.setTargetTag(1);
+        minusAbility.addTarget(controlledCreature);
+
+        FilterCreaturePermanent filter = new FilterCreaturePermanent("Another creature: damage dealt to");
+        filter.add(new AnotherTargetPredicate(2));
+        TargetCreaturePermanent anotherTargetCreature = new TargetCreaturePermanent(filter);
+        minusAbility.addTarget(anotherTargetCreature);
+
         this.addAbility(minusAbility);
 
         // −7: Until end of turn, creatures you control gain "You may have this creature assign its combat damage as though it weren't blocked."
         ContinuousEffect ultimateEffect = new GainAbilityControlledEffect(DamageAsThoughNotBlockedAbility.getInstance(), Duration.EndOfTurn);
         ultimateEffect.setText("Until end of turn, creatures you control gain \"You may have this creature assign its combat damage as though it weren't blocked.\"");
-        ultimateEffect.setDependedToType(DependencyType.AddingAbility);
         this.addAbility(new LoyaltyAbility(ultimateEffect, -7));
     }
 
@@ -63,7 +74,7 @@ public final class GarrukSavageHerald extends CardImpl {
 class GarrukSavageHeraldEffect extends OneShotEffect {
 
     GarrukSavageHeraldEffect() {
-        super(Outcome.Detriment);
+        super(Outcome.Benefit);
         staticText = "reveal the top card of your library. If it's a creature card, " +
                 "put it into your hand. Otherwise, put it on the bottom of your library";
     }
@@ -90,7 +101,8 @@ class GarrukSavageHeraldEffect extends OneShotEffect {
         player.revealCards(source, new CardsImpl(card), game);
         if (card.isCreature()) {
             return player.moveCards(card, Zone.HAND, source, game);
+        } else {
+            return player.putCardsOnBottomOfLibrary(card, game, source, false);
         }
-        return player.putCardsOnBottomOfLibrary(card, game, source, false);
     }
 }
