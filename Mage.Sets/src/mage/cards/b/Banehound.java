@@ -19,7 +19,7 @@ public final class Banehound extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");
 
         this.subtype.add(SubType.NIGHTMARE);
-        this.subtype.add(SubType.HOUND);
+        this.subtype.add(SubType.DOG);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

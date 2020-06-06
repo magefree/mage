@@ -26,7 +26,7 @@ public final class EncampmentKeeper extends CardImpl {
     public EncampmentKeeper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");
 
-        this.subtype.add(SubType.HOUND);
+        this.subtype.add(SubType.DOG);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

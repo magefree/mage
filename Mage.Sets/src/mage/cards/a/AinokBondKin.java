@@ -33,7 +33,7 @@ public final class AinokBondKin extends CardImpl {
 
     public AinokBondKin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
-        this.subtype.add(SubType.HOUND);
+        this.subtype.add(SubType.DOG);
         this.subtype.add(SubType.SOLDIER);
 
         this.power = new MageInt(2);

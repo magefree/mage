@@ -17,7 +17,7 @@ public final class TwoHeadedCerberus extends CardImpl {
 
     public TwoHeadedCerberus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");
-        this.subtype.add(SubType.HOUND);
+        this.subtype.add(SubType.DOG);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);

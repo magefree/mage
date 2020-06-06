@@ -31,7 +31,7 @@ public final class GhostHounds extends CardImpl {
     public GhostHounds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
         
-        this.subtype.add(SubType.HOUND);
+        this.subtype.add(SubType.DOG);
         this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

@@ -30,7 +30,7 @@ public final class CorpseCur extends CardImpl {
 
     public CorpseCur (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");
-        this.subtype.add(SubType.HOUND);
+        this.subtype.add(SubType.DOG);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(InfectAbility.getInstance());
