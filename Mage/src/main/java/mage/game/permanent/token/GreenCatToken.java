@@ -1,3 +1,4 @@
+
 package mage.game.permanent.token;
 
 import mage.MageInt;
@@ -5,25 +6,25 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**
+ *
  * @author spjspj
  */
-public final class DogToken extends TokenImpl {
+public final class GreenCatToken extends TokenImpl {
 
-    public DogToken() {
-        super("Dog", "1/1 green Dog creature token");
+    public GreenCatToken() {
+        super("Cat", "1/1 green Cat creature token");
         cardType.add(CardType.CREATURE);
-        subtype.add(SubType.DOG);
-
         color.setGreen(true);
+        subtype.add(SubType.CAT);
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
-
-    private DogToken(final DogToken token) {
+    
+    public GreenCatToken(final GreenCatToken token) {
         super(token);
     }
 
-    public DogToken copy() {
-        return new DogToken(this);
+    public GreenCatToken copy() {
+        return new GreenCatToken(this);
     }
 }
