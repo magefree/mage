@@ -69,6 +69,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Spirit of Malevolence", 331, Rarity.COMMON, mage.cards.s.SpiritOfMalevolence.class));
         cards.add(new SetCardInfo("Storm Caller", 335, Rarity.COMMON, mage.cards.s.StormCaller.class));
         cards.add(new SetCardInfo("Teferi's Protege", 77, Rarity.COMMON, mage.cards.t.TeferisProtege.class));
+        cards.add(new SetCardInfo("Teferi's Wavecaster", 327, Rarity.RARE, mage.cards.t.TeferisWavecaster.class));
         cards.add(new SetCardInfo("Teferi, Master of Time", 75, Rarity.MYTHIC, mage.cards.t.TeferiMasterOfTime.class));
         cards.add(new SetCardInfo("Tormod's Crypt", 241, Rarity.UNCOMMON, mage.cards.t.TormodsCrypt.class));
         cards.add(new SetCardInfo("Ugin, the Spirit Dragon", 1, Rarity.MYTHIC, mage.cards.u.UginTheSpiritDragon.class));
