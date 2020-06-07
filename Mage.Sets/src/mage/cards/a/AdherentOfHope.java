@@ -1,18 +1,19 @@
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
+
+import java.util.UUID;
 
 /**
  *
