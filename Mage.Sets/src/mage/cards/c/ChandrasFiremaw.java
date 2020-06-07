@@ -35,7 +35,7 @@ public final class ChandrasFiremaw extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // When Chandra's Firemaw enters the battlefield, you may search your library and/or graveyard for a card named Chandra, Flame's Catalyst, reveal it, and put it into your hand. If you search your library this way, shuffle it.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryGraveyardPutInHandEffect(filter)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryGraveyardPutInHandEffect(filter),true));
     }
 
     private ChandrasFiremaw(final ChandrasFiremaw card) {
