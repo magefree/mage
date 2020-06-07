@@ -11,7 +11,7 @@ import mage.constants.TurnPhase;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.token.DogToken;
+import mage.game.permanent.token.GreenDogToken;
 
 import java.util.UUID;
 
@@ -44,7 +44,7 @@ public final class MongrelPack extends CardImpl {
 class MongrelPackAbility extends ZoneChangeTriggeredAbility {
 
     MongrelPackAbility() {
-        super(Zone.BATTLEFIELD, Zone.GRAVEYARD, new CreateTokenEffect(new DogToken(), 4), "When {this} dies during combat, ", false);
+        super(Zone.BATTLEFIELD, Zone.GRAVEYARD, new CreateTokenEffect(new GreenDogToken(), 4), "When {this} dies during combat, ", false);
     }
 
     private MongrelPackAbility(MongrelPackAbility ability) {

@@ -5,25 +5,27 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**
- * @author spjspj
+ *
+ * @author htrajan
  */
-public final class DogToken extends TokenImpl {
+public final class WhiteDogToken extends TokenImpl {
 
-    public DogToken() {
-        super("Dog", "1/1 green Dog creature token");
+    public WhiteDogToken() {
+        super("Dog", "1/1 white Dog creature token");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.DOG);
 
-        color.setGreen(true);
+        color.setWhite(true);
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
 
-    private DogToken(final DogToken token) {
+    private WhiteDogToken(final WhiteDogToken token) {
         super(token);
     }
 
-    public DogToken copy() {
-        return new DogToken(this);
+    public WhiteDogToken copy() {
+        return new WhiteDogToken(this);
     }
+
 }
