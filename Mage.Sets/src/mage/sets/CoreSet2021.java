@@ -33,22 +33,28 @@ public final class CoreSet2021 extends ExpansionSet {
         this.ratioBoosterMythic = 8;
         this.maxCardNumberInBooster = 274;
 
+        cards.add(new SetCardInfo("Adherent of Hope", 321, Rarity.COMMON, mage.cards.a.AdherentOfHope.class));
         cards.add(new SetCardInfo("Azusa, Lost but Seeking", 173, Rarity.RARE, mage.cards.a.AzusaLostButSeeking.class));
         cards.add(new SetCardInfo("Bad Deal", 89, Rarity.UNCOMMON, mage.cards.b.BadDeal.class));
         cards.add(new SetCardInfo("Baneslayer Angel", 4, Rarity.MYTHIC, mage.cards.b.BaneslayerAngel.class));
+        cards.add(new SetCardInfo("Basri's Aegis", 322, Rarity.RARE, mage.cards.b.BasrisAegis.class));
         cards.add(new SetCardInfo("Basri, Devoted Paladin", 320, Rarity.MYTHIC, mage.cards.b.BasriDevotedPaladin.class));
         cards.add(new SetCardInfo("Chandra's Firemaw", 333, Rarity.RARE, mage.cards.c.ChandrasFiremaw.class));
         cards.add(new SetCardInfo("Chandra, Flame's Catalyst", 332, Rarity.MYTHIC, mage.cards.c.ChandraFlamesCatalyst.class));
+        cards.add(new SetCardInfo("Chromatic Orrery", 228, Rarity.MYTHIC, mage.cards.c.ChromaticOrrery.class));
         cards.add(new SetCardInfo("Containment Priest", 314, Rarity.RARE, mage.cards.c.ContainmentPriest.class));
         cards.add(new SetCardInfo("Double Vision", 142, Rarity.RARE, mage.cards.d.DoubleVision.class));
         cards.add(new SetCardInfo("Fierce Empath", 181, Rarity.UNCOMMON, mage.cards.f.FierceEmpath.class));
+        cards.add(new SetCardInfo("Fungal Rebirth", 182, Rarity.UNCOMMON, mage.cards.f.FungalRebirth.class));
         cards.add(new SetCardInfo("Gadrak, the Crown-Scourge", 146, Rarity.RARE, mage.cards.g.GadrakTheCrownScourge.class));
+        cards.add(new SetCardInfo("Garruk's Warsteed", 337, Rarity.RARE, mage.cards.g.GarruksWarsteed.class));
         cards.add(new SetCardInfo("Garruk, Savage Herald", 336, Rarity.MYTHIC, mage.cards.g.GarrukSavageHerald.class));
         cards.add(new SetCardInfo("Grim Tutor", 103, Rarity.MYTHIC, mage.cards.g.GrimTutor.class));
         cards.add(new SetCardInfo("Historian of Zhalfir", 325, Rarity.UNCOMMON, mage.cards.h.HistorianOfZhalfir.class));
         cards.add(new SetCardInfo("Indulging Patrician", 219, Rarity.UNCOMMON, mage.cards.i.IndulgingPatrician.class));
         cards.add(new SetCardInfo("Island", 310, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jeskai Elder", 53, Rarity.UNCOMMON, mage.cards.j.JeskaiElder.class));
+        cards.add(new SetCardInfo("Keral Keep Disciples", 334, Rarity.UNCOMMON, mage.cards.k.KeralKeepDisciples.class));
         cards.add(new SetCardInfo("Liliana's Scorn", 329, Rarity.RARE, mage.cards.l.LilianasScorn.class));
         cards.add(new SetCardInfo("Liliana's Scrounger", 330, Rarity.UNCOMMON, mage.cards.l.LilianasScrounger.class));
         cards.add(new SetCardInfo("Liliana, Death Mage", 328, Rarity.MYTHIC, mage.cards.l.LilianaDeathMage.class));
