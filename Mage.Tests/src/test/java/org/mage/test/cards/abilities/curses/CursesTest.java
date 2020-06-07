@@ -283,7 +283,7 @@ public class CursesTest extends CardTestPlayerBase {
         addTarget(playerB, "Curse of Death's Hold");
         
         // {2}{G/U}{G/U}: Put the top two cards of your library into your graveyard, then return a nonland card of an opponent's choice from your graveyard to your hand.
-        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{G/U}{G/U}: Put the top two cards");
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{G/U}{G/U}: Mill two cards");
         castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Curse of Death's Hold", playerB);
                
         setStopAt(3, PhaseStep.END_TURN);
