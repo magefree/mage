@@ -45,7 +45,7 @@ class FinaleOfRevelationEffect extends OneShotEffect {
     FinaleOfRevelationEffect() {
         super(Outcome.Benefit);
         staticText = "Draw X cards. If X is 10 or more, instead shuffle your graveyard into your library, " +
-                "draw X cards, untap up to five lands, and you have no maximum hand size for the rest of the game"; //removed punctuation
+                "draw X cards, untap up to five lands, and you have no maximum hand size for the rest of the game";
     }
 
     private FinaleOfRevelationEffect(final FinaleOfRevelationEffect effect) {

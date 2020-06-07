@@ -46,7 +46,7 @@ class TurfWoundEffect extends ContinuousRuleModifyingEffectImpl {
 
     public TurfWoundEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment);
-        staticText = "Target player can't play land cards this turn"; //removed punctuation
+        staticText = "Target player can't play land cards this turn";
     }
 
     public TurfWoundEffect(final TurfWoundEffect effect) {

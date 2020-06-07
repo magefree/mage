@@ -52,7 +52,7 @@ public final class WickedWolf extends CardImpl {
         );
         ability.addEffect(new GainAbilitySourceEffect(
                 IndestructibleAbility.getInstance(), Duration.EndOfTurn
-        ).setText("it gains indestructible until end of turn")); //removed punctuation
+        ).setText("it gains indestructible until end of turn"));
         ability.addEffect(new TapSourceEffect().setText("Tap it"));
         this.addAbility(ability);
     }

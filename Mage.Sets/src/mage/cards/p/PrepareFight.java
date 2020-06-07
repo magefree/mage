@@ -30,13 +30,13 @@ public final class PrepareFight extends SplitCard {
         // Untap target creature. It gets +2/+2 and gains lifelink until end of turn.
         getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
         Effect effect = new UntapTargetEffect();
-        effect.setText("Untap target creature");  //remove punctuation
+        effect.setText("Untap target creature");
         getLeftHalfCard().getSpellAbility().addEffect(effect);
         effect = new BoostTargetEffect(2, 2, Duration.EndOfTurn);
         effect.setText("It gets +2/+2");
         getLeftHalfCard().getSpellAbility().addEffect(effect);
         effect = new GainAbilityTargetEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("and gains lifelink until end of turn"); //removed punctuation even though it was not causing problems
+        effect.setText("and gains lifelink until end of turn");
         getLeftHalfCard().getSpellAbility().addEffect(effect);
 
         // to

@@ -135,7 +135,7 @@ public class RevealCardsFromLibraryUntilEffect extends OneShotEffect {
                         sb.append("a random");
 
                     }
-                    sb.append(" order"); //removed punctuation
+                    sb.append(" order");
                 }
                 break;
             }

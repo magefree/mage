@@ -43,7 +43,7 @@ public final class OkoTheTrickster extends CardImpl {
         // 0: Until end of turn, Oko, the Trickster becomes a copy of target creature you control. Prevent all damage that would be dealt to him this turn.
         ability = new LoyaltyAbility(new OkoTheTricksterCopyEffect(), 0);
         ability.addEffect(new PreventAllDamageToSourceEffect(Duration.EndOfTurn)
-                .setText("Prevent all damage that would be dealt to him this turn")); //remove punctuation even though its not causing error
+                .setText("Prevent all damage that would be dealt to him this turn"));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
 
@@ -72,7 +72,7 @@ class OkoTheTricksterCopyEffect extends OneShotEffect {
 
     OkoTheTricksterCopyEffect() {
         super(Outcome.Copy);
-        this.staticText = "Until end of turn, {this} becomes a copy of target creature you control"; //removed punctuation
+        this.staticText = "Until end of turn, {this} becomes a copy of target creature you control";
     }
 
     private OkoTheTricksterCopyEffect(final OkoTheTricksterCopyEffect effect) {

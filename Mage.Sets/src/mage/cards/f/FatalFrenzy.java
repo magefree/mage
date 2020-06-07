@@ -36,7 +36,7 @@ public final class FatalFrenzy extends CardImpl {
                 .setText("Until end of turn, target creature you control gains trample")
         );
         this.getSpellAbility().addEffect(new BoostTargetEffect(TargetPermanentPowerCount.instance, StaticValue.get(0), Duration.EndOfTurn, true)
-                .setText("and gets +X/+0, where X is its power") //removed punctuation
+                .setText("and gets +X/+0, where X is its power")
         );
         this.getSpellAbility().addEffect(new FatalFrenzyEffect());
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());

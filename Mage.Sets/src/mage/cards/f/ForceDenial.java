@@ -28,13 +28,13 @@ public final class ForceDenial extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new CounterUnlessPaysEffect(new GenericManaCost(1)),
                 new InvertCondition(HateCondition.instance),
-                "Counter target spell unless its controller pays {1}")); //removed punctuation even though not causing error
+                "Counter target spell unless its controller pays {1}"));
 
         // <i>Hate</i> &mdash; If an opponent lost life from a source other then combat damage this turn, counter that spell instead.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new CounterTargetEffect(),
                 HateCondition.instance,
-                "<br><i>Hate</i> &mdash; If an opponent lost life from a source other than combat damage this turn, counter that spell instead")); //removed ending punctuation
+                "<br><i>Hate</i> &mdash; If an opponent lost life from a source other than combat damage this turn, counter that spell instead"));
         this.getSpellAbility().addTarget(new TargetSpell());
         this.getSpellAbility().addWatcher(new LifeLossOtherFromCombatWatcher());
 

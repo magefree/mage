@@ -51,7 +51,7 @@ class ForeverYoungEffect extends OneShotEffect {
 
     ForeverYoungEffect() {
         super(Outcome.Benefit);
-        staticText = "Put any number of target creature cards from your graveyard on top of your library"; //removed punctuation
+        staticText = "Put any number of target creature cards from your graveyard on top of your library";
     }
 
     private ForeverYoungEffect(final ForeverYoungEffect effect) {

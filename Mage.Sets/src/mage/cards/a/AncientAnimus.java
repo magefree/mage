@@ -30,7 +30,7 @@ public final class AncientAnimus extends CardImpl {
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
                 new TargetHasSuperTypeCondition(SuperType.LEGENDARY)
         );
-        effect.setText("Put a +1/+1 counter on target creature you control if it's legendary"); //remove punctuation
+        effect.setText("Put a +1/+1 counter on target creature you control if it's legendary");
         this.getSpellAbility().addEffect(effect);
         effect = new FightTargetsEffect();
         effect.setText("Then it fights target creature an opponent controls");

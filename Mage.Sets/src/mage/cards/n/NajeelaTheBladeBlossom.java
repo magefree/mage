@@ -74,7 +74,7 @@ public final class NajeelaTheBladeBlossom extends CardImpl {
                 HasteAbility.getInstance(),
                 Duration.EndOfTurn,
                 StaticFilters.FILTER_ATTACKING_CREATURES
-        ).setText(", and haste until end of turn")); //removed period
+        ).setText(", and haste until end of turn"));
         ability.addEffect(new AdditionalCombatPhaseEffect());
         this.addAbility(ability);
     }

@@ -26,7 +26,7 @@ public final class DesperateLunge extends CardImpl {
         ).setText("Target creature gets +2/+2"));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(
                 FlyingAbility.getInstance(), Duration.EndOfTurn
-        ).setText("and gains flying until end of turn"));  //removed final period
+        ).setText("and gains flying until end of turn"));
         this.getSpellAbility().addEffect(new GainLifeEffect(2));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }

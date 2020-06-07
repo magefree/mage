@@ -75,6 +75,6 @@ class BenefactorsDraughtTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "Until end of turn, whenever a creature an opponent controls blocks, draw a card"; //removed punctuation
+        return "Until end of turn, whenever a creature an opponent controls blocks, draw a card";
     }
 }

@@ -25,7 +25,7 @@ public final class ColossalHeroics extends CardImpl {
         this.addAbility(new StriveAbility("{1}{G}"));
         // Any number of target creatures each get +2/+2 until end of turn. Untap those creatures.
         Effect effect = new BoostTargetEffect(2, 2, Duration.EndOfTurn);
-        effect.setText("Any number of target creatures each get +2/+2 until end of turn"); //removed final period
+        effect.setText("Any number of target creatures each get +2/+2 until end of turn");
         this.getSpellAbility().addEffect(effect);
         effect = new UntapTargetEffect();
         effect.setText("Untap those creatures");

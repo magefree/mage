@@ -44,7 +44,7 @@ class ClearTheMindEffect extends OneShotEffect {
 
     ClearTheMindEffect() {
         super(Outcome.Benefit);
-        staticText = "Target player shuffles their graveyard into their library"; //removed punctuation
+        staticText = "Target player shuffles their graveyard into their library";
     }
 
     private ClearTheMindEffect(final ClearTheMindEffect effect) {

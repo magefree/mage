@@ -45,7 +45,7 @@ class WinnowEffect extends DestroyTargetEffect {
 
     public WinnowEffect() {
         super();
-        staticText = "Destroy target nonland permanent if another permanent with the same name is on the battlefield"; //removed punctuation
+        staticText = "Destroy target nonland permanent if another permanent with the same name is on the battlefield";
     }
 
     public WinnowEffect(final WinnowEffect effect) {

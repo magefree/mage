@@ -47,10 +47,10 @@ public final class AnimatingFaerie extends AdventureCard {
         ).setText("Target noncreature artifact you control becomes"));
         this.getSpellCard().getSpellAbility().addEffect(new SetPowerToughnessTargetEffect(
                 0, 0, Duration.EndOfGame
-        ).setText("a 0/0 artifact creature"));  //removed punctuation
+        ).setText("a 0/0 artifact creature"));
         this.getSpellCard().getSpellAbility().addEffect(new AddCountersTargetEffect(
                 CounterType.P1P1.createInstance(4)
-        ).setText("Put four +1/+1 counters on it.")); //removed punctuation even though not causing error
+        ).setText("Put four +1/+1 counters on it."));
         this.getSpellCard().getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 

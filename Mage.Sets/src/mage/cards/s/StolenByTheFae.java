@@ -27,9 +27,9 @@ public final class StolenByTheFae extends CardImpl {
 
         // Return target creature with converted mana cost X to its owner's hand. You create X 1/1 blue Faerie creature tokens with flying.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect()
-                .setText("Return target creature with converted mana cost X to its owner's hand")); //removed final period
+                .setText("Return target creature with converted mana cost X to its owner's hand"));
         this.getSpellAbility().addEffect(new CreateTokenEffect(new FaerieToken(), ManacostVariableValue.instance)
-                .setText("You create X 1/1 blue Faerie creature tokens with flying")); //removed final period
+                .setText("You create X 1/1 blue Faerie creature tokens with flying"));
         this.getSpellAbility().setTargetAdjuster(StolenByTheFaeAdjuster.instance);
     }
 

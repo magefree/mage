@@ -50,12 +50,12 @@ public final class ChromiumTheMutable extends CardImpl {
                         false, false, null, null, true
                 ).setText("Until end of turn, {this} becomes "
                         + "a Human with base power and toughness 1/1, "
-                        + "loses all abilities, and gains hexproof"), //removed punctuation
+                        + "loses all abilities, and gains hexproof"),
                 new DiscardCardCost()
         );
         ability.addEffect(
                 new CantBeBlockedSourceEffect(Duration.EndOfTurn)
-                        .setText("It can't be blocked this turn") //removed punctuation even though not causing error.
+                        .setText("It can't be blocked this turn")
         );
         this.addAbility(ability);
     }

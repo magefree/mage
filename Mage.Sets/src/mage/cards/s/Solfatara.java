@@ -49,7 +49,7 @@ class SolfataraEffect extends ContinuousRuleModifyingEffectImpl {
 
     public SolfataraEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment);
-        staticText = "Target player can't play land cards this turn"; //removed punctuation
+        staticText = "Target player can't play land cards this turn";
     }
 
     public SolfataraEffect(final SolfataraEffect effect) {

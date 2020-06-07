@@ -52,7 +52,7 @@ class LeadershipVacuumEffect extends OneShotEffect {
 
     LeadershipVacuumEffect() {
         super(Outcome.Detriment);
-        staticText = "Target player returns each commander they control from the battlefield to the command zone"; //removed punctuation
+        staticText = "Target player returns each commander they control from the battlefield to the command zone";
     }
 
     private LeadershipVacuumEffect(final LeadershipVacuumEffect effect) {

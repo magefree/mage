@@ -60,7 +60,7 @@ class SingleCombatEffect extends OneShotEffect {
 
     SingleCombatEffect() {
         super(Outcome.Benefit);
-        staticText = "Each player chooses a creature or planeswalker they control, then sacrifices the rest"; //removed punctuation
+        staticText = "Each player chooses a creature or planeswalker they control, then sacrifices the rest";
     }
 
     private SingleCombatEffect(final SingleCombatEffect effect) {
@@ -97,7 +97,7 @@ class SingleCombatRestrictionEffect extends ContinuousRuleModifyingEffectImpl {
 
     SingleCombatRestrictionEffect() {
         super(Duration.UntilEndOfYourNextTurn, Outcome.Neutral);
-        staticText = "Players can't cast creature or planeswalker spells until the end of your next turn"; //removed punctuation even though not causing error
+        staticText = "Players can't cast creature or planeswalker spells until the end of your next turn";
     }
 
     private SingleCombatRestrictionEffect(final SingleCombatRestrictionEffect effect) {
