@@ -47,7 +47,7 @@ public final class BasriDevotedPaladin extends CardImpl {
         ).setText("Put a +1/+1 counter on up to one target creature"), 1);
         ability.addEffect(new GainAbilityTargetEffect(
                 VigilanceAbility.getInstance(), Duration.EndOfTurn
-        ).setText("It gains vigilance until end of turn."));
+        ).setText("It gains vigilance until end of turn"));
         ability.addTarget(new TargetCreaturePermanent(0, 1));
         this.addAbility(ability);
 
@@ -59,7 +59,7 @@ public final class BasriDevotedPaladin extends CardImpl {
         effect.setText("Creatures you control get +2/+2");
         LoyaltyAbility ultimateAbility = new LoyaltyAbility(effect, -6);
         effect = new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE);
-        effect.setText("and gain flying until end of turn.");
+        effect.setText("and gain flying until end of turn");
         ultimateAbility.addEffect(effect);
         this.addAbility(ultimateAbility);
     }

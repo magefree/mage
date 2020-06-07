@@ -63,7 +63,7 @@ class LilianaDeathMagePlusEffect extends OneShotEffect {
 
     LilianaDeathMagePlusEffect() {
         super(Outcome.Benefit);
-        staticText = "Return up to one target creature card from your graveyard to your hand.";
+        staticText = "Return up to one target creature card from your graveyard to your hand";
     }
 
     private LilianaDeathMagePlusEffect(LilianaDeathMagePlusEffect effect) {
@@ -93,7 +93,7 @@ class LilianaDeathMageUltimateEffect extends OneShotEffect {
 
     LilianaDeathMageUltimateEffect() {
         super(Outcome.Damage);
-        staticText = "Target opponent loses 2 life for each creature card in their graveyard.";
+        staticText = "Target opponent loses 2 life for each creature card in their graveyard";
     }
 
     private LilianaDeathMageUltimateEffect(LilianaDeathMageUltimateEffect effect) {
