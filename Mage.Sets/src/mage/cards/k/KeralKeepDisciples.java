@@ -1,11 +1,15 @@
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.constants.SubType;
+import mage.abilities.common.ActivatePlaneswalkerLoyaltyAbilityTriggeredAbility;
+import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.TargetController;
+
+import java.util.UUID;
 
 /**
  *
@@ -22,6 +26,7 @@ public final class KeralKeepDisciples extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever you activate a loyalty ability of a Chandra planeswalker, Keral Keep Disciples deals 1 damage to each opponent.
+        this.addAbility(new ActivatePlaneswalkerLoyaltyAbilityTriggeredAbility(new DamagePlayersEffect(1, TargetController.OPPONENT), SubType.CHANDRA));
     }
 
     private KeralKeepDisciples(final KeralKeepDisciples card) {
