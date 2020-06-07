@@ -18,7 +18,7 @@ import java.util.UUID;
  */
 public final class BasrisAegis extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard();
+    private static final FilterCard filter = new FilterCard("Basri, Devoted Paladin");
 
     static {
         filter.add(new NamePredicate("Basri, Devoted Paladin"));

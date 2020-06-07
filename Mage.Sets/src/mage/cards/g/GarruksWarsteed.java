@@ -19,7 +19,7 @@ import java.util.UUID;
  */
 public final class GarruksWarsteed extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard();
+    private static final FilterCard filter = new FilterCard("Garruk, Savage Herald");
 
     static {
         filter.add(new NamePredicate("Garruk, Savage Herald"));
