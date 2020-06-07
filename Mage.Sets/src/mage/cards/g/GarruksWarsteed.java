@@ -36,7 +36,7 @@ public final class GarruksWarsteed extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // When Garruk's Warsteed enters the battlefield, you may search your library and/or graveyard for a card named Garruk, Savage Herald, reveal it, and put it into your hand. If you search your library this way, shuffle it.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryGraveyardPutInHandEffect(filter, false, true), true));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryGraveyardPutInHandEffect(filter, false, true)));
     }
 
     private GarruksWarsteed(final GarruksWarsteed card) {

@@ -36,7 +36,7 @@ public final class ChromaticOrrery extends CardImpl {
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(5), new TapSourceCost()));
 
         // {5}, {T}: Draw a card for each color among permanents you control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardForEachColorAmongControlledPermanentsEffect(), new GenericManaCost(5));
+        Ability ability = new SimpleActivatedAbility(new DrawCardForEachColorAmongControlledPermanentsEffect(), new GenericManaCost(5));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
