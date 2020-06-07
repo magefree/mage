@@ -18,6 +18,7 @@ import mage.game.Game;
 import mage.game.command.emblems.LilianaWakerOfTheDeadEmblem;
 import mage.players.Player;
 import mage.target.Target;
+import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetDiscard;
 
 import java.util.HashMap;
@@ -43,9 +44,11 @@ public final class LilianaWakerOfTheDead extends CardImpl {
         this.addAbility(new LoyaltyAbility(new LilianaWakerOfTheDeadDiscardEffect(), 1));
 
         // −3: Target creature gets -X/-X until end of turn, where X is the number of cards in your graveyard.
-        this.addAbility(new LoyaltyAbility(new BoostTargetEffect(
+        Ability ability = new LoyaltyAbility(new BoostTargetEffect(
                 xValue, xValue, Duration.EndOfTurn, true
-        ).setText("target creature gets -X/-X until end of turn, where X is the number of cards in your graveyard"), 3));
+        ).setText("target creature gets -X/-X until end of turn, where X is the number of cards in your graveyard"), -3);
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
 
         // −7: You get an emblem with "At the beginning of combat on your turn, put target creature card from a graveyard onto the battlefield under your control. It gains haste."
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new LilianaWakerOfTheDeadEmblem()), -7));
