@@ -70,6 +70,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Storm Caller", 335, Rarity.COMMON, mage.cards.s.StormCaller.class));
         cards.add(new SetCardInfo("Teferi's Ageless Insight", 76, Rarity.RARE, mage.cards.t.TeferisAgelessInsight.class));
         cards.add(new SetCardInfo("Teferi's Protege", 77, Rarity.COMMON, mage.cards.t.TeferisProtege.class));
+        cards.add(new SetCardInfo("Teferi's Tutelage", 78, Rarity.UNCOMMON, mage.cards.t.TeferisTutelage.class));
         cards.add(new SetCardInfo("Teferi's Wavecaster", 327, Rarity.RARE, mage.cards.t.TeferisWavecaster.class));
         cards.add(new SetCardInfo("Teferi, Master of Time", 75, Rarity.MYTHIC, mage.cards.t.TeferiMasterOfTime.class));
         cards.add(new SetCardInfo("Tormod's Crypt", 241, Rarity.UNCOMMON, mage.cards.t.TormodsCrypt.class));
