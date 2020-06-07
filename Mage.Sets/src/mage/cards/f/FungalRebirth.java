@@ -28,7 +28,10 @@ public final class FungalRebirth extends CardImpl {
                 new ReturnFromGraveyardToHandTargetEffect().setText("Return target permanent card from your graveyard to your hand")
         );
         getSpellAbility().addWatcher(new MorbidWatcher());
-        getSpellAbility().addEffect(new ConditionalOneShotEffect(new CreateTokenEffect(new SaprolingToken(), 2), MorbidCondition.instance, "If a creature died this turn, create two 1/1 green Saproling creature tokens"));
+        getSpellAbility().addEffect(new ConditionalOneShotEffect(
+                new CreateTokenEffect(new SaprolingToken(), 2),
+                MorbidCondition.instance,
+                "If a creature died this turn, create two 1/1 green Saproling creature tokens"));
         getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_PERMANENT));
     }
 
