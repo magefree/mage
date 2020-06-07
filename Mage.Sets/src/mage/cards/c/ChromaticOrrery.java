@@ -1,10 +1,22 @@
 package mage.cards.c;
 
-import java.util.UUID;
-import mage.constants.SuperType;
+import mage.Mana;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.AsThoughEffectImpl;
+import mage.abilities.effects.AsThoughManaEffect;
+import mage.abilities.effects.common.DrawCardForEachColorAmongControlledPermanentsEffect;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
+import mage.constants.*;
+import mage.game.Game;
+import mage.players.ManaPoolItem;
+
+import java.util.UUID;
 
 /**
  *
@@ -18,8 +30,15 @@ public final class ChromaticOrrery extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
 
         // You may spend mana as though it were mana of any color.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ChromaticOrreryEffect()));
+
         // {T}: Add {C}{C}{C}{C}{C}.
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(5), new TapSourceCost()));
+
         // {5}, {T}: Draw a card for each color among permanents you control.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardForEachColorAmongControlledPermanentsEffect(), new GenericManaCost(5));
+        ability.addCost(new TapSourceCost());
+        this.addAbility(ability);
     }
 
     private ChromaticOrrery(final ChromaticOrrery card) {
@@ -29,5 +48,37 @@ public final class ChromaticOrrery extends CardImpl {
     @Override
     public ChromaticOrrery copy() {
         return new ChromaticOrrery(this);
+    }
+}
+
+class ChromaticOrreryEffect extends AsThoughEffectImpl implements AsThoughManaEffect {
+
+    ChromaticOrreryEffect() {
+        super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.WhileOnBattlefield, Outcome.Benefit);
+        staticText = "You may spend mana as though it were mana of any color";
+    }
+
+    private ChromaticOrreryEffect(ChromaticOrreryEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public ChromaticOrreryEffect copy() {
+        return new ChromaticOrreryEffect(this);
+    }
+
+    @Override
+    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
+        return true;
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
+
+    @Override
+    public ManaType getAsThoughManaType(ManaType manaType, ManaPoolItem mana, UUID affectedControllerId, Ability source, Game game) {
+        return mana.getFirstAvailable();
     }
 }
