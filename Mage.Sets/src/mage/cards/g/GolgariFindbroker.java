@@ -29,7 +29,8 @@ public final class GolgariFindbroker extends CardImpl {
 
         // When Golgari Findbroker enters the battlefield, return target permanent card from your graveyard to your hand.
         Ability ability = new EntersBattlefieldTriggeredAbility(
-                new ReturnFromGraveyardToHandTargetEffect(), false
+                new ReturnFromGraveyardToHandTargetEffect().setText("return target permanent card from your graveyard to your hand"),
+                false
         );
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_PERMANENT));
         this.addAbility(ability);
