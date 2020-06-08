@@ -25,7 +25,7 @@ public final class UnlicensedDisintegration extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new DamageTargetControllerEffect(3,false,true),
+                new DamageTargetControllerEffect(3),
                 new PermanentsOnTheBattlefieldCondition(new FilterControlledArtifactPermanent()),
                 "If you control an artifact, Unlicensed Disintegration deals 3 damage to that creature's controller"));
         
