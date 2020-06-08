@@ -2,6 +2,7 @@ package mage.game;
 
 import mage.MageException;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.*;
 import mage.abilities.common.AttachableToRestrictedAbility;
 import mage.abilities.common.CantHaveMoreThanAmountCountersSourceAbility;
@@ -119,6 +120,8 @@ public abstract class GameImpl implements Game, Serializable {
     protected MultiplayerAttackOption attackOption;
     protected GameOptions gameOptions;
     protected String startMessage;
+
+    protected final Set<MageObjectReference> stuckCommanders = new HashSet<>();
 
     // private final transient LinkedList<MageAction> actions;
     private Player scorePlayer;
@@ -1854,6 +1857,33 @@ public abstract class GameImpl implements Game, Serializable {
             }
         }
 
+        // New commander zone change rule
+        for (Player player : state.getPlayers().values()) {
+            Set<UUID> commanderIds = getCommandersIds(player, CommanderCardType.COMMANDER_OR_OATHBREAKER);
+            Set<Card> commanders = new HashSet<>();
+            Cards toMove = new CardsImpl();
+            player.getGraveyard()
+                    .stream()
+                    .filter(commanderIds::contains)
+                    .map(this::getCard)
+                    .filter(Objects::nonNull)
+                    .forEach(commanders::add);
+            commanderIds
+                    .stream()
+                    .map(uuid -> getExile().getCard(uuid, this))
+                    .filter(Objects::nonNull)
+                    .forEach(commanders::add);
+            commanders.removeIf(card -> stuckCommanders.stream().anyMatch(mor -> mor.refersTo(card, this)));
+            for (Card card : commanders) {
+                if (player.chooseUse(Outcome.Benefit, "Move " + card.getIdName() + " to the command zone or leave it in its current zone?", "You can only make this choice once", "Move to command", "Leave in current zone", null, this)) {
+                    toMove.add(card);
+                } else {
+                    stuckCommanders.add(new MageObjectReference(card, this));
+                }
+            }
+            player.moveCards(toMove, Zone.COMMAND, null, this);
+        }
+
         // 704.5e If a copy of a spell is in a zone other than the stack, it ceases to exist. If a copy of a card is in any zone other than the stack or the battlefield, it ceases to exist.
         // (Isochron Scepter) 12/1/2004: If you don't want to cast the copy, you can choose not to; the copy ceases to exist the next time state-based actions are checked.
         Iterator<Card> copiedCards = this.getState().getCopiedCards().iterator();
@@ -2595,7 +2625,7 @@ public abstract class GameImpl implements Game, Serializable {
                 }
             }
         }
-        for(Card card : toOutside) {
+        for (Card card : toOutside) {
             rememberLKI(card.getId(), Zone.BATTLEFIELD, card);
         }
         // needed to send event that permanent leaves the battlefield to allow non stack effects to execute
