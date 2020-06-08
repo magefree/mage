@@ -107,7 +107,7 @@ class LilianaWakerOfTheDeadDiscardEffect extends OneShotEffect {
                 continue;
             }
             int amountDiscarded = player.discard(cardsToDiscard.get(playerId), source, game).size();
-            if (!playerId.equals(controller.getId()) && amountDiscarded == 0) {
+            if (controller.hasOpponent(playerId, game) && amountDiscarded == 0) {
                 player.loseLife(3, game, false);
             }
         }
