@@ -70,6 +70,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Pack Leader", 29, Rarity.RARE, mage.cards.p.PackLeader.class));
         cards.add(new SetCardInfo("Peer into the Abyss", 117, Rarity.RARE, mage.cards.p.PeerIntoTheAbyss.class));
         cards.add(new SetCardInfo("Predatory Wurm", 338, Rarity.UNCOMMON, mage.cards.p.PredatoryWurm.class));
+        cards.add(new SetCardInfo("Primal Might", 197, Rarity.RARE, mage.cards.p.PrimalMight.class));
         cards.add(new SetCardInfo("Quirion Dryad", 198, Rarity.UNCOMMON, mage.cards.q.QuirionDryad.class));
         cards.add(new SetCardInfo("Rain of Revelation", 61, Rarity.UNCOMMON, mage.cards.r.RainOfRevelation.class));
         cards.add(new SetCardInfo("Rewind", 63, Rarity.UNCOMMON, mage.cards.r.Rewind.class));
