@@ -33,6 +33,7 @@ import java.util.UUID;
 public final class LilianaWakerOfTheDead extends CardImpl {
 
     private static final DynamicValue xValue = new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD, -1);
+    private static final DynamicValue xValue_hint = new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD);
 
     public LilianaWakerOfTheDead(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{B}{B}");
@@ -48,7 +49,7 @@ public final class LilianaWakerOfTheDead extends CardImpl {
         Ability ability = new LoyaltyAbility(new BoostTargetEffect(
                 xValue, xValue, Duration.EndOfTurn, true
         ).setText("target creature gets -X/-X until end of turn, where X is the number of cards in your graveyard"), -3)
-        .addHint(new ValueHint("Cards in your graveyard", xValue));
+        .addHint(new ValueHint("Cards in your graveyard", xValue_hint));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
