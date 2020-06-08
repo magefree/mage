@@ -1,26 +1,15 @@
 package mage.cards.g;
 
-import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.effects.common.ReturnCreatureFromGraveyardToBattlefieldAndGainHasteEffect;
 import mage.abilities.keyword.BasicLandcyclingAbility;
-import mage.abilities.keyword.HasteAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
-import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -32,7 +21,7 @@ public final class GraveUpheaval extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}{R}");
 
         // Put target creature card from a graveyard onto the battlefield under your control. It gains haste.
-        this.getSpellAbility().addEffect(new GraveUpheavalEffect());
+        this.getSpellAbility().addEffect(new ReturnCreatureFromGraveyardToBattlefieldAndGainHasteEffect());
         this.getSpellAbility().addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE));
 
         // Basic landcycling {2}
@@ -49,40 +38,3 @@ public final class GraveUpheaval extends CardImpl {
     }
 }
 
-class GraveUpheavalEffect extends OneShotEffect {
-
-    public GraveUpheavalEffect() {
-        super(Outcome.PutCreatureInPlay);
-        this.staticText = "Put target creature card from a graveyard onto the battlefield under your control. It gains haste";
-    }
-
-    public GraveUpheavalEffect(final GraveUpheavalEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public GraveUpheavalEffect copy() {
-        return new GraveUpheavalEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-        Card card = game.getCard(source.getFirstTarget());
-        if (card != null) {
-            controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-            Permanent permanent = game.getPermanent(card.getId());
-            if (permanent != null) {
-                ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
-                effect.setTargetPointer(new FixedTarget(permanent, game));
-                game.addEffect(effect, source);
-            }
-            return true;
-        }
-
-        return false;
-    }
-}

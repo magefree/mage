@@ -59,9 +59,11 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Liliana's Scorn", 329, Rarity.RARE, mage.cards.l.LilianasScorn.class));
         cards.add(new SetCardInfo("Liliana's Scrounger", 330, Rarity.UNCOMMON, mage.cards.l.LilianasScrounger.class));
         cards.add(new SetCardInfo("Liliana, Death Mage", 328, Rarity.MYTHIC, mage.cards.l.LilianaDeathMage.class));
+        cards.add(new SetCardInfo("Liliana, Waker of the Dead", 108, Rarity.MYTHIC, mage.cards.l.LilianaWakerOfTheDead.class));
         cards.add(new SetCardInfo("Llanowar Visionary", 193, Rarity.COMMON, mage.cards.l.LlanowarVisionary.class));
         cards.add(new SetCardInfo("Mangara, the Diplomat", 27, Rarity.MYTHIC, mage.cards.m.MangaraTheDiplomat.class));
         cards.add(new SetCardInfo("Mystic Skyfish", 326, Rarity.COMMON, mage.cards.m.MysticSkyfish.class));
+        cards.add(new SetCardInfo("Necromentia", 116, Rarity.RARE, mage.cards.n.Necromentia.class));
         cards.add(new SetCardInfo("Pack Leader", 29, Rarity.RARE, mage.cards.p.PackLeader.class));
         cards.add(new SetCardInfo("Peer into the Abyss", 117, Rarity.RARE, mage.cards.p.PeerIntoTheAbyss.class));
         cards.add(new SetCardInfo("Predatory Wurm", 338, Rarity.UNCOMMON, mage.cards.p.PredatoryWurm.class));
