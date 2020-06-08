@@ -52,8 +52,7 @@ public final class MarrowGnawer extends CardImpl {
 
         // {T}, Sacrifice a Rat: create X 1/1 black Rat creature tokens, where X is the number of Rats you control.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
-                new CreateTokenEffect(new RatToken(), new PermanentsOnBattlefieldCount(filter3, null))
-                        /*.setText("create X 1/1 black Rat creature tokens, where X is the number of Rats you control")*/, 
+                new CreateTokenEffect(new RatToken(), new PermanentsOnBattlefieldCount(filter3, null)),
                 new TapSourceCost());
         ability.addCost( new SacrificeTargetCost(new TargetControlledPermanent(filterSacrifice)));
         this.addAbility(ability);
