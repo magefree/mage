@@ -433,7 +433,8 @@ public class Combat implements Serializable, Copyable<Combat> {
             // check if a creature has to attack
             for (Map.Entry<RequirementEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRequirementEffects(creature, false, game).entrySet()) {
                 RequirementEffect effect = entry.getKey();
-                if (effect.mustAttack(game)) {
+                if (effect.mustAttack(game)
+                        && checkAttackRestrictions(player, game)) { // needed for Goad Effect
                     mustAttack = true;
                     for (Ability ability : entry.getValue()) {
                         UUID defenderId = effect.mustAttackDefender(ability, game);
