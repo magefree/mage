@@ -1,7 +1,11 @@
 package mage.cards.a;
 
 import mage.MageObject;
+import mage.abilities.Abilities;
 import mage.abilities.Ability;
+import mage.abilities.costs.CostImpl;
+import mage.abilities.costs.Costs;
+import mage.abilities.costs.CostsImpl;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -15,6 +19,7 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 
 import java.util.*;
@@ -139,6 +144,21 @@ class AminatousAuguryCastFromExileEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        return applies(objectId, null, source, game, affectedControllerId);
+    }
+
+
+    @Override
+    public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
+
+    //@Override
+    //public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        Card cardToCheck = game.getCard(objectId);
+        objectId = CardUtil.getMainCardId(game, objectId); // for split cards
+
+        if (!isAbilityAppliedForAlternateCast(cardToCheck, affectedAbility, playerId, source)) {
+            return false;
+        }
 
         //cards put into exile using Aminatou -- created in AminatouAuguryEffect -> Apply
         Set<Card> aminatouCards = (Set<Card>) game.getState().getValue(source.getSourceId().toString() + "Cards");
@@ -150,7 +170,7 @@ class AminatousAuguryCastFromExileEffect extends AsThoughEffectImpl {
         }
 
         if (objectId.equals(getTargetPointer().getFirst(game, source))
-                && affectedControllerId.equals(source.getControllerId())) {
+                && playerId.equals(source.getControllerId())) {
 
             // Determine which card types from Aminatou cards were cast
             Iterator<Card> chkCardCastIterator = aminatouCards.iterator();
@@ -167,11 +187,17 @@ class AminatousAuguryCastFromExileEffect extends AsThoughEffectImpl {
             // make all eligible cards types zero mana cost
             Card card = game.getCard(objectId);
             if (card != null && Collections.disjoint(usedCardTypes,card.getCardType())) {
-                Player player = game.getPlayer(affectedControllerId);
+                Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    //TODO: Bolass Citadel seems to work, try fix based on that 
-                    player.setCastSourceIdWithAlternateMana(objectId, null, source.getCosts());
+                    //TODO: Bolass Citadel seems to work, try fix based on that
+                    //Costs cost = new CostsImpl();
+                    //Abilities<Ability> cardAbilities = card.getAbilities(game);
+                    //cost.addAll(card.getAbilities(game). getCosts());
+                    System.out.println("Card costs:" + card.getSpellAbility().getCosts().getText());
+                    System.out.println("Source costs:" + source.getCosts().getText());
+                    //player.setCastSourceIdWithAlternateMana(objectId, null, cost);
                     //player.setCastSourceIdWithAlternateMana(objectId, null, card.getSpellAbility().getCosts());
+                    player.setCastSourceIdWithAlternateMana(affectedAbility.getSourceId(), null, affectedAbility.getCosts());
                     return true;
                 }
             }
