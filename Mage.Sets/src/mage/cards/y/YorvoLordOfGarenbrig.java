@@ -93,7 +93,7 @@ class YorvoLordOfGarenbrigEffect extends OneShotEffect {
         if (permanent == null) {
             return true;
         }
-        game.applyEffects();
+        game.getState().processAction(game);
         if (permanent.getPower().getValue() > sourcePerm.getPower().getValue()) {
             sourcePerm.addCounters(CounterType.P1P1.createInstance(), source, game);
         }

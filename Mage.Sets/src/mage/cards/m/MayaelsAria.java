@@ -75,7 +75,7 @@ class MayaelsAriaEffect extends OneShotEffect {
                 creature.addCounters(CounterType.P1P1.createInstance(), source, game);
             }
         }
-        game.applyEffects(); // needed because otehrwise the +1/+1 counters wouldn't be taken into account
+        game.getState().processAction(game); // needed because otehrwise the +1/+1 counters wouldn't be taken into account
 
         // Then you gain 10 life if you control a creature with power 10 or greater.
         filter = new FilterCreaturePermanent();

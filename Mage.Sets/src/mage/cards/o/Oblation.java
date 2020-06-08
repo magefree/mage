@@ -63,7 +63,7 @@ class OblationEffect extends OneShotEffect {
                 player.moveCardToLibraryWithInfo(permanent, source.getSourceId(), game, Zone.BATTLEFIELD, true, true);
                 player.shuffleLibrary(source, game);
 
-                game.applyEffects(); // so effects from creatures that were on the battlefield won't trigger from draw 
+                game.getState().processAction(game); // so effects from creatures that were on the battlefield won't trigger from draw 
 
                 player.drawCards(2, source.getSourceId(), game);
                 return true;

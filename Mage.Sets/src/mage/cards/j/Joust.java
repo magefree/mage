@@ -76,7 +76,7 @@ class JoustEffect extends OneShotEffect {
         if (creature2 == null) {
             return true;
         }
-        game.applyEffects();
+        game.getState().processAction(game);
         return creature1.fight(creature2, source, game);
     }
 }

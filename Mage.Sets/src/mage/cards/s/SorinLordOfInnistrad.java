@@ -101,7 +101,7 @@ class SorinLordOfInnistradEffect extends OneShotEffect {
                 }
             }
         }
-        game.applyEffects();
+        game.getState().processAction(game);
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             return controller.moveCards(toBattlefield, Zone.BATTLEFIELD, source, game);
