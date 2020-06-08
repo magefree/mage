@@ -5,9 +5,7 @@ import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -19,7 +17,6 @@ public class DamageTargetControllerEffect extends OneShotEffect {
 
     protected DynamicValue amount;
     protected boolean preventable;
-    protected boolean useLastKnownInfo;
 
     public DamageTargetControllerEffect(int amount) {
         this(StaticValue.get(amount), true);
@@ -27,11 +24,6 @@ public class DamageTargetControllerEffect extends OneShotEffect {
 
     public DamageTargetControllerEffect(int amount, boolean preventable) {
         this(StaticValue.get(amount), preventable);
-    }
-    
-    public DamageTargetControllerEffect(int amount, boolean preventable, boolean useLastKnownInfo) {
-        this(StaticValue.get(amount), preventable);
-        this.useLastKnownInfo = useLastKnownInfo;
     }
 
     public DamageTargetControllerEffect(DynamicValue amount) {
@@ -48,7 +40,6 @@ public class DamageTargetControllerEffect extends OneShotEffect {
         super(effect);
         amount = effect.amount.copy();
         preventable = effect.preventable;
-        useLastKnownInfo = effect.useLastKnownInfo;
     }
 
     @Override
@@ -58,16 +49,7 @@ public class DamageTargetControllerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-
-        if (permanent == null && useLastKnownInfo){
-            Card card = game.getCard(targetPointer.getFirst(game, source));
-
-            if (card != null) {
-                permanent = (Permanent) game.getLastKnownInformation(card.getId(), Zone.BATTLEFIELD);
-            }
-        }
-        
+        Permanent permanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
         if (permanent != null) {
             Player targetController = game.getPlayer(permanent.getControllerId());
             if (targetController != null) {
