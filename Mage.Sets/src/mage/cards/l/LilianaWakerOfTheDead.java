@@ -8,6 +8,7 @@ import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
@@ -46,7 +47,8 @@ public final class LilianaWakerOfTheDead extends CardImpl {
         // −3: Target creature gets -X/-X until end of turn, where X is the number of cards in your graveyard.
         Ability ability = new LoyaltyAbility(new BoostTargetEffect(
                 xValue, xValue, Duration.EndOfTurn, true
-        ).setText("target creature gets -X/-X until end of turn, where X is the number of cards in your graveyard"), -3);
+        ).setText("target creature gets -X/-X until end of turn, where X is the number of cards in your graveyard"), -3)
+        .addHint(new ValueHint("Cards in your graveyard", xValue));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 

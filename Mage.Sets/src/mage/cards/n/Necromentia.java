@@ -33,7 +33,7 @@ public final class Necromentia extends CardImpl {
 
         // Choose a card name other than a basic land card name. Search target opponent's graveyard, hand, and library for any number of cards with that name and exile them. That player shuffles their library, then creates a 2/2 black Zombie creature token for each card exiled from their hand this way.
         this.getSpellAbility().addEffect(
-                new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.NONBASIC_LAND_NAME).setText("Choose a card name other than a basic land card name")
+                new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.NOT_BASIC_LAND_NAME)
         );
         this.getSpellAbility().addEffect(new NecromentiaEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
