@@ -13,12 +13,20 @@ import java.util.UUID;
  */
 public class CantAttackYouEffect extends RestrictionEffect {
 
+    UUID controllerId;
+
     public CantAttackYouEffect(Duration duration) {
         super(duration);
     }
 
+    public CantAttackYouEffect(Duration duration, UUID controllerId) {
+        super(duration);
+        this.controllerId = controllerId;
+    }
+
     public CantAttackYouEffect(final CantAttackYouEffect effect) {
         super(effect);
+        this.controllerId = effect.controllerId;
     }
 
     @Override
@@ -36,6 +44,9 @@ public class CantAttackYouEffect extends RestrictionEffect {
         if (defenderId == null) {
             return true;
         }
-        return !defenderId.equals(source.getControllerId());
+        if (controllerId == null) {
+            controllerId = source.getControllerId();
+        }
+        return !defenderId.equals(controllerId);
     }
 }
