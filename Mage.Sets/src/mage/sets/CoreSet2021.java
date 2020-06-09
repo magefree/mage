@@ -97,6 +97,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Rin and Seri, Inseparable", 278, Rarity.MYTHIC, mage.cards.r.RinAndSeriInseparable.class));
         cards.add(new SetCardInfo("Runed Halo", 32, Rarity.RARE, mage.cards.r.RunedHalo.class));
         cards.add(new SetCardInfo("Seasoned Hallowblade", 34, Rarity.UNCOMMON, mage.cards.s.SeasonedHallowblade.class));
+        cards.add(new SetCardInfo("See the Truth", 69, Rarity.RARE, mage.cards.s.SeeTheTruth.class));
         cards.add(new SetCardInfo("Shipwreck Dowser", 71, Rarity.UNCOMMON, mage.cards.s.ShipwreckDowser.class));
         cards.add(new SetCardInfo("Sigiled Contender", 323, Rarity.UNCOMMON, mage.cards.s.SigiledContender.class));
         cards.add(new SetCardInfo("Solemn Simulacrum", 239, Rarity.RARE, mage.cards.s.SolemnSimulacrum.class));
