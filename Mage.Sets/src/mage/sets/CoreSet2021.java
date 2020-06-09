@@ -82,6 +82,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Pestilent Haze", 118, Rarity.UNCOMMON, mage.cards.p.PestilentHaze.class));
         cards.add(new SetCardInfo("Plains", 309, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Predatory Wurm", 338, Rarity.UNCOMMON, mage.cards.p.PredatoryWurm.class));
+        cards.add(new SetCardInfo("Pridemalkin", 196, Rarity.COMMON, mage.cards.p.Pridemalkin.class));
         cards.add(new SetCardInfo("Quirion Dryad", 198, Rarity.UNCOMMON, mage.cards.q.QuirionDryad.class));
         cards.add(new SetCardInfo("Radiant Fountain", 248, Rarity.COMMON, mage.cards.r.RadiantFountain.class));
         cards.add(new SetCardInfo("Rain of Revelation", 61, Rarity.UNCOMMON, mage.cards.r.RainOfRevelation.class));
