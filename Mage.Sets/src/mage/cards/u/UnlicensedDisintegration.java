@@ -28,7 +28,7 @@ public final class UnlicensedDisintegration extends CardImpl {
                 new DamageTargetControllerEffect(3),
                 new PermanentsOnTheBattlefieldCondition(new FilterControlledArtifactPermanent()),
                 "If you control an artifact, Unlicensed Disintegration deals 3 damage to that creature's controller"));
-
+        
     }
 
     public UnlicensedDisintegration(final UnlicensedDisintegration card) {
