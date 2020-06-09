@@ -72,6 +72,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Liliana, Waker of the Dead", 108, Rarity.MYTHIC, mage.cards.l.LilianaWakerOfTheDead.class));
         cards.add(new SetCardInfo("Llanowar Visionary", 193, Rarity.COMMON, mage.cards.l.LlanowarVisionary.class));
         cards.add(new SetCardInfo("Lorescale Coatl", 221, Rarity.UNCOMMON, mage.cards.l.LorescaleCoatl.class));
+        cards.add(new SetCardInfo("Malefic Scythe", 112, Rarity.UNCOMMON, mage.cards.m.MaleficScythe.class));
         cards.add(new SetCardInfo("Mangara, the Diplomat", 27, Rarity.MYTHIC, mage.cards.m.MangaraTheDiplomat.class));
         cards.add(new SetCardInfo("Massacre Wurm", 114, Rarity.MYTHIC, mage.cards.m.MassacreWurm.class));
         cards.add(new SetCardInfo("Mystic Skyfish", 326, Rarity.COMMON, mage.cards.m.MysticSkyfish.class));
