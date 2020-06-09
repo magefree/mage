@@ -16,10 +16,11 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
-
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import mage.MageItem;
 
 /**
  * @author L_J
@@ -87,7 +88,7 @@ class NoxiousVaporsEffect extends OneShotEffect {
             chooseCardForColor(ObjectColor.GREEN, chosenCards, player, game, source);
             chosenCards.addAll(player.getHand().getCards(StaticFilters.FILTER_CARD_LAND, game));
             Cards cards = player.getHand().copy();
-            cards.removeIf(chosenCards::contains);
+            cards.removeIf(chosenCards.stream().map(MageItem::getId).collect(Collectors.toSet())::contains);
             player.discard(cards, source, game);
         }
         return true;
