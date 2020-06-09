@@ -51,7 +51,7 @@ class MeddlingMageReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 
     public MeddlingMageReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "Spells with the chosen name can't be cast.";
+        staticText = "Spells with the chosen name can't be cast";
     }
 
     public MeddlingMageReplacementEffect(final MeddlingMageReplacementEffect effect) {

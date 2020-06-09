@@ -74,7 +74,7 @@ class FeedingGroundsEffect extends CostModificationEffectImpl {
                 new ColorPredicate(ObjectColor.GREEN)));
     }
 
-    private static final String rule = "Red spells cost {1} less to cast. Green spells cost {1} less to cast.";
+    private static final String rule = "Red spells cost {1} less to cast. Green spells cost {1} less to cast";
     private int amount = 1;
 
     public FeedingGroundsEffect() {

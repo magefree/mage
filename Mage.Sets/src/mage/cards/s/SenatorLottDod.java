@@ -53,7 +53,7 @@ class SenatorLottDodSpellsTargetingCreatureCostReductionEffect extends CostModif
 
     public SenatorLottDodSpellsTargetingCreatureCostReductionEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);
-        this.staticText = "Spell your opponents cast that target a creature you control cost {1} more to cast.";
+        this.staticText = "Spell your opponents cast that target a creature you control cost {1} more to cast";
     }
 
     protected SenatorLottDodSpellsTargetingCreatureCostReductionEffect(SenatorLottDodSpellsTargetingCreatureCostReductionEffect effect) {
@@ -96,7 +96,7 @@ class SenatorLottDodSpellsTargetingYouCostReductionEffect extends CostModificati
 
     public SenatorLottDodSpellsTargetingYouCostReductionEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);
-        this.staticText = "Spells your opponents cast that target you cost {2} more to cast.";
+        this.staticText = "Spells your opponents cast that target you cost {2} more to cast";
     }
 
     protected SenatorLottDodSpellsTargetingYouCostReductionEffect(SenatorLottDodSpellsTargetingYouCostReductionEffect effect) {
