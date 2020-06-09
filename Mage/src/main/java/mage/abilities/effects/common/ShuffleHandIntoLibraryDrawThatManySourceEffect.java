@@ -36,7 +36,7 @@ public class ShuffleHandIntoLibraryDrawThatManySourceEffect extends OneShotEffec
             if (cardsHand > 0) {
                 controller.moveCards(controller.getHand(), Zone.LIBRARY, source, game);
                 controller.shuffleLibrary(source, game);
-                game.applyEffects(); // then
+                game.getState().processAction(game); // then
                 controller.drawCards(cardsHand, source.getSourceId(), game);
             }
             return true;
