@@ -96,6 +96,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Shipwreck Dowser", 71, Rarity.UNCOMMON, mage.cards.s.ShipwreckDowser.class));
         cards.add(new SetCardInfo("Sigiled Contender", 323, Rarity.UNCOMMON, mage.cards.s.SigiledContender.class));
         cards.add(new SetCardInfo("Solemn Simulacrum", 239, Rarity.RARE, mage.cards.s.SolemnSimulacrum.class));
+        cards.add(new SetCardInfo("Soul Sear", 160, Rarity.UNCOMMON, mage.cards.s.SoulSear.class));
         cards.add(new SetCardInfo("Sparkhunter Masticore", 240, Rarity.RARE, mage.cards.s.SparkhunterMasticore.class));
         cards.add(new SetCardInfo("Spined Megalodon", 72, Rarity.COMMON, mage.cards.s.SpinedMegalodon.class));
         cards.add(new SetCardInfo("Spirit of Malevolence", 331, Rarity.COMMON, mage.cards.s.SpiritOfMalevolence.class));
