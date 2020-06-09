@@ -30,10 +30,10 @@ public final class MeddlingMage extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // As Meddling Mage enters the battlefield, name a nonland card.
+        // As Meddling Mage enters the battlefield, choose a nonland card name.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.NON_LAND_NAME)));
 
-        //The named card can't be cast.
+        // Spells with the chosen name can't be cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MeddlingMageReplacementEffect()));
     }
 
@@ -51,7 +51,7 @@ class MeddlingMageReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 
     public MeddlingMageReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "Spells with the chosen name can't be cast";
+        staticText = "Spells with the chosen name can't be cast.";
     }
 
     public MeddlingMageReplacementEffect(final MeddlingMageReplacementEffect effect) {
@@ -89,6 +89,5 @@ class MeddlingMageReplacementEffect extends ContinuousRuleModifyingEffectImpl {
         return object != null
                 && !object.isCopy()
                 && CardUtil.haveSameNames(object, cardName, game);
-
     }
 }
