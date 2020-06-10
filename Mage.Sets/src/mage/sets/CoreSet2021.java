@@ -40,6 +40,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Basri Ket", 7, Rarity.MYTHIC, mage.cards.b.BasriKet.class));
         cards.add(new SetCardInfo("Basri's Acolyte", 8, Rarity.COMMON, mage.cards.b.BasrisAcolyte.class));
         cards.add(new SetCardInfo("Basri's Aegis", 322, Rarity.RARE, mage.cards.b.BasrisAegis.class));
+        cards.add(new SetCardInfo("Basri's Lieutenant", 9, Rarity.RARE, mage.cards.b.BasrisLieutenant.class));
         cards.add(new SetCardInfo("Basri's Solidarity", 10, Rarity.UNCOMMON, mage.cards.b.BasrisSolidarity.class));
         cards.add(new SetCardInfo("Basri, Devoted Paladin", 320, Rarity.MYTHIC, mage.cards.b.BasriDevotedPaladin.class));
         cards.add(new SetCardInfo("Bolt Hound", 131, Rarity.UNCOMMON, mage.cards.b.BoltHound.class));
