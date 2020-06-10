@@ -67,6 +67,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Grasp of Darkness", 102, Rarity.COMMON, mage.cards.g.GraspOfDarkness.class));
         cards.add(new SetCardInfo("Grim Tutor", 103, Rarity.MYTHIC, mage.cards.g.GrimTutor.class));
         cards.add(new SetCardInfo("Havoc Jester", 149, Rarity.UNCOMMON, mage.cards.h.HavocJester.class));
+        cards.add(new SetCardInfo("Hellkite Punisher", 151, Rarity.UNCOMMON, mage.cards.h.HellkitePunisher.class));
         cards.add(new SetCardInfo("Heroic Intervention", 188, Rarity.RARE, mage.cards.h.HeroicIntervention.class));
         cards.add(new SetCardInfo("Historian of Zhalfir", 325, Rarity.UNCOMMON, mage.cards.h.HistorianOfZhalfir.class));
         cards.add(new SetCardInfo("Indulging Patrician", 219, Rarity.UNCOMMON, mage.cards.i.IndulgingPatrician.class));
