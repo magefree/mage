@@ -1,5 +1,6 @@
 package mage.abilities.effects;
 
+import java.util.*;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.CompoundAbility;
@@ -18,8 +19,6 @@ import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.targetpointer.TargetPointer;
-
-import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com, JayDi85
@@ -47,9 +46,9 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     protected boolean characterDefining = false;
 
     // until your next turn or until end of your next turn
-    private UUID startingControllerId; // player to checkss turns (can't different with real controller ability)
-    private boolean startingTurnWasActive;
-    private int yourTurnNumPlayed = 0; // turnes played after effect was created
+    private UUID startingControllerId; // player to check for turn duration (can't different with real controller ability)
+    private boolean startingTurnWasActive; // effect started during related players turn and related players turn was already active
+    private int effectStartingOnTurn = 0; // turn the effect started
 
     public ContinuousEffectImpl(Duration duration, Outcome outcome) {
         super(outcome);
@@ -79,7 +78,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         this.temporary = effect.temporary;
         this.startingControllerId = effect.startingControllerId;
         this.startingTurnWasActive = effect.startingTurnWasActive;
-        this.yourTurnNumPlayed = effect.yourTurnNumPlayed;
+        this.effectStartingOnTurn = effect.effectStartingOnTurn;
         this.dependencyTypes = effect.dependencyTypes;
         this.dependendToTypes = effect.dependendToTypes;
         this.characterDefining = effect.characterDefining;
@@ -191,23 +190,13 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         this.startingControllerId = startingController;
         this.startingTurnWasActive = activePlayerId != null
                 && activePlayerId.equals(startingController); // you can't use "game" for active player cause it's called from tests/cheat too
-        this.yourTurnNumPlayed = 0;
-    }
-
-    @Override
-    public void incYourTurnNumPlayed() {
-        yourTurnNumPlayed++;
+        this.effectStartingOnTurn = game.getTurnNum();
     }
 
     @Override
     public boolean isYourNextTurn(Game game) {
-        if (this.startingTurnWasActive) {
-            return yourTurnNumPlayed == 1
-                    && game.isActivePlayer(startingControllerId);
-        } else {
-            return yourTurnNumPlayed == 0
-                    && game.isActivePlayer(startingControllerId);
-        }
+        return effectStartingOnTurn < game.getTurnNum()
+                && game.isActivePlayer(startingControllerId);
     }
 
     @Override
@@ -367,6 +356,9 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     /**
      * Auto-generates dependencies on different effects (what's apply first and
      * what's apply second)
+     *
+     * @param abilityToGain
+     * @param filterToSearch
      */
     public void generateGainAbilityDependencies(Ability abilityToGain, Filter filterToSearch) {
         this.addDependencyType(DependencyType.AddingAbility);

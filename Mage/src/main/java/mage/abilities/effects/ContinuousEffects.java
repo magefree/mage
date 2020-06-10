@@ -1,5 +1,9 @@
 package mage.abilities.effects;
 
+import java.io.Serializable;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -25,11 +29,6 @@ import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 import mage.util.CardUtil;
 import org.apache.log4j.Logger;
-
-import java.io.Serializable;
-import java.util.*;
-import java.util.Map.Entry;
-import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -163,28 +162,17 @@ public class ContinuousEffects implements Serializable {
         spliceCardEffects.removeInactiveEffects(game);
     }
 
-    public synchronized void incYourTurnNumPlayed(Game game) {
-        layeredEffects.incYourTurnNumPlayed(game);
-        continuousRuleModifyingEffects.incYourTurnNumPlayed(game);
-        replacementEffects.incYourTurnNumPlayed(game);
-        preventionEffects.incYourTurnNumPlayed(game);
-        requirementEffects.incYourTurnNumPlayed(game);
-        restrictionEffects.incYourTurnNumPlayed(game);
-        for (ContinuousEffectsList asThoughtlist : asThoughEffectsMap.values()) {
-            asThoughtlist.incYourTurnNumPlayed(game);
-        }
-        costModificationEffects.incYourTurnNumPlayed(game);
-        spliceCardEffects.incYourTurnNumPlayed(game);
-    }
-
     public synchronized List<ContinuousEffect> getLayeredEffects(Game game) {
         return getLayeredEffects(game, "main");
     }
 
     /**
-     * Return effects list ordered by timestamps (timestamps are automaticity generates from new/old lists on same layer)
+     * Return effects list ordered by timestamps (timestamps are automaticity
+     * generates from new/old lists on same layer)
      *
-     * @param timestampGroupName workaround to fix broken timestamps on effect's add/remove between different layers
+     * @param game
+     * @param timestampGroupName workaround to fix broken timestamps on effect's
+     * add/remove between different layers
      * @return effects list ordered by timestamp
      */
     public synchronized List<ContinuousEffect> getLayeredEffects(Game game, String timestampGroupName) {
@@ -229,8 +217,10 @@ public class ContinuousEffects implements Serializable {
      * "actual" meaning it becomes turned on that is defined by
      * Ability.#isInUseableZone(Game, boolean) method in
      * #getLayeredEffects(Game).
-     * <p>
-     * It must be called with different timestamp group name (otherwise sort order will be changed for add/remove effects, see Urborg and Bloodmoon test)
+     *
+     * It must be called with different timestamp group name (otherwise sort
+     * order will be changed for add/remove effects, see Urborg and Bloodmoon
+     * test)
      *
      * @param layerEffects
      */
@@ -359,7 +349,7 @@ public class ContinuousEffects implements Serializable {
         }
         // boolean checkLKI = event.getType().equals(EventType.ZONE_CHANGE) || event.getType().equals(EventType.DESTROYED_PERMANENT);
         //get all applicable transient Replacement effects
-        for (Iterator<ReplacementEffect> iterator = replacementEffects.iterator(); iterator.hasNext(); ) {
+        for (Iterator<ReplacementEffect> iterator = replacementEffects.iterator(); iterator.hasNext();) {
             ReplacementEffect effect = iterator.next();
             if (!effect.checksEventType(event, game)) {
                 continue;
@@ -392,7 +382,7 @@ public class ContinuousEffects implements Serializable {
             }
         }
 
-        for (Iterator<PreventionEffect> iterator = preventionEffects.iterator(); iterator.hasNext(); ) {
+        for (Iterator<PreventionEffect> iterator = preventionEffects.iterator(); iterator.hasNext();) {
             PreventionEffect effect = iterator.next();
             if (!effect.checksEventType(event, game)) {
                 continue;
@@ -768,8 +758,8 @@ public class ContinuousEffects implements Serializable {
      * @param event
      * @param targetAbility ability the event is attached to. can be null.
      * @param game
-     * @param silentMode    true if the event does not really happen but it's
-     *                      checked if the event would be replaced
+     * @param silentMode true if the event does not really happen but it's
+     * checked if the event would be replaced
      * @return
      */
     public boolean preventedByRuleModification(GameEvent event, Ability targetAbility, Game game, boolean silentMode) {
@@ -817,7 +807,7 @@ public class ContinuousEffects implements Serializable {
         do {
             Map<ReplacementEffect, Set<Ability>> rEffects = getApplicableReplacementEffects(event, game);
             // Remove all consumed effects (ability dependant)
-            for (Iterator<ReplacementEffect> it1 = rEffects.keySet().iterator(); it1.hasNext(); ) {
+            for (Iterator<ReplacementEffect> it1 = rEffects.keySet().iterator(); it1.hasNext();) {
                 ReplacementEffect entry = it1.next();
                 if (consumed.containsKey(entry.getId()) /*&& !(entry instanceof CommanderReplacementEffect) */) { // 903.9.
                     Set<UUID> consumedAbilitiesIds = consumed.get(entry.getId());
@@ -1002,7 +992,7 @@ public class ContinuousEffects implements Serializable {
                             .entrySet()
                             .stream()
                             .filter(entry -> dependentTo.contains(entry.getKey().getId())
-                                    && entry.getValue().contains(effect.getId()))
+                            && entry.getValue().contains(effect.getId()))
                             .forEach(entry -> {
                                 entry.getValue().remove(effect.getId());
                                 dependentTo.remove(entry.getKey().getId());
@@ -1036,7 +1026,7 @@ public class ContinuousEffects implements Serializable {
                     continue;
                 }
                 // check if waiting effects can be applied now
-                for (Iterator<Map.Entry<ContinuousEffect, Set<UUID>>> iterator = waitingEffects.entrySet().iterator(); iterator.hasNext(); ) {
+                for (Iterator<Map.Entry<ContinuousEffect, Set<UUID>>> iterator = waitingEffects.entrySet().iterator(); iterator.hasNext();) {
                     Map.Entry<ContinuousEffect, Set<UUID>> entry = iterator.next();
                     if (!appliedEffects.containsAll(entry.getValue())) { // all dependent to effects are applied now so apply the effect itself
                         continue;
@@ -1283,18 +1273,19 @@ public class ContinuousEffects implements Serializable {
     }
 
     private void setControllerForEffect(ContinuousEffectsList<?> effects, UUID sourceId, UUID controllerId) {
-        for (Effect effect : effects) {
-            Set<Ability> abilities = effects.getAbility(effect.getId());
-            for (Ability ability : abilities) {
-                if (ability.getSourceId() != null) {
-                    if (ability.getSourceId().equals(sourceId)) {
-                        ability.setControllerId(controllerId);
+        for (ContinuousEffect effect : effects) {
+            if (!effect.getDuration().isFixedController()) {
+                Set<Ability> abilities = effects.getAbility(effect.getId());
+                for (Ability ability : abilities) {
+                    if (ability.getSourceId() != null) {
+                        if (ability.getSourceId().equals(sourceId)) {
+                            ability.setControllerId(controllerId);
+                        }
+                    } else if (ability.getZone() != Zone.COMMAND) {
+                        logger.fatal("Continuous effect for ability with no sourceId Ability: " + ability);
                     }
-                } else if (ability.getZone() != Zone.COMMAND) {
-                    logger.fatal("Continuous effect for ability with no sourceId Ability: " + ability);
                 }
             }
-
         }
     }
 

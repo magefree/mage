@@ -1,4 +1,3 @@
-
 package mage.cards.o;
 
 import java.util.UUID;
@@ -9,14 +8,15 @@ import mage.abilities.condition.common.SourceOnBattlefieldControlUnchangedCondit
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.AssignNoCombatDamageSourceEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.permanent.DefendingPlayerControlsPredicate;
 import mage.target.TargetPermanent;
+import mage.watchers.common.LostControlWatcher;
 
 /**
  *
@@ -45,6 +45,7 @@ public final class OrcishSquatters extends CardImpl {
         ), true);
         ability.addEffect(new AssignNoCombatDamageSourceEffect(Duration.EndOfTurn, true));
         ability.addTarget(new TargetPermanent(filter));
+        ability.addWatcher(new LostControlWatcher());
         this.addAbility(ability);
     }
 
