@@ -2699,11 +2699,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                         (event.isWinnable() ? "(You called " + event.getChosenName() + ")" : null),
                         "Heads", "Tails", source, game
                 ));
-            } else if (canChooseHeads) {
-                event.setResult(true);
-            } else {
-                event.setResult(false);
-            }
+            } else event.setResult(canChooseHeads);
             game.informPlayers(getLogName() + " chose to keep " + CardUtil.booleanToFlipName(event.getResult()));
         }
         if (event.isWinnable()) {
@@ -2935,7 +2931,7 @@ public abstract class PlayerImpl implements Player, Serializable {
      */
     protected boolean canPlay(ActivatedAbility ability, ManaOptions available, MageObject sourceObject, Game game) {
         if (!(ability instanceof ActivatedManaAbilityImpl)) {
-            ActivatedAbility copy = ability.copy(); // Copy is needed because cost reduction effects modify e.g. the mana to activate/cast the ability
+            ActivatedAbility copy = ability.copy(); // copy is needed because cost reduction effects modify e.g. the mana to activate/cast the ability
             if (!copy.canActivate(playerId, game).canActivate()) {
                 return false;
             }

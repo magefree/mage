@@ -314,17 +314,7 @@ public class TestPlayer implements Player {
             if (group.startsWith("spell") || group.startsWith("!spell") || group.startsWith("target=null") || group.startsWith("manaInPool=")) {
                 break;
             }
-            if (ability instanceof SpellAbility && ((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED) {
-                if (group.contains("FuseLeft-")) {
-                    result = handleTargetString(group.substring(group.indexOf("FuseLeft-") + 9), ability, game);
-                } else if (group.startsWith("FuseRight-")) {
-                    result = handleTargetString(group.substring(group.indexOf("FuseRight-") + 10), ability, game);
-                } else {
-                    result = false;
-                }
-            } else {
-                result = handleTargetString(group, ability, game);
-            }
+            result = handleTargetString(group, ability, game);
         }
         return result;
     }

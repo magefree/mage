@@ -124,24 +124,28 @@ public class Spell extends StackObjImpl implements Card {
     }
 
     public boolean activate(Game game, boolean noMana) {
-        setDoneActivatingManaAbilities(false); // Used for e.g. improvise
-        if (!spellAbilities.get(0).activate(game, noMana)) {
+        setDoneActivatingManaAbilities(false); // used for e.g. improvise
+
+        if (!ability.activate(game, noMana)) {
             return false;
         }
-        if (spellAbilities.size() > 1) {
-            // if there are more abilities (fused split spell) or first ability added new abilities (splice), activate the additional abilities
-            boolean ignoreAbility = true;
+
+        // spell can contains multiple abilities to activate (fused split, splice)
+        for (SpellAbility spellAbility : spellAbilities) {
+            if (ability.equals(spellAbility)) {
+                // activated first
+                continue;
+            }
+
             boolean payNoMana = noMana;
-            for (SpellAbility spellAbility : spellAbilities) {
-                if (ignoreAbility) {
-                    ignoreAbility = false;
-                } else {
-                    // costs for spliced abilities were added to main spellAbility, so pay no mana for spliced abilities
-                    payNoMana |= spellAbility.getSpellAbilityType() == SpellAbilityType.SPLICE;
-                    if (!spellAbility.activate(game, payNoMana)) {
-                        return false;
-                    }
-                }
+            // costs for spliced abilities were added to main spellAbility, so pay no mana for spliced abilities
+            payNoMana |= spellAbility.getSpellAbilityType() == SpellAbilityType.SPLICE;
+            // costs for fused ability pay on first spell activate, so all parts must be without mana
+            // see https://github.com/magefree/mage/issues/6603
+            payNoMana |= ability.getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED;
+
+            if (!spellAbility.activate(game, payNoMana)) {
+                return false;
             }
         }
         setDoneActivatingManaAbilities(true); // can be activated again maybe during the resolution of the spell (e.g. Metallic Rebuke)
