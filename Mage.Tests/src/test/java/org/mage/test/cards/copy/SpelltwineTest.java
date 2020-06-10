@@ -48,7 +48,6 @@ public class SpelltwineTest extends CardTestPlayerBase {
      * after this, failing to be in the stack box or resolve all.
      */
     @Test
-    @Ignore // TODO: test is wrong -- mirari exile cards and must cast their copies, on copies cast mirari triggers again (two times).
     public void testCopyCardsMirari() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 9);
         // Exile target instant or sorcery card from your graveyard and target instant or sorcery card from an opponent's graveyard.
@@ -69,10 +68,8 @@ public class SpelltwineTest extends CardTestPlayerBase {
 
         // cast spellwin
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spelltwine");
-        addTarget(playerA, "Impulse"); // target 1 to excile
-        addTarget(playerA, "Blasphemous Act"); // target 2 to excile
-
-
+        addTarget(playerA, "Impulse"); // target 1 to exile
+        addTarget(playerA, "Blasphemous Act"); // target 2 to exile
 
         setChoice(playerA, "Yes"); //  pay {3} and copy spell
         setChoice(playerA, "Yes"); // Change targets

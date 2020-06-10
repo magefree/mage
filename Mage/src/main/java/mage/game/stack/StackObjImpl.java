@@ -272,7 +272,7 @@ public abstract class StackObjImpl implements StackObject {
                 name = targetPlayer.getLogName();
             }
         } else {
-            name = object.getName();
+            name = object.getIdName();
         }
         return name;
     }
