@@ -28,7 +28,7 @@ public final class AvatarOfWill extends CardImpl {
         this.toughness = new MageInt(6);
 
         // If an opponent has no cards in hand, Avatar of Will costs {6} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.STACK, new AvatarOfWillCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new AvatarOfWillCostReductionEffect()));
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());

@@ -27,7 +27,7 @@ public final class MarshmistTitan extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Marshmist Titan costs {X} less to cast, where X is your devotion to black.
-        this.addAbility(new SimpleStaticAbility(Zone.STACK, new MarshmistTitanCostReductionEffect())
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new MarshmistTitanCostReductionEffect())
                 .addHint(DevotionCount.B.getHint()));
     }
 

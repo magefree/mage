@@ -32,7 +32,7 @@ public final class AvatarOfWoe extends CardImpl {
         this.toughness = new MageInt(5);
 
         // If there are ten or more creature cards total in all graveyards, Avatar of Woe costs {6} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.STACK, new AvatarOfWoeCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new AvatarOfWoeCostReductionEffect()));
 
         // Fear
         this.addAbility(FearAbility.getInstance());
