@@ -1077,6 +1077,7 @@ public class TestPlayer implements Player {
         List<String> data = abilities.stream()
                 .map(a -> (a.getZone() + " -> "
                         + a.getSourceObject(game).getIdName() + " -> "
+                        + (a.toString().startsWith("Cast ") ? "[" + a.getManaCostsToPay().getText() + "] -> " : "") // printed cost, not modified
                         + (a.toString().length() > 0
                         ? a.toString().substring(0, Math.min(20, a.toString().length()))
                         : a.getClass().getSimpleName())

@@ -4,7 +4,6 @@ import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.MageSingleton;
-import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
 import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
 import mage.abilities.effects.common.continuous.CommanderReplacementEffect;
@@ -24,6 +23,7 @@ import mage.game.stack.Spell;
 import mage.players.ManaPoolItem;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
+import mage.util.CardUtil;
 import org.apache.log4j.Logger;
 
 import java.io.Serializable;
@@ -229,7 +229,7 @@ public class ContinuousEffects implements Serializable {
      * "actual" meaning it becomes turned on that is defined by
      * Ability.#isInUseableZone(Game, boolean) method in
      * #getLayeredEffects(Game).
-     *
+     * <p>
      * It must be called with different timestamp group name (otherwise sort order will be changed for add/remove effects, see Urborg and Bloodmoon test)
      *
      * @param layerEffects
@@ -703,10 +703,17 @@ public class ContinuousEffects implements Serializable {
      * @param game
      */
     public void applySpliceEffects(Ability abilityToModify, Game game) {
-        if (((SpellAbility) abilityToModify).getSpellAbilityType() == SpellAbilityType.SPLICE) {
-            // on a spliced ability of a spell can't be spliced again
+        // add effects from splice card to spell ability on activate/cast
+
+        // splice spell - spell can't be spliced again
+        if (CardUtil.isSpliceAbility(abilityToModify, game)) {
             return;
         }
+        // fused spell - can be spliced only to main fused ability, not to parts
+        if (CardUtil.isFusedPartAbility(abilityToModify, game)) {
+            return;
+        }
+
         List<SpliceCardEffect> spliceEffects = getApplicableSpliceCardEffects(game, abilityToModify.getControllerId());
         // get the applyable splice abilities
         List<Ability> spliceAbilities = new ArrayList<>();

@@ -24,6 +24,7 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.Targets;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 import mage.util.GameLog;
 import mage.util.ThreadLocalStringBuilder;
 import mage.watchers.Watcher;
@@ -352,8 +353,15 @@ public abstract class AbilityImpl implements Ability {
             return false;
         }
 
+        // fused spell contains 3 abilities (fused, left, right)
+        // fused cost added to fused ability, so no need cost modification for other parts
+        boolean needCostModification = true;
+        if (CardUtil.isFusedPartAbility(this, game)) {
+            needCostModification = false;
+        }
+
         //20101001 - 601.2e
-        if (sourceObject != null) {
+        if (needCostModification && sourceObject != null) {
             sourceObject.adjustCosts(this, game); // still needed
             game.getContinuousEffects().costModification(this, game);
         }
