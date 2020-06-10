@@ -64,14 +64,14 @@ public class PutLibraryIntoGraveTargetEffect extends OneShotEffect {
         } else {
             sb.append("that target");
         }
-
-        sb.append(" mills ");
+        sb.append(" puts the top ");
         if (message.isEmpty()) {
             if (amount.toString().equals("1")) {
                 sb.append("a card");
             } else {
                 sb.append(CardUtil.numberToText(amount.toString())).append(" cards");
             }
+            sb.append(" of their library into their graveyard");
         } else {
             sb.append(" X cards, where X is the number of ");
         }
