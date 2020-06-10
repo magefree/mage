@@ -98,7 +98,7 @@ class AccursedWitchSpellsCostReductionEffect extends CostModificationEffectImpl 
 
     AccursedWitchSpellsCostReductionEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment, CostModificationType.REDUCE_COST);
-        this.staticText = "Spells your opponents cast that target {this} cost {1} less to cast.";
+        this.staticText = "Spells your opponents cast that target {this} cost {1} less to cast";
     }
 
     private AccursedWitchSpellsCostReductionEffect(AccursedWitchSpellsCostReductionEffect effect) {

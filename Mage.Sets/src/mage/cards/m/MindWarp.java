@@ -43,7 +43,7 @@ class MindWarpEffect extends OneShotEffect {
 
     MindWarpEffect() {
         super(Outcome.Discard);
-        staticText = "Look at target player's hand and choose X cards from it. That player discards those card.";
+        staticText = "Look at target player's hand and choose X cards from it. That player discards those cards.";
     }
 
     private MindWarpEffect(final MindWarpEffect effect) {

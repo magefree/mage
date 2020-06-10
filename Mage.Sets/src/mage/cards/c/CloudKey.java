@@ -98,7 +98,7 @@ class CloudKeyCostModificationEffect extends CostModificationEffectImpl {
 
     public CloudKeyCostModificationEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        this.staticText = "Spells you cast of the chosen type cost {1} less to cast.";
+        this.staticText = "Spells you cast of the chosen type cost {1} less to cast";
     }
 
     public CloudKeyCostModificationEffect(final CloudKeyCostModificationEffect effect) {

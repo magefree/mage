@@ -1349,7 +1349,7 @@ public class ContinuousEffects implements Serializable {
                 for (Ability ability : entry.getValue()) {
                     MageObject object = game.getObject(ability.getSourceId());
                     if (object != null) {
-                        texts.put(ability.getId().toString() + '_' + entry.getKey().getId().toString(), object.getName() + ": " + ability.getRule(object.getName()));
+                        texts.put(ability.getId().toString() + '_' + entry.getKey().getId().toString(), object.getIdName() + ": " + ability.getRule(object.getName()));
                     } else {
                         texts.put(ability.getId().toString() + '_' + entry.getKey().getId().toString(), entry.getKey().getText(null));
                     }

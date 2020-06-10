@@ -50,7 +50,7 @@ class AetherStormReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 
     public AetherStormReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "Creature spells can't be cast.";
+        staticText = "Creature spells can't be cast";
     }
 
     private AetherStormReplacementEffect(final AetherStormReplacementEffect effect) {

@@ -41,7 +41,7 @@ public class GoadTargetEffect extends OneShotEffect {
         Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         if (targetCreature != null && controller != null) {
-            // TODO: impoves goad to allows to target controller, current AttacksIfAbleTargetEffect is not support it
+            // TODO: Allow goad to target controller, current AttacksIfAbleTargetEffect is not support it
             // https://github.com/magefree/mage/issues/5283
             /*
             If the creature doesn’t meet any of the above exceptions and can attack, it must attack a player other than
@@ -52,7 +52,7 @@ public class GoadTargetEffect extends OneShotEffect {
             ContinuousEffect effect = new AttacksIfAbleTargetEffect(Duration.UntilYourNextTurn);
             effect.setTargetPointer(new FixedTarget(getTargetPointer().getFirst(game, source)));
             game.addEffect(effect, source);
-            effect = new CantAttackYouEffect(Duration.UntilYourNextTurn);
+            effect = new CantAttackYouEffect(Duration.UntilYourNextTurn, source.getControllerId()); // remember current controller
             effect.setTargetPointer(new FixedTarget(getTargetPointer().getFirst(game, source)));
             game.addEffect(effect, source);
             game.informPlayers(controller.getLogName() + " is goading " + targetCreature.getLogName());
