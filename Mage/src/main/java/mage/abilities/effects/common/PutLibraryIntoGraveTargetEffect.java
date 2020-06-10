@@ -67,7 +67,7 @@ public class PutLibraryIntoGraveTargetEffect extends OneShotEffect {
         sb.append(" puts the top ");
         if (message.isEmpty()) {
             if (amount.toString().equals("1")) {
-                sb.append("a card");
+                sb.append("card");
             } else {
                 sb.append(CardUtil.numberToText(amount.toString())).append(" cards");
             }
