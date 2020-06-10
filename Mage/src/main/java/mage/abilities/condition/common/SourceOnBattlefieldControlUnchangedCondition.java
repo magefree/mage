@@ -12,10 +12,10 @@ import mage.watchers.common.LostControlWatcher;
  * Monitoring the LOST_CONTROL event has the advantage that also all layered
  * effects can correctly check for controller change because comparing old and
  * new controller during their apply time does not take into account layered
- * cahnge control effects that will be applied later.
+ * change control effects that will be applied later.
  *
  * This condition needs the LostControlWatcher, so be sure to add it to the card
- * that uses the condition
+ * that uses the condition.
  *
  * @author LevelX2
  */

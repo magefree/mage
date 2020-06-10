@@ -10,17 +10,14 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
-/**
- *
- * Lazav, Dimir Mastermind
- *
- * Legendary Creature — Shapeshifter 3/3, UUBB Hexproof Whenever a creature card
- * is put into an opponent's graveyard from anywhere, you may have Lazav, Dimir
- * Mastermind become a copy of that card except its name is still Lazav, Dimir
- * Mastermind, it's legendary in addition to its other types, and it gains
- * hexproof and this ability.
- *
- * @author LevelX2
+/*
+    Lazav, Dimir Mastermind
+    Legendary Creature — Shapeshifter 3/3, UUBB
+    Hexproof Whenever a creature card is put into an opponent's graveyard from anywhere, you may have
+    Lazav, Dimir Mastermind become a copy of that card except its name is still Lazav, Dimir Mastermind,
+    it's legendary in addition to its other types, and it gains hexproof and this ability.
+
+    @author LevelX2
  */
 public class LazavDimirMastermindTest extends CardTestPlayerBase {
 
@@ -83,14 +80,13 @@ public class LazavDimirMastermindTest extends CardTestPlayerBase {
 
     }
 
-    /**
+    /*
      * Tests copy Nightveil Specter
      *
-     * Nightveil Specter Creature — Specter 2/3, {U/B}{U/B}{U/B} Flying Whenever
-     * Nightveil Specter deals combat damage to a player, that player exiles the
-     * top card of their library. You may play cards exiled with Nightveil
-     * Specter.
-     *
+     * Nightveil Specter Creature — Specter 2/3, {U/B}{U/B}{U/B}
+     * Flying
+     * Whenever Nightveil Specter deals combat damage to a player, that player exiles the
+     * top card of their library. You may play cards exiled with Nightveil Specter.
      */
     @Test
     public void testCopyNightveilSpecter() {
