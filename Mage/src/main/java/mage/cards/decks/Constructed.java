@@ -27,6 +27,7 @@ public class Constructed extends DeckValidator {
     protected List<String> restricted = new ArrayList<>();
     protected List<String> setCodes = new ArrayList<>();
     protected List<Rarity> rarities = new ArrayList<>();
+    protected Set<String> singleCards = new HashSet<>();
 
     public Constructed() {
         super("Constructed");
@@ -153,7 +154,7 @@ public class Constructed extends DeckValidator {
     }
 
     /**
-     * Checks if the given card is legal in any of the given sets
+     * Checks if the given card is legal in any of the given sets or as single card
      *
      * @param card - the card to check
      * @return Whether the card was printed in any of this format's sets.
@@ -168,6 +169,12 @@ public class Constructed extends DeckValidator {
                 break;
             }
         }
+
+        // check if single card allows
+        if (singleCards.contains(card.getName())) {
+            legal = true;
+        }
+
         if (!legal && !invalid.containsKey(card.getName())) {
             invalid.put(card.getName(), "Invalid set: " + card.getExpansionSetCode());
         }
