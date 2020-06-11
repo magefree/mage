@@ -131,6 +131,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Teferi's Tutelage", 78, Rarity.UNCOMMON, mage.cards.t.TeferisTutelage.class));
         cards.add(new SetCardInfo("Teferi's Wavecaster", 327, Rarity.RARE, mage.cards.t.TeferisWavecaster.class));
         cards.add(new SetCardInfo("Teferi, Master of Time", 75, Rarity.MYTHIC, mage.cards.t.TeferiMasterOfTime.class));
+        cards.add(new SetCardInfo("Tempered Veteran", 41, Rarity.UNCOMMON, mage.cards.t.TemperedVeteran.class));
         cards.add(new SetCardInfo("Temple of Epiphany", 252, Rarity.RARE, mage.cards.t.TempleOfEpiphany.class));
         cards.add(new SetCardInfo("Temple of Malady", 253, Rarity.RARE, mage.cards.t.TempleOfMalady.class));
         cards.add(new SetCardInfo("Temple of Mystery", 254, Rarity.RARE, mage.cards.t.TempleOfMystery.class));
