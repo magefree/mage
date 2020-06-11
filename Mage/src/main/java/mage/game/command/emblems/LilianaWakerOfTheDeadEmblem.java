@@ -5,9 +5,7 @@ import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.common.ReturnCreatureFromGraveyardToBattlefieldAndGainHasteEffect;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreatureCard;
 import mage.game.command.Emblem;
 import mage.target.common.TargetCardInGraveyard;
 
@@ -15,8 +13,6 @@ public final class LilianaWakerOfTheDeadEmblem extends Emblem {
     /**
      * Emblem with "At the beginning of combat on your turn, put target creature card from a graveyard onto the battlefield under your control. It gains haste."
      */
-
-    private static final FilterCard filter = new FilterCreatureCard("creature card from a graveyard");
 
     public LilianaWakerOfTheDeadEmblem() {
         setName("Emblem Liliana");
