@@ -1,6 +1,7 @@
 package mage.game;
 
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.*;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
@@ -100,6 +101,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     private Map<UUID, Card> copiedCards = new HashMap<>();
     private int permanentOrderNumber;
     private Map<UUID, FilterCreaturePermanent> usePowerInsteadOfToughnessForDamageLethalityFilters = new HashMap<>();
+    private final Set<MageObjectReference> stuckCommanders = new HashSet<>();
 
     private int applyEffectsCounter; // Upcounting number of each applyEffects execution
 
@@ -1228,5 +1230,13 @@ public class GameState implements Serializable, Copyable<GameState> {
                 .filter(usePowerInsteadOfToughnessForDamageLethalityFilters::containsKey)
                 .map(usePowerInsteadOfToughnessForDamageLethalityFilters::get)
                 .collect(Collectors.toList());
+    }
+
+    boolean checkCommander(Card card, Game game) {
+        return stuckCommanders.stream().anyMatch(mor -> mor.refersTo(card, game));
+    }
+
+    void stickCommander(Card card, Game game) {
+        stuckCommanders.add(new MageObjectReference(card, game));
     }
 }

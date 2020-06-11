@@ -2,7 +2,6 @@ package mage.game;
 
 import mage.MageException;
 import mage.MageObject;
-import mage.MageObjectReference;
 import mage.abilities.*;
 import mage.abilities.common.AttachableToRestrictedAbility;
 import mage.abilities.common.CantHaveMoreThanAmountCountersSourceAbility;
@@ -120,8 +119,6 @@ public abstract class GameImpl implements Game, Serializable {
     protected MultiplayerAttackOption attackOption;
     protected GameOptions gameOptions;
     protected String startMessage;
-
-    protected final Set<MageObjectReference> stuckCommanders = new HashSet<>();
 
     // private final transient LinkedList<MageAction> actions;
     private Player scorePlayer;
@@ -1857,9 +1854,13 @@ public abstract class GameImpl implements Game, Serializable {
             }
         }
 
-        // New commander zone change rule
+        // If a commander is in a graveyard or in exile and that card was put into that zone
+        // since the last time state-based actions were checked, its owner may put it into the command zone.
         for (Player player : state.getPlayers().values()) {
             Set<UUID> commanderIds = getCommandersIds(player, CommanderCardType.COMMANDER_OR_OATHBREAKER);
+            if (commanderIds.isEmpty()) {
+                continue;
+            }
             Set<Card> commanders = new HashSet<>();
             Cards toMove = new CardsImpl();
             player.getGraveyard()
@@ -1873,15 +1874,19 @@ public abstract class GameImpl implements Game, Serializable {
                     .map(uuid -> getExile().getCard(uuid, this))
                     .filter(Objects::nonNull)
                     .forEach(commanders::add);
-            commanders.removeIf(card -> stuckCommanders.stream().anyMatch(mor -> mor.refersTo(card, this)));
+            commanders.removeIf(card -> state.checkCommander(card, this));
             for (Card card : commanders) {
                 if (player.chooseUse(Outcome.Benefit, "Move " + card.getIdName() + " to the command zone or leave it in its current zone?", "You can only make this choice once", "Move to command", "Leave in current zone", null, this)) {
                     toMove.add(card);
                 } else {
-                    stuckCommanders.add(new MageObjectReference(card, this));
+                    state.stickCommander(card, this);
                 }
             }
+            if (toMove.isEmpty()) {
+                continue;
+            }
             player.moveCards(toMove, Zone.COMMAND, null, this);
+            somethingHappened = true;
         }
 
         // 704.5e If a copy of a spell is in a zone other than the stack, it ceases to exist. If a copy of a card is in any zone other than the stack or the battlefield, it ceases to exist.
