@@ -15,12 +15,11 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  * Volrath's Shapeshifter
- *
+ * <p>
  * As long as the top card of your graveyard is a creature card, Volrath's
  * Shapeshifter has the full text of that card and has the text "2: Discard a
  * card." (Volrath's Shapeshifter has that card's name, mana cost, color, types,
  * abilities, power, and toughness.)
- *
  */
 public class VolrathsShapshifterTest extends CardTestPlayerBase {
 
@@ -58,7 +57,7 @@ public class VolrathsShapshifterTest extends CardTestPlayerBase {
     public void testLosingCopy() {
         addCard(Zone.BATTLEFIELD, playerA, "Volrath's Shapeshifter", 1);
         // Codex Shredder - Artifact
-        // {T}: {T}: Target player puts the top card of their library into their graveyard.
+        // {T}: Target player mills a card.
         // {5}, {T}, Sacrifice Codex Shredder: Return target card from your graveyard to your hand.
         addCard(Zone.BATTLEFIELD, playerA, "Codex Shredder", 1);
 
@@ -67,7 +66,7 @@ public class VolrathsShapshifterTest extends CardTestPlayerBase {
         addCard(Zone.LIBRARY, playerA, "Forest", 1);
         skipInitShuffling();
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Target player puts the top card of their library into their graveyard.", playerA);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Target player mills a card.", playerA);
 
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
