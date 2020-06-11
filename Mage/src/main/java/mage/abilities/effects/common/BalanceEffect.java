@@ -7,7 +7,6 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
-import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledLandPermanent;
@@ -18,18 +17,13 @@ import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetControlledPermanent;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author emerald000
  */
 public class BalanceEffect extends OneShotEffect {
-
-    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("lands to keep");
-    private static final FilterControlledPermanent filter2 = new FilterControlledCreaturePermanent("creatures to keep");
-    private static final FilterCard filter3 = new FilterCard("cards to keep");
 
     public BalanceEffect() {
         super(Outcome.Sacrifice);
@@ -54,49 +48,45 @@ public class BalanceEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        //Lands
-        Cards toSacrifice = getPermanentsToSacrifice(game, source, controller, StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND, filter);
 
-        //creatures
-        toSacrifice.addAll(getPermanentsToSacrifice(game, source, controller, StaticFilters.FILTER_CONTROLLED_CREATURE, filter2).getCards(game));
-
-        for (UUID cardId : toSacrifice) {
-            Permanent permanent = game.getPermanent(cardId);
-            if (permanent != null) {
-                permanent.sacrifice(source.getSourceId(), game);
-            }
-        }
+        choosePermanentsToKeep(game, source, controller, StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND, new FilterControlledLandPermanent("lands to keep"));
+        choosePermanentsToKeep(game, source, controller, StaticFilters.FILTER_CONTROLLED_CREATURE, new FilterControlledCreaturePermanent("creatures to keep"));
 
         //Cards in hand
-        int minCard = Integer.MAX_VALUE;
-        Map<UUID, Cards> cardsToDiscard = new HashMap<>(2);
+        int lowestHandSize = Integer.MAX_VALUE;
         for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player == null) {
                 continue;
             }
-            int count = player.getHand().size();
-            if (count < minCard) {
-                minCard = count;
-            }
+
+            lowestHandSize = Math.min(lowestHandSize, player.getHand().size());
         }
 
+        Map<UUID, Cards> cardsToDiscard = new HashMap<>();
         for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player == null) {
                 continue;
             }
-            Cards cards = new CardsImpl();
-            TargetCardInHand target = new TargetCardInHand(minCard, filter3);
-            if (!target.choose(Outcome.Discard, player.getId(), source.getSourceId(), game)) {
+
+            TargetCardInHand target = new TargetCardInHand(lowestHandSize, new FilterCard("cards to keep"));
+            if (!target.choose(Outcome.Protect, player.getId(), source.getSourceId(), game)) {
                 continue;
             }
-            for (Card card : player.getHand().getCards(game)) {
-                if (card != null && !target.getTargets().contains(card.getId())) {
-                    cards.add(card);
+
+            Set<Card> allCardsInHand = player.getHand().getCards(game);
+            Set<Card> cardsToKeep = new LinkedHashSet<>();
+
+            for (Card card : allCardsInHand) {
+                if (card != null && target.getTargets().contains(card.getId())) {
+                    cardsToKeep.add(card);
                 }
             }
-            cardsToDiscard.put(playerId, cards);
+
+            cardsToDiscard.put(playerId, allCardsInHand.stream()
+                .filter(e -> !cardsToKeep.contains(e))
+                .collect(CardsImpl::new, CardsImpl::add, CardsImpl::addAll));
         }
 
         for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
@@ -109,37 +99,54 @@ public class BalanceEffect extends OneShotEffect {
         return true;
     }
 
-    private Cards getPermanentsToSacrifice(Game game, Ability source, Player controller,
-                                           FilterControlledPermanent filterPermanent, FilterControlledPermanent filterPermanentDialog) {
-        int min = Integer.MAX_VALUE;
-        Cards permToSacrifice = new CardsImpl();
+    private void choosePermanentsToKeep(Game game, Ability source, Player controller,
+                                         FilterControlledPermanent filterPermanent, FilterControlledPermanent filterPermanentDialog) {
+        int lowestPermanentsCount = Integer.MAX_VALUE;
         for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player == null) {
                 continue;
             }
-            int count = game.getBattlefield().countAll(filterPermanent, player.getId(), game);
-            if (count < min) {
-                min = count;
-            }
+
+            lowestPermanentsCount = Math.min(lowestPermanentsCount,
+                    game.getBattlefield().countAll(filterPermanent, player.getId(), game));
         }
+
+        List<Permanent> permanentsToSacrifice = new ArrayList<>();
 
         for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player == null) {
                 continue;
             }
-            TargetControlledPermanent target = new TargetControlledPermanent(min, min, filterPermanentDialog, true);
-            if (!target.choose(Outcome.Sacrifice, player.getId(), source.getSourceId(), game)) {
+
+            TargetControlledPermanent target = new TargetControlledPermanent(lowestPermanentsCount, lowestPermanentsCount, filterPermanentDialog, true);
+            if (!target.choose(Outcome.Protect, player.getId(), source.getSourceId(), game)) {
                 continue;
             }
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filterPermanent, player.getId(), source.getSourceId(), game)) {
-                if (permanent != null && !target.getTargets().contains(permanent.getId())) {
-                    permToSacrifice.add(permanent);
+
+            List<Permanent> allPermanentsOfType = game.getBattlefield().getActivePermanents(filterPermanent, player.getId(), source.getSourceId(), game);
+            List<Permanent> permanentsToKeep = new ArrayList<>();
+
+            for (Permanent permanent : allPermanentsOfType) {
+                if (permanent != null && target.getTargets().contains(permanent.getId())) {
+                    permanentsToKeep.add(permanent);
                 }
             }
+
+            List<Permanent> playerPermanentsToSacrifice = allPermanentsOfType.stream().filter(e -> !permanentsToKeep.contains(e)).collect(Collectors.toList());
+            permanentsToSacrifice.addAll(playerPermanentsToSacrifice);
+
+            if (playerPermanentsToSacrifice.isEmpty()) {
+                game.informPlayers(player.getLogName() + " chose permanents to be sacrificed: "
+                        + playerPermanentsToSacrifice.stream().map(Permanent::getLogName).collect(Collectors.joining(", ")));
+            }
         }
 
-        return permToSacrifice;
+        for (Permanent permanent : permanentsToSacrifice) {
+            if (permanent != null) {
+                permanent.sacrifice(source.getSourceId(), game);
+            }
+        }
     }
 }
