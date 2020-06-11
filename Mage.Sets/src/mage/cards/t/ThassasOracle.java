@@ -29,7 +29,10 @@ public final class ThassasOracle extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
-        // When Thassa's Oracle enters the battlefield, look at the top X cards of your library, where X is your devotion to blue. Put one of them on top of your library and the rest on the bottom of your library in a random order. If X is greater than or equal to the number of cards in your library, you win the game.
+        // When Thassa's Oracle enters the battlefield, look at the top X cards of your library, where X is your devotion to blue.
+        // Put up to one of them on top of your library and the rest on the bottom of your library in a random order. 
+        // If X is greater than or equal to the number of cards in your library, you win the game. 
+        // (Each Blue in the mana costs of permanents you control counts toward your devotion to blue.)
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ThassasOracleEffect())
                 .addHint(DevotionCount.U.getHint()));
     }

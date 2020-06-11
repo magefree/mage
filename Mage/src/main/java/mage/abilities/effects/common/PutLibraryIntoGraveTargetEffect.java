@@ -65,23 +65,20 @@ public class PutLibraryIntoGraveTargetEffect extends OneShotEffect {
             sb.append("that target");
         }
 
-        sb.append(" puts the top ");
+        sb.append(" mills ");
         if (message.isEmpty()) {
             if (amount.toString().equals("1")) {
-                sb.append("card ");
+                sb.append("a card");
             } else {
-                sb.append(CardUtil.numberToText(amount.toString())).append(" cards ");
+                sb.append(CardUtil.numberToText(amount.toString())).append(" cards");
             }
         } else {
-            sb.append(" X cards ");
+            sb.append("X cards, where X is the number of ");
         }
-        sb.append("of their library into their graveyard");
 
         if (!message.isEmpty()) {
-            sb.append(", where X is the number of ");
             sb.append(message);
         }
         return sb.toString();
     }
-
 }

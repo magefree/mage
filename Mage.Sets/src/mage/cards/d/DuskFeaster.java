@@ -29,8 +29,8 @@ public final class DuskFeaster extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 
-        // <i>Delirium</i> &mdash; Dusk Feaster costs {2} less to cast if there are four or more card types among cards in your graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.STACK, new DuskFeasterCostReductionEffect()));
+        // Delirium - Dusk Feaster costs {2} less to cast if there are four or more card types among cards in your graveyard.
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new DuskFeasterCostReductionEffect()));
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());

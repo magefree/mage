@@ -154,7 +154,7 @@
 |Generate|TOK:5ED|Serf|||SerfToken|
 |Generate|TOK:5ED|Snake|||SerpentGeneratorSnakeToken|
 |Generate|TOK:5ED|Thrull|||BreedingPitBlackInsectToken|
-|Generate|TOK:6ED|Cat|||WaitingInTheWeedsCatToken|
+|Generate|TOK:6ED|Cat|||GreenCatToken|
 |Generate|TOK:6ED|Citizen|||CitizenToken|
 |Generate|TOK:6ED|Djinn|||DjinnToken|
 |Generate|TOK:6ED|Goblin|||GoblinToken|
@@ -1147,7 +1147,7 @@
 |Generate|TOK:THS|Soldier|1||SoldierToken|
 |Generate|TOK:THS|Soldier|2||SoldierToken|
 |Generate|TOK:TMP|Beast|||CarnivoreToken|
-|Generate|TOK:TMP|Hound|||HoundToken|
+|Generate|TOK:TMP|Dog|||GreenDogToken|
 |Generate|TOK:TMP|Pegasus|||PegasusToken|
 |Generate|TOK:TMP|Reflection|||ReflectionToken|
 |Generate|TOK:TMP|Saproling|||SaprolingToken|

@@ -74,7 +74,7 @@ class BlessedReincarnationEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent != null && controller != null) {
             controller.moveCards(permanent, Zone.EXILED, source, game);
-            game.applyEffects();
+            game.getState().processAction(game);
 
             Player permanentController = game.getPlayer(permanent.getControllerId());
             if (permanentController != null) {

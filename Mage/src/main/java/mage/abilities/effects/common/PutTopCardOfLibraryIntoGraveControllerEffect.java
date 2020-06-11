@@ -42,15 +42,6 @@ public class PutTopCardOfLibraryIntoGraveControllerEffect extends OneShotEffect 
     }
 
     private String setText() {
-        StringBuilder sb = new StringBuilder("put the top");
-        if (numberCards == 1) {
-            sb.append(" card");
-        } else {
-            sb.append(" ");
-            sb.append(CardUtil.numberToText(numberCards));
-            sb.append(" cards");
-        }
-        sb.append(" of your library into your graveyard");
-        return sb.toString();
+        return "mill " + (numberCards == 1 ? "a card" : CardUtil.numberToText(numberCards) + " cards");
     }
 }

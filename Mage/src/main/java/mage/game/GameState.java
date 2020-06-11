@@ -1,5 +1,9 @@
 package mage.game;
 
+import java.io.Serializable;
+import java.util.*;
+import static java.util.Collections.emptyList;
+import java.util.stream.Collectors;
 import mage.MageObject;
 import mage.abilities.*;
 import mage.abilities.effects.ContinuousEffect;
@@ -34,12 +38,6 @@ import mage.util.Copyable;
 import mage.util.ThreadLocalStringBuilder;
 import mage.watchers.Watcher;
 import mage.watchers.Watchers;
-
-import java.io.Serializable;
-import java.util.*;
-import java.util.stream.Collectors;
-
-import static java.util.Collections.emptyList;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -179,8 +177,8 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.copiedCards.putAll(state.copiedCards);
         this.permanentOrderNumber = state.permanentOrderNumber;
         this.applyEffectsCounter = state.applyEffectsCounter;
-        state.usePowerInsteadOfToughnessForDamageLethalityFilters.forEach((uuid, filter) ->
-                this.usePowerInsteadOfToughnessForDamageLethalityFilters.put(uuid, filter.copy()));
+        state.usePowerInsteadOfToughnessForDamageLethalityFilters.forEach((uuid, filter)
+                -> this.usePowerInsteadOfToughnessForDamageLethalityFilters.put(uuid, filter.copy()));
     }
 
     public void restoreForRollBack(GameState state) {
@@ -226,8 +224,8 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.copiedCards = state.copiedCards;
         this.permanentOrderNumber = state.permanentOrderNumber;
         this.applyEffectsCounter = state.applyEffectsCounter;
-        state.usePowerInsteadOfToughnessForDamageLethalityFilters.forEach((uuid, filter) ->
-                this.usePowerInsteadOfToughnessForDamageLethalityFilters.put(uuid, filter.copy()));
+        state.usePowerInsteadOfToughnessForDamageLethalityFilters.forEach((uuid, filter)
+                -> this.usePowerInsteadOfToughnessForDamageLethalityFilters.put(uuid, filter.copy()));
     }
 
     @Override
@@ -605,7 +603,6 @@ public class GameState implements Serializable, Copyable<GameState> {
         delayed.removeEndOfTurnAbilities(game);
         exile.cleanupEndOfTurnZones(game);
         game.applyEffects();
-        effects.incYourTurnNumPlayed(game);
     }
 
     public void addEffect(ContinuousEffect effect, Ability source) {
@@ -623,7 +620,6 @@ public class GameState implements Serializable, Copyable<GameState> {
 //    public void addMessage(String message) {
 //        this.messages.add(message);
 //    }
-
     /**
      * Returns a list of all players of the game ignoring range or if a player
      * has lost or left the game.
@@ -797,7 +793,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         for (Map.Entry<ZoneChangeData, List<GameEvent>> entry : eventsByKey.entrySet()) {
             Set<Card> movedCards = new LinkedHashSet<>();
             Set<PermanentToken> movedTokens = new LinkedHashSet<>();
-            for (Iterator<GameEvent> it = entry.getValue().iterator(); it.hasNext(); ) {
+            for (Iterator<GameEvent> it = entry.getValue().iterator(); it.hasNext();) {
                 GameEvent event = it.next();
                 ZoneChangeEvent castEvent = (ZoneChangeEvent) event;
                 UUID targetId = castEvent.getTargetId();
@@ -1030,7 +1026,7 @@ public class GameState implements Serializable, Copyable<GameState> {
      * @param attachedTo
      * @param ability
      * @param copyAbility copies non MageSingleton abilities before adding to
-     *                    state
+     * state
      */
     public void addOtherAbility(Card attachedTo, Ability ability, boolean copyAbility) {
         Ability newAbility;

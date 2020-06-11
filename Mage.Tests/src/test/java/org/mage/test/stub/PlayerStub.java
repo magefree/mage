@@ -1023,7 +1023,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public List<Ability> getPlayable(Game game, boolean hidden) {
+    public List<ActivatedAbility> getPlayable(Game game, boolean hidden) {
         return null;
     }
 
@@ -1038,7 +1038,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public LinkedHashMap<UUID, ActivatedAbility> getUseableActivatedAbilities(MageObject object, Zone zone, Game game) {
+    public LinkedHashMap<UUID, ActivatedAbility> getPlayableActivatedAbilities(MageObject object, Zone zone, Game game) {
         return null;
     }
 

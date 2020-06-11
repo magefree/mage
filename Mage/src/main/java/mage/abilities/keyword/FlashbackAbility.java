@@ -14,6 +14,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -53,6 +54,7 @@ public class FlashbackAbility extends SpellAbility {
 
     @Override
     public ActivationStatus canActivate(UUID playerId, Game game) {
+        // flashback ability dynamicly added to all card's parts (split cards)
         if (super.canActivate(playerId, game).canActivate()) {
             Card card = game.getCard(getSourceId());
             if (card != null) {
@@ -210,11 +212,12 @@ class FlashbackReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getTargetId().equals(source.getSourceId())
+        UUID cardId = CardUtil.getMainCardId(game, source.getSourceId()); // for split cards
+        if (cardId.equals(event.getTargetId())
                 && ((ZoneChangeEvent) event).getFromZone() == Zone.STACK
                 && ((ZoneChangeEvent) event).getToZone() != Zone.EXILED) {
 
-            int zcc = game.getState().getZoneChangeCounter(source.getSourceId());
+            int zcc = game.getState().getZoneChangeCounter(cardId);
             return ((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1 == zcc;
 
         }

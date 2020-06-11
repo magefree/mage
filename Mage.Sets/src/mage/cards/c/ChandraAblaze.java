@@ -172,7 +172,6 @@ class ChandraAblazeEffect5 extends OneShotEffect {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
                         player.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
-                        player.getGraveyard().remove(card);
                         cards.remove(card);
                     }
                 }

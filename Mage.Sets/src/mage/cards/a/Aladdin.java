@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -17,6 +16,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetArtifactPermanent;
+import mage.watchers.common.LostControlWatcher;
 
 /**
  *
@@ -25,7 +25,7 @@ import mage.target.common.TargetArtifactPermanent;
 public final class Aladdin extends CardImpl {
 
     public Aladdin(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(1);
@@ -39,6 +39,7 @@ public final class Aladdin extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}{R}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetArtifactPermanent());
+        ability.addWatcher(new LostControlWatcher());
         this.addAbility(ability);
     }
 

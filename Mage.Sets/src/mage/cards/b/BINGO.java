@@ -39,7 +39,7 @@ public final class BINGO extends CardImpl {
 
     public BINGO(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
-        this.subtype.add(SubType.HOUND);
+        this.subtype.add(SubType.DOG);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

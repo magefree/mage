@@ -19,7 +19,7 @@ public final class AinokTracker extends CardImpl {
 
     public AinokTracker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}");
-        this.subtype.add(SubType.HOUND);
+        this.subtype.add(SubType.DOG);
         this.subtype.add(SubType.SCOUT);
 
         this.power = new MageInt(3);

@@ -42,8 +42,8 @@ public final class TrainingGrounds extends CardImpl {
 
 class TrainingGroundsEffect extends CostModificationEffectImpl {
 
-    private static final String effectText = "Activated abilities of creatures you control cost {2} less to activate. " +
-            "This effect can't reduce the mana in that cost to less than one mana";
+    private static final String effectText = "Activated abilities of creatures you control cost up to {2} less to activate. "
+            + "This effect can't reduce the mana in that cost to less than one mana";
 
     TrainingGroundsEffect() {
         super(Duration.Custom, Outcome.Benefit, CostModificationType.REDUCE_COST);
@@ -74,15 +74,20 @@ class TrainingGroundsEffect extends CostModificationEffectImpl {
         ChoiceImpl choice = new ChoiceImpl(true);
         Set<String> set = new LinkedHashSet<>();
 
-        for (int i = 0; i <= reduceMax; i++) {
-            set.add(String.valueOf(i));
+        int reduce;
+        if (game.inCheckPlayableState()) {
+            reduce = reduceMax;
+        } else {
+            for (int i = 0; i <= reduceMax; i++) {
+                set.add(String.valueOf(i));
+            }
+            choice.setChoices(set);
+            choice.setMessage("Reduce ability cost");
+            if (!controller.choose(Outcome.Benefit, choice, game)) {
+                return false;
+            }
+            reduce = Integer.parseInt(choice.getChoice());
         }
-        choice.setChoices(set);
-        choice.setMessage("Reduce ability cost");
-        if (!controller.choose(Outcome.Benefit, choice, game)) {
-            return false;
-        }
-        int reduce = Integer.parseInt(choice.getChoice());
         CardUtil.reduceCost(abilityToModify, reduce);
         return true;
 

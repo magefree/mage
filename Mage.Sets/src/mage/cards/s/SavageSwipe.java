@@ -70,7 +70,7 @@ class SavageSwipeEffect extends OneShotEffect {
             ContinuousEffect effect = new BoostTargetEffect(2, 2, Duration.EndOfTurn);
             effect.setTargetPointer(new FixedTarget(permanent, game));
             game.addEffect(effect, source);
-            game.applyEffects();
+            game.getState().processAction(game);
         }
         return new FightTargetsEffect().apply(game, source);
     }

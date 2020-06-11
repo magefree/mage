@@ -914,4 +914,97 @@ public class MorphTest extends CardTestPlayerBase {
         Permanent akroma = getPermanent("Akroma, Angel of Fury");
         Assert.assertTrue("Akroma has to be red", akroma.getColor(currentGame).isRed());
     }
+
+    @Test
+    public void test_LandWithMorph_PlayLand() {
+        // Morph {2}
+        addCard(Zone.HAND, playerA, "Zoetic Cavern");
+
+        checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Play Zoetic Cavern", true);
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Zoetic Cavern");
+        setChoice(playerA, "No"); // no morph (canPay for generic/colored mana returns true all the time, so xmage ask about face down cast)
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        // 1 action must be here ("no" option is restores on failed morph call in playLand)
+        //assertAllCommandsUsed();
+        assertChoicesCount(playerA, 1);
+
+        assertPermanentCount(playerA, "Zoetic Cavern", 1);
+    }
+
+    @Test
+    public void test_LandWithMorph_Morph() {
+        // Morph {2}
+        addCard(Zone.HAND, playerA, "Zoetic Cavern");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+
+        checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Play Zoetic Cavern", true);
+        checkPlayableAbility("morph must be replaced by play ability", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Morph", false);
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Zoetic Cavern");
+        setChoice(playerA, "Yes"); // morph
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Zoetic Cavern", 0);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+    }
+
+    @Test
+    public void test_LandWithMorph_MorphAfterLand() {
+        removeAllCardsFromHand(playerA);
+
+        // Morph {2}
+        addCard(Zone.HAND, playerA, "Zoetic Cavern");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        //
+        addCard(Zone.HAND, playerA, "Island", 1);
+
+        // play land first
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Island");
+
+        // morph ability (play as face down) calls from playLand method, so it visible for play land command
+        checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Play Zoetic Cavern", true);
+        checkPlayableAbility("morph must be replaced by play ability", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Morph", false);
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Zoetic Cavern");
+        setChoice(playerA, "Yes"); // morph
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Island", 1);
+        assertPermanentCount(playerA, "Zoetic Cavern", 0);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+    }
+
+    @Test
+    public void test_LandWithMorph_MorphFromLibrary() {
+        removeAllCardsFromLibrary(playerA);
+
+        // You may play lands and cast spells from the top of your library.
+        addCard(Zone.BATTLEFIELD, playerA, "Future Sight");
+        //
+        // Morph {2}
+        addCard(Zone.LIBRARY, playerA, "Zoetic Cavern");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+
+        checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Play Zoetic Cavern", true);
+        checkPlayableAbility("morph must be replaced by play ability", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Morph", false);
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Zoetic Cavern");
+        setChoice(playerA, "Yes"); // morph
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Zoetic Cavern", 0);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+    }
 }

@@ -39,7 +39,7 @@ public final class GateColossus extends CardImpl {
         this.toughness = new MageInt(8);
 
         // This spell costs {1} less to cast for each Gate you control.
-        this.addAbility(new SimpleStaticAbility(Zone.STACK, new GateColossusCostReductionEffect())
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new GateColossusCostReductionEffect())
                 .addHint(GateYouControlHint.instance));
 
         // Gate Colossus can't be blocked by creatures with power 2 or less.

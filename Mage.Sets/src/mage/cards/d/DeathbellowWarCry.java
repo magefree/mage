@@ -72,6 +72,6 @@ class DeathbellowWarCryTarget extends TargetCardInLibrary {
                 .map(game::getCard)
                 .filter(Objects::nonNull)
                 .map(Card::getName)
-                .noneMatch(n -> CardUtil.haveSameNames(n, card.getName()));
+                .noneMatch(n -> CardUtil.haveSameNames(card, n, game));
     }
 }

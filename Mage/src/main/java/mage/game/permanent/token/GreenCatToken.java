@@ -9,9 +9,9 @@ import mage.constants.SubType;
  *
  * @author spjspj
  */
-public final class WaitingInTheWeedsCatToken extends TokenImpl {
+public final class GreenCatToken extends TokenImpl {
 
-    public WaitingInTheWeedsCatToken() {
+    public GreenCatToken() {
         super("Cat", "1/1 green Cat creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
@@ -20,11 +20,11 @@ public final class WaitingInTheWeedsCatToken extends TokenImpl {
         toughness = new MageInt(1);
     }
     
-    public WaitingInTheWeedsCatToken(final WaitingInTheWeedsCatToken token) {
+    public GreenCatToken(final GreenCatToken token) {
         super(token);
     }
 
-    public WaitingInTheWeedsCatToken copy() {
-        return new WaitingInTheWeedsCatToken(this);
+    public GreenCatToken copy() {
+        return new GreenCatToken(this);
     }
 }

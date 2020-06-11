@@ -39,7 +39,11 @@ public final class KhalniHydra extends CardImpl {
 
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
-        this.addAbility(new SimpleStaticAbility(Zone.STACK, new KhalniHydraCostReductionEffect()));
+        
+        // This spell costs {G} less to cast for each green creature you control.
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new KhalniHydraCostReductionEffect()));
+        
+        // Trample
         this.addAbility(TrampleAbility.getInstance());
     }
 
@@ -54,8 +58,8 @@ public final class KhalniHydra extends CardImpl {
         Iterator<ManaCost> iter = ability.getManaCostsToPay().iterator();
 
         while ( reductionAmount > 0 && iter.hasNext() ) {
-            ManaCost manaCost = iter.next();
-            if (manaCost.getMana().getGreen() > 0) { // in case another effect adds additional mana cost
+            ManaCost manaCostEntry = iter.next();
+            if (manaCostEntry.getMana().getGreen() > 0) { // in case another effect adds additional mana cost
                 iter.remove();
                 reductionAmount--;
             }

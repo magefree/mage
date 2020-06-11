@@ -34,11 +34,13 @@ public final class ArmoredAscension extends CardImpl {
 
         this.subtype.add(SubType.AURA);
 
+        // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
+        // Enchanted creature gets +1/+1 for each Plains you control and has flying.
         PermanentsOnBattlefieldCount amount = new PermanentsOnBattlefieldCount(filter, 1);
         SimpleStaticAbility ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(amount, amount, Duration.WhileOnBattlefield));
         ability.addEffect(new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA));

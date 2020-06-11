@@ -32,7 +32,7 @@ public final class Hydradoodle extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{X}{X}{G}{G}");
 
         this.subtype.add(SubType.HYDRA);
-        this.subtype.add(SubType.HOUND);
+        this.subtype.add(SubType.DOG);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

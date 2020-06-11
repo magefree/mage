@@ -177,15 +177,15 @@ public class MadnessTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Forest");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Falkenrath Gorger");
+        
         setChoice(playerA, "Yes"); // Discard a card and put a +1/+1 counter on that creature, it gains haste until end of turn, and it becomes a Vampire in addition to its other types?
-        setChoice(playerA, "Asylum Visitor");
-        setChoice(playerA, "Asylum Visitor: Madness {1}{B}"); // choose replacement effect (TODO: 2 same madness effetcs: one from Asylum Visitor, one from Falkenrath -- is that ok?!)
-        //
-        setChoice(playerA, "Yes"); // use madness triggered ability
-        setChoice(playerA, "Yes"); // use madness cast
+        setChoice(playerA, "Asylum Visitor"); // Card to discard from Falkenrath entering by Olivia effect
+        setChoice(playerA, "Asylum Visito"); // Madness {1}{B}
+        setChoice(playerA, "Yes"); // use madness triggered ability        
+        setChoice(playerA, "Yes"); // use madness cast        
         setChoice(playerA, "Yes"); // Discard a card and put a +1/+1 counter on that creature, it gains haste until end of turn, and it becomes a Vampire in addition to its other types?
         setChoice(playerA, "Forest");
-
+        
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

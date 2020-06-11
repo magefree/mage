@@ -35,6 +35,7 @@ Conflux|Conflux|
 Conspiracy: Take the Crown|ConspiracyTakeTheCrown|
 Core Set 2019|CoreSet2019|
 Core Set 2020|CoreSet2020|
+Core Set 2021|CoreSet2021|
 Dark Ascension|DarkAscension|
 Darksteel|Darksteel|
 Dissension|Dissension|

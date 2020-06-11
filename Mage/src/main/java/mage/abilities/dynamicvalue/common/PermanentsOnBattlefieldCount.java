@@ -24,6 +24,11 @@ public class PermanentsOnBattlefieldCount implements DynamicValue {
         this(filter, 1);
     }
 
+    /**
+     * 
+     * @param filter
+     * @param multiplier 
+     */
     public PermanentsOnBattlefieldCount(FilterPermanent filter, Integer multiplier) {
         this.filter = filter;
         this.multiplier = multiplier;

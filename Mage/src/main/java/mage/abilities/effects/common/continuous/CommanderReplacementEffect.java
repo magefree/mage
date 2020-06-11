@@ -91,9 +91,9 @@ public class CommanderReplacementEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
 
-        if (!game.isSimulation() && commanderId.equals(zEvent.getTargetId())) {
-            //System.out.println("applies " + game.getTurnNum() + ": " + game.getObject(event.getTargetId()).getName() + ": " + zEvent.getFromZone() + " -> " + zEvent.getToZone() + "; " + game.getObject(zEvent.getSourceId()));
-        }
+//        if (!game.isSimulation() && commanderId.equals(zEvent.getTargetId())) {
+//            System.out.println("applies " + game.getTurnNum() + ": " + game.getObject(event.getTargetId()).getName() + ": " + zEvent.getFromZone() + " -> " + zEvent.getToZone() + "; " + game.getObject(zEvent.getSourceId()));
+//        }
 
         if (zEvent.getToZone().equals(Zone.HAND) && !alsoHand) {
             return false;

@@ -10,11 +10,14 @@ import mage.cards.Card;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.EmptyNames;
 import mage.constants.ManaType;
+import mage.constants.SpellAbilityType;
 import mage.filter.Filter;
+import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.CardState;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
+import mage.game.stack.Spell;
 import mage.util.functions.CopyTokenFunction;
 
 import java.io.UnsupportedEncodingException;
@@ -657,6 +660,14 @@ public final class CardUtil {
         return object1 != null && object2 != null && haveSameNames(object1.getName(), object2.getName());
     }
 
+    public static boolean haveSameNames(MageObject object, String needName, Game game) {
+        return containsName(object, needName, game);
+    }
+
+    public static boolean containsName(MageObject object, String name, Game game) {
+        return new NamePredicate(name).apply(object, game);
+    }
+
     public static boolean haveEmptyName(String name) {
         return name == null || name.isEmpty() || name.equals(EmptyNames.FACE_DOWN_CREATURE.toString()) || name.equals(EmptyNames.FACE_DOWN_TOKEN.toString());
     }
@@ -757,5 +768,27 @@ public final class CardUtil {
         if (signedT.equals("+0") && signedP.startsWith("-")) signedT = "-0";
 
         return signedP + "/" + signedT;
+    }
+
+    public static boolean isSpliceAbility(Ability ability, Game game) {
+        if (ability instanceof SpellAbility) {
+            return ((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.SPLICE;
+        }
+        return false;
+    }
+
+    public static boolean isFusedPartAbility(Ability ability, Game game) {
+        // TODO: is works fine with copies of spells on stack?
+        if (ability instanceof SpellAbility) {
+            Spell mainSpell = game.getSpell(ability.getId());
+            if (mainSpell == null) {
+                return true;
+            } else {
+                SpellAbility mainSpellAbility = mainSpell.getSpellAbility();
+                return mainSpellAbility.getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED
+                        && !ability.equals(mainSpellAbility);
+            }
+        }
+        return false;
     }
 }

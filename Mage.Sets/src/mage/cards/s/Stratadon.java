@@ -32,7 +32,7 @@ public final class Stratadon extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Domain - Stratadon costs {1} less to cast for each basic land type among lands you control.
-        this.addAbility(new SimpleStaticAbility(Zone.STACK, new StratadonCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new StratadonCostReductionEffect()));
         // Trample
         this.addAbility(TrampleAbility.getInstance());
     }

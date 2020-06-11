@@ -92,7 +92,7 @@ class WaveOfVitriolEffect extends OneShotEffect {
                     }
                 }
             }
-            game.applyEffects();
+            game.getState().processAction(game);
             Cards toBattlefield = new CardsImpl();
             Set<Player> playersToShuffle = new LinkedHashSet<>();
             for (Map.Entry<Player, Integer> entry : sacrificedLands.entrySet()) {

@@ -86,7 +86,7 @@ class ThoughtHemorrhageEffect extends OneShotEffect {
                         + targetPlayer.getName(), targetPlayer.getHand(), game);
                 int cardsFound = 0;
                 for (Card card : targetPlayer.getHand().getCards(game)) {
-                    if (CardUtil.haveSameNames(card.getName(), cardName)) {
+                    if (CardUtil.haveSameNames(card, cardName, game)) {
                         cardsFound++;
                     }
                 }

@@ -26,7 +26,7 @@ public final class MonstrousHound extends CardImpl {
     public MonstrousHound(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
 
-        this.subtype.add(SubType.HOUND);
+        this.subtype.add(SubType.DOG);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

@@ -86,19 +86,7 @@ class BiomancersFamiliarCostReductionEffect extends CostModificationEffectImpl {
         if (reduceMax <= 0) {
             return true;
         }
-        ChoiceImpl choice = new ChoiceImpl(true);
-        Set<String> set = new LinkedHashSet<>();
-
-        for (int i = 0; i <= reduceMax; i++) {
-            set.add(String.valueOf(i));
-        }
-        choice.setChoices(set);
-        choice.setMessage("Reduce ability cost");
-        if (!controller.choose(Outcome.Benefit, choice, game)) {
-            return false;
-        }
-        int reduce = Integer.parseInt(choice.getChoice());
-        CardUtil.reduceCost(abilityToModify, reduce);
+        CardUtil.reduceCost(abilityToModify, reduceMax);
         return true;
 
     }

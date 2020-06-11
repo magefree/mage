@@ -45,7 +45,7 @@ class BondOfInsightEffect extends OneShotEffect {
 
     BondOfInsightEffect() {
         super(Outcome.Benefit);
-        staticText = "Each player puts the top four cards of their library into their graveyard. " +
+        staticText = "Each player mills four cards. " +
                 "Return up to two instant and/or sorcery cards from your graveyard to your hand.";
     }
 

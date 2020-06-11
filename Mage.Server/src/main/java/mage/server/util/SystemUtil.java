@@ -425,7 +425,7 @@ public final class SystemUtil {
                                 game.firePriorityEvent(opponent.getId());
                             }
 
-                            List<Ability> abilities = opponent.getPlayable(game, true);
+                            List<ActivatedAbility> abilities = opponent.getPlayable(game, true);
                             Map<String, String> choices = new HashMap<>();
                             abilities.forEach(ability -> {
                                 MageObject object = ability.getSourceObject(game);
@@ -437,10 +437,10 @@ public final class SystemUtil {
                             choice.setKeyChoices(choices);
                             if (feedbackPlayer.choose(Outcome.Detriment, choice, game) && choice.getChoiceKey() != null) {
                                 String needId = choice.getChoiceKey();
-                                Optional<Ability> ability = abilities.stream().filter(a -> a.getId().toString().equals(needId)).findFirst();
+                                Optional<ActivatedAbility> ability = abilities.stream().filter(a -> a.getId().toString().equals(needId)).findFirst();
                                 if (ability.isPresent()) {
                                     // TODO: set priority for player?
-                                    ActivatedAbility activatedAbility = (ActivatedAbility) ability.get();
+                                    ActivatedAbility activatedAbility = ability.get();
                                     game.informPlayers(feedbackPlayer.getLogName() + " as another player " + opponent.getLogName()
                                             + " trying to force an activate ability: " + activatedAbility.getGameLogMessage(game));
                                     if (opponent.activateAbility(activatedAbility, game)) {

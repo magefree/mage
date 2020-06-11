@@ -29,7 +29,7 @@ public final class GearseekerSerpent extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Gearseeker Serpent costs {1} less to cast for each artifact you control
-        this.addAbility(new SimpleStaticAbility(Zone.STACK, new GearseekerSerpentCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new GearseekerSerpentCostReductionEffect()));
 
         // 5U: Gearseeker Serpent can't be blocked this turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,

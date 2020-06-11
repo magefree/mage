@@ -76,13 +76,13 @@ class LivingDeathEffect extends OneShotEffect {
                     }
                 }
             }
-            game.applyEffects();
+            game.getState().processAction(game);
 
             // Sacrifice all creatures
             for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game)) {
                 permanent.sacrifice(source.getSourceId(), game);
             }
-            game.applyEffects();
+            game.getState().processAction(game);
 
             // Exiled cards are put onto the battlefield at the same time under their owner's control
             Set<Card> cardsToReturnFromExile = new HashSet<>();

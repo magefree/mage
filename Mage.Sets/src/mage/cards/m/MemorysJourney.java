@@ -73,7 +73,6 @@ class MemorysJourneyEffect extends OneShotEffect {
                 Card card = game.getCard(targetId);
                 if (card != null) {
                     if (player.getGraveyard().contains(card.getId())) {
-                        player.getGraveyard().remove(card);
                         card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
                         shuffle = true;
                     }

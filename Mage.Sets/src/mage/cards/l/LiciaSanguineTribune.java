@@ -40,7 +40,7 @@ public final class LiciaSanguineTribune extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Licia, Sanguine Tribune costs 1 less to cast for each 1 life you gained this turn.
-        this.addAbility(new SimpleStaticAbility(Zone.STACK, new LiciaSanguineTribuneCostReductionEffect()), new PlayerGainedLifeWatcher());
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new LiciaSanguineTribuneCostReductionEffect()), new PlayerGainedLifeWatcher());
 
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());

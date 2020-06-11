@@ -88,7 +88,7 @@ class EmpoweredAutogeneratorManaEffect extends ManaEffect {
         if (game == null) {
             return mana;
         }
-        game.applyEffects();
+        game.getState().processAction(game);
         Permanent sourcePermanent = game.getState().getPermanent(source.getSourceId());
         if (sourcePermanent == null) {
             return mana;

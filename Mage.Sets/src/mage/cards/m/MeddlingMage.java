@@ -1,6 +1,5 @@
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -10,17 +9,15 @@ import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.ChooseACardNameEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author Plopman
  */
 public final class MeddlingMage extends CardImpl {
@@ -33,10 +30,10 @@ public final class MeddlingMage extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // As Meddling Mage enters the battlefield, name a nonland card.
+        // As Meddling Mage enters the battlefield, choose a nonland card name.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.NON_LAND_NAME)));
 
-        //The named card can't be cast.
+        // Spells with the chosen name can't be cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MeddlingMageReplacementEffect()));
     }
 
@@ -75,21 +72,22 @@ class MeddlingMageReplacementEffect extends ContinuousRuleModifyingEffectImpl {
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject mageObject = game.getObject(source.getSourceId());
         if (mageObject != null) {
-            return "You can't cast a spell with that name (" + mageObject.getLogName() + " in play).";
+            return "You can't cast a spell with that name (" + mageObject.getName() + " in play).";
         }
         return null;
     }
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.CAST_SPELL;
+        return event.getType() == EventType.CAST_SPELL_LATE;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         MageObject object = game.getObject(event.getSourceId());
-        // fixes issue #1072
-        return object != null && !object.isCopy() && object.getName().equals(game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY));
+        String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
+        return object != null
+                && !object.isCopy()
+                && CardUtil.haveSameNames(object, cardName, game);
     }
-
 }

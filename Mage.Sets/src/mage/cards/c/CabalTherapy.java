@@ -75,18 +75,7 @@ class CabalTherapyEffect extends OneShotEffect {
             if (card == null) {
                 return true;
             }
-            if (card.isSplitCard()) {
-                SplitCard splitCard = (SplitCard) card;
-                if (CardUtil.haveSameNames(splitCard.getLeftHalfCard().getName(), cardName)) {
-                    return false;
-                } else if (CardUtil.haveSameNames(splitCard.getRightHalfCard().getName(), cardName)) {
-                    return false;
-                }
-            }
-            if (CardUtil.haveSameNames(card.getName(), cardName)) {
-                return false;
-            }
-            return true;
+            return !CardUtil.haveSameNames(card, cardName, game);
         });
         targetPlayer.discard(hand, source, game);
         return true;

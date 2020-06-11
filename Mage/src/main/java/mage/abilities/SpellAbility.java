@@ -145,9 +145,13 @@ public class SpellAbility extends ActivatedAbilityImpl {
         this.costs.clearPaid();
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     @Override
     public String toString() {
-        return this.name;
+        return getName();
     }
 
     @Override

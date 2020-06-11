@@ -119,6 +119,7 @@ public enum SubType {
     DEVIL("Devil", SubTypeSet.CreatureType),
     DINOSAUR("Dinosaur", SubTypeSet.CreatureType), // With Ixalan now being spoiled, need this to be selectable
     DJINN("Djinn", SubTypeSet.CreatureType),
+    DOG("Dog", SubTypeSet.CreatureType),
     DRAGON("Dragon", SubTypeSet.CreatureType),
     DRAKE("Drake", SubTypeSet.CreatureType),
     DREADNOUGHT("Dreadnought", SubTypeSet.CreatureType),
@@ -175,7 +176,6 @@ public enum SubType {
     HOMUNCULUS("Homunculus", SubTypeSet.CreatureType),
     HORROR("Horror", SubTypeSet.CreatureType),
     HORSE("Horse", SubTypeSet.CreatureType),
-    HOUND("Hound", SubTypeSet.CreatureType),
     HUMAN("Human", SubTypeSet.CreatureType),
     HUNTER("Hunter", SubTypeSet.CreatureType),
     HUTT("Hutt", SubTypeSet.CreatureType, true), // Star Wars
@@ -391,6 +391,7 @@ public enum SubType {
     ARLINN("Arlinn", SubTypeSet.PlaneswalkerType),
     ASHIOK("Ashiok", SubTypeSet.PlaneswalkerType),
     AURRA("Aurra", SubTypeSet.PlaneswalkerType, true), // Star Wars
+    BASRI("Basri", SubTypeSet.PlaneswalkerType),
     BOLAS("Bolas", SubTypeSet.PlaneswalkerType),
     CALIX("Calix", SubTypeSet.PlaneswalkerType),
     CHANDRA("Chandra", SubTypeSet.PlaneswalkerType),
