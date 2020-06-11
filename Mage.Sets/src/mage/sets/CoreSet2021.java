@@ -55,6 +55,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Chromatic Orrery", 228, Rarity.MYTHIC, mage.cards.c.ChromaticOrrery.class));
         cards.add(new SetCardInfo("Containment Priest", 314, Rarity.RARE, mage.cards.c.ContainmentPriest.class));
         cards.add(new SetCardInfo("Cultivate", 177, Rarity.UNCOMMON, mage.cards.c.Cultivate.class));
+        cards.add(new SetCardInfo("Dire Fleet Warmonger", 217, Rarity.UNCOMMON, mage.cards.d.DireFleetWarmonger.class));
         cards.add(new SetCardInfo("Double Vision", 142, Rarity.RARE, mage.cards.d.DoubleVision.class));
         cards.add(new SetCardInfo("Elder Gargaroth", 179, Rarity.MYTHIC, mage.cards.e.ElderGargaroth.class));
         cards.add(new SetCardInfo("Eliminate", 97, Rarity.UNCOMMON, mage.cards.e.Eliminate.class));
