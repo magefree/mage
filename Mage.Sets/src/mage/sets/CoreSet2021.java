@@ -144,6 +144,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Valorous Steed", 42, Rarity.COMMON, mage.cards.v.ValorousSteed.class));
         cards.add(new SetCardInfo("Village Rites", 126, Rarity.COMMON, mage.cards.v.VillageRites.class));
         cards.add(new SetCardInfo("Vito, Thorn of the Dusk Rose", 127, Rarity.RARE, mage.cards.v.VitoThornOfTheDuskRose.class));
+        cards.add(new SetCardInfo("Volcanic Salvo", 172, Rarity.RARE, mage.cards.v.VolcanicSalvo.class));
         cards.add(new SetCardInfo("Vryn Wingmare", 43, Rarity.UNCOMMON, mage.cards.v.VrynWingmare.class));
         cards.add(new SetCardInfo("Warden of the Woods", 213, Rarity.UNCOMMON, mage.cards.w.WardenOfTheWoods.class));
         cards.add(new SetCardInfo("Wildwood Patrol", 339, Rarity.COMMON, mage.cards.w.WildwoodPatrol.class));
