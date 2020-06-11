@@ -140,6 +140,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Thieves' Guild Enforcer", 125, Rarity.RARE, mage.cards.t.ThievesGuildEnforcer.class));
         cards.add(new SetCardInfo("Tide Skimmer", 79, Rarity.UNCOMMON, mage.cards.t.TideSkimmer.class));
         cards.add(new SetCardInfo("Tormod's Crypt", 241, Rarity.UNCOMMON, mage.cards.t.TormodsCrypt.class));
+        cards.add(new SetCardInfo("Trufflesnout", 212, Rarity.COMMON, mage.cards.t.Trufflesnout.class));
         cards.add(new SetCardInfo("Ugin, the Spirit Dragon", 1, Rarity.MYTHIC, mage.cards.u.UginTheSpiritDragon.class));
         cards.add(new SetCardInfo("Valorous Steed", 42, Rarity.COMMON, mage.cards.v.ValorousSteed.class));
         cards.add(new SetCardInfo("Village Rites", 126, Rarity.COMMON, mage.cards.v.VillageRites.class));
