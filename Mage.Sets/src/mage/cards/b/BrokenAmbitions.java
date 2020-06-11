@@ -51,7 +51,7 @@ class BrokenAmbitionsEffect extends OneShotEffect {
     public BrokenAmbitionsEffect(Cost cost) {
         super(Outcome.Benefit);
         this.cost = cost;
-        this.staticText = "Counter target spell unless its controller pays {X}. Clash with an opponent. If you win, that spell's controller puts the top four cards of their library into their graveyard";
+        this.staticText = "Counter target spell unless its controller pays {X}. Clash with an opponent. If you win, that spell's controller mills four cards";
     }
 
     public BrokenAmbitionsEffect(DynamicValue genericMana) {

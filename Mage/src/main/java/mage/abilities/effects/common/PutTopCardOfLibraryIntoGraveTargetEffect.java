@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
@@ -49,14 +48,13 @@ public class PutTopCardOfLibraryIntoGraveTargetEffect extends OneShotEffect {
     }
 
     private String setText() {
-        StringBuilder sb = new StringBuilder("target player puts the top ");
+        StringBuilder sb = new StringBuilder("target player mills ");
         if (numberCards.toString().equals("1")) {
-            sb.append(" card");
+            sb.append("a card");
         } else {
             sb.append(CardUtil.numberToText(numberCards.toString()));
             sb.append(" cards");
         }
-        sb.append(" of their library into their graveyard");
         return sb.toString();
     }
 }
