@@ -66,6 +66,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Eliminate", 97, Rarity.UNCOMMON, mage.cards.e.Eliminate.class));
         cards.add(new SetCardInfo("Fabled Passage", 246, Rarity.RARE, mage.cards.f.FabledPassage.class));
         cards.add(new SetCardInfo("Faith's Fetters", 17, Rarity.UNCOMMON, mage.cards.f.FaithsFetters.class));
+        cards.add(new SetCardInfo("Falconer Adept", 18, Rarity.UNCOMMON, mage.cards.f.FalconerAdept.class));
         cards.add(new SetCardInfo("Fierce Empath", 181, Rarity.UNCOMMON, mage.cards.f.FierceEmpath.class));
         cards.add(new SetCardInfo("Fiery Emancipation", 143, Rarity.MYTHIC, mage.cards.f.FieryEmancipation.class));
         cards.add(new SetCardInfo("Fungal Rebirth", 182, Rarity.UNCOMMON, mage.cards.f.FungalRebirth.class));
