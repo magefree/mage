@@ -52,7 +52,6 @@ public class MythUnboundTest extends CardTestCommanderDuelBase {
         assertPermanentCount(playerA, "Myth Unbound", 1);
         assertGraveyardCount(playerB, "Lightning Bolt", 1);
         assertPermanentCount(playerA, "Oviya Pashiri, Sage Lifecrafter", 1);
-        assertHandCount(playerA, 1);
         assertTappedCount("Forest", false, 4 - 3); // 1 for first, 2 for second cast
     }
 }

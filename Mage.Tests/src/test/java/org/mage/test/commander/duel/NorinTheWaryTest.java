@@ -83,8 +83,9 @@ public class NorinTheWaryTest extends CardTestCommanderDuelBase {
         execute();
 
         assertGraveyardCount(playerA, "Lightning Bolt", 1);
-        assertPermanentCount(playerA, "Norin the Wary", 1);
+        assertPermanentCount(playerA, "Norin the Wary", 0);
         assertExileCount("Norin the Wary", 0);
+        assertCommandZoneCount(playerA,"Norin the Wary",1);
 
         assertLife(playerB, 37);
 
