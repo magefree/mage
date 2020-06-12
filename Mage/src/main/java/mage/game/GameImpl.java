@@ -1874,12 +1874,12 @@ public abstract class GameImpl implements Game, Serializable {
                     .map(uuid -> getExile().getCard(uuid, this))
                     .filter(Objects::nonNull)
                     .forEach(commanders::add);
-            commanders.removeIf(card -> state.checkCommander(card, this));
+            commanders.removeIf(card -> state.checkCommanderShouldStay(card, this));
             for (Card card : commanders) {
                 if (player.chooseUse(Outcome.Benefit, "Move " + card.getIdName() + " to the command zone or leave it in its current zone?", "You can only make this choice once", "Move to command", "Leave in current zone", null, this)) {
                     toMove.add(card);
                 } else {
-                    state.stickCommander(card, this);
+                    state.setCommanderShouldStay(card, this);
                 }
             }
             if (toMove.isEmpty()) {

@@ -101,7 +101,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     private Map<UUID, Card> copiedCards = new HashMap<>();
     private int permanentOrderNumber;
     private Map<UUID, FilterCreaturePermanent> usePowerInsteadOfToughnessForDamageLethalityFilters = new HashMap<>();
-    private final Set<MageObjectReference> stuckCommanders = new HashSet<>();
+    private final Set<MageObjectReference> commandersToStay = new HashSet<>();
 
     private int applyEffectsCounter; // Upcounting number of each applyEffects execution
 
@@ -1232,11 +1232,11 @@ public class GameState implements Serializable, Copyable<GameState> {
                 .collect(Collectors.toList());
     }
 
-    boolean checkCommander(Card card, Game game) {
-        return stuckCommanders.stream().anyMatch(mor -> mor.refersTo(card, game));
+    boolean checkCommanderShouldStay(Card card, Game game) {
+        return commandersToStay.stream().anyMatch(mor -> mor.refersTo(card, game));
     }
 
-    void stickCommander(Card card, Game game) {
-        stuckCommanders.add(new MageObjectReference(card, game));
+    void setCommanderShouldStay(Card card, Game game) {
+        commandersToStay.add(new MageObjectReference(card, game));
     }
 }
