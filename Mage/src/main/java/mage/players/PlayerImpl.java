@@ -3882,7 +3882,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 break;
             case COMMAND:
                 for (Card card : cards) {
-                    if (moveCardToCommandWithInfo(card, source.getSourceId(), game, fromZone)) {
+                    if (moveCardToCommandWithInfo(card, source == null ? null : source.getSourceId(), game, fromZone)) {
                         successfulMovedCards.add(card);
                     }
                 }
