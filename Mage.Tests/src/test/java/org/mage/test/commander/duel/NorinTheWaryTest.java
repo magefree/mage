@@ -72,7 +72,7 @@ public class NorinTheWaryTest extends CardTestCommanderDuelBase {
     }
 
     @Test
-    public void castNorinTheWaryToCommandAndReturn() {
+    public void castNorinTheWaryToCommandAndNotReturn() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
         addCard(Zone.HAND, playerA, "Lightning Bolt", 1);
 
@@ -85,7 +85,7 @@ public class NorinTheWaryTest extends CardTestCommanderDuelBase {
         assertGraveyardCount(playerA, "Lightning Bolt", 1);
         assertPermanentCount(playerA, "Norin the Wary", 0);
         assertExileCount("Norin the Wary", 0);
-        assertCommandZoneCount(playerA,"Norin the Wary",1);
+        assertCommandZoneCount(playerA, "Norin the Wary", 1);
 
         assertLife(playerB, 37);
 
