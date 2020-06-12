@@ -1,9 +1,9 @@
 package mage.cards.i;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.YouGainedLifeCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -11,9 +11,9 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.game.Game;
 import mage.watchers.common.PlayerGainedLifeWatcher;
 
 import java.util.UUID;
@@ -22,6 +22,8 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class IndulgingPatrician extends CardImpl {
+
+    private static final Condition condition = new YouGainedLifeCondition(ComparisonType.MORE_THAN, 2);
 
     public IndulgingPatrician(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{B}");
@@ -41,7 +43,7 @@ public final class IndulgingPatrician extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(
                         new LoseLifeOpponentsEffect(3), TargetController.YOU, false
-                ), IndulgingPatricianCondition.instance, "At the beginning of your end step, " +
+                ), condition, "At the beginning of your end step, " +
                 "if you gained 3 or more life this turn, each opponent loses 3 life."
         ), new PlayerGainedLifeWatcher());
     }
@@ -53,15 +55,5 @@ public final class IndulgingPatrician extends CardImpl {
     @Override
     public IndulgingPatrician copy() {
         return new IndulgingPatrician(this);
-    }
-}
-
-enum IndulgingPatricianCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        PlayerGainedLifeWatcher watcher = game.getState().getWatcher(PlayerGainedLifeWatcher.class);
-        return watcher != null && watcher.getLifeGained(source.getControllerId()) >= 3;
     }
 }
