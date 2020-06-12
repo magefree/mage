@@ -1853,6 +1853,41 @@ public abstract class GameImpl implements Game, Serializable {
             }
         }
 
+        // If a commander is in a graveyard or in exile and that card was put into that zone
+        // since the last time state-based actions were checked, its owner may put it into the command zone.
+        for (Player player : state.getPlayers().values()) {
+            Set<UUID> commanderIds = getCommandersIds(player, CommanderCardType.COMMANDER_OR_OATHBREAKER);
+            if (commanderIds.isEmpty()) {
+                continue;
+            }
+            Set<Card> commanders = new HashSet<>();
+            Cards toMove = new CardsImpl();
+            player.getGraveyard()
+                    .stream()
+                    .filter(commanderIds::contains)
+                    .map(this::getCard)
+                    .filter(Objects::nonNull)
+                    .forEach(commanders::add);
+            commanderIds
+                    .stream()
+                    .map(uuid -> getExile().getCard(uuid, this))
+                    .filter(Objects::nonNull)
+                    .forEach(commanders::add);
+            commanders.removeIf(card -> state.checkCommanderShouldStay(card, this));
+            for (Card card : commanders) {
+                if (player.chooseUse(Outcome.Benefit, "Move " + card.getIdName() + " to the command zone or leave it in its current zone?", "You can only make this choice once", "Move to command", "Leave in current zone", null, this)) {
+                    toMove.add(card);
+                } else {
+                    state.setCommanderShouldStay(card, this);
+                }
+            }
+            if (toMove.isEmpty()) {
+                continue;
+            }
+            player.moveCards(toMove, Zone.COMMAND, null, this);
+            somethingHappened = true;
+        }
+
         // 704.5e If a copy of a spell is in a zone other than the stack, it ceases to exist. If a copy of a card is in any zone other than the stack or the battlefield, it ceases to exist.
         // (Isochron Scepter) 12/1/2004: If you don't want to cast the copy, you can choose not to; the copy ceases to exist the next time state-based actions are checked.
         Iterator<Card> copiedCards = this.getState().getCopiedCards().iterator();

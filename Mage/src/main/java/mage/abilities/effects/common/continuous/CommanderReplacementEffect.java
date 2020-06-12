@@ -106,8 +106,6 @@ public class CommanderReplacementEffect extends ReplacementEffectImpl {
         switch (zEvent.getToZone()) {
             case LIBRARY:
             case HAND:
-            case GRAVEYARD:
-            case EXILED:
                 if (commanderId.equals(zEvent.getTargetId())) {
                     return true;
                 }
