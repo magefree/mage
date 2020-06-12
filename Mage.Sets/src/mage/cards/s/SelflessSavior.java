@@ -12,7 +12,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.TargetPermanent;
 
@@ -23,7 +23,8 @@ import java.util.UUID;
  */
 public final class SelflessSavior extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent("another target creature");
+    private static final FilterPermanent filter
+            = new FilterControlledCreaturePermanent("another target creature");
 
     static {
         filter.add(AnotherPredicate.instance);

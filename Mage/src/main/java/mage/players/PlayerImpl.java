@@ -3879,7 +3879,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 break;
             case COMMAND:
                 for (Card card : cards) {
-                    if (moveCardToCommandWithInfo(card, source.getSourceId(), game, fromZone)) {
+                    if (moveCardToCommandWithInfo(card, source == null ? null : source.getSourceId(), game, fromZone)) {
                         successfulMovedCards.add(card);
                     }
                 }
@@ -4272,7 +4272,8 @@ public abstract class PlayerImpl implements Player, Serializable {
         cards.addAll(getLibrary().getTopCards(game, value));
         if (!cards.isEmpty()) {
             TargetCard target = new TargetCard(0, cards.size(), Zone.LIBRARY,
-                    new FilterCard("cards to PUT on the BOTTOM of your library (Scry)"));
+                    new FilterCard("card" + (cards.size() == 1 ? "":"s") 
+                            + " to PUT on the BOTTOM of your library (Scry)"));
             chooseTarget(Outcome.Benefit, cards, target, source, game);
             putCardsOnBottomOfLibrary(new CardsImpl(target.getTargets()), game, source, true);
             cards.removeAll(target.getTargets());
