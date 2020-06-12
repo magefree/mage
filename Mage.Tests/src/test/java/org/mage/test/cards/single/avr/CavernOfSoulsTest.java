@@ -296,5 +296,4 @@ public class CavernOfSoulsTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Counterspell", 2);
         assertGraveyardCount(playerB, "Unsummon", 1);
     }
-
 }

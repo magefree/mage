@@ -5,6 +5,7 @@ import java.util.*;
 
 import mage.ConditionalMana;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -120,7 +121,7 @@ class CavernOfSoulsManaCondition extends CreatureCastManaCondition {
 
 class CavernOfSoulsWatcher extends Watcher {
 
-    private final Map<UUID, Integer> spells = new HashMap<>();
+    private final Set<MageObjectReference> spells = new HashSet<>();
     private final UUID originalId;
 
     public CavernOfSoulsWatcher(UUID originalId) {
@@ -131,14 +132,14 @@ class CavernOfSoulsWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.MANA_PAID) {
-            if (event.getData() != null && event.getData().equals(originalId.toString())) {
-                spells.put(event.getTargetId(), game.getObject(event.getTargetId()).getZoneChangeCounter(game));
+            if (event.getData() != null && event.getData().equals(originalId.toString()) && event.getTargetId() != null) {
+                spells.add(new MageObjectReference(game.getObject(event.getTargetId()), game));
             }
         }
     }
 
-    public boolean spellCantBeCountered(UUID spellId, Integer zoneChangeCounter) {
-        return zoneChangeCounter.equals(spells.get(spellId));
+    public boolean spellCantBeCountered(MageObjectReference mor) {
+        return spells.contains(mor);
     }
 
     @Override
@@ -185,10 +186,8 @@ class CavernOfSoulsCantCounterEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-
         CavernOfSoulsWatcher watcher = game.getState().getWatcher(CavernOfSoulsWatcher.class, source.getSourceId());
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        Integer currentZCC = game.getObject(event.getTargetId()).getZoneChangeCounter(game);
-        return spell != null && watcher != null && watcher.spellCantBeCountered(spell.getId(), currentZCC);
+        return spell != null && watcher != null && watcher.spellCantBeCountered(new MageObjectReference(spell, game));
     }
 }
