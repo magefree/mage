@@ -53,6 +53,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Chandra's Magmutt", 137, Rarity.COMMON, mage.cards.c.ChandrasMagmutt.class));
         cards.add(new SetCardInfo("Chandra, Flame's Catalyst", 332, Rarity.MYTHIC, mage.cards.c.ChandraFlamesCatalyst.class));
         cards.add(new SetCardInfo("Chromatic Orrery", 228, Rarity.MYTHIC, mage.cards.c.ChromaticOrrery.class));
+        cards.add(new SetCardInfo("Conclave Mentor", 216, Rarity.UNCOMMON, mage.cards.c.ConclaveMentor.class));
         cards.add(new SetCardInfo("Containment Priest", 314, Rarity.RARE, mage.cards.c.ContainmentPriest.class));
         cards.add(new SetCardInfo("Cultivate", 177, Rarity.UNCOMMON, mage.cards.c.Cultivate.class));
         cards.add(new SetCardInfo("Dire Fleet Warmonger", 217, Rarity.UNCOMMON, mage.cards.d.DireFleetWarmonger.class));
