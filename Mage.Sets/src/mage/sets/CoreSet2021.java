@@ -117,6 +117,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Necromentia", 116, Rarity.RARE, mage.cards.n.Necromentia.class));
         cards.add(new SetCardInfo("Obsessive Stitcher", 223, Rarity.UNCOMMON, mage.cards.o.ObsessiveStitcher.class));
         cards.add(new SetCardInfo("Pack Leader", 29, Rarity.RARE, mage.cards.p.PackLeader.class));
+        cards.add(new SetCardInfo("Palladium Myr", 234, Rarity.UNCOMMON, mage.cards.p.PalladiumMyr.class));
         cards.add(new SetCardInfo("Peer into the Abyss", 117, Rarity.RARE, mage.cards.p.PeerIntoTheAbyss.class));
         cards.add(new SetCardInfo("Pestilent Haze", 118, Rarity.UNCOMMON, mage.cards.p.PestilentHaze.class));
         cards.add(new SetCardInfo("Plains", 309, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
@@ -135,6 +136,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Rin and Seri, Inseparable", 278, Rarity.MYTHIC, mage.cards.r.RinAndSeriInseparable.class));
         cards.add(new SetCardInfo("Runed Halo", 32, Rarity.RARE, mage.cards.r.RunedHalo.class));
         cards.add(new SetCardInfo("Sabertooth Mauler", 202, Rarity.COMMON, mage.cards.s.SabertoothMauler.class));
+        cards.add(new SetCardInfo("Scavenging Ooze", 204, Rarity.RARE, mage.cards.s.ScavengingOoze.class));
         cards.add(new SetCardInfo("Seasoned Hallowblade", 34, Rarity.UNCOMMON, mage.cards.s.SeasonedHallowblade.class));
         cards.add(new SetCardInfo("See the Truth", 69, Rarity.RARE, mage.cards.s.SeeTheTruth.class));
         cards.add(new SetCardInfo("Selfless Savior", 36, Rarity.UNCOMMON, mage.cards.s.SelflessSavior.class));
@@ -173,7 +175,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Valorous Steed", 42, Rarity.COMMON, mage.cards.v.ValorousSteed.class));
         cards.add(new SetCardInfo("Village Rites", 126, Rarity.COMMON, mage.cards.v.VillageRites.class));
         cards.add(new SetCardInfo("Vito, Thorn of the Dusk Rose", 127, Rarity.RARE, mage.cards.v.VitoThornOfTheDuskRose.class));
-        cards.add(new SetCardInfo("Waker of Waves", 84, Rarity.UNCOMMON, mage.cards.w.WakerofWaves.class));
+        cards.add(new SetCardInfo("Waker of Waves", 84, Rarity.UNCOMMON, mage.cards.w.WakerOfWaves.class));
         cards.add(new SetCardInfo("Volcanic Salvo", 172, Rarity.RARE, mage.cards.v.VolcanicSalvo.class));
         cards.add(new SetCardInfo("Vryn Wingmare", 43, Rarity.UNCOMMON, mage.cards.v.VrynWingmare.class));
         cards.add(new SetCardInfo("Warden of the Woods", 213, Rarity.UNCOMMON, mage.cards.w.WardenOfTheWoods.class));

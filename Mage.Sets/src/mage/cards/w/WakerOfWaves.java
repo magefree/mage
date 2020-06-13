@@ -15,7 +15,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.common.FilterControlledLandPermanent;
 
 import java.util.UUID;
 
@@ -23,7 +22,7 @@ import java.util.UUID;
  *
  * @author mikalinn777
  */
-public final class WakerofWaves extends CardImpl {
+public final class WakerOfWaves extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures your opponents control");
 
@@ -31,7 +30,7 @@ public final class WakerofWaves extends CardImpl {
         filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
-    public WakerofWaves(UUID ownerId, CardSetInfo setInfo) {
+    public WakerOfWaves(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");
         this.subtype.add(SubType.WHALE);
 
@@ -48,13 +47,13 @@ public final class WakerofWaves extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WakerofWaves(final WakerofWaves card) {
+    public WakerOfWaves(final WakerOfWaves card) {
         super(card);
     }
 
     @Override
-    public WakerofWaves copy() {
-        return new WakerofWaves(this);
+    public WakerOfWaves copy() {
+        return new WakerOfWaves(this);
     }
 }
 
