@@ -92,6 +92,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 310, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jeskai Elder", 53, Rarity.UNCOMMON, mage.cards.j.JeskaiElder.class));
         cards.add(new SetCardInfo("Jolrael, Mwonvuli Recluse", 191, Rarity.RARE, mage.cards.j.JolraelMwonvuliRecluse.class));
+        cards.add(new SetCardInfo("Kaervek, the Spiteful", 106, Rarity.RARE, mage.cards.k.KaervekTheSpiteful.class));
         cards.add(new SetCardInfo("Keral Keep Disciples", 334, Rarity.UNCOMMON, mage.cards.k.KeralKeepDisciples.class));
         cards.add(new SetCardInfo("Liliana's Devotee", 109, Rarity.UNCOMMON, mage.cards.l.LilianasDevotee.class));
         cards.add(new SetCardInfo("Liliana's Scorn", 329, Rarity.RARE, mage.cards.l.LilianasScorn.class));
