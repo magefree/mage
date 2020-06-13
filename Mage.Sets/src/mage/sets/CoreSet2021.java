@@ -37,6 +37,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Alpine Houndmaster", 215, Rarity.UNCOMMON, mage.cards.a.AlpineHoundmaster.class));
         cards.add(new SetCardInfo("Alpine Watchdog", 2, Rarity.COMMON, mage.cards.a.AlpineWatchdog.class));
         cards.add(new SetCardInfo("Angelic Ascension", 3, Rarity.UNCOMMON, mage.cards.a.AngelicAscension.class));
+        cards.add(new SetCardInfo("Animal Sanctuary", 242, Rarity.RARE, mage.cards.a.AnimalSanctuary.class));
         cards.add(new SetCardInfo("Azusa, Lost but Seeking", 173, Rarity.RARE, mage.cards.a.AzusaLostButSeeking.class));
         cards.add(new SetCardInfo("Bad Deal", 89, Rarity.UNCOMMON, mage.cards.b.BadDeal.class));
         cards.add(new SetCardInfo("Baneslayer Angel", 6, Rarity.MYTHIC, mage.cards.b.BaneslayerAngel.class));
