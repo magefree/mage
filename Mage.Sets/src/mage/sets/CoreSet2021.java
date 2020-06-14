@@ -103,6 +103,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Liliana's Devotee", 109, Rarity.UNCOMMON, mage.cards.l.LilianasDevotee.class));
         cards.add(new SetCardInfo("Liliana's Scorn", 329, Rarity.RARE, mage.cards.l.LilianasScorn.class));
         cards.add(new SetCardInfo("Liliana's Scrounger", 330, Rarity.UNCOMMON, mage.cards.l.LilianasScrounger.class));
+        cards.add(new SetCardInfo("Liliana's Standard Bearer", 110, Rarity.RARE, mage.cards.l.LilianasStandardBearer.class));
         cards.add(new SetCardInfo("Liliana's Steward", 111, Rarity.COMMON, mage.cards.l.LilianasSteward.class));
         cards.add(new SetCardInfo("Liliana, Death Mage", 328, Rarity.MYTHIC, mage.cards.l.LilianaDeathMage.class));
         cards.add(new SetCardInfo("Liliana, Waker of the Dead", 108, Rarity.MYTHIC, mage.cards.l.LilianaWakerOfTheDead.class));
