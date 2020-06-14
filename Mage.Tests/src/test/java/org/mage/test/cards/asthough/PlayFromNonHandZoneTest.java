@@ -173,4 +173,98 @@ public class PlayFromNonHandZoneTest extends CardTestPlayerBase {
 
     }
 
+    /**
+     * Can't cast Karn's Temporal Sundering when exiled with Golos, Tireless
+     * Pilgrim
+     */
+    @Test
+    public void castSunderingWithGolosTest() {
+        // When Golos, Tireless Pilgrim enters the battlefield, you may search your library for a land card, put that card onto the battlefield tapped, then shuffle your library.
+        // {2}{W}{U}{B}{R}{G}: Exile the top three cards of your library. You may play them this turn without paying their mana costs.
+        addCard(Zone.BATTLEFIELD, playerA, "Golos, Tireless Pilgrim", 1);
+
+        // (You may cast a legendary sorcery only if you control a legendary creature or planeswalker.)
+        // Target player takes an extra turn after this one. Return up to one target nonland permanent to its owner's hand. Exile Karn's Temporal Sundering.
+        addCard(Zone.LIBRARY, playerA, "Karn's Temporal Sundering"); // Sorcery
+        addCard(Zone.LIBRARY, playerA, "Silvercoat Lion");
+        addCard(Zone.LIBRARY, playerA, "Mountain");
+        skipInitShuffling();
+
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{W}{U}{B}{R}{G}: Exile");
+
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mountain");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Karn's Temporal Sundering");
+        addTarget(playerA, playerA);
+        addTarget(playerA, "Silvercoat Lion");
+
+        setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
+
+        setStrictChooseMode(true);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Mountain", 2);
+        assertPermanentCount(playerA, "Silvercoat Lion", 0);
+        assertExileCount(playerA, "Karn's Temporal Sundering", 1);
+
+        assertHandCount(playerA, "Silvercoat Lion", 1);
+        assertExileCount(playerA, 1);
+
+        assertActivePlayer(playerA);
+    }
+
+    /**
+     * Can't cast Karn's Temporal Sundering when exiled with Golos, Tireless
+     * Pilgrim
+     */
+    @Test
+    public void castSunderingWithGolos2Test() {
+        // When Golos, Tireless Pilgrim enters the battlefield, you may search your library for a land card, put that card onto the battlefield tapped, then shuffle your library.
+        // {2}{W}{U}{B}{R}{G}: Exile the top three cards of your library. You may play them this turn without paying their mana costs.
+        addCard(Zone.BATTLEFIELD, playerA, "Golos, Tireless Pilgrim", 1);
+
+        // (You may cast a legendary sorcery only if you control a legendary creature or planeswalker.)
+        // Target player takes an extra turn after this one. Return up to one target nonland permanent to its owner's hand. Exile Karn's Temporal Sundering.
+        addCard(Zone.LIBRARY, playerA, "Karn's Temporal Sundering"); // Sorcery
+        addCard(Zone.LIBRARY, playerA, "Silvercoat Lion");
+        addCard(Zone.LIBRARY, playerA, "Mountain");
+        skipInitShuffling();
+
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{W}{U}{B}{R}{G}: Exile");
+
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mountain");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Karn's Temporal Sundering");
+        addTarget(playerA, playerA);
+        addTarget(playerA, "Golos, Tireless Pilgrim"); // Return to hand
+
+        setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
+
+        setStrictChooseMode(true);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Mountain", 2);
+        assertPermanentCount(playerA, "Silvercoat Lion", 1);
+        assertExileCount(playerA, "Karn's Temporal Sundering", 1);
+
+        assertHandCount(playerA, "Golos, Tireless Pilgrim", 1);
+        assertExileCount(playerA, 1);
+
+        assertActivePlayer(playerA);
+    }
+
 }
