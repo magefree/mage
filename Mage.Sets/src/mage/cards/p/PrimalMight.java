@@ -29,7 +29,7 @@ public final class PrimalMight extends CardImpl {
         //
         this.getSpellAbility().addEffect(new FightTargetsEffect()
                 .concatBy("Then")
-                .setText("it fights up to one target creature you don’t control"));
+                .setText("it fights up to one target creature you don't control"));
         this.getSpellAbility().addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL, false));
 
     }
