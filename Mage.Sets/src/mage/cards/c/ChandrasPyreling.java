@@ -56,8 +56,8 @@ class ChandrasPyrelingAbility extends TriggeredAbilityImpl {
         addEffect(new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn));
     }
 
-    private ChandrasPyrelingAbility(ChandrasPyrelingAbility effect) {
-        super(effect);
+    private ChandrasPyrelingAbility(ChandrasPyrelingAbility ability) {
+        super(ability);
         addEffect(new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn));
     }
 
