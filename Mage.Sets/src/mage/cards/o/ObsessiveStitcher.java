@@ -1,4 +1,3 @@
-
 package mage.cards.o;
 
 import mage.MageInt;
@@ -16,12 +15,10 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetAnyTarget;
 
 import java.util.UUID;
 
 /**
- *
  * @author mikalinn777
  */
 public final class ObsessiveStitcher extends CardImpl {
@@ -34,11 +31,11 @@ public final class ObsessiveStitcher extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);
 
-        // Draw a card, then discard a card.
+        // {T}: Draw a card, then discard a card.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(), new TapSourceCost()));
 
-        // {2}{U}{B}, {tap}, Sacrifice Obsessive Stitcher: Return target creature card from your graveyard to the battlefield.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), new ManaCostsImpl("{2}{U}{B}"));
+        // {2}{U}{B}, {T}, Sacrifice Obsessive Stitcher: Return target creature card from your graveyard to the battlefield.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(false, false), new ManaCostsImpl("{2}{U}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
