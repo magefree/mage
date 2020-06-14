@@ -51,6 +51,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Bolt Hound", 131, Rarity.UNCOMMON, mage.cards.b.BoltHound.class));
         cards.add(new SetCardInfo("Burlfist Oak", 174, Rarity.UNCOMMON, mage.cards.b.BurlfistOak.class));
         cards.add(new SetCardInfo("Carrion Grub", 92, Rarity.UNCOMMON, mage.cards.c.CarrionGrub.class));
+        cards.add(new SetCardInfo("Celestial Enforcer", 11, Rarity.COMMON, mage.cards.c.CelestialEnforcer.class));
         cards.add(new SetCardInfo("Chandra's Firemaw", 333, Rarity.RARE, mage.cards.c.ChandrasFiremaw.class));
         cards.add(new SetCardInfo("Chandra's Incinerator", 136, Rarity.RARE, mage.cards.c.ChandrasIncinerator.class));
         cards.add(new SetCardInfo("Chandra's Magmutt", 137, Rarity.COMMON, mage.cards.c.ChandrasMagmutt.class));
