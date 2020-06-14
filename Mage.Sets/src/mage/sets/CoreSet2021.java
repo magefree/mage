@@ -62,6 +62,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Cultivate", 177, Rarity.UNCOMMON, mage.cards.c.Cultivate.class));
         cards.add(new SetCardInfo("Defiant Strike", 15, Rarity.COMMON, mage.cards.d.DefiantStrike.class));
         cards.add(new SetCardInfo("Dire Fleet Warmonger", 217, Rarity.UNCOMMON, mage.cards.d.DireFleetWarmonger.class));
+        cards.add(new SetCardInfo("Discontinuity", 48, Rarity.MYTHIC, mage.cards.d.Discontinuity.class));
         cards.add(new SetCardInfo("Double Vision", 142, Rarity.RARE, mage.cards.d.DoubleVision.class));
         cards.add(new SetCardInfo("Drowsing Tyrannodon", 178, Rarity.COMMON, mage.cards.d.DrowsingTyrannodon.class));
         cards.add(new SetCardInfo("Duress", 96, Rarity.COMMON, mage.cards.d.Duress.class));
