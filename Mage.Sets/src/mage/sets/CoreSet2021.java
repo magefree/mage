@@ -82,6 +82,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Garruk's Warsteed", 337, Rarity.RARE, mage.cards.g.GarruksWarsteed.class));
         cards.add(new SetCardInfo("Garruk, Savage Herald", 336, Rarity.MYTHIC, mage.cards.g.GarrukSavageHerald.class));
         cards.add(new SetCardInfo("Goblin Arsonist", 147, Rarity.COMMON, mage.cards.g.GoblinArsonist.class));
+        cards.add(new SetCardInfo("Goremand", 101, Rarity.UNCOMMON, mage.cards.g.Goremand.class));
         cards.add(new SetCardInfo("Grasp of Darkness", 102, Rarity.COMMON, mage.cards.g.GraspOfDarkness.class));
         cards.add(new SetCardInfo("Griffin Aerie", 22, Rarity.UNCOMMON, mage.cards.g.GriffinAerie.class));
         cards.add(new SetCardInfo("Grim Tutor", 103, Rarity.MYTHIC, mage.cards.g.GrimTutor.class));
