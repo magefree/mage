@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -109,7 +108,7 @@ class BronzehideLionContinuousEffect extends ContinuousEffectImpl {
 
     private final int zoneChangeCounter;
     private final Ability activatedAbility = new SimpleActivatedAbility(new GainAbilityAttachedEffect(
-            IndestructibleAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield
+            IndestructibleAbility.getInstance(), AttachmentType.AURA, Duration.EndOfTurn
     ), new ManaCostsImpl("{G}{W}"));
 
     BronzehideLionContinuousEffect(int zoneChangeCounter) {

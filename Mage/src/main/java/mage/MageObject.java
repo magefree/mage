@@ -1,5 +1,8 @@
 package mage;
 
+import java.io.Serializable;
+import java.util.List;
+import java.util.Set;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
@@ -14,12 +17,6 @@ import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.util.SubTypeList;
-
-import java.io.Serializable;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 
 public interface MageObject extends MageItem, Serializable {
 
@@ -42,8 +39,8 @@ public interface MageObject extends MageItem, Serializable {
     Set<SuperType> getSuperType();
 
     /**
-     * For cards: return basic abilities (without dynamic added)
-     * For permanents: return all abilities (dynamic ability inserts into permanent)
+     * For cards: return basic abilities (without dynamic added) For permanents:
+     * return all abilities (dynamic ability inserts into permanent)
      */
     Abilities<Ability> getAbilities();
 
