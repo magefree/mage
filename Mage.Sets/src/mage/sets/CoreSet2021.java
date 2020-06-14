@@ -74,6 +74,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Fierce Empath", 181, Rarity.UNCOMMON, mage.cards.f.FierceEmpath.class));
         cards.add(new SetCardInfo("Fiery Emancipation", 143, Rarity.MYTHIC, mage.cards.f.FieryEmancipation.class));
         cards.add(new SetCardInfo("Finishing Blow", 99, Rarity.COMMON, mage.cards.f.FinishingBlow.class));
+        cards.add(new SetCardInfo("Frantic Inventory", 50, Rarity.COMMON, mage.cards.f.FranticInventory.class));
         cards.add(new SetCardInfo("Fungal Rebirth", 182, Rarity.UNCOMMON, mage.cards.f.FungalRebirth.class));
         cards.add(new SetCardInfo("Furious Rise", 144, Rarity.UNCOMMON, mage.cards.f.FuriousRise.class));
         cards.add(new SetCardInfo("Gadrak, the Crown-Scourge", 146, Rarity.RARE, mage.cards.g.GadrakTheCrownScourge.class));
