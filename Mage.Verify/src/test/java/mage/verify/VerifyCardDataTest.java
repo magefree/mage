@@ -967,17 +967,25 @@ public class VerifyCardDataTest {
     @Test
     public void showCardInfo() throws Exception {
         // debug only: show direct card info (takes it from class file, not from db repository)
-        String cardName = "Essence Capture";
+        // can check multiple cards at once, example: name1;name2;name3
+        String cardNames = "Armed // Dangerous;Beacon Behemoth;Grizzly Bears";
         CardScanner.scan();
-        CardSetInfo testSet = new CardSetInfo(cardName, "test", "123", Rarity.COMMON);
-        CardInfo cardInfo = CardRepository.instance.findCard(cardName);
-        Card card = CardImpl.createCard(cardInfo.getClassName(), testSet);
-        System.out.println(card.getName());
-        if (card instanceof SplitCard) {
-            card.getAbilities().getRules(card.getName()).stream().forEach(System.out::println);
-        } else {
-            card.getRules().stream().forEach(System.out::println);
-        }
+        Arrays.stream(cardNames.split(";")).forEach(cardName -> {
+            cardName = cardName.trim();
+            CardSetInfo testSet = new CardSetInfo(cardName, "test", "123", Rarity.COMMON);
+            CardInfo cardInfo = CardRepository.instance.findCard(cardName);
+            if (cardInfo == null) {
+                Assert.fail("Can't find card name: " + cardName);
+            }
+            Card card = CardImpl.createCard(cardInfo.getClassName(), testSet);
+            System.out.println();
+            System.out.println(card.getName() + " " + card.getManaCost().getText());
+            if (card instanceof SplitCard) {
+                card.getAbilities().getRules(card.getName()).stream().forEach(System.out::println);
+            } else {
+                card.getRules().stream().forEach(System.out::println);
+            }
+        });
     }
 
     private void checkWrongAbilitiesText(Card card, JsonCard ref, int cardIndex) {
