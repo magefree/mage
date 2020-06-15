@@ -35,9 +35,10 @@ public final class GarruksHarbinger extends CardImpl {
         this.addAbility(HexproofFromBlackAbility.getInstance());
 
         // Whenever Garruk's Harbinger deals combat damage to a player or planeswalker, look at that many cards from the top of your library. You may reveal a creature card or Garruk planeswalker card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
-        DealsCombatDamageToAPlayerTriggeredAbility ability = new DealsCombatDamageToAPlayerTriggeredAbility(new GarruksHarbingerEffect(), false, true);
-        ability.setOrPlaneswalker(true);
-        this.addAbility(ability);
+        this.addAbility(
+                new DealsCombatDamageToAPlayerTriggeredAbility(new GarruksHarbingerEffect(), false, true)
+                        .setOrPlaneswalker(true)
+        );
     }
 
     private GarruksHarbinger(final GarruksHarbinger card) {
