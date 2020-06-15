@@ -270,9 +270,9 @@
 |Generate|TOK:C13|Beast|||OneDozenEyesBeastToken|
 |Generate|TOK:C13|Beast|||SpawningGroundsBeastToken|
 |Generate|TOK:C13|Drake|||LeafdrakeRoostDrakeToken|
-|Generate|TOK:C13|Elemental|||SeedGuardianToken|
-|Generate|TOK:C13|Elemental|||WalkerOfTheGroveToken|
-|Generate|TOK:C13|Elemental|||YoungPyromancerElementalToken|
+|Generate|TOK:C13|Elemental|1||SeedGuardianToken|
+|Generate|TOK:C13|Elemental|2||WalkerOfTheGroveToken|
+|Generate|TOK:C13|Elemental|3||RedElementalToken|
 |Generate|TOK:C13|Elephant|||ElephantToken|
 |Generate|TOK:C13|Elf Warrior|||ElfToken|
 |Generate|TOK:C13|Goat|||GoatToken|
@@ -351,7 +351,7 @@
 |Generate|TOK:C16|Beast||
 |Generate|TOK:C16|Bird|1|
 |Generate|TOK:C16|Bird|2|
-|Generate|TOK:C16|Elemental||
+|Generate|TOK:C16|Elemental|||WhiteElementalToken|
 |Generate|TOK:C16|Elf Warrior||
 |Generate|TOK:C16|Germ||
 |Generate|TOK:C16|Goat||
@@ -619,7 +619,7 @@
 |Generate|TOK:EMA|Beast|||CarnivoreToken|
 |Generate|TOK:EMA|Carnivore||
 |Generate|TOK:EMA|Dragon|||DragonEggDragonToken|
-|Generate|TOK:EMA|Elemental|1||YoungPyromancerElementalToken|
+|Generate|TOK:EMA|Elemental|1||RedElementalToken|
 |Generate|TOK:EMA|Elemental|2||CallTheSkyBreakerElementalToken|
 |Generate|TOK:EMA|Elephant|||ElephantToken|
 |Generate|TOK:EMA|Elf Warrior|||ElfToken|
@@ -655,7 +655,7 @@
 |Generate|TOK:EVE|Spirit|||BeckonApparitionToken|
 |Generate|TOK:EVE|Wolf|||WolfToken|
 |Generate|TOK:EVE|Worm|||WormHarvestToken|
-|Generate|TOK:EVG|Elemental||
+|Generate|TOK:EVG|Elemental|||VoiceOfTheWoodsElementalToken|
 |Generate|TOK:EVG|Elf Warrior|||ElfToken|
 |Generate|TOK:EVG|Goblin|||GoblinToken|
 |Generate|TOK:EXO|Pegasus|||PegasusToken|
@@ -791,8 +791,8 @@
 |Generate|TOK:LRW|Avatar|||AvatarToken|
 |Generate|TOK:LRW|Beast|||BeastToken|
 |Generate|TOK:LRW|Elemental Shaman|||ElementalShamanToken|
-|Generate|TOK:LRW|Elemental|||WalkerOfTheGroveToken|
-|Generate|TOK:LRW|Elemental|||WhiteElementalToken|
+|Generate|TOK:LRW|Elemental|1||WalkerOfTheGroveToken|
+|Generate|TOK:LRW|Elemental|2||WhiteElementalToken|
 |Generate|TOK:LRW|Elf Warrior|||ElfToken|
 |Generate|TOK:LRW|Goblin Rogue|||GoblinRogueToken|
 |Generate|TOK:LRW|Kithkin Soldier|||KithkinToken|
@@ -834,8 +834,8 @@
 |Generate|TOK:M14|Beast|||BeastToken|
 |Generate|TOK:M14|Cat|||CatToken|
 |Generate|TOK:M14|Dragon|||DragonEggDragonToken|
-|Generate|TOK:M14|Elemental|1||YoungPyromancerElementalToken|
-|Generate|TOK:M14|Elemental|2||YoungPyromancerElementalToken|
+|Generate|TOK:M14|Elemental|1||RedElementalToken|
+|Generate|TOK:M14|Elemental|2||RedElementalToken|
 |Generate|TOK:M14|Goat|||GoatToken|
 |Generate|TOK:M14|Saproling|||SaprolingToken|
 |Generate|TOK:M14|Sliver||
@@ -909,7 +909,7 @@
 |Generate|TOK:MM3|Bird||
 |Generate|TOK:MM3|Centaur||
 |Generate|TOK:MM3|Dragon||
-|Generate|TOK:MM3|Elemental||
+|Generate|TOK:MM3|Elemental|||VoiceOfResurgenceToken|
 |Generate|TOK:MM3|Elephant||
 |Generate|TOK:MM3|Giant Warrior||
 |Generate|TOK:MM3|Goblin Warrior||
@@ -1077,7 +1077,7 @@
 |Generate|TOK:SCG|Goblin|||GoblinToken|
 |Generate|TOK:SCG|Soldier|||SoldierToken|
 |Generate|TOK:SHM|Elemental|1||DinOfTheFireherdToken|
-|Generate|TOK:SHM|Elemental|2||YoungPyromancerElementalToken|
+|Generate|TOK:SHM|Elemental|2||RedElementalToken|
 |Generate|TOK:SHM|Elf Warrior|1|
 |Generate|TOK:SHM|Elf Warrior|2|
 |Generate|TOK:SHM|Elf Warrior|||ElfToken|
@@ -1239,8 +1239,8 @@
 |Generate|TOK:ZEN|Angel|||AngelToken|
 |Generate|TOK:ZEN|Beast|||BeastToken2|
 |Generate|TOK:ZEN|Bird|||BirdToken|
-|Generate|TOK:ZEN|Elemental||
-|Generate|TOK:ZEN|Elemental|||ZektarShrineElementalToken|
+|Generate|TOK:ZEN|Elemental|1||RedElementalWithTrampleAndHaste|
+|Generate|TOK:ZEN|Elemental|2||RedElementalWithTrampleAndHaste|
 |Generate|TOK:ZEN|Illusion|||IllusionToken|
 |Generate|TOK:ZEN|Kor Soldier|||KorSoldierToken|
 |Generate|TOK:ZEN|Merfolk||
@@ -1290,7 +1290,7 @@
 |Generate|TOK:MH1|Bear|||BearToken|
 |Generate|TOK:MH1|Bird|||BirdToken|
 |Generate|TOK:MH1|Construct|||KarnConstructToken|
-|Generate|TOK:MH1|Elemental|1||YoungPyromancerElementalToken|
+|Generate|TOK:MH1|Elemental|1||RedElementalToken|
 |Generate|TOK:MH1|Elemental|2||AkoumStonewakerElementalToken|
 |Generate|TOK:MH1|Elephant|||ElephantToken|
 |Generate|TOK:MH1|Goblin|||GoblinToken|
@@ -1320,7 +1320,7 @@
 |Generate|TOK:M19|Zombie|||ZombieToken|
 |Generate|TOK:M20|Ajani's Pridemate|||AjanisPridemateToken|
 |Generate|TOK:M20|Demon|||DemonToken|
-|Generate|TOK:M20|Elemental|||YoungPyromancerElementalToken|
+|Generate|TOK:M20|Elemental|||RedElementalToken|
 |Generate|TOK:M20|Elemental Bird|||MuYanlingSkyDancerToken|
 |Generate|TOK:M20|Golem|||GolemToken|
 |Generate|TOK:M20|Soldier|||SoldierToken|
