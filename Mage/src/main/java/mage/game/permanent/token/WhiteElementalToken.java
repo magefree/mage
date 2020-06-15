@@ -1,13 +1,11 @@
-
-
 package mage.game.permanent.token;
-import mage.constants.CardType;
-import mage.constants.SubType;
+
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
- *
  * @author spjspj
  */
 public final class WhiteElementalToken extends TokenImpl {
@@ -19,8 +17,11 @@ public final class WhiteElementalToken extends TokenImpl {
         subtype.add(SubType.ELEMENTAL);
         power = new MageInt(4);
         toughness = new MageInt(4);
-        setTokenType(2);
         this.addAbility(FlyingAbility.getInstance());
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C20")) {
+            setTokenType(2);
+        }
     }
 
     public WhiteElementalToken(final WhiteElementalToken token) {

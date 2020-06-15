@@ -38,7 +38,7 @@ public final class GeistHonoredMonk extends CardImpl {
                 .addHint(CreaturesYouControlHint.instance));
 
         // When Geist-Honored Monk enters the battlefield, create two 1/1 white Spirit creature tokens with flying.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new SpiritWhiteToken("ISD"), 2)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new SpiritWhiteToken(), 2)));
     }
 
     public GeistHonoredMonk(final GeistHonoredMonk card) {

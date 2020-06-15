@@ -18,7 +18,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.permanent.token.ElementalToken;
+import mage.game.permanent.token.ElementalTokenWithHaste;
 import mage.players.Player;
 
 import java.util.UUID;
@@ -75,7 +75,7 @@ class ChandraElementalEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            CreateTokenEffect effect = new CreateTokenEffect(new ElementalToken("OGW", 2, true), 2);
+            CreateTokenEffect effect = new CreateTokenEffect(new ElementalTokenWithHaste(), 2);
             effect.apply(game, source);
             effect.exileTokensCreatedAtNextEndStep(game, source);
             return true;

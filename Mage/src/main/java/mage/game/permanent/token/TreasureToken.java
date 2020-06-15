@@ -20,24 +20,11 @@ public final class TreasureToken extends TokenImpl {
 
     static final private List<String> tokenImageSets = new ArrayList<>();
 
-    static {
-        tokenImageSets.addAll(Arrays.asList("XLN", "RNA", "M20", "C19"));
-    }
-
     public TreasureToken() {
-        this(null, 0);
-    }
-
-    public TreasureToken(String setCode) {
-        this(setCode, 0);
-    }
-
-    public TreasureToken(String setCode, int tokenType) {
         super("Treasure", "Treasure token");
-        availableImageSetCodes = tokenImageSets;
-        setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.ARTIFACT);
         subtype.add(SubType.TREASURE);
+        availableImageSetCodes = Arrays.asList("XLN", "RNA", "M20", "C19", "C20");
 
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

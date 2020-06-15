@@ -1,7 +1,5 @@
-
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
@@ -19,16 +17,18 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.ElementalToken;
+import mage.game.permanent.token.ElementalTokenWithHaste;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author escplan9 - Derek Monturo
  */
 public final class LightningCoils extends CardImpl {
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a nontoken creature you control");
+
     static {
         filter.add(TargetController.YOU.getControllerPredicate());
         filter.add(Predicates.not(TokenPredicate.instance));
@@ -36,13 +36,13 @@ public final class LightningCoils extends CardImpl {
 
     public LightningCoils(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
-        
+
         // Whenever a nontoken creature you control dies, put a charge counter on Lightning Coils.
         this.addAbility(
                 new DiesCreatureTriggeredAbility(
-                        new AddCountersSourceEffect(CounterType.CHARGE.createInstance(), true), 
+                        new AddCountersSourceEffect(CounterType.CHARGE.createInstance(), true),
                         false, filter));
-        
+
         // At the beginning of your upkeep, if Lightning Coils has five or more charge counters on it, remove all of them from it 
         // and put that many 3/1 red Elemental creature tokens with haste onto the battlefield. 
         // Exile them at the beginning of the next end step.
@@ -79,9 +79,9 @@ class LightningCoilsEffect extends OneShotEffect {
             if (counters >= 5) {
                 // remove all the counters and create that many tokens
                 p.removeCounters(CounterType.CHARGE.getName(), p.getCounters(game).getCount(CounterType.CHARGE), game);
-                CreateTokenEffect effect = new CreateTokenEffect(new ElementalToken("CON", 1, true), counters);
+                CreateTokenEffect effect = new CreateTokenEffect(new ElementalTokenWithHaste(), counters);
                 effect.apply(game, source);
-                
+
                 // exile those tokens at next end step
                 effect.exileTokensCreatedAtNextEndStep(game, source);
                 return true;

@@ -388,6 +388,27 @@ public class ScryfallImageSupportTokens {
             put("PCA/Plane - Turri Island", "https://api.scryfall.com/cards/opca/82/en?format=image");
             put("PCA/Plane - Undercity Reaches", "https://api.scryfall.com/cards/opca/83/en?format=image");
 
+            // C20
+            put("C20/Angel", "https://api.scryfall.com/cards/tc20/1/en?format=image");
+            put("C20/Beast", "https://api.scryfall.com/cards/tc20/11/en?format=image");
+            put("C20/Bird Illusion", "https://api.scryfall.com/cards/tc20/7/en?format=image");
+            put("C20/Bird", "https://api.scryfall.com/cards/tc20/2/en?format=image");
+            put("C20/Dinosaur Cat", "https://api.scryfall.com/cards/tc20/16/en?format=image");
+            put("C20/Drake", "https://api.scryfall.com/cards/tc20/8/en?format=image");
+            put("C20/Elemental/1", "https://api.scryfall.com/cards/tc20/10/en?format=image"); // 3/1
+            put("C20/Elemental/2", "https://api.scryfall.com/cards/tc20/3/en?format=image"); // 4/4
+            put("C20/Goblin Warrior", "https://api.scryfall.com/cards/tc20/17/en?format=image");
+            put("C20/Human", "https://api.scryfall.com/cards/tc20/4/en?format=image");
+            put("C20/Hydra", "https://api.scryfall.com/cards/tc20/12/en?format=image");
+            put("C20/Insect/1", "https://api.scryfall.com/cards/tc20/13/en?format=image"); // deathtouch
+            put("C20/Insect/2", "https://api.scryfall.com/cards/tc20/18/en?format=image"); // haste
+            put("C20/Saproling", "https://api.scryfall.com/cards/tc20/14/en?format=image");
+            put("C20/Snake", "https://api.scryfall.com/cards/tc20/15/en?format=image");
+            put("C20/Soldier", "https://api.scryfall.com/cards/tc20/5/en?format=image");
+            put("C20/Spirit", "https://api.scryfall.com/cards/tc20/6/en?format=image");
+            put("C20/Treasure", "https://api.scryfall.com/cards/tc20/19/en?format=image");
+            put("C20/Zombie", "https://api.scryfall.com/cards/tc20/9/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

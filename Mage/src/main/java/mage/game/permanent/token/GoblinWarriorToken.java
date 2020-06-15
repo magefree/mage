@@ -1,17 +1,17 @@
-
-
 package mage.game.permanent.token;
+
+import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.MageInt;
+
+import java.util.Arrays;
 
 /**
- *
  * @author spjspj
  */
-public final class WortTheRaidmotherToken extends TokenImpl {
+public final class GoblinWarriorToken extends TokenImpl {
 
-    public WortTheRaidmotherToken() {
+    public GoblinWarriorToken() {
         super("Goblin Warrior", "1/1 red and green Goblin Warrior creature token");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
@@ -20,13 +20,15 @@ public final class WortTheRaidmotherToken extends TokenImpl {
         subtype.add(SubType.WARRIOR);
         power = new MageInt(1);
         toughness = new MageInt(1);
+
+        availableImageSetCodes.addAll(Arrays.asList("C20"));
     }
 
-    public WortTheRaidmotherToken(final WortTheRaidmotherToken token) {
+    public GoblinWarriorToken(final GoblinWarriorToken token) {
         super(token);
     }
 
-    public WortTheRaidmotherToken copy() {
-        return new WortTheRaidmotherToken(this);
+    public GoblinWarriorToken copy() {
+        return new GoblinWarriorToken(this);
     }
 }

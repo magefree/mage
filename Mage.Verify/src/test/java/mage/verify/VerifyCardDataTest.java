@@ -701,6 +701,10 @@ public class VerifyCardDataTest {
         if (errorsList.size() > 0) {
             Assert.fail("Found token errors: " + errorsList.size());
         }
+
+        // TODO: all token must have correct availableImageSetCodes (all sets with that token)
+        // Some sets have original card, but don't have token card at all. So you must use scryfall tokens list above to find
+        // all token's sets and compare with xmage
     }
 
     @Test
