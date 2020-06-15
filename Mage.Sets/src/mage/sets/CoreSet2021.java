@@ -155,6 +155,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Seasoned Hallowblade", 34, Rarity.UNCOMMON, mage.cards.s.SeasonedHallowblade.class));
         cards.add(new SetCardInfo("See the Truth", 69, Rarity.RARE, mage.cards.s.SeeTheTruth.class));
         cards.add(new SetCardInfo("Selfless Savior", 36, Rarity.UNCOMMON, mage.cards.s.SelflessSavior.class));
+        cards.add(new SetCardInfo("Shacklegeist", 70, Rarity.RARE, mage.cards.s.Shacklegeist.class));
         cards.add(new SetCardInfo("Shipwreck Dowser", 71, Rarity.UNCOMMON, mage.cards.s.ShipwreckDowser.class));
         cards.add(new SetCardInfo("Siege Striker", 37, Rarity.UNCOMMON, mage.cards.s.SiegeStriker.class));
         cards.add(new SetCardInfo("Sigiled Contender", 323, Rarity.UNCOMMON, mage.cards.s.SigiledContender.class));
