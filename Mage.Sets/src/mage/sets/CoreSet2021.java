@@ -49,6 +49,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Basri, Devoted Paladin", 320, Rarity.MYTHIC, mage.cards.b.BasriDevotedPaladin.class));
         cards.add(new SetCardInfo("Battle-Rattle Shaman", 130, Rarity.UNCOMMON, mage.cards.b.BattleRattleShaman.class));
         cards.add(new SetCardInfo("Bolt Hound", 131, Rarity.UNCOMMON, mage.cards.b.BoltHound.class));
+        cards.add(new SetCardInfo("Brash Taunter", 133, Rarity.RARE, mage.cards.b.BrashTaunter.class));
         cards.add(new SetCardInfo("Burlfist Oak", 174, Rarity.UNCOMMON, mage.cards.b.BurlfistOak.class));
         cards.add(new SetCardInfo("Carrion Grub", 92, Rarity.UNCOMMON, mage.cards.c.CarrionGrub.class));
         cards.add(new SetCardInfo("Celestial Enforcer", 11, Rarity.COMMON, mage.cards.c.CelestialEnforcer.class));
