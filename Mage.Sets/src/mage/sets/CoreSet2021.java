@@ -159,6 +159,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Sporeweb Weaver", 208, Rarity.RARE, mage.cards.s.SporewebWeaver.class));
         cards.add(new SetCardInfo("Storm Caller", 335, Rarity.COMMON, mage.cards.s.StormCaller.class));
         cards.add(new SetCardInfo("Stormwing Entity", 73, Rarity.RARE, mage.cards.s.StormwingEntity.class));
+        cards.add(new SetCardInfo("Sublime Epiphany", 74, Rarity.RARE, mage.cards.s.SublimeEpiphany.class));
         cards.add(new SetCardInfo("Swamp", 311, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Teferi's Ageless Insight", 76, Rarity.RARE, mage.cards.t.TeferisAgelessInsight.class));
         cards.add(new SetCardInfo("Teferi's Protege", 77, Rarity.COMMON, mage.cards.t.TeferisProtege.class));
