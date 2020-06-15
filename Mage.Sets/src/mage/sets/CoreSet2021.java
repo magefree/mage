@@ -125,6 +125,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Mazemind Tome", 232, Rarity.RARE, mage.cards.m.MazemindTome.class));
         cards.add(new SetCardInfo("Meteorite", 233, Rarity.UNCOMMON, mage.cards.m.Meteorite.class));
         cards.add(new SetCardInfo("Miscast", 57, Rarity.UNCOMMON, mage.cards.m.Miscast.class));
+        cards.add(new SetCardInfo("Mistral Singer", 58, Rarity.COMMON, mage.cards.m.MistralSinger.class));
         cards.add(new SetCardInfo("Mountain", 269, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mystic Skyfish", 326, Rarity.COMMON, mage.cards.m.MysticSkyfish.class));
         cards.add(new SetCardInfo("Necromentia", 116, Rarity.RARE, mage.cards.n.Necromentia.class));
