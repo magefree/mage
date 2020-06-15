@@ -1,5 +1,10 @@
 package mage.game.command;
 
+import java.lang.reflect.Constructor;
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.ObjectColor;
@@ -24,17 +29,12 @@ import mage.util.GameLog;
 import mage.util.RandomUtil;
 import mage.util.SubTypeList;
 
-import java.lang.reflect.Constructor;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.UUID;
-
 /**
  * @author spjspj
  */
 public class Plane implements CommandObject {
 
-    private static EnumSet<CardType> emptySet = EnumSet.noneOf(CardType.class);
+    private static ArrayList<CardType> emptySet = new ArrayList<>();
     private static ObjectColor emptyColor = new ObjectColor();
     private static ManaCosts emptyCost = new ManaCostsImpl();
 
@@ -157,7 +157,7 @@ public class Plane implements CommandObject {
     }
 
     @Override
-    public EnumSet<CardType> getCardType() {
+    public ArrayList<CardType> getCardType() {
         return emptySet;
     }
 

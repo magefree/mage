@@ -1,6 +1,7 @@
 package mage;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import mage.abilities.Abilities;
@@ -30,7 +31,7 @@ public interface MageObject extends MageItem, Serializable {
 
     void setName(String name);
 
-    Set<CardType> getCardType();
+    ArrayList<CardType> getCardType();
 
     SubTypeList getSubtype(Game game);
 
@@ -41,6 +42,8 @@ public interface MageObject extends MageItem, Serializable {
     /**
      * For cards: return basic abilities (without dynamic added) For permanents:
      * return all abilities (dynamic ability inserts into permanent)
+     *
+     * @return
      */
     Abilities<Ability> getAbilities();
 
@@ -201,7 +204,7 @@ public interface MageObject extends MageItem, Serializable {
 
     void setIsAllCreatureTypes(boolean value);
 
-    default void addCardTypes(Set<CardType> cardType) {
+    default void addCardTypes(ArrayList<CardType> cardType) {
         getCardType().addAll(cardType);
     }
 

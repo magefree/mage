@@ -1,5 +1,6 @@
 package mage.game.stack;
 
+import java.util.*;
 import mage.MageInt;
 import mage.MageObject;
 import mage.Mana;
@@ -30,8 +31,6 @@ import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.util.GameLog;
 import mage.util.SubTypeList;
-
-import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -467,14 +466,14 @@ public class Spell extends StackObjImpl implements Card {
     }
 
     @Override
-    public Set<CardType> getCardType() {
+    public ArrayList<CardType> getCardType() {
         if (faceDown) {
-            EnumSet<CardType> cardTypes = EnumSet.noneOf(CardType.class);
+            ArrayList<CardType> cardTypes = new ArrayList<>();
             cardTypes.add(CardType.CREATURE);
             return cardTypes;
         }
         if (this.getSpellAbility() instanceof BestowAbility) {
-            EnumSet<CardType> cardTypes = EnumSet.noneOf(CardType.class);
+            ArrayList<CardType> cardTypes = new ArrayList<>();
             cardTypes.addAll(card.getCardType());
             cardTypes.remove(CardType.CREATURE);
             return cardTypes;

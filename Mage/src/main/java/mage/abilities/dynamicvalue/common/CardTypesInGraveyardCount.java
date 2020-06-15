@@ -1,5 +1,6 @@
 package mage.abilities.dynamicvalue.common;
 
+import java.util.ArrayList;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
@@ -7,8 +8,6 @@ import mage.cards.Card;
 import mage.constants.CardType;
 import mage.game.Game;
 import mage.players.Player;
-
-import java.util.EnumSet;
 
 /**
  * @author JayDi85
@@ -21,7 +20,7 @@ public enum CardTypesInGraveyardCount implements DynamicValue {
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         Player controller = game.getPlayer(sourceAbility.getControllerId());
         if (controller != null) {
-            EnumSet<CardType> foundCardTypes = EnumSet.noneOf(CardType.class);
+            ArrayList<CardType> foundCardTypes = new ArrayList<>();
             for (Card card : controller.getGraveyard().getCards(game)) {
                 foundCardTypes.addAll(card.getCardType());
             }

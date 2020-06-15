@@ -24,6 +24,7 @@ public final class TilonallisSummonerElementalToken extends TokenImpl {
         super(token);
     }
 
+    @Override
     public TilonallisSummonerElementalToken copy() {
         return new TilonallisSummonerElementalToken(this);
     }
