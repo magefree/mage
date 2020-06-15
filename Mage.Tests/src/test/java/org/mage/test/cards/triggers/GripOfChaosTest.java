@@ -18,11 +18,10 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class GripOfChaosTest extends CardTestPlayerBase {
 
     /**
-     * From #6344
-     * I just had a game where we had an interaction between Grip of Chaos,
-     * Felidar Guardian, and Panharmonicon in which the cloned Felidar trigger
-     * fizzled with valid targets on field because Grip retargeted that trigger
-     * onto Felidar itself, which isn't a valid target. Grip of Chaos
+     * From #6344 I just had a game where we had an interaction between Grip of
+     * Chaos, Felidar Guardian, and Panharmonicon in which the cloned Felidar
+     * trigger fizzled with valid targets on field because Grip retargeted that
+     * trigger onto Felidar itself, which isn't a valid target. Grip of Chaos
      * specifically states it only chooses from valid targets when retargeting,
      * so this is a bug somewhere in that interaction, though whether it only
      * happens with cloned triggers or if there's a bad interaction between Grip
@@ -33,11 +32,11 @@ public class GripOfChaosTest extends CardTestPlayerBase {
         // Whenever a spell or ability is put onto the stack, if it has a single target, reselect its target at random.
         addCard(Zone.BATTLEFIELD, playerB, "Grip of Chaos", 1); // Enchantment
 
-        // If an artifact or creature entering the battlefield causes a triggered ability 
+        // If an artifact or creature entering the battlefield causes a triggered ability
         // of a permanent you control to trigger, that ability triggers an additional time.
         addCard(Zone.BATTLEFIELD, playerA, "Panharmonicon", 1); // Artifact
 
-        // When Felidar Guardian enters the battlefield, you may exile another target permanent you control, 
+        // When Felidar Guardian enters the battlefield, you may exile another target permanent you control,
         // then return that card to the battlefield under its owner's control.
         addCard(Zone.HAND, playerA, "Felidar Guardian"); // Creature {3}{W}
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
@@ -63,33 +62,31 @@ public class GripOfChaosTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerA, "Felidar Guardian", 1);
-        
+
         int zcc = 0;
         zcc += getPermanent("Mountain").getZoneChangeCounter(currentGame);
         zcc += getPermanent("Forest").getZoneChangeCounter(currentGame);
         zcc += getPermanent("Swamp").getZoneChangeCounter(currentGame);
         zcc += getPermanent("Plains").getZoneChangeCounter(currentGame);
         zcc += getPermanent("Panharmonicon").getZoneChangeCounter(currentGame);
+        // If both select the same permanent to exile, one spell fizzles so zcc == 7 otherwise 9
         if (zcc != 7) {
-          Assert.assertEquals("Sum of zone change counter should be 9", 9, zcc);
-          assertAllCommandsUsed(); // creates error if the random targets do select the same target twice zcc is 7 then the second trigger has an invalid target
+            Assert.assertEquals("Sum of zone change counter should be 9", 9, zcc);
+            assertAllCommandsUsed(); // creates error if the random targets do select the same target twice zcc is 7 then the second trigger has an invalid target
         }
     }
 
     /**
-     * Maybe also good situation to create an test for
-     * 9/20/2016 Panharmonicon
-     * 
-     * In some cases involving linked abilities, an ability requires
-     * information about “the exiled card.” When this happens, the ability gets
-     * multiple answers. If these answers are being used to determine the value
-     * of a variable, the sum is used. For example, if Elite Arcanist’s
+     * Maybe also good situation to create an test for 9/20/2016 Panharmonicon
+     *
+     * In some cases involving linked abilities, an ability requires information
+     * about “the exiled card.” When this happens, the ability gets multiple
+     * answers. If these answers are being used to determine the value of a
+     * variable, the sum is used. For example, if Elite Arcanist’s
      * enters-the-battlefield ability triggers twice, two cards are exiled. The
      * value of X in the activation cost of Elite Arcanist’s other ability is
      * the sum of the two cards’ converted mana costs. As the ability resolves,
      * you create copies of both cards and can cast none, one, or both of the
      * copies in any order.
      */
-    
-    
 }
