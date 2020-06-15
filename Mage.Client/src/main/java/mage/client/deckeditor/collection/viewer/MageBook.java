@@ -562,8 +562,8 @@ public class MageBook extends JComponent {
                     Constructor<?> cons = c.getConstructor();
                     Object newToken = cons.newInstance();
                     if (newToken instanceof Token) {
-                        ((Token) newToken).setExpansionSetCodeForImage(set);
                         ((Token) newToken).setOriginalExpansionSetCode(set);
+                        ((Token) newToken).setExpansionSetCodeForImage(set);
                         ((Token) newToken).setTokenType(token.getType());
                         tokens.add((Token) newToken);
                     }
@@ -632,6 +632,10 @@ public class MageBook extends JComponent {
                     // Swallow exception
                 }
             }
+        }
+
+        if (emblems.size() == 0) {
+            return emblems;
         }
 
         int totalTokens = getTotalNumTokens(set);
@@ -917,8 +921,8 @@ public class MageBook extends JComponent {
 
     private int currentPage = 0;
     private String currentSet = "RTR";
-    private int currentCardsInSet = 0;
-    private int currentCardsNotInSet = 0;
+    private final int currentCardsInSet = 0;
+    private final int currentCardsNotInSet = 0;
 
     private static CardDimensions cardDimensions = new CardDimensions(1.2d);
     private static final Logger log = Logger.getLogger(MageBook.class);

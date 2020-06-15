@@ -370,7 +370,10 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             copyAbility.setSourceId(objectId);
             // triggered abilities must be added to the state().triggers
             // still as long as the prev. permanent is known to the LKI (e.g. Showstopper) so gained dies triggered ability will trigger
-            game.getState().addAbility(copyAbility, sourceId, this);
+            if (game != null) {
+                // game is null in cards viewer window (MageBook)
+                game.getState().addAbility(copyAbility, sourceId, this);
+            }
             abilities.add(copyAbility);
         }
     }
@@ -400,7 +403,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public void removeAbilities(List<Ability> abilitiesToRemove, UUID sourceId, Game game){
+    public void removeAbilities(List<Ability> abilitiesToRemove, UUID sourceId, Game game) {
         if (abilitiesToRemove == null) {
             return;
         }

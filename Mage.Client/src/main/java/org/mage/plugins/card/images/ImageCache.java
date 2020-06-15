@@ -47,7 +47,7 @@ public final class ImageCache {
     private static final SoftValuesLoadingCache<String, BufferedImage> FACE_IMAGE_CACHE;
 
     /**
-     * Common pattern for keys. Format: "<cardname>#<setname>#<collectorID>"
+     * Common pattern for keys. See ImageCache.getKey for structure info
      */
     private static final Pattern KEY_PATTERN = Pattern.compile("(.*)#(.*)#(.*)#(.*)#(.*)#(.*)");
 
@@ -428,11 +428,14 @@ public final class ImageCache {
      * Returns the map key for a card, without any suffixes for the image size.
      */
     private static String getKey(CardView card, String name, String suffix) {
-        return name + '#' + card.getExpansionSetCode() + '#' + card.getType() + '#' + card.getCardNumber() + '#'
-                + (card.getTokenSetCode() == null ? "" : card.getTokenSetCode())
+        return name
+                + '#' + card.getExpansionSetCode()
+                + '#' + card.getType()
+                + '#' + card.getCardNumber()
+                + '#' + (card.getTokenSetCode() == null ? "" : card.getTokenSetCode())
                 + suffix
                 + (card.getUsesVariousArt() ? "#usesVariousArt" : "")
-                + (card.getTokenDescriptor() != null ? '#' + card.getTokenDescriptor() : "#");
+                + '#' + (card.getTokenDescriptor() != null ? card.getTokenDescriptor() : "");
     }
 
     /**
