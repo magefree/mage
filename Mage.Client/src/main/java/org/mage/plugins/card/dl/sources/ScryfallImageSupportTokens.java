@@ -110,7 +110,6 @@ public class ScryfallImageSupportTokens {
             put("AKH/Anointer Priest", "https://api.scryfall.com/cards/takh/2/en?format=image");
             put("AKH/Aven Initiate", "https://api.scryfall.com/cards/takh/3/en?format=image");
             put("AKH/Aven Wind Guide", "https://api.scryfall.com/cards/takh/4/en?format=image");
-            put("AKH/Gideon of the Trials Emblem", "https://api.scryfall.com/cards/takh/25/en?format=image");
             put("AKH/Glyph Keeper", "https://api.scryfall.com/cards/takh/5/en?format=image");
             put("AKH/Heart-Piercer Manticore", "https://api.scryfall.com/cards/takh/6/en?format=image");
             put("AKH/Honored Hydra", "https://api.scryfall.com/cards/takh/7/en?format=image");
@@ -203,9 +202,6 @@ public class ScryfallImageSupportTokens {
             put("BFZ/Emblem Nixilis", "https://api.scryfall.com/cards/tbfz/13/en?format=image");
             put("BFZ/Octopus", "https://api.scryfall.com/cards/tbfz/7/en?format=image");
             put("BFZ/Plant", "https://api.scryfall.com/cards/tbfz/10/en?format=image");
-
-            // C17
-
 
             // WAR
             put("WAR/Angel", "https://api.scryfall.com/cards/twar/2/en?format=image");
