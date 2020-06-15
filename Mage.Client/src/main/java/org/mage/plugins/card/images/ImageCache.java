@@ -84,13 +84,21 @@ public final class ImageCache {
 
                         boolean cardback = false;
                         String path;
-                        if (collectorId.isEmpty() || "0".equals(collectorId)) {
+                        if (collectorId.isEmpty() || "0".equals(collectorId) || !tokenDescriptor.isEmpty()) { // tokenDescriptor for embalm ability
                             info.setToken(true);
                             path = CardImageUtils.generateTokenImagePath(info);
                             if (path == null) {
                                 cardback = true;
-                                // TODO: replace empty token by other default card, not cardback
-                                path = CardImageUtils.buildImagePathToDefault(DirectLinksForDownload.cardbackFilename);
+                                // try token image from card
+                                CardDownloadData newInfo = new CardDownloadData(info);
+                                newInfo.setToken(false);
+                                path = CardImageUtils.buildImagePathToCard(newInfo);
+                                TFile tokenFile = getTFile(path);
+                                if (tokenFile == null || !tokenFile.exists()) {
+                                    // token empty token image
+                                    // TODO: replace empty token by other default card, not cardback
+                                    path = CardImageUtils.buildImagePathToDefault(DirectLinksForDownload.cardbackFilename);
+                                }
                             }
                         } else {
                             path = CardImageUtils.buildImagePathToCard(info);
@@ -245,12 +253,20 @@ public final class ImageCache {
             CardDownloadData info = new CardDownloadData(name, set, collectorId, usesVariousArt, type, tokenSetCode, tokenDescriptor);
 
             String path;
-            if (collectorId.isEmpty() || "0".equals(collectorId)) {
+            if (collectorId.isEmpty() || "0".equals(collectorId) || !tokenDescriptor.isEmpty()) { // tokenDescriptor for embalm ability
                 info.setToken(true);
-                path = CardImageUtils.generateFullTokenImagePath(info);
+                path = CardImageUtils.generateTokenImagePath(info);
                 if (path == null) {
-                    // TODO: replace empty token by other default card, not cardback
-                    path = CardImageUtils.buildImagePathToDefault(DirectLinksForDownload.cardbackFilename);
+                    // try token image from card
+                    CardDownloadData newInfo = new CardDownloadData(info);
+                    newInfo.setToken(false);
+                    path = CardImageUtils.buildImagePathToCard(newInfo);
+                    TFile tokenFile = getTFile(path);
+                    if (tokenFile == null || !tokenFile.exists()) {
+                        // token empty token image
+                        // TODO: replace empty token by other default card, not cardback
+                        path = CardImageUtils.buildImagePathToDefault(DirectLinksForDownload.cardbackFilename);
+                    }
                 }
             } else {
                 path = CardImageUtils.buildImagePathToCard(info);

@@ -168,30 +168,34 @@
 |Generate|TOK:AER|Etherium Cell|||EtheriumCellToken|
 |Generate|TOK:AER|Gremlin|||GremlinToken|
 |Generate|TOK:AER|Ragavan|||RagavanToken|
+
+# AKH
 |Generate|TOK:AKH|Beast|||BeastToken3|
 |Generate|TOK:AKH|Cat|||CatToken2|
 |Generate|TOK:AKH|Drake|||DrakeToken|
 |Generate|TOK:AKH|Hippo|||HippoToken2|
+|Generate|TOK:AKH|Insect|||NestOfScarabsBlackInsectToken|
 |Generate|TOK:AKH|Snake|||DeathtouchSnakeToken|
 |Generate|TOK:AKH|Warrior|||WarriorVigilantToken|
 |Generate|TOK:AKH|Wurm|||Wurm55Token|
-|Generate|TOK:AKH|Zombie|||ZombieToken
+|Generate|TOK:AKH|Zombie|||ZombieToken|
 #TOK:AKH - some tokens from real cards (see Embalm ability)
-#|Generate|TOK:AKH|Angel of Sanctions||
-#|Generate|TOK:AKH|Anointer Priest||
-#|Generate|TOK:AKH|Aven Initiate||
-#|Generate|TOK:AKH|Aven Wind Guide||
-#|Generate|TOK:AKH|Glyph Keeper||
-#|Generate|TOK:AKH|Heart-Piercer Manticore||
-#|Generate|TOK:AKH|Honored Hydra||
-#|Generate|TOK:AKH|Labyrinth Guardian||
-#|Generate|TOK:AKH|Oketra's Attendant||
-#|Generate|TOK:AKH|Sacred Cat||
-#|Generate|TOK:AKH|Tah-Crop Skirmisher||
-#|Generate|TOK:AKH|Temmet, Vizier of Naktamun||
-#|Generate|TOK:AKH|Trueheart Duelist||
-#|Generate|TOK:AKH|Unwavering Initiate||
-#|Generate|TOK:AKH|Vizier of Many Faces||
+|Generate|TOK:AKH|Angel of Sanctions||
+|Generate|TOK:AKH|Anointer Priest||
+|Generate|TOK:AKH|Aven Initiate||
+|Generate|TOK:AKH|Aven Wind Guide||
+|Generate|TOK:AKH|Glyph Keeper||
+|Generate|TOK:AKH|Heart-Piercer Manticore||
+|Generate|TOK:AKH|Honored Hydra||
+|Generate|TOK:AKH|Labyrinth Guardian||
+|Generate|TOK:AKH|Oketra's Attendant||
+|Generate|TOK:AKH|Sacred Cat||
+|Generate|TOK:AKH|Tah-Crop Skirmisher||
+|Generate|TOK:AKH|Temmet, Vizier of Naktamun||
+|Generate|TOK:AKH|Trueheart Duelist||
+|Generate|TOK:AKH|Unwavering Initiate||
+|Generate|TOK:AKH|Vizier of Many Faces||
+
 |Generate|TOK:ALA|Beast|||GodSireBeastToken|
 |Generate|TOK:ALA|Dragon|||DragonToken|
 |Generate|TOK:ALA|Goblin|||GoblinTokenWithHaste|

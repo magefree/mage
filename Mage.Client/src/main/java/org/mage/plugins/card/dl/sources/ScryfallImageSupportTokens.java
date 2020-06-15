@@ -94,16 +94,34 @@ public class ScryfallImageSupportTokens {
             put("HOU/Insect", "https://api.scryfall.com/cards/thou/12/en?format=image");
             put("HOU/Snake", "https://api.scryfall.com/cards/thou/11/en?format=image");
 
-            //AKH
+            //AKH - tokens
             put("AKH/Beast", "https://api.scryfall.com/cards/takh/21/en?format=image");
             put("AKH/Cat", "https://api.scryfall.com/cards/takh/16/en?format=image");
             put("AKH/Drake", "https://api.scryfall.com/cards/takh/18/en?format=image");
             put("AKH/Emblem Gideon", "https://api.scryfall.com/cards/takh/25/en?format=image");
             put("AKH/Hippo", "https://api.scryfall.com/cards/takh/22/en?format=image");
+            put("AKH/Insect", "https://api.scryfall.com/cards/takh/19/en?format=image");
             put("AKH/Snake", "https://api.scryfall.com/cards/takh/23/en?format=image");
             put("AKH/Warrior", "https://api.scryfall.com/cards/takh/17/en?format=image");
             put("AKH/Wurm", "https://api.scryfall.com/cards/takh/24/en?format=image");
             put("AKH/Zombie", "https://api.scryfall.com/cards/takh/20/en?format=image");
+            //AKH - embalm ability (token from card)
+            put("AKH/Angel of Sanctions", "https://api.scryfall.com/cards/takh/1/en?format=image");
+            put("AKH/Anointer Priest", "https://api.scryfall.com/cards/takh/2/en?format=image");
+            put("AKH/Aven Initiate", "https://api.scryfall.com/cards/takh/3/en?format=image");
+            put("AKH/Aven Wind Guide", "https://api.scryfall.com/cards/takh/4/en?format=image");
+            put("AKH/Gideon of the Trials Emblem", "https://api.scryfall.com/cards/takh/25/en?format=image");
+            put("AKH/Glyph Keeper", "https://api.scryfall.com/cards/takh/5/en?format=image");
+            put("AKH/Heart-Piercer Manticore", "https://api.scryfall.com/cards/takh/6/en?format=image");
+            put("AKH/Honored Hydra", "https://api.scryfall.com/cards/takh/7/en?format=image");
+            put("AKH/Labyrinth Guardian", "https://api.scryfall.com/cards/takh/8/en?format=image");
+            put("AKH/Oketra's Attendant", "https://api.scryfall.com/cards/takh/9/en?format=image");
+            put("AKH/Sacred Cat", "https://api.scryfall.com/cards/takh/10/en?format=image");
+            put("AKH/Tah-Crop Skirmisher", "https://api.scryfall.com/cards/takh/11/en?format=image");
+            put("AKH/Temmet, Vizier of Naktamun", "https://api.scryfall.com/cards/takh/12/en?format=image");
+            put("AKH/Trueheart Duelist", "https://api.scryfall.com/cards/takh/13/en?format=image");
+            put("AKH/Unwavering Initiate", "https://api.scryfall.com/cards/takh/14/en?format=image");
+            put("AKH/Vizier of Many Faces", "https://api.scryfall.com/cards/takh/15/en?format=image");
 
             //AER
             put("AER/Etherium Cell", "https://api.scryfall.com/cards/taer/3/en?format=image");
@@ -187,7 +205,7 @@ public class ScryfallImageSupportTokens {
             put("BFZ/Plant", "https://api.scryfall.com/cards/tbfz/10/en?format=image");
 
             // C17
-            
+
 
             // WAR
             put("WAR/Angel", "https://api.scryfall.com/cards/twar/2/en?format=image");
