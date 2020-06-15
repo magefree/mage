@@ -75,11 +75,11 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Fabled Passage", 246, Rarity.RARE, mage.cards.f.FabledPassage.class));
         cards.add(new SetCardInfo("Faith's Fetters", 17, Rarity.UNCOMMON, mage.cards.f.FaithsFetters.class));
         cards.add(new SetCardInfo("Falconer Adept", 18, Rarity.UNCOMMON, mage.cards.f.FalconerAdept.class));
-        cards.add(new SetCardInfo("Feline Sovereign", 180, Rarity.RARE, mage.cards.f.FelineSovereign.class, ExpansionSet.NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Feline Sovereign", 374, Rarity.RARE, mage.cards.f.FelineSovereign.class, ExpansionSet.NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Feline Sovereign", 180, Rarity.RARE, mage.cards.f.FelineSovereign.class));
         cards.add(new SetCardInfo("Fierce Empath", 181, Rarity.UNCOMMON, mage.cards.f.FierceEmpath.class));
         cards.add(new SetCardInfo("Fiery Emancipation", 143, Rarity.MYTHIC, mage.cards.f.FieryEmancipation.class));
         cards.add(new SetCardInfo("Finishing Blow", 99, Rarity.COMMON, mage.cards.f.FinishingBlow.class));
+        cards.add(new SetCardInfo("Forest", 272, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Frantic Inventory", 50, Rarity.COMMON, mage.cards.f.FranticInventory.class));
         cards.add(new SetCardInfo("Fungal Rebirth", 182, Rarity.UNCOMMON, mage.cards.f.FungalRebirth.class));
         cards.add(new SetCardInfo("Furious Rise", 144, Rarity.UNCOMMON, mage.cards.f.FuriousRise.class));
@@ -87,6 +87,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Garruk's Gorehorn", 184, Rarity.COMMON, mage.cards.g.GarruksGorehorn.class));
         cards.add(new SetCardInfo("Garruk's Warsteed", 337, Rarity.RARE, mage.cards.g.GarruksWarsteed.class));
         cards.add(new SetCardInfo("Garruk, Savage Herald", 336, Rarity.MYTHIC, mage.cards.g.GarrukSavageHerald.class));
+        cards.add(new SetCardInfo("Glorious Anthem", 21, Rarity.RARE, mage.cards.g.GloriousAnthem.class));
         cards.add(new SetCardInfo("Goblin Arsonist", 147, Rarity.COMMON, mage.cards.g.GoblinArsonist.class));
         cards.add(new SetCardInfo("Goremand", 101, Rarity.UNCOMMON, mage.cards.g.Goremand.class));
         cards.add(new SetCardInfo("Grasp of Darkness", 102, Rarity.COMMON, mage.cards.g.GraspOfDarkness.class));
@@ -100,11 +101,12 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Igneous Cur", 153, Rarity.COMMON, mage.cards.i.IgneousCur.class));
         cards.add(new SetCardInfo("Indulging Patrician", 219, Rarity.UNCOMMON, mage.cards.i.IndulgingPatrician.class));
         cards.add(new SetCardInfo("Invigorating Surge", 190, Rarity.UNCOMMON, mage.cards.i.InvigoratingSurge.class));
-        cards.add(new SetCardInfo("Island", 310, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 263, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jeskai Elder", 53, Rarity.UNCOMMON, mage.cards.j.JeskaiElder.class));
         cards.add(new SetCardInfo("Jolrael, Mwonvuli Recluse", 191, Rarity.RARE, mage.cards.j.JolraelMwonvuliRecluse.class));
         cards.add(new SetCardInfo("Kaervek, the Spiteful", 106, Rarity.RARE, mage.cards.k.KaervekTheSpiteful.class));
         cards.add(new SetCardInfo("Keral Keep Disciples", 334, Rarity.UNCOMMON, mage.cards.k.KeralKeepDisciples.class));
+        cards.add(new SetCardInfo("Kitesail Freebooter", 107, Rarity.UNCOMMON, mage.cards.k.KitesailFreebooter.class));
         cards.add(new SetCardInfo("Library Larcenist", 55, Rarity.COMMON, mage.cards.l.LibraryLarcenist.class));
         cards.add(new SetCardInfo("Light of Promise", 25, Rarity.UNCOMMON, mage.cards.l.LightOfPromise.class));
         cards.add(new SetCardInfo("Liliana's Devotee", 109, Rarity.UNCOMMON, mage.cards.l.LilianasDevotee.class));
@@ -123,7 +125,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Mazemind Tome", 232, Rarity.RARE, mage.cards.m.MazemindTome.class));
         cards.add(new SetCardInfo("Meteorite", 233, Rarity.UNCOMMON, mage.cards.m.Meteorite.class));
         cards.add(new SetCardInfo("Miscast", 57, Rarity.UNCOMMON, mage.cards.m.Miscast.class));
-        cards.add(new SetCardInfo("Mountain", 312, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 269, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mystic Skyfish", 326, Rarity.COMMON, mage.cards.m.MysticSkyfish.class));
         cards.add(new SetCardInfo("Necromentia", 116, Rarity.RARE, mage.cards.n.Necromentia.class));
         cards.add(new SetCardInfo("Obsessive Stitcher", 223, Rarity.UNCOMMON, mage.cards.o.ObsessiveStitcher.class));
@@ -131,7 +133,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Palladium Myr", 234, Rarity.UNCOMMON, mage.cards.p.PalladiumMyr.class));
         cards.add(new SetCardInfo("Peer into the Abyss", 117, Rarity.RARE, mage.cards.p.PeerIntoTheAbyss.class));
         cards.add(new SetCardInfo("Pestilent Haze", 118, Rarity.UNCOMMON, mage.cards.p.PestilentHaze.class));
-        cards.add(new SetCardInfo("Plains", 309, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 260, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Predatory Wurm", 338, Rarity.UNCOMMON, mage.cards.p.PredatoryWurm.class));
         cards.add(new SetCardInfo("Pridemalkin", 196, Rarity.COMMON, mage.cards.p.Pridemalkin.class));
         cards.add(new SetCardInfo("Primal Might", 197, Rarity.RARE, mage.cards.p.PrimalMight.class));
@@ -166,7 +168,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Storm Caller", 335, Rarity.COMMON, mage.cards.s.StormCaller.class));
         cards.add(new SetCardInfo("Stormwing Entity", 73, Rarity.RARE, mage.cards.s.StormwingEntity.class));
         cards.add(new SetCardInfo("Sublime Epiphany", 74, Rarity.RARE, mage.cards.s.SublimeEpiphany.class));
-        cards.add(new SetCardInfo("Swamp", 311, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 266, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Teferi's Ageless Insight", 76, Rarity.RARE, mage.cards.t.TeferisAgelessInsight.class));
         cards.add(new SetCardInfo("Teferi's Protege", 77, Rarity.COMMON, mage.cards.t.TeferisProtege.class));
         cards.add(new SetCardInfo("Teferi's Tutelage", 78, Rarity.UNCOMMON, mage.cards.t.TeferisTutelage.class));
@@ -189,6 +191,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Valorous Steed", 42, Rarity.COMMON, mage.cards.v.ValorousSteed.class));
         cards.add(new SetCardInfo("Village Rites", 126, Rarity.COMMON, mage.cards.v.VillageRites.class));
         cards.add(new SetCardInfo("Vito, Thorn of the Dusk Rose", 127, Rarity.RARE, mage.cards.v.VitoThornOfTheDuskRose.class));
+        cards.add(new SetCardInfo("Volcanic Geyser", 171, Rarity.UNCOMMON, mage.cards.v.VolcanicGeyser.class));
         cards.add(new SetCardInfo("Volcanic Salvo", 172, Rarity.RARE, mage.cards.v.VolcanicSalvo.class));
         cards.add(new SetCardInfo("Vryn Wingmare", 43, Rarity.UNCOMMON, mage.cards.v.VrynWingmare.class));
         cards.add(new SetCardInfo("Waker of Waves", 84, Rarity.UNCOMMON, mage.cards.w.WakerOfWaves.class));
