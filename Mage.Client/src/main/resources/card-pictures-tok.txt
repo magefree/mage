@@ -174,7 +174,7 @@
 |Generate|TOK:AKH|Hippo|||HippoToken2|
 |Generate|TOK:AKH|Snake|||DeathtouchSnakeToken|
 |Generate|TOK:AKH|Warrior|||WarriorVigilantToken|
-|Generate|TOK:AKH|Wurm|||WurmToken3|
+|Generate|TOK:AKH|Wurm|||Wurm55Token|
 |Generate|TOK:AKH|Zombie|||ZombieToken
 #TOK:AKH - some tokens from real cards (see Embalm ability)
 #|Generate|TOK:AKH|Angel of Sanctions||
@@ -319,8 +319,8 @@
 |Generate|TOK:C14|Treefolk|||SylvanOfferingTreefolkToken|
 |Generate|TOK:C14|Whale|||ReefWormWhaleToken|
 |Generate|TOK:C14|Wolf|||WolfToken|
-|Generate|TOK:C14|Wurm|1||Wurm1Token|
-|Generate|TOK:C14|Wurm|2||Wurm2Token|
+|Generate|TOK:C14|Wurm|1||WurmWithDeathtouchToken|
+|Generate|TOK:C14|Wurm|2||WurmWithLifelinkToken|
 |Generate|TOK:C14|Zombie|1||ZombieToken|
 |Generate|TOK:C14|Zombie|2||StitcherGeralfZombieToken|
 |Generate|TOK:C15|Angel|||AngelToken|
@@ -567,8 +567,8 @@
 |Generate|TOK:DGM|Rhino|||RhinoToken|
 |Generate|TOK:DGM|Soldier|||SoldierTokenWithHaste|
 |Generate|TOK:DGM|Spirit|||TeysaEnvoyOfGhostsToken|
-|Generate|TOK:DGM|Wurm|||WurmToken2|
-|Generate|TOK:DGM|Wurm|||WurmToken3|
+|Generate|TOK:DGM|Wurm|1||WurmWithTrampleToken|
+|Generate|TOK:DGM|Wurm|2||Wurm55Token|
 |Generate|TOK:DIS|Bird|||DovescapeToken|
 |Generate|TOK:DIS|Drake|||LeafdrakeRoostDrakeToken|
 |Generate|TOK:DIS|Elemental|||ResearchDevelopmentToken|
@@ -1070,7 +1070,7 @@
 |Generate|TOK:RTR|Rhino|||RhinoToken|
 |Generate|TOK:RTR|Saproling|||SaprolingToken|
 |Generate|TOK:RTR|Soldier|||SoldierToken|
-|Generate|TOK:RTR|Wurm|||WurmToken2|
+|Generate|TOK:RTR|Wurm|||WurmWithTrampleToken|
 |Generate|TOK:SCG|Angel|||AngelToken|
 |Generate|TOK:SCG|Beast|||BeastToken2|
 |Generate|TOK:SCG|Dragon|||DragonToken2|
@@ -1118,8 +1118,8 @@
 |Generate|TOK:SOM|Myr|||MyrToken|
 |Generate|TOK:SOM|Soldier|||SoldierToken|
 |Generate|TOK:SOM|Wolf|||WolfToken|
-|Generate|TOK:SOM|Wurm|1||Wurm1Token|
-|Generate|TOK:SOM|Wurm|2||Wurm2Token|
+|Generate|TOK:SOM|Wurm|1||WurmWithDeathtouchToken|
+|Generate|TOK:SOM|Wurm|2||WurmWithLifelinkToken|
 |Generate|TOK:STH|Goblin|||GoblinToken|
 |Generate|TOK:STH|Insect|||HornetToken|
 |Generate|TOK:STH|Insect|||WaspToken|
@@ -1214,8 +1214,8 @@
 |Generate|TOK:VMA|Spirit|||SpiritWhiteToken|
 |Generate|TOK:VMA|Squirrel|||SquirrelToken|
 |Generate|TOK:VMA|Thopter|||ThopterColorlessToken|
-|Generate|TOK:VMA|Wurm|||PenumbraWurmToken|
-|Generate|TOK:VMA|Wurm|||WurmToken|
+|Generate|TOK:VMA|Wurm|1||PenumbraWurmToken|
+|Generate|TOK:VMA|Wurm|2||WurmToken|
 |Generate|TOK:VMA|Zombie|||ZombieToken|
 |Generate|TOK:WTH|Squirrel|||SquirrelToken|
 |Generate|TOK:WWK|Construct|||StoneTrapIdolToken|

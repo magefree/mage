@@ -186,6 +186,9 @@ public class ScryfallImageSupportTokens {
             put("BFZ/Octopus", "https://api.scryfall.com/cards/tbfz/7/en?format=image");
             put("BFZ/Plant", "https://api.scryfall.com/cards/tbfz/10/en?format=image");
 
+            // C17
+            
+
             // WAR
             put("WAR/Angel", "https://api.scryfall.com/cards/twar/2/en?format=image");
             put("WAR/Assassin", "https://api.scryfall.com/cards/twar/6/en?format=image");
