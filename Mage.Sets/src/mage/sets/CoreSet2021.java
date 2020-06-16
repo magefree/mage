@@ -185,6 +185,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Rain of Revelation", 61, Rarity.UNCOMMON, mage.cards.r.RainOfRevelation.class));
         cards.add(new SetCardInfo("Rambunctious Mutt", 30, Rarity.COMMON, mage.cards.r.RambunctiousMutt.class));
         cards.add(new SetCardInfo("Ranger's Guile", 199, Rarity.COMMON, mage.cards.r.RangersGuile.class));
+        cards.add(new SetCardInfo("Read the Tides", 62, Rarity.COMMON, mage.cards.r.ReadTheTides.class));
         cards.add(new SetCardInfo("Return to Nature", 200, Rarity.COMMON, mage.cards.r.ReturnToNature.class));
         cards.add(new SetCardInfo("Revitalize", 31, Rarity.COMMON, mage.cards.r.Revitalize.class));
         cards.add(new SetCardInfo("Rewind", 63, Rarity.UNCOMMON, mage.cards.r.Rewind.class));
