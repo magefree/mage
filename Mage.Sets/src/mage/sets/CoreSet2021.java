@@ -275,5 +275,6 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Wildwood Scourge", 214, Rarity.UNCOMMON, mage.cards.w.WildwoodScourge.class));
         cards.add(new SetCardInfo("Wind-Scarred Crag", 259, Rarity.COMMON, mage.cards.w.WindScarredCrag.class));
         cards.add(new SetCardInfo("Wishcoin Crab", 86, Rarity.COMMON, mage.cards.w.WishcoinCrab.class));
+        cards.add(new SetCardInfo("Witch's Cauldron", 129, Rarity.UNCOMMON, mage.cards.w.WitchsCauldron.class));
     }
 }
