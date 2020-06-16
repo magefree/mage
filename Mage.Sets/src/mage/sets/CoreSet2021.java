@@ -53,6 +53,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Bloodfell Caves", 243, Rarity.COMMON, mage.cards.b.BloodfellCaves.class));
         cards.add(new SetCardInfo("Blossoming Sands", 244, Rarity.COMMON, mage.cards.b.BlossomingSands.class));
         cards.add(new SetCardInfo("Bolt Hound", 131, Rarity.UNCOMMON, mage.cards.b.BoltHound.class));
+        cards.add(new SetCardInfo("Bone Pit Brute", 132, Rarity.COMMON, mage.cards.b.BonePitBrute.class));
         cards.add(new SetCardInfo("Brash Taunter", 133, Rarity.RARE, mage.cards.b.BrashTaunter.class));
         cards.add(new SetCardInfo("Burlfist Oak", 174, Rarity.UNCOMMON, mage.cards.b.BurlfistOak.class));
         cards.add(new SetCardInfo("Burn Bright", 134, Rarity.COMMON, mage.cards.b.BurnBright.class));
