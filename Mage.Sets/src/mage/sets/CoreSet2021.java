@@ -75,6 +75,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Concordia Pegasus", 12, Rarity.COMMON, mage.cards.c.ConcordiaPegasus.class));
         cards.add(new SetCardInfo("Containment Priest", 13, Rarity.RARE, mage.cards.c.ContainmentPriest.class));
         cards.add(new SetCardInfo("Crash Through", 140, Rarity.COMMON, mage.cards.c.CrashThrough.class));
+        cards.add(new SetCardInfo("Crypt Lurker", 93, Rarity.COMMON, mage.cards.c.CryptLurker.class));
         cards.add(new SetCardInfo("Cultivate", 177, Rarity.UNCOMMON, mage.cards.c.Cultivate.class));
         cards.add(new SetCardInfo("Deathbloom Thallid", 94, Rarity.COMMON, mage.cards.d.DeathbloomThallid.class));
         cards.add(new SetCardInfo("Defiant Strike", 15, Rarity.COMMON, mage.cards.d.DefiantStrike.class));
