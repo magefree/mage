@@ -317,13 +317,6 @@ public class CardView extends SimpleCardView {
             }
         }
 
-        AdventureCard adventureCard = null;
-        AdventureCardSpell adventureCardSpell = null;
-        if (card instanceof AdventureCard) {
-            adventureCard = (AdventureCard) card;
-            adventureCardSpell = (AdventureCardSpell) adventureCard.getSpellCard();
-        }
-
         String fullCardName;
         if (splitCard != null) {
             this.isSplitCard = true;
@@ -339,7 +332,9 @@ public class CardView extends SimpleCardView {
             fullCardName = card.getName(); // split card contains full name as normal
             this.manaCostLeft = splitCard.getLeftHalfCard().getManaCost().getSymbols();
             this.manaCostRight = splitCard.getRightHalfCard().getManaCost().getSymbols();
-        } else if (adventureCard != null) {
+        } else if (card instanceof AdventureCard) {
+            AdventureCard adventureCard = ((AdventureCard) card);
+            AdventureCardSpell adventureCardSpell = ((AdventureCardSpell) adventureCard.getSpellCard());            
             fullCardName = adventureCard.getName() + MockCard.ADVENTURE_NAME_SEPARATOR + adventureCardSpell.getName();
             this.manaCostLeft = adventureCardSpell.getManaCost().getSymbols();
             this.manaCostRight = adventureCard.getManaCost().getSymbols();
@@ -466,7 +461,7 @@ public class CardView extends SimpleCardView {
                 } else if (spell.getCard() != null) {
                     SplitCard wholeCard = ((SplitCardHalf) spell.getCard()).getParentCard();
                     Abilities<Ability> aftermathHalfAbilities = wholeCard.getRightHalfCard().getAbilities(game);
-                    if (aftermathHalfAbilities.stream().anyMatch(ability -> ability instanceof AftermathAbility)) {
+                    if (aftermathHalfAbilities.stream().anyMatch(halfAbility -> halfAbility instanceof AftermathAbility)) {
                         if (ty == SpellAbilityType.SPLIT_RIGHT) {
                             artRect = ArtRect.AFTERMATH_BOTTOM;
                         } else {
@@ -1029,26 +1024,25 @@ public class CardView extends SimpleCardView {
     }
 
     public String getColorText() {
-
-        String color = getColor().getDescription();
-        return color.substring(0, 1).toUpperCase(Locale.ENGLISH) + color.substring(1);
+        String colorText = getColor().getDescription();
+        return colorText.substring(0, 1).toUpperCase(Locale.ENGLISH) + colorText.substring(1);
     }
 
     public String getTypeText() {
-        StringBuilder type = new StringBuilder();
+        StringBuilder typeText = new StringBuilder();
         if (!getSuperTypes().isEmpty()) {
-            type.append(String.join(" ", getSuperTypes().stream().map(SuperType::toString).collect(Collectors.toList())));
-            type.append(" ");
+            typeText.append(String.join(" ", getSuperTypes().stream().map(SuperType::toString).collect(Collectors.toList())));
+            typeText.append(" ");
         }
         if (!getCardTypes().isEmpty()) {
-            type.append(String.join(" ", getCardTypes().stream().map(CardType::toString).collect(Collectors.toList())));
-            type.append(" ");
+            typeText.append(String.join(" ", getCardTypes().stream().map(CardType::toString).collect(Collectors.toList())));
+            typeText.append(" ");
         }
         if (!getSubTypes().isEmpty()) {
-            type.append(" - ");
-            type.append(String.join(" ", getSubTypes().stream().map(SubType::toString).collect(Collectors.toList())));
+            typeText.append(" - ");
+            typeText.append(String.join(" ", getSubTypes().stream().map(SubType::toString).collect(Collectors.toList())));
         }
-        return type.toString();
+        return typeText.toString();
     }
 
     public boolean isLand() {
