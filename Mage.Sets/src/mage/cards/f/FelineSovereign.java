@@ -82,7 +82,7 @@ class FelineSovereignTriggeredAbility extends TriggeredAbilityImpl {
     private final Set<UUID> damagedPlayerIds = new HashSet<>();
 
     public FelineSovereignTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DestroyTargetEffect(), true);
+        super(Zone.BATTLEFIELD, new DestroyTargetEffect(), false);
     }
 
     public FelineSovereignTriggeredAbility(final FelineSovereignTriggeredAbility ability) {
