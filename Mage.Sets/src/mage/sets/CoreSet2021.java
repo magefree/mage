@@ -268,6 +268,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Waker of Waves", 84, Rarity.UNCOMMON, mage.cards.w.WakerOfWaves.class));
         cards.add(new SetCardInfo("Walking Corpse", 128, Rarity.COMMON, mage.cards.w.WalkingCorpse.class));
         cards.add(new SetCardInfo("Wall of Runes", 85, Rarity.COMMON, mage.cards.w.WallOfRunes.class));
+        cards.add(new SetCardInfo("Warded Battlements", 44, Rarity.COMMON, mage.cards.w.WardedBattlements.class));
         cards.add(new SetCardInfo("Warden of the Woods", 213, Rarity.UNCOMMON, mage.cards.w.WardenOfTheWoods.class));
         cards.add(new SetCardInfo("Wildwood Patrol", 339, Rarity.COMMON, mage.cards.w.WildwoodPatrol.class));
         cards.add(new SetCardInfo("Wildwood Scourge", 214, Rarity.UNCOMMON, mage.cards.w.WildwoodScourge.class));
