@@ -102,6 +102,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Fiery Emancipation", 143, Rarity.MYTHIC, mage.cards.f.FieryEmancipation.class));
         cards.add(new SetCardInfo("Finishing Blow", 99, Rarity.COMMON, mage.cards.f.FinishingBlow.class));
         cards.add(new SetCardInfo("Forest", 272, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forgotten Sentinel", 231, Rarity.COMMON, mage.cards.f.ForgottenSentinel.class));
         cards.add(new SetCardInfo("Frantic Inventory", 50, Rarity.COMMON, mage.cards.f.FranticInventory.class));
         cards.add(new SetCardInfo("Frost Breath", 51, Rarity.COMMON, mage.cards.f.FrostBreath.class));
         cards.add(new SetCardInfo("Fungal Rebirth", 182, Rarity.UNCOMMON, mage.cards.f.FungalRebirth.class));
