@@ -3,6 +3,8 @@ package mage.cards.repository;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
+import java.util.*;
+import java.util.stream.Collectors;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -14,9 +16,6 @@ import mage.constants.*;
 import mage.util.CardUtil;
 import mage.util.SubTypeList;
 import org.apache.log4j.Logger;
-
-import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @author North
@@ -289,8 +288,8 @@ public class CardInfo {
         return res;
     }
 
-    public final Set<CardType> getTypes() {
-        Set<CardType> list = EnumSet.noneOf(CardType.class);
+    public final ArrayList<CardType> getTypes() {
+        ArrayList<CardType> list = new ArrayList<>();
         for (String type : this.types.split(SEPARATOR)) {
             try {
                 list.add(CardType.valueOf(type));
@@ -300,7 +299,7 @@ public class CardInfo {
         return list;
     }
 
-    public final void setTypes(Set<CardType> types) {
+    public final void setTypes(ArrayList<CardType> types) {
         StringBuilder sb = new StringBuilder();
         for (CardType item : types) {
             sb.append(item.name()).append(SEPARATOR);

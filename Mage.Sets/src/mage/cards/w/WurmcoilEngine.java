@@ -1,7 +1,5 @@
-
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
@@ -12,11 +10,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.game.permanent.token.Wurm1Token;
-import mage.game.permanent.token.Wurm2Token;
+import mage.game.permanent.token.WurmWithDeathtouchToken;
+import mage.game.permanent.token.WurmWithLifelinkToken;
+
+import java.util.UUID;
 
 /**
- *
  * @author Loki
  */
 public final class WurmcoilEngine extends CardImpl {
@@ -32,8 +31,8 @@ public final class WurmcoilEngine extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // When Wurmcoil Engine dies, create a 3/3 colorless Wurm artifact creature token with deathtouch and a 3/3 colorless Wurm artifact creature token with lifelink.
-        Ability ability = new DiesTriggeredAbility(new CreateTokenEffect(new Wurm1Token(expansionSetCode)), false);
-        ability.addEffect(new CreateTokenEffect(new Wurm2Token(expansionSetCode)));
+        Ability ability = new DiesTriggeredAbility(new CreateTokenEffect(new WurmWithDeathtouchToken()), false);
+        ability.addEffect(new CreateTokenEffect(new WurmWithLifelinkToken()));
         this.addAbility(ability);
     }
 

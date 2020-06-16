@@ -1,5 +1,9 @@
 package mage.game.stack;
 
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.ObjectColor;
@@ -30,17 +34,12 @@ import mage.util.GameLog;
 import mage.util.SubTypeList;
 import mage.watchers.Watcher;
 
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.UUID;
-
 /**
  * @author BetaSteward_at_googlemail.com
  */
 public class StackAbility extends StackObjImpl implements Ability {
 
-    private static EnumSet<CardType> emptyCardType = EnumSet.noneOf(CardType.class);
+    private static ArrayList<CardType> emptyCardType = new ArrayList<>();
     private static List<String> emptyString = new ArrayList<>();
     private static ObjectColor emptyColor = new ObjectColor();
     private static ManaCosts<ManaCost> emptyCost = new ManaCostsImpl<>();
@@ -153,7 +152,7 @@ public class StackAbility extends StackObjImpl implements Ability {
     }
 
     @Override
-    public EnumSet<CardType> getCardType() {
+    public ArrayList<CardType> getCardType() {
         return emptyCardType;
     }
 

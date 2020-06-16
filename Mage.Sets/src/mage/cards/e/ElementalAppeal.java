@@ -1,9 +1,5 @@
-
 package mage.cards.e;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.KickedCondition;
@@ -21,10 +17,13 @@ import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.game.Game;
-import mage.game.permanent.token.ElementalAppealElementalToken;
+import mage.game.permanent.token.RedElementalWithTrampleAndHaste;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
- *
  * @author North
  */
 public final class ElementalAppeal extends CardImpl {
@@ -69,7 +68,7 @@ class ElementalAppealEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        CreateTokenEffect effect = new CreateTokenEffect(new ElementalAppealElementalToken());
+        CreateTokenEffect effect = new CreateTokenEffect(new RedElementalWithTrampleAndHaste());
         if (effect.apply(game, source)) {
             effect.exileTokensCreatedAtNextEndStep(game, source);
             if (KickedCondition.instance.apply(game, source)) {

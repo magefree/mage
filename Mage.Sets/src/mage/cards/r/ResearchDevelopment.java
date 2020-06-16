@@ -1,28 +1,23 @@
-
 package mage.cards.r;
 
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.cards.Card;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.cards.SplitCard;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
-import mage.game.permanent.token.ElementalToken;
+import mage.game.permanent.token.ResearchDevelopmentToken;
 import mage.players.Player;
 import mage.target.TargetCard;
 
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author magenoxx
  */
 public final class ResearchDevelopment extends SplitCard {
@@ -144,7 +139,7 @@ class DevelopmentEffect extends OneShotEffect {
                 for (UUID opponentUuid : opponents) {
                     Player opponent = game.getPlayer(opponentUuid);
                     if (opponent != null && opponent.chooseUse(Outcome.Detriment,
-                            "Allow " + player.getLogName() + " to draw a card instead? (" + Integer.toString(i + 1) + ')', source, game)) {
+                            "Allow " + player.getLogName() + " to draw a card instead? (" + (i + 1) + ')', source, game)) {
                         game.informPlayers(opponent.getLogName() + " had chosen to let " + player.getLogName() + " draw a card.");
                         player.drawCards(1, source.getSourceId(), game);
                         putToken = false;
@@ -152,7 +147,7 @@ class DevelopmentEffect extends OneShotEffect {
                     }
                 }
                 if (putToken) {
-                    new CreateTokenEffect(new ElementalToken("DIS", 1)).apply(game, source);
+                    new CreateTokenEffect(new ResearchDevelopmentToken()).apply(game, source);
                 }
             }
 

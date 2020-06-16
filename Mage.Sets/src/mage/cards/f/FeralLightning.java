@@ -1,7 +1,5 @@
-
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -10,17 +8,18 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.permanent.token.ElementalToken;
+import mage.game.permanent.token.ElementalTokenWithHaste;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class FeralLightning extends CardImpl {
 
     public FeralLightning(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}{R}{R}");
 
         // Create three 3/1 red Elemental creature tokens with haste. Exile them at the beginning of the next end step.
         this.getSpellAbility().addEffect(new FeralLightningEffect());
@@ -57,7 +56,7 @@ class FeralLightningEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            CreateTokenEffect effect = new CreateTokenEffect(new ElementalToken("CON", 1, true), 3);
+            CreateTokenEffect effect = new CreateTokenEffect(new ElementalTokenWithHaste(), 3);
             effect.apply(game, source);
             effect.exileTokensCreatedAtNextEndStep(game, source);
             return true;

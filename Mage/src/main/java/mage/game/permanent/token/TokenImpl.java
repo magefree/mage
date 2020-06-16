@@ -2,15 +2,12 @@ package mage.game.permanent.token;
 
 import mage.MageObject;
 import mage.MageObjectImpl;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.CreateTokenEvent;
 import mage.game.events.CreatedTokenEvent;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
@@ -53,7 +50,8 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         }
     }
 
-    public TokenImpl() { }
+    public TokenImpl() {
+    }
 
     public TokenImpl(String name, String description) {
         this.name = name;
@@ -165,6 +163,9 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         if (controller == null) {
             return false;
         }
+        if (amount == 0) {
+            return false;
+        }
         lastAddedTokenIds.clear();
 
         CreateTokenEvent event = new CreateTokenEvent(sourceId, controllerId, amount, this);
@@ -240,6 +241,10 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         return tokenType;
     }
 
+    /**
+     * Set token index to search in card-pictures-tok.txt (if set have multiple tokens with same name)
+     * Default is 1
+     */
     @Override
     public void setTokenType(int tokenType) {
         this.tokenType = tokenType;

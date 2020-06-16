@@ -1,4 +1,3 @@
-
 package mage.game.permanent.token;
 
 import mage.MageInt;
@@ -6,14 +5,14 @@ import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.util.RandomUtil;
 
 /**
- *
  * @author spjspj
  */
-public final class ElementalAppealElementalToken extends TokenImpl {
+public final class RedElementalWithTrampleAndHaste extends TokenImpl {
 
-    public ElementalAppealElementalToken() {
+    public RedElementalWithTrampleAndHaste() {
         super("Elemental", "7/1 red Elemental creature token with trample and haste");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
@@ -24,11 +23,20 @@ public final class ElementalAppealElementalToken extends TokenImpl {
         addAbility(HasteAbility.getInstance());
     }
 
-    public ElementalAppealElementalToken(final ElementalAppealElementalToken token) {
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("ZEN")) {
+            setTokenType(RandomUtil.nextInt(2) + 1);
+        }
+    }
+
+    public RedElementalWithTrampleAndHaste(final RedElementalWithTrampleAndHaste token) {
         super(token);
     }
 
-    public ElementalAppealElementalToken copy() {
-        return new ElementalAppealElementalToken(this);
+    public RedElementalWithTrampleAndHaste copy() {
+        return new RedElementalWithTrampleAndHaste(this);
     }
 }

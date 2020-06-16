@@ -47,7 +47,7 @@ public final class ImageCache {
     private static final SoftValuesLoadingCache<String, BufferedImage> FACE_IMAGE_CACHE;
 
     /**
-     * Common pattern for keys. Format: "<cardname>#<setname>#<collectorID>"
+     * Common pattern for keys. See ImageCache.getKey for structure info
      */
     private static final Pattern KEY_PATTERN = Pattern.compile("(.*)#(.*)#(.*)#(.*)#(.*)#(.*)");
 
@@ -84,13 +84,21 @@ public final class ImageCache {
 
                         boolean cardback = false;
                         String path;
-                        if (collectorId.isEmpty() || "0".equals(collectorId)) {
+                        if (collectorId.isEmpty() || "0".equals(collectorId) || !tokenDescriptor.isEmpty()) { // tokenDescriptor for embalm ability
                             info.setToken(true);
                             path = CardImageUtils.generateTokenImagePath(info);
                             if (path == null) {
                                 cardback = true;
-                                // TODO: replace empty token by other default card, not cardback
-                                path = CardImageUtils.buildImagePathToDefault(DirectLinksForDownload.cardbackFilename);
+                                // try token image from card
+                                CardDownloadData newInfo = new CardDownloadData(info);
+                                newInfo.setToken(false);
+                                path = CardImageUtils.buildImagePathToCard(newInfo);
+                                TFile tokenFile = getTFile(path);
+                                if (tokenFile == null || !tokenFile.exists()) {
+                                    // token empty token image
+                                    // TODO: replace empty token by other default card, not cardback
+                                    path = CardImageUtils.buildImagePathToDefault(DirectLinksForDownload.cardbackFilename);
+                                }
                             }
                         } else {
                             path = CardImageUtils.buildImagePathToCard(info);
@@ -245,12 +253,20 @@ public final class ImageCache {
             CardDownloadData info = new CardDownloadData(name, set, collectorId, usesVariousArt, type, tokenSetCode, tokenDescriptor);
 
             String path;
-            if (collectorId.isEmpty() || "0".equals(collectorId)) {
+            if (collectorId.isEmpty() || "0".equals(collectorId) || !tokenDescriptor.isEmpty()) { // tokenDescriptor for embalm ability
                 info.setToken(true);
-                path = CardImageUtils.generateFullTokenImagePath(info);
+                path = CardImageUtils.generateTokenImagePath(info);
                 if (path == null) {
-                    // TODO: replace empty token by other default card, not cardback
-                    path = CardImageUtils.buildImagePathToDefault(DirectLinksForDownload.cardbackFilename);
+                    // try token image from card
+                    CardDownloadData newInfo = new CardDownloadData(info);
+                    newInfo.setToken(false);
+                    path = CardImageUtils.buildImagePathToCard(newInfo);
+                    TFile tokenFile = getTFile(path);
+                    if (tokenFile == null || !tokenFile.exists()) {
+                        // token empty token image
+                        // TODO: replace empty token by other default card, not cardback
+                        path = CardImageUtils.buildImagePathToDefault(DirectLinksForDownload.cardbackFilename);
+                    }
                 }
             } else {
                 path = CardImageUtils.buildImagePathToCard(info);
@@ -428,11 +444,14 @@ public final class ImageCache {
      * Returns the map key for a card, without any suffixes for the image size.
      */
     private static String getKey(CardView card, String name, String suffix) {
-        return name + '#' + card.getExpansionSetCode() + '#' + card.getType() + '#' + card.getCardNumber() + '#'
-                + (card.getTokenSetCode() == null ? "" : card.getTokenSetCode())
+        return name
+                + '#' + card.getExpansionSetCode()
+                + '#' + card.getType()
+                + '#' + card.getCardNumber()
+                + '#' + (card.getTokenSetCode() == null ? "" : card.getTokenSetCode())
                 + suffix
                 + (card.getUsesVariousArt() ? "#usesVariousArt" : "")
-                + (card.getTokenDescriptor() != null ? '#' + card.getTokenDescriptor() : "#");
+                + '#' + (card.getTokenDescriptor() != null ? card.getTokenDescriptor() : "");
     }
 
     /**

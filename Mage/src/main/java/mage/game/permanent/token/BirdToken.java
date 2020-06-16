@@ -1,15 +1,13 @@
-
-
 package mage.game.permanent.token;
 
-import java.util.Arrays;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.Arrays;
+
 /**
- *
  * @author LoneFox
  */
 public final class BirdToken extends TokenImpl {
@@ -22,6 +20,7 @@ public final class BirdToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
         addAbility(FlyingAbility.getInstance());
+
         availableImageSetCodes.addAll(Arrays.asList("BNG", "RTR", "ZEN", "C16", "MM3", "DGM"));
     }
 
@@ -30,7 +29,7 @@ public final class BirdToken extends TokenImpl {
     }
 
     @Override
-        public BirdToken copy() {
+    public BirdToken copy() {
         return new BirdToken(this);
     }
 

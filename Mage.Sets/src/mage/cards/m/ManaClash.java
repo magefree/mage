@@ -1,5 +1,6 @@
 package mage.cards.m;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -10,8 +11,6 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
 
-import java.util.UUID;
-
 /**
  * @author LevelX2
  */
@@ -20,7 +19,8 @@ public final class ManaClash extends CardImpl {
     public ManaClash(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{R}");
 
-        // You and target opponent each flip a coin. Mana Clash deals 1 damage to each player whose coin comes up tails. Repeat this process until both players' coins come up heads on the same flip.
+        // You and target opponent each flip a coin. Mana Clash deals 1 damage to each player whose coin comes up tails.
+        // Repeat this process until both players' coins come up heads on the same flip.
         this.getSpellAbility().addEffect(new ManaClashEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
     }

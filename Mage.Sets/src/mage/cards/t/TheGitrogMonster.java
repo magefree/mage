@@ -1,7 +1,5 @@
-
 package mage.cards.t;
 
-import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
@@ -29,7 +27,7 @@ import mage.target.common.TargetControlledPermanent;
 public final class TheGitrogMonster extends CardImpl {
 
     public TheGitrogMonster(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{G}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.FROG);
         this.subtype.add(SubType.HORROR);
@@ -79,12 +77,10 @@ class TheGitrogMonsterTriggeredAbility extends TriggeredAbilityImpl {
         ZoneChangeGroupEvent zEvent = (ZoneChangeGroupEvent) event;
         if (zEvent != null && Zone.GRAVEYARD == zEvent.getToZone() && zEvent.getCards() != null) {
             for (Card card : zEvent.getCards()) {
-                if (card != null) {                    
+                if (card != null) {
                     UUID cardOwnerId = card.getOwnerId();
-                    Set<CardType> cardType = card.getCardType();
                     if (cardOwnerId != null
                             && card.isOwnedBy(getControllerId())
-                            && cardType != null
                             && card.isLand()) {
                         return true;
                     }
