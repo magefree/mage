@@ -49,6 +49,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Basri's Solidarity", 10, Rarity.UNCOMMON, mage.cards.b.BasrisSolidarity.class));
         cards.add(new SetCardInfo("Basri, Devoted Paladin", 320, Rarity.MYTHIC, mage.cards.b.BasriDevotedPaladin.class));
         cards.add(new SetCardInfo("Battle-Rattle Shaman", 130, Rarity.UNCOMMON, mage.cards.b.BattleRattleShaman.class));
+        cards.add(new SetCardInfo("Blood Glutton", 90, Rarity.COMMON, mage.cards.b.BloodGlutton.class));
         cards.add(new SetCardInfo("Bloodfell Caves", 243, Rarity.COMMON, mage.cards.b.BloodfellCaves.class));
         cards.add(new SetCardInfo("Blossoming Sands", 244, Rarity.COMMON, mage.cards.b.BlossomingSands.class));
         cards.add(new SetCardInfo("Bolt Hound", 131, Rarity.UNCOMMON, mage.cards.b.BoltHound.class));
