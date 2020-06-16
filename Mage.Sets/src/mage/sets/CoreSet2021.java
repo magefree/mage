@@ -155,6 +155,8 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Rousing Read", 67, Rarity.COMMON, mage.cards.r.RousingRead.class));
         cards.add(new SetCardInfo("Runed Halo", 32, Rarity.RARE, mage.cards.r.RunedHalo.class));
         cards.add(new SetCardInfo("Sabertooth Mauler", 202, Rarity.COMMON, mage.cards.s.SabertoothMauler.class));
+        cards.add(new SetCardInfo("Sanctum of Calm Waters", 68, Rarity.UNCOMMON, mage.cards.s.SanctumOfCalmWaters.class));
+        cards.add(new SetCardInfo("Sanctum of Shattered Heights", 157, Rarity.UNCOMMON, mage.cards.s.SanctumOfShatteredHeights.class));
         cards.add(new SetCardInfo("Scavenging Ooze", 204, Rarity.RARE, mage.cards.s.ScavengingOoze.class));
         cards.add(new SetCardInfo("Seasoned Hallowblade", 34, Rarity.UNCOMMON, mage.cards.s.SeasonedHallowblade.class));
         cards.add(new SetCardInfo("See the Truth", 69, Rarity.RARE, mage.cards.s.SeeTheTruth.class));
@@ -191,6 +193,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Tolarian Kraken", 80, Rarity.UNCOMMON, mage.cards.t.TolarianKraken.class));
         cards.add(new SetCardInfo("Tormod's Crypt", 241, Rarity.UNCOMMON, mage.cards.t.TormodsCrypt.class));
         cards.add(new SetCardInfo("Traitorous Greed", 166, Rarity.UNCOMMON, mage.cards.t.TraitorousGreed.class));
+        cards.add(new SetCardInfo("Transmogrify", 167, Rarity.RARE, mage.cards.t.Transmogrify.class));
         cards.add(new SetCardInfo("Trufflesnout", 212, Rarity.COMMON, mage.cards.t.Trufflesnout.class));
         cards.add(new SetCardInfo("Ugin, the Spirit Dragon", 1, Rarity.MYTHIC, mage.cards.u.UginTheSpiritDragon.class));
         cards.add(new SetCardInfo("Unleash Fury", 170, Rarity.UNCOMMON, mage.cards.u.UnleashFury.class));
@@ -203,6 +206,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Vryn Wingmare", 43, Rarity.UNCOMMON, mage.cards.v.VrynWingmare.class));
         cards.add(new SetCardInfo("Waker of Waves", 84, Rarity.UNCOMMON, mage.cards.w.WakerOfWaves.class));
         cards.add(new SetCardInfo("Warden of the Woods", 213, Rarity.UNCOMMON, mage.cards.w.WardenOfTheWoods.class));
+        cards.add(new SetCardInfo("Watcher of the Spheres", 227, Rarity.UNCOMMON, mage.cards.w.WatcherOfTheSpheres.class));
         cards.add(new SetCardInfo("Wildwood Patrol", 339, Rarity.COMMON, mage.cards.w.WildwoodPatrol.class));
         cards.add(new SetCardInfo("Wildwood Scourge", 214, Rarity.UNCOMMON, mage.cards.w.WildwoodScourge.class));
     }
