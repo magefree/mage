@@ -1,9 +1,5 @@
-
 package mage.cards.f;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -15,11 +11,7 @@ import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -31,33 +23,40 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 public final class FelineSovereign extends CardImpl {
 
     private static final FilterCreaturePermanent filterCat = new FilterCreaturePermanent("Cats");
+
     static {
         filterCat.add(SubType.CAT.getPredicate());
         filterCat.add(TargetController.YOU.getControllerPredicate());
     }
 
     private static final FilterCard filterProtectionFromDogs = new FilterCard("Dogs");
+
     static {
         filterProtectionFromDogs.add(SubType.DOG.getPredicate());
     }
 
     public FelineSovereign(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.subtype.add(SubType.CAT);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        // Other cats get +1/+1
+        // Other Cats you control get +1/+1 and have protection from Dogs.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterCat, true));
-        // Cats you control have protection from Dogs
-        Effect effect = new GainAbilityAllEffect(new ProtectionAbility(filterProtectionFromDogs), Duration.WhileOnBattlefield, filterCat);
+        //
+        Effect effect = new GainAbilityAllEffect(new ProtectionAbility(filterProtectionFromDogs), Duration.WhileOnBattlefield, filterCat, true);
         effect.setText("and have protection from Dogs");
         ability.addEffect(effect);
         this.addAbility(ability);
-        // if a cat deals combat damage to a player you may destroy up to one artifact/enchantment
+
+        // Whenever one or more Cats you control deal combat damage to a player, destroy up to one target artifact or enchantment that player controls.
         this.addAbility(new FelineSovereignTriggeredAbility());
     }
 
@@ -74,12 +73,13 @@ public final class FelineSovereign extends CardImpl {
 class FelineSovereignTriggeredAbility extends TriggeredAbilityImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Cat you control");
+
     static {
         filter.add(TargetController.YOU.getControllerPredicate());
         filter.add(SubType.CAT.getPredicate());
     }
-    
-    private Set<UUID> damagedPlayerIds = new HashSet<>();
+
+    private final Set<UUID> damagedPlayerIds = new HashSet<>();
 
     public FelineSovereignTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect(), true);
@@ -113,7 +113,7 @@ class FelineSovereignTriggeredAbility extends TriggeredAbilityImpl {
                 this.getTargets().clear();
                 FilterArtifactOrEnchantmentPermanent filter = new FilterArtifactOrEnchantmentPermanent();
                 filter.add(new ControllerIdPredicate(event.getPlayerId()));
-                this.addTarget(new TargetPermanent(0, 1, filter, false)); 
+                this.addTarget(new TargetPermanent(0, 1, filter, false));
                 return true;
             }
         }
