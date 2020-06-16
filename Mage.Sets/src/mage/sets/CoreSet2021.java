@@ -254,6 +254,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Trufflesnout", 212, Rarity.COMMON, mage.cards.t.Trufflesnout.class));
         cards.add(new SetCardInfo("Turn to Slag", 168, Rarity.COMMON, mage.cards.t.TurnToSlag.class));
         cards.add(new SetCardInfo("Turret Ogre", 169, Rarity.COMMON, mage.cards.t.TurretOgre.class));
+        cards.add(new SetCardInfo("Twinblade Assassin", 226, Rarity.UNCOMMON, mage.cards.t.TwinbladeAssassin.class));
         cards.add(new SetCardInfo("Ugin, the Spirit Dragon", 1, Rarity.MYTHIC, mage.cards.u.UginTheSpiritDragon.class));
         cards.add(new SetCardInfo("Unleash Fury", 170, Rarity.UNCOMMON, mage.cards.u.UnleashFury.class));
         cards.add(new SetCardInfo("Unsubstantiate", 82, Rarity.UNCOMMON, mage.cards.u.Unsubstantiate.class));
