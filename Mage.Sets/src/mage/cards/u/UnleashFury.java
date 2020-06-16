@@ -60,7 +60,7 @@ class UnleashFuryEffect extends OneShotEffect {
             return false;
         }
         game.addEffect(new BoostTargetEffect(
-                2 * permanent.getPower().getValue(), 0, Duration.EndOfTurn
+                permanent.getPower().getValue(), 0, Duration.EndOfTurn
         ), source);
         return true;
     }
