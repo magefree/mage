@@ -69,6 +69,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Chandra, Flame's Catalyst", 332, Rarity.MYTHIC, mage.cards.c.ChandraFlamesCatalyst.class));
         cards.add(new SetCardInfo("Chandra, Heart of Fire", 135, Rarity.MYTHIC, mage.cards.c.ChandraHeartOfFire.class));
         cards.add(new SetCardInfo("Chromatic Orrery", 228, Rarity.MYTHIC, mage.cards.c.ChromaticOrrery.class));
+        cards.add(new SetCardInfo("Chrome Replicator", 229, Rarity.UNCOMMON, mage.cards.c.ChromeReplicator.class));
         cards.add(new SetCardInfo("Colossal Dreadmaw", 176, Rarity.COMMON, mage.cards.c.ColossalDreadmaw.class));
         cards.add(new SetCardInfo("Conclave Mentor", 216, Rarity.UNCOMMON, mage.cards.c.ConclaveMentor.class));
         cards.add(new SetCardInfo("Concordia Pegasus", 12, Rarity.COMMON, mage.cards.c.ConcordiaPegasus.class));
