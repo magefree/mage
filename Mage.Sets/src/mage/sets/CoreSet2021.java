@@ -77,6 +77,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Crash Through", 140, Rarity.COMMON, mage.cards.c.CrashThrough.class));
         cards.add(new SetCardInfo("Crypt Lurker", 93, Rarity.COMMON, mage.cards.c.CryptLurker.class));
         cards.add(new SetCardInfo("Cultivate", 177, Rarity.UNCOMMON, mage.cards.c.Cultivate.class));
+        cards.add(new SetCardInfo("Daybreak Charger", 14, Rarity.COMMON, mage.cards.d.DaybreakCharger.class));
         cards.add(new SetCardInfo("Deathbloom Thallid", 94, Rarity.COMMON, mage.cards.d.DeathbloomThallid.class));
         cards.add(new SetCardInfo("Defiant Strike", 15, Rarity.COMMON, mage.cards.d.DefiantStrike.class));
         cards.add(new SetCardInfo("Destructive Tampering", 141, Rarity.COMMON, mage.cards.d.DestructiveTampering.class));
