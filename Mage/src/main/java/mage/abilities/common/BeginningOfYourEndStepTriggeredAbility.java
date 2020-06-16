@@ -15,6 +15,10 @@ public class BeginningOfYourEndStepTriggeredAbility extends TriggeredAbilityImpl
         super(Zone.BATTLEFIELD, effect, optional);
     }
 
+    public BeginningOfYourEndStepTriggeredAbility(Zone zone, Effect effect, boolean optional) {
+        super(zone, effect, optional);
+    }
+
     public BeginningOfYourEndStepTriggeredAbility(final BeginningOfYourEndStepTriggeredAbility ability) {
         super(ability);
     }

@@ -56,7 +56,7 @@ public final class GarrukUnleashed extends CardImpl {
                 .setText("Then if an opponent controls more creatures than you, put a loyalty counter on {this}"));
         this.addAbility(ability);
 
-        // −7: Create an emblem with "At the beginning of your end step, you may search your library for a creature card, put it onto the battlefield, then shuffle your library."
+        // −7: You get an emblem with "At the beginning of your end step, you may search your library for a creature card, put it onto the battlefield, then shuffle your library."
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new GarrukUnleashedEmblem()), -7));
     }
 
