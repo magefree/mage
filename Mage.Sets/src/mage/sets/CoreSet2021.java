@@ -154,6 +154,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Makeshift Battalion", 26, Rarity.COMMON, mage.cards.m.MakeshiftBattalion.class));
         cards.add(new SetCardInfo("Malefic Scythe", 112, Rarity.UNCOMMON, mage.cards.m.MaleficScythe.class));
         cards.add(new SetCardInfo("Mangara, the Diplomat", 27, Rarity.MYTHIC, mage.cards.m.MangaraTheDiplomat.class));
+        cards.add(new SetCardInfo("Masked Blackguard", 113, Rarity.COMMON, mage.cards.m.MaskedBlackguard.class));
         cards.add(new SetCardInfo("Massacre Wurm", 114, Rarity.MYTHIC, mage.cards.m.MassacreWurm.class));
         cards.add(new SetCardInfo("Mazemind Tome", 232, Rarity.RARE, mage.cards.m.MazemindTome.class));
         cards.add(new SetCardInfo("Meteorite", 233, Rarity.UNCOMMON, mage.cards.m.Meteorite.class));
