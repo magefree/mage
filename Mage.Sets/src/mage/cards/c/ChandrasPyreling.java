@@ -2,7 +2,6 @@ package mage.cards.c;
 
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
@@ -17,17 +16,17 @@ import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
- *
  * @author htrajan
  */
 public final class ChandrasPyreling extends CardImpl {
 
     public ChandrasPyreling(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        
+
         this.subtype.add(SubType.ELEMENTAL);
         this.subtype.add(SubType.LIZARD);
         this.power = new MageInt(1);
@@ -49,16 +48,13 @@ public final class ChandrasPyreling extends CardImpl {
 
 class ChandrasPyrelingAbility extends TriggeredAbilityImpl {
 
-    private static final Effect effect = new BoostSourceEffect(1, 0, Duration.EndOfTurn);
-
     ChandrasPyrelingAbility() {
-        super(Zone.BATTLEFIELD, effect);
+        super(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn));
         addEffect(new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn));
     }
 
-    private ChandrasPyrelingAbility(ChandrasPyrelingAbility ability) {
+    private ChandrasPyrelingAbility(final ChandrasPyrelingAbility ability) {
         super(ability);
-        addEffect(new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn));
     }
 
     @Override
@@ -76,7 +72,7 @@ class ChandrasPyrelingAbility extends TriggeredAbilityImpl {
         DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
         return !damageEvent.isCombatDamage()
                 && game.getOpponents(controllerId).contains(event.getTargetId())
-                && game.getControllerId(event.getSourceId()).equals(controllerId);
+                && Objects.equals(controllerId, game.getControllerId(event.getSourceId()));
     }
 
     @Override

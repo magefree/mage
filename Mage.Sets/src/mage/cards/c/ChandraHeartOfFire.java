@@ -12,42 +12,41 @@ import mage.abilities.effects.common.ExileTop3MayPlayUntilEndOfTurnEffect;
 import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.abilities.effects.common.discard.DiscardHandControllerEffect;
 import mage.abilities.effects.mana.BasicManaEffect;
-import mage.cards.*;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetCard;
+import mage.target.Target;
 import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetCardInLibrary;
+import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTargets;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
- *
  * @author htrajan
  */
 public final class ChandraHeartOfFire extends CardImpl {
 
     public ChandraHeartOfFire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{R}{R}");
-        
+
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.CHANDRA);
         this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
 
         // +1: Discard your hand, then exile the top three cards of your library. Until end of turn, you may play cards exiled this way.
         Ability ability = new LoyaltyAbility(new DiscardHandControllerEffect(), 1);
-        ability.addEffect(new ExileTop3MayPlayUntilEndOfTurnEffect() {{
-            setText(", then " + getText(null));
-        }});
+        ability.addEffect(new ExileTop3MayPlayUntilEndOfTurnEffect().concatBy(", then"));
         this.addAbility(ability);
 
         // +1: Chandra, Heart of Fire deals 2 damage to any target.
@@ -73,7 +72,7 @@ public final class ChandraHeartOfFire extends CardImpl {
 
 class ChandraHeartOfFireUltimateEffect extends OneShotEffect {
 
-    private static final FilterCard filter = new FilterCard();
+    private static final FilterCard filter = new FilterCard("red instant or sorcery");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.RED));
@@ -100,22 +99,22 @@ class ChandraHeartOfFireUltimateEffect extends OneShotEffect {
         if (controller != null) {
             Set<Card> exiledCards = new HashSet<>();
 
-            filter.setMessage("red instant or sorcery in your graveyard");
-            TargetCard target = new TargetCard(0, Integer.MAX_VALUE, Zone.GRAVEYARD, filter);
-            if (controller.choose(Outcome.Exile, controller.getGraveyard(), target, game)) {
-                List<UUID> targets = target.getTargets();
-                controller.moveCards(new CardsImpl(targets), Zone.EXILED, source, game);
-                exiledCards.addAll(targets.stream().map(game::getCard).collect(Collectors.toList()));
+            // from graveyard
+            Target target = new TargetCardInYourGraveyard(0, Integer.MAX_VALUE, filter, true).withChooseHint("from graveyard");
+            if (target.canChoose(source.getSourceId(), controller.getId(), game)
+                    && target.choose(Outcome.AIDontUseIt, controller.getId(), source.getSourceId(), game)) {
+                Set<Card> cards = new CardsImpl(target.getTargets()).getCards(game);
+                controller.moveCards(cards, Zone.EXILED, source, game);
+                exiledCards.addAll(cards);
             }
 
-            filter.setMessage("red instant or sorcery in your library");
-            Cards cardsInLibrary = new CardsImpl();
-            cardsInLibrary.addAll(controller.getLibrary().getCards(game));
-            target = new TargetCardInLibrary(0, Integer.MAX_VALUE, filter);
-            if (controller.choose(Outcome.Exile, cardsInLibrary, target, game)) {
-                List<UUID> targets = target.getTargets();
-                controller.moveCards(new CardsImpl(targets), Zone.EXILED, source, game);
-                exiledCards.addAll(targets.stream().map(game::getCard).collect(Collectors.toList()));
+            // from library
+            target = new TargetCardInLibrary(0, Integer.MAX_VALUE, filter).withChooseHint("from library");
+            if (target.canChoose(source.getSourceId(), controller.getId(), game)
+                    && target.choose(Outcome.AIDontUseIt, controller.getId(), source.getSourceId(), game)) {
+                Set<Card> cards = new CardsImpl(target.getTargets()).getCards(game);
+                controller.moveCards(cards, Zone.EXILED, source, game);
+                exiledCards.addAll(cards);
             }
             controller.shuffleLibrary(source, game);
 
