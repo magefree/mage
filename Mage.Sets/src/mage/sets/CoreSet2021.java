@@ -73,6 +73,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Duress", 96, Rarity.COMMON, mage.cards.d.Duress.class));
         cards.add(new SetCardInfo("Elder Gargaroth", 179, Rarity.MYTHIC, mage.cards.e.ElderGargaroth.class));
         cards.add(new SetCardInfo("Eliminate", 97, Rarity.UNCOMMON, mage.cards.e.Eliminate.class));
+        cards.add(new SetCardInfo("Experimental Overload", 218, Rarity.UNCOMMON, mage.cards.e.ExperimentalOverload.class));
         cards.add(new SetCardInfo("Fabled Passage", 246, Rarity.RARE, mage.cards.f.FabledPassage.class));
         cards.add(new SetCardInfo("Faith's Fetters", 17, Rarity.UNCOMMON, mage.cards.f.FaithsFetters.class));
         cards.add(new SetCardInfo("Falconer Adept", 18, Rarity.UNCOMMON, mage.cards.f.FalconerAdept.class));
