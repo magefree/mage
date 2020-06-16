@@ -221,6 +221,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Spined Megalodon", 72, Rarity.COMMON, mage.cards.s.SpinedMegalodon.class));
         cards.add(new SetCardInfo("Spirit of Malevolence", 331, Rarity.COMMON, mage.cards.s.SpiritOfMalevolence.class));
         cards.add(new SetCardInfo("Sporeweb Weaver", 208, Rarity.RARE, mage.cards.s.SporewebWeaver.class));
+        cards.add(new SetCardInfo("Staunch Shieldmate", 39, Rarity.COMMON, mage.cards.s.StaunchShieldmate.class));
         cards.add(new SetCardInfo("Storm Caller", 335, Rarity.COMMON, mage.cards.s.StormCaller.class));
         cards.add(new SetCardInfo("Stormwing Entity", 73, Rarity.RARE, mage.cards.s.StormwingEntity.class));
         cards.add(new SetCardInfo("Sublime Epiphany", 74, Rarity.RARE, mage.cards.s.SublimeEpiphany.class));
