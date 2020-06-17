@@ -61,6 +61,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Burn Bright", 134, Rarity.COMMON, mage.cards.b.BurnBright.class));
         cards.add(new SetCardInfo("Caged Zombie", 91, Rarity.COMMON, mage.cards.c.CagedZombie.class));
         cards.add(new SetCardInfo("Cancel", 46, Rarity.COMMON, mage.cards.c.Cancel.class));
+        cards.add(new SetCardInfo("Canopy Stalker", 175, Rarity.UNCOMMON, mage.cards.c.CanopyStalker.class));
         cards.add(new SetCardInfo("Capture Sphere", 47, Rarity.COMMON, mage.cards.c.CaptureSphere.class));
         cards.add(new SetCardInfo("Carrion Grub", 92, Rarity.UNCOMMON, mage.cards.c.CarrionGrub.class));
         cards.add(new SetCardInfo("Celestial Enforcer", 11, Rarity.COMMON, mage.cards.c.CelestialEnforcer.class));
