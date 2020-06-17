@@ -35,10 +35,10 @@ public final class SanctumOfCalmWaters extends CardImpl {
         this.subtype.add(SubType.SHRINE);
 
         // At the beginning of your precombat main phase, you may draw X cards, where X is the number of Shrines you control. If you do, discard a card.
-        Ability ability = new BeginningOfPreCombatMainTriggeredAbility(new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(filter)), TargetController.YOU, true);
-        Effect effect = new DiscardControllerEffect(1);
-        effect.setText("If you do, discard a card");
-        ability.addEffect(effect);
+        Ability ability = new BeginningOfPreCombatMainTriggeredAbility(new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(filter))
+                .setText("At the beginning of your precombat main phase, you may draw X cards, where X is the number of Shrines you control"),
+                TargetController.YOU, true);
+        ability.addEffect(new DiscardControllerEffect(1).setText("If you do, discard a card"));
         this.addAbility(ability);
     }
 
