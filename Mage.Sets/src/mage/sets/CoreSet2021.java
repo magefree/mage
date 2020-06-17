@@ -119,6 +119,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Ghostly Pilferer", 52, Rarity.RARE, mage.cards.g.GhostlyPilferer.class));
         cards.add(new SetCardInfo("Glorious Anthem", 21, Rarity.RARE, mage.cards.g.GloriousAnthem.class));
         cards.add(new SetCardInfo("Goblin Arsonist", 147, Rarity.COMMON, mage.cards.g.GoblinArsonist.class));
+        cards.add(new SetCardInfo("Goblin Wizardry", 148, Rarity.COMMON, mage.cards.g.GoblinWizardry.class));
         cards.add(new SetCardInfo("Goremand", 101, Rarity.UNCOMMON, mage.cards.g.Goremand.class));
         cards.add(new SetCardInfo("Grasp of Darkness", 102, Rarity.COMMON, mage.cards.g.GraspOfDarkness.class));
         cards.add(new SetCardInfo("Griffin Aerie", 22, Rarity.UNCOMMON, mage.cards.g.GriffinAerie.class));
