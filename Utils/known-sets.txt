@@ -114,6 +114,7 @@ Ixalan|Ixalan|
 Journey into Nyx|JourneyIntoNyx|
 Judge Promo|JudgePromo|
 Judgment|Judgment|
+Jumpstart|Jumpstart|
 Kaladesh|Kaladesh|
 Khans of Tarkir|KhansOfTarkir|
 Launch Party|LaunchParty|
