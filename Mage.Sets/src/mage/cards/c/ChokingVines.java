@@ -79,11 +79,14 @@ class ChokingVinesEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Targets targets = source.getTargets();
+
         if (controller != null && !targets.isEmpty()) {
             for (Target target : targets) {
-                CombatGroup combatGroup = game.getCombat().findGroup(target.getFirstTarget());
-                if (combatGroup != null) {
-                    combatGroup.setBlocked(true, game);
+                for (UUID id : target.getTargets()) {
+                    CombatGroup combatGroup = game.getCombat().findGroup(id);
+                    if (combatGroup != null) {
+                        combatGroup.setBlocked(true, game);
+                    }
                 }
             }
             return true;
