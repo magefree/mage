@@ -1,7 +1,7 @@
 
 package mage.game.command.emblems;
 
-import mage.abilities.Ability;
+import mage.abilities.CompoundAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
@@ -22,16 +22,15 @@ public final class DomriRadeEmblem extends Emblem {
     // "Creatures you control have double strike, trample, hexproof and haste."
 
     public DomriRadeEmblem() {
-        this.setName("Emblem Domri");
+        this.setName("Emblem Domri Rade");
         FilterPermanent filter = new FilterControlledCreaturePermanent("Creatures");
-        GainAbilityControlledEffect effect = new GainAbilityControlledEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfGame, filter);
-        Ability ability = new SimpleStaticAbility(Zone.COMMAND, effect);
-        effect = new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfGame, filter);
-        ability.addEffect(effect);
-        effect = new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.EndOfGame, filter);
-        ability.addEffect(effect);
-        effect = new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.EndOfGame, filter);
-        ability.addEffect(effect);
-        this.getAbilities().add(ability);
+
+        CompoundAbility compoundAbilities = new CompoundAbility(
+                DoubleStrikeAbility.getInstance(),
+                TrampleAbility.getInstance(),
+                HexproofAbility.getInstance(),
+                HasteAbility.getInstance()
+        );
+        this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, new GainAbilityControlledEffect(compoundAbilities, Duration.EndOfGame, filter)));
     }
 }
