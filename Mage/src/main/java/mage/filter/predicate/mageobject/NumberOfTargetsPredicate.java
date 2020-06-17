@@ -1,8 +1,6 @@
-
 package mage.filter.predicate.mageobject;
 
 import java.util.UUID;
-import mage.MageObject;
 import mage.abilities.Mode;
 import mage.filter.predicate.Predicate;
 import mage.game.Controllable;
@@ -37,18 +35,6 @@ public class NumberOfTargetsPredicate implements Predicate<Controllable> {
                 return true;
             }
         }
-//        Spell spell = game.getStack().getSpell(input.getId());
-//        if (spell != null) {
-//            int numberOfTargets = 0;
-//            for (Mode mode : spell.getSpellAbility().getModes().getSelectedModes()) {
-//                for (Target target : mode.getTargets()) {
-//                    numberOfTargets += target.getTargets().size();
-//                }
-//            }
-//            if (numberOfTargets == targets) {
-//                return true;
-//            }
-//        }
         return false;
     }
 

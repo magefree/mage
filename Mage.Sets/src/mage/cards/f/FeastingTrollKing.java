@@ -3,7 +3,7 @@ package mage.cards.f;
 import mage.MageInt;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.common.CastFromHandSourceCondition;
+import mage.abilities.condition.common.CastFromHandSourcePermanentCondition;
 import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -48,7 +48,7 @@ public final class FeastingTrollKing extends CardImpl {
         // When Feasting Troll King enters the battlefield, if you cast it from your hand, create three Food tokens.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new FoodToken(), 3)),
-                CastFromHandSourceCondition.instance, "When {this} enters the battlefield, " +
+                CastFromHandSourcePermanentCondition.instance, "When {this} enters the battlefield, " +
                 "if you cast it from your hand, create three Food tokens."
         ), new CastFromHandWatcher());
 

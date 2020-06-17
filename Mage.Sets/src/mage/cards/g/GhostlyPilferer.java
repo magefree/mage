@@ -2,13 +2,13 @@ package mage.cards.g;
 
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.BecomesTappedSourceTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
+import mage.abilities.keyword.InspiredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -34,10 +34,10 @@ public final class GhostlyPilferer extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // Whenever Ghostly Pilferer becomes tapped, you may pay {2}. If you do, draw a card.
-        this.addAbility(new BecomesTappedSourceTriggeredAbility(new DoIfCostPaid(
+        // Whenever Ghostly Pilferer becomes untapped, you may pay {2}. If you do, draw a card.
+        this.addAbility(new InspiredAbility(new DoIfCostPaid(
                 new DrawCardSourceControllerEffect(1), new GenericManaCost(2)
-        )));
+        ), false, false));
 
         // Whenever an opponent casts a spell from anywhere other than their hand, draw a card.
         this.addAbility(new GhostlyPilfererTriggeredAbility());

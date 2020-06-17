@@ -76,6 +76,7 @@ class EnduringScalelordTriggeredAbility extends TriggeredAbilityImpl {
             return (permanent != null
                     && !event.getTargetId().equals(this.getSourceId())
                     && permanent.isCreature()
+                    && !permanent.getSubtype(game).contains(SubType.HYDRA)
                     && permanent.isControlledBy(this.getControllerId()));
         }
         return false;
@@ -83,6 +84,6 @@ class EnduringScalelordTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever one or more +1/+1 counters are put on another creature you control, put a +1/+1 counter on {this}.";
+        return "Whenever one or more +1/+1 counters are put on another non-Hydra creature you control, put a +1/+1 counter on {this}.";
     }
 }

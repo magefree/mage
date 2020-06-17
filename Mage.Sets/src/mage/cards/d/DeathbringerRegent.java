@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.CastFromHandSourceCondition;
+import mage.abilities.condition.common.CastFromHandSourcePermanentCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -63,7 +63,7 @@ class DeathbringerRegentCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return CastFromHandSourceCondition.instance.apply(game, source)
+        return CastFromHandSourcePermanentCondition.instance.apply(game, source)
                 && game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, game).size() >= 6;
     }
 }

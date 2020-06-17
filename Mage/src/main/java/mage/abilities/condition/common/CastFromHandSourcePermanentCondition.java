@@ -13,7 +13,7 @@ import mage.watchers.common.CastFromHandWatcher;
  *
  * @author Loki
  */
-public enum CastFromHandSourceCondition implements Condition {
+public enum CastFromHandSourcePermanentCondition implements Condition {
 
     instance;
 

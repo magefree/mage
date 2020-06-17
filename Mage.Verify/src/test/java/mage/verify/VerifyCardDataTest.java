@@ -985,9 +985,9 @@ public class VerifyCardDataTest {
             System.out.println();
             System.out.println(card.getName() + " " + card.getManaCost().getText());
             if (card instanceof SplitCard) {
-                card.getAbilities().getRules(card.getName()).stream().forEach(System.out::println);
+                card.getAbilities().getRules(card.getName()).forEach(System.out::println);
             } else {
-                card.getRules().stream().forEach(System.out::println);
+                card.getRules().forEach(System.out::println);
             }
         });
     }
