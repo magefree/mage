@@ -20,9 +20,12 @@ import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
-import mage.util.CardUtil;
 
 import java.util.UUID;
+import mage.cards.SplitCard;
+import mage.cards.SplitCardHalf;
+import mage.util.CardUtil;
+
 
 /**
  * @author jeffwadsworth
@@ -94,23 +97,43 @@ class BolassCitadelPlayTheTopCardEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
-        Card cardToCheck = game.getCard(objectId);
-        objectId = CardUtil.getMainCardId(game, objectId); // for split cards
+        Player player = game.getPlayer(playerId);
+        if (player != null) {
+            Card topCard = player.getLibrary().getFromTop(game);
+            UUID objectIdToCast = CardUtil.getMainCardId(game, objectId); // for adventure cards
+            if (topCard == null || !topCard.getId().equals(objectIdToCast)) {
+                return false;
+            }
+            if (!topCard.isLand()) {
+                if (topCard instanceof SplitCard) {
+                    SplitCardHalf leftCard = ((SplitCard) topCard).getLeftHalfCard();
+                    PayLifeCost lifeCost = new PayLifeCost(leftCard.getSpellAbility().getManaCosts().convertedManaCost());
+                    Costs leftCosts = new CostsImpl();
+                    leftCosts.add(lifeCost);
+                    leftCosts.addAll(leftCard.getSpellAbility().getCosts());
+                    player.setCastSourceIdWithAlternateMana(leftCard.getId(), null, leftCosts);
 
-        if (!isAbilityAppliedForAlternateCast(cardToCheck, affectedAbility, playerId, source)) {
-            return false;
-        }
-
-        Player controller = game.getPlayer(cardToCheck.getOwnerId());
-        Card topCard = controller == null ? null : controller.getLibrary().getFromTop(game);
-        if (topCard != null && objectId.equals(topCard.getId())) {
-            // add the life cost first
-            PayLifeCost cost = new PayLifeCost(affectedAbility.getManaCosts().convertedManaCost());
-            Costs costs = new CostsImpl();
-            costs.add(cost);
-            costs.addAll(affectedAbility.getCosts());
-            controller.setCastSourceIdWithAlternateMana(affectedAbility.getSourceId(), null, costs);
+                    SplitCardHalf rightCard = ((SplitCard) topCard).getRightHalfCard();
+                    lifeCost = new PayLifeCost(rightCard.getSpellAbility().getManaCosts().convertedManaCost());
+                    Costs rightCosts = new CostsImpl();
+                    rightCosts.add(lifeCost);
+                    rightCosts.addAll(rightCard.getSpellAbility().getCosts());
+                    player.setCastSourceIdWithAlternateMana(rightCard.getId(), null, rightCosts);
+                } else {
+                    if (affectedAbility == null) {
+                        affectedAbility = topCard.getSpellAbility();                        
+                    } else {
+                        objectIdToCast = affectedAbility.getSourceId();
+                    }
+                    PayLifeCost cost = new PayLifeCost(affectedAbility.getManaCosts().convertedManaCost());
+                    Costs costs = new CostsImpl();
+                    costs.add(cost);
+                    costs.addAll(affectedAbility.getCosts());
+                    player.setCastSourceIdWithAlternateMana(objectIdToCast, null, costs);
+                }
+            }
             return true;
+
         }
         return false;
     }

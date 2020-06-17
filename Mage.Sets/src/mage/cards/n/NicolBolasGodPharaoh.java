@@ -21,11 +21,12 @@ import mage.target.Target;
 import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetOpponent;
-import mage.target.targetpointer.FixedTarget;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  * @author Will
@@ -168,58 +169,12 @@ class NicolBolasGodPharaohPlusTwoEffect extends OneShotEffect {
             if (card.isLand()) {
                 continue;
             }
-            ContinuousEffect effect = new NicolBolasGodPharaohFromExileEffect();
-            effect.setTargetPointer(new FixedTarget(card.getId(),
-                    game.getState().getZoneChangeCounter(card.getId())));
+            ContinuousEffect effect =  new PlayFromNotOwnHandZoneTargetEffect(Zone.EXILED, TargetController.YOU, Duration.EndOfTurn, true);
+            effect.setTargetPointer(new FixedTarget(card, game));
             game.addEffect(effect, source);
             break;
         } while (library.hasCards()
                 && card != null);
-        return true;
-    }
-}
-
-class NicolBolasGodPharaohFromExileEffect extends AsThoughEffectImpl {
-
-    NicolBolasGodPharaohFromExileEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "You may cast card from exile";
-    }
-
-    private NicolBolasGodPharaohFromExileEffect(final NicolBolasGodPharaohFromExileEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public NicolBolasGodPharaohFromExileEffect copy() {
-        return new NicolBolasGodPharaohFromExileEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        if (sourceId == null
-                || !sourceId.equals(getTargetPointer().getFirst(game, source))
-                || !affectedControllerId.equals(source.getControllerId())) {
-            return false;
-        }
-        Card card = game.getCard(sourceId);
-        if (card == null
-                || game.getState().getZone(sourceId) != Zone.EXILED) {
-            return false;
-        }
-        Player controller = game.getPlayer(affectedControllerId);
-        if (controller == null) {
-            return false;
-        }
-        controller.setCastSourceIdWithAlternateMana(
-                sourceId,
-                null,
-                card.getSpellAbility().getCosts());
         return true;
     }
 }

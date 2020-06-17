@@ -1819,7 +1819,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     private boolean isObjectHaveTargetNameOrAlias(Player player, MageObject object, String nameOrAlias) {
         TestPlayer testPlayer = (TestPlayer) player;
         if (player != null) { // TODO: remove null check and replace all null-player calls in tests by player
-            return testPlayer.isObjectHaveTargetNameOrAlias(object, nameOrAlias);
+            return testPlayer.hasObjectTargetNameOrAlias(object, nameOrAlias);
         } else {
             return object.getName().equals(nameOrAlias);
         }
