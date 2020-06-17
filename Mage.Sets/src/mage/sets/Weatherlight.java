@@ -66,6 +66,7 @@ public final class Weatherlight extends ExpansionSet {
         cards.add(new SetCardInfo("Cinder Giant", 93, Rarity.UNCOMMON, mage.cards.c.CinderGiant.class));
         cards.add(new SetCardInfo("Cinder Wall", 94, Rarity.COMMON, mage.cards.c.CinderWall.class));
         cards.add(new SetCardInfo("Cloud Djinn", 36, Rarity.UNCOMMON, mage.cards.c.CloudDjinn.class));
+        cards.add(new SetCardInfo("Coils of the Medusa", 65, Rarity.COMMON, mage.cards.c.CoilsOfTheMedusa.class));
         cards.add(new SetCardInfo("Cone of Flame", 95, Rarity.UNCOMMON, mage.cards.c.ConeOfFlame.class));
         cards.add(new SetCardInfo("Debt of Loyalty", 11, Rarity.RARE, mage.cards.d.DebtOfLoyalty.class));
         cards.add(new SetCardInfo("Dense Foliage", 124, Rarity.RARE, mage.cards.d.DenseFoliage.class));
