@@ -62,6 +62,7 @@ public final class Weatherlight extends ExpansionSet {
         cards.add(new SetCardInfo("Buried Alive", 63, Rarity.UNCOMMON, mage.cards.b.BuriedAlive.class));
         cards.add(new SetCardInfo("Call of the Wild", 122, Rarity.RARE, mage.cards.c.CallOfTheWild.class));
         cards.add(new SetCardInfo("Chimeric Sphere", 148, Rarity.UNCOMMON, mage.cards.c.ChimericSphere.class));
+        cards.add(new SetCardInfo("Choking Vines", 123, Rarity.COMMON, mage.cards.c.ChokingVines.class));
         cards.add(new SetCardInfo("Cinder Giant", 93, Rarity.UNCOMMON, mage.cards.c.CinderGiant.class));
         cards.add(new SetCardInfo("Cinder Wall", 94, Rarity.COMMON, mage.cards.c.CinderWall.class));
         cards.add(new SetCardInfo("Cloud Djinn", 36, Rarity.UNCOMMON, mage.cards.c.CloudDjinn.class));
