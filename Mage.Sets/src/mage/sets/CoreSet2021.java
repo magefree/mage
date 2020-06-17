@@ -34,6 +34,7 @@ public final class CoreSet2021 extends ExpansionSet {
         this.maxCardNumberInBooster = 274;
 
         cards.add(new SetCardInfo("Adherent of Hope", 321, Rarity.COMMON, mage.cards.a.AdherentOfHope.class));
+        cards.add(new SetCardInfo("Alchemist's Gift", 87, Rarity.COMMON, mage.cards.a.AlchemistsGift.class));
         cards.add(new SetCardInfo("Alpine Houndmaster", 215, Rarity.UNCOMMON, mage.cards.a.AlpineHoundmaster.class));
         cards.add(new SetCardInfo("Alpine Watchdog", 2, Rarity.COMMON, mage.cards.a.AlpineWatchdog.class));
         cards.add(new SetCardInfo("Angelic Ascension", 3, Rarity.UNCOMMON, mage.cards.a.AngelicAscension.class));
