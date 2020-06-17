@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
@@ -35,7 +34,7 @@ public final class NabanDeanOfIteration extends CardImpl {
         this.toughness = new MageInt(1);
 
         // If a Wizard entering the battlefield under your control causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new NabanDeanOfIterationEffect()));
+        this.addAbility(new SimpleStaticAbility(new NabanDeanOfIterationEffect()));
     }
 
     public NabanDeanOfIteration(final NabanDeanOfIteration card) {
@@ -84,9 +83,7 @@ class NabanDeanOfIterationEffect extends ReplacementEffectImpl {
                     // Only for entering artifacts or creatures
                     if (entersTheBattlefieldEvent.getTarget().hasSubtype(SubType.WIZARD, game)) {
                         // Only for triggers of permanents
-                        if (game.getPermanent(numberOfTriggersEvent.getSourceId()) != null) {
-                            return true;
-                        }
+                        return game.getPermanent(numberOfTriggersEvent.getSourceId()) != null;
                     }
                 }
             }
@@ -97,6 +94,6 @@ class NabanDeanOfIterationEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         event.setAmount(event.getAmount() + 1);
-        return false;
+        return true;
     }
 }
