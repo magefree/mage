@@ -12,9 +12,9 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 
@@ -26,11 +26,10 @@ import java.util.UUID;
 
 public final class WatcherOfTheSpheres extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Creature spells with flying");
+    private static final FilterCreatureCard filter = new FilterCreatureCard("Creature spells with flying");
     private static final FilterPermanent filter1 = new FilterControlledCreaturePermanent("another creature with flying");
 
     static {
-        filter.add(CardType.CREATURE.getPredicate());
         filter.add(new AbilityPredicate(FlyingAbility.class));
         filter1.add(AnotherPredicate.instance);
         filter1.add(new AbilityPredicate(FlyingAbility.class));
