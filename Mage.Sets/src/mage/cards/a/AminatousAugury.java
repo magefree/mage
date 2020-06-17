@@ -111,6 +111,7 @@ class AminatousAuguryPlayLandAndExileEffect extends OneShotEffect {
              //  ContinuousRuleModifyingEffect effect = new AminatousAuguryCastFromExileEffect();
             //}
 
+            /*
             // Track all non-land cards put into exile with Aminatou
             Set<Card> aminatouCards = new HashSet<>();
             for (Card card : cards) {
@@ -119,10 +120,13 @@ class AminatousAuguryPlayLandAndExileEffect extends OneShotEffect {
                 }
             }
             //use unique id in case of multiple Aminatou's
-            game.getState().setValue(source.getSourceId().toString() + "Cards", aminatouCards);
+            //game.getState().setValue(source.getSourceId().toString() + "Cards", aminatouCards);
+
+             */
 
             //set list of unused card types -- TODO: Use exile zone id for unique identifier
             EnumSet<CardType> unusedCardTypes = EnumSet.allOf(CardType.class);
+            unusedCardTypes.remove(CardType.LAND); //untested
             //game.getState().setValue(source.getSourceId().toString() + "_unusedCardTypes", unusedCardTypes);
             game.getState().setValue("AA_unusedCardTypes", unusedCardTypes);
             System.out.println("ID:" + source.getSourceId().toString());
@@ -229,6 +233,7 @@ class AminatousAuguryCastFromExileEffectTwo extends AsThoughEffectImpl {
             return false;
         }
 
+        /*
         //cards put into exile using Aminatou -- created in AminatouAuguryEffect - Apply
         Set<Card> aminatouCards = (Set<Card>) game.getState().getValue(source.getSourceId().toString() + "Cards");
 
@@ -237,11 +242,22 @@ class AminatousAuguryCastFromExileEffectTwo extends AsThoughEffectImpl {
         if (game.getState().getValue(source.getSourceId().toString() + "UsedCardTypes") != null){
             usedCardTypes = (Set<CardType>) game.getState().getValue(source.getSourceId().toString() + "UsedCardTypes");
         }
+        */
+
+        // c
+
+        EnumSet<CardType> unusedCardTypes = (EnumSet<CardType>) game.getState().getValue("AA_unusedCardTypes" );
+        if (unusedCardTypes == null){
+            return false;
+        }
+
+
 
         if (objectId.equals(getTargetPointer().getFirst(game, source))
                 && playerId.equals(source.getControllerId())) {
 
             // Determine which card types from Aminatou cards were cast
+            /*
             Iterator<Card> chkCardCastIterator = aminatouCards.iterator();
             while(chkCardCastIterator.hasNext()){
                 Card chkCardCast = chkCardCastIterator.next();
@@ -254,10 +270,18 @@ class AminatousAuguryCastFromExileEffectTwo extends AsThoughEffectImpl {
             //save changes to used card types
             game.getState().setValue(source.getSourceId().toString() + "UsedCardTypes", usedCardTypes);
 
+
+             */
+
             // make all eligible cards types zero mana cost
             Card card = game.getCard(objectId);
+
+            //if ( unusedCardTypes.contains(card.getCardType())){
+                //allow casting
+            //}
+
             //if (card != null && Collections.disjoint(usedCardTypes,card.getCardType())) {
-            if (card != null ) {
+            if (card != null && !Collections.disjoint(unusedCardTypes,card.getCardType()) ) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
 
@@ -396,18 +420,13 @@ class AminatousAuguryCost extends CostImpl {
         return paid;
     }
 
-
-    /*
-     * Cards that share types with types on the unused list should be listed
-     *  as canPay targets.
-     */
-
     @Override
     public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
 
-        System.out.println( "EZID: " + game.getExile().getExileZone(exileZoneId));
-        System.out.println( "S ID: " + game.getState().getZone(sourceId));
+        //System.out.println( "EZID: " + game.getExile().getExileZone(exileZoneId));
+        //System.out.println( "S ID: " + game.getState().getZone(sourceId));
         return targets.canChoose(controllerId, game);
+
     }
 
     @Override
