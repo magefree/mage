@@ -217,6 +217,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Silversmote Ghoul", 122, Rarity.UNCOMMON, mage.cards.s.SilversmoteGhoul.class));
         cards.add(new SetCardInfo("Skeleton Archer", 123, Rarity.COMMON, mage.cards.s.SkeletonArcher.class));
         cards.add(new SetCardInfo("Skyscanner", 238, Rarity.COMMON, mage.cards.s.Skyscanner.class));
+        cards.add(new SetCardInfo("Skyway Sniper", 206, Rarity.UNCOMMON, mage.cards.s.SkywaySniper.class));
         cards.add(new SetCardInfo("Snarespinner", 207, Rarity.COMMON, mage.cards.s.Snarespinner.class));
         cards.add(new SetCardInfo("Solemn Simulacrum", 239, Rarity.RARE, mage.cards.s.SolemnSimulacrum.class));
         cards.add(new SetCardInfo("Soul Sear", 160, Rarity.UNCOMMON, mage.cards.s.SoulSear.class));
