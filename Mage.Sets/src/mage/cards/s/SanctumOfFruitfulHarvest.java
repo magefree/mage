@@ -20,7 +20,7 @@ import java.util.UUID;
  */
 public final class SanctumOfFruitfulHarvest extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("Shrine");
+    private static final FilterPermanent filter = new FilterPermanent();
 
     static {
         filter.add(SubType.SHRINE.getPredicate());
@@ -35,7 +35,10 @@ public final class SanctumOfFruitfulHarvest extends CardImpl {
 
         // At the beginning of your precombat main phase, add X mana of any one color, where X is the number of Shrines you control.
         this.addAbility(new BeginningOfPreCombatMainTriggeredAbility(
-                new DynamicManaEffect(Mana.AnyMana(1), new PermanentsOnBattlefieldCount(filter)),
+                new DynamicManaEffect(
+                        Mana.AnyMana(1),
+                        new PermanentsOnBattlefieldCount(filter),
+                        "add X mana of any one color, where X is the number of Shrines you control"),
                 TargetController.YOU, false));
     }
 
