@@ -89,11 +89,9 @@ class AminatousAuguryPlayLandAndExileEffect extends OneShotEffect {
                 cardIdToAminatouIdMap = (HashMap<UUID,UUID>) game.getState().getValue("cardToAminatouIdMap");
             }
 
-
             //Exile the top eight cards of your library.
             Set<Card> cards = player.getLibrary().getTopCards(game, 8);
             UUID exileId = CardUtil.getCardExileZoneId(game, source);
-
 
             for (Card card : cards) {
                 card.moveToExile(exileId,source.getSourceObject(game).getName(), source.getSourceId(), game);
@@ -101,19 +99,6 @@ class AminatousAuguryPlayLandAndExileEffect extends OneShotEffect {
              }
 
             game.getState().setValue("cardToAminatouIdMap", cardIdToAminatouIdMap);
-
-            //HACK
-            //create game state hash map, to map each mage object to each aminatou's augury card.
-            //HashMap<UUID, UUID> cardIdToAminatouIdMap = new HashMap <UUID, UUID>();
-            //if (game.getState().getValue("cardToAminatouIdMap")!=null) {
-            //    cardIdToAminatouIdMap = (HashMap<UUID,UUID>) game.getState().getValue("cardToAminatouIdMap");
-           // }
-            //for (Card card : cards) {
-            //    cardIdToAminatouIdMap.put(card.getId(), source.getSourceId());
-            //}
-            //System.out.println("HMap: " + cardIdToAminatouIdMap.toString());
-
-
 
 
             //you may put a land card from among them onto the battlefield
@@ -138,8 +123,6 @@ class AminatousAuguryPlayLandAndExileEffect extends OneShotEffect {
             //use unique id in case of multiple Aminatou's Augury cast
             String aminatouId = source.getSourceId().toString() + "_unusedCardTypes";
             game.getState().setValue(aminatouId, unusedCardTypes);
-            System.out.println("EXID1: " +  aminatouId);
-            System.out.println(unusedCardTypes);
 
             //apply effect to each card
             for (Card card : cards) {
@@ -187,7 +170,6 @@ class AminatousAuguryCastFromExileEffect extends AsThoughEffectImpl {
     @Override
     public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
 
-
         Card cardToCheck = game.getCard(objectId);
         objectId = CardUtil.getMainCardId(game, objectId); // for split cards
 
@@ -197,32 +179,15 @@ class AminatousAuguryCastFromExileEffect extends AsThoughEffectImpl {
 
         if (objectId.equals(getTargetPointer().getFirst(game, source)) && playerId.equals(source.getControllerId())) {
 
-            // make all eligible cards types zero mana cost
-            //Card card = game.getCard(objectId);
             Player player = game.getPlayer(playerId);
             if (cardToCheck != null && player !=null ) {
 
-
-                HashMap<UUID,UUID> setLocater = (HashMap<UUID, UUID>) game.getState().getValue("cardToAminatouIdMap");
-                String aminatouId = setLocater.get(cardToCheck.getId()).toString() + "_unusedCardTypes";
-                //EnumSet<CardType> unusedCardTypes = (EnumSet<CardType>) game.getState().getValue(aminatouId);
-                //load unused card types using Aminatou card Id
                 EnumSet<CardType> unusedCardTypes = (EnumSet<CardType>) game.getState().getValue(source.getSourceId().toString() + "_unusedCardTypes");
                 if (unusedCardTypes == null){
                     return false;  //return false or null on error?
                 }
 
-                if (!aminatouId.equals(source.getSourceId().toString() + "_unusedCardTypes")){
-                    System.out.println("Mismatch: " + aminatouId + " AND " + source.getSourceId().toString());
-                }
-                //if (!aminatouId.equals(source.getSourceId().toString() + "_unusedCardTypes")){
-                //    System.out.println("Mismatch: " + aminatouId + " AND " + source.getSourceId().toString());
-                //}
-
-
-                //System.out.println("From Applies ID: " + source.getSourceId().toString() + "_unusedCardTypes " + " Castable types: " + unusedCardTypes.toString());
-
-
+                // make all eligible cards types zero mana cost
                 if (!Collections.disjoint(unusedCardTypes,cardToCheck.getCardType())) {
                     AminatousAuguryCost aminatouCost = new AminatousAuguryCost();
                     Costs costs = new CostsImpl();
@@ -252,7 +217,7 @@ class AminatousAuguryCost extends CostImpl {
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
 
         /*
-         use map to match card to Aminatou card used to exile it. Then use Aminatou card Id, to load
+         Use map to match card to Aminatou card used to exile it. Then use Aminatou card Id, to load
          castable card types
         */
         HashMap<UUID,UUID> setLocater = (HashMap<UUID, UUID>) game.getState().getValue("cardToAminatouIdMap");
@@ -260,17 +225,13 @@ class AminatousAuguryCost extends CostImpl {
         EnumSet<CardType> unusedCardTypes = (EnumSet<CardType>) game.getState().getValue(aminatouId);
 
         if (unusedCardTypes == null){
-            System.out.println("Failed to load cast type list");
             return false; //return false, null or paid??
-        } else {
-            System.out.println("From Pay ID: " + aminatouId + " Castable types: " + unusedCardTypes.toString());
         }
-
 
         Set<CardType> castCardTypes = ability.getSourceObject(game).getCardType();
         if (castCardTypes != null) {
 
-            //count matching available card types
+            // Count matching available card types
             CardType useType = null;
             int numAvailTypes = 0;
             for (CardType chkType : castCardTypes){
@@ -280,9 +241,8 @@ class AminatousAuguryCost extends CostImpl {
                 }
             }
 
-
             if (numAvailTypes == 0){
-                //If no available types, then do not cast.
+                // If no available types, then do not cast.
                 paid = false;
             } else if (numAvailTypes == 1){
                 // If card has multiple types, and only one is unused,
@@ -291,8 +251,8 @@ class AminatousAuguryCost extends CostImpl {
                 unusedCardTypes.remove(useType);
                 paid = true;
             } else if (numAvailTypes >= 2){
-                //If card has multiple types, and more than one has not yet been used,
-                //then show dialog to select which type to use for cast.
+                // If card has multiple types, and more than one has not yet been used,
+                // then show dialog to select which type to use for cast.
                 AminatousAuguryCardTypeChoice choices = new AminatousAuguryCardTypeChoice(castCardTypes);
                 Player controller = game.getPlayer(controllerId);
                 if (controller.choose(Outcome.Neutral, choices, game)) {
@@ -302,10 +262,10 @@ class AminatousAuguryCost extends CostImpl {
                 }
             }
         } else {
-            System.out.println("CardType returned null");
+            return paid;
         }
 
-        //save changes to unused card types
+
         game.getState().setValue( aminatouId, unusedCardTypes);
 
         return paid;
