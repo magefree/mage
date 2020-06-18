@@ -57,6 +57,7 @@ public final class Jumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Maelstrom Archangel", 454, Rarity.MYTHIC, mage.cards.m.MaelstromArchangel.class));
         cards.add(new SetCardInfo("Mire Triton", 257, Rarity.UNCOMMON, mage.cards.m.MireTriton.class));
         cards.add(new SetCardInfo("Mirrodin's Core", 492, Rarity.UNCOMMON, mage.cards.m.MirrodinsCore.class));
+        cards.add(new SetCardInfo("Nocturnal Feeder", 16, Rarity.COMMON, mage.cards.n.NocturnalFeeder.class));
         cards.add(new SetCardInfo("Nyxathid", 259, Rarity.RARE, mage.cards.n.Nyxathid.class));
         cards.add(new SetCardInfo("Pillar of Flame", 355, Rarity.RARE, mage.cards.p.PillarOfFlame.class));
         cards.add(new SetCardInfo("Plains", 45, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
