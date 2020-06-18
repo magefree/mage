@@ -149,6 +149,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Keen Glidemaster", 54, Rarity.COMMON, mage.cards.k.KeenGlidemaster.class));
         cards.add(new SetCardInfo("Keral Keep Disciples", 334, Rarity.UNCOMMON, mage.cards.k.KeralKeepDisciples.class));
         cards.add(new SetCardInfo("Kitesail Freebooter", 107, Rarity.UNCOMMON, mage.cards.k.KitesailFreebooter.class));
+        cards.add(new SetCardInfo("Leafkin Avenger", 220, Rarity.UNCOMMON, mage.cards.l.LeafkinAvenger.class));
         cards.add(new SetCardInfo("Legion's Judgment", 24, Rarity.COMMON, mage.cards.l.LegionsJudgment.class));
         cards.add(new SetCardInfo("Library Larcenist", 55, Rarity.COMMON, mage.cards.l.LibraryLarcenist.class));
         cards.add(new SetCardInfo("Life Goes On", 192, Rarity.COMMON, mage.cards.l.LifeGoesOn.class));
