@@ -63,6 +63,7 @@ public final class Jumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Pyroclastic Elemental", 356, Rarity.UNCOMMON, mage.cards.p.PyroclasticElemental.class));
         cards.add(new SetCardInfo("Raging Regisaur", 455, Rarity.UNCOMMON, mage.cards.r.RagingRegisaur.class));
         cards.add(new SetCardInfo("Reanimate", 270, Rarity.RARE, mage.cards.r.Reanimate.class));
+        cards.add(new SetCardInfo("Release the Dogs", 4, Rarity.UNCOMMON, mage.cards.r.ReleaseTheDogs.class));
         cards.add(new SetCardInfo("Rupture Spire", 495, Rarity.COMMON, mage.cards.r.RuptureSpire.class));
         cards.add(new SetCardInfo("Settle the Score", 276, Rarity.UNCOMMON, mage.cards.s.SettleTheScore.class));
         cards.add(new SetCardInfo("Shambling Goblin", 277, Rarity.COMMON, mage.cards.s.ShamblingGoblin.class));
