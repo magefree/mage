@@ -264,8 +264,8 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Tolarian Kraken", 80, Rarity.UNCOMMON, mage.cards.t.TolarianKraken.class));
         cards.add(new SetCardInfo("Tormod's Crypt", 241, Rarity.UNCOMMON, mage.cards.t.TormodsCrypt.class));
         cards.add(new SetCardInfo("Traitorous Greed", 166, Rarity.UNCOMMON, mage.cards.t.TraitorousGreed.class));
-        cards.add(new SetCardInfo("Transmogrify", 167, Rarity.RARE, mage.cards.t.Transmogrify.class));
         cards.add(new SetCardInfo("Tranquil Cove", 258, Rarity.COMMON, mage.cards.t.TranquilCove.class));
+        cards.add(new SetCardInfo("Transmogrify", 167, Rarity.RARE, mage.cards.t.Transmogrify.class));
         cards.add(new SetCardInfo("Trufflesnout", 212, Rarity.COMMON, mage.cards.t.Trufflesnout.class));
         cards.add(new SetCardInfo("Turn to Slag", 168, Rarity.COMMON, mage.cards.t.TurnToSlag.class));
         cards.add(new SetCardInfo("Turret Ogre", 169, Rarity.COMMON, mage.cards.t.TurretOgre.class));
