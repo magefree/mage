@@ -46,7 +46,7 @@ class TransmogrifyEffect extends OneShotEffect {
 
     public TransmogrifyEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "That creature’s controller reveals cards from the top of their library until they reveal a creature card. That player puts that card onto the battlefield, then shuffles the rest into their library";
+        staticText = "That creature's controller reveals cards from the top of their library until they reveal a creature card. That player puts that card onto the battlefield, then shuffles the rest into their library";
     }
 
     public TransmogrifyEffect(final TransmogrifyEffect effect) {

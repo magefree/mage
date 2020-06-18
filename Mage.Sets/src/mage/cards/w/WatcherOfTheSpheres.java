@@ -36,7 +36,7 @@ public final class WatcherOfTheSpheres extends CardImpl {
     }
 
     public WatcherOfTheSpheres(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{U}");
 
         this.subtype.add(SubType.BIRD);
         this.subtype.add(SubType.WIZARD);
