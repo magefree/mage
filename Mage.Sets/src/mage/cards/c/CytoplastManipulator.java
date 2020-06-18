@@ -6,6 +6,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.SourceOnBattlefieldCondition;
+import mage.abilities.condition.common.SourceRemainsInZoneCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalContinuousEffect;
@@ -47,7 +48,7 @@ public final class CytoplastManipulator extends CardImpl {
         // {U}, {tap}: Gain control of target creature with a +1/+1 counter on it for as long as Cytoplast Manipulator remains on the battlefield.
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(
                 new GainControlTargetEffect(Duration.Custom, true),
-                SourceOnBattlefieldCondition.instance,
+                new SourceRemainsInZoneCondition(Zone.BATTLEFIELD),
                 "gain control of target creature with a +1/+1 counter on it for as long as {this} remains on the battlefield");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{U}"));
         ability.addCost(new TapSourceCost());

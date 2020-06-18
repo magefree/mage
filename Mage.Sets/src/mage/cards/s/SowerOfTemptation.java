@@ -6,6 +6,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.SourceOnBattlefieldCondition;
+import mage.abilities.condition.common.SourceRemainsInZoneCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
@@ -16,6 +17,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -78,7 +80,7 @@ class SowerOfTemptationGainControlEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(
                 new GainControlTargetEffect(Duration.Custom),
-                SourceOnBattlefieldCondition.instance,
+                new SourceRemainsInZoneCondition(Zone.BATTLEFIELD),
                 "gain control of target creature for as long as {this} remains on the battlefield");
         game.addEffect(effect, source);
         return false;

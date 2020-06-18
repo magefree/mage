@@ -177,6 +177,7 @@ public class ConditionalContinuousEffect extends ContinuousEffectImpl {
 
     /**
      * Return all effects list, for tests only
+     * @return 
      */
     public List<ContinuousEffect> getAllEffects() {
         List<ContinuousEffect> res = new ArrayList<>();
