@@ -181,6 +181,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Obsessive Stitcher", 223, Rarity.UNCOMMON, mage.cards.o.ObsessiveStitcher.class));
         cards.add(new SetCardInfo("Onakke Ogre", 155, Rarity.COMMON, mage.cards.o.OnakkeOgre.class));
         cards.add(new SetCardInfo("Opt", 59, Rarity.COMMON, mage.cards.o.Opt.class));
+        cards.add(new SetCardInfo("Ornery Dilophosaur", 194, Rarity.COMMON, mage.cards.o.OrneryDilophosaur.class));
         cards.add(new SetCardInfo("Pack Leader", 29, Rarity.RARE, mage.cards.p.PackLeader.class));
         cards.add(new SetCardInfo("Palladium Myr", 234, Rarity.UNCOMMON, mage.cards.p.PalladiumMyr.class));
         cards.add(new SetCardInfo("Peer into the Abyss", 117, Rarity.RARE, mage.cards.p.PeerIntoTheAbyss.class));
