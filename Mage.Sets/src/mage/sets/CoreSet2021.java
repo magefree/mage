@@ -204,6 +204,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Roaming Ghostlight", 65, Rarity.COMMON, mage.cards.r.RoamingGhostlight.class));
         cards.add(new SetCardInfo("Rousing Read", 67, Rarity.COMMON, mage.cards.r.RousingRead.class));
         cards.add(new SetCardInfo("Rugged Highlands", 249, Rarity.COMMON, mage.cards.r.RuggedHighlands.class));
+        cards.add(new SetCardInfo("Run Afoul", 201, Rarity.COMMON, mage.cards.r.RunAfoul.class));
         cards.add(new SetCardInfo("Runed Halo", 32, Rarity.RARE, mage.cards.r.RunedHalo.class));
         cards.add(new SetCardInfo("Sabertooth Mauler", 202, Rarity.COMMON, mage.cards.s.SabertoothMauler.class));
         cards.add(new SetCardInfo("Sanctum of Calm Waters", 68, Rarity.UNCOMMON, mage.cards.s.SanctumOfCalmWaters.class));
