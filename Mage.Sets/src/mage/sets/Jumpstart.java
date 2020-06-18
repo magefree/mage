@@ -49,6 +49,7 @@ public final class Jumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Innocent Blood", 244, Rarity.COMMON, mage.cards.i.InnocentBlood.class));
         cards.add(new SetCardInfo("Ironroot Warlord", 452, Rarity.UNCOMMON, mage.cards.i.IronrootWarlord.class));
         cards.add(new SetCardInfo("Isamaru, Hound of Konda", 113, Rarity.RARE, mage.cards.i.IsamaruHoundOfKonda.class));
+        cards.add(new SetCardInfo("Kels, Fight Fixer", 15, Rarity.RARE, mage.cards.k.KelsFightFixer.class));
         cards.add(new SetCardInfo("Knight of the Tusk", 114, Rarity.COMMON, mage.cards.k.KnightOfTheTusk.class));
         cards.add(new SetCardInfo("Last Gasp", 247, Rarity.COMMON, mage.cards.l.LastGasp.class));
         cards.add(new SetCardInfo("Lawmage's Binding", 453, Rarity.COMMON, mage.cards.l.LawmagesBinding.class));
