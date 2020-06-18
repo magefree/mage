@@ -104,11 +104,9 @@ class SanctumOfAllSearchEffect extends OneShotEffect {
             }
 
             maybeChosenCard.ifPresent(card -> controller.moveCards(card, Zone.BATTLEFIELD, source, game));
-
             if (searchedLibrary) {
                 controller.shuffleLibrary(source, game);
             }
-
             return true;
         }
         return false;
