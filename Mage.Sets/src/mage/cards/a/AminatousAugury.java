@@ -26,6 +26,7 @@ import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 
+import java.io.ObjectStreamException;
 import java.util.*;
 
 import static mage.filter.predicate.permanent.ControllerControlsIslandPredicate.filter;
@@ -93,11 +94,13 @@ class AminatousAuguryPlayLandAndExileEffect extends OneShotEffect {
             Set<Card> cards = player.getLibrary().getTopCards(game, 8);
             UUID exileId = CardUtil.getCardExileZoneId(game, source);
 
+
             for (Card card : cards) {
                 card.moveToExile(exileId,source.getSourceObject(game).getName(), source.getSourceId(), game);
                 cardIdToAminatouIdMap.put(card.getId(), source.getSourceId());
              }
 
+            game.getExile().getExileZone(exileId).setCleanupOnEndTurn(true);
             game.getState().setValue("cardToAminatouIdMap", cardIdToAminatouIdMap);
 
 
@@ -184,10 +187,10 @@ class AminatousAuguryCastFromExileEffect extends AsThoughEffectImpl {
 
                 EnumSet<CardType> unusedCardTypes = (EnumSet<CardType>) game.getState().getValue(source.getSourceId().toString() + "_unusedCardTypes");
                 if (unusedCardTypes == null){
-                    return false;  //return false or null on error?
+                    throw new UnsupportedOperationException("Could not load unused card types for Aminatou's Augury");
                 }
 
-                // make all eligible cards types zero mana cost
+                // make all cards with eligible types zero mana cost
                 if (!Collections.disjoint(unusedCardTypes,cardToCheck.getCardType())) {
                     AminatousAuguryCost aminatouCost = new AminatousAuguryCost();
                     Costs costs = new CostsImpl();
@@ -217,15 +220,14 @@ class AminatousAuguryCost extends CostImpl {
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
 
         /*
-         Use map to match card to Aminatou card used to exile it. Then use Aminatou card Id, to load
-         castable card types
+         Use map to match card to the Aminatou card used to exile it. Then use that Aminatou card Id,
+         to load castable card types
         */
         HashMap<UUID,UUID> setLocater = (HashMap<UUID, UUID>) game.getState().getValue("cardToAminatouIdMap");
         String aminatouId = setLocater.get(sourceId).toString() + "_unusedCardTypes";
         EnumSet<CardType> unusedCardTypes = (EnumSet<CardType>) game.getState().getValue(aminatouId);
-
         if (unusedCardTypes == null){
-            return false; //return false, null or paid??
+            throw new UnsupportedOperationException("Could not load unused card types for Aminatou's Augury");
         }
 
         Set<CardType> castCardTypes = ability.getSourceObject(game).getCardType();
@@ -262,7 +264,7 @@ class AminatousAuguryCost extends CostImpl {
                 }
             }
         } else {
-            return paid;
+            throw new UnsupportedOperationException("Card type returned null.");
         }
 
 
