@@ -216,6 +216,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Sabertooth Mauler", 202, Rarity.COMMON, mage.cards.s.SabertoothMauler.class));
         cards.add(new SetCardInfo("Sanctum of Calm Waters", 68, Rarity.UNCOMMON, mage.cards.s.SanctumOfCalmWaters.class));
         cards.add(new SetCardInfo("Sanctum of Shattered Heights", 157, Rarity.UNCOMMON, mage.cards.s.SanctumOfShatteredHeights.class));
+        cards.add(new SetCardInfo("Sanguine Indulgence", 121, Rarity.COMMON, mage.cards.s.SanguineIndulgence.class));
         cards.add(new SetCardInfo("Scavenging Ooze", 204, Rarity.RARE, mage.cards.s.ScavengingOoze.class));
         cards.add(new SetCardInfo("Scorching Dragonfire", 158, Rarity.COMMON, mage.cards.s.ScorchingDragonfire.class));
         cards.add(new SetCardInfo("Scoured Barrens", 250, Rarity.COMMON, mage.cards.s.ScouredBarrens.class));
