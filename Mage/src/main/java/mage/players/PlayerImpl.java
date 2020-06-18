@@ -3365,11 +3365,14 @@ public abstract class PlayerImpl implements Player, Serializable {
             // activated abilities from battlefield objects
             if (fromAll || fromZone == Zone.BATTLEFIELD) {
                 for (Permanent permanent : game.getBattlefield().getAllActivePermanents(playerId)) {
+                    boolean canUseActivated = permanent.canUseActivatedAbilities(game);
                     List<ActivatedAbility> battlePlayable = new ArrayList<>();
                     getPlayableFromCardAll(game, Zone.BATTLEFIELD, permanent, availableMana, battlePlayable);
                     for (ActivatedAbility ability : battlePlayable) {
-                        activatedUnique.putIfAbsent(ability.toString(), ability);
-                        activatedAll.add(ability);
+                        if (ability instanceof SpecialAction || canUseActivated) {
+                            activatedUnique.putIfAbsent(ability.toString(), ability);
+                            activatedAll.add(ability);
+                        }
                     }
                 }
             }
@@ -4272,7 +4275,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         cards.addAll(getLibrary().getTopCards(game, value));
         if (!cards.isEmpty()) {
             TargetCard target = new TargetCard(0, cards.size(), Zone.LIBRARY,
-                    new FilterCard("card" + (cards.size() == 1 ? "":"s") 
+                    new FilterCard("card" + (cards.size() == 1 ? "" : "s")
                             + " to PUT on the BOTTOM of your library (Scry)"));
             chooseTarget(Outcome.Benefit, cards, target, source, game);
             putCardsOnBottomOfLibrary(new CardsImpl(target.getTargets()), game, source, true);

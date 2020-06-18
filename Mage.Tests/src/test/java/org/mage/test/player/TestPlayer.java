@@ -1165,9 +1165,9 @@ public class TestPlayer implements Player {
         }
 
         if (mustHave) {
-            Assert.assertEquals(action.getActionName() + " - permanent " + permanentName + " must have ability " + abilityClass, true, founded);
+            Assert.assertEquals(action.getActionName() + " - permanent " + permanentName + " must have the ability " + abilityClass, true, founded);
         } else {
-            Assert.assertEquals(action.getActionName() + " - permanent " + permanentName + " must have not ability " + abilityClass, false, founded);
+            Assert.assertEquals(action.getActionName() + " - permanent " + permanentName + " must not have the ability " + abilityClass, false, founded);
         }
     }
 
