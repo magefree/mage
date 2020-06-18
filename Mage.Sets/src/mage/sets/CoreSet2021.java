@@ -220,6 +220,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Scorching Dragonfire", 158, Rarity.COMMON, mage.cards.s.ScorchingDragonfire.class));
         cards.add(new SetCardInfo("Scoured Barrens", 250, Rarity.COMMON, mage.cards.s.ScouredBarrens.class));
         cards.add(new SetCardInfo("Seasoned Hallowblade", 34, Rarity.UNCOMMON, mage.cards.s.SeasonedHallowblade.class));
+        cards.add(new SetCardInfo("Secure the Scene", 35, Rarity.COMMON, mage.cards.s.SecureTheScene.class));
         cards.add(new SetCardInfo("See the Truth", 69, Rarity.RARE, mage.cards.s.SeeTheTruth.class));
         cards.add(new SetCardInfo("Selfless Savior", 36, Rarity.UNCOMMON, mage.cards.s.SelflessSavior.class));
         cards.add(new SetCardInfo("Setessan Training", 205, Rarity.COMMON, mage.cards.s.SetessanTraining.class));
