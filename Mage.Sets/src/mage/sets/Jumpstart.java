@@ -73,6 +73,7 @@ public final class Jumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Terramorphic Expanse", 78, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class));
         cards.add(new SetCardInfo("Thriving Heath", 35, Rarity.COMMON, mage.cards.t.ThrivingHeath.class));
         cards.add(new SetCardInfo("Thriving Isle", 36, Rarity.COMMON, mage.cards.t.ThrivingIsle.class));
+        cards.add(new SetCardInfo("Thriving Moor", 37, Rarity.COMMON, mage.cards.t.ThrivingMoor.class));
         cards.add(new SetCardInfo("Wailing Ghoul", 286, Rarity.COMMON, mage.cards.w.WailingGhoul.class));
         cards.add(new SetCardInfo("Young Pyromancer", 372, Rarity.UNCOMMON, mage.cards.y.YoungPyromancer.class));
     }
