@@ -207,6 +207,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Rin and Seri, Inseparable", 278, Rarity.MYTHIC, mage.cards.r.RinAndSeriInseparable.class));
         cards.add(new SetCardInfo("Rise Again", 119, Rarity.COMMON, mage.cards.r.RiseAgain.class));
         cards.add(new SetCardInfo("Roaming Ghostlight", 65, Rarity.COMMON, mage.cards.r.RoamingGhostlight.class));
+        cards.add(new SetCardInfo("Rookie Mistake", 66, Rarity.COMMON, mage.cards.r.RookieMistake.class));
         cards.add(new SetCardInfo("Rousing Read", 67, Rarity.COMMON, mage.cards.r.RousingRead.class));
         cards.add(new SetCardInfo("Rugged Highlands", 249, Rarity.COMMON, mage.cards.r.RuggedHighlands.class));
         cards.add(new SetCardInfo("Run Afoul", 201, Rarity.COMMON, mage.cards.r.RunAfoul.class));
