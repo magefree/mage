@@ -120,6 +120,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Garruk, Savage Herald", 336, Rarity.MYTHIC, mage.cards.g.GarrukSavageHerald.class));
         cards.add(new SetCardInfo("Garruk, Unleashed", 183, Rarity.MYTHIC, mage.cards.g.GarrukUnleashed.class));
         cards.add(new SetCardInfo("Ghostly Pilferer", 52, Rarity.RARE, mage.cards.g.GhostlyPilferer.class));
+        cards.add(new SetCardInfo("Gloom Sower", 100, Rarity.COMMON, mage.cards.g.GloomSower.class));
         cards.add(new SetCardInfo("Glorious Anthem", 21, Rarity.RARE, mage.cards.g.GloriousAnthem.class));
         cards.add(new SetCardInfo("Goblin Arsonist", 147, Rarity.COMMON, mage.cards.g.GoblinArsonist.class));
         cards.add(new SetCardInfo("Goblin Wizardry", 148, Rarity.COMMON, mage.cards.g.GoblinWizardry.class));
