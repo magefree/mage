@@ -1,9 +1,9 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -27,18 +27,21 @@ import mage.target.TargetSpell;
 public final class CrypticCommand extends CardImpl {
 
     public CrypticCommand(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{U}{U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}{U}{U}");
 
         // Choose two -
         this.getSpellAbility().getModes().setMinModes(2);
         this.getSpellAbility().getModes().setMaxModes(2);
         // Counter target spell;
-        this.getSpellAbility().addEffect(new CounterTargetEffect());
+        Effect effect1 = new CounterTargetEffect();
+        effect1.setText("Counter target spell.");
+        this.getSpellAbility().addEffect(effect1);
         this.getSpellAbility().addTarget(new TargetSpell());
         // or return target permanent to its owner's hand;
         Mode mode = new Mode();
-        mode.addEffect(new ReturnToHandTargetEffect());
+        Effect effect2 = new ReturnToHandTargetEffect();
+        effect2.setText("Return target permanent to its owner's hand.");
+        mode.addEffect(effect2);
         mode.addTarget(new TargetPermanent());
         this.getSpellAbility().getModes().addMode(mode);
         // or tap all creatures your opponents control;
@@ -47,7 +50,9 @@ public final class CrypticCommand extends CardImpl {
         this.getSpellAbility().getModes().addMode(mode);
         // or draw a card.
         mode = new Mode();
-        mode.addEffect(new DrawCardSourceControllerEffect(1));
+        Effect effect3 = new DrawCardSourceControllerEffect(1);
+        mode.addEffect(effect3);
+        effect3.setText("Draw a card.");
         this.getSpellAbility().getModes().addMode(mode);
     }
 
@@ -64,13 +69,14 @@ public final class CrypticCommand extends CardImpl {
 class CrypticCommandEffect extends OneShotEffect {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
+
     static {
-      filter.add(TargetController.OPPONENT.getControllerPredicate());
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public CrypticCommandEffect() {
         super(Outcome.Tap);
-        staticText = "tap all creatures your opponents control";
+        staticText = "Tap all creatures your opponents control";
     }
 
     public CrypticCommandEffect(final CrypticCommandEffect effect) {
