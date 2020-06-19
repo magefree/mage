@@ -1533,10 +1533,34 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 }
             }
         }
+
         // pay phyrexian life costs
         if (cost instanceof PhyrexianManaCost) {
             return cost.pay(null, game, null, playerId, false, null) || permittingObject != null;
         }
+
+        // pay special mana like convoke cost (tap for pay)
+        // GUI: user see "special" button while pay spell's cost
+        // TODO: AI can't prioritize special mana types to pay, e.g. it will use first available
+        SpecialAction specialAction = game.getState().getSpecialActions().getControlledBy(this.getId(), true)
+                .values().stream().findFirst().orElse(null);
+        ManaOptions specialMana = specialAction == null ? null : specialAction.getManaOptions(ability, game, unpaid);
+        if (specialMana != null) {
+            for (Mana netMana : specialMana) {
+                if (cost.testPay(netMana) || permittingObject != null) {
+                    if (netMana instanceof ConditionalMana && !((ConditionalMana) netMana).apply(ability, game, getId(), cost)) {
+                        continue;
+                    }
+                    specialAction.setUnpaidMana(unpaid);
+                    if (activateAbility(specialAction, game)) {
+                        return true;
+                    }
+                    // only one time try to pay
+                    break;
+                }
+            }
+        }
+
         return false;
     }
 
