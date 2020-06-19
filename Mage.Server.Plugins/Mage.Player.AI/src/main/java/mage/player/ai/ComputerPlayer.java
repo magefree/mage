@@ -396,12 +396,16 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 }
             }
 
-            while ((outcome.isGood() ? target.getTargets().size() < target.getMaxNumberOfTargets() : !target.isChosen())
+            // exile cost workaround: exile is bad, but exile from graveyard in most cases is good (more exiled -- more good things you get, e.g. delve's pay)
+            boolean isRealGood = outcome.isGood() || outcome == Outcome.Exile;
+            while ((isRealGood ? target.getTargets().size() < target.getMaxNumberOfTargets() : !target.isChosen())
                     && !cards.isEmpty()) {
                 Card pick = pickTarget(abilityControllerId, cards, outcome, target, null, game);
                 if (pick != null) {
                     target.addTarget(pick.getId(), null, game);
                     cards.remove(pick);
+                } else {
+                    break;
                 }
             }
 
