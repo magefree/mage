@@ -1,6 +1,5 @@
 package mage.game.stack;
 
-import java.util.*;
 import mage.MageInt;
 import mage.MageObject;
 import mage.Mana;
@@ -11,6 +10,7 @@ import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.mana.ActivationManaAbilityStep;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.keyword.BestowAbility;
@@ -31,6 +31,11 @@ import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.util.GameLog;
 import mage.util.SubTypeList;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -62,7 +67,7 @@ public class Spell extends StackObjImpl implements Card {
     private boolean resolving = false;
     private UUID commandedBy = null; // for Word of Command
 
-    private boolean doneActivatingManaAbilities; // if this is true, the player is no longer allowed to pay the spell costs with activating of mana abilies
+    private ActivationManaAbilityStep currentActivatingManaAbilitiesStep = ActivationManaAbilityStep.BEFORE;
 
     public Spell(Card card, SpellAbility ability, UUID controllerId, Zone fromZone) {
         this.card = card;
@@ -118,12 +123,12 @@ public class Spell extends StackObjImpl implements Card {
         this.resolving = spell.resolving;
         this.commandedBy = spell.commandedBy;
 
-        this.doneActivatingManaAbilities = spell.doneActivatingManaAbilities;
+        this.currentActivatingManaAbilitiesStep = spell.currentActivatingManaAbilitiesStep;
         this.targetChanged = spell.targetChanged;
     }
 
     public boolean activate(Game game, boolean noMana) {
-        setDoneActivatingManaAbilities(false); // used for e.g. improvise
+        setCurrentActivatingManaAbilitiesStep(ActivationManaAbilityStep.BEFORE); // mana payment step started, can use any mana abilities, see AlternateManaPaymentAbility
 
         if (!ability.activate(game, noMana)) {
             return false;
@@ -147,7 +152,7 @@ public class Spell extends StackObjImpl implements Card {
                 return false;
             }
         }
-        setDoneActivatingManaAbilities(true); // can be activated again maybe during the resolution of the spell (e.g. Metallic Rebuke)
+        setCurrentActivatingManaAbilitiesStep(ActivationManaAbilityStep.NORMAL);
         return true;
     }
 
@@ -401,12 +406,12 @@ public class Spell extends StackObjImpl implements Card {
         }
     }
 
-    public boolean isDoneActivatingManaAbilities() {
-        return doneActivatingManaAbilities;
+    public ActivationManaAbilityStep getCurrentActivatingManaAbilitiesStep() {
+        return this.currentActivatingManaAbilitiesStep;
     }
 
-    public void setDoneActivatingManaAbilities(boolean doneActivatingManaAbilities) {
-        this.doneActivatingManaAbilities = doneActivatingManaAbilities;
+    public void setCurrentActivatingManaAbilitiesStep(ActivationManaAbilityStep currentActivatingManaAbilitiesStep) {
+        this.currentActivatingManaAbilitiesStep = currentActivatingManaAbilitiesStep;
     }
 
     @Override
