@@ -1,6 +1,5 @@
 package mage.game.jumpstart;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.security.SecureRandom;
@@ -11,7 +10,6 @@ import java.util.Set;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.CharSource;
-import com.google.common.io.Files;
 import com.google.common.io.Resources;
 
 import mage.cards.Card;
@@ -22,7 +20,7 @@ import mage.game.GameException;
 
 public class JumpstartPoolGenerator {
 
-  private static final String RESOURCE_NAME = "mage/game/jumpstart/jumpstart.txt";
+  private static final String RESOURCE_NAME = "jumpstart/jumpstart.txt";
   private static final List<JumpstartPack> JUMPSTART_PACKS;
 
   static {

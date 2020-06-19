@@ -1,0 +1,50 @@
+# setCode cardNum cardName
+# Red Cards
+ELD 137 Rimrock Knight
+ELD 137 Rimrock Knight
+ELD 137 Rimrock Knight
+ELD 137 Rimrock Knight
+ELD 291 Bonecrusher Giant
+ELD 291 Bonecrusher Giant
+ELD 291 Bonecrusher Giant
+ELD 291 Bonecrusher Giant
+ELD 120 Embercleave
+ELD 120 Embercleave
+ELD 120 Embercleave
+ELD 120 Embercleave
+
+# Green Cards
+GRN 141 Pelt Collector
+GRN 141 Pelt Collector
+GRN 141 Pelt Collector
+GRN 141 Pelt Collector
+WAR 171 Paradise Druid
+WAR 171 Paradise Druid
+WAR 171 Paradise Druid
+WAR 171 Paradise Druid
+ELD 165 Lovestruck Beast
+ELD 165 Lovestruck Beast
+ELD 165 Lovestruck Beast
+ELD 165 Lovestruck Beast
+ELD 171 Questing Beast
+ELD 171 Questing Beast
+ELD 171 Questing Beast
+ELD 171 Questing Beast
+
+# Black Cards
+THB 123 Woe Strider
+THB 123 Woe Strider
+THB 123 Woe Strider
+THB 123 Woe Strider
+ELD 81 Cauldron Familiar
+ELD 81 Cauldron Familiar
+ELD 81 Cauldron Familiar
+ELD 81 Cauldron Familiar
+ELD 237 Witch's Oven
+ELD 237 Witch's Oven
+ELD 237 Witch's Oven
+ELD 237 Witch's Oven
+IKO 220 Fiend Artisan
+IKO 220 Fiend Artisan
+IKO 220 Fiend Artisan
+IKO 220 Fiend Artisan
