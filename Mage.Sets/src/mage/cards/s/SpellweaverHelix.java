@@ -1,12 +1,12 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ExileTargetForSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -21,15 +21,15 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetCardInASingleGraveyard;
 import mage.target.targetpointer.FixedTarget;
-import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author emerald000
  */
 public final class SpellweaverHelix extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("sorcery cards from a single graveyard");
+    private static final FilterCard filter = new FilterCard("sorcery cards");
 
     static {
         filter.add(CardType.SORCERY.getPredicate());
@@ -39,7 +39,7 @@ public final class SpellweaverHelix extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // Imprint - When Spellweaver Helix enters the battlefield, you may exile two target sorcery cards from a single graveyard.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new SpellweaverHelixImprintEffect(), true, "Imprint &mdash; ");
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileTargetForSourceEffect(), true, "Imprint &mdash; ");
         ability.addTarget(new TargetCardInASingleGraveyard(2, 2, filter));
         this.addAbility(ability);
 
@@ -54,42 +54,6 @@ public final class SpellweaverHelix extends CardImpl {
     @Override
     public SpellweaverHelix copy() {
         return new SpellweaverHelix(this);
-    }
-}
-
-class SpellweaverHelixImprintEffect extends OneShotEffect {
-
-    SpellweaverHelixImprintEffect() {
-        super(Outcome.Exile);
-        this.staticText = "you may exile two target sorcery cards from a single graveyard";
-    }
-
-    SpellweaverHelixImprintEffect(final SpellweaverHelixImprintEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SpellweaverHelixImprintEffect copy() {
-        return new SpellweaverHelixImprintEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-            for (UUID targetId : this.getTargetPointer().getTargets(game, source)) {
-                Card card = game.getCard(targetId);
-                if (card != null) {
-                    controller.moveCardsToExile(card, source, game, true, CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()), source.getSourceObject(game).getIdName());
-                    if (sourcePermanent != null) {
-                        sourcePermanent.imprint(targetId, game);
-                    }
-                }
-            }
-            return true;
-        }
-        return false;
     }
 }
 
