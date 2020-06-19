@@ -222,6 +222,7 @@ public final class Jumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Thriving Moor", 37, Rarity.COMMON, mage.cards.t.ThrivingMoor.class));
         cards.add(new SetCardInfo("Thundering Spineback", 437, Rarity.UNCOMMON, mage.cards.t.ThunderingSpineback.class));
         cards.add(new SetCardInfo("Tithebearer Giant", 284, Rarity.COMMON, mage.cards.t.TithebearerGiant.class));
+        cards.add(new SetCardInfo("Towering Titan", 31, Rarity.MYTHIC, mage.cards.t.ToweringTitan.class));
         cards.add(new SetCardInfo("Ulvenwald Hydra", 439, Rarity.MYTHIC, mage.cards.u.UlvenwaldHydra.class));
         cards.add(new SetCardInfo("Vampire Neonate", 285, Rarity.COMMON, mage.cards.v.VampireNeonate.class));
         cards.add(new SetCardInfo("Vastwood Zendikon", 440, Rarity.COMMON, mage.cards.v.VastwoodZendikon.class));
