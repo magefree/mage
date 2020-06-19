@@ -1,7 +1,5 @@
 package mage.cards.t;
 
-import java.util.UUID;
-
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -14,6 +12,8 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  * @author arcox
@@ -42,7 +42,7 @@ class TrackDownEffect extends OneShotEffect {
 
     public TrackDownEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "then reveal the top card of your library. If it’s a creature or land card, draw a card";
+        this.staticText = "then reveal the top card of your library. If it's a creature or land card, draw a card";
     }
 
     public TrackDownEffect(final TrackDownEffect effect) {
