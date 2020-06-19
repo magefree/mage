@@ -351,6 +351,13 @@ public abstract class MageTestPlayerBase {
         return new TestPlayer(new TestComputerPlayer(name, rangeOfInfluence));
     }
 
+    /**
+     * Raise error on any miss choices/targets setup in tests (if AI try to make decision itself instead of user defined actions)
+     * If you want to disable mana auto-payment (e.g. to simulate user clicks on mana pool or special mana) then call
+     * disableManaAutoPayment()
+     *
+     * @param enable
+     */
     protected void setStrictChooseMode(boolean enable) {
         if (playerA != null) playerA.setChooseStrictMode(enable);
         if (playerB != null) playerB.setChooseStrictMode(enable);
@@ -403,8 +410,8 @@ public abstract class MageTestPlayerBase {
 // custom card with global abilities list to init (can contains abilities per card name)
 class CustomTestCard extends CardImpl {
 
-    static private Map<String, Abilities<Ability>> abilitiesList = new HashMap<>(); // card name -> abilities
-    static private Map<String, SpellAbility> spellAbilitiesList = new HashMap<>(); // card name -> spell ability
+    static private final Map<String, Abilities<Ability>> abilitiesList = new HashMap<>(); // card name -> abilities
+    static private final Map<String, SpellAbility> spellAbilitiesList = new HashMap<>(); // card name -> spell ability
 
     static void addCustomAbility(String cardName, SpellAbility spellAbility, Ability ability) {
         if (!abilitiesList.containsKey(cardName)) {

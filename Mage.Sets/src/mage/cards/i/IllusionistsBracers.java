@@ -1,7 +1,5 @@
-
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -12,8 +10,8 @@ import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -22,18 +20,19 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class IllusionistsBracers extends CardImpl {
 
     public IllusionistsBracers(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.subtype.add(SubType.EQUIPMENT);
 
         // Whenever an ability of equipped creature is activated, if it isn't a mana ability, copy that ability. You may choose new targets for the copy.
-        this.addAbility(new AbilityActivatedTriggeredAbility());
+        this.addAbility(new IllusionistsBracersTriggeredAbility());
 
         // Equip 3
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3)));
@@ -49,19 +48,19 @@ public final class IllusionistsBracers extends CardImpl {
     }
 }
 
-class AbilityActivatedTriggeredAbility extends TriggeredAbilityImpl {
+class IllusionistsBracersTriggeredAbility extends TriggeredAbilityImpl {
 
-    AbilityActivatedTriggeredAbility() {
+    IllusionistsBracersTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CopyActivatedAbilityEffect());
     }
 
-    AbilityActivatedTriggeredAbility(final AbilityActivatedTriggeredAbility ability) {
+    IllusionistsBracersTriggeredAbility(final IllusionistsBracersTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
-    public AbilityActivatedTriggeredAbility copy() {
-        return new AbilityActivatedTriggeredAbility(this);
+    public IllusionistsBracersTriggeredAbility copy() {
+        return new IllusionistsBracersTriggeredAbility(this);
     }
 
     @Override
@@ -72,7 +71,7 @@ class AbilityActivatedTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent equipment = game.getPermanent(this.getSourceId());
-        if (equipment != null  && equipment.isAttachedTo(event.getSourceId())) {
+        if (equipment != null && equipment.isAttachedTo(event.getSourceId())) {
             StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
             if (!(stackAbility.getStackAbility() instanceof ActivatedManaAbilityImpl)) {
                 Effect effect = this.getEffects().get(0);
