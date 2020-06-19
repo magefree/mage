@@ -88,19 +88,19 @@ public class DevourEffect extends ReplacementEffectImpl {
                 controller.chooseTarget(Outcome.Detriment, target, source, game);
                 if (!target.getTargets().isEmpty()) {
                     List<SubTypeList> cardSubtypes = new ArrayList<>();
-                    int devouredCreatures = target.getTargets().size();
+                    int devouredCreatures = 0;
+                    for (UUID targetId : target.getTargets()) {
+                        Permanent targetCreature = game.getPermanent(targetId);
+                        if (targetCreature != null && targetCreature.sacrifice(source.getSourceId(), game)) {
+                            cardSubtypes.add(targetCreature.getSubtype(game));
+                            devouredCreatures++;
+                        }
+                    }
                     if (!game.isSimulation()) {
                         game.informPlayers(creature.getLogName() + " devours " + devouredCreatures + " creatures");
                     }
-                    for (UUID targetId : target.getTargets()) {
-                        Permanent targetCreature = game.getPermanent(targetId);
-                        if (targetCreature != null) {
-                            cardSubtypes.add(targetCreature.getSubtype(game));
-                        }
-                        if (targetCreature == null || !targetCreature.sacrifice(source.getSourceId(), game)) {
-                            return false;
-                        }
-                    }
+                    game.getState().processAction(game); // need for multistep effects
+
                     int amountCounters;
                     if (devourFactor == DevourFactor.DevourX) {
                         amountCounters = devouredCreatures * devouredCreatures;
