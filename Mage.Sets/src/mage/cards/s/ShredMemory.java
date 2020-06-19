@@ -21,7 +21,7 @@ public final class ShredMemory extends CardImpl {
 
         // Exile up to four target cards from a single graveyard.
         this.getSpellAbility().addEffect(new ExileTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCardInASingleGraveyard(0, 4, new FilterCard("cards")));
+        this.getSpellAbility().addTarget(new TargetCardInASingleGraveyard(0, 4, new FilterCard("cards from a single graveyard")));
         // Transmute {1}{B}{B}
         this.addAbility(new TransmuteAbility("{1}{B}{B}"));
     }
