@@ -127,6 +127,7 @@ public final class Jumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Lawmage's Binding", 453, Rarity.COMMON, mage.cards.l.LawmagesBinding.class));
         cards.add(new SetCardInfo("Leaf Gilder", 408, Rarity.COMMON, mage.cards.l.LeafGilder.class));
         cards.add(new SetCardInfo("Leave in the Dust", 156, Rarity.COMMON, mage.cards.l.LeaveInTheDust.class));
+        cards.add(new SetCardInfo("Lightning-Core Excavator", 32, Rarity.COMMON, mage.cards.l.LightningCoreExcavator.class));
         cards.add(new SetCardInfo("Liliana's Elite", 250, Rarity.UNCOMMON, mage.cards.l.LilianasElite.class));
         cards.add(new SetCardInfo("Lurking Predators", 410, Rarity.RARE, mage.cards.l.LurkingPredators.class));
         cards.add(new SetCardInfo("Macabre Waltz", 252, Rarity.COMMON, mage.cards.m.MacabreWaltz.class));
