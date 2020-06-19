@@ -239,6 +239,7 @@ public final class Jumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Wight of Precinct Six", 287, Rarity.COMMON, mage.cards.w.WightOfPrecinctSix.class));
         cards.add(new SetCardInfo("Wildheart Invoker", 444, Rarity.COMMON, mage.cards.w.WildheartInvoker.class));
         cards.add(new SetCardInfo("Winged Words", 196, Rarity.COMMON, mage.cards.w.WingedWords.class));
+        cards.add(new SetCardInfo("Witch of the Moors", 18, Rarity.RARE, mage.cards.w.WitchOfTheMoors.class));
         cards.add(new SetCardInfo("Wizard's Retort", 198, Rarity.UNCOMMON, mage.cards.w.WizardsRetort.class));
         cards.add(new SetCardInfo("Woodborn Behemoth", 446, Rarity.UNCOMMON, mage.cards.w.WoodbornBehemoth.class));
         cards.add(new SetCardInfo("Wren's Run Vanquisher", 447, Rarity.UNCOMMON, mage.cards.w.WrensRunVanquisher.class));
