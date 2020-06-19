@@ -8,7 +8,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveEachPlayerEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
@@ -56,7 +56,7 @@ public final class ThievesGuildEnforcer extends CardImpl {
                 ThievesGuildEnforcerCondition.instance, "as long as an opponent " +
                 "has eight or more cards in their graveyard, {this} gets +2/+1"
         ));
-        ability.addEffect(new ConditionalContinuousEffect(new GainAbilityControlledEffect(
+        ability.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(
                 DeathtouchAbility.getInstance(), Duration.WhileOnBattlefield
         ), ThievesGuildEnforcerCondition.instance, "and has deathtouch"));
         this.addAbility(ability);
