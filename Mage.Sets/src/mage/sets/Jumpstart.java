@@ -202,6 +202,7 @@ public final class Jumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Spitting Earth", 364, Rarity.COMMON, mage.cards.s.SpittingEarth.class));
         cards.add(new SetCardInfo("Sporemound", 433, Rarity.COMMON, mage.cards.s.Sporemound.class));
         cards.add(new SetCardInfo("Storm Sculptor", 179, Rarity.COMMON, mage.cards.s.StormSculptor.class));
+        cards.add(new SetCardInfo("Supply Runners", 7, Rarity.UNCOMMON, mage.cards.s.SupplyRunners.class));
         cards.add(new SetCardInfo("Suspicious Bookcase", 487, Rarity.UNCOMMON, mage.cards.s.SuspiciousBookcase.class));
         cards.add(new SetCardInfo("Swamp", 54, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swarm of Bloodflies", 282, Rarity.UNCOMMON, mage.cards.s.SwarmOfBloodflies.class));
