@@ -156,6 +156,7 @@ public final class Jumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Oneirophage", 162, Rarity.UNCOMMON, mage.cards.o.Oneirophage.class));
         cards.add(new SetCardInfo("Oracle of Mul Daya", 415, Rarity.RARE, mage.cards.o.OracleOfMulDaya.class));
         cards.add(new SetCardInfo("Orazca Frillback", 416, Rarity.COMMON, mage.cards.o.OrazcaFrillback.class));
+        cards.add(new SetCardInfo("Ormos, Archive Keeper", 13, Rarity.RARE, mage.cards.o.OrmosArchiveKeeper.class));
         cards.add(new SetCardInfo("Overgrown Battlement", 417, Rarity.UNCOMMON, mage.cards.o.OvergrownBattlement.class));
         cards.add(new SetCardInfo("Pacifism", 125, Rarity.COMMON, mage.cards.p.Pacifism.class));
         cards.add(new SetCardInfo("Peel from Reality", 163, Rarity.COMMON, mage.cards.p.PeelFromReality.class));
