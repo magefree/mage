@@ -1795,7 +1795,7 @@ public class TestPlayer implements Player {
 
         assertAliasSupportInChoices(true);
         if (!choices.isEmpty()) {
-            List<String> usedChoices = new ArrayList<>();
+            List<Integer> usedChoices = new ArrayList<>();
             List<UUID> usedTargets = new ArrayList<>();
 
             Ability source = null;
@@ -1883,7 +1883,8 @@ public class TestPlayer implements Player {
                 boolean targetCompleted = false;
 
                 CheckAllChoices:
-                for (String choiceRecord : choices) {
+                for (int choiceIndex = 0; choiceIndex < choices.size(); choiceIndex++) {
+                    String choiceRecord = choices.get(choiceIndex);
                     if (targetCompleted) {
                         break CheckAllChoices;
                     }
@@ -1923,14 +1924,19 @@ public class TestPlayer implements Player {
                     }
 
                     if (targetFound) {
-                        usedChoices.add(choiceRecord);
+                        usedChoices.add(choiceIndex);
                     }
                 }
 
                 // apply only on ALL targets or revert
                 if (usedChoices.size() > 0) {
                     if (target.isChosen()) {
-                        choices.removeAll(usedChoices);
+                        // remove all used choices
+                        for (int i = choices.size(); i >= 0; i--) {
+                            if (usedChoices.contains(i)) {
+                                choices.remove(i);
+                            }
+                        }
                         return true;
                     } else {
                         Assert.fail("Not full targets list.");
@@ -2091,7 +2097,7 @@ public class TestPlayer implements Player {
                                     if ((permanent.isCopy() && !originOnly) || (!permanent.isCopy() && !copyOnly)) {
                                         target.addTarget(permanent.getId(), source, game);
                                         targetFound = true;
-                                        break; // return to for (String targetName
+                                        break; // return to next targetName
                                     }
                                 }
                             }
@@ -2105,18 +2111,19 @@ public class TestPlayer implements Player {
             }
 
             // card in hand
-            if (target.getOriginalTarget() instanceof TargetCardInHand) {
+            if (target.getOriginalTarget() instanceof TargetCardInHand
+                    || target.getOriginalTarget() instanceof TargetDiscard) {
                 for (String targetDefinition : targets) {
                     checkTargetDefinitionMarksSupport(target, targetDefinition, "^");
                     String[] targetList = targetDefinition.split("\\^");
                     boolean targetFound = false;
                     for (String targetName : targetList) {
-                        for (Card card : computerPlayer.getHand().getCards(((TargetCardInHand) target.getOriginalTarget()).getFilter(), game)) {
+                        for (Card card : computerPlayer.getHand().getCards(((TargetCard) target.getOriginalTarget()).getFilter(), game)) {
                             if (hasObjectTargetNameOrAlias(card, targetName) || (card.getName() + '-' + card.getExpansionSetCode()).equals(targetName)) { // TODO: remove set code search?
                                 if (target.canTarget(abilityControllerId, card.getId(), source, game) && !target.getTargets().contains(card.getId())) {
                                     target.addTarget(card.getId(), source, game);
                                     targetFound = true;
-                                    break; // return to for (String targetName
+                                    break; // return to next targetName
                                 }
                             }
                         }
@@ -2141,7 +2148,7 @@ public class TestPlayer implements Player {
                                 if (target.canTarget(abilityControllerId, card.getId(), source, game) && !target.getTargets().contains(card.getId())) {
                                     target.addTarget(card.getId(), source, game);
                                     targetFound = true;
-                                    break; // return to for (String targetName
+                                    break; // return to next targetName
                                 }
                             }
                         }
@@ -2166,7 +2173,7 @@ public class TestPlayer implements Player {
                                 if (targetFull.canTarget(abilityControllerId, card.getId(), source, game) && !targetFull.getTargets().contains(card.getId())) {
                                     targetFull.add(card.getId(), game);
                                     targetFound = true;
-                                    break; // return to for (String targetName
+                                    break; // return to next targetName
                                 }
                             }
                         }
@@ -2216,7 +2223,7 @@ public class TestPlayer implements Player {
                                     if (target.canTarget(abilityControllerId, card.getId(), source, game) && !target.getTargets().contains(card.getId())) {
                                         target.addTarget(card.getId(), source, game);
                                         targetFound = true;
-                                        break IterateGraveyards;  // return to for (String targetName
+                                        break IterateGraveyards;  // return to next targetName
                                     }
                                 }
                             }
@@ -2243,7 +2250,7 @@ public class TestPlayer implements Player {
                                 if (target.canTarget(abilityControllerId, stackObject.getId(), source, game) && !target.getTargets().contains(stackObject.getId())) {
                                     target.addTarget(stackObject.getId(), source, game);
                                     targetFound = true;
-                                    break; // return to for (String targetName
+                                    break; // return to next targetName
                                 }
                             }
                         }
@@ -3620,38 +3627,76 @@ public class TestPlayer implements Player {
         groupsForTargetHandling = null;
 
         if (!computerPlayer.getManaPool().isAutoPayment()) {
-            // manual pay by mana clicks/commands
             if (!choices.isEmpty()) {
-                String needColor = choices.get(0);
-                switch (needColor) {
+                // manual pay by mana clicks/commands
+                String choice = choices.get(0);
+                boolean choiceUsed = false;
+                boolean choiceRemoved = false;
+                switch (choice) {
                     case "White":
                         Assert.assertTrue("pool must have white mana", computerPlayer.getManaPool().getWhite() > 0);
                         computerPlayer.getManaPool().unlockManaType(ManaType.WHITE);
+                        choiceUsed = true;
                         break;
                     case "Blue":
                         Assert.assertTrue("pool must have blue mana", computerPlayer.getManaPool().getBlue() > 0);
                         computerPlayer.getManaPool().unlockManaType(ManaType.BLUE);
+                        choiceUsed = true;
                         break;
                     case "Black":
                         Assert.assertTrue("pool must have black mana", computerPlayer.getManaPool().getBlack() > 0);
                         computerPlayer.getManaPool().unlockManaType(ManaType.BLACK);
+                        choiceUsed = true;
                         break;
                     case "Red":
                         Assert.assertTrue("pool must have red mana", computerPlayer.getManaPool().getRed() > 0);
                         computerPlayer.getManaPool().unlockManaType(ManaType.RED);
+                        choiceUsed = true;
                         break;
                     case "Green":
                         Assert.assertTrue("pool must have green mana", computerPlayer.getManaPool().getGreen() > 0);
                         computerPlayer.getManaPool().unlockManaType(ManaType.GREEN);
+                        choiceUsed = true;
+                        break;
+                    case "Colorless":
+                        Assert.assertTrue("pool must have colorless mana", computerPlayer.getManaPool().getColorless() > 0);
+                        computerPlayer.getManaPool().unlockManaType(ManaType.COLORLESS);
+                        choiceUsed = true;
                         break;
                     default:
-                        Assert.fail("Unknown choice command for mana unlock: " + needColor);
+                        // go to special block
+                        //Assert.fail("Unknown choice command for mana unlock: " + needColor);
                         break;
                 }
-                choices.remove(0);
-                return true;
+
+                // manual pay by special actions like convoke
+                if (!choiceUsed) {
+                    Map<UUID, SpecialAction> specialActions = game.getState().getSpecialActions().getControlledBy(this.getId(), true);
+                    for (SpecialAction specialAction : specialActions.values()) {
+                        if (specialAction.getRule(true).startsWith(choice)) {
+                            if (specialAction.canActivate(this.getId(), game).canActivate()) {
+                                choices.remove(0);
+                                choiceRemoved = true;
+                                specialAction.setUnpaidMana(unpaid);
+                                if (activateAbility(specialAction, game)) {
+                                    choiceUsed = true;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if (choiceUsed) {
+                    if (!choiceRemoved) {
+                        choices.remove(0);
+                    }
+                    return true;
+                } else {
+                    Assert.fail("Can't use choice in play mana: " + choice);
+                }
             }
-            Assert.fail(this.getName() + " disabled mana auto-payment, but no choices found for color unlock in pool for unpaid cost: " + unpaid.getText());
+
+            Assert.fail(this.getName() + " disabled mana auto-payment, but no choices found for color unlock in pool or special action for unpaid cost: " + unpaid.getText());
         }
 
         return computerPlayer.playMana(ability, unpaid, promptText, game);

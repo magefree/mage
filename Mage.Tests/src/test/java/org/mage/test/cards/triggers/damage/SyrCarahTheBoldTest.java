@@ -55,32 +55,31 @@ public class SyrCarahTheBoldTest extends CardTestPlayerBase {
     public void test_DamageWithCopyAbility() {
         removeAllCardsFromLibrary(playerA);
         removeAllCardsFromHand(playerA);
+
         // When Syr Carah, the Bold or an instant or sorcery spell you control deals damage to a player, exile the top card of your library. You may play that card this turn.
         // {T}: Syr Carah deals 1 damage to any target.
         addCard(Zone.BATTLEFIELD, playerA, "Syr Carah, the Bold", 1);
-        //
-        addCard(Zone.LIBRARY, playerA, "Swamp", 5);
-        //
-        // {T}: Embermage Goblin deals 1 damage to any target.
-        addCard(Zone.BATTLEFIELD, playerB, "Embermage Goblin", 1);
+        addCard(Zone.LIBRARY, playerA, "Balduvian Bears", 2);
         //
         // Whenever an ability of equipped creature is activated, if it isn't a mana ability, copy that ability. You may choose new targets for the copy.
         // Equip 3
-        addCard(Zone.BATTLEFIELD, playerB, "Illusionist's Bracers", 1);
-        addCard(Zone.BATTLEFIELD, playerB, "Island", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Illusionist's Bracers", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
 
-        // equip to copy abilities
-        // showAvaileableAbilities("abils", 2, PhaseStep.PRECOMBAT_MAIN, playerB);
-        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Equip {3}", "Embermage Goblin");
-        setChoice(playerB, "No"); // no new target
+        // prepare equip
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {3}", "Syr Carah, the Bold");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkExileCount("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Balduvian Bears", 0);
 
-        // 3 - 2x damage (copy), but no trigger
-        // java.lang.ClassCastException: mage.game.stack.StackAbility cannot be cast to mage.game.stack.Spell
-        activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "{T}: {source} deals", playerA);
-        checkLife("damage 3", 2, PhaseStep.END_TURN, playerA, 20 - 1 - 1);
+        // activate damage - 2x damage with copy
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {source} deals", playerB);
+        setChoice(playerA, "No"); // no new target for copy
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkLife("damage 2", 1, PhaseStep.PRECOMBAT_MAIN, playerB, 20 - 1 - 1);
+        checkExileCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Balduvian Bears", 2);
 
         setStrictChooseMode(true);
-        setStopAt(3, PhaseStep.END_TURN);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
         assertAllCommandsUsed();
     }

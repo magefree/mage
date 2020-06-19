@@ -1,4 +1,3 @@
-
 package org.mage.test.cards.copy;
 
 import mage.constants.CardType;
@@ -9,7 +8,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 public class CleverImpersonatorTest extends CardTestPlayerBase {
@@ -54,22 +52,29 @@ public class CleverImpersonatorTest extends CardTestPlayerBase {
      */
     @Test
     public void testCopyPlaneswalker() {
-        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
-
         // You may have Clever Impersonator enter the battlefield as a copy of any nonland permanent on the battlefield.
         addCard(Zone.HAND, playerA, "Clever Impersonator", 1); // {2}{U}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
 
         // +2: Each player discards a card.
         // -X: Return target nonlegendary creature with converted mana cost X from your graveyard to the battlefield.
         // -8: You get an emblem with "Whenever a creature dies, return it to the battlefield under your control at the beginning of the next end step.";
         addCard(Zone.BATTLEFIELD, playerB, "Liliana, Defiant Necromancer", 1);
+        //
+        addCard(Zone.HAND, playerA, "Balduvian Bears", 1);
+        addCard(Zone.HAND, playerB, "Balduvian Bears", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Clever Impersonator");
-        setChoice(playerA, "Liliana, Defiant Necromancer");
+        setChoice(playerA, "Yes"); // make copy
+        setChoice(playerA, "Liliana, Defiant Necromancer"); // copy target
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+2: Each player discards a card");
+        addTarget(playerA, "Balduvian Bears"); // discard
+        addTarget(playerB, "Balduvian Bears"); // discard
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertHandCount(playerA, "Clever Impersonator", 0);
         assertCounterCount(playerB, "Liliana, Defiant Necromancer", CounterType.LOYALTY, 3);  // 3
@@ -157,8 +162,7 @@ public class CleverImpersonatorTest extends CardTestPlayerBase {
      * Reported bug: could not use Clever Impersonator to copy Dawn's Reflection
      */
     @Test
-    public void dawnsReflectionCopiedByImpersonator()
-    {
+    public void dawnsReflectionCopiedByImpersonator() {
         String impersonator = "Clever Impersonator";
         String dReflection = "Dawn's Reflection";
 

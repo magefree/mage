@@ -273,7 +273,7 @@ public class PlayFromNonHandZoneTest extends CardTestPlayerBase {
      * the discard was required. In the first log, when it was cast after
      * Angelic Purge the discard was not required.
      */
-    
+
     @Test
     public void castFromExileButWithAdditionalCostTest() {
         // Ninjutsu {2}{U}{B}
@@ -282,7 +282,7 @@ public class PlayFromNonHandZoneTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Fallen Shinobi", 1); // Creature 5/4
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
         addCard(Zone.HAND, playerB, "Pillarfield Ox");
-        
+
         addCard(Zone.LIBRARY, playerB, "Pillarfield Ox"); // Card to draw on turn 2
         // As an additional cost to cast Tormenting Voice, discard a card.
         // Draw two cards.        
@@ -290,14 +290,14 @@ public class PlayFromNonHandZoneTest extends CardTestPlayerBase {
         // As an additional cost to cast this spell, sacrifice a creature.
         // Flying, Trample        
         addCard(Zone.LIBRARY, playerA, "Demon of Catastrophes"); // Creature {2}{B}{B}  6/6
-  
+
         skipInitShuffling();
 
         attack(2, playerB, "Fallen Shinobi");
-        
+
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Tormenting Voice");
         setChoice(playerB, "Pillarfield Ox"); // Discord for Tormenting Voice
-        
+
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Demon of Catastrophes");
         setChoice(playerB, "Silvercoat Lion"); // Sacrifice for Demon
 
@@ -309,20 +309,20 @@ public class PlayFromNonHandZoneTest extends CardTestPlayerBase {
 
         assertLife(playerA, 15);
         assertPermanentCount(playerB, "Fallen Shinobi", 1);
-        
-        assertGraveyardCount(playerA,  "Tormenting Voice", 1);
-        assertGraveyardCount(playerB,  "Pillarfield Ox", 1);  // Discarded for Tormenting Voice
-        
-        
+
+        assertGraveyardCount(playerA, "Tormenting Voice", 1);
+        assertGraveyardCount(playerB, "Pillarfield Ox", 1);  // Discarded for Tormenting Voice
+
+
         assertPermanentCount(playerB, "Demon of Catastrophes", 1);
-        assertGraveyardCount(playerB,  "Silvercoat Lion", 1);  // sacrificed for Demon
-        
+        assertGraveyardCount(playerB, "Silvercoat Lion", 1);  // sacrificed for Demon
+
         assertHandCount(playerB, "Pillarfield Ox", 1);
         assertHandCount(playerB, 3); // 2 from Tormenting Voice + 1 from Turn 2
         assertExileCount(playerA, 0); // Both exiled cards are cast
-    }    
-    
-    
+    }
+
+
     @Test
     public void castFromExileButWithAdditionalCost2Test() {
         // Ninjutsu {2}{U}{B}
@@ -331,7 +331,7 @@ public class PlayFromNonHandZoneTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Fallen Shinobi", 1); // Creature 5/4
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
         addCard(Zone.HAND, playerB, "Pillarfield Ox");
-        
+
         addCard(Zone.BATTLEFIELD, playerA, "Amulet of Kroog"); // Just to exile for Angelic Purge
 
         // As an additional cost to cast Tormenting Voice, discard a card.
@@ -341,18 +341,18 @@ public class PlayFromNonHandZoneTest extends CardTestPlayerBase {
         // As an additional cost to cast Angelic Purge, sacrifice a permanent.
         // Exile target artifact, creature, or enchantment.      
         addCard(Zone.LIBRARY, playerA, "Angelic Purge"); // Sorcery {2}{W}
-  
+
         skipInitShuffling();
 
         attack(2, playerB, "Fallen Shinobi");
-        
+
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Angelic Purge");
         setChoice(playerB, "Silvercoat Lion"); // Sacrifice for Purge
         addTarget(playerB, "Amulet of Kroog"); // Exile with Purge
-        
+
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Tormenting Voice");
         setChoice(playerB, "Pillarfield Ox"); // Discord for Tormenting Voice
-        
+
         setStopAt(2, PhaseStep.END_TURN);
 
         setStrictChooseMode(true);
@@ -361,27 +361,27 @@ public class PlayFromNonHandZoneTest extends CardTestPlayerBase {
 
         assertLife(playerA, 15);
         assertPermanentCount(playerB, "Fallen Shinobi", 1);
-        
-        assertGraveyardCount(playerA, "Angelic Purge", 1);
-        assertGraveyardCount(playerB,  "Silvercoat Lion", 1);  // sacrificed for Purge
 
-        assertGraveyardCount(playerA,  "Tormenting Voice", 1);
-        assertGraveyardCount(playerB,  "Pillarfield Ox", 1);  // Discarded for Tormenting Voice
-                     
+        assertGraveyardCount(playerA, "Angelic Purge", 1);
+        assertGraveyardCount(playerB, "Silvercoat Lion", 1);  // sacrificed for Purge
+
+        assertGraveyardCount(playerA, "Tormenting Voice", 1);
+        assertGraveyardCount(playerB, "Pillarfield Ox", 1);  // Discarded for Tormenting Voice
+
         assertHandCount(playerB, 3); // 2 from Tormenting Voice + 1 from Turn 2 draw
-        
+
         assertExileCount(playerA, 1); // Both exiled cards are cast
         assertExileCount(playerA, "Amulet of Kroog", 1); // Exiled with Purge
-    }     
-    
-     @Test
-    public void castAdventureWithFallenShinobiTest() {     
+    }
+
+    @Test
+    public void castAdventureWithFallenShinobiTest() {
         // Ninjutsu {2}{U}{B}
         // Whenever Fallen Shinobi deals combat damage to a player, that player exiles the top two cards 
         // of their library. Until end of turn, you may play those cards without paying their mana cost.
         addCard(Zone.BATTLEFIELD, playerB, "Fallen Shinobi", 1); // Creature 5/4
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
-        
+
         addCard(Zone.BATTLEFIELD, playerA, "Amulet of Kroog"); // Just to exile for Angelic Purge
 
         /* Curious Pair {1}{G}
@@ -391,23 +391,23 @@ public class PlayFromNonHandZoneTest extends CardTestPlayerBase {
          * Treats to Share {G}
          * Sorcery — Adventure
          * Create a Food token.
-         */        
-        addCard(Zone.LIBRARY, playerA, "Curious Pair");      
+         */
+        addCard(Zone.LIBRARY, playerA, "Curious Pair");
 
         // As an additional cost to cast Angelic Purge, sacrifice a permanent.
         // Exile target artifact, creature, or enchantment.      
         addCard(Zone.LIBRARY, playerA, "Angelic Purge"); // Sorcery {2}{W}
-  
+
         skipInitShuffling();
 
         attack(2, playerB, "Fallen Shinobi");
-        
+
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Angelic Purge");
         setChoice(playerB, "Silvercoat Lion"); // Sacrifice for Purge
         addTarget(playerB, "Amulet of Kroog"); // Exile with Purge
-        
+
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Treats to Share");
-        
+
         setStopAt(2, PhaseStep.END_TURN);
 
         setStrictChooseMode(true);
@@ -416,17 +416,46 @@ public class PlayFromNonHandZoneTest extends CardTestPlayerBase {
 
         assertLife(playerA, 15);
         assertPermanentCount(playerB, "Fallen Shinobi", 1);
-        
+
         assertGraveyardCount(playerA, "Angelic Purge", 1);
-        assertGraveyardCount(playerB,  "Silvercoat Lion", 1);  // sacrificed for Purge
+        assertGraveyardCount(playerB, "Silvercoat Lion", 1);  // sacrificed for Purge
 
         assertPermanentCount(playerB, "Food", 1);
         assertExileCount(playerA, "Curious Pair", 1);
-                     
+
         assertHandCount(playerB, 1); // 1 from Turn 2 draw
-        
+
         assertExileCount(playerA, 2); // Both exiled cards are cast 
         assertExileCount(playerA, "Amulet of Kroog", 1); // Exiled with Purge        
     }
-    
+
+    @Test
+    public void test_ActivateFromOpponentCreature() {
+        // Players can’t search libraries. Any player may pay {2} for that player to ignore this effect until end of turn.
+        addCard(Zone.BATTLEFIELD, playerB, "Leonin Arbiter", 1);
+        //
+        // {3}{U}{U}
+        // Search target opponent’s library for an artifact card and put that card onto the battlefield under your control. Then that player shuffles their library.
+        addCard(Zone.HAND, playerA, "Acquire", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5 * 2 + 2);
+        addCard(Zone.LIBRARY, playerB, "Alpha Myr", 1);
+
+        // first cast -- can't search library
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Acquire", playerB);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // second cast -- unlock library and search
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}: Any player may");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        //
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Acquire", playerB);
+        addTarget(playerA, "Alpha Myr");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Alpha Myr", 1);
+    }
 }
