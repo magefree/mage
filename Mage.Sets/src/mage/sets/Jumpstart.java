@@ -29,6 +29,7 @@ public final class Jumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Ambassador Oak", 375, Rarity.COMMON, mage.cards.a.AmbassadorOak.class));
         cards.add(new SetCardInfo("Ancestral Statue", 458, Rarity.COMMON, mage.cards.a.AncestralStatue.class));
         cards.add(new SetCardInfo("Arcane Encyclopedia", 459, Rarity.UNCOMMON, mage.cards.a.ArcaneEncyclopedia.class));
+        cards.add(new SetCardInfo("Archaeomender", 9, Rarity.COMMON, mage.cards.a.Archaeomender.class));
         cards.add(new SetCardInfo("Ashmouth Hound", 290, Rarity.COMMON, mage.cards.a.AshmouthHound.class));
         cards.add(new SetCardInfo("Assassin's Strike", 200, Rarity.UNCOMMON, mage.cards.a.AssassinsStrike.class));
         cards.add(new SetCardInfo("Assault Formation", 378, Rarity.RARE, mage.cards.a.AssaultFormation.class));
