@@ -985,11 +985,16 @@ public class VerifyCardDataTest {
             System.out.println();
             System.out.println(card.getName() + " " + card.getManaCost().getText());
             if (card instanceof SplitCard) {
-                card.getAbilities().getRules(card.getName()).forEach(System.out::println);
+                card.getAbilities().getRules(card.getName()).forEach(this::printAbilityText);
             } else {
-                card.getRules().forEach(System.out::println);
+                card.getRules().forEach(this::printAbilityText);
             }
         });
+    }
+
+    private void printAbilityText(String text) {
+        text = text.replace("<br>", "\n");
+        System.out.println(text);
     }
 
     private void checkWrongAbilitiesText(Card card, JsonCard ref, int cardIndex) {
