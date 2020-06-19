@@ -47,6 +47,7 @@ public final class Jumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Bogbrew Witch", 211, Rarity.RARE, mage.cards.b.BogbrewWitch.class));
         cards.add(new SetCardInfo("Bone Picker", 212, Rarity.UNCOMMON, mage.cards.b.BonePicker.class));
         cards.add(new SetCardInfo("Bone Splinters", 213, Rarity.COMMON, mage.cards.b.BoneSplinters.class));
+        cards.add(new SetCardInfo("Brightmare", 2, Rarity.COMMON, mage.cards.b.Brightmare.class));
         cards.add(new SetCardInfo("Brindle Shoat", 380, Rarity.UNCOMMON, mage.cards.b.BrindleShoat.class));
         cards.add(new SetCardInfo("Brushstrider", 381, Rarity.UNCOMMON, mage.cards.b.Brushstrider.class));
         cards.add(new SetCardInfo("Bubbling Cauldron", 460, Rarity.UNCOMMON, mage.cards.b.BubblingCauldron.class));
