@@ -1,50 +1,23 @@
-# setCode cardNum cardName
+# Jumpstart Decklists
+# https://magic.wizards.com/en/articles/archive/feature/jumpstart-decklists-2020-06-18
+# quantity setCode cardNum cardName
+
 # Red Cards
-ELD 137 Rimrock Knight
-ELD 137 Rimrock Knight
-ELD 137 Rimrock Knight
-ELD 137 Rimrock Knight
-ELD 291 Bonecrusher Giant
-ELD 291 Bonecrusher Giant
-ELD 291 Bonecrusher Giant
-ELD 291 Bonecrusher Giant
-ELD 120 Embercleave
-ELD 120 Embercleave
-ELD 120 Embercleave
-ELD 120 Embercleave
+3 ELD 137 Rimrock Knight
+4 ELD 115 Bonecrusher Giant
+2 ELD 120 Embercleave
+8 ELD 262 Mountain
 
 # Green Cards
-GRN 141 Pelt Collector
-GRN 141 Pelt Collector
-GRN 141 Pelt Collector
-GRN 141 Pelt Collector
-WAR 171 Paradise Druid
-WAR 171 Paradise Druid
-WAR 171 Paradise Druid
-WAR 171 Paradise Druid
-ELD 165 Lovestruck Beast
-ELD 165 Lovestruck Beast
-ELD 165 Lovestruck Beast
-ELD 165 Lovestruck Beast
-ELD 171 Questing Beast
-ELD 171 Questing Beast
-ELD 171 Questing Beast
-ELD 171 Questing Beast
+3 GRN 141 Pelt Collector
+3 WAR 171 Paradise Druid
+3 ELD 165 Lovestruck Beast
+3 ELD 171 Questing Beast
+8 ELD 266 Forest
 
 # Black Cards
-THB 123 Woe Strider
-THB 123 Woe Strider
-THB 123 Woe Strider
-THB 123 Woe Strider
-ELD 81 Cauldron Familiar
-ELD 81 Cauldron Familiar
-ELD 81 Cauldron Familiar
-ELD 81 Cauldron Familiar
-ELD 237 Witch's Oven
-ELD 237 Witch's Oven
-ELD 237 Witch's Oven
-ELD 237 Witch's Oven
-IKO 220 Fiend Artisan
-IKO 220 Fiend Artisan
-IKO 220 Fiend Artisan
-IKO 220 Fiend Artisan
+2 THB 123 Woe Strider
+4 ELD 81 Cauldron Familiar
+3 ELD 237 Witch's Oven
+3 IKO 220 Fiend Artisan
+8 ELD 258 Swamp

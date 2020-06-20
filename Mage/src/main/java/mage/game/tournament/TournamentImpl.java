@@ -411,7 +411,7 @@ public abstract class TournamentImpl implements Tournament {
                     player.getDeck().getSideboard().addAll(cube.createBooster());
                 }
             } else if (options.getLimitedOptions().getIsJumpstart()) {
-                player.getDeck().getSideboard().addAll(JumpstartPoolGenerator.generatePool());
+                player.getDeck().getCards().addAll(JumpstartPoolGenerator.generatePool());
             } else {
                 for (ExpansionSet set : sets) {
                     player.getDeck().getSideboard().addAll(set.createBooster());
