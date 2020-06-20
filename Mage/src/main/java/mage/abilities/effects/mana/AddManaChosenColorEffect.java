@@ -44,6 +44,7 @@ public class AddManaChosenColorEffect extends ManaEffect {
 
     @Override
     public String getText(Mode mode) {
+        // buggy, but no other way, see comments https://github.com/magefree/mage/commit/cd8d12365f8119dcfe19176a7142e77f80f423b
         return super.getText(mode) + (chosenColorInfo == null ? "" : " {" + chosenColorInfo.toString() + "}");
     }
 }

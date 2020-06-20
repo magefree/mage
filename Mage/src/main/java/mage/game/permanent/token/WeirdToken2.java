@@ -1,16 +1,17 @@
 package mage.game.permanent.token;
 
 import mage.MageInt;
-import mage.abilities.keyword.DefenderAbility;
-import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**
- *
  * @author TheElk801
  */
 public final class WeirdToken2 extends TokenImpl {
+
+    public WeirdToken2() {
+        this(0);
+    }
 
     public WeirdToken2(int xValue) {
         super("Weird", "X/X blue and red Weird creature token");
