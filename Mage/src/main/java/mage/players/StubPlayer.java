@@ -35,6 +35,7 @@ import static com.google.common.collect.Iterables.getOnlyElement;
 
 public class StubPlayer extends PlayerImpl implements Player {
 
+    @Override
     public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game) {
         if (target instanceof TargetPlayer) {
             for (Player player : game.getPlayers().values()) {
@@ -47,6 +48,7 @@ public class StubPlayer extends PlayerImpl implements Player {
         return false;
     }
 
+    @Override
     public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game) {
         cards.getCards(game).stream().map(MageItem::getId).forEach(cardId -> target.add(cardId, game));
         return true;

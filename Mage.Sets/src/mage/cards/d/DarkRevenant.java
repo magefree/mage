@@ -10,6 +10,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
@@ -67,9 +68,9 @@ class DarkRevenantEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(source.getSourceId());
         if (card != null && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
-            Player owner = game.getPlayer(card.getOwnerId());
-            if(owner != null) {
-                return card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
+            Player controller = game.getPlayer(source.getControllerId());
+            if(controller != null) {
+                return controller.putCardsOnTopOfLibrary(card, game, source, true);
             }
         }
         return true;

@@ -2660,6 +2660,21 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public boolean putCardsOnTopOfLibrary(Card card, Game game, Ability source, boolean anyOrder) {
+        return computerPlayer.putCardsOnTopOfLibrary(card, game, source, anyOrder);
+    }
+    
+    @Override
+    public boolean shuffleCardsToLibrary(Cards cards, Game game, Ability source) {
+        return computerPlayer.shuffleCardsToLibrary(cards, game, source);
+    }
+    
+    @Override
+    public boolean shuffleCardsToLibrary(Card card, Game game, Ability source) {
+        return computerPlayer.shuffleCardsToLibrary(card, game, source);
+    }
+    
+    @Override
     public void setCastSourceIdWithAlternateMana(UUID sourceId, ManaCosts manaCosts, Costs costs) {
         computerPlayer.setCastSourceIdWithAlternateMana(sourceId, manaCosts, costs);
     }

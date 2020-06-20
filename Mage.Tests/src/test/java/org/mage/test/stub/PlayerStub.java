@@ -893,6 +893,21 @@ public class PlayerStub implements Player {
     }
 
     @Override
+    public boolean putCardsOnTopOfLibrary(Card card, Game game, Ability source, boolean anyOrder) {
+        return false;
+    }
+    
+    @Override
+    public boolean shuffleCardsToLibrary(Cards cards, Game game, Ability source) {
+        return false;
+    }
+
+    @Override
+    public boolean shuffleCardsToLibrary(Card card, Game game, Ability source) {
+        return false;
+    }
+    
+    @Override
     public boolean putCardOnTopXOfLibrary(Card card, Game game, Ability source, int xFromTheTop) {
         return true;
     }
