@@ -108,6 +108,7 @@ public final class Jumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Commune with Dinosaurs", 384, Rarity.COMMON, mage.cards.c.CommuneWithDinosaurs.class));
         cards.add(new SetCardInfo("Corpse Hauler", 219, Rarity.COMMON, mage.cards.c.CorpseHauler.class));
         cards.add(new SetCardInfo("Corpse Traders", 220, Rarity.UNCOMMON, mage.cards.c.CorpseTraders.class));
+        cards.add(new SetCardInfo("Corsair Captain", 11, Rarity.RARE, mage.cards.c.CorsairCaptain.class));
         cards.add(new SetCardInfo("Cradle of Vitality", 98, Rarity.RARE, mage.cards.c.CradleOfVitality.class));
         cards.add(new SetCardInfo("Craterhoof Behemoth", 385, Rarity.MYTHIC, mage.cards.c.CraterhoofBehemoth.class));
         cards.add(new SetCardInfo("Crookclaw Transmuter", 145, Rarity.COMMON, mage.cards.c.CrookclawTransmuter.class));
