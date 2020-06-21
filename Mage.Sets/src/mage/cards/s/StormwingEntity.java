@@ -1,5 +1,8 @@
 package mage.cards.s;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -22,10 +25,6 @@ import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.watchers.Watcher;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-
 /**
  * @author TheElk801
  */
@@ -43,7 +42,7 @@ public final class StormwingEntity extends CardImpl {
         this.toughness = new MageInt(3);
 
         // This spell costs {2}{U} less to cast if you've cast an instant or sorcery spell this turn.
-        this.addAbility(new SimpleStaticAbility(Zone.STACK, new SpellCostReductionSourceEffect(
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(
                 new ManaCostsImpl("{2}{U}"), StormwingEntityCondition.instance
         )).setRuleAtTheTop(true).addHint(hint), new StormwingEntityWatcher());
 

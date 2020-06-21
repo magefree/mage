@@ -1,4 +1,3 @@
-
 package mage.cards.w;
 
 import java.util.UUID;
@@ -31,7 +30,7 @@ public final class WizardsRetort extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");
 
         // Wizard's Retort costs {1} less to cast if you control a Wizard.
-        Ability ability = new SimpleStaticAbility(Zone.STACK, new SpellCostReductionSourceEffect(1, new PermanentsOnTheBattlefieldCondition(filter)));
+        Ability ability = new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(1, new PermanentsOnTheBattlefieldCondition(filter)));
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);
 

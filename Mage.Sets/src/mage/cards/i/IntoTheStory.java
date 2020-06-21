@@ -1,5 +1,6 @@
 package mage.cards.i;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
@@ -13,8 +14,6 @@ import mage.game.Game;
 import mage.game.Graveyard;
 import mage.players.Player;
 
-import java.util.UUID;
-
 /**
  * @author TheElk801
  */
@@ -25,7 +24,7 @@ public final class IntoTheStory extends CardImpl {
 
         // This spell costs {3} less to cast if an opponent has seven or more cards in their graveyard.
         this.addAbility(new SimpleStaticAbility(
-                Zone.STACK, new SpellCostReductionSourceEffect(3, IntoTheStoryCondition.instance)
+                Zone.ALL, new SpellCostReductionSourceEffect(3, IntoTheStoryCondition.instance)
         ).setRuleAtTheTop(true));
 
         // Draw four cards.

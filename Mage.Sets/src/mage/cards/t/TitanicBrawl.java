@@ -1,5 +1,6 @@
 package mage.cards.t;
 
+import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceTargetsPermanentCondition;
@@ -16,8 +17,6 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.CounterPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -38,7 +37,7 @@ public final class TitanicBrawl extends CardImpl {
 
         // This spell costs {1} less to cast if it targets a creature you control with a +1/+1 counter on it.
         this.addAbility(new SimpleStaticAbility(
-                Zone.STACK, new SpellCostReductionSourceEffect(1, condition)
+                Zone.ALL, new SpellCostReductionSourceEffect(1, condition)
         ).setRuleAtTheTop(true));
 
         // Target creature you control fights target creature you don't control.

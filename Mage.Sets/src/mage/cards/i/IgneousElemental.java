@@ -1,5 +1,6 @@
 package mage.cards.i;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -15,8 +16,6 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
-import java.util.UUID;
-
 /**
  * @author TheElk801
  */
@@ -30,7 +29,7 @@ public final class IgneousElemental extends CardImpl {
         this.toughness = new MageInt(3);
 
         // This spell costs {2} less to cast if there is a land card in your graveyard.
-        Ability ability = new SimpleStaticAbility(Zone.STACK, new SpellCostReductionSourceEffect(
+        Ability ability = new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(
                 2, new CardsInControllerGraveCondition(1, StaticFilters.FILTER_CARD_LAND)
         ).setText("This spell costs {2} less to cast if there is a land card in your graveyard."));
         ability.setRuleAtTheTop(true);
