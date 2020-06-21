@@ -94,6 +94,7 @@ public final class Jumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Celestial Mantle", 96, Rarity.RARE, mage.cards.c.CelestialMantle.class));
         cards.add(new SetCardInfo("Cemetery Recruitment", 217, Rarity.COMMON, mage.cards.c.CemeteryRecruitment.class));
         cards.add(new SetCardInfo("Chain Lightning", 302, Rarity.UNCOMMON, mage.cards.c.ChainLightning.class));
+        cards.add(new SetCardInfo("Chained Brute", 19, Rarity.UNCOMMON, mage.cards.c.ChainedBrute.class));
         cards.add(new SetCardInfo("Chamber Sentry", 461, Rarity.RARE, mage.cards.c.ChamberSentry.class));
         cards.add(new SetCardInfo("Champion of Lambholt", 383, Rarity.RARE, mage.cards.c.ChampionOfLambholt.class));
         cards.add(new SetCardInfo("Charmbreaker Devils", 303, Rarity.RARE, mage.cards.c.CharmbreakerDevils.class));
