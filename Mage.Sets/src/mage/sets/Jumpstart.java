@@ -392,6 +392,7 @@ public final class Jumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Soul Salvage", 280, Rarity.COMMON, mage.cards.s.SoulSalvage.class));
         cards.add(new SetCardInfo("Soul of the Harvest", 432, Rarity.RARE, mage.cards.s.SoulOfTheHarvest.class));
         cards.add(new SetCardInfo("Spectral Sailor", 178, Rarity.UNCOMMON, mage.cards.s.SpectralSailor.class));
+        cards.add(new SetCardInfo("Spiteful Prankster", 26, Rarity.UNCOMMON, mage.cards.s.SpitefulPrankster.class));
         cards.add(new SetCardInfo("Spitting Earth", 364, Rarity.COMMON, mage.cards.s.SpittingEarth.class));
         cards.add(new SetCardInfo("Sporemound", 433, Rarity.COMMON, mage.cards.s.Sporemound.class));
         cards.add(new SetCardInfo("Stab Wound", 281, Rarity.UNCOMMON, mage.cards.s.StabWound.class));
