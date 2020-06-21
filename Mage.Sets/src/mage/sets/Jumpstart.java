@@ -212,6 +212,7 @@ public final class Jumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Homing Lightning", 335, Rarity.UNCOMMON, mage.cards.h.HomingLightning.class));
         cards.add(new SetCardInfo("Hungry Flames", 336, Rarity.COMMON, mage.cards.h.HungryFlames.class));
         cards.add(new SetCardInfo("Hunter's Insight", 402, Rarity.UNCOMMON, mage.cards.h.HuntersInsight.class));
+        cards.add(new SetCardInfo("Immolating Gyre", 20, Rarity.MYTHIC, mage.cards.i.ImmolatingGyre.class));
         cards.add(new SetCardInfo("Indomitable Will", 109, Rarity.COMMON, mage.cards.i.IndomitableWill.class));
         cards.add(new SetCardInfo("Inferno Hellion", 337, Rarity.UNCOMMON, mage.cards.i.InfernoHellion.class));
         cards.add(new SetCardInfo("Initiate's Companion", 403, Rarity.COMMON, mage.cards.i.InitiatesCompanion.class));
