@@ -458,11 +458,11 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         show(showName, turnNum, step, player, SHOW_COMMAND_EXILE);
     }
 
-    public void showAvaileableAbilities(String showName, int turnNum, PhaseStep step, TestPlayer player) {
+    public void showAvailableAbilities(String showName, int turnNum, PhaseStep step, TestPlayer player) {
         show(showName, turnNum, step, player, SHOW_COMMAND_AVAILABLE_ABILITIES);
     }
 
-    public void showAvaileableMana(String showName, int turnNum, PhaseStep step, TestPlayer player) {
+    public void showAvailableMana(String showName, int turnNum, PhaseStep step, TestPlayer player) {
         show(showName, turnNum, step, player, SHOW_COMMAND_AVAILABLE_MANA);
     }
 

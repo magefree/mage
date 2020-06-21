@@ -202,7 +202,7 @@ public class OathOfLiegesTest extends CardTestPlayerBase {
         // cast oath copy by opponent
         // showBattlefield("A perms", 2, PhaseStep.POSTCOMBAT_MAIN, playerA);
         // showBattlefield("B perms", 2, PhaseStep.POSTCOMBAT_MAIN, playerB);
-        // showAvaileableAbilities("B abils", 2, PhaseStep.POSTCOMBAT_MAIN, playerB);
+        // showAvailableAbilities("B abils", 2, PhaseStep.POSTCOMBAT_MAIN, playerB);
         // showHand("B hand", 2, PhaseStep.POSTCOMBAT_MAIN, playerB);
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Copy Enchantment");
         setChoice(playerB, "Yes"); // use copy effect

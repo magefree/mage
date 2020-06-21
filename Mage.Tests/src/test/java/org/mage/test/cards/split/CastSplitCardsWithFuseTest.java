@@ -80,7 +80,7 @@ public class CastSplitCardsWithFuseTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Absolute Grace"); // Enchantment
         addCard(Zone.BATTLEFIELD, playerB, "Juggernaut"); // Artifact
 
-        // showAvaileableAbilities("abils", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        // showAvailableAbilities("abils", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "fused Wear // Tear");
         addTarget(playerA, "Juggernaut");
         addTarget(playerA, "Absolute Grace");

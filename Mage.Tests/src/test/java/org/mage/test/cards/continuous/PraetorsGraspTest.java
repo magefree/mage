@@ -22,7 +22,7 @@ public class PraetorsGraspTest extends CardTestPlayerBase {
         addTarget(playerA, playerB);
         addTarget(playerA, "Mountain");
 
-        // showAvaileableAbilities("after", 1, PhaseStep.POSTCOMBAT_MAIN, playerA);
+        // showAvailableAbilities("after", 1, PhaseStep.POSTCOMBAT_MAIN, playerA);
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
