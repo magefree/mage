@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.9" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
+  <Properties>
+    <Property name="resizable" type="boolean" value="true"/>
+  </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
   </SyntheticProperties>
@@ -39,7 +42,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="panelSearch" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="scrollList" pref="246" max="32767" attributes="0"/>
+              <Component id="scrollList" pref="282" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="panelCommands" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -55,8 +58,8 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="labelMessage" alignment="1" pref="210" max="32767" attributes="0"/>
-                      <Component id="labelSubMessage" alignment="1" pref="210" max="32767" attributes="0"/>
+                      <Component id="labelMessage" alignment="1" pref="337" max="32767" attributes="0"/>
+                      <Component id="labelSubMessage" alignment="1" pref="337" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               </Group>
