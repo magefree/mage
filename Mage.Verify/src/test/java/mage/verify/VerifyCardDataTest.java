@@ -1,16 +1,15 @@
 package mage.verify;
 
 import mage.ObjectColor;
+import mage.abilities.Ability;
+import mage.abilities.effects.CostModificationEffect;
 import mage.abilities.keyword.MultikickerAbility;
 import mage.cards.*;
 import mage.cards.basiclands.BasicLand;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.cards.repository.CardScanner;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.game.command.Plane;
 import mage.game.draft.RateCard;
 import mage.game.permanent.token.Token;
@@ -518,6 +517,24 @@ public class VerifyCardDataTest {
                 // 3. check that getMana works without NPE errors (it uses getNetMana with empty game param for AI score calcs)
                 // https://github.com/magefree/mage/issues/6300
                 card.getMana();
+
+                // 4. check cost modification effects must be ALL instead STACK zone
+                for (Ability ability : card.getAbilities()) {
+                    // uncomment to get playable problems, see https://github.com/magefree/mage/issues/6684
+                    if (ability.getAllEffects().stream().noneMatch(e -> e instanceof CostModificationEffect)) {
+                        continue;
+                    }
+
+                    // must change zone to ALL and check conditions/filters (no spell filters, only cards)
+                    if (ability.getZone() == Zone.STACK) {
+                        //errorsList.add("error, cost modification effect must be in ALL zone instead " + ability.getZone() + " - " + card.getName() + " - " + ability.toString());
+                    }
+
+                    // must check conditions/filters (no spell filters, only cards)
+                    if (ability.getZone() == Zone.BATTLEFIELD) {
+                        //warningsList.add("warning, must check cost modification filters/conditions " + card.getName() + " - " + ability.toString());
+                    }
+                }
             }
         }
 
