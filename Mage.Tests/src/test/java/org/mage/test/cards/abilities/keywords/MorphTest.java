@@ -636,15 +636,14 @@ public class MorphTest extends CardTestPlayerBase {
      * restriction."
      */
     @Test
-    public void testReflectorMageBouncesFaceupCreatureReplayAsMorph() {
-
+    public void test_ReflectorMageCantStopMorphToCast_TryNormalCast() {
         // {1}{W}{U} When Reflector Mage enters the battlefield, return target creature an opponent controls to its owner's hand.
         // That creature's owner can't cast spells with the same name as that creature until your next turn.
         addCard(Zone.HAND, playerA, "Reflector Mage"); // 2/3
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
 
-        //Tap: Add {G}, {U}, or {R}.
+        // Tap: Add {G}, {U}, or {R}.
         // Morph 2 (You may cast this card face down as a 2/2 creature for 3. Turn it face up any time for its morph cost.)
         // When Rattleclaw Mystic is turned face up, add {G}{U}{R}.
         addCard(Zone.BATTLEFIELD, playerB, "Rattleclaw Mystic"); // 2/1
@@ -652,20 +651,58 @@ public class MorphTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Island");
         addCard(Zone.BATTLEFIELD, playerB, "Mountain");
 
+        // return to hand
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reflector Mage");
         addTarget(playerA, "Rattleclaw Mystic");
 
+        // try cast as normal -- must not work
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Rattleclaw Mystic");
-        setChoice(playerB, "Yes"); // cast it face down as 2/2 creature
+        setChoice(playerB, "No"); // try cast as normal
 
+        //setStrictChooseMode(true); // no strict mode - cause can't cast as normal
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
-
         execute();
+        //assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Reflector Mage", 1);
         assertPermanentCount(playerB, "Rattleclaw Mystic", 0);
-        assertHandCount(playerB, "Rattleclaw Mystic", 0); // should have been replayed
-        assertPermanentCount(playerB, EmptyNames.FACE_DOWN_CREATURE.toString(), 1); // Rattleclaw played as a morph
+        assertHandCount(playerB, "Rattleclaw Mystic", 1); // can't play
+        assertPermanentCount(playerB, EmptyNames.FACE_DOWN_CREATURE.toString(), 0); // don't try as morph
+    }
+
+    @Test
+    public void test_ReflectorMageCantStopMorphToCast_TryMorph() {
+        // {1}{W}{U} When Reflector Mage enters the battlefield, return target creature an opponent controls to its owner's hand.
+        // That creature's owner can't cast spells with the same name as that creature until your next turn.
+        addCard(Zone.HAND, playerA, "Reflector Mage"); // 2/3
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+
+        // Tap: Add {G}, {U}, or {R}.
+        // Morph 2 (You may cast this card face down as a 2/2 creature for 3. Turn it face up any time for its morph cost.)
+        // When Rattleclaw Mystic is turned face up, add {G}{U}{R}.
+        addCard(Zone.BATTLEFIELD, playerB, "Rattleclaw Mystic"); // 2/1
+        addCard(Zone.BATTLEFIELD, playerB, "Forest");
+        addCard(Zone.BATTLEFIELD, playerB, "Island");
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain");
+
+        // return to hand
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reflector Mage");
+        addTarget(playerA, "Rattleclaw Mystic");
+
+        // try cast as morph - must work
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Rattleclaw Mystic");
+        setChoice(playerB, "Yes"); // try cast as morph
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Reflector Mage", 1);
+        assertPermanentCount(playerB, "Rattleclaw Mystic", 0);
+        assertHandCount(playerB, "Rattleclaw Mystic", 0); // able cast as morph
+        assertPermanentCount(playerB, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
     }
 
     /**
@@ -1006,5 +1043,26 @@ public class MorphTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Zoetic Cavern", 0);
         assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+    }
+
+    @Test
+    public void test_CantActivateOnOpponentTurn() {
+        // https://github.com/magefree/mage/issues/6698
+
+        // Morph {1}{U} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
+        // When Willbender is turned face up, change the target of target spell or ability with a single target.
+        addCard(Zone.HAND, playerA, "Willbender");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+
+        // can play on own turn
+        checkPlayableAbility("can", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Willbender", true);
+
+        // can't play on opponent turn
+        checkPlayableAbility("can't", 2, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Willbender", false);
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
     }
 }

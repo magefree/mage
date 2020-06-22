@@ -3140,54 +3140,52 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     protected ActivatedAbility findActivatedAbilityFromAlternativeSourceCost(MageObject object, ManaOptions manaAvailable, Ability ability, Game game) {
-        // alternative cost must be replaced by real play ability
-        if (ability instanceof AlternativeSourceCosts) {
-            AlternativeSourceCosts altAbility = (AlternativeSourceCosts) ability;
+        // return play ability that can activate AlternativeSourceCosts
+        if (ability instanceof AlternativeSourceCosts && !(object instanceof Permanent)) {
+            ActivatedAbility playAbility = null;
             if (object.isLand()) {
-                // land
-                // morph ability is static, so it must be replaced with play land ability (playLand search and try to use face down first)
-                if (canLandPlayAlternateSourceCostsAbility(object, manaAvailable, ability, game)) { // e.g. Land with Morph
-                    Ability landAbility = CardUtil.getAbilities(object, game).stream().filter(a -> a instanceof PlayLandAbility).findFirst().orElse(null);
-                    if (landAbility != null) {
-                        return (PlayLandAbility) landAbility;
-                    }
-                }
+                playAbility = (PlayLandAbility) CardUtil.getAbilities(object, game).stream().filter(a -> a instanceof PlayLandAbility).findFirst().orElse(null);
+            } else if (object instanceof Card) {
+                playAbility = ((Card) object).getSpellAbility();
+            }
+            if (playAbility == null) {
+                return null;
+            }
+
+            // 707.4.Objects that are cast face down are turned face down before they are put onto the stack
+            // (e.g. no lands per turn limit, no cast restrictions, another cost, etc)
+            // so morph must checks only mana payment here
+            boolean canUse;
+            if (ability instanceof MorphAbility) {
+                canUse = game.canPlaySorcery(playerId) && canPayAlternateSourceCostsAbility(object, playAbility, manaAvailable, ability, game);
             } else {
-                // creature and other
-                if (object instanceof Card) {
-                    SpellAbility spellAbility = ((Card) object).getSpellAbility();
-                    if (altAbility.isAvailable(spellAbility, game)) {
-                        return spellAbility;
-                    }
-                }
+                canUse = canPlay(playAbility, manaAvailable, object, game); // canPlay already checks alternative source costs and all conditions
+            }
+
+            if (canUse) {
+                return playAbility;
             }
         }
         return null;
     }
 
-    protected boolean canLandPlayAlternateSourceCostsAbility(MageObject sourceObject, ManaOptions available, Ability ability, Game game) {
-        if (sourceObject != null && !(sourceObject instanceof Permanent)) {
-            Ability sourceAbility = sourceObject.getAbilities().stream()
-                    .filter(landAbility -> landAbility.getAbilityType() == AbilityType.PLAY_LAND)
-                    .findFirst().orElse(null);
-
-            if (sourceAbility != null && ((AlternativeSourceCosts) ability).isAvailable(sourceAbility, game)) {
-                if (ability.getCosts().canPay(ability, sourceObject.getId(), this.getId(), game)) {
-                    ManaCostsImpl manaCosts = new ManaCostsImpl();
-                    for (Cost cost : ability.getCosts()) {
-                        if (cost instanceof ManaCost) {
-                            manaCosts.add((ManaCost) cost);
-                        }
+    protected boolean canPayAlternateSourceCostsAbility(MageObject sourceObject, Ability sourceAbility, ManaOptions available, Ability alternativeAbility, Game game) {
+        if (sourceAbility != null && ((AlternativeSourceCosts) alternativeAbility).isAvailable(sourceAbility, game)) {
+            if (alternativeAbility.getCosts().canPay(alternativeAbility, sourceObject.getId(), this.getId(), game)) {
+                ManaCostsImpl manaCosts = new ManaCostsImpl();
+                for (Cost cost : alternativeAbility.getCosts()) {
+                    if (cost instanceof ManaCost) {
+                        manaCosts.add((ManaCost) cost);
                     }
+                }
 
-                    if (manaCosts.isEmpty()) {
-                        return true;
-                    } else {
-                        for (Mana mana : manaCosts.getOptions()) {
-                            for (Mana avail : available) {
-                                if (mana.enough(avail)) {
-                                    return true;
-                                }
+                if (manaCosts.isEmpty()) {
+                    return true;
+                } else {
+                    for (Mana mana : manaCosts.getOptions()) {
+                        for (Mana avail : available) {
+                            if (mana.enough(avail)) {
+                                return true;
                             }
                         }
                     }
