@@ -84,6 +84,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Daybreak Charger", 14, Rarity.COMMON, mage.cards.d.DaybreakCharger.class));
         cards.add(new SetCardInfo("Deathbloom Thallid", 94, Rarity.COMMON, mage.cards.d.DeathbloomThallid.class));
         cards.add(new SetCardInfo("Defiant Strike", 15, Rarity.COMMON, mage.cards.d.DefiantStrike.class));
+        cards.add(new SetCardInfo("Demonic Embrace", 95, Rarity.RARE, mage.cards.d.DemonicEmbrace.class));
         cards.add(new SetCardInfo("Destructive Tampering", 141, Rarity.COMMON, mage.cards.d.DestructiveTampering.class));
         cards.add(new SetCardInfo("Dire Fleet Warmonger", 217, Rarity.UNCOMMON, mage.cards.d.DireFleetWarmonger.class));
         cards.add(new SetCardInfo("Discontinuity", 48, Rarity.MYTHIC, mage.cards.d.Discontinuity.class));
