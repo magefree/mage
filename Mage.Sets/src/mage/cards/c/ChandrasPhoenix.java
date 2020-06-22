@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -8,6 +7,7 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -26,7 +26,7 @@ import mage.game.stack.StackObject;
 public final class ChandrasPhoenix extends CardImpl {
 
     public ChandrasPhoenix(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
         this.subtype.add(SubType.PHOENIX);
 
         this.power = new MageInt(2);
@@ -34,9 +34,13 @@ public final class ChandrasPhoenix extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+        
         // Haste (This creature can attack and as soon as it comes under your control.)
         this.addAbility(HasteAbility.getInstance());
-        // Whenever an opponent is dealt damage by a red instant or sorcery spell you control or by a red planeswalker you control, return Chandra's Phoenix from your graveyard to your hand.
+        
+        // Whenever an opponent is dealt damage by a red instant or sorcery spell 
+        // you control or by a red planeswalker you control, return Chandra's 
+        // Phoenix from your graveyard to your hand.
         this.addAbility(new ChandrasPhoenixTriggeredAbility());
     }
 
@@ -72,7 +76,9 @@ class ChandrasPhoenixTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
+        Card chandrasPhoenix = game.getCard(this.getSourceId());
+        if (chandrasPhoenix != null
+                && game.getOpponents(chandrasPhoenix.getOwnerId()).contains(event.getPlayerId())) {
             StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
             if (stackObject != null) {
                 MageObject sourceObjectDamage;
@@ -96,6 +102,7 @@ class ChandrasPhoenixTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever an opponent is dealt damage by a red instant or sorcery spell you control or by a red planeswalker you control, return {this} from your graveyard to your hand.";
+        return "Whenever an opponent is dealt damage by a red instant or sorcery spell "
+                + "you control or by a red planeswalker you control, return {this} from your graveyard to your hand.";
     }
 }
