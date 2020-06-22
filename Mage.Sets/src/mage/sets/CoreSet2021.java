@@ -180,6 +180,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Mystic Skyfish", 326, Rarity.COMMON, mage.cards.m.MysticSkyfish.class));
         cards.add(new SetCardInfo("Necromentia", 116, Rarity.RARE, mage.cards.n.Necromentia.class));
         cards.add(new SetCardInfo("Niambi, Esteemed Speaker", 222, Rarity.RARE, mage.cards.n.NiambiEsteemedSpeaker.class));
+        cards.add(new SetCardInfo("Nine Lives", 28, Rarity.RARE, mage.cards.n.NineLives.class));
         cards.add(new SetCardInfo("Obsessive Stitcher", 223, Rarity.UNCOMMON, mage.cards.o.ObsessiveStitcher.class));
         cards.add(new SetCardInfo("Onakke Ogre", 155, Rarity.COMMON, mage.cards.o.OnakkeOgre.class));
         cards.add(new SetCardInfo("Opt", 59, Rarity.COMMON, mage.cards.o.Opt.class));
