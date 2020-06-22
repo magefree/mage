@@ -20,6 +20,8 @@ import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.TargetAdjuster;
 
 import static mage.filter.StaticFilters.FILTER_ATTACKING_CREATURES;
+import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 
 /**
  * @author arcox
@@ -30,7 +32,8 @@ public final class ChokingVines extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{G}");
 
         // Cast only during the declare blockers step.
-        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(null, PhaseStep.DECLARE_BLOCKERS, null, "Cast this spell only during the declare blockers step"));
+        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(null,
+                PhaseStep.DECLARE_BLOCKERS, null, "Cast this spell only during the declare blockers step"));
 
         // X target attacking creatures become blocked. Choking Vines deals 1 damage to each of those creatures.
         this.getSpellAbility().addEffect(new ChokingVinesEffect());
@@ -85,7 +88,12 @@ class ChokingVinesEffect extends OneShotEffect {
                 for (UUID id : target.getTargets()) {
                     CombatGroup combatGroup = game.getCombat().findGroup(id);
                     if (combatGroup != null) {
-                        combatGroup.setBlocked(true, game);
+                        combatGroup.setBlocked(true); // non-banded creatures
+                        combatGroup.setBlocked(true, game); // this only works for banded creatures and needs to be checked out
+                        Permanent attacker = game.getPermanent(id);
+                        if (attacker != null) {
+                            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREATURE_BLOCKED, attacker.getId(), null));
+                        }
                     }
                 }
             }
