@@ -3,7 +3,7 @@ package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BecomesBlockedTriggeredAbility;
+import mage.abilities.common.BecomesBlockedSourceTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -24,7 +24,7 @@ public final class Drelnoch extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever Drelnoch becomes blocked, you may draw two cards.
-        this.addAbility(new BecomesBlockedTriggeredAbility(new DrawCardSourceControllerEffect(2), true));
+        this.addAbility(new BecomesBlockedSourceTriggeredAbility(new DrawCardSourceControllerEffect(2), true));
     }
 
     public Drelnoch(final Drelnoch card) {

@@ -3,7 +3,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BecomesBlockedTriggeredAbility;
+import mage.abilities.common.BecomesBlockedSourceTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -24,7 +24,7 @@ public final class SlashingTiger extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever Slashing Tiger becomes blocked, it gets +2/+2 until end of turn.
-        this.addAbility(new BecomesBlockedTriggeredAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), false));
+        this.addAbility(new BecomesBlockedSourceTriggeredAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), false));
     }
 
     public SlashingTiger(final SlashingTiger card) {

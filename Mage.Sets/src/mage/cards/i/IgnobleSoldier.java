@@ -3,7 +3,7 @@ package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BecomesBlockedTriggeredAbility;
+import mage.abilities.common.BecomesBlockedSourceTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.PreventCombatDamageBySourceEffect;
 import mage.cards.CardImpl;
@@ -28,7 +28,7 @@ public final class IgnobleSoldier extends CardImpl {
         // Whenever Ignoble Soldier becomes blocked, prevent all combat damage that would be dealt by it this turn.
         Effect effect = new PreventCombatDamageBySourceEffect(Duration.EndOfTurn);
         effect.setText("prevent all combat damage that would be dealt by it this turn");
-        this.addAbility(new BecomesBlockedTriggeredAbility(effect, false));
+        this.addAbility(new BecomesBlockedSourceTriggeredAbility(effect, false));
     }
 
     public IgnobleSoldier(final IgnobleSoldier card) {

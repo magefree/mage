@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksAndIsNotBlockedTriggeredAbility;
-import mage.abilities.common.BecomesBlockedTriggeredAbility;
+import mage.abilities.common.BecomesBlockedSourceTriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.effects.Effect;
@@ -44,7 +44,7 @@ public final class LimDulsPaladin extends CardImpl {
         // At the beginning of your upkeep, you may discard a card. If you don't, sacrifice Lim-Dul's Paladin and draw a card.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new LimDulsPaladinEffect(), TargetController.YOU, false));
         // Whenever Lim-Dul's Paladin becomes blocked, it gets +6/+3 until end of turn.
-        this.addAbility(new BecomesBlockedTriggeredAbility(new BoostSourceEffect(6, 3, Duration.EndOfTurn), false));
+        this.addAbility(new BecomesBlockedSourceTriggeredAbility(new BoostSourceEffect(6, 3, Duration.EndOfTurn), false));
         // Whenever Lim-Dul's Paladin attacks and isn't blocked, it assigns no combat damage to defending player this turn and that player loses 4 life.
         Effect effect = new AssignNoCombatDamageSourceEffect(Duration.EndOfTurn);
         effect.setText("it assigns no combat damage this turn");
