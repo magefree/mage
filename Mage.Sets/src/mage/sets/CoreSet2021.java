@@ -197,6 +197,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Prismite", 235, Rarity.COMMON, mage.cards.p.Prismite.class));
         cards.add(new SetCardInfo("Pursued Whale", 60, Rarity.RARE, mage.cards.p.PursuedWhale.class));
         cards.add(new SetCardInfo("Quirion Dryad", 198, Rarity.UNCOMMON, mage.cards.q.QuirionDryad.class));
+        cards.add(new SetCardInfo("Radha, Heart of Keld", 224, Rarity.RARE, mage.cards.r.RadhaHeartOfKeld.class));
         cards.add(new SetCardInfo("Radiant Fountain", 248, Rarity.COMMON, mage.cards.r.RadiantFountain.class));
         cards.add(new SetCardInfo("Rain of Revelation", 61, Rarity.UNCOMMON, mage.cards.r.RainOfRevelation.class));
         cards.add(new SetCardInfo("Rambunctious Mutt", 30, Rarity.COMMON, mage.cards.r.RambunctiousMutt.class));
