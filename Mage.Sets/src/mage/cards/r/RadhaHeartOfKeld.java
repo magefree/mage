@@ -48,13 +48,19 @@ public final class RadhaHeartOfKeld extends CardImpl {
         )).addHint(MyTurnHint.instance));
 
         // You may look at the top card of your library any time, and you may play lands from the top of your library.
-        this.addAbility(new SimpleStaticAbility(new LookAtTopCardOfLibraryAnyTimeEffect()));
-        this.addAbility(new SimpleStaticAbility(new PlayTheTopCardEffect(filter)));
+        LookAtTopCardOfLibraryAnyTimeEffect lookEffect = new LookAtTopCardOfLibraryAnyTimeEffect();
+        lookEffect.overrideRuleText("You may look at the top card of your library any time, ");
+        PlayTheTopCardEffect playEffect = new PlayTheTopCardEffect(filter);
+        playEffect.overrideRuleText("and you may play lands from the top of your library");
+
+        SimpleStaticAbility lookAndPlayAbility = new SimpleStaticAbility(lookEffect);
+        lookAndPlayAbility.addEffect(playEffect);
+        this.addAbility(lookAndPlayAbility);
 
         // 4RG: Radha gets +X/+X until end of turn, where X is the number of lands you control.
         DynamicValue controlledLands = new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_PERMANENT_LANDS);
         BoostSourceEffect bse = new BoostSourceEffect(controlledLands, controlledLands, Duration.EndOfTurn, true);
-        bse.overrideRuleText("{this} gets +X/+X until end of turn, where X is the number of lands you control");
+        bse.overrideRuleText("Radha gets +X/+X until end of turn, where X is the number of lands you control");
         this.addAbility(new SimpleActivatedAbility(bse, new ManaCostsImpl("{4}{R}{G}")));
     }
 
