@@ -426,6 +426,7 @@ public final class Jumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Thundering Spineback", 437, Rarity.UNCOMMON, mage.cards.t.ThunderingSpineback.class));
         cards.add(new SetCardInfo("Tibalt's Rager", 366, Rarity.UNCOMMON, mage.cards.t.TibaltsRager.class));
         cards.add(new SetCardInfo("Time to Feed", 438, Rarity.COMMON, mage.cards.t.TimeToFeed.class));
+        cards.add(new SetCardInfo("Tinybones, Trinket Thief", 17, Rarity.MYTHIC, mage.cards.t.TinybonesTrinketThief.class));
         cards.add(new SetCardInfo("Tithebearer Giant", 284, Rarity.COMMON, mage.cards.t.TithebearerGiant.class));
         cards.add(new SetCardInfo("Torch Fiend", 367, Rarity.COMMON, mage.cards.t.TorchFiend.class));
         cards.add(new SetCardInfo("Towering Titan", 31, Rarity.MYTHIC, mage.cards.t.ToweringTitan.class));
