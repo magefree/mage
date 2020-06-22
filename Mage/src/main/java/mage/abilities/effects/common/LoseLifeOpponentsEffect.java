@@ -20,7 +20,7 @@ public class LoseLifeOpponentsEffect extends OneShotEffect {
 
     private DynamicValue amount;
 
-    publicLoseLifeOpponentsEffect(int amount) {
+    public LoseLifeOpponentsEffect(int amount) {
         this(StaticValue.get(amount));
     }
 
