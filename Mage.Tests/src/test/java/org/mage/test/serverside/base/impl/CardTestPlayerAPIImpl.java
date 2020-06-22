@@ -1735,7 +1735,13 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      */
     // TODO: mode options doesn't work here (see BrutalExpulsionTest)
     public void addTarget(TestPlayer player, String target) {
-        player.addTarget(target);
+        addTarget(player, target, 1);
+    }
+
+    public void addTarget(TestPlayer player, String target, int timesToChoose) {
+        for (int i = 0; i < timesToChoose; i++) {
+            player.addTarget(target);
+        }
     }
 
     /**
@@ -1745,7 +1751,13 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param targetPlayer
      */
     public void addTarget(TestPlayer player, TestPlayer targetPlayer) {
-        player.addTarget("targetPlayer=" + targetPlayer.getName());
+        addTarget(player, targetPlayer, 1);
+    }
+
+    public void addTarget(TestPlayer player, TestPlayer targetPlayer, int timesToChoose) {
+        for (int i = 0; i < timesToChoose; i++) {
+            player.addTarget("targetPlayer=" + targetPlayer.getName());
+        }
     }
 
     /**

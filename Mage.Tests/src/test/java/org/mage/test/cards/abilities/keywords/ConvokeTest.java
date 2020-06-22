@@ -295,4 +295,52 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
         execute();
         assertAllCommandsUsed();
     }
+
+    @Test
+    public void test_Other_CastFromGraveayrd_Convoke() {
+        // https://github.com/magefree/mage/issues/6680
+
+        // {5}{B/G}{B/G}
+        // You can't spend mana to cast this spell.
+        // Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)
+        // Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)
+        // You may cast Hogaak, Arisen Necropolis from your graveyard.
+        addCard(Zone.GRAVEYARD, playerA, "Hogaak, Arisen Necropolis", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Balduvian Bears", 7);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hogaak, Arisen Necropolis");
+        addTarget(playerA, "Balduvian Bears", 7); // convoke pay
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Hogaak, Arisen Necropolis", 1);
+    }
+
+    @Test
+    public void test_Other_CastFromGraveayrd_ConvokeAndDelve() {
+        // https://github.com/magefree/mage/issues/6680
+
+        // {5}{B/G}{B/G}
+        // You can't spend mana to cast this spell.
+        // Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)
+        // Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)
+        // You may cast Hogaak, Arisen Necropolis from your graveyard.
+        addCard(Zone.GRAVEYARD, playerA, "Hogaak, Arisen Necropolis", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Balduvian Bears", 2); // convoke (you can't pay normal mana here)
+        addCard(Zone.GRAVEYARD, playerA, "Balduvian Bears", 5); // delve
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hogaak, Arisen Necropolis");
+        addTarget(playerA, "Balduvian Bears", 2); // convoke pay
+        setChoice(playerA, "Balduvian Bears", 5); // delve pay
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Hogaak, Arisen Necropolis", 1);
+    }
 }

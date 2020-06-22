@@ -1711,7 +1711,7 @@ public class TestPlayer implements Player {
                 printAbilities(game, computerPlayer.getPlayable(game, true));
                 printEnd();
             }
-            Assert.fail("Missing " + choiceType + " def for"
+            Assert.fail("Missing " + choiceType.toUpperCase(Locale.ENGLISH) + " def for"
                     + " turn " + game.getTurnNum()
                     + ", step " + (game.getStep() != null ? game.getStep().getType().name() : "not started")
                     + ", " + this.getName()
@@ -2663,17 +2663,17 @@ public class TestPlayer implements Player {
     public boolean putCardsOnTopOfLibrary(Card card, Game game, Ability source, boolean anyOrder) {
         return computerPlayer.putCardsOnTopOfLibrary(card, game, source, anyOrder);
     }
-    
+
     @Override
     public boolean shuffleCardsToLibrary(Cards cards, Game game, Ability source) {
         return computerPlayer.shuffleCardsToLibrary(cards, game, source);
     }
-    
+
     @Override
     public boolean shuffleCardsToLibrary(Card card, Game game, Ability source) {
         return computerPlayer.shuffleCardsToLibrary(card, game, source);
     }
-    
+
     @Override
     public void setCastSourceIdWithAlternateMana(UUID sourceId, ManaCosts manaCosts, Costs costs) {
         computerPlayer.setCastSourceIdWithAlternateMana(sourceId, manaCosts, costs);
