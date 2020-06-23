@@ -896,7 +896,7 @@ public class PlayerStub implements Player {
     public boolean putCardsOnTopOfLibrary(Card card, Game game, Ability source, boolean anyOrder) {
         return false;
     }
-    
+
     @Override
     public boolean shuffleCardsToLibrary(Cards cards, Game game, Ability source) {
         return false;
@@ -906,7 +906,7 @@ public class PlayerStub implements Player {
     public boolean shuffleCardsToLibrary(Card card, Game game, Ability source) {
         return false;
     }
-    
+
     @Override
     public boolean putCardOnTopXOfLibrary(Card card, Game game, Ability source, int xFromTheTop) {
         return true;
@@ -1200,6 +1200,11 @@ public class PlayerStub implements Player {
     @Override
     public boolean moveCardToCommandWithInfo(Card card, UUID sourceId, Game game, Zone fromZone) {
         return false;
+    }
+
+    @Override
+    public Cards millCards(int toMill, Ability source, Game game) {
+        return null;
     }
 
     @Override
