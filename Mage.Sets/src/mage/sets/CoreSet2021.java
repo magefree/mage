@@ -269,6 +269,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Temple of Mystery", 254, Rarity.RARE, mage.cards.t.TempleOfMystery.class));
         cards.add(new SetCardInfo("Temple of Silence", 255, Rarity.RARE, mage.cards.t.TempleOfSilence.class));
         cards.add(new SetCardInfo("Temple of Triumph", 256, Rarity.RARE, mage.cards.t.TempleOfTriumph.class));
+        cards.add(new SetCardInfo("Terror of the Peaks", 164, Rarity.MYTHIC, mage.cards.t.TerrorOfThePeaks.class));
         cards.add(new SetCardInfo("Thieves' Guild Enforcer", 125, Rarity.RARE, mage.cards.t.ThievesGuildEnforcer.class));
         cards.add(new SetCardInfo("Thornwood Falls", 257, Rarity.COMMON, mage.cards.t.ThornwoodFalls.class));
         cards.add(new SetCardInfo("Thrashing Brontodon", 209, Rarity.UNCOMMON, mage.cards.t.ThrashingBrontodon.class));
