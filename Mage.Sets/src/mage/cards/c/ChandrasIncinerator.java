@@ -119,8 +119,13 @@ class ChandrasIncineratorWatcher extends Watcher {
         super.reset();
     }
 
-    int getDamage(UUID playerId) {
-        return damageMap.getOrDefault(playerId, 0);
+    int getDamage(UUID playerId, Game game) {
+        return game
+                .getOpponents(playerId)
+                .stream()
+                .filter(damageMap::containsKey)
+                .mapToInt(damageMap::get)
+                .sum();
     }
 }
 
