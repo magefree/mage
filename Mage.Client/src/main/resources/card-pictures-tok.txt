@@ -1402,3 +1402,6 @@
 |Generate|TOK:C20|Spirit|||SpiritWhiteToken|
 |Generate|TOK:C20|Treasure|||TreasureToken|
 |Generate|TOK:C20|Zombie|||ZombieToken|
+
+# JMP
+|Generate|TOK:JMP|Unicorn|||UnicornToken|
