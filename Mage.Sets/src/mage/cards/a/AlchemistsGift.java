@@ -66,8 +66,8 @@ class AlchemistsGiftEffect extends OneShotEffect {
                 outcome, "Deathtouch or lifelink?", null,
                 "Deathtouch", "Lifelink", source, game
         ) ? DeathtouchAbility.getInstance() : LifelinkAbility.getInstance();
-        game.addEffect(new BoostSourceEffect(1, 1, Duration.EndOfTurn), ability);
-        game.addEffect(new GainAbilitySourceEffect(ability, Duration.EndOfTurn), ability);
+        game.addEffect(new BoostSourceEffect(1, 1, Duration.EndOfTurn), source);
+        game.addEffect(new GainAbilitySourceEffect(ability, Duration.EndOfTurn), source);
         return true;
     }
 }
