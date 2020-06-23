@@ -12,13 +12,13 @@ import mage.util.CardUtil;
 
 import java.util.UUID;
 
-public class DynamicValueCostModidicationEffect extends CostModificationEffectImpl {
+public class DynamicValueCostModificationEffect extends CostModificationEffectImpl {
 
     private final UUID originalId;
     private final DynamicValue value;
     private final boolean reducesCost;
 
-    public DynamicValueCostModidicationEffect(Duration duration, Outcome outcome, UUID originalId, DynamicValue value, boolean reducesCost) {
+    public DynamicValueCostModificationEffect(Duration duration, Outcome outcome, UUID originalId, DynamicValue value, boolean reducesCost) {
         super(duration, outcome, reducesCost ? CostModificationType.REDUCE_COST : CostModificationType.INCREASE_COST);
         this.originalId = originalId;
         this.value = value;
@@ -26,7 +26,7 @@ public class DynamicValueCostModidicationEffect extends CostModificationEffectIm
         this.staticText = "this ability costs {1} " + (reducesCost ? "less" : "more") + " to activate for each " + value.getMessage();
     }
 
-    private DynamicValueCostModidicationEffect(DynamicValueCostModidicationEffect effect) {
+    private DynamicValueCostModificationEffect(DynamicValueCostModificationEffect effect) {
         super(effect);
         this.originalId = effect.originalId;
         this.value = effect.value;
@@ -34,8 +34,8 @@ public class DynamicValueCostModidicationEffect extends CostModificationEffectIm
     }
 
     @Override
-    public DynamicValueCostModidicationEffect copy() {
-        return new DynamicValueCostModidicationEffect(this);
+    public DynamicValueCostModificationEffect copy() {
+        return new DynamicValueCostModificationEffect(this);
     }
 
     @Override
