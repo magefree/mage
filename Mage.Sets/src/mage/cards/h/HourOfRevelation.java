@@ -23,7 +23,7 @@ public final class HourOfRevelation extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}{W}{W}");
 
         // Hour of Revelation costs {3} less to cast if there are ten or more nonland permanents on the battlefield.
-        SimpleStaticAbility ability = new SimpleStaticAbility(Zone.STACK,
+        SimpleStaticAbility ability = new SimpleStaticAbility(Zone.ALL,
                 new SpellCostReductionSourceEffect(3, new PermanentsOnTheBattlefieldCondition(
                         new FilterNonlandPermanent("there are ten or more nonland permanents on the battlefield"), ComparisonType.MORE_THAN, 9, false)));
         ability.setRuleAtTheTop(true);
