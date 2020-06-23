@@ -76,7 +76,7 @@ class ChandrasIncineratorCostReductionEffect extends CostModificationEffectImpl 
         if (watcher == null) {
             return true;
         }
-        int reductionAmount = watcher.getDamage(source.getControllerId());
+        int reductionAmount = watcher.getDamage(source.getControllerId(), game);
         CardUtil.reduceCost(abilityToModify, Math.max(0, reductionAmount));
         return true;
     }
