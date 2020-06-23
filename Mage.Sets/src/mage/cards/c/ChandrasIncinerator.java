@@ -109,13 +109,14 @@ class ChandrasIncineratorWatcher extends Watcher {
             return;
         }
         for (UUID playerId : game.getOpponents(event.getPlayerId())) {
-            damageMap.compute(playerId, ((u, i) -> i == null ? 0 : Integer.sum(i, event.getAmount())));
+            damageMap.compute(playerId, ((u, i) -> i == null ? event.getAmount() : Integer.sum(i, event.getAmount())));
         }
     }
 
     @Override
     public void reset() {
         damageMap.clear();
+        super.reset();
     }
 
     int getDamage(UUID playerId) {
