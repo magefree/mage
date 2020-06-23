@@ -10,11 +10,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.PhasingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.target.TargetPermanent;
@@ -25,7 +21,7 @@ import mage.target.TargetPermanent;
  */
 public final class TeferisCurse extends CardImpl {
     
-    private static final FilterPermanent filter = new FilterPermanent("artifact or creature");
+    private static final FilterPermanent filter = new FilterPermanent("artifact or creature.");
     
     static {
         filter.add(Predicates.or(
@@ -45,7 +41,7 @@ public final class TeferisCurse extends CardImpl {
         this.addAbility(ability);
         
         // Enchanted permanent has phasing.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(PhasingAbility.getInstance(), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(PhasingAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield, null, "permanent")));
     }
 
     public TeferisCurse(final TeferisCurse card) {

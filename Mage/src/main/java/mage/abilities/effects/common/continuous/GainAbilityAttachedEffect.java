@@ -15,6 +15,7 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
     protected Ability ability;
     protected AttachmentType attachmentType;
     protected boolean independentEffect;
+    protected String targetObjectName;
 
     public GainAbilityAttachedEffect(Ability ability, AttachmentType attachmentType) {
         this(ability, attachmentType, Duration.WhileOnBattlefield);
@@ -25,7 +26,12 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
     }
 
     public GainAbilityAttachedEffect(Ability ability, AttachmentType attachmentType, Duration duration, String rule) {
+        this(ability, attachmentType, duration, rule, null);
+    }
+
+    public GainAbilityAttachedEffect(Ability ability, AttachmentType attachmentType, Duration duration, String rule, String targetObjectName) {
         super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+        this.targetObjectName = targetObjectName;
         this.ability = ability;
         this.attachmentType = attachmentType;
         switch (duration) {
@@ -96,7 +102,11 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
     private void setText() {
         StringBuilder sb = new StringBuilder();
         sb.append(attachmentType.verb());
-        sb.append(" creature ");
+        if (targetObjectName!=null){
+            sb.append(" " + targetObjectName + " ");
+        } else {
+            sb.append(" creature ");
+        }
         if (duration == Duration.WhileOnBattlefield) {
             sb.append("has ");
         } else {
