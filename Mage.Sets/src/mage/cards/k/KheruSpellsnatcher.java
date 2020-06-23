@@ -5,8 +5,6 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.Card;
@@ -14,14 +12,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
-import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
-import mage.players.Player;
 import mage.target.TargetSpell;
-import mage.target.targetpointer.FixedTarget;
-import mage.util.CardUtil;
 
 import java.util.UUID;
+import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 
 /**
  * @author emerald000
@@ -59,7 +54,9 @@ class KheruSpellsnatcherEffect extends OneShotEffect {
 
     KheruSpellsnatcherEffect() {
         super(Outcome.Benefit);
-        this.staticText = "counter target spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard. You may cast that card without paying its mana cost as long as it remains exiled";
+        this.staticText = "counter target spell. If that spell is countered this way, "
+                + "exile it instead of putting it into its owner's graveyard. "
+                + "You may cast that card without paying its mana cost as long as it remains exiled";
     }
 
     KheruSpellsnatcherEffect(final KheruSpellsnatcherEffect effect) {
@@ -73,68 +70,14 @@ class KheruSpellsnatcherEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID objectId = targetPointer.getFirst(game, source);
-        UUID sourceId = source.getSourceId();
-
-        StackObject stackObject = game.getStack().getStackObject(objectId);
-        if (stackObject != null
+        MageObject sourceObject = source.getSourceObject(game);
+        StackObject stackObject = game.getStack().getStackObject(targetPointer.getFirst(game, source));
+        if (stackObject != null && sourceObject != null
                 && game.getStack().counter(targetPointer.getFirst(game, source), source.getSourceId(), game, Zone.EXILED, false, ZoneDetail.NONE)) {
             if (!stackObject.isCopy()) {
                 MageObject card = game.getObject(stackObject.getSourceId());
-                if (card instanceof Card) {
-                    UUID exileId = CardUtil.getCardExileZoneId(game, sourceId);
-                    ((Card) card).moveToExile(exileId, "Kheru Spellsnatcher - cast without mana cost", sourceId, game);
-                    ContinuousEffect effect = new KheruSpellsnatcherCastFromExileEffect();
-                    effect.setTargetPointer(new FixedTarget(card.getId()));
-                    game.addEffect(effect, source);
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-}
-
-class KheruSpellsnatcherCastFromExileEffect extends AsThoughEffectImpl {
-
-    KheruSpellsnatcherCastFromExileEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
-        staticText = "You may cast that card without paying its mana cost as long as it remains exiled";
-    }
-
-    KheruSpellsnatcherCastFromExileEffect(final KheruSpellsnatcherCastFromExileEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public KheruSpellsnatcherCastFromExileEffect copy() {
-        return new KheruSpellsnatcherCastFromExileEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        if (affectedControllerId.equals(source.getControllerId())) {
-            if (getTargetPointer().getFirst(game, source) == null) {
-                this.discard();
-                return false;
-            }
-            if (sourceId.equals(getTargetPointer().getFirst(game, source))) {
-                Card card = game.getCard(sourceId);
-                if (card != null) {
-                    if (game.getState().getZone(sourceId) == Zone.EXILED) {
-                        Player player = game.getPlayer(affectedControllerId);
-                        if(player != null) {
-                            player.setCastSourceIdWithAlternateMana(sourceId, null, card.getSpellAbility().getCosts());
-                            return true;
-                        }
-                    } else {
-                        this.discard();
-                    }
+                if (card instanceof Card) {                    
+                    return PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(game, source, (Card)card, TargetController.YOU, Duration.Custom, true);
                 }
             }
         }

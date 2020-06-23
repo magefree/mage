@@ -17,9 +17,9 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class TwinbladeAssassin extends CardImpl {
+public final class TwinbladeAssassins extends CardImpl {
 
-    public TwinbladeAssassin(UUID ownerId, CardSetInfo setInfo) {
+    public TwinbladeAssassins(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{G}");
 
         this.subtype.add(SubType.ELF);
@@ -36,12 +36,12 @@ public final class TwinbladeAssassin extends CardImpl {
         ), new MorbidWatcher());
     }
 
-    private TwinbladeAssassin(final TwinbladeAssassin card) {
+    private TwinbladeAssassins(final TwinbladeAssassins card) {
         super(card);
     }
 
     @Override
-    public TwinbladeAssassin copy() {
-        return new TwinbladeAssassin(this);
+    public TwinbladeAssassins copy() {
+        return new TwinbladeAssassins(this);
     }
 }

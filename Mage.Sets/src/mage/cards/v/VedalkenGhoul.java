@@ -3,7 +3,7 @@ package mage.cards.v;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BecomesBlockedTriggeredAbility;
+import mage.abilities.common.BecomesBlockedSourceTriggeredAbility;
 import mage.abilities.effects.common.LoseLifeDefendingPlayerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -25,7 +25,7 @@ public final class VedalkenGhoul extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Vedalken Ghoul becomes blocked, defending player loses 4 life.
-        this.addAbility(new BecomesBlockedTriggeredAbility(new LoseLifeDefendingPlayerEffect(4, true), false));
+        this.addAbility(new BecomesBlockedSourceTriggeredAbility(new LoseLifeDefendingPlayerEffect(4, true), false));
 
     }
 

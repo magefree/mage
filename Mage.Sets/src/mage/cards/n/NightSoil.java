@@ -1,7 +1,5 @@
-
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.ExileFromGraveCost;
@@ -15,19 +13,19 @@ import mage.filter.common.FilterCreatureCard;
 import mage.game.permanent.token.SaprolingToken;
 import mage.target.common.TargetCardInASingleGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class NightSoil extends CardImpl {
 
     public NightSoil(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}{G}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}{G}");
 
         // {1}, Exile two creature cards from a single graveyard: Create a 1/1 green Saproling creature token.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SaprolingToken()), new GenericManaCost(1));
-        ability.addCost(new ExileFromGraveCost(new TargetCardInASingleGraveyard(2,2, new FilterCreatureCard("two creature cards from a single graveyard"))));
+        ability.addCost(new ExileFromGraveCost(new TargetCardInASingleGraveyard(2, 2, new FilterCreatureCard("two creature cards"))));
         this.addAbility(ability);
     }
 

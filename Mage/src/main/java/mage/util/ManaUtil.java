@@ -1,6 +1,5 @@
 package mage.util;
 
-import java.util.*;
 import mage.MageObject;
 import mage.Mana;
 import mage.ManaSymbol;
@@ -18,6 +17,8 @@ import mage.constants.ColoredManaSymbol;
 import mage.filter.FilterMana;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.*;
 
 /**
  * @author noxx
@@ -46,7 +47,7 @@ public final class ManaUtil {
      * In case we can't auto choose we'll simply return the useableAbilities map
      * back to caller without any modification.
      *
-     * @param unpaid Mana we need to pay. Can be null (it is for X costs now).
+     * @param unpaid           Mana we need to pay. Can be null (it is for X costs now).
      * @param useableAbilities List of mana abilities permanent may produce
      * @return List of mana abilities permanent may produce and are reasonable
      * for unpaid mana
@@ -403,7 +404,7 @@ public final class ManaUtil {
     }
 
     /**
-     * This activates the special button inthe feedback panel of the client if
+     * This activates the special button in the feedback panel of the client if
      * there exists special ways to pay the mana (e.g. Delve, Convoke)
      *
      * @param source ability the mana costs have to be paid for

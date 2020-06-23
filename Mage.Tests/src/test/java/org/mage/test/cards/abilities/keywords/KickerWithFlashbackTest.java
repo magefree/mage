@@ -75,7 +75,7 @@ public class KickerWithFlashbackTest extends CardTestPlayerBase {
         addTarget(playerA, "Burst Lightning");
 
         // cast burst by flashback
-        // showAvaileableAbilities("after", 1, PhaseStep.BEGIN_COMBAT, playerA);
+        // showAvailableAbilities("after", 1, PhaseStep.BEGIN_COMBAT, playerA);
         activateAbility(1, PhaseStep.BEGIN_COMBAT, playerA, "Flashback");
         setChoice(playerA, "Yes"); // use kicker
         addTarget(playerA, playerB);

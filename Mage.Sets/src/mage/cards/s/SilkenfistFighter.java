@@ -3,7 +3,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BecomesBlockedTriggeredAbility;
+import mage.abilities.common.BecomesBlockedSourceTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.cards.CardImpl;
@@ -27,7 +27,7 @@ public final class SilkenfistFighter extends CardImpl {
         // Whenever Silkenfist Fighter becomes blocked, untap it.
         Effect effect = new UntapSourceEffect();
         effect.setText("untap it");
-        this.addAbility(new BecomesBlockedTriggeredAbility(effect, false));
+        this.addAbility(new BecomesBlockedSourceTriggeredAbility(effect, false));
     }
 
     public SilkenfistFighter(final SilkenfistFighter card) {

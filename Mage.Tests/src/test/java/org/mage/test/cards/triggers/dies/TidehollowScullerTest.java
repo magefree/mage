@@ -104,7 +104,7 @@ public class TidehollowScullerTest extends CardTestPlayerBase {
         for (int i = 1; i <= 10; i++) {
             try {
                 this.reset();
-                System.out.println("run " + i);
+                // System.out.println("run " + i);
                 test_CastTwoCardFromHandWillBeExiled();
             } catch (Exception e) {
                 //

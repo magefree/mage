@@ -2,6 +2,7 @@ package mage.util;
 
 import mage.MageObject;
 import mage.Mana;
+import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.VariableCost;
@@ -790,5 +791,13 @@ public final class CardUtil {
             }
         }
         return false;
+    }
+
+    public static Abilities<Ability> getAbilities(MageObject object, Game game) {
+        if (object instanceof Card) {
+            return ((Card) object).getAbilities(game);
+        } else {
+            return object.getAbilities();
+        }
     }
 }

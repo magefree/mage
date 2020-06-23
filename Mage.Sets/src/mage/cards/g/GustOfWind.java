@@ -1,5 +1,6 @@
 package mage.cards.g;
 
+import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -17,8 +18,6 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.target.TargetPermanent;
-
-import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -42,7 +41,7 @@ public final class GustOfWind extends CardImpl {
 
         // This spell costs {2} less to cast if you control a creature with flying.
         this.addAbility(new SimpleStaticAbility(
-                Zone.STACK, new SpellCostReductionSourceEffect(2, condition)
+                Zone.ALL, new SpellCostReductionSourceEffect(2, condition)
         ).setRuleAtTheTop(true));
 
         // Return target nonland permanent you don't control to its owner's hand.

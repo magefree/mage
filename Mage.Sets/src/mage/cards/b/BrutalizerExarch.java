@@ -83,13 +83,9 @@ class BrutalizerExarchEffect2 extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (permanent != null) {
-            Player player = game.getPlayer(permanent.getOwnerId());
-            if (player == null) {
-                return false;
-            }
-
-            return permanent.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (permanent != null && controller != null) {
+            return controller.putCardsOnBottomOfLibrary(permanent, game, source, true);
         }
         return false;
     }

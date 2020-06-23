@@ -6,6 +6,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.condition.common.SourceOnBattlefieldCondition;
+import mage.abilities.condition.common.SourceRemainsInZoneCondition;
 import mage.abilities.decorator.ConditionalContinuousRuleModifyingEffect;
 import mage.abilities.effects.ContinuousRuleModifyingEffect;
 import mage.abilities.effects.Effect;
@@ -44,7 +45,7 @@ public final class Somnophore extends CardImpl {
         // Whenever Somnophore deals damage to a player, tap target creature that player controls. That creature doesn't untap during its controller's untap step for as long as Somnophore remains on the battlefield.
         ContinuousRuleModifyingEffect skipUntapEffect = new DontUntapInControllersUntapStepTargetEffect(Duration.WhileOnBattlefield);
         skipUntapEffect.setText("That creature doesn't untap during its controller's untap step for as long as {this} remains on the battlefield");
-        ConditionalContinuousRuleModifyingEffect effect = new ConditionalContinuousRuleModifyingEffect(skipUntapEffect, SourceOnBattlefieldCondition.instance);
+        ConditionalContinuousRuleModifyingEffect effect = new ConditionalContinuousRuleModifyingEffect(skipUntapEffect, new SourceRemainsInZoneCondition(Zone.BATTLEFIELD));
         Ability ability = new SomnophoreTriggeredAbility(new TapTargetEffect());
         ability.addTarget(new TargetCreaturePermanent());
         ability.addEffect(effect);

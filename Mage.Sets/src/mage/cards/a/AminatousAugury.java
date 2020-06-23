@@ -175,7 +175,8 @@ class AminatousAuguryCastFromExileEffect extends AsThoughEffectImpl {
                             usedCardTypes.add(CardType.fromString(choice.getChoice()));
                         }
                         usedCardTypes.addAll(unusedCardTypes);
-                        player.setCastSourceIdWithAlternateMana(sourceId, null, null);
+                        player.setCastSourceIdWithAlternateMana(sourceId, null, card.getSpellAbility().getCosts());
+                        // TODO- This does not correctly work when you cancel the cast (has to be done by watcher I guess)
                         game.getState().setValue(source.getSourceId().toString() + "cardTypes", usedCardTypes);
                     }
                     return true;

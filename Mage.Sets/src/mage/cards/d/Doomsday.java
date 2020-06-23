@@ -58,47 +58,24 @@ class DoomsdayEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
 
-        if (player != null) {
+        if (controller != null) {
             //Search your library and graveyard for five cards
             Cards allCards = new CardsImpl();
-            Cards cards = new CardsImpl();
-            allCards.addAll(player.getLibrary().getCardList());
-            allCards.addAll(player.getGraveyard());
+            allCards.addAll(controller.getLibrary().getCardList());
+            allCards.addAll(controller.getGraveyard());
             int number = Math.min(5, allCards.size());
             TargetCard target = new TargetCard(number, number, Zone.ALL, new FilterCard());
 
-            if (player.choose(Outcome.Benefit, allCards, target, game)) {
-                // exile the rest
-                for (UUID uuid : allCards) {
-                    if (!target.getTargets().contains(uuid)) {
-                        Card card = game.getCard(uuid);
-                        if (card != null) {
-                            card.moveToExile(null, "Doomsday", source.getSourceId(), game);
-                        }
-                    } else {
-                        cards.add(uuid);
-                    }
-
-                }
+            if (controller.choose(Outcome.Benefit, allCards, target, game)) {
+                Cards toLibrary = new CardsImpl(target.getTargets());
+                allCards.removeAll(toLibrary);
+                // Exile the rest
+                controller.moveCards(allCards, Zone.EXILED, source, game);
                 //Put the chosen cards on top of your library in any order
-                target = new TargetCard(Zone.ALL, new FilterCard("Card to put on top"));
-                while (cards.size() > 1 && player.canRespond()) {
-                    player.choose(Outcome.Neutral, cards, target, game);
-                    Card card = cards.get(target.getFirstTarget(), game);
-                    if (card != null) {
-                        cards.remove(card);
-                        card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-                    }
-                    target.clearChosen();
-                }
-                if (cards.size() == 1) {
-                    Card card = cards.get(cards.iterator().next(), game);
-                    card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-                }
+                controller.putCardsOnTopOfLibrary(toLibrary, game, source, true);
             }
-
             return true;
         }
         return false;

@@ -98,7 +98,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     private Map<UUID, Integer> zoneChangeCounter = new HashMap<>();
     private Map<UUID, Card> copiedCards = new HashMap<>();
     private int permanentOrderNumber;
-    private Map<UUID, FilterCreaturePermanent> usePowerInsteadOfToughnessForDamageLethalityFilters = new HashMap<>();
+    private final Map<UUID, FilterCreaturePermanent> usePowerInsteadOfToughnessForDamageLethalityFilters = new HashMap<>();
     private final Set<MageObjectReference> commandersToStay = new HashSet<>();
 
     private int applyEffectsCounter; // Upcounting number of each applyEffects execution

@@ -425,36 +425,28 @@ public abstract class AbilityImpl implements Ability {
             }
         }
 
-        boolean alternativeCostisUsed = false;
+        boolean alternativeCostUsed = false;
         if (sourceObject != null && !(sourceObject instanceof Permanent)) {
-            Abilities<Ability> abilities = null;
-            if (sourceObject instanceof Card) {
-                abilities = ((Card) sourceObject).getAbilities(game);
-            } else {
-                sourceObject.getAbilities();
-            }
-
-            if (abilities != null) {
-                for (Ability ability : abilities) {
-                    // if cast for noMana no Alternative costs are allowed
-                    if (canUseAlternativeCost && !noMana && ability instanceof AlternativeSourceCosts) {
-                        AlternativeSourceCosts alternativeSpellCosts = (AlternativeSourceCosts) ability;
-                        if (alternativeSpellCosts.isAvailable(this, game)) {
-                            if (alternativeSpellCosts.askToActivateAlternativeCosts(this, game)) {
-                                // only one alternative costs may be activated
-                                alternativeCostisUsed = true;
-                                break;
-                            }
+            Abilities<Ability> abilities = CardUtil.getAbilities(sourceObject, game);
+            for (Ability ability : abilities) {
+                // if cast for noMana no Alternative costs are allowed
+                if (canUseAlternativeCost && !noMana && ability instanceof AlternativeSourceCosts) {
+                    AlternativeSourceCosts alternativeSpellCosts = (AlternativeSourceCosts) ability;
+                    if (alternativeSpellCosts.isAvailable(this, game)) {
+                        if (alternativeSpellCosts.askToActivateAlternativeCosts(this, game)) {
+                            // only one alternative costs may be activated
+                            alternativeCostUsed = true;
+                            break;
                         }
                     }
-                    if (canUseAdditionalCost && ability instanceof OptionalAdditionalSourceCosts) {
-                        ((OptionalAdditionalSourceCosts) ability).addOptionalAdditionalCosts(this, game);
-                    }
+                }
+                if (canUseAdditionalCost && ability instanceof OptionalAdditionalSourceCosts) {
+                    ((OptionalAdditionalSourceCosts) ability).addOptionalAdditionalCosts(this, game);
                 }
             }
 
             // controller specific alternate spell costs
-            if (canUseAlternativeCost && !noMana && !alternativeCostisUsed) {
+            if (canUseAlternativeCost && !noMana && !alternativeCostUsed) {
                 if (this.getAbilityType() == AbilityType.SPELL
                         // 117.9a Only one alternative cost can be applied to any one spell as it's being cast.
                         // So an alternate spell ability can't be paid with Omniscience
@@ -463,7 +455,7 @@ public abstract class AbilityImpl implements Ability {
                         if (alternativeSourceCosts.isAvailable(this, game)) {
                             if (alternativeSourceCosts.askToActivateAlternativeCosts(this, game)) {
                                 // only one alternative costs may be activated
-                                alternativeCostisUsed = true;
+                                alternativeCostUsed = true;
                                 break;
                             }
                         }
@@ -472,7 +464,7 @@ public abstract class AbilityImpl implements Ability {
             }
         }
 
-        return alternativeCostisUsed;
+        return alternativeCostUsed;
     }
 
     /**

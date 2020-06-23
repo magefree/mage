@@ -24,7 +24,7 @@ public final class DragToTheUnderworld extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{B}{B}");
 
         // This spell costs {X} less to cast, where X is your devotion to black.
-        this.addAbility(new SimpleStaticAbility(Zone.STACK, new DragToTheUnderworldEffect())
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new DragToTheUnderworldEffect())
                 .addHint(DevotionCount.B.getHint())
                 .setRuleAtTheTop(true));
 

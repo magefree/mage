@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -15,8 +13,9 @@ import mage.constants.SubType;
 import mage.target.Target;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class SkymarchBloodletter extends CardImpl {
@@ -34,7 +33,7 @@ public final class SkymarchBloodletter extends CardImpl {
 
         // When Skymarch Bloodletters enters the battlefield, target opponent loses 1 life and you gain 1 life.
         Ability ability = new EntersBattlefieldTriggeredAbility(new LoseLifeTargetEffect(1), false);
-        ability.addEffect(new GainLifeEffect(1).setText("and you gain 1 life"));
+        ability.addEffect(new GainLifeEffect(1).concatBy("and"));
         Target target = new TargetOpponent();
         ability.addTarget(target);
         this.addAbility(ability);

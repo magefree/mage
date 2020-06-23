@@ -21,7 +21,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public final class DriverOfTheDead extends CardImpl {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("creature card with converted mana cost 2 or less from your graveyard to the battlefield");
+    private static final FilterCreatureCard filter = new FilterCreatureCard("creature card with converted mana cost 2 or less from your graveyard");
 
     static {
         filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 3));

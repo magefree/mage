@@ -38,7 +38,7 @@ public final class TentativeConnection extends CardImpl {
 
         // This spell costs {3} less to cast if you control a creature with menace.
         Ability ability = new SimpleStaticAbility(
-                Zone.STACK,
+                Zone.ALL,
                 new SpellCostReductionSourceEffect(
                         3, new PermanentsOnTheBattlefieldCondition(filter)
                 )

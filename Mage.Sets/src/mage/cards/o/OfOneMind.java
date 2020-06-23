@@ -1,5 +1,6 @@
 package mage.cards.o;
 
+import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.CompoundCondition;
 import mage.abilities.condition.Condition;
@@ -14,8 +15,6 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
-
-import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -40,7 +39,7 @@ public final class OfOneMind extends CardImpl {
 
         // This spell costs {2} less to cast if you control a Human creature and a non-Human creature.
         this.addAbility(new SimpleStaticAbility(
-                Zone.STACK, new SpellCostReductionSourceEffect(2, condition)
+                Zone.ALL, new SpellCostReductionSourceEffect(2, condition)
         ).setRuleAtTheTop(true));
 
         // Draw two cards.

@@ -8,7 +8,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInASingleGraveyard;
@@ -23,10 +23,9 @@ public final class SereneRemembrance extends CardImpl {
     public SereneRemembrance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{G}");
 
-
         // Shuffle Serene Remembrance and up to three target cards from a single graveyard into their owners' libraries.
         this.getSpellAbility().addEffect(new SereneRemembranceEffect());
-        this.getSpellAbility().addTarget(new TargetCardInASingleGraveyard(0, 3, new FilterCard("up to three target cards from a single graveyard")));
+        this.getSpellAbility().addTarget(new TargetCardInASingleGraveyard(0, 3, StaticFilters.FILTER_CARD_CARDS));
 
     }
 

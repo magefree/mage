@@ -351,7 +351,7 @@ public class ConditionalManaTest extends CardTestPlayerBase {
         // computer must see available mana (4 red mana instead 2)
         //activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
         //activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
-        showAvaileableAbilities("abils", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        showAvailableAbilities("abils", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Precision Bolt", playerB);
 
         setStrictChooseMode(true);

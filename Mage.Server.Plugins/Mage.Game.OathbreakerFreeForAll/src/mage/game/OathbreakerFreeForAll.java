@@ -122,7 +122,7 @@ public class OathbreakerFreeForAll extends GameCommanderImpl {
         if (player != null) {
             Set<UUID> commanders = this.playerOathbreakers.getOrDefault(player.getId(), new HashSet<>());
             Set<UUID> spells = this.playerSignatureSpells.getOrDefault(player.getId(), new HashSet<>());
-            for (UUID commanderId : getCommandersIds(player, commanderCardType)) {
+            for (UUID commanderId : super.getCommandersIds(player, commanderCardType)) {
                 switch (commanderCardType) {
                     case ANY:
                         res.add(commanderId);

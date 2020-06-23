@@ -7,9 +7,9 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -19,7 +19,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.targetpointer.FixedTarget;
+import mage.target.targetpointer.FixedTargets;
 
 /**
  * @author TheElk801
@@ -75,57 +75,12 @@ class GolosTirelessPilgrimEffect extends OneShotEffect {
             return false;
         }
         Set<Card> cards = player.getLibrary().getTopCards(game, 3);
-        player.moveCards(cards, Zone.EXILED, source, game);
-        cards.stream()
-                .filter(card -> game.getState().getZone(card.getId()) == Zone.EXILED)
-                .forEach(card -> {
-                    ContinuousEffect effect = new GolosTirelessPilgrimCastFromExileEffect();
-                    effect.setTargetPointer(new FixedTarget(card, game));
-                    game.addEffect(effect, source);
-                });
-        return true;
+        return PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(game, source, cards, 
+                TargetController.YOU, Duration.EndOfTurn, true);        
     }
 
     @Override
     public GolosTirelessPilgrimEffect copy() {
         return new GolosTirelessPilgrimEffect(this);
-    }
-}
-
-class GolosTirelessPilgrimCastFromExileEffect extends AsThoughEffectImpl {
-
-    GolosTirelessPilgrimCastFromExileEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
-    }
-
-    private GolosTirelessPilgrimCastFromExileEffect(final GolosTirelessPilgrimCastFromExileEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public GolosTirelessPilgrimCastFromExileEffect copy() {
-        return new GolosTirelessPilgrimCastFromExileEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (!objectId.equals(getTargetPointer().getFirst(game, source))
-                || !affectedControllerId.equals(source.getControllerId())) {
-            return false;
-        }
-        Card card = game.getCard(objectId);
-        if (card == null || card.isLand() || card.getSpellAbility().getCosts() == null) {
-            return true;
-        }
-        Player player = game.getPlayer(affectedControllerId);
-        if (player != null) {
-            player.setCastSourceIdWithAlternateMana(objectId, null, card.getSpellAbility().getCosts());
-        }
-        return true;
     }
 }

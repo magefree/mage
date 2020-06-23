@@ -1,10 +1,11 @@
-
 package mage.cards.e;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksCreatureYouControlTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.keyword.BolsterEffect;
 import mage.cards.CardImpl;
@@ -14,13 +15,12 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.filter.predicate.permanent.CounterPredicate;
-import mage.filter.predicate.permanent.DefendingPlayerControlsPredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
+import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetpointer.FirstTargetPointer;
 
 /**
  * @author emerald000
@@ -28,11 +28,9 @@ import java.util.UUID;
 public final class EliteScaleguard extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature you control with a +1/+1 counter on it");
-    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creature defending player controls");
 
     static {
         filter.add(new CounterPredicate(CounterType.P1P1));
-        filter2.add(DefendingPlayerControlsPredicate.instance);
     }
 
     public EliteScaleguard(UUID ownerId, CardSetInfo setInfo) {
@@ -46,8 +44,9 @@ public final class EliteScaleguard extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BolsterEffect(2)));
 
         // Whenever a creature you control with a +1/+1 counter on it attacks, tap target creature defending player controls.
-        Ability ability = new AttacksCreatureYouControlTriggeredAbility(new EliteScaleguardTapEffect(), false, filter, true);
-        ability.addTarget(new TargetCreaturePermanent(filter2));
+        Ability ability = new AttacksCreatureYouControlTriggeredAbility(new TapTargetEffect(), false, filter, true);
+        ability.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature defending player controls")));
+        ability.setTargetAdjuster(EliteScaleguardTargetAdjuster.instance);
         this.addAbility(ability);
     }
 
@@ -61,28 +60,21 @@ public final class EliteScaleguard extends CardImpl {
     }
 }
 
-class EliteScaleguardTapEffect extends TapTargetEffect {
-
-    EliteScaleguardTapEffect() {
-        super();
-    }
-
-    EliteScaleguardTapEffect(final EliteScaleguardTapEffect effect) {
-        super(effect);
-    }
+enum EliteScaleguardTargetAdjuster implements TargetAdjuster {
+    instance;
 
     @Override
-    public EliteScaleguardTapEffect copy() {
-        return new EliteScaleguardTapEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (permanent != null) {
-            permanent.tap(game);
-            return true;
+    public void adjustTargets(Ability ability, Game game) {
+        FilterCreaturePermanent filterDefender = new FilterCreaturePermanent("creature defending player controls");
+        for (Effect effect : ability.getEffects()) {
+            if (effect instanceof TapTargetEffect) {
+                filterDefender.add(new ControllerIdPredicate(game.getCombat().getDefendingPlayerId(effect.getTargetPointer().getFirst(game, ability), game)));
+                effect.setTargetPointer(new FirstTargetPointer());// reset target pointer to first target to tap correct target
+                break;
+            }
         }
-        return false;
+        ability.getTargets().clear();
+        TargetCreaturePermanent target = new TargetCreaturePermanent(filterDefender);
+        ability.addTarget(target);
     }
 }

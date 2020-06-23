@@ -525,7 +525,7 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         addCounters(1, PhaseStep.UPKEEP, playerA, "Wrenn and Six", CounterType.LOYALTY, 5);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "-7: You get an emblem");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
-        // showAvaileableAbilities("abils", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        // showAvailableAbilities("abils", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
 
         // retrace - You may cast this card from your graveyard by discarding a land card as an additional cost to cast it
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Treats to Share");
@@ -562,7 +562,7 @@ public class AdventureCardsTest extends CardTestPlayerBase {
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Until your next");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
-        // showAvaileableAbilities("abils", 1, PhaseStep.BEGIN_COMBAT, playerA);
+        // showAvailableAbilities("abils", 1, PhaseStep.BEGIN_COMBAT, playerA);
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Treats to Share");
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);

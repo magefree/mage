@@ -3,7 +3,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BecomesBlockedTriggeredAbility;
+import mage.abilities.common.BecomesBlockedSourceTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -23,7 +23,7 @@ public final class SaprazzanRaider extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Saprazzan Raider becomes blocked, return it to its owner's hand.
-        this.addAbility(new BecomesBlockedTriggeredAbility(new ReturnToHandSourceEffect(), false));
+        this.addAbility(new BecomesBlockedSourceTriggeredAbility(new ReturnToHandSourceEffect(), false));
     }
 
     public SaprazzanRaider(final SaprazzanRaider card) {

@@ -9,6 +9,7 @@ import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -132,7 +133,7 @@ class FallEffect extends OneShotEffect {
             cards.add(card);
         }
         targetPlayer.revealCards(sourceObject.getIdName(), cards, game);
-        targetPlayer.discard(cards, source, game);
+        targetPlayer.discard(new CardsImpl(cards.getCards(StaticFilters.FILTER_CARD_NON_LAND, game)), source, game);
         return true;
     }
 }

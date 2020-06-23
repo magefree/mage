@@ -18,6 +18,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  *
@@ -50,7 +51,7 @@ class GravebaneZombieEffect extends ReplacementEffectImpl {
 
     GravebaneZombieEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
-        staticText = "If {this} would die, put Gravebane Zombie on top of its owner's library instead";
+        staticText = "If {this} would die, put {this} on top of its owner's library instead";
     }
 
     GravebaneZombieEffect(final GravebaneZombieEffect effect) {
@@ -60,11 +61,9 @@ class GravebaneZombieEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent permanent = ((ZoneChangeEvent) event).getTarget();
-        if (permanent != null) {
-            if (permanent.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true)) {
-                game.informPlayers(permanent.getName() + " was put on the top of its owner's library");
-                return true;
-            }
+        Player controller = game.getPlayer(source.getControllerId());
+        if (permanent != null && controller !=null) {
+            return controller.putCardsOnTopOfLibrary(permanent, game, source, true);
         }
         return false;
     }

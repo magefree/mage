@@ -42,6 +42,7 @@ public final class ObzedatGhostCouncil extends CardImpl {
         ability.addEffect(new GainLifeEffect(2).concatBy("and"));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
+
         //At the beginning of your end step you may exile Obzedat. If you do, return it to the battlefield under its owner's 
         //control at the beginning of your next upkeep. It gains haste.
         Ability ability2 = new BeginningOfYourEndStepTriggeredAbility(new ObzedatGhostCouncilExileSourceEffect(), true);

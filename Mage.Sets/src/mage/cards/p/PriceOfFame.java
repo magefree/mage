@@ -1,5 +1,6 @@
 package mage.cards.p;
 
+import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceTargetsPermanentCondition;
@@ -14,8 +15,6 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -36,7 +35,7 @@ public final class PriceOfFame extends CardImpl {
 
         // This spell costs {2} less to cast if it targets a legendary creature.
         this.addAbility(new SimpleStaticAbility(
-                Zone.STACK, new SpellCostReductionSourceEffect(2, condition)
+                Zone.ALL, new SpellCostReductionSourceEffect(2, condition)
         ).setRuleAtTheTop(true));
 
         // Destroy target creature.

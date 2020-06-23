@@ -1,23 +1,23 @@
 package mage.cards.o;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.OpponentControlsPermanentCondition;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import java.util.UUID;
-import mage.abilities.condition.common.OpponentControlsPermanentCondition;
-import mage.constants.ComparisonType;
 
 /**
  * @author TheElk801
@@ -43,7 +43,7 @@ public final class OakhameAdversary extends CardImpl {
 
         // This spell costs {2} less to cast if your opponent controls a green permanent.
         this.addAbility(new SimpleStaticAbility(
-                Zone.STACK, new SpellCostReductionSourceEffect(2, condition)
+                Zone.ALL, new SpellCostReductionSourceEffect(2, condition)
         ).setRuleAtTheTop(true));
 
         // Deathtouch

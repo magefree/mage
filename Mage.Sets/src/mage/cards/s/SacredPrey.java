@@ -3,7 +3,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BecomesBlockedTriggeredAbility;
+import mage.abilities.common.BecomesBlockedSourceTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -23,7 +23,7 @@ public final class SacredPrey extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Sacred Prey becomes blocked, you gain 1 life.
-        this.addAbility(new BecomesBlockedTriggeredAbility(new GainLifeEffect(1), false));
+        this.addAbility(new BecomesBlockedSourceTriggeredAbility(new GainLifeEffect(1), false));
     }
 
     public SacredPrey(final SacredPrey card) {

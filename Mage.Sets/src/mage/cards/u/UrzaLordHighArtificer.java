@@ -7,7 +7,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.AsThoughEffectImpl;
+
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -28,6 +28,8 @@ import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
 
 import java.util.UUID;
+import mage.MageObject;
+import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 
 /**
  * @author TheElk801
@@ -92,68 +94,13 @@ class UrzaLordHighArtificerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller == null || sourceObject == null) {
             return false;
         }
         controller.shuffleLibrary(source, game);
         Card card = controller.getLibrary().getFromTop(game);
-        if (card == null) {
-            return false;
-        }
-        UUID exileId = CardUtil.getExileZoneId(
-                controller.getId().toString()
-                        + "-" + game.getState().getTurnNum()
-                        + "-" + UrzaLordHighArtificer.class.toString(), game
-        );
-        String exileName = "Urza, Lord High Artificer free cast on "
-                + game.getState().getTurnNum() + " turn for " + controller.getName();
-        game.getExile().createZone(exileId, exileName).setCleanupOnEndTurn(true);
-        if (!controller.moveCardsToExile(card, source, game, true, exileId, exileName)) {
-            return false;
-        }
-        ContinuousEffect effect = new UrzaLordHighArtificerFromExileEffect();
-        effect.setTargetPointer(new FixedTargets(game.getExile().getExileZone(exileId).getCards(game), game));
-        game.addEffect(effect, source);
-        return true;
-    }
-}
-
-class UrzaLordHighArtificerFromExileEffect extends AsThoughEffectImpl {
-
-    UrzaLordHighArtificerFromExileEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "you may play that card without paying its mana cost";
-    }
-
-    private UrzaLordHighArtificerFromExileEffect(final UrzaLordHighArtificerFromExileEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public UrzaLordHighArtificerFromExileEffect copy() {
-        return new UrzaLordHighArtificerFromExileEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (!affectedControllerId.equals(source.getControllerId())
-                || !getTargetPointer().getTargets(game, source).contains(objectId)) {
-            return false;
-        }
-        Card card = game.getCard(objectId);
-        if (card == null || card.isLand() || card.getSpellAbility().getCosts() == null) {
-            return true;
-        }
-        Player player = game.getPlayer(affectedControllerId);
-        if (player == null) {
-            return false;
-        }
-        player.setCastSourceIdWithAlternateMana(objectId, null, card.getSpellAbility().getCosts());
-        return true;
+        return PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(game, source, card, 
+                TargetController.YOU, Duration.EndOfTurn, true);          
     }
 }

@@ -4,7 +4,7 @@ package mage.cards.g;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BecomesBlockedTriggeredAbility;
+import mage.abilities.common.BecomesBlockedSourceTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.RemoveFromCombatSourceEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
@@ -28,7 +28,7 @@ public final class GustcloakSentinel extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever Gustcloak Sentinel becomes blocked, you may untap it and remove it from combat.
-        Ability ability = new BecomesBlockedTriggeredAbility(new UntapSourceEffect(), true);
+        Ability ability = new BecomesBlockedSourceTriggeredAbility(new UntapSourceEffect(), true);
         Effect effect = new RemoveFromCombatSourceEffect();
         effect.setText("and remove it from combat");
         ability.addEffect(effect);

@@ -3,7 +3,7 @@ package mage.cards.j;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BecomesBlockedTriggeredAbility;
+import mage.abilities.common.BecomesBlockedSourceTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.MultipliedValue;
 import mage.abilities.dynamicvalue.common.BlockedCreatureCount;
@@ -32,7 +32,7 @@ public final class JungleWurm extends CardImpl {
         DynamicValue value = new MultipliedValue(blockedCreatureCount, -1);
         Effect effect = new BoostSourceEffect(value, value, Duration.EndOfTurn, true);
         effect.setText("it gets -1/-1 until end of turn for each creature blocking it beyond the first");
-        this.addAbility(new BecomesBlockedTriggeredAbility(effect, false));
+        this.addAbility(new BecomesBlockedSourceTriggeredAbility(effect, false));
     }
 
     public JungleWurm(final JungleWurm card) {
