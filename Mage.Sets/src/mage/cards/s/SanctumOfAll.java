@@ -3,8 +3,10 @@ package mage.cards.s;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.hint.ValueHint;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -17,6 +19,7 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -34,6 +37,13 @@ import java.util.UUID;
  */
 public final class SanctumOfAll extends CardImpl {
 
+    private static final FilterPermanent filter = new FilterControlledPermanent();
+    static final PermanentsOnBattlefieldCount count = new PermanentsOnBattlefieldCount(filter);
+
+    static {
+        filter.add(SubType.SHRINE.getPredicate());
+    }
+
     public SanctumOfAll(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}{U}{B}{R}{G}");
         
@@ -44,7 +54,7 @@ public final class SanctumOfAll extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SanctumOfAllSearchEffect(), TargetController.YOU, true));
 
         // If an ability of another Shrine you control triggers while you control six or more Shrines, that ability triggers an additional time.
-        this.addAbility(new SimpleStaticAbility(new SanctumOfAllTriggerEffect()));
+        this.addAbility(new SimpleStaticAbility(new SanctumOfAllTriggerEffect()).addHint(new ValueHint("Shrines you control", count)));
     }
 
     private SanctumOfAll(final SanctumOfAll card) {
@@ -89,6 +99,7 @@ class SanctumOfAllSearchEffect extends OneShotEffect {
             // from library
             Target target = new TargetCardInLibrary(0, 1, filter).withChooseHint("from library");
             if (target.canChoose(source.getSourceId(), controller.getId(), game)
+                    && controller.chooseUse(Outcome.Benefit, "Search your library?", source, game)
                     && target.choose(Outcome.PutCardInPlay, controller.getId(), source.getSourceId(), game)) {
                 maybeChosenCard = Optional.ofNullable(game.getCard(target.getFirstTarget()));
                 searchedLibrary = true;
@@ -138,7 +149,7 @@ class SanctumOfAllTriggerEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         event.setAmount(event.getAmount() + 1);
-        return true;
+        return false;
     }
 
     @Override
@@ -149,10 +160,9 @@ class SanctumOfAllTriggerEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         // Only triggers of the controller of Sanctum of All
-        UUID playerId = event.getPlayerId();
-        if (source.isControlledBy(playerId)) {
+        if (source.isControlledBy(event.getPlayerId())) {
             // Only trigger while you control six or more Shrines
-            int numShrines = game.getBattlefield().countAll(filter, playerId, game);
+            int numShrines = SanctumOfAll.count.calculate(game, source, this);
             if (numShrines >= 6) {
                 // Only for triggers of Shrines
                 Permanent permanent = game.getPermanent(event.getSourceId());

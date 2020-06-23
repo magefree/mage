@@ -2,6 +2,7 @@ package mage.cards.s;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.TapTargetEffect;
@@ -14,8 +15,9 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -26,12 +28,11 @@ import java.util.UUID;
  */
 public final class SanctumOfTranquilLight extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("Shrine you control");
+    private static final FilterPermanent filter = new FilterControlledPermanent("Shrine you control");
     private static final PermanentsOnBattlefieldCount count = new PermanentsOnBattlefieldCount(filter);
 
     static {
         filter.add(SubType.SHRINE.getPredicate());
-        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public SanctumOfTranquilLight(UUID ownerId, CardSetInfo setInfo) {
@@ -41,11 +42,11 @@ public final class SanctumOfTranquilLight extends CardImpl {
         this.subtype.add(SubType.SHRINE);
 
         // {5}{W}: Tap target creature. This ability costs {1} less to activate for each Shrine you control.
-        Ability ability = new SimpleActivatedAbility(new TapTargetEffect(), new ManaCostsImpl<>("{5}{W}"));
+        Ability ability = new SimpleActivatedAbility(new TapTargetEffect().setText("target creature. This ability costs {1} less to activate for each Shrine you control"), new ManaCostsImpl<>("{5}{W}"));
         ability.addTarget(new TargetCreaturePermanent());
-        ability.addEffect(new DynamicValueCostModidicationEffect(Duration.WhileOnBattlefield, Outcome.Benefit, ability.getOriginalId(), count, true));
-        ability.addHint(new ValueHint("Shrines you control", count));
         this.addAbility(ability);
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new DynamicValueCostModidicationEffect(Duration.EndOfGame, Outcome.Benefit, ability.getOriginalId(), count, true).setText(""))
+                .addHint(new ValueHint("Shrines you control", count)));
     }
 
     private SanctumOfTranquilLight(final SanctumOfTranquilLight card) {
