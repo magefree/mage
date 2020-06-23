@@ -144,7 +144,7 @@ class ChandrasIncineratorTriggeredAbility extends TriggeredAbilityImpl {
         DamagedPlayerEvent dEvent = (DamagedPlayerEvent) event;
         if (dEvent.isCombatDamage()
                 || !game.getOpponents(event.getTargetId()).contains(getControllerId())
-                || !event.getPlayerId().equals(getControllerId())) {
+                || !game.getControllerId(event.getSourceId()).equals(getControllerId())) {
             return false;
         }
         this.getEffects().clear();
