@@ -38,10 +38,10 @@ public class AllosaurusShepherd extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        //Allosaurus Shepherd can’t be countered.
+        //Allosaurus Shepherd can't be countered.
         this.addAbility(new CantBeCounteredAbility());
 
-        //Green spells you control can’t be countered.
+        //Green spells you control can't be countered.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new CantBeCounteredControlledEffect(greenSpellsFilter, null, Duration.WhileOnBattlefield)));
 
