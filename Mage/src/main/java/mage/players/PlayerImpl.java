@@ -2852,7 +2852,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public ManaOptions getManaAvailable(Game game) {
-        ManaOptions available = new ManaOptions();
+        ManaOptions availableMana = new ManaOptions();
 
         List<Abilities<ActivatedManaAbilityImpl>> sourceWithoutManaCosts = new ArrayList<>();
         List<Abilities<ActivatedManaAbilityImpl>> sourceWithCosts = new ArrayList<>();
@@ -2884,17 +2884,17 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
 
         for (Abilities<ActivatedManaAbilityImpl> manaAbilities : sourceWithoutManaCosts) {
-            available.addMana(manaAbilities, game);
+            availableMana.addMana(manaAbilities, game);
         }
         for (Abilities<ActivatedManaAbilityImpl> manaAbilities : sourceWithCosts) {
-            available.removeDuplicated();
-            available.addManaWithCost(manaAbilities, game);
+            availableMana.removeDuplicated();
+            availableMana.addManaWithCost(manaAbilities, game);
         }
 
         // remove duplicated variants (see ManaOptionsTest for info - when that rises)
-        available.removeDuplicated();
+        availableMana.removeDuplicated();
 
-        return available;
+        return availableMana;
     }
 
     // returns only mana producers that don't require mana payment
@@ -2958,18 +2958,18 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     /**
      * @param ability
-     * @param available    if null, it won't be checked if enough mana is available
+     * @param availableMana if null, it won't be checked if enough mana is available
      * @param sourceObject
      * @param game
      * @return
      */
-    protected boolean canPlay(ActivatedAbility ability, ManaOptions available, MageObject sourceObject, Game game) {
+    protected boolean canPlay(ActivatedAbility ability, ManaOptions availableMana, MageObject sourceObject, Game game) {
         if (!(ability instanceof ActivatedManaAbilityImpl)) {
             ActivatedAbility copy = ability.copy(); // Copy is needed because cost reduction effects modify e.g. the mana to activate/cast the ability
             if (!copy.canActivate(playerId, game).canActivate()) {
                 return false;
             }
-            if (available != null) {
+            if (availableMana != null) {
                 game.getContinuousEffects().costModification(copy, game);
             }
             boolean canBeCastRegularly = true;
@@ -2980,31 +2980,8 @@ public abstract class PlayerImpl implements Player, Serializable {
                 canBeCastRegularly = false;
             }
             if (canBeCastRegularly) {
-                ManaOptions abilityOptions = copy.getMinimumCostToActivate(playerId, game);
-                if (abilityOptions.isEmpty()) {
+                if (canPayMinimumManaCost(copy, availableMana, game)) {
                     return true;
-                } else {
-                    if (available == null) {
-                        return true;
-                    }
-                    MageObjectReference permittingObject = game.getContinuousEffects().asThough(copy.getSourceId(),
-                            AsThoughEffectType.SPEND_OTHER_MANA, copy, copy.getControllerId(), game);
-                    for (Mana mana : abilityOptions) {
-                        for (Mana avail : available) {
-                            // TODO: SPEND_OTHER_MANA effects with getAsThoughManaType can change mana type to pay,
-                            //  but that code processing it as any color, need to test and fix another use cases
-                            //  (example: Sunglasses of Urza - may spend white mana as though it were red mana)
-
-                            //
-                            //  add tests for non any color like Sunglasses of Urza
-                            if (permittingObject != null && mana.count() <= avail.count()) {
-                                return true;
-                            }
-                            if (mana.enough(avail)) { // here we need to check if spend mana as though allow to pay the mana cost
-                                return true;
-                            }
-                        }
-                    }
                 }
             }
 
@@ -3036,12 +3013,42 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
 
             // ALTERNATIVE COST from source card (any AlternativeSourceCosts)
-            return canPlayCardByAlternateCost(game.getCard(ability.getSourceId()), available, copy, game);
+            return canPlayCardByAlternateCost(game.getCard(ability.getSourceId()), availableMana, copy, game);
         }
         return false;
     }
 
-    protected boolean canPlayCardByAlternateCost(Card sourceObject, ManaOptions available, Ability ability, Game game) {
+    protected boolean canPayMinimumManaCost(ActivatedAbility ability, ManaOptions availableMana, Game game) {
+        ManaOptions abilityOptions = ability.getMinimumCostToActivate(playerId, game);
+        if (abilityOptions.isEmpty()) {
+            return true;
+        } else {
+            if (availableMana == null) {
+                return true;
+            }
+            MageObjectReference permittingObject = game.getContinuousEffects().asThough(ability.getSourceId(),
+                    AsThoughEffectType.SPEND_OTHER_MANA, ability, ability.getControllerId(), game);
+            for (Mana mana : abilityOptions) {
+                for (Mana avail : availableMana) {
+                    // TODO: SPEND_OTHER_MANA effects with getAsThoughManaType can change mana type to pay,
+                    //  but that code processing it as any color, need to test and fix another use cases
+                    //  (example: Sunglasses of Urza - may spend white mana as though it were red mana)
+
+                    //
+                    //  add tests for non any color like Sunglasses of Urza
+                    if (permittingObject != null && mana.count() <= avail.count()) {
+                        return true;
+                    }
+                    if (mana.enough(avail)) { // here we need to check if spend mana as though allow to pay the mana cost
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    protected boolean canPlayCardByAlternateCost(Card sourceObject, ManaOptions availableMana, Ability ability, Game game) {
         if (sourceObject != null && !(sourceObject instanceof Permanent)) {
             for (Ability alternateSourceCostsAbility : sourceObject.getAbilities()) {
                 // if cast for noMana no Alternative costs are allowed
@@ -3058,11 +3065,11 @@ public abstract class PlayerImpl implements Player, Serializable {
                             if (manaCosts.isEmpty()) {
                                 return true;
                             } else {
-                                if (available == null) {
+                                if (availableMana == null) {
                                     return true;
                                 }
                                 for (Mana mana : manaCosts.getOptions()) {
-                                    for (Mana avail : available) {
+                                    for (Mana avail : availableMana) {
                                         if (mana.enough(avail)) {
                                             return true;
                                         }
@@ -3090,7 +3097,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                                 return true;
                             } else {
                                 for (Mana mana : manaCosts.getOptions()) {
-                                    for (Mana avail : available) {
+                                    for (Mana avail : availableMana) {
                                         if (mana.enough(avail)) {
                                             return true;
                                         }
@@ -3105,10 +3112,10 @@ public abstract class PlayerImpl implements Player, Serializable {
         return false;
     }
 
-    protected ActivatedAbility findActivatedAbilityFromPlayable(MageObject object, ManaOptions manaAvailable, Ability ability, Game game) {
+    protected ActivatedAbility findActivatedAbilityFromPlayable(MageObject object, ManaOptions availableMana, Ability ability, Game game) {
 
         // special mana to pay spell cost
-        ManaOptions manaFull = manaAvailable.copy();
+        ManaOptions manaFull = availableMana.copy();
         if (ability instanceof SpellAbility) {
             for (AlternateManaPaymentAbility altAbility : CardUtil.getAbilities(object, game).stream()
                     .filter(a -> a instanceof AlternateManaPaymentAbility)
@@ -3139,7 +3146,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         return null;
     }
 
-    protected ActivatedAbility findActivatedAbilityFromAlternativeSourceCost(MageObject object, ManaOptions manaAvailable, Ability ability, Game game) {
+    protected ActivatedAbility findActivatedAbilityFromAlternativeSourceCost(MageObject object, ManaOptions availableMana, Ability ability, Game game) {
         // return play ability that can activate AlternativeSourceCosts
         if (ability instanceof AlternativeSourceCosts && !(object instanceof Permanent)) {
             ActivatedAbility playAbility = null;
@@ -3153,13 +3160,14 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
 
             // 707.4.Objects that are cast face down are turned face down before they are put onto the stack
-            // (e.g. no lands per turn limit, no cast restrictions, another cost, etc)
-            // so morph must checks only mana payment here
+            // E.g. no lands per turn limit, no cast restrictions, cost reduce, etc
+            // Even mana cost can't be checked here without lookahead
+            // So make it available all the time
             boolean canUse;
             if (ability instanceof MorphAbility) {
-                canUse = game.canPlaySorcery(playerId) && canPayAlternateSourceCostsAbility(object, playAbility, manaAvailable, ability, game);
+                canUse = game.canPlaySorcery(playerId) && ((MorphAbility) ability).isAvailable(playAbility, game);
             } else {
-                canUse = canPlay(playAbility, manaAvailable, object, game); // canPlay already checks alternative source costs and all conditions
+                canUse = canPlay(playAbility, availableMana, object, game); // canPlay already checks alternative source costs and all conditions
             }
 
             if (canUse) {
@@ -3167,32 +3175,6 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
         }
         return null;
-    }
-
-    protected boolean canPayAlternateSourceCostsAbility(MageObject sourceObject, Ability sourceAbility, ManaOptions available, Ability alternativeAbility, Game game) {
-        if (sourceAbility != null && ((AlternativeSourceCosts) alternativeAbility).isAvailable(sourceAbility, game)) {
-            if (alternativeAbility.getCosts().canPay(alternativeAbility, sourceObject.getId(), this.getId(), game)) {
-                ManaCostsImpl manaCosts = new ManaCostsImpl();
-                for (Cost cost : alternativeAbility.getCosts()) {
-                    if (cost instanceof ManaCost) {
-                        manaCosts.add((ManaCost) cost);
-                    }
-                }
-
-                if (manaCosts.isEmpty()) {
-                    return true;
-                } else {
-                    for (Mana mana : manaCosts.getOptions()) {
-                        for (Mana avail : available) {
-                            if (mana.enough(avail)) {
-                                return true;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return false;
     }
 
     private void getPlayableFromObjectAll(Game game, Zone fromZone, MageObject object, ManaOptions availableMana, List<ActivatedAbility> output) {

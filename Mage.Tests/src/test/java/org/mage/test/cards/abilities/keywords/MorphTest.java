@@ -1065,4 +1065,50 @@ public class MorphTest extends CardTestPlayerBase {
         execute();
         assertAllCommandsUsed();
     }
+
+    @Test
+    public void test_MorphWithCostReductionMustBePlayable_NormalCondition() {
+        // {1}{U} creature
+        // Morph {1}{U} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
+        // When Willbender is turned face up, change the target of target spell or ability with a single target.
+        addCard(Zone.HAND, playerA, "Willbender");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+        //
+        // Creature spells you cast cost {1} less to cast.
+        addCard(Zone.BATTLEFIELD, playerA, "Nylea, Keen-Eyed");
+
+        checkPlayableAbility("can", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Willbender", true);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Willbender");
+        setChoice(playerA, "Yes"); // morph
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+    }
+
+    @Test
+    public void test_MorphWithCostReductionMustBePlayable_MorphCondition() {
+        // {1}{U} creature
+        // Morph {1}{U} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
+        // When Willbender is turned face up, change the target of target spell or ability with a single target.
+        addCard(Zone.HAND, playerA, "Willbender");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+        //
+        // Face-down creature spells you cast cost {1} less to cast.
+        addCard(Zone.BATTLEFIELD, playerA, "Dream Chisel");
+
+        checkPlayableAbility("can", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Willbender", true);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Willbender");
+        setChoice(playerA, "Yes"); // morph
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+    }
 }

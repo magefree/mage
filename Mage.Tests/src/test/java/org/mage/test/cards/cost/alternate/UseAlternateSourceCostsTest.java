@@ -1,13 +1,12 @@
-
 package org.mage.test.cards.cost.alternate;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 public class UseAlternateSourceCostsTest extends CardTestPlayerBase {
@@ -74,5 +73,86 @@ public class UseAlternateSourceCostsTest extends CardTestPlayerBase {
         //Gray Ogre is cast with the discard
         assertPermanentCount(playerA, "Gray Ogre", 1);
         assertGraveyardCount(playerA, "Lightning Bolt", 1);
+    }
+
+
+    @Test
+    public void test_Playable_WithMana() {
+        // {1}{W}{W} instant
+        // You may discard a Plains card rather than pay Abolish's mana cost.
+        // Destroy target artifact or enchantment.
+        addCard(Zone.HAND, playerA, "Abolish");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+        addCard(Zone.HAND, playerA, "Plains", 1); // discard cost
+        //
+        addCard(Zone.BATTLEFIELD, playerB, "Alpha Myr");
+
+        checkPlayableAbility("can", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Abolish", true);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Abolish", "Alpha Myr");
+        setChoice(playerA, "Yes"); // use alternative cost
+        setChoice(playerA, "Plains");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertGraveyardCount(playerB, "Alpha Myr", 1);
+        assertTappedCount("Plains", false, 3); // must discard 1 instead tap
+    }
+
+    @Test
+    public void test_Playable_WithoutMana() {
+        // {1}{W}{W} instant
+        // You may discard a Plains card rather than pay Abolish's mana cost.
+        // Destroy target artifact or enchantment.
+        addCard(Zone.HAND, playerA, "Abolish");
+        //addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+        addCard(Zone.HAND, playerA, "Plains", 1); // discard cost
+        //
+        addCard(Zone.BATTLEFIELD, playerB, "Alpha Myr");
+
+        checkPlayableAbility("can", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Abolish", true);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Abolish", "Alpha Myr");
+        setChoice(playerA, "Yes"); // use alternative cost
+        setChoice(playerA, "Plains");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertGraveyardCount(playerB, "Alpha Myr", 1);
+    }
+
+    @Test
+    public void test_Playable_WithoutManaAndCost() {
+        // {1}{W}{W} instant
+        // You may discard a Plains card rather than pay Abolish's mana cost.
+        // Destroy target artifact or enchantment.
+        addCard(Zone.HAND, playerA, "Abolish");
+        //addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+        //addCard(Zone.HAND, playerA, "Plains", 1); // discard cost
+        //
+        addCard(Zone.BATTLEFIELD, playerB, "Alpha Myr");
+
+        // can't see as playable (no mana for normal, no discard for alternative)
+        checkPlayableAbility("can't", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Abolish", false);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+    }
+
+    @Test
+    @Ignore // TODO: make test to check combo of alternative cost and cost reduction effects
+    public void test_Playable_WithCostReduction() {
+        addCard(Zone.HAND, playerA, "xxx");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
     }
 }
