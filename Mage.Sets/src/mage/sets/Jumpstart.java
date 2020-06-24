@@ -292,6 +292,7 @@ public final class Jumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 62, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mugging", 352, Rarity.COMMON, mage.cards.m.Mugging.class));
         cards.add(new SetCardInfo("Murmuring Phantasm", 157, Rarity.COMMON, mage.cards.m.MurmuringPhantasm.class));
+        cards.add(new SetCardInfo("Muxus, Goblin Grandee", 24, Rarity.RARE, mage.cards.m.MuxusGoblinGrandee.class));
         cards.add(new SetCardInfo("Myr Sire", 475, Rarity.COMMON, mage.cards.m.MyrSire.class));
         cards.add(new SetCardInfo("Mystic Archaeologist", 158, Rarity.RARE, mage.cards.m.MysticArchaeologist.class));
         cards.add(new SetCardInfo("Narcolepsy", 159, Rarity.COMMON, mage.cards.n.Narcolepsy.class));
