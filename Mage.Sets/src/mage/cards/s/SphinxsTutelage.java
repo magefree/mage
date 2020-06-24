@@ -88,7 +88,6 @@ class SphinxsTutelageEffect extends OneShotEffect {
                         .millCards(2, source, game)
                         .getCards(game)
                         .stream()
-                        .filter(card -> game.getState().getZone(card.getId()).isPublicZone())
                         .filter(card -> !card.isLand())
                         .collect(Collectors.toList());
                 if (cards.size() < 2) {
