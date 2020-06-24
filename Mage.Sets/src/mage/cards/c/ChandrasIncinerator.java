@@ -76,7 +76,7 @@ class ChandrasIncineratorCostReductionEffect extends CostModificationEffectImpl 
         if (watcher == null) {
             return true;
         }
-        int reductionAmount = watcher.getDamage(source.getControllerId(), game);
+        int reductionAmount = watcher.getDamage(source.getControllerId());
         CardUtil.reduceCost(abilityToModify, Math.max(0, reductionAmount));
         return true;
     }
@@ -108,7 +108,7 @@ class ChandrasIncineratorWatcher extends Watcher {
                 || ((DamagedPlayerEvent) event).isCombatDamage()) {
             return;
         }
-        for (UUID playerId : game.getOpponents(event.getPlayerId())) {
+        for (UUID playerId : game.getOpponents(event.getTargetId())) {
             damageMap.compute(playerId, ((u, i) -> i == null ? event.getAmount() : Integer.sum(i, event.getAmount())));
         }
     }
@@ -119,13 +119,8 @@ class ChandrasIncineratorWatcher extends Watcher {
         super.reset();
     }
 
-    int getDamage(UUID playerId, Game game) {
-        return game
-                .getOpponents(playerId)
-                .stream()
-                .filter(damageMap::containsKey)
-                .mapToInt(damageMap::get)
-                .sum();
+    int getDamage(UUID playerId) {
+        return damageMap.getOrDefault(playerId, 0);
     }
 }
 
