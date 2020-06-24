@@ -53,6 +53,7 @@ public class SearchLibraryGraveyardPutOntoBattlefieldEffect extends OneShotEffec
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         Card cardFound = null;
+        boolean needShuffle = false;
         if (controller != null && sourceObject != null) {
             if (forceToSearchBoth || controller.chooseUse(outcome, "Search your library for a " + filter.getMessage() + '?', source, game)) {
                 TargetCardInLibrary target = new TargetCardInLibrary(0, 1, filter);
@@ -62,7 +63,7 @@ public class SearchLibraryGraveyardPutOntoBattlefieldEffect extends OneShotEffec
                         cardFound = game.getCard(target.getFirstTarget());
                     }
                 }
-                controller.shuffleLibrary(source, game);
+                needShuffle = true;
             }
 
             if (cardFound == null && controller.chooseUse(outcome, "Search your graveyard for a " + filter.getMessage() + '?', source, game)) {
@@ -77,6 +78,10 @@ public class SearchLibraryGraveyardPutOntoBattlefieldEffect extends OneShotEffec
 
             if (cardFound != null) {
                 controller.moveCards(cardFound, Zone.BATTLEFIELD, source, game);
+            }
+
+            if (needShuffle) {
+                controller.shuffleLibrary(source, game);
             }
 
             return true;
