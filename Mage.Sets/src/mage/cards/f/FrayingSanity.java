@@ -83,7 +83,7 @@ class FrayingSanityTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "At the beginning of each end step, enchanted player puts the top X cards of their library into their graveyard, where X is the total number of cards put into their graveyard from anywhere this turn.";
+        return "At the beginning of each end step, enchanted player mills X cards, where X is the total number of cards put into their graveyard from anywhere this turn.";
     }
 }
 
@@ -117,8 +117,8 @@ class FrayingSanityEffect extends OneShotEffect {
             if (watcher != null) {
                 xAmount = watcher.getAmountCardsPutToGraveyard(enchantedPlayer.getId());
             }
-            Set<Card> topXCardsFromLibrary = enchantedPlayer.getLibrary().getTopCards(game, xAmount);
-            return enchantedPlayer.moveCards(topXCardsFromLibrary, Zone.GRAVEYARD, source, game, false, false, true, null);
+            enchantedPlayer.millCards(xAmount, source, game);
+            return true;
         }
         return false;
     }

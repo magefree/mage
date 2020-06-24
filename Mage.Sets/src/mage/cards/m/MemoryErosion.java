@@ -68,7 +68,7 @@ class SpellCastTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever an opponent casts a spell, that player puts the top two cards of their library into their graveyard";
+        return "Whenever an opponent casts a spell, that player mills two cards";
     }
 
     @Override

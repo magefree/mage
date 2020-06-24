@@ -1,12 +1,13 @@
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveEachPlayerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -14,8 +15,9 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class ExtractFromDarkness extends CardImpl {
@@ -24,12 +26,13 @@ public final class ExtractFromDarkness extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}{B}");
 
         // Each player puts the top two cards of their library into their graveyard.
-        this.getSpellAbility().addEffect(new ExtractFromDarknessMillEffect());
+        this.getSpellAbility().addEffect(new PutTopCardOfLibraryIntoGraveEachPlayerEffect(2, TargetController.ANY));
+
         // Then put a creature card from a graveyard onto the battlefield under your control.
-        this.getSpellAbility().addEffect(new ExtractFromDarknessReturnFromGraveyardToBattlefieldEffect());
+        this.getSpellAbility().addEffect(new ExtractFromDarknessEffect());
     }
 
-    public ExtractFromDarkness(final ExtractFromDarkness card) {
+    private ExtractFromDarkness(final ExtractFromDarkness card) {
         super(card);
     }
 
@@ -39,48 +42,20 @@ public final class ExtractFromDarkness extends CardImpl {
     }
 }
 
-class ExtractFromDarknessMillEffect extends OneShotEffect {
+class ExtractFromDarknessEffect extends OneShotEffect {
 
-    ExtractFromDarknessMillEffect() {
-        super(Outcome.Detriment);
-        staticText = "Each player puts the top two cards of their library into their graveyard";
-    }
-
-    ExtractFromDarknessMillEffect(final ExtractFromDarknessMillEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                player.moveCards(player.getLibrary().getTopCards(game, 2), Zone.GRAVEYARD, source, game);
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public ExtractFromDarknessMillEffect copy() {
-        return new ExtractFromDarknessMillEffect(this);
-    }
-}
-
-class ExtractFromDarknessReturnFromGraveyardToBattlefieldEffect extends OneShotEffect {
-
-    public ExtractFromDarknessReturnFromGraveyardToBattlefieldEffect() {
+    ExtractFromDarknessEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "Put a creature card from a graveyard onto the battlefield under your control";
     }
 
-    public ExtractFromDarknessReturnFromGraveyardToBattlefieldEffect(final ExtractFromDarknessReturnFromGraveyardToBattlefieldEffect effect) {
+    private ExtractFromDarknessEffect(final ExtractFromDarknessEffect effect) {
         super(effect);
     }
 
     @Override
-    public ExtractFromDarknessReturnFromGraveyardToBattlefieldEffect copy() {
-        return new ExtractFromDarknessReturnFromGraveyardToBattlefieldEffect(this);
+    public ExtractFromDarknessEffect copy() {
+        return new ExtractFromDarknessEffect(this);
     }
 
     @Override

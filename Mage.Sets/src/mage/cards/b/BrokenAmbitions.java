@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
@@ -45,7 +44,7 @@ public final class BrokenAmbitions extends CardImpl {
 
 class BrokenAmbitionsEffect extends OneShotEffect {
 
-    private static final String effectText = "Counter target spell unless its controller pays {X}. Clash with an opponent. If you win, that spell's controller puts the top four cards of their library into their graveyard";
+    private static final String effectText = "Counter target spell unless its controller pays {X}. Clash with an opponent. If you win, that spell's controller mills four cards";
 
     protected Cost cost;
     protected DynamicValue genericMana;
@@ -107,7 +106,7 @@ class BrokenAmbitionsEffect extends OneShotEffect {
             game.informPlayers(player.getLogName() + " chooses to pay " + costValueMessage + " to prevent the counter effect");
 
             if (ClashEffect.getInstance().apply(game, source)) {
-                player.moveCards(player.getLibrary().getTopCards(game, 4), Zone.GRAVEYARD, source, game);
+                player.millCards(4, source, game);
             }
             return true;
         }
