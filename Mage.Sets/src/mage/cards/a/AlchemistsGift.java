@@ -2,8 +2,8 @@ package mage.cards.a;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
@@ -66,8 +66,8 @@ class AlchemistsGiftEffect extends OneShotEffect {
                 outcome, "Deathtouch or lifelink?", null,
                 "Deathtouch", "Lifelink", source, game
         ) ? DeathtouchAbility.getInstance() : LifelinkAbility.getInstance();
-        game.addEffect(new BoostSourceEffect(1, 1, Duration.EndOfTurn), source);
-        game.addEffect(new GainAbilitySourceEffect(ability, Duration.EndOfTurn), source);
+        game.addEffect(new BoostTargetEffect(1, 1, Duration.EndOfTurn), source);
+        game.addEffect(new GainAbilityTargetEffect(ability, Duration.EndOfTurn), source);
         return true;
     }
 }
