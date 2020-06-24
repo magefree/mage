@@ -54,7 +54,7 @@ class CephalidVandalEffect extends OneShotEffect {
 
     public CephalidVandalEffect() {
         super(Outcome.Neutral);
-        staticText = "Then put the top card of your library into your graveyard for each shred counter on {this}";
+        staticText = "Then mill a card for each shred counter on {this}";
     }
 
     public CephalidVandalEffect(final CephalidVandalEffect effect) {
@@ -72,7 +72,7 @@ class CephalidVandalEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null && controller != null) {
             int amount = permanent.getCounters(game).getCount(CounterType.SHRED);
-            controller.moveCards(controller.getLibrary().getTopCards(game, amount), Zone.GRAVEYARD, source, game);
+            controller.millCards(amount, source, game);
         }
         return true;
     }

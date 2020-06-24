@@ -24,7 +24,7 @@ public final class GraveStrength extends CardImpl {
         // Choose target creature. Put the top three cards of your library into your graveyard, then put a +1/+1 counter on that creature for each creature card in your graveyard.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         Effect effect = new PutTopCardOfLibraryIntoGraveControllerEffect(3);
-        effect.setText("Choose target creature. Put the top three cards of your library into your graveyard");
+        effect.setText("Choose target creature. Mill three cards");
         this.getSpellAbility().addEffect(effect);
         effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(0), new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_CREATURE));
         effect.setText(", then put a +1/+1 counter on that creature for each creature card in your graveyard");

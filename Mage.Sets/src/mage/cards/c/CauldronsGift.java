@@ -47,8 +47,7 @@ class CauldronsGiftEffect extends OneShotEffect {
     CauldronsGiftEffect() {
         super(Outcome.Benefit);
         staticText = "<i>Adamant</i> &mdash; If at least three black mana was spent to cast this spell, " +
-                "put the top four cards of your library into your graveyard." +
-                "<br>You may choose a creature card in your graveyard. " +
+                "mill four cards. <br>You may choose a creature card in your graveyard. " +
                 "If you do, return it to the battlefield with an additional +1/+1 counter on it.";
     }
 
@@ -68,7 +67,7 @@ class CauldronsGiftEffect extends OneShotEffect {
             return false;
         }
         if (AdamantCondition.BLACK.apply(game, source)) {
-            player.moveCards(player.getLibrary().getTopCards(game, 4), Zone.GRAVEYARD, source, game);
+            player.millCards(4, source, game);
         }
         if (player.getGraveyard().count(StaticFilters.FILTER_CARD_CREATURE, game) == 0
                 || !player.chooseUse(outcome, "Choose a creature card in your graveyard to return to the battlefield?", source, game)) {

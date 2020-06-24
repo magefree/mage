@@ -71,8 +71,7 @@ class TymaretCallsTheDeadFirstEffect extends OneShotEffect {
 
     TymaretCallsTheDeadFirstEffect() {
         super(Benefit);
-        staticText = "put the top three cards of your library into your graveyard. " +
-                "Then you may exile a creature or enchantment card from your graveyard. " +
+        staticText = "mill three cards. Then you may exile a creature or enchantment card from your graveyard. " +
                 "If you do, create a 2/2 black Zombie creature token";
     }
 
