@@ -37,7 +37,9 @@ public final class DireFleetWarmonger extends CardImpl {
                 new SacrificeTargetCost(new TargetControlledPermanent(
                         StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE
                 ))
-        ).addEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance())), TargetController.YOU, false));
+        ).addEffect(new GainAbilitySourceEffect(
+                TrampleAbility.getInstance(), Duration.EndOfTurn
+        )), TargetController.YOU, false));
     }
 
     private DireFleetWarmonger(final DireFleetWarmonger card) {

@@ -30,7 +30,7 @@ public final class WardedBattlements extends CardImpl {
 
         // Attacking creatures you control get +1/+0.
         this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(
-                1, 1, Duration.WhileOnBattlefield,
+                1, 0, Duration.WhileOnBattlefield,
                 StaticFilters.FILTER_ATTACKING_CREATURES
         )));
     }

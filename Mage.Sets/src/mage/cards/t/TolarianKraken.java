@@ -34,7 +34,7 @@ public final class TolarianKraken extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(new DrawCardControllerTriggeredAbility(new DoWhenCostPaid(
                 ability, new GenericManaCost(1),
-                "Pay {1} to tap or untap a permanent?"
+                "Pay {1} to tap or untap a creature?"
         ), false));
     }
 

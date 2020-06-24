@@ -9,7 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterArtifactOrEnchantmentCard;
+import mage.filter.common.FilterArtifactCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
@@ -20,7 +20,7 @@ import java.util.UUID;
 public final class Archaeomender extends CardImpl {
 
     private static final FilterCard filter
-            = new FilterArtifactOrEnchantmentCard("artifact card from your graveyard");
+            = new FilterArtifactCard("artifact card from your graveyard");
 
     public Archaeomender(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");

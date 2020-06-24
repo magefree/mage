@@ -28,9 +28,7 @@ import java.util.UUID;
     that permanent and the card representing it that isn’t a commander are put into the appropriate zone, and the card
     that represents it and is a commander is put into the command zone.
  */
-
 // Oathbreaker mode: If your Oathbreaker changes zones, you may return it to the Command Zone. The Signature Spell must return to the Command Zone.
-
 public class CommanderReplacementEffect extends ReplacementEffectImpl {
 
     private final UUID commanderId;
@@ -39,6 +37,17 @@ public class CommanderReplacementEffect extends ReplacementEffectImpl {
     private final boolean forceToMove;
     private final String commanderTypeName;
 
+    /**
+     *
+     * @param commanderId
+     * @param alsoHand is the replacement effect also applied if commander
+     * object goes to hand zone
+     * @param alsoLibrary is the replacement effect also applied if commander
+     * object goes to library zone
+     * @param forceToMove used for signature spell of Oathbreaker format (spell
+     * is mandatory moved to command zone instead)
+     * @param commanderTypeName type of commander object to set the correct text
+     */
     public CommanderReplacementEffect(UUID commanderId, boolean alsoHand, boolean alsoLibrary, boolean forceToMove, String commanderTypeName) {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         String mayStr = forceToMove ? " " : " may ";
@@ -89,11 +98,11 @@ public class CommanderReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        if (!commanderId.equals(event.getTargetId())) {
+            return false;
+        }
 
-//        if (!game.isSimulation() && commanderId.equals(zEvent.getTargetId())) {
-//            System.out.println("applies " + game.getTurnNum() + ": " + game.getObject(event.getTargetId()).getName() + ": " + zEvent.getFromZone() + " -> " + zEvent.getToZone() + "; " + game.getObject(zEvent.getSourceId()));
-//        }
+        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
 
         if (zEvent.getToZone().equals(Zone.HAND) && !alsoHand) {
             return false;
@@ -106,10 +115,14 @@ public class CommanderReplacementEffect extends ReplacementEffectImpl {
         switch (zEvent.getToZone()) {
             case LIBRARY:
             case HAND:
-                if (commanderId.equals(zEvent.getTargetId())) {
+                return true;
+        }
+        if (forceToMove) {
+            switch (zEvent.getToZone()) {
+                case BATTLEFIELD:
+                case GRAVEYARD:
                     return true;
-                }
-                break;
+            }
         }
         return false;
     }
@@ -118,10 +131,6 @@ public class CommanderReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         String originToZone = zEvent.getToZone().toString().toLowerCase(Locale.ENGLISH);
-
-        if (!game.isSimulation()) {
-            //System.out.println("replace " + game.getTurnNum() + ": " + game.getObject(event.getTargetId()).getName() + ": " + zEvent.getFromZone() + " -> " + zEvent.getToZone() + "; " + game.getObject(zEvent.getSourceId()));
-        }
 
         if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
             Permanent permanent = zEvent.getTarget();

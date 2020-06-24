@@ -108,7 +108,7 @@ class ChandrasIncineratorWatcher extends Watcher {
                 || ((DamagedPlayerEvent) event).isCombatDamage()) {
             return;
         }
-        for (UUID playerId : game.getOpponents(event.getPlayerId())) {
+        for (UUID playerId : game.getOpponents(event.getTargetId())) {
             damageMap.compute(playerId, ((u, i) -> i == null ? event.getAmount() : Integer.sum(i, event.getAmount())));
         }
     }
@@ -144,7 +144,7 @@ class ChandrasIncineratorTriggeredAbility extends TriggeredAbilityImpl {
         DamagedPlayerEvent dEvent = (DamagedPlayerEvent) event;
         if (dEvent.isCombatDamage()
                 || !game.getOpponents(event.getTargetId()).contains(getControllerId())
-                || !event.getPlayerId().equals(getControllerId())) {
+                || !game.getControllerId(event.getSourceId()).equals(getControllerId())) {
             return false;
         }
         this.getEffects().clear();
