@@ -31,6 +31,7 @@ public final class Jumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Agonizing Syphon", 199, Rarity.COMMON, mage.cards.a.AgonizingSyphon.class));
         cards.add(new SetCardInfo("Ajani's Chosen", 82, Rarity.RARE, mage.cards.a.AjanisChosen.class));
         cards.add(new SetCardInfo("Alabaster Mage", 83, Rarity.UNCOMMON, mage.cards.a.AlabasterMage.class));
+        cards.add(new SetCardInfo("Allosaurus Shepherd", 28, Rarity.MYTHIC, mage.cards.a.AllosaurusShepherd.class));
         cards.add(new SetCardInfo("Alloy Myr", 457, Rarity.COMMON, mage.cards.a.AlloyMyr.class));
         cards.add(new SetCardInfo("Ambassador Oak", 375, Rarity.COMMON, mage.cards.a.AmbassadorOak.class));
         cards.add(new SetCardInfo("Ancestral Statue", 458, Rarity.COMMON, mage.cards.a.AncestralStatue.class));
@@ -63,6 +64,7 @@ public final class Jumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Black Cat", 203, Rarity.COMMON, mage.cards.b.BlackCat.class));
         cards.add(new SetCardInfo("Black Market", 204, Rarity.RARE, mage.cards.b.BlackMarket.class));
         cards.add(new SetCardInfo("Blessed Spirits", 92, Rarity.UNCOMMON, mage.cards.b.BlessedSpirits.class));
+        cards.add(new SetCardInfo("Blessed Sanctuary", 1, Rarity.RARE, mage.cards.b.BlessedSanctuary.class));
         cards.add(new SetCardInfo("Blighted Bat", 205, Rarity.COMMON, mage.cards.b.BlightedBat.class));
         cards.add(new SetCardInfo("Blindblast", 295, Rarity.COMMON, mage.cards.b.Blindblast.class));
         cards.add(new SetCardInfo("Blood Artist", 206, Rarity.UNCOMMON, mage.cards.b.BloodArtist.class));

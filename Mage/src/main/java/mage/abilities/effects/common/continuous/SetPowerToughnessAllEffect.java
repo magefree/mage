@@ -98,6 +98,10 @@ public class SetPowerToughnessAllEffect extends ContinuousEffectImpl {
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
+
         StringBuilder sb = new StringBuilder();
         sb.append(filter.getMessage());
         if (filter.getMessage().toLowerCase(Locale.ENGLISH).startsWith("Each ")) {
