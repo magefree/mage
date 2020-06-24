@@ -12,6 +12,7 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
+import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  * @author Styxo
@@ -67,7 +68,7 @@ public class SearchLibraryGraveyardPutInHandEffect extends OneShotEffect {
             }
 
             if (cardFound == null && controller.chooseUse(outcome, "Search your graveyard for a card named " + filter.getMessage() + '?', source, game)) {
-                TargetCard target = new TargetCard(0, 1, Zone.GRAVEYARD, filter);
+                TargetCard target = new TargetCardInYourGraveyard(0, 1, filter, true);
                 target.clearChosen();
                 if (controller.choose(outcome, controller.getGraveyard(), target, game)) {
                     if (!target.getTargets().isEmpty()) {
