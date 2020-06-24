@@ -17,6 +17,8 @@ public class CreaturesBecomeOtherTypeEffect extends ContinuousEffectImpl {
         super(duration, Outcome.Neutral);
         this.filter = filter;
         this.subType = subType;
+
+        this.dependendToTypes.add(DependencyType.BecomeCreature);  // Opalescence and Starfield of Nyx
     }
 
     protected CreaturesBecomeOtherTypeEffect(final CreaturesBecomeOtherTypeEffect effect) {
