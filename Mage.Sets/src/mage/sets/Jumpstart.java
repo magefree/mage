@@ -256,6 +256,7 @@ public final class Jumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Lightning Bolt", 342, Rarity.UNCOMMON, mage.cards.l.LightningBolt.class));
         cards.add(new SetCardInfo("Lightning Diadem", 343, Rarity.COMMON, mage.cards.l.LightningDiadem.class));
         cards.add(new SetCardInfo("Lightning Elemental", 344, Rarity.COMMON, mage.cards.l.LightningElemental.class));
+        cards.add(new SetCardInfo("Lightning Phoenix", 21, Rarity.RARE, mage.cards.l.LightningPhoenix.class));
         cards.add(new SetCardInfo("Lightning Shrieker", 345, Rarity.COMMON, mage.cards.l.LightningShrieker.class));
         cards.add(new SetCardInfo("Lightning Visionary", 22, Rarity.COMMON, mage.cards.l.LightningVisionary.class));
         cards.add(new SetCardInfo("Lightning-Core Excavator", 32, Rarity.COMMON, mage.cards.l.LightningCoreExcavator.class));
