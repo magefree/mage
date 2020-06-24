@@ -83,6 +83,7 @@ class GrindstoneEffect extends OneShotEffect {
                         .millCards(2, source, game)
                         .getCards(game)
                         .stream()
+                        .filter(card -> game.getState().getZone(card.getId()).isPublicZone())
                         .collect(Collectors.toList());
                 for (int i = 0; i < cards.size(); i++) {
                     if (colorShared) {
