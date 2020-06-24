@@ -1,24 +1,21 @@
 package mage.cards.l;
 
-import java.util.Set;
-import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 
+import java.util.Objects;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class LilianasIndignation extends CardImpl {
@@ -45,7 +42,7 @@ class LilianasIndignationEffect extends OneShotEffect {
 
     public LilianasIndignationEffect() {
         super(Outcome.LoseLife);
-        this.staticText = "Put the top X cards of your library into your graveyard. Target player loses 2 life for each creature card put into your graveyard this way";
+        this.staticText = "Mill X cards. Target player loses 2 life for each creature card put into your graveyard this way";
     }
 
     public LilianasIndignationEffect(final LilianasIndignationEffect effect) {
@@ -60,27 +57,28 @@ class LilianasIndignationEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            int x = source.getManaCostsToPay().getX();
-            if (x > 0) {
-                Cards cardsToGraveyard = new CardsImpl();
-                cardsToGraveyard.addAll(controller.getLibrary().getTopCards(game, x));
-                if (!cardsToGraveyard.isEmpty()) {
-                    Set<Card> movedCards = controller.moveCardsToGraveyardWithInfo(cardsToGraveyard.getCards(game), source, game, Zone.LIBRARY);
-                    Cards cardsMoved = new CardsImpl();
-                    cardsMoved.addAll(movedCards);
-                    int creatures = cardsMoved.count(StaticFilters.FILTER_CARD_CREATURE, game);
-                    if (creatures > 0) {
-                        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
-                        if (targetPlayer != null) {
-                            targetPlayer.loseLife(creatures * 2, game, false);
-                        }
-
-                    }
-                }
-            }
+        if (controller == null) {
+            return false;
+        }
+        int xValue = source.getManaCostsToPay().getX();
+        if (xValue < 1) {
             return true;
         }
-        return false;
+        int creatures = controller
+                .millCards(xValue, source, game)
+                .getCards(game)
+                .stream()
+                .filter(Objects::nonNull)
+                .filter(card -> game.getState().getZone(card.getId()) == Zone.GRAVEYARD)
+                .filter(MageObject::isCreature)
+                .mapToInt(x -> 2)
+                .sum();
+        if (creatures > 0) {
+            Player targetPlayer = game.getPlayer(source.getFirstTarget());
+            if (targetPlayer != null) {
+                targetPlayer.loseLife(creatures, game, false);
+            }
+        }
+        return true;
     }
 }

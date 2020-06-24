@@ -48,7 +48,7 @@ class AltarOfDementiaEffect extends OneShotEffect {
 
     public AltarOfDementiaEffect() {
         super(Outcome.Damage);
-        staticText = "Target player puts a number of cards equal to the sacrificed creature's power from the top of their library into their graveyard";
+        staticText = "Target player mills cards equal to the sacrificed creature's power";
     }
 
     public AltarOfDementiaEffect(final AltarOfDementiaEffect effect) {
@@ -67,7 +67,7 @@ class AltarOfDementiaEffect extends OneShotEffect {
                 }
             }
             if (amount > 0) {
-                player.moveCards(player.getLibrary().getTopCards(game, amount), Zone.GRAVEYARD, source, game);
+                player.millCards(amount, source, game);
             }
             return true;
         }

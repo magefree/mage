@@ -1,7 +1,5 @@
 package mage.cards.m;
 
-import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -17,6 +15,8 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 
+import java.util.UUID;
+
 /**
  * @author fireshoes
  */
@@ -30,19 +30,22 @@ public final class ManicScribe extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Manic Scribe enters the battlefield, each opponent puts the top three cards of their library into their graveyard.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new PutTopCardOfLibraryIntoGraveEachPlayerEffect(3, TargetController.OPPONENT), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new PutTopCardOfLibraryIntoGraveEachPlayerEffect(3, TargetController.OPPONENT), false
+        ));
 
         // <i>Delirium</i> &mdash; At the beginning of each opponent's upkeep, if there are four or more card types among cards in your graveyard,
         // that player puts the top three cards of their library into their graveyard.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new PutTopCardOfLibraryIntoGraveTargetEffect(3), TargetController.OPPONENT, false, true),
-                DeliriumCondition.instance,
-                "<i>Delirium</i> &mdash; At the beginning of each opponent's upkeep, if there are four or more card types among cards in your graveyard, "
-                        + "that player puts the top three cards of their library into their graveyard.")
-                .addHint(DeliriumHint.instance));
+                new BeginningOfUpkeepTriggeredAbility(
+                        Zone.BATTLEFIELD, new PutTopCardOfLibraryIntoGraveTargetEffect(3),
+                        TargetController.OPPONENT, false, true
+                ), DeliriumCondition.instance, "<i>Delirium</i> &mdash; At the beginning of each opponent's upkeep, " +
+                "if there are four or more card types among cards in your graveyard, that player mills three cards."
+        ).addHint(DeliriumHint.instance));
     }
 
-    public ManicScribe(final ManicScribe card) {
+    private ManicScribe(final ManicScribe card) {
         super(card);
     }
 

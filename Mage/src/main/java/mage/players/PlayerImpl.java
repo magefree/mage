@@ -4194,6 +4194,17 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
+    public Cards millCards(int toMill, Ability source, Game game) {
+        GameEvent event = GameEvent.getEvent(EventType.MILL_CARDS, getId(), source.getSourceId(), getId(), toMill);
+        if (game.replaceEvent(event)) {
+            return new CardsImpl();
+        }
+        Cards cards = new CardsImpl(this.getLibrary().getTopCards(game, event.getAmount()));
+        this.moveCards(cards, Zone.GRAVEYARD, source, game);
+        return cards;
+    }
+
+    @Override
     public boolean hasOpponent(UUID playerToCheckId, Game game) {
         return !this.getId().equals(playerToCheckId)
                 && game.isOpponent(this, playerToCheckId)

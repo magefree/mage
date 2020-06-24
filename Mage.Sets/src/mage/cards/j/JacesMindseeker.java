@@ -1,19 +1,12 @@
 package mage.cards.j;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -25,8 +18,10 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
 
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class JacesMindseeker extends CardImpl {
@@ -65,9 +60,8 @@ class JaceMindseekerEffect extends OneShotEffect {
 
     public JaceMindseekerEffect() {
         super(Outcome.PlayForFree);
-        this.staticText = "target opponent puts the top five cards of their "
-                + "library into their graveyard. You may cast an instant or "
-                + "sorcery card from among them without paying its mana cost";
+        this.staticText = "target opponent mills five cards. You may cast an instant or sorcery spell " +
+                "from among them without paying its mana cost.";
     }
 
     public JaceMindseekerEffect(final JaceMindseekerEffect effect) {
@@ -84,10 +78,7 @@ class JaceMindseekerEffect extends OneShotEffect {
         Cards cardsToCast = new CardsImpl();
         Player targetOpponent = game.getPlayer(targetPointer.getFirst(game, source));
         if (targetOpponent != null) {
-            Set<Card> allCards = targetOpponent.getLibrary().getTopCards(game, 5);
-            Set<Card> toMove = new HashSet<>();
-            toMove.addAll(allCards);
-            targetOpponent.moveCards(toMove, Zone.GRAVEYARD, source, game);
+            Set<Card> allCards = targetOpponent.millCards(5, source, game).getCards(game);
             for (Card card : allCards) {
                 if (filter.match(card, game)) {
                     Zone zone = game.getState().getZone(card.getId());

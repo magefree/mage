@@ -1,21 +1,20 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class HeedTheMists extends CardImpl {
@@ -41,7 +40,7 @@ public final class HeedTheMists extends CardImpl {
 
         public HeedTheMistsEffect() {
             super(Outcome.DrawCard);
-            staticText = "Put the top card of your library into your graveyard, then draw cards equal to that card's converted mana cost";
+            staticText = "Mill a card, then draw cards equal to that card's converted mana cost";
         }
 
         public HeedTheMistsEffect(HeedTheMistsEffect effect) {
@@ -52,15 +51,14 @@ public final class HeedTheMists extends CardImpl {
         public boolean apply(Game game, Ability source) {
             boolean result = false;
             Player controller = game.getPlayer(source.getControllerId());
-            if (controller != null) {
-                Card card = controller.getLibrary().getFromTop(game);
-                if (card != null) {
-                    int cmc = card.getConvertedManaCost();
-                    controller.moveCards(card, Zone.GRAVEYARD, source, game);
-                    controller.drawCards(cmc, source.getSourceId(), game);
-                }
-            }
-            return result;
+            int totalCMC = controller
+                    .millCards(1, source, game)
+                    .getCards(game)
+                    .stream()
+                    .mapToInt(MageObject::getConvertedManaCost)
+                    .sum();
+            controller.millCards(totalCMC, source, game);
+            return true;
         }
 
         @Override

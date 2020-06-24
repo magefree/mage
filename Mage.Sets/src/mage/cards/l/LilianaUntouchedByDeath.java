@@ -1,7 +1,5 @@
 package mage.cards.l;
 
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
@@ -12,22 +10,17 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.Card;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class LilianaUntouchedByDeath extends CardImpl {
@@ -73,8 +66,7 @@ class LilianaUntouchedByDeathEffect extends OneShotEffect {
 
     public LilianaUntouchedByDeathEffect() {
         super(Outcome.Benefit);
-        this.staticText = "put the top three cards of your library into your graveyard. "
-                + "If at least one of them is a Zombie card, each opponent loses 2 life and you gain 2 life";
+        this.staticText = "mill three cards. If at least one of them is a Zombie card, each opponent loses 2 life and you gain 2 life";
     }
 
     public LilianaUntouchedByDeathEffect(final LilianaUntouchedByDeathEffect effect) {
@@ -92,15 +84,11 @@ class LilianaUntouchedByDeathEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        boolean doEffect = false;
-        Set<Card> top3 = player.moveCardsToGraveyardWithInfo(player.getLibrary().getTopCards(game, 3), source, game, Zone.LIBRARY);
-        for (Card card : top3) {
-            if (card != null && card.hasSubtype(SubType.ZOMBIE, game)) {
-                doEffect = true;
-                break;
-            }
-        }
-        if (doEffect) {
+        if (player
+                .millCards(3, source, game)
+                .getCards(game)
+                .stream()
+                .anyMatch(card -> card.hasSubtype(SubType.ZOMBIE, game))) {
             new LoseLifeOpponentsEffect(2).apply(game, source);
             player.gainLife(2, game, source);
         }

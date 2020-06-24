@@ -5,7 +5,9 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.*;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -48,8 +50,7 @@ class GorgingVultureEffect extends OneShotEffect {
 
     GorgingVultureEffect() {
         super(Outcome.Benefit);
-        staticText = "put the top four cards of your library into your graveyard. " +
-                "You gain 1 life for each creature card put into your graveyard this way.";
+        staticText = "mill four cards. You gain 1 life for each creature card put into your graveyard this way.";
     }
 
     private GorgingVultureEffect(final GorgingVultureEffect effect) {
@@ -67,9 +68,8 @@ class GorgingVultureEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 4));
-        player.moveCards(cards, Zone.GRAVEYARD, source, game);
-        int lifeToGain = cards
+        int lifeToGain = player
+                .millCards(4, source, game)
                 .getCards(game)
                 .stream()
                 .filter(Card::isCreature)
