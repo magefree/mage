@@ -562,6 +562,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
     JButton selectByButton;
     JButton analyseButton;
     JButton blingButton;
+    JButton oldVersionButton;
 
     // Popup for toolbar
     final JPopupMenu filterPopup;
@@ -716,6 +717,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         selectByButton = new JButton("Select By");
         analyseButton = new JButton("M"); // "Mana" button
         blingButton = new JButton("B"); // "Bling" button
+        oldVersionButton = new JButton("O"); // "Old version" button
 
         // Name and count label
         deckNameAndCountLabel = new JLabel();
@@ -740,6 +742,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         toolbarInner.add(visibilityButton);
         toolbarInner.add(analyseButton);
         toolbarInner.add(blingButton);
+        toolbarInner.add(oldVersionButton);
         toolbar.add(toolbarInner, BorderLayout.WEST);
         JPanel sliderPanel = new JPanel(new GridBagLayout());
         sliderPanel.setOpaque(false);
@@ -981,6 +984,11 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         blingButton.setToolTipText("Bling your deck! Select the original and added cards by selecting 'Multiples' in the selection options");
 
         blingButton.addActionListener(evt -> blingDeck());
+
+        // Old version button - Switch cards to the oldest non-promo printing. In case of multiples in a set, take the lowest card number.
+        oldVersionButton.setToolTipText("Switch cards to the oldest non-promo printing");
+
+        oldVersionButton.addActionListener(evt -> oldVersionDeck());
 
         // Filter popup
         filterPopup = new JPopupMenu();
@@ -1565,6 +1573,44 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                 JOptionPane.showMessageDialog(null, "Added " + pimpedCards.size() + " cards.  You can select them and the originals by choosing 'Multiples'");
             }
         }
+    }
+
+    private void oldVersionDeck() {
+        if (this.mode != Constants.DeckEditorMode.FREE_BUILDING) {
+            return;
+        }
+
+        if (JOptionPane.showConfirmDialog(null, "Are you sure you want to switch your card versions to the oldest ones?", "WARNING",
+                JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
+            return;
+        }
+
+        List<List<List<CardView>>> newCardGrid = new ArrayList<>();
+        for (List<List<CardView>> gridRow : cardGrid) {
+            List<List<CardView>> newGridRow = new ArrayList<>();
+            for (List<CardView> stack : gridRow) {
+                List<CardView> newStack = new ArrayList<>();
+                for (CardView card : stack) {
+                    CardInfo oldestCardInfo = CardRepository.instance.findOldestNonPromoVersionCard(card.getName());
+                    if (oldestCardInfo != null) {
+                        CardView oldestCardView = new CardView(oldestCardInfo.getMockCard());
+                        this.removeCardView(card);
+                        eventSource.fireEvent(card, ClientEventType.REMOVE_SPECIFIC_CARD);
+                        this.addCardView(oldestCardView, false);
+                        eventSource.fireEvent(oldestCardView, ClientEventType.ADD_SPECIFIC_CARD);
+                        newStack.add(oldestCardView);
+                    } else {
+                        newStack.add(card);
+                    }
+                }
+                newGridRow.add(newStack);
+            }
+            newCardGrid.add(newGridRow);
+        }
+        cardGrid = newCardGrid;
+        layoutGrid();
+        cardScroll.revalidate();
+        repaint();
     }
 
     // Update the contents of the card grid
