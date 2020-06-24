@@ -1,6 +1,5 @@
 package mage.abilities.effects;
 
-import java.util.*;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.MageSingleton;
@@ -10,6 +9,8 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import org.apache.log4j.Logger;
+
+import java.util.*;
 
 /**
  * @param <T>
@@ -46,7 +47,7 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
     public void removeEndOfTurnEffects(Game game) {
         // calls every turn on cleanup step (only end of turn duration)
         // rules 514.2
-        for (Iterator<T> i = this.iterator(); i.hasNext();) {
+        for (Iterator<T> i = this.iterator(); i.hasNext(); ) {
             T entry = i.next();
             boolean canRemove = false;
             switch (entry.getDuration()) {
@@ -65,8 +66,7 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
     }
 
     public void removeEndOfCombatEffects() {
-
-        for (Iterator<T> i = this.iterator(); i.hasNext();) {
+        for (Iterator<T> i = this.iterator(); i.hasNext(); ) {
             T entry = i.next();
             if (entry.getDuration() == Duration.EndOfCombat) {
                 i.remove();
@@ -76,7 +76,7 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
     }
 
     public void removeInactiveEffects(Game game) {
-        for (Iterator<T> i = this.iterator(); i.hasNext();) {
+        for (Iterator<T> i = this.iterator(); i.hasNext(); ) {
             T entry = i.next();
             if (isInactive(entry, game)) {
                 i.remove();
@@ -207,20 +207,13 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
         return effectAbilityMap.getOrDefault(effectId, new HashSet<>());
     }
 
-    public void removeEffects(UUID effectIdToRemove, Set<Ability> abilitiesToRemove) {
-        Set<Ability> abilities = effectAbilityMap.get(effectIdToRemove);
-        if (abilitiesToRemove != null && abilities != null) {
-            abilities.removeIf(ability -> abilitiesToRemove.stream().anyMatch(a -> a.isSameInstance(ability)));
-        }
-        if (abilities == null || abilities.isEmpty()) {
-            for (Iterator<T> iterator = this.iterator(); iterator.hasNext();) {
-                ContinuousEffect effect = iterator.next();
-                if (effect.getId().equals(effectIdToRemove)) {
-                    iterator.remove();
-                    break;
-                }
+    public void removeTemporaryEffects() {
+        for (Iterator<T> i = this.iterator(); i.hasNext(); ) {
+            T entry = i.next();
+            if (entry.isTemporary()) {
+                i.remove();
+                effectAbilityMap.remove(entry.getId());
             }
-            effectAbilityMap.remove(effectIdToRemove);
         }
     }
 
@@ -228,5 +221,19 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
     public void clear() {
         super.clear();
         effectAbilityMap.clear();
+    }
+
+    public boolean contains(Effect effect) {
+        // search by id
+        for (Iterator<T> iterator = this.iterator(); iterator.hasNext(); ) {
+            T test = iterator.next();
+            if (effect.getId().equals(test.getId())) {
+                return true;
+            }
+            if (effect.equals(test)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
