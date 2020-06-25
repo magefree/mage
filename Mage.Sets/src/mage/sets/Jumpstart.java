@@ -148,6 +148,7 @@ public final class Jumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Elemental Uprising", 390, Rarity.COMMON, mage.cards.e.ElementalUprising.class));
         cards.add(new SetCardInfo("Elvish Archdruid", 391, Rarity.RARE, mage.cards.e.ElvishArchdruid.class));
         cards.add(new SetCardInfo("Emancipation Angel", 102, Rarity.UNCOMMON, mage.cards.e.EmancipationAngel.class));
+        cards.add(new SetCardInfo("Emiel the Blessed", 3, Rarity.MYTHIC, mage.cards.e.EmielTheBlessed.class));
         cards.add(new SetCardInfo("Enlarge", 392, Rarity.UNCOMMON, mage.cards.e.Enlarge.class));
         cards.add(new SetCardInfo("Entomber Exarch", 227, Rarity.UNCOMMON, mage.cards.e.EntomberExarch.class));
         cards.add(new SetCardInfo("Erratic Visionary", 150, Rarity.COMMON, mage.cards.e.ErraticVisionary.class));
