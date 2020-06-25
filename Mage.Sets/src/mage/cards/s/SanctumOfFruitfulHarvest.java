@@ -23,7 +23,7 @@ import java.util.UUID;
 public final class SanctumOfFruitfulHarvest extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledPermanent();
-    private static final PermanentsOnBattlefieldCount count = new PermanentsOnBattlefieldCount(filter);
+    private static final PermanentsOnBattlefieldCount xValue = new PermanentsOnBattlefieldCount(filter);
 
     static {
         filter.add(SubType.SHRINE.getPredicate());
@@ -39,11 +39,11 @@ public final class SanctumOfFruitfulHarvest extends CardImpl {
         this.addAbility(new BeginningOfPreCombatMainTriggeredAbility(
                 new DynamicManaEffect(
                         Mana.AnyMana(1),
-                        count,
+                        xValue,
                         "add X mana of any one color, where X is the number of Shrines you control",
                         true),
                 TargetController.YOU, false)
-                .addHint(new ValueHint("Shrines you control", count)));
+                .addHint(new ValueHint("Shrines you control", xValue)));
     }
 
     private SanctumOfFruitfulHarvest(final SanctumOfFruitfulHarvest card) {

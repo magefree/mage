@@ -4,10 +4,9 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.search.SearchLibraryGraveyardPutOntoBattlefieldEffect;
 import mage.abilities.hint.ValueHint;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -16,19 +15,13 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.Target;
-import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetCardInYourGraveyard;
 
-import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -38,10 +31,13 @@ import java.util.UUID;
 public final class SanctumOfAll extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledPermanent();
+    private static final FilterCard filterCard = new FilterCard("a Shrine card");
+
     static final PermanentsOnBattlefieldCount count = new PermanentsOnBattlefieldCount(filter);
 
     static {
         filter.add(SubType.SHRINE.getPredicate());
+        filterCard.add(SubType.SHRINE.getPredicate());
     }
 
     public SanctumOfAll(UUID ownerId, CardSetInfo setInfo) {
@@ -51,7 +47,7 @@ public final class SanctumOfAll extends CardImpl {
         this.subtype.add(SubType.SHRINE);
 
         // At the beginning of your upkeep, you may search your library and/or graveyard for a Shrine card and put it onto the battlefield. If you search your library this way, shuffle it.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SanctumOfAllSearchEffect(), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SearchLibraryGraveyardPutOntoBattlefieldEffect(filterCard), TargetController.YOU, true));
 
         // If an ability of another Shrine you control triggers while you control six or more Shrines, that ability triggers an additional time.
         this.addAbility(new SimpleStaticAbility(new SanctumOfAllTriggerEffect()).addHint(new ValueHint("Shrines you control", count)));
@@ -67,70 +63,7 @@ public final class SanctumOfAll extends CardImpl {
     }
 }
 
-class SanctumOfAllSearchEffect extends OneShotEffect {
-
-    public static final FilterCard filter = new FilterCard("a Shrine card");
-
-    static {
-        filter.add(SubType.SHRINE.getPredicate());
-    }
-
-    SanctumOfAllSearchEffect() {
-        super(Outcome.Benefit);
-        staticText = "search your library and/or graveyard for a Shrine card and put it onto the battlefield. If you search your library this way, shuffle it";
-    }
-
-    private SanctumOfAllSearchEffect(SanctumOfAllSearchEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SanctumOfAllSearchEffect copy() {
-        return new SanctumOfAllSearchEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Optional<Card> maybeChosenCard = Optional.empty();
-            boolean searchedLibrary = false;
-
-            // from library
-            Target target = new TargetCardInLibrary(0, 1, filter).withChooseHint("from library");
-            if (target.canChoose(source.getSourceId(), controller.getId(), game)
-                    && controller.chooseUse(Outcome.Benefit, "Search your library?", source, game)
-                    && target.choose(Outcome.PutCardInPlay, controller.getId(), source.getSourceId(), game)) {
-                maybeChosenCard = Optional.ofNullable(game.getCard(target.getFirstTarget()));
-                searchedLibrary = true;
-            }
-
-            if (!maybeChosenCard.isPresent()) {
-                // from graveyard
-                target = new TargetCardInYourGraveyard(0, 1, filter, true).withChooseHint("from graveyard");
-                if (target.canChoose(source.getSourceId(), controller.getId(), game)
-                        && target.choose(Outcome.PutCardInPlay, controller.getId(), source.getSourceId(), game)) {
-                    maybeChosenCard = Optional.ofNullable(game.getCard(target.getFirstTarget()));
-                }
-            }
-
-            maybeChosenCard.ifPresent(card -> controller.moveCards(card, Zone.BATTLEFIELD, source, game));
-            if (searchedLibrary) {
-                controller.shuffleLibrary(source, game);
-            }
-            return true;
-        }
-        return false;
-    }
-}
-
 class SanctumOfAllTriggerEffect extends ReplacementEffectImpl {
-
-    private static final FilterPermanent filter = new FilterPermanent();
-
-    static {
-        filter.add(SubType.SHRINE.getPredicate());
-    }
 
     SanctumOfAllTriggerEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);

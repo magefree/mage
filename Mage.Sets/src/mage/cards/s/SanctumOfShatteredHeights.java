@@ -30,7 +30,7 @@ public final class SanctumOfShatteredHeights extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a land card or Shrine card");
     private static final FilterPermanent filterShrinesOnly = new FilterControlledPermanent("Shrine you control");
-    private static final PermanentsOnBattlefieldCount count = new PermanentsOnBattlefieldCount(filterShrinesOnly);
+    private static final PermanentsOnBattlefieldCount xValue = new PermanentsOnBattlefieldCount(filterShrinesOnly);
 
     static {
         filter.add(Predicates.or(CardType.LAND.getPredicate(), SubType.SHRINE.getPredicate()));
@@ -44,10 +44,10 @@ public final class SanctumOfShatteredHeights extends CardImpl {
         this.subtype.add(SubType.SHRINE);
 
         // {1}, Discard a land card or Shrine card: Sanctum of Shattered Heights deals X damage to target creature or planeswalker, where X is the number of Shrines you control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(count)
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(xValue)
                 .setText("Sanctum of Shattered Heights deals X damage to target creature or planeswalker, where X is the number of Shrines you control"),
                 new ManaCostsImpl<>("{1}"))
-                .addHint(new ValueHint("Shrines you control", count));
+                .addHint(new ValueHint("Shrines you control", xValue));
         ability.addCost(new DiscardTargetCost(new TargetCardInHand(filter)));
         ability.addTarget(new TargetCreatureOrPlaneswalker());
         this.addAbility(ability);

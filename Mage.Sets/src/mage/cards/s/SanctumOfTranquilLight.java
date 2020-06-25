@@ -6,7 +6,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.TapTargetEffect;
-import mage.abilities.effects.common.cost.DynamicValueCostModificationEffect;
+import mage.abilities.effects.common.cost.CostModificationSourceEffect;
 import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -45,7 +45,7 @@ public final class SanctumOfTranquilLight extends CardImpl {
         Ability ability = new SimpleActivatedAbility(new TapTargetEffect().setText("target creature. This ability costs {1} less to activate for each Shrine you control"), new ManaCostsImpl<>("{5}{W}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new DynamicValueCostModificationEffect(Duration.EndOfGame, Outcome.Benefit, ability.getOriginalId(), count, true).setText(""))
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new CostModificationSourceEffect(Duration.EndOfGame, Outcome.Benefit, ability.getOriginalId(), count, true).setText(""))
                 .addHint(new ValueHint("Shrines you control", count)));
     }
 

@@ -24,7 +24,7 @@ import java.util.UUID;
 public final class SanctumOfCalmWaters extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledPermanent();
-    private static final PermanentsOnBattlefieldCount count = new PermanentsOnBattlefieldCount(filter);
+    private static final PermanentsOnBattlefieldCount xValue = new PermanentsOnBattlefieldCount(filter);
 
     static {
         filter.add(SubType.SHRINE.getPredicate());
@@ -37,10 +37,10 @@ public final class SanctumOfCalmWaters extends CardImpl {
         this.subtype.add(SubType.SHRINE);
 
         // At the beginning of your precombat main phase, you may draw X cards, where X is the number of Shrines you control. If you do, discard a card.
-        Ability ability = new BeginningOfPreCombatMainTriggeredAbility(new DrawCardSourceControllerEffect(count)
+        Ability ability = new BeginningOfPreCombatMainTriggeredAbility(new DrawCardSourceControllerEffect(xValue)
                 .setText("you may draw X cards, where X is the number of Shrines you control"),
                 TargetController.YOU, true)
-                .addHint(new ValueHint("Shrines you control", count));
+                .addHint(new ValueHint("Shrines you control", xValue));
         ability.addEffect(new DiscardControllerEffect(1).setText("If you do, discard a card"));
         this.addAbility(ability);
     }

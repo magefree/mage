@@ -24,7 +24,7 @@ import java.util.UUID;
 public final class SanctumOfStoneFangs extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledPermanent("");
-    private static final PermanentsOnBattlefieldCount count = new PermanentsOnBattlefieldCount(filter);
+    private static final PermanentsOnBattlefieldCount xValue = new PermanentsOnBattlefieldCount(filter, null);
 
     static {
         filter.add(SubType.SHRINE.getPredicate());
@@ -38,10 +38,10 @@ public final class SanctumOfStoneFangs extends CardImpl {
 
         // At the beginning of your precombat main phase, each opponent loses X life and you gain X life, where X is the number of Shrines you control.
         Ability ability = new BeginningOfPreCombatMainTriggeredAbility(
-                new LoseLifeOpponentsEffect(new PermanentsOnBattlefieldCount(filter, null)).setText("each opponent loses X life"),
+                new LoseLifeOpponentsEffect(xValue).setText("each opponent loses X life"),
                 TargetController.YOU, false)
-                .addHint(new ValueHint("Shrines you control", count));
-        ability.addEffect(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter)).setText("and you gain X life, where X is the number of Shrines you control"));
+                .addHint(new ValueHint("Shrines you control", xValue));
+        ability.addEffect(new GainLifeEffect(xValue).setText("and you gain X life, where X is the number of Shrines you control"));
         this.addAbility(ability);
     }
 
