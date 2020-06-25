@@ -14,13 +14,13 @@ import java.util.UUID;
 
 public class CostModificationSourceEffect extends CostModificationEffectImpl {
 
-    private final UUID originalId;
+    private final Class<? extends Ability> abilityType;
     private final DynamicValue value;
     private final boolean reducesCost;
 
-    public CostModificationSourceEffect(Duration duration, Outcome outcome, UUID originalId, DynamicValue value, boolean reducesCost) {
+    public CostModificationSourceEffect(Duration duration, Outcome outcome, Class<? extends Ability> abilityType, DynamicValue value, boolean reducesCost) {
         super(duration, outcome, reducesCost ? CostModificationType.REDUCE_COST : CostModificationType.INCREASE_COST);
-        this.originalId = originalId;
+        this.abilityType = abilityType;
         this.value = value;
         this.reducesCost = reducesCost;
         this.staticText = "this ability costs {1} " + (reducesCost ? "less" : "more") + " to activate for each " + value.getMessage();
@@ -28,7 +28,7 @@ public class CostModificationSourceEffect extends CostModificationEffectImpl {
 
     private CostModificationSourceEffect(CostModificationSourceEffect effect) {
         super(effect);
-        this.originalId = effect.originalId;
+        this.abilityType = effect.abilityType;
         this.value = effect.value;
         this.reducesCost = effect.reducesCost;
     }
@@ -54,7 +54,7 @@ public class CostModificationSourceEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        return abilityToModify.getOriginalId().equals(originalId);
+        return (abilityToModify.getClass().isAssignableFrom(abilityType)) && abilityToModify.getSourceId().equals(source.getSourceId());
     }
 
     @Override
