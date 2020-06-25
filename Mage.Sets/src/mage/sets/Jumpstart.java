@@ -385,6 +385,7 @@ public final class Jumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Sengir Vampire", 275, Rarity.UNCOMMON, mage.cards.s.SengirVampire.class));
         cards.add(new SetCardInfo("Serendib Efreet", 175, Rarity.RARE, mage.cards.s.SerendibEfreet.class));
         cards.add(new SetCardInfo("Serra Angel", 132, Rarity.UNCOMMON, mage.cards.s.SerraAngel.class));
+        cards.add(new SetCardInfo("Sethron, Hurloon General", 25, Rarity.RARE, mage.cards.s.SethronHurloonGeneral.class));
         cards.add(new SetCardInfo("Settle the Score", 276, Rarity.UNCOMMON, mage.cards.s.SettleTheScore.class));
         cards.add(new SetCardInfo("Shambling Goblin", 277, Rarity.COMMON, mage.cards.s.ShamblingGoblin.class));
         cards.add(new SetCardInfo("Sharding Sphinx", 176, Rarity.RARE, mage.cards.s.ShardingSphinx.class));
