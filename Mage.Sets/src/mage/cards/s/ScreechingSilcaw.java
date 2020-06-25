@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -14,16 +13,15 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.UUID;
+
 /**
- *
  * @author ayratn
  */
 public final class ScreechingSilcaw extends CardImpl {
 
-    private static final String rule = "<i>Metalcraft</i> &mdash; Whenever Screeching Silcaw deals combat damage to a player, if you control three or more artifacts, that player puts the top four cards of their library into their graveyard.";
-
     public ScreechingSilcaw(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.subtype.add(SubType.BIRD);
 
         this.power = new MageInt(1);
@@ -33,8 +31,11 @@ public final class ScreechingSilcaw extends CardImpl {
 
         //"<i>Metalcraft</i> &mdash; Whenever Screeching Silcaw deals combat damage to a player, if you control three or more artifacts, that player puts the top four cards of their library into their graveyard.
         TriggeredAbility conditional = new ConditionalInterveningIfTriggeredAbility(
-                new DealsCombatDamageToAPlayerTriggeredAbility(new PutLibraryIntoGraveTargetEffect(4), false, true),
-                MetalcraftCondition.instance, rule);
+                new DealsCombatDamageToAPlayerTriggeredAbility(
+                        new PutLibraryIntoGraveTargetEffect(4), false, true
+                ), MetalcraftCondition.instance, "<i>Metalcraft</i> &mdash; Whenever {this} " +
+                "deals combat damage to a player, if you control three or more artifacts, that player mills four cards."
+        );
         this.addAbility(conditional);
     }
 

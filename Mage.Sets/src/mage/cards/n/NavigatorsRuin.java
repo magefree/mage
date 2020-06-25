@@ -1,7 +1,5 @@
-
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.RaidCondition;
@@ -14,8 +12,9 @@ import mage.constants.TargetController;
 import mage.target.common.TargetOpponent;
 import mage.watchers.common.PlayerAttackedWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class NavigatorsRuin extends CardImpl {
@@ -25,14 +24,16 @@ public final class NavigatorsRuin extends CardImpl {
 
         // Raid - At the beginning of your end step, if you attacked with a creature this turm, target opponent puts the top four cards of their library into their graveyard.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfEndStepTriggeredAbility(new PutLibraryIntoGraveTargetEffect(4), TargetController.YOU, false),
-                RaidCondition.instance,
-                "<i>Raid</i> &mdash; At the beginning of your end step, if you attacked this turn, target opponent puts the top four cards of their library into their graveyard.");
+                new BeginningOfEndStepTriggeredAbility(
+                        new PutLibraryIntoGraveTargetEffect(4), TargetController.YOU, false
+                ), RaidCondition.instance, "<i>Raid</i> &mdash; At the beginning of your end step, " +
+                "if you attacked this turn, target opponent mills four cards."
+        );
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability, new PlayerAttackedWatcher());
     }
 
-    public NavigatorsRuin(final NavigatorsRuin card) {
+    private NavigatorsRuin(final NavigatorsRuin card) {
         super(card);
     }
 

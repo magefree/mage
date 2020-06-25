@@ -1,7 +1,7 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.DrawCardControllerTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -11,8 +11,6 @@ import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -20,8 +18,11 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
 
+import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
 /**
- *
  * @author LevelX2
  */
 public final class SphinxsTutelage extends CardImpl {
@@ -52,7 +53,7 @@ class SphinxsTutelageEffect extends OneShotEffect {
 
     public SphinxsTutelageEffect() {
         super(Outcome.Benefit);
-        this.staticText = "target opponent puts the top two cards of their library into their graveyard. If they're both nonland cards that share a color, repeat this process";
+        this.staticText = "target opponent mills two cards. If two nonland cards that share a color were milled this way, repeat this process.";
     }
 
     public SphinxsTutelageEffect(final SphinxsTutelageEffect effect) {
@@ -67,10 +68,11 @@ class SphinxsTutelageEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
-        boolean colorShared;
+
         if (targetPlayer != null) {
             int possibleIterations = targetPlayer.getLibrary().size() / 2;
             int iteration = 0;
+            boolean colorShared;
             do {
                 iteration++;
                 if (iteration > possibleIterations + 20) {
@@ -82,20 +84,35 @@ class SphinxsTutelageEffect extends OneShotEffect {
                     return true;
                 }
                 colorShared = false;
-                Cards cards = new CardsImpl(targetPlayer.getLibrary().getTopCards(game, 2));
-                Card card1 = null;
-                for (Card card : cards.getCards(game)) {
-                    if (card.isLand()) {
+                List<Card> cards = targetPlayer
+                        .millCards(2, source, game)
+                        .getCards(game)
+                        .stream()
+                        .filter(card -> !card.isLand())
+                        .collect(Collectors.toList());
+                if (cards.size() < 2) {
+                    break;
+                }
+                for (int i = 0; i < cards.size(); i++) {
+                    if (colorShared) {
                         break;
                     }
-                    if (card1 == null) {
-                        card1 = card;
-                    } else {
-                        colorShared = card1.getColor(game).shares(card.getColor(game));
+                    ObjectColor color1 = cards.get(i).getColor(game);
+                    if (color1.isColorless()) {
+                        continue;
+                    }
+                    for (int j = 0; j < cards.size(); j++) {
+                        if (i >= j) {
+                            continue;
+                        }
+                        ObjectColor color2 = cards.get(j).getColor(game);
+                        if (color1.shares(color2)) {
+                            colorShared = true;
+                            break;
+                        }
                     }
                 }
-                targetPlayer.moveCards(cards, Zone.GRAVEYARD, source, game);
-            } while (colorShared && targetPlayer.isInGame());
+            } while (colorShared);
             return true;
         }
         return false;

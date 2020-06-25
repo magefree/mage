@@ -114,7 +114,7 @@ class SewerNemesisTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever the chosen player casts a spell, that player puts the top card of their library into their graveyard.";
+        return "Whenever the chosen player casts a spell, that player mills a card.";
     }
 
     @Override

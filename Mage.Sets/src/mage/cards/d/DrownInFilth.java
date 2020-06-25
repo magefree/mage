@@ -28,7 +28,7 @@ public final class DrownInFilth extends CardImpl {
         // Choose target creature. Put the top four cards of your library into your graveyard, then that creature gets -1/-1 until end of turn for each land card in your graveyard.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         Effect effect = new PutTopCardOfLibraryIntoGraveControllerEffect(4);
-        effect.setText("Choose target creature. Put the top four cards of your library into your graveyard");
+        effect.setText("Choose target creature. Mill four cards");
         this.getSpellAbility().addEffect(effect);
         DynamicValue landCards = new SignInversionDynamicValue(new CardsInControllerGraveyardCount(new FilterLandCard()));
         this.getSpellAbility().addEffect(new BoostTargetEffect(landCards, landCards, Duration.EndOfTurn));

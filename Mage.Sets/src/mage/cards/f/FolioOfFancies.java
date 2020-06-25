@@ -9,18 +9,16 @@ import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardAllEffect;
 import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
 
-import java.util.Collection;
-import java.util.Objects;
-import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -63,8 +61,7 @@ class FolioOfFanciesEffect extends OneShotEffect {
 
     FolioOfFanciesEffect() {
         super(Outcome.Benefit);
-        staticText = "Each opponent puts a number of cards equal to the number of cards in their hand " +
-                "from the top of their library into their graveyard.";
+        staticText = "each opponent mills cards equal to the number of cards in their hand";
     }
 
     private FolioOfFanciesEffect(final FolioOfFanciesEffect effect) {
@@ -82,14 +79,13 @@ class FolioOfFanciesEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        Set<Card> cards = game.getOpponents(source.getControllerId())
-                .stream()
-                .map(game::getPlayer)
-                .filter(Objects::nonNull)
-                .filter(player -> !player.getHand().isEmpty())
-                .map(player -> player.getLibrary().getTopCards(game, player.getHand().size()))
-                .flatMap(Collection::stream)
-                .collect(Collectors.toSet());
-        return controller.moveCards(cards, Zone.GRAVEYARD, source, game);
+        for (UUID playerId : game.getOpponents(source.getControllerId())) {
+            Player player = game.getPlayer(playerId);
+            if (player == null) {
+                continue;
+            }
+            player.millCards(player.getHand().size(), source, game);
+        }
+        return true;
     }
 }

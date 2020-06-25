@@ -4,7 +4,6 @@ import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.cards.Card;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -38,8 +37,7 @@ public class PutTopCardOfYourLibraryToGraveyardCost extends CostImpl {
         Player player = game.getPlayer(controllerId);
         if (player != null && player.getLibrary().size() >= numberOfCards) {
             paid = true;
-            this.cardsMovedToGraveyard.addAll(player.getLibrary().getTopCards(game, numberOfCards));
-            player.moveCards(player.getLibrary().getTopCards(game, numberOfCards), Zone.GRAVEYARD, ability, game);
+            this.cardsMovedToGraveyard.addAll(player.millCards(numberOfCards, ability, game).getCards(game));
         }
         return paid;
     }

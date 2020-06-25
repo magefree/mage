@@ -31,6 +31,7 @@ public final class Jumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Agonizing Syphon", 199, Rarity.COMMON, mage.cards.a.AgonizingSyphon.class));
         cards.add(new SetCardInfo("Ajani's Chosen", 82, Rarity.RARE, mage.cards.a.AjanisChosen.class));
         cards.add(new SetCardInfo("Alabaster Mage", 83, Rarity.UNCOMMON, mage.cards.a.AlabasterMage.class));
+        cards.add(new SetCardInfo("Allosaurus Shepherd", 28, Rarity.MYTHIC, mage.cards.a.AllosaurusShepherd.class));
         cards.add(new SetCardInfo("Alloy Myr", 457, Rarity.COMMON, mage.cards.a.AlloyMyr.class));
         cards.add(new SetCardInfo("Ambassador Oak", 375, Rarity.COMMON, mage.cards.a.AmbassadorOak.class));
         cards.add(new SetCardInfo("Ancestral Statue", 458, Rarity.COMMON, mage.cards.a.AncestralStatue.class));
@@ -62,6 +63,7 @@ public final class Jumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Belltower Sphinx", 141, Rarity.UNCOMMON, mage.cards.b.BelltowerSphinx.class));
         cards.add(new SetCardInfo("Black Cat", 203, Rarity.COMMON, mage.cards.b.BlackCat.class));
         cards.add(new SetCardInfo("Black Market", 204, Rarity.RARE, mage.cards.b.BlackMarket.class));
+        cards.add(new SetCardInfo("Blessed Sanctuary", 1, Rarity.RARE, mage.cards.b.BlessedSanctuary.class));
         cards.add(new SetCardInfo("Blessed Spirits", 92, Rarity.UNCOMMON, mage.cards.b.BlessedSpirits.class));
         cards.add(new SetCardInfo("Blighted Bat", 205, Rarity.COMMON, mage.cards.b.BlightedBat.class));
         cards.add(new SetCardInfo("Blindblast", 295, Rarity.COMMON, mage.cards.b.Blindblast.class));
@@ -129,7 +131,7 @@ public final class Jumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Divine Arrow", 100, Rarity.COMMON, mage.cards.d.DivineArrow.class));
         cards.add(new SetCardInfo("Doublecast", 307, Rarity.UNCOMMON, mage.cards.d.Doublecast.class));
         cards.add(new SetCardInfo("Douse in Gloom", 223, Rarity.COMMON, mage.cards.d.DouseInGloom.class));
-        cards.add(new SetCardInfo("Draconic Roar", 308, Rarity.COMMON, mage.cards.d.DraconicRoar.class));
+        cards.add(new SetCardInfo("Draconic Roar", 308, Rarity.UNCOMMON, mage.cards.d.DraconicRoar.class));
         cards.add(new SetCardInfo("Dragon Fodder", 309, Rarity.COMMON, mage.cards.d.DragonFodder.class));
         cards.add(new SetCardInfo("Dragon Hatchling", 310, Rarity.COMMON, mage.cards.d.DragonHatchling.class));
         cards.add(new SetCardInfo("Dragonloft Idol", 463, Rarity.UNCOMMON, mage.cards.d.DragonloftIdol.class));
@@ -155,7 +157,7 @@ public final class Jumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Eternal Thirst", 229, Rarity.COMMON, mage.cards.e.EternalThirst.class));
         cards.add(new SetCardInfo("Exclude", 152, Rarity.UNCOMMON, mage.cards.e.Exclude.class));
         cards.add(new SetCardInfo("Exclusion Mage", 153, Rarity.UNCOMMON, mage.cards.e.ExclusionMage.class));
-        cards.add(new SetCardInfo("Exhume", 230, Rarity.COMMON, mage.cards.e.Exhume.class));
+        cards.add(new SetCardInfo("Exhume", 230, Rarity.UNCOMMON, mage.cards.e.Exhume.class));
         cards.add(new SetCardInfo("Explore", 393, Rarity.COMMON, mage.cards.e.Explore.class));
         cards.add(new SetCardInfo("Exquisite Blood", 231, Rarity.RARE, mage.cards.e.ExquisiteBlood.class));
         cards.add(new SetCardInfo("Fa'adiyah Seer", 394, Rarity.COMMON, mage.cards.f.FaadiyahSeer.class));
@@ -179,7 +181,7 @@ public final class Jumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Forge Devil", 322, Rarity.COMMON, mage.cards.f.ForgeDevil.class));
         cards.add(new SetCardInfo("Fortify", 105, Rarity.COMMON, mage.cards.f.Fortify.class));
         cards.add(new SetCardInfo("Funeral Rites", 235, Rarity.COMMON, mage.cards.f.FuneralRites.class));
-        cards.add(new SetCardInfo("Furnace Whelp", 323, Rarity.COMMON, mage.cards.f.FurnaceWhelp.class));
+        cards.add(new SetCardInfo("Furnace Whelp", 323, Rarity.UNCOMMON, mage.cards.f.FurnaceWhelp.class));
         cards.add(new SetCardInfo("Fusion Elemental", 451, Rarity.UNCOMMON, mage.cards.f.FusionElemental.class));
         cards.add(new SetCardInfo("Gargoyle Sentinel", 465, Rarity.UNCOMMON, mage.cards.g.GargoyleSentinel.class));
         cards.add(new SetCardInfo("Ghalta, Primal Hunger", 399, Rarity.RARE, mage.cards.g.GhaltaPrimalHunger.class));
@@ -254,6 +256,7 @@ public final class Jumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Lightning Bolt", 342, Rarity.UNCOMMON, mage.cards.l.LightningBolt.class));
         cards.add(new SetCardInfo("Lightning Diadem", 343, Rarity.COMMON, mage.cards.l.LightningDiadem.class));
         cards.add(new SetCardInfo("Lightning Elemental", 344, Rarity.COMMON, mage.cards.l.LightningElemental.class));
+        cards.add(new SetCardInfo("Lightning Phoenix", 21, Rarity.RARE, mage.cards.l.LightningPhoenix.class));
         cards.add(new SetCardInfo("Lightning Shrieker", 345, Rarity.COMMON, mage.cards.l.LightningShrieker.class));
         cards.add(new SetCardInfo("Lightning Visionary", 22, Rarity.COMMON, mage.cards.l.LightningVisionary.class));
         cards.add(new SetCardInfo("Lightning-Core Excavator", 32, Rarity.COMMON, mage.cards.l.LightningCoreExcavator.class));
@@ -289,6 +292,7 @@ public final class Jumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 62, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mugging", 352, Rarity.COMMON, mage.cards.m.Mugging.class));
         cards.add(new SetCardInfo("Murmuring Phantasm", 157, Rarity.COMMON, mage.cards.m.MurmuringPhantasm.class));
+        cards.add(new SetCardInfo("Muxus, Goblin Grandee", 24, Rarity.RARE, mage.cards.m.MuxusGoblinGrandee.class));
         cards.add(new SetCardInfo("Myr Sire", 475, Rarity.COMMON, mage.cards.m.MyrSire.class));
         cards.add(new SetCardInfo("Mystic Archaeologist", 158, Rarity.RARE, mage.cards.m.MysticArchaeologist.class));
         cards.add(new SetCardInfo("Narcolepsy", 159, Rarity.COMMON, mage.cards.n.Narcolepsy.class));

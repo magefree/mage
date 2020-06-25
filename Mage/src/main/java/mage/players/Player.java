@@ -531,10 +531,10 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param cards    - list of cards that have to be moved
      * @param game     - game
      * @param anyOrder - true = if player can determine the order of the cards
-     *                     else false = random order
-     *                  401.4. If an effect puts two or more cards in a specific position in a library
-     *                  at the same time, the owner of those cards may arrange them in any order. 
-     *                  That library’s owner doesn’t reveal the order in which the cards go into the library.
+     *                 else false = random order
+     *                 401.4. If an effect puts two or more cards in a specific position in a library
+     *                 at the same time, the owner of those cards may arrange them in any order.
+     *                 That library’s owner doesn’t reveal the order in which the cards go into the library.
      * @param source   - source ability
      * @return
      */
@@ -563,13 +563,13 @@ public interface Player extends MageItem, Copyable<Player> {
      * @return
      */
     boolean putCardsOnTopOfLibrary(Cards cards, Game game, Ability source, boolean anyOrder);
-    
+
     boolean putCardsOnTopOfLibrary(Card card, Game game, Ability source, boolean anyOrder);
 
     boolean shuffleCardsToLibrary(Cards cards, Game game, Ability source);
-    
+
     boolean shuffleCardsToLibrary(Card card, Game game, Ability source);
-    
+
     // set the value for X mana spells and abilities
     default int announceXMana(int min, int max, String message, Game game, Ability ability) {
         return announceXMana(min, max, 1, message, game, ability);
@@ -839,6 +839,8 @@ public interface Player extends MageItem, Copyable<Player> {
      * @return
      */
     boolean moveCardToCommandWithInfo(Card card, UUID sourceId, Game game, Zone fromZone);
+
+    Cards millCards(int toMill, Ability source, Game game);
 
     /**
      * Checks if the playerToCheckId is from an opponent in range

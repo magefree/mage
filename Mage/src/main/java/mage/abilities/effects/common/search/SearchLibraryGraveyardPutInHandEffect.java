@@ -12,6 +12,7 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
+import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  * @author Styxo
@@ -54,6 +55,7 @@ public class SearchLibraryGraveyardPutInHandEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         Card cardFound = null;
+        boolean needShuffle = false;
         if (controller != null && sourceObject != null) {
             if (forceToSearchBoth || controller.chooseUse(outcome, "Search your library for a card named " + filter.getMessage() + '?', source, game)) {
                 TargetCardInLibrary target = new TargetCardInLibrary(0, 1, filter);
@@ -63,11 +65,11 @@ public class SearchLibraryGraveyardPutInHandEffect extends OneShotEffect {
                         cardFound = game.getCard(target.getFirstTarget());
                     }
                 }
-                controller.shuffleLibrary(source, game);
+                needShuffle = true;
             }
 
             if (cardFound == null && controller.chooseUse(outcome, "Search your graveyard for a card named " + filter.getMessage() + '?', source, game)) {
-                TargetCard target = new TargetCard(0, 1, Zone.GRAVEYARD, filter);
+                TargetCard target = new TargetCardInYourGraveyard(0, 1, filter, true);
                 target.clearChosen();
                 if (controller.choose(outcome, controller.getGraveyard(), target, game)) {
                     if (!target.getTargets().isEmpty()) {
@@ -79,6 +81,10 @@ public class SearchLibraryGraveyardPutInHandEffect extends OneShotEffect {
             if (cardFound != null) {
                 controller.revealCards(sourceObject.getIdName(), new CardsImpl(cardFound), game);
                 controller.moveCards(cardFound, Zone.HAND, source, game);
+            }
+
+            if (needShuffle) {
+                controller.shuffleLibrary(source, game);
             }
 
             return true;
