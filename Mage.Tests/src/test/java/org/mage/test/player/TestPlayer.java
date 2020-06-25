@@ -3422,6 +3422,11 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public Cards millCards(int toMill, Ability source, Game game) {
+        return computerPlayer.millCards(toMill, source, game);
+    }
+
+    @Override
     public boolean hasOpponent(UUID playerToCheckId, Game game) {
         return computerPlayer.hasOpponent(playerToCheckId, game);
     }

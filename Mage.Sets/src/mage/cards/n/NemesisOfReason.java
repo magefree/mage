@@ -2,7 +2,6 @@
 
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -16,27 +15,26 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author Loki
  */
 public final class NemesisOfReason extends CardImpl {
 
-    public NemesisOfReason (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{B}");
+    public NemesisOfReason(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{B}");
         this.subtype.add(SubType.LEVIATHAN);
         this.subtype.add(SubType.HORROR);
-        
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(7);
-        
+
         // Whenever Nemesis of Reason attacks, defending player puts the top ten cards of their library into their graveyard.
-        Effect effect = new PutLibraryIntoGraveTargetEffect(10);
-        effect.setText("defending player puts the top ten cards of their library into their graveyard");
-        this.addAbility(new NemesisOfReasonTriggeredAbility(effect));
+        this.addAbility(new NemesisOfReasonTriggeredAbility(new PutLibraryIntoGraveTargetEffect(10)));
     }
 
-    public NemesisOfReason (final NemesisOfReason card) {
+    public NemesisOfReason(final NemesisOfReason card) {
         super(card);
     }
 
@@ -47,12 +45,12 @@ public final class NemesisOfReason extends CardImpl {
 }
 
 class NemesisOfReasonTriggeredAbility extends TriggeredAbilityImpl {
-    
+
     NemesisOfReasonTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);
     }
 
-    NemesisOfReasonTriggeredAbility(final NemesisOfReasonTriggeredAbility ability) {
+    private NemesisOfReasonTriggeredAbility(final NemesisOfReasonTriggeredAbility ability) {
         super(ability);
     }
 
@@ -68,9 +66,9 @@ class NemesisOfReasonTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getSourceId().equals(this.getSourceId()) ) {
+        if (event.getSourceId().equals(this.getSourceId())) {
             UUID defenderId = game.getCombat().getDefendingPlayerId(this.getSourceId(), game);
-            for (Effect effect : this.getEffects()) {                
+            for (Effect effect : this.getEffects()) {
                 effect.setTargetPointer(new FixedTarget(defenderId));
             }
             return true;
@@ -80,6 +78,6 @@ class NemesisOfReasonTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever {this} attacks, defending player puts the top ten cards of their library into their graveyard.";
+        return "Whenever {this} attacks, defending player mills ten cards.";
     }
 }

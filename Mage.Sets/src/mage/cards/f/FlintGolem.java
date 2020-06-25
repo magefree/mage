@@ -46,7 +46,7 @@ class FlintGolemEffect extends OneShotEffect {
 
     public FlintGolemEffect() {
         super(Outcome.Detriment);
-        this.staticText = "defending player puts the top three cards of their library into their graveyard";
+        this.staticText = "defending player mills three cards";
     }
 
     public FlintGolemEffect(final FlintGolemEffect effect) {

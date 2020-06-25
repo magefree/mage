@@ -40,7 +40,7 @@ public final class IcebergCancrix extends CardImpl {
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(2), filter,
                 true, "Whenever another snow permanent enters the battlefield under your control, " +
-                "you may have target player put the top two cards of their library into their graveyard."
+                "you may have target player mill two cards."
         );
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

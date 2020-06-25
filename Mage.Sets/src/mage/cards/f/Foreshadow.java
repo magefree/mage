@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
@@ -49,12 +48,12 @@ public final class Foreshadow extends CardImpl {
 
 class ForeshadowEffect extends OneShotEffect {
 
-    public ForeshadowEffect() {
+    ForeshadowEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "target opponent puts the top card of their library into their graveyard. If that card has the chosen name, you draw a card";
+        this.staticText = "target opponent mills a card. If that card has the chosen name, you draw a card";
     }
 
-    public ForeshadowEffect(final ForeshadowEffect effect) {
+    private ForeshadowEffect(final ForeshadowEffect effect) {
         super(effect);
     }
 
@@ -68,17 +67,16 @@ class ForeshadowEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
         String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
-        if (controller != null && targetPlayer != null && cardName != null && !cardName.isEmpty()) {
-            Card card = targetPlayer.getLibrary().getFromTop(game);
-            if (card != null) {
-                controller.moveCards(card, Zone.GRAVEYARD, source, game);
-                if (CardUtil.haveSameNames(card, cardName, game)) {
-                    controller.drawCards(1, source.getSourceId(), game);
-                }
-            }
-            return true;
+        if (controller == null || targetPlayer == null || cardName == null || cardName.isEmpty()) {
+            return false;
         }
-        return false;
+        for (Card card : targetPlayer.millCards(1, source, game).getCards(game)) {
+            if (CardUtil.haveSameNames(card, cardName, game)) {
+                controller.drawCards(1, source.getSourceId(), game);
+                break;
+            }
+        }
+        return true;
     }
 
 }

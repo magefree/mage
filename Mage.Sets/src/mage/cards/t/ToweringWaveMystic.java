@@ -76,7 +76,6 @@ class ToweringWaveMysticTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever {this} deals damage, target player puts that many cards " +
-                "from the top of their library into their graveyard.";
+        return "Whenever {this} deals damage, target player mills that many cards.";
     }
 }

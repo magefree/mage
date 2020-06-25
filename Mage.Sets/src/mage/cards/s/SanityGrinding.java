@@ -1,33 +1,26 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
- *
  */
 public final class SanityGrinding extends CardImpl {
 
     public SanityGrinding(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{U}{U}{U}");
 
         // Chroma - Reveal the top ten cards of your library. For each blue mana symbol in the mana costs of the revealed cards, target opponent puts the top card of their library into their graveyard. Then put the cards you revealed this way on the bottom of your library in any order.
         this.getSpellAbility().addEffect(new SanityGrindingEffect());
@@ -49,7 +42,9 @@ class SanityGrindingEffect extends OneShotEffect {
 
     public SanityGrindingEffect() {
         super(Outcome.Neutral);
-        staticText = "<i>Chroma</i> &mdash; Reveal the top ten cards of your library. For each blue mana symbol in the mana costs of the revealed cards, target opponent puts the top card of their library into their graveyard. Then put the cards you revealed this way on the bottom of your library in any order";
+        staticText = "<i>Chroma</i> &mdash; Reveal the top ten cards of your library. " +
+                "For each blue mana symbol in the mana costs of the revealed cards, target opponent mills a card. " +
+                "Then put the cards you revealed this way on the bottom of your library in any order";
     }
 
     public SanityGrindingEffect(final SanityGrindingEffect effect) {
@@ -68,8 +63,7 @@ class SanityGrindingEffect extends OneShotEffect {
         controller.revealCards(sourceObject.getIdName(), revealed, game);
         Player targetOpponent = game.getPlayer(source.getFirstTarget());
         if (targetOpponent != null) {
-            targetOpponent.moveCards(targetOpponent.getLibrary().getTopCards(game, new ChromaSanityGrindingCount(revealed).calculate(game, source, this)),
-                    Zone.GRAVEYARD, source, game);
+            targetOpponent.millCards(new ChromaSanityGrindingCount(revealed).calculate(game, source, this), source, game);
         }
         return controller.putCardsOnBottomOfLibrary(revealed, game, source, true);
     }

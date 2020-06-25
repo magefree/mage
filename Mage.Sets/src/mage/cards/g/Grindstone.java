@@ -1,22 +1,25 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.*;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 
+import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
 /**
- *
  * @author LevelX2
  */
 public final class Grindstone extends CardImpl {
@@ -25,11 +28,10 @@ public final class Grindstone extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
         // {3}, {T}: Target player puts the top two cards of their library into their graveyard. If both cards share a color, repeat this process.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GrindstoneEffect(), new ManaCostsImpl("{3}"));
+        Ability ability = new SimpleActivatedAbility(new GrindstoneEffect(), new ManaCostsImpl("{3}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
-
     }
 
     public Grindstone(final Grindstone card) {
@@ -44,12 +46,12 @@ public final class Grindstone extends CardImpl {
 
 class GrindstoneEffect extends OneShotEffect {
 
-    public GrindstoneEffect() {
+    GrindstoneEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Target player puts the top two cards of their library into their graveyard. If both cards share a color, repeat this process";
+        this.staticText = "target player mills two cards. If two cards that share a color were milled this way, repeat this process.";
     }
 
-    public GrindstoneEffect(final GrindstoneEffect effect) {
+    private GrindstoneEffect(final GrindstoneEffect effect) {
         super(effect);
     }
 
@@ -77,18 +79,33 @@ class GrindstoneEffect extends OneShotEffect {
                     return true;
                 }
                 colorShared = false;
-                Card card1 = null;
-                Cards toGraveyard = new CardsImpl();
-                for (Card card : targetPlayer.getLibrary().getCards(game)) {
-                    toGraveyard.add(card);
-                    if (card1 == null) {
-                        card1 = card;
-                    } else {
-                        colorShared = card1.getColor(game).shares(card.getColor(game));
+                List<Card> cards = targetPlayer
+                        .millCards(2, source, game)
+                        .getCards(game)
+                        .stream()
+                        .collect(Collectors.toList());
+                if (cards.size() < 2) {
+                    break;
+                }
+                for (int i = 0; i < cards.size(); i++) {
+                    if (colorShared) {
                         break;
                     }
+                    ObjectColor color1 = cards.get(i).getColor(game);
+                    if (color1.isColorless()) {
+                        continue;
+                    }
+                    for (int j = 0; j < cards.size(); j++) {
+                        if (i >= j) {
+                            continue;
+                        }
+                        ObjectColor color2 = cards.get(j).getColor(game);
+                        if (color1.shares(color2)) {
+                            colorShared = true;
+                            break;
+                        }
+                    }
                 }
-                targetPlayer.moveCards(toGraveyard, Zone.GRAVEYARD, source, game);
             } while (colorShared);
             return true;
         }

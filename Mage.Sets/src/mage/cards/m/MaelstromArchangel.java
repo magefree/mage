@@ -53,11 +53,11 @@ public final class MaelstromArchangel extends CardImpl {
 
 class MaelstromArchangelCastEffect extends OneShotEffect {
 
-    private static final FilterCard filter = new FilterNonlandCard("nonland card from your hand");
+    private static final FilterCard filter = new FilterNonlandCard("spell from your hand");
 
     public MaelstromArchangelCastEffect() {
         super(Outcome.PlayForFree);
-        this.staticText = "you may cast a nonland card from your hand without paying its mana cost";
+        this.staticText = "you may cast a spell from your hand without paying its mana cost";
     }
 
     public MaelstromArchangelCastEffect(final MaelstromArchangelCastEffect effect) {
@@ -75,7 +75,7 @@ class MaelstromArchangelCastEffect extends OneShotEffect {
         if (controller != null) {
             Target target = new TargetCardInHand(filter);
             if (target.canChoose(source.getSourceId(), controller.getId(), game)
-                    && controller.chooseUse(outcome, "Cast a nonland card from your hand without paying its mana cost?", source, game)) {
+                    && controller.chooseUse(outcome, "Cast a spell from your hand without paying its mana cost?", source, game)) {
                 Card cardToCast = null;
                 boolean cancel = false;
                 while (controller.canRespond() && !cancel) {

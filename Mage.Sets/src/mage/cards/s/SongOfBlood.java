@@ -1,22 +1,17 @@
 package mage.cards.s;
 
-import java.util.Set;
-import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -24,8 +19,10 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.Objects;
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class SongOfBlood extends CardImpl {
@@ -38,7 +35,7 @@ public final class SongOfBlood extends CardImpl {
         this.getSpellAbility().addEffect(new SongOfBloodEffect());
     }
 
-    public SongOfBlood(final SongOfBlood card) {
+    private SongOfBlood(final SongOfBlood card) {
         super(card);
     }
 
@@ -50,13 +47,14 @@ public final class SongOfBlood extends CardImpl {
 
 class SongOfBloodEffect extends OneShotEffect {
 
-    public SongOfBloodEffect() {
+    SongOfBloodEffect() {
         super(Outcome.LoseLife);
-        this.staticText = "Put the top four cards of your library into your graveyard.";
+        this.staticText = "Mill four cards. Whenever a creature attacks this turn, " +
+                "it gets +1/+0 until end of turn for each creature card put into your graveyard this way.";
 
     }
 
-    public SongOfBloodEffect(final SongOfBloodEffect effect) {
+    private SongOfBloodEffect(final SongOfBloodEffect effect) {
         super(effect);
     }
 
@@ -68,36 +66,35 @@ class SongOfBloodEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Cards cardsToGraveyard = new CardsImpl();
-            cardsToGraveyard.addAll(controller.getLibrary().getTopCards(game, 4));
-            if (!cardsToGraveyard.isEmpty()) {
-                Set<Card> movedCards = controller.moveCardsToGraveyardWithInfo(cardsToGraveyard.getCards(game), source, game, Zone.LIBRARY);
-                Cards cardsMoved = new CardsImpl();
-                cardsMoved.addAll(movedCards);
-                int creatures = cardsMoved.count(StaticFilters.FILTER_CARD_CREATURE, game);
-                if (creatures > 0) {
-                    // Setup a delayed trigger to give +X/+0 to any creature attacking this turn..
-                    DelayedTriggeredAbility delayedAbility = new SongOfBloodTriggeredAbility(creatures);
-                    game.addDelayedTriggeredAbility(delayedAbility, source);
-                }
-            }
-            return true;
+        if (controller == null) {
+            return false;
         }
-        return false;
+        int creatures = controller
+                .millCards(4, source, game)
+                .getCards(game)
+                .stream()
+                .filter(Objects::nonNull)
+                .filter(card -> game.getState().getZone(card.getId()) == Zone.GRAVEYARD)
+                .filter(MageObject::isCreature)
+                .mapToInt(x -> 1)
+                .sum();
+        // Setup a delayed trigger to give +X/+0 to any creature attacking this turn..
+        DelayedTriggeredAbility delayedAbility = new SongOfBloodTriggeredAbility(creatures);
+        game.addDelayedTriggeredAbility(delayedAbility, source);
+        return true;
     }
 }
 
 class SongOfBloodTriggeredAbility extends DelayedTriggeredAbility {
 
-    int booster;
+    private final int booster;
 
-    public SongOfBloodTriggeredAbility(int booster) {
+    SongOfBloodTriggeredAbility(int booster) {
         super(new BoostTargetEffect(booster, 0, Duration.EndOfTurn), Duration.EndOfTurn, false);
         this.booster = booster;
     }
 
-    public SongOfBloodTriggeredAbility(SongOfBloodTriggeredAbility ability) {
+    private SongOfBloodTriggeredAbility(SongOfBloodTriggeredAbility ability) {
         super(ability);
         this.booster = ability.booster;
     }
@@ -126,6 +123,6 @@ class SongOfBloodTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "Whenever a creature attacks this turn, it gets +1/+0 (+" + booster + "/0) until end of turn for each creature card put into your graveyard this way.";
+        return "Whenever a creature attacks this turn, it gets +" + booster + "/0 until end of turn.";
     }
 }

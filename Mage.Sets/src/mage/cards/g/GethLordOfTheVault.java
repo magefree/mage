@@ -1,6 +1,5 @@
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -10,18 +9,15 @@ import mage.abilities.keyword.IntimidateAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.targetadjustment.XCMCGraveyardAdjuster;
+
+import java.util.UUID;
 
 /**
  * @author nantuko
@@ -70,7 +66,7 @@ class GethLordOfTheVaultEffect extends OneShotEffect {
 
     public GethLordOfTheVaultEffect() {
         super(Outcome.Benefit);
-        staticText = "Put target artifact or creature card with converted mana cost X from an opponent's graveyard onto the battlefield under your control tapped. Then that player puts the top X cards of their library into their graveyard";
+        staticText = "Put target artifact or creature card with converted mana cost X from an opponent's graveyard onto the battlefield under your control tapped. Then that player mills X cards";
     }
 
     public GethLordOfTheVaultEffect(final GethLordOfTheVaultEffect effect) {
@@ -80,18 +76,19 @@ class GethLordOfTheVaultEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Card card = game.getCard(getTargetPointer().getFirst(game, source));
-            if (card != null) {
-                controller.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
-                Player player = game.getPlayer(card.getOwnerId());
-                if (player != null) {
-                    player.moveCards(player.getLibrary().getTopCards(game, card.getConvertedManaCost()), Zone.GRAVEYARD, source, game);
-                }
-            }
+        if (controller == null) {
+            return false;
+        }
+        Card card = game.getCard(getTargetPointer().getFirst(game, source));
+        if (card == null) {
             return true;
         }
-        return false;
+        controller.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
+        Player player = game.getPlayer(card.getOwnerId());
+        if (player != null) {
+            player.millCards(card.getConvertedManaCost(), source, game);
+        }
+        return true;
     }
 
     @Override

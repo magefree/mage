@@ -1,20 +1,23 @@
-
 package mage.cards.i;
 
-import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.token.MinionToken2;
+import mage.game.permanent.token.Token;
 import mage.players.Player;
 
+import java.util.Objects;
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class InfernalGenesis extends CardImpl {
@@ -39,28 +42,30 @@ public final class InfernalGenesis extends CardImpl {
 
 class InfernalGenesisEffect extends OneShotEffect {
 
+    private static final Token token = new MinionToken2();
+
     InfernalGenesisEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "that player puts the top card of their library into their graveyard. " +
-                "Then they create X 1/1 black Minion creature tokens, where X is that card's converted mana cost";
+        staticText = "that player mills a card. Then they create X 1/1 black Minion creature tokens, " +
+                "where X is the milled card's converted mana cost.";
     }
 
-    InfernalGenesisEffect(final InfernalGenesisEffect effect) {
+    private InfernalGenesisEffect(final InfernalGenesisEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if (player != null) {
-            Card card = player.getLibrary().getFromTop(game);
-            if (card != null) {
-                if (player.moveCards(card, Zone.GRAVEYARD, source, game)) {
-                    int cmc = card.getConvertedManaCost();
-                    MinionToken2 token = new MinionToken2();
-                    token.putOntoBattlefield(cmc, game, source.getSourceId(), player.getId());
-                }
-            }
+        int totalCMC = player
+                .millCards(1, source, game)
+                .getCards(game)
+                .stream()
+                .filter(Objects::nonNull)
+                .mapToInt(MageObject::getConvertedManaCost)
+                .sum();
+        if (totalCMC > 0) {
+            token.putOntoBattlefield(totalCMC, game, source.getSourceId(), player.getId());
         }
         return true;
     }
