@@ -18,6 +18,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
+import mage.target.common.TargetAnyTarget;
 
 import java.util.Collection;
 import java.util.UUID;
@@ -116,7 +117,9 @@ class TerrorOfThePeaksTriggeredAbility extends EntersBattlefieldAllTriggeredAbil
             return false;
         }
         this.getEffects().clear();
+        this.getTargets().clear();
         this.addEffect(new DamageTargetEffect(permanent.getPower().getValue()));
+        this.addTarget(new TargetAnyTarget());
         return true;
     }
 
