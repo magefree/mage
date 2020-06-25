@@ -3,7 +3,7 @@ package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.CantBeCounteredAbility;
+import mage.abilities.common.CantBeCounteredSourceAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
@@ -25,7 +25,7 @@ public final class CarnageTyrant extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Carnage Tyrant can't be countered.
-        this.addAbility(new CantBeCounteredAbility());
+        this.addAbility(new CantBeCounteredSourceAbility());
         
         // Trample
         this.addAbility(TrampleAbility.getInstance());

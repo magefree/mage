@@ -4,7 +4,7 @@ package mage.cards.a;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.CantBeCounteredAbility;
+import mage.abilities.common.CantBeCounteredSourceAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CopyPermanentEffect;
@@ -32,7 +32,7 @@ public final class AlteredEgo extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Altered Ego can't be countered.
-        this.addAbility(new CantBeCounteredAbility());
+        this.addAbility(new CantBeCounteredSourceAbility());
 
         // You may have Altered Ego enter the battlefield as a copy of any creature on the battlefield, except it enters with an additional X +1/+1 counters on it.
         Effect effect = new CopyPermanentEffect(StaticFilters.FILTER_PERMANENT_CREATURE, null);

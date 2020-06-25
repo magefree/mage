@@ -3,7 +3,7 @@ package mage.cards.c;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.CantBeCounteredAbility;
+import mage.abilities.common.CantBeCounteredSourceAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
@@ -38,7 +38,7 @@ public final class ChromiumTheMutable extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
 
         // This spell can't be countered.
-        this.addAbility(new CantBeCounteredAbility());
+        this.addAbility(new CantBeCounteredSourceAbility());
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());

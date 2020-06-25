@@ -1,7 +1,7 @@
 package mage.cards.f;
 
 import mage.ObjectColor;
-import mage.abilities.common.CantBeCounteredAbility;
+import mage.abilities.common.CantBeCounteredSourceAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -33,7 +33,7 @@ public final class Fry extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}");
 
         // This spell can't be countered.
-        this.addAbility(new CantBeCounteredAbility());
+        this.addAbility(new CantBeCounteredSourceAbility());
 
         // Fry deals 5 damage to target creature or planeswalker that's white or blue.
         this.getSpellAbility().addEffect(new DamageTargetEffect(5));

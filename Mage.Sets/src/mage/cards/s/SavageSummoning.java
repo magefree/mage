@@ -3,7 +3,7 @@ package mage.cards.s;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.CantBeCounteredAbility;
+import mage.abilities.common.CantBeCounteredSourceAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -34,7 +34,7 @@ public final class SavageSummoning extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}");
 
         // Savage Summoning can't be countered.
-        Ability ability = new CantBeCounteredAbility();
+        Ability ability = new CantBeCounteredSourceAbility();
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);
 

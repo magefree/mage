@@ -1,7 +1,7 @@
 package mage.cards.i;
 
 import java.util.UUID;
-import mage.abilities.common.CantBeCounteredAbility;
+import mage.abilities.common.CantBeCounteredSourceAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -18,7 +18,7 @@ public final class InescapableBlaze extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{R}{R}");
 
         // This spell can't be countered.        
-        this.addAbility(new CantBeCounteredAbility().setRuleAtTheTop(true));
+        this.addAbility(new CantBeCounteredSourceAbility().setRuleAtTheTop(true));
 
         // Inescapable Flame deals 6 damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(6));
