@@ -1372,7 +1372,7 @@
 # IKO
 |Generate|TOK:IKO|Beast|||BeastToken|
 |Generate|TOK:IKO|Cat Bird|||CatBirdToken|
-|Generate|TOK:IKO|Cat|||CatToken|
+|Generate|TOK:IKO|Cat|||CatToken2|
 |Generate|TOK:IKO|Dinosaur Beast|||DinosaurBeastToken|
 |Generate|TOK:IKO|Dinosaur|||DinosaurHasteToken|
 |Generate|TOK:IKO|Feather|||FeatherToken|
