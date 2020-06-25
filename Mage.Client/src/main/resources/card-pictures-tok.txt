@@ -373,7 +373,7 @@
 |Generate|TOK:C16|Worm||
 |Generate|TOK:C16|Zombie||
 |Generate|TOK:C17|Bat||
-|Generate|TOK:C17|Cat||
+|Generate|TOK:C17|Cat|||CatToken|
 |Generate|TOK:C17|Cat Dragon|||WasitoraCatDragonToken|
 |Generate|TOK:C17|Cat Warrior||
 |Generate|TOK:C17|Dragon|1||DragonToken|
