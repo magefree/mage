@@ -112,7 +112,10 @@ public abstract class TargetImpl implements Target {
             sb.append(suffix);
             return sb.toString();
         }
-        if (targetName.startsWith("another") || targetName.startsWith("a ") || targetName.startsWith("an ")) {
+        if (targetName.startsWith("another") 
+                || targetName.startsWith("a ") 
+                || targetName.startsWith("an ")
+                || targetName.startsWith("any ")) {
             return "Select " + targetName + suffix;
         } else if (targetName.startsWith("a") || targetName.startsWith("e") || targetName.startsWith("i") || targetName.startsWith("o") || targetName.startsWith("u")) {
             return "Select an " + targetName + suffix;
