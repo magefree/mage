@@ -76,9 +76,9 @@ public class AttacksCreatureYouControlTriggeredAbility extends TriggeredAbilityI
     public String getRule() {
         String an;
         String who = filter.getMessage();
-        if (who.startsWith("another")) {
+        if (who.startsWith("another") || who.startsWith("a ")) {
             an = "";
-        } else if (who.startsWith("a")) {
+        } else if (who.length() > 0 && "aeiou".contains(who.charAt(0) + "")) {
             an = "an ";
         } else {
             an = "a ";
