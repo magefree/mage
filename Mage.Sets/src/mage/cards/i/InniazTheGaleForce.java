@@ -84,7 +84,7 @@ class InniazTheGaleForceEffect extends OneShotEffect {
         private final FilterPermanent filter;
         private final TargetPermanent target;
 
-        private PlayerPair(Player leftPlayer, Player rightPlayer) {
+        private PlayerPair(Player rightPlayer, Player leftPlayer) {
             this.leftPlayer = leftPlayer;
             this.rightPlayer = rightPlayer;
             this.filter = this.makeFilter();
@@ -101,7 +101,7 @@ class InniazTheGaleForceEffect extends OneShotEffect {
         }
 
         private TargetPermanent makeTarget() {
-            return new TargetPermanent(1, this.filter);
+            return new TargetPermanent(1, 1, this.filter, true);
         }
 
         private void chooseTargets(Player controller, Game game, Ability source) {
