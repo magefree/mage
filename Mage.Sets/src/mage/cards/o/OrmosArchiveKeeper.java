@@ -65,8 +65,8 @@ class OrmosArchiveKeeperEffect extends ReplacementEffectImpl {
 
     OrmosArchiveKeeperEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "If you would draw a card while your library has no cards in it, " +
-                "instead put five +1/+1 counters on {this}";
+        staticText = "If you would draw a card while your library has no cards in it, "
+                + "instead put five +1/+1 counters on {this}";
     }
 
     private OrmosArchiveKeeperEffect(final OrmosArchiveKeeperEffect effect) {
@@ -111,7 +111,7 @@ class OrmosArchiveKeeperEffect extends ReplacementEffectImpl {
 
 class OrmosArchiveKeeperTarget extends TargetCardInHand {
 
-    private static final FilterCard filter = new FilterCard("3 cards with different names");
+    private static final FilterCard filter = new FilterCard("three cards with different names");
 
     OrmosArchiveKeeperTarget() {
         super(3, filter);
