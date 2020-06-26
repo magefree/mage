@@ -3,7 +3,7 @@ package mage.cards.c;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
+import mage.abilities.common.delayed.OnLeaveReturnExiledAbility;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
 import mage.abilities.keyword.ConvokeAbility;
@@ -38,7 +38,7 @@ public final class ConclaveTribunal extends CardImpl {
         );
         ability.addTarget(new TargetPermanent(filter));
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(
-                new OnLeaveReturnExiledToBattlefieldAbility())
+                new OnLeaveReturnExiledAbility())
         );
         this.addAbility(ability);
     }

@@ -1,7 +1,5 @@
 package mage.abilities.common.delayed;
 
-import java.util.LinkedHashSet;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -15,6 +13,8 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 import mage.util.CardUtil;
+
+import java.util.LinkedHashSet;
 
 /**
  *
@@ -30,21 +30,29 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class OnLeaveReturnExiledToBattlefieldAbility extends DelayedTriggeredAbility {
+public class OnLeaveReturnExiledAbility extends DelayedTriggeredAbility {
 
-    public OnLeaveReturnExiledToBattlefieldAbility() {
+    private final Zone zone;
+
+    public OnLeaveReturnExiledAbility() {
+        this(Zone.BATTLEFIELD);
+    }
+
+    public OnLeaveReturnExiledAbility(Zone zone) {
         super(new ReturnExiledPermanentsEffect(), Duration.OneUse);
         this.usesStack = false;
         this.setRuleVisible(false);
+        this.zone = zone;
     }
 
-    public OnLeaveReturnExiledToBattlefieldAbility(final OnLeaveReturnExiledToBattlefieldAbility ability) {
+    public OnLeaveReturnExiledAbility(final OnLeaveReturnExiledAbility ability) {
         super(ability);
+        this.zone = ability.zone;
     }
 
     @Override
-    public OnLeaveReturnExiledToBattlefieldAbility copy() {
-        return new OnLeaveReturnExiledToBattlefieldAbility(this);
+    public OnLeaveReturnExiledAbility copy() {
+        return new OnLeaveReturnExiledAbility(this);
     }
 
     @Override
@@ -56,9 +64,7 @@ public class OnLeaveReturnExiledToBattlefieldAbility extends DelayedTriggeredAbi
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getTargetId().equals(this.getSourceId())) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
-                return true;
-            }
+            return zEvent.getFromZone() == zone;
         }
         return false;
     }
@@ -66,13 +72,21 @@ public class OnLeaveReturnExiledToBattlefieldAbility extends DelayedTriggeredAbi
 
 class ReturnExiledPermanentsEffect extends OneShotEffect {
 
+    private final Zone zone;
+
     public ReturnExiledPermanentsEffect() {
+        this(Zone.BATTLEFIELD);
+    }
+
+    public ReturnExiledPermanentsEffect(Zone zone) {
         super(Outcome.Benefit);
         this.staticText = "Return exiled permanents";
+        this.zone = zone;
     }
 
     public ReturnExiledPermanentsEffect(final ReturnExiledPermanentsEffect effect) {
         super(effect);
+        this.zone = effect.zone;
     }
 
     @Override
@@ -85,29 +99,13 @@ class ReturnExiledPermanentsEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         if (sourceObject != null && controller != null) {
-            ExileZone exile = getExileIfPossible(game, source);
+            ExileZone exile = CardUtil.getExileIfPossible(game, source);
             if (exile != null) {
-                return controller.moveCards(new LinkedHashSet<>(exile.getCards(game)), Zone.BATTLEFIELD, source, game, false, false, true, null);
+                return controller.moveCards(new LinkedHashSet<>(exile.getCards(game)), zone, source, game, false, false, true, null);
             }
         }
         return false;
     }
 
-    private ExileZone getExileIfPossible(final Game game, final Ability source) {
-        UUID exileZone = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
-
-        if (exileZone != null) {
-            ExileZone exile = game.getExile().getExileZone(exileZone);
-            if (exile == null) {
-                // try without ZoneChangeCounter - that is useful for tokens
-                exileZone = CardUtil.getCardExileZoneId(game, source);
-                if (exileZone != null) {
-                    return game.getExile().getExileZone(exileZone);
-                }
-            }
-            return exile;
-        }
-
-        return null;
-    }
 }
+

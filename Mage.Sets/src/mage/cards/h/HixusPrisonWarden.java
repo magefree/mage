@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
+import mage.abilities.common.delayed.OnLeaveReturnExiledAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
@@ -61,7 +61,7 @@ class HixusPrisonWardenTriggeredAbility extends TriggeredAbilityImpl {
 
     public HixusPrisonWardenTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);
-        this.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
+        this.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledAbility()));
     }
 
     public HixusPrisonWardenTriggeredAbility(final HixusPrisonWardenTriggeredAbility ability) {

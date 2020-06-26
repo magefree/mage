@@ -15,6 +15,7 @@ import mage.constants.SpellAbilityType;
 import mage.filter.Filter;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.CardState;
+import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
@@ -799,5 +800,16 @@ public final class CardUtil {
         } else {
             return object.getAbilities();
         }
+    }
+
+    public static ExileZone getExileIfPossible(final Game game, final Ability source) {
+        UUID exileZone = getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+        ExileZone exile = game.getExile().getExileZone(exileZone);
+        if (exile == null) {
+            // try without ZoneChangeCounter - that is useful for tokens
+            exileZone = getCardExileZoneId(game, source);
+            return game.getExile().getExileZone(exileZone);
+        }
+        return exile;
     }
 }

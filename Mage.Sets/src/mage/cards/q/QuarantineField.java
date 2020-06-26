@@ -4,7 +4,7 @@ package mage.cards.q;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
+import mage.abilities.common.delayed.OnLeaveReturnExiledAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
@@ -37,7 +37,7 @@ public final class QuarantineField extends CardImpl {
 
         // When Quarantine Field enters the battlefield, for each isolation counter on it, exile up to one target nonland permanent an opponent controls until Quarantine Field leaves the battlefield.
         Ability ability = new EntersBattlefieldTriggeredAbility(new QuarantineFieldEffect(), false);
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
+        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledAbility()));
         ability.setTargetAdjuster(QuarantineFieldAdjuster.instance);
         this.addAbility(ability);
     }

@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealtDamageToSourceTriggeredAbility;
-import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
+import mage.abilities.common.delayed.OnLeaveReturnExiledAbility;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
 import mage.cards.CardImpl;
@@ -38,7 +38,7 @@ public final class TrapjawTyrant extends CardImpl {
         // Enrage — Whenever Trapjaw Tyrant is dealt damage, exile target creature your opponent controls until Trapjaw Tyrant leaves the battlefield.
         Ability ability = new DealtDamageToSourceTriggeredAbility(new ExileUntilSourceLeavesEffect(filter.getMessage()), false, true);
         ability.addTarget(new TargetCreaturePermanent(filter));
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
+        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledAbility()));
         this.addAbility(ability);
     }
 

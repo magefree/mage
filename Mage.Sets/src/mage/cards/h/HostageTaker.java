@@ -3,7 +3,7 @@ package mage.cards.h;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
+import mage.abilities.common.delayed.OnLeaveReturnExiledAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.AsThoughManaEffect;
 import mage.abilities.effects.ContinuousEffect;
@@ -53,7 +53,7 @@ public final class HostageTaker extends CardImpl {
         // When Hostage Taker enters the battlefield, exile another target artifact or creature until Hostage Taker leaves the battlefield. You may cast that card as long as it remains exiled, and you may spend mana as though it were mana of any type to cast that spell.
         Ability ability = new EntersBattlefieldTriggeredAbility(new HostageTakerExileEffect());
         ability.addTarget(new TargetPermanent(filter));
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
+        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledAbility()));
         this.addAbility(ability);
     }
 

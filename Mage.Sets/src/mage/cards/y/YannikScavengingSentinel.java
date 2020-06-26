@@ -3,7 +3,7 @@ package mage.cards.y;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
+import mage.abilities.common.delayed.OnLeaveReturnExiledAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
@@ -105,7 +105,7 @@ class YannikScavengingSentinelEffect extends OneShotEffect {
         new ExileTargetEffect(CardUtil.getExileZoneId(
                 game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()
         ), permanent.getIdName()).setTargetPointer(new FixedTarget(permanent, game)).apply(game, source);
-        game.addDelayedTriggeredAbility(new OnLeaveReturnExiledToBattlefieldAbility(), source);
+        game.addDelayedTriggeredAbility(new OnLeaveReturnExiledAbility(), source);
         if (game.getState().getZone(permanent.getId()) != Zone.BATTLEFIELD) {
             ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
                     new DistributeCountersEffect(
