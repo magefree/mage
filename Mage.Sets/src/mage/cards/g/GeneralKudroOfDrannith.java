@@ -2,7 +2,7 @@ package mage.cards.g;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldThisOrAnotherTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -32,7 +32,7 @@ public final class GeneralKudroOfDrannith extends CardImpl {
     private static final FilterCreaturePermanent filter
             = new FilterCreaturePermanent(SubType.HUMAN, "Humans");
     private static final FilterPermanent filter2
-            = new FilterPermanent(SubType.HUMAN, "{this} or another Human");
+            = new FilterPermanent(SubType.HUMAN, "Human");
     private static final FilterCard filter3
             = new FilterCard("card from an opponent's graveyard");
     private static final FilterControlledPermanent filter4
@@ -59,7 +59,7 @@ public final class GeneralKudroOfDrannith extends CardImpl {
         )));
 
         // Whenever General Kudro of Drannith or another Human enters the battlefield under your control, exile target card from an opponent's graveyard.
-        Ability ability = new EntersBattlefieldControlledTriggeredAbility(new ExileTargetEffect(), filter2);
+        Ability ability = new EntersBattlefieldThisOrAnotherTriggeredAbility(new ExileTargetEffect(), filter2, false, true);
         ability.addTarget(new TargetCardInOpponentsGraveyard(filter3));
         this.addAbility(ability);
 

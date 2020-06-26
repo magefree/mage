@@ -12,7 +12,7 @@ import mage.filter.FilterPermanent;
 public class FilterEquipmentPermanent extends FilterPermanent {
 
     public FilterEquipmentPermanent() {
-        this("equipment");
+        this("Equipment");
     }
 
     public FilterEquipmentPermanent(String name) {

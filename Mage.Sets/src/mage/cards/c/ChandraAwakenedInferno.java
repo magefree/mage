@@ -2,7 +2,7 @@ package mage.cards.c;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.CantBeCounteredAbility;
+import mage.abilities.common.CantBeCounteredSourceAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayVariableLoyaltyCost;
@@ -46,7 +46,7 @@ public final class ChandraAwakenedInferno extends CardImpl {
         this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(6));
 
         // This spell can't be countered.
-        this.addAbility(new CantBeCounteredAbility());
+        this.addAbility(new CantBeCounteredSourceAbility());
 
         // +2: Each opponent gets an emblem with "At the beginning of your upkeep, this emblem deals 1 damage to you."
         this.addAbility(new LoyaltyAbility(new ChandraAwakenedInfernoEffect(), 2));

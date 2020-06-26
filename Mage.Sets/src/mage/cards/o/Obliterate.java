@@ -2,7 +2,7 @@
 package mage.cards.o;
 
 import java.util.UUID;
-import mage.abilities.common.CantBeCounteredAbility;
+import mage.abilities.common.CantBeCounteredSourceAbility;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -30,7 +30,7 @@ public final class Obliterate extends CardImpl {
 
 
         // Obliterate can't be countered.
-        this.addAbility(new CantBeCounteredAbility());
+        this.addAbility(new CantBeCounteredSourceAbility());
         // Destroy all artifacts, creatures, and lands. They can't be regenerated.
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
     }

@@ -32,7 +32,7 @@ public final class FatedRetribution extends CardImpl {
 
         // Destroy all creatures and planeswalkers. If it's your turn, scry 2.
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter, false));
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new ScryEffect(2), MyTurnCondition.instance, "If it's your turn, scry 2"));
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new ScryEffect(2, false), MyTurnCondition.instance, "If it's your turn, scry 2"));
         this.getSpellAbility().addHint(MyTurnHint.instance);
     }
 

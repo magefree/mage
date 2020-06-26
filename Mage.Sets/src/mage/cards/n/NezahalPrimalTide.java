@@ -3,7 +3,7 @@ package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.CantBeCounteredAbility;
+import mage.abilities.common.CantBeCounteredSourceAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
@@ -47,7 +47,7 @@ public final class NezahalPrimalTide extends CardImpl {
         this.toughness = new MageInt(7);
 
         // Nezahal, Primal Tide can't be countered.
-        this.addAbility(new CantBeCounteredAbility());
+        this.addAbility(new CantBeCounteredSourceAbility());
 
         // You have no maximum hand size.
         Effect effect = new MaximumHandSizeControllerEffect(Integer.MAX_VALUE, Duration.WhileOnBattlefield, MaximumHandSizeControllerEffect.HandSizeModification.SET);

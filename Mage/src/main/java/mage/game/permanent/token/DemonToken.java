@@ -22,7 +22,7 @@ public final class DemonToken extends TokenImpl {
         power = new MageInt(5);
         toughness = new MageInt(5);
         addAbility(FlyingAbility.getInstance());
-        availableImageSetCodes.addAll(Arrays.asList("ISD", "AVR", "C14", "ORI"));
+        availableImageSetCodes.addAll(Arrays.asList("ISD", "AVR", "C14", "ORI", "M20"));
     }
 
     public DemonToken(final DemonToken token) {

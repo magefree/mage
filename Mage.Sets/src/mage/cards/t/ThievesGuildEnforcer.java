@@ -1,11 +1,8 @@
 package mage.cards.t;
 
-import java.util.Objects;
-import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldThisOrAnotherTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
@@ -24,6 +21,9 @@ import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.Graveyard;
 import mage.players.Player;
+
+import java.util.Objects;
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -44,10 +44,10 @@ public final class ThievesGuildEnforcer extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
 
         // Whenever Thieves' Guild Enforcer or another Rogue enters the battlefield under your control, each opponent mills two cards.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
+        this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new PutTopCardOfLibraryIntoGraveEachPlayerEffect(
                         2, TargetController.OPPONENT
-                ), filter
+                ), filter, false, true
         ));
 
         // As long as an opponent has eight or more cards in their graveyard, Thieves' Guild Enforcer gets +2/+1 and has deathtouch.

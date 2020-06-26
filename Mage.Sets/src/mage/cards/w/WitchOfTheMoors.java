@@ -39,14 +39,15 @@ public final class WitchOfTheMoors extends CardImpl {
         // Deathtouch
         this.addAbility(DeathtouchAbility.getInstance());
 
-        // At the beginning of your end step, if you gained life this turn, each opponent sacrifices a creature and you return up to one target creature card from your graveyard to your hand.
+        // At the beginning of your end step, if you gained life this turn, each opponent sacrifices a 
+        // creature and you return up to one target creature card from your graveyard to your hand.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(new SacrificeOpponentsEffect(
                         StaticFilters.FILTER_PERMANENT_A_CREATURE
                 ), TargetController.YOU, false),
-                condition, "At the beginning of your end step, if you gained life this turn, " +
-                "each opponent sacrifices a creature and you return up to one target creature card " +
-                "from your graveyard to your hand"
+                condition, "At the beginning of your end step, if you gained life this turn, "
+                + "each opponent sacrifices a creature and you return up to one target creature card "
+                + "from your graveyard to your hand."
         );
         ability.addEffect(new ReturnFromGraveyardToHandTargetEffect());
         ability.addTarget(new TargetCardInYourGraveyard(

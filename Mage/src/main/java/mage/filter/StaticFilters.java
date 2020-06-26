@@ -615,13 +615,7 @@ public final class StaticFilters {
         FILTER_PERMANENT_AURA.setLockedFilter(true);
     }
 
-    public static final FilterPermanent FILTER_PERMANENT_EQUIPMENT = new FilterPermanent();
-
-    static {
-        FILTER_PERMANENT_EQUIPMENT.add(CardType.ARTIFACT.getPredicate());
-        FILTER_PERMANENT_EQUIPMENT.add(SubType.EQUIPMENT.getPredicate());
-        FILTER_PERMANENT_EQUIPMENT.setLockedFilter(true);
-    }
+    public static final FilterPermanent FILTER_PERMANENT_EQUIPMENT = new FilterEquipmentPermanent();
 
     public static final FilterPermanent FILTER_PERMANENT_FORTIFICATION = new FilterPermanent();
 

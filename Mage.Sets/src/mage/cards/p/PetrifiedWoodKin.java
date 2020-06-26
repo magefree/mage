@@ -7,7 +7,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.common.CantBeCounteredAbility;
+import mage.abilities.common.CantBeCounteredSourceAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.SubType;
@@ -44,7 +44,7 @@ public final class PetrifiedWoodKin extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Petrified Wood-Kin can't be countered.
-        this.addAbility(new CantBeCounteredAbility());
+        this.addAbility(new CantBeCounteredSourceAbility());
 
         // Bloodthirst X
         this.addAbility(new EntersBattlefieldAbility(

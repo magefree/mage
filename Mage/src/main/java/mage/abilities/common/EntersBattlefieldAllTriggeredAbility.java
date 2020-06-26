@@ -1,7 +1,6 @@
 
 package mage.abilities.common;
 
-import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.SetTargetPointer;
@@ -12,8 +11,9 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
@@ -22,6 +22,7 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
     protected String rule;
     protected boolean controlledText;
     protected SetTargetPointer setTargetPointer;
+    protected final boolean thisOrAnother;
 
     /**
      * zone = BATTLEFIELD optional = false
@@ -54,11 +55,16 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     public EntersBattlefieldAllTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, SetTargetPointer setTargetPointer, String rule, boolean controlledText) {
+        this(zone, effect, filter, optional, setTargetPointer, rule, controlledText, false);
+    }
+
+    protected EntersBattlefieldAllTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, SetTargetPointer setTargetPointer, String rule, boolean controlledText, boolean thisOrAnother) {
         super(zone, effect, optional);
         this.filter = filter;
         this.rule = rule;
         this.controlledText = controlledText;
         this.setTargetPointer = setTargetPointer;
+        this.thisOrAnother = thisOrAnother;
     }
 
     public EntersBattlefieldAllTriggeredAbility(final EntersBattlefieldAllTriggeredAbility ability) {
@@ -67,6 +73,7 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
         this.rule = ability.rule;
         this.controlledText = ability.controlledText;
         this.setTargetPointer = ability.setTargetPointer;
+        this.thisOrAnother = ability.thisOrAnother;
     }
 
     @Override
@@ -105,7 +112,11 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
         if (rule != null && !rule.isEmpty()) {
             return rule;
         }
-        StringBuilder sb = new StringBuilder("Whenever ").append(filter.getMessage());
+        StringBuilder sb = new StringBuilder("Whenever ");
+        if (thisOrAnother) {
+            sb.append("{this} or another ");
+        }
+        sb.append(filter.getMessage());
         sb.append(" enters the battlefield");
         if (controlledText) {
             sb.append(" under your control, ");

@@ -1116,6 +1116,7 @@ public abstract class AbilityImpl implements Ability {
             String usedVerb = null;
             for (Target target : targets) {
                 if (!target.getTargets().isEmpty()) {
+                    String targetHintInfo = target.getChooseHint() == null ? "" : " (" + target.getChooseHint() + ")";
                     if (!target.isNotTarget()) {
                         if (usedVerb == null || usedVerb.equals(" choosing ")) {
                             usedVerb = " targeting ";
@@ -1126,6 +1127,7 @@ public abstract class AbilityImpl implements Ability {
                         sb.append(usedVerb);
                     }
                     sb.append(target.getTargetedName(game));
+                    sb.append(targetHintInfo);
                 }
             }
         }

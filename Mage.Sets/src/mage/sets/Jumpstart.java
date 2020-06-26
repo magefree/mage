@@ -148,6 +148,7 @@ public final class Jumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Elemental Uprising", 390, Rarity.COMMON, mage.cards.e.ElementalUprising.class));
         cards.add(new SetCardInfo("Elvish Archdruid", 391, Rarity.RARE, mage.cards.e.ElvishArchdruid.class));
         cards.add(new SetCardInfo("Emancipation Angel", 102, Rarity.UNCOMMON, mage.cards.e.EmancipationAngel.class));
+        cards.add(new SetCardInfo("Emiel the Blessed", 3, Rarity.MYTHIC, mage.cards.e.EmielTheBlessed.class));
         cards.add(new SetCardInfo("Enlarge", 392, Rarity.UNCOMMON, mage.cards.e.Enlarge.class));
         cards.add(new SetCardInfo("Entomber Exarch", 227, Rarity.UNCOMMON, mage.cards.e.EntomberExarch.class));
         cards.add(new SetCardInfo("Erratic Visionary", 150, Rarity.COMMON, mage.cards.e.ErraticVisionary.class));
@@ -220,6 +221,7 @@ public final class Jumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Indomitable Will", 109, Rarity.COMMON, mage.cards.i.IndomitableWill.class));
         cards.add(new SetCardInfo("Inferno Hellion", 337, Rarity.UNCOMMON, mage.cards.i.InfernoHellion.class));
         cards.add(new SetCardInfo("Initiate's Companion", 403, Rarity.COMMON, mage.cards.i.InitiatesCompanion.class));
+        cards.add(new SetCardInfo("Inniaz, the Gale Force", 12, Rarity.RARE, mage.cards.i.InniazTheGaleForce.class));
         cards.add(new SetCardInfo("Innocent Blood", 244, Rarity.COMMON, mage.cards.i.InnocentBlood.class));
         cards.add(new SetCardInfo("Inspired Charge", 110, Rarity.COMMON, mage.cards.i.InspiredCharge.class));
         cards.add(new SetCardInfo("Inspiring Call", 404, Rarity.UNCOMMON, mage.cards.i.InspiringCall.class));
@@ -372,6 +374,7 @@ public final class Jumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Sarkhan's Unsealing", 361, Rarity.RARE, mage.cards.s.SarkhansUnsealing.class));
         cards.add(new SetCardInfo("Savage Stomp", 427, Rarity.UNCOMMON, mage.cards.s.SavageStomp.class));
         cards.add(new SetCardInfo("Scarecrone", 482, Rarity.RARE, mage.cards.s.Scarecrone.class));
+        cards.add(new SetCardInfo("Scholar of the Lost Trove", 14, Rarity.RARE, mage.cards.s.ScholarOfTheLostTrove.class));
         cards.add(new SetCardInfo("Scourge of Nel Toth", 274, Rarity.RARE, mage.cards.s.ScourgeOfNelToth.class));
         cards.add(new SetCardInfo("Scroll of Avacyn", 483, Rarity.COMMON, mage.cards.s.ScrollOfAvacyn.class));
         cards.add(new SetCardInfo("Scrounging Bandar", 428, Rarity.COMMON, mage.cards.s.ScroungingBandar.class));
@@ -383,6 +386,7 @@ public final class Jumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Sengir Vampire", 275, Rarity.UNCOMMON, mage.cards.s.SengirVampire.class));
         cards.add(new SetCardInfo("Serendib Efreet", 175, Rarity.RARE, mage.cards.s.SerendibEfreet.class));
         cards.add(new SetCardInfo("Serra Angel", 132, Rarity.UNCOMMON, mage.cards.s.SerraAngel.class));
+        cards.add(new SetCardInfo("Sethron, Hurloon General", 25, Rarity.RARE, mage.cards.s.SethronHurloonGeneral.class));
         cards.add(new SetCardInfo("Settle the Score", 276, Rarity.UNCOMMON, mage.cards.s.SettleTheScore.class));
         cards.add(new SetCardInfo("Shambling Goblin", 277, Rarity.COMMON, mage.cards.s.ShamblingGoblin.class));
         cards.add(new SetCardInfo("Sharding Sphinx", 176, Rarity.RARE, mage.cards.s.ShardingSphinx.class));
