@@ -112,8 +112,8 @@ public abstract class TargetImpl implements Target {
             sb.append(suffix);
             return sb.toString();
         }
-        if (targetName.startsWith("another") 
-                || targetName.startsWith("a ") 
+        if (targetName.startsWith("another")
+                || targetName.startsWith("a ")
                 || targetName.startsWith("an ")
                 || targetName.startsWith("any ")) {
             return "Select " + targetName + suffix;
@@ -553,6 +553,11 @@ public abstract class TargetImpl implements Target {
     public Target withChooseHint(String chooseHint) {
         this.chooseHint = chooseHint;
         return this;
+    }
+
+    @Override
+    public String getChooseHint() {
+        return chooseHint;
     }
 
     @Override

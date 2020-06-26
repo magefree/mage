@@ -1,9 +1,8 @@
-
 package mage.target.common;
 
-import mage.constants.Zone;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreatureOrPlayer;
 import mage.game.Game;
@@ -16,7 +15,6 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class TargetCreatureOrPlayer extends TargetImpl {
@@ -98,7 +96,7 @@ public class TargetCreatureOrPlayer extends TargetImpl {
      * be chosen. Should only be used for Ability targets since this checks for
      * protection, shroud etc.
      *
-     * @param sourceId - the target event source
+     * @param sourceId           - the target event source
      * @param sourceControllerId - controller of the target event source
      * @param game
      * @return - true if enough valid {@link Permanent} or {@link Player} exist
@@ -211,7 +209,7 @@ public class TargetCreatureOrPlayer extends TargetImpl {
                 }
             }
         }
-        return sb.toString();
+        return sb.toString().trim();
     }
 
     @Override

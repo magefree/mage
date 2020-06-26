@@ -1,16 +1,16 @@
 package mage.target;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.filter.FilterPlayer;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class TargetPlayer extends TargetImpl {
@@ -51,7 +51,7 @@ public class TargetPlayer extends TargetImpl {
      * Checks if there are enough {@link Player} that can be chosen. Should only
      * be used for Ability targets since this checks for protection, shroud etc.
      *
-     * @param sourceId - the target event source
+     * @param sourceId           - the target event source
      * @param sourceControllerId - controller of the target event source
      * @param game
      * @return - true if enough valid {@link Player} exist
@@ -170,7 +170,7 @@ public class TargetPlayer extends TargetImpl {
                 sb.append("[target missing]");
             }
         }
-        return sb.toString();
+        return sb.toString().trim();
     }
 
     @Override
