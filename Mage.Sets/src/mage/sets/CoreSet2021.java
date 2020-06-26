@@ -40,6 +40,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Angelic Ascension", 3, Rarity.UNCOMMON, mage.cards.a.AngelicAscension.class));
         cards.add(new SetCardInfo("Animal Sanctuary", 242, Rarity.RARE, mage.cards.a.AnimalSanctuary.class));
         cards.add(new SetCardInfo("Anointed Chorister", 4, Rarity.COMMON, mage.cards.a.AnointedChorister.class));
+        cards.add(new SetCardInfo("Archfiend's Vessel", 88, Rarity.UNCOMMON, mage.cards.a.ArchfiendsVessel.class));
         cards.add(new SetCardInfo("Aven Gagglemaster", 5, Rarity.UNCOMMON, mage.cards.a.AvenGagglemaster.class));
         cards.add(new SetCardInfo("Azusa, Lost but Seeking", 173, Rarity.RARE, mage.cards.a.AzusaLostButSeeking.class));
         cards.add(new SetCardInfo("Bad Deal", 89, Rarity.UNCOMMON, mage.cards.b.BadDeal.class));
@@ -77,6 +78,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Colossal Dreadmaw", 176, Rarity.COMMON, mage.cards.c.ColossalDreadmaw.class));
         cards.add(new SetCardInfo("Conclave Mentor", 216, Rarity.UNCOMMON, mage.cards.c.ConclaveMentor.class));
         cards.add(new SetCardInfo("Concordia Pegasus", 12, Rarity.COMMON, mage.cards.c.ConcordiaPegasus.class));
+        cards.add(new SetCardInfo("Conspicuous Snoop", 139, Rarity.RARE, mage.cards.c.ConspicuousSnoop.class));
         cards.add(new SetCardInfo("Containment Priest", 13, Rarity.RARE, mage.cards.c.ContainmentPriest.class));
         cards.add(new SetCardInfo("Crash Through", 140, Rarity.COMMON, mage.cards.c.CrashThrough.class));
         cards.add(new SetCardInfo("Crypt Lurker", 93, Rarity.COMMON, mage.cards.c.CryptLurker.class));
@@ -95,6 +97,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Duress", 96, Rarity.COMMON, mage.cards.d.Duress.class));
         cards.add(new SetCardInfo("Elder Gargaroth", 179, Rarity.MYTHIC, mage.cards.e.ElderGargaroth.class));
         cards.add(new SetCardInfo("Eliminate", 97, Rarity.UNCOMMON, mage.cards.e.Eliminate.class));
+        cards.add(new SetCardInfo("Enthralling Hold", 49, Rarity.UNCOMMON, mage.cards.e.EnthrallingHold.class));
         cards.add(new SetCardInfo("Epitaph Golem", 230, Rarity.UNCOMMON, mage.cards.e.EpitaphGolem.class));
         cards.add(new SetCardInfo("Experimental Overload", 218, Rarity.UNCOMMON, mage.cards.e.ExperimentalOverload.class));
         cards.add(new SetCardInfo("Fabled Passage", 246, Rarity.RARE, mage.cards.f.FabledPassage.class));
@@ -137,6 +140,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Heroic Intervention", 188, Rarity.RARE, mage.cards.h.HeroicIntervention.class));
         cards.add(new SetCardInfo("Historian of Zhalfir", 325, Rarity.UNCOMMON, mage.cards.h.HistorianOfZhalfir.class));
         cards.add(new SetCardInfo("Hobblefiend", 152, Rarity.COMMON, mage.cards.h.Hobblefiend.class));
+        cards.add(new SetCardInfo("Hooded Blightfang", 104, Rarity.RARE, mage.cards.h.HoodedBlightfang.class));
         cards.add(new SetCardInfo("Hunter's Edge", 189, Rarity.COMMON, mage.cards.h.HuntersEdge.class));
         cards.add(new SetCardInfo("Igneous Cur", 153, Rarity.COMMON, mage.cards.i.IgneousCur.class));
         cards.add(new SetCardInfo("Indulging Patrician", 219, Rarity.UNCOMMON, mage.cards.i.IndulgingPatrician.class));
