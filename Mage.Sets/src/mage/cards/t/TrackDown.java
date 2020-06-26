@@ -24,8 +24,8 @@ public final class TrackDown extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{G}");
 
         // Scry 3, then reveal the top card of your library. If it's a creature or land card, draw a card.
-        this.getSpellAbility().addEffect(new ScryEffect(3).setText("Scry 3,"));
-        this.getSpellAbility().addEffect(new TrackDownEffect());
+        this.getSpellAbility().addEffect(new ScryEffect(3, false));
+        this.getSpellAbility().addEffect(new TrackDownEffect().concatBy(", then"));
     }
 
     public TrackDown(final TrackDown card) {
@@ -42,7 +42,7 @@ class TrackDownEffect extends OneShotEffect {
 
     public TrackDownEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "then reveal the top card of your library. If it's a creature or land card, draw a card";
+        this.staticText = "reveal the top card of your library. If it’s a creature or land card, draw a card";
     }
 
     public TrackDownEffect(final TrackDownEffect effect) {

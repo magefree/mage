@@ -17,8 +17,8 @@ public final class TamiyosEpiphany extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}");
 
         // Scry 4, then draw two cards.
-        this.getSpellAbility().addEffect(new ScryEffect(4).setText("scry 4,"));
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2).setText("then draw two cards"));
+        this.getSpellAbility().addEffect(new ScryEffect(4, false));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2).concatBy(", then"));
     }
 
     private TamiyosEpiphany(final TamiyosEpiphany card) {

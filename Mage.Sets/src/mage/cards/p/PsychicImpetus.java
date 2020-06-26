@@ -40,7 +40,7 @@ public final class PsychicImpetus extends CardImpl {
 
         // Whenever enchanted creature attacks, you scry 2.
         this.addAbility(new AttacksAttachedTriggeredAbility(
-                new ScryEffect(2).setText("you scry 2"), AttachmentType.AURA, false
+                new ScryEffect(2, false).setText("you scry 2"), AttachmentType.AURA, false
         ));
     }
 
