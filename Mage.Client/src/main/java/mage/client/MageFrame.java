@@ -27,6 +27,7 @@ import mage.client.preference.MagePreferences;
 import mage.client.remote.CallbackClientImpl;
 import mage.client.table.TablesPane;
 import mage.client.table.TablesPanel;
+import mage.client.themes.ThemeType;
 import mage.client.tournament.TournamentPane;
 import mage.client.util.*;
 import mage.client.util.audio.MusicPlayer;
@@ -128,6 +129,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     private final BalloonTip balloonTip;
 
+    private ThemeType currentTheme;
+
     /**
      * @return the session
      */
@@ -200,9 +203,19 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         TConfig config = TConfig.current();
         config.setArchiveDetector(new TArchiveDetector("zip"));
         config.setAccessPreference(FsAccessOption.STORE, true);
+
+        this.currentTheme = ThemeType.valueByName(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_THEME, "Default Theme"));
+
         try {
             UIManager.put("desktop", new Color(0, 0, 0, 0));
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+
+            UIManager.put("nimbusBlueGrey", this.currentTheme.getNimbusBlueGrey()); // buttons, scrollbar background, disabled inputs
+            UIManager.put("control", this.currentTheme.getControl()); // window bg
+            UIManager.put("nimbusLightBackground", this.currentTheme.getNimbusLightBackground()); // inputs, table rows
+            UIManager.put("info", this.currentTheme.getInfo()); // tooltips
+            UIManager.put("nimbusBase", this.currentTheme.getNimbusBase()); // title bars, scrollbar foreground
+
             //UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             // stop JSplitPane from eating F6 and F8 or any other function keys
             {
@@ -445,13 +458,24 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         }
     }
 
+    // Sets background for login screen
     private void setBackground() {
         if (liteMode || grayMode) {
             return;
         }
-        String filename = "/background.jpg";
+        String filename = "/background/background.png";
+
+        // Use theme's login background, fallback to theme's default background. If neither, use default theme's bg
+        if (this.currentTheme.hasLoginBackground()) {
+            filename = "/background/" + this.currentTheme.getPath() + "login-background.png";
+        } else if (this.currentTheme.hasBackground()) {
+            filename = "/background/" + this.currentTheme.getPath() + "background.png";
+        }
+
         try {
-            if (Plugins.instance.isThemePluginLoaded()) {
+            // If user has custom background, use that, otherwise, use theme background
+            if (Plugins.instance.isThemePluginLoaded() &&
+                    !PreferencesDialog.getCachedValue(PreferencesDialog.KEY_BACKGROUND_IMAGE_DEFAULT, "true").equals("true")) {
                 backgroundPane = (ImagePanel) Plugins.instance.updateTablePanel(new HashMap<>());
             } else {
                 InputStream is = this.getClass().getResourceAsStream(filename);
@@ -1019,6 +1043,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                                 .addGap(2, 2, 2)
                                 .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE))
         );
+
+        if (this.currentTheme.getMageToolbar() != null) {
+            mageToolbar.getParent().setBackground(this.currentTheme.getMageToolbar());
+        }
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
