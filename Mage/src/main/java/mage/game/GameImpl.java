@@ -562,7 +562,7 @@ public abstract class GameImpl implements Game, Serializable {
 
     @Override
     public void saveState(boolean bookmark) {
-        if (!simulation && gameStates != null) {
+        if (!simulation && gameStates != null) {            
             if (bookmark || saveGame) {
                 gameStates.save(state);
             }
@@ -1642,7 +1642,8 @@ public abstract class GameImpl implements Game, Serializable {
             newBluePrint.reset(this);
 
             //getState().addCard(permanent);
-            if (copyFromPermanent.isMorphed() || copyFromPermanent.isManifested()) {
+            if (copyFromPermanent.isMorphed() || copyFromPermanent.isManifested() 
+                    || copyFromPermanent.isFaceDown(this)) {
                 MorphAbility.setPermanentToFaceDownCreature(newBluePrint);
             }
             newBluePrint.assignNewId();
