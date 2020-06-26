@@ -221,6 +221,7 @@ public final class Jumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Indomitable Will", 109, Rarity.COMMON, mage.cards.i.IndomitableWill.class));
         cards.add(new SetCardInfo("Inferno Hellion", 337, Rarity.UNCOMMON, mage.cards.i.InfernoHellion.class));
         cards.add(new SetCardInfo("Initiate's Companion", 403, Rarity.COMMON, mage.cards.i.InitiatesCompanion.class));
+        cards.add(new SetCardInfo("Inniaz, the Gale Force", 12, Rarity.RARE, mage.cards.i.InniazTheGaleForce.class));
         cards.add(new SetCardInfo("Innocent Blood", 244, Rarity.COMMON, mage.cards.i.InnocentBlood.class));
         cards.add(new SetCardInfo("Inspired Charge", 110, Rarity.COMMON, mage.cards.i.InspiredCharge.class));
         cards.add(new SetCardInfo("Inspiring Call", 404, Rarity.UNCOMMON, mage.cards.i.InspiringCall.class));
