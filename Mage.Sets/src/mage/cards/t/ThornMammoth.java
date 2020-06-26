@@ -2,7 +2,7 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldThisOrAnotherTriggeredAbility;
 import mage.abilities.effects.common.FightTargetSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -30,10 +30,9 @@ public final class ThornMammoth extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Whenever Thorn Mammoth or another creature enters the battlefield under your control, Thorn Mammoth fights up to one target creature you don't control.
-        Ability ability = new EntersBattlefieldControlledTriggeredAbility(
-                new FightTargetSourceEffect(), StaticFilters.FILTER_PERMANENT_CREATURE,
-                "Whenever {this} or another creature enters the battlefield under your control, " +
-                        "{this} fights up to one target creature you don't control."
+        Ability ability = new EntersBattlefieldThisOrAnotherTriggeredAbility(
+                new FightTargetSourceEffect().setText("{this} fights up to one target creature you don't control"),
+                StaticFilters.FILTER_PERMANENT_CREATURE, false, true
         );
         ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL, false));
         this.addAbility(ability);

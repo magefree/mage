@@ -1,44 +1,33 @@
-
 package mage.cards.u;
+
+import mage.MageInt;
+import mage.MageObject;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldThisOrAnotherTriggeredAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.cards.*;
+import mage.constants.*;
+import mage.filter.FilterCard;
+import mage.filter.FilterPermanent;
+import mage.game.Game;
+import mage.players.Player;
+import mage.target.TargetCard;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
-import mage.MageInt;
-import mage.MageObject;
-import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.TargetCard;
 
 /**
- *
  * @author spjspj
  */
 public final class UneshCriosphinxSovereign extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Sphinx spells");
+    private static final FilterPermanent filter2 = new FilterPermanent(SubType.SPHINX, "Sphinx");
 
     static {
         filter.add(SubType.SPHINX.getPredicate());
@@ -56,13 +45,15 @@ public final class UneshCriosphinxSovereign extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Sphinx spells you cast cost {2} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 2)));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 2)));
 
         // Whenever Unesh, Criosphinx Sovereign or another Sphinx enters the battlefield under your control, reveal the top four cards of your library. An opponent seperates those cards into two piles. Put one pile into your hand and the other into your graveyard.
-        this.addAbility(new UneshCriosphinxSovereignTriggeredAbility());
+        this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
+                new UneshCriosphinxSovereignEffect(), filter2, false, true
+        ));
     }
 
-    public UneshCriosphinxSovereign(final UneshCriosphinxSovereign card) {
+    private UneshCriosphinxSovereign(final UneshCriosphinxSovereign card) {
         super(card);
     }
 
@@ -72,58 +63,14 @@ public final class UneshCriosphinxSovereign extends CardImpl {
     }
 }
 
-class UneshCriosphinxSovereignTriggeredAbility extends TriggeredAbilityImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-
-    static {
-        filter.add(SubType.SPHINX.getPredicate());
-    }
-
-    public UneshCriosphinxSovereignTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new UneshCriosphinxSovereignEffect(), false);
-    }
-
-    public UneshCriosphinxSovereignTriggeredAbility(UneshCriosphinxSovereignTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent != null
-                && permanent.isOwnedBy(controllerId)
-                && permanent.isCreature()
-                && (event.getTargetId().equals(getSourceId()) || filter.match(permanent, game))) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} or another Sphinx enters the battlefield under your control, " + super.getRule();
-    }
-
-    @Override
-    public UneshCriosphinxSovereignTriggeredAbility copy() {
-        return new UneshCriosphinxSovereignTriggeredAbility(this);
-    }
-}
-
 class UneshCriosphinxSovereignEffect extends OneShotEffect {
 
-    public UneshCriosphinxSovereignEffect() {
+    UneshCriosphinxSovereignEffect() {
         super(Outcome.DrawCard);
         this.staticText = "reveal the top four cards of your library. An opponent separates those cards into two piles. Put one pile into your hand and the other into your graveyard";
     }
 
-    public UneshCriosphinxSovereignEffect(final UneshCriosphinxSovereignEffect effect) {
+    private UneshCriosphinxSovereignEffect(final UneshCriosphinxSovereignEffect effect) {
         super(effect);
     }
 

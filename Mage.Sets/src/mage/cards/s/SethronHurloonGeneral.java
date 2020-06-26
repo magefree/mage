@@ -2,7 +2,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldThisOrAnotherTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -17,7 +17,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
@@ -30,9 +29,8 @@ import java.util.UUID;
  */
 public final class SethronHurloonGeneral extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledPermanent(
-            SubType.MINOTAUR, "{this} or another nontoken Minotaur"
-    );
+    private static final FilterPermanent filter
+            = new FilterPermanent(SubType.MINOTAUR, "nontoken Minotaur");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent(SubType.MINOTAUR, "");
     private static final FilterPermanent filter3 = new FilterPermanent(SubType.MINOTAUR, "");
 
@@ -50,7 +48,9 @@ public final class SethronHurloonGeneral extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever Sethron, Hurloon General or another nontoken Minotaur enters the battlefield under your control, create a 2/3 red Minotaur creature token.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new CreateTokenEffect(new MinotaurToken()), filter));
+        this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
+                new CreateTokenEffect(new MinotaurToken()), filter, false, true
+        ));
 
         // {2}{B/R}: Minotaurs you control get +1/+0 and gain menace and haste until end of turn.
         Ability ability = new SimpleActivatedAbility(new BoostControlledEffect(
