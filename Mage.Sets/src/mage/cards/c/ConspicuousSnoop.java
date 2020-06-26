@@ -40,7 +40,7 @@ public final class ConspicuousSnoop extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new PlayTheTopCardEffect(filter)));
 
         // As long as the top card of your library is a Goblin card, Conspicuous Snoop has all activated abilities of that card.
-        this.addAbility(new SimpleStaticAbility(new GainActivatedAbilitiesOfTopCardEffect(filter.withMessage("a Goblin card"))));
+        this.addAbility(new SimpleStaticAbility(new GainActivatedAbilitiesOfTopCardEffect(filter.copy().withMessage("a Goblin card"))));
     }
 
     private ConspicuousSnoop(final ConspicuousSnoop card) {
