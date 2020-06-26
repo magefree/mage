@@ -1,11 +1,11 @@
 package mage.cards.i;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.delayed.OnLeaveReturnExiledAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.cards.Card;
@@ -25,7 +25,6 @@ import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.util.CardUtil;
 import mage.watchers.Watcher;
@@ -48,6 +47,9 @@ public final class IdolOfEndurance extends CardImpl {
         this.addAbility(ability);
 
         // {1}{W}, {T}: Until end of turn, you may cast a creature spell from among the cards exiled with Idol of Endurance without paying its mana cost.
+        Ability activatedAbility = new SimpleActivatedAbility(new IdolOfEnduranceResetWatcherEffect(), new ManaCostsImpl<>("{1}{W}"));
+        activatedAbility.addEffect(new IdolOfEnduranceCastFromExileEffect(ability));
+        this.addAbility(activatedAbility, new IdolOfEnduranceWatcher(ability));
     }
 
     private IdolOfEndurance(final IdolOfEndurance card) {
@@ -98,8 +100,8 @@ class IdolOfEnduranceCastFromExileEffect extends AsThoughEffectImpl {
     private final Ability exileZoneSource;
 
     IdolOfEnduranceCastFromExileEffect(Ability exileZoneSource) {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
-        staticText = "you may cast a creature spell from among the cards exiled with {this} without paying its mana cost";
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
+        staticText = "Until end of turn, you may cast a creature spell from among the cards exiled with {this} without paying its mana cost";
         this.exileZoneSource = exileZoneSource;
     }
 
