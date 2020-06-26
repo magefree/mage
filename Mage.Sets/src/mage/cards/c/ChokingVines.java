@@ -37,7 +37,8 @@ public final class ChokingVines extends CardImpl {
 
         // X target attacking creatures become blocked. Choking Vines deals 1 damage to each of those creatures.
         this.getSpellAbility().addEffect(new ChokingVinesEffect());
-        this.getSpellAbility().addEffect(new DamageTargetEffect(1));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(1)
+                .setText("{this} deals 1 damage to each of those creatures"));
         this.getSpellAbility().setTargetAdjuster(ChokingVinesAdjuster.instance);
     }
 
