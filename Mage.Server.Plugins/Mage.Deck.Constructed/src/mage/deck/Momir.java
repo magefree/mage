@@ -9,16 +9,12 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * @author nigelzor
+ * @author nigelzor, Elandril
  */
 public class Momir extends DeckValidator {
 
     public Momir() {
-        this("Momir Basic");
-    }
-
-    public Momir(String name) {
-        super(name);
+        super("Momir Basic", "Momir");
     }
 
     @Override
@@ -34,6 +30,7 @@ public class Momir extends DeckValidator {
     @Override
     public boolean validate(Deck deck) {
         boolean valid = true;
+        invalid.clear();
 
         if (deck.getCards().size() != getDeckMinSize()) {
             invalid.put("Deck", "Must contain " + getDeckMinSize() + " cards: has " + deck.getCards().size() + " cards");

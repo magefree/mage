@@ -17,7 +17,7 @@ import java.util.*;
  * <p>
  * If there are any questions or corrections, feel free to contact me.
  *
- * @author Marthinwurer (at gmail.com)
+ * @author Marthinwurer (at gmail.com), Elandril
  */
 public class SuperType2 extends Constructed {
 
@@ -80,6 +80,7 @@ public class SuperType2 extends Constructed {
         Map<String, String> leastInvalid = null;
 
         boolean valid = false;
+        invalid.clear();
 
         // first, check whether misty and batterskull are in the same deck.
         Map<String, Integer> counts = new HashMap<>();

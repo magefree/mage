@@ -17,7 +17,7 @@ import java.util.*;
 import java.util.Map.Entry;
 
 /**
- * @author spjspj
+ * @author spjspj, Elandril
  */
 public class PennyDreadfulCommander extends Constructed {
 
@@ -26,16 +26,12 @@ public class PennyDreadfulCommander extends Constructed {
     private static boolean setupAllowed = false;
 
     public PennyDreadfulCommander() {
-        this("Penny Dreadful Commander");
+        super("Penny Dreadful Commander", "Penny");
         for (ExpansionSet set : Sets.getInstance().values()) {
             if (set.getSetType().isEternalLegal()) {
                 setCodes.add(set.getCode());
             }
         }
-    }
-
-    public PennyDreadfulCommander(String name) {
-        super(name);
     }
 
     @Override
@@ -51,6 +47,7 @@ public class PennyDreadfulCommander extends Constructed {
     @Override
     public boolean validate(Deck deck) {
         boolean valid = true;
+        invalid.clear();
         FilterMana colorIdentity = new FilterMana();
         Set<Card> commanders = new HashSet<>();
         Card companion = null;
