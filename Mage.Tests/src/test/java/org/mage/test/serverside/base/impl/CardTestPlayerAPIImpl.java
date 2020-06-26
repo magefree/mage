@@ -51,7 +51,8 @@ import java.util.stream.Collectors;
  */
 public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implements CardTestAPI {
 
-    private static final boolean FAST_SCAN_WITHOUT_DATABASE_CREATE = false; // DEBUG only, enable it to fast startup tests without database create
+    // DEBUG only, enable it to fast startup tests without database create (delete \db\ folder to force db recreate)
+    private static final boolean FAST_SCAN_WITHOUT_DATABASE_CREATE = false;
 
     public static final String ALIAS_PREFIX = "@"; // don't change -- it uses in user's tests
     public static final String CHECK_PARAM_DELIMETER = "#";
@@ -137,7 +138,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public CardTestPlayerAPIImpl() {
         // load all cards to db from class list
         ArrayList<String> errorsList = new ArrayList<>();
-        if (FAST_SCAN_WITHOUT_DATABASE_CREATE) {
+        if (FAST_SCAN_WITHOUT_DATABASE_CREATE && CardRepository.instance.findCard("Mountain") != null) {
             CardScanner.scanned = true;
         }
         CardScanner.scan(errorsList);

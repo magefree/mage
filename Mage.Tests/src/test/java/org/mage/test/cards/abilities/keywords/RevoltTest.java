@@ -1,5 +1,4 @@
-
-package org.mage.test.cards.abilities.abilitywords;
+package org.mage.test.cards.abilities.keywords;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
@@ -7,7 +6,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 public class RevoltTest extends CardTestPlayerBase {

@@ -223,14 +223,20 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
         effectAbilityMap.clear();
     }
 
-    public boolean contains(Effect effect) {
+    @Override
+    public boolean contains(Object object) {
+        if (object == null || !(object instanceof ContinuousEffect)) {
+            return false;
+        }
+
         // search by id
+        ContinuousEffect need = (ContinuousEffect) object;
         for (Iterator<T> iterator = this.iterator(); iterator.hasNext(); ) {
             T test = iterator.next();
-            if (effect.getId().equals(test.getId())) {
+            if (need.equals(test)) {
                 return true;
             }
-            if (effect.equals(test)) {
+            if (need.getId().equals(test.getId())) {
                 return true;
             }
         }
