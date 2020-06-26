@@ -3,7 +3,6 @@ package mage.cards.t;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -23,8 +22,7 @@ public final class TrackDown extends CardImpl {
     public TrackDown(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{G}");
 
-        // Scry 3, then reveal the top card of your library. If it’s a creature or land card, draw a card.
-        this.getSpellAbility().addEffect(new ScryEffect(3));
+        // Scry 3, then reveal the top card of your library. If it's a creature or land card, draw a card.
         this.getSpellAbility().addEffect(new TrackDownEffect());
     }
 
@@ -42,7 +40,7 @@ class TrackDownEffect extends OneShotEffect {
 
     public TrackDownEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "then reveal the top card of your library. If it's a creature or land card, draw a card";
+        this.staticText = "Scry 3, then reveal the top card of your library. If it's a creature or land card, draw a card";
     }
 
     public TrackDownEffect(final TrackDownEffect effect) {
@@ -66,6 +64,8 @@ class TrackDownEffect extends OneShotEffect {
         if (!controller.getLibrary().hasCards()) {
             return false;
         }
+
+        controller.scry(3, source, game);
 
         Card card = controller.getLibrary().getFromTop(game);
         if (card == null) {
