@@ -3,6 +3,9 @@ package mage.verify;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.CostModificationEffect;
+import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
+import mage.abilities.effects.keyword.ScryEffect;
+import mage.abilities.keyword.MenaceAbility;
 import mage.abilities.keyword.MultikickerAbility;
 import mage.cards.*;
 import mage.cards.basiclands.BasicLand;
@@ -158,7 +161,7 @@ public class VerifyCardDataTest {
 
         printMessages(outputMessages);
         if (failed > 0) {
-            Assert.fail(failed + " errors in verify");
+            Assert.fail("found " + failed + " errors in cards verify (see errors list above)");
         }
     }
 
@@ -923,6 +926,28 @@ public class VerifyCardDataTest {
         // special check: kicker ability must be in rules
         if (card.getAbilities().containsClass(MultikickerAbility.class) && card.getRules().stream().noneMatch(rule -> rule.contains("Multikicker"))) {
             fail(card, "abilities", "card have Multikicker ability, but missing it in rules text");
+        }
+
+        // special check: missing or wrong ability/effect hints
+        Map<Class, String> hints = new HashMap<>();
+        hints.put(MenaceAbility.class, "can't be blocked except by two or more");
+        hints.put(ScryEffect.class, "Look at the top card of your library");
+        for (Class objectClass : hints.keySet()) {
+            String objectHint = hints.get(objectClass);
+            // ability/effect must have description or not
+            boolean mustCheck = card.getAbilities().containsClass(objectClass)
+                    || card.getAbilities().stream()
+                    .map(Ability::getAllEffects)
+                    .flatMap(Collection::stream)
+                    .anyMatch(effect -> effect.getClass().isAssignableFrom(objectClass));
+            mustCheck = false; // TODO: enable and fix all problems with effect and ability hints
+            if (mustCheck) {
+                boolean needHint = ref.text.contains(objectHint);
+                boolean haveHint = card.getRules().stream().anyMatch(rule -> rule.contains(objectHint));
+                if (needHint != haveHint) {
+                    fail(card, "abilities", "card have " + objectClass.getSimpleName() + " but hint is wrong (it must be " + (needHint ? "enabled" : "disabled") + ")");
+                }
+            }
         }
 
         // spells have only 1 ability
