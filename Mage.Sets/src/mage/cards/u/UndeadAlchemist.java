@@ -79,7 +79,9 @@ class UndeadAlchemistTriggeredAbility extends TriggeredAbilityImpl {
         if (zEvent.getFromZone() == Zone.LIBRARY && zEvent.getToZone() == Zone.GRAVEYARD && game.getOpponents(this.getControllerId()).contains(zEvent.getPlayerId())) {
             Card card = game.getCard(event.getTargetId());
             if (card != null && card.isCreature()) {
-                this.getEffects().get(0).setTargetPointer(new FixedTarget(card.getId()));
+                if (game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {
+                    this.getEffects().get(0).setTargetPointer(new FixedTarget(card, game));
+                }
                 return true;
             }
         }
