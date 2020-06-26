@@ -20,14 +20,14 @@ import java.util.UUID;
 public class BlessedSanctuary extends CardImpl {
 
     private static final FilterPermanent filterYourCreatures = new FilterControlledCreaturePermanent("creatures you control");
-    private static final FilterControlledCreaturePermanent filterNontoken = new FilterControlledCreaturePermanent("nontoken creature");
+    private static final FilterControlledCreaturePermanent filterNontoken = new FilterControlledCreaturePermanent("a nontoken creature");
 
     static {
         filterNontoken.add(Predicates.not(TokenPredicate.instance));
     }
 
     public BlessedSanctuary(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{W}");
 
         //Prevent all noncombat damage that would be dealt to you and creatures you control.
         this.addAbility(new SimpleStaticAbility(new PreventAllNonCombatDamageToAllEffect(

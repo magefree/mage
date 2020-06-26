@@ -34,9 +34,9 @@ import java.util.UUID;
 public final class InniazTheGaleForce extends CardImpl {
 
     private static final FilterCreaturePermanent filter
-            = new FilterCreaturePermanent("attacking creatures with flying");
+            = new FilterCreaturePermanent("Attacking creatures with flying");
     private static final FilterCreaturePermanent filter2
-            = new FilterCreaturePermanent("creatures you control with flying");
+            = new FilterCreaturePermanent("three or more creatures you control with flying");
 
     static {
         filter.add(AttackingPredicate.instance);
@@ -60,7 +60,8 @@ public final class InniazTheGaleForce extends CardImpl {
                 1, 1, Duration.EndOfTurn, filter, false
         ), new ManaCostsImpl("{2}{W/U}")));
 
-        // Whenever three or more creatures you control with flying attack, each player gains control of a nonland permanent of your choice controlled by the player to their right.
+        // Whenever three or more creatures you control with flying attack, each player gains control 
+        // of a nonland permanent of your choice controlled by the player to their right.
         this.addAbility(new AttacksWithCreaturesTriggeredAbility(
                 new InniazTheGaleForceEffect(), 3, filter2
         ));
@@ -79,6 +80,7 @@ public final class InniazTheGaleForce extends CardImpl {
 class InniazTheGaleForceEffect extends OneShotEffect {
 
     private static final class PlayerPair {
+
         private final Player leftPlayer;
         private final Player rightPlayer;
         private final FilterPermanent filter;
@@ -94,7 +96,7 @@ class InniazTheGaleForceEffect extends OneShotEffect {
         private FilterPermanent makeFilter() {
             FilterPermanent filter = new FilterNonlandPermanent(
                     "nonland permanent controlled by " + rightPlayer.getName()
-                            + " to give to " + leftPlayer.getName()
+                    + " to give to " + leftPlayer.getName()
             );
             filter.add(new ControllerIdPredicate(rightPlayer.getId()));
             return filter;
