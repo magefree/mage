@@ -43,6 +43,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.beans.PropertyVetoException;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.*;
 import java.util.concurrent.CancellationException;
@@ -2372,6 +2373,7 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     private void btnEndTurnActionPerformed(java.awt.event.ActionEvent evt) {
+    	this.feedbackPanel.setLastResponse(LocalDateTime.now());
         SessionHandler.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_NEXT_TURN, gameId, null);
         skipButtons.activateSkipButton(KEY_CONTROL_NEXT_TURN);
 
@@ -2395,6 +2397,7 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     private void btnUntilEndOfTurnActionPerformed(java.awt.event.ActionEvent evt) {
+    	this.feedbackPanel.setLastResponse(LocalDateTime.now());
         SessionHandler.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_TURN_END_STEP, gameId, null);
         skipButtons.activateSkipButton(KEY_CONTROL_END_STEP);
 
@@ -2412,6 +2415,7 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     private void btnUntilNextMainPhaseActionPerformed(java.awt.event.ActionEvent evt) {
+    	this.feedbackPanel.setLastResponse(LocalDateTime.now());
         SessionHandler.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_NEXT_MAIN_PHASE, gameId, null);
         skipButtons.activateSkipButton(KEY_CONTROL_MAIN_STEP);
 
@@ -2420,6 +2424,7 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     private void btnPassPriorityUntilNextYourTurnActionPerformed(java.awt.event.ActionEvent evt) {
+    	this.feedbackPanel.setLastResponse(LocalDateTime.now());
         SessionHandler.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_MY_NEXT_TURN, gameId, null);
         skipButtons.activateSkipButton(KEY_CONTROL_YOUR_TURN);
 
@@ -2428,6 +2433,7 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     private void btnPassPriorityUntilStackResolvedActionPerformed(java.awt.event.ActionEvent evt) {
+    	this.feedbackPanel.setLastResponse(LocalDateTime.now());
         SessionHandler.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_STACK_RESOLVED, gameId, null);
         skipButtons.activateSkipButton(KEY_CONTROL_SKIP_STACK);
 
@@ -2436,6 +2442,7 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     private void btnSkipToEndStepBeforeYourTurnActionPerformed(java.awt.event.ActionEvent evt) {
+    	this.feedbackPanel.setLastResponse(LocalDateTime.now());
         SessionHandler.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_END_STEP_BEFORE_MY_NEXT_TURN, gameId, null);
         skipButtons.activateSkipButton(KEY_CONTROL_PRIOR_END);
 
@@ -2444,6 +2451,7 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     private void restorePriorityActionPerformed(java.awt.event.ActionEvent evt) {
+    	this.feedbackPanel.setLastResponse(LocalDateTime.now());
         SessionHandler.sendPlayerAction(PlayerAction.PASS_PRIORITY_CANCEL_ALL_ACTIONS, gameId, null);
         skipButtons.activateSkipButton("");
 
