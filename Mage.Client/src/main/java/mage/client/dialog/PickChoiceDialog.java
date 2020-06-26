@@ -1,25 +1,22 @@
 package mage.client.dialog;
 
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
+import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import mage.choices.Choice;
 import mage.client.MageFrame;
 import mage.client.util.gui.MageDialogState;
 
-import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
-import java.util.List;
-
 /**
  * @author JayDi85
  */
-
 public class PickChoiceDialog extends MageDialog {
 
     Choice choice;
-    List<KeyValueItem> allItems = new ArrayList<>();
+    java.util.List<KeyValueItem> allItems = new ArrayList<>();
     DefaultListModel<KeyValueItem> dataModel = new DefaultListModel<>();
 
     final private static String HTML_TEMPLATE = "<html><div style='text-align: center;'>%s</div></html>";
@@ -79,7 +76,7 @@ public class PickChoiceDialog extends MageDialog {
             this.editSearch.setText("");
         }
 
-        // listeners for inremental filtering        
+        // listeners for inremental filtering
         editSearch.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -104,7 +101,7 @@ public class PickChoiceDialog extends MageDialog {
         editSearch.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
-                //System.out.println("types");                
+                //System.out.println("types");
             }
 
             @Override
@@ -152,8 +149,11 @@ public class PickChoiceDialog extends MageDialog {
         } else {
             MageFrame.getDesktop().add(this, JLayeredPane.PALETTE_LAYER);
         }
-        if (mageDialogState != null) mageDialogState.setStateToDialog(this);
-        else this.makeWindowCentered();
+        if (mageDialogState != null) {
+            mageDialogState.setStateToDialog(this);
+        } else {
+            this.makeWindowCentered();
+        }
 
         // final load
         loadData();
@@ -269,6 +269,7 @@ public class PickChoiceDialog extends MageDialog {
     }
 
     class KeyValueItem {
+
         private final String Key;
         private final String Value;
 
@@ -312,6 +313,8 @@ public class PickChoiceDialog extends MageDialog {
         btOK = new javax.swing.JButton();
         btCancel = new javax.swing.JButton();
 
+        setResizable(true);
+
         labelMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("SwingMessage"); // NOI18N
         labelMessage.setText(bundle.getString("PickChoiceDialog.labelMessage.text")); // NOI18N
@@ -326,8 +329,8 @@ public class PickChoiceDialog extends MageDialog {
             panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelHeaderLayout.createSequentialGroup()
                 .addGroup(panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelMessage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
-                    .addComponent(labelSubMessage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE))
+                    .addComponent(labelMessage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
+                    .addComponent(labelSubMessage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE))
                 .addGap(0, 0, 0))
         );
         panelHeaderLayout.setVerticalGroup(
@@ -432,7 +435,7 @@ public class PickChoiceDialog extends MageDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollList, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
+                .addComponent(scrollList, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelCommands, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())

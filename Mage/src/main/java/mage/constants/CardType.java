@@ -1,11 +1,10 @@
 package mage.constants;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import mage.MageObject;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
-
-import java.util.Arrays;
-import java.util.EnumSet;
 
 /**
  * @author North
@@ -63,7 +62,7 @@ public enum CardType {
      * @return
      */
     public static CardType[] mergeTypes(CardType[] a, CardType[] b) {
-        EnumSet<CardType> cardTypes = EnumSet.noneOf(CardType.class);
+        ArrayList<CardType> cardTypes = new ArrayList<>();
         cardTypes.addAll(Arrays.asList(a));
         cardTypes.addAll(Arrays.asList(b));
         return cardTypes.toArray(new CardType[0]);

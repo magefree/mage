@@ -55,7 +55,7 @@ public final class PsychicVortex extends CardImpl {
 class PsychicVortexCost extends CostImpl {
     
     PsychicVortexCost() {
-        this.text = "Draw a card.";
+        this.text = "Draw a card";
     }
 
     @Override

@@ -1,4 +1,3 @@
-
 package mage.cards.w;
 
 import java.util.UUID;
@@ -14,6 +13,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetAnyTarget;
+
 /**
  *
  * @author Will
@@ -30,7 +30,7 @@ public final class WizardsLightning extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}");
 
         // Wizard's Lightning costs {2} less to cast if you control a Wizard.
-        Ability ability = new SimpleStaticAbility(Zone.STACK, new SpellCostReductionSourceEffect(2, new PermanentsOnTheBattlefieldCondition(filter)));
+        Ability ability = new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(2, new PermanentsOnTheBattlefieldCondition(filter)));
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);
 

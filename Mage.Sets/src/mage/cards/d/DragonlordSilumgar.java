@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -16,9 +15,9 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -26,6 +25,7 @@ import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlaneswalker;
 import mage.util.CardUtil;
 import mage.util.GameLog;
+import mage.watchers.common.LostControlWatcher;
 
 /**
  *
@@ -50,6 +50,7 @@ public final class DragonlordSilumgar extends CardImpl {
         // When Dragonlord Silumgar enters the battlefield, gain control of target creature or planeswalker for as long as you control Dragonlord Silumgar.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DragonlordSilumgarEffect(), false);
         ability.addTarget(new TargetCreatureOrPlaneswalker());
+        ability.addWatcher(new LostControlWatcher());
         this.addAbility(ability);
 
     }

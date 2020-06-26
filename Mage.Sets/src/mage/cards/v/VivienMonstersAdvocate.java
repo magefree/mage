@@ -5,12 +5,11 @@ import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.continuous.LookAtTopCardOfLibraryAnyTimeEffect;
+import mage.abilities.effects.common.continuous.PlayTheTopCardEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.Choice;
@@ -34,12 +33,12 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-import static mage.constants.Outcome.Benefit;
-
 /**
  * @author TheElk801
  */
 public final class VivienMonstersAdvocate extends CardImpl {
+
+    private static final FilterCard filter = new FilterCreatureCard("cast creature spells");
 
     public VivienMonstersAdvocate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{G}{G}");
@@ -52,7 +51,7 @@ public final class VivienMonstersAdvocate extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new LookAtTopCardOfLibraryAnyTimeEffect()));
 
         // You may cast creature spells from the top of your library.
-        this.addAbility(new SimpleStaticAbility(new VivienMonstersAdvocateTopCardCastEffect()));
+        this.addAbility(new SimpleStaticAbility(new PlayTheTopCardEffect(filter)));
 
         // +1: Create a 3/3 green Beast creature token. Put your choice of a vigilance counter, a reach counter, or a trample counter on it.
         this.addAbility(new LoyaltyAbility(new VivienMonstersAdvocateTokenEffect(), 1));
@@ -70,49 +69,6 @@ public final class VivienMonstersAdvocate extends CardImpl {
     @Override
     public VivienMonstersAdvocate copy() {
         return new VivienMonstersAdvocate(this);
-    }
-}
-
-class VivienMonstersAdvocateTopCardCastEffect extends AsThoughEffectImpl {
-
-    VivienMonstersAdvocateTopCardCastEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Benefit);
-        staticText = "You may cast creature spells from the top of your library";
-    }
-
-    private VivienMonstersAdvocateTopCardCastEffect(final VivienMonstersAdvocateTopCardCastEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public VivienMonstersAdvocateTopCardCastEffect copy() {
-        return new VivienMonstersAdvocateTopCardCastEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (!affectedControllerId.equals(source.getControllerId())) {
-            return false;
-        }
-        Card card = game.getCard(objectId);
-        if (card == null) {
-            return false;
-        }
-        Player controller = game.getPlayer(affectedControllerId);
-        if (controller == null) {
-            return false;
-        }
-        Card topCard = controller.getLibrary().getFromTop(game);
-        return topCard != null
-                && topCard == card
-                && topCard.isCreature()
-                && topCard.getSpellAbility() != null
-                && topCard.getSpellAbility().spellCanBeActivatedRegularlyNow(controller.getId(), game);
     }
 }
 

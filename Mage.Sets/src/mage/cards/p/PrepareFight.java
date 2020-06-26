@@ -1,32 +1,27 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.*;
+import mage.abilities.effects.common.FightTargetsEffect;
+import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.AftermathAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
-import mage.constants.*;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.target.Target;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SpellAbilityType;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author stravant
  */
 public final class PrepareFight extends SplitCard {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you don't control");
-
-    static {
-        filter.add(TargetController.NOT_YOU.getControllerPredicate());
-    }
 
     public PrepareFight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, new CardType[]{CardType.SORCERY}, "{1}{W}", "{3}{G}", SpellAbilityType.SPLIT_AFTERMATH);
@@ -50,11 +45,10 @@ public final class PrepareFight extends SplitCard {
         getRightHalfCard().addAbility(new AftermathAbility().setRuleAtTheTop(true));
         getRightHalfCard().getSpellAbility().addEffect(new FightTargetsEffect());
         getRightHalfCard().getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        Target target = new TargetCreaturePermanent(filter);
-        getRightHalfCard().getSpellAbility().addTarget(target);
+        getRightHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
     }
 
-    public PrepareFight(final PrepareFight card) {
+    private PrepareFight(final PrepareFight card) {
         super(card);
     }
 

@@ -90,7 +90,7 @@ class SpellweaverVoluteEffect extends OneShotEffect {
                             && controller.chooseUse(Outcome.Copy, "Create a copy of " + enchantedCard.getName() + '?', source, game)) {
                         Card copiedCard = game.copyCard(enchantedCard, source, source.getControllerId());
                         if (copiedCard != null) {
-                            ownerEnchanted.getGraveyard().add(copiedCard);
+                            controller.getGraveyard().add(copiedCard);
                             game.getState().setZone(copiedCard.getId(), Zone.GRAVEYARD);
                             if (controller.chooseUse(Outcome.PlayForFree, "Cast the copied card without paying mana cost?", source, game)) {
                                 if (copiedCard.getSpellAbility() != null) {

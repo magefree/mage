@@ -91,6 +91,6 @@ class ChronicFloodingAbility extends TriggeredAbilityImpl {
  
     @Override
     public String getRule() {
-        return "Whenever enchanted land becomes tapped, its controller puts the top three cards of their library into their graveyard.";
+        return "Whenever enchanted land becomes tapped, its controller mills three cards.";
     }
 }

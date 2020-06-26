@@ -11,8 +11,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -23,17 +22,11 @@ import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
  */
 public final class BarrageOfBoulders extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you don't control");
-
-    static {
-        filter.add(TargetController.NOT_YOU.getControllerPredicate());
-    }
-
     public BarrageOfBoulders(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}");
 
         // Barrage of Boulders deals 1 damage to each creature you don't control.
-        this.getSpellAbility().addEffect(new DamageAllEffect(1, filter));
+        this.getSpellAbility().addEffect(new DamageAllEffect(1, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
         // Ferocious - If you control a creature with power 4 or greater, creatures can't block this turn
         Effect effect = new ConditionalRestrictionEffect(
                 Duration.EndOfTurn,
@@ -44,7 +37,7 @@ public final class BarrageOfBoulders extends CardImpl {
         this.getSpellAbility().addHint(FerociousHint.instance);
     }
 
-    public BarrageOfBoulders(final BarrageOfBoulders card) {
+    private BarrageOfBoulders(final BarrageOfBoulders card) {
         super(card);
     }
 

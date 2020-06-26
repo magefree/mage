@@ -54,7 +54,7 @@ public class SurgeAbility extends SpellAbility {
                     if (!player.hasOpponent(playerToCheckId, game)) {
                         if (watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(playerToCheckId) > 0
                                 && super.canActivate(playerId, game).canActivate()) {
-                            return ActivationStatus.getTrue();
+                            return ActivationStatus.getTrue(this, game);
                         }
                     }
                 }

@@ -45,7 +45,7 @@ public final class FrenzySliver extends CardImpl {
         // All Sliver creatures have frenzy 1. (Whenever a Sliver attacks and isn't blocked, it gets +1/+0 until end of turn.)
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(
                 new FrenzyAbility(), Duration.WhileOnBattlefield,
-                filter, "All Sliver creatures have frenzy 1. <i>(Whenever a Sliver attacks and isn't blocked, it gets +1/+0 until end of turn.)</i>\"")));          
+                filter, "All Sliver creatures have frenzy 1. <i>(Whenever a Sliver attacks and isn't blocked, it gets +1/+0 until end of turn.)</i>")));
     }
 
     public FrenzySliver(final FrenzySliver card) {

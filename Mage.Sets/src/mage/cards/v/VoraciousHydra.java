@@ -14,10 +14,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -28,12 +26,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class VoraciousHydra extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterCreaturePermanent("creature you don't control");
-
-    static {
-        filter.add(TargetController.NOT_YOU.getControllerPredicate());
-    }
 
     public VoraciousHydra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{X}{G}{G}");
@@ -59,7 +51,7 @@ public final class VoraciousHydra extends CardImpl {
                 new FightTargetSourceEffect()
                         .setText("{this} fights target creature you don't control")
         );
-        mode.addTarget(new TargetPermanent(filter));
+        mode.addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
         ability.addMode(mode);
         this.addAbility(ability);
     }

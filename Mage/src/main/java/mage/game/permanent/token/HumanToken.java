@@ -18,7 +18,7 @@ public final class HumanToken extends TokenImpl {
         subtype.add(SubType.HUMAN);
         power = new MageInt(1);
         toughness = new MageInt(1);
-        availableImageSetCodes.addAll(Arrays.asList("DKA", "AVR", "FNMP", "RNA", "ELD", "C19"));
+        availableImageSetCodes.addAll(Arrays.asList("DKA", "AVR", "FNMP", "RNA", "ELD", "C19", "C20"));
     }
 
     public HumanToken(final HumanToken token) {

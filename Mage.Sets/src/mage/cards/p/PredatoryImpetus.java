@@ -39,7 +39,7 @@ public final class PredatoryImpetus extends CardImpl {
         // Enchanted creature gets +3/+3, must be blocked if able, and is goaded.
         this.addAbility(new GoadAttachedAbility(
                 new BoostEnchantedEffect(3, 3)
-                        .setText("Enchanted creature gets +3/+3,"),
+                        .setText("Enchanted creature gets +3/+3"),
                 new PredatoryImpetusEffect()
         ));
     }
@@ -58,7 +58,7 @@ class PredatoryImpetusEffect extends RequirementEffect {
 
     PredatoryImpetusEffect() {
         super(Duration.WhileOnBattlefield);
-        staticText = "must be blocked if able,";
+        staticText = ", must be blocked if able";
     }
 
     private PredatoryImpetusEffect(final PredatoryImpetusEffect effect) {
@@ -68,13 +68,12 @@ class PredatoryImpetusEffect extends RequirementEffect {
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         Permanent attachment = game.getPermanent(source.getSourceId());
-        if (attachment != null && attachment.getAttachedTo() != null) {
-            Permanent attachedCreature = game.getPermanent(attachment.getAttachedTo());
-            if (attachedCreature != null && attachedCreature.isAttacking()) {
-                return permanent.canBlock(attachment.getAttachedTo(), game);
-            }
+        if (attachment == null || attachment.getAttachedTo() == null) {
+            return false;
         }
-        return false;
+        Permanent attachedCreature = game.getPermanent(attachment.getAttachedTo());
+        return attachedCreature != null && attachedCreature.isAttacking()
+                && permanent.canBlock(attachment.getAttachedTo(), game);
     }
 
     @Override
@@ -88,12 +87,9 @@ class PredatoryImpetusEffect extends RequirementEffect {
     }
 
     @Override
-    public UUID mustBlockAttacker(Ability source, Game game) {
+    public UUID mustBlockAttackerIfElseUnblocked(Ability source, Game game) {
         Permanent attachment = game.getPermanent(source.getSourceId());
-        if (attachment != null && attachment.getAttachedTo() != null) {
-            return attachment.getAttachedTo();
-        }
-        return null;
+        return attachment == null ? null : attachment.getAttachedTo();
     }
 
     @Override

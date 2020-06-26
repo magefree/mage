@@ -383,7 +383,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
 
     public static void main(String[] argv) {
         try {
-            UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
         } catch (Exception ex) {
         }
 

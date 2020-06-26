@@ -68,7 +68,6 @@ public class GameEvent implements Serializable {
          */
         ZONE_CHANGE,
         ZONE_CHANGE_GROUP,
-        EMPTY_DRAW,
         DRAW_CARDS, // applies to an instruction to draw more than one card before any replacement effects apply to individual cards drawn
         DRAW_CARD, DREW_CARD,
         EXPLORED,
@@ -85,9 +84,11 @@ public class GameEvent implements Serializable {
         CONVOKED,
         DISCARD_CARD,
         DISCARDED_CARD,
+        DISCARDED_CARDS,
         CYCLE_CARD, CYCLED_CARD, CYCLE_DRAW,
         CLASH, CLASHED,
         DAMAGE_PLAYER,
+        MILL_CARDS,
         /* DAMAGED_PLAYER
          targetId    the id of the damaged player
          sourceId    sourceId of the ability which caused the damage
@@ -149,7 +150,8 @@ public class GameEvent implements Serializable {
         SPELL_CAST,
         ACTIVATE_ABILITY, ACTIVATED_ABILITY,
         TRIGGERED_ABILITY,
-        COPIED_STACKOBJECT,
+        RESOLVING_ABILITY,
+        COPY_STACKOBJECT, COPIED_STACKOBJECT,
         /* ADD_MANA
          targetId    id of the ability that added the mana
          sourceId    sourceId of the ability that added the mana
@@ -315,7 +317,7 @@ public class GameEvent implements Serializable {
          */
         LOST_CONTROL,
         GAIN_CONTROL, GAINED_CONTROL,
-        CREATE_TOKEN,
+        CREATE_TOKEN, CREATED_TOKEN,
         /* REGENERATE
          targetId    id of the creature to regenerate
          sourceId    sourceId of the effect doing the regeneration

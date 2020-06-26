@@ -21,6 +21,10 @@ import java.util.UUID;
  */
 public class ExileTargetForSourceEffect extends OneShotEffect {
 
+    /**
+     * Exile cards to source's exile window (e.g. if it have another effect like return from exile later)
+     * TODO: delete that effect and replace it by ExileTargetEffect (it have special param for same purpose)
+     */
     public ExileTargetForSourceEffect() {
         super(Outcome.Exile);
     }

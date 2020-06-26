@@ -1,4 +1,3 @@
-
 package mage.cards;
 
 import mage.abilities.Ability;
@@ -13,7 +12,6 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- *
  * @author emerald000
  */
 public abstract class MeldCard extends CardImpl {
@@ -143,6 +141,24 @@ public abstract class MeldCard extends CardImpl {
     }
 
     @Override
+    public boolean moveToZone(Zone toZone, UUID sourceId, Game game, boolean flag, List<UUID> appliedEffects) {
+        // TODO: missing override method for meld cards? See removeFromZone, updateZoneChangeCounter, etc
+        return super.moveToZone(toZone, sourceId, game, flag, appliedEffects);
+    }
+
+    @Override
+    public void setZone(Zone zone, Game game) {
+        // TODO: missing override method for meld cards? See removeFromZone, updateZoneChangeCounter, etc
+        super.setZone(zone, game);
+    }
+
+    @Override
+    public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, List<UUID> appliedEffects) {
+        // TODO: missing override method for meld cards? See removeFromZone, updateZoneChangeCounter, etc
+        return super.moveToExile(exileId, name, sourceId, game, appliedEffects);
+    }
+
+    @Override
     public boolean removeFromZone(Game game, Zone fromZone, UUID sourceId) {
         if (isCopy()) {
             return super.removeFromZone(game, fromZone, sourceId);
@@ -170,7 +186,7 @@ public abstract class MeldCard extends CardImpl {
             super.updateZoneChangeCounter(game, event);
             return;
         }
-        game.getState().updateZoneChangeCounter(objectId);
+        super.updateZoneChangeCounter(game, event);
         if (topLastZoneChangeCounter == topHalfCard.getZoneChangeCounter(game)
                 && halves.contains(topHalfCard.getId())) {
             topHalfCard.updateZoneChangeCounter(game, event);

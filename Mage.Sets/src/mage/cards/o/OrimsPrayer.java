@@ -38,8 +38,6 @@ public final class OrimsPrayer extends CardImpl {
 
 class OrimsPrayerTriggeredAbility extends TriggeredAbilityImpl {
 
-    int numberAttackingController = 0;
-
     public OrimsPrayerTriggeredAbility() {
         super(Zone.BATTLEFIELD, null);
     }
@@ -65,6 +63,7 @@ class OrimsPrayerTriggeredAbility extends TriggeredAbilityImpl {
         if (controller == null) {
             return false;
         }
+        int numberAttackingController = 0;
         for (UUID attackersId : game.getCombat().getAttackers()) {
             Permanent attackingCreature = game.getPermanent(attackersId);
             if (attackingCreature != null

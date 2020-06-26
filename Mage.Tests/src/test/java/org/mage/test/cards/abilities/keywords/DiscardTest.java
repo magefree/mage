@@ -120,4 +120,45 @@ public class DiscardTest extends CardTestPlayerBase {
 
         assertHandCount(playerB, "Driven // Despair", 0);
     }
+    
+    
+    /**
+     * Test a discard after selecting the cards from another player    
+     */
+    @Test
+    public void GruesomeDiscoveryTest(){
+        // Target player discards two cards.
+        // Morbid - If a creature died this turn, instead that player reveals their hand, 
+        // you choose two cards from it, then that player discards those cards.        
+        addCard(Zone.HAND, playerA, "Gruesome Discovery", 1); // Sorcery {2}{B}{B}
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+        
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
+        
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
+        addCard(Zone.HAND, playerB, "Silvercoat Lion");
+        addCard(Zone.HAND, playerB, "Aluren");
+        addCard(Zone.HAND, playerB, "Contagion");
+
+        attack(3, playerA, "Silvercoat Lion");
+        block(3, playerB, "Silvercoat Lion", "Silvercoat Lion");
+        castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Gruesome Discovery", playerB);
+
+        setChoice(playerA, "Aluren^Contagion");
+        
+        // addTarget(playerA, "Aluren");
+        // addTarget(playerA, "Contagion");
+        
+        setStopAt(3, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerA, "Silvercoat Lion", 1);
+        assertGraveyardCount(playerB, "Silvercoat Lion", 1);
+        
+        assertGraveyardCount(playerA, "Gruesome Discovery", 1);
+        
+        assertGraveyardCount(playerB, "Aluren", 1);
+        assertGraveyardCount(playerB, "Contagion", 1);
+        assertGraveyardCount(playerB, 3);
+    }  
 }

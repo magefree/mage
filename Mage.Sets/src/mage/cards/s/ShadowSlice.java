@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.effects.common.CipherEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
@@ -9,15 +7,15 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class ShadowSlice extends CardImpl {
 
-    public ShadowSlice (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}");
-
+    public ShadowSlice(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}");
 
         // Target Opponent loses 3 life.
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(3));
@@ -33,7 +31,7 @@ public final class ShadowSlice extends CardImpl {
     }
 
     @Override
-    public ShadowSlice  copy() {
+    public ShadowSlice copy() {
         return new ShadowSlice(this);
     }
 }

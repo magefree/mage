@@ -9,7 +9,7 @@ import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
 public class TargetCreatureOrPlaneswalkerAmount extends TargetPermanentAmount {
 
     private static final FilterCreatureOrPlaneswalkerPermanent defaultFilter
-            = new FilterCreatureOrPlaneswalkerPermanent();
+            = new FilterCreatureOrPlaneswalkerPermanent("target creatures or planeswalkers");
 
     public TargetCreatureOrPlaneswalkerAmount(int amount) {
         super(amount, defaultFilter);

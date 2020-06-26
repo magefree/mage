@@ -157,7 +157,7 @@ class SearchTheCityExiledCardToHandEffect extends OneShotEffect {
         ExileZone searchTheCityExileZone = game.getExile().getExileZone(source.getSourceId());
         if (cardName != null && searchTheCityExileZone != null) {
             for (Card card : searchTheCityExileZone.getCards(game)) {
-                if (CardUtil.haveSameNames(card.getName(), cardName)) {
+                if (CardUtil.haveSameNames(card, cardName, game)) {
                     if (card.moveToZone(Zone.HAND, source.getSourceId(), game, true)) {
                         game.informPlayers("Search the City: put " + card.getName() + " into owner's hand");
                     }

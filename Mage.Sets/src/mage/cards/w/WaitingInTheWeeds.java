@@ -14,7 +14,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
-import mage.game.permanent.token.WaitingInTheWeedsCatToken;
+import mage.game.permanent.token.GreenCatToken;
 import mage.players.Player;
 
 /**
@@ -68,7 +68,7 @@ class WaitingInTheWeedsEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                Token token = new WaitingInTheWeedsCatToken();
+                Token token = new GreenCatToken();
                 int amount = game.getBattlefield().getAllActivePermanents(filter, playerId, game).size();
                 token.putOntoBattlefield(amount, game, source.getSourceId(), playerId);
             }

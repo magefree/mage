@@ -1,30 +1,24 @@
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
+import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.SendOptionUsedEventEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class ViviensInvocation extends CardImpl {
@@ -36,7 +30,7 @@ public final class ViviensInvocation extends CardImpl {
         this.getSpellAbility().addEffect(new ViviensInvocationEffect());
     }
 
-    public ViviensInvocation(final ViviensInvocation card) {
+    private ViviensInvocation(final ViviensInvocation card) {
         super(card);
     }
 
@@ -48,17 +42,19 @@ public final class ViviensInvocation extends CardImpl {
 
 class ViviensInvocationEffect extends OneShotEffect {
 
-    public ViviensInvocationEffect(final ViviensInvocationEffect effect) {
-        super(effect);
-    }
+    private static final FilterCard filter = new FilterCreatureCard("creature card to put on the battlefield");
 
-    public ViviensInvocationEffect() {
+    ViviensInvocationEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Look at the top seven cards of your library. "
                 + "You may put a creature card from among them onto the battlefield. "
                 + "Put the rest on the bottom of your library in a random order. "
                 + "When a creature is put onto the battlefield this way, "
                 + "it deals damage equal to its power to target creature an opponent controls";
+    }
+
+    private ViviensInvocationEffect(final ViviensInvocationEffect effect) {
+        super(effect);
     }
 
     @Override
@@ -68,31 +64,32 @@ class ViviensInvocationEffect extends OneShotEffect {
             return false;
         }
         Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 7));
-        if (!cards.isEmpty()) {
-            TargetCard target = new TargetCard(
-                    Zone.LIBRARY,
-                    new FilterCreatureCard("creature card to put on the battlefield")
-            );
-            target.setNotTarget(true);
-            if (controller.choose(Outcome.PutCreatureInPlay, cards, target, game)) {
-                Card card = cards.get(target.getFirstTarget(), game);
-                if (card != null) {
-                    cards.remove(card);
-                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                    Permanent permanent = game.getPermanent(card.getId());
-                    if (permanent != null) {
-                        game.addDelayedTriggeredAbility(
-                                new ViviensInvocationReflexiveTriggeredAbility(
-                                        new MageObjectReference(permanent, game)
-                                ), source);
-                        new SendOptionUsedEventEffect().apply(game, source);
-                    }
-                }
-            }
-            if (!cards.isEmpty()) {
-                controller.putCardsOnBottomOfLibrary(cards, game, source, false);
-            }
+        if (cards.isEmpty()) {
+            return true;
         }
+        TargetCard target = new TargetCard(Zone.LIBRARY, filter);
+        target.setNotTarget(true);
+        controller.choose(Outcome.PutCreatureInPlay, cards, target, game);
+        Card card = cards.get(target.getFirstTarget(), game);
+        if (card == null) {
+            controller.putCardsOnBottomOfLibrary(cards, game, source, false);
+            return true;
+        }
+        if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
+            cards.remove(card);
+        }
+        Permanent permanent = game.getPermanent(card.getId());
+        if (permanent == null) {
+            controller.putCardsOnBottomOfLibrary(cards, game, source, false);
+            return true;
+        }
+        ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
+                new ViviensInvocationDamageEffect(new MageObjectReference(permanent, game)), false,
+                "it deals damage equals to its power to target creature an opponent controls"
+        );
+        ability.addTarget(new TargetOpponentsCreaturePermanent());
+        game.fireReflexiveTriggeredAbility(ability, source);
+        controller.putCardsOnBottomOfLibrary(cards, game, source, false);
         return true;
     }
 
@@ -102,50 +99,16 @@ class ViviensInvocationEffect extends OneShotEffect {
     }
 }
 
-class ViviensInvocationReflexiveTriggeredAbility extends DelayedTriggeredAbility {
-
-    public ViviensInvocationReflexiveTriggeredAbility(MageObjectReference mor) {
-        super(new ViviensInvocationDamageEffect(mor), Duration.OneUse, false);
-        this.addTarget(new TargetOpponentsCreaturePermanent());
-    }
-
-    public ViviensInvocationReflexiveTriggeredAbility(final ViviensInvocationReflexiveTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public ViviensInvocationReflexiveTriggeredAbility copy() {
-        return new ViviensInvocationReflexiveTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.OPTION_USED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getPlayerId().equals(this.getControllerId())
-                && event.getSourceId().equals(this.getSourceId());
-    }
-
-    @Override
-    public String getRule() {
-        return "When a creature is put onto the battlefield with {this}, "
-                + "it deals damage equal to its power to target creature an opponent controls";
-    }
-}
-
 class ViviensInvocationDamageEffect extends OneShotEffect {
 
     private final MageObjectReference mor;
 
-    public ViviensInvocationDamageEffect(MageObjectReference mor) {
+    ViviensInvocationDamageEffect(MageObjectReference mor) {
         super(Outcome.Benefit);
         this.mor = mor;
     }
 
-    public ViviensInvocationDamageEffect(final ViviensInvocationDamageEffect effect) {
+    private ViviensInvocationDamageEffect(final ViviensInvocationDamageEffect effect) {
         super(effect);
         mor = effect.mor;
     }

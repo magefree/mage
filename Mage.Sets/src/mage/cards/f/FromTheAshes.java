@@ -76,7 +76,7 @@ class FromTheAshesEffect extends OneShotEffect {
                     playerAmount.put(playerId, amount);
                 }
             }
-            game.applyEffects();
+            game.getState().processAction(game);
             for (Map.Entry<UUID, Integer> entry : playerAmount.entrySet()) {
                 Player player = game.getPlayer(entry.getKey());
                 if (player != null && player.chooseUse(outcome, "Search your library for up to " + entry.getValue() + " basic land card(s) to put it onto the battlefield?", source, game)) {
@@ -90,7 +90,7 @@ class FromTheAshesEffect extends OneShotEffect {
                     entry.setValue(0); // no search no shuffling
                 }
             }
-            game.applyEffects();
+            game.getState().processAction(game);
             for (Map.Entry<UUID, Integer> entry : playerAmount.entrySet()) {
                 Player player = game.getPlayer(entry.getKey());
                 if (player != null && entry.getValue() > 0) {

@@ -79,13 +79,7 @@ class MirariTriggeredAbility extends TriggeredAbilityImpl {
         if (event.getPlayerId().equals(this.getControllerId())) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (isControlledInstantOrSorcery(spell)) {
-                for (Effect effect : getEffects()) {
-                    if (effect instanceof DoIfCostPaid) {
-                        for (Effect execEffect : ((DoIfCostPaid) effect).getExecutingEffects()) {
-                            execEffect.setTargetPointer(new FixedTarget(spell.getId()));
-                        }
-                    }
-                }
+                getEffects().setTargetPointer(new FixedTarget(spell.getId()));
                 return true;
             }
         }

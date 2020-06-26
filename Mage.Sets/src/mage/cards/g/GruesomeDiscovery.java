@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import mage.abilities.Ability;
@@ -6,19 +5,18 @@ import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.TargetPlayer;
+import mage.target.common.TargetCardInHand;
 
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -29,18 +27,18 @@ public final class GruesomeDiscovery extends CardImpl {
     public GruesomeDiscovery(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
 
-
         // Target player discards two cards.
         // <i>Morbid</i> &mdash; If a creature died this turn, instead that player reveals their hand, you choose two cards from it, then that player discards those cards.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new GruesomeDiscoveryEffect(),
-                new DiscardTargetEffect(2),
-                MorbidCondition.instance,
-                "Target player discards two cards. <i>Morbid</i> &mdash; If a creature died this turn, instead that player reveals their hand, you choose two cards from it, then that player discards those cards"));
+                new GruesomeDiscoveryEffect(), new DiscardTargetEffect(2),
+                MorbidCondition.instance, "Target player discards two cards. " +
+                "<br><i>Morbid</i> &mdash; If a creature died this turn, instead that player reveals their hand, " +
+                "you choose two cards from it, then that player discards those cards"
+        ));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public GruesomeDiscovery(final GruesomeDiscovery card) {
+    private GruesomeDiscovery(final GruesomeDiscovery card) {
         super(card);
     }
 
@@ -52,12 +50,11 @@ public final class GruesomeDiscovery extends CardImpl {
 
 class GruesomeDiscoveryEffect extends OneShotEffect {
 
-    public GruesomeDiscoveryEffect() {
+    GruesomeDiscoveryEffect() {
         super(Outcome.Discard);
-        this.staticText = "target player reveals their hand, you choose two cards from it, then that player discards those cards";
     }
 
-    public GruesomeDiscoveryEffect(final GruesomeDiscoveryEffect effect) {
+    private GruesomeDiscoveryEffect(final GruesomeDiscoveryEffect effect) {
         super(effect);
     }
 
@@ -70,25 +67,16 @@ class GruesomeDiscoveryEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
-
-        if (player != null && targetPlayer != null) {
-            targetPlayer.revealCards("Gruesome Discovery", targetPlayer.getHand(), game);
-
-            if (targetPlayer.getHand().size() <= 2) {
-                targetPlayer.discard(2, false, source, game);
-            }
-
-            TargetCard target = new TargetCard(2, Zone.HAND, new FilterCard());
-            if (player.choose(Outcome.Benefit, targetPlayer.getHand(), target, game)) {
-                List<UUID> targets = target.getTargets();
-                for (UUID targetId : targets) {
-                    Card card = targetPlayer.getHand().get(targetId, game);
-                    targetPlayer.discard(card, source, game);
-
-                }
-            }
-            return true;
+        if (player == null || targetPlayer == null) {
+            return false;
         }
-        return false;
+        targetPlayer.revealCards(source, targetPlayer.getHand(), game);
+        if (targetPlayer.getHand().size() <= 2) {
+            targetPlayer.discard(2, false, source, game);
+        }
+        TargetCard target = new TargetCardInHand(2, StaticFilters.FILTER_CARD_CARDS);
+        player.choose(Outcome.Discard, targetPlayer.getHand(), target, game);
+        targetPlayer.discard(new CardsImpl(target.getTargets()), source, game);
+        return true;
     }
 }

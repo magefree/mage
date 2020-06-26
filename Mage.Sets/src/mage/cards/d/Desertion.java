@@ -2,17 +2,20 @@
 package mage.cards.d;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.stack.Spell;
-import mage.players.Player;
+import mage.game.events.GameEvent;
+import mage.game.events.ZoneChangeEvent;
 import mage.target.TargetSpell;
 
 /**
@@ -24,9 +27,12 @@ public final class Desertion extends CardImpl {
     public Desertion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");
 
-        // Counter target spell. If an artifact or creature spell is countered this way, put that card onto the battlefield under your control instead of into its owner's graveyard.
-        this.getSpellAbility().addEffect(new DesertionEffect());
+        // Counter target spell.
+        this.getSpellAbility().addEffect(new CounterTargetEffect());
         this.getSpellAbility().addTarget(new TargetSpell());
+        
+        // If an artifact or creature spell is countered this way, put that card onto the battlefield under your control instead of into its owner's graveyard.
+        this.addAbility(new SimpleStaticAbility(Zone.STACK, new DesertionReplacementEffect()));
     }
 
     public Desertion(final Desertion card) {
@@ -39,38 +45,48 @@ public final class Desertion extends CardImpl {
     }
 }
 
-class DesertionEffect extends OneShotEffect {
+class DesertionReplacementEffect extends ReplacementEffectImpl {
 
-    public DesertionEffect() {
-        super(Outcome.Detriment);
-        this.staticText = "Counter target spell. If an artifact or creature spell is countered this way, put that card onto the battlefield under your control instead of into its owner's graveyard";
+    DesertionReplacementEffect() {
+        super(Duration.WhileOnStack, Outcome.PutCardInPlay);
+        staticText = "If an artifact or creature spell is countered this way, put that card onto the battlefield under your control instead of into its owner's graveyard";
     }
 
-    public DesertionEffect(final DesertionEffect effect) {
+    private DesertionReplacementEffect(final DesertionReplacementEffect effect) {
         super(effect);
     }
 
     @Override
-    public DesertionEffect copy() {
-        return new DesertionEffect(this);
+    public DesertionReplacementEffect copy() {
+        return new DesertionReplacementEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Spell targetSpell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
-            if (targetSpell != null) {
-                if (game.getStack().counter(targetSpell.getId(), source.getSourceId(), game)) {
-                    game.applyEffects();
-                    if (targetSpell.isArtifact() || targetSpell.isCreature()) {
-                        Card card = game.getCard(targetSpell.getSourceId());
-                        controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                    }
-                }
-            }
-            return true;
-        }
+        return true;
+    }
+
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        ZoneChangeEvent zce = (ZoneChangeEvent) event;
+        zce.setToZone(Zone.BATTLEFIELD);
+        zce.setPlayerId(source.getControllerId());
         return false;
+    }
+
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {        
+        if (!event.getSourceId().equals(source.getSourceId())               
+                || !(((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD)) {
+            return false;
+        }
+        MageObject mageObject =  game.getObject(event.getTargetId());
+        return mageObject != null 
+                && (mageObject.isArtifact() || mageObject.isCreature());
     }
 }

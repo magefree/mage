@@ -55,8 +55,8 @@ public class TappedForManaFromMultipleEffects extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nyxbloom Ancient");
         // TODO: TAPPED_FOR_MANA replace event called from checkTappedForManaReplacement and start to choose replace events (is that problem?)
         // use case (that test): comment one 1-2 choices to fail in 1-2 calls
-        setChoice(playerA, "Nyxbloom Ancient: If you tap a permanent"); // getPlayable... checkTappedForManaReplacement... chooseReplacementEffect
-        setChoice(playerA, "Nyxbloom Ancient: If you tap a permanent"); // playManaAbility... resolve... checkToFirePossibleEvents... chooseReplacementEffect
+        setChoice(playerA, "Nyxbloom Ancient"); // getPlayable... checkTappedForManaReplacement... chooseReplacementEffect
+        setChoice(playerA, "Nyxbloom Ancient"); // playManaAbility... resolve... checkToFirePossibleEvents... chooseReplacementEffect
 
         // cast chloro
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Chlorophant");

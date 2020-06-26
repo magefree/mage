@@ -8,7 +8,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetSpell;
@@ -44,8 +43,7 @@ class DidntSayPleaseEffect extends OneShotEffect {
 
     DidntSayPleaseEffect() {
         super(Outcome.Benefit);
-        staticText = "Counter target spell. Its controller puts " +
-                "the top three cards of their library into their graveyard.";
+        staticText = "Counter target spell. Its controller mills three cards.";
     }
 
     private DidntSayPleaseEffect(final DidntSayPleaseEffect effect) {
@@ -63,7 +61,7 @@ class DidntSayPleaseEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        player.moveCards(player.getLibrary().getTopCards(game, 3), Zone.GRAVEYARD, source, game);
+        player.millCards(3, source, game);
         return effect.apply(game, source);
     }
 }

@@ -23,7 +23,7 @@ public final class ThrashingMossdog extends CardImpl {
     public ThrashingMossdog (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
         this.subtype.add(SubType.PLANT);
-        this.subtype.add(SubType.HOUND);
+        this.subtype.add(SubType.DOG);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

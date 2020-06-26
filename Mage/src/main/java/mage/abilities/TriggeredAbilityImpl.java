@@ -171,21 +171,24 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                         }
                     }
                 }
+                if (isLeavesTheBattlefieldTrigger()) {
+                    source = zce.getTarget();
+                }
+                break;
             case DESTROYED_PERMANENT:
                 if (isLeavesTheBattlefieldTrigger()) {
-                    if (event.getType() == EventType.DESTROYED_PERMANENT) {
-                        source = game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD);
-                    } else if (((ZoneChangeEvent) event).getTarget() != null) {
-                        source = ((ZoneChangeEvent) event).getTarget();
-                    } else {
-                        source = game.getLastKnownInformation(getSourceId(), event.getZone());
-                    }
+                    source = game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD);
                 }
+                break;
             case PHASED_OUT:
             case PHASED_IN:
+                if (isLeavesTheBattlefieldTrigger()) {
+                    source = game.getLastKnownInformation(getSourceId(), event.getZone());
+                }
                 if (this.zone == Zone.ALL || game.getLastKnownInformation(getSourceId(), zone) != null) {
                     return this.hasSourceObjectAbility(game, source, event);
                 }
+                break;
         }
         return super.isInUseableZone(game, source, event);
     }

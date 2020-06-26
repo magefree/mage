@@ -20,7 +20,7 @@ public final class UnderworldRageHound extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
 
         this.subtype.add(SubType.ELEMENTAL);
-        this.subtype.add(SubType.HOUND);
+        this.subtype.add(SubType.DOG);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 

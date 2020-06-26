@@ -93,6 +93,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public static final String CHECK_COMMAND_PERMANENT_COUNT = "PERMANENT_COUNT";
     public static final String CHECK_COMMAND_PERMANENT_COUNTERS = "PERMANENT_COUNTERS";
     public static final String CHECK_COMMAND_EXILE_COUNT = "EXILE_COUNT";
+    public static final String CHECK_COMMAND_GRAVEYARD_COUNT = "GRAVEYARD_COUNT";
     public static final String CHECK_COMMAND_HAND_COUNT = "HAND_COUNT";
     public static final String CHECK_COMMAND_HAND_CARD_COUNT = "HAND_CARD_COUNT";
     public static final String CHECK_COMMAND_COMMAND_CARD_COUNT = "COMMAND_CARD_COUNT";
@@ -276,7 +277,6 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
                         + " (found actions after stop on " + maxTurn + " / " + maxPhase + ")",
                 (maxTurn > this.stopOnTurn) || (maxTurn == this.stopOnTurn && maxPhase > this.stopAtStep.getIndex()));
 
-
         for (Player player : currentGame.getPlayers().values()) {
             TestPlayer testPlayer = (TestPlayer) player;
             currentGame.cheat(player.getId(), getCommands(testPlayer));
@@ -325,7 +325,6 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     // check commands
-
     private void check(String checkName, int turnNum, PhaseStep step, TestPlayer player, String command, String... params) {
         String res = CHECK_PREFIX + command;
         for (String param : params) {
@@ -380,6 +379,11 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         check(checkName, turnNum, step, player, CHECK_COMMAND_EXILE_COUNT, permanentName, count.toString());
     }
 
+    public void checkGraveyardCount(String checkName, int turnNum, PhaseStep step, TestPlayer player, String permanentName, Integer count) {
+        //Assert.assertNotEquals("", permanentName);
+        check(checkName, turnNum, step, player, CHECK_COMMAND_GRAVEYARD_COUNT, permanentName, count.toString());
+    }
+
     public void checkHandCount(String checkName, int turnNum, PhaseStep step, TestPlayer player, Integer count) {
         check(checkName, turnNum, step, player, CHECK_COMMAND_HAND_COUNT, count.toString());
     }
@@ -422,7 +426,6 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     // show commands
-
     private void show(String showName, int turnNum, PhaseStep step, TestPlayer player, String command, String... params) {
         String res = "show:" + command;
         for (String param : params) {
@@ -455,11 +458,11 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         show(showName, turnNum, step, player, SHOW_COMMAND_EXILE);
     }
 
-    public void showAvaileableAbilities(String showName, int turnNum, PhaseStep step, TestPlayer player) {
+    public void showAvailableAbilities(String showName, int turnNum, PhaseStep step, TestPlayer player) {
         show(showName, turnNum, step, player, SHOW_COMMAND_AVAILABLE_ABILITIES);
     }
 
-    public void showAvaileableMana(String showName, int turnNum, PhaseStep step, TestPlayer player) {
+    public void showAvailableMana(String showName, int turnNum, PhaseStep step, TestPlayer player) {
         show(showName, turnNum, step, player, SHOW_COMMAND_AVAILABLE_MANA);
     }
 
@@ -490,8 +493,9 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     /**
-     * Disable auto-payment from mana pool, you must manually fill pool by activateManaAbility and unlock color by setChoice
-     * Use it for pay color order testing (e.g. simulate user clicks on mana pool to pay)
+     * Disable auto-payment from mana pool, you must manually fill pool by
+     * activateManaAbility and unlock color by setChoice Use it for pay color
+     * order testing (e.g. simulate user clicks on mana pool to pay)
      *
      * @param player
      */
@@ -807,8 +811,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param player
      * @param cardName
      * @param ability
-     * @param mustHave true if creature should contain ability, false if it should
-     *                 NOT contain it instead
+     * @param mustHave true if creature should contain ability, false if it
+     *                 should NOT contain it instead
      * @param count    number of permanents with that ability
      * @throws AssertionError
      */
@@ -985,7 +989,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
         Assert.assertNotNull("There is no such permanent on the battlefield, cardName=" + cardName, found);
 
-        Assert.assertTrue("(Battlefield) card type not found (" + cardName + ':' + type + ')', (found.getCardType().contains(type) == mustHave));
+        Assert.assertTrue("(Battlefield) card type " + (mustHave ? "not " : "")
+                + "found (" + cardName + ':' + type + ')', (found.getCardType().contains(type) == mustHave));
 
     }
 
@@ -1176,7 +1181,6 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         Assert.assertEquals("(Hand) Card counts for card " + cardName + " for " + player.getName() + " are not equal ", count, actual);
     }
 
-
     public void assertManaPool(Player player, ManaType color, int amount) {
         ManaPool manaPool = currentGame.getPlayer(player.getId()).getManaPool();
         switch (color) {
@@ -1347,6 +1351,12 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         Assert.assertEquals("(Targets of " + player.getName() + ") Count are not equal (found " + player.getTargets() + ")", count, player.getTargets().size());
     }
 
+    /**
+     * Raise error on any unused commands, choices or targets
+     * If you want to test that ability can't be activated then use call checkPlayableAbility()
+     *
+     * @throws AssertionError
+     */
     public void assertAllCommandsUsed() throws AssertionError {
         for (Player player : currentGame.getPlayers().values()) {
             TestPlayer testPlayer = (TestPlayer) player;
@@ -1420,8 +1430,9 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     /**
-     * AI play one PRIORITY with multi game simulations (calcs and play ONE best action, can be called with stack)
-     * All choices must be made by AI (e.g. strict mode possible)
+     * AI play one PRIORITY with multi game simulations (calcs and play ONE best
+     * action, can be called with stack) All choices must be made by AI (e.g.
+     * strict mode possible)
      */
     public void aiPlayPriority(int turnNum, PhaseStep step, TestPlayer player) {
         assertAiPlayAndGameCompatible(player);
@@ -1429,8 +1440,9 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     /**
-     * AI play STEP to the end with multi game simulations (calcs and play best actions until step ends, can be called in the middle of the step)
-     * All choices must be made by AI (e.g. strict mode possible)
+     * AI play STEP to the end with multi game simulations (calcs and play best
+     * actions until step ends, can be called in the middle of the step) All
+     * choices must be made by AI (e.g. strict mode possible)
      */
     public void aiPlayStep(int turnNum, PhaseStep step, TestPlayer player) {
         assertAiPlayAndGameCompatible(player);
@@ -1488,7 +1500,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param player
      * @param cardName
      * @param targetName for modes you can add "mode=3" before target name,
-     *                   multiple targets can be seperated by ^, not target marks as TestPlayer.NO_TARGET
+     *                   multiple targets can be seperated by ^, not target marks as
+     *                   TestPlayer.NO_TARGET
      */
     public void castSpell(int turnNum, PhaseStep step, TestPlayer player, String cardName, String targetName) {
         //Assert.assertNotEquals("", cardName);
@@ -1594,6 +1607,14 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         player.addAction(turnNum, step, ACTIVATE_ABILITY + ability + "$target=" + String.join("^", targetNames));
     }
 
+    /**
+     * @param turnNum
+     * @param step
+     * @param player
+     * @param ability
+     * @param targetName   use NO_TARGET if there is no target to set
+     * @param spellOnStack
+     */
     public void activateAbility(int turnNum, PhaseStep step, TestPlayer player, String ability, String targetName, String spellOnStack) {
         // TODO: it's uses computerPlayer to execute, only ability target will work, but choices and targets commands aren't
         this.activateAbility(turnNum, step, player, ability, targetName, spellOnStack, StackClause.WHILE_ON_STACK);
@@ -1714,7 +1735,13 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      */
     // TODO: mode options doesn't work here (see BrutalExpulsionTest)
     public void addTarget(TestPlayer player, String target) {
-        player.addTarget(target);
+        addTarget(player, target, 1);
+    }
+
+    public void addTarget(TestPlayer player, String target, int timesToChoose) {
+        for (int i = 0; i < timesToChoose; i++) {
+            player.addTarget(target);
+        }
     }
 
     /**
@@ -1724,12 +1751,19 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param targetPlayer
      */
     public void addTarget(TestPlayer player, TestPlayer targetPlayer) {
-        player.addTarget("targetPlayer=" + targetPlayer.getName());
+        addTarget(player, targetPlayer, 1);
+    }
+
+    public void addTarget(TestPlayer player, TestPlayer targetPlayer, int timesToChoose) {
+        for (int i = 0; i < timesToChoose; i++) {
+            player.addTarget("targetPlayer=" + targetPlayer.getName());
+        }
     }
 
     /**
      * @param player
-     * @param target use TestPlayer.TARGET_SKIP to 0 targets selects or to stop "up two xxx" selection
+     * @param target use TestPlayer.TARGET_SKIP to 0 targets selects or to stop
+     *               "up two xxx" selection
      * @param amount
      */
     public void addTargetAmount(TestPlayer player, String target, int amount) {
@@ -1743,7 +1777,6 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public void addTargetAmount(TestPlayer player, Player targetPlayer, int amount) {
         addTargetAmount(player, "targetPlayer=" + targetPlayer.getName(), amount);
     }
-
 
     public void addTargetAmount(TestPlayer player, String target) {
         Assert.assertTrue("Only skip command allows here", target.equals(TestPlayer.TARGET_SKIP));
@@ -1779,10 +1812,18 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     public void waitStackResolved(int turnNum, PhaseStep step) {
-        if (playerA != null) waitStackResolved(turnNum, step, playerA);
-        if (playerB != null) waitStackResolved(turnNum, step, playerB);
-        if (playerC != null) waitStackResolved(turnNum, step, playerC);
-        if (playerD != null) waitStackResolved(turnNum, step, playerD);
+        if (playerA != null) {
+            waitStackResolved(turnNum, step, playerA);
+        }
+        if (playerB != null) {
+            waitStackResolved(turnNum, step, playerB);
+        }
+        if (playerC != null) {
+            waitStackResolved(turnNum, step, playerC);
+        }
+        if (playerD != null) {
+            waitStackResolved(turnNum, step, playerD);
+        }
     }
 
     private void assertAliaseSupportInActivateCommand(String targetName, boolean methodSupportAliases) {
@@ -1797,7 +1838,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     private boolean isObjectHaveTargetNameOrAlias(Player player, MageObject object, String nameOrAlias) {
         TestPlayer testPlayer = (TestPlayer) player;
         if (player != null) { // TODO: remove null check and replace all null-player calls in tests by player
-            return testPlayer.isObjectHaveTargetNameOrAlias(object, nameOrAlias);
+            return testPlayer.hasObjectTargetNameOrAlias(object, nameOrAlias);
         } else {
             return object.getName().equals(nameOrAlias);
         }

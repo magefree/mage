@@ -1,7 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -18,8 +17,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 
+import java.util.UUID;
+
 /**
- *
  * @author Loki
  */
 public final class Grindclock extends CardImpl {
@@ -62,7 +62,7 @@ class GrindclockEffect extends OneShotEffect {
             int amount = sourceObject.getCounters(game).getCount(CounterType.CHARGE);
             Player targetPlayer = game.getPlayer(source.getFirstTarget());
             if (targetPlayer != null) {
-                targetPlayer.moveCards(targetPlayer.getLibrary().getTopCards(game, amount), Zone.GRAVEYARD, source, game);
+                targetPlayer.millCards(amount, source, game);
                 return true;
             }
         }

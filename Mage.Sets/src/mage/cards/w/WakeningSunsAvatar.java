@@ -4,7 +4,7 @@ package mage.cards.w;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.common.CastFromHandSourceCondition;
+import mage.abilities.condition.common.CastFromHandSourcePermanentCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
@@ -38,7 +38,7 @@ public final class WakeningSunsAvatar extends CardImpl {
         // When Wakening Sun's Avatar enters the battlefield, if you cast it from you hand, destroy all non-Dinosaur creatures.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DestroyAllEffect(filter), false),
-                CastFromHandSourceCondition.instance,
+                CastFromHandSourcePermanentCondition.instance,
                 "When {this} enters the battlefield, if you cast it from your hand, destroy all non-Dinosaur creatures."),
                 new CastFromHandWatcher());
     }

@@ -11,6 +11,9 @@ import mage.constants.SubType;
  */
 public final class PurphorossInterventionToken extends TokenImpl {
 
+    public PurphorossInterventionToken() {
+        this(0);
+    }
     public PurphorossInterventionToken(int power) {
         super("Elemental", "X/1 red Elemental creature token with trample and haste");
         this.cardType.add(CardType.CREATURE);

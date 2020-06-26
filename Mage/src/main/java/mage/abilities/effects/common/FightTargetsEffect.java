@@ -77,7 +77,7 @@ public class FightTargetsEffect extends OneShotEffect {
             return staticText;
 
         }
-        return "Target " + mode
+        return "target " + mode
                 .getTargets().get(0).getTargetName() + " fights another target " + mode
                 .getTargets().get(1).getTargetName();
     }

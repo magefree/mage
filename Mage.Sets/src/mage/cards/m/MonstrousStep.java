@@ -1,48 +1,54 @@
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.effects.RequirementEffect;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AnotherTargetPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.BlockedAttackerWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author drowinternet
  */
 public final class MonstrousStep extends CardImpl {
 
-    private static final FilterCreaturePermanent filterMustBlock = new FilterCreaturePermanent("Target creature that must block");
-    private static final FilterCreaturePermanent filterToBeBlocked = new FilterCreaturePermanent("Creature that will be block");
+    private static final FilterPermanent filter
+            = new FilterCreaturePermanent("another creature (must block this turn)");
+
+    static {
+        filter.add(new AnotherTargetPredicate(2));
+    }
 
     public MonstrousStep(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{G}");
 
-
-        // Target creature gets +7/+7 until end of turn.
-        this.getSpellAbility().addEffect(new BoostTargetEffect(7,7, Duration.EndOfTurn)
-                .setText("Target creature gets +7/+7 until end of turn."));
-
-        //Up to one target creature blocks it this turn if able.
+        // Target creature gets +7/+7 until end of turn. Up to one target creature blocks it this turn if able.
+        this.getSpellAbility().addEffect(new BoostTargetEffect(7, 7));
         this.getSpellAbility().addEffect(new MonstrousStepEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filterMustBlock));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filterToBeBlocked));
         this.getSpellAbility().addWatcher(new BlockedAttackerWatcher());
 
+        TargetPermanent target = new TargetCreaturePermanent();
+        target.setTargetTag(1);
+        this.getSpellAbility().addTarget(target);
+        target = new TargetPermanent(0, 1, filter, false);
+        target.setTargetTag(2);
+        this.getSpellAbility().addTarget(target);
 
         // Cycling {2}
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
-
     }
 
     private MonstrousStep(final MonstrousStep card) {
@@ -57,40 +63,23 @@ public final class MonstrousStep extends CardImpl {
 
 class MonstrousStepEffect extends RequirementEffect {
 
-    public MonstrousStepEffect() {
-        this(Duration.EndOfTurn);
+    MonstrousStepEffect() {
+        super(Duration.EndOfTurn);
+        staticText = "Up to one other target creature blocks it this turn if able";
     }
 
-    public MonstrousStepEffect(Duration duration) {
-        super(duration);
-        staticText = "Up to one target creature blocks it this turn if able.";
-    }
-
-    public MonstrousStepEffect(final MonstrousStepEffect effect) {
+    private MonstrousStepEffect(final MonstrousStepEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getId().equals(source.getTargets().get(0).getFirstTarget())) {
-            Permanent blocker = game.getPermanent(source.getTargets().get(0).getFirstTarget());
-            if (blocker != null
-                    && blocker.canBlock(source.getTargets().get(1).getFirstTarget(), game)) {
-                Permanent attacker = game.getPermanent(source.getTargets().get(1).getFirstTarget());
-                if (attacker != null) {
-                    BlockedAttackerWatcher blockedAttackerWatcher = game.getState().getWatcher(BlockedAttackerWatcher.class);
-                    if (blockedAttackerWatcher != null
-                            && blockedAttackerWatcher.creatureHasBlockedAttacker(attacker, blocker, game)) {
-                        // has already blocked this turn, so no need to do again
-                        return false;
-                    }
-                    return true;
-                } else {
-                    discard();
-                }
-            }
-        }
-        return false;
+        BlockedAttackerWatcher watcher = game.getState().getWatcher(BlockedAttackerWatcher.class);
+        return permanent != null
+                && watcher != null
+                && !watcher.creatureHasBlockedAttacker(game.getPermanent(source.getFirstTarget()), permanent, game)
+                && permanent.getId().equals(source.getTargets().get(1).getFirstTarget())
+                && permanent.canBlock(source.getFirstTarget(), game);
     }
 
     @Override
@@ -105,12 +94,11 @@ class MonstrousStepEffect extends RequirementEffect {
 
     @Override
     public UUID mustBlockAttacker(Ability source, Game game) {
-        return source.getTargets().get(1).getFirstTarget();
+        return source.getFirstTarget();
     }
 
     @Override
     public MonstrousStepEffect copy() {
         return new MonstrousStepEffect(this);
     }
-
 }

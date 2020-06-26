@@ -1,5 +1,7 @@
 package mage.game.combat;
 
+import java.io.Serializable;
+import java.util.*;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.RequirementEffect;
@@ -32,9 +34,6 @@ import mage.util.CardUtil;
 import mage.util.Copyable;
 import mage.util.trace.TraceUtil;
 import org.apache.log4j.Logger;
-
-import java.io.Serializable;
-import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -306,7 +305,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                 || getAttackers().size() <= 1) {
             return;
         }
-        boolean canBand = attacker.getAbilities().containsKey(BandingAbility.getInstance().getId());
+        boolean canBand = attacker.hasAbility(BandingAbility.getInstance(), game);
         List<Ability> bandsWithOther = new ArrayList<>();
         for (Ability ability : attacker.getAbilities()) {
             if (ability.getClass().equals(BandsWithOtherAbility.class)) {
@@ -346,8 +345,8 @@ public class Combat implements Serializable, Copyable<Combat> {
             if (game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_ATTACKERS, attackingPlayerId, attackingPlayerId))
                     || (!canBand && !canBandWithOther)
                     || !player.chooseUse(Outcome.Benefit,
-                    "Do you wish to " + (isBanded ? "band " + attacker.getLogName()
-                            + " with another " : "form a band with " + attacker.getLogName() + " and an ")
+                            "Do you wish to " + (isBanded ? "band " + attacker.getLogName()
+                                    + " with another " : "form a band with " + attacker.getLogName() + " and an ")
                             + "attacking creature?", null, game)) {
                 break;
             }
@@ -390,7 +389,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                         permanent.addBandedCard(creatureId);
                         attacker.addBandedCard(targetId);
                         if (canBand) {
-                            if (!permanent.getAbilities().containsKey(BandingAbility.getInstance().getId())) {
+                            if (!permanent.hasAbility(BandingAbility.getInstance(), game)) {
                                 filter.add(new AbilityPredicate(BandingAbility.class));
                                 canBandWithOther = false;
                             }
@@ -412,7 +411,8 @@ public class Combat implements Serializable, Copyable<Combat> {
         if (!isBanded) {
             return;
         }
-        StringBuilder sb = new StringBuilder(player.getLogName()).append(" formed a band with ").append((attacker.getBandedCards().size() + 1) + " creatures: ");
+        StringBuilder sb = new StringBuilder(player.getLogName()).append(" formed a band with ")
+                .append(attacker.getBandedCards().size()).append(1).append(" creatures: ");
         sb.append(attacker.getLogName());
         for (UUID id : attacker.getBandedCards()) {
             sb.append(", ");
@@ -433,7 +433,8 @@ public class Combat implements Serializable, Copyable<Combat> {
             // check if a creature has to attack
             for (Map.Entry<RequirementEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRequirementEffects(creature, false, game).entrySet()) {
                 RequirementEffect effect = entry.getKey();
-                if (effect.mustAttack(game)) {
+                if (effect.mustAttack(game)
+                        && checkAttackRestrictions(player, game)) { // needed for Goad Effect
                     mustAttack = true;
                     for (Ability ability : entry.getValue()) {
                         UUID defenderId = effect.mustAttackDefender(ability, game);
@@ -564,7 +565,7 @@ public class Combat implements Serializable, Copyable<Combat> {
      * Handle the blocker selection process
      *
      * @param blockController player that controls how to block, if null the
-     *                        defender is the controller
+     * defender is the controller
      * @param game
      */
     public void selectBlockers(Player blockController, Game game) {
@@ -743,15 +744,15 @@ public class Combat implements Serializable, Copyable<Combat> {
     }
 
     /**
-     * 509.1c The defending player checks each creature they control to
-     * see whether it's affected by any requirements (effects that say a
-     * creature must block, or that it must block if some condition is met). If
-     * the number of requirements that are being obeyed is fewer than the
-     * maximum possible number of requirements that could be obeyed without
-     * disobeying any restrictions, the declaration of blockers is illegal. If a
-     * creature can't block unless a player pays a cost, that player is not
-     * required to pay that cost, even if blocking with that creature would
-     * increase the number of requirements being obeyed.
+     * 509.1c The defending player checks each creature they control to see
+     * whether it's affected by any requirements (effects that say a creature
+     * must block, or that it must block if some condition is met). If the
+     * number of requirements that are being obeyed is fewer than the maximum
+     * possible number of requirements that could be obeyed without disobeying
+     * any restrictions, the declaration of blockers is illegal. If a creature
+     * can't block unless a player pays a cost, that player is not required to
+     * pay that cost, even if blocking with that creature would increase the
+     * number of requirements being obeyed.
      * <p>
      * <p>
      * Example: A player controls one creature that "blocks if able" and another
@@ -1289,7 +1290,8 @@ public class Combat implements Serializable, Copyable<Combat> {
         if (attacker != null) {
             if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARE_ATTACKER, defenderId, creatureId, playerId))) {
                 if (addAttackerToCombat(creatureId, defenderId, game)) {
-                    if (!attacker.getAbilities().containsKey(VigilanceAbility.getInstance().getId()) && !attacker.getAbilities().containsKey(JohanVigilanceAbility.getInstance().getId())) {
+                    if (!attacker.hasAbility(VigilanceAbility.getInstance(), game)
+                            && !attacker.hasAbility(JohanVigilanceAbility.getInstance(), game)) {
                         if (!attacker.isTapped()) {
                             attacker.setTapped(true);
                             attackersTappedByAttack.add(attacker.getId());
@@ -1377,7 +1379,7 @@ public class Combat implements Serializable, Copyable<Combat> {
      * @param playerId
      * @param game
      * @param solveBanding check whether also add creatures banded with
-     *                     attackerId
+     * attackerId
      */
     public void addBlockingGroup(UUID blockerId, UUID attackerId, UUID playerId, Game game, boolean solveBanding) {
         Permanent blocker = game.getPermanent(blockerId);

@@ -9,13 +9,12 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author North
  */
 public class CardsInControllerGraveyardCount implements DynamicValue {
 
-    private FilterCard filter;
-    private Integer amount;
+    private final FilterCard filter;
+    private final Integer amount;
 
     public CardsInControllerGraveyardCount() {
         this(StaticFilters.FILTER_CARD, 1);
@@ -39,7 +38,9 @@ public class CardsInControllerGraveyardCount implements DynamicValue {
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         Player player = game.getPlayer(sourceAbility.getControllerId());
         if (player != null) {
-            return amount * player.getGraveyard().count(filter, game);
+            return amount * player.getGraveyard().count(
+                    filter, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game
+            );
         }
         return 0;
     }

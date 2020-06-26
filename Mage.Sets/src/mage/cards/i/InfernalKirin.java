@@ -1,20 +1,14 @@
-
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.cards.Cards;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.stack.Spell;
@@ -22,8 +16,9 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPlayer;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class InfernalKirin extends CardImpl {
@@ -39,14 +34,14 @@ public final class InfernalKirin extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+
         // Whenever you cast a Spirit or Arcane spell, target player reveals their hand and discards all cards with that spell's converted mana cost.
         Ability ability = new SpellCastControllerTriggeredAbility(Zone.BATTLEFIELD, new InfernalKirinEffect(), StaticFilters.SPIRIT_OR_ARCANE_CARD, false, true);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
-
     }
 
-    public InfernalKirin(final InfernalKirin card) {
+    private InfernalKirin(final InfernalKirin card) {
         super(card);
     }
 
@@ -58,12 +53,12 @@ public final class InfernalKirin extends CardImpl {
 
 class InfernalKirinEffect extends OneShotEffect {
 
-    public InfernalKirinEffect() {
+    InfernalKirinEffect() {
         super(Outcome.Detriment);
         this.staticText = "target player reveals their hand and discards all cards with that spell's converted mana cost";
     }
 
-    public InfernalKirinEffect(final InfernalKirinEffect effect) {
+    private InfernalKirinEffect(final InfernalKirinEffect effect) {
         super(effect);
     }
 
@@ -75,27 +70,26 @@ class InfernalKirinEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Spell spell = game.getSpellOrLKIStack(this.getTargetPointer().getFirst(game, source));
-        if (spell != null) {
-            int cmc = spell.getConvertedManaCost();
-            Player targetPlayer = null;
-            for (Target target : source.getTargets()) {
-                if (target instanceof TargetPlayer) {
-                    targetPlayer = game.getPlayer(target.getFirstTarget());
-                }
-            }
-            if (targetPlayer != null) {
-                if (!targetPlayer.getHand().isEmpty()) {
-                    targetPlayer.revealCards("Infernal Kirin", targetPlayer.getHand(), game);
-                    for (UUID uuid : targetPlayer.getHand().copy()) {
-                        Card card = game.getCard(uuid);
-                        if (card != null && card.getConvertedManaCost() == cmc) {
-                            targetPlayer.discard(card, source, game);
-                        }
-                    }
-                }
-                return true;
+        if (spell == null) {
+            return false;
+        }
+        int cmc = spell.getConvertedManaCost();
+        Player targetPlayer = null;
+        for (Target target : source.getTargets()) {
+            if (target instanceof TargetPlayer) {
+                targetPlayer = game.getPlayer(target.getFirstTarget());
             }
         }
-        return false;
+        if (targetPlayer == null) {
+            return false;
+        }
+        if (targetPlayer.getHand().isEmpty()) {
+            return true;
+        }
+        targetPlayer.revealCards(source, targetPlayer.getHand(), game);
+        Cards cards = targetPlayer.getHand().copy();
+        cards.removeIf(uuid -> game.getCard(uuid).getConvertedManaCost() != cmc);
+        targetPlayer.discard(cards, source, game);
+        return true;
     }
 }

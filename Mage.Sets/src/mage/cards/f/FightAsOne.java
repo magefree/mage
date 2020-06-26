@@ -33,8 +33,8 @@ public final class FightAsOne extends CardImpl {
 
         // Choose one or both—
         this.getSpellAbility().getModes().setMinModes(1);
-        this.getSpellAbility().getModes().setMinModes(2);
-        
+        this.getSpellAbility().getModes().setMaxModes(2);
+
         // • Target Human creature you control gets +1/+1 and gains indestructible until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(1, 1)
                 .setText("Target Human creature you control gets +1/+1"));

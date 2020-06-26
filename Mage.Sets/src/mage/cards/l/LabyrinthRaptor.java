@@ -16,7 +16,7 @@ import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.filter.predicate.permanent.BlockedByIdPredicate;
+import mage.filter.predicate.permanent.BlockingAttackerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -29,7 +29,7 @@ import java.util.UUID;
  */
 public final class LabyrinthRaptor extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you control with menace");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature you control with menace");
 
     static {
         filter.add(new AbilityPredicate(MenaceAbility.class));
@@ -60,7 +60,7 @@ public final class LabyrinthRaptor extends CardImpl {
 
         // {B}{R}: Creatures you control with menace get +1/+0 until end of turn.
         this.addAbility(new SimpleActivatedAbility(new BoostAllEffect(
-                1, 0, Duration.WhileOnBattlefield, filter2, false
+                1, 0, Duration.EndOfTurn, filter2, false
         ), new ManaCostsImpl("{B}{R}")));
     }
 
@@ -101,7 +101,7 @@ class LabyrinthRaptorEffect extends OneShotEffect {
             return false;
         }
         FilterPermanent filterPermanent = new FilterPermanent("creature blocking " + permanent.getIdName());
-        filterPermanent.add(new BlockedByIdPredicate(permanent.getId()));
+        filterPermanent.add(new BlockingAttackerIdPredicate(permanent.getId()));
         Effect effect = new SacrificeEffect(filterPermanent, 1, "");
         effect.setTargetPointer(new FixedTarget(player.getId(), game));
         return effect.apply(game, source);

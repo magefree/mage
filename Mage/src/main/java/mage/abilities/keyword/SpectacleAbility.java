@@ -48,7 +48,7 @@ public class SpectacleAbility extends SpellAbility {
     public ActivationStatus canActivate(UUID playerId, Game game) {
         if (OpponentsLostLifeCount.instance.calculate(game, playerId) > 0
                 && super.canActivate(playerId, game).canActivate()) {
-            return ActivationStatus.getTrue();
+            return ActivationStatus.getTrue(this, game);
         }
         return ActivationStatus.getFalse();
     }

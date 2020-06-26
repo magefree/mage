@@ -10,9 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -26,19 +24,13 @@ import java.util.UUID;
  */
 public final class SavageSwipe extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent("creature you don't control");
-
-    static {
-        filter.add(TargetController.NOT_YOU.getControllerPredicate());
-    }
-
     public SavageSwipe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{G}");
 
         // Target creature you control gets +2/+2 until end of turn if its power is 2. Then it fights target creature you don't control.
         this.getSpellAbility().addEffect(new SavageSwipeEffect());
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
     }
 
     private SavageSwipe(final SavageSwipe card) {
@@ -78,7 +70,7 @@ class SavageSwipeEffect extends OneShotEffect {
             ContinuousEffect effect = new BoostTargetEffect(2, 2, Duration.EndOfTurn);
             effect.setTargetPointer(new FixedTarget(permanent, game));
             game.addEffect(effect, source);
-            game.applyEffects();
+            game.getState().processAction(game);
         }
         return new FightTargetsEffect().apply(game, source);
     }

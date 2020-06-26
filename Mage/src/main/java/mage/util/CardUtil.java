@@ -2,6 +2,7 @@ package mage.util;
 
 import mage.MageObject;
 import mage.Mana;
+import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.VariableCost;
@@ -10,13 +11,15 @@ import mage.cards.Card;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.EmptyNames;
 import mage.constants.ManaType;
+import mage.constants.SpellAbilityType;
 import mage.filter.Filter;
+import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.CardState;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
+import mage.game.stack.Spell;
 import mage.util.functions.CopyTokenFunction;
-import org.junit.Assert;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -658,6 +661,14 @@ public final class CardUtil {
         return object1 != null && object2 != null && haveSameNames(object1.getName(), object2.getName());
     }
 
+    public static boolean haveSameNames(MageObject object, String needName, Game game) {
+        return containsName(object, needName, game);
+    }
+
+    public static boolean containsName(MageObject object, String name, Game game) {
+        return new NamePredicate(name).apply(object, game);
+    }
+
     public static boolean haveEmptyName(String name) {
         return name == null || name.isEmpty() || name.equals(EmptyNames.FACE_DOWN_CREATURE.toString()) || name.equals(EmptyNames.FACE_DOWN_TOKEN.toString());
     }
@@ -745,6 +756,48 @@ public final class CardUtil {
             case COLORLESS:
             default:
                 throw new IllegalArgumentException("Wrong mana type " + manaType);
+        }
+    }
+
+    public static String getBoostCountAsStr(int power, int toughness) {
+        // sign fix for zero values
+        // -1/+0 must be -1/-0
+        // +0/-1 must be -0/-1
+        String signedP = String.format("%1$+d", power);
+        String signedT = String.format("%1$+d", toughness);
+        if (signedP.equals("+0") && signedT.startsWith("-")) signedP = "-0";
+        if (signedT.equals("+0") && signedP.startsWith("-")) signedT = "-0";
+
+        return signedP + "/" + signedT;
+    }
+
+    public static boolean isSpliceAbility(Ability ability, Game game) {
+        if (ability instanceof SpellAbility) {
+            return ((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.SPLICE;
+        }
+        return false;
+    }
+
+    public static boolean isFusedPartAbility(Ability ability, Game game) {
+        // TODO: is works fine with copies of spells on stack?
+        if (ability instanceof SpellAbility) {
+            Spell mainSpell = game.getSpell(ability.getId());
+            if (mainSpell == null) {
+                return true;
+            } else {
+                SpellAbility mainSpellAbility = mainSpell.getSpellAbility();
+                return mainSpellAbility.getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED
+                        && !ability.equals(mainSpellAbility);
+            }
+        }
+        return false;
+    }
+
+    public static Abilities<Ability> getAbilities(MageObject object, Game game) {
+        if (object instanceof Card) {
+            return ((Card) object).getAbilities(game);
+        } else {
+            return object.getAbilities();
         }
     }
 }

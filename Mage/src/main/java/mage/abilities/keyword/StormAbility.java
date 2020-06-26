@@ -16,7 +16,6 @@ import mage.watchers.common.CastSpellLastTurnWatcher;
 import org.apache.log4j.Logger;
 
 /**
- *
  * @author Plopman
  */
 public class StormAbility extends TriggeredAbilityImpl {
@@ -83,13 +82,11 @@ class StormEffect extends OneShotEffect {
                         if (!game.isSimulation()) {
                             game.informPlayers("Storm: " + spell.getLogName() + " will be copied " + stormCount + " time" + (stormCount > 1 ? "s" : ""));
                         }
-                        for (int i = 0; i < stormCount; i++) {
-                            spell.createCopyOnStack(game, source, source.getControllerId(), true);
-                        }
+                        spell.createCopyOnStack(game, source, source.getControllerId(), true, stormCount);
                     }
                 }
             } else {
-                Logger.getLogger(StormEffect.class).fatal("CastSpellLastTurnWatcher not found. game = " +game.getGameType().toString());
+                Logger.getLogger(StormEffect.class).fatal("CastSpellLastTurnWatcher not found. game = " + game.getGameType().toString());
             }
             return true;
         }

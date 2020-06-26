@@ -1,16 +1,16 @@
 package mage.filter;
 
-import java.util.ArrayList;
-import java.util.List;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
+ * @param <E>
  * @author BetaSteward_at_googlemail.com
  * @author North
- * @param <E>
  */
 public abstract class FilterImpl<E> implements Filter<E> {
 
@@ -78,5 +78,4 @@ public abstract class FilterImpl<E> implements Filter<E> {
     public List<Predicate<? super E>> getPredicates() {
         return predicates;
     }
-
 }

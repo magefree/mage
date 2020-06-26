@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -34,14 +33,12 @@ public final class Showstopper extends CardImpl {
     public Showstopper (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}{R}");
 
-
-
         // Until end of turn, creatures you control gain "When this creature dies, it deals 2 damage to target creature an opponent controls."
         TriggeredAbility ability = new DiesTriggeredAbility(new DamageTargetEffect(2, "it"), false);
         Target target = new TargetCreaturePermanent(filter2);
         ability.addTarget(target);
         Effect effect = new GainAbilityControlledEffect(ability, Duration.EndOfTurn, filter);
-        effect.setText("Until end of turn, creatures you control gain \"When this creature dies, it deals 2 damage to target creature an opponent controls.\" ");
+        effect.setText("Until end of turn, creatures you control gain \"When this creature dies, it deals 2 damage to target creature an opponent controls.\"");
         this.getSpellAbility().addEffect(effect);
 
     }

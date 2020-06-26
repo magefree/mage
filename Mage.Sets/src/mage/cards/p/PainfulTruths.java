@@ -26,7 +26,7 @@ public final class PainfulTruths extends CardImpl {
         effect.setText("You draw X cards");
         getSpellAbility().addEffect(effect);
         effect = new LoseLifeSourceControllerEffect(ColorsOfManaSpentToCastCount.getInstance());
-        effect.setText("and lose X life, where X is the number of colors of mana spent to cast {this}");
+        effect.setText("and lose X life, where X is the number of colors of mana spent to cast this spell");
         getSpellAbility().addEffect(effect);
     }
 

@@ -62,7 +62,7 @@ class BondersOrnamentEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
-            Player player = game.getPlayer(source.getControllerId());
+            Player player = game.getPlayer(playerId);
             if (player == null) {
                 continue;
             }

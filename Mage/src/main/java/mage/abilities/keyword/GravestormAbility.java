@@ -16,7 +16,6 @@ import mage.game.stack.StackObject;
 import mage.watchers.common.GravestormWatcher;
 
 /**
- *
  * @author emerald000
  */
 public class GravestormAbility extends TriggeredAbilityImpl {
@@ -75,7 +74,7 @@ class GravestormEffect extends OneShotEffect {
         MageObjectReference spellRef = (MageObjectReference) this.getValue("GravestormSpellRef");
         if (spellRef != null) {
             GravestormWatcher watcher = game.getState().getWatcher(GravestormWatcher.class);
-            if(watcher != null) {
+            if (watcher != null) {
                 int gravestormCount = watcher.getGravestormCount();
                 if (gravestormCount > 0) {
                     Spell spell = (Spell) this.getValue("GravestormSpell");
@@ -83,9 +82,7 @@ class GravestormEffect extends OneShotEffect {
                         if (!game.isSimulation()) {
                             game.informPlayers("Gravestorm: " + spell.getName() + " will be copied " + gravestormCount + " time" + (gravestormCount > 1 ? "s" : ""));
                         }
-                        for (int i = 0; i < gravestormCount; i++) {
-                            spell.createCopyOnStack(game, source, source.getControllerId(), true);
-                        }
+                        spell.createCopyOnStack(game, source, source.getControllerId(), true, gravestormCount);
                     }
                 }
                 return true;

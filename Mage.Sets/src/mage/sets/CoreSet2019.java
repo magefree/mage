@@ -1,7 +1,5 @@
 package mage.sets;
 
-import java.util.ArrayList;
-import java.util.List;
 import mage.cards.ExpansionSet;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
@@ -10,8 +8,10 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * @author TheElk801
  */
 public final class CoreSet2019 extends ExpansionSet {
@@ -36,7 +36,7 @@ public final class CoreSet2019 extends ExpansionSet {
         this.ratioBoosterMythic = 8;
         this.numBoosterDoubleFaced = -1;
         this.maxCardNumberInBooster = 280;
-        
+
         // Core 2019 boosters have a 5/12 chance of basic land being replaced
         // with the common taplands, which DO NOT appear in the common slot.
         this.ratioBoosterSpecialLand = 12;
@@ -380,23 +380,18 @@ public final class CoreSet2019 extends ExpansionSet {
             return super.getCardsByRarity(rarity);
         }
     }
-    
+
     @Override
     // the common taplands replacing the basic land
-    public List<CardInfo> getSpecialLand()
-    {
-        if (savedSpecialLand.isEmpty())
-        {
+    public List<CardInfo> getSpecialLand() {
+        if (savedSpecialLand.isEmpty()) {
             CardCriteria criteria = new CardCriteria();
             criteria.setCodes(this.code);
             criteria.rarities(Rarity.COMMON);
             criteria.types(CardType.LAND);
             savedSpecialLand.addAll(CardRepository.instance.findCards(criteria));
         }
-        
+
         return new ArrayList<>(savedSpecialLand);
     }
-    
-    
-    
 }

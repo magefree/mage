@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -18,6 +17,7 @@ import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.TargetPermanent;
+import mage.watchers.common.LostControlWatcher;
 
 /**
  * @author Loki
@@ -47,6 +47,7 @@ public final class AegisAngel extends CardImpl {
                 "another target permanent is indestructible for as long as you control Aegis Angel");
         Ability ability = new EntersBattlefieldTriggeredAbility(effect, false);
         ability.addTarget(new TargetPermanent(filter));
+        ability.addWatcher(new LostControlWatcher());
         this.addAbility(ability);
     }
 

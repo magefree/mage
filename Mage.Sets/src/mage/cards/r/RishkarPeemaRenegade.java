@@ -1,7 +1,5 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -13,22 +11,22 @@ import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.CounterAnyPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class RishkarPeemaRenegade extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Each creature you control with a counter on it");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
         filter.add(CounterAnyPredicate.instance);
@@ -52,14 +50,13 @@ public final class RishkarPeemaRenegade extends CardImpl {
 
         // Each creature you control with a counter on it has "T: Add G."
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new GainAbilityControlledEffect(
-                        new GreenManaAbility(),
-                        Duration.WhileOnBattlefield,
-                        filter)));
+                        new GreenManaAbility(), Duration.WhileOnBattlefield, filter
+                ).setText("Each creature you control with a counter on it has \"{T}: Add {G}.\"")
+        ));
     }
 
-    public RishkarPeemaRenegade(final RishkarPeemaRenegade card) {
+    private RishkarPeemaRenegade(final RishkarPeemaRenegade card) {
         super(card);
     }
 

@@ -397,15 +397,15 @@ public class MageServerImpl implements MageServer {
 
     @Override
     //FIXME: why no sessionId here???
-    public Optional<TableView> getTable(UUID roomId, UUID tableId) throws MageException {
+    public TableView getTable(UUID roomId, UUID tableId) throws MageException {
         try {
             Optional<GamesRoom> room = GamesRoomManager.instance.getRoom(roomId);
-            return room.flatMap(r -> r.getTable(tableId));
+            return room.flatMap(r -> r.getTable(tableId)).orElse(null);
 
         } catch (Exception ex) {
             handleException(ex);
         }
-        return Optional.empty();
+        return null;
     }
 
     @Override
@@ -536,18 +536,18 @@ public class MageServerImpl implements MageServer {
 
     @Override
     //FIXME: why no sessionId here???
-    public Optional<UUID> getRoomChatId(UUID roomId) throws MageException {
+    public UUID getRoomChatId(UUID roomId) throws MageException {
         try {
             Optional<GamesRoom> room = GamesRoomManager.instance.getRoom(roomId);
             if (!room.isPresent()) {
                 logger.error("roomId not found : " + roomId);
-                return Optional.empty();
+                return null;
             }
-            return Optional.of(room.get().getChatId());
+            return room.get().getChatId();
         } catch (Exception ex) {
             handleException(ex);
         }
-        return Optional.empty();
+        return null;
     }
 
     @Override
@@ -602,13 +602,13 @@ public class MageServerImpl implements MageServer {
 
     @Override
     //FIXME: why no sessionId here???
-    public Optional<UUID> getTableChatId(UUID tableId) throws MageException {
+    public UUID getTableChatId(UUID tableId) throws MageException {
         try {
-            return TableManager.instance.getChatId(tableId);
+            return TableManager.instance.getChatId(tableId).orElse(null);
         } catch (Exception ex) {
             handleException(ex);
         }
-        return Optional.empty();
+        return null;
     }
 
     @Override
@@ -646,24 +646,24 @@ public class MageServerImpl implements MageServer {
 
     @Override
     //FIXME: why no sessionId here???
-    public Optional<UUID> getGameChatId(UUID gameId) throws MageException {
+    public UUID getGameChatId(UUID gameId) throws MageException {
         try {
-            return GameManager.instance.getChatId(gameId);
+            return GameManager.instance.getChatId(gameId).orElse(null);
         } catch (Exception ex) {
             handleException(ex);
         }
-        return Optional.empty();
+        return null;
     }
 
     @Override
     //FIXME: why no sessionId here???
-    public Optional<UUID> getTournamentChatId(UUID tournamentId) throws MageException {
+    public UUID getTournamentChatId(UUID tournamentId) throws MageException {
         try {
-            return TournamentManager.instance.getChatId(tournamentId);
+            return TournamentManager.instance.getChatId(tournamentId).orElse(null);
         } catch (Exception ex) {
             handleException(ex);
         }
-        return Optional.empty();
+        return null;
     }
 
     @Override

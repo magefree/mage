@@ -116,6 +116,7 @@ Innistrad|ISD|
 Journey into Nyx|JOU|
 Judge Promo|JR|
 Judgment|JUD|
+Jumpstart|JMP|
 Kaladesh|KLD|
 Khans of Tarkir|KTK|
 Limited Edition Alpha|LEA|
@@ -131,6 +132,7 @@ Magic 2014|M14|
 Magic 2015|M15|
 Core Set 2019|M19|
 Core Set 2020|M20|
+Core Set 2021|M21|
 Masters 25|A25|
 Magic: The Gathering-Commander|CMD|
 Magic: The Gathering-Conspiracy|CNS|

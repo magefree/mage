@@ -26,8 +26,8 @@ public final class OmenOfTheSea extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
 
         // When Omen of the Sea enters the battlefield, scry 2, then draw a card.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ScryEffect(2).setText("scry 2,"));
-        ability.addEffect(new DrawCardSourceControllerEffect(1).concatBy("then"));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ScryEffect(2, false));
+        ability.addEffect(new DrawCardSourceControllerEffect(1).concatBy(", then"));
         this.addAbility(ability);
 
         // {2}{U}, Sacrifice Omen of the Sea: Scry 2.

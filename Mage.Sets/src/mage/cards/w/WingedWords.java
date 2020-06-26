@@ -1,5 +1,6 @@
 package mage.cards.w;
 
+import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -11,8 +12,6 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-
-import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -31,9 +30,9 @@ public final class WingedWords extends CardImpl {
 
         // This spell costs {1} less to cast if you control a creature with flying.
         this.addAbility(new SimpleStaticAbility(
-                Zone.STACK, new SpellCostReductionSourceEffect(
-                1, new PermanentsOnTheBattlefieldCondition(filter)
-        )).setRuleAtTheTop(true));
+                Zone.ALL, new SpellCostReductionSourceEffect(
+                        1, new PermanentsOnTheBattlefieldCondition(filter)
+                )).setRuleAtTheTop(true));
 
         // Draw two cards.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));

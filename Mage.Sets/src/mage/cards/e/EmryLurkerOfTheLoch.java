@@ -35,7 +35,7 @@ public final class EmryLurkerOfTheLoch extends CardImpl {
         this.toughness = new MageInt(2);
 
         // This spell costs {1} less to cast for each artifact you control.
-        this.addAbility(new SimpleStaticAbility(Zone.STACK, new EmryLurkerOfTheLochCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new EmryLurkerOfTheLochCostReductionEffect()));
 
         // When Emry, Lurker of the Loch enters the battlefield, put the top four cards of your library into your graveyard.
         this.addAbility(new EntersBattlefieldTriggeredAbility(

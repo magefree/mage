@@ -1,4 +1,3 @@
-
 package mage.cards.m;
 
 import java.util.UUID;
@@ -11,9 +10,10 @@ import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.target.common.TargetArtifactPermanent;
+import mage.watchers.common.LostControlWatcher;
 
 /**
  * @author Loki, JayDi85
@@ -33,9 +33,10 @@ public final class MasterThief extends CardImpl {
                 new GainControlTargetEffect(Duration.Custom),
                 new SourceOnBattlefieldControlUnchangedCondition(),
                 "gain control of target artifact for as long as you control {this}"),
-        false);
+                false);
 
         ability.addTarget(new TargetArtifactPermanent());
+        ability.addWatcher(new LostControlWatcher());
         this.addAbility(ability);
     }
 

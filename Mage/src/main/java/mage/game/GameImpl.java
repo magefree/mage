@@ -6,6 +6,7 @@ import mage.abilities.*;
 import mage.abilities.common.AttachableToRestrictedAbility;
 import mage.abilities.common.CantHaveMoreThanAmountCountersSourceAbility;
 import mage.abilities.common.SagaAbility;
+import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
 import mage.abilities.effects.Effect;
@@ -1646,7 +1647,7 @@ public abstract class GameImpl implements Game, Serializable {
             }
             newBluePrint.assignNewId();
             if (copyFromPermanent.isTransformed()) {
-                TransformAbility.transform(newBluePrint, newBluePrint.getSecondCardFace(), this);
+                TransformAbility.transform(newBluePrint, newBluePrint.getSecondCardFace(), this, source);
             }
         }
         if (applier != null) {
@@ -1748,6 +1749,13 @@ public abstract class GameImpl implements Game, Serializable {
         return newAbility.getId();
     }
 
+    @Override
+    public UUID fireReflexiveTriggeredAbility(ReflexiveTriggeredAbility reflexiveAbility, Ability source) {
+        UUID uuid = this.addDelayedTriggeredAbility(reflexiveAbility, source);
+        this.fireEvent(GameEvent.getEvent(GameEvent.EventType.OPTION_USED, source.getOriginalId(), source.getSourceId(), source.getControllerId()));
+        return uuid;
+    }
+
     /**
      * 116.5. Each time a player would get priority, the game first performs all
      * applicable state-based actions as a single event (see rule 704,
@@ -1840,10 +1848,49 @@ public abstract class GameImpl implements Game, Serializable {
         for (Player player : state.getPlayers().values()) {
             if (!player.hasLost()
                     && ((player.getLife() <= 0 && player.canLoseByZeroOrLessLife())
-                    || player.isEmptyDraw()
+                    || player.getLibrary().isEmptyDraw()
                     || player.getCounters().getCount(CounterType.POISON) >= 10)) {
                 player.lost(this);
             }
+        }
+
+        // If a commander is in a graveyard or in exile and that card was put into that zone
+        // since the last time state-based actions were checked, its owner may put it into the command zone.
+        for (Player player : state.getPlayers().values()) {
+            Set<UUID> commanderIds = getCommandersIds(player, CommanderCardType.COMMANDER_OR_OATHBREAKER);
+            if (commanderIds.isEmpty()) {
+                continue;
+            }
+            Set<Card> commanders = new HashSet<>();
+            Cards toMove = new CardsImpl();
+            player.getGraveyard()
+                    .stream()
+                    .filter(commanderIds::contains)
+                    .map(this::getCard)
+                    .filter(Objects::nonNull)
+                    .forEach(commanders::add);
+            commanderIds
+                    .stream()
+                    .map(uuid -> getExile().getCard(uuid, this))
+                    .filter(Objects::nonNull)
+                    .forEach(commanders::add);
+            commanders.removeIf(card -> state.checkCommanderShouldStay(card, this));
+            for (Card card : commanders) {
+                Zone currentZone = this.getState().getZone(card.getId());
+                String currentZoneInfo = (currentZone == null ? "(error)" : "(" + currentZone.name() + ")");
+                if (player.chooseUse(Outcome.Benefit, "Move " + card.getIdName()
+                                + " to the command zone or leave it in current zone " + currentZoneInfo + "?", "You can only make this choice once per object",
+                        "Move to command", "Leave in current zone " + currentZoneInfo, null, this)) {
+                    toMove.add(card);
+                } else {
+                    state.setCommanderShouldStay(card, this);
+                }
+            }
+            if (toMove.isEmpty()) {
+                continue;
+            }
+            player.moveCards(toMove, Zone.COMMAND, null, this);
+            somethingHappened = true;
         }
 
         // 704.5e If a copy of a spell is in a zone other than the stack, it ceases to exist. If a copy of a card is in any zone other than the stack or the battlefield, it ceases to exist.
@@ -1909,8 +1956,8 @@ public abstract class GameImpl implements Game, Serializable {
                      */
                     boolean usePowerInsteadOfToughnessForDamageLethality = usePowerInsteadOfToughnessForDamageLethalityFilters.stream()
                             .anyMatch(filter -> filter.match(perm, this));
-                    int lethalDamageThreshold = usePowerInsteadOfToughnessForDamageLethality ?
-                            // Zilortha, Strength Incarnate, 2020-04-17: A creature with 0 power isn’t destroyed unless it has at least 1 damage marked on it.
+                    int lethalDamageThreshold = usePowerInsteadOfToughnessForDamageLethality
+                            ? // Zilortha, Strength Incarnate, 2020-04-17: A creature with 0 power isn’t destroyed unless it has at least 1 damage marked on it.
                             Math.max(perm.getPower().getValue(), 1) : perm.getToughness().getValue();
                     if (lethalDamageThreshold <= perm.getDamage() || perm.isDeathtouched()) {
                         if (perm.destroy(null, this, false)) {
@@ -2227,15 +2274,20 @@ public abstract class GameImpl implements Game, Serializable {
                     newestPermanent = null;
                 }
             }
+
+            PlayerList newestPermanentControllerRange = state.getPlayersInRange(newestPermanent.getControllerId(), this);
+
+            // 801.12 The "world rule" applies to a permanent only if other world permanents are within its controller's range of influence.
             for (Permanent permanent : worldEnchantment) {
-                if (!Objects.equals(newestPermanent, permanent)) {
+                if (newestPermanentControllerRange.contains(permanent.getControllerId())
+                        && !Objects.equals(newestPermanent, permanent)) {
                     movePermanentToGraveyardWithInfo(permanent);
                     somethingHappened = true;
                 }
             }
         }
-        //TODO: implement the rest
 
+        //TODO: implement the rest
         return somethingHappened;
     }
 
@@ -2580,6 +2632,9 @@ public abstract class GameImpl implements Game, Serializable {
                     }
                 }
             }
+        }
+        for (Card card : toOutside) {
+            rememberLKI(card.getId(), Zone.BATTLEFIELD, card);
         }
         // needed to send event that permanent leaves the battlefield to allow non stack effects to execute
         player.moveCards(toOutside, Zone.OUTSIDE, null, this);

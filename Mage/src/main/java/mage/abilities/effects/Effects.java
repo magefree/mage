@@ -167,4 +167,7 @@ public class Effects extends ArrayList<Effect> {
         }
     }
 
+    public void setValue(String key, Object value) {
+        this.stream().forEach(effect -> effect.setValue(key, value));
+    }
 }

@@ -280,7 +280,7 @@ public class ThousandYearStormTest extends CardTestPlayerBase {
     Cycling {2} ({2}, Discard this card: Draw a card.)
      */
     // Test fails sometimes with the following message:
-    // java.lang.AssertionError: b 0x copy after control - PlayerA have wrong life: 20 <> 17 expected:<17> but was:<20>
+    // Can't find available command - activate:Cast Lightning Bolt$targetPlayer=PlayerA
     @Test
     public void test_GetControlNotCounts() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);

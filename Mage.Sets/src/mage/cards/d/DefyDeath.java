@@ -1,7 +1,5 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
@@ -16,8 +14,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class DefyDeath extends CardImpl {
@@ -26,7 +25,7 @@ public final class DefyDeath extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}{W}");
 
         // Return target creature card from your graveyard to the battlefield. If it's an Angel, put two +1/+1 counters on it.
-        this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
+        this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect(false, false));
         this.getSpellAbility().addEffect(new DefyDeathEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
     }

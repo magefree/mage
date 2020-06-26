@@ -92,7 +92,7 @@ class FiendArtisanEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int xValue = source.getCosts().getVariableCosts().get(0).getAmount();
+        int xValue = source.getManaCostsToPay().getX();
         FilterCard filter = new FilterCreatureCard("creature card with converted mana cost " + xValue + " or less");
         filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, xValue + 1));
         return new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)).apply(game, source);

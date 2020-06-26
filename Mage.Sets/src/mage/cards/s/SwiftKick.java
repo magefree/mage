@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -9,23 +7,16 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.target.Target;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class SwiftKick extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you don't control");
-
-    static {
-        filter.add(TargetController.NOT_YOU.getControllerPredicate());
-    }
 
     public SwiftKick(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{R}");
@@ -38,12 +29,10 @@ public final class SwiftKick extends CardImpl {
         effect = new FightTargetsEffect();
         effect.setText("It fights target creature you don't control");
         this.getSpellAbility().addEffect(effect);
-        Target target = new TargetCreaturePermanent(filter);
-        this.getSpellAbility().addTarget(target);
-
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
     }
 
-    public SwiftKick(final SwiftKick card) {
+    private SwiftKick(final SwiftKick card) {
         super(card);
     }
 

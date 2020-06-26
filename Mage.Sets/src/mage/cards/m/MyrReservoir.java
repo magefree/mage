@@ -1,7 +1,5 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.ConditionalMana;
 import mage.MageObject;
 import mage.Mana;
@@ -10,9 +8,9 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
-import mage.abilities.mana.BasicManaAbility;
+import mage.abilities.effects.mana.BasicManaEffect;
+import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -21,6 +19,8 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  * @author nantuko
@@ -34,7 +34,7 @@ public final class MyrReservoir extends CardImpl {
     }
 
     public MyrReservoir(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // {tap}: Add {C}{C}. Spend this mana only to cast Myr spells or activate abilities of Myr.
         this.addAbility(new MyrReservoirManaAbility());
@@ -46,7 +46,7 @@ public final class MyrReservoir extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MyrReservoir(final MyrReservoir card) {
+    private MyrReservoir(final MyrReservoir card) {
         super(card);
     }
 
@@ -56,14 +56,14 @@ public final class MyrReservoir extends CardImpl {
     }
 }
 
-class MyrReservoirManaAbility extends BasicManaAbility {
+class MyrReservoirManaAbility extends ActivatedManaAbilityImpl {
 
     MyrReservoirManaAbility() {
-        super(new BasicManaEffect(new MyrConditionalMana()));
+        super(Zone.BATTLEFIELD, new BasicManaEffect(new MyrConditionalMana()), new TapSourceCost());
         this.netMana.add(Mana.ColorlessMana(2));
     }
 
-    MyrReservoirManaAbility(MyrReservoirManaAbility ability) {
+    private MyrReservoirManaAbility(MyrReservoirManaAbility ability) {
         super(ability);
     }
 
@@ -75,7 +75,7 @@ class MyrReservoirManaAbility extends BasicManaAbility {
 
 class MyrConditionalMana extends ConditionalMana {
 
-    public MyrConditionalMana() {
+    MyrConditionalMana() {
         super(Mana.ColorlessMana(2));
         staticText = "Spend this mana only to cast Myr spells or activate abilities of Myr";
         addCondition(new MyrManaCondition());

@@ -1,7 +1,5 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -15,14 +13,15 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+
 /**
- *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
 public final class AbundantMaw extends CardImpl {
 
     public AbundantMaw(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{8}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{8}");
         this.subtype.add(SubType.ELDRAZI);
         this.subtype.add(SubType.LEECH);
         this.power = new MageInt(6);
@@ -30,11 +29,11 @@ public final class AbundantMaw extends CardImpl {
 
         // Emerge {6}{B}
         this.addAbility(new EmergeAbility(this, new ManaCostsImpl<>("{6}{B}")));
-        
+
         // When you cast Abundant Maw, target opponent loses 3 life and you gain 3 life.
         Ability ability = new CastSourceTriggeredAbility(new GainLifeEffect(3));
+        ability.addEffect(new LoseLifeTargetEffect(3).concatBy("and"));
         ability.addTarget(new TargetOpponent());
-        ability.addEffect(new LoseLifeTargetEffect(3));
         this.addAbility(ability);
     }
 

@@ -1,4 +1,3 @@
-
 package mage.cards.m;
 
 import java.util.UUID;
@@ -25,6 +24,7 @@ import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.watchers.common.LostControlWatcher;
 
 /**
  *
@@ -50,6 +50,7 @@ public final class MeriekeRiBerit extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, MeriekeRiBeritGainControlEffect, new TapSourceCost());
         ability.addTarget(new TargetPermanent(new FilterCreaturePermanent("target creature")));
         ability.addEffect(new MeriekeRiBeritCreateDelayedTriggerEffect());
+        ability.addWatcher(new LostControlWatcher());
         this.addAbility(ability);
 
     }

@@ -229,7 +229,7 @@ public class SparkDoubleTest extends CardTestPlayerBase {
 
         // make copy of copy by CreateTokenCopyTargetEffect
         // showBattlefield("before last copy", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
-        // showAvaileableAbilities("before last copy", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        // showAvailableAbilities("before last copy", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "create a token that");
         addTarget(playerA, "Akroma, Angel of Wrath[only copy]");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);

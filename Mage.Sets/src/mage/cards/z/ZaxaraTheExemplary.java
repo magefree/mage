@@ -6,7 +6,6 @@ import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.mana.AddManaOfAnyColorEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.mana.SimpleManaAbility;
@@ -18,7 +17,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.ZaxaraTheExemplaryHydraToken;
 import mage.game.stack.Spell;
 import mage.players.Player;
 
@@ -143,26 +142,5 @@ class ZaxaraTheExemplaryHydraTokenEffect extends OneShotEffect {
             }
         }
         return false;
-    }
-}
-
-class ZaxaraTheExemplaryHydraToken extends TokenImpl {
-    public ZaxaraTheExemplaryHydraToken() {
-        super("Hydra", "0/0 green Hydra creature token");
-        setExpansionSetCodeForImage("C20");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        subtype.add(SubType.HYDRA);
-        power = new MageInt(0);
-        toughness = new MageInt(0);
-    }
-
-    private ZaxaraTheExemplaryHydraToken(final ZaxaraTheExemplaryHydraToken token) {
-        super(token);
-    }
-
-    @Override
-    public ZaxaraTheExemplaryHydraToken copy() {
-        return new ZaxaraTheExemplaryHydraToken(this);
     }
 }

@@ -1,9 +1,8 @@
-
-
 package mage.counters;
 
+import mage.util.CardUtil;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class BoostCounter extends Counter {
@@ -16,7 +15,7 @@ public class BoostCounter extends Counter {
     }
 
     public BoostCounter(int power, int toughness, int count) {
-        super(String.format("%1$+d/%2$+d", power, toughness), count);
+        super(CardUtil.getBoostCountAsStr(power, toughness), count);
         this.power = power;
         this.toughness = toughness;
     }

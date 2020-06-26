@@ -27,6 +27,12 @@ public class FixedTarget implements TargetPointer {
         this(mor.getSourceId(), mor.getZoneChangeCounter());
     }
 
+    /**
+     * Target counter is immediatly initialised with current zoneChangeCounter value from the GameState
+     * Sets fixed the currect zone chnage counter 
+     * @param card used to get the objectId
+     * @param game 
+     */
     public FixedTarget(Card card, Game game) {
         this.targetId = card.getId();
         this.zoneChangeCounter = card.getZoneChangeCounter(game);

@@ -1,5 +1,9 @@
 package mage;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
@@ -15,12 +19,6 @@ import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.util.SubTypeList;
 
-import java.io.Serializable;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
-
 public interface MageObject extends MageItem, Serializable {
 
     String getName();
@@ -33,7 +31,7 @@ public interface MageObject extends MageItem, Serializable {
 
     void setName(String name);
 
-    Set<CardType> getCardType();
+    ArrayList<CardType> getCardType();
 
     SubTypeList getSubtype(Game game);
 
@@ -41,9 +39,15 @@ public interface MageObject extends MageItem, Serializable {
 
     Set<SuperType> getSuperType();
 
+    /**
+     * For cards: return basic abilities (without dynamic added) For permanents:
+     * return all abilities (dynamic ability inserts into permanent)
+     *
+     * @return
+     */
     Abilities<Ability> getAbilities();
 
-    boolean hasAbility(UUID abilityId, Game game);
+    boolean hasAbility(Ability ability, Game game);
 
     ObjectColor getColor(Game game);
 
@@ -180,9 +184,9 @@ public interface MageObject extends MageItem, Serializable {
         }
 
         if (this.isCreature() && otherCard.isCreature()) {
-            if (this.getAbilities().contains(ChangelingAbility.getInstance())
+            if (this.hasAbility(ChangelingAbility.getInstance(), game)
                     || this.isAllCreatureTypes()
-                    || otherCard.getAbilities().contains(ChangelingAbility.getInstance())
+                    || otherCard.hasAbility(ChangelingAbility.getInstance(), game)
                     || otherCard.isAllCreatureTypes()) {
                 return true;
             }
@@ -200,7 +204,7 @@ public interface MageObject extends MageItem, Serializable {
 
     void setIsAllCreatureTypes(boolean value);
 
-    default void addCardTypes(Set<CardType> cardType) {
+    default void addCardTypes(ArrayList<CardType> cardType) {
         getCardType().addAll(cardType);
     }
 

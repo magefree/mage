@@ -1,30 +1,22 @@
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.FightTargetSourceEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.constants.SubType;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class AffectionateIndrik extends CardImpl {
-
-    private static final FilterCreaturePermanent filter
-            = new FilterCreaturePermanent("creature you don't control");
-
-    static {
-        filter.add(TargetController.NOT_YOU.getControllerPredicate());
-    }
 
     public AffectionateIndrik(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}");
@@ -40,11 +32,11 @@ public final class AffectionateIndrik extends CardImpl {
                                 + "target creature you don't control"),
                 true
         );
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
         this.addAbility(ability);
     }
 
-    public AffectionateIndrik(final AffectionateIndrik card) {
+    private AffectionateIndrik(final AffectionateIndrik card) {
         super(card);
     }
 

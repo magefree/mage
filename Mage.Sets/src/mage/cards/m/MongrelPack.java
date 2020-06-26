@@ -1,7 +1,5 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.ZoneChangeTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -13,18 +11,18 @@ import mage.constants.TurnPhase;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.token.TokenImpl;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.GreenDogToken;
+
+import java.util.UUID;
 
 /**
- *
  * @author North
  */
 public final class MongrelPack extends CardImpl {
 
     public MongrelPack(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
-        this.subtype.add(SubType.HOUND);
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
+        this.subtype.add(SubType.DOG);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(1);
@@ -33,7 +31,7 @@ public final class MongrelPack extends CardImpl {
         this.addAbility(new MongrelPackAbility());
     }
 
-    public MongrelPack(final MongrelPack card) {
+    private MongrelPack(final MongrelPack card) {
         super(card);
     }
 
@@ -45,11 +43,11 @@ public final class MongrelPack extends CardImpl {
 
 class MongrelPackAbility extends ZoneChangeTriggeredAbility {
 
-    public MongrelPackAbility() {
-        super(Zone.BATTLEFIELD, Zone.GRAVEYARD, new CreateTokenEffect(new HoundToken(), 4), "When {this} dies during combat, ", false);
+    MongrelPackAbility() {
+        super(Zone.BATTLEFIELD, Zone.GRAVEYARD, new CreateTokenEffect(new GreenDogToken(), 4), "When {this} dies during combat, ", false);
     }
 
-    public MongrelPackAbility(MongrelPackAbility ability) {
+    private MongrelPackAbility(MongrelPackAbility ability) {
         super(ability);
     }
 
@@ -66,26 +64,5 @@ class MongrelPackAbility extends ZoneChangeTriggeredAbility {
             }
         }
         return false;
-    }
-}
-
-class HoundToken extends TokenImpl {
-
-    public HoundToken() {
-        super("Hound", "1/1 green Hound creature token");
-        cardType.add(CardType.CREATURE);
-        subtype.add(SubType.HOUND);
-
-        color.setGreen(true);
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-    }
-
-    public HoundToken(final HoundToken token) {
-        super(token);
-    }
-
-    public HoundToken copy() {
-        return new HoundToken(this);
     }
 }

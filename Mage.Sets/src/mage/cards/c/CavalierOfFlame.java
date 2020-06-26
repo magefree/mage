@@ -16,6 +16,7 @@ import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
@@ -103,12 +104,7 @@ class CavalierOfFlameEffect extends OneShotEffect {
         }
         TargetCardInHand target = new TargetCardInHand(0, player.getHand().size(), StaticFilters.FILTER_CARD);
         if (player.choose(Outcome.Discard, player.getHand(), target, game)) {
-            int counter = target
-                    .getTargets()
-                    .stream()
-                    .map(uuid -> game.getCard(uuid))
-                    .mapToInt(card -> card != null && player.discard(card, source, game) ? 1 : 0)
-                    .sum();
+            int counter = player.discard(new CardsImpl(target.getTargets()), source, game).size();
             player.drawCards(counter, source.getSourceId(), game);
         }
         return true;

@@ -1,5 +1,9 @@
 package mage.game.stack;
 
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.ObjectColor;
@@ -30,17 +34,12 @@ import mage.util.GameLog;
 import mage.util.SubTypeList;
 import mage.watchers.Watcher;
 
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.UUID;
-
 /**
  * @author BetaSteward_at_googlemail.com
  */
 public class StackAbility extends StackObjImpl implements Ability {
 
-    private static EnumSet<CardType> emptyCardType = EnumSet.noneOf(CardType.class);
+    private static ArrayList<CardType> emptyCardType = new ArrayList<>();
     private static List<String> emptyString = new ArrayList<>();
     private static ObjectColor emptyColor = new ObjectColor();
     private static ManaCosts<ManaCost> emptyCost = new ManaCostsImpl<>();
@@ -153,7 +152,7 @@ public class StackAbility extends StackObjImpl implements Ability {
     }
 
     @Override
-    public EnumSet<CardType> getCardType() {
+    public ArrayList<CardType> getCardType() {
         return emptyCardType;
     }
 
@@ -178,7 +177,7 @@ public class StackAbility extends StackObjImpl implements Ability {
     }
 
     @Override
-    public boolean hasAbility(UUID abilityId, Game game) {
+    public boolean hasAbility(Ability ability, Game game) {
         return false;
     }
 
@@ -573,19 +572,30 @@ public class StackAbility extends StackObjImpl implements Ability {
 
     @Override
     public StackObject createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets) {
-        Ability newAbility = this.copy();
-        newAbility.newId();
-        StackAbility newStackAbility = new StackAbility(newAbility, newControllerId);
-        game.getStack().push(newStackAbility);
-        if (chooseNewTargets && !newAbility.getTargets().isEmpty()) {
-            Player controller = game.getPlayer(newControllerId);
-            Outcome outcome = newAbility.getEffects().getOutcome(newAbility);
-            if (controller.chooseUse(outcome, "Choose new targets?", source, game)) {
-                newAbility.getTargets().clearChosen();
-                newAbility.getTargets().chooseTargets(outcome, newControllerId, newAbility, false, game, false);
-            }
+        return createCopyOnStack(game, source, newControllerId, chooseNewTargets, 1);
+    }
+
+    public StackObject createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets, int amount) {
+        StackAbility newStackAbility = null;
+        GameEvent gameEvent = GameEvent.getEvent(GameEvent.EventType.COPY_STACKOBJECT, this.getId(), source.getSourceId(), newControllerId, amount);
+        if (game.replaceEvent(gameEvent)) {
+            return null;
         }
-        game.fireEvent(new GameEvent(GameEvent.EventType.COPIED_STACKOBJECT, newStackAbility.getId(), this.getId(), newControllerId));
+        for (int i = 0; i < gameEvent.getAmount(); i++) {
+            Ability newAbility = this.copy();
+            newAbility.newId();
+            newStackAbility = new StackAbility(newAbility, newControllerId);
+            game.getStack().push(newStackAbility);
+            if (chooseNewTargets && !newAbility.getTargets().isEmpty()) {
+                Player controller = game.getPlayer(newControllerId);
+                Outcome outcome = newAbility.getEffects().getOutcome(newAbility);
+                if (controller.chooseUse(outcome, "Choose new targets?", source, game)) {
+                    newAbility.getTargets().clearChosen();
+                    newAbility.getTargets().chooseTargets(outcome, newControllerId, newAbility, false, game, false);
+                }
+            }
+            game.fireEvent(new GameEvent(GameEvent.EventType.COPIED_STACKOBJECT, newStackAbility.getId(), this.getId(), newControllerId));
+        }
         return newStackAbility;
     }
 
@@ -660,5 +670,18 @@ public class StackAbility extends StackObjImpl implements Ability {
     @Override
     public Outcome getCustomOutcome() {
         return this.ability.getCustomOutcome();
+    }
+
+    @Override
+    public boolean isSameInstance(Ability ability) {
+        // same instance (by mtg rules) = same object, ID or class+text (you can't check class only cause it can be different by params/text)
+        if (ability == null) {
+            return false;
+        }
+
+        return (this == ability)
+                || (this.getId().equals(ability.getId()))
+                || (this.getOriginalId().equals(ability.getOriginalId()))
+                || (this.getClass() == ability.getClass() && this.getRule().equals(ability.getRule()));
     }
 }

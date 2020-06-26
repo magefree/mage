@@ -137,5 +137,7 @@ public interface Target extends Serializable {
 
     Target withChooseHint(String chooseHint);
 
+    String getChooseHint();
+
     void setEventReporting(boolean shouldReport);
 }

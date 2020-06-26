@@ -2,7 +2,7 @@ package mage.cards.p;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BecomesBlockedTriggeredAbility;
+import mage.abilities.common.BecomesBlockedSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
@@ -32,7 +32,7 @@ public final class PlagueWight extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Plague Wight becomes blocked, each creature blocking it gets -1/-1 until end of turn.
-        this.addAbility(new BecomesBlockedTriggeredAbility(new PlagueWightEffect(), false));
+        this.addAbility(new BecomesBlockedSourceTriggeredAbility(new PlagueWightEffect(), false));
     }
 
     private PlagueWight(final PlagueWight card) {

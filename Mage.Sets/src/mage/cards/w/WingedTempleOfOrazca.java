@@ -1,7 +1,6 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -16,15 +15,13 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -68,7 +65,7 @@ class WingedTempleOfOrazcaEffect extends OneShotEffect {
 
     public WingedTempleOfOrazcaEffect() {
         super(Outcome.Benefit);
-        this.staticText = "it gains flying and gets +X/+X until end of turn, where X is its power";
+        this.staticText = "target creature you control gains flying and gets +X/+X until end of turn, where X is its power";
     }
 
     public WingedTempleOfOrazcaEffect(final WingedTempleOfOrazcaEffect effect) {

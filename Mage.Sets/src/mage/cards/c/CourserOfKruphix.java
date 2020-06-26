@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -12,32 +10,37 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandCard;
-import mage.filter.common.FilterLandPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class CourserOfKruphix extends CardImpl {
 
+    private static final FilterCard filter = new FilterLandCard("play land cards");
+
     public CourserOfKruphix(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{1}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{G}{G}");
         this.subtype.add(SubType.CENTAUR);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 
         // Play with the top card of your library revealed.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithTheTopCardRevealedEffect()));
+        this.addAbility(new SimpleStaticAbility(new PlayWithTheTopCardRevealedEffect()));
+
         // You may play the top card of your library if it's a land card.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayTheTopCardEffect(new FilterLandCard())));
+        this.addAbility(new SimpleStaticAbility(new PlayTheTopCardEffect(filter)));
+
         // Whenever a land enters the battlefield under your control, you gain 1 life.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new GainLifeEffect(1), new FilterLandPermanent("a land")));
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new GainLifeEffect(1), StaticFilters.FILTER_LAND_A));
     }
 
-    public CourserOfKruphix(final CourserOfKruphix card) {
+    private CourserOfKruphix(final CourserOfKruphix card) {
         super(card);
     }
 

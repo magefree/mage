@@ -1,7 +1,5 @@
-
 package mage.abilities.effects.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
@@ -9,8 +7,9 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author cg5
  */
 public class TurnFaceUpTargetEffect extends OneShotEffect {
@@ -42,6 +41,6 @@ public class TurnFaceUpTargetEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
-        return "turn target " + mode.getTargets().toString() + " face-up";
+        return "turn target " + mode.getTargets().get(0).getTargetName() + " face-up";
     }
 }

@@ -31,7 +31,7 @@ public final class UnbreakableBond extends CardImpl {
         this.getSpellAbility().addEffect(new UnbreakableBondReplacementEffect());
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
         this.getSpellAbility().addEffect(new InfoEffect("with a lifelink counter on it"));
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE));
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
     }
 
     private UnbreakableBond(final UnbreakableBond card) {

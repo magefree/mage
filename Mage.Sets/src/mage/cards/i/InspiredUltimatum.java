@@ -41,7 +41,7 @@ class InspiredUltimatumEffect extends OneShotEffect {
 
     InspiredUltimatumEffect() {
         super(Outcome.Benefit);
-        staticText = "Target player gains 5 life. {this} deals 5 damage to any target. You draw five cards.";
+        staticText = "Target player gains 5 life, {this} deals 5 damage to any target, then you draw five cards.";
     }
 
     private InspiredUltimatumEffect(final InspiredUltimatumEffect effect) {

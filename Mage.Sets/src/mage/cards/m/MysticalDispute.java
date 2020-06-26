@@ -1,5 +1,7 @@
 package mage.cards.m;
 
+import java.util.Collection;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
@@ -15,9 +17,6 @@ import mage.game.stack.StackObject;
 import mage.target.Target;
 import mage.target.TargetSpell;
 
-import java.util.Collection;
-import java.util.UUID;
-
 /**
  * @author TheElk801
  */
@@ -28,7 +27,7 @@ public final class MysticalDispute extends CardImpl {
 
         // This spell costs {2} less to cast if it targets a blue spell.
         this.addAbility(new SimpleStaticAbility(
-                Zone.STACK, new SpellCostReductionSourceEffect(2, MysticalDisputeCondition.instance)
+                Zone.ALL, new SpellCostReductionSourceEffect(2, MysticalDisputeCondition.instance)
         ).setRuleAtTheTop(true));
 
         // Counter target spell unless its controller pays {3}.

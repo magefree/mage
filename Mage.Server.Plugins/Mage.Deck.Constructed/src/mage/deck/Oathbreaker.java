@@ -22,14 +22,15 @@ public class Oathbreaker extends Vintage {
         super();
         this.name = "Oathbreaker";
 
-        // banned = vintage + oathbreaker's list: https://weirdcards.org/oathbreaker-ban-list
-        // last updated 8/2/19 - Primeval Titan unbanned
+        // banned = vintage + oathbreaker's list: https://oathbreakermtg.org/banned-list/
+        // last updated 4/24/20 - Dark Ritual banned
         banned.add("Ad Nauseam");
         banned.add("Ancestral Recall");
         banned.add("Balance");
         banned.add("Biorhythm");
         banned.add("Black Lotus");
         banned.add("Channel");
+        banned.add("Dark Ritual");
         banned.add("Doomsday");
         banned.add("Emrakul, the Aeons Torn");
         banned.add("Expropriate");

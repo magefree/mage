@@ -10,7 +10,6 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DamageAllEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -19,10 +18,9 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.permanent.token.ElementalToken;
+import mage.game.permanent.token.ElementalTokenWithHaste;
 import mage.players.Player;
 
-import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -77,7 +75,7 @@ class ChandraElementalEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            CreateTokenEffect effect = new CreateTokenEffect(new ElementalToken("OGW", 2, true), 2);
+            CreateTokenEffect effect = new CreateTokenEffect(new ElementalTokenWithHaste(), 2);
             effect.apply(game, source);
             effect.exileTokensCreatedAtNextEndStep(game, source);
             return true;
@@ -106,16 +104,12 @@ class ChandraDrawEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            Set<Card> cardsInHand = player.getHand().getCards(game);
-            int amount = cardsInHand.size();
-            for (Card card : cardsInHand) {
-                player.discard(card, source, game);
-            }
-            player.drawCards(amount + 1, source.getSourceId(), game);
-            return true;
+        if (player == null) {
+            return false;
         }
-        return false;
+        int amount = player.discard(player.getHand(), source, game).size();
+        player.drawCards(amount + 1, source.getSourceId(), game);
+        return true;
     }
 }
 

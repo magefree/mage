@@ -26,7 +26,7 @@ public final class ChargeOfTheForeverBeast extends CardImpl {
 
         // As an additional cost to cast this spell, reveal a creature card from your hand.
         this.getSpellAbility().addCost(new RevealTargetFromHandCost(
-                new TargetCardInHand(StaticFilters.FILTER_CARD_CREATURE_A)
+                new TargetCardInHand(StaticFilters.FILTER_CARD_CREATURE_YOUR_HAND)
         ));
 
         // Charge of the Forever-Beast deals damage to target creature or planeswalker equal to the revealed card's power.
@@ -64,7 +64,7 @@ class ChargeOfTheForeverBeastEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         RevealTargetFromHandCost cost = (RevealTargetFromHandCost) source.getCosts().get(0);
-        if (permanent == null && cost == null) {
+        if (permanent == null || cost == null) {
             return false;
         }
         Card card = cost.getRevealedCards().get(0);

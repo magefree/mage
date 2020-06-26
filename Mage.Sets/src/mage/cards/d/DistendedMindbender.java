@@ -1,38 +1,38 @@
-
 package mage.cards.d;
 
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.keyword.EmergeAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
+import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+import mage.constants.Zone;
+
 /**
- *
  * @author fireshoes
  */
 public final class DistendedMindbender extends CardImpl {
 
     public DistendedMindbender(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{8}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{8}");
         this.subtype.add(SubType.ELDRAZI);
         this.subtype.add(SubType.INSECT);
         this.power = new MageInt(5);
@@ -88,30 +88,20 @@ class DistendedMindbenderEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player opponent = game.getPlayer(source.getFirstTarget());
         Player controller = game.getPlayer(source.getControllerId());
-        if (opponent != null && controller != null) {
-            opponent.revealCards("Distended Mindbender", opponent.getHand(), game);
-            TargetCard targetThreeOrLess = new TargetCard(1, Zone.HAND, filterThreeOrLess);
-            TargetCard targetFourOrGreater = new TargetCard(1, Zone.HAND, filterFourOrGreater);
-            if (controller.choose(Outcome.Benefit, opponent.getHand(), targetThreeOrLess, game)) {
-                List<UUID> targets = targetThreeOrLess.getTargets();
-                for (UUID targetId : targets) {
-                    Card card = opponent.getHand().get(targetId, game);
-                    if (card != null) {
-                        opponent.discard(card, source, game);
-                    }
-                }
-            }
-            if (controller.choose(Outcome.Benefit, opponent.getHand(), targetFourOrGreater, game)) {
-                List<UUID> targets = targetFourOrGreater.getTargets();
-                for (UUID targetId : targets) {
-                    Card card = opponent.getHand().get(targetId, game);
-                    if (card != null) {
-                        opponent.discard(card, source, game);
-                    }
-                }
-            }
-            return true;
+        if (opponent == null || controller == null) {
+            return false;
         }
-        return false;
+        opponent.revealCards(source, opponent.getHand(), game);
+        TargetCard targetThreeOrLess = new TargetCard(1, Zone.HAND, filterThreeOrLess);
+        TargetCard targetFourOrGreater = new TargetCard(1, Zone.HAND, filterFourOrGreater);
+        Cards toDiscard = new CardsImpl();
+        if (controller.chooseTarget(Outcome.Benefit, opponent.getHand(), targetThreeOrLess, source, game)) {
+            toDiscard.addAll(targetThreeOrLess.getTargets());
+        }
+        if (controller.chooseTarget(Outcome.Benefit, opponent.getHand(), targetFourOrGreater, source, game)) {
+            toDiscard.addAll(targetFourOrGreater.getTargets());
+        }
+        opponent.discard(toDiscard, source, game);
+        return true;
     }
 }

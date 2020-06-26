@@ -61,9 +61,9 @@ class CrownOfEmpiresEffect extends OneShotEffect {
         boolean scepter = false;
         boolean throne = false;
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(source.getControllerId())) {
-            if (CardUtil.haveSameNames(permanent.getName(), "Scepter of Empires")) {
+            if (CardUtil.haveSameNames(permanent, "Scepter of Empires", game)) {
                 scepter = true;
-            } else if (CardUtil.haveSameNames(permanent.getName(), "Throne of Empires")) {
+            } else if (CardUtil.haveSameNames(permanent, "Throne of Empires", game)) {
                 throne = true;
             }
             if (scepter && throne) break;

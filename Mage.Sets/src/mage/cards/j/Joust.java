@@ -6,9 +6,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -22,20 +24,13 @@ import java.util.UUID;
  */
 public final class Joust extends CardImpl {
 
-    private static final FilterPermanent filter
-            = new FilterCreaturePermanent("creature you don't control");
-
-    static {
-        filter.add(TargetController.NOT_YOU.getControllerPredicate());
-    }
-
     public Joust(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}");
 
         // Choose target creature you control and target creature you don't control. The creature you control gets +2/+1 until end of turn if it's a Knight. Then those creatures fight each other.
         this.getSpellAbility().addEffect(new JoustEffect());
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
     }
 
     private Joust(final Joust card) {
@@ -81,7 +76,7 @@ class JoustEffect extends OneShotEffect {
         if (creature2 == null) {
             return true;
         }
-        game.applyEffects();
+        game.getState().processAction(game);
         return creature1.fight(creature2, source, game);
     }
 }

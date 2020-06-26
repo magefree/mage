@@ -1,7 +1,5 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
@@ -11,14 +9,15 @@ import mage.constants.CardType;
 import mage.constants.TimingRule;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+
 /**
  * @author nantuko
  */
 public final class BumpInTheNight extends CardImpl {
 
     public BumpInTheNight(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}");
 
         // Target opponent loses 3 life.
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(3));

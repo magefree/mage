@@ -140,13 +140,30 @@ public abstract class CardRenderer {
                 break;
             }
 
+            // workaround to use real split card names
+            String realCardName = cardView.getDisplayName();
+            if (cardView.isSplitCard()) {
+                for (String partRule : cardView.getLeftSplitRules()) {
+                    if (partRule.equals(rule)) {
+                        realCardName = cardView.getLeftSplitName();
+                        break;
+                    }
+                }
+                for (String partRule : cardView.getRightSplitRules()) {
+                    if (partRule.equals(rule)) {
+                        realCardName = cardView.getRightSplitName();
+                        break;
+                    }
+                }
+            }
+
             // Kill reminder text
             if (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_RENDERING_REMINDER_TEXT, "false").equals("false")) {
                 rule = CardRendererUtils.killReminderText(rule).trim();
             }
 
             if (!rule.isEmpty()) {
-                TextboxRule tbRule = TextboxRuleParser.parse(cardView, rule);
+                TextboxRule tbRule = TextboxRuleParser.parse(cardView, rule, realCardName);
                 if (tbRule.type == TextboxRuleType.SIMPLE_KEYWORD) {
                     keywords.add(tbRule);
                 } else if (tbRule.text.isEmpty()) {

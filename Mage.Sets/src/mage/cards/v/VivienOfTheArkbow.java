@@ -10,10 +10,12 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -23,12 +25,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class VivienOfTheArkbow extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you don't control");
-
-    static {
-        filter.add(TargetController.NOT_YOU.getControllerPredicate());
-    }
 
     public VivienOfTheArkbow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{G}{G}");
@@ -45,7 +41,7 @@ public final class VivienOfTheArkbow extends CardImpl {
         // −3: Target creature you control deals damage equal to its power to target creature you don't control.
         ability = new LoyaltyAbility(new DamageWithPowerFromOneToAnotherTargetEffect(), -3);
         ability.addTarget(new TargetControlledCreaturePermanent());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
         this.addAbility(ability);
 
         // −9: Creatures you control get +4/+4 and gain trample until end of turn.
@@ -61,7 +57,7 @@ public final class VivienOfTheArkbow extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VivienOfTheArkbow(final VivienOfTheArkbow card) {
+    private VivienOfTheArkbow(final VivienOfTheArkbow card) {
         super(card);
     }
 

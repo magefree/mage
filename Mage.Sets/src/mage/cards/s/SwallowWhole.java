@@ -64,7 +64,7 @@ class SwallowWholeEffect extends OneShotEffect {
 
     SwallowWholeEffect() {
         super(Outcome.Benefit);
-        staticText = "Put a +1/+1 counter on the creature tapped to cast this spell.";
+        staticText = "Put a +1/+1 counter on the creature tapped to pay this spell's additional cost.";
     }
 
     private SwallowWholeEffect(final SwallowWholeEffect effect) {

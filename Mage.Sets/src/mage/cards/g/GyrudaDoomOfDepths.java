@@ -17,7 +17,6 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInGraveyard;
 
-import java.util.Collection;
 import java.util.Set;
 import java.util.UUID;
 
@@ -36,7 +35,7 @@ public final class GyrudaDoomOfDepths extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Companion — Your starting deck contains only cards with even converted mana costs.
-        this.addAbility(new CompanionAbility(OboshThePreypiercerCompanionCondition.instance));
+        this.addAbility(new CompanionAbility(GyrudaDoomOfDepthsCompanionCondition.instance));
 
         // When Gyruda, Doom of Depths enters the battlefield, each player puts the top four cards of the library into their graveyard. Put a creature card with an even converted mana cost from among those cards onto the battlefield under your control.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GyrudaDoomOfDepthsEffect()));
@@ -52,19 +51,18 @@ public final class GyrudaDoomOfDepths extends CardImpl {
     }
 }
 
-enum OboshThePreypiercerCompanionCondition implements CompanionCondition {
+enum GyrudaDoomOfDepthsCompanionCondition implements CompanionCondition {
     instance;
 
     @Override
     public String getRule() {
-        return "Your starting deck contains only cards with odd converted mana costs and land cards.";
+        return "Your starting deck contains only cards with even converted mana costs.";
     }
 
     @Override
     public boolean isLegal(Set<Card> deck, int startingSize) {
         return deck
                 .stream()
-                .filter(card -> !card.isLand())
                 .mapToInt(MageObject::getConvertedManaCost)
                 .map(i -> i % 2)
                 .allMatch(i -> i == 0);
@@ -82,9 +80,8 @@ class GyrudaDoomOfDepthsEffect extends OneShotEffect {
 
     GyrudaDoomOfDepthsEffect() {
         super(Outcome.Benefit);
-        staticText = "each player puts the top four cards of the library into their graveyard. " +
-                "Put a creature card with an even converted mana cost from among those cards " +
-                "onto the battlefield under your control.";
+        staticText = "each player mills four cards. Put a creature card with an even converted mana cost " +
+                "from among the milled cards onto the battlefield under your control";
     }
 
     private GyrudaDoomOfDepthsEffect(final GyrudaDoomOfDepthsEffect effect) {
@@ -103,16 +100,15 @@ class GyrudaDoomOfDepthsEffect extends OneShotEffect {
             return false;
         }
         Cards cards = new CardsImpl();
-        game.getState()
-                .getPlayersInRange(source.getControllerId(), game)
-                .stream()
-                .map(game::getPlayer)
-                .map(Player::getLibrary)
-                .map(library -> library.getTopCards(game, 4))
-                .flatMap(Collection::stream)
-                .forEach(cards::add);
-        controller.moveCards(cards, Zone.GRAVEYARD, source, game);
-        cards.removeIf(cardId -> game.getState().getZone(cardId) != Zone.GRAVEYARD);
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
+            Player player = game.getPlayer(playerId);
+            if (player == null) {
+                continue;
+            }
+            cards.addAll(player.millCards(4, source, game));
+        }
+        cards.removeIf(cardId -> game.getState().getZone(cardId) != Zone.GRAVEYARD
+                && game.getState().getZone(cardId) != Zone.EXILED);
         if (cards.isEmpty()) {
             return true;
         }

@@ -1,7 +1,5 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
@@ -14,14 +12,15 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Loki
  */
 public final class GeralfsMessenger extends CardImpl {
 
     public GeralfsMessenger(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{B}{B}");
         this.subtype.add(SubType.ZOMBIE);
 
         this.power = new MageInt(3);
@@ -29,10 +28,12 @@ public final class GeralfsMessenger extends CardImpl {
 
         // Geralf's Messenger enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
+
         // When Geralf's Messenger enters the battlefield, target opponent loses 2 life.
         Ability ability = new EntersBattlefieldTriggeredAbility(new LoseLifeTargetEffect(2));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
+
         // Undying
         this.addAbility(new UndyingAbility());
     }

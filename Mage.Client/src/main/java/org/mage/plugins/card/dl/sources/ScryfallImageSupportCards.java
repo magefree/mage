@@ -242,6 +242,10 @@ public class ScryfallImageSupportCards {
             add("C19");
             add("ELD");
             add("THB");
+            add("IKO");
+            add("C20");
+            add("MB1");
+            add("FMB1");
             //
             add("EURO");
             add("GPX");
@@ -256,6 +260,7 @@ public class ScryfallImageSupportCards {
             add("PPP1");
             add("PF19");
             add("MPS-AKH");
+            add("M21");
         }
     };
 

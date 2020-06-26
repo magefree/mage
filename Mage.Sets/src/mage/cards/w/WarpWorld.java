@@ -97,7 +97,7 @@ class WarpWorldEffect extends OneShotEffect {
             }
         }
 
-        game.applyEffects(); // so effects from creatures that were on the battlefield won't trigger from draw or later put into play
+        game.getState().processAction(game); // so effects from creatures that were on the battlefield won't trigger from draw or later put into play
 
         Map<UUID, CardsImpl> cardsRevealed = new HashMap<>();
 
@@ -111,7 +111,7 @@ class WarpWorldEffect extends OneShotEffect {
                 cardsRevealed.put(player.getId(), cards);
             }
         }
-        game.applyEffects();
+        game.getState().processAction(game);
         // put artifacts, creaturs and lands onto the battlefield
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
@@ -129,7 +129,7 @@ class WarpWorldEffect extends OneShotEffect {
                 player.moveCards(toBattlefield, Zone.BATTLEFIELD, source, game);
             }
         }
-        game.applyEffects();
+        game.getState().processAction(game);
         // put enchantments onto the battlefield
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);

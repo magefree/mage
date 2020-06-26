@@ -1426,6 +1426,7 @@ class ImportFilter extends FileFilter {
                     || ext.equalsIgnoreCase("dek")
                     || ext.equalsIgnoreCase("cod")
                     || ext.equalsIgnoreCase("o8d")
+                    || ext.equalsIgnoreCase("json")
                     || ext.equalsIgnoreCase("draft")
                     || ext.equalsIgnoreCase("mtga");
         }
@@ -1434,7 +1435,7 @@ class ImportFilter extends FileFilter {
 
     @Override
     public String getDescription() {
-        return "All formats (*.dec; *.mwDeck; *.txt; *.dek; *.cod; *.o8d; *.draft; *.mtga)";
+        return "All formats (*.dec; *.mwDeck; *.txt; *.dek; *.cod; *.o8d; *.json; *.draft; *.mtga;)";
     }
 }
 

@@ -8,6 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -24,7 +25,8 @@ public final class FlawlessManeuver extends CardImpl {
 
         // Creatures you control gain indestructible until end of turn.
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(
-                IndestructibleAbility.getInstance(), Duration.EndOfTurn
+                IndestructibleAbility.getInstance(), Duration.EndOfTurn,
+                StaticFilters.FILTER_PERMANENT_CREATURES
         ));
     }
 

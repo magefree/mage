@@ -49,7 +49,9 @@ public final class DireFleetDaredevil extends CardImpl {
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
 
-        // When this enters the battlefield, exile target instant or sorcery card from an opponent's graveyard. You may cast that card this turn and you may spend mana as though it were mana of any color. If that card would be put into a graveyard this turn, exile it instead.
+        // When Dire Fleet Daredevil enters the battlefield, exile target instant or sorcery card from an opponent's graveyard. 
+        // You may cast it this turn, and you may spend mana as though it were mana of any type to cast that spell. 
+        // If that spell would be put into a graveyard this turn, exile it instead.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DireFleetDaredevilEffect());
         ability.addTarget(new TargetCardInOpponentsGraveyard(filter));
         this.addAbility(ability);
@@ -167,8 +169,9 @@ class DireFleetDaredevilReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Card card = game.getCard(event.getTargetId());
-        if (card != null) {
-            return card.moveToZone(Zone.EXILED, source.getSourceId(), game, false);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (card != null && controller != null) {
+            return controller.moveCards(card, Zone.EXILED, source, game);
         }
         return false;
     }

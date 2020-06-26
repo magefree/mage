@@ -27,7 +27,7 @@ public final class Putrefy extends CardImpl {
     public Putrefy (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}{G}");
 
-
+        // Destroy target artifact or creature. It can't be regenerated.
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
     }

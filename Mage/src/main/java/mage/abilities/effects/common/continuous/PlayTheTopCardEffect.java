@@ -7,6 +7,7 @@ import mage.constants.AsThoughEffectType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -18,17 +19,17 @@ import java.util.UUID;
  */
 public class PlayTheTopCardEffect extends AsThoughEffectImpl {
 
-    private FilterCard filter;
+    private final FilterCard filter;
 
     public PlayTheTopCardEffect() {
-        this(new FilterCard());
-        staticText = "You may play the top card of your library";
+        this(StaticFilters.FILTER_CARD);
+        staticText = "You may play lands and cast spells from the top of your library";
     }
 
     public PlayTheTopCardEffect(FilterCard filter) {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
         this.filter = filter;
-        staticText = "You may play the top card of your library if it's a " + filter.getMessage();
+        staticText = "You may " + filter.getMessage() + " from the top of your library";
     }
 
     public PlayTheTopCardEffect(final PlayTheTopCardEffect effect) {

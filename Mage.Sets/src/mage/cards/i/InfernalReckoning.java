@@ -69,7 +69,7 @@ class InfernalJudgmentEffect extends OneShotEffect {
         }
         int creaturePower = permanent.getPower().getValue();
         permanent.moveToExile(null, null, source.getSourceId(), game);
-        game.applyEffects();
+        game.getState().processAction(game);
         player.gainLife(creaturePower, game, source);
         return true;
     }

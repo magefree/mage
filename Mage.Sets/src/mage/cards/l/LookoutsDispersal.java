@@ -1,4 +1,3 @@
-
 package mage.cards.l;
 
 import java.util.UUID;
@@ -32,7 +31,7 @@ public final class LookoutsDispersal extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}");
 
         // Lookout's Dispersal costs {1} less to cast if you control a Pirate.
-        Ability ability = new SimpleStaticAbility(Zone.STACK, new SpellCostReductionSourceEffect(1, new PermanentsOnTheBattlefieldCondition(filter)));
+        Ability ability = new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(1, new PermanentsOnTheBattlefieldCondition(filter)));
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);
 

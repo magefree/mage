@@ -106,7 +106,7 @@ class InfectiousCurseCostReductionEffect extends CostModificationEffectImpl {
 
     public InfectiousCurseCostReductionEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        this.staticText = "Spells you cast that target enchanted player cost {1} less to cast.";
+        this.staticText = "Spells you cast that target enchanted player cost {1} less to cast";
     }
 
     protected InfectiousCurseCostReductionEffect(InfectiousCurseCostReductionEffect effect) {

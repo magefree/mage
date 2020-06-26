@@ -1,7 +1,5 @@
 package org.mage.test.stub;
 
-import java.io.Serializable;
-import java.util.*;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.*;
@@ -40,6 +38,9 @@ import mage.target.Target;
 import mage.target.TargetAmount;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
+
+import java.io.Serializable;
+import java.util.*;
 
 /**
  * @author Quercitron
@@ -284,11 +285,6 @@ public class PlayerStub implements Player {
 
     @Override
     public boolean isPassed() {
-        return false;
-    }
-
-    @Override
-    public boolean isEmptyDraw() {
         return false;
     }
 
@@ -543,11 +539,6 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public SpellAbility chooseSpellAbilityForCast(SpellAbility ability, Game game, boolean noMana) {
-        return null;
-    }
-
-    @Override
     public boolean putInHand(Card card, Game game) {
         return false;
     }
@@ -654,6 +645,11 @@ public class PlayerStub implements Player {
     @Override
     public int rollDice(Game game, List<UUID> appliedEffects, int numSides) {
         return 1;
+    }
+
+    @Override
+    public Cards discard(Cards cards, Ability source, Game game) {
+        return null;
     }
 
     @Override
@@ -897,6 +893,21 @@ public class PlayerStub implements Player {
     }
 
     @Override
+    public boolean putCardsOnTopOfLibrary(Card card, Game game, Ability source, boolean anyOrder) {
+        return false;
+    }
+
+    @Override
+    public boolean shuffleCardsToLibrary(Cards cards, Game game, Ability source) {
+        return false;
+    }
+
+    @Override
+    public boolean shuffleCardsToLibrary(Card card, Game game, Ability source) {
+        return false;
+    }
+
+    @Override
     public boolean putCardOnTopXOfLibrary(Card card, Game game, Ability source, int xFromTheTop) {
         return true;
     }
@@ -1027,7 +1038,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public List<Ability> getPlayable(Game game, boolean hidden) {
+    public List<ActivatedAbility> getPlayable(Game game, boolean hidden) {
         return null;
     }
 
@@ -1042,7 +1053,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public LinkedHashMap<UUID, ActivatedAbility> getUseableActivatedAbilities(MageObject object, Zone zone, Game game) {
+    public LinkedHashMap<UUID, ActivatedAbility> getPlayableActivatedAbilities(MageObject object, Zone zone, Game game) {
         return null;
     }
 
@@ -1189,6 +1200,11 @@ public class PlayerStub implements Player {
     @Override
     public boolean moveCardToCommandWithInfo(Card card, UUID sourceId, Game game, Zone fromZone) {
         return false;
+    }
+
+    @Override
+    public Cards millCards(int toMill, Ability source, Game game) {
+        return null;
     }
 
     @Override

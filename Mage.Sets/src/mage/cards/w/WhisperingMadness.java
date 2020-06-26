@@ -1,11 +1,8 @@
-
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CipherEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -13,23 +10,24 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class WhisperingMadness extends CardImpl {
 
     public WhisperingMadness(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}{B}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}{B}");
 
         // Each player discards their hand, then draws cards equal to the greatest number of cards a player discarded this way.
         this.getSpellAbility().addEffect(new WhisperingMadnessEffect());
+
         // Cipher
         this.getSpellAbility().addEffect(new CipherEffect());
     }
 
-    public WhisperingMadness(final WhisperingMadness card) {
+    private WhisperingMadness(final WhisperingMadness card) {
         super(card);
     }
 
@@ -45,38 +43,33 @@ class WhisperingMadnessEffect extends OneShotEffect {
         staticText = "Each player discards their hand, then draws cards equal to the greatest number of cards a player discarded this way";
     }
 
-    WhisperingMadnessEffect(final WhisperingMadnessEffect effect) {
+    private WhisperingMadnessEffect(final WhisperingMadnessEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         int maxDiscarded = 0;
-        Player sourcePlayer = game.getPlayer(source.getControllerId());
-        if (sourcePlayer == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
         }
-        for (UUID playerId : game.getState().getPlayersInRange(sourcePlayer.getId(), game)) {
+        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
             Player player = game.getPlayer(playerId);
-            if (player != null) {
-                int discarded = 0;
-                for (Card c : player.getHand().getCards(game)) {
-                    if (player.discard(c, source, game)) {
-                        discarded++;
-                    }
-                }
-                if (discarded > maxDiscarded) {
-                    maxDiscarded = discarded;
-                }
+            if (player == null) {
+                continue;
+            }
+            int discarded = player.discard(player.getHand(), source, game).size();
+            if (discarded > maxDiscarded) {
+                maxDiscarded = discarded;
             }
         }
-        for (UUID playerId : game.getState().getPlayersInRange(sourcePlayer.getId(), game)) {
+        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 player.drawCards(maxDiscarded, source.getSourceId(), game);
             }
         }
-
         return true;
     }
 

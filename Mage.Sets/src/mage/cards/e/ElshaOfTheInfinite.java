@@ -24,7 +24,7 @@ import java.util.UUID;
  */
 public final class ElshaOfTheInfinite extends CardImpl {
 
-    private static final FilterCard filter = new FilterNonlandCard();
+    private static final FilterCard filter = new FilterNonlandCard("cast noncreature spells");
 
     static {
         filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
@@ -46,14 +46,10 @@ public final class ElshaOfTheInfinite extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new LookAtTopCardOfLibraryAnyTimeEffect()));
 
         // You may cast the top card of your library if it's a noncreature, nonland card, and you may cast it as though it had flash.
-        Ability ability = new SimpleStaticAbility(
-                new PlayTheTopCardEffect(filter).setText(
-                        "you may cast the top card of your library if it's a noncreature, nonland card,"
-                )
-        );
+        Ability ability = new SimpleStaticAbility(new PlayTheTopCardEffect(filter));
         ability.addEffect(new CastAsThoughItHadFlashAllEffect(
                 Duration.WhileOnBattlefield, filter
-        ).setText("and you may cast it as though it had flash"));
+        ).setText("If you cast a spell this way, you may cast it as though it had flash."));
         this.addAbility(ability);
     }
 

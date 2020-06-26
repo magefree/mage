@@ -522,4 +522,11 @@ public interface Ability extends Controllable, Serializable {
     Ability addCustomOutcome(Outcome customOutcome);
 
     Outcome getCustomOutcome();
+
+    /**
+     * For mtg's instances search, see rules example in 112.10b
+     * @param ability
+     * @return
+     */
+    boolean isSameInstance(Ability ability);
 }

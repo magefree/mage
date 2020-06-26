@@ -1,9 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -11,23 +7,23 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+import java.util.stream.Collectors;
+
 /**
- *
  * @author LoneFox
- *
  */
 public final class CrosisThePurger extends CardImpl {
 
@@ -45,7 +41,7 @@ public final class CrosisThePurger extends CardImpl {
                 new ManaCostsImpl("{2}{B}")), false, true));
     }
 
-    public CrosisThePurger(final CrosisThePurger card) {
+    private CrosisThePurger(final CrosisThePurger card) {
         super(card);
     }
 
@@ -62,7 +58,7 @@ class CrosisThePurgerEffect extends OneShotEffect {
         this.staticText = "choose a color, then that player reveals their hand and discards all cards of that color.";
     }
 
-    CrosisThePurgerEffect(final CrosisThePurgerEffect effect) {
+    private CrosisThePurgerEffect(final CrosisThePurgerEffect effect) {
         super(effect);
     }
 
@@ -74,30 +70,28 @@ class CrosisThePurgerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            ChoiceColor choice = new ChoiceColor();
-            player.choose(outcome, choice, game);
-            if (choice.isChosen()) {
-                game.informPlayers(player.getLogName() + " chooses " + choice.getColor());
-                Player damagedPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
-                if(damagedPlayer != null) {
-                    damagedPlayer.revealCards("hand of " + damagedPlayer.getName(), damagedPlayer.getHand(), game);
-                    FilterCard filter = new FilterCard();
-                    filter.add(new ColorPredicate(choice.getColor()));
-                    List<Card> toDiscard = new ArrayList<>();
-                    for (UUID cardId : damagedPlayer.getHand()) {
-                        Card card = game.getCard(cardId);
-                        if (filter.match(card, game)) {
-                            toDiscard.add(card);
-                        }
-                    }
-                    for (Card card : toDiscard) {
-                        damagedPlayer.discard(card, source, game);
-                    }
-                    return true;
-                }
-            }
+        if (player == null) {
+            return false;
         }
-        return false;
+        ChoiceColor choice = new ChoiceColor();
+        player.choose(outcome, choice, game);
+        if (!choice.isChosen()) {
+            return false;
+        }
+        game.informPlayers(player.getLogName() + " chooses " + choice.getColor());
+        Player damagedPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
+        if (damagedPlayer == null) {
+            return false;
+        }
+        damagedPlayer.revealCards("hand of " + damagedPlayer.getName(), damagedPlayer.getHand(), game);
+        Cards cards = new CardsImpl(
+                damagedPlayer.getHand()
+                        .getCards(game)
+                        .stream()
+                        .filter(card -> card.getColor(game).shares(choice.getColor()))
+                        .collect(Collectors.toSet())
+        );
+        damagedPlayer.discard(cards, source, game);
+        return true;
     }
 }

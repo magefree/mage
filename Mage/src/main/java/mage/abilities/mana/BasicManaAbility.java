@@ -1,13 +1,10 @@
-
-
 package mage.abilities.mana;
 
-import mage.constants.Zone;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.ManaEffect;
+import mage.constants.Zone;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class BasicManaAbility extends ActivatedManaAbilityImpl {
@@ -19,5 +16,4 @@ public abstract class BasicManaAbility extends ActivatedManaAbilityImpl {
     public BasicManaAbility(BasicManaAbility ability) {
         super(ability);
     }
-
 }

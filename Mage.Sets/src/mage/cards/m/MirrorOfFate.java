@@ -67,42 +67,20 @@ class MirrorOfFateEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
         }
-
+        // Choose up to seven face-up exiled cards you own
         CardsImpl cards = new CardsImpl();
         MirrorOfFateTarget targetExile = new MirrorOfFateTarget();
-        if (player.choose(outcome, targetExile, source.getSourceId(), game)) {
-            for (UUID cardId : targetExile.getTargets()) {
-                Card card = game.getCard(cardId);
-                if (card != null) {
-                    cards.add(card);
-                }
-            }
+        if (controller.choose(outcome, targetExile, source.getSourceId(), game)) {
+            cards.addAll(targetExile.getTargets());
         }
-
-        for (Card card : player.getLibrary().getCards(game)) {
-            card.moveToExile(null, null, source.getSourceId(), game);
-        }
-
-        TargetCard target = new TargetCard(Zone.EXILED, new FilterCard("card to put on top of your library"));
-        while (player.canRespond() && cards.size() > 1) {
-            player.choose(Outcome.Neutral, cards, target, game);
-            Card card = cards.get(target.getFirstTarget(), game);
-            if (card != null) {
-                cards.remove(card);
-                card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-            }
-            target.clearChosen();
-        }
-        if (cards.size() == 1) {
-            Card card = cards.get(cards.iterator().next(), game);
-            card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-        }
-
-        return true;
+        // Exile all the cards from your library
+        controller.moveCards(new CardsImpl(controller.getLibrary().getCardList()), Zone.EXILED, source, game);
+        // put the chosen cards on top of your library"
+        return controller.putCardsOnTopOfLibrary(cards, game, source, true);
     }
 }
 

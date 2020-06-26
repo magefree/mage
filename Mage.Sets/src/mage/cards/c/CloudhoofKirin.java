@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -9,11 +8,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.stack.Spell;
@@ -21,8 +16,9 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPlayer;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class CloudhoofKirin extends CardImpl {
@@ -44,7 +40,7 @@ public final class CloudhoofKirin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CloudhoofKirin(final CloudhoofKirin card) {
+    private CloudhoofKirin(final CloudhoofKirin card) {
         super(card);
     }
 
@@ -56,12 +52,12 @@ public final class CloudhoofKirin extends CardImpl {
 
 class CloudhoofKirinEffect extends OneShotEffect {
 
-    public CloudhoofKirinEffect() {
+    CloudhoofKirinEffect() {
         super(Outcome.Detriment);
-        this.staticText = "you may have target player put the top X cards of their library into their graveyard, where X is that spell's converted mana cost";
+        this.staticText = "have target player mill X cards, where X is that spell's converted mana cost";
     }
 
-    public CloudhoofKirinEffect(final CloudhoofKirinEffect effect) {
+    private CloudhoofKirinEffect(final CloudhoofKirinEffect effect) {
         super(effect);
     }
 
@@ -80,8 +76,10 @@ class CloudhoofKirinEffect extends OneShotEffect {
                     targetPlayer = game.getPlayer(target.getFirstTarget());
                 }
             }
-            if (targetPlayer != null) {
-                return targetPlayer.moveCards(targetPlayer.getLibrary().getTopCards(game, spell.getConvertedManaCost()), Zone.GRAVEYARD, source, game);
+            int cmc = spell.getConvertedManaCost();
+            if (targetPlayer != null && cmc > 0) {
+                targetPlayer.millCards(cmc, source, game);
+                return true;
             }
         }
         return false;

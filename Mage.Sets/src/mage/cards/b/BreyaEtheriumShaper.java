@@ -1,7 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -22,6 +21,8 @@ import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 
+import java.util.UUID;
+
 /**
  *
  * @author fireshoes
@@ -39,12 +40,12 @@ public final class BreyaEtheriumShaper extends CardImpl {
         // When Breya, Etherium Shaper enters the battlefield, create two 1/1 blue Thopter artifact creature tokens with flying.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ThopterToken(), 2)));
 
-        // {2}, Sacrifice two artifacts: Choose one &mdash; Breya deals 3 damage to target player.
+        // {2}, Sacrifice two artifacts: Choose one &mdash; Breya deals 3 damage to target player or planeswalker.
         Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new DamageTargetEffect(3),
                 new GenericManaCost(2));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(2, 2, new FilterControlledArtifactPermanent("two artifacts"), true)));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(2, 2, new FilterControlledArtifactPermanent("artifacts"), true)));
         ability.addTarget(new TargetPlayerOrPlaneswalker());
 
         // Target creature gets -4/-4 until end of turn.

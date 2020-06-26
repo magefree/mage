@@ -133,7 +133,7 @@ class CorrosiveOozeCombatWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.BLOCKER_DECLARED) {
             Permanent attacker = game.getPermanent(event.getTargetId());
             Permanent blocker = game.getPermanent(event.getSourceId());
-            if (attacker != null && CardUtil.haveSameNames(attacker.getName(), "Corrosive Ooze")) { // To check for name is not working if Ooze is copied but name changed
+            if (attacker != null && CardUtil.haveSameNames(attacker, "Corrosive Ooze", game)) { // To check for name is not working if Ooze is copied but name changed
                 if (blocker != null && hasAttachedEquipment(game, blocker)) {
                     MageObjectReference oozeMor = new MageObjectReference(attacker, game);
                     Set<MageObjectReference> relatedCreatures = oozeBlocksOrBlocked.getOrDefault(oozeMor, new HashSet<>());
@@ -141,7 +141,7 @@ class CorrosiveOozeCombatWatcher extends Watcher {
                     oozeBlocksOrBlocked.put(oozeMor, relatedCreatures);
                 }
             }
-            if (blocker != null && CardUtil.haveSameNames(blocker.getName(), "Corrosive Ooze")) {
+            if (blocker != null && CardUtil.haveSameNames(blocker, "Corrosive Ooze", game)) {
                 if (attacker != null && hasAttachedEquipment(game, attacker)) {
                     MageObjectReference oozeMor = new MageObjectReference(blocker, game);
                     Set<MageObjectReference> relatedCreatures = oozeBlocksOrBlocked.getOrDefault(oozeMor, new HashSet<>());

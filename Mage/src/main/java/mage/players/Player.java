@@ -152,8 +152,6 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean isPassed();
 
-    boolean isEmptyDraw();
-
     void pass(Game game);
 
     void resetPassed();
@@ -317,8 +315,6 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean cast(SpellAbility ability, Game game, boolean noMana, MageObjectReference reference);
 
-    SpellAbility chooseSpellAbilityForCast(SpellAbility ability, Game game, boolean noMana);
-
     SpellAbility chooseAbilityForCast(Card card, Game game, boolean noMana);
 
     boolean putInHand(Card card, Game game);
@@ -411,6 +407,8 @@ public interface Player extends MageItem, Copyable<Player> {
     Card discardOne(boolean random, Ability source, Game game);
 
     Cards discard(int amount, boolean random, Ability source, Game game);
+
+    Cards discard(Cards cards, Ability source, Game game);
 
     void discardToMax(Game game);
 
@@ -532,8 +530,11 @@ public interface Player extends MageItem, Copyable<Player> {
      *
      * @param cards    - list of cards that have to be moved
      * @param game     - game
-     * @param anyOrder - true if player can determine the order of the cards
-     *                 else random order
+     * @param anyOrder - true = if player can determine the order of the cards
+     *                 else false = random order
+     *                 401.4. If an effect puts two or more cards in a specific position in a library
+     *                 at the same time, the owner of those cards may arrange them in any order.
+     *                 That library’s owner doesn’t reveal the order in which the cards go into the library.
      * @param source   - source ability
      * @return
      */
@@ -562,6 +563,12 @@ public interface Player extends MageItem, Copyable<Player> {
      * @return
      */
     boolean putCardsOnTopOfLibrary(Cards cards, Game game, Ability source, boolean anyOrder);
+
+    boolean putCardsOnTopOfLibrary(Card card, Game game, Ability source, boolean anyOrder);
+
+    boolean shuffleCardsToLibrary(Cards cards, Game game, Ability source);
+
+    boolean shuffleCardsToLibrary(Card card, Game game, Ability source);
 
     // set the value for X mana spells and abilities
     default int announceXMana(int min, int max, String message, Game game, Ability ability) {
@@ -629,13 +636,13 @@ public interface Player extends MageItem, Copyable<Player> {
 
     ManaOptions getManaAvailable(Game game);
 
-    List<Ability> getPlayable(Game game, boolean hidden);
+    List<ActivatedAbility> getPlayable(Game game, boolean hidden);
 
     List<Ability> getPlayableOptions(Ability ability, Game game);
 
     Map<UUID, Integer> getPlayableObjects(Game game, Zone zone);
 
-    LinkedHashMap<UUID, ActivatedAbility> getUseableActivatedAbilities(MageObject object, Zone zone, Game game);
+    LinkedHashMap<UUID, ActivatedAbility> getPlayableActivatedAbilities(MageObject object, Zone zone, Game game);
 
     boolean addCounters(Counter counter, Game game);
 
@@ -727,7 +734,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     /**
      * Universal method to move cards from one zone to another. Do not mix
-     * objects from different from zones to move.
+     * objects from different zones to move.
      *
      * @param cards
      * @param toZone
@@ -832,6 +839,8 @@ public interface Player extends MageItem, Copyable<Player> {
      * @return
      */
     boolean moveCardToCommandWithInfo(Card card, UUID sourceId, Game game, Zone fromZone);
+
+    Cards millCards(int toMill, Ability source, Game game);
 
     /**
      * Checks if the playerToCheckId is from an opponent in range

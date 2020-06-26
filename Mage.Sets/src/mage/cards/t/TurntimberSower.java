@@ -1,6 +1,5 @@
 package mage.cards.t;
 
-import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -11,10 +10,10 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.Card;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -94,10 +93,8 @@ class TurntimberSowerTriggeredAbility extends TriggeredAbilityImpl {
             for (Card card : zEvent.getCards()) {
                 if (card != null) {
                     UUID cardOwnerId = card.getOwnerId();
-                    Set<CardType> cardType = card.getCardType();
                     if (cardOwnerId != null
                             && card.isOwnedBy(getControllerId())
-                            && cardType != null
                             && card.isLand()) {
                         return true;
                     }

@@ -1,14 +1,15 @@
 package mage.filter;
 
+import mage.cards.Card;
+import mage.constants.TargetController;
+import mage.filter.predicate.*;
+import mage.game.Game;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
-import mage.cards.Card;
-import mage.constants.TargetController;
-import mage.filter.predicate.*;
-import mage.game.Game;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -94,5 +95,10 @@ public class FilterCard extends FilterObject<Card> {
         if (list.stream().anyMatch(p -> p instanceof TargetController.ControllerPredicate)) {
             throw new IllegalArgumentException("Card filter doesn't support controller predicate");
         }
+    }
+
+    public FilterCard withMessage(String message) {
+        this.setMessage(message);
+        return this;
     }
 }

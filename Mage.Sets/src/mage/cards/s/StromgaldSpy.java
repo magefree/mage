@@ -5,6 +5,8 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksAndIsNotBlockedTriggeredAbility;
+import mage.abilities.condition.common.SourceRemainsInZoneCondition;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continuous.AssignNoCombatDamageSourceEffect;
 import mage.constants.SubType;
@@ -15,6 +17,7 @@ import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -32,8 +35,14 @@ public final class StromgaldSpy extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 
-        // Whenever Stromgald Spy attacks and isn't blocked, you may have defending player play with their hand revealed for as long as Stromgald Spy remains on the battlefield. If you do, Stromgald Spy assigns no combat damage this turn.
-        Ability ability = new AttacksAndIsNotBlockedTriggeredAbility(new StromgaldSpyEffect(), true, true);
+        // Whenever Stromgald Spy attacks and isn't blocked, you may have defending player play with their hand revealed
+        // for as long as Stromgald Spy remains on the battlefield. If you do, Stromgald Spy assigns no combat damage this turn.
+        Ability ability = new AttacksAndIsNotBlockedTriggeredAbility(
+                new ConditionalContinuousEffect(
+                                new StromgaldSpyEffect(),
+                                new SourceRemainsInZoneCondition(Zone.BATTLEFIELD),
+                                "you may have defending player play with their hand revealed for as long as {this} remains on the battlefield"),
+                true, true);
         ability.addEffect(new AssignNoCombatDamageSourceEffect(Duration.EndOfTurn, true));
         this.addAbility(ability);
     }
@@ -51,8 +60,7 @@ public final class StromgaldSpy extends CardImpl {
 class StromgaldSpyEffect extends ContinuousEffectImpl {
 
     public StromgaldSpyEffect() {
-        super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Detriment);
-        this.staticText = "you may have defending player play with their hand revealed for as long as Stromgald Spy remains on the battlefield";
+        super(Duration.Custom, Layer.PlayerEffects, SubLayer.NA, Outcome.Detriment);
     }
 
     public StromgaldSpyEffect(final StromgaldSpyEffect effect) {

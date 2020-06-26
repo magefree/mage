@@ -16,8 +16,9 @@ public final class Foresee extends CardImpl {
     public Foresee(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}");
 
-        this.getSpellAbility().addEffect(new ScryEffect(4).setText("scry 4,"));
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2).setText("then draw two cards"));
+        // Scry 4, then draw two cards. (To scry 4, look at the top four cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
+        this.getSpellAbility().addEffect(new ScryEffect(4, false));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2).concatBy(", then"));
     }
 
     public Foresee(final Foresee card) {

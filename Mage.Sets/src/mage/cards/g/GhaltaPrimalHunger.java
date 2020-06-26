@@ -40,7 +40,7 @@ public final class GhaltaPrimalHunger extends CardImpl {
         this.toughness = new MageInt(12);
 
         // Ghalta, Primal Hunger costs {X} less to cast, where X is the total power of creatures you control.
-        this.addAbility(new SimpleStaticAbility(Zone.STACK, new GhaltaPrimalHungerCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new GhaltaPrimalHungerCostReductionEffect()));
         // Trample
         this.addAbility(TrampleAbility.getInstance());
 

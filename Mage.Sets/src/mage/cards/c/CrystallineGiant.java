@@ -16,10 +16,10 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.RandomUtil;
 
+import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -69,7 +69,7 @@ class CrystallineGiantEffect extends OneShotEffect {
     CrystallineGiantEffect() {
         super(Outcome.Benefit);
         staticText = "choose a kind of counter at random that {this} doesn't have on it from among " +
-                "flying, first strike, deathtouch, hexproof, lifelink, menace, reach, trample, vigilance, or +1/+1. " +
+                "flying, first strike, deathtouch, hexproof, lifelink, menace, reach, trample, vigilance or +1/+1. " +
                 "Put a counter of that kind on {this}";
     }
 
@@ -89,12 +89,11 @@ class CrystallineGiantEffect extends OneShotEffect {
             return false;
         }
         Counters counters = permanent.getCounters(game);
-        List<CounterType> counterTypes = counterTypeSet
-                .stream()
-                .filter(counterType -> !counters.containsKey(counterType))
-                .collect(Collectors.toList());
-        if (counterTypes.size() == 0) {
-            return false;
+        List<CounterType> counterTypes = new ArrayList();
+        counterTypes.addAll(counterTypeSet);
+        counterTypes.removeIf(counters::containsKey);
+        if (counterTypes.isEmpty()) {
+            return true;
         }
         return permanent.addCounters(counterTypes.get(
                 RandomUtil.nextInt(counterTypes.size())

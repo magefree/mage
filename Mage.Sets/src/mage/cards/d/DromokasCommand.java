@@ -1,7 +1,5 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.FightTargetsEffect;
@@ -12,8 +10,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.common.FilterInstantOrSorcerySpell;
@@ -22,19 +20,15 @@ import mage.target.TargetSpell;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class DromokasCommand extends CardImpl {
 
     private static final FilterEnchantmentPermanent filterEnchantment = new FilterEnchantmentPermanent("an enchantment");
     private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("creature to put a +1/+1 counter on it");
-    private static final FilterCreaturePermanent filterUncontrolledCreature = new FilterCreaturePermanent("creature you don't control");
-
-    static {
-        filterUncontrolledCreature.add(TargetController.NOT_YOU.getControllerPredicate());
-    }
 
     public DromokasCommand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}{W}");
@@ -69,12 +63,12 @@ public final class DromokasCommand extends CardImpl {
         effect.setText("Target creature you control fights target creature you don't control");
         mode.addEffect(effect);
         mode.addTarget(new TargetControlledCreaturePermanent());
-        mode.addTarget(new TargetCreaturePermanent(filterUncontrolledCreature));
+        mode.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
         this.getSpellAbility().getModes().addMode(mode);
 
     }
 
-    public DromokasCommand(final DromokasCommand card) {
+    private DromokasCommand(final DromokasCommand card) {
         super(card);
     }
 

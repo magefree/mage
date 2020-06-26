@@ -4,49 +4,56 @@ import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.constants.SubType;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 
-public class UrzaTerrainValue implements DynamicValue {
+public enum UrzaTerrainValue implements DynamicValue {
+    MINE(2, SubType.MINE),
+    TOWER(3, SubType.TOWER),
+    POWER_PLANT(2, SubType.POWER_PLANT);
 
     private final int value;
+    private final SubType subType;
 
-    public UrzaTerrainValue(int value) {
+    private static final FilterPermanent mineFilter = new FilterControlledPermanent(SubType.MINE);
+    private static final FilterPermanent towerFilter = new FilterControlledPermanent(SubType.TOWER);
+    private static final FilterPermanent powerPlantFilter = new FilterControlledPermanent(SubType.POWER_PLANT);
+
+    static {
+        mineFilter.add(SubType.URZAS.getPredicate());
+        towerFilter.add(SubType.URZAS.getPredicate());
+        powerPlantFilter.add(SubType.URZAS.getPredicate());
+    }
+
+    UrzaTerrainValue(int value, SubType subType) {
         this.value = value;
+        this.subType = subType;
     }
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        FilterControlledPermanent pp = new FilterControlledPermanent("Urza's Power Plant");
-        pp.add(SubType.URZAS.getPredicate());
-        pp.add(SubType.POWER_PLANT.getPredicate());
-        PermanentsOnBattlefieldCount ppP = new PermanentsOnBattlefieldCount(pp);
-        if (ppP.calculate(game, sourceAbility, effect) < 1) {
+        if (subType != SubType.MINE && game.getBattlefield().count(
+                mineFilter, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game
+        ) < 1) {
             return 1;
         }
-
-        FilterControlledPermanent to = new FilterControlledPermanent("Urza's Tower");
-        to.add(SubType.URZAS.getPredicate());
-        to.add(SubType.TOWER.getPredicate());
-        PermanentsOnBattlefieldCount toP = new PermanentsOnBattlefieldCount(to);
-        if (toP.calculate(game, sourceAbility, effect) < 1) {
+        if (subType != SubType.TOWER && game.getBattlefield().count(
+                towerFilter, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game
+        ) < 1) {
             return 1;
         }
-
-        FilterControlledPermanent mi = new FilterControlledPermanent("Urza's Mine");
-        mi.add(SubType.URZAS.getPredicate());
-        mi.add(SubType.MINE.getPredicate());
-        PermanentsOnBattlefieldCount miP = new PermanentsOnBattlefieldCount(mi);
-        if (miP.calculate(game, sourceAbility, effect) < 1) {
+        if (subType != SubType.POWER_PLANT && game.getBattlefield().count(
+                powerPlantFilter, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game
+        ) < 1) {
             return 1;
         }
-
         return value;
     }
 
     @Override
     public UrzaTerrainValue copy() {
-        return new UrzaTerrainValue(value);
+        return this;
     }
 
     @Override

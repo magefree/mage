@@ -1,7 +1,5 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
@@ -14,7 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.target.Target;
@@ -22,17 +20,16 @@ import mage.target.TargetSpell;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class TemurCharm extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you don't control");
     private static final FilterCreaturePermanent filterCantBlock = new FilterCreaturePermanent("Creatures with power 3 or less");
 
     static {
-        filter.add(TargetController.NOT_YOU.getControllerPredicate());
         filterCantBlock.add(new PowerPredicate(ComparisonType.FEWER_THAN, 4));
     }
 
@@ -44,10 +41,10 @@ public final class TemurCharm extends CardImpl {
         Effect effect = new BoostTargetEffect(1, 1, Duration.EndOfTurn);
         this.getSpellAbility().addEffect(effect);
         effect = new FightTargetsEffect();
-        effect.setText("That creature fights target creature you don't control");
+        effect.setText("It fights target creature you don't control");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        Target target = new TargetCreaturePermanent(filter);
+        Target target = new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL);
         this.getSpellAbility().addTarget(target);
 
         // Counter target spell unless its controller pays {3}.
@@ -60,7 +57,6 @@ public final class TemurCharm extends CardImpl {
         mode = new Mode();
         mode.addEffect(new CantBlockAllEffect(filterCantBlock, Duration.EndOfTurn));
         this.getSpellAbility().addMode(mode);
-
     }
 
     private TemurCharm(final TemurCharm card) {

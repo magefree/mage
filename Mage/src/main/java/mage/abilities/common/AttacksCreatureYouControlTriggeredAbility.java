@@ -79,9 +79,9 @@ public class AttacksCreatureYouControlTriggeredAbility extends TriggeredAbilityI
         if (who.startsWith("another")) {
             an = "";
         } else if (who.startsWith("a")) {
-            an = "an";
+            an = "an ";
         } else {
-            an = "a";
+            an = "a ";
         }
 
         return "When" + (once ? "" : "ever")

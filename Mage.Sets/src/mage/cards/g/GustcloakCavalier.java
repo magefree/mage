@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.common.BecomesBlockedTriggeredAbility;
+import mage.abilities.common.BecomesBlockedSourceTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.RemoveFromCombatSourceEffect;
 import mage.abilities.effects.common.TapTargetEffect;
@@ -39,7 +39,7 @@ public final class GustcloakCavalier extends CardImpl {
         this.addAbility(ability);
         
         // Whenever Gustcloak Cavalier becomes blocked, you may untap Gustcloak Cavalier and remove it from combat.
-        Ability ability2 = new BecomesBlockedTriggeredAbility(new UntapSourceEffect(), true);
+        Ability ability2 = new BecomesBlockedSourceTriggeredAbility(new UntapSourceEffect(), true);
         Effect effect = new RemoveFromCombatSourceEffect();
         effect.setText("and remove it from combat");
         ability2.addEffect(effect);

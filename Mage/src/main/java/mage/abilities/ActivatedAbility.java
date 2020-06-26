@@ -1,18 +1,19 @@
 package mage.abilities;
 
-import java.util.UUID;
+import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.mana.ManaOptions;
 import mage.constants.TargetController;
 import mage.game.Game;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public interface ActivatedAbility extends Ability {
 
-    final public class ActivationStatus {
+    final class ActivationStatus {
 
         private final boolean canActivate;
         private final MageObjectReference permittingObject;
@@ -34,8 +35,13 @@ public interface ActivatedAbility extends Ability {
             return new ActivationStatus(false, null);
         }
 
-        public static ActivationStatus getTrue() {
-            return new ActivationStatus(true, null);
+        /**
+         * @param permittingObjectAbility card or permanent that allows to activate current ability
+         */
+        public static ActivationStatus getTrue(Ability permittingObjectAbility, Game game) {
+            MageObject object = permittingObjectAbility == null ? null : permittingObjectAbility.getSourceObject(game);
+            MageObjectReference ref = object == null ? null : new MageObjectReference(object, game);
+            return new ActivationStatus(true, ref);
         }
     }
 

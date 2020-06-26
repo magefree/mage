@@ -30,39 +30,6 @@ public class TestComputerPlayer extends ComputerPlayer {
     }
 
     @Override
-    public SpellAbility chooseSpellAbilityForCast(SpellAbility ability, Game game, boolean noMana) {
-        // copy-paste for TestComputerXXX
-
-        // workaround to cast fused cards in tests by it's NAMES (Wear, Tear, Wear // Tear)
-        // reason: TestPlayer uses outer computerPlayer to cast, not TestPlayer
-        switch (ability.getSpellAbilityType()) {
-            case SPLIT:
-            case SPLIT_FUSED:
-            case SPLIT_AFTERMATH:
-                if (!this.testPlayerLink.getChoices().isEmpty()) {
-                    MageObject object = game.getObject(ability.getSourceId());
-                    if (object != null) {
-                        LinkedHashMap<UUID, ActivatedAbility> useableAbilities = getSpellAbilities(playerId, object, game.getState().getZone(object.getId()), game);
-
-                        // left, right or fused cast
-                        for (String choose : this.testPlayerLink.getChoices()) {
-                            for (ActivatedAbility activatedAbility : useableAbilities.values()) {
-                                if (activatedAbility instanceof SpellAbility) {
-                                    if (((SpellAbility) activatedAbility).getCardName().equals(choose)) {
-                                        return (SpellAbility) activatedAbility;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-        }
-
-        // default implementation by AI
-        return super.chooseSpellAbilityForCast(ability, game, noMana);
-    }
-
-    @Override
     public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game) {
         // copy-paste for TestComputerXXX
 

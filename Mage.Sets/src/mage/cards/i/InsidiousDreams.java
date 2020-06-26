@@ -113,7 +113,7 @@ class InsidiousDreamsAdditionalCost extends VariableCostImpl {
 
     InsidiousDreamsAdditionalCost() {
         super("cards to discard");
-        this.text = "as an additional cost to cast this spell, discard X cards";
+        this.text = "discard X cards";
     }
 
     InsidiousDreamsAdditionalCost(final InsidiousDreamsAdditionalCost cost) {

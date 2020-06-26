@@ -17,7 +17,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.ManaPoolItem;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -35,18 +34,15 @@ public final class QuicksilverElemental extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {U}: Quicksilver Elemental gains all activated abilities of target creature until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new QuicksilverElementalEffect(), new ManaCostsImpl("{U}"));
+        Ability ability = new SimpleActivatedAbility(new QuicksilverElementalEffect(), new ManaCostsImpl("{U}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
         // You may spend blue mana as though it were mana of any color to pay the activation costs of Quicksilver Elemental's abilities.
-        QuickSilverElementalBlueManaEffect effect2 = new QuickSilverElementalBlueManaEffect();
-        effect2.setTargetPointer(new FixedTarget(this.getId()));
-        Ability ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, effect2);
-        this.addAbility(ability2);
+        this.addAbility(new SimpleStaticAbility(new QuickSilverElementalBlueManaEffect()));
     }
 
-    public QuicksilverElemental(final QuicksilverElemental card) {
+    private QuicksilverElemental(final QuicksilverElemental card) {
         super(card);
     }
 
@@ -63,7 +59,7 @@ class QuicksilverElementalEffect extends OneShotEffect {
         staticText = "{this} gains all activated abilities of target creature until end of turn";
     }
 
-    QuicksilverElementalEffect(final QuicksilverElementalEffect effect) {
+    private QuicksilverElementalEffect(final QuicksilverElementalEffect effect) {
         super(effect);
     }
 
@@ -89,44 +85,14 @@ class QuicksilverElementalEffect extends OneShotEffect {
     }
 }
 
-//class QuicksilverElementalEffect extends ContinuousEffectImpl {
-//
-//    public QuicksilverElementalEffect() {
-//        super(Duration.EndOfTurn, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-//        staticText = "{this} gains all activated abilities of target creature until end of turn";
-//    }
-//
-//    public QuicksilverElementalEffect(final QuicksilverElementalEffect effect) {
-//        super(effect);
-//    }
-//
-//    @Override
-//    public QuicksilverElementalEffect copy() {
-//        return new QuicksilverElementalEffect(this);
-//    }
-//
-//    @Override
-//    public boolean apply(Game game, Ability source) {
-//        Permanent permanent = game.getPermanent(source.getSourceId());
-//        Permanent creature = game.getPermanent(source.getTargets().getFirstTarget());
-//
-//        if (permanent != null && creature != null) {
-//            for (ActivatedAbility ability : creature.getAbilities().getActivatedAbilities(Zone.BATTLEFIELD)) {
-//                permanent.addAbility(ability, source.getSourceId(), game);
-//            }
-//        }
-//        return false;
-//    }
-//}
-
 class QuickSilverElementalBlueManaEffect extends AsThoughEffectImpl implements AsThoughManaEffect {
 
-    public QuickSilverElementalBlueManaEffect() {
+    QuickSilverElementalBlueManaEffect() {
         super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.Custom, Outcome.Benefit);
         staticText = "You may spend blue mana as though it were mana of any color to pay the activation costs of {this}'s abilities";
     }
 
-    public QuickSilverElementalBlueManaEffect(final QuickSilverElementalBlueManaEffect effect) {
+    private QuickSilverElementalBlueManaEffect(final QuickSilverElementalBlueManaEffect effect) {
         super(effect);
     }
 
@@ -143,11 +109,7 @@ class QuickSilverElementalBlueManaEffect extends AsThoughEffectImpl implements A
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         objectId = CardUtil.getMainCardId(game, objectId); // for split cards
-        if (objectId.equals(getTargetPointer().getFirst(game, source))) {
-            return affectedControllerId.equals(source.getControllerId());
-        }
-
-        return false;
+        return objectId.equals(source.getSourceId()) && affectedControllerId.equals(source.getControllerId());
     }
 
     @Override

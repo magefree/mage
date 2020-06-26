@@ -4,7 +4,7 @@ package mage.cards.i;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.CantBeCounteredAbility;
+import mage.abilities.common.CantBeCounteredSourceAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.RegenerateTargetEffect;
@@ -40,7 +40,7 @@ public final class IsaoEnlightenedBushi extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Isao, Enlightened Bushi can't be countered.
-        this.addAbility(new CantBeCounteredAbility());
+        this.addAbility(new CantBeCounteredSourceAbility());
         this.addAbility(new BushidoAbility(2));
         // {2}: Regenerate target Samurai.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new GenericManaCost(2));

@@ -1,4 +1,3 @@
-
 package mage.cards.f;
 
 import mage.Mana;
@@ -15,6 +14,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
@@ -25,24 +25,22 @@ import mage.target.common.TargetCreaturePermanent;
 import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class FrontierSiege extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature with flying");
-    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("a creature you don't control");
 
     static {
         filter.add(TargetController.YOU.getControllerPredicate());
         filter.add(new AbilityPredicate(FlyingAbility.class));
-        filter2.add(TargetController.NOT_YOU.getControllerPredicate());
     }
+
     private static final String ruleTrigger1 = "&bull Khans &mdash; At the beginning of each of your main phases, add {G}{G}.";
     private static final String ruleTrigger2 = "&bull Dragons &mdash; Whenever a creature with flying enters the battlefield under your control, you may have it fight target creature you don't control.";
 
     public FrontierSiege(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
 
         // As Frontier Siege enters the battlefield, choose Khans or Dragons.
         this.addAbility(new EntersBattlefieldAbility(new ChooseModeEffect("Khans or Dragons?", "Khans", "Dragons"), null,
@@ -59,12 +57,12 @@ public final class FrontierSiege extends CardImpl {
                 new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new FrontierSiegeFightEffect(), filter, true, SetTargetPointer.PERMANENT, ""),
                 new ModeChoiceSourceCondition("Dragons"),
                 ruleTrigger2);
-        ability2.addTarget(new TargetCreaturePermanent(filter2));
+        ability2.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
         this.addAbility(ability2);
 
     }
 
-    public FrontierSiege(final FrontierSiege card) {
+    private FrontierSiege(final FrontierSiege card) {
         super(card);
     }
 
@@ -76,12 +74,12 @@ public final class FrontierSiege extends CardImpl {
 
 class FrontierSiegeKhansTriggeredAbility extends TriggeredAbilityImpl {
 
-    public FrontierSiegeKhansTriggeredAbility() {
+    FrontierSiegeKhansTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddManaToManaPoolSourceControllerEffect(Mana.GreenMana(2)), false);
 
     }
 
-    public FrontierSiegeKhansTriggeredAbility(final FrontierSiegeKhansTriggeredAbility ability) {
+    private FrontierSiegeKhansTriggeredAbility(final FrontierSiegeKhansTriggeredAbility ability) {
         super(ability);
     }
 
@@ -114,7 +112,7 @@ class FrontierSiegeFightEffect extends OneShotEffect {
         super(Outcome.Damage);
     }
 
-    FrontierSiegeFightEffect(final FrontierSiegeFightEffect effect) {
+    private FrontierSiegeFightEffect(final FrontierSiegeFightEffect effect) {
         super(effect);
     }
 

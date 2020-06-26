@@ -56,7 +56,7 @@ public final class PathOfAncestry extends CardImpl {
 class PathOfAncestryTriggeredAbility extends TriggeredAbilityImpl {
 
     public PathOfAncestryTriggeredAbility(Effect effect) {
-        super(Zone.ALL, effect, true);
+        super(Zone.ALL, effect, false);
     }
 
     public PathOfAncestryTriggeredAbility(final PathOfAncestryTriggeredAbility ability) {

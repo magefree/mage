@@ -1,6 +1,5 @@
 package mage.cards.d;
 
-import java.util.Set;
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -60,13 +59,9 @@ class DesecratedTombTriggeredAbility extends TriggeredAbilityImpl {
                 && zEvent.getCards() != null) {
             for (Card card : zEvent.getCards()) {
                 if (card != null) {
-
                     UUID cardOwnerId = card.getOwnerId();
-                    Set<CardType> cardType = card.getCardType();
-
                     if (cardOwnerId != null
                             && card.isOwnedBy(getControllerId())
-                            && cardType != null
                             && card.isCreature()) {
                         return true;
                     }

@@ -41,7 +41,6 @@ public class DrawCardSourceControllerEffect extends OneShotEffect {
         super(effect);
         this.amount = effect.amount.copy();
         this.whoDrawCard = effect.whoDrawCard;
-        setText();
     }
 
     @Override

@@ -3,7 +3,6 @@ package mage.abilities.effects.common;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -36,21 +35,12 @@ public class PutTopCardOfLibraryIntoGraveControllerEffect extends OneShotEffect 
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            return controller.moveCards(controller.getLibrary().getTopCards(game, numberCards), Zone.GRAVEYARD, source, game);
+            return !controller.millCards(numberCards, source, game).isEmpty();
         }
         return false;
     }
 
     private String setText() {
-        StringBuilder sb = new StringBuilder("put the top");
-        if (numberCards == 1) {
-            sb.append(" card");
-        } else {
-            sb.append(" ");
-            sb.append(CardUtil.numberToText(numberCards));
-            sb.append(" cards");
-        }
-        sb.append(" of your library into your graveyard");
-        return sb.toString();
+        return "mill " + (numberCards == 1 ? "a card" : CardUtil.numberToText(numberCards) + " cards");
     }
 }

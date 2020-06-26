@@ -3,7 +3,7 @@ package mage.cards.e;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BecomesBlockedTriggeredAbility;
+import mage.abilities.common.BecomesBlockedSourceTriggeredAbility;
 import mage.abilities.dynamicvalue.common.BlockedCreatureCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
@@ -30,7 +30,7 @@ public final class ElvishBerserker extends CardImpl {
         BlockedCreatureCount value = new BlockedCreatureCount();
         Effect effect = new BoostSourceEffect(value, value, Duration.EndOfTurn, true);
         effect.setText("it gets +1/+1 until end of turn for each creature blocking it");
-        this.addAbility(new BecomesBlockedTriggeredAbility(effect, false));
+        this.addAbility(new BecomesBlockedSourceTriggeredAbility(effect, false));
     }
 
     public ElvishBerserker(final ElvishBerserker card) {

@@ -4,7 +4,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.abilityword.LieutenantAbility;
-import mage.abilities.common.BecomesBlockedTriggeredAbility;
+import mage.abilities.common.BecomesBlockedSourceTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
@@ -32,7 +32,7 @@ public final class StormsurgeKraken extends CardImpl {
         this.addAbility(HexproofAbility.getInstance());
         
         // Lieutenant - As long as you control your commander, Stormsurge Kraken gets +2/+2 and has "Whenever Stormsurge Kraken becomes blocked, you may draw two cards."
-        ContinuousEffect effect = new GainAbilitySourceEffect(new BecomesBlockedTriggeredAbility(new DrawCardSourceControllerEffect(2), true), Duration.WhileOnBattlefield);
+        ContinuousEffect effect = new GainAbilitySourceEffect(new BecomesBlockedSourceTriggeredAbility(new DrawCardSourceControllerEffect(2), true), Duration.WhileOnBattlefield);
         effect.setText("and has \"Whenever Stormsurge Kraken becomes blocked, you may draw two cards.\"");
         this.addAbility(new LieutenantAbility(effect));
     }

@@ -75,6 +75,6 @@ enum MomentumRumblerCondition implements Condition {
         if (permanent == null) {
             return false;
         }
-        return hasAbility == permanent.getAbilities(game).containsKey(FirstStrikeAbility.getInstance().getId());
+        return hasAbility == permanent.hasAbility(FirstStrikeAbility.getInstance(), game);
     }
 }

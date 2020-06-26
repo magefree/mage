@@ -9,15 +9,17 @@ import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.target.TargetPermanent;
 import mage.game.stack.Spell;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -63,15 +65,9 @@ public final class GargosViciousWatcher extends CardImpl {
 
 class GargosViciousWatcherTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent("creature you don't control");
-
-    static {
-        filter.add(TargetController.NOT_YOU.getControllerPredicate());
-    }
-
     GargosViciousWatcherTriggeredAbility() {
         super(Zone.BATTLEFIELD, new FightTargetSourceEffect());
-        this.addTarget(new TargetPermanent(0, 1, filter, false));
+        this.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL, false));
     }
 
     private GargosViciousWatcherTriggeredAbility(final GargosViciousWatcherTriggeredAbility ability) {
@@ -99,7 +95,6 @@ class GargosViciousWatcherTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         return object instanceof Spell; // must be a type of spell (instant, sorcery, or aura)
-        
     }
 
     @Override

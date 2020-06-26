@@ -10,6 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.game.permanent.token.HumanSoldierToken;
+import mage.watchers.common.PlayerAttackedWatcher;
 
 import java.util.UUID;
 
@@ -31,7 +32,7 @@ public final class NightsquadCommando extends CardImpl {
                 new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new HumanSoldierToken())),
                 RaidCondition.instance, "When {this} enters the battlefield, " +
                 "if you attacked this turn, create a 1/1 white Human Soldier creature token."
-        ));
+        ), new PlayerAttackedWatcher());
     }
 
     private NightsquadCommando(final NightsquadCommando card) {

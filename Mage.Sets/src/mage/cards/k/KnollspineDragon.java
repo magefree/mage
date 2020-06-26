@@ -72,11 +72,10 @@ class KnollspineDragonEffect extends OneShotEffect {
                 if (watcher != null) {
                     int drawAmount = watcher.getAmountOfDamageReceivedThisTurn(targetOpponent.getId());
                     controller.drawCards(drawAmount, source.getSourceId(), game);
-                    game.informPlayers(controller.getLogName() + "draws " + drawAmount + " cards");
                     return true;
                 }
             }
-            game.informPlayers(controller.getLogName() + "drew no cards");
+            game.informPlayers(controller.getLogName() + " drew no cards");
             return true;
         }
         return false;

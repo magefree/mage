@@ -31,7 +31,7 @@ public final class ConfrontTheAssault extends CardImpl {
         this.addAbility(ability);
 
         // Create three 1/1 white Spirit creature tokens with flying.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new SpiritWhiteToken("ANA"), 3));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new SpiritWhiteToken(), 3));
     }
 
     public ConfrontTheAssault(final ConfrontTheAssault card) {

@@ -64,25 +64,20 @@ class CabalTherapyEffect extends OneShotEffect {
         Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
-        if (targetPlayer != null && controller != null && sourceObject != null) {
-            String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
-            Cards hand = targetPlayer.getHand();
-
-            for (Card card : hand.getCards(game)) {
-                if (card.isSplitCard()) {
-                    SplitCard splitCard = (SplitCard) card;
-                    if (CardUtil.haveSameNames(splitCard.getLeftHalfCard().getName(), cardName)) {
-                        targetPlayer.discard(card, source, game);
-                    } else if (CardUtil.haveSameNames(splitCard.getRightHalfCard().getName(), cardName)) {
-                        targetPlayer.discard(card, source, game);
-                    }
-                }
-                if (CardUtil.haveSameNames(card.getName(), cardName)) {
-                    targetPlayer.discard(card, source, game);
-                }
-            }
-            targetPlayer.revealCards("Cabal Therapy", hand, game);
+        if (targetPlayer == null || controller == null || sourceObject == null) {
+            return false;
         }
+        String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
+        Cards hand = targetPlayer.getHand().copy();
+        targetPlayer.revealCards(source, hand, game);
+        hand.removeIf(uuid -> {
+            Card card = hand.get(uuid, game);
+            if (card == null) {
+                return true;
+            }
+            return !CardUtil.haveSameNames(card, cardName, game);
+        });
+        targetPlayer.discard(hand, source, game);
         return true;
     }
 

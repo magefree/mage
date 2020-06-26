@@ -13,7 +13,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.game.permanent.token.YoungPyromancerElementalToken;
+import mage.game.permanent.token.RedElementalToken;
 
 import java.util.UUID;
 
@@ -34,7 +34,7 @@ public final class ScamperingScorcher extends CardImpl {
 
         // When Scampering Scorcher enters the battlefield, create two 1/1 red Elemental creature tokens. Elementals you control gain haste until end of turn.
         Ability ability = new EntersBattlefieldTriggeredAbility(
-                new CreateTokenEffect(new YoungPyromancerElementalToken(), 2)
+                new CreateTokenEffect(new RedElementalToken(), 2)
         );
         ability.addEffect(new GainAbilityControlledEffect(
                 HasteAbility.getInstance(), Duration.EndOfTurn, filter
