@@ -23,8 +23,8 @@ public final class TrackDown extends CardImpl {
     public TrackDown(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{G}");
 
-        // Scry 3, then reveal the top card of your library. If it’s a creature or land card, draw a card.
-        this.getSpellAbility().addEffect(new ScryEffect(3));
+        // Scry 3, then reveal the top card of your library. If it's a creature or land card, draw a card.
+        this.getSpellAbility().addEffect(new ScryEffect(3).setText("Scry 3,"));
         this.getSpellAbility().addEffect(new TrackDownEffect());
     }
 
