@@ -108,6 +108,11 @@ class TerrorOfThePeaksTriggeredAbility extends EntersBattlefieldAllTriggeredAbil
     }
 
     @Override
+    public TerrorOfThePeaksTriggeredAbility copy() {
+        return new TerrorOfThePeaksTriggeredAbility(this);
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (!super.checkTrigger(event, game)) {
             return false;
@@ -119,7 +124,7 @@ class TerrorOfThePeaksTriggeredAbility extends EntersBattlefieldAllTriggeredAbil
         this.getEffects().clear();
         this.getTargets().clear();
         this.addEffect(new DamageTargetEffect(permanent.getPower().getValue()));
-        this.addTarget(new TargetAnyTarget());
+        this.addTarget(new TargetAnyTarget().withChooseHint("gets " + permanent.getPower().getValue() + " damage"));
         return true;
     }
 
