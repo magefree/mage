@@ -23,7 +23,6 @@ import mage.players.Player;
 import mage.players.PlayerList;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -36,7 +35,7 @@ public final class InniazTheGaleForce extends CardImpl {
     private static final FilterCreaturePermanent filter
             = new FilterCreaturePermanent("Attacking creatures with flying");
     private static final FilterCreaturePermanent filter2
-            = new FilterCreaturePermanent("three or more creatures you control with flying");
+            = new FilterCreaturePermanent("creatures you control with flying");
 
     static {
         filter.add(AttackingPredicate.instance);
