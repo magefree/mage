@@ -47,7 +47,7 @@ public final class EnthrallingHold extends CardImpl {
         // You can't choose an untapped creature as this spell's target as you cast it.
         auraTarget.replaceFilter(filter);
         Effect controlEnchantedEffect = new ControlEnchantedEffect();
-        controlEnchantedEffect.setText("You can't choose an untapped creature as this spell's target as you cast it.\n" + controlEnchantedEffect.getText(null));
+        controlEnchantedEffect.setText("You can't choose an untapped creature as this spell's target as you cast it.<br>" + controlEnchantedEffect.getText(null));
 
         // You control enchanted creature.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, controlEnchantedEffect));

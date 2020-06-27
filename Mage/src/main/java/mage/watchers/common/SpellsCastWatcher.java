@@ -5,8 +5,6 @@
  */
 package mage.watchers.common;
 
-import java.util.*;
-
 import mage.MageObject;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
@@ -17,6 +15,12 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 import mage.watchers.Watcher;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
 /**
  *
  * @author LevelX2
@@ -24,6 +28,7 @@ import mage.watchers.Watcher;
 public class SpellsCastWatcher extends Watcher {
 
     private final Map<UUID, List<Spell>> spellsCast = new HashMap<>();
+    private final Map<UUID, List<Spell>> spellsCastFromGraveyard = new HashMap<>();
     private int nonCreatureSpells;
 
     public SpellsCastWatcher() {
@@ -42,13 +47,21 @@ public class SpellsCastWatcher extends Watcher {
             }
             if (spell != null) {
                 List<Spell> spells;
+                List<Spell> graveyardSpells;
                 if (!spellsCast.containsKey(spell.getControllerId())) {
                     spells = new ArrayList<>();
                     spellsCast.put(spell.getControllerId(), spells);
+                    graveyardSpells = new ArrayList<>();
+                    spellsCastFromGraveyard.put(spell.getControllerId(), graveyardSpells);
+
                 } else {
                     spells = spellsCast.get(spell.getControllerId());
+                    graveyardSpells = spellsCastFromGraveyard.get(spell.getControllerId());
                 }
                 spells.add(spell.copy()); // copy needed because attributes like color could be changed later
+                if (event.getZone() == Zone.GRAVEYARD) {
+                    graveyardSpells.add(spell.copy());
+                }
                 if (StaticFilters.FILTER_SPELL_NON_CREATURE.match(spell, game)) {
                     nonCreatureSpells++;
                 }
@@ -61,10 +74,15 @@ public class SpellsCastWatcher extends Watcher {
         super.reset();
         nonCreatureSpells = 0;
         spellsCast.clear();
+        spellsCastFromGraveyard.clear();
     }
 
     public List<Spell> getSpellsCastThisTurn(UUID playerId) {
         return spellsCast.get(playerId);
+    }
+
+    public List<Spell> getSpellsCastFromGraveyardThisTurn(UUID playerId) {
+        return spellsCastFromGraveyard.get(playerId);
     }
 
     public int getNumberOfNonCreatureSpells() {

@@ -17,8 +17,11 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.DemonToken;
 import mage.game.permanent.token.Token;
+import mage.game.stack.Spell;
 import mage.players.Player;
+import mage.watchers.common.SpellsCastWatcher;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -39,7 +42,7 @@ public final class ArchfiendsVessel extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // When Archfiend's Vessel enters the battlefield, if it entered from your graveyard or you cast it from your graveyard, exile it. If you do, create a 5/5 black Demon creature token with flying.
-        this.addAbility(new ArchfiendsVesselAbility());
+        this.addAbility(new ArchfiendsVesselAbility(), new SpellsCastWatcher());
     }
 
     private ArchfiendsVessel(final ArchfiendsVessel card) {
@@ -63,10 +66,26 @@ class ArchfiendsVesselAbility extends EntersBattlefieldTriggeredAbility {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (super.checkTrigger(event, game) && event instanceof EntersTheBattlefieldEvent) {
-            EntersTheBattlefieldEvent entersTheBattlefieldEvent = (EntersTheBattlefieldEvent) event;
-            return entersTheBattlefieldEvent.getFromZone() == Zone.GRAVEYARD;
+        if (super.checkTrigger(event, game)) {
+            if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
+                EntersTheBattlefieldEvent entersTheBattlefieldEvent = (EntersTheBattlefieldEvent) event;
+                if (entersTheBattlefieldEvent.getTargetId().equals(getSourceId()) && entersTheBattlefieldEvent.getFromZone() == Zone.GRAVEYARD) {
+                    return true;
+                } else {
+                    SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
+                    List<Spell> spellsCastFromGraveyard = watcher.getSpellsCastFromGraveyardThisTurn(getControllerId());
+                    if (spellsCastFromGraveyard != null) {
+                        return spellsCastFromGraveyard.stream()
+                            .anyMatch(spell -> spell.getMainCard().getId().equals((entersTheBattlefieldEvent.getTarget().getMainCard().getId())));
+                    }
+                }
+            }
         }
         return false;
     }
