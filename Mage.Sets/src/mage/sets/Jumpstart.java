@@ -478,5 +478,6 @@ public final class Jumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Young Pyromancer", 372, Rarity.UNCOMMON, mage.cards.y.YoungPyromancer.class));
         cards.add(new SetCardInfo("Zendikar's Roil", 448, Rarity.UNCOMMON, mage.cards.z.ZendikarsRoil.class));
         cards.add(new SetCardInfo("Zombie Infestation", 288, Rarity.UNCOMMON, mage.cards.z.ZombieInfestation.class));
+        cards.add(new SetCardInfo("Zurzoth, Chaos Rider", 27, Rarity.RARE, mage.cards.z.ZurzothChaosRider.class));
     }
 }
