@@ -1,8 +1,5 @@
-
 package mage.cards.e;
 
-import java.util.UUID;
-import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -24,8 +21,9 @@ import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledPermanent;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class EmbalmersTools extends CardImpl {
@@ -81,10 +79,7 @@ class EmbalmersToolsEffect extends CostModificationEffectImpl {
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         Player controller = game.getPlayer(abilityToModify.getControllerId());
         if (controller != null) {
-            Mana mana = abilityToModify.getManaCostsToPay().getMana();
-            if (mana.count() > 1 && mana.getGeneric() > 0) {
-                CardUtil.reduceCost(abilityToModify, 1);
-            }
+            CardUtil.reduceCost(abilityToModify, 1);
             return true;
         }
         return false;

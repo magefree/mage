@@ -105,10 +105,8 @@ class RakdosLordOfRiotsCostReductionEffect extends CostModificationEffectImpl {
         Ability spellAbility = abilityToModify;
         if (spellAbility != null) {
             int amount = OpponentsLostLifeCount.instance.calculate(game, source, this);
-            if (amount > 0) {
-                CardUtil.reduceCost(spellAbility, amount);
-                return true;
-            }
+            CardUtil.reduceCost(spellAbility, amount);
+            return true;
         }
         return false;
     }

@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
@@ -16,8 +14,9 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class StormscapeFamiliar extends CardImpl {
@@ -31,7 +30,7 @@ public final class StormscapeFamiliar extends CardImpl {
     }
 
     public StormscapeFamiliar(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.subtype.add(SubType.BIRD);
 
         this.power = new MageInt(1);
@@ -39,6 +38,7 @@ public final class StormscapeFamiliar extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+
         // White spells and black spells you cast cost {1} less to cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
     }

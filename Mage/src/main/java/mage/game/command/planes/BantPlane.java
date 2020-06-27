@@ -1,7 +1,6 @@
 package mage.game.command.planes;
 
 import mage.ObjectColor;
-import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.IsStillOnPlaneCondition;
@@ -13,27 +12,26 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.RollPlanarDieEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.effects.common.cost.CostModificationEffectImpl;
+import mage.abilities.effects.common.cost.PlanarDieRollCostIncreasingEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.ExaltedAbility;
 import mage.abilities.keyword.IndestructibleAbility;
-import mage.constants.*;
+import mage.constants.Duration;
+import mage.constants.Planes;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.game.Game;
 import mage.game.command.Plane;
-import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
-import mage.util.CardUtil;
 import mage.watchers.common.PlanarRollWatcher;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * @author spjspj
@@ -81,44 +79,5 @@ public class BantPlane extends Plane {
         this.getAbilities().add(chaosAbility);
         chaosAbility.setMayActivate(TargetController.ANY);
         this.getAbilities().add(new SimpleStaticAbility(Zone.ALL, new PlanarDieRollCostIncreasingEffect(chaosAbility.getOriginalId())));
-    }
-}
-
-class PlanarDieRollCostIncreasingEffect extends CostModificationEffectImpl {
-
-    private final UUID originalId;
-
-    PlanarDieRollCostIncreasingEffect(UUID originalId) {
-        super(Duration.EndOfGame, Outcome.Benefit, CostModificationType.INCREASE_COST);
-        this.originalId = originalId;
-    }
-
-    PlanarDieRollCostIncreasingEffect(final PlanarDieRollCostIncreasingEffect effect) {
-        super(effect);
-        this.originalId = effect.originalId;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        Player activePlayer = game.getPlayer(game.getActivePlayerId());
-        if (activePlayer != null) {
-            PlanarRollWatcher watcher = game.getState().getWatcher(PlanarRollWatcher.class);
-            int rolledCounter = 0;
-            if (watcher != null) {
-                rolledCounter = watcher.getNumberTimesPlanarDieRolled(activePlayer.getId());
-            }
-            CardUtil.increaseCost(abilityToModify, rolledCounter);
-        }
-        return true;
-    }
-
-    @Override
-    public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        return abilityToModify.getOriginalId().equals(originalId);
-    }
-
-    @Override
-    public PlanarDieRollCostIncreasingEffect copy() {
-        return new PlanarDieRollCostIncreasingEffect(this);
     }
 }

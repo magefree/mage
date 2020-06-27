@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
@@ -14,8 +12,9 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class StonybrookBanneret extends CardImpl {
@@ -29,7 +28,7 @@ public final class StonybrookBanneret extends CardImpl {
     }
 
     public StonybrookBanneret(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.subtype.add(SubType.MERFOLK);
         this.subtype.add(SubType.WIZARD);
 
@@ -38,6 +37,7 @@ public final class StonybrookBanneret extends CardImpl {
 
         // Islandwalk
         this.addAbility(new IslandwalkAbility());
+
         // Merfolk spells and Wizard spells you cast cost {1} less to cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
     }

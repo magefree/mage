@@ -66,9 +66,7 @@ class GearseekerSerpentCostReductionEffect extends CostModificationEffectImpl {
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         int count = game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game).size();
-        if (count > 0) {
-            CardUtil.reduceCost(abilityToModify, count);
-        }
+        CardUtil.reduceCost(abilityToModify, count);
         return true;
     }
 

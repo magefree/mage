@@ -1,7 +1,5 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -21,8 +19,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class AnimarSoulOfElements extends CardImpl {
@@ -73,10 +72,8 @@ class AnimarCostReductionEffect extends CostModificationEffectImpl {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (sourcePermanent != null && spellAbility != null) {
             int amount = sourcePermanent.getCounters(game).getCount(CounterType.P1P1);
-            if (amount > 0) {
-                CardUtil.reduceCost(spellAbility, amount);
-                return true;
-            }
+            CardUtil.reduceCost(spellAbility, amount);
+            return true;
         }
         return false;
     }

@@ -26,9 +26,7 @@ public class SpellCostReductionSourceForOpponentsEffect extends CostModification
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         int count = game.getOpponents(source.getControllerId()).size();
-        if (count > 0) {
-            CardUtil.reduceCost(abilityToModify, count);
-        }
+        CardUtil.reduceCost(abilityToModify, count);
         return true;
     }
 

@@ -14,8 +14,10 @@ import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
 import mage.abilities.effects.common.RollPlanarDieEffect;
+import mage.abilities.effects.common.cost.PlanarDieRollCostIncreasingEffect;
 import mage.cards.Card;
 import mage.constants.*;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
@@ -28,7 +30,6 @@ import mage.watchers.common.PlanarRollWatcher;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import mage.filter.common.FilterCreaturePermanent;
 
 /**
  * @author spjspj
