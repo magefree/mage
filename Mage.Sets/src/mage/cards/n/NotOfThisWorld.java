@@ -1,7 +1,5 @@
 package mage.cards.n;
 
-import java.util.Collection;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.SimpleStaticAbility;
@@ -20,6 +18,9 @@ import mage.game.Game;
 import mage.game.stack.StackObject;
 import mage.target.Target;
 import mage.target.TargetStackObject;
+
+import java.util.Collection;
+import java.util.UUID;
 
 /**
  * @author Rafbill
@@ -41,7 +42,7 @@ public final class NotOfThisWorld extends CardImpl {
         this.getSpellAbility().addTarget(new TargetStackObject(filter));
 
         // Not of This World costs {7} less to cast if it targets a spell or ability that targets a creature you control with power 7 or greater.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(7, NotOfThisWorldCondition.instance)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(7, NotOfThisWorldCondition.instance).setCanWorksOnStackOnly(true)));
     }
 
     private NotOfThisWorld(final NotOfThisWorld card) {
@@ -86,8 +87,8 @@ enum NotOfThisWorldCondition implements Condition {
                 .flatMap(Collection::stream)
                 .map(game::getPermanentOrLKIBattlefield)
                 .anyMatch(permanent -> permanent != null && filter.match(
-                permanent, sourceSpell.getSourceId(), sourceSpell.getControllerId(), game
-        ));
+                        permanent, sourceSpell.getSourceId(), sourceSpell.getControllerId(), game
+                ));
     }
 
     @Override

@@ -93,7 +93,9 @@ public class SpellCostReductionSourceEffect extends CostModificationEffectImpl {
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         if (abilityToModify.getSourceId().equals(source.getSourceId()) && (abilityToModify instanceof SpellAbility)) {
-            return condition == null || condition.apply(game, source);
+            // some conditions can works after put on stack, so skip it in get playable (allows user to put card on stack anyway)
+            boolean skipCondition = game.inCheckPlayableState() && canWorksOnStackOnly();
+            return condition == null || skipCondition || condition.apply(game, source);
         }
         return false;
     }

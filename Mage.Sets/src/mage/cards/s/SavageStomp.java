@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceTargetsPermanentCondition;
@@ -20,6 +19,8 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
  * @author TheElk801
  */
@@ -35,7 +36,7 @@ public final class SavageStomp extends CardImpl {
 
         // Savage Stomp costs {2} less to cast if it targets a Dinosaur you control.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SpellCostReductionSourceEffect(2, condition)
+                Zone.ALL, new SpellCostReductionSourceEffect(2, condition).setCanWorksOnStackOnly(true)
         ).setRuleAtTheTop(true));
 
         // Put a +1/+1 counter on target creature you control. Then that creature fights target creature you don't control.
