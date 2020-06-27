@@ -21,7 +21,7 @@ import mage.target.TargetPermanent;
  */
 public final class TeferisCurse extends CardImpl {
     
-    private static final FilterPermanent filter = new FilterPermanent("artifact or creature.");
+    private static final FilterPermanent filter = new FilterPermanent("artifact or creature");
     
     static {
         filter.add(Predicates.or(
