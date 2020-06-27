@@ -1,16 +1,15 @@
 package mage.cards.m;
 
 import mage.MageInt;
-import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.DevotionCount;
-import mage.abilities.effects.common.cost.CostModificationEffectImpl;
+import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.game.Game;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.Zone;
 
 import java.util.UUID;
 
@@ -26,9 +25,11 @@ public final class MarshmistTitan extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 
-        // Marshmist Titan costs {X} less to cast, where X is your devotion to black.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new MarshmistTitanCostReductionEffect())
-                .addHint(DevotionCount.B.getHint()));
+        // This spell costs {X} less to cast, where X is your devotion to black.
+        Ability ability = new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(DevotionCount.B));
+        ability.addHint(DevotionCount.B.getHint());
+        this.addAbility(ability);
+
     }
 
     private MarshmistTitan(final MarshmistTitan card) {
@@ -38,42 +39,5 @@ public final class MarshmistTitan extends CardImpl {
     @Override
     public MarshmistTitan copy() {
         return new MarshmistTitan(this);
-    }
-}
-
-class MarshmistTitanCostReductionEffect extends CostModificationEffectImpl {
-
-    MarshmistTitanCostReductionEffect() {
-        super(Duration.Custom, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        staticText = "This spell costs {X} less to cast, where X is your devotion to black. " +
-                "<i>(Each {B} in the mana costs of permanents you control counts toward your devotion to black.)</i> ";
-    }
-
-    private MarshmistTitanCostReductionEffect(final MarshmistTitanCostReductionEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        SpellAbility spellAbility = (SpellAbility) abilityToModify;
-        Mana mana = spellAbility.getManaCostsToPay().getMana();
-        if (mana.getGeneric() == 0) {
-            return false;
-        }
-        int count = DevotionCount.B.calculate(game, source, this);
-        mana.setGeneric(Math.max(mana.getGeneric() - count, 0));
-        spellAbility.getManaCostsToPay().load(mana.toString());
-        return true;
-    }
-
-    @Override
-    public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        return abilityToModify instanceof SpellAbility
-                && abilityToModify.getSourceId().equals(source.getSourceId());
-    }
-
-    @Override
-    public MarshmistTitanCostReductionEffect copy() {
-        return new MarshmistTitanCostReductionEffect(this);
     }
 }

@@ -1,12 +1,12 @@
 package mage.abilities.effects.common.cost;
 
-import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
+import mage.util.CardUtil;
 
 public class SpellCostReductionSourceForOpponentsEffect extends CostModificationEffectImpl {
 
@@ -25,19 +25,11 @@ public class SpellCostReductionSourceForOpponentsEffect extends CostModification
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        SpellAbility spellAbility = (SpellAbility) abilityToModify;
-        Mana mana = spellAbility.getManaCostsToPay().getMana();
-        if (mana.getGeneric() > 0) {
-            int count = game.getOpponents(source.getControllerId()).size();
-            int newCount = mana.getGeneric() - count;
-            if (newCount < 0) {
-                newCount = 0;
-            }
-            mana.setGeneric(newCount);
-            spellAbility.getManaCostsToPay().load(mana.toString());
-            return true;
+        int count = game.getOpponents(source.getControllerId()).size();
+        if (count > 0) {
+            CardUtil.reduceCost(abilityToModify, count);
         }
-        return false;
+        return true;
     }
 
     @Override

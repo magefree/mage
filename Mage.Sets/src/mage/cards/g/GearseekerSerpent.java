@@ -1,7 +1,5 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -16,14 +14,15 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class GearseekerSerpent extends CardImpl {
 
     public GearseekerSerpent(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");
         this.subtype.add(SubType.SERPENT);
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);
@@ -70,7 +69,6 @@ class GearseekerSerpentCostReductionEffect extends CostModificationEffectImpl {
         if (count > 0) {
             CardUtil.reduceCost(abilityToModify, count);
         }
-
         return true;
     }
 
