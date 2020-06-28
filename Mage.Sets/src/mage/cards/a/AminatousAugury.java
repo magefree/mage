@@ -230,7 +230,13 @@ class AminatousAuguryCost extends CostImpl {
             throw new UnsupportedOperationException("Could not load unused card types for Aminatou's Augury");
         }
 
-        Set<CardType> castCardTypes = ability.getSourceObject(game).getCardType();
+        MageObject sourceObject = ability.getSourceObject(game);
+        if (sourceObject!=null) {
+            Set<CardType> castCardTypes = sourceObject.getCardType();
+        } else {
+            throw new UnsupportedOperationException("Mage source object returned null.");
+        }
+
         if (castCardTypes != null) {
 
             // Count matching available card types
@@ -276,6 +282,7 @@ class AminatousAuguryCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
+        //need to check which cards can be paid or not here. 
         return targets.canChoose(controllerId, game);
     }
 
