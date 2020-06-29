@@ -29,7 +29,7 @@ public class EmergeAbility extends SpellAbility {
     public EmergeAbility(Card card, ManaCosts<ManaCost> emergeCost) {
         super(card.getSpellAbility());
         this.emergeCost = emergeCost.copy();
-        this.newId(); // Why is this neccessary? will create new id anyway or not?
+        this.newId(); // Set newId because cards spell ability is copied and needs own id
         this.setCardName(card.getName() + " with emerge");
         zone = Zone.HAND;
         spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
