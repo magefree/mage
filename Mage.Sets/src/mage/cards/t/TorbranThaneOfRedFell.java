@@ -30,7 +30,8 @@ public final class TorbranThaneOfRedFell extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 
-        // If a red source you control would deal damage to an opponent or a permanent an opponent controls, it deals that much damage plus 2 instead.
+        // If a red source you control would deal damage to an opponent or a 
+        // permanent an opponent controls, it deals that much damage plus 2 instead.
         this.addAbility(new SimpleStaticAbility(new TorbranThaneOfRedFellEffect()));
     }
 
@@ -48,8 +49,8 @@ class TorbranThaneOfRedFellEffect extends ReplacementEffectImpl {
 
     TorbranThaneOfRedFellEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Damage);
-        this.staticText = "If a red source you control would deal damage to an opponent " +
-                "or a permanent an opponent controls, it deals that much damage plus 2 instead.";
+        this.staticText = "If a red source you control would deal damage to an opponent "
+                + "or a permanent an opponent controls, it deals that much damage plus 2 instead.";
     }
 
     private TorbranThaneOfRedFellEffect(final TorbranThaneOfRedFellEffect effect) {
@@ -65,9 +66,9 @@ class TorbranThaneOfRedFellEffect extends ReplacementEffectImpl {
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         switch (event.getType()) {
-            case DAMAGE_CREATURE:
-            case DAMAGE_PLANESWALKER:
-            case DAMAGE_PLAYER:
+            case DAMAGED_CREATURE:
+            case DAMAGED_PLANESWALKER:
+            case DAMAGED_PLAYER:
                 return true;
             default:
                 return false;
