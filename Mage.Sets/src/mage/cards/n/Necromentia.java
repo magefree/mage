@@ -20,6 +20,7 @@ import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetOpponent;
 
+import java.util.HashSet;
 import java.util.UUID;
 
 /**
@@ -94,6 +95,8 @@ class NecromentiaEffect extends OneShotEffect {
                     numberOfCardsExiledFromHand = target.getTargets().size();
                     controller.moveCards(new CardsImpl(target.getTargets()), Zone.EXILED, source, game);
                 }
+            } else {
+                targetPlayer.revealCards(targetPlayer.getName() + "'s Hand", targetPlayer.getHand(), game);
             }
 
             // cards in Library
@@ -106,6 +109,8 @@ class NecromentiaEffect extends OneShotEffect {
                 if (controller.choose(Outcome.Exile, cardsInLibrary, targetLib, game)) {
                     controller.moveCards(new CardsImpl(targetLib.getTargets()), Zone.EXILED, source, game);
                 }
+            } else {
+                targetPlayer.revealCards(targetPlayer.getName() + "'s Library", new CardsImpl(new HashSet<>(targetPlayer.getLibrary().getCards(game))), game);
             }
 
             targetPlayer.shuffleLibrary(source, game);
