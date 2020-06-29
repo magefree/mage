@@ -59,7 +59,7 @@ class EnthrallingHoldTarget extends TargetCreaturePermanent {
 
     @Override
     public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
-        if(super.canTarget(controllerId, id, source, game)){
+        if (super.canTarget(controllerId, id, source, game)) {
             Permanent permanent = game.getPermanent(id);
             return permanent.isTapped();
         }
