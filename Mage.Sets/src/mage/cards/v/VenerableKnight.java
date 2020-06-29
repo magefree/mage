@@ -2,7 +2,7 @@ package mage.cards.v;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -31,7 +31,7 @@ public final class VenerableKnight extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Venerable Knight dies, put a +1/+1 counter on target Knight you control.
-        Ability ability = new DiesTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
+        Ability ability = new DiesSourceTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

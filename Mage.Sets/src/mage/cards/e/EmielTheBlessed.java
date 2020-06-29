@@ -23,6 +23,7 @@ import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
+import mage.abilities.effects.Effect;
 
 /**
  * @author TheElk801
@@ -50,12 +51,13 @@ public final class EmielTheBlessed extends CardImpl {
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
-        // Whenever another creature enters the battlefield under your control, you may pay {G/W}. If you do, put a +1/+1 counter on it. If it's a Unicorn, put two +1/+1 counters on it instead.
+        // Whenever another creature enters the battlefield under your control, you may pay {G/W}. 
+        // If you do, put a +1/+1 counter on it. If it's a Unicorn, put two +1/+1 counters on it instead.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD, new DoIfCostPaid(new EmielTheBlessedEffect(), new ManaCostsImpl<>("{G/W}")),
                 StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, false, SetTargetPointer.PERMANENT,
-                "Whenever another creature enters the battlefield under your control, you may pay {G/W}. " +
-                        "If you do, put a +1/+1 counter on it. If it's a Unicorn, put two +1/+1 counters on it instead."
+                "Whenever another creature enters the battlefield under your control, you may pay {G/W}. "
+                + "If you do, put a +1/+1 counter on it. If it's a Unicorn, put two +1/+1 counters on it instead."
         ));
     }
 

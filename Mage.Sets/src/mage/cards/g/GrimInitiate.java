@@ -1,7 +1,7 @@
 package mage.cards.g;
 
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.keyword.AmassEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
@@ -28,7 +28,7 @@ public final class GrimInitiate extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // When Grim Initiate dies, amass 1.
-        this.addAbility(new DiesTriggeredAbility(new AmassEffect(1)));
+        this.addAbility(new DiesSourceTriggeredAbility(new AmassEffect(1)));
     }
 
     private GrimInitiate(final GrimInitiate card) {

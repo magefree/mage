@@ -5,7 +5,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -29,7 +29,7 @@ public final class SilentChantZubera extends CardImpl {
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
-        Ability ability = new DiesTriggeredAbility(new GainLifeEffect(new SilentChantZuberaDynamicValue()));
+        Ability ability = new DiesSourceTriggeredAbility(new GainLifeEffect(new SilentChantZuberaDynamicValue()));
         this.addAbility(ability, new ZuberasDiedWatcher());
     }
 

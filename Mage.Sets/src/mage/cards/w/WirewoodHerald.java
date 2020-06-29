@@ -3,7 +3,7 @@ package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -32,7 +32,7 @@ public final class WirewoodHerald extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Wirewood Herald dies, you may search your library for an Elf card, reveal that card, put it into your hand, then shuffle your library.
-        this.addAbility(new DiesTriggeredAbility(
+        this.addAbility(new DiesSourceTriggeredAbility(
                 new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true),
                 true));
     }

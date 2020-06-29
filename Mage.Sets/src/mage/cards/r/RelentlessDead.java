@@ -2,7 +2,7 @@ package mage.cards.r;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
@@ -37,10 +37,10 @@ public final class RelentlessDead extends CardImpl {
         this.addAbility(new MenaceAbility());
 
         // When Relentless Dead dies, you may pay {B}. If you do, return it to its owner's hand.
-        this.addAbility(new DiesTriggeredAbility(new DoIfCostPaid(new ReturnToHandSourceEffect(), new ManaCostsImpl("{B}"))));
+        this.addAbility(new DiesSourceTriggeredAbility(new DoIfCostPaid(new ReturnToHandSourceEffect(), new ManaCostsImpl("{B}"))));
 
         // When Relentless Dead dies, you may pay {X}. If you do, return another target Zombie creature card with converted mana cost X from your graveyard to the battlefield.
-        this.addAbility(new DiesTriggeredAbility(new RelentlessDeadEffect()));
+        this.addAbility(new DiesSourceTriggeredAbility(new RelentlessDeadEffect()));
     }
 
     public RelentlessDead(final RelentlessDead card) {

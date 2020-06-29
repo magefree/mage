@@ -3,7 +3,7 @@ package mage.cards.b;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
@@ -31,7 +31,7 @@ public final class BearerOfTheHeavens extends CardImpl {
         DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new DestroyAllEffect(StaticFilters.FILTER_PERMANENT));
         Effect effect = new CreateDelayedTriggeredAbilityEffect(delayedAbility);
         effect.setText("destroy all permanents at the beginning of the next end step");
-        this.addAbility(new DiesTriggeredAbility(effect, false));
+        this.addAbility(new DiesSourceTriggeredAbility(effect, false));
     }
 
     public BearerOfTheHeavens(final BearerOfTheHeavens card) {

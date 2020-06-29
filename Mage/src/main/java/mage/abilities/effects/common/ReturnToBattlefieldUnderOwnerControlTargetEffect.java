@@ -52,7 +52,7 @@ public class ReturnToBattlefieldUnderOwnerControlTargetEffect extends OneShotEff
     }
 
     private void updateText() {
-        this.staticText = "return " + this.returnName
+        this.staticText = "then return " + this.returnName
                 + " to the battlefield" + (tapped ? " tapped" : "")
                 + " under " + this.returnUnderControlName + " control";
     }

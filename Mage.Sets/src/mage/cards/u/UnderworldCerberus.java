@@ -4,7 +4,7 @@ package mage.cards.u;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CantBeTargetedCardsGraveyardsEffect;
 import mage.abilities.effects.common.ExileSourceEffect;
@@ -37,7 +37,7 @@ public final class UnderworldCerberus extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeTargetedCardsGraveyardsEffect()));
 
         // When Underworld Cerberus dies, exile it and each player returns all creature cards from their graveyard to their hand.
-        Ability ability = new DiesTriggeredAbility(new ExileSourceEffect());
+        Ability ability = new DiesSourceTriggeredAbility(new ExileSourceEffect());
         ability.addEffect(new ReturnToHandFromGraveyardAllEffect(new FilterCreatureCard("creature cards")));
         this.addAbility(ability);
     }

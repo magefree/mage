@@ -3,7 +3,7 @@ package mage.cards.j;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.costs.OrCost;
 import mage.constants.SubType;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -37,7 +37,7 @@ public final class JotunOwlKeeper extends CardImpl {
         )));
 
         // When J&ouml;tun Owl Keeper dies, put a 1/1 white Bird creature token with flying onto the battlefield for each age counter on it.
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new BirdToken(), new CountersSourceCount(CounterType.AGE))));
+        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new BirdToken(), new CountersSourceCount(CounterType.AGE))));
     }
 
     public JotunOwlKeeper(final JotunOwlKeeper card) {

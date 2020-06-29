@@ -1,7 +1,7 @@
 package mage.cards.l;
 
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -28,7 +28,7 @@ public final class LeoninOfTheLostPride extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Leonin of the Lost Pride dies, exile target card from an opponent’s graveyard.
-        DiesTriggeredAbility diesTriggeredAbility = new DiesTriggeredAbility(new ExileTargetEffect());
+        DiesSourceTriggeredAbility diesTriggeredAbility = new DiesSourceTriggeredAbility(new ExileTargetEffect());
         diesTriggeredAbility.addTarget(new TargetCardInOpponentsGraveyard(new FilterCard("card from an opponent's graveyard")));
         this.addAbility(diesTriggeredAbility);
     }

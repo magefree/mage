@@ -4,7 +4,7 @@ package mage.cards.u;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -29,7 +29,7 @@ public final class UndyingBeast extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Undying Beast dies, put it on top of its owner's library.
-        this.addAbility(new DiesTriggeredAbility(new UndyingBeastEffect()));
+        this.addAbility(new DiesSourceTriggeredAbility(new UndyingBeastEffect()));
     }
 
     public UndyingBeast(final UndyingBeast card) {

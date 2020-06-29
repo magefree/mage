@@ -2,7 +2,7 @@ package mage.cards.c;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.common.ExileSourceFromGraveCost;
 import mage.abilities.effects.OneShotEffect;
@@ -50,7 +50,7 @@ public final class CavalierOfThorns extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CavalierOfThornsEffect()));
 
         // When Cavalier of Thorns dies, you may exile it. If you do, put another target card from your graveyard on top of your library.
-        Ability ability = new DiesTriggeredAbility(new DoIfCostPaid(
+        Ability ability = new DiesSourceTriggeredAbility(new DoIfCostPaid(
                 new PutOnLibraryTargetEffect(true), new ExileSourceFromGraveCost()
         ).setText("you may exile it. If you do, put another target card from your graveyard on top of your library."));
         ability.addTarget(new TargetCardInYourGraveyard(filter));

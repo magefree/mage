@@ -4,7 +4,7 @@ package mage.cards.p;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
 import mage.constants.CardType;
@@ -34,7 +34,7 @@ public final class ProteanHulk extends CardImpl {
         this.toughness = new MageInt(6);
 
         // When Protean Hulk dies, search your library for any number of creature cards with total converted mana cost 6 or less and put them onto the battlefield. Then shuffle your library.
-        this.addAbility(new DiesTriggeredAbility(new ProteanHulkEffect()));
+        this.addAbility(new DiesSourceTriggeredAbility(new ProteanHulkEffect()));
     }
 
     public ProteanHulk(final ProteanHulk card) {

@@ -4,7 +4,7 @@ package mage.cards.f;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -25,7 +25,7 @@ public final class FireSnake extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Fire Snake dies, destroy target land.
-        Ability ability = new DiesTriggeredAbility(new DestroyTargetEffect(), false);
+        Ability ability = new DiesSourceTriggeredAbility(new DestroyTargetEffect(), false);
         ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);
     }

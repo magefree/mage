@@ -3,7 +3,7 @@ package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
@@ -25,7 +25,7 @@ public final class DeathbloomThallid extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Deathbloom Thallid dies, create a 1/1 green Saproling creature token.
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new SaprolingToken()), false));
+        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new SaprolingToken()), false));
     }
 
     public DeathbloomThallid(final DeathbloomThallid card) {

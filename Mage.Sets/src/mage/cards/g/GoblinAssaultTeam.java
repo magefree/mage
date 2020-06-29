@@ -2,7 +2,7 @@ package mage.cards.g;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
@@ -31,7 +31,7 @@ public final class GoblinAssaultTeam extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // When Goblin Assault Team dies, put a +1/+1 counter on target creature you control.
-        Ability ability = new DiesTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
+        Ability ability = new DiesSourceTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }

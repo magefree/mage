@@ -3,7 +3,7 @@ package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -25,7 +25,7 @@ public final class MaalfeldTwins extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When Maalfeld Twins dies, create two 2/2 black Zombie creature tokens.
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new ZombieToken(), 2)));
+        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new ZombieToken(), 2)));
     }
 
     public MaalfeldTwins(final MaalfeldTwins card) {

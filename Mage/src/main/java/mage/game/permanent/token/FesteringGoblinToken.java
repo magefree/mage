@@ -5,7 +5,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
@@ -26,7 +26,7 @@ public final class FesteringGoblinToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
 
-        Ability ability = new DiesTriggeredAbility(new BoostTargetEffect(-1, -1, Duration.EndOfTurn), false);
+        Ability ability = new DiesSourceTriggeredAbility(new BoostTargetEffect(-1, -1, Duration.EndOfTurn), false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

@@ -3,7 +3,7 @@ package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -25,7 +25,7 @@ public final class DoomedDissenter extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Doomed Dissenter dies, create a 2/2 black Zombie creature token.        
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new ZombieToken())));
+        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new ZombieToken())));
     }
 
     public DoomedDissenter(final DoomedDissenter card) {

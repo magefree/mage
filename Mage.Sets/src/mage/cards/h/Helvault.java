@@ -1,6 +1,6 @@
 package mage.cards.h;
 
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -39,7 +39,7 @@ public final class Helvault extends CardImpl {
         this.addAbility(ability);
 
         // When Helvault is put into a graveyard from the battlefield, return all cards exiled with it to the battlefield under their owners' control.
-        this.addAbility(new DiesTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD)));
+        this.addAbility(new DiesSourceTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD)));
     }
 
     private Helvault(final Helvault card) {

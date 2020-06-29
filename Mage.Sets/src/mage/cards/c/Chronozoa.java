@@ -4,7 +4,7 @@ package mage.cards.c;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.common.LastTimeCounterRemovedCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -46,7 +46,7 @@ public final class Chronozoa extends CardImpl {
         // When Chronozoa is put into a graveyard from play, if it had no time counters on it, create two tokens that are copies of it.
         Effect effect = new CreateTokenCopySourceEffect(2);
         effect.setText("create two tokens that are copies of it");
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new DiesTriggeredAbility(effect, false),
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new DiesSourceTriggeredAbility(effect, false),
                 LastTimeCounterRemovedCondition.instance,
                 "When {this} dies, if it had no time counters on it, create two tokens that are copies of it."));
     }

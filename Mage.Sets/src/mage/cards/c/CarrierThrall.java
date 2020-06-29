@@ -3,7 +3,7 @@ package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
@@ -27,7 +27,7 @@ public final class CarrierThrall extends CardImpl {
         // When Carrier Thrall dies, create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature. Add {C}."
         Effect effect = new CreateTokenEffect(new EldraziScionToken());
         effect.setText("create a 1/1 colorless Eldrazi Scion creature token. It has \"Sacrifice this creature: Add {C}.\"");
-        this.addAbility(new DiesTriggeredAbility(effect, false));
+        this.addAbility(new DiesSourceTriggeredAbility(effect, false));
 
     }
 

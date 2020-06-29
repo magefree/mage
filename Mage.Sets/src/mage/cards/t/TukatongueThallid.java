@@ -4,7 +4,7 @@ package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -25,7 +25,7 @@ public final class TukatongueThallid extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new SaprolingToken()), false));
+        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new SaprolingToken()), false));
     }
 
     public TukatongueThallid(final TukatongueThallid card) {

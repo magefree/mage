@@ -2,7 +2,7 @@ package mage.cards.c;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -64,7 +64,7 @@ public final class CavalierOfNight extends CardImpl {
         )));
 
         // When Cavalier of Night dies, return target creature card with converted mana cost 3 or less from your graveyard to the battlefield.
-        Ability ability = new DiesTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect());
+        Ability ability = new DiesSourceTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect());
         ability.addTarget(new TargetCardInYourGraveyard(filter2));
         this.addAbility(ability);
     }

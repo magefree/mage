@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.CantBlockAbility;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.FlippedCondition;
@@ -50,7 +50,7 @@ public final class HomuraHumanAscendant extends CardImpl {
         // Homura, Human Ascendant can't block.
         this.addAbility(new CantBlockAbility());
         // When Homura dies, return it to the battlefield flipped.
-        this.addAbility(new DiesTriggeredAbility(new HomuraReturnFlippedSourceEffect(new HomurasEssence2())));
+        this.addAbility(new DiesSourceTriggeredAbility(new HomuraReturnFlippedSourceEffect(new HomurasEssence2())));
     }
 
     public HomuraHumanAscendant(final HomuraHumanAscendant card) {

@@ -4,7 +4,7 @@ package mage.cards.c;
 import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.mana.BasicManaEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -22,7 +22,7 @@ public final class Cathodion extends CardImpl {
         this.subtype.add(SubType.CONSTRUCT);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
-        this.addAbility(new DiesTriggeredAbility(new BasicManaEffect(Mana.ColorlessMana(3)), false));
+        this.addAbility(new DiesSourceTriggeredAbility(new BasicManaEffect(Mana.ColorlessMana(3)), false));
     }
 
     public Cathodion(final Cathodion card) {

@@ -1,7 +1,7 @@
 package mage.cards.a;
 
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.AttackingCreatureCount;
@@ -44,7 +44,7 @@ public final class AncientStoneIdol extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // When Ancient Stone Idol dies, create a 6/12 colorless Construct artifact creature token with trample.
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new StoneTrapIdolToken())));
+        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new StoneTrapIdolToken())));
     }
 
     public AncientStoneIdol(final AncientStoneIdol card) {

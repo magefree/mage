@@ -2,7 +2,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ExileSourceEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
@@ -40,7 +40,7 @@ public final class SylvanHierophant extends CardImpl {
 
         // When Sylvan Hierophant dies, exile Sylvan Hierophant, then return another target creature card from your graveyard to your hand.
         Effect effect = new ReturnFromGraveyardToHandTargetEffect();
-        Ability ability = new DiesTriggeredAbility(new ExileSourceEffect(), false);
+        Ability ability = new DiesSourceTriggeredAbility(new ExileSourceEffect(), false);
         ability.addEffect(effect);
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);

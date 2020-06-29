@@ -4,7 +4,7 @@ package mage.game.permanent.token;
 
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 
 /**
@@ -19,7 +19,7 @@ public final class ATATToken extends TokenImpl {
         cardType.add(CardType.CREATURE);
         cardType.add(CardType.ARTIFACT);
         color.setWhite(true);
-        addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new TrooperToken(), 2)));
+        addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new TrooperToken(), 2)));
         subtype.add(SubType.ATAT);
     }
 

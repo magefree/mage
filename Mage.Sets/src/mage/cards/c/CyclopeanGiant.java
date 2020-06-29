@@ -2,7 +2,7 @@ package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.ExileSourceEffect;
 import mage.abilities.effects.common.continuous.BecomesBasicLandTargetEffect;
 import mage.constants.Duration;
@@ -27,7 +27,7 @@ public final class CyclopeanGiant extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Cyclopean Giant dies, target land becomes a Swamp. Exile Cyclopean Giant.
-        DiesTriggeredAbility ability = new DiesTriggeredAbility(new BecomesBasicLandTargetEffect(Duration.EndOfGame, SubType.SWAMP));
+        DiesSourceTriggeredAbility ability = new DiesSourceTriggeredAbility(new BecomesBasicLandTargetEffect(Duration.EndOfGame, SubType.SWAMP));
         ability.addEffect(new ExileSourceEffect());
         ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);

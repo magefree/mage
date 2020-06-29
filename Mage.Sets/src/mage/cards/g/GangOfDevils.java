@@ -4,7 +4,7 @@ package mage.cards.g;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -27,7 +27,7 @@ public final class GangOfDevils extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Gang of Devils dies, it deals 3 damage divided as you choose among one, two, or three target creatures and/or players.
-        Ability ability = new DiesTriggeredAbility(new DamageMultiEffect(3, "it"));
+        Ability ability = new DiesSourceTriggeredAbility(new DamageMultiEffect(3, "it"));
         ability.addTarget(new TargetAnyTargetAmount(3));
         this.addAbility(ability);
     }

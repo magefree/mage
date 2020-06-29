@@ -3,7 +3,7 @@ package mage.cards.g;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.costs.common.ExileSourceFromGraveCost;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.RevealCardsFromLibraryUntilEffect;
@@ -27,7 +27,7 @@ public final class Gamekeeper extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Gamekeeper dies, you may exile it. If you do, reveal cards from the top of your library until you reveal a creature card. Put that card onto the battlefield and put all other cards revealed this way into your graveyard.
-        Ability ability = new DiesTriggeredAbility(new DoIfCostPaid(new RevealCardsFromLibraryUntilEffect(StaticFilters.FILTER_CARD_CREATURE, Zone.BATTLEFIELD, Zone.GRAVEYARD), new ExileSourceFromGraveCost(), "Exile to reveal cards from the top of your library until you reveal a creature card?"), false);
+        Ability ability = new DiesSourceTriggeredAbility(new DoIfCostPaid(new RevealCardsFromLibraryUntilEffect(StaticFilters.FILTER_CARD_CREATURE, Zone.BATTLEFIELD, Zone.GRAVEYARD), new ExileSourceFromGraveCost(), "Exile to reveal cards from the top of your library until you reveal a creature card?"), false);
         this.addAbility(ability);
     }
 

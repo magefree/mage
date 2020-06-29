@@ -3,7 +3,7 @@ package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
@@ -27,7 +27,7 @@ public final class RiptideCrab extends CardImpl {
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
         // When Riptide Crab dies, draw a card.
-        this.addAbility(new DiesTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
+        this.addAbility(new DiesSourceTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
     }
 
     public RiptideCrab(final RiptideCrab card) {

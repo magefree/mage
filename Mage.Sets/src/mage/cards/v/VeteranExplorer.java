@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -36,7 +36,7 @@ public final class VeteranExplorer extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Veteran Explorer dies, each player may search their library for up to two basic land cards and put them onto the battlefield. Then each player who searched their library this way shuffles it.
-        this.addAbility(new DiesTriggeredAbility(new VeteranExplorerEffect()));
+        this.addAbility(new DiesSourceTriggeredAbility(new VeteranExplorerEffect()));
     }
 
     public VeteranExplorer(final VeteranExplorer card) {

@@ -4,7 +4,7 @@ package mage.cards.f;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
@@ -45,7 +45,7 @@ public final class FesteringNewt extends CardImpl {
                 new BoostTargetEffect(-1,-1, Duration.EndOfTurn),
                 new LockedInCondition(new PermanentsOnTheBattlefieldCondition(filterBogbrewWitch)),
                 "target creature an opponent controls gets -1/-1 until end of turn. That creature gets -4/-4 instead if you control a creature named Bogbrew Witch");
-        Ability ability = new DiesTriggeredAbility(effect);
+        Ability ability = new DiesSourceTriggeredAbility(effect);
         ability.addTarget(new TargetCreaturePermanent(filterCreature));
         this.addAbility(ability);
     }

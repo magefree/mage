@@ -2,7 +2,7 @@ package mage.cards.n;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -30,7 +30,7 @@ public final class NocturnalFeeder extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Nocturnal Feeder dies, each opponent loses 2 life and you gain 2 life.
-        Ability ability = new DiesTriggeredAbility(new LoseLifeOpponentsEffect(2));
+        Ability ability = new DiesSourceTriggeredAbility(new LoseLifeOpponentsEffect(2));
         ability.addEffect(new GainLifeEffect(2).concatBy("and"));
         this.addAbility(ability);
     }

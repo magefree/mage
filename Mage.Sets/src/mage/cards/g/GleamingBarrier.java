@@ -3,7 +3,7 @@ package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
@@ -29,7 +29,7 @@ public final class GleamingBarrier extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // When Gleaming Barrier dies, create a colorless Treasure artifact token with "{t}, Sacrifice this artifact: Add one mana of any color."
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new TreasureToken())));
+        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new TreasureToken())));
     }
 
     public GleamingBarrier(final GleamingBarrier card) {

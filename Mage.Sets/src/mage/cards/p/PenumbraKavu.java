@@ -3,7 +3,7 @@ package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -23,7 +23,7 @@ public final class PenumbraKavu extends CardImpl {
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new PenumbraKavuToken(), 1), false));
+        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new PenumbraKavuToken(), 1), false));
     }
 
     public PenumbraKavu(final PenumbraKavu card) {

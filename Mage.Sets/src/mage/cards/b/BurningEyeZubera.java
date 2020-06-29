@@ -4,7 +4,7 @@ package mage.cards.b;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -31,7 +31,7 @@ public final class BurningEyeZubera extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Burning-Eye Zubera dies, if 4 or more damage was dealt to it this turn, Burning-Eye Zubera deals 3 damage to any target.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(new DiesTriggeredAbility(new DamageTargetEffect(3)),new SourceGotFourDamage(),
+        Ability ability = new ConditionalInterveningIfTriggeredAbility(new DiesSourceTriggeredAbility(new DamageTargetEffect(3)),new SourceGotFourDamage(),
                 "When {this} dies, if 4 or more damage was dealt to it this turn, Burning-Eye Zubera deals 3 damage to any target");
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

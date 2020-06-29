@@ -4,7 +4,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -40,7 +40,7 @@ public final class ServantOfTheScale extends CardImpl {
                 "with a +1/+1 counter on it"));
 
         // When Servant of the Scale dies, put X +1/+1 counters on target creature you control, where X is the number of +1/+1 counter on Servant of the Scale.
-        Ability ability = new DiesTriggeredAbility(new ServantOfTheScaleEffect(), false);
+        Ability ability = new DiesSourceTriggeredAbility(new ServantOfTheScaleEffect(), false);
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }

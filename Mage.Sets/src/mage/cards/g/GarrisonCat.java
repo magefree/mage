@@ -1,7 +1,7 @@
 package mage.cards.g;
 
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -24,7 +24,7 @@ public final class GarrisonCat extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Garrison Cat dies, create a 1/1 white Human Soldier creature token.
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new HumanSoldierToken())));
+        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new HumanSoldierToken())));
     }
 
     private GarrisonCat(final GarrisonCat card) {

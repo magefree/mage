@@ -3,7 +3,7 @@ package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.ExileSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -23,7 +23,7 @@ public final class CyclopeanMummy extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Cyclopean Mummy dies, exile it.
-        this.addAbility(new DiesTriggeredAbility(new ExileSourceEffect()));
+        this.addAbility(new DiesSourceTriggeredAbility(new ExileSourceEffect()));
     }
 
     public CyclopeanMummy(final CyclopeanMummy card) {

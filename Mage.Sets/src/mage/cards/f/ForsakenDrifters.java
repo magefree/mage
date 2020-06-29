@@ -3,7 +3,7 @@ package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -24,7 +24,7 @@ public final class ForsakenDrifters extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Forsaken Drifters dies, put the top four cards of your library into your graveyard.
-        this.addAbility(new DiesTriggeredAbility(new PutTopCardOfLibraryIntoGraveControllerEffect(4)));
+        this.addAbility(new DiesSourceTriggeredAbility(new PutTopCardOfLibraryIntoGraveControllerEffect(4)));
     }
 
     public ForsakenDrifters(final ForsakenDrifters card) {

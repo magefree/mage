@@ -1,7 +1,7 @@
 package mage.game.permanent.token;
 
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.constants.CardType;
 import mage.constants.SubType;
@@ -26,7 +26,7 @@ public final class GarrukCursedHuntsmanToken extends TokenImpl {
         power = new MageInt(2);
         toughness = new MageInt(2);
 
-        this.addAbility(new DiesTriggeredAbility(new AddCountersAllEffect(CounterType.LOYALTY.createInstance(), filter)));
+        this.addAbility(new DiesSourceTriggeredAbility(new AddCountersAllEffect(CounterType.LOYALTY.createInstance(), filter)));
     }
 
     public GarrukCursedHuntsmanToken(final GarrukCursedHuntsmanToken token) {

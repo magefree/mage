@@ -4,7 +4,7 @@ package mage.cards.o;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -31,7 +31,7 @@ public final class OriginSpellbomb extends CardImpl {
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
-        this.addAbility(new DiesTriggeredAbility(new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{W}")), false));
+        this.addAbility(new DiesSourceTriggeredAbility(new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{W}")), false));
     }
 
     public OriginSpellbomb (final OriginSpellbomb card) {

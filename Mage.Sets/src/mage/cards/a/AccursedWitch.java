@@ -5,7 +5,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
@@ -42,7 +42,7 @@ public final class AccursedWitch extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AccursedWitchSpellsCostReductionEffect()));
         // When Accursed Witch dies, return it to the battlefield transformed under your control attached to target opponent.
         this.addAbility(new TransformAbility());
-        Ability ability = new DiesTriggeredAbility(new AccursedWitchReturnTransformedEffect());
+        Ability ability = new DiesSourceTriggeredAbility(new AccursedWitchReturnTransformedEffect());
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }

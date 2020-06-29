@@ -4,7 +4,7 @@ package mage.cards.d;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
@@ -29,7 +29,7 @@ public final class DrainpipeVermin extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Drainpipe Vermin dies, you may pay {B}. If you do, target player discards a card.
-        Ability ability = new DiesTriggeredAbility(new DoIfCostPaid(new DiscardTargetEffect(1), new ColoredManaCost(ColoredManaSymbol.B)), false);
+        Ability ability = new DiesSourceTriggeredAbility(new DoIfCostPaid(new DiscardTargetEffect(1), new ColoredManaCost(ColoredManaSymbol.B)), false);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

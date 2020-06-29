@@ -7,7 +7,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -35,7 +35,7 @@ public final class BlazingEffigy extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Blazing Effigy dies, it deals X damage to target creature, where X is 3 plus the amount of damage dealt to Blazing Effigy this turn by other sources named Blazing Effigy.
-        Ability ability = new DiesTriggeredAbility(new DamageTargetEffect(BlazingEffigyCount.instance), false);
+        Ability ability = new DiesSourceTriggeredAbility(new DamageTargetEffect(BlazingEffigyCount.instance), false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability, new BlazingEffigyWatcher());
     }

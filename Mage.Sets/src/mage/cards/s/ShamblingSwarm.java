@@ -4,7 +4,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.counter.DistributeCountersEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -26,7 +26,7 @@ public final class ShamblingSwarm extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Shambling Swarm dies, distribute three -1/-1 counters among one, two, or three target creatures. For each -1/-1 counter you put on a creature this way, remove a -1/-1 counter from that creature at the beginning of the next end step.
-        Ability ability = new DiesTriggeredAbility(new DistributeCountersEffect(CounterType.M1M1, 3, true, "one, two, or three target creatures"), false);
+        Ability ability = new DiesSourceTriggeredAbility(new DistributeCountersEffect(CounterType.M1M1, 3, true, "one, two, or three target creatures"), false);
         ability.addTarget(new TargetCreaturePermanentAmount(3));
         this.addAbility(ability);
     }

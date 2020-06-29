@@ -2,7 +2,7 @@ package mage.cards.r;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.effects.common.counter.ProliferateEffect;
@@ -56,7 +56,7 @@ public final class RoaleskApexHybrid extends CardImpl {
         this.addAbility(ability);
 
         // When Roalsk dies, proliferate, then proliferate again. (Choose any number of permanents and/or players, then give each another counter of each kind already there. Then do it again.)
-        ability = new DiesTriggeredAbility(new ProliferateEffect(false));
+        ability = new DiesSourceTriggeredAbility(new ProliferateEffect(false));
         ability.addEffect(new ProliferateEffect(" again", true).concatBy(", then"));
         this.addAbility(ability);
     }

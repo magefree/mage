@@ -4,7 +4,7 @@ package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -25,7 +25,7 @@ public final class DarkslickDrake extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new DiesTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
+        this.addAbility(new DiesSourceTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
     }
 
     public DarkslickDrake (final DarkslickDrake card) {

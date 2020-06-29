@@ -3,7 +3,7 @@ package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ShuffleHandIntoLibraryDrawThatManySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -31,7 +31,7 @@ public final class WhirlpoolDrake extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ShuffleHandIntoLibraryDrawThatManySourceEffect(), false));
 
         // When Whirlpool Drake dies, shuffle the cards from your hand into your library, then draw that many cards.
-        this.addAbility(new DiesTriggeredAbility(new ShuffleHandIntoLibraryDrawThatManySourceEffect(), false));
+        this.addAbility(new DiesSourceTriggeredAbility(new ShuffleHandIntoLibraryDrawThatManySourceEffect(), false));
     }
 
     public WhirlpoolDrake(final WhirlpoolDrake card) {

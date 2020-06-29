@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.CycleTriggeredAbility;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.CyclingAbility;
@@ -30,7 +30,7 @@ public final class BantSojourners extends CardImpl {
 
         // When you cycle Bant Sojourners or it dies, you may create a 1/1 white Soldier creature token.
         Ability ability1 = new CycleTriggeredAbility(new CreateTokenEffect(new SoldierToken()), true);
-        Ability ability2 = new DiesTriggeredAbility(new CreateTokenEffect(new SoldierToken()), true);
+        Ability ability2 = new DiesSourceTriggeredAbility(new CreateTokenEffect(new SoldierToken()), true);
         this.addAbility(ability1);
         this.addAbility(ability2);
         

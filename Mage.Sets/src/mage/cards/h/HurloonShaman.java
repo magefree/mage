@@ -3,7 +3,7 @@ package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.SacrificeAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -25,7 +25,7 @@ public final class HurloonShaman extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Hurloon Shaman dies, each player sacrifices a land.
-        this.addAbility(new DiesTriggeredAbility(new SacrificeAllEffect(new FilterControlledLandPermanent("land"))));
+        this.addAbility(new DiesSourceTriggeredAbility(new SacrificeAllEffect(new FilterControlledLandPermanent("land"))));
     }
 
     public HurloonShaman(final HurloonShaman card) {

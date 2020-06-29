@@ -3,7 +3,7 @@ package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.costs.common.ExileSourceFromGraveCost;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
@@ -29,7 +29,7 @@ public final class ArenaRector extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Arena Rector dies, you may exile it. If you do, search your library for a planeswalker card, put it onto the battlefield, then shuffle your library.
-        this.addAbility(new DiesTriggeredAbility(
+        this.addAbility(new DiesSourceTriggeredAbility(
                 new DoIfCostPaid(
                         new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterPlaneswalkerCard())),
                         new ExileSourceFromGraveCost(),

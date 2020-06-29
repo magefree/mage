@@ -2,7 +2,7 @@ package mage.cards.c;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.BrainstormEffect;
 import mage.abilities.effects.common.ShuffleIntoLibrarySourceEffect;
@@ -35,7 +35,7 @@ public final class CavalierOfGales extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BrainstormEffect()));
 
         // When Cavalier of Gales dies, shuffle it into its owner's library, then scry 2.
-        Ability ability = new DiesTriggeredAbility(new ShuffleIntoLibrarySourceEffect());
+        Ability ability = new DiesSourceTriggeredAbility(new ShuffleIntoLibrarySourceEffect());
         ability.addEffect(new ScryEffect(2).concatBy(", then"));
         this.addAbility(ability);
     }

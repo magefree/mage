@@ -1,7 +1,7 @@
 package mage.game.permanent.token;
 
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.constants.CardType;
@@ -30,7 +30,7 @@ public final class NestingDragonToken extends TokenImpl {
         power = new MageInt(0);
         toughness = new MageInt(2);
         addAbility(DefenderAbility.getInstance());
-        this.addAbility(new DiesTriggeredAbility(
+        this.addAbility(new DiesSourceTriggeredAbility(
                 new CreateTokenEffect(new DragonEggDragonToken()), false
         ));
     }

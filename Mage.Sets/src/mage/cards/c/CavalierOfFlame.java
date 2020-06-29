@@ -2,7 +2,7 @@ package mage.cards.c;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -61,7 +61,7 @@ public final class CavalierOfFlame extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CavalierOfFlameEffect()));
 
         // When Cavalier of Flame dies, it deals X damage to each opponent and each planeswalker they control, where X is the number of land cards in your graveyard.
-        ability = new DiesTriggeredAbility(new DamagePlayersEffect(
+        ability = new DiesSourceTriggeredAbility(new DamagePlayersEffect(
                 Outcome.Damage, xValue, TargetController.OPPONENT
         ).setText("it deals X damage to each opponent"));
         ability.addEffect(new DamageAllEffect(

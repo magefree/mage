@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.CastFromHandSourcePermanentCondition;
@@ -46,7 +46,7 @@ public final class Epochrasite extends CardImpl {
                 new CastFromHandWatcher());
 
         // When Epochrasite dies, exile it with three time counters on it and it gains suspend.
-        this.addAbility(new DiesTriggeredAbility(new EpochrasiteEffect()));
+        this.addAbility(new DiesSourceTriggeredAbility(new EpochrasiteEffect()));
     }
 
     public Epochrasite(final Epochrasite card) {
