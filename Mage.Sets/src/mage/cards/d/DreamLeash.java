@@ -12,6 +12,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -73,4 +74,10 @@ class DreamLeashTarget extends TargetPermanent {
         return false;
     }
 
+    // See ruling: https://www.mtgsalvation.com/forums/magic-fundamentals/magic-rulings/magic-rulings-archives/253345-dream-leash
+    @Override
+    public boolean stillLegalTarget(UUID id, Ability source, Game game) {
+        Permanent permanent = game.getPermanent(id);
+        return permanent != null && StaticFilters.FILTER_PERMANENT.match(permanent, game);
+    }
 }

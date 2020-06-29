@@ -12,7 +12,14 @@ import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.util.RandomUtil;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -337,7 +344,7 @@ public abstract class TargetImpl implements Target {
                 illegalTargets.add(targetId);
                 continue;
             }
-            if (!canTarget(targetId, source, game)) {
+            if (!stillLegalTarget(targetId, source, game)) {
                 illegalTargets.add(targetId);
             }
         }
@@ -471,6 +478,11 @@ public abstract class TargetImpl implements Target {
             return targets.keySet().iterator().next();
         }
         return null;
+    }
+
+    @Override
+    public boolean stillLegalTarget(UUID id, Ability source, Game game) {
+        return canTarget(id, source, game);
     }
 
     @Override
