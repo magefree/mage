@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AttacksEachCombatStaticAbility;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -42,7 +42,7 @@ public final class VolatileRig extends CardImpl {
         this.addAbility(new VolatileRigTriggeredAbility());
 
         // When Volatile Rig dies, flip a coin. If you lose the flip, it deals 4 damage to each creature and each player.
-        this.addAbility(new DiesTriggeredAbility(new VolatileRigEffect2()));
+        this.addAbility(new DiesSourceTriggeredAbility(new VolatileRigEffect2()));
 
     }
 

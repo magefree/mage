@@ -2,7 +2,7 @@ package mage.cards.c;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
@@ -40,7 +40,7 @@ public final class ConclaveMentor extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new ConclaveMentorEffect()));
 
         // When Conclave Mentor dies, you gain life equal to its power.
-        this.addAbility(new DiesTriggeredAbility(new GainLifeEffect(xValue, "you gain life equal to its power")));
+        this.addAbility(new DiesSourceTriggeredAbility(new GainLifeEffect(xValue, "you gain life equal to its power")));
     }
 
     private ConclaveMentor(final ConclaveMentor card) {

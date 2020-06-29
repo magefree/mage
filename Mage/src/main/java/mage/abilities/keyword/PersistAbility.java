@@ -2,7 +2,7 @@
 package mage.abilities.keyword;
 
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.constants.Outcome;
@@ -13,7 +13,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 
-public class PersistAbility extends DiesTriggeredAbility {
+public class PersistAbility extends DiesSourceTriggeredAbility {
 
     public PersistAbility() {
         super(new PersistEffect());

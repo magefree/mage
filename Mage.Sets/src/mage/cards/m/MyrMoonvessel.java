@@ -4,7 +4,7 @@ package mage.cards.m;
 import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.mana.BasicManaEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -21,7 +21,7 @@ public final class MyrMoonvessel extends CardImpl {
         this.subtype.add(SubType.MYR);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        this.addAbility(new DiesTriggeredAbility(new BasicManaEffect(Mana.ColorlessMana(1))));
+        this.addAbility(new DiesSourceTriggeredAbility(new BasicManaEffect(Mana.ColorlessMana(1))));
     }
 
     public MyrMoonvessel(final MyrMoonvessel card) {

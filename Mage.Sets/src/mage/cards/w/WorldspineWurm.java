@@ -1,7 +1,7 @@
 package mage.cards.w;
 
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.PutIntoGraveFromAnywhereSourceTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ShuffleIntoLibrarySourceEffect;
@@ -30,7 +30,7 @@ public final class WorldspineWurm extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // When Worldspine Wurm dies, create three 5/5 green Wurm creature tokens with trample.
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new WurmWithTrampleToken(), 3)));
+        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new WurmWithTrampleToken(), 3)));
 
         // When Worldspine Wurm is put into a graveyard from anywhere, shuffle it into its owner's library.
         this.addAbility(new PutIntoGraveFromAnywhereSourceTriggeredAbility(new ShuffleIntoLibrarySourceEffect()));

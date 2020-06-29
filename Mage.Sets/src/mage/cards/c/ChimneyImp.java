@@ -4,7 +4,7 @@ package mage.cards.c;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
@@ -35,7 +35,7 @@ public final class ChimneyImp extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // When Chimney Imp dies, target opponent puts a card from their hand on top of their library.
-        Ability ability = new DiesTriggeredAbility(new ChimneyImpEffect(), false);
+        Ability ability = new DiesSourceTriggeredAbility(new ChimneyImpEffect(), false);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
         

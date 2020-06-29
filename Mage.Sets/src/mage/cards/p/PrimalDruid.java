@@ -2,7 +2,7 @@
 package mage.cards.p;
 
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
@@ -30,7 +30,7 @@ public final class PrimalDruid extends CardImpl {
         // When Primal Druid dies, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
         Effect effect = new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true);
         effect.setText("you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library");
-        this.addAbility(new DiesTriggeredAbility(effect, true));
+        this.addAbility(new DiesSourceTriggeredAbility(effect, true));
 
     }
 

@@ -3,7 +3,7 @@ package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -25,7 +25,7 @@ public final class ReefWorm extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Reef Worm dies, create a 3/3 blue Fish creature token with "When this creature dies, create a 6/6 blue Whale creature token with "When this creature dies, create a 9/9 blue Kraken creature token.""
-        addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new ReefWormFishToken())));
+        addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new ReefWormFishToken())));
     }
 
     public ReefWorm(final ReefWorm card) {

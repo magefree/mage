@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -38,7 +38,7 @@ import mage.util.CardUtil;
  *
  * @author Loki, LevelX2
  */
-public class ModularAbility extends DiesTriggeredAbility {
+public class ModularAbility extends DiesSourceTriggeredAbility {
 
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("artifact creature");
 

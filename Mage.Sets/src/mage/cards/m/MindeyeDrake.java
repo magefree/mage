@@ -4,7 +4,7 @@ package mage.cards.m;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -29,7 +29,7 @@ public final class MindeyeDrake extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // When Mindeye Drake dies, target player puts the top five cards of their library into their graveyard.
-        Ability ability = new DiesTriggeredAbility(new PutLibraryIntoGraveTargetEffect(5));
+        Ability ability = new DiesSourceTriggeredAbility(new PutLibraryIntoGraveTargetEffect(5));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

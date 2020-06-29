@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSourceEffect;
@@ -42,7 +42,7 @@ public final class InameLifeAspect extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When Iname, Life Aspect dies, you may exile it. If you do, return any number of target Spirit cards from your graveyard to your hand.
-        Ability ability = new DiesTriggeredAbility(new InameLifeAspectEffect(), false);
+        Ability ability = new DiesSourceTriggeredAbility(new InameLifeAspectEffect(), false);
         ability.addTarget(new TargetCardInYourGraveyard(0, Integer.MAX_VALUE, filter));
         this.addAbility(ability);
     }

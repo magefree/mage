@@ -2,7 +2,7 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -29,7 +29,7 @@ public final class TibaltsRager extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Tibalt's Rager dies, it deals 1 damage to any target.
-        Ability ability = new DiesTriggeredAbility(new DamageTargetEffect(1, "it"));
+        Ability ability = new DiesSourceTriggeredAbility(new DamageTargetEffect(1, "it"));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
 

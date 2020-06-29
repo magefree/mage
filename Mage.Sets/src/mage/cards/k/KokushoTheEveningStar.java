@@ -5,7 +5,7 @@ package mage.cards.k;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -30,7 +30,7 @@ public final class KokushoTheEveningStar extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new DiesTriggeredAbility(new KokushoTheEveningStarEffect(), false));
+        this.addAbility(new DiesSourceTriggeredAbility(new KokushoTheEveningStarEffect(), false));
     }
 
     public KokushoTheEveningStar(final KokushoTheEveningStar card) {

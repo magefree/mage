@@ -4,7 +4,7 @@ package mage.cards.b;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -24,7 +24,7 @@ public final class BogardanFirefiend extends CardImpl {
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
-        Ability ability = new DiesTriggeredAbility(new DamageTargetEffect(2), false);
+        Ability ability = new DiesSourceTriggeredAbility(new DamageTargetEffect(2), false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

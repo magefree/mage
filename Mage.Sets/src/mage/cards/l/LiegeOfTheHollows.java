@@ -2,7 +2,7 @@ package mage.cards.l;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenTargetEffect;
@@ -33,7 +33,7 @@ public final class LiegeOfTheHollows extends CardImpl {
 
         // When Liege of the Hollows dies, each player may pay any amount of mana.
         // Then each player creates a number of 1/1 green Squirrel creature tokens equal to the amount of mana they paid this way.
-        this.addAbility(new DiesTriggeredAbility(new LiegeOfTheHollowsEffect()));
+        this.addAbility(new DiesSourceTriggeredAbility(new LiegeOfTheHollowsEffect()));
     }
 
     public LiegeOfTheHollows(final LiegeOfTheHollows card) {

@@ -4,7 +4,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.condition.common.HellbentCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -32,7 +32,7 @@ public final class SlaughterhouseBouncer extends CardImpl {
 
         // Hellbent - When Slaughterhouse Bouncer dies, if you have no cards in hand, target creature gets -3/-3 until end of turn.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new DiesTriggeredAbility(new BoostTargetEffect(-3, -3, Duration.EndOfTurn)),
+                new DiesSourceTriggeredAbility(new BoostTargetEffect(-3, -3, Duration.EndOfTurn)),
                 HellbentCondition.instance,
                 "When {this} dies, if you have no cards in hand, target creature gets -3/-3 until end of turn."
         );

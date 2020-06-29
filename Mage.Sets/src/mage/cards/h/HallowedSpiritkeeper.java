@@ -3,7 +3,7 @@ package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -34,7 +34,7 @@ public final class HallowedSpiritkeeper extends CardImpl {
         // When Hallowed Spiritkeeper dies, create X 1/1 white Spirit creature tokens with flying, where X is the number of creature cards in your graveyard.
         Effect effect = new CreateTokenEffect(new SpiritWhiteToken(), new CardsInControllerGraveyardCount(new FilterCreatureCard("creature cards")));
         effect.setText("create X 1/1 white Spirit creature tokens with flying, where X is the number of creature cards in your graveyard");
-        this.addAbility(new DiesTriggeredAbility(effect, false));
+        this.addAbility(new DiesSourceTriggeredAbility(effect, false));
 
     }
 

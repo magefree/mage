@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.CycleTriggeredAbility;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.CyclingAbility;
@@ -35,7 +35,7 @@ public final class GrixisSojourners extends CardImpl {
 
         // When you cycle Grixis Sojourners or it dies, you may exile target card from a graveyard.
         Ability ability1 = new CycleTriggeredAbility(new ExileTargetEffect(), true);
-        Ability ability2 = new DiesTriggeredAbility(new ExileTargetEffect(), true);
+        Ability ability2 = new DiesSourceTriggeredAbility(new ExileTargetEffect(), true);
         ability1.addTarget(new TargetCardInASingleGraveyard(1, 1, new FilterCard()));
         ability2.addTarget(new TargetCardInASingleGraveyard(1, 1, new FilterCard()));
         this.addAbility(ability1);

@@ -1,7 +1,7 @@
 package mage.abilities.keyword;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BecomesBlockedTriggeredAbility;
+import mage.abilities.common.BecomesBlockedSourceTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
@@ -13,7 +13,7 @@ import mage.game.combat.CombatGroup;
  *
  * @author LoneFox
  */
-public class RampageAbility extends BecomesBlockedTriggeredAbility {
+public class RampageAbility extends BecomesBlockedSourceTriggeredAbility {
 
     private final String rule;
 

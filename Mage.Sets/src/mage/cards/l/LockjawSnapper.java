@@ -4,7 +4,7 @@ package mage.cards.l;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.WitherAbility;
 import mage.cards.CardImpl;
@@ -34,7 +34,7 @@ public final class LockjawSnapper extends CardImpl {
         this.addAbility(WitherAbility.getInstance());
         
         // When Lockjaw Snapper dies, put a -1/-1 counter on each creature with a -1/-1 counter on it.
-        this.addAbility(new DiesTriggeredAbility(new LockjawSnapperEffect()));
+        this.addAbility(new DiesSourceTriggeredAbility(new LockjawSnapperEffect()));
         
     }
 

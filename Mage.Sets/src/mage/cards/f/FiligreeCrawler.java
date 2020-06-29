@@ -3,7 +3,7 @@ package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -25,7 +25,7 @@ public final class FiligreeCrawler extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Filigree Crawler dies, create a 1/1 colorless Thopter artifact creature token with flying.
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new ThopterColorlessToken())));
+        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new ThopterColorlessToken())));
     }
 
     public FiligreeCrawler(final FiligreeCrawler card) {

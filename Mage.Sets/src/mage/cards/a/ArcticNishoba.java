@@ -3,7 +3,7 @@ package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.costs.OrCost;
 import mage.constants.SubType;
 import mage.abilities.keyword.TrampleAbility;
@@ -45,7 +45,7 @@ public final class ArcticNishoba extends CardImpl {
         // When Arctic Nishoba dies, you gain 2 life for each age counter on it.
         Effect effect = new GainLifeEffect(new MultipliedValue(new CountersSourceCount(CounterType.AGE), 2));
         effect.setText("you gain 2 life for each age counter on it");
-        this.addAbility(new DiesTriggeredAbility(effect));
+        this.addAbility(new DiesSourceTriggeredAbility(effect));
     }
 
     public ArcticNishoba(final ArcticNishoba card) {

@@ -4,7 +4,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleEvasionAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
@@ -41,7 +41,7 @@ public final class ScuttlingDoomEngine extends CardImpl {
         // Scuttling Doom Engine can't be blocked by creatures with power 2 or less.
         this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
         // When Scuttling Doom Engine dies, it deals 6 damage to target opponnent
-        Ability ability = new DiesTriggeredAbility(new DamageTargetEffect(6, "it"), false);
+        Ability ability = new DiesSourceTriggeredAbility(new DamageTargetEffect(6, "it"), false);
         ability.addTarget(new TargetOpponentOrPlaneswalker());
         this.addAbility(ability);
     }

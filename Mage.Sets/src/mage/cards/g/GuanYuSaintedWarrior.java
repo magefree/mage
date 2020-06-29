@@ -3,7 +3,7 @@ package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.ShuffleIntoLibrarySourceEffect;
 import mage.abilities.keyword.HorsemanshipAbility;
 import mage.cards.CardImpl;
@@ -30,7 +30,7 @@ public final class GuanYuSaintedWarrior extends CardImpl {
         // Horsemanship
         this.addAbility(HorsemanshipAbility.getInstance());
         // When Guan Yu, Sainted Warrior is put into your graveyard from the battlefield, you may shuffle Guan Yu into your library.
-        this.addAbility(new DiesTriggeredAbility(new ShuffleIntoLibrarySourceEffect(), true));
+        this.addAbility(new DiesSourceTriggeredAbility(new ShuffleIntoLibrarySourceEffect(), true));
     }
 
     public GuanYuSaintedWarrior(final GuanYuSaintedWarrior card) {

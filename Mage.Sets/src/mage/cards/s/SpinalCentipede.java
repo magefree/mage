@@ -3,7 +3,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
@@ -26,7 +26,7 @@ public final class SpinalCentipede extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Spinal Centipede dies, put a +1/+1 counter on target creature you control.
-        Ability ability = new DiesTriggeredAbility(new AddCountersTargetEffect(
+        Ability ability = new DiesSourceTriggeredAbility(new AddCountersTargetEffect(
                 CounterType.P1P1.createInstance()
         ), false);
         ability.addTarget(new TargetControlledCreaturePermanent());

@@ -1,7 +1,7 @@
 package mage.cards.s;
 
 import java.util.UUID;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
@@ -26,7 +26,7 @@ public final class SupernaturalStamina extends CardImpl {
                 .setText("Until end of turn, target creature gets +2/+0")
         );
         getSpellAbility().addEffect(new GainAbilityTargetEffect(
-                new DiesTriggeredAbility(
+                new DiesSourceTriggeredAbility(
                         new ReturnSourceFromGraveyardToBattlefieldEffect(true, true),
                         false),
                 Duration.EndOfTurn,

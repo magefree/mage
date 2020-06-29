@@ -3,7 +3,7 @@ package mage.cards.e;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -24,7 +24,7 @@ public final class ExultantCultist extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Exultant Cultist dies, draw a card.
-        this.addAbility(new DiesTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
+        this.addAbility(new DiesSourceTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
     }
 
     public ExultantCultist(final ExultantCultist card) {

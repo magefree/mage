@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.DrawCardControllerTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
@@ -52,7 +52,7 @@ public final class TheLocustGod extends CardImpl {
         this.addAbility(ability);
 
         // When The Locust God dies, return it to its owner's hand at the beginning of the next end step.
-        this.addAbility(new DiesTriggeredAbility(new TheLocustGodEffect()));
+        this.addAbility(new DiesSourceTriggeredAbility(new TheLocustGodEffect()));
     }
 
     public TheLocustGod(final TheLocustGod card) {

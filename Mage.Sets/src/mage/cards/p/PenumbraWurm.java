@@ -3,7 +3,7 @@ package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -29,7 +29,7 @@ public final class PenumbraWurm extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // When Penumbra Wurm dies, create a 6/6 black Wurm creature token with trample.
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new PenumbraWurmToken(), 1), false));
+        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new PenumbraWurmToken(), 1), false));
     }
 
     public PenumbraWurm(final PenumbraWurm card) {

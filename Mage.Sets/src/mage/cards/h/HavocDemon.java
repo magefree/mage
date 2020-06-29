@@ -3,7 +3,7 @@ package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -27,7 +27,7 @@ public final class HavocDemon extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // When Havoc Demon dies, all creatures get -5/-5 until end of turn.
-        this.addAbility(new DiesTriggeredAbility(new BoostAllEffect(-5, -5, Duration.EndOfTurn), false));
+        this.addAbility(new DiesSourceTriggeredAbility(new BoostAllEffect(-5, -5, Duration.EndOfTurn), false));
     }
 
     public HavocDemon(final HavocDemon card) {

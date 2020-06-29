@@ -3,7 +3,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.abilities.keyword.DevoidAbility;
 import mage.abilities.keyword.IngestAbility;
@@ -30,7 +30,7 @@ public final class SalvageDrone extends CardImpl {
         // Ingest (Whenever this creature deals combat damage to a player, that player exiles the top card of their library.)
         this.addAbility(new IngestAbility());
         // When Salvage Drone dies, you may draw a card. If you do, discard a card.
-        this.addAbility(new DiesTriggeredAbility(new DrawDiscardControllerEffect(1, 1, true), false));
+        this.addAbility(new DiesSourceTriggeredAbility(new DrawDiscardControllerEffect(1, 1, true), false));
 
     }
 

@@ -4,7 +4,7 @@ package mage.cards.d;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -34,7 +34,7 @@ public final class DutifulAttendant extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Dutiful Ateendant dies, return another target creature card from your graveyard to your hand.
-        Ability ability = new DiesTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect(), false);
+        Ability ability = new DiesSourceTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect(), false);
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
     }

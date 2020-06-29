@@ -2,7 +2,7 @@ package mage.cards.w;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.LifelinkAbility;
@@ -31,7 +31,7 @@ public final class WurmcoilEngine extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // When Wurmcoil Engine dies, create a 3/3 colorless Wurm artifact creature token with deathtouch and a 3/3 colorless Wurm artifact creature token with lifelink.
-        Ability ability = new DiesTriggeredAbility(new CreateTokenEffect(new WurmWithDeathtouchToken()), false);
+        Ability ability = new DiesSourceTriggeredAbility(new CreateTokenEffect(new WurmWithDeathtouchToken()), false);
         ability.addEffect(new CreateTokenEffect(new WurmWithLifelinkToken()));
         this.addAbility(ability);
     }

@@ -4,7 +4,7 @@ package mage.cards.m;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -34,7 +34,7 @@ public final class MatterReshaper extends CardImpl {
 
         // When Matter Reshaper dies, reveal the top card of your library. You may put that card onto the battlefield
         // if it's a permanent card with converted mana cost 3 or less. Otherwise, put that card into your hand.
-        this.addAbility(new DiesTriggeredAbility(new MatterReshaperEffect(), false));
+        this.addAbility(new DiesSourceTriggeredAbility(new MatterReshaperEffect(), false));
     }
 
     public MatterReshaper(final MatterReshaper card) {

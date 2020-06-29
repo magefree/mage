@@ -1,7 +1,7 @@
 package mage.cards.m;
 
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.keyword.LifelinkAbility;
@@ -30,7 +30,7 @@ public final class MurderousRider extends AdventureCard {
         this.addAbility(LifelinkAbility.getInstance());
 
         // When Murderous Rider dies, put it on the bottom of its owner's library.
-        this.addAbility(new DiesTriggeredAbility(new PutOnLibrarySourceEffect(
+        this.addAbility(new DiesSourceTriggeredAbility(new PutOnLibrarySourceEffect(
                 false, "put it on the bottom of its owner's library"
         ), false));
 

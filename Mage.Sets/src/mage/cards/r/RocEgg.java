@@ -3,7 +3,7 @@ package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
@@ -28,7 +28,7 @@ public final class RocEgg extends CardImpl {
         this.toughness = new MageInt(3);
 
         this.addAbility(DefenderAbility.getInstance());
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(rocEggToken, 1), false));
+        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(rocEggToken, 1), false));
     }
 
     public RocEgg(final RocEgg card) {

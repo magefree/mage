@@ -4,7 +4,7 @@ package mage.cards.m;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSourceEffect;
@@ -39,7 +39,7 @@ public final class MoldgrafMonstrosity extends CardImpl {
         // When Moldgraf Monstrosity dies, exile it, then return two creature cards at random from your graveyard to the battlefield.
         Effect effect = new ExileSourceEffect();
         effect.setText("");
-        DiesTriggeredAbility ability = new DiesTriggeredAbility(effect);
+        DiesSourceTriggeredAbility ability = new DiesSourceTriggeredAbility(effect);
         ability.addEffect(new MoldgrafMonstrosityEffect());
         this.addAbility(ability);
     }

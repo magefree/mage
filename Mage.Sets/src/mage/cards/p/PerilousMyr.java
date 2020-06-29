@@ -4,7 +4,7 @@ package mage.cards.p;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -25,7 +25,7 @@ public final class PerilousMyr extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Perilous Myr dies, it deals 2 damage to any target.
-        Ability ability = new DiesTriggeredAbility(new DamageTargetEffect(2, "it"), false);
+        Ability ability = new DiesSourceTriggeredAbility(new DamageTargetEffect(2, "it"), false);
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

@@ -3,7 +3,7 @@ package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.SacrificeAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -29,7 +29,7 @@ public final class AkkiBlizzardHerder extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Akki Blizzard-Herder dies, each player sacrifices a land.
-        this.addAbility(new DiesTriggeredAbility(new SacrificeAllEffect(filter)));
+        this.addAbility(new DiesSourceTriggeredAbility(new SacrificeAllEffect(filter)));
     }
 
     public AkkiBlizzardHerder(final AkkiBlizzardHerder card) {

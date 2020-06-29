@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -63,7 +63,7 @@ public final class TheScorpionGod extends CardImpl {
         this.addAbility(ability);
 
         // When The Scorpion God dies, return it to its owner's hand at the beginning of the next end step.
-        this.addAbility(new DiesTriggeredAbility(new TheScorpionGodEffect()));
+        this.addAbility(new DiesSourceTriggeredAbility(new TheScorpionGodEffect()));
     }
 
     public TheScorpionGod(final TheScorpionGod card) {

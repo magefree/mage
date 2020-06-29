@@ -4,7 +4,7 @@ package mage.cards.a;
 import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SpellCastAllTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DoIfCostPaid;
@@ -36,7 +36,7 @@ public final class AuspiciousAncestor extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Auspicious Ancestor dies, you gain 3 life.
-        this.addAbility(new DiesTriggeredAbility(new GainLifeEffect(3), false));
+        this.addAbility(new DiesSourceTriggeredAbility(new GainLifeEffect(3), false));
         // Whenever a player casts a white spell, you may pay {1}. If you do, you gain 1 life.
         this.addAbility(new SpellCastAllTriggeredAbility(new DoIfCostPaid(new GainLifeEffect(1), new ManaCostsImpl("{1}")), filter, true));
     }

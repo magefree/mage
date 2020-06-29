@@ -5,7 +5,7 @@ import java.util.Collections;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.constants.CardType;
@@ -29,7 +29,7 @@ public final class DevilToken extends TokenImpl {
         toughness = new MageInt(1);
         Effect effect = new DamageTargetEffect(1);
         effect.setText("it deals 1 damage to any target");
-        Ability ability = new DiesTriggeredAbility(effect);
+        Ability ability = new DiesSourceTriggeredAbility(effect);
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

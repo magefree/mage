@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.CycleTriggeredAbility;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.CyclingAbility;
@@ -34,7 +34,7 @@ public final class JundSojourners extends CardImpl {
 
         // When you cycle Jund Sojourners or it dies, you may have it deal 1 damage to any target.
         Ability ability1 = new CycleTriggeredAbility(new DamageTargetEffect(1));
-        Ability ability2 = new DiesTriggeredAbility(new DamageTargetEffect(1));
+        Ability ability2 = new DiesSourceTriggeredAbility(new DamageTargetEffect(1));
         ability1.addTarget(new TargetAnyTarget());
         ability2.addTarget(new TargetAnyTarget());
         this.addAbility(ability1);

@@ -4,7 +4,7 @@ package mage.cards.i;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
@@ -27,7 +27,7 @@ public final class InsidiousBookworms extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Insidious Bookworms dies, you may pay {1}{B}. If you do, target player discards a card at random.
-        Ability ability = new DiesTriggeredAbility(new DoIfCostPaid(new DiscardTargetEffect(1, true), new ManaCostsImpl("{1}{B}")));
+        Ability ability = new DiesSourceTriggeredAbility(new DoIfCostPaid(new DiscardTargetEffect(1, true), new ManaCostsImpl("{1}{B}")));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

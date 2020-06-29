@@ -3,7 +3,7 @@ package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -26,7 +26,7 @@ public final class DoomedTraveler extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Doomed Traveler dies, create a 1/1 white Spirit creature token with flying.
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new SpiritWhiteToken())));
+        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new SpiritWhiteToken())));
     }
 
     public DoomedTraveler(final DoomedTraveler card) {

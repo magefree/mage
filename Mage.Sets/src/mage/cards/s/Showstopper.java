@@ -2,7 +2,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbility;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
@@ -34,7 +34,7 @@ public final class Showstopper extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}{R}");
 
         // Until end of turn, creatures you control gain "When this creature dies, it deals 2 damage to target creature an opponent controls."
-        TriggeredAbility ability = new DiesTriggeredAbility(new DamageTargetEffect(2, "it"), false);
+        TriggeredAbility ability = new DiesSourceTriggeredAbility(new DamageTargetEffect(2, "it"), false);
         Target target = new TargetCreaturePermanent(filter2);
         ability.addTarget(target);
         Effect effect = new GainAbilityControlledEffect(ability, Duration.EndOfTurn, filter);

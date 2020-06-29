@@ -3,7 +3,7 @@ package mage.cards.o;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -23,7 +23,7 @@ public final class Onulet extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Onulet dies, you gain 2 life.
-        this.addAbility(new DiesTriggeredAbility(new GainLifeEffect(2)));
+        this.addAbility(new DiesSourceTriggeredAbility(new GainLifeEffect(2)));
     }
 
     public Onulet(final Onulet card) {

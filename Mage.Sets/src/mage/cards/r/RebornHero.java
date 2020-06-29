@@ -4,7 +4,7 @@ package mage.cards.r;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -41,7 +41,7 @@ public final class RebornHero extends CardImpl {
         Ability ability = new SimpleStaticAbility(
                 Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(
-                        new GainAbilitySourceEffect(new DiesTriggeredAbility(new DoIfCostPaid(
+                        new GainAbilitySourceEffect(new DiesSourceTriggeredAbility(new DoIfCostPaid(
                                 new ReturnSourceFromGraveyardToBattlefieldEffect(), new ManaCostsImpl("{W}{W}")
                         ))),
                         new CardsInControllerGraveCondition(7),

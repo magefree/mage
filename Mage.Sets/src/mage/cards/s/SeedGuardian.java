@@ -3,7 +3,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.ReachAbility;
@@ -32,7 +32,7 @@ public final class SeedGuardian extends CardImpl {
         // Reach
         this.addAbility(ReachAbility.getInstance());
         // When Seed Guardian dies, create an X/X green Elemental creature token, where X is the number of creature cards in your graveyard.
-        this.addAbility(new DiesTriggeredAbility(new SeedGuardianEffect(), false));
+        this.addAbility(new DiesSourceTriggeredAbility(new SeedGuardianEffect(), false));
     }
 
     public SeedGuardian(final SeedGuardian card) {

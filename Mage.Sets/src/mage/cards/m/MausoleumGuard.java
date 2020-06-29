@@ -1,7 +1,7 @@
 package mage.cards.m;
 
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -25,7 +25,7 @@ public final class MausoleumGuard extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Mausoleum Guard dies, create two 1/1 white Spirit creature tokens with flying.
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new SpiritWhiteToken(), 2)));
+        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new SpiritWhiteToken(), 2)));
     }
 
     public MausoleumGuard(final MausoleumGuard card) {

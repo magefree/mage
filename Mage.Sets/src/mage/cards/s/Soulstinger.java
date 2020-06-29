@@ -4,7 +4,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -43,7 +43,7 @@ public final class Soulstinger extends CardImpl {
                         new CountersSourceCount(CounterType.M1M1),
                         Outcome.Detriment);
         effect.setText("you may put a -1/-1 counter on target creature for each -1/-1 counter on {this}");
-        ability = new DiesTriggeredAbility(effect, true);
+        ability = new DiesSourceTriggeredAbility(effect, true);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

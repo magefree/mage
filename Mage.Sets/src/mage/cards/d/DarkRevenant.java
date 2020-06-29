@@ -4,7 +4,7 @@ package mage.cards.d;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
@@ -35,7 +35,7 @@ public final class DarkRevenant extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Dark Revenant dies, put it on top of its owner's library.
-        this.addAbility(new DiesTriggeredAbility(new DarkRevenantEffect()));
+        this.addAbility(new DiesSourceTriggeredAbility(new DarkRevenantEffect()));
     }
 
     public DarkRevenant(final DarkRevenant card) {

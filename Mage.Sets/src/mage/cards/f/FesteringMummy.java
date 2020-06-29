@@ -4,7 +4,7 @@ package mage.cards.f;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -27,7 +27,7 @@ public final class FesteringMummy extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Festering Mummy dies, you may put a -1/-1 counter on target creature.
-        Ability ability = new DiesTriggeredAbility(new AddCountersTargetEffect(CounterType.M1M1.createInstance()), true);
+        Ability ability = new DiesSourceTriggeredAbility(new AddCountersTargetEffect(CounterType.M1M1.createInstance()), true);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
