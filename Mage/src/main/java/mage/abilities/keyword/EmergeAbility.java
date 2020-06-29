@@ -28,7 +28,8 @@ public class EmergeAbility extends SpellAbility {
 
     public EmergeAbility(Card card, ManaCosts<ManaCost> emergeCost) {
         super(card.getSpellAbility());
-        this.newId();
+        this.emergeCost = emergeCost.copy();
+        this.newId(); // Why is this neccessary? will create new id anyway or not?
         this.setCardName(card.getName() + " with emerge");
         zone = Zone.HAND;
         spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
@@ -37,8 +38,7 @@ public class EmergeAbility extends SpellAbility {
         this.getManaCostsToPay().clear();
         this.addManaCost(emergeCost.copy());
 
-        this.setRuleAtTheTop(true);
-        this.emergeCost = emergeCost.copy();
+        this.setRuleAtTheTop(true);        
     }
 
     public EmergeAbility(final EmergeAbility ability) {

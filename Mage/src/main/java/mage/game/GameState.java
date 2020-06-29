@@ -867,7 +867,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     /**
-     * Abilities that are applied to other objects or applie for a certain time
+     * Abilities that are applied to other objects or applied for a certain time
      * span
      *
      * @param ability
