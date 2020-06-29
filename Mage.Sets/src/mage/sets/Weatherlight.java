@@ -152,6 +152,7 @@ public final class Weatherlight extends ExpansionSet {
         cards.add(new SetCardInfo("Roc Hatchling", 113, Rarity.UNCOMMON, mage.cards.r.RocHatchling.class));
         cards.add(new SetCardInfo("Rogue Elephant", 139, Rarity.COMMON, mage.cards.r.RogueElephant.class));
         cards.add(new SetCardInfo("Sage Owl", 52, Rarity.COMMON, mage.cards.s.SageOwl.class));
+        cards.add(new SetCardInfo("Sawtooth Ogre", 114, Rarity.COMMON, mage.cards.s.SawtoothOgre.class));
         cards.add(new SetCardInfo("Scorched Ruins", 166, Rarity.RARE, mage.cards.s.ScorchedRuins.class));
         cards.add(new SetCardInfo("Serenity", 24, Rarity.RARE, mage.cards.s.Serenity.class));
         cards.add(new SetCardInfo("Serra's Blessing", 25, Rarity.UNCOMMON, mage.cards.s.SerrasBlessing.class));
