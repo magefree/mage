@@ -2,18 +2,14 @@ package mage.cards.g;
 
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.cost.CostModificationEffectImpl;
+import mage.abilities.effects.common.cost.SpellsCostIncreasingAllEffect;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.game.Game;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -46,7 +42,7 @@ public final class GrandArbiterAugustinIV extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filterBlue, 1)));
 
         // Spells your opponents cast cost {1} more to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GrandArbiterAugustinIVCostIncreaseEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostIncreasingAllEffect(1, new FilterCard("Spells"), TargetController.OPPONENT)));
     }
 
     public GrandArbiterAugustinIV(final GrandArbiterAugustinIV card) {
@@ -57,41 +53,4 @@ public final class GrandArbiterAugustinIV extends CardImpl {
     public GrandArbiterAugustinIV copy() {
         return new GrandArbiterAugustinIV(this);
     }
-}
-
-class GrandArbiterAugustinIVCostIncreaseEffect extends CostModificationEffectImpl {
-
-    private static final String effectText = "Spells your opponents cast cost {1} more to cast";
-
-    GrandArbiterAugustinIVCostIncreaseEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);
-        staticText = effectText;
-    }
-
-    GrandArbiterAugustinIVCostIncreaseEffect(GrandArbiterAugustinIVCostIncreaseEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        SpellAbility spellAbility = (SpellAbility) abilityToModify;
-        CardUtil.adjustCost(spellAbility, -1);
-        return true;
-    }
-
-    @Override
-    public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify instanceof SpellAbility) {
-            if (game.getOpponents(source.getControllerId()).contains(abilityToModify.getControllerId())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public GrandArbiterAugustinIVCostIncreaseEffect copy() {
-        return new GrandArbiterAugustinIVCostIncreaseEffect(this);
-    }
-
 }
