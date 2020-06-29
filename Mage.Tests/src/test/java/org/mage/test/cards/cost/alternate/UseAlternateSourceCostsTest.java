@@ -146,6 +146,52 @@ public class UseAlternateSourceCostsTest extends CardTestPlayerBase {
     }
 
     @Test
+    public void test_Playable_WithOpponentGainingLive() {
+        // If you control a Forest, rather than pay Invigorate's mana cost, you may have an opponent gain 3 life.
+        // Target creature gets +4/+4 until end of turn.        
+        addCard(Zone.HAND, playerA, "Invigorate"); // Instant {2}{G}
+        addCard(Zone.BATTLEFIELD, playerA, "Forest");
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
+        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Invigorate", "Silvercoat Lion");
+        setChoice(playerA, "Yes"); // use alternative cost
+        addTarget(playerA, playerB); // Opponent to gain live
+        
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+        assertAllCommandsUsed();
+        
+        assertGraveyardCount(playerA, "Invigorate", 1);
+        assertPowerToughness(playerA, "Silvercoat Lion", 6, 6);
+        assertLife(playerB, 23);
+    }
+    
+    @Test
+    public void test_Not_Playable_WithOpponentGainingLive() {
+        // If you control a Forest, rather than pay Invigorate's mana cost, you may have an opponent gain 3 life.
+        // Target creature gets +4/+4 until end of turn.        
+        addCard(Zone.GRAVEYARD, playerA, "Invigorate"); // Instant {2}{G}
+        addCard(Zone.BATTLEFIELD, playerA, "Forest");
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
+        addCard(Zone.BATTLEFIELD, playerB, "Forest");
+        
+         // can't see as playable because in graveyard
+        checkPlayableAbility("can't", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Invigorate", false);
+        
+        checkPlayableAbility("can't", 1, PhaseStep.PRECOMBAT_MAIN, playerB, "Cast Invigorate", false);
+        
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+        assertAllCommandsUsed();
+        
+        assertGraveyardCount(playerA, "Invigorate", 1);
+        assertPowerToughness(playerA, "Silvercoat Lion", 2, 2);
+        assertLife(playerB, 20);
+    }
+    
+    @Test
     @Ignore // TODO: make test to check combo of alternative cost and cost reduction effects
     public void test_Playable_WithCostReduction() {
         addCard(Zone.HAND, playerA, "xxx");

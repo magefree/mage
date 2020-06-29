@@ -3207,6 +3207,9 @@ public abstract class PlayerImpl implements Player, Serializable {
         // check "can play" condition as affected controller (BUT play from not own hand zone must be checked as original controller)
         // must check all abilities, not activated only
         for (Ability ability : candidateAbilities) {
+            if (!(ability instanceof ActivatedAbility)) {
+                continue;
+            }
             boolean isPlaySpell = (ability instanceof SpellAbility);
             boolean isPlayLand = (ability instanceof PlayLandAbility);
 
