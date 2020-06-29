@@ -34,6 +34,7 @@ public class FightTargetsEffect extends OneShotEffect {
         if (card != null) {
             UUID target1Id = null;
             UUID target2Id = null;
+            boolean secondTargetOptional = false;
             // first target is in target pointer, second target is a normal target
             if (source.getTargets().size() < 2) {
                 if (!source.getTargets().get(0).isLegal(source, game)) {
@@ -48,6 +49,7 @@ public class FightTargetsEffect extends OneShotEffect {
             } else if (source.getTargets().get(0).isLegal(source, game) && source.getTargets().get(1).isLegal(source, game)) {
                 target1Id = source.getTargets().get(0).getFirstTarget();
                 target2Id = source.getTargets().get(1).getFirstTarget();
+                secondTargetOptional = source.getTargets().get(1).getMinNumberOfTargets() == 0;
             }
             Permanent creature1 = game.getPermanent(target1Id);
             Permanent creature2 = game.getPermanent(target2Id);
@@ -57,7 +59,7 @@ public class FightTargetsEffect extends OneShotEffect {
                     return creature1.fight(creature2, source, game);
                 }
             }
-            if (!game.isSimulation()) {
+            if (!game.isSimulation() && !secondTargetOptional) {
                 game.informPlayers(card.getName() + " has been fizzled.");
             }
         }
