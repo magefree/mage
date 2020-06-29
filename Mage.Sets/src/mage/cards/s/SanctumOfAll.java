@@ -97,9 +97,11 @@ class SanctumOfAllTriggerEffect extends ReplacementEffectImpl {
             // Only trigger while you control six or more Shrines
             int numShrines = SanctumOfAll.count.calculate(game, source, this);
             if (numShrines >= 6) {
-                // Only for triggers of Shrines
+                // Only for triggers of other Shrines
                 Permanent permanent = game.getPermanent(event.getSourceId());
-                return permanent != null && permanent.hasSubtype(SubType.SHRINE, game);
+                return permanent != null
+                        && !permanent.getId().equals(source.getSourceId())
+                        && permanent.hasSubtype(SubType.SHRINE, game);
             }
         }
         return false;
