@@ -4,7 +4,7 @@ package mage.cards.g;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BlocksOrBecomesBlockedTriggeredAbility;
+import mage.abilities.common.BlocksOrBecomesBlockedSourceTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -27,7 +27,7 @@ public final class GoblinCadets extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Goblin Cadets blocks or becomes blocked, target opponent gains control of it.
-        Ability ability = new BlocksOrBecomesBlockedTriggeredAbility(new GoblinCadetsChangeControlEffect(), false);
+        Ability ability = new BlocksOrBecomesBlockedSourceTriggeredAbility(new GoblinCadetsChangeControlEffect(), false);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
 

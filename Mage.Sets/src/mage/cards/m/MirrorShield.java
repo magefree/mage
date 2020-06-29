@@ -1,7 +1,7 @@
 package mage.cards.m;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BlocksOrBecomesBlockedTriggeredAbility;
+import mage.abilities.common.BlocksOrBecomesBlockedSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
@@ -44,7 +44,7 @@ public final class MirrorShield extends CardImpl {
         ability.addEffect(new GainAbilityAttachedEffect(
                 HexproofAbility.getInstance(), AttachmentType.EQUIPMENT
         ).setText("and has hexproof"));
-        ability.addEffect(new GainAbilityAttachedEffect(new BlocksOrBecomesBlockedTriggeredAbility(
+        ability.addEffect(new GainAbilityAttachedEffect(new BlocksOrBecomesBlockedSourceTriggeredAbility(
                 new DestroyTargetEffect(), filter, false, rule + "", true
         ), AttachmentType.EQUIPMENT).setText("and \"" + rule + "\""));
         this.addAbility(ability);

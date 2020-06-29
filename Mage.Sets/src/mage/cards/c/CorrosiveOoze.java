@@ -3,7 +3,7 @@ package mage.cards.c;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.common.BlocksOrBecomesBlockedTriggeredAbility;
+import mage.abilities.common.BlocksOrBecomesBlockedSourceTriggeredAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -44,7 +44,7 @@ public final class CorrosiveOoze extends CardImpl {
 
         // Whenever Corrosive Ooze blocks or becomes blocked by an equipped creature, destroy all Equipment attached to that creature at end of combat.
         Effect effect = new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(new CorrosiveOozeEffect()), true);
-        this.addAbility(new BlocksOrBecomesBlockedTriggeredAbility(effect, filter, false), new CorrosiveOozeCombatWatcher());
+        this.addAbility(new BlocksOrBecomesBlockedSourceTriggeredAbility(effect, filter, false), new CorrosiveOozeCombatWatcher());
     }
 
     public CorrosiveOoze(final CorrosiveOoze card) {

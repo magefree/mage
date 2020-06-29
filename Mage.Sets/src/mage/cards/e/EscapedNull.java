@@ -3,7 +3,7 @@ package mage.cards.e;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BlocksOrBecomesBlockedTriggeredAbility;
+import mage.abilities.common.BlocksOrBecomesBlockedSourceTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
@@ -27,7 +27,7 @@ public final class EscapedNull extends CardImpl {
         this.toughness = new MageInt(2);
 
         this.addAbility(LifelinkAbility.getInstance());
-        this.addAbility(new BlocksOrBecomesBlockedTriggeredAbility(new BoostSourceEffect(5, 0, Duration.EndOfTurn), false));
+        this.addAbility(new BlocksOrBecomesBlockedSourceTriggeredAbility(new BoostSourceEffect(5, 0, Duration.EndOfTurn), false));
     }
 
     public EscapedNull(final EscapedNull card) {
