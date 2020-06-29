@@ -24,7 +24,7 @@ public final class ReadTheTides extends CardImpl {
 
         // • Return up to two target creatures to their owners' hands.
         Mode mode = new Mode(new ReturnToHandTargetEffect());
-        mode.addTarget(new TargetCreaturePermanent(0, 1));
+        mode.addTarget(new TargetCreaturePermanent(0, 2));
         this.getSpellAbility().addMode(mode);
     }
 
