@@ -3,7 +3,7 @@ package mage.cards.v;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BlocksOrBecomesBlockedTriggeredAbility;
+import mage.abilities.common.BlocksOrBecomesBlockedSourceTriggeredAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
@@ -32,7 +32,7 @@ public final class VenomousDragonfly extends CardImpl {
         // Whenever Venomous Dragonfly blocks or becomes blocked by a creature, destroy that creature at end of combat.
         Effect effect = new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect()));
         effect.setText("destroy that creature at end of combat");
-        this.addAbility(new BlocksOrBecomesBlockedTriggeredAbility(effect, false));
+        this.addAbility(new BlocksOrBecomesBlockedSourceTriggeredAbility(effect, false));
     }
 
     public VenomousDragonfly(final VenomousDragonfly card) {
