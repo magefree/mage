@@ -53,10 +53,10 @@ public final class GarrukSavageHerald extends CardImpl {
         controlledCreature.setTargetTag(1);
         minusAbility.addTarget(controlledCreature);
 
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature to deal damage to");
+        FilterCreaturePermanent filter = new FilterCreaturePermanent();
         filter.add(new AnotherTargetPredicate(2));
         TargetCreaturePermanent anotherTargetCreature = new TargetCreaturePermanent(filter);
-        minusAbility.addTarget(anotherTargetCreature);
+        minusAbility.addTarget(anotherTargetCreature.withChooseHint("another creature to deal damage to"));
 
         this.addAbility(minusAbility);
 
