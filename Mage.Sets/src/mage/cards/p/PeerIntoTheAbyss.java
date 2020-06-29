@@ -58,8 +58,8 @@ class PeerIntoTheAbyssEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        player.drawCards((int) Math.ceil(player.getLibrary().size() / 2), source.getSourceId(), game);
-        player.loseLife((int) Math.ceil(player.getLife() / 2), game, false);
+        player.drawCards((int) Math.ceil(player.getLibrary().size() / 2.0), source.getSourceId(), game);
+        player.loseLife((int) Math.ceil(player.getLife() / 2.0), game, false);
         return true;
     }
 }
