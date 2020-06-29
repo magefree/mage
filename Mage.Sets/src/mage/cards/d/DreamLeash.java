@@ -74,6 +74,7 @@ class DreamLeashTarget extends TargetPermanent {
         return false;
     }
 
+    // See ruling: https://www.mtgsalvation.com/forums/magic-fundamentals/magic-rulings/magic-rulings-archives/253345-dream-leash
     @Override
     public boolean stillLegalTarget(UUID id, Ability source, Game game) {
         Permanent permanent = game.getPermanent(id);
