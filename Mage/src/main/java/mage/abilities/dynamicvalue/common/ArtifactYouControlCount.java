@@ -9,7 +9,7 @@ import mage.game.Game;
 /**
  * @author JayDi85
  */
-public enum ArtifactsYouControlCount implements DynamicValue {
+public enum ArtifactYouControlCount implements DynamicValue {
 
     instance;
 
@@ -19,17 +19,17 @@ public enum ArtifactsYouControlCount implements DynamicValue {
     }
 
     @Override
-    public ArtifactsYouControlCount copy() {
+    public ArtifactYouControlCount copy() {
         return instance;
     }
 
     @Override
     public String toString() {
-        return "X";
+        return "1"; // uses "for each" effects, so must be 1, not X
     }
 
     @Override
     public String getMessage() {
-        return "artifacts you control";
+        return "artifact you control";
     }
 }

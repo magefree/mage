@@ -2,7 +2,7 @@ package mage.abilities.keyword;
 
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AffinityEffect;
-import mage.abilities.hint.common.ArtifactsYouControlHint;
+import mage.abilities.hint.common.ArtifactYouControlHint;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 
@@ -15,7 +15,7 @@ public class AffinityForArtifactsAbility extends SimpleStaticAbility {
         super(Zone.ALL, new AffinityEffect(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT));
         setRuleAtTheTop(true);
 
-        this.addHint(ArtifactsYouControlHint.instance);
+        this.addHint(ArtifactYouControlHint.instance);
     }
 
     public AffinityForArtifactsAbility(final AffinityForArtifactsAbility ability) {

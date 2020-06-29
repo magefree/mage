@@ -4,12 +4,12 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.costs.Cost;
+import mage.abilities.dynamicvalue.common.ArtifactYouControlCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.common.FilterArtifactPermanent;
 import mage.game.Game;
 import mage.game.stack.StackObject;
 import mage.players.Player;
@@ -64,7 +64,7 @@ class OverrideEffect extends OneShotEffect {
             Player player = game.getPlayer(spell.getControllerId());
             Player controller = game.getPlayer(source.getControllerId());
             if (player != null && controller != null) {
-                int amount = game.getBattlefield().countAll(new FilterArtifactPermanent(), source.getControllerId(), game);
+                int amount = ArtifactYouControlCount.instance.calculate(game, source, this);
                 if (amount > 0) {
                     Cost cost = ManaUtil.createManaCost(amount, false);
                     if (!cost.pay(source, game, spell.getControllerId(), spell.getControllerId(), false)) {

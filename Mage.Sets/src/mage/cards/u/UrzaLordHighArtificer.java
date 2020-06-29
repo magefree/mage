@@ -1,16 +1,17 @@
 package mage.cards.u;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.costs.mana.GenericManaCost;
-
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
+import mage.abilities.hint.common.ArtifactYouControlHint;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -24,12 +25,8 @@ import mage.game.Game;
 import mage.game.permanent.token.KarnConstructToken;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
-import mage.target.targetpointer.FixedTargets;
-import mage.util.CardUtil;
 
 import java.util.UUID;
-import mage.MageObject;
-import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 
 /**
  * @author TheElk801
@@ -53,7 +50,9 @@ public final class UrzaLordHighArtificer extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When Urza, Lord High Artificer enters the battlefield, create a 0/0 colorless Construct artifact creature token with "This creature gets +1/+1 for each artifact you control."
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new KarnConstructToken())));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new KarnConstructToken()))
+                .addHint(ArtifactYouControlHint.instance)
+        );
 
         // Tap an untapped artifact you control: Add {U}.
         this.addAbility(new SimpleManaAbility(
@@ -100,7 +99,7 @@ class UrzaLordHighArtificerEffect extends OneShotEffect {
         }
         controller.shuffleLibrary(source, game);
         Card card = controller.getLibrary().getFromTop(game);
-        return PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(game, source, card, 
-                TargetController.YOU, Duration.EndOfTurn, true);          
+        return PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(game, source, card,
+                TargetController.YOU, Duration.EndOfTurn, true);
     }
 }

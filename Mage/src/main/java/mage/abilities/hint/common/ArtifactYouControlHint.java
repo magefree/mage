@@ -1,7 +1,7 @@
 package mage.abilities.hint.common;
 
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.common.ArtifactsYouControlCount;
+import mage.abilities.dynamicvalue.common.ArtifactYouControlCount;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
 import mage.game.Game;
@@ -9,10 +9,10 @@ import mage.game.Game;
 /**
  * @author JayDi85
  */
-public enum ArtifactsYouControlHint implements Hint {
+public enum ArtifactYouControlHint implements Hint {
 
     instance;
-    private static final Hint hint = new ValueHint("Artifacts you control", ArtifactsYouControlCount.instance);
+    private static final Hint hint = new ValueHint("Artifacts you control", ArtifactYouControlCount.instance);
 
     @Override
     public String getText(Game game, Ability ability) {

@@ -1,9 +1,9 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.Mana;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -11,8 +11,9 @@ import mage.constants.CardType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class PowerstoneShard extends CardImpl {
@@ -28,7 +29,9 @@ public final class PowerstoneShard extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // {T}: Add {C} for each artifact you control named Powerstone Shard.
-        this.addAbility(new DynamicManaAbility(Mana.ColorlessMana(1), new PermanentsOnBattlefieldCount(filter)));
+        DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
+        this.addAbility(new DynamicManaAbility(Mana.ColorlessMana(1), xValue)
+                .addHint(new ValueHint("Artifact you control named Powerstone Shard", xValue)));
     }
 
     public PowerstoneShard(final PowerstoneShard card) {
