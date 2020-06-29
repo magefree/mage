@@ -12,6 +12,12 @@ import mage.game.Game;
 /**
  * Simple implementation of a {@link CostModificationEffect} offering simplified
  * construction to setup the object for use by the mage framework.
+ * <p>
+ * WARNING, if you implement custom effect and it can works on stack only (e.g. it need spell's targets to check) then
+ * use different apply code:
+ * - one for get playable mode before spell puts on stack (apply maximum possible cost reduction, use game.inCheckPlayableState()).
+ * - one for normal mode after spell puts on stack (apply real cost reduction)
+ * Example: TorgaarFamineIncarnate
  *
  * @author maurer.it_at_gmail.com
  */

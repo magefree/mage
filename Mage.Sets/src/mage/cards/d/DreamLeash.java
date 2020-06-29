@@ -1,7 +1,5 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
@@ -10,21 +8,22 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author maxlebedev
  */
 public final class DreamLeash extends CardImpl {
 
     public DreamLeash(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
         this.subtype.add(SubType.AURA);
 
         // Enchant permanent
@@ -55,7 +54,7 @@ class DreamLeashTarget extends TargetPermanent {
     @Override
     public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
 
-        if(super.canTarget(controllerId, id, source, game)){
+        if (super.canTarget(controllerId, id, source, game)) {
             Permanent permanent = game.getPermanent(id);
             return permanent.isTapped();
         }

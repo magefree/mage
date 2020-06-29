@@ -1,18 +1,17 @@
 package mage.cards.b;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.cost.CostModificationEffectImpl;
+import mage.abilities.effects.common.cost.SpellCostReductionForEachSourceEffect;
 import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.game.Game;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -21,8 +20,13 @@ import java.util.UUID;
  */
 public final class BrineGiant extends CardImpl {
 
-    private static final DynamicValue xValue
-            = new PermanentsOnBattlefieldCount(BrineGiantCostReductionEffect.filter);
+    static final FilterControlledPermanent filter = new FilterControlledPermanent("enchantment you control");
+
+    static {
+        filter.add(CardType.ENCHANTMENT.getPredicate());
+    }
+
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
 
     public BrineGiant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{U}");
@@ -33,7 +37,7 @@ public final class BrineGiant extends CardImpl {
 
         // This spell costs {1} less to cast for each enchantment you control.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new BrineGiantCostReductionEffect()
+                Zone.ALL, new SpellCostReductionForEachSourceEffect(1, xValue)
         ).addHint(new ValueHint("Enchantments you control", xValue)));
     }
 
@@ -44,40 +48,5 @@ public final class BrineGiant extends CardImpl {
     @Override
     public BrineGiant copy() {
         return new BrineGiant(this);
-    }
-}
-
-class BrineGiantCostReductionEffect extends CostModificationEffectImpl {
-
-    static final FilterControlledPermanent filter = new FilterControlledPermanent();
-
-    static {
-        filter.add(CardType.ENCHANTMENT.getPredicate());
-    }
-
-    BrineGiantCostReductionEffect() {
-        super(Duration.WhileOnStack, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        staticText = "This spell costs {1} less to cast for each enchantment you control";
-    }
-
-    private BrineGiantCostReductionEffect(final BrineGiantCostReductionEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        int count = game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game).size();
-        CardUtil.reduceCost(abilityToModify, count);
-        return true;
-    }
-
-    @Override
-    public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        return abilityToModify.getSourceId().equals(source.getSourceId());
-    }
-
-    @Override
-    public BrineGiantCostReductionEffect copy() {
-        return new BrineGiantCostReductionEffect(this);
     }
 }

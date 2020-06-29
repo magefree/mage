@@ -1663,16 +1663,20 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     public void attack(int turnNum, TestPlayer player, String attacker) {
         //Assert.assertNotEquals("", attacker);
+        assertAliaseSupportInActivateCommand(attacker, false); // it uses old special notation like card_name:index
         player.addAction(turnNum, PhaseStep.DECLARE_ATTACKERS, "attack:" + attacker);
     }
 
     public void attack(int turnNum, TestPlayer player, String attacker, TestPlayer defendingPlayer) {
         //Assert.assertNotEquals("", attacker);
+        assertAliaseSupportInActivateCommand(attacker, false); // it uses old special notation like card_name:index
         player.addAction(turnNum, PhaseStep.DECLARE_ATTACKERS, "attack:" + attacker + "$defendingPlayer=" + defendingPlayer.getName());
     }
 
     public void attack(int turnNum, TestPlayer player, String attacker, String planeswalker) {
         //Assert.assertNotEquals("", attacker);
+        assertAliaseSupportInActivateCommand(attacker, false); // it uses old special notation like card_name:index
+        assertAliaseSupportInActivateCommand(planeswalker, false);
         player.addAction(turnNum, PhaseStep.DECLARE_ATTACKERS, new StringBuilder("attack:").append(attacker).append("$planeswalker=").append(planeswalker).toString());
     }
 
@@ -1683,6 +1687,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public void block(int turnNum, TestPlayer player, String blocker, String attacker) {
         //Assert.assertNotEquals("", blocker);
         //Assert.assertNotEquals("", attacker);
+        assertAliaseSupportInActivateCommand(blocker, false); // it uses old special notation like card_name:index
+        assertAliaseSupportInActivateCommand(attacker, false);
         player.addAction(turnNum, PhaseStep.DECLARE_BLOCKERS, "block:" + blocker + '$' + attacker);
     }
 

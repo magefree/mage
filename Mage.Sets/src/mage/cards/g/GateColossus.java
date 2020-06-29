@@ -5,9 +5,11 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.common.SimpleEvasionAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.dynamicvalue.common.GateYouControlCount;
 import mage.abilities.effects.common.PutOnLibrarySourceEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
+import mage.abilities.effects.common.cost.SpellCostReductionForEachSourceEffect;
 import mage.abilities.hint.common.GateYouControlHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -39,8 +41,10 @@ public final class GateColossus extends CardImpl {
         this.toughness = new MageInt(8);
 
         // This spell costs {1} less to cast for each Gate you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new GateColossusCostReductionEffect())
-                .addHint(GateYouControlHint.instance));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL,
+                new SpellCostReductionForEachSourceEffect(1, GateYouControlCount.instance))
+                .addHint(GateYouControlHint.instance)
+        );
 
         // Gate Colossus can't be blocked by creatures with power 2 or less.
         this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));

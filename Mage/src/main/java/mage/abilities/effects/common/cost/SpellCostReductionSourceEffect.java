@@ -37,11 +37,10 @@ public class SpellCostReductionSourceEffect extends CostModificationEffectImpl {
         for (String manaSymbol : manaCostsToReduce.getSymbols()) {
             sb.append(manaSymbol);
         }
-        sb.append(" less");
+        sb.append(" less to cast");
         if (this.condition != null) {
-            sb.append(" to if ").append(this.condition.toString());
+            sb.append(" if ").append(this.condition.toString());
         }
-
         this.staticText = sb.toString();
     }
 

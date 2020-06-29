@@ -29,10 +29,7 @@ public final class GlaiveOfTheGuildpact extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +1/+0 for each Gate you control and has vigilance and menace.
-        Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(
-                GateYouControlCount.instance,
-                StaticValue.get(0)
-        ).setText("Equipped creature gets +1/+0 for each Gate you control"));
+        Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(GateYouControlCount.instance, StaticValue.get(0)));
         ability.addEffect(new GainAbilityAttachedEffect(
                 VigilanceAbility.getInstance(), AttachmentType.EQUIPMENT
         ).setText("and has vigilance"));

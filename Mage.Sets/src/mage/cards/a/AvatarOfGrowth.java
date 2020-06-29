@@ -4,8 +4,9 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.dynamicvalue.common.OpponentsCount;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.cost.SpellCostReductionSourceForOpponentsEffect;
+import mage.abilities.effects.common.cost.SpellCostReductionForEachSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -35,7 +36,8 @@ public final class AvatarOfGrowth extends CardImpl {
         this.toughness = new MageInt(4);
 
         // This spell costs {1} less to cast for each opponent you have.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceForOpponentsEffect("This spell costs {1} less to cast for each opponent you have")));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionForEachSourceEffect(1, OpponentsCount.instance)
+                .setText("This spell costs {1} less to cast for each opponent you have")));
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());
