@@ -54,12 +54,12 @@ class PeerIntoTheAbyssEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
+        if (targetPlayer == null) {
             return false;
         }
-        player.drawCards((int) Math.ceil(player.getLibrary().size() / 2.0), source.getSourceId(), game);
-        player.loseLife((int) Math.ceil(player.getLife() / 2.0), game, false);
+        targetPlayer.drawCards((int) Math.ceil(targetPlayer.getLibrary().size() / 2.0), source.getSourceId(), game);
+        targetPlayer.loseLife((int) Math.ceil(targetPlayer.getLife() / 2.0), game, false);
         return true;
     }
 }
