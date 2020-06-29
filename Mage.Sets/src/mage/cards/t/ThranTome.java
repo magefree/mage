@@ -14,7 +14,6 @@ import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetOpponent;
 
@@ -96,7 +95,7 @@ class ThranTomeEffect extends OneShotEffect {
         if (cards.size() == 1) {
             cardToGraveyard = cards.getRandom(game);
         } else {
-            TargetCard target = new TargetCardInLibrary(1, new FilterCard());
+            TargetCardInLibrary target = new TargetCardInLibrary(1, new FilterCard());
             opponent.chooseTarget(outcome, cards, target, source, game);
             cardToGraveyard = game.getCard(target.getFirstTarget());
         }
