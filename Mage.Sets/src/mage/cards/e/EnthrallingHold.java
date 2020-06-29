@@ -57,6 +57,17 @@ public final class EnthrallingHold extends CardImpl {
 
 class EnthrallingHoldTarget extends TargetCreaturePermanent {
 
+    EnthrallingHoldTarget() {}
+
+    private EnthrallingHoldTarget(EnthrallingHoldTarget target) {
+        super(target);
+    }
+
+    @Override
+    public EnthrallingHoldTarget copy() {
+        return new EnthrallingHoldTarget(this);
+    }
+
     @Override
     public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
         if (super.canTarget(controllerId, id, source, game)) {
