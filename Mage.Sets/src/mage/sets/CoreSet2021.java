@@ -1,7 +1,10 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
+import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
@@ -32,6 +35,8 @@ public final class CoreSet2021 extends ExpansionSet {
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
         this.maxCardNumberInBooster = 274;
+        this.ratioBoosterSpecialLand = 2;
+        this.ratioBoosterSpecialLandNumerator = 1;
 
         cards.add(new SetCardInfo("Adherent of Hope", 321, Rarity.COMMON, mage.cards.a.AdherentOfHope.class));
         cards.add(new SetCardInfo("Alchemist's Gift", 87, Rarity.COMMON, mage.cards.a.AlchemistsGift.class));
@@ -430,5 +435,45 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Wind-Scarred Crag", 259, Rarity.COMMON, mage.cards.w.WindScarredCrag.class));
         cards.add(new SetCardInfo("Wishcoin Crab", 86, Rarity.COMMON, mage.cards.w.WishcoinCrab.class));
         cards.add(new SetCardInfo("Witch's Cauldron", 129, Rarity.UNCOMMON, mage.cards.w.WitchsCauldron.class));
+    }
+
+
+    @Override
+    public List<CardInfo> getCardsByRarity(Rarity rarity) {
+        if (rarity != Rarity.COMMON) {
+            return super.getCardsByRarity(rarity);
+        }
+        List<CardInfo> savedCardsInfos = savedCards.get(rarity);
+        if (savedCardsInfos != null) {
+            return new ArrayList(savedCardsInfos);
+        }
+        CardCriteria criteria = new CardCriteria();
+        criteria.setCodes(this.code).notTypes(CardType.LAND);
+        criteria.rarities(rarity).doubleFaced(false);
+        savedCardsInfos = CardRepository.instance.findCards(criteria);
+        if (maxCardNumberInBooster != Integer.MAX_VALUE) {
+            savedCardsInfos.removeIf(next -> next.getCardNumberAsInt() > maxCardNumberInBooster);
+        }
+        criteria = new CardCriteria();
+        criteria.setCodes(this.code).nameExact("Radiant Fountain");
+        savedCardsInfos.addAll(CardRepository.instance.findCards(criteria));
+        savedCards.put(rarity, savedCardsInfos);
+        // Return a copy of the saved cards information, as not to modify the original.
+        return new ArrayList(savedCardsInfos);
+    }
+
+    @Override
+    // the common taplands replacing the basic land
+    public List<CardInfo> getSpecialLand() {
+        if (savedSpecialLand.isEmpty()) {
+            CardCriteria criteria = new CardCriteria();
+            criteria.setCodes(this.code);
+            criteria.rarities(Rarity.COMMON);
+            criteria.types(CardType.LAND);
+            savedSpecialLand.addAll(CardRepository.instance.findCards(criteria));
+            savedSpecialLand.removeIf(cardInfo -> "Radiant Fountain".equals(cardInfo.getName()));
+        }
+
+        return new ArrayList<>(savedSpecialLand);
     }
 }
