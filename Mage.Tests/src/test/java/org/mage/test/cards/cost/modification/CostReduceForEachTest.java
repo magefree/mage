@@ -110,12 +110,13 @@ public class CostReduceForEachTest extends CardTestPlayerBaseWithAIHelps {
         // When Torgaar, Famine Incarnate enters the battlefield, up to one target player's life total becomes half their starting life total, rounded down.
         addCard(Zone.HAND, playerA, "Torgaar, Famine Incarnate", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 8 - 4 - 2);
-        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
         addCard(Zone.HAND, playerA, "Balduvian Bears", 2); // give 4 cost reduction on sacrifice
 
         checkPlayableAbility("no cost reduction 1", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Torgaar, Famine Incarnate", false);
 
         // prepare creatures for reduce
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G}", 4);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Balduvian Bears");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Balduvian Bears");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
