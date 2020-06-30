@@ -39,7 +39,7 @@ public final class Jumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Angel of the Dire Hour", 85, Rarity.RARE, mage.cards.a.AngelOfTheDireHour.class));
         cards.add(new SetCardInfo("Angelic Arbiter", 86, Rarity.RARE, mage.cards.a.AngelicArbiter.class));
         cards.add(new SetCardInfo("Angelic Edict", 87, Rarity.COMMON, mage.cards.a.AngelicEdict.class));
-        cards.add(new SetCardInfo("Angelic Page", 88, Rarity.UNCOMMON, mage.cards.a.AngelicPage.class));
+        cards.add(new SetCardInfo("Angelic Page", 88, Rarity.COMMON, mage.cards.a.AngelicPage.class));
         cards.add(new SetCardInfo("Arbor Armament", 376, Rarity.COMMON, mage.cards.a.ArborArmament.class));
         cards.add(new SetCardInfo("Arcane Encyclopedia", 459, Rarity.UNCOMMON, mage.cards.a.ArcaneEncyclopedia.class));
         cards.add(new SetCardInfo("Archaeomender", 9, Rarity.COMMON, mage.cards.a.Archaeomender.class));
