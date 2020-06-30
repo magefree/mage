@@ -46,16 +46,16 @@ public class SpellsCostModificationThatTargetSourceEffect extends CostModificati
             case ANY:
                 break;
             case YOU:
-                sb.append(" you");
+                sb.append(" you cast");
                 break;
             case OPPONENT:
-                sb.append(" your opponents");
+                sb.append(" your opponents cast");
                 break;
             default:
                 throw new IllegalArgumentException("Unsupported target controller " + this.targetController);
         }
 
-        sb.append(" cast that target ").append(this.targetName);
+        sb.append(" that target ").append(this.targetName);
         if (this.modificationAmount < 0) {
             sb.append(" cost {").append(-1 * this.modificationAmount).append("} less to cast");
         } else {
