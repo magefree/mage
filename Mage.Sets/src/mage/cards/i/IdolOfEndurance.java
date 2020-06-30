@@ -91,16 +91,20 @@ class IdolOfEnduranceExileEffect extends OneShotEffect {
                 .filter(Objects::nonNull)
                 .map(card -> new MageObjectReference(card, game))
                 .collect(Collectors.toSet());
-        game.getState().setValue("" + mor.getSourceId() + mor.getZoneChangeCounter(), morSet);
-        game.addDelayedTriggeredAbility(new IdolOfEnduranceDelayedTrigger(morSet), source);
+        String exileId = "idolOfEndurance_" + mor.getSourceId() + mor.getZoneChangeCounter();
+        if (game.getState().getValue(exileId) == null) {
+            game.getState().setValue(exileId, new HashSet<MageObjectReference>());
+        }
+        ((Set) game.getState().getValue(exileId)).addAll(morSet);
+        game.addDelayedTriggeredAbility(new IdolOfEnduranceDelayedTrigger(exileId), source);
         return true;
     }
 }
 
 class IdolOfEnduranceDelayedTrigger extends DelayedTriggeredAbility {
 
-    IdolOfEnduranceDelayedTrigger(Set<MageObjectReference> morSet) {
-        super(new IdolOfEnduranceLeaveEffect(morSet), Duration.Custom, true, false);
+    IdolOfEnduranceDelayedTrigger(String exileId) {
+        super(new IdolOfEnduranceLeaveEffect(exileId), Duration.Custom, true, false);
         this.usesStack = false;
         this.setRuleVisible(false);
     }
@@ -133,15 +137,16 @@ class IdolOfEnduranceDelayedTrigger extends DelayedTriggeredAbility {
 
 class IdolOfEnduranceLeaveEffect extends OneShotEffect {
 
-    private final Set<MageObjectReference> morSet = new HashSet<>();
+    private final String exileId;
 
-    IdolOfEnduranceLeaveEffect(Set<MageObjectReference> morSet) {
+    IdolOfEnduranceLeaveEffect(String exileId) {
         super(Outcome.Benefit);
-        this.morSet.addAll(morSet);
+        this.exileId = exileId;
     }
 
     private IdolOfEnduranceLeaveEffect(final IdolOfEnduranceLeaveEffect effect) {
         super(effect);
+        this.exileId = effect.exileId;
     }
 
     @Override
@@ -152,6 +157,14 @@ class IdolOfEnduranceLeaveEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
+        if (player == null) {
+            return false;
+        }
+        Object object = game.getState().getValue(exileId);
+        if (!(object instanceof Set)) {
+            return false;
+        }
+        Set<MageObjectReference> morSet = (Set<MageObjectReference>) object;
         return player != null && player.moveCards(
                 morSet.stream()
                         .map(mor -> mor.getCard(game))
@@ -198,7 +211,9 @@ class IdolOfEnduranceCastFromExileEffect extends AsThoughEffectImpl {
         if (watcher == null || !watcher.checkPermission(affectedControllerId, source, game)) {
             return false;
         }
-        Object value = game.getState().getValue("" + source.getSourceId() + source.getSourceObjectZoneChangeCounter());
+        Object value = game.getState().getValue(
+                "idolOfEndurance_" + source.getSourceId() + source.getSourceObjectZoneChangeCounter()
+        );
         if (!(value instanceof Set)) {
             discard();
             return false;
