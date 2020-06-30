@@ -353,7 +353,7 @@ public abstract class GameImpl implements Game, Serializable {
             // can be an ability of a sacrificed Token trying to get it's source object
             object = getLastKnownInformation(objectId, Zone.BATTLEFIELD);
         }
-
+        
         return object;
     }
 
@@ -1548,7 +1548,7 @@ public abstract class GameImpl implements Game, Serializable {
     /**
      * @param emblem
      * @param sourceObject
-     * @param toPlayerId controller and owner of the emblem
+     * @param toPlayerId   controller and owner of the emblem
      */
     @Override
     public void addEmblem(Emblem emblem, MageObject sourceObject, UUID toPlayerId) {
@@ -1566,8 +1566,8 @@ public abstract class GameImpl implements Game, Serializable {
     /**
      * @param plane
      * @param sourceObject
-     * @param toPlayerId controller and owner of the plane (may only be one per
-     * game..)
+     * @param toPlayerId   controller and owner of the plane (may only be one
+     *                     per game..)
      * @return boolean - whether the plane was added successfully or not
      */
     @Override

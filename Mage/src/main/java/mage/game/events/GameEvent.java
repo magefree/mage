@@ -149,6 +149,17 @@ public class GameEvent implements Serializable {
          */
         SPELL_CAST,
         ACTIVATE_ABILITY, ACTIVATED_ABILITY,
+        /* ACTIVATE_ABILITY, ACTIVATED_ABILITY,
+         targetId    id of the ability to activate / use
+         sourceId    sourceId of the object with that ability
+         playerId    player that tries to use this ability
+        */
+        TAKE_SPECIAL_ACTION, TAKEN_SPECIAL_ACTION, // not used in implementation yet
+        /* TAKE_SPECIAL_ACTION, TAKEN_SPECIAL_ACTION,
+         targetId    id of the ability to activate / use
+         sourceId    sourceId of the object with that ability
+         playerId    player that tries to use this ability
+        */
         TRIGGERED_ABILITY,
         RESOLVING_ABILITY,
         COPY_STACKOBJECT, COPIED_STACKOBJECT,

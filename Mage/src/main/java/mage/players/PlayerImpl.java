@@ -1346,11 +1346,11 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected boolean specialAction(SpecialAction action, Game game) {
         //20091005 - 114
         if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATE_ABILITY,
-                action.getSourceId(), action.getId(), playerId))) {
+                action.getId(), action.getSourceId(), getId()))) {
             int bookmark = game.bookmarkState();
             if (action.activate(game, false)) {
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATED_ABILITY,
-                        action.getSourceId(), action.getId(), playerId));
+                        action.getId(), action.getSourceId(), getId()));
                 if (!game.isSimulation()) {
                     game.informPlayers(getLogName() + action.getGameLogMessage(game));
                 }
