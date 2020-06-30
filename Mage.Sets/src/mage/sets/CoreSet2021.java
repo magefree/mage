@@ -142,6 +142,7 @@ public final class CoreSet2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Hobblefiend", 152, Rarity.COMMON, mage.cards.h.Hobblefiend.class));
         cards.add(new SetCardInfo("Hooded Blightfang", 104, Rarity.RARE, mage.cards.h.HoodedBlightfang.class));
         cards.add(new SetCardInfo("Hunter's Edge", 189, Rarity.COMMON, mage.cards.h.HuntersEdge.class));
+        cards.add(new SetCardInfo("Idol of Endurance", 23, Rarity.RARE, mage.cards.i.IdolOfEndurance.class));
         cards.add(new SetCardInfo("Igneous Cur", 153, Rarity.COMMON, mage.cards.i.IgneousCur.class));
         cards.add(new SetCardInfo("Indulging Patrician", 219, Rarity.UNCOMMON, mage.cards.i.IndulgingPatrician.class));
         cards.add(new SetCardInfo("Infernal Scarring", 105, Rarity.COMMON, mage.cards.i.InfernalScarring.class));
