@@ -1486,8 +1486,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     }
 
-    public void waitStackResolved(int turnNum, PhaseStep step, TestPlayer player, boolean oneTime) {
-        String command = "waitStackResolved" + (oneTime ? ":1" : "");
+    public void waitStackResolved(int turnNum, PhaseStep step, TestPlayer player, boolean skipOneStackObjectOnly) {
+        String command = "waitStackResolved" + (skipOneStackObjectOnly ? ":1" : "");
         player.addAction(turnNum, step, command);
     }
 
@@ -1845,18 +1845,18 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         waitStackResolved(turnNum, step, false);
     }
 
-    public void waitStackResolved(int turnNum, PhaseStep step, boolean oneTime) {
+    public void waitStackResolved(int turnNum, PhaseStep step, boolean skipOneStackObjectOnly) {
         if (playerA != null) {
-            waitStackResolved(turnNum, step, playerA, oneTime);
+            waitStackResolved(turnNum, step, playerA, skipOneStackObjectOnly);
         }
         if (playerB != null) {
-            waitStackResolved(turnNum, step, playerB, oneTime);
+            waitStackResolved(turnNum, step, playerB, skipOneStackObjectOnly);
         }
         if (playerC != null) {
-            waitStackResolved(turnNum, step, playerC, oneTime);
+            waitStackResolved(turnNum, step, playerC, skipOneStackObjectOnly);
         }
         if (playerD != null) {
-            waitStackResolved(turnNum, step, playerD, oneTime);
+            waitStackResolved(turnNum, step, playerD, skipOneStackObjectOnly);
         }
     }
 

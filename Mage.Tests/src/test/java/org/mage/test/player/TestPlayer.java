@@ -660,15 +660,15 @@ public class TestPlayer implements Player {
                         }
                     }
                 } else if (action.getAction().startsWith("waitStackResolved")) {
-                    boolean oneTime = action.getAction().equals("waitStackResolved:1");
+                    boolean skipOneStackObjectOnly = action.getAction().equals("waitStackResolved:1");
                     if (game.getStack().isEmpty()) {
                         // all done, can use next command
                         actions.remove(action);
                         continue;
                     } else {
-                        // need to wait (don't remove command, except one time)
+                        // need to wait (don't remove command, except one skip only)
                         tryToPlayPriority(game);
-                        if (oneTime) {
+                        if (skipOneStackObjectOnly) {
                             actions.remove(action);
                         }
                         return true;
