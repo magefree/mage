@@ -171,6 +171,7 @@ public final class Weatherlight extends ExpansionSet {
         cards.add(new SetCardInfo("Teferi's Veil", 53, Rarity.UNCOMMON, mage.cards.t.TeferisVeil.class));
         cards.add(new SetCardInfo("Tendrils of Despair", 83, Rarity.COMMON, mage.cards.t.TendrilsOfDespair.class));
         cards.add(new SetCardInfo("Thran Forge", 159, Rarity.UNCOMMON, mage.cards.t.ThranForge.class));
+        cards.add(new SetCardInfo("Thran Tome", 160, Rarity.RARE, mage.cards.t.ThranTome.class));
         cards.add(new SetCardInfo("Thunderbolt", 115, Rarity.COMMON, mage.cards.t.Thunderbolt.class));
         cards.add(new SetCardInfo("Thundermare", 116, Rarity.RARE, mage.cards.t.Thundermare.class));
         cards.add(new SetCardInfo("Timid Drake", 54, Rarity.UNCOMMON, mage.cards.t.TimidDrake.class));
