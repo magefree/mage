@@ -660,13 +660,17 @@ public class TestPlayer implements Player {
                         }
                     }
                 } else if (action.getAction().startsWith("waitStackResolved")) {
+                    boolean oneTime = action.getAction().equals("waitStackResolved:1");
                     if (game.getStack().isEmpty()) {
                         // all done, can use next command
                         actions.remove(action);
                         continue;
                     } else {
-                        // need to wait (don't remove command)
+                        // need to wait (don't remove command, except one time)
                         tryToPlayPriority(game);
+                        if (oneTime) {
+                            actions.remove(action);
+                        }
                         return true;
                     }
                 } else if (action.getAction().startsWith("playerAction:")) {
@@ -844,6 +848,20 @@ public class TestPlayer implements Player {
                             actions.remove(action);
                             wasProccessed = true;
                         }
+
+                        // check stack size: need size
+                        if (params[0].equals(CHECK_COMMAND_STACK_SIZE) && params.length == 2) {
+                            assertStackSize(action, game, Integer.parseInt(params[1]));
+                            actions.remove(action);
+                            wasProccessed = true;
+                        }
+
+                        // check stack object: stack ability name, amount
+                        if (params[0].equals(CHECK_COMMAND_STACK_OBJECT) && params.length == 3) {
+                            assertStackObject(action, game, params[1], Integer.parseInt(params[2]));
+                            actions.remove(action);
+                            wasProccessed = true;
+                        }
                     }
                     if (wasProccessed) {
                         return true;
@@ -937,6 +955,15 @@ public class TestPlayer implements Player {
                         if (params[0].equals(SHOW_COMMAND_ALIASES) && params.length == 1) {
                             printStart(action.getActionName());
                             printAliases(game, this);
+                            printEnd();
+                            actions.remove(action);
+                            wasProccessed = true;
+                        }
+
+                        // show stack
+                        if (params[0].equals(SHOW_COMMAND_STACK) && params.length == 1) {
+                            printStart(action.getActionName());
+                            printStack(game);
                             printEnd();
                             actions.remove(action);
                             wasProccessed = true;
@@ -1119,6 +1146,13 @@ public class TestPlayer implements Player {
         for (String s : data) {
             System.out.println(s);
         }
+    }
+
+    private void printStack(Game game) {
+        System.out.println("Stack objects: " + game.getStack().size());
+        game.getStack().forEach(stack -> {
+            System.out.println(stack.getStackAbility().toString());
+        });
     }
 
     private void assertPT(PlayerAction action, Game game, Player player, String permanentName, int Power, int Toughness) {
@@ -1358,6 +1392,21 @@ public class TestPlayer implements Player {
             Assert.assertEquals(action.getActionName() + " - alias " + aliasName + " must have zone " + needZone.toString(), needZone, currentZone);
         } else {
             Assert.assertNotEquals(action.getActionName() + " - alias " + aliasName + " must have not zone " + needZone.toString(), needZone, currentZone);
+        }
+    }
+
+    private void assertStackSize(PlayerAction action, Game game, int needStackSize) {
+        Assert.assertEquals(action.getActionName() + " - stack size must be " + needStackSize + " but is " + game.getStack().size(), needStackSize, game.getStack().size());
+    }
+
+    private void assertStackObject(PlayerAction action, Game game, String stackAbilityName, int needAmount) {
+        long foundedAmount = game.getStack()
+                .stream()
+                .filter(stack -> stack.getStackAbility().toString().startsWith(stackAbilityName))
+                .count();
+        if (needAmount != foundedAmount) {
+            printStack(game);
+            Assert.fail(action.getActionName() + " - stack must have " + needAmount + " objects with ability [" + stackAbilityName + "] but have " + foundedAmount);
         }
     }
 
