@@ -261,6 +261,7 @@ public class ScryfallImageSupportCards {
             add("PF19");
             add("MPS-AKH");
             add("M21");
+            add("JMP");
         }
     };
 
