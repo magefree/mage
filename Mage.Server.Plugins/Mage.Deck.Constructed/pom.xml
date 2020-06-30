@@ -46,6 +46,11 @@
             </plugin>
 
         </plugins>
+        <resources>
+         <resource>
+           <directory>src/mage/resources</directory>
+         </resource>
+       </resources>
 
         <finalName>mage-deck-constructed</finalName>
     </build>

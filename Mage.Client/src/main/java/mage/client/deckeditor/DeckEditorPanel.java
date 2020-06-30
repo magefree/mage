@@ -581,7 +581,6 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             setCursor(new Cursor(Cursor.WAIT_CURSOR));
             this.txtDeckName.setText(deck.getName());
             deckArea.loadDeck(deck, useLayout, bigCard);
-            deckLegalityDisplay.validateDeck(deck);
         } finally {
             setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }
@@ -859,6 +858,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         btnSubmitTimer = new javax.swing.JButton();
         panelDeckLands = new javax.swing.JPanel();
         btnAddLand = new javax.swing.JButton();
+        btnLegality = new javax.swing.JButton();
         panelDeckExit = new javax.swing.JPanel();
         btnExit = new javax.swing.JButton();
         txtTimeRemaining = new javax.swing.JTextField();
@@ -1089,6 +1089,15 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             }
         });
 
+        btnLegality.setText("Validate");
+        btnLegality.setIconTextGap(2);
+        btnLegality.setName("btnAddLand"); // NOI18N
+        btnLegality.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLegalityActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelDeckLandsLayout = new javax.swing.GroupLayout(panelDeckLands);
         panelDeckLands.setLayout(panelDeckLandsLayout);
         panelDeckLandsLayout.setHorizontalGroup(
@@ -1096,13 +1105,17 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             .addGroup(panelDeckLandsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnAddLand, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(155, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnLegality, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(49, Short.MAX_VALUE))
         );
         panelDeckLandsLayout.setVerticalGroup(
             panelDeckLandsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelDeckLandsLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDeckLandsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnAddLand, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                .addGroup(panelDeckLandsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAddLand, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnLegality, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, 0))
         );
 
@@ -1146,8 +1159,10 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
         panelDeck.add(panelDeckExit);
 
-        deckLegalityDisplay.setMaximumSize(new java.awt.Dimension(245, 32767));
+        deckLegalityDisplay.setMaximumSize(new java.awt.Dimension(245, 155));
+        deckLegalityDisplay.setMinimumSize(new java.awt.Dimension(85, 155));
         deckLegalityDisplay.setOpaque(false);
+        deckLegalityDisplay.setVisible(false);
 
         javax.swing.GroupLayout panelLeftLayout = new javax.swing.GroupLayout(panelLeft);
         panelLeft.setLayout(panelLeftLayout);
@@ -1178,7 +1193,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(panelLeft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelRight, javax.swing.GroupLayout.DEFAULT_SIZE, 890, Short.MAX_VALUE))
+                .addComponent(panelRight, javax.swing.GroupLayout.PREFERRED_SIZE, 890, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1376,6 +1391,11 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         exportChoose(evt);
     }//GEN-LAST:event_btnExportActionPerformed
 
+    private void btnLegalityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLegalityActionPerformed
+        this.deckLegalityDisplay.setVisible(true);
+        this.deckLegalityDisplay.validateDeck(deck);
+    }//GEN-LAST:event_btnLegalityActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private mage.client.cards.BigCard bigCard;
@@ -1384,6 +1404,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnExport;
     private javax.swing.JButton btnGenDeck;
     private javax.swing.JButton btnImport;
+    private javax.swing.JButton btnLegality;
     private javax.swing.JButton btnLoad;
     private javax.swing.JButton btnNew;
     private javax.swing.JButton btnSave;

@@ -206,7 +206,7 @@ public class PennyDreadfulCommander extends Constructed {
 
         Properties properties = new Properties();
         try {
-            properties.load(PennyDreadfulCommander.class.getResourceAsStream("pennydreadful.properties"));
+            properties.load(PennyDreadfulCommander.class.getResourceAsStream("/pennydreadful.properties"));
         } catch (Exception e) {
             e.printStackTrace();
         }
