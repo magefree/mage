@@ -2,22 +2,18 @@ package mage.cards.p;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.cost.CostModificationEffectImpl;
+import mage.abilities.effects.common.cost.SpellsCostModificationThatTargetSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.permanent.token.PursuedWhaleToken;
 import mage.game.permanent.token.Token;
-import mage.target.Target;
-import mage.util.CardUtil;
 
-import java.util.Collection;
 import java.util.UUID;
 
 /**
@@ -36,7 +32,9 @@ public final class PursuedWhale extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new PursuedWhaleTokenEffect()));
 
         // Spells your opponents cast that target Pursued Whale cost {3} more to cast.
-        this.addAbility(new SimpleStaticAbility(new PursuedWhaleCostIncreaseEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new SpellsCostModificationThatTargetSourceEffect(3, new FilterCard("Spells"), TargetController.OPPONENT))
+        );
     }
 
     private PursuedWhale(final PursuedWhale card) {
@@ -74,47 +72,5 @@ class PursuedWhaleTokenEffect extends OneShotEffect {
             token.putOntoBattlefield(1, game, source.getSourceId(), playerId);
         }
         return true;
-    }
-}
-
-class PursuedWhaleCostIncreaseEffect extends CostModificationEffectImpl {
-
-    PursuedWhaleCostIncreaseEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);
-        staticText = "Spells your opponents cast that target {this} cost {3} more to cast";
-    }
-
-    private PursuedWhaleCostIncreaseEffect(PursuedWhaleCostIncreaseEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        SpellAbility spellAbility = (SpellAbility) abilityToModify;
-        CardUtil.adjustCost(spellAbility, -3);
-        return true;
-    }
-
-    @Override
-    public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (!(abilityToModify instanceof SpellAbility)
-                || !game.getOpponents(source.getControllerId()).contains(abilityToModify.getControllerId())) {
-            return false;
-        }
-        return abilityToModify
-                .getModes()
-                .getSelectedModes()
-                .stream()
-                .map(uuid -> abilityToModify.getModes().get(uuid))
-                .map(Mode::getTargets)
-                .flatMap(Collection::stream)
-                .map(Target::getTargets)
-                .flatMap(Collection::stream)
-                .anyMatch(uuid -> uuid.equals(source.getSourceId()));
-    }
-
-    @Override
-    public PursuedWhaleCostIncreaseEffect copy() {
-        return new PursuedWhaleCostIncreaseEffect(this);
     }
 }

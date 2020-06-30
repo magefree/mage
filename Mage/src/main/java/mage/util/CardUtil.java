@@ -800,4 +800,12 @@ public final class CardUtil {
             return object.getAbilities();
         }
     }
+
+    public static String getTextWithFirstCharUpperCase(String text) {
+        if (text != null && text.length() >= 1) {
+            return Character.toUpperCase(text.charAt(0)) + text.substring(1);
+        } else {
+            return text;
+        }
+    }
 }

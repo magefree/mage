@@ -3,6 +3,7 @@ package mage.abilities.hint;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.game.Game;
+import mage.util.CardUtil;
 
 import java.awt.*;
 
@@ -18,15 +19,19 @@ public class ConditionHint implements Hint {
     private Color falseColor;
     private Boolean useIcons;
 
+    public ConditionHint(Condition condition) {
+        this(condition, condition.toString());
+    }
+
     public ConditionHint(Condition condition, String textWithIcons) {
         this(condition, textWithIcons, null, textWithIcons, null, true);
     }
 
     public ConditionHint(Condition condition, String trueText, Color trueColor, String falseText, Color falseColor, Boolean useIcons) {
         this.condition = condition;
-        this.trueText = trueText;
+        this.trueText = CardUtil.getTextWithFirstCharUpperCase(trueText);
         this.trueColor = trueColor;
-        this.falseText = falseText;
+        this.falseText = CardUtil.getTextWithFirstCharUpperCase(falseText);
         this.falseColor = falseColor;
         this.useIcons = useIcons;
     }

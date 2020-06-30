@@ -769,7 +769,7 @@ public abstract class AbilityImpl implements Ability {
             if (ruleStart.length() > 1) {
                 String end = ruleStart.substring(ruleStart.length() - 2).trim();
                 if (end.isEmpty() || end.equals(":") || end.equals(".")) {
-                    rule = ruleStart + Character.toUpperCase(text.charAt(0)) + text.substring(1);
+                    rule = ruleStart + CardUtil.getTextWithFirstCharUpperCase(text);
                 } else {
                     rule = ruleStart + text;
                 }

@@ -1,25 +1,20 @@
-
 package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.cost.CostModificationEffectImpl;
+import mage.abilities.effects.common.cost.SpellsCostModificationThatTargetSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.FilterCard;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.common.TargetOpponent;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -39,7 +34,10 @@ public final class AccursedWitch extends CardImpl {
         this.secondSideCardClazz = mage.cards.i.InfectiousCurse.class;
 
         // Spells your opponents cast that target Accursed Witch cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AccursedWitchSpellsCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new SpellsCostModificationThatTargetSourceEffect(-1, new FilterCard("Spells"), TargetController.OPPONENT))
+        );
+
         // When Accursed Witch dies, return it to the battlefield transformed under your control attached to target opponent.
         this.addAbility(new TransformAbility());
         Ability ability = new DiesSourceTriggeredAbility(new AccursedWitchReturnTransformedEffect());
@@ -91,47 +89,5 @@ class AccursedWitchReturnTransformedEffect extends OneShotEffect {
             }
         }
         return true;
-    }
-}
-
-class AccursedWitchSpellsCostReductionEffect extends CostModificationEffectImpl {
-
-    AccursedWitchSpellsCostReductionEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment, CostModificationType.REDUCE_COST);
-        this.staticText = "Spells your opponents cast that target {this} cost {1} less to cast";
-    }
-
-    private AccursedWitchSpellsCostReductionEffect(AccursedWitchSpellsCostReductionEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        CardUtil.reduceCost(abilityToModify, 1);
-        return true;
-    }
-
-    @Override
-    public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (!(abilityToModify instanceof SpellAbility) || !game.getOpponents(source.getControllerId()).contains(abilityToModify.getControllerId())) {
-            return false;
-        }
-        for (UUID modeId : abilityToModify.getModes().getSelectedModes()) {
-            Mode mode = abilityToModify.getModes().get(modeId);
-            for (Target target : mode.getTargets()) {
-                for (UUID targetUUID : target.getTargets()) {
-                    Permanent permanent = game.getPermanent(targetUUID);
-                    if (permanent != null && permanent.getId().equals(source.getSourceId())) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public AccursedWitchSpellsCostReductionEffect copy() {
-        return new AccursedWitchSpellsCostReductionEffect(this);
     }
 }

@@ -1,23 +1,17 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.SetPowerSourceEffect;
-import mage.abilities.effects.common.cost.CostModificationEffectImpl;
+import mage.abilities.effects.common.cost.SpellsCostModificationThatTargetSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.game.Game;
-import mage.target.Target;
-import mage.util.CardUtil;
+import mage.filter.FilterCard;
 
-import java.util.Collection;
 import java.util.UUID;
 
 /**
@@ -43,7 +37,9 @@ public final class SyrElenoraTheDiscerning extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
 
         // Spells your opponents cast that target Syr Elenora cost {2} more to cast.
-        this.addAbility(new SimpleStaticAbility(new SyrElenoraTheDiscerningCostIncreaseEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new SpellsCostModificationThatTargetSourceEffect(2, new FilterCard("Spells"), TargetController.OPPONENT))
+        );
     }
 
     private SyrElenoraTheDiscerning(final SyrElenoraTheDiscerning card) {
@@ -54,47 +50,4 @@ public final class SyrElenoraTheDiscerning extends CardImpl {
     public SyrElenoraTheDiscerning copy() {
         return new SyrElenoraTheDiscerning(this);
     }
-}
-
-class SyrElenoraTheDiscerningCostIncreaseEffect extends CostModificationEffectImpl {
-
-    SyrElenoraTheDiscerningCostIncreaseEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);
-        staticText = "Spells your opponents cast that target {this} cost {2} more to cast";
-    }
-
-    private SyrElenoraTheDiscerningCostIncreaseEffect(SyrElenoraTheDiscerningCostIncreaseEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        SpellAbility spellAbility = (SpellAbility) abilityToModify;
-        CardUtil.adjustCost(spellAbility, -2);
-        return true;
-    }
-
-    @Override
-    public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (!(abilityToModify instanceof SpellAbility)
-                || !game.getOpponents(source.getControllerId()).contains(abilityToModify.getControllerId())) {
-            return false;
-        }
-        return abilityToModify
-                .getModes()
-                .getSelectedModes()
-                .stream()
-                .map(uuid -> abilityToModify.getModes().get(uuid))
-                .map(Mode::getTargets)
-                .flatMap(Collection::stream)
-                .map(Target::getTargets)
-                .flatMap(Collection::stream)
-                .anyMatch(uuid -> uuid.equals(source.getSourceId()));
-    }
-
-    @Override
-    public SyrElenoraTheDiscerningCostIncreaseEffect copy() {
-        return new SyrElenoraTheDiscerningCostIncreaseEffect(this);
-    }
-
 }

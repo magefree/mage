@@ -1181,6 +1181,8 @@ public class TestPlayer implements Player {
         }
 
         if (mustHave && !founded) {
+            printStart("Available mana for " + computerPlayer.getName());
+            printMana(game, computerPlayer.getManaAvailable(game));
             printStart(action.getActionName());
             printAbilities(game, computerPlayer.getPlayable(game, true));
             printEnd();
@@ -1188,6 +1190,8 @@ public class TestPlayer implements Player {
         }
 
         if (!mustHave && founded) {
+            printStart("Available mana for " + computerPlayer.getName());
+            printMana(game, computerPlayer.getManaAvailable(game));
             printStart(action.getActionName());
             printAbilities(game, computerPlayer.getPlayable(game, true));
             printEnd();

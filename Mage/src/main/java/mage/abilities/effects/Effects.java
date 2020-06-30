@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.constants.Outcome;
 import mage.target.targetpointer.TargetPointer;
+import mage.util.CardUtil;
 
 import java.util.ArrayList;
 
@@ -31,7 +32,7 @@ public class Effects extends ArrayList<Effect> {
     public String getTextStartingUpperCase(Mode mode) {
         String text = getText(mode);
         if (text.length() > 3) {
-            return Character.toUpperCase(text.charAt(0)) + text.substring(1);
+            return CardUtil.getTextWithFirstCharUpperCase(text);
         }
         return text;
     }
