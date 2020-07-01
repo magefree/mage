@@ -96,8 +96,7 @@ class ScourgeOfValkasDamageEffect extends OneShotEffect {
             permanent.damage(dragons, enteringDragon.getId(), game, false, true);
         } else {
             Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
-            if (player != null
-                    && player.isInGame()) {
+            if (player != null) {
                 player.damage(dragons, enteringDragon.getId(), game);
             }
         }

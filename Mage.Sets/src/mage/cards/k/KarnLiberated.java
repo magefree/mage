@@ -1,8 +1,5 @@
 package mage.cards.k;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -25,6 +22,10 @@ import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInHand;
 import mage.util.CardUtil;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author bunchOfDevs
@@ -100,7 +101,7 @@ class KarnLiberatedEffect extends OneShotEffect {
             game.getState().addCard(card);
         }
         for (Player player : game.getPlayers().values()) {
-            if (player.isInGame()) { // only players alive are in the restarted game
+            if (player.canRespond()) { // only players alive are in the restarted game
                 player.getGraveyard().clear();
                 player.getHand().clear();
                 player.getLibrary().clear();

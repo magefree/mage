@@ -982,7 +982,7 @@ public abstract class GameImpl implements Game, Serializable {
             targetPlayer.setTargetName("starting player");
             if (choosingPlayerId != null) {
                 choosingPlayer = this.getPlayer(choosingPlayerId);
-                if (choosingPlayer != null && !choosingPlayer.isInGame()) {
+                if (choosingPlayer != null && !choosingPlayer.canRespond()) {
                     choosingPlayer = null;
                 }
             }
@@ -1007,7 +1007,7 @@ public abstract class GameImpl implements Game, Serializable {
         if (startingPlayerId == null) {
             // choose any available player as starting player
             for (Player player : state.getPlayers().values()) {
-                if (player.isInGame()) {
+                if (player.canRespond()) {
                     startingPlayerId = player.getId();
                     break;
                 }
@@ -1161,7 +1161,7 @@ public abstract class GameImpl implements Game, Serializable {
         while (!hasEnded()) {
             playerId = players[RandomUtil.nextInt(players.length)];
             Player player = getPlayer(playerId);
-            if (player != null && player.isInGame()) {
+            if (player != null && player.canRespond()) {
                 fireInformEvent(state.getPlayer(playerId).getLogName() + " won the toss");
                 return player.getId();
             }
@@ -3281,7 +3281,7 @@ public abstract class GameImpl implements Game, Serializable {
                     gameStatesRollBack.put(getTurnNum(), state.copy());
                     executingRollback = true;
                     for (Player playerObject : getPlayers().values()) {
-                        if (playerObject.isHuman() && playerObject.isInGame()) {
+                        if (playerObject.isHuman() && playerObject.canRespond()) {
                             playerObject.resetStoredBookmark(this);
                             playerObject.abort();
                             playerObject.resetPlayerPassedActions();

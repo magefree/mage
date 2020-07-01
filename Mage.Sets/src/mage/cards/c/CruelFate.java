@@ -1,14 +1,8 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -18,8 +12,9 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801 & L_J
  */
 public final class CruelFate extends CardImpl {
@@ -71,7 +66,7 @@ class CruelFateEffect extends OneShotEffect {
 
                 // card to put into opponent's graveyard
                 TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put into target opponent's graveyard"));
-                if (targetOpponent.isInGame()) {
+                if (targetOpponent.canRespond()) {
                     if (cards.size() > 1) {
                         controller.choose(Outcome.Detriment, cards, target, game);
                         Card card = cards.get(target.getFirstTarget(), game);

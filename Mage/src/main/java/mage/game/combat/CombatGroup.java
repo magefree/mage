@@ -1,17 +1,10 @@
-
 package mage.game.combat;
 
 import mage.abilities.Ability;
 import mage.abilities.common.ControllerAssignCombatDamageToBlockersAbility;
 import mage.abilities.common.ControllerDivideCombatDamageAbility;
 import mage.abilities.common.DamageAsThoughNotBlockedAbility;
-import mage.abilities.keyword.BandingAbility;
-import mage.abilities.keyword.BandsWithOtherAbility;
-import mage.abilities.keyword.CantBlockAloneAbility;
-import mage.abilities.keyword.DeathtouchAbility;
-import mage.abilities.keyword.DoubleStrikeAbility;
-import mage.abilities.keyword.FirstStrikeAbility;
-import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.keyword.*;
 import mage.constants.AsThoughEffectType;
 import mage.constants.Outcome;
 import mage.filter.StaticFilters;
@@ -27,7 +20,6 @@ import java.util.*;
 import java.util.stream.Stream;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class CombatGroup implements Serializable, Copyable<CombatGroup> {
@@ -43,9 +35,9 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
     protected boolean defenderIsPlaneswalker;
 
     /**
-     * @param defenderId the player that controls the defending permanents
+     * @param defenderId             the player that controls the defending permanents
      * @param defenderIsPlaneswalker is the defending permanent a planeswalker
-     * @param defendingPlayerId regular controller of the defending permanents
+     * @param defendingPlayerId      regular controller of the defending permanents
      */
     public CombatGroup(UUID defenderId, boolean defenderIsPlaneswalker, UUID defendingPlayerId) {
         this.defenderId = defenderId;
@@ -174,7 +166,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                     Player player = game.getPlayer(defenderAssignsCombatDamage(game) ? defendingPlayerId : attacker.getControllerId());
                     if ((attacker.getAbilities().containsKey(DamageAsThoughNotBlockedAbility.getInstance().getId()) &&
                             player.chooseUse(Outcome.Damage, "Do you wish to assign damage for "
-                            + attacker.getLogName() + " as though it weren't blocked?", null, game)) ||
+                                    + attacker.getLogName() + " as though it weren't blocked?", null, game)) ||
                             game.getContinuousEffects().asThough(attacker.getId(), AsThoughEffectType.DAMAGE_NOT_BLOCKED
                                     , null, attacker.getControllerId(), game) != null) {
                         // for handling creatures like Thorn Elemental
@@ -227,7 +219,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
      * Determines if permanent can damage in current (First Strike or not)
      * combat damage step
      *
-     * @param perm Permanent to check
+     * @param perm  Permanent to check
      * @param first First strike or common combat damage step
      * @return
      */
@@ -409,7 +401,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 }
                 if (damage > 0) {
                     Player defendingPlayer = game.getPlayer(defendingPlayerId);
-                    if (defendingPlayer.isInGame()) {
+                    if (defendingPlayer != null) {
                         defendingPlayer.damage(damage, attacker.getId(), game, true, true);
                     }
                 }
@@ -466,9 +458,9 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
      * Damages attacking creatures by a creature that blocked several ones
      * Damages only attackers as blocker was damage in
      * {@link #singleBlockerDamage}.
-     *
+     * <p>
      * Handles abilities like "{this} an block any number of creatures.".
-     *
+     * <p>
      * Blocker damage for blockers blocking single creatures is handled in the
      * single/multi blocker methods, so this shouldn't be used anymore.
      *
@@ -492,7 +484,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
      * Damages attacking creatures by a creature that blocked several ones
      * Damages only attackers as blocker was damage in either
      * {@link #singleBlockerDamage} or {@link #multiBlockerDamage}.
-     *
+     * <p>
      * Handles abilities like "{this} an block any number of creatures.".
      *
      * @param first
@@ -552,7 +544,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
             }
         } else {
             Player defender = game.getPlayer(defenderId);
-            if (defender.isInGame()) {
+            if (defender != null) {
                 defender.damage(amount, attacker.getId(), game, true, true);
             }
         }
@@ -572,9 +564,8 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
     }
 
     /**
-     *
      * @param blockerId
-     * @param playerId controller of the blocking creature
+     * @param playerId  controller of the blocking creature
      * @param game
      */
     public void addBlocker(UUID blockerId, UUID playerId, Game game) {
@@ -591,7 +582,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
      * event.
      *
      * @param blockerId
-     * @param playerId controller of the blocking creature
+     * @param playerId  controller of the blocking creature
      * @param game
      */
     public void addBlockerToGroup(UUID blockerId, UUID playerId, Game game) {
@@ -645,7 +636,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                     attackerPerms.add(game.getPermanent(attackerId));
                 }
                 UUID attackerId = player.chooseAttackerOrder(attackerPerms, game);
-                if (!player.isInGame()) {
+                if (attackerId == null) {
                     break;
                 }
                 attackerOrder.add(attackerId);
@@ -791,7 +782,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
     /**
      * There are effects, that set an attacker to be blocked. Therefore this
      * setter can be used.
-     *
+     * <p>
      * This method lacks a band check, use setBlocked(blocked, game) instead.
      *
      * @param blocked

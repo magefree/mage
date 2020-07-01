@@ -1964,7 +1964,7 @@ public class HumanPlayer extends PlayerImpl {
         }
         waitForResponse(game);
 
-        if (response.getUUID() != null && isInGame()) {
+        if (response.getUUID() != null) {
             if (abilities.containsKey(response.getUUID())) {
                 activateAbility(abilities.get(response.getUUID()), game);
             }
