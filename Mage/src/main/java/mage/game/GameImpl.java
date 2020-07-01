@@ -953,7 +953,7 @@ public abstract class GameImpl implements Game, Serializable {
             }
             // Choose a companion from the list of legal companions
             for (Card card : potentialCompanions) {
-                if (player.chooseUse(Outcome.Benefit, "Use " + card.getName() + " as your companion?", null, this)) {
+                if (player.chooseUse(Outcome.Benefit, "Use " + card.getLogName() + " as your companion?", null, this)) {
                     playerCompanionMap.put(player, card);
                     break;
                 }

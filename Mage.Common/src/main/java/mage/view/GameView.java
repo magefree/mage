@@ -55,7 +55,7 @@ public class GameView implements Serializable {
     private final PhaseStep step;
     private final UUID activePlayerId;
     private String activePlayerName = "";
-    private String priorityPlayerName;
+    private final String priorityPlayerName;
     private final int turn;
     private boolean special = false;
     private final boolean isPlayer; // false = watching user
@@ -138,7 +138,7 @@ public class GameView implements Serializable {
                     // can happen if a player times out while ability is on the stack
                     LOGGER.debug("Stack Object for stack ability not found: " + stackObject.getStackAbility().getRule());
                 }
-            } else {
+            } else if (stackObject != null) {
                 LOGGER.fatal("Unknown type of StackObject: " + stackObject.getName() + ' ' + stackObject.toString() + ' ' + stackObject.getClass().toString());
             }
             //stackOrder.add(stackObject.getId());
