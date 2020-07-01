@@ -33,7 +33,7 @@ public final class Goatnap extends CardImpl {
         this.getSpellAbility().addEffect(new UntapTargetEffect().setText("Untap that creature"));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(
                 HasteAbility.getInstance(), Duration.EndOfTurn
-        ).setText("It gains haste until end of turn."));
+        ).setText("It gains haste until end of turn"));
         this.getSpellAbility().addEffect(new GoatnapEffect());
     }
 

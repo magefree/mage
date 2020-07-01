@@ -57,10 +57,10 @@ public final class WorkshopElders extends CardImpl {
         ).setText("have target noncreature artifact you control become"), TargetController.YOU, true);
         ability.addEffect(new SetPowerToughnessTargetEffect(
                 0, 0, Duration.EndOfGame
-        ).setText("a 0/0 artifact creature."));
+        ).setText("a 0/0 artifact creature"));
         ability.addEffect(new AddCountersTargetEffect(
                 CounterType.P1P1.createInstance(4)
-        ).setText("If you do, put four +1/+1 counters on it."));
+        ).setText("If you do, put four +1/+1 counters on it"));
         ability.addTarget(new TargetPermanent(filter2));
         this.addAbility(ability);
     }

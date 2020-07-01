@@ -16,7 +16,12 @@ public class PreventAllDamageToSourceEffect extends PreventionEffectImpl {
 
     public PreventAllDamageToSourceEffect(Duration duration) {
         super(duration, Integer.MAX_VALUE, false);
-        staticText = "Prevent all damage that would be dealt to {this} " + duration.toString();
+        //Some durations have no text
+        if ( duration.toString().length()>0){
+            staticText = "Prevent all damage that would be dealt to {this} " + duration.toString();
+        } else {
+            staticText = "Prevent all damage that would be dealt to {this}";
+        }
     }
 
     public PreventAllDamageToSourceEffect(final PreventAllDamageToSourceEffect effect) {

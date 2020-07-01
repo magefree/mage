@@ -53,17 +53,27 @@ public class Effects extends ArrayList<Effect> {
 
             // concat effects (default: each effect with a new sentence)
             String concatPrefix = effect.getConcatPrefix();
+
             if (effectNum > 1 && !concatPrefix.isEmpty() && !concatPrefix.equals(".")) {
                 nextRule = concatPrefix + " " + nextRule;
             }
 
             if (nextRule != null) {
+                //check if nextRule is a new sentence or not.
                 if (nextRule.startsWith("and ") || nextRule.startsWith("with ") || nextRule.startsWith("then ")) {
                     endString = " ";
                 } else if (nextRule.startsWith(",") || nextRule.startsWith(" ")) {
                     endString = "";
+                // nextRule determined to be a new sentence, now check ending of lastRule
                 } else if (lastRule != null && lastRule.length() > 3) {
-                    if (!lastRule.endsWith(".") && !lastRule.endsWith("<br>")) {
+                    //check if lastRule already has appropriate punctuation, if so, add a space.
+                    if (lastRule.endsWith(".\"") ||
+                            lastRule.endsWith(".)") ||
+                            lastRule.endsWith(".)</i>") ||
+                            lastRule.endsWith(".")){
+                        endString = " ";
+                     // if lastRule does not have appropriate punctuation, add the default ". "
+                    } else if (!lastRule.endsWith(".") && !lastRule.endsWith("<br>")) {
                         endString = ". ";
                     }
                     if (nextRule.length() > 3) {
@@ -83,9 +93,12 @@ public class Effects extends ArrayList<Effect> {
 
                 sbText.append(currentRule);
             }
+
             lastRule = nextRule;
+
         }
 
+        //add punctuation to very last rule.
         if (lastRule != null && lastRule.length() > 3
                 && !lastRule.endsWith(".")
                 && !lastRule.endsWith("\"")
@@ -96,6 +109,7 @@ public class Effects extends ArrayList<Effect> {
         }
 
         return sbText.toString();
+
     }
 
     public boolean hasOutcome(Ability source, Outcome outcome) {
