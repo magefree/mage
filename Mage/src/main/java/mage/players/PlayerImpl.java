@@ -489,7 +489,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             for (int i = 0; i < range.getRange(); i++) {
                 Player player = players.getNext(game, false);
                 if (player != null) {
-                    while (player.hasLeft()) {
+                    while (player.hasLeft()) { // can freeze?
                         player = players.getNext(game, false);
                     }
                     inRange.add(player.getId());
@@ -499,7 +499,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             for (int i = 0; i < range.getRange(); i++) {
                 Player player = players.getPrevious(game);
                 if (player != null) {
-                    while (player.hasLeft()) {
+                    while (player.hasLeft()) { // can freeze?
                         player = players.getPrevious(game);
                     }
                     inRange.add(player.getId());
@@ -2039,6 +2039,10 @@ public abstract class PlayerImpl implements Player, Serializable {
     @SuppressWarnings({"null", "ConstantConditions"})
     private int doDamage(int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable, List<
             UUID> appliedEffects) {
+        if (!this.isInGame()) {
+            return 0;
+        }
+
         if (damage > 0) {
             if (canDamage(game.getObject(sourceId), game)) {
                 GameEvent event = new DamagePlayerEvent(playerId,
@@ -2970,6 +2974,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 return false;
             }
             if (availableMana != null) {
+                sourceObject.adjustCosts(copy, game);
                 game.getContinuousEffects().costModification(copy, game);
             }
             boolean canBeCastRegularly = true;
