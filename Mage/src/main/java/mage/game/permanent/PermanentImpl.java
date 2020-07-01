@@ -1559,10 +1559,24 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public boolean fight(Permanent fightTarget, Ability source, Game game) {
+        return this.fight(fightTarget, source, game, true);
+    }
+
+    @Override
+    public boolean fight(Permanent fightTarget, Ability source, Game game, boolean batchTrigger) {
         game.fireEvent(GameEvent.getEvent(GameEvent.EventType.FIGHTED_PERMANENT, fightTarget.getId(), getId(), source.getControllerId()));
         game.fireEvent(GameEvent.getEvent(GameEvent.EventType.FIGHTED_PERMANENT, getId(), fightTarget.getId(), source.getControllerId()));
-        damage(fightTarget.getPower().getValue(), fightTarget.getId(), game, false, true);
+        damage(fightTarget.getPower().getValue(), fightTarget.getId(), game);
         fightTarget.damage(getPower().getValue(), getId(), game);
+        if (!batchTrigger) {
+            return true;
+        }
+        Set<MageObjectReference> morSet = new HashSet<>();
+        morSet.add(new MageObjectReference(this, game));
+        morSet.add(new MageObjectReference(fightTarget, game));
+        String data = UUID.randomUUID().toString();
+        game.getState().setValue("batchFight_" + data, morSet);
+        game.fireEvent(GameEvent.getEvent(EventType.BATCH_FIGHT, getId(), getId(), source.getControllerId(), data, 0));
         return true;
     }
 

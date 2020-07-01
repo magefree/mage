@@ -308,6 +308,7 @@ public class GameEvent implements Serializable {
         DESTROYED_PERMANENT,
         SACRIFICE_PERMANENT, SACRIFICED_PERMANENT,
         FIGHTED_PERMANENT,
+        BATCH_FIGHT,
         EXPLOITED_CREATURE,
         EVOLVED_CREATURE,
         EMBALMED_CREATURE,

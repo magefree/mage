@@ -323,6 +323,7 @@ public final class Jumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Nebelgast Herald", 160, Rarity.UNCOMMON, mage.cards.n.NebelgastHerald.class));
         cards.add(new SetCardInfo("Nessian Hornbeetle", 413, Rarity.UNCOMMON, mage.cards.n.NessianHornbeetle.class));
         cards.add(new SetCardInfo("New Horizons", 414, Rarity.COMMON, mage.cards.n.NewHorizons.class));
+        cards.add(new SetCardInfo("Neyith of the Dire Hunt", 30, Rarity.RARE, mage.cards.n.NeyithOfTheDireHunt.class));
         cards.add(new SetCardInfo("Nightshade Stinger", 258, Rarity.COMMON, mage.cards.n.NightshadeStinger.class));
         cards.add(new SetCardInfo("Nocturnal Feeder", 16, Rarity.COMMON, mage.cards.n.NocturnalFeeder.class));
         cards.add(new SetCardInfo("Nyxathid", 259, Rarity.RARE, mage.cards.n.Nyxathid.class));

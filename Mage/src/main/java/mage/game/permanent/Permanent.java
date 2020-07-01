@@ -152,6 +152,8 @@ public interface Permanent extends Card, Controllable {
 
     boolean fight(Permanent fightTarget, Ability source, Game game);
 
+    boolean fight(Permanent fightTarget, Ability source, Game game,boolean batchTrigger);
+
     boolean entersBattlefield(UUID sourceId, Game game, Zone fromZone, boolean fireEvent);
 
     String getValue(GameState state);
