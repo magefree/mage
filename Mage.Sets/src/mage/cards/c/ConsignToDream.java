@@ -11,6 +11,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.TargetPermanent;
 
 /**
@@ -58,15 +59,15 @@ class ConsignToDreamEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        boolean applied = false;
         Permanent target = game.getPermanent(source.getFirstTarget());
-        if (target != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (target != null && controller != null) {
             if (target.getColor(game).isRed() || target.getColor(game).isGreen()) {
-                applied = target.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
+                return controller.putCardsOnTopOfLibrary(target, game, source, true);
             } else {
-                applied = target.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+                return controller.moveCards(target, Zone.HAND, source, game);
             }
         }
-        return applied;
+        return false;
     }
 }

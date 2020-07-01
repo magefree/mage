@@ -6,7 +6,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromExileEffect;
@@ -44,7 +44,7 @@ public final class HoardingDragon extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new HoardingDragonEffect(this.getId()), true));
 
         // When Hoarding Dragon dies, you may put the exiled card into its owner's hand.
-        this.addAbility(new DiesTriggeredAbility(new ReturnFromExileEffect(this.getId(), Zone.HAND), false));
+        this.addAbility(new DiesSourceTriggeredAbility(new ReturnFromExileEffect(this.getId(), Zone.HAND), false));
     }
 
     public HoardingDragon(final HoardingDragon card) {

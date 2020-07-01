@@ -3,7 +3,7 @@ package mage.cards.e;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.discard.DiscardControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -24,7 +24,7 @@ public final class ExiledBoggart extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Exiled Boggart dies, discard a card.
-        this.addAbility(new DiesTriggeredAbility(new DiscardControllerEffect(1), false));
+        this.addAbility(new DiesSourceTriggeredAbility(new DiscardControllerEffect(1), false));
     }
 
     public ExiledBoggart(final ExiledBoggart card) {

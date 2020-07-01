@@ -6,6 +6,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
+import mage.abilities.hint.ConditionHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -39,9 +40,10 @@ public final class OfOneMind extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}");
 
         // This spell costs {2} less to cast if you control a Human creature and a non-Human creature.
-        this.addAbility(new SimpleStaticAbility(
-                Zone.STACK, new SpellCostReductionSourceEffect(2, condition)
-        ).setRuleAtTheTop(true));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(2, condition))
+                .setRuleAtTheTop(true)
+                .addHint(new ConditionHint(condition, "You control a Human creature and a non-Human creature"))
+        );
 
         // Draw two cards.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));

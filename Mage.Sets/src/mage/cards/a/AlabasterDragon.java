@@ -3,7 +3,7 @@ package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.ShuffleIntoLibrarySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -26,7 +26,7 @@ public final class AlabasterDragon extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // When Alabaster Dragon dies, shuffle it into its owner's library.
-        this.addAbility(new DiesTriggeredAbility(new ShuffleIntoLibrarySourceEffect()));                                                                                          }
+        this.addAbility(new DiesSourceTriggeredAbility(new ShuffleIntoLibrarySourceEffect()));                                                                                          }
 
     public AlabasterDragon(final AlabasterDragon card) {
         super(card);

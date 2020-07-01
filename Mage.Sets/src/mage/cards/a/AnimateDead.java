@@ -225,9 +225,7 @@ class AnimateDeadChangeAbilityEffect extends ContinuousEffectImpl implements Sou
                     abilityToRemove = ability;
                 }
             }
-            if (abilityToRemove != null) {
-                permanent.getAbilities().remove(abilityToRemove);
-            }
+            permanent.removeAbility(abilityToRemove, source.getSourceId(), game);
             permanent.addAbility(newAbility, source.getSourceId(), game);
             return true;
         }

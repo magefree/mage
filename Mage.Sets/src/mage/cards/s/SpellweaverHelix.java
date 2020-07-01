@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -23,13 +22,14 @@ import mage.target.common.TargetCardInASingleGraveyard;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author emerald000
  */
 public final class SpellweaverHelix extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("sorcery cards from a single graveyard");
+    private static final FilterCard filter = new FilterCard("sorcery cards");
 
     static {
         filter.add(CardType.SORCERY.getPredicate());

@@ -1,7 +1,5 @@
-
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -14,23 +12,25 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author lunaskyrise
  */
 public final class IsperiaTheInscrutable extends CardImpl {
 
     public IsperiaTheInscrutable(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{W}{U}{U}");
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPHINX);
         this.power = new MageInt(3);
@@ -38,7 +38,7 @@ public final class IsperiaTheInscrutable extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // Whenever Isperia the Inscrutable deals combat damage to a player, name a card. That player reveals their hand. If they reveal the named card, search your library for a creature card with flying, reveal it, put it into your hand, then shuffle your library.
         Effect effect1 = new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.ALL);
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(effect1, false, true);
@@ -78,12 +78,11 @@ class IsperiaTheInscrutableEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
-        Object object = game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
-        if (player != null && object instanceof String) {
+        String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
+        if (player != null && cardName != null) {
             player.revealCards(player.getLogName() + " hand", player.getHand(), game, true);
-            String namedCard = (String) object;
             for (Card card : player.getHand().getCards(game)) {
-                if (card != null && card.getName().equals(namedCard)) {
+                if (CardUtil.haveSameNames(card, cardName, game)) {
                     return new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true).apply(game, source);
                 }
             }

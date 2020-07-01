@@ -31,7 +31,7 @@ public final class VampireSovereign extends CardImpl {
 
         // When Vampire Sovereign enters the battlefield, target opponent loses 3 life and you gain 3 life.
         Ability ability = new EntersBattlefieldTriggeredAbility(new LoseLifeTargetEffect(3));
-        ability.addEffect(new GainLifeEffect(3).setText("and you gain 3 life"));
+        ability.addEffect(new GainLifeEffect(3).concatBy("and"));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }

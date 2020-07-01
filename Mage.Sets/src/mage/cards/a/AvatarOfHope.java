@@ -1,22 +1,24 @@
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.effects.common.combat.CanBlockAdditionalCreatureEffect;
-import mage.abilities.effects.common.cost.CostModificationEffectImpl;
+import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
+import mage.abilities.hint.ConditionHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
-import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author Plopman
  */
 public final class AvatarOfHope extends CardImpl {
@@ -29,9 +31,14 @@ public final class AvatarOfHope extends CardImpl {
         this.toughness = new MageInt(9);
 
         // If you have 3 or less life, Avatar of Hope costs {6} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new AvatarOfHopeAdjustingCostsEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(6, AvatarOfHopeCondition.instance)
+                .setText("if you have 3 or less life, Avatar of Hope costs {6} less to cast"))
+                .addHint(new ConditionHint(AvatarOfHopeCondition.instance))
+        );
+
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+
         // Avatar of Hope can block any number of creatures.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect(0)));
     }
@@ -46,39 +53,21 @@ public final class AvatarOfHope extends CardImpl {
     }
 }
 
-class AvatarOfHopeAdjustingCostsEffect extends CostModificationEffectImpl {
+enum AvatarOfHopeCondition implements Condition {
 
-    AvatarOfHopeAdjustingCostsEffect() {
-        super(Duration.EndOfGame, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        staticText = "If you have 3 or less life, {this} costs {6} less to cast";
-    }
-
-    AvatarOfHopeAdjustingCostsEffect(AvatarOfHopeAdjustingCostsEffect effect) {
-        super(effect);
-    }
+    instance;
 
     @Override
-    public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        CardUtil.reduceCost(abilityToModify, 6);
-        return true;
-    }
-
-    @Override
-    public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify.getSourceId().equals(source.getSourceId())
-                && (abilityToModify instanceof SpellAbility)) {
-            Player player = game.getPlayer(abilityToModify.getControllerId());
-            if (player != null && player.getLife() < 4) {
-                return true;
-            }
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null && player.getLife() <= 3) {
+            return true;
         }
-
         return false;
     }
 
     @Override
-    public AvatarOfHopeAdjustingCostsEffect copy() {
-        return new AvatarOfHopeAdjustingCostsEffect(this);
+    public String toString() {
+        return "you have 3 or less life";
     }
-
 }

@@ -7,12 +7,14 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.ConspireAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterAttackingOrBlockingCreature;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -58,9 +60,9 @@ class AethertowEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent targetCreature = game.getPermanent(targetPointer.getFirst(game, source));
+        Player controller = game.getPlayer(source.getControllerId());
         if (targetCreature != null) {
-            targetCreature.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-            return true;
+            return controller.putCardsOnTopOfLibrary(targetCreature, game, source, true);
         }
         return false;
     }

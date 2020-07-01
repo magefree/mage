@@ -61,7 +61,7 @@ enum SlingbowTrapCondition implements Condition {
         for (UUID attackingCreatureId : game.getCombat().getAttackers()) {
             Permanent attackingCreature = game.getPermanent(attackingCreatureId);
             if (attackingCreature != null) {
-                if (attackingCreature.getColor(game).isBlack() && attackingCreature.hasAbility(FlyingAbility.getInstance().getId(), game)) {
+                if (attackingCreature.getColor(game).isBlack() && attackingCreature.hasAbility(FlyingAbility.getInstance(), game)) {
                     return true;
                 }
             }

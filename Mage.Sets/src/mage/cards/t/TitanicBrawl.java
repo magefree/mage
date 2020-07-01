@@ -38,7 +38,7 @@ public final class TitanicBrawl extends CardImpl {
 
         // This spell costs {1} less to cast if it targets a creature you control with a +1/+1 counter on it.
         this.addAbility(new SimpleStaticAbility(
-                Zone.STACK, new SpellCostReductionSourceEffect(1, condition)
+                Zone.ALL, new SpellCostReductionSourceEffect(1, condition).setCanWorksOnStackOnly(true)
         ).setRuleAtTheTop(true));
 
         // Target creature you control fights target creature you don't control.

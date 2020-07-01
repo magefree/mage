@@ -1,8 +1,5 @@
 package mage.abilities.keyword;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -27,10 +24,13 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * 502.59. Suspend
- *
+ * <p>
  * 502.59a Suspend is a keyword that represents three abilities. The first is a
  * static ability that functions while the card with suspend is in a player's
  * hand. The second and third are triggered abilities that function in the
@@ -42,13 +42,13 @@ import mage.target.targetpointer.FixedTarget;
  * card, if it's removed from the game, play it without paying its mana cost if
  * able. If you can't, it remains removed from the game. If you play it this way
  * and it's a creature, it gains haste until you lose control of it."
- *
+ * <p>
  * 502.59b A card is "suspended" if it's in the removed-from-the-game zone, has
  * suspend, and has a time counter on it.
- *
+ * <p>
  * 502.59c Playing a spell as an effect of its suspend ability follows the rules
  * for paying alternative costs in rules 409.1b and 409.1f-h.
- *
+ * <p>
  * The phrase "if you could play this card from your hand" checks only for
  * timing restrictions and permissions. This includes both what's inherent in
  * the card's type (for example, if the card with suspend is a creature, it must
@@ -57,38 +57,38 @@ import mage.target.targetpointer.FixedTarget;
  * actually follow all steps in playing the card is irrelevant. If the card is
  * impossible to play due to a lack of legal targets or an unpayable mana cost,
  * for example, it may still be removed from the game with suspend.
- *
+ * <p>
  * Removing a card from the game with its suspend ability is not playing that
  * card. This action doesn't use the stack and can't be responded to.
- *
+ * <p>
  * If a spell with suspend has targets, the targets are chosen when the spell is
  * played, not when it's removed from the game.
- *
+ * <p>
  * If the first triggered ability of suspend is countered, no time counter is
  * removed. The ability will trigger again during its owner's next upkeep.
- *
+ * <p>
  * When the last time counter is removed from a suspended card, the second
  * triggered ability of suspend will trigger. It doesn't matter why the time
  * counter was removed or whose effect removed it. (The _Time Spiral_ reminder
  * text is misleading on this point.)
- *
+ * <p>
  * If the second triggered ability of suspend is countered, the card can't be
  * played. It remains in the removed-from-the-game zone without any time
  * counters on it for the rest of the game, and it's no longer considered
  * suspended.
- *
+ * <p>
  * If the second triggered ability of suspend resolves, the card's owner must
  * play the spell if possible, even if that player doesn't want to. Normal
  * timing considerations for the spell are ignored (for example, if the
  * suspended card is a creature and this ability resolves during your upkeep,
  * you're able to play the card), but other play restrictions are not ignored.
- *
+ * <p>
  * If the second triggered ability of suspend resolves and the suspended card
  * can't be played due to a lack of legal targets or a play restriction, for
  * example, it remains in the removed-from-the-game zone without any time
  * counters on it for the rest of the game, and it's no longer considered
  * suspended.
- *
+ * <p>
  * As the second triggered ability of suspend resolves, if playing the suspended
  * card involves an additional cost, the card's owner must pay that cost if
  * able. If they can't, the card remains removed from the game. If the
@@ -99,14 +99,12 @@ import mage.target.targetpointer.FixedTarget;
  * cost, then they have a choice: The player may play the spell, produce mana,
  * and pay the cost. Or the player may choose to play no mana abilities, thus
  * making the card impossible to play because the additional mana can't be paid.
- *
+ * <p>
  * A creature played via suspend comes into play with haste. It still has haste
  * after the first turn it's in play as long as the same player controls it. As
  * soon as another player takes control of it, it loses haste.
  *
- *
  * @author LevelX2
- *
  */
 public class SuspendAbility extends SpecialAction {
 
@@ -117,9 +115,9 @@ public class SuspendAbility extends SpecialAction {
      * Gives the card the SuspendAbility
      *
      * @param suspend - amount of time counters, if Integer.MAX_VALUE is set
-     * there will be {X} costs and X counters added
-     * @param cost - null is used for temporary gained suspend ability
-     * @param card - card that has the suspend ability
+     *                there will be {X} costs and X counters added
+     * @param cost    - null is used for temporary gained suspend ability
+     * @param card    - card that has the suspend ability
      */
     public SuspendAbility(int suspend, ManaCost cost, Card card) {
         this(suspend, cost, card, false);
@@ -138,13 +136,13 @@ public class SuspendAbility extends SpecialAction {
         }
         StringBuilder sb = new StringBuilder("Suspend ");
         if (cost != null) {
-            sb.append(suspend == Integer.MAX_VALUE ? "X" : suspend).append("&mdash;").append(cost.getText()).append(suspend 
+            sb.append(suspend == Integer.MAX_VALUE ? "X" : suspend).append("&mdash;").append(cost.getText()).append(suspend
                     == Integer.MAX_VALUE ? ". X can't be 0" : "");
             if (!shortRule) {
                 sb.append(" <i>(Rather than cast this card from your hand, pay ")
                         .append(cost.getText())
                         .append(" and exile it with ")
-                        .append((suspend == 1 ? "a time counter" : (suspend == Integer.MAX_VALUE 
+                        .append((suspend == 1 ? "a time counter" : (suspend == Integer.MAX_VALUE
                                 ? "X time counters" : suspend + " time counters")))
                         .append(" on it.")
                         .append(" At the beginning of your upkeep, remove a time counter. "
@@ -176,7 +174,7 @@ public class SuspendAbility extends SpecialAction {
         ability.setControllerId(card.getOwnerId());
         game.getState().addOtherAbility(card, ability);
 
-        SuspendBeginningOfUpkeepInterveningIfTriggeredAbility ability1 = 
+        SuspendBeginningOfUpkeepInterveningIfTriggeredAbility ability1 =
                 new SuspendBeginningOfUpkeepInterveningIfTriggeredAbility();
         ability1.setSourceId(card.getId());
         ability1.setControllerId(card.getOwnerId());
@@ -213,9 +211,9 @@ public class SuspendAbility extends SpecialAction {
         }
         MageObject object = game.getObject(sourceId);
         return new ActivationStatus(object.isInstant()
-                || object.hasAbility(FlashAbility.getInstance().getId(), game)
-                || null != game.getContinuousEffects().asThough(sourceId, 
-                        AsThoughEffectType.CAST_AS_INSTANT, this, playerId, game)
+                || object.hasAbility(FlashAbility.getInstance(), game)
+                || null != game.getContinuousEffects().asThough(sourceId,
+                AsThoughEffectType.CAST_AS_INSTANT, this, playerId, game)
                 || game.canPlaySorcery(playerId), null);
     }
 
@@ -241,7 +239,7 @@ class SuspendExileEffect extends OneShotEffect {
 
     public SuspendExileEffect(int suspend) {
         super(Outcome.PutCardInPlay);
-        this.staticText = new StringBuilder("Suspend ").append(suspend 
+        this.staticText = new StringBuilder("Suspend ").append(suspend
                 == Integer.MAX_VALUE ? "X" : suspend).toString();
         this.suspend = suspend;
     }
@@ -262,7 +260,7 @@ class SuspendExileEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (card != null && controller != null) {
             UUID exileId = SuspendAbility.getSuspendExileId(controller.getId(), game);
-            if (controller.moveCardToExileWithInfo(card, exileId, "Suspended cards of " 
+            if (controller.moveCardToExileWithInfo(card, exileId, "Suspended cards of "
                     + controller.getName(), source.getSourceId(), game, Zone.HAND, true)) {
                 if (suspend == Integer.MAX_VALUE) {
                     suspend = source.getManaCostsToPay().getX();
@@ -298,11 +296,9 @@ class SuspendPlayCardAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getTargetId().equals(getSourceId())) {
             Card card = game.getCard(getSourceId());
-            if (card != null
+            return card != null
                     && game.getState().getZone(card.getId()) == Zone.EXILED
-                    && card.getCounters(game).getCount(CounterType.TIME) == 0) {
-                return true;
-            }
+                    && card.getCounters(game).getCount(CounterType.TIME) == 0;
         }
         return false;
     }
@@ -340,8 +336,9 @@ class SuspendPlayCardEffect extends OneShotEffect {
         Card card = game.getCard(source.getSourceId());
         if (player != null && card != null) {
             // remove temporary suspend ability (used e.g. for Epochrasite)
+            // TODO: isGainedTemporary is not set or use in other places, so it can be deleted?!
             List<Ability> abilitiesToRemove = new ArrayList<>();
-            for (Ability ability : card.getAbilities()) {
+            for (Ability ability : card.getAbilities(game)) {
                 if (ability instanceof SuspendAbility) {
                     if (((SuspendAbility) ability).isGainedTemporary()) {
                         abilitiesToRemove.add(ability);
@@ -350,12 +347,19 @@ class SuspendPlayCardEffect extends OneShotEffect {
             }
             if (!abilitiesToRemove.isEmpty()) {
                 for (Ability ability : card.getAbilities()) {
-                    if (ability instanceof SuspendBeginningOfUpkeepInterveningIfTriggeredAbility 
+                    if (ability instanceof SuspendBeginningOfUpkeepInterveningIfTriggeredAbility
                             || ability instanceof SuspendPlayCardAbility) {
                         abilitiesToRemove.add(ability);
                     }
                 }
                 // remove the abilities from the card
+                // TODO: will not work with Adventure Cards and another auto-generated abilities list
+                // TODO: is it work after blink or return to hand?
+                /*
+                 bug example:
+                 Epochrasite bug: It comes out of suspend, is cast and enters the battlefield. THEN if it's returned to
+                 its owner's hand from battlefield, the bounced Epochrasite can't be cast for the rest of the game.
+                 */
                 card.getAbilities().removeAll(abilitiesToRemove);
             }
             // cast the card for free
@@ -409,7 +413,7 @@ class GainHasteEffect extends ContinuousEffectImpl {
             }
             return true;
         }
-        if (game.getState().getZoneChangeCounter(((FixedTarget) getTargetPointer()).getTarget()) 
+        if (game.getState().getZoneChangeCounter(((FixedTarget) getTargetPointer()).getTarget())
                 >= ((FixedTarget) getTargetPointer()).getZoneChangeCounter()) {
             this.discard();
         }
@@ -421,8 +425,8 @@ class GainHasteEffect extends ContinuousEffectImpl {
 class SuspendBeginningOfUpkeepInterveningIfTriggeredAbility extends ConditionalInterveningIfTriggeredAbility {
 
     public SuspendBeginningOfUpkeepInterveningIfTriggeredAbility() {
-        super(new BeginningOfUpkeepTriggeredAbility(Zone.EXILED, new RemoveCounterSourceEffect(CounterType.TIME.createInstance()), 
-                TargetController.YOU, false),
+        super(new BeginningOfUpkeepTriggeredAbility(Zone.EXILED, new RemoveCounterSourceEffect(CounterType.TIME.createInstance()),
+                        TargetController.YOU, false),
                 SuspendedCondition.instance,
                 "At the beginning of your upkeep, if this card ({this}) is suspended, remove a time counter from it.");
         this.setRuleVisible(false);

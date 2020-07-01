@@ -96,6 +96,7 @@ class AwakenerDruidToken extends TokenImpl {
         super(token);
     }
 
+    @Override
     public AwakenerDruidToken copy() {
         return new AwakenerDruidToken(this);
     }

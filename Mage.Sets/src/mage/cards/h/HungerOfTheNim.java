@@ -1,38 +1,31 @@
-
 package mage.cards.h;
 
-import java.util.UUID;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.dynamicvalue.common.ArtifactYouControlCount;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.hint.common.ArtifactYouControlHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class HungerOfTheNim extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact you control");
-
-    static {
-        filter.add(CardType.ARTIFACT.getPredicate());
-    }
-
     public HungerOfTheNim(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");
 
         // Target creature gets +1/+0 until end of turn for each artifact you control.
-        Effect effect = new BoostTargetEffect(new PermanentsOnBattlefieldCount(filter), StaticValue.get(0), Duration.EndOfTurn, true);
-        effect.setText("Target creature gets +1/+0 until end of turn for each artifact you control");
+        Effect effect = new BoostTargetEffect(ArtifactYouControlCount.instance, StaticValue.get(0), Duration.EndOfTurn, true);
         getSpellAbility().addEffect(effect);
         getSpellAbility().addTarget(new TargetCreaturePermanent());
+        getSpellAbility().addHint(ArtifactYouControlHint.instance);
     }
 
     public HungerOfTheNim(final HungerOfTheNim card) {

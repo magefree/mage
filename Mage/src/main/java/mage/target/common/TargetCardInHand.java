@@ -41,8 +41,10 @@ public class TargetCardInHand extends TargetCard {
 
     @Override
     public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
-        Card card = game.getPlayer(playerId).getHand().get(id, game);
-        return card != null && filter.match(card, source != null ? source.getSourceId() : null, playerId, game);
+        // Has to be a card in the hand of a player in range. We don't know here, from which player's hand so we have to check all possible players
+        // And because a card in hand is never targeted we can omitt specific targeting related checks
+        return game.getState().getZone(id) == Zone.HAND 
+                && game.getState().getPlayersInRange(getTargetController() == null ? playerId : getTargetController(), game).contains(game.getOwnerId(id));
     }
 
     @Override

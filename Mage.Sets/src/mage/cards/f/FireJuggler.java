@@ -3,7 +3,7 @@ package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BecomesBlockedTriggeredAbility;
+import mage.abilities.common.BecomesBlockedSourceTriggeredAbility;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.DoIfClashWonEffect;
 import mage.cards.CardImpl;
@@ -30,7 +30,7 @@ public final class FireJuggler extends CardImpl {
         // Whenever Fire Juggler becomes blocked, clash with an opponent. If you win, Fire Juggler deals 4 damage to each creature blocking it.
         FilterPermanent filter = new FilterPermanent("each creature blocking it");
         filter.add(new BlockingAttackerIdPredicate(this.getId()));
-        this.addAbility(new BecomesBlockedTriggeredAbility(new DoIfClashWonEffect(new DamageAllEffect(4,filter)),false));
+        this.addAbility(new BecomesBlockedSourceTriggeredAbility(new DoIfClashWonEffect(new DamageAllEffect(4,filter)),false));
     }
 
     public FireJuggler(final FireJuggler card) {

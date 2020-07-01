@@ -4,7 +4,7 @@ package mage.cards.p;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.condition.common.LiveLostLastTurnCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.common.SourcePermanentToughnessValue;
@@ -38,7 +38,7 @@ public final class PaladinOfAtonement extends CardImpl {
                 "At the beginning of each upkeep, if you lost life last turn, put a +1/+1 counter on {this}"));
 
         // When Paladin of Atonement dies, you gain life equal to it's toughness.
-        this.addAbility(new DiesTriggeredAbility(new GainLifeEffect(SourcePermanentToughnessValue.getInstance(),
+        this.addAbility(new DiesSourceTriggeredAbility(new GainLifeEffect(SourcePermanentToughnessValue.getInstance(),
                 "you gain life equal to it's toughness")));
     }
 

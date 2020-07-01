@@ -4,7 +4,7 @@ package mage.cards.m;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -34,7 +34,7 @@ public final class MistmoonGriffin extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // When Mistmoon Griffin dies, exile Mistmoon Griffin, then return the top creature card of your graveyard to the battlefield.
-        Ability ability = new DiesTriggeredAbility(new ExileSourceEffect());
+        Ability ability = new DiesSourceTriggeredAbility(new ExileSourceEffect());
         ability.addEffect(new MistmoonGriffinEffect());
         this.addAbility(ability);
 

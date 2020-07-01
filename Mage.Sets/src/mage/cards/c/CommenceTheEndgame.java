@@ -1,7 +1,7 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
-import mage.abilities.common.CantBeCounteredAbility;
+import mage.abilities.common.CantBeCounteredSourceAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.keyword.AmassEffect;
 import mage.cards.CardImpl;
@@ -22,7 +22,7 @@ public final class CommenceTheEndgame extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{U}{U}");
 
         // This spell can't be countered.
-        this.addAbility(new CantBeCounteredAbility());
+        this.addAbility(new CantBeCounteredSourceAbility());
 
         // Draw two cards, then amass X, where X is the number of cards in your hand.
         this.getSpellAbility().addEffect(new CommenceTheEndgameEffect());

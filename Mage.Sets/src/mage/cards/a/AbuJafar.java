@@ -3,7 +3,7 @@ package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -31,7 +31,7 @@ public final class AbuJafar extends CardImpl {
                                  new BlockingAttackerIdPredicate(this.getId())));
         
         // When Abu Ja'far dies, destroy all creatures blocking or blocked by it. They can't be regenerated.        
-        this.addAbility(new DiesTriggeredAbility(new DestroyAllEffect(filter, true), false));
+        this.addAbility(new DiesSourceTriggeredAbility(new DestroyAllEffect(filter, true), false));
     }
 
     public AbuJafar(final AbuJafar card) {

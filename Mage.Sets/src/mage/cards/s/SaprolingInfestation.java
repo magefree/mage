@@ -13,14 +13,13 @@ import mage.game.permanent.token.SaprolingToken;
 import java.util.UUID;
 
 /**
- *
  * @author noahg
  */
 public final class SaprolingInfestation extends CardImpl {
 
     public SaprolingInfestation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
-        
+
 
         // Whenever a player kicks a spell, you put a 1/1 green Saproling creature token onto the battlefield.
         this.addAbility(new SaprolingInfestationTriggeredAbility());
@@ -38,7 +37,7 @@ public final class SaprolingInfestation extends CardImpl {
     class SaprolingInfestationTriggeredAbility extends TriggeredAbilityImpl {
 
         SaprolingInfestationTriggeredAbility() {
-            super(Zone.BATTLEFIELD, new CreateTokenEffect(new SaprolingToken("INV")), false);
+            super(Zone.BATTLEFIELD, new CreateTokenEffect(new SaprolingToken()), false);
         }
 
         SaprolingInfestationTriggeredAbility(final SaprolingInfestationTriggeredAbility ability) {

@@ -1,7 +1,7 @@
 package mage.cards.v;
 
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
@@ -37,7 +37,7 @@ public final class VoiceOfResurgence extends CardImpl {
                         new SpellCastOpponentTriggeredAbility(null, new FilterSpell("a spell"), false),
                         MyTurnCondition.instance,
                         "Whenever an opponent casts a spell during your turn, "),
-                new DiesTriggeredAbility(null, false));
+                new DiesSourceTriggeredAbility(null, false));
         ability.setLeavesTheBattlefieldTrigger(true);
         ability.addHint(MyTurnHint.instance);
         ability.addHint(CreaturesYouControlHint.instance);

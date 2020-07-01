@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import mage.abilities.costs.AlternativeCostSourceAbility;
@@ -16,7 +15,6 @@ import mage.target.common.TargetCardInHand;
 import java.util.UUID;
 
 /**
- *
  * @author Backfir3
  */
 public final class Abolish extends CardImpl {
@@ -28,8 +26,7 @@ public final class Abolish extends CardImpl {
     }
 
     public Abolish(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}{W}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}{W}");
 
         // You may discard a Plains card rather than pay Abolish's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(new DiscardTargetCost(new TargetCardInHand(filterCost))));

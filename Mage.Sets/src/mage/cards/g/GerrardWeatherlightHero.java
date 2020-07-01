@@ -3,7 +3,7 @@ package mage.cards.g;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
@@ -40,7 +40,7 @@ public final class GerrardWeatherlightHero extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // When Gerrard, Weatherlight Hero dies, exile it and return to the battlefield all artifact and creature cards in your graveyard that were put there from the battlefield this turn.
-        Ability ability = new DiesTriggeredAbility(new ExileSourceEffect().setText("exile it"));
+        Ability ability = new DiesSourceTriggeredAbility(new ExileSourceEffect().setText("exile it"));
         ability.addEffect(new GerrardWeatherlightHeroEffect());
         this.addAbility(ability, new GerrardWeatherlightHeroWatcher());
     }

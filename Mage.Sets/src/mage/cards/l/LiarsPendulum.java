@@ -93,7 +93,7 @@ class LiarsPendulumEffect extends OneShotEffect {
                         rightGuess = opponentGuess;
                     }
                 }
-                if (CardUtil.haveSameNames(card.getName(), cardName)) {
+                if (CardUtil.haveSameNames(card, cardName, game)) {
                     rightGuess = opponentGuess;
                 }
             }

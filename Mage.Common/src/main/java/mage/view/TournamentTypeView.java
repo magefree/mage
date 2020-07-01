@@ -22,6 +22,7 @@ public class TournamentTypeView implements Serializable {
     private final boolean elimination;
     private final boolean random;
     private final boolean richMan;
+    private final boolean jumpstart;
 
     public TournamentTypeView(TournamentType tournamentType) {
         this.name = tournamentType.getName();
@@ -34,6 +35,7 @@ public class TournamentTypeView implements Serializable {
         this.elimination = tournamentType.isElimination();
         this.random = tournamentType.isRandom();
         this.richMan = tournamentType.isRichMan();
+        this.jumpstart = tournamentType.isJumpstart();
     }
 
     @Override
@@ -80,4 +82,9 @@ public class TournamentTypeView implements Serializable {
     public boolean isRichMan() {
         return richMan;
     }
+
+    public boolean isJumpstart() {
+        return jumpstart;
+    }
+
 } 

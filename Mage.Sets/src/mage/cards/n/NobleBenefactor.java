@@ -3,7 +3,7 @@ package mage.cards.n;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -33,7 +33,7 @@ public final class NobleBenefactor extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Noble Benefactor dies, each player may search their library for a card and put that card into their hand. Then each player who searched their library this way shuffles it.
-        this.addAbility(new DiesTriggeredAbility(new NobleBenefactorEffect()));
+        this.addAbility(new DiesSourceTriggeredAbility(new NobleBenefactorEffect()));
     }
 
     public NobleBenefactor(final NobleBenefactor card) {

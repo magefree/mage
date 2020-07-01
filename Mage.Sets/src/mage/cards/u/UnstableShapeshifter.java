@@ -77,7 +77,7 @@ class UnstableShapeshifterEffect extends OneShotEffect {
         if (targetCreature != null && permanent != null) {
             Permanent blueprintPermanent = game.copyPermanent(Duration.Custom, targetCreature, permanent.getId(), source, new EmptyApplyToPermanent());
             blueprintPermanent.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD,
-                    new UnstableShapeshifterEffect(), filterAnotherCreature, false, SetTargetPointer.PERMANENT, ""), game);
+                    new UnstableShapeshifterEffect(), filterAnotherCreature, false, SetTargetPointer.PERMANENT, ""), source.getSourceId(), game);
             return true;
         }
         return false;

@@ -1,11 +1,9 @@
-
 package mage.abilities.effects.common.discard;
 
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
@@ -16,8 +14,8 @@ import mage.util.CardUtil;
  */
 public class DiscardControllerEffect extends OneShotEffect {
 
-    protected DynamicValue amount;
-    protected boolean randomDiscard;
+    protected final DynamicValue amount;
+    protected final boolean randomDiscard;
 
     public DiscardControllerEffect(int amount) {
         this(StaticValue.get(amount));
@@ -51,22 +49,8 @@ public class DiscardControllerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        boolean result = false;
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            if (randomDiscard) {
-                int maxAmount = Math.min(amount.calculate(game, source, this), player.getHand().size());
-                for (int i = 0; i < maxAmount; i++) {
-                    Card card = player.getHand().getRandom(game);
-                    result |= player.discard(card, source, game);
-
-                }
-            } else {
-                player.discard(amount.calculate(game, source, this), false, source, game);
-                result = true;
-            }
-        }
-        return result;
+        return player != null && !player.discard(amount.calculate(game, source, this), randomDiscard, source, game).isEmpty();
     }
 
     private void setText() {

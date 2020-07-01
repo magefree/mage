@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -25,8 +23,9 @@ import mage.game.permanent.token.SpiritWhiteToken;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class SpiritBonds extends CardImpl {
@@ -42,16 +41,16 @@ public final class SpiritBonds extends CardImpl {
     }
 
     public SpiritBonds(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
 
 
         // Whenever a nontoken creature enters the battlefield under your control, you may pay {W}. If you do, but a 1/1 white Spirit creature token with flying into play.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new DoIfCostPaid(new CreateTokenEffect(new SpiritWhiteToken("M15")), new ManaCostsImpl("{W}")), filterNontoken, false));
-        
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new DoIfCostPaid(new CreateTokenEffect(new SpiritWhiteToken()), new ManaCostsImpl("{W}")), filterNontoken, false));
+
         // {1}{W}, Sacrifice a Spirit: Target non-Spirit creature you control gains indestructible until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{1}{W}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(1,1,filterSpirit, true)));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filterSpirit, true)));
         ability.addTarget(new TargetControlledCreaturePermanent(filter));
         this.addAbility(ability);
     }

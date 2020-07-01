@@ -3,7 +3,7 @@ package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.CantBeCounteredAbility;
+import mage.abilities.common.CantBeCounteredSourceAbility;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -24,7 +24,7 @@ public final class BlurredMongoose extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Blurred Mongoose can't be countered.
-        this.addAbility(new CantBeCounteredAbility());
+        this.addAbility(new CantBeCounteredSourceAbility());
         this.addAbility(ShroudAbility.getInstance());
     }
 

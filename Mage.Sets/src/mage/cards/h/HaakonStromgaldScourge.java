@@ -5,7 +5,7 @@ package mage.cards.h;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
@@ -41,7 +41,7 @@ public final class HaakonStromgaldScourge extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HaakonPlayKnightsFromGraveyardEffect()));
 
         // When Haakon dies, you lose 2 life.
-        this.addAbility(new DiesTriggeredAbility(new LoseLifeSourceControllerEffect(2)));
+        this.addAbility(new DiesSourceTriggeredAbility(new LoseLifeSourceControllerEffect(2)));
 
     }
 

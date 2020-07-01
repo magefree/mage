@@ -1,15 +1,32 @@
 
 package mage.game.tournament;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 import java.util.concurrent.CopyOnWriteArrayList;
+
+import org.apache.log4j.Logger;
+
 import mage.cards.ExpansionSet;
 import mage.cards.decks.Deck;
 import mage.constants.TournamentPlayerState;
 import mage.game.draft.Draft;
 import mage.game.draft.DraftCube;
-import mage.game.events.*;
+import mage.game.events.Listener;
+import mage.game.events.PlayerQueryEvent;
+import mage.game.events.PlayerQueryEventSource;
+import mage.game.events.TableEvent;
 import mage.game.events.TableEvent.EventType;
+import mage.game.events.TableEventSource;
+import mage.game.jumpstart.JumpstartPoolGenerator;
 import mage.game.match.Match;
 import mage.game.match.MatchPlayer;
 import mage.game.result.ResultProtos.MatchPlayerProto;
@@ -20,7 +37,6 @@ import mage.game.result.ResultProtos.TourneyRoundProto;
 import mage.players.Player;
 import mage.players.PlayerType;
 import mage.util.RandomUtil;
-import org.apache.log4j.Logger;
 
 /**
  *
@@ -394,6 +410,8 @@ public abstract class TournamentImpl implements Tournament {
                 for (int i = 0; i < options.getLimitedOptions().getNumberBoosters(); i++) {
                     player.getDeck().getSideboard().addAll(cube.createBooster());
                 }
+            } else if (options.getLimitedOptions().getIsJumpstart()) {
+                player.getDeck().getCards().addAll(JumpstartPoolGenerator.generatePool());
             } else {
                 for (ExpansionSet set : sets) {
                     player.getDeck().getSideboard().addAll(set.createBooster());

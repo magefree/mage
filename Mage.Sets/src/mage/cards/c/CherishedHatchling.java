@@ -3,7 +3,7 @@ package mage.cards.c;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
@@ -45,7 +45,7 @@ public final class CherishedHatchling extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Cherished Hatchling dies, you may cast Dinosaur spells this turn as though they had flash, and whenever you cast a Dinosaur spell this turn, it gains "When this creature enters the battlefield, you may have it fight another target creature."
-        Ability ability = new DiesTriggeredAbility(new CastAsThoughItHadFlashAllEffect(Duration.EndOfTurn, filterCard, false));
+        Ability ability = new DiesSourceTriggeredAbility(new CastAsThoughItHadFlashAllEffect(Duration.EndOfTurn, filterCard, false));
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new CherishedHatchlingTriggeredAbility()));
         this.addAbility(ability);
     }

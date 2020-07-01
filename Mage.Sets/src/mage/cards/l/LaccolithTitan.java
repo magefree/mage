@@ -4,7 +4,7 @@ package mage.cards.l;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BecomesBlockedTriggeredAbility;
+import mage.abilities.common.BecomesBlockedSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.AssignNoCombatDamageSourceEffect;
 import mage.cards.CardImpl;
@@ -32,7 +32,7 @@ public final class LaccolithTitan extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Whenever Laccolith Grunt becomes blocked, you may have it deal damage equal to its power to target creature. If you do, Laccolith Grunt assigns no combat damage this turn.
-        Ability ability = new BecomesBlockedTriggeredAbility(new LaccolithEffect().setText("you may have it deal damage equal to its power to target creature"), true);
+        Ability ability = new BecomesBlockedSourceTriggeredAbility(new LaccolithEffect().setText("you may have it deal damage equal to its power to target creature"), true);
         ability.addEffect(new AssignNoCombatDamageSourceEffect(Duration.EndOfTurn, true));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

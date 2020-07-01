@@ -40,7 +40,7 @@ public class WonderTest extends CardTestPlayerBase {
         // check no flying in graveyard
         for (Card card : playerA.getGraveyard().getCards(currentGame)) {
             if (card.getName().equals("Runeclaw Bear")) {
-                Assert.assertFalse(card.getAbilities().contains(FlyingAbility.getInstance()));
+                Assert.assertFalse(card.hasAbility(FlyingAbility.getInstance(), currentGame));
             }
         }
     }

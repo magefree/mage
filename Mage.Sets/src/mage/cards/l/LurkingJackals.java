@@ -110,7 +110,7 @@ class LurkingJackalsToken extends TokenImpl {
     public LurkingJackalsToken() {
         super("Hound", "3/2 Hound creature");
         cardType.add(CardType.CREATURE);
-        subtype.add(SubType.HOUND);
+        subtype.add(SubType.DOG);
         power = new MageInt(3);
         toughness = new MageInt(2);
     }

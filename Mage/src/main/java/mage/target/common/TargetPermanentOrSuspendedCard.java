@@ -29,9 +29,6 @@
  */
 package mage.target.common;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.cards.Card;
@@ -42,18 +39,21 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetImpl;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author emerald000
  */
 public class TargetPermanentOrSuspendedCard extends TargetImpl {
-    
+
     protected final FilterPermanentOrSuspendedCard filter;
-    
+
     public TargetPermanentOrSuspendedCard() {
         this(new FilterPermanentOrSuspendedCard(), false);
     }
-    
+
     public TargetPermanentOrSuspendedCard(FilterPermanentOrSuspendedCard filter, boolean notTarget) {
         super(notTarget);
         this.filter = filter;
@@ -62,17 +62,17 @@ public class TargetPermanentOrSuspendedCard extends TargetImpl {
         this.minNumberOfTargets = 1;
         this.maxNumberOfTargets = 1;
     }
-    
+
     public TargetPermanentOrSuspendedCard(final TargetPermanentOrSuspendedCard target) {
         super(target);
         this.filter = target.filter.copy();
     }
-    
+
     @Override
     public Filter<MageObject> getFilter() {
         return this.filter;
     }
-    
+
     @Override
     public TargetPermanentOrSuspendedCard copy() {
         return new TargetPermanentOrSuspendedCard(this);
@@ -166,6 +166,6 @@ public class TargetPermanentOrSuspendedCard extends TargetImpl {
                 }
             }
         }
-        return sb.toString();
+        return sb.toString().trim();
     }
 }

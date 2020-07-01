@@ -89,6 +89,12 @@ public final class StaticFilters {
         FILTER_CARD_CREATURE_A.setLockedFilter(true);
     }
 
+    public static final FilterCreatureCard FILTER_CARD_CREATURE_YOUR_HAND = new FilterCreatureCard("a creature card from your hand");
+
+    static {
+        FILTER_CARD_CREATURE_YOUR_HAND.setLockedFilter(true);
+    }
+
     public static final FilterCreatureCard FILTER_CARD_CREATURE_YOUR_GRAVEYARD = new FilterCreatureCard("creature card from your graveyard");
 
     static {
@@ -183,6 +189,12 @@ public final class StaticFilters {
 
     static {
         FILTER_CARD_INSTANT_AND_SORCERY.setLockedFilter(true);
+    }
+
+    public static final FilterPermanentCard FILTER_CARD_PERMANENT = new FilterPermanentCard("permanent card");
+
+    static {
+        FILTER_CARD_PERMANENT.setLockedFilter(true);
     }
 
     public static final FilterPermanent FILTER_PERMANENT = new FilterPermanent();
@@ -603,13 +615,7 @@ public final class StaticFilters {
         FILTER_PERMANENT_AURA.setLockedFilter(true);
     }
 
-    public static final FilterPermanent FILTER_PERMANENT_EQUIPMENT = new FilterPermanent();
-
-    static {
-        FILTER_PERMANENT_EQUIPMENT.add(CardType.ARTIFACT.getPredicate());
-        FILTER_PERMANENT_EQUIPMENT.add(SubType.EQUIPMENT.getPredicate());
-        FILTER_PERMANENT_EQUIPMENT.setLockedFilter(true);
-    }
+    public static final FilterPermanent FILTER_PERMANENT_EQUIPMENT = new FilterEquipmentPermanent();
 
     public static final FilterPermanent FILTER_PERMANENT_FORTIFICATION = new FilterPermanent();
 

@@ -101,7 +101,7 @@ public class RiotTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Silvercoat Lion", 1); // Creature {1}{W}  2/2
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
-        setChoice(playerA, "Rhythm of the Wild: Nontoken creatu"); // choose replacement effect
+        setChoice(playerA, "Rhythm of the Wild"); // choose replacement effect
         setChoice(playerA, "Yes"); // yes - counter
         setChoice(playerA, "Yes"); // yes - counter
 

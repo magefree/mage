@@ -1,14 +1,13 @@
-
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.mana.DynamicManaEffect;
+import mage.abilities.dynamicvalue.common.ArtifactYouControlCount;
 import mage.abilities.effects.common.InfoEffect;
+import mage.abilities.effects.mana.DynamicManaEffect;
+import mage.abilities.hint.common.ArtifactYouControlHint;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
@@ -16,10 +15,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class VaultOfCatlacan extends CardImpl {
@@ -40,8 +39,9 @@ public final class VaultOfCatlacan extends CardImpl {
 
         // {T}: Add {U} for each artifact you control.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD,
-                new DynamicManaEffect(Mana.BlueMana(1), new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT)),
-                new TapSourceCost()));
+                new DynamicManaEffect(Mana.BlueMana(1), ArtifactYouControlCount.instance),
+                new TapSourceCost())
+                .addHint(ArtifactYouControlHint.instance));
 
     }
 

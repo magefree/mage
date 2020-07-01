@@ -42,6 +42,7 @@ public class Connection {
 //    private UserSkipPrioritySteps userSkipPrioritySteps;
     private static final String serialization = "?serializationtype=jboss";
     private static final String transport = "bisocket";
+    private static final String threadpool = "onewayThreadPool=mage.remote.CustomThreadPool";
 
     private final String parameter;
 
@@ -78,13 +79,13 @@ public class Connection {
             try {
                 InetAddress inet = getLocalAddress();
                 if (inet != null) {
-                    return transport + "://" + inet.getHostAddress() + ':' + port + '/' + serialization + parameter;
+                    return transport + "://" + inet.getHostAddress() + ':' + port + '/' + serialization + "&" + threadpool + parameter;
                 }
             } catch (SocketException ex) {
                 // just use localhost if can't find local ip
             }
         }
-        return transport + "://" + host + ':' + port + '/' + serialization + parameter;
+        return transport + "://" + host + ':' + port + '/' + serialization + "&" + threadpool + parameter;
     }
 
     public ProxyType getProxyType() {

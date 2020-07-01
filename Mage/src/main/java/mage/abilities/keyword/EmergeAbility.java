@@ -2,7 +2,6 @@ package mage.abilities.keyword;
 
 import mage.Mana;
 import mage.abilities.SpellAbility;
-import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.mana.ManaOptions;
@@ -11,7 +10,6 @@ import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -30,7 +28,8 @@ public class EmergeAbility extends SpellAbility {
 
     public EmergeAbility(Card card, ManaCosts<ManaCost> emergeCost) {
         super(card.getSpellAbility());
-        this.newId();
+        this.emergeCost = emergeCost.copy();
+        this.newId(); // Set newId because cards spell ability is copied and needs own id
         this.setCardName(card.getName() + " with emerge");
         zone = Zone.HAND;
         spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
@@ -39,8 +38,7 @@ public class EmergeAbility extends SpellAbility {
         this.getManaCostsToPay().clear();
         this.addManaCost(emergeCost.copy());
 
-        this.setRuleAtTheTop(true);
-        this.emergeCost = emergeCost.copy();
+        this.setRuleAtTheTop(true);        
     }
 
     public EmergeAbility(final EmergeAbility ability) {
@@ -57,7 +55,7 @@ public class EmergeAbility extends SpellAbility {
                         new FilterControlledCreaturePermanent(), this.getControllerId(), this.getSourceId(), game)) {
                     ManaCost costToPay = CardUtil.reduceCost(emergeCost.copy(), creature.getConvertedManaCost());
                     if (costToPay.canPay(this, this.getSourceId(), this.getControllerId(), game)) {
-                        return ActivationStatus.getTrue();
+                        return ActivationStatus.getTrue(this, game);
                     }
                 }
             }
@@ -92,11 +90,16 @@ public class EmergeAbility extends SpellAbility {
             TargetPermanent target = new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("creature to sacrifice for emerge"));
             if (controller.choose(Outcome.Sacrifice, target, this.getSourceId(), game)) {
                 Permanent creature = game.getPermanent(target.getFirstTarget());
-                CardUtil.reduceCost(this, creature.getConvertedManaCost());
-                FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent(creature.getLogName());
-                filter.add(new CardIdPredicate(creature.getId()));
-                this.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(filter)));
-                return super.activate(game, false);
+                if (creature != null) {
+                    CardUtil.reduceCost(this, creature.getConvertedManaCost());
+                    if (super.activate(game, false)) {
+                        if (creature.sacrifice(getSourceId(), game)) {
+                            return true;
+                        } else {
+                            activated = false;
+                        }
+                    }
+                }
             }
         }
         return false;

@@ -1,23 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mage.abilities.keyword;
 
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.SpecialAction;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.ActivationManaAbilityStep;
 import mage.abilities.costs.mana.AlternateManaPaymentAbility;
 import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.hint.ValueHint;
+import mage.abilities.mana.ManaOptions;
 import mage.constants.AbilityType;
 import mage.constants.ManaType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
@@ -29,20 +27,36 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.UUID;
+
 /**
- * @author LevelX2
+ * 702.125. Improvise
+ * <p>
+ * 702.125a Improvise is a static ability that functions while the spell with improvise is on the stack. “Improvise”
+ * means “For each generic mana in this spell’s total cost, you may tap an untapped artifact you control rather
+ * than pay that mana.”
+ * <p>
+ * 702.125b The improvise ability isn’t an additional or alternative cost and applies only after the total cost of
+ * the spell with improvise is determined.
+ * <p>
+ * 702.125c Multiple instances of improvise on the same spell are redundant.
+ *
+ * @author LevelX2, JayDi85
  */
 public class ImproviseAbility extends SimpleStaticAbility implements AlternateManaPaymentAbility {
 
-    private static final FilterArtifactPermanent filterUntapped = new FilterArtifactPermanent();
+    private static final FilterControlledArtifactPermanent filterUntapped = new FilterControlledArtifactPermanent("untapped artifact you control");
 
     static {
         filterUntapped.add(Predicates.not(TappedPredicate.instance));
     }
 
+    private static final DynamicValue untappedCount = new PermanentsOnBattlefieldCount(filterUntapped);
+
     public ImproviseAbility() {
-        super(Zone.STACK, null);
+        super(Zone.ALL, null);
         this.setRuleAtTheTop(true);
+        this.addHint(new ValueHint("Untapped artifacts you control", untappedCount));
     }
 
     public ImproviseAbility(final ImproviseAbility ability) {
@@ -54,19 +68,29 @@ public class ImproviseAbility extends SimpleStaticAbility implements AlternateMa
         return new ImproviseAbility(this);
     }
 
+
+    @Override
+    public String getRule() {
+        return "Improvise <i>(Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)</i>";
+    }
+
+    @Override
+    public ActivationManaAbilityStep useOnActivationManaAbilityStep() {
+        return ActivationManaAbilityStep.AFTER;
+    }
+
     @Override
     public void addSpecialAction(Ability source, Game game, ManaCost unpaid) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && game.getBattlefield().contains(filterUntapped, controller.getId(), 1, game)) {
+        int canPayCount = untappedCount.calculate(game, source, null);
+        if (controller != null && canPayCount > 0) {
             if (source.getAbilityType() == AbilityType.SPELL && unpaid.getMana().getGeneric() > 0) {
-                SpecialAction specialAction = new ImproviseSpecialAction(unpaid);
+                SpecialAction specialAction = new ImproviseSpecialAction(unpaid, this);
                 specialAction.setControllerId(source.getControllerId());
                 specialAction.setSourceId(source.getSourceId());
                 // create filter for possible artifacts to tap
-                FilterControlledArtifactPermanent filter = new FilterControlledArtifactPermanent();
-                filter.add(Predicates.not(TappedPredicate.instance));
-                Target target = new TargetControlledPermanent(1, unpaid.getMana().getGeneric(), filter, true);
-                target.setTargetName("artifact to Improvise");
+                Target target = new TargetControlledPermanent(1, unpaid.getMana().getGeneric(), filterUntapped, true);
+                target.setTargetName("artifact to tap as Improvise's pay");
                 specialAction.addTarget(target);
                 if (specialAction.canActivate(source.getControllerId(), game).canActivate()) {
                     game.getState().getSpecialActions().add(specialAction);
@@ -76,15 +100,21 @@ public class ImproviseAbility extends SimpleStaticAbility implements AlternateMa
     }
 
     @Override
-    public String getRule() {
-        return "Improvise <i>(Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)</i>";
+    public ManaOptions getManaOptions(Ability source, Game game, ManaCost unpaid) {
+        ManaOptions options = new ManaOptions();
+        Player controller = game.getPlayer(source.getControllerId());
+        int canPayCount = untappedCount.calculate(game, source, null);
+        if (controller != null && canPayCount > 0) {
+            options.addMana(Mana.GenericMana(Math.min(unpaid.getMana().getGeneric(), canPayCount)));
+        }
+        return options;
     }
 }
 
 class ImproviseSpecialAction extends SpecialAction {
 
-    public ImproviseSpecialAction(ManaCost unpaid) {
-        super(Zone.ALL, true);
+    public ImproviseSpecialAction(ManaCost unpaid, AlternateManaPaymentAbility manaAbility) {
+        super(Zone.ALL, manaAbility);
         setRuleVisible(false);
         this.addEffect(new ImproviseEffect(unpaid));
     }
@@ -136,7 +166,9 @@ class ImproviseEffect extends OneShotEffect {
                     if (!game.isSimulation()) {
                         game.informPlayers("Improvise: " + controller.getLogName() + " taps " + perm.getLogName() + " to pay {1}");
                     }
-                    spell.setDoneActivatingManaAbilities(true);
+
+                    // can't use mana abilities after that (improvise cost must be payed after mana abilities only)
+                    spell.setCurrentActivatingManaAbilitiesStep(ActivationManaAbilityStep.AFTER);
                 }
 
             }

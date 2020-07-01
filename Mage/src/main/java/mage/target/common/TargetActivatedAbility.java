@@ -1,11 +1,6 @@
-
 package mage.target.common;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.constants.AbilityType;
 import mage.constants.Zone;
 import mage.filter.Filter;
@@ -16,8 +11,11 @@ import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 import mage.target.TargetObject;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author emerald000
  */
 public class TargetActivatedAbility extends TargetObject {
@@ -108,7 +106,6 @@ public class TargetActivatedAbility extends TargetObject {
                 sb.append(object.getRule()).append(' ');
             }
         }
-        sb.append(')');
-        return sb.toString();
+        return sb.toString().trim() + ")";
     }
 }

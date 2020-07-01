@@ -50,10 +50,11 @@ public class ManaOptions extends ArrayList<Mana> {
                 } else {
                     List<Mana> copy = copy();
                     this.clear();
-                    boolean hasTapCost = hasTapCost(abilities.get(0));
+//                    boolean hasTapCost = hasTapCost(abilities.get(0)); // needed if checkTappedForManaReplacement is reactivated
                     for (Mana netMana : netManas) {
                         for (Mana mana : copy) {
-                            if (!hasTapCost /* || checkTappedForManaReplacement(abilities.get(0), game, netMana) */) { // Seems to produce endless iterations so deactivated for now:  https://github.com/magefree/mage/issues/5023
+                            // checkTappedForManaReplacement seems in some situations to produce endless iterations so deactivated for now:  https://github.com/magefree/mage/issues/5023
+                            if (true/* !hasTapCost || checkTappedForManaReplacement(abilities.get(0), game, netMana) */) {
                                 Mana newMana = new Mana();
                                 newMana.add(mana);
                                 newMana.add(netMana);

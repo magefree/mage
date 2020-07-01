@@ -49,6 +49,7 @@ public class Legacy extends Constructed {
         banned.add("Iterative Analysis");
         banned.add("Jeweled Bird");
         banned.add("Library of Alexandria");
+        banned.add("Lurrus of the Dream-Den");
         banned.add("Mana Crypt");
         banned.add("Mana Drain");
         banned.add("Mana Vault");
@@ -94,6 +95,6 @@ public class Legacy extends Constructed {
         banned.add("Wrenn and Six");
         banned.add("Yawgmoth's Bargain");
         banned.add("Yawgmoth's Will");
-
+        banned.add("Zirda, the Dawnwaker");
     }
 }

@@ -83,7 +83,7 @@ class OutmuscleEffect extends OneShotEffect {
         if (creature == null) {
             return true;
         }
-        game.applyEffects();
+        game.getState().processAction(game);
         return creature.fight(permanent, source, game);
     }
 }

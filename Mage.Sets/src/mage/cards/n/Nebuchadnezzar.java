@@ -66,30 +66,28 @@ class NebuchadnezzarEffect extends OneShotEffect {
         Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
         MageObject sourceObject = game.getObject(source.getSourceId());
         String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
-        if (opponent != null && sourceObject != null && !cardName.isEmpty()) {
-            int costX = source.getManaCostsToPay().getX();
-            if (costX > 0 && !opponent.getHand().isEmpty()) {
-                Cards cards = new CardsImpl();
-                while (costX > 0) {
-                    Card card = opponent.getHand().getRandom(game);
-                    if (!cards.contains(card.getId())) {
-                        cards.add(card);
-                        costX--;
-                    }
-                    if (opponent.getHand().size() <= cards.size()) {
-                        break;
-                    }
-                }
-                opponent.revealCards(sourceObject.getIdName(), cards, game);
-                for (Card cardToDiscard : cards.getCards(game)) {
-                    if (cardToDiscard.getName().equals(cardName)) {
-                        opponent.discard(cardToDiscard, source, game);
-                    }
-                }
-            }
+        if (opponent == null || sourceObject == null || cardName.isEmpty()) {
+            return false;
+        }
+        int costX = source.getManaCostsToPay().getX();
+        if (costX <= 0 || opponent.getHand().isEmpty()) {
             return true;
         }
-        return false;
+        Cards cards = new CardsImpl();
+        while (costX > 0) {
+            Card card = opponent.getHand().getRandom(game);
+            if (!cards.contains(card.getId())) {
+                cards.add(card);
+                costX--;
+            }
+            if (opponent.getHand().size() <= cards.size()) {
+                break;
+            }
+        }
+        opponent.revealCards(sourceObject.getIdName(), cards, game);
+        cards.removeIf(uuid -> !cardName.equals(game.getCard(uuid).getName()));
+        opponent.discard(cards, source, game);
+        return true;
     }
 
     @Override

@@ -19,7 +19,6 @@ import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPlaneswalkerPermanent;
-import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -27,8 +26,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.token.RedElementalToken;
 import mage.game.permanent.token.Token;
-import mage.game.permanent.token.YoungPyromancerElementalToken;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
@@ -100,7 +99,7 @@ class ChandraAcolyteOfFlameEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Token token = new YoungPyromancerElementalToken();
+        Token token = new RedElementalToken();
         token.putOntoBattlefield(2, game, source.getSourceId(), source.getControllerId());
 
         token.getLastAddedTokenIds().stream().forEach(permId -> {

@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import java.util.UUID;
@@ -19,6 +18,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPermanent;
+import mage.watchers.common.LostControlWatcher;
 
 /**
  *
@@ -33,7 +33,7 @@ public final class ThrullChampion extends CardImpl {
     }
 
     public ThrullChampion(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}");
         this.subtype.add(SubType.THRULL);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
@@ -47,6 +47,7 @@ public final class ThrullChampion extends CardImpl {
                 "Gain control of target Thrull for as long as you control {this}");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, ThrullChampionGainControlEffect, new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
+        ability.addWatcher(new LostControlWatcher());
         this.addAbility(ability);
     }
 

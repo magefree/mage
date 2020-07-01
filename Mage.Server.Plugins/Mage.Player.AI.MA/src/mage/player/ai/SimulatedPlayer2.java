@@ -3,6 +3,7 @@ package mage.player.ai;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.AbilityImpl;
+import mage.abilities.ActivatedAbility;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.PassAbility;
 import mage.abilities.costs.mana.ManaCost;
@@ -94,9 +95,9 @@ public class SimulatedPlayer2 extends ComputerPlayer {
     }
 
     protected void simulateOptions(Game game) {
-        List<Ability> playables = game.getPlayer(playerId).getPlayable(game, isSimulatedPlayer);
+        List<ActivatedAbility> playables = game.getPlayer(playerId).getPlayable(game, isSimulatedPlayer);
         playables = filterAbilities(game, playables, suggested);
-        for (Ability ability : playables) {
+        for (ActivatedAbility ability : playables) {
             if (ability.getAbilityType() == AbilityType.MANA) {
                 continue;
             }
@@ -186,15 +187,15 @@ public class SimulatedPlayer2 extends ComputerPlayer {
      * @param suggested
      * @return
      */
-    protected List<Ability> filterAbilities(Game game, List<Ability> playables, List<String> suggested) {
+    protected List<ActivatedAbility> filterAbilities(Game game, List<ActivatedAbility> playables, List<String> suggested) {
         if (playables.isEmpty()) {
             return playables;
         }
         if (suggested == null || suggested.isEmpty()) {
             return playables;
         }
-        List<Ability> filtered = new ArrayList<>();
-        for (Ability ability : playables) {
+        List<ActivatedAbility> filtered = new ArrayList<>();
+        for (ActivatedAbility ability : playables) {
             Card card = game.getCard(ability.getSourceId());
             if (card != null) {
                 for (String s : suggested) {
@@ -212,7 +213,7 @@ public class SimulatedPlayer2 extends ComputerPlayer {
         return playables;
     }
 
-    protected List<Ability> filterOptions(Game game, List<Ability> options, Ability ability, List<String> suggested) {
+    protected List<Ability> filterOptions(Game game, List<Ability> options, ActivatedAbility ability, List<String> suggested) {
         if (options.isEmpty()) {
             return options;
         }

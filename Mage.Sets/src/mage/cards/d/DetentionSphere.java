@@ -85,7 +85,7 @@ class DetentionSphereEntersEffect extends OneShotEffect {
             } else {
                 String name = targetPermanent.getName();
                 for (Permanent permanent : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
-                    if (permanent != null && CardUtil.haveSameNames(permanent.getName(), name)) {
+                    if (permanent != null && CardUtil.haveSameNames(permanent, name, game)) {
                         controller.moveCardToExileWithInfo(permanent, exileId, sourceObject.getIdName(), source.getSourceId(), game, Zone.BATTLEFIELD, true);
                     }
                 }

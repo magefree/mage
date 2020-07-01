@@ -3,7 +3,7 @@ package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BlocksOrBecomesBlockedTriggeredAbility;
+import mage.abilities.common.BlocksOrBecomesBlockedSourceTriggeredAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
@@ -37,7 +37,7 @@ public final class GiftOfTheWoods extends CardImpl {
 
         // Whenever enchanted creature blocks or becomes blocked, it gets +0/+3 until
         // end of turn and you gain 1 life.
-        Ability ability2 = new BlocksOrBecomesBlockedTriggeredAbility(
+        Ability ability2 = new BlocksOrBecomesBlockedSourceTriggeredAbility(
                 new BoostEnchantedEffect(0, 3, Duration.EndOfTurn), false);
         ability2.addEffect(new GainLifeEffect(1).concatBy("and"));
         this.addAbility(ability2);

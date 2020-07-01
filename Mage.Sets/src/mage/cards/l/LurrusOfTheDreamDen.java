@@ -1,7 +1,11 @@
 package mage.cards.l;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
@@ -16,6 +20,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterPermanentCard;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -23,10 +28,6 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.Watcher;
-
-import java.util.Set;
-import java.util.UUID;
-import mage.filter.predicate.Predicates;
 
 /**
  * @author TheElk801
@@ -94,8 +95,8 @@ class LurrusOfTheDreamDenContinuousEffect extends ContinuousEffectImpl {
 
     LurrusOfTheDreamDenContinuousEffect() {
         super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
-        staticText = "During each of your turns, you may cast one permanent spell " +
-                "with converted mana cost 2 or less from your graveyard";
+        staticText = "During each of your turns, you may cast one permanent spell "
+                + "with converted mana cost 2 or less from your graveyard";
     }
 
     private LurrusOfTheDreamDenContinuousEffect(final LurrusOfTheDreamDenContinuousEffect effect) {
@@ -113,13 +114,16 @@ class LurrusOfTheDreamDenContinuousEffect extends ContinuousEffectImpl {
         if (player == null) {
             return false;
         }
-        if (!game.isActivePlayer(player.getId())) {
-            return false;
-        }
-        for (Card card : player.getGraveyard().getCards(filter, game)) {
-            ContinuousEffect effect = new LurrusOfTheDreamDenCastFromGraveyardEffect();
-            effect.setTargetPointer(new FixedTarget(card, game));
-            game.addEffect(effect, source);
+        if (game.isActivePlayer(player.getId())) {
+            LurrusOfTheDreamDenWatcher watcher = game.getState().getWatcher(LurrusOfTheDreamDenWatcher.class);
+            if (watcher != null && !watcher.isAbilityUsed(new MageObjectReference(source.getSourceId(), game))) {
+                // if not used yet, add effect per card in graveyard to cast it
+                for (Card card : player.getGraveyard().getCards(filter, game)) {
+                    ContinuousEffect effect = new LurrusOfTheDreamDenCastFromGraveyardEffect();
+                    effect.setTargetPointer(new FixedTarget(card, game));
+                    game.addEffect(effect, source);
+                }
+            }
         }
         return true;
     }
@@ -154,38 +158,40 @@ class LurrusOfTheDreamDenCastFromGraveyardEffect extends AsThoughEffectImpl {
         if (!affectedControllerId.equals(source.getControllerId())) {
             return false;
         }
-        LurrusOfTheDreamDenWatcher watcher = game.getState().getWatcher(LurrusOfTheDreamDenWatcher.class, source.getSourceId());
-        return watcher != null && !watcher.isAbilityUsed();
+        LurrusOfTheDreamDenWatcher watcher = game.getState().getWatcher(LurrusOfTheDreamDenWatcher.class);
+        return watcher != null && !watcher.isAbilityUsed(new MageObjectReference(source.getSourceId(), game));
     }
 }
 
 class LurrusOfTheDreamDenWatcher extends Watcher {
 
-    private boolean abilityUsed = false;
+    private final Set<MageObjectReference> abilityUsed = new HashSet<>();
 
     LurrusOfTheDreamDenWatcher() {
-        super(WatcherScope.CARD);
+        super(WatcherScope.GAME);
     }
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() != GameEvent.EventType.SPELL_CAST || event.getZone() != Zone.GRAVEYARD) {
+        if (event.getType() != GameEvent.EventType.SPELL_CAST
+                || event.getZone() != Zone.GRAVEYARD
+                || event.getAdditionalReference() == null) { // permitting source to cast from graveyard
             return;
         }
         Spell spell = game.getSpell(event.getTargetId());
         if (spell == null || !spell.isPermanent() || spell.getConvertedManaCost() > 2) {
             return;
         }
-        abilityUsed = true;
+        abilityUsed.add(event.getAdditionalReference());
     }
 
     @Override
     public void reset() {
         super.reset();
-        abilityUsed = false;
+        abilityUsed.clear();
     }
 
-    boolean isAbilityUsed() {
-        return abilityUsed;
+    boolean isAbilityUsed(MageObjectReference mor) {
+        return abilityUsed.contains(mor);
     }
 }

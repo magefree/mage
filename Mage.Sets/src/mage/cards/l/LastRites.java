@@ -1,29 +1,30 @@
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.TargetPlayer;
+import mage.target.common.TargetDiscard;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class LastRites extends CardImpl {
@@ -32,14 +33,13 @@ public final class LastRites extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");
 
         // Discard any number of cards. Target player reveals their hand, then 
-        //you choose a nonland card from it for each card discarded 
+        // you choose a nonland card from it for each card discarded
         // this way. That player discards those cards.
         this.getSpellAbility().addEffect(new LastRitesEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
-
     }
 
-    public LastRites(final LastRites card) {
+    private LastRites(final LastRites card) {
         super(card);
     }
 
@@ -58,7 +58,7 @@ class LastRitesEffect extends OneShotEffect {
                 + "each card discarded this way. That player discards those cards";
     }
 
-    LastRitesEffect(final LastRitesEffect effect) {
+    private LastRitesEffect(final LastRitesEffect effect) {
         super(effect);
     }
 
@@ -71,28 +71,21 @@ class LastRitesEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player targetPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
-        if (controller != null && targetPlayer != null) {
-            Cards cardsInHand = controller.getHand().copy();
-            TargetCard target = new TargetCard(0, Integer.MAX_VALUE, Zone.HAND, new FilterCard("cards to discard"));
-            controller.chooseTarget(Outcome.AIDontUseIt, cardsInHand, target, source, game);
-            int discardCount = target.getTargets().size();
-            if (discardCount > 0) {
-                for (UUID cardId : target.getTargets()) {
-                    Card card = game.getCard(cardId);
-                    if (card != null) {
-                        controller.discard(card, source, game);
-                    }
-                }
-                FilterCard filter = new FilterCard((discardCount > 1 ? "" : "a")
-                        + " nonland card" + (discardCount > 1 ? "s" : ""));
-                filter.add(Predicates.not(CardType.LAND.getPredicate()));
-                StaticValue discardValue = StaticValue.get(discardCount);
-                Effect effect = new DiscardCardYouChooseTargetEffect(discardValue, filter, TargetController.ANY);
-                effect.setTargetPointer(new FixedTarget(targetPlayer.getId()));
-                effect.apply(game, source);
-            }
-            return true;
+        if (controller == null || targetPlayer == null) {
+            return false;
         }
-        return false;
+        Cards cardsInHand = controller.getHand().copy();
+        TargetCard target = new TargetDiscard(
+                0, Integer.MAX_VALUE, StaticFilters.FILTER_CARD_CARDS, controller.getId()
+        );
+        controller.chooseTarget(Outcome.AIDontUseIt, cardsInHand, target, source, game);
+        int discardCount = controller.discard(new CardsImpl(target.getTargets()), source, game).size();
+        FilterCard filter = new FilterCard((discardCount > 1 ? "" : "a")
+                + " nonland card" + (discardCount > 1 ? "s" : ""));
+        filter.add(Predicates.not(CardType.LAND.getPredicate()));
+        Effect effect = new DiscardCardYouChooseTargetEffect(StaticValue.get(discardCount), filter, TargetController.ANY);
+        effect.setTargetPointer(new FixedTarget(targetPlayer.getId()));
+        effect.apply(game, source);
+        return true;
     }
 }

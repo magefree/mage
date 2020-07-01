@@ -99,7 +99,7 @@ class RielleTheEverwiseTriggeredAbility extends TriggeredAbilityImpl {
 
 class RielleTheEverwiseWatcher extends Watcher {
 
-    private final Map<UUID, Integer> discardedThisTurn = new HashMap();
+    private final Map<UUID, Integer> discardedThisTurn = new HashMap<>();
 
     RielleTheEverwiseWatcher() {
         super(WatcherScope.GAME);
@@ -107,8 +107,9 @@ class RielleTheEverwiseWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getAmount() > 0) {
-            discardedThisTurn.compute(event.getPlayerId(), (u, i) -> i == null ? 1 : i + 1);
+        if (event.getType() == GameEvent.EventType.DISCARDED_CARDS
+                && event.getAmount() > 0) {
+            discardedThisTurn.merge(event.getPlayerId(), 1, Integer::sum);
         }
     }
 

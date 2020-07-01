@@ -38,7 +38,7 @@ public class GainProtectionFromTypeTargetEffect extends GainAbilityTargetEffect 
     public boolean apply(Game game, Ability source) {
         Permanent creature = game.getPermanent(source.getFirstTarget());
         if (creature != null) {
-            creature.addAbility(ability, game);
+            creature.addAbility(ability, source.getSourceId(), game);
             return true;
         }
         return false;

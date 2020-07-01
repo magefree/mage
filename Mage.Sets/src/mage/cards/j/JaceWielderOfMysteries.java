@@ -90,14 +90,14 @@ class JaceWielderOfMysteriesContinuousEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.EMPTY_DRAW;
+        return event.getType() == GameEvent.EventType.DRAW_CARD;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getPlayerId().equals(source.getControllerId())) {
             Player player = game.getPlayer(event.getPlayerId());
-            if (player != null && !player.hasLost() && player.isEmptyDraw()) {
+            if (player != null && !player.hasLost() && !player.getLibrary().hasCards()) {
                 return true;
             }
         }

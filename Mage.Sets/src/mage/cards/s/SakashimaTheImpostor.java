@@ -64,7 +64,7 @@ class SakashimaTheImpostorApplier extends ApplyToPermanent {
         permanent.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnToHandSourceEffect(true)), false),
                 new ManaCostsImpl("{2}{U}{U}")
-        ), game);
+        ), source.getSourceId(), game);
         return true;
     }
 

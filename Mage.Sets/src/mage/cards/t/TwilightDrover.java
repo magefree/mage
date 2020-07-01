@@ -1,7 +1,5 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.LeavesBattlefieldAllTriggeredAbility;
@@ -20,8 +18,9 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.SpiritWhiteToken;
 
+import java.util.UUID;
+
 /**
- *
  * @author emerald000
  */
 public final class TwilightDrover extends CardImpl {
@@ -33,7 +32,7 @@ public final class TwilightDrover extends CardImpl {
     }
 
     public TwilightDrover(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(1);
@@ -43,7 +42,7 @@ public final class TwilightDrover extends CardImpl {
         this.addAbility(new LeavesBattlefieldAllTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter));
 
         // {2}{W}, Remove a +1/+1 counter from Twilight Drover: Create two 1/1 white Spirit creature tokens with flying.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SpiritWhiteToken("RAV"), 2), new ManaCostsImpl<>("{2}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SpiritWhiteToken(), 2), new ManaCostsImpl<>("{2}{W}"));
         ability.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance()));
         this.addAbility(ability);
     }

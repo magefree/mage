@@ -4,7 +4,7 @@ package mage.cards.e;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -38,7 +38,7 @@ public final class ElendaTheDuskRose extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, true));
 
         // When Elenda dies, create X 1/1 white Vampire creature tokens with lifelink, where X is Elenda's power. 
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new IxalanVampireToken(), new SourcePermanentPowerCount())));
+        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new IxalanVampireToken(), new SourcePermanentPowerCount())));
     }
 
     public ElendaTheDuskRose(final ElendaTheDuskRose card) {

@@ -5,7 +5,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.common.CantBeCounteredAbility;
+import mage.abilities.common.CantBeCounteredSourceAbility;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.keyword.ReachAbility;
@@ -30,7 +30,7 @@ public final class Skylasher extends CardImpl {
         // Flash
         this.addAbility(FlashAbility.getInstance());
         // Skylasher can't be countered.
-        this.addAbility(new CantBeCounteredAbility());
+        this.addAbility(new CantBeCounteredSourceAbility());
         // Reach, protection from blue
         this.addAbility(ReachAbility.getInstance());
         this.addAbility(ProtectionAbility.from(ObjectColor.BLUE));

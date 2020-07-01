@@ -3,7 +3,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -27,7 +27,7 @@ public final class ShivanPhoenix extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // When Shivan Phoenix dies, return Shivan Phoenix to its owner's hand.
-        this.addAbility(new DiesTriggeredAbility(new ReturnToHandSourceEffect()));
+        this.addAbility(new DiesSourceTriggeredAbility(new ReturnToHandSourceEffect()));
     }
 
     public ShivanPhoenix(final ShivanPhoenix card) {

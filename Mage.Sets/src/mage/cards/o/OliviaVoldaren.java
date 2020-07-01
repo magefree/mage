@@ -1,7 +1,6 @@
 
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -23,6 +22,8 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -55,7 +56,11 @@ public final class OliviaVoldaren extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {1}{R}: Olivia Voldaren deals 1 damage to another target creature. That creature becomes a Vampire in addition to its other types. Put a +1/+1 counter on Olivia Voldaren.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{1}{R}"));
+        Ability ability = new SimpleActivatedAbility(
+                Zone.BATTLEFIELD,
+                new DamageTargetEffect(1).setText("{this} deals 1 damage to another target creature"),
+                new ManaCostsImpl("{1}{R}")
+        );
         ability.addTarget(new TargetCreaturePermanent(filter));
         Effect effect = new AddCardSubTypeTargetEffect(SubType.VAMPIRE, Duration.WhileOnBattlefield);
         effect.setText("That creature becomes a Vampire in addition to its other types");

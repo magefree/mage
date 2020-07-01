@@ -77,10 +77,8 @@ class MythUnboundCostReductionEffect extends CostModificationEffectImpl {
         if (spellAbility != null) {
             CommanderPlaysCountWatcher watcher = game.getState().getWatcher(CommanderPlaysCountWatcher.class);
             int castCount = watcher.getPlaysCount(abilityToModify.getSourceId());
-            if (castCount > 0) {
-                CardUtil.reduceCost(spellAbility, castCount);
-                return true;
-            }
+            CardUtil.reduceCost(spellAbility, castCount);
+            return true;
         }
         return false;
     }

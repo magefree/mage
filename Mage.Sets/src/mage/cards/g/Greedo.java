@@ -3,7 +3,7 @@ package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
@@ -45,7 +45,7 @@ public final class Greedo extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter, "Creatures blocking or blocked by {this} have first strike")));
 
         // When Greedo dies, you may search your library for Hunter or Rogue card, reveal it, and put it into your hand.
-        this.addAbility(new DiesTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filterCard), true), true));
+        this.addAbility(new DiesSourceTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filterCard), true), true));
     }
 
     public Greedo(final Greedo card) {

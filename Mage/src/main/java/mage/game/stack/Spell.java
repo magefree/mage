@@ -10,6 +10,7 @@ import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.mana.ActivationManaAbilityStep;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.keyword.BestowAbility;
@@ -31,7 +32,10 @@ import mage.players.Player;
 import mage.util.GameLog;
 import mage.util.SubTypeList;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -63,7 +67,7 @@ public class Spell extends StackObjImpl implements Card {
     private boolean resolving = false;
     private UUID commandedBy = null; // for Word of Command
 
-    private boolean doneActivatingManaAbilities; // if this is true, the player is no longer allowed to pay the spell costs with activating of mana abilies
+    private ActivationManaAbilityStep currentActivatingManaAbilitiesStep = ActivationManaAbilityStep.BEFORE;
 
     public Spell(Card card, SpellAbility ability, UUID controllerId, Zone fromZone) {
         this.card = card;
@@ -119,32 +123,36 @@ public class Spell extends StackObjImpl implements Card {
         this.resolving = spell.resolving;
         this.commandedBy = spell.commandedBy;
 
-        this.doneActivatingManaAbilities = spell.doneActivatingManaAbilities;
+        this.currentActivatingManaAbilitiesStep = spell.currentActivatingManaAbilitiesStep;
         this.targetChanged = spell.targetChanged;
     }
 
     public boolean activate(Game game, boolean noMana) {
-        setDoneActivatingManaAbilities(false); // Used for e.g. improvise
-        if (!spellAbilities.get(0).activate(game, noMana)) {
+        setCurrentActivatingManaAbilitiesStep(ActivationManaAbilityStep.BEFORE); // mana payment step started, can use any mana abilities, see AlternateManaPaymentAbility
+
+        if (!ability.activate(game, noMana)) {
             return false;
         }
-        if (spellAbilities.size() > 1) {
-            // if there are more abilities (fused split spell) or first ability added new abilities (splice), activate the additional abilities
-            boolean ignoreAbility = true;
+
+        // spell can contains multiple abilities to activate (fused split, splice)
+        for (SpellAbility spellAbility : spellAbilities) {
+            if (ability.equals(spellAbility)) {
+                // activated first
+                continue;
+            }
+
             boolean payNoMana = noMana;
-            for (SpellAbility spellAbility : spellAbilities) {
-                if (ignoreAbility) {
-                    ignoreAbility = false;
-                } else {
-                    // costs for spliced abilities were added to main spellAbility, so pay no mana for spliced abilities
-                    payNoMana |= spellAbility.getSpellAbilityType() == SpellAbilityType.SPLICE;
-                    if (!spellAbility.activate(game, payNoMana)) {
-                        return false;
-                    }
-                }
+            // costs for spliced abilities were added to main spellAbility, so pay no mana for spliced abilities
+            payNoMana |= spellAbility.getSpellAbilityType() == SpellAbilityType.SPLICE;
+            // costs for fused ability pay on first spell activate, so all parts must be without mana
+            // see https://github.com/magefree/mage/issues/6603
+            payNoMana |= ability.getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED;
+
+            if (!spellAbility.activate(game, payNoMana)) {
+                return false;
             }
         }
-        setDoneActivatingManaAbilities(true); // can be activated again maybe during the resolution of the spell (e.g. Metallic Rebuke)
+        setCurrentActivatingManaAbilitiesStep(ActivationManaAbilityStep.NORMAL);
         return true;
     }
 
@@ -398,12 +406,12 @@ public class Spell extends StackObjImpl implements Card {
         }
     }
 
-    public boolean isDoneActivatingManaAbilities() {
-        return doneActivatingManaAbilities;
+    public ActivationManaAbilityStep getCurrentActivatingManaAbilitiesStep() {
+        return this.currentActivatingManaAbilitiesStep;
     }
 
-    public void setDoneActivatingManaAbilities(boolean doneActivatingManaAbilities) {
-        this.doneActivatingManaAbilities = doneActivatingManaAbilities;
+    public void setCurrentActivatingManaAbilitiesStep(ActivationManaAbilityStep currentActivatingManaAbilitiesStep) {
+        this.currentActivatingManaAbilitiesStep = currentActivatingManaAbilitiesStep;
     }
 
     @Override
@@ -463,14 +471,14 @@ public class Spell extends StackObjImpl implements Card {
     }
 
     @Override
-    public Set<CardType> getCardType() {
+    public ArrayList<CardType> getCardType() {
         if (faceDown) {
-            EnumSet<CardType> cardTypes = EnumSet.noneOf(CardType.class);
+            ArrayList<CardType> cardTypes = new ArrayList<>();
             cardTypes.add(CardType.CREATURE);
             return cardTypes;
         }
         if (this.getSpellAbility() instanceof BestowAbility) {
-            EnumSet<CardType> cardTypes = EnumSet.noneOf(CardType.class);
+            ArrayList<CardType> cardTypes = new ArrayList<>();
             cardTypes.addAll(card.getCardType());
             cardTypes.remove(CardType.CREATURE);
             return cardTypes;
@@ -524,8 +532,8 @@ public class Spell extends StackObjImpl implements Card {
     }
 
     @Override
-    public boolean hasAbility(UUID abilityId, Game game) {
-        return card.hasAbility(abilityId, game);
+    public boolean hasAbility(Ability ability, Game game) {
+        return card.hasAbility(ability, game);
     }
 
     @Override

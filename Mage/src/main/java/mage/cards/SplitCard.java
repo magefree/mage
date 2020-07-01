@@ -1,8 +1,5 @@
 package mage.cards;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
@@ -12,6 +9,11 @@ import mage.constants.CardType;
 import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.ZoneChangeEvent;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -74,6 +76,13 @@ public abstract class SplitCard extends CardImpl {
     }
 
     @Override
+    public void setZone(Zone zone, Game game) {
+        super.setZone(zone, game);
+        game.setZone(getLeftHalfCard().getId(), zone);
+        game.setZone(getRightHalfCard().getId(), zone);
+    }
+
+    @Override
     public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, List<UUID> appliedEffects) {
         if (super.moveToExile(exileId, name, sourceId, game, appliedEffects)) {
             Zone currentZone = game.getState().getZone(getId());
@@ -82,6 +91,23 @@ public abstract class SplitCard extends CardImpl {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean removeFromZone(Game game, Zone fromZone, UUID sourceId) {
+        // zone contains only one main card
+        return super.removeFromZone(game, fromZone, sourceId);
+    }
+
+    @Override
+    public void updateZoneChangeCounter(Game game, ZoneChangeEvent event) {
+        if (isCopy()) { // same as meld cards
+            super.updateZoneChangeCounter(game, event);
+            return;
+        }
+        super.updateZoneChangeCounter(game, event);
+        getLeftHalfCard().updateZoneChangeCounter(game, event);
+        getRightHalfCard().updateZoneChangeCounter(game, event);
     }
 
     @Override
@@ -99,21 +125,16 @@ public abstract class SplitCard extends CardImpl {
     }
 
     @Override
-    public void setZone(Zone zone, Game game) {
-        super.setZone(zone, game);
-        game.setZone(getLeftHalfCard().getId(), zone);
-        game.setZone(getRightHalfCard().getId(), zone);
-    }
-
-    @Override
     public Abilities<Ability> getAbilities() {
         Abilities<Ability> allAbilites = new AbilitiesImpl<>();
         for (Ability ability : super.getAbilities()) {
+            // ignore split abilities TODO: why it here, for GUI's cleanup in card texts? Maybe it can be removed
             if (ability instanceof SpellAbility
-                    && ((SpellAbility) ability).getSpellAbilityType() != SpellAbilityType.SPLIT
-                    && ((SpellAbility) ability).getSpellAbilityType() != SpellAbilityType.SPLIT_AFTERMATH) {
-                allAbilites.add(ability);
+                    && (((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.SPLIT
+                    || ((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.SPLIT_AFTERMATH)) {
+                continue;
             }
+            allAbilites.add(ability);
         }
         allAbilites.addAll(leftHalfCard.getAbilities());
         allAbilites.addAll(rightHalfCard.getAbilities());
@@ -135,11 +156,13 @@ public abstract class SplitCard extends CardImpl {
     public Abilities<Ability> getAbilities(Game game) {
         Abilities<Ability> allAbilites = new AbilitiesImpl<>();
         for (Ability ability : super.getAbilities(game)) {
+            // ignore split abilities TODO: why it here, for GUI's cleanup in card texts? Maybe it can be removed
             if (ability instanceof SpellAbility
-                    && ((SpellAbility) ability).getSpellAbilityType() != SpellAbilityType.SPLIT
-                    && ((SpellAbility) ability).getSpellAbilityType() != SpellAbilityType.SPLIT_AFTERMATH) {
-                allAbilites.add(ability);
+                    && (((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.SPLIT
+                    || ((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.SPLIT_AFTERMATH)) {
+                continue;
             }
+            allAbilites.add(ability);
         }
         allAbilites.addAll(leftHalfCard.getAbilities(game));
         allAbilites.addAll(rightHalfCard.getAbilities(game));
@@ -163,7 +186,5 @@ public abstract class SplitCard extends CardImpl {
         leftHalfCard.setOwnerId(ownerId);
         rightHalfCard.getAbilities().setControllerId(ownerId);
         rightHalfCard.setOwnerId(ownerId);
-
     }
-
 }

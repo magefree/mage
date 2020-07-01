@@ -3,7 +3,9 @@ package mage.cards.s;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.*;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
@@ -83,17 +85,14 @@ class ShatterAssumptionsEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        Cards cards = new CardsImpl(player.getHand());
-        player.revealCards(source, cards, game);
+        player.revealCards(source, player.getHand(), game);
         FilterCard f;
         if (colorless) {
             f = filter;
         } else {
             f = filter2;
         }
-        for (Card card : cards.getCards(f, source.getSourceId(), source.getControllerId(), game)) {
-            player.discard(card, source, game);
-        }
+        player.discard(new CardsImpl(player.getHand().getCards(f, game)), source, game);
         return true;
     }
 }

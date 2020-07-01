@@ -2,7 +2,7 @@ package mage.cards.g;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -25,7 +25,7 @@ public final class GrimPhysician extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Grim Physician dies, target creature an opponent controls gets -1/-1 until end of turn.
-        Ability ability = new DiesTriggeredAbility(new BoostTargetEffect(-1, -1));
+        Ability ability = new DiesSourceTriggeredAbility(new BoostTargetEffect(-1, -1));
         ability.addTarget(new TargetOpponentsCreaturePermanent());
         this.addAbility(ability);
     }

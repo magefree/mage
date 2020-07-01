@@ -5,10 +5,12 @@ import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.condition.common.NotMyTurnCondition;
 import mage.abilities.decorator.ConditionalCostModificationEffect;
 import mage.abilities.effects.common.cost.AbilitiesCostReductionControllerEffect;
-import mage.abilities.effects.common.cost.SpellsCostIncreasementAllEffect;
+import mage.abilities.effects.common.cost.SpellsCostIncreasingAllEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.constants.PhaseStep;
+import mage.constants.TargetController;
 import mage.constants.Zone;
+import mage.filter.FilterCard;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -113,7 +115,7 @@ public class ConditionalCostModificationTest extends CardTestPlayerBase {
                 new ConditionalCostModificationEffect(
                         new AbilitiesCostReductionControllerEffect(EquipAbility.class, "equip"),
                         NotMyTurnCondition.instance,
-                        new SpellsCostIncreasementAllEffect(1),
+                        new SpellsCostIncreasingAllEffect(1, new FilterCard(), TargetController.ANY),
                         ""
                 )
         ));

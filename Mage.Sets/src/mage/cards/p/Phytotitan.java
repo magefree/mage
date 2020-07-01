@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -32,7 +32,7 @@ public final class Phytotitan extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Phytotitan dies, return it to the battlefield tapped under its owner's control at the beginning of their next upkeep.
-        this.addAbility(new DiesTriggeredAbility(new PhytotitanEffect()));
+        this.addAbility(new DiesSourceTriggeredAbility(new PhytotitanEffect()));
     }
 
     public Phytotitan(final Phytotitan card) {

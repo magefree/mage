@@ -10,6 +10,8 @@ import mage.constants.AsThoughEffectType;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.stack.Spell;
+import mage.game.stack.StackObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,10 +56,24 @@ public abstract class ActivatedManaAbilityImpl extends ActivatedAbilityImpl impl
                 && null == game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.ACTIVATE_AS_INSTANT, this, controllerId, game)) {
             return ActivationStatus.getFalse();
         }
-        // check if player is in the process of playing spell costs and they are no longer allowed to use activated mana abilities (e.g. because they started to use improvise)
+
+        // check if player is in the process of playing spell costs and they are no longer allowed to use
+        // activated mana abilities (e.g. because they started to use improvise or convoke)
+        if (!game.getStack().isEmpty()) {
+            StackObject stackObject = game.getStack().getFirst();
+            if (stackObject instanceof Spell) {
+                switch (((Spell) stackObject).getCurrentActivatingManaAbilitiesStep()) {
+                    case BEFORE:
+                    case NORMAL:
+                        break;
+                    case AFTER:
+                        return ActivationStatus.getFalse();
+                }
+            }
+        }
+
         //20091005 - 605.3a
         return new ActivationStatus(costs.canPay(this, sourceId, controllerId, game), null);
-
     }
 
     /**

@@ -450,6 +450,6 @@ class TargetWithAdditionalFilter<T extends MageItem> extends TargetImpl {
                 }
             }
         }
-        return sb.toString();
+        return sb.toString().trim();
     }
 }

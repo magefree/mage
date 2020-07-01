@@ -18,7 +18,7 @@ public final class SandsteppeScavenger extends CardImpl {
 
     public SandsteppeScavenger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
-        this.subtype.add(SubType.HOUND);
+        this.subtype.add(SubType.DOG);
         this.subtype.add(SubType.SCOUT);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

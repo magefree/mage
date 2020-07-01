@@ -12,7 +12,7 @@ import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.BeastXToken;
+import mage.game.permanent.token.DinosaurBeastToken;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.Watcher;
 
@@ -50,7 +50,7 @@ public final class QuartzwoodCrasher extends CardImpl {
 
 class QuartzwoodCrasherTriggeredAbility extends TriggeredAbilityImpl {
 
-    private final Set<UUID> damagedPlayerIds = new HashSet();
+    private final Set<UUID> damagedPlayerIds = new HashSet<>();
 
     QuartzwoodCrasherTriggeredAbility() {
         super(Zone.BATTLEFIELD, new QuartzwoodCrasherEffect(), false);
@@ -78,17 +78,16 @@ class QuartzwoodCrasherTriggeredAbility extends TriggeredAbilityImpl {
             damagedPlayerIds.clear();
             return false;
         }
-        if (event.getType() != GameEvent.EventType.DAMAGED_PLAYER
-                && !((DamagedPlayerEvent) event).isCombatDamage()) {
-            return false;
-        }
-        Permanent creature = game.getPermanent(event.getSourceId());
-        if (creature != null && creature.isControlledBy(controllerId)
-                && creature.getAbilities(game).containsKey(TrampleAbility.getInstance().getId())
-                && !damagedPlayerIds.contains(event.getTargetId())) {
-            damagedPlayerIds.add(event.getTargetId());
-            this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
-            return true;
+        if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER
+                && ((DamagedPlayerEvent) event).isCombatDamage()) {
+            Permanent creature = game.getPermanent(event.getSourceId());
+            if (creature != null && creature.isControlledBy(controllerId)
+                    && creature.hasAbility(TrampleAbility.getInstance(), game)
+                    && !damagedPlayerIds.contains(event.getTargetId())) {
+                damagedPlayerIds.add(event.getTargetId());
+                this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
+                return true;
+            }
         }
         return false;
     }
@@ -119,7 +118,7 @@ class QuartzwoodCrasherEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         QuartzwoodCrasherWatcher watcher = game.getState().getWatcher(QuartzwoodCrasherWatcher.class);
-        return watcher != null && new BeastXToken(
+        return watcher != null && new DinosaurBeastToken(
                 watcher.getDamage(targetPointer.getFirst(game, source), source.getControllerId())
         ).putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
     }
@@ -127,7 +126,7 @@ class QuartzwoodCrasherEffect extends OneShotEffect {
 
 class QuartzwoodCrasherWatcher extends Watcher {
 
-    private final Map<UUID, Map<UUID, Integer>> damageMap = new HashMap();
+    private final Map<UUID, Map<UUID, Integer>> damageMap = new HashMap<>();
 
     QuartzwoodCrasherWatcher() {
         super(WatcherScope.GAME);
@@ -144,7 +143,7 @@ class QuartzwoodCrasherWatcher extends Watcher {
             return;
         }
         Permanent creature = game.getPermanent(event.getSourceId());
-        if (creature == null || !creature.getAbilities(game).containsKey(TrampleAbility.getInstance().getId())) {
+        if (creature == null || !creature.hasAbility(TrampleAbility.getInstance(), game)) {
             return;
         }
         damageMap

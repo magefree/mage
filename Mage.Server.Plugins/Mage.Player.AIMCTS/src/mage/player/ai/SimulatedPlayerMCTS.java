@@ -73,7 +73,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
     }
 
     private Ability getAction(Game game) {
-        List<Ability> playables = getPlayableAbilities(game);
+        List<ActivatedAbility> playables = getPlayableAbilities(game);
         Ability ability;
         while (true) {
             if (playables.size() == 1) {

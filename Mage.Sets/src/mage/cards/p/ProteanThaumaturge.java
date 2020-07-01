@@ -72,7 +72,7 @@ class ProteanThaumaturgeApplyToPermanent extends ApplyToPermanent {
 
     @Override
     public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
-        permanent.addAbility(ProteanThaumaturge.createAbility(), game);
+        permanent.addAbility(ProteanThaumaturge.createAbility(), source.getSourceId(), game);
         return true;
     }
 }

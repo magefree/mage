@@ -1,4 +1,3 @@
-
 package mage.cards.m;
 
 import mage.MageInt;
@@ -11,7 +10,6 @@ import mage.abilities.costs.VariableCostImpl;
 import mage.abilities.costs.common.RevealTargetFromHandCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -19,6 +17,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -41,13 +40,12 @@ public final class MartyrOfBones extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        //TODO: Make ability properly copiable
+        // TODO: Make ability properly copiable
         // {1}, Reveal X black cards from your hand, Sacrifice Martyr of Bones: Exile up to X target cards from a single graveyard.
-        Effect effect = new ExileTargetEffect(null, null, Zone.GRAVEYARD);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new GenericManaCost(1));
         ability.addCost(new RevealVariableBlackCardsFromHandCost());
         ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetCardInASingleGraveyard(0, 1, new FilterCard("cards in a single graveyard")));
+        ability.addTarget(new TargetCardInASingleGraveyard(0, 1, StaticFilters.FILTER_CARD_CARDS));
         ability.setTargetAdjuster(MartyrOfBonesAdjuster.instance);
         this.addAbility(ability);
     }
@@ -74,7 +72,7 @@ enum MartyrOfBonesAdjuster implements TargetAdjuster {
             }
         }
         ability.getTargets().clear();
-        ability.addTarget(new TargetCardInASingleGraveyard(0, amount, new FilterCard()));
+        ability.addTarget(new TargetCardInASingleGraveyard(0, amount, StaticFilters.FILTER_CARD_CARDS));
     }
 }
 

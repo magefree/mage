@@ -24,6 +24,7 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.Targets;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 import mage.util.GameLog;
 import mage.util.ThreadLocalStringBuilder;
 import mage.watchers.Watcher;
@@ -152,6 +153,9 @@ public abstract class AbilityImpl implements Ability {
         boolean result = true;
         //20100716 - 117.12
         if (checkIfClause(game)) {
+            // Ability has started resolving. Fire event.
+            // Used for abilities counting the number of resolutions like Ashling the Pilgrim.
+            game.fireEvent(new GameEvent(GameEvent.EventType.RESOLVING_ABILITY, this.getOriginalId(), this.getSourceId(), this.getControllerId()));
             if (this instanceof TriggeredAbility) {
                 for (UUID modeId : this.getModes().getSelectedModes()) {
                     this.getModes().setActiveMode(modeId);
@@ -349,8 +353,15 @@ public abstract class AbilityImpl implements Ability {
             return false;
         }
 
+        // fused spell contains 3 abilities (fused, left, right)
+        // fused cost added to fused ability, so no need cost modification for other parts
+        boolean needCostModification = true;
+        if (CardUtil.isFusedPartAbility(this, game)) {
+            needCostModification = false;
+        }
+
         //20101001 - 601.2e
-        if (sourceObject != null) {
+        if (needCostModification && sourceObject != null) {
             sourceObject.adjustCosts(this, game); // still needed
             game.getContinuousEffects().costModification(this, game);
         }
@@ -414,36 +425,28 @@ public abstract class AbilityImpl implements Ability {
             }
         }
 
-        boolean alternativeCostisUsed = false;
+        boolean alternativeCostUsed = false;
         if (sourceObject != null && !(sourceObject instanceof Permanent)) {
-            Abilities<Ability> abilities = null;
-            if (sourceObject instanceof Card) {
-                abilities = ((Card) sourceObject).getAbilities(game);
-            } else {
-                sourceObject.getAbilities();
-            }
-
-            if (abilities != null) {
-                for (Ability ability : abilities) {
-                    // if cast for noMana no Alternative costs are allowed
-                    if (canUseAlternativeCost && !noMana && ability instanceof AlternativeSourceCosts) {
-                        AlternativeSourceCosts alternativeSpellCosts = (AlternativeSourceCosts) ability;
-                        if (alternativeSpellCosts.isAvailable(this, game)) {
-                            if (alternativeSpellCosts.askToActivateAlternativeCosts(this, game)) {
-                                // only one alternative costs may be activated
-                                alternativeCostisUsed = true;
-                                break;
-                            }
+            Abilities<Ability> abilities = CardUtil.getAbilities(sourceObject, game);
+            for (Ability ability : abilities) {
+                // if cast for noMana no Alternative costs are allowed
+                if (canUseAlternativeCost && !noMana && ability instanceof AlternativeSourceCosts) {
+                    AlternativeSourceCosts alternativeSpellCosts = (AlternativeSourceCosts) ability;
+                    if (alternativeSpellCosts.isAvailable(this, game)) {
+                        if (alternativeSpellCosts.askToActivateAlternativeCosts(this, game)) {
+                            // only one alternative costs may be activated
+                            alternativeCostUsed = true;
+                            break;
                         }
                     }
-                    if (canUseAdditionalCost && ability instanceof OptionalAdditionalSourceCosts) {
-                        ((OptionalAdditionalSourceCosts) ability).addOptionalAdditionalCosts(this, game);
-                    }
+                }
+                if (canUseAdditionalCost && ability instanceof OptionalAdditionalSourceCosts) {
+                    ((OptionalAdditionalSourceCosts) ability).addOptionalAdditionalCosts(this, game);
                 }
             }
 
             // controller specific alternate spell costs
-            if (canUseAlternativeCost && !noMana && !alternativeCostisUsed) {
+            if (canUseAlternativeCost && !noMana && !alternativeCostUsed) {
                 if (this.getAbilityType() == AbilityType.SPELL
                         // 117.9a Only one alternative cost can be applied to any one spell as it's being cast.
                         // So an alternate spell ability can't be paid with Omniscience
@@ -452,7 +455,7 @@ public abstract class AbilityImpl implements Ability {
                         if (alternativeSourceCosts.isAvailable(this, game)) {
                             if (alternativeSourceCosts.askToActivateAlternativeCosts(this, game)) {
                                 // only one alternative costs may be activated
-                                alternativeCostisUsed = true;
+                                alternativeCostUsed = true;
                                 break;
                             }
                         }
@@ -461,7 +464,7 @@ public abstract class AbilityImpl implements Ability {
             }
         }
 
-        return alternativeCostisUsed;
+        return alternativeCostUsed;
     }
 
     /**
@@ -766,7 +769,7 @@ public abstract class AbilityImpl implements Ability {
             if (ruleStart.length() > 1) {
                 String end = ruleStart.substring(ruleStart.length() - 2).trim();
                 if (end.isEmpty() || end.equals(":") || end.equals(".")) {
-                    rule = ruleStart + Character.toUpperCase(text.charAt(0)) + text.substring(1);
+                    rule = ruleStart + CardUtil.getTextWithFirstCharUpperCase(text);
                 } else {
                     rule = ruleStart + text;
                 }
@@ -935,6 +938,10 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public boolean hasSourceObjectAbility(Game game, MageObject source, GameEvent event) {
+        // if source object have this ability
+        // uses for ability.isInUseableZone
+        // replacement and other continues effects can be without source, but active (must return true)
+
         MageObject object = source;
         // for singleton abilities like Flying we can't rely on abilities' source because it's only once in continuous effects
         // so will use the sourceId of the object itself that came as a parameter if it is not null
@@ -946,16 +953,10 @@ public abstract class AbilityImpl implements Ability {
         }
         if (object != null) {
             if (object instanceof Permanent) {
-                if (!((Permanent) object).getAbilities(game).contains(this)) {
-                    return false;
-                }
-                return ((Permanent) object).isPhasedIn();
-            } else if (object instanceof Card) {
-                return ((Card) object).getAbilities(game).contains(this);
-            } else if (!object.getAbilities().contains(this)) { // not sure which object it can still be
-                // check if it's an ability that is temporary gained to a card
-                Abilities<Ability> otherAbilities = game.getState().getAllOtherAbilities(this.getSourceId());
-                return otherAbilities != null && otherAbilities.contains(this);
+                return object.hasAbility(this, game) && ((Permanent) object).isPhasedIn();
+            } else {
+                // cards and other objects
+                return object.hasAbility(this, game);
             }
         }
         return true;
@@ -1115,6 +1116,7 @@ public abstract class AbilityImpl implements Ability {
             String usedVerb = null;
             for (Target target : targets) {
                 if (!target.getTargets().isEmpty()) {
+                    String targetHintInfo = target.getChooseHint() == null ? "" : " (" + target.getChooseHint() + ")";
                     if (!target.isNotTarget()) {
                         if (usedVerb == null || usedVerb.equals(" choosing ")) {
                             usedVerb = " targeting ";
@@ -1125,6 +1127,7 @@ public abstract class AbilityImpl implements Ability {
                         sb.append(usedVerb);
                     }
                     sb.append(target.getTargetedName(game));
+                    sb.append(targetHintInfo);
                 }
             }
         }
@@ -1260,5 +1263,18 @@ public abstract class AbilityImpl implements Ability {
     @Override
     public Outcome getCustomOutcome() {
         return this.customOutcome;
+    }
+
+    @Override
+    public boolean isSameInstance(Ability ability) {
+        // same instance (by mtg rules) = same object, ID or class+text (you can't check class only cause it can be different by params/text)
+        if (ability == null) {
+            return false;
+        }
+
+        return (this == ability)
+                || (this.getId().equals(ability.getId()))
+                || (this.getOriginalId().equals(ability.getOriginalId()))
+                || (this.getClass() == ability.getClass() && this.getRule(true).equals(ability.getRule(true)));
     }
 }

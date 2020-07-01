@@ -66,7 +66,7 @@ class MartyrdomGainAbilityTargetEffect extends ContinuousEffectImpl {
         if (permanent != null) {
             ActivatedAbilityImpl ability = new MartyrdomActivatedAbility(source.getControllerId());
             ability.setMayActivate(TargetController.ANY);
-            permanent.addAbility(ability, source.getSourceId(), game, false);
+            permanent.addAbility(ability, source.getSourceId(), game);
             return true;
         }
         return false;

@@ -2,7 +2,7 @@ package mage.cards.r;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -31,7 +31,7 @@ public final class RuinationRioter extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Ruination Rioter dies, you may have it deal damage to any target equal to the number of land cards in your graveyard.
-        Ability ability = new DiesTriggeredAbility(
+        Ability ability = new DiesSourceTriggeredAbility(
                 new DamageTargetEffect(xValue).setText("you may have it deal damage to any target " +
                         "equal to the number of land cards in your graveyard."), true
         );

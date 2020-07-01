@@ -40,6 +40,7 @@ public class MythosOfSnapdax extends CardImpl {
         super(card);
     }
 
+    @Override
     public MythosOfSnapdax copy() {
         return new MythosOfSnapdax(this);
     }
@@ -113,10 +114,8 @@ class MythosOfSnapdaxEffect extends OneShotEffect {
             }
         }
 
-        for (Iterator<Permanent> iterator = game.getBattlefield().getActivePermanents(
-                StaticFilters.FILTER_PERMANENT_NON_LAND, source.getControllerId(), game
-        ).iterator(); iterator.hasNext(); ) {
-            Permanent permanent = iterator.next();
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(
+                StaticFilters.FILTER_PERMANENT_NON_LAND, source.getControllerId(), game)) {
             if (permanent == null || toKeep.contains(permanent.getId())) {
                 continue;
             }

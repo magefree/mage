@@ -20,6 +20,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.PreventDamageEvent;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -132,11 +133,12 @@ class GideonsInterventionPreventAllDamageEffect extends PreventionEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         MageObject object = game.getObject(event.getSourceId());
         Permanent targetPerm = game.getPermanent(event.getTargetId());
+        String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
 
         if (object != null && (event.getType() == GameEvent.EventType.DAMAGE_PLAYER
                 || targetPerm != null && (event.getType() == GameEvent.EventType.DAMAGE_CREATURE
                 || event.getType() == GameEvent.EventType.DAMAGE_PLANESWALKER))) {
-            if (object.getName().equals(game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY))
+            if (CardUtil.haveSameNames(object, cardName, game)
                     && (event.getTargetId().equals(source.getControllerId())
                     || targetPerm != null && targetPerm.isControlledBy(source.getControllerId()))) {
                 return super.applies(event, source, game);

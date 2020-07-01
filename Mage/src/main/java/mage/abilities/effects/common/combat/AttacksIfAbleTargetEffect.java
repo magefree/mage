@@ -48,9 +48,9 @@ public class AttacksIfAbleTargetEffect extends RequirementEffect {
             return staticText;
         }
         if (this.duration == Duration.EndOfTurn) {
-            return "Target " + mode.getTargets().get(0).getTargetName() + " attacks this turn if able";
+            return "target " + mode.getTargets().get(0).getTargetName() + " attacks this turn if able";
         } else {
-            return "Target " + mode.getTargets().get(0).getTargetName() + " attacks each turn if able";
+            return "target " + mode.getTargets().get(0).getTargetName() + " attacks each turn if able";
         }
     }
 

@@ -3,7 +3,7 @@
 package mage.abilities.keyword;
 
 import mage.constants.ComparisonType;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
@@ -27,7 +27,7 @@ import java.util.UUID;
  *
  * @author Loki, LevelX2
  */
-public class SoulshiftAbility extends DiesTriggeredAbility {
+public class SoulshiftAbility extends DiesSourceTriggeredAbility {
     
     private final DynamicValue amount;
 
@@ -57,7 +57,7 @@ public class SoulshiftAbility extends DiesTriggeredAbility {
     }
 
     @Override
-    public DiesTriggeredAbility copy() {
+    public DiesSourceTriggeredAbility copy() {
         return new SoulshiftAbility(this);
     }
 

@@ -1,24 +1,23 @@
-
 package mage.cards.p;
 
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class Persecute extends CardImpl {
@@ -29,7 +28,6 @@ public final class Persecute extends CardImpl {
         // Choose a color. Target player reveals their hand and discards all cards of that color.
         this.getSpellAbility().addEffect(new PersecuteEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
-
     }
 
     public Persecute(final Persecute card) {
@@ -44,12 +42,12 @@ public final class Persecute extends CardImpl {
 
 class PersecuteEffect extends OneShotEffect {
 
-    public PersecuteEffect() {
+    PersecuteEffect() {
         super(Outcome.Discard);
         this.staticText = "Choose a color. Target player reveals their hand and discards all cards of that color";
     }
 
-    public PersecuteEffect(final PersecuteEffect effect) {
+    private PersecuteEffect(final PersecuteEffect effect) {
         super(effect);
     }
 
@@ -64,17 +62,16 @@ class PersecuteEffect extends OneShotEffect {
         MageObject sourceObject = game.getObject(source.getSourceId());
         Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         ChoiceColor choice = new ChoiceColor();
-        if (controller != null && sourceObject != null && targetPlayer != null && controller.choose(outcome, choice, game)) {
-            Cards hand = targetPlayer.getHand();
-            targetPlayer.revealCards(sourceObject.getIdName(), hand, game);
-            Set<Card> cards = hand.getCards(game);
-            for (Card card : cards) {
-                if (card != null && card.getColor(game).shares(choice.getColor())) {
-                    targetPlayer.discard(card, source, game);
-                }
-            }
-            return true;
+        if (controller == null
+                || sourceObject == null
+                || targetPlayer == null
+                || !controller.choose(outcome, choice, game)) {
+            return false;
         }
-        return false;
+        FilterCard filterCard = new FilterCard();
+        filterCard.add(new ColorPredicate(choice.getColor()));
+        targetPlayer.revealCards(source, targetPlayer.getHand(), game);
+        targetPlayer.discard(new CardsImpl(targetPlayer.getHand().getCards(filterCard, game)), source, game);
+        return true;
     }
 }

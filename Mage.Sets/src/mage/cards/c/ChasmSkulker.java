@@ -4,7 +4,7 @@ package mage.cards.c;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.DrawCardControllerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -39,7 +39,7 @@ public final class ChasmSkulker extends CardImpl {
         this.addAbility(new DrawCardControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
 
         // When Chasm Skulker dies, create X 1/1 blue Squid creature tokens with islandwalk, where X is the number of +1/+1 counters on Chasm Skulker.
-        this.addAbility(new DiesTriggeredAbility(new ChasmSkulkerEffect(), false));
+        this.addAbility(new DiesSourceTriggeredAbility(new ChasmSkulkerEffect(), false));
     }
 
     public ChasmSkulker(final ChasmSkulker card) {

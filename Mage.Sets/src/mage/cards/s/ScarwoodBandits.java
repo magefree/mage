@@ -26,6 +26,7 @@ import mage.target.common.TargetArtifactPermanent;
 import mage.util.CardUtil;
 
 import java.util.UUID;
+import mage.abilities.condition.common.SourceRemainsInZoneCondition;
 
 /**
  * @author L_J
@@ -47,7 +48,7 @@ public final class ScarwoodBandits extends CardImpl {
                 new DoUnlessAnyOpponentPaysEffect(
                         new ConditionalContinuousEffect(
                                 new GainControlTargetEffect(Duration.Custom, true),
-                                SourceOnBattlefieldCondition.instance,
+                                new SourceRemainsInZoneCondition(Zone.BATTLEFIELD),
                                 "gain control of target artifact for as long as {this} remains on the battlefield"),
                         new GenericManaCost(2)),
                 new ManaCostsImpl("{2}{G}"));

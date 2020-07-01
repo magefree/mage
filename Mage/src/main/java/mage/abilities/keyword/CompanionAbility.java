@@ -1,8 +1,10 @@
 package mage.abilities.keyword;
 
-import mage.abilities.StaticAbility;
+import mage.abilities.SpecialAction;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.keyword.CompanionEffect;
 import mage.cards.Card;
+import mage.constants.TimingRule;
 import mage.constants.Zone;
 
 import java.util.Set;
@@ -10,18 +12,21 @@ import java.util.Set;
 /*
  * @author emerald000
  */
-public class CompanionAbility extends StaticAbility {
+public class CompanionAbility extends SpecialAction {
 
-    private final CompanionCondition condition;
+    private final CompanionCondition companionCondition;
 
-    public CompanionAbility(CompanionCondition condition) {
-        super(Zone.OUTSIDE, new CompanionEffect());
-        this.condition = condition;
+    public CompanionAbility(CompanionCondition companionCondition) {
+        super(Zone.OUTSIDE);
+        this.companionCondition = companionCondition;
+        this.addCost(new GenericManaCost(3));
+        this.addEffect(new CompanionEffect());
+        this.setTiming(TimingRule.SORCERY);
     }
 
     private CompanionAbility(final CompanionAbility ability) {
         super(ability);
-        this.condition = ability.condition;
+        this.companionCondition = ability.companionCondition;
     }
 
     @Override
@@ -31,11 +36,11 @@ public class CompanionAbility extends StaticAbility {
 
     @Override
     public String getRule() {
-        return "Companion &mdash; " + condition.getRule();
+        return "Companion &mdash; " + companionCondition.getRule();
     }
 
     public boolean isLegal(Set<Card> cards, int startingSize) {
-        return condition.isLegal(cards, startingSize);
+        return companionCondition.isLegal(cards, startingSize);
     }
 }
 

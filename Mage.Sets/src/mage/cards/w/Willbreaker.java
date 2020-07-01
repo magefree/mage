@@ -1,4 +1,3 @@
-
 package mage.cards.w;
 
 import java.util.UUID;
@@ -11,8 +10,8 @@ import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -20,6 +19,7 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+import mage.watchers.common.LostControlWatcher;
 
 /**
  *
@@ -28,7 +28,7 @@ import mage.target.targetpointer.FixedTarget;
 public final class Willbreaker extends CardImpl {
 
     public Willbreaker(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(2);
@@ -37,7 +37,7 @@ public final class Willbreaker extends CardImpl {
         // Whenever a creature an opponent controls becomes the target of a spell or ability you control, gain control of that creature for as long as you control Willbreaker.
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new GainControlTargetEffect(Duration.Custom), new SourceOnBattlefieldControlUnchangedCondition(), null);
         effect.setText("gain control of that creature for as long as you control {this}");
-        this.addAbility(new WillbreakerTriggeredAbility(effect));
+        this.addAbility(new WillbreakerTriggeredAbility(effect), new LostControlWatcher());
     }
 
     public Willbreaker(final Willbreaker card) {

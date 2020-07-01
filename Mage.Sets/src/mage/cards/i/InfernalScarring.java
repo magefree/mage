@@ -3,7 +3,7 @@ package mage.cards.i;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
@@ -43,7 +43,7 @@ public final class InfernalScarring extends CardImpl {
         Effect effect = new BoostEnchantedEffect(2, 0, Duration.WhileOnBattlefield);
         effect.setText("Enchanted creature gets +2/+0");
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
-        effect = new GainAbilityAttachedEffect(new DiesTriggeredAbility(new DrawCardSourceControllerEffect(1)), AttachmentType.AURA, Duration.WhileOnBattlefield);
+        effect = new GainAbilityAttachedEffect(new DiesSourceTriggeredAbility(new DrawCardSourceControllerEffect(1)), AttachmentType.AURA, Duration.WhileOnBattlefield);
         effect.setText("and has \"When this creature dies, draw a card.\"");
         ability.addEffect(effect);
         this.addAbility(ability);

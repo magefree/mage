@@ -1,8 +1,5 @@
 package mage.abilities.effects.common;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -20,13 +17,16 @@ import mage.target.targetpointer.FirstTargetPointer;
 import mage.target.targetpointer.SecondTargetPointer;
 import mage.util.CardUtil;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class ExileTargetEffect extends OneShotEffect {
 
-    private Zone onlyFromZone;
+    private final Zone onlyFromZone;
     private String exileZone = null;
     private UUID exileId = null;
     protected boolean multitargetHandling;
@@ -42,6 +42,10 @@ public class ExileTargetEffect extends OneShotEffect {
         this.multitargetHandling = multitargetHandling;
     }
 
+    /**
+     * Exile cards to normal exile window (but it can exile to source's exile
+     * window after toSourceExileZone change)
+     */
     public ExileTargetEffect() {
         this(null, "");
     }
@@ -88,21 +92,27 @@ public class ExileTargetEffect extends OneShotEffect {
             Set<Card> toExile = new LinkedHashSet<>();
             if (multitargetHandling
                     && targetPointer instanceof FirstTargetPointer
-                    && (source.getTargets().size() > 1 || (source.getTargets().size() > 0 && source.getTargets().get(0).getTargets().size() > 1))) {
+                    && (source.getTargets().size() > 1
+                    || (source.getTargets().size() > 0
+                    && source.getTargets().get(0).getTargets().size() > 1))) {
                 for (Target target : source.getTargets()) {
                     for (UUID targetId : target.getTargets()) {
                         Permanent permanent = game.getPermanent(targetId);
                         if (permanent != null
                                 && permanent.isPhasedIn()) {
                             Zone currentZone = game.getState().getZone(permanent.getId());
-                            if (currentZone != Zone.EXILED && (onlyFromZone == null || onlyFromZone == Zone.BATTLEFIELD)) {
+                            if (currentZone != Zone.EXILED
+                                    && (onlyFromZone == null
+                                    || onlyFromZone == Zone.BATTLEFIELD)) {
                                 toExile.add(permanent);
                             }
                         } else {
                             Card card = game.getCard(targetId);
                             if (card != null) {
                                 Zone currentZone = game.getState().getZone(card.getId());
-                                if (currentZone != Zone.EXILED && (onlyFromZone == null || onlyFromZone == currentZone)) {
+                                if (currentZone != Zone.EXILED
+                                        && (onlyFromZone == null
+                                        || onlyFromZone == currentZone)) {
                                     toExile.add(card);
                                 }
                             } else {
@@ -120,14 +130,18 @@ public class ExileTargetEffect extends OneShotEffect {
                     if (permanent != null
                             && permanent.isPhasedIn()) {
                         Zone currentZone = game.getState().getZone(permanent.getId());
-                        if (currentZone != Zone.EXILED && (onlyFromZone == null || onlyFromZone == Zone.BATTLEFIELD)) {
+                        if (currentZone != Zone.EXILED
+                                && (onlyFromZone == null
+                                || onlyFromZone == Zone.BATTLEFIELD)) {
                             toExile.add(permanent);
                         }
                     } else {
                         Card card = game.getCard(targetId);
                         if (card != null) {
                             Zone currentZone = game.getState().getZone(card.getId());
-                            if (currentZone != Zone.EXILED && (onlyFromZone == null || onlyFromZone == currentZone)) {
+                            if (currentZone != Zone.EXILED
+                                    && (onlyFromZone == null
+                                    || onlyFromZone == currentZone)) {
                                 toExile.add(card);
                             }
                         } else {

@@ -29,7 +29,6 @@ public final class Tyrannize extends CardImpl {
         // Target player discards their hand unless they pay 7 life.
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new TyrannizeEffect());
-        
     }
 
     public Tyrannize(final Tyrannize card) {
@@ -66,9 +65,7 @@ class TyrannizeEffect extends OneShotEffect {
             if (!cost.canPay(source, source.getSourceId(), player.getId(), game)
                     || !player.chooseUse(Outcome.LoseLife, "Pay 7 life?", source, game)
                     || !cost.pay(source, game, source.getSourceId(), player.getId(), false, null)) {
-                for (Card card : player.getHand().getCards(game)) {
-                    player.discard(card, source, game);
-                }
+                player.discard(player.getHand(),source,game);
             }
             return true;
         }

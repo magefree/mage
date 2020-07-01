@@ -3,7 +3,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BlocksOrBecomesBlockedTriggeredAbility;
+import mage.abilities.common.BlocksOrBecomesBlockedSourceTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.WitherAbility;
 import mage.cards.CardImpl;
@@ -28,7 +28,7 @@ public final class SlinkingGiant extends CardImpl {
 
         this.addAbility(WitherAbility.getInstance());
         // Whenever Slinking Giant blocks or becomes blocked, it gets -3/-0 until end of turn.
-        this.addAbility(new BlocksOrBecomesBlockedTriggeredAbility(new BoostSourceEffect(-3, 0, Duration.EndOfTurn), false));
+        this.addAbility(new BlocksOrBecomesBlockedSourceTriggeredAbility(new BoostSourceEffect(-3, 0, Duration.EndOfTurn), false));
     }
 
     public SlinkingGiant(final SlinkingGiant card) {

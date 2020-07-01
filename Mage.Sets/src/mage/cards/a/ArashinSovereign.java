@@ -4,7 +4,7 @@ package mage.cards.a;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
@@ -33,7 +33,7 @@ public final class ArashinSovereign extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // When Arashin Sovereign dies, you may put it on the top or bottom of its owner's library.
-        this.addAbility(new DiesTriggeredAbility(new ArashinSovereignEffect(), true));
+        this.addAbility(new DiesSourceTriggeredAbility(new ArashinSovereignEffect(), true));
     }
 
     public ArashinSovereign(final ArashinSovereign card) {

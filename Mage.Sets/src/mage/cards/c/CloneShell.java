@@ -2,7 +2,7 @@ package mage.cards.c;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
@@ -36,7 +36,7 @@ public final class CloneShell extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CloneShellEffect(), false));
 
         // When Clone Shell dies, turn the exiled card face up. If it's a creature card, put it onto the battlefield under your control.
-        this.addAbility(new DiesTriggeredAbility(new CloneShellDiesEffect()));
+        this.addAbility(new DiesSourceTriggeredAbility(new CloneShellDiesEffect()));
     }
 
     public CloneShell(final CloneShell card) {

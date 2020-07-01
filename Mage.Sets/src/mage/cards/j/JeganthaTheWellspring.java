@@ -67,7 +67,7 @@ enum JeganthaTheWellspringCompanionCondition implements CompanionCondition {
         return deck.stream().noneMatch(JeganthaTheWellspringCompanionCondition::checkCard);
     }
 
-    private static final boolean checkCard(Card card) {
+    private static boolean checkCard(Card card) {
         Map<String, Integer> symbolMap = new HashMap();
         return card.getManaCost()
                 .getSymbols()

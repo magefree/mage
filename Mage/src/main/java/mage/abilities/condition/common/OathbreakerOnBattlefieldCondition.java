@@ -22,9 +22,9 @@ import java.util.UUID;
  */
 public class OathbreakerOnBattlefieldCondition implements Condition {
 
-    private UUID playerId;
-    private FilterControlledPermanent filter;
-    private String compatibleNames;
+    private final UUID playerId;
+    private final FilterControlledPermanent filter;
+    private final String compatibleNames;
 
     public OathbreakerOnBattlefieldCondition(Game game, UUID playerId, UUID signatureSpellId, Set<UUID> oathbreakersToSearch) {
         this.playerId = playerId;
@@ -35,17 +35,17 @@ public class OathbreakerOnBattlefieldCondition implements Condition {
 
         // spell can be casted by any compatible oathbreakers
         List<PermanentIdPredicate> compatibleList = new ArrayList<>();
-        List<String> compatibleNames = new ArrayList<>();
+        List<String> compatibleNamesList = new ArrayList<>();
         if (oathbreakersToSearch != null && !oathbreakersToSearch.isEmpty()) {
             for (UUID id : oathbreakersToSearch) {
                 Card commander = game.getCard(id);
                 if (commander != null && ManaUtil.isColorIdentityCompatible(commander.getColorIdentity(), spellColors)) {
                     compatibleList.add(new PermanentIdPredicate(id));
-                    compatibleNames.add(commander.getName());
+                    compatibleNamesList.add(commander.getName());
                 }
             }
         }
-        this.compatibleNames = String.join("; ", compatibleNames);
+        this.compatibleNames = String.join("; ", compatibleNamesList);
 
         if (compatibleList.isEmpty()) {
             // random id to disable condition

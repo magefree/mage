@@ -74,7 +74,7 @@ class VexingArcanixEffect extends OneShotEffect {
             if (card != null) {
                 Cards cards = new CardsImpl(card);
                 player.revealCards(sourceObject.getIdName(), cards, game);
-                if (CardUtil.haveSameNames(card.getName(), cardName)) {
+                if (CardUtil.haveSameNames(card, cardName, game)) {
                     player.moveCards(cards, Zone.HAND, source, game);
                 } else {
                     player.moveCards(cards, Zone.GRAVEYARD, source, game);

@@ -120,7 +120,7 @@ class VesuvanShapeshifterEffect extends OneShotEffect {
                 if (copyFromCreature != null) {
                     game.copyPermanent(Duration.Custom, copyFromCreature, copyToCreature.getId(), source, new VesuvanShapeShifterFaceUpApplier());
                     source.getTargets().clear();
-                    game.applyEffects(); // needed to get effects ready if copy happens in replacment and the copied abilities react of the same event (e.g. turn face up)
+                    game.getState().processAction(game); // needed to get effects ready if copy happens in replacment and the copied abilities react of the same event (e.g. turn face up)
                     return true;
                 }
             }

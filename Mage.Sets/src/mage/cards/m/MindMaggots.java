@@ -1,25 +1,26 @@
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.cards.Card;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCardInHand;
+import mage.target.TargetCard;
+import mage.target.common.TargetDiscard;
+
+import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
  */
 public final class MindMaggots extends CardImpl {
@@ -34,10 +35,9 @@ public final class MindMaggots extends CardImpl {
         // When Mind Maggots enters the battlefield, discard any number of creature cards.
         // For each card discarded this way, put two +1/+1 counters on Mind Maggots.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new MindMaggotsEffect()));
-
     }
 
-    public MindMaggots(final MindMaggots card) {
+    private MindMaggots(final MindMaggots card) {
         super(card);
     }
 
@@ -51,10 +51,11 @@ class MindMaggotsEffect extends OneShotEffect {
 
     MindMaggotsEffect() {
         super(Outcome.BoostCreature);
-        this.staticText = "discard any number of creature cards. For each card discarded this way, put two +1/+1 counters on {this}";
+        this.staticText = "discard any number of creature cards. " +
+                "For each card discarded this way, put two +1/+1 counters on {this}";
     }
 
-    MindMaggotsEffect(final MindMaggotsEffect effect) {
+    private MindMaggotsEffect(final MindMaggotsEffect effect) {
         super(effect);
     }
 
@@ -66,23 +67,17 @@ class MindMaggotsEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            int numToDiscard = controller.getAmount(0,
-                    controller.getHand().getCards(StaticFilters.FILTER_CARD_CREATURE, game).size(),
-                    "Discard how many creature cards?",
-                    game);
-            TargetCardInHand target = new TargetCardInHand(numToDiscard, StaticFilters.FILTER_CARD_CREATURE);
-            if (controller.choose(Outcome.Benefit, target, source.getSourceId(), game)) {
-                for (UUID targetId : target.getTargets()) {
-                    Card card = game.getCard(targetId);
-                    if (card != null
-                            && controller.discard(card, source, game)) {
-                        new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)).apply(game, source);
-                    }
-                }
-            }
+        if (controller == null) {
+            return false;
+        }
+        TargetCard target = new TargetDiscard(0, Integer.MAX_VALUE, StaticFilters.FILTER_CARD_CREATURE, controller.getId());
+        controller.choose(outcome, controller.getHand(), target, game);
+        int counters = controller.discard(new CardsImpl(target.getTargets()), source, game).size();
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent == null || counters < 1) {
             return true;
         }
-        return false;
+        permanent.addCounters(CounterType.P1P1.createInstance(counters), source, game);
+        return true;
     }
 }

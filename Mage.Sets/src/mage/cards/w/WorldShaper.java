@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
 import mage.cards.CardImpl;
@@ -36,7 +36,7 @@ public final class WorldShaper extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new PutTopCardOfLibraryIntoGraveControllerEffect(3), true));
 
         // When World Shaper dies, put all land cards from your graveyard onto the battlefield tapped.
-        this.addAbility(new DiesTriggeredAbility(new WorldShaperEffect(), false));
+        this.addAbility(new DiesSourceTriggeredAbility(new WorldShaperEffect(), false));
     }
 
     public WorldShaper(final WorldShaper card) {

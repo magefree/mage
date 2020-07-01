@@ -3,7 +3,7 @@ package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -25,7 +25,7 @@ public final class TatteredMummy extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Tattered Mummy dies, each opponent loses 2 life.
-        this.addAbility(new DiesTriggeredAbility(new LoseLifeOpponentsEffect(2)));
+        this.addAbility(new DiesSourceTriggeredAbility(new LoseLifeOpponentsEffect(2)));
     }
 
     public TatteredMummy(final TatteredMummy card) {

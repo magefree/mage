@@ -1,5 +1,9 @@
 package mage.abilities.effects;
 
+import java.util.EnumSet;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.constants.DependencyType;
@@ -8,11 +12,6 @@ import mage.constants.Layer;
 import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.target.targetpointer.TargetPointer;
-
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -66,8 +65,6 @@ public interface ContinuousEffect extends Effect {
     void setStartingControllerAndTurnNum(Game game, UUID startingController, UUID activePlayerId);
 
     UUID getStartingController();
-
-    void incYourTurnNumPlayed();
 
     boolean isYourNextTurn(Game game);
 

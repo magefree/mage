@@ -22,8 +22,12 @@ public final class DeadlyRecluse extends CardImpl {
 
         this.subtype.add(SubType.SPIDER);
         this.power = new MageInt(1);
-    this.toughness = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        // Reach (This creature can block creatures with flying.)
         this.addAbility(ReachAbility.getInstance());
+
+        // Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)
         this.addAbility(DeathtouchAbility.getInstance());
     }
 

@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
@@ -10,12 +9,15 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -52,14 +54,30 @@ public final class DreamLeash extends CardImpl {
 
 class DreamLeashTarget extends TargetPermanent {
 
+    DreamLeashTarget() {}
+
+    private DreamLeashTarget(DreamLeashTarget target) {
+        super(target);
+    }
+
+    @Override
+    public DreamLeashTarget copy() {
+        return new DreamLeashTarget(this);
+    }
+
     @Override
     public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
-
-        if(super.canTarget(controllerId, id, source, game)){
+        if (super.canTarget(controllerId, id, source, game)) {
             Permanent permanent = game.getPermanent(id);
             return permanent.isTapped();
         }
         return false;
     }
 
+    // See ruling: https://www.mtgsalvation.com/forums/magic-fundamentals/magic-rulings/magic-rulings-archives/253345-dream-leash
+    @Override
+    public boolean stillLegalTarget(UUID id, Ability source, Game game) {
+        Permanent permanent = game.getPermanent(id);
+        return permanent != null && StaticFilters.FILTER_PERMANENT.match(permanent, game);
+    }
 }

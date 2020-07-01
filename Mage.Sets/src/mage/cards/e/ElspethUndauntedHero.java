@@ -28,7 +28,7 @@ import java.util.UUID;
  */
 public final class ElspethUndauntedHero extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Sunlit Hoplite");
+    private static final FilterCard filter = new FilterCard("card named Sunlit Hoplite");
 
     static {
         filter.add(new NamePredicate("Sunlit Hoplite"));

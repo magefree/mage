@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import mage.MageInt;
@@ -37,6 +36,7 @@ public final class TasigurTheGoldenFang extends CardImpl {
 
         // Delve
         this.addAbility(new DelveAbility());
+
         // {2}{G/U}{G/U}: Put the top two cards of your library into your graveyard, then return a nonland card of an opponent's choice from your graveyard to your hand.
         Ability ability = new SimpleActivatedAbility(new PutTopCardOfLibraryIntoGraveControllerEffect(2), new ManaCostsImpl("{2}{G/U}{G/U}"));
         ability.addEffect(new TasigurTheGoldenFangEffect());

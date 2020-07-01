@@ -1,7 +1,5 @@
 package mage.abilities;
 
-import java.util.Optional;
-import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.costs.Cost;
@@ -16,6 +14,9 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
+
+import java.util.Optional;
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -70,7 +71,7 @@ public class SpellAbility extends ActivatedAbilityImpl {
         }
         return null != game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.CAST_AS_INSTANT, this, playerId, game) // check this first to allow Offering in main phase
                 || timing == TimingRule.INSTANT
-                || object.hasAbility(FlashAbility.getInstance().getId(), game)
+                || object.hasAbility(FlashAbility.getInstance(), game)
                 || game.canPlaySorcery(playerId);
     }
 
@@ -104,12 +105,16 @@ public class SpellAbility extends ActivatedAbilityImpl {
                     return ActivationStatus.getFalse();
                 }
             }
-            if (costs.canPay(this, sourceId, controllerId, game)) {
+            if (costs.canPay(this, sourceId, playerId, game)) {
                 if (getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED) {
                     SplitCard splitCard = (SplitCard) game.getCard(getSourceId());
                     if (splitCard != null) {
-                        return new ActivationStatus(splitCard.getLeftHalfCard().getSpellAbility().canChooseTarget(game)
-                                && splitCard.getRightHalfCard().getSpellAbility().canChooseTarget(game), null);
+                        // fused can be called from hand only, so not permitting object allows or other zones checks
+                        // see https://www.mtgsalvation.com/forums/magic-fundamentals/magic-rulings/magic-rulings-archives/251926-snapcaster-mage-and-fuse
+                        if (game.getState().getZone(splitCard.getId()) == Zone.HAND) {
+                            return new ActivationStatus(splitCard.getLeftHalfCard().getSpellAbility().canChooseTarget(game)
+                                    && splitCard.getRightHalfCard().getSpellAbility().canChooseTarget(game), null);
+                        }
                     }
                     return ActivationStatus.getFalse();
 
@@ -140,9 +145,13 @@ public class SpellAbility extends ActivatedAbilityImpl {
         this.costs.clearPaid();
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     @Override
     public String toString() {
-        return this.name;
+        return getName();
     }
 
     @Override

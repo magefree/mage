@@ -1,5 +1,8 @@
 package mage.game.permanent;
 
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -10,11 +13,9 @@ import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.GameState;
 
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
-
 public interface Permanent extends Card, Controllable {
+
+    void setOriginalControllerId(UUID controllerId);
 
     void setControllerId(UUID controllerId);
 
@@ -103,7 +104,8 @@ public interface Permanent extends Card, Controllable {
     /**
      * @param source
      * @param game
-     * @param silentMode - use it to ignore warning message for users (e.g. for checking only)
+     * @param silentMode - use it to ignore warning message for users (e.g. for
+     * checking only)
      * @return
      */
     boolean cantBeAttachedBy(MageObject source, Game game, boolean silentMode);
@@ -150,18 +152,19 @@ public interface Permanent extends Card, Controllable {
 
     boolean fight(Permanent fightTarget, Ability source, Game game);
 
+    boolean fight(Permanent fightTarget, Ability source, Game game,boolean batchTrigger);
+
     boolean entersBattlefield(UUID sourceId, Game game, Zone fromZone, boolean fireEvent);
 
     String getValue(GameState state);
 
-    @Deprecated
-    void addAbility(Ability ability, Game game);
-
     void addAbility(Ability ability, UUID sourceId, Game game);
 
-    void addAbility(Ability ability, UUID sourceId, Game game, boolean createNewId);
-
     void removeAllAbilities(UUID sourceId, Game game);
+
+    void removeAbility(Ability abilityToRemove, UUID sourceId, Game game);
+
+    void removeAbilities(List<Ability> abilitiesToRemove, UUID sourceId, Game game);
 
     void addLoyaltyUsed();
 
@@ -218,7 +221,7 @@ public interface Permanent extends Card, Controllable {
 
     /**
      * @param defenderId id of planeswalker or player to attack - can be empty
-     *                   to check generally
+     * to check generally
      * @param game
      * @return
      */

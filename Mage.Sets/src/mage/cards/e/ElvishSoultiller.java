@@ -6,7 +6,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -34,7 +34,7 @@ public final class ElvishSoultiller extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When Elvish Soultiller dies, choose a creature type. Shuffle all creature cards of that type from your graveyard into your library.
-        addAbility(new DiesTriggeredAbility(new ElvishSoultillerEffect()));
+        addAbility(new DiesSourceTriggeredAbility(new ElvishSoultillerEffect()));
 
     }
 

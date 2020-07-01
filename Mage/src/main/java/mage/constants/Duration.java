@@ -4,25 +4,27 @@ package mage.constants;
  * @author North
  */
 public enum Duration {
-    OneUse("", true),
-    EndOfGame("for the rest of the game", false),
-    WhileOnBattlefield("", false),
-    WhileOnStack("", false),
-    WhileInGraveyard("", false),
-    EndOfTurn("until end of turn", true),
-    UntilYourNextTurn("until your next turn", true),
-    UntilEndOfYourNextTurn("until the end of your next turn", true),
-    UntilSourceLeavesBattlefield("until {source} leaves the battlefield", true), // supported for continuous layered effects
-    EndOfCombat("until end of combat", true),
-    EndOfStep("until end of phase step", true),
-    Custom("", true);
+    OneUse("", true, true),
+    EndOfGame("for the rest of the game", false, false),
+    WhileOnBattlefield("", false, false),
+    WhileOnStack("", false, true),
+    WhileInGraveyard("", false, false),
+    EndOfTurn("until end of turn", true, true),
+    UntilYourNextTurn("until your next turn", true, true),
+    UntilEndOfYourNextTurn("until the end of your next turn", true, true),
+    UntilSourceLeavesBattlefield("until {source} leaves the battlefield", true, false), // supported for continuous layered effects
+    EndOfCombat("until end of combat", true, true),
+    EndOfStep("until end of phase step", true, true),
+    Custom("", true, true);
 
     private final String text;
-    private final boolean onlyValidIfNoZoneChange; // defines if an effect lasts only if the source has not chnaged zone since init of the effect
+    private final boolean onlyValidIfNoZoneChange; // defines if an effect lasts only if the source has not changed zone since init of the effect
+    private final boolean fixedController; // has the controller of the effect to change, if the controller of the source changes
 
-    Duration(String text, boolean onlyValidIfNoZoneChange) {
+    Duration(String text, boolean onlyValidIfNoZoneChange, boolean fixedController) {
         this.text = text;
         this.onlyValidIfNoZoneChange = onlyValidIfNoZoneChange;
+        this.fixedController = fixedController;
     }
 
     @Override
@@ -34,4 +36,7 @@ public enum Duration {
         return onlyValidIfNoZoneChange;
     }
 
+    public boolean isFixedController() {
+        return fixedController;
+    }
 }

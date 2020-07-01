@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.costs.common.TapSourceCost;
@@ -22,7 +21,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetLandPermanent;
 import mage.util.CardUtil;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -48,8 +46,10 @@ public final class BenthicExplorers extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {tap}, Untap a tapped land an opponent controls: Add one mana of any type that land could produce.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BenthicExplorersManaEffect(), new TapSourceCost());
-        ability.addCost(new BenthicExplorersCost(new TargetLandPermanent(filter)));
+        Ability ability = new BenthicExplorersManaAbility();
+        TargetLandPermanent targetOpponentLand = new TargetLandPermanent(filter);
+        targetOpponentLand.setNotTarget(true);  // not a target, it is chosen
+        ability.addCost(new BenthicExplorersCost(targetOpponentLand));
         this.addAbility(ability);
 
     }
@@ -105,6 +105,22 @@ class BenthicExplorersCost extends CostImpl {
         return new BenthicExplorersCost(this);
     }
 
+}
+
+class BenthicExplorersManaAbility extends ActivatedManaAbilityImpl {
+
+    BenthicExplorersManaAbility() {
+        super(Zone.BATTLEFIELD, new BenthicExplorersManaEffect(), new TapSourceCost());
+    }
+
+    private BenthicExplorersManaAbility(BenthicExplorersManaAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public BenthicExplorersManaAbility copy() {
+        return new BenthicExplorersManaAbility(this);
+    }
 }
 
 class BenthicExplorersManaEffect extends ManaEffect {
@@ -226,7 +242,6 @@ class BenthicExplorersManaEffect extends ManaEffect {
         }
         Permanent land = (Permanent) game.getState().getValue("UntapTargetCost" + source.getSourceId().toString());
         if (land != null) {
-            System.out.println("The land is " + land.getName());
             Abilities<ActivatedManaAbilityImpl> mana = land.getAbilities().getActivatedManaAbilities(Zone.BATTLEFIELD);
             for (ActivatedManaAbilityImpl ability : mana) {
                 if (ability.definesMana(game)) {
@@ -236,7 +251,6 @@ class BenthicExplorersManaEffect extends ManaEffect {
                 }
             }
         }
-        System.out.println("The types : " + types.toString());
         return types;
     }
 

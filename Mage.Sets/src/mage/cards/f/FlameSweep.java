@@ -51,8 +51,6 @@ enum FlameSweepPredicate implements ObjectPlayerPredicate<ObjectPlayer<Permanent
         Permanent object = input.getObject();
         UUID playerId = input.getPlayerId();
         return !(object.isControlledBy(playerId)
-                && object.getAbilities(game).stream().anyMatch(
-                ability -> ability.getClass().equals(FlyingAbility.class)
-        ));
+                && object.getAbilities(game).containsClass(FlyingAbility.class));
     }
 }

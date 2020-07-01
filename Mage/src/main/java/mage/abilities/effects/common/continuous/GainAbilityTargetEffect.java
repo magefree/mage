@@ -112,7 +112,7 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
             for (UUID permanentId : targetPointer.getTargets(game, source)) {
                 Permanent permanent = game.getPermanentOrLKIBattlefield(permanentId);
                 if (permanent != null) {
-                    permanent.addAbility(ability, source.getSourceId(), game, false);
+                    permanent.addAbility(ability, source.getSourceId(), game);
                     affectedTargets++;
                 }
             }

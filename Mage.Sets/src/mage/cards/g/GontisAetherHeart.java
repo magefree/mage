@@ -1,9 +1,8 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldThisOrAnotherTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.ExileSourceCost;
 import mage.abilities.costs.common.PayEnergyCost;
@@ -13,21 +12,14 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
-import mage.filter.common.FilterArtifactPermanent;
+import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 public final class GontisAetherHeart extends CardImpl {
-
-    private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("{this} or another artifact");
-
-    static {
-        filter.add(TargetController.YOU.getControllerPredicate());
-    }
 
     public GontisAetherHeart(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");
@@ -35,15 +27,18 @@ public final class GontisAetherHeart extends CardImpl {
         addSuperType(SuperType.LEGENDARY);
 
         // Whenever Gonti's Aether Heart or another artifact enters the battlefield under your control, you get {E}{E} <i>(two energy counters).
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new GetEnergyCountersControllerEffect(2), filter, false));
+        this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
+                new GetEnergyCountersControllerEffect(2),
+                StaticFilters.FILTER_PERMANENT_ARTIFACT, false, true
+        ));
 
         // Pay {E}{E}{E}{E}{E}{E}{E}{E}, Exile Gonti's Aether Heart: Take an extra turn after this one.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddExtraTurnControllerEffect(), new PayEnergyCost(8));
+        Ability ability = new SimpleActivatedAbility(new AddExtraTurnControllerEffect(), new PayEnergyCost(8));
         ability.addCost(new ExileSourceCost());
         this.addAbility(ability);
     }
 
-    public GontisAetherHeart(final GontisAetherHeart card) {
+    private GontisAetherHeart(final GontisAetherHeart card) {
         super(card);
     }
 

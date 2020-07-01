@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.CycleTriggeredAbility;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.CyclingAbility;
@@ -35,7 +35,7 @@ public final class NayaSojourners extends CardImpl {
 
         // When you cycle Naya Sojourners or it dies, you may put a +1/+1 counter on target creature.
         Ability ability1 = new CycleTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
-        Ability ability2 = new DiesTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
+        Ability ability2 = new DiesSourceTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
         ability1.addTarget(new TargetCreaturePermanent());
         ability2.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability1);

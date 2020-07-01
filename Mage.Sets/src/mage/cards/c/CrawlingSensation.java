@@ -1,8 +1,5 @@
-
-
 package mage.cards.c;
 
-import java.util.Set;
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.OnEventTriggeredAbility;
@@ -69,11 +66,8 @@ class CrawlingSensationTriggeredAbility extends TriggeredAbilityImpl {
                 for (Card card : zEvent.getCards()) {
                     if (card != null) {
                         UUID cardOwnerId = card.getOwnerId();
-                        Set<CardType> cardType = card.getCardType();
-
                         if (cardOwnerId != null
                                 && card.isOwnedBy(getControllerId())
-                                && cardType != null
                                 && card.isLand()) {
                             game.getState().setValue("usedOnTurn" + getControllerId() + getOriginalId(), game.getTurnNum());
                             return true;

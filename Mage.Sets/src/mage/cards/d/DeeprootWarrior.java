@@ -3,7 +3,7 @@ package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BecomesBlockedTriggeredAbility;
+import mage.abilities.common.BecomesBlockedSourceTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
@@ -29,7 +29,7 @@ public final class DeeprootWarrior extends CardImpl {
         // Whenever Deeproot Warrior becomes blocked, it gets +1/+1 until end of turn.
         Effect effect = new BoostSourceEffect(1, 1, Duration.EndOfTurn);
         effect.setText("it gets +1/+1 until end of turn");
-        this.addAbility(new BecomesBlockedTriggeredAbility(effect, false));
+        this.addAbility(new BecomesBlockedSourceTriggeredAbility(effect, false));
     }
 
     public DeeprootWarrior(final DeeprootWarrior card) {

@@ -30,7 +30,7 @@ public final class OverwhelmedApprentice extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(
                 new PutTopCardOfLibraryIntoGraveEachPlayerEffect(2, TargetController.OPPONENT)
         );
-        ability.addEffect(new ScryEffect(2).setText("Then you scry 2."));
+        ability.addEffect(new ScryEffect(2, false).setText("Then you scry 2."));
         this.addAbility(ability);
     }
 

@@ -73,7 +73,7 @@ class TunnelVisionEffect extends OneShotEffect {
 
         for (Card card : targetPlayer.getLibrary().getCards(game)) {
             cardsToReveal.add(card);
-            if (CardUtil.haveSameNames(card.getName(), cardName)) {
+            if (CardUtil.haveSameNames(card, cardName, game)) {
                 namedCard = card;
                 break;
             }

@@ -1,7 +1,5 @@
 package mage.abilities.effects.common.cost;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -19,8 +17,10 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 /**
- *
  * @author North
  */
 public class SpellsCostReductionControllerEffect extends CostModificationEffectImpl {
@@ -116,9 +116,11 @@ public class SpellsCostReductionControllerEffect extends CostModificationEffectI
             if (abilityToModify.isControlledBy(source.getControllerId())) {
                 Spell spell = (Spell) game.getStack().getStackObject(abilityToModify.getId());
                 if (spell != null) {
+                    // real cast with put on stack
                     return this.filter.match(spell, source.getSourceId(), source.getControllerId(), game);
                 } else {
-                    // used at least for flashback ability because Flashback ability doesn't use stack or for getPlayables where spell is not cast yet
+                    // get playable and other staff without put on stack
+                    // used at least for flashback ability because Flashback ability doesn't use stack
                     Card sourceCard = game.getCard(abilityToModify.getSourceId());
                     return sourceCard != null && this.filter.match(sourceCard, source.getSourceId(), source.getControllerId(), game);
                 }

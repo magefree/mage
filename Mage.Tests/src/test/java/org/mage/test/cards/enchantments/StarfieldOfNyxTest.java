@@ -1,13 +1,14 @@
 package org.mage.test.cards.enchantments;
 
 import mage.abilities.keyword.FlyingAbility;
+import mage.constants.CardType;
 import mage.constants.EmptyNames;
 import mage.constants.PhaseStep;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -25,7 +26,7 @@ public class StarfieldOfNyxTest extends CardTestPlayerBase {
      */
     @Test
     public void testCloudform() {
-        // At the beginning of your upkeep, if you control an artifact, put a 1/1 
+        // At the beginning of your upkeep, if you control an artifact, put a 1/1
         // colorless Thopter artifact creature token with flying onto the battlefield.
         // Whenever one or more artifact creatures you control deal combat damage to a player, draw a card.
         addCard(Zone.BATTLEFIELD, playerA, "Thopter Spy Network", 2); // {2}{U}{U}  - added to come to 5 enchantments on the battlefield
@@ -35,7 +36,7 @@ public class StarfieldOfNyxTest extends CardTestPlayerBase {
         // As long as you control five or more enchantments, each other non-Aura enchantment you control is a creature in
         // addition to its other types and has base power and base toughness each equal to its converted mana cost.
         addCard(Zone.HAND, playerA, "Starfield of Nyx"); // "{4}{W}"
-        // When Cloudform enters the battlefield, it becomes an Aura with enchant creature. 
+        // When Cloudform enters the battlefield, it becomes an Aura with enchant creature.
         // Manifest the top card of your library and attach Cloudform to it.
         // Enchanted creature has flying and hexproof.
         addCard(Zone.HAND, playerA, "Cloudform"); // {1}{U}{U}
@@ -51,7 +52,7 @@ public class StarfieldOfNyxTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Thopter Spy Network", 0);
-        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 
+        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(),
                 2, 2, Filter.ComparisonScope.All); // the manifested cards
         assertPermanentCount(playerA, "Starfield of Nyx", 1);
         assertPowerToughness(playerA, "Thopter Spy Network", 4, 4, Filter.ComparisonScope.All);
@@ -66,7 +67,7 @@ public class StarfieldOfNyxTest extends CardTestPlayerBase {
      */
     @Test
     public void testHexproof() {
-        // At the beginning of your upkeep, if you control an artifact, put a 1/1 colorless 
+        // At the beginning of your upkeep, if you control an artifact, put a 1/1 colorless
         // Thopter artifact creature token with flying onto the battlefield.
         // Whenever one or more artifact creatures you control deal combat damage to a player, draw a card.
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
@@ -114,7 +115,7 @@ public class StarfieldOfNyxTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
         assertAllCommandsUsed();
-        
+
         assertPowerToughness(playerA, "Master of the Feast", 3, 3, Filter.ComparisonScope.All);
         assertPowerToughness(playerA, "Humility", 4, 4, Filter.ComparisonScope.All);
         // Humility loses its ability in layer 6.  Layer 7 never gets Humility's effect
@@ -139,10 +140,9 @@ public class StarfieldOfNyxTest extends CardTestPlayerBase {
      * there.
      */
     @Test
-    @Ignore
     public void testStarfieldOfNyxAndSongOfTheDryads() {
         // Nontoken creatures you control get +1/+1 and have vigilance.
-        addCard(Zone.BATTLEFIELD, playerA, "Always Watching", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Always Watching", 5); // Enchantment {1}{W}{W}
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
         // At the beginning of your upkeep, you may return target enchantment card from your graveyard to the battlefield.
         // As long as you control five or more enchantments, each other non-Aura enchantment you control is a creature in
@@ -157,15 +157,19 @@ public class StarfieldOfNyxTest extends CardTestPlayerBase {
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Song of the Dryads", "Starfield of Nyx");
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
+
+        setStrictChooseMode(true);
         execute();
+        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Always Watching", 5);
         assertPermanentCount(playerB, "Song of the Dryads", 1);
 
+        assertType("Always Watching", CardType.ENCHANTMENT, true);
+        assertType("Always Watching", CardType.CREATURE, false);
         assertPowerToughness(playerA, "Always Watching", 0, 0, Filter.ComparisonScope.All);
 
-        assertPermanentCount(playerA, "Forest", 1);
-
+        assertType("Starfield of Nyx", CardType.LAND, SubType.FOREST);
     }
 
 }

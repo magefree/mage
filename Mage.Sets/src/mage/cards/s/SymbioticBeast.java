@@ -3,7 +3,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -25,7 +25,7 @@ public final class SymbioticBeast extends CardImpl {
         this.toughness = new MageInt(4);
       
         // When Symbiotic Beast dies, create four 1/1 green Insect creature tokens.
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new InsectToken(), 4)));
+        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new InsectToken(), 4)));
     }
 
     public SymbioticBeast(final SymbioticBeast card) {

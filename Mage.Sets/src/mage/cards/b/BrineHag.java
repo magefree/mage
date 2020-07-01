@@ -7,7 +7,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessAllEffect;
 import mage.cards.CardImpl;
@@ -36,7 +36,7 @@ public final class BrineHag extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Brine Hag dies, change the base power and toughness of all creatures that dealt damage to it this turn to 0/2.
-        this.addAbility(new DiesTriggeredAbility(new BrineHagEffect()));
+        this.addAbility(new DiesSourceTriggeredAbility(new BrineHagEffect()));
     }
 
     public BrineHag(final BrineHag card) {

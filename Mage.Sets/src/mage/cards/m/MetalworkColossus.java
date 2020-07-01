@@ -39,7 +39,7 @@ public final class MetalworkColossus extends CardImpl {
         this.toughness = new MageInt(10);
 
         // Metalwork Colossus costs {X} less to cast, where X is the total converted mana cost of noncreature artifacts you control.
-        this.addAbility(new SimpleStaticAbility(Zone.STACK, new MetalworkColossusCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new MetalworkColossusCostReductionEffect()));
 
         // Sacrifice two artifacts: Return Metalwork Colossus from your graveyard to your hand.
         this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new SacrificeTargetCost(new TargetControlledPermanent(2, 2, new FilterControlledArtifactPermanent("two artifacts"), true))));

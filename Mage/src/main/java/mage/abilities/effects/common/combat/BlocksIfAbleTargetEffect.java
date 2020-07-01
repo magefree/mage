@@ -54,10 +54,10 @@ public class BlocksIfAbleTargetEffect extends RequirementEffect {
             return staticText;
         }
         if (this.duration == Duration.EndOfTurn) {
-            return "Target " + mode.getTargets().get(0).getTargetName() + " blocks this turn if able";
+            return "target " + mode.getTargets().get(0).getTargetName() + " blocks this turn if able";
         }
         else {
-            return "Target " + mode.getTargets().get(0).getTargetName() + " blocks each turn if able";
+            return "target " + mode.getTargets().get(0).getTargetName() + " blocks each turn if able";
         }
     }
 

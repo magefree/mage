@@ -10,6 +10,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.hint.HintUtils;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
+import mage.abilities.mana.ManaAbility;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.decks.Deck;
@@ -60,6 +61,8 @@ import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_RESET_ALL;
  * @author BetaSteward_at_googlemail.com
  */
 public class HumanPlayer extends PlayerImpl {
+
+    private static final boolean ALLOW_USERS_TO_PUT_NON_PLAYABLE_SPELLS_ON_STACK_WORKAROUND = false; // warning, see workaround's info on usage
 
     private transient Boolean responseOpenedForAnswer = false; // can't get response until prepared target (e.g. until send all fire events to all players)
     private final transient PlayerResponse response = new PlayerResponse();
@@ -1039,7 +1042,7 @@ public class HumanPlayer extends PlayerImpl {
 
             if (response.getString() != null
                     && response.getString().equals("special")) {
-                specialAction(game);
+                activateSpecialAction(game, null);
             } else if (response.getUUID() != null) {
                 boolean result = false;
                 MageObject object = game.getObject(response.getUUID());
@@ -1047,24 +1050,42 @@ public class HumanPlayer extends PlayerImpl {
                     Zone zone = game.getState().getZone(object.getId());
                     if (zone != null) {
                         // look at card or try to cast/activate abilities
+                        LinkedHashMap<UUID, ActivatedAbility> useableAbilities = new LinkedHashMap<>();
+
                         Player actingPlayer = null;
-                        LinkedHashMap<UUID, ActivatedAbility> useableAbilities = null;
                         if (playerId.equals(game.getPriorityPlayerId())) {
                             actingPlayer = this;
                         } else if (getPlayersUnderYourControl().contains(game.getPriorityPlayerId())) {
                             actingPlayer = game.getPlayer(game.getPriorityPlayerId());
                         }
                         if (actingPlayer != null) {
-                            useableAbilities = actingPlayer.getUseableActivatedAbilities(object, zone, game);
+                            useableAbilities = actingPlayer.getPlayableActivatedAbilities(object, zone, game);
+
+                            // GUI: workaround to enable users to put spells on stack without real available mana
+                            // (without highlighting, like it was in old versions before June 2020)
+                            // Reason: some gain ability adds cost modification and other things to spells on stack only,
+                            // e.g. xmage can't find playable ability before put that spell on stack (wtf example: Chief Engineer,
+                            // see ConvokeTest)
+                            // TODO: it's a BAD workaround  -- users can't see that card/ability is broken and will not report to us, AI can't play that ability too
+                            // Enable it on massive broken cards/abilities only or for manual tests
+                            if (ALLOW_USERS_TO_PUT_NON_PLAYABLE_SPELLS_ON_STACK_WORKAROUND) {
+                                if (object instanceof Card) {
+                                    for (Ability ability : ((Card) object).getAbilities(game)) {
+                                        if (ability instanceof SpellAbility && ((SpellAbility) ability).canActivate(actingPlayer.getId(), game).canActivate()
+                                                || ability instanceof PlayLandAbility) {
+                                            useableAbilities.putIfAbsent(ability.getId(), (ActivatedAbility) ability);
+                                        }
+                                    }
+                                }
+                            }
                         }
 
                         if (object instanceof Card
                                 && ((Card) object).isFaceDown(game)
-                                && lookAtFaceDownCard((Card) object, game, useableAbilities == null ? 0 : useableAbilities.size())) {
+                                && lookAtFaceDownCard((Card) object, game, useableAbilities.size())) {
                             result = true;
                         } else {
-                            if (useableAbilities != null
-                                    && !useableAbilities.isEmpty()) {
+                            if (!useableAbilities.isEmpty()) {
                                 activateAbility(useableAbilities, object, game);
                                 result = true;
                             }
@@ -1221,7 +1242,7 @@ public class HumanPlayer extends PlayerImpl {
             } else if (response.getString() != null
                     && response.getString().equals("special")) {
                 if (unpaid instanceof ManaCostsImpl) {
-                    specialManaAction(unpaid, game);
+                    activateSpecialAction(game, unpaid);
                 }
             } else if (response.getManaType() != null) {
                 // this mana type can be paid once from pool
@@ -1336,19 +1357,30 @@ public class HumanPlayer extends PlayerImpl {
         if (object == null) {
             return;
         }
-        if (AbilityType.SPELL.equals(abilityToCast.getAbilityType())) {
+
+        // GUI: for user's information only - check if mana abilities allows to use here (getUseableManaAbilities already filter it)
+        // Reason: when you use special mana ability then normal mana abilities will be restricted to pay. Users
+        // can't see lands as playable and must know the reason (if they click on land then they get that message)
+        if (abilityToCast.getAbilityType() == AbilityType.SPELL) {
             Spell spell = game.getStack().getSpell(abilityToCast.getSourceId());
-            if (spell != null && !spell.isResolving()
-                    && spell.isDoneActivatingManaAbilities()) {
-                game.informPlayer(this, "You can no longer use activated mana abilities to pay for the current spell. Cancel and recast the spell and activate mana abilities first.");
-                return;
+            boolean haveManaAbilities = object.getAbilities().stream().anyMatch(a -> a instanceof ManaAbility);
+            if (spell != null && !spell.isResolving() && haveManaAbilities) {
+                switch (spell.getCurrentActivatingManaAbilitiesStep()) {
+                    // if you used special mana ability like convoke then normal mana abilities will be restricted to use, see Convoke for details
+                    case BEFORE:
+                    case NORMAL:
+                        break;
+                    case AFTER:
+                        game.informPlayer(this, "You can no longer use activated mana abilities to pay for the current spell (special mana pay already used). Cancel and recast the spell to activate mana abilities first.");
+                        return;
+                }
             }
         }
+
         Zone zone = game.getState().getZone(object.getId());
         if (zone != null) {
             LinkedHashMap<UUID, ActivatedManaAbilityImpl> useableAbilities = getUseableManaAbilities(object, zone, game);
-            if (useableAbilities != null
-                    && !useableAbilities.isEmpty()) {
+            if (!useableAbilities.isEmpty()) {
                 useableAbilities = ManaUtil.tryToAutoPay(unpaid, useableAbilities); // eliminates other abilities if one fits perfectly
                 currentlyUnpaidMana = unpaid;
                 activateAbility(useableAbilities, object, game);
@@ -1845,7 +1877,13 @@ public class HumanPlayer extends PlayerImpl {
         draft.firePickCardEvent(playerId);
     }
 
-    protected void specialAction(Game game) {
+    /**
+     * Activate special action (normal or mana)
+     *
+     * @param game
+     * @param unpaidForManaAction - set unpaid for mana actions like convoke
+     */
+    protected void activateSpecialAction(Game game, ManaCost unpaidForManaAction) {
         if (gameInCheckPlayableState(game)) {
             return;
         }
@@ -1854,35 +1892,9 @@ public class HumanPlayer extends PlayerImpl {
             return;
         }
 
-        Map<UUID, SpecialAction> specialActions = game.getState().getSpecialActions().getControlledBy(playerId, false);
+        Map<UUID, SpecialAction> specialActions = game.getState().getSpecialActions().getControlledBy(playerId, unpaidForManaAction != null);
         if (!specialActions.isEmpty()) {
 
-            updateGameStatePriority("specialAction", game);
-            prepareForResponse(game);
-            if (!isExecutingMacro()) {
-                game.fireGetChoiceEvent(playerId, name, null, new ArrayList<>(specialActions.values()));
-            }
-            waitForResponse(game);
-
-            if (response.getUUID() != null) {
-                if (specialActions.containsKey(response.getUUID())) {
-                    activateAbility(specialActions.get(response.getUUID()), game);
-                }
-            }
-        }
-    }
-
-    protected void specialManaAction(ManaCost unpaid, Game game) {
-        if (gameInCheckPlayableState(game)) {
-            return;
-        }
-
-        if (!canRespond()) {
-            return;
-        }
-
-        Map<UUID, SpecialAction> specialActions = game.getState().getSpecialActions().getControlledBy(playerId, true);
-        if (!specialActions.isEmpty()) {
             updateGameStatePriority("specialAction", game);
             prepareForResponse(game);
             if (!isExecutingMacro()) {
@@ -1893,10 +1905,10 @@ public class HumanPlayer extends PlayerImpl {
             if (response.getUUID() != null) {
                 if (specialActions.containsKey(response.getUUID())) {
                     SpecialAction specialAction = specialActions.get(response.getUUID());
-                    if (specialAction != null) {
-                        specialAction.setUnpaidMana(unpaid);
-                        activateAbility(specialActions.get(response.getUUID()), game);
+                    if (unpaidForManaAction != null) {
+                        specialAction.setUnpaidMana(unpaidForManaAction);
                     }
+                    activateAbility(specialAction, game);
                 }
             }
         }
@@ -1971,51 +1983,6 @@ public class HumanPlayer extends PlayerImpl {
             return ability instanceof ActivatedManaAbilityImpl;
         }
         return true;
-    }
-
-    @Override
-    public SpellAbility chooseSpellAbilityForCast(SpellAbility ability, Game game, boolean noMana) {
-        if (gameInCheckPlayableState(game)) {
-            return null;
-        }
-
-        // TODO: add canRespond cycle?
-        if (!canRespond()) {
-            return null;
-        }
-
-        switch (ability.getSpellAbilityType()) {
-            case SPLIT:
-            case SPLIT_FUSED:
-            case SPLIT_AFTERMATH:
-                MageObject object = game.getObject(ability.getSourceId());
-                if (object != null) {
-                    String message = "Choose ability to cast" + (noMana ? " for FREE" : "") + "<br>" + object.getLogName();
-                    LinkedHashMap<UUID, ActivatedAbility> useableAbilities = getSpellAbilities(playerId, object, game.getState().getZone(object.getId()), game);
-                    if (useableAbilities != null
-                            && useableAbilities.size() == 1) {
-                        return (SpellAbility) useableAbilities.values().iterator().next();
-                    } else if (useableAbilities != null
-                            && !useableAbilities.isEmpty()) {
-
-                        updateGameStatePriority("chooseSpellAbilityForCast", game);
-                        prepareForResponse(game);
-                        if (!isExecutingMacro()) {
-                            game.fireGetChoiceEvent(playerId, message, object, new ArrayList<>(useableAbilities.values()));
-                        }
-                        waitForResponse(game);
-
-                        if (response.getUUID() != null) {
-                            if (useableAbilities.containsKey(response.getUUID())) {
-                                return (SpellAbility) useableAbilities.get(response.getUUID());
-                            }
-                        }
-                    }
-                }
-                return null;
-            default:
-                return ability;
-        }
     }
 
     @Override
@@ -2096,6 +2063,9 @@ public class HumanPlayer extends PlayerImpl {
                             modeText = "(selected " + timesSelected + "x) " + modeText;
                         }
                     }
+                    if (!modeText.isEmpty()) {
+                        modeText = Character.toUpperCase(modeText.charAt(0)) + modeText.substring(1);
+                    }
                     modeMap.put(mode.getId(), modeIndex + ". " + modeText);
                 }
             }
@@ -2141,13 +2111,14 @@ public class HumanPlayer extends PlayerImpl {
                         // cancel choice (remove all selections)
                         if (Modes.CHOOSE_OPTION_CANCEL_ID.equals(response.getUUID())) {
                             modes.getSelectedModes().clear();
-                            return null;
                         }
                     } else if (canEndChoice) {
                         // end choice by done button in feedback panel
                         // disable after done option implemented
                         // done = true;
                     }
+
+                    // triggered abilities can't be skipped by cancel or wrong answer
                     if (source.getAbilityType() != AbilityType.TRIGGERED) {
                         done = true;
                     }

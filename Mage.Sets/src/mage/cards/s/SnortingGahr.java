@@ -3,7 +3,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BecomesBlockedTriggeredAbility;
+import mage.abilities.common.BecomesBlockedSourceTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
@@ -28,7 +28,7 @@ public final class SnortingGahr extends CardImpl {
         // Whenever Snorting Gahr becomes blocked, it gets +2/+2 until end of turn.
         Effect effect = new BoostSourceEffect(2, 2, Duration.EndOfTurn);
         effect.setText("it gets +2/+2 until end of turn");
-        this.addAbility(new BecomesBlockedTriggeredAbility(effect, false));
+        this.addAbility(new BecomesBlockedSourceTriggeredAbility(effect, false));
     }
 
     public SnortingGahr(final SnortingGahr card) {

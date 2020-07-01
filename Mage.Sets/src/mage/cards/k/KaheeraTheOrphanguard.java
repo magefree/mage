@@ -91,8 +91,8 @@ enum KaheeraTheOrphanguardCompanionCondition implements CompanionCondition {
             SubType.BEAST
     );
 
-    private static final boolean checkTypes(Card card) {
-        return subtypes.stream().anyMatch(card.getSubtype(null)::contains);
+    private static boolean checkTypes(Card card) {
+        return subtypes.stream().anyMatch(subtype -> card.hasSubtype(subtype, null));
     }
 
     @Override

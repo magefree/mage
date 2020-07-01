@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
@@ -34,7 +34,7 @@ public final class HarvestHand extends CardImpl {
 
         // When Harvest Hand dies, return it to the battlefield transformed under your control.
         this.addAbility(new TransformAbility());
-        this.addAbility(new DiesTriggeredAbility(new HarvestHandReturnTransformedEffect()));
+        this.addAbility(new DiesSourceTriggeredAbility(new HarvestHandReturnTransformedEffect()));
     }
 
     public HarvestHand(final HarvestHand card) {

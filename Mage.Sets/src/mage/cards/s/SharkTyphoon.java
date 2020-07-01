@@ -31,7 +31,7 @@ public final class SharkTyphoon extends CardImpl {
 
         // Whenever you cast a noncreature spell, create an X/X blue Shark creature token with flying, where X is that spell's converted mana cost.
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                new SharkTyphoonCastEffect(), StaticFilters.FILTER_SPELL_A_NON_CREATURE, false
+                new SharkTyphoonCastEffect(), StaticFilters.FILTER_SPELL_A_NON_CREATURE, false, true
         ));
 
         // Cycling {X}{1}{U}
@@ -69,7 +69,7 @@ class SharkTyphoonCastEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getSpell(targetPointer.getFirst(game, source));
+        Spell spell = game.getSpell(getTargetPointer().getFirst(game, source));
         int xValue = 0;
         if (spell != null) {
             xValue = spell.getConvertedManaCost();

@@ -3,7 +3,7 @@ package mage.cards.d;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -39,7 +39,7 @@ public final class DreadhordeButcher extends CardImpl {
         ), false).setOrPlaneswalker(true));
 
         // When Dreadhorde Butcher dies, it deals damage equal to its power to any target.
-        Ability ability = new DiesTriggeredAbility(new DamageTargetEffect(
+        Ability ability = new DiesSourceTriggeredAbility(new DamageTargetEffect(
                 new SourcePermanentPowerCount()
         ).setText("it deals damage equal to its power to any target"));
         ability.addTarget(new TargetAnyTarget());

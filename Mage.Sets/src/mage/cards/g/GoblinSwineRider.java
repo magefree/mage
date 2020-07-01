@@ -3,7 +3,7 @@ package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BecomesBlockedTriggeredAbility;
+import mage.abilities.common.BecomesBlockedSourceTriggeredAbility;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -24,7 +24,7 @@ public final class GoblinSwineRider extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Goblin Swine-Rider becomes blocked, it deals 2 damage to each attacking creature and each blocking creature.
-        this.addAbility(new BecomesBlockedTriggeredAbility(new DamageAllEffect(2, "it", new FilterAttackingOrBlockingCreature("attacking creature and each blocking creature")), false));
+        this.addAbility(new BecomesBlockedSourceTriggeredAbility(new DamageAllEffect(2, "it", new FilterAttackingOrBlockingCreature("attacking creature and each blocking creature")), false));
     }
 
     public GoblinSwineRider(final GoblinSwineRider card) {

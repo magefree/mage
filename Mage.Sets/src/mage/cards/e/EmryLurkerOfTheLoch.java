@@ -2,21 +2,21 @@ package mage.cards.e;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.dynamicvalue.common.ArtifactYouControlCount;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
-import mage.abilities.effects.common.cost.CostModificationEffectImpl;
+import mage.abilities.effects.common.cost.SpellCostReductionForEachSourceEffect;
+import mage.abilities.hint.common.ArtifactYouControlHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -35,7 +35,9 @@ public final class EmryLurkerOfTheLoch extends CardImpl {
         this.toughness = new MageInt(2);
 
         // This spell costs {1} less to cast for each artifact you control.
-        this.addAbility(new SimpleStaticAbility(Zone.STACK, new EmryLurkerOfTheLochCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL,
+                new SpellCostReductionForEachSourceEffect(1, ArtifactYouControlCount.instance)
+        ).addHint(ArtifactYouControlHint.instance));
 
         // When Emry, Lurker of the Loch enters the battlefield, put the top four cards of your library into your graveyard.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
@@ -55,40 +57,6 @@ public final class EmryLurkerOfTheLoch extends CardImpl {
     @Override
     public EmryLurkerOfTheLoch copy() {
         return new EmryLurkerOfTheLoch(this);
-    }
-}
-
-class EmryLurkerOfTheLochCostReductionEffect extends CostModificationEffectImpl {
-
-    EmryLurkerOfTheLochCostReductionEffect() {
-        super(Duration.WhileOnStack, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        staticText = "This spell costs {1} less to cast for each artifact you control";
-    }
-
-    private EmryLurkerOfTheLochCostReductionEffect(final EmryLurkerOfTheLochCostReductionEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        int reductionAmount = game.getBattlefield().count(
-                StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT,
-                source.getSourceId(), source.getControllerId(), game
-        );
-        CardUtil.reduceCost(abilityToModify, reductionAmount);
-        return true;
-    }
-
-    @Override
-    public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        return abilityToModify instanceof SpellAbility
-                && abilityToModify.getSourceId().equals(source.getSourceId())
-                && game.getCard(abilityToModify.getSourceId()) != null;
-    }
-
-    @Override
-    public EmryLurkerOfTheLochCostReductionEffect copy() {
-        return new EmryLurkerOfTheLochCostReductionEffect(this);
     }
 }
 

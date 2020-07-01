@@ -64,7 +64,7 @@ public class GainAbilitySpellsEffect extends ContinuousEffectImpl {
                 if (stackObject.isControlledBy(source.getControllerId())) {
                     Card card = game.getCard(stackObject.getSourceId());
                     if (card != null && filter.match(card, game)) {
-                        if (!card.getAbilities().contains(ability)) {
+                        if (!card.hasAbility(ability, game)) {
                             game.getState().addOtherAbility(card, ability);
                         }
                     }

@@ -3,7 +3,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -27,7 +27,7 @@ public final class ScreechingBuzzard extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // When Screeching Buzzard dies, each opponent discards a card.
-        this.addAbility(new DiesTriggeredAbility(new DiscardEachPlayerEffect(TargetController.OPPONENT), false));
+        this.addAbility(new DiesSourceTriggeredAbility(new DiscardEachPlayerEffect(TargetController.OPPONENT), false));
     }
 
     public ScreechingBuzzard(final ScreechingBuzzard card) {

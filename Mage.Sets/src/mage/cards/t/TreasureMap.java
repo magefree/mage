@@ -1,7 +1,5 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -21,8 +19,9 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TreasureToken;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class TreasureMap extends CardImpl {
@@ -81,7 +80,7 @@ class TreasureMapEffect extends OneShotEffect {
                 if (counters > 2) {
                     permanent.removeCounters("landmark", counters, game);
                     new TransformSourceEffect(true).apply(game, source);
-                    new CreateTokenEffect(new TreasureToken("XLN"), 3).apply(game, source);
+                    new CreateTokenEffect(new TreasureToken(), 3).apply(game, source);
                 }
                 return true;
             }

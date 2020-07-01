@@ -1,7 +1,6 @@
 package mage.cards.a;
 
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -12,16 +11,26 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.SatyrCantBlockToken;
 
-import java.util.Objects;
 import java.util.UUID;
+import mage.abilities.common.DiesThisOrAnotherCreatureTriggeredAbility;
+import mage.abilities.effects.Effect;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.permanent.TokenPredicate;
 
 /**
  * @author TheElk801
  */
 public final class AnaxHardenedInTheForge extends CardImpl {
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature you control");
+
+    static {
+        filter.add(TargetController.YOU.getControllerPredicate());
+        filter.add(Predicates.not(TokenPredicate.instance));
+    }
 
     public AnaxHardenedInTheForge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{R}{R}");
@@ -38,8 +47,9 @@ public final class AnaxHardenedInTheForge extends CardImpl {
                         .setText("{this}'s power is equal to your devotion to red")
         ).addHint(DevotionCount.R.getHint()));
 
-        // Whenever Anax or another nontoken creature you control dies, create a 1/1 red Satyr creature token with "This creature can't block." If the creature had power 4 or greater, create two of those tokens instead.
-        this.addAbility(new AnaxHardenedInTheForgeTriggeredAbility());
+        // Whenever Anax or another nontoken creature you control dies, create a 1/1 red Satyr creature token 
+        // with "This creature can't block." If the creature had power 4 or greater, create two of those tokens instead.
+        this.addAbility(new AnaxHardenedInTheForgeTriggeredAbility(null, false, filter));
     }
 
     private AnaxHardenedInTheForge(final AnaxHardenedInTheForge card) {
@@ -52,10 +62,10 @@ public final class AnaxHardenedInTheForge extends CardImpl {
     }
 }
 
-class AnaxHardenedInTheForgeTriggeredAbility extends TriggeredAbilityImpl {
+class AnaxHardenedInTheForgeTriggeredAbility extends DiesThisOrAnotherCreatureTriggeredAbility {
 
-    AnaxHardenedInTheForgeTriggeredAbility() {
-        super(Zone.BATTLEFIELD, null, false);
+    AnaxHardenedInTheForgeTriggeredAbility(Effect effect, boolean optional, FilterCreaturePermanent filter) {
+        super(effect, optional, filter);
     }
 
     private AnaxHardenedInTheForgeTriggeredAbility(final AnaxHardenedInTheForgeTriggeredAbility ability) {
@@ -68,32 +78,20 @@ class AnaxHardenedInTheForgeTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (!zEvent.isDiesEvent()) {
-            return false;
+        if (super.checkTrigger(event, game)) {
+            int tokenCount = ((ZoneChangeEvent) event).getTarget().getPower().getValue() > 3 ? 2 : 1;
+            this.getEffects().clear();
+            this.addEffect(new CreateTokenEffect(new SatyrCantBlockToken(), tokenCount));
+            return true;
         }
-        if (!zEvent.getTarget().getId().equals(getSourceId())
-                && (zEvent.getTarget() instanceof PermanentToken
-                || !zEvent.getTarget().isCreature()
-                || !Objects.equals(zEvent.getTarget().getControllerId(), getControllerId()))) {
-            return false;
-        }
-        int tokenCount = zEvent.getTarget().getPower().getValue() > 3 ? 2 : 1;
-        this.getEffects().clear();
-        this.addEffect(new CreateTokenEffect(new SatyrCantBlockToken(), tokenCount));
-        return true;
+        return false;
     }
 
     @Override
     public String getRule() {
-        return "Whenever {this} or another nontoken creature you control dies, " +
-                "create a 1/1 red Satyr creature token with \"This creature can't block.\" " +
-                "If the creature had power 4 or greater, create two of those tokens instead.";
+        return "Whenever {this} or another nontoken creature you control dies, "
+                + "create a 1/1 red Satyr creature token with \"This creature can't block.\" "
+                + "If the creature had power 4 or greater, create two of those tokens instead.";
     }
 }

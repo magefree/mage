@@ -1,11 +1,11 @@
 package mage.abilities.keyword;
 
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.game.permanent.token.WhiteBlackSpiritToken;
 import mage.util.CardUtil;
 
-public class AfterlifeAbility extends DiesTriggeredAbility {
+public class AfterlifeAbility extends DiesSourceTriggeredAbility {
 
     private final int tokenCount;
 

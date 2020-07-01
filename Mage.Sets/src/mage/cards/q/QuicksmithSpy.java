@@ -1,4 +1,3 @@
-
 package mage.cards.q;
 
 import java.util.UUID;
@@ -14,11 +13,12 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.target.TargetPermanent;
+import mage.watchers.common.LostControlWatcher;
 
 /**
  *
@@ -42,6 +42,7 @@ public final class QuicksmithSpy extends CardImpl {
                 "target artifact you control gains \"{T}: Draw a card\" for as long as you control {this}");
         Ability ability = new EntersBattlefieldTriggeredAbility(effect, false);
         ability.addTarget(new TargetPermanent(new FilterControlledArtifactPermanent()));
+        ability.addWatcher(new LostControlWatcher());
         this.addAbility(ability);
     }
 

@@ -26,11 +26,11 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl {
     protected boolean forceQuotes = false;
 
     public GainAbilityControlledEffect(Ability ability, Duration duration) {
-        this(ability, duration, StaticFilters.FILTER_PERMANENT);
+        this(ability, duration, StaticFilters.FILTER_PERMANENTS);
     }
 
     public GainAbilityControlledEffect(CompoundAbility ability, Duration duration) {
-        this(ability, duration, StaticFilters.FILTER_PERMANENT);
+        this(ability, duration, StaticFilters.FILTER_PERMANENTS);
     }
 
     public GainAbilityControlledEffect(Ability ability, Duration duration, FilterPermanent filter) {
@@ -87,7 +87,7 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl {
                 Permanent perm = it.next().getPermanentOrLKIBattlefield(game); //LKI is neccessary for "dies triggered abilities" to work given to permanets  (e.g. Showstopper)
                 if (perm != null) {
                     for (Ability abilityToAdd : ability) {
-                        perm.addAbility(abilityToAdd, source.getSourceId(), game, false);
+                        perm.addAbility(abilityToAdd, source.getSourceId(), game);
                     }
                 } else {
                     it.remove();
@@ -100,7 +100,7 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl {
             for (Permanent perm : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
                 if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
                     for (Ability abilityToAdd : ability) {
-                        perm.addAbility(abilityToAdd, source.getSourceId(), game, false);
+                        perm.addAbility(abilityToAdd, source.getSourceId(), game);
                     }
                 }
             }
@@ -112,7 +112,7 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl {
                     if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
                         if (filter.match(perm, source.getSourceId(), source.getControllerId(), game)) {
                             for (Ability abilityToAdd : ability) {
-                                perm.addAbility(abilityToAdd, source.getSourceId(), game, false);
+                                perm.addAbility(abilityToAdd, source.getSourceId(), game);
                             }
                         }
                     }
@@ -154,6 +154,7 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl {
 
     /**
      * Add quotes to gains abilities (by default static abilities don't have it)
+     * @return 
      */
     public GainAbilityControlledEffect withForceQuotes() {
         this.forceQuotes = true;

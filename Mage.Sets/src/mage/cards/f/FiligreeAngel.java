@@ -1,34 +1,30 @@
-
-
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.dynamicvalue.common.ArtifactYouControlCount;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.hint.common.ArtifactYouControlHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledPermanent;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author Loki
  */
 public final class FiligreeAngel extends CardImpl {
 
-    public FiligreeAngel (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}{W}{W}{U}");
+    public FiligreeAngel(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}{W}{W}{U}");
         this.subtype.add(SubType.ANGEL);
-
-
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
@@ -36,10 +32,10 @@ public final class FiligreeAngel extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Filigree Angel enters the battlefield, you gain 3 life for each artifact you control.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new FiligreeAngelEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new FiligreeAngelEffect()).addHint(ArtifactYouControlHint.instance));
     }
 
-    public FiligreeAngel (final FiligreeAngel card) {
+    public FiligreeAngel(final FiligreeAngel card) {
         super(card);
     }
 
@@ -50,12 +46,6 @@ public final class FiligreeAngel extends CardImpl {
 }
 
 class FiligreeAngelEffect extends OneShotEffect {
-    
-    private static final FilterPermanent filter = new FilterControlledPermanent();
-
-    static {
-        filter.add(CardType.ARTIFACT.getPredicate());
-    }
 
     public FiligreeAngelEffect() {
         super(Outcome.GainLife);
@@ -70,7 +60,7 @@ class FiligreeAngelEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            int life = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) * 3;
+            int life = ArtifactYouControlCount.instance.calculate(game, source, this) * 3;
             player.gainLife(life, game, source);
         }
         return true;

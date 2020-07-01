@@ -396,12 +396,16 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 }
             }
 
-            while ((outcome.isGood() ? target.getTargets().size() < target.getMaxNumberOfTargets() : !target.isChosen())
+            // exile cost workaround: exile is bad, but exile from graveyard in most cases is good (more exiled -- more good things you get, e.g. delve's pay)
+            boolean isRealGood = outcome.isGood() || outcome == Outcome.Exile;
+            while ((isRealGood ? target.getTargets().size() < target.getMaxNumberOfTargets() : !target.isChosen())
                     && !cards.isEmpty()) {
                 Card pick = pickTarget(abilityControllerId, cards, outcome, target, null, game);
                 if (pick != null) {
                     target.addTarget(pick.getId(), null, game);
                     cards.remove(pick);
+                } else {
+                    break;
                 }
             }
 
@@ -1267,7 +1271,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         //play a land that will allow us to play an unplayable
         for (Mana mana : unplayable.keySet()) {
             for (Card card : lands) {
-                for (ActivatedManaAbilityImpl ability : card.getAbilities().getActivatedManaAbilities(Zone.BATTLEFIELD)) {
+                for (ActivatedManaAbilityImpl ability : card.getAbilities(game).getActivatedManaAbilities(Zone.BATTLEFIELD)) {
                     for (Mana netMana : ability.getNetMana(game)) {
                         if (netMana.enough(mana)) {
                             this.playLand(card, game, false);
@@ -1281,7 +1285,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         //play a land that will get us closer to playing an unplayable
         for (Mana mana : unplayable.keySet()) {
             for (Card card : lands) {
-                for (ActivatedManaAbilityImpl ability : card.getAbilities().getActivatedManaAbilities(Zone.BATTLEFIELD)) {
+                for (ActivatedManaAbilityImpl ability : card.getAbilities(game).getActivatedManaAbilities(Zone.BATTLEFIELD)) {
                     for (Mana netMana : ability.getNetMana(game)) {
                         if (mana.contains(netMana)) {
                             this.playLand(card, game, false);
@@ -1321,7 +1325,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                         if (ability != null && ability.canActivate(playerId, game).canActivate()
                                 && !game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, ability.getSourceId(), ability.getSourceId(), playerId), ability, game, true)) {
                             if (card.getCardType().contains(CardType.INSTANT)
-                                    || card.hasAbility(FlashAbility.getInstance().getId(), game)) {
+                                    || card.hasAbility(FlashAbility.getInstance(), game)) {
                                 playableInstant.add(card);
                             } else {
                                 playableNonInstant.add(card);
@@ -1362,7 +1366,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             }
         }
         for (Card card : graveyard.getCards(game)) {
-            for (ActivatedAbility ability : card.getAbilities().getActivatedAbilities(Zone.GRAVEYARD)) {
+            for (ActivatedAbility ability : card.getAbilities(game).getActivatedAbilities(Zone.GRAVEYARD)) {
                 if (ability.canActivate(playerId, game).canActivate()) {
                     ManaOptions abilityOptions = ability.getManaCosts().getOptions();
                     if (abilityOptions.isEmpty()) {
@@ -1529,10 +1533,34 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 }
             }
         }
+
         // pay phyrexian life costs
         if (cost instanceof PhyrexianManaCost) {
             return cost.pay(null, game, null, playerId, false, null) || permittingObject != null;
         }
+
+        // pay special mana like convoke cost (tap for pay)
+        // GUI: user see "special" button while pay spell's cost
+        // TODO: AI can't prioritize special mana types to pay, e.g. it will use first available
+        SpecialAction specialAction = game.getState().getSpecialActions().getControlledBy(this.getId(), true)
+                .values().stream().findFirst().orElse(null);
+        ManaOptions specialMana = specialAction == null ? null : specialAction.getManaOptions(ability, game, unpaid);
+        if (specialMana != null) {
+            for (Mana netMana : specialMana) {
+                if (cost.testPay(netMana) || permittingObject != null) {
+                    if (netMana instanceof ConditionalMana && !((ConditionalMana) netMana).apply(ability, game, getId(), cost)) {
+                        continue;
+                    }
+                    specialAction.setUnpaidMana(unpaid);
+                    if (activateAbility(specialAction, game)) {
+                        return true;
+                    }
+                    // only one time try to pay
+                    break;
+                }
+            }
+        }
+
         return false;
     }
 
@@ -1893,27 +1921,6 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         log.debug("chooseReplacementEffect");
         //TODO: implement this
         return 0;
-    }
-
-    @Override
-    public SpellAbility chooseSpellAbilityForCast(SpellAbility ability, Game game, boolean noMana) {
-        switch (ability.getSpellAbilityType()) {
-            case SPLIT:
-            case SPLIT_FUSED:
-            case SPLIT_AFTERMATH:
-                MageObject object = game.getObject(ability.getSourceId());
-                if (object != null) {
-                    LinkedHashMap<UUID, ActivatedAbility> useableAbilities = getSpellAbilities(playerId, object, game.getState().getZone(object.getId()), game);
-                    if (useableAbilities != null && !useableAbilities.isEmpty()) {
-                        // game.fireGetChoiceEvent(playerId, name, object, new ArrayList<>(useableAbilities.values()));
-                        // TODO: Improve this
-                        return (SpellAbility) useableAbilities.values().iterator().next();
-                    }
-                }
-                return null;
-            default:
-                return ability;
-        }
     }
 
     @Override

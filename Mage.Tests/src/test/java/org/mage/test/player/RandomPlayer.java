@@ -73,7 +73,7 @@ public class RandomPlayer extends ComputerPlayer {
     }
 
     private Ability getAction(Game game) {
-        List<Ability> playables = getPlayableAbilities(game);
+        List<ActivatedAbility> playables = getPlayableAbilities(game);
         Ability ability;
         while (true) {
             if (playables.size() == 1) {
@@ -115,8 +115,8 @@ public class RandomPlayer extends ComputerPlayer {
         return ability;
     }
 
-    protected List<Ability> getPlayableAbilities(Game game) {
-        List<Ability> playables = getPlayable(game, true);
+    protected List<ActivatedAbility> getPlayableAbilities(Game game) {
+        List<ActivatedAbility> playables = getPlayable(game, true);
         playables.add(pass);
         return playables;
     }

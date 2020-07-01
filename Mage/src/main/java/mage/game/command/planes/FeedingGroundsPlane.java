@@ -12,6 +12,7 @@ import mage.abilities.dynamicvalue.common.TargetConvertedManaCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.RollPlanarDieEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
+import mage.abilities.effects.common.cost.PlanarDieRollCostIncreasingEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.Card;
 import mage.constants.*;
@@ -74,7 +75,7 @@ class FeedingGroundsEffect extends CostModificationEffectImpl {
                 new ColorPredicate(ObjectColor.GREEN)));
     }
 
-    private static final String rule = "Red spells cost {1} less to cast. Green spells cost {1} less to cast.";
+    private static final String rule = "Red spells cost {1} less to cast. Green spells cost {1} less to cast";
     private int amount = 1;
 
     public FeedingGroundsEffect() {

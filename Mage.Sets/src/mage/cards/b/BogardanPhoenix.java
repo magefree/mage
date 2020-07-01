@@ -3,7 +3,7 @@ package mage.cards.b;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
@@ -36,7 +36,7 @@ public final class BogardanPhoenix extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Bogardan Phoenix dies, exile it if it had a death counter on it. Otherwise, return it to the battlefield under your control and put a death counter on it.
-        this.addAbility(new DiesTriggeredAbility(new BogardanPhoenixEffect(), false));
+        this.addAbility(new DiesSourceTriggeredAbility(new BogardanPhoenixEffect(), false));
     }
 
     public BogardanPhoenix(final BogardanPhoenix card) {

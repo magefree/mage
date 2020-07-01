@@ -89,7 +89,10 @@ class TitansNestEffect extends OneShotEffect {
 class TitansNestManaAbility extends ActivatedManaAbilityImpl {
 
     TitansNestManaAbility() {
-        super(Zone.BATTLEFIELD, (BasicManaEffect) new BasicManaEffect(new TitansNestConditionalMana()).setText("Add {C}. Spend this mana only to cast a colored spell without {X} in its mana cost."), new ExileFromGraveCost(new TargetCardInYourGraveyard()));
+        super(Zone.BATTLEFIELD, (BasicManaEffect) new BasicManaEffect(
+                new TitansNestConditionalMana())
+                .setText("Add {C}. Spend this mana only to cast a colored spell without {X} in its mana cost."), 
+                new ExileFromGraveCost(new TargetCardInYourGraveyard()));
         this.netMana.add(Mana.ColorlessMana(1));
     }
 

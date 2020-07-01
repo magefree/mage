@@ -53,8 +53,7 @@ class AcolyteOfAfflictionEffect extends OneShotEffect {
 
     AcolyteOfAfflictionEffect() {
         super(Outcome.Benefit);
-        staticText = "put the top two cards of your library into your graveyard, " +
-                "then you may return a permanent card from your graveyard to your hand.";
+        staticText = "mill two cards, then you may return a permanent card from your graveyard to your hand.";
     }
 
     private AcolyteOfAfflictionEffect(final AcolyteOfAfflictionEffect effect) {

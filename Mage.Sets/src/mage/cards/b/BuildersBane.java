@@ -77,7 +77,7 @@ class BuildersBaneEffect extends OneShotEffect {
             Permanent permanent = game.getPermanent(targetID);
             if (permanent != null) {
                 if (permanent.destroy(source.getSourceId(), game, false)) {
-                    game.applyEffects();
+                    game.getState().processAction(game);
                     if (permanent.getZoneChangeCounter(game) + 1 == game.getState().getZoneChangeCounter(permanent.getId())
                             && game.getState().getZone(permanent.getId()) != Zone.GRAVEYARD) {
                         // A replacement effect has moved the card to another zone as grvayard

@@ -7,7 +7,6 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.EscalateAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -90,14 +89,11 @@ class CollectiveDefianceEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
-        if (targetPlayer != null) {
-            int count = targetPlayer.getHand().size();
-            for (Card card : targetPlayer.getHand().getCards(game)) {
-                targetPlayer.discard(card, source, game);
-            }
-            targetPlayer.drawCards(count, source.getSourceId(), game);
-            return true;
+        if (targetPlayer == null) {
+            return false;
         }
-        return false;
+        int count = targetPlayer.discard(targetPlayer.getHand(), source, game).size();
+        targetPlayer.drawCards(count, source.getSourceId(), game);
+        return true;
     }
 }

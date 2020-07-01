@@ -1,16 +1,18 @@
 package mage.verify;
 
 import mage.ObjectColor;
+import mage.abilities.Ability;
+import mage.abilities.effects.CostModificationEffect;
+import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
+import mage.abilities.effects.keyword.ScryEffect;
+import mage.abilities.keyword.MenaceAbility;
 import mage.abilities.keyword.MultikickerAbility;
 import mage.cards.*;
 import mage.cards.basiclands.BasicLand;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.cards.repository.CardScanner;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.game.command.Plane;
 import mage.game.draft.RateCard;
 import mage.game.permanent.token.Token;
@@ -117,6 +119,9 @@ public class VerifyCardDataTest {
         // subtype
         skipListCreate(SKIP_LIST_SUBTYPE);
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Miss Demeanor");
+        // the following is temporary
+        subtypesToIgnore.add("Dog");
+        subtypesToIgnore.add("Hound");
 
         // number
         skipListCreate(SKIP_LIST_NUMBER);
@@ -156,7 +161,7 @@ public class VerifyCardDataTest {
 
         printMessages(outputMessages);
         if (failed > 0) {
-            Assert.fail(failed + " errors in verify");
+            Assert.fail("found " + failed + " errors in cards verify (see errors list above)");
         }
     }
 
@@ -515,6 +520,24 @@ public class VerifyCardDataTest {
                 // 3. check that getMana works without NPE errors (it uses getNetMana with empty game param for AI score calcs)
                 // https://github.com/magefree/mage/issues/6300
                 card.getMana();
+
+                // 4. check cost modification effects must be ALL instead STACK zone
+                for (Ability ability : card.getAbilities()) {
+                    // uncomment to get playable problems, see https://github.com/magefree/mage/issues/6684
+                    if (ability.getAllEffects().stream().noneMatch(e -> e instanceof CostModificationEffect)) {
+                        continue;
+                    }
+
+                    // must change zone to ALL and check conditions/filters (no spell filters, only cards)
+                    if (ability.getZone() == Zone.STACK) {
+                        //errorsList.add("error, cost modification effect must be in ALL zone instead " + ability.getZone() + " - " + card.getName() + " - " + ability.toString());
+                    }
+
+                    // must check conditions/filters (no spell filters, only cards)
+                    if (ability.getZone() == Zone.BATTLEFIELD) {
+                        //warningsList.add("warning, must check cost modification filters/conditions " + card.getName() + " - " + ability.toString());
+                    }
+                }
             }
         }
 
@@ -680,9 +703,8 @@ public class VerifyCardDataTest {
         for (Class<? extends TokenImpl> tokenClass : publicTokens) {
             String className = extractShortClass(tokenClass);
             Token token = (Token) createNewObject(tokenClass);
-            //Assert.assertNotNull("Can't create token by default constructor", token);
             if (token == null) {
-                Assert.fail("Can't create token by default constructor: " + className);
+                errorsList.add("error, token must have default constructor with zero params: " + tokenClass.getName());
             } else if (tokDataNamesIndex.getOrDefault(token.getName(), "").isEmpty()) {
                 errorsList.add("error, can't find data in card-pictures-tok.txt for token: " + tokenClass.getName() + " -> " + token.getName());
             }
@@ -699,6 +721,10 @@ public class VerifyCardDataTest {
         if (errorsList.size() > 0) {
             Assert.fail("Found token errors: " + errorsList.size());
         }
+
+        // TODO: all token must have correct availableImageSetCodes (all sets with that token)
+        // Some sets have original card, but don't have token card at all. So you must use scryfall tokens list above to find
+        // all token's sets and compare with xmage
     }
 
     @Test
@@ -902,6 +928,28 @@ public class VerifyCardDataTest {
             fail(card, "abilities", "card have Multikicker ability, but missing it in rules text");
         }
 
+        // special check: missing or wrong ability/effect hints
+        Map<Class, String> hints = new HashMap<>();
+        hints.put(MenaceAbility.class, "can't be blocked except by two or more");
+        hints.put(ScryEffect.class, "Look at the top card of your library");
+        for (Class objectClass : hints.keySet()) {
+            String objectHint = hints.get(objectClass);
+            // ability/effect must have description or not
+            boolean mustCheck = card.getAbilities().containsClass(objectClass)
+                    || card.getAbilities().stream()
+                    .map(Ability::getAllEffects)
+                    .flatMap(Collection::stream)
+                    .anyMatch(effect -> effect.getClass().isAssignableFrom(objectClass));
+            mustCheck = false; // TODO: enable and fix all problems with effect and ability hints
+            if (mustCheck) {
+                boolean needHint = ref.text.contains(objectHint);
+                boolean haveHint = card.getRules().stream().anyMatch(rule -> rule.contains(objectHint));
+                if (needHint != haveHint) {
+                    fail(card, "abilities", "card have " + objectClass.getSimpleName() + " but hint is wrong (it must be " + (needHint ? "enabled" : "disabled") + ")");
+                }
+            }
+        }
+
         // spells have only 1 ability
         if (card.isSorcery() || card.isInstant()) {
             return;
@@ -963,20 +1011,32 @@ public class VerifyCardDataTest {
     }
 
     @Test
-    @Ignore
     public void showCardInfo() throws Exception {
         // debug only: show direct card info (takes it from class file, not from db repository)
-        String cardName = "Essence Capture";
+        // can check multiple cards at once, example: name1;name2;name3
+        String cardNames = "Armed // Dangerous;Beacon Behemoth;Grizzly Bears";
         CardScanner.scan();
-        CardSetInfo testSet = new CardSetInfo(cardName, "test", "123", Rarity.COMMON);
-        CardInfo cardInfo = CardRepository.instance.findCard(cardName);
-        Card card = CardImpl.createCard(cardInfo.getClassName(), testSet);
-        System.out.println(card.getName());
-        if (card instanceof SplitCard) {
-            card.getAbilities().getRules(card.getName()).stream().forEach(System.out::println);
-        } else {
-            card.getRules().stream().forEach(System.out::println);
-        }
+        Arrays.stream(cardNames.split(";")).forEach(cardName -> {
+            cardName = cardName.trim();
+            CardSetInfo testSet = new CardSetInfo(cardName, "test", "123", Rarity.COMMON);
+            CardInfo cardInfo = CardRepository.instance.findCard(cardName);
+            if (cardInfo == null) {
+                Assert.fail("Can't find card name: " + cardName);
+            }
+            Card card = CardImpl.createCard(cardInfo.getClassName(), testSet);
+            System.out.println();
+            System.out.println(card.getName() + " " + card.getManaCost().getText());
+            if (card instanceof SplitCard) {
+                card.getAbilities().getRules(card.getName()).forEach(this::printAbilityText);
+            } else {
+                card.getRules().forEach(this::printAbilityText);
+            }
+        });
+    }
+
+    private void printAbilityText(String text) {
+        text = text.replace("<br>", "\n");
+        System.out.println(text);
     }
 
     private void checkWrongAbilitiesText(Card card, JsonCard ref, int cardIndex) {

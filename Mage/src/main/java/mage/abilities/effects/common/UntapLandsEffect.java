@@ -17,7 +17,7 @@ import mage.util.CardUtil;
  */
 public class UntapLandsEffect extends OneShotEffect {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("untapped lands");
+    private static final FilterLandPermanent filter = new FilterLandPermanent("land(s) to untap");
 
     static {
         filter.add(TappedPredicate.instance);

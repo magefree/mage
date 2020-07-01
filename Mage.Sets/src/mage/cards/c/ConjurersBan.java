@@ -12,6 +12,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -66,18 +67,19 @@ class ConjurersBanEffect extends ContinuousRuleModifyingEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.CAST_SPELL || event.getType() == GameEvent.EventType.PLAY_LAND) {
             MageObject object = game.getObject(event.getSourceId());
-            return object != null && object.getName().equals(game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY));
+            String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
+            return CardUtil.haveSameNames(object, cardName, game);
         }
         return false;
     }
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        String namedCard = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
+        String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
         String playerName = game.getPlayer(source.getControllerId()).getName();
-        if (namedCard == null || playerName == null || source.getSourceObject(game) == null) {
+        if (cardName == null || playerName == null || source.getSourceObject(game) == null) {
             return super.getInfoMessage(source, event, game);
         }
-        return "Until " + playerName + "'s next turn, spells named " + namedCard + " can't be cast and lands named " + namedCard + " can't be played (" + source.getSourceObject(game).getIdName() + ").";
+        return "Until " + playerName + "'s next turn, spells named " + cardName + " can't be cast and lands named " + cardName + " can't be played (" + source.getSourceObject(game).getIdName() + ").";
     }
 }

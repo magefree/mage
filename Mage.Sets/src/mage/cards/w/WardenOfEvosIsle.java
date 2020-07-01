@@ -1,7 +1,5 @@
-
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
@@ -14,20 +12,22 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class WardenOfEvosIsle extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Creature spells with flying");
+
     static {
         filter.add(CardType.CREATURE.getPredicate());
         filter.add(new AbilityPredicate(FlyingAbility.class));
     }
 
     public WardenOfEvosIsle(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
         this.subtype.add(SubType.BIRD);
         this.subtype.add(SubType.WIZARD);
 
@@ -36,6 +36,7 @@ public final class WardenOfEvosIsle extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+
         // Creature spells with flying you cast cost {1} less to cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
 

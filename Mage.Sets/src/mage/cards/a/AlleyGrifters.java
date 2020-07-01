@@ -4,7 +4,7 @@ package mage.cards.a;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BecomesBlockedByCreatureTriggeredAbility;
+import mage.abilities.common.BecomesBlockedSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -29,7 +29,7 @@ public final class AlleyGrifters extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Alley Grifters becomes blocked, defending player discards a card.
-        this.addAbility(new BecomesBlockedByCreatureTriggeredAbility(new AlleyGriftersDiscardEffect(), false));
+        this.addAbility(new BecomesBlockedSourceTriggeredAbility(new AlleyGriftersDiscardEffect(), false));
     }
 
     public AlleyGrifters(final AlleyGrifters card) {

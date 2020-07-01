@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.common.BlocksOrBecomesBlockedTriggeredAbility;
+import mage.abilities.common.BlocksOrBecomesBlockedSourceTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BecomesColorTargetEffect;
 import mage.cards.CardImpl;
@@ -29,7 +29,7 @@ public final class AislingLeprechaun extends CardImpl {
         // Whenever Aisling Leprechaun blocks or becomes blocked by a creature, that creature becomes green.
         Effect effect = new BecomesColorTargetEffect(ObjectColor.GREEN, Duration.EndOfGame);
         effect.setText("that creature becomes green");
-        Ability ability = new BlocksOrBecomesBlockedTriggeredAbility(effect, false);
+        Ability ability = new BlocksOrBecomesBlockedSourceTriggeredAbility(effect, false);
         this.addAbility(ability);
     }
 

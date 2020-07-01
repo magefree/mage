@@ -4,7 +4,7 @@ package mage.game.permanent.token;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 
 /**
@@ -22,7 +22,7 @@ public final class ReefWormFishToken extends TokenImpl {
         power = new MageInt(3);
         toughness = new MageInt(3);
 
-        addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new ReefWormWhaleToken())));
+        addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new ReefWormWhaleToken())));
     }
 
     public ReefWormFishToken(final ReefWormFishToken token) {

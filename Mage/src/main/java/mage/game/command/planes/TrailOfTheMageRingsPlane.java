@@ -8,6 +8,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.RollPlanarDieEffect;
+import mage.abilities.effects.common.cost.PlanarDieRollCostIncreasingEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.abilities.keyword.ReboundAbility;
 import mage.cards.Card;
@@ -120,7 +121,7 @@ class TrailOfTheMageRingsReboundEffect extends ContinuousEffectImpl {
 
     private void addReboundAbility(Card card, Ability source, Game game) {
         if (filter.match(card, game)) {
-            boolean found = card.getAbilities().stream().anyMatch(ability -> ability instanceof ReboundAbility);
+            boolean found = card.getAbilities(game).containsClass(ReboundAbility.class);
             if (!found) {
                 Ability ability = new ReboundAbility();
                 game.getState().addOtherAbility(card, ability);

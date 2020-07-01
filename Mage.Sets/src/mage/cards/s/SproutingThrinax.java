@@ -4,7 +4,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -28,7 +28,7 @@ public final class SproutingThrinax extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(saprolingToken, 3), false));
+        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(saprolingToken, 3), false));
     }
 
     public SproutingThrinax(final SproutingThrinax card) {

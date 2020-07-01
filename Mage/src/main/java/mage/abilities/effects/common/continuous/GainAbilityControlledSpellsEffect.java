@@ -51,7 +51,7 @@ public class GainAbilityControlledSpellsEffect extends ContinuousEffectImpl {
                 if ((stackObject instanceof Spell) && !stackObject.isCopy() && stackObject.isControlledBy(source.getControllerId())) {
                     Spell spell = (Spell) stackObject;
                     if (filter.match(spell, game)) {
-                        if (!spell.getAbilities().contains(ability)) {
+                        if (!spell.hasAbility(ability, game)) {
                             game.getState().addOtherAbility(spell.getCard(), ability);
                         }
                     }

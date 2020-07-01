@@ -27,10 +27,10 @@ public enum SuspendedCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(source.getSourceId());
         if (card != null) {
-            boolean found = card.getAbilities().stream().anyMatch(ability -> ability instanceof SuspendAbility);
+            boolean found = card.getAbilities(game).containsClass(SuspendAbility.class);
 
             if (!found) {
-                found = game.getState().getAllOtherAbilities(source.getSourceId()).stream().anyMatch(ability -> ability instanceof SuspendAbility);
+                found = game.getState().getAllOtherAbilities(source.getSourceId()).containsClass(SuspendAbility.class);
 
             }
             if (found) {

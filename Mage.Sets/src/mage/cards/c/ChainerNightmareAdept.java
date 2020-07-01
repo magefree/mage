@@ -177,6 +177,15 @@ class ChainerNightmareAdeptTriggeredAbility extends EntersBattlefieldAllTriggere
         super(Zone.BATTLEFIELD, gainHasteUntilNextTurnEffect, filter, false, SetTargetPointer.PERMANENT, abilityText);
     }
 
+    ChainerNightmareAdeptTriggeredAbility(final ChainerNightmareAdeptTriggeredAbility effect) {
+        super(effect);
+    }
+
+    @Override
+    public ChainerNightmareAdeptTriggeredAbility copy() {
+        return new ChainerNightmareAdeptTriggeredAbility(this);
+    }
+
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (!super.checkTrigger(event, game)) {

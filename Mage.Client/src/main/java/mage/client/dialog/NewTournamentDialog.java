@@ -1203,6 +1203,7 @@ public class NewTournamentDialog extends MageDialog {
             tOptions.getLimitedOptions().setConstructionTime((Integer) this.spnConstructTime.getValue() * 60);
             tOptions.getLimitedOptions().setIsRandom(tournamentType.isRandom());
             tOptions.getLimitedOptions().setIsRichMan(tournamentType.isRichMan());
+            tOptions.getLimitedOptions().setIsJumpstart(tournamentType.isJumpstart());
             if (tournamentType.isCubeBooster()) {
                 tOptions.getLimitedOptions().setDraftCubeName(this.cbDraftCube.getSelectedItem().toString());
                 if (!(cubeFromDeckFilename.isEmpty())) {

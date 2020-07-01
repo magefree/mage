@@ -12,18 +12,25 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 /**
- *
  * @author Plopman
  */
 public class ChooseColorEffect extends OneShotEffect {
 
+    private final String exceptColor;
+
     public ChooseColorEffect(Outcome outcome) {
+        this(outcome, null);
+    }
+
+    public ChooseColorEffect(Outcome outcome, String exceptColor) {
         super(outcome);
-        staticText = "choose a color";
+        this.exceptColor = exceptColor;
+        staticText = "choose a color" + (exceptColor != null ? " other than " + exceptColor.toLowerCase() : "");
     }
 
     public ChooseColorEffect(final ChooseColorEffect effect) {
         super(effect);
+        this.exceptColor = effect.exceptColor;
     }
 
     @Override
@@ -34,17 +41,18 @@ public class ChooseColorEffect extends OneShotEffect {
             mageObject = game.getObject(source.getSourceId());
         }
         ChoiceColor choice = new ChoiceColor();
-        if (controller != null && mageObject != null && controller.choose(outcome, choice, game)) {
-            if (!game.isSimulation()) {
-                game.informPlayers(mageObject.getLogName() + ": " + controller.getLogName() + " has chosen " + choice.getChoice());
-            }
-            game.getState().setValue(mageObject.getId() + "_color", choice.getColor());
-            if (mageObject instanceof Permanent) {
-                ((Permanent) mageObject).addInfo("chosen color", CardUtil.addToolTipMarkTags("Chosen color: " + choice.getChoice()), game);
-            }
-            return true;
+        if (exceptColor != null) {
+            choice.removeColorFromChoices(exceptColor);
         }
-        return false;
+        if (controller == null || mageObject == null || !controller.choose(outcome, choice, game)) {
+            return false;
+        }
+        game.informPlayers(mageObject.getLogName() + ": " + controller.getLogName() + " has chosen " + choice.getChoice());
+        game.getState().setValue(mageObject.getId() + "_color", choice.getColor());
+        if (mageObject instanceof Permanent) {
+            ((Permanent) mageObject).addInfo("chosen color", CardUtil.addToolTipMarkTags("Chosen color: " + choice.getChoice()), game);
+        }
+        return true;
     }
 
     @Override

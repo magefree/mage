@@ -1,7 +1,5 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -15,8 +13,9 @@ import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class BishopOfTheBloodstained extends CardImpl {
@@ -36,7 +35,7 @@ public final class BishopOfTheBloodstained extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // When Bishop of the Bloodstained enters the battlefield, target opponent loses 1 life for each vampire you control.
+        // When Bishop of the Bloodstained enters the battlefield, target opponent loses 1 life for each Vampire you control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new LoseLifeTargetEffect(new PermanentsOnBattlefieldCount(filter)));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);

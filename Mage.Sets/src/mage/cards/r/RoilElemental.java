@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
@@ -13,6 +12,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.target.common.TargetCreaturePermanent;
+import mage.watchers.common.LostControlWatcher;
 
 /**
  *
@@ -36,6 +36,7 @@ public final class RoilElemental extends CardImpl {
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new GainControlTargetEffect(Duration.Custom), new SourceOnBattlefieldControlUnchangedCondition(), rule);
         Ability ability = new LandfallAbility(Zone.BATTLEFIELD, effect, true);
         ability.addTarget(new TargetCreaturePermanent());
+        ability.addWatcher(new LostControlWatcher());
         this.addAbility(ability);
     }
 

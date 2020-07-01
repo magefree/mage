@@ -3,7 +3,10 @@ package mage.cards.o;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.cost.SourceCostReductionForEachCardInGraveyardEffect;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
+import mage.abilities.effects.common.cost.SpellCostReductionForEachSourceEffect;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
@@ -28,10 +31,10 @@ public final class OreScaleGuardian extends CardImpl {
         this.toughness = new MageInt(4);
 
         // This spell costs {1} less to cast for each land card in your graveyard.
-        Ability ability = new SimpleStaticAbility(
-                Zone.ALL, new SourceCostReductionForEachCardInGraveyardEffect(StaticFilters.FILTER_CARD_LAND)
-        );
+        DynamicValue xValue = new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_LAND);
+        Ability ability = new SimpleStaticAbility(Zone.ALL, new SpellCostReductionForEachSourceEffect(1, xValue));
         ability.setRuleAtTheTop(true);
+        ability.addHint(new ValueHint("Land card in your graveyard", xValue));
         this.addAbility(ability);
 
         // Flying

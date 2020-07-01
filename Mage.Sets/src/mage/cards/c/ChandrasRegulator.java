@@ -2,14 +2,12 @@ package mage.cards.c;
 
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.LoyaltyAbility;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.ActivatePlaneswalkerLoyaltyAbilityTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
@@ -19,7 +17,6 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
 import mage.players.Player;
@@ -47,7 +44,7 @@ public final class ChandrasRegulator extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
 
         // Whenever you activate a loyalty ability of a Chandra planeswalker, you may pay {1}. If you do, copy that ability. You may choose new targets for the copy.
-        this.addAbility(new ChandrasRegulatorTriggeredAbility());
+        this.addAbility(new ActivatePlaneswalkerLoyaltyAbilityTriggeredAbility(new ChandrasRegulatorEffect(), SubType.CHANDRA));
 
         // {1}, {T}, Discard a Mountain card or a red card: Draw a card.
         Ability ability = new SimpleActivatedAbility(
@@ -68,56 +65,11 @@ public final class ChandrasRegulator extends CardImpl {
     }
 }
 
-class ChandrasRegulatorTriggeredAbility extends TriggeredAbilityImpl {
-
-    ChandrasRegulatorTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new ChandrasRegulatorEffect(), false);
-    }
-
-    private ChandrasRegulatorTriggeredAbility(final ChandrasRegulatorTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public ChandrasRegulatorTriggeredAbility copy() {
-        return new ChandrasRegulatorTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ACTIVATED_ABILITY;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (!event.getPlayerId().equals(getControllerId())) {
-            return false;
-        }
-        StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
-        if (stackAbility == null || !(stackAbility.getStackAbility() instanceof LoyaltyAbility)) {
-            return false;
-        }
-        Permanent permanent = stackAbility.getSourcePermanentOrLKI(game);
-        if (permanent == null || !permanent.isPlaneswalker()
-                || !permanent.hasSubtype(SubType.CHANDRA, game)) {
-            return false;
-        }
-        Effect effect = this.getEffects().get(0);
-        effect.setValue("stackAbility", stackAbility);
-        return true;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you activate a loyalty ability of a Chandra planeswalker, you may pay {1}. " +
-                "If you do, copy that ability. You may choose new targets for the copy.";
-    }
-}
-
 class ChandrasRegulatorEffect extends OneShotEffect {
 
     ChandrasRegulatorEffect() {
         super(Outcome.Benefit);
+        staticText = "you may pay {1}. If you do, copy that ability. You may choose new targets for the copy";
     }
 
     private ChandrasRegulatorEffect(final ChandrasRegulatorEffect effect) {

@@ -154,6 +154,7 @@ public class CardPanelRenderImpl extends CardPanel {
             sb.append(this.view.getToughness());
             sb.append(this.view.getLoyalty());
             sb.append(this.view.getColor().toString());
+            sb.append(this.view.getType());
             sb.append(this.view.getExpansionSetCode());
             for (CardType type : this.view.getCardTypes()) {
                 sb.append((char) type.ordinal());
@@ -227,7 +228,7 @@ public class CardPanelRenderImpl extends CardPanel {
     private BufferedImage faceArtImage;
 
     // Factory to generate card appropriate views
-    private CardRendererFactory cardRendererFactory = new CardRendererFactory();
+    private final CardRendererFactory cardRendererFactory = new CardRendererFactory();
 
     // The rendered card image, with or without the art image loaded yet
     // = null while invalid

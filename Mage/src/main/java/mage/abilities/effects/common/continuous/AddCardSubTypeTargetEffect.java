@@ -47,13 +47,21 @@ public class AddCardSubTypeTargetEffect extends ContinuousEffectImpl {
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         StringBuilder sb = new StringBuilder();
         if (!mode.getTargets().isEmpty()) {
             sb.append("Target ").append(mode.getTargets().get(0).getTargetName());
         } else {
             sb.append("It ");
         }
-        sb.append(" becomes ").append(addedSubType).append(" in addition to its other types ").append(duration.toString());
+        if (addedSubType.toString().matches("(?i)^[AEIOUYaeiouy].*$")) {
+            sb.append(" becomes an ");
+        } else {
+            sb.append(" becomes a ");
+        }
+        sb.append(addedSubType).append(" in addition to its other types ").append(duration.toString());
         return sb.toString();
     }
 }

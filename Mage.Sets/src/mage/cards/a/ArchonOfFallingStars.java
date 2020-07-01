@@ -2,7 +2,7 @@ package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -33,7 +33,7 @@ public final class ArchonOfFallingStars extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Archon of Falling Stars dies, you may return target enchantment card from your graveyard to the battlefield.
-        Ability ability = new DiesTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(false, false), true);
+        Ability ability = new DiesSourceTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(false, false), true);
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
     }

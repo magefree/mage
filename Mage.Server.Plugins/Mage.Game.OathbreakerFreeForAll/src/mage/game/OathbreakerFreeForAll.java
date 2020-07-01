@@ -25,8 +25,8 @@ import java.util.*;
 public class OathbreakerFreeForAll extends GameCommanderImpl {
 
     private int numPlayers;
-    private Map<UUID, Set<UUID>> playerSignatureSpells = new HashMap<>();
-    private Map<UUID, Set<UUID>> playerOathbreakers = new HashMap<>();
+    private final Map<UUID, Set<UUID>> playerSignatureSpells = new HashMap<>();
+    private final Map<UUID, Set<UUID>> playerOathbreakers = new HashMap<>();
 
     private static final String COMMANDER_NAME_OATHBREAKER = "Oathbreaker";
     private static final String COMMANDER_NAME_SIGNATURE_SPELL = "Signature Spell";
@@ -122,19 +122,19 @@ public class OathbreakerFreeForAll extends GameCommanderImpl {
         if (player != null) {
             Set<UUID> commanders = this.playerOathbreakers.getOrDefault(player.getId(), new HashSet<>());
             Set<UUID> spells = this.playerSignatureSpells.getOrDefault(player.getId(), new HashSet<>());
-            for (UUID id : player.getCommandersIds()) {
+            for (UUID commanderId : super.getCommandersIds(player, commanderCardType)) {
                 switch (commanderCardType) {
                     case ANY:
-                        res.add(id);
+                        res.add(commanderId);
                         break;
                     case COMMANDER_OR_OATHBREAKER:
-                        if (commanders.contains(id)) {
-                            res.add(id);
+                        if (commanders.contains(commanderId)) {
+                            res.add(commanderId);
                         }
                         break;
                     case SIGNATURE_SPELL:
-                        if (spells.contains(id)) {
-                            res.add(id);
+                        if (spells.contains(commanderId)) {
+                            res.add(commanderId);
                         }
                         break;
                     default:

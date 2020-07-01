@@ -4,7 +4,7 @@ package mage.cards.d;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksOrBlocksTriggeredAbility;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -31,7 +31,7 @@ public final class DuskUrchins extends CardImpl {
         this.addAbility(new AttacksOrBlocksTriggeredAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance()), false));
 
         // When Dusk Urchins dies, draw a card for each -1/-1 counter on it.
-        this.addAbility(new DiesTriggeredAbility(new DrawCardSourceControllerEffect(new CountersSourceCount(CounterType.M1M1))));
+        this.addAbility(new DiesSourceTriggeredAbility(new DrawCardSourceControllerEffect(new CountersSourceCount(CounterType.M1M1))));
 
     }
 

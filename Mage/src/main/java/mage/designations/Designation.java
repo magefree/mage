@@ -1,5 +1,9 @@
 package mage.designations;
 
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.ObjectColor;
@@ -18,11 +22,6 @@ import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.util.GameLog;
 import mage.util.SubTypeList;
-
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -151,8 +150,8 @@ public abstract class Designation implements MageObject {
     }
 
     @Override
-    public EnumSet<CardType> getCardType() {
-        return emptySet;
+    public ArrayList<CardType> getCardType() {
+        return new ArrayList<>();
     }
 
     @Override
@@ -171,8 +170,8 @@ public abstract class Designation implements MageObject {
     }
 
     @Override
-    public boolean hasAbility(UUID abilityId, Game game) {
-        return abilites.containsKey(abilityId);
+    public boolean hasAbility(Ability ability, Game game) {
+        return this.getAbilities().contains(ability);
     }
 
     @Override

@@ -4,7 +4,7 @@ package mage.cards.p;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -28,7 +28,7 @@ public final class PlagueSpitter extends CardImpl {
         // At the beginning of your upkeep, Plague Spitter deals 1 damage to each creature and each player.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DamageEverythingEffect(1), TargetController.YOU, false));
         // When Plague Spitter dies, Plague Spitter deals 1 damage to each creature and each player.
-        this.addAbility(new DiesTriggeredAbility(new DamageEverythingEffect(1), false));
+        this.addAbility(new DiesSourceTriggeredAbility(new DamageEverythingEffect(1), false));
     }
 
     public PlagueSpitter(final PlagueSpitter card) {

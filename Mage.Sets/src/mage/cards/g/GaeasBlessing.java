@@ -1,7 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.ZoneChangeTriggeredAbility;
@@ -10,6 +9,7 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -68,24 +68,9 @@ class GaeasBlessingEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getFirstTarget());
-        if (player != null) {
-            List<UUID> targets = source.getTargets().get(1).getTargets();
-            boolean shuffle = false;
-            for (UUID targetId : targets) {
-                Card card = game.getCard(targetId);
-                if (card != null) {
-                    if (player.getGraveyard().contains(card.getId())) {
-                        player.getGraveyard().remove(card);
-                        card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-                        shuffle = true;
-                    }
-                }
-            }
-            if (shuffle) {
-                player.shuffleLibrary(source, game);
-            }
-            return true;
+        Player targetPlayer = game.getPlayer(source.getFirstTarget());
+        if (targetPlayer != null) {
+            return targetPlayer.shuffleCardsToLibrary(new CardsImpl(source.getTargets().get(1).getTargets()), game, source);
         }
         return false;
     }
@@ -155,14 +140,7 @@ class GaeasBlessingGraveToLibraryEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            game.informPlayers(controller.getLogName() + " shuffle their graveyard into their library");
-            for (Card card : controller.getGraveyard().getCards(game)) {
-                controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.GRAVEYARD, true, true);
-            }
-            controller.getLibrary().addAll(controller.getGraveyard().getCards(game), game);
-            controller.getGraveyard().clear();
-            controller.shuffleLibrary(source, game);
-            return true;
+            return controller.shuffleCardsToLibrary(controller.getGraveyard(), game, source);
         }
         return false;
     }

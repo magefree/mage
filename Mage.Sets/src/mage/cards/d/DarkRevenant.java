@@ -4,12 +4,13 @@ package mage.cards.d;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
@@ -34,7 +35,7 @@ public final class DarkRevenant extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Dark Revenant dies, put it on top of its owner's library.
-        this.addAbility(new DiesTriggeredAbility(new DarkRevenantEffect()));
+        this.addAbility(new DiesSourceTriggeredAbility(new DarkRevenantEffect()));
     }
 
     public DarkRevenant(final DarkRevenant card) {
@@ -67,10 +68,9 @@ class DarkRevenantEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(source.getSourceId());
         if (card != null && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
-            Player owner = game.getPlayer(card.getOwnerId());
-            if(owner != null) {
-                owner.getGraveyard().remove(card);
-                return card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
+            Player controller = game.getPlayer(source.getControllerId());
+            if(controller != null) {
+                return controller.putCardsOnTopOfLibrary(card, game, source, true);
             }
         }
         return true;

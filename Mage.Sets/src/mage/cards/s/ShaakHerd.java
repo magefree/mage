@@ -4,7 +4,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -33,7 +33,7 @@ public final class ShaakHerd extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Shaak Herd dies, you may return another target creature card from your graveyard to your hand.
-        Ability ability = new DiesTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect(), true);
+        Ability ability = new DiesSourceTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect(), true);
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
     }

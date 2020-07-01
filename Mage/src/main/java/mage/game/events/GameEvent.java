@@ -68,7 +68,6 @@ public class GameEvent implements Serializable {
          */
         ZONE_CHANGE,
         ZONE_CHANGE_GROUP,
-        EMPTY_DRAW,
         DRAW_CARDS, // applies to an instruction to draw more than one card before any replacement effects apply to individual cards drawn
         DRAW_CARD, DREW_CARD,
         EXPLORED,
@@ -89,6 +88,7 @@ public class GameEvent implements Serializable {
         CYCLE_CARD, CYCLED_CARD, CYCLE_DRAW,
         CLASH, CLASHED,
         DAMAGE_PLAYER,
+        MILL_CARDS,
         /* DAMAGED_PLAYER
          targetId    the id of the damaged player
          sourceId    sourceId of the ability which caused the damage
@@ -149,8 +149,20 @@ public class GameEvent implements Serializable {
          */
         SPELL_CAST,
         ACTIVATE_ABILITY, ACTIVATED_ABILITY,
+        /* ACTIVATE_ABILITY, ACTIVATED_ABILITY,
+         targetId    id of the ability to activate / use
+         sourceId    sourceId of the object with that ability
+         playerId    player that tries to use this ability
+        */
+        TAKE_SPECIAL_ACTION, TAKEN_SPECIAL_ACTION, // not used in implementation yet
+        /* TAKE_SPECIAL_ACTION, TAKEN_SPECIAL_ACTION,
+         targetId    id of the ability to activate / use
+         sourceId    sourceId of the object with that ability
+         playerId    player that tries to use this ability
+        */
         TRIGGERED_ABILITY,
-        COPY_STACKOBJECT,COPIED_STACKOBJECT,
+        RESOLVING_ABILITY,
+        COPY_STACKOBJECT, COPIED_STACKOBJECT,
         /* ADD_MANA
          targetId    id of the ability that added the mana
          sourceId    sourceId of the ability that added the mana
@@ -296,6 +308,7 @@ public class GameEvent implements Serializable {
         DESTROYED_PERMANENT,
         SACRIFICE_PERMANENT, SACRIFICED_PERMANENT,
         FIGHTED_PERMANENT,
+        BATCH_FIGHT,
         EXPLOITED_CREATURE,
         EVOLVED_CREATURE,
         EMBALMED_CREATURE,

@@ -10,6 +10,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.RollPlanarDieEffect;
+import mage.abilities.effects.common.cost.PlanarDieRollCostIncreasingEffect;
 import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
 import mage.constants.Planes;
 import mage.constants.SetTargetPointer;

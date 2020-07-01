@@ -3,7 +3,7 @@ package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -24,7 +24,7 @@ public final class MortusStrider extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Mortus Strider dies, return it to its owner's hand.
-        this.addAbility(new DiesTriggeredAbility(new ReturnToHandSourceEffect(false)));
+        this.addAbility(new DiesSourceTriggeredAbility(new ReturnToHandSourceEffect(false)));
     }
 
     public MortusStrider(final MortusStrider card) {

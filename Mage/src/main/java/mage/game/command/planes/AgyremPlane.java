@@ -14,9 +14,10 @@ import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
 import mage.abilities.effects.common.RollPlanarDieEffect;
+import mage.abilities.effects.common.cost.PlanarDieRollCostIncreasingEffect;
 import mage.cards.Card;
 import mage.constants.*;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
@@ -35,8 +36,8 @@ import java.util.UUID;
  */
 public class AgyremPlane extends Plane {
 
-    private static final FilterControlledCreaturePermanent filterWhite = new FilterControlledCreaturePermanent("a white creature");
-    private static final FilterControlledCreaturePermanent filterNonWhite = new FilterControlledCreaturePermanent("a nonwhite creature");
+    private static final FilterCreaturePermanent filterWhite = new FilterCreaturePermanent("a white creature");
+    private static final FilterCreaturePermanent filterNonWhite = new FilterCreaturePermanent("a nonwhite creature");
 
     static {
         filterWhite.add(new ColorPredicate(ObjectColor.WHITE));
@@ -50,6 +51,7 @@ public class AgyremPlane extends Plane {
         // Whenever a white creature dies, return it to the battlefield under its owner's control at the beginning of the next end step
         DiesCreatureTriggeredAbility ability = new DiesCreatureTriggeredAbility(Zone.COMMAND, new AgyremEffect(), false, filterWhite, true);
         this.getAbilities().add(ability);
+        // Whenever a nonwhite creature dies, return it to its owner's hand at the beginning of the next end step.
         DiesCreatureTriggeredAbility ability2 = new DiesCreatureTriggeredAbility(Zone.COMMAND, new AgyremEffect2(), false, filterNonWhite, true);
         this.getAbilities().add(ability2);
 
@@ -57,9 +59,9 @@ public class AgyremPlane extends Plane {
         Effect chaosEffect = new AgyremRestrictionEffect();
         Target chaosTarget = null;
 
-        List<Effect> chaosEffects = new ArrayList<Effect>();
+        List<Effect> chaosEffects = new ArrayList<>();
         chaosEffects.add(chaosEffect);
-        List<Target> chaosTargets = new ArrayList<Target>();
+        List<Target> chaosTargets = new ArrayList<>();
         chaosTargets.add(chaosTarget);
 
         ActivateIfConditionActivatedAbility chaosAbility = new ActivateIfConditionActivatedAbility(Zone.COMMAND, new RollPlanarDieEffect(chaosEffects, chaosTargets), new GenericManaCost(0), MainPhaseStackEmptyCondition.instance);

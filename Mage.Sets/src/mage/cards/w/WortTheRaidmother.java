@@ -1,7 +1,5 @@
-
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -17,12 +15,13 @@ import mage.filter.common.FilterInstantOrSorcerySpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
-import mage.game.permanent.token.WortTheRaidmotherToken;
+import mage.game.permanent.token.GoblinWarriorToken;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class WortTheRaidmother extends CardImpl {
@@ -36,7 +35,7 @@ public final class WortTheRaidmother extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Wort, the Raidmother enters the battlefield, create two 1/1 red and green Goblin Warrior creature tokens.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new WortTheRaidmotherToken(), 2), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new GoblinWarriorToken(), 2), false));
 
         // Each red or green instant or sorcery spell you cast has conspire.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WortGainConspireEffect()));
@@ -59,6 +58,7 @@ class WortGainConspireEffect extends ContinuousEffectImpl {
     static {
         filter.add(Predicates.or(new ColorPredicate(ObjectColor.RED), new ColorPredicate(ObjectColor.GREEN)));
     }
+
     private final ConspireAbility conspireAbility;
 
     public WortGainConspireEffect() {

@@ -35,7 +35,7 @@ public final class Draco extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Domain - Draco costs {2} less to cast for each basic land type among lands you control.
-        this.addAbility(new SimpleStaticAbility(Zone.STACK, new DracoCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new DracoCostReductionEffect()));
 
         // Domain - At the beginning of your upkeep, sacrifice Draco unless you pay {10}. This cost is reduced by {2} for each basic land type among lands you control.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DracoSacrificeUnlessPaysEffect(), TargetController.YOU, false));

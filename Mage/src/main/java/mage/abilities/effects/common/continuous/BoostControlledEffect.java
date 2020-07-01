@@ -1,7 +1,5 @@
-
 package mage.abilities.effects.common.continuous;
 
-import java.util.Iterator;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -16,8 +14,9 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.Iterator;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class BoostControlledEffect extends ContinuousEffectImpl {
@@ -56,10 +55,10 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
      * @param power
      * @param toughness
      * @param duration
-     * @param filter AnotherPredicate is not working, you need to use the
-     * excludeSource option
-     * @param lockedIn if true, power and toughness will be calculated only
-     * once, when the ability resolves
+     * @param filter        AnotherPredicate is not working, you need to use the
+     *                      excludeSource option
+     * @param lockedIn      if true, power and toughness will be calculated only
+     *                      once, when the ability resolves
      * @param excludeSource
      */
     public BoostControlledEffect(DynamicValue power, DynamicValue toughness, Duration duration, FilterCreaturePermanent filter, boolean excludeSource, boolean lockedIn) {
@@ -105,7 +104,7 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         if (this.affectedObjectsSet) {
-            for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) {
+            for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext(); ) {
                 Permanent permanent = it.next().getPermanent(game);
                 if (permanent != null) {
                     permanent.addPower(power.calculate(game, source, this));
@@ -126,7 +125,6 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
     }
 
     private void setText() {
-        String message = null;
         StringBuilder sb = new StringBuilder();
         if (excludeSource) {
             sb.append("other ");
@@ -150,6 +148,9 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
         sb.append(t);
 
         sb.append((duration == Duration.EndOfTurn ? " until end of turn" : ""));
+
+        // where X
+        String message = null;
         if (t.equals("X")) {
             message = toughness.getMessage();
         } else if (p.equals("X")) {
@@ -157,6 +158,17 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
         }
         if (message != null && !message.isEmpty()) {
             sb.append(", where X is ").append(message);
+        }
+
+        // for each
+        if (message == null) {
+            message = toughness.getMessage();
+            if (message.isEmpty()) {
+                message = power.getMessage();
+            }
+            if (!message.isEmpty()) {
+                sb.append(" for each " + message);
+            }
         }
         staticText = sb.toString();
     }

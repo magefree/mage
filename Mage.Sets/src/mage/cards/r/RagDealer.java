@@ -1,7 +1,5 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -13,11 +11,12 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInASingleGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX, North
  */
 public final class RagDealer extends CardImpl {
@@ -33,7 +32,7 @@ public final class RagDealer extends CardImpl {
         // {2}{B}, {T}: Exile up to three target cards from a single graveyard.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl("{2}{B}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCardInASingleGraveyard(0, 3, new FilterCard("cards from a single graveyard")));
+        ability.addTarget(new TargetCardInASingleGraveyard(0, 3, StaticFilters.FILTER_CARD_CARDS));
         this.addAbility(ability);
     }
 

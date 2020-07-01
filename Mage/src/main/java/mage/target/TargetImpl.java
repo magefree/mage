@@ -12,7 +12,14 @@ import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.util.RandomUtil;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -112,7 +119,10 @@ public abstract class TargetImpl implements Target {
             sb.append(suffix);
             return sb.toString();
         }
-        if (targetName.startsWith("another") || targetName.startsWith("a ") || targetName.startsWith("an ")) {
+        if (targetName.startsWith("another")
+                || targetName.startsWith("a ")
+                || targetName.startsWith("an ")
+                || targetName.startsWith("any ")) {
             return "Select " + targetName + suffix;
         } else if (targetName.startsWith("a") || targetName.startsWith("e") || targetName.startsWith("i") || targetName.startsWith("o") || targetName.startsWith("u")) {
             return "Select an " + targetName + suffix;
@@ -334,7 +344,7 @@ public abstract class TargetImpl implements Target {
                 illegalTargets.add(targetId);
                 continue;
             }
-            if (!canTarget(targetId, source, game)) {
+            if (!stillLegalTarget(targetId, source, game)) {
                 illegalTargets.add(targetId);
             }
         }
@@ -471,6 +481,11 @@ public abstract class TargetImpl implements Target {
     }
 
     @Override
+    public boolean stillLegalTarget(UUID id, Ability source, Game game) {
+        return canTarget(id, source, game);
+    }
+
+    @Override
     public void setNotTarget(boolean notTarget) {
         this.notTarget = notTarget;
     }
@@ -550,6 +565,11 @@ public abstract class TargetImpl implements Target {
     public Target withChooseHint(String chooseHint) {
         this.chooseHint = chooseHint;
         return this;
+    }
+
+    @Override
+    public String getChooseHint() {
+        return chooseHint;
     }
 
     @Override

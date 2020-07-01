@@ -2,7 +2,7 @@ package mage.cards.c;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -40,7 +40,7 @@ public final class CarelessCelebrant extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Careless Celebrant dies, it deals 2 damage to target creature or planeswalker an opponent controls.
-        Ability ability = new DiesTriggeredAbility(new DamageTargetEffect(2, "it"));
+        Ability ability = new DiesSourceTriggeredAbility(new DamageTargetEffect(2, "it"));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

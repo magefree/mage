@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -55,11 +54,13 @@ class SnickeringSquirrelEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
-
-        if (controller != null) {
+        Player dieRoller = game.getPlayer(event.getPlayerId());
+        if (controller != null && dieRoller != null) {
             Permanent permanent = game.getPermanent(source.getSourceId());
-            if (permanent != null && permanent.canTap() && !permanent.isTapped()) {
-                if (controller.chooseUse(Outcome.AIDontUseIt, "Do you want to tap this to increase the result of a die any player rolled by 1?", null, "Yes", "No", source, game)) {
+            if (permanent != null && !permanent.isTapped()) {
+                if (controller.chooseUse(Outcome.AIDontUseIt, "Do you want to tap this to increase the result of a die ("
+                        + event.getAmount() + ") "
+                        + dieRoller.getName() + " rolled by 1?", null, "Yes", "No", source, game)) {
                     permanent.tap(game);
                     // ignore planar dies (dice roll amount of planar dies is equal to 0)
                     if (event.getAmount() > 0) {

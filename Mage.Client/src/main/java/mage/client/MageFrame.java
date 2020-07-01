@@ -202,7 +202,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         config.setAccessPreference(FsAccessOption.STORE, true);
         try {
             UIManager.put("desktop", new Color(0, 0, 0, 0));
-            UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
             //UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             // stop JSplitPane from eating F6 and F8 or any other function keys
             {

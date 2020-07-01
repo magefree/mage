@@ -1,9 +1,9 @@
 package mage.cards.t;
 
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
+import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -18,7 +18,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -89,41 +88,12 @@ class TheRoyalScionsCreateReflexiveTriggerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         effect.apply(game, source);
-        game.addDelayedTriggeredAbility(new TheRoyalScionsReflexiveTriggeredAbility(), source);
-        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.OPTION_USED, source.getOriginalId(), source.getSourceId(), source.getControllerId(), 0));
+        ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
+                new DamageTargetEffect(CardsInControllerHandCount.instance), false,
+                "{this} deals damage to any target equal to the number of cards in your hand"
+        );
+        ability.addTarget(new TargetAnyTarget());
+        game.fireReflexiveTriggeredAbility(ability, source);
         return true;
-    }
-}
-
-class TheRoyalScionsReflexiveTriggeredAbility extends DelayedTriggeredAbility {
-
-    TheRoyalScionsReflexiveTriggeredAbility() {
-        super(new DamageTargetEffect(CardsInControllerHandCount.instance), Duration.OneUse, true);
-        this.addTarget(new TargetAnyTarget());
-    }
-
-    private TheRoyalScionsReflexiveTriggeredAbility(final TheRoyalScionsReflexiveTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public TheRoyalScionsReflexiveTriggeredAbility copy() {
-        return new TheRoyalScionsReflexiveTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.OPTION_USED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getPlayerId().equals(this.getControllerId())
-                && event.getSourceId().equals(this.getSourceId());
-    }
-
-    @Override
-    public String getRule() {
-        return "When you do, {this} deals damage to any target equal to the number of cards in your hand.";
     }
 }

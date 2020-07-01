@@ -1,4 +1,3 @@
-
 package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
@@ -43,7 +42,7 @@ public class EnchantedCreatureBlockedTriggeredAbility extends TriggeredAbilityIm
 
     @Override
     public String getRule() {
-        return "Whenever enchanted creature becomes blocked by a creature, " + super.getRule();
+        return "Whenever enchanted creature becomes blocked, " + super.getRule();
     }
 
     @Override

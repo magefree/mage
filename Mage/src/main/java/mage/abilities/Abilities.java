@@ -2,9 +2,12 @@
 package mage.abilities;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.function.Predicate;
+
 import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.constants.Zone;
@@ -255,7 +258,8 @@ public interface Abilities<T extends Ability> extends List<T>, Serializable {
     boolean containsAll(Abilities<T> abilities);
 
     /**
-     * Searches this set of abilities for the existence of the give class
+     * Searches this set of abilities for the existence of the given class
+     * Warning, it doesn't work with inherited classes (e.g. it's not equal to instanceOf command)
      *
      * @param classObject
      * @return True if the passed in class is also in this set of abilities.
@@ -271,4 +275,13 @@ public interface Abilities<T extends Ability> extends List<T>, Serializable {
     Abilities<T> copy();
 
     String getValue();
+
+    @Deprecated // use permanent.removeAbility instead
+    boolean remove(Object o);
+
+    @Deprecated // use permanent.removeAbility instead
+    boolean removeAll(Collection<?> c);
+
+    @Deprecated // use permanent.removeAbility instead
+    boolean removeIf(Predicate<? super T> filter);
 }

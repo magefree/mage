@@ -7,6 +7,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -59,22 +60,22 @@ class DeadReckoningEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player you = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         TargetCardInYourGraveyard target1 = new TargetCardInYourGraveyard(new FilterCreatureCard("creature card in your graveyard"));
         TargetCreaturePermanent target2 = new TargetCreaturePermanent();
 
-        if (you != null) {
+        if (controller != null) {
             if (target1.canChoose(source.getControllerId(), game)
-                    && you.choose(Outcome.Benefit, target1, source.getSourceId(), game)
+                    && controller.choose(Outcome.Benefit, target1, source.getSourceId(), game)
                     && target2.canChoose(source.getControllerId(), game)
-                    && you.choose(Outcome.Damage, target2, source.getSourceId(), game)) {
+                    && controller.choose(Outcome.Damage, target2, source.getSourceId(), game)) {
                 Card creatureInGraveyard = game.getCard(target1.getFirstTarget());
                 if (creatureInGraveyard != null) {
-                    if (creatureInGraveyard.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true)) {
+                    if (controller.putCardsOnTopOfLibrary(creatureInGraveyard, game, source, true)) {
                         int power = creatureInGraveyard.getPower().getValue();
                         Permanent creature = game.getPermanent(target2.getFirstTarget());
                         if (creature != null) {
-                            creature.damage(power, source.getSourceId(), game, true, true);
+                            creature.damage(power, source.getSourceId(), game, false, true);
                             return true;
                         }
                     }

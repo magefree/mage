@@ -12,6 +12,7 @@ import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.RollPlanarDieEffect;
 import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect;
 import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect.HandSizeModification;
+import mage.abilities.effects.common.cost.PlanarDieRollCostIncreasingEffect;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.game.Game;

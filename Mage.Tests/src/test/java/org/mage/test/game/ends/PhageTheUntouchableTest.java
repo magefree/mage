@@ -10,7 +10,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  *
- * @author LeveöX
+ * @author LevelX2
  */
 public class PhageTheUntouchableTest extends CardTestPlayerBase {
 
@@ -32,10 +32,16 @@ public class PhageTheUntouchableTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phage the Untouchable");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hero's Downfall", "Phage the Untouchable");
+        addTarget(playerA, playerB);
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        
+        setStrictChooseMode(true);
+        
         execute();
 
+        assertAllCommandsUsed();
+        
         assertLife(playerA, 20);
         assertLife(playerB, 20);
 

@@ -18,6 +18,7 @@ import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
+import mage.abilities.condition.common.SourceRemainsInZoneCondition;
 
 /**
  * @author TheElk801
@@ -42,8 +43,8 @@ public final class TheAkroanWar extends CardImpl {
                 SagaChapter.CHAPTER_I,
                 new ConditionalContinuousEffect(
                         new GainControlTargetEffect(Duration.Custom, true),
-                        SourceOnBattlefieldCondition.instance, "gain control of target creature " +
-                        "for as long as {this} remains on the battlefield"
+                        new SourceRemainsInZoneCondition(Zone.BATTLEFIELD),
+                        "gain control of target creature for as long as {this} remains on the battlefield"
                 ), new TargetCreaturePermanent()
         );
 

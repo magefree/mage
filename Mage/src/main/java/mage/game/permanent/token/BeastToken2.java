@@ -16,7 +16,7 @@ public final class BeastToken2 extends TokenImpl {
     static final private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("ZEN", "C14", "DDD", "C15", "DD3GVL", "MM3", "CMA", "E01", "C19"));
+        tokenImageSets.addAll(Arrays.asList("ZEN", "C14", "DDD", "C15", "DD3GVL", "MM3", "CMA", "E01", "C19", "C20"));
     }
 
     public BeastToken2() {

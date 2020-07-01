@@ -4,7 +4,7 @@ package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -23,7 +23,7 @@ public final class MyrSire extends CardImpl {
         this.subtype.add(SubType.MYR);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new MyrToken())));
+        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new MyrToken())));
     }
 
     public MyrSire (final MyrSire card) {
