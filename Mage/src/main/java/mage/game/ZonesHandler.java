@@ -290,7 +290,7 @@ public final class ZonesHandler {
         }
         TargetCard target = new TargetCard(Zone.ALL, new FilterCard(message));
         target.setRequired(true);
-        while (player.isInGame() && cards.size() > 1) {
+        while (player.canRespond() && cards.size() > 1) {
             player.choose(Outcome.Neutral, cards, target, game);
             UUID targetObjectId = target.getFirstTarget();
             order.add(cards.get(targetObjectId, game));
