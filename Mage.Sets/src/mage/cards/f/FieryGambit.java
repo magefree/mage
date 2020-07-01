@@ -1,7 +1,5 @@
-
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -17,14 +15,15 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class FieryGambit extends CardImpl {
 
     public FieryGambit(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}");
 
         // Flip a coin until you lose a flip or choose to stop flipping. If you lose a flip, Fiery Gambit has no effect. If you win one or more flips, Fiery Gambit deals 3 damage to target creature. If you win two or more flips, Fiery Gambit deals 6 damage to each opponent. If you win three or more flips, draw nine cards and untap all lands you control.
         this.getSpellAbility().addEffect(new FieryGambitEffect());
@@ -68,6 +67,12 @@ class FieryGambitEffect extends OneShotEffect {
                 ++flipsWon;
                 if (!controller.chooseUse(outcome, "You won " + flipsWon + (flipsWon == 1 ? " flip." : " flips.") +
                         " Flip another coin?", source, game)) {
+                    controllerStopped = true;
+                    break;
+                }
+
+                // AI workaround to stop flips on good result
+                if (!controller.isHuman() && !controller.isTestMode() && flipsWon >= 3) {
                     controllerStopped = true;
                     break;
                 }
