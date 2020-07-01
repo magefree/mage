@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author JRHerlehy, Elandril
+ * @author JRHerlehy
  */
 public class TinyLeaders extends Constructed {
 

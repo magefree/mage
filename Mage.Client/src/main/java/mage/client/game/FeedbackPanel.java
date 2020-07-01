@@ -253,7 +253,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
     }
 
     private void btnRightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRightActionPerformed
-    	setLastResponse(LocalDateTime.now());
+    	setLastResponse();
     	if (connectedDialog != null) {
             connectedDialog.removeDialog();
             connectedDialog = null;
@@ -272,18 +272,18 @@ public class FeedbackPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnRightActionPerformed
 
     private void btnLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLeftActionPerformed
-    	setLastResponse(LocalDateTime.now());
+    	setLastResponse();
         SessionHandler.sendPlayerBoolean(gameId, true);
         AudioManager.playButtonCancel();
     }//GEN-LAST:event_btnLeftActionPerformed
 
     private void btnSpecialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpecialActionPerformed
-    	setLastResponse(LocalDateTime.now());
+    	setLastResponse();
         SessionHandler.sendPlayerString(gameId, "special");
     }//GEN-LAST:event_btnSpecialActionPerformed
 
     private void btnUndoActionPerformed(java.awt.event.ActionEvent evt) {
-    	setLastResponse(LocalDateTime.now());
+    	setLastResponse();
         SessionHandler.sendPlayerAction(PlayerAction.UNDO, gameId, null);
     }
 
@@ -315,8 +315,8 @@ public class FeedbackPanel extends javax.swing.JPanel {
         this.helper.setUndoEnabled(false);
     }
     
-    public void setLastResponse(LocalDateTime ts) {
-    	this.lastResponse = ts;
+    public void setLastResponse() {
+    	this.lastResponse = LocalDateTime.now();
     }
 
     private javax.swing.JButton btnLeft;

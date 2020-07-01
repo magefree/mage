@@ -10,7 +10,7 @@ import java.util.*;
 import java.util.Map.Entry;
 
 /**
- * @author BetaSteward_at_googlemail.com, Elandril
+ * @author BetaSteward_at_googlemail.com
  */
 public class Constructed extends DeckValidator {
 

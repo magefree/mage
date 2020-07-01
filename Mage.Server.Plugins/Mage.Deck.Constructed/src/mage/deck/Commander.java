@@ -18,7 +18,7 @@ import mage.util.ManaUtil;
 import java.util.*;
 
 /**
- * @author Plopman, Elandril
+ * @author Plopman
  */
 public class Commander extends Constructed {
 

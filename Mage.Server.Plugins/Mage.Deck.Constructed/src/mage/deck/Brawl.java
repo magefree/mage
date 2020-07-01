@@ -12,7 +12,7 @@ import mage.util.ManaUtil;
 import java.util.*;
 
 /**
- * @author spjspj, Elandril
+ * @author spjspj
  */
 public class Brawl extends Constructed {
 

@@ -17,7 +17,7 @@ import java.util.*;
  * <p>
  * If there are any questions or corrections, feel free to contact me.
  *
- * @author Marthinwurer (at gmail.com), Elandril
+ * @author Marthinwurer (at gmail.com)
  */
 public class SuperType2 extends Constructed {
 

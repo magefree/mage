@@ -11,7 +11,7 @@ import mage.util.ManaUtil;
 import java.util.*;
 
 /**
- * @author JayDi85, Elandril
+ * @author JayDi85
  */
 public class Oathbreaker extends Vintage {
 

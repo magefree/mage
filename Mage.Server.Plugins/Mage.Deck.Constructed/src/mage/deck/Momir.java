@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * @author nigelzor, Elandril
+ * @author nigelzor
  */
 public class Momir extends DeckValidator {
 

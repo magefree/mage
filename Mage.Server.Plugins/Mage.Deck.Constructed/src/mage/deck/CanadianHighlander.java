@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author spjspj, Elandril
+ * @author spjspj
  */
 public class CanadianHighlander extends Constructed {
 

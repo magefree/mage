@@ -17,7 +17,7 @@ import java.util.*;
 import java.util.Map.Entry;
 
 /**
- * @author spjspj, Elandril
+ * @author spjspj
  */
 public class PennyDreadfulCommander extends Constructed {
 

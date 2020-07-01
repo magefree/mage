@@ -4,7 +4,7 @@ import mage.cards.decks.Deck;
 import mage.cards.decks.DeckValidator;
 
 /**
- * @author fireshoes, Elandril
+ * @author fireshoes
  */
 public class Freeform extends DeckValidator {
 

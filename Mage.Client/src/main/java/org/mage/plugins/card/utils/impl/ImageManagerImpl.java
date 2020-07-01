@@ -29,12 +29,8 @@ public enum ImageManagerImpl implements ImageManager {
         init();
     }
 
-    private static Logger LOGGER;
-
     public void init() {
-        LOGGER = Logger.getLogger(ImageManagerImpl.class);
         ThemeType currentTheme = ThemeType.valueByName(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_THEME, "Default Theme"));
-        LOGGER.info("themeType: " + currentTheme.toString());
         this.buttonPath = "/buttons/";
         this.phasePath = "/phases/";
 
