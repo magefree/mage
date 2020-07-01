@@ -141,7 +141,7 @@ class NeyithOfTheDireHuntEffect extends OneShotEffect {
             return false;
         }
         int power = permanent.getPower().getValue();
-        game.addEffect(new BoostTargetEffect(power, power, Duration.EndOfTurn), source);
+        game.addEffect(new BoostTargetEffect(power, 0, Duration.EndOfTurn), source);
         game.addEffect(new MustBeBlockedByAtLeastOneTargetEffect(Duration.EndOfCombat), source);
         return true;
     }
