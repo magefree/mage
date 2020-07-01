@@ -33,6 +33,7 @@ import mage.util.GameLog;
 import mage.util.SubTypeList;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -219,15 +220,14 @@ public class Spell extends StackObjImpl implements Card {
             // resolve if legal parts
             if (notTargeted || legalParts) {
                 for (SpellAbility spellAbility : this.spellAbilities) {
-                    if (spellAbilityHasLegalParts(spellAbility, game)) {
+                    // legality of targets is checked only as the spell begins to resolve, not in between modes (spliced spells handeled correctly?)
+                    if (spellAbilityCheckTargetsAndDeactivateModes(spellAbility, game)) {
                         for (UUID modeId : spellAbility.getModes().getSelectedModes()) {
                             spellAbility.getModes().setActiveMode(modeId);
-                            if (spellAbility.getTargets().stillLegal(spellAbility, game)) {
-                                if (spellAbility.getSpellAbilityType() != SpellAbilityType.SPLICE) {
-                                    updateOptionalCosts(index);
-                                }
-                                result |= spellAbility.resolve(game);
+                            if (spellAbility.getSpellAbilityType() != SpellAbilityType.SPLICE) {
+                                updateOptionalCosts(index);
                             }
+                            result |= spellAbility.resolve(game);
                         }
                         index++;
                     }
@@ -316,6 +316,31 @@ public class Spell extends StackObjImpl implements Card {
         } else {
             return !spellAbility.getTargets().isEmpty();
         }
+    }
+
+    /**
+     * Legality of the targets of all modes are only checked as the spell begins to resolve
+     * A mode without any legal target (if it has targets at all) won't resolve.
+     * So modes with targets without legal targets are unselected.
+     *
+     * @param spellAbility
+     * @param game
+     * @return
+     */
+    private boolean spellAbilityCheckTargetsAndDeactivateModes(SpellAbility spellAbility, Game game) {
+        boolean legalModes = false;
+        for (Iterator<UUID> iterator = spellAbility.getModes().getSelectedModes().iterator(); iterator.hasNext();) {
+            UUID nextSelectedModeId = iterator.next();
+            Mode mode = spellAbility.getModes().get(nextSelectedModeId);
+            if (!mode.getTargets().isEmpty()) {
+                if (!mode.getTargets().stillLegal(spellAbility, game)) {
+                    iterator.remove();
+                    continue;
+                }
+            }
+            legalModes = true;
+        }
+        return legalModes;
     }
 
     private boolean spellAbilityHasLegalParts(SpellAbility spellAbility, Game game) {
@@ -606,7 +631,9 @@ public class Spell extends StackObjImpl implements Card {
         spellAbilities.add(spellAbility);
     }
 
+    @Override
     public void addAbility(Ability ability) {
+        throw new UnsupportedOperationException("Not supported.");
     }
 
     @Override
@@ -709,7 +736,7 @@ public class Spell extends StackObjImpl implements Card {
     }
 
     public Spell copySpell(UUID newController) {
-        Spell copy = new Spell(this.card, this.ability.copySpell(), this.controllerId, this.fromZone);
+        Spell spellCopy = new Spell(this.card, this.ability.copySpell(), this.controllerId, this.fromZone);
         boolean firstDone = false;
         for (SpellAbility spellAbility : this.getSpellAbilities()) {
             if (!firstDone) {
@@ -718,11 +745,11 @@ public class Spell extends StackObjImpl implements Card {
             }
             SpellAbility newAbility = spellAbility.copy(); // e.g. spliced spell
             newAbility.newId();
-            copy.addSpellAbility(newAbility);
+            spellCopy.addSpellAbility(newAbility);
         }
-        copy.setCopy(true, this);
-        copy.setControllerId(newController);
-        return copy;
+        spellCopy.setCopy(true, this);
+        spellCopy.setControllerId(newController);
+        return spellCopy;
     }
 
     @Override
@@ -947,12 +974,12 @@ public class Spell extends StackObjImpl implements Card {
         }
         if (isTransformable()) {
             Card secondCard = getSecondCardFace();
-            ObjectColor color = secondCard.getColor(null);
-            mana.setBlack(mana.isBlack() || color.isBlack());
-            mana.setGreen(mana.isGreen() || color.isGreen());
-            mana.setRed(mana.isRed() || color.isRed());
-            mana.setBlue(mana.isBlue() || color.isBlue());
-            mana.setWhite(mana.isWhite() || color.isWhite());
+            ObjectColor objectColor = secondCard.getColor(null);
+            mana.setBlack(mana.isBlack() || objectColor.isBlack());
+            mana.setGreen(mana.isGreen() || objectColor.isGreen());
+            mana.setRed(mana.isRed() || objectColor.isRed());
+            mana.setBlue(mana.isBlue() || objectColor.isBlue());
+            mana.setWhite(mana.isWhite() || objectColor.isWhite());
             for (String rule : secondCard.getRules()) {
                 rule = rule.replaceAll("(?i)<i.*?</i>", ""); // Ignoring reminder text in italic
                 if (!mana.isBlack() && rule.matches(regexBlack)) {
@@ -1006,21 +1033,21 @@ public class Spell extends StackObjImpl implements Card {
 
     @Override
     public StackObject createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets, int amount) {
-        Spell copy = null;
+        Spell spellCopy = null;
         GameEvent gameEvent = GameEvent.getEvent(EventType.COPY_STACKOBJECT, this.getId(), source.getSourceId(), newControllerId, amount);
         if (game.replaceEvent(gameEvent)) {
             return null;
         }
         for (int i = 0; i < gameEvent.getAmount(); i++) {
-            copy = this.copySpell(newControllerId);
-            game.getState().setZone(copy.getId(), Zone.STACK); // required for targeting ex: Nivmagus Elemental
-            game.getStack().push(copy);
+            spellCopy = this.copySpell(newControllerId);
+            game.getState().setZone(spellCopy.getId(), Zone.STACK); // required for targeting ex: Nivmagus Elemental
+            game.getStack().push(spellCopy);
             if (chooseNewTargets) {
-                copy.chooseNewTargets(game, newControllerId);
+                spellCopy.chooseNewTargets(game, newControllerId);
             }
-            game.fireEvent(new GameEvent(EventType.COPIED_STACKOBJECT, copy.getId(), this.getId(), newControllerId));
+            game.fireEvent(new GameEvent(EventType.COPIED_STACKOBJECT, spellCopy.getId(), this.getId(), newControllerId));
         }
-        return copy;
+        return spellCopy;
     }
 
     @Override
