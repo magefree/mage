@@ -1,10 +1,6 @@
 package mage.players;
 
 import com.google.common.collect.ImmutableMap;
-import java.io.Serializable;
-import java.util.*;
-import java.util.Map.Entry;
-import java.util.stream.Collectors;
 import mage.ConditionalMana;
 import mage.MageObject;
 import mage.MageObjectReference;
@@ -70,6 +66,11 @@ import mage.util.GameLog;
 import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
 
+import java.io.Serializable;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
+
 public abstract class PlayerImpl implements Player, Serializable {
 
     private static final Logger logger = Logger.getLogger(PlayerImpl.class);
@@ -131,7 +132,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected boolean idleTimeout;
 
     protected RangeOfInfluence range;
-    protected Set<UUID> inRange = new HashSet<>();
+    protected Set<UUID> inRange = new HashSet<>(); // players list in current range of influence (updates each turn)
 
     protected boolean isTestMode = false;
     protected boolean canGainLife = true;
@@ -460,7 +461,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public void beginTurn(Game game) {
         this.landsPlayed = 0;
-        findRange(game);
+        updateRangeOfInfluence(game);
     }
 
     @Override
@@ -468,44 +469,34 @@ public abstract class PlayerImpl implements Player, Serializable {
         return range;
     }
 
-    protected void findRange(Game game) {
-        //20100423 - 801.2c
+    protected void updateRangeOfInfluence(Game game) {
+        // 20100423 - 801.2c
+        // 801.2c The particular players within each player’s range of influence are determined as each turn begins.
         inRange.clear();
-        if (range == RangeOfInfluence.ALL) {
-            for (Player player : game.getPlayers().values()) {
-                if (!player.hasLeft()) {
-                    inRange.add(player.getId());
-                }
+        inRange.add(this.playerId);
+        inRange.addAll(getAllNearPlayers(game, true));
+        inRange.addAll(getAllNearPlayers(game, false));
+    }
+
+    private Set<UUID> getAllNearPlayers(Game game, boolean needPrevious) {
+        // find all near players (search from current player position)
+        Set<UUID> foundedList = new HashSet<>();
+        PlayerList players = game.getState().getPlayerList(this.playerId);
+        int needAmount = this.getRange().getRange(); // distance to search (0 - ALL range)
+        int foundedAmount = 0;
+        while (needAmount == 0 || foundedAmount < needAmount) {
+            Player foundedPlayer = needPrevious ? players.getPrevious(game) : players.getNext(game, false);
+
+            // PlayerList is inifine, so stops on repeats
+            if (foundedPlayer == null || foundedPlayer.getId().equals(this.playerId) || foundedList.contains(foundedPlayer.getId())) {
+                break;
             }
-        } else if ((range.getRange() * 2) + 1 >= game.getPlayers().size()) {
-            for (Player player : game.getPlayers().values()) {
-                if (!player.hasLeft()) {
-                    inRange.add(player.getId());
-                }
-            }
-        } else {
-            inRange.add(playerId);
-            PlayerList players = game.getState().getPlayerList(playerId);
-            for (int i = 0; i < range.getRange(); i++) {
-                Player player = players.getNext(game, false);
-                if (player != null) {
-                    while (player.hasLeft()) { // can freeze?
-                        player = players.getNext(game, false);
-                    }
-                    inRange.add(player.getId());
-                }
-            }
-            players = game.getState().getPlayerList(playerId);
-            for (int i = 0; i < range.getRange(); i++) {
-                Player player = players.getPrevious(game);
-                if (player != null) {
-                    while (player.hasLeft()) { // can freeze?
-                        player = players.getPrevious(game);
-                    }
-                    inRange.add(player.getId());
-                }
-            }
+            // skip leaved player (no needs cause next/previous code already checks it)
+
+            foundedList.add(foundedPlayer.getId());
+            foundedAmount++;
         }
+        return foundedList;
     }
 
     @Override
@@ -613,9 +604,9 @@ public abstract class PlayerImpl implements Player, Serializable {
                     && this.hasOpponent(sourceControllerId, game)
                     && game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, null, sourceControllerId, game) == null
                     && abilities.stream()
-                            .filter(HexproofBaseAbility.class::isInstance)
-                            .map(HexproofBaseAbility.class::cast)
-                            .anyMatch(ability -> ability.checkObject(source, game))) {
+                    .filter(HexproofBaseAbility.class::isInstance)
+                    .map(HexproofBaseAbility.class::cast)
+                    .anyMatch(ability -> ability.checkObject(source, game))) {
                 return false;
             }
 
@@ -655,7 +646,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 game.informPlayers(getLogName() + " discards down to "
                         + this.maxHandSize
                         + (this.maxHandSize == 1
-                                ? " hand card" : " hand cards"));
+                        ? " hand card" : " hand cards"));
             }
             discard(hand.size() - this.maxHandSize, false, null, game);
         }
@@ -804,7 +795,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         GameEvent gameEvent = GameEvent.getEvent(GameEvent.EventType.DISCARD_CARD,
                 card.getId(), source == null
-                ? null : source.getSourceId(), playerId);
+                        ? null : source.getSourceId(), playerId);
         gameEvent.setFlag(source != null); // event from effect or from cost (source == null)
         if (game.replaceEvent(gameEvent, source)) {
             return false;
@@ -1841,9 +1832,9 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     private List<Permanent> getPermanentsThatCanBeUntapped(Game game,
-            List<Permanent> canBeUntapped,
-            RestrictionUntapNotMoreThanEffect handledEffect,
-            Map<Entry<RestrictionUntapNotMoreThanEffect, Set<Ability>>, Integer> notMoreThanEffectsUsage) {
+                                                           List<Permanent> canBeUntapped,
+                                                           RestrictionUntapNotMoreThanEffect handledEffect,
+                                                           Map<Entry<RestrictionUntapNotMoreThanEffect, Set<Ability>>, Integer> notMoreThanEffectsUsage) {
         List<Permanent> leftForUntap = new ArrayList<>();
         // select permanents that can still be untapped
         for (Permanent permanent : canBeUntapped) {
@@ -2556,7 +2547,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game, UUID targetPlayerId,
-            boolean triggerEvents) {
+                                 boolean triggerEvents) {
         //20091005 - 701.14c
         Library searchedLibrary = null;
         String searchInfo = null;
@@ -2758,7 +2749,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     /**
      * @param game
      * @param appliedEffects
-     * @param numSides Number of sides the dice has
+     * @param numSides       Number of sides the dice has
      * @return the number that the player rolled
      */
     @Override
@@ -2795,16 +2786,16 @@ public abstract class PlayerImpl implements Player, Serializable {
     /**
      * @param game
      * @param appliedEffects
-     * @param numberChaosSides The number of chaos sides the planar die
-     * currently has (normally 1 but can be 5)
+     * @param numberChaosSides  The number of chaos sides the planar die
+     *                          currently has (normally 1 but can be 5)
      * @param numberPlanarSides The number of chaos sides the planar die
-     * currently has (normally 1)
+     *                          currently has (normally 1)
      * @return the outcome that the player rolled. Either ChaosRoll, PlanarRoll
      * or NilRoll
      */
     @Override
     public PlanarDieRoll rollPlanarDie(Game game, List<UUID> appliedEffects, int numberChaosSides,
-            int numberPlanarSides) {
+                                       int numberPlanarSides) {
         int result = RandomUtil.nextInt(9) + 1;
         PlanarDieRoll roll = PlanarDieRoll.NIL_ROLL;
         if (numberChaosSides + numberPlanarSides > 9) {
@@ -2962,7 +2953,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     /**
      * @param ability
      * @param availableMana if null, it won't be checked if enough mana is
-     * available
+     *                      available
      * @param sourceObject
      * @param game
      * @return
@@ -3303,10 +3294,10 @@ public abstract class PlayerImpl implements Player, Serializable {
      * currently cast/activate with his available ressources
      *
      * @param game
-     * @param hidden also from hidden objects (e.g. turned face down cards ?)
-     * @param fromZone of objects from which zone (ALL = from all zones)
+     * @param hidden                  also from hidden objects (e.g. turned face down cards ?)
+     * @param fromZone                of objects from which zone (ALL = from all zones)
      * @param hideDuplicatedAbilities if equal abilities exist return only the
-     * first instance
+     *                                first instance
      * @return
      */
     public List<ActivatedAbility> getPlayable(Game game, boolean hidden, Zone fromZone, boolean hideDuplicatedAbilities) {
@@ -3674,7 +3665,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean canPaySacrificeCost(Permanent permanent, UUID sourceId,
-            UUID controllerId, Game game
+                                       UUID controllerId, Game game
     ) {
         return sacrificeCostFilter == null || !sacrificeCostFilter.match(permanent, sourceId, controllerId, game);
     }
@@ -3827,8 +3818,8 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean moveCards(Card card, Zone toZone,
-            Ability source, Game game,
-            boolean tapped, boolean faceDown, boolean byOwner, List<UUID> appliedEffects
+                             Ability source, Game game,
+                             boolean tapped, boolean faceDown, boolean byOwner, List<UUID> appliedEffects
     ) {
         Set<Card> cardList = new HashSet<>();
         if (card != null) {
@@ -3839,22 +3830,22 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean moveCards(Cards cards, Zone toZone,
-            Ability source, Game game
+                             Ability source, Game game
     ) {
         return moveCards(cards.getCards(game), toZone, source, game);
     }
 
     @Override
     public boolean moveCards(Set<Card> cards, Zone toZone,
-            Ability source, Game game
+                             Ability source, Game game
     ) {
         return moveCards(cards, toZone, source, game, false, false, false, null);
     }
 
     @Override
     public boolean moveCards(Set<Card> cards, Zone toZone,
-            Ability source, Game game,
-            boolean tapped, boolean faceDown, boolean byOwner, List<UUID> appliedEffects
+                             Ability source, Game game,
+                             boolean tapped, boolean faceDown, boolean byOwner, List<UUID> appliedEffects
     ) {
         if (cards.isEmpty()) {
             return true;
@@ -3956,8 +3947,8 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean moveCardsToExile(Card card, Ability source,
-            Game game, boolean withName, UUID exileId,
-            String exileZoneName
+                                    Game game, boolean withName, UUID exileId,
+                                    String exileZoneName
     ) {
         Set<Card> cards = new HashSet<>();
         cards.add(card);
@@ -3966,8 +3957,8 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean moveCardsToExile(Set<Card> cards, Ability source,
-            Game game, boolean withName, UUID exileId,
-            String exileZoneName
+                                    Game game, boolean withName, UUID exileId,
+                                    String exileZoneName
     ) {
         if (cards.isEmpty()) {
             return true;
@@ -3983,14 +3974,14 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean moveCardToHandWithInfo(Card card, UUID sourceId,
-            Game game
+                                          Game game
     ) {
         return this.moveCardToHandWithInfo(card, sourceId, game, true);
     }
 
     @Override
     public boolean moveCardToHandWithInfo(Card card, UUID sourceId,
-            Game game, boolean withName
+                                          Game game, boolean withName
     ) {
         boolean result = false;
         Zone fromZone = game.getState().getZone(card.getId());
@@ -4015,7 +4006,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public Set<Card> moveCardsToGraveyardWithInfo(Set<Card> allCards, Ability source,
-            Game game, Zone fromZone
+                                                  Game game, Zone fromZone
     ) {
         UUID sourceId = source == null ? null : source.getSourceId();
         Set<Card> movedCards = new LinkedHashSet<>();
@@ -4023,7 +4014,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             // identify cards from one owner
             Cards cards = new CardsImpl();
             UUID ownerId = null;
-            for (Iterator<Card> it = allCards.iterator(); it.hasNext();) {
+            for (Iterator<Card> it = allCards.iterator(); it.hasNext(); ) {
                 Card card = it.next();
                 if (cards.isEmpty()) {
                     ownerId = card.getOwnerId();
@@ -4086,7 +4077,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean moveCardToGraveyardWithInfo(Card card, UUID sourceId,
-            Game game, Zone fromZone
+                                               Game game, Zone fromZone
     ) {
         if (card == null) {
             return false;
@@ -4115,8 +4106,8 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean moveCardToLibraryWithInfo(Card card, UUID sourceId,
-            Game game, Zone fromZone,
-            boolean toTop, boolean withName
+                                             Game game, Zone fromZone,
+                                             boolean toTop, boolean withName
     ) {
         if (card == null) {
             return false;
@@ -4181,7 +4172,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean moveCardToExileWithInfo(Card card, UUID exileId, String exileName, UUID sourceId,
-            Game game, Zone fromZone, boolean withName) {
+                                           Game game, Zone fromZone, boolean withName) {
         if (card == null) {
             return false;
         }
@@ -4204,7 +4195,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 game.informPlayers(this.getLogName() + " moves " + (withName ? card.getLogName()
                         + (card.isCopy() ? " (Copy)" : "") : "a card face down") + ' '
                         + (fromZone != null ? "from " + fromZone.toString().toLowerCase(Locale.ENGLISH)
-                                + ' ' : "") + "to the exile zone");
+                        + ' ' : "") + "to the exile zone");
 
             }
             result = true;
