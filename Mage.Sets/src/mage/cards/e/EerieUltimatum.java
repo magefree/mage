@@ -17,7 +17,10 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -90,18 +93,18 @@ class EerieUltimatumTarget extends TargetCardInYourGraveyard {
     }
 
     @Override
-    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
-        if (!super.canTarget(controllerId, id, source, game)) {
-            return false;
-        }
-        Card card = game.getCard(id);
-        if (card == null) {
-            return false;
-        }
-        return this.getTargets()
+    public Set<UUID> possibleTargets(UUID sourceId, UUID playerId, Game game) {
+        Set<UUID> possibleTargets = super.possibleTargets(sourceId, playerId, game);
+        Set<String> names = this.getTargets()
                 .stream()
                 .map(game::getCard)
                 .map(MageObject::getName)
-                .noneMatch(card.getName()::equals);
+                .filter(Objects::nonNull)
+                .collect(Collectors.toSet());
+        possibleTargets.removeIf(uuid -> {
+            Card card = game.getCard(uuid);
+            return card != null && names.contains(card.getName());
+        });
+        return possibleTargets;
     }
 }
