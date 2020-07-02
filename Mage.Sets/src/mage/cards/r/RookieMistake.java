@@ -9,6 +9,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AnotherTargetPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -22,6 +25,12 @@ import java.util.UUID;
  */
 public final class RookieMistake extends CardImpl {
 
+    private static final FilterPermanent filter = new FilterCreaturePermanent();
+
+    static {
+        filter.add(new AnotherTargetPredicate(2));
+    }
+
     public RookieMistake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
 
@@ -30,7 +39,7 @@ public final class RookieMistake extends CardImpl {
         TargetPermanent target = new TargetCreaturePermanent();
         target.setTargetTag(1);
         this.getSpellAbility().addTarget(target.withChooseHint("+0/+2"));
-        target = new TargetCreaturePermanent();
+        target = new TargetPermanent(filter);
         target.setTargetTag(2);
         this.getSpellAbility().addTarget(target.withChooseHint("-2/-0"));
     }
