@@ -32,12 +32,7 @@ import mage.players.Player;
 import mage.util.GameLog;
 import mage.util.SubTypeList;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -223,14 +218,12 @@ public class Spell extends StackObjImpl implements Card {
                 for (SpellAbility spellAbility : this.spellAbilities) {
                     // legality of targets is checked only as the spell begins to resolve, not in between modes (spliced spells handeled correctly?)
                     if (spellAbilityCheckTargetsAndDeactivateModes(spellAbility, game)) {
-                        for (Mode mode : spellAbility.getModes().values()) {
-                            if (spellAbility.getModes().getSelectedModes().contains(mode.getId()))  {
-                                spellAbility.getModes().setActiveMode(mode.getId());
-                                if (spellAbility.getSpellAbilityType() != SpellAbilityType.SPLICE) {
-                                    updateOptionalCosts(index);
-                                }
-                                result |= spellAbility.resolve(game);
+                        for (UUID modeId : spellAbility.getModes().getSelectedModes()) {
+                            spellAbility.getModes().setActiveMode(modeId);
+                            if (spellAbility.getSpellAbilityType() != SpellAbilityType.SPLICE) {
+                                updateOptionalCosts(index);
                             }
+                            result |= spellAbility.resolve(game);
                         }
                         index++;
                     }
@@ -333,11 +326,12 @@ public class Spell extends StackObjImpl implements Card {
      */
     private boolean spellAbilityCheckTargetsAndDeactivateModes(SpellAbility spellAbility, Game game) {
         boolean legalModes = false;
-        for (Iterator<UUID> iterator = spellAbility.getModes().getSelectedModes().iterator(); iterator.hasNext();) {
+        for (Iterator<UUID> iterator = spellAbility.getModes().getSelectedModes().iterator(); iterator.hasNext(); ) {
             UUID nextSelectedModeId = iterator.next();
             Mode mode = spellAbility.getModes().get(nextSelectedModeId);
             if (!mode.getTargets().isEmpty()) {
                 if (!mode.getTargets().stillLegal(spellAbility, game)) {
+                    spellAbility.getModes().removeSelectedMode(mode.getId());
                     iterator.remove();
                     continue;
                 }

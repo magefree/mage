@@ -1780,10 +1780,10 @@ public class TestPlayer implements Player {
                 modesSet.remove(0);
                 return null;
             }
-            int selectedMode = Integer.parseInt(modesSet.get(0));
+            int needMode = Integer.parseInt(modesSet.get(0));
             int i = 1;
             for (Mode mode : modes.getAvailableModes(source, game)) {
-                if (i == selectedMode) {
+                if (i == needMode) {
                     modesSet.remove(0);
                     return mode;
                 }

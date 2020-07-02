@@ -2110,7 +2110,7 @@ public class HumanPlayer extends PlayerImpl {
 
                         // cancel choice (remove all selections)
                         if (Modes.CHOOSE_OPTION_CANCEL_ID.equals(response.getUUID())) {
-                            modes.getSelectedModes().clear();
+                            modes.clearSelectedModes();
                         }
                     } else if (canEndChoice) {
                         // end choice by done button in feedback panel
