@@ -3,6 +3,7 @@ package mage.cards.d;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.ControlEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -11,14 +12,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
+import mage.target.common.TargetTappedPermanentAsYouCast;
 
-import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  *
@@ -31,15 +28,18 @@ public final class DreamLeash extends CardImpl {
         this.subtype.add(SubType.AURA);
 
         // Enchant permanent
-        // You can't choose an untapped permanent as Dream Leash's target as you cast Dream Leash.
-        TargetPermanent auraTarget = new DreamLeashTarget();
+        TargetPermanent auraTarget = new TargetTappedPermanentAsYouCast();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.GainControl));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
+        // You can't choose an untapped permanent as Dream Leash's target as you cast Dream Leash.
+        Effect effect = new ControlEnchantedEffect("permanent");
+        effect.setText("You can't choose an untapped permanent as {this}'s target as you cast {this}.<br>" + effect.getText(null));
+
         // You control enchanted permanent.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect("permanent")));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private DreamLeash(final DreamLeash card) {
@@ -49,51 +49,5 @@ public final class DreamLeash extends CardImpl {
     @Override
     public DreamLeash copy() {
         return new DreamLeash(this);
-    }
-}
-
-
-class DreamLeashTarget extends TargetPermanent {
-
-    DreamLeashTarget() {}
-
-    private DreamLeashTarget(DreamLeashTarget target) {
-        super(target);
-    }
-
-    @Override
-    public DreamLeashTarget copy() {
-        return new DreamLeashTarget(this);
-    }
-
-    @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-        return game.getBattlefield().getAllActivePermanents().stream()
-                .filter(permanent -> getFilter().match(permanent, game) && permanent.isTapped())
-                .map(Permanent::getId)
-                .collect(Collectors.toSet());
-    }
-
-    @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
-        return game.getBattlefield().getAllActivePermanents().stream()
-                .filter(permanent -> getFilter().match(permanent, game))
-                .anyMatch(Permanent::isTapped);
-    }
-
-    @Override
-    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
-        if (super.canTarget(controllerId, id, source, game)) {
-            Permanent permanent = game.getPermanent(id);
-            return permanent != null && permanent.isTapped();
-        }
-        return false;
-    }
-
-    // See ruling: https://www.mtgsalvation.com/forums/magic-fundamentals/magic-rulings/magic-rulings-archives/253345-dream-leash
-    @Override
-    public boolean stillLegalTarget(UUID id, Ability source, Game game) {
-        Permanent permanent = game.getPermanent(id);
-        return permanent != null && getFilter().match(permanent, game);
     }
 }

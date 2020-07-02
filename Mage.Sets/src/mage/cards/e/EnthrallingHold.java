@@ -11,15 +11,11 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetTappedPermanentAsYouCast;
 
-import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  *
@@ -33,18 +29,18 @@ public final class EnthrallingHold extends CardImpl {
         this.subtype.add(SubType.AURA);
 
         // Enchant creature
-        TargetPermanent auraTarget = new EnthrallingHoldTarget();
+        TargetPermanent auraTarget = new TargetTappedPermanentAsYouCast(StaticFilters.FILTER_PERMANENT_CREATURE);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.GainControl));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
         // You can't choose an untapped creature as this spell's target as you cast it.
-        Effect controlEnchantedEffect = new ControlEnchantedEffect();
-        controlEnchantedEffect.setText("You can't choose an untapped creature as this spell's target as you cast it.<br>" + controlEnchantedEffect.getText(null));
+        Effect effect = new ControlEnchantedEffect();
+        effect.setText("You can't choose an untapped creature as this spell's target as you cast it.<br>" + effect.getText(null));
 
         // You control enchanted creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, controlEnchantedEffect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private EnthrallingHold(final EnthrallingHold card) {
@@ -54,50 +50,5 @@ public final class EnthrallingHold extends CardImpl {
     @Override
     public EnthrallingHold copy() {
         return new EnthrallingHold(this);
-    }
-}
-
-class EnthrallingHoldTarget extends TargetCreaturePermanent {
-
-    EnthrallingHoldTarget() {}
-
-    private EnthrallingHoldTarget(EnthrallingHoldTarget target) {
-        super(target);
-    }
-
-    @Override
-    public EnthrallingHoldTarget copy() {
-        return new EnthrallingHoldTarget(this);
-    }
-
-    @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-        return game.getBattlefield().getAllActivePermanents().stream()
-                .filter(permanent -> getFilter().match(permanent, game) && permanent.isTapped())
-                .map(Permanent::getId)
-                .collect(Collectors.toSet());
-    }
-
-    @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
-        return game.getBattlefield().getAllActivePermanents().stream()
-                .filter(permanent -> getFilter().match(permanent, game))
-                .anyMatch(Permanent::isTapped);
-    }
-
-    @Override
-    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
-        if (super.canTarget(controllerId, id, source, game)) {
-            Permanent permanent = game.getPermanent(id);
-            return permanent != null && permanent.isTapped();
-        }
-        return false;
-    }
-
-    // See ruling: https://www.mtgsalvation.com/forums/magic-fundamentals/magic-rulings/magic-rulings-archives/253345-dream-leash
-    @Override
-    public boolean stillLegalTarget(UUID id, Ability source, Game game) {
-        Permanent permanent = game.getPermanent(id);
-        return permanent != null && getFilter().match(permanent, game);
     }
 }
