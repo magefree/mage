@@ -129,8 +129,8 @@ class MnemonicBetrayalCastFromExileEffect extends AsThoughEffectImpl {
         }
         return objectId.equals(card.getId())
                 && card.getZoneChangeCounter(game) == zoneCounter
-                && affectedControllerId.equals(source.getControllerId()
-                        && !card.isLand());  // cast only not play
+                && affectedControllerId.equals(source.getControllerId())
+                && !card.isLand();  // cast only not play
     }
 }
 
