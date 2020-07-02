@@ -75,7 +75,7 @@ class NeyithOfTheDireHuntTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.BATCH_FIGHT
-                || event.getType() == GameEvent.EventType.DECLARED_BLOCKERS;
+                || event.getType() == GameEvent.EventType.DECLARE_BLOCKERS_STEP;
     }
 
     @Override
@@ -93,7 +93,7 @@ class NeyithOfTheDireHuntTriggeredAbility extends TriggeredAbilityImpl {
                         .filter(Objects::nonNull)
                         .map(Controllable::getControllerId)
                         .anyMatch(this.getControllerId()::equals);
-            case DECLARED_BLOCKERS:
+            case DECLARE_BLOCKERS_STEP:
                 return game.getCombat()
                         .getGroups()
                         .stream()
