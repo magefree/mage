@@ -71,7 +71,12 @@ enum SilverWyvernPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePl
 
     @Override
     public boolean apply(ObjectSourcePlayer<StackObject> input, Game game) {
-        Stream<UUID> stream = input.getObject()
+        return makeStream(input, game).anyMatch(input.getSourceId()::equals)
+                && makeStream(input, game).allMatch(input.getSourceId()::equals);
+    }
+
+    private static final Stream<UUID> makeStream(ObjectSourcePlayer<StackObject> input, Game game) {
+        return input.getObject()
                 .getStackAbility()
                 .getTargets()
                 .stream()
@@ -80,7 +85,5 @@ enum SilverWyvernPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePl
                 .map(game::getPermanent)
                 .filter(Objects::nonNull)
                 .map(MageItem::getId);
-        return stream.allMatch(input.getSourceId()::equals)
-                && stream.anyMatch(input.getSourceId()::equals);
     }
 }
