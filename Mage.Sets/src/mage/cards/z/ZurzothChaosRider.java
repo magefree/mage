@@ -160,6 +160,7 @@ class ZurzothChaosRiderEffect extends OneShotEffect {
 
     private ZurzothChaosRiderEffect(final ZurzothChaosRiderEffect effect) {
         super(effect);
+        this.playerIds.addAll(effect.playerIds);
     }
 
     @Override
