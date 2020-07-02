@@ -17,7 +17,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 
+import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -66,10 +68,25 @@ class DreamLeashTarget extends TargetPermanent {
     }
 
     @Override
+    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+        return game.getBattlefield().getAllActivePermanents().stream()
+                .filter(permanent -> StaticFilters.FILTER_PERMANENT.match(permanent, game) && permanent.isTapped())
+                .map(Permanent::getId)
+                .collect(Collectors.toSet());
+    }
+
+    @Override
+    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+        return game.getBattlefield().getAllActivePermanents().stream()
+                .filter(permanent -> StaticFilters.FILTER_PERMANENT.match(permanent, game))
+                .anyMatch(Permanent::isTapped);
+    }
+
+    @Override
     public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
         if (super.canTarget(controllerId, id, source, game)) {
             Permanent permanent = game.getPermanent(id);
-            return permanent.isTapped();
+            return permanent != null && permanent.isTapped();
         }
         return false;
     }
