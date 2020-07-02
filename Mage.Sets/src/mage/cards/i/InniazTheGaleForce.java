@@ -23,6 +23,7 @@ import mage.players.Player;
 import mage.players.PlayerList;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -95,7 +96,7 @@ class InniazTheGaleForceEffect extends OneShotEffect {
         private FilterPermanent makeFilter() {
             FilterPermanent filter = new FilterNonlandPermanent(
                     "nonland permanent controlled by " + rightPlayer.getName()
-                    + " to give to " + leftPlayer.getName()
+                            + " to give to " + leftPlayer.getName()
             );
             filter.add(new ControllerIdPredicate(rightPlayer.getId()));
             return filter;
@@ -150,7 +151,7 @@ class InniazTheGaleForceEffect extends OneShotEffect {
             ));
         }
         playerPairList.add(new PlayerPair(
-                game.getPlayer(playerList.get(playerPairList.size() - 1)),
+                game.getPlayer(playerList.get(playerList.size() - 1)),
                 game.getPlayer(playerList.get(0))
         ));
         for (PlayerPair playerPair : playerPairList) {
