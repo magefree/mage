@@ -74,7 +74,7 @@ class EnthrallingHoldTarget extends TargetCreaturePermanent {
     @Override
     public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
         return game.getBattlefield().getAllActivePermanents().stream()
-                .filter(permanent -> StaticFilters.FILTER_PERMANENT_CREATURE.match(permanent, game) && permanent.isTapped())
+                .filter(permanent -> getFilter().match(permanent, game) && permanent.isTapped())
                 .map(Permanent::getId)
                 .collect(Collectors.toSet());
     }
@@ -82,7 +82,7 @@ class EnthrallingHoldTarget extends TargetCreaturePermanent {
     @Override
     public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
         return game.getBattlefield().getAllActivePermanents().stream()
-                .filter(permanent -> StaticFilters.FILTER_PERMANENT_CREATURE.match(permanent, game))
+                .filter(permanent -> getFilter().match(permanent, game))
                 .anyMatch(Permanent::isTapped);
     }
 
@@ -99,6 +99,6 @@ class EnthrallingHoldTarget extends TargetCreaturePermanent {
     @Override
     public boolean stillLegalTarget(UUID id, Ability source, Game game) {
         Permanent permanent = game.getPermanent(id);
-        return permanent != null && StaticFilters.FILTER_PERMANENT_CREATURE.match(permanent, game);
+        return permanent != null && getFilter().match(permanent, game);
     }
 }
