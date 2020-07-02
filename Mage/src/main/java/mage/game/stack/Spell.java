@@ -35,6 +35,7 @@ import mage.util.SubTypeList;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.UUID;
 
@@ -222,12 +223,14 @@ public class Spell extends StackObjImpl implements Card {
                 for (SpellAbility spellAbility : this.spellAbilities) {
                     // legality of targets is checked only as the spell begins to resolve, not in between modes (spliced spells handeled correctly?)
                     if (spellAbilityCheckTargetsAndDeactivateModes(spellAbility, game)) {
-                        for (UUID modeId : spellAbility.getModes().getSelectedModes()) {
-                            spellAbility.getModes().setActiveMode(modeId);
-                            if (spellAbility.getSpellAbilityType() != SpellAbilityType.SPLICE) {
-                                updateOptionalCosts(index);
+                        for (Mode mode : spellAbility.getModes().values()) {
+                            if (spellAbility.getModes().getSelectedModes().contains(mode.getId()))  {
+                                spellAbility.getModes().setActiveMode(mode.getId());
+                                if (spellAbility.getSpellAbilityType() != SpellAbilityType.SPLICE) {
+                                    updateOptionalCosts(index);
+                                }
+                                result |= spellAbility.resolve(game);
                             }
-                            result |= spellAbility.resolve(game);
                         }
                         index++;
                     }
@@ -319,9 +322,10 @@ public class Spell extends StackObjImpl implements Card {
     }
 
     /**
-     * Legality of the targets of all modes are only checked as the spell begins to resolve
-     * A mode without any legal target (if it has targets at all) won't resolve.
-     * So modes with targets without legal targets are unselected.
+     * Legality of the targets of all modes are only checked as the spell begins
+     * to resolve A mode without any legal target (if it has targets at all)
+     * won't resolve. So modes with targets without legal targets are
+     * unselected.
      *
      * @param spellAbility
      * @param game
