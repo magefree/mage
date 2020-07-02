@@ -331,7 +331,7 @@ public class VerifyCardDataTest {
             // replace codes for aliases
             String searchSet = MtgJson.mtgJsonToXMageCodes.getOrDefault(refSet.code, refSet.code);
 
-            ExpansionSet mageSet = Sets.findSet(searchSet.toUpperCase());
+            ExpansionSet mageSet = Sets.findSet(searchSet.toUpperCase(Locale.ENGLISH));
             if (mageSet == null) {
                 totalMissingSets = totalMissingSets + 1;
                 totalMissingCards = totalMissingCards + refSet.cards.size();

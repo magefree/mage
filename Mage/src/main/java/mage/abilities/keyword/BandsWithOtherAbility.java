@@ -6,6 +6,8 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 
+import java.util.Locale;
+
 /**
  *
  * @author L_J
@@ -69,7 +71,7 @@ public class BandsWithOtherAbility extends StaticAbility {
         if (subtype != null) {
             return sb.append(' ').append(subtype.getDescription()).append('s').toString();
         } else if (supertype != null) {
-            return sb.append(' ').append(supertype.toString().toLowerCase()).append(" creatures").toString();
+            return sb.append(' ').append(supertype.toString().toLowerCase(Locale.ENGLISH)).append(" creatures").toString();
         } else if (bandingName != null) {
             return sb.append(" creatures named ").append(bandingName).toString();
         }

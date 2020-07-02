@@ -230,12 +230,12 @@ public class PickCheckBoxDialog extends MageDialog {
         if (filter == null) {
             filter = "";
         }
-        filter = filter.toLowerCase();
+        filter = filter.toLowerCase(Locale.ENGLISH);
 
         this.dataModel.clear();
         this.m_dataModel.clear();
         for (KeyValueItem item : this.allItems) {
-            if (!choice.isSearchEnabled() || item.Value.toLowerCase().contains(filter)) {
+            if (!choice.isSearchEnabled() || item.Value.toLowerCase(Locale.ENGLISH).contains(filter)) {
                 this.dataModel.addElement(item);
                 this.m_dataModel.addElement(item.getObjectValue());
             }

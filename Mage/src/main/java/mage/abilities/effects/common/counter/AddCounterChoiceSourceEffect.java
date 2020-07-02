@@ -9,6 +9,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.Locale;
+
 /**
  * @author TheElk801
  */
@@ -50,7 +52,7 @@ public class AddCounterChoiceSourceEffect extends OneShotEffect {
     }
 
     private static final String cap(String string) {
-        return string != null ? string.substring(0, 1).toUpperCase() + string.substring(1) : null;
+        return string != null ? string.substring(0, 1).toUpperCase(Locale.ENGLISH) + string.substring(1) : null;
     }
 
     @Override

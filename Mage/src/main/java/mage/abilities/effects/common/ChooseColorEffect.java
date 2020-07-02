@@ -11,6 +11,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.Locale;
+
 /**
  * @author Plopman
  */
@@ -25,7 +27,7 @@ public class ChooseColorEffect extends OneShotEffect {
     public ChooseColorEffect(Outcome outcome, String exceptColor) {
         super(outcome);
         this.exceptColor = exceptColor;
-        staticText = "choose a color" + (exceptColor != null ? " other than " + exceptColor.toLowerCase() : "");
+        staticText = "choose a color" + (exceptColor != null ? " other than " + exceptColor.toLowerCase(Locale.ENGLISH) : "");
     }
 
     public ChooseColorEffect(final ChooseColorEffect effect) {

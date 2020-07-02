@@ -119,7 +119,7 @@ class JeganthaTheWellspringManaCondition extends ManaCondition {
     private final String manaSymbol;
 
     JeganthaTheWellspringManaCondition(String manaSymbol) {
-        this.manaSymbol = manaSymbol.toLowerCase();
+        this.manaSymbol = manaSymbol.toLowerCase(Locale.ENGLISH);
     }
 
     @Override
@@ -132,6 +132,6 @@ class JeganthaTheWellspringManaCondition extends ManaCondition {
                         .getUnpaid()
                         .getText()
                         .split("[\\}\\{]")
-        ).map(String::toLowerCase).anyMatch(s -> s.contains(manaSymbol));
+        ).map(s -> s.toLowerCase(Locale.ENGLISH)).anyMatch(s -> s.contains(manaSymbol));
     }
 }

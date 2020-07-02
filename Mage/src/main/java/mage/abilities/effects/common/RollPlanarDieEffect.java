@@ -17,6 +17,7 @@ import mage.target.Target;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 /**
@@ -150,7 +151,7 @@ public class RollPlanarDieEffect extends OneShotEffect {
             if (effect != null) {
                 try {
                     String emode = effect.getText(mode);
-                    emode = emode.substring(0, 1).toLowerCase() + emode.substring(1);
+                    emode = emode.substring(0, 1).toLowerCase(Locale.ENGLISH) + emode.substring(1);
                     sb.append(emode);
                 } catch (Exception e) {
                     sb.append("perform the CHAOS action");
