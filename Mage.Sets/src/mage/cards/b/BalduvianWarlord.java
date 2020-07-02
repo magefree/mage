@@ -1,11 +1,7 @@
-
 package mage.cards.b;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.common.TapSourceCost;
@@ -15,11 +11,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.RemoveFromCombatTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.PhaseStep;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.common.FilterBlockingCreature;
 import mage.filter.predicate.permanent.PermanentInListPredicate;
@@ -32,8 +24,9 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetAttackingCreature;
 import mage.watchers.common.BlockedByOnlyOneCreatureThisCombatWatcher;
 
+import java.util.*;
+
 /**
- *
  * @author L_J
  */
 public final class BalduvianWarlord extends CardImpl {
@@ -64,7 +57,7 @@ public final class BalduvianWarlord extends CardImpl {
 
 class BalduvianWarlordUnblockEffect extends OneShotEffect {
 
-    public BalduvianWarlordUnblockEffect() {
+    BalduvianWarlordUnblockEffect() {
         super(Outcome.Benefit);
         this.staticText = " Remove target blocking creature from combat. Creatures it was blocking that hadn't become blocked by another creature this combat become unblocked, then it blocks an attacking creature of your choice";
     }
@@ -146,6 +139,15 @@ class BalduvianWarlordUnblockEffect extends OneShotEffect {
                                         game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREATURE_BLOCKED, bandedId, null));
                                     }
                                 }
+                                Set<MageObjectReference> morSet = new HashSet<>();
+                                morSet.add(new MageObjectReference(chosenPermanent, game));
+                                String key = UUID.randomUUID().toString();
+                                game.getState().setValue("becameBlocked_" + key, morSet);
+                                game.fireEvent(GameEvent.getEvent(
+                                        GameEvent.EventType.BATCH_BLOCK_NONCOMBAT,
+                                        source.getSourceId(), source.getSourceId(),
+                                        source.getControllerId(), key, 0)
+                                );
                             }
                             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.BLOCKER_DECLARED, chosenPermanent.getId(), permanent.getId(), permanent.getControllerId()));
                         }

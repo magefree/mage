@@ -1,22 +1,22 @@
-
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.BecomeBlockedTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
+import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.combat.CombatGroup;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
+import mage.target.targetpointer.FixedTargets;
+
+import java.util.UUID;
 
 /**
- *
  * @author L_J
  */
 public final class FogPatch extends CardImpl {
@@ -25,13 +25,16 @@ public final class FogPatch extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");
 
         // Cast Fog Patch only during the declare blockers step.
-        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(null, PhaseStep.DECLARE_BLOCKERS, null, "Cast this spell only during the declare blockers step"));
+        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(
+                null, PhaseStep.DECLARE_BLOCKERS, null,
+                "Cast this spell only during the declare blockers step"
+        ));
 
         // Attacking creatures become blocked.
         this.getSpellAbility().addEffect(new FogPatchEffect());
     }
 
-    public FogPatch(final FogPatch card) {
+    private FogPatch(final FogPatch card) {
         super(card);
     }
 
@@ -43,12 +46,12 @@ public final class FogPatch extends CardImpl {
 
 class FogPatchEffect extends OneShotEffect {
 
-    public FogPatchEffect() {
+    FogPatchEffect() {
         super(Outcome.Benefit);
         this.staticText = "Attacking creatures become blocked";
     }
 
-    public FogPatchEffect(final FogPatchEffect effect) {
+    private FogPatchEffect(final FogPatchEffect effect) {
         super(effect);
     }
 
@@ -59,19 +62,10 @@ class FogPatchEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            for (UUID attackers : game.getCombat().getAttackers()) {
-                Permanent attacker = game.getPermanent(attackers);
-                if (attacker != null) {
-                    CombatGroup combatGroup = game.getCombat().findGroup(attacker.getId());
-                    if (combatGroup != null) {
-                        combatGroup.setBlocked(true, game);
-                    }
-                }
-            }
-            return true;
-        }
-        return false;
+        Effect effect = new BecomeBlockedTargetEffect();
+        effect.setTargetPointer(new FixedTargets(game.getBattlefield().getActivePermanents(
+                StaticFilters.FILTER_ATTACKING_CREATURES, source.getSourceId(), game
+        ), game));
+        return effect.apply(game, source);
     }
 }

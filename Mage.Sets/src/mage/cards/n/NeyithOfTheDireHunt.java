@@ -75,18 +75,33 @@ class NeyithOfTheDireHuntTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.BATCH_FIGHT
-                || event.getType() == GameEvent.EventType.DECLARE_BLOCKERS_STEP;
+                || event.getType() == GameEvent.EventType.DECLARE_BLOCKERS_STEP
+                || event.getType() == GameEvent.EventType.BATCH_BLOCK_NONCOMBAT;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
+        Object value;
+        Set<MageObjectReference> permanents;
         switch (event.getType()) {
             case BATCH_FIGHT:
-                Object value = game.getState().getValue("batchFight_" + event.getData());
+                value = game.getState().getValue("batchFight_" + event.getData());
                 if (!(value instanceof Set)) {
                     return false;
                 }
-                Set<MageObjectReference> permanents = (Set<MageObjectReference>) value;
+                permanents = (Set<MageObjectReference>) value;
+                return permanents
+                        .stream()
+                        .map(mor -> mor.getPermanentOrLKIBattlefield(game))
+                        .filter(Objects::nonNull)
+                        .map(Controllable::getControllerId)
+                        .anyMatch(this.getControllerId()::equals);
+            case BATCH_BLOCK_NONCOMBAT:
+                value = game.getState().getValue("becameBlocked_" + event.getData());
+                if (!(value instanceof Set)) {
+                    return false;
+                }
+                permanents = (Set<MageObjectReference>) value;
                 return permanents
                         .stream()
                         .map(mor -> mor.getPermanentOrLKIBattlefield(game))
