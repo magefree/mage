@@ -1,7 +1,6 @@
 package mage.abilities.effects.common.cost;
 
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
@@ -11,13 +10,10 @@ import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
-import mage.target.Target;
 import mage.util.CardUtil;
 
-import java.util.Collection;
 import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author JayDi85
@@ -119,12 +115,12 @@ public class SpellsCostModificationThatTargetSourceEffect extends CostModificati
         Spell spell = (Spell) game.getStack().getStackObject(abilityToModify.getId());
         if (spell != null && this.spellFilter.match(spell, game)) {
             // real cast with put on stack
-            Set<UUID> allTargets = getAllSelectedTargets(abilityToModify, source, game);
+            Set<UUID> allTargets = CardUtil.getAllSelectedTargets(abilityToModify, game);
             return allTargets.contains(source.getSourceId());
         } else {
             // get playable and other staff without put on stack
             // used at least for flashback ability because Flashback ability doesn't use stack
-            Set<UUID> allTargets = getAllPossibleTargets(abilityToModify, source, game);
+            Set<UUID> allTargets = CardUtil.getAllPossibleTargets(abilityToModify, game);
             switch (this.getModificationType()) {
                 case REDUCE_COST:
                     // reduce all the time
@@ -135,27 +131,6 @@ public class SpellsCostModificationThatTargetSourceEffect extends CostModificati
             }
         }
         return false;
-    }
-
-    private Set<UUID> getAllSelectedTargets(Ability abilityToModify, Ability source, Game game) {
-        return abilityToModify.getModes().getSelectedModes()
-                .stream()
-                .map(abilityToModify.getModes()::get)
-                .map(Mode::getTargets)
-                .flatMap(Collection::stream)
-                .map(Target::getTargets)
-                .flatMap(Collection::stream)
-                .collect(Collectors.toSet());
-    }
-
-    private Set<UUID> getAllPossibleTargets(Ability abilityToModify, Ability source, Game game) {
-        return abilityToModify.getModes().values()
-                .stream()
-                .map(Mode::getTargets)
-                .flatMap(Collection::stream)
-                .map(t -> t.possibleTargets(abilityToModify.getSourceId(), abilityToModify.getControllerId(), game))
-                .flatMap(Collection::stream)
-                .collect(Collectors.toSet());
     }
 
     public SpellsCostModificationThatTargetSourceEffect withTargetName(String targetName) {

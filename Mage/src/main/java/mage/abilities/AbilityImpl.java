@@ -1226,6 +1226,14 @@ public abstract class AbilityImpl implements Ability {
         }
     }
 
+    /**
+     * Dynamic cost modification for ability.
+     * Example: if it need stack related info (like real targets) then must check two states (game.inCheckPlayableState):
+     * 1. In playable state it must check all possible use cases (e.g. allow to reduce on any available target and modes)
+     * 2. In real cast state it must check current use case (e.g. real selected targets and modes)
+     *
+     * @param costAdjuster
+     */
     @Override
     public void setCostAdjuster(CostAdjuster costAdjuster) {
         this.costAdjuster = costAdjuster;
