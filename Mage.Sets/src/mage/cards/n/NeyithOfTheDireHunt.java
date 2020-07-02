@@ -95,8 +95,9 @@ class NeyithOfTheDireHuntTriggeredAbility extends TriggeredAbilityImpl {
                         .anyMatch(this.getControllerId()::equals);
             case DECLARED_BLOCKERS:
                 return game.getCombat()
-                        .getBlockingGroups()
+                        .getGroups()
                         .stream()
+                        .filter(CombatGroup::getBlocked)
                         .map(CombatGroup::getAttackers)
                         .flatMap(Collection::stream)
                         .map(game::getControllerId)
