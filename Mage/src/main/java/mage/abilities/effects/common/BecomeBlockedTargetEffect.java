@@ -74,6 +74,9 @@ public class BecomeBlockedTargetEffect extends OneShotEffect {
             return staticText;
         }
         StringBuilder sb = new StringBuilder();
+        if (mode.getTargets().isEmpty()) {
+            return "that creature becomes blocked";
+        }
         Target target = mode.getTargets().get(0);
         if (target.getNumberOfTargets() == 1) {
             String targetName = target.getTargetName();
