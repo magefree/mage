@@ -93,8 +93,11 @@ public class AmplifyTest extends CardTestPlayerBase {
     /**
      * Tests if a creature with Amplify is able to select itself if it's put
      * onto the battlefield from hand (without casting).
+     * 
+     * TODO: Remove @Ignore when https://github.com/magefree/mage/issues/6776 is fixed.
      */
     @Test
+    @Ignore
     public void testAmplifyPutOntoBattlefieldFromHand() {
         // Creature — Dragon - Dragon   5/5  {5}{R}{R}
         // Amplify 3 (As this creature enters the battlefield, put three +1/+1 counters on it for each Dragon card you reveal in your hand.)
@@ -113,8 +116,6 @@ public class AmplifyTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerA, "Kilnmouth Dragon", 1);
-        // This recreates https://github.com/magefree/mage/issues/6776. The
-        // expected value should be 5/5.
-        assertPowerToughness(playerA, "Kilnmouth Dragon", 8,8); // 5 + 3 from Amplify
+        assertPowerToughness(playerA, "Kilnmouth Dragon", 5,5); // 5 + 0 from Amplify
     }
 }
