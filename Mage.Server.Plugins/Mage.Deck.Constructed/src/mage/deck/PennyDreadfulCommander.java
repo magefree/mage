@@ -10,6 +10,7 @@ import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.cards.decks.Constructed;
 import mage.cards.decks.Deck;
+import mage.cards.decks.PennyDreadfulLegalityUtil;
 import mage.filter.FilterMana;
 import mage.util.ManaUtil;
 
@@ -23,7 +24,6 @@ public class PennyDreadfulCommander extends Constructed {
 
     protected List<String> bannedCommander = new ArrayList<>();
     private static final Map<String, Integer> pdAllowed = new HashMap<>();
-    private static boolean setupAllowed = false;
 
     public PennyDreadfulCommander() {
         super("Penny Dreadful Commander", "Penny");
@@ -107,7 +107,10 @@ public class PennyDreadfulCommander extends Constructed {
         countCards(counts, deck.getSideboard());
         valid = checkCounts(1, counts) && valid;
 
-        generatePennyDreadfulHash();
+        if (pdAllowed.isEmpty()) {
+            pdAllowed.putAll(PennyDreadfulLegalityUtil.getLegalCardList());
+        }
+
         for (String wantedCard : counts.keySet()) {
             if (!(pdAllowed.containsKey(wantedCard))) {
                 invalid.put(wantedCard, "Banned");
@@ -195,23 +198,5 @@ public class PennyDreadfulCommander extends Constructed {
             }
         }
         return valid;
-    }
-
-    public void generatePennyDreadfulHash() {
-        if (setupAllowed == false) {
-            setupAllowed = true;
-        } else {
-            return;
-        }
-
-        Properties properties = new Properties();
-        try {
-            properties.load(PennyDreadfulCommander.class.getResourceAsStream("/pennydreadful.properties"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        for (final Entry<Object, Object> entry : properties.entrySet()) {
-            pdAllowed.put((String) entry.getKey(), 1);
-        }
     }
 }

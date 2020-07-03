@@ -108,7 +108,7 @@ public enum ThemeType {
     private final boolean hasSkipButtons;
     private final boolean hasPhaseIcons;
     private final boolean hasWinLossImages;
-    private final boolean skipShortcutsVisible; // Whether or not to display skip button shortcuts
+    private final boolean shortcutsVisibleForSkipButtons; // Whether or not to display skip button shortcuts
     private final Color nimbusBlueGrey;  // buttons, scrollbar background, disabled inputs
     private final Color control;  // window bg
     private final Color nimbusLightBackground; // inputs, table rows
@@ -127,7 +127,7 @@ public enum ThemeType {
               boolean hasSkipButtons,
               boolean hasPhaseIcons,
               boolean hasWinLossImages,
-              boolean skipShortcutsVisible,
+              boolean shortcutsVisibleForSkipButtons,
               Color nimbusBlueGrey,
               Color control,
               Color nimbusLightBackground,
@@ -146,7 +146,7 @@ public enum ThemeType {
         this.hasSkipButtons = hasSkipButtons;
         this.hasPhaseIcons = hasPhaseIcons;
         this.hasWinLossImages = hasWinLossImages;
-        this.skipShortcutsVisible = skipShortcutsVisible;
+        this.shortcutsVisibleForSkipButtons = shortcutsVisibleForSkipButtons;
         this.nimbusBlueGrey = nimbusBlueGrey;
         this.control = control;
         this.nimbusLightBackground = nimbusLightBackground;
@@ -172,40 +172,12 @@ public enum ThemeType {
         return DEFAULT;
     }
 
-    public String getPath() {
-        return this.path;
-    }
-
     public String getName() {
         return name;
     }
 
-    public boolean hasBackground() {
-        return hasBackground;
-    }
-
-    public boolean hasLoginBackground() {
-        return hasLoginBackground;
-    }
-
-    public boolean hasBattleBackground() {
-        return hasBattleBackground;
-    }
-
-    public boolean hasSkipButtons() {
-        return hasSkipButtons;
-    }
-
-    public boolean hasPhaseIcons() {
-        return hasPhaseIcons;
-    }
-
-    public boolean hasWinLossImages() {
-        return hasWinLossImages;
-    }
-
-    public boolean isSkipShortcutsVisible() {
-        return skipShortcutsVisible;
+    public boolean isShortcutsVisibleForSkipButtons() {
+        return shortcutsVisibleForSkipButtons;
     }
 
     public Color getNimbusBlueGrey() {
@@ -242,5 +214,57 @@ public enum ThemeType {
 
     public Color getPlayerPanel_deadBackgroundColor() {
         return playerPanel_deadBackgroundColor;
+    }
+
+    private String getImagePath(String imageType, String name) {
+        return "/" + imageType + "/" + path + name;
+    }
+
+    public String getButtonPath(String name) {
+        if (hasSkipButtons) {
+            return getImagePath("buttons", name);
+        } else {
+            return "/buttons/" + name;
+        }
+    }
+
+    public String getPhasePath(String name) {
+        if (hasPhaseIcons) {
+            return getImagePath("phases", name);
+        } else {
+            return "/phases/" + name;
+        }
+    }
+
+    public String getWinlossPath(String name) {
+        if (hasWinLossImages) {
+            return getImagePath("winloss", name);
+        } else {
+            return "/winloss/" + name;
+        }
+    }
+
+    public String getBackgroundPath() {
+        if (hasBackground) {
+            return getImagePath("background", "background.png");
+        } else {
+            return "/background/background.png";
+        }
+    }
+
+    public String getLoginBackgroundPath() {
+        if (hasLoginBackground) {
+            return getImagePath("background", "login-background.png");
+        } else {
+            return getBackgroundPath();
+        }
+    }
+
+    public String getBattleBackgroundPath() {
+        if (hasBattleBackground) {
+            return getImagePath("background", "battle-background.png");
+        } else {
+            return getBackgroundPath();
+        }
     }
 }

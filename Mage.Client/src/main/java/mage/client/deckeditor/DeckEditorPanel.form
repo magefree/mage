@@ -431,7 +431,7 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Validate"/>
                     <Property name="iconTextGap" type="int" value="2"/>
-                    <Property name="name" type="java.lang.String" value="btnAddLand" noResource="true"/>
+                    <Property name="name" type="java.lang.String" value="btnLegality" noResource="true"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLegalityActionPerformed"/>

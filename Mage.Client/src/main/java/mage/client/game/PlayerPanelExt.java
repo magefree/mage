@@ -80,7 +80,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         initComponents();
         setGUISize();
 
-        ThemeType currentTheme = ThemeType.valueByName(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_THEME, "Default Theme"));
+        ThemeType currentTheme = PreferencesDialog.getCurrentTheme();
         inactiveBackgroundColor = currentTheme.getPlayerPanel_inactiveBackgroundColor();
         activeBackgroundColor = currentTheme.getPlayerPanel_activeBackgroundColor();
         deadBackgroundColor = currentTheme.getPlayerPanel_deadBackgroundColor();

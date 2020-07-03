@@ -1091,7 +1091,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
         btnLegality.setText("Validate");
         btnLegality.setIconTextGap(2);
-        btnLegality.setName("btnAddLand"); // NOI18N
+        btnLegality.setName("btnLegality"); // NOI18N
         btnLegality.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLegalityActionPerformed(evt);

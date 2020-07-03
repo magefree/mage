@@ -313,6 +313,16 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private static final Border BLACK_BORDER = BorderFactory.createLineBorder(Color.BLACK, 3);
 
     private static int selectedAvatarId;
+    
+    private static ThemeType currentTheme = null;
+    
+    public static ThemeType getCurrentTheme() {
+        if (currentTheme == null) {
+            currentTheme = ThemeType.valueByName(getCachedValue(KEY_THEME, "Default Theme"));
+        }
+        
+        return currentTheme;
+    }
 
     private final JFileChooser fc = new JFileChooser();
 
@@ -474,7 +484,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         txtImageFolderPath = new javax.swing.JTextField();
         btnBrowseImageLocation = new javax.swing.JButton();
         cbSaveToZipFiles = new javax.swing.JCheckBox();
-        cbPreferedImageLanguage = new javax.swing.JComboBox<>();
+        cbPreferedImageLanguage = new javax.swing.JComboBox<String>();
         labelPreferedImageLanguage = new javax.swing.JLabel();
         labelNumberOfDownloadThreads = new javax.swing.JLabel();
         cbNumberOfDownloadThreads = new javax.swing.JComboBox();
@@ -535,7 +545,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         txtURLServerList = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         lblProxyType = new javax.swing.JLabel();
-        cbProxyType = new javax.swing.JComboBox<>();
+        cbProxyType = new javax.swing.JComboBox<ProxyType>();
         pnlProxySettings = new javax.swing.JPanel();
         pnlProxy = new javax.swing.JPanel();
         lblProxyServer = new javax.swing.JLabel();
@@ -573,11 +583,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
         keyToggleRecordMacro = new KeyBindButton(this, KEY_CONTROL_TOGGLE_MACRO);
         labelSwitchChat = new javax.swing.JLabel();
         keySwitchChat = new KeyBindButton(this, KEY_CONTROL_SWITCH_CHAT);
-        jPanel2 = new javax.swing.JPanel();
-        connection_servers1 = new javax.swing.JPanel();
-        lblURLServerList1 = new javax.swing.JLabel();
-        cbTheme = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
+        tabThemes = new javax.swing.JPanel();
+        themesCategory = new javax.swing.JPanel();
+        lbSelectLabel = new javax.swing.JLabel();
+        cbTheme = new javax.swing.JComboBox<ThemeType>();
+        lbThemeHint = new javax.swing.JLabel();
         saveButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
 
@@ -1544,7 +1554,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         });
 
         cbPreferedImageLanguage.setMaximumRowCount(20);
-        cbPreferedImageLanguage.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbPreferedImageLanguage.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         labelPreferedImageLanguage.setText("Default images language:");
         labelPreferedImageLanguage.setFocusable(false);
@@ -2673,14 +2683,14 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         tabsPanel.addTab("Controls", tabControls);
 
-        connection_servers1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Themes"));
+        themesCategory.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Themes"));
 
-        lblURLServerList1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblURLServerList1.setText("Select a theme:");
-        lblURLServerList1.setToolTipText("");
-        lblURLServerList1.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        lblURLServerList1.setPreferredSize(new java.awt.Dimension(110, 16));
-        lblURLServerList1.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        lbSelectLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lbSelectLabel.setText("Select a theme:");
+        lbSelectLabel.setToolTipText("");
+        lbSelectLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        lbSelectLabel.setPreferredSize(new java.awt.Dimension(110, 16));
+        lbSelectLabel.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         cbTheme.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2688,54 +2698,54 @@ public class PreferencesDialog extends javax.swing.JDialog {
             }
         });
 
-        jLabel1.setText("Requires a restart to apply new theme.");
+        lbThemeHint.setText("Requires a restart to apply new theme.");
 
-        org.jdesktop.layout.GroupLayout connection_servers1Layout = new org.jdesktop.layout.GroupLayout(connection_servers1);
-        connection_servers1.setLayout(connection_servers1Layout);
-        connection_servers1Layout.setHorizontalGroup(
-            connection_servers1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(connection_servers1Layout.createSequentialGroup()
+        org.jdesktop.layout.GroupLayout themesCategoryLayout = new org.jdesktop.layout.GroupLayout(themesCategory);
+        themesCategory.setLayout(themesCategoryLayout);
+        themesCategoryLayout.setHorizontalGroup(
+            themesCategoryLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(themesCategoryLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(lblURLServerList1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 96, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(lbSelectLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 96, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(connection_servers1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jLabel1)
+                .add(themesCategoryLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(lbThemeHint)
                     .add(cbTheme, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 303, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(303, Short.MAX_VALUE))
         );
-        connection_servers1Layout.setVerticalGroup(
-            connection_servers1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(connection_servers1Layout.createSequentialGroup()
-                .add(connection_servers1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+        themesCategoryLayout.setVerticalGroup(
+            themesCategoryLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(themesCategoryLayout.createSequentialGroup()
+                .add(themesCategoryLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
                     .add(cbTheme, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(lblURLServerList1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 22, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(lbSelectLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 22, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jLabel1)
+                .add(lbThemeHint)
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        org.jdesktop.layout.GroupLayout jPanel2Layout = new org.jdesktop.layout.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+        org.jdesktop.layout.GroupLayout tabThemesLayout = new org.jdesktop.layout.GroupLayout(tabThemes);
+        tabThemes.setLayout(tabThemesLayout);
+        tabThemesLayout.setHorizontalGroup(
+            tabThemesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(0, 750, Short.MAX_VALUE)
-            .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                .add(jPanel2Layout.createSequentialGroup()
+            .add(tabThemesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                .add(tabThemesLayout.createSequentialGroup()
                     .addContainerGap()
-                    .add(connection_servers1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(themesCategory, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addContainerGap()))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+        tabThemesLayout.setVerticalGroup(
+            tabThemesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(0, 526, Short.MAX_VALUE)
-            .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                .add(jPanel2Layout.createSequentialGroup()
+            .add(tabThemesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                .add(tabThemesLayout.createSequentialGroup()
                     .add(21, 21, 21)
-                    .add(connection_servers1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(themesCategory, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(430, Short.MAX_VALUE)))
         );
 
-        tabsPanel.addTab("Themes", jPanel2);
+        tabsPanel.addTab("Themes", tabThemes);
 
         saveButton.setLabel("Save");
         saveButton.setMaximumSize(new java.awt.Dimension(100, 30));
@@ -3542,7 +3552,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }
 
     private static void loadThemeSettings(Preferences prefs) {
-        dialog.cbTheme.setSelectedItem(ThemeType.valueByName(MageFrame.getPreferences().get(KEY_THEME, "Default Theme")));
+        dialog.cbTheme.setSelectedItem(PreferencesDialog.getCurrentTheme());
     }
 
     private static void loadSelectedAvatar(Preferences prefs) {
@@ -4025,14 +4035,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox checkBoxUpkeepOthers;
     private javax.swing.JCheckBox checkBoxUpkeepYou;
     private javax.swing.JPanel connection_servers;
-    private javax.swing.JPanel connection_servers1;
     private javax.swing.JLabel controlsDescriptionLabel;
     private javax.swing.JCheckBox displayLifeOnAvatar;
     private javax.swing.JButton exitButton;
     private javax.swing.JLabel fontSizeLabel;
     private javax.swing.JPanel guiSizeBasic;
     private javax.swing.JPanel guiSizeGame;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
@@ -4057,7 +4065,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel19;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel20;
     private javax.swing.JPanel jPanel21;
     private javax.swing.JPanel jPanel22;
@@ -4107,6 +4114,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JLabel labelToggleRecordMacro;
     private javax.swing.JLabel labelTooltipSize;
     private javax.swing.JLabel labelYourTurn;
+    private javax.swing.JLabel lbSelectLabel;
+    private javax.swing.JLabel lbThemeHint;
     private javax.swing.JLabel lblBattlefieldFeedbackColorizingMode;
     private javax.swing.JLabel lblProxyPassword;
     private javax.swing.JLabel lblProxyPort;
@@ -4114,7 +4123,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JLabel lblProxyType;
     private javax.swing.JLabel lblProxyUserName;
     private javax.swing.JLabel lblURLServerList;
-    private javax.swing.JLabel lblURLServerList1;
     private javax.swing.JLabel lebelSkip;
     private javax.swing.JPanel main_battlefield;
     private javax.swing.JPanel main_card;
@@ -4155,7 +4163,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JPanel tabMain;
     private javax.swing.JPanel tabPhases;
     private javax.swing.JPanel tabSounds;
+    private javax.swing.JPanel tabThemes;
     private javax.swing.JTabbedPane tabsPanel;
+    private javax.swing.JPanel themesCategory;
     private javax.swing.JSlider tooltipDelay;
     private javax.swing.JLabel tooltipDelayLabel;
     private javax.swing.JTextField txtBackgroundImagePath;

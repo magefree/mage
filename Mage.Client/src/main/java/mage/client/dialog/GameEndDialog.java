@@ -9,7 +9,6 @@
 
  import mage.client.MageFrame;
  import mage.client.game.GamePanel;
- import mage.client.themes.ThemeType;
  import mage.client.util.Format;
  import mage.client.util.ImageHelper;
  import mage.client.util.audio.AudioManager;
@@ -32,19 +31,12 @@
   */
  public class GameEndDialog extends MageDialog {
 
-     private final DateFormat df = DateFormat.getDateTimeInstance();
-
      /**
       * Creates new form GameEndDialog
       *
       * @param gameEndView
       */
      public GameEndDialog(GameEndView gameEndView) {
-         ThemeType currentTheme = ThemeType.valueByName(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_THEME, "Default Theme"));
-         String winlossPath = "/winloss/";
-         if (currentTheme.hasWinLossImages()) {
-             winlossPath = "/winloss/" + currentTheme.getPath();
-         }
          initComponents();
          this.modal = true;
 
@@ -52,7 +44,14 @@
          pnlText.setBackground(new Color(240, 240, 240, 140));
 
          Rectangle r = new Rectangle(610, 250);
-         Image image = ImageHelper.getImageFromResources(gameEndView.hasWon() ?  winlossPath + "game_won.jpg" : winlossPath + "game_lost.jpg");
+
+         Image image;
+         if (gameEndView.hasWon()) {
+             image = ImageHelper.getImageFromResources(PreferencesDialog.getCurrentTheme().getWinlossPath("game_won.jpg"));
+         } else {
+             image = ImageHelper.getImageFromResources(PreferencesDialog.getCurrentTheme().getWinlossPath("game_lost.jpg"));
+         }
+
          BufferedImage imageResult = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
          ImageIcon icon = new ImageIcon(imageResult);
          lblResultImage.setIcon(icon);
@@ -65,6 +64,8 @@
          if (autoSave.equals("true")) {
              this.saveGameLog(gameEndView);
          }
+
+         DateFormat df = DateFormat.getDateTimeInstance();
 
          // game duration
          txtDurationGame.setText(" " + Format.getDuration(gameEndView.getStartTime(), gameEndView.getEndTime()));

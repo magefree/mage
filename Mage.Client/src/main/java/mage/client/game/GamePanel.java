@@ -43,7 +43,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.beans.PropertyVetoException;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.*;
 import java.util.concurrent.CancellationException;
@@ -115,8 +114,6 @@ public final class GamePanel extends javax.swing.JPanel {
 
     // popup menu for triggered abilities order
     private JPopupMenu popupMenuTriggerOrder;
-
-    private ThemeType currentTheme;
 
     public GamePanel() {
         initComponents = true;
@@ -1579,9 +1576,6 @@ public final class GamePanel extends javax.swing.JPanel {
 
     @SuppressWarnings("unchecked")
     private void initComponents() {
-
-        this.currentTheme = ThemeType.valueByName(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_THEME, "Default Theme"));
-
         abilityPicker = new mage.client.components.ability.AbilityPicker();
         jSplitPane1 = new javax.swing.JSplitPane();
         jSplitPane0 = new javax.swing.JSplitPane();
@@ -1616,27 +1610,16 @@ public final class GamePanel extends javax.swing.JPanel {
         txtHoldPriority.setToolTipText("Holding priority after the next spell cast or ability activation");
         txtHoldPriority.setVisible(false);
 
-        // Some themes don't have button text
-        if (!this.currentTheme.isSkipShortcutsVisible()) {
-            btnToggleMacro = new JButton();
-            btnCancelSkip = new JButton();
-            btnSkipToNextTurn = new JButton();
-            btnSkipToEndTurn = new JButton();
-            btnSkipToNextMain = new JButton();
-            btnSkipStack = new JButton();
-            btnSkipToYourTurn = new JButton();
-            btnSkipToEndStepBeforeYourTurn = new JButton();
-        } else {
-            btnToggleMacro = new KeyboundButton(KEY_CONTROL_TOGGLE_MACRO);
-            btnCancelSkip = new KeyboundButton(KEY_CONTROL_CANCEL_SKIP); // F3
-            btnSkipToNextTurn = new KeyboundButton(KEY_CONTROL_NEXT_TURN); // F4
-            btnSkipToEndTurn = new KeyboundButton(KEY_CONTROL_END_STEP); // F5
-            btnSkipToNextMain = new KeyboundButton(KEY_CONTROL_MAIN_STEP); // F7
-            btnSkipStack = new KeyboundButton(KEY_CONTROL_SKIP_STACK); // F10
-            btnSkipToYourTurn = new KeyboundButton(KEY_CONTROL_YOUR_TURN); // F9
-            btnSkipToEndStepBeforeYourTurn = new KeyboundButton(KEY_CONTROL_PRIOR_END); // F11
-        }
-
+        boolean displayButtonText = PreferencesDialog.getCurrentTheme().isShortcutsVisibleForSkipButtons();
+        
+        btnToggleMacro = new KeyboundButton(KEY_CONTROL_TOGGLE_MACRO, displayButtonText);
+        btnCancelSkip = new KeyboundButton(KEY_CONTROL_CANCEL_SKIP, displayButtonText); // F3
+        btnSkipToNextTurn = new KeyboundButton(KEY_CONTROL_NEXT_TURN, displayButtonText); // F4
+        btnSkipToEndTurn = new KeyboundButton(KEY_CONTROL_END_STEP, displayButtonText); // F5
+        btnSkipToNextMain = new KeyboundButton(KEY_CONTROL_MAIN_STEP, displayButtonText); // F7
+        btnSkipStack = new KeyboundButton(KEY_CONTROL_SKIP_STACK, displayButtonText); // F10
+        btnSkipToYourTurn = new KeyboundButton(KEY_CONTROL_YOUR_TURN, displayButtonText); // F9
+        btnSkipToEndStepBeforeYourTurn = new KeyboundButton(KEY_CONTROL_PRIOR_END, displayButtonText); // F11
 
         btnConcede = new javax.swing.JButton();
         btnSwitchHands = new javax.swing.JButton();
@@ -2709,14 +2692,14 @@ public final class GamePanel extends javax.swing.JPanel {
     private mage.client.cards.BigCard bigCard;
 
     //    private JPanel cancelSkipPanel;
-    private JButton btnToggleMacro;
-    private JButton btnCancelSkip;
-    private JButton btnSkipToNextTurn; // F4
-    private JButton btnSkipToEndTurn; // F5
-    private JButton btnSkipToNextMain; // F7
-    private JButton btnSkipStack; // F8
-    private JButton btnSkipToYourTurn; // F9
-    private JButton btnSkipToEndStepBeforeYourTurn; // F11
+    private KeyboundButton btnToggleMacro;
+    private KeyboundButton btnCancelSkip;
+    private KeyboundButton btnSkipToNextTurn; // F4
+    private KeyboundButton btnSkipToEndTurn; // F5
+    private KeyboundButton btnSkipToNextMain; // F7
+    private KeyboundButton btnSkipStack; // F8
+    private KeyboundButton btnSkipToYourTurn; // F9
+    private KeyboundButton btnSkipToEndStepBeforeYourTurn; // F11
 
     private javax.swing.JButton btnConcede;
     private javax.swing.JButton btnSwitchHands;

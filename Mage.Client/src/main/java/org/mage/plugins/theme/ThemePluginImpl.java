@@ -8,12 +8,10 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import mage.client.dialog.PreferencesDialog;
-import mage.client.themes.ThemeType;
 import mage.components.ImagePanel;
 import mage.components.ImagePanelStyle;
 import mage.interfaces.plugin.ThemePlugin;
 import net.xeoh.plugins.base.annotations.PluginImplementation;
-import net.xeoh.plugins.base.annotations.events.Init;
 import net.xeoh.plugins.base.annotations.events.PluginLoaded;
 import net.xeoh.plugins.base.annotations.meta.Author;
 import org.apache.log4j.Logger;
@@ -27,12 +25,6 @@ public class ThemePluginImpl implements ThemePlugin {
     private static BufferedImage background;
     private final List flist = new List();
     private final String BackgroundDir = "backgrounds" + File.separator;
-    private ThemeType currentTheme;
-
-    @Init
-    public void init() {
-        this.currentTheme = ThemeType.valueByName(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_THEME, "Default Theme"));
-    }
 
     @PluginLoaded
     public void newPlugin(ThemePlugin plugin) {
@@ -110,15 +102,8 @@ public class ThemePluginImpl implements ThemePlugin {
     // Sets background for in-battle
     // loadbuffer_default - Only apply theme background if no custom user background set
     private BufferedImage loadbuffer_default() throws IOException {
-        String filename = "/background/battle-background.png";
-        // Use theme's battle background, fallback to theme's default background. If neither, use default theme's bg
-        if (this.currentTheme.hasBattleBackground()) {
-            filename = "/background/" + this.currentTheme.getPath() + "battle-background.png";
-        } else if (this.currentTheme.hasBackground()) {
-            filename = "/background/" + this.currentTheme.getPath() + "background.png";
-        }
         BufferedImage res;
-        InputStream is = this.getClass().getResourceAsStream(filename);
+        InputStream is = this.getClass().getResourceAsStream(PreferencesDialog.getCurrentTheme().getBattleBackgroundPath());
         res = ImageIO.read(is);
         return res;
     }
@@ -164,46 +149,41 @@ public class ThemePluginImpl implements ThemePlugin {
     // Sets background for logged in user for tables/deck editor/card viewer/etc
     private synchronized ImagePanel createImagePanelInstance() {
         if (background == null) {
-                String filename = "/background/background.png";
-                try {
-                    if (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_BACKGROUND_IMAGE_DEFAULT, "true").equals("true")) {
-                        // Only apply theme background if no custom user background set
-                        if (this.currentTheme.hasBackground()) {
-                            filename = "/background/" + this.currentTheme.getPath() + "background.png";
-                        }
-
-                        InputStream is = this.getClass().getResourceAsStream(filename);
-                        if (is == null) {
-                            throw new FileNotFoundException("Couldn't find " + filename + " in resources.");
-                        }
-                        background = ImageIO.read(is);
-                    } else {
-                        String path = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_BACKGROUND_IMAGE, "");
-                        if (path != null && !path.isEmpty()) {
-                            try {
-                                File f = new File(path);
-                                if (f != null) {
-                                    background = ImageIO.read(f);
-                                }
-                            } catch (Exception e) {
-                                background = null;
+            try {
+                if (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_BACKGROUND_IMAGE_DEFAULT, "true").equals("true")) {
+                    InputStream is = this.getClass().getResourceAsStream(PreferencesDialog.getCurrentTheme().getBackgroundPath());
+                    if (is == null) {
+                        throw new FileNotFoundException("Couldn't find " + PreferencesDialog.getCurrentTheme().getBackgroundPath() + " in resources.");
+                    }
+                    background = ImageIO.read(is);
+                } else {
+                    String path = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_BACKGROUND_IMAGE, "");
+                    if (path != null && !path.isEmpty()) {
+                        try {
+                            File f = new File(path);
+                            if (f != null) {
+                                background = ImageIO.read(f);
                             }
+                        } catch (Exception e) {
+                            background = null;
                         }
                     }
-                    if (background == null) {
-                        InputStream is = this.getClass().getResourceAsStream(filename);
-                        if (is == null) {
-                            throw new FileNotFoundException("Couldn't find " + filename + " in resources.");
-                        }
-                        background = ImageIO.read(is);
+                }
+                if (background == null) {
+                    String filename = "/background/background.png";
+                    InputStream is = this.getClass().getResourceAsStream(filename);
+                    if (is == null) {
+                        throw new FileNotFoundException("Couldn't find " + filename + " in resources.");
                     }
+                    background = ImageIO.read(is);
                     if (background == null) {
                         throw new FileNotFoundException("Couldn't find " + filename + " in resources.");
                     }
-                } catch (Exception e) {
-                    log.error(e.getMessage(), e);
-                    return null;
                 }
+            } catch (Exception e) {
+                log.error(e.getMessage(), e);
+                return null;
+            }
         }
         return new ImagePanel(background, ImagePanelStyle.SCALED);
     }
