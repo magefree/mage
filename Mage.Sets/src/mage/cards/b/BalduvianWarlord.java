@@ -133,14 +133,15 @@ class BalduvianWarlordUnblockEffect extends OneShotEffect {
                             game.getCombat().addBlockingGroup(permanent.getId(), chosenPermanent.getId(), controller.getId(), game); // 702.21h
                             if (notYetBlocked) {
                                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREATURE_BLOCKED, chosenPermanent.getId(), null));
+                                Set<MageObjectReference> morSet = new HashSet<>();
+                                morSet.add(new MageObjectReference(chosenPermanent, game));
                                 for (UUID bandedId : chosenPermanent.getBandedCards()) {
                                     CombatGroup bandedGroup = game.getCombat().findGroup(bandedId);
                                     if (bandedGroup != null && chosenGroup.getBlockers().size() == 1) {
+                                        morSet.add(new MageObjectReference(bandedId, game));
                                         game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREATURE_BLOCKED, bandedId, null));
                                     }
                                 }
-                                Set<MageObjectReference> morSet = new HashSet<>();
-                                morSet.add(new MageObjectReference(chosenPermanent, game));
                                 String key = UUID.randomUUID().toString();
                                 game.getState().setValue("becameBlocked_" + key, morSet);
                                 game.fireEvent(GameEvent.getEvent(
