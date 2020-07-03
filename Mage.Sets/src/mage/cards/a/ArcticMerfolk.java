@@ -13,7 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -30,7 +30,7 @@ public final class ArcticMerfolk extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Kicker—Return a creature you control to its owner's hand. (You may return a creature you control to its owner's hand in addition to any other costs as you cast this spell.)
-        this.addAbility(new KickerAbility(new ReturnToHandChosenControlledPermanentCost(new TargetControlledCreaturePermanent(1,1,new FilterControlledCreaturePermanent("a creature"),true))));
+        this.addAbility(new KickerAbility(new ReturnToHandChosenControlledPermanentCost(new TargetControlledCreaturePermanent(1,1,StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT,true))));
 
         // If Arctic Merfolk was kicked, it enters the battlefield with a +1/+1 counter on it.
         this.addAbility(new EntersBattlefieldAbility(

@@ -15,7 +15,7 @@ import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -33,7 +33,7 @@ public final class StormriderRig extends CardImpl {
         // Whenever a creature enters the battlefield under your control, you may attach Stormrider Rig to it.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
                 Zone.BATTLEFIELD, new AttachEffect(Outcome.Detriment, "attach {source} to it"),
-                new FilterControlledCreaturePermanent("a creature"), true, SetTargetPointer.PERMANENT, null, true));
+                StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT, true, SetTargetPointer.PERMANENT, null, true));
 
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));

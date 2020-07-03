@@ -9,7 +9,7 @@ import mage.abilities.effects.common.LoseLifeTargetControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -31,7 +31,7 @@ public final class DeathBomb extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{B}");
 
         // As an additional cost to cast Death Bomb, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1, new FilterControlledCreaturePermanent("a creature"), true)));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1, StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT, true)));
         // Destroy target nonblack creature. It can't be regenerated. Its controller loses 2 life.
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
         this.getSpellAbility().addEffect(new LoseLifeTargetControllerEffect(2));

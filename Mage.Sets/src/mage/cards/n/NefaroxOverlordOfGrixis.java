@@ -12,7 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -34,7 +34,7 @@ public final class NefaroxOverlordOfGrixis extends CardImpl {
         this.addAbility(new ExaltedAbility());
         // Whenever Nefarox, Overlord of Grixis attacks alone, defending player sacrifices a creature.
         this.addAbility(new AttacksAloneTriggeredAbility(new SacrificeEffect(
-            new FilterControlledCreaturePermanent("a creature"), 1, "defending player")));
+            StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT, 1, "defending player")));
     }
 
     public NefaroxOverlordOfGrixis(final NefaroxOverlordOfGrixis card) {

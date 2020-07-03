@@ -9,7 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -71,7 +71,7 @@ class TyrantsChoiceEffect extends OneShotEffect {
                 }
             }
             if (deathCount > tortureCount) {
-                new SacrificeOpponentsEffect(new FilterControlledCreaturePermanent("a creature")).apply(game, source);
+                new SacrificeOpponentsEffect(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT).apply(game, source);
             } else {
                 new TyrantsChoiceLoseLifeEffect().apply(game, source);
             }
