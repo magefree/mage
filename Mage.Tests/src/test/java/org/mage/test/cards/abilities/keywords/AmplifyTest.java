@@ -90,4 +90,31 @@ public class AmplifyTest extends CardTestPlayerBase {
         assertPowerToughness(playerB, "Kilnmouth Dragon", 8,8); // 5 + 3 from Amplify
     }
 
+    /**
+     * Tests if a creature with Amplify is able to select itself if it's put
+     * onto the battlefield from hand (without casting).
+     */
+    @Test
+    public void testAmplifyPutOntoBattlefieldFromHand() {
+        // Creature — Dragon - Dragon   5/5  {5}{R}{R}
+        // Amplify 3 (As this creature enters the battlefield, put three +1/+1 counters on it for each Dragon card you reveal in your hand.)
+        // {T}: Kilnmouth Dragon deals damage equal to the number of +1/+1 counters on it to any target
+        addCard(Zone.HAND, playerA, "Kilnmouth Dragon", 1);
+        addCard(Zone.HAND, playerA, "Through the Breach", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Through the Breach");
+        setChoice(playerA, "Yes");  // Put a creature into play with Through the Breach?
+        addTarget(playerA, "Kilnmouth Dragon");
+        setChoice(playerA, "Yes");  // Reveal cards to Amplify?
+        addTarget(playerA, "Kilnmouth Dragon");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Kilnmouth Dragon", 1);
+        // This recreates https://github.com/magefree/mage/issues/6776. The
+        // expected value should be 5/5.
+        assertPowerToughness(playerA, "Kilnmouth Dragon", 8,8); // 5 + 3 from Amplify
+    }
 }
