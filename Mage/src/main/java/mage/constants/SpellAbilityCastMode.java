@@ -8,7 +8,8 @@ package mage.constants;
 public enum SpellAbilityCastMode {
     NORMAL("Normal"),
     MADNESS("Madness"),
-    FLASHBACK("Flashback");
+    FLASHBACK("Flashback"),
+    BESTOW("Bestow");
 
     private final String text;
 

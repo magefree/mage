@@ -3,6 +3,8 @@ package org.mage.test.commander.duel;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.game.permanent.Permanent;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestCommanderDuelBase;
 
@@ -11,6 +13,7 @@ import org.mage.test.serverside.base.CardTestCommanderDuelBase;
  * @author LevelX2
  */
 public class CastCommanderTest extends CardTestCommanderDuelBase {
+    
     @Test
     public void testCastCommander() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
@@ -25,4 +28,39 @@ public class CastCommanderTest extends CardTestCommanderDuelBase {
 
         assertPermanentCount(playerA, "Ob Nixilis of the Black Oath", 1);
     }     
+    
+    @Test
+    public void testCastKestiaCommander() {
+        // Bestow {3}{G}{W}{U}
+        // Enchanted creature gets +4/+4.
+        // Whenever an enchanted creature or enchantment creature you control attacks, draw a card.        
+        addCard(Zone.COMMAND, playerA, "Kestia, the Cultivator", 1); // Creature  {1}{G}{W}{U} 4/4
+        
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
+        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Kestia, the Cultivator using bestow", "Silvercoat Lion");
+
+        setStrictChooseMode(true);
+        
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertAllCommandsUsed();
+        assertLife(playerA, 40);
+        assertLife(playerB, 40);
+
+        
+        assertPermanentCount(playerA, "Kestia, the Cultivator", 1);
+        
+        Permanent kestia = getPermanent("Kestia, the Cultivator", playerA);
+        Assert.assertNotEquals("Kestia may not be an creature", true, kestia.isCreature());        
+        Assert.assertEquals("Kestia has to be an enchantment", true, kestia.isEnchantment());        
+        
+        assertPowerToughness(playerA, "Silvercoat Lion", 6, 6);
+    }     
+    
 }

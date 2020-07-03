@@ -2059,8 +2059,6 @@ public abstract class GameImpl implements Game, Serializable {
                                 if (card != null && card.isCreature()) {
                                     UUID wasAttachedTo = perm.getAttachedTo();
                                     perm.attachTo(null, this);
-                                    //moved to mage.game.permanent.PermanentImpl::detachAllAttachments
-                                    //BestowAbility.becomeCreature(perm, this);
                                     fireEvent(new GameEvent(GameEvent.EventType.UNATTACHED, wasAttachedTo, perm.getId(), perm.getControllerId()));
                                 } else if (movePermanentToGraveyardWithInfo(perm)) {
                                     somethingHappened = true;

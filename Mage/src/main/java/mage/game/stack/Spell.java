@@ -244,7 +244,7 @@ public class Spell extends StackObjImpl implements Card {
         } else if (this.isEnchantment() && this.hasSubtype(SubType.AURA, game)) {
             if (ability.getTargets().stillLegal(ability, game)) {
                 updateOptionalCosts(0);
-                boolean bestow = ability instanceof BestowAbility;
+                boolean bestow = SpellAbilityCastMode.BESTOW.equals(ability.getSpellAbilityCastMode());
                 if (bestow) {
                     // Must be removed first time, after that will be removed by continous effect
                     // Otherwise effects like evolve trigger from creature comes into play event
@@ -274,7 +274,7 @@ public class Spell extends StackObjImpl implements Card {
                 return false;
             }
             // Aura has no legal target and its a bestow enchantment -> Add it to battlefield as creature
-            if (this.getSpellAbility() instanceof BestowAbility) {
+            if (SpellAbilityCastMode.BESTOW.equals(this.getSpellAbility().getSpellAbilityCastMode())) {
                 updateOptionalCosts(0);
                 if (controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null)) {
                     Permanent permanent = game.getPermanent(card.getId());
@@ -500,7 +500,7 @@ public class Spell extends StackObjImpl implements Card {
             cardTypes.add(CardType.CREATURE);
             return cardTypes;
         }
-        if (this.getSpellAbility() instanceof BestowAbility) {
+        if (SpellAbilityCastMode.BESTOW.equals(this.getSpellAbility().getSpellAbilityCastMode())) {
             ArrayList<CardType> cardTypes = new ArrayList<>();
             cardTypes.addAll(card.getCardType());
             cardTypes.remove(CardType.CREATURE);
@@ -511,7 +511,7 @@ public class Spell extends StackObjImpl implements Card {
 
     @Override
     public SubTypeList getSubtype(Game game) {
-        if (this.getSpellAbility() instanceof BestowAbility) {
+        if (SpellAbilityCastMode.BESTOW.equals(this.getSpellAbility().getSpellAbilityCastMode())) {
             SubTypeList subtypes = card.getSubtype(game);
             if (!subtypes.contains(SubType.AURA)) { // do it only once
                 subtypes.add(SubType.AURA);
@@ -523,7 +523,7 @@ public class Spell extends StackObjImpl implements Card {
 
     @Override
     public boolean hasSubtype(SubType subtype, Game game) {
-        if (this.getSpellAbility() instanceof BestowAbility) { // workaround for Bestow (don't like it)
+        if (SpellAbilityCastMode.BESTOW.equals(this.getSpellAbility().getSpellAbilityCastMode())) { // workaround for Bestow (don't like it)
             SubTypeList subtypes = card.getSubtype(game);
             if (!subtypes.contains(SubType.AURA)) { // do it only once
                 subtypes.add(SubType.AURA);
