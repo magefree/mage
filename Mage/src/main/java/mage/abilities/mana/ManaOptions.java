@@ -47,7 +47,7 @@ public class ManaOptions extends ArrayList<Mana> {
                     if (!hasTapCost(abilities.get(0)) || checkTappedForManaReplacement(abilities.get(0), game, netManas.get(0))) {
                         addMana(netManas.get(0));
                     }
-                } else {
+                } else if (netManas.size() > 1) {
                     List<Mana> copy = copy();
                     this.clear();
 //                    boolean hasTapCost = hasTapCost(abilities.get(0)); // needed if checkTappedForManaReplacement is reactivated
