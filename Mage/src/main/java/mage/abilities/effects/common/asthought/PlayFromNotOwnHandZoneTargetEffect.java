@@ -93,6 +93,11 @@ public class PlayFromNotOwnHandZoneTargetEffect extends AsThoughEffectImpl {
                     return false;
                 }
                 break;
+            case OWNER:
+                if (playerId != game.getCard(objectId).getOwnerId()) {
+                    return false;
+                }
+                break;
             case ANY:
                 break;
         }
