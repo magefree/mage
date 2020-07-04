@@ -2093,8 +2093,8 @@ public class TestPlayer implements Player {
                     || target.getOriginalTarget() instanceof TargetPermanentOrPlayer
                     || target.getOriginalTarget() instanceof TargetDefender) {
                 for (String targetDefinition : targets) {
-                    checkTargetDefinitionMarksSupport(target, targetDefinition, "=");
                     if (targetDefinition.startsWith("targetPlayer=")) {
+                        checkTargetDefinitionMarksSupport(target, targetDefinition, "=");
                         String playerName = targetDefinition.substring(targetDefinition.indexOf("targetPlayer=") + 13);
                         for (Player player : game.getPlayers().values()) {
                             if (player.getName().equals(playerName)
@@ -2119,6 +2119,7 @@ public class TestPlayer implements Player {
                     String[] targetList = targetDefinition.split("\\^");
                     boolean targetFound = false;
                     for (String targetName : targetList) {
+                        targetFound = false; // must have all valid targets from list
                         boolean originOnly = false;
                         boolean copyOnly = false;
                         if (targetName.endsWith("]")) {

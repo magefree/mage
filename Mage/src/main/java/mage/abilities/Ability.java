@@ -190,12 +190,18 @@ public interface Ability extends Controllable, Serializable {
 
     /**
      * Retrieves all targets that must be satisfied before this ability is put
-     * onto the stack.
+     * onto the stack. Warning, return targets from first/current mode only.
      *
      * @return All {@link Targets} that must be satisfied before this ability is
      * put onto the stack.
      */
     Targets getTargets();
+
+    /**
+     * Retrieves all selected targets, read only. Multi-modes return different targets.
+     * Works on stack only (after real cast/activate)
+     */
+    Targets getAllSelectedTargets();
 
     /**
      * Retrieves the {@link Target} located at the 0th index in the
@@ -525,6 +531,7 @@ public interface Ability extends Controllable, Serializable {
 
     /**
      * For mtg's instances search, see rules example in 112.10b
+     *
      * @param ability
      * @return
      */

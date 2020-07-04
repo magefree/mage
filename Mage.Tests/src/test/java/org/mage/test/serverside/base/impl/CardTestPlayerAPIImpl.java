@@ -1770,6 +1770,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     public void addTarget(TestPlayer player, String target, int timesToChoose) {
         for (int i = 0; i < timesToChoose; i++) {
+            assertAliaseSupportInActivateCommand(target, true);
             player.addTarget(target);
         }
     }

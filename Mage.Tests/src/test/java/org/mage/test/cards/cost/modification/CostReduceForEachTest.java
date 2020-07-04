@@ -138,4 +138,48 @@ public class CostReduceForEachTest extends CardTestPlayerBaseWithAIHelps {
         assertPermanentCount(playerA, "Torgaar, Famine Incarnate", 1);
         assertLife(playerB, 20 / 2);
     }
+
+    @Test
+    public void test_AshnodsAltar_SacrificeCost() {
+        // Sacrifice a creature: Add {C}{C}.
+        addCard(Zone.BATTLEFIELD, playerA, "Ashnod's Altar", 1);
+        //
+        addCard(Zone.HAND, playerA, "Alloy Myr", 1); // {3}
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3 - 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Balduvian Bears", 1); // give 2 mana on sacrifice
+
+        checkPlayableAbility("must play", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Alloy Myr", true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Alloy Myr");
+        setChoice(playerA, "Balduvian Bears");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Alloy Myr", 1);
+    }
+
+    @Test
+    public void test_BattlefieldThaumaturge_TargetCostReduce() {
+        // Each instant and sorcery spell you cast costs {1} less to cast for each creature it targets.
+        addCard(Zone.BATTLEFIELD, playerA, "Battlefield Thaumaturge", 1);
+        //
+        // {3}{R}{R} sorcery
+        // Shower of Coals deals 2 damage to each of up to three target creatures and/or players.
+        addCard(Zone.HAND, playerA, "Shower of Coals", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5 - 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Balduvian Bears@bear", 3); // add 3 cost reduce on target
+
+        checkPlayableAbility("must play", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Shower of Coals", true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shower of Coals");
+        addTarget(playerA, "@bear.1^@bear.2^@bear.3");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertGraveyardCount(playerA, "Shower of Coals", 1);
+    }
 }

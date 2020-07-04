@@ -23,7 +23,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
     public static final UUID CHOOSE_OPTION_CANCEL_ID = UUID.fromString("0125bd0c-5610-4eba-bc80-fc6d0a7b9de6");
 
     private Mode currentMode; // the current mode of the selected modes
-    private final List<UUID> selectedModes = new ArrayList<>(); // all selected modes (this + duplicate), for all code user getSelectedModes to keep modes order
+    private final List<UUID> selectedModes = new ArrayList<>(); // all selected modes (this + duplicate), use getSelectedModes all the time to keep modes order
     private final Map<UUID, Mode> selectedDuplicateModes = new LinkedHashMap<>(); // for 2x selects: copy mode and put it to duplicate list
     private final Map<UUID, UUID> selectedDuplicateToOriginalModeRefs = new LinkedHashMap<>(); // for 2x selects: stores ref from duplicate to original mode
 

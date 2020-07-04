@@ -847,6 +847,18 @@ public abstract class AbilityImpl implements Ability {
     }
 
     @Override
+    public Targets getAllSelectedTargets() {
+        Targets res = new Targets();
+        for (UUID modeId : this.getModes().getSelectedModes()) {
+            Mode mode = this.getModes().get(modeId);
+            if (mode != null) {
+                res.addAll(mode.getTargets());
+            }
+        }
+        return res;
+    }
+
+    @Override
     public UUID getFirstTarget() {
         return getTargets().getFirstTarget();
     }

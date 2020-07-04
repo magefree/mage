@@ -1,9 +1,5 @@
 package mage.game.stack;
 
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.ObjectColor;
@@ -33,6 +29,11 @@ import mage.target.targetadjustment.TargetAdjuster;
 import mage.util.GameLog;
 import mage.util.SubTypeList;
 import mage.watchers.Watcher;
+
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -305,6 +306,11 @@ public class StackAbility extends StackObjImpl implements Ability {
     @Override
     public Targets getTargets() {
         return ability.getTargets();
+    }
+
+    @Override
+    public Targets getAllSelectedTargets() {
+        return ability.getAllSelectedTargets();
     }
 
     @Override
