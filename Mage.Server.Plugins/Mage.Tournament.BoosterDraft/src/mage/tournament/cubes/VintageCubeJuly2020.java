@@ -2,10 +2,10 @@ package mage.tournament.cubes;
 
 import mage.game.draft.DraftCube;
 
-public class VintageCubeApril2020 extends DraftCube {
+public class VintageCubeJuly2020 extends DraftCube {
 
-    public VintageCubeApril2020() {
-        super("MTGO Vintage Cube April 2020");
+    public VintageCubeJuly2020() {
+        super("MTGO Vintage Cube July 2020");
 
         cubeCards.add(new CardIdentity("Kytheon, Hero of Akros", ""));
         cubeCards.add(new CardIdentity("Mother of Runes", ""));
