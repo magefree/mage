@@ -215,7 +215,7 @@ public class LoadCallbackClient implements CallbackClient {
                 }
 
                 if (controlCount > 5) {
-                    log.warn(getLogStartInfo() + "Game seems freezed. Sending boolean message to server.");
+                    log.warn(getLogStartInfo() + "Game seems frozen. Sending boolean message to server.");
                     session.sendPlayerBoolean(gameId, false);
                     controlCount = 0;
                 }

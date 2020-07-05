@@ -137,8 +137,8 @@ public class HumanPlayer extends PlayerImpl {
         while (!responseOpenedForAnswer && canRespond()) {
             numTimesWaiting++;
             if (numTimesWaiting >= 300) {
-                // game freezed -- need to report about error and continue to execute
-                String s = "Game freezed in waitResponseOpen for user " + getName() + " (connection problem)";
+                // game frozen -- need to report about error and continue to execute
+                String s = "Game frozen in waitResponseOpen for user " + getName() + " (connection problem)";
                 logger.warn(s);
                 break;
             }
