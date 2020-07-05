@@ -5,24 +5,38 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.choices.Choice;
 import mage.choices.ChoiceCardType;
+import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * @author emerald000
  */
 public class ChooseCardTypeEffect extends OneShotEffect {
 
+    List<CardType> cardTypes = Arrays.stream(CardType.values()).collect(Collectors.toList());
+
     public ChooseCardTypeEffect(Outcome outcome) {
+        this(outcome, Arrays.stream(CardType.values()).collect(Collectors.toList()));
+    }
+
+    public ChooseCardTypeEffect(Outcome outcome, List<CardType> cardTypes) {
         super(outcome);
-        staticText = "choose a card type";
+        this.staticText = "choose a card type";
+        this.cardTypes = new ArrayList<>(cardTypes);
     }
 
     private ChooseCardTypeEffect(final ChooseCardTypeEffect effect) {
         super(effect);
+        this.cardTypes = new ArrayList<>(effect.cardTypes);
     }
 
     @Override

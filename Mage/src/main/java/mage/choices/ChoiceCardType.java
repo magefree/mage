@@ -3,6 +3,7 @@ package mage.choices;
 import mage.constants.CardType;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -11,12 +12,12 @@ import java.util.stream.Collectors;
 public class ChoiceCardType extends ChoiceImpl {
 
     public ChoiceCardType() {
-        this(true);
+        this(true, Arrays.stream(CardType.values()).collect(Collectors.toList()));
     }
 
-    public ChoiceCardType(boolean required) {
+    public ChoiceCardType(boolean required, List<CardType> cardTypes) {
         super(required);
-        this.choices.addAll(Arrays.stream(CardType.values()).map(CardType::toString).collect(Collectors.toList()));
+        this.choices.addAll(cardTypes.stream().map(CardType::toString).collect(Collectors.toList()));
         this.message = "Choose a card type";
     }
 

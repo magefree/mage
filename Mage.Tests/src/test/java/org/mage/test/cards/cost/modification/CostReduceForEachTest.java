@@ -213,4 +213,35 @@ public class CostReduceForEachTest extends CardTestPlayerBaseWithAIHelps {
 
         assertPermanentCount(playerA, "Balduvian Bears", 1);
     }
+
+    @Test
+    public void test_CloudKey_ChooseCardTypeForCostReduce() {
+        // {3}
+        // As Cloud Key enters the battlefield, choose artifact, creature, enchantment, instant, or sorcery.
+        // Spells you cast of the chosen type cost {1} less to cast.
+        addCard(Zone.HAND, playerA, "Cloud Key", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+        //
+        addCard(Zone.HAND, playerA, "Balduvian Bears", 1); // {1}{G}
+        addCard(Zone.HAND, playerA, "Forest", 1);
+
+        // prepare cloud key to reduce
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cloud Key");
+        setChoice(playerA, "Creature");
+
+        // prepare lands
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPlayableAbility("can't with no mana", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Balduvian Bears", false);
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Forest");
+        checkPlayableAbility("can play with mana and reduce", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Balduvian Bears", true);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Balduvian Bears");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Balduvian Bears", 1);
+    }
 }
