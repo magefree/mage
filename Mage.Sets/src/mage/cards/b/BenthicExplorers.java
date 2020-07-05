@@ -136,6 +136,9 @@ class BenthicExplorersManaEffect extends ManaEffect {
     @Override
     public List<Mana> getNetMana(Game game, Ability source) {
         List<Mana> netManas = new ArrayList<>();
+        if (game == null) {
+            return netManas;
+        }
 
         Mana types = new Mana();
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
