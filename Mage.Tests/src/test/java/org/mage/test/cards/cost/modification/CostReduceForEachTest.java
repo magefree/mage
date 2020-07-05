@@ -182,4 +182,35 @@ public class CostReduceForEachTest extends CardTestPlayerBaseWithAIHelps {
 
         assertGraveyardCount(playerA, "Shower of Coals", 1);
     }
+
+    @Test
+    public void test_BenthicExplorers_ManaAbilityFromOpponentCard() {
+        // {T}, Untap a tapped land an opponent controls: Add one mana of any type that land could produce.
+        addCard(Zone.BATTLEFIELD, playerA, "Benthic Explorers", 1);
+        //
+        addCard(Zone.HAND, playerA, "Balduvian Bears", 1); // {1}{G}
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Forest", 1); // give 1 mana
+        //
+        // {1}, {T}: Tap target land.
+        addCard(Zone.BATTLEFIELD, playerA, "Rishadan Port", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+
+        // prepare tapped land
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}, {T}: Tap target land", "Forest");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentTapped("must be tapped", 1, PhaseStep.PRECOMBAT_MAIN, playerA, playerB, "Forest", true, 1);
+
+        // cast with opponent's mana
+        checkPlayableAbility("must play", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Balduvian Bears", true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Balduvian Bears");
+        setChoice(playerA, "Forest"); // mana from tapped
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Balduvian Bears", 1);
+    }
 }

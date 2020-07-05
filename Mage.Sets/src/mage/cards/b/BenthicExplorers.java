@@ -21,6 +21,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetLandPermanent;
 import mage.util.CardUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -45,13 +46,12 @@ public final class BenthicExplorers extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 
-        // {tap}, Untap a tapped land an opponent controls: Add one mana of any type that land could produce.
+        // {T}, Untap a tapped land an opponent controls: Add one mana of any type that land could produce.
         Ability ability = new BenthicExplorersManaAbility();
-        TargetLandPermanent targetOpponentLand = new TargetLandPermanent(filter);
-        targetOpponentLand.setNotTarget(true);  // not a target, it is chosen
-        ability.addCost(new BenthicExplorersCost(targetOpponentLand));
+        ability.addCost(new BenthicExplorersCost(
+                new TargetLandPermanent(1, 1, filter, true)
+        ));
         this.addAbility(ability);
-
     }
 
     private BenthicExplorers(final BenthicExplorers card) {
@@ -136,7 +136,20 @@ class BenthicExplorersManaEffect extends ManaEffect {
     @Override
     public List<Mana> getNetMana(Game game, Ability source) {
         List<Mana> netManas = new ArrayList<>();
-        Mana types = getManaTypes(game, source);
+
+        Mana types = new Mana();
+        for (UUID opponentId : game.getOpponents(source.getControllerId())) {
+            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(opponentId)) {
+                if (permanent.isLand() && permanent.isTapped()) {
+                    for (ActivatedManaAbilityImpl ability : permanent.getAbilities(game).getActivatedManaAbilities(Zone.BATTLEFIELD)) {
+                        for (Mana mana : ability.getNetMana(game)) {
+                            types.add(mana);
+                        }
+                    }
+                }
+            }
+        }
+
         if (types.getBlack() > 0) {
             netManas.add(new Mana(ColoredManaSymbol.B));
         }
