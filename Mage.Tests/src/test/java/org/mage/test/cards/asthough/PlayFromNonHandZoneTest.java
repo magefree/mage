@@ -129,10 +129,15 @@ public class PlayFromNonHandZoneTest extends CardTestPlayerBase {
 
         attack(2, playerB, "Narset, Enlightened Master");
 
+        checkPlayableAbility("must play", 2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Cast Cathartic Reunion", true);
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Cathartic Reunion");
         setChoice(playerB, "Swamp^Forest");
+
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
+        assertAllCommandsUsed();
+
 
         assertHandCount(playerB, 3);
         assertGraveyardCount(playerB, "Forest", 1);

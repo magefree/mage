@@ -3046,6 +3046,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     protected boolean canPlayCardByAlternateCost(Card sourceObject, ManaOptions availableMana, Ability ability, Game game) {
         if (sourceObject != null && !(sourceObject instanceof Permanent)) {
+            Ability copyAbility; // for alternative cost and reduce tries
             for (Ability alternateSourceCostsAbility : sourceObject.getAbilities()) {
                 // if cast for noMana no Alternative costs are allowed
                 if (alternateSourceCostsAbility instanceof AlternativeSourceCosts) {
@@ -3064,7 +3065,15 @@ public abstract class PlayerImpl implements Player, Serializable {
                                 if (availableMana == null) {
                                     return true;
                                 }
-                                for (Mana mana : manaCosts.getOptions()) {
+
+                                // alternative cost reduce
+                                copyAbility = ability.copy();
+                                copyAbility.getManaCostsToPay().clear();
+                                copyAbility.getManaCostsToPay().addAll(manaCosts.copy());
+                                sourceObject.adjustCosts(copyAbility, game);
+                                game.getContinuousEffects().costModification(copyAbility, game);
+
+                                for (Mana mana : copyAbility.getManaCostsToPay().getOptions()) {
                                     for (Mana avail : availableMana) {
                                         if (mana.enough(avail)) {
                                             return true;
@@ -3092,7 +3101,18 @@ public abstract class PlayerImpl implements Player, Serializable {
                             if (manaCosts.isEmpty()) {
                                 return true;
                             } else {
-                                for (Mana mana : manaCosts.getOptions()) {
+                                if (availableMana == null) {
+                                    return true;
+                                }
+
+                                // alternative cost reduce
+                                copyAbility = ability.copy();
+                                copyAbility.getManaCostsToPay().clear();
+                                copyAbility.getManaCostsToPay().addAll(manaCosts.copy());
+                                sourceObject.adjustCosts(copyAbility, game);
+                                game.getContinuousEffects().costModification(copyAbility, game);
+
+                                for (Mana mana : copyAbility.getManaCostsToPay().getOptions()) {
                                     for (Mana avail : availableMana) {
                                         if (mana.enough(avail)) {
                                             return true;

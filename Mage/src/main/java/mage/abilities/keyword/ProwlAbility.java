@@ -1,30 +1,26 @@
-
 package mage.abilities.keyword;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
-import mage.abilities.costs.AlternativeCost2;
-import mage.abilities.costs.AlternativeCost2Impl;
-import mage.abilities.costs.AlternativeSourceCosts;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.Costs;
-import mage.abilities.costs.CostsImpl;
+import mage.abilities.condition.common.ProwlCondition;
+import mage.abilities.costs.*;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.hint.common.ProwlHint;
 import mage.cards.Card;
 import mage.constants.Outcome;
-import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.watchers.common.ProwlWatcher;
 
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * 702.74. Prowl #
- *
+ * <p>
  * 702.74a Prowl is a static ability that functions on the stack. "Prowl [cost]"
  * means "You may pay [cost] rather than pay this spell's mana cost if a player
  * was dealt combat damage this turn by a source that, at the time it dealt that
@@ -41,13 +37,13 @@ public class ProwlAbility extends StaticAbility implements AlternativeSourceCost
     private String reminderText;
 
     public ProwlAbility(Card card, String manaString) {
-        super(Zone.STACK, null);
-        setRuleAtTheTop(true);
-        name = PROWL_KEYWORD;
-        setReminderText(card);
+        super(Zone.ALL, null);
+        this.setRuleAtTheTop(true);
+        this.name = PROWL_KEYWORD;
+        this.setReminderText(card);
         this.addProwlCost(manaString);
-        addWatcher(new ProwlWatcher());
-
+        this.addWatcher(new ProwlWatcher());
+        this.addHint(ProwlHint.instance);
     }
 
     public ProwlAbility(final ProwlAbility ability) {
@@ -85,26 +81,17 @@ public class ProwlAbility extends StaticAbility implements AlternativeSourceCost
 
     @Override
     public boolean isAvailable(Ability source, Game game) {
-        return true;
+        return ProwlCondition.instance.apply(game, source);
     }
 
     @Override
     public boolean askToActivateAlternativeCosts(Ability ability, Game game) {
         if (ability instanceof SpellAbility) {
             Player player = game.getPlayer(controllerId);
-            ProwlWatcher prowlWatcher = game.getState().getWatcher(ProwlWatcher.class);
-            Card card = game.getCard(ability.getSourceId());
-            if (player == null || prowlWatcher == null || card == null) {
-                throw new IllegalArgumentException("Params can't be null");
+            if (player == null) {
+                return false;
             }
-            boolean canProwl = false;
-            for (SubType subtype : card.getSubtype(game)) {
-                if (prowlWatcher.hasSubtypeMadeCombatDamage(ability.getControllerId(), subtype)) {
-                    canProwl = true;
-                    break;
-                }
-            }
-            if (canProwl) {
+            if (ProwlCondition.instance.apply(game, ability)) {
                 this.resetProwl();
                 for (AlternativeCost2 prowlCost : prowlCosts) {
                     if (prowlCost.canPay(ability, sourceId, controllerId, game)
@@ -112,7 +99,7 @@ public class ProwlAbility extends StaticAbility implements AlternativeSourceCost
                         prowlCost.activate();
                         ability.getManaCostsToPay().clear();
                         ability.getCosts().clear();
-                        for (Iterator it = ((Costs) prowlCost).iterator(); it.hasNext();) {
+                        for (Iterator it = ((Costs) prowlCost).iterator(); it.hasNext(); ) {
                             Cost cost = (Cost) it.next();
                             if (cost instanceof ManaCostsImpl) {
                                 ability.getManaCostsToPay().add((ManaCostsImpl) cost.copy());
@@ -162,7 +149,7 @@ public class ProwlAbility extends StaticAbility implements AlternativeSourceCost
     }
 
     private void setReminderText(Card card) {
-        reminderText = 
+        reminderText =
                 "(You may cast this for its prowl cost if you dealt combat damage to a player this turn with a creature that shared a creature type with {this}";
     }
 

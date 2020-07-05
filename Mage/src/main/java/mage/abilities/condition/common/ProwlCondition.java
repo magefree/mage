@@ -1,16 +1,16 @@
-
 package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
-import mage.abilities.keyword.ProwlAbility;
 import mage.cards.Card;
+import mage.constants.SubType;
 import mage.game.Game;
+import mage.watchers.common.ProwlWatcher;
 
 /**
- * Checks if a the spell was cast with the alternate prowl costs
+ * Is it able to activate prowl cost (damage was made)
  *
- * @author LevelX2
+ * @author JayDi85
  */
 public enum ProwlCondition implements Condition {
 
@@ -18,22 +18,15 @@ public enum ProwlCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        ProwlWatcher watcher = game.getState().getWatcher(ProwlWatcher.class);
         Card card = game.getCard(source.getSourceId());
-        if (card != null) {
-            for (Ability ability : card.getAbilities()) {
-                if (ability instanceof ProwlAbility) {
-                    if (((ProwlAbility) ability).isActivated(source, game)) {
-                        return true;
-                    }
+        if (watcher != null && card != null) {
+            for (SubType subtype : card.getSubtype(game)) {
+                if (watcher.hasSubtypeMadeCombatDamage(source.getControllerId(), subtype)) {
+                    return true;
                 }
             }
         }
         return false;
     }
-
-    @Override
-    public String toString() {
-        return "{source}'s prowl cost was paid";
-    }
-
 }
