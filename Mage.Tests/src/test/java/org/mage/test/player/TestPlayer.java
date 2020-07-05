@@ -772,6 +772,13 @@ public class TestPlayer implements Player {
                             wasProccessed = true;
                         }
 
+                        // check permanent tapped count: target player, card name, tapped status, count
+                        if (params[0].equals(CHECK_COMMAND_PERMANENT_TAPPED) && params.length == 5) {
+                            assertPermanentTapped(action, game, game.getPlayer(UUID.fromString(params[1])), params[2], Boolean.parseBoolean(params[3]), Integer.parseInt(params[4]));
+                            actions.remove(action);
+                            wasProccessed = true;
+                        }
+
                         // check permanent counters: card name, counter type, count
                         if (params[0].equals(CHECK_COMMAND_PERMANENT_COUNTERS) && params.length == 4) {
                             assertPermanentCounters(action, game, computerPlayer, params[1], CounterType.findByName(params[2]), Integer.parseInt(params[3]));
@@ -1241,7 +1248,31 @@ public class TestPlayer implements Player {
             }
         }
 
-        Assert.assertEquals(action.getActionName() + " - permanent " + permanentName + " must exists in " + count + " instances", count, foundedCount);
+        if (foundedCount != count) {
+            printStart("Permanents of " + player.getName());
+            printPermanents(game, game.getBattlefield().getAllActivePermanents(player.getId()));
+            printEnd();
+            Assert.fail(action.getActionName() + " - permanent " + permanentName + " must exists in " + count + " instances");
+        }
+    }
+
+    private void assertPermanentTapped(PlayerAction action, Game game, Player player, String permanentName, boolean tapped, int count) {
+        int foundedCount = 0;
+        for (Permanent perm : game.getBattlefield().getAllPermanents()) {
+            if (hasObjectTargetNameOrAlias(perm, permanentName)
+                    && perm.getControllerId().equals(player.getId())
+                    && perm.isTapped() == tapped) {
+                foundedCount++;
+            }
+        }
+
+        if (foundedCount != count) {
+            printStart("Permanents of " + player.getName());
+            printPermanents(game, game.getBattlefield().getAllActivePermanents(player.getId()));
+            printEnd();
+            Assert.fail(action.getActionName() + " - must have " + count + (tapped ? " tapped " : " untapped ")
+                    + "permanents with name " + permanentName + ", but founded " + foundedCount);
+        }
     }
 
     private void assertPermanentCounters(PlayerAction action, Game game, Player player, String permanentName, CounterType counterType, int count) {
@@ -2039,7 +2070,7 @@ public class TestPlayer implements Player {
 
         // ignore player select
         if (!target.getMessage().equals("Select a starting player")) {
-            this.chooseStrictModeFailed("choice", game, getInfo(game.getObject(sourceId)) + "; " + getInfo(target));
+            this.chooseStrictModeFailed("choice", game, getInfo(game.getObject(sourceId)) + ";\n" + getInfo(target));
         }
         return computerPlayer.choose(outcome, target, sourceId, game, options);
     }

@@ -92,6 +92,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public static final String CHECK_COMMAND_ABILITY = "ABILITY";
     public static final String CHECK_COMMAND_PLAYABLE_ABILITY = "PLAYABLE_ABILITY";
     public static final String CHECK_COMMAND_PERMANENT_COUNT = "PERMANENT_COUNT";
+    public static final String CHECK_COMMAND_PERMANENT_TAPPED = "PERMANENT_TAPPED";
     public static final String CHECK_COMMAND_PERMANENT_COUNTERS = "PERMANENT_COUNTERS";
     public static final String CHECK_COMMAND_EXILE_COUNT = "EXILE_COUNT";
     public static final String CHECK_COMMAND_GRAVEYARD_COUNT = "GRAVEYARD_COUNT";
@@ -104,7 +105,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public static final String CHECK_COMMAND_MANA_POOL = "MANA_POOL";
     public static final String CHECK_COMMAND_ALIAS_ZONE = "ALIAS_ZONE";
     public static final String CHECK_COMMAND_PLAYER_IN_GAME = "PLAYER_IN_GAME";
-    public static final String CHECK_COMMAND_STACK_SIZE = "STACK_COUNT";
+    public static final String CHECK_COMMAND_STACK_SIZE = "STACK_SIZE";
     public static final String CHECK_COMMAND_STACK_OBJECT = "STACK_OBJECT";
 
     // TODO: add target player param to commands
@@ -372,6 +373,14 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public void checkPermanentCount(String checkName, int turnNum, PhaseStep step, TestPlayer player, TestPlayer targetPlayer, String permanentName, Integer count) {
         //Assert.assertNotEquals("", permanentName);
         check(checkName, turnNum, step, player, CHECK_COMMAND_PERMANENT_COUNT, targetPlayer.getId().toString(), permanentName, count.toString());
+    }
+
+    public void checkPermanentTapped(String checkName, int turnNum, PhaseStep step, TestPlayer player, String permanentName, Boolean tapped, Integer count) {
+        checkPermanentTapped(checkName, turnNum, step, player, player, permanentName, tapped, count);
+    }
+
+    public void checkPermanentTapped(String checkName, int turnNum, PhaseStep step, TestPlayer player, TestPlayer targetPlayer, String permanentName, Boolean tapped, Integer count) {
+        check(checkName, turnNum, step, player, CHECK_COMMAND_PERMANENT_TAPPED, targetPlayer.getId().toString(), permanentName, tapped.toString(), count.toString());
     }
 
     public void checkPermanentCounters(String checkName, int turnNum, PhaseStep step, TestPlayer player, String permanentName, CounterType counterType, Integer count) {
