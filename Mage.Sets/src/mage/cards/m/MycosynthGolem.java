@@ -1,7 +1,5 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.GainAbilityControlledSpellsEffect;
@@ -11,15 +9,16 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.FilterSpell;
+import mage.filter.FilterCard;
+
+import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
  */
 public final class MycosynthGolem extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("Artifact creature spells");
+    private static final FilterCard filter = new FilterCard("Artifact creature spells");
 
     static {
         filter.add(CardType.ARTIFACT.getPredicate());

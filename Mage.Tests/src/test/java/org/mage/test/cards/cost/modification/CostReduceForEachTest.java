@@ -10,6 +10,8 @@ import org.mage.test.serverside.base.CardTestPlayerBaseWithAIHelps;
  */
 public class CostReduceForEachTest extends CardTestPlayerBaseWithAIHelps {
 
+    // tests for https://github.com/magefree/mage/issues/6698
+
     @Test
     public void test_AncientStoneIdol_Attacking() {
         // {10}
@@ -243,5 +245,27 @@ public class CostReduceForEachTest extends CardTestPlayerBaseWithAIHelps {
         assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Balduvian Bears", 1);
+    }
+
+    @Test
+    public void test_InspiringStatuary_PayByArtifacts() {
+        // {3}
+        // Nonartifact spells you cast have improvise. (Your artifacts can help cast those spells. Each artifact you
+        // tap after you’re done activating mana abilities pays for {1}.)
+        addCard(Zone.BATTLEFIELD, playerA, "Inspiring Statuary", 5);
+        //
+        addCard(Zone.HAND, playerA, "Keeper of Tresserhorn", 1); // {5}{B}
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 6 - 5); // 5 mana from artifact
+
+        checkPlayableAbility("can play", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Keeper of Tresserhorn", true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Keeper of Tresserhorn");
+        addTarget(playerA, "Inspiring Statuary", 5); // as pay
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Keeper of Tresserhorn", 1);
     }
 }
