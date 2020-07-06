@@ -11,20 +11,17 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.effects.common.continuous.LookAtTopCardOfLibraryAnyTimeEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
+import mage.cards.*;
 import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
-
-import java.util.UUID;
-import mage.cards.SplitCard;
-import mage.cards.SplitCardHalf;
 import mage.util.CardUtil;
+
+import java.util.Objects;
+import java.util.UUID;
 
 
 /**
@@ -97,6 +94,10 @@ class BolassCitadelPlayTheTopCardEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
+        if (!Objects.equals(source.getControllerId(), playerId)) {
+            return false;
+        }
+
         Player player = game.getPlayer(playerId);
         if (player != null) {
             Card topCard = player.getLibrary().getFromTop(game);
@@ -121,7 +122,7 @@ class BolassCitadelPlayTheTopCardEffect extends AsThoughEffectImpl {
                     player.setCastSourceIdWithAlternateMana(rightCard.getId(), null, rightCosts);
                 } else {
                     if (affectedAbility == null) {
-                        affectedAbility = topCard.getSpellAbility();                        
+                        affectedAbility = topCard.getSpellAbility();
                     } else {
                         objectIdToCast = affectedAbility.getSourceId();
                     }

@@ -8,7 +8,6 @@ package mage.abilities.effects.common;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.Duration;
@@ -114,7 +113,6 @@ public class AmplifyEffect extends ReplacementEffectImpl {
             // You can’t reveal this card or any other cards that are entering the battlefield at the same time as this card.
             filter.add(Predicates.not(new CardIdPredicate(source.getSourceId())));
             for (Permanent enteringPermanent : game.getPermanentsEntering().values()) {
-                Card card = game.getCard(enteringPermanent.getId());
                 filter.add(Predicates.not(new CardIdPredicate(enteringPermanent.getId())));
             }
 
