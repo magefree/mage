@@ -114,39 +114,38 @@ public class PlayFromNonHandZoneTest extends CardTestPlayerBase {
 
     @Test
     public void testNarsetEnlightenedMasterAdditionalCost() {
+        skipInitShuffling();
+        removeAllCardsFromLibrary(playerA);
+
         // First strike
         // Hexproof
         // Whenever Narset, Enlightented Master attacks, exile the top four cards of your library. Until end of turn, you may cast noncreature cards exiled with Narset this turn without paying their mana costs.
-        skipInitShuffling();
+        addCard(Zone.BATTLEFIELD, playerA, "Narset, Enlightened Master", 1);
+        //
+        // {1}{R}
+        // As an additional cost to cast this spell, discard two cards.
+        addCard(Zone.LIBRARY, playerA, "Swamp", 3); // 3 cards for draw effect
+        addCard(Zone.LIBRARY, playerA, "Cathartic Reunion", 1); // exile from lib
+        addCard(Zone.LIBRARY, playerA, "Plains", 3); // exile from lib
+        addCard(Zone.HAND, playerA, "Swamp", 1);
+        addCard(Zone.HAND, playerA, "Forest", 1);
 
-        addCard(Zone.BATTLEFIELD, playerB, "Narset, Enlightened Master", 1);
-        addCard(Zone.HAND, playerB, "Swamp");
-        addCard(Zone.LIBRARY, playerB, "Plains");
-        addCard(Zone.LIBRARY, playerB, "Plains");
-        addCard(Zone.LIBRARY, playerB, "Plains");
-        addCard(Zone.LIBRARY, playerB, "Cathartic Reunion");
-        addCard(Zone.LIBRARY, playerB, "Forest");
+        attack(1, playerA, "Narset, Enlightened Master");
 
-        attack(2, playerB, "Narset, Enlightened Master");
-
-        checkPlayableAbility("must play", 2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Cast Cathartic Reunion", true);
-        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Cathartic Reunion");
-        setChoice(playerB, "Swamp^Forest");
+        // can play for 2 discard
+        checkPlayableAbility("must play", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast Cathartic Reunion", true);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cathartic Reunion");
+        setChoice(playerA, "Swamp^Forest");
+        waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN);
 
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
         assertAllCommandsUsed();
 
-
-        assertHandCount(playerB, 3);
-        assertGraveyardCount(playerB, "Forest", 1);
-        assertGraveyardCount(playerB, "Swamp", 1);
-        assertGraveyardCount(playerB, "Cathartic Reunion", 1);
-        assertGraveyardCount(playerB, 3);
-        assertExileCount(playerB, "Plains", 3);
-        assertExileCount(playerB, 3);
-
+        assertGraveyardCount(playerA, "Swamp", 1);
+        assertGraveyardCount(playerA, "Forest", 1);
+        assertGraveyardCount(playerA, "Cathartic Reunion", 1);
     }
 
     /**

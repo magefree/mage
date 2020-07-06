@@ -151,8 +151,8 @@ public class BolassCitadelTest extends CardTestPlayerBase {
         checkPlayableAbility("B can't use bolas on 2", 2, PhaseStep.PRECOMBAT_MAIN, playerB, "Cast Grizzly Bears", false);
 
         // 3 turn
-        checkPlayableAbility("A can use bolas on 1", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Balduvian Bears", true);
-        checkPlayableAbility("B cant use bolas on 1", 1, PhaseStep.PRECOMBAT_MAIN, playerB, "Cast Grizzly Bears", false);
+        checkPlayableAbility("A can use bolas on 3", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Balduvian Bears", true);
+        checkPlayableAbility("B cant use bolas on 3", 1, PhaseStep.PRECOMBAT_MAIN, playerB, "Cast Grizzly Bears", false);
 
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.END_TURN);
