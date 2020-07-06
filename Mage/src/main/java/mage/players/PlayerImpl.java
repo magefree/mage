@@ -1075,9 +1075,10 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public void setCastSourceIdWithAlternateMana(UUID sourceId, ManaCosts<ManaCost> manaCosts, Costs<Cost> costs) {
+        // cost must be copied for data consistence between game simulations
         castSourceIdWithAlternateMana.add(sourceId);
-        castSourceIdManaCosts.put(sourceId, manaCosts);
-        castSourceIdCosts.put(sourceId, costs);
+        castSourceIdManaCosts.put(sourceId, manaCosts != null ? manaCosts.copy() : null);
+        castSourceIdCosts.put(sourceId, costs != null ? costs.copy() : null);
     }
 
     @Override
