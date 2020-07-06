@@ -13,6 +13,7 @@ import mage.constants.SubType;
 import mage.watchers.common.CreaturesDiedWatcher;
 
 import java.util.UUID;
+import mage.constants.Duration;
 
 /**
  * @author TheElk801
@@ -27,7 +28,7 @@ public final class CanopyStalker extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Canopy Stalker must be blocked if able.
-        this.addAbility(new SimpleStaticAbility(new MustBeBlockedByAtLeastOneSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(new MustBeBlockedByAtLeastOneSourceEffect(Duration.WhileOnBattlefield)));
 
         // When Canopy Stalker dies, you gain 1 life for each creature that died this turn.
         this.addAbility(new DiesSourceTriggeredAbility(
