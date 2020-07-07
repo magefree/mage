@@ -4,7 +4,7 @@ updates:
     directory: '/'
     schedule:
       interval: 'weekly'
-  - package-ecosystem: 'java:maven'
+  - package-ecosystem: 'maven'
     directory: '/'
     schedule:
       interval: 'weekly'
