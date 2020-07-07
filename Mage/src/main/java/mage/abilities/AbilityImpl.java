@@ -329,8 +329,9 @@ public abstract class AbilityImpl implements Ability {
             }
             if (!getTargets().isEmpty()) {
                 Outcome outcome = getEffects().getOutcome(this);
-                // only activated abilities can be canceled by user (not triggered)
-                if (!getTargets().chooseTargets(outcome, this.controllerId, this, noMana, game, this instanceof ActivatedAbility)) {
+                // only activated abilities can be canceled by human user (not triggered)
+                boolean canCancel = this instanceof ActivatedAbility && controller.isHuman();
+                if (!getTargets().chooseTargets(outcome, this.controllerId, this, noMana, game, canCancel)) {
                     // was canceled during targer selection
                     return false;
                 }
