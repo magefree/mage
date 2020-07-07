@@ -71,7 +71,7 @@ class AvenEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent target = game.getPermanent(source.getFirstTarget());
+        Permanent target = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (target != null) {
             target.getPower().setValue(3);
             target.getToughness().setValue(1);
@@ -82,7 +82,7 @@ class AvenEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean isInactive(Ability source, Game game) {
-        Permanent creature = game.getPermanent(this.targetPointer.getFirst(game, source));
+        Permanent creature = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (creature != null && creature.getCounters(game).getCount(CounterType.FEATHER) < 1) {
             return true;
         }
@@ -112,7 +112,7 @@ class AvenEffect2 extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent target = game.getPermanent(source.getFirstTarget());
+        Permanent target = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (target != null) {
             if (!target.getAbilities().contains(FlyingAbility.getInstance())) {
                 target.addAbility(FlyingAbility.getInstance(), source.getSourceId(), game);
@@ -124,7 +124,7 @@ class AvenEffect2 extends ContinuousEffectImpl {
 
     @Override
     public boolean isInactive(Ability source, Game game) {
-        Permanent creature = game.getPermanent(this.targetPointer.getFirst(game, source));
+        Permanent creature = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (creature != null && creature.getCounters(game).getCount(CounterType.FEATHER) < 1) {
             return true;
         }
