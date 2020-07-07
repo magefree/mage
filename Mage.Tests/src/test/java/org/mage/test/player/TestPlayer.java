@@ -2124,16 +2124,17 @@ public class TestPlayer implements Player {
                     || target.getOriginalTarget() instanceof TargetPermanentOrPlayer
                     || target.getOriginalTarget() instanceof TargetDefender) {
                 for (String targetDefinition : targets) {
-                    if (targetDefinition.startsWith("targetPlayer=")) {
-                        checkTargetDefinitionMarksSupport(target, targetDefinition, "=");
-                        String playerName = targetDefinition.substring(targetDefinition.indexOf("targetPlayer=") + 13);
-                        for (Player player : game.getPlayers().values()) {
-                            if (player.getName().equals(playerName)
-                                    && target.canTarget(computerPlayer.getId(), player.getId(), source, game)) {
-                                target.addTarget(player.getId(), source, game);
-                                targets.remove(targetDefinition);
-                                return true;
-                            }
+                    if (!targetDefinition.startsWith("targetPlayer=")) {
+                        continue;
+                    }
+                    checkTargetDefinitionMarksSupport(target, targetDefinition, "=");
+                    String playerName = targetDefinition.substring(targetDefinition.indexOf("targetPlayer=") + 13);
+                    for (Player player : game.getPlayers().values()) {
+                        if (player.getName().equals(playerName)
+                                && target.canTarget(computerPlayer.getId(), player.getId(), source, game)) {
+                            target.addTarget(player.getId(), source, game);
+                            targets.remove(targetDefinition);
+                            return true;
                         }
                     }
                 }
@@ -2146,6 +2147,9 @@ public class TestPlayer implements Player {
                     || (target.getOriginalTarget() instanceof TargetCreatureOrPlayer)
                     || (target.getOriginalTarget() instanceof TargetDefender)) {
                 for (String targetDefinition : targets) {
+                    if (targetDefinition.startsWith("targetPlayer=")) {
+                        continue;
+                    }
                     checkTargetDefinitionMarksSupport(target, targetDefinition, "^[]");
                     String[] targetList = targetDefinition.split("\\^");
                     boolean targetFound = false;

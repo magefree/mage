@@ -1,27 +1,24 @@
 package mage.abilities.keyword;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.StaticAbility;
 import mage.cards.Card;
 import mage.constants.Zone;
-import mage.filter.Filter;
-import mage.filter.FilterCard;
-import mage.filter.FilterObject;
-import mage.filter.FilterPermanent;
-import mage.filter.FilterSpell;
+import mage.filter.*;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
+import mage.players.Player;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class ProtectionAbility extends StaticAbility {
@@ -87,6 +84,7 @@ public class ProtectionAbility extends StaticAbility {
             }
             return true;
         }
+
         if (filter instanceof FilterSpell) {
             if (source instanceof Spell) {
                 return !filter.match(source, game);
@@ -99,9 +97,21 @@ public class ProtectionAbility extends StaticAbility {
                 return true;
             }
         }
+
         if (filter instanceof FilterObject) {
             return !filter.match(source, game);
         }
+
+        if (filter instanceof FilterPlayer) {
+            Player player = null;
+            if (source instanceof Permanent) {
+                player = game.getPlayer(((Permanent) source).getControllerId());
+            } else if (source instanceof Card) {
+                player = game.getPlayer(((Card) source).getOwnerId());
+            }
+            return !((FilterPlayer) filter).match(player, getSourceId(), this.getControllerId(), game);
+        }
+
         return true;
     }
 
