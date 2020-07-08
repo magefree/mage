@@ -4,17 +4,18 @@ import java.util.UUID;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.SpecialAction;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.DiscardSourceCost;
 import mage.abilities.costs.common.ExileTopCreatureCardOfGraveyardCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.keyword.FlyingAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
+import mage.players.Player;
 
 /**
  * @author arcox
@@ -32,7 +33,7 @@ public final class CirclingVultures extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // You may discard Circling Vultures any time you could cast an instant.
-        this.addAbility(new SimpleActivatedAbility(Zone.HAND, new CirclingVulturesEffect(), new CirclingVulturesCost()));
+        this.addAbility(new CirclingVulturesSpecialAction());
 
         // At the beginning of your upkeep, sacrifice Circling Vultures unless you exile the top creature card of your graveyard.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ExileTopCreatureCardOfGraveyardCost(1)), TargetController.YOU, false));
@@ -48,43 +49,56 @@ public final class CirclingVultures extends CardImpl {
     }
 }
 
-class CirclingVulturesCost extends DiscardSourceCost {
-    public CirclingVulturesCost() {
+class CirclingVulturesSpecialAction extends SpecialAction {
+
+    public CirclingVulturesSpecialAction() {
+        super(Zone.HAND);
+        this.setMayActivate(TargetController.YOU);
+        this.addEffect(new CirclingVulturesDiscardEffect());
     }
 
-    public CirclingVulturesCost(CirclingVulturesCost cost) {
-        super(cost);
+    public CirclingVulturesSpecialAction(final CirclingVulturesSpecialAction ability) {
+        super(ability);
     }
 
     @Override
-    public CirclingVulturesCost copy() {
-        return new CirclingVulturesCost(this);
+    public CirclingVulturesSpecialAction copy() {
+        return new CirclingVulturesSpecialAction(this);
     }
 
     @Override
-    public String getText() {
-        return "";
+    public String getRule() {
+        return "You may discard {this} any time you could cast an instant.";
     }
 }
 
-class CirclingVulturesEffect extends OneShotEffect {
-
-    public CirclingVulturesEffect() {
+class CirclingVulturesDiscardEffect extends OneShotEffect {
+    public CirclingVulturesDiscardEffect() {
         super(Outcome.Neutral);
-        this.staticText = "You may discard {this} any time you could cast an instant";
+        this.staticText = "discard {this}";
     }
 
-    public CirclingVulturesEffect(final CirclingVulturesEffect effect) {
+    public CirclingVulturesDiscardEffect(final CirclingVulturesDiscardEffect effect) {
         super(effect);
     }
 
     @Override
-    public CirclingVulturesEffect copy() {
-        return new CirclingVulturesEffect(this);
+    public CirclingVulturesDiscardEffect copy() {
+        return new CirclingVulturesDiscardEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return true;
+        Player player = game.getPlayer(source.getControllerId());
+        if (player == null) {
+            return false;
+        }
+
+        Card card = player.getHand().get(source.getSourceId(), game);
+        if (card == null) {
+            return false;
+        }
+
+        return player.discard(card, source, game);
     }
 }
