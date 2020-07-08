@@ -3,7 +3,6 @@ package mage.verify;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.CostModificationEffect;
-import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.abilities.keyword.MultikickerAbility;
@@ -119,9 +118,6 @@ public class VerifyCardDataTest {
         // subtype
         skipListCreate(SKIP_LIST_SUBTYPE);
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Miss Demeanor");
-        // the following is temporary
-        subtypesToIgnore.add("Dog");
-        subtypesToIgnore.add("Hound");
 
         // number
         skipListCreate(SKIP_LIST_NUMBER);
