@@ -37,8 +37,8 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 import java.util.Map.Entry;
 
 import static mage.client.dialog.PreferencesDialog.*;
@@ -299,6 +299,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         criteria.white(this.tbWhite.isSelected());
         criteria.colorless(this.tbColorless.isSelected());
 
+        // if you add new type filter then sync it with CardType
         if (this.tbLand.isSelected()) {
             criteria.types(CardType.LAND);
         }
@@ -320,8 +321,6 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         if (this.tbPlaneswalkers.isSelected()) {
             criteria.types(CardType.PLANESWALKER);
         }
-        // criteria.types(CardType.TRIBAL);
-        // criteria.types(CardType.CONSPIRACY);
 
         if (this.tbCommon.isSelected()) {
             criteria.rarities(Rarity.COMMON);

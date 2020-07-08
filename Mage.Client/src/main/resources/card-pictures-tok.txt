@@ -1428,5 +1428,6 @@
 |Generate|TOK:M21|Zombie|||ZombieToken|
 
 # JMP
+# Jumpstart uses tokens and emblems from M21 set,
+# TODO: check scryfall for JMP tokens after set's release
 |Generate|TOK:JMP|Unicorn|||UnicornToken|
-|Generate|TOK:JMP|Dog|||WhiteDogToken|

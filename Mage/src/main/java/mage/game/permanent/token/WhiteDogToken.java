@@ -20,7 +20,7 @@ public final class WhiteDogToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
 
-        availableImageSetCodes.addAll(Arrays.asList("M21", "JMP"));
+        availableImageSetCodes.addAll(Arrays.asList("M21"));
     }
 
     private WhiteDogToken(final WhiteDogToken token) {
