@@ -6,29 +6,16 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.util.RandomUtil;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * @author LevelX2
  */
 public final class KnightToken extends TokenImpl {
 
-    static final private List<String> tokenImageSets = new ArrayList<>();
-
-    static {
-        tokenImageSets.addAll(Arrays.asList("ORI", "RTR", "C15", "CMA", "DOM", "ELD"));
-    }
-
     public KnightToken() {
         super("Knight", "2/2 white Knight creature token with vigilance");
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C15")) {
-            setTokenType(2);
-        }
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("DOM")) {
-            this.setTokenType(RandomUtil.nextInt(2) + 1);
-        }
+
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add(SubType.KNIGHT);
@@ -36,7 +23,7 @@ public final class KnightToken extends TokenImpl {
         toughness = new MageInt(2);
         this.addAbility(VigilanceAbility.getInstance());
 
-        availableImageSetCodes = tokenImageSets;
+        availableImageSetCodes = Arrays.asList("C13", "C15", "CMA", "DGM", "ORI", "RTR", "M19", "ELD", "M21");
     }
 
     public KnightToken(final KnightToken token) {
@@ -45,5 +32,18 @@ public final class KnightToken extends TokenImpl {
 
     public KnightToken copy() {
         return new KnightToken(this);
+    }
+
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C15")) {
+            setTokenType(2);
+        }
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("DOM")) {
+            this.setTokenType(RandomUtil.nextInt(2) + 1);
+        }
     }
 }

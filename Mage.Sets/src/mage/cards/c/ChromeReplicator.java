@@ -16,7 +16,7 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
-import mage.game.permanent.token.RetrofitterFoundryToken;
+import mage.game.permanent.token.Construct4Token;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,7 +37,7 @@ public final class ChromeReplicator extends CardImpl {
 
         // When Chrome Replicator enters the battlefield, if you control two or more nonland, nontoken permanents with the same name as one another, create a 4/4 colorless Construct artifact creature token.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new RetrofitterFoundryToken())),
+                new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new Construct4Token())),
                 ChromeReplicatorCondition.instance, "When {this} enters the battlefield, " +
                 "if you control two or more nonland, nontoken permanents with the same name as one another, " +
                 "create a 4/4 colorless Construct artifact creature token."

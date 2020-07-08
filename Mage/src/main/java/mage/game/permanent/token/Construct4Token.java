@@ -1,34 +1,32 @@
 package mage.game.permanent.token;
 
+import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.MageInt;
+
+import java.util.Arrays;
 
 /**
- *
  * @author TheElk801
  */
-public final class RetrofitterFoundryToken extends TokenImpl {
+public final class Construct4Token extends TokenImpl {
 
-    public RetrofitterFoundryToken() {
-        this("C18");
-    }
-
-    public RetrofitterFoundryToken(String setCode) {
+    public Construct4Token() {
         super("Construct", "4/4 colorless Construct artifact creature token");
-        this.setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.CONSTRUCT);
         power = new MageInt(4);
         toughness = new MageInt(4);
+
+        availableImageSetCodes.addAll(Arrays.asList("C18", "M21"));
     }
 
-    public RetrofitterFoundryToken(final RetrofitterFoundryToken token) {
+    public Construct4Token(final Construct4Token token) {
         super(token);
     }
 
-    public RetrofitterFoundryToken copy() {
-        return new RetrofitterFoundryToken(this);
+    public Construct4Token copy() {
+        return new Construct4Token(this);
     }
 }

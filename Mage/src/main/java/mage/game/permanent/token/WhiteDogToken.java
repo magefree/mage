@@ -4,8 +4,9 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.Arrays;
+
 /**
- *
  * @author htrajan
  */
 public final class WhiteDogToken extends TokenImpl {
@@ -18,6 +19,8 @@ public final class WhiteDogToken extends TokenImpl {
         color.setWhite(true);
         power = new MageInt(1);
         toughness = new MageInt(1);
+
+        availableImageSetCodes.addAll(Arrays.asList("M21", "JMP"));
     }
 
     private WhiteDogToken(final WhiteDogToken token) {

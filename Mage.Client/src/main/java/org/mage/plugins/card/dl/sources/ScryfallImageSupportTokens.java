@@ -426,6 +426,29 @@ public class ScryfallImageSupportTokens {
             put("C20/Treasure", "https://api.scryfall.com/cards/tc20/19/en?format=image");
             put("C20/Zombie", "https://api.scryfall.com/cards/tc20/9/en?format=image");
 
+            // M21
+            put("M21/Angel", "https://api.scryfall.com/cards/tm21/1/en?format=image");
+            put("M21/Emblem Basri Ket", "https://api.scryfall.com/cards/tm21/16/en?format=image");
+            put("M21/Beast", "https://api.scryfall.com/cards/tm21/10/en?format=image");
+            put("M21/Bird", "https://api.scryfall.com/cards/tm21/2/en?format=image");
+            put("M21/Cat/1", "https://api.scryfall.com/cards/tm21/20/en?format=image"); // 1/1
+            put("M21/Cat/2", "https://api.scryfall.com/cards/tm21/11/en?format=image"); // 2/2
+            put("M21/Construct", "https://api.scryfall.com/cards/tm21/14/en?format=image");
+            put("M21/Demon", "https://api.scryfall.com/cards/tm21/6/en?format=image");
+            put("M21/Dog", "https://api.scryfall.com/cards/tm21/19/en?format=image");
+            put("M21/Emblem Garruk, Unleashed", "https://api.scryfall.com/cards/tm21/17/en?format=image");
+            put("M21/Goblin Wizard", "https://api.scryfall.com/cards/tm21/8/en?format=image");
+            put("M21/Griffin", "https://api.scryfall.com/cards/tm21/3/en?format=image");
+            put("M21/Knight", "https://api.scryfall.com/cards/tm21/4/en?format=image");
+            put("M21/Emblem Liliana, Waker of the Dead", "https://api.scryfall.com/cards/tm21/18/en?format=image");
+            put("M21/Pirate", "https://api.scryfall.com/cards/tm21/9/en?format=image");
+            put("M21/Saproling", "https://api.scryfall.com/cards/tm21/12/en?format=image");
+            put("M21/Soldier", "https://api.scryfall.com/cards/tm21/5/en?format=image");
+            put("M21/Treasure", "https://api.scryfall.com/cards/tm21/15/en?format=image");
+            put("M21/Weird", "https://api.scryfall.com/cards/tm21/13/en?format=image");
+            put("M21/Zombie", "https://api.scryfall.com/cards/tm21/7/en?format=image");
+
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

@@ -29,6 +29,7 @@ public final class SaprolingToken extends TokenImpl {
                 "MM2",
                 "MM3",
                 "MMA",
+                "NEM",
                 "RTR",
                 "C15",
                 "MM3",
@@ -40,7 +41,8 @@ public final class SaprolingToken extends TokenImpl {
                 "RIX",
                 "DOM", // 3 different token images
                 "C19",
-                "C20"
+                "C20",
+                "M21"
         ));
     }
 
@@ -52,13 +54,6 @@ public final class SaprolingToken extends TokenImpl {
         subtype.add(SubType.SAPROLING);
         power = new MageInt(1);
         toughness = new MageInt(1);
-
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C16")) {
-            this.setTokenType(RandomUtil.nextInt(2) + 1);
-        }
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("DOM")) {
-            this.setTokenType(RandomUtil.nextInt(3) + 1);
-        }
     }
 
     public SaprolingToken(final SaprolingToken token) {
@@ -67,5 +62,24 @@ public final class SaprolingToken extends TokenImpl {
 
     public SaprolingToken copy() {
         return new SaprolingToken(this);
+    }
+
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("NEM")) {
+            this.setTokenType(2);
+        }
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("VMA")) {
+            this.setTokenType(2);
+        }
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C16")) {
+            this.setTokenType(RandomUtil.nextInt(2) + 1);
+        }
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("DOM")) {
+            this.setTokenType(RandomUtil.nextInt(3) + 1);
+        }
     }
 }

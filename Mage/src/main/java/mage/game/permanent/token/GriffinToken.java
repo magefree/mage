@@ -1,13 +1,13 @@
-
-
 package mage.game.permanent.token;
-import mage.constants.CardType;
-import mage.constants.SubType;
+
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
+import mage.constants.CardType;
+import mage.constants.SubType;
+
+import java.util.Arrays;
 
 /**
- *
  * @author spjspj
  */
 public final class GriffinToken extends TokenImpl {
@@ -16,11 +16,12 @@ public final class GriffinToken extends TokenImpl {
         super("Griffin", "2/2 white Griffin creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
-
         subtype.add(SubType.GRIFFIN);
         power = new MageInt(2);
         toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());
+
+        availableImageSetCodes.addAll(Arrays.asList("DDG", "DDH", "DDL", "TSP", "M21"));
     }
 
     public GriffinToken(final GriffinToken token) {

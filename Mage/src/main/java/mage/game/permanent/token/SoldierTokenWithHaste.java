@@ -1,26 +1,16 @@
-
-
 package mage.game.permanent.token;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.HasteAbility;
+import mage.constants.CardType;
+import mage.constants.SubType;
+
+import java.util.Arrays;
 
 /**
- *
  * @author LoneFox
  */
 public final class SoldierTokenWithHaste extends TokenImpl {
-
-    static final private List<String> tokenImageSets = new ArrayList<>();
-
-    static {
-        tokenImageSets.addAll(Arrays.asList("GTC", "MM3"));
-    }
 
     public SoldierTokenWithHaste() {
         super("Soldier", "1/1 red and white Soldier creature token with haste");
@@ -31,12 +21,18 @@ public final class SoldierTokenWithHaste extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
         addAbility(HasteAbility.getInstance());
+
+        availableImageSetCodes = Arrays.asList("GTC", "MM3");
     }
 
 
     @Override
     public void setExpansionSetCodeForImage(String code) {
         super.setExpansionSetCodeForImage(code);
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("GTC")) {
+            setTokenType(2);
+        }
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("MM3")) {
             setTokenType(2);
         }

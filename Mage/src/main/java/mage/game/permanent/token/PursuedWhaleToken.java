@@ -10,6 +10,8 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 
+import java.util.Arrays;
+
 /**
  * @author TheElk801
  */
@@ -34,6 +36,8 @@ public final class PursuedWhaleToken extends TokenImpl {
         this.addAbility(new SimpleStaticAbility(new AttacksIfAbleAllEffect(
                 filter, Duration.WhileOnBattlefield, true
         )));
+
+        availableImageSetCodes = Arrays.asList("M21");
     }
 
     private PursuedWhaleToken(final PursuedWhaleToken token) {

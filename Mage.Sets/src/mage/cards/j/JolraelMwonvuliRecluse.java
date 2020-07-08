@@ -14,7 +14,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.StaticFilters;
-import mage.game.permanent.token.GreenCatToken2;
+import mage.game.permanent.token.GreenCat2Token;
 
 import java.util.UUID;
 
@@ -33,7 +33,7 @@ public final class JolraelMwonvuliRecluse extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever you draw your second card each turn, create a 2/2 green Cat creature token.
-        this.addAbility(new DrawSecondCardTriggeredAbility(new CreateTokenEffect(new GreenCatToken2()), false));
+        this.addAbility(new DrawSecondCardTriggeredAbility(new CreateTokenEffect(new GreenCat2Token()), false));
 
         // {4}{G}{G}: Until end of turn, creatures you control have base power and toughness X/X, where X is the number of cards in your hand.
         this.addAbility(new SimpleActivatedAbility(new SetPowerToughnessAllEffect(
