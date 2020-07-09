@@ -30,7 +30,7 @@ public final class Flicker extends CardImpl {
         // Exile target nontoken permanent, then return it to the battlefield under its owner's control.
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new ExileTargetForSourceEffect());
-        this.getSpellAbility().addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect());        
+        this.getSpellAbility().addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, true));        
         
     }
 
