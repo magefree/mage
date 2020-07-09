@@ -27,7 +27,7 @@ public final class MudbuttonClanger extends CardImpl {
 
         // Kinship - At the beginning of your upkeep, you may look at the top card of your library. If it shares a creature type with Mudbutton Clanger, you may reveal it. 
         // If you do, Mudbutton Clanger gets +1/+1 until end of turn.
-        this.addAbility(new KinshipAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())));
+        this.addAbility(new KinshipAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn)));
     }
 
     public MudbuttonClanger(final MudbuttonClanger card) {
