@@ -47,12 +47,12 @@ public final class GUISizeHelper {
 
     public static int cardTooltipFontSize = 15;
 
-    public static Font chatFont = new java.awt.Font("Arial", 0, 12);
-    public static Font tableFont = new java.awt.Font("Arial", 0, 12);
-    public static Font balloonTooltipFont = new java.awt.Font("Arial", 0, 12);
-    public static Font menuFont = new java.awt.Font("Arial", 0, 12);
+    public static Font chatFont = new java.awt.Font("Microsoft YaHei", 0, 12);
+    public static Font tableFont = new java.awt.Font("Microsoft YaHei", 0, 12);
+    public static Font balloonTooltipFont = new java.awt.Font("Microsoft YaHei", 0, 12);
+    public static Font menuFont = new java.awt.Font("Microsoft YaHei", 0, 12);
 
-    public static Font gameRequestsFont = new java.awt.Font("Arial", 0, 12);
+    public static Font gameRequestsFont = new java.awt.Font("Microsoft YaHei", 0, 12);
 
     public static int gameDialogAreaFontSizeBig = 16;
     public static int gameDialogAreaFontSizeTooltip = 14;
@@ -61,7 +61,7 @@ public final class GUISizeHelper {
 
     public static int gameDialogAreaButtonHigh = 16;
 
-    public static Font gameDialogAreaFont = new java.awt.Font("Arial", 0, 12);
+    public static Font gameDialogAreaFont = new java.awt.Font("Microsoft YaHei", 0, 12);
     public static int gameDialogButtonHeight;
     public static int gameDialogButtonWidth;
 
@@ -85,7 +85,7 @@ public final class GUISizeHelper {
 
     public static Font getTabFont() {
         int fontSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_TABLE_FONT_SIZE, 14);
-        return new java.awt.Font("Arial", 0, fontSize);
+        return new java.awt.Font("Microsoft YaHei", 0, fontSize);
     }
 
     public static void changeGUISize() {
@@ -95,12 +95,12 @@ public final class GUISizeHelper {
 
     public static void calculateGUISizes() {
         int tableFontSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_TABLE_FONT_SIZE, 14);
-        tableFont = new java.awt.Font("Arial", 0, tableFontSize);
+        tableFont = new java.awt.Font("Microsoft YaHei", 0, tableFontSize);
         tableRowHeight = tableFontSize + 4;
         tableHeaderHeight = tableFontSize + 10;
         symbolTableSize = tableFontSize;
         flagHeight = tableFontSize - 2;
-        balloonTooltipFont = new Font("Arial", 0, tableFontSize);
+        balloonTooltipFont = new Font("Microsoft YaHei", 0, tableFontSize);
         if (tableFontSize > 15) {
             symbolEditorSize = tableFontSize - 5;
             dividerBarSize = 10 + (tableFontSize / 4);
@@ -113,8 +113,8 @@ public final class GUISizeHelper {
 
         // used for popup menus
         int dialogFontSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_DIALOG_FONT_SIZE, 14);
-        menuFont = new Font("Arial", 0, dialogFontSize);
-        gameRequestsFont = new Font("Arial", 0, dialogFontSize);
+        menuFont = new Font("Microsoft YaHei", 0, dialogFontSize);
+        gameRequestsFont = new Font("Microsoft YaHei", 0, dialogFontSize);
 
         // used in the feedback area of the game panel
         int feedbackFontSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_FEEDBACK_AREA_SIZE, 14);
@@ -124,13 +124,13 @@ public final class GUISizeHelper {
         gameDialogAreaTextHeight = GUISizeHelper.gameDialogAreaFontSizeBig + GUISizeHelper.gameDialogAreaFontSizeSmall + 30;
 
         gameDialogAreaButtonHigh = feedbackFontSize;
-        gameDialogAreaFont = new Font("Arial", 0, feedbackFontSize);
+        gameDialogAreaFont = new Font("Microsoft YaHei", 0, feedbackFontSize);
         gameDialogButtonHeight = feedbackFontSize + 6;
         gameDialogButtonWidth = feedbackFontSize * 2 + 40;
         symbolDialogSize = feedbackFontSize;
 
         int chatFontSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CHAT_FONT_SIZE, 14);
-        chatFont = new java.awt.Font("Arial", 0, chatFontSize);
+        chatFont = new java.awt.Font("Microsoft YaHei", 0, chatFontSize);
         symbolChatSize = chatFontSize;
 
         cardTooltipFontSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_TOOLTIP_SIZE, 14);

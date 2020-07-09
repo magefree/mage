@@ -4,6 +4,7 @@ package mage.client.dialog;
 import java.util.Locale;
 import javax.swing.*;
 import mage.client.SessionHandler;
+
 import org.apache.log4j.Logger;
 
 /**
@@ -57,27 +58,28 @@ public class FeedbackDialog extends javax.swing.JDialog {
         cancelButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Feedback");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("SwingMessage"); // NOI18N
+        setTitle(bundle.getString("FeedbackDialog.title")); // NOI18N
 
-        lblProxyServer.setText("Enter your idea*");
+        lblProxyServer.setText(bundle.getString("FeedbackDialog.lblProxyServer.text")); // NOI18N
 
-        lblProxyPort.setText("Your email:");
+        lblProxyPort.setText(bundle.getString("FeedbackDialog.lblProxyPort.text")); // NOI18N
 
-        lblProxyUserName.setText("Describe your idea*");
+        lblProxyUserName.setText(bundle.getString("FeedbackDialog.lblProxyUserName.text")); // NOI18N
 
-        lblProxyType.setText("Category");
+        lblProxyType.setText(bundle.getString("FeedbackDialog.lblProxyType.text")); // NOI18N
 
         txtFeedbackMessage.setColumns(20);
-        txtFeedbackMessage.setFont(new java.awt.Font("Tahoma", 0, 11));
+        txtFeedbackMessage.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         txtFeedbackMessage.setRows(5);
-        txtFeedbackMessage.setText("(300 characters max)");
+        txtFeedbackMessage.setText(bundle.getString("FeedbackDialog.txtFeedbackMessage.text")); // NOI18N
         jScrollPane1.setViewportView(txtFeedbackMessage);
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 2, 11));
-        jLabel2.setText("(optional)");
+        jLabel2.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        jLabel2.setText(bundle.getString("FeedbackDialog.jLabel2.text")); // NOI18N
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 2, 11));
-        jLabel3.setText("(optional)");
+        jLabel3.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        jLabel3.setText(bundle.getString("FeedbackDialog.jLabel3.text")); // NOI18N
 
         javax.swing.GroupLayout pnlProxyLayout = new javax.swing.GroupLayout(pnlProxy);
         pnlProxy.setLayout(pnlProxyLayout);
@@ -132,9 +134,9 @@ public class FeedbackDialog extends javax.swing.JDialog {
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
-        jLabel1.setFont(new java.awt.Font("Arial", 1, 14));
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 153, 51));
-        jLabel1.setText("I suggest you...");
+        jLabel1.setText(bundle.getString("FeedbackDialog.jLabel1.text")); // NOI18N
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -157,19 +159,27 @@ public class FeedbackDialog extends javax.swing.JDialog {
                 .addContainerGap(41, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Give feedback", jPanel6);
+        jTabbedPane1.addTab(bundle.getString("FeedbackDialog.jPanel6.TabConstraints.tabTitle"), jPanel6); // NOI18N
 
-        sendButton.setText("Send");
-        sendButton.addActionListener(evt -> sendButtonActionPerformed(evt));
+        sendButton.setText(bundle.getString("FeedbackDialog.sendButton.text")); // NOI18N
+        sendButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sendButtonActionPerformed(evt);
+            }
+        });
 
-        cancelButton.setText("Cancel");
-        cancelButton.addActionListener(evt -> cancelButtonActionPerformed(evt));
+        cancelButton.setText(bundle.getString("FeedbackDialog.cancelButton.text")); // NOI18N
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 469, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(324, Short.MAX_VALUE)
                 .addComponent(sendButton)
@@ -188,7 +198,7 @@ public class FeedbackDialog extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.getAccessibleContext().setAccessibleName("Feedback");
+        jTabbedPane1.getAccessibleContext().setAccessibleName(bundle.getString("FeedbackDialog.jTabbedPane1.AccessibleContext.accessibleName")); // NOI18N
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -201,32 +211,32 @@ public class FeedbackDialog extends javax.swing.JDialog {
     private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendButtonActionPerformed
         String title = txtIdeaTitle.getText().trim();
         if (title.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "\"Enter your idea\" is a mandatory field", "Warning", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, java.util.ResourceBundle.getBundle("otherMessage").getString("lblEnterYourIdeaMandatory"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblWarning"), JOptionPane.INFORMATION_MESSAGE);
             return;
         }
         if (title.length() > 100) {
-            JOptionPane.showMessageDialog(null, "\"Enter your idea\" value is too long (100 characters max)", "Warning", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, java.util.ResourceBundle.getBundle("otherMessage").getString("lblEnterYourIdeaTooLong"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblWarning"), JOptionPane.INFORMATION_MESSAGE);
             return;
         }
         String type = cleanUpType(cbFeedbackType.getSelectedItem().toString());
         String message = txtFeedbackMessage.getText().trim();
         if (message.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "\"Describe your idea\" is a mandatory field.", "Warning", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, java.util.ResourceBundle.getBundle("otherMessage").getString("lblDescribeYourIdeaMandatory"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblWarning"), JOptionPane.INFORMATION_MESSAGE);
             return;
         }
         if (message.length() > 300) {
-            JOptionPane.showMessageDialog(null, "\"Describe your idea\" value is too long (300 characters max)", "Warning", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, java.util.ResourceBundle.getBundle("otherMessage").getString("lblDescribeYourIdeaTooLong"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblWarning"), JOptionPane.INFORMATION_MESSAGE);
         }
         String email = txtEmail.getText().trim();
         if (email.length() > 100) {
             email = email.substring(0, 100);
         }
         if (SessionHandler.sendFeedback(title, type, message, email)) {
-            JOptionPane.showMessageDialog(null, "Feedback was sent. Thank you!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, java.util.ResourceBundle.getBundle("otherMessage").getString("lblFeedbackWasSent"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblSuccess"), JOptionPane.INFORMATION_MESSAGE);
             reset();
             dialog.setVisible(false);
         } else {
-            JOptionPane.showMessageDialog(null, "Couldn't sent feedback.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, java.util.ResourceBundle.getBundle("otherMessage").getString("lblCouldntSentFeedback"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblError"), JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_sendButtonActionPerformed
 

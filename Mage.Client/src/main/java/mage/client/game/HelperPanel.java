@@ -151,19 +151,19 @@ public class HelperPanel extends JPanel {
         buttonGrid.setOpaque(false);
         buttonContainer.add(buttonGrid);
 
-        btnSpecial = new JButton("Special");
+        btnSpecial = new JButton(java.util.ResourceBundle.getBundle("otherMessage").getString("lblSpecial"));
         btnSpecial.setVisible(false);
         buttonGrid.add(btnSpecial);
 
-        btnLeft = new JButton("OK");
+        btnLeft = new JButton(java.util.ResourceBundle.getBundle("otherMessage").getString("lblOK"));
         btnLeft.setVisible(false);
         buttonGrid.add(btnLeft);
 
-        btnRight = new JButton("Cancel");
+        btnRight = new JButton(java.util.ResourceBundle.getBundle("otherMessage").getString("lblCancel"));
         btnRight.setVisible(false);
         buttonGrid.add(btnRight);
 
-        btnUndo = new JButton("Undo");
+        btnUndo = new JButton(java.util.ResourceBundle.getBundle("otherMessage").getString("lblUndo"));
         btnUndo.setVisible(false);
         buttonGrid.add(btnUndo);
 
@@ -440,36 +440,36 @@ public class HelperPanel extends JPanel {
 
         // String tooltipText = "";
         JMenuItem menuItem;
-        menuItem = new JMenuItem("Always Yes for the same text and ability");
+        menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblAlwaysYesForSameTextAbility"));
         menuItem.setActionCommand(CMD_AUTO_ANSWER_ID_YES);
         menuItem.addActionListener(actionListener);
-        menuItem.setToolTipText("<HTML>If the same question from the same ability would<br/>be asked again, it's automatically answered with <b>Yes</b>.");
+        menuItem.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("htmlAlwaysYesForSameTextAbilityDest"));
         popupMenuAskYes.add(menuItem);
 
-        menuItem = new JMenuItem("Always No for the same text and ability");
+        menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblAlwaysNoForSameTextAbility"));
         menuItem.setActionCommand(CMD_AUTO_ANSWER_ID_NO);
-        menuItem.setToolTipText("<HTML>If the same question from the same ability would<br/>be asked again, it's automatically answered with <b>No</b>.");
+        menuItem.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("htmlAlwaysNoForSameTextAbilityDest"));
         menuItem.addActionListener(actionListener);
         popupMenuAskNo.add(menuItem);
 
-        menuItem = new JMenuItem("Always Yes for the same text");
+        menuItem = new JMenuItem("lblAlwaysYesForSameText");
         menuItem.setActionCommand(CMD_AUTO_ANSWER_NAME_YES);
-        menuItem.setToolTipText("<HTML>If the same question would be asked again (regardless from which source),<br/> it's automatically answered with <b>Yes</b>.");
+        menuItem.setToolTipText("htmlAlwaysYesForSameTextDest");
         menuItem.addActionListener(actionListener);
         popupMenuAskYes.add(menuItem);
 
-        menuItem = new JMenuItem("Always No for the same text");
+        menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblAlwaysNoForSameText"));
         menuItem.setActionCommand(CMD_AUTO_ANSWER_NAME_NO);
-        menuItem.setToolTipText("<HTML>If the same question would be asked again (regardless from which source),<br/> it's automatically answered with <b>No</b>.");
+        menuItem.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("htmlAlwaysNoForSameTextDest"));
         menuItem.addActionListener(actionListener);
         popupMenuAskNo.add(menuItem);
 
-        menuItem = new JMenuItem("Delete all automatic Yes/No settings");
+        menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblDeleteAllAutomaticYesSettings"));
         menuItem.setActionCommand(CMD_AUTO_ANSWER_RESET_ALL);
         menuItem.addActionListener(actionListener);
         popupMenuAskYes.add(menuItem);
 
-        menuItem = new JMenuItem("Delete all automatic Yes/No settings");
+        menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblDeleteAllAutomaticNoSettings"));
         menuItem.setActionCommand(CMD_AUTO_ANSWER_RESET_ALL);
         menuItem.addActionListener(actionListener);
         popupMenuAskNo.add(menuItem);

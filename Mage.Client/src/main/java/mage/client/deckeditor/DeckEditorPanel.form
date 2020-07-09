@@ -2,11 +2,12 @@
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <AuxValues>
-    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="1"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_formBundle" type="java.lang.String" value="SwingMessage"/>
     <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
     <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
-    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="true"/>
     <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
@@ -138,7 +139,9 @@
                     <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
                       <ComponentRef name="txtDeckName"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Deck Name:"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="DeckEditorPanel.lblDeckName.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtDeckName">
@@ -180,7 +183,9 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/buttons/state_active.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="NEW"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="DeckEditorPanel.btnNew.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                     <Property name="iconTextGap" type="int" value="2"/>
                   </Properties>
                   <Events>
@@ -192,7 +197,9 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/buttons/card_panel.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Random"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="DeckEditorPanel.btnGenDeck.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                     <Property name="iconTextGap" type="int" value="1"/>
                     <Property name="name" type="java.lang.String" value="btnGenDeck" noResource="true"/>
                   </Properties>
@@ -237,7 +244,9 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/buttons/search_24.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="LOAD"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="DeckEditorPanel.btnLoad.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                     <Property name="iconTextGap" type="int" value="2"/>
                   </Properties>
                   <Events>
@@ -249,7 +258,9 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/buttons/deck_in.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Import"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="DeckEditorPanel.btnImport.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                     <Property name="iconTextGap" type="int" value="2"/>
                     <Property name="name" type="java.lang.String" value="btnImport" noResource="true"/>
                   </Properties>
@@ -294,7 +305,9 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/buttons/sideboard_out.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="SAVE"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="DeckEditorPanel.btnSave.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                     <Property name="iconTextGap" type="int" value="2"/>
                   </Properties>
                   <Events>
@@ -306,7 +319,9 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/buttons/deck_out.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Export"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="DeckEditorPanel.btnExport.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                     <Property name="iconTextGap" type="int" value="2"/>
                     <Property name="name" type="java.lang.String" value="btnImport" noResource="true"/>
                   </Properties>
@@ -355,7 +370,9 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/buttons/state_finished.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="SUBMIT"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="DeckEditorPanel.btnSubmit.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                     <Property name="iconTextGap" type="int" value="2"/>
                     <Property name="name" type="java.lang.String" value="btnSubmit" noResource="true"/>
                   </Properties>
@@ -371,7 +388,9 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/buttons/state_finished.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="&lt;html&gt;Submit&lt;br&gt;in 1 min"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="DeckEditorPanel.btnSubmitTimer.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                     <Property name="iconTextGap" type="int" value="2"/>
                     <Property name="name" type="java.lang.String" value="btnSubmitTimer" noResource="true"/>
                   </Properties>
@@ -400,7 +419,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnAddLand" pref="30" max="32767" attributes="0"/>
+                          <Component id="btnAddLand" max="32767" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -412,7 +431,9 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/buttons/type_land.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Lands"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="DeckEditorPanel.btnAddLand.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                     <Property name="iconTextGap" type="int" value="2"/>
                     <Property name="name" type="java.lang.String" value="btnAddLand" noResource="true"/>
                   </Properties>
@@ -454,7 +475,9 @@
               <SubComponents>
                 <Component class="javax.swing.JButton" name="btnExit">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Exit"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="SwingMessage.properties" key="DeckEditorPanel.btnExit.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                     <Property name="iconTextGap" type="int" value="2"/>
                   </Properties>
                   <Events>

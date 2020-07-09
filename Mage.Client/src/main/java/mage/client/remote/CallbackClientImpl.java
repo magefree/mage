@@ -121,9 +121,9 @@ public class CallbackClientImpl implements CallbackClient {
                         if (callback.getData() != null) {
                             ChatMessage message = (ChatMessage) callback.getData();
                             if (message.getColor() == ChatMessage.MessageColor.RED) {
-                                JOptionPane.showMessageDialog(null, message.getMessage(), "Server message", JOptionPane.WARNING_MESSAGE);
+                                JOptionPane.showMessageDialog(null, message.getMessage(), java.util.ResourceBundle.getBundle("otherMessage").getString("lblServerMessage"), JOptionPane.WARNING_MESSAGE);
                             } else {
-                                JOptionPane.showMessageDialog(null, message.getMessage(), "Server message", JOptionPane.INFORMATION_MESSAGE);
+                                JOptionPane.showMessageDialog(null, message.getMessage(), java.util.ResourceBundle.getBundle("otherMessage").getString("lblServerMessage"), JOptionPane.INFORMATION_MESSAGE);
                             }
                         }
                         break;

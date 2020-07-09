@@ -66,7 +66,8 @@ public class CombatGroup extends javax.swing.JPanel {
         attackers.setPreferredSize(new java.awt.Dimension(ClientDefaultSettings.dimensions.getFrameWidth() + 8, ClientDefaultSettings.dimensions.getFrameHeight() + 25));
 
         lblDefender.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblDefender.setText("Defender");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("SwingMessage"); // NOI18N
+        lblDefender.setText(bundle.getString("CombatGroup.lblDefender.text")); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

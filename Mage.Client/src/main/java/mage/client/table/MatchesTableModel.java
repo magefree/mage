@@ -10,7 +10,7 @@ import java.util.UUID;
 
 public class MatchesTableModel extends AbstractTableModel {
 
-    private final String[] columnNames = new String[]{"Deck Type", "Players", "Game Type", "Rating", "Result", "Duration", "Start Time", "End Time", "Action"};
+    private final String[] columnNames = new String[]{"lblDeckType", "lblPlayer", "lblGameType", "lblRating", "lblResult", "lblDuration", "lblStartTime", "lblEndTime", "lblAction"};
     public static final int COLUMN_DURATION = 5;
     public static final int COLUMN_START = 6;
     public static final int COLUMN_END = 7;
@@ -84,11 +84,11 @@ public class MatchesTableModel extends AbstractTableModel {
                 return matches[arg0].getEndTime();
             case 8:
                 if (matches[arg0].isTournament()) {
-                    return "Show";
+                    return TableAction.getName(TableAction.Show);
                 } else if (matches[arg0].isReplayAvailable()) {
-                    return "Replay";
+                    return TableAction.getName(TableAction.Replay);
                 } else {
-                    return "None";
+                    return TableAction.getName(TableAction.None);
                 }
             case 9:
                 return matches[arg0].getGames();
@@ -118,7 +118,7 @@ public class MatchesTableModel extends AbstractTableModel {
         String colName = "";
 
         if (columnIndex <= getColumnCount()) {
-            colName = columnNames[columnIndex];
+            colName = java.util.ResourceBundle.getBundle("otherMessage").getString(columnNames[columnIndex]);
         }
 
         return colName;

@@ -160,21 +160,21 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             }
         };
 
-        menuItem = new JMenuItem("<html><b>F2</b> - Confirm current request");
+        menuItem = new JMenuItem("<html><b>F2</b> - " + java.util.ResourceBundle.getBundle("otherMessage").getString("lblConfirmRequest"));
         menuItem.setActionCommand("F2");
         menuItem.setMnemonic(KeyEvent.VK_O);
         popupMenu.add(menuItem);
         menuItem.addActionListener(skipListener);
 
-        menuItem = new JMenuItem("<html><b>F3</b> - Cancel active skip action");
+        menuItem = new JMenuItem("<html><b>F3</b> - " + java.util.ResourceBundle.getBundle("otherMessage").getString("lblCancelSkipAction"));
         menuItem.setActionCommand("F3");
         menuItem.setMnemonic(KeyEvent.VK_N);
         popupMenu.add(menuItem);
         menuItem.addActionListener(skipListener);
 
-        holdPriorityMenuItem = new JCheckBoxMenuItem("<html><b>" + (System.getProperty("os.name").contains("Mac OS X") ? "Cmd" : "Ctrl") + "+click</b> - Hold Priority");
+        holdPriorityMenuItem = new JCheckBoxMenuItem("<html><b>" + (System.getProperty("os.name").contains("Mac OS X") ? "Cmd" : "Ctrl") + "+click</b> - " + java.util.ResourceBundle.getBundle("otherMessage").getString("lblHoldPriority"));
         holdPriorityMenuItem.setMnemonic(KeyEvent.VK_P);
-        holdPriorityMenuItem.setToolTipText("<html>Hold priority after casting a spell or activating an ability, instead of automatically passing priority.");
+        holdPriorityMenuItem.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("htmlHoldPriorityDest"));
         popupMenu.add(holdPriorityMenuItem);
         holdPriorityMenuItem.addActionListener(e -> {
             boolean holdPriority = ((JCheckBoxMenuItem) e.getSource()).getState();
@@ -182,48 +182,48 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             gamePanel.holdPriority(holdPriority);
         });
 
-        JMenu skipMenu = new JMenu("Skip");
+        JMenu skipMenu = new JMenu(java.util.ResourceBundle.getBundle("otherMessage").getString("lblSkip"));
         skipMenu.setMnemonic(KeyEvent.VK_S);
         popupMenu.add(skipMenu);
 
-        String tooltipText = "<html>This skip actions stops if something goes to <br><b>stack</b> and if <b>attackers</b> or <b>blocker</b> have to be <b>declared</b>.";
-        String everythingTooltipText = "<html>This skip actions stops if <b>attackers</b> or <b>blocker</b> have to be <b>declared</b>, but not if something goes to the <b>stack</b>.";
-        menuItem = new JMenuItem("<html><b>F4</b> - Phases until next turn");
+        String tooltipText = java.util.ResourceBundle.getBundle("otherMessage").getString("htmlSkipButtonDest");
+        String everythingTooltipText = java.util.ResourceBundle.getBundle("otherMessage").getString("htmlEverythingSkipButtonDest");
+        menuItem = new JMenuItem("<html><b>F4</b> - " + java.util.ResourceBundle.getBundle("otherMessage").getString("lblSkipUntilNextTurn"));
         menuItem.setActionCommand("F4");
         menuItem.setToolTipText(tooltipText);
         menuItem.setMnemonic(KeyEvent.VK_T);
         skipMenu.add(menuItem);
         menuItem.addActionListener(skipListener);
 
-        menuItem = new JMenuItem("<html><b>F5</b> - Phases until next end step");
+        menuItem = new JMenuItem("<html><b>F5</b> - " + java.util.ResourceBundle.getBundle("otherMessage").getString("lblSkipUntilNextEndStep"));
         menuItem.setActionCommand("F5");
         menuItem.setToolTipText(tooltipText);
         menuItem.setMnemonic(KeyEvent.VK_E);
         skipMenu.add(menuItem);
         menuItem.addActionListener(skipListener);
 
-        menuItem = new JMenuItem("<html><b>F6</b> - Everything until the next turn");
+        menuItem = new JMenuItem("<html><b>F6</b> - " + java.util.ResourceBundle.getBundle("otherMessage").getString("lblSkipEverythingUntilNextTurn"));
         menuItem.setActionCommand("F6");
         menuItem.setToolTipText(everythingTooltipText);
         menuItem.setMnemonic(KeyEvent.VK_U);
         skipMenu.add(menuItem);
         menuItem.addActionListener(skipListener);
 
-        menuItem = new JMenuItem("<html><b>F7</b> - Phases until begin of next main phase");
+        menuItem = new JMenuItem("<html><b>F7</b> - " + java.util.ResourceBundle.getBundle("otherMessage").getString("lblSkipUntilNextMainBegin"));
         menuItem.setToolTipText(tooltipText);
         menuItem.setActionCommand("F7");
         menuItem.setMnemonic(KeyEvent.VK_M);
         skipMenu.add(menuItem);
         menuItem.addActionListener(skipListener);
 
-        menuItem = new JMenuItem("<html><b>F9</b> - Everything until your own next turn");
+        menuItem = new JMenuItem("<html><b>F9</b> - " + java.util.ResourceBundle.getBundle("otherMessage").getString("lblSkipEverythingUntilYourNextTurn"));
         menuItem.setActionCommand("F9");
         menuItem.setToolTipText(everythingTooltipText);
         menuItem.setMnemonic(KeyEvent.VK_V);
         skipMenu.add(menuItem);
         menuItem.addActionListener(skipListener);
 
-        menuItem = new JMenuItem("<html><b>F11</b> - Everything until end step prior to your own next turn");
+        menuItem = new JMenuItem("<html><b>F11</b> - " + java.util.ResourceBundle.getBundle("otherMessage").getString("lblSkipUntilYourNextTurnProirEndStep"));
         menuItem.setActionCommand("F11");
         menuItem.setToolTipText(everythingTooltipText);
         menuItem.setMnemonic(KeyEvent.VK_P);
@@ -232,15 +232,13 @@ public class PlayAreaPanel extends javax.swing.JPanel {
 
         popupMenu.addSeparator();
 
-        JMenu manaPoolMenu = new JMenu("Mana payment");
+        JMenu manaPoolMenu = new JMenu(java.util.ResourceBundle.getBundle("otherMessage").getString("lblManaPayment"));
         manaPoolMenu.setMnemonic(KeyEvent.VK_M);
         popupMenu.add(manaPoolMenu);
 
-        manaPoolMenuItem1 = new JCheckBoxMenuItem("Automatically", true);
+        manaPoolMenuItem1 = new JCheckBoxMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblAutoPay"), true);
         manaPoolMenuItem1.setMnemonic(KeyEvent.VK_A);
-        manaPoolMenuItem1.setToolTipText("<html>If not active, produced mana goes only to the mana pool<br>"
-                + "and you have to click the type of mana you want to use <br>"
-                + "in the player mana pool panel for payment.");
+        manaPoolMenuItem1.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("htmlAutomaticallyPayDest"));
         manaPoolMenu.add(manaPoolMenuItem1);
 
         // Auto pay mana from mana pool
@@ -251,11 +249,9 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             SessionHandler.sendPlayerAction(manaPoolAutomatic ? PlayerAction.MANA_AUTO_PAYMENT_ON : PlayerAction.MANA_AUTO_PAYMENT_OFF, gameId, null);
         });
 
-        manaPoolMenuItem2 = new JCheckBoxMenuItem("No automatic usage for mana already in the pool", true);
+        manaPoolMenuItem2 = new JCheckBoxMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblNoAlreadyAutoPayMana"), true);
         manaPoolMenuItem2.setMnemonic(KeyEvent.VK_N);
-        manaPoolMenuItem2.setToolTipText("<html>Mana that is already in the mana pool as you start casting a spell or activating an ability<br>"
-                + " needs to be payed manually. So you use the mana in the pool only by clicking on the related<br>"
-                + " mana symbols of mana pool area.");
+        manaPoolMenuItem2.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("htmlNoAlreadyAutoPayManaDest"));
         manaPoolMenu.add(manaPoolMenuItem2);
 
         // Auto pay mana from mana pool
@@ -266,11 +262,9 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             SessionHandler.sendPlayerAction(manaPoolAutomaticRestricted ? PlayerAction.MANA_AUTO_PAYMENT_RESTRICTED_ON : PlayerAction.MANA_AUTO_PAYMENT_RESTRICTED_OFF, gameId, null);
         });
 
-        useFirstManaAbilityItem = new JCheckBoxMenuItem("Use first mana ability when tapping lands", false);
+        useFirstManaAbilityItem = new JCheckBoxMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblFirstUseManaAbilityWhenTapLands"), false);
         useFirstManaAbilityItem.setMnemonic(KeyEvent.VK_F);
-        useFirstManaAbilityItem.setToolTipText("<html>Use the first mana ability when<br>"
-                + " tapping lands for mana<br>"
-                + "You can hold Alt+1 whilst tapping lands to use this feature");
+        useFirstManaAbilityItem.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("htmlFirstUseManaAbilityWhenTapLandsDest"));
         manaPoolMenu.add(useFirstManaAbilityItem);
 
         // Use first mana ability of lands
@@ -281,46 +275,46 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             SessionHandler.sendPlayerAction(useFirstManaAbility ? PlayerAction.USE_FIRST_MANA_ABILITY_ON : PlayerAction.USE_FIRST_MANA_ABILITY_OFF, gameId, null);
         });
 
-        JMenu automaticConfirmsMenu = new JMenu("Automatic confirms");
+        JMenu automaticConfirmsMenu = new JMenu(java.util.ResourceBundle.getBundle("otherMessage").getString("lblAutoConfirms"));
         automaticConfirmsMenu.setMnemonic(KeyEvent.VK_U);
         popupMenu.add(automaticConfirmsMenu);
 
-        menuItem = new JMenuItem("Replacement effects - reset auto select");
+        menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblResetAutoSelectReplacementEffects"));
         menuItem.setMnemonic(KeyEvent.VK_R);
-        menuItem.setToolTipText("Reset all effects that were added to the list of auto select replacement effects this game.");
+        menuItem.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblResetAutoSelectReplacementEffectsDest"));
         automaticConfirmsMenu.add(menuItem);
         // Reset the replacement effcts that were auto selected for the game
         menuItem.addActionListener(e -> SessionHandler.sendPlayerAction(PlayerAction.RESET_AUTO_SELECT_REPLACEMENT_EFFECTS, gameId, null));
 
-        menuItem = new JMenuItem("Triggered abilities - reset auto stack order");
+        menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblResetAutoSelectTriggeredAbilitiesOrder"));
         menuItem.setMnemonic(KeyEvent.VK_T);
-        menuItem.setToolTipText("Deletes all triggered ability order settings you added during the game.");
+        menuItem.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblResetAutoSelectTriggeredAbilitiesOrderDest"));
         automaticConfirmsMenu.add(menuItem);
         // Reset the replacement effcts that were auto selected for the game
         menuItem.addActionListener(e -> SessionHandler.sendPlayerAction(PlayerAction.TRIGGER_AUTO_ORDER_RESET_ALL, gameId, null));
 
-        menuItem = new JMenuItem("Use requests - reset automatic answers");
+        menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblResetAutoAnswersRequests"));
         menuItem.setMnemonic(KeyEvent.VK_T);
-        menuItem.setToolTipText("Deletes all defined automatic answers for Yes/No usage requests.");
+        menuItem.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblResetAutoAnswersRequestsDest"));
         automaticConfirmsMenu.add(menuItem);
         // Reset the replacement effcts that were auto selected for the game
         menuItem.addActionListener(e -> SessionHandler.sendPlayerAction(PlayerAction.REQUEST_AUTO_ANSWER_RESET_ALL, gameId, null));
 
-        JMenu handCardsMenu = new JMenu("Cards on hand");
+        JMenu handCardsMenu = new JMenu(java.util.ResourceBundle.getBundle("otherMessage").getString("lblHand"));
         handCardsMenu.setMnemonic(KeyEvent.VK_H);
         popupMenu.add(handCardsMenu);
 
         if (!options.playerItself) {
-            menuItem = new JMenuItem("Request permission to see the hand cards");
+            menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblRequestSeeHandPermission"));
             menuItem.setMnemonic(KeyEvent.VK_P);
             handCardsMenu.add(menuItem);
 
             // Request to see hand cards
             menuItem.addActionListener(e -> SessionHandler.sendPlayerAction(PlayerAction.REQUEST_PERMISSION_TO_SEE_HAND_CARDS, gameId, playerId));
         } else {
-            allowViewHandCardsMenuItem = new JCheckBoxMenuItem("Allow hand requests from other users", allowRequestToShowHandCards);
+            allowViewHandCardsMenuItem = new JCheckBoxMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblAllowSeeHandRequests"), allowRequestToShowHandCards);
             allowViewHandCardsMenuItem.setMnemonic(KeyEvent.VK_A);
-            allowViewHandCardsMenuItem.setToolTipText("Watchers or other players can request your hand cards once per game. Re-activate it to allow new requests.");
+            allowViewHandCardsMenuItem.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblAllowSeeHandRequestsDest"));
             handCardsMenu.add(allowViewHandCardsMenuItem);
 
             // requests allowed (disable -> enable to reset requested list)
@@ -330,9 +324,9 @@ public class PlayAreaPanel extends javax.swing.JPanel {
                 SessionHandler.sendPlayerAction(requestsAllowed ? PlayerAction.PERMISSION_REQUESTS_ALLOWED_ON : PlayerAction.PERMISSION_REQUESTS_ALLOWED_OFF, gameId, null);
             });
 
-            menuItem = new JMenuItem("Revoke all permission(s) to see your hand cards");
+            menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblRevokeAllSeeHandPermission"));
             menuItem.setMnemonic(KeyEvent.VK_R);
-            menuItem.setToolTipText("Revoke already granted permission for all spectators to see your hand cards.");
+            menuItem.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblRevokeAllAllowRequests"));
             handCardsMenu.add(menuItem);
 
             // revoke permissions to see hand cards
@@ -345,30 +339,30 @@ public class PlayAreaPanel extends javax.swing.JPanel {
                 SessionHandler.sendPlayerAction(PlayerAction.ROLLBACK_TURNS, gameId, turnsToRollBack);
             };
 
-            JMenu rollbackMainItem = new JMenu("Rollback");
+            JMenu rollbackMainItem = new JMenu(java.util.ResourceBundle.getBundle("otherMessage").getString("lblRollbacks"));
             rollbackMainItem.setMnemonic(KeyEvent.VK_R);
-            rollbackMainItem.setToolTipText("The game will be rolled back to the start of the requested turn if all players agree.");
+            rollbackMainItem.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblRollbackDest"));
             popupMenu.add(rollbackMainItem);
 
-            menuItem = new JMenuItem("To the start of the current turn");
+            menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblToCurrentTurnStart"));
             menuItem.setMnemonic(KeyEvent.VK_C);
             menuItem.setActionCommand("0");
             menuItem.addActionListener(rollBackActionListener);
             rollbackMainItem.add(menuItem);
 
-            menuItem = new JMenuItem("To the start of the previous turn");
+            menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblToPreviousTurnStart"));
             menuItem.setMnemonic(KeyEvent.VK_P);
             menuItem.setActionCommand("1");
             menuItem.addActionListener(rollBackActionListener);
             rollbackMainItem.add(menuItem);
 
-            menuItem = new JMenuItem("The current turn and the 2 turns before");
+            menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblToBefore2TurnStart"));
             menuItem.setMnemonic(KeyEvent.VK_2);
             menuItem.setActionCommand("2");
             menuItem.addActionListener(rollBackActionListener);
             rollbackMainItem.add(menuItem);
 
-            menuItem = new JMenuItem("The current turn and the 3 turns before");
+            menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblToBefore3TurnStart"));
             menuItem.setMnemonic(KeyEvent.VK_3);
             menuItem.setActionCommand("3");
             menuItem.addActionListener(rollBackActionListener);
@@ -376,24 +370,24 @@ public class PlayAreaPanel extends javax.swing.JPanel {
 
         }
 
-        JMenu concedeMenu = new JMenu("Concede");
+        JMenu concedeMenu = new JMenu(java.util.ResourceBundle.getBundle("otherMessage").getString("lblConcede"));
         concedeMenu.setMnemonic(KeyEvent.VK_C);
         popupMenu.add(concedeMenu);
 
         ActionListener concedeListener = e -> {
             switch (e.getActionCommand()) {
                 case "Game": {
-                    UserRequestMessage message = new UserRequestMessage("Confirm concede game", "Are you sure you want to concede the game?");
-                    message.setButton1("No", null);
-                    message.setButton2("Yes", PlayerAction.CLIENT_CONCEDE_GAME);
+                    UserRequestMessage message = new UserRequestMessage(java.util.ResourceBundle.getBundle("otherMessage").getString("lblConfirmConcedeGame"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblAreYouSureConcedeGame"));
+                    message.setButton1(java.util.ResourceBundle.getBundle("otherMessage").getString("lblNo"), null);
+                    message.setButton2(java.util.ResourceBundle.getBundle("otherMessage").getString("lblYes"), PlayerAction.CLIENT_CONCEDE_GAME);
                     message.setGameId(gameId);
                     MageFrame.getInstance().showUserRequestDialog(message);
                     break;
                 }
                 case "Match": {
-                    UserRequestMessage message = new UserRequestMessage("Confirm concede match", "Are you sure you want to concede the complete match?");
-                    message.setButton1("No", null);
-                    message.setButton2("Yes", PlayerAction.CLIENT_CONCEDE_MATCH);
+                    UserRequestMessage message = new UserRequestMessage(java.util.ResourceBundle.getBundle("otherMessage").getString("lblConfirmConcedeMatch"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblAreYouSureConcedeMatch"));
+                    message.setButton1(java.util.ResourceBundle.getBundle("otherMessage").getString("lblNo"), null);
+                    message.setButton2(java.util.ResourceBundle.getBundle("otherMessage").getString("lblYes"), PlayerAction.CLIENT_CONCEDE_MATCH);
                     message.setGameId(gameId);
                     MageFrame.getInstance().showUserRequestDialog(message);
                     break;
@@ -404,18 +398,18 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         };
 
         // Concede Game
-        menuItem = new JMenuItem("Game");
+        menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblGame"));
         menuItem.setMnemonic(KeyEvent.VK_G);
         menuItem.setActionCommand("Game");
-        menuItem.setToolTipText("Concedes only the current game and after that the next game of the match is started if there is another game needed.");
+        menuItem.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblConcedeGameDest"));
         concedeMenu.add(menuItem);
         menuItem.addActionListener(concedeListener);
 
         // Concede Match
-        menuItem = new JMenuItem("Match");
+        menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblMatch"));
         menuItem.setMnemonic(KeyEvent.VK_M);
         menuItem.setActionCommand("Match");
-        menuItem.setToolTipText("Concedes the complete match. So if you're in a tournament you finish the current tournament round.");
+        menuItem.setToolTipText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblConcedeMatchDest"));
         concedeMenu.add(menuItem);
         menuItem.addActionListener(concedeListener);
 
@@ -441,7 +435,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
 
         popupMenu.addSeparator();
 
-        menuItem = new JMenuItem("<html>View current deck");
+        menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("htmlViewCurrentDeck"));
         menuItem.setMnemonic(KeyEvent.VK_V);
         popupMenu.add(menuItem);
 
@@ -454,19 +448,19 @@ public class PlayAreaPanel extends javax.swing.JPanel {
     private void addPopupMenuWatcher() {
         JMenuItem menuItem;
 
-        menuItem = new JMenuItem("Stop watching");
+        menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblStopWatching"));
         popupMenu.add(menuItem);
 
         // Stop watching
         menuItem.addActionListener(e -> {
-            UserRequestMessage message = new UserRequestMessage("Confirm stop watching game", "Are you sure you want to stop watching the game?");
-            message.setButton1("No", null);
-            message.setButton2("Yes", PlayerAction.CLIENT_STOP_WATCHING);
+            UserRequestMessage message = new UserRequestMessage(java.util.ResourceBundle.getBundle("otherMessage").getString("lblConfirmStopWatching"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblAreYouSureStopWatching"));
+            message.setButton1(java.util.ResourceBundle.getBundle("otherMessage").getString("lblNo"), null);
+            message.setButton2(java.util.ResourceBundle.getBundle("otherMessage").getString("lblYes"), PlayerAction.CLIENT_STOP_WATCHING);
             message.setGameId(gameId);
             MageFrame.getInstance().showUserRequestDialog(message);
         });
 
-        menuItem = new JMenuItem("Request permission to see hand cards");
+        menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblRequestSeeHandPermission"));
         popupMenu.add(menuItem);
 
         // Request to see hand cards

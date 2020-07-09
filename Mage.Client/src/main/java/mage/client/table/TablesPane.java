@@ -47,7 +47,7 @@ public class TablesPane extends MagePane {
     public void showTables() {
         UUID roomId = SessionHandler.getSession().getMainRoomId();
         if (roomId != null) {
-            this.setTitle("Tables");
+            this.setTitle(java.util.ResourceBundle.getBundle("otherMessage").getString("lblTables"));
             tablesPanel.showTables(roomId);
             this.repaint();
         }

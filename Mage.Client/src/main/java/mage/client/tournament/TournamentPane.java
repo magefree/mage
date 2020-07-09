@@ -1,10 +1,9 @@
 
-
- /*
- * TournamentPane.java
- *
- * Created on 22-Jan-2011, 11:41:47 PM
- */
+/*
+* TournamentPane.java
+*
+* Created on 22-Jan-2011, 11:41:47 PM
+*/
 package mage.client.tournament;
 
 import java.util.UUID;
@@ -24,7 +23,7 @@ public class TournamentPane extends MagePane {
     }
 
     public void showTournament(UUID tournamentId) {
-        this.setTitle("Tournament " + tournamentId);
+        this.setTitle(java.util.ResourceBundle.getBundle("otherMessage").getString("lblTournament") + " " + tournamentId);
         this.tournamentPanel.showTournament(tournamentId);
         this.repaint();
     }

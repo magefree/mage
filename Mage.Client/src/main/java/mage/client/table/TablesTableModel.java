@@ -16,13 +16,13 @@ public class TablesTableModel extends AbstractTableModel {
     final ImageIcon tourneyIcon = new ImageIcon(getClass().getResource("/tables/tourney_icon.png")) {
         @Override
         public String toString() {
-            return "Tourney";
+            return java.util.ResourceBundle.getBundle("otherMessage").getString("lblTournament");
         }
     };
     final ImageIcon matchIcon = new ImageIcon(getClass().getResource("/tables/match_icon.png")) {
         @Override
         public String toString() {
-            return "Match";
+            return java.util.ResourceBundle.getBundle("otherMessage").getString("lblMatch");
         }
     };
 
@@ -42,12 +42,12 @@ public class TablesTableModel extends AbstractTableModel {
     public static final int COLUMN_MINIMUM_RATING = 13;
     public static final int ACTION_COLUMN = 14; // column the action is located (starting with 0)
 
-    public static final String RATED_VALUE_YES = "YES";
+    public static final String RATED_VALUE_YES = "Yes";
     public static final String RATED_VALUE_NO = "";
 
-    public static final String PASSWORD_VALUE_YES = "YES";
+    public static final String PASSWORD_VALUE_YES = "Yes";
 
-    private final String[] columnNames = new String[]{"M/T", "Deck Type", "Name", "Seats", "Owner / Players", "Game Type", "Info", "Status", "Password", "Created / Started", "Skill Level", "Rated", "Quit %", "Min Rating", "Action"};
+    private final String[] columnNames = new String[]{"lblMatchOrTournament", "lblDeckType", "lblName", "lblSeats", "lblOwnerOrPlayers", "lblGameType", "lblInformation", "lblState", "lblPassword", "lblCreatedOrStarted", "lblSkillLevel", "lblRated", "lblQuitPercent", "lblMinRating", "lblAction"};
 
     private TableView[] tables = new TableView[0];
 
@@ -155,22 +155,22 @@ public class TablesTableModel extends AbstractTableModel {
                         if (SessionHandler.getSession() != null && owner.equals(SessionHandler.getUserName())) {
                             return "";
                         }
-                        return "Join";
+                        return TableAction.getName(TableAction.Join);
                     case CONSTRUCTING:
                     case DRAFTING:
                         if (tables[rowIndex].isTournament()) {
-                            return "Show";
+                            return TableAction.getName(TableAction.Show);
                         }
                     case DUELING:
                         if (tables[rowIndex].isTournament()) {
-                            return "Show";
+                            return TableAction.getName(TableAction.Show);
                         } else {
                             owner = tables[rowIndex].getControllerName();
                             if (SessionHandler.getSession() != null && owner.equals(SessionHandler.getUserName())) {
                                 return "";
                             }
                             if (tables[rowIndex].getSpectatorsAllowed()) {
-                                return "Watch";
+                                return TableAction.getName(TableAction.Watch);
                             }
                             return "";
                         }
@@ -195,7 +195,7 @@ public class TablesTableModel extends AbstractTableModel {
         String colName = "";
 
         if (columnIndex <= getColumnCount()) {
-            colName = columnNames[columnIndex];
+            colName = java.util.ResourceBundle.getBundle("otherMessage").getString(columnNames[columnIndex]);
         }
 
         return colName;

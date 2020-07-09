@@ -66,115 +66,127 @@ public class RegisterUserDialog extends MageDialog {
         lblEmailReasoning = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Register");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("SwingMessage"); // NOI18N
+        setTitle(bundle.getString("RegisterUserDialog.title")); // NOI18N
 
         lblServer.setLabelFor(txtServer);
-        lblServer.setText("Server:");
+        lblServer.setText(bundle.getString("RegisterUserDialog.lblServer.text")); // NOI18N
 
         lblPort.setLabelFor(txtPort);
-        lblPort.setText("Port:");
+        lblPort.setText(bundle.getString("RegisterUserDialog.lblPort.text")); // NOI18N
 
         lblUserName.setLabelFor(txtUserName);
-        lblUserName.setText("User name:");
+        lblUserName.setText(bundle.getString("RegisterUserDialog.lblUserName.text")); // NOI18N
 
         lblPassword.setLabelFor(txtPassword);
-        lblPassword.setText("Password:");
+        lblPassword.setText(bundle.getString("RegisterUserDialog.lblPassword.text")); // NOI18N
 
-        txtUserName.addActionListener(evt -> txtUserNameActionPerformed(evt));
+        txtUserName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUserNameActionPerformed(evt);
+            }
+        });
 
-        btnRegister.setText("Register");
-        btnRegister.addActionListener(evt -> btnRegisterActionPerformed(evt));
+        btnRegister.setText(bundle.getString("RegisterUserDialog.btnRegister.text")); // NOI18N
+        btnRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegisterActionPerformed(evt);
+            }
+        });
 
-        btnCancel.setText("Cancel");
-        btnCancel.addActionListener(evt -> btnCancelActionPerformed(evt));
+        btnCancel.setText(bundle.getString("RegisterUserDialog.btnCancel.text")); // NOI18N
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
 
-        lblStatus.setToolTipText("");
+        lblStatus.setToolTipText(bundle.getString("RegisterUserDialog.lblStatus.toolTipText")); // NOI18N
 
         lblPasswordConfirmation.setLabelFor(txtPasswordConfirmation);
-        lblPasswordConfirmation.setText("Password:");
+        lblPasswordConfirmation.setText(bundle.getString("RegisterUserDialog.lblPasswordConfirmation.text")); // NOI18N
 
         lblEmail.setLabelFor(txtEmail);
-        lblEmail.setText("Email:");
+        lblEmail.setText(bundle.getString("RegisterUserDialog.lblEmail.text")); // NOI18N
 
         lblPasswordConfirmationReasoning.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
         lblPasswordConfirmationReasoning.setLabelFor(txtPasswordConfirmation);
-        lblPasswordConfirmationReasoning.setText("(confirmation)");
+        lblPasswordConfirmationReasoning.setText(bundle.getString("RegisterUserDialog.lblPasswordConfirmationReasoning.text")); // NOI18N
 
         lblEmailReasoning.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
         lblEmailReasoning.setLabelFor(txtEmail);
-        lblEmailReasoning.setText("(used for password reset and sending initial password)");
-        lblEmailReasoning.setToolTipText("");
+        lblEmailReasoning.setText(bundle.getString("RegisterUserDialog.lblEmailReasoning.text")); // NOI18N
+        lblEmailReasoning.setToolTipText(bundle.getString("RegisterUserDialog.lblEmailReasoning.toolTipText")); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(lblPasswordConfirmationReasoning)
                         .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addComponent(lblPasswordConfirmationReasoning)
-                                                .addGroup(layout.createSequentialGroup()
-                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                                .addComponent(lblServer)
-                                                                .addComponent(lblUserName)
-                                                                .addComponent(lblPort)
-                                                                .addComponent(lblPassword)
-                                                                .addComponent(lblPasswordConfirmation)
-                                                                .addComponent(lblEmail))
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                                .addComponent(txtServer, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addComponent(txtPort, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addComponent(txtPasswordConfirmation, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                                .addComponent(lblEmailReasoning)
-                                                .addGroup(layout.createSequentialGroup()
-                                                        .addComponent(btnRegister)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addComponent(btnCancel)))
-                                        .addComponent(lblStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addContainerGap(22, Short.MAX_VALUE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(lblServer)
+                                .addComponent(lblUserName)
+                                .addComponent(lblPort)
+                                .addComponent(lblPassword)
+                                .addComponent(lblPasswordConfirmation)
+                                .addComponent(lblEmail))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtServer, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtPort, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtPasswordConfirmation, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lblEmailReasoning)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(btnRegister)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(btnCancel)))
+                    .addComponent(lblStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(9, 9, 9)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(lblServer)
-                                        .addComponent(txtServer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(lblPort)
-                                        .addComponent(txtPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(lblUserName)
-                                        .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(lblPassword)
-                                        .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(txtPasswordConfirmation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(lblPasswordConfirmation))
-                                .addComponent(lblPasswordConfirmationReasoning)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(lblEmail)
-                                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblEmailReasoning)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(btnCancel)
-                                        .addComponent(btnRegister))
-                                .addContainerGap())
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(9, 9, 9)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblServer)
+                    .addComponent(txtServer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPort)
+                    .addComponent(txtPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblUserName)
+                    .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPassword)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPasswordConfirmation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPasswordConfirmation))
+                .addComponent(lblPasswordConfirmationReasoning)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblEmail)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(lblEmailReasoning)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCancel)
+                    .addComponent(btnRegister))
+                .addContainerGap())
         );
 
         pack();
@@ -190,7 +202,7 @@ public class RegisterUserDialog extends MageDialog {
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         if (!Arrays.equals(this.txtPassword.getPassword(), this.txtPasswordConfirmation.getPassword())) {
-            MageFrame.getInstance().showError("Passwords don't match.");
+            MageFrame.getInstance().showError(java.util.ResourceBundle.getBundle("otherMessage").getString("lblPasswordsDontMatch"));
             return;
         }
         connection = new Connection();
@@ -212,7 +224,7 @@ public class RegisterUserDialog extends MageDialog {
 
         @Override
         protected Boolean doInBackground() throws Exception {
-            lblStatus.setText("Connecting...");
+            lblStatus.setText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblConnecting"));
             btnRegister.setEnabled(false);
             result = SessionHandler.register(connection);
             return result;
@@ -230,20 +242,20 @@ public class RegisterUserDialog extends MageDialog {
                     MagePreferences.setPassword(connection.getHost(), connection.getPassword());
                     MagePreferences.setEmail(connection.getHost(), connection.getEmail());
 
-                    String message = "Registration succeeded";
+                    String message = java.util.ResourceBundle.getBundle("otherMessage").getString("lblRegistrationSucceeded");
                     lblStatus.setText(message);
                     MageFrame.getInstance().showMessage(message);
                     hideDialog();
                 } else {
-                    lblStatus.setText("Could not register");
+                    lblStatus.setText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblCouldNotRegister"));
                 }
             } catch (InterruptedException | ExecutionException ex) {
                 logger.fatal("Registration task error", ex);
             } catch (CancellationException ex) {
                 logger.info("Registration was canceled");
-                lblStatus.setText("Registration was canceled (but an account might have been actually created)");
+                lblStatus.setText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblRegistrationWasCanceled"));
             } catch (TimeoutException ex) {
-                logger.fatal("Registration timeout: ", ex);
+                logger.fatal(java.util.ResourceBundle.getBundle("otherMessage").getString("lblRegistrationTimeout") + ": ", ex);
             } finally {
                 MageFrame.stopConnecting();
                 btnRegister.setEnabled(true);

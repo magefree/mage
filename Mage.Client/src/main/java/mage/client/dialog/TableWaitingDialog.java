@@ -190,27 +190,44 @@ public class TableWaitingDialog extends MageDialog {
         chatPanel = new mage.client.chat.ChatPanelBasic();
 
         setResizable(true);
-        setTitle("Waiting for players");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("SwingMessage"); // NOI18N
+        setTitle(bundle.getString("TableWaitingDialog.title")); // NOI18N
 
-        btnMoveUp.setText("Move Up");
+        btnMoveUp.setText(bundle.getString("TableWaitingDialog.btnMoveUp.text")); // NOI18N
         btnMoveUp.setEnabled(false);
-        btnMoveUp.addActionListener(evt -> btnMoveUpActionPerformed(evt));
+        btnMoveUp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMoveUpActionPerformed(evt);
+            }
+        });
 
-        btnMoveDown.setText("Move Down");
+        btnMoveDown.setText(bundle.getString("TableWaitingDialog.btnMoveDown.text")); // NOI18N
         btnMoveDown.setEnabled(false);
-        btnMoveDown.addActionListener(evt -> btnMoveDownActionPerformed(evt));
+        btnMoveDown.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMoveDownActionPerformed(evt);
+            }
+        });
 
-        btnCancel.setText("Cancel");
-        btnCancel.addActionListener(evt -> btnCancelActionPerformed(evt));
+        btnCancel.setText(bundle.getString("TableWaitingDialog.btnCancel.text")); // NOI18N
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
 
-        btnStart.setText("Start");
+        btnStart.setText(bundle.getString("TableWaitingDialog.btnStart.text")); // NOI18N
         btnStart.setEnabled(false);
-        btnStart.addActionListener(evt -> btnStartActionPerformed(evt));
+        btnStart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStartActionPerformed(evt);
+            }
+        });
 
         jSplitPane1.setDividerLocation(300);
         jSplitPane1.setDividerSize(3);
         jSplitPane1.setResizeWeight(1.0);
-        jSplitPane1.setToolTipText("");
+        jSplitPane1.setToolTipText(bundle.getString("TableWaitingDialog.jSplitPane1.toolTipText")); // NOI18N
 
         jTableSeats.setModel(tableWaitModel);
         jTableSeats.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -222,30 +239,30 @@ public class TableWaitingDialog extends MageDialog {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(btnMoveDown)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnMoveUp)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnStart)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnCancel)
-                                .addContainerGap())
-                        .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnMoveDown)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnMoveUp)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnStart)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCancel)
+                .addContainerGap())
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(btnMoveDown)
-                                        .addComponent(btnMoveUp)
-                                        .addComponent(btnCancel)
-                                        .addComponent(btnStart))
-                                .addContainerGap())
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnMoveDown)
+                    .addComponent(btnMoveUp)
+                    .addComponent(btnCancel)
+                    .addComponent(btnStart))
+                .addContainerGap())
         );
 
         pack();

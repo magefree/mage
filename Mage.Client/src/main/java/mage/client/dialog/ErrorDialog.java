@@ -1,6 +1,4 @@
 
-
-
 /*
  * ErrorDialog.java
  *
@@ -8,6 +6,7 @@
  */
 
 package mage.client.dialog;
+
 
 /**
  *
@@ -47,24 +46,29 @@ public class ErrorDialog extends MageDialog {
         jTextArea1 = new javax.swing.JTextArea();
 
         setResizable(true);
-        setTitle("Error");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("SwingMessage"); // NOI18N
+        setTitle(bundle.getString("ErrorDialog.title")); // NOI18N
 
-        btnOK.setText("OK");
-        btnOK.addActionListener(this::btnOKActionPerformed);
+        btnOK.setText(bundle.getString("ErrorDialog.btnOK.text")); // NOI18N
+        btnOK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOKActionPerformed(evt);
+            }
+        });
 
-        lblMessage.setColumns(20);
         lblMessage.setEditable(false);
-        lblMessage.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        lblMessage.setColumns(20);
+        lblMessage.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblMessage.setLineWrap(true);
         lblMessage.setRows(5);
         lblMessage.setWrapStyleWord(true);
         jScrollPane1.setViewportView(lblMessage);
 
-        jTextArea1.setColumns(20);
         jTextArea1.setEditable(false);
-        jTextArea1.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         jTextArea1.setRows(2);
-        jTextArea1.setText("An error has occurred on the MAGE server. Your last action will be rollbacked.\nPlease post the following report here: http://www.slightlymagic.net/forum/posting.php?mode=reply&f=70&t=3116");
+        jTextArea1.setText(bundle.getString("ErrorDialog.jTextArea1.text")); // NOI18N
         jScrollPane2.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -74,23 +78,18 @@ public class ErrorDialog extends MageDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 647, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 647, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 647, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 647, Short.MAX_VALUE)
+                    .addComponent(btnOK, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(6, 6, 6)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnOK)
                 .addGap(12, 12, 12))

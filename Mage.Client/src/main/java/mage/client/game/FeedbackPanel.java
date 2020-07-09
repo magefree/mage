@@ -1,10 +1,9 @@
 
-
- /*
- * FeedbackPanel.java
- *
- * Created on 23-Dec-2009, 9:54:01 PM
- */
+/*
+* FeedbackPanel.java
+*
+* Created on 23-Dec-2009, 9:54:01 PM
+*/
 package mage.client.game;
 
 import java.awt.Component;
@@ -91,23 +90,23 @@ public class FeedbackPanel extends javax.swing.JPanel {
                 setButtonState("", "", mode);
                 break;
             case QUESTION:
-                setButtonState("Yes", "No", mode);
+                setButtonState(java.util.ResourceBundle.getBundle("otherMessage").getString("lblYes"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblNo"), mode);
                 if (options != null && options.containsKey(ORIGINAL_ID)) {
                     this.helper.setOriginalId((UUID) options.get(ORIGINAL_ID));
                 }
                 break;
             case CONFIRM:
-                setButtonState("OK", "Cancel", mode);
+                setButtonState(java.util.ResourceBundle.getBundle("otherMessage").getString("lblOK"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblCancel"), mode);
                 break;
             case CANCEL:
-                setButtonState("", "Cancel", mode);
+                setButtonState("", java.util.ResourceBundle.getBundle("otherMessage").getString("lblCancel"), mode);
                 this.helper.setUndoEnabled(false);
                 break;
             case SELECT:
-                setButtonState("", "Done", mode);
+                setButtonState("", java.util.ResourceBundle.getBundle("otherMessage").getString("lblDone"), mode);
                 break;
             case END:
-                setButtonState("", "Close game", mode);
+                setButtonState("", java.util.ResourceBundle.getBundle("otherMessage").getString("lblCloseGame"), mode);
                 ArrowBuilder.getBuilder().removeAllArrows(gameId);
                 endWithTimeout();
                 break;
@@ -229,16 +228,16 @@ public class FeedbackPanel extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(0, 0, 0, 80));
 
-        btnRight.setText("Cancel");
+        btnRight.setText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblCancel"));
         btnRight.addActionListener(evt -> btnRightActionPerformed(evt));
 
-        btnLeft.setText("OK");
+        btnLeft.setText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblOK"));
         btnLeft.addActionListener(evt -> btnLeftActionPerformed(evt));
 
-        btnSpecial.setText("Special");
+        btnSpecial.setText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblSpecial"));
         btnSpecial.addActionListener(evt -> btnSpecialActionPerformed(evt));
 
-        btnUndo.setText("Undo");
+        btnUndo.setText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblUndo"));
         btnUndo.addActionListener(evt -> btnUndoActionPerformed(evt));
 
     }
@@ -287,9 +286,9 @@ public class FeedbackPanel extends javax.swing.JPanel {
     }
 
     public void pressOKYesOrDone() {
-        if (btnLeft.getText().equals("OK") || btnLeft.getText().equals("Yes")) {
+        if (btnLeft.getText().equals(java.util.ResourceBundle.getBundle("otherMessage").getString("lblOK")) || btnLeft.getText().equals(java.util.ResourceBundle.getBundle("otherMessage").getString("lblYes"))) {
             btnLeft.doClick();
-        } else if (btnRight.getText().equals("OK") || btnRight.getText().equals("Yes") || btnRight.getText().equals("Done")) {
+        } else if (btnRight.getText().equals(java.util.ResourceBundle.getBundle("otherMessage").getString("lblOK")) || btnRight.getText().equals(java.util.ResourceBundle.getBundle("otherMessage").getString("lblYes")) || btnRight.getText().equals(java.util.ResourceBundle.getBundle("otherMessage").getString("lblDone"))) {
             btnRight.doClick();
         }
     }

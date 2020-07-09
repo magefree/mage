@@ -357,7 +357,7 @@ public class ChatPanelBasic extends javax.swing.JPanel {
 
         txtConversation.setEditable(false);
         txtConversation.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        txtConversation.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtConversation.setFont(new java.awt.Font("Microsoft YaHei", 0, 14)); // NOI18N
         txtConversation.setFocusCycleRoot(false);
         txtConversation.setMargin(new java.awt.Insets(2, 2, 2, 2));
         txtConversation.setOpaque(false);

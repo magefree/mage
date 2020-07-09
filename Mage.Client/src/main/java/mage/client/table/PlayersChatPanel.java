@@ -31,37 +31,37 @@ public class PlayersChatPanel extends javax.swing.JPanel {
     private final List<String> players = new ArrayList<>();
     private final UserTableModel userTableModel;
     private static final TableInfo tableInfo = new TableInfo()
-            .addColumn(0, 20, Icon.class, "Flag", null)
-            .addColumn(1, 100, String.class, "Players",
+            .addColumn(0, 20, Icon.class, java.util.ResourceBundle.getBundle("otherMessage").getString("lblFlag"), null)
+            .addColumn(1, 100, String.class, java.util.ResourceBundle.getBundle("otherMessage").getString("lblPlayers"),
                     "<b>User name</b>"
-                            + "<br>(the number behind the header text is the number of users online)")
-            .addColumn(2, 40, Integer.class, "Constructed Rating", null)
-            .addColumn(3, 40, Integer.class, "Limited Rating", null)
-            .addColumn(4, 40, String.class, "Matches",
+                    + "<br>(the number behind the header text is the number of users online)")
+            .addColumn(2, 40, Integer.class, java.util.ResourceBundle.getBundle("otherMessage").getString("lblConstructedRating"), null)
+            .addColumn(3, 40, Integer.class, java.util.ResourceBundle.getBundle("otherMessage").getString("lblLimitedRating"), null)
+            .addColumn(4, 40, String.class, java.util.ResourceBundle.getBundle("otherMessage").getString("lblMatches"),
                     "<b>Number of matches the user played so far</b>"
-                            + "<br>Q = number of matches quit"
-                            + "<br>I = number of matches lost because of idle timeout"
-                            + "<br>T = number of matches lost because of match timeout")
-            .addColumn(5, 100, Integer.class, "MQP",
+                    + "<br>Q = number of matches quit"
+                    + "<br>I = number of matches lost because of idle timeout"
+                    + "<br>T = number of matches lost because of match timeout")
+            .addColumn(5, 100, Integer.class, java.util.ResourceBundle.getBundle("otherMessage").getString("lblMQP"),
                     "<b>Percent-Ratio of matches played related to matches quit</b>"
-                            + "<br>this calculation does not include tournament matches")
-            .addColumn(6, 40, String.class, "Tourneys",
+                    + "<br>this calculation does not include tournament matches")
+            .addColumn(6, 40, String.class, java.util.ResourceBundle.getBundle("otherMessage").getString("lblTournaments"),
                     "<b>Number of tournaments the user played so far</b>"
-                            + "<br>D = number of tournaments left during draft phase"
-                            + "<br>C = number of tournaments left during constructing phase"
-                            + "<br>R = number of tournaments left during rounds")
-            .addColumn(7, 100, Integer.class, "TQP",
+                    + "<br>D = number of tournaments left during draft phase"
+                    + "<br>C = number of tournaments left during constructing phase"
+                    + "<br>R = number of tournaments left during rounds")
+            .addColumn(7, 100, Integer.class, java.util.ResourceBundle.getBundle("otherMessage").getString("lblTQP"),
                     "<b>Percent-Ratio of tournament matches played related to tournament matches quit</b>"
-                            + "<br>this calculation does not include non tournament matches")
-            .addColumn(8, 80, String.class, "Games",
+                    + "<br>this calculation does not include non tournament matches")
+            .addColumn(8, 80, String.class, java.util.ResourceBundle.getBundle("otherMessage").getString("lblGames"),
                     "<b>Current activities of the player</b>"
-                            + "<BR>the header itself shows the number of currently active games"
-                            + "<BR>T: = number of games threads "
-                            + "<BR><i>(that can vary from active games because of sideboarding or crashed games)</i>"
-                            + "<BR>limt: the maximum of games the server is configured to"
-                            + "<BR><i>(if the number of started games exceed that limit, the games have to wait"
-                            + "<BR>until active games end)</i>")
-            .addColumn(9, 80, String.class, "Ping", null);
+                    + "<BR>the header itself shows the number of currently active games"
+                    + "<BR>T: = number of games threads "
+                    + "<BR><i>(that can vary from active games because of sideboarding or crashed games)</i>"
+                    + "<BR>limt: the maximum of games the server is configured to"
+                    + "<BR><i>(if the number of started games exceed that limit, the games have to wait"
+                    + "<BR>until active games end)</i>")
+            .addColumn(9, 80, String.class, java.util.ResourceBundle.getBundle("otherMessage").getString("lblPing"), null);
 
     public PlayersChatPanel() {
         userTableModel = new UserTableModel(); // needs to be set before initComponents();
@@ -143,11 +143,25 @@ public class PlayersChatPanel extends javax.swing.JPanel {
             JTableHeader th = jTablePlayers.getTableHeader();
             TableColumnModel tcm = th.getColumnModel();
 
-            tcm.getColumn(jTablePlayers.convertColumnIndexToView(tableInfo.getColumnByName("Players").getIndex())).setHeaderValue("Players (" + this.players.length + ')');
-            tcm.getColumn(jTablePlayers.convertColumnIndexToView(tableInfo.getColumnByName("Games").getIndex())).setHeaderValue("Games "
-                    + roomUserInfo.getNumberActiveGames()
-                    + (roomUserInfo.getNumberActiveGames() != roomUserInfo.getNumberGameThreads() ? " (T:" + roomUserInfo.getNumberGameThreads() : " (")
-                    + " limit: " + roomUserInfo.getNumberMaxGames() + ')');
+            tcm.getColumn(jTablePlayers.convertColumnIndexToView(
+                    tableInfo.getColumnByName(java.util.ResourceBundle.getBundle("otherMessage").getString("lblPlayers")).getIndex())
+            ).setHeaderValue(java.text.MessageFormat.format(
+                    java.util.ResourceBundle.getBundle("otherMessage").getString("lblPlayersOfN"), new Object[]{this.players.length})
+            );
+            
+            String gamesHeaderValue;
+            if (roomUserInfo.getNumberActiveGames() != roomUserInfo.getNumberGameThreads()) {
+                gamesHeaderValue = java.text.MessageFormat.format(
+                    java.util.ResourceBundle.getBundle("otherMessage").getString("lblGamesXThreadYLimitZ"),
+                    new Object[]{roomUserInfo.getNumberActiveGames(), roomUserInfo.getNumberGameThreads(), roomUserInfo.getNumberMaxGames()}
+                );
+            } else {
+                gamesHeaderValue = java.text.MessageFormat.format(
+                    java.util.ResourceBundle.getBundle("otherMessage").getString("lblGamesNLimitM"),
+                    new Object[]{roomUserInfo.getNumberActiveGames(), roomUserInfo.getNumberMaxGames()}
+                );
+            }
+            tcm.getColumn(jTablePlayers.convertColumnIndexToView(tableInfo.getColumnByName(java.util.ResourceBundle.getBundle("otherMessage").getString("lblGames")).getIndex())).setHeaderValue(gamesHeaderValue);
             th.repaint();
             this.fireTableDataChanged();
         }
@@ -219,21 +233,21 @@ public class PlayersChatPanel extends javax.swing.JPanel {
         jSpinner1 = new javax.swing.JSpinner();
         jSplitPane1 = new javax.swing.JSplitPane();
         jScrollPanePlayers = new javax.swing.JScrollPane();
-        jTablePlayers = new MageTable(tableInfo);
+        jTablePlayers = new javax.swing.JTable();
         jTabbedPaneText = new javax.swing.JTabbedPane();
         jScrollPaneTalk = new mage.client.chat.ChatPanelSeparated();
         jScrollPaneSystem = new javax.swing.JScrollPane();
         colorPaneSystem = new mage.client.components.ColorPane();
 
         jSplitPane1.setBorder(null);
-        jSplitPane1.setDividerSize(10);
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
         jSplitPane1.setResizeWeight(0.25);
 
         jScrollPanePlayers.setBorder(null);
 
         jTablePlayers.setModel(this.userTableModel);
-        jTablePlayers.setToolTipText("Connected players");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("SwingMessage"); // NOI18N
+        jTablePlayers.setToolTipText(bundle.getString("PlayersChatPanel.jTablePlayers.toolTipText")); // NOI18N
         jTablePlayers.setAutoscrolls(false);
         jTablePlayers.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jTablePlayers.setOpaque(false);
@@ -244,12 +258,12 @@ public class PlayersChatPanel extends javax.swing.JPanel {
         jTablePlayers.setUpdateSelectionOnSort(false);
         jTablePlayers.setVerifyInputWhenFocusTarget(false);
         jScrollPanePlayers.setViewportView(jTablePlayers);
-        jTablePlayers.getAccessibleContext().setAccessibleDescription("");
+        jTablePlayers.getAccessibleContext().setAccessibleDescription(bundle.getString("PlayersChatPanel.jTablePlayers.AccessibleContext.accessibleDescription")); // NOI18N
 
         jSplitPane1.setTopComponent(jScrollPanePlayers);
 
         jTabbedPaneText.setTabPlacement(javax.swing.JTabbedPane.BOTTOM);
-        jTabbedPaneText.addTab("Talk", jScrollPaneTalk);
+        jTabbedPaneText.addTab(bundle.getString("PlayersChatPanel.jScrollPaneTalk.TabConstraints.tabTitle"), jScrollPaneTalk); // NOI18N
 
         jScrollPaneSystem.setBorder(null);
         jScrollPaneSystem.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -265,21 +279,21 @@ public class PlayersChatPanel extends javax.swing.JPanel {
         colorPaneSystem.setOpaque(false);
         jScrollPaneSystem.setViewportView(colorPaneSystem);
 
-        jTabbedPaneText.addTab("System", jScrollPaneSystem);
+        jTabbedPaneText.addTab(bundle.getString("PlayersChatPanel.jScrollPaneSystem.TabConstraints.tabTitle"), jScrollPaneSystem); // NOI18N
 
         jSplitPane1.setRightComponent(jTabbedPaneText);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jSplitPane1)
-                                .addGap(0, 0, 0))
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jSplitPane1)
+                .addGap(0, 0, 0))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -299,6 +313,6 @@ public class PlayersChatPanel extends javax.swing.JPanel {
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JTabbedPane jTabbedPaneText;
-    private MageTable jTablePlayers;
+    private javax.swing.JTable jTablePlayers;
     // End of variables declaration//GEN-END:variables
 }

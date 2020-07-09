@@ -146,9 +146,9 @@ public class DraftPanel extends javax.swing.JPanel {
     public void updateDraft(DraftView draftView) {
         if (draftView.getSets().size() != 3) {
             // Random draft
-            this.txtPack1.setText("Random Boosters");
-            this.txtPack2.setText("Random Boosters");
-            this.txtPack3.setText("Random Boosters");
+            this.txtPack1.setText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblRandomBoosters"));
+            this.txtPack2.setText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblRandomBoosters"));
+            this.txtPack3.setText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblRandomBoosters"));
         } else {
             this.txtPack1.setText(draftView.getSets().get(0));
             this.txtPack2.setText(draftView.getSets().get(1));
@@ -275,7 +275,7 @@ public class DraftPanel extends javax.swing.JPanel {
                             loadCardsToPickedCardsArea(view.getPicks());
                             draftBooster.loadBooster(EMPTY_VIEW, bigCard);
                             Plugins.instance.getActionCallback().hideOpenComponents();
-                            setMessage("Waiting for other players");
+                            setMessage(java.util.ResourceBundle.getBundle("otherMessage").getString("lblWaitingOtherPlayers"));
                         }
                     }
                     if (event.getEventType() == ClientEventType.MARK_A_CARD) {
@@ -284,9 +284,9 @@ public class DraftPanel extends javax.swing.JPanel {
                     }
                 }
         );
-        setMessage("Pick a card");
+        setMessage(java.util.ResourceBundle.getBundle("otherMessage").getString("lblPickACard"));
         if (!MageFrame.getInstance().isActive()) {
-            MageTray.instance.displayMessage("Pick the next card.");
+            MageTray.instance.displayMessage(java.util.ResourceBundle.getBundle("otherMessage").getString("lblPickNextCard"));
             MageTray.instance.blink();
         }
         countdown.stop();
@@ -355,7 +355,7 @@ public class DraftPanel extends javax.swing.JPanel {
 
         JMenuItem menuItem;
 
-        menuItem = new JMenuItem("F9 - Show all hidden cards");
+        menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblF9ShowAllHihhenCards"));
         popupMenuPickedArea.add(menuItem);
 
         // Confirm (F9)
@@ -368,7 +368,7 @@ public class DraftPanel extends javax.swing.JPanel {
 
         JMenuItem menuItem;
 
-        menuItem = new JMenuItem("Hide this card");
+        menuItem = new JMenuItem(java.util.ResourceBundle.getBundle("otherMessage").getString("lblHideThisCard"));
         popupMenuCardPanel.add(menuItem);
 
         // Hide Card
@@ -513,28 +513,33 @@ public class DraftPanel extends javax.swing.JPanel {
         draftLeftPane.setRequestFocusEnabled(false);
         draftLeftPane.setVerifyInputWhenFocusTarget(false);
 
-        btnQuitTournament.setText("Quit Tournament");
-        btnQuitTournament.addActionListener(evt -> btnQuitTournamentActionPerformed(evt));
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("SwingMessage"); // NOI18N
+        btnQuitTournament.setText(bundle.getString("DraftPanel.btnQuitTournament.text")); // NOI18N
+        btnQuitTournament.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuitTournamentActionPerformed(evt);
+            }
+        });
 
-        lblPack1.setText("Pack 1:");
+        lblPack1.setText(bundle.getString("DraftPanel.lblPack1.text")); // NOI18N
 
         txtPack1.setEditable(false);
         txtPack1.setEnabled(false);
         txtPack1.setPreferredSize(new java.awt.Dimension(130, 22));
 
-        lblPack2.setText("Pack 2:");
+        lblPack2.setText(bundle.getString("DraftPanel.lblPack2.text")); // NOI18N
 
         txtPack2.setEditable(false);
         txtPack2.setEnabled(false);
         txtPack2.setPreferredSize(new java.awt.Dimension(130, 22));
 
-        lblPack3.setText("Pack 3:");
+        lblPack3.setText(bundle.getString("DraftPanel.lblPack3.text")); // NOI18N
 
         txtPack3.setEditable(false);
         txtPack3.setEnabled(false);
         txtPack3.setPreferredSize(new java.awt.Dimension(130, 22));
 
-        lblCardNo.setText("Card #:");
+        lblCardNo.setText(bundle.getString("DraftPanel.lblCardNo.text")); // NOI18N
 
         txtCardNo.setEditable(false);
         txtCardNo.setEnabled(false);
@@ -562,57 +567,56 @@ public class DraftPanel extends javax.swing.JPanel {
         pnlLeft.setVerifyInputWhenFocusTarget(false);
         pnlLeft.setLayout(new java.awt.GridLayout(8, 1));
 
-        lblPlayer01.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblPlayer01.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblPlayer01.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblPlayer01.setFocusable(false);
         lblPlayer01.setRequestFocusEnabled(false);
         lblPlayer01.setVerifyInputWhenFocusTarget(false);
         pnlLeft.add(lblPlayer01);
-        lblPlayer01.getAccessibleContext().setAccessibleName("");
 
-        lblPlayer02.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblPlayer02.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblPlayer02.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblPlayer02.setFocusable(false);
         lblPlayer02.setRequestFocusEnabled(false);
         lblPlayer02.setVerifyInputWhenFocusTarget(false);
         pnlLeft.add(lblPlayer02);
 
-        lblPlayer03.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblPlayer03.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblPlayer03.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblPlayer03.setFocusable(false);
         lblPlayer03.setRequestFocusEnabled(false);
         lblPlayer03.setVerifyInputWhenFocusTarget(false);
         pnlLeft.add(lblPlayer03);
 
-        lblPlayer04.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblPlayer04.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblPlayer04.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblPlayer04.setFocusable(false);
         lblPlayer04.setRequestFocusEnabled(false);
         lblPlayer04.setVerifyInputWhenFocusTarget(false);
         pnlLeft.add(lblPlayer04);
 
-        lblPlayer05.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblPlayer05.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblPlayer05.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblPlayer05.setFocusable(false);
         lblPlayer05.setRequestFocusEnabled(false);
         lblPlayer05.setVerifyInputWhenFocusTarget(false);
         pnlLeft.add(lblPlayer05);
 
-        lblPlayer06.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblPlayer06.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblPlayer06.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblPlayer06.setFocusable(false);
         lblPlayer06.setRequestFocusEnabled(false);
         lblPlayer06.setVerifyInputWhenFocusTarget(false);
         pnlLeft.add(lblPlayer06);
 
-        lblPlayer07.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblPlayer07.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblPlayer07.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblPlayer07.setFocusable(false);
         lblPlayer07.setRequestFocusEnabled(false);
         lblPlayer07.setVerifyInputWhenFocusTarget(false);
         pnlLeft.add(lblPlayer07);
 
-        lblPlayer08.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblPlayer08.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblPlayer08.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblPlayer08.setFocusable(false);
         lblPlayer08.setRequestFocusEnabled(false);
@@ -643,56 +647,56 @@ public class DraftPanel extends javax.swing.JPanel {
         pnlRight.setVerifyInputWhenFocusTarget(false);
         pnlRight.setLayout(new java.awt.GridLayout(8, 1));
 
-        lblPlayer09.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblPlayer09.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblPlayer09.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblPlayer09.setFocusable(false);
         lblPlayer09.setRequestFocusEnabled(false);
         lblPlayer09.setVerifyInputWhenFocusTarget(false);
         pnlRight.add(lblPlayer09);
 
-        lblPlayer10.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblPlayer10.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblPlayer10.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblPlayer10.setFocusable(false);
         lblPlayer10.setRequestFocusEnabled(false);
         lblPlayer10.setVerifyInputWhenFocusTarget(false);
         pnlRight.add(lblPlayer10);
 
-        lblPlayer11.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblPlayer11.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblPlayer11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblPlayer11.setFocusable(false);
         lblPlayer11.setRequestFocusEnabled(false);
         lblPlayer11.setVerifyInputWhenFocusTarget(false);
         pnlRight.add(lblPlayer11);
 
-        lblPlayer12.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblPlayer12.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblPlayer12.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblPlayer12.setFocusable(false);
         lblPlayer12.setRequestFocusEnabled(false);
         lblPlayer12.setVerifyInputWhenFocusTarget(false);
         pnlRight.add(lblPlayer12);
 
-        lblPlayer13.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblPlayer13.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblPlayer13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblPlayer13.setFocusable(false);
         lblPlayer13.setRequestFocusEnabled(false);
         lblPlayer13.setVerifyInputWhenFocusTarget(false);
         pnlRight.add(lblPlayer13);
 
-        lblPlayer14.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblPlayer14.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblPlayer14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblPlayer14.setFocusable(false);
         lblPlayer14.setRequestFocusEnabled(false);
         lblPlayer14.setVerifyInputWhenFocusTarget(false);
         pnlRight.add(lblPlayer14);
 
-        lblPlayer15.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblPlayer15.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblPlayer15.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblPlayer15.setFocusable(false);
         lblPlayer15.setRequestFocusEnabled(false);
         lblPlayer15.setVerifyInputWhenFocusTarget(false);
         pnlRight.add(lblPlayer15);
 
-        lblPlayer16.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblPlayer16.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblPlayer16.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblPlayer16.setFocusable(false);
         lblPlayer16.setRequestFocusEnabled(false);
@@ -812,9 +816,9 @@ public class DraftPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnQuitTournamentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitTournamentActionPerformed
-        UserRequestMessage message = new UserRequestMessage("Confirm quit tournament", "Are you sure you want to quit the draft tournament?");
-        message.setButton1("No", null);
-        message.setButton2("Yes", PlayerAction.CLIENT_QUIT_DRAFT_TOURNAMENT);
+        UserRequestMessage message = new UserRequestMessage(java.util.ResourceBundle.getBundle("otherMessage").getString("lblTournamentQuitConfirm"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblAreYouSureQuitDraftTournament"));
+        message.setButton1(java.util.ResourceBundle.getBundle("otherMessage").getString("lblNo"), null);
+        message.setButton2(java.util.ResourceBundle.getBundle("otherMessage").getString("lblYes"), PlayerAction.CLIENT_QUIT_DRAFT_TOURNAMENT);
         message.setTournamentId(draftId);
         MageFrame.getInstance().showUserRequestDialog(message);
     }//GEN-LAST:event_btnQuitTournamentActionPerformed

@@ -26,11 +26,11 @@ public class RandomPacksSelectorDialog extends javax.swing.JDialog {
     private boolean isRandomDraft;
     private boolean isRichManDraft;
     private String title = "";
-    public static final String randomDraftDescription = ("The selected packs will be randomly distributed to players. Each player may open different packs. Duplicates will be avoided.");
 
     public RandomPacksSelectorDialog(boolean isRandomDraft, boolean isRichManDraft) {
         initComponents();
         setType(isRandomDraft, isRichManDraft);
+        String randomDraftDescription = java.util.ResourceBundle.getBundle("otherMessage").getString("lblRandomPacksSekectorDest");
         this.pnlApply.setToolTipText(randomDraftDescription);
         this.pnlSelect.setToolTipText(randomDraftDescription);
         boxesCreated = false;
@@ -40,9 +40,9 @@ public class RandomPacksSelectorDialog extends javax.swing.JDialog {
         this.isRandomDraft = isRandomDraft;
         this.isRichManDraft = isRichManDraft;
         if (this.isRandomDraft) {
-            title = "Random Booster Draft Packs Selector";
+            title = java.util.ResourceBundle.getBundle("otherMessage").getString("lblRandomPacksSekector");
         } else if (this.isRichManDraft) {
-            title = "Rich Man Booster Draft Packs Selector";
+            title = java.util.ResourceBundle.getBundle("otherMessage").getString("lblRichManPacksSekector");
         }
         setTitle(title);
     }
@@ -118,7 +118,8 @@ public class RandomPacksSelectorDialog extends javax.swing.JDialog {
         btnApply = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle("Random Booster Draft Packs Selector");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("SwingMessage"); // NOI18N
+        setTitle(bundle.getString("RandomPacksSelectorDialog.title")); // NOI18N
         setModal(true);
         setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
         setPreferredSize(new java.awt.Dimension(600, 450));
@@ -133,8 +134,8 @@ public class RandomPacksSelectorDialog extends javax.swing.JDialog {
 
         pnlSelect.setLayout(new javax.swing.BoxLayout(pnlSelect, javax.swing.BoxLayout.LINE_AXIS));
 
-        btnNone.setText("Select none");
-        btnNone.setActionCommand("none");
+        btnNone.setText(bundle.getString("RandomPacksSelectorDialog.btnNone.text")); // NOI18N
+        btnNone.setActionCommand(bundle.getString("RandomPacksSelectorDialog.btnNone.actionCommand")); // NOI18N
         btnNone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNoneActionPerformed(evt);
@@ -142,7 +143,7 @@ public class RandomPacksSelectorDialog extends javax.swing.JDialog {
         });
         pnlSelect.add(btnNone);
 
-        btnAll.setText("Select all");
+        btnAll.setText(bundle.getString("RandomPacksSelectorDialog.btnAll.text")); // NOI18N
         btnAll.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAllActionPerformed(evt);
@@ -152,8 +153,8 @@ public class RandomPacksSelectorDialog extends javax.swing.JDialog {
 
         pnlApply.setLayout(new javax.swing.BoxLayout(pnlApply, javax.swing.BoxLayout.LINE_AXIS));
 
-        btnApply.setText("Apply");
-        btnApply.setToolTipText("At least two packs must be selected");
+        btnApply.setText(bundle.getString("RandomPacksSelectorDialog.btnApply.text")); // NOI18N
+        btnApply.setToolTipText(bundle.getString("RandomPacksSelectorDialog.btnApply.toolTipText")); // NOI18N
         btnApply.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnApplyActionPerformed(evt);
@@ -210,9 +211,9 @@ public class RandomPacksSelectorDialog extends javax.swing.JDialog {
 
     public void doApply() {
         if (getSelectedPacks().size() < 2 && isRandomDraft) {
-            JOptionPane.showMessageDialog(this, "At least 2 sets must be selected", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, String.format(java.util.ResourceBundle.getBundle("otherMessage").getString("lblAtLeastSelecteNSets"), String.valueOf(2)), java.util.ResourceBundle.getBundle("otherMessage").getString("lblError"), JOptionPane.ERROR_MESSAGE);
         } else if (getSelectedPacks().isEmpty() && isRichManDraft) {
-            JOptionPane.showMessageDialog(this, "At least 1 set must be selected", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, String.format(java.util.ResourceBundle.getBundle("otherMessage").getString("lblAtLeastSelecteNSets"), String.valueOf(1)), java.util.ResourceBundle.getBundle("otherMessage").getString("lblError"), JOptionPane.ERROR_MESSAGE);
         } else {
             this.setVisible(false);
         }

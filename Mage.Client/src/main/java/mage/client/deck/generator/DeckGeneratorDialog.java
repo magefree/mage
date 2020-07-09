@@ -122,7 +122,7 @@ public class DeckGeneratorDialog {
         c.gridx = 0;
         c.gridy = 2;
         c.weightx = 0.10;
-        JLabel textDeckSize = new JLabel("Deck size:");
+        JLabel textDeckSize = new JLabel(java.util.ResourceBundle.getBundle("otherMessage").getString("lblDeckSize") + ":");
         mainPanel.add(textDeckSize, c);
 
         // Deck size dropdown

@@ -131,7 +131,7 @@ public class PickChoiceDialog extends MageDialog {
 
         // listeners for ESC close
         if (!choice.isRequired()) {
-            String cancelName = "cancel";
+            String cancelName = java.util.ResourceBundle.getBundle("otherMessage").getString("lblCancel");
             InputMap inputMap = getRootPane().getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
             inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), cancelName);
             ActionMap actionMap = getRootPane().getActionMap();
@@ -316,11 +316,12 @@ public class PickChoiceDialog extends MageDialog {
         setResizable(true);
 
         labelMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelMessage.setText("<html><div style='text-align: center;'>example long message example long message example long message example long message example long message</div></html>");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("SwingMessage"); // NOI18N
+        labelMessage.setText(bundle.getString("PickChoiceDialog.labelMessage.text")); // NOI18N
 
         labelSubMessage.setFont(labelSubMessage.getFont().deriveFont((labelSubMessage.getFont().getStyle() | java.awt.Font.ITALIC) | java.awt.Font.BOLD));
         labelSubMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelSubMessage.setText("<html><div style='text-align: center;'>example long message example long</div></html>");
+        labelSubMessage.setText(bundle.getString("PickChoiceDialog.labelSubMessage.text")); // NOI18N
 
         javax.swing.GroupLayout panelHeaderLayout = new javax.swing.GroupLayout(panelHeader);
         panelHeader.setLayout(panelHeaderLayout);
@@ -341,9 +342,9 @@ public class PickChoiceDialog extends MageDialog {
                 .addComponent(labelSubMessage))
         );
 
-        labelSearch.setText("Search:");
+        labelSearch.setText(bundle.getString("PickChoiceDialog.labelSearch.text")); // NOI18N
 
-        editSearch.setText("sample search text");
+        editSearch.setText(bundle.getString("PickChoiceDialog.editSearch.text")); // NOI18N
 
         javax.swing.GroupLayout panelSearchLayout = new javax.swing.GroupLayout(panelSearch);
         panelSearch.setLayout(panelSearchLayout);
@@ -373,14 +374,14 @@ public class PickChoiceDialog extends MageDialog {
         });
         scrollList.setViewportView(listChoices);
 
-        btOK.setText("Choose");
+        btOK.setText(bundle.getString("PickChoiceDialog.btOK.text")); // NOI18N
         btOK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btOKActionPerformed(evt);
             }
         });
 
-        btCancel.setText("Cancel");
+        btCancel.setText(bundle.getString("PickChoiceDialog.btCancel.text")); // NOI18N
         btCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btCancelActionPerformed(evt);

@@ -58,7 +58,7 @@ public final class CollectionViewerPanel extends JPanel {
         btnExit.setAlignmentX(Component.LEFT_ALIGNMENT);
         buttonsPanel.add(btnExit);
 
-        JLabel label1 = new JLabel("Choose format:");
+        JLabel label1 = new JLabel(java.util.ResourceBundle.getBundle("otherMessage").getString("lblChooseFormat"));
         label1.setAlignmentX(Component.LEFT_ALIGNMENT);
         label1.setForeground(Color.white);
         buttonsPanel.add(label1);
@@ -115,7 +115,7 @@ public final class CollectionViewerPanel extends JPanel {
         });
         setPanel.add(btnSetFastSearch);
 
-        JLabel label2 = new JLabel("Choose size:");
+        JLabel label2 = new JLabel(java.util.ResourceBundle.getBundle("otherMessage").getString("lblChooseSize"));
         label2.setAlignmentX(Component.LEFT_ALIGNMENT);
         label2.setForeground(Color.white);
         buttonsPanel.add(label2);
@@ -141,7 +141,7 @@ public final class CollectionViewerPanel extends JPanel {
         });
         buttonsPanel.add(big4x4);
 
-        JLabel label3 = new JLabel("Switch tabs:");
+        JLabel label3 = new JLabel(java.util.ResourceBundle.getBundle("otherMessage").getString("lblSwitchTabs"));
         label3.setAlignmentX(Component.LEFT_ALIGNMENT);
         label3.setForeground(Color.white);
         buttonsPanel.add(label3);
@@ -153,20 +153,20 @@ public final class CollectionViewerPanel extends JPanel {
         buttonPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
         buttonsPanel.add(buttonPanel);
 
-        JButton prev = new JButton("Prev");
+        JButton prev = new JButton(java.util.ResourceBundle.getBundle("otherMessage").getString("lblPrev"));
         prev.addActionListener(e -> mageBook.prev());
         buttonPanel.add(prev);
 
-        JButton next = new JButton("Next");
+        JButton next = new JButton(java.util.ResourceBundle.getBundle("otherMessage").getString("lblNext"));
         next.addActionListener(e -> mageBook.next());
         buttonPanel.add(next);
 
-        JLabel labelCardTokenSwitch = new JLabel("Show cards or tokens:");
+        JLabel labelCardTokenSwitch = new JLabel(java.util.ResourceBundle.getBundle("otherMessage").getString("lblShowCardsOrTokens"));
         labelCardTokenSwitch.setAlignmentX(Component.LEFT_ALIGNMENT);
         labelCardTokenSwitch.setForeground(Color.white);
         buttonsPanel.add(labelCardTokenSwitch);
 
-        JCheckBox cardsOrTokens = new JCheckBox("Display Cards");
+        JCheckBox cardsOrTokens = new JCheckBox(java.util.ResourceBundle.getBundle("otherMessage").getString("lblDisplayCards"));
         cardsOrTokens.setSelected(true);
         cardsOrTokens.setForeground(Color.white);
         cardsOrTokens.setToolTipText("Select to show Cards for the chosen set.  When unselected, will show Tokens, Emblems and Planes for the set instead");
@@ -198,7 +198,7 @@ public final class CollectionViewerPanel extends JPanel {
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 615, Short.MAX_VALUE)
         );
 
-        btnExit.setText("Exit");
+        btnExit.setText(java.util.ResourceBundle.getBundle("otherMessage").getString("lblExit"));
         btnExit.addActionListener(evt -> btnExitActionPerformed(evt));
 
     }

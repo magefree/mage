@@ -83,44 +83,26 @@ public class TablePlayerPanel extends javax.swing.JPanel {
 
         lbPlayerType = new javax.swing.JLabel();
         cbPlayerType = new javax.swing.JComboBox();
-        newPlayerPanel = new mage.client.table.NewPlayerPanel();
         lblPlayerNum = new javax.swing.JLabel();
+        newPlayerPanel = new mage.client.table.NewPlayerPanel();
 
-        lbPlayerType.setText("Type:");
+        setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        cbPlayerType.addActionListener(evt -> cbPlayerTypeActionPerformed(evt));
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("SwingMessage"); // NOI18N
+        lbPlayerType.setText(bundle.getString("TablePlayerPanel.lbPlayerType.text")); // NOI18N
+        add(lbPlayerType);
 
-        lblPlayerNum.setFont(new java.awt.Font("Tahoma", 1, 11));
-        lblPlayerNum.setText("Player #");
+        cbPlayerType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbPlayerTypeActionPerformed(evt);
+            }
+        });
+        add(cbPlayerType);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblPlayerNum)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addComponent(lbPlayerType)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(cbPlayerType, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(newPlayerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addComponent(lblPlayerNum)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                        .addComponent(cbPlayerType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(lbPlayerType)))
-                                        .addComponent(newPlayerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE))
-                                .addContainerGap())
-        );
+        lblPlayerNum.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
+        lblPlayerNum.setText(bundle.getString("TablePlayerPanel.lblPlayerNum.text")); // NOI18N
+        add(lblPlayerNum);
+        add(newPlayerPanel);
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbPlayerTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPlayerTypeActionPerformed

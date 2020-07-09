@@ -365,8 +365,8 @@ public class TablesPanel extends javax.swing.JPanel {
                 boolean isTournament = (Boolean) tableModel.getValueAt(modelRow, TablesTableModel.ACTION_COLUMN + 1);
                 String owner = (String) tableModel.getValueAt(modelRow, TablesTableModel.COLUMN_OWNER);
                 String pwdColumn = (String) tableModel.getValueAt(modelRow, TablesTableModel.COLUMN_PASSWORD);
-                switch (action) {
-                    case "Join":
+                switch (TableAction.toAction(action)) {
+                    case Join:
                         if (owner.equals(SessionHandler.getUserName()) || owner.startsWith(SessionHandler.getUserName() + ',')) {
                             try {
                                 JDesktopPane desktopPane = (JDesktopPane) MageFrame.getUI().getComponent(MageComponents.DESKTOP_PANE);
@@ -404,27 +404,29 @@ public class TablesPanel extends javax.swing.JPanel {
                             joinTableDialog.showDialog(roomId, tableId, false, false);
                         }
                         break;
-                    case "Remove":
-                        UserRequestMessage message = new UserRequestMessage("Removing table", "Are you sure you want to remove table?");
-                        message.setButton1("No", null);
-                        message.setButton2("Yes", PlayerAction.CLIENT_REMOVE_TABLE);
+                    case Remove:
+                        UserRequestMessage message = new UserRequestMessage(java.util.ResourceBundle.getBundle("otherMessage").getString("lblRemovingTable"), java.util.ResourceBundle.getBundle("otherMessage").getString("lblAreYouSureRemoveTable"));
+                        message.setButton1(java.util.ResourceBundle.getBundle("otherMessage").getString("lblNo"), null);
+                        message.setButton2(java.util.ResourceBundle.getBundle("otherMessage").getString("lblYes"), PlayerAction.CLIENT_REMOVE_TABLE);
                         MageFrame.getInstance().showUserRequestDialog(message);
                         break;
-                    case "Show":
+                    case Show:
                         if (isTournament) {
                             LOGGER.info("Showing tournament table " + tableId);
                             SessionHandler.watchTable(roomId, tableId);
                         }
                         break;
-                    case "Watch":
+                    case Watch:
                         if (!isTournament) {
                             LOGGER.info("Watching table " + tableId);
                             SessionHandler.watchTable(roomId, tableId);
                         }
                         break;
-                    case "Replay":
+                    case Replay:
                         LOGGER.info("Replaying game " + gameId);
                         SessionHandler.replayGame(gameId);
+                        break;
+                    case None:
                         break;
                 }
             }
@@ -440,8 +442,8 @@ public class TablesPanel extends javax.swing.JPanel {
                     return;
                 }
                 String action = (String) matchesModel.getValueAt(modelRow, MatchesTableModel.COLUMN_ACTION);
-                switch (action) {
-                    case "Replay":
+                switch (TableAction.toAction(action)) {
+                    case Replay:
                         java.util.List<UUID> gameList = matchesModel.getListofGames(modelRow);
                         if (gameList != null && !gameList.isEmpty()) {
                             if (gameList.size() == 1) {
@@ -452,7 +454,7 @@ public class TablesPanel extends javax.swing.JPanel {
                         }
                         // MageFrame.getDesktop().showTournament(tournamentId);
                         break;
-                    case "Show":
+                    case Show:
                         if (matchesModel.isTournament(modelRow)) {
                             LOGGER.info("Showing tournament table " + matchesModel.getTableId(modelRow));
                             SessionHandler.watchTable(roomId, matchesModel.getTableId(modelRow));
@@ -1010,7 +1012,8 @@ public class TablesPanel extends javax.swing.JPanel {
         jPanelTop.setOpaque(false);
 
         btnNewTable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/match_new.png"))); // NOI18N
-        btnNewTable.setToolTipText("Creates a new match table.");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("SwingMessage"); // NOI18N
+        btnNewTable.setToolTipText(bundle.getString("TablesPanel.btnNewTable.toolTipText")); // NOI18N
         btnNewTable.setMargin(new java.awt.Insets(2, 2, 2, 2));
         btnNewTable.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1019,7 +1022,7 @@ public class TablesPanel extends javax.swing.JPanel {
         });
 
         btnNewTournament.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/tourney_new.png"))); // NOI18N
-        btnNewTournament.setToolTipText("Creates a new tourney table.");
+        btnNewTournament.setToolTipText(bundle.getString("TablesPanel.btnNewTournament.toolTipText")); // NOI18N
         btnNewTournament.setMargin(new java.awt.Insets(2, 2, 2, 2));
         btnNewTournament.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1033,8 +1036,8 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar1.setOpaque(false);
 
         btnStateWaiting.setSelected(true);
-        btnStateWaiting.setToolTipText("Shows all tables waiting for players.");
-        btnStateWaiting.setActionCommand("stateWait");
+        btnStateWaiting.setToolTipText(bundle.getString("TablesPanel.btnStateWaiting.toolTipText")); // NOI18N
+        btnStateWaiting.setActionCommand(bundle.getString("TablesPanel.btnStateWaiting.actionCommand")); // NOI18N
         btnStateWaiting.setFocusPainted(false);
         btnStateWaiting.setFocusable(false);
         btnStateWaiting.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1049,8 +1052,8 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar1.add(btnStateWaiting);
 
         btnStateActive.setSelected(true);
-        btnStateActive.setToolTipText("Shows all tables with active matches.");
-        btnStateActive.setActionCommand("stateActive");
+        btnStateActive.setToolTipText(bundle.getString("TablesPanel.btnStateActive.toolTipText")); // NOI18N
+        btnStateActive.setActionCommand(bundle.getString("TablesPanel.btnStateActive.actionCommand")); // NOI18N
         btnStateActive.setFocusPainted(false);
         btnStateActive.setFocusable(false);
         btnStateActive.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1065,8 +1068,8 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar1.add(btnStateActive);
 
         btnStateFinished.setSelected(true);
-        btnStateFinished.setToolTipText("<HTML>Toggles the visibility of the table of completed <br>matches and tournaments in the lower area.\n<br>Showing the last 50 finished matches.");
-        btnStateFinished.setActionCommand("stateFinished");
+        btnStateFinished.setToolTipText(bundle.getString("TablesPanel.btnStateFinished.toolTipText")); // NOI18N
+        btnStateFinished.setActionCommand(bundle.getString("TablesPanel.btnStateFinished.actionCommand")); // NOI18N
         btnStateFinished.setFocusPainted(false);
         btnStateFinished.setFocusable(false);
         btnStateFinished.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1082,9 +1085,9 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar1.add(jSeparator1);
 
         btnTypeMatch.setSelected(true);
-        btnTypeMatch.setText("Matches");
-        btnTypeMatch.setToolTipText("Shows all non tournament tables.");
-        btnTypeMatch.setActionCommand("typeMatch");
+        btnTypeMatch.setText(bundle.getString("TablesPanel.btnTypeMatch.text")); // NOI18N
+        btnTypeMatch.setToolTipText(bundle.getString("TablesPanel.btnTypeMatch.toolTipText")); // NOI18N
+        btnTypeMatch.setActionCommand(bundle.getString("TablesPanel.btnTypeMatch.actionCommand")); // NOI18N
         btnTypeMatch.setFocusPainted(false);
         btnTypeMatch.setFocusable(false);
         btnTypeMatch.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1099,9 +1102,9 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar1.add(btnTypeMatch);
 
         btnTypeTourneyConstructed.setSelected(true);
-        btnTypeTourneyConstructed.setText("Constructed tourn.");
-        btnTypeTourneyConstructed.setToolTipText("Shows all constructed tournament tables.");
-        btnTypeTourneyConstructed.setActionCommand("typeTourneyConstructed");
+        btnTypeTourneyConstructed.setText(bundle.getString("TablesPanel.btnTypeTourneyConstructed.text")); // NOI18N
+        btnTypeTourneyConstructed.setToolTipText(bundle.getString("TablesPanel.btnTypeTourneyConstructed.toolTipText")); // NOI18N
+        btnTypeTourneyConstructed.setActionCommand(bundle.getString("TablesPanel.btnTypeTourneyConstructed.actionCommand")); // NOI18N
         btnTypeTourneyConstructed.setFocusPainted(false);
         btnTypeTourneyConstructed.setFocusable(false);
         btnTypeTourneyConstructed.setRequestFocusEnabled(false);
@@ -1114,9 +1117,9 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar1.add(btnTypeTourneyConstructed);
 
         btnTypeTourneyLimited.setSelected(true);
-        btnTypeTourneyLimited.setText("Limited tourn.");
-        btnTypeTourneyLimited.setToolTipText("Shows all limited tournament tables.");
-        btnTypeTourneyLimited.setActionCommand("typeTourneyLimited");
+        btnTypeTourneyLimited.setText(bundle.getString("TablesPanel.btnTypeTourneyLimited.text")); // NOI18N
+        btnTypeTourneyLimited.setToolTipText(bundle.getString("TablesPanel.btnTypeTourneyLimited.toolTipText")); // NOI18N
+        btnTypeTourneyLimited.setActionCommand(bundle.getString("TablesPanel.btnTypeTourneyLimited.actionCommand")); // NOI18N
         btnTypeTourneyLimited.setFocusPainted(false);
         btnTypeTourneyLimited.setFocusable(false);
         btnTypeTourneyLimited.setMaximumSize(new java.awt.Dimension(72, 20));
@@ -1131,9 +1134,9 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar1.add(jSeparator4);
 
         btnSkillBeginner.setSelected(true);
-        btnSkillBeginner.setText("Beginner");
-        btnSkillBeginner.setToolTipText("Shows all tables with skill level beginner.");
-        btnSkillBeginner.setActionCommand("typeMatch");
+        btnSkillBeginner.setText(bundle.getString("TablesPanel.btnSkillBeginner.text")); // NOI18N
+        btnSkillBeginner.setToolTipText(bundle.getString("TablesPanel.btnSkillBeginner.toolTipText")); // NOI18N
+        btnSkillBeginner.setActionCommand(bundle.getString("TablesPanel.btnSkillBeginner.actionCommand")); // NOI18N
         btnSkillBeginner.setFocusPainted(false);
         btnSkillBeginner.setFocusable(false);
         btnSkillBeginner.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1148,9 +1151,9 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar1.add(btnSkillBeginner);
 
         btnSkillCasual.setSelected(true);
-        btnSkillCasual.setText("Casual");
-        btnSkillCasual.setToolTipText("Shows all tables with skill level casual.");
-        btnSkillCasual.setActionCommand("typeMatch");
+        btnSkillCasual.setText(bundle.getString("TablesPanel.btnSkillCasual.text")); // NOI18N
+        btnSkillCasual.setToolTipText(bundle.getString("TablesPanel.btnSkillCasual.toolTipText")); // NOI18N
+        btnSkillCasual.setActionCommand(bundle.getString("TablesPanel.btnSkillCasual.actionCommand")); // NOI18N
         btnSkillCasual.setFocusPainted(false);
         btnSkillCasual.setFocusable(false);
         btnSkillCasual.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1165,9 +1168,9 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar1.add(btnSkillCasual);
 
         btnSkillSerious.setSelected(true);
-        btnSkillSerious.setText("Serious");
-        btnSkillSerious.setToolTipText("Shows all tables with skill level serious.");
-        btnSkillSerious.setActionCommand("typeMatch");
+        btnSkillSerious.setText(bundle.getString("TablesPanel.btnSkillSerious.text")); // NOI18N
+        btnSkillSerious.setToolTipText(bundle.getString("TablesPanel.btnSkillSerious.toolTipText")); // NOI18N
+        btnSkillSerious.setActionCommand(bundle.getString("TablesPanel.btnSkillSerious.actionCommand")); // NOI18N
         btnSkillSerious.setFocusPainted(false);
         btnSkillSerious.setFocusable(false);
         btnSkillSerious.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1183,9 +1186,9 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar1.add(jSeparator6);
 
         btnRated.setSelected(true);
-        btnRated.setText("Rated");
-        btnRated.setToolTipText("Shows all rated tables.");
-        btnRated.setActionCommand("typeMatch");
+        btnRated.setText(bundle.getString("TablesPanel.btnRated.text")); // NOI18N
+        btnRated.setToolTipText(bundle.getString("TablesPanel.btnRated.toolTipText")); // NOI18N
+        btnRated.setActionCommand(bundle.getString("TablesPanel.btnRated.actionCommand")); // NOI18N
         btnRated.setFocusPainted(false);
         btnRated.setFocusable(false);
         btnRated.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1200,9 +1203,9 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar1.add(btnRated);
 
         btnUnrated.setSelected(true);
-        btnUnrated.setText("Unrated");
-        btnUnrated.setToolTipText("Shows all unrated tables.");
-        btnUnrated.setActionCommand("typeMatch");
+        btnUnrated.setText(bundle.getString("TablesPanel.btnUnrated.text")); // NOI18N
+        btnUnrated.setToolTipText(bundle.getString("TablesPanel.btnUnrated.toolTipText")); // NOI18N
+        btnUnrated.setActionCommand(bundle.getString("TablesPanel.btnUnrated.actionCommand")); // NOI18N
         btnUnrated.setFocusPainted(false);
         btnUnrated.setFocusable(false);
         btnUnrated.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1221,8 +1224,8 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar2.setOpaque(false);
 
         btnFormatBlock.setSelected(true);
-        btnFormatBlock.setText("Block");
-        btnFormatBlock.setToolTipText("Block constructed formats.");
+        btnFormatBlock.setText(bundle.getString("TablesPanel.btnFormatBlock.text")); // NOI18N
+        btnFormatBlock.setToolTipText(bundle.getString("TablesPanel.btnFormatBlock.toolTipText")); // NOI18N
         btnFormatBlock.setFocusPainted(false);
         btnFormatBlock.setFocusable(false);
         btnFormatBlock.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1237,8 +1240,8 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar2.add(btnFormatBlock);
 
         btnFormatStandard.setSelected(true);
-        btnFormatStandard.setText("Standard");
-        btnFormatStandard.setToolTipText("Standard format.");
+        btnFormatStandard.setText(bundle.getString("TablesPanel.btnFormatStandard.text")); // NOI18N
+        btnFormatStandard.setToolTipText(bundle.getString("TablesPanel.btnFormatStandard.toolTipText")); // NOI18N
         btnFormatStandard.setFocusPainted(false);
         btnFormatStandard.setFocusable(false);
         btnFormatStandard.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1253,8 +1256,8 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar2.add(btnFormatStandard);
 
         btnFormatModern.setSelected(true);
-        btnFormatModern.setText("Modern");
-        btnFormatModern.setToolTipText("Modern format.");
+        btnFormatModern.setText(bundle.getString("TablesPanel.btnFormatModern.text")); // NOI18N
+        btnFormatModern.setToolTipText(bundle.getString("TablesPanel.btnFormatModern.toolTipText")); // NOI18N
         btnFormatModern.setFocusPainted(false);
         btnFormatModern.setFocusable(false);
         btnFormatModern.setRequestFocusEnabled(false);
@@ -1267,8 +1270,8 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar2.add(btnFormatModern);
 
         btnFormatPioneer.setSelected(true);
-        btnFormatPioneer.setText("Pioneer");
-        btnFormatPioneer.setToolTipText("Pioneer format.");
+        btnFormatPioneer.setText(bundle.getString("TablesPanel.btnFormatPioneer.text")); // NOI18N
+        btnFormatPioneer.setToolTipText(bundle.getString("TablesPanel.btnFormatPioneer.toolTipText")); // NOI18N
         btnFormatPioneer.setFocusPainted(false);
         btnFormatPioneer.setFocusable(false);
         btnFormatPioneer.setRequestFocusEnabled(false);
@@ -1281,8 +1284,8 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar2.add(btnFormatPioneer);
 
         btnFormatLegacy.setSelected(true);
-        btnFormatLegacy.setText("Legacy");
-        btnFormatLegacy.setToolTipText("Legacy format.");
+        btnFormatLegacy.setText(bundle.getString("TablesPanel.btnFormatLegacy.text")); // NOI18N
+        btnFormatLegacy.setToolTipText(bundle.getString("TablesPanel.btnFormatLegacy.toolTipText")); // NOI18N
         btnFormatLegacy.setFocusPainted(false);
         btnFormatLegacy.setFocusable(false);
         btnFormatLegacy.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1297,8 +1300,8 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar2.add(btnFormatLegacy);
 
         btnFormatVintage.setSelected(true);
-        btnFormatVintage.setText("Vintage");
-        btnFormatVintage.setToolTipText("Vintage format.");
+        btnFormatVintage.setText(bundle.getString("TablesPanel.btnFormatVintage.text")); // NOI18N
+        btnFormatVintage.setToolTipText(bundle.getString("TablesPanel.btnFormatVintage.toolTipText")); // NOI18N
         btnFormatVintage.setFocusPainted(false);
         btnFormatVintage.setFocusable(false);
         btnFormatVintage.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1313,8 +1316,8 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar2.add(btnFormatVintage);
 
         btnFormatPremodern.setSelected(true);
-        btnFormatPremodern.setText("Premodern");
-        btnFormatPremodern.setToolTipText("Premodern format.");
+        btnFormatPremodern.setText(bundle.getString("TablesPanel.btnFormatPremodern.text")); // NOI18N
+        btnFormatPremodern.setToolTipText(bundle.getString("TablesPanel.btnFormatPremodern.toolTipText")); // NOI18N
         btnFormatPremodern.setFocusPainted(false);
         btnFormatPremodern.setFocusable(false);
         btnFormatPremodern.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1330,8 +1333,8 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar2.add(jSeparator3);
 
         btnFormatCommander.setSelected(true);
-        btnFormatCommander.setText("Commander");
-        btnFormatCommander.setToolTipText("Commander format.");
+        btnFormatCommander.setText(bundle.getString("TablesPanel.btnFormatCommander.text")); // NOI18N
+        btnFormatCommander.setToolTipText(bundle.getString("TablesPanel.btnFormatCommander.toolTipText")); // NOI18N
         btnFormatCommander.setFocusPainted(false);
         btnFormatCommander.setFocusable(false);
         btnFormatCommander.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1346,8 +1349,8 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar2.add(btnFormatCommander);
 
         btnFormatOathbreaker.setSelected(true);
-        btnFormatOathbreaker.setText("Oathbreaker");
-        btnFormatOathbreaker.setToolTipText("Oathbreaker format.");
+        btnFormatOathbreaker.setText(bundle.getString("TablesPanel.btnFormatOathbreaker.text")); // NOI18N
+        btnFormatOathbreaker.setToolTipText(bundle.getString("TablesPanel.btnFormatOathbreaker.toolTipText")); // NOI18N
         btnFormatOathbreaker.setFocusPainted(false);
         btnFormatOathbreaker.setFocusable(false);
         btnFormatOathbreaker.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1362,8 +1365,8 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar2.add(btnFormatOathbreaker);
 
         btnFormatTinyLeader.setSelected(true);
-        btnFormatTinyLeader.setText("Tiny Leader");
-        btnFormatTinyLeader.setToolTipText("Tiny Leader format.");
+        btnFormatTinyLeader.setText(bundle.getString("TablesPanel.btnFormatTinyLeader.text")); // NOI18N
+        btnFormatTinyLeader.setToolTipText(bundle.getString("TablesPanel.btnFormatTinyLeader.toolTipText")); // NOI18N
         btnFormatTinyLeader.setFocusPainted(false);
         btnFormatTinyLeader.setFocusable(false);
         btnFormatTinyLeader.setRequestFocusEnabled(false);
@@ -1377,8 +1380,8 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar2.add(jSeparator2);
 
         btnFormatLimited.setSelected(true);
-        btnFormatLimited.setText("Limited");
-        btnFormatLimited.setToolTipText("Limited format.");
+        btnFormatLimited.setText(bundle.getString("TablesPanel.btnFormatLimited.text")); // NOI18N
+        btnFormatLimited.setToolTipText(bundle.getString("TablesPanel.btnFormatLimited.toolTipText")); // NOI18N
         btnFormatLimited.setFocusPainted(false);
         btnFormatLimited.setFocusable(false);
         btnFormatLimited.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1393,8 +1396,8 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar2.add(btnFormatLimited);
 
         btnFormatOther.setSelected(true);
-        btnFormatOther.setText("Other");
-        btnFormatOther.setToolTipText("Other formats (Freeform, Pauper, Extended, etc.)");
+        btnFormatOther.setText(bundle.getString("TablesPanel.btnFormatOther.text")); // NOI18N
+        btnFormatOther.setToolTipText(bundle.getString("TablesPanel.btnFormatOther.toolTipText")); // NOI18N
         btnFormatOther.setFocusPainted(false);
         btnFormatOther.setFocusable(false);
         btnFormatOther.setRequestFocusEnabled(false);
@@ -1408,8 +1411,8 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar2.add(jSeparator5);
 
         btnOpen.setSelected(true);
-        btnOpen.setText("Open");
-        btnOpen.setToolTipText("Show open games");
+        btnOpen.setText(bundle.getString("TablesPanel.btnOpen.text")); // NOI18N
+        btnOpen.setToolTipText(bundle.getString("TablesPanel.btnOpen.toolTipText")); // NOI18N
         btnOpen.setFocusPainted(false);
         btnOpen.setFocusable(false);
         btnOpen.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1424,8 +1427,8 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar2.add(btnOpen);
 
         btnPassword.setSelected(true);
-        btnPassword.setText("PW");
-        btnPassword.setToolTipText("Show passworded games");
+        btnPassword.setText(bundle.getString("TablesPanel.btnPassword.text")); // NOI18N
+        btnPassword.setToolTipText(bundle.getString("TablesPanel.btnPassword.toolTipText")); // NOI18N
         btnPassword.setFocusPainted(false);
         btnPassword.setFocusable(false);
         btnPassword.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1439,7 +1442,7 @@ public class TablesPanel extends javax.swing.JPanel {
         });
         filterBar2.add(btnPassword);
 
-        btnQuickStartDuel.setText("Quick start duel");
+        btnQuickStartDuel.setText(bundle.getString("TablesPanel.btnQuickStartDuel.text")); // NOI18N
         btnQuickStartDuel.setFocusable(false);
         btnQuickStartDuel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnQuickStartDuel.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -1449,7 +1452,7 @@ public class TablesPanel extends javax.swing.JPanel {
             }
         });
 
-        btnQuickStartCommander.setText("Quick start commander");
+        btnQuickStartCommander.setText(bundle.getString("TablesPanel.btnQuickStartCommander.text")); // NOI18N
         btnQuickStartCommander.setFocusable(false);
         btnQuickStartCommander.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnQuickStartCommander.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -1519,11 +1522,9 @@ public class TablesPanel extends javax.swing.JPanel {
         add(jPanelTop, gridBagConstraints);
 
         jSplitPane1.setBorder(null);
-        jSplitPane1.setDividerSize(10);
         jSplitPane1.setResizeWeight(1.0);
 
         jSplitPaneTables.setBorder(null);
-        jSplitPaneTables.setDividerSize(10);
         jSplitPaneTables.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
         jSplitPaneTables.setResizeWeight(0.5);
 
@@ -1570,7 +1571,7 @@ public class TablesPanel extends javax.swing.JPanel {
         jPanelBottom.setPreferredSize(new java.awt.Dimension(516, 37));
         jPanelBottom.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        buttonWhatsNew.setText("Show what's new");
+        buttonWhatsNew.setText(bundle.getString("TablesPanel.buttonWhatsNew.text")); // NOI18N
         buttonWhatsNew.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         buttonWhatsNew.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttonWhatsNew.setOpaque(false);
@@ -1581,7 +1582,7 @@ public class TablesPanel extends javax.swing.JPanel {
         });
         jPanelBottom.add(buttonWhatsNew);
 
-        buttonNextMessage.setText("Next message");
+        buttonNextMessage.setText(bundle.getString("TablesPanel.buttonNextMessage.text")); // NOI18N
         buttonNextMessage.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         buttonNextMessage.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttonNextMessage.setOpaque(false);
@@ -1594,12 +1595,12 @@ public class TablesPanel extends javax.swing.JPanel {
 
         labelMessageHeader.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         labelMessageHeader.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        labelMessageHeader.setText("Message of the Day:");
+        labelMessageHeader.setText(bundle.getString("TablesPanel.labelMessageHeader.text")); // NOI18N
         labelMessageHeader.setAlignmentY(0.3F);
         jPanelBottom.add(labelMessageHeader);
 
         labelMessageText.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        labelMessageText.setText("You are playing Mage version 0.7.5. Welcome! -- Mage dev team --");
+        labelMessageText.setText(bundle.getString("TablesPanel.labelMessageText.text")); // NOI18N
         jPanelBottom.add(labelMessageText);
 
         gridBagConstraints = new java.awt.GridBagConstraints();

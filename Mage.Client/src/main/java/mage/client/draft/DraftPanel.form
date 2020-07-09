@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+<Form version="1.5" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <NonVisualComponents>
     <Component class="javax.swing.JSeparator" name="jSeparator1">
     </Component>
   </NonVisualComponents>
   <AuxValues>
-    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="1"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_formBundle" type="java.lang.String" value="SwingMessage"/>
     <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
     <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
-    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="true"/>
     <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
@@ -153,7 +154,9 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="btnQuitTournament">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Quit Tournament"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="SwingMessage.properties" key="DraftPanel.btnQuitTournament.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnQuitTournamentActionPerformed"/>
@@ -161,7 +164,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblPack1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Pack 1:"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="SwingMessage.properties" key="DraftPanel.lblPack1.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtPack1">
@@ -177,7 +182,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblPack2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Pack 2:"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="SwingMessage.properties" key="DraftPanel.lblPack2.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtPack2">
@@ -193,7 +200,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblPack3">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Pack 3:"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="SwingMessage.properties" key="DraftPanel.lblPack3.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtPack3">
@@ -209,7 +218,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblCardNo">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Card #:"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="SwingMessage.properties" key="DraftPanel.lblCardNo.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtCardNo">
@@ -291,7 +302,7 @@
                 <Component class="javax.swing.JLabel" name="lblPlayer01">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="10" style="0"/>
+                      <Font name="Dialog" size="10" style="0"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="4"/>
                     <Property name="focusable" type="boolean" value="false"/>
@@ -302,7 +313,7 @@
                 <Component class="javax.swing.JLabel" name="lblPlayer02">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="10" style="0"/>
+                      <Font name="Dialog" size="10" style="0"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="4"/>
                     <Property name="focusable" type="boolean" value="false"/>
@@ -313,7 +324,7 @@
                 <Component class="javax.swing.JLabel" name="lblPlayer03">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="10" style="0"/>
+                      <Font name="Dialog" size="10" style="0"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="4"/>
                     <Property name="focusable" type="boolean" value="false"/>
@@ -324,7 +335,7 @@
                 <Component class="javax.swing.JLabel" name="lblPlayer04">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="10" style="0"/>
+                      <Font name="Dialog" size="10" style="0"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="4"/>
                     <Property name="focusable" type="boolean" value="false"/>
@@ -335,7 +346,7 @@
                 <Component class="javax.swing.JLabel" name="lblPlayer05">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="10" style="0"/>
+                      <Font name="Dialog" size="10" style="0"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="4"/>
                     <Property name="focusable" type="boolean" value="false"/>
@@ -346,7 +357,7 @@
                 <Component class="javax.swing.JLabel" name="lblPlayer06">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="10" style="0"/>
+                      <Font name="Dialog" size="10" style="0"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="4"/>
                     <Property name="focusable" type="boolean" value="false"/>
@@ -357,7 +368,7 @@
                 <Component class="javax.swing.JLabel" name="lblPlayer07">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="10" style="0"/>
+                      <Font name="Dialog" size="10" style="0"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="4"/>
                     <Property name="focusable" type="boolean" value="false"/>
@@ -368,7 +379,7 @@
                 <Component class="javax.swing.JLabel" name="lblPlayer08">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="10" style="0"/>
+                      <Font name="Dialog" size="10" style="0"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="4"/>
                     <Property name="focusable" type="boolean" value="false"/>
@@ -434,7 +445,7 @@
                 <Component class="javax.swing.JLabel" name="lblPlayer09">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="10" style="0"/>
+                      <Font name="Dialog" size="10" style="0"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="focusable" type="boolean" value="false"/>
@@ -445,7 +456,7 @@
                 <Component class="javax.swing.JLabel" name="lblPlayer10">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="10" style="0"/>
+                      <Font name="Dialog" size="10" style="0"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="focusable" type="boolean" value="false"/>
@@ -456,7 +467,7 @@
                 <Component class="javax.swing.JLabel" name="lblPlayer11">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="10" style="0"/>
+                      <Font name="Dialog" size="10" style="0"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="focusable" type="boolean" value="false"/>
@@ -467,7 +478,7 @@
                 <Component class="javax.swing.JLabel" name="lblPlayer12">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="10" style="0"/>
+                      <Font name="Dialog" size="10" style="0"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="focusable" type="boolean" value="false"/>
@@ -478,7 +489,7 @@
                 <Component class="javax.swing.JLabel" name="lblPlayer13">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="10" style="0"/>
+                      <Font name="Dialog" size="10" style="0"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="focusable" type="boolean" value="false"/>
@@ -489,7 +500,7 @@
                 <Component class="javax.swing.JLabel" name="lblPlayer14">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="10" style="0"/>
+                      <Font name="Dialog" size="10" style="0"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="focusable" type="boolean" value="false"/>
@@ -500,7 +511,7 @@
                 <Component class="javax.swing.JLabel" name="lblPlayer15">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="10" style="0"/>
+                      <Font name="Dialog" size="10" style="0"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="focusable" type="boolean" value="false"/>
@@ -511,7 +522,7 @@
                 <Component class="javax.swing.JLabel" name="lblPlayer16">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="10" style="0"/>
+                      <Font name="Dialog" size="10" style="0"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="focusable" type="boolean" value="false"/>

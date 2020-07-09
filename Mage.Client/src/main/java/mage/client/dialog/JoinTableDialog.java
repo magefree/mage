@@ -58,17 +58,26 @@ public class JoinTableDialog extends MageDialog {
         lblPassword = new javax.swing.JLabel();
         txtPassword = new javax.swing.JTextField();
 
-        setTitle("Join Table");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("SwingMessage"); // NOI18N
+        setTitle(bundle.getString("JoinTableDialog.title")); // NOI18N
 
-        btnCancel.setText("Cancel");
-        btnCancel.addActionListener(evt -> btnCancelActionPerformed(evt));
+        btnCancel.setText(bundle.getString("JoinTableDialog.btnCancel.text")); // NOI18N
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
 
-        btnOK.setText("OK");
-        btnOK.addActionListener(evt -> btnOKActionPerformed(evt));
+        btnOK.setText(bundle.getString("JoinTableDialog.btnOK.text")); // NOI18N
+        btnOK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOKActionPerformed(evt);
+            }
+        });
 
-        lblPassword.setText("Password:");
+        lblPassword.setText(bundle.getString("JoinTableDialog.lblPassword.text")); // NOI18N
 
-        txtPassword.setText("password");
+        txtPassword.setText(bundle.getString("JoinTableDialog.txtPassword.text")); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -139,7 +148,7 @@ public class JoinTableDialog extends MageDialog {
 
     private void handleError(Exception ex) {
         logger.fatal("Error loading deck", ex);
-        JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error loading deck.", "Error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(MageFrame.getDesktop(), java.util.ResourceBundle.getBundle("otherMessage").getString("lblErrorLoadingDeck") + ".", java.util.ResourceBundle.getBundle("otherMessage").getString("lblError"), JOptionPane.ERROR_MESSAGE);
     }
 
 

@@ -1,10 +1,9 @@
 
-
- /*
- * NewPlayerPanel.java
- *
- * Created on 15-Dec-2009, 10:09:46 PM
- */
+/*
+* NewPlayerPanel.java
+*
+* Created on 15-Dec-2009, 10:09:46 PM
+*/
 package mage.client.table;
 
 import java.io.File;
@@ -51,7 +50,7 @@ public class NewPlayerPanel extends javax.swing.JPanel {
         if (!lastFolder.isEmpty()) {
             fcSelectDeck.setCurrentDirectory(new File(lastFolder));
         }
-        int ret = fcSelectDeck.showDialog(this, "Select Deck");
+        int ret = fcSelectDeck.showDialog(this, java.util.ResourceBundle.getBundle("otherMessage").getString("lblSelectDeck"));
         if (ret == JFileChooser.APPROVE_OPTION) {
             File file = fcSelectDeck.getSelectedFile();
             this.txtPlayerDeck.setText(file.getPath());
@@ -117,17 +116,26 @@ public class NewPlayerPanel extends javax.swing.JPanel {
         lblLevel = new javax.swing.JLabel();
         spnLevel = new javax.swing.JSpinner();
 
-        lblPlayerName.setText("Name:");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("SwingMessage"); // NOI18N
+        lblPlayerName.setText(bundle.getString("NewPlayerPanel.lblPlayerName.text")); // NOI18N
 
-        lblPlayerDeck.setText("Deck:");
+        lblPlayerDeck.setText(bundle.getString("NewPlayerPanel.lblPlayerDeck.text")); // NOI18N
 
-        btnPlayerDeck.setText("...");
-        btnPlayerDeck.addActionListener(evt -> btnPlayerDeckActionPerformed(evt));
+        btnPlayerDeck.setText(bundle.getString("NewPlayerPanel.btnPlayerDeck.text")); // NOI18N
+        btnPlayerDeck.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPlayerDeckActionPerformed(evt);
+            }
+        });
 
-        btnGenerate.setText("Generate");
-        btnGenerate.addActionListener(evt -> btnGenerateActionPerformed(evt));
+        btnGenerate.setText(bundle.getString("NewPlayerPanel.btnGenerate.text")); // NOI18N
+        btnGenerate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerateActionPerformed(evt);
+            }
+        });
 
-        lblLevel.setText("Skill:");
+        lblLevel.setText(bundle.getString("NewPlayerPanel.lblLevel.text")); // NOI18N
 
         spnLevel.setModel(new javax.swing.SpinnerNumberModel(6, 1, 10, 1));
 

@@ -10,7 +10,9 @@
       <SubComponents>
         <MenuItem class="javax.swing.JMenuItem" name="menuSaveSettings1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Save to config 1"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.menuSaveSettings1.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuSaveSettings1ActionPerformed"/>
@@ -18,7 +20,9 @@
         </MenuItem>
         <MenuItem class="javax.swing.JMenuItem" name="menuSaveSettings2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Save to config 2"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.menuSaveSettings2.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuSaveSettings2ActionPerformed"/>
@@ -34,8 +38,12 @@
       <SubComponents>
         <MenuItem class="javax.swing.JMenuItem" name="menuLoadSettingsLast">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Load from last time"/>
-            <Property name="toolTipText" type="java.lang.String" value=""/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.menuLoadSettingsLast.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.menuLoadSettingsLast.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuLoadSettingsLastActionPerformed"/>
@@ -45,8 +53,12 @@
         </Component>
         <MenuItem class="javax.swing.JMenuItem" name="menuLoadSettings1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Load from config 1"/>
-            <Property name="toolTipText" type="java.lang.String" value=""/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.menuLoadSettings1.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.menuLoadSettings1.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuLoadSettings1ActionPerformed"/>
@@ -54,7 +66,9 @@
         </MenuItem>
         <MenuItem class="javax.swing.JMenuItem" name="menuLoadSettings2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Load from config 2"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.menuLoadSettings2.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuLoadSettings2ActionPerformed"/>
@@ -64,8 +78,12 @@
         </Component>
         <MenuItem class="javax.swing.JMenuItem" name="menuLoadSettingsDefault">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Load default settings"/>
-            <Property name="toolTipText" type="java.lang.String" value=""/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.menuLoadSettingsDefault.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.menuLoadSettingsDefault.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuLoadSettingsDefaultActionPerformed"/>
@@ -75,17 +93,20 @@
     </Container>
   </NonVisualComponents>
   <Properties>
-    <Property name="title" type="java.lang.String" value="New Tournament"/>
+    <Property name="title" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+      <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.title" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+    </Property>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
   </SyntheticProperties>
   <AuxValues>
-    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="1"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_formBundle" type="java.lang.String" value="SwingMessage"/>
     <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
     <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
-    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="true"/>
     <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
@@ -150,7 +171,7 @@
                       <Component id="btnCancel" min="-2" pref="100" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="20" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
@@ -305,7 +326,7 @@
                   <Group type="102" attributes="0">
                       <Component id="pnlPacks" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="pnlRandomPacks" pref="10" max="32767" attributes="0"/>
+                      <Component id="pnlRandomPacks" pref="83" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                           <Group type="103" alignment="1" groupAlignment="3" attributes="0">
@@ -354,15 +375,21 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="lblName">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Name:"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.lblName.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtName">
     </Component>
     <Component class="javax.swing.JLabel" name="lbTimeLimit">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Time Limit:"/>
-        <Property name="toolTipText" type="java.lang.String" value="The time a player has for the whole match. If a player runs out of time during a game, they lose the complete match. "/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.lbTimeLimit.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.lbTimeLimit.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
       <BindingProperties>
         <BindingProperty name="labelFor" source="cbTimeLimit" target="lbTimeLimit" targetPath="labelFor" updateStrategy="0" immediately="false"/>
@@ -370,34 +397,50 @@
     </Component>
     <Component class="javax.swing.JComboBox" name="cbTimeLimit">
       <Properties>
-        <Property name="toolTipText" type="java.lang.String" value="The time a player has for the whole match. If a player runs out of time during a game, they lose the complete match. "/>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.cbTimeLimit.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lbSkillLevel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Skill Level:"/>
-        <Property name="toolTipText" type="java.lang.String" value="The time a player has for the whole match. If a player runs out of time during a game, they lose the complete match. "/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.lbSkillLevel.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.lbSkillLevel.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="cbSkillLevel">
       <Properties>
-        <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;This option can be used to make it easier to find matches&lt;br&gt;&#xa;with opponents of the appropriate skill level."/>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.cbSkillLevel.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblPassword">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Password:"/>
-        <Property name="toolTipText" type="java.lang.String" value="Players have to enter the password to be able to join this table."/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.lblPassword.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.lblPassword.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtPassword">
       <Properties>
-        <Property name="toolTipText" type="java.lang.String" value="Players have to enter the password to be able to join this table."/>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.txtPassword.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblTournamentType">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Tournament Type:"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.lblTournamentType.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="cbTournamentType">
@@ -417,7 +460,9 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lbDeckType">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Deck Type:"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.lbDeckType.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
         <Property name="focusable" type="boolean" value="false"/>
       </Properties>
     </Component>
@@ -425,7 +470,9 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblGameType">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Game Type:"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.lblGameType.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
         <Property name="focusable" type="boolean" value="false"/>
       </Properties>
     </Component>
@@ -439,22 +486,30 @@
         <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
           <ComponentRef name="spnFreeMulligans"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Free Mulligans:"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.lblFreeMulligans.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JSpinner" name="spnFreeMulligans">
       <Properties>
-        <Property name="toolTipText" type="java.lang.String" value="Players can take this number of free mulligans (their hand size will not be reduced)."/>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.spnFreeMulligans.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblNumWins">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Wins:"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.lblNumWins.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JSpinner" name="spnNumWins">
       <Properties>
-        <Property name="toolTipText" type="java.lang.String" value="To win a match a player has to win this number of games."/>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.spnNumWins.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="spnNumWinsnumPlayersChanged"/>
@@ -462,7 +517,9 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblDraftCube">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Draft Cube:"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.lblDraftCube.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="cbDraftCube">
@@ -482,13 +539,19 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblNumRounds">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Number of Swiss Rounds:"/>
-        <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;The number of rounds the swiss tournament has in total.&lt;br&gt;&#xa;The tournaments ends after that number of rounds or&lt;br&gt; &#xa;if there are less than two players left in the tournament."/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.lblNumRounds.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.lblNumRounds.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JSpinner" name="spnNumRounds">
       <Properties>
-        <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;The number of rounds the swiss tournament has in total.&lt;br&gt;&#xa;The tournaments ends after that number of rounds or&lt;br&gt; &#xa;if there are less than two players left in the tournament."/>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.spnNumRounds.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="spnNumRoundsnumPlayersChanged"/>
@@ -496,10 +559,14 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblPacks">
       <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="11" style="1"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.editors2.FontEditor">
+          <FontInfo relative="true">
+            <Font component="lblPacks" property="font" relativeSize="true" size="-1"/>
+          </FontInfo>
         </Property>
-        <Property name="text" type="java.lang.String" value="Packs"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.lblPacks.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
     </Component>
     <Container class="javax.swing.JPanel" name="pnlPacks">
@@ -519,12 +586,16 @@
     </Container>
     <Component class="javax.swing.JLabel" name="lblNbrPlayers">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Players:"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.lblNbrPlayers.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblNbrSeats">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Seats:"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.lblNbrSeats.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JSpinner" name="spnNumPlayers">
@@ -566,7 +637,9 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Timing:"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.jLabel6.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="cbDraftTiming">
@@ -588,38 +661,58 @@
     </Container>
     <Component class="javax.swing.JCheckBox" name="cbAllowSpectators">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Allow spectators"/>
-        <Property name="toolTipText" type="java.lang.String" value="Allow other players to watch the games of this table."/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.cbAllowSpectators.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.cbAllowSpectators.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="cbPlaneChase">
       <Properties>
-        <Property name="text" type="java.lang.String" value="PlaneChase"/>
-        <Property name="toolTipText" type="java.lang.String" value="Use Plane Chase for the tournament."/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.cbPlaneChase.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.cbPlaneChase.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblPlayer1">
       <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="11" style="1"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.editors2.FontEditor">
+          <FontInfo relative="true">
+            <Font component="lblPlayer1" property="font" relativeSize="true" size="-1"/>
+          </FontInfo>
         </Property>
-        <Property name="text" type="java.lang.String" value="Player 1 (You)"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.lblPlayer1.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblConstructionTime">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Construction Time (Minutes):"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.lblConstructionTime.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="chkRollbackTurnsAllowed">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Rollbacks"/>
-        <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;Allow to rollback to the start of previous turns&lt;br&gt; if all players agree. "/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.chkRollbackTurnsAllowed.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.chkRollbackTurnsAllowed.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JSpinner" name="spnConstructTime">
       <Properties>
-        <Property name="toolTipText" type="java.lang.String" value="The time players have to build their deck."/>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.spnConstructTime.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="mage.client.table.NewPlayerPanel" name="player1Panel">
@@ -639,7 +732,7 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="pnlOtherPlayers" alignment="0" pref="5" max="32767" attributes="0"/>
+              <Component id="pnlOtherPlayers" alignment="0" pref="30" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -663,7 +756,9 @@
     </Container>
     <Component class="javax.swing.JButton" name="btnOk">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Create"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.btnOk.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOkActionPerformed"/>
@@ -671,7 +766,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnCancel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Cancel"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.btnCancel.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelActionPerformed"/>
@@ -684,7 +781,9 @@
             <EtchetBorder/>
           </Border>
         </Property>
-        <Property name="toolTipText" type="java.lang.String" value=""/>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.pnlRandomPacks.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
@@ -693,18 +792,26 @@
     </Container>
     <Component class="javax.swing.JLabel" name="lblQuitRatio">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Allowed quit %"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.lblQuitRatio.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JSpinner" name="spnQuitRatio">
       <Properties>
-        <Property name="toolTipText" type="java.lang.String" value=""/>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.spnQuitRatio.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblMinimumRating">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Minimum rating:"/>
-        <Property name="toolTipText" type="java.lang.String" value="Players with rating less than this value can&apos;t join this table"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.lblMinimumRating.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.lblMinimumRating.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JSpinner" name="spnMinimumRating">
@@ -714,14 +821,22 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="chkRated">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Rated game"/>
-        <Property name="toolTipText" type="java.lang.String" value="Indicates if matches will be rated"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.chkRated.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.chkRated.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblMullgian">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Mulligan type:"/>
-        <Property name="toolTipText" type="java.lang.String" value="What style of mulligan?"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.lblMullgian.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.lblMullgian.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="NewTableDialog_lblMullgian"/>
@@ -732,7 +847,9 @@
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="0"/>
         </Property>
-        <Property name="toolTipText" type="java.lang.String" value="Selections the type of mulligan for games."/>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.cbMulligan.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -740,8 +857,12 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnSettingsSave">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Save..."/>
-        <Property name="toolTipText" type="java.lang.String" value="Save settings"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.btnSettingsSave.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.btnSettingsSave.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnSettingsSaveMouseClicked"/>
@@ -749,8 +870,12 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnSettingsLoad">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Load..."/>
-        <Property name="toolTipText" type="java.lang.String" value="Load settings"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.btnSettingsLoad.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.btnSettingsLoad.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnSettingsLoadMouseClicked"/>
@@ -758,7 +883,9 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblSettings">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Settings"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="SwingMessage.properties" key="NewTournamentDialog.lblSettings.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
     </Component>
   </SubComponents>
