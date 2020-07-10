@@ -1,4 +1,4 @@
-#!/bin/sh -x
+#!/bin/sh
 
 script_dir="$(readlink -f -- "$BASH_SOURCE")"
 script_dir="$(dirname -- $script_dir)"
