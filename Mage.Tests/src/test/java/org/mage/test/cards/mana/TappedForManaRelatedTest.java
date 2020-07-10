@@ -44,9 +44,7 @@ public class TappedForManaRelatedTest extends CardTestPlayerBase {
 
     }
 
-    // Mana producedc by triggered mana abilities is not calculated in manaOptions calculations yet.
     @Test
-    // @Ignore
     public void TestCradleWithWildGrowthTwoCreatures() {
         // {T}: Add {G} for each creature you control.
         addCard(Zone.BATTLEFIELD, playerA, "Gaea's Cradle", 1);
@@ -70,9 +68,7 @@ public class TappedForManaRelatedTest extends CardTestPlayerBase {
 
     }
 
-    // Mana producedc by triggered mana abilities is not calculated in manaOptions calculations yet.
     @Test
-    // @Ignore
     public void TestWildGrowth() {
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 2);
 
