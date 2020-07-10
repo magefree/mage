@@ -54,8 +54,8 @@ class PowerArtifactCostModificationEffect extends CostModificationEffectImpl {
 
     PowerArtifactCostModificationEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        staticText = "Enchanted artifact's activated abilities cost {2} less to activate. " +
-                "This effect can't reduce the amount of mana an ability costs to activate to less than one mana.";
+        staticText = "Enchanted artifact's activated abilities cost {2} less to activate. "
+                + "This effect can't reduce the amount of mana an ability costs to activate to less than one mana.";
 
     }
 
@@ -82,10 +82,12 @@ class PowerArtifactCostModificationEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        Permanent artifact = game.getPermanent(abilityToModify.getSourceId());
-        if (artifact != null && artifact.getAttachments().contains(source.getSourceId())) {
+        Permanent artifact = game.getPermanentOrLKIBattlefield(abilityToModify.getSourceId());
+        if (artifact != null
+                && artifact.getAttachments().contains(source.getSourceId())) {
             if (abilityToModify.getAbilityType() == AbilityType.ACTIVATED
-                    || (abilityToModify.getAbilityType() == AbilityType.MANA && (abilityToModify instanceof ActivatedAbility))) {
+                    || (abilityToModify.getAbilityType() == AbilityType.MANA
+                    && (abilityToModify instanceof ActivatedAbility))) {
                 return true;
             }
         }

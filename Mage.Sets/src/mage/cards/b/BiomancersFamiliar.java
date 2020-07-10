@@ -11,7 +11,6 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.choices.ChoiceImpl;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -20,8 +19,6 @@ import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -36,7 +33,8 @@ public final class BiomancersFamiliar extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Activated abilities of creatures you control cost {2} less to activate. This effect can't reduce the amount of mana an ability costs to activate to less than one mana.
+        // Activated abilities of creatures you control cost {2} less to activate. 
+        // This effect can't reduce the amount of mana an ability costs to activate to less than one mana.
         this.addAbility(new SimpleStaticAbility(new BiomancersFamiliarCostReductionEffect()));
 
         // {T}: The next time target creature adapts this turn, it adapts as though it had no +1/+1 counters on it.
@@ -57,8 +55,9 @@ public final class BiomancersFamiliar extends CardImpl {
 
 class BiomancersFamiliarCostReductionEffect extends CostModificationEffectImpl {
 
-    private static final String effectText = "Activated abilities of creatures you control cost {2} less to activate. " +
-            "This effect can't reduce the mana in that cost to less than one mana";
+    private static final String effectText = "Activated abilities of creatures "
+            + "you control cost {2} less to activate. "
+            + "This effect can't reduce the mana in that cost to less than one mana";
 
     BiomancersFamiliarCostReductionEffect() {
         super(Duration.Custom, Outcome.Benefit, CostModificationType.REDUCE_COST);
@@ -99,8 +98,9 @@ class BiomancersFamiliarCostReductionEffect extends CostModificationEffectImpl {
             return false;
         }
         //Activated abilities of creatures you control
-        Permanent permanent = game.getPermanent(abilityToModify.getSourceId());
-        return permanent != null && permanent.isCreature()
+        Permanent permanent = game.getPermanentOrLKIBattlefield(abilityToModify.getSourceId());
+        return permanent != null
+                && permanent.isCreature()
                 && permanent.isControlledBy(source.getControllerId());
     }
 
@@ -114,8 +114,8 @@ class BiomancersFamiliarReplacementEffect extends ReplacementEffectImpl {
 
     BiomancersFamiliarReplacementEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "The next time target creature adapts this turn, " +
-                "it adapts as though it had no +1/+1 counters on it.";
+        staticText = "The next time target creature adapts this turn, "
+                + "it adapts as though it had no +1/+1 counters on it.";
     }
 
     private BiomancersFamiliarReplacementEffect(final BiomancersFamiliarReplacementEffect effect) {
