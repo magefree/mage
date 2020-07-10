@@ -138,8 +138,8 @@ public class OathOfLiegesTest extends CardTestPlayerBase {
 
         // turn 1 - A
         // cast oath A
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {W}", 4);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Replenish");
-//        showBattlefield("A perms", 1, PhaseStep.POSTCOMBAT_MAIN, playerA);
         // cast oath copy
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Copy Enchantment");
         setChoice(playerA, "Yes"); // use copy effect
@@ -200,10 +200,6 @@ public class OathOfLiegesTest extends CardTestPlayerBase {
         // cast oath A
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Replenish");
         // cast oath copy by opponent
-        // showBattlefield("A perms", 2, PhaseStep.POSTCOMBAT_MAIN, playerA);
-        // showBattlefield("B perms", 2, PhaseStep.POSTCOMBAT_MAIN, playerB);
-        // showAvailableAbilities("B abils", 2, PhaseStep.POSTCOMBAT_MAIN, playerB);
-        // showHand("B hand", 2, PhaseStep.POSTCOMBAT_MAIN, playerB);
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Copy Enchantment");
         setChoice(playerB, "Yes"); // use copy effect
         setChoice(playerB, "Oath of Lieges"); // target for copy
@@ -211,7 +207,6 @@ public class OathOfLiegesTest extends CardTestPlayerBase {
         checkPermanentCount("B have 1 oath", 2, PhaseStep.END_TURN, playerA, "Oath of Lieges", 1);
         checkPermanentCount("A have 10 plains", 2, PhaseStep.END_TURN, playerA, "Plains", 10);
         checkPermanentCount("B have 12 plains", 2, PhaseStep.END_TURN, playerB, "Plains", 12);
-        // showLibrary("lib B", 2, PhaseStep.END_TURN, playerB);
 
         // turn 3 - A
         // oath A triggers for A and activates
