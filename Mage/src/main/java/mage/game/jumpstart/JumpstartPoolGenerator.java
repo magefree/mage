@@ -102,7 +102,7 @@ public class JumpstartPoolGenerator {
         int index = random.nextInt(JUMPSTART_PACKS.size());
         list.getCards().addAll(JUMPSTART_PACKS.get(index).getCards());
       }
-      return Deck.load(list).getCards();
+      return Deck.load(list, false, false).getCards();
     } catch (GameException e) {
       throw new RuntimeException(e);
     }
