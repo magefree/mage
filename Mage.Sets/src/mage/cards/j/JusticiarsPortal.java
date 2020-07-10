@@ -62,7 +62,7 @@ class JusticiarsPortalEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         UUID targetId = source.getFirstTarget();
         new ExileTargetForSourceEffect().apply(game, source);
-        new ReturnToBattlefieldUnderYourControlTargetEffect(true).apply(game, source);
+        new ReturnToBattlefieldUnderYourControlTargetEffect().apply(game, source);
         ContinuousEffect effect = new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn);
         effect.setTargetPointer(new FixedTarget(targetId, game));
         game.addEffect(effect, source);

@@ -1,7 +1,5 @@
-
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
@@ -15,12 +13,7 @@ import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetE
 import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -28,8 +21,9 @@ import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class KayaGhostAssassin extends CardImpl {
@@ -37,7 +31,7 @@ public final class KayaGhostAssassin extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("target creature to exile. Choose no targets to exile Kaya.");
 
     public KayaGhostAssassin(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{W}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{B}");
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.KAYA);
 
@@ -101,7 +95,7 @@ class KayaGhostAssassinEffect extends OneShotEffect {
                 if (targetCreature != null) {
                     int zcc = targetCreature.getZoneChangeCounter(game);
                     if (controller.moveCards(targetCreature, Zone.EXILED, source, game)) {
-                        Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect();
+                        Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false);
                         effect.setTargetPointer(new FixedTarget(targetCreature.getId(), zcc + 1));
                         AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility delayedAbility
                                 = new AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility(effect);
@@ -111,12 +105,12 @@ class KayaGhostAssassinEffect extends OneShotEffect {
             } else {
                 int zcc = sourcePermanent.getZoneChangeCounter(game);
                 if (controller.moveCards(sourcePermanent, Zone.EXILED, source, game)) {
-                    Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect();
-                        effect.setTargetPointer(new FixedTarget(sourcePermanent.getId(), zcc + 1));
-                        AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility delayedAbility
-                                = new AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility(effect);
-                        game.addDelayedTriggeredAbility(delayedAbility, source);
-                    }
+                    Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false);
+                    effect.setTargetPointer(new FixedTarget(sourcePermanent.getId(), zcc + 1));
+                    AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility delayedAbility
+                            = new AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility(effect);
+                    game.addDelayedTriggeredAbility(delayedAbility, source);
+                }
             }
             controller.loseLife(2, game, false);
             return true;

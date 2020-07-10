@@ -40,7 +40,7 @@ public final class EscapeProtocol extends CardImpl {
                 "exile target artifact or creature you control, " +
                         "then return it to the battlefield under its owner's control."
         );
-        ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect());
+        ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(new CycleControllerTriggeredAbility(new DoWhenCostPaid(
                 ability, new GenericManaCost(1), "Pay {1}?"

@@ -132,7 +132,7 @@ class YorionSkyNomadEffect extends OneShotEffect {
                 cardsToReturn.add(exiled);
             }
         }
-        Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect();
+        Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false);
         effect.setTargetPointer(new FixedTargets(cardsToReturn, game));
         AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
         game.addDelayedTriggeredAbility(delayedAbility, source);

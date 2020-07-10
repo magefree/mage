@@ -1,7 +1,5 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ExileTargetForSourceEffect;
@@ -11,8 +9,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.common.TargetControlledCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class AcrobaticManeuver extends CardImpl {
@@ -24,7 +23,7 @@ public final class AcrobaticManeuver extends CardImpl {
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         Effect effect = new ExileTargetForSourceEffect();
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect());
+        this.getSpellAbility().addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false));
 
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

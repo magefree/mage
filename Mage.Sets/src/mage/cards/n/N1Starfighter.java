@@ -43,7 +43,7 @@ public final class N1Starfighter extends CardImpl {
         // P.S. original card have error with missing target word (another target creature)
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new DoIfCostPaid(
                 new ExileTargetForSourceEffect(), new ManaCostsImpl("{1}{W/U}")), false);
-        ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, true).concatBy(", then"));
+        ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false).concatBy(", then"));
         ability.addTarget(new TargetControlledCreaturePermanent(filter));
         this.addAbility(ability);
     }

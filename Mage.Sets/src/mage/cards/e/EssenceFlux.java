@@ -1,7 +1,5 @@
-
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -13,16 +11,15 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
-import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class EssenceFlux extends CardImpl {
@@ -68,30 +65,25 @@ class EssenceFluxEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Cards cardsToBattlefield = new CardsImpl();
-            UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
-            if (exileZoneId != null) {
-                ExileZone exileZone = game.getExile().getExileZone(exileZoneId);
-                if (exileZone != null) {
-                    for (UUID targetId : this.getTargetPointer().getTargets(game, source)) {
-                        if (exileZone.contains(targetId)) {
-                            cardsToBattlefield.add(targetId);
-                        } else {
-                            Card card = game.getCard(targetId);
-                            if (card instanceof MeldCard) {
-                                MeldCard meldCard = (MeldCard) card;
-                                Card topCard = meldCard.getTopHalfCard();
-                                Card bottomCard = meldCard.getBottomHalfCard();
-                                if (topCard.getZoneChangeCounter(game) == meldCard.getTopLastZoneChangeCounter() && exileZone.contains(topCard.getId())) {
-                                    cardsToBattlefield.add(topCard);
-                                }
-                                if (bottomCard.getZoneChangeCounter(game) == meldCard.getBottomLastZoneChangeCounter() && exileZone.contains(bottomCard.getId())) {
-                                    cardsToBattlefield.add(bottomCard);
-                                }
-                            }
+            for (UUID targetId : this.getTargetPointer().getTargets(game, source)) {
+                if (game.getExile().containsId(targetId, game)) {
+                    cardsToBattlefield.add(targetId);
+                } else {
+                    Card card = game.getCard(targetId);
+                    if (card instanceof MeldCard) {
+                        MeldCard meldCard = (MeldCard) card;
+                        Card topCard = meldCard.getTopHalfCard();
+                        Card bottomCard = meldCard.getBottomHalfCard();
+                        if (topCard.getZoneChangeCounter(game) == meldCard.getTopLastZoneChangeCounter() && game.getExile().containsId(topCard.getId(), game)) {
+                            cardsToBattlefield.add(topCard);
+                        }
+                        if (bottomCard.getZoneChangeCounter(game) == meldCard.getBottomLastZoneChangeCounter() && game.getExile().containsId(bottomCard.getId(), game)) {
+                            cardsToBattlefield.add(bottomCard);
                         }
                     }
                 }
             }
+
             if (!cardsToBattlefield.isEmpty()) {
                 controller.moveCards(cardsToBattlefield.getCards(game), Zone.BATTLEFIELD, source, game, false, false, true, null);
                 for (UUID cardId : cardsToBattlefield) {
