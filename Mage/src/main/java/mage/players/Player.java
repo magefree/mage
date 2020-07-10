@@ -40,6 +40,7 @@ import mage.util.Copyable;
 
 import java.io.Serializable;
 import java.util.*;
+import mage.Mana;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -635,6 +636,10 @@ public interface Player extends MageItem, Copyable<Player> {
     void untap(Game game);
 
     ManaOptions getManaAvailable(Game game);
+    
+    void addAvailableTriggeredMana(List<Mana> netManaAvailable);
+    
+    List<List<Mana>> getAvailableTriggeredMana();
 
     List<ActivatedAbility> getPlayable(Game game, boolean hidden);
 

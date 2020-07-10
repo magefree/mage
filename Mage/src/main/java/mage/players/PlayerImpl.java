@@ -177,6 +177,9 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     protected FilterMana phyrexianColors;
 
+    // Used during available mana calculation to give back possible available net mana from triggered mana abilities (No need to copy)
+    protected final List<List<Mana>> availableTriggeredManaList = new ArrayList<>();
+    
     /**
      * During some steps we can't play anything
      */
@@ -2848,8 +2851,18 @@ public abstract class PlayerImpl implements Player, Serializable {
         return game.getBattlefield().getAllActivePermanents(blockFilter, playerId, game);
     }
 
+    /**
+     * Returns the mana options the player currently has. That means which combinations of
+     * mana are available to cast spells or activate abilities etc.
+     * 
+     * @param game
+     * @return 
+     */
     @Override
     public ManaOptions getManaAvailable(Game game) {
+        boolean oldState = game.inCheckPlayableState();
+        game.setCheckPlayableState(true);
+        
         ManaOptions availableMana = new ManaOptions();
 
         List<Abilities<ActivatedManaAbilityImpl>> sourceWithoutManaCosts = new ArrayList<>();
@@ -2891,10 +2904,34 @@ public abstract class PlayerImpl implements Player, Serializable {
 
         // remove duplicated variants (see ManaOptionsTest for info - when that rises)
         availableMana.removeDuplicated();
-
+        
+        game.setCheckPlayableState(oldState);
         return availableMana;
     }
 
+    /**
+     * Used during calculation of available mana to gather the amount of producable triggered mana caused by using mana sources.
+     * So the set value is only used during the calculation of the mana produced by one source and cleared thereafter
+     * 
+     * @param netManaAvailable the net mana produced by the triggered mana abaility
+     */
+    @Override
+    public void addAvailableTriggeredMana(List<Mana> netManaAvailable) {
+        this.availableTriggeredManaList.add(netManaAvailable);
+    }  
+
+    /**
+     * Used during calculation of available mana to get the amount of producable triggered mana caused by using mana sources.
+     * The list is cleared as soon the value is retrieved during available mana calculation.
+     * 
+     * @return 
+     */
+    @Override
+    public List<List<Mana>> getAvailableTriggeredMana() {
+        return availableTriggeredManaList;
+    }
+    
+    
     // returns only mana producers that don't require mana payment
     protected List<MageObject> getAvailableManaProducers(Game game) {
         List<MageObject> result = new ArrayList<>();

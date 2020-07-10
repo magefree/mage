@@ -63,6 +63,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import mage.Mana;
 
 import static org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl.*;
 
@@ -3274,7 +3275,17 @@ public class TestPlayer implements Player {
     public ManaOptions getManaAvailable(Game game) {
         return computerPlayer.getManaAvailable(game);
     }
+    
+    @Override
+    public void addAvailableTriggeredMana(List<Mana> availableTriggeredMana) {
+        computerPlayer.addAvailableTriggeredMana(availableTriggeredMana);
+    }  
 
+    @Override
+    public List<List<Mana>> getAvailableTriggeredMana() {
+        return computerPlayer.getAvailableTriggeredMana();
+    }
+    
     @Override
     public List<ActivatedAbility> getPlayable(Game game, boolean hidden) {
         return computerPlayer.getPlayable(game, hidden);

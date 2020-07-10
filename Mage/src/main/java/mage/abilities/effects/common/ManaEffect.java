@@ -14,6 +14,7 @@ import mage.players.Player;
 
 import java.util.ArrayList;
 import java.util.List;
+import mage.abilities.TriggeredAbility;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -37,6 +38,15 @@ public abstract class ManaEffect extends OneShotEffect {
         Player player = getPlayer(game, source);
         if (player == null) {
             return false;
+        }
+        if (game.inCheckPlayableState()) {
+            // During calculation of the available mana for a player the "TappedForMana" event is fired to simulate triggered mana production.
+            // By checking the inCheckPlayableState these events are handled to give back only the available mana of instead really producing mana
+            // So it's important if ManaEffects overwrite the apply method to take care for this.
+            if (source instanceof TriggeredAbility) {
+                player.addAvailableTriggeredMana(getNetMana(game, source));
+            }
+            return true; // No need to add mana to pool during checkPlayable   
         }
         Mana manaToAdd = produceMana(game, source);
         if (manaToAdd != null && manaToAdd.count() > 0) {
@@ -72,11 +82,13 @@ public abstract class ManaEffect extends OneShotEffect {
     }
 
     /**
-     * Produced the mana the effect can produce (DO NOT add it to mana pool -- return all added as mana object to process by replace events)
+     * Produced the mana the effect can produce (DO NOT add it to mana pool --
+     * return all added as mana object to process by replace events)
      * <p>
-     * WARNING, produceMana can be called multiple times for mana and spell available calculations
-     * if you don't want it then overide getNetMana to return max possible mana values
-     * (if you have choose dialogs or extra effects like new counters in produceMana)
+     * WARNING, produceMana can be called multiple times for mana and spell
+     * available calculations if you don't want it then overide getNetMana to
+     * return max possible mana values (if you have choose dialogs or extra
+     * effects like new counters in produceMana)
      *
      * @param game   warning, can be NULL for AI score calcs (game == null)
      * @param source

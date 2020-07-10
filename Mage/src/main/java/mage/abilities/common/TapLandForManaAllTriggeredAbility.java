@@ -34,6 +34,9 @@ public class TapLandForManaAllTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
+        if (game.inCheckPlayableState()) { // Ignored - see GameEvent.TAPPED_FOR_MANA
+            return false;
+        }
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
         if (permanent != null && permanent.isLand()) {
             if (setTargetPointer) {

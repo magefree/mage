@@ -41,6 +41,7 @@ import mage.target.common.TargetCardInLibrary;
 
 import java.io.Serializable;
 import java.util.*;
+import mage.Mana;
 
 /**
  * @author Quercitron
@@ -1037,6 +1038,21 @@ public class PlayerStub implements Player {
         return null;
     }
 
+    @Override
+    public void addAvailableTriggeredMana(List<Mana> availableTriggeredMan) {
+    
+    } 
+    
+    @Override
+    public List<List<Mana>> getAvailableTriggeredMana() {
+        return null;
+    }
+    
+    @Override
+    public int announceXMana(int min, int max, String message, Game game, Ability ability) {
+        return 0;
+    }
+    
     @Override
     public List<ActivatedAbility> getPlayable(Game game, boolean hidden) {
         return null;

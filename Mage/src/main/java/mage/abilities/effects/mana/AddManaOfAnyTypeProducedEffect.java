@@ -38,9 +38,26 @@ public class AddManaOfAnyTypeProducedEffect extends ManaEffect {
     @Override
     public List<Mana> getNetMana(Game game, Ability source) {
         List<Mana> netMana = new ArrayList<>();
-        Mana types = (Mana) this.getValue("mana"); // TODO: will not work until TriggeredManaAbility fix (see TriggeredManaAbilityMustGivesExtraManaOptions test)
+        Mana types = (Mana) this.getValue("mana");
         if (types != null) {
-            netMana.add(types.copy());
+            if (types.getBlack() > 0) {
+                netMana.add(Mana.BlackMana(1));
+            }
+            if (types.getRed() > 0) {
+                netMana.add(Mana.RedMana(1));
+            }
+            if (types.getBlue() > 0) {
+                netMana.add(Mana.BlueMana(1));
+            }
+            if (types.getGreen() > 0) {
+                netMana.add(Mana.GreenMana(1));
+            }
+            if (types.getWhite() > 0) {
+                netMana.add(Mana.WhiteMana(1));
+            }
+            if (types.getColorless() > 0) {
+                netMana.add(Mana.ColorlessMana(1));
+            }
         }
         return netMana;
     }

@@ -1,5 +1,6 @@
 package mage.cards.s;
 
+import java.util.ArrayList;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -11,8 +12,6 @@ import mage.abilities.effects.common.FlipSourceEffect;
 import mage.abilities.effects.common.ManaEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.choices.Choice;
-import mage.choices.ChoiceColor;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledLandPermanent;
@@ -26,9 +25,10 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TokenImpl;
 import mage.players.Player;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.choices.Choice;
+import mage.choices.ChoiceColor;
 
 /**
  * @author LevelX2
@@ -133,9 +133,55 @@ class SasayasEssenceManaEffect extends ManaEffect {
 
     @Override
     public List<Mana> getNetMana(Game game, Ability source) {
-        return new ArrayList<>();
+        List<Mana> netMana = new ArrayList<>();
+        Player controller = game.getPlayer(source.getControllerId());
+        Mana producedMana = (Mana) this.getValue("mana");
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (controller != null && producedMana != null && permanent != null) {
+            FilterPermanent filter = new FilterLandPermanent();
+            filter.add(Predicates.not(new PermanentIdPredicate(permanent.getId())));
+            filter.add(new NamePredicate(permanent.getName()));
+            int count = game.getBattlefield().countAll(filter, controller.getId(), game);
+            if (count > 0) {
+               if (producedMana.getBlack() > 0) {
+                   netMana.add(Mana.BlackMana(count));
+                }
+                if (producedMana.getRed() > 0) {
+                   netMana.add(Mana.RedMana(count));
+                }
+                if (producedMana.getBlue() > 0) {
+                    netMana.add(Mana.BlueMana(count));
+                }
+                if (producedMana.getGreen() > 0) {
+                    netMana.add(Mana.GreenMana(count));
+                }
+                if (producedMana.getWhite() > 0) {
+                    netMana.add(Mana.WhiteMana(count));
+                }
+                if (producedMana.getColorless() > 0) {
+                    netMana.add(Mana.ColorlessMana(count));
+                }                
+            }
+        }
+        return netMana;
+
     }
 
+    /**
+     * RULINGS 6/1/2005 If Sasaya’s Essence’s controller has four Forests and
+     * taps one of them for Green, the Essence will add GreenGreenGreen to that
+     * player’s mana pool for a total of GreenGreenGreenGreen.
+     *
+     * 6/1/2005 If Sasaya’s Essence’s controller has four Mossfire Valley and
+     * taps one of them for RedGreen, the Essence will add three mana (one for
+     * each other Mossfire Valley) of any combination of Red and/or Green to
+     * that player’s mana pool.
+     *
+     * 6/1/2005 If Sasaya’s Essence’s controller has two Brushlands and taps one
+     * of them for White, Sasaya’s Essence adds another White to that player’s
+     * mana pool. It won’t produce Green or Colorless unless the land was tapped
+     * for Green or Colorless instead.
+     */
     @Override
     public Mana produceMana(Game game, Ability source) {
         Mana newMana = new Mana();

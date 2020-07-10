@@ -11,6 +11,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ManaEvent;
+import mage.players.Player;
 import org.apache.log4j.Logger;
 
 /**
@@ -44,24 +45,11 @@ public class ManaOptions extends ArrayList<Mana> {
                 //if there is only one mana option available add it to all the existing options
                 List<Mana> netManas = abilities.get(0).getNetMana(game);
                 if (netManas.size() == 1) {
-                    if (!hasTapCost(abilities.get(0)) || checkTappedForManaReplacement(abilities.get(0), game, netManas.get(0))) {
-                        addMana(netManas.get(0));
-                    }
+                    checkTappedForManaReplacement(abilities.get(0), game, netManas.get(0));
+                    addMana(netManas.get(0));
+                    addTriggeredMana(game, abilities.get(0));
                 } else if (netManas.size() > 1) {
-                    List<Mana> copy = copy();
-                    this.clear();
-//                    boolean hasTapCost = hasTapCost(abilities.get(0)); // needed if checkTappedForManaReplacement is reactivated
-                    for (Mana netMana : netManas) {
-                        for (Mana mana : copy) {
-                            // checkTappedForManaReplacement seems in some situations to produce endless iterations so deactivated for now:  https://github.com/magefree/mage/issues/5023
-                            if (true/* !hasTapCost || checkTappedForManaReplacement(abilities.get(0), game, netMana) */) {
-                                Mana newMana = new Mana();
-                                newMana.add(mana);
-                                newMana.add(netMana);
-                                this.add(newMana);
-                            }
-                        }
-                    }
+                    addManaVariation(netManas, abilities.get(0), game);
                 }
 
             } else { // mana source has more than 1 ability
@@ -69,14 +57,14 @@ public class ManaOptions extends ArrayList<Mana> {
                 List<Mana> copy = copy();
                 this.clear();
                 for (ActivatedManaAbilityImpl ability : abilities) {
-                    boolean hasTapCost = hasTapCost(ability);
                     for (Mana netMana : ability.getNetMana(game)) {
-                        if (!hasTapCost || checkTappedForManaReplacement(ability, game, netMana)) {
+                        checkTappedForManaReplacement(ability, game, netMana);
+                        for (Mana triggeredManaVariation : getTriggeredManaVariations(game, ability, netMana)) {
                             SkipAddMana:
                             for (Mana mana : copy) {
                                 Mana newMana = new Mana();
                                 newMana.add(mana);
-                                newMana.add(netMana);
+                                newMana.add(triggeredManaVariation);
                                 for (Mana existingMana : this) {
                                     if (existingMana.equalManaValue(newMana)) {
                                         continue SkipAddMana;
@@ -91,18 +79,48 @@ public class ManaOptions extends ArrayList<Mana> {
                                 this.add(newMana);
                             }
                         }
+
                     }
                 }
             }
         }
     }
 
-    private boolean checkTappedForManaReplacement(Ability ability, Game game, Mana mana) {
-        ManaEvent event = new ManaEvent(GameEvent.EventType.TAPPED_FOR_MANA, ability.getSourceId(), ability.getSourceId(), ability.getControllerId(), mana);
-        if (!game.replaceEvent(event)) {
-            return true;
+    private void addManaVariation(List<Mana> netManas, ActivatedManaAbilityImpl ability, Game game) {
+        List<Mana> copy = copy();
+        this.clear();
+        for (Mana netMana : netManas) {
+            for (Mana mana : copy) {
+                if (!hasTapCost(ability) || checkTappedForManaReplacement(ability, game, netMana)) {
+                    Mana newMana = new Mana();
+                    newMana.add(mana);
+                    newMana.add(netMana);
+                    this.add(newMana);
+                }
+            }
         }
-        return false;
+    }
+
+    private List<List<Mana>> getSimulatedTriggeredManaFromPlayer(Game game, Ability ability) {
+        Player player = game.getPlayer(ability.getControllerId());
+        List<List<Mana>> newList = new ArrayList<>();
+        if (player != null) {
+            newList.addAll(player.getAvailableTriggeredMana());
+            player.getAvailableTriggeredMana().clear();
+        }
+        return newList;
+    }
+
+    private boolean checkTappedForManaReplacement(Ability ability, Game game, Mana mana) {
+        if (hasTapCost(ability)) {
+            ManaEvent event = new ManaEvent(GameEvent.EventType.TAPPED_FOR_MANA, ability.getSourceId(), ability.getSourceId(), ability.getControllerId(), mana);
+            if (!game.replaceEvent(event)) {
+                game.fireEvent(event);
+                return true;
+            }
+            return false;
+        }
+        return true;
     }
 
     private boolean hasTapCost(Ability ability) {
@@ -127,31 +145,41 @@ public class ManaOptions extends ArrayList<Mana> {
                 // no mana costs
                 if (ability.getManaCosts().isEmpty()) {
                     if (netManas.size() == 1) {
+                        checkTappedForManaReplacement(ability, game, netManas.get(0));
                         addMana(netManas.get(0));
+                        addTriggeredMana(game, ability);
                     } else {
                         List<Mana> copy = copy();
                         this.clear();
                         for (Mana netMana : netManas) {
-                            for (Mana mana : copy) {
-                                Mana newMana = new Mana();
-                                newMana.add(mana);
-                                newMana.add(netMana);
-                                this.add(newMana);
+                            checkTappedForManaReplacement(ability, game, netMana);
+                            for (Mana triggeredManaVariation : getTriggeredManaVariations(game, ability, netMana)) {
+                                for (Mana mana : copy) {
+                                    Mana newMana = new Mana();
+                                    newMana.add(mana);
+                                    newMana.add(triggeredManaVariation);
+                                    this.add(newMana);
+                                }
                             }
                         }
                     }
                 } else // the ability has mana costs
                 if (netManas.size() == 1) {
+                    checkTappedForManaReplacement(ability, game, netManas.get(0));
                     subtractCostAddMana(ability.getManaCosts().getMana(), netManas.get(0), ability.getCosts().isEmpty());
+                    addTriggeredMana(game, ability);
                 } else {
                     List<Mana> copy = copy();
                     this.clear();
                     for (Mana netMana : netManas) {
-                        for (Mana mana : copy) {
-                            Mana newMana = new Mana();
-                            newMana.add(mana);
-                            newMana.add(netMana);
-                            subtractCostAddMana(ability.getManaCosts().getMana(), netMana, ability.getCosts().isEmpty());
+                        checkTappedForManaReplacement(ability, game, netMana);
+                        for (Mana triggeredManaVariation : getTriggeredManaVariations(game, ability, netMana)) {
+                            for (Mana mana : copy) {
+                                Mana newMana = new Mana();
+                                newMana.add(mana);
+                                newMana.add(triggeredManaVariation);
+                                subtractCostAddMana(ability.getManaCosts().getMana(), netMana, ability.getCosts().isEmpty());
+                            }
                         }
                     }
                 }
@@ -160,30 +188,30 @@ public class ManaOptions extends ArrayList<Mana> {
                 List<Mana> copy = copy();
                 this.clear();
                 for (ActivatedManaAbilityImpl ability : abilities) {
-                    boolean hasTapCost = hasTapCost(ability);
                     List<Mana> netManas = ability.getNetMana(game);
-
                     if (ability.getManaCosts().isEmpty()) {
                         for (Mana netMana : netManas) {
-                            if (!hasTapCost || checkTappedForManaReplacement(ability, game, netMana)) {
+                            checkTappedForManaReplacement(ability, game, netMana);
+                            for (Mana triggeredManaVariation : getTriggeredManaVariations(game, ability, netMana)) {
                                 for (Mana mana : copy) {
                                     Mana newMana = new Mana();
                                     newMana.add(mana);
-                                    newMana.add(netMana);
+                                    newMana.add(triggeredManaVariation);
                                     this.add(newMana);
                                 }
                             }
                         }
                     } else {
                         for (Mana netMana : netManas) {
-                            if (!hasTapCost || checkTappedForManaReplacement(ability, game, netMana)) {
+                            checkTappedForManaReplacement(ability, game, netMana);
+                            for (Mana triggeredManaVariation : getTriggeredManaVariations(game, ability, netMana)) {
                                 for (Mana previousMana : copy) {
                                     CombineWithExisting:
                                     for (Mana manaOption : ability.getManaCosts().getManaOptions()) {
                                         Mana newMana = new Mana(previousMana);
                                         if (previousMana.includesMana(manaOption)) { // costs can be paid
                                             newMana.subtractCost(manaOption);
-                                            newMana.add(netMana);
+                                            newMana.add(triggeredManaVariation);
                                             // if the new mana is in all colors more than another already existing than replace
                                             for (Mana existingMana : this) {
                                                 Mana moreValuable = Mana.getMoreValuableMana(newMana, existingMana);
@@ -208,6 +236,52 @@ public class ManaOptions extends ArrayList<Mana> {
         if (this.size() > 30 || replaces > 30) {
             logger.trace("ManaOptionsCosts " + this.size() + " Ign:" + replaces + " => " + this.toString());
             logger.trace("Abilities: " + abilities.toString());
+        }
+    }
+
+    private List<Mana> getTriggeredManaVariations(Game game, Ability ability, Mana baseMana) {
+        List<Mana> baseManaPlusTriggeredMana = new ArrayList<>();
+        baseManaPlusTriggeredMana.add(baseMana);
+        List<List<Mana>> availableTriggeredManaList = getSimulatedTriggeredManaFromPlayer(game, ability);
+        for (List<Mana> availableTriggeredMana : availableTriggeredManaList) {
+            if (availableTriggeredMana.size() == 1) {
+                for (Mana prevMana : baseManaPlusTriggeredMana) {
+                    prevMana.add(availableTriggeredMana.get(0));
+                }
+            } else if (availableTriggeredMana.size() > 1) {
+                List<Mana> copy = new ArrayList<>(baseManaPlusTriggeredMana);
+                baseManaPlusTriggeredMana.clear();
+                for (Mana triggeredMana : availableTriggeredMana) {
+                    for (Mana prevMana : copy) {
+                        Mana newMana = new Mana();
+                        newMana.add(prevMana);
+                        newMana.add(triggeredMana);
+                        baseManaPlusTriggeredMana.add(newMana);
+                    }
+                }
+            }
+        }
+        return baseManaPlusTriggeredMana;
+    }
+
+    private void addTriggeredMana(Game game, Ability ability) {
+        List<List<Mana>> netManaList = getSimulatedTriggeredManaFromPlayer(game, ability);
+        for (List<Mana> triggeredNetMana : netManaList) {
+            if (triggeredNetMana.size() == 1) {
+                addMana(triggeredNetMana.get(0));
+            } else if (triggeredNetMana.size() > 1) {
+                // Add variations
+                List<Mana> copy = copy();
+                this.clear();
+                for (Mana triggeredMana : triggeredNetMana) {
+                    for (Mana mana : copy) {
+                        Mana newMana = new Mana();
+                        newMana.add(mana);
+                        newMana.add(triggeredMana);
+                        this.add(newMana);
+                    }
+                }
+            }
         }
     }
 

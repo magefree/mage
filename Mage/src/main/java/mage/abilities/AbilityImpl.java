@@ -34,6 +34,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
+import mage.abilities.effects.common.ManaEffect;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -171,6 +172,9 @@ public abstract class AbilityImpl implements Ability {
     private boolean resolveMode(Game game) {
         boolean result = true;
         for (Effect effect : getEffects()) {
+            if (game.inCheckPlayableState() && !(effect instanceof ManaEffect)) {
+                continue; // Ignored non mana effects - see GameEvent.TAPPED_FOR_MANA
+            }
             if (effect instanceof OneShotEffect) {
                 boolean effectResult = effect.apply(game, this);
                 result &= effectResult;
