@@ -31,7 +31,7 @@ public class UnattachedTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getSourceId().equals(this.getSourceId()) ) {
-            getEffects().get(0).setTargetPointer(new FixedTarget(event.getTargetId()));
+            getEffects().get(0).setTargetPointer(new FixedTarget(event.getTargetId(), game));
             return true;
         }
         return false;
