@@ -111,4 +111,9 @@ class SubiraTulzidiCaravannerAbility extends DelayedTriggeredAbility {
     public SubiraTulzidiCaravannerAbility copy() {
         return new SubiraTulzidiCaravannerAbility(this);
     }
+
+    @Override
+    public String getRule() {
+        return "Until end of turn, whenever a creature you control with power 2 or less deals combat damage to a player, draw a card.";
+    }
 }
