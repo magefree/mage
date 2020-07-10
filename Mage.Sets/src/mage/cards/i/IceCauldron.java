@@ -193,7 +193,7 @@ class IceCauldronAddManaEffect extends ManaEffect {
 
     IceCauldronAddManaEffect(IceCauldronAddManaEffect effect) {
         super(effect);
-        storedMana = effect.storedMana.copy();
+        storedMana = effect.storedMana == null ? null : effect.storedMana.copy();
         exiledCardMor = effect.exiledCardMor;
     }
 
