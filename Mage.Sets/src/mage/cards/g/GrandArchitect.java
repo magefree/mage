@@ -126,13 +126,15 @@ class GrandArchitectManaAbility extends ActivatedManaAbilityImpl {
 
     @Override
     public List<Mana> getNetMana(Game game) {
-        if (game.inCheckPlayableState()) {
+        if (game != null && game.inCheckPlayableState()) {
             int count = game.getBattlefield().count(filter, getSourceId(), getControllerId(), game);
-            List<Mana> netManaCalculated = new ArrayList<>();
-            ConditionalMana mana = new GrandArchitectConditionalMana();
-            mana.setColorless(count * 2);
-            netManaCalculated.add(mana);
-            return netManaCalculated;
+            List<Mana> netMana = new ArrayList<>();
+            if (count > 0) {
+                ConditionalMana mana = new GrandArchitectConditionalMana();
+                mana.setColorless(count * 2);
+                netMana.add(mana);
+            }
+            return netMana;
         }
         return super.getNetMana(game);
     }

@@ -1,7 +1,6 @@
 
 package mage.abilities.mana;
 
-import java.util.List;
 import mage.Mana;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -12,9 +11,11 @@ import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.constants.Zone;
 import mage.game.Game;
 
+import java.util.List;
+
 /**
  * For cards like:
- *   {tap}: Add three mana of any one color. Spend this mana only to cast creature spells.
+ * {tap}: Add three mana of any one color. Spend this mana only to cast creature spells.
  *
  * @author noxx
  */
@@ -47,7 +48,10 @@ public class ConditionalAnyColorManaAbility extends ActivatedManaAbilityImpl {
     @Override
     public List<Mana> getNetMana(Game game) {
         this.netMana.clear();
-        this.netMana.add(new Mana(0,0,0,0,0,0, amount.calculate(game, this, null), 0));
+        int count = amount.calculate(game, this, null);
+        if (count > 0) {
+            this.netMana.add(Mana.AnyMana(count));
+        }
         return super.getNetMana(game);
     }
 
@@ -56,7 +60,7 @@ public class ConditionalAnyColorManaAbility extends ActivatedManaAbilityImpl {
         return true;
     }
 
-    
+
     @Override
     public ConditionalAnyColorManaAbility copy() {
         return new ConditionalAnyColorManaAbility(this);

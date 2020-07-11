@@ -75,10 +75,12 @@ class HeritageDruidManaEffect extends BasicManaEffect {
 
     @Override
     public List<Mana> getNetMana(Game game, Ability source) {
-        if (game.inCheckPlayableState()) {
+        if (game != null && game.inCheckPlayableState()) {
             int count = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) / 3;
             List<Mana> netMana = new ArrayList<>();
-            netMana.add(new Mana(0, count * 3, 0, 0, 0, 0, 0, 0));
+            if (count > 0) {
+                netMana.add(Mana.GreenMana(count * 3));
+            }
             return netMana;
         }
         return super.getNetMana(game, source);
