@@ -126,7 +126,7 @@ public class TablePlayerPanel extends javax.swing.JPanel {
     private void cbPlayerTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPlayerTypeActionPerformed
         if (getPlayerType() != PlayerType.HUMAN) {
             this.newPlayerPanel.setVisible(true);
-            this.newPlayerPanel.setPlayerName("Computer " + this.lblPlayerNum.getText().charAt(this.lblPlayerNum.getText().length() - 1));
+            this.newPlayerPanel.setPlayerName(ClientDefaultSettings.computerName + " " + this.lblPlayerNum.getText().charAt(this.lblPlayerNum.getText().length() - 1));
         } 
         else {
             this.newPlayerPanel.setVisible(false);

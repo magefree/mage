@@ -1,7 +1,7 @@
 package mage.cards.c;
 
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.counter.ProliferateEffect;
 import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
@@ -26,7 +26,7 @@ public final class CoreProwler extends CardImpl {
         this.addAbility(InfectAbility.getInstance());
 
         // When Core Prowler dies, proliferate. (You choose any number of permanents and/or players with counters on them, then give each another counter of a kind already there.)
-        this.addAbility(new DiesTriggeredAbility(new ProliferateEffect()));
+        this.addAbility(new DiesSourceTriggeredAbility(new ProliferateEffect()));
     }
 
     public CoreProwler(final CoreProwler card) {

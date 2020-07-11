@@ -2,7 +2,9 @@ package mage.util;
 
 import mage.MageObject;
 import mage.Mana;
+import mage.abilities.Abilities;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.*;
@@ -18,16 +20,15 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
+import mage.target.Target;
 import mage.util.functions.CopyTokenFunction;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author nantuko
@@ -790,5 +791,42 @@ public final class CardUtil {
             }
         }
         return false;
+    }
+
+    public static Abilities<Ability> getAbilities(MageObject object, Game game) {
+        if (object instanceof Card) {
+            return ((Card) object).getAbilities(game);
+        } else {
+            return object.getAbilities();
+        }
+    }
+
+    public static String getTextWithFirstCharUpperCase(String text) {
+        if (text != null && text.length() >= 1) {
+            return Character.toUpperCase(text.charAt(0)) + text.substring(1);
+        } else {
+            return text;
+        }
+    }
+
+    public static Set<UUID> getAllSelectedTargets(Ability ability, Game game) {
+        return ability.getModes().getSelectedModes()
+                .stream()
+                .map(ability.getModes()::get)
+                .map(Mode::getTargets)
+                .flatMap(Collection::stream)
+                .map(Target::getTargets)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toSet());
+    }
+
+    public static Set<UUID> getAllPossibleTargets(Ability ability, Game game) {
+        return ability.getModes().values()
+                .stream()
+                .map(Mode::getTargets)
+                .flatMap(Collection::stream)
+                .map(t -> t.possibleTargets(ability.getSourceId(), ability.getControllerId(), game))
+                .flatMap(Collection::stream)
+                .collect(Collectors.toSet());
     }
 }

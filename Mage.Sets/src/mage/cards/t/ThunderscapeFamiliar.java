@@ -1,7 +1,5 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
@@ -16,8 +14,9 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class ThunderscapeFamiliar extends CardImpl {
@@ -31,7 +30,7 @@ public final class ThunderscapeFamiliar extends CardImpl {
     }
 
     public ThunderscapeFamiliar(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.subtype.add(SubType.KAVU);
 
         this.power = new MageInt(1);
@@ -39,6 +38,7 @@ public final class ThunderscapeFamiliar extends CardImpl {
 
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
+
         // Black spells and green spells you cast cost {1} less to cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
     }

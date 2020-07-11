@@ -1,14 +1,12 @@
-
 package mage.watchers;
-
-import mage.constants.WatcherScope;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import org.apache.log4j.Logger;
 
 import java.io.Serializable;
 import java.lang.reflect.*;
 import java.util.*;
+import mage.constants.WatcherScope;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import org.apache.log4j.Logger;
 
 /**
  * watches for certain game events to occur and flags condition
@@ -23,7 +21,6 @@ public abstract class Watcher implements Serializable {
     protected UUID sourceId;
     protected boolean condition;
     protected final WatcherScope scope;
-
 
     public Watcher(WatcherScope scope) {
         this.scope = scope;
@@ -114,21 +111,38 @@ public abstract class Watcher implements Serializable {
                     if (field.getType() == Set.class) {
                         ((Set) field.get(watcher)).clear();
                         ((Set) field.get(watcher)).addAll((Set) field.get(this));
-                    } else if (field.getType() == Map.class) {
-                        Map target = ((Map) field.get(watcher));
-                        target.clear();
-                        Map source = (Map) field.get(this);
-
+                    } else if (field.getType() == Map.class || field.getType() == HashMap.class) {
                         ParameterizedType parameterizedType = (ParameterizedType) field.getGenericType();
                         Type valueType = parameterizedType.getActualTypeArguments()[1];
-                        if (valueType.getClass().getSimpleName().contains("Set")) {
-                            source.entrySet().forEach(kv -> {
-                                Object key = ((Map.Entry) kv).getKey();
-                                Set value = (Set) ((Map.Entry) kv).getValue();
-                                target.put(key, new HashSet<>(value));
-                            });
-                        }
-                        else {
+                        if (valueType.getTypeName().contains("Set")) {
+                            Map<Object, Set<Object>> source = (Map<Object, Set<Object>>) field.get(this);
+                            Map<Object, Set<Object>> target = (Map<Object, Set<Object>>) field.get(watcher);
+                            target.clear();
+                            for (Map.Entry<Object, Set<Object>> e : source.entrySet()) {
+                                Set<Object> set = new HashSet<>();
+                                set.addAll(e.getValue());
+                                target.put(e.getKey(), set);
+                            }
+                        } else if (valueType.getTypeName().contains("List")) {
+                            Map<Object, List<Object>> source = (Map<Object, List<Object>>) field.get(this);
+                            Map<Object, List<Object>> target = (Map<Object, List<Object>>) field.get(watcher);
+                            target.clear();
+                            for (Map.Entry<Object, List<Object>> e : source.entrySet()) {
+                                List<Object> list = new ArrayList<>();
+                                list.addAll(e.getValue());
+                                target.put(e.getKey(), list);
+                            }
+                        } else if (valueType.getTypeName().contains("Map")) {
+                            Map<Object, Map<Object, Object>> source = (Map<Object, Map<Object, Object>>) field.get(this);
+                            Map<Object, Map<Object, Object>> target = (Map<Object, Map<Object, Object>>) field.get(watcher);
+                            target.clear();
+                            for (Map.Entry<Object, Map<Object, Object>> e : source.entrySet()) {
+                                Map<Object, Object> map = new HashMap<>();
+                                map.putAll(e.getValue());
+                                target.put(e.getKey(), map);
+                            }
+
+                        } else {
                             ((Map) field.get(watcher)).putAll((Map) field.get(this));
                         }
                     } else if (field.getType() == List.class) {

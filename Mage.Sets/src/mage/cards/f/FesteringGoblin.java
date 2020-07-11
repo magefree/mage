@@ -4,7 +4,7 @@ package mage.cards.f;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -26,7 +26,7 @@ public final class FesteringGoblin extends CardImpl {
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        Ability ability = new DiesTriggeredAbility(new BoostTargetEffect(-1, -1, Duration.EndOfTurn), false);
+        Ability ability = new DiesSourceTriggeredAbility(new BoostTargetEffect(-1, -1, Duration.EndOfTurn), false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

@@ -1,9 +1,5 @@
 package mage.game;
 
-import java.io.IOException;
-import java.io.Serializable;
-import java.util.*;
-import java.util.Map.Entry;
 import mage.MageException;
 import mage.MageObject;
 import mage.abilities.*;
@@ -70,6 +66,11 @@ import mage.util.RandomUtil;
 import mage.util.functions.ApplyToPermanent;
 import mage.watchers.common.*;
 import org.apache.log4j.Logger;
+
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.*;
+import java.util.Map.Entry;
 
 public abstract class GameImpl implements Game, Serializable {
 
@@ -952,7 +953,7 @@ public abstract class GameImpl implements Game, Serializable {
             }
             // Choose a companion from the list of legal companions
             for (Card card : potentialCompanions) {
-                if (player.chooseUse(Outcome.Benefit, "Use " + card.getName() + " as your companion?", null, this)) {
+                if (player.chooseUse(Outcome.Benefit, "Use " + card.getLogName() + " as your companion?", null, this)) {
                     playerCompanionMap.put(player, card);
                     break;
                 }
@@ -981,7 +982,7 @@ public abstract class GameImpl implements Game, Serializable {
             targetPlayer.setTargetName("starting player");
             if (choosingPlayerId != null) {
                 choosingPlayer = this.getPlayer(choosingPlayerId);
-                if (choosingPlayer != null && !choosingPlayer.isInGame()) {
+                if (choosingPlayer != null && !choosingPlayer.canRespond()) {
                     choosingPlayer = null;
                 }
             }
@@ -1006,7 +1007,7 @@ public abstract class GameImpl implements Game, Serializable {
         if (startingPlayerId == null) {
             // choose any available player as starting player
             for (Player player : state.getPlayers().values()) {
-                if (player.isInGame()) {
+                if (player.canRespond()) {
                     startingPlayerId = player.getId();
                     break;
                 }
@@ -1160,7 +1161,7 @@ public abstract class GameImpl implements Game, Serializable {
         while (!hasEnded()) {
             playerId = players[RandomUtil.nextInt(players.length)];
             Player player = getPlayer(playerId);
-            if (player != null && player.isInGame()) {
+            if (player != null && player.canRespond()) {
                 fireInformEvent(state.getPlayer(playerId).getLogName() + " won the toss");
                 return player.getId();
             }
@@ -1548,7 +1549,7 @@ public abstract class GameImpl implements Game, Serializable {
     /**
      * @param emblem
      * @param sourceObject
-     * @param toPlayerId controller and owner of the emblem
+     * @param toPlayerId   controller and owner of the emblem
      */
     @Override
     public void addEmblem(Emblem emblem, MageObject sourceObject, UUID toPlayerId) {
@@ -1566,8 +1567,8 @@ public abstract class GameImpl implements Game, Serializable {
     /**
      * @param plane
      * @param sourceObject
-     * @param toPlayerId controller and owner of the plane (may only be one per
-     * game..)
+     * @param toPlayerId   controller and owner of the plane (may only be one
+     *                     per game..)
      * @return boolean - whether the plane was added successfully or not
      */
     @Override
@@ -1641,7 +1642,8 @@ public abstract class GameImpl implements Game, Serializable {
             newBluePrint.reset(this);
 
             //getState().addCard(permanent);
-            if (copyFromPermanent.isMorphed() || copyFromPermanent.isManifested()) {
+            if (copyFromPermanent.isMorphed() || copyFromPermanent.isManifested()
+                    || copyFromPermanent.isFaceDown(this)) {
                 MorphAbility.setPermanentToFaceDownCreature(newBluePrint);
             }
             newBluePrint.assignNewId();
@@ -1797,13 +1799,13 @@ public abstract class GameImpl implements Game, Serializable {
         state.getTriggers().checkStateTriggers(this);
         for (UUID playerId : state.getPlayerList(state.getActivePlayerId())) {
             Player player = getPlayer(playerId);
-            while (player.isInGame()) { // player can die or win caused by triggered abilities or leave the game
+            while (player.canRespond()) { // player can die or win caused by triggered abilities or leave the game
                 List<TriggeredAbility> abilities = state.getTriggered(player.getId());
                 if (abilities.isEmpty()) {
                     break;
                 }
                 // triggered abilities that don't use the stack have to be executed first (e.g. Banisher Priest Return exiled creature
-                for (Iterator<TriggeredAbility> it = abilities.iterator(); it.hasNext();) {
+                for (Iterator<TriggeredAbility> it = abilities.iterator(); it.hasNext(); ) {
                     TriggeredAbility triggeredAbility = it.next();
                     if (!triggeredAbility.isUsesStack()) {
                         state.removeTriggeredAbility(triggeredAbility);
@@ -1851,6 +1853,45 @@ public abstract class GameImpl implements Game, Serializable {
                     || player.getCounters().getCount(CounterType.POISON) >= 10)) {
                 player.lost(this);
             }
+        }
+
+        // If a commander is in a graveyard or in exile and that card was put into that zone
+        // since the last time state-based actions were checked, its owner may put it into the command zone.
+        for (Player player : state.getPlayers().values()) {
+            Set<UUID> commanderIds = getCommandersIds(player, CommanderCardType.COMMANDER_OR_OATHBREAKER);
+            if (commanderIds.isEmpty()) {
+                continue;
+            }
+            Set<Card> commanders = new HashSet<>();
+            Cards toMove = new CardsImpl();
+            player.getGraveyard()
+                    .stream()
+                    .filter(commanderIds::contains)
+                    .map(this::getCard)
+                    .filter(Objects::nonNull)
+                    .forEach(commanders::add);
+            commanderIds
+                    .stream()
+                    .map(uuid -> getExile().getCard(uuid, this))
+                    .filter(Objects::nonNull)
+                    .forEach(commanders::add);
+            commanders.removeIf(card -> state.checkCommanderShouldStay(card, this));
+            for (Card card : commanders) {
+                Zone currentZone = this.getState().getZone(card.getId());
+                String currentZoneInfo = (currentZone == null ? "(error)" : "(" + currentZone.name() + ")");
+                if (player.chooseUse(Outcome.Benefit, "Move " + card.getIdName()
+                                + " to the command zone or leave it in current zone " + currentZoneInfo + "?", "You can only make this choice once per object",
+                        "Move to command", "Leave in current zone " + currentZoneInfo, null, this)) {
+                    toMove.add(card);
+                } else {
+                    state.setCommanderShouldStay(card, this);
+                }
+            }
+            if (toMove.isEmpty()) {
+                continue;
+            }
+            player.moveCards(toMove, Zone.COMMAND, null, this);
+            somethingHappened = true;
         }
 
         // 704.5e If a copy of a spell is in a zone other than the stack, it ceases to exist. If a copy of a card is in any zone other than the stack or the battlefield, it ceases to exist.
@@ -2018,8 +2059,6 @@ public abstract class GameImpl implements Game, Serializable {
                                 if (card != null && card.isCreature()) {
                                     UUID wasAttachedTo = perm.getAttachedTo();
                                     perm.attachTo(null, this);
-                                    //moved to mage.game.permanent.PermanentImpl::detachAllAttachments
-                                    //BestowAbility.becomeCreature(perm, this);
                                     fireEvent(new GameEvent(GameEvent.EventType.UNATTACHED, wasAttachedTo, perm.getId(), perm.getControllerId()));
                                 } else if (movePermanentToGraveyardWithInfo(perm)) {
                                     somethingHappened = true;
@@ -2555,7 +2594,7 @@ public abstract class GameImpl implements Game, Serializable {
         }
         //20100423 - 800.4a
         Set<Card> toOutside = new HashSet<>();
-        for (Iterator<Permanent> it = getBattlefield().getAllPermanents().iterator(); it.hasNext();) {
+        for (Iterator<Permanent> it = getBattlefield().getAllPermanents().iterator(); it.hasNext(); ) {
             Permanent perm = it.next();
             if (perm.isOwnedBy(playerId)) {
                 if (perm.getAttachedTo() != null) {
@@ -2580,6 +2619,10 @@ public abstract class GameImpl implements Game, Serializable {
                 for (ContinuousEffect effect : getContinuousEffects().getLayeredEffects(this)) {
                     if (effect.hasLayer(Layer.ControlChangingEffects_2)) {
                         for (Ability ability : getContinuousEffects().getLayeredEffectAbilities(effect)) {
+                            if (effect.getTargetPointer().getTargets(this, ability).contains(perm.getId())) {
+                                effect.discard();
+                                continue Effects;
+                            }
                             for (Target target : ability.getTargets()) {
                                 for (UUID targetId : target.getTargets()) {
                                     if (targetId.equals(perm.getId())) {
@@ -2589,6 +2632,7 @@ public abstract class GameImpl implements Game, Serializable {
                                 }
                             }
                         }
+
                     }
                 }
             }
@@ -2600,7 +2644,7 @@ public abstract class GameImpl implements Game, Serializable {
         player.moveCards(toOutside, Zone.OUTSIDE, null, this);
         // triggered abilities that don't use the stack have to be executed
         List<TriggeredAbility> abilities = state.getTriggered(player.getId());
-        for (Iterator<TriggeredAbility> it = abilities.iterator(); it.hasNext();) {
+        for (Iterator<TriggeredAbility> it = abilities.iterator(); it.hasNext(); ) {
             TriggeredAbility triggeredAbility = it.next();
             if (!triggeredAbility.isUsesStack()) {
                 state.removeTriggeredAbility(triggeredAbility);
@@ -2620,7 +2664,7 @@ public abstract class GameImpl implements Game, Serializable {
 
         // Remove cards from the player in all exile zones
         for (ExileZone exile : this.getExile().getExileZones()) {
-            for (Iterator<UUID> it = exile.iterator(); it.hasNext();) {
+            for (Iterator<UUID> it = exile.iterator(); it.hasNext(); ) {
                 Card card = this.getCard(it.next());
                 if (card != null && card.isOwnedBy(playerId)) {
                     it.remove();
@@ -2630,7 +2674,7 @@ public abstract class GameImpl implements Game, Serializable {
 
         //Remove all commander/emblems/plane the player controls
         boolean addPlaneAgain = false;
-        for (Iterator<CommandObject> it = this.getState().getCommand().iterator(); it.hasNext();) {
+        for (Iterator<CommandObject> it = this.getState().getCommand().iterator(); it.hasNext(); ) {
             CommandObject obj = it.next();
             if (obj.isControlledBy(playerId)) {
                 if (obj instanceof Emblem) {
@@ -3235,7 +3279,7 @@ public abstract class GameImpl implements Game, Serializable {
                     gameStatesRollBack.put(getTurnNum(), state.copy());
                     executingRollback = true;
                     for (Player playerObject : getPlayers().values()) {
-                        if (playerObject.isHuman() && playerObject.isInGame()) {
+                        if (playerObject.isHuman() && playerObject.canRespond()) {
                             playerObject.resetStoredBookmark(this);
                             playerObject.abort();
                             playerObject.resetPlayerPassedActions();

@@ -2,7 +2,7 @@ package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.keyword.SurveilEffect;
 import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
@@ -27,7 +27,7 @@ public final class CitywatchSphinx extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Citywatch Sphinx dies, surveil 2.
-        this.addAbility(new DiesTriggeredAbility(new SurveilEffect(2)));
+        this.addAbility(new DiesSourceTriggeredAbility(new SurveilEffect(2)));
     }
 
     public CitywatchSphinx(final CitywatchSphinx card) {

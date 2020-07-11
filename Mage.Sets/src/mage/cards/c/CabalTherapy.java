@@ -18,6 +18,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
 import mage.util.CardUtil;
 
 import java.util.UUID;
+import mage.abilities.StaticAbility;
+import mage.filter.StaticFilters;
 
 /**
  * @author jonubuu
@@ -34,7 +36,7 @@ public final class CabalTherapy extends CardImpl {
 
         // Flashback-Sacrifice a creature.
         this.addAbility(new FlashbackAbility(
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, new FilterControlledCreaturePermanent("a creature"), true)),
+                new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT, true)),
                 TimingRule.SORCERY));
     }
 

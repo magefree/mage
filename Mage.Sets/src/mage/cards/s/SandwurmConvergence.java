@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
@@ -16,10 +14,11 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.game.permanent.token.WurmToken3;
+import mage.game.permanent.token.Wurm55Token;
+
+import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 public final class SandwurmConvergence extends CardImpl {
@@ -39,7 +38,7 @@ public final class SandwurmConvergence extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
         // At the beginning of your end step, create a 5/5 green Wurm creature token.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new CreateTokenEffect(new WurmToken3()), TargetController.YOU, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new CreateTokenEffect(new Wurm55Token()), TargetController.YOU, false));
     }
 
     public SandwurmConvergence(final SandwurmConvergence card) {

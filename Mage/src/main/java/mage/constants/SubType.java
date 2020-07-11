@@ -496,6 +496,19 @@ public enum SubType {
         return predicate;
     }
 
+
+    public String getIndefiniteArticle() {
+        if (isVowel(description.charAt(0))) {
+            return "an";
+        } else {
+            return "a";
+        }
+    }
+
+    private boolean isVowel(char c) {
+        return "AEIOUaeiou".indexOf(c) != -1;
+    }
+
     public static SubType fromString(String value) {
         for (SubType st : SubType.values()) {
             if (st.toString().equals(value)) {

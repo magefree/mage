@@ -1,4 +1,3 @@
-
 package mage.cards.l;
 
 import java.util.UUID;
@@ -30,10 +29,19 @@ public final class LifeMatrix extends CardImpl {
     public LifeMatrix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
-        // {4}, {T}: Put a matrix counter on target creature and that creature gains “Remove a matrix counter from this creature: Regenerate this creature.” Activate this ability only during your upkeep.
-        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.MATRIX.createInstance()), new GenericManaCost(4), 
-                new IsStepCondition(PhaseStep.UPKEEP), null);
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new RemoveCountersSourceCost(CounterType.MATRIX.createInstance()));
+        // {4}, {T}: Put a matrix counter on target creature and that creature gains 
+        // “Remove a matrix counter from this creature: Regenerate this creature.” 
+        // Activate this ability only during your upkeep.
+        Ability ability = new ConditionalActivatedAbility(
+                Zone.BATTLEFIELD,
+                new AddCountersTargetEffect(CounterType.MATRIX.createInstance()),
+                new GenericManaCost(4),
+                new IsStepCondition(PhaseStep.UPKEEP), "Put a matrix counter on target creature and "
+                + "that creature gains “Remove a matrix counter from this creature: "
+                + "Regenerate this creature.” Activate this ability only during your upkeep.");
+        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new RegenerateSourceEffect(),
+                new RemoveCountersSourceCost(CounterType.MATRIX.createInstance()));
         ability.addEffect(new GainAbilityTargetEffect(ability2, Duration.Custom));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());

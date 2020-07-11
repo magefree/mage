@@ -3,7 +3,7 @@ package mage.cards.e;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
@@ -28,7 +28,7 @@ public final class ElgaudInquisitor extends CardImpl {
 
         this.addAbility(LifelinkAbility.getInstance());
         // When Elgaud Inquisitor dies, create a 1/1 white Spirit creature token with flying.
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new SpiritWhiteToken())));
+        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new SpiritWhiteToken())));
     }
 
     public ElgaudInquisitor(final ElgaudInquisitor card) {

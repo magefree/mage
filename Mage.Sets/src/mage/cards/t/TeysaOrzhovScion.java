@@ -1,7 +1,5 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -12,11 +10,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -25,14 +19,16 @@ import mage.game.permanent.token.SpiritWhiteToken;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author emerald000
  */
 public final class TeysaOrzhovScion extends CardImpl {
-    
+
     private static final FilterControlledCreaturePermanent filterWhite = new FilterControlledCreaturePermanent("three white creatures");
     private static final FilterCreaturePermanent filterBlack = new FilterCreaturePermanent("another black creature you control");
+
     static {
         filterWhite.add(new ColorPredicate(ObjectColor.WHITE));
         filterBlack.add(new ColorPredicate(ObjectColor.BLACK));
@@ -41,7 +37,7 @@ public final class TeysaOrzhovScion extends CardImpl {
     }
 
     public TeysaOrzhovScion(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{B}");
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ADVISOR);
@@ -53,9 +49,9 @@ public final class TeysaOrzhovScion extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new SacrificeTargetCost(new TargetControlledCreaturePermanent(3, 3, filterWhite, true)));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
-        
+
         // Whenever another black creature you control dies, create a 1/1 white Spirit creature token with flying.
-        this.addAbility(new DiesCreatureTriggeredAbility(new CreateTokenEffect(new SpiritWhiteToken("GPT")), false, filterBlack));
+        this.addAbility(new DiesCreatureTriggeredAbility(new CreateTokenEffect(new SpiritWhiteToken()), false, filterBlack));
     }
 
     public TeysaOrzhovScion(final TeysaOrzhovScion card) {

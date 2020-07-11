@@ -2,10 +2,10 @@
 
 package mage.abilities.effects.common;
 
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -19,6 +19,11 @@ public class RegenerateSourceEffect extends ReplacementEffectImpl {
     public RegenerateSourceEffect() {
         super(Duration.EndOfTurn, Outcome.Regenerate);
         staticText = "Regenerate {this}";
+    }
+
+    public RegenerateSourceEffect(String targetName) {
+        super(Duration.EndOfTurn, Outcome.Regenerate);
+        staticText = "Regenerate " + targetName;
     }
 
     public RegenerateSourceEffect(final RegenerateSourceEffect effect) {

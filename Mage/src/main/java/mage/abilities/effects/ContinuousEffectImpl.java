@@ -1,10 +1,10 @@
 package mage.abilities.effects;
 
-import java.util.*;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.CompoundAbility;
 import mage.abilities.MageSingleton;
+import mage.abilities.costs.mana.ActivationManaAbilityStep;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
@@ -19,6 +19,8 @@ import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.targetpointer.TargetPointer;
+
+import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com, JayDi85
@@ -416,7 +418,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
             StackObject stackObject = game.getStack().getFirst();
             return !(stackObject instanceof Spell)
                     || !Zone.LIBRARY.equals(((Spell) stackObject).getFromZone())
-                    || ((Spell) stackObject).isDoneActivatingManaAbilities();
+                    || ((Spell) stackObject).getCurrentActivatingManaAbilitiesStep() == ActivationManaAbilityStep.AFTER; // mana payment finished
         }
         return true;
     }

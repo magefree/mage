@@ -33,7 +33,7 @@ public final class MischievousChimera extends CardImpl {
         Ability ability = new FirstSpellOpponentsTurnTriggeredAbility(
                 new DamagePlayersEffect(1, TargetController.OPPONENT), false
         );
-        ability.addEffect(new ScryEffect(1).setText("Scry 1"));
+        ability.addEffect(new ScryEffect(1, false));
         this.addAbility(ability);
     }
 

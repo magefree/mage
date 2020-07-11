@@ -2,7 +2,7 @@ package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
@@ -28,7 +28,7 @@ public final class DragonEgg extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // When Dragon Egg dies, create a 2/2 red Dragon creature token with flying. It has "{R}: This creature gets +1/+0 until end of turn".
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new DragonEggDragonToken()), false));
+        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new DragonEggDragonToken()), false));
 
     }
 

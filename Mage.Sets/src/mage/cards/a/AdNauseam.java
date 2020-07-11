@@ -1,7 +1,5 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -13,6 +11,8 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  * @author North
@@ -62,13 +62,19 @@ class AdNauseamEffect extends OneShotEffect {
         }
         while (controller.chooseUse(outcome, message, source, game) && controller.getLibrary().hasCards()) {
             Card card = controller.getLibrary().getFromTop(game);
-            if (card != null) {
-                controller.moveCards(card, Zone.HAND, source, game);
-                int cmc = card.getConvertedManaCost();
-                if (cmc > 0) {
-                    controller.loseLife(cmc, game, false);
-                }
-                controller.revealCards(sourceCard.getIdName() + " put into hand", new CardsImpl(card), game);
+            if (card == null) {
+                break;
+            }
+            controller.moveCards(card, Zone.HAND, source, game);
+            int cmc = card.getConvertedManaCost();
+            if (cmc > 0) {
+                controller.loseLife(cmc, game, false);
+            }
+            controller.revealCards(sourceCard.getIdName() + " put into hand", new CardsImpl(card), game);
+
+            // AI workaround to stop infinite choose (only one card allows)
+            if (!controller.isHuman() && !controller.isTestMode()) {
+                break;
             }
         }
         return true;

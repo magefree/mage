@@ -3,7 +3,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -24,7 +24,7 @@ public final class SmolderingEfreet extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Smoldering Efreet dies, it deals 2 damage to you.
-        this.addAbility(new DiesTriggeredAbility(new DamageControllerEffect(2, "it"), false));
+        this.addAbility(new DiesSourceTriggeredAbility(new DamageControllerEffect(2, "it"), false));
     }
 
     public SmolderingEfreet(final SmolderingEfreet card) {

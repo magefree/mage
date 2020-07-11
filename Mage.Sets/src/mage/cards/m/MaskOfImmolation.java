@@ -16,7 +16,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.YoungPyromancerElementalToken;
+import mage.game.permanent.token.RedElementalToken;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 
@@ -59,7 +59,7 @@ public final class MaskOfImmolation extends CardImpl {
 class MaskOfImmolationEffect extends CreateTokenEffect {
 
     MaskOfImmolationEffect() {
-        super(new YoungPyromancerElementalToken());
+        super(new RedElementalToken());
         staticText = "create a 1/1 red Elemental creature token, then attach {this} to it.";
     }
 

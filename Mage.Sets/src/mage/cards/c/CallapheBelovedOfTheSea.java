@@ -2,23 +2,18 @@ package mage.cards.c;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.common.continuous.SetPowerSourceEffect;
-import mage.abilities.effects.common.cost.CostModificationEffectImpl;
+import mage.abilities.effects.common.cost.SpellsCostModificationThatTargetSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.game.Game;
-import mage.target.Target;
-import mage.util.CardUtil;
 
-import java.util.Collection;
 import java.util.UUID;
 
 /**
@@ -51,11 +46,12 @@ public final class CallapheBelovedOfTheSea extends CardImpl {
         ).addHint(DevotionCount.U.getHint()));
 
         // Creatures and enchantments you control have "Spells your opponents cast that target this permanent cost {1} more to cast".
-        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
-                new SimpleStaticAbility(
-                        new CallapheBelovedOfTheSeaEffect()
-                ), Duration.WhileOnBattlefield, filter)
-                .withForceQuotes()
+        Ability gainAbility = new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new SpellsCostModificationThatTargetSourceEffect(1, new FilterCard("Spells"), TargetController.OPPONENT)
+                        .withTargetName("this permanent")
+        );
+        this.addAbility(new SimpleStaticAbility(
+                new GainAbilityControlledEffect(gainAbility, Duration.WhileOnBattlefield, filter).withForceQuotes()
         ));
     }
 
@@ -66,47 +62,5 @@ public final class CallapheBelovedOfTheSea extends CardImpl {
     @Override
     public CallapheBelovedOfTheSea copy() {
         return new CallapheBelovedOfTheSea(this);
-    }
-}
-
-class CallapheBelovedOfTheSeaEffect extends CostModificationEffectImpl {
-
-    CallapheBelovedOfTheSeaEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);
-        staticText = "Spells your opponents cast that target this permanent cost {1} more to cast";
-    }
-
-    private CallapheBelovedOfTheSeaEffect(CallapheBelovedOfTheSeaEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        SpellAbility spellAbility = (SpellAbility) abilityToModify;
-        CardUtil.adjustCost(spellAbility, -1);
-        return true;
-    }
-
-    @Override
-    public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (!(abilityToModify instanceof SpellAbility)
-                || !game.getOpponents(source.getControllerId()).contains(abilityToModify.getControllerId())) {
-            return false;
-        }
-        return abilityToModify
-                .getModes()
-                .getSelectedModes()
-                .stream()
-                .map(uuid -> abilityToModify.getModes().get(uuid))
-                .map(Mode::getTargets)
-                .flatMap(Collection::stream)
-                .map(Target::getTargets)
-                .flatMap(Collection::stream)
-                .anyMatch(uuid -> uuid.equals(source.getSourceId()));
-    }
-
-    @Override
-    public CallapheBelovedOfTheSeaEffect copy() {
-        return new CallapheBelovedOfTheSeaEffect(this);
     }
 }

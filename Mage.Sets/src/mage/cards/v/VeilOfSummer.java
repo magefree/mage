@@ -34,7 +34,9 @@ public final class VeilOfSummer extends CardImpl {
     public VeilOfSummer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}");
 
-        // Draw a card if an opponent has cast a blue or black spell this turn. Spells you control can't be countered this turn. You and permanents you control gain hexproof from blue and from black until end of turn.
+        // Draw a card if an opponent has cast a blue or black spell this turn. 
+        // Spells you control can't be countered this turn. You and permanents you control
+        // gain hexproof from blue and from black until end of turn.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DrawCardSourceControllerEffect(1),
                 VeilOfSummerCondition.instance, "Draw a card " +

@@ -19,7 +19,7 @@ public final class ChainToMemory extends CardImpl {
 
         // Target creature gets -4/-0 until end of turn. Scry 2.
         this.getSpellAbility().addEffect(new BoostTargetEffect(-4, 0));
-        this.getSpellAbility().addEffect(new ScryEffect(2).setText("Scry 2"));
+        this.getSpellAbility().addEffect(new ScryEffect(2, false));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

@@ -4,7 +4,7 @@ package mage.cards.d;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -26,7 +26,7 @@ public final class DeadbridgeShaman extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Deadbridge Shaman dies, target opponent discards a card.
-        Ability ability = new DiesTriggeredAbility(new DiscardTargetEffect(1));
+        Ability ability = new DiesSourceTriggeredAbility(new DiscardTargetEffect(1));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }

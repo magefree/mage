@@ -2,17 +2,16 @@ package mage.cards.i;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.TapTargetEffect;
-import mage.abilities.effects.common.cost.CostModificationEffectImpl;
+import mage.abilities.effects.common.cost.SpellsCostModificationThatTargetSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -20,7 +19,6 @@ import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
-import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
 import java.util.UUID;
@@ -53,8 +51,9 @@ public final class IcefallRegent extends CardImpl {
         this.addAbility(ability, new IcefallRegentWatcher());
 
         // Spells your opponents cast that target Icefall Regent cost {2} more to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new IcefallRegentCostIncreaseEffect()));
-
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new SpellsCostModificationThatTargetSourceEffect(2, new FilterCard("Spells"), TargetController.OPPONENT))
+        );
     }
 
     public IcefallRegent(final IcefallRegent card) {
@@ -156,49 +155,4 @@ class IcefallRegentWatcher extends Watcher {
     public void reset() {
         //don't reset condition each turn - only when this leaves the battlefield
     }
-}
-
-class IcefallRegentCostIncreaseEffect extends CostModificationEffectImpl {
-
-
-    IcefallRegentCostIncreaseEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);
-        staticText = "Spells your opponents cast that target {this} cost {2} more to cast";
-    }
-
-    private IcefallRegentCostIncreaseEffect(IcefallRegentCostIncreaseEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        SpellAbility spellAbility = (SpellAbility) abilityToModify;
-        CardUtil.adjustCost(spellAbility, -2);
-        return true;
-    }
-
-    @Override
-    public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify instanceof SpellAbility) {
-            if (game.getOpponents(source.getControllerId()).contains(abilityToModify.getControllerId())) {
-                for (UUID modeId : abilityToModify.getModes().getSelectedModes()) {
-                    Mode mode = abilityToModify.getModes().get(modeId);
-                    for (Target target : mode.getTargets()) {
-                        for (UUID targetUUID : target.getTargets()) {
-                            if (targetUUID.equals(source.getSourceId())) {
-                                return true;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public IcefallRegentCostIncreaseEffect copy() {
-        return new IcefallRegentCostIncreaseEffect(this);
-    }
-
 }

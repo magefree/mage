@@ -1,7 +1,7 @@
 package mage.cards.m;
 
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.counter.ProliferateEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -24,7 +24,7 @@ public final class MartyrForTheCause extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Martyr for the Cause dies, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
-        this.addAbility(new DiesTriggeredAbility(new ProliferateEffect()));
+        this.addAbility(new DiesSourceTriggeredAbility(new ProliferateEffect()));
     }
 
     private MartyrForTheCause(final MartyrForTheCause card) {

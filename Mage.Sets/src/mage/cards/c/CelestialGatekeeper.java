@@ -3,7 +3,7 @@ package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ExileSourceEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
@@ -47,7 +47,7 @@ public final class CelestialGatekeeper extends CardImpl {
         // When Celestial Gatekeeper dies, exile it, then return up to two target Bird and/or Cleric permanent cards from your graveyard to the battlefield.
         Effect effect = new ExileSourceEffect();
         effect.setText("");
-        DiesTriggeredAbility ability = new DiesTriggeredAbility(effect);
+        DiesSourceTriggeredAbility ability = new DiesSourceTriggeredAbility(effect);
         effect = new ReturnFromGraveyardToBattlefieldTargetEffect();
         effect.setText("exile it, then return up to two target Bird and/or Cleric permanent cards from your graveyard to the battlefield");
         ability.addEffect(effect);

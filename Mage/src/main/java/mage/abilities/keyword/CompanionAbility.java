@@ -14,11 +14,11 @@ import java.util.Set;
  */
 public class CompanionAbility extends SpecialAction {
 
-    private final CompanionCondition condition;
+    private final CompanionCondition companionCondition;
 
-    public CompanionAbility(CompanionCondition condition) {
+    public CompanionAbility(CompanionCondition companionCondition) {
         super(Zone.OUTSIDE);
-        this.condition = condition;
+        this.companionCondition = companionCondition;
         this.addCost(new GenericManaCost(3));
         this.addEffect(new CompanionEffect());
         this.setTiming(TimingRule.SORCERY);
@@ -26,7 +26,7 @@ public class CompanionAbility extends SpecialAction {
 
     private CompanionAbility(final CompanionAbility ability) {
         super(ability);
-        this.condition = ability.condition;
+        this.companionCondition = ability.companionCondition;
     }
 
     @Override
@@ -36,11 +36,11 @@ public class CompanionAbility extends SpecialAction {
 
     @Override
     public String getRule() {
-        return "Companion &mdash; " + condition.getRule();
+        return "Companion &mdash; " + companionCondition.getRule();
     }
 
     public boolean isLegal(Set<Card> cards, int startingSize) {
-        return condition.isLegal(cards, startingSize);
+        return companionCondition.isLegal(cards, startingSize);
     }
 }
 

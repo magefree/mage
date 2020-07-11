@@ -25,7 +25,7 @@ public final class BattlefieldPromotion extends CardImpl {
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(
                 FirstStrikeAbility.getInstance(), Duration.EndOfTurn
-        ).setText("That creature gains first strike until end of turn."));
+        ).setText("That creature gains first strike until end of turn"));
         this.getSpellAbility().addEffect(new GainLifeEffect(2));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }

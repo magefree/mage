@@ -74,22 +74,17 @@ class PreacherEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent targetPermanent = game.getPermanent(source.getFirstTarget());
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null
-                && sourcePermanent != null) {
-            Permanent targetPermanent = game.getPermanent(source.getFirstTarget());
-            if (targetPermanent != null) {
-                SourceTappedCondition sourceTappedCondition = SourceTappedCondition.instance;
-                SourceHasRemainedInSameZoneCondition conditionSourceSameZone = new SourceHasRemainedInSameZoneCondition(sourcePermanent.getId());
-                SourceHasRemainedInSameZoneCondition conditionTargetSameZone = new SourceHasRemainedInSameZoneCondition(targetPermanent.getId());
-                ConditionalContinuousEffect effect = new ConditionalContinuousEffect(
-                        new GainControlTargetEffect(Duration.Custom),
-                        new CompoundCondition(sourceTappedCondition, new CompoundCondition(conditionSourceSameZone, conditionTargetSameZone)),
-                        "Gain control of target creature of an opponent's choice that they control for as long as {this} remains tapped");
-                effect.setTargetPointer(new FixedTarget(targetPermanent.getId()));
-                game.addEffect(effect, source);
-                return true;
-            }
+        if (controller != null && sourcePermanent != null && targetPermanent != null) {
+            SourceTappedCondition sourceTappedCondition = SourceTappedCondition.instance;
+            ConditionalContinuousEffect effect = new ConditionalContinuousEffect(
+                    new GainControlTargetEffect(Duration.Custom),
+                    sourceTappedCondition,
+                    "Gain control of target creature of an opponent's choice that they control for as long as {this} remains tapped");
+            effect.setTargetPointer(new FixedTarget(targetPermanent.getId()));
+            game.addEffect(effect, source);
+            return true;
         }
         return false;
     }

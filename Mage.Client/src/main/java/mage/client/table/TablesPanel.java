@@ -793,7 +793,7 @@ public class TablesPanel extends javax.swing.JPanel {
             typeFilterList.add(RowFilter.regexFilter("Constructed", TablesTableModel.COLUMN_GAME_TYPE));
         }
         if (btnTypeTourneyLimited.isSelected()) {
-            typeFilterList.add(RowFilter.regexFilter("Booster|Sealed", TablesTableModel.COLUMN_GAME_TYPE));
+            typeFilterList.add(RowFilter.regexFilter("Booster|Sealed|Jumpstart", TablesTableModel.COLUMN_GAME_TYPE));
         }
 
         // format

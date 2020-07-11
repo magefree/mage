@@ -4,7 +4,7 @@ package mage.cards.h;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -37,7 +37,7 @@ public final class HangarbackWalker extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.P1P1.createInstance())));
 
         // When Hangarback Walker dies, create a 1/1 colorless Thopter artifact creature token with flying for each +1/+1 counter on Hangarback Walker.
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new ThopterColorlessToken(), new CountersSourceCount(CounterType.P1P1)), false));
+        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new ThopterColorlessToken(), new CountersSourceCount(CounterType.P1P1)), false));
 
         // {1}, {t}: Put a +1/+1 counter on Hangarback Walker.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new GenericManaCost(1));

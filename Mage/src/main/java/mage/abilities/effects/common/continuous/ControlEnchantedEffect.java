@@ -8,6 +8,7 @@ import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  * @author nantuko
@@ -19,7 +20,7 @@ public class ControlEnchantedEffect extends ContinuousEffectImpl {
     }
 
     public ControlEnchantedEffect(String targetDescription) {
-        super(Duration.WhileOnBattlefield, Outcome.GainControl);
+        super(Duration.WhileOnBattlefield, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         staticText = "You control enchanted " + targetDescription;
     }
 
@@ -35,8 +36,10 @@ public class ControlEnchantedEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Permanent enchantment = game.getPermanent(source.getSourceId());
+        Player controllerOfEnchantment = game.getPlayer(source.getControllerId());
         if (enchantment != null
-                && enchantment.getAttachedTo() != null) {
+                && enchantment.getAttachedTo() != null
+                && controllerOfEnchantment != null) {
             Permanent permanent = game.getPermanent(enchantment.getAttachedTo());
             if (permanent != null) {
                 switch (layer) {
@@ -50,6 +53,8 @@ public class ControlEnchantedEffect extends ContinuousEffectImpl {
                         break;
                 }
                 return true;
+            } else { //remove effect if the aura or attachedTo permanent or controller of the enchantment is null
+                discard();
             }
         }
         return false;

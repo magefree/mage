@@ -1,48 +1,52 @@
-
 package mage.cards.k;
 
-import java.util.Iterator;
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCost;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.common.cost.SpellCostReductionForEachSourceEffect;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.game.Game;
+
+import java.util.UUID;
 
 /**
- *
  * @author maurer.it_at_gmail.com
  */
 public final class KhalniHydra extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter;
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("green creature you control");
 
     static {
-        filter = new FilterControlledCreaturePermanent();
         filter.add(new ColorPredicate(ObjectColor.GREEN));
     }
 
     public KhalniHydra(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}{G}{G}{G}{G}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{G}{G}{G}{G}{G}{G}{G}");
         this.subtype.add(SubType.HYDRA);
 
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
-        
+
         // This spell costs {G} less to cast for each green creature you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new KhalniHydraCostReductionEffect()));
-        
+        ManaCosts<ManaCost> manaReduce = new ManaCostsImpl<>("{G}");
+        DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
+        this.addAbility(new SimpleStaticAbility(Zone.ALL,
+                new SpellCostReductionForEachSourceEffect(manaReduce, xValue))
+                .addHint(new ValueHint("Green creature you control", xValue))
+        );
+
         // Trample
         this.addAbility(TrampleAbility.getInstance());
     }
@@ -52,46 +56,7 @@ public final class KhalniHydra extends CardImpl {
     }
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
-        super.adjustCosts(ability, game);
-        int reductionAmount = game.getBattlefield().count(filter,  ability.getSourceId(), ability.getControllerId(), game);
-        Iterator<ManaCost> iter = ability.getManaCostsToPay().iterator();
-
-        while ( reductionAmount > 0 && iter.hasNext() ) {
-            ManaCost manaCostEntry = iter.next();
-            if (manaCostEntry.getMana().getGreen() > 0) { // in case another effect adds additional mana cost
-                iter.remove();
-                reductionAmount--;
-            }
-        }
-    }
-
-    @Override
     public KhalniHydra copy() {
         return new KhalniHydra(this);
     }
-}
-
-class KhalniHydraCostReductionEffect extends OneShotEffect {
-    private static final String effectText = "{this} costs {G} less to cast for each green creature you control";
-
-    KhalniHydraCostReductionEffect ( ) {
-        super(Outcome.Benefit);
-        this.staticText = effectText;
-    }
-
-    KhalniHydraCostReductionEffect ( KhalniHydraCostReductionEffect effect ) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public KhalniHydraCostReductionEffect copy() {
-        return new KhalniHydraCostReductionEffect(this);
-    }
-
 }

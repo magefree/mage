@@ -1,13 +1,13 @@
 package mage.abilities.keyword;
 
 import java.util.UUID;
-import mage.abilities.common.BecomesBlockedTriggeredAbility;
+import mage.abilities.common.BecomesBlockedSourceTriggeredAbility;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.targetpointer.FixedTarget;
 
-public class AfflictAbility extends BecomesBlockedTriggeredAbility {
+public class AfflictAbility extends BecomesBlockedSourceTriggeredAbility {
 
     private final int lifeLoss;
 

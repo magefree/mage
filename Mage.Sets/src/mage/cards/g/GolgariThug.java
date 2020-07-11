@@ -4,7 +4,7 @@ package mage.cards.g;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.abilities.keyword.DredgeAbility;
 import mage.cards.CardImpl;
@@ -35,7 +35,7 @@ public final class GolgariThug extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Golgari Thug dies, put target creature card from your graveyard on top of your library.
-        Ability ability = new DiesTriggeredAbility(new PutOnLibraryTargetEffect(true));
+        Ability ability = new DiesSourceTriggeredAbility(new PutOnLibraryTargetEffect(true));
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
         // Dredge 4

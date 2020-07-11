@@ -1,9 +1,12 @@
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.cost.SourceCostReductionForEachCardInGraveyardEffect;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
+import mage.abilities.effects.common.cost.SpellCostReductionForEachSourceEffect;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -11,8 +14,9 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class Ghoultree extends CardImpl {
@@ -26,7 +30,11 @@ public final class Ghoultree extends CardImpl {
         this.toughness = new MageInt(10);
 
         // Ghoultree costs {1} less to cast for each creature card in your graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SourceCostReductionForEachCardInGraveyardEffect(StaticFilters.FILTER_CARD_CREATURE)));
+        DynamicValue xValue = new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_CREATURE);
+        Ability ability = new SimpleStaticAbility(Zone.ALL, new SpellCostReductionForEachSourceEffect(1, xValue));
+        ability.setRuleAtTheTop(true);
+        ability.addHint(new ValueHint("Creature card in your graveyard", xValue));
+        this.addAbility(ability);
     }
 
     public Ghoultree(final Ghoultree card) {

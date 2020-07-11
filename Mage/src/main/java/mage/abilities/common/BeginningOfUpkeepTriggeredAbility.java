@@ -1,4 +1,3 @@
-
 package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
@@ -137,7 +136,7 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl {
             case OPPONENT:
                 return sb.insert(0, generateZoneString()).insert(0, "At the beginning of each opponent's upkeep, ").toString();
             case ANY:
-                return sb.insert(0, generateZoneString()).insert(0, "At the beginning of each upkeep, ").toString();
+                return sb.insert(0, generateZoneString()).insert(0, "At the beginning of each player's upkeep, ").toString();
             case ACTIVE:
                 return sb.insert(0, generateZoneString()).insert(0, "At the beginning of each player's upkeep, ").toString();
             case CONTROLLER_ATTACHED_TO:

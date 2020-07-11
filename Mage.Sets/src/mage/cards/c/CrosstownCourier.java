@@ -80,7 +80,7 @@ public final class CrosstownCourier extends CardImpl {
 
         @Override
         public String getRule() {
-            return "Whenever {this} deals combat damage to a player, that player puts that many cards from the top of their library into their graveyard.";
+            return "Whenever {this} deals combat damage to a player, that player mills that many cards.";
         }
     }
 }

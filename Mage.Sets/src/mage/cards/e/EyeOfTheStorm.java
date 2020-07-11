@@ -137,7 +137,7 @@ class EyeOfTheStormEffect1 extends OneShotEffect {
                 }
 
                 boolean continueCasting = true;
-                while (spellController.isInGame() && continueCasting) {
+                while (spellController.canRespond() && continueCasting) {
                     continueCasting = copiedCards.size() > 1 && spellController.chooseUse(outcome, "Cast one of the copied cards without paying its mana cost?", source, game);
 
                     Card cardToCopy;

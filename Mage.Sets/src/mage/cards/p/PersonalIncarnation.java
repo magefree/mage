@@ -4,7 +4,7 @@ package mage.cards.p;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
@@ -41,7 +41,7 @@ public final class PersonalIncarnation extends CardImpl {
         ability.setMayActivate(TargetController.OWNER);
         this.addAbility(ability);
         // When Personal Incarnation dies, its owner loses half their life, rounded up.
-        this.addAbility(new DiesTriggeredAbility(new PersonalIncarnationLoseHalfLifeEffect()));
+        this.addAbility(new DiesSourceTriggeredAbility(new PersonalIncarnationLoseHalfLifeEffect()));
     }
 
     public PersonalIncarnation(final PersonalIncarnation card) {

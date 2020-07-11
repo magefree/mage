@@ -3,7 +3,7 @@ package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.keyword.InvestigateEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -23,7 +23,7 @@ public final class BywayCourier extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Byway Courier dies, investigate.
-        this.addAbility(new DiesTriggeredAbility(new InvestigateEffect(), false));
+        this.addAbility(new DiesSourceTriggeredAbility(new InvestigateEffect(), false));
     }
 
     public BywayCourier(final BywayCourier card) {

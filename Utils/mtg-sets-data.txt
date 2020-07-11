@@ -116,6 +116,7 @@ Innistrad|ISD|
 Journey into Nyx|JOU|
 Judge Promo|JR|
 Judgment|JUD|
+Jumpstart|JMP|
 Kaladesh|KLD|
 Khans of Tarkir|KTK|
 Limited Edition Alpha|LEA|

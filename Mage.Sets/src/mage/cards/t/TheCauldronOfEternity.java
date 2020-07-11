@@ -1,25 +1,25 @@
 package mage.cards.t;
 
-import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
-import mage.abilities.effects.common.cost.CostModificationEffectImpl;
+import mage.abilities.effects.common.cost.SpellCostReductionForEachSourceEffect;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SuperType;
+import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -34,7 +34,11 @@ public final class TheCauldronOfEternity extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
 
         // This spell costs {2} less to cast for each creature card in your graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new TheCauldronOfEternityCostReductionEffect()));
+        DynamicValue xValue = new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_CREATURE);
+        Ability ability = new SimpleStaticAbility(Zone.ALL, new SpellCostReductionForEachSourceEffect(2, xValue));
+        ability.setRuleAtTheTop(true);
+        ability.addHint(new ValueHint("Creature card in your graveyard", xValue));
+        this.addAbility(ability);
 
         // Whenever a creature you control dies, put it on the bottom of its owner's library.
         this.addAbility(new DiesCreatureTriggeredAbility(
@@ -43,7 +47,7 @@ public final class TheCauldronOfEternity extends CardImpl {
         ));
 
         // {2}{B}, {T}, Pay 2 life: Return target creature card from your graveyard to the battlefield. Activate this ability only any time you could cast a sorcery.
-        Ability ability = new ActivateAsSorceryActivatedAbility(
+        ability = new ActivateAsSorceryActivatedAbility(
                 Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), new ManaCostsImpl("{2}{B}")
         );
         ability.addCost(new TapSourceCost());
@@ -59,46 +63,5 @@ public final class TheCauldronOfEternity extends CardImpl {
     @Override
     public TheCauldronOfEternity copy() {
         return new TheCauldronOfEternity(this);
-    }
-}
-
-class TheCauldronOfEternityCostReductionEffect extends CostModificationEffectImpl {
-
-    TheCauldronOfEternityCostReductionEffect() {
-        super(Duration.WhileOnStack, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        staticText = "This spell costs {2} less to cast for each creature card in your graveyard";
-    }
-
-    private TheCauldronOfEternityCostReductionEffect(final TheCauldronOfEternityCostReductionEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
-        int reductionAmount = player
-                .getGraveyard()
-                .getCards(game)
-                .stream()
-                .filter(MageObject::isCreature)
-                .mapToInt(card -> 2)
-                .sum();
-        CardUtil.reduceCost(abilityToModify, reductionAmount);
-        return true;
-    }
-
-    @Override
-    public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        return abilityToModify instanceof SpellAbility
-                && abilityToModify.getSourceId().equals(source.getSourceId())
-                && game.getCard(abilityToModify.getSourceId()) != null;
-    }
-
-    @Override
-    public TheCauldronOfEternityCostReductionEffect copy() {
-        return new TheCauldronOfEternityCostReductionEffect(this);
     }
 }

@@ -1,10 +1,6 @@
-
 package mage.cards.s;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesTappedSourceTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -16,25 +12,28 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterOpponentsCreaturePermanent;
 import mage.filter.predicate.permanent.BlockingPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.combat.CombatGroup;
+import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanentSameController;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class SorrowsPath extends CardImpl {
-    
+
     private static final FilterOpponentsCreaturePermanent filter = new FilterOpponentsCreaturePermanent("blocking creatures an opponent controls");
-    
+
     static {
         filter.add(BlockingPredicate.instance);
     }
@@ -43,17 +42,19 @@ public final class SorrowsPath extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // {T}: Choose two target blocking creatures an opponent controls. If each of those creatures could block all creatures that the other is blocking, remove both of them from combat. Each one then blocks all creatures the other was blocking.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SorrowsPathSwitchBlockersEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new SorrowsPathSwitchBlockersEffect(), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanentSameController(2, 2, filter, false));
         this.addAbility(ability);
-        
+
         // Whenever Sorrow's Path becomes tapped, it deals 2 damage to you and each creature you control.
         Ability ability2 = new BecomesTappedSourceTriggeredAbility(new DamageControllerEffect(2));
-        ability2.addEffect(new DamageAllEffect(2, new FilterControlledCreaturePermanent()).setText("and each creature you control"));
+        ability2.addEffect(new DamageAllEffect(
+                2, StaticFilters.FILTER_CONTROLLED_CREATURE
+        ).setText("and each creature you control"));
         this.addAbility(ability2);
     }
 
-    public SorrowsPath(final SorrowsPath card) {
+    private SorrowsPath(final SorrowsPath card) {
         super(card);
     }
 
@@ -66,12 +67,14 @@ public final class SorrowsPath extends CardImpl {
 
 class SorrowsPathSwitchBlockersEffect extends OneShotEffect {
 
-    public SorrowsPathSwitchBlockersEffect() {
+    SorrowsPathSwitchBlockersEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Choose two target blocking creatures an opponent controls. If each of those creatures could block all creatures that the other is blocking, remove both of them from combat. Each one then blocks all creatures the other was blocking";
+        this.staticText = "Choose two target blocking creatures an opponent controls. " +
+                "If each of those creatures could block all creatures that the other is blocking, " +
+                "remove both of them from combat. Each one then blocks all creatures the other was blocking";
     }
 
-    public SorrowsPathSwitchBlockersEffect(final SorrowsPathSwitchBlockersEffect effect) {
+    private SorrowsPathSwitchBlockersEffect(final SorrowsPathSwitchBlockersEffect effect) {
         super(effect);
     }
 
@@ -97,14 +100,14 @@ class SorrowsPathSwitchBlockersEffect extends OneShotEffect {
                 Set<Permanent> attackers1 = new HashSet<>();
                 Set<Permanent> attackers2 = new HashSet<>();
                 boolean blockPossible = false;
-                
+
                 if (chosenGroup1 != null && chosenGroup2 != null) {
                     blockPossible = getRestrictions(chosenGroup1, blocker2, attackers1, sourcePermanent, controller, game) && getRestrictions(chosenGroup2, blocker1, attackers2, sourcePermanent, controller, game);
                 }
                 if (!blockPossible) {
                     return true;
                 }
-                
+
                 // 10/1/2009: When the first ability resolves, if all the creatures that one of the targeted creatures was blocking have left combat, then the other targeted creature 
                 // is considered to be able to block all creatures the first creature is blocking. If the ability has its full effect, the second creature will be removed from combat 
                 // but not returned to combat; it doesn't block anything.
@@ -112,13 +115,29 @@ class SorrowsPathSwitchBlockersEffect extends OneShotEffect {
                 game.getCombat().removeFromCombat(blocker2.getId(), game, false);
                 blocker1.setRemovedFromCombat(attackers2.isEmpty());
                 blocker2.setRemovedFromCombat(attackers1.isEmpty());
-                
+
                 // 10/1/2009: Abilities that trigger whenever one of the targeted creatures blocks will trigger when the first ability resolves, because those creatures will change from 
                 // not blocking (since they're removed from combat) to blocking. It doesn't matter if those abilities triggered when those creatures blocked the first time. Abilities 
                 // that trigger whenever one of the attacking creatures becomes blocked will not trigger again, because they never stopped being blocked creatures. Abilities that 
                 // trigger whenever a creature blocks one of the attacking creatures will trigger again, though; those kinds of abilities trigger once for each creature that blocks.
                 reassignBlocker(blocker1, attackers2, game);
                 reassignBlocker(blocker2, attackers1, game);
+                Set<MageObjectReference> morSet = new HashSet<>();
+                attackers1
+                        .stream()
+                        .map(permanent -> new MageObjectReference(permanent, game))
+                        .forEach(morSet::add);
+                attackers2
+                        .stream()
+                        .map(permanent -> new MageObjectReference(permanent, game))
+                        .forEach(morSet::add);
+                String key = UUID.randomUUID().toString();
+                game.getState().setValue("becameBlocked_" + key, morSet);
+                game.fireEvent(GameEvent.getEvent(
+                        GameEvent.EventType.BATCH_BLOCK_NONCOMBAT,
+                        source.getSourceId(), source.getSourceId(),
+                        source.getControllerId(), key, 0)
+                );
                 return true;
             }
         }

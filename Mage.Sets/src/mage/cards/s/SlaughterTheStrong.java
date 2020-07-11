@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import mage.abilities.Ability;
@@ -70,7 +69,7 @@ class SlaughterTheStrongEffect extends OneShotEffect {
                 if (player != null) {
                     boolean selectionDone = false;
                     Set<UUID> selectedCreatures = new HashSet<>();
-                    while (selectionDone == false && player.isInGame()) {
+                    while (player.canRespond() && selectionDone == false) {
                         int powerSum = 0;
                         for (UUID creatureId : selectedCreatures) {
                             Permanent creature = game.getPermanent(creatureId);

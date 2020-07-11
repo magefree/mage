@@ -2,7 +2,7 @@ package mage.cards.r;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldThisOrAnotherTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -22,8 +22,7 @@ import java.util.UUID;
  */
 public final class RisenReef extends CardImpl {
 
-    private static final FilterPermanent filter
-            = new FilterPermanent(SubType.ELEMENTAL, "{this} or another Elemental");
+    private static final FilterPermanent filter = new FilterPermanent(SubType.ELEMENTAL, "Elemental");
 
     public RisenReef(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{U}");
@@ -33,7 +32,9 @@ public final class RisenReef extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Risen Reef or another Elemental enters the battlefield under your control, look at the top card of your library. If it's a land card, you may put it onto the battlefield tapped. If you don't put the card onto the battlefield, put it into your hand.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new RisenReefEffect(), filter));
+        this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
+                new RisenReefEffect(), filter, false, true
+        ));
     }
 
     private RisenReef(final RisenReef card) {

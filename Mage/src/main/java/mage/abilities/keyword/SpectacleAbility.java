@@ -20,7 +20,7 @@ public class SpectacleAbility extends SpellAbility {
 
     public static final String SPECTACLE_ACTIVATION_VALUE_KEY = "spectacleActivation";
 
-    private String rule;
+    private final String rule;
 
     public SpectacleAbility(Card card, ManaCost spectacleCosts) {
         super(card.getSpellAbility());

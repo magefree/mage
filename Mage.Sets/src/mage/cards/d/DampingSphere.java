@@ -1,19 +1,15 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.cost.SpellsCostIncreasementAllEffect;
+import mage.abilities.effects.common.cost.SpellsCostIncreasingAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
+import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -21,8 +17,9 @@ import mage.game.events.ManaEvent;
 import mage.util.CardUtil;
 import mage.watchers.common.CastSpellLastTurnWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class DampingSphere extends CardImpl {
@@ -90,10 +87,10 @@ class DampingSphereReplacementEffect extends ReplacementEffectImpl {
     }
 }
 
-class DampingSphereIncreasementAllEffect extends SpellsCostIncreasementAllEffect {
+class DampingSphereIncreasementAllEffect extends SpellsCostIncreasingAllEffect {
 
     DampingSphereIncreasementAllEffect() {
-        super(0);
+        super(1, new FilterCard(), TargetController.ANY);
         this.staticText = "Each spell a player casts costs {1} more to cast for each other spell that player has cast this turn";
     }
 

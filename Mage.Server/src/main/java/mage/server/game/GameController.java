@@ -326,7 +326,7 @@ public class GameController implements GameCallback {
     private void sendInfoAboutPlayersNotJoinedYetAndTryToFixIt() {
         // runs every 5 secs untill all players join
         for (Player player : game.getPlayers().values()) {
-            if (player.isInGame() && player.isHuman()) {
+            if (player.canRespond() && player.isHuman()) {
                 Optional<User> requestedUser = getUserByPlayerId(player.getId());
                 if (requestedUser.isPresent()) {
                     User user = requestedUser.get();

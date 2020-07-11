@@ -1,7 +1,5 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
@@ -16,8 +14,9 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author jonubuu
  */
 public final class GoblinWarchief extends CardImpl {
@@ -38,6 +37,7 @@ public final class GoblinWarchief extends CardImpl {
 
         // Goblin spells you cast cost {1} less to cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filterSpells, 1)));
+
         // Goblins you control have haste.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HasteAbility.getInstance(),
                 Duration.WhileOnBattlefield, new FilterCreaturePermanent(SubType.GOBLIN, "Goblins"), false)));

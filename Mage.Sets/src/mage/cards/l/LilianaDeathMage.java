@@ -9,7 +9,11 @@ import mage.abilities.effects.common.LoseLifeTargetControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
@@ -78,7 +82,7 @@ class LilianaDeathMagePlusEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player == null || !player.chooseUse(Outcome.Benefit, "Return a creature card from your graveyard to your hand?", source, game)) {
+        if (player == null) {
             return false;
         }
         Card card = game.getCard(source.getTargets().get(0).getFirstTarget());

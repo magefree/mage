@@ -31,7 +31,7 @@ import java.util.UUID;
 public final class GadrakTheCrownScourge extends CardImpl {
 
     private static final Condition condition = new PermanentsOnTheBattlefieldCondition(
-            StaticFilters.FILTER_PERMANENT_ARTIFACT, ComparisonType.MORE_THAN, 3
+            StaticFilters.FILTER_PERMANENT_ARTIFACT, ComparisonType.FEWER_THAN, 4
     );
 
     public GadrakTheCrownScourge(UUID ownerId, CardSetInfo setInfo) {

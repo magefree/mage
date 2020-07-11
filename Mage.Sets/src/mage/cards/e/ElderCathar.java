@@ -4,7 +4,7 @@ package mage.cards.e;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -31,7 +31,7 @@ public final class ElderCathar extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Elder Cathar dies, put a +1/+1 counter on target creature you control. If that creature is a Human, put two +1/+1 counters on it instead.
-        Ability ability = new DiesTriggeredAbility(new ElderCatharAddCountersTargetEffect(), false);
+        Ability ability = new DiesSourceTriggeredAbility(new ElderCatharAddCountersTargetEffect(), false);
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }

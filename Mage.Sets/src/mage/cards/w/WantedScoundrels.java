@@ -4,7 +4,7 @@ package mage.cards.w;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -28,7 +28,7 @@ public final class WantedScoundrels extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Wanted Scoundrels dies, target opponent creates two colorless Treasure artifact tokens with "T, Sacrifice this artifact: Add one mana of any color."
-        Ability ability = new DiesTriggeredAbility(new CreateTokenTargetEffect(new TreasureToken(), 2), false);
+        Ability ability = new DiesSourceTriggeredAbility(new CreateTokenTargetEffect(new TreasureToken(), 2), false);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }

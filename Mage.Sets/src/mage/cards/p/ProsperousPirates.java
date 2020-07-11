@@ -1,7 +1,5 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -11,8 +9,9 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.game.permanent.token.TreasureToken;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class ProsperousPirates extends CardImpl {
@@ -26,7 +25,7 @@ public final class ProsperousPirates extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When Prosperous Pirates enters the battlefield, create two colorless Treasure artifact tokens with "{T}, Sacrifice this artifact: Add one mana of any color."
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new TreasureToken("XLN"), 2)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new TreasureToken(), 2)));
     }
 
     public ProsperousPirates(final ProsperousPirates card) {

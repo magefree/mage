@@ -53,7 +53,6 @@ public class ConditionalManaTest extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore
     public void testWorkingWithReflectingPool() {
         addCard(Zone.BATTLEFIELD, playerA, "Cavern of Souls", 1); // can give {C] or {any} mana ({any} with restrictions)
         addCard(Zone.BATTLEFIELD, playerA, "Reflecting Pool", 1); // must give {C} or {any} mana from the Cavern, but without restrictions
@@ -321,7 +320,6 @@ public class ConditionalManaTest extends CardTestPlayerBase {
     //  and process all available net mana by special call like TriggeredManaAbility->getNetManaForEvent(ManaEvent xxx)
 
     @Test
-    @Ignore
     public void TriggeredManaAbilityMustGivesExtraManaOptions() {
         // TriggeredManaAbility must give extra mana options (2 red instead 1)
         // Whenever you tap a land for mana, add one mana of any type that land produced.
@@ -340,7 +338,6 @@ public class ConditionalManaTest extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore
     public void DictateOfKarametra_AutoPay() {
         // Whenever you tap a land for mana, add one mana of any type that land produced.
         addCard(Zone.BATTLEFIELD, playerA, "Dictate of Karametra");
@@ -351,7 +348,7 @@ public class ConditionalManaTest extends CardTestPlayerBase {
         // computer must see available mana (4 red mana instead 2)
         //activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
         //activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
-        showAvaileableAbilities("abils", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        showAvailableAbilities("abils", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Precision Bolt", playerB);
 
         setStrictChooseMode(true);

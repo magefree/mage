@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.mage</groupId>
         <artifactId>mage-root</artifactId>
-        <version>1.4.42</version>
+        <version>1.4.44</version>
     </parent>
 
     <artifactId>mage</artifactId>
@@ -95,7 +95,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
-                <version>1.12</version>
+                <version>3.2.0</version>
                 <executions>
                     <execution>
                         <id>add-classes</id>

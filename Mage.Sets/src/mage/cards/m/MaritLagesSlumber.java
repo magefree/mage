@@ -1,7 +1,7 @@
 package mage.cards.m;
 
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldThisOrAnotherTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -27,7 +27,7 @@ import java.util.UUID;
 public final class MaritLagesSlumber extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterControlledPermanent("{this} or another snow permanent");
+            = new FilterControlledPermanent("snow permanent");
 
     static {
         filter.add(SuperType.SNOW.getPredicate());
@@ -43,7 +43,9 @@ public final class MaritLagesSlumber extends CardImpl {
         this.addSuperType(SuperType.SNOW);
 
         // Whenever Marit Lage's Slumber or another snow permanent enters the battlefield under your control, scry 1.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new ScryEffect(1), filter));
+        this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
+                new ScryEffect(1), filter, false, true
+        ));
 
         // At the beginning of your upkeep, if you control ten or more snow permanents, sacrifice Marit Lage's Slumber. If you do, create Marit Lage, a legendary 20/20 black Avatar creature token with flying and indestructible.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(

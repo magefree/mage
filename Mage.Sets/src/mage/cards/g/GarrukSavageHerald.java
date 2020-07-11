@@ -5,6 +5,7 @@ import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.DamageAsThoughNotBlockedAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageWithPowerFromOneToAnotherTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
@@ -12,7 +13,12 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherTargetPredicate;
 import mage.game.Game;
@@ -39,7 +45,7 @@ public final class GarrukSavageHerald extends CardImpl {
         this.addAbility(new LoyaltyAbility(new GarrukSavageHeraldEffect(), 1));
 
         // −2: Target creature you control deals damage equal to its power to another target creature.
-        DamageWithPowerFromOneToAnotherTargetEffect effect = new DamageWithPowerFromOneToAnotherTargetEffect();
+        Effect effect = new DamageWithPowerFromOneToAnotherTargetEffect();
         effect.setText("Target creature you control deals damage equal to its power to another target creature");
 
         Ability minusAbility = new LoyaltyAbility(effect, -2);
@@ -47,10 +53,10 @@ public final class GarrukSavageHerald extends CardImpl {
         controlledCreature.setTargetTag(1);
         minusAbility.addTarget(controlledCreature);
 
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("Another creature: damage dealt to");
+        FilterCreaturePermanent filter = new FilterCreaturePermanent();
         filter.add(new AnotherTargetPredicate(2));
         TargetCreaturePermanent anotherTargetCreature = new TargetCreaturePermanent(filter);
-        minusAbility.addTarget(anotherTargetCreature);
+        minusAbility.addTarget(anotherTargetCreature.withChooseHint("another creature to deal damage to"));
 
         this.addAbility(minusAbility);
 

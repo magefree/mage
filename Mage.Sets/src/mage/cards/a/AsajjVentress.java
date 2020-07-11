@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.common.BecomesBlockedTriggeredAbility;
+import mage.abilities.common.BecomesBlockedSourceTriggeredAbility;
 import mage.abilities.condition.common.HateCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.common.BlockedCreatureCount;
@@ -42,7 +42,7 @@ public final class AsajjVentress extends CardImpl {
         BlockedCreatureCount value = new BlockedCreatureCount();
         Effect effect = new BoostSourceEffect(value, value, Duration.EndOfTurn, true);
         effect.setText("she gets +1/+1 for each creature blocking her until end of turn");
-        this.addAbility(new BecomesBlockedTriggeredAbility(effect, false));
+        this.addAbility(new BecomesBlockedSourceTriggeredAbility(effect, false));
 
         // <i>Hate</i> &mdash; Whenever Asajj Ventress attacks, if an opponent lost life from a source other than combat damage this turn, target creature blocks this turn if able.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(

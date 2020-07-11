@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardAllEffect;
@@ -54,7 +54,7 @@ public final class MathasFiendSeeker extends CardImpl {
         // At the beginning of your end step, put a bounty counter on target creature an opponent controls. For as long as that creature has a bounty counter on it, it has "When this creature dies, each opponent draws a card and gains 2 life."
         Ability ability = new BeginningOfYourEndStepTriggeredAbility(new AddCountersTargetEffect(CounterType.BOUNTY.createInstance()), false);
         ability.addTarget(new TargetCreaturePermanent(filter));
-        Ability ability2 = new DiesTriggeredAbility(new DrawCardAllEffect(1, TargetController.OPPONENT));
+        Ability ability2 = new DiesSourceTriggeredAbility(new DrawCardAllEffect(1, TargetController.OPPONENT));
         ability2.addEffect(new OpponentsGainLifeEffect());
         Effect effect = new MathasFiendSeekerGainAbilityEffect(ability2, Duration.Custom, rule);
         ability.addEffect(effect);

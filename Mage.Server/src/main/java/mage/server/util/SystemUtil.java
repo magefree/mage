@@ -82,7 +82,7 @@ public final class SystemUtil {
     }
 
     private static final Pattern patternGroup = Pattern.compile("\\[(.+)\\]"); // [test new card]
-    private static final Pattern patternCommand = Pattern.compile("([\\w]+):([\\S]+?):([\\S ]+):([\\d]+)"); // battlefield:Human:Island:10
+    private static final Pattern patternCommand = Pattern.compile("([\\w]+):([\\S ]+?):([\\S ]+):([\\d]+)"); // battlefield:Human:Island:10
     private static final Pattern patternCardInfo = Pattern.compile("([\\S ]+):([\\S ]+)"); // Island:XLN
 
     // show ext info for special commands

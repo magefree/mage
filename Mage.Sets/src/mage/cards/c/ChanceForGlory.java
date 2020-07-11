@@ -23,7 +23,7 @@ public final class ChanceForGlory extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityAllEffect(
                 IndestructibleAbility.getInstance(), Duration.EndOfGame,
                 StaticFilters.FILTER_CONTROLLED_CREATURES
-        ).setText("Creatures you control gain indestructible."));
+        ).setText("Creatures you control gain indestructible"));
         this.getSpellAbility().addEffect(new AddExtraTurnControllerEffect(true));
     }
 

@@ -34,6 +34,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
+import mage.abilities.effects.common.ManaEffect;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -171,6 +172,9 @@ public abstract class AbilityImpl implements Ability {
     private boolean resolveMode(Game game) {
         boolean result = true;
         for (Effect effect : getEffects()) {
+            if (game.inCheckPlayableState() && !(effect instanceof ManaEffect)) {
+                continue; // Ignored non mana effects - see GameEvent.TAPPED_FOR_MANA
+            }
             if (effect instanceof OneShotEffect) {
                 boolean effectResult = effect.apply(game, this);
                 result &= effectResult;
@@ -329,8 +333,9 @@ public abstract class AbilityImpl implements Ability {
             }
             if (!getTargets().isEmpty()) {
                 Outcome outcome = getEffects().getOutcome(this);
-                // only activated abilities can be canceled by user (not triggered)
-                if (!getTargets().chooseTargets(outcome, this.controllerId, this, noMana, game, this instanceof ActivatedAbility)) {
+                // only activated abilities can be canceled by human user (not triggered)
+                boolean canCancel = this instanceof ActivatedAbility && controller.isHuman();
+                if (!getTargets().chooseTargets(outcome, this.controllerId, this, noMana, game, canCancel)) {
                     // was canceled during targer selection
                     return false;
                 }
@@ -425,36 +430,28 @@ public abstract class AbilityImpl implements Ability {
             }
         }
 
-        boolean alternativeCostisUsed = false;
+        boolean alternativeCostUsed = false;
         if (sourceObject != null && !(sourceObject instanceof Permanent)) {
-            Abilities<Ability> abilities = null;
-            if (sourceObject instanceof Card) {
-                abilities = ((Card) sourceObject).getAbilities(game);
-            } else {
-                sourceObject.getAbilities();
-            }
-
-            if (abilities != null) {
-                for (Ability ability : abilities) {
-                    // if cast for noMana no Alternative costs are allowed
-                    if (canUseAlternativeCost && !noMana && ability instanceof AlternativeSourceCosts) {
-                        AlternativeSourceCosts alternativeSpellCosts = (AlternativeSourceCosts) ability;
-                        if (alternativeSpellCosts.isAvailable(this, game)) {
-                            if (alternativeSpellCosts.askToActivateAlternativeCosts(this, game)) {
-                                // only one alternative costs may be activated
-                                alternativeCostisUsed = true;
-                                break;
-                            }
+            Abilities<Ability> abilities = CardUtil.getAbilities(sourceObject, game);
+            for (Ability ability : abilities) {
+                // if cast for noMana no Alternative costs are allowed
+                if (canUseAlternativeCost && !noMana && ability instanceof AlternativeSourceCosts) {
+                    AlternativeSourceCosts alternativeSpellCosts = (AlternativeSourceCosts) ability;
+                    if (alternativeSpellCosts.isAvailable(this, game)) {
+                        if (alternativeSpellCosts.askToActivateAlternativeCosts(this, game)) {
+                            // only one alternative costs may be activated
+                            alternativeCostUsed = true;
+                            break;
                         }
                     }
-                    if (canUseAdditionalCost && ability instanceof OptionalAdditionalSourceCosts) {
-                        ((OptionalAdditionalSourceCosts) ability).addOptionalAdditionalCosts(this, game);
-                    }
+                }
+                if (canUseAdditionalCost && ability instanceof OptionalAdditionalSourceCosts) {
+                    ((OptionalAdditionalSourceCosts) ability).addOptionalAdditionalCosts(this, game);
                 }
             }
 
             // controller specific alternate spell costs
-            if (canUseAlternativeCost && !noMana && !alternativeCostisUsed) {
+            if (canUseAlternativeCost && !noMana && !alternativeCostUsed) {
                 if (this.getAbilityType() == AbilityType.SPELL
                         // 117.9a Only one alternative cost can be applied to any one spell as it's being cast.
                         // So an alternate spell ability can't be paid with Omniscience
@@ -463,7 +460,7 @@ public abstract class AbilityImpl implements Ability {
                         if (alternativeSourceCosts.isAvailable(this, game)) {
                             if (alternativeSourceCosts.askToActivateAlternativeCosts(this, game)) {
                                 // only one alternative costs may be activated
-                                alternativeCostisUsed = true;
+                                alternativeCostUsed = true;
                                 break;
                             }
                         }
@@ -472,7 +469,7 @@ public abstract class AbilityImpl implements Ability {
             }
         }
 
-        return alternativeCostisUsed;
+        return alternativeCostUsed;
     }
 
     /**
@@ -717,7 +714,6 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public void addWatcher(Watcher watcher) {
-
         watcher.setSourceId(this.sourceId);
         watcher.setControllerId(this.controllerId);
         getWatchers().add(watcher);
@@ -777,7 +773,7 @@ public abstract class AbilityImpl implements Ability {
             if (ruleStart.length() > 1) {
                 String end = ruleStart.substring(ruleStart.length() - 2).trim();
                 if (end.isEmpty() || end.equals(":") || end.equals(".")) {
-                    rule = ruleStart + Character.toUpperCase(text.charAt(0)) + text.substring(1);
+                    rule = ruleStart + CardUtil.getTextWithFirstCharUpperCase(text);
                 } else {
                     rule = ruleStart + text;
                 }
@@ -853,6 +849,18 @@ public abstract class AbilityImpl implements Ability {
             return getModes().getMode().getTargets();
         }
         return new Targets();
+    }
+
+    @Override
+    public Targets getAllSelectedTargets() {
+        Targets res = new Targets();
+        for (UUID modeId : this.getModes().getSelectedModes()) {
+            Mode mode = this.getModes().get(modeId);
+            if (mode != null) {
+                res.addAll(mode.getTargets());
+            }
+        }
+        return res;
     }
 
     @Override
@@ -1124,6 +1132,7 @@ public abstract class AbilityImpl implements Ability {
             String usedVerb = null;
             for (Target target : targets) {
                 if (!target.getTargets().isEmpty()) {
+                    String targetHintInfo = target.getChooseHint() == null ? "" : " (" + target.getChooseHint() + ")";
                     if (!target.isNotTarget()) {
                         if (usedVerb == null || usedVerb.equals(" choosing ")) {
                             usedVerb = " targeting ";
@@ -1134,6 +1143,7 @@ public abstract class AbilityImpl implements Ability {
                         sb.append(usedVerb);
                     }
                     sb.append(target.getTargetedName(game));
+                    sb.append(targetHintInfo);
                 }
             }
         }
@@ -1232,6 +1242,14 @@ public abstract class AbilityImpl implements Ability {
         }
     }
 
+    /**
+     * Dynamic cost modification for ability.
+     * Example: if it need stack related info (like real targets) then must check two states (game.inCheckPlayableState):
+     * 1. In playable state it must check all possible use cases (e.g. allow to reduce on any available target and modes)
+     * 2. In real cast state it must check current use case (e.g. real selected targets and modes)
+     *
+     * @param costAdjuster
+     */
     @Override
     public void setCostAdjuster(CostAdjuster costAdjuster) {
         this.costAdjuster = costAdjuster;

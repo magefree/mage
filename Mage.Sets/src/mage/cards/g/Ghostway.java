@@ -1,9 +1,5 @@
-
 package mage.cards.g;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
@@ -20,14 +16,17 @@ import mage.players.Player;
 import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class Ghostway extends CardImpl {
 
     public Ghostway(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{W}");
 
         // Exile each creature you control. Return those cards to the battlefield under their owner's control at the beginning of the next end step.
         this.getSpellAbility().addEffect(new GhostwayEffect());
@@ -77,7 +76,7 @@ class GhostwayEffect extends OneShotEffect {
                     cardsToReturn.add(exiled);
                 }
             }
-            Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect();
+            Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false);
             effect.setTargetPointer(new FixedTargets(cardsToReturn, game));
             AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
             game.addDelayedTriggeredAbility(delayedAbility, source);

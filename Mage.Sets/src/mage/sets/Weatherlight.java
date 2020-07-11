@@ -62,9 +62,12 @@ public final class Weatherlight extends ExpansionSet {
         cards.add(new SetCardInfo("Buried Alive", 63, Rarity.UNCOMMON, mage.cards.b.BuriedAlive.class));
         cards.add(new SetCardInfo("Call of the Wild", 122, Rarity.RARE, mage.cards.c.CallOfTheWild.class));
         cards.add(new SetCardInfo("Chimeric Sphere", 148, Rarity.UNCOMMON, mage.cards.c.ChimericSphere.class));
+        cards.add(new SetCardInfo("Choking Vines", 123, Rarity.COMMON, mage.cards.c.ChokingVines.class));
         cards.add(new SetCardInfo("Cinder Giant", 93, Rarity.UNCOMMON, mage.cards.c.CinderGiant.class));
         cards.add(new SetCardInfo("Cinder Wall", 94, Rarity.COMMON, mage.cards.c.CinderWall.class));
+        cards.add(new SetCardInfo("Circling Vultures", 64, Rarity.UNCOMMON, mage.cards.c.CirclingVultures.class));
         cards.add(new SetCardInfo("Cloud Djinn", 36, Rarity.UNCOMMON, mage.cards.c.CloudDjinn.class));
+        cards.add(new SetCardInfo("Coils of the Medusa", 65, Rarity.COMMON, mage.cards.c.CoilsOfTheMedusa.class));
         cards.add(new SetCardInfo("Cone of Flame", 95, Rarity.UNCOMMON, mage.cards.c.ConeOfFlame.class));
         cards.add(new SetCardInfo("Debt of Loyalty", 11, Rarity.RARE, mage.cards.d.DebtOfLoyalty.class));
         cards.add(new SetCardInfo("Dense Foliage", 124, Rarity.RARE, mage.cards.d.DenseFoliage.class));
@@ -108,9 +111,11 @@ public final class Weatherlight extends ExpansionSet {
         cards.add(new SetCardInfo("Infernal Tribute", 73, Rarity.RARE, mage.cards.i.InfernalTribute.class));
         cards.add(new SetCardInfo("Inner Sanctum", 18, Rarity.RARE, mage.cards.i.InnerSanctum.class));
         cards.add(new SetCardInfo("Jabari's Banner", 150, Rarity.UNCOMMON, mage.cards.j.JabarisBanner.class));
+        cards.add(new SetCardInfo("Jangling Automaton", 151, Rarity.COMMON, mage.cards.j.JanglingAutomaton.class));
         cards.add(new SetCardInfo("Kithkin Armor", 19, Rarity.COMMON, mage.cards.k.KithkinArmor.class));
         cards.add(new SetCardInfo("Lava Hounds", 109, Rarity.UNCOMMON, mage.cards.l.LavaHounds.class));
         cards.add(new SetCardInfo("Lava Storm", 110, Rarity.COMMON, mage.cards.l.LavaStorm.class));
+        cards.add(new SetCardInfo("Liege of the Hollows", 131, Rarity.RARE, mage.cards.l.LiegeOfTheHollows.class));
         cards.add(new SetCardInfo("Llanowar Behemoth", 132, Rarity.UNCOMMON, mage.cards.l.LlanowarBehemoth.class));
         cards.add(new SetCardInfo("Llanowar Druid", 133, Rarity.COMMON, mage.cards.l.LlanowarDruid.class));
         cards.add(new SetCardInfo("Llanowar Sentinel", 134, Rarity.COMMON, mage.cards.l.LlanowarSentinel.class));
@@ -148,6 +153,7 @@ public final class Weatherlight extends ExpansionSet {
         cards.add(new SetCardInfo("Roc Hatchling", 113, Rarity.UNCOMMON, mage.cards.r.RocHatchling.class));
         cards.add(new SetCardInfo("Rogue Elephant", 139, Rarity.COMMON, mage.cards.r.RogueElephant.class));
         cards.add(new SetCardInfo("Sage Owl", 52, Rarity.COMMON, mage.cards.s.SageOwl.class));
+        cards.add(new SetCardInfo("Sawtooth Ogre", 114, Rarity.COMMON, mage.cards.s.SawtoothOgre.class));
         cards.add(new SetCardInfo("Scorched Ruins", 166, Rarity.RARE, mage.cards.s.ScorchedRuins.class));
         cards.add(new SetCardInfo("Serenity", 24, Rarity.RARE, mage.cards.s.Serenity.class));
         cards.add(new SetCardInfo("Serra's Blessing", 25, Rarity.UNCOMMON, mage.cards.s.SerrasBlessing.class));
@@ -166,6 +172,7 @@ public final class Weatherlight extends ExpansionSet {
         cards.add(new SetCardInfo("Teferi's Veil", 53, Rarity.UNCOMMON, mage.cards.t.TeferisVeil.class));
         cards.add(new SetCardInfo("Tendrils of Despair", 83, Rarity.COMMON, mage.cards.t.TendrilsOfDespair.class));
         cards.add(new SetCardInfo("Thran Forge", 159, Rarity.UNCOMMON, mage.cards.t.ThranForge.class));
+        cards.add(new SetCardInfo("Thran Tome", 160, Rarity.RARE, mage.cards.t.ThranTome.class));
         cards.add(new SetCardInfo("Thunderbolt", 115, Rarity.COMMON, mage.cards.t.Thunderbolt.class));
         cards.add(new SetCardInfo("Thundermare", 116, Rarity.RARE, mage.cards.t.Thundermare.class));
         cards.add(new SetCardInfo("Timid Drake", 54, Rarity.UNCOMMON, mage.cards.t.TimidDrake.class));

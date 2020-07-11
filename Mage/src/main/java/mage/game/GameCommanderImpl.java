@@ -55,8 +55,8 @@ public abstract class GameCommanderImpl extends GameImpl {
             Player player = getPlayer(playerId);
             if (player != null) {
                 // add new commanders
-                for (UUID id : player.getSideboard()) {
-                    Card card = this.getCard(id);
+                for (UUID cardId : player.getSideboard()) {
+                    Card card = this.getCard(cardId);
                     if (card != null) {
                         // Check for companions. If it is the only card in the sideboard, it is the commander, not a companion.
                         if (player.getSideboard().size() > 1 && card.getAbilities(this).stream().anyMatch(ability -> ability instanceof CompanionAbility)) {

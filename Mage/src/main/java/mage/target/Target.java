@@ -52,6 +52,8 @@ public interface Target extends Serializable {
 
     boolean canTarget(UUID id, Ability source, Game game);
 
+    boolean stillLegalTarget(UUID id, Ability source, Game game);
+
     boolean canTarget(UUID playerId, UUID id, Ability source, Game game);
 
     boolean isLegal(Ability source, Game game);
@@ -136,6 +138,8 @@ public interface Target extends Serializable {
     void setTargetAmount(UUID targetId, int amount, Game game);
 
     Target withChooseHint(String chooseHint);
+
+    String getChooseHint();
 
     void setEventReporting(boolean shouldReport);
 }

@@ -10,6 +10,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.RevealLibraryPutIntoHandEffect;
 import mage.abilities.effects.common.RollPlanarDieEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
+import mage.abilities.effects.common.cost.PlanarDieRollCostIncreasingEffect;
 import mage.cards.Card;
 import mage.constants.*;
 import mage.filter.FilterCard;

@@ -10,6 +10,7 @@ package mage.client.table;
 
 import mage.cards.decks.DeckCardLists;
 import mage.client.SessionHandler;
+import mage.client.util.ClientDefaultSettings;
 import mage.players.PlayerType;
 
 import javax.swing.*;
@@ -136,9 +137,9 @@ public class TournamentPlayerPanel extends javax.swing.JPanel {
     private void cbPlayerTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPlayerTypeActionPerformed
         if (this.cbPlayerType.getSelectedItem() != PlayerType.HUMAN) {
             this.pnlPlayerName.setVisible(true);
-            if (this.txtPlayerName.getText().isEmpty()) {
-                this.txtPlayerName.setText("Computer " + this.lblPlayerNum.getText());
-            }
+            this.txtPlayerName.setText(ClientDefaultSettings.computerName + " " + this.lblPlayerNum.getText().charAt(this.lblPlayerNum.getText().length() - 1));
+            this.txtPlayerName.setEditable(false);
+            this.txtPlayerName.setEnabled(false);
         } else {
             this.pnlPlayerName.setVisible(false);
         }

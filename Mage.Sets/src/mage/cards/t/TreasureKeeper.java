@@ -3,7 +3,7 @@ package mage.cards.t;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -32,7 +32,7 @@ public final class TreasureKeeper extends CardImpl {
 
         // When Treasure Keeper dies, reveal cards from the top of your library until you reveal a nonland card with converted mana cost 3 or less.
         // You may cast that card without paying its mana cost. Put all revealed cards not cast this way on the bottom of your library in a random order.
-        this.addAbility(new DiesTriggeredAbility(new TreasureKeeperEffect()));
+        this.addAbility(new DiesSourceTriggeredAbility(new TreasureKeeperEffect()));
     }
 
     public TreasureKeeper(final TreasureKeeper card) {

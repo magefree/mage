@@ -20,8 +20,8 @@ public final class ScourAllPossibilities extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{U}");
 
         // Scry 2, then draw a card.
-        this.getSpellAbility().addEffect(new ScryEffect(2).setText("scry 2,"));
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("then"));
+        this.getSpellAbility().addEffect(new ScryEffect(2, false));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy(", then"));
 
         // Flashback {4}{U}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{4}{U}"), TimingRule.SORCERY));

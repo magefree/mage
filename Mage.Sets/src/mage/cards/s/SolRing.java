@@ -18,6 +18,8 @@ public final class SolRing extends CardImpl {
 
     public SolRing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
+        
+        // Tap: Add {C}{C}
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(2), new TapSourceCost()));
     }
 

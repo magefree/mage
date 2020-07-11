@@ -29,7 +29,7 @@ public class OpalPalaceTest extends CardTestCommanderDuelBase {
 
         // showHand("hand", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
         // showCommand("command", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
-        // showAvaileableAbilities("abi", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        // showAvailableAbilities("abi", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G}");
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}, {T}");
         setChoice(playerA, "Opal Palace"); // activate mana replace effect first (+3 counters)

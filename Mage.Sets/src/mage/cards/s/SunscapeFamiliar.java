@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
@@ -16,8 +14,9 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class SunscapeFamiliar extends CardImpl {
@@ -31,7 +30,7 @@ public final class SunscapeFamiliar extends CardImpl {
     }
 
     public SunscapeFamiliar(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.subtype.add(SubType.WALL);
 
         this.power = new MageInt(0);
@@ -39,6 +38,7 @@ public final class SunscapeFamiliar extends CardImpl {
 
         // Defender
         this.addAbility(DefenderAbility.getInstance());
+
         // Green spells and blue spells you cast cost {1} less to cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
     }

@@ -6,6 +6,8 @@ import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
+import java.util.Locale;
+
 /**
  * @author TheElk801
  */
@@ -36,7 +38,7 @@ public class ReflexiveTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public String getRule() {
-        return text.substring(0, 1).toUpperCase() + text.substring(1) + '.';
+        return text.substring(0, 1).toUpperCase(Locale.ENGLISH) + text.substring(1) + '.';
     }
 
     public String getText() {

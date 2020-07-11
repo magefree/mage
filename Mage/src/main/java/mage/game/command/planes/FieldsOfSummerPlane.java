@@ -11,6 +11,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.GainLifeTargetEffect;
 import mage.abilities.effects.common.RollPlanarDieEffect;
+import mage.abilities.effects.common.cost.PlanarDieRollCostIncreasingEffect;
 import mage.constants.*;
 import mage.filter.FilterSpell;
 import mage.game.Game;

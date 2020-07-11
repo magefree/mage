@@ -3,13 +3,15 @@ package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.common.BecomesTargetTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.SacrificeSourceEffect;
+import mage.abilities.effects.common.continuous.CreaturesBecomeOtherTypeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -20,13 +22,18 @@ import mage.game.permanent.Permanent;
  */
 public final class DismissIntoDream extends CardImpl {
 
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Each creature your opponents control");
+    static {
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
+    }
+
     public DismissIntoDream(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{6}{U}");
 
 
         // Each creature your opponents control is an Illusion in addition to its other types 
         // and has "When this creature becomes the target of a spell or ability, sacrifice it."
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DismissIntoDreamEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DismissIntoDreamEffect(filter)));
     }
 
     public DismissIntoDream(final DismissIntoDream card) {
@@ -39,16 +46,11 @@ public final class DismissIntoDream extends CardImpl {
     }
 }
 
-class DismissIntoDreamEffect extends ContinuousEffectImpl {
+class DismissIntoDreamEffect extends CreaturesBecomeOtherTypeEffect {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
-
-    DismissIntoDreamEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        this.staticText = "Each creature your opponents control is an Illusion in addition to its other types and has \"When this creature becomes the target of a spell or ability, sacrifice it.\"";
+    DismissIntoDreamEffect(FilterPermanent filter) {
+        super(filter, SubType.ILLUSION, Duration.WhileOnBattlefield);
+        this.outcome = Outcome.Detriment;
     }
 
     DismissIntoDreamEffect(final DismissIntoDreamEffect effect) {
@@ -67,23 +69,24 @@ class DismissIntoDreamEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        for (Permanent object: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
-            switch (layer) {
-                case AbilityAddingRemovingEffects_6:
-                    object.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()), source.getSourceId(), game);
-                    break;
-                case TypeChangingEffects_4:
-                    if (!object.hasSubtype(SubType.ILLUSION, game)) {
-                        object.getSubtype(game).add(SubType.ILLUSION);
-                    }
-                    break;
+        super.apply(layer, sublayer, source, game);
+
+        if (layer == Layer.AbilityAddingRemovingEffects_6) {
+            for (Permanent object: game.getBattlefield().getActivePermanents(this.filter, source.getControllerId(), game)) {
+                object.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()), source.getSourceId(), game);
             }
         }
+
         return true;
     }
 
     @Override
     public boolean hasLayer(Layer layer) {
-        return layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.TypeChangingEffects_4;
+        return super.hasLayer(layer) || layer == Layer.AbilityAddingRemovingEffects_6;
+    }
+
+    @Override
+    public String getText(Mode mode) {
+        return super.getText(mode) + " and has \"When this creature becomes the target of a spell or ability, sacrifice it.\"";
     }
 }

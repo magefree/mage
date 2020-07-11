@@ -12,7 +12,7 @@ import mage.game.Game;
 public enum AbilityResolutionCountHint implements Hint {
 
     instance;
-    private static final Hint hint = new ValueHint("Resolution count:", AbilityResolutionCount.instance);
+    private static final Hint hint = new ValueHint("Resolution count", AbilityResolutionCount.instance);
 
     @Override
     public String getText(Game game, Ability ability) {

@@ -51,7 +51,7 @@ class InduceParanoiaEffect extends OneShotEffect {
 
     InduceParanoiaEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Counter target spell. If {B} was spent to cast this spell, that spell's controller puts the top X cards of their library into their graveyard, where X is the spell's converted mana cost.";
+        this.staticText = "Counter target spell. If {B} was spent to cast this spell, that spell's controller mills X cards, where X is the spell's converted mana cost.";
     }
 
     InduceParanoiaEffect(final InduceParanoiaEffect effect) {
@@ -71,7 +71,7 @@ class InduceParanoiaEffect extends OneShotEffect {
             int spellCMC = spell.getConvertedManaCost();
             Player player = game.getPlayer(spell.getControllerId());
             if (player != null) {
-                player.moveCards(player.getLibrary().getTopCards(game, spellCMC), Zone.GRAVEYARD, source, game);
+                player.millCards(spellCMC, source, game);
                 return true;
             }
         }

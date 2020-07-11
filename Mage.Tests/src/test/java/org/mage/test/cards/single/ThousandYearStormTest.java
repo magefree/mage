@@ -279,8 +279,6 @@ public class ThousandYearStormTest extends CardTestPlayerBase {
     You control enchanted permanent.
     Cycling {2} ({2}, Discard this card: Draw a card.)
      */
-    // Test fails sometimes with the following message:
-    // java.lang.AssertionError: b 0x copy after control - PlayerA have wrong life: 20 <> 17 expected:<17> but was:<20>
     @Test
     public void test_GetControlNotCounts() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
@@ -305,6 +303,7 @@ public class ThousandYearStormTest extends CardTestPlayerBase {
         checkLife("a 1x copy", 2, PhaseStep.END_COMBAT, playerB, 20 - 3 - 3 * 2);
 
         // change controller to B
+        activateManaAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "{T}: Add {U}", 7);
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lay Claim", "Thousand-Year Storm");
         // cast bolt without pump
         castSpell(2, PhaseStep.END_TURN, playerB, "Lightning Bolt", playerA);

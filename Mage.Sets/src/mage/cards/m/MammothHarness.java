@@ -3,7 +3,7 @@ package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BlocksOrBecomesBlockedTriggeredAbility;
+import mage.abilities.common.BlocksOrBecomesBlockedSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
@@ -61,7 +61,7 @@ public final class MammothHarness extends CardImpl {
     }
 }
 
-class MammothHarnessTriggeredAbility extends BlocksOrBecomesBlockedTriggeredAbility {
+class MammothHarnessTriggeredAbility extends BlocksOrBecomesBlockedSourceTriggeredAbility {
 
     public MammothHarnessTriggeredAbility() {
         super(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), StaticFilters.FILTER_PERMANENT_CREATURE, false, null, false);

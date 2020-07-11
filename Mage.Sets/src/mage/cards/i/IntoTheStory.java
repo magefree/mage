@@ -5,6 +5,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
+import mage.abilities.hint.ConditionHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -25,8 +26,8 @@ public final class IntoTheStory extends CardImpl {
 
         // This spell costs {3} less to cast if an opponent has seven or more cards in their graveyard.
         this.addAbility(new SimpleStaticAbility(
-                Zone.STACK, new SpellCostReductionSourceEffect(3, IntoTheStoryCondition.instance)
-        ).setRuleAtTheTop(true));
+                Zone.ALL, new SpellCostReductionSourceEffect(3, IntoTheStoryCondition.instance)
+        ).setRuleAtTheTop(true).addHint(new ConditionHint(IntoTheStoryCondition.instance, "Opponent has seven or more cards in their graveyard")));
 
         // Draw four cards.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(4));

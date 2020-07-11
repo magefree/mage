@@ -1,6 +1,5 @@
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -16,11 +15,13 @@ import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class GuildSummit extends CardImpl {
@@ -82,9 +83,10 @@ class GuildSummitEffect extends OneShotEffect {
         Player you = game.getPlayer(source.getControllerId());
         TargetPermanent target = new TargetPermanent(0, Integer.MAX_VALUE, filter, true);
         if (target.canChoose(source.getControllerId(), game) && target.choose(Outcome.Tap, source.getControllerId(), source.getSourceId(), game)) {
-            for (UUID creature : target.getTargets()) {
+            for (UUID creatureId : target.getTargets()) {
+                Permanent creature = game.getPermanent(creatureId);
                 if (creature != null) {
-                    game.getPermanent(creature).tap(game);
+                    creature.tap(game);
                     tappedAmount++;
                 }
             }

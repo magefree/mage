@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.CycleTriggeredAbility;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.MayTapOrUntapTargetEffect;
 import mage.abilities.keyword.CyclingAbility;
@@ -34,7 +34,7 @@ public final class EsperSojourners extends CardImpl {
 
         // When you cycle Esper Sojourners or it dies, you may tap or untap target permanent.
         Ability ability1 = new CycleTriggeredAbility(new MayTapOrUntapTargetEffect());
-        Ability ability2 = new DiesTriggeredAbility(new MayTapOrUntapTargetEffect());
+        Ability ability2 = new DiesSourceTriggeredAbility(new MayTapOrUntapTargetEffect());
         ability1.addTarget(new TargetPermanent());
         ability2.addTarget(new TargetPermanent());
         this.addAbility(ability1);

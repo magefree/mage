@@ -5,7 +5,7 @@ package mage.cards.k;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -34,7 +34,7 @@ public final class KeigaTheTideStar extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Keiga, the Tide Star dies, gain control of target creature.
-        Ability ability = new DiesTriggeredAbility(new GainControlTargetEffect(Duration.Custom));
+        Ability ability = new DiesSourceTriggeredAbility(new GainControlTargetEffect(Duration.Custom));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

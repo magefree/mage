@@ -4,7 +4,7 @@ package mage.cards.b;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.effects.Effect;
@@ -38,7 +38,7 @@ public final class BodySnatcher extends CardImpl {
         // When Body Snatcher dies, exile Body Snatcher and return target creature card from your graveyard to the battlefield.
         Effect effect = new ReturnFromGraveyardToBattlefieldTargetEffect();
         effect.setText("and return target creature card from your graveyard to the battlefield");
-        Ability ability = new DiesTriggeredAbility(new ExileSourceEffect(), false);
+        Ability ability = new DiesSourceTriggeredAbility(new ExileSourceEffect(), false);
         ability.addEffect(effect);
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.addAbility(ability);

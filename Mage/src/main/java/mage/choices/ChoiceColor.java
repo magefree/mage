@@ -16,11 +16,11 @@ public class ChoiceColor extends ChoiceImpl {
 
     public static List<String> getBaseColors() {
         List<String> arr = new ArrayList<>();
-        arr.add("Green");
+        arr.add("White");
         arr.add("Blue");
         arr.add("Black");
         arr.add("Red");
-        arr.add("White");
+        arr.add("Green");
         return arr;
     }
 

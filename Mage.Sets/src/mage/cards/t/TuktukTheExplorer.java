@@ -3,7 +3,7 @@ package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
@@ -27,7 +27,7 @@ public final class TuktukTheExplorer extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(HasteAbility.getInstance());
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new TuktukTheReturnedToken(expansionSetCode))));
+        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new TuktukTheReturnedToken(expansionSetCode))));
     }
 
     public TuktukTheExplorer(final TuktukTheExplorer card) {

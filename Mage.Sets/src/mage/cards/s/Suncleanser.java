@@ -67,9 +67,9 @@ class SuncleanserRemoveCountersEffect extends OneShotEffect {
     public SuncleanserRemoveCountersEffect(boolean player) {
         super(Outcome.Benefit);
         if (player) {
-            staticText = "Target opponent loses all counters.";
+            staticText = "Target opponent loses all counters";
         } else {
-            staticText = "Remove all counters from target creature.";
+            staticText = "Remove all counters from target creature";
         }
     }
 

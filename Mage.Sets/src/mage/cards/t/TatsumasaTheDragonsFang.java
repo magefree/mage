@@ -1,7 +1,5 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -25,8 +23,9 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TatsumaDragonToken;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class TatsumasaTheDragonsFang extends CardImpl {
@@ -82,7 +81,7 @@ class TatsumaTheDragonsFangEffect extends OneShotEffect {
             Permanent tokenPermanent = game.getPermanent(tokenId);
             if (tokenPermanent != null) {
                 FixedTarget fixedTarget = new FixedTarget(tokenPermanent, game);
-                Effect returnEffect = new ReturnToBattlefieldUnderOwnerControlTargetEffect();
+                Effect returnEffect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false);
                 returnEffect.setTargetPointer(new FixedTarget(source.getSourceId(), game.getState().getZoneChangeCounter(source.getSourceId())));
                 DelayedTriggeredAbility delayedAbility = new TatsumaTheDragonsFangTriggeredAbility(fixedTarget, returnEffect);
                 game.addDelayedTriggeredAbility(delayedAbility, source);

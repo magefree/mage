@@ -3,7 +3,7 @@ package mage.cards.g;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -39,7 +39,7 @@ public final class GiantAlbatross extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Giant Albatross dies, you may pay {1}{U}. If you do, for each creature that dealt damage to Giant Albatross this turn, destroy that creature unless its controller pays 2 life. A creature destroyed this way can't be regenerated.
-        Ability ability = new DiesTriggeredAbility(new DoIfCostPaid(new GiantAlbatrossEffect(), new ManaCostsImpl("{1}{U}")));
+        Ability ability = new DiesSourceTriggeredAbility(new DoIfCostPaid(new GiantAlbatrossEffect(), new ManaCostsImpl("{1}{U}")));
         this.addAbility(ability);
     }
 

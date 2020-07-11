@@ -17,6 +17,8 @@ import mage.util.GameLog;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.HintUtils;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -113,6 +115,18 @@ public class StackAbilityView extends CardView {
             for (UUID modeId : modes.getSelectedModes()) {
                 Mode mode = modes.get(modeId);
                 this.rules.add("<span color='green'><i>Chosen mode: " + mode.getEffects().getText(mode) + "</i></span>");
+            }
+        }
+        
+        if (HintUtils.ABILITY_HINTS_ENABLE) {
+            List<String> abilityHints = new ArrayList<>();
+            for (Hint hint : ability.getHints()) {
+                abilityHints.add(hint.getText(game, ability));
+            }
+            // total hints
+            if (!abilityHints.isEmpty()) {
+                rules.add(HintUtils.HINT_START_MARK);
+                HintUtils.appendHints(rules, abilityHints);
             }
         }
     }

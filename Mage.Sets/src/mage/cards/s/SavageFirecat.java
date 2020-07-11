@@ -74,6 +74,9 @@ class SavageFirecatTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
+        if (game.inCheckPlayableState()) { // Ignored - see GameEvent.TAPPED_FOR_MANA
+            return false;
+        }        
         return game.getCard(event.getSourceId()).isLand() &&
                 event.getPlayerId().equals(this.controllerId);
     }

@@ -20,6 +20,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetOpponentsCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -27,12 +28,6 @@ import mage.target.targetpointer.FixedTarget;
  * @author jeffwadsworth
  */
 public final class GruulRagebeast extends CardImpl {
-
-    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creature an opponent controls");
-
-    static {
-        filter2.add(TargetController.OPPONENT.getControllerPredicate());
-    }
 
     public GruulRagebeast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}{G}");
@@ -42,10 +37,7 @@ public final class GruulRagebeast extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Whenever Gruul Ragebeast or another creature enters the battlefield under your control, that creature fights target creature an opponent controls.
-        Ability ability = new GruulRagebeastTriggeredAbility();
-
-        ability.addTarget(new TargetCreaturePermanent(filter2));
-        this.addAbility(ability);
+        this.addAbility(new GruulRagebeastTriggeredAbility());
     }
 
     public GruulRagebeast(final GruulRagebeast card) {
@@ -61,10 +53,10 @@ public final class GruulRagebeast extends CardImpl {
 class GruulRagebeastTriggeredAbility extends TriggeredAbilityImpl {
 
     GruulRagebeastTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new GruulRagebeastEffect(), false);
+        super(Zone.BATTLEFIELD, new GruulRagebeastEffect(), false);this.addTarget(new TargetOpponentsCreaturePermanent());
     }
 
-    GruulRagebeastTriggeredAbility(final GruulRagebeastTriggeredAbility ability) {
+  private   GruulRagebeastTriggeredAbility(final GruulRagebeastTriggeredAbility ability) {
         super(ability);
     }
 
@@ -106,7 +98,7 @@ class GruulRagebeastEffect extends OneShotEffect {
         super(Outcome.Damage);
     }
 
-    GruulRagebeastEffect(final GruulRagebeastEffect effect) {
+  private   GruulRagebeastEffect(final GruulRagebeastEffect effect) {
         super(effect);
     }
 

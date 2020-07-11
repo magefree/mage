@@ -29,6 +29,7 @@ import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -110,7 +111,7 @@ class VivienMonstersAdvocateTokenEffect extends OneShotEffect {
             player.choose(outcome, choice, game);
             String chosen = choice.getChoice();
             if (chosen != null) {
-                permanent.addCounters(CounterType.findByName(chosen.toLowerCase()).createInstance(), source, game);
+                permanent.addCounters(CounterType.findByName(chosen.toLowerCase(Locale.ENGLISH)).createInstance(), source, game);
             }
         }
         return true;

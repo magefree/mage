@@ -1,7 +1,5 @@
-
 package mage.cards.z;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.LandfallAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -17,10 +15,11 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
-import mage.game.permanent.token.ZektarShrineElementalToken;
+import mage.game.permanent.token.RedElementalWithTrampleAndHaste;
+
+import java.util.UUID;
 
 /**
- *
  * @author North
  */
 public final class ZektarShrineExpedition extends CardImpl {
@@ -65,7 +64,7 @@ class ZektarShrineExpeditionEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
 
-        CreateTokenEffect effect = new CreateTokenEffect(new ZektarShrineElementalToken());
+        CreateTokenEffect effect = new CreateTokenEffect(new RedElementalWithTrampleAndHaste());
         if (effect.apply(game, source)) {
             effect.exileTokensCreatedAtNextEndStep(game, source);
             return true;

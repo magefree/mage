@@ -4,7 +4,6 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
-import mage.cards.CardsImpl;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -12,9 +11,9 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
+import mage.target.common.TargetCardInYourGraveyard;
 
 /**
- *
  * @author Styxo
  */
 public class SearchLibraryGraveyardPutOntoBattlefieldEffect extends OneShotEffect {
@@ -34,15 +33,14 @@ public class SearchLibraryGraveyardPutOntoBattlefieldEffect extends OneShotEffec
         super(Outcome.Benefit);
         this.filter = filter;
         this.forceToSearchBoth = forceToSearchBoth;
-        staticText = (youMay ? "You may" : "") + " search your library and" + (forceToSearchBoth ? "" : "/or") + " graveyard for a card named " + filter.getMessage()
-                + ", reveal it, and put it into your hand. " + (forceToSearchBoth ? "Then shuffle your library" : "If you search your library this way, shuffle it");
+        staticText = (youMay ? "You may " : "") + "search your library and" + (forceToSearchBoth ? "" : "/or") + " graveyard for a " + filter.getMessage()
+                + " and put it onto the battlefield. " + (forceToSearchBoth ? "Then shuffle your library" : "If you search your library this way, shuffle it");
     }
 
     public SearchLibraryGraveyardPutOntoBattlefieldEffect(final SearchLibraryGraveyardPutOntoBattlefieldEffect effect) {
         super(effect);
         this.filter = effect.filter;
         this.forceToSearchBoth = effect.forceToSearchBoth;
-
     }
 
     @Override
@@ -55,8 +53,9 @@ public class SearchLibraryGraveyardPutOntoBattlefieldEffect extends OneShotEffec
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         Card cardFound = null;
+        boolean needShuffle = false;
         if (controller != null && sourceObject != null) {
-            if (forceToSearchBoth || controller.chooseUse(outcome, "Search your library for a card named " + filter.getMessage() + '?', source, game)) {
+            if (forceToSearchBoth || controller.chooseUse(outcome, "Search your library for a " + filter.getMessage() + '?', source, game)) {
                 TargetCardInLibrary target = new TargetCardInLibrary(0, 1, filter);
                 target.clearChosen();
                 if (controller.searchLibrary(target, source, game)) {
@@ -64,11 +63,11 @@ public class SearchLibraryGraveyardPutOntoBattlefieldEffect extends OneShotEffec
                         cardFound = game.getCard(target.getFirstTarget());
                     }
                 }
-                controller.shuffleLibrary(source, game);
+                needShuffle = true;
             }
 
-            if (cardFound == null && controller.chooseUse(outcome, "Search your graveyard for a card named " + filter.getMessage() + '?', source, game)) {
-                TargetCard target = new TargetCard(0, 1, Zone.GRAVEYARD, filter);
+            if (cardFound == null && controller.chooseUse(outcome, "Search your graveyard for a " + filter.getMessage() + '?', source, game)) {
+                TargetCard target = new TargetCardInYourGraveyard(0, 1, filter, true);
                 target.clearChosen();
                 if (controller.choose(outcome, controller.getGraveyard(), target, game)) {
                     if (!target.getTargets().isEmpty()) {
@@ -78,8 +77,11 @@ public class SearchLibraryGraveyardPutOntoBattlefieldEffect extends OneShotEffec
             }
 
             if (cardFound != null) {
-                controller.revealCards(sourceObject.getIdName(), new CardsImpl(cardFound), game);
                 controller.moveCards(cardFound, Zone.BATTLEFIELD, source, game);
+            }
+
+            if (needShuffle) {
+                controller.shuffleLibrary(source, game);
             }
 
             return true;
@@ -87,5 +89,4 @@ public class SearchLibraryGraveyardPutOntoBattlefieldEffect extends OneShotEffec
 
         return false;
     }
-
 }

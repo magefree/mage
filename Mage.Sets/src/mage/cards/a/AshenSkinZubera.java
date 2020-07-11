@@ -5,7 +5,7 @@ package mage.cards.a;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.dynamicvalue.common.ZuberasDiedDynamicValue;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
@@ -27,7 +27,7 @@ public final class AshenSkinZubera extends CardImpl {
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
-        Ability ability = new DiesTriggeredAbility(new DiscardTargetEffect(ZuberasDiedDynamicValue.instance));
+        Ability ability = new DiesSourceTriggeredAbility(new DiscardTargetEffect(ZuberasDiedDynamicValue.instance));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability, new ZuberasDiedWatcher());
     }

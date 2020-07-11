@@ -3,7 +3,7 @@ package mage.cards.r;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.costs.common.ExileSourceFromGraveCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
@@ -31,7 +31,7 @@ public final class RootingKavu extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Rooting Kavu dies, you may exile it. If you do, shuffle all creature cards from your graveyard into your library.
-        this.addAbility(new DiesTriggeredAbility(new DoIfCostPaid(new RootingKavuEffect(), new ExileSourceFromGraveCost())));
+        this.addAbility(new DiesSourceTriggeredAbility(new DoIfCostPaid(new RootingKavuEffect(), new ExileSourceFromGraveCost())));
     }
 
     public RootingKavu(final RootingKavu card) {

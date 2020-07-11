@@ -47,7 +47,7 @@ public final class SorinVengefulBloodlord extends CardImpl {
                         LifelinkAbility.getInstance(), Duration.WhileOnBattlefield,
                         StaticFilters.FILTER_PERMANENT_CREATURE_OR_PLANESWALKER_A
                 ), MyTurnCondition.instance, "As long as it's your turn, " +
-                "creatures and planeswalkers you control have lifelink."
+                "creatures and planeswalkers you control have lifelink"
         )).addHint(MyTurnHint.instance));
 
         // +2: Sorin, Vengeful Bloodlord deals 1 damage to target player or planeswalker.
@@ -57,7 +57,7 @@ public final class SorinVengefulBloodlord extends CardImpl {
 
         // -X: Return target creature card with converted mana cost X from your graveyard to the battlefield. That creature is a vampire in addition to its other types.
         ability = new LoyaltyAbility(new ReturnFromGraveyardToBattlefieldTargetEffect().setText(
-                "Return target creature card with converted mana cost X from your graveyard to the battlefield."
+                "Return target creature card with converted mana cost X from your graveyard to the battlefield"
         ));
         ability.addEffect(new SorinVengefulBloodlordEffect());
         ability.setTargetAdjuster(SorinVengefulBloodlordAdjuster.instance);
@@ -95,7 +95,7 @@ enum SorinVengefulBloodlordAdjuster implements TargetAdjuster {
 class SorinVengefulBloodlordEffect extends ContinuousEffectImpl {
     SorinVengefulBloodlordEffect() {
         super(Duration.Custom, Outcome.Neutral);
-        staticText = "That creature is a vampire in addition to its other types.";
+        staticText = "That creature is a vampire in addition to its other types";
     }
 
     private SorinVengefulBloodlordEffect(final SorinVengefulBloodlordEffect effect) {

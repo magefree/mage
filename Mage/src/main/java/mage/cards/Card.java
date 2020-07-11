@@ -29,6 +29,8 @@ public interface Card extends MageObject {
     /**
      * For cards: return all basic and dynamic abilities
      * For permanents: return all basic and dynamic abilities
+     * @param game
+     * @return 
      */
     Abilities<Ability> getAbilities(Game game);
 

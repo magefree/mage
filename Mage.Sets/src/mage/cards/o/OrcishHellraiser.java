@@ -2,7 +2,7 @@ package mage.cards.o;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.EchoAbility;
 import mage.cards.CardImpl;
@@ -30,7 +30,7 @@ public final class OrcishHellraiser extends CardImpl {
         this.addAbility(new EchoAbility("{R}"));
 
         // When Orcish Hellraiser dies, it deals 2 damage to target player or planeswalker.
-        Ability ability = new DiesTriggeredAbility(new DamageTargetEffect(2, "it"));
+        Ability ability = new DiesSourceTriggeredAbility(new DamageTargetEffect(2, "it"));
         ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);
     }

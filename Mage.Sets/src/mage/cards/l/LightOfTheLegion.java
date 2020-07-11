@@ -3,7 +3,7 @@ package mage.cards.l;
 import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
@@ -42,7 +42,7 @@ public final class LightOfTheLegion extends CardImpl {
         this.addAbility(new MentorAbility());
 
         // When Light of the Legion dies, put a +1/+1 counter on each white creature you control.
-        this.addAbility(new DiesTriggeredAbility(new AddCountersAllEffect(
+        this.addAbility(new DiesSourceTriggeredAbility(new AddCountersAllEffect(
                 CounterType.P1P1.createInstance(), filter
         )));
     }

@@ -5,6 +5,7 @@ import java.util.*;
 import static java.util.Collections.emptyList;
 import java.util.stream.Collectors;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.*;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
@@ -97,7 +98,8 @@ public class GameState implements Serializable, Copyable<GameState> {
     private Map<UUID, Integer> zoneChangeCounter = new HashMap<>();
     private Map<UUID, Card> copiedCards = new HashMap<>();
     private int permanentOrderNumber;
-    private Map<UUID, FilterCreaturePermanent> usePowerInsteadOfToughnessForDamageLethalityFilters = new HashMap<>();
+    private final Map<UUID, FilterCreaturePermanent> usePowerInsteadOfToughnessForDamageLethalityFilters = new HashMap<>();
+    private final Set<MageObjectReference> commandersToStay = new HashSet<>();
 
     private int applyEffectsCounter; // Upcounting number of each applyEffects execution
 
@@ -865,7 +867,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     /**
-     * Abilities that are applied to other objects or applie for a certain time
+     * Abilities that are applied to other objects or applied for a certain time
      * span
      *
      * @param ability
@@ -1224,5 +1226,13 @@ public class GameState implements Serializable, Copyable<GameState> {
                 .filter(usePowerInsteadOfToughnessForDamageLethalityFilters::containsKey)
                 .map(usePowerInsteadOfToughnessForDamageLethalityFilters::get)
                 .collect(Collectors.toList());
+    }
+
+    boolean checkCommanderShouldStay(Card card, Game game) {
+        return commandersToStay.stream().anyMatch(mor -> mor.refersTo(card, game));
+    }
+
+    void setCommanderShouldStay(Card card, Game game) {
+        commandersToStay.add(new MageObjectReference(card, game));
     }
 }

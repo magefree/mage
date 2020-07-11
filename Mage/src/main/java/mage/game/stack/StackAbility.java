@@ -40,7 +40,7 @@ import java.util.UUID;
  */
 public class StackAbility extends StackObjImpl implements Ability {
 
-    private static EnumSet<CardType> emptyCardType = EnumSet.noneOf(CardType.class);
+    private static ArrayList<CardType> emptyCardType = new ArrayList<>();
     private static List<String> emptyString = new ArrayList<>();
     private static ObjectColor emptyColor = new ObjectColor();
     private static ManaCosts<ManaCost> emptyCost = new ManaCostsImpl<>();
@@ -153,7 +153,7 @@ public class StackAbility extends StackObjImpl implements Ability {
     }
 
     @Override
-    public EnumSet<CardType> getCardType() {
+    public ArrayList<CardType> getCardType() {
         return emptyCardType;
     }
 
@@ -306,6 +306,11 @@ public class StackAbility extends StackObjImpl implements Ability {
     @Override
     public Targets getTargets() {
         return ability.getTargets();
+    }
+
+    @Override
+    public Targets getAllSelectedTargets() {
+        return ability.getAllSelectedTargets();
     }
 
     @Override

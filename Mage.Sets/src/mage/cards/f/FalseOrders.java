@@ -1,10 +1,6 @@
-
 package mage.cards.f;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
 import mage.abilities.effects.Effect;
@@ -30,8 +26,9 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetAttackingCreature;
 import mage.watchers.common.BlockedByOnlyOneCreatureThisCombatWatcher;
 
+import java.util.*;
+
 /**
- *
  * @author L_J
  */
 public final class FalseOrders extends CardImpl {
@@ -40,7 +37,7 @@ public final class FalseOrders extends CardImpl {
 
     static {
         filter.add(CardType.CREATURE.getPredicate());
-        filter.add(new FalseOrdersDefendingPlayerControlsPredicate());
+        filter.add(FalseOrdersDefendingPlayerControlsPredicate.instance);
     }
 
     public FalseOrders(UUID ownerId, CardSetInfo setInfo) {
@@ -55,7 +52,7 @@ public final class FalseOrders extends CardImpl {
         this.getSpellAbility().addWatcher(new BlockedByOnlyOneCreatureThisCombatWatcher());
     }
 
-    public FalseOrders(final FalseOrders card) {
+    private FalseOrders(final FalseOrders card) {
         super(card);
     }
 
@@ -66,7 +63,8 @@ public final class FalseOrders extends CardImpl {
 
 }
 
-class FalseOrdersDefendingPlayerControlsPredicate implements ObjectPlayerPredicate<ObjectPlayer<Controllable>> {
+enum FalseOrdersDefendingPlayerControlsPredicate implements ObjectPlayerPredicate<ObjectPlayer<Controllable>> {
+    instance;
 
     @Override
     public boolean apply(ObjectPlayer<Controllable> input, Game game) {
@@ -76,12 +74,12 @@ class FalseOrdersDefendingPlayerControlsPredicate implements ObjectPlayerPredica
 
 class FalseOrdersUnblockEffect extends OneShotEffect {
 
-    public FalseOrdersUnblockEffect() {
+    FalseOrdersUnblockEffect() {
         super(Outcome.Benefit);
         this.staticText = "Remove target creature defending player controls from combat. Creatures it was blocking that had become blocked by only that creature this combat become unblocked. You may have it block an attacking creature of your choice";
     }
 
-    public FalseOrdersUnblockEffect(final FalseOrdersUnblockEffect effect) {
+    private FalseOrdersUnblockEffect(final FalseOrdersUnblockEffect effect) {
         super(effect);
     }
 
@@ -161,12 +159,22 @@ class FalseOrdersUnblockEffect extends OneShotEffect {
             game.getCombat().addBlockingGroup(permanent.getId(), chosenPermanent.getId(), controller.getId(), game); // 702.21h
             if (notYetBlocked) {
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREATURE_BLOCKED, chosenPermanent.getId(), null));
+                Set<MageObjectReference> morSet = new HashSet<>();
+                morSet.add(new MageObjectReference(chosenPermanent, game));
                 for (UUID bandedId : chosenPermanent.getBandedCards()) {
                     CombatGroup bandedGroup = game.getCombat().findGroup(bandedId);
                     if (bandedGroup != null && chosenGroup.getBlockers().size() == 1) {
+                        morSet.add(new MageObjectReference(bandedId, game));
                         game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREATURE_BLOCKED, bandedId, null));
                     }
                 }
+                String key = UUID.randomUUID().toString();
+                game.getState().setValue("becameBlocked_" + key, morSet);
+                game.fireEvent(GameEvent.getEvent(
+                        GameEvent.EventType.BATCH_BLOCK_NONCOMBAT,
+                        source.getSourceId(), source.getSourceId(),
+                        source.getControllerId(), key, 0)
+                );
             }
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.BLOCKER_DECLARED, chosenPermanent.getId(), permanent.getId(), permanent.getControllerId()));
         }

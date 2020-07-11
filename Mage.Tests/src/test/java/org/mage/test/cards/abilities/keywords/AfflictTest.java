@@ -19,8 +19,29 @@ public class AfflictTest extends CardTestPlayerBase {
         attack(1, playerA, khenra);
         block(1, playerB, elves, khenra);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
+        assertAllCommandsUsed();
+
+        assertLife(playerB, 19);
+    }
+
+    @Test
+    public void testBecomesDoubleBlocked() {
+        addCard(Zone.BATTLEFIELD, playerA, khenra);
+        addCard(Zone.BATTLEFIELD, playerB, elves, 2);
+
+        // afflict must trigger only once
+        attack(1, playerA, khenra);
+        block(1, playerB, elves + ":0", khenra);
+        block(1, playerB, elves + ":1", khenra);
+        setChoice(playerA, "X=1"); // assign damage
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        assertAllCommandsUsed();
 
         assertLife(playerB, 19);
 
@@ -28,17 +49,17 @@ public class AfflictTest extends CardTestPlayerBase {
 
     @Test
     public void testNotBlocked() {
-
         addCard(Zone.BATTLEFIELD, playerA, khenra);
         addCard(Zone.BATTLEFIELD, playerB, elves);
 
         attack(1, playerA, khenra);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
+        assertAllCommandsUsed();
 
         assertLife(playerB, 18);
-
     }
 
     // My afflict didn't come through after using Endless Sands on my own creature. The afflict ability was on the stack already.
@@ -62,9 +83,11 @@ public class AfflictTest extends CardTestPlayerBase {
         attack(1, playerA, "Frontline Devastator");
         block(1, playerB, "Ruin Rat", "Frontline Devastator");
 
+        setStrictChooseMode(true);
         activateAbility(1, PhaseStep.DECLARE_BLOCKERS, playerA, "{2},", "Frontline Devastator");
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
+        assertAllCommandsUsed();
 
         assertExileCount(playerA, "Frontline Devastator", 1);
         assertPermanentCount(playerB, "Ruin Rat", 1);

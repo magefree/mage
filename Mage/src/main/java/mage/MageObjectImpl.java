@@ -1,5 +1,6 @@
 package mage;
 
+import java.util.*;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
@@ -21,8 +22,6 @@ import mage.game.permanent.Permanent;
 import mage.util.GameLog;
 import mage.util.SubTypeList;
 
-import java.util.*;
-
 public abstract class MageObjectImpl implements MageObject {
 
     protected UUID objectId;
@@ -32,7 +31,7 @@ public abstract class MageObjectImpl implements MageObject {
     protected ObjectColor color;
     protected ObjectColor frameColor;
     protected FrameStyle frameStyle;
-    protected Set<CardType> cardType = EnumSet.noneOf(CardType.class);
+    protected ArrayList<CardType> cardType = new ArrayList<>();
     protected SubTypeList subtype = new SubTypeList();
     protected boolean isAllCreatureTypes;
     protected Set<SuperType> supertype = EnumSet.noneOf(SuperType.class);
@@ -112,7 +111,7 @@ public abstract class MageObjectImpl implements MageObject {
     }
 
     @Override
-    public Set<CardType> getCardType() {
+    public ArrayList<CardType> getCardType() {
         return cardType;
     }
 
@@ -329,7 +328,7 @@ public abstract class MageObjectImpl implements MageObject {
      */
     @Override
     public void removePTCDA() {
-        for (Iterator<Ability> iter = this.getAbilities().iterator(); iter.hasNext(); ) {
+        for (Iterator<Ability> iter = this.getAbilities().iterator(); iter.hasNext();) {
             Ability ability = iter.next();
             for (Effect effect : ability.getEffects()) {
                 if (effect instanceof ContinuousEffect && ((ContinuousEffect) effect).getSublayer() == SubLayer.CharacteristicDefining_7a) {

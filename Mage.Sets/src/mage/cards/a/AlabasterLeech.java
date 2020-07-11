@@ -1,22 +1,22 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.cost.SpellsCostIncreasementControllerEffect;
+import mage.abilities.effects.common.cost.SpellsCostIncreasingAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
+import java.util.UUID;
+
 /**
- *
  * @author LoneFox
  */
 public final class AlabasterLeech extends CardImpl {
@@ -28,14 +28,14 @@ public final class AlabasterLeech extends CardImpl {
     }
 
     public AlabasterLeech(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");
         this.subtype.add(SubType.LEECH);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
         // White spells you cast cost {W} more to cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-            new SpellsCostIncreasementControllerEffect(filter, new ManaCostsImpl("{W}"))));
+                new SpellsCostIncreasingAllEffect(new ManaCostsImpl("{W}"), filter, TargetController.YOU)));
     }
 
     public AlabasterLeech(final AlabasterLeech card) {

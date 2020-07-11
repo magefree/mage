@@ -396,12 +396,16 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 }
             }
 
-            while ((outcome.isGood() ? target.getTargets().size() < target.getMaxNumberOfTargets() : !target.isChosen())
+            // exile cost workaround: exile is bad, but exile from graveyard in most cases is good (more exiled -- more good things you get, e.g. delve's pay)
+            boolean isRealGood = outcome.isGood() || outcome == Outcome.Exile;
+            while ((isRealGood ? target.getTargets().size() < target.getMaxNumberOfTargets() : !target.isChosen())
                     && !cards.isEmpty()) {
                 Card pick = pickTarget(abilityControllerId, cards, outcome, target, null, game);
                 if (pick != null) {
                     target.addTarget(pick.getId(), null, game);
                     cards.remove(pick);
+                } else {
+                    break;
                 }
             }
 
@@ -725,12 +729,6 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             List<Permanent> targets;
             TargetPermanentOrPlayer origTarget = ((TargetPermanentOrPlayer) target.getOriginalTarget());
 
-            // TODO: if effect is bad and no opponent's targets available then AI can't target yourself but must by rules
-            /*
-            battlefield:Computer:Mountain:5
-            hand:Computer:Viashino Pyromancer:3
-            battlefield:Human:Shalai, Voice of Plenty:1
-             */
             // TODO: in multiplayer game there many opponents - if random opponents don't have targets then AI must use next opponent, but it skips
             //  (e.g. you randomOpponentId must be replaced by List<UUID> randomOpponents)
 
@@ -776,6 +774,16 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 }
             } else if (target.canTarget(abilityControllerId, randomOpponentId, source, game)) {
                 return tryAddTarget(target, randomOpponentId, source, game);
+            }
+
+            // try target player as bad (bad on itself, good on opponent)
+            for (UUID opponentId : game.getOpponents(abilityControllerId)) {
+                if (target.canTarget(abilityControllerId, opponentId, source, game)) {
+                    return tryAddTarget(target, opponentId, source, game);
+                }
+            }
+            if (target.canTarget(abilityControllerId, abilityControllerId, source, game)) {
+                return tryAddTarget(target, abilityControllerId, source, game);
             }
 
             return false;
@@ -1529,10 +1537,34 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 }
             }
         }
+
         // pay phyrexian life costs
         if (cost instanceof PhyrexianManaCost) {
             return cost.pay(null, game, null, playerId, false, null) || permittingObject != null;
         }
+
+        // pay special mana like convoke cost (tap for pay)
+        // GUI: user see "special" button while pay spell's cost
+        // TODO: AI can't prioritize special mana types to pay, e.g. it will use first available
+        SpecialAction specialAction = game.getState().getSpecialActions().getControlledBy(this.getId(), true)
+                .values().stream().findFirst().orElse(null);
+        ManaOptions specialMana = specialAction == null ? null : specialAction.getManaOptions(ability, game, unpaid);
+        if (specialMana != null) {
+            for (Mana netMana : specialMana) {
+                if (cost.testPay(netMana) || permittingObject != null) {
+                    if (netMana instanceof ConditionalMana && !((ConditionalMana) netMana).apply(ability, game, getId(), cost)) {
+                        continue;
+                    }
+                    specialAction.setUnpaidMana(unpaid);
+                    if (activateAbility(specialAction, game)) {
+                        return true;
+                    }
+                    // only one time try to pay
+                    break;
+                }
+            }
+        }
+
         return false;
     }
 

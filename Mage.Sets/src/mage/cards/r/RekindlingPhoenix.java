@@ -3,7 +3,7 @@ package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -29,7 +29,7 @@ public final class RekindlingPhoenix extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Rekindling Phoenix dies, create a 0/1 red Elemental creature token with "At the beginning of your upkeep, sacrifice this creature and return target card named Rekindling Phoenix from your graveyard to the battlefield. It gains haste until end of turn."
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new RekindlingPhoenixToken()), false));
+        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new RekindlingPhoenixToken()), false));
     }
 
     public RekindlingPhoenix(final RekindlingPhoenix card) {

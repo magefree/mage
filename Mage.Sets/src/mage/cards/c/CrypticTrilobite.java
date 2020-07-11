@@ -94,7 +94,12 @@ class CrypticTrilobiteManaCondition extends ManaCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return source != null && source.getAbilityType() == AbilityType.ACTIVATED;
+        if (source != null) {
+            // ex: SimpleManaAbility is an ACTIVATED ability, but it is categorized as a MANA ability
+            return source.getAbilityType() == AbilityType.MANA
+                    || source.getAbilityType() == AbilityType.ACTIVATED;
+        }
+        return false;
     }
 
     @Override

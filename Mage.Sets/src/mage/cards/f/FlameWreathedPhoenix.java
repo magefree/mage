@@ -4,7 +4,7 @@ package mage.cards.f;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.TributeNotPaidCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -39,7 +39,7 @@ public final class FlameWreathedPhoenix extends CardImpl {
         this.addAbility(new TributeAbility(2));
         // When Flame-Wreathed Phoenix enters the battlefield, if its tribute wasn't paid, it gains haste and "When this creature dies, return it to its owner's hand."
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield));
-        Effect effect = new GainAbilitySourceEffect(new DiesTriggeredAbility(new ReturnToHandSourceEffect()));
+        Effect effect = new GainAbilitySourceEffect(new DiesSourceTriggeredAbility(new ReturnToHandSourceEffect()));
         ability.addEffect(effect);
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, TributeNotPaidCondition.instance,
                 "When {this} enters the battlefield, if its tribute wasn't paid, it gains haste and \"When this creature dies, return it to its owner's hand.\""));

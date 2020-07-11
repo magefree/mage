@@ -1,10 +1,9 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BecomesBlockedByCreatureTriggeredAbility;
+import mage.abilities.common.BecomesBlockedSourceTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -16,6 +15,7 @@ import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.combat.Combat;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
@@ -26,7 +26,7 @@ import mage.players.Player;
 public final class CorruptOfficial extends CardImpl {
 
     public CorruptOfficial(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.MINION);
         this.power = new MageInt(3);
@@ -34,9 +34,9 @@ public final class CorruptOfficial extends CardImpl {
 
         // {2}{B}: Regenerate Corrupt Official.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{2}{B}")));
-        
+
         // Whenever Corrupt Official becomes blocked, defending player discards a card at random.
-        this.addAbility(new BecomesBlockedByCreatureTriggeredAbility(new CorruptOfficialDiscardEffect(), false));
+        this.addAbility(new BecomesBlockedSourceTriggeredAbility(new CorruptOfficialDiscardEffect(), false));
     }
 
     public CorruptOfficial(final CorruptOfficial card) {
@@ -67,11 +67,12 @@ class CorruptOfficialDiscardEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent blockingCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (blockingCreature != null) {
-            Player opponent = game.getPlayer(blockingCreature.getControllerId());
-            if (opponent != null) {
-                opponent.discard(1, true, source, game);
+        Permanent corruptOfficial = game.getPermanent(source.getSourceId());
+        if (corruptOfficial != null) {
+            Combat combat = game.getCombat();
+            Player defendingPlayer = game.getPlayer(combat.getDefendingPlayerId(corruptOfficial.getId(), game));
+            if (defendingPlayer != null) {
+                defendingPlayer.discard(1, true, source, game);
                 return true;
             }
         }

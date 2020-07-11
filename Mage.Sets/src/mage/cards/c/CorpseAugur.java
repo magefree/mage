@@ -4,7 +4,7 @@ package mage.cards.c;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.dynamicvalue.common.CardsInTargetPlayersGraveyardCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -33,7 +33,7 @@ public final class CorpseAugur extends CardImpl {
         CardsInTargetPlayersGraveyardCount dynamicValue = new CardsInTargetPlayersGraveyardCount(new FilterCreatureCard("the number of creature cards"));
         Effect effect = new DrawCardSourceControllerEffect(dynamicValue);
         effect.setText("You draw X cards");
-        Ability ability = new DiesTriggeredAbility(effect, false);
+        Ability ability = new DiesSourceTriggeredAbility(effect, false);
         effect = new LoseLifeSourceControllerEffect(dynamicValue);
         effect.setText("and you lose X life, where X is the number of creature cards in target player's graveyard");
         ability.addEffect(effect);

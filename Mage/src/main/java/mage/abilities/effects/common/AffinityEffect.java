@@ -1,6 +1,5 @@
 package mage.abilities.effects.common;
 
-import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
@@ -9,9 +8,10 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
+import mage.util.CardUtil;
 
 public class AffinityEffect extends CostModificationEffectImpl {
-    
+
     private final FilterControlledPermanent filter;
 
     public AffinityEffect(FilterControlledPermanent affinityFilter) {
@@ -27,20 +27,10 @@ public class AffinityEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        SpellAbility spellAbility = (SpellAbility)abilityToModify;
-        Mana mana = spellAbility.getManaCostsToPay().getMana();
-        if (mana.getGeneric() > 0) {
-            // the following works with Sen Triplets and in multiplayer games
-            int count = game.getBattlefield().getActivePermanents(filter, abilityToModify.getControllerId(), source.getId(), game).size();
-            int newCount = mana.getGeneric() - count;
-            if (newCount < 0) {
-                newCount = 0;
-            }
-            mana.setGeneric(newCount);
-            spellAbility.getManaCostsToPay().load(mana.toString());
-            return true;
-        }
-        return false;
+        // abilityToModify.getControllerId() works with Sen Triplets and in multiplayer games, see https://github.com/magefree/mage/issues/5931
+        int count = game.getBattlefield().getActivePermanents(filter, abilityToModify.getControllerId(), source.getId(), game).size();
+        CardUtil.reduceCost(abilityToModify, count);
+        return true;
     }
 
     @Override

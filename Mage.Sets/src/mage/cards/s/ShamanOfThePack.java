@@ -1,13 +1,12 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -16,8 +15,9 @@ import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class ShamanOfThePack extends CardImpl {
@@ -30,7 +30,7 @@ public final class ShamanOfThePack extends CardImpl {
     }
 
     public ShamanOfThePack(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{G}");
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(3);
@@ -41,6 +41,7 @@ public final class ShamanOfThePack extends CardImpl {
         effect.setText("target opponent loses life equal to the number of Elves you control");
         Ability ability = new EntersBattlefieldTriggeredAbility(effect, false);
         ability.addTarget(new TargetOpponent());
+        ability.addHint(new ValueHint("Elves you control", new PermanentsOnBattlefieldCount(filter)));
         this.addAbility(ability);
     }
 

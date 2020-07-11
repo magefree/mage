@@ -1,15 +1,14 @@
-
-
 package mage.game.permanent.token;
 
-import java.util.Arrays;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.util.RandomUtil;
+
+import java.util.Arrays;
 
 /**
- *
  * @author LoneFox
  */
 public final class BirdToken extends TokenImpl {
@@ -22,7 +21,8 @@ public final class BirdToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
         addAbility(FlyingAbility.getInstance());
-        availableImageSetCodes.addAll(Arrays.asList("BNG", "RTR", "ZEN", "C16", "MM3", "DGM"));
+
+        availableImageSetCodes.addAll(Arrays.asList("BNG", "CSP", "DGM", "JUD", "MM3", "RTR", "VMA", "ZEN", "MH1", "C20", "M21"));
     }
 
     public BirdToken(final BirdToken token) {
@@ -30,18 +30,16 @@ public final class BirdToken extends TokenImpl {
     }
 
     @Override
-        public BirdToken copy() {
+    public BirdToken copy() {
         return new BirdToken(this);
     }
 
     @Override
     public void setExpansionSetCodeForImage(String code) {
         super.setExpansionSetCodeForImage(code);
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("BNG")) {
-            this.setTokenType(1);
-        }
+
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C16")) {
-            this.setTokenType(1);
+            setTokenType(RandomUtil.nextInt(2) + 1);
         }
     }
 }

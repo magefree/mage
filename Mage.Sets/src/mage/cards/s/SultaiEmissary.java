@@ -3,7 +3,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.keyword.ManifestEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -24,7 +24,7 @@ public final class SultaiEmissary extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Sultai Emissary dies, manifest the top card of your library.
-        this.addAbility(new DiesTriggeredAbility(new ManifestEffect(1)));
+        this.addAbility(new DiesSourceTriggeredAbility(new ManifestEffect(1)));
     }
 
     public SultaiEmissary(final SultaiEmissary card) {

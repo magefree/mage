@@ -102,7 +102,7 @@ public class LondonMulligan extends Mulligan {
         }
         player.drawCards(numCards, null, game);
 
-        while (player.getHand().size() > newHandSize) {
+        while (player.canRespond() && player.getHand().size() > newHandSize) {
             Target target = new TargetCardInHand(new FilterCard("card (" + (player.getHand().size() - newHandSize) + " more) to put on the bottom of your library"));
             player.chooseTarget(Outcome.Discard, target, null, game);
             player.putCardsOnBottomOfLibrary(new CardsImpl(target.getTargets()), game, null, true);

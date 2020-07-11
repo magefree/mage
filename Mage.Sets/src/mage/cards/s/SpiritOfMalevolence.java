@@ -2,7 +2,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.cards.CardImpl;
@@ -25,7 +25,7 @@ public final class SpiritOfMalevolence extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Spirit of Malevolence dies, each opponent loses 1 life and you gain 1 life.
-        Ability ability = new DiesTriggeredAbility(new LoseLifeOpponentsEffect(1));
+        Ability ability = new DiesSourceTriggeredAbility(new LoseLifeOpponentsEffect(1));
         ability.addEffect(new GainLifeEffect(1).concatBy("and"));
         this.addAbility(ability);
     }

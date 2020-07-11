@@ -1,5 +1,7 @@
 package mage.cards.g;
 
+import java.util.ArrayList;
+import java.util.List;
 import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -43,10 +45,10 @@ public final class GauntletOfPower extends CardImpl {
         // As Gauntlet of Power enters the battlefield, choose a color.
         this.addAbility(new EntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral)));
         // Creatures of the chosen color get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GauntletOfPowerEffect1()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GauntletOfPowerBoostEffect()));
 
         // Whenever a basic land is tapped for mana of the chosen color, its controller adds one mana of that color.
-        this.addAbility(new TapForManaAllTriggeredAbility(new GauntletOfPowerEffectEffect2(), filter, SetTargetPointer.PERMANENT));
+        this.addAbility(new GauntletOfPowerTapForManaAllTriggeredAbility(new GauntletOfPowerManaEffect2(), filter, SetTargetPointer.PERMANENT));
     }
 
     public GauntletOfPower(final GauntletOfPower card) {
@@ -59,22 +61,22 @@ public final class GauntletOfPower extends CardImpl {
     }
 }
 
-class GauntletOfPowerEffect1 extends ContinuousEffectImpl {
+class GauntletOfPowerBoostEffect extends ContinuousEffectImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
-    public GauntletOfPowerEffect1() {
+    public GauntletOfPowerBoostEffect() {
         super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
         staticText = "Creatures of the chosen color get +1/+1";
     }
 
-    public GauntletOfPowerEffect1(final GauntletOfPowerEffect1 effect) {
+    public GauntletOfPowerBoostEffect(final GauntletOfPowerBoostEffect effect) {
         super(effect);
     }
 
     @Override
-    public GauntletOfPowerEffect1 copy() {
-        return new GauntletOfPowerEffect1(this);
+    public GauntletOfPowerBoostEffect copy() {
+        return new GauntletOfPowerBoostEffect(this);
     }
 
     @Override
@@ -93,18 +95,18 @@ class GauntletOfPowerEffect1 extends ContinuousEffectImpl {
 
 }
 
-class TapForManaAllTriggeredAbility extends TriggeredManaAbility {
+class GauntletOfPowerTapForManaAllTriggeredAbility extends TriggeredManaAbility {
 
     private final FilterPermanent filter;
     private final SetTargetPointer setTargetPointer;
 
-    public TapForManaAllTriggeredAbility(ManaEffect effect, FilterPermanent filter, SetTargetPointer setTargetPointer) {
+    public GauntletOfPowerTapForManaAllTriggeredAbility(ManaEffect effect, FilterPermanent filter, SetTargetPointer setTargetPointer) {
         super(Zone.BATTLEFIELD, effect, false);
         this.filter = filter;
         this.setTargetPointer = setTargetPointer;
     }
 
-    public TapForManaAllTriggeredAbility(TapForManaAllTriggeredAbility ability) {
+    public GauntletOfPowerTapForManaAllTriggeredAbility(GauntletOfPowerTapForManaAllTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter.copy();
         this.setTargetPointer = ability.setTargetPointer;
@@ -156,8 +158,8 @@ class TapForManaAllTriggeredAbility extends TriggeredManaAbility {
     }
 
     @Override
-    public TapForManaAllTriggeredAbility copy() {
-        return new TapForManaAllTriggeredAbility(this);
+    public GauntletOfPowerTapForManaAllTriggeredAbility copy() {
+        return new GauntletOfPowerTapForManaAllTriggeredAbility(this);
     }
 
     @Override
@@ -167,14 +169,14 @@ class TapForManaAllTriggeredAbility extends TriggeredManaAbility {
     }
 }
 
-class GauntletOfPowerEffectEffect2 extends ManaEffect {
+class GauntletOfPowerManaEffect2 extends ManaEffect {
 
-    public GauntletOfPowerEffectEffect2() {
+    public GauntletOfPowerManaEffect2() {
         super();
         staticText = "its controller adds one additional mana of that color";
     }
 
-    public GauntletOfPowerEffectEffect2(final GauntletOfPowerEffectEffect2 effect) {
+    public GauntletOfPowerManaEffect2(final GauntletOfPowerManaEffect2 effect) {
         super(effect);
     }
 
@@ -185,6 +187,18 @@ class GauntletOfPowerEffectEffect2 extends ManaEffect {
             return game.getPlayer(land.getControllerId());
         }
         return null;
+    }
+
+    @Override
+    public List<Mana> getNetMana(Game game, Ability source) {
+        List<Mana> netMana = new ArrayList<>();
+        if (game != null) {
+            Mana mana = (Mana) getValue("mana");
+            if (mana != null) {
+                netMana.add(mana.copy());
+            }
+        }
+        return netMana;
     }
 
     @Override
@@ -202,7 +216,7 @@ class GauntletOfPowerEffectEffect2 extends ManaEffect {
     }
 
     @Override
-    public GauntletOfPowerEffectEffect2 copy() {
-        return new GauntletOfPowerEffectEffect2(this);
+    public GauntletOfPowerManaEffect2 copy() {
+        return new GauntletOfPowerManaEffect2(this);
     }
 }

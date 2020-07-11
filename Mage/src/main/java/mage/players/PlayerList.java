@@ -53,6 +53,7 @@ public class PlayerList extends CircularList<UUID> {
                     player.setReachedNextTurnAfterLeaving(true);
                 }
             }
+
             if (player.getId().equals(start)) {
                 return null;
             }
@@ -63,11 +64,15 @@ public class PlayerList extends CircularList<UUID> {
     public Player getPrevious(Game game) {
         Player player;
         UUID start = this.get();
+        if (start == null) {
+            return null;
+        }
         while (true) {
             player = game.getPlayer(super.getPrevious());
             if (player.isInGame()) {
                 break;
             }
+
             if (player.getId().equals(start)) {
                 return null;
             }

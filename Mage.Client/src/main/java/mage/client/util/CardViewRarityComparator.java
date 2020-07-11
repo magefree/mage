@@ -15,16 +15,10 @@ public class CardViewRarityComparator implements Comparator<CardView> {
         Rarity r1 = o1.getRarity();
         Rarity r2 = o2.getRarity();
 
-        int val = Integer.compare(
+        return Integer.compare(
                 r1 == null ? 0 : r1.getSorting(),
                 r2 == null ? 0 : r2.getSorting()
         );
-
-        if (val == 0) {
-            return o1.getName().compareTo(o2.getName());
-        } else {
-            return val;
-        }
     }
 
 }

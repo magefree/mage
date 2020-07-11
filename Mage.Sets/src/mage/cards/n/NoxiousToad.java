@@ -3,7 +3,7 @@ package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -24,7 +24,7 @@ public final class NoxiousToad extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Noxious Toad dies, each opponent discards a card.
-        this.addAbility(new DiesTriggeredAbility(new DiscardEachPlayerEffect(TargetController.OPPONENT), false));
+        this.addAbility(new DiesSourceTriggeredAbility(new DiscardEachPlayerEffect(TargetController.OPPONENT), false));
     }
 
     public NoxiousToad(final NoxiousToad card) {

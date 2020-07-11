@@ -23,9 +23,9 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
     public static final UUID CHOOSE_OPTION_CANCEL_ID = UUID.fromString("0125bd0c-5610-4eba-bc80-fc6d0a7b9de6");
 
     private Mode currentMode; // the current mode of the selected modes
-    private final List<UUID> selectedModes = new ArrayList<>(); // all selected modes (this + duplicate)
-    private final Map<UUID, Mode> duplicateModes = new LinkedHashMap<>(); // for 2x selects: copy mode and put it to duplicate list
-    private final Map<UUID, UUID> duplicateToOriginalModeRefs = new LinkedHashMap<>(); // for 2x selects: stores ref from duplicate to original mode
+    private final List<UUID> selectedModes = new ArrayList<>(); // all selected modes (this + duplicate), use getSelectedModes all the time to keep modes order
+    private final Map<UUID, Mode> selectedDuplicateModes = new LinkedHashMap<>(); // for 2x selects: copy mode and put it to duplicate list
+    private final Map<UUID, UUID> selectedDuplicateToOriginalModeRefs = new LinkedHashMap<>(); // for 2x selects: stores ref from duplicate to original mode
 
     private int minModes;
     private int maxModes;
@@ -52,10 +52,10 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
         for (Map.Entry<UUID, Mode> entry : modes.entrySet()) {
             this.put(entry.getKey(), entry.getValue().copy());
         }
-        for (Map.Entry<UUID, Mode> entry : modes.duplicateModes.entrySet()) {
-            duplicateModes.put(entry.getKey(), entry.getValue().copy());
+        for (Map.Entry<UUID, Mode> entry : modes.selectedDuplicateModes.entrySet()) {
+            selectedDuplicateModes.put(entry.getKey(), entry.getValue().copy());
         }
-        duplicateToOriginalModeRefs.putAll(modes.duplicateToOriginalModeRefs);
+        selectedDuplicateToOriginalModeRefs.putAll(modes.selectedDuplicateToOriginalModeRefs);
 
         this.minModes = modes.minModes;
         this.maxModes = modes.maxModes;
@@ -72,7 +72,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
         if (modes.getSelectedModes().isEmpty()) {
             this.currentMode = values().iterator().next();
         } else {
-            this.currentMode = get(modes.getMode().getId());
+            this.currentMode = get(modes.getMode().getId()); // need fix?
         }
     }
 
@@ -84,7 +84,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
     public Mode get(Object key) {
         Mode modeToGet = super.get(key);
         if (modeToGet == null && eachModeMoreThanOnce) {
-            modeToGet = duplicateModes.get(key);
+            modeToGet = selectedDuplicateModes.get(key);
         }
         return modeToGet;
     }
@@ -103,7 +103,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
     public UUID getModeId(int index) {
         int idx = 0;
         if (eachModeMoreThanOnce) {
-            for (UUID modeId : this.selectedModes) {
+            for (UUID modeId : this.getSelectedModes()) {
                 idx++;
                 if (idx == index) {
                     return modeId;
@@ -121,7 +121,25 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
     }
 
     public List<UUID> getSelectedModes() {
-        return selectedModes;
+        // sorted as original modes
+        List<UUID> res = new ArrayList<>();
+        for (Mode mode : this.values()) {
+            for (UUID selectedId : this.selectedModes) {
+                // selectedModes contains original mode and 2+ selected as duplicates (new modes)
+                UUID selectedOriginalId = this.selectedDuplicateToOriginalModeRefs.get(selectedId);
+                if (Objects.equals(mode.getId(), selectedId)
+                        || Objects.equals(mode.getId(), selectedOriginalId)) {
+                    res.add(selectedId);
+                }
+            }
+        }
+        return res;
+    }
+
+    public void clearSelectedModes() {
+        this.selectedModes.clear();
+        this.selectedDuplicateModes.clear();
+        this.selectedDuplicateToOriginalModeRefs.clear();
     }
 
     public int getSelectedStats(UUID modeId) {
@@ -133,14 +151,14 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
 
             // multiple select (all 2x select generate new duplicate mode)
             UUID originalId;
-            if (this.duplicateModes.containsKey(modeId)) {
+            if (this.selectedDuplicateModes.containsKey(modeId)) {
                 // modeId is duplicate
-                originalId = this.duplicateToOriginalModeRefs.get(modeId);
+                originalId = this.selectedDuplicateToOriginalModeRefs.get(modeId);
             } else {
                 // modeId is original
                 originalId = modeId;
             }
-            for (UUID id : this.duplicateToOriginalModeRefs.values()) {
+            for (UUID id : this.selectedDuplicateToOriginalModeRefs.values()) {
                 if (id.equals(originalId)) {
                     count++;
                 }
@@ -183,9 +201,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
     }
 
     public void setActiveMode(Mode mode) {
-        if (selectedModes.contains(mode.getId())) {
-            this.currentMode = mode;
-        }
+        setActiveMode(mode.getId());
     }
 
     public void setActiveMode(UUID modeId) {
@@ -200,9 +216,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
 
     public boolean choose(Game game, Ability source) {
         if (this.size() > 1) {
-            this.selectedModes.clear();
-            this.duplicateModes.clear();
-            this.duplicateToOriginalModeRefs.clear();
+            this.clearSelectedModes();
             if (this.isRandom) {
                 List<Mode> modes = getAvailableModes(source, game);
                 this.addSelectedMode(modes.get(RandomUtil.nextInt(modes.size())).getId());
@@ -230,7 +244,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
                     }
                 }
                 if (isEachModeOnlyOnce()) {
-                    setAlreadySelectedModes(selectedModes, source, game);
+                    setAlreadySelectedModes(source, game);
                 }
                 return !selectedModes.isEmpty();
             }
@@ -274,7 +288,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
                 Mode choice = player.chooseMode(this, source, game);
                 if (choice == null) {
                     if (isEachModeOnlyOnce()) {
-                        setAlreadySelectedModes(selectedModes, source, game);
+                        setAlreadySelectedModes(source, game);
                     }
                     return this.selectedModes.size() >= this.getMinModes();
                 }
@@ -284,12 +298,13 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
                 }
             }
             if (isEachModeOnlyOnce()) {
-                setAlreadySelectedModes(selectedModes, source, game);
+                setAlreadySelectedModes(source, game);
             }
             return true;
-        } else { // only one mode
+        } else {
+            // only one mode available
             if (currentMode == null) {
-                this.selectedModes.clear();
+                this.clearSelectedModes();
                 Mode mode = this.values().iterator().next();
                 this.addSelectedMode(mode.getId());
                 this.setActiveMode(mode);
@@ -301,12 +316,11 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
     /**
      * Saves the already selected modes to the state value
      *
-     * @param selectedModes
      * @param source
      * @param game
      */
-    private void setAlreadySelectedModes(List<UUID> selectedModes, Ability source, Game game) {
-        for (UUID modeId : selectedModes) {
+    private void setAlreadySelectedModes(Ability source, Game game) {
+        for (UUID modeId : getSelectedModes()) {
             String key = getKey(source, game, modeId);
             game.getState().setValue(key, true);
         }
@@ -318,17 +332,27 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
      *
      * @param modeId
      */
-    private void addSelectedMode(UUID modeId) {
+    public void addSelectedMode(UUID modeId) {
+        if (!this.containsKey(modeId)) {
+            throw new IllegalArgumentException("Unknown modeId to select");
+        }
+
         if (selectedModes.contains(modeId) && eachModeMoreThanOnce) {
             Mode duplicateMode = get(modeId).copy();
             UUID originalId = modeId;
             duplicateMode.setRandomId();
             modeId = duplicateMode.getId();
-            duplicateModes.put(modeId, duplicateMode);
-            duplicateToOriginalModeRefs.put(duplicateMode.getId(), originalId);
+            selectedDuplicateModes.put(modeId, duplicateMode);
+            selectedDuplicateToOriginalModeRefs.put(duplicateMode.getId(), originalId);
 
         }
         this.selectedModes.add(modeId);
+    }
+
+    public void removeSelectedMode(UUID modeId) {
+        this.selectedModes.remove(modeId);
+        this.selectedDuplicateModes.remove(modeId);
+        this.selectedDuplicateToOriginalModeRefs.remove(modeId);
     }
 
     // The already once selected modes for a modal card are stored as a state value

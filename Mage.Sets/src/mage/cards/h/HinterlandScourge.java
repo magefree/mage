@@ -14,6 +14,7 @@ import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -37,7 +38,7 @@ public final class HinterlandScourge extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Hinterland Scourge must be blocked if able.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBeBlockedByAtLeastOneSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBeBlockedByAtLeastOneSourceEffect(Duration.WhileOnBattlefield)));
 
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Hinterland Scourge.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(false), TargetController.ANY, false);

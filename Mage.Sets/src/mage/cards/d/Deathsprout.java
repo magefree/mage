@@ -20,7 +20,7 @@ public final class Deathsprout extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}{B}{G}");
 
         // Destroy target creature. Search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
-        this.getSpellAbility().addEffect(new DestroyTargetEffect().setText("Destroy target creature. "));
+        this.getSpellAbility().addEffect(new DestroyTargetEffect().setText("Destroy target creature"));
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(
                 new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true
         ));

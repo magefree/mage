@@ -190,7 +190,7 @@ public class TestAliases extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Embermage Goblin", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
 
-        showAvaileableAbilities("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        showAvailableAbilities("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {source} deals", "Silvercoat Lion");
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {source} deals", "Silvercoat Lion");
 
@@ -208,7 +208,7 @@ public class TestAliases extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Embermage Goblin@goblin", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion@lion", 1);
 
-        showAvaileableAbilities("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        showAvailableAbilities("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {source} deals", "@lion");
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {source} deals", "@lion");
 

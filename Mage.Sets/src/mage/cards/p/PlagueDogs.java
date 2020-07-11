@@ -4,7 +4,7 @@ package mage.cards.p;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -31,7 +31,7 @@ public final class PlagueDogs extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Plague Dogs dies, all creatures get -1/-1 until end of turn.
-        this.addAbility(new DiesTriggeredAbility(new BoostAllEffect(-1, -1, Duration.EndOfTurn), false));
+        this.addAbility(new DiesSourceTriggeredAbility(new BoostAllEffect(-1, -1, Duration.EndOfTurn), false));
         // {2}, Sacrifice Plague Dogs: Draw a card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{2}"));
         ability.addCost(new SacrificeSourceCost());

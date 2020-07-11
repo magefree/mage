@@ -3,7 +3,7 @@ package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
@@ -30,7 +30,7 @@ public final class RuinRat extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
 
         // When Ruin Rat dies, exile target card from an opponent's graveyard.
-        DiesTriggeredAbility ability = new DiesTriggeredAbility(new ExileTargetEffect());
+        DiesSourceTriggeredAbility ability = new DiesSourceTriggeredAbility(new ExileTargetEffect());
         ability.addTarget(new TargetCardInOpponentsGraveyard(new FilterCard("card from an opponent's graveyard")));
         this.addAbility(ability);
 

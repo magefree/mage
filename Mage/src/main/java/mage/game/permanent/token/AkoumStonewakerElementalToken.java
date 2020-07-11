@@ -23,6 +23,11 @@ public final class AkoumStonewakerElementalToken extends TokenImpl {
         this.addAbility(TrampleAbility.getInstance());
         this.addAbility(HasteAbility.getInstance());
         availableImageSetCodes.addAll(Arrays.asList("BFZ", "MH1"));
+    }
+
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
 
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("BFZ")) {
             setTokenType(2);

@@ -47,9 +47,9 @@ public class CanAttackAsThoughItDidntHaveDefenderTargetEffect extends AsThoughEf
         }
         if (!mode.getTargets().isEmpty()) {
             if (this.duration == Duration.EndOfTurn) {
-                return "Target " + mode.getTargets().get(0).getTargetName() + " can attack this turn as though it didn't have defender";
+                return "target " + mode.getTargets().get(0).getTargetName() + " can attack this turn as though it didn't have defender";
             } else {
-                return "Target " + mode.getTargets().get(0).getTargetName() + " can attack as though it didn't have defender";
+                return "target " + mode.getTargets().get(0).getTargetName() + " can attack as though it didn't have defender";
             }
         } else {
             throw new UnsupportedOperationException("No target defined");

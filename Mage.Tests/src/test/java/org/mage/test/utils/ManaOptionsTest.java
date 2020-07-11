@@ -210,10 +210,31 @@ public class ManaOptionsTest extends CardTestPlayerBase {
     }
 
     // Nykthos, Shrine to Nyx
+    @Test
+    public void testNykthos4a() {
+        addCard(Zone.BATTLEFIELD, playerA, "Sedge Scorpion", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+        // {T}: Add {C}.
+        // {2}, {T}: Choose a color. Add an amount of mana of that color equal to your devotion to that color. (Your devotion to a color is the number of mana symbols of that color in the mana costs of permanents you control.)
+        addCard(Zone.BATTLEFIELD, playerA, "Nykthos, Shrine to Nyx", 1);
+
+        setStopAt(1, PhaseStep.UPKEEP);
+        execute();
+
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        assertDuplicatedManaOptions(manaOptions);
+
+        Assert.assertEquals("mana variations don't fit", 2, manaOptions.size());
+        assertManaOptions("{C}{G}{G}{G}", manaOptions);
+        assertManaOptions("{G}{G}{G}{G}{G}", manaOptions);
+
+    }
+
+    // Nykthos, Shrine to Nyx
     // {T}: Add {C}.
     // {2}, {T}: Choose a color. Add an amount of mana of that color equal to your devotion to that color. (Your devotion to a color is the number of mana symbols of that color in the mana costs of permanents you control.)
     @Test
-    public void testNykthos4() {
+    public void testNykthos4b() {
         // If a land is tapped for two or more mana, it produces {C} instead of any other type and amount.
         // Each spell a player casts costs {1} more to cast for each other spell that player has cast this turn.
         addCard(Zone.BATTLEFIELD, playerA, "Damping Sphere", 1);
@@ -399,7 +420,6 @@ public class ManaOptionsTest extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore  // TriggeredManaAbilities not supported yet for getAvailableMana
     public void testCryptGhast() {
         //Extort (Whenever you cast a spell, you may pay {WB}. If you do, each opponent loses 1 life and you gain that much life.)
         // Whenever you tap a Swamp for mana, add {B} (in addition to the mana the land produces).

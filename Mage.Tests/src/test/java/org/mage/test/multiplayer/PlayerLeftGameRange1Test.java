@@ -1,5 +1,6 @@
 package org.mage.test.multiplayer;
 
+import java.io.FileNotFoundException;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.PhaseStep;
 import mage.constants.RangeOfInfluence;
@@ -13,8 +14,6 @@ import mage.game.permanent.Permanent;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestMultiPlayerBase;
-
-import java.io.FileNotFoundException;
 
 /**
  * @author LevelX2
@@ -344,4 +343,54 @@ public class PlayerLeftGameRange1Test extends CardTestMultiPlayerBase {
         Assert.assertTrue("Staff of player B could be used", staffPlayerB.isTapped());
 
     }
+
+    /**
+     * Captive Audience doesn't work correctly in multiplayer #5593
+     *
+     * Currently, if the controller of Captive Audience leaves the game, Captive
+     * Audience returns to its owner instead of being exiled.
+     */
+    @Test
+    public void TestCaptiveAudienceGoesToExile() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        // Captive Audience enters the battlefield under the control of an opponent of your choice.
+        // At the beginning of your upkeep, choose one that hasn't been chosen —
+        // • Your life total becomes 4.
+        // • Discard your hand.
+        // • Each opponent creates five 2/2 black Zombie creature tokens.
+        addCard(Zone.HAND, playerA, "Captive Audience"); // Enchantment {5}{B}{R}
+
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Pillarfield Ox", 1);
+
+        setChoice(playerA, "PlayerA"); // Starting Player
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Captive Audience");
+        setChoice(playerA, "PlayerD");
+
+        setModeChoice(playerD, "1");
+
+        attack(5, playerA, "Silvercoat Lion", playerD);
+        attack(5, playerA, "Pillarfield Ox", playerD);
+
+        setStopAt(5, PhaseStep.POSTCOMBAT_MAIN);
+
+        setStrictChooseMode(true);
+        execute();
+
+        assertAllCommandsUsed();
+
+        assertLife(playerA, 2);
+
+        Assert.assertFalse("Player D is no longer in the game", playerD.isInGame());
+
+        assertPermanentCount(playerD, 0);
+
+        assertPermanentCount(playerA, "Captive Audience", 0);
+        assertGraveyardCount(playerA, "Captive Audience", 0);
+        assertExileCount(playerA, "Captive Audience", 1);
+
+    }
+
 }

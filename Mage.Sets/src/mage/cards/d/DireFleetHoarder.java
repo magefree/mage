@@ -3,7 +3,7 @@ package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
@@ -26,7 +26,7 @@ public final class DireFleetHoarder extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Dire Fleet Hoarder dies, create a colorless Treasure artifact token with "{t}, Sacrifice this artifact: Add one mana of any color."
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new TreasureToken())));
+        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new TreasureToken())));
     }
 
     public DireFleetHoarder(final DireFleetHoarder card) {

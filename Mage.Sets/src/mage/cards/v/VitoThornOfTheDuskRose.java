@@ -16,6 +16,8 @@ import mage.game.events.GameEvent;
 import mage.target.common.TargetOpponent;
 
 import java.util.UUID;
+import mage.MageObject;
+import mage.abilities.hint.StaticHint;
 
 /**
  * @author TheElk801
@@ -73,8 +75,14 @@ class VitoThornOfTheDuskRoseTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getPlayerId().equals(this.controllerId)) {
+        if (event.getPlayerId().equals(getControllerId())) {
+            MageObject mageObject = game.getObject(event.getSourceId());
             this.getEffects().clear();
+            this.getHints().clear();
+            this.addHint(new StaticHint("Lose life amount: " + event.getAmount()));
+            if (mageObject != null) {
+                this.addHint(new StaticHint("Caused by: " + mageObject.getLogName()));
+            }
             this.addEffect(new LoseLifeTargetEffect(event.getAmount()));
             return true;
         }

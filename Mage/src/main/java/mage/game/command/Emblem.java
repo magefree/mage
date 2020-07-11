@@ -1,5 +1,9 @@
 package mage.game.command;
 
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.ObjectColor;
@@ -22,16 +26,12 @@ import mage.game.events.ZoneChangeEvent;
 import mage.util.GameLog;
 import mage.util.SubTypeList;
 
-import java.util.EnumSet;
-import java.util.List;
-import java.util.UUID;
-
 /**
  * @author nantuko
  */
 public class Emblem implements CommandObject {
 
-    private static EnumSet<CardType> emptySet = EnumSet.noneOf(CardType.class);
+    private static ArrayList<CardType> emptySet = new ArrayList<>();
     private static ObjectColor emptyColor = new ObjectColor();
     private static ManaCosts emptyCost = new ManaCostsImpl();
 
@@ -148,7 +148,7 @@ public class Emblem implements CommandObject {
     }
 
     @Override
-    public EnumSet<CardType> getCardType() {
+    public ArrayList<CardType> getCardType() {
         return emptySet;
     }
 

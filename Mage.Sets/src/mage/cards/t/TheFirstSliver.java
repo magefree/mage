@@ -9,7 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.filter.FilterSpell;
+import mage.filter.FilterCard;
 
 import java.util.UUID;
 
@@ -18,7 +18,7 @@ import java.util.UUID;
  */
 public final class TheFirstSliver extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("Sliver spells you cast");
+    private static final FilterCard filter = new FilterCard("Sliver spells you cast");
 
     static {
         filter.add(SubType.SLIVER.getPredicate());

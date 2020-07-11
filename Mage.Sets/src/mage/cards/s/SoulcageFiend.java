@@ -3,7 +3,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.LoseLifeAllPlayersEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -23,7 +23,7 @@ public final class SoulcageFiend extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Soulcage Fiend dies, each player loses 3 life.
-        this.addAbility(new DiesTriggeredAbility(new LoseLifeAllPlayersEffect(3)));
+        this.addAbility(new DiesSourceTriggeredAbility(new LoseLifeAllPlayersEffect(3)));
     }
 
     public SoulcageFiend(final SoulcageFiend card) {

@@ -2,14 +2,12 @@ package mage.game.permanent.token;
 
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.dynamicvalue.common.ArtifactYouControlCount;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledPermanent;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,12 +17,6 @@ import java.util.List;
  * @author spjspj
  */
 public final class KarnConstructToken extends TokenImpl {
-
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifacts you control");
-
-    static {
-        filter.add(CardType.ARTIFACT.getPredicate());
-    }
 
     static final private List<String> tokenImageSets = new ArrayList<>();
 
@@ -41,10 +33,8 @@ public final class KarnConstructToken extends TokenImpl {
         power = new MageInt(0);
         toughness = new MageInt(0);
 
-        DynamicValue value = new PermanentsOnBattlefieldCount(filter);
-        this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
-                new BoostSourceEffect(value, value, Duration.WhileOnBattlefield)
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new BoostSourceEffect(ArtifactYouControlCount.instance, ArtifactYouControlCount.instance, Duration.WhileOnBattlefield)
                         .setText("This creature gets +1/+1 for each artifact you control")
         ));
     }

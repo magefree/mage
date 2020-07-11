@@ -29,7 +29,7 @@ public final class GatekeeperGargoyle extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Gargoyle Guardian enters the battlefield with a +1/+1 counter on it for each Gate you control.
+        // Gatekeeper Gargoyle enters the battlefield with a +1/+1 counter on it for each Gate you control.
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(
                         CounterType.P1P1.createInstance(),

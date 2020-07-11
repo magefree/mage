@@ -1,24 +1,22 @@
 package mage.cards.c;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
 
-import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -97,7 +95,7 @@ class CombustibleGearhulkMillAndDamageEffect extends OneShotEffect {
 
     public CombustibleGearhulkMillAndDamageEffect() {
         super(Outcome.Damage);
-        staticText = "put the top three cards of your library into your graveyard, then {this} deals damage to that player equal to the total converted mana cost of those cards.";
+        staticText = "mill three cards, then {this} deals damage to that player equal to the total converted mana cost of those cards.";
     }
 
     public CombustibleGearhulkMillAndDamageEffect(final CombustibleGearhulkMillAndDamageEffect effect) {
@@ -108,13 +106,12 @@ class CombustibleGearhulkMillAndDamageEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int sumCMC = 0;
-            Set<Card> cardList = controller.getLibrary().getTopCards(game, 3);
-            for (Card card : cardList) {
-                int test = card.getConvertedManaCost();
-                sumCMC += test;
-            }
-            controller.moveCards(cardList, Zone.GRAVEYARD, source, game);
+            int sumCMC = controller
+                    .millCards(3, source, game)
+                    .getCards(game)
+                    .stream()
+                    .mapToInt(MageObject::getConvertedManaCost)
+                    .sum();
             Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
             if (targetPlayer != null) {
                 targetPlayer.damage(sumCMC, source.getSourceId(), game);

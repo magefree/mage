@@ -100,6 +100,7 @@ class HedronBladeTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever equipped creature becomes blocked by one or more colorless creatures, " + super.getRule();
+        return "Whenever equipped creature becomes blocked by one or more colorless creatures, "
+                + "" + "it gains deathtouch until end of turn.";
     }
 }

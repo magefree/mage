@@ -40,7 +40,8 @@ public final class ZirdaTheDawnwaker extends CardImpl {
         // Companion — Each permanent card in your starting deck has an activated ability.
         this.addAbility(new CompanionAbility(ZirdaTheDawnwakerCompanionCondition.instance));
 
-        // Abilities you activate that aren't mana abilities cost {2} less to activate. This effect can't reduce the mana in that cost to less than one mana.
+        // Abilities you activate that aren't mana abilities cost {2} less to activate. 
+        // This effect can't reduce the mana in that cost to less than one mana.
         this.addAbility(new SimpleStaticAbility(new ZirdaTheDawnwakerEffect()));
 
         // {1}, {T}: Target creature can't block this turn.
@@ -76,11 +77,11 @@ enum ZirdaTheDawnwakerCompanionCondition implements CompanionCondition {
                 .stream()
                 .filter(MageObject::isPermanent)
                 .allMatch(card -> card
-                        .getAbilities()
-                        .stream()
-                        .map(Ability::getAbilityType)
-                        .anyMatch(abilityType -> abilityType == AbilityType.ACTIVATED
-                                || abilityType == AbilityType.MANA)
+                .getAbilities()
+                .stream()
+                .map(Ability::getAbilityType)
+                .anyMatch(abilityType -> abilityType == AbilityType.ACTIVATED
+                || abilityType == AbilityType.MANA)
                 );
     }
 }
@@ -89,8 +90,8 @@ class ZirdaTheDawnwakerEffect extends CostModificationEffectImpl {
 
     ZirdaTheDawnwakerEffect() {
         super(Duration.Custom, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        staticText = "Abilities you activate that aren't mana abilities cost {2} less to activate. " +
-                "This effect can't reduce the mana in that cost to less than one mana.";
+        staticText = "Abilities you activate that aren't mana abilities cost {2} less to activate. "
+                + "This effect can't reduce the mana in that cost to less than one mana.";
     }
 
     private ZirdaTheDawnwakerEffect(final ZirdaTheDawnwakerEffect effect) {
@@ -101,7 +102,8 @@ class ZirdaTheDawnwakerEffect extends CostModificationEffectImpl {
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         Mana mana = abilityToModify.getManaCostsToPay().getMana();
         int reduceMax = mana.getGeneric();
-        if (reduceMax > 0 && mana.count() == mana.getGeneric()) {
+        if (reduceMax > 0
+                && mana.count() == mana.getGeneric()) {
             reduceMax--;
         }
         reduceMax = Math.min(reduceMax, 2);
@@ -116,7 +118,8 @@ class ZirdaTheDawnwakerEffect extends CostModificationEffectImpl {
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         return abilityToModify.getAbilityType() == AbilityType.ACTIVATED
-                && abilityToModify.isControlledBy(source.getControllerId());
+                && abilityToModify.isControlledBy(source.getControllerId())
+                && abilityToModify.getAbilityType() != AbilityType.MANA;  // no mana abilities
     }
 
     @Override

@@ -46,7 +46,7 @@ class IncreasingConfusionEffect extends OneShotEffect {
 
     public IncreasingConfusionEffect() {
         super(Outcome.Detriment);
-        staticText = "Target player puts the top X cards of their library into their graveyard. If this spell was cast from a graveyard, that player puts twice that many cards into their graveyard instead";
+        staticText = "Target player mills X cards. If this spell was cast from a graveyard, that player mills twice that many cards";
     }
 
     public IncreasingConfusionEffect(final IncreasingConfusionEffect effect) {
@@ -63,7 +63,7 @@ class IncreasingConfusionEffect extends OneShotEffect {
                 if (spell.getFromZone() == Zone.GRAVEYARD) {
                     amount *= 2;
                 }
-                player.moveCards(player.getLibrary().getTopCards(game, amount), Zone.GRAVEYARD, source, game);
+                player.millCards(amount, source, game);
                 return true;
             }
         }

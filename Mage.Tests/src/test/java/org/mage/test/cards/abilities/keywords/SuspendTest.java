@@ -223,7 +223,6 @@ public class SuspendTest extends CardTestPlayerBase {
         checkExileCount("after counter", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", 1);
 
         // 3 time counters removes on upkeep (3, 5, 7) and cast again
-        setChoice(playerA, "Cast");
         addTarget(playerA, playerB);
         checkLife("after suspend", 7, PhaseStep.PRECOMBAT_MAIN, playerB, 20 - 3);
         checkGraveyardCount("after suspend", 7, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", 1);
@@ -258,7 +257,6 @@ public class SuspendTest extends CardTestPlayerBase {
         checkExileCount("after counter", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Wear // Tear", 1);
 
         // 3 time counters removes on upkeep (3, 5, 7) and cast again
-        setChoice(playerA, "Cast Wear");
         addTarget(playerA, "Bident of Thassa");
         checkPermanentCount("after suspend", 7, PhaseStep.PRECOMBAT_MAIN, playerB, "Bident of Thassa", 0);
         checkPermanentCount("after suspend", 7, PhaseStep.PRECOMBAT_MAIN, playerB, "Bow of Nylea", 1);

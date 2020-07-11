@@ -88,6 +88,6 @@ class CurseOfTheBloodyTomeAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "At the beginning of enchanted player's upkeep, that player puts the top two cards of their library into their graveyard.";
+        return "At the beginning of enchanted player's upkeep, that player mills two cards.";
     }
 }

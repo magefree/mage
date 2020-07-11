@@ -1,7 +1,6 @@
 package mage.cards.t;
 
 import mage.MageInt;
-import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ColoredManaCost;
@@ -24,11 +23,8 @@ import mage.game.stack.StackObject;
 import mage.target.Target;
 import mage.target.TargetSpell;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.Collection;
-import java.util.Objects;
 import java.util.UUID;
-import java.util.stream.Stream;
+import mage.abilities.Mode;
 
 /**
  * @author emerald000
@@ -88,20 +84,23 @@ public final class Torchling extends CardImpl {
 }
 
 enum TorchlingPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<StackObject>> {
+
     instance;
 
     @Override
     public boolean apply(ObjectSourcePlayer<StackObject> input, Game game) {
-        Stream<UUID> stream = input.getObject()
-                .getStackAbility()
-                .getTargets()
-                .stream()
-                .map(Target::getTargets)
-                .flatMap(Collection::stream)
-                .map(game::getPermanent)
-                .filter(Objects::nonNull)
-                .map(MageItem::getId);
-        return stream.allMatch(input.getSourceId()::equals)
-                && stream.anyMatch(input.getSourceId()::equals);
+        StackObject stackObject = game.getState().getStack().getStackObject(input.getObject().getId());
+        if (stackObject != null) {
+            for (UUID modeId : stackObject.getStackAbility().getModes().getSelectedModes()) {
+                Mode mode = stackObject.getStackAbility().getModes().get(modeId);
+                for (Target target : mode.getTargets()) {
+                    if (target.getTargets().contains(input.getSourceId()) // contains this card
+                            && target.getTargets().size() == 1) { // only one target
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 }

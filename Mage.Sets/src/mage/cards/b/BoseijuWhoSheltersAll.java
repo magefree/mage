@@ -1,10 +1,10 @@
 
 package mage.cards.b;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
@@ -58,7 +58,7 @@ public final class BoseijuWhoSheltersAll extends CardImpl {
 
 class BoseijuWhoSheltersAllWatcher extends Watcher {
 
-    private List<UUID> spells = new ArrayList<>();
+    private final Set<MageObjectReference> spells = new HashSet<>();
     private final UUID originalId;
 
     public BoseijuWhoSheltersAllWatcher(UUID originalId) {
@@ -69,17 +69,17 @@ class BoseijuWhoSheltersAllWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.MANA_PAID) {
-            if (event.getData() != null && event.getData().equals(originalId.toString())) {
+            if (event.getData() != null && event.getData().equals(originalId.toString()) && event.getTargetId() != null) {
                 Card spell = game.getSpell(event.getTargetId());
                 if (spell != null && (spell.isInstant() || spell.isSorcery())) {
-                    spells.add(event.getTargetId());
+                    spells.add(new MageObjectReference(game.getObject(event.getTargetId()), game));
                 }
             }
         }
     }
 
-    public boolean spellCantBeCountered(UUID spellId) {
-        return spells.contains(spellId);
+    public boolean spellCantBeCountered(MageObjectReference mor) {
+        return spells.contains(mor);
     }
 
     @Override
@@ -128,6 +128,6 @@ class BoseijuWhoSheltersAllCantCounterEffect extends ContinuousRuleModifyingEffe
     public boolean applies(GameEvent event, Ability source, Game game) {
         BoseijuWhoSheltersAllWatcher watcher = game.getState().getWatcher(BoseijuWhoSheltersAllWatcher.class, source.getSourceId());
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        return spell != null && watcher != null && watcher.spellCantBeCountered(spell.getId());
+        return spell != null && watcher != null && watcher.spellCantBeCountered(new MageObjectReference(spell, game));
     }
 }

@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
@@ -28,12 +27,14 @@ public final class RedManaBattery extends CardImpl {
     public RedManaBattery(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
-        // {2}, {tap}: Put a charge counter on Red Mana Battery.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.STORAGE.createInstance(1)), new GenericManaCost(2));
+        // {2}, {T}: Put a charge counter on Red Mana Battery.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new AddCountersSourceEffect(CounterType.CHARGE.createInstance(1)), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
-        // {tap}, Remove any number of charge counters from Red Mana Battery: Add {R}, then add an additional {R} for each charge counter removed this way.
+        // {T}, Remove any number of charge counters from Red Mana Battery: Add {R}, 
+        // then add an additional {R} for each charge counter removed this way.
         ability = new DynamicManaAbility(
                 Mana.RedMana(1),
                 new IntPlusDynamicValue(1, RemovedCountersForCostValue.instance),

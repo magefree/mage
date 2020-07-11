@@ -23,7 +23,7 @@ public final class Displace extends CardImpl {
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(0, 2, new FilterControlledCreaturePermanent("creatures you control"), false));
         Effect effect = new ExileTargetForSourceEffect();
         this.getSpellAbility().addEffect(effect);
-        effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect()
+        effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false)
                 .withReturnNames("those cards", "their owner's").concatBy(", then");
         this.getSpellAbility().addEffect(effect);
     }

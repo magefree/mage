@@ -1,7 +1,5 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
@@ -16,20 +14,20 @@ import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class PryingQuestions extends CardImpl {
 
     public PryingQuestions(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");
 
         // Target opponent loses 3 life and puts a card from their hand on top of their library.
-        this.getSpellAbility().addTarget(new TargetOpponent());
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(3));
-        this.getSpellAbility().addEffect(new PryingQuestionsEffect());
-
+        this.getSpellAbility().addEffect(new PryingQuestionsEffect().concatBy("and"));
+        this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
     public PryingQuestions(final PryingQuestions card) {
@@ -46,7 +44,7 @@ class PryingQuestionsEffect extends OneShotEffect {
 
     public PryingQuestionsEffect() {
         super(Outcome.Detriment);
-        this.staticText = "and puts a card from their hand on top of their library";
+        this.staticText = "puts a card from their hand on top of their library";
     }
 
     public PryingQuestionsEffect(final PryingQuestionsEffect effect) {

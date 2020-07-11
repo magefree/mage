@@ -3,9 +3,11 @@ package org.mage.test.cards.copy;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectsList;
 import mage.cards.Card;
+import mage.constants.EmptyNames;
 import mage.constants.PhaseStep;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.NamePredicate;
@@ -231,4 +233,60 @@ public class CloneTest extends CardTestPlayerBase {
         Assert.assertTrue("The cloned Adaptive Automaton should be a Goblin", clone.hasSubtype(SubType.GOBLIN, currentGame));
     }
 
+    /**
+     * Cloning a face-down creature should produce a plain 2/2 creature #3582
+     *
+     * What I expected: Using a clone effect on a face-down creature should
+     * create another 2/2 creature.
+     *
+     * What I observed: The resulting token appears face-up as a copy of the
+     * face-down creature's front face, copying its power/toughness but not
+     * abilities.
+     *
+     * To reproduce: Play a Terastodon, then an Ixidron. Terastodon is turned
+     * face-down. Then play a clone creature (such as Progenitor Mimic). It
+     * appears as a face-up 9/9 Terastodon token, but without any ETB triggers.
+     * The next turn, when it copies itself, it creates a Terastodon that does
+     * have its ETB ability.
+     *
+     * https://blogs.magicjudges.org/articles/2014/09/16/morph-rules-problems-face-down-in-a-face-up-world/
+     * explains that cloning a face-down 2/2 creature should create another 2/2
+     * creature with no abilities (see Face-down Creatures and Clone).
+     */
+
+    @Test
+    public void testCloningFaceDownCreature() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
+        // As Ixidron enters the battlefield, turn all other nontoken creatures face down.
+        // Ixidron's power and toughness are each equal to the number of face-down creatures on the battlefield.        
+        addCard(Zone.HAND, playerA, "Ixidron"); // Creature {3}{U}{U}
+
+        // When Terastodon enters the battlefield, you may destroy up to three target noncreature permanents. 
+        // For each permanent put into a graveyard this way, its controller creates a 3/3 green Elephant creature token.
+        addCard(Zone.BATTLEFIELD, playerA, "Terastodon", 1); // Creature 9/9  {6}{G}{G}
+
+        // You may have Clone enter the battlefield as a copy of any creature on the battlefield.        
+        addCard(Zone.HAND, playerA, "Clone"); // Creature {3}{U}
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ixidron");
+
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Clone");
+        setChoice(playerA, "Yes");
+        setChoice(playerA, EmptyNames.FACE_DOWN_CREATURE.toString());
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+        execute();
+        assertAllCommandsUsed();
+
+        
+        assertPermanentCount(playerA, "Terastodon", 0);
+        
+        assertPermanentCount(playerA, "Ixidron", 1);
+        assertPowerToughness(playerA, "Ixidron", 1, 1);
+
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2);
+        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 2, Filter.ComparisonScope.All);
+    }
+    
 }

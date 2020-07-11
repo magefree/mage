@@ -2,7 +2,7 @@ package mage.cards.b;
 
 import mage.MageInt;
 import mage.MageObject;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DiscardCardControllerTriggeredAbility;
@@ -41,7 +41,7 @@ public final class BarteredCow extends CardImpl {
         // When Bartered Cow dies or when you discard it, create a Food token.
         this.addAbility(new OrTriggeredAbility(
                 Zone.ALL, new CreateTokenEffect(new FoodToken()), false,
-                "When {this} dies or when you discard it, ", new DiesTriggeredAbility((Effect) null),
+                "When {this} dies or when you discard it, ", new DiesSourceTriggeredAbility((Effect) null),
                 new DiscardCardControllerTriggeredAbility(null, false, filter)
         ));
     }

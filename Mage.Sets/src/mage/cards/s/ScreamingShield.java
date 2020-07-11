@@ -37,7 +37,7 @@ public final class ScreamingShield extends CardImpl {
         Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(0, 3));
         ability.addEffect(new GainAbilityAttachedEffect(
                 toAdd, AttachmentType.EQUIPMENT
-        ).setText("and has \"{2}, {T}: Target player puts the top three cards of their library into their graveyard.\""));
+        ).setText("and has \"{2}, {T}: Target player mills three cards.\""));
         this.addAbility(ability);
 
         // Equip {3}

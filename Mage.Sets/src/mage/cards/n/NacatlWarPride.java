@@ -27,6 +27,7 @@ import mage.target.targetpointer.FixedTargets;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+import mage.watchers.common.CreatureAttackedWhichPlayerWatcher;
 
 /**
  *
@@ -46,7 +47,10 @@ public final class NacatlWarPride extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBeBlockedByAtLeastOneSourceEffect(Duration.WhileOnBattlefield)));
 
         // Whenever Nacatl War-Pride attacks, create X tokens that are copies of Nacatl War-Pride tapped and attacking, where X is the number of creatures defending player controls. Exile the tokens at the beginning of the next end step.
-        this.addAbility(new AttacksTriggeredAbility(new NacatlWarPrideEffect(), false));
+        Ability ability = new AttacksTriggeredAbility(new NacatlWarPrideEffect(), false);
+        ability.addWatcher(new CreatureAttackedWhichPlayerWatcher());
+        this.addAbility(ability);       
+        
     }
 
     public NacatlWarPride(final NacatlWarPride card) {
@@ -77,13 +81,16 @@ class NacatlWarPrideEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent origNactalWarPride = game.getPermanent(source.getSourceId());
+        Permanent origNactalWarPride = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (origNactalWarPride == null) {
             return false;
         }
+        
+        CreatureAttackedWhichPlayerWatcher PlayerAttackedWatcher = game.getState().getWatcher(CreatureAttackedWhichPlayerWatcher.class);
 
         // Count the number of creatures attacked opponent controls
-        UUID defenderId = game.getCombat().getDefendingPlayerId(origNactalWarPride.getId(), game);
+        UUID defenderId = PlayerAttackedWatcher.getPlayerAttackedThisTurnByCreature(source.getSourceId());        
+
         int count = 0;
         if (defenderId != null) {
             count = game.getBattlefield().countAll(new FilterControlledCreaturePermanent(), defenderId, game);

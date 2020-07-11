@@ -95,7 +95,7 @@ class MythosOfSnapdaxEffect extends OneShotEffect {
         for (Player player : playerList) {
             for (CardType cardType : cardTypes) {
                 String message = cardType.toString().equals("Artifact") ? "an " : "a ";
-                message += cardType.toString().toLowerCase();
+                message += cardType.toString().toLowerCase(Locale.ENGLISH);
                 message += (conditionMet && player != controller) ? " controlled by " + player.getName() : " you control";
                 FilterPermanent filter = new FilterNonlandPermanent(message);
                 filter.add(cardType.getPredicate());

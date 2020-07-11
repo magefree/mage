@@ -5,8 +5,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Outcome;
@@ -18,8 +16,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -46,7 +42,7 @@ public final class Void extends CardImpl {
 }
 
 class VoidEffect extends OneShotEffect {
-
+    
     VoidEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Choose a number. Destroy all artifacts and creatures with converted mana cost equal to that number. Then target player reveals their hand and discards all nonland cards with converted mana cost equal to the number";
@@ -67,17 +63,10 @@ class VoidEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        Choice numberChoice = new ChoiceImpl();
-        Set<String> numbers = new HashSet<>(16);
-        for (int i = 0; i <= 15; i++) {
-            numbers.add(Integer.toString(i));
-        }
-        numberChoice.setChoices(numbers);
-        numberChoice.setMessage("Choose a number");
-        if (!controller.choose(Outcome.DestroyPermanent, numberChoice, game)) {
-            return false;
-        }
-        int number = Integer.parseInt(numberChoice.getChoice());
+        
+        int number = controller.announceXMana(0, Integer.MAX_VALUE, this.staticText, game, source);
+        game.informPlayers(controller.getLogName() + " chooses " + number + '.');
+     
         for (Permanent permanent : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
             if ((permanent.isArtifact() || permanent.isCreature())
                     && permanent.getConvertedManaCost() == number) {

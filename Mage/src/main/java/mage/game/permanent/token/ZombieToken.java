@@ -5,30 +5,26 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.util.RandomUtil;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * @author BetaSteward_at_googlemail.com
  */
 public final class ZombieToken extends TokenImpl {
 
-    static final private List<String> tokenImageSets = new ArrayList<>();
-
-    static {
-        tokenImageSets.addAll(Arrays.asList("10E", "M10", "M11", "M12", "M13", "M14", "M15", "MBS", "ALA", "ISD", "C14", "C15", "C16", "C17", "CNS",
-                "MMA", "BNG", "KTK", "DTK", "ORI", "OGW", "SOI", "EMN", "EMA", "MM3", "AKH", "CMA", "E01", "RNA", "WAR", "MH1", "M20", "C19", "THB"));
-    }
-
     public ZombieToken() {
         super("Zombie", "2/2 black Zombie creature token");
-        availableImageSetCodes = tokenImageSets;
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.ZOMBIE);
         power = new MageInt(2);
         toughness = new MageInt(2);
+
+        availableImageSetCodes = Arrays.asList("10E", "M10", "M11", "M12", "M13", "M14", "M15",
+                "MBS", "ALA", "ISD", "C14", "C15", "C16", "C17",
+                "CNS", "MMA", "BNG", "KTK", "DTK", "ORI", "OGW",
+                "SOI", "EMN", "EMA", "MM3", "AKH", "CMA", "E01",
+                "RNA", "WAR", "MH1", "M20", "C19", "THB", "M21");
     }
 
     @Override
@@ -55,6 +51,6 @@ public final class ZombieToken extends TokenImpl {
 
     @Override
     public ZombieToken copy() {
-        return new ZombieToken(this); //To change body of generated methods, choose Tools | Templates.
+        return new ZombieToken(this);
     }
 }

@@ -8,6 +8,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.AsThoughManaEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.hint.StaticHint;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -34,7 +35,9 @@ public final class MycosynthLattice extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EverythingIsColorlessEffect()));
 
         // Players may spend mana as though it were mana of any color.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ManaCanBeSpentAsAnyColorEffect()));
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ManaCanBeSpentAsAnyColorEffect());
+        ability.addHint(new StaticHint("(XMage hint: You can use floating mana by clicking on the related symbol of the needed mana type in your mana pool player area.)"));
+        this.addAbility(ability);
     }
 
     public MycosynthLattice(final MycosynthLattice card) {

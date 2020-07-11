@@ -4,7 +4,7 @@ package mage.cards.p;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -26,7 +26,7 @@ public final class PollutedDead extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Polluted Dead dies, destroy target land.
-        Ability ability = new DiesTriggeredAbility(new DestroyTargetEffect());
+        Ability ability = new DiesSourceTriggeredAbility(new DestroyTargetEffect());
         Target target = new TargetLandPermanent();
         ability.addTarget(target);
         this.addAbility(ability);

@@ -13,12 +13,12 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
 /**
- *
  * @author mikalinn777
  */
 public final class SiegeStriker extends CardImpl {
@@ -36,7 +36,7 @@ public final class SiegeStriker extends CardImpl {
 
         // Whenever Siege Striker attacks, you may tap any number of untapped creatures you control. Siege Striker gets +1/+1 until end of turn for each creature tapped this way.
         this.addAbility(new AttacksTriggeredAbility(
-                new SiegeStrikerEffect(), false
+                new SiegeStrikerEffect(), true
         ));
 
     }
@@ -63,7 +63,7 @@ class SiegeStrikerEffect extends OneShotEffect {
     public SiegeStrikerEffect() {
         super(Outcome.GainLife);
         staticText = "you may tap any number of untapped creatures you control. "
-                + "{this} gets +1/+1 until end of turn for each creature tapped this way.";
+                + "{this} gets +1/+1 until end of turn for each creature tapped this way";
     }
 
     public SiegeStrikerEffect(SiegeStrikerEffect effect) {
@@ -76,9 +76,10 @@ class SiegeStrikerEffect extends OneShotEffect {
         TargetCreaturePermanent target = new TargetCreaturePermanent(0, Integer.MAX_VALUE, filter, true);
         if (target.canChoose(source.getControllerId(), game)
                 && target.choose(Outcome.Tap, source.getControllerId(), source.getSourceId(), game)) {
-            for (UUID creature : target.getTargets()) {
+            for (UUID creatureId : target.getTargets()) {
+                Permanent creature = game.getPermanent(creatureId);
                 if (creature != null) {
-                    game.getPermanent(creature).tap(game);
+                    creature.tap(game);
                     tappedAmount++;
                 }
             }

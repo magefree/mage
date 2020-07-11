@@ -17,7 +17,6 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInGraveyard;
 
-import java.util.Collection;
 import java.util.Set;
 import java.util.UUID;
 
@@ -81,9 +80,8 @@ class GyrudaDoomOfDepthsEffect extends OneShotEffect {
 
     GyrudaDoomOfDepthsEffect() {
         super(Outcome.Benefit);
-        staticText = "each player puts the top four cards of the library into their graveyard. " +
-                "Put a creature card with an even converted mana cost from among those cards " +
-                "onto the battlefield under your control.";
+        staticText = "each player mills four cards. Put a creature card with an even converted mana cost " +
+                "from among the milled cards onto the battlefield under your control";
     }
 
     private GyrudaDoomOfDepthsEffect(final GyrudaDoomOfDepthsEffect effect) {
@@ -102,15 +100,13 @@ class GyrudaDoomOfDepthsEffect extends OneShotEffect {
             return false;
         }
         Cards cards = new CardsImpl();
-        game.getState()
-                .getPlayersInRange(source.getControllerId(), game)
-                .stream()
-                .map(game::getPlayer)
-                .map(Player::getLibrary)
-                .map(library -> library.getTopCards(game, 4))
-                .flatMap(Collection::stream)
-                .forEach(cards::add);
-        controller.moveCards(cards, Zone.GRAVEYARD, source, game);
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
+            Player player = game.getPlayer(playerId);
+            if (player == null) {
+                continue;
+            }
+            cards.addAll(player.millCards(4, source, game));
+        }
         cards.removeIf(cardId -> game.getState().getZone(cardId) != Zone.GRAVEYARD
                 && game.getState().getZone(cardId) != Zone.EXILED);
         if (cards.isEmpty()) {

@@ -12,6 +12,7 @@ import mage.cards.Card;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SpellAbilityCastMode;
 import mage.constants.SpellAbilityType;
 import mage.constants.SubType;
 import mage.constants.TimingRule;
@@ -92,6 +93,7 @@ public class BestowAbility extends SpellAbility {
     public BestowAbility(Card card, String manaString) {
         super(new ManaCostsImpl(manaString), card.getName() + " using bestow");
         this.spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
+        this.spellAbilityCastMode = SpellAbilityCastMode.BESTOW;
         this.timing = TimingRule.SORCERY;
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.addTarget(auraTarget);

@@ -1,5 +1,7 @@
 package mage.game.permanent;
 
+import java.io.Serializable;
+import java.util.*;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.ObjectColor;
@@ -37,9 +39,6 @@ import mage.util.CardUtil;
 import mage.util.GameLog;
 import mage.util.ThreadLocalStringBuilder;
 import org.apache.log4j.Logger;
-
-import java.io.Serializable;
-import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -182,6 +181,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     public void setControllerId(UUID controllerId) {
         this.controllerId = controllerId;
         abilities.setControllerId(controllerId);
+    }
+
+    @Override
+    public void setOriginalControllerId(UUID originalControllerId) {
+        this.originalControllerId = originalControllerId;
     }
 
     /**
@@ -370,7 +374,10 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             copyAbility.setSourceId(objectId);
             // triggered abilities must be added to the state().triggers
             // still as long as the prev. permanent is known to the LKI (e.g. Showstopper) so gained dies triggered ability will trigger
-            game.getState().addAbility(copyAbility, sourceId, this);
+            if (game != null) {
+                // game is null in cards viewer window (MageBook)
+                game.getState().addAbility(copyAbility, sourceId, this);
+            }
             abilities.add(copyAbility);
         }
     }
@@ -400,7 +407,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public void removeAbilities(List<Ability> abilitiesToRemove, UUID sourceId, Game game){
+    public void removeAbilities(List<Ability> abilitiesToRemove, UUID sourceId, Game game) {
         if (abilitiesToRemove == null) {
             return;
         }
@@ -790,7 +797,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.attachedTo = attachToObjectId;
         this.attachedToZoneChangeCounter = game.getState().getZoneChangeCounter(attachToObjectId);
         for (Ability ability : this.getAbilities()) {
-            for (Iterator<Effect> ite = ability.getEffects(game, EffectType.CONTINUOUS).iterator(); ite.hasNext(); ) {
+            for (Iterator<Effect> ite = ability.getEffects(game, EffectType.CONTINUOUS).iterator(); ite.hasNext();) {
                 ContinuousEffect effect = (ContinuousEffect) ite.next();
                 game.getContinuousEffects().setOrder(effect);
                 // It's important to update the timestamp of the copied effect in ContinuousEffects because it does the action
@@ -845,8 +852,8 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
      * @param game
      * @param preventable
      * @param combat
-     * @param markDamage   If true, damage will be dealt later in applyDamage
-     *                     method
+     * @param markDamage If true, damage will be dealt later in applyDamage
+     * method
      * @return
      */
     private int damage(int damageAmount, UUID sourceId, Game game, boolean preventable, boolean combat, boolean markDamage, List<UUID> appliedEffects) {
@@ -1063,9 +1070,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             if (game.getPlayer(this.getControllerId()).hasOpponent(sourceControllerId, game)
                     && game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, null, sourceControllerId, game) == null
                     && abilities.stream()
-                    .filter(HexproofBaseAbility.class::isInstance)
-                    .map(HexproofBaseAbility.class::cast)
-                    .anyMatch(ability -> ability.checkObject(source, game))) {
+                            .filter(HexproofBaseAbility.class::isInstance)
+                            .map(HexproofBaseAbility.class::cast)
+                            .anyMatch(ability -> ability.checkObject(source, game))) {
                 return false;
             }
 
@@ -1552,10 +1559,24 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public boolean fight(Permanent fightTarget, Ability source, Game game) {
+        return this.fight(fightTarget, source, game, true);
+    }
+
+    @Override
+    public boolean fight(Permanent fightTarget, Ability source, Game game, boolean batchTrigger) {
         game.fireEvent(GameEvent.getEvent(GameEvent.EventType.FIGHTED_PERMANENT, fightTarget.getId(), getId(), source.getControllerId()));
         game.fireEvent(GameEvent.getEvent(GameEvent.EventType.FIGHTED_PERMANENT, getId(), fightTarget.getId(), source.getControllerId()));
-        damage(fightTarget.getPower().getValue(), fightTarget.getId(), game, false, true);
+        damage(fightTarget.getPower().getValue(), fightTarget.getId(), game);
         fightTarget.damage(getPower().getValue(), getId(), game);
+        if (!batchTrigger) {
+            return true;
+        }
+        Set<MageObjectReference> morSet = new HashSet<>();
+        morSet.add(new MageObjectReference(this, game));
+        morSet.add(new MageObjectReference(fightTarget, game));
+        String data = UUID.randomUUID().toString();
+        game.getState().setValue("batchFight_" + data, morSet);
+        game.fireEvent(GameEvent.getEvent(EventType.BATCH_FIGHT, getId(), getId(), source.getControllerId(), data, 0));
         return true;
     }
 
@@ -1616,9 +1637,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, List<UUID> appliedEffects) {
         Zone fromZone = game.getState().getZone(objectId);
         ZoneChangeEvent event = new ZoneChangeEvent(this, sourceId, ownerId, fromZone, Zone.EXILED, appliedEffects);
-        ZoneChangeInfo.Exile info = new ZoneChangeInfo.Exile(event, exileId, name);
+        ZoneChangeInfo.Exile zcInfo = new ZoneChangeInfo.Exile(event, exileId, name);
 
-        boolean successfullyMoved = ZonesHandler.moveCard(info, game);
+        boolean successfullyMoved = ZonesHandler.moveCard(zcInfo, game);
         //20180810 - 701.3d
         detachAllAttachments(game);
         return successfullyMoved;

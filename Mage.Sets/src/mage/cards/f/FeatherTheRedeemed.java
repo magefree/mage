@@ -41,7 +41,9 @@ public final class FeatherTheRedeemed extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever you cast an instant or sorcery spell that targets a creature you control, exile that card instead of putting it into your graveyard as it resolves. If you do, return it to your hand at the beginning of the next end step.
+        // Whenever you cast an instant or sorcery spell that targets a creature you control, 
+        // exile that card instead of putting it into your graveyard as it resolves. 
+        // If you do, return it to your hand at the beginning of the next end step.
         this.addAbility(new FeatherTheRedeemedTriggeredAbility());
     }
 

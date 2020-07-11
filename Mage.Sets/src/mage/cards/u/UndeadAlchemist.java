@@ -24,13 +24,12 @@ import mage.target.targetpointer.FixedTarget;
 import java.util.UUID;
 
 /**
- *
  * @author BetaSteward
  */
 public final class UndeadAlchemist extends CardImpl {
 
     public UndeadAlchemist(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
         this.subtype.add(SubType.ZOMBIE);
 
         this.power = new MageInt(4);
@@ -80,7 +79,9 @@ class UndeadAlchemistTriggeredAbility extends TriggeredAbilityImpl {
         if (zEvent.getFromZone() == Zone.LIBRARY && zEvent.getToZone() == Zone.GRAVEYARD && game.getOpponents(this.getControllerId()).contains(zEvent.getPlayerId())) {
             Card card = game.getCard(event.getTargetId());
             if (card != null && card.isCreature()) {
-                this.getEffects().get(0).setTargetPointer(new FixedTarget(card.getId()));
+                if (game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {
+                    this.getEffects().get(0).setTargetPointer(new FixedTarget(card, game));
+                }
                 return true;
             }
         }
@@ -97,10 +98,10 @@ class UndeadAlchemistEffect extends ReplacementEffectImpl {
 
     UndeadAlchemistEffect() {
         super(Duration.WhileOnBattlefield, Outcome.RedirectDamage);
-        staticText = "If a Zombie you control would deal combat damage to a player, instead that player puts that many cards from the top of their library into their graveyard";
+        staticText = "If a Zombie you control would deal combat damage to a player, instead that player mills that many cards";
     }
 
-    UndeadAlchemistEffect(final UndeadAlchemistEffect effect) {
+    private UndeadAlchemistEffect(final UndeadAlchemistEffect effect) {
         super(effect);
     }
 
@@ -108,7 +109,8 @@ class UndeadAlchemistEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(event.getTargetId());
         if (player != null) {
-            return player.moveCards(player.getLibrary().getTopCards(game, event.getAmount()), Zone.GRAVEYARD, source, game);
+            player.millCards(event.getAmount(), source, game);
+            return true;
         }
         return true;
     }

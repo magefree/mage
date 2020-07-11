@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import mage.MageInt;
@@ -68,6 +67,11 @@ class CrazedFirecatEffect extends OneShotEffect {
             int flipsWon = 0;
             while (controller.flipCoin(source, game, true)) {
                 flipsWon++;
+
+                // AI workaround to stop on good condition
+                if (!controller.isHuman() && !controller.isTestMode() && flipsWon >= 2) {
+                    break;
+                }
             }
             sourceObject.addCounters(CounterType.P1P1.createInstance(flipsWon), source, game);
             return true;
