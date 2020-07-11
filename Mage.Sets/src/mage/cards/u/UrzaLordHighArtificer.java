@@ -1,5 +1,7 @@
 package mage.cards.u;
 
+import java.util.ArrayList;
+import java.util.List;
 import mage.MageInt;
 import mage.MageObject;
 import mage.Mana;
@@ -27,18 +29,13 @@ import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
+import mage.abilities.effects.mana.BasicManaEffect;
+import mage.filter.FilterPermanent;
 
 /**
  * @author TheElk801
  */
 public final class UrzaLordHighArtificer extends CardImpl {
-
-    private static final FilterControlledPermanent filter
-            = new FilterControlledArtifactPermanent("untapped artifact you control");
-
-    static {
-        filter.add(Predicates.not(TappedPredicate.instance));
-    }
 
     public UrzaLordHighArtificer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
@@ -55,9 +52,12 @@ public final class UrzaLordHighArtificer extends CardImpl {
         );
 
         // Tap an untapped artifact you control: Add {U}.
+        FilterControlledPermanent filter = new FilterControlledArtifactPermanent("untapped artifact you control");
+        filter.add(Predicates.not(TappedPredicate.instance));
         this.addAbility(new SimpleManaAbility(
-                Zone.BATTLEFIELD, Mana.BlueMana(1), new TapTargetCost(new TargetControlledPermanent(filter))
-        ));
+                Zone.BATTLEFIELD, 
+                new UrzaLordHighArtificerManaEffect(filter),
+                new TapTargetCost(new TargetControlledPermanent(filter))));
 
         // {5}: Shuffle your library, then exile the top card. Until end of turn, you may play that card without paying its mana cost.
         this.addAbility(new SimpleActivatedAbility(new UrzaLordHighArtificerEffect(), new GenericManaCost(5)));
@@ -102,4 +102,36 @@ class UrzaLordHighArtificerEffect extends OneShotEffect {
         return PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(game, source, card,
                 TargetController.YOU, Duration.EndOfTurn, true);
     }
+}
+
+class UrzaLordHighArtificerManaEffect extends BasicManaEffect {
+
+    private final FilterPermanent filter;
+    
+    public UrzaLordHighArtificerManaEffect(FilterPermanent filter) {
+        super(Mana.BlueMana(1));
+        this.filter = filter;
+    }
+
+    public UrzaLordHighArtificerManaEffect(final UrzaLordHighArtificerManaEffect effect) {
+        super(effect);
+        this.filter = effect.filter.copy();
+    }
+
+    @Override
+    public UrzaLordHighArtificerManaEffect copy() {
+        return new UrzaLordHighArtificerManaEffect(this);
+    }
+
+    @Override
+    public List<Mana> getNetMana(Game game, Ability source) {
+        if (game.inCheckPlayableState()) {
+            int count = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
+            List<Mana> netMana = new ArrayList<>();
+            netMana.add(new Mana(0, 0, count, 0,0,0,0,0));
+            return netMana;                    
+        }
+        return super.getNetMana(game, source);
+    }
+
 }

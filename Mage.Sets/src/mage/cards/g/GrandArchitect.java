@@ -1,5 +1,7 @@
 package mage.cards.g;
 
+import java.util.ArrayList;
+import java.util.List;
 import mage.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -25,6 +27,7 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
+import mage.filter.FilterPermanent;
 
 /**
  * @author BetaSteward_at_googlemail.com, nantuko
@@ -56,7 +59,10 @@ public final class GrandArchitect extends CardImpl {
         this.addAbility(ability);
 
         // Tap an untapped blue creature you control: Add {C}{C}. Spend this mana only to cast artifact spells or activate abilities of artifacts.
-        this.addAbility(new GrandArchitectManaAbility());
+        FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped blue creature");
+        filter.add(new ColorPredicate(ObjectColor.BLUE));
+        filter.add(Predicates.not(TappedPredicate.instance));
+        this.addAbility(new GrandArchitectManaAbility(filter));
     }
 
     public GrandArchitect(final GrandArchitect card) {
@@ -104,20 +110,31 @@ class GrandArchitectEffect extends ContinuousEffectImpl {
 
 class GrandArchitectManaAbility extends ActivatedManaAbilityImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped blue creature");
+    private final FilterPermanent filter;
 
-    static {
-        filter.add(new ColorPredicate(ObjectColor.BLUE));
-        filter.add(Predicates.not(TappedPredicate.instance));
-    }
-
-    GrandArchitectManaAbility() {
-        super(Zone.BATTLEFIELD, new BasicManaEffect(new GrandArchitectConditionalMana()), new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true)));
-        this.netMana.add(Mana.ColorlessMana(2));
+    GrandArchitectManaAbility(FilterControlledCreaturePermanent filter) {
+        super(Zone.BATTLEFIELD, new BasicManaEffect(new GrandArchitectConditionalMana()),
+                new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true)));
+        this.netMana.add(new GrandArchitectConditionalMana());
+        this.filter = filter;
     }
 
     GrandArchitectManaAbility(GrandArchitectManaAbility ability) {
         super(ability);
+        this.filter = ability.filter.copy();
+    }
+
+    @Override
+    public List<Mana> getNetMana(Game game) {
+        if (game.inCheckPlayableState()) {
+            int count = game.getBattlefield().count(filter, getSourceId(), getControllerId(), game);
+            List<Mana> netManaCalculated = new ArrayList<>();
+            ConditionalMana mana = new GrandArchitectConditionalMana();
+            mana.setColorless(count * 2);
+            netManaCalculated.add(mana);
+            return netManaCalculated;
+        }
+        return super.getNetMana(game);
     }
 
     @Override

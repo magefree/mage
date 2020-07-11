@@ -1,19 +1,26 @@
-
 package mage.cards.b;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
+import mage.Mana;
+import mage.abilities.Ability;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.mana.AddManaOfAnyColorEffect;
 import mage.abilities.keyword.MorphAbility;
-import mage.abilities.mana.AnyColorManaAbility;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.Zone;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
+import mage.game.Game;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -22,22 +29,22 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public final class BirchloreRangers extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Elves you control");
-
-    static {
-        filter.add(Predicates.not(TappedPredicate.instance));
-        filter.add(SubType.ELF.getPredicate());
-    }
-
     public BirchloreRangers(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");
         this.subtype.add(SubType.ELF, SubType.DRUID);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
         // Tap two untapped Elves you control: Add one mana of any color.
-        this.addAbility(new AnyColorManaAbility(new TapTargetCost(new TargetControlledCreaturePermanent(2, 2, filter, false))));
+        FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Elves you control");
+        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(SubType.ELF.getPredicate());
+        this.addAbility(new SimpleManaAbility(
+                Zone.BATTLEFIELD,
+                new BirchloreRangersManaEffect(filter),
+                new TapTargetCost(new TargetControlledCreaturePermanent(2, 2, filter, false))));        
+        
         // Morph {G}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{G}")));
     }
@@ -50,4 +57,36 @@ public final class BirchloreRangers extends CardImpl {
     public BirchloreRangers copy() {
         return new BirchloreRangers(this);
     }
+}
+
+class BirchloreRangersManaEffect extends AddManaOfAnyColorEffect {
+
+    private final FilterPermanent filter;
+
+    public BirchloreRangersManaEffect(FilterPermanent filter) {
+        super(1);
+        this.filter = filter;
+    }
+
+    public BirchloreRangersManaEffect(final BirchloreRangersManaEffect effect) {
+        super(effect);
+        this.filter = effect.filter.copy();
+    }
+
+    @Override
+    public BirchloreRangersManaEffect copy() {
+        return new BirchloreRangersManaEffect(this);
+    }
+
+    @Override
+    public List<Mana> getNetMana(Game game, Ability source) {
+        if (game.inCheckPlayableState()) {
+            int count = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) / 2;
+            List<Mana> netManaCalculated = new ArrayList<>();
+            netManaCalculated.add(new Mana(0, 0, 0, 0, 0, 0, count * 2, 0));
+            return netManaCalculated;
+        }
+        return super.getNetMana(game, source);
+    }
+
 }
