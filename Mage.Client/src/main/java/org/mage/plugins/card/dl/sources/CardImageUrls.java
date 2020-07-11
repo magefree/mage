@@ -2,6 +2,7 @@ package org.mage.plugins.card.dl.sources;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author JayDi85
@@ -25,7 +26,10 @@ public class CardImageUrls {
 
         this.baseUrl = baseUrl;
 
-        if (alternativeUrl != null && !alternativeUrl.isEmpty()) {
+        if (alternativeUrl != null
+                && alternativeUrl != null
+                && !alternativeUrl.isEmpty()
+                && !Objects.equals(baseUrl, alternativeUrl)) {
             this.alternativeUrls.add(alternativeUrl);
         }
     }
