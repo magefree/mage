@@ -248,7 +248,7 @@ public class ReflectingPoolTest extends CardTestPlayerBase {
     public void testReflectingPoolAnyManaTapped() {
         // any mana source with tapped must allow use any too
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
-        addCard(Zone.BATTLEFIELD, playerA, "City of Brass", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "City of Brass", 1);        
         addCard(Zone.BATTLEFIELD, playerA, "Reflecting Pool", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Upwelling", 1);
 
@@ -265,5 +265,31 @@ public class ReflectingPoolTest extends CardTestPlayerBase {
         assertTapped("Plains", true);
         assertTapped("Reflecting Pool", false);
         Assert.assertEquals(1, playerA.getManaPool().get(ManaType.BLACK));
+    }
+
+    /**
+     * I only control 3 lands, a Triome, a Reflecting Pool, and a Mana
+     * Confluence. The Reflecting Pool is able to tap for colorless, but it
+     * should not be able to.
+     * 
+     * https://blogs.magicjudges.org/rulestips/2012/09/you-have-to-name-a-color-when-you-add-one-mana-of-any-color-to-your-mana-pool/
+     */
+    @Test
+    public void testWithTriomeAndManaConfluence() {
+        // {T}: Add {C}.       
+        // {1}{U}, {T}: Put target artifact card from your graveyard on top of your library.
+        addCard(Zone.BATTLEFIELD, playerA, "Academy Ruins", 1);
+        // {T}, Pay 1 life: Add one mana of any color.        
+        addCard(Zone.BATTLEFIELD, playerA, "Mana Confluence", 1);
+        // {T}: Add one mana of any type that a land you control could produce.        
+        addCard(Zone.BATTLEFIELD, playerA, "Reflecting Pool", 1);
+
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        ManaOptions options = playerA.getAvailableManaTest(currentGame);
+        Assert.assertEquals("Player A should be able to create only 3 different mana options", 2, options.size());
+        assertManaOptions("{C}{C}{Any}", options);
+        assertManaOptions("{C}{Any}{Any}", options);
     }
 }

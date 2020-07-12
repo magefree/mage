@@ -140,16 +140,12 @@ class AnyColorLandsProduceManaEffect extends ManaEffect {
         if (!onlyColors && types.getColorless() > 0) {
             choice.getChoices().add("Colorless");
         }
-        if (types.getAny() > 0) {
+        if (types.getAny() > 0) { // Only any Color
             choice.getChoices().add("Black");
             choice.getChoices().add("Red");
             choice.getChoices().add("Blue");
             choice.getChoices().add("Green");
             choice.getChoices().add("White");
-            if (!onlyColors) {
-                choice.getChoices().add("Colorless");
-            }
-
         }
         if (!choice.getChoices().isEmpty()) {
             Player player = game.getPlayer(source.getControllerId());
@@ -199,7 +195,7 @@ class AnyColorLandsProduceManaEffect extends ManaEffect {
         for (Permanent land : lands) {
             Abilities<ActivatedManaAbilityImpl> mana = land.getAbilities().getActivatedManaAbilities(Zone.BATTLEFIELD);
             for (ActivatedManaAbilityImpl ability : mana) {
-                if (!ability.equals(source) && ability.definesMana(game)) {
+                if (!ability.getSourceId().equals(source.getSourceId()) && ability.definesMana(game)) {
                     for (Mana netMana : ability.getNetMana(game)) {
                         types.add(netMana);
                     }
