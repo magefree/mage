@@ -1,5 +1,7 @@
 package mage.players;
 
+import java.io.Serializable;
+import java.util.*;
 import mage.ConditionalMana;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -14,9 +16,6 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ManaEvent;
 import mage.game.stack.Spell;
-
-import java.io.Serializable;
-import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -83,7 +82,8 @@ public class ManaPool implements Serializable {
      * @param ability
      * @param filter
      * @param game
-     * @param costToPay     complete costs to pay (needed to check conditional mana)
+     * @param costToPay     complete costs to pay (needed to check conditional
+     *                      mana)
      * @param usedManaToPay the information about what mana was paid
      * @return
      */
@@ -144,7 +144,7 @@ public class ManaPool implements Serializable {
                 GameEvent event = new GameEvent(GameEvent.EventType.MANA_PAID, ability.getId(), mana.getSourceId(), ability.getControllerId(), 0, mana.getFlag());
                 event.setData(mana.getOriginalId().toString());
                 game.fireEvent(event);
-                usedManaToPay.increase(mana.getFirstAvailable());
+                usedManaToPay.increase(usableManaType);
                 mana.remove(usableManaType);
                 if (mana.count() == 0) { // so no items with count 0 stay in list
                     manaItems.remove(mana);
@@ -301,7 +301,7 @@ public class ManaPool implements Serializable {
                 if (mana instanceof ConditionalMana) {
                     ManaPoolItem item = new ManaPoolItem((ConditionalMana) mana, source.getSourceObject(game),
                             ((ConditionalMana) mana).getManaProducerOriginalId() != null
-                                    ? ((ConditionalMana) mana).getManaProducerOriginalId() : source.getOriginalId());
+                            ? ((ConditionalMana) mana).getManaProducerOriginalId() : source.getOriginalId());
                     if (emptyOnTurnsEnd) {
                         item.setDuration(Duration.EndOfTurn);
                     }
