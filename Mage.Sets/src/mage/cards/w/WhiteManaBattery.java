@@ -40,7 +40,7 @@ public final class WhiteManaBattery extends CardImpl {
                 new IntPlusDynamicValue(1, RemovedCountersForCostValue.instance),
                 new TapSourceCost(),
                 "Add {W}, then add {W} for each charge counter removed this way",
-                true, new CountersSourceCount(CounterType.CHARGE));
+                true, new IntPlusDynamicValue(1, new CountersSourceCount(CounterType.CHARGE)));
         ability.addCost(new RemoveVariableCountersSourceCost(CounterType.CHARGE.createInstance(),
                 "Remove any number of charge counters from {this}"));
         this.addAbility(ability);
