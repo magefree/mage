@@ -65,7 +65,6 @@ public class CounterspellTest extends CardTestPlayerBase {
      * the same card ID (6b5), which seems likely to cause issues.
      */
     @Test
-    @Ignore
     public void testCopyCounterToCounter() {
         // Lightning Bolt deals 3 damage to any target.
         addCard(Zone.HAND, playerA, "Lightning Bolt");
@@ -78,7 +77,7 @@ public class CounterspellTest extends CardTestPlayerBase {
         // Counter target spell. If that spell is countered this way, put it on top of its owner's library instead of into that player's graveyard.
         addCard(Zone.HAND, playerB, "Memory Lapse"); // Instant {1}{U}
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerA);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Memory Lapse", "Lightning Bolt");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Twincast", "Memory Lapse");
 
