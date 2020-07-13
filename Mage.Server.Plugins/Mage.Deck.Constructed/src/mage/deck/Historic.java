@@ -10,7 +10,6 @@ import java.util.GregorianCalendar;
 
 /**
  * @author mikalinn777
- * 
  * Historic is a nonrotating format in MTGA. https://mtg.gamepedia.com/Historic_(format)
  */
 public class Historic extends Constructed {
@@ -55,5 +54,6 @@ public class Historic extends Constructed {
         banned.add("Oko, Thief of Crowns");
         banned.add("Once Upon a Time");
         banned.add("Veil of Summer");
+        banned.add("Burning-Tree Emissary");
     }
 }

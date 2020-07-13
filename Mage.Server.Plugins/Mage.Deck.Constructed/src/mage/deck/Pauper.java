@@ -27,6 +27,7 @@ public class Pauper extends Constructed {
         banned.add("Cranial Plating");
         banned.add("Daze");
         banned.add("Empty the Warrens");
+        banned.add("Expedition Map");
         banned.add("Frantic Search");
         banned.add("Gitaxian Probe");
         banned.add("Grapeshot");
@@ -34,6 +35,7 @@ public class Pauper extends Constructed {
         banned.add("Hight Tide");
         banned.add("Hymn to Tourach");
         banned.add("Invigorate");
+        banned.add("Mystic Sanctuary");
         banned.add("Peregrine Drake");
         banned.add("Sinkhole");
         banned.add("Temporal Fissure");
