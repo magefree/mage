@@ -16,7 +16,7 @@ import java.util.UUID;
  */
 public final class SwiftResponse extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent("tapped permanent");
+    private static final FilterPermanent filter = new FilterCreaturePermanent("tapped creature");
 
     static {
         filter.add(TappedPredicate.instance);

@@ -26,7 +26,7 @@ import java.util.UUID;
 public final class Pridemalkin extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterControlledCreaturePermanent("creature you control with a +1/+1 counter on it");
+            = new FilterControlledCreaturePermanent("each creature you control with a +1/+1 counter on it");
 
     static {
         filter.add(new CounterPredicate(CounterType.P1P1));

@@ -30,7 +30,7 @@ public final class WildwoodScourge extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Wildwood Scourge enters the battlefield with X +1/+1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.P1P1.createInstance())));
+        this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.P1P1.createInstance()).setText("enters the battlefield with X +1/+1 counters")));
 
         // Whenever one or more +1/+1 counters are put on another non-Hydra creature you control, put a +1/+1 counter on Wildwood Scourge.
         this.addAbility(new EnduringScalelordTriggeredAbility());

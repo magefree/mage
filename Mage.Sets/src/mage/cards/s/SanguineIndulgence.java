@@ -31,7 +31,7 @@ public final class SanguineIndulgence extends CardImpl {
         // This spell costs {3} less to cast if you've gained 3 or more life this turn.
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL, new SpellCostReductionSourceEffect(3, condition)
-        ).addHint(hint));
+        ).setRuleAtTheTop(true).addHint(hint));
 
         // Return up to two target creature cards from your graveyard to your hand.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());

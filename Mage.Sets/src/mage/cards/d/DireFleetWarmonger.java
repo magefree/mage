@@ -39,7 +39,7 @@ public final class DireFleetWarmonger extends CardImpl {
                 ))
         ).addEffect(new GainAbilitySourceEffect(
                 TrampleAbility.getInstance(), Duration.EndOfTurn
-        )), TargetController.YOU, false));
+        ).setText("and gains trample until end of turn")), TargetController.YOU, false));
     }
 
     private DireFleetWarmonger(final DireFleetWarmonger card) {

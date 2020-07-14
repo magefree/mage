@@ -9,10 +9,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
@@ -21,7 +20,7 @@ import java.util.UUID;
  */
 public final class RoamingGhostlight extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent("non-Spirit creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Spirit creature");
 
     static {
         filter.add(Predicates.not(SubType.SPIRIT.getPredicate()));
@@ -39,7 +38,7 @@ public final class RoamingGhostlight extends CardImpl {
 
         // When Roaming Ghostlight enters the battlefield, return up to one target non-Spirit creature to its owner's hand.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect());
-        ability.addTarget(new TargetPermanent(0, 1, filter, false));
+        ability.addTarget(new TargetCreaturePermanent(0, 1, filter, false));
         this.addAbility(ability);
     }
 

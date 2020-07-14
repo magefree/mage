@@ -52,7 +52,7 @@ public final class UginTheSpiritDragon extends CardImpl {
         // -X: Exile each permanent with converted mana cost X or less that's one or more colors.
         this.addAbility(new LoyaltyAbility(new UginTheSpiritDragonEffect2()));
 
-        // -10: You gain 7 life, draw 7 cards, then put up to seven permanent cards from your hand onto the battlefield.
+        // -10: You gain 7 life, draw seven cards, then put up to seven permanent cards from your hand onto the battlefield.
         this.addAbility(new LoyaltyAbility(new UginTheSpiritDragonEffect3(), -10));
 
     }
@@ -112,7 +112,7 @@ class UginTheSpiritDragonEffect3 extends OneShotEffect {
 
     public UginTheSpiritDragonEffect3() {
         super(Outcome.Benefit);
-        this.staticText = "You gain 7 life, draw 7 cards, then put up to seven permanent cards from your hand onto the battlefield";
+        this.staticText = "You gain 7 life, draw seven cards, then put up to seven permanent cards from your hand onto the battlefield";
     }
 
     public UginTheSpiritDragonEffect3(final UginTheSpiritDragonEffect3 effect) {

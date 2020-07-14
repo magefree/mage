@@ -507,7 +507,7 @@ public final class StaticFilters {
         FILTER_PERMANENTS_NON_LAND.setLockedFilter(true);
     }
 
-    public static final FilterStackObject FILTER_SPELL_OR_ABILITY_OPPONENTS = new FilterStackObject("spell or ability and opponent controls");
+    public static final FilterStackObject FILTER_SPELL_OR_ABILITY_OPPONENTS = new FilterStackObject("a spell or ability an opponent controls");
 
     static {
         FILTER_SPELL_OR_ABILITY_OPPONENTS.add(TargetController.OPPONENT.getControllerPredicate());

@@ -21,10 +21,10 @@ public final class GrimTutor extends CardImpl {
 
         // Search your library for a card and put that card into your hand, then shuffle your library.
         TargetCardInLibrary target = new TargetCardInLibrary();
-        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(target));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(target).setText("search your library for a card and put that card into your hand, then shuffle your library"));
         // You lose 3 life.
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(3));
-        
+
     }
 
     public GrimTutor(final GrimTutor card) {
