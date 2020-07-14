@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
-import mage.MageObject;
 import mage.MageObjectImpl;
 import mage.Mana;
 import mage.ObjectColor;
@@ -15,20 +14,13 @@ import mage.abilities.*;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.HintUtils;
 import mage.abilities.keyword.FlashbackAbility;
-import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.repository.PluginClassloaderRegistery;
 import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.filter.FilterMana;
 import mage.game.*;
-import mage.game.command.CommandObject;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
-import mage.util.GameLog;
 import mage.util.SubTypeList;
 import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
@@ -135,11 +127,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             secondSideCardClazz = card.secondSideCardClazz;
             nightCard = card.nightCard;
         }
-//        if (card.spellAbility != null) {
-//            spellAbility = (SpellAbility) abilities.get(0);
-//        } else {
-        spellAbility = null; // will be set on first getSpellAbility call.
-//        }
+        spellAbility = null; // will be set on first getSpellAbility call if card has one.
 
         flipCard = card.flipCard;
         flipCardName = card.flipCardName;

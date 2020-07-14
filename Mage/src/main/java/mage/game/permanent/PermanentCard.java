@@ -6,7 +6,6 @@ import javax.lang.model.SourceVersion;
 import mage.MageObject;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.keyword.TransformAbility;
@@ -89,9 +88,7 @@ public class PermanentCard extends PermanentImpl {
             }
         } else {
             this.abilities = card.getAbilities().copy();
-            if (this.spellAbility != null) {
-                this.spellAbility = (SpellAbility) this.abilities.get(0);
-            }
+            this.spellAbility = null; // will be set on first getSpellAbility call if card has one.
         }
         // adventure cards must show adventure spell info on battlefield too
         /*
