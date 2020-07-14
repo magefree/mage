@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
@@ -14,6 +13,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -23,19 +23,22 @@ import mage.target.common.TargetCreaturePermanent;
 public final class RetreatToHagra extends CardImpl {
 
     public RetreatToHagra(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
 
-        // <i>Landfall</i>- Whenever a land enters the battlefield under your control, choose one - Target creature gets +1/+0 and gains deathtouch until end of turn;
+        // <i>Landfall</i>- Whenever a land enters the battlefield under your control, 
+        // choose one - Target creature gets +1/+0 and gains deathtouch until end of turn;
         LandfallAbility ability = new LandfallAbility(new BoostTargetEffect(1, 0, Duration.EndOfTurn), false);
-        ability.addEffect(new GainAbilityTargetEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn));
+        Effect effect = new GainAbilityTargetEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn);
+        effect.setOutcome(Outcome.Benefit);
+        ability.addEffect(effect);
         ability.addTarget(new TargetCreaturePermanent());
 
         // or Each opponent loses 1 life and you gain 1 life.
         Mode mode = new Mode();
         mode.addEffect(new LoseLifeOpponentsEffect(1));
-        Effect effect = new GainLifeEffect(1);
-        effect.setText("and you gain 1 life");
-        mode.addEffect(effect);
+        Effect gainLife = new GainLifeEffect(1);
+        gainLife.setText("and you gain 1 life");
+        mode.addEffect(gainLife);
         ability.addMode(mode);
         this.addAbility(ability);
     }

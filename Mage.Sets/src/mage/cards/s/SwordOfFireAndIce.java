@@ -1,5 +1,3 @@
-
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -33,16 +31,18 @@ import mage.target.common.TargetAnyTarget;
 public final class SwordOfFireAndIce extends CardImpl {
 
     public SwordOfFireAndIce(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +2/+2 and has protection from red and from blue.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ProtectionAbility.from(ObjectColor.RED, ObjectColor.BLUE), AttachmentType.EQUIPMENT)));
-        // Whenever equipped creature deals combat damage to a player, Sword of Fire and Ice deals 2 damage to any target and you draw a card.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(
+                ProtectionAbility.from(ObjectColor.RED, ObjectColor.BLUE), AttachmentType.EQUIPMENT)));
+        // Whenever equipped creature deals combat damage to a player, Sword of Fire 
+        // and Ice deals 2 damage to any target and you draw a card.
         this.addAbility(new SwordOfFireAndIceAbility());
         // Equip
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(Outcome.Benefit, new GenericManaCost(2)));
     }
 
     public SwordOfFireAndIce(final SwordOfFireAndIce card) {
@@ -82,11 +82,14 @@ class SwordOfFireAndIceAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
         Permanent p = game.getPermanent(event.getSourceId());
-        return damageEvent.isCombatDamage() && p != null && p.getAttachments().contains(this.getSourceId());
+        return damageEvent.isCombatDamage()
+                && p != null
+                && p.getAttachments().contains(this.getSourceId());
     }
 
     @Override
     public String getRule() {
-        return "Whenever equipped creature deals combat damage to a player, {this} deals 2 damage to any target and you draw a card.";
+        return "Whenever equipped creature deals combat damage to a player, "
+                + "{this} deals 2 damage to any target and you draw a card.";
     }
 }

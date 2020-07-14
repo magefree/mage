@@ -21,8 +21,8 @@ import mage.target.common.TargetCreaturePermanent;
 public final class InevitableEnd extends CardImpl {
 
     public InevitableEnd(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[] {CardType.ENCHANTMENT},
-              "{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT},
+                "{2}{B}");
 
         this.subtype.add(SubType.AURA);
 
@@ -30,23 +30,25 @@ public final class InevitableEnd extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(
-            new AttachEffect(Outcome.BoostCreature));
+                new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
         // Enchanted creature has "At the beginning of your upkeep, sacrifice a
         // creature."
-        BeginningOfUpkeepTriggeredAbility triggeredAbility =
-            new BeginningOfUpkeepTriggeredAbility(
-                new SacrificeControllerEffect(
-                    StaticFilters.FILTER_PERMANENT_CREATURE, 1, null),
-                TargetController.YOU, false);
+        BeginningOfUpkeepTriggeredAbility triggeredAbility
+                = new BeginningOfUpkeepTriggeredAbility(
+                        new SacrificeControllerEffect(
+                                StaticFilters.FILTER_PERMANENT_CREATURE, 1, null),
+                        TargetController.YOU, false);
         this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(
-            triggeredAbility, AttachmentType.AURA, Duration.WhileOnBattlefield,
-            "Enchanted creature has \"" + triggeredAbility.getRule() + "\"")));
+                triggeredAbility, AttachmentType.AURA, Duration.WhileOnBattlefield,
+                "Enchanted creature has \"" + triggeredAbility.getRule() + "\"")));
     }
 
-    private InevitableEnd(final InevitableEnd card) { super(card); }
+    private InevitableEnd(final InevitableEnd card) {
+        super(card);
+    }
 
     @Override
     public InevitableEnd copy() {
