@@ -41,7 +41,7 @@ public final class BeastWithin extends CardImpl {
 class BeastWithinEffect extends OneShotEffect {
 
     public BeastWithinEffect() {
-        super(Outcome.PutCreatureInPlay);
+        super(Outcome.Detriment);
         staticText = "Its controller creates a 3/3 green Beast creature token";
     }
 

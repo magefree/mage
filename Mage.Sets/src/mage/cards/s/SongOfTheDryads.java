@@ -34,7 +34,7 @@ public final class SongOfTheDryads extends CardImpl {
         // Enchant permanent
         TargetPermanent auraTarget = new TargetPermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
@@ -108,6 +108,8 @@ class BecomesColorlessForestLandEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean hasLayer(Layer layer) {
-        return layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.ColorChangingEffects_5 || layer == Layer.TypeChangingEffects_4;
+        return layer == Layer.AbilityAddingRemovingEffects_6
+                || layer == Layer.ColorChangingEffects_5
+                || layer == Layer.TypeChangingEffects_4;
     }
 }
