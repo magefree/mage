@@ -1,6 +1,12 @@
 package mage.cards;
 
 import com.google.common.collect.ImmutableList;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectImpl;
 import mage.Mana;
@@ -26,13 +32,6 @@ import mage.util.GameLog;
 import mage.util.SubTypeList;
 import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
-
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
 
 public abstract class CardImpl extends MageObjectImpl implements Card {
 
@@ -137,7 +136,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             nightCard = card.nightCard;
         }
         if (card.spellAbility != null) {
-            spellAbility = card.getSpellAbility().copy();
+            spellAbility = (SpellAbility) abilities.get(0);
         } else {
             spellAbility = null;
         }
@@ -397,10 +396,15 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     /**
-     * Dynamic cost modification for card (process only own abilities).
-     * Example: if it need stack related info (like real targets) then must check two states (game.inCheckPlayableState):
-     * 1. In playable state it must check all possible use cases (e.g. allow to reduce on any available target and modes)
-     * 2. In real cast state it must check current use case (e.g. real selected targets and modes)
+     * Dynamic cost modification for card (process only own abilities). Example:
+     * if it need stack related info (like real targets) then must check two
+     * states (game.inCheckPlayableState):
+     *
+     * 1. In playable state it must check all possible use cases (e.g. allow to
+     * reduce on any available target and modes)
+     *
+     * 2. In real cast state it must check current use case (e.g. real selected
+     * targets and modes)
      *
      * @param ability
      * @param game

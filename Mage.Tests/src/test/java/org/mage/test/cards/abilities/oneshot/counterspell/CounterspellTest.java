@@ -2,7 +2,6 @@ package org.mage.test.cards.abilities.oneshot.counterspell;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -95,6 +94,78 @@ public class CounterspellTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Twincast", 1);
 
         assertLibraryCount(playerB, "Memory Lapse", 1);
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 17);
+    }
+
+    @Test
+    public void testCopyCounterToCounterGraveyard() {
+        // Lightning Bolt deals 3 damage to any target.
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+        // Copy target instant or sorcery spell. You may choose new targets for the copy.
+        addCard(Zone.HAND, playerA, "Twincast");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+        // Counter target spell
+        addCard(Zone.HAND, playerB, "Counterspell"); // Instant {1}{U}
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Counterspell", "Lightning Bolt");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Twincast", "Counterspell");
+
+        setChoice(playerA, "Yes"); // change the target
+        addTarget(playerA, "Counterspell");
+
+        setStrictChooseMode(true);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertAllCommandsUsed();
+
+        assertGraveyardCount(playerA, "Lightning Bolt", 1);
+        assertGraveyardCount(playerA, "Twincast", 1);
+
+        assertGraveyardCount(playerB, "Counterspell", 1);
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 17);
+    }
+
+    @Test
+    public void testCopyCounterToCounterExile() {
+        // Lightning Bolt deals 3 damage to any target.
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+        // Copy target instant or sorcery spell. You may choose new targets for the copy.
+        addCard(Zone.HAND, playerA, "Twincast");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 3);
+        // CCounter target spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.
+        addCard(Zone.HAND, playerB, "Dissipate"); // Instant {1}{U}
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Dissipate", "Lightning Bolt");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Twincast", "Dissipate");
+
+        setChoice(playerA, "Yes"); // change the target
+        addTarget(playerA, "Dissipate");
+
+        setStrictChooseMode(true);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertAllCommandsUsed();
+
+        assertGraveyardCount(playerA, "Lightning Bolt", 1);
+        assertGraveyardCount(playerA, "Twincast", 1);
+
+        assertExileCount(playerB, "Dissipate", 1);
 
         assertLife(playerA, 20);
         assertLife(playerB, 17);

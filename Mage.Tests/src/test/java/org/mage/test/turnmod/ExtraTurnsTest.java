@@ -1,4 +1,3 @@
-
 package org.mage.test.turnmod;
 
 import mage.constants.PhaseStep;
@@ -97,4 +96,50 @@ public class ExtraTurnsTest extends CardTestPlayerBase {
         Assert.assertEquals("For turn " + currentGame.getTurnNum() + ", playerB has to be the active player but active player is: "
                 + currentGame.getPlayer(currentGame.getActivePlayerId()).getName(), currentGame.getActivePlayerId(), playerB.getId());
     }
+
+    /**
+     * https://github.com/magefree/mage/issues/6824
+     *
+     * When you cast miracled Temporal Mastery with God-Eternal Kefnet on the
+     * battlefield and copy it with it's ability you get only 1 extra turn. It
+     * should be 2, since you cast Temporal Mastery with it's miracle ability +
+     * you get a copy from Kefnet's ability. Still after first extra turn game
+     * proceeds to next player.
+     */
+    @Test
+    public void testCopyMiracledTemporalMastery4TwoExtraTurns() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 7);
+        // Flying
+        // You may reveal the first card you draw each turn as you draw it. Whenever you reveal an instant or sorcery card this way,
+        // copy that card and you may cast the copy. That copy costs {2} less to cast.
+        // When God-Eternal Kefnet dies or is put into exile from the battlefield, you may put it into its owner’s library third from the top.
+        addCard(Zone.BATTLEFIELD, playerB, "God-Eternal Kefnet", 1);
+        // Take an extra turn after this one. Exile Temporal Mastery.
+        // Miracle {1}{U} (You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)
+        addCard(Zone.LIBRARY, playerB, "Temporal Mastery", 1); // Sorcery {5}{U}{U}
+        skipInitShuffling();
+
+        setChoice(playerB, "Yes"); // Would you like to reveal first drawn card (Temporal Mastery, you can copy it and cast {2} less)?
+        setChoice(playerB, "Yes"); // Would you like to copy Temporal Mastery and cast it {2} less?
+        setChoice(playerB, "Yes"); // Reveal Temporal Mastery to be able to use Miracle?
+        setChoice(playerB, "Yes"); // Miracle {1}{U} (You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)
+
+        setChoice(playerB, "No"); // Would you like to reveal first drawn card? (Turn 3)
+        setChoice(playerB, "No"); // Would you like to reveal first drawn card? (Turn 4)
+
+        // Turn 3 + 4 are extra turns
+        setStopAt(4, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertAllCommandsUsed();
+
+        assertExileCount(playerB, "Temporal Mastery", 1);
+
+        Assert.assertTrue("Turn 4 is an extra turn ", currentGame.getState().isExtraTurn());
+        Assert.assertEquals("For turn " + currentGame.getTurnNum() + ", playerB has to be the active player but active player is: "
+                + currentGame.getPlayer(currentGame.getActivePlayerId()).getName(), currentGame.getActivePlayerId(), playerB.getId());
+    }
+
 }

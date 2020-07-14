@@ -1,6 +1,10 @@
 package mage.players;
 
 import com.google.common.collect.ImmutableMap;
+import java.io.Serializable;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
 import mage.ConditionalMana;
 import mage.MageObject;
 import mage.MageObjectReference;
@@ -65,11 +69,6 @@ import mage.util.CardUtil;
 import mage.util.GameLog;
 import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
-
-import java.io.Serializable;
-import java.util.*;
-import java.util.Map.Entry;
-import java.util.stream.Collectors;
 
 public abstract class PlayerImpl implements Player, Serializable {
 
@@ -179,7 +178,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     // Used during available mana calculation to give back possible available net mana from triggered mana abilities (No need to copy)
     protected final List<List<Mana>> availableTriggeredManaList = new ArrayList<>();
-    
+
     /**
      * During some steps we can't play anything
      */
@@ -610,9 +609,9 @@ public abstract class PlayerImpl implements Player, Serializable {
                     && this.hasOpponent(sourceControllerId, game)
                     && game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, null, sourceControllerId, game) == null
                     && abilities.stream()
-                    .filter(HexproofBaseAbility.class::isInstance)
-                    .map(HexproofBaseAbility.class::cast)
-                    .anyMatch(ability -> ability.checkObject(source, game))) {
+                            .filter(HexproofBaseAbility.class::isInstance)
+                            .map(HexproofBaseAbility.class::cast)
+                            .anyMatch(ability -> ability.checkObject(source, game))) {
                 return false;
             }
 
@@ -652,7 +651,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 game.informPlayers(getLogName() + " discards down to "
                         + this.maxHandSize
                         + (this.maxHandSize == 1
-                        ? " hand card" : " hand cards"));
+                                ? " hand card" : " hand cards"));
             }
             discard(hand.size() - this.maxHandSize, false, null, game);
         }
@@ -801,7 +800,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         GameEvent gameEvent = GameEvent.getEvent(GameEvent.EventType.DISCARD_CARD,
                 card.getId(), source == null
-                        ? null : source.getSourceId(), playerId);
+                ? null : source.getSourceId(), playerId);
         gameEvent.setFlag(source != null); // event from effect or from cost (source == null)
         if (game.replaceEvent(gameEvent, source)) {
             return false;
@@ -1067,12 +1066,12 @@ public abstract class PlayerImpl implements Player, Serializable {
     private boolean moveObjectToLibrary(UUID objectId, UUID sourceId, Game game, boolean toTop, boolean withName) {
         MageObject mageObject = game.getObject(objectId);
         if (mageObject instanceof Spell && mageObject.isCopy()) {
-        // Spell copies are not moved as cards, so here the no copy spell has to be selected to move 
-        // (but because copy and original have the same objectId the wrong sepell can be selected from stack).
-        // So let's check if the original spell is on the stack and has to be selected. // TODO: Better handling so each spell could be selected by a unique id 
+            // Spell copies are not moved as cards, so here the no copy spell has to be selected to move
+            // (but because copy and original have the same objectId the wrong sepell can be selected from stack).
+            // So let's check if the original spell is on the stack and has to be selected. // TODO: Better handling so each spell could be selected by a unique id
             Spell spellNoCopy = game.getStack().getSpell(sourceId, false);
             if (spellNoCopy != null) {
-                mageObject = spellNoCopy; 
+                mageObject = spellNoCopy;
             }
         }
         if (mageObject != null) {
@@ -1145,6 +1144,14 @@ public abstract class PlayerImpl implements Player, Serializable {
         return result;
     }
 
+    /**
+     *
+     * @param originalAbility
+     * @param game
+     * @param noMana           cast it without paying mana costs
+     * @param permittingObject which object permitted the cast
+     * @return
+     */
     @Override
     public boolean cast(SpellAbility originalAbility, Game game, boolean noMana, MageObjectReference permittingObject) {
         if (game == null || originalAbility == null) {
@@ -1486,7 +1493,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 return true;
             }
         }
-        restoreState(bookmark, triggeredAbility.getRule(), game); // why restore is needed here? (to remove the triggered ability from the stack)
+        restoreState(bookmark, triggeredAbility.getRule(), game); // why restore is needed here? (to remove the triggered ability from the stack because of no possible targets)
         return false;
     }
 
@@ -2713,7 +2720,7 @@ public abstract class PlayerImpl implements Player, Serializable {
      * @param winnable
      * @param appliedEffects
      * @return if winnable, true if player won the toss, if not winnable, true
-     * for heads and false for tails
+     *         for heads and false for tails
      */
     @Override
     public boolean flipCoin(Ability source, Game game, boolean winnable, List<UUID> appliedEffects) {
@@ -2807,7 +2814,7 @@ public abstract class PlayerImpl implements Player, Serializable {
      * @param numberPlanarSides The number of chaos sides the planar die
      *                          currently has (normally 1)
      * @return the outcome that the player rolled. Either ChaosRoll, PlanarRoll
-     * or NilRoll
+     *         or NilRoll
      */
     @Override
     public PlanarDieRoll rollPlanarDie(Game game, List<UUID> appliedEffects, int numberChaosSides,
@@ -2861,17 +2868,18 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     /**
-     * Returns the mana options the player currently has. That means which combinations of
-     * mana are available to cast spells or activate abilities etc.
-     * 
+     * Returns the mana options the player currently has. That means which
+     * combinations of mana are available to cast spells or activate abilities
+     * etc.
+     *
      * @param game
-     * @return 
+     * @return
      */
     @Override
     public ManaOptions getManaAvailable(Game game) {
         boolean oldState = game.inCheckPlayableState();
         game.setCheckPlayableState(true);
-        
+
         ManaOptions availableMana = new ManaOptions();
 
         List<Abilities<ActivatedManaAbilityImpl>> sourceWithoutManaCosts = new ArrayList<>();
@@ -2913,34 +2921,37 @@ public abstract class PlayerImpl implements Player, Serializable {
 
         // remove duplicated variants (see ManaOptionsTest for info - when that rises)
         availableMana.removeDuplicated();
-        
+
         game.setCheckPlayableState(oldState);
         return availableMana;
     }
 
     /**
-     * Used during calculation of available mana to gather the amount of producable triggered mana caused by using mana sources.
-     * So the set value is only used during the calculation of the mana produced by one source and cleared thereafter
-     * 
-     * @param netManaAvailable the net mana produced by the triggered mana abaility
+     * Used during calculation of available mana to gather the amount of
+     * producable triggered mana caused by using mana sources. So the set value
+     * is only used during the calculation of the mana produced by one source
+     * and cleared thereafter
+     *
+     * @param netManaAvailable the net mana produced by the triggered mana
+     *                         abaility
      */
     @Override
     public void addAvailableTriggeredMana(List<Mana> netManaAvailable) {
         this.availableTriggeredManaList.add(netManaAvailable);
-    }  
+    }
 
     /**
-     * Used during calculation of available mana to get the amount of producable triggered mana caused by using mana sources.
-     * The list is cleared as soon the value is retrieved during available mana calculation.
-     * 
-     * @return 
+     * Used during calculation of available mana to get the amount of producable
+     * triggered mana caused by using mana sources. The list is cleared as soon
+     * the value is retrieved during available mana calculation.
+     *
+     * @return
      */
     @Override
     public List<List<Mana>> getAvailableTriggeredMana() {
         return availableTriggeredManaList;
     }
-    
-    
+
     // returns only mana producers that don't require mana payment
     protected List<MageObject> getAvailableManaProducers(Game game) {
         List<MageObject> result = new ArrayList<>();
@@ -3364,8 +3375,10 @@ public abstract class PlayerImpl implements Player, Serializable {
      * currently cast/activate with his available ressources
      *
      * @param game
-     * @param hidden                  also from hidden objects (e.g. turned face down cards ?)
-     * @param fromZone                of objects from which zone (ALL = from all zones)
+     * @param hidden                  also from hidden objects (e.g. turned face
+     *                                down cards ?)
+     * @param fromZone                of objects from which zone (ALL = from all
+     *                                zones)
      * @param hideDuplicatedAbilities if equal abilities exist return only the
      *                                first instance
      * @return
@@ -3532,7 +3545,7 @@ public abstract class PlayerImpl implements Player, Serializable {
      *
      * @param game
      * @return A Set of cardIds that are playable and amount of playable
-     * abilities
+     *         abilities
      */
     @Override
     public Map<UUID, Integer> getPlayableObjects(Game game, Zone zone) {
@@ -4084,7 +4097,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             // identify cards from one owner
             Cards cards = new CardsImpl();
             UUID ownerId = null;
-            for (Iterator<Card> it = allCards.iterator(); it.hasNext(); ) {
+            for (Iterator<Card> it = allCards.iterator(); it.hasNext();) {
                 Card card = it.next();
                 if (cards.isEmpty()) {
                     ownerId = card.getOwnerId();
@@ -4265,7 +4278,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 game.informPlayers(this.getLogName() + " moves " + (withName ? card.getLogName()
                         + (card.isCopy() ? " (Copy)" : "") : "a card face down") + ' '
                         + (fromZone != null ? "from " + fromZone.toString().toLowerCase(Locale.ENGLISH)
-                        + ' ' : "") + "to the exile zone");
+                                + ' ' : "") + "to the exile zone");
 
             }
             result = true;
