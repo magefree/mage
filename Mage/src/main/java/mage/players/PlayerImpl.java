@@ -967,7 +967,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (cards.isEmpty()) {
             return true;
         }
-        game.informPlayers(getName() + " shuffels " + CardUtil.numberToText(cards.size(), "a")
+        game.informPlayers(getLogName() + " shuffels " + CardUtil.numberToText(cards.size(), "a")
                 + " card" + (cards.size() == 1 ? "" : "s")
                 + " into their library.");
         boolean status = moveCards(cards, Zone.LIBRARY, source, game);

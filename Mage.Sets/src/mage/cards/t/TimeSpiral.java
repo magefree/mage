@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import java.util.UUID;
@@ -8,12 +7,12 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardAllEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
 import mage.abilities.effects.common.UntapLandsEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -24,7 +23,7 @@ import mage.players.Player;
 public final class TimeSpiral extends CardImpl {
 
     public TimeSpiral(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{U}{U}");
 
         // Exile Time Spiral. Each player shuffles their graveyard and hand into their library, then draws seven cards. You untap up to six lands.
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
@@ -62,13 +61,9 @@ class TimeSpiralEffect extends OneShotEffect {
         for (UUID playerId : game.getState().getPlayersInRange(sourcePlayer.getId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                for (Card card : player.getHand().getCards(game)) {
-                    card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-                }
-                for (Card card : player.getGraveyard().getCards(game)) {
-                    card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-                }
-                player.shuffleLibrary(source, game);
+                Cards toLib = new CardsImpl(player.getHand());
+                toLib.addAll(player.getGraveyard());
+                player.shuffleCardsToLibrary(toLib, game, source);
             }
         }
         return true;

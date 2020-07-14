@@ -1,7 +1,7 @@
-
 package mage.cards.p;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -61,9 +61,10 @@ class PerishTheThoughtEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player targetOpponent = game.getPlayer(source.getFirstTarget());
-        if (targetOpponent != null) {
+        MageObject sourceObject = source.getSourceObject(game);
+        if (targetOpponent != null && sourceObject != null) {
             if (!targetOpponent.getHand().isEmpty()) {
-                targetOpponent.revealCards("Perish the Thought", targetOpponent.getHand(), game);
+                targetOpponent.revealCards(sourceObject.getIdName(), targetOpponent.getHand(), game);
                 Player you = game.getPlayer(source.getControllerId());
                 if (you != null) {
                     TargetCard target = new TargetCard(Zone.HAND, filter);
@@ -71,13 +72,13 @@ class PerishTheThoughtEffect extends OneShotEffect {
                     if (you.choose(Outcome.Neutral, targetOpponent.getHand(), target, game)) {
                         Card chosenCard = targetOpponent.getHand().get(target.getFirstTarget(), game);
                         if (chosenCard != null) {
-                            chosenCard.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
-                            targetOpponent.shuffleLibrary(source, game);
+                            targetOpponent.shuffleCardsToLibrary(chosenCard, game, source);
                         }
                     }
-                    return true;
+
                 }
             }
+            return true;
         }
         return false;
     }

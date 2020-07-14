@@ -1,8 +1,11 @@
 package mage.players;
 
+import java.io.Serializable;
+import java.util.*;
 import mage.MageItem;
 import mage.MageObject;
 import mage.MageObjectReference;
+import mage.Mana;
 import mage.abilities.*;
 import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.Cost;
@@ -37,10 +40,6 @@ import mage.target.TargetAmount;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
 import mage.util.Copyable;
-
-import java.io.Serializable;
-import java.util.*;
-import mage.Mana;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -366,8 +365,9 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param game
      * @param noMana       if it's a spell i can be cast without paying mana
      * @param ignoreTiming if it's cast during the resolution of another spell
-     *                     no sorcery or play land timing restriction are checked. For a land it has
-     *                     to be the turn of the player playing that card.
+     *                     no sorcery or play land timing restriction are
+     *                     checked. For a land it has to be the turn of the
+     *                     player playing that card.
      * @param reference    mage object that allows to play the card
      * @return
      */
@@ -377,8 +377,9 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param card         the land card to play
      * @param game
      * @param ignoreTiming false - it won't be checked if the stack is empty and
-     *                     you are able to play a Sorcery. It's still checked, if you are able to
-     *                     play a land concerning the number of lands you already played.
+     *                     you are able to play a Sorcery. It's still checked,
+     *                     if you are able to play a land concerning the number
+     *                     of lands you already played.
      * @return
      */
     boolean playLand(Card card, Game game, boolean ignoreTiming);
@@ -446,11 +447,11 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void revealCards(Ability source, Cards cards, Game game);
 
-    void revealCards(String name, Cards cards, Game game);
+    void revealCards(String titelSuffix, Cards cards, Game game);
 
-    void revealCards(Ability source, String name, Cards cards, Game game);
+    void revealCards(Ability source, String titelSuffix, Cards cards, Game game);
 
-    void revealCards(String name, Cards cards, Game game, boolean postToLog);
+    void revealCards(String titelSuffix, Cards cards, Game game, boolean postToLog);
 
     /**
      * Adds the cards to the reveal window and adds the source object's id name
@@ -532,10 +533,11 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param cards    - list of cards that have to be moved
      * @param game     - game
      * @param anyOrder - true = if player can determine the order of the cards
-     *                 else false = random order
-     *                 401.4. If an effect puts two or more cards in a specific position in a library
-     *                 at the same time, the owner of those cards may arrange them in any order.
-     *                 That library’s owner doesn’t reveal the order in which the cards go into the library.
+     *                 else false = random order 401.4. If an effect puts two or
+     *                 more cards in a specific position in a library at the
+     *                 same time, the owner of those cards may arrange them in
+     *                 any order. That library’s owner doesn’t reveal the order
+     *                 in which the cards go into the library.
      * @param source   - source ability
      * @return
      */
@@ -636,9 +638,9 @@ public interface Player extends MageItem, Copyable<Player> {
     void untap(Game game);
 
     ManaOptions getManaAvailable(Game game);
-    
+
     void addAvailableTriggeredMana(List<Mana> netManaAvailable);
-    
+
     List<List<Mana>> getAvailableTriggeredMana();
 
     List<ActivatedAbility> getPlayable(Game game, boolean hidden);
@@ -747,9 +749,10 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param game
      * @param tapped         the cards are tapped on the battlefield
      * @param faceDown       the cards are face down in the to zone
-     * @param byOwner        the card is moved (or put onto battlefield) by the owner
-     *                       of the card and if target zone is battlefield controls the permanent
-     *                       (instead of the controller of the source)
+     * @param byOwner        the card is moved (or put onto battlefield) by the
+     *                       owner of the card and if target zone is battlefield
+     *                       controls the permanent (instead of the controller
+     *                       of the source)
      * @param appliedEffects
      * @return
      */

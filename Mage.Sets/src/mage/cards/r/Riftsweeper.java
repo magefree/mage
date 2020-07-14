@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
@@ -12,11 +11,11 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.other.FaceDownPredicate;
 import mage.game.Game;
+import mage.players.Player;
 import mage.target.common.TargetCardInExile;
 
 /**
@@ -26,12 +25,13 @@ import mage.target.common.TargetCardInExile;
 public final class Riftsweeper extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("face-up exiled card");
+
     static {
         filter.add(Predicates.not(FaceDownPredicate.instance));
     }
 
     public Riftsweeper(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.SHAMAN);
 
@@ -74,13 +74,12 @@ class RiftsweeperEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(targetPointer.getFirst(game, source));
         if (card != null) {
-            // remove exiting suspend counters
+            // remove existing suspend counters
             card.getCounters(game).clear();
-            // move to exile
-            card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-            game.getPlayer(card.getOwnerId()).shuffleLibrary(source, game);
-            game.informPlayers("Riftsweeper: Choosen card was " + card.getName());
-            return true;
+            Player owner = game.getPlayer(card.getOwnerId());
+            if (owner != null) {
+                return owner.shuffleCardsToLibrary(card, game, source);
+            }
         }
         return false;
     }

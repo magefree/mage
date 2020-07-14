@@ -1,5 +1,7 @@
 package mage.cards.r;
 
+import java.util.Set;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -13,9 +15,6 @@ import mage.game.Game;
 import mage.game.permanent.token.ResearchDevelopmentToken;
 import mage.players.Player;
 import mage.target.TargetCard;
-
-import java.util.Set;
-import java.util.UUID;
 
 /**
  * @author magenoxx
@@ -44,10 +43,6 @@ public final class ResearchDevelopment extends SplitCard {
 
 class ResearchEffect extends OneShotEffect {
 
-    private static final String choiceText = "Choose a card you own from outside the game";
-
-    private static final FilterCard filter = new FilterCard("card");
-
     public ResearchEffect() {
         super(Outcome.Benefit);
         this.staticText = "Choose up to four cards you own from outside the game and shuffle them into your library";
@@ -64,53 +59,20 @@ class ResearchEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            StringBuilder textToAsk = new StringBuilder(choiceText);
-            textToAsk.append(" (0)");
-            int count = 0;
-            while (player.chooseUse(Outcome.Benefit, textToAsk.toString(), source, game)) {
-                Cards cards = player.getSideboard();
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            if (controller.chooseUse(Outcome.Benefit, staticText + "?", source, game)) {
+                Cards cards = controller.getSideboard();
                 if (cards.isEmpty()) {
-                    game.informPlayer(player, "You have no cards outside the game.");
-                    break;
+                    game.informPlayer(controller, "You have no cards outside the game.");
+                    return true;
                 }
-
-                Set<Card> filtered = cards.getCards(filter, game);
-                if (filtered.isEmpty()) {
-                    game.informPlayer(player, "You have no " + filter.getMessage() + " outside the game.");
-                    break;
-                }
-
-                Cards filteredCards = new CardsImpl();
-                for (Card card : filtered) {
-                    filteredCards.add(card.getId());
-                }
-
-                TargetCard target = new TargetCard(Zone.OUTSIDE, filter);
-                if (player.choose(Outcome.Benefit, filteredCards, target, game)) {
-                    Card card = player.getSideboard().get(target.getFirstTarget(), game);
-                    if (card != null) {
-                        card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
-                        count++;
-                        textToAsk = new StringBuilder(choiceText);
-                        textToAsk.append(" (");
-                        textToAsk.append(count);
-                        textToAsk.append(')');
-                    }
-                }
-
-                if (count == 4) {
-                    break;
+                TargetCard target = new TargetCard(0, 4, Zone.OUTSIDE, new FilterCard("cards you own from outside the game"));
+                target.setNotTarget(true);
+                if (controller.choose(Outcome.Benefit, controller.getSideboard(), target, game)) {
+                    controller.shuffleCardsToLibrary(new CardsImpl(target.getTargets()), game, source);
                 }
             }
-
-            game.informPlayers(player.getLogName() + " has chosen " + count + " card(s) to shuffle into their library.");
-
-            if (count > 0) {
-                player.shuffleLibrary(source, game);
-            }
-
             return true;
         }
 

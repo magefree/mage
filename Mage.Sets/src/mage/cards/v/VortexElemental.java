@@ -1,4 +1,3 @@
-
 package mage.cards.v;
 
 import java.util.HashSet;
@@ -12,9 +11,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.combat.MustBeBlockedByTargetSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.combat.Combat;
@@ -30,7 +31,7 @@ import mage.target.common.TargetCreaturePermanent;
 public final class VortexElemental extends CardImpl {
 
     public VortexElemental(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}");
         this.subtype.add(SubType.ELEMENTAL);
 
         this.power = new MageInt(0);
@@ -80,7 +81,7 @@ class VortexElementalEffect extends OneShotEffect {
             Set<UUID> playersToShuffle = new HashSet<>();
             creaturesToReturn.add(source.getSourceId());
             if (combat != null) {
-                for(CombatGroup combatGroup: combat.getGroups()) {
+                for (CombatGroup combatGroup : combat.getGroups()) {
                     if (combatGroup.getAttackers().contains(source.getSourceId())) {
                         creaturesToReturn.addAll(combatGroup.getBlockers());
                     } else if (combatGroup.getBlockers().contains(source.getSourceId())) {
@@ -88,14 +89,15 @@ class VortexElementalEffect extends OneShotEffect {
                     }
                 }
             }
-            for (UUID creatureId: creaturesToReturn) {
+            for (UUID creatureId : creaturesToReturn) {
                 Permanent creature = game.getPermanent(creatureId);
                 if (creature != null) {
                     playersToShuffle.add(creature.getControllerId());
-                    creature.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
                 }
             }
-            for (UUID playerId: playersToShuffle){
+            Cards toLib = new CardsImpl(creaturesToReturn);
+            controller.putCardsOnTopOfLibrary(toLib, game, source, false);
+            for (UUID playerId : playersToShuffle) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     player.shuffleLibrary(source, game);
@@ -104,7 +106,6 @@ class VortexElementalEffect extends OneShotEffect {
 
             return true;
         }
-
 
         return false;
     }
