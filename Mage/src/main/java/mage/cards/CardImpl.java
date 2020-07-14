@@ -135,11 +135,11 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             secondSideCardClazz = card.secondSideCardClazz;
             nightCard = card.nightCard;
         }
-        if (card.spellAbility != null) {
-            spellAbility = (SpellAbility) abilities.get(0);
-        } else {
-            spellAbility = null;
-        }
+//        if (card.spellAbility != null) {
+//            spellAbility = (SpellAbility) abilities.get(0);
+//        } else {
+        spellAbility = null; // will be set on first getSpellAbility call.
+//        }
 
         flipCard = card.flipCard;
         flipCardName = card.flipCardName;
