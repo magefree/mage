@@ -31,7 +31,7 @@ import java.util.UUID;
 public final class SanctumOfAll extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledPermanent();
-    private static final FilterCard filterCard = new FilterCard("a Shrine card");
+    private static final FilterCard filterCard = new FilterCard("Shrine card");
 
     static final PermanentsOnBattlefieldCount count = new PermanentsOnBattlefieldCount(filter);
 
@@ -42,7 +42,7 @@ public final class SanctumOfAll extends CardImpl {
 
     public SanctumOfAll(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}{U}{B}{R}{G}");
-        
+
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.SHRINE);
 

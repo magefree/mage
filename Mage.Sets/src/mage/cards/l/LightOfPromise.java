@@ -11,6 +11,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.counters.CounterType;
@@ -42,7 +43,7 @@ public final class LightOfPromise extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(
                 new GainLifeControllerTriggeredAbility(
                         new LightOfPromiseEffect(), false, true
-                ), AttachmentType.AURA
+                ), AttachmentType.AURA, Duration.WhileOnBattlefield, "Enchanted creature has \"Whenever you gain life, put that many +1/+1 counters on this creature.\""
         )));
     }
 

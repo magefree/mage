@@ -46,7 +46,7 @@ class ExperimentalOverloadEffect extends OneShotEffect {
         super(Outcome.Benefit);
         staticText = "Create an X/X blue and red Weird creature token, " +
                 "where X is the number of instant and sorcery cards in your graveyard. " +
-                "Then you may return an instant or sorcery card from your graveyard to your hand.";
+                "Then you may return an instant or sorcery card from your graveyard to your hand";
     }
 
     private ExperimentalOverloadEffect(final ExperimentalOverloadEffect effect) {

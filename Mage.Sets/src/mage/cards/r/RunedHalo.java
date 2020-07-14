@@ -38,7 +38,7 @@ public final class RunedHalo extends CardImpl {
 
         // As Runed Halo enters the battlefield, name a card.
         Ability ability = new AsEntersBattlefieldAbility(new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.ALL));
-        // You have protection from the chosen name.
+        // You have protection from the chosen card name.
         ability.addEffect(new RunedHaloSetProtectionEffect());
         this.addAbility(ability);
     }
@@ -57,7 +57,7 @@ class RunedHaloSetProtectionEffect extends OneShotEffect {
 
     public RunedHaloSetProtectionEffect() {
         super(Outcome.Protect);
-        staticText = "<br/><br/>You have protection from the chosen card name  <i>(You can't be targeted, dealt damage, or enchanted by anything with that name.)</i>";
+        staticText = "<br/><br/>You have protection from the chosen card name. <i>(You can't be targeted, dealt damage, or enchanted by anything with that name.)</i>";
     }
 
     public RunedHaloSetProtectionEffect(final RunedHaloSetProtectionEffect effect) {
@@ -68,9 +68,9 @@ class RunedHaloSetProtectionEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
-        if (controller != null && cardName != null && !cardName.isEmpty()) {            
-            FilterObject filter = new FilterObject("the name [" + cardName + ']');
-            filter.add(new NamePredicate(cardName));            
+        if (controller != null && cardName != null && !cardName.isEmpty()) {
+            FilterObject filter = new FilterObject("the card name [" + cardName + ']');
+            filter.add(new NamePredicate(cardName));
             ContinuousEffect effect = new GainAbilityControllerEffect(new ProtectionAbility(filter), Duration.Custom);
             game.addEffect(effect, source);
             return true;

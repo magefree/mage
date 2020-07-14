@@ -11,13 +11,12 @@ import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetCreatureOrPlaneswalker;
 import mage.watchers.Watcher;
 
 import java.util.HashSet;
@@ -29,7 +28,7 @@ import java.util.UUID;
  */
 public final class BarrinTolarianArchmage extends CardImpl {
 
-    private static final FilterPermanent filter
+    private static final FilterCreatureOrPlaneswalkerPermanent filter
             = new FilterCreatureOrPlaneswalkerPermanent("other target creature or planeswalker");
 
     static {
@@ -47,7 +46,7 @@ public final class BarrinTolarianArchmage extends CardImpl {
 
         // When Barrin, Tolarian Archmage enters the battlefield, return up to one other target creature or planeswalker to its owner's hand.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect());
-        ability.addTarget(new TargetPermanent(0, 1, filter, false));
+        ability.addTarget(new TargetCreatureOrPlaneswalker(0, 1, filter, false));
         this.addAbility(ability);
 
         // At the beginning of your end step, if a permanent was put into your hand from the battlefield this turn, draw a card.

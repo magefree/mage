@@ -89,7 +89,7 @@ class MangaraTheDiplomatAttackTriggeredAbility extends TriggeredAbilityImpl {
     public String getRule() {
         return "Whenever an opponent attacks with creatures, " +
                 "if two or more of those creatures are attacking you " +
-                "and/or a planeswalker you control, draw a card.";
+                "and/or planeswalkers you control, draw a card.";
     }
 }
 

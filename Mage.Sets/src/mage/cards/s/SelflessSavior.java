@@ -24,7 +24,7 @@ import java.util.UUID;
 public final class SelflessSavior extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterControlledCreaturePermanent("another target creature");
+            = new FilterControlledCreaturePermanent("another target creature you control");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -37,7 +37,7 @@ public final class SelflessSavior extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // Sacrifice Selfless Savior: Another target creature gains indestructible until end of turn.
+        // Sacrifice Selfless Savior: Another target creature you control gains indestructible until end of turn.
         Ability ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(
                 IndestructibleAbility.getInstance(), Duration.EndOfTurn
         ), new SacrificeSourceCost());

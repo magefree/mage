@@ -26,7 +26,7 @@ public final class VolcanicSalvo extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{10}{R}{R}");
 
         // This spell costs {X} less to cast, where X is the total power of creatures you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new VolcanicSalvoCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new VolcanicSalvoCostReductionEffect()).setRuleAtTheTop(true));
 
         // Volcanic Salvo deals 6 damage to each of up to two target creatures and/or planeswalkers.
         this.getSpellAbility().addEffect(new DamageTargetEffect(6)

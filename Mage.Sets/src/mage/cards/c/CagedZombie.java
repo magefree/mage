@@ -2,10 +2,10 @@ package mage.cards.c;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -29,7 +29,7 @@ public final class CagedZombie extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {1}{B}, {T}: Each opponent loses 2 life. Activate this ability only if a creature died this turn.
-        Ability ability = new ConditionalActivatedAbility(
+        Ability ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD, new LoseLifeOpponentsEffect(2),
                 new ManaCostsImpl("{1}{B}"), MorbidCondition.instance
         );
