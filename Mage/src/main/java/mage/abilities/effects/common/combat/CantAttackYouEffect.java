@@ -32,7 +32,8 @@ public class CantAttackYouEffect extends RestrictionEffect {
 
     @Override
     public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game, boolean canUseChooseDialogs) {
-        if (defenderId == null) {
+        if (defenderId == null
+                || game.getState().getPlayersInRange(attacker.getControllerId(), game).size() == 2) {  // just 2 players left, so it may attack you
             return true;
         }
         // A planeswalker controlled by the controller is the defender
