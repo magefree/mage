@@ -23,7 +23,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author fireshoes
  */
 public final class DuelistsHeritage extends CardImpl {
-    
+
     public DuelistsHeritage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
 
@@ -37,11 +37,11 @@ public final class DuelistsHeritage extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent(new FilterAttackingCreature()));
         this.addAbility(ability);
     }
-    
+
     public DuelistsHeritage(final DuelistsHeritage card) {
         super(card);
     }
-    
+
     @Override
     public DuelistsHeritage copy() {
         return new DuelistsHeritage(this);
@@ -49,25 +49,25 @@ public final class DuelistsHeritage extends CardImpl {
 }
 
 class DuelistsHeritageTriggeredAbility extends TriggeredAbilityImpl {
-    
+
     public DuelistsHeritageTriggeredAbility(Zone zone, Effect effect) {
         super(zone, effect, true);
     }
-    
+
     public DuelistsHeritageTriggeredAbility(final DuelistsHeritageTriggeredAbility ability) {
         super(ability);
     }
-    
+
     @Override
     public DuelistsHeritageTriggeredAbility copy() {
         return new DuelistsHeritageTriggeredAbility(this);
     }
-    
+
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == EventType.DECLARED_ATTACKERS;
     }
-    
+
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         // AI workaround to disable it on opponent's attacks - JayDi85
@@ -76,10 +76,9 @@ class DuelistsHeritageTriggeredAbility extends TriggeredAbilityImpl {
         } else {
             this.addCustomOutcome(Outcome.AIDontUseIt);
         }
-
         return !game.getCombat().getAttackers().isEmpty();
     }
-    
+
     @Override
     public String getRule() {
         return "Whenever one or more creatures attack, " + super.getRule();
