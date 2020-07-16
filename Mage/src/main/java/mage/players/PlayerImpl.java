@@ -2890,11 +2890,24 @@ public abstract class PlayerImpl implements Player, Serializable {
             boolean withCost = false;
             Abilities<ActivatedManaAbilityImpl> manaAbilities
                     = permanent.getAbilities().getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, game);
-            for (ActivatedManaAbilityImpl ability : manaAbilities) {
+            for (Iterator<ActivatedManaAbilityImpl> it = manaAbilities.iterator(); it.hasNext();) {
+                ActivatedManaAbilityImpl ability = it.next();
                 if (canUse == null) {
                     canUse = permanent.canUseActivatedAbilities(game);
                 }
                 if (canUse && ability.canActivate(playerId, game).canActivate()) {
+                    // abilities without Tap costs have to be handled as separate sources, because they can be used also
+                    if (!availableMana.hasTapCost(ability)) {
+                        it.remove();
+                        Abilities<ActivatedManaAbilityImpl> noTapAbilities = new AbilitiesImpl<>(ability);
+                        if (ability.getManaCosts().isEmpty()) {
+                            sourceWithoutManaCosts.add(noTapAbilities);
+                        } else {
+                            sourceWithCosts.add(noTapAbilities);
+                        }
+                        continue;
+                    }
+
                     canAdd = true;
                     if (!ability.getManaCosts().isEmpty()) {
                         withCost = true;

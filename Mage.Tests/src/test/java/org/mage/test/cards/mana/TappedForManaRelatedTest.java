@@ -3,6 +3,7 @@ package org.mage.test.cards.mana;
 import mage.abilities.mana.ManaOptions;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -90,4 +91,112 @@ public class TappedForManaRelatedTest extends CardTestPlayerBase {
 
     }
 
+    @Test
+    public void TestCalciformPools() {
+        // {T}: Add {C}.
+        // {1}, {T}: Put a storage counter on Calciform Pools.
+        // {1}, Remove X storage counters from Calciform Pools: Add X mana in any combination of {W} and/or {U}.
+        addCard(Zone.BATTLEFIELD, playerA, "Calciform Pools", 1);
+
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        assertManaOptions("{C}", manaOptions);
+
+    }
+
+    @Test
+    public void TestCalciformPools2Counter() {
+        // {T}: Add {C}.
+        // {1}, {T}: Put a storage counter on Calciform Pools.
+        // {1}, Remove X storage counters from Calciform Pools: Add X mana in any combination of {W} and/or {U}.
+        addCard(Zone.BATTLEFIELD, playerA, "Calciform Pools", 1);
+        addCounters(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Calciform Pools", CounterType.STORAGE, 2);
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertCounterCount("Calciform Pools", CounterType.STORAGE, 2);
+
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        Assert.assertEquals("mana variations don't fit", 4, manaOptions.size());
+        assertManaOptions("{W}{W}", manaOptions);
+        assertManaOptions("{W}{U}", manaOptions);
+        assertManaOptions("{U}{U}", manaOptions);
+        assertManaOptions("{C}", manaOptions);
+    }
+
+    @Test
+    public void TestCalciformPools2CounterAndTrigger() {
+        setStrictChooseMode(true);
+        // {T}: Add {C}.
+        // {1}, {T}: Put a storage counter on Calciform Pools.
+        // {1}, Remove X storage counters from Calciform Pools: Add X mana in any combination of {W} and/or {U}.
+        addCard(Zone.BATTLEFIELD, playerA, "Calciform Pools", 1);
+        addCounters(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Calciform Pools", CounterType.STORAGE, 2);
+
+        // As Caged Sun enters the battlefield, choose a color.
+        // Creatures you control of the chosen color get +1/+1.
+        // Whenever a land's ability adds one or more mana of the chosen color, add one additional mana of that color.
+        addCard(Zone.BATTLEFIELD, playerA, "Caged Sun", 1);
+        setChoice(playerA, "White");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertAllCommandsUsed();
+
+        assertCounterCount("Calciform Pools", CounterType.STORAGE, 2);
+
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        Assert.assertEquals("mana variations don't fit", 4, manaOptions.size());
+        assertManaOptions("{W}{W}{W}", manaOptions);
+        assertManaOptions("{W}{W}{U}", manaOptions);
+        assertManaOptions("{U}{U}", manaOptions);
+        assertManaOptions("{C}", manaOptions);
+    }
+
+    @Test
+    public void TestCastleSengir() {
+        setStrictChooseMode(true);
+        // {T}: Add Colorless.
+        // {1}, {T}: Add Black.
+        // {2}, {T}: Add Blue or Red.
+        addCard(Zone.BATTLEFIELD, playerA, "Castle Sengir", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertAllCommandsUsed();
+
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        Assert.assertEquals("mana variations don't fit", 2, manaOptions.size());
+        assertManaOptions("{C}{R}", manaOptions);
+        assertManaOptions("{B}", manaOptions);
+    }
+
+    @Test
+    public void TestCastleSengir2() {
+        setStrictChooseMode(true);
+        // {T}: Add {C}.
+        // {1}, {T}: Add {B}.
+        // {2}, {T}: Add {U} or {R}.
+        addCard(Zone.BATTLEFIELD, playerA, "Castle Sengir", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertAllCommandsUsed();
+
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        Assert.assertEquals("mana variations don't fit", 4, manaOptions.size());
+        assertManaOptions("{C}{W}{W}", manaOptions);
+        assertManaOptions("{W}{B}", manaOptions);
+        assertManaOptions("{U}", manaOptions);
+        assertManaOptions("{R}", manaOptions);
+    }
 }

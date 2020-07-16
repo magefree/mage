@@ -1,4 +1,3 @@
-
 package mage.cards.f;
 
 import java.util.UUID;
@@ -7,9 +6,10 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.dynamicvalue.common.RemovedCountersForCostValue;
-import mage.abilities.effects.mana.AddManaInAnyCombinationEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.effects.mana.AddManaInAnyCombinationEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
@@ -26,7 +26,7 @@ import mage.counters.CounterType;
 public final class FungalReaches extends CardImpl {
 
     public FungalReaches(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
@@ -38,7 +38,8 @@ public final class FungalReaches extends CardImpl {
 
         // {1}, Remove X storage counters from Fungal Reaches: Add X mana in any combination of {R} and/or {G}.
         ability = new SimpleManaAbility(Zone.BATTLEFIELD,
-                new AddManaInAnyCombinationEffect(RemovedCountersForCostValue.instance, ColoredManaSymbol.R, ColoredManaSymbol.G),
+                new AddManaInAnyCombinationEffect(RemovedCountersForCostValue.instance,
+                        new CountersSourceCount(CounterType.STORAGE), ColoredManaSymbol.R, ColoredManaSymbol.G),
                 new GenericManaCost(1));
         ability.addCost(new RemoveVariableCountersSourceCost(CounterType.STORAGE.createInstance()));
         this.addAbility(ability);

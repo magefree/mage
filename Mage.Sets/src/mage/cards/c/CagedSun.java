@@ -1,5 +1,8 @@
 package mage.cards.c;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -17,8 +20,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
-
-import java.util.UUID;
 
 /**
  * @author BetaSteward
@@ -133,6 +134,19 @@ class CagedSunEffect extends ManaEffect {
 
     public CagedSunEffect(final CagedSunEffect effect) {
         super(effect);
+    }
+
+    @Override
+    public List<Mana> getNetMana(Game game, Ability source) {
+        if (game != null && game.inCheckPlayableState()) {
+            ObjectColor color = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");
+            if (color != null) {
+                List<Mana> availableNetMana = new ArrayList<>();
+                availableNetMana.add(new Mana(ColoredManaSymbol.lookup(color.toString().charAt(0))));
+                return availableNetMana;
+            }
+        }
+        return super.getNetMana(game, source);
     }
 
     @Override
