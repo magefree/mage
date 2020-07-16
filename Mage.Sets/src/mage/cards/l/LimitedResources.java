@@ -41,8 +41,7 @@ public final class LimitedResources extends CardImpl {
                         new CantPlayLandEffect(),
                         new PermanentsOnTheBattlefieldCondition(
                                 new FilterLandPermanent(),
-                                ComparisonType.MORE_THAN, 9,
-                                false))));
+                                ComparisonType.MORE_THAN, 9, false))));
 
     }
 
