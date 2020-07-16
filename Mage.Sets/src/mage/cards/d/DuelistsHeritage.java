@@ -70,6 +70,13 @@ class DuelistsHeritageTriggeredAbility extends TriggeredAbilityImpl {
     
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
+        // AI workaround to disable it on opponent's attacks - JayDi85
+        if (game.getCombat().getAttackingPlayerId().equals(this.getControllerId())) {
+            this.addCustomOutcome(Outcome.Benefit);
+        } else {
+            this.addCustomOutcome(Outcome.AIDontUseIt);
+        }
+
         return !game.getCombat().getAttackers().isEmpty();
     }
     
