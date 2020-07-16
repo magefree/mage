@@ -318,6 +318,10 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.maxHandSize = player.getMaxHandSize();
         this.maxAttackedBy = player.getMaxAttackedBy();
         this.manaPool = player.getManaPool().copy();
+        // Restore user specific settings in case changed since state save
+        this.manaPool.setAutoPayment(this.getUserData().isManaPoolAutomatic());
+        this.manaPool.setAutoPaymentRestricted(this.getUserData().isManaPoolAutomaticRestricted());
+
         this.turns = player.getTurns();
 
         this.range = player.getRange();
