@@ -22,6 +22,9 @@ import org.apache.log4j.Logger;
  * be used to find all the ways to pay a mana cost or all the different mana
  * combinations available to a player
  *
+ * TODO: Conditional Mana is not supported yet. The mana adding removes the
+ * condition of conditional mana
+ *
  */
 public class ManaOptions extends ArrayList<Mana> {
 

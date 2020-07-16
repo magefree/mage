@@ -2881,6 +2881,11 @@ public abstract class PlayerImpl implements Player, Serializable {
         game.setCheckPlayableState(true);
 
         ManaOptions availableMana = new ManaOptions();
+        availableMana.addMana(manaPool.getMana());
+        // conditional mana
+        for (ConditionalMana conditionalMana : manaPool.getConditionalMana()) {
+            availableMana.addMana(conditionalMana);
+        }
 
         List<Abilities<ActivatedManaAbilityImpl>> sourceWithoutManaCosts = new ArrayList<>();
         List<Abilities<ActivatedManaAbilityImpl>> sourceWithCosts = new ArrayList<>();
@@ -3407,11 +3412,11 @@ public abstract class PlayerImpl implements Player, Serializable {
         try {
             // basic mana
             ManaOptions availableMana = getManaAvailable(game);
-            availableMana.addMana(manaPool.getMana());
+            // availableMana.addMana(manaPool.getMana());
             // conditional mana
-            for (ConditionalMana conditionalMana : manaPool.getConditionalMana()) {
-                availableMana.addMana(conditionalMana);
-            }
+//            for (ConditionalMana conditionalMana : manaPool.getConditionalMana()) {
+//                availableMana.addMana(conditionalMana);
+//            }
 
             boolean fromAll = fromZone.equals(Zone.ALL);
             if (hidden && (fromAll || fromZone == Zone.HAND)) {

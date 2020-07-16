@@ -29,7 +29,7 @@ public class SasayaOrochiAscendantTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Upwelling", 1); // Enchantment {3}{G}
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reveal your hand: If you have seven or more land cards in your hand, flip");
-        
+
         activateManaAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: Add {G}");
         activateManaAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: Add {G}");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Upwelling");
@@ -38,7 +38,7 @@ public class SasayaOrochiAscendantTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
         assertAllCommandsUsed();
-        
+
         assertPermanentCount(playerA, "Sasaya's Essence", 1);
         assertPermanentCount(playerA, "Upwelling", 1);
 
@@ -48,11 +48,11 @@ public class SasayaOrochiAscendantTest extends CardTestPlayerBase {
         assertDuplicatedManaOptions(manaOptions);
 
         Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
-        assertManaOptions("{G}{G}{G}", manaOptions);
+        assertManaOptions("{G}{G}{G}{G}{G}", manaOptions);
 
     }
-    
-  @Test
+
+    @Test
     public void testSasayasEssence2() {
         addCard(Zone.HAND, playerA, "Plains", 7);
         addCard(Zone.BATTLEFIELD, playerA, "Brushland", 3);
@@ -73,26 +73,25 @@ public class SasayaOrochiAscendantTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
         assertAllCommandsUsed();
-        
+
         assertPermanentCount(playerA, "Sasaya's Essence", 1);
         assertPermanentCount(playerA, "Upwelling", 1);
 
         assertManaPool(playerA, ManaType.GREEN, 2);
 
         assertLife(playerA, 18);
-        
+
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
         assertDuplicatedManaOptions(manaOptions);
 
         Assert.assertEquals("mana variations don't fit", 3, manaOptions.size());
-        assertManaOptions("{C}{C}{C}", manaOptions);
-        assertManaOptions("{G}{G}{G}", manaOptions);
-        assertManaOptions("{W}{W}{W}", manaOptions);
+        assertManaOptions("{C}{C}{C}{G}{G}", manaOptions);
+        assertManaOptions("{G}{G}{G}{G}{G}", manaOptions);
+        assertManaOptions("{W}{W}{W}{G}{G}", manaOptions);
 
-    }    
-    
-    
-  @Test
+    }
+
+    @Test
     public void testSasayasEssence3() {
         addCard(Zone.HAND, playerA, "Plains", 7);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
@@ -115,22 +114,22 @@ public class SasayaOrochiAscendantTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
         assertAllCommandsUsed();
-        
+
         assertPermanentCount(playerA, "Sasaya's Essence", 1);
         assertPermanentCount(playerA, "Upwelling", 1);
 
         assertManaPool(playerA, ManaType.GREEN, 2);
 
         assertLife(playerA, 20);
-        
+
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
         assertDuplicatedManaOptions(manaOptions);
 
         Assert.assertEquals("mana variations don't fit", 4, manaOptions.size());
-        assertManaOptions("{R}{R}{R}{R}{G}{G}{G}", manaOptions);
-        assertManaOptions("{R}{R}{R}{G}{G}{G}{G}", manaOptions);
-        assertManaOptions("{R}{R}{G}{G}{G}{G}{G}", manaOptions);
-        assertManaOptions("{R}{G}{G}{G}{G}{G}{G}", manaOptions);
-    }    
-    
+        assertManaOptions("{R}{R}{R}{R}{G}{G}{G}{G}{G}", manaOptions);
+        assertManaOptions("{R}{R}{R}{G}{G}{G}{G}{G}{G}", manaOptions);
+        assertManaOptions("{R}{R}{G}{G}{G}{G}{G}{G}{G}", manaOptions);
+        assertManaOptions("{R}{G}{G}{G}{G}{G}{G}{G}{G}", manaOptions);
+    }
+
 }

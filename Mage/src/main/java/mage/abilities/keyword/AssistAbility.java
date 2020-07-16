@@ -1,5 +1,6 @@
 package mage.abilities.keyword;
 
+import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.SpecialAction;
@@ -20,22 +21,20 @@ import mage.target.Target;
 import mage.target.TargetPlayer;
 import mage.util.ManaUtil;
 
-import java.util.UUID;
-
 /**
  * 702.131. Assist
  * <p>
- * 702.131a Assist is a static ability that modifies the rules of paying for the spell with assist (see rules 601.2g-h).
- * If the total cost to cast a spell with assist includes a generic mana component, before you activate mana
- * abilities while casting it, you may choose another player. That player has a chance to activate mana abilities.
- * Once that player chooses not to activate any more mana abilities, you have a chance to activate mana abilities.
- * Before you begin to pay the total cost of the spell, the player you chose may pay for any amount of the generic
- * mana in the spell’s total cost.
+ * 702.131a Assist is a static ability that modifies the rules of paying for the
+ * spell with assist (see rules 601.2g-h). If the total cost to cast a spell
+ * with assist includes a generic mana component, before you activate mana
+ * abilities while casting it, you may choose another player. That player has a
+ * chance to activate mana abilities. Once that player chooses not to activate
+ * any more mana abilities, you have a chance to activate mana abilities. Before
+ * you begin to pay the total cost of the spell, the player you chose may pay
+ * for any amount of the generic mana in the spell’s total cost.
  *
  * @author emerald000, JayDi85
  */
-
-
 public class AssistAbility extends SimpleStaticAbility implements AlternateManaPaymentAbility {
 
     private static final FilterPlayer filter = new FilterPlayer("another player");
@@ -107,7 +106,7 @@ public class AssistAbility extends SimpleStaticAbility implements AlternateManaP
             if (opponent != null) {
                 // basic and pool, but no coditional mana
                 ManaOptions availableMana = opponent.getManaAvailable(game);
-                availableMana.addMana(opponent.getManaPool().getMana());
+//                availableMana.addMana(opponent.getManaPool().getMana());
                 for (Mana mana : availableMana) {
                     if (mana.count() > 0) {
                         opponentCanPayMax = Math.max(opponentCanPayMax, mana.count());

@@ -5,6 +5,7 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 import static org.mage.test.utils.ManaOptionsTestUtils.assertManaOptions;
@@ -198,5 +199,45 @@ public class TappedForManaRelatedTest extends CardTestPlayerBase {
         assertManaOptions("{W}{B}", manaOptions);
         assertManaOptions("{U}", manaOptions);
         assertManaOptions("{R}", manaOptions);
+    }
+
+    @Test
+    public void TestCrystallineCrawler() {
+        setStrictChooseMode(true);
+        // Converge - Crystalline Crawler enters the battlefield with a +1/+1 counter on it for each color of mana spent to cast it.
+        // Remove a +1/+1 counter from Crystalline Crawler: Add one mana of any color.
+        // {T}: Put a +1/+1 counter on Crystalline Crawler.
+        addCard(Zone.BATTLEFIELD, playerA, "Crystalline Crawler", 1);
+        addCounters(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Crystalline Crawler", CounterType.P1P1, 2);
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertAllCommandsUsed();
+
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        assertManaOptions("{Any}{Any}", manaOptions);
+    }
+
+    @Test
+    @Ignore  // Because this is no mana ability, this mana will not be calculated during available mana calculation
+    public void TestDeathriteShaman() {
+        setStrictChooseMode(true);
+        // {T}: Exile target land card from a graveyard. Add one mana of any color.
+        // {B}, {T}: Exile target instant or sorcery card from a graveyard. Each opponent loses 2 life.
+        // {G}, {T}: Exile target creature card from a graveyard. You gain 2 life.
+        addCard(Zone.BATTLEFIELD, playerA, "Deathrite Shaman", 1);
+
+        addCard(Zone.GRAVEYARD, playerA, "Mountain", 3);
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertAllCommandsUsed();
+
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        assertManaOptions("{Any}", manaOptions);
     }
 }

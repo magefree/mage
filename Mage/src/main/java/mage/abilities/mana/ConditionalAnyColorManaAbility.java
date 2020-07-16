@@ -1,6 +1,6 @@
-
 package mage.abilities.mana;
 
+import java.util.List;
 import mage.Mana;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -11,11 +11,9 @@ import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.constants.Zone;
 import mage.game.Game;
 
-import java.util.List;
-
 /**
- * For cards like:
- * {tap}: Add three mana of any one color. Spend this mana only to cast creature spells.
+ * For cards like: {tap}: Add three mana of any one color. Spend this mana only
+ * to cast creature spells.
  *
  * @author noxx
  */
@@ -32,11 +30,11 @@ public class ConditionalAnyColorManaAbility extends ActivatedManaAbilityImpl {
     }
 
     public ConditionalAnyColorManaAbility(Cost cost, int amount, ConditionalManaBuilder manaBuilder, boolean oneChoice) {
-        this(cost, StaticValue.get(amount), manaBuilder, oneChoice);
+        this(cost, StaticValue.get(amount), StaticValue.get(amount), manaBuilder, oneChoice);
     }
 
-    public ConditionalAnyColorManaAbility(Cost cost, DynamicValue amount, ConditionalManaBuilder manaBuilder, boolean oneChoice) {
-        super(Zone.BATTLEFIELD, new AddConditionalManaOfAnyColorEffect(amount, manaBuilder, oneChoice), cost);
+    public ConditionalAnyColorManaAbility(Cost cost, DynamicValue amount, DynamicValue netAmount, ConditionalManaBuilder manaBuilder, boolean oneChoice) {
+        super(Zone.BATTLEFIELD, new AddConditionalManaOfAnyColorEffect(amount, netAmount, manaBuilder, oneChoice), cost);
         this.amount = amount;
     }
 
@@ -59,7 +57,6 @@ public class ConditionalAnyColorManaAbility extends ActivatedManaAbilityImpl {
     public boolean definesMana(Game game) {
         return true;
     }
-
 
     @Override
     public ConditionalAnyColorManaAbility copy() {
