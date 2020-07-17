@@ -74,6 +74,11 @@ enum StormwingEntityCondition implements Condition {
         StormwingEntityWatcher watcher = game.getState().getWatcher(StormwingEntityWatcher.class);
         return watcher != null && watcher.checkPlayer(source.getControllerId());
     }
+
+    @Override
+    public String toString() {
+        return "you've cast an instant or sorcery spell this turn";
+    }
 }
 
 class StormwingEntityWatcher extends Watcher {
