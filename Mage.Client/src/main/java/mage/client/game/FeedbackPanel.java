@@ -10,6 +10,7 @@ package mage.client.game;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.Executors;
@@ -46,6 +47,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
     private MageDialog connectedDialog;
     private ChatPanelBasic connectedChatPanel;
     private int lastMessageId;
+    private LocalDateTime lastResponse;
 
     private static final ScheduledExecutorService WORKER = Executors.newSingleThreadScheduledExecutor();
 
@@ -85,6 +87,13 @@ public class FeedbackPanel extends javax.swing.JPanel {
         String lblText = addAdditionalText(message, options);
         this.helper.setTextArea(lblText);
         //this.lblMessage.setText(lblText);
+        
+        // Alert user when needing feedback if last dialog was informative, and it has been over 2 seconds since last input
+        if (this.mode == FeedbackMode.INFORM && mode != FeedbackMode.INFORM
+        		&& (this.lastResponse == null || this.lastResponse.isBefore(LocalDateTime.now().minusSeconds(2)))) {
+        	AudioManager.playFeedbackNeeded();
+        }
+        
         this.mode = mode;
         switch (this.mode) {
             case INFORM:
@@ -244,7 +253,8 @@ public class FeedbackPanel extends javax.swing.JPanel {
     }
 
     private void btnRightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRightActionPerformed
-        if (connectedDialog != null) {
+    	setLastResponse();
+    	if (connectedDialog != null) {
             connectedDialog.removeDialog();
             connectedDialog = null;
         }
@@ -262,15 +272,18 @@ public class FeedbackPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnRightActionPerformed
 
     private void btnLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLeftActionPerformed
+    	setLastResponse();
         SessionHandler.sendPlayerBoolean(gameId, true);
         AudioManager.playButtonCancel();
     }//GEN-LAST:event_btnLeftActionPerformed
 
     private void btnSpecialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpecialActionPerformed
+    	setLastResponse();
         SessionHandler.sendPlayerString(gameId, "special");
     }//GEN-LAST:event_btnSpecialActionPerformed
 
     private void btnUndoActionPerformed(java.awt.event.ActionEvent evt) {
+    	setLastResponse();
         SessionHandler.sendPlayerAction(PlayerAction.UNDO, gameId, null);
     }
 
@@ -300,6 +313,10 @@ public class FeedbackPanel extends javax.swing.JPanel {
 
     public void disableUndo() {
         this.helper.setUndoEnabled(false);
+    }
+    
+    public void setLastResponse() {
+    	this.lastResponse = LocalDateTime.now();
     }
 
     private javax.swing.JButton btnLeft;

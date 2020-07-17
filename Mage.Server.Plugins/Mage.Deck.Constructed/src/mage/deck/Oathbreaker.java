@@ -20,7 +20,7 @@ public class Oathbreaker extends Vintage {
 
     public Oathbreaker() {
         super();
-        this.name = "Oathbreaker";
+        setName("Oathbreaker");
 
         // banned = vintage + oathbreaker's list: https://oathbreakermtg.org/banned-list/
         // last updated 4/24/20 - Dark Ritual banned
@@ -82,6 +82,7 @@ public class Oathbreaker extends Vintage {
     @Override
     public boolean validate(Deck deck) {
         boolean valid = true;
+        invalid.clear();
 
         if (deck.getCards().size() + deck.getSideboard().size() != 60) {
             invalid.put("Deck", "Must contain " + 60 + " cards: has " + (deck.getCards().size() + deck.getSideboard().size()) + " cards");

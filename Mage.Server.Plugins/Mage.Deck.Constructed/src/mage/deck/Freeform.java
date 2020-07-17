@@ -12,6 +12,14 @@ public class Freeform extends DeckValidator {
         super("Constructed - Freeform");
     }
 
+    public Freeform(String name) {
+        super(name);
+    }
+
+    public Freeform(String name, String shortName) {
+        super(name, shortName);
+    }
+
     @Override
     public int getDeckMinSize() {
         return 40;
@@ -25,6 +33,7 @@ public class Freeform extends DeckValidator {
     @Override
     public boolean validate(Deck deck) {
         boolean valid = true;
+        invalid.clear();
         // http://magic.wizards.com/en/gameinfo/gameplay/formats/freeform
         if (deck.getCards().size() < getDeckMinSize()) {
             invalid.put("Deck", "Must contain at least " + getDeckMinSize() + " cards: has only " + deck.getCards().size() + " cards");

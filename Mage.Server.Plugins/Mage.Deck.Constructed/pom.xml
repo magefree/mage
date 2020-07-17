@@ -46,7 +46,6 @@
             </plugin>
 
         </plugins>
-
         <finalName>mage-deck-constructed</finalName>
     </build>
 

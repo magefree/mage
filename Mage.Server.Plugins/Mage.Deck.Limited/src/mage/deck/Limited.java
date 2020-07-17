@@ -28,6 +28,7 @@ public class Limited extends DeckValidator {
     @Override
     public boolean validate(Deck deck) {
         boolean valid = true;
+        invalid.clear();
         //20091005 - 100.2b
         if (deck.getCards().size() < getDeckMinSize()) {
             invalid.put("Deck", "Must contain at least " + getDeckMinSize() + " cards: has only " + deck.getCards().size() + " cards");
