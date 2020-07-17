@@ -1010,7 +1010,7 @@ public class VerifyCardDataTest {
     public void showCardInfo() throws Exception {
         // debug only: show direct card info (takes it from class file, not from db repository)
         // can check multiple cards at once, example: name1;name2;name3
-        String cardNames = "Stormwing Entity";
+        String cardNames = "Armed // Dangerous;Beacon Behemoth;Grizzly Bears";
         CardScanner.scan();
         Arrays.stream(cardNames.split(";")).forEach(cardName -> {
             cardName = cardName.trim();
