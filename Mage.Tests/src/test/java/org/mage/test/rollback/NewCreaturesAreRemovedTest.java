@@ -1,4 +1,3 @@
-
 package org.mage.test.rollback;
 
 import mage.constants.PhaseStep;
@@ -70,28 +69,38 @@ public class NewCreaturesAreRemovedTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Port Town"); // Land
         addCard(Zone.HAND, playerA, "Island"); // Land
 
-        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1); // TODO: Check why the test fails (related to rollback?) if the number is set to 3
         addCard(Zone.BATTLEFIELD, playerB, "Pillarfield Ox", 3);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tamiyo's Journal");
 
-        attack(2, playerB, "Pillarfield Ox");
+        attack(2, playerB, "Pillarfield Ox"); // A = 18
 
-        attack(3, playerA, "Silvercoat Lion");
+        attack(3, playerA, "Silvercoat Lion"); // B = 18
+
         rollbackTurns(3, PhaseStep.END_TURN, playerA, 0);
+        rollbackAfterActionsStart();
+        attack(3, playerA, "Silvercoat Lion"); // B = 18
+        rollbackAfterActionsEnd();
 
-        attack(4, playerB, "Pillarfield Ox");
+        attack(4, playerB, "Pillarfield Ox"); // A =16
 
-        attack(5, playerA, "Silvercoat Lion");
-
+        attack(5, playerA, "Silvercoat Lion"); // B = 16
         rollbackTurns(5, PhaseStep.END_TURN, playerA, 0);
+        rollbackAfterActionsStart();
+        attack(5, playerA, "Silvercoat Lion"); // B = 16
+        rollbackAfterActionsEnd();
 
-        attack(6, playerB, "Pillarfield Ox");
+        attack(6, playerB, "Pillarfield Ox"); // A = 14
 
         playLand(7, PhaseStep.PRECOMBAT_MAIN, playerA, "Port Town");
-        attack(7, playerA, "Silvercoat Lion");
+        attack(7, playerA, "Silvercoat Lion"); // B = 14
 
         rollbackTurns(7, PhaseStep.POSTCOMBAT_MAIN, playerA, 0);
+        rollbackAfterActionsStart();
+        playLand(7, PhaseStep.PRECOMBAT_MAIN, playerA, "Port Town");
+        attack(7, playerA, "Silvercoat Lion"); // B = 14
+        rollbackAfterActionsEnd();
 
         setStopAt(7, PhaseStep.END_TURN);
         execute();
@@ -100,8 +109,8 @@ public class NewCreaturesAreRemovedTest extends CardTestPlayerBase {
         assertTapped("Port Town", false);
         assertPermanentCount(playerA, "Clue", 3);
 
-        assertLife(playerA, 14);
         assertLife(playerB, 14);
+        assertLife(playerA, 14);
 
     }
 

@@ -95,20 +95,20 @@ public class JaceTest extends CardTestPlayerBase {
 
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Draw a card");
         setChoice(playerA, "Pillarfield Ox");
-                     
-        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+
+        rollbackTurns(3, PhaseStep.BEGIN_COMBAT, playerA, 0); // Start of turn 3
+
+        setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        
-        currentGame.rollbackTurns(0); // Start of turn 3
 
         assertGraveyardCount(playerA, "Pillarfield Ox", 0); // Goes back to hand
         assertHandCount(playerA, "Pillarfield Ox", 1);
-        
+
         assertExileCount("Jace, Vryn's Prodigy", 0);
-        
+
         assertPermanentCount(playerA, "Jace, Telepath Unbound", 0);
         assertPermanentCount(playerA, "Jace, Vryn's Prodigy", 1);
-        
+
         Assert.assertFalse("Jace, Vryn's Prodigy may not be flipped", getPermanent("Jace, Vryn's Prodigy").isFlipped());
     }
 
@@ -119,7 +119,7 @@ public class JaceTest extends CardTestPlayerBase {
         // exile Jace, Vryn's Prodigy, then return him to the battefield transformed under his owner's control.
         String jVryn = "Jace, Vryn's Prodigy"; // {U}{1} 0/2
 
-        //−3: You may cast target instant or sorcery card from your graveyard this turn. If that card would be put into your graveyard this turn, exile it instead.        
+        //−3: You may cast target instant or sorcery card from your graveyard this turn. If that card would be put into your graveyard this turn, exile it instead.
         String jTelepath = "Jace, Telepath Unbound"; // 5 loyalty
 
         // Sorcery, Suspend 4 {U}. Target player draws three cards.

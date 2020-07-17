@@ -1,4 +1,3 @@
-
 package org.mage.test.rollback;
 
 import mage.constants.PhaseStep;
@@ -50,6 +49,7 @@ public class TransformTest extends CardTestPlayerBase {
         // BACK: It That Rides as One
         // Creature 4/4 First strike, lifelink
         addCard(Zone.HAND, playerA, "Lone Rider"); // Creature {1}{W} 1/1
+
         // When Venerable Monk enters the battlefield, you gain 2 life.
         addCard(Zone.HAND, playerA, "Venerable Monk"); // Creature {2}{W} 2/2
 
@@ -59,6 +59,11 @@ public class TransformTest extends CardTestPlayerBase {
         attack(3, playerA, "Lone Rider");
 
         rollbackTurns(3, PhaseStep.END_TURN, playerA, 0);
+
+        castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Venerable Monk");
+
+        attack(3, playerA, "Lone Rider");
+
         setStopAt(4, PhaseStep.PRECOMBAT_MAIN);
         execute();
 

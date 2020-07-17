@@ -1,8 +1,14 @@
 package org.mage.test.player;
 
+import java.io.Serializable;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import mage.MageItem;
 import mage.MageObject;
 import mage.MageObjectReference;
+import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.*;
 import mage.abilities.costs.AlternativeSourceCosts;
@@ -57,14 +63,6 @@ import mage.util.CardUtil;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Ignore;
-
-import java.io.Serializable;
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-import mage.Mana;
-
 import static org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl.*;
 
 /**
@@ -87,7 +85,8 @@ public class TestPlayer implements Player {
     private boolean AIPlayer; // full playable AI
     private boolean AICanChooseInStrictMode = false; // AI can choose in custom aiXXX commands (e.g. on one priority or step)
     private final List<PlayerAction> actions = new ArrayList<>();
-    private final Map<PlayerAction, PhaseStep> actionsToRemovesLater = new HashMap<>(); // remove actions later, on next step (e.g. for AI commands)
+    private final Map<PlayerAction, PhaseStep> actionsToRemoveLater = new HashMap<>(); // remove actions later, on next step (e.g. for AI commands)
+    private final Map<Integer, HashMap<UUID, ArrayList<PlayerAction>>> rollbackActions = new HashMap<>(); // actions to add after a executed rollback
     private final List<String> choices = new ArrayList<>(); // choices stack for choice
     private final List<String> targets = new ArrayList<>(); // targets stack for choose (it's uses on empty direct target by cast command)
     private final Map<String, UUID> aliases = new HashMap<>(); // aliases for game objects/players (use it for cards with same name to save and use)
@@ -552,16 +551,16 @@ public class TestPlayer implements Player {
     @Override
     public boolean priority(Game game) {
         // later remove actions (ai commands related)
-        if (actionsToRemovesLater.size() > 0) {
+        if (actionsToRemoveLater.size() > 0) {
             List<PlayerAction> removed = new ArrayList<>();
-            actionsToRemovesLater.forEach((action, step) -> {
+            actionsToRemoveLater.forEach((action, step) -> {
                 if (game.getStep().getType() != step) {
                     action.onActionRemovedLater(game, this);
                     actions.remove(action);
                     removed.add(action);
                 }
             });
-            removed.forEach(actionsToRemovesLater::remove);
+            removed.forEach(actionsToRemoveLater::remove);
         }
 
         int numberOfActions = actions.size();
@@ -681,11 +680,15 @@ public class TestPlayer implements Player {
                     String[] groups = command.split("\\$");
                     if (groups.length > 0) {
                         if (groups[0].equals("Rollback")) {
-                            if (groups.length > 1 && groups[1].startsWith("turns=")) {
+                            if (groups.length > 2 && groups[1].startsWith("turns=") && groups[2].startsWith("rollbackBlock=")) {
                                 int turns = Integer.parseInt(groups[1].substring(6));
+                                int rollbackBlockNumber = Integer.parseInt(groups[2].substring(14));
                                 game.rollbackTurns(turns);
                                 actions.remove(action);
+                                addActionsAfterRollback(game, rollbackBlockNumber);
                                 return true;
+                            } else {
+                                Assert.fail("Rollback command misses parameter: " + command);
                             }
                         }
                         if (groups[0].equals("Concede")) {
@@ -710,7 +713,7 @@ public class TestPlayer implements Player {
                     // play step
                     if (command.equals(AI_COMMAND_PLAY_STEP)) {
                         AICanChooseInStrictMode = true; // disable on action's remove
-                        actionsToRemovesLater.put(action, game.getStep().getType());
+                        actionsToRemoveLater.put(action, game.getStep().getType());
                         computerPlayer.priority(game);
                         return true;
                     }
@@ -1008,6 +1011,32 @@ public class TestPlayer implements Player {
         return false;
     }
 
+    /**
+     * Adds actions to the player actions after an executed rollback Actions
+     * have to be added after the rollback becauuse otherwise the actions are
+     * not valid because otehr ot the same actions are already taken before the
+     * rollback.
+     *
+     * @param game
+     * @param rollbackBlock rollback block to add the actions for
+     */
+    private void addActionsAfterRollback(Game game, int rollbackBlockNumber) {
+        Map<UUID, ArrayList<PlayerAction>> rollbackBlock = rollbackActions.get(rollbackBlockNumber);
+        if (rollbackBlock != null && !rollbackBlock.isEmpty()) {
+            for (Map.Entry<UUID, ArrayList<PlayerAction>> entry : rollbackBlock.entrySet()) {
+                TestPlayer testPlayer = (TestPlayer) game.getPlayer(entry.getKey());
+                if (testPlayer != null) {
+                    // Add the actions at the start of the action list
+                    int pos = 0;
+                    for (PlayerAction playerAction : entry.getValue()) {
+                        testPlayer.getActions().add(pos, playerAction);
+                        pos++;
+                    }
+                }
+            }
+        }
+    }
+
     private void tryToPlayPriority(Game game) {
         if (AIPlayer) {
             computerPlayer.priority(game);
@@ -1081,13 +1110,13 @@ public class TestPlayer implements Player {
 
         List<String> data = cards.stream()
                 .map(c -> (((c instanceof PermanentToken) ? "[T] " : "[C] ")
-                        + c.getIdName()
-                        + (c.isCopy() ? " [copy of " + c.getCopyFrom().getId().toString().substring(0, 3) + "]" : "")
-                        + " - " + c.getPower().getValue() + "/" + c.getToughness().getValue()
-                        + (c.isPlaneswalker() ? " - L" + c.getCounters(game).getCount(CounterType.LOYALTY) : "")
-                        + ", " + (c.isTapped() ? "Tapped" : "Untapped")
-                        + getPrintableAliases(", [", c.getId(), "]")
-                        + (c.getAttachedTo() == null ? "" : ", attached to " + game.getPermanent(c.getAttachedTo()).getIdName())))
+                + c.getIdName()
+                + (c.isCopy() ? " [copy of " + c.getCopyFrom().getId().toString().substring(0, 3) + "]" : "")
+                + " - " + c.getPower().getValue() + "/" + c.getToughness().getValue()
+                + (c.isPlaneswalker() ? " - L" + c.getCounters(game).getCount(CounterType.LOYALTY) : "")
+                + ", " + (c.isTapped() ? "Tapped" : "Untapped")
+                + getPrintableAliases(", [", c.getId(), "]")
+                + (c.getAttachedTo() == null ? "" : ", attached to " + game.getPermanent(c.getAttachedTo()).getIdName())))
                 .sorted()
                 .collect(Collectors.toList());
 
@@ -1111,12 +1140,12 @@ public class TestPlayer implements Player {
 
         List<String> data = abilities.stream()
                 .map(a -> (a.getZone() + " -> "
-                        + a.getSourceObject(game).getIdName() + " -> "
-                        + (a.toString().startsWith("Cast ") ? "[" + a.getManaCostsToPay().getText() + "] -> " : "") // printed cost, not modified
-                        + (a.toString().length() > 0
-                        ? a.toString().substring(0, Math.min(20, a.toString().length()))
-                        : a.getClass().getSimpleName())
-                        + "..."))
+                + a.getSourceObject(game).getIdName() + " -> "
+                + (a.toString().startsWith("Cast ") ? "[" + a.getManaCostsToPay().getText() + "] -> " : "") // printed cost, not modified
+                + (a.toString().length() > 0
+                ? a.toString().substring(0, Math.min(20, a.toString().length()))
+                : a.getClass().getSimpleName())
+                + "..."))
                 .sorted()
                 .collect(Collectors.toList());
 
@@ -1531,7 +1560,7 @@ public class TestPlayer implements Player {
         UUID defenderId = null;
         boolean mustAttackByAction = false;
         boolean madeAttackByAction = false;
-        for (Iterator<org.mage.test.player.PlayerAction> it = actions.iterator(); it.hasNext(); ) {
+        for (Iterator<org.mage.test.player.PlayerAction> it = actions.iterator(); it.hasNext();) {
             PlayerAction action = it.next();
 
             // aiXXX commands
@@ -2112,7 +2141,7 @@ public class TestPlayer implements Player {
             // skip targets
             if (targets.get(0).equals(TARGET_SKIP)) {
                 Assert.assertTrue("found skip target, but it require more targets, needs "
-                                + (target.getMinNumberOfTargets() - target.getTargets().size()) + " more",
+                        + (target.getMinNumberOfTargets() - target.getTargets().size()) + " more",
                         target.getTargets().size() >= target.getMinNumberOfTargets());
                 targets.remove(0);
                 return true;
@@ -2423,7 +2452,7 @@ public class TestPlayer implements Player {
 
         this.chooseStrictModeFailed("choice", game,
                 "Triggered list (total " + abilities.size() + "):\n"
-                        + abilities.stream().map(a -> getInfo(a, game)).collect(Collectors.joining("\n")));
+                + abilities.stream().map(a -> getInfo(a, game)).collect(Collectors.joining("\n")));
         return computerPlayer.chooseTriggeredAbility(abilities, game);
     }
 
@@ -2538,16 +2567,7 @@ public class TestPlayer implements Player {
 
     @Override
     public void restore(Player player) {
-        this.modesSet.clear();
-        this.modesSet.addAll(((TestPlayer) player).modesSet);
-        this.actions.clear();
-        this.actions.addAll(((TestPlayer) player).actions);
-        this.choices.clear();
-        this.choices.addAll(((TestPlayer) player).choices);
-        this.targets.clear();
-        this.targets.addAll(((TestPlayer) player).targets);
-        this.aliases.clear();
-        this.aliases.putAll(((TestPlayer) player).aliases);
+        // no rollback for test player meta data (modesSet, actions, choices, targets, aliases)
         computerPlayer.restore(player);
     }
 
@@ -3275,17 +3295,17 @@ public class TestPlayer implements Player {
     public ManaOptions getManaAvailable(Game game) {
         return computerPlayer.getManaAvailable(game);
     }
-    
+
     @Override
     public void addAvailableTriggeredMana(List<Mana> availableTriggeredMana) {
         computerPlayer.addAvailableTriggeredMana(availableTriggeredMana);
-    }  
+    }
 
     @Override
     public List<List<Mana>> getAvailableTriggeredMana() {
         return computerPlayer.getAvailableTriggeredMana();
     }
-    
+
     @Override
     public List<ActivatedAbility> getPlayable(Game game, boolean hidden) {
         return computerPlayer.getPlayable(game, hidden);
@@ -3681,7 +3701,7 @@ public class TestPlayer implements Player {
             // skip targets
             if (targets.get(0).equals(TARGET_SKIP)) {
                 Assert.assertTrue("found skip target, but it require more targets, needs "
-                                + (target.getMinNumberOfTargets() - target.getTargets().size()) + " more",
+                        + (target.getMinNumberOfTargets() - target.getTargets().size()) + " more",
                         target.getTargets().size() >= target.getMinNumberOfTargets());
                 targets.remove(0);
                 return false; // false in chooseTargetAmount = stop to choose
@@ -4031,4 +4051,9 @@ public class TestPlayer implements Player {
     public void setAICanChooseInStrictMode(boolean AICanChooseInStrictMode) {
         this.AICanChooseInStrictMode = AICanChooseInStrictMode;
     }
+
+    public Map<Integer, HashMap<UUID, ArrayList<org.mage.test.player.PlayerAction>>> getRollbackActions() {
+        return rollbackActions;
+    }
+
 }

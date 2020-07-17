@@ -964,9 +964,8 @@ public class MorphTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        // 1 action must be here ("no" option is restores on failed morph call in playLand)
-        //assertAllCommandsUsed();
-        assertChoicesCount(playerA, 1);
+
+        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Zoetic Cavern", 1);
     }
