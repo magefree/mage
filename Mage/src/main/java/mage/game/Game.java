@@ -1,5 +1,8 @@
 package mage.game;
 
+import java.io.Serializable;
+import java.util.*;
+import java.util.stream.Collectors;
 import mage.MageItem;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -41,10 +44,6 @@ import mage.players.PlayerList;
 import mage.players.Players;
 import mage.util.MessageToClient;
 import mage.util.functions.ApplyToPermanent;
-
-import java.io.Serializable;
-import java.util.*;
-import java.util.stream.Collectors;
 
 public interface Game extends MageItem, Serializable {
 
@@ -301,8 +300,8 @@ public interface Game extends MageItem, Serializable {
     /**
      * Creates and fires an damage prevention event
      *
-     * @param damageEvent     damage event that will be replaced (instanceof check
-     *                        will be done)
+     * @param damageEvent     damage event that will be replaced (instanceof
+     *                        check will be done)
      * @param source          ability that's the source of the prevention effect
      * @param game
      * @param amountToPrevent max preventable amount
@@ -313,9 +312,10 @@ public interface Game extends MageItem, Serializable {
     /**
      * Creates and fires an damage prevention event
      *
-     * @param event            damage event that will be replaced (instanceof check will be
-     *                         done)
-     * @param source           ability that's the source of the prevention effect
+     * @param event            damage event that will be replaced (instanceof
+     *                         check will be done)
+     * @param source           ability that's the source of the prevention
+     *                         effect
      * @param game
      * @param preventAllDamage true if there is no limit to the damage that can
      *                         be prevented
@@ -489,4 +489,7 @@ public interface Game extends MageItem, Serializable {
         return getCommandersIds(player, CommanderCardType.ANY);
     }
 
+    void setGameStopped(boolean gameStopped);
+
+    boolean isGameStopped();
 }
