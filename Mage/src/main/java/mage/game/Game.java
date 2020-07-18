@@ -373,7 +373,16 @@ public interface Game extends MageItem, Serializable {
 
     void addCommander(Commander commander);
 
-    void addPermanent(Permanent permanent);
+    /**
+     * Adds a permanent to the battlefield
+     *
+     * @param permanent
+     * @param createOrder upcounting number from state about the create order of
+     *                    all permanents. Can equal for multiple permanents, if
+     *                    they go to battlefield at the same time. If the value
+     *                    is set to 0, a next number will be set automatically.
+     */
+    void addPermanent(Permanent permanent, int createOrder);
 
     // priority method
     void sendPlayerAction(PlayerAction playerAction, UUID playerId, Object data);

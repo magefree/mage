@@ -187,6 +187,7 @@ public abstract class GameImpl implements Game, Serializable {
         this.startLife = game.startLife;
         this.enterWithCounters.putAll(game.enterWithCounters);
         this.startingSize = game.startingSize;
+        this.gameStopped = game.gameStopped;
     }
 
     @Override
@@ -1419,7 +1420,7 @@ public abstract class GameImpl implements Game, Serializable {
         if (spell != null) {
             if (spell.getCommandedBy() != null) {
                 UUID commandedBy = spell.getCommandedBy();
-                UUID spellControllerId = null;
+                UUID spellControllerId;
                 if (commandedBy.equals(spell.getControllerId())) {
                     spellControllerId = spell.getSpellAbility().getFirstTarget(); // i.e. resolved spell is Word of Command
                 } else {
@@ -1605,9 +1606,12 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public void addPermanent(Permanent permanent) {
+    public void addPermanent(Permanent permanent, int createOrder) {
+        if (createOrder == 0) {
+            createOrder = getState().getNextPermanentOrderNumber();
+        }
+        permanent.setCreateOrder(createOrder);
         getBattlefield().addPermanent(permanent);
-        permanent.setCreateOrder(getState().getNextPermanentOrderNumber());
     }
 
     @Override
@@ -2254,30 +2258,38 @@ public abstract class GameImpl implements Game, Serializable {
                 }
             }
         }
-        //704.5m  - World Enchantments
+        //704.5k  - World Enchantments
         if (worldEnchantment.size() > 1) {
             int newestCard = -1;
+            Set<UUID> controllerIdOfNewest = new HashSet<>();
             Permanent newestPermanent = null;
             for (Permanent permanent : worldEnchantment) {
                 if (newestCard == -1) {
                     newestCard = permanent.getCreateOrder();
                     newestPermanent = permanent;
+                    controllerIdOfNewest.clear();
+                    controllerIdOfNewest.add(permanent.getControllerId());
                 } else if (newestCard < permanent.getCreateOrder()) {
                     newestCard = permanent.getCreateOrder();
                     newestPermanent = permanent;
+                    controllerIdOfNewest.clear();
+                    controllerIdOfNewest.add(permanent.getControllerId());
                 } else if (newestCard == permanent.getCreateOrder()) {
+                    //  In the event of a tie for the shortest amount of time, all are put into their owners’ graveyards. This is called the “world rule.”
                     newestPermanent = null;
+                    controllerIdOfNewest.add(permanent.getControllerId());
                 }
             }
+            for (UUID controllerId : controllerIdOfNewest) {
+                PlayerList newestPermanentControllerRange = state.getPlayersInRange(controllerId, this);
 
-            PlayerList newestPermanentControllerRange = state.getPlayersInRange(newestPermanent.getControllerId(), this);
-
-            // 801.12 The "world rule" applies to a permanent only if other world permanents are within its controller's range of influence.
-            for (Permanent permanent : worldEnchantment) {
-                if (newestPermanentControllerRange.contains(permanent.getControllerId())
-                        && !Objects.equals(newestPermanent, permanent)) {
-                    movePermanentToGraveyardWithInfo(permanent);
-                    somethingHappened = true;
+                // 801.12 The "world rule" applies to a permanent only if other world permanents are within its controller's range of influence.
+                for (Permanent permanent : worldEnchantment) {
+                    if (newestPermanentControllerRange.contains(permanent.getControllerId())
+                            && !Objects.equals(newestPermanent, permanent)) {
+                        movePermanentToGraveyardWithInfo(permanent);
+                        somethingHappened = true;
+                    }
                 }
             }
         }
@@ -2788,7 +2800,7 @@ public abstract class GameImpl implements Game, Serializable {
         }
         if (amountToPrevent != Integer.MAX_VALUE) {
             // set remaining amount
-            result.setRemainingAmount(amountToPrevent -= result.getPreventedDamage());
+            result.setRemainingAmount(amountToPrevent - result.getPreventedDamage());
         }
         MageObject damageSource = game.getObject(damageEvent.getSourceId());
         MageObject preventionSource = game.getObject(source.getSourceId());
@@ -3058,7 +3070,7 @@ public abstract class GameImpl implements Game, Serializable {
                 PermanentCard newPermanent = new PermanentCard(permanentCard.getCard(), ownerId, this);
                 getPermanentsEntering().put(newPermanent.getId(), newPermanent);
                 newPermanent.entersBattlefield(newPermanent.getId(), this, Zone.OUTSIDE, false);
-                getBattlefield().addPermanent(newPermanent);
+                addPermanent(newPermanent, getState().getNextPermanentOrderNumber());
                 getPermanentsEntering().remove(newPermanent.getId());
                 newPermanent.removeSummoningSickness();
                 if (permanentCard.isTapped()) {

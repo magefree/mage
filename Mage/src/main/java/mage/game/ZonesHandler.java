@@ -1,5 +1,6 @@
 package mage.game;
 
+import java.util.*;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
@@ -18,8 +19,6 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetCard;
 
-import java.util.*;
-
 /**
  * Created by samuelsandeen on 9/6/16.
  */
@@ -27,7 +26,7 @@ public final class ZonesHandler {
 
     public static boolean cast(ZoneChangeInfo info, Game game) {
         if (maybeRemoveFromSourceZone(info, game)) {
-            placeInDestinationZone(info, game);
+            placeInDestinationZone(info, game, 0);
             // create a group zone change event if a card is moved to stack for casting (it's always only one card, but some effects check for group events (one or more xxx))
             Set<Card> cards = new HashSet<>();
             Set<PermanentToken> tokens = new HashSet<>();
@@ -53,7 +52,7 @@ public final class ZonesHandler {
 
     public static List<ZoneChangeInfo> moveCards(List<ZoneChangeInfo> zoneChangeInfos, Game game) {
         // Handle Unmelded Meld Cards
-        for (ListIterator<ZoneChangeInfo> itr = zoneChangeInfos.listIterator(); itr.hasNext(); ) {
+        for (ListIterator<ZoneChangeInfo> itr = zoneChangeInfos.listIterator(); itr.hasNext();) {
             ZoneChangeInfo info = itr.next();
             MeldCard card = game.getMeldCard(info.event.getTargetId());
             // Copies should be handled as normal cards.
@@ -67,8 +66,13 @@ public final class ZonesHandler {
             }
         }
         zoneChangeInfos.removeIf(zoneChangeInfo -> !maybeRemoveFromSourceZone(zoneChangeInfo, game));
+        int createOrder = 0;
         for (ZoneChangeInfo zoneChangeInfo : zoneChangeInfos) {
-            placeInDestinationZone(zoneChangeInfo, game);
+            if (createOrder == 0 && Zone.BATTLEFIELD.equals(zoneChangeInfo.event.getToZone())) {
+                // All permanents go to battlefield at the same time (=create order)
+                createOrder = game.getState().getNextPermanentOrderNumber();
+            }
+            placeInDestinationZone(zoneChangeInfo, game, createOrder);
             if (game.getPhase() != null) { // moving cards to zones before game started does not need events
                 game.addSimultaneousEvent(zoneChangeInfo.event);
             }
@@ -76,14 +80,14 @@ public final class ZonesHandler {
         return zoneChangeInfos;
     }
 
-    private static void placeInDestinationZone(ZoneChangeInfo info, Game game) {
+    private static void placeInDestinationZone(ZoneChangeInfo info, Game game, int createOrder) {
         // Handle unmelded cards
         if (info instanceof ZoneChangeInfo.Unmelded) {
             ZoneChangeInfo.Unmelded unmelded = (ZoneChangeInfo.Unmelded) info;
             Zone toZone = null;
             for (ZoneChangeInfo subInfo : unmelded.subInfo) {
                 toZone = subInfo.event.getToZone();
-                placeInDestinationZone(subInfo, game);
+                placeInDestinationZone(subInfo, game, createOrder);
             }
             // We arbitrarily prefer the bottom half card. This should never be relevant.
             if (toZone != null) {
@@ -161,7 +165,7 @@ public final class ZonesHandler {
                     break;
                 case BATTLEFIELD:
                     Permanent permanent = event.getTarget();
-                    game.addPermanent(permanent);
+                    game.addPermanent(permanent, createOrder);
                     game.getPermanentsEntering().remove(permanent.getId());
                     break;
                 default:
@@ -197,7 +201,7 @@ public final class ZonesHandler {
         if (info instanceof ZoneChangeInfo.Unmelded) {
             ZoneChangeInfo.Unmelded unmelded = (ZoneChangeInfo.Unmelded) info;
             MeldCard meld = game.getMeldCard(info.event.getTargetId());
-            for (Iterator<ZoneChangeInfo> itr = unmelded.subInfo.iterator(); itr.hasNext(); ) {
+            for (Iterator<ZoneChangeInfo> itr = unmelded.subInfo.iterator(); itr.hasNext();) {
                 ZoneChangeInfo subInfo = itr.next();
                 if (!maybeRemoveFromSourceZone(subInfo, game)) {
                     itr.remove();

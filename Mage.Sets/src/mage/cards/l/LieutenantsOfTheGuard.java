@@ -1,4 +1,3 @@
-
 package mage.cards.l;
 
 import java.util.UUID;
@@ -11,8 +10,8 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -27,13 +26,15 @@ public final class LieutenantsOfTheGuard extends CardImpl {
 
     public LieutenantsOfTheGuard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}");
-        
+
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // <i>Council's dilemma</i> &mdash; When Lieutenants of the Guard enters the battlefield, starting with you, each player votes for strength or numbers. Put a +1/+1 counter on Lieutenants of the Guard for each strength vote and put a 1/1 white Soldier creature token onto the battlefield for each numbers vote.
+        // <i>Council's dilemma</i> &mdash; When Lieutenants of the Guard enters the battlefield, starting with you,
+        // each player votes for strength or numbers. Put a +1/+1 counter on Lieutenants of the Guard for each
+        // strength vote and put a 1/1 white Soldier creature token onto the battlefield for each numbers vote.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new LieutenantsOfTheGuardDilemmaEffect(), false, "<i>Council's dilemma</i> — "));
     }
 
@@ -48,6 +49,7 @@ public final class LieutenantsOfTheGuard extends CardImpl {
 }
 
 class LieutenantsOfTheGuardDilemmaEffect extends CouncilsDilemmaVoteEffect {
+
     public LieutenantsOfTheGuardDilemmaEffect() {
         super(Outcome.Benefit);
         this.staticText = "starting with you, each player votes for strength or numbers. Put a +1/+1 counter on {this} for each strength vote and put a 1/1 white Soldier creature token onto the battlefield for each numbers vote.";
@@ -62,7 +64,9 @@ class LieutenantsOfTheGuardDilemmaEffect extends CouncilsDilemmaVoteEffect {
         Player controller = game.getPlayer(source.getControllerId());
 
         //If no controller, exit out here and do not vote.
-        if (controller == null) return false;
+        if (controller == null) {
+            return false;
+        }
 
         this.vote("strength", "numbers", controller, game, source);
 
@@ -70,8 +74,9 @@ class LieutenantsOfTheGuardDilemmaEffect extends CouncilsDilemmaVoteEffect {
 
         //Strength Votes
         //If strength received zero votes or the permanent is no longer on the battlefield, do not attempt to put P1P1 counters on it.
-        if (voteOneCount > 0 && permanent != null)
+        if (voteOneCount > 0 && permanent != null) {
             permanent.addCounters(CounterType.P1P1.createInstance(voteOneCount), source, game);
+        }
 
         //Numbers Votes
         if (voteTwoCount > 0) {
