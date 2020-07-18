@@ -1,4 +1,3 @@
-
 package org.mage.test.cards.abilities.keywords;
 
 import mage.constants.PhaseStep;
@@ -158,12 +157,10 @@ public class MeldTest extends CardTestPlayerBase {
 
         // {T}: Add {C}.
         // {R},{T}: Target creature gains haste until end of turn.
-        // {3}{R}{R},{T}: If you both own and control Hanweir Battlements and a creature named Hanweir Garrison, exile them, then meld them into Hanweir, the Writhing Township.
+        // {3}{R}{R},{T}: If you both own and control Hanweir Battlements and a creature named Hanweir Garrison, exile them,
+        // then meld them into Hanweir, the Writhing Township.
         addCard(Zone.BATTLEFIELD, playerA, "Hanweir Battlements"); // Land
 
-        // Brisela, Voice of Nightmares  9/10
-        // Flying, First strike, Vigilance, Lifelink
-        // Your opponents can't cast spells with converted mana cost 3 or less.
         addCard(Zone.BATTLEFIELD, playerB, "Island", 1);
         // Return target creature to its owner's hand.
         addCard(Zone.HAND, playerB, "Unsummon", 1); // Instant {U}
@@ -177,6 +174,42 @@ public class MeldTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Unsummon", 1);
 
         assertPermanentCount(playerA, "Hanweir Battlements", 1);
+        assertHandCount(playerA, "Hanweir Garrison", 1);
+
+    }
+
+    @Test
+    public void testUnmeldAfterRollback() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
+
+        // Whenever Hanweir Garrison attacks, put two 1/1 red Human creature tokens onto the battlefield tapped and attacking.
+        // <i>(Melds with Hanweir Battlements.)</i>
+        addCard(Zone.BATTLEFIELD, playerA, "Hanweir Garrison"); // Creature 2/3 {2}{R}
+
+        // {T}: Add {C}.
+        // {R},{T}: Target creature gains haste until end of turn.
+        // {3}{R}{R},{T}: If you both own and control Hanweir Battlements and a creature named Hanweir Garrison, exile them,
+        // then meld them into Hanweir, the Writhing Township.
+        addCard(Zone.BATTLEFIELD, playerA, "Hanweir Battlements"); // Land
+
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 1);
+        // Return target creature to its owner's hand.
+        addCard(Zone.HAND, playerB, "Unsummon", 1); // Instant {U}
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}{R}{R}");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Unsummon", "Hanweir, the Writhing Township");
+
+        rollbackTurns(2, PhaseStep.BEGIN_COMBAT, playerB, 0);
+        rollbackAfterActionsStart();
+        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Unsummon", "Hanweir, the Writhing Township");
+        rollbackAfterActionsEnd();
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerB, "Unsummon", 1);
+
+        assertHandCount(playerA, "Hanweir Battlements", 1);
         assertHandCount(playerA, "Hanweir Garrison", 1);
 
     }

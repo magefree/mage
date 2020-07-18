@@ -56,7 +56,7 @@ public final class ZonesHandler {
             ZoneChangeInfo info = itr.next();
             MeldCard card = game.getMeldCard(info.event.getTargetId());
             // Copies should be handled as normal cards.
-            if (card != null && !card.isMelded() && !card.isCopy()) {
+            if (card != null && !card.isMelded(game) && !card.isCopy()) {
                 ZoneChangeInfo.Unmelded unmelded = new ZoneChangeInfo.Unmelded(info, game);
                 if (unmelded.subInfo.isEmpty()) {
                     itr.remove();
@@ -175,7 +175,7 @@ public final class ZonesHandler {
         game.setZone(event.getTargetId(), event.getToZone());
         if (targetCard instanceof MeldCard && cards != null) {
             if (event.getToZone() != Zone.BATTLEFIELD) {
-                ((MeldCard) targetCard).setMelded(false);
+                ((MeldCard) targetCard).setMelded(false, game);
             }
             for (Card card : cards.getCards(game)) {
                 game.setZone(card.getId(), event.getToZone());
