@@ -36,7 +36,7 @@ public class ExileAttachedEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        // The LKI must be used for this step.  608.2g
+        // The LKI must be used for this step.  608.2g 
         Permanent enchantment = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
         if (controller != null
                 && enchantment != null
