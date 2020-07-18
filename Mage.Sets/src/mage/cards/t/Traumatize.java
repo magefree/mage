@@ -1,5 +1,3 @@
-
-
 package mage.cards.t;
 
 import java.util.UUID;
@@ -9,7 +7,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -21,7 +18,7 @@ import mage.target.TargetPlayer;
 public final class Traumatize extends CardImpl {
 
     public Traumatize(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
 
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new TraumatizeEffect());
@@ -41,7 +38,7 @@ class TraumatizeEffect extends OneShotEffect {
 
     public TraumatizeEffect() {
         super(Outcome.Detriment);
-        staticText = "Target player puts the top half of their library, rounded down, into their graveyard";
+        staticText = "Target player mills half their library, rounded down";
     }
 
     public TraumatizeEffect(final TraumatizeEffect effect) {
@@ -53,7 +50,8 @@ class TraumatizeEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getFirstTarget());
         if (player != null) {
             int amount = player.getLibrary().size() / 2;
-            return player.moveCards(player.getLibrary().getTopCards(game, amount), Zone.GRAVEYARD, source, game);
+            player.millCards(amount, source, game);
+            return true;
         }
         return false;
     }

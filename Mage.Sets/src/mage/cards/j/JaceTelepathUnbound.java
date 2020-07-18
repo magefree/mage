@@ -1,4 +1,3 @@
-
 package mage.cards.j;
 
 import java.util.UUID;
@@ -11,8 +10,8 @@ import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.game.command.emblems.JaceTelepathUnboundEmblem;
@@ -50,7 +49,7 @@ public final class JaceTelepathUnbound extends CardImpl {
         ability.addTarget(new TargetCardInYourGraveyard(new FilterInstantOrSorceryCard()));
         this.addAbility(ability);
 
-        // -9: You get an emblem with "Whenever you cast a spell, target opponent puts the top five cards of their library into their graveyard".
+        // −9: You get an emblem with "Whenever you cast a spell, target opponent mills five cards."
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new JaceTelepathUnboundEmblem()), -9));
     }
 
