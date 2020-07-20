@@ -1,5 +1,7 @@
 package mage.abilities.effects.common.continuous;
 
+import java.util.Locale;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
@@ -12,9 +14,6 @@ import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
-
-import java.util.Locale;
-import java.util.UUID;
 
 /**
  * @author Plopman, JayDi85
@@ -40,12 +39,13 @@ public class CommanderReplacementEffect extends ReplacementEffectImpl {
     /**
      *
      * @param commanderId
-     * @param alsoHand is the replacement effect also applied if commander
-     * object goes to hand zone
-     * @param alsoLibrary is the replacement effect also applied if commander
-     * object goes to library zone
-     * @param forceToMove used for signature spell of Oathbreaker format (spell
-     * is mandatory moved to command zone instead)
+     * @param alsoHand          is the replacement effect also applied if
+     *                          commander object goes to hand zone
+     * @param alsoLibrary       is the replacement effect also applied if
+     *                          commander object goes to library zone
+     * @param forceToMove       used for signature spell of Oathbreaker format
+     *                          (spell is mandatory moved to command zone
+     *                          instead)
      * @param commanderTypeName type of commander object to set the correct text
      */
     public CommanderReplacementEffect(UUID commanderId, boolean alsoHand, boolean alsoLibrary, boolean forceToMove, String commanderTypeName) {
@@ -118,7 +118,7 @@ public class CommanderReplacementEffect extends ReplacementEffectImpl {
                 return true;
         }
         if (forceToMove) {
-            switch (zEvent.getToZone()) {
+            switch (zEvent.getToZone()) { // Normal commander movement is handled in state-based actions in GameImpl
                 case BATTLEFIELD:
                 case GRAVEYARD:
                     return true;
