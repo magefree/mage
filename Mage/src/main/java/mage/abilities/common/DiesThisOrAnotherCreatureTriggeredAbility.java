@@ -1,4 +1,3 @@
-
 package mage.abilities.common;
 
 import mage.MageObject;
@@ -17,6 +16,7 @@ import mage.game.permanent.Permanent;
 public class DiesThisOrAnotherCreatureTriggeredAbility extends TriggeredAbilityImpl {
 
     protected FilterCreaturePermanent filter;
+    private boolean applyFilterOnSource = false;
 
     public DiesThisOrAnotherCreatureTriggeredAbility(Effect effect, boolean optional) {
         this(effect, optional, new FilterCreaturePermanent());
@@ -30,6 +30,12 @@ public class DiesThisOrAnotherCreatureTriggeredAbility extends TriggeredAbilityI
     public DiesThisOrAnotherCreatureTriggeredAbility(DiesThisOrAnotherCreatureTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
+        this.applyFilterOnSource = ability.applyFilterOnSource;
+    }
+
+    public DiesThisOrAnotherCreatureTriggeredAbility setApplyFilterOnSource(boolean applyFilterOnSource) {
+        this.applyFilterOnSource = applyFilterOnSource;
+        return this;
     }
 
     @Override
@@ -68,7 +74,7 @@ public class DiesThisOrAnotherCreatureTriggeredAbility extends TriggeredAbilityI
 
         if (zEvent.isDiesEvent()) {
             if (zEvent.getTarget() != null) {
-                if (zEvent.getTarget().getId().equals(this.getSourceId())) {
+                if (!applyFilterOnSource && zEvent.getTarget().getId().equals(this.getSourceId())) {
                     return true;
                 } else {
                     if (filter.match(zEvent.getTarget(), getSourceId(), getControllerId(), game)) {

@@ -1,5 +1,6 @@
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -22,8 +23,6 @@ import mage.filter.predicate.permanent.CounterPredicate;
 import mage.game.permanent.token.KnightToken;
 import mage.target.common.TargetControlledCreaturePermanent;
 
-import java.util.UUID;
-
 /**
  *
  * @author htrajan
@@ -41,7 +40,7 @@ public final class BasrisLieutenant extends CardImpl {
 
     public BasrisLieutenant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
-        
+
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.KNIGHT);
         this.power = new MageInt(3);
@@ -63,7 +62,7 @@ public final class BasrisLieutenant extends CardImpl {
                 new CreateTokenEffect(new KnightToken()).setText("if it had a +1/+1 counter on it, create a 2/2 white Knight creature token with vigilance"),
                 false,
                 controlledCreatureWithP1P1CounterFilter
-        ));
+        ).setApplyFilterOnSource(true));
     }
 
     private BasrisLieutenant(final BasrisLieutenant card) {
