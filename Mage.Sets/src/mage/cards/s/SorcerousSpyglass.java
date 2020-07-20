@@ -1,5 +1,7 @@
 package mage.cards.s;
 
+import java.util.Optional;
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -14,9 +16,6 @@ import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
 import mage.util.CardUtil;
-
-import java.util.Optional;
-import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -69,7 +68,9 @@ class SorcerousSpyglassEntersEffect extends ChooseACardNameEffect {
                 if (opponent != null) {
                     MageObject sourceObject = game.getObject(source.getSourceId());
                     player.lookAtCards(sourceObject != null ? sourceObject.getIdName() : null, opponent.getHand(), game);
-                    player.chooseUse(Outcome.Benefit, "Press ok to name a card", "You won't be able to resize the window once you do", "Ok", " ", source, game);
+                    player.chooseUse(Outcome.Benefit, "Press Ok to name a card",
+                            "You won't be able to resize the window showing opponents hand once you do",
+                            "Ok", "", source, game);
                 }
             }
         }

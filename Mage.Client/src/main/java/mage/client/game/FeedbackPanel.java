@@ -1,6 +1,4 @@
-
-
- /*
+/*
  * FeedbackPanel.java
  *
  * Created on 23-Dec-2009, 9:54:01 PM
@@ -87,13 +85,13 @@ public class FeedbackPanel extends javax.swing.JPanel {
         String lblText = addAdditionalText(message, options);
         this.helper.setTextArea(lblText);
         //this.lblMessage.setText(lblText);
-        
+
         // Alert user when needing feedback if last dialog was informative, and it has been over 2 seconds since last input
         if (this.mode == FeedbackMode.INFORM && mode != FeedbackMode.INFORM
-        		&& (this.lastResponse == null || this.lastResponse.isBefore(LocalDateTime.now().minusSeconds(2)))) {
-        	AudioManager.playFeedbackNeeded();
+                && (this.lastResponse == null || this.lastResponse.isBefore(LocalDateTime.now().minusSeconds(2)))) {
+            AudioManager.playFeedbackNeeded();
         }
-        
+
         this.mode = mode;
         switch (this.mode) {
             case INFORM:
@@ -187,12 +185,12 @@ public class FeedbackPanel extends javax.swing.JPanel {
             if (options.containsKey("UI.left.btn.text")) {
                 String text = (String) options.get("UI.left.btn.text");
                 this.btnLeft.setText(text);
-                this.helper.setLeft(text, true);
+                this.helper.setLeft(text, !text.isEmpty());
             }
             if (options.containsKey("UI.right.btn.text")) {
                 String text = (String) options.get("UI.right.btn.text");
                 this.btnRight.setText(text);
-                this.helper.setRight(text, true);
+                this.helper.setRight(text, !text.isEmpty());
             }
             if (options.containsKey("dialog")) {
                 connectedDialog = (MageDialog) options.get("dialog");
@@ -253,8 +251,8 @@ public class FeedbackPanel extends javax.swing.JPanel {
     }
 
     private void btnRightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRightActionPerformed
-    	setLastResponse();
-    	if (connectedDialog != null) {
+        setLastResponse();
+        if (connectedDialog != null) {
             connectedDialog.removeDialog();
             connectedDialog = null;
         }
@@ -272,18 +270,18 @@ public class FeedbackPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnRightActionPerformed
 
     private void btnLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLeftActionPerformed
-    	setLastResponse();
+        setLastResponse();
         SessionHandler.sendPlayerBoolean(gameId, true);
         AudioManager.playButtonCancel();
     }//GEN-LAST:event_btnLeftActionPerformed
 
     private void btnSpecialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpecialActionPerformed
-    	setLastResponse();
+        setLastResponse();
         SessionHandler.sendPlayerString(gameId, "special");
     }//GEN-LAST:event_btnSpecialActionPerformed
 
     private void btnUndoActionPerformed(java.awt.event.ActionEvent evt) {
-    	setLastResponse();
+        setLastResponse();
         SessionHandler.sendPlayerAction(PlayerAction.UNDO, gameId, null);
     }
 
@@ -314,9 +312,9 @@ public class FeedbackPanel extends javax.swing.JPanel {
     public void disableUndo() {
         this.helper.setUndoEnabled(false);
     }
-    
+
     public void setLastResponse() {
-    	this.lastResponse = LocalDateTime.now();
+        this.lastResponse = LocalDateTime.now();
     }
 
     private javax.swing.JButton btnLeft;
