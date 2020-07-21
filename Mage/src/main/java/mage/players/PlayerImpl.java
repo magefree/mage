@@ -4297,10 +4297,12 @@ public abstract class PlayerImpl implements Player, Serializable {
                         game.getStack().remove(spell, game);
                     }
                 }
-                game.informPlayers(this.getLogName() + " moves " + (withName ? card.getLogName()
-                        + (card.isCopy() ? " (Copy)" : "") : "a card face down") + ' '
-                        + (fromZone != null ? "from " + fromZone.toString().toLowerCase(Locale.ENGLISH)
-                                + ' ' : "") + "to the exile zone");
+                if (Zone.EXILED.equals(game.getState().getZone(card.getId()))) { // only if target zone was not replaced
+                    game.informPlayers(this.getLogName() + " moves " + (withName ? card.getLogName()
+                            + (card.isCopy() ? " (Copy)" : "") : "a card face down") + ' '
+                            + (fromZone != null ? "from " + fromZone.toString().toLowerCase(Locale.ENGLISH)
+                                    + ' ' : "") + "to the exile zone");
+                }
 
             }
             result = true;
