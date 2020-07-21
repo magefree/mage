@@ -33,7 +33,7 @@ public final class EpitaphGolem extends CardImpl {
         // {2}: Put target card from your graveyard on the bottom of your library.
         Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
-                new PutOnLibraryTargetEffect(true),
+                new PutOnLibraryTargetEffect(false),
                 new ManaCostsImpl("{2}"));
         ability.addTarget(new TargetCardInYourGraveyard());
         this.addAbility(ability);
