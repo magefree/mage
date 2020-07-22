@@ -1,4 +1,7 @@
 # faster builds
+git:
+  depth: false
+  submodules: false
 sudo: false
 dist: trusty
 language: java
