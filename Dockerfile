@@ -8,6 +8,7 @@ COPY . .
 RUN apt-get update \
   && apt-get install -y \
     maven \
+    openjfx \
   && mvn clean install --define skipTests=true
 
 ENTRYPOINT ["mvn"]
