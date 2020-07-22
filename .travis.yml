@@ -7,10 +7,14 @@ sudo: false
 
 language: java
 jdk:
-  - oraclejdk8
   - openjdk11
 before_install:
   - echo "MAVEN_OPTS='-Xmx2g'" > ~/.mavenrc
+
+addons:
+  apt:
+    packages:
+      - openjfx
 # addons:
 #   sonarcloud:
 #     organization: "magefree"
