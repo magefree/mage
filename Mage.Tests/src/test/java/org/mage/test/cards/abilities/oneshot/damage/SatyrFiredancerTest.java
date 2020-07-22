@@ -3,6 +3,7 @@ package org.mage.test.cards.abilities.oneshot.damage;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.game.GameException;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -74,5 +75,64 @@ public class SatyrFiredancerTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
         assertLife(playerB, 19);
         
+    }
+
+    @Test
+    public void testPriceOfProgressMultiplayer() throws GameException {
+        playerC = createPlayer(currentGame, playerC, "PlayerC");
+        addCard(Zone.BATTLEFIELD, playerA, "Satyr Firedancer", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        addCard(Zone.HAND, playerA, "Price of Progress", 1);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Taiga", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Swab Goblin", 1);
+        addCard(Zone.BATTLEFIELD, playerC, "Savannah", 1);
+        addCard(Zone.BATTLEFIELD, playerC, "Grizzly Bears", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Price of Progress");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        execute();
+
+        assertPermanentCount(playerB, "Swab Goblin", 0);
+        assertGraveyardCount(playerB, "Swab Goblin", 1);
+
+        assertPermanentCount(playerC, "Grizzly Bears", 0);
+        assertGraveyardCount(playerC, "Grizzly Bears", 1);
+    }
+
+    @Test
+    public void testMultipleInstanceOfDamage() {
+        addCard(Zone.BATTLEFIELD, playerA, "Satyr Firedancer", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        addCard(Zone.HAND, playerA, "Fiery Confluence", 1);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Taiga", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Bear Cub", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Forest Bear", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Runeclaw Bear", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fiery Confluence");
+        setModeChoice(playerA, "2");
+        setModeChoice(playerA, "2");
+        setModeChoice(playerA, "2");
+
+        addTarget(playerA, "Grizzly Bears");
+        addTarget(playerA, "Bear Cub");
+        addTarget(playerA, "Forest Bear");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        execute();
+
+        assertPermanentCount(playerB, "Grizzly Bears", 0);
+        assertPermanentCount(playerB, "Bear Cub", 0);
+        assertPermanentCount(playerB, "Forest Bear", 0);
+        assertPermanentCount(playerB, "Runeclaw Bear", 1);
+
+        assertGraveyardCount(playerB, "Grizzly Bears", 1);
+        assertGraveyardCount(playerB, "Bear Cub", 1);
+        assertGraveyardCount(playerB, "Forest Bear", 1);
+        assertGraveyardCount(playerB, "Runeclaw Bear", 0);
     }
 }
