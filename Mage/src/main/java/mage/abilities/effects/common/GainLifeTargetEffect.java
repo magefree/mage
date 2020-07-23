@@ -1,17 +1,14 @@
-
-
 package mage.abilities.effects.common;
 
-import mage.constants.Outcome;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
-
-import java.util.UUID;
 
 /**
  *
@@ -42,7 +39,7 @@ public class GainLifeTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (UUID playerId: targetPointer.getTargets(game, source)) {
+        for (UUID playerId : targetPointer.getTargets(game, source)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 player.gainLife(life.calculate(game, source, this), game, source);
@@ -59,12 +56,13 @@ public class GainLifeTargetEffect extends OneShotEffect {
         StringBuilder sb = new StringBuilder();
         String message = life.getMessage();
 
-        if (!mode.getTargets().isEmpty()) {
-            sb.append("target ").append(mode.getTargets().get(0).getTargetName());
+        if (!mode.getTargets().isEmpty() && mode.getTargets().get(0).getMaxNumberOfTargets() == Integer.MAX_VALUE) {
+            sb.append("any number of target players each gain ");
+        } else if (!mode.getTargets().isEmpty()) {
+            sb.append("target ").append(mode.getTargets().get(0).getTargetName()).append(" gains ");
         } else {
-            sb.append("that player");
+            sb.append("that player gains ");
         }
-        sb.append(" gains ");
         if (message.isEmpty() || !message.equals("1")) {
             sb.append(life.toString()).append(' ');
         }
