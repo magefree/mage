@@ -1,5 +1,7 @@
 package mage.abilities.effects.common.cost;
 
+import java.util.Set;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.constants.CostModificationType;
@@ -12,9 +14,6 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.util.CardUtil;
 
-import java.util.Set;
-import java.util.UUID;
-
 /**
  * @author JayDi85
  */
@@ -23,7 +22,7 @@ public class SpellsCostModificationThatTargetSourceEffect extends CostModificati
     private final FilterCard spellFilter;
     private final int modificationAmount;
     private String targetName = "{this}";
-    private TargetController targetController;
+    private final TargetController targetController;
 
     public SpellsCostModificationThatTargetSourceEffect(int modificationAmount, FilterCard spellFilter, TargetController targetController) {
         super(Duration.WhileOnBattlefield, Outcome.Neutral, modificationAmount < 0 ? CostModificationType.REDUCE_COST : CostModificationType.INCREASE_COST);

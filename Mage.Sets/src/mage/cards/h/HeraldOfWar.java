@@ -1,4 +1,3 @@
-
 package mage.cards.h;
 
 import java.util.UUID;
@@ -25,7 +24,7 @@ import mage.util.CardUtil;
 public final class HeraldOfWar extends CardImpl {
 
     public HeraldOfWar(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
         this.subtype.add(SubType.ANGEL);
 
         this.power = new MageInt(3);
@@ -54,7 +53,7 @@ class HeraldOfWarCostReductionEffect extends CostModificationEffectImpl {
 
     HeraldOfWarCostReductionEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        staticText = "Angel spells and Human spells you cast cost {1} less to cast for each +1/+1 counter on Herald of War";
+        staticText = "Angel spells and Human spells you cast cost {1} less to cast for each +1/+1 counter on {this}";
     }
 
     HeraldOfWarCostReductionEffect(HeraldOfWarCostReductionEffect effect) {

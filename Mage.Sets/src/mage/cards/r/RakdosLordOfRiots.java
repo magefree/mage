@@ -15,10 +15,10 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.game.stack.Spell;
 import mage.util.CardUtil;
 
 import java.util.UUID;
+import mage.cards.Card;
 
 /**
  * @author LevelX2
@@ -115,9 +115,12 @@ class RakdosLordOfRiotsCostReductionEffect extends CostModificationEffectImpl {
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         if (abilityToModify instanceof SpellAbility) {
             if (abilityToModify.isControlledBy(source.getControllerId())) {
-                Spell spell = (Spell) game.getStack().getStackObject(abilityToModify.getId());
-                if (spell != null) {
-                    return spell.isCreature();
+                Card spellCard = ((SpellAbility) abilityToModify).getCharacteristics(game);
+                if (spellCard != null) {
+                    if (((SpellAbility) abilityToModify).getSpellAbilityCastMode() != SpellAbilityCastMode.NORMAL) {
+                        spellCard = ((SpellAbility) abilityToModify).getSpellAbilityCastMode().getTypeModifiedCardObjectCopy(spellCard, game);
+                    }
+                    return spellCard.isCreature();
                 }
             }
         }

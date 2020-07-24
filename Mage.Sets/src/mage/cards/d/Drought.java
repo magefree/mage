@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -11,12 +10,12 @@ import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.AbilityType;
+import mage.constants.CardType;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
@@ -54,9 +53,10 @@ public final class Drought extends CardImpl {
 
 class DroughtAdditionalCostEffect extends CostModificationEffectImpl {
 
-    private boolean appliesToSpells;
+    private final boolean appliesToSpells;
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Swamp");
-    static{
+
+    static {
         filter.add(SubType.SWAMP.getPredicate());
     }
 

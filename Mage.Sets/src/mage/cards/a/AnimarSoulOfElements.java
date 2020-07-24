@@ -1,5 +1,6 @@
 package mage.cards.a;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -18,8 +19,6 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
-
-import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -82,9 +81,12 @@ class AnimarCostReductionEffect extends CostModificationEffectImpl {
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         if (abilityToModify instanceof SpellAbility) {
             if (abilityToModify.isControlledBy(source.getControllerId())) {
-                Card card = ((SpellAbility) abilityToModify).getCharacteristics(game);
-                if (card != null) {
-                    return card.isCreature();
+                Card spellCard = ((SpellAbility) abilityToModify).getCharacteristics(game);
+                if (spellCard != null) {
+                    if (((SpellAbility) abilityToModify).getSpellAbilityCastMode() != SpellAbilityCastMode.NORMAL) {
+                        spellCard = ((SpellAbility) abilityToModify).getSpellAbilityCastMode().getTypeModifiedCardObjectCopy(spellCard, game);
+                    }
+                    return spellCard.isCreature();
                 }
             }
         }

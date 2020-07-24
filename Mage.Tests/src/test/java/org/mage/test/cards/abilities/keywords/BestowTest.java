@@ -191,7 +191,6 @@ public class BestowTest extends CardTestPlayerBase {
         addTarget(playerB, playerA); // Away
         addTarget(playerA, "Nyxborn Rollicker");
 
-
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -463,4 +462,26 @@ public class BestowTest extends CardTestPlayerBase {
         Assert.assertFalse("The unattached Nighthowler may not have the aura subtype.", nighthowler.getSubtype(currentGame).contains(SubType.AURA));
     }
 
+    @Test
+    public void testCastBestowWithCostReduction() {
+        // Enchantment Creature — Horror
+        // Bestow {5}{G} (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)
+        // Trample
+        // Enchanted creature gets +3/+3 and has trample.
+        addCard(Zone.HAND, playerA, "Nylea's Emissary"); // Enchantment Creature
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion"); // {1}{W} 2/2 creature
+        // Aura spells you cast cost {1} less to cast.
+        addCard(Zone.BATTLEFIELD, playerA, "Transcendent Envoy", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nylea's Emissary using bestow", "Silvercoat Lion");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Nylea's Emissary", 1);
+        assertPowerToughness(playerA, "Silvercoat Lion", 5, 5);
+        assertType("Nylea's Emissary", CardType.CREATURE, false);
+        assertType("Nylea's Emissary", CardType.ENCHANTMENT, SubType.AURA);
+    }
 }

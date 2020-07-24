@@ -18,7 +18,7 @@ import mage.util.CardUtil;
  */
 public class AbilitiesCostReductionControllerEffect extends CostModificationEffectImpl {
 
-    private Class activatedAbility;
+    private final Class activatedAbility;
 
     public AbilitiesCostReductionControllerEffect(Class activatedAbility, String activatedAbilityName) {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
