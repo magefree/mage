@@ -1,7 +1,5 @@
-
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.dynamicvalue.common.EffectKeyValue;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -15,8 +13,9 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.NestOfScarabsBlackInsectToken;
 
+import java.util.UUID;
+
 /**
- *
  * @author stravant
  */
 public final class NestOfScarabs extends CardImpl {
@@ -63,7 +62,7 @@ class NestOfScarabsTriggeredAbility extends TriggeredAbilityImpl {
             if (permanent == null) {
                 permanent = game.getPermanentEntering(event.getTargetId());
             }
-            if (permanent.isCreature()) {
+            if (permanent != null && permanent.isCreature()) {
                 getEffects().forEach(effect -> effect.setValue("countersAdded", event.getAmount()));
                 return true;
             }
