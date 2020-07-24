@@ -240,4 +240,42 @@ public class TappedForManaRelatedTest extends CardTestPlayerBase {
         Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
         assertManaOptions("{Any}", manaOptions);
     }
+
+    @Test
+    public void TestEyeOfRamos() {
+        setStrictChooseMode(true);
+        // {T}: Add {U}.
+        // Sacrifice Eye of Ramos: Add {U}.
+        addCard(Zone.BATTLEFIELD, playerA, "Eye of Ramos", 2);
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertAllCommandsUsed();
+
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        assertManaOptions("{U}{U}{U}{U}", manaOptions);
+    }
+
+    @Test
+    public void TestFarrelitePriest() {
+        setStrictChooseMode(true);
+        // {1}: Add {W}. If this ability has been activated four or more times this turn, sacrifice Farrelite Priest at the beginning of the next end step.
+        addCard(Zone.BATTLEFIELD, playerA, "Farrelite Priest", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertAllCommandsUsed();
+
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        Assert.assertEquals("mana variations don't fit", 5, manaOptions.size());
+        assertManaOptions("{W}{W}{W}{W}", manaOptions);
+        assertManaOptions("{W}{W}{W}{B}", manaOptions);
+        assertManaOptions("{W}{W}{B}{B}", manaOptions);
+        assertManaOptions("{W}{B}{B}{B}", manaOptions);
+        assertManaOptions("{B}{B}{B}{B}", manaOptions);
+    }
 }
