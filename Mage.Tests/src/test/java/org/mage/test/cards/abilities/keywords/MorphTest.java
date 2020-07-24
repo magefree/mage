@@ -1089,7 +1089,7 @@ public class MorphTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void test_MorphWithCostReductionMustBePlayable_MorphCondition() {
+    public void test_MorphWithCostReductionMustBePlayable_MorphCondition1() {
         // {1}{U} creature
         // Morph {1}{U} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
         // When Willbender is turned face up, change the target of target spell or ability with a single target.
@@ -1105,6 +1105,38 @@ public class MorphTest extends CardTestPlayerBase {
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+    }
+
+    @Test
+    public void test_MorphWithCostReductionMustBePlayable_MorphCondition2() {
+        // {1}{U} creature
+        // Morph {1}{U} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
+        // When Willbender is turned face up, change the target of target spell or ability with a single target.
+        addCard(Zone.HAND, playerA, "Willbender", 2);
+        //addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+        //
+        // The first face-down creature spell you cast each turn costs {3} less to cast.
+        addCard(Zone.BATTLEFIELD, playerA, "Kadena, Slinking Sorcerer");
+
+        // creature one - get cost reduce
+        checkPlayableAbility("can", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Willbender", true);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Willbender");
+        setChoice(playerA, "Yes"); // morph
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // creature two - do not get cost reduce
+        checkPlayableAbility("can't by no reduce", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Willbender", false);
+
+        // on next turn it can cost reduce again
+        checkPlayableAbility("can't by not your turn", 2, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Willbender", false);
+        checkPlayableAbility("can", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Willbender", true);
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.END_TURN);
         execute();
         assertAllCommandsUsed();
 

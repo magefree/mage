@@ -3156,6 +3156,11 @@ public abstract class PlayerImpl implements Player, Serializable {
                                 sourceObject.adjustCosts(copyAbility, game);
                                 game.getContinuousEffects().costModification(copyAbility, game);
 
+                                // reduced all cost
+                                if (copyAbility.getManaCostsToPay().isEmpty()) {
+                                    return true;
+                                }
+
                                 for (Mana mana : copyAbility.getManaCostsToPay().getOptions()) {
                                     if (availableMana.enough(mana)) {
                                         return true;
@@ -3192,6 +3197,11 @@ public abstract class PlayerImpl implements Player, Serializable {
                                 copyAbility.getManaCostsToPay().addAll(manaCosts.copy());
                                 sourceObject.adjustCosts(copyAbility, game);
                                 game.getContinuousEffects().costModification(copyAbility, game);
+
+                                // reduced all cost
+                                if (copyAbility.getManaCostsToPay().isEmpty()) {
+                                    return true;
+                                }
 
                                 for (Mana mana : copyAbility.getManaCostsToPay().getOptions()) {
                                     if (availableMana.enough(mana)) {
@@ -3260,7 +3270,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             // So make it available all the time
             boolean canUse;
             if (ability instanceof MorphAbility && object instanceof Card && game.canPlaySorcery(getId())) {
-                canUse = canPlayCardByAlternateCost((Card) object, availableMana, ability, game);
+                canUse = canPlayCardByAlternateCost((Card) object, availableMana, playAbility, game);
             } else {
                 canUse = canPlay(playAbility, availableMana, object, game); // canPlay already checks alternative source costs and all conditions
             }
