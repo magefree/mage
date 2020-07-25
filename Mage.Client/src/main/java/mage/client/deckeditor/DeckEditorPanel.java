@@ -182,6 +182,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             case LIMITED_BUILDING:
                 this.btnAddLand.setVisible(true);
                 this.txtTimeRemaining.setVisible(true);
+                this.btnLegality.setVisible(false); // legality check available only in free building mode
                 // Fall through to sideboarding (no break)
             case SIDEBOARDING:
                 this.btnSubmit.setVisible(true);
@@ -215,6 +216,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 this.btnSubmit.setVisible(false);
                 this.btnSubmitTimer.setVisible(false);
                 this.btnAddLand.setVisible(true);
+                this.btnLegality.setVisible(true);
                 this.cardSelector.setVisible(true);
                 this.cardSelector.loadCards(this.bigCard);
                 //this.cardTableSelector.loadCards(this.bigCard);
