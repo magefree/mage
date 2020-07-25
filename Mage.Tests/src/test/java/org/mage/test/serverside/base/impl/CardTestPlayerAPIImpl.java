@@ -1,14 +1,5 @@
 package org.mage.test.serverside.base.impl;
 
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 import mage.MageObject;
 import mage.Mana;
 import mage.ObjectColor;
@@ -43,6 +34,12 @@ import org.mage.test.player.PlayerAction;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestAPI;
 import org.mage.test.serverside.base.MageTestPlayerBase;
+
+import java.io.FileNotFoundException;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * API for test initialization and asserting the test results.
@@ -202,7 +199,6 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     /**
-     *
      * @throws GameException
      * @throws FileNotFoundException
      */
@@ -291,7 +287,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
             }
         }
         Assert.assertFalse("Wrong stop command on " + this.stopOnTurn + " / " + this.stopAtStep + " (" + this.stopAtStep.getIndex() + ")"
-                + " (found actions after stop on " + maxTurn + " / " + maxPhase + ")",
+                        + " (found actions after stop on " + maxTurn + " / " + maxPhase + ")",
                 (maxTurn > this.stopOnTurn) || (maxTurn == this.stopOnTurn && maxPhase > this.stopAtStep.getIndex()));
 
         for (Player player : currentGame.getPlayers().values()) {
@@ -533,6 +529,9 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * Removes all cards from player's library from the game. Usually this
      * should be used once before initialization to form the library in certain
      * order.
+     * <p>
+     * Warning, if you doesn't add cards to hand then player will lose the game on draw and test
+     * return unused actions (game ended too early)
      *
      * @param player {@link Player} to remove all library cards from.
      */

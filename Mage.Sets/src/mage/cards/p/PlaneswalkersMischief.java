@@ -22,7 +22,6 @@ import mage.watchers.common.SpellsCastWatcher;
 
 import java.util.List;
 import java.util.UUID;
-import mage.MageObject;
 
 /**
  * @author jeffwadsworth
@@ -76,7 +75,7 @@ class PlaneswalkersMischiefEffect extends OneShotEffect {
             Cards cards = new CardsImpl(revealedCard);
             opponent.revealCards(source, cards, game);
             if (revealedCard.isInstant()
-                    || revealedCard.isSorcery()) {                
+                    || revealedCard.isSorcery()) {
                 opponent.moveCardToExileWithInfo(revealedCard, source.getSourceId(), "Planeswalker's Mischief", source.getSourceId(), game, Zone.HAND, true);
                 AsThoughEffect effect = new PlaneswalkersMischiefCastFromExileEffect();
                 effect.setTargetPointer(new FixedTarget(revealedCard.getId()));
@@ -145,7 +144,7 @@ class PlaneswalkersMischiefCondition implements Condition {
         if (!game.getExile().getExileZone(exileId).contains(cardId)) {
             return false;
         }
-        SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class, source.getSourceId());
+        SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
         if (watcher != null) {
             List<Spell> spells = watcher.getSpellsCastThisTurn(source.getControllerId());
             if (spells != null) {

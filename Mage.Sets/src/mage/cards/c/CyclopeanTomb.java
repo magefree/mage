@@ -120,7 +120,7 @@ class CyclopeanTombCreateTriggeredEffect extends OneShotEffect {
             DelayedTriggeredAbility ability = new AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility(new CyclopeanTombEffect(), Duration.EndOfGame, false);
             ability.setControllerId(source.getControllerId());
             ability.setSourceId(source.getSourceId());
-            game.addDelayedTriggeredAbility(ability);
+            game.addDelayedTriggeredAbility(ability, source);
             return true;
         }
         return false;
