@@ -31,7 +31,7 @@ public class WatchersFromDelayedTriggeredAbilitiesTest extends CardTestPlayerBas
 
         // can play until end step
         checkPlayableAbility("can play bolt on 1", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Lightning Bolt", true);
-        checkPlayableAbility("can play bolt on 2", 2, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Lightning Bolt", false);
+        checkPlayableAbility("can't play bolt on 2", 2, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Lightning Bolt", false);
 
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);

@@ -86,9 +86,6 @@ class BringToLightEffect extends OneShotEffect {
                     Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
                             game, true, new MageObjectReference(source.getSourceObject(game), game));
                     game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
-                    if (!cardWasCast) {
-                        Logger.getLogger(BringToLightEffect.class).error("Bring to Light: spellAbility == null " + card.getName());
-                    }
                 }
             }
             return true;

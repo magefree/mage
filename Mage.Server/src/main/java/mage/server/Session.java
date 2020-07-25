@@ -232,7 +232,7 @@ public class Session {
         if (reconnect) { // must be connected to receive the message
             Optional<GamesRoom> room = GamesRoomManager.instance.getRoom(GamesRoomManager.instance.getMainRoomId());
             if (!room.isPresent()) {
-                logger.error("main room not found");
+                logger.warn("main room not found"); // after server restart users try to use old rooms on reconnect
                 return null;
             }
             ChatManager.instance.joinChat(room.get().getChatId(), userId);
