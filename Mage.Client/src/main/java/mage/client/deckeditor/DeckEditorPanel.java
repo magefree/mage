@@ -78,7 +78,6 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         deckArea.setOpaque(false);
         panelLeft.setOpaque(false);
         panelRight.setOpaque(false);
-        restoreDividerLocationsAndDeckAreaSettings();
         countdown = new javax.swing.Timer(1000,
                 e -> {
                     if (--timeout > 0) {
@@ -93,11 +92,16 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                     }
                 });
 
-        // Set up tracking to save the deck editor settings when the deck editor is hidden.
+        // save editor settings dynamicly on hides (e.g. app close)
         addHierarchyListener((HierarchyEvent e) -> {
             if ((e.getChangeFlags() & HierarchyEvent.SHOWING_CHANGED) != 0) {
                 if (!isShowing()) {
-                    saveDividerLocationsAndDeckAreaSettings();
+                    // It's bugged and called on sideboarding creates too (before load). So:
+                    // * for free mode - save here
+                    // * for draft/sideboarding - save on cleanup call
+                    if (mode == DeckEditorMode.FREE_BUILDING) {
+                        saveDividerLocationsAndDeckAreaSettings();
+                    }
                 }
             }
         });
@@ -127,21 +131,32 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     }
 
     private void saveDividerLocationsAndDeckAreaSettings() {
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_EDITOR_HORIZONTAL_DIVIDER_LOCATION, Integer.toString(panelRight.getDividerLocation()));
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_EDITOR_DECKAREA_SETTINGS, this.deckArea.saveSettings().toString());
+        boolean isLimitedBuildingOrientation = (mode != DeckEditorMode.FREE_BUILDING);
+        if (isLimitedBuildingOrientation) {
+            PreferencesDialog.saveValue(PreferencesDialog.KEY_EDITOR_HORIZONTAL_DIVIDER_LOCATION_LIMITED, Integer.toString(panelRight.getDividerLocation()));
+        } else {
+            PreferencesDialog.saveValue(PreferencesDialog.KEY_EDITOR_HORIZONTAL_DIVIDER_LOCATION_NORMAL, Integer.toString(panelRight.getDividerLocation()));
+        }
+
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_EDITOR_DECKAREA_SETTINGS, this.deckArea.saveSettings(isLimitedBuildingOrientation).toString());
     }
 
     private void restoreDividerLocationsAndDeckAreaSettings() {
-        // Load horizontal split position setting
-        String dividerLocation = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_EDITOR_HORIZONTAL_DIVIDER_LOCATION, "");
+        String dividerLocation = "";
+        boolean isLimitedBuildingOrientation = (mode != DeckEditorMode.FREE_BUILDING);
+        if (isLimitedBuildingOrientation) {
+            dividerLocation = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_EDITOR_HORIZONTAL_DIVIDER_LOCATION_LIMITED, "");
+        } else {
+            dividerLocation = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_EDITOR_HORIZONTAL_DIVIDER_LOCATION_NORMAL, "");
+        }
         if (!dividerLocation.isEmpty()) {
             panelRight.setDividerLocation(Integer.parseInt(dividerLocation));
         }
 
         // Load deck area settings
         this.deckArea.loadSettings(
-                DeckArea.Settings.parse(
-                        PreferencesDialog.getCachedValue(PreferencesDialog.KEY_EDITOR_DECKAREA_SETTINGS, "")));
+                DeckArea.Settings.parse(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_EDITOR_DECKAREA_SETTINGS, "")),
+                isLimitedBuildingOrientation);
     }
 
     public void changeGUISize() {
@@ -157,11 +172,12 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         this.mode = mode;
         this.btnAddLand.setVisible(false);
 
+        restoreDividerLocationsAndDeckAreaSettings();
         switch (mode) {
             case LIMITED_BUILDING:
                 this.btnAddLand.setVisible(true);
                 this.txtTimeRemaining.setVisible(true);
-                // Fall through to sideboarding
+                // Fall through to sideboarding (no break)
             case SIDEBOARDING:
                 this.btnSubmit.setVisible(true);
                 this.btnSubmitTimer.setVisible(true);
