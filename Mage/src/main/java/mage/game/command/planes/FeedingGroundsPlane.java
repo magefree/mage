@@ -1,5 +1,7 @@
 package mage.game.command.planes;
 
+import java.util.ArrayList;
+import java.util.List;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -29,9 +31,6 @@ import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
 import mage.watchers.common.PlanarRollWatcher;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * @author spjspj
  */
@@ -52,9 +51,9 @@ public class FeedingGroundsPlane extends Plane {
         Effect chaosEffect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(), TargetConvertedManaCost.instance);
         Target chaosTarget = new TargetCreaturePermanent(1, 1, filter, false);
 
-        List<Effect> chaosEffects = new ArrayList<Effect>();
+        List<Effect> chaosEffects = new ArrayList<>();
         chaosEffects.add(chaosEffect);
-        List<Target> chaosTargets = new ArrayList<Target>();
+        List<Target> chaosTargets = new ArrayList<>();
         chaosTargets.add(chaosTarget);
 
         ActivateIfConditionActivatedAbility chaosAbility = new ActivateIfConditionActivatedAbility(Zone.COMMAND, new RollPlanarDieEffect(chaosEffects, chaosTargets), new GenericManaCost(0), MainPhaseStackEmptyCondition.instance);

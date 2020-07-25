@@ -1,5 +1,3 @@
-
-
 package mage.cards.c;
 
 import mage.MageInt;
@@ -7,12 +5,10 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.hint.common.MetalcraftHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 
 import java.util.UUID;
 
@@ -35,8 +31,9 @@ public final class CarapaceForger extends CardImpl {
                         new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield),
                         MetalcraftCondition.instance, "<i>Metalcraft</i> &mdash; {this} gets " +
                         "+2/+2 as long as you control three or more artifacts"
-                )
-        ));
+                ))
+                .setAbilityWord(AbilityWord.METALCRAFT)
+                .addHint(MetalcraftHint.instance));
     }
 
     public CarapaceForger(final CarapaceForger card) {

@@ -1,5 +1,6 @@
 package mage.cards.m;
 
+import java.util.UUID;
 import mage.ConditionalMana;
 import mage.MageObject;
 import mage.Mana;
@@ -20,8 +21,6 @@ import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
 
-import java.util.UUID;
-
 /**
  * @author nantuko
  */
@@ -36,10 +35,10 @@ public final class MyrReservoir extends CardImpl {
     public MyrReservoir(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
-        // {tap}: Add {C}{C}. Spend this mana only to cast Myr spells or activate abilities of Myr.
+        // {T}: Add {C}{C}. Spend this mana only to cast Myr spells or activate abilities of Myr.
         this.addAbility(new MyrReservoirManaAbility());
 
-        // {3}, {tap}: Return target Myr card from your graveyard to your hand.
+        // {3}, {T}: Return target Myr card from your graveyard to your hand.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCardInYourGraveyard(myrCardFilter));

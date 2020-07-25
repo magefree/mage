@@ -10,8 +10,6 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
 
-import java.util.UUID;
-
 public class CostModificationSourceEffect extends CostModificationEffectImpl {
 
     private final Class<? extends Ability> abilityType;

@@ -8,6 +8,7 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.Card;
@@ -34,7 +35,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
-import mage.abilities.effects.common.ManaEffect;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -54,7 +54,7 @@ public abstract class AbilityImpl implements Ability {
     protected ManaCosts<ManaCost> manaCostsToPay;
     protected Costs<Cost> costs;
     protected Costs<Cost> optionalCosts;
-    protected Modes modes; // access to it by GetModes only (it's can be override by some abilities)
+    protected Modes modes; // access to it by GetModes only (it can be overridden by some abilities)
     protected Zone zone;
     protected String name;
     protected AbilityWord abilityWord;
@@ -65,7 +65,7 @@ public abstract class AbilityImpl implements Ability {
     protected boolean activated = false;
     protected boolean worksFaceDown = false;
     protected int sourceObjectZoneChangeCounter;
-    protected List<Watcher> watchers = new ArrayList<>(); // access to it by GetWatchers only (it's can be override by some abilities)
+    protected List<Watcher> watchers = new ArrayList<>(); // access to it by GetWatchers only (it can be overridden by some abilities)
     protected List<Ability> subAbilities = null;
     protected boolean canFizzle = true;
     protected TargetAdjuster targetAdjuster = null;
@@ -1022,8 +1022,9 @@ public abstract class AbilityImpl implements Ability {
     }
 
     @Override
-    public void setAbilityWord(AbilityWord abilityWord) {
+    public Ability setAbilityWord(AbilityWord abilityWord) {
         this.abilityWord = abilityWord;
+        return this;
     }
 
     @Override
@@ -1243,10 +1244,13 @@ public abstract class AbilityImpl implements Ability {
     }
 
     /**
-     * Dynamic cost modification for ability.
-     * Example: if it need stack related info (like real targets) then must check two states (game.inCheckPlayableState):
-     * 1. In playable state it must check all possible use cases (e.g. allow to reduce on any available target and modes)
-     * 2. In real cast state it must check current use case (e.g. real selected targets and modes)
+     * Dynamic cost modification for ability.<br>
+     * Example: if it need stack related info (like real targets) then must
+     * check two states (game.inCheckPlayableState): <br>
+     * 1. In playable state it must check all possible use cases (e.g. allow to
+     * reduce on any available target and modes) <br>
+     * 2. In real cast state it must check current use case (e.g. real selected
+     * targets and modes)
      *
      * @param costAdjuster
      */

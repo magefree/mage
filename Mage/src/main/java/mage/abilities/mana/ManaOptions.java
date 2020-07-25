@@ -348,26 +348,34 @@ public class ManaOptions extends ArrayList<Mana> {
     private boolean subtractCostAddMana(Mana cost, Mana manaToAdd, boolean onlyManaCosts, Mana currentMana) {
         boolean oldManaWasReplaced = false; // true if the newly created mana includes all mana possibilities of the old
         boolean repeatable = false;
-        if (manaToAdd.getAny() == 1 && manaToAdd.count() == 1 && onlyManaCosts) {
+        if ((manaToAdd.countColored() > 0 || manaToAdd.getAny() > 0) && manaToAdd.count() > 0 && onlyManaCosts) {
             // deactivated because it does cause loops TODO: Find reason
             repeatable = true; // only replace to any with mana costs only will be repeated if able
         }
         Mana prevMana = currentMana.copy();
-        if (currentMana.includesMana(cost)) { // it can be paid
+        if (currentMana.includesMana(cost)) { // cost can be paid
             // generic mana costs can be paid with different colored mana, can lead to different color combinations
             if (cost.getGeneric() > 0 && cost.getGeneric() > (currentMana.getGeneric() + currentMana.getColorless())) {
-                Mana coloredCost = cost.copy();
-                coloredCost.setGeneric(0);
-                currentMana.subtract(coloredCost);
                 for (Mana payCombination : getPossiblePayCombinations(cost.getGeneric(), currentMana)) {
-                    Mana newMana = currentMana.copy();
-                    newMana.subtract(payCombination);
-                    newMana.add(manaToAdd);
-                    Mana moreValuable = Mana.getMoreValuableMana(prevMana, newMana);
-                    if (!prevMana.equals(moreValuable)) {
-                        this.add(newMana);
-                        if (moreValuable != null) {
-                            oldManaWasReplaced = true; // the new mana includes all possibilities of the old one
+                    Mana currentManaCopy = currentMana.copy();
+                    while (currentManaCopy.includesMana(payCombination)) { // loop for multiple usage if possible
+                        boolean newCombinations = false;
+
+                        Mana newMana = currentManaCopy.copy();
+                        newMana.subtract(payCombination);
+                        newMana.add(manaToAdd);
+                        // Mana moreValuable = Mana.getMoreValuableMana(currentMana, newMana);
+                        if (!isExistingManaCombination(newMana)) {
+                            this.add(newMana); // add the new combination
+                            newCombinations = true; // repeat the while as long there are new combinations and usage is repeatable
+                            currentManaCopy = newMana.copy();
+                            Mana moreValuable = Mana.getMoreValuableMana(currentMana, newMana);
+                            if (!oldManaWasReplaced && newMana.equals(moreValuable)) {
+                                oldManaWasReplaced = true; // the new mana includes all possibilities of the old one, so no need to add it after return
+                            }
+                        }
+                        if (!newCombinations || !repeatable) {
+                            break;
                         }
                     }
 
@@ -447,6 +455,16 @@ public class ManaOptions extends ArrayList<Mana> {
         return payCombinations;
     }
 
+    private boolean isExistingManaCombination(Mana newMana) {
+        for (Mana mana : this) {
+            Mana moreValuable = Mana.getMoreValuableMana(mana, newMana);
+            if (mana.equals(moreValuable)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void addManaCombination(Mana mana, Mana existingMana, List<Mana> payCombinations, List<String> payCombinationsStrings) {
         Mana newMana = existingMana.copy();
         newMana.add(mana);
@@ -477,5 +495,21 @@ public class ManaOptions extends ArrayList<Mana> {
                 }
             }
         }
+    }
+
+    /**
+     * Checks if the given mana (cost) is already included in one available mana
+     * option
+     *
+     * @param mana
+     * @return
+     */
+    public boolean enough(Mana mana) {
+        for (Mana avail : this) {
+            if (mana.enough(avail)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

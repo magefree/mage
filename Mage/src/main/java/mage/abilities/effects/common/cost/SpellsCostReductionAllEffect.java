@@ -1,5 +1,8 @@
 package mage.abilities.effects.common.cost;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -8,15 +11,11 @@ import mage.choices.ChoiceImpl;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SpellAbilityCastMode;
 import mage.filter.FilterCard;
 import mage.game.Game;
-import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.util.CardUtil;
-
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -123,15 +122,12 @@ public class SpellsCostReductionAllEffect extends CostModificationEffectImpl {
             return false;
         }
         if (abilityToModify instanceof SpellAbility) {
-            Spell spell = (Spell) game.getStack().getStackObject(abilityToModify.getId());
-            if (spell != null) {
-                // real cast with put on stack
-                return this.filter.match(spell, game) && selectedByRuntimeData(spell, source, game);
-            } else {
-                // get playable and other staff without put on stack
-                // used at least for flashback ability because Flashback ability doesn't use stack
-                Card sourceCard = game.getCard(abilityToModify.getSourceId());
-                return sourceCard != null && this.filter.match(sourceCard, game) && selectedByRuntimeData(sourceCard, source, game);
+            Card spellCard = ((SpellAbility) abilityToModify).getCharacteristics(game);
+            if (spellCard != null) {
+                if (((SpellAbility) abilityToModify).getSpellAbilityCastMode() != SpellAbilityCastMode.NORMAL) {
+                    spellCard = ((SpellAbility) abilityToModify).getSpellAbilityCastMode().getTypeModifiedCardObjectCopy(spellCard, game);
+                }
+                return this.filter.match(spellCard, game) && selectedByRuntimeData(spellCard, source, game);
             }
         }
         return false;

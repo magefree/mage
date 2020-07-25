@@ -453,7 +453,7 @@ public interface Ability extends Controllable, Serializable {
      *
      * @param abilityWord
      */
-    void setAbilityWord(AbilityWord abilityWord);
+    Ability setAbilityWord(AbilityWord abilityWord);
 
     /**
      * Creates the message about the ability casting/triggering/activating to

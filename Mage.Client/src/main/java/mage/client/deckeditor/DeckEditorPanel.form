@@ -33,6 +33,7 @@
   <SubComponents>
     <Container class="javax.swing.JSplitPane" name="panelRight">
       <Properties>
+        <Property name="dividerSize" type="int" value="10"/>
         <Property name="orientation" type="int" value="0"/>
         <Property name="resizeWeight" type="double" value="0.5"/>
       </Properties>
@@ -47,6 +48,11 @@
           </Constraints>
         </Component>
         <Component class="mage.client.deckeditor.DeckArea" name="deckArea">
+          <Properties>
+            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[200, 56]"/>
+            </Property>
+          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout$JSplitPaneConstraintsDescription">
               <JSplitPaneConstraints position="bottom"/>

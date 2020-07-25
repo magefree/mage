@@ -1,4 +1,3 @@
-
 package mage.cards.e;
 
 import java.util.UUID;
@@ -18,11 +17,11 @@ import mage.constants.Zone;
 public final class EyeOfRamos extends CardImpl {
 
     public EyeOfRamos(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
-        // {tap}: Add {U}.
+        // {T}: Add {U}.
         this.addAbility(new BlueManaAbility());
-        
+
         // Sacrifice Eye of Ramos: Add {U}.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlueMana(1), new SacrificeSourceCost()));
     }

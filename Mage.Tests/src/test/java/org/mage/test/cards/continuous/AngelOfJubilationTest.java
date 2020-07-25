@@ -84,7 +84,7 @@ public class AngelOfJubilationTest extends CardTestPlayerBase {
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{2}, Sacrifice a permanent you control: Return target creature to its owner's hand.");
         addTarget(playerB, "Angel of Jubilation"); // return to hand
-        setChoice(playerB, "Food Chain"); // cacrifice cost
+        setChoice(playerB, "Food Chain"); // sacrifice cost
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);

@@ -1,5 +1,8 @@
 package mage.abilities.mana;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.Mana;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
@@ -12,10 +15,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -87,7 +86,7 @@ public abstract class ActivatedManaAbilityImpl extends ActivatedAbilityImpl impl
      */
     @Override
     public List<Mana> getNetMana(Game game) {
-        if (netMana.isEmpty()) {
+        if (netMana.isEmpty() || (game != null && game.inCheckPlayableState())) {
             List<Mana> dynamicNetMana = new ArrayList<>();
             for (Effect effect : getEffects()) {
                 if (effect instanceof ManaEffect) {

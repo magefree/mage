@@ -1,6 +1,6 @@
-
 package mage.cards.s;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -19,17 +19,10 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
-import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.TargetAdjuster;
 import mage.target.targetpointer.FixedTarget;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -80,16 +73,15 @@ class SatyrFiredancerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        boolean controlledBy = isControlledBy(game.getControllerId(event.getSourceId()));
-        if (!controlledBy) {
+        if (!isControlledBy(game.getControllerId(event.getSourceId()))) {
             return false;
         }
         MageObject damageSource = game.getObject(event.getSourceId());
         if (damageSource == null) {
             return false;
         }
-        UUID damageTarget = event.getTargetId();
-        if (!game.getOpponents(getControllerId()).contains(damageTarget)) {
+        UUID damageTargetId = event.getTargetId();
+        if (!game.getOpponents(getControllerId()).contains(damageTargetId)) {
             return false;
         }
         MageObject sourceObject = game.getObject(event.getSourceId());
@@ -97,7 +89,7 @@ class SatyrFiredancerTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         for (Effect effect : this.getEffects()) {
-            effect.setTargetPointer(new FixedTarget(damageTarget)); // used by adjust targets
+            effect.setTargetPointer(new FixedTarget(damageTargetId)); // used by adjust targets
             effect.setValue("damage", event.getAmount());
         }
         return true;

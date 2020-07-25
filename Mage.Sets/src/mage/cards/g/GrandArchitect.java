@@ -1,7 +1,5 @@
 package mage.cards.g;
 
-import java.util.ArrayList;
-import java.util.List;
 import mage.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -122,21 +120,6 @@ class GrandArchitectManaAbility extends ActivatedManaAbilityImpl {
     GrandArchitectManaAbility(GrandArchitectManaAbility ability) {
         super(ability);
         this.filter = ability.filter.copy();
-    }
-
-    @Override
-    public List<Mana> getNetMana(Game game) {
-        if (game != null && game.inCheckPlayableState()) {
-            int count = game.getBattlefield().count(filter, getSourceId(), getControllerId(), game);
-            List<Mana> netMana = new ArrayList<>();
-            if (count > 0) {
-                ConditionalMana mana = new GrandArchitectConditionalMana();
-                mana.setColorless(count * 2);
-                netMana.add(mana);
-            }
-            return netMana;
-        }
-        return super.getNetMana(game);
     }
 
     @Override

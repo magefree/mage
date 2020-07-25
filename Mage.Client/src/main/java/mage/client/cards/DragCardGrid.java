@@ -73,8 +73,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             }
             trimGrid();
             layoutGrid();
-            cardScroll.revalidate();
-            cardScroll.repaint();
+            repaintGrid();
         }
     }
 
@@ -315,8 +314,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             // Remove empty rows / cols / spaces in stacks
             trimGrid();
             layoutGrid();
-            cardScroll.revalidate();
-            cardScroll.repaint();
+            repaintGrid();
         } else {
             // Add new cards to grid
             for (CardView card : cards) {
@@ -325,14 +323,14 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                 eventSource.fireEvent(card, ClientEventType.ADD_SPECIFIC_CARD);
             }
             layoutGrid();
-            cardContent.repaint();
+            repaintGrid();
         }
     }
 
     public void changeGUISize() {
         layoutGrid();
         cardScroll.getVerticalScrollBar().setUnitIncrement(CardRenderer.getCardTopHeight(getCardWidth()));
-        cardContent.repaint();
+        repaintGrid();
     }
 
     public void cleanUp() {
@@ -386,7 +384,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         }
         trimGrid();
         layoutGrid();
-        cardContent.repaint();
+        repaintGrid();
     }
 
     public DeckCardLayout getCardLayout() {
@@ -710,6 +708,47 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         // Editting mode
         this.mode = Constants.DeckEditorMode.LIMITED_BUILDING;
 
+        // Content
+        cardContent = new JLayeredPane();
+        cardContent.setLayout(null);
+        cardContent.setOpaque(false);
+        cardContent.addMouseListener(new MouseAdapter() {
+            private boolean isDragging = false;
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                if (SwingUtilities.isLeftMouseButton(e)) {
+                    isDragging = true;
+                    beginSelectionDrag(e.getX(), e.getY(), e.isShiftDown());
+                    updateSelectionDrag(e.getX(), e.getY());
+                }
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                if (isDragging) {
+                    isDragging = false;
+                    updateSelectionDrag(e.getX(), e.getY());
+                    endSelectionDrag(e.getX(), e.getY());
+                }
+            }
+        });
+        cardContent.addMouseMotionListener(new MouseAdapter() {
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                updateSelectionDrag(e.getX(), e.getY());
+            }
+        });
+        cardScroll = new JScrollPane(cardContent,
+                ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        cardScroll.setOpaque(false);
+        cardScroll.getViewport().setOpaque(false);
+        cardScroll.setViewportBorder(BorderFactory.createEmptyBorder());
+        cardScroll.setBorder(BorderFactory.createLineBorder(Color.gray, 1));
+        cardScroll.getVerticalScrollBar().setUnitIncrement(CardRenderer.getCardTopHeight(getCardWidth()));
+        this.add(cardScroll, BorderLayout.CENTER);
+
         // Toolbar
         sortButton = new JButton("Sort");
         filterButton = new JButton("Filter");
@@ -757,55 +796,14 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                 cardSizeMod = (float) Math.pow(2, sliderFrac);
                 // Update grid
                 layoutGrid();
-                cardContent.repaint();
+                repaintGrid();
             }
         });
-        cardSizeSliderLabel = new JLabel("Card Size:");
+        cardSizeSliderLabel = new JLabel("Card size:");
         sliderPanel.add(cardSizeSliderLabel);
         sliderPanel.add(cardSizeSlider);
         toolbar.add(sliderPanel, BorderLayout.EAST);
         this.add(toolbar, BorderLayout.NORTH);
-
-        // Content
-        cardContent = new JLayeredPane();
-        cardContent.setLayout(null);
-        cardContent.setOpaque(false);
-        cardContent.addMouseListener(new MouseAdapter() {
-            private boolean isDragging = false;
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-                if (SwingUtilities.isLeftMouseButton(e)) {
-                    isDragging = true;
-                    beginSelectionDrag(e.getX(), e.getY(), e.isShiftDown());
-                    updateSelectionDrag(e.getX(), e.getY());
-                }
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                if (isDragging) {
-                    isDragging = false;
-                    updateSelectionDrag(e.getX(), e.getY());
-                    endSelectionDrag(e.getX(), e.getY());
-                }
-            }
-        });
-        cardContent.addMouseMotionListener(new MouseAdapter() {
-            @Override
-            public void mouseDragged(MouseEvent e) {
-                updateSelectionDrag(e.getX(), e.getY());
-            }
-        });
-        cardScroll = new JScrollPane(cardContent,
-                ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
-                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        cardScroll.setOpaque(false);
-        cardScroll.getViewport().setOpaque(false);
-        cardScroll.setViewportBorder(BorderFactory.createEmptyBorder());
-        cardScroll.setBorder(BorderFactory.createLineBorder(Color.gray, 1));
-        cardScroll.getVerticalScrollBar().setUnitIncrement(CardRenderer.getCardTopHeight(getCardWidth()));
-        this.add(cardScroll, BorderLayout.CENTER);
 
         // Insert arrow
         insertArrow = new JLabel();
@@ -1230,7 +1228,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
         // And finally rerender
         layoutGrid();
-        repaint();
+        repaintGrid();
     }
 
     public void reselectBy() {
@@ -1340,7 +1338,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
         // And finally rerender
         layoutGrid();
-        repaint();
+        repaintGrid();
     }
 
     private static final Pattern pattern = Pattern.compile(".*Add(.*)(\\{[WUBRGXC]\\})");
@@ -1568,8 +1566,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                 }
 
                 layoutGrid();
-                cardScroll.revalidate();
-                repaint();
+                repaintGrid();
                 JOptionPane.showMessageDialog(null, "Added " + pimpedCards.size() + " cards.  You can select them and the originals by choosing 'Multiples'");
             }
         }
@@ -1609,8 +1606,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         }
         cardGrid = newCardGrid;
         layoutGrid();
-        cardScroll.revalidate();
-        repaint();
+        repaintGrid();
     }
 
     // Update the contents of the card grid
@@ -1734,10 +1730,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         if (didModify) {
             // Update layout
             layoutGrid();
-
-            // Update draw
-            cardScroll.revalidate();
-            repaint();
+            repaintGrid();
         }
     }
 
@@ -1877,9 +1870,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             eventSource.fireEvent(card, ClientEventType.ADD_SPECIFIC_CARD);
             // Update layout
             layoutGrid();
-            // Update draw
-            cardScroll.revalidate();
-            repaint();
+            repaintGrid();
         }
     }
 
@@ -2081,6 +2072,12 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
     private int getCardHeight() {
         return (int) (1.4 * getCardWidth());
+    }
+
+    private void repaintGrid() {
+        cardScroll.revalidate();
+        cardScroll.repaint();
+        repaint();
     }
 
     /**

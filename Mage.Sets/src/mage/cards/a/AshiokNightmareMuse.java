@@ -1,10 +1,13 @@
 package mage.cards.a;
 
+import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -16,11 +19,6 @@ import mage.players.Player;
 import mage.target.common.TargetCardInExile;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetNonlandPermanent;
-
-import java.util.UUID;
-
-import mage.MageObjectReference;
-import mage.cards.Card;
 
 /**
  * @author TheElk801
@@ -42,7 +40,7 @@ public final class AshiokNightmareMuse extends CardImpl {
         ability.addTarget(new TargetNonlandPermanent());
         this.addAbility(ability);
 
-        // −7: You may cast up to three face-up cards your opponents own from exile without paying their mana costs.
+        // −7: You may cast up to three spells from among face-up cards your opponents own from exile without paying their mana costs.
         this.addAbility(new LoyaltyAbility(new AshiokNightmareMuseCastEffect(), -7));
     }
 
@@ -102,7 +100,7 @@ class AshiokNightmareMuseCastEffect extends OneShotEffect {
 
     AshiokNightmareMuseCastEffect() {
         super(Outcome.Discard);
-        staticText = "You may cast up to three face-up cards your opponents own from exile without paying their mana costs.";
+        staticText = "You may cast up to three spells from among face-up cards your opponents own from exile without paying their mana costs.";
     }
 
     private AshiokNightmareMuseCastEffect(final AshiokNightmareMuseCastEffect effect) {

@@ -1,5 +1,6 @@
 package mage.cards.t;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -13,8 +14,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
-
-import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -30,7 +29,7 @@ public final class TorbranThaneOfRedFell extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 
-        // If a red source you control would deal damage to an opponent or a 
+        // If a red source you control would deal damage to an opponent or a
         // permanent an opponent controls, it deals that much damage plus 2 instead.
         this.addAbility(new SimpleStaticAbility(new TorbranThaneOfRedFellEffect()));
     }

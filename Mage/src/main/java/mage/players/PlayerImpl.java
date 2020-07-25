@@ -3156,11 +3156,14 @@ public abstract class PlayerImpl implements Player, Serializable {
                                 sourceObject.adjustCosts(copyAbility, game);
                                 game.getContinuousEffects().costModification(copyAbility, game);
 
+                                // reduced all cost
+                                if (copyAbility.getManaCostsToPay().isEmpty()) {
+                                    return true;
+                                }
+
                                 for (Mana mana : copyAbility.getManaCostsToPay().getOptions()) {
-                                    for (Mana avail : availableMana) {
-                                        if (mana.enough(avail)) {
-                                            return true;
-                                        }
+                                    if (availableMana.enough(mana)) {
+                                        return true;
                                     }
                                 }
                             }
@@ -3195,11 +3198,14 @@ public abstract class PlayerImpl implements Player, Serializable {
                                 sourceObject.adjustCosts(copyAbility, game);
                                 game.getContinuousEffects().costModification(copyAbility, game);
 
+                                // reduced all cost
+                                if (copyAbility.getManaCostsToPay().isEmpty()) {
+                                    return true;
+                                }
+
                                 for (Mana mana : copyAbility.getManaCostsToPay().getOptions()) {
-                                    for (Mana avail : availableMana) {
-                                        if (mana.enough(avail)) {
-                                            return true;
-                                        }
+                                    if (availableMana.enough(mana)) {
+                                        return true;
                                     }
                                 }
                             }
@@ -3247,7 +3253,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     protected ActivatedAbility findActivatedAbilityFromAlternativeSourceCost(MageObject object, ManaOptions availableMana, Ability ability, Game game) {
         // return play ability that can activate AlternativeSourceCosts
-        if (ability instanceof AlternativeSourceCosts && !(object instanceof Permanent)) {
+        if (ability instanceof AlternativeSourceCosts && object != null && !(object instanceof Permanent)) {
             ActivatedAbility playAbility = null;
             if (object.isLand()) {
                 playAbility = (PlayLandAbility) CardUtil.getAbilities(object, game).stream().filter(a -> a instanceof PlayLandAbility).findFirst().orElse(null);
@@ -3263,8 +3269,8 @@ public abstract class PlayerImpl implements Player, Serializable {
             // Even mana cost can't be checked here without lookahead
             // So make it available all the time
             boolean canUse;
-            if (ability instanceof MorphAbility) {
-                canUse = game.canPlaySorcery(playerId) && ((MorphAbility) ability).isAvailable(playAbility, game);
+            if (ability instanceof MorphAbility && object instanceof Card && game.canPlaySorcery(getId())) {
+                canUse = canPlayCardByAlternateCost((Card) object, availableMana, playAbility, game);
             } else {
                 canUse = canPlay(playAbility, availableMana, object, game); // canPlay already checks alternative source costs and all conditions
             }
