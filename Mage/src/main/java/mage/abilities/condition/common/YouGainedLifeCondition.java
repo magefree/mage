@@ -1,8 +1,8 @@
 package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
-import mage.constants.ComparisonType;
 import mage.abilities.condition.IntCompareCondition;
+import mage.constants.ComparisonType;
 import mage.game.Game;
 import mage.watchers.common.PlayerGainedLifeWatcher;
 
@@ -27,6 +27,6 @@ public class YouGainedLifeCondition extends IntCompareCondition {
 
     @Override
     public String toString() {
-        return String.format("if you gained %s or more life this turn ", value + 1);
+        return String.format("if you gained %s or more life this turn", value + 1);
     }
 }
