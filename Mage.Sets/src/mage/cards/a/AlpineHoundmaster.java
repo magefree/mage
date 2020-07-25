@@ -29,13 +29,13 @@ import java.util.UUID;
  */
 public final class AlpineHoundmaster extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterAttackingCreature();
+    private static final FilterPermanent filter = new FilterAttackingCreature("the number of other attacking creatures");
 
     static {
         filter.add(AnotherPredicate.instance);
     }
 
-    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter, null);
 
     public AlpineHoundmaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{W}");
@@ -50,8 +50,8 @@ public final class AlpineHoundmaster extends CardImpl {
 
         // Whenever Alpine Houndmaster attacks, it gets +X/+0 until end of turn, where X is the number of other attacking creatures.
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(
-                xValue, StaticValue.get(0), Duration.EndOfTurn
-        ), false, "it gets +X/+0 until end of turn, where X is the number of other attacking creatures"));
+                xValue, StaticValue.get(0), Duration.EndOfTurn, true
+        ), false));
     }
 
     private AlpineHoundmaster(final AlpineHoundmaster card) {
