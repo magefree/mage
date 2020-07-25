@@ -296,4 +296,22 @@ public class TappedForManaRelatedTest extends CardTestPlayerBase {
         Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
         assertManaOptions("{B}{B}{Any}{Any}{Any}{Any}", manaOptions);
     }
+
+    @Test
+    public void TestChromaticOrrery() {
+        setStrictChooseMode(true);
+        // You may spend mana as though it were mana of any color.
+        // {T}: Add {C}{C}{C}{C}{C}.
+        // {5}, {T}: Draw a card for each color among permanents you control.
+        addCard(Zone.BATTLEFIELD, playerA, "Chromatic Orrery", 1);
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertAllCommandsUsed();
+
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        assertManaOptions("{C}{C}{C}{C}{C}", manaOptions);
+    }
 }
