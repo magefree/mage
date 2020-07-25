@@ -3,8 +3,10 @@ package mage.cards.g;
 import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.hint.common.MetalcraftHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.target.common.TargetAnyTarget;
 
@@ -29,6 +31,8 @@ public final class GalvanicBlast extends CardImpl {
                 MetalcraftCondition.instance, effectText
         ));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
+        this.getSpellAbility().setAbilityWord(AbilityWord.METALCRAFT);
+        this.getSpellAbility().addHint(MetalcraftHint.instance);
     }
 
     public GalvanicBlast(final GalvanicBlast card) {

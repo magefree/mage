@@ -1,9 +1,5 @@
 package mage.abilities;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.costs.*;
 import mage.abilities.costs.common.PayLifeCost;
@@ -34,6 +30,11 @@ import mage.util.GameLog;
 import mage.util.ThreadLocalStringBuilder;
 import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -1021,8 +1022,9 @@ public abstract class AbilityImpl implements Ability {
     }
 
     @Override
-    public void setAbilityWord(AbilityWord abilityWord) {
+    public Ability setAbilityWord(AbilityWord abilityWord) {
         this.abilityWord = abilityWord;
+        return this;
     }
 
     @Override

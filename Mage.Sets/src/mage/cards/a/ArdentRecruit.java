@@ -1,7 +1,5 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -9,9 +7,12 @@ import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.hint.common.MetalcraftHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+
+import java.util.UUID;
 
 /**
  * @author Loki
@@ -32,6 +33,7 @@ public final class ArdentRecruit extends CardImpl {
                 "{this} gets +2/+2 as long as you control three or more artifacts");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
         ability.setAbilityWord(AbilityWord.METALCRAFT);
+        ability.addHint(MetalcraftHint.instance);
         this.addAbility(ability);
     }
 

@@ -472,7 +472,7 @@ public class StackAbility extends StackObjImpl implements Ability {
     }
 
     @Override
-    public void setAbilityWord(AbilityWord abilityWord) {
+    public Ability setAbilityWord(AbilityWord abilityWord) {
         throw new UnsupportedOperationException("Not supported.");
     }
 
