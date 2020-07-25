@@ -881,7 +881,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         popupDebug.add(menuDebugTestCardRenderModesDialog);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(1024, 768));
+        setMinimumSize(new java.awt.Dimension(1024, 500));
 
         desktopPane.setBackground(new java.awt.Color(204, 204, 204));
 
