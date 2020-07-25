@@ -71,7 +71,7 @@ class SeanceEffect extends OneShotEffect {
         if (controller != null && card != null) {
             controller.moveCards(card, Zone.EXILED, source, game); // Also if the move to exile is replaced, the copy takes place
             CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(source.getControllerId(), null, false);
-            effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
+            effect.setTargetPointer(new FixedTarget(card, game));
             effect.setAdditionalSubType(SubType.SPIRIT);
             effect.apply(game, source);
             ExileTargetEffect exileEffect = new ExileTargetEffect();

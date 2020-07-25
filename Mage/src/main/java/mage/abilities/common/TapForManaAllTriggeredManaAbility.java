@@ -49,7 +49,7 @@ public class TapForManaAllTriggeredManaAbility extends TriggeredManaAbility {
                 effect.setValue("mana", mEvent.getMana());
                 switch(setTargetPointer) {
                     case PERMANENT:
-                        effect.setTargetPointer(new FixedTarget(permanent.getId()));
+                        effect.setTargetPointer(new FixedTarget(permanent, game));
                         break;
                     case PLAYER:
                         effect.setTargetPointer(new FixedTarget(permanent.getControllerId()));

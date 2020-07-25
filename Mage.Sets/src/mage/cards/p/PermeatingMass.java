@@ -59,7 +59,7 @@ class PermeatingMassEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability ability) {
-        Permanent copyTo = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, ability));
+        Permanent copyTo = game.getPermanent(getTargetPointer().getFirst(game, ability));
         if (copyTo != null) {
             Permanent copyFrom = ability.getSourcePermanentOrLKI(game);
             if (copyFrom != null) {

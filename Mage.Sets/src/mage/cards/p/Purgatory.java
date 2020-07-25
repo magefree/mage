@@ -96,7 +96,7 @@ class PurgatoryTriggeredAbility extends TriggeredAbilityImpl {
                         && permanent.isCreature()
                         && permanent.isOwnedBy(controller.getId())) {
         
-                    this.getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
+                    this.getEffects().get(0).setTargetPointer(new FixedTarget(permanent, game));
                     return true;
                 }
             }

@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -21,7 +20,7 @@ import mage.target.common.TargetCreaturePermanent;
 public final class Afterlife extends CardImpl {
 
     public Afterlife(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{W}");
 
         // Destroy target creature. It can't be regenerated. Its controller puts a
         // 1/1 white Spirit creature token with flying.
@@ -58,7 +57,7 @@ class AfterlifeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(this.getTargetPointer().getFirst(game, source));
+        Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (permanent != null) {
             SpiritWhiteToken token = new SpiritWhiteToken();
             token.putOntoBattlefield(1, game, source.getSourceId(), permanent.getControllerId());

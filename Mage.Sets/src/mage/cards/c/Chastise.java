@@ -58,7 +58,7 @@ class ChastiseEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(this.getTargetPointer().getFirst(game, source));
+        Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (permanent != null) {
             int power = permanent.getPower().getValue();
             Player player = game.getPlayer(source.getControllerId());

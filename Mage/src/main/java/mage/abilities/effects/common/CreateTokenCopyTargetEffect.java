@@ -1,5 +1,9 @@
 package mage.abilities.effects.common;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -19,11 +23,6 @@ import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 import mage.util.functions.ApplyToPermanent;
 import mage.util.functions.EmptyApplyToPermanent;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -71,8 +70,8 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
     }
 
     /**
-     * @param playerId           null the token is controlled/owned by the controller of
-     *                           the source ability
+     * @param playerId           null the token is controlled/owned by the
+     *                           controller of the source ability
      * @param additionalCardType the token gains this card type in addition
      * @param hasHaste           the token gains haste
      * @param number             number of tokens to put into play
@@ -133,7 +132,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         }
         Permanent permanent;
         if (useLKI) {
-            permanent = ((FixedTarget) getTargetPointer()).getTargetedPermanentOrLKIBattlefield(game);
+            permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         } else {
             permanent = game.getPermanentOrLKIBattlefield(targetId);
         }

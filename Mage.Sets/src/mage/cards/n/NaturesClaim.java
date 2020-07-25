@@ -54,7 +54,7 @@ class NaturesClaimEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent target = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+        Permanent target = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (target != null) {
             Player player = game.getPlayer(target.getControllerId());
             if (player != null) {

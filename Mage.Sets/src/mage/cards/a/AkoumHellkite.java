@@ -115,7 +115,7 @@ class AkoumHellkiteDamageEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent land = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+        Permanent land = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         Player player = game.getPlayer(source.getFirstTarget());
         if (land != null && player != null) {
             if (land.hasSubtype(SubType.MOUNTAIN, game)) {

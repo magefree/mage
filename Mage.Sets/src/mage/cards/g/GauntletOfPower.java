@@ -144,7 +144,7 @@ class GauntletOfPowerTapForManaAllTriggeredAbility extends TriggeredManaAbility 
                     }
                     switch (setTargetPointer) {
                         case PERMANENT:
-                            getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
+                            getEffects().get(0).setTargetPointer(new FixedTarget(permanent, game));
                             break;
                         case PLAYER:
                             getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getControllerId()));
@@ -182,7 +182,7 @@ class GauntletOfPowerManaEffect2 extends ManaEffect {
 
     @Override
     public Player getPlayer(Game game, Ability source) {
-        Permanent land = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+        Permanent land = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (land != null) {
             return game.getPlayer(land.getControllerId());
         }
@@ -204,7 +204,7 @@ class GauntletOfPowerManaEffect2 extends ManaEffect {
     @Override
     public Mana produceMana(Game game, Ability source) {
         if (game != null) {
-            Permanent land = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+            Permanent land = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
             if (land != null) {
                 Mana mana = (Mana) getValue("mana");
                 if (mana != null) {

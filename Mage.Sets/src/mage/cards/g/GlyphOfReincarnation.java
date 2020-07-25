@@ -80,7 +80,7 @@ class GlyphOfReincarnationEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent targetWall = game.getPermanentOrLKIBattlefield(source.getFirstTarget());
+        Permanent targetWall = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (controller != null && targetWall != null) {
             BlockedAttackerWatcher watcher = game.getState().getWatcher(BlockedAttackerWatcher.class);
             if (watcher != null) {

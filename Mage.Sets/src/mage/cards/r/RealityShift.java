@@ -60,7 +60,7 @@ class RealityShiftEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent targetCreature = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+        Permanent targetCreature = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (targetCreature != null) {
             Effect effect = new ManifestTargetPlayerEffect(1, "Its controller");
             effect.setTargetPointer(new FixedTarget(targetCreature.getControllerId()));

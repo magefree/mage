@@ -5,8 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.cards.Card;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -94,4 +96,25 @@ public class FirstTargetPointer implements TargetPointer {
 
     }
 
+    @Override
+    public Permanent getFirstTargetPermanentOrLKI(Game game, Ability source) {
+        UUID targetId = source.getFirstTarget();
+        Permanent permanent;
+        if (zoneChangeCounter.containsKey(targetId)) {
+            permanent = game.getPermanent(targetId);
+            if (permanent != null && permanent.getZoneChangeCounter(game) == zoneChangeCounter.get(targetId)) {
+                return permanent;
+            }
+            MageObject mageObject = game.getLastKnownInformation(targetId, Zone.BATTLEFIELD, zoneChangeCounter.get(targetId));
+            if (mageObject instanceof Permanent) {
+                return (Permanent) mageObject;
+            }
+        } else {
+            permanent = game.getPermanent(targetId);
+            if (permanent == null) {
+                permanent = (Permanent) game.getLastKnownInformation(targetId, Zone.BATTLEFIELD);
+            }
+        }
+        return permanent;
+    }
 }

@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 public class FlusterstormTest extends CardTestPlayerBase {
+
     @Test
     public void testThatFlusterstormGoesToGraveyard() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);

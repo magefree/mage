@@ -39,7 +39,7 @@ public class InfoEffect extends OneShotEffect {
         // add simple static info to permanent's rules
         SimpleStaticAbility ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new InfoEffect(info));
         GainAbilityTargetEffect gainAbilityEffect = new GainAbilityTargetEffect(ability, Duration.WhileOnBattlefield);
-        gainAbilityEffect.setTargetPointer(new FixedTarget(permanent.getId()));
+        gainAbilityEffect.setTargetPointer(new FixedTarget(permanent, game));
         game.addEffect(gainAbilityEffect, source);
     }
 }

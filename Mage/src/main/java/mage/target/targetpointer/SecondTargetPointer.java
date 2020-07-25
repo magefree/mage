@@ -1,9 +1,12 @@
 package mage.target.targetpointer;
 
 import java.util.*;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.cards.Card;
+import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 public class SecondTargetPointer implements TargetPointer {
 
@@ -78,6 +81,32 @@ public class SecondTargetPointer implements TargetPointer {
         UUID firstId = getFirst(game, source);
         if (firstId != null) {
             return new FixedTarget(firstId, game.getState().getZoneChangeCounter(firstId));
+        }
+        return null;
+    }
+
+    @Override
+    public Permanent getFirstTargetPermanentOrLKI(Game game, Ability source) {
+        if (source.getTargets().size() > 1) {
+            Permanent permanent;
+            UUID targetId = source.getTargets().get(1).getFirstTarget();
+            if (zoneChangeCounter.containsKey(targetId)) {
+                permanent = game.getPermanent(targetId);
+                if (permanent != null && permanent.getZoneChangeCounter(game) == zoneChangeCounter.get(targetId)) {
+                    return permanent;
+                }
+                MageObject mageObject = game.getLastKnownInformation(targetId, Zone.BATTLEFIELD, zoneChangeCounter.get(targetId));
+                if (mageObject instanceof Permanent) {
+                    return (Permanent) mageObject;
+                }
+
+            } else {
+                permanent = game.getPermanent(targetId);
+                if (permanent == null) {
+                    permanent = (Permanent) game.getLastKnownInformation(targetId, Zone.BATTLEFIELD);
+                }
+            }
+            return permanent;
         }
         return null;
     }

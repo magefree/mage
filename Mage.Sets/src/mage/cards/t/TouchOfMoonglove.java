@@ -74,7 +74,7 @@ class TouchOfMoongloveAddTriggerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+        Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (permanent != null) {
             DelayedTriggeredAbility delayedAbility = new TouchOfMoongloveDelayedTriggeredAbility(new MageObjectReference(permanent, game));
             game.addDelayedTriggeredAbility(delayedAbility, source);

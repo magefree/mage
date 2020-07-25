@@ -141,7 +141,7 @@ class ImprisonUnblockEffect extends OneShotEffect {
     
                     // Remove it from combat
                     Effect effect = new RemoveFromCombatTargetEffect();
-                    effect.setTargetPointer(new FixedTarget(permanent.getId()));
+                    effect.setTargetPointer(new FixedTarget(permanent, game));
                     effect.apply(game, source);
     
                     // Make blocked creatures unblocked

@@ -92,7 +92,7 @@ class DraconicRoarEffect extends OneShotEffect {
         if (controller != null) {
             DragonOnTheBattlefieldWhileSpellWasCastWatcher watcher = game.getState().getWatcher(DragonOnTheBattlefieldWhileSpellWasCastWatcher.class);
             if (watcher != null && watcher.castWithConditionTrue(source.getId())) {
-                Permanent permanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+                Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
                 if (permanent != null) {
                     Player player = game.getPlayer(permanent.getControllerId());
                     if (player != null) {

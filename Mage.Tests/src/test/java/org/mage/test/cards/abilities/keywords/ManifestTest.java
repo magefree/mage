@@ -123,6 +123,8 @@ public class ManifestTest extends CardTestPlayerBase {
      */
     @Test
     public void testNylea() {
+        setStrictChooseMode(true);
+
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
         // Exile target creature. Its controller manifests the top card of their library {1}{U}
         addCard(Zone.HAND, playerB, "Reality Shift");

@@ -117,7 +117,7 @@ class StandOrFallEffect extends OneShotEffect {
                     if (permanent != null) {
                         RestrictionEffect effect = new CantBlockTargetEffect(Duration.EndOfTurn);
                         effect.setText("");
-                        effect.setTargetPointer(new FixedTarget(permanent.getId()));
+                        effect.setTargetPointer(new FixedTarget(permanent, game));
                         game.addEffect(effect, source);
                     }
                 }

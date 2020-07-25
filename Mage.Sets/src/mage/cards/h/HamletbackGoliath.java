@@ -1,5 +1,6 @@
 package mage.cards.h;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -18,9 +19,8 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
-import java.util.UUID;
-
 /**
+ *
  * @author jeffwadsworth
  */
 public final class HamletbackGoliath extends CardImpl {
@@ -74,7 +74,7 @@ class HamletbackGoliathTriggeredAbility extends TriggeredAbilityImpl {
         if (permanent != null && permanent.isCreature()
                 && !(targetId.equals(this.getSourceId()))) {
             for (Effect effect : this.getEffects()) {
-                effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                effect.setTargetPointer(new FixedTarget(permanent, game));
             }
             return true;
         }
@@ -99,11 +99,8 @@ class HamletbackGoliathEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent creature = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent creature = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         Permanent sourceObject = game.getPermanent(source.getSourceId());
-        if (creature == null) {
-            creature = (Permanent) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.BATTLEFIELD);
-        }
         if (creature != null && sourceObject != null) {
             sourceObject.addCounters(CounterType.P1P1.createInstance(creature.getPower().getValue()), source, game);
         }

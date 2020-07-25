@@ -118,11 +118,11 @@ class TibaltTheFiendBloodedThirdEffect extends OneShotEffect {
             permanent.untap(game);
 
             ContinuousEffect effect = new TibaltTheFiendBloodedControlEffect(source.getControllerId());
-            effect.setTargetPointer(new FixedTarget(permanent.getId()));
+            effect.setTargetPointer(new FixedTarget(permanent, game));
             game.addEffect(effect, source);
 
             effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
-            effect.setTargetPointer(new FixedTarget(permanent.getId()));
+            effect.setTargetPointer(new FixedTarget(permanent, game));
             game.addEffect(effect, source);
         }
         return true;

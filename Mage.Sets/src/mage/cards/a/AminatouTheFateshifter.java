@@ -172,7 +172,7 @@ class AminatouUltimateEffect extends OneShotEffect {
                         continue;
                     }
                     ContinuousEffect effect = new GainControlTargetEffect(Duration.EndOfGame, currentPlayer);
-                    effect.setTargetPointer(new FixedTarget(permanent.getId()));
+                    effect.setTargetPointer(new FixedTarget(permanent, game));
                     game.addEffect(effect, source);
                 }
                 currentPlayer = nextPlayer;

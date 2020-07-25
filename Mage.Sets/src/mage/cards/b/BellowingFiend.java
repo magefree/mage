@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -69,7 +68,7 @@ class BellowingFiendEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         boolean applied = false;
-        Permanent damagedCreature = ((FixedTarget) targetPointer).getTargetedPermanentOrLKIBattlefield(game);
+        Permanent damagedCreature = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (damagedCreature != null) {
             Player controller = game.getPlayer(damagedCreature.getControllerId());
             if (controller != null) {
