@@ -1,6 +1,5 @@
 package mage.game;
 
-import java.util.*;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
@@ -18,6 +17,8 @@ import mage.game.permanent.PermanentToken;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetCard;
+
+import java.util.*;
 
 /**
  * Created by samuelsandeen on 9/6/16.
@@ -52,7 +53,7 @@ public final class ZonesHandler {
 
     public static List<ZoneChangeInfo> moveCards(List<ZoneChangeInfo> zoneChangeInfos, Game game) {
         // Handle Unmelded Meld Cards
-        for (ListIterator<ZoneChangeInfo> itr = zoneChangeInfos.listIterator(); itr.hasNext();) {
+        for (ListIterator<ZoneChangeInfo> itr = zoneChangeInfos.listIterator(); itr.hasNext(); ) {
             ZoneChangeInfo info = itr.next();
             MeldCard card = game.getMeldCard(info.event.getTargetId());
             // Copies should be handled as normal cards.
@@ -201,7 +202,7 @@ public final class ZonesHandler {
         if (info instanceof ZoneChangeInfo.Unmelded) {
             ZoneChangeInfo.Unmelded unmelded = (ZoneChangeInfo.Unmelded) info;
             MeldCard meld = game.getMeldCard(info.event.getTargetId());
-            for (Iterator<ZoneChangeInfo> itr = unmelded.subInfo.iterator(); itr.hasNext();) {
+            for (Iterator<ZoneChangeInfo> itr = unmelded.subInfo.iterator(); itr.hasNext(); ) {
                 ZoneChangeInfo subInfo = itr.next();
                 if (!maybeRemoveFromSourceZone(subInfo, game)) {
                     itr.remove();
@@ -233,6 +234,7 @@ public final class ZonesHandler {
         if (!game.replaceEvent(event)) {
             Zone fromZone = event.getFromZone();
             if (event.getToZone() == Zone.BATTLEFIELD) {
+                // prepare card and permanent
                 // If needed take attributes from the spell (e.g. color of spell was changed)
                 card = takeAttributesFromSpell(card, event, game);
                 // controlling player can be replaced so use event player now
@@ -245,15 +247,18 @@ public final class ZonesHandler {
                 } else {
                     permanent = new PermanentCard(card, event.getPlayerId(), game);
                 }
+
+                // put onto battlefield with possible counters
                 game.getPermanentsEntering().put(permanent.getId(), permanent);
                 card.checkForCountersToAdd(permanent, game);
-                permanent.setTapped(
-                        info instanceof ZoneChangeInfo.Battlefield && ((ZoneChangeInfo.Battlefield) info).tapped);
-                permanent.setFaceDown(info.faceDown, game);
+                permanent.setTapped(info instanceof ZoneChangeInfo.Battlefield
+                        && ((ZoneChangeInfo.Battlefield) info).tapped);
 
+                permanent.setFaceDown(info.faceDown, game);
                 if (info.faceDown) {
                     card.setFaceDown(false, game);
                 }
+
                 // make sure the controller of all continuous effects of this card are switched to the current controller
                 game.setScopeRelevant(true);
                 game.getContinuousEffects().setController(permanent.getId(), permanent.getControllerId());
