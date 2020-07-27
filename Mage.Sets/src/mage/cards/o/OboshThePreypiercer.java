@@ -94,7 +94,7 @@ class OboshThePreypiercerEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
+        MageObject sourceObject = game.getObject(event.getSourceId());
         return sourceObject != null
                 && sourceObject.getConvertedManaCost() % 2 == 1
                 && game.getControllerId(event.getSourceId()).equals(source.getControllerId());
