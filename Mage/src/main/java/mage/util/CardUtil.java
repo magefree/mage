@@ -8,18 +8,20 @@ import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.*;
+import mage.abilities.effects.ContinuousEffect;
 import mage.cards.Card;
-import mage.constants.ColoredManaSymbol;
-import mage.constants.EmptyNames;
-import mage.constants.ManaType;
-import mage.constants.SpellAbilityType;
+import mage.cards.MeldCard;
+import mage.constants.*;
 import mage.filter.Filter;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.CardState;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentCard;
+import mage.game.permanent.PermanentMeld;
 import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
+import mage.players.Player;
 import mage.target.Target;
 import mage.util.functions.CopyTokenFunction;
 
@@ -828,5 +830,49 @@ public final class CardUtil {
                 .map(t -> t.possibleTargets(ability.getSourceId(), ability.getControllerId(), game))
                 .flatMap(Collection::stream)
                 .collect(Collectors.toSet());
+    }
+
+    /**
+     * Put card to battlefield without resolve
+     *
+     * @param game
+     * @param card
+     * @param player
+     */
+    public static void putCardOntoBattlefieldWithEffects(Game game, Card card, Player player) {
+        // same logic as ZonesHandler->maybeRemoveFromSourceZone
+
+        // prepare card and permanent
+        card.setZone(Zone.BATTLEFIELD, game);
+        card.setOwnerId(player.getId());
+        PermanentCard permanent;
+        if (card instanceof MeldCard) {
+            permanent = new PermanentMeld(card, player.getId(), game);
+        } else {
+            permanent = new PermanentCard(card, player.getId(), game);
+        }
+
+        // put onto battlefield with possible counters
+        game.getPermanentsEntering().put(permanent.getId(), permanent);
+        card.checkForCountersToAdd(permanent, game);
+        permanent.entersBattlefield(permanent.getId(), game, Zone.OUTSIDE, false);
+        game.addPermanent(permanent, game.getState().getNextPermanentOrderNumber());
+        game.getPermanentsEntering().remove(permanent.getId());
+
+        // workaround for special tapped status from test framework's command (addCard)
+        if (card instanceof PermanentCard && ((PermanentCard) card).isTapped()) {
+            permanent.setTapped(true);
+        }
+
+        // remove sickness
+        permanent.removeSummoningSickness();
+
+        // init effects on static abilities (init continuous effects; warning, game state contains copy)
+        for (ContinuousEffect effect : game.getState().getContinuousEffects().getLayeredEffects(game)) {
+            Optional<Ability> ability = game.getState().getContinuousEffects().getLayeredEffectAbilities(effect).stream().findFirst();
+            if (ability.isPresent() && permanent.getId().equals(ability.get().getSourceId())) {
+                effect.init(ability.get(), game, player.getId());
+            }
+        }
     }
 }
