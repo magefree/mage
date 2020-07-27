@@ -2,26 +2,33 @@ package org.mage.test.cards.single.nph;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- * Created by glerman on 23/6/15.
- * what is this test???
+ * Created by glerman on 23/6/15
  */
-@Ignore
-public class NornsAnnexTest extends CardTestPlayerBase{
-  @Test
-  @Ignore
-  public void testNornsAnnex() {
-    addCard(Zone.BATTLEFIELD, playerA, "Norn's Annex");
-    addCard(Zone.BATTLEFIELD, playerB, "Brindle Boar");
-    attack(2, playerB, "Brindle Boar", playerA);
-    setStopAt(2, PhaseStep.END_TURN);
-    execute();
+public class NornsAnnexTest extends CardTestPlayerBase {
 
+    @Test
+    public void testNornsAnnex() {
+        setStrictChooseMode(true);
+        
+        // {W/P} ({W/P} can be paid with either or 2 life.)
+        // Creatures can't attack you or a planeswalker you control unless their controller pays {W/P} for each of those creatures.      
+        addCard(Zone.BATTLEFIELD, playerA, "Norn's Annex");
+        addCard(Zone.BATTLEFIELD, playerB, "Brindle Boar"); // Creature 2/2
 
+        attack(2, playerB, "Brindle Boar", playerA);
+        setChoice(playerB, "Yes"); // Pay {W/P} to attack?
+        setChoice(playerB, "Yes"); // Pay 2 life instead of {W}?
+        
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
 
-  }
+        assertLife(playerA, 18);
+        assertLife(playerB, 18);
+
+    }
 }
