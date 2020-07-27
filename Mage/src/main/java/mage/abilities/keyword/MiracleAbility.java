@@ -1,4 +1,3 @@
-
 package mage.abilities.keyword;
 
 import mage.MageObjectReference;
@@ -102,9 +101,7 @@ public class MiracleAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getSourceId().equals(getSourceId())) {
             // Refer to the card at the zone it is now (hand)
-            FixedTarget fixedTarget = new FixedTarget(event.getSourceId());
-            fixedTarget.init(game, this);
-            getEffects().get(0).setTargetPointer(fixedTarget);
+            getEffects().setTargetPointer(new FixedTarget(game.getCard(event.getSourceId()), game));
             return true;
         }
         return false;

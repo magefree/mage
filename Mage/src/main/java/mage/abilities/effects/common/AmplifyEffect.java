@@ -16,6 +16,7 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
@@ -108,6 +109,13 @@ public class AmplifyEffect extends ReplacementEffectImpl {
             } else if (filterSubtypes.size() == 1) {
                 filter.add(filterSubtypes.get(0));
             }
+
+            // You can’t reveal this card or any other cards that are entering the battlefield at the same time as this card.
+            filter.add(Predicates.not(new CardIdPredicate(source.getSourceId())));
+            for (Permanent enteringPermanent : game.getPermanentsEntering().values()) {
+                filter.add(Predicates.not(new CardIdPredicate(enteringPermanent.getId())));
+            }
+
             if (controller.getHand().count(filter, source.getSourceId(), source.getControllerId(), game) > 0) {
                 if (controller.chooseUse(outcome, "Reveal cards to Amplify?", source, game)) {
                     TargetCardInHand target = new TargetCardInHand(0, Integer.MAX_VALUE, filter);

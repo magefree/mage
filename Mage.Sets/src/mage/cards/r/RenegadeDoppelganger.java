@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
@@ -10,9 +9,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -28,7 +27,7 @@ import mage.util.functions.EmptyApplyToPermanent;
 public final class RenegadeDoppelganger extends CardImpl {
 
     public RenegadeDoppelganger(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.subtype.add(SubType.SHAPESHIFTER);
 
         this.power = new MageInt(0);
@@ -74,7 +73,7 @@ class RenegadeDoppelgangerTriggeredAbility extends TriggeredAbilityImpl {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent != null && permanent.isCreature() && permanent.isControlledBy(this.getControllerId())) {
                 for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(permanent.getId()));
+                    effect.setTargetPointer(new FixedTarget(permanent, game));
                 }
                 return true;
             }
@@ -107,10 +106,7 @@ class RenegadeDoppelgangerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        Permanent targetCreature = game.getPermanent(targetPointer.getFirst(game, source));
-        if (targetCreature == null) {
-            targetCreature = (Permanent) game.getLastKnownInformation(getTargetPointer().getFirst(game, source), Zone.BATTLEFIELD);
-        }
+        Permanent targetCreature = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (targetCreature == null || permanent == null) {
             return false;
         }

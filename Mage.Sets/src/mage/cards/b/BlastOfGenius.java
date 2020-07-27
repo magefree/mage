@@ -1,5 +1,6 @@
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -12,8 +13,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetDiscard;
-
-import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -43,7 +42,7 @@ class BlastOfGeniusEffect extends OneShotEffect {
 
     public BlastOfGeniusEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Choose any target. Draw three cards and discard a card. Blast of Genius deals damage equal to the converted mana cost of the discard card to that permanent or player";
+        this.staticText = "Choose any target. Draw three cards and discard a card. {this} deals damage equal to the converted mana cost of the discard card to that permanent or player";
     }
 
     public BlastOfGeniusEffect(final BlastOfGeniusEffect effect) {

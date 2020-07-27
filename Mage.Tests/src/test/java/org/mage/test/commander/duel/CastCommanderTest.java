@@ -63,4 +63,34 @@ public class CastCommanderTest extends CardTestCommanderDuelBase {
         assertPowerToughness(playerA, "Silvercoat Lion", 6, 6);
     }     
     
+   
+    @Test
+    public void testCastPatronOfTheOrochiCommander() {
+        // Snake offering (You may cast this card any time you could cast an instant 
+        // by sacrificing a Snake and paying the difference in mana costs between this 
+        // and the sacrificed Snake. Mana cost includes color.)
+        // {T}: Untap all Forests and all green creatures. Activate this ability only once each turn.    
+        addCard(Zone.COMMAND, playerA, "Patron of the Orochi", 1); // Creature  {6}{G}{G} 7/7
+        
+        // First strike
+        addCard(Zone.BATTLEFIELD, playerA, "Coiled Tinviper", 1); // Creature Snake {3} 2/1
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 8); // Cost reduction does not work for getPlayable so you need to have 8 mana available
+       
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Patron of the Orochi");
+        setChoice(playerA, "Yes");
+        addTarget(playerA, "Coiled Tinviper");
+
+        setStrictChooseMode(true);
+        
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertAllCommandsUsed();
+        assertLife(playerA, 40);
+        assertLife(playerB, 40);
+       
+        assertPermanentCount(playerA, "Patron of the Orochi", 1);        
+        assertGraveyardCount(playerA, "Coiled Tinviper", 1);
+        assertTappedCount("Forest", false, 3);
+    }        
 }

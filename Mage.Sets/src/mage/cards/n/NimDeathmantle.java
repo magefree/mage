@@ -91,7 +91,7 @@ class NimDeathmantleTriggeredAbility extends TriggeredAbilityImpl {
                 && !(permanent instanceof PermanentToken)
                 && permanent.isCreature()) {
 
-            getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
+            getEffects().get(0).setTargetPointer(new FixedTarget(permanent, game));
             return true;
         }
         return false;

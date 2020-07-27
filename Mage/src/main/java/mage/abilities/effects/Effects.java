@@ -1,12 +1,12 @@
 package mage.abilities.effects;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.constants.Outcome;
 import mage.target.targetpointer.TargetPointer;
 import mage.util.CardUtil;
-
-import java.util.ArrayList;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -14,9 +14,7 @@ import java.util.ArrayList;
 public class Effects extends ArrayList<Effect> {
 
     public Effects(Effect... effects) {
-        for (Effect effect : effects) {
-            this.add(effect);
-        }
+        this.addAll(Arrays.asList(effects));
     }
 
     public Effects(final Effects effects) {
@@ -64,15 +62,15 @@ public class Effects extends ArrayList<Effect> {
                     endString = " ";
                 } else if (nextRule.startsWith(",") || nextRule.startsWith(" ")) {
                     endString = "";
-                // nextRule determined to be a new sentence, now check ending of lastRule
+                    // nextRule determined to be a new sentence, now check ending of lastRule
                 } else if (lastRule != null && lastRule.length() > 3) {
                     //check if lastRule already has appropriate punctuation, if so, add a space.
-                    if (lastRule.endsWith(".\"") ||
-                            lastRule.endsWith(".)") ||
-                            lastRule.endsWith(".)</i>") ||
-                            lastRule.endsWith(".")){
+                    if (lastRule.endsWith(".\"")
+                            || lastRule.endsWith(".)")
+                            || lastRule.endsWith(".)</i>")
+                            || lastRule.endsWith(".")) {
                         endString = " ";
-                     // if lastRule does not have appropriate punctuation, add the default ". "
+                        // if lastRule does not have appropriate punctuation, add the default ". "
                     } else if (!lastRule.endsWith(".") && !lastRule.endsWith("<br>")) {
                         endString = ". ";
                     }

@@ -2,10 +2,13 @@ package mage.cards.s;
 
 import mage.MageObject;
 import mage.MageObjectReference;
+import mage.abilities.Ability;
 import mage.abilities.common.SpellCastAllTriggeredAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -44,13 +47,18 @@ public final class SentinelTower extends CardImpl {
 
 class SentinelTowerTriggeredAbility extends SpellCastAllTriggeredAbility {
 
+    private String damageInfo;
+
     SentinelTowerTriggeredAbility() {
         super(new DamageTargetEffect(0), StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, false);
         this.addTarget(new TargetAnyTarget());
+        this.addHint(new ValueHint("There were cast instant and sorcery this turn", SentinelTowerSpellsCastValue.instance));
+        this.damageInfo = null;
     }
 
     SentinelTowerTriggeredAbility(final SentinelTowerTriggeredAbility effect) {
         super(effect);
+        this.damageInfo = effect.damageInfo;
     }
 
     @Override
@@ -78,6 +86,7 @@ class SentinelTowerTriggeredAbility extends SpellCastAllTriggeredAbility {
                     break;
                 }
             }
+            damageInfo = " (<b>" + damageToDeal + " damage</b>)";
             for (Effect effect : this.getEffects()) {
                 if (effect instanceof DamageTargetEffect) {
                     ((DamageTargetEffect) effect).setAmount(StaticValue.get(damageToDeal));
@@ -92,7 +101,8 @@ class SentinelTowerTriggeredAbility extends SpellCastAllTriggeredAbility {
     public String getRule() {
         return "Whenever an instant or sorcery spell is cast during your turn, "
                 + "{this} deals damage to any target equal to 1 "
-                + "plus the number of instant and sorcery spells cast before that spell this turn.";
+                + "plus the number of instant and sorcery spells cast before that spell this turn."
+                + (damageInfo != null ? damageInfo : "");
     }
 }
 
@@ -122,5 +132,38 @@ class SentinelTowerWatcher extends Watcher {
 
     public List<MageObjectReference> getSpellsThisTurn() {
         return spellsThisTurn;
+    }
+}
+
+enum SentinelTowerSpellsCastValue implements DynamicValue {
+
+    instance;
+
+    @Override
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        SentinelTowerWatcher watcher = game.getState().getWatcher(SentinelTowerWatcher.class);
+        if (watcher == null) {
+            return 0;
+        }
+        List<MageObjectReference> spellsCast = watcher.getSpellsThisTurn();
+        if (spellsCast == null) {
+            return 0;
+        }
+        return spellsCast.size();
+    }
+
+    @Override
+    public SentinelTowerSpellsCastValue copy() {
+        return instance;
+    }
+
+    @Override
+    public String toString() {
+        return "X";
+    }
+
+    @Override
+    public String getMessage() {
+        return "There was an instant or sorcery spell in this turn";
     }
 }

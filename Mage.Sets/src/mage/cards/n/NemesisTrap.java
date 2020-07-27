@@ -79,7 +79,7 @@ class NemesisTrapEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent targetedCreature = game.getPermanentOrLKIBattlefield(source.getFirstTarget());
+        Permanent targetedCreature = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && targetedCreature != null) {
             // exile target

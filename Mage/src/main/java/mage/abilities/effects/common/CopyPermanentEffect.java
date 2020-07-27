@@ -64,6 +64,7 @@ public class CopyPermanentEffect extends OneShotEffect {
             this.bluePrintPermanent = effect.bluePrintPermanent.copy();
         }
         this.useTargetOfAbility = effect.useTargetOfAbility;
+        this.duration = effect.duration;
     }
 
     @Override

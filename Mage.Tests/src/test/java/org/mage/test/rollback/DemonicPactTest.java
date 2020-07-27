@@ -87,12 +87,12 @@ public class DemonicPactTest extends CardTestPlayerBase {
      * the game. The log says I'm the winner and the opponent lost and that is
      * immediately after rollback request.
      */
-    
     @Test
     public void testPactOfNegationRollback() {
+        setStrictChooseMode(true);
+
         addCard(Zone.HAND, playerA, "Silvercoat Lion", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
-
 
         addCard(Zone.BATTLEFIELD, playerB, "Island", 5);
         // Counter target spell.
@@ -106,22 +106,21 @@ public class DemonicPactTest extends CardTestPlayerBase {
 
         rollbackTurns(2, PhaseStep.PRECOMBAT_MAIN, playerB, 0);
 
-        setStrictChooseMode(true);
+        setChoice(playerB, "Yes");
+
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
-        
-        assertAllCommandsUsed();
 
+        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Silvercoat Lion", 1);
         assertGraveyardCount(playerB, "Pact of Negation", 1);
-        
+
         Assert.assertTrue("Player A is still in game", playerA.isInGame());
         Assert.assertTrue("Player B is still in game", playerB.isInGame());
-        
-        assertTappedCount("Island", true,  5); 
 
+        assertTappedCount("Island", true, 5);
 
     }
-    
+
 }

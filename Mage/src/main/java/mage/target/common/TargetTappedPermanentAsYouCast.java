@@ -55,6 +55,8 @@ public class TargetTappedPermanentAsYouCast extends TargetPermanent {
     @Override
     public boolean stillLegalTarget(UUID id, Ability source, Game game) {
         Permanent permanent = game.getPermanent(id);
-        return permanent != null && getFilter().match(permanent, game);
+        return permanent != null 
+                && getFilter().match(permanent, game)
+                && super.canTarget(id, game);  // check everything but leave out the tapped requirement
     }
 }

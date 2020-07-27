@@ -1,7 +1,5 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.CycleAllTriggeredAbility;
@@ -19,8 +17,9 @@ import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author Plopman
  */
 public final class AstralSlide extends CardImpl {
@@ -48,7 +47,7 @@ class AstralSlideEffect extends OneShotEffect {
 
     public AstralSlideEffect() {
         super(Outcome.Detriment);
-        staticText = "exile target creature. If you do, eturn that card to the battlefield under its owner's control at the beginning of the next end step";
+        staticText = "exile target creature. If you do, return that card to the battlefield under its owner's control at the beginning of the next end step";
     }
 
     public AstralSlideEffect(final AstralSlideEffect effect) {
@@ -65,7 +64,7 @@ class AstralSlideEffect extends OneShotEffect {
                 UUID exileId = UUID.randomUUID();
                 if (controller.moveCardsToExile(permanent, source, game, true, exileId, sourceObject.getIdName())) {
                     //create delayed triggered ability
-                    Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect();
+                    Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false);
                     effect.setText("Return that card to the battlefield under its owner's control at the beginning of the next end step");
                     effect.setTargetPointer(new FixedTarget(permanent.getId(), game));
                     game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect), source);

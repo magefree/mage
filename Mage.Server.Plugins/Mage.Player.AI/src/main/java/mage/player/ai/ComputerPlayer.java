@@ -1,5 +1,9 @@
 package mage.player.ai;
 
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.*;
+import java.util.Map.Entry;
 import mage.ConditionalMana;
 import mage.MageObject;
 import mage.MageObjectReference;
@@ -56,11 +60,6 @@ import mage.util.RandomUtil;
 import mage.util.TournamentUtil;
 import mage.util.TreeNode;
 import org.apache.log4j.Logger;
-
-import java.io.IOException;
-import java.io.Serializable;
-import java.util.*;
-import java.util.Map.Entry;
 
 /**
  * suitable for two player games and some multiplayer games
@@ -137,8 +136,6 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         // - target.getTargetController(), this.getId() -- player that must makes choices (must be same with this.getId)
         // - target.getAbilityController(), abilityControllerId -- affected player/controller for all actions/filters
         // - affected controler can be different from target controller (another player makes choices for controller)
-
-
         // sometimes a target selection can be made from a player that does not control the ability
         UUID abilityControllerId = playerId;
         if (target.getTargetController() != null
@@ -478,7 +475,6 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         // target - real target, make all changes and add targets to it
         // target.getOriginalTarget() - copy spell effect replaces original target with TargetWithAdditionalFilter
         // use originalTarget to get filters and target class info
-
         // source can be null (as example: legendary rule permanent selection)
         UUID sourceId = source != null ? source.getSourceId() : null;
 
@@ -729,17 +725,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             List<Permanent> targets;
             TargetPermanentOrPlayer origTarget = ((TargetPermanentOrPlayer) target.getOriginalTarget());
 
-            // TODO: if effect is bad and no opponent's targets available then AI can't target yourself but must by rules
-            /*
-            battlefield:Computer:Mountain:5
-            hand:Computer:Viashino Pyromancer:3
-            battlefield:Human:Shalai, Voice of Plenty:1
-             */
             // TODO: in multiplayer game there many opponents - if random opponents don't have targets then AI must use next opponent, but it skips
             //  (e.g. you randomOpponentId must be replaced by List<UUID> randomOpponents)
-
             // normal cycle (good for you, bad for opponents)
-
             // possible good/bad permanents
             if (outcome.isGood()) {
                 targets = threats(abilityControllerId, source.getSourceId(), ((FilterPermanentOrPlayer) target.getFilter()).getPermanentFilter(), game, target.getTargets());
@@ -780,6 +768,16 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 }
             } else if (target.canTarget(abilityControllerId, randomOpponentId, source, game)) {
                 return tryAddTarget(target, randomOpponentId, source, game);
+            }
+
+            // try target player as bad (bad on itself, good on opponent)
+            for (UUID opponentId : game.getOpponents(abilityControllerId)) {
+                if (target.canTarget(abilityControllerId, opponentId, source, game)) {
+                    return tryAddTarget(target, opponentId, source, game);
+                }
+            }
+            if (target.canTarget(abilityControllerId, abilityControllerId, source, game)) {
+                return tryAddTarget(target, abilityControllerId, source, game);
             }
 
             return false;
@@ -1308,7 +1306,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         playableAbilities.clear();
         Set<Card> nonLands = hand.getCards(new FilterNonlandCard(), game);
         ManaOptions available = getManaAvailable(game);
-        available.addMana(manaPool.getMana());
+//        available.addMana(manaPool.getMana());
 
         for (Card card : nonLands) {
             ManaOptions options = card.getManaCost().getOptions();
@@ -2558,7 +2556,6 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         }
     }
 
-
     protected List<Permanent> threats(UUID playerId, UUID sourceId, FilterPermanent filter, Game game, List<UUID> targets) {
         return threats(playerId, sourceId, filter, game, targets, true);
     }
@@ -2683,7 +2680,6 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         int after = target.getTargets().size();
         return before != after;
     }
-
 
     /**
      * Sets a possible target player

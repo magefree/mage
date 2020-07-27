@@ -18,7 +18,7 @@ import mage.util.CardUtil;
 public class SpellCostReductionForEachSourceEffect extends CostModificationEffectImpl {
 
     private final DynamicValue eachAmount;
-    private ManaCosts<ManaCost> reduceManaCosts;
+    private final ManaCosts<ManaCost> reduceManaCosts;
     private final int reduceGenericMana;
 
     public SpellCostReductionForEachSourceEffect(int reduceGenericMana, DynamicValue eachAmount) {
@@ -49,7 +49,6 @@ public class SpellCostReductionForEachSourceEffect extends CostModificationEffec
         sb.append(" less to cast for each ").append(this.eachAmount.getMessage());
         this.staticText = sb.toString();
     }
-
 
     protected SpellCostReductionForEachSourceEffect(final SpellCostReductionForEachSourceEffect effect) {
         super(effect);

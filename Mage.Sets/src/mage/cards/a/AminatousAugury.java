@@ -104,7 +104,7 @@ class AminatousAuguryEffect extends OneShotEffect {
             }
             for (Card card : cardsToCast.getCards(StaticFilters.FILTER_CARD_NON_LAND, game)) {
                 AminatousAuguryCastFromExileEffect effect = new AminatousAuguryCastFromExileEffect();
-                effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
+                effect.setTargetPointer(new FixedTarget(card, game));
                 game.addEffect(effect, source);
             }
         }

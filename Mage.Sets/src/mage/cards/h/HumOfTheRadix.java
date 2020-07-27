@@ -1,6 +1,5 @@
 package mage.cards.h;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -13,6 +12,7 @@ import mage.game.Game;
 import mage.util.CardUtil;
 
 import java.util.UUID;
+import mage.cards.Card;
 
 /**
  * @author Pete Rossi
@@ -58,9 +58,12 @@ class HumOfTheRadixCostIncreaseEffect extends CostModificationEffectImpl {
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         if (abilityToModify instanceof SpellAbility) {
-            MageObject sourceObject = abilityToModify.getSourceObject(game);
-            if (sourceObject != null && sourceObject.isArtifact()) {
-                return true;
+            Card spellCard = ((SpellAbility) abilityToModify).getCharacteristics(game);
+            if (spellCard != null) {
+                if (((SpellAbility) abilityToModify).getSpellAbilityCastMode() != SpellAbilityCastMode.NORMAL) {
+                    spellCard = ((SpellAbility) abilityToModify).getSpellAbilityCastMode().getTypeModifiedCardObjectCopy(spellCard, game);
+                }
+                return !spellCard.isArtifact();
             }
         }
         return false;

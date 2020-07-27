@@ -1,5 +1,9 @@
 package mage.game.permanent.token;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectImpl;
 import mage.abilities.Ability;
@@ -13,11 +17,6 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 import mage.util.RandomUtil;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.UUID;
 
 public abstract class TokenImpl extends MageObjectImpl implements Token {
 
@@ -202,8 +201,9 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
             }
         }
         game.setScopeRelevant(false);
+        int createOrder = game.getState().getNextPermanentOrderNumber();
         for (Permanent permanent : permanentsEntered) {
-            game.addPermanent(permanent);
+            game.addPermanent(permanent, createOrder);
             permanent.setZone(Zone.BATTLEFIELD, game);
             game.getPermanentsEntering().remove(permanent.getId());
 
@@ -242,8 +242,8 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
     }
 
     /**
-     * Set token index to search in card-pictures-tok.txt (if set have multiple tokens with same name)
-     * Default is 1
+     * Set token index to search in card-pictures-tok.txt (if set have multiple
+     * tokens with same name) Default is 1
      */
     @Override
     public void setTokenType(int tokenType) {

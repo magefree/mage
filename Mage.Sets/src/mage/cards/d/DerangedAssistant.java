@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -17,14 +16,14 @@ import mage.constants.SubType;
 public final class DerangedAssistant extends CardImpl {
 
     public DerangedAssistant(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {T}, Put the top card of your library into your graveyard: Add {C}.
+        // {T}, Mill a card: Add {C}.
         ColorlessManaAbility ability = new ColorlessManaAbility();
         ability.addCost(new PutTopCardOfYourLibraryToGraveyardCost());
         ability.setUndoPossible(false);

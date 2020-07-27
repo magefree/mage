@@ -80,7 +80,7 @@ class PsychicTheftEffect extends OneShotEffect {
                 Card chosenCard = null;
                 if (cardsHand > 0) {
                     TargetCard target = new TargetCard(Zone.HAND, filter);
-                    if (controller.choose(Outcome.Benefit, opponent.getHand(), target, game)) {
+                    if (controller.choose(Outcome.Exile, opponent.getHand(), target, game)) {
                         chosenCard = opponent.getHand().get(target.getFirstTarget(), game);
                     }
                 }
@@ -156,7 +156,7 @@ class PsychicTheftCondition implements Condition {
         if (!game.getExile().getExileZone(exileId).contains(cardId)) {
             return false;
         }
-        SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class, source.getSourceId());
+        SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
         if (watcher != null) {
             List<Spell> spells = watcher.getSpellsCastThisTurn(source.getControllerId());
             if (spells != null) {

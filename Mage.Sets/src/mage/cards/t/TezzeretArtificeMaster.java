@@ -1,6 +1,5 @@
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.condition.common.MetalcraftCondition;
@@ -8,16 +7,19 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.abilities.hint.common.MetalcraftHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.game.command.emblems.TezzeretArtificeMasterEmblem;
 import mage.game.permanent.token.ThopterColorlessToken;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class TezzeretArtificeMaster extends CardImpl {
@@ -38,8 +40,10 @@ public final class TezzeretArtificeMaster extends CardImpl {
                 new DrawCardSourceControllerEffect(1),
                 MetalcraftCondition.instance,
                 "Draw a card. If you control three or "
-                + "more artifacts, draw two cards instead"
-        ), 0));
+                        + "more artifacts, draw two cards instead"
+        ), 0)
+                .setAbilityWord(AbilityWord.METALCRAFT)
+                .addHint(MetalcraftHint.instance));
 
         // −9: You get an emblem with "At the beginning of your end step, search your library for a permanent card, put it into the battlefield, then shuffle your library."
         this.addAbility(new LoyaltyAbility(

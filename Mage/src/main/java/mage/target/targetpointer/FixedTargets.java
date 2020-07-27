@@ -5,17 +5,18 @@
  */
 package mage.target.targetpointer;
 
-import mage.MageObjectReference;
-import mage.abilities.Ability;
-import mage.cards.Card;
-import mage.cards.Cards;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import mage.MageObject;
+import mage.MageObjectReference;
+import mage.abilities.Ability;
+import mage.cards.Card;
+import mage.cards.Cards;
+import mage.constants.Zone;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
  * @author LevelX2
@@ -113,6 +114,36 @@ public class FixedTargets implements TargetPointer {
         UUID firstId = getFirst(game, source);
         if (firstId != null) {
             return new FixedTarget(firstId, game.getState().getZoneChangeCounter(firstId));
+        }
+        return null;
+    }
+
+    @Override
+    public Permanent getFirstTargetPermanentOrLKI(Game game, Ability source) {
+        UUID targetId = null;
+        int zoneChangeCounter = Integer.MIN_VALUE;
+        if (!targets.isEmpty()) {
+            MageObjectReference mor = targets.get(0);
+            targetId = mor.getSourceId();
+            zoneChangeCounter = mor.getZoneChangeCounter();
+        } else if (!targetsNotInitialized.isEmpty()) {
+            targetId = targetsNotInitialized.get(0);
+        }
+        if (targetId != null) {
+            Permanent permanent = game.getPermanent(targetId);
+            if (permanent != null
+                    && (zoneChangeCounter == Integer.MIN_VALUE || permanent.getZoneChangeCounter(game) == zoneChangeCounter)) {
+                return permanent;
+            }
+            MageObject mageObject;
+            if (zoneChangeCounter == Integer.MIN_VALUE) {
+                mageObject = game.getLastKnownInformation(targetId, Zone.BATTLEFIELD);
+            } else {
+                mageObject = game.getLastKnownInformation(targetId, Zone.BATTLEFIELD, zoneChangeCounter);
+            }
+            if (mageObject instanceof Permanent) {
+                return (Permanent) mageObject;
+            }
         }
         return null;
     }

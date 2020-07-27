@@ -1,11 +1,13 @@
-
 package mage.cards.s;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -16,9 +18,6 @@ import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInGraveyard;
 
-import java.util.List;
-import java.util.UUID;
-
 /**
  *
  * @author LevelX2
@@ -26,7 +25,7 @@ import java.util.UUID;
 public final class StreamOfConsciousness extends CardImpl {
 
     public StreamOfConsciousness(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.subtype.add(SubType.ARCANE);
 
         // Target player shuffles up to four target cards from their graveyard into their library.
@@ -64,23 +63,11 @@ class StreamOfConsciousnessEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getFirstTarget());
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
-            List<UUID> targets = source.getTargets().get(1).getTargets();
-            boolean shuffle = false;
-            for (UUID targetId : targets) {
-                Card card = game.getCard(targetId);
-                if (card != null) {
-                    if (player.getGraveyard().contains(card.getId())) {
-                        card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-                        shuffle = true;
-                    }
-                }
-            }
-            if (shuffle) {
-                player.shuffleLibrary(source, game);
-            }
-            return true;
+            Cards targets = new CardsImpl(source.getTargets().get(1).getTargets());
+            targets.retainAll(player.getGraveyard());
+            return player.shuffleCardsToLibrary(targets, game, source);
         }
         return false;
     }

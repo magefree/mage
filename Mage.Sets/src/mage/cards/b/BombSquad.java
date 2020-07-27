@@ -94,7 +94,7 @@ class BombSquadTriggeredAbility extends TriggeredAbilityImpl {
             if (permanent != null && filter.match(permanent, game)) {
                 if (4 <= permanent.getCounters(game).getCount(CounterType.FUSE)) {
                     for (Effect effect : this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(permanent.getId()));
+                        effect.setTargetPointer(new FixedTarget(permanent, game));
                     }
                     return true;
                 }

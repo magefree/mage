@@ -1,36 +1,39 @@
 package mage.constants;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import mage.MageObject;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * @author North
  */
 public enum CardType {
-    ARTIFACT("Artifact", true),
-    CONSPIRACY("Conspiracy", false),
-    CREATURE("Creature", true),
-    ENCHANTMENT("Enchantment", true),
-    INSTANT("Instant", false),
-    LAND("Land", true),
-    PHENOMENON("Phenomenon", false),
-    PLANE("Plane", false),
-    PLANESWALKER("Planeswalker", true),
-    SCHEME("Scheme", false),
-    SORCERY("Sorcery", false),
-    TRIBAL("Tribal", false),
-    VANGUARD("Vanguard", false);
+    ARTIFACT("Artifact", true, true),
+    CONSPIRACY("Conspiracy", false, false),
+    CREATURE("Creature", true, true),
+    ENCHANTMENT("Enchantment", true, true),
+    INSTANT("Instant", false, true),
+    LAND("Land", true, true),
+    PHENOMENON("Phenomenon", false, false),
+    PLANE("Plane", false, false),
+    PLANESWALKER("Planeswalker", true, true),
+    SCHEME("Scheme", false, false),
+    SORCERY("Sorcery", false, true),
+    TRIBAL("Tribal", false, false),
+    VANGUARD("Vanguard", false, false);
 
     private final String text;
     private final boolean permanentType;
+    private final boolean includeInSearch; // types that can be searched/filtered by Deck Editor
     private final CardTypePredicate predicate;
 
-    CardType(String text, boolean permanentType) {
+    CardType(String text, boolean permanentType, boolean includeInSearch) {
         this.text = text;
         this.permanentType = permanentType;
+        this.includeInSearch = includeInSearch;
         this.predicate = new CardTypePredicate(this);
     }
 
@@ -51,6 +54,10 @@ public enum CardType {
 
     public boolean isPermanentType() {
         return permanentType;
+    }
+
+    public boolean isIncludeInSearch() {
+        return includeInSearch;
     }
 
     /**

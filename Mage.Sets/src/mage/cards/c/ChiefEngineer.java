@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.GainAbilityControlledSpellsEffect;
@@ -11,10 +9,11 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterArtifactSpell;
+import mage.filter.common.FilterArtifactCard;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class ChiefEngineer extends CardImpl {
@@ -28,7 +27,7 @@ public final class ChiefEngineer extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Artifact spells you cast have convoke.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledSpellsEffect(new ConvokeAbility(), new FilterArtifactSpell("Artifact spells you cast"))));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledSpellsEffect(new ConvokeAbility(), new FilterArtifactCard("Artifact spells you cast"))));
 
     }
 

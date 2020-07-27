@@ -13,7 +13,6 @@ import mage.abilities.keyword.AffinityForArtifactsAbility;
 import mage.cards.*;
 import mage.constants.*;
 import mage.filter.FilterCard;
-import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterArtifactCard;
 import mage.filter.predicate.Predicates;
@@ -28,7 +27,7 @@ import java.util.UUID;
  */
 public final class TezzeretMasterOfTheBridge extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("creature and planeswalker spells");
+    private static final FilterCard filter = new FilterCard("creature and planeswalker spells");
 
     static {
         filter.add(Predicates.or(

@@ -1,7 +1,5 @@
 package mage.cards.c;
 
-import java.util.UUID;
-import java.util.stream.Collectors;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -15,7 +13,6 @@ import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetE
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import static mage.constants.Outcome.Benefit;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledEnchantmentPermanent;
@@ -28,6 +25,11 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
+import java.util.stream.Collectors;
+
+import static mage.constants.Outcome.Benefit;
 
 /**
  * @author TheElk801
@@ -155,7 +157,7 @@ class CalixDestinysHandDelayedTriggeredAbility extends DelayedTriggeredAbility {
             return false;
         }
         this.getEffects().clear();
-        this.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect()
+        this.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false)
                 .setTargetPointer(new FixedTarget(this.theirMor)));
         return true;
     }

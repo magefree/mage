@@ -79,7 +79,7 @@ class SpittingSlugEffect extends OneShotEffect {
             filter.add(Predicates.or(new BlockedByIdPredicate(sourcePermanent.getId()), new BlockingAttackerIdPredicate(sourcePermanent.getId())));
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, game)) {
                 ContinuousEffect effect = new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn);
-                effect.setTargetPointer(new FixedTarget(permanent.getId()));
+                effect.setTargetPointer(new FixedTarget(permanent, game));
                 game.addEffect(effect, source);
             }
             return true;

@@ -1,5 +1,9 @@
 package mage.cards.h;
 
+import java.util.Objects;
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -18,11 +22,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
-
-import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author Plopman
@@ -57,10 +56,10 @@ class HelmOfObedienceEffect extends OneShotEffect {
 
     HelmOfObedienceEffect() {
         super(Outcome.Detriment);
-        staticText = "Target opponent mills a card, then repeats this process until a creature card " +
-                "or X cards have been put into their graveyard this way, whichever comes first. " +
-                "If one or more creature cards were put into that graveyard this way, " +
-                "sacrifice {this} and put one of them onto the battlefield under your control. X can't be 0";
+        staticText = "Target opponent mills a card, then repeats this process until a creature card "
+                + "or X cards have been put into their graveyard this way, whichever comes first. "
+                + "If one or more creature cards were put into that graveyard this way, "
+                + "sacrifice {this} and put one of them onto the battlefield under your control. X can't be 0";
     }
 
     private HelmOfObedienceEffect(final HelmOfObedienceEffect effect) {
@@ -94,11 +93,14 @@ class HelmOfObedienceEffect extends OneShotEffect {
             if (!creatures.isEmpty()) {
                 controller.moveCards(creatures, Zone.BATTLEFIELD, source, game);
             }
-            if (!creatures.isEmpty() || numberOfCard >= max) {
+            if (!creatures.isEmpty()) {
                 Permanent permanent = game.getPermanent(source.getSourceId());
                 if (permanent != null) {
                     permanent.sacrifice(source.getSourceId(), game);
                 }
+                break;
+            }
+            if (numberOfCard >= max) {
                 break;
             }
         }

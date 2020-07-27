@@ -1,5 +1,6 @@
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.ConditionalMana;
 import mage.MageInt;
 import mage.Mana;
@@ -24,8 +25,6 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.game.Game;
 
-import java.util.UUID;
-
 /**
  * @author TheElk801
  */
@@ -45,9 +44,8 @@ public final class CrypticTrilobite extends CardImpl {
 
         // Remove a +1/+1 counter from Cryptic Trilobite: Add {C}{C}. Spend this mana only to activate abilities.
         this.addAbility(new ConditionalColorlessManaAbility(
-                new RemoveCountersSourceCost(
-                        CounterType.P1P1.createInstance()
-                ), 2, new CrypticTrilobiteManaBuilder()
+                new RemoveCountersSourceCost(CounterType.P1P1.createInstance()),
+                2, new CrypticTrilobiteManaBuilder()
         ));
 
         // {1}, {T}: Put a +1/+1 counter on Cryptic Trilobite.
@@ -94,7 +92,12 @@ class CrypticTrilobiteManaCondition extends ManaCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return source != null && source.getAbilityType() == AbilityType.ACTIVATED;
+        if (source != null) {
+            // ex: SimpleManaAbility is an ACTIVATED ability, but it is categorized as a MANA ability
+            return source.getAbilityType() == AbilityType.MANA
+                    || source.getAbilityType() == AbilityType.ACTIVATED;
+        }
+        return false;
     }
 
     @Override

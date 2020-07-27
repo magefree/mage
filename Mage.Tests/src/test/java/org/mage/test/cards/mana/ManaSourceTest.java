@@ -1,4 +1,3 @@
-
 package org.mage.test.cards.mana;
 
 import mage.constants.PhaseStep;
@@ -35,7 +34,6 @@ public class ManaSourceTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerB, "Myr Superion", 0);
         assertHandCount(playerB, "Myr Superion", 1);
-
     }
 
 }

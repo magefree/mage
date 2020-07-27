@@ -1,6 +1,5 @@
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -14,13 +13,14 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.game.permanent.token.RetrofitterFoundryToken;
+import mage.game.permanent.token.Construct4Token;
 import mage.game.permanent.token.ServoToken;
 import mage.game.permanent.token.ThopterColorlessToken;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class RetrofitterFoundry extends CardImpl {
@@ -62,7 +62,7 @@ public final class RetrofitterFoundry extends CardImpl {
 
         // {T}, Sacrifice a Thopter: Create a 4/4 colorless Construct artifact creature token.
         ability = new SimpleActivatedAbility(
-                new CreateTokenEffect(new RetrofitterFoundryToken()),
+                new CreateTokenEffect(new Construct4Token()),
                 new TapSourceCost()
         );
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter2)));

@@ -19,6 +19,7 @@ public class CardState implements Serializable {
     protected Counters counters;
     protected Abilities<Ability> abilities;
     protected boolean lostAllAbilities;
+    protected boolean melded;
 
     private static final Map<String, String> emptyInfo = new HashMap<>();
     private static final Abilities<Ability> emptyAbilities = new AbilitiesImpl<>();
@@ -41,6 +42,7 @@ public class CardState implements Serializable {
             }
         }
         this.lostAllAbilities = state.lostAllAbilities;
+        this.melded = state.melded;
     }
 
     public CardState copy() {
@@ -115,6 +117,14 @@ public class CardState implements Serializable {
 
     public void setLostAllAbilities(boolean lostAllAbilities) {
         this.lostAllAbilities = lostAllAbilities;
+    }
+
+    public boolean isMelded() {
+        return melded;
+    }
+
+    public void setMelded(boolean melded) {
+        this.melded = melded;
     }
 
 }

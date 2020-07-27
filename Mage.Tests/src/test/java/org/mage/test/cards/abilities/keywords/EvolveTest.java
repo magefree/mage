@@ -1,4 +1,3 @@
-
 package org.mage.test.cards.abilities.keywords;
 
 import mage.constants.PhaseStep;
@@ -8,7 +7,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 public class EvolveTest extends CardTestPlayerBase {
@@ -166,9 +164,12 @@ public class EvolveTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Sudden Disappearance", 2);
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Sudden Disappearance", playerA);
+        setChoice(playerA, "Evolve"); // two triggers
 
+        setStrictChooseMode(true);
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
+        assertAllCommandsUsed();
 
         assertLife(playerA, 20);
         assertLife(playerB, 20);

@@ -1,7 +1,5 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -16,11 +14,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
@@ -29,8 +23,9 @@ import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class RoonOfTheHiddenRealm extends CardImpl {
@@ -42,7 +37,7 @@ public final class RoonOfTheHiddenRealm extends CardImpl {
     }
 
     public RoonOfTheHiddenRealm(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{W}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{W}{U}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.RHINO);
         this.subtype.add(SubType.SOLDIER);
@@ -98,7 +93,7 @@ class RoonOfTheHiddenRealmEffect extends OneShotEffect {
                 if (permanent != null) {
                     int zcc = permanent.getZoneChangeCounter(game);
                     if (controller.moveCards(permanent, Zone.EXILED, source, game)) {
-                        Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect();
+                        Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false);
                         effect.setTargetPointer(new FixedTarget(permanent.getId(), zcc + 1));
                         AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility
                                 = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);

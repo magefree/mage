@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -25,9 +24,9 @@ public final class AltarOfTheBrood extends CardImpl {
     }
 
     public AltarOfTheBrood(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
-        // Whenever another permanent enters the battlefield under your control, each opponent puts the top card of their library into their graveyard.
+        // Whenever another permanent enters the battlefield under your control, each opponent mills a card.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD,
                 new PutTopCardOfLibraryIntoGraveEachPlayerEffect(1, TargetController.OPPONENT), filter, false, null, true));
     }

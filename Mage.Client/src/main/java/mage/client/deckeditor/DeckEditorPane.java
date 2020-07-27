@@ -74,6 +74,7 @@ public class DeckEditorPane extends MagePane {
         deckEditorPanel1 = new mage.client.deckeditor.DeckEditorPanel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 32767));
 
+        deckEditorPanel1.setMinimumSize(new java.awt.Dimension(1000, 500));
         getContentPane().add(deckEditorPanel1, java.awt.BorderLayout.CENTER);
         getContentPane().add(filler1, java.awt.BorderLayout.NORTH);
     }// </editor-fold>//GEN-END:initComponents

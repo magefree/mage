@@ -99,7 +99,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     private Map<UUID, Card> copiedCards = new HashMap<>();
     private int permanentOrderNumber;
     private final Map<UUID, FilterCreaturePermanent> usePowerInsteadOfToughnessForDamageLethalityFilters = new HashMap<>();
-    private final Set<MageObjectReference> commandersToStay = new HashSet<>();
+    private Set<MageObjectReference> commandersToStay = new HashSet<>(); // commanders that do not go back to command zone
 
     private int applyEffectsCounter; // Upcounting number of each applyEffects execution
 
@@ -181,6 +181,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.applyEffectsCounter = state.applyEffectsCounter;
         state.usePowerInsteadOfToughnessForDamageLethalityFilters.forEach((uuid, filter)
                 -> this.usePowerInsteadOfToughnessForDamageLethalityFilters.put(uuid, filter.copy()));
+        this.commandersToStay.addAll(state.commandersToStay);
     }
 
     public void restoreForRollBack(GameState state) {
@@ -228,6 +229,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.applyEffectsCounter = state.applyEffectsCounter;
         state.usePowerInsteadOfToughnessForDamageLethalityFilters.forEach((uuid, filter)
                 -> this.usePowerInsteadOfToughnessForDamageLethalityFilters.put(uuid, filter.copy()));
+        this.commandersToStay = state.commandersToStay;
     }
 
     @Override
@@ -888,6 +890,7 @@ public class GameState implements Serializable, Copyable<GameState> {
             // TODO: add sources for triggers - the same way as in addEffect: sources
             this.triggers.add((TriggeredAbility) ability, sourceId, attachedTo);
         }
+
         List<Watcher> watcherList = new ArrayList<>(ability.getWatchers()); // Workaround to prevent ConcurrentModificationException, not clear to me why this is happening now
         for (Watcher watcher : watcherList) {
             // TODO: Check that watcher for commanderAbility (where attachedTo = null) also work correctly
@@ -895,6 +898,7 @@ public class GameState implements Serializable, Copyable<GameState> {
             watcher.setSourceId(attachedTo == null ? ability.getSourceId() : attachedTo.getId());
             watchers.add(watcher);
         }
+
         for (Ability sub : ability.getSubAbilities()) {
             addAbility(sub, sourceId, attachedTo);
         }
@@ -947,6 +951,13 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public void addDelayedTriggeredAbility(DelayedTriggeredAbility ability) {
         this.delayed.add(ability);
+
+        List<Watcher> watcherList = new ArrayList<>(ability.getWatchers()); // Workaround to prevent ConcurrentModificationException, not clear to me why this is happening now
+        for (Watcher watcher : watcherList) {
+            watcher.setControllerId(ability.getControllerId());
+            watcher.setSourceId(ability.getSourceId());
+            this.watchers.add(watcher);
+        }
     }
 
     public void removeDelayedTriggeredAbility(UUID abilityId) {
@@ -1028,7 +1039,7 @@ public class GameState implements Serializable, Copyable<GameState> {
      * @param attachedTo
      * @param ability
      * @param copyAbility copies non MageSingleton abilities before adding to
-     * state
+     *                    state
      */
     public void addOtherAbility(Card attachedTo, Ability ability, boolean copyAbility) {
         Ability newAbility;

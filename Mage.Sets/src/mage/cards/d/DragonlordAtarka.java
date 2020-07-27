@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -30,7 +29,7 @@ public final class DragonlordAtarka extends CardImpl {
     }
 
     public DragonlordAtarka(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}{G}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELDER);
         this.subtype.add(SubType.DRAGON);
@@ -45,7 +44,10 @@ public final class DragonlordAtarka extends CardImpl {
 
         // When Dragonlord Atarka enters the battlefield, it deals 5 damage divided as you choose among any number of target creatures and/or planeswalkers your opponents control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DamageMultiEffect(5, "it"), false);
-        ability.addTarget(new TargetCreatureOrPlaneswalkerAmount(5, filter));
+        TargetCreatureOrPlaneswalkerAmount target = new TargetCreatureOrPlaneswalkerAmount(5, filter);
+        target.setMinNumberOfTargets(1);
+        target.setMaxNumberOfTargets(5);
+        ability.addTarget(target);
         this.addAbility(ability);
     }
 

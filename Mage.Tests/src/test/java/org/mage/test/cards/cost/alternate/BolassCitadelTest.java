@@ -129,4 +129,34 @@ public class BolassCitadelTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Ferocious Zheng", 1);
         assertLife(playerA, 20 - 3);
     }
+
+    @Test
+    public void testOpponentCantUseMyBolas() {
+        // https://github.com/magefree/mage/issues/6741
+        removeAllCardsFromLibrary(playerA);
+        removeAllCardsFromLibrary(playerB);
+
+        // You may play the top card of your library. If you cast a spell this way, pay life equal to its converted mana cost rather than pay its mana cost.
+        addCard(Zone.BATTLEFIELD, playerA, "Bolas's Citadel");
+        //
+        addCard(Zone.LIBRARY, playerA, "Balduvian Bears", 2); // {1}{G}
+        addCard(Zone.LIBRARY, playerB, "Grizzly Bears", 2); // {1}{G}
+
+        // 1 turn
+        checkPlayableAbility("A can use bolas on 1", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Balduvian Bears", true);
+        checkPlayableAbility("B cant use bolas on 1", 1, PhaseStep.PRECOMBAT_MAIN, playerB, "Cast Grizzly Bears", false);
+
+        // 2 turn
+        checkPlayableAbility("A can't use bolas on 2", 2, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Balduvian Bears", false);
+        checkPlayableAbility("B can't use bolas on 2", 2, PhaseStep.PRECOMBAT_MAIN, playerB, "Cast Grizzly Bears", false);
+
+        // 3 turn
+        checkPlayableAbility("A can use bolas on 3", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Balduvian Bears", true);
+        checkPlayableAbility("B cant use bolas on 3", 1, PhaseStep.PRECOMBAT_MAIN, playerB, "Cast Grizzly Bears", false);
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+    }
 }

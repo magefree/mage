@@ -81,7 +81,7 @@ public class AusHighlander extends Constructed {
     }
 
     public AusHighlander() {
-        this("Australian Highlander");
+        super("Australian Highlander", "AU Highlander");
         for (ExpansionSet set : Sets.getInstance().values()) {
             if (set.getSetType().isEternalLegal()) {
                 setCodes.add(set.getCode());
@@ -89,13 +89,10 @@ public class AusHighlander extends Constructed {
         }
     }
 
-    public AusHighlander(String name) {
-        super(name);
-    }
-
     @Override
     public boolean validate(Deck deck) {
         boolean valid = true;
+        invalid.clear();
 
         if (deck.getCards().size() != getDeckMinSize()) {
             invalid.put("Deck", "Must contain " + getDeckMinSize() + " singleton cards: has " + (deck.getCards().size()) + " cards");

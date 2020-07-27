@@ -117,7 +117,7 @@ class OranRiefHydraEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         // the LKI of the land to verify the last-known land type
-        Permanent landLKI = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+        Permanent landLKI = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         Permanent land = game.getPermanent(getTargetPointer().getFirst(game, source));
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         // the land must be on the battlefield when the trigger resolves

@@ -1,4 +1,3 @@
-
 package org.mage.test.cards.replacement.prevent;
 
 import mage.constants.PhaseStep;
@@ -49,7 +48,7 @@ public class DeflectingPalmTest extends CardTestPlayerBase {
      */
     @Test
     public void testPreventDamageWithDromokasCommand() {
-
+        setStrictChooseMode(true);
         // Choose two -
         // - Prevent all damage target instant or sorcery spell would deal this turn;
         // - or Target player sacrifices an enchantment;
@@ -68,15 +67,21 @@ public class DeflectingPalmTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Deflecting Palm");
         setChoice(playerB, "Silvercoat Lion");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dromoka's Command", "Deflecting Palm");
-        addTarget(playerA, "Silvercoat Lion");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dromoka's Command", null, "Deflecting Palm");
+
         setModeChoice(playerA, "1");
+        addTarget(playerA, "Deflecting Palm");
         setModeChoice(playerA, "3");
+        addTarget(playerA, "Silvercoat Lion");
 
         attack(1, playerA, "Silvercoat Lion");
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
+
+        assertAllCommandsUsed();
+
         assertGraveyardCount(playerB, "Deflecting Palm", 1);
         assertGraveyardCount(playerA, "Dromoka's Command", 1);
 
@@ -87,4 +92,40 @@ public class DeflectingPalmTest extends CardTestPlayerBase {
 
     }
 
+    /**
+     * Test that prevented damage will be created with the correct source and
+     * will trigger the ability of Satyr Firedance
+     * https://github.com/magefree/mage/issues/804
+     */
+    @Test
+    public void testDamageInPlayer() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains");
+        // The next time a source of your choice would deal damage to you this turn, prevent that damage.
+        // If damage is prevented this way, Deflecting Palm deals that much damage to that source's controller.
+        addCard(Zone.HAND, playerA, "Deflecting Palm");
+        // Whenever an instant or sorcery spell you control deals damage to an opponent, Satyr Firedancer deals
+        // that much damage to target creature that player controls.
+        addCard(Zone.BATTLEFIELD, playerA, "Satyr Firedancer");
+
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain");
+        addCard(Zone.HAND, playerB, "Lightning Bolt");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", playerA);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Deflecting Palm", null, "Lightning Bolt");
+        setChoice(playerA, "Lightning Bolt");
+        addTarget(playerA, "Silvercoat Lion"); // target for Satyr Firedancer
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Deflecting Palm", 1);
+        assertGraveyardCount(playerB, "Lightning Bolt", 1);
+
+        assertGraveyardCount(playerB, "Silvercoat Lion", 1);
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 17);
+    }
 }

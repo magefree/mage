@@ -52,7 +52,7 @@ public class GoadTargetEffect extends OneShotEffect {
             ContinuousEffect effect = new AttacksIfAbleTargetEffect(Duration.UntilYourNextTurn);
             effect.setTargetPointer(new FixedTarget(getTargetPointer().getFirst(game, source)));
             game.addEffect(effect, source);
-            effect = new CantAttackYouEffect(Duration.UntilYourNextTurn); // remember current controller
+            effect = new CantAttackControllerDueToGoadEffect(Duration.UntilYourNextTurn); // remember current controller
             effect.setTargetPointer(new FixedTarget(getTargetPointer().getFirst(game, source)));
             game.addEffect(effect, source);
             game.informPlayers(controller.getLogName() + " is goading " + targetCreature.getLogName());

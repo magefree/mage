@@ -80,7 +80,7 @@ class PandemoniumEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Permanent enteringCreature = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+            Permanent enteringCreature = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
             if (enteringCreature != null) {
                 Permanent targetPermanent = game.getPermanent(source.getTargets().getFirstTarget());
                 if (targetPermanent != null) {

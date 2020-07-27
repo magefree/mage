@@ -16,9 +16,9 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.filter.FilterObject;
+import mage.filter.FilterPlayer;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
+import mage.filter.predicate.other.PlayerIdPredicate;
 import mage.game.Game;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
@@ -85,8 +85,8 @@ class EonFrolickerEffect extends OneShotEffect {
             return false;
         }
         game.getState().getTurnMods().add(new TurnMod(player.getId(), false));
-        FilterObject filter = new FilterObject(player.getName());
-        filter.add(new ControllerIdPredicate(player.getId()));
+        FilterPlayer filter = new FilterPlayer(player.getName());
+        filter.add(new PlayerIdPredicate(player.getId()));
         Ability ability = new ProtectionAbility(filter);
         game.addEffect(new GainAbilityControlledEffect(
                 ability, Duration.UntilYourNextTurn,

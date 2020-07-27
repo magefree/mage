@@ -75,7 +75,7 @@ class MartyrsBondTriggeredAbility extends TriggeredAbilityImpl {
             Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
             if (permanent.isControlledBy(this.getControllerId()) && !permanent.isLand()) {
                 for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(permanent.getId()));
+                    effect.setTargetPointer(new FixedTarget(permanent, game));
                 }
                 return true;
             }
@@ -110,7 +110,7 @@ class MartyrsBondEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         List<UUID> perms = new ArrayList<>();
         if (source != null) {
-            Permanent saccedPermanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+            Permanent saccedPermanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null && saccedPermanent != null) {
                 FilterControlledPermanent filter = new FilterControlledPermanent();

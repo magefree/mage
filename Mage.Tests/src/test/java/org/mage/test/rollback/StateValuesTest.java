@@ -30,20 +30,29 @@ public class StateValuesTest extends CardTestPlayerBase {
         attack(3, playerA, "Dragon Whelp");
 
         rollbackTurns(3, PhaseStep.BEGIN_COMBAT, playerA, 0);
+        rollbackAfterActionsStart();
+
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{R}: ");
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{R}: ");
+
+        attack(3, playerA, "Dragon Whelp");
+        rollbackAfterActionsEnd();
 
         setStopAt(4, PhaseStep.UPKEEP);
         execute();
 
-        assertLife(playerA, 20);
-        assertLife(playerB, 12);
-
         assertPermanentCount(playerA, "Dragon Whelp", 1);
         assertGraveyardCount(playerA, "Dragon Whelp", 0);
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 12);
 
     }
 
     @Test
     public void testBriarbridgePatrol() {
+        setStrictChooseMode(true);
+
         // Whenever Briarbridge Patrol deals damage to one or more creatures, investigate (Create a colorless Clue artifact token onto the battlefield with "{2}, Sacrifice this artifact: Draw a card.").
         // At the beginning of each end step, if you sacrificed three or more Clues this turn, you may put a creature card from your hand onto the battlefield.
         addCard(Zone.BATTLEFIELD, playerA, "Briarbridge Patrol", 1); // 3/3
@@ -55,10 +64,18 @@ public class StateValuesTest extends CardTestPlayerBase {
 
         attack(3, playerA, "Briarbridge Patrol");
         block(3, playerB, "Pillarfield Ox", "Briarbridge Patrol");
+
         rollbackTurns(3, PhaseStep.POSTCOMBAT_MAIN, playerA, 0);
+
+        rollbackAfterActionsStart();
+        attack(3, playerA, "Briarbridge Patrol");
+        block(3, playerB, "Pillarfield Ox", "Briarbridge Patrol");
+        rollbackAfterActionsEnd();
 
         setStopAt(3, PhaseStep.END_TURN);
         execute();
+
+        assertAllCommandsUsed();
 
         assertLife(playerA, 20);
         assertLife(playerB, 20);

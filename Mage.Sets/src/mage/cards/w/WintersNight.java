@@ -22,7 +22,8 @@ import mage.filter.common.FilterLandPermanent;
 public final class WintersNight extends CardImpl {
     
     private static final FilterLandPermanent filter = new FilterLandPermanent("a player taps a snow land");
-    {
+    
+    static {
         filter.add(SuperType.SNOW.getPredicate());
     }
 

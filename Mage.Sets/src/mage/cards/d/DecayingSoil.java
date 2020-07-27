@@ -101,7 +101,7 @@ class DecayingSoilTriggeredAbility extends TriggeredAbilityImpl {
         if (zEvent.isDiesEvent()) {
             Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
             if (permanent != null && filter.match(permanent, this.getSourceId(), this.getControllerId(), game)) {
-                getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
+                getEffects().get(0).setTargetPointer(new FixedTarget(permanent, game));
                 return true;
             }
         }

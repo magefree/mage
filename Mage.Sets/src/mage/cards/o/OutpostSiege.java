@@ -99,7 +99,7 @@ class OutpostSiegeExileEffect extends OneShotEffect {
                 controller.moveCardsToExile(card, source, game, true, source.getSourceId(), exileName);
                 if (game.getState().getZone(card.getId()) == Zone.EXILED) {
                     ContinuousEffect effect = new CastFromNonHandZoneTargetEffect(Duration.EndOfTurn);
-                    effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
+                    effect.setTargetPointer(new FixedTarget(card, game));
                     game.addEffect(effect, source);
                 }
             }

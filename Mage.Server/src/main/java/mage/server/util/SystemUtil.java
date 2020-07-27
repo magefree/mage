@@ -22,6 +22,7 @@ import mage.game.command.CommandObject;
 import mage.game.command.Plane;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 import mage.util.RandomUtil;
 
 import java.io.File;
@@ -572,7 +573,7 @@ public final class SystemUtil {
 
                     // move card from exile to stack
                     for (Card card : cardsToLoad) {
-                        swapWithAnyCard(game, player, card, Zone.STACK);
+                        putCardToZone(game, player, card, Zone.STACK);
                     }
 
                     continue;
@@ -647,7 +648,7 @@ public final class SystemUtil {
                 } else {
                     // as other card
                     for (Card card : cardsToLoad) {
-                        swapWithAnyCard(game, player, card, gameZone);
+                        putCardToZone(game, player, card, gameZone);
                     }
                 }
             }
@@ -657,38 +658,33 @@ public final class SystemUtil {
     }
 
     /**
-     * Swap cards between specified card from library and any hand card.
-     *
-     * @param game
-     * @param card Card to put to player's hand
+     * Put card to specified (battlefield zone will be tranformed to permanent with initialized effects)
      */
-    private static void swapWithAnyCard(Game game, Player player, Card card, Zone zone) {
-        // Put the card in Exile to start. Otherwise the game doesn't know where to remove the card from.
-        game.getExile().getPermanentExile().add(card);
-        game.setZone(card.getId(), Zone.EXILED);
+    private static void putCardToZone(Game game, Player player, Card card, Zone zone) {
+        // TODO: replace by player.move?
         switch (zone) {
             case BATTLEFIELD:
-                card.putOntoBattlefield(game, Zone.EXILED, null, player.getId());
+                CardUtil.putCardOntoBattlefieldWithEffects(game, card, player);
                 break;
             case LIBRARY:
                 card.setZone(Zone.LIBRARY, game);
-                game.getExile().getPermanentExile().remove(card);
                 player.getLibrary().putOnTop(card, game);
                 break;
             case STACK:
-                card.cast(game, Zone.EXILED, card.getSpellAbility(), player.getId());
+                card.cast(game, game.getState().getZone(card.getId()), card.getSpellAbility(), player.getId());
                 break;
             case EXILED:
-                // nothing to do
+                card.setZone(Zone.EXILED, game);
+                game.getExile().getPermanentExile().add(card);
                 break;
             case OUTSIDE:
                 card.setZone(Zone.OUTSIDE, game);
-                game.getExile().getPermanentExile().remove(card);
                 break;
             default:
                 card.moveToZone(zone, null, game, false);
                 break;
         }
+        game.applyEffects();
         logger.info("Added card to player's " + zone.toString() + ": " + card.getName() + ", player = " + player.getName());
     }
 

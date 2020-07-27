@@ -60,6 +60,7 @@ import mage.target.Target;
 import mage.target.TargetCard;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
+import mage.util.CardUtil;
 import mage.util.GameLog;
 import mage.util.MessageToClient;
 import mage.util.RandomUtil;
@@ -107,11 +108,13 @@ public abstract class GameImpl implements Game, Serializable {
     // game states to allow player rollback
     protected transient Map<Integer, GameState> gameStatesRollBack = new HashMap<>();
     protected boolean executingRollback;
+    protected int turnToGoToForRollback;
 
     protected Date startTime;
     protected Date endTime;
     protected UUID startingPlayerId;
     protected UUID winnerId;
+    protected boolean gameStopped = false;
 
     protected RangeOfInfluence range;
     protected Mulligan mulligan;
@@ -186,6 +189,7 @@ public abstract class GameImpl implements Game, Serializable {
         this.startLife = game.startLife;
         this.enterWithCounters.putAll(game.enterWithCounters);
         this.startingSize = game.startingSize;
+        this.gameStopped = game.gameStopped;
     }
 
     @Override
@@ -767,27 +771,6 @@ public abstract class GameImpl implements Game, Serializable {
         }
     }
 
-    @Override
-    public void resume() {
-        playerList = state.getPlayerList(state.getActivePlayerId());
-        Player player = getPlayer(playerList.get());
-        boolean wasPaused = state.isPaused();
-        state.resume();
-        if (!checkIfGameIsOver()) {
-            fireInformEvent("Turn " + state.getTurnNum());
-            if (checkStopOnTurnOption()) {
-                return;
-            }
-            state.getTurn().resumePlay(this, wasPaused);
-            if (!isPaused() && !checkIfGameIsOver()) {
-                endOfTurn();
-                player = playerList.getNext(this, true);
-                state.setTurnNum(state.getTurnNum() + 1);
-            }
-        }
-        play(player.getId());
-    }
-
     protected void play(UUID nextPlayerId) {
         if (!isPaused() && !checkIfGameIsOver()) {
             playerList = state.getPlayerList(nextPlayerId);
@@ -876,13 +859,8 @@ public abstract class GameImpl implements Game, Serializable {
         boolean skipTurn = false;
         do {
             if (executingRollback) {
-                executingRollback = false;
+                rollbackTurnsExecution(turnToGoToForRollback);
                 player = getPlayer(state.getActivePlayerId());
-                for (Player playerObject : getPlayers().values()) {
-                    if (playerObject.isInGame()) {
-                        playerObject.abortReset();
-                    }
-                }
             } else {
                 state.setActivePlayerId(player.getId());
                 saveRollBackGameState();
@@ -902,6 +880,27 @@ public abstract class GameImpl implements Game, Serializable {
         }
 
         return true;
+    }
+
+    @Override
+    public void resume() {
+        playerList = state.getPlayerList(state.getActivePlayerId());
+        Player player = getPlayer(playerList.get());
+        boolean wasPaused = state.isPaused();
+        state.resume();
+        if (!checkIfGameIsOver()) {
+            fireInformEvent("Turn " + state.getTurnNum());
+            if (checkStopOnTurnOption()) {
+                return;
+            }
+            state.getTurn().resumePlay(this, wasPaused);
+            if (!isPaused() && !checkIfGameIsOver()) {
+                endOfTurn();
+                player = playerList.getNext(this, true);
+                state.setTurnNum(state.getTurnNum() + 1);
+            }
+        }
+        play(player.getId());
     }
 
     private boolean checkStopOnTurnOption() {
@@ -1423,7 +1422,7 @@ public abstract class GameImpl implements Game, Serializable {
         if (spell != null) {
             if (spell.getCommandedBy() != null) {
                 UUID commandedBy = spell.getCommandedBy();
-                UUID spellControllerId = null;
+                UUID spellControllerId;
                 if (commandedBy.equals(spell.getControllerId())) {
                     spellControllerId = spell.getSpellAbility().getFirstTarget(); // i.e. resolved spell is Word of Command
                 } else {
@@ -1609,9 +1608,12 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public void addPermanent(Permanent permanent) {
+    public void addPermanent(Permanent permanent, int createOrder) {
+        if (createOrder == 0) {
+            createOrder = getState().getNextPermanentOrderNumber();
+        }
+        permanent.setCreateOrder(createOrder);
         getBattlefield().addPermanent(permanent);
-        permanent.setCreateOrder(getState().getNextPermanentOrderNumber());
     }
 
     @Override
@@ -2258,30 +2260,38 @@ public abstract class GameImpl implements Game, Serializable {
                 }
             }
         }
-        //704.5m  - World Enchantments
+        //704.5k  - World Enchantments
         if (worldEnchantment.size() > 1) {
             int newestCard = -1;
+            Set<UUID> controllerIdOfNewest = new HashSet<>();
             Permanent newestPermanent = null;
             for (Permanent permanent : worldEnchantment) {
                 if (newestCard == -1) {
                     newestCard = permanent.getCreateOrder();
                     newestPermanent = permanent;
+                    controllerIdOfNewest.clear();
+                    controllerIdOfNewest.add(permanent.getControllerId());
                 } else if (newestCard < permanent.getCreateOrder()) {
                     newestCard = permanent.getCreateOrder();
                     newestPermanent = permanent;
+                    controllerIdOfNewest.clear();
+                    controllerIdOfNewest.add(permanent.getControllerId());
                 } else if (newestCard == permanent.getCreateOrder()) {
+                    //  In the event of a tie for the shortest amount of time, all are put into their owners’ graveyards. This is called the “world rule.”
                     newestPermanent = null;
+                    controllerIdOfNewest.add(permanent.getControllerId());
                 }
             }
+            for (UUID controllerId : controllerIdOfNewest) {
+                PlayerList newestPermanentControllerRange = state.getPlayersInRange(controllerId, this);
 
-            PlayerList newestPermanentControllerRange = state.getPlayersInRange(newestPermanent.getControllerId(), this);
-
-            // 801.12 The "world rule" applies to a permanent only if other world permanents are within its controller's range of influence.
-            for (Permanent permanent : worldEnchantment) {
-                if (newestPermanentControllerRange.contains(permanent.getControllerId())
-                        && !Objects.equals(newestPermanent, permanent)) {
-                    movePermanentToGraveyardWithInfo(permanent);
-                    somethingHappened = true;
+                // 801.12 The "world rule" applies to a permanent only if other world permanents are within its controller's range of influence.
+                for (Permanent permanent : worldEnchantment) {
+                    if (newestPermanentControllerRange.contains(permanent.getControllerId())
+                            && !Objects.equals(newestPermanent, permanent)) {
+                        movePermanentToGraveyardWithInfo(permanent);
+                        somethingHappened = true;
+                    }
                 }
             }
         }
@@ -2792,7 +2802,7 @@ public abstract class GameImpl implements Game, Serializable {
         }
         if (amountToPrevent != Integer.MAX_VALUE) {
             // set remaining amount
-            result.setRemainingAmount(amountToPrevent -= result.getPreventedDamage());
+            result.setRemainingAmount(amountToPrevent - result.getPreventedDamage());
         }
         MageObject damageSource = game.getObject(damageEvent.getSourceId());
         MageObject preventionSource = game.getObject(source.getSourceId());
@@ -3055,28 +3065,10 @@ public abstract class GameImpl implements Game, Serializable {
                 throw new IllegalArgumentException("Command zone supports in commander test games");
             }
 
-            // warning, permanents go to battlefield without resolve, continuus effects must be init
             for (PermanentCard permanentCard : battlefield) {
-                permanentCard.setZone(Zone.BATTLEFIELD, this);
-                permanentCard.setOwnerId(ownerId);
-                PermanentCard newPermanent = new PermanentCard(permanentCard.getCard(), ownerId, this);
-                getPermanentsEntering().put(newPermanent.getId(), newPermanent);
-                newPermanent.entersBattlefield(newPermanent.getId(), this, Zone.OUTSIDE, false);
-                getBattlefield().addPermanent(newPermanent);
-                getPermanentsEntering().remove(newPermanent.getId());
-                newPermanent.removeSummoningSickness();
-                if (permanentCard.isTapped()) {
-                    newPermanent.setTapped(true);
-                }
-
-                // init effects on static abilities (init continuous effects, warning, game state contains copy)
-                for (ContinuousEffect effect : this.getState().getContinuousEffects().getLayeredEffects(this)) {
-                    Optional<Ability> ability = this.getState().getContinuousEffects().getLayeredEffectAbilities(effect).stream().findFirst();
-                    if (ability.isPresent() && newPermanent.getId().equals(ability.get().getSourceId())) {
-                        effect.init(ability.get(), this, activePlayerId); // game is not setup yet, game.activePlayer is null -- need direct id
-                    }
-                }
+                CardUtil.putCardOntoBattlefieldWithEffects(this, permanentCard, player);
             }
+
             applyEffects();
         }
     }
@@ -3260,32 +3252,46 @@ public abstract class GameImpl implements Game, Serializable {
         return turnToGoTo > 0 && gameStatesRollBack.containsKey(turnToGoTo);
     }
 
+    private void rollbackTurnsExecution(int turnToGoToForRollback) {
+        GameState restore = gameStatesRollBack.get(turnToGoToForRollback);
+        if (restore != null) {
+            informPlayers(GameLog.getPlayerRequestColoredText("Player request: Rolling back to start of turn " + restore.getTurnNum()));
+            state.restoreForRollBack(restore);
+            playerList.setCurrent(state.getPlayerByOrderId());
+            // Reset temporary created bookmarks because no longer valid after rollback
+            savedStates.clear();
+            gameStates.clear();
+            // because restore uses the objects without copy each copy the state again
+            gameStatesRollBack.put(getTurnNum(), state.copy());
+
+            for (Player playerObject : getPlayers().values()) {
+                if (playerObject.isInGame()) {
+                    playerObject.abortReset();
+                }
+            }
+        }
+        executingRollback = false;
+    }
+
     @Override
     public synchronized void rollbackTurns(int turnsToRollback) {
-        if (gameOptions.rollbackTurnsAllowed) {
+        if (gameOptions.rollbackTurnsAllowed && !executingRollback) {
             int turnToGoTo = getTurnNum() - turnsToRollback;
             if (turnToGoTo < 1 || !gameStatesRollBack.containsKey(turnToGoTo)) {
                 informPlayers(GameLog.getPlayerRequestColoredText("Player request: It's not possible to rollback " + turnsToRollback + " turn(s)"));
             } else {
-                GameState restore = gameStatesRollBack.get(turnToGoTo);
-                if (restore != null) {
-                    informPlayers(GameLog.getPlayerRequestColoredText("Player request: Rolling back to start of turn " + restore.getTurnNum()));
-                    state.restoreForRollBack(restore);
-                    playerList.setCurrent(state.getPlayerByOrderId());
-                    // Reset temporary created bookmarks because no longer valid after rollback
-                    savedStates.clear();
-                    gameStates.clear();
-                    // because restore uses the objects without copy each copy the state again
-                    gameStatesRollBack.put(getTurnNum(), state.copy());
-                    executingRollback = true;
-                    for (Player playerObject : getPlayers().values()) {
-                        if (playerObject.isHuman() && playerObject.canRespond()) {
-                            playerObject.resetStoredBookmark(this);
-                            playerObject.abort();
-                            playerObject.resetPlayerPassedActions();
-                        }
+                executingRollback = true;
+                turnToGoToForRollback = turnToGoTo;
+                for (Player playerObject : getPlayers().values()) {
+                    if (playerObject.isHuman() && playerObject.canRespond()) {
+                        playerObject.resetStoredBookmark(this);
+                        playerObject.abort();
+                        playerObject.resetPlayerPassedActions();
                     }
-                    fireUpdatePlayersEvent();
+                }
+                fireUpdatePlayersEvent();
+                if (gameOptions.testMode && gameStopped) { // in test mode execute rollback directly
+                    rollbackTurnsExecution(turnToGoToForRollback);
                 }
             }
         }
@@ -3374,4 +3380,15 @@ public abstract class GameImpl implements Game, Serializable {
     public Set<UUID> getCommandersIds(Player player, CommanderCardType commanderCardType) {
         return player.getCommandersIds();
     }
+
+    @Override
+    public void setGameStopped(boolean gameStopped) {
+        this.gameStopped = gameStopped;
+    }
+
+    @Override
+    public boolean isGameStopped() {
+        return gameStopped;
+    }
+
 }

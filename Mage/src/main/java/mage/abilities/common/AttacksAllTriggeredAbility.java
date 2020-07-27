@@ -77,7 +77,7 @@ public class AttacksAllTriggeredAbility extends TriggeredAbilityImpl {
             switch (setTargetPointer) {
                 case PERMANENT:
                     for (Effect effect : getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(permanent.getId()));
+                        effect.setTargetPointer(new FixedTarget(permanent, game));
                     }
                     break;
                 case PLAYER:

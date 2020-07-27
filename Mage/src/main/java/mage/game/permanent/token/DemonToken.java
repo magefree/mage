@@ -1,15 +1,13 @@
-
-
 package mage.game.permanent.token;
 
-import java.util.Arrays;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.Arrays;
+
 /**
- *
  * @author LoneFox
  */
 public final class DemonToken extends TokenImpl {
@@ -22,7 +20,8 @@ public final class DemonToken extends TokenImpl {
         power = new MageInt(5);
         toughness = new MageInt(5);
         addAbility(FlyingAbility.getInstance());
-        availableImageSetCodes.addAll(Arrays.asList("ISD", "AVR", "C14", "ORI", "M20"));
+
+        availableImageSetCodes.addAll(Arrays.asList("AVR", "C14", "DD3A", "ISD", "ORI", "M20", "M21"));
     }
 
     public DemonToken(final DemonToken token) {
@@ -30,15 +29,7 @@ public final class DemonToken extends TokenImpl {
     }
 
     @Override
-        public DemonToken copy() {
+    public DemonToken copy() {
         return new DemonToken(this);
-    }
-
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
-        if (getOriginalExpansionSetCode().equals("C14")) {
-            this.setTokenType(2);
-        }
     }
 }

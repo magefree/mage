@@ -89,11 +89,11 @@ class OracleEnVecEffect extends OneShotEffect {
                 for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), opponent.getId(), source.getSourceId(), game)) {
                     if (target.getTargets().contains(permanent.getId())) {
                         RequirementEffect effect = new OracleEnVecMustAttackRequirementEffect();
-                        effect.setTargetPointer(new FixedTarget(permanent.getId()));
+                        effect.setTargetPointer(new FixedTarget(permanent, game));
                         game.addEffect(effect, source);
                     } else {
                         RestrictionEffect effect = new OracleEnVecCantAttackRestrictionEffect();
-                        effect.setTargetPointer(new FixedTarget(permanent.getId()));
+                        effect.setTargetPointer(new FixedTarget(permanent, game));
                         game.addEffect(effect, source);
                     }
                 }

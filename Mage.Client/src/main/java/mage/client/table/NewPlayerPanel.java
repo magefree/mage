@@ -1,10 +1,3 @@
-
-
- /*
- * NewPlayerPanel.java
- *
- * Created on 15-Dec-2009, 10:09:46 PM
- */
 package mage.client.table;
 
 import java.io.File;

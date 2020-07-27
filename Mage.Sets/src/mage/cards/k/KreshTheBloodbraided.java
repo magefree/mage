@@ -1,4 +1,3 @@
-
 package mage.cards.k;
 
 import java.util.UUID;
@@ -12,7 +11,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -24,7 +22,7 @@ import mage.game.permanent.Permanent;
 public final class KreshTheBloodbraided extends CardImpl {
 
     public KreshTheBloodbraided(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{R}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{R}{G}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARRIOR);
@@ -59,7 +57,7 @@ class KreshTheBloodbraidedEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = (Permanent) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.BATTLEFIELD);
+        Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         Permanent kreshTheBloodbraided = game.getPermanent(source.getSourceId());
         if (permanent != null && kreshTheBloodbraided != null) {
             int amount = permanent.getPower().getValue();

@@ -55,7 +55,7 @@ public class SimpleManaAbility extends ActivatedManaAbilityImpl {
         if (predictable) {
             return super.getNetMana(game);
         }
-        return new ArrayList<Mana>(netMana);
+        return new ArrayList<>(netMana);
     }
 
 }

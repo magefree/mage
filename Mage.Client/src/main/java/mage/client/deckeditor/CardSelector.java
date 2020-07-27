@@ -10,6 +10,7 @@ import mage.ObjectColor;
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.cards.Sets;
+import mage.cards.decks.PennyDreadfulLegalityUtil;
 import mage.cards.repository.*;
 import mage.client.MageFrame;
 import mage.client.cards.*;
@@ -37,8 +38,8 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 import java.util.Map.Entry;
 
 import static mage.client.dialog.PreferencesDialog.*;
@@ -299,6 +300,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         criteria.white(this.tbWhite.isSelected());
         criteria.colorless(this.tbColorless.isSelected());
 
+        // if you add new type filter then sync it with CardType
         if (this.tbLand.isSelected()) {
             criteria.types(CardType.LAND);
         }
@@ -320,8 +322,6 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         if (this.tbPlaneswalkers.isSelected()) {
             criteria.types(CardType.PLANESWALKER);
         }
-        // criteria.types(CardType.TRIBAL);
-        // criteria.types(CardType.CONSPIRACY);
 
         if (this.tbCommon.isSelected()) {
             criteria.rarities(Rarity.COMMON);
@@ -422,9 +422,8 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         try {
             java.util.List<Card> filteredCards = new ArrayList<>();
 
-            boolean chkPD = chkPennyDreadful.isSelected();
-            if (chkPD) {
-                generatePennyDreadfulHash();
+            if (chkPennyDreadful.isSelected() && pdAllowed.isEmpty()) {
+                pdAllowed.putAll(PennyDreadfulLegalityUtil.getLegalCardList());
             }
 
             if (limited) {
@@ -438,7 +437,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
                 for (CardInfo cardInfo : foundCards) {
                     Card card = cardInfo.getMockCard();
                     if (filter.match(card, null)) {
-                        if (chkPD) {
+                        if (chkPennyDreadful.isSelected()) {
                             if (!pdAllowed.containsKey(card.getName())) {
                                 continue;
                             }
@@ -476,22 +475,6 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
                 cards.remove(card);
                 break;
             }
-        }
-    }
-
-    public void generatePennyDreadfulHash() {
-        if (pdAllowed.size() > 0) {
-            return;
-        }
-
-        Properties properties = new Properties();
-        try {
-            properties.load(CardSelector.class.getResourceAsStream("pennydreadful.properties"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        for (final Entry<Object, Object> entry : properties.entrySet()) {
-            pdAllowed.put((String) entry.getKey(), 1);
         }
     }
 

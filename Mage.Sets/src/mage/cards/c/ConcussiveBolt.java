@@ -5,8 +5,10 @@ import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.hint.common.MetalcraftHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -28,9 +30,12 @@ public final class ConcussiveBolt extends CardImpl {
         // Concussive Bolt deals 4 damage to target player.
         this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
+
         // <i>Metalcraft</i> &mdash; If you control three or more artifacts, creatures that player controls can't block this turn.
         this.getSpellAbility().addEffect(new ConcussiveBoltEffect());
         this.getSpellAbility().addEffect(new ConcussiveBoltRestrictionEffect());
+        this.getSpellAbility().setAbilityWord(AbilityWord.METALCRAFT);
+        this.getSpellAbility().addHint(MetalcraftHint.instance);
     }
 
     public ConcussiveBolt(final ConcussiveBolt card) {

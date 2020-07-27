@@ -91,7 +91,7 @@ class PowerLeakEffect extends OneShotEffect {
 
         PreventDamageByTargetEffect effect = new PreventDamageByTargetEffect(Duration.OneUse, xValue, false);
         if (xValue != 0 && cost.isPaid()) {
-            effect.setTargetPointer(new FixedTarget(permanent.getId()));
+            effect.setTargetPointer(new FixedTarget(permanent, game));
             game.addEffect(effect, source);
         }
         player.damage(2, source.getSourceId(), game);

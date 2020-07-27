@@ -55,6 +55,15 @@ public class Deck implements Serializable {
         return currentDeck;
     }
 
+    /**
+     * Warning, AI can't play Mock cards, so call it with extra params in real games or tests
+     *
+     * @param deckCardLists cards to load
+     * @param ignoreErrors - do not raise exception error on wrong deck
+     * @param mockCards - use it for GUI only code, real game cards must be real
+     * @return
+     * @throws GameException
+     */
     public static Deck load(DeckCardLists deckCardLists, boolean ignoreErrors, boolean mockCards) throws GameException {
         Deck deck = new Deck();
         deck.setName(deckCardLists.getName());

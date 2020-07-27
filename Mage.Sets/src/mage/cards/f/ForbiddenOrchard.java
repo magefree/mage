@@ -86,7 +86,7 @@ class ForbiddenOrchardTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getSourceId().equals(getSourceId());
+        return event.getSourceId().equals(getSourceId()) && !game.inCheckPlayableState();
     }
 
     @Override

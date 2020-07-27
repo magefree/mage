@@ -1,9 +1,3 @@
-
- /*
- * DeckArea.java
- *
- * Created on Feb 18, 2010, 3:10:39 PM
- */
 package mage.client.deckeditor;
 
 import mage.cards.Card;
@@ -26,7 +20,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class DeckArea extends javax.swing.JPanel {
@@ -38,7 +31,6 @@ public class DeckArea extends javax.swing.JPanel {
     private BigCard lastBigCard = null;
     private int dividerLocationNormal = 0;
     private int dividerLocationLimited = 0;
-    private static final boolean isLimitedBuildingOrientation = false;
 
     public DeckCardLayout getCardLayout() {
         return deckList.getCardLayout();
@@ -156,7 +148,7 @@ public class DeckArea extends javax.swing.JPanel {
                 for (CardView card : cards) {
                     CardView newCard = new CardView(card);
                     sideboardList.addCardView(newCard, true);
-                }                
+                }
             }
 
             @Override
@@ -170,7 +162,7 @@ public class DeckArea extends javax.swing.JPanel {
         });
     }
 
-    public Settings saveSettings() {
+    public Settings saveSettings(boolean isLimitedBuildingOrientation) {
         Settings settings = new Settings();
         settings.maindeckSettings = deckList.saveSettings();
         settings.sideboardSetings = sideboardList.saveSettings();
@@ -184,7 +176,7 @@ public class DeckArea extends javax.swing.JPanel {
         return settings;
     }
 
-    public void loadSettings(Settings s) {
+    public void loadSettings(Settings s, boolean isLimitedBuildingOrientation) {
         if (s != null) {
             deckList.loadSettings(s.maindeckSettings);
             sideboardList.loadSettings(s.sideboardSetings);
@@ -215,8 +207,8 @@ public class DeckArea extends javax.swing.JPanel {
     private void setGUISize() {
     }
 
-    public void setOrientation(boolean limitedBuildingOrientation) {
-        if (limitedBuildingOrientation) {
+    public void setOrientation(boolean isLimitedBuildingOrientation) {
+        if (isLimitedBuildingOrientation) {
             deckAreaSplitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
             if (dividerLocationLimited != 0) {
                 deckAreaSplitPane.setDividerLocation(dividerLocationLimited);
@@ -298,21 +290,19 @@ public class DeckArea extends javax.swing.JPanel {
         deckList = new mage.client.cards.DragCardGrid();
         sideboardList = new mage.client.cards.DragCardGrid();
 
+        setLayout(new java.awt.BorderLayout());
+
         deckAreaSplitPane.setBorder(null);
-        deckAreaSplitPane.setResizeWeight(0.6);
+        deckAreaSplitPane.setDividerSize(10);
+        deckAreaSplitPane.setResizeWeight(0.5);
+
+        deckList.setMinimumSize(new java.awt.Dimension(200, 56));
         deckAreaSplitPane.setLeftComponent(deckList);
+
+        sideboardList.setMinimumSize(new java.awt.Dimension(200, 56));
         deckAreaSplitPane.setRightComponent(sideboardList);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(deckAreaSplitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 918, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(deckAreaSplitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)
-        );
+        add(deckAreaSplitPane, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     public DragCardGrid getDeckList() {

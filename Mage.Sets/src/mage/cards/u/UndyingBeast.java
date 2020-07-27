@@ -1,4 +1,3 @@
-
 package mage.cards.u;
 
 import java.util.UUID;
@@ -10,10 +9,11 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
@@ -23,7 +23,7 @@ import mage.players.Player;
 public final class UndyingBeast extends CardImpl {
 
     public UndyingBeast(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.subtype.add(SubType.BEAST);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
@@ -62,10 +62,17 @@ class UndyingBeastEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(source.getSourceId());
         if (card != null && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
-            Player owner = game.getPlayer(card.getOwnerId());
-            if(owner != null) {
-                return card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
+            Object object = this.getValue("permanentLeftBattlefield");
+            if (object instanceof Permanent) {
+                Permanent permanent = (Permanent) object;
+                if (permanent.getZoneChangeCounter(game) + 1 == card.getZoneChangeCounter(game)) {
+                    Player owner = game.getPlayer(card.getOwnerId());
+                    if (owner != null) {
+                        return owner.putCardsOnTopOfLibrary(card, game, source, true);
+                    }
+                }
             }
+
         }
         return true;
     }

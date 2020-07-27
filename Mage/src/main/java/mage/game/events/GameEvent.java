@@ -133,7 +133,7 @@ public class GameEvent implements Serializable {
          targetId    id of the spell that's cast
          playerId    player that casts the spell or ability
          amount      X multiplier to change X value, default 1
-        */
+         */
         CAST_SPELL,
         /* SPELL_CAST
          x-Costs are already defined
@@ -153,13 +153,13 @@ public class GameEvent implements Serializable {
          targetId    id of the ability to activate / use
          sourceId    sourceId of the object with that ability
          playerId    player that tries to use this ability
-        */
+         */
         TAKE_SPECIAL_ACTION, TAKEN_SPECIAL_ACTION, // not used in implementation yet
         /* TAKE_SPECIAL_ACTION, TAKEN_SPECIAL_ACTION,
          targetId    id of the ability to activate / use
          sourceId    sourceId of the object with that ability
          playerId    player that tries to use this ability
-        */
+         */
         TRIGGERED_ABILITY,
         RESOLVING_ABILITY,
         COPY_STACKOBJECT, COPIED_STACKOBJECT,
@@ -254,7 +254,13 @@ public class GameEvent implements Serializable {
         ENTERS_THE_BATTLEFIELD_CONTROL, // 616.1b
         ENTERS_THE_BATTLEFIELD_COPY, // 616.1c
         ENTERS_THE_BATTLEFIELD, // 616.1d
-        TAP, TAPPED, TAPPED_FOR_MANA,
+        TAP, TAPPED,
+        TAPPED_FOR_MANA,
+        /* TAPPED_FOR_MANA
+         During calculation of the available mana for a player the "TappedForMana" event is fired to simulate triggered mana production.
+         By checking the inCheckPlayableState these events are handled to give back only the available mana of instead really producing mana.
+         IMPORTANT: Triggered non mana abilities have to ignore the event if game.inCheckPlayableState is true.
+         */
         UNTAP, UNTAPPED,
         FLIP, FLIPPED,
         UNFLIP, UNFLIPPED,
@@ -412,12 +418,12 @@ public class GameEvent implements Serializable {
     }
 
     private GameEvent(EventType type, UUID customEventType,
-                      UUID targetId, UUID sourceId, UUID playerId, int amount, boolean flag) {
+            UUID targetId, UUID sourceId, UUID playerId, int amount, boolean flag) {
         this(type, customEventType, targetId, sourceId, playerId, amount, flag, null);
     }
 
     private GameEvent(EventType type, UUID customEventType,
-                      UUID targetId, UUID sourceId, UUID playerId, int amount, boolean flag, MageObjectReference reference) {
+            UUID targetId, UUID sourceId, UUID playerId, int amount, boolean flag, MageObjectReference reference) {
         this.type = type;
         this.customEventType = customEventType;
         this.targetId = targetId;

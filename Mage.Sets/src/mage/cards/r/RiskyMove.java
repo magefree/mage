@@ -165,7 +165,7 @@ class RiskyMoveFlipCoinEffect extends OneShotEffect {
             if (!controller.flipCoin(source, game, true)) {
                 if (permanent != null && chosenOpponent != null) {
                     ContinuousEffect effect = new RiskyMoveCreatureGainControlEffect(Duration.Custom, chosenOpponent.getId());
-                    effect.setTargetPointer(new FixedTarget(permanent.getId()));
+                    effect.setTargetPointer(new FixedTarget(permanent, game));
                     game.addEffect(effect, source);
                     game.informPlayers(chosenOpponent.getLogName() + " has gained control of " + permanent.getLogName());
                     return true;

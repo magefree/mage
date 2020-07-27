@@ -62,7 +62,7 @@ class ProfanerOfTheDeadReturnEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent exploitedCreature = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+        Permanent exploitedCreature = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (controller != null && exploitedCreature != null) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent();
             filter.add(TargetController.OPPONENT.getControllerPredicate());

@@ -1,5 +1,7 @@
 package mage.abilities.effects.common.cost;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -11,14 +13,11 @@ import mage.choices.ChoiceImpl;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SpellAbilityCastMode;
 import mage.filter.FilterCard;
 import mage.game.Game;
-import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.util.CardUtil;
-
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 /**
  * @author North
@@ -114,15 +113,12 @@ public class SpellsCostReductionControllerEffect extends CostModificationEffectI
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         if (abilityToModify instanceof SpellAbility) {
             if (abilityToModify.isControlledBy(source.getControllerId())) {
-                Spell spell = (Spell) game.getStack().getStackObject(abilityToModify.getId());
-                if (spell != null) {
-                    // real cast with put on stack
-                    return this.filter.match(spell, source.getSourceId(), source.getControllerId(), game);
-                } else {
-                    // get playable and other staff without put on stack
-                    // used at least for flashback ability because Flashback ability doesn't use stack
-                    Card sourceCard = game.getCard(abilityToModify.getSourceId());
-                    return sourceCard != null && this.filter.match(sourceCard, source.getSourceId(), source.getControllerId(), game);
+                Card spellCard = ((SpellAbility) abilityToModify).getCharacteristics(game);;
+                if (spellCard != null) {
+                    if (((SpellAbility) abilityToModify).getSpellAbilityCastMode() != SpellAbilityCastMode.NORMAL) {
+                        spellCard = ((SpellAbility) abilityToModify).getSpellAbilityCastMode().getTypeModifiedCardObjectCopy(spellCard, game);
+                    }
+                    return this.filter.match(spellCard, source.getSourceId(), source.getControllerId(), game);
                 }
             }
         }

@@ -59,7 +59,7 @@ class TemptWithReflectionsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(this.getTargetPointer().getFirst(game, source));
+        Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (permanent != null) {
             Effect effect = new CreateTokenCopyTargetEffect();
             effect.setTargetPointer(getTargetPointer());

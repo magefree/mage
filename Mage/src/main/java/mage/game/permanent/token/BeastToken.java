@@ -3,6 +3,7 @@ package mage.game.permanent.token;
 import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.util.RandomUtil;
 
 import java.util.Arrays;
 
@@ -12,34 +13,37 @@ import java.util.Arrays;
 public final class BeastToken extends TokenImpl {
 
     public BeastToken() {
-        this(null, 0);
-    }
-
-    public BeastToken(String setCode) {
-        this(setCode, 0);
-    }
-
-    public BeastToken(String setCode, int tokenType) {
         super("Beast", "3/3 green Beast creature token");
-        setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.BEAST);
         power = new MageInt(3);
         toughness = new MageInt(3);
 
-        availableImageSetCodes = Arrays.asList("C14", "LRW", "M15", "M14", "DDL", "M13", "M12", "DD3GVL", "NPH", "M11", "M10", "EVE", "MM3", "CMA", "E01", "C19", "IKO");
+        availableImageSetCodes = Arrays.asList("5DN", "C14", "C16", "C19", "CMA", "CMD", "CN2",
+                "DD3C", "DD3GVL", "DDD", "DDL", "DST", "E01", "EVE", "LRW", "M10", "M11", "M12",
+                "M13", "M14", "M15", "MM3", "NPH", "PC2", "USG", "M19", "IKO", "M21");
     }
 
     @Override
     public void setExpansionSetCodeForImage(String code) {
         super.setExpansionSetCodeForImage(code);
 
-        if (getOriginalExpansionSetCode().equals("M15")) {
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("M15")) {
             this.setTokenType(2);
         }
-        if (getOriginalExpansionSetCode().equals("DD3GVL") || getOriginalExpansionSetCode().equals("C14") || getOriginalExpansionSetCode().equals("DDD") || getOriginalExpansionSetCode().equals("MM3")) {
-            this.setTokenType(1);
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("CMD")) {
+            this.setTokenType(2);
+        }
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("DD3GVL")) {
+            this.setTokenType(2);
+        }
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("DD3C")) {
+            setTokenType(RandomUtil.nextInt(2) + 1);
+        }
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("MM3")) {
+            setTokenType(RandomUtil.nextInt(2) + 1);
         }
     }
 
@@ -49,6 +53,6 @@ public final class BeastToken extends TokenImpl {
 
     @Override
     public BeastToken copy() {
-        return new BeastToken(this); //To change body of generated methods, choose Tools | Templates.
+        return new BeastToken(this);
     }
 }

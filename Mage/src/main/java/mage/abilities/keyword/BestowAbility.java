@@ -1,4 +1,3 @@
-
 package mage.abilities.keyword;
 
 import mage.MageObject;
@@ -136,6 +135,14 @@ public class BestowAbility extends SpellAbility {
                 permanent.addCardType(CardType.CREATURE);
             }
 
+        }
+    }
+
+    static public void becomeAura(Card card) {
+        if (card != null) {
+            card.getSubtype(null).add(SubType.AURA);
+            card.getCardType().remove(CardType.CREATURE);
+            card.getCardType().add(CardType.ENCHANTMENT);
         }
     }
 }

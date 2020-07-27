@@ -16,6 +16,7 @@ import mage.client.components.HoverButton;
 import mage.client.components.MageRoundPane;
 import mage.client.components.ext.dlg.DialogManager;
 import mage.client.dialog.PreferencesDialog;
+import mage.client.themes.ThemeType;
 import mage.client.util.CardsViewUtil;
 import mage.client.util.ImageHelper;
 import mage.client.util.gui.BufferedImageBuilder;
@@ -56,9 +57,9 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     private static final Border GREEN_BORDER = new LineBorder(Color.green, 3);
     private static final Border RED_BORDER = new LineBorder(Color.red, 2);
     private static final Border EMPTY_BORDER = BorderFactory.createEmptyBorder(0, 0, 0, 0);
-    private final Color inactiveBackgroundColor = new Color(200, 200, 180, 200);
-    private final Color activeBackgroundColor = new Color(200, 255, 200, 200);
-    private final Color deadBackgroundColor = new Color(131, 94, 83, 200);
+    private final Color inactiveBackgroundColor;
+    private final Color activeBackgroundColor;
+    private final Color deadBackgroundColor;
 
     private final Color activeValueColor = new Color(244, 9, 47);
     private final Font fontValuesZero = this.getFont().deriveFont(Font.PLAIN);
@@ -78,6 +79,11 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
         initComponents();
         setGUISize();
+
+        ThemeType currentTheme = PreferencesDialog.getCurrentTheme();
+        inactiveBackgroundColor = currentTheme.getPlayerPanel_inactiveBackgroundColor();
+        activeBackgroundColor = currentTheme.getPlayerPanel_activeBackgroundColor();
+        deadBackgroundColor = currentTheme.getPlayerPanel_deadBackgroundColor();
     }
 
     public void init(UUID gameId, UUID playerId, BigCard bigCard, int priorityTime) {

@@ -1,6 +1,6 @@
-
 package mage.cards.s;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -19,15 +19,10 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
-import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.TargetAdjuster;
 import mage.target.targetpointer.FixedTarget;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -57,8 +52,6 @@ public final class SatyrFiredancer extends CardImpl {
 
 class SatyrFiredancerTriggeredAbility extends TriggeredAbilityImpl {
 
-    private List<UUID> handledStackObjects = new ArrayList<>();
-
     public SatyrFiredancerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SatyrFiredancerDamageEffect(), false);
         targetAdjuster = SatyrFiredancerAdjuster.instance;
@@ -74,38 +67,32 @@ class SatyrFiredancerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public void reset(Game game) {
-        handledStackObjects.clear();
-    }
-
-    @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == EventType.DAMAGED_PLAYER;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (isControlledBy(game.getControllerId(event.getSourceId()))) {
-            MageObject damageSource = game.getObject(event.getSourceId());
-            if (damageSource != null) {
-                if (game.getOpponents(getControllerId()).contains(event.getTargetId())) {
-                    MageObject object = game.getObject(event.getSourceId());
-                    if (object != null && (object.isInstant() || object.isSorcery())) {
-                        if (!(damageSource instanceof StackObject) || !handledStackObjects.contains(damageSource.getId())) {
-                            if (damageSource instanceof StackObject) {
-                                handledStackObjects.add(damageSource.getId());
-                            }
-                            for (Effect effect : this.getEffects()) {
-                                effect.setTargetPointer(new FixedTarget(event.getTargetId())); // used by adjust targets
-                                effect.setValue("damage", event.getAmount());
-                            }
-                            return true;
-                        }
-                    }
-                }
-            }
+        if (!isControlledBy(game.getControllerId(event.getSourceId()))) {
+            return false;
         }
-        return false;
+        MageObject damageSource = game.getObject(event.getSourceId());
+        if (damageSource == null) {
+            return false;
+        }
+        UUID damageTargetId = event.getTargetId();
+        if (!game.getOpponents(getControllerId()).contains(damageTargetId)) {
+            return false;
+        }
+        MageObject sourceObject = game.getObject(event.getSourceId());
+        if (sourceObject == null || !(sourceObject.isInstant() || sourceObject.isSorcery())) {
+            return false;
+        }
+        for (Effect effect : this.getEffects()) {
+            effect.setTargetPointer(new FixedTarget(damageTargetId)); // used by adjust targets
+            effect.setValue("damage", event.getAmount());
+        }
+        return true;
     }
 
     @Override

@@ -43,13 +43,13 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * Creates a {@link Mana} object with the passed in values. Values can not
      * be less than 0. Any values less than 0 will be logged and set to 0.
      *
-     * @param red total Red mana to have.
-     * @param green total Green mana to have.
-     * @param blue total Blue mana to have.
-     * @param white total White mana to have.
-     * @param black total Black mana to have.
-     * @param generic total Generic mana to have.
-     * @param any total Any mana to have.
+     * @param red       total Red mana to have.
+     * @param green     total Green mana to have.
+     * @param blue      total Blue mana to have.
+     * @param white     total White mana to have.
+     * @param black     total Black mana to have.
+     * @param generic   total Generic mana to have.
+     * @param any       total Any mana to have.
      * @param colorless total Colorless mana to have.
      */
     public Mana(final int red, final int green, final int blue, final int white, final int black, final int generic, final int any, final int colorless) {
@@ -142,6 +142,35 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         }
     }
 
+    public Mana(final ManaType manaType, int num) {
+        Objects.requireNonNull(manaType, "The passed in ManaType can not be null");
+        switch (manaType) {
+            case GREEN:
+                green = num;
+                break;
+            case RED:
+                red = num;
+                break;
+            case BLACK:
+                black = num;
+                break;
+            case BLUE:
+                blue = num;
+                break;
+            case WHITE:
+                white = num;
+                break;
+            case COLORLESS:
+                colorless = num;
+                break;
+            case GENERIC:
+                generic = num;
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown manaType: " + manaType);
+        }
+    }
+
     /**
      * Creates a {@link Mana} object with the passed in {@code num} of Red mana.
      * {@code num} can not be a negative value. Negative values will be logged
@@ -161,7 +190,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      *
      * @param num value of Green mana to create.
      * @return a {@link Mana} object with the passed in {@code num} of Green
-     * mana.
+     *         mana.
      */
     public static Mana GreenMana(int num) {
         return new Mana(0, notNegative(num, "Green"), 0, 0, 0, 0, 0, 0);
@@ -174,7 +203,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      *
      * @param num value of Blue mana to create.
      * @return a {@link Mana} object with the passed in {@code num} of Blue
-     * mana.
+     *         mana.
      */
     public static Mana BlueMana(int num) {
         return new Mana(0, 0, notNegative(num, "Blue"), 0, 0, 0, 0, 0);
@@ -187,7 +216,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      *
      * @param num value of White mana to create.
      * @return a {@link Mana} object with the passed in {@code num} of White
-     * mana.
+     *         mana.
      */
     public static Mana WhiteMana(int num) {
         return new Mana(0, 0, 0, notNegative(num, "White"), 0, 0, 0, 0);
@@ -200,7 +229,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      *
      * @param num value of Black mana to create.
      * @return a {@link Mana} object with the passed in {@code num} of Black
-     * mana.
+     *         mana.
      */
     public static Mana BlackMana(int num) {
         return new Mana(0, 0, 0, 0, notNegative(num, "Black"), 0, 0, 0);
@@ -213,7 +242,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      *
      * @param num value of Generic mana to create.
      * @return a {@link Mana} object with the passed in {@code num} of Generic
-     * mana.
+     *         mana.
      */
     public static Mana GenericMana(int num) {
         return new Mana(0, 0, 0, 0, 0, notNegative(num, "Generic"), 0, 0);
@@ -226,7 +255,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      *
      * @param num value of Colorless mana to create.
      * @return a {@link Mana} object with the passed in {@code num} of Colorless
-     * mana.
+     *         mana.
      */
     public static Mana ColorlessMana(int num) {
         return new Mana(0, 0, 0, 0, 0, 0, 0, notNegative(num, "Colorless"));
@@ -444,7 +473,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      *
      * @param filter the colors of mana to return the count for.
      * @return the count of filtered mana provided by the passed in
-     * {@link FilterMana}.
+     *         {@link FilterMana}.
      */
     public int count(final FilterMana filter) {
         if (filter == null) {
@@ -898,10 +927,10 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * Returns if this objects mana contains any coloured mana the same as the
      * passed in {@link Mana}'s mana.
      *
-     * @param mana the mana to check for
+     * @param mana             the mana to check for
      * @param includeColorless also check for colorless
      * @return true if this contains any of the same type of coloured mana that
-     * this has
+     *         this has
      */
     public boolean containsAny(final Mana mana, boolean includeColorless) {
         if (mana.black > 0 && this.black > 0) {
@@ -929,7 +958,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      *
      * @param color the color to return the count for.
      * @return the total count of mana in this object as specified by the passed
-     * in {@link ColoredManaSymbol}.
+     *         in {@link ColoredManaSymbol}.
      */
     public int getColor(final ColoredManaSymbol color) {
         if (color == ColoredManaSymbol.G) {
@@ -956,7 +985,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      *
      * @param manaType the type to return the count for.
      * @return the total count of mana in this object as specified by the passed
-     * in {@link ManaType}.
+     *         in {@link ManaType}.
      */
     public int get(final ManaType manaType) {
         switch (manaType) {
@@ -981,7 +1010,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * {@code amount} .
      *
      * @param manaType the color of the mana to set
-     * @param amount the value to set the mana too
+     * @param amount   the value to set the mana too
      */
     public void set(final ManaType manaType, final int amount) {
         switch (manaType) {
@@ -1056,7 +1085,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      *
      * @param mana the mana to compare with
      * @return if this object has more than or equal mana to the passed in
-     * {@link Mana}.
+     *         {@link Mana}.
      */
     public boolean includesMana(Mana mana) {
         return this.green >= mana.green
@@ -1217,10 +1246,10 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * is negative, it is logged and 0 is returned.
      *
      * @param value the value to check.
-     * @param name the name of the value to check. Used to make logging of the
-     * {@code value} easier
+     * @param name  the name of the value to check. Used to make logging of the
+     *              {@code value} easier
      * @return the {@code value} passed in, unless it is minus, in which case 0
-     * is returned.
+     *         is returned.
      */
     private static int notNegative(int value, final String name) {
         if (value < 0) {

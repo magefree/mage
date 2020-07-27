@@ -17,7 +17,7 @@ import mage.abilities.keyword.RiotAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterSpell;
+import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.game.Game;
@@ -137,7 +137,7 @@ class DomriChaosBringerTriggeredAbility extends DelayedTriggeredAbility {
             return false;
         }
         this.getEffects().clear();
-        FilterSpell filter = new FilterSpell();
+        FilterCard filter = new FilterCard();
         filter.add(new CardIdPredicate(event.getTargetId()));
         this.addEffect(new GainAbilityControlledSpellsEffect(new RiotAbility(), filter));
         return true;

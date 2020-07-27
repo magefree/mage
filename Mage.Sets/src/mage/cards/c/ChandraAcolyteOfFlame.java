@@ -147,7 +147,7 @@ class ChandraAcolyteOfFlameGraveyardEffect extends OneShotEffect {
         Card card = game.getCard(this.getTargetPointer().getFirst(game, source));
         if (card != null) {
             ContinuousEffect effect = new ChandraAcolyteOfFlameCastFromGraveyardEffect();
-            effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
+            effect.setTargetPointer(new FixedTarget(card, game));
             game.addEffect(effect, source);
             effect = new ChandraAcolyteOfFlameReplacementEffect(card.getId());
             game.addEffect(effect, source);

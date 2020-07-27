@@ -141,7 +141,7 @@ class HeraldOfLeshracLeavesEffect extends OneShotEffect {
             filter.add(new ControllerIdPredicate(source.getControllerId()));
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
                 ContinuousEffect effect = new GainControlTargetEffect(Duration.EndOfGame, playerId);
-                effect.setTargetPointer(new FixedTarget(permanent.getId()));
+                effect.setTargetPointer(new FixedTarget(permanent, game));
                 game.addEffect(effect, source);
             }
         }

@@ -65,7 +65,7 @@ class ThrillingEncoreEffect extends OneShotEffect {
                     Card card = mor.getCard(game);
                     if (card != null && card.isCreature()) {
                         Effect effect = new ReturnFromGraveyardToBattlefieldTargetEffect();
-                        effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
+                        effect.setTargetPointer(new FixedTarget(card, game));
                         effect.apply(game, source);
                     }
                 }

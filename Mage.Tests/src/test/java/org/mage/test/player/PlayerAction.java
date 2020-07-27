@@ -37,7 +37,11 @@ public class PlayerAction {
     }
 
     /**
-     * Calls after action removed from commands queue later (for multi steps action, e.g. AI related)
+     * Calls after action removed from commands queue later (for multi steps
+     * action, e.g.AI related)
+     *
+     * @param game
+     * @param player
      */
     public void onActionRemovedLater(Game game, TestPlayer player) {
         //

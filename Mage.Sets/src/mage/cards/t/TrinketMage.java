@@ -21,7 +21,7 @@ import mage.target.common.TargetCardInLibrary;
  */
 public final class TrinketMage extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("an artifact card with converted mana cost 1 or less");
+    private static final FilterCard filter = new FilterCard("artifact card with converted mana cost 1 or less");
 
     static {
         filter.add(CardType.ARTIFACT.getPredicate());

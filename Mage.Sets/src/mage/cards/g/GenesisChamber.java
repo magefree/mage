@@ -92,7 +92,7 @@ class GenesisChamberEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = ((FixedTarget) targetPointer).getTargetedPermanentOrLKIBattlefield(game);
+        Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (permanent != null) {
             MyrToken token = new MyrToken();
             token.putOntoBattlefield(1, game, source.getSourceId(), permanent.getControllerId());

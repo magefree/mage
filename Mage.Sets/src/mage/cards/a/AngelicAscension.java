@@ -1,5 +1,6 @@
 package mage.cards.a;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
@@ -12,8 +13,6 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.AngelToken;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetCreatureOrPlaneswalker;
-
-import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -59,7 +58,7 @@ class AngelicAscensionEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(source.getFirstTarget());
+        Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (permanent == null) {
             return false;
         }

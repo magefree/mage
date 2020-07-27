@@ -13,7 +13,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
-
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -26,7 +25,8 @@ public final class TrainingGrounds extends CardImpl {
     public TrainingGrounds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}");
 
-        // Activated abilities of creatures you control cost up to {2} less to activate. This effect can't reduce the amount of mana an ability costs to activate to less than one mana.
+        // Activated abilities of creatures you control cost up to {2} less to activate. 
+        // This effect can't reduce the amount of mana an ability costs to activate to less than one mana.
         this.addAbility(new SimpleStaticAbility(new TrainingGroundsEffect()));
     }
 
@@ -42,7 +42,8 @@ public final class TrainingGrounds extends CardImpl {
 
 class TrainingGroundsEffect extends CostModificationEffectImpl {
 
-    private static final String effectText = "Activated abilities of creatures you control cost up to {2} less to activate. "
+    private static final String effectText = "Activated abilities of creatures you control "
+            + "cost up to {2} less to activate. "
             + "This effect can't reduce the mana in that cost to less than one mana";
 
     TrainingGroundsEffect() {
@@ -101,8 +102,9 @@ class TrainingGroundsEffect extends CostModificationEffectImpl {
             return false;
         }
         //Activated abilities of creatures you control
-        Permanent permanent = game.getPermanent(abilityToModify.getSourceId());
-        return permanent != null && permanent.isCreature()
+        Permanent permanent = game.getPermanentOrLKIBattlefield(abilityToModify.getSourceId());
+        return permanent != null
+                && permanent.isCreature()
                 && permanent.isControlledBy(source.getControllerId());
     }
 

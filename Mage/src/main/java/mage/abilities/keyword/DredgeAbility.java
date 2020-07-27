@@ -14,9 +14,8 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 /**
- * If you would draw a card, instead you may put exactly X cards from the top of
- * your library into your graveyard. If you do, return this card from your
- * graveyard to your hand. Otherwise, draw a card.
+ * If you would draw a card, you may mill X cards instead. If you do, return
+ * this card from your graveyard to your hand.
  *
  * @author North
  */
@@ -73,7 +72,7 @@ class DredgeEffect extends ReplacementEffectImpl {
         if (owner != null
                 && owner.getLibrary().size() >= amount
                 && owner.chooseUse(outcome, new StringBuilder("Dredge ").append(sourceCard.getLogName()).
-                append("? (").append(amount).append(" cards go from top of library to graveyard)").toString(), source, game)) {
+                        append("? (").append(amount).append(" cards are milled)").toString(), source, game)) {
             if (!game.isSimulation()) {
                 game.informPlayers(new StringBuilder(owner.getLogName()).append(" dredges ").append(sourceCard.getLogName()).toString());
             }

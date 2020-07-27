@@ -1,5 +1,6 @@
 package mage.cards.e;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SagaAbility;
@@ -22,8 +23,6 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.util.CardUtil;
-
-import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -99,12 +98,17 @@ class ElspethConquersDeathCostEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (!(abilityToModify instanceof SpellAbility) ||
-                !game.getOpponents(source.getControllerId()).contains(abilityToModify.getControllerId())) {
-            return false;
+        if ((abilityToModify instanceof SpellAbility)
+                && game.getOpponents(source.getControllerId()).contains(abilityToModify.getControllerId())) {
+            Card spellCard = ((SpellAbility) abilityToModify).getCharacteristics(game);
+            if (spellCard != null) {
+                if (((SpellAbility) abilityToModify).getSpellAbilityCastMode() != SpellAbilityCastMode.NORMAL) {
+                    spellCard = ((SpellAbility) abilityToModify).getSpellAbilityCastMode().getTypeModifiedCardObjectCopy(spellCard, game);
+                }
+                return !spellCard.isCreature();
+            }
         }
-        Card card = game.getCard(abilityToModify.getSourceId());
-        return card != null && !card.isCreature();
+        return false;
     }
 
     @Override
@@ -117,8 +121,8 @@ class ElspethConquersDeathReturnEffect extends OneShotEffect {
 
     ElspethConquersDeathReturnEffect() {
         super(Outcome.Benefit);
-        staticText = "Return target creature or planeswalker card from your graveyard to the battlefield. " +
-                "Put a +1/+1 counter or a loyalty counter on it";
+        staticText = "Return target creature or planeswalker card from your graveyard to the battlefield. "
+                + "Put a +1/+1 counter or a loyalty counter on it";
     }
 
     private ElspethConquersDeathReturnEffect(final ElspethConquersDeathReturnEffect effect) {
@@ -149,4 +153,5 @@ class ElspethConquersDeathReturnEffect extends OneShotEffect {
         permanent.addCounters(counter, source, game);
         return true;
     }
+
 }

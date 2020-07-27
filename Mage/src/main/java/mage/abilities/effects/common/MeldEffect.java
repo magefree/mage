@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import java.util.HashSet;
@@ -80,7 +79,7 @@ public class MeldEffect extends OneShotEffect {
                     meldCard.setOwnerId(controller.getId());
                     meldCard.setTopHalfCard(meldWithCard, game);
                     meldCard.setBottomHalfCard(sourceCard, game);
-                    meldCard.setMelded(true);
+                    meldCard.setMelded(true, game);
                     game.addMeldCard(meldCard.getId(), meldCard);
                     game.getState().addCard(meldCard);
                     meldCard.setZone(Zone.EXILED, game);

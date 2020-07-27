@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -24,8 +22,9 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class SentinelOfThePearlTrident extends CardImpl {
@@ -87,7 +86,7 @@ class SentinelOfThePearlTridentEffect extends OneShotEffect {
                 int zcc = permanent.getZoneChangeCounter(game);
                 controller.moveCards(permanent, Zone.EXILED, source, game);
                 //create delayed triggered ability
-                Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect();
+                Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false);
                 effect.setTargetPointer(new FixedTarget(permanent.getId(), zcc + 1));
                 AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
                 game.addDelayedTriggeredAbility(delayedAbility, source);

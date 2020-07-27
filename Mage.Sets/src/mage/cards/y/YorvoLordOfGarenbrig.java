@@ -89,7 +89,7 @@ class YorvoLordOfGarenbrigEffect extends OneShotEffect {
             return false;
         }
         sourcePerm.addCounters(CounterType.P1P1.createInstance(), source, game);
-        Permanent permanent = ((FixedTarget) targetPointer).getTargetedPermanentOrLKIBattlefield(game);
+        Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (permanent == null) {
             return true;
         }

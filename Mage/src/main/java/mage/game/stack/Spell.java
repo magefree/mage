@@ -1,5 +1,6 @@
 package mage.game.stack;
 
+import java.util.*;
 import mage.MageInt;
 import mage.MageObject;
 import mage.Mana;
@@ -13,7 +14,6 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ActivationManaAbilityStep;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.keyword.BestowAbility;
 import mage.abilities.keyword.MorphAbility;
 import mage.abilities.text.TextPart;
 import mage.cards.*;
@@ -31,8 +31,6 @@ import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.util.GameLog;
 import mage.util.SubTypeList;
-
-import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -326,7 +324,7 @@ public class Spell extends StackObjImpl implements Card {
      */
     private boolean spellAbilityCheckTargetsAndDeactivateModes(SpellAbility spellAbility, Game game) {
         boolean legalModes = false;
-        for (Iterator<UUID> iterator = spellAbility.getModes().getSelectedModes().iterator(); iterator.hasNext(); ) {
+        for (Iterator<UUID> iterator = spellAbility.getModes().getSelectedModes().iterator(); iterator.hasNext();) {
             UUID nextSelectedModeId = iterator.next();
             Mode mode = spellAbility.getModes().get(nextSelectedModeId);
             if (!mode.getTargets().isEmpty()) {

@@ -108,7 +108,7 @@ class IdentityThiefEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent targetPermanent = game.getPermanentOrLKIBattlefield(source.getFirstTarget());
+        Permanent targetPermanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (controller != null

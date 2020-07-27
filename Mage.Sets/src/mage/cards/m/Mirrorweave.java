@@ -72,7 +72,7 @@ class MirrorWeaveEffect extends OneShotEffect {
         FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
         if (controller != null) {
-            Permanent copyFromCreature = game.getPermanentOrLKIBattlefield(source.getFirstTarget());
+            Permanent copyFromCreature = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
             if (copyFromCreature != null) {
                 filter.add(Predicates.not(new PermanentIdPredicate(copyFromCreature.getId())));
                 for (Permanent copyToCreature : game.getBattlefield().getAllActivePermanents(filter, game)) {

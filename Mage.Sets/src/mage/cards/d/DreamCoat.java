@@ -109,7 +109,7 @@ class BecomesColorOrColorsEnchantedEffect extends OneShotEffect {
         String colors = new String(sb);
         ObjectColor chosenColors = new ObjectColor(colors);
         ContinuousEffect effect = new BecomesColorTargetEffect(chosenColors, Duration.Custom);
-        effect.setTargetPointer(new FixedTarget(permanent.getId()));
+        effect.setTargetPointer(new FixedTarget(permanent, game));
         game.addEffect(effect, source);
 
         return true;

@@ -32,10 +32,6 @@ public class Brawl extends Constructed {
         banned.add("Winota, Joiner of Forces");
     }
 
-    public Brawl(String name) {
-        super(name);
-    }
-
     @Override
     public int getSideboardMinSize() {
         return 1;
@@ -44,6 +40,7 @@ public class Brawl extends Constructed {
     @Override
     public boolean validate(Deck deck) {
         boolean valid = true;
+        invalid.clear();
         Card brawler = null;
         Card companion = null;
         FilterMana colorIdentity = new FilterMana();

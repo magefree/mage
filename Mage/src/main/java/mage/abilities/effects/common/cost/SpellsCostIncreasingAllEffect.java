@@ -23,7 +23,7 @@ public class SpellsCostIncreasingAllEffect extends CostModificationEffectImpl {
     private final FilterCard filter;
     private final TargetController targetController;
     private final int increaseGenericCost;
-    private ManaCosts<ManaCost> increaseManaCosts;
+    private final ManaCosts<ManaCost> increaseManaCosts;
 
     public SpellsCostIncreasingAllEffect(int increaseGenericCost, FilterCard filter, TargetController targetController) {
         super(Duration.WhileOnBattlefield, Outcome.Detriment, CostModificationType.INCREASE_COST);

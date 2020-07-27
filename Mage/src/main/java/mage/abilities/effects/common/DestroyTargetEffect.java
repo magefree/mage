@@ -39,7 +39,7 @@ public class DestroyTargetEffect extends OneShotEffect {
     }
 
     public DestroyTargetEffect(boolean noRegen, boolean multitargetHandling) {
-        super(Outcome.DestroyPermanent);
+        super(Outcome.Detriment);
         this.noRegen = noRegen;
         this.multitargetHandling = multitargetHandling;
     }

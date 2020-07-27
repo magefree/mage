@@ -1,5 +1,6 @@
 package mage.cards.t;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -17,14 +18,10 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 
-import java.util.UUID;
-
 /**
  * @author TheElk801
  */
 public final class TheMagicMirror extends CardImpl {
-
-    private static final DynamicValue xValue = new CountersSourceCount(CounterType.KNOWLEDGE);
 
     public TheMagicMirror(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}{U}{U}{U}");
@@ -48,9 +45,8 @@ public final class TheMagicMirror extends CardImpl {
         ability = new BeginningOfUpkeepTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.KNOWLEDGE.createInstance())
                         .setText("put a knowledge counter on {this},"),
-                TargetController.YOU, false
-        );
-        ability.addEffect(new DrawCardSourceControllerEffect(xValue).concatBy("then"));
+                TargetController.YOU, false);
+        ability.addEffect(new DrawCardSourceControllerEffect(new CountersSourceCount(CounterType.KNOWLEDGE)).concatBy("then"));
         this.addAbility(ability);
     }
 

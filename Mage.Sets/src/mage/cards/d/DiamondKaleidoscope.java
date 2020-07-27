@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -7,6 +6,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
@@ -33,7 +33,7 @@ public final class DiamondKaleidoscope extends CardImpl {
     }
 
     public DiamondKaleidoscope(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // {3}, {tap}: Create a 0/1 colorless Prism artifact creature token.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new PrismToken(), 1), new GenericManaCost(3));
@@ -41,7 +41,9 @@ public final class DiamondKaleidoscope extends CardImpl {
         this.addAbility(ability);
 
         // Sacrifice a Prism token: Add one mana of any color.
-        ability = new AnyColorManaAbility(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability = new AnyColorManaAbility(new SacrificeTargetCost(new TargetControlledPermanent(filter)),
+                new PermanentsOnBattlefieldCount(filter),
+                false);
         this.addAbility(ability);
     }
 

@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ExileTargetForSourceEffect;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlTargetEffect;
@@ -10,8 +8,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.common.TargetControlledCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author noxx
  */
 public final class Cloudshift extends CardImpl {
@@ -23,7 +22,7 @@ public final class Cloudshift extends CardImpl {
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         Effect effect = new ExileTargetForSourceEffect();
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addEffect(new ReturnToBattlefieldUnderYourControlTargetEffect(true));
+        this.getSpellAbility().addEffect(new ReturnToBattlefieldUnderYourControlTargetEffect(false));
     }
 
     public Cloudshift(final Cloudshift card) {

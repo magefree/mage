@@ -18,6 +18,7 @@ import mage.client.dialog.CardInfoWindowDialog.ShowType;
 import mage.client.game.FeedbackPanel.FeedbackMode;
 import mage.client.plugins.adapters.MageActionCallback;
 import mage.client.plugins.impl.Plugins;
+import mage.client.themes.ThemeType;
 import mage.client.util.Event;
 import mage.client.util.*;
 import mage.client.util.audio.AudioManager;
@@ -1575,7 +1576,6 @@ public final class GamePanel extends javax.swing.JPanel {
 
     @SuppressWarnings("unchecked")
     private void initComponents() {
-
         abilityPicker = new mage.client.components.ability.AbilityPicker();
         jSplitPane1 = new javax.swing.JSplitPane();
         jSplitPane0 = new javax.swing.JSplitPane();
@@ -1610,14 +1610,16 @@ public final class GamePanel extends javax.swing.JPanel {
         txtHoldPriority.setToolTipText("Holding priority after the next spell cast or ability activation");
         txtHoldPriority.setVisible(false);
 
-        btnToggleMacro = new KeyboundButton(KEY_CONTROL_TOGGLE_MACRO);
-        btnCancelSkip = new KeyboundButton(KEY_CONTROL_CANCEL_SKIP); // F3
-        btnSkipToNextTurn = new KeyboundButton(KEY_CONTROL_NEXT_TURN); // F4
-        btnSkipToEndTurn = new KeyboundButton(KEY_CONTROL_END_STEP); // F5
-        btnSkipToNextMain = new KeyboundButton(KEY_CONTROL_MAIN_STEP); // F7
-        btnSkipStack = new KeyboundButton(KEY_CONTROL_SKIP_STACK); // F10
-        btnSkipToYourTurn = new KeyboundButton(KEY_CONTROL_YOUR_TURN); // F9
-        btnSkipToEndStepBeforeYourTurn = new KeyboundButton(KEY_CONTROL_PRIOR_END); // F11
+        boolean displayButtonText = PreferencesDialog.getCurrentTheme().isShortcutsVisibleForSkipButtons();
+        
+        btnToggleMacro = new KeyboundButton(KEY_CONTROL_TOGGLE_MACRO, displayButtonText);
+        btnCancelSkip = new KeyboundButton(KEY_CONTROL_CANCEL_SKIP, displayButtonText); // F3
+        btnSkipToNextTurn = new KeyboundButton(KEY_CONTROL_NEXT_TURN, displayButtonText); // F4
+        btnSkipToEndTurn = new KeyboundButton(KEY_CONTROL_END_STEP, displayButtonText); // F5
+        btnSkipToNextMain = new KeyboundButton(KEY_CONTROL_MAIN_STEP, displayButtonText); // F7
+        btnSkipStack = new KeyboundButton(KEY_CONTROL_SKIP_STACK, displayButtonText); // F10
+        btnSkipToYourTurn = new KeyboundButton(KEY_CONTROL_YOUR_TURN, displayButtonText); // F9
+        btnSkipToEndStepBeforeYourTurn = new KeyboundButton(KEY_CONTROL_PRIOR_END, displayButtonText); // F11
 
         btnConcede = new javax.swing.JButton();
         btnSwitchHands = new javax.swing.JButton();
@@ -2353,6 +2355,7 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     private void btnEndTurnActionPerformed(java.awt.event.ActionEvent evt) {
+    	this.feedbackPanel.setLastResponse();
         SessionHandler.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_NEXT_TURN, gameId, null);
         skipButtons.activateSkipButton(KEY_CONTROL_NEXT_TURN);
 
@@ -2376,6 +2379,7 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     private void btnUntilEndOfTurnActionPerformed(java.awt.event.ActionEvent evt) {
+    	this.feedbackPanel.setLastResponse();
         SessionHandler.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_TURN_END_STEP, gameId, null);
         skipButtons.activateSkipButton(KEY_CONTROL_END_STEP);
 
@@ -2393,6 +2397,7 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     private void btnUntilNextMainPhaseActionPerformed(java.awt.event.ActionEvent evt) {
+    	this.feedbackPanel.setLastResponse();
         SessionHandler.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_NEXT_MAIN_PHASE, gameId, null);
         skipButtons.activateSkipButton(KEY_CONTROL_MAIN_STEP);
 
@@ -2401,6 +2406,7 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     private void btnPassPriorityUntilNextYourTurnActionPerformed(java.awt.event.ActionEvent evt) {
+    	this.feedbackPanel.setLastResponse();
         SessionHandler.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_MY_NEXT_TURN, gameId, null);
         skipButtons.activateSkipButton(KEY_CONTROL_YOUR_TURN);
 
@@ -2409,6 +2415,7 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     private void btnPassPriorityUntilStackResolvedActionPerformed(java.awt.event.ActionEvent evt) {
+    	this.feedbackPanel.setLastResponse();
         SessionHandler.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_STACK_RESOLVED, gameId, null);
         skipButtons.activateSkipButton(KEY_CONTROL_SKIP_STACK);
 
@@ -2417,6 +2424,7 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     private void btnSkipToEndStepBeforeYourTurnActionPerformed(java.awt.event.ActionEvent evt) {
+    	this.feedbackPanel.setLastResponse();
         SessionHandler.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_END_STEP_BEFORE_MY_NEXT_TURN, gameId, null);
         skipButtons.activateSkipButton(KEY_CONTROL_PRIOR_END);
 
@@ -2425,6 +2433,7 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     private void restorePriorityActionPerformed(java.awt.event.ActionEvent evt) {
+    	this.feedbackPanel.setLastResponse();
         SessionHandler.sendPlayerAction(PlayerAction.PASS_PRIORITY_CANCEL_ALL_ACTIONS, gameId, null);
         skipButtons.activateSkipButton("");
 

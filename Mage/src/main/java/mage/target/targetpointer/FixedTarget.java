@@ -1,16 +1,16 @@
 package mage.target.targetpointer;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.UUID;
+import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
 
 public class FixedTarget implements TargetPointer {
 
@@ -28,10 +28,11 @@ public class FixedTarget implements TargetPointer {
     }
 
     /**
-     * Target counter is immediatly initialised with current zoneChangeCounter value from the GameState
-     * Sets fixed the currect zone chnage counter 
+     * Target counter is immediatly initialised with current zoneChangeCounter
+     * value from the GameState Sets fixed the currect zone chnage counter
+     *
      * @param card used to get the objectId
-     * @param game 
+     * @param game
      */
     public FixedTarget(Card card, Game game) {
         this.targetId = card.getId();
@@ -129,18 +130,23 @@ public class FixedTarget implements TargetPointer {
         return zoneChangeCounter;
     }
 
-    public Permanent getTargetedPermanentOrLKIBattlefield(Game game) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(targetId);
-        if (permanent != null && permanent.getZoneChangeCounter(game) != zoneChangeCounter) {
-            permanent = (Permanent) game.getLastKnownInformation(targetId, Zone.BATTLEFIELD, zoneChangeCounter);
-        }
-        return permanent;
-    }
-
     @Override
     public FixedTarget getFixedTarget(Game game, Ability source) {
         init(game, source);
         return this;
+    }
+
+    @Override
+    public Permanent getFirstTargetPermanentOrLKI(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(targetId);
+        if (permanent != null && permanent.getZoneChangeCounter(game) == zoneChangeCounter) {
+            return permanent;
+        }
+        MageObject mageObject = game.getLastKnownInformation(targetId, Zone.BATTLEFIELD, zoneChangeCounter);
+        if (mageObject instanceof Permanent) {
+            return (Permanent) mageObject;
+        }
+        return null;
     }
 
 }

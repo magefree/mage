@@ -25,7 +25,7 @@ public class SerializationTest extends CardTestPlayerBase {
     public void test_PermanentImpl_Simple() {
         CardInfo cardInfo = CardRepository.instance.findCard("Balduvian Bears");
         PermanentImpl permanent = new PermanentCard(cardInfo.getCard(), playerA.getId(), currentGame);
-        currentGame.addPermanent(permanent);
+        currentGame.addPermanent(permanent, 0);
 
         Object compressed = CompressUtil.compress(permanent);
         Assert.assertTrue("Must be zip", compressed instanceof ZippedObjectImpl);
@@ -37,7 +37,7 @@ public class SerializationTest extends CardTestPlayerBase {
     public void test_PermanentImpl_MarkedDamageInfo() {
         CardInfo cardInfo = CardRepository.instance.findCard("Balduvian Bears");
         PermanentImpl permanent = new PermanentCard(cardInfo.getCard(), playerA.getId(), currentGame);
-        currentGame.addPermanent(permanent);
+        currentGame.addPermanent(permanent, 0);
 
         // mark damage from infected ability
         permanent.addAbility(InfectAbility.getInstance(), null, currentGame);

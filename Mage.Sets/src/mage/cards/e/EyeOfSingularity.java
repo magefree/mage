@@ -159,7 +159,7 @@ class EyeOfSingularityTriggeredEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Map<UUID, Integer> toDestroy = new HashMap<>();
-        Permanent etbPermanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+        Permanent etbPermanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
 
         if (etbPermanent == null) {
             return false;

@@ -23,7 +23,9 @@ public final class Heartstone extends CardImpl {
     public Heartstone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
-        // Activated abilities of creatures cost {1} less to activate. This effect can't reduce the amount of mana an ability costs to activate to less than one mana.
+        // Activated abilities of creatures cost {1} less to activate. 
+        // This effect can't reduce the amount of mana an ability 
+        // costs to activate to less than one mana.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HeartstoneEffect()));
     }
 
@@ -39,7 +41,8 @@ public final class Heartstone extends CardImpl {
 
 class HeartstoneEffect extends CostModificationEffectImpl {
 
-    private static final String effectText = "Activated abilities of creatures cost {1} less to activate. This effect can't reduce the mana in that cost to less than one mana.";
+    private static final String effectText = "Activated abilities of creatures cost "
+            + "{1} less to activate. This effect can't reduce the mana in that cost to less than one mana.";
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     public HeartstoneEffect() {
@@ -64,10 +67,12 @@ class HeartstoneEffect extends CostModificationEffectImpl {
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         if (abilityToModify.getAbilityType() == AbilityType.ACTIVATED
-                || (abilityToModify.getAbilityType() == AbilityType.MANA && (abilityToModify instanceof ActivatedAbility))) {
+                || (abilityToModify.getAbilityType() == AbilityType.MANA
+                && (abilityToModify instanceof ActivatedAbility))) {
             // Activated abilities of creatures
-            Permanent permanent = game.getPermanent(abilityToModify.getSourceId());
-            if (permanent != null && filter.match(permanent, source.getSourceId(), source.getControllerId(), game)) {
+            Permanent permanent = game.getPermanentOrLKIBattlefield(abilityToModify.getSourceId());
+            if (permanent != null
+                    && filter.match(permanent, source.getSourceId(), source.getControllerId(), game)) {
                 return true;
             }
         }

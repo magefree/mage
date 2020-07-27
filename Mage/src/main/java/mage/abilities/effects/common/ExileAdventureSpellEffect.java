@@ -1,5 +1,6 @@
 package mage.abilities.effects.common;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.MageSingleton;
 import mage.abilities.effects.AsThoughEffectImpl;
@@ -16,8 +17,6 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
-
-import java.util.UUID;
 
 /**
  * @author phulin
@@ -58,7 +57,7 @@ public class ExileAdventureSpellEffect extends OneShotEffect implements MageSing
                     Card parentCard = adventureSpellCard.getParentCard();
                     if (controller.moveCardsToExile(parentCard, source, game, true, exileId, "On an Adventure from " + controller.getName())) {
                         ContinuousEffect effect = new AdventureCastFromExileEffect();
-                        effect.setTargetPointer(new FixedTarget(parentCard.getId(), game));
+                        effect.setTargetPointer(new FixedTarget(parentCard, game));
                         game.addEffect(effect, source);
                     }
                 }

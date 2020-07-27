@@ -1,15 +1,12 @@
-
 package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -20,7 +17,7 @@ import mage.players.Player;
 public final class MnemonicNexus extends CardImpl {
 
     public MnemonicNexus(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{U}");
 
         // Each player shuffles their graveyard into their library.
         this.getSpellAbility().addEffect(new MnemonicNexusEffect());
@@ -50,16 +47,13 @@ class MnemonicNexusEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player sourcePlayer = game.getPlayer(source.getControllerId());
-        if(sourcePlayer == null){
+        if (sourcePlayer == null) {
             return false;
         }
-        for (UUID playerId: game.getState().getPlayersInRange(sourcePlayer.getId(), game)) {
+        for (UUID playerId : game.getState().getPlayersInRange(sourcePlayer.getId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                for (Card card: player.getGraveyard().getCards(game)) {
-                    card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-                }                               
-                player.shuffleLibrary(source, game);
+                player.shuffleCardsToLibrary(player.getGraveyard(), game, source);
             }
         }
         return true;

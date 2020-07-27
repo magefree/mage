@@ -45,7 +45,7 @@ public class SpliceOnArcaneTest extends CardTestPlayerBase {
         assertHandCount(playerA, "Through the Breach", 1);
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
         assertAbility(playerA, "Silvercoat Lion", HasteAbility.getInstance(), true);
-        Assert.assertEquals("All available mana has to be used", 0, playerA.getManaAvailable(currentGame).size());
+        Assert.assertEquals("All available mana has to be used", "[]", playerA.getManaAvailable(currentGame).toString());
     }
 
     @Test
