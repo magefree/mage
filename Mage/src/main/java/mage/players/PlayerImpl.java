@@ -3420,14 +3420,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         boolean previousState = game.inCheckPlayableState();
         game.setCheckPlayableState(true);
         try {
-            // basic mana
-            ManaOptions availableMana = getManaAvailable(game);
-            // availableMana.addMana(manaPool.getMana());
-            // conditional mana
-//            for (ConditionalMana conditionalMana : manaPool.getConditionalMana()) {
-//                availableMana.addMana(conditionalMana);
-//            }
-
+            ManaOptions availableMana = getManaAvailable(game); // get available mana options (mana pool and conditional mana added (but conditional still lose condition))
             boolean fromAll = fromZone.equals(Zone.ALL);
             if (hidden && (fromAll || fromZone == Zone.HAND)) {
                 for (Card card : hand.getCards(game)) {

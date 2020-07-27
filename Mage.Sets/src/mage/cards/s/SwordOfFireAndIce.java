@@ -41,7 +41,7 @@ public final class SwordOfFireAndIce extends CardImpl {
         // Whenever equipped creature deals combat damage to a player, Sword of Fire 
         // and Ice deals 2 damage to any target and you draw a card.
         this.addAbility(new SwordOfFireAndIceAbility());
-        // Equip
+        // Equip {2}
         this.addAbility(new EquipAbility(Outcome.Benefit, new GenericManaCost(2)));
     }
 

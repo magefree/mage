@@ -90,14 +90,22 @@ class FerventChampionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        return abilityToModify instanceof EquipAbility
-                && abilityToModify.isControlledBy(source.getControllerId())
-                && abilityToModify
+        if (abilityToModify instanceof EquipAbility 
+                && abilityToModify.isControlledBy(source.getControllerId())) {
+            if (game != null && game.inCheckPlayableState()) {
+                return !abilityToModify.getTargets().isEmpty() &&
+                    abilityToModify.getTargets().get(0).canTarget(source.getSourceId(), abilityToModify, game);
+            } else {
+               return abilityToModify
                 .getTargets()
                 .stream()
                 .map(Target::getTargets)
                 .flatMap(Collection::stream)
-                .anyMatch(source.getSourceId()::equals);
+                .anyMatch(source.getSourceId()::equals); 
+            }
+            
+        }
+        return false;
     }
 
     @Override
