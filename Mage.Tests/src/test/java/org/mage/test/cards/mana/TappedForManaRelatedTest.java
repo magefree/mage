@@ -314,4 +314,33 @@ public class TappedForManaRelatedTest extends CardTestPlayerBase {
         Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
         assertManaOptions("{C}{C}{C}{C}{C}", manaOptions);
     }
+
+    @Test
+    public void TestViridianJoiner() {
+        setStrictChooseMode(true);
+        
+        // {T}: Add an amount of {G} equal to Viridian Joiner's power.
+        addCard(Zone.HAND, playerA, "Viridian Joiner", 1); // Creature {2}{G}  1/2
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+        
+        addCard(Zone.BATTLEFIELD, playerB, "Forest", 1);
+        addCard(Zone.HAND, playerB, "Giant Growth", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA,  "Viridian Joiner");
+        
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerB,  "Giant Growth", "Viridian Joiner");
+        
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertAllCommandsUsed();
+
+        assertGraveyardCount(playerB, "Giant Growth", 1);
+        assertPowerToughness(playerA, "Viridian Joiner", 4, 5);
+        
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        assertManaOptions("{G}{G}{G}{G}{G}{G}{G}", manaOptions);
+    }    
+    
 }
