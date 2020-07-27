@@ -343,4 +343,21 @@ public class TappedForManaRelatedTest extends CardTestPlayerBase {
         assertManaOptions("{G}{G}{G}{G}{G}{G}{G}", manaOptions);
     }    
     
+   @Test
+    public void TestWorkhorse() {
+        setStrictChooseMode(true);
+        
+        // Workhorse enters the battlefield with four +1/+1 counters on it.
+        // Remove a +1/+1 counter from Workhorse: Add {C}.
+        addCard(Zone.BATTLEFIELD, playerA, "Workhorse", 1);
+        
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertAllCommandsUsed();
+
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        assertManaOptions("{C}{C}{C}{C}", manaOptions);
+    }        
 }
