@@ -12,11 +12,11 @@ import mage.cards.SplitCard;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.stack.Spell;
 import mage.players.Player;
 
 import java.util.Optional;
 import java.util.UUID;
+import javax.naming.directory.InvalidAttributesException;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -236,12 +236,25 @@ public class SpellAbility extends ActivatedAbilityImpl {
         return this;
     }
 
+    /**
+     * Returns a card object with the spell characteristics like calor, types,
+     * subtypes etc. E.g. if you cast a Bestow card as enchantment, the
+     * characteristics don't include the creature type.
+     *
+     * @param game
+     * @return card object with the spell characteristics
+     */
     public Card getCharacteristics(Game game) {
-        Spell spell = game.getSpell(this.getId());
-        if (spell != null) {
-            return spell;
+        Card spellCharacteristics = game.getSpell(this.getId());
+        if (spellCharacteristics == null) {
+            spellCharacteristics = game.getCard(this.getSourceId());
         }
-        return game.getCard(this.getSourceId());
+        if (spellCharacteristics != null) {
+            if (getSpellAbilityCastMode() != SpellAbilityCastMode.NORMAL) {
+                spellCharacteristics = getSpellAbilityCastMode().getTypeModifiedCardObjectCopy(spellCharacteristics, game);
+            }
+        }
+        return spellCharacteristics;
     }
 
     public static SpellAbility getSpellAbilityFromEvent(GameEvent event, Game game) {

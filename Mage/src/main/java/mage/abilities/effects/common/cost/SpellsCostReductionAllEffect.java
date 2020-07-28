@@ -3,6 +3,7 @@ package mage.abilities.effects.common.cost;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
+import javax.naming.directory.InvalidAttributesException;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -11,7 +12,6 @@ import mage.choices.ChoiceImpl;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.SpellAbilityCastMode;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -124,9 +124,6 @@ public class SpellsCostReductionAllEffect extends CostModificationEffectImpl {
         if (abilityToModify instanceof SpellAbility) {
             Card spellCard = ((SpellAbility) abilityToModify).getCharacteristics(game);
             if (spellCard != null) {
-                if (((SpellAbility) abilityToModify).getSpellAbilityCastMode() != SpellAbilityCastMode.NORMAL) {
-                    spellCard = ((SpellAbility) abilityToModify).getSpellAbilityCastMode().getTypeModifiedCardObjectCopy(spellCard, game);
-                }
                 return this.filter.match(spellCard, game) && selectedByRuntimeData(spellCard, source, game);
             }
         }

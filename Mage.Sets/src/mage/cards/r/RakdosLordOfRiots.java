@@ -117,9 +117,6 @@ class RakdosLordOfRiotsCostReductionEffect extends CostModificationEffectImpl {
             if (abilityToModify.isControlledBy(source.getControllerId())) {
                 Card spellCard = ((SpellAbility) abilityToModify).getCharacteristics(game);
                 if (spellCard != null) {
-                    if (((SpellAbility) abilityToModify).getSpellAbilityCastMode() != SpellAbilityCastMode.NORMAL) {
-                        spellCard = ((SpellAbility) abilityToModify).getSpellAbilityCastMode().getTypeModifiedCardObjectCopy(spellCard, game);
-                    }
                     return spellCard.isCreature();
                 }
             }

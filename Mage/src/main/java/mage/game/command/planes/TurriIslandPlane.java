@@ -111,9 +111,6 @@ class TurriIslandEffect extends CostModificationEffectImpl {
             }
             Card spellCard = ((SpellAbility) abilityToModify).getCharacteristics(game);
             if (spellCard != null) {
-                if (((SpellAbility) abilityToModify).getSpellAbilityCastMode() != SpellAbilityCastMode.NORMAL) {
-                    spellCard = ((SpellAbility) abilityToModify).getSpellAbilityCastMode().getTypeModifiedCardObjectCopy(spellCard, game);
-                }
                 return filter.match(spellCard, game) && selectedByRuntimeData(spellCard, source, game);
             }
         }
