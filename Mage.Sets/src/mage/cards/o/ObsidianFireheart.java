@@ -94,7 +94,7 @@ class ObsidianFireheartOneShotEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         // If the owner/controller of this card leaves the game, the blaze counters 
         // presence on the targeted land will continue to deal 1 damage every upkeep
-        // to the lands controller
+        // to the lands controller.
         Permanent targetLand = game.getPermanent(source.getFirstTarget());
         if (targetLand != null
                 && source.getTargets().get(0) != null) {
