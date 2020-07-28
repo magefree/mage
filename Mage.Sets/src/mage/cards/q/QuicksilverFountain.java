@@ -4,10 +4,10 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BecomesBasicLandTargetEffect;
 import mage.cards.CardImpl;
@@ -26,7 +26,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetLandPermanent;
 import mage.target.targetadjustment.TargetAdjuster;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -37,15 +36,21 @@ public final class QuicksilverFountain extends CardImpl {
     public QuicksilverFountain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
-        // At the beginning of each player's upkeep, that player puts a flood counter on target non-Island land they control of their choice. That land is an Island for as long as it has a flood counter on it.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new QuicksilverFountainEffect(), TargetController.ANY, false, true);
+        // At the beginning of each player's upkeep, that player puts a flood 
+        // counter on target non-Island land they control of their choice. 
+        // That land is an Island for as long as it has a flood counter on it.
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
+                new QuicksilverFountainEffect(), TargetController.ANY, false, true);
         ability.addTarget(new TargetLandPermanent());
         ability.setTargetAdjuster(QuicksilverFountainAdjuster.instance);
         this.addAbility(ability);
 
-        // At the beginning of each end step, if all lands on the battlefield are Islands, remove all flood counters from them.
+        // At the beginning of each end step, if all lands on the battlefield are 
+        // Islands, remove all flood counters from them.
+        // Note: This applies only if Quicksilver Fountain is on the battlefield
         Condition condition = new AllLandsAreSubtypeCondition(SubType.ISLAND);
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new QuicksilverFountainEffect2(), TargetController.ANY, condition, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD,
+                new QuicksilverFountainEffect2(), TargetController.ANY, condition, false));
     }
 
     public QuicksilverFountain(final QuicksilverFountain card) {
@@ -96,13 +101,16 @@ class QuicksilverFountainEffect extends OneShotEffect {
             Permanent landChosen = game.getPermanent(source.getFirstTarget());
             landChosen.addCounters(CounterType.FLOOD.createInstance(), source, game);
             ContinuousEffect becomesBasicLandTargetEffect
-                    = new BecomesBasicLandTargetEffect(Duration.OneUse, false, SubType.ISLAND);
+                    = new BecomesBasicLandTargetEffect(Duration.Custom, false, SubType.ISLAND);
             ConditionalContinuousEffect effect
                     = new ConditionalContinuousEffect(becomesBasicLandTargetEffect,
-                            new LandHasFloodCounterCondition(this), staticText);
-            this.setTargetPointer(new FixedTarget(landChosen, game));
-            effect.setTargetPointer(new FixedTarget(landChosen, game));
-            game.addEffect(effect, source);
+                            new LandHasFloodCounterCondition(), staticText);
+            // Bug #6885 Fixed when owner/controller leaves the game the effect still applies
+            SimpleStaticAbility gainAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+            gainAbility.setSourceId(landChosen.getId());
+            gainAbility.getTargets().add(source.getTargets().get(0));
+            System.out.println("The source target in the oneshoteffect? " + source.getTargets().get(0));
+            game.addEffect(effect, gainAbility);
             return true;
         }
         return false;
@@ -128,7 +136,8 @@ class QuicksilverFountainEffect2 extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent land : game.getBattlefield().getAllActivePermanents(CardType.LAND)) {
-            land.removeCounters(CounterType.FLOOD.createInstance(land.getCounters(game).getCount(CounterType.FLOOD)), game);
+            land.removeCounters(CounterType.FLOOD.createInstance(
+                    land.getCounters(game).getCount(CounterType.FLOOD)), game);
         }
         return true;
     }
@@ -163,15 +172,13 @@ class AllLandsAreSubtypeCondition implements Condition {
 
 class LandHasFloodCounterCondition implements Condition {
 
-    private final Effect effect;
-
-    public LandHasFloodCounterCondition(Effect effect) {
-        this.effect = effect;
+    public LandHasFloodCounterCondition() {
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(effect.getTargetPointer().getFirst(game, source));
+        Permanent permanent = game.getPermanent(source.getFirstTarget());
+        System.out.println("The source and its target? " + source.toString() + " " + source.getFirstTarget());
         return permanent != null
                 && permanent.getCounters(game).getCount(CounterType.FLOOD) > 0;
     }
