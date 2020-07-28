@@ -287,14 +287,16 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
             }
         }
         Assert.assertFalse("Wrong stop command on " + this.stopOnTurn + " / " + this.stopAtStep + " (" + this.stopAtStep.getIndex() + ")"
-                        + " (found actions after stop on " + maxTurn + " / " + maxPhase + ")",
+                + " (found actions after stop on " + maxTurn + " / " + maxPhase + ")",
                 (maxTurn > this.stopOnTurn) || (maxTurn == this.stopOnTurn && maxPhase > this.stopAtStep.getIndex()));
 
-        for (Player player : currentGame.getPlayers().values()) {
-            TestPlayer testPlayer = (TestPlayer) player;
-            currentGame.cheat(player.getId(), getCommands(testPlayer));
-            currentGame.cheat(player.getId(), activePlayer.getId(), getLibraryCards(testPlayer), getHandCards(testPlayer),
-                    getBattlefieldCards(testPlayer), getGraveCards(testPlayer), getCommandCards(testPlayer));
+        if (!currentGame.isPaused()) {
+            for (Player player : currentGame.getPlayers().values()) {
+                TestPlayer testPlayer = (TestPlayer) player;
+                currentGame.cheat(player.getId(), getCommands(testPlayer));
+                currentGame.cheat(player.getId(), activePlayer.getId(), getLibraryCards(testPlayer), getHandCards(testPlayer),
+                        getBattlefieldCards(testPlayer), getGraveCards(testPlayer), getCommandCards(testPlayer));
+            }
         }
 
         long t1 = System.nanoTime();
@@ -303,6 +305,9 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         gameOptions.stopOnTurn = stopOnTurn;
         gameOptions.stopAtStep = stopAtStep;
         currentGame.setGameOptions(gameOptions);
+        if (currentGame.isPaused()) {
+            currentGame.resume();// needed if execute() is performed multiple times
+        }
         currentGame.start(activePlayer.getId());
         currentGame.setGameStopped(true); // used for rollback handling
         long t2 = System.nanoTime();
@@ -530,8 +535,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * should be used once before initialization to form the library in certain
      * order.
      * <p>
-     * Warning, if you doesn't add cards to hand then player will lose the game on draw and test
-     * return unused actions (game ended too early)
+     * Warning, if you doesn't add cards to hand then player will lose the game
+     * on draw and test return unused actions (game ended too early)
      *
      * @param player {@link Player} to remove all library cards from.
      */
