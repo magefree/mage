@@ -1,7 +1,5 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.abilityword.StriveAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -13,20 +11,21 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class AerialFormation extends CardImpl {
 
     public AerialFormation(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
 
         // Strive — Aerial Formation costs {2}{U} more to cast for each target beyond the first.
         this.addAbility(new StriveAbility("{2}{U}"));
+
         // Any number of target creatures each get +1/+1 and gain flying until end of turn.
-        Effect effect = new BoostTargetEffect(1,1, Duration.EndOfTurn);
+        Effect effect = new BoostTargetEffect(1, 1, Duration.EndOfTurn);
         effect.setText("Any number of target creatures each get +1/+1");
         this.getSpellAbility().addEffect(effect);
         effect = new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);

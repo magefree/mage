@@ -1,7 +1,5 @@
-
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.abilities.abilityword.StriveAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.UntapTargetEffect;
@@ -14,18 +12,19 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class HarnessByForce extends CardImpl {
 
     public HarnessByForce(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");
 
         // Strive - Harness by Force costs {2}{R} more to cast for each target beyond the first.
         this.addAbility(new StriveAbility("{2}{R}"));
+
         // Gain control of any number of target creatures until end of turn. Untap those creatures. They gain haste until end of turn.
         Effect effect = new GainControlTargetEffect(Duration.EndOfTurn);
         effect.setText("Gain control of any number of target creatures until end of turn");

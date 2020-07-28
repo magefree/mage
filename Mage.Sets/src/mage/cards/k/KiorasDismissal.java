@@ -1,4 +1,3 @@
-
 package mage.cards.k;
 
 import mage.abilities.abilityword.StriveAbility;
@@ -13,17 +12,17 @@ import mage.target.TargetPermanent;
 import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class KiorasDismissal extends CardImpl {
 
     public KiorasDismissal(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
 
 
         // Strive - Kiora's Dismissal costs U more to cast for each target beyond the first.
         this.addAbility(new StriveAbility("{U}"));
+
         // Return any number of target enchantments to their owners' hands.
         this.getSpellAbility().addTarget(new TargetPermanent(0, Integer.MAX_VALUE, StaticFilters.FILTER_ENCHANTMENT_PERMANENT, false));
         Effect effect = new ReturnToHandTargetEffect();
