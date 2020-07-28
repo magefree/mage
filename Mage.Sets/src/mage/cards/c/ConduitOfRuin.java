@@ -10,6 +10,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutOnLibraryEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -71,7 +72,7 @@ public final class ConduitOfRuin extends CardImpl {
 
 class ConduitOfRuinWatcher extends Watcher {
 
-   private Map<UUID, Integer> playerCreatureSpells;
+   private final Map<UUID, Integer> playerCreatureSpells;
 
     public ConduitOfRuinWatcher() {
         super(WatcherScope.GAME);
@@ -103,8 +104,8 @@ class FirstCastCreatureSpellPredicate implements ObjectPlayerPredicate<ObjectPla
 
     @Override
     public boolean apply(ObjectPlayer<Controllable> input, Game game) {
-        if (input.getObject() instanceof Spell
-                && ((Spell) input.getObject()).isCreature()) {
+        if (input.getObject() instanceof Card
+                && ((Card) input.getObject()).isCreature()) {
             ConduitOfRuinWatcher watcher = game.getState().getWatcher(ConduitOfRuinWatcher.class);
             return watcher != null && watcher.creatureSpellsCastThisTurn(input.getPlayerId()) == 0;
         }
