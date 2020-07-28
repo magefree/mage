@@ -14,6 +14,7 @@ import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.Target;
 import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
 
