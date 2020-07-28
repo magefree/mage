@@ -49,19 +49,26 @@ public class BasicManaEffect extends ManaEffect {
             Mana computedMana = new Mana();
             if (manaTemplate.getBlack() > 0) {
                 computedMana.setBlack(count * manaTemplate.getBlack());
-            } else if (manaTemplate.getBlue() > 0) {
+            }
+            if (manaTemplate.getBlue() > 0) {
                 computedMana.setBlue(count * manaTemplate.getBlue());
-            } else if (manaTemplate.getGreen() > 0) {
+            }
+            if (manaTemplate.getGreen() > 0) {
                 computedMana.setGreen(count * manaTemplate.getGreen());
-            } else if (manaTemplate.getRed() > 0) {
+            }
+            if (manaTemplate.getRed() > 0) {
                 computedMana.setRed(count * manaTemplate.getRed());
-            } else if (manaTemplate.getWhite() > 0) {
+            }
+            if (manaTemplate.getWhite() > 0) {
                 computedMana.setWhite(count * manaTemplate.getWhite());
-            } else if (manaTemplate.getColorless() > 0) {
+            }
+            if (manaTemplate.getColorless() > 0) {
                 computedMana.setColorless(count * manaTemplate.getColorless());
-            } else if (manaTemplate.getAny() > 0) {
-                computedMana.setAny(count * manaTemplate.getAny());
-            } else if (manaTemplate.getGeneric() > 0){
+            }
+            if (manaTemplate.getAny() > 0) {
+                throw new IllegalArgumentException("BasicManaEffect does not support {Any} mana!");
+            }
+            if (manaTemplate.getGeneric() > 0) {
                 computedMana.setGeneric(count * manaTemplate.getGeneric());
             }
             return new ArrayList<>(Arrays.asList(computedMana));
