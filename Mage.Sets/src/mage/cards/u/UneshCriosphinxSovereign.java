@@ -14,7 +14,9 @@ import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.Target;
 import mage.target.TargetCard;
+import mage.target.common.TargetOpponent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,9 +95,16 @@ class UneshCriosphinxSovereignEffect extends OneShotEffect {
         Set<UUID> opponents = game.getOpponents(source.getControllerId());
         if (!opponents.isEmpty()) {
             Player opponent = game.getPlayer(opponents.iterator().next());
+            if (opponents.size() > 1) {
+                Target targetOpponent = new TargetOpponent(true);
+                if (controller.chooseTarget(Outcome.Neutral, targetOpponent, source, game)) {
+                    opponent = game.getPlayer(targetOpponent.getFirstTarget());
+                    game.informPlayers(controller.getLogName() + " chose " + opponent.getLogName() + " to separate the revealed cards");
+                }
+            }
             TargetCard target = new TargetCard(0, cards.size(), Zone.LIBRARY, new FilterCard("cards to put in the first pile"));
             List<Card> pile1 = new ArrayList<>();
-            if (opponent != null && opponent.choose(Outcome.Neutral, cards, target, game)) {
+            if (opponent.choose(Outcome.Neutral, cards, target, game)) {
                 List<UUID> targets = target.getTargets();
                 for (UUID targetId : targets) {
                     Card card = cards.get(targetId, game);
