@@ -109,7 +109,6 @@ class QuicksilverFountainEffect extends OneShotEffect {
             SimpleStaticAbility gainAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
             gainAbility.setSourceId(landChosen.getId());
             gainAbility.getTargets().add(source.getTargets().get(0));
-            System.out.println("The source target in the oneshoteffect? " + source.getTargets().get(0));
             game.addEffect(effect, gainAbility);
             return true;
         }
@@ -178,7 +177,6 @@ class LandHasFloodCounterCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
-        System.out.println("The source and its target? " + source.toString() + " " + source.getFirstTarget());
         return permanent != null
                 && permanent.getCounters(game).getCount(CounterType.FLOOD) > 0;
     }
