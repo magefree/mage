@@ -86,11 +86,11 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         deadBackgroundColor = currentTheme.getPlayerPanel_deadBackgroundColor();
     }
 
-    public void init(UUID gameId, UUID playerId, BigCard bigCard, int priorityTime) {
+    public void init(UUID gameId, UUID playerId, boolean controlled, BigCard bigCard, int priorityTime) {
         this.gameId = gameId;
         this.playerId = playerId;
         this.bigCard = bigCard;
-        cheat.setVisible(SessionHandler.isTestMode());
+        cheat.setVisible(SessionHandler.isTestMode() && controlled);
         cheat.setFocusable(false);
         flagName = null;
         if (priorityTime > 0) {
