@@ -3362,8 +3362,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean canPayLifeCost() {
-        return computerPlayer.canPayLifeCost();
+    public boolean canPayLifeCost(Ability ability) {
+        return computerPlayer.canPayLifeCost(ability);
     }
 
     @Override

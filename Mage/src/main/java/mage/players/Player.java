@@ -103,7 +103,13 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void setCanPayLifeCost(boolean canPayLifeCost);
 
-    boolean canPayLifeCost();
+    /**
+     * Can the player pay life for spells or activated abilities
+     * 
+     * @param Ability
+     * @return 
+     */
+    boolean canPayLifeCost(Ability Ability);
 
     void setCanPaySacrificeCostFilter(FilterPermanent filter);
 
