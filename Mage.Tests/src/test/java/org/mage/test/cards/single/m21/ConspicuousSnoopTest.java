@@ -26,9 +26,12 @@ public class ConspicuousSnoopTest extends CardTestPlayerBase {
     public void castGoblinSpellsFromLibrary(){
         // You may cast Goblin spells from the top of your library.
         addCard(Zone.BATTLEFIELD, playerA, "Conspicuous Snoop");
+        
         addCard(Zone.LIBRARY, playerA, "Goblin Lackey");
+        skipInitShuffling();
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
 
+        // Whenever Goblin Lackey deals damage to a player, you may put a Goblin permanent card from your hand onto the battlefield.        
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Goblin Lackey");
 
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
@@ -41,18 +44,22 @@ public class ConspicuousSnoopTest extends CardTestPlayerBase {
 
     @Test
     public void hasActivatedAbilities(){
-        // As long as the top card of your library is a Goblin card,
-        // Conspicuous Snoop has all activated abilities of that card.
-        addCard(Zone.BATTLEFIELD, playerA, "Conspicuous Snoop");
-        addCard(Zone.LIBRARY, playerA, "Goblin Balloon Brigade");
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
-
+        // Play with the top card of your library revealed.
+        // You may cast Goblin spells from the top of your library.
+        // As long as the top card of your library is a Goblin card, Conspicuous Snoop has all activated abilities of that card.
+        addCard(Zone.BATTLEFIELD, playerA, "Conspicuous Snoop");
+        // {R}: Goblin Balloon Brigade gains flying until end of turn.        
+        addCard(Zone.LIBRARY, playerA, "Goblin Balloon Brigade");       
+        skipInitShuffling();
 
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        
         setStrictChooseMode(true);
         execute();
+        
         assertAllCommandsUsed();
-        assertAbilityCount(playerA, "Conspicuous Snoop", ActivatedAbility.class,5);
-
+        assertAbilityCount(playerA, "Conspicuous Snoop", ActivatedAbility.class, 3); // (2 X casts + gains flying )
+        
     }
 }

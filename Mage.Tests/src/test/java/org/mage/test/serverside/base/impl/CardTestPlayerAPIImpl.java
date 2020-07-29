@@ -906,21 +906,19 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         }
     }
 
-    public void assertAbilityCount(Player player, String cardName, Class<? extends Ability> ability, int amount) {
-        int foundCount = 0;
+    public void assertAbilityCount(Player player, String cardName, Class<? extends Ability> searchedAbility, int amount) {
         Permanent found = null;
         for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents(player.getId())) {
             if (isObjectHaveTargetNameOrAlias(player, permanent, cardName)) {
                 found = permanent;
-                foundCount++;
+                break;
             }
         }
-
         Assert.assertNotNull("There is no such permanent under player's control, player=" + player.getName()
                 + ", cardName=" + cardName, found);
-
+        
         Assert.assertEquals(amount, found.getAbilities(currentGame).stream()
-                .filter(a -> a.getClass().isAssignableFrom(ability)).collect(Collectors.toList()).size());
+                .filter(a -> searchedAbility.isAssignableFrom(a.getClass())).collect(Collectors.toList()).size());
     }
 
     /**
