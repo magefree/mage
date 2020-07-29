@@ -4,7 +4,6 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
-import mage.abilities.keyword.EquipFilterAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -13,6 +12,7 @@ import mage.constants.SubType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
 import java.util.UUID;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author TheElk801
@@ -31,7 +31,7 @@ public final class SteelclawLance extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(2, 2)));
 
         // Equip Knight {1}
-        this.addAbility(new EquipFilterAbility(filter, new GenericManaCost(1)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1), new TargetControlledCreaturePermanent(filter)));        
 
         // Equip {3}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));

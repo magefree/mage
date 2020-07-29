@@ -8,7 +8,6 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.abilities.keyword.EquipFilterAbility;
 import mage.abilities.keyword.MenaceAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
@@ -23,6 +22,9 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.EquippedPredicate;
 
 import java.util.UUID;
+import mage.abilities.keyword.EquipAbility;
+import mage.constants.Outcome;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author TheElk801
@@ -64,7 +66,8 @@ public final class SyrGwynHeroOfAshvale extends CardImpl {
 
         // Equipment you control have equip Knight {0}.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
-                new EquipFilterAbility(filter3, new GenericManaCost(0)), Duration.WhileOnBattlefield, filter2
+                new EquipAbility(Outcome.AddAbility, new GenericManaCost(0), new TargetControlledCreaturePermanent(filter3)),
+                Duration.WhileOnBattlefield, filter2
         )));
     }
 
