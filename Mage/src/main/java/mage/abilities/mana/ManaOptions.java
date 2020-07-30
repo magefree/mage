@@ -146,7 +146,16 @@ public class ManaOptions extends ArrayList<Mana> {
         return false;
     }
 
-    public void addManaWithCost(List<ActivatedManaAbilityImpl> abilities, Game game) {
+    /**
+     * This adds the mana the abilities can produce to the possible mana
+     * variabtion.
+     *
+     * @param abilities
+     * @param game
+     * @return false if the costs could not be paid
+     */
+    public boolean addManaWithCost(List<ActivatedManaAbilityImpl> abilities, Game game) {
+        boolean wasUsable = false;
         int replaces = 0;
         if (isEmpty()) {
             this.add(new Mana()); // needed if this is the first available mana, otherwise looping over existing options woold not loop
@@ -185,8 +194,15 @@ public class ManaOptions extends ArrayList<Mana> {
                             for (Mana triggeredManaVariation : getTriggeredManaVariations(game, ability, netMana)) {
                                 for (Mana prevMana : copy) {
                                     Mana startingMana = prevMana.copy();
-                                    if (!subtractCostAddMana(ability.getManaCosts().getMana(), triggeredManaVariation, ability.getCosts().isEmpty(), startingMana)) {
-                                        // the starting mana includes mana parts that the increased mana does not include, so add starting mana also as an option
+                                    Mana manaCosts = ability.getManaCosts().getMana();
+                                    if (startingMana.includesMana(manaCosts)) { // can pay the mana costs to use the ability
+                                        if (!subtractCostAddMana(manaCosts, triggeredManaVariation, ability.getCosts().isEmpty(), startingMana)) {
+                                            // the starting mana includes mana parts that the increased mana does not include, so add starting mana also as an option
+                                            add(prevMana);                                            
+                                        } 
+                                        wasUsable = true;                                         
+                                    } else {
+                                        // mana costs can't be paid so keep starting mana
                                         add(prevMana);
                                     }
                                 }
@@ -248,6 +264,7 @@ public class ManaOptions extends ArrayList<Mana> {
             logger.trace("ManaOptionsCosts " + this.size() + " Ign:" + replaces + " => " + this.toString());
             logger.trace("Abilities: " + abilities.toString());
         }
+        return wasUsable;
     }
 
     private List<Mana> getTriggeredManaVariations(Game game, Ability ability, Mana baseMana) {
@@ -353,54 +370,52 @@ public class ManaOptions extends ArrayList<Mana> {
             repeatable = true; // only replace to any with mana costs only will be repeated if able
         }
         Mana prevMana = currentMana.copy();
-        if (currentMana.includesMana(cost)) { // cost can be paid
-            // generic mana costs can be paid with different colored mana, can lead to different color combinations
-            if (cost.getGeneric() > 0 && cost.getGeneric() > (currentMana.getGeneric() + currentMana.getColorless())) {
-                for (Mana payCombination : getPossiblePayCombinations(cost.getGeneric(), currentMana)) {
-                    Mana currentManaCopy = currentMana.copy();
-                    while (currentManaCopy.includesMana(payCombination)) { // loop for multiple usage if possible
-                        boolean newCombinations = false;
+        // generic mana costs can be paid with different colored mana, can lead to different color combinations
+        if (cost.getGeneric() > 0 && cost.getGeneric() > (currentMana.getGeneric() + currentMana.getColorless())) {
+            for (Mana payCombination : getPossiblePayCombinations(cost.getGeneric(), currentMana)) {
+                Mana currentManaCopy = currentMana.copy();
+                while (currentManaCopy.includesMana(payCombination)) { // loop for multiple usage if possible
+                    boolean newCombinations = false;
 
-                        Mana newMana = currentManaCopy.copy();
-                        newMana.subtract(payCombination);
-                        newMana.add(manaToAdd);
-                        // Mana moreValuable = Mana.getMoreValuableMana(currentMana, newMana);
-                        if (!isExistingManaCombination(newMana)) {
-                            this.add(newMana); // add the new combination
-                            newCombinations = true; // repeat the while as long there are new combinations and usage is repeatable
-                            currentManaCopy = newMana.copy();
-                            Mana moreValuable = Mana.getMoreValuableMana(currentMana, newMana);
-                            if (!oldManaWasReplaced && newMana.equals(moreValuable)) {
-                                oldManaWasReplaced = true; // the new mana includes all possibilities of the old one, so no need to add it after return
-                            }
-                        }
-                        if (!newCombinations || !repeatable) {
-                            break;
+                    Mana newMana = currentManaCopy.copy();
+                    newMana.subtract(payCombination);
+                    newMana.add(manaToAdd);
+                    // Mana moreValuable = Mana.getMoreValuableMana(currentMana, newMana);
+                    if (!isExistingManaCombination(newMana)) {
+                        this.add(newMana); // add the new combination
+                        newCombinations = true; // repeat the while as long there are new combinations and usage is repeatable
+                        currentManaCopy = newMana.copy();
+                        Mana moreValuable = Mana.getMoreValuableMana(currentMana, newMana);
+                        if (!oldManaWasReplaced && newMana.equals(moreValuable)) {
+                            oldManaWasReplaced = true; // the new mana includes all possibilities of the old one, so no need to add it after return
                         }
                     }
-
-                }
-            } else {
-                while (currentMana.includesMana(cost)) { // loop for multiple usage if possible
-                    currentMana.subtractCost(cost);
-                    currentMana.add(manaToAdd);
-                    if (!repeatable) {
-                        break; // Stop adding multiple usages of the ability
-                    }
-                }
-                // Don't use mana that only reduce the available mana
-                if (prevMana.contains(currentMana) && prevMana.count() > currentMana.count()) {
-                    currentMana.setToMana(prevMana);
-                }
-                Mana moreValuable = Mana.getMoreValuableMana(prevMana, currentMana);
-                if (!prevMana.equals(moreValuable)) {
-                    this.add(currentMana);
-                    if (moreValuable != null) {
-                        oldManaWasReplaced = true; // the new mana includes all possibilities of the old one
+                    if (!newCombinations || !repeatable) {
+                        break;
                     }
                 }
 
             }
+        } else {
+            while (currentMana.includesMana(cost)) { // loop for multiple usage if possible
+                currentMana.subtractCost(cost);
+                currentMana.add(manaToAdd);
+                if (!repeatable) {
+                    break; // Stop adding multiple usages of the ability
+                }
+            }
+            // Don't use mana that only reduce the available mana
+            if (prevMana.contains(currentMana) && prevMana.count() > currentMana.count()) {
+                currentMana.setToMana(prevMana);
+            }
+            Mana moreValuable = Mana.getMoreValuableMana(prevMana, currentMana);
+            if (!prevMana.equals(moreValuable)) {
+                this.add(currentMana);
+                if (moreValuable != null) {
+                    oldManaWasReplaced = true; // the new mana includes all possibilities of the old one
+                }
+            }
+
         }
         return oldManaWasReplaced;
     }

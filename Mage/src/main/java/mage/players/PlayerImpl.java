@@ -2936,9 +2936,19 @@ public abstract class PlayerImpl implements Player, Serializable {
         for (Abilities<ActivatedManaAbilityImpl> manaAbilities : sourceWithoutManaCosts) {
             availableMana.addMana(manaAbilities, game);
         }
-        for (Abilities<ActivatedManaAbilityImpl> manaAbilities : sourceWithCosts) {
-            availableMana.removeDuplicated();
-            availableMana.addManaWithCost(manaAbilities, game);
+
+        boolean anAbilityWasUsed = true;
+        while (anAbilityWasUsed && !sourceWithCosts.isEmpty()) {
+            anAbilityWasUsed = false;
+            for (Iterator<Abilities<ActivatedManaAbilityImpl>> iterator = sourceWithCosts.iterator(); iterator.hasNext();) {
+                Abilities<ActivatedManaAbilityImpl> manaAbilities = iterator.next();
+                boolean used = availableMana.addManaWithCost(manaAbilities, game);
+                if (used) {
+                    iterator.remove();
+                    availableMana.removeDuplicated();
+                    anAbilityWasUsed = true;
+                }
+            }
         }
 
         // remove duplicated variants (see ManaOptionsTest for info - when that rises)

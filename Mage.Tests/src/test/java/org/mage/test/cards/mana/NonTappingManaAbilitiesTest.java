@@ -108,6 +108,7 @@ public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
         assertManaOptions("{W}{B}{B}{B}", manaOptions);
         assertManaOptions("{B}{B}{B}{B}", manaOptions);
     }
+    
     @Test
     public void TestCrystallineCrawler() {
         setStrictChooseMode(true);
@@ -126,5 +127,58 @@ public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
         Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
         assertManaOptions("{Any}{Any}", manaOptions);
     }
+
     
+    @Test
+    public void TestCoalGolemAndDromarsAttendant() {
+        setStrictChooseMode(true);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        
+        // {1}, Sacrifice Dromar's Attendant: Add {W}{U}{B}.        
+        addCard(Zone.BATTLEFIELD, playerA, "Dromar's Attendant", 1);        
+        
+        // {3}, Sacrifice Coal Golem: Add {R}{R}{R}.
+        addCard(Zone.BATTLEFIELD, playerA, "Coal Golem", 1);
+
+        
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertAllCommandsUsed();
+
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        Assert.assertEquals("mana variations don't fit", 3, manaOptions.size());
+        assertManaOptions("{G}", manaOptions);
+        assertManaOptions("{W}{U}{B}", manaOptions);
+        assertManaOptions("{R}{R}{R}", manaOptions);
+    }
+    
+ 
+    /**
+     * The order the mana abilities are checked during available mana calculation does matter.
+     * Because Coal Golem can not be used as long as Dromar's Attendant is not used yet to produce the 3 mana.
+     */
+    @Test
+    public void TestCoalGolemAndDromarsAttendantOrder2() {
+        setStrictChooseMode(true);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        
+        // {3}, Sacrifice Coal Golem: Add {R}{R}{R}.
+        addCard(Zone.BATTLEFIELD, playerA, "Coal Golem", 1);
+
+        // {1}, Sacrifice Dromar's Attendant: Add {W}{U}{B}.        
+        addCard(Zone.BATTLEFIELD, playerA, "Dromar's Attendant", 1);        
+                
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertAllCommandsUsed();
+
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        Assert.assertEquals("mana variations don't fit", 3, manaOptions.size());
+        assertManaOptions("{G}", manaOptions);
+        assertManaOptions("{W}{U}{B}", manaOptions);
+        assertManaOptions("{R}{R}{R}", manaOptions);
+    }
+        
 }
