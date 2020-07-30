@@ -30,7 +30,7 @@ public class ApplyCountersEffect extends ContinuousEffectImpl {
         if (layer == Layer.AbilityAddingRemovingEffects_6) {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents()) {
                 for (AbilityCounter counter : permanent.getCounters(game).getAbilityCounters()) {
-                    permanent.addAbility(counter.getAbility(), source == null ? null : source.getSourceId(), game);
+                    permanent.addAbility(counter.getAbility(), source == null ? permanent.getId() : source.getSourceId(), game);
                 }
             }
         }

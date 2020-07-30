@@ -343,4 +343,43 @@ public class CostModificationTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerA, "Engulfing Flames", 1);
     }
+
+    @Test
+    public void test_ThatTargetEnchantedPlayer_InfectiousCurse() {
+        // When Accursed Witch dies, return it to the battlefield transformed under your control attached to target opponent.
+        //
+        // transformed: Infectious Curse
+        // Enchant player
+        // Spells you cast that target enchanted player cost {1} less to cast.
+        addCard(Zone.BATTLEFIELD, playerA, "Accursed Witch", 1); // 4/2
+        //
+        addCard(Zone.HAND, playerA, "Lightning Bolt", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        //
+        // {1}{R} SORCERY
+        // Grapeshot deals 1 damage to any target.
+        addCard(Zone.HAND, playerA, "Grapeshot");
+
+        checkPlayableAbility("no mana", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Grapeshot", false);
+
+        // transform
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Accursed Witch");
+        addTarget(playerA, playerB); // attach curse to
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("transformed", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Infectious Curse", 1);
+        checkPlayableAbility("reduced, but no mana", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Grapeshot", false);
+
+        // cast
+        // possible bug: transform command can generate duplicated triggers (player get choose trigger dialog but must not)
+        checkPlayableAbility("reduced, with mana", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Grapeshot", true);
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Grapeshot", playerB);
+        waitStackResolved(3, PhaseStep.PRECOMBAT_MAIN);
+        checkLife("a", 3, PhaseStep.PRECOMBAT_MAIN, playerA, 20 + 1); // +1 from curse on turn 2
+        checkLife("b", 3, PhaseStep.PRECOMBAT_MAIN, playerB, 20 - 1 - 1); // -1 from grapeshot, -1 from curse on turn 2
+
+        setStrictChooseMode(true);
+        setStopAt(6, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+    }
 }
