@@ -2,7 +2,6 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -17,10 +16,12 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.target.Target;
+import mage.game.stack.Spell;
 import mage.target.common.TargetAnyTarget;
+import mage.util.CardUtil;
 
-import java.util.Collection;
+import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -59,7 +60,7 @@ class TerrorOfThePeaksCostIncreaseEffect extends CostModificationEffectImpl {
 
     TerrorOfThePeaksCostIncreaseEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);
-        staticText = "Spells your opponents cast that target {this} cost an additional 3 life to cast";
+        this.staticText = "Spells your opponents cast that target {this} cost an additional 3 life to cast";
     }
 
     private TerrorOfThePeaksCostIncreaseEffect(TerrorOfThePeaksCostIncreaseEffect effect) {
@@ -68,27 +69,42 @@ class TerrorOfThePeaksCostIncreaseEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        SpellAbility spellAbility = (SpellAbility) abilityToModify;
-        spellAbility.addCost(new PayLifeCost(3));
+        abilityToModify.addCost(new PayLifeCost(3));
         return true;
     }
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (!(abilityToModify instanceof SpellAbility)
-                || !game.getOpponents(source.getControllerId()).contains(abilityToModify.getControllerId())) {
+        if (!(abilityToModify instanceof SpellAbility)) {
             return false;
         }
-        return abilityToModify
-                .getModes()
-                .getSelectedModes()
-                .stream()
-                .map(uuid -> abilityToModify.getModes().get(uuid))
-                .map(Mode::getTargets)
-                .flatMap(Collection::stream)
-                .map(Target::getTargets)
-                .flatMap(Collection::stream)
-                .anyMatch(uuid -> uuid.equals(source.getSourceId()));
+
+        if (!game.getOpponents(source.getControllerId()).contains(abilityToModify.getControllerId())) {
+            return false;
+        }
+
+        Spell spell = (Spell) game.getStack().getStackObject(abilityToModify.getId());
+        Set<UUID> allTargets;
+        if (spell != null) {
+            // real cast
+            allTargets = CardUtil.getAllSelectedTargets(abilityToModify, game);
+        } else {
+            // playable
+            allTargets = CardUtil.getAllPossibleTargets(abilityToModify, game);
+
+            // can target without cost increase
+            if (allTargets.stream().anyMatch(target -> !isTargetCompatible(target, source, game))) {
+                return false;
+            }
+            ;
+        }
+
+        return allTargets.stream().anyMatch(target -> isTargetCompatible(target, source, game));
+    }
+
+    private boolean isTargetCompatible(UUID target, Ability source, Game game) {
+        // target {this}
+        return Objects.equals(source.getSourceId(), target);
     }
 
     @Override

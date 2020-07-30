@@ -145,7 +145,7 @@ class InfectiousCurseCostReductionEffect extends CostModificationEffectImpl {
             allTargets = CardUtil.getAllPossibleTargets(abilityToModify, game);
         }
 
-        // try to reduce all the time (if it possible to target that player)
+        // try to reduce all the time (if it possible to target)
         return allTargets.stream().anyMatch(target -> Objects.equals(target, enchantment.getAttachedTo()));
     }
 
