@@ -1639,6 +1639,13 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             whatsNewDialog.checkUpdatesAndShow(forceToShowPage);
         }
     }
+
+    public boolean isGameFrameActive(UUID gameId) {
+        if (activeFrame != null && activeFrame instanceof GamePane) {
+            return ((GamePane) activeFrame).getGameId().equals(gameId);
+        }
+        return false;
+    }
 }
 
 class MagePaneMenuItem extends JCheckBoxMenuItem {

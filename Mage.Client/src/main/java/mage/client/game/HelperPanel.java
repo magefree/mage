@@ -1,4 +1,3 @@
-
 package mage.client.game;
 
 import mage.client.SessionHandler;
@@ -6,7 +5,9 @@ import mage.client.components.MageTextArea;
 import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.game.FeedbackPanel.FeedbackMode;
+import mage.client.util.AppUtil;
 import mage.client.util.GUISizeHelper;
+import mage.client.util.audio.AudioManager;
 import mage.constants.TurnPhase;
 
 import javax.swing.*;
@@ -63,6 +64,18 @@ public class HelperPanel extends JPanel {
     private UUID gameId;
     private boolean gameNeedFeedback = false;
     private TurnPhase gameTurnPhase = null;
+
+    private Timer needFeedbackTimer;
+
+    {
+        // start timer to inform user about needed feedback (example: inform by sound play)
+        needFeedbackTimer = new Timer(100, evt -> SwingUtilities.invokeLater(() -> {
+            needFeedbackTimer.stop();
+            if (!AppUtil.isAppActive() || !AppUtil.isGameActive(this.gameId)) {
+                AudioManager.playFeedbackNeeded();
+            }
+        }));
+    }
 
     public HelperPanel() {
         initComponents();
@@ -297,7 +310,7 @@ public class HelperPanel extends JPanel {
 
     public void autoSizeButtonsAndFeedbackState() {
         // two mode: same size for small texts (flow), different size for long texts (grid)
-        // plus colorize feedback panel on player's priority
+        // also colorize feedback panel on player's priority and enable sound notification
 
         int BUTTONS_H_GAP = 15;
         Color ACTIVE_FEEDBACK_BACKGROUND_COLOR_MAIN = new Color(0, 0, 255, 50);
@@ -325,6 +338,10 @@ public class HelperPanel extends JPanel {
 
         // color panel on player's feedback waiting
         if (this.gameNeedFeedback) {
+
+            // start notification sound timer
+            this.needFeedbackTimer.restart();
+
             // wait player's action
             switch (FEEDBACK_COLORIZING_MODE) {
                 case Constants.BATTLEFIELD_FEEDBACK_COLORIZING_MODE_DISABLE:
@@ -362,6 +379,9 @@ public class HelperPanel extends JPanel {
                     break;
             }
         } else {
+            // stop notification sound timer
+            this.needFeedbackTimer.stop();
+
             // inform about other players
             this.mainPanel.setOpaque(false);
         }
