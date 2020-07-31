@@ -289,5 +289,25 @@ public class TappedForManaRelatedTest extends CardTestPlayerBase {
         assertManaOptions("{G}{G}{G}{G}{G}{G}{G}", manaOptions);
     }    
     
+    @Test
+    public void TestPriestOfYawgmoth() {
+        setStrictChooseMode(true);
+        
+        // {T}, Sacrifice an artifact: Add an amount of {B} equal to the sacrificed artifact's converted mana cost.     
+        addCard(Zone.BATTLEFIELD, playerA, "Priest of Yawgmoth", 1); // Creature {1}{B}  1/2
+        
+        addCard(Zone.BATTLEFIELD, playerA, "Abandoned Sarcophagus", 1); // {3}
+        addCard(Zone.BATTLEFIELD, playerA, "Accorder's Shield", 1);  // {0}
+        addCard(Zone.BATTLEFIELD, playerA, "Adarkar Sentinel", 1); // {5}
+
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertAllCommandsUsed();
+        
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        assertManaOptions("{B}{B}{B}{B}{B}", manaOptions);
+    }    
        
 }

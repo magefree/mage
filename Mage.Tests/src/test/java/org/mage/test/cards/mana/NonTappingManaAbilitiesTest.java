@@ -13,15 +13,14 @@ import static org.mage.test.utils.ManaOptionsTestUtils.assertManaOptions;
  *
  * @author LevelX2
  */
-
 public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
 
     @Test
     public void druidsRepositoryTest() {
         setStrictChooseMode(true);
-        
+
         addCard(Zone.HAND, playerA, "Alaborn Grenadier", 1); //Creature {W}{W}
-        
+
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 2);
         // Whenever a creature you control attacks, put a charge counter on Druids' Repository.
         // Remove a charge counter from Druids' Repository: Add one mana of any color.        
@@ -30,36 +29,36 @@ public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
         attack(1, playerA, "Silvercoat Lion");
         attack(1, playerA, "Silvercoat Lion");
         setChoice(playerA, "Whenever a creature you control");
-        
+
         setStopAt(1, PhaseStep.END_COMBAT);
         execute();
-        
-        assertTappedCount("Silvercoat Lion", true, 2);        
-        assertCounterCount(playerA,"Druids' Repository",  CounterType.CHARGE, 2);
+
+        assertTappedCount("Silvercoat Lion", true, 2);
+        assertCounterCount(playerA, "Druids' Repository", CounterType.CHARGE, 2);
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
         Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
-        assertManaOptions("{Any}{Any}", manaOptions);        
-                
+        assertManaOptions("{Any}{Any}", manaOptions);
+
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Alaborn Grenadier");
         setChoice(playerA, "White");
         setChoice(playerA, "White");
-        
+
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertCounterCount(playerA,"Druids' Repository",  CounterType.CHARGE, 0);
+        assertCounterCount(playerA, "Druids' Repository", CounterType.CHARGE, 0);
         assertPermanentCount(playerA, "Alaborn Grenadier", 1);
     }
 
-   @Test
+    @Test
     public void TestWorkhorse() {
         setStrictChooseMode(true);
-        
+
         // Workhorse enters the battlefield with four +1/+1 counters on it.
         // Remove a +1/+1 counter from Workhorse: Add {C}.
         addCard(Zone.BATTLEFIELD, playerA, "Workhorse", 1);
-        
+
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
@@ -68,7 +67,7 @@ public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
         Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
         assertManaOptions("{C}{C}{C}{C}", manaOptions);
-    } 
+    }
 
     @Test
     public void TestMorselhoarder() {
@@ -108,7 +107,7 @@ public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
         assertManaOptions("{W}{B}{B}{B}", manaOptions);
         assertManaOptions("{B}{B}{B}{B}", manaOptions);
     }
-    
+
     @Test
     public void TestCrystallineCrawler() {
         setStrictChooseMode(true);
@@ -128,19 +127,17 @@ public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
         assertManaOptions("{Any}{Any}", manaOptions);
     }
 
-    
     @Test
     public void TestCoalGolemAndDromarsAttendant() {
         setStrictChooseMode(true);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
-        
+
         // {1}, Sacrifice Dromar's Attendant: Add {W}{U}{B}.        
-        addCard(Zone.BATTLEFIELD, playerA, "Dromar's Attendant", 1);        
-        
+        addCard(Zone.BATTLEFIELD, playerA, "Dromar's Attendant", 1);
+
         // {3}, Sacrifice Coal Golem: Add {R}{R}{R}.
         addCard(Zone.BATTLEFIELD, playerA, "Coal Golem", 1);
 
-        
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -152,23 +149,23 @@ public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
         assertManaOptions("{W}{U}{B}", manaOptions);
         assertManaOptions("{R}{R}{R}", manaOptions);
     }
-    
- 
+
     /**
-     * The order the mana abilities are checked during available mana calculation does matter.
-     * Because Coal Golem can not be used as long as Dromar's Attendant is not used yet to produce the 3 mana.
+     * The order the mana abilities are checked during available mana
+     * calculation does matter. Because Coal Golem can not be used as long as
+     * Dromar's Attendant is not used yet to produce the 3 mana.
      */
     @Test
     public void TestCoalGolemAndDromarsAttendantOrder2() {
         setStrictChooseMode(true);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
-        
+
         // {3}, Sacrifice Coal Golem: Add {R}{R}{R}.
         addCard(Zone.BATTLEFIELD, playerA, "Coal Golem", 1);
 
         // {1}, Sacrifice Dromar's Attendant: Add {W}{U}{B}.        
-        addCard(Zone.BATTLEFIELD, playerA, "Dromar's Attendant", 1);        
-                
+        addCard(Zone.BATTLEFIELD, playerA, "Dromar's Attendant", 1);
+
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -180,5 +177,28 @@ public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
         assertManaOptions("{W}{U}{B}", manaOptions);
         assertManaOptions("{R}{R}{R}", manaOptions);
     }
+
+    @Test
+    public void TestJunglePatrol() {
+        setStrictChooseMode(true);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        // {1}{G}, {T}: Create a 0/1 green Wall creature token with defender named Wood.
+        // Sacrifice a token named Wood: Add {R}.
+        addCard(Zone.BATTLEFIELD, playerA, "Jungle Patrol", 1);
         
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}{G}, {T}: Create");
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}{G}, {T}: Create");
+        activateAbility(5, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}{G}, {T}: Create");
+
+        setStopAt(5, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertAllCommandsUsed();
+        
+        assertPermanentCount(playerA, "Wood", 3);
+
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        assertManaOptions("{R}{R}{R}", manaOptions);
+    }
 }
