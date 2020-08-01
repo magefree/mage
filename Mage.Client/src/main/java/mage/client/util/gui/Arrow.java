@@ -1,18 +1,11 @@
 package mage.client.util.gui;
 
-import java.awt.AlphaComposite;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Composite;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.awt.geom.Area;
 import java.awt.geom.GeneralPath;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 public class Arrow extends JPanel {
 
@@ -26,6 +19,7 @@ public class Arrow extends JPanel {
     private float headSize = 17;
     private Composite composite;
     private Color color = Color.red;
+    private Color strokeColor = Color.black;
 
     public Arrow() {
         setOpaque(false);
@@ -53,8 +47,11 @@ public class Arrow extends JPanel {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setComposite(composite);
         g2d.setColor(this.color);
+        //debug stroke draw
+        //float[] dash2 = {10, 5};
+        //g2d.setStroke(new BasicStroke(3.5f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND, 10.0f, dash2, 0));
         g2d.fill(arrow);
-        g2d.setColor(Color.BLACK);
+        g2d.setColor(this.strokeColor);
         g2d.draw(arrow);
     }
 

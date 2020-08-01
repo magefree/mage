@@ -27,6 +27,9 @@ public enum CombatManager {
     private final Map<UUID, Integer> combatBlockers = new HashMap<>();
     private int globalBlockersCount; // we need global counter as there are several combat groups
 
+    private static Color ARROW_COLOR_ATTACKER = Color.red;
+    private static Color ARROW_COLOR_BLOCKED_ATTACKER = Color.gray;
+
 
     private Point parentPoint;
 
@@ -79,15 +82,19 @@ public enum CombatManager {
     private void drawDefender(CombatGroupView group, MagePermanent attackerCard, UUID gameId) {
         UUID defenderId = group.getDefenderId();
         if (defenderId != null) {
+            // if attacker was blocked then use another allow color
+            Color attackColor = group.getBlockers().isEmpty() ? ARROW_COLOR_ATTACKER : ARROW_COLOR_BLOCKED_ATTACKER;
             parentPoint = getParentPoint(attackerCard);
             PlayAreaPanel p = MageFrame.getGamePlayers(gameId).get(defenderId);
             if (p != null) {
+                // attack to player
                 Point target = p.getLocationOnScreen();
                 target.translate(-parentPoint.x, -parentPoint.y);
                 Point attackerPoint = attackerCard.getLocationOnScreen();
                 attackerPoint.translate(-parentPoint.x, -parentPoint.y);
-                ArrowBuilder.getBuilder().addArrow(gameId, (int) attackerPoint.getX() + 45, (int) attackerPoint.getY() + 25, (int) target.getX() + 40, (int) target.getY() - 20, Color.red, ArrowBuilder.Type.COMBAT);
+                ArrowBuilder.getBuilder().addArrow(gameId, (int) attackerPoint.getX() + 45, (int) attackerPoint.getY() + 25, (int) target.getX() + 40, (int) target.getY() - 20, attackColor, ArrowBuilder.Type.COMBAT);
             } else {
+                // attack to planeswalker
                 for (PlayAreaPanel pa : MageFrame.getGamePlayers(gameId).values()) {
                     MagePermanent permanent = pa.getBattlefieldPanel().getPermanents().get(defenderId);
                     if (permanent != null) {
@@ -95,7 +102,7 @@ public enum CombatManager {
                         target.translate(-parentPoint.x, -parentPoint.y);
                         Point attackerPoint = attackerCard.getLocationOnScreen();
                         attackerPoint.translate(-parentPoint.x, -parentPoint.y);
-                        ArrowBuilder.getBuilder().addArrow(gameId, (int) attackerPoint.getX() + 45, (int) attackerPoint.getY() + 25, (int) target.getX() + 40, (int) target.getY() + 10, Color.red, ArrowBuilder.Type.COMBAT);
+                        ArrowBuilder.getBuilder().addArrow(gameId, (int) attackerPoint.getX() + 45, (int) attackerPoint.getY() + 25, (int) target.getX() + 40, (int) target.getY() + 10, attackColor, ArrowBuilder.Type.COMBAT);
                     }
                 }
             }
