@@ -1,8 +1,5 @@
-
 package mage.abilities.effects.common;
 
-import java.util.Locale;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.constants.AttachmentType;
@@ -11,6 +8,9 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+
+import java.util.Locale;
+import java.util.UUID;
 
 /**
  * @author jeff
@@ -37,11 +37,27 @@ public class RegenerateAttachedEffect extends ReplacementEffectImpl {
             return false;
         }
         Permanent equipped = game.getPermanent(permanent.getAttachedTo());
-        if (equipped != null && equipped.regenerate(this.getId(), game)) {
+        if (equipped != null && equipped.regenerate(source, game)) {
             this.used = true;
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent == null) {
+            return;
+        }
+        Permanent equipped = game.getPermanent(permanent.getAttachedTo());
+        if (equipped == null) {
+            return;
+        }
+
+        RegenerateSourceEffect.initRegenerationInfoWhileAttached(game, source, equipped.getId());
     }
 
     @Override

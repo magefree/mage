@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateOnlyByOpponentActivatedAbility;
@@ -11,17 +9,14 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.CantBeRegeneratedSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
 public final class ClergyOfTheHolyNimbus extends CardImpl {
@@ -66,7 +61,7 @@ class ClergyOfTheHolyNimbusReplacementEffect extends ReplacementEffectImpl {
         Permanent ClergyOfTheHolyNimbus = game.getPermanent(event.getTargetId());
         if (ClergyOfTheHolyNimbus != null
                 && event.getAmount() == 0) { // 1=noRegen
-            if (ClergyOfTheHolyNimbus.regenerate(source.getSourceId(), game)) {
+            if (ClergyOfTheHolyNimbus.regenerate(source, game)) {
                 game.informPlayers(source.getSourceObject(game).getName() + " has been regenerated.");
                 return true;
             }

@@ -1,7 +1,5 @@
 package mage.game.permanent;
 
-import java.io.Serializable;
-import java.util.*;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.ObjectColor;
@@ -39,6 +37,9 @@ import mage.util.CardUtil;
 import mage.util.GameLog;
 import mage.util.ThreadLocalStringBuilder;
 import org.apache.log4j.Logger;
+
+import java.io.Serializable;
+import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -797,7 +798,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.attachedTo = attachToObjectId;
         this.attachedToZoneChangeCounter = game.getState().getZoneChangeCounter(attachToObjectId);
         for (Ability ability : this.getAbilities()) {
-            for (Iterator<Effect> ite = ability.getEffects(game, EffectType.CONTINUOUS).iterator(); ite.hasNext();) {
+            for (Iterator<Effect> ite = ability.getEffects(game, EffectType.CONTINUOUS).iterator(); ite.hasNext(); ) {
                 ContinuousEffect effect = (ContinuousEffect) ite.next();
                 game.getContinuousEffects().setOrder(effect);
                 // It's important to update the timestamp of the copied effect in ContinuousEffects because it does the action
@@ -852,8 +853,8 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
      * @param game
      * @param preventable
      * @param combat
-     * @param markDamage If true, damage will be dealt later in applyDamage
-     * method
+     * @param markDamage   If true, damage will be dealt later in applyDamage
+     *                     method
      * @return
      */
     private int damage(int damageAmount, UUID sourceId, Game game, boolean preventable, boolean combat, boolean markDamage, List<UUID> appliedEffects) {
@@ -1070,9 +1071,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             if (game.getPlayer(this.getControllerId()).hasOpponent(sourceControllerId, game)
                     && game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, null, sourceControllerId, game) == null
                     && abilities.stream()
-                            .filter(HexproofBaseAbility.class::isInstance)
-                            .map(HexproofBaseAbility.class::cast)
-                            .anyMatch(ability -> ability.checkObject(source, game))) {
+                    .filter(HexproofBaseAbility.class::isInstance)
+                    .map(HexproofBaseAbility.class::cast)
+                    .anyMatch(ability -> ability.checkObject(source, game))) {
                 return false;
             }
 
@@ -1171,13 +1172,17 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public boolean regenerate(UUID sourceId, Game game) {
+    public boolean regenerate(Ability source, Game game) {
         //20110930 - 701.12
-        if (!game.replaceEvent(GameEvent.getEvent(EventType.REGENERATE, objectId, sourceId, controllerId))) {
+        if (!game.replaceEvent(GameEvent.getEvent(EventType.REGENERATE, objectId, source.getSourceId(), controllerId))) {
             this.tap(game);
             this.removeFromCombat(game);
             this.removeAllDamage(game);
-            game.fireEvent(GameEvent.getEvent(EventType.REGENERATED, objectId, sourceId, controllerId));
+
+            // remove regen info
+            game.getState().setValue(CardUtil.getCardZoneString("RegenerationActivated", this.getId(), game), Boolean.FALSE);
+
+            game.fireEvent(GameEvent.getEvent(EventType.REGENERATED, objectId, source.getSourceId(), controllerId));
             return true;
         }
         return false;

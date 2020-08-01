@@ -1,7 +1,5 @@
-
 package mage.abilities.effects.common;
 
-import java.util.Locale;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -13,8 +11,9 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 
+import java.util.Locale;
+
 /**
- *
  * @author maurer.it_at_gmail.com
  */
 public class RegenerateTargetEffect extends ReplacementEffectImpl {
@@ -31,11 +30,18 @@ public class RegenerateTargetEffect extends ReplacementEffectImpl {
     public boolean apply(Game game, Ability source) {
         //20110204 - 701.11
         Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
-        if (permanent != null && permanent.regenerate(this.getId(), game)) {
+        if (permanent != null && permanent.regenerate(source, game)) {
             this.used = true;
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+
+        RegenerateSourceEffect.initRegenerationInfo(game, source, targetPointer.getFirst(game, source));
     }
 
     @Override
@@ -76,5 +82,4 @@ public class RegenerateTargetEffect extends ReplacementEffectImpl {
         }
         return sb.toString();
     }
-
 }
