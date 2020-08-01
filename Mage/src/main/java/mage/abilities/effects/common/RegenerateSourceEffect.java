@@ -37,8 +37,10 @@ public class RegenerateSourceEffect extends ReplacementEffectImpl {
     public boolean apply(Game game, Ability source) {
         //20110204 - 701.11
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null && permanent.regenerate(source, game)) {
+        if (permanent != null
+                && permanent.regenerate(source, game)) {
             this.used = true;
+            discard();
             return true;
         }
         return false;
@@ -63,13 +65,22 @@ public class RegenerateSourceEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DESTROY_PERMANENT;
+        return event.getType() == GameEvent.EventType.DESTROY_PERMANENT
+                || event.getType() == GameEvent.EventType.ZONE_CHANGE;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
+        // The regeneration shield is discarded if the permanent is blinked or changes zone
+        if (event.getType() == GameEvent.EventType.ZONE_CHANGE
+                && event.getTargetId() == source.getSourceId()) {
+            discard();
+            return false;
+        }
         //20110204 - 701.11c - event.getAmount() is used to signal if regeneration is allowed
-        return event.getAmount() == 0 && event.getTargetId().equals(source.getSourceId()) && !this.used;
+        return event.getAmount() == 0
+                && event.getTargetId().equals(source.getSourceId())
+                && !this.used;
     }
 
     public static void initRegenerationInfo(Game game, Ability source, UUID permanentId) {
@@ -98,7 +109,6 @@ public class RegenerateSourceEffect extends ReplacementEffectImpl {
         }
     }
 }
-
 
 enum RegeneratingCanBeUsedCondition implements Condition {
 
