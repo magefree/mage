@@ -71,7 +71,7 @@ public class RegenerateSourceEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        // The regeneration shield is discarded if the permanent is blinked or changes zone
+        // The regeneration effect is discarded if the permanent is blinked or changes zone
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE
                 && event.getTargetId() == source.getSourceId()) {
             discard();
