@@ -236,7 +236,7 @@ public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
         assertManaOptions("{C}{C}{U}{R}{G}", manaOptions);
     }        
     
-   @Test
+    @Test
     public void TestSquanderedResourcesWithManaConfluence() {
         setStrictChooseMode(true);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
@@ -254,5 +254,22 @@ public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
         Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
         assertManaOptions("{G}{Any}{Any}", manaOptions);
-    }            
+    }       
+    
+    @Test
+    public void TestTreasonousOgre() {
+        setStrictChooseMode(true);
+        // Dethrone
+        // Pay 3 life: Add {R}.  
+        addCard(Zone.BATTLEFIELD, playerA, "Treasonous Ogre", 1);
+               
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertAllCommandsUsed();
+
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        assertManaOptions("{R}{R}{R}{R}{R}{R}", manaOptions);
+    }       
 }
