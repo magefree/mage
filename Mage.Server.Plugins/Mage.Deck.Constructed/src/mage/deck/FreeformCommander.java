@@ -9,6 +9,7 @@ import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.cards.decks.Constructed;
 import mage.cards.decks.Deck;
+import mage.cards.decks.DeckValidatorErrorType;
 import mage.filter.FilterMana;
 import mage.util.ManaUtil;
 
@@ -53,7 +54,7 @@ public class FreeformCommander extends Constructed {
     @Override
     public boolean validate(Deck deck) {
         boolean valid = true;
-        invalid.clear();
+        errorsList.clear();
         FilterMana colorIdentity = new FilterMana();
         Set<Card> commanders = new HashSet<>();
         Card companion = null;
@@ -92,19 +93,19 @@ public class FreeformCommander extends Constructed {
                 commanders.add(card1);
                 commanders.add(card2);
             } else {
-                invalid.put("Commander", "Sideboard must contain only the commander(s) and up to 1 companion");
+                addError(DeckValidatorErrorType.PRIMARY, "Commander", "Sideboard must contain only the commander(s) and up to 1 companion");
                 valid = false;
             }
         } else {
-            invalid.put("Commander", "Sideboard must contain only the commander(s) and up to 1 companion");
+            addError(DeckValidatorErrorType.PRIMARY, "Commander", "Sideboard must contain only the commander(s) and up to 1 companion");
             valid = false;
         }
 
         if (companion != null && deck.getCards().size() + deck.getSideboard().size() != 101) {
-            invalid.put("Deck", "Must contain " + 101 + " cards (companion doesn't count for deck size): has " + (deck.getCards().size() + deck.getSideboard().size()) + " cards");
+            addError(DeckValidatorErrorType.DECK_SIZE, "Deck", "Must contain " + 101 + " cards (companion doesn't count for deck size): has " + (deck.getCards().size() + deck.getSideboard().size()) + " cards");
             valid = false;
         } else if (companion == null && deck.getCards().size() + deck.getSideboard().size() != 100) {
-            invalid.put("Deck", "Must contain " + 100 + " cards: has " + (deck.getCards().size() + deck.getSideboard().size()) + " cards");
+            addError(DeckValidatorErrorType.DECK_SIZE, "Deck", "Must contain " + 100 + " cards: has " + (deck.getCards().size() + deck.getSideboard().size()) + " cards");
             valid = false;
         }
 
@@ -119,7 +120,7 @@ public class FreeformCommander extends Constructed {
         }
         for (Card commander : commanders) {
             if (!commander.isCreature() || !commander.isLegendary()) {
-                invalid.put("Commander", "For Freeform Commander, the commander must be a creature or be legendary. Yours was: " + commander.getName());
+                addError(DeckValidatorErrorType.PRIMARY, "Commander", "For Freeform Commander, the commander must be a creature or be legendary. Yours was: " + commander.getName());
                 valid = false;
             }
             if (commanders.size() == 2) {
@@ -131,7 +132,7 @@ public class FreeformCommander extends Constructed {
                             .map(PartnerWithAbility::getPartnerName)
                             .anyMatch(commanderNames::contains);
                     if (!partnersWith) {
-                        invalid.put("Commander", "Commander without Partner (" + commander.getName() + ')');
+                        addError(DeckValidatorErrorType.PRIMARY, "Commander", "Commander without Partner (" + commander.getName() + ')');
                         valid = false;
                     }
                 }
@@ -146,13 +147,13 @@ public class FreeformCommander extends Constructed {
 
         for (Card card : deck.getCards()) {
             if (!ManaUtil.isColorIdentityCompatible(colorIdentity, card.getColorIdentity())) {
-                invalid.put(card.getName(), "Invalid color (" + colorIdentity.toString() + ')');
+                addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid color (" + colorIdentity.toString() + ')');
                 valid = false;
             }
         }
         for (Card card : deck.getSideboard()) {
             if (!ManaUtil.isColorIdentityCompatible(colorIdentity, card.getColorIdentity())) {
-                invalid.put(card.getName(), "Invalid color (" + colorIdentity.toString() + ')');
+                addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid color (" + colorIdentity.toString() + ')');
                 valid = false;
             }
         }
@@ -164,7 +165,7 @@ public class FreeformCommander extends Constructed {
                 if (ability instanceof CompanionAbility) {
                     CompanionAbility companionAbility = (CompanionAbility) ability;
                     if (!companionAbility.isLegal(cards, getDeckMinSize())) {
-                        invalid.put(companion.getName(), "Deck invalid for companion");
+                        addError(DeckValidatorErrorType.PRIMARY, companion.getName(), "Deck invalid for companion");
                         valid = false;
                     }
                     break;

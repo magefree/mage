@@ -2,6 +2,7 @@ package mage.client.components;
 
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckValidator;
+import mage.cards.decks.DeckValidatorError;
 import mage.cards.decks.importer.DeckImporter;
 import org.unbescape.html.HtmlEscape;
 import org.unbescape.html.HtmlEscapeLevel;
@@ -10,7 +11,6 @@ import org.unbescape.html.HtmlEscapeType;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
-import java.util.Map;
 
 /**
  * @author Elandril
@@ -19,6 +19,7 @@ public class LegalityLabel extends JLabel {
 
     protected static final Color COLOR_UNKNOWN = new Color(174, 174, 174);
     protected static final Color COLOR_LEGAL = new Color(117, 152, 110);
+    protected static final Color COLOR_PARTLY_LEGAL = new Color(191, 176, 80);
     protected static final Color COLOR_NOT_LEGAL = new Color(191, 84, 74);
     protected static final Color COLOR_TEXT = new Color(255, 255, 255);
     protected static final Dimension DIM_MINIMUM = new Dimension(75, 25);
@@ -105,11 +106,17 @@ public class LegalityLabel extends JLabel {
         return HtmlEscape.escapeHtml(string, HtmlEscapeType.HTML4_NAMED_REFERENCES_DEFAULT_TO_HEXA, HtmlEscapeLevel.LEVEL_0_ONLY_MARKUP_SIGNIFICANT_EXCEPT_APOS);
     }
 
-    protected String formatInvalidTooltip(Map<String, String> invalid) {
-        return invalid.entrySet().stream()
-                .sorted(Map.Entry.comparingByKey())
+    protected String formatInvalidTooltip(java.util.List<DeckValidatorError> sortedErrorsList) {
+        return sortedErrorsList.stream()
                 .reduce("<html><body><p>Deck is <span style='color:#BF544A;font-weight:bold;'>INVALID</span></p><u>The following problems have been found:</u><br><table>",
-                        (str, entry) -> String.format("%s<tr><td><b>%s</b></td><td>%s</td></tr>", str, escapeHtml(entry.getKey()), escapeHtml(entry.getValue())), String::concat)
+                        (str, error) -> String.format("%s<tr><td><b>%s</b></td><td>%s</td></tr>", str, escapeHtml(error.getGroup()), escapeHtml(error.getMessage())), String::concat)
+                + "</table></body></html>";
+    }
+
+    protected String formatPartlyValidTooltip(java.util.List<DeckValidatorError> sortedErrorsList) {
+        return sortedErrorsList.stream()
+                .reduce("<html><body><p>Deck is <span style='color:#b8860b;font-weight:bold;'>PARTLY VALID</span></p><u>The following problems have been found:</u><br><table>",
+                        (str, error) -> String.format("%s<tr><td><b>%s</b></td><td>%s</td></tr>", str, escapeHtml(error.getGroup()), escapeHtml(error.getMessage())), String::concat)
                 + "</table></body></html>";
     }
 
@@ -139,6 +146,10 @@ public class LegalityLabel extends JLabel {
         showState(COLOR_LEGAL, tooltip);
     }
 
+    public void showStatePartlyLegal(String tooltip) {
+        showState(COLOR_PARTLY_LEGAL, tooltip);
+    }
+
     public void showStateNotLegal(String tooltip) {
         showState(COLOR_NOT_LEGAL, tooltip);
     }
@@ -157,8 +168,10 @@ public class LegalityLabel extends JLabel {
         try {
             if (validator.validate(deck)) {
                 showStateLegal("<html><body>Deck is <span style='color:green;font-weight:bold;'>VALID</span></body></html>");
+            } else if (validator.isPartlyValid()) {
+                showStatePartlyLegal(formatPartlyValidTooltip(validator.getErrorsListSorted()));
             } else {
-                showStateNotLegal(formatInvalidTooltip(validator.getInvalid()));
+                showStateNotLegal(formatInvalidTooltip(validator.getErrorsListSorted()));
             }
         } catch (Exception e) {
             showStateUnknown(String.format("<html><body><b>Deck could not be validated!</b><br>The following error occurred while validating this deck:<br>%s</body></html>", escapeHtml(e.getMessage())));

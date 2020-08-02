@@ -6,6 +6,7 @@ import mage.abilities.keyword.CompanionAbility;
 import mage.cards.Card;
 import mage.cards.decks.Constructed;
 import mage.cards.decks.Deck;
+import mage.cards.decks.DeckValidatorErrorType;
 import mage.filter.FilterMana;
 import mage.util.ManaUtil;
 
@@ -40,7 +41,7 @@ public class Brawl extends Constructed {
     @Override
     public boolean validate(Deck deck) {
         boolean valid = true;
-        invalid.clear();
+        errorsList.clear();
         Card brawler = null;
         Card companion = null;
         FilterMana colorIdentity = new FilterMana();
@@ -60,32 +61,32 @@ public class Brawl extends Constructed {
                 companion = card2;
                 brawler = card1;
             } else {
-                invalid.put("Brawl", "Sideboard must contain only the brawler and up to 1 companion");
+                addError(DeckValidatorErrorType.PRIMARY, "Brawl", "Sideboard must contain only the brawler and up to 1 companion");
                 valid = false;
             }
         } else {
-            invalid.put("Brawl", "Sideboard must contain only the brawler and up to 1 companion");
+            addError(DeckValidatorErrorType.PRIMARY, "Brawl", "Sideboard must contain only the brawler and up to 1 companion");
             valid = false;
         }
 
         if (brawler != null) {
             ManaUtil.collectColorIdentity(colorIdentity, brawler.getColorIdentity());
             if (bannedCommander.contains(brawler.getName())) {
-                invalid.put("Brawl", "Brawler banned (" + brawler.getName() + ')');
+                addError(DeckValidatorErrorType.PRIMARY, "Brawl", "Brawler banned (" + brawler.getName() + ')');
                 valid = false;
             }
             if (!((brawler.isCreature() && brawler.isLegendary())
                     || brawler.isPlaneswalker() || brawler.getAbilities().contains(CanBeYourCommanderAbility.getInstance()))) {
-                invalid.put("Brawl", "Invalid Brawler (" + brawler.getName() + ')');
+                addError(DeckValidatorErrorType.PRIMARY, "Brawl", "Invalid Brawler (" + brawler.getName() + ')');
                 valid = false;
             }
         }
 
         if (companion != null && deck.getCards().size() + deck.getSideboard().size() != getDeckMinSize() + 1) {
-            invalid.put("Deck", "Must contain " + (getDeckMinSize() + 1) + " cards (companion doesn't count in deck size requirement): has " + (deck.getCards().size() + deck.getSideboard().size()) + " cards");
+            addError(DeckValidatorErrorType.DECK_SIZE, "Deck", "Must contain " + (getDeckMinSize() + 1) + " cards (companion doesn't count in deck size requirement): has " + (deck.getCards().size() + deck.getSideboard().size()) + " cards");
             valid = false;
         } else if (companion == null && deck.getCards().size() + deck.getSideboard().size() != getDeckMinSize()) {
-            invalid.put("Deck", "Must contain " + getDeckMinSize() + " cards: has " + (deck.getCards().size() + deck.getSideboard().size()) + " cards");
+            addError(DeckValidatorErrorType.DECK_SIZE, "Deck", "Must contain " + getDeckMinSize() + " cards: has " + (deck.getCards().size() + deck.getSideboard().size()) + " cards");
             valid = false;
         }
 
@@ -96,7 +97,7 @@ public class Brawl extends Constructed {
 
         for (String bannedCard : banned) {
             if (counts.containsKey(bannedCard)) {
-                invalid.put(bannedCard, "Banned");
+                addError(DeckValidatorErrorType.BANNED, "Banned", bannedCard);
                 valid = false;
             }
         }
@@ -114,7 +115,7 @@ public class Brawl extends Constructed {
                     && !(colorIdentity.isColorless()
                     && basicsInDeck.size() == 1
                     && basicsInDeck.contains(card.getName()))) {
-                invalid.put(card.getName(), "Invalid color (" + colorIdentity.toString() + ')');
+                addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid color (" + colorIdentity.toString() + ')');
                 valid = false;
             }
         }
@@ -123,14 +124,14 @@ public class Brawl extends Constructed {
                     && !(colorIdentity.isColorless()
                     && basicsInDeck.size() == 1
                     && basicsInDeck.contains(card.getName()))) {
-                invalid.put(card.getName(), "Invalid color (" + colorIdentity.toString() + ')');
+                addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid color (" + colorIdentity.toString() + ')');
                 valid = false;
             }
         }
         for (Card card : deck.getCards()) {
             if (!isSetAllowed(card.getExpansionSetCode())) {
                 if (!legalSets(card)) {
-                    invalid.put(card.getName(), "Not allowed Set: " + card.getExpansionSetCode());
+                    addError(DeckValidatorErrorType.WRONG_SET, card.getName(), "Not allowed Set: " + card.getExpansionSetCode());
                     valid = false;
                 }
             }
@@ -138,7 +139,7 @@ public class Brawl extends Constructed {
         for (Card card : deck.getSideboard()) {
             if (!isSetAllowed(card.getExpansionSetCode())) {
                 if (!legalSets(card)) {
-                    invalid.put(card.getName(), "Not allowed Set: " + card.getExpansionSetCode());
+                    addError(DeckValidatorErrorType.WRONG_SET, card.getName(), "Not allowed Set: " + card.getExpansionSetCode());
                     valid = false;
                 }
             }
@@ -151,7 +152,7 @@ public class Brawl extends Constructed {
                 if (ability instanceof CompanionAbility) {
                     CompanionAbility companionAbility = (CompanionAbility) ability;
                     if (!companionAbility.isLegal(cards, getDeckMinSize())) {
-                        invalid.put(companion.getName(), "Deck invalid for companion");
+                        addError(DeckValidatorErrorType.PRIMARY, companion.getName(), "Deck invalid for companion");
                         valid = false;
                     }
                     break;

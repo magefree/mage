@@ -3,9 +3,8 @@ package mage.cards.decks;
 import mage.cards.Card;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -14,8 +13,7 @@ public abstract class DeckValidator implements Serializable {
 
     protected String name;
     protected String shortName;
-
-    protected Map<String, String> invalid = new HashMap<>();
+    protected List<DeckValidatorError> errorsList = new ArrayList<>();
 
     public DeckValidator(String name) {
         setName(name);
@@ -49,8 +47,62 @@ public abstract class DeckValidator implements Serializable {
         this.shortName = shortName;
     }
 
-    public Map<String, String> getInvalid() {
-        return invalid;
+    public List<DeckValidatorError> getErrorsList() {
+        return this.errorsList;
+    }
+
+    /**
+     * Get errors list sorted by error type and texts
+     *
+     * @return
+     */
+    public List<DeckValidatorError> getErrorsListSorted() {
+        List<DeckValidatorError> list = new ArrayList<>(this.getErrorsList());
+
+        Collections.sort(list, new Comparator<DeckValidatorError>() {
+            @Override
+            public int compare(DeckValidatorError e1, DeckValidatorError e2) {
+                int res = 0;
+
+                // sort by error type
+                Integer order1 = e1.getErrorType().getSortOrder();
+                Integer order2 = e2.getErrorType().getSortOrder();
+                res = order2.compareTo(order1);
+
+                // sort by group
+                if (res != 0) {
+                    res = e2.getGroup().compareTo(e1.getGroup());
+                }
+
+                // sort by message
+                if (res != 0) {
+                    res = e2.getMessage().compareTo(e1.getMessage());
+                }
+
+                return res;
+            }
+        });
+
+        return list;
+    }
+
+    public String getErrorsListInfo() {
+        // for tests
+        return this.errorsList.stream()
+                .map(e -> e.getGroup() + "=" + e.getMessage())
+                .collect(Collectors.joining(", "));
+    }
+
+    public void addError(DeckValidatorErrorType errorType, String group, String message) {
+        this.errorsList.add(new DeckValidatorError(errorType, group, message));
+    }
+
+    public boolean errorsListContainsGroup(String group) {
+        return this.errorsList.stream().anyMatch(e -> e.getGroup().equals(group));
+    }
+
+    public boolean isPartlyValid() {
+        return errorsList.size() == 0 || !errorsList.stream().anyMatch(e -> !e.getErrorType().isPartlyLegal());
     }
 
     protected void countCards(Map<String, Integer> counts, Collection<Card> cards) {
