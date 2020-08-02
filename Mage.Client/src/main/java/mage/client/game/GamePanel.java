@@ -611,6 +611,21 @@ public final class GamePanel extends javax.swing.JPanel {
         this.pnlBattlefield.add(topPanel, panelC);
         panelC.gridy = 1;
         this.pnlBattlefield.add(bottomPanel, panelC);
+
+        // TODO: combat arrows aren't visible on re-connect, must click on avatar to update correctrly
+        //  reason: panels aren't visible/located here, so battlefieldpanel see wrong sizes
+        // recalc all component sizes and update permanents/arrows positions
+        // if you don't do it here then will catch wrong arrows drawing on re-connect (no sortLayout calls)
+        /*
+        this.validate();
+        for (Map.Entry<UUID, PlayAreaPanel> p : players.entrySet()) {
+            PlayerView playerView = game.getPlayers().stream().filter(view -> view.getPlayerId().equals(p.getKey())).findFirst().orElse(null);
+            if (playerView != null) {
+                p.getValue().getBattlefieldPanel().updateSize();
+                p.getValue().update(null, playerView, null);
+            }
+        }
+         */
     }
 
     public synchronized void updateGame(GameView game) {
