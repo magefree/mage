@@ -41,7 +41,7 @@ public class RegenerateTargetEffect extends ReplacementEffectImpl {
     public void init(Ability source, Game game) {
         super.init(source, game);
 
-        RegenerateSourceEffect.initRegenerationInfo(game, source, targetPointer.getFirst(game, source));
+        RegenerateSourceEffect.initRegenerationShieldInfo(game, source, targetPointer.getFirst(game, source));
     }
 
     @Override

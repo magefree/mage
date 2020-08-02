@@ -10,6 +10,7 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.HintUtils;
 import mage.abilities.keyword.*;
@@ -1179,8 +1180,8 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             this.removeFromCombat(game);
             this.removeAllDamage(game);
 
-            // remove regen info
-            game.getState().setValue(CardUtil.getCardZoneString("RegenerationActivated", this.getId(), game), Boolean.FALSE);
+            // remove one regen shield
+            RegenerateSourceEffect.decRegenerationShieldsAmount(game, this.getId());
 
             game.fireEvent(GameEvent.getEvent(EventType.REGENERATED, objectId, source.getSourceId(), controllerId));
             return true;

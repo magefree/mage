@@ -1,10 +1,9 @@
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.AttachedToPermanentCondition;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.hint.ConditionHint;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.HintUtils;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
@@ -15,7 +14,7 @@ import mage.util.CardUtil;
 import java.util.UUID;
 
 /**
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class RegenerateSourceEffect extends ReplacementEffectImpl {
 
@@ -50,7 +49,7 @@ public class RegenerateSourceEffect extends ReplacementEffectImpl {
     public void init(Ability source, Game game) {
         super.init(source, game);
 
-        RegenerateSourceEffect.initRegenerationInfo(game, source, source.getSourceId());
+        RegenerateSourceEffect.initRegenerationShieldInfo(game, source, source.getSourceId());
     }
 
     @Override
@@ -83,44 +82,70 @@ public class RegenerateSourceEffect extends ReplacementEffectImpl {
                 && !this.used;
     }
 
-    public static void initRegenerationInfo(Game game, Ability source, UUID permanentId) {
-        // enable regen info
+    /**
+     * Add info about new regen shield.
+     * Warning, it's a workaround to show regen shields info, real effects will be use replacement logic.
+     *
+     * @param game
+     * @param source
+     * @param permanentId
+     */
+    public static void initRegenerationShieldInfo(Game game, Ability source, UUID permanentId) {
         Permanent permanent = game.getPermanent(permanentId);
         if (permanent != null) {
-            game.getState().setValue(CardUtil.getCardZoneString("RegenerationActivated", permanent.getId(), game), Boolean.TRUE);
+            // add one regen shield
+            RegenerateSourceEffect.incRegenerationShieldsAmount(game, permanent.getId());
+            // add regen info
             InfoEffect.addCardHintToPermanent(game, source, permanent,
-                    new ConditionHint(RegeneratingCanBeUsedCondition.instance, "Permanent will be regenerated instead destroy"),
-                    Duration.EndOfTurn
-            );
+                    RegenerationShieldsHint.instance, Duration.EndOfTurn);
         }
     }
 
-    public static void initRegenerationInfoWhileAttached(Game game, Ability source, UUID permanentId) {
-        // enable regen info for attached permanent
-        Permanent permanent = game.getPermanent(permanentId);
-        if (permanent != null) {
-            game.getState().setValue(CardUtil.getCardZoneString("RegenerationActivated", permanent.getId(), game), Boolean.TRUE);
-
-            InfoEffect.addCardHintToPermanentConditional(game, source, permanent,
-                    new ConditionHint(RegeneratingCanBeUsedCondition.instance, "Permanent will be regenerated instead destroy"),
-                    Duration.EndOfTurn,
-                    new AttachedToPermanentCondition(permanent.getId())
-            );
+    public static int getRegenerationShieldsAmount(Game game, UUID permanentId) {
+        // info must be reset on new turn
+        Integer amount = (Integer) game.getState().getValue(
+                CardUtil.getCardZoneString("RegenerationShieldsAmount_turn" + game.getTurnNum(), permanentId, game));
+        if (amount != null) {
+            return amount;
         }
+        return 0;
+    }
+
+    private static void setRegenerationShieldsAmount(Game game, UUID permanentId, int amount) {
+        game.getState().setValue(
+                CardUtil.getCardZoneString("RegenerationShieldsAmount_turn" + game.getTurnNum(), permanentId, game), amount);
+    }
+
+    public static int incRegenerationShieldsAmount(Game game, UUID permanentId) {
+        int amount = getRegenerationShieldsAmount(game, permanentId) + 1;
+        setRegenerationShieldsAmount(game, permanentId, amount);
+        return amount;
+    }
+
+    public static int decRegenerationShieldsAmount(Game game, UUID permanentId) {
+        int amount = Math.max(0, getRegenerationShieldsAmount(game, permanentId) - 1);
+        setRegenerationShieldsAmount(game, permanentId, amount);
+        return amount;
     }
 }
 
-enum RegeneratingCanBeUsedCondition implements Condition {
+enum RegenerationShieldsHint implements Hint {
 
     instance;
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            Boolean shieldActivated = (Boolean) game.getState().getValue(CardUtil.getCardZoneString("RegenerationActivated", permanent.getId(), game));
-            return shieldActivated != null && shieldActivated;
+    public String getText(Game game, Ability ability) {
+        int amount = RegenerateSourceEffect.getRegenerationShieldsAmount(game, ability.getSourceId());
+        String info = "Regeneration shields: " + amount + " (permanent will be regenerated instead destroy)";
+        if (amount > 0) {
+            return HintUtils.prepareText(info, null, HintUtils.HINT_ICON_GOOD);
+        } else {
+            return HintUtils.prepareText(info, null, HintUtils.HINT_ICON_BAD);
         }
-        return false;
+    }
+
+    @Override
+    public Hint copy() {
+        return instance;
     }
 }
