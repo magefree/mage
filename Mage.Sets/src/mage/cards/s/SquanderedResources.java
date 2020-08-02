@@ -1,34 +1,33 @@
 package mage.cards.s;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
 import mage.Mana;
-import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.ManaEffect;
-import mage.abilities.mana.ActivatedManaAbilityImpl;
+import mage.abilities.mana.AnyColorLandsProduceManaAbility;
+import mage.abilities.mana.ManaOptions;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
+import mage.constants.ManaType;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
-import mage.abilities.mana.AnyColorLandsProduceManaAbility;
-import mage.constants.ManaType;
-import mage.filter.StaticFilters;
 
 /**
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
@@ -68,14 +67,28 @@ class SquanderedResourcesEffect extends ManaEffect {
     @Override
     public List<Mana> getNetMana(Game game, Ability source) {
         List<Mana> netManas = new ArrayList<>();
-        Set<ManaType> manaTypes = new HashSet<>();
         if (game != null && game.inCheckPlayableState()) {
+            // add color combinations of available mana
+            ManaOptions allPossibleMana = new ManaOptions();
             for (Permanent land : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_LAND, source.getControllerId(), game)) {
-                manaTypes.addAll(AnyColorLandsProduceManaAbility.getManaTypesFromPermanent(land, game));
+                ManaOptions currentPossibleMana = new ManaOptions();
+                Set<ManaType> manaTypes = AnyColorLandsProduceManaAbility.getManaTypesFromPermanent(land, game);
+                if (manaTypes.size() == 5 && !manaTypes.contains(ManaType.COLORLESS) || manaTypes.size() == 6) {
+                    currentPossibleMana.add(Mana.AnyMana(1));
+                    if (manaTypes.contains(ManaType.COLORLESS)) {
+                        currentPossibleMana.add(new Mana(ManaType.COLORLESS));
+                    }
+                } else {
+                    for (ManaType manaType : manaTypes) {
+                        currentPossibleMana.add(new Mana(manaType));
+                    }
+                }
+                allPossibleMana.addMana(currentPossibleMana);
             }
-        } else {
-            manaTypes = getManaTypesFromSacrificedPermanent(game, source);
+            allPossibleMana.removeDuplicated();
+            return allPossibleMana.stream().collect(Collectors.toList());
         }
+        Set<ManaType> manaTypes = getManaTypesFromSacrificedPermanent(game, source);
         if (manaTypes.size() == 5 && !manaTypes.contains(ManaType.COLORLESS) && !manaTypes.contains(ManaType.GENERIC)) {
             netManas.add(Mana.AnyMana(1));
         } else {

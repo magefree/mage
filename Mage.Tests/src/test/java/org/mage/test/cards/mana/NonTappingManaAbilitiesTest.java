@@ -23,7 +23,7 @@ public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 2);
         // Whenever a creature you control attacks, put a charge counter on Druids' Repository.
-        // Remove a charge counter from Druids' Repository: Add one mana of any color.        
+        // Remove a charge counter from Druids' Repository: Add one mana of any color.
         addCard(Zone.BATTLEFIELD, playerA, "Druids' Repository", 1); // Enchantment {1}{G}{G}
 
         attack(1, playerA, "Silvercoat Lion");
@@ -132,7 +132,7 @@ public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
 
-        // {1}, Sacrifice Dromar's Attendant: Add {W}{U}{B}.        
+        // {1}, Sacrifice Dromar's Attendant: Add {W}{U}{B}.
         addCard(Zone.BATTLEFIELD, playerA, "Dromar's Attendant", 1);
 
         // {3}, Sacrifice Coal Golem: Add {R}{R}{R}.
@@ -163,7 +163,7 @@ public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
         // {3}, Sacrifice Coal Golem: Add {R}{R}{R}.
         addCard(Zone.BATTLEFIELD, playerA, "Coal Golem", 1);
 
-        // {1}, Sacrifice Dromar's Attendant: Add {W}{U}{B}.        
+        // {1}, Sacrifice Dromar's Attendant: Add {W}{U}{B}.
         addCard(Zone.BATTLEFIELD, playerA, "Dromar's Attendant", 1);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -185,7 +185,7 @@ public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
         // {1}{G}, {T}: Create a 0/1 green Wall creature token with defender named Wood.
         // Sacrifice a token named Wood: Add {R}.
         addCard(Zone.BATTLEFIELD, playerA, "Jungle Patrol", 1);
-        
+
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}{G}, {T}: Create");
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}{G}, {T}: Create");
         activateAbility(5, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}{G}, {T}: Create");
@@ -194,14 +194,14 @@ public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
         execute();
 
         assertAllCommandsUsed();
-        
+
         assertPermanentCount(playerA, "Wood", 3);
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
         Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
         assertManaOptions("{R}{R}{R}", manaOptions);
     }
-    
+
     @Test
     public void TestSquanderedResources() {
         setStrictChooseMode(true);
@@ -209,15 +209,14 @@ public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Taiga", 1);  // ({T}: Add {R} or {G}.)
         // {T}: Add {C}.
         // {1}, {T}: Put a storage counter on Calciform Pools.
-        // {1}, Remove X storage counters from Calciform Pools: Add X mana in any combination of {W} and/or {U}.        
+        // {1}, Remove X storage counters from Calciform Pools: Add X mana in any combination of {W} and/or {U}.
         addCard(Zone.BATTLEFIELD, playerA, "Calciform Pools", 1);
         // {T}: Add {U}. If you played a land this turn, add {B} instead.
-        addCard(Zone.BATTLEFIELD, playerA, "River of Tears", 1);              
-        
-        
+        addCard(Zone.BATTLEFIELD, playerA, "River of Tears", 1);
+
         // Sacrifice a land: Add one mana of any type the sacrificed land could produce.
         addCard(Zone.BATTLEFIELD, playerA, "Squandered Resources", 1);
-        
+
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
@@ -225,27 +224,27 @@ public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
         Assert.assertEquals("mana variations don't fit", 9, manaOptions.size());
-        assertManaOptions("{C}{U}{R}{R}{G}", manaOptions);
-        assertManaOptions("{C}{U}{U}{G}{G}", manaOptions);
-        assertManaOptions("{C}{U}{U}{R}{G}", manaOptions);
-        assertManaOptions("{C}{U}{G}{G}{G}", manaOptions);
-        assertManaOptions("{C}{U}{R}{G}{G}", manaOptions);        
-        assertManaOptions("{C}{W}{U}{G}{G}", manaOptions);
-        assertManaOptions("{C}{W}{U}{R}{G}", manaOptions);
-        assertManaOptions("{C}{C}{U}{G}{G}", manaOptions);
-        assertManaOptions("{C}{C}{U}{R}{G}", manaOptions);
-    }        
-    
+        assertManaOptions("{C}{U}{U}{U}{R}{R}{G}{G}", manaOptions);
+        assertManaOptions("{C}{U}{U}{U}{G}{G}{G}{G}", manaOptions);
+        assertManaOptions("{C}{U}{U}{U}{R}{G}{G}{G}", manaOptions);
+        assertManaOptions("{C}{C}{U}{U}{R}{R}{G}{G}", manaOptions);
+        assertManaOptions("{C}{C}{U}{U}{G}{G}{G}{G}", manaOptions);
+        assertManaOptions("{C}{C}{U}{U}{R}{G}{G}{G}", manaOptions);
+        assertManaOptions("{C}{W}{U}{U}{R}{R}{G}{G}", manaOptions);
+        assertManaOptions("{C}{W}{U}{U}{G}{G}{G}{G}", manaOptions);
+        assertManaOptions("{C}{W}{U}{U}{R}{G}{G}{G}", manaOptions);
+    }
+
     @Test
     public void TestSquanderedResourcesWithManaConfluence() {
         setStrictChooseMode(true);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
-        // {T}, Pay 1 life: Add one mana of any color.        
+        // {T}, Pay 1 life: Add one mana of any color.
         addCard(Zone.BATTLEFIELD, playerA, "Mana Confluence", 1);
-        
+
         // Sacrifice a land: Add one mana of any type the sacrificed land could produce.
         addCard(Zone.BATTLEFIELD, playerA, "Squandered Resources", 1);
-        
+
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
@@ -253,16 +252,16 @@ public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
         Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
-        assertManaOptions("{G}{Any}{Any}", manaOptions);
-    }       
-    
+        assertManaOptions("{G}{G}{Any}{Any}", manaOptions);
+    }
+
     @Test
     public void TestTreasonousOgre() {
         setStrictChooseMode(true);
         // Dethrone
-        // Pay 3 life: Add {R}.  
+        // Pay 3 life: Add {R}.
         addCard(Zone.BATTLEFIELD, playerA, "Treasonous Ogre", 1);
-               
+
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
@@ -271,5 +270,23 @@ public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
         Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
         assertManaOptions("{R}{R}{R}{R}{R}{R}", manaOptions);
-    }       
+    }
+
+    @Test
+    public void TestSquanderedResourcesTwoSwamps() {
+        setStrictChooseMode(true);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+
+        // Sacrifice a land: Add one mana of any type the sacrificed land could produce.
+        addCard(Zone.BATTLEFIELD, playerA, "Squandered Resources", 1);
+
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertAllCommandsUsed();
+
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        assertManaOptions("{B}{B}{B}{B}", manaOptions);
+    }
 }
