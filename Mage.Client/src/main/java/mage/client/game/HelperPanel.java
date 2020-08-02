@@ -72,7 +72,11 @@ public class HelperPanel extends JPanel {
         needFeedbackTimer = new Timer(100, evt -> SwingUtilities.invokeLater(() -> {
             needFeedbackTimer.stop();
             if (!AppUtil.isAppActive() || !AppUtil.isGameActive(this.gameId)) {
+                // sound notification
                 AudioManager.playFeedbackNeeded();
+                // tray notification (baloon + icon blinking)
+                //MageTray.instance.displayMessage("Game needs your action.");
+                //MageTray.instance.blink();
             }
         }));
     }

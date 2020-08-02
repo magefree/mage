@@ -1,12 +1,13 @@
 package mage.client.deckeditor;
 
-import java.util.*;
-import java.util.stream.Stream;
-
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckValidator;
 import mage.client.components.LegalityLabel;
 import mage.deck.*;
+
+import javax.swing.*;
+import java.util.Arrays;
+import java.util.stream.Stream;
 
 
 /**
@@ -85,10 +86,15 @@ public class DeckLegalityPanel extends javax.swing.JPanel {
         remove(previewNotLegal);
 
         Stream.of(
-                new Standard(), new Pioneer(), new Modern(), new Pauper(), new HistoricalType2(),
-                new Legacy(), new Vintage(), new Eternal(), new Frontier(), new Momir(),
-                new Commander(), new Brawl(), new Oathbreaker(), new PennyDreadfulCommander(), new TinyLeaders()
+                // most popular
+                new Standard(), new Pioneer(), new Modern(), new Legacy(), new Vintage(), new Pauper(),
+                // common
+                new Commander(), new Oathbreaker(), new Brawl(),
+                // other
+                new Frontier(), new HistoricalType2(), new PennyDreadfulCommander()
+                // not used: new Eternal(), new Momir(), new TinyLeaders()
         ).forEach(this::addLegalityLabel);
+        addHidePanelButton();
 
         revalidate();
         repaint();
@@ -99,6 +105,12 @@ public class DeckLegalityPanel extends javax.swing.JPanel {
         add(label);
 
         return label;
+    }
+
+    protected void addHidePanelButton() {
+        JButton button = LegalityLabel.createHideButton();
+        button.addActionListener(e -> this.setVisible(false));
+        add(button);
     }
 
     public void validateDeck(Deck deck) {

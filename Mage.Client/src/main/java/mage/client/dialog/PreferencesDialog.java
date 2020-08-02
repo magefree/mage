@@ -319,7 +319,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     public static ThemeType getCurrentTheme() {
         if (currentTheme == null) {
-            currentTheme = ThemeType.valueByName(getCachedValue(KEY_THEME, "Default Theme"));
+            currentTheme = ThemeType.valueByName(getCachedValue(KEY_THEME, "Default"));
+            logger.info("Using GUI theme: " + currentTheme.getName());
         }
 
         return currentTheme;

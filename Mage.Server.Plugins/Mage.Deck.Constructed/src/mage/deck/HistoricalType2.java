@@ -80,7 +80,7 @@ public class HistoricalType2 extends Constructed {
      * done in the overridden validate function.
      */
     public HistoricalType2() {
-        super("Constructed - Historical Type 2");
+        super("Constructed - Historical Type 2", "Hist. Type 2");
 
         // banned cards
         banned.add("Balance");

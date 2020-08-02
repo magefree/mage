@@ -76,6 +76,18 @@ public class LegalityLabel extends JLabel {
         setPreferredSize(DIM_PREFERRED);
     }
 
+    /**
+     * Creates hide button to close legality panel (must be same size as label)
+     */
+    public static JButton createHideButton() {
+        JButton button = new JButton("Hide");
+        button.setHorizontalAlignment(SwingConstants.CENTER);
+        button.setMinimumSize(DIM_MINIMUM);
+        button.setMaximumSize(DIM_MAXIMUM);
+        button.setPreferredSize(DIM_PREFERRED);
+        return button;
+    }
+
     public String getErrorMessage() {
         return errorMessage;
     }

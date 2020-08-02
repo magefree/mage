@@ -136,7 +136,7 @@ enum RegenerationShieldsHint implements Hint {
     @Override
     public String getText(Game game, Ability ability) {
         int amount = RegenerateSourceEffect.getRegenerationShieldsAmount(game, ability.getSourceId());
-        String info = "Regeneration shields: " + amount + " (permanent will be regenerated instead destroy)";
+        String info = "Regeneration shields: " + amount + " (permanent will be regenerated instead of destroyed)";
         if (amount > 0) {
             return HintUtils.prepareText(info, null, HintUtils.HINT_ICON_GOOD);
         } else {
