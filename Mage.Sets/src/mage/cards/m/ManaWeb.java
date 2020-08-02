@@ -2,15 +2,18 @@
 package mage.cards.m;
 
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
+import mage.abilities.mana.AnyColorLandsProduceManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ManaType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
@@ -61,6 +64,9 @@ class ManaWebTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
+        if (game.inCheckPlayableState()) {
+            return false;
+        }
         if (game.getOpponents(controllerId).contains(event.getPlayerId())) {
             Permanent permanent = game.getPermanent(event.getSourceId());
 
@@ -103,34 +109,18 @@ class ManaWebeffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = null;
-
-        if (game != null && source != null) {
-            permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        }
-
-        if (permanent != null && game != null) {
-            Mana mana = new Mana();
-
-            for (ActivatedManaAbilityImpl ability : permanent.getAbilities().getActivatedManaAbilities(Zone.BATTLEFIELD)) {
-                for (Mana netMana : ability.getNetMana(game)) {
-                    mana.add(netMana);
-                }
-            }
-
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (permanent != null) {
+            Set<ManaType> manaTypesSource = AnyColorLandsProduceManaAbility.getManaTypesFromPermanent(permanent, game);
             boolean tappedLands = false;
             for (Permanent opponentPermanent : game.getBattlefield().getActivePermanents(filter, permanent.getControllerId(), game)) {
                 if (Objects.equals(opponentPermanent.getControllerId(), permanent.getControllerId())) {
-                    Mana opponentLandMana = new Mana();
-
-                    for (ActivatedManaAbilityImpl ability : opponentPermanent.getAbilities().getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, game)) {
-                        for (Mana netMana : ability.getNetMana(game)) {
-                            opponentLandMana.add(netMana);
+                    Set<ManaType> manaTypes = AnyColorLandsProduceManaAbility.getManaTypesFromPermanent(opponentPermanent, game);
+                    for (ManaType manaType : manaTypes) {
+                        if (manaTypesSource.contains(manaType)) {
+                           tappedLands = opponentPermanent.tap(game) || tappedLands;
+                           break;
                         }
-                    }
-
-                    if (mana.containsAny(opponentLandMana, true)) {
-                        tappedLands = opponentPermanent.tap(game) || tappedLands;
                     }
                 }
             }

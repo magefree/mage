@@ -6,7 +6,9 @@
 package mage.abilities.mana;
 
 import java.util.List;
+import java.util.Set;
 import mage.Mana;
+import mage.constants.ManaType;
 import mage.game.Game;
 
 /**
@@ -23,6 +25,18 @@ public interface ManaAbility {
      * @return
      */
     List<Mana> getNetMana(Game game);
+
+    /**
+     * The type of mana a permanent "could produce" is the type of mana that any
+     * ability of that permanent can generate, taking into account any
+     * applicable replacement effects. If the type of mana can’t be defined,
+     * there’s no type of mana that that permanent could produce. The "type" of
+     * mana is its color, or lack thereof (for colorless mana).
+     *
+     * @param game
+     * @return
+     */
+    Set<ManaType> getProducableManaTypes(Game game);
 
     /**
      * Used to check if the ability itself defines mana types it can produce.

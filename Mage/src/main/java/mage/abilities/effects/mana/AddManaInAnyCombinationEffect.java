@@ -2,7 +2,9 @@ package mage.abilities.effects.mana;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -11,6 +13,7 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.ManaOptions;
 import mage.constants.ColoredManaSymbol;
+import mage.constants.ManaType;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -101,8 +104,7 @@ public class AddManaInAnyCombinationEffect extends ManaEffect {
     }
 
     @Override
-    public Mana produceMana(Game game, Ability source
-    ) {
+    public Mana produceMana(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             Mana mana = new Mana();
@@ -128,6 +130,29 @@ public class AddManaInAnyCombinationEffect extends ManaEffect {
             return mana;
         }
         return null;
+    }
+
+    @Override
+    public Set<ManaType> getProducableManaTypes(Game game, Ability source) {
+        Set<ManaType> manaTypes = new HashSet<>();
+        for(ColoredManaSymbol coloredManaSymbol: manaSymbols) {
+            if (coloredManaSymbol.equals(ColoredManaSymbol.B)) {
+                manaTypes.add(ManaType.BLACK);
+            }
+            if (coloredManaSymbol.equals(ColoredManaSymbol.R)) {
+                manaTypes.add(ManaType.RED);
+            }
+            if (coloredManaSymbol.equals(ColoredManaSymbol.G)) {
+                manaTypes.add(ManaType.GREEN);
+            }
+            if (coloredManaSymbol.equals(ColoredManaSymbol.U)) {
+                manaTypes.add(ManaType.BLUE);
+            }
+            if (coloredManaSymbol.equals(ColoredManaSymbol.W)) {
+                manaTypes.add(ManaType.WHITE);
+            }
+        }
+        return manaTypes;
     }
 
     private String setText() {

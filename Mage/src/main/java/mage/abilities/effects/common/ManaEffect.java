@@ -13,24 +13,23 @@ import mage.game.events.ManaEvent;
 import mage.players.Player;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import mage.abilities.TriggeredAbility;
+import mage.constants.ManaType;
 
 /**
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class ManaEffect extends OneShotEffect {
 
-    protected Mana createdMana;
-
     public ManaEffect() {
         super(Outcome.PutManaInPool);
-        createdMana = null;
     }
 
     public ManaEffect(final ManaEffect effect) {
         super(effect);
-        this.createdMana = effect.createdMana == null ? null : effect.createdMana.copy();
     }
 
     @Override
@@ -82,6 +81,53 @@ public abstract class ManaEffect extends OneShotEffect {
     }
 
     /**
+     * The type of mana a permanent "could produce" is the type of mana that any
+     * ability of that permanent can generate, taking into account any
+     * applicable replacement effects. If the type of mana can’t be defined,
+     * there’s no type of mana that that permanent could produce. The "type" of
+     * mana is its color, or lack thereof (for colorless mana).
+     *
+     * @param game
+     * @param source
+     * @return
+     */
+    public Set<ManaType> getProducableManaTypes(Game game, Ability source) {
+        return getManaTypesFromManaList(getNetMana(game, source));
+    }
+
+    public static Set<ManaType> getManaTypesFromManaList(List<Mana> manaList) {
+        Set<ManaType> manaTypes = new HashSet<>();
+        for (Mana mana : manaList) {
+            if (mana.getAny() > 0) {
+                manaTypes.add(ManaType.BLACK);
+                manaTypes.add(ManaType.BLUE);
+                manaTypes.add(ManaType.GREEN);
+                manaTypes.add(ManaType.WHITE);
+                manaTypes.add(ManaType.RED);
+            }
+            if (mana.getBlack() > 0) {
+                manaTypes.add(ManaType.BLACK);
+            }
+            if (mana.getBlue() > 0) {
+                manaTypes.add(ManaType.BLUE);
+            }
+            if (mana.getGreen() > 0) {
+                manaTypes.add(ManaType.GREEN);
+            }
+            if (mana.getWhite() > 0) {
+                manaTypes.add(ManaType.WHITE);
+            }
+            if (mana.getRed() > 0) {
+                manaTypes.add(ManaType.RED);
+            }
+            if (mana.getColorless() > 0) {
+                manaTypes.add(ManaType.COLORLESS);
+            }
+        }
+        return manaTypes;
+    }
+
+    /**
      * Produced the mana the effect can produce (DO NOT add it to mana pool --
      * return all added as mana object to process by replace events)
      * <p>
@@ -105,14 +151,10 @@ public abstract class ManaEffect extends OneShotEffect {
      * @param source
      */
     public void checkToFirePossibleEvents(Mana mana, Game game, Ability source) {
-        if (source.getAbilityType() == AbilityType.MANA) {
-            for (Cost cost : source.getCosts()) {
-                if (cost instanceof TapSourceCost) {
-                    ManaEvent event = new ManaEvent(GameEvent.EventType.TAPPED_FOR_MANA, source.getSourceId(), source.getSourceId(), source.getControllerId(), mana);
-                    if (!game.replaceEvent(event)) {
-                        game.fireEvent(event);
-                    }
-                }
+        if (source.getAbilityType() == AbilityType.MANA && source.hasTapCost()) {
+            ManaEvent event = new ManaEvent(GameEvent.EventType.TAPPED_FOR_MANA, source.getSourceId(), source.getSourceId(), source.getControllerId(), mana);
+            if (!game.replaceEvent(event)) {
+                game.fireEvent(event);
             }
         }
     }

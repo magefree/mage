@@ -35,6 +35,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
+import mage.abilities.costs.common.TapSourceCost;
 
 /**
  * @author BetaSteward_at_googlemail.com

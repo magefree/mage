@@ -1152,10 +1152,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
             }
         }
         if (lessMana.getColorless() > moreMana.getColorless()) {
-            anyDiff -= lessMana.getColorless() - moreMana.getColorless();
-            if (anyDiff < 0) {
-                return null;
-            }
+            return null; // Any (color) can't produce colorless mana
         }
         if (lessMana.getAny() > moreMana.getAny()) {
             return null;

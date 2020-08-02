@@ -9,7 +9,10 @@ import mage.constants.Zone;
 import mage.game.Game;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import mage.constants.ManaType;
 
 /**
  * see 20110715 - 605.1b
@@ -56,7 +59,18 @@ public abstract class TriggeredManaAbility extends TriggeredAbilityImpl implemen
         }
         return new ArrayList<>(netMana);
     }
-
+    
+    @Override
+    public Set<ManaType> getProducableManaTypes(Game game) {
+        Set<ManaType> manaTypes = new HashSet<>();
+        for (Effect effect : getEffects()) {
+            if (effect instanceof ManaEffect) {
+                manaTypes.addAll(((ManaEffect) effect).getProducableManaTypes(game, this));
+            }
+        }
+        return manaTypes;
+    }
+    
     /**
      * Used to check if the ability itself defines mana types it can produce.
      *

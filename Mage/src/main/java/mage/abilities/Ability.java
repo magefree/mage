@@ -23,6 +23,7 @@ import mage.watchers.Watcher;
 import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
+import mage.abilities.costs.common.TapSourceCost;
 
 /**
  * Practically everything in the game is started from an Ability. This interface
@@ -366,6 +367,19 @@ public interface Ability extends Controllable, Serializable {
      * @return
      */
     boolean hasSourceObjectAbility(Game game, MageObject source, GameEvent event);
+    
+    /**
+     * Returns true if the ability has a tap itself in their costs
+     * @return 
+     */
+    default boolean hasTapCost() {
+        for (Cost cost : this.getCosts()) {
+            if (cost instanceof TapSourceCost) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     /**
      * Returns true if this ability has to be shown as topmost of all the rules

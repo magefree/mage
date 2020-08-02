@@ -321,9 +321,11 @@ public class ManaOptionsTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
-        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        Assert.assertEquals("mana variations don't fit", 3, manaOptions.size());
         assertDuplicatedManaOptions(manaOptions);
+        assertManaOptions("{C}{C}", manaOptions);        
         assertManaOptions("{Any}{Any}", manaOptions);
+        assertManaOptions("{C}{Any}", manaOptions);
     }
 
     @Test

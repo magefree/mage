@@ -2906,7 +2906,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 }
                 if (canUse && ability.canActivate(playerId, game).canActivate()) {
                     // abilities without Tap costs have to be handled as separate sources, because they can be used also
-                    if (!availableMana.hasTapCost(ability)) {
+                    if (!ability.hasTapCost()) {
                         it.remove();
                         Abilities<ActivatedManaAbilityImpl> noTapAbilities = new AbilitiesImpl<>(ability);
                         if (ability.getManaCosts().isEmpty()) {

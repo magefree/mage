@@ -1,15 +1,19 @@
 package mage.abilities.mana;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import mage.Mana;
+import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ManaEffect;
 import mage.constants.AbilityType;
 import mage.constants.AsThoughEffectType;
+import mage.constants.ManaType;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -103,6 +107,17 @@ public abstract class ActivatedManaAbilityImpl extends ActivatedAbilityImpl impl
             netManaCopy.add(mana.copy());
         }
         return netManaCopy;
+    }
+
+    @Override
+    public Set<ManaType> getProducableManaTypes(Game game) {
+        Set<ManaType> manaTypes = new HashSet<>();
+        for (Effect effect : getEffects()) {
+            if (effect instanceof ManaEffect) {
+                manaTypes.addAll(((ManaEffect) effect).getProducableManaTypes(game, this));
+            }
+        }
+        return manaTypes;
     }
 
     /**

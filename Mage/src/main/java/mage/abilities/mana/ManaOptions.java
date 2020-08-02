@@ -94,7 +94,7 @@ public class ManaOptions extends ArrayList<Mana> {
         this.clear();
         for (Mana netMana : netManas) {
             for (Mana mana : copy) {
-                if (!hasTapCost(ability) || checkManaReplacementAndTriggeredMana(ability, game, netMana)) {
+                if (ability.hasTapCost() || checkManaReplacementAndTriggeredMana(ability, game, netMana)) {
                     Mana newMana = new Mana();
                     newMana.add(mana);
                     newMana.add(netMana);
@@ -104,7 +104,7 @@ public class ManaOptions extends ArrayList<Mana> {
         }
     }
 
-    private List<List<Mana>> getSimulatedTriggeredManaFromPlayer(Game game, Ability ability) {
+    private static List<List<Mana>> getSimulatedTriggeredManaFromPlayer(Game game, Ability ability) {
         Player player = game.getPlayer(ability.getControllerId());
         List<List<Mana>> newList = new ArrayList<>();
         if (player != null) {
@@ -124,7 +124,7 @@ public class ManaOptions extends ArrayList<Mana> {
      * @return false if mana production was completely replaced
      */
     private boolean checkManaReplacementAndTriggeredMana(Ability ability, Game game, Mana mana) {
-        if (hasTapCost(ability)) {
+        if (ability.hasTapCost()) {
             ManaEvent event = new ManaEvent(GameEvent.EventType.TAPPED_FOR_MANA, ability.getSourceId(), ability.getSourceId(), ability.getControllerId(), mana);
             if (game.replaceEvent(event)) {
                 return false;
@@ -135,15 +135,6 @@ public class ManaOptions extends ArrayList<Mana> {
         manaEvent.setData(mana.toString());
         game.fireEvent(manaEvent);
         return true;
-    }
-
-    public boolean hasTapCost(Ability ability) {
-        for (Cost cost : ability.getCosts()) {
-            if (cost instanceof TapSourceCost) {
-                return true;
-            }
-        }
-        return false;
     }
 
     /**
@@ -267,10 +258,10 @@ public class ManaOptions extends ArrayList<Mana> {
         return wasUsable;
     }
 
-    private List<Mana> getTriggeredManaVariations(Game game, Ability ability, Mana baseMana) {
+    public static List<Mana> getTriggeredManaVariations(Game game, Ability ability, Mana baseMana) {
         List<Mana> baseManaPlusTriggeredMana = new ArrayList<>();
         baseManaPlusTriggeredMana.add(baseMana);
-        List<List<Mana>> availableTriggeredManaList = getSimulatedTriggeredManaFromPlayer(game, ability);
+        List<List<Mana>> availableTriggeredManaList = ManaOptions.getSimulatedTriggeredManaFromPlayer(game, ability);
         for (List<Mana> availableTriggeredMana : availableTriggeredManaList) {
             if (availableTriggeredMana.size() == 1) {
                 for (Mana prevMana : baseManaPlusTriggeredMana) {
@@ -372,7 +363,7 @@ public class ManaOptions extends ArrayList<Mana> {
         Mana prevMana = currentMana.copy();
         // generic mana costs can be paid with different colored mana, can lead to different color combinations
         if (cost.getGeneric() > 0 && cost.getGeneric() > (currentMana.getGeneric() + currentMana.getColorless())) {
-            for (Mana payCombination : getPossiblePayCombinations(cost.getGeneric(), currentMana)) {
+            for (Mana payCombination : ManaOptions.getPossiblePayCombinations(cost.getGeneric(), currentMana)) {
                 Mana currentManaCopy = currentMana.copy();
                 while (currentManaCopy.includesMana(payCombination)) { // loop for multiple usage if possible
                     boolean newCombinations = false;
@@ -420,7 +411,13 @@ public class ManaOptions extends ArrayList<Mana> {
         return oldManaWasReplaced;
     }
 
-    private List<Mana> getPossiblePayCombinations(int number, Mana manaAvailable) {
+    /**
+     * 
+     * @param number of generic mana 
+     * @param manaAvailable
+     * @return 
+     */
+    public static List<Mana> getPossiblePayCombinations(int number, Mana manaAvailable) {
         List<Mana> payCombinations = new ArrayList<>();
         List<String> payCombinationsStrings = new ArrayList<>();
         if (manaAvailable.countColored() > 0) {
@@ -439,28 +436,28 @@ public class ManaOptions extends ArrayList<Mana> {
                     manaToPayFrom.subtract(existingMana);
                     if (manaToPayFrom.getBlack() > 0 && !payCombinationsStrings.contains(existingMana.toString() + Mana.BlackMana(1).toString())) {
                         manaToPayFrom.subtract(Mana.BlackMana(1));
-                        addManaCombination(Mana.BlackMana(1), existingMana, payCombinations, payCombinationsStrings);
+                        ManaOptions.addManaCombination(Mana.BlackMana(1), existingMana, payCombinations, payCombinationsStrings);
                     }
                     if (manaToPayFrom.getBlue() > 0 && !payCombinationsStrings.contains(existingMana.toString() + Mana.BlueMana(1).toString())) {
                         manaToPayFrom.subtract(Mana.BlueMana(1));
-                        addManaCombination(Mana.BlueMana(1), existingMana, payCombinations, payCombinationsStrings);
+                        ManaOptions.addManaCombination(Mana.BlueMana(1), existingMana, payCombinations, payCombinationsStrings);
                     }
                     if (manaToPayFrom.getGreen() > 0 && !payCombinationsStrings.contains(existingMana.toString() + Mana.GreenMana(1).toString())) {
                         manaToPayFrom.subtract(Mana.GreenMana(1));
-                        addManaCombination(Mana.GreenMana(1), existingMana, payCombinations, payCombinationsStrings);
+                        ManaOptions.addManaCombination(Mana.GreenMana(1), existingMana, payCombinations, payCombinationsStrings);
                     }
                     if (manaToPayFrom.getRed() > 0 && !payCombinationsStrings.contains(existingMana.toString() + Mana.RedMana(1).toString())) {
                         manaToPayFrom.subtract(Mana.RedMana(1));
-                        addManaCombination(Mana.RedMana(1), existingMana, payCombinations, payCombinationsStrings);
+                        ManaOptions.addManaCombination(Mana.RedMana(1), existingMana, payCombinations, payCombinationsStrings);
                     }
                     if (manaToPayFrom.getWhite() > 0 && !payCombinationsStrings.contains(existingMana.toString() + Mana.WhiteMana(1).toString())) {
                         manaToPayFrom.subtract(Mana.WhiteMana(1));
-                        addManaCombination(Mana.WhiteMana(1), existingMana, payCombinations, payCombinationsStrings);
+                        ManaOptions.addManaCombination(Mana.WhiteMana(1), existingMana, payCombinations, payCombinationsStrings);
                     }
                     // Pay with any only needed if colored payment was not possible
                     if (payCombinations.isEmpty() && manaToPayFrom.getAny() > 0 && !payCombinationsStrings.contains(existingMana.toString() + Mana.AnyMana(1).toString())) {
                         manaToPayFrom.subtract(Mana.AnyMana(1));
-                        addManaCombination(Mana.AnyMana(1), existingMana, payCombinations, payCombinationsStrings);
+                        ManaOptions.addManaCombination(Mana.AnyMana(1), existingMana, payCombinations, payCombinationsStrings);
                     }
                 }
             }
@@ -480,7 +477,7 @@ public class ManaOptions extends ArrayList<Mana> {
         return false;
     }
 
-    private void addManaCombination(Mana mana, Mana existingMana, List<Mana> payCombinations, List<String> payCombinationsStrings) {
+    public static void addManaCombination(Mana mana, Mana existingMana, List<Mana> payCombinations, List<String> payCombinationsStrings) {
         Mana newMana = existingMana.copy();
         newMana.add(mana);
         payCombinations.add(newMana);

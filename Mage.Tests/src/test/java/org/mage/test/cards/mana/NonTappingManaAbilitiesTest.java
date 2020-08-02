@@ -201,4 +201,58 @@ public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
         Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
         assertManaOptions("{R}{R}{R}", manaOptions);
     }
+    
+    @Test
+    public void TestSquanderedResources() {
+        setStrictChooseMode(true);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Taiga", 1);  // ({T}: Add {R} or {G}.)
+        // {T}: Add {C}.
+        // {1}, {T}: Put a storage counter on Calciform Pools.
+        // {1}, Remove X storage counters from Calciform Pools: Add X mana in any combination of {W} and/or {U}.        
+        addCard(Zone.BATTLEFIELD, playerA, "Calciform Pools", 1);
+        // {T}: Add {U}. If you played a land this turn, add {B} instead.
+        addCard(Zone.BATTLEFIELD, playerA, "River of Tears", 1);              
+        
+        
+        // Sacrifice a land: Add one mana of any type the sacrificed land could produce.
+        addCard(Zone.BATTLEFIELD, playerA, "Squandered Resources", 1);
+        
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertAllCommandsUsed();
+
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        Assert.assertEquals("mana variations don't fit", 9, manaOptions.size());
+        assertManaOptions("{C}{U}{R}{R}{G}", manaOptions);
+        assertManaOptions("{C}{U}{U}{G}{G}", manaOptions);
+        assertManaOptions("{C}{U}{U}{R}{G}", manaOptions);
+        assertManaOptions("{C}{U}{G}{G}{G}", manaOptions);
+        assertManaOptions("{C}{U}{R}{G}{G}", manaOptions);        
+        assertManaOptions("{C}{W}{U}{G}{G}", manaOptions);
+        assertManaOptions("{C}{W}{U}{R}{G}", manaOptions);
+        assertManaOptions("{C}{C}{U}{G}{G}", manaOptions);
+        assertManaOptions("{C}{C}{U}{R}{G}", manaOptions);
+    }        
+    
+   @Test
+    public void TestSquanderedResourcesWithManaConfluence() {
+        setStrictChooseMode(true);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        // {T}, Pay 1 life: Add one mana of any color.        
+        addCard(Zone.BATTLEFIELD, playerA, "Mana Confluence", 1);
+        
+        // Sacrifice a land: Add one mana of any type the sacrificed land could produce.
+        addCard(Zone.BATTLEFIELD, playerA, "Squandered Resources", 1);
+        
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertAllCommandsUsed();
+
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        assertManaOptions("{G}{Any}{Any}", manaOptions);
+    }            
 }

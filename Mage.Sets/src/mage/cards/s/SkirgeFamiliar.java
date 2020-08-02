@@ -5,6 +5,8 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.costs.common.DiscardCardCost;
+import mage.abilities.dynamicvalue.IntPlusDynamicValue;
+import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
@@ -29,7 +31,13 @@ public final class SkirgeFamiliar extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // Discard a card: Add {B}.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(1), new DiscardCardCost(false)));
+        // public SimpleManaAbility(Zone zone, Mana mana, Cost cost, DynamicValue netAmount) {
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(1), 
+                new DiscardCardCost(false),
+                // not perfect but for hand cards correct, activated abilities on Battlefield will miss one possible available mana
+                // to solve this we have to do possible mana calculation per pell/ability to use.
+                new IntPlusDynamicValue(-1, CardsInControllerHandCount.instance)
+                ));
     }
 
     public SkirgeFamiliar(final SkirgeFamiliar card) {

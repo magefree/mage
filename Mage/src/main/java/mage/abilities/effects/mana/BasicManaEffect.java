@@ -47,29 +47,31 @@ public class BasicManaEffect extends ManaEffect {
             // calculate the maximum available mana
             int count = netAmount.calculate(game, source, this);
             Mana computedMana = new Mana();
-            if (manaTemplate.getBlack() > 0) {
-                computedMana.setBlack(count * manaTemplate.getBlack());
-            }
-            if (manaTemplate.getBlue() > 0) {
-                computedMana.setBlue(count * manaTemplate.getBlue());
-            }
-            if (manaTemplate.getGreen() > 0) {
-                computedMana.setGreen(count * manaTemplate.getGreen());
-            }
-            if (manaTemplate.getRed() > 0) {
-                computedMana.setRed(count * manaTemplate.getRed());
-            }
-            if (manaTemplate.getWhite() > 0) {
-                computedMana.setWhite(count * manaTemplate.getWhite());
-            }
-            if (manaTemplate.getColorless() > 0) {
-                computedMana.setColorless(count * manaTemplate.getColorless());
-            }
-            if (manaTemplate.getAny() > 0) {
-                throw new IllegalArgumentException("BasicManaEffect does not support {Any} mana!");
-            }
-            if (manaTemplate.getGeneric() > 0) {
-                computedMana.setGeneric(count * manaTemplate.getGeneric());
+            if (count > 0) {
+                if (manaTemplate.getBlack() > 0) {
+                    computedMana.setBlack(count * manaTemplate.getBlack());
+                }
+                if (manaTemplate.getBlue() > 0) {
+                    computedMana.setBlue(count * manaTemplate.getBlue());
+                }
+                if (manaTemplate.getGreen() > 0) {
+                    computedMana.setGreen(count * manaTemplate.getGreen());
+                }
+                if (manaTemplate.getRed() > 0) {
+                    computedMana.setRed(count * manaTemplate.getRed());
+                }
+                if (manaTemplate.getWhite() > 0) {
+                    computedMana.setWhite(count * manaTemplate.getWhite());
+                }
+                if (manaTemplate.getColorless() > 0) {
+                    computedMana.setColorless(count * manaTemplate.getColorless());
+                }
+                if (manaTemplate.getAny() > 0) {
+                    throw new IllegalArgumentException("BasicManaEffect does not support {Any} mana!");
+                }
+                if (manaTemplate.getGeneric() > 0) {
+                    computedMana.setGeneric(count * manaTemplate.getGeneric());
+                }
             }
             return new ArrayList<>(Arrays.asList(computedMana));
         }

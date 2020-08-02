@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -23,8 +22,13 @@ import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
+import mage.abilities.mana.AnyColorLandsProduceManaAbility;
+import mage.constants.ManaType;
+import mage.filter.StaticFilters;
 
 /**
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
@@ -64,24 +68,35 @@ class SquanderedResourcesEffect extends ManaEffect {
     @Override
     public List<Mana> getNetMana(Game game, Ability source) {
         List<Mana> netManas = new ArrayList<>();
-        Mana types = getManaTypes(game, source);
-        if (types.getBlack() > 0) {
-            netManas.add(new Mana(ColoredManaSymbol.B));
+        Set<ManaType> manaTypes = new HashSet<>();
+        if (game != null && game.inCheckPlayableState()) {
+            for (Permanent land : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_LAND, source.getControllerId(), game)) {
+                manaTypes.addAll(AnyColorLandsProduceManaAbility.getManaTypesFromPermanent(land, game));
+            }
+        } else {
+            manaTypes = getManaTypesFromSacrificedPermanent(game, source);
         }
-        if (types.getRed() > 0) {
-            netManas.add(new Mana(ColoredManaSymbol.R));
-        }
-        if (types.getBlue() > 0) {
-            netManas.add(new Mana(ColoredManaSymbol.U));
-        }
-        if (types.getGreen() > 0) {
-            netManas.add(new Mana(ColoredManaSymbol.G));
-        }
-        if (types.getWhite() > 0) {
-            netManas.add(new Mana(ColoredManaSymbol.W));
-        }
-        if (types.getGeneric() > 0) {
-            netManas.add(Mana.ColorlessMana(1));
+        if (manaTypes.size() == 5 && !manaTypes.contains(ManaType.COLORLESS) && !manaTypes.contains(ManaType.GENERIC)) {
+            netManas.add(Mana.AnyMana(1));
+        } else {
+            if (manaTypes.contains(ManaType.BLACK)) {
+                netManas.add(Mana.BlackMana(1));
+            }
+            if (manaTypes.contains(ManaType.RED)) {
+                netManas.add(Mana.RedMana(1));
+            }
+            if (manaTypes.contains(ManaType.BLUE)) {
+                netManas.add(Mana.BlueMana(1));
+            }
+            if (manaTypes.contains(ManaType.GREEN)) {
+                netManas.add(Mana.GreenMana(1));
+            }
+            if (manaTypes.contains(ManaType.WHITE)) {
+                netManas.add(Mana.WhiteMana(1));
+            }
+            if (manaTypes.contains(ManaType.COLORLESS)) {
+                netManas.add(Mana.ColorlessMana(1));
+            }
         }
         return netManas;
     }
@@ -92,34 +107,26 @@ class SquanderedResourcesEffect extends ManaEffect {
         if (game == null) {
             return mana;
         }
-        Mana types = getManaTypes(game, source);
+        Set<ManaType> manaTypes = getManaTypesFromSacrificedPermanent(game, source);
         Choice choice = new ChoiceColor(true);
         choice.getChoices().clear();
         choice.setMessage("Pick a mana color");
-        if (types.getBlack() > 0) {
+        if (manaTypes.contains(ManaType.BLACK)) {
             choice.getChoices().add("Black");
         }
-        if (types.getRed() > 0) {
+        if (manaTypes.contains(ManaType.RED)) {
             choice.getChoices().add("Red");
         }
-        if (types.getBlue() > 0) {
+        if (manaTypes.contains(ManaType.BLUE)) {
             choice.getChoices().add("Blue");
         }
-        if (types.getGreen() > 0) {
+        if (manaTypes.contains(ManaType.GREEN)) {
             choice.getChoices().add("Green");
         }
-        if (types.getWhite() > 0) {
+        if (manaTypes.contains(ManaType.WHITE)) {
             choice.getChoices().add("White");
         }
-        if (types.getColorless() > 0) {
-            choice.getChoices().add("Colorless");
-        }
-        if (types.getAny() > 0) {
-            choice.getChoices().add("Black");
-            choice.getChoices().add("Red");
-            choice.getChoices().add("Blue");
-            choice.getChoices().add("Green");
-            choice.getChoices().add("White");
+        if (manaTypes.contains(ManaType.COLORLESS)) {
             choice.getChoices().add("Colorless");
         }
         if (!choice.getChoices().isEmpty()) {
@@ -158,20 +165,14 @@ class SquanderedResourcesEffect extends ManaEffect {
         return mana;
     }
 
-    private Mana getManaTypes(Game game, Ability source) {
-        Mana types = new Mana();
+    private Set<ManaType> getManaTypesFromSacrificedPermanent(Game game, Ability source) {
+        Set<ManaType> types = new HashSet<>();
         for (Cost cost : source.getCosts()) {
             if (cost instanceof SacrificeTargetCost && !((SacrificeTargetCost) cost).getPermanents().isEmpty()) {
                 Permanent land = ((SacrificeTargetCost) cost).getPermanents().get(0);
                 if (land != null) {
-                    Abilities<ActivatedManaAbilityImpl> manaAbilities = land.getAbilities().getActivatedManaAbilities(Zone.BATTLEFIELD);
-                    for (ActivatedManaAbilityImpl ability : manaAbilities) {
-                        if (!ability.equals(source) && ability.definesMana(game)) {
-                            for (Mana netMana : ability.getNetMana(game)) {
-                                types.add(netMana);
-                            }
-                        }
-                    }
+                    types.addAll(AnyColorLandsProduceManaAbility.getManaTypesFromPermanent(land, game));
+                    break;
                 }
             }
         }
