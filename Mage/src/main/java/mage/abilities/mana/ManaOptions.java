@@ -94,7 +94,7 @@ public class ManaOptions extends ArrayList<Mana> {
         this.clear();
         for (Mana netMana : netManas) {
             for (Mana mana : copy) {
-                if (ability.hasTapCost() || checkManaReplacementAndTriggeredMana(ability, game, netMana)) {
+                if (!ability.hasTapCost() || checkManaReplacementAndTriggeredMana(ability, game, netMana)) {
                     Mana newMana = new Mana();
                     newMana.add(mana);
                     newMana.add(netMana);
