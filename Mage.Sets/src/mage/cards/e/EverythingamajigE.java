@@ -11,9 +11,11 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.dynamicvalue.common.CreaturesYouControlCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -47,9 +49,11 @@ public final class EverythingamajigE extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(2), new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT))));
         
         // Ashnod's Altar
-        // Sacrifice a creature: Add CC to your mana pool.
+        // Sacrifice a creature: Add {C}{C} to your mana pool.
         SacrificeTargetCost cost = new SacrificeTargetCost(new TargetControlledCreaturePermanent(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(2), cost));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, 
+                new BasicManaEffect(Mana.ColorlessMana(2), CreaturesYouControlCount.instance), 
+                cost));
 
         // Urza's Hot Tub
         // 2, Discard a card: Search your library for a card that shares a complete word in its name with the name of the discarded card, reveal it, put it into your hand, then shuffle your library.

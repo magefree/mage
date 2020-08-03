@@ -4,6 +4,8 @@ package mage.cards.a;
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.dynamicvalue.common.CreaturesYouControlCount;
+import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -23,7 +25,9 @@ public final class AshnodsAltar extends CardImpl {
 
         // Sacrifice a creature: Add {C}{C}.
         SacrificeTargetCost cost = new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(2), cost));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, 
+                new BasicManaEffect(Mana.ColorlessMana(2), CreaturesYouControlCount.instance), 
+                cost));
     }
 
     public AshnodsAltar(final AshnodsAltar card) {
