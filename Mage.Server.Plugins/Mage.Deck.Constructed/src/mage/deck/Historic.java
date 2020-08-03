@@ -47,13 +47,15 @@ public class Historic extends Constructed {
                 singleCards.add("Talrand, Sky Summoner");
             }
         }
-        banned.add("Fires of Invention");
         banned.add("Agent of Treachery");
-        banned.add("Winota, Joiner of Forces");
+        banned.add("Burning-Tree Emissary");
+        banned.add("Fires of Invention");
         banned.add("Nexus of Fate");
         banned.add("Oko, Thief of Crowns");
         banned.add("Once Upon a Time");
+        banned.add("Teferi, Time Raveler");
         banned.add("Veil of Summer");
-        banned.add("Burning-Tree Emissary");
+        banned.add("Wilderness Reclamation");
+        banned.add("Winota, Joiner of Forces");
     }
 }
