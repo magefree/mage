@@ -12,6 +12,7 @@ import mage.target.TargetCard;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+import mage.filter.StaticFilters;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -19,7 +20,7 @@ import java.util.UUID;
 public class TargetCardInHand extends TargetCard {
 
     public TargetCardInHand() {
-        this(1, 1, new FilterCard());
+        this(1, 1, StaticFilters.FILTER_CARD_A);
     }
 
     public TargetCardInHand(FilterCard filter) {
