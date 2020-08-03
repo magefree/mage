@@ -932,10 +932,16 @@ public interface Player extends MageItem, Copyable<Player> {
 
     List<Designation> getDesignations();
 
+    /**
+     * Set the mana colors the user can pay with 2 life instead
+     * @param colors 
+     */
     void addPhyrexianToColors(FilterMana colors);
 
-    void removePhyrexianFromColors(FilterMana colors);
-
+    /**
+     * Mana colors the player can pay instead with 2 life
+     * @return 
+     */
     FilterMana getPhyrexianColors();
 
 }

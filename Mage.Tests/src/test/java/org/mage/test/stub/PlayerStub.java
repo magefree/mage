@@ -1409,11 +1409,6 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public void removePhyrexianFromColors(FilterMana colors) {
-
-    }
-
-    @Override
     public FilterMana getPhyrexianColors() {
         return (new FilterMana());
     }

@@ -174,6 +174,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     protected List<Designation> designations = new ArrayList<>();
 
+    // mana colors the player can handle like Phyrexian mana
     protected FilterMana phyrexianColors;
 
     // Used during available mana calculation to give back possible available net mana from triggered mana abilities (No need to copy)
@@ -196,7 +197,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         manaPool = new ManaPool(playerId);
         library = new Library(playerId);
         sideboard = new CardsImpl();
-        phyrexianColors = new FilterMana();
+        phyrexianColors = null;
     }
 
     protected PlayerImpl(UUID id) {
@@ -279,8 +280,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.castSourceIdCosts.putAll(player.castSourceIdCosts);
 
         this.payManaMode = player.payManaMode;
-        this.phyrexianColors = player.phyrexianColors.copy();
-
+        this.phyrexianColors = player.getPhyrexianColors() != null ? player.phyrexianColors.copy() : null;
         this.designations.addAll(player.designations);
     }
 
@@ -357,8 +357,8 @@ public abstract class PlayerImpl implements Player, Serializable {
         for (Entry<UUID, Costs<Cost>> entry : player.getCastSourceIdCosts().entrySet()) {
             this.castSourceIdCosts.put(entry.getKey(), entry.getValue().copy());
         }
-        this.phyrexianColors = player.getPhyrexianColors().copy();
 
+        this.phyrexianColors = player.getPhyrexianColors() != null ? player.getPhyrexianColors().copy() : null;
         this.designations.clear();
         this.designations.addAll(player.getDesignations());
 
@@ -434,7 +434,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.clearCastSourceIdManaCosts();
 
         this.getManaPool().init(); // needed to remove mana that not empties on step change from previous game if left
-        this.phyrexianColors = new FilterMana();
+        this.phyrexianColors = null;
 
         this.designations.clear();
     }
@@ -459,7 +459,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.alternativeSourceCosts.clear();
         this.clearCastSourceIdManaCosts();
         this.getManaPool().clearEmptyManaPoolRules();
-        this.phyrexianColors = new FilterMana();
+        this.phyrexianColors = null;
     }
 
     @Override
@@ -3115,6 +3115,11 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (availableMana == null) {
                 return true;
             }
+            // Check for pay option with like phyrexian mana
+            if (getPhyrexianColors() != null) {
+                addPhyrexianLikePayOptions(abilityOptions, availableMana, game);
+            }
+
             MageObjectReference permittingObject = game.getContinuousEffects().asThough(ability.getSourceId(),
                     AsThoughEffectType.SPEND_OTHER_MANA, ability, ability.getControllerId(), game);
             for (Mana mana : abilityOptions) {
@@ -3135,6 +3140,49 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
         }
         return false;
+    }
+
+    private void addPhyrexianLikePayOptions(ManaOptions abilityOptions, ManaOptions availableMana, Game game) {
+        int maxLifeMana = getLife() / 2;
+        if (maxLifeMana > 0) {
+            Set<Mana> phyrexianOptions = new HashSet<>();
+            for (Mana mana : abilityOptions) {
+                int availableLifeMana = maxLifeMana;
+                if (getPhyrexianColors().isBlack()) {
+                    createReducedManaPayOption(availableLifeMana, mana, phyrexianOptions, ManaType.BLACK);
+                }
+                if (getPhyrexianColors().isBlue()) {
+                    createReducedManaPayOption(availableLifeMana, mana, phyrexianOptions, ManaType.BLUE);
+                }
+                if (getPhyrexianColors().isRed()) {
+                    createReducedManaPayOption(availableLifeMana, mana, phyrexianOptions, ManaType.RED);
+                }
+                if (getPhyrexianColors().isGreen()) {
+                    createReducedManaPayOption(availableLifeMana, mana, phyrexianOptions, ManaType.GREEN);
+                }
+                if (getPhyrexianColors().isWhite()) {
+                    createReducedManaPayOption(availableLifeMana, mana, phyrexianOptions, ManaType.WHITE);
+                }
+            }
+            abilityOptions.addAll(phyrexianOptions);
+        }
+    }
+
+    private int createReducedManaPayOption(int availableLifeMana, Mana oldPayOption, Set<Mana> phyrexianOptions, ManaType manaType) {
+        if (oldPayOption.get(manaType) > 0) {
+            Mana manaCopy = oldPayOption.copy();
+            int restVal;
+            if (availableLifeMana > oldPayOption.get(manaType)) {
+                restVal = 0;
+                availableLifeMana -= oldPayOption.get(manaType);
+            } else {
+                restVal = oldPayOption.get(manaType) - availableLifeMana;
+                availableLifeMana = 0;
+            }
+            manaCopy.set(manaType, restVal);
+            phyrexianOptions.add(manaCopy);
+        }
+        return availableLifeMana;
     }
 
     protected boolean canPlayCardByAlternateCost(Card sourceObject, ManaOptions availableMana, Ability ability, Game game) {
@@ -4544,39 +4592,24 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public void addPhyrexianToColors(FilterMana colors) {
-        if (colors.isWhite()) {
-            this.phyrexianColors.setWhite(true);
-        }
-        if (colors.isBlue()) {
-            this.phyrexianColors.setBlue(true);
-        }
-        if (colors.isBlack()) {
-            this.phyrexianColors.setBlack(true);
-        }
-        if (colors.isRed()) {
-            this.phyrexianColors.setRed(true);
-        }
-        if (colors.isGreen()) {
-            this.phyrexianColors.setGreen(true);
-        }
-    }
-
-    @Override
-    public void removePhyrexianFromColors(FilterMana colors) {
-        if (colors.isWhite()) {
-            this.phyrexianColors.setWhite(false);
-        }
-        if (colors.isBlue()) {
-            this.phyrexianColors.setBlue(false);
-        }
-        if (colors.isBlack()) {
-            this.phyrexianColors.setBlack(false);
-        }
-        if (colors.isRed()) {
-            this.phyrexianColors.setRed(false);
-        }
-        if (colors.isGreen()) {
-            this.phyrexianColors.setGreen(false);
+        if (phyrexianColors == null) {
+            phyrexianColors = colors.copy();
+        } else {
+            if (colors.isWhite()) {
+                this.phyrexianColors.setWhite(true);
+            }
+            if (colors.isBlue()) {
+                this.phyrexianColors.setBlue(true);
+            }
+            if (colors.isBlack()) {
+                this.phyrexianColors.setBlack(true);
+            }
+            if (colors.isRed()) {
+                this.phyrexianColors.setRed(true);
+            }
+            if (colors.isGreen()) {
+                this.phyrexianColors.setGreen(true);
+            }
         }
     }
 

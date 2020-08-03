@@ -4009,11 +4009,6 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void removePhyrexianFromColors(FilterMana colors) {
-        computerPlayer.removePhyrexianFromColors(colors);
-    }
-
-    @Override
     public FilterMana getPhyrexianColors() {
         return computerPlayer.getPhyrexianColors();
     }
