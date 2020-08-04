@@ -1334,6 +1334,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATE_ABILITY,
                     ability.getId(), ability.getSourceId(), playerId))) {
                 int bookmark = game.bookmarkState();
+                setStoredBookmark(bookmark); // move global bookmark to current state (if you activated mana before then you can't rollback it)
                 ability.newId();
                 ability.setControllerId(playerId);
                 game.getStack().push(new StackAbility(ability, playerId));
