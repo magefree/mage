@@ -35,7 +35,8 @@ public final class StormwildCapridor extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // If noncombat damage would be dealt to Stormwild Capridor, prevent that damage. Put a +1/+1 counter on Stormwild Capridor for each 1 damage prevented this way.
+        // If noncombat damage would be dealt to Stormwild Capridor, prevent that damage. 
+        // Put a +1/+1 counter on Stormwild Capridor for each 1 damage prevented this way.
         this.addAbility(new SimpleStaticAbility(new StormwildCapridorEffect()));
     }
 
@@ -53,8 +54,8 @@ class StormwildCapridorEffect extends PreventionEffectImpl {
 
     StormwildCapridorEffect() {
         super(Duration.WhileOnBattlefield);
-        staticText = "If noncombat damage would be dealt to {this}, prevent that damage. " +
-                "Put a +1/+1 counter on {this} for each 1 damage prevented this way";
+        staticText = "If noncombat damage would be dealt to {this}, prevent that damage. "
+                + "Put a +1/+1 counter on {this} for each 1 damage prevented this way";
     }
 
     private StormwildCapridorEffect(final StormwildCapridorEffect effect) {
@@ -89,8 +90,11 @@ class StormwildCapridorEffect extends PreventionEffectImpl {
                 || !super.applies(event, source, game)) {
             return false;
         }
-        DamageCreatureEvent damageEvent = (DamageCreatureEvent) event;
-        return !damageEvent.isCombatDamage();
+        if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getSourceId(), source.getControllerId()))) {
+            DamageCreatureEvent damageEvent = (DamageCreatureEvent) event;
+            return !damageEvent.isCombatDamage();
+        }
+        return false;
     }
 
 }
