@@ -343,4 +343,28 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
 
         assertPermanentCount(playerA, "Hogaak, Arisen Necropolis", 1);
     }
+
+    @Test
+    public void test_Mana_MemoryOverflow() {
+        // possible bug: convoke mana calculation can overflow server's memory (too much mana options from too much permanents)
+        // https://github.com/magefree/mage/issues/6938
+
+        // Create X 1/1 white Soldier creature tokens with lifelink.
+        // Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature’s color.)
+        addCard(Zone.HAND, playerA, "March of the Multitudes", 1); // {X}{G}{W}{W}
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears", 500);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "March of the Multitudes");
+        setChoice(playerA, "X=1");
+        addTarget(playerA, "Grizzly Bears"); // convoke pay
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Soldier", 1);
+    }
 }

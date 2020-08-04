@@ -1,30 +1,27 @@
 package mage.abilities.mana;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.common.TapSourceCost;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ManaEvent;
 import mage.players.Player;
 import org.apache.log4j.Logger;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
- *
+ * <p>
  * this class is used to build a list of all possible mana combinations it can
  * be used to find all the ways to pay a mana cost or all the different mana
  * combinations available to a player
- *
+ * <p>
  * TODO: Conditional Mana is not supported yet. The mana adding removes the
  * condition of conditional mana
- *
  */
 public class ManaOptions extends ArrayList<Mana> {
 
@@ -87,6 +84,8 @@ public class ManaOptions extends ArrayList<Mana> {
                 }
             }
         }
+
+        forceManaDeduplication();
     }
 
     private void addManaVariation(List<Mana> netManas, ActivatedManaAbilityImpl ability, Game game) {
@@ -102,6 +101,8 @@ public class ManaOptions extends ArrayList<Mana> {
                 }
             }
         }
+
+        forceManaDeduplication();
     }
 
     private static List<List<Mana>> getSimulatedTriggeredManaFromPlayer(Game game, Ability ability) {
@@ -189,9 +190,9 @@ public class ManaOptions extends ArrayList<Mana> {
                                     if (startingMana.includesMana(manaCosts)) { // can pay the mana costs to use the ability
                                         if (!subtractCostAddMana(manaCosts, triggeredManaVariation, ability.getCosts().isEmpty(), startingMana)) {
                                             // the starting mana includes mana parts that the increased mana does not include, so add starting mana also as an option
-                                            add(prevMana);                                            
-                                        } 
-                                        wasUsable = true;                                         
+                                            add(prevMana);
+                                        }
+                                        wasUsable = true;
                                     } else {
                                         // mana costs can't be paid so keep starting mana
                                         add(prevMana);
@@ -251,10 +252,13 @@ public class ManaOptions extends ArrayList<Mana> {
                 }
             }
         }
+
         if (this.size() > 30 || replaces > 30) {
             logger.trace("ManaOptionsCosts " + this.size() + " Ign:" + replaces + " => " + this.toString());
             logger.trace("Abilities: " + abilities.toString());
         }
+        forceManaDeduplication();
+
         return wasUsable;
     }
 
@@ -302,6 +306,8 @@ public class ManaOptions extends ArrayList<Mana> {
                 }
             }
         }
+
+        forceManaDeduplication();
     }
 
     public void addMana(Mana addMana) {
@@ -311,6 +317,8 @@ public class ManaOptions extends ArrayList<Mana> {
         for (Mana mana : this) {
             mana.add(addMana);
         }
+
+        forceManaDeduplication();
     }
 
     public void addMana(ManaOptions options) {
@@ -334,6 +342,17 @@ public class ManaOptions extends ArrayList<Mana> {
                     }
                 }
             }
+        }
+
+        forceManaDeduplication();
+    }
+
+    private void forceManaDeduplication() {
+        // memory overflow protection - force de-duplication on too much mana sources
+        // bug example: https://github.com/magefree/mage/issues/6938
+        // use it after new mana adding
+        if (this.size() > 1000) {
+            this.removeDuplicated();
         }
     }
 
@@ -408,14 +427,16 @@ public class ManaOptions extends ArrayList<Mana> {
             }
 
         }
+
+        forceManaDeduplication();
+
         return oldManaWasReplaced;
     }
 
     /**
-     * 
-     * @param number of generic mana 
+     * @param number        of generic mana
      * @param manaAvailable
-     * @return 
+     * @return
      */
     public static List<Mana> getPossiblePayCombinations(int number, Mana manaAvailable) {
         List<Mana> payCombinations = new ArrayList<>();
