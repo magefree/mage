@@ -76,6 +76,8 @@ public class TestPlayer implements Player {
     private static final Logger LOGGER = Logger.getLogger(TestPlayer.class);
 
     public static final String TARGET_SKIP = "[target_skip]"; // stop/skip targeting
+    public static final String CHOICE_SKIP = "[choice_skip]"; // stop/skip choice
+    public static final String MANA_CANCEL = "[mana_cancel]"; // cancel payment
     public static final String BLOCK_SKIP = "[block_skip]";
     public static final String ATTACK_SKIP = "[attack_skip]";
     public static final String NO_TARGET = "NO_TARGET"; // cast spell or activate ability without target defines
@@ -1909,6 +1911,16 @@ public class TestPlayer implements Player {
 
         assertAliasSupportInChoices(true);
         if (!choices.isEmpty()) {
+
+            // skip choices
+            if (choices.get(0).equals(CHOICE_SKIP)) {
+                Assert.assertTrue("found skip choice, but it require more choices, needs "
+                                + (target.getMinNumberOfTargets() - target.getTargets().size()) + " more",
+                        target.getTargets().size() >= target.getMinNumberOfTargets());
+                choices.remove(0);
+                return true;
+            }
+
             List<Integer> usedChoices = new ArrayList<>();
             List<UUID> usedTargets = new ArrayList<>();
 
@@ -3769,6 +3781,13 @@ public class TestPlayer implements Player {
         if (!computerPlayer.getManaPool().isAutoPayment()) {
             if (!choices.isEmpty()) {
                 // manual pay by mana clicks/commands
+
+                // simulate cancel on mana payment (e.g. user press on cancel button)
+                if (choices.get(0).equals(MANA_CANCEL)) {
+                    choices.remove(0);
+                    return false;
+                }
+
                 String choice = choices.get(0);
                 boolean choiceUsed = false;
                 boolean choiceRemoved = false;

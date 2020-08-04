@@ -2,7 +2,9 @@ package org.mage.test.cards.abilities.keywords;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Ignore;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBaseWithAIHelps;
 
 /**
@@ -80,5 +82,45 @@ public class DelveTest extends CardTestPlayerBaseWithAIHelps {
         assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Ethereal Forager", 1);
+    }
+
+    @Test
+    @Ignore
+    public void test_CheatWithCancel() {
+        // possible bug: users can start to pay delve special action with nothing (done button) and gets no mana cast
+        // https://github.com/magefree/mage/issues/6937
+
+        disableManaAutoPayment(playerA);
+        removeAllCardsFromHand(playerA);
+
+        // Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)
+        // Draw 3 Cards
+        addCard(Zone.HAND, playerA, "Treasure Cruise", 1); // {7}{U} sorcery
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
+        addCard(Zone.GRAVEYARD, playerA, "Balduvian Bears", 7); // delve pay
+
+        // user case:
+        // 1. Use mana from land (fill mana pool)
+        // 2. Use delve as special action
+        // 3. Press done without real delve pay
+        // 4. All generic cost will be removed and card go to stack for {U} instead {7}{U}
+
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Treasure Cruise");
+        //setChoice(playerA, "Blue");
+        setChoice(playerA, "Exile cards"); // delve activate
+        setChoice(playerA, TestPlayer.CHOICE_SKIP);
+        setChoice(playerA, TestPlayer.MANA_CANCEL);
+
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        showGraveyard("hmm", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
+
+        // it uses bug with rollback, so test commands restores with rollback too (no strict or commands usage check)
+        //setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        //assertAllCommandsUsed();
+
+        assertHandCount(playerA, 0); // no resolve, so no draw cards (if rollback bug active then it shows 3 cards)
     }
 }
