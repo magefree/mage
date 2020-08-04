@@ -27,7 +27,6 @@ import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
-
 import java.util.Arrays;
 import java.util.Locale;
 import java.util.Set;
@@ -54,10 +53,12 @@ public final class VivienMonstersAdvocate extends CardImpl {
         // You may cast creature spells from the top of your library.
         this.addAbility(new SimpleStaticAbility(new PlayTheTopCardEffect(filter)));
 
-        // +1: Create a 3/3 green Beast creature token. Put your choice of a vigilance counter, a reach counter, or a trample counter on it.
+        // +1: Create a 3/3 green Beast creature token. Put your choice of a vigilance 
+        // counter, a reach counter, or a trample counter on it.
         this.addAbility(new LoyaltyAbility(new VivienMonstersAdvocateTokenEffect(), 1));
 
-        // −2: When you cast your next creature spell this turn, search your library for a creature card with lesser converted mana cost, put it onto the battlefield, then shuffle your library.
+        // −2: When you cast your next creature spell this turn, search your library for a 
+        // creature card with lesser converted mana cost, put it onto the battlefield, then shuffle your library.
         this.addAbility(new LoyaltyAbility(
                 new CreateDelayedTriggeredAbilityEffect(new VivienMonstersAdvocateTriggeredAbility()), -2
         ));
@@ -81,8 +82,8 @@ class VivienMonstersAdvocateTokenEffect extends OneShotEffect {
 
     VivienMonstersAdvocateTokenEffect() {
         super(Outcome.Benefit);
-        staticText = "Create a 3/3 green Beast creature token. Put your choice of a vigilance counter, " +
-                "a reach counter, or a trample counter on it.";
+        staticText = "Create a 3/3 green Beast creature token. Put your choice of a vigilance counter, "
+                + "a reach counter, or a trample counter on it.";
     }
 
     private VivienMonstersAdvocateTokenEffect(final VivienMonstersAdvocateTokenEffect effect) {
@@ -111,7 +112,8 @@ class VivienMonstersAdvocateTokenEffect extends OneShotEffect {
             player.choose(outcome, choice, game);
             String chosen = choice.getChoice();
             if (chosen != null) {
-                permanent.addCounters(CounterType.findByName(chosen.toLowerCase(Locale.ENGLISH)).createInstance(), source, game);
+                permanent.addCounters(CounterType.findByName(chosen.toLowerCase(
+                        Locale.ENGLISH)).createInstance(), source, game);
             }
         }
         return true;
@@ -136,15 +138,16 @@ class VivienMonstersAdvocateTriggeredAbility extends DelayedTriggeredAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Spell spell = game.getSpell(event.getTargetId());
-        if (spell == null) {
-            return false;
+        if (spell != null
+                && spell.isCreature()) {
+            int cmc = spell.getConvertedManaCost();
+            FilterCard filter = new FilterCreatureCard("creature card with converted mana cost less than " + cmc);
+            filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, cmc));
+            this.getEffects().clear();
+            this.getEffects().add(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)));
+            return true;
         }
-        int cmc = spell.getConvertedManaCost();
-        FilterCard filter = new FilterCreatureCard("creature card with converted mana cost less than " + cmc);
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, cmc));
-        this.getEffects().clear();
-        this.getEffects().add(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)));
-        return true;
+        return false;
     }
 
     @Override
@@ -154,8 +157,8 @@ class VivienMonstersAdvocateTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "When you cast your next creature spell this turn, " +
-                "search your library for a creature card with lesser converted mana cost, " +
-                "put it onto the battlefield, then shuffle your library.";
+        return "When you cast your next creature spell this turn, "
+                + "search your library for a creature card with lesser converted mana cost, "
+                + "put it onto the battlefield, then shuffle your library.";
     }
 }
