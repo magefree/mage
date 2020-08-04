@@ -43,7 +43,8 @@ import mage.target.common.TargetControlledPermanent;
 public class NinjutsuAbility extends ActivatedAbilityImpl {
 
     private final boolean commander;
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("unblocked attacker you control");
+    private static final FilterControlledCreaturePermanent filter = 
+            new FilterControlledCreaturePermanent("unblocked attacker you control");
 
     static {
         filter.add(UnblockedPredicate.instance);
@@ -149,7 +150,8 @@ class ReturnAttackerToHandTargetCost extends CostImpl {
             for (UUID targetId : targets.get(0).getTargets()) {
                 Permanent permanent = game.getPermanent(targetId);
                 Player controller = game.getPlayer(controllerId);
-                if (permanent == null || controller == null) {
+                if (permanent == null 
+                        || controller == null) {
                     return false;
                 }
                 defendingPlayerId = game.getCombat().getDefenderId(permanent.getId());

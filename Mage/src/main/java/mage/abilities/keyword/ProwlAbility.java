@@ -58,7 +58,8 @@ public class ProwlAbility extends StaticAbility implements AlternativeSourceCost
     }
 
     public final AlternativeCost2 addProwlCost(String manaString) {
-        AlternativeCost2 prowlCost = new AlternativeCost2Impl(PROWL_KEYWORD, reminderText, new ManaCostsImpl(manaString));
+        AlternativeCost2 prowlCost = new AlternativeCost2Impl(PROWL_KEYWORD,
+                reminderText, new ManaCostsImpl(manaString));
         prowlCosts.add(prowlCost);
         return prowlCost;
     }
@@ -87,19 +88,21 @@ public class ProwlAbility extends StaticAbility implements AlternativeSourceCost
     @Override
     public boolean askToActivateAlternativeCosts(Ability ability, Game game) {
         if (ability instanceof SpellAbility) {
-            Player player = game.getPlayer(controllerId);
+            Player player = game.getPlayer(ability.getControllerId());
             if (player == null) {
                 return false;
             }
             if (ProwlCondition.instance.apply(game, ability)) {
                 this.resetProwl();
                 for (AlternativeCost2 prowlCost : prowlCosts) {
-                    if (prowlCost.canPay(ability, sourceId, controllerId, game)
-                            && player.chooseUse(Outcome.Benefit, "Cast for " + PROWL_KEYWORD + " cost " + prowlCost.getText(true) + " ?", ability, game)) {
+                    if (prowlCost.canPay(ability, sourceId, ability.getControllerId(), game)
+                            && player.chooseUse(Outcome.Benefit, "Cast for "
+                                    + PROWL_KEYWORD + " cost " + prowlCost.getText(true)
+                                    + " ?", ability, game)) {
                         prowlCost.activate();
                         ability.getManaCostsToPay().clear();
                         ability.getCosts().clear();
-                        for (Iterator it = ((Costs) prowlCost).iterator(); it.hasNext(); ) {
+                        for (Iterator it = ((Costs) prowlCost).iterator(); it.hasNext();) {
                             Cost cost = (Cost) it.next();
                             if (cost instanceof ManaCostsImpl) {
                                 ability.getManaCostsToPay().add((ManaCostsImpl) cost.copy());
@@ -149,8 +152,9 @@ public class ProwlAbility extends StaticAbility implements AlternativeSourceCost
     }
 
     private void setReminderText(Card card) {
-        reminderText =
-                "(You may cast this for its prowl cost if you dealt combat damage to a player this turn with a creature that shared a creature type with {this}";
+        reminderText
+                = "(You may cast this for its prowl cost if you dealt combat damage to a "
+                + "player this turn with a creature that shared a creature type with {this}";
     }
 
     @Override

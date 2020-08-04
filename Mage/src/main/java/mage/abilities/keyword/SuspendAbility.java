@@ -115,9 +115,9 @@ public class SuspendAbility extends SpecialAction {
      * Gives the card the SuspendAbility
      *
      * @param suspend - amount of time counters, if Integer.MAX_VALUE is set
-     *                there will be {X} costs and X counters added
-     * @param cost    - null is used for temporary gained suspend ability
-     * @param card    - card that has the suspend ability
+     * there will be {X} costs and X counters added
+     * @param cost - null is used for temporary gained suspend ability
+     * @param card - card that has the suspend ability
      */
     public SuspendAbility(int suspend, ManaCost cost, Card card) {
         this(suspend, cost, card, false);
@@ -136,7 +136,8 @@ public class SuspendAbility extends SpecialAction {
         }
         StringBuilder sb = new StringBuilder("Suspend ");
         if (cost != null) {
-            sb.append(suspend == Integer.MAX_VALUE ? "X" : suspend).append("&mdash;").append(cost.getText()).append(suspend
+            sb.append(suspend == Integer.MAX_VALUE ? "X" : suspend).append("&mdash;")
+                    .append(cost.getText()).append(suspend
                     == Integer.MAX_VALUE ? ". X can't be 0" : "");
             if (!shortRule) {
                 sb.append(" <i>(Rather than cast this card from your hand, pay ")
@@ -174,8 +175,8 @@ public class SuspendAbility extends SpecialAction {
         ability.setControllerId(card.getOwnerId());
         game.getState().addOtherAbility(card, ability);
 
-        SuspendBeginningOfUpkeepInterveningIfTriggeredAbility ability1 =
-                new SuspendBeginningOfUpkeepInterveningIfTriggeredAbility();
+        SuspendBeginningOfUpkeepInterveningIfTriggeredAbility ability1
+                = new SuspendBeginningOfUpkeepInterveningIfTriggeredAbility();
         ability1.setSourceId(card.getId());
         ability1.setControllerId(card.getOwnerId());
         game.getState().addOtherAbility(card, ability1);
@@ -213,7 +214,7 @@ public class SuspendAbility extends SpecialAction {
         return new ActivationStatus(object.isInstant()
                 || object.hasAbility(FlashAbility.getInstance(), game)
                 || null != game.getContinuousEffects().asThough(sourceId,
-                AsThoughEffectType.CAST_AS_INSTANT, this, playerId, game)
+                        AsThoughEffectType.CAST_AS_INSTANT, this, playerId, game)
                 || game.canPlaySorcery(playerId), null);
     }
 
@@ -267,7 +268,8 @@ class SuspendExileEffect extends OneShotEffect {
                 }
                 card.addCounters(CounterType.TIME.createInstance(suspend), source, game);
                 if (!game.isSimulation()) {
-                    game.informPlayers(controller.getLogName() + " suspends (" + suspend + ") " + card.getLogName());
+                    game.informPlayers(controller.getLogName()
+                            + " suspends (" + suspend + ") " + card.getLogName());
                 }
                 return true;
             }
@@ -305,7 +307,8 @@ class SuspendPlayCardAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "When the last time counter is removed from this card ({this}), if it's removed from the game, " + super.getRule();
+        return "When the last time counter is removed from this card ({this}), "
+                + "if it's removed from the game, " + super.getRule();
     }
 
     @Override
@@ -318,7 +321,8 @@ class SuspendPlayCardEffect extends OneShotEffect {
 
     public SuspendPlayCardEffect() {
         super(Outcome.PlayForFree);
-        this.staticText = "play it without paying its mana cost if able. If you can't, it remains removed from the game";
+        this.staticText = "play it without paying its mana cost if able. "
+                + "If you can't, it remains removed from the game";
     }
 
     public SuspendPlayCardEffect(final SuspendPlayCardEffect effect) {
@@ -426,7 +430,7 @@ class SuspendBeginningOfUpkeepInterveningIfTriggeredAbility extends ConditionalI
 
     public SuspendBeginningOfUpkeepInterveningIfTriggeredAbility() {
         super(new BeginningOfUpkeepTriggeredAbility(Zone.EXILED, new RemoveCounterSourceEffect(CounterType.TIME.createInstance()),
-                        TargetController.YOU, false),
+                TargetController.YOU, false),
                 SuspendedCondition.instance,
                 "At the beginning of your upkeep, if this card ({this}) is suspended, remove a time counter from it.");
         this.setRuleVisible(false);

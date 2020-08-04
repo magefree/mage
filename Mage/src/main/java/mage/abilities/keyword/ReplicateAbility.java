@@ -25,12 +25,15 @@ import java.util.Iterator;
 public class ReplicateAbility extends StaticAbility implements OptionalAdditionalSourceCosts {
 
     private static final String keywordText = "Replicate";
-    private static final String reminderTextMana = "When you cast this spell, copy it for each time you paid its replicate cost. You may choose new targets for the copies.";
+    private static final String reminderTextMana = "When you cast this spell, "
+            + "copy it for each time you paid its replicate cost."
+            + " You may choose new targets for the copies.";
     protected OptionalAdditionalCost additionalCost;
 
     public ReplicateAbility(Card card, String manaString) {
         super(Zone.STACK, null);
-        this.additionalCost = new OptionalAdditionalCostImpl(keywordText, reminderTextMana, new ManaCostsImpl(manaString));
+        this.additionalCost = new OptionalAdditionalCostImpl(keywordText,
+                reminderTextMana, new ManaCostsImpl(manaString));
         this.additionalCost.setRepeatable(true);
         setRuleAtTheTop(true);
         addSubAbility(new ReplicateTriggeredAbility());
@@ -77,12 +80,12 @@ public class ReplicateAbility extends StaticAbility implements OptionalAdditiona
     @Override
     public void addOptionalAdditionalCosts(Ability ability, Game game) {
         if (ability instanceof SpellAbility) {
-            Player player = game.getPlayer(controllerId);
+            Player player = game.getPlayer(ability.getControllerId());
             if (player != null) {
                 this.resetReplicate();
-
                 boolean again = true;
-                while (player.canRespond() && again) {
+                while (player.canRespond()
+                        && again) {
                     String times = "";
                     if (additionalCost.isRepeatable()) {
                         int numActivations = additionalCost.getActivateCount();
@@ -91,10 +94,12 @@ public class ReplicateAbility extends StaticAbility implements OptionalAdditiona
 
                     // TODO: add AI support to find max number of possible activations (from available mana)
                     //  canPay checks only single mana available, not total mana usage
-                    if (additionalCost.canPay(ability, sourceId, controllerId, game)
-                            && player.chooseUse(/*Outcome.Benefit*/Outcome.AIDontUseIt, new StringBuilder("Pay ").append(times).append(additionalCost.getText(false)).append(" ?").toString(), ability, game)) {
+                    if (additionalCost.canPay(ability, sourceId, ability.getControllerId(), game)
+                            && player.chooseUse(/*Outcome.Benefit*/Outcome.AIDontUseIt,
+                                    new StringBuilder("Pay ").append(times).append(
+                                            additionalCost.getText(false)).append(" ?").toString(), ability, game)) {
                         additionalCost.activate();
-                        for (Iterator it = ((Costs) additionalCost).iterator(); it.hasNext(); ) {
+                        for (Iterator it = ((Costs) additionalCost).iterator(); it.hasNext();) {
                             Cost cost = (Cost) it.next();
                             if (cost instanceof ManaCostsImpl) {
                                 ability.getManaCostsToPay().add((ManaCostsImpl) cost.copy());
@@ -185,7 +190,8 @@ class ReplicateTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Replicate <i>(When you cast this spell, copy it for each time you paid its replicate cost. You may choose new targets for the copies.)</i>";
+        return "Replicate <i>(When you cast this spell, copy it for each time you paid "
+                + "its replicate cost. You may choose new targets for the copies.)</i>";
     }
 }
 
@@ -205,7 +211,8 @@ class ReplicateCopyEffect extends OneShotEffect {
         if (controller != null) {
             Spell spell = (Spell) this.getValue("ReplicateSpell");
             int replicateCount = (Integer) this.getValue("ReplicateCount");
-            if (spell != null && replicateCount > 0) {
+            if (spell != null
+                    && replicateCount > 0) {
                 // reset replicate now so the copies don't report x times Replicate
                 Card card = game.getCard(spell.getSourceId());
                 if (card != null) {
@@ -218,7 +225,8 @@ class ReplicateCopyEffect extends OneShotEffect {
                     }
                 }
                 // create the copies
-                StackObject newStackObject = spell.createCopyOnStack(game, source, source.getControllerId(), true, replicateCount);
+                StackObject newStackObject = spell.createCopyOnStack(game, source,
+                        source.getControllerId(), true, replicateCount);
                 return true;
             }
 
