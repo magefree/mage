@@ -2,16 +2,20 @@ package mage.verify;
 
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.effects.CostModificationEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.abilities.keyword.MultikickerAbility;
 import mage.cards.*;
 import mage.cards.basiclands.BasicLand;
+import mage.cards.decks.DeckCardLists;
+import mage.cards.decks.importer.DeckImporter;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.cards.repository.CardScanner;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.game.command.Plane;
 import mage.game.draft.RateCard;
 import mage.game.permanent.token.Token;
@@ -32,9 +36,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.NoSuchFileException;
-import java.nio.file.Paths;
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -142,7 +145,7 @@ public class VerifyCardDataTest {
     private final ArrayList<String> outputMessages = new ArrayList<>();
 
     @Test
-    public void verifyCards() throws IOException {
+    public void test_verifyCards() throws IOException {
         int cardIndex = 0;
         for (Card card : CardScanner.getAllCards()) {
             cardIndex++;
@@ -162,7 +165,7 @@ public class VerifyCardDataTest {
     }
 
     @Test
-    public void checkDuplicateCardNumbersInDB() {
+    public void test_checkDuplicateCardNumbersInDB() {
         Collection<String> doubleErrors = new ArrayList<>();
 
         Collection<ExpansionSet> sets = Sets.getInstance().values();
@@ -214,7 +217,7 @@ public class VerifyCardDataTest {
 
     @Test
     @Ignore // TODO: enable it after THB set will be completed
-    public void checkDoubleRareCardsInSets() {
+    public void test_checkDoubleRareCardsInSets() {
         // all basic sets after THB must have double rare cards (one normal, one bonus)
         // ELD can have same rules, but xmage stores it as different sets (ELD and CELD)
         Date startCheck = TherosBeyondDeath.getInstance().getReleaseDate();
@@ -273,7 +276,7 @@ public class VerifyCardDataTest {
     }
 
     @Test
-    public void checkWrongCardClasses() {
+    public void test_checkWrongCardClasses() {
         Collection<String> errorsList = new ArrayList<>();
         Map<String, String> classesIndex = new HashMap<>();
         int totalCards = 0;
@@ -314,8 +317,7 @@ public class VerifyCardDataTest {
     }
 
     @Test
-    public void checkMissingSets() {
-
+    public void test_checkMissingSets() {
         Collection<String> errorsList = new ArrayList<>();
 
         int totalMissingSets = 0;
@@ -341,6 +343,55 @@ public class VerifyCardDataTest {
         // only warnings
         for (String error : errorsList) {
             System.out.println(error);
+        }
+    }
+
+    @Test
+    @Ignore // TODO: enable and fix broken decks after promo sets merge https://github.com/magefree/mage/pull/6190
+    public void test_checkSampleDecks() {
+        Collection<String> errorsList = new ArrayList<>();
+
+        // collect all files
+        final String rootPath = "..\\Mage.Client\\release\\sample-decks\\";
+        Collection<Path> filesList = new ArrayList<>();
+        try {
+            Files.walkFileTree(Paths.get(rootPath), new SimpleFileVisitor<Path>() {
+                @Override
+                public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+                    filesList.add(file);
+                    return FileVisitResult.CONTINUE;
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+            errorsList.add("Error: sample deck - can't get folder content - " + e.getMessage());
+        }
+        Assert.assertTrue("Sample decks: can't find any deck files", filesList.size() > 0);
+
+        // try to open deck files
+        int totalErrorFiles = 0;
+        for (Path deckFile : filesList) {
+            String deckName = deckFile.toString().replace(rootPath, "");
+            StringBuilder deckErrors = new StringBuilder();
+            DeckCardLists deckCards = DeckImporter.importDeckFromFile(deckFile.toString(), deckErrors);
+
+            if (!deckErrors.toString().isEmpty()) {
+                errorsList.add("Error: sample contains errors " + deckName);
+                System.out.println("Errors in sample file " + deckName + ":\n" + deckErrors.toString());
+                totalErrorFiles++;
+                continue;
+            }
+
+            if ((deckCards.getCards().size() + deckCards.getSideboard().size()) < 10) {
+                errorsList.add("Error: sample deck contains too little cards " + deckName);
+                totalErrorFiles++;
+                continue;
+            }
+        }
+
+        printMessages(errorsList);
+        if (errorsList.size() > 0) {
+            Assert.fail("Found sample decks: " + filesList.size() + "; with errors: " + totalErrorFiles);
         }
     }
 
@@ -386,7 +437,7 @@ public class VerifyCardDataTest {
     }
 
     @Test
-    public void checkMissingSetData() {
+    public void test_checkMissingSetData() {
         Collection<String> errorsList = new ArrayList<>();
         Collection<String> warningsList = new ArrayList<>();
 
@@ -474,7 +525,7 @@ public class VerifyCardDataTest {
     }
 
     @Test
-    public void checkMissingCardData() {
+    public void test_checkMissingCardData() {
         Collection<String> errorsList = new ArrayList<>();
         Collection<String> warningsList = new ArrayList<>();
 
@@ -516,24 +567,6 @@ public class VerifyCardDataTest {
                 // 3. check that getMana works without NPE errors (it uses getNetMana with empty game param for AI score calcs)
                 // https://github.com/magefree/mage/issues/6300
                 card.getMana();
-
-                // 4. check cost modification effects must be ALL instead STACK zone
-                for (Ability ability : card.getAbilities()) {
-                    // uncomment to get playable problems, see https://github.com/magefree/mage/issues/6684
-                    if (ability.getAllEffects().stream().noneMatch(e -> e instanceof CostModificationEffect)) {
-                        continue;
-                    }
-
-                    // must change zone to ALL and check conditions/filters (no spell filters, only cards)
-                    if (ability.getZone() == Zone.STACK) {
-                        //errorsList.add("error, cost modification effect must be in ALL zone instead " + ability.getZone() + " - " + card.getName() + " - " + ability.toString());
-                    }
-
-                    // must check conditions/filters (no spell filters, only cards)
-                    if (ability.getZone() == Zone.BATTLEFIELD) {
-                        //warningsList.add("warning, must check cost modification filters/conditions " + card.getName() + " - " + ability.toString());
-                    }
-                }
             }
         }
 
@@ -545,8 +578,7 @@ public class VerifyCardDataTest {
     }
 
     @Test
-    //@Ignore // TODO: enable it on copy() methods removing
-    public void checkWatcherCopyMethods() {
+    public void test_checkWatcherCopyMethods() {
 
         Collection<String> errorsList = new ArrayList<>();
         Collection<String> warningsList = new ArrayList<>();
@@ -623,7 +655,7 @@ public class VerifyCardDataTest {
 
     @Test
     @Ignore  // TODO: enable test after massive token fixes
-    public void checkMissingTokenData() {
+    public void test_checkMissingTokenData() {
 
         Collection<String> errorsList = new ArrayList<>();
         Collection<String> warningsList = new ArrayList<>();
@@ -724,7 +756,7 @@ public class VerifyCardDataTest {
     }
 
     @Test
-    public void checkMissingPlanesData() {
+    public void test_checkMissingPlanesData() {
         Collection<String> errorsList = new ArrayList<>();
 
         Reflections reflections = new Reflections("mage.");
@@ -1007,7 +1039,7 @@ public class VerifyCardDataTest {
     }
 
     @Test
-    public void showCardInfo() throws Exception {
+    public void test_showCardInfo() throws Exception {
         // debug only: show direct card info (takes it from class file, not from db repository)
         // can check multiple cards at once, example: name1;name2;name3
         String cardNames = "Armed // Dangerous;Beacon Behemoth;Grizzly Bears";
@@ -1282,7 +1314,7 @@ public class VerifyCardDataTest {
     }
 
     @Test
-    public void testCardRatingConsistency() {
+    public void test_checkCardRatingConsistency() {
         // all cards with same name must have same rating (see RateCard.rateCard)
         // cards rating must be consistency (same) for card sorting
         List<Card> cardsList = new ArrayList<>(CardScanner.getAllCards());
@@ -1301,7 +1333,7 @@ public class VerifyCardDataTest {
     }
 
     @Test
-    public void testCardsCreatingAndConstructorErrors() {
+    public void test_CardsCreatingAndConstructorErrors() {
         int errorsCount = 0;
         Collection<ExpansionSet> sets = Sets.getInstance().values();
         for (ExpansionSet set : sets) {
