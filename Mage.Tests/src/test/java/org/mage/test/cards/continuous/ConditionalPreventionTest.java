@@ -135,7 +135,7 @@ public class ConditionalPreventionTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void test_PrentableCombatDamage() {
+    public void test_PreventableCombatDamage() {
         // Prevent all damage that would be dealt to creatures.
         addCard(Zone.BATTLEFIELD, playerA, "Bubble Matrix", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Balduvian Bears", 1);
@@ -189,5 +189,78 @@ public class ConditionalPreventionTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Balduvian Bears", 1);
         assertLife(playerA, 20);
         assertLife(playerB, 20 - 2);
+    }
+
+    @Test
+    public void test_PreventSomeDamage_Normal() {
+        // Kicker-Sacrifice a land.
+        // Prevent the next 3 damage that would be dealt this turn to any number of target creatures and/or players, divided as you choose.
+        // If Pollen Remedy was kicked, prevent the next 6 damage this way instead.
+        addCard(Zone.HAND, playerA, "Pollen Remedy", 1); // {W}
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+        addCard(Zone.HAND, playerA, "Swamp", 1); // for kicker
+        //
+        addCard(Zone.BATTLEFIELD, playerA, "Balduvian Bears", 1);
+        //
+        addCard(Zone.HAND, playerA, "Lightning Bolt", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+
+        // add shield for 3 damage
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pollen Remedy");
+        setChoice(playerA, "No"); // no kicker
+        addTargetAmount(playerA, "Balduvian Bears", 3);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkGraveyardCount("shield", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pollen Remedy", 1);
+
+        // 6 damage to die (if no shield then can cast only 1 bolt)
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Balduvian Bears");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Balduvian Bears");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        checkGraveyardCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", 2);
+        checkGraveyardCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Balduvian Bears", 1);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+    }
+
+    @Test
+    public void test_PreventSomeDamage_Kicked() {
+        // Kicker-Sacrifice a land.
+        // Prevent the next 3 damage that would be dealt this turn to any number of target creatures and/or players, divided as you choose.
+        // If Pollen Remedy was kicked, prevent the next 6 damage this way instead.
+        addCard(Zone.HAND, playerA, "Pollen Remedy", 1); // {W}
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1); // for kicker
+        //
+        addCard(Zone.BATTLEFIELD, playerA, "Balduvian Bears", 1);
+        //
+        addCard(Zone.HAND, playerA, "Lightning Bolt", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+
+        // add shield for 6 damage
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pollen Remedy");
+        setChoice(playerA, "Yes"); // use kicker
+        setChoice(playerA, "Swamp"); // kicker cost
+        addTargetAmount(playerA, "Balduvian Bears", 6);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkGraveyardCount("shield", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pollen Remedy", 1);
+
+        // 9 damage to die (if no shield then can cast only 1 bolt)
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Balduvian Bears");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Balduvian Bears");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Balduvian Bears");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        checkGraveyardCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", 3);
+        checkGraveyardCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Balduvian Bears", 1);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
     }
 }

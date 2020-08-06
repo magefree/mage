@@ -287,7 +287,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
             }
         }
         Assert.assertFalse("Wrong stop command on " + this.stopOnTurn + " / " + this.stopAtStep + " (" + this.stopAtStep.getIndex() + ")"
-                + " (found actions after stop on " + maxTurn + " / " + maxPhase + ")",
+                        + " (found actions after stop on " + maxTurn + " / " + maxPhase + ")",
                 (maxTurn > this.stopOnTurn) || (maxTurn == this.stopOnTurn && maxPhase > this.stopAtStep.getIndex()));
 
         if (!currentGame.isPaused()) {
@@ -916,7 +916,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         }
         Assert.assertNotNull("There is no such permanent under player's control, player=" + player.getName()
                 + ", cardName=" + cardName, found);
-        
+
         Assert.assertEquals(amount, found.getAbilities(currentGame).stream()
                 .filter(a -> searchedAbility.isAssignableFrom(a.getClass())).collect(Collectors.toList()).size());
     }
@@ -1619,9 +1619,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param step
      * @param player
      * @param cardName
-     * @param targetName for modes you can add "mode=3" before target name,
-     *                   multiple targets can be seperated by ^, not target
-     *                   marks as TestPlayer.NO_TARGET
+     * @param targetName for modes you can add "mode=3" before target name;
+     *                   multiple targets can be seperated by ^;
+     *                   no target marks as TestPlayer.NO_TARGET;
+     *                   warning, do not support cards with target adjusters - use addTarget instead
      */
     public void castSpell(int turnNum, PhaseStep step, TestPlayer player, String cardName, String targetName) {
         //Assert.assertNotEquals("", cardName);

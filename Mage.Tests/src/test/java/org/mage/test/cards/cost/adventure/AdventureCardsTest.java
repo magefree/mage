@@ -650,4 +650,43 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         execute();
         assertAllCommandsUsed();
     }
+
+    @Test
+    public void test_BonecrusherGiant_Stopm() {
+        // bug with non working stopm: https://github.com/magefree/mage/issues/6915
+
+        // If noncombat damage would be dealt to Stormwild Capridor, prevent that damage.
+        // Put a +1/+1 counter on Stormwild Capridor for each 1 damage prevented this way.
+        addCard(Zone.BATTLEFIELD, playerA, "Stormwild Capridor@storm", 2); // 1/3
+        //
+        addCard(Zone.HAND, playerA, "Lightning Bolt", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        //
+        // Stomp {1}{R}
+        // Damage can’t be prevented this turn. Stomp deals 2 damage to any target.
+        addCard(Zone.HAND, playerA, "Bonecrusher Giant", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+
+        // prevent
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "@storm.1");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkGraveyardCount("prevent", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", 1);
+        checkGraveyardCount("prevent", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "@storm.1", 0);
+
+        // prepare protect by stomp
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Stomp");
+        addTarget(playerA, playerB);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // can't prevent
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "@storm.2");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkGraveyardCount("can't prevent", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", 2);
+        checkGraveyardCount("can't prevent", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "@storm.2", 1);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        assertAllCommandsUsed();
+    }
 }

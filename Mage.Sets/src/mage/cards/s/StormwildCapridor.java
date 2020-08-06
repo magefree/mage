@@ -80,8 +80,9 @@ class StormwildCapridorEffect extends PreventionEffectImpl {
             if (permanent != null) {
                 permanent.addCounters(CounterType.P1P1.createInstance(preventionEffectData.getPreventedDamage()), source, game);
             }
+            return true;
         }
-        return preventionEffectData.isReplaced();
+        return false;
     }
 
     @Override
@@ -90,11 +91,8 @@ class StormwildCapridorEffect extends PreventionEffectImpl {
                 || !super.applies(event, source, game)) {
             return false;
         }
-        if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getSourceId(), source.getControllerId()))) {
-            DamageCreatureEvent damageEvent = (DamageCreatureEvent) event;
-            return !damageEvent.isCombatDamage();
-        }
-        return false;
+        DamageCreatureEvent damageEvent = (DamageCreatureEvent) event;
+        return !damageEvent.isCombatDamage();
     }
 
 }

@@ -2450,7 +2450,7 @@ public class TestPlayer implements Player {
             //Assert.fail("Wrong target");
         }
 
-        this.chooseStrictModeFailed("target", game, getInfo(source, game) + "; " + getInfo(target));
+        this.chooseStrictModeFailed("target", game, getInfo(source, game) + "\n" + getInfo(target));
         return computerPlayer.chooseTarget(outcome, cards, target, source, game);
     }
 
@@ -3760,7 +3760,7 @@ public class TestPlayer implements Player {
             }
         }
 
-        this.chooseStrictModeFailed("target", game, getInfo(source, game) + "; " + getInfo(target));
+        this.chooseStrictModeFailed("target", game, getInfo(source, game) + "\n" + getInfo(target));
         return computerPlayer.chooseTargetAmount(outcome, target, source, game);
     }
 

@@ -1,16 +1,16 @@
 package mage.cards.b;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.BecomesTargetTriggeredAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.continuous.DamageCantBePreventedEffect;
 import mage.cards.AdventureCard;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SetTargetPointer;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.target.common.TargetAnyTarget;
 
 import java.util.UUID;
@@ -34,7 +34,7 @@ public final class BonecrusherGiant extends AdventureCard {
 
         // Stomp
         // Damage can’t be prevented this turn. Stomp deals 2 damage to any target.
-        this.getSpellCard().getSpellAbility().addEffect(new StompEffect());
+        this.getSpellCard().getSpellAbility().addEffect(new DamageCantBePreventedEffect(Duration.EndOfTurn, "Damage can't be prevented this turn", false, false));
         this.getSpellCard().getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellCard().getSpellAbility().addTarget(new TargetAnyTarget());
     }
@@ -46,37 +46,5 @@ public final class BonecrusherGiant extends AdventureCard {
     @Override
     public BonecrusherGiant copy() {
         return new BonecrusherGiant(this);
-    }
-}
-
-class StompEffect extends ReplacementEffectImpl {
-
-    StompEffect() {
-        super(Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "Damage can't be prevented this turn.";
-    }
-
-    private StompEffect(final StompEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public StompEffect copy() {
-        return new StompEffect(this);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.PREVENT_DAMAGE;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        return true;
     }
 }

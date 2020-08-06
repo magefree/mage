@@ -82,7 +82,7 @@ class QuestingBeastPreventionEffect extends ContinuousRuleModifyingEffectImpl {
 
     QuestingBeastPreventionEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "Combat damage that would be dealt by creatures you control can't be prevented.";
+        staticText = "Combat damage that would be dealt by creatures you control can't be prevented";
     }
 
     private QuestingBeastPreventionEffect(final QuestingBeastPreventionEffect effect) {
