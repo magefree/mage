@@ -150,13 +150,16 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
      */
     @Override
     public boolean payOrRollback(Ability ability, Game game, UUID sourceId, UUID payingPlayerId) {
-        int bookmark = game.bookmarkState();
-        handlePhyrexianManaCosts(payingPlayerId, ability, game);
-        if (pay(ability, game, sourceId, payingPlayerId, false, null)) {
-            game.removeBookmark(bookmark);
-            return true;
+        Player player = game.getPlayer(payingPlayerId);
+        if (player != null) {
+            int bookmark = game.bookmarkState();
+            handlePhyrexianManaCosts(payingPlayerId, ability, game);
+            if (pay(ability, game, sourceId, payingPlayerId, false, null)) {
+                game.removeBookmark(bookmark);
+                return true;
+            }
+            player.restoreState(bookmark, ability.getRule(), game);
         }
-        game.restoreState(bookmark, ability.getRule());
         return false;
     }
 

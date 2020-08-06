@@ -60,7 +60,7 @@ public class DoWhenCostPaid extends OneShotEffect {
             player.resetStoredBookmark(game);
             return true;
         }
-        game.restoreState(bookmark, DoWhenCostPaid.class.getName());
+        player.restoreState(bookmark, DoWhenCostPaid.class.getName(), game);
         return true;
     }
 

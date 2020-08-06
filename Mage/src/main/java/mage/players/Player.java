@@ -451,6 +451,13 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void resetStoredBookmark(Game game);
 
+    default void restoreState(int bookmark, String text, Game game) {
+        game.restoreState(bookmark, text);
+        if (getStoredBookmark() >= bookmark) {
+            resetStoredBookmark(game);
+        }
+    }
+
     void revealCards(Ability source, Cards cards, Game game);
 
     void revealCards(String titelSuffix, Cards cards, Game game);

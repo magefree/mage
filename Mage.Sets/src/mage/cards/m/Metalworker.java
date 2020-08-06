@@ -35,8 +35,10 @@ public final class Metalworker extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
-        // {tap}: Reveal any number of artifact cards in your hand. Add {C}{C} for each card revealed this way.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new MetalworkerManaEffect(), new TapSourceCost()));
+        // {T}: Reveal any number of artifact cards in your hand. Add {C}{C} for each card revealed this way.
+        SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, new MetalworkerManaEffect(), new TapSourceCost());
+        ability.setUndoPossible(false);
+        this.addAbility(ability);
     }
 
     public Metalworker(final Metalworker card) {

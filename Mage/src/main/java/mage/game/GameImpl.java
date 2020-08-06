@@ -699,6 +699,12 @@ public abstract class GameImpl implements Game, Serializable {
         return savedStates.size();
     }
 
+    /**
+     * Warning, for inner usage only, use player.restoreState as much as possible instead
+     *
+     * @param bookmark
+     * @param context  additional information for error message
+     */
     @Override
     public void restoreState(int bookmark, String context) {
         if (!simulation && !this.hasEnded()) { // if player left or game is over no undo is possible - this could lead to wrong winner
@@ -1247,7 +1253,7 @@ public abstract class GameImpl implements Game, Serializable {
         if (player != null) {
             int bookmark = player.getStoredBookmark();
             if (bookmark != -1) {
-                restoreState(bookmark, "undo");
+                player.restoreState(bookmark, "undo", this);
                 player.setStoredBookmark(-1);
                 fireUpdatePlayersEvent();
             }

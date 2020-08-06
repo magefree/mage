@@ -1,24 +1,16 @@
 package mage.abilities.mana;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 import mage.Mana;
-import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ManaEffect;
-import mage.constants.AbilityType;
-import mage.constants.AsThoughEffectType;
-import mage.constants.ManaType;
-import mage.constants.TimingRule;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
+
+import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -134,6 +126,9 @@ public abstract class ActivatedManaAbilityImpl extends ActivatedAbilityImpl impl
      * Is it allowed to undo the mana creation. It's e.g. not allowed if some
      * game revealing information is related (like reveal the top card of the
      * library)
+     * <p>
+     * TODO: it helps with single mana activate for mana pool, but will not work while activates on paying for casting
+     * (e.g. user can cheats to see next draw card)
      *
      * @return
      */
