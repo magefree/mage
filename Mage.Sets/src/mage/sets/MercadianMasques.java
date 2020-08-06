@@ -83,6 +83,7 @@ public final class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Collective Unconscious", 236, Rarity.RARE, mage.cards.c.CollectiveUnconscious.class));
         cards.add(new SetCardInfo("Common Cause", 13, Rarity.RARE, mage.cards.c.CommonCause.class));
         cards.add(new SetCardInfo("Conspiracy", 127, Rarity.RARE, mage.cards.c.Conspiracy.class));
+        cards.add(new SetCardInfo("Cornered Market", 14, Rarity.RARE, mage.cards.c.CorneredMarket.class));
         cards.add(new SetCardInfo("Corrupt Official", 128, Rarity.RARE, mage.cards.c.CorruptOfficial.class));
         cards.add(new SetCardInfo("Counterspell", 69, Rarity.COMMON, mage.cards.c.Counterspell.class));
         cards.add(new SetCardInfo("Cowardice", 70, Rarity.RARE, mage.cards.c.Cowardice.class));
