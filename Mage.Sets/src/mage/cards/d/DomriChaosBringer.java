@@ -26,6 +26,7 @@ import mage.game.events.GameEvent;
 import mage.players.Player;
 
 import java.util.UUID;
+import mage.game.stack.StackObject;
 
 /**
  * @author TheElk801
@@ -42,19 +43,22 @@ public final class DomriChaosBringer extends CardImpl {
         // +1: Add {R} or {G}. If that mana is spent on a creature spell, it gains riot.
         this.addAbility(new LoyaltyAbility(new DomriChaosBringerEffect(), 1));
 
-        // −3: Look at the top four cards of your library. You may reveal up to two creature cards from among them and put them into your hand. Put the rest on the bottom of your library in a random order.
+        // −3: Look at the top four cards of your library. You may reveal up to two 
+        // creature cards from among them and put them into your hand. Put the rest 
+        // on the bottom of your library in a random order.
         this.addAbility(new LoyaltyAbility(new LookLibraryAndPickControllerEffect(
                 StaticValue.get(4), false, StaticValue.get(2),
                 StaticFilters.FILTER_CARD_CREATURE, Zone.LIBRARY, false,
                 true, true, Zone.HAND, false, false, false
         ).setText(
-                "Look at the top four cards of your library. " +
-                        "You may reveal up to two creature cards from among them " +
-                        "and put them into your hand. Put the rest on the bottom of your library " +
-                        "in a random order."
+                "Look at the top four cards of your library. "
+                + "You may reveal up to two creature cards from among them "
+                + "and put them into your hand. Put the rest on the bottom of your library "
+                + "in a random order."
         ), -3));
 
-        // −8: You get an emblem with "At the beginning of each end step, create a 4/4 red and green Beast creature token with trample."
+        // −8: You get an emblem with "At the beginning of each end step, create a 4/4 red 
+        // and green Beast creature token with trample."
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new DomriChaosBringerEmblem()), -8));
     }
 
@@ -136,9 +140,15 @@ class DomriChaosBringerTriggeredAbility extends DelayedTriggeredAbility {
         if (mo == null || !mo.isCreature()) {
             return false;
         }
+        
+        StackObject stackObject = game.getStack().getStackObject(event.getTargetId());
+        
+        if (stackObject == null) {
+            return false;
+        }
         this.getEffects().clear();
         FilterCard filter = new FilterCard();
-        filter.add(new CardIdPredicate(event.getTargetId()));
+        filter.add(new CardIdPredicate(stackObject.getSourceId()));
         this.addEffect(new GainAbilityControlledSpellsEffect(new RiotAbility(), filter));
         return true;
     }

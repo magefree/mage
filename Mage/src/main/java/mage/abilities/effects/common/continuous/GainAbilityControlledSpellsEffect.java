@@ -44,9 +44,11 @@ public class GainAbilityControlledSpellsEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (player != null && permanent != null) {
+        if (player != null
+                && permanent != null) {
             for (Card card : game.getExile().getAllCards(game)) {
-                if (card.isOwnedBy(source.getControllerId()) && filter.match(card, game)) {
+                if (card.isOwnedBy(source.getControllerId())
+                        && filter.match(card, game)) {
                     game.getState().addOtherAbility(card, ability);
                 }
             }
@@ -67,16 +69,19 @@ public class GainAbilityControlledSpellsEffect extends ContinuousEffectImpl {
             }
             for (StackObject stackObject : game.getStack()) {
                 // only spells cast, so no copies of spells
-                if ((stackObject instanceof Spell) && !stackObject.isCopy() && stackObject.isControlledBy(source.getControllerId())) {
+                if ((stackObject instanceof Spell)
+                        && !stackObject.isCopy()
+                        && stackObject.isControlledBy(source.getControllerId())) {
                     Card card = game.getCard(stackObject.getSourceId());
-                    if (card != null && filter.match(card, game)) {
+                    if (card != null
+                            && filter.match(card, game)) {
                         if (!card.hasAbility(ability, game)) {
                             game.getState().addOtherAbility(card, ability);
+                            return true;
                         }
                     }
                 }
             }
-            return true;
         }
         return false;
     }
