@@ -79,6 +79,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_CARD_IMAGES_USE_DEFAULT = "cardImagesUseDefault";
     public static final String KEY_CARD_IMAGES_PATH = "cardImagesPath";
     public static final String KEY_CARD_IMAGES_THREADS = "cardImagesThreads";
+    public static final String KEY_CARD_IMAGES_THREADS_DEFAULT = "3";
     public static final String KEY_CARD_IMAGES_SAVE_TO_ZIP = "cardImagesSaveToZip";
     public static final String KEY_CARD_IMAGES_PREF_LANGUAGE = "cardImagesPreferedImageLaguage";
 
@@ -3465,7 +3466,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
             updateCache(KEY_CARD_IMAGES_PATH, path);
         }
         load(prefs, dialog.cbSaveToZipFiles, KEY_CARD_IMAGES_SAVE_TO_ZIP, "true");
-        dialog.cbNumberOfDownloadThreads.setSelectedItem(MageFrame.getPreferences().get(KEY_CARD_IMAGES_THREADS, "10"));
+        dialog.cbNumberOfDownloadThreads.setSelectedItem(MageFrame.getPreferences().get(KEY_CARD_IMAGES_THREADS, KEY_CARD_IMAGES_THREADS_DEFAULT));
         dialog.cbPreferedImageLanguage.setSelectedItem(MageFrame.getPreferences().get(KEY_CARD_IMAGES_PREF_LANGUAGE, CardLanguage.ENGLISH.getCode()));
 
         // rendering settings
@@ -3762,10 +3763,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
         if (CACHE.containsKey(key)) {
             return CACHE.get(key);
         } else {
-            Preferences prefs = MageFrame.getPreferences();
-            String value = prefs.get(key, def);
+            String value = MageFrame.getPreferences().get(key, def);
             if (value == null) {
-                return null;
+                return def;
             }
             CACHE.put(key, value);
             return value;

@@ -51,18 +51,18 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
 
     private static final int MAX_ERRORS_COUNT_BEFORE_CANCEL = 50;
 
-    private DownloadImagesDialog uiDialog;
+    private final DownloadImagesDialog uiDialog;
     private boolean needCancel;
     private int errorCount;
     private int cardIndex;
 
     private List<CardInfo> cardsAll;
     private List<CardDownloadData> cardsMissing;
-    private List<CardDownloadData> cardsDownloadQueue;
+    private final List<CardDownloadData> cardsDownloadQueue;
     private int missingCardsCount = 0;
     private int missingTokensCount = 0;
 
-    private List<String> selectedSets = new ArrayList<>();
+    private final List<String> selectedSets = new ArrayList<>();
     private static CardImageSource selectedSource;
 
     private final Object sync = new Object();
@@ -617,7 +617,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
             uiDialog.getProgressBar().setString("Preparing download list...");
             if (selectedSource.prepareDownloadList(this, cardsDownloadQueue)) {
                 update(0, cardsDownloadQueue.size());
-                int numberOfThreads = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_THREADS, "10"));
+                int numberOfThreads = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_THREADS, PreferencesDialog.KEY_CARD_IMAGES_THREADS_DEFAULT));
                 ExecutorService executor = Executors.newFixedThreadPool(numberOfThreads);
                 for (int i = 0; i < cardsDownloadQueue.size() && !this.isNeedCancel(); i++) {
                     try {
