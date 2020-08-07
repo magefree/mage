@@ -101,7 +101,10 @@ public final class CardImageUtils {
     }
 
     public static String prepareCardNameForFile(String cardName) {
-        return cardName.replace(":", "").replace("\"", "").replace("//", "-");
+        return cardName
+                .replace(":", "")
+                .replace("\"", "")
+                .replace("//", "-");
     }
 
     public static String getImagesDir() {
