@@ -3,6 +3,7 @@ package mage.abilities.effects.common.continuous;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.constants.DependencyType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
@@ -18,14 +19,15 @@ import mage.players.Player;
  */
 public class CreaturesCantGetOrHaveAbilityEffect extends ContinuousEffectImpl {
 
-    private Ability ability;
-    private FilterCreaturePermanent filter;
+    private final Ability ability;
+    private final FilterCreaturePermanent filter;
 
     public CreaturesCantGetOrHaveAbilityEffect(Ability ability, Duration duration, FilterCreaturePermanent filter) {
         super(duration, Outcome.Detriment);
         this.ability = ability;
         this.filter = filter;
         setText();
+        addDependedToType(DependencyType.AddingAbility);
     }
 
     public CreaturesCantGetOrHaveAbilityEffect(final CreaturesCantGetOrHaveAbilityEffect effect) {
@@ -61,7 +63,7 @@ public class CreaturesCantGetOrHaveAbilityEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean hasLayer(Layer layer) {
-        return layer == Layer.RulesEffects;
+        return layer == Layer.AbilityAddingRemovingEffects_6;
     }
 
     private void setText() {
