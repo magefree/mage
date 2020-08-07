@@ -203,7 +203,7 @@ public final class CardImageUtils {
         String finalFileName = "";
         if (card.getUsesVariousArt()) {
             // different arts uses name + collector id
-            finalFileName = cardName + prefixType + '.' + card.getCollectorId() + ".full.jpg";
+            finalFileName = cardName + prefixType + '.' + card.getCollectorIdAsFileName() + ".full.jpg";
         } else {
             // basic arts uses name
             finalFileName = cardName + prefixType + ".full.jpg";

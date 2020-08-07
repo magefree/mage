@@ -4,8 +4,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import mage.cards.ExpansionSet;
-import mage.cards.Sets;
 import mage.client.util.CardLanguage;
 import mage.util.CardUtil;
 import org.apache.log4j.Logger;
@@ -30,7 +28,7 @@ public enum ScryfallImageSource implements CardImageSource {
 
     private final Map<CardLanguage, String> languageAliases;
     private CardLanguage currentLanguage = CardLanguage.ENGLISH; // working language
-    private Map<CardDownloadData, String> preparedUrls = new HashMap<>();
+    private final Map<CardDownloadData, String> preparedUrls = new HashMap<>();
 
     ScryfallImageSource() {
         // LANGUAGES
@@ -68,7 +66,7 @@ public enum ScryfallImageSource implements CardImageSource {
         // TOKENS TRY
 
         // tokens support only direct links
-        if (baseUrl == null && isToken) {
+        if (isToken) {
             baseUrl = ScryfallImageSupportTokens.findTokenLink(card.getSet(), card.getName(), card.getType());
             alternativeUrl = null;
         }

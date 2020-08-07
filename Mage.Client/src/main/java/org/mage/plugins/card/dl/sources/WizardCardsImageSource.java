@@ -461,7 +461,7 @@ public enum WizardCardsImageSource implements CardImageSource {
         String collectorId = card.getCollectorId();
         String cardSet = card.getSet();
         if (collectorId == null || cardSet == null) {
-            throw new Exception("Wrong parameters for image: collector id: " + collectorId + ",card set: " + cardSet);
+            throw new Exception("Wrong parameters for image: collector id: " + collectorId + ", card set: " + cardSet);
         }
         if (card.isFlippedSide()) { //doesn't support rotated images
             return null;
