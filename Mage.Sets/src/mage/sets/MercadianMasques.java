@@ -236,6 +236,7 @@ public final class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 332, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 333, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 334, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Port Inspector", 90, Rarity.COMMON, mage.cards.p.PortInspector.class));
         cards.add(new SetCardInfo("Power Matrix", 309, Rarity.RARE, mage.cards.p.PowerMatrix.class));
         cards.add(new SetCardInfo("Primeval Shambler", 152, Rarity.UNCOMMON, mage.cards.p.PrimevalShambler.class));
         cards.add(new SetCardInfo("Puffer Extract", 310, Rarity.UNCOMMON, mage.cards.p.PufferExtract.class));
@@ -264,6 +265,7 @@ public final class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Rishadan Footpad", 94, Rarity.UNCOMMON, mage.cards.r.RishadanFootpad.class));
         cards.add(new SetCardInfo("Rishadan Pawnshop", 311, Rarity.RARE, mage.cards.r.RishadanPawnshop.class));
         cards.add(new SetCardInfo("Rishadan Port", 324, Rarity.RARE, mage.cards.r.RishadanPort.class));
+        cards.add(new SetCardInfo("Robber Fly", 209, Rarity.UNCOMMON, mage.cards.r.RobberFly.class));
         cards.add(new SetCardInfo("Rock Badger", 210, Rarity.UNCOMMON, mage.cards.r.RockBadger.class));
         cards.add(new SetCardInfo("Rouse", 157, Rarity.COMMON, mage.cards.r.Rouse.class));
         cards.add(new SetCardInfo("Rushwood Dryad", 263, Rarity.COMMON, mage.cards.r.RushwoodDryad.class));
