@@ -1,4 +1,3 @@
-
 package mage.cards.f;
 
 import java.util.UUID;
@@ -65,14 +64,14 @@ public final class FracturedLoyalty extends CardImpl {
 
         @Override
         public boolean apply(Game game, Ability source) {
-            Permanent enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
+            Permanent enchantment = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
             if (enchantment != null) {
                 Permanent enchantedCreature = game.getPermanent(enchantment.getAttachedTo());
                 if (enchantedCreature != null) {
                     Player controller = game.getPlayer(enchantedCreature.getControllerId());
                     if (enchantment.getAttachedTo() != null) {
                         if (controller != null && !enchantedCreature.isControlledBy(this.getTargetPointer().getFirst(game, source))) {
-                            ContinuousEffect effect = new GainControlTargetEffect(Duration.Custom, this.getTargetPointer().getFirst(game, source));
+                            ContinuousEffect effect = new GainControlTargetEffect(Duration.EndOfGame, this.getTargetPointer().getFirst(game, source));
                             effect.setTargetPointer(new FixedTarget(enchantment.getAttachedTo()));
                             game.addEffect(effect, source);
                             return true;
