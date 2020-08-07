@@ -1,8 +1,6 @@
-
 package mage.cards.m;
 
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.BeginningOfDrawTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -17,19 +15,20 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.Target;
+import mage.game.stack.Spell;
+import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.Set;
 import java.util.UUID;
 
 /**
- *
  * @author emerald000
  */
 public final class MonasterySiege extends CardImpl {
 
     public MonasterySiege(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
 
         // As Monastery Siege enters the battlefield, choose Khans or Dragons.
         this.addAbility(new EntersBattlefieldAbility(new ChooseModeEffect("Khans or Dragons?", "Khans", "Dragons"), null,
@@ -57,6 +56,8 @@ public final class MonasterySiege extends CardImpl {
 
 class MonasterySiegeCostIncreaseEffect extends CostModificationEffectImpl {
 
+    private static ModeChoiceSourceCondition modeDragons = new ModeChoiceSourceCondition("Dragons");
+
     MonasterySiegeCostIncreaseEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);
         staticText = "&bull; Dragons &mdash; Spells your opponents cast that target you or a permanent you control cost {2} more to cast";
@@ -68,33 +69,55 @@ class MonasterySiegeCostIncreaseEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        SpellAbility spellAbility = (SpellAbility) abilityToModify;
-        CardUtil.adjustCost(spellAbility, -2);
+        CardUtil.increaseCost(abilityToModify, 2);
         return true;
     }
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (new ModeChoiceSourceCondition("Dragons").apply(game, source)) {
-            if (abilityToModify instanceof SpellAbility) {
-                if (game.getOpponents(source.getControllerId()).contains(abilityToModify.getControllerId())) {
-                    for (UUID modeId : abilityToModify.getModes().getSelectedModes()) {
-                        Mode mode = abilityToModify.getModes().get(modeId);
-                        for (Target target : mode.getTargets()) {
-                            for (UUID targetUUID : target.getTargets()) {
-                                if (targetUUID.equals(source.getControllerId())) {
-                                    return true;
-                                }
-                                Permanent permanent = game.getPermanent(targetUUID);
-                                if (permanent != null && permanent.isControlledBy(source.getControllerId())) {
-                                    return true;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+        if (!modeDragons.apply(game, source)) {
+            return false;
         }
+
+        if (!(abilityToModify instanceof SpellAbility)) {
+            return false;
+        }
+
+        if (!game.getOpponents(source.getControllerId()).contains(abilityToModify.getControllerId())) {
+            return false;
+        }
+
+        Spell spell = (Spell) game.getStack().getStackObject(abilityToModify.getId());
+        Set<UUID> allTargets;
+        if (spell != null) {
+            // real cast
+            allTargets = CardUtil.getAllSelectedTargets(abilityToModify, game);
+        } else {
+            // playable
+            allTargets = CardUtil.getAllPossibleTargets(abilityToModify, game);
+
+            // can target without cost increase
+            if (allTargets.stream().anyMatch(target -> !isTargetCompatible(target, source, game))) {
+                return false;
+            }
+            ;
+        }
+
+        return allTargets.stream().anyMatch(target -> isTargetCompatible(target, source, game));
+    }
+
+    private boolean isTargetCompatible(UUID target, Ability source, Game game) {
+        // target you or a permanent you control
+        Player targetPlayer = game.getPlayer(target);
+        if (targetPlayer != null && targetPlayer.getId().equals(source.getControllerId())) {
+            return true;
+        }
+
+        Permanent targetPermanent = game.getPermanent(target);
+        if (targetPermanent != null && targetPermanent.isControlledBy(source.getControllerId())) {
+            return true;
+        }
+
         return false;
     }
 

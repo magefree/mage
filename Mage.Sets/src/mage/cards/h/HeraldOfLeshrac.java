@@ -97,7 +97,7 @@ class HeraldOfLeshracCumulativeCost extends CostImpl {
             ContinuousEffect effect = new GainControlTargetEffect(Duration.EndOfGame);
             effect.setTargetPointer(new FixedTarget(target.getFirstTarget()));
             game.addEffect(effect, ability);
-            game.applyEffects();
+            game.getState().processAction(game);
             paid = true;
         }
         return paid;
@@ -141,7 +141,7 @@ class HeraldOfLeshracLeavesEffect extends OneShotEffect {
             filter.add(new ControllerIdPredicate(source.getControllerId()));
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
                 ContinuousEffect effect = new GainControlTargetEffect(Duration.EndOfGame, playerId);
-                effect.setTargetPointer(new FixedTarget(permanent.getId()));
+                effect.setTargetPointer(new FixedTarget(permanent, game));
                 game.addEffect(effect, source);
             }
         }

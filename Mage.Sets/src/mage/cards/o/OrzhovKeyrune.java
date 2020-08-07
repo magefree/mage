@@ -1,7 +1,5 @@
-
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -12,22 +10,22 @@ import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.token.TokenImpl;
-import mage.game.permanent.token.Token;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class OrzhovKeyrune extends CardImpl {
 
     public OrzhovKeyrune(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
-        // {{T}: Add {W} or {B}.
+        // {T}: Add {W} or {B}.
         this.addAbility(new WhiteManaAbility());
         this.addAbility(new BlackManaAbility());
 
@@ -56,6 +54,7 @@ public final class OrzhovKeyrune extends CardImpl {
             toughness = new MageInt(4);
             this.addAbility(LifelinkAbility.getInstance());
         }
+
         public OrzhovKeyruneToken(final OrzhovKeyruneToken token) {
             super(token);
         }

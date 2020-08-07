@@ -1,24 +1,25 @@
-
 package mage.cards.l;
 
-import java.util.UUID;
-
 import mage.MageInt;
-import mage.abilities.TriggeredAbility;
-import mage.abilities.common.OnEventTriggeredAbility;
+import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.YouGainedLifeCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
+import mage.abilities.hint.ConditionHint;
+import mage.abilities.hint.Hint;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.ComparisonType;
-import mage.game.events.GameEvent;
+import mage.constants.SubType;
+import mage.constants.TargetController;
 import mage.watchers.common.PlayerGainedLifeWatcher;
+
+import java.util.UUID;
 
 /**
  * @author fireshoes
@@ -26,6 +27,8 @@ import mage.watchers.common.PlayerGainedLifeWatcher;
 public final class LoneRider extends CardImpl {
 
     private static final String ruleText = "At the beginning of the end step, if you gained 3 or more life this turn, transform {this}";
+    private static final Condition condition = new YouGainedLifeCondition(ComparisonType.MORE_THAN, 2);
+    private static final Hint hint = new ConditionHint(condition, "You gained 3 or more life this turn");
 
     public LoneRider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
@@ -45,11 +48,14 @@ public final class LoneRider extends CardImpl {
 
         // At the beginning of the end step, if you gained 3 or more life this turn, transform Lone Rider.
         this.addAbility(new TransformAbility());
-        TriggeredAbility triggered = new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new TransformSourceEffect(true));
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(triggered, new YouGainedLifeCondition(ComparisonType.MORE_THAN, 2), ruleText), new PlayerGainedLifeWatcher());
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
+                new BeginningOfEndStepTriggeredAbility(
+                        new TransformSourceEffect(true), TargetController.NEXT, false
+                ), condition, ruleText
+        ), new PlayerGainedLifeWatcher());
     }
 
-    public LoneRider(final LoneRider card) {
+    private LoneRider(final LoneRider card) {
         super(card);
     }
 

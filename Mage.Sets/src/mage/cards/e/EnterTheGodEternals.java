@@ -1,5 +1,6 @@
 package mage.cards.e;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.keyword.AmassEffect;
@@ -7,15 +8,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -45,8 +43,8 @@ class EnterTheGodEternalsEffect extends OneShotEffect {
 
     EnterTheGodEternalsEffect() {
         super(Outcome.Benefit);
-        staticText = "{this} deals 4 damage to target creature and you gain life equal to the damage dealt this way. " +
-                "Target player puts the top four cards of their library into their graveyard. Amass 4.";
+        staticText = "{this} deals 4 damage to target creature and you gain life equal to the damage dealt this way. "
+                + "Target player mills four cards. Amass 4.";
     }
 
     private EnterTheGodEternalsEffect(final EnterTheGodEternalsEffect effect) {
@@ -73,7 +71,7 @@ class EnterTheGodEternalsEffect extends OneShotEffect {
                 }
                 Player player = game.getPlayer(targetId);
                 if (player != null) {
-                    player.moveCards(player.getLibrary().getTopCards(game, 4), Zone.GRAVEYARD, source, game);
+                    player.millCards(4, source, game);
                 }
             }
         }

@@ -3,7 +3,7 @@ package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BecomesBlockedTriggeredAbility;
+import mage.abilities.common.BecomesBlockedSourceTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -24,7 +24,7 @@ public final class ChamberedNautilus extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Chambered Nautilus becomes blocked, you may draw a card.
-        this.addAbility(new BecomesBlockedTriggeredAbility(new DrawCardSourceControllerEffect(1), true));
+        this.addAbility(new BecomesBlockedSourceTriggeredAbility(new DrawCardSourceControllerEffect(1), true));
     }
 
     public ChamberedNautilus(final ChamberedNautilus card) {

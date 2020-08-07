@@ -101,7 +101,7 @@ class HellkiteTyrantEffect extends OneShotEffect {
         List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game);
         for (Permanent permanent : permanents) {
             ContinuousEffect effect = new HellkiteTyrantControlEffect(source.getControllerId());
-            effect.setTargetPointer(new FixedTarget(permanent.getId()));
+            effect.setTargetPointer(new FixedTarget(permanent, game));
             game.addEffect(effect, source);
         }
         return true;

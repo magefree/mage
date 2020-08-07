@@ -3,7 +3,7 @@ package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.DrawCardAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -21,7 +21,7 @@ public final class RunedServitor extends CardImpl {
         this.subtype.add(SubType.CONSTRUCT);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        this.addAbility(new DiesTriggeredAbility(new DrawCardAllEffect(1), false));
+        this.addAbility(new DiesSourceTriggeredAbility(new DrawCardAllEffect(1), false));
     }
 
     public RunedServitor(final RunedServitor card) {

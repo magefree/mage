@@ -1,7 +1,5 @@
-
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -14,10 +12,11 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.other.FaceDownPredicate;
+import mage.filter.predicate.other.FaceDownCastablePredicate;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class ObscuringAether extends CardImpl {
@@ -25,7 +24,7 @@ public final class ObscuringAether extends CardImpl {
     private static final FilterCreatureCard filter = new FilterCreatureCard("Face-down creature spells");
 
     static {
-        filter.add(FaceDownPredicate.instance);
+        filter.add(FaceDownCastablePredicate.instance);
     }
 
     public ObscuringAether(UUID ownerId, CardSetInfo setInfo) {

@@ -1,7 +1,5 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -19,8 +17,9 @@ import mage.target.Target;
 import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class BenevolentOffering extends CardImpl {
@@ -69,10 +68,10 @@ class BenevolentOfferingEffect1 extends OneShotEffect {
             target.choose(Outcome.Sacrifice, source.getControllerId(), source.getSourceId(), game);
             Player opponent = game.getPlayer(target.getFirstTarget());
             if (opponent != null) {
-                Effect effect = new CreateTokenTargetEffect(new SpiritWhiteToken("C14"), 3);
+                Effect effect = new CreateTokenTargetEffect(new SpiritWhiteToken(), 3);
                 effect.setTargetPointer(new FixedTarget(opponent.getId()));
                 effect.apply(game, source);
-                new CreateTokenEffect(new SpiritWhiteToken("C14"), 3).apply(game, source);
+                new CreateTokenEffect(new SpiritWhiteToken(), 3).apply(game, source);
                 return true;
             }
         }

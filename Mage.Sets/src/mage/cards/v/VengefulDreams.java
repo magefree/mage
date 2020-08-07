@@ -1,6 +1,5 @@
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.DiscardXTargetCost;
 import mage.abilities.effects.Effect;
@@ -15,6 +14,8 @@ import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.targetadjustment.TargetAdjuster;
 
+import java.util.UUID;
+
 /**
  * @author fireshoes
  */
@@ -24,7 +25,7 @@ public final class VengefulDreams extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}{W}");
 
         // As an additional cost to cast Vengeful Dreams, discard X cards.
-        this.getSpellAbility().addCost(new DiscardXTargetCost(new FilterCard("cards"), true));
+        this.getSpellAbility().addCost(new DiscardXTargetCost(new FilterCard("cards"), false));
 
         // Exile X target attacking creatures.
         Effect effect = new ExileTargetEffect();

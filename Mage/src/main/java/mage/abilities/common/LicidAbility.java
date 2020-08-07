@@ -1,4 +1,3 @@
-
 package mage.abilities.common;
 
 import java.util.ArrayList;
@@ -78,7 +77,7 @@ class LicidEffect extends OneShotEffect {
         if (licid != null) {
             UUID messageId = UUID.randomUUID();
             LicidContinuousEffect effect = new LicidContinuousEffect(messageId);
-            effect.setTargetPointer(new FixedTarget(licid.getId()));
+            effect.setTargetPointer(new FixedTarget(licid, game));
             game.addEffect(effect, source);
             new AttachEffect(Outcome.Neutral).apply(game, source);
             SpecialAction specialAction = new LicidSpecialAction(this.specialActionCost, messageId, licid.getIdName());
@@ -130,7 +129,8 @@ class LicidContinuousEffect extends ContinuousEffectImpl {
                             }
                         }
                     }
-                    licid.getAbilities(game).removeAll(toRemove);
+                    licid.removeAbilities(toRemove, source.getSourceId(), game);
+
                     Ability ability = new EnchantAbility("creature");
                     ability.setRuleAtTheTop(true);
                     licid.addAbility(ability, source.getSourceId(), game);

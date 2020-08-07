@@ -240,9 +240,7 @@ class DanceOfTheDeadChangeAbilityEffect extends ContinuousEffectImpl implements 
                     abilityToRemove = ability;
                 }
             }
-            if (abilityToRemove != null) {
-                permanent.getAbilities().remove(abilityToRemove);
-            }
+            permanent.removeAbility(abilityToRemove, source.getSourceId(), game);
             permanent.addAbility(newAbility, source.getSourceId(), game);
             return true;
         }

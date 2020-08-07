@@ -100,7 +100,7 @@ class GravityWellEffect extends ContinuousEffectImpl {
             switch (layer) {
                 case AbilityAddingRemovingEffects_6:
                     if (sublayer == SubLayer.NA) {
-                        permanent.getAbilities().removeIf(entry -> entry.getId().equals(FlyingAbility.getInstance().getId()));
+                        permanent.removeAbility(FlyingAbility.getInstance(), source.getSourceId(), game);
                     }
                     break;
             }

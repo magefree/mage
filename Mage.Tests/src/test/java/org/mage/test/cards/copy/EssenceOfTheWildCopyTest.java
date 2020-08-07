@@ -1,19 +1,19 @@
 package org.mage.test.cards.copy;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.filter.Filter;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author JayDi85
@@ -22,7 +22,6 @@ public class EssenceOfTheWildCopyTest extends CardTestPlayerBase {
 
     // Essence of the Wild {3}{G}{G}{G}
     // Creatures you control enter the battlefield as a copy of Essence of the Wild.
-
     private Permanent findCopyPermanent(Game game, int num) {
         int currentCopyNumber = 1;
         for (Permanent perm : game.getBattlefield().getAllActivePermanents()) {
@@ -169,4 +168,36 @@ public class EssenceOfTheWildCopyTest extends CardTestPlayerBase {
         Assert.assertEquals("copy must have 6 p/t", 6, copy.getPower().getValue());
         Assert.assertEquals("copy must have 6 p/t", 6, copy.getToughness().getValue());
     }
+
+    @Test
+    public void testCopyFromTheCopy() {
+        // Creatures you control enter the battlefield as a copy of Essence of the Wild.
+        addCard(Zone.BATTLEFIELD, playerA, "Essence of the Wild", 1);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+        addCard(Zone.HAND, playerA, "Silvercoat Lion", 2);
+
+        // Destroy target nonartifact, nonblack creature. It can't be regenerated.
+        addCard(Zone.HAND, playerB, "Terror", 1); // Instant {1}{B}
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
+
+        castSpell(1, PhaseStep.BEGIN_COMBAT, playerB, "Terror", "Essence of the Wild[no copy]");
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Silvercoat Lion");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertGraveyardCount(playerB, "Terror", 1);
+        assertGraveyardCount(playerA, "Essence of the Wild", 1);
+        assertPermanentCount(playerA, "Silvercoat Lion", 0);
+        assertPermanentCount(playerA, "Essence of the Wild", 2);
+
+        assertPowerToughness(playerA, "Essence of the Wild", 6, 6, Filter.ComparisonScope.All);
+    }
+
 }

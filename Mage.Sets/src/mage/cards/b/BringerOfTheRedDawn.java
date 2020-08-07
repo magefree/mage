@@ -41,11 +41,11 @@ public final class BringerOfTheRedDawn extends CardImpl {
         Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.YOU, true);
         
         effect = new GainControlTargetEffect(Duration.EndOfTurn);
-        effect.setText("and gain control of it until end of turn.");
+        effect.setText("and gain control of it until end of turn");
         ability.addEffect(effect);
         
         effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("That creature gains haste until end of turn.");
+        effect.setText("That creature gains haste until end of turn");
         ability.addEffect(effect);
         
         ability.addTarget(new TargetCreaturePermanent());

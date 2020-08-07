@@ -14,8 +14,8 @@ import org.mage.card.arcane.UI;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Locale;
+import java.util.List;
+import java.util.*;
 
 import static mage.client.dialog.PreferencesDialog.KEY_MAGE_PANEL_LAST_SIZE;
 
@@ -38,7 +38,7 @@ public final class GuiDisplayUtil {
             this.basicTextLength = basicTextLength;
         }
 
-        public java.util.List<String> getLines() {
+        public List<String> getLines() {
             return lines;
         }
 
@@ -343,6 +343,9 @@ public final class GuiDisplayUtil {
         }
         buffer.append("</td></tr></table>");
 
+        // split card rules shows up by parts, so no needs to duplicate it later (only dynamic abilities must be shown)
+        Set<String> duplicatedRules = new HashSet<>();
+
         StringBuilder rule = new StringBuilder("<br/>");
         if (card.isSplitCard()) {
             rule.append("<table cellspacing=0 cellpadding=0 border=0 width='100%'>");
@@ -355,7 +358,9 @@ public final class GuiDisplayUtil {
             rule.append("</td></tr></table>");
             for (String ruling : card.getLeftSplitRules()) {
                 if (ruling != null && !ruling.replace(".", "").trim().isEmpty()) {
-                    rule.append("<p style='margin: 2px'>").append(ruling).append("</p>");
+                    // split names must be replaced
+                    duplicatedRules.add(ruling);
+                    rule.append("<p style='margin: 2px'>").append(replaceNamesInRule(ruling, card.getLeftSplitName())).append("</p>");
                 }
             }
             rule.append("<table cellspacing=0 cellpadding=0 border=0 width='100%'>");
@@ -368,13 +373,18 @@ public final class GuiDisplayUtil {
             rule.append("</td></tr></table>");
             for (String ruling : card.getRightSplitRules()) {
                 if (ruling != null && !ruling.replace(".", "").trim().isEmpty()) {
-                    rule.append("<p style='margin: 2px'>").append(ruling).append("</p>");
+                    // split names must be replaced
+                    duplicatedRules.add(ruling);
+                    rule.append("<p style='margin: 2px'>").append(replaceNamesInRule(ruling, card.getRightSplitName())).append("</p>");
                 }
             }
         }
         if (!textLines.getLines().isEmpty()) {
             for (String textLine : textLines.getLines()) {
                 if (textLine != null && !textLine.replace(".", "").trim().isEmpty()) {
+                    if (duplicatedRules.contains(textLine)) {
+                        continue;
+                    }
                     rule.append("<p style='margin: 2px'>").append(textLine).append("</p>");
                 }
             }
@@ -382,8 +392,7 @@ public final class GuiDisplayUtil {
 
         String legal = rule.toString();
         if (!legal.isEmpty()) {
-            legal = legal.replaceAll("\\{this\\}", card.getName().isEmpty() ? "this" : card.getName());
-            legal = legal.replaceAll("\\{source\\}", card.getName().isEmpty() ? "this" : card.getName());
+            legal = replaceNamesInRule(legal, card.getDisplayName()); // must show real display name (e.g. split part, not original card)
             buffer.append(ManaSymbols.replaceSymbolsWithHTML(legal, ManaSymbols.Type.TOOLTIP));
         }
 
@@ -394,6 +403,12 @@ public final class GuiDisplayUtil {
 
         buffer.append("<br></body></html>");
         return buffer;
+    }
+
+    private static String replaceNamesInRule(String rule, String cardName) {
+        String res = rule.replaceAll("\\{this\\}", cardName.isEmpty() ? "this" : cardName);
+        res = res.replaceAll("\\{source\\}", cardName.isEmpty() ? "this" : cardName);
+        return res;
     }
 
     private static String getResourcePath(String image) {

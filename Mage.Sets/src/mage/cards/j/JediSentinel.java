@@ -1,7 +1,5 @@
-
 package mage.cards.j;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -12,25 +10,23 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Styxo
  */
 public final class JediSentinel extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter1 = new FilterControlledCreaturePermanent("another target creature you control");
-    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creature you don't control");
 
     static {
         filter1.add(AnotherPredicate.instance);
-        filter2.add(TargetController.NOT_YOU.getControllerPredicate());
     }
 
     public JediSentinel(UUID ownerId, CardSetInfo setInfo) {
@@ -48,12 +44,11 @@ public final class JediSentinel extends CardImpl {
         effect.setText("return another target creature you control and target creature you don't control to their owners' hands");
         Ability ability = new EntersBattlefieldTriggeredAbility(effect);
         ability.addTarget(new TargetControlledCreaturePermanent(filter1));
-        ability.addTarget(new TargetCreaturePermanent(filter2));
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
         this.addAbility(ability);
-
     }
 
-    public JediSentinel(final JediSentinel card) {
+    private JediSentinel(final JediSentinel card) {
         super(card);
     }
 

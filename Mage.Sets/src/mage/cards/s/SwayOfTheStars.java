@@ -1,8 +1,6 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -10,6 +8,8 @@ import mage.abilities.effects.common.DrawCardAllEffect;
 import mage.abilities.effects.common.SetPlayerLifeAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -50,7 +50,7 @@ class SwayOfTheStarsEffect extends OneShotEffect {
 
     public SwayOfTheStarsEffect() {
         super(Outcome.Neutral);
-        staticText = "Each player shuffles their hand, graveyard, and permanents they own into their library, then draws seven cards. Each player's life total becomes 7";
+        staticText = "Each player shuffles their hand, graveyard, and permanents they own into their library";
     }
 
     public SwayOfTheStarsEffect(final SwayOfTheStarsEffect effect) {
@@ -68,10 +68,11 @@ class SwayOfTheStarsEffect extends OneShotEffect {
                     player.moveCards(player.getGraveyard(), Zone.LIBRARY, source, game);
                     FilterPermanent filter = new FilterPermanent();
                     filter.add(new OwnerIdPredicate(playerId));
+                    Cards toLib = new CardsImpl();
                     for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, controller.getId(), source.getSourceId(), game)) {
-                        permanent.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
+                        toLib.add(permanent);
                     }
-                    player.shuffleLibrary(source, game);
+                    player.shuffleCardsToLibrary(toLib, game, source);
                 }
             }
         }

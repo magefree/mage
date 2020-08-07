@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SkipNextPlayerUntapStepEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -44,7 +44,7 @@ public final class YoseiTheMorningStar extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Yosei, the Morning Star dies, target player skips their next untap step. Tap up to five target permanents that player controls.
-        Ability ability = new DiesTriggeredAbility(new SkipNextPlayerUntapStepEffect("target"));
+        Ability ability = new DiesSourceTriggeredAbility(new SkipNextPlayerUntapStepEffect("target"));
         ability.addTarget(new TargetPlayer());
         ability.addTarget(new YoseiTheMorningStarTarget());
         ability.addEffect(new YoseiTheMorningStarTapEffect());

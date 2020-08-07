@@ -1,24 +1,23 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetCardInHand;
+import mage.target.common.TargetDiscard;
+
+import java.util.UUID;
 
 /**
- *
  * @author cbt33
  */
 public final class SacredRites extends CardImpl {
@@ -30,7 +29,7 @@ public final class SacredRites extends CardImpl {
         this.getSpellAbility().addEffect(new SacredRitesEffect());
     }
 
-    public SacredRites(final SacredRites card) {
+    private SacredRites(final SacredRites card) {
         super(card);
     }
 
@@ -43,11 +42,11 @@ public final class SacredRites extends CardImpl {
 class SacredRitesEffect extends OneShotEffect {
 
     SacredRitesEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.AIDontUseIt);
         this.staticText = "Discard any number of cards. Creatures you control get +0/+1 until end of turn for each card discarded this way.";
     }
 
-    SacredRitesEffect(final SacredRitesEffect effect) {
+    private SacredRitesEffect(final SacredRitesEffect effect) {
         super(effect);
     }
 
@@ -59,21 +58,15 @@ class SacredRitesEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Target target = new TargetCardInHand(0, Integer.MAX_VALUE, new FilterCard("cards to discard"));
-            while (controller.canRespond() && !target.isChosen()) {
-                target.choose(Outcome.BoostCreature, controller.getId(), source.getSourceId(), game);
-            }
-            int numDiscarded = 0;
-            for (UUID targetId : target.getTargets()) {
-                Card card = controller.getHand().get(targetId, game);
-                if (controller.discard(card, source, game)) {
-                    numDiscarded++;
-                }
-            }
-            game.addEffect(new BoostControlledEffect(0, numDiscarded, Duration.EndOfTurn), source);
-            return true;
+        if (controller == null) {
+            return false;
         }
-        return false;
+        Target target = new TargetDiscard(0, Integer.MAX_VALUE, StaticFilters.FILTER_CARD, controller.getId());
+        target.choose(outcome, controller.getId(), source.getSourceId(), game);
+        int numDiscarded = controller.discard(new CardsImpl(target.getTargets()), source, game).size();
+        if (numDiscarded > 0) {
+            game.addEffect(new BoostControlledEffect(0, numDiscarded, Duration.EndOfTurn), source);
+        }
+        return true;
     }
 }

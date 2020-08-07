@@ -85,7 +85,7 @@ class RayamiFirstOfTheFallenEffect extends ContinuousEffectImpl {
                             || ability instanceof DoubleStrikeAbility
                             || ability instanceof DeathtouchAbility
                             || ability instanceof HasteAbility
-                            || ability instanceof HexproofAbility
+                            || ability instanceof HexproofBaseAbility
                             || ability instanceof IndestructibleAbility
                             || ability instanceof LifelinkAbility
                             || ability instanceof MenaceAbility

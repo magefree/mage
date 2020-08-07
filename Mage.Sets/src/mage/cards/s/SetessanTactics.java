@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.abilityword.StriveAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -19,8 +17,9 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class SetessanTactics extends CardImpl {
@@ -36,6 +35,7 @@ public final class SetessanTactics extends CardImpl {
 
         // Strive - Setessan Tactics costs G more to cast for each target beyond the first.
         this.addAbility(new StriveAbility("{G}"));
+
         // Until end of turn, any number of target creatures each get +1/+1 and gain "T: This creature fights another target creature."
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, Integer.MAX_VALUE));
         Effect effect = new BoostTargetEffect(1, 1, Duration.EndOfTurn);

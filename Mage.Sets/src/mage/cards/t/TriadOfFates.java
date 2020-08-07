@@ -1,7 +1,5 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -14,11 +12,7 @@ import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetE
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -29,8 +23,9 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class TriadOfFates extends CardImpl {
@@ -44,7 +39,7 @@ public final class TriadOfFates extends CardImpl {
     }
 
     public TriadOfFates(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{B}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
@@ -64,7 +59,7 @@ public final class TriadOfFates extends CardImpl {
         ability.addCost(new TapSourceCost());
         target = new TargetCreaturePermanent(filterCounter);
         ability.addTarget(target);
-        ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect());
+        ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false));
         this.addAbility(ability);
 
         // {B}, {T}: Exile target creature that has a fate counter on it. Its controller draws two cards.
@@ -108,7 +103,7 @@ class DrawCardControllerTargetEffect extends OneShotEffect {
         if (creature != null) {
             Player controllerOfTarget = game.getPlayer(creature.getControllerId());
             if (controllerOfTarget != null) {
-                controllerOfTarget.drawCards(2, game);
+                controllerOfTarget.drawCards(2, source.getSourceId(), game);
             }
         }
         return false;

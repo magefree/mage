@@ -67,7 +67,7 @@ class FlayedNimEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent creature = ((FixedTarget) targetPointer).getTargetedPermanentOrLKIBattlefield(game);
+        Permanent creature = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (creature == null) {
             return false;
         }

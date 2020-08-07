@@ -9,8 +9,8 @@ import mage.game.Game;
  */
 public class ValueHint implements Hint {
 
-    private String name;
-    private DynamicValue value;
+    private final String name;
+    private final DynamicValue value;
 
     public ValueHint(String name, DynamicValue value) {
         this.name = name;

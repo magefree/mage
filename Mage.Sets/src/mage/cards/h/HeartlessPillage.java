@@ -1,20 +1,21 @@
-
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.abilities.condition.common.RaidCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
+import mage.abilities.hint.common.RaidHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.game.permanent.token.TreasureToken;
 import mage.target.common.TargetOpponent;
 import mage.watchers.common.PlayerAttackedWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class HeartlessPillage extends CardImpl {
@@ -32,6 +33,8 @@ public final class HeartlessPillage extends CardImpl {
                 RaidCondition.instance,
                 "<br/><br/><i>Raid</i> &mdash; If you attacked with a creature this turn, create a colorless Treasure artifact token with \"{T}, Sacrifice this artifact: Add one mana of any color.\""));
         this.getSpellAbility().addWatcher(new PlayerAttackedWatcher());
+        this.getSpellAbility().setAbilityWord(AbilityWord.RAID);
+        this.getSpellAbility().addHint(RaidHint.instance);
     }
 
     public HeartlessPillage(final HeartlessPillage card) {

@@ -19,7 +19,8 @@ public class LimitedOptions implements Serializable {
     protected int numberBoosters;
     protected boolean isRandom;
     protected boolean isRichMan;
-    protected Deck cubeFromDeck = null;
+    protected Deck cubeFromDeck;
+    protected boolean isJumpstart;
 
     public List<String> getSetCodes() {
         return sets;
@@ -80,4 +81,13 @@ public class LimitedOptions implements Serializable {
     public void setIsRichMan(boolean isRichMan) {
         this.isRichMan = isRichMan;
     }
+
+    public void setIsJumpstart(boolean isJumpstart) {
+        this.isJumpstart = isJumpstart;
+    }
+
+    public boolean getIsJumpstart() {
+        return this.isJumpstart;
+    }
+
 }

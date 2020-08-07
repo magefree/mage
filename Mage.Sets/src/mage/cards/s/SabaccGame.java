@@ -76,7 +76,7 @@ class SabaccGameEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Permanent targetPermanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+            Permanent targetPermanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
             if (targetPermanent != null) {
                 Player opponent = game.getPlayer(targetPermanent.getControllerId());
                 if (opponent != null) {

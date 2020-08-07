@@ -84,7 +84,7 @@ public class AngelOfJubilationTest extends CardTestPlayerBase {
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{2}, Sacrifice a permanent you control: Return target creature to its owner's hand.");
         addTarget(playerB, "Angel of Jubilation"); // return to hand
-        setChoice(playerB, "Food Chain"); // cacrifice cost
+        setChoice(playerB, "Food Chain"); // sacrifice cost
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -177,4 +177,71 @@ public class AngelOfJubilationTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Wasteland", 0);
     }
 
+    /**
+     * https://github.com/magefree/mage/issues/3663
+     *
+     * Angel of Jubilation should just prevent paying life for activating
+     * abilities, but currently when it is out the opponent is not prompted to
+     * choose whether or not to pay life for Athreos.
+     */
+    @Test
+    public void testAthreosLifePayNotPrevented() {
+        setStrictChooseMode(true);
+        // Other nonblack creatures you control get +1/+1. 
+        // Players can't pay life or sacrifice creatures to cast spells or activate abilities
+        addCard(Zone.BATTLEFIELD, playerA, "Angel of Jubilation");
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
+
+        // Indestructible
+        // As long as your devotion to white and black is less than seven, Athreos isn't a creature.
+        // Whenever another creature you own dies, return it to your hand unless target opponent pays 3 life.        
+        addCard(Zone.BATTLEFIELD, playerA, "Athreos, God of Passage");        
+
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain");
+        addCard(Zone.HAND, playerB, "Lightning Bolt");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", "Silvercoat Lion");
+        setChoice(playerB, "Yes"); // Pay 3 life to prevent that returns to PlayerA's hand?
+
+        addTarget(playerA, playerB);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertAllCommandsUsed();
+
+        assertGraveyardCount(playerB, "Lightning Bolt", 1);
+        assertGraveyardCount(playerA, "Silvercoat Lion", 1);
+        
+        assertLife(playerA, 20);
+        assertLife(playerB, 17);
+
+    }
+
+    /**
+     * 5/1/2012
+     *
+     * If a spell or activated ability has a cost that requires a player to pay
+     * life (as Griselbrand’s activated ability does) or sacrifice a creature
+     * (as Fling does), that spell or ability can’t be cast or activated.
+     */
+    
+    @Test
+    public void testGriselbrandCantPay() {
+        setStrictChooseMode(true);
+        // Other nonblack creatures you control get +1/+1. 
+        // Players can't pay life or sacrifice creatures to cast spells or activate abilities
+        addCard(Zone.BATTLEFIELD, playerA, "Angel of Jubilation");
+
+        // Pay 7 life: Draw seven cards.
+        addCard(Zone.BATTLEFIELD, playerB, "Griselbrand");
+        
+        checkPlayableAbility("activated ability", 1, PhaseStep.PRECOMBAT_MAIN, playerB, "Pay 7 life", false);
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertAllCommandsUsed();
+
+    }    
 }

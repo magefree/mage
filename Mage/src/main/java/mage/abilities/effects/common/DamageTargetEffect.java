@@ -122,8 +122,7 @@ public class DamageTargetEffect extends OneShotEffect {
                         permanent.damage(amount.calculate(game, source, this), source.getSourceId(), game, false, preventable);
                     }
                     Player player = game.getPlayer(targetId);
-                    if (player != null
-                            && player.isInGame()) {
+                    if (player != null) {
                         player.damage(amount.calculate(game, source, this), source.getSourceId(), game, false, preventable);
                     }
                 }
@@ -136,8 +135,7 @@ public class DamageTargetEffect extends OneShotEffect {
                 permanent.damage(amount.calculate(game, source, this), source.getSourceId(), game, false, preventable);
             } else {
                 Player player = game.getPlayer(targetId);
-                if (player != null
-                        && player.isInGame()) {
+                if (player != null) {
                     player.damage(amount.calculate(game, source, this), source.getSourceId(), game, false, preventable);
                 }
             }

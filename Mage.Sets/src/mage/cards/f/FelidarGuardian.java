@@ -1,7 +1,5 @@
-
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -16,8 +14,9 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Styxo
  */
 public final class FelidarGuardian extends CardImpl {
@@ -39,7 +38,7 @@ public final class FelidarGuardian extends CardImpl {
         // When Felidar Guardian enters the battlefield, you may exile another target permanent you control, then return that card to the battlefield under its owner's control.
         Effect effect = new ExileTargetForSourceEffect();
         Ability ability = new EntersBattlefieldTriggeredAbility(effect, true);
-        ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect());
+        ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false));
         ability.addTarget(new TargetControlledPermanent(filter));
         this.addAbility(ability);
 

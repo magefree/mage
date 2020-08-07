@@ -1,27 +1,19 @@
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.SendOptionUsedEventEffect;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.counters.Counters;
 import mage.filter.FilterCard;
@@ -33,8 +25,9 @@ import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class IsarethTheAwakener extends CardImpl {
@@ -55,7 +48,7 @@ public final class IsarethTheAwakener extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new IsarethTheAwakenerCreateReflexiveTriggerEffect(), false));
     }
 
-    public IsarethTheAwakener(final IsarethTheAwakener card) {
+    private IsarethTheAwakener(final IsarethTheAwakener card) {
         super(card);
     }
 
@@ -67,15 +60,17 @@ public final class IsarethTheAwakener extends CardImpl {
 
 class IsarethTheAwakenerCreateReflexiveTriggerEffect extends OneShotEffect {
 
-    public IsarethTheAwakenerCreateReflexiveTriggerEffect() {
+    private static final String rule = "return target creature card "
+            + "with converted mana cost X from your graveyard to the battlefield "
+            + "with a corpse counter on it. If that creature would leave the battlefield, "
+            + "exile it instead of putting it anywhere else.";
+
+    IsarethTheAwakenerCreateReflexiveTriggerEffect() {
         super(Outcome.Benefit);
-        this.staticText = "you may pay {X}. When you do, return target creature card "
-                + "with converted mana cost X from your graveyard to the battlefield "
-                + "with a corpse counter on it. If that creature would leave the battlefield, "
-                + "exile it instead of putting it anywhere else.";
+        this.staticText = "you may pay {X}. When you do, " + rule;
     }
 
-    public IsarethTheAwakenerCreateReflexiveTriggerEffect(final IsarethTheAwakenerCreateReflexiveTriggerEffect effect) {
+    private IsarethTheAwakenerCreateReflexiveTriggerEffect(final IsarethTheAwakenerCreateReflexiveTriggerEffect effect) {
         super(effect);
     }
 
@@ -97,67 +92,34 @@ class IsarethTheAwakenerCreateReflexiveTriggerEffect extends OneShotEffect {
         if (!cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
             return false;
         }
-        game.addDelayedTriggeredAbility(new IsarethTheAwakenerReflexiveTriggeredAbility(), source);
-        return new SendOptionUsedEventEffect(costX).apply(game, source);
-    }
-}
-
-class IsarethTheAwakenerReflexiveTriggeredAbility extends DelayedTriggeredAbility {
-
-    public IsarethTheAwakenerReflexiveTriggeredAbility() {
-        super(new IsarethTheAwakenerEffect(), Duration.OneUse, true);
-        this.addEffect(new IsarethTheAwakenerReplacementEffect());
-    }
-
-    public IsarethTheAwakenerReflexiveTriggeredAbility(final IsarethTheAwakenerReflexiveTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public IsarethTheAwakenerReflexiveTriggeredAbility copy() {
-        return new IsarethTheAwakenerReflexiveTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.OPTION_USED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (!event.getPlayerId().equals(this.getControllerId())
-                || !event.getSourceId().equals(this.getSourceId())) {
-            return false;
-        }
-        FilterCard filter = new FilterCreatureCard(
-                "creature card with converted mana cost "
-                + event.getAmount()
-                + " or less from your graveyard"
+        ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
+                new IsarethTheAwakenerEffect(), false, rule
         );
-        filter.add(new ConvertedManaCostPredicate(
-                ComparisonType.FEWER_THAN, event.getAmount() + 1
-        ));
-        this.getTargets().clear();
-        this.addTarget(new TargetCardInYourGraveyard(filter));
+        ability.addEffect(new IsarethTheAwakenerReplacementEffect());
+        ability.addTarget(new TargetCardInYourGraveyard(makeFilter(costX)));
+        game.fireReflexiveTriggeredAbility(ability, source);
         return true;
     }
 
-    @Override
-    public String getRule() {
-        return "When you pay {X}, return target creature card "
-                + "with converted mana cost X from your graveyard to the battlefield "
-                + "with a corpse counter on it. If that creature would leave the battlefield, "
-                + "exile it instead of putting it anywhere else.";
+    private static FilterCard makeFilter(int xValue) {
+        FilterCard filter = new FilterCreatureCard(
+                "creature card with converted mana cost " +
+                        xValue + " or less from your graveyard"
+        );
+        filter.add(new ConvertedManaCostPredicate(
+                ComparisonType.EQUAL_TO, xValue
+        ));
+        return filter;
     }
 }
 
 class IsarethTheAwakenerEffect extends OneShotEffect {
 
-    public IsarethTheAwakenerEffect() {
+    IsarethTheAwakenerEffect() {
         super(Outcome.PutCreatureInPlay);
     }
 
-    public IsarethTheAwakenerEffect(final IsarethTheAwakenerEffect effect) {
+    private IsarethTheAwakenerEffect(final IsarethTheAwakenerEffect effect) {
         super(effect);
     }
 
@@ -182,11 +144,11 @@ class IsarethTheAwakenerEffect extends OneShotEffect {
 
 class IsarethTheAwakenerReplacementEffect extends ReplacementEffectImpl {
 
-    public IsarethTheAwakenerReplacementEffect() {
+    IsarethTheAwakenerReplacementEffect() {
         super(Duration.Custom, Outcome.Exile);
     }
 
-    public IsarethTheAwakenerReplacementEffect(final IsarethTheAwakenerReplacementEffect effect) {
+    private IsarethTheAwakenerReplacementEffect(final IsarethTheAwakenerReplacementEffect effect) {
         super(effect);
     }
 

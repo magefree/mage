@@ -1,8 +1,8 @@
 package mage.cards.f;
 
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
+import mage.abilities.common.EntersBattlefieldThisOrAnotherTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -33,8 +33,8 @@ public final class FieldOfTheDead extends CardImpl {
 
         // Whenever Field of the Dead or another land enters the battlefield under your control, if you control seven or more lands with different names, create a 2/2 black Zombie creature token.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldControlledTriggeredAbility(
-                        new CreateTokenEffect(new ZombieToken()), StaticFilters.FILTER_LAND
+                new EntersBattlefieldThisOrAnotherTriggeredAbility(
+                        new CreateTokenEffect(new ZombieToken()), StaticFilters.FILTER_LAND, false, true
                 ), FieldOfTheDeadCondition.instance, "Whenever {this} or another land " +
                 "enters the battlefield under your control, if you control seven or more lands with different names, " +
                 "create a 2/2 black Zombie creature token."

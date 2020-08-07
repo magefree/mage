@@ -36,7 +36,7 @@ public final class HollowbornBarghest extends CardImpl {
     public HollowbornBarghest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");
         this.subtype.add(SubType.DEMON);
-        this.subtype.add(SubType.HOUND);
+        this.subtype.add(SubType.DOG);
 
         this.power = new MageInt(7);
         this.toughness = new MageInt(6);

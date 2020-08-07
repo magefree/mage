@@ -88,7 +88,7 @@ class DeclarationInStoneEffect extends OneShotEffect {
                     }
                 }
                 controller.moveCards(cardsToExile, Zone.EXILED, source, game);
-                game.applyEffects();
+                game.getState().processAction(game);
                 if (nonTokenCount > 0) {
                     new ClueArtifactToken().putOntoBattlefield(nonTokenCount, game, source.getSourceId(), targetPermanent.getControllerId(), false, false);
                 }

@@ -51,6 +51,6 @@ public class AddPoisonCounterTargetEffect extends OneShotEffect {
         if(staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return "Target " + mode.getTargets().get(0).getTargetName() + " gets " + Integer.toString(amount) + " poison counter(s).";
+        return "target " + mode.getTargets().get(0).getTargetName() + " gets " + Integer.toString(amount) + " poison counter(s).";
     }
 }

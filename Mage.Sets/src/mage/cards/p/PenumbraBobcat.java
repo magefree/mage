@@ -3,7 +3,7 @@ package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -23,7 +23,7 @@ public final class PenumbraBobcat extends CardImpl {
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new PenumbraBobcatToken(), 1), false));
+        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new PenumbraBobcatToken(), 1), false));
     }
 
     public PenumbraBobcat(final PenumbraBobcat card) {

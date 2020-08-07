@@ -4,7 +4,7 @@ package mage.cards.d;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -35,7 +35,7 @@ public final class DestructorDragon extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // When Destructor Dragon dies, destroy target noncreature permanent.
-        Ability ability = new DiesTriggeredAbility(new DestroyTargetEffect(), false);
+        Ability ability = new DiesSourceTriggeredAbility(new DestroyTargetEffect(), false);
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

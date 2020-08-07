@@ -3,7 +3,7 @@ package mage.cards.b;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSourceEffect;
 import mage.constants.SubType;
@@ -31,7 +31,7 @@ public final class Barishi extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Barishi dies, exile Barishi, then shuffle all creature cards from your graveyard into your library.
-        this.addAbility(new DiesTriggeredAbility(new BarishiEffect(), false));
+        this.addAbility(new DiesSourceTriggeredAbility(new BarishiEffect(), false));
     }
 
     public Barishi(final Barishi card) {

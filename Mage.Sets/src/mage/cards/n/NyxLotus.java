@@ -1,5 +1,9 @@
 package mage.cards.n;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
@@ -15,11 +19,6 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -68,14 +67,6 @@ class NyxLotusManaAbility extends ActivatedManaAbilityImpl {
         return new NyxLotusManaAbility(this);
     }
 
-    @Override
-    public List<Mana> getNetMana(Game game) {
-        List<Mana> netMana = new ArrayList<>();
-        if (game != null) {
-            netMana.addAll(((ManaEffect) this.getEffects().get(0)).getNetMana(game, this));
-        }
-        return netMana;
-    }
 }
 
 class NyxLotusDynamicManaEffect extends ManaEffect {

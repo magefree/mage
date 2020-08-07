@@ -62,7 +62,7 @@ class HeliodsPunishmentLoseAllAbilitiesEnchantedEffect extends ContinuousEffectI
 
     public HeliodsPunishmentLoseAllAbilitiesEnchantedEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.LoseAbility);
-        staticText = "It loses all abilities and has \"{T}: Remove a task counter from {this}. Then if it has no task counters on it, destroy {this}.\" ";
+        staticText = "It loses all abilities and has \"{T}: Remove a task counter from {this}. Then if it has no task counters on it, destroy {this}.\"";
     }
 
     public HeliodsPunishmentLoseAllAbilitiesEnchantedEffect(final HeliodsPunishmentLoseAllAbilitiesEnchantedEffect effect) {

@@ -5,6 +5,7 @@ import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -14,10 +15,9 @@ import mage.constants.WatcherScope;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.ObjectPlayer;
-import mage.filter.predicate.ObjectPlayerPredicate;
+import mage.filter.predicate.Predicate;
+import mage.filter.predicate.other.FaceDownCastablePredicate;
 import mage.filter.predicate.other.FaceDownPredicate;
-import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
@@ -32,12 +32,12 @@ import java.util.UUID;
  */
 public final class KadenaSlinkingSorcerer extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard();
-    private static final FilterPermanent filter2 = new FilterControlledCreaturePermanent("a face-down creature");
+    private static final FilterCard filterFirstFaceDownSpell = new FilterCard("first face-down creature spell");
+    private static final FilterPermanent filterFaceDownPermanent = new FilterControlledCreaturePermanent("a face-down creature");
 
     static {
-        filter.add(KadenaSlinkingSorcererPredicate.instance);
-        filter2.add(FaceDownPredicate.instance);
+        filterFirstFaceDownSpell.add(KadenaSlinkingSorcererPredicate.instance);
+        filterFaceDownPermanent.add(FaceDownPredicate.instance);
     }
 
     public KadenaSlinkingSorcerer(UUID ownerId, CardSetInfo setInfo) {
@@ -51,13 +51,13 @@ public final class KadenaSlinkingSorcerer extends CardImpl {
 
         // The first face-down creature spell you cast each turn costs {3} less to cast.
         this.addAbility(new SimpleStaticAbility(
-                new SpellsCostReductionControllerEffect(filter, 3)
+                new SpellsCostReductionControllerEffect(filterFirstFaceDownSpell, 3)
                         .setText("The first face-down creature spell you cast each turn costs {3} less to cast.")
         ), new KadenaSlinkingSorcererWatcher());
 
         // Whenever a face-down creature enters the battlefield under your control, draw a card.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
-                new DrawCardSourceControllerEffect(1), filter2
+                new DrawCardSourceControllerEffect(1), filterFaceDownPermanent
         ));
     }
 
@@ -71,16 +71,15 @@ public final class KadenaSlinkingSorcerer extends CardImpl {
     }
 }
 
-enum KadenaSlinkingSorcererPredicate implements ObjectPlayerPredicate<ObjectPlayer<Controllable>> {
+enum KadenaSlinkingSorcererPredicate implements Predicate<Card> {
     instance;
 
     @Override
-    public boolean apply(ObjectPlayer<Controllable> input, Game game) {
-        if (input.getObject() instanceof Spell
-                && ((Spell) input.getObject()).isCreature()
-                && ((Spell) input.getObject()).isFaceDown(game)) {
-            KadenaSlinkingSorcererWatcher watcher = game.getState().getWatcher(KadenaSlinkingSorcererWatcher.class);
-            return watcher != null && !watcher.castFaceDownThisTurn(input.getPlayerId());
+    public boolean apply(Card input, Game game) {
+        KadenaSlinkingSorcererWatcher watcher = game.getState().getWatcher(KadenaSlinkingSorcererWatcher.class);
+        if (watcher != null) {
+            return FaceDownCastablePredicate.instance.apply(input, game)
+                    && !watcher.castFaceDownThisTurn(input.getOwnerId());
         }
         return false;
     }

@@ -12,6 +12,7 @@ import com.j256.ormlite.support.DatabaseConnection;
 import com.j256.ormlite.table.TableUtils;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SetType;
 import mage.constants.SuperType;
 import mage.game.events.Listener;
 import mage.util.RandomUtil;
@@ -35,7 +36,7 @@ public enum CardRepository {
     // raise this if db structure was changed
     private static final long CARD_DB_VERSION = 52;
     // raise this if new cards were added to the server
-    private static final long CARD_CONTENT_VERSION = 229;
+    private static final long CARD_CONTENT_VERSION = 231;
     private Dao<CardInfo, Object> cardDao;
     private Set<String> classNames;
     private RepositoryEventSource eventSource = new RepositoryEventSource();
@@ -484,6 +485,37 @@ public enum CardRepository {
             Logger.getLogger(CardRepository.class).error("Error during execution of card repository query statement", ex);
         }
         return Collections.emptyList();
+    }
+
+    public CardInfo findOldestNonPromoVersionCard(String name) {
+        List<CardInfo> allVersions = this.findCards(name);
+        if (!allVersions.isEmpty()) {
+            allVersions.sort(new OldestNonPromoComparator());
+            return allVersions.get(0);
+        } else {
+            return null;
+        }
+    }
+
+    static class OldestNonPromoComparator implements Comparator<CardInfo> {
+        @Override
+        public int compare(CardInfo a, CardInfo b) {
+            ExpansionInfo aSet = ExpansionRepository.instance.getSetByCode(a.getSetCode());
+            ExpansionInfo bSet = ExpansionRepository.instance.getSetByCode(b.getSetCode());
+            if (aSet.getType() == SetType.PROMOTIONAL && bSet.getType() != SetType.PROMOTIONAL) {
+                return 1;
+            }
+            if (bSet.getType() == SetType.PROMOTIONAL && aSet.getType() != SetType.PROMOTIONAL) {
+                return -1;
+            }
+            if (aSet.getReleaseDate().after(bSet.getReleaseDate())) {
+                return 1;
+            }
+            if (aSet.getReleaseDate().before(bSet.getReleaseDate())) {
+                return -1;
+            }
+            return Integer.compare(a.getCardNumberAsInt(), b.getCardNumberAsInt());
+        }
     }
 
     public long getContentVersionFromDB() {

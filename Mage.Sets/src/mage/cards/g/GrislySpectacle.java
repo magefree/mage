@@ -54,7 +54,7 @@ class GrislySpectacleEffect extends OneShotEffect {
 
     public GrislySpectacleEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "Its controller puts a number of cards equal to that creature's power from the top of their library into their graveyard";
+        this.staticText = "Its controller mills cards equal to that creature's power";
     }
 
     public GrislySpectacleEffect(final GrislySpectacleEffect effect) {
@@ -68,7 +68,7 @@ class GrislySpectacleEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent creature = game.getPermanentOrLKIBattlefield(this.getTargetPointer().getFirst(game, source));
+        Permanent creature = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (creature != null) {
             Player controller = game.getPlayer(creature.getControllerId());
             if (controller != null) {

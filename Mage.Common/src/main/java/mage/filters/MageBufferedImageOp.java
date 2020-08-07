@@ -18,6 +18,7 @@ public abstract class MageBufferedImageOp implements BufferedImageOp {
     /**
      * Creates compatible image for @param src image.
      */
+    @Override
     public BufferedImage createCompatibleDestImage(BufferedImage src, ColorModel dest) {
         if (dest == null) {
             dest = src.getColorModel();
@@ -25,14 +26,17 @@ public abstract class MageBufferedImageOp implements BufferedImageOp {
         return new BufferedImage(dest, dest.createCompatibleWritableRaster(src.getWidth(), src.getHeight()), dest.isAlphaPremultiplied(), null);
     }
 
+    @Override
     public RenderingHints getRenderingHints() {
         return null;
     }
 
+    @Override
     public Rectangle2D getBounds2D(BufferedImage src) {
         return new Rectangle(0, 0, src.getWidth(), src.getHeight());
     }
 
+    @Override
     public Point2D getPoint2D(Point2D srcPt, Point2D destPt) {
         if (destPt == null) {
             destPt = new Point2D.Double();

@@ -86,7 +86,7 @@ class VraskaTheUnseenGainAbilityEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            permanent.addAbility(ability, game);
+            permanent.addAbility(ability, source.getSourceId(), game);
             return true;
         }
         return false;

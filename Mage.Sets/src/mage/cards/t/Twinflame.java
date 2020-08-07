@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import mage.abilities.Ability;
@@ -6,8 +5,8 @@ import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.abilityword.StriveAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
+import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -25,16 +24,16 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class Twinflame extends CardImpl {
 
     public Twinflame(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}");
 
         // Strive - Twinflame costs 2R more to cast for each target beyond the first.
         this.addAbility(new StriveAbility("{2}{R}"));
+
         // Choose any number of target creatures you control. For each of them, create a token that's a copy of that creature, except it has haste. Exile them at the beginning of the next end step.
         this.getSpellAbility().addEffect(new TwinflameCopyEffect());
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, new FilterControlledCreaturePermanent(), false));

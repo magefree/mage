@@ -1,9 +1,9 @@
 package mage.abilities.keyword;
 
+import mage.MageObject;
+import mage.game.Game;
+
 import java.io.ObjectStreamException;
-import mage.abilities.MageSingleton;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.constants.Zone;
 
 /**
  * Hexproof (This creature or player can't be the target of spells or abilities
@@ -11,7 +11,7 @@ import mage.constants.Zone;
  *
  * @author loki
  */
-public class HexproofAbility extends SimpleStaticAbility implements MageSingleton {
+public class HexproofAbility extends HexproofBaseAbility {
 
     private static final HexproofAbility instance;
 
@@ -28,7 +28,12 @@ public class HexproofAbility extends SimpleStaticAbility implements MageSingleto
     }
 
     private HexproofAbility() {
-        super(Zone.BATTLEFIELD, null);
+        super();
+    }
+
+    @Override
+    public boolean checkObject(MageObject source, Game game) {
+        return true;
     }
 
     @Override

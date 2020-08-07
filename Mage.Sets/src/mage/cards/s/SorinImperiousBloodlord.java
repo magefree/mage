@@ -1,12 +1,15 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
+import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.*;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.DoWhenCostPaid;
+import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.PutCardFromHandOntoBattlefieldEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.LifelinkAbility;
@@ -21,7 +24,6 @@ import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -58,11 +60,16 @@ public final class SorinImperiousBloodlord extends CardImpl {
         this.addAbility(ability);
 
         // +1: You may sacrifice a Vampire. When you do, Sorin, Imperious Bloodlord deals 3 damage to any target and you gain 3 life.
-        this.addAbility(new LoyaltyAbility(new DoIfCostPaid(
-                new SorinImperiousBloodlordCreateReflexiveTriggerEffect(),
-                new SacrificeTargetCost(new TargetControlledPermanent(filter))
-        ).setText("You may sacrifice a Vampire. " +
-                "When you do, {this} deals 3 damage to any target and you gain 3 life."
+        ReflexiveTriggeredAbility triggeredAbility = new ReflexiveTriggeredAbility(
+                new DamageTargetEffect(3), false,
+                "{this} deals 3 damage to any target and you gain 3 life"
+        );
+        triggeredAbility.addEffect(new GainLifeEffect(3));
+        triggeredAbility.addTarget(new TargetAnyTarget());
+        this.addAbility(new LoyaltyAbility(new DoWhenCostPaid(
+                triggeredAbility,
+                new SacrificeTargetCost(new TargetControlledPermanent(filter)),
+                "Sacrifice a Vampire?"
         ), 1));
 
         // −3: You may put a Vampire creature card from your hand onto the battlefield.
@@ -108,60 +115,5 @@ class SorinImperiousBloodlordEffect extends OneShotEffect {
         game.addEffect(new GainAbilityTargetEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn), source);
         game.addEffect(new GainAbilityTargetEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn), source);
         return true;
-    }
-}
-
-class SorinImperiousBloodlordCreateReflexiveTriggerEffect extends OneShotEffect {
-
-    SorinImperiousBloodlordCreateReflexiveTriggerEffect() {
-        super(Benefit);
-    }
-
-    private SorinImperiousBloodlordCreateReflexiveTriggerEffect(final SorinImperiousBloodlordCreateReflexiveTriggerEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SorinImperiousBloodlordCreateReflexiveTriggerEffect copy() {
-        return new SorinImperiousBloodlordCreateReflexiveTriggerEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        game.addDelayedTriggeredAbility(new SorinImperiousBloodlordReflexiveTriggeredAbility(), source);
-        return new SendOptionUsedEventEffect().apply(game, source);
-    }
-}
-
-class SorinImperiousBloodlordReflexiveTriggeredAbility extends DelayedTriggeredAbility {
-    SorinImperiousBloodlordReflexiveTriggeredAbility() {
-        super(new DamageTargetEffect(3), Duration.OneUse, true);
-        this.addEffect(new GainLifeEffect(3));
-        this.addTarget(new TargetAnyTarget());
-    }
-
-    private SorinImperiousBloodlordReflexiveTriggeredAbility(final SorinImperiousBloodlordReflexiveTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public SorinImperiousBloodlordReflexiveTriggeredAbility copy() {
-        return new SorinImperiousBloodlordReflexiveTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.OPTION_USED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getPlayerId().equals(this.getControllerId())
-                && event.getSourceId().equals(this.getSourceId());
-    }
-
-    @Override
-    public String getRule() {
-        return "{this} deals 3 damage to any target and you gain 3 life";
     }
 }

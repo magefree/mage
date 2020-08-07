@@ -1,8 +1,5 @@
-
 package mage.game.command.planes;
 
-import java.util.ArrayList;
-import java.util.List;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -13,22 +10,19 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.RollPlanarDieEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.effects.common.cost.PlanarDieRollCostIncreasingEffect;
 import mage.abilities.keyword.TrampleAbility;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.command.Plane;
 import mage.target.Target;
 import mage.watchers.common.PlanarRollWatcher;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * @author spjspj
  */
 public class TheGreatForestPlane extends Plane {
@@ -36,7 +30,7 @@ public class TheGreatForestPlane extends Plane {
     private static final String rule = "Each creature assigns combat damage equal to its toughness rather than its power";
 
     public TheGreatForestPlane() {
-        this.setName("Plane - The Great Forest");
+        this.setPlaneType(Planes.PLANE_THE_GREAT_FOREST);
         this.setExpansionSetCodeForImage("PCA");
 
         // Each creature assigns combat damage equal to its toughness rather than its power
@@ -82,11 +76,11 @@ class TheGreatForestCombatDamageRuleEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Plane cPlane = game.getState().getCurrentPlane();        
+        Plane cPlane = game.getState().getCurrentPlane();
         if (cPlane == null) {
             return false;
         }
-        if (!cPlane.getName().equalsIgnoreCase("Plane - The Great Forest")) {
+        if (!cPlane.getPlaneType().equals(Planes.PLANE_THE_GREAT_FOREST)) {
             return false;
         }
 

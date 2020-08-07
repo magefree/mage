@@ -1,9 +1,9 @@
-
 package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesTargetTriggeredAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -24,7 +24,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -35,9 +34,13 @@ public final class MakeshiftMannequin extends CardImpl {
     public MakeshiftMannequin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{B}");
 
-        // Return target creature card from your graveyard to the battlefield with a mannequin counter on it. For as long as that creature has a mannequin counter on it, it has "When this creature becomes the target of a spell or ability, sacrifice it."
+        // Return target creature card from your graveyard to the battlefield 
+        // with a mannequin counter on it. For as long as that creature has a 
+        // mannequin counter on it, it has "When this creature becomes the target 
+        // of a spell or ability, sacrifice it."
         this.getSpellAbility().addEffect(new MakeshiftMannequinEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(
+                StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
     }
 
     public MakeshiftMannequin(final MakeshiftMannequin card) {
@@ -54,7 +57,11 @@ class MakeshiftMannequinEffect extends OneShotEffect {
 
     MakeshiftMannequinEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Return target creature card from your graveyard to the battlefield with a mannequin counter on it. For as long as that creature has a mannequin counter on it, it has \"When this creature becomes the target of a spell or ability, sacrifice it.\"";
+        this.staticText = "Return target creature card from your graveyard "
+                + "to the battlefield with a mannequin counter on it. "
+                + "For as long as that creature has a mannequin counter on it, "
+                + "it has \"When this creature becomes the target of a spell "
+                + "or ability, sacrifice it.\"";
     }
 
     MakeshiftMannequinEffect(final MakeshiftMannequinEffect effect) {
@@ -80,11 +87,14 @@ class MakeshiftMannequinEffect extends OneShotEffect {
                     Permanent permanent = game.getPermanent(cardId);
                     if (permanent != null) {
                         ContinuousEffect gainedEffect = new MakeshiftMannequinGainAbilityEffect();
-                        gainedEffect.setTargetPointer(new FixedTarget(permanent, game));
-                        game.addEffect(gainedEffect, source);
+                        // Bug #6885 Fixed when owner/controller leaves the game the effect still applies
+                        SimpleStaticAbility gainAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, gainedEffect);
+                        gainAbility.setSourceId(cardId);
+                        gainAbility.getTargets().add(source.getTargets().get(0));
+                        game.addEffect(gainedEffect, gainAbility);
+                        return true;
                     }
                 }
-                return true;
             }
         }
         return false;
@@ -105,7 +115,10 @@ class MakeshiftMannequinGainAbilityEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
         if (permanent != null) {
-            permanent.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()), source.getSourceId(), game);
+            permanent.addAbility(
+                    new BecomesTargetTriggeredAbility(
+                            new SacrificeSourceEffect()),
+                    source.getSourceId(), game);
             return true;
         }
         return false;
@@ -114,7 +127,8 @@ class MakeshiftMannequinGainAbilityEffect extends ContinuousEffectImpl {
     @Override
     public boolean isInactive(Ability source, Game game) {
         Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
-        return permanent == null || permanent.getCounters(game).getCount(CounterType.MANNEQUIN) < 1;
+        return permanent == null
+                || permanent.getCounters(game).getCount(CounterType.MANNEQUIN) < 1;
     }
 
     @Override

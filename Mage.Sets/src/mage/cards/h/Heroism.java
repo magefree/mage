@@ -107,7 +107,7 @@ class HeroismEffect extends OneShotEffect {
 
             for (Permanent permanent : permanentsToPrevent) {
                 ContinuousEffect effect = new PreventDamageByTargetEffect(Duration.EndOfTurn, Integer.MAX_VALUE, true);
-                effect.setTargetPointer(new FixedTarget(permanent.getId()));
+                effect.setTargetPointer(new FixedTarget(permanent, game));
                 game.addEffect(effect, source);
             }
             return true;

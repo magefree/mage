@@ -4,7 +4,7 @@ package mage.cards.l;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
@@ -39,7 +39,7 @@ public final class LifebloodHydra extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.P1P1.createInstance())));
 
         // When Lifeblood Hydra dies, you gain life and draw cards equal to its power.
-        this.addAbility(new DiesTriggeredAbility(new LifebloodHydraEffect(), false));
+        this.addAbility(new DiesSourceTriggeredAbility(new LifebloodHydraEffect(), false));
     }
 
     public LifebloodHydra(final LifebloodHydra card) {
@@ -76,7 +76,7 @@ class LifebloodHydraEffect extends OneShotEffect {
             Permanent diedPermanent = (Permanent) getValue("permanentLeftBattlefield");
             if (diedPermanent != null) {
                 controller.gainLife(diedPermanent.getPower().getValue(), game, source);
-                controller.drawCards(diedPermanent.getPower().getValue(), game);
+                controller.drawCards(diedPermanent.getPower().getValue(), source.getSourceId(), game);
             }
             return true;
         }

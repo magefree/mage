@@ -1,51 +1,40 @@
 package mage.cards.o;
 
-import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
+import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.counters.Counter;
-import mage.counters.Counters;
-import mage.filter.Filter;
-import mage.game.ExileZone;
 import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
-import mage.util.CardUtil;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
 /**
- * @author MarcoMarin
+ * @author TheElk801
  */
 public final class Oubliette extends CardImpl {
 
     public Oubliette(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");
 
-        // When Oubliette enters the battlefield, exile target creature and all Auras attached to it. Note the number and kind of counters that were on that creature.
-        Ability ability1 = new EntersBattlefieldTriggeredAbility(new OublietteEffect(), false);
-        ability1.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability1);
-
-        // When Oubliette leaves the battlefield, return the exiled card to the battlefield under its owner's control tapped with the noted number and kind of counters on it. If you do, return the exiled Aura cards to the battlefield under their owner's control attached to that permanent.
-        Ability ability2 = new LeavesBattlefieldTriggeredAbility(new OublietteReturnEffect(), false);
-        this.addAbility(ability2);
+        // When Oubliette enters the battlefield, target creature phases out until Oubliette leaves the battlefield. Tap that creature as it phases in this way.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new OubliettePhaseOutEffect());
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
     }
 
-    public Oubliette(final Oubliette card) {
+    private Oubliette(final Oubliette card) {
         super(card);
     }
 
@@ -55,120 +44,130 @@ public final class Oubliette extends CardImpl {
     }
 }
 
-class OublietteEffect extends OneShotEffect {
+class OubliettePhaseOutEffect extends OneShotEffect {
 
-    public OublietteEffect() {
-        super(Outcome.Detriment);
-        this.staticText = "exile target creature and all Auras attached to it. Note the number and kind of counters that were on that creature";
+    OubliettePhaseOutEffect() {
+        super(Outcome.Benefit);
+        staticText = "target creature phases out until {this} leaves the battlefield. " +
+                "Tap that creature as it phases in this way.";
     }
 
-    public OublietteEffect(final OublietteEffect effect) {
+    private OubliettePhaseOutEffect(final OubliettePhaseOutEffect effect) {
         super(effect);
     }
 
     @Override
-    public OublietteEffect copy() {
-        return new OublietteEffect(this);
+    public OubliettePhaseOutEffect copy() {
+        return new OubliettePhaseOutEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller == null || sourceObject == null) {
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
+        Permanent permanent = game.getPermanent(source.getFirstTarget());
+        if (sourcePermanent == null || permanent == null) {
             return false;
         }
-        Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (targetCreature != null) {
-            game.getState().setValue(CardUtil.getCardZoneString("savedCounters", source.getSourceId(), game), targetCreature.getCounters(game).copy());
-            game.getState().setValue(CardUtil.getCardZoneString("targetId", source.getSourceId(), game), targetCreature.getId());
-            Set<Card> toExile = new HashSet<>();
-            toExile.add(targetCreature);
-            for (UUID attachementId : targetCreature.getAttachments()) {
-                Permanent attachment = game.getPermanent(attachementId);
-                if (attachment != null && attachment.getSubtype(game).contains(SubType.AURA)) {
-                    toExile.add(attachment);
-                }
-            }
-            controller.moveCardsToExile(toExile, source, game, true, CardUtil.getCardExileZoneId(game, source), sourceObject.getIdName());
-        }
-
+        MageObjectReference mor = new MageObjectReference(permanent, game);
+        permanent.tap(game);
+        permanent.phaseOut(game);
+        game.addEffect(new OubliettePhasePreventEffect(mor), source);
+        game.addDelayedTriggeredAbility(new OublietteDelayedTriggeredAbility(mor), source);
         return true;
     }
 }
 
-class OublietteReturnEffect extends OneShotEffect {
+class OubliettePhasePreventEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public OublietteReturnEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "return the exiled card to the battlefield under its owner's control tapped with the noted number and kind of counters on it. If you do, return the exiled Aura cards to the battlefield under their owner's control attached to that permanent";
+    private final MageObjectReference mor;
+
+    OubliettePhasePreventEffect(MageObjectReference mor) {
+        super(Duration.WhileOnBattlefield, Outcome.Neutral);
+        this.mor = mor;
     }
 
-    public OublietteReturnEffect(final OublietteReturnEffect effect) {
+    private OubliettePhasePreventEffect(final OubliettePhasePreventEffect effect) {
         super(effect);
+        this.mor = effect.mor;
     }
 
     @Override
-    public OublietteReturnEffect copy() {
-        return new OublietteReturnEffect(this);
+    public OubliettePhasePreventEffect copy() {
+        return new OubliettePhasePreventEffect(this);
+    }
+
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.PHASE_IN;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source.getSourceId(), true));
-        if (exileZone == null) {
-            return true;
-        }
-
-        Card exiledCreatureCard = exileZone.get((UUID) game.getState().getValue(CardUtil.getCardZoneString("targetId", source.getSourceId(), game, true)), game);
-        if (exiledCreatureCard == null) {
-            return false;
-        }
-        controller.moveCards(exiledCreatureCard, Zone.BATTLEFIELD, source, game, true, false, true, null);
-        Permanent newPermanent = game.getPermanent(exiledCreatureCard.getId());
-        if (newPermanent != null) {
-            // Restore the counters
-            Counters counters = (Counters) game.getState().getValue(CardUtil.getCardZoneString("savedCounters", source.getSourceId(), game, true));
-            if (counters != null) {
-                for (Counter counter : counters.values()) {
-                    if (counter != null) {
-                        newPermanent.getCounters(game).addCounter(counter); // it's restore counters, not add (e.g. without add events)
-                    }
-                }
-            }
-            // readd the attachments
-            Set<Card> toBattlefield = new HashSet<>();
-            for (Card enchantment : exileZone.getCards(game)) {
-                if (enchantment.getSubtype(game).contains(SubType.AURA)) {
-                    boolean canTarget = false;
-                    for (Target target : enchantment.getSpellAbility().getTargets()) {
-                        Filter filter2 = target.getFilter();
-                        if (filter2.match(newPermanent, game)) {
-                            canTarget = true;
-                            break;
-                        }
-                    }
-                    if (!canTarget) {
-                        // Aura stays exiled
-                        continue;
-                    }
-                    game.getState().setValue("attachTo:" + enchantment.getId(), newPermanent);
-                    toBattlefield.add(enchantment);
-                }
-            }
-            controller.moveCards(toBattlefield, Zone.BATTLEFIELD, source, game, true, false, true, null);
-            for (Card enchantmentCard : toBattlefield) {
-                Permanent permanent = game.getPermanent(enchantmentCard.getId());
-                if (permanent != null) {
-                    newPermanent.addAttachment(permanent.getId(), game);
-                }
-            }
-
-        }
         return true;
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        return source.getSourcePermanentIfItStillExists(game) != null
+                && this.mor.refersTo(event.getTargetId(), game);
+    }
+}
+
+class OublietteDelayedTriggeredAbility extends DelayedTriggeredAbility {
+
+    OublietteDelayedTriggeredAbility(MageObjectReference mor) {
+        super(new OubliettePhaseInEffect(mor), Duration.Custom, true, false);
+        this.usesStack = false;
+    }
+
+    private OublietteDelayedTriggeredAbility(final OublietteDelayedTriggeredAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public OublietteDelayedTriggeredAbility copy() {
+        return new OublietteDelayedTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getTargetId().equals(this.getSourceId())) {
+            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+            if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
+class OubliettePhaseInEffect extends OneShotEffect {
+
+    private final MageObjectReference mor;
+
+    OubliettePhaseInEffect(MageObjectReference mor) {
+        super(Outcome.Benefit);
+        this.mor = mor;
+    }
+
+    private OubliettePhaseInEffect(final OubliettePhaseInEffect effect) {
+        super(effect);
+        this.mor = effect.mor;
+    }
+
+    @Override
+    public OubliettePhaseInEffect copy() {
+        return new OubliettePhaseInEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = mor.getPermanent(game);
+        return permanent != null && permanent.phaseIn(game);
     }
 }

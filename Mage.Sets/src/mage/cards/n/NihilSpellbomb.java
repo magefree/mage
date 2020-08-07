@@ -2,7 +2,7 @@
 package mage.cards.n;
 
 import java.util.UUID;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -31,7 +31,7 @@ public final class NihilSpellbomb extends CardImpl {
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
         // When Nihil Spellbomb is put into a graveyard from the battlefield, you may pay {B}. If you do, draw a card.
-        this.addAbility(new DiesTriggeredAbility(new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{B}")), false));
+        this.addAbility(new DiesSourceTriggeredAbility(new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{B}")), false));
     }
 
     public NihilSpellbomb(final NihilSpellbomb card) {

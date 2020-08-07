@@ -4,7 +4,7 @@ package mage.cards.m;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -31,7 +31,7 @@ public final class MarkerBeetles extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Marker Beetles dies, target creature gets +1/+1 until end of turn.
-        Ability ability = new DiesTriggeredAbility(new BoostTargetEffect(1, 1, Duration.EndOfTurn), false);
+        Ability ability = new DiesSourceTriggeredAbility(new BoostTargetEffect(1, 1, Duration.EndOfTurn), false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         // {2}, Sacrifice Marker Beetles: Draw a card.

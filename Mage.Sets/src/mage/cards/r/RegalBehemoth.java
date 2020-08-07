@@ -89,7 +89,7 @@ class RegalBehemothTriggeredManaAbility extends TriggeredManaAbility {
                 ManaEvent mEvent = (ManaEvent) event;
                 for (Effect effect : getEffects()) {
                     effect.setValue("mana", mEvent.getMana());
-                    effect.setTargetPointer(new FixedTarget(permanent.getId()));
+                    effect.setTargetPointer(new FixedTarget(permanent, game));
                 }
                 return true;
             }

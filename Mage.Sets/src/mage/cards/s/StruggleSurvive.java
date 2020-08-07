@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -8,14 +7,11 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.AftermathAbility;
-import mage.cards.Card;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
-import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.players.Player;
@@ -69,16 +65,11 @@ class SurviveEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player sourcePlayer = game.getPlayer(source.getControllerId());
-        if(sourcePlayer != null) {
+        if (sourcePlayer != null) {
             for (UUID playerId : game.getState().getPlayersInRange(sourcePlayer.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    for (Card card : player.getGraveyard().getCards(game)) {
-                        if(card != null) {
-                            card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-                        }
-                    }
-                    player.shuffleLibrary(source, game);
+                    player.shuffleCardsToLibrary(player.getGraveyard(), game, source);
                 }
             }
         }

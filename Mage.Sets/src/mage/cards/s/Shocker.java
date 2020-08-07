@@ -1,28 +1,26 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author markedagain
  */
 public final class Shocker extends CardImpl {
 
     public Shocker(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.subtype.add(SubType.INSECT);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
@@ -40,14 +38,15 @@ public final class Shocker extends CardImpl {
         return new Shocker(this);
     }
 }
+
 class ShockerEffect extends OneShotEffect {
 
-    public ShockerEffect() {
+    ShockerEffect() {
         super(Outcome.Discard);
         this.staticText = " that player discards all the cards in their hand, then draws that many cards";
     }
 
-    public ShockerEffect(final ShockerEffect effect) {
+    private ShockerEffect(final ShockerEffect effect) {
         super(effect);
     }
 
@@ -59,14 +58,11 @@ class ShockerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
-            if (targetPlayer != null) {
-                int count = targetPlayer.getHand().size();
-                for (Card card : targetPlayer.getHand().getCards(game)) {
-                    targetPlayer.discard(card, source, game);
-                }
-                targetPlayer.drawCards(count, game);
-                return false;
-            }
+        if (targetPlayer == null) {
+            return false;
+        }
+        int count = targetPlayer.discard(targetPlayer.getHand(), source, game).size();
+        targetPlayer.drawCards(count, source.getSourceId(), game);
         return true;
     }
 }

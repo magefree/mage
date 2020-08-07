@@ -1,23 +1,20 @@
-
-
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
+import mage.abilities.hint.common.MetalcraftHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
+
+import java.util.UUID;
 
 /**
  * @author nantuko
@@ -33,15 +30,21 @@ public final class IndomitableArchangel extends CardImpl {
     }
 
     public IndomitableArchangel(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
         this.subtype.add(SubType.ANGEL);
-
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
+
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
+
+        // Metalcraft — Artifacts you control have shroud as long as you control three or more artifacts. (An artifact with shroud can’t be the target of spells or abilities.)
         ContinuousEffect gainAbilityEffect = new GainAbilityControlledEffect(ShroudAbility.getInstance(), Duration.WhileOnBattlefield, filter);
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(gainAbilityEffect, MetalcraftCondition.instance, rule);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect)
+                .setAbilityWord(AbilityWord.METALCRAFT)
+                .addHint(MetalcraftHint.instance)
+        );
     }
 
     public IndomitableArchangel(final IndomitableArchangel card) {

@@ -4,7 +4,7 @@ package mage.cards.e;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
@@ -36,7 +36,7 @@ public final class EndlessWhispers extends CardImpl {
         DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnSourceToBattlefieldEffect());
         Effect effect = new CreateDelayedTriggeredAbilityEffect(delayedAbility, true);
         effect.setText("choose target opponent. That player puts this card from its owner's graveyard onto the battlefield under their control at the beginning of the next end step");
-        Ability gainAbility = new DiesTriggeredAbility(effect);
+        Ability gainAbility = new DiesSourceTriggeredAbility(effect);
         gainAbility.addTarget(new TargetOpponent());
 
         effect = new GainAbilityAllEffect(gainAbility, Duration.WhileOnBattlefield, new FilterCreaturePermanent("Each creature"));

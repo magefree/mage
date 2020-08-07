@@ -1,27 +1,22 @@
-
 package mage.cards.a;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ChooseCardTypeEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.choices.ChoiceImpl;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.util.CardUtil;
 
+import java.util.Arrays;
 import java.util.UUID;
 
 /**
@@ -46,7 +41,10 @@ public final class ArchonOfValorsReach extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // As Archon of Valor's Reach enters the battlefield, choose artifact, enchantment, instant, sorcery, or planeswalker.
-        this.addAbility(new AsEntersBattlefieldAbility(new ArchonOfValorsReachChooseEffect()));
+        this.addAbility(new AsEntersBattlefieldAbility(
+                new ChooseCardTypeEffect(Outcome.Benefit, Arrays.asList(CardType.ARTIFACT, CardType.ENCHANTMENT, CardType.INSTANT, CardType.PLANESWALKER))
+                        .setText("choose artifact, enchantment, instant, sorcery, or planeswalker")
+        ));
 
         // Players can't cast spells of the chosen type.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ArchonOfValorsReachReplacementEffect()));
@@ -62,85 +60,6 @@ public final class ArchonOfValorsReach extends CardImpl {
     }
 }
 
-class ArchonOfValorsReachChooseEffect extends OneShotEffect {
-
-    ArchonOfValorsReachChooseEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "choose artifact, enchantment, instant, sorcery, or planeswalker";
-    }
-
-    private ArchonOfValorsReachChooseEffect(final ArchonOfValorsReachChooseEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ArchonOfValorsReachChooseEffect copy() {
-        return new ArchonOfValorsReachChooseEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject mageObject = game.getPermanentEntering(source.getSourceId());
-        if (mageObject == null) {
-            mageObject = game.getObject(source.getSourceId());
-        }
-        if (controller != null && mageObject != null) {
-            ArchonOfValorsReachChoice choices = new ArchonOfValorsReachChoice();
-            if (controller.choose(Outcome.Neutral, choices, game)) {
-                game.informPlayers(mageObject.getName() + ":  Chosen card type is " + choices.getChoice());
-                System.out.println(mageObject.getId());
-                game.getState().setValue(mageObject.getId().toString() + "_cardtype", choices.getChoice());
-                if (mageObject instanceof Permanent) {
-                    ((Permanent) mageObject).addInfo("chosen color", CardUtil.addToolTipMarkTags("Chosen card type: " + choices.getChoice()), game);
-                }
-                return true;
-            }
-        }
-        return false;
-    }
-}
-
-class ArchonOfValorsReachChoice extends ChoiceImpl {
-
-    ArchonOfValorsReachChoice() {
-        super(true);
-        this.choices.add("Artifact");
-        this.choices.add("Enchantment");
-        this.choices.add("Instant");
-        this.choices.add("Sorcery");
-        this.choices.add("Planeswalker");
-        this.message = "Choose artifact, enchantment, instant, sorcery, or planeswalker";
-    }
-
-    private ArchonOfValorsReachChoice(final ArchonOfValorsReachChoice choice) {
-        super(choice);
-    }
-
-    public static CardType getType(String ch) {
-        switch (ch) {
-            case "Artifact":
-                return CardType.ARTIFACT;
-            case "Enchantment":
-                return CardType.ENCHANTMENT;
-            case "Instant":
-                return CardType.INSTANT;
-            case "Sorcery":
-                return CardType.SORCERY;
-            case "Planeswalker":
-                return CardType.PLANESWALKER;
-            default:
-                return null;
-        }
-    }
-
-    @Override
-    public ArchonOfValorsReachChoice copy() {
-        return new ArchonOfValorsReachChoice(this);
-    }
-
-}
-
 class ArchonOfValorsReachReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 
     ArchonOfValorsReachReplacementEffect() {
@@ -154,10 +73,11 @@ class ArchonOfValorsReachReplacementEffect extends ContinuousRuleModifyingEffect
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        CardType cardType = (CardType) game.getState().getValue(source.getSourceId().toString() + "_cardtype");
-        MageObject mageObject = game.getObject(source.getSourceId());
-        if (mageObject != null && cardType != null) {
-            return "You can't cast " + cardType.toString() + " spells (" + mageObject.getIdName() + ").";
+        Object savedType = game.getState().getValue(source.getSourceId() + "_type");
+        Card sourceCard = game.getCard(source.getSourceId());
+        if (savedType instanceof String && sourceCard != null) {
+            CardType cardType = CardType.fromString((String) savedType);
+            return "You can't cast " + cardType.toString() + " spells (" + sourceCard.getIdName() + ").";
         }
         return null;
     }
@@ -169,10 +89,13 @@ class ArchonOfValorsReachReplacementEffect extends ContinuousRuleModifyingEffect
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        CardType cardType = ArchonOfValorsReachChoice.getType((String) game.getState().getValue(source.getSourceId().toString() + "_cardtype"));
-        // spell is not on the stack yet, so we have to check the card
-        Card card = game.getCard(event.getSourceId());
-        return cardType != null && card != null && card.getCardType().contains(cardType);
+        Object savedType = game.getState().getValue(source.getSourceId() + "_type");
+        Card sourceCard = game.getCard(source.getSourceId());
+        if (savedType instanceof String && sourceCard != null) {
+            CardType cardType = CardType.fromString((String) savedType);
+            return cardType != null && sourceCard != null && sourceCard.getCardType().contains(cardType);
+        }
+        return false;
     }
 
     @Override

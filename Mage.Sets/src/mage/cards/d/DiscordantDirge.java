@@ -9,6 +9,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
@@ -21,15 +22,12 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
 
-import java.util.Objects;
 import java.util.UUID;
 
 /**
  * @author jeffwadsworth
  */
 public final class DiscordantDirge extends CardImpl {
-
-    private static final String rule = "Look at target opponent's hand and choose up to X cards from it, where X is the number of verse counters on {this}. That player discards those cards..";
 
     public DiscordantDirge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
@@ -47,7 +45,7 @@ public final class DiscordantDirge extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DiscordantDirge(final DiscordantDirge card) {
+    private DiscordantDirge(final DiscordantDirge card) {
         super(card);
     }
 
@@ -59,37 +57,37 @@ public final class DiscordantDirge extends CardImpl {
 
 class DiscordantDirgeEffect extends OneShotEffect {
 
-    public DiscordantDirgeEffect() {
+    DiscordantDirgeEffect() {
         super(Outcome.Benefit);
-        staticText = "Look at target opponent's hand and choose up to X cards from it, where X is the number of verse counters on {this}. That player discards those card.";
+        staticText = "Look at target opponent's hand and choose up to X cards from it, " +
+                "where X is the number of verse counters on {this}. That player discards those cards";
     }
 
-    public DiscordantDirgeEffect(final DiscordantDirgeEffect effect) {
+    private DiscordantDirgeEffect(final DiscordantDirgeEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent discordantDirge = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (discordantDirge != null) {
-            int verseCounters = discordantDirge.getCounters(game).getCount(CounterType.VERSE);
-            Player targetOpponent = game.getPlayer(source.getFirstTarget());
-            Player controller = game.getPlayer(source.getControllerId());
-            if (targetOpponent != null
-                    && controller != null) {
-                controller.lookAtCards(targetOpponent.getName() + " hand", targetOpponent.getHand(), game);
-                TargetCard target = new TargetCard(0, verseCounters, Zone.HAND, new FilterCard());
-                target.setNotTarget(true);
-                if (controller.choose(Outcome.Benefit, targetOpponent.getHand(), target, game)) {
-                    target.getTargets().stream().map(game::getCard).filter(Objects::nonNull).filter((card) -> (card != null
-                            && targetOpponent.getHand().contains(card.getId()))).forEachOrdered((card) -> {
-                        targetOpponent.discard(card, source, game);
-                    });
-                    return true;
-                }
-            }
+        if (discordantDirge == null) {
+            return false;
         }
-        return false;
+        int verseCounters = discordantDirge.getCounters(game).getCount(CounterType.VERSE);
+        Player targetOpponent = game.getPlayer(source.getFirstTarget());
+        Player controller = game.getPlayer(source.getControllerId());
+        if (targetOpponent == null
+                || controller == null) {
+            return false;
+        }
+        controller.lookAtCards(targetOpponent.getName() + " hand", targetOpponent.getHand(), game);
+        TargetCard target = new TargetCard(0, verseCounters, Zone.HAND, new FilterCard());
+        target.setNotTarget(true);
+        if (!controller.choose(Outcome.Benefit, targetOpponent.getHand(), target, game)) {
+            return false;
+        }
+        targetOpponent.discard(new CardsImpl(target.getTargets()), source, game);
+        return true;
     }
 
     @Override

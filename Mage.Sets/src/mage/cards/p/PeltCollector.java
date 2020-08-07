@@ -135,7 +135,7 @@ class PeltCollectorEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent triggeringCreature = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+        Permanent triggeringCreature = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         Permanent sourceCreature = game.getPermanent(source.getSourceId());
         if (!PeltCollectorAbility.isPowerGreater(sourceCreature, triggeringCreature)) {
             return false;

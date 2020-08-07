@@ -18,24 +18,12 @@ public final class SpiritWhiteToken extends TokenImpl {
 
     static {
         tokenImageSets.addAll(Arrays.asList("AVR", "C14", "CNS", "DDC", "DDK", "FRF", "ISD", "KTK", "M15", "MM2", "SHM",
-                "SOI", "EMA", "C16", "MM3", "CMA", "E01", "ANA", "RNA", "M20"));
+                "SOI", "EMA", "C16", "MM3", "CMA", "E01", "ANA", "GPT", "RAV", "EMN", "RNA", "M20", "C20"));
     }
 
     public SpiritWhiteToken() {
-        this(null, 0);
-    }
-
-    public SpiritWhiteToken(String setCode) {
-        this(setCode, 0);
-    }
-
-    public SpiritWhiteToken(String setCode, int tokenType) {
         super("Spirit", "1/1 white Spirit creature token with flying");
         availableImageSetCodes = tokenImageSets;
-        setOriginalExpansionSetCode(setCode);
-        if (tokenType > 0) {
-            setTokenType(tokenType);
-        }
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.SPIRIT);
         color.setWhite(true);

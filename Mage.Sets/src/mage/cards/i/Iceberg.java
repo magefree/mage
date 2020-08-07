@@ -7,6 +7,7 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.SimpleManaAbility;
@@ -32,7 +33,9 @@ public final class Iceberg extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.ICE.createInstance(1)), new ManaCostsImpl("{3}")));
 
         // Remove an ice counter from Iceberg: Add {C}.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(1), new RemoveCountersSourceCost(CounterType.ICE.createInstance(1))));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(1), 
+                new RemoveCountersSourceCost(CounterType.ICE.createInstance(1)),
+                new CountersSourceCount(CounterType.ICE)));
     }
 
     public Iceberg(final Iceberg card) {

@@ -1,6 +1,8 @@
 
 package mage.cards.b;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -70,7 +72,13 @@ class BloodSunEffect extends ContinuousEffectImpl {
             for (Permanent permanent : game.getState().getBattlefield().getActivePermanents(StaticFilters.FILTER_LANDS, player.getId(), source.getSourceId(), game)) {
                 switch (layer) {
                     case AbilityAddingRemovingEffects_6:
-                        permanent.getAbilities().removeIf(ability -> ability.getAbilityType() != AbilityType.MANA);
+                        List<Ability> toRemove = new ArrayList<>();
+                        permanent.getAbilities().forEach(a -> {
+                            if (a.getAbilityType() != AbilityType.MANA) {
+                                toRemove.add(a);
+                            }
+                        });
+                        permanent.removeAbilities(toRemove, source.getSourceId(), game);
                         break;
                 }
             }

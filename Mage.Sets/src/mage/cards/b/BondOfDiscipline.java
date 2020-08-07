@@ -19,7 +19,7 @@ import java.util.UUID;
 public final class BondOfDiscipline extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterOpponentsCreaturePermanent("creatures your opponents control.");
+            = new FilterOpponentsCreaturePermanent("creatures your opponents control");
 
     public BondOfDiscipline(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{W}");

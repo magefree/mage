@@ -4,7 +4,7 @@ package mage.cards.c;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BlocksOrBecomesBlockedTriggeredAbility;
+import mage.abilities.common.BlocksOrBecomesBlockedSourceTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
@@ -28,7 +28,7 @@ public final class ChubToad extends CardImpl {
         // Whenever Chub Toad blocks or becomes blocked, it gets +2/+2 until end of turn.
         Effect effect = new BoostSourceEffect(+2, +2, Duration.EndOfTurn);
         effect.setText("it gets +2/+2 until end of turn");
-        Ability ability = new BlocksOrBecomesBlockedTriggeredAbility(effect, false);
+        Ability ability = new BlocksOrBecomesBlockedSourceTriggeredAbility(effect, false);
         this.addAbility(ability);
     }
 

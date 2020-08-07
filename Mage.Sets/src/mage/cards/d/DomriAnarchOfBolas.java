@@ -12,9 +12,7 @@ import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPermanent;
@@ -26,13 +24,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class DomriAnarchOfBolas extends CardImpl {
-
-    private static final FilterPermanent filter
-            = new FilterCreaturePermanent("creature you don't control");
-
-    static {
-        filter.add(TargetController.NOT_YOU.getControllerPredicate());
-    }
 
     public DomriAnarchOfBolas(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{R}{G}");
@@ -52,7 +43,7 @@ public final class DomriAnarchOfBolas extends CardImpl {
         // -2: Target creature you control fights target creature you don't control.
         Ability ability = new LoyaltyAbility(new FightTargetsEffect(), -2);
         ability.addTarget(new TargetControlledCreaturePermanent());
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
         this.addAbility(ability);
     }
 

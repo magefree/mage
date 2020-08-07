@@ -3,7 +3,7 @@ package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
@@ -36,7 +36,7 @@ public final class CarrionThrash extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When Carrion Thrash dies, you may pay {2}. If you do, return another target creature card from your graveyard to your hand.
-        DiesTriggeredAbility ability = new DiesTriggeredAbility(new DoIfCostPaid(new ReturnToHandTargetEffect(), new GenericManaCost(2)), false);
+        DiesSourceTriggeredAbility ability = new DiesSourceTriggeredAbility(new DoIfCostPaid(new ReturnToHandTargetEffect(), new GenericManaCost(2)), false);
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
     }

@@ -1,4 +1,3 @@
-
 package mage.players;
 
 import java.io.Serializable;
@@ -204,6 +203,21 @@ public class ManaPoolItem implements Serializable {
             return ManaType.WHITE;
         } else if (colorless > 0) {
             return ManaType.COLORLESS;
+        }
+        if (conditionalMana != null) {
+            if (conditionalMana.getBlack() > 0) {
+                return ManaType.BLACK;
+            } else if (conditionalMana.getBlue() > 0) {
+                return ManaType.BLUE;
+            } else if (conditionalMana.getGreen() > 0) {
+                return ManaType.GREEN;
+            } else if (conditionalMana.getRed() > 0) {
+                return ManaType.RED;
+            } else if (conditionalMana.getWhite() > 0) {
+                return ManaType.WHITE;
+            } else if (conditionalMana.getColorless() > 0) {
+                return ManaType.COLORLESS;
+            }
         }
         return null;
     }

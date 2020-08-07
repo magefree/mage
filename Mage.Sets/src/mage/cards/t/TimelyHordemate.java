@@ -1,25 +1,26 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.RaidCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
+import mage.abilities.hint.common.RaidHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.ComparisonType;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.watchers.common.PlayerAttackedWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class TimelyHordemate extends CardImpl {
@@ -40,8 +41,10 @@ public final class TimelyHordemate extends CardImpl {
 
         // <i>Raid</i> &mdash; When Timely Hordemate enters the battlefield, if you attacked this turn, return target creature card with converted mana cost 2 or less from your graveyard to the battlefield.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect()), RaidCondition.instance,
-                "<i>Raid</i> &mdash; When {this} enters the battlefield, if you attacked with a creature this turn, return target creature card with converted mana cost 2 or less from your graveyard to the battlefield.");
+                "<i>Raid</i> &mdash; When {this} enters the battlefield, if you attacked this turn, return target creature card with converted mana cost 2 or less from your graveyard to the battlefield.");
         ability.addTarget(new TargetCardInYourGraveyard(filter));
+        ability.setAbilityWord(AbilityWord.RAID);
+        ability.addHint(RaidHint.instance);
         this.addAbility(ability, new PlayerAttackedWatcher());
 
     }

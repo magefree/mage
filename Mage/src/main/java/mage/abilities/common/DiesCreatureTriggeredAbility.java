@@ -69,7 +69,7 @@ public class DiesCreatureTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.isDiesEvent()) {
-            if (filter.match(zEvent.getTarget(), sourceId, controllerId, game) && zEvent.getTarget().isCreature()) {
+            if (filter.match(zEvent.getTarget(), sourceId, controllerId, game)) {
                 if (setTargetPointer) {
                     for (Effect effect : this.getEffects()) {
                         effect.setTargetPointer(new FixedTarget(event.getTargetId(), game));

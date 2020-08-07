@@ -23,7 +23,7 @@ public final class EverAfter extends CardImpl {
 
         // Return up to two target creature cards from your graveyard to the battlefield. Each of those creatures is a black Zombie in addition
         // to its other colors and types. Put Ever After on the bottom of its owner's library.
-        this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
+        this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect(false, false));
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 2, new FilterCreatureCard("creature cards from your graveyard")));
         Effect effect = new BecomesBlackZombieAdditionEffect();
         effect.setText("Each of those creatures is a black Zombie in addition to its other colors and types");

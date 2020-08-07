@@ -3,7 +3,7 @@ package mage.cards.n;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.CantBeCounteredAbility;
+import mage.abilities.common.CantBeCounteredSourceAbility;
 import mage.abilities.common.DrawCardControllerTriggeredAbility;
 import mage.abilities.common.SpellCastAllTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -33,7 +33,7 @@ public final class NivMizzetParun extends CardImpl {
         this.toughness = new MageInt(5);
 
         // This spell can't be countered.
-        this.addAbility(new CantBeCounteredAbility());
+        this.addAbility(new CantBeCounteredSourceAbility());
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());

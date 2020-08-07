@@ -86,7 +86,7 @@ class CascadeEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        ExileZone exile = game.getExile().createZone(source.getSourceId(), 
+        ExileZone exile = game.getExile().createZone(source.getSourceId(),
                 controller.getName() + " Cascade");
         card = game.getCard(source.getSourceId());
         if (card == null) {
@@ -99,7 +99,7 @@ class CascadeEffect extends OneShotEffect {
                 break;
             }
             controller.moveCardsToExile(card, source, game, true, exile.getId(), exile.getName());
-        } while (controller.isInGame()
+        } while (controller.canRespond()
                 && (card.isLand()
                 || !cardThatCostsLess(sourceCost, card, game)));
 

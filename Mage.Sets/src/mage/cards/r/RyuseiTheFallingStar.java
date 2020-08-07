@@ -4,7 +4,7 @@ package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -36,7 +36,7 @@ public final class RyuseiTheFallingStar extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new DiesTriggeredAbility(new DamageAllEffect(5, filter)));
+        this.addAbility(new DiesSourceTriggeredAbility(new DamageAllEffect(5, filter)));
     }
 
     public RyuseiTheFallingStar(final RyuseiTheFallingStar card) {

@@ -63,7 +63,7 @@ class GuulDrazOverseerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent land = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+        Permanent land = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (controller != null && land != null) {
             int boost = 1;
             if (land.hasSubtype(SubType.SWAMP, game)) {

@@ -120,7 +120,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
         }
 
         Player player = game.getPlayer(controllerId);
-        handleKrrikPhyrexianManaCosts(controllerId, ability, game);
+        handleLikePhyrexianManaCosts(controllerId, ability, game); // e.g. K'rrik, Son of Yawgmoth
         if (!player.getManaPool().isForcedToPay()) {
             assignPayment(game, ability, player.getManaPool(), this);
         }
@@ -150,13 +150,16 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
      */
     @Override
     public boolean payOrRollback(Ability ability, Game game, UUID sourceId, UUID payingPlayerId) {
-        int bookmark = game.bookmarkState();
-        handlePhyrexianManaCosts(payingPlayerId, ability, game);
-        if (pay(ability, game, sourceId, payingPlayerId, false, null)) {
-            game.removeBookmark(bookmark);
-            return true;
+        Player player = game.getPlayer(payingPlayerId);
+        if (player != null) {
+            int bookmark = game.bookmarkState();
+            handlePhyrexianManaCosts(payingPlayerId, ability, game);
+            if (pay(ability, game, sourceId, payingPlayerId, false, null)) {
+                game.removeBookmark(bookmark);
+                return true;
+            }
+            player.restoreState(bookmark, ability.getRule(), game);
         }
-        game.restoreState(bookmark, ability.getRule());
         return false;
     }
 
@@ -170,11 +173,6 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
 
         while (manaCostIterator.hasNext()) {
             ManaCost manaCost = manaCostIterator.next();
-            PhyrexianManaCost tempPhyrexianCost = null;
-            Mana mana = manaCost.getMana();
-
-            FilterMana phyrexianColors = player.getPhyrexianColors();
-
             if (manaCost instanceof PhyrexianManaCost) {
                 PhyrexianManaCost phyrexianManaCost = (PhyrexianManaCost) manaCost;
                 PayLifeCost payLifeCost = new PayLifeCost(2);
@@ -189,7 +187,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
         tempCosts.pay(source, game, source.getSourceId(), player.getId(), false, null);
     }
 
-    private void handleKrrikPhyrexianManaCosts(UUID payingPlayerId, Ability source, Game game) {
+    private void handleLikePhyrexianManaCosts(UUID payingPlayerId, Ability source, Game game) {
         Player player = game.getPlayer(payingPlayerId);
         if (this == null || player == null) {
             return; // nothing to be done without any mana costs. prevents NRE from occurring here

@@ -1,17 +1,20 @@
 package mage.cards.p;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.LookAtTopCardOfLibraryAnyTimeEffect;
+import mage.abilities.effects.common.continuous.PlayTheTopCardEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Zone;
+import mage.filter.FilterCard;
+import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -22,6 +25,15 @@ import java.util.UUID;
  */
 public final class PrecognitionField extends CardImpl {
 
+    private static final FilterCard filter = new FilterCard("cast instant or sorcery spells");
+
+    static {
+        filter.add(Predicates.or(
+                CardType.INSTANT.getPredicate(),
+                CardType.SORCERY.getPredicate()
+        ));
+    }
+
     public PrecognitionField(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
 
@@ -29,7 +41,7 @@ public final class PrecognitionField extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new LookAtTopCardOfLibraryAnyTimeEffect()));
 
         // You may cast the top card of your library if it's an instant or sorcery card.
-        this.addAbility(new SimpleStaticAbility(new PrecognitionFieldTopCardCastEffect()));
+        this.addAbility(new SimpleStaticAbility(new PlayTheTopCardEffect(filter)));
 
         // {3}: Exile the top card of your library.
         this.addAbility(new SimpleActivatedAbility(new PrecognitionFieldExileEffect(), new GenericManaCost(3)));
@@ -42,50 +54,6 @@ public final class PrecognitionField extends CardImpl {
     @Override
     public PrecognitionField copy() {
         return new PrecognitionField(this);
-    }
-}
-
-class PrecognitionFieldTopCardCastEffect extends AsThoughEffectImpl {
-
-    public PrecognitionFieldTopCardCastEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "You may cast the top card of your library if it's an instant or sorcery card.";
-    }
-
-    public PrecognitionFieldTopCardCastEffect(final PrecognitionFieldTopCardCastEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public PrecognitionFieldTopCardCastEffect copy() {
-        return new PrecognitionFieldTopCardCastEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (affectedControllerId.equals(source.getControllerId())) {
-            Card card = game.getCard(objectId);
-            if (card != null) {
-                Player controller = game.getPlayer(affectedControllerId);
-                if (controller != null) {
-                    Card topCard = controller.getLibrary().getFromTop(game);
-                    MageObject precognitionField = game.getObject(source.getSourceId());
-                    if (precognitionField != null
-                            && topCard != null) {
-                        return topCard == card
-                                && (topCard.isInstant() || topCard.isSorcery())
-                                && topCard.getSpellAbility() != null
-                                && topCard.getSpellAbility().spellCanBeActivatedRegularlyNow(controller.getId(), game);
-                    }
-                }
-            }
-        }
-        return false;
     }
 }
 

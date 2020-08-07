@@ -2,9 +2,11 @@
 package mage.cards.d;
 
 import java.util.UUID;
+import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksCreatureYouControlTriggeredAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
+import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.mana.AddManaOfAnyColorEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.SimpleManaAbility;
@@ -29,8 +31,9 @@ public final class DruidsRepository extends CardImpl {
         this.addAbility(new AttacksCreatureYouControlTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance())));
 
         // Remove a charge counter from Druids' Repository: Add one mana of any color.
-        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));        
-        this.addAbility(ability);
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, 
+                new AddManaOfAnyColorEffect(1, new CountersSourceCount(CounterType.CHARGE), false),
+                new RemoveCountersSourceCost(CounterType.CHARGE.createInstance())));
     }
 
     public DruidsRepository(final DruidsRepository card) {

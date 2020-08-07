@@ -85,7 +85,7 @@ class PeerPressureEffect extends OneShotEffect {
             if (playerWithMost != null && playerWithMost.equals(controller.getId())) {
                 for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(SubType.byDescription(chosenType), chosenType), controller.getId(), source.getSourceId(), game)) {
                     ContinuousEffect effect = new GainControlTargetEffect(Duration.EndOfGame);
-                    effect.setTargetPointer(new FixedTarget(permanent.getId()));
+                    effect.setTargetPointer(new FixedTarget(permanent, game));
                     game.addEffect(effect, source);
                 }
             }

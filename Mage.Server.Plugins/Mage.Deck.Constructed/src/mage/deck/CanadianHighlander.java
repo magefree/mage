@@ -4,6 +4,7 @@ import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.cards.decks.Constructed;
 import mage.cards.decks.Deck;
+import mage.cards.decks.DeckValidatorErrorType;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -63,7 +64,7 @@ public class CanadianHighlander extends Constructed {
     }
 
     public CanadianHighlander() {
-        this("Canadian Highlander");
+        super("Canadian Highlander");
         for (ExpansionSet set : Sets.getInstance().values()) {
             if (set.getSetType().isEternalLegal()) {
                 setCodes.add(set.getCode());
@@ -71,21 +72,18 @@ public class CanadianHighlander extends Constructed {
         }
     }
 
-    public CanadianHighlander(String name) {
-        super(name);
-    }
-
     @Override
     public boolean validate(Deck deck) {
         boolean valid = true;
+        errorsList.clear();
 
         if (deck.getCards().size() < 100) {
-            invalid.put("Deck", "Must contain 100 or more singleton cards: has " + (deck.getCards().size()) + " cards");
+            addError(DeckValidatorErrorType.DECK_SIZE, "Deck", "Must contain 100 or more singleton cards: has " + (deck.getCards().size()) + " cards");
             valid = false;
         }
 
         if (!deck.getSideboard().isEmpty()) {
-            invalid.put("Deck", "Sideboard can't contain any cards: has " + (deck.getSideboard().size()) + " cards");
+            addError(DeckValidatorErrorType.DECK_SIZE, "Deck", "Sideboard can't contain any cards: has " + (deck.getSideboard().size()) + " cards");
             valid = false;
         }
 
@@ -100,11 +98,11 @@ public class CanadianHighlander extends Constructed {
             String cn = entry.getKey();
             if (pointMap.containsKey(cn)) {
                 totalPoints += pointMap.get(cn);
-                invalid.put(entry.getKey(), " " + pointMap.get(cn) + " point " + cn);
+                addError(DeckValidatorErrorType.OTHER, entry.getKey(), " " + pointMap.get(cn) + " point " + cn);
             }
         }
         if (totalPoints > allowedPoints) {
-            invalid.put("Total points too high", "Your calculated point total was " + totalPoints);
+            addError(DeckValidatorErrorType.PRIMARY, "Total points too high", "Your calculated point total was " + totalPoints);
             valid = false;
         }
         return valid;

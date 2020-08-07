@@ -56,39 +56,36 @@ class SignalTheClansEffect extends SearchEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
         }
         //Search your library for three creature cards
-        if (player.searchLibrary(target, source, game)) {
+        if (controller.searchLibrary(target, source, game)) {
+            boolean shuffleDone = false;
             if (!target.getTargets().isEmpty()) {
-                Cards cards = new CardsImpl();
-                for (UUID cardId : target.getTargets()) {
-                    Card card = player.getLibrary().remove(cardId, game);
-                    if (card != null) {
-                        cards.add(card);
-                    }
-                }
+                Cards cards = new CardsImpl(target.getTargets());
                 //Reveal them
-                player.revealCards("Reveal", cards, game);
+                controller.revealCards(source, cards, game);
                 Card cardsArray[] = cards.getCards(game).toArray(new Card[0]);
                 //If you reveal three cards with different names
                 if (Stream.of(cardsArray).map(MageObject::getName).collect(Collectors.toSet()).size() == 3) {
                     //Choose one of them at random and put that card into your hand
                     Card randomCard = cards.getRandom(game);
-                    randomCard.moveToZone(Zone.HAND, source.getSourceId(), game, true);
+                    controller.moveCards(randomCard, Zone.HAND, source, game);
                     cards.remove(randomCard);
                 }
-                //Shuffle the rest into your library
-                for (Card card : cards.getCards(game)) {
-                    card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
+                // Shuffle the rest into your library
+                if (!cards.isEmpty()) {
+                    controller.shuffleCardsToLibrary(cards, game, source);
+                    shuffleDone = true;
                 }
             }
-            player.shuffleLibrary(source, game);
+            if (!shuffleDone) {
+                controller.shuffleLibrary(source, game);
+            }
             return true;
         }
-        player.shuffleLibrary(source, game);
         return false;
     }
 

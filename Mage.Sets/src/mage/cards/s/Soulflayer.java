@@ -1,8 +1,5 @@
 package mage.cards.s;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -18,6 +15,10 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -106,7 +107,7 @@ class SoulflayerEffect extends ContinuousEffectImpl implements SourceEffect {
                             if (cardAbility instanceof HasteAbility) {
                                 abilitiesToAdd.add(HasteAbility.getInstance());
                             }
-                            if (cardAbility instanceof HexproofAbility) {
+                            if (cardAbility instanceof HexproofBaseAbility) {
                                 abilitiesToAdd.add(HexproofAbility.getInstance());
                             }
                             if (cardAbility instanceof IndestructibleAbility) {

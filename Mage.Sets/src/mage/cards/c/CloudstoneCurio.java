@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import mage.abilities.Ability;
@@ -14,7 +13,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -69,10 +67,7 @@ class CloudstoneCurioEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Permanent triggeringCreature = ((FixedTarget) getTargetPointer()).getTargetedPermanentOrLKIBattlefield(game);
-            if (triggeringCreature == null) {
-                triggeringCreature = (Permanent) game.getLastKnownInformation(getTargetPointer().getFirst(game, source), Zone.BATTLEFIELD);
-            }
+            Permanent triggeringCreature = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
             if (triggeringCreature != null) {
                 FilterPermanent filter = new FilterPermanent("another permanent you control that shares a permanent type with " + triggeringCreature.getName());
                 filter.add(Predicates.not(new PermanentIdPredicate(triggeringCreature.getId())));

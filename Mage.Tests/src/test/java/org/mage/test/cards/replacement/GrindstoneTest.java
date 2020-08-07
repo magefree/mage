@@ -8,7 +8,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 public class GrindstoneTest extends CardTestPlayerBase {
@@ -34,7 +33,7 @@ public class GrindstoneTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Painter's Servant");
         setChoice(playerA, "Blue");
 
-        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{3}, {T}: Target player puts the top two cards of their library into their graveyard. If both cards share a color, repeat this process.");
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{3}, {T}: Target player mills");
         addTarget(playerA, playerB);
 
         setStopAt(1, PhaseStep.END_TURN);
@@ -65,7 +64,7 @@ public class GrindstoneTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Painter's Servant");
         setChoice(playerA, "Blue");
 
-        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{3}, {T}: Target player puts the top two cards of their library into their graveyard. If both cards share a color, repeat this process.");
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{3}, {T}: Target player mills");
         addTarget(playerA, playerB);
 
         setStopAt(1, PhaseStep.END_TURN);
@@ -98,7 +97,7 @@ public class GrindstoneTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Painter's Servant");
         setChoice(playerA, "Blue");
 
-        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{3}, {T}: Target player puts the top two cards of their library into their graveyard. If both cards share a color, repeat this process.");
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{3}, {T}: Target player mills");
         addTarget(playerA, playerB);
 
         setStopAt(1, PhaseStep.END_TURN);

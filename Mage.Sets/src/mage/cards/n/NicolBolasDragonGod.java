@@ -129,7 +129,7 @@ class NicolBolasDragonGodPlusOneEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        player.drawCards(1, game);
+        player.drawCards(1, source.getSourceId(), game);
         Set<Card> cardsOnBattlefield = new LinkedHashSet<>();
         Set<Card> cards = new LinkedHashSet<>();
         for (UUID opponentId : game.getState().getPlayersInRange(player.getId(), game)) {

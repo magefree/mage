@@ -4,7 +4,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -25,7 +25,7 @@ public final class SerumRaker extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new DiesTriggeredAbility(new DiscardEachPlayerEffect()));
+        this.addAbility(new DiesSourceTriggeredAbility(new DiscardEachPlayerEffect()));
     }
 
     public SerumRaker (final SerumRaker card) {

@@ -11,7 +11,6 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.UUID;
@@ -24,13 +23,14 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl {
     protected CompoundAbility ability;
     protected boolean excludeSource;
     protected FilterPermanent filter;
+    protected boolean forceQuotes = false;
 
     public GainAbilityControlledEffect(Ability ability, Duration duration) {
-        this(ability, duration, StaticFilters.FILTER_PERMANENT);
+        this(ability, duration, StaticFilters.FILTER_PERMANENTS);
     }
 
     public GainAbilityControlledEffect(CompoundAbility ability, Duration duration) {
-        this(ability, duration, StaticFilters.FILTER_PERMANENT);
+        this(ability, duration, StaticFilters.FILTER_PERMANENTS);
     }
 
     public GainAbilityControlledEffect(Ability ability, Duration duration, FilterPermanent filter) {
@@ -60,7 +60,7 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl {
         this.ability = effect.ability.copy();
         this.filter = effect.filter.copy();
         this.excludeSource = effect.excludeSource;
-
+        this.forceQuotes = effect.forceQuotes;
     }
 
     @Override
@@ -87,7 +87,7 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl {
                 Permanent perm = it.next().getPermanentOrLKIBattlefield(game); //LKI is neccessary for "dies triggered abilities" to work given to permanets  (e.g. Showstopper)
                 if (perm != null) {
                     for (Ability abilityToAdd : ability) {
-                        perm.addAbility(abilityToAdd, source.getSourceId(), game, false);
+                        perm.addAbility(abilityToAdd, source.getSourceId(), game);
                     }
                 } else {
                     it.remove();
@@ -100,7 +100,7 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl {
             for (Permanent perm : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
                 if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
                     for (Ability abilityToAdd : ability) {
-                        perm.addAbility(abilityToAdd, source.getSourceId(), game, false);
+                        perm.addAbility(abilityToAdd, source.getSourceId(), game);
                     }
                 }
             }
@@ -112,7 +112,7 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl {
                     if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
                         if (filter.match(perm, source.getSourceId(), source.getControllerId(), game)) {
                             for (Ability abilityToAdd : ability) {
-                                perm.addAbility(abilityToAdd, source.getSourceId(), game, false);
+                                perm.addAbility(abilityToAdd, source.getSourceId(), game);
                             }
                         }
                     }
@@ -139,7 +139,7 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl {
         sb.append(filter.getMessage()).append(" you control ");
         if (duration == Duration.WhileOnBattlefield || duration == Duration.EndOfGame) {
             sb.append("have ");
-            if (gainedAbility.startsWith("Whenever ") || gainedAbility.startsWith("{T}")) {
+            if (forceQuotes || gainedAbility.startsWith("When") || gainedAbility.startsWith("{T}")) {
                 gainedAbility = '"' + gainedAbility + '"';
             }
         } else {
@@ -149,7 +149,17 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl {
         if (!duration.toString().isEmpty() && duration != Duration.EndOfGame) {
             sb.append(' ').append(duration.toString());
         }
-        staticText = sb.toString() + ".";
+        staticText = sb.toString();
+    }
+
+    /**
+     * Add quotes to gains abilities (by default static abilities don't have it)
+     * @return 
+     */
+    public GainAbilityControlledEffect withForceQuotes() {
+        this.forceQuotes = true;
+        setText();
+        return this;
     }
 
 }

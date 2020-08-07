@@ -10,6 +10,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -28,12 +29,14 @@ public final class AetherfluxReservoir extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // Whenever you cast a spell, you gain 1 life for each spell you've cast this turn.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new GainLifeEffect(new AetherfluxReservoirDynamicValue()), false));
+        Ability abilityGainLife = new SpellCastControllerTriggeredAbility(new GainLifeEffect(new AetherfluxReservoirDynamicValue()), false);
+        abilityGainLife.addHint(new ValueHint("You've cast spells this turn", new AetherfluxReservoirDynamicValue()));
+        this.addAbility(abilityGainLife);
 
         // Pay 50 life: Aetherflux Reservoir deals 50 damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(50), new PayLifeCost(50));
-        ability.addTarget(new TargetAnyTarget());
-        this.addAbility(ability);
+        Ability abilityPayLife = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(50), new PayLifeCost(50));
+        abilityPayLife.addTarget(new TargetAnyTarget());
+        this.addAbility(abilityPayLife);
     }
 
     public AetherfluxReservoir(final AetherfluxReservoir card) {

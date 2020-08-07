@@ -220,7 +220,7 @@ public class TargetPermanentOrPlayer extends TargetImpl {
                 sb.append(player.getLogName()).append(' ');
             }
         }
-        return sb.toString();
+        return sb.toString().trim();
     }
 
     @Override

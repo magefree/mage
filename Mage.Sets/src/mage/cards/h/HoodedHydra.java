@@ -4,7 +4,7 @@ package mage.cards.h;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -41,7 +41,7 @@ public final class HoodedHydra extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.P1P1.createInstance())));
 
         // When Hooded Hydra dies, create a 1/1 green Snake creature token for each +1/+1 counter on it.
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new SnakeToken("KTK"), new CountersSourceCount(CounterType.P1P1)), false));
+        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new SnakeToken("KTK"), new CountersSourceCount(CounterType.P1P1)), false));
 
         // Morph {3}{G}{G}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{3}{G}{G}")));

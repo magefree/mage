@@ -4,7 +4,7 @@ package mage.cards.b;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.ShuffleLibrarySourceEffect;
@@ -35,7 +35,7 @@ public final class BibFortuna extends CardImpl {
         this.addAbility(ability);
 
         // When Bib Fortuna dies shuffle your library.
-        this.addAbility(new DiesTriggeredAbility(new ShuffleLibrarySourceEffect()));
+        this.addAbility(new DiesSourceTriggeredAbility(new ShuffleLibrarySourceEffect()));
     }
 
     public BibFortuna(final BibFortuna card) {

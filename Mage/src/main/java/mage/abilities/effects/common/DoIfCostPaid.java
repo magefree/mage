@@ -108,7 +108,7 @@ public class DoIfCostPaid extends OneShotEffect {
                     player.resetStoredBookmark(game); // otherwise you can e.g. undo card drawn with Mentor of the Meek
                 } else {
                     // Paying cost was cancels so try to undo payment so far
-                    game.restoreState(bookmark, DoIfCostPaid.class.getName());
+                    player.restoreState(bookmark, DoIfCostPaid.class.getName(), game);
                     if (!otherwiseEffects.isEmpty()) {
                         for (Effect effect : otherwiseEffects) {
                             effect.setTargetPointer(this.targetPointer);
@@ -165,6 +165,13 @@ public class DoIfCostPaid extends OneShotEffect {
             sb.append("pay ");
         }
         return sb.append(costText).toString();
+    }
+
+    @Override
+    public void setValue(String key, Object value) {
+        super.setValue(key, value);
+        this.executingEffects.setValue(key, value);
+        this.otherwiseEffects.setValue(key, value);
     }
 
     @Override

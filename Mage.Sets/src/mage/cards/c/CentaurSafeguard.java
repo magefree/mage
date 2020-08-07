@@ -3,7 +3,7 @@ package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -25,7 +25,7 @@ public final class CentaurSafeguard extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Centaur Safeguard dies, you may gain 3 life.
-        this.addAbility(new DiesTriggeredAbility(new GainLifeEffect(3), true));
+        this.addAbility(new DiesSourceTriggeredAbility(new GainLifeEffect(3), true));
     }
 
     public CentaurSafeguard(final CentaurSafeguard card) {

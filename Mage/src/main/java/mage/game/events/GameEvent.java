@@ -68,7 +68,6 @@ public class GameEvent implements Serializable {
          */
         ZONE_CHANGE,
         ZONE_CHANGE_GROUP,
-        EMPTY_DRAW,
         DRAW_CARDS, // applies to an instruction to draw more than one card before any replacement effects apply to individual cards drawn
         DRAW_CARD, DREW_CARD,
         EXPLORED,
@@ -85,9 +84,11 @@ public class GameEvent implements Serializable {
         CONVOKED,
         DISCARD_CARD,
         DISCARDED_CARD,
-        CYCLE_CARD, CYCLED_CARD,
+        DISCARDED_CARDS,
+        CYCLE_CARD, CYCLED_CARD, CYCLE_DRAW,
         CLASH, CLASHED,
         DAMAGE_PLAYER,
+        MILL_CARDS,
         /* DAMAGED_PLAYER
          targetId    the id of the damaged player
          sourceId    sourceId of the ability which caused the damage
@@ -132,7 +133,7 @@ public class GameEvent implements Serializable {
          targetId    id of the spell that's cast
          playerId    player that casts the spell or ability
          amount      X multiplier to change X value, default 1
-        */
+         */
         CAST_SPELL,
         /* SPELL_CAST
          x-Costs are already defined
@@ -148,8 +149,20 @@ public class GameEvent implements Serializable {
          */
         SPELL_CAST,
         ACTIVATE_ABILITY, ACTIVATED_ABILITY,
+        /* ACTIVATE_ABILITY, ACTIVATED_ABILITY,
+         targetId    id of the ability to activate / use
+         sourceId    sourceId of the object with that ability
+         playerId    player that tries to use this ability
+         */
+        TAKE_SPECIAL_ACTION, TAKEN_SPECIAL_ACTION, // not used in implementation yet
+        /* TAKE_SPECIAL_ACTION, TAKEN_SPECIAL_ACTION,
+         targetId    id of the ability to activate / use
+         sourceId    sourceId of the object with that ability
+         playerId    player that tries to use this ability
+         */
         TRIGGERED_ABILITY,
-        COPIED_STACKOBJECT,
+        RESOLVING_ABILITY,
+        COPY_STACKOBJECT, COPIED_STACKOBJECT,
         /* ADD_MANA
          targetId    id of the ability that added the mana
          sourceId    sourceId of the ability that added the mana
@@ -222,6 +235,7 @@ public class GameEvent implements Serializable {
          */
         DECLARE_BLOCKER, BLOCKER_DECLARED,
         CREATURE_BLOCKED,
+        BATCH_BLOCK_NONCOMBAT,
         UNBLOCKED_ATTACKER,
         SEARCH_LIBRARY, LIBRARY_SEARCHED,
         SHUFFLE_LIBRARY, LIBRARY_SHUFFLED,
@@ -240,7 +254,13 @@ public class GameEvent implements Serializable {
         ENTERS_THE_BATTLEFIELD_CONTROL, // 616.1b
         ENTERS_THE_BATTLEFIELD_COPY, // 616.1c
         ENTERS_THE_BATTLEFIELD, // 616.1d
-        TAP, TAPPED, TAPPED_FOR_MANA,
+        TAP, TAPPED,
+        TAPPED_FOR_MANA,
+        /* TAPPED_FOR_MANA
+         During calculation of the available mana for a player the "TappedForMana" event is fired to simulate triggered mana production.
+         By checking the inCheckPlayableState these events are handled to give back only the available mana of instead really producing mana.
+         IMPORTANT: Triggered non mana abilities have to ignore the event if game.inCheckPlayableState is true.
+         */
         UNTAP, UNTAPPED,
         FLIP, FLIPPED,
         UNFLIP, UNFLIPPED,
@@ -295,6 +315,7 @@ public class GameEvent implements Serializable {
         DESTROYED_PERMANENT,
         SACRIFICE_PERMANENT, SACRIFICED_PERMANENT,
         FIGHTED_PERMANENT,
+        BATCH_FIGHT,
         EXPLOITED_CREATURE,
         EVOLVED_CREATURE,
         EMBALMED_CREATURE,
@@ -315,7 +336,7 @@ public class GameEvent implements Serializable {
          */
         LOST_CONTROL,
         GAIN_CONTROL, GAINED_CONTROL,
-        CREATE_TOKEN,
+        CREATE_TOKEN, CREATED_TOKEN,
         /* REGENERATE
          targetId    id of the creature to regenerate
          sourceId    sourceId of the effect doing the regeneration
@@ -397,12 +418,12 @@ public class GameEvent implements Serializable {
     }
 
     private GameEvent(EventType type, UUID customEventType,
-                      UUID targetId, UUID sourceId, UUID playerId, int amount, boolean flag) {
+            UUID targetId, UUID sourceId, UUID playerId, int amount, boolean flag) {
         this(type, customEventType, targetId, sourceId, playerId, amount, flag, null);
     }
 
     private GameEvent(EventType type, UUID customEventType,
-                      UUID targetId, UUID sourceId, UUID playerId, int amount, boolean flag, MageObjectReference reference) {
+            UUID targetId, UUID sourceId, UUID playerId, int amount, boolean flag, MageObjectReference reference) {
         this.type = type;
         this.customEventType = customEventType;
         this.targetId = targetId;

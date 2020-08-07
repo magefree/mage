@@ -23,10 +23,10 @@ public final class SoaringSeacliff extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         this.addAbility(new EntersBattlefieldTappedAbility());
-        this.addAbility(new BlueManaAbility());
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
+        this.addAbility(new BlueManaAbility());
     }
 
     public SoaringSeacliff(final SoaringSeacliff card) {

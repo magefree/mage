@@ -1,8 +1,5 @@
-
 package mage.game.command.planes;
 
-import java.util.ArrayList;
-import java.util.List;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
@@ -15,10 +12,8 @@ import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.RollPlanarDieEffect;
 import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect;
 import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect.HandSizeModification;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.abilities.effects.common.cost.PlanarDieRollCostIncreasingEffect;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.command.Plane;
@@ -30,8 +25,10 @@ import mage.target.Target;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.PlanarRollWatcher;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * @author spjspj
  */
 public class UndercityReachesPlane extends Plane {
@@ -43,7 +40,7 @@ public class UndercityReachesPlane extends Plane {
     }
 
     public UndercityReachesPlane() {
-        this.setName("Plane - Undercity Reaches");
+        this.setPlaneType(Planes.PLANE_UNDERCITY_REACHES);
         this.setExpansionSetCodeForImage("PCA");
 
         // Whenever a creature deals combat damage to a player, its controller may a draw a card
@@ -94,7 +91,7 @@ class UndercityReachesTriggeredAbility extends TriggeredAbilityImpl {
         if (cPlane == null) {
             return false;
         }
-        if (!cPlane.getName().equalsIgnoreCase("Plane - Undercity Reaches")) {
+        if (!cPlane.getPlaneType().equals(Planes.PLANE_UNDERCITY_REACHES)) {
             return false;
         }
 

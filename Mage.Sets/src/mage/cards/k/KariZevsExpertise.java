@@ -36,7 +36,7 @@ public final class KariZevsExpertise extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new UntapTargetEffect().setText("Untap it"));
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn).setText("It gans haste until end of turn."));
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn).setText("It gains haste until end of turn"));
 
         // You may cast a card with converted mana cost 2 or less from your hand without paying its mana cost.
         this.getSpellAbility().addEffect(new CastWithoutPayingManaCostEffect(2));

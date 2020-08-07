@@ -34,7 +34,7 @@ public final class SirenOfTheSilentSong extends CardImpl {
         // <i>Inspired</i> &mdash; Whenever Siren of the Silent Song becomes untapped, each opponent discards a card, then puts the top card of their library into their graveyard.
         Ability ability = new InspiredAbility(new DiscardEachPlayerEffect(TargetController.OPPONENT));
         Effect effect = new PutTopCardOfLibraryIntoGraveEachPlayerEffect(1, TargetController.OPPONENT);
-        effect.setText(", then puts the top card of their library into their graveyard");
+        effect.setText(", then mills a card");
         ability.addEffect(effect);
         this.addAbility(ability);
     }

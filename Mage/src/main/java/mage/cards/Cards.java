@@ -15,7 +15,7 @@ public interface Cards extends Set<UUID>, Serializable {
 
     Card get(UUID cardId, Game game);
 
-    void remove(Card card);
+    boolean remove(Card card);
 
     void setOwner(UUID ownerId, Game game);
 

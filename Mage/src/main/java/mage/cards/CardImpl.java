@@ -1,12 +1,6 @@
 package mage.cards;
 
 import com.google.common.collect.ImmutableList;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectImpl;
 import mage.Mana;
@@ -14,6 +8,7 @@ import mage.ObjectColor;
 import mage.abilities.*;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.HintUtils;
+import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.repository.PluginClassloaderRegistery;
 import mage.constants.*;
@@ -31,6 +26,10 @@ import mage.util.GameLog;
 import mage.util.SubTypeList;
 import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.*;
 
 public abstract class CardImpl extends MageObjectImpl implements Card {
 
@@ -134,11 +133,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             secondSideCardClazz = card.secondSideCardClazz;
             nightCard = card.nightCard;
         }
-        if (card.spellAbility != null) {
-            spellAbility = card.getSpellAbility().copy();
-        } else {
-            spellAbility = null;
-        }
+        spellAbility = null; // will be set on first getSpellAbility call if card has one.
 
         flipCard = card.flipCard;
         flipCardName = card.flipCardName;
@@ -285,7 +280,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     /**
      * Gets all current abilities - includes additional abilities added by other
-     * cards or effects
+     * cards or effects. Warning, you can't modify that list.
      *
      * @param game
      * @return A list of {@link Ability} - this collection is not modifiable
@@ -295,15 +290,38 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         if (game == null) {
             return abilities; // deck editor with empty game
         }
+
         CardState cardState = game.getState().getCardState(this.getId());
-        if (!cardState.hasLostAllAbilities() && (cardState.getAbilities() == null || cardState.getAbilities().isEmpty())) {
+        if (cardState == null) {
             return abilities;
         }
+
+        // collects all abilities
         Abilities<Ability> all = new AbilitiesImpl<>();
+
+        // basic
         if (!cardState.hasLostAllAbilities()) {
             all.addAll(abilities);
         }
+
+        // dynamic
         all.addAll(cardState.getAbilities());
+
+        // workaround to add dynamic flashback ability from main card to all parts (example: Snapcaster Mage gives flashback to split card)
+        if (!this.getId().equals(this.getMainCard().getId())) {
+            CardState mainCardState = game.getState().getCardState(this.getMainCard().getId());
+            if (mainCardState != null
+                    && !mainCardState.hasLostAllAbilities()
+                    && mainCardState.getAbilities().containsClass(FlashbackAbility.class)) {
+                FlashbackAbility flash = new FlashbackAbility(this.getManaCost(), this.isInstant() ? TimingRule.INSTANT : TimingRule.SORCERY);
+                flash.setSourceId(this.getId());
+                flash.setControllerId(this.getOwnerId());
+                flash.setSpellAbilityType(this.getSpellAbility().getSpellAbilityType());
+                flash.setAbilityName(this.getName());
+                all.add(flash);
+            }
+        }
+
         return all;
     }
 
@@ -312,6 +330,12 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         CardState cardState = game.getState().getCardState(this.getId());
         cardState.setLostAllAbilities(true);
         cardState.getAbilities().clear();
+    }
+
+    @Override
+    public boolean hasAbility(Ability ability, Game game) {
+        // getAbilities(game) searches all abilities from base and dynamic lists (other)
+        return this.getAbilities(game).contains(ability);
     }
 
     /**
@@ -326,6 +350,24 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         for (Ability subAbility : ability.getSubAbilities()) {
             abilities.add(subAbility);
         }
+
+        // verify check: draw effect can't be rollback after mana usage (example: Chromatic Sphere)
+        // (player can cheat with cancel button to see next card)
+        // verify test will catch that errors
+        if (ability instanceof ActivatedManaAbilityImpl) {
+            ActivatedManaAbilityImpl manaAbility = (ActivatedManaAbilityImpl) ability;
+            String rule = manaAbility.getRule().toLowerCase(Locale.ENGLISH);
+            if (manaAbility.getEffects().stream().anyMatch(e -> e.getOutcome().equals(Outcome.DrawCard))
+                    || rule.contains("reveal ")
+                    || rule.contains("draw ")) {
+                if (manaAbility.isUndoPossible()) {
+                    throw new IllegalArgumentException("Ability contains draw/reveal effect, but isUndoPossible is true. Ability: "
+                            + ability.getClass().getSimpleName() + "; " + ability.getRule());
+                }
+            }
+        }
+
+
     }
 
     protected void addAbilities(List<Ability> abilities) {
@@ -365,6 +407,20 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         return spellAbility;
     }
 
+    /**
+     * Dynamic cost modification for card (process only own abilities). Example:
+     * if it need stack related info (like real targets) then must check two
+     * states (game.inCheckPlayableState):
+     * <p>
+     * 1. In playable state it must check all possible use cases (e.g. allow to
+     * reduce on any available target and modes)
+     * <p>
+     * 2. In real cast state it must check current use case (e.g. real selected
+     * targets and modes)
+     *
+     * @param ability
+     * @param game
+     */
     @Override
     public void adjustCosts(Ability ability, Game game) {
         ability.adjustCosts(game);
@@ -493,7 +549,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             case EXILED:
                 if (game.getExile().getCard(getId(), game) != null) {
                     removed = game.getExile().removeCard(this, game);
-
                 }
                 break;
             case STACK:
@@ -503,15 +558,18 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 } else {
                     stackObject = game.getStack().getSpell(this.getId(), false);
                 }
+
                 if (stackObject == null && (this instanceof SplitCard)) { // handle if half of Split cast is on the stack
                     stackObject = game.getStack().getSpell(((SplitCard) this).getLeftHalfCard().getId(), false);
                     if (stackObject == null) {
                         stackObject = game.getStack().getSpell(((SplitCard) this).getRightHalfCard().getId(), false);
                     }
                 }
+
                 if (stackObject == null && (this instanceof AdventureCard)) {
                     stackObject = game.getStack().getSpell(((AdventureCard) this).getSpellCard().getId(), false);
                 }
+
                 if (stackObject == null) {
                     stackObject = game.getStack().getSpell(getId(), false);
                 }
@@ -559,6 +617,8 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             }
         } else {
             logger.warn("Couldn't find card in fromZone, card=" + getIdName() + ", fromZone=" + fromZone);
+            // possible reason: you to remove card from wrong zone or card already removed,
+            // e.g. you added copy card to wrong graveyard (see owner) or removed card from graveyard before moveToZone call
         }
         return removed;
     }

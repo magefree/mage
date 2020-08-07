@@ -1,7 +1,7 @@
 package mage.abilities.keyword;
 
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.constants.Outcome;
@@ -15,7 +15,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author Loki
  */
-public class UndyingAbility extends DiesTriggeredAbility {
+public class UndyingAbility extends DiesSourceTriggeredAbility {
 
     public UndyingAbility() {
         super(new UndyingEffect());
@@ -27,7 +27,7 @@ public class UndyingAbility extends DiesTriggeredAbility {
     }
 
     @Override
-    public DiesTriggeredAbility copy() {
+    public DiesSourceTriggeredAbility copy() {
         return new UndyingAbility(this);
     }
 

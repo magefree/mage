@@ -33,7 +33,7 @@ public class CanBlockOnlyFlyingEffect extends RestrictionEffect {
         if (attacker == null) {
             return true;
         }
-        return attacker.getAbilities().contains(FlyingAbility.getInstance());
+        return attacker.hasAbility(FlyingAbility.getInstance(), game);
     }
 
     @Override

@@ -7,10 +7,7 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
- * also tests cost reduction effects
- *
- * @author BetaSteward
+ * @author BetaSteward, JayDi85
  */
 public class CostModificationTest extends CardTestPlayerBase {
 
@@ -71,7 +68,7 @@ public class CostModificationTest extends CardTestPlayerBase {
     /**
      * Test that cost reduction also works with mana source restriction Myr
      * Superion Spend only mana produced by creatures to cast Myr Superion
-     *
+     * <p>
      * Etherium Sculptor {1}{U} Artifact Creature - Vedalken Artificer 1/2
      * Artifact spells you cast cost {1} less to cast.
      */
@@ -143,7 +140,7 @@ public class CostModificationTest extends CardTestPlayerBase {
     }
 
     /*
-    * Reported bug: Grand Arbiter Augustin IV makes moth spells you cast and your opponent cast {1} more. Should only affect opponent's spells costs.
+     * Reported bug: Grand Arbiter Augustin IV makes moth spells you cast and your opponent cast {1} more. Should only affect opponent's spells costs.
      */
     @Test
     public void testArbiterIncreasingCostBothPlayers() {
@@ -244,6 +241,145 @@ public class CostModificationTest extends CardTestPlayerBase {
         assertCounterCount(playerA, "Animar, Soul of Elements", CounterType.P1P1, 2);
 
         assertTappedCount("Plains", true, 3);
+    }
 
+    @Test
+    public void test_ThatTargetSourceEffect_AccursedWitch_CanPlayWithReduction() {
+        // creature 4/2
+        // Spells your opponents cast that target Accursed Witch cost {1} less to cast.
+        addCard(Zone.BATTLEFIELD, playerB, "Accursed Witch");
+        //
+        // {1}{R} SORCERY
+        // Grapeshot deals 1 damage to any target.
+        addCard(Zone.HAND, playerA, "Grapeshot");
+        addCard(Zone.HAND, playerA, "Mountain", 1); // play to add mana
+
+        checkPlayableAbility("0 mana, can't", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Grapeshot", false);
+
+        // add 1 mana, can cast by target
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mountain");
+        checkPlayableAbility("1 mana, can play", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Grapeshot", true);
+
+        // cast with target
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grapeshot", "Accursed Witch");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertGraveyardCount(playerA, "Grapeshot", 1);
+    }
+
+    @Test
+    public void test_ThatTargetSourceEffect_AccursedWitch_CantPlayOnProtection() {
+        // creature 4/2
+        // Spells your opponents cast that target Accursed Witch cost {1} less to cast.
+        addCard(Zone.BATTLEFIELD, playerB, "Accursed Witch");
+        //
+        // {1}{R} SORCERY
+        // Grapeshot deals 1 damage to any target.
+        addCard(Zone.HAND, playerA, "Grapeshot");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        //
+        // Artifact — Equipment
+        // Equip {2}
+        // Equipped creature gets +2/+2 and has protection from red and from white.
+        addCard(Zone.BATTLEFIELD, playerB, "Sword of War and Peace");
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
+
+        // 1 mana, can cast by target
+        checkPlayableAbility("1 mana, can play", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Grapeshot", true);
+
+        // add protection from red
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Equip {2}", "Accursed Witch");
+
+        // can't cast cause can't target to red
+        checkPlayableAbility("can't cast cause protection", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Grapeshot", false);
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+    }
+
+    @Test
+    public void test_ThatTargetSourceEffect_BorealElemental() {
+        // use case: cost increase for getPlayable works only for no other targets available
+        // so if you can targets another target then allows to cast (don't apply cost increase)
+
+        // creature 3/4
+        // Spells your opponents cast that target Boreal Elemental cost {2} more to cast.
+        addCard(Zone.BATTLEFIELD, playerB, "Boreal Elemental");
+        //
+        // {R} instant
+        // Engulfing Flames deals 1 damage to target creature. It can't be regenerated this turn.
+        addCard(Zone.HAND, playerA, "Engulfing Flames");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        //
+        addCard(Zone.HAND, playerA, "Grizzly Bears"); // {1}{G}
+        addCard(Zone.HAND, playerA, "Forest", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+
+        // no second target, so must cost increase
+        checkPlayableAbility("one target, can't play", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Engulfing Flames", false);
+
+        // prepare second target
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Forest");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G}", 2);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grizzly Bears");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPlayableAbility("two targets, can play", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Engulfing Flames", true);
+
+        // try to cast (only one target possible to targets/play)
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Engulfing Flames");
+        //addTarget(playerA, "Boreal Elemental"); // you can't target Boreal Elemental cause it will increase cost
+        addTarget(playerA, "Grizzly Bears");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertGraveyardCount(playerA, "Engulfing Flames", 1);
+    }
+
+    @Test
+    public void test_ThatTargetEnchantedPlayer_InfectiousCurse() {
+        // When Accursed Witch dies, return it to the battlefield transformed under your control attached to target opponent.
+        //
+        // transformed: Infectious Curse
+        // Enchant player
+        // Spells you cast that target enchanted player cost {1} less to cast.
+        addCard(Zone.BATTLEFIELD, playerA, "Accursed Witch", 1); // 4/2
+        //
+        addCard(Zone.HAND, playerA, "Lightning Bolt", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        //
+        // {1}{R} SORCERY
+        // Grapeshot deals 1 damage to any target.
+        addCard(Zone.HAND, playerA, "Grapeshot");
+
+        checkPlayableAbility("no mana", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Grapeshot", false);
+
+        // transform
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Accursed Witch");
+        addTarget(playerA, playerB); // attach curse to
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("transformed", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Infectious Curse", 1);
+        checkPlayableAbility("reduced, but no mana", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Grapeshot", false);
+
+        // cast
+        // possible bug: transform command can generate duplicated triggers (player get choose trigger dialog but must not)
+        checkPlayableAbility("reduced, with mana", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Grapeshot", true);
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Grapeshot", playerB);
+        waitStackResolved(3, PhaseStep.PRECOMBAT_MAIN);
+        checkLife("a", 3, PhaseStep.PRECOMBAT_MAIN, playerA, 20 + 1); // +1 from curse on turn 2
+        checkLife("b", 3, PhaseStep.PRECOMBAT_MAIN, playerB, 20 - 1 - 1); // -1 from grapeshot, -1 from curse on turn 2
+
+        setStrictChooseMode(true);
+        setStopAt(6, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
     }
 }

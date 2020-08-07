@@ -1,7 +1,5 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.dynamicvalue.common.TargetConvertedManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -11,21 +9,22 @@ import mage.constants.CardType;
 import mage.game.permanent.token.SaprolingToken;
 import mage.target.common.TargetArtifactPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class ArtifactMutation extends CardImpl {
 
     public ArtifactMutation(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}{G}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}{G}");
 
         // Destroy target artifact. It can't be regenerated.
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
         this.getSpellAbility().addTarget(new TargetArtifactPermanent());
+
         // create X 1/1 green Saproling creature tokens, where X is that artifact's converted mana cost.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken(), TargetConvertedManaCost.instance));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken(), TargetConvertedManaCost.instance).setText("create X 1/1 green Saproling creature tokens, where X is that artifact's converted mana cost"));
     }
 
     public ArtifactMutation(final ArtifactMutation card) {

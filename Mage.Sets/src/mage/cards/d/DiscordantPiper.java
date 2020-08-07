@@ -1,7 +1,7 @@
 package mage.cards.d;
 
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -25,7 +25,7 @@ public final class DiscordantPiper extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Discordant Piper dies, create a 0/1 white Goat creature token.
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new GoatToken())));
+        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new GoatToken())));
     }
 
     private DiscordantPiper(final DiscordantPiper card) {

@@ -1,5 +1,6 @@
 package mage.abilities.effects;
 
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -16,8 +17,6 @@ import mage.game.stack.StackAbility;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
-
-import java.util.UUID;
 
 /**
  * Cards with the Aura subtype don't change the zone they are in, if there is no
@@ -163,7 +162,7 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
             PermanentCard permanent = new PermanentCard(card, (controllingPlayer == null ? card.getOwnerId() : controllingPlayer.getId()), game);
             ZoneChangeEvent zoneChangeEvent = new ZoneChangeEvent(permanent, controllerId, fromZone, Zone.BATTLEFIELD);
             permanent.updateZoneChangeCounter(game, zoneChangeEvent);
-            game.getBattlefield().addPermanent(permanent);
+            game.addPermanent(permanent, 0);
             card.setZone(Zone.BATTLEFIELD, game);
             if (permanent.entersBattlefield(event.getSourceId(), game, fromZone, true)) {
                 if (targetCard != null) {
@@ -196,9 +195,9 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
             return card != null && (card.isEnchantment() && card.hasSubtype(SubType.AURA, game)
                     || // in case of transformable enchantments
                     (game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId()) != null
-                            && card.getSecondCardFace() != null
-                            && card.getSecondCardFace().isEnchantment()
-                            && card.getSecondCardFace().hasSubtype(SubType.AURA, game)));
+                    && card.getSecondCardFace() != null
+                    && card.getSecondCardFace().isEnchantment()
+                    && card.getSecondCardFace().hasSubtype(SubType.AURA, game)));
         }
         return false;
     }

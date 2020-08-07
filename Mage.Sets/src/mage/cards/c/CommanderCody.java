@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -15,8 +13,9 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.TrooperToken;
 
+import java.util.UUID;
+
 /**
- *
  * @author Styxo
  */
 public final class CommanderCody extends CardImpl {
@@ -29,7 +28,7 @@ public final class CommanderCody extends CardImpl {
     }
 
     public CommanderCody(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{U}{B}{R}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{U}{B}{R}{G}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.TROOPER);
@@ -37,7 +36,11 @@ public final class CommanderCody extends CardImpl {
         this.toughness = new MageInt(7);
 
         // Non-token Trooper creatures you control have "At the beginning of your upkeep, create a 1/1 white Trooper creature token."
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new TrooperToken()), TargetController.YOU, false), Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(
+                new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new TrooperToken()), TargetController.YOU, false),
+                Duration.WhileOnBattlefield, filter, false)
+                .withForceQuotes()
+        ));
     }
 
     public CommanderCody(final CommanderCody card) {

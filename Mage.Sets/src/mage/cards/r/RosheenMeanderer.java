@@ -5,16 +5,18 @@ import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.mana.BasicManaEffect;
-import mage.abilities.mana.BasicManaAbility;
+import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.mana.conditional.ManaCondition;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
+import mage.constants.Zone;
 import mage.game.Game;
 
 import java.util.UUID;
@@ -34,10 +36,9 @@ public final class RosheenMeanderer extends CardImpl {
 
         // {T}: Add {C}{C}{C}{C}. Spend this mana only on costs that contain {X}.
         this.addAbility(new RosheenMeandererManaAbility());
-
     }
 
-    public RosheenMeanderer(final RosheenMeanderer card) {
+    private RosheenMeanderer(final RosheenMeanderer card) {
         super(card);
     }
 
@@ -47,14 +48,14 @@ public final class RosheenMeanderer extends CardImpl {
     }
 }
 
-class RosheenMeandererManaAbility extends BasicManaAbility {
+class RosheenMeandererManaAbility extends ActivatedManaAbilityImpl {
 
     RosheenMeandererManaAbility() {
-        super(new BasicManaEffect(new RosheenMeandererConditionalMana()));
+        super(Zone.BATTLEFIELD, new BasicManaEffect(new RosheenMeandererConditionalMana()), new TapSourceCost());
         this.netMana.add(Mana.ColorlessMana(4));
     }
 
-    RosheenMeandererManaAbility(RosheenMeandererManaAbility ability) {
+    private RosheenMeandererManaAbility(RosheenMeandererManaAbility ability) {
         super(ability);
     }
 
@@ -66,7 +67,7 @@ class RosheenMeandererManaAbility extends BasicManaAbility {
 
 class RosheenMeandererConditionalMana extends ConditionalMana {
 
-    public RosheenMeandererConditionalMana() {
+    RosheenMeandererConditionalMana() {
         super(Mana.ColorlessMana(4));
         staticText = "Spend this mana only on costs that contain {X}";
         addCondition(new RosheenMeandererManaCondition());

@@ -86,7 +86,7 @@ class RageForgerDamageEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent attackingCreature = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+        Permanent attackingCreature = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (controller != null && attackingCreature != null) {
             game.damagePlayerOrPlaneswalker(source.getFirstTarget(), 1, attackingCreature.getId(), game, false, true);
             return true;

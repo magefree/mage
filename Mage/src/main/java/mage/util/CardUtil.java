@@ -2,30 +2,35 @@ package mage.util;
 
 import mage.MageObject;
 import mage.Mana;
+import mage.abilities.Abilities;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.*;
+import mage.abilities.effects.ContinuousEffect;
 import mage.cards.Card;
-import mage.constants.ColoredManaSymbol;
-import mage.constants.EmptyNames;
-import mage.constants.ManaType;
+import mage.cards.MeldCard;
+import mage.constants.*;
 import mage.filter.Filter;
+import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.CardState;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentCard;
+import mage.game.permanent.PermanentMeld;
 import mage.game.permanent.token.Token;
+import mage.game.stack.Spell;
+import mage.players.Player;
+import mage.target.Target;
 import mage.util.functions.CopyTokenFunction;
-import org.junit.Assert;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author nantuko
@@ -658,6 +663,14 @@ public final class CardUtil {
         return object1 != null && object2 != null && haveSameNames(object1.getName(), object2.getName());
     }
 
+    public static boolean haveSameNames(MageObject object, String needName, Game game) {
+        return containsName(object, needName, game);
+    }
+
+    public static boolean containsName(MageObject object, String name, Game game) {
+        return new NamePredicate(name).apply(object, game);
+    }
+
     public static boolean haveEmptyName(String name) {
         return name == null || name.isEmpty() || name.equals(EmptyNames.FACE_DOWN_CREATURE.toString()) || name.equals(EmptyNames.FACE_DOWN_TOKEN.toString());
     }
@@ -745,6 +758,121 @@ public final class CardUtil {
             case COLORLESS:
             default:
                 throw new IllegalArgumentException("Wrong mana type " + manaType);
+        }
+    }
+
+    public static String getBoostCountAsStr(int power, int toughness) {
+        // sign fix for zero values
+        // -1/+0 must be -1/-0
+        // +0/-1 must be -0/-1
+        String signedP = String.format("%1$+d", power);
+        String signedT = String.format("%1$+d", toughness);
+        if (signedP.equals("+0") && signedT.startsWith("-")) signedP = "-0";
+        if (signedT.equals("+0") && signedP.startsWith("-")) signedT = "-0";
+
+        return signedP + "/" + signedT;
+    }
+
+    public static boolean isSpliceAbility(Ability ability, Game game) {
+        if (ability instanceof SpellAbility) {
+            return ((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.SPLICE;
+        }
+        return false;
+    }
+
+    public static boolean isFusedPartAbility(Ability ability, Game game) {
+        // TODO: is works fine with copies of spells on stack?
+        if (ability instanceof SpellAbility) {
+            Spell mainSpell = game.getSpell(ability.getId());
+            if (mainSpell == null) {
+                return true;
+            } else {
+                SpellAbility mainSpellAbility = mainSpell.getSpellAbility();
+                return mainSpellAbility.getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED
+                        && !ability.equals(mainSpellAbility);
+            }
+        }
+        return false;
+    }
+
+    public static Abilities<Ability> getAbilities(MageObject object, Game game) {
+        if (object instanceof Card) {
+            return ((Card) object).getAbilities(game);
+        } else {
+            return object.getAbilities();
+        }
+    }
+
+    public static String getTextWithFirstCharUpperCase(String text) {
+        if (text != null && text.length() >= 1) {
+            return Character.toUpperCase(text.charAt(0)) + text.substring(1);
+        } else {
+            return text;
+        }
+    }
+
+    public static Set<UUID> getAllSelectedTargets(Ability ability, Game game) {
+        return ability.getModes().getSelectedModes()
+                .stream()
+                .map(ability.getModes()::get)
+                .map(Mode::getTargets)
+                .flatMap(Collection::stream)
+                .map(Target::getTargets)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toSet());
+    }
+
+    public static Set<UUID> getAllPossibleTargets(Ability ability, Game game) {
+        return ability.getModes().values()
+                .stream()
+                .map(Mode::getTargets)
+                .flatMap(Collection::stream)
+                .map(t -> t.possibleTargets(ability.getSourceId(), ability.getControllerId(), game))
+                .flatMap(Collection::stream)
+                .collect(Collectors.toSet());
+    }
+
+    /**
+     * Put card to battlefield without resolve
+     *
+     * @param game
+     * @param card
+     * @param player
+     */
+    public static void putCardOntoBattlefieldWithEffects(Game game, Card card, Player player) {
+        // same logic as ZonesHandler->maybeRemoveFromSourceZone
+
+        // prepare card and permanent
+        card.setZone(Zone.BATTLEFIELD, game);
+        card.setOwnerId(player.getId());
+        PermanentCard permanent;
+        if (card instanceof MeldCard) {
+            permanent = new PermanentMeld(card, player.getId(), game);
+        } else {
+            permanent = new PermanentCard(card, player.getId(), game);
+        }
+
+        // put onto battlefield with possible counters
+        game.getPermanentsEntering().put(permanent.getId(), permanent);
+        card.checkForCountersToAdd(permanent, game);
+        permanent.entersBattlefield(permanent.getId(), game, Zone.OUTSIDE, false);
+        game.addPermanent(permanent, game.getState().getNextPermanentOrderNumber());
+        game.getPermanentsEntering().remove(permanent.getId());
+
+        // workaround for special tapped status from test framework's command (addCard)
+        if (card instanceof PermanentCard && ((PermanentCard) card).isTapped()) {
+            permanent.setTapped(true);
+        }
+
+        // remove sickness
+        permanent.removeSummoningSickness();
+
+        // init effects on static abilities (init continuous effects; warning, game state contains copy)
+        for (ContinuousEffect effect : game.getState().getContinuousEffects().getLayeredEffects(game)) {
+            Optional<Ability> ability = game.getState().getContinuousEffects().getLayeredEffectAbilities(effect).stream().findFirst();
+            if (ability.isPresent() && permanent.getId().equals(ability.get().getSourceId())) {
+                effect.init(ability.get(), game, player.getId());
+            }
         }
     }
 }

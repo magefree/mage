@@ -9,7 +9,7 @@ import mage.constants.Zone;
  */
 public class CastCommanderAbility extends SpellAbility {
 
-    private String ruleText;
+    private final String ruleText;
 
     public CastCommanderAbility(Card card, SpellAbility spellTemplate) {
         super(spellTemplate);

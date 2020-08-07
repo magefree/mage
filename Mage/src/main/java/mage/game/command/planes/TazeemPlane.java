@@ -11,7 +11,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.RollPlanarDieEffect;
+import mage.abilities.effects.common.cost.PlanarDieRollCostIncreasingEffect;
 import mage.constants.Duration;
+import mage.constants.Planes;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
@@ -33,7 +35,7 @@ public class TazeemPlane extends Plane {
     private static final String rule = "Creatures can't block";
 
     public TazeemPlane() {
-        this.setName("Plane - Tazeem");
+        this.setPlaneType(Planes.PLANE_TAZEEM);
         this.setExpansionSetCodeForImage("PCA");
 
         // Creatures can't block
@@ -75,7 +77,7 @@ class TazeemCantBlockAllEffect extends RestrictionEffect {
     public boolean applies(Permanent permanent, Ability source, Game game) {
         Plane cPlane = game.getState().getCurrentPlane();
 
-        if (cPlane == null || !cPlane.getName().equalsIgnoreCase("Plane - Tazeem")) {
+        if (cPlane == null || !cPlane.getPlaneType().equals(Planes.PLANE_TAZEEM)) {
             return false;
         }
         return filter.match(permanent, source.getSourceId(), source.getControllerId(), game);

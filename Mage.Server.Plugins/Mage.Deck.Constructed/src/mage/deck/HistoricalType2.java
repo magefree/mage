@@ -4,6 +4,7 @@ import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.cards.decks.Constructed;
 import mage.cards.decks.Deck;
+import mage.cards.decks.DeckValidatorError;
 
 import java.util.*;
 
@@ -80,7 +81,7 @@ public class HistoricalType2 extends Constructed {
      * done in the overridden validate function.
      */
     public HistoricalType2() {
-        super("Constructed - Historical Type 2");
+        super("Constructed - Historical Type 2", "Hist. Type 2");
 
         // banned cards
         banned.add("Balance");
@@ -104,9 +105,10 @@ public class HistoricalType2 extends Constructed {
     @Override
     public boolean validate(Deck deck) {
 
-        Map<String, String> leastInvalid = null;
+        List<DeckValidatorError> leastInvalid = null;
 
         boolean valid = false;
+        errorsList.clear();
 
         // first, check whether misty and batterskull are in the same deck.
         Map<String, Integer> counts = new HashMap<>();
@@ -124,7 +126,7 @@ public class HistoricalType2 extends Constructed {
         for (String[] sets : standards) {
 
             // clear the invalid list
-            invalid.clear();
+            errorsList.clear();
 
             // add the sets to the setCodes.
             setCodes = new ArrayList<>(Arrays.asList(sets));
@@ -138,15 +140,15 @@ public class HistoricalType2 extends Constructed {
             // if the map holding the invalid cards is empty, set it to a
             // copy of the current invalid list.
             if (leastInvalid == null) {
-                leastInvalid = new HashMap<>(this.getInvalid());
+                leastInvalid = new ArrayList<>(this.getErrorsList());
                 continue;
             }
 
             // see how many invalid cards there are. if there are less invalid
             // cards than the stored invalid list, assign the current invalid
             // to leastInvalid.
-            if (leastInvalid.size() > this.getInvalid().size()) {
-                leastInvalid = new HashMap<>(this.getInvalid());
+            if (leastInvalid.size() > this.getErrorsList().size()) {
+                leastInvalid = new ArrayList<>(this.getErrorsList());
             }
         }
 
@@ -164,7 +166,7 @@ public class HistoricalType2 extends Constructed {
 
             // clear the invalid list and set codes.
             setCodes.clear();
-            invalid.clear();
+            errorsList.clear();
 
             // increment the start and end dates.
             start.set(Calendar.YEAR, start.get(Calendar.YEAR) + 1);
@@ -182,7 +184,7 @@ public class HistoricalType2 extends Constructed {
 
             // validate it. If it validates, clear the invalid cards and break.
             if (super.validate(deck)) {
-                invalid.clear();
+                errorsList.clear();
                 valid = true;
                 break;
             }
@@ -191,17 +193,16 @@ public class HistoricalType2 extends Constructed {
             // cards than the stored invalid list, assign the current invalid
             // to leastInvalid.
             if (leastInvalid == null) {
-                leastInvalid = new HashMap<>(this.getInvalid());
-
-            } else if (leastInvalid.size() > this.getInvalid().size()) {
-                leastInvalid = new HashMap<>(this.getInvalid());
+                leastInvalid = new ArrayList<>(this.getErrorsList());
+            } else if (leastInvalid.size() > this.getErrorsList().size()) {
+                leastInvalid = new ArrayList<>(this.getErrorsList());
             }
         }
 
         // if no standard environment is valid, set the invalid to the
         // invalid that had the least errors.
         if (!valid) {
-            this.invalid = new HashMap<>(leastInvalid);
+            this.errorsList = new ArrayList<>(leastInvalid);
         }
 
         // return the validity.

@@ -33,7 +33,9 @@ public final class PatronOfTheOrochi extends CardImpl {
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 
-        // Snake offering (You may cast this card any time you could cast an instant by sacrificing a Snake and paying the difference in mana costs between this and the sacrificed Snake. Mana cost includes color.)
+        // Snake offering (You may cast this card any time you could cast an instant 
+        // by sacrificing a Snake and paying the difference in mana costs between this 
+        // and the sacrificed Snake. Mana cost includes color.)
         this.addAbility(new OfferingAbility(SubType.SNAKE));
 
         // {T}: Untap all Forests and all green creatures. Activate this ability only once each turn.

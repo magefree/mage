@@ -38,7 +38,7 @@ public final class KaradorGhostChieftain extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Karador, Ghost Chieftain costs {1} less to cast for each creature card in your graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.STACK,
+        this.addAbility(new SimpleStaticAbility(Zone.ALL,
                 new KaradorGhostChieftainCostReductionEffect()));
 
         // During each of your turns, you may cast one creature card from your graveyard.

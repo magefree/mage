@@ -1,26 +1,19 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.abilities.StaticAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.common.GainActivatedAbilitiesOfTopCardEffect;
 import mage.abilities.effects.common.continuous.PlayWithTheTopCardRevealedEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
+import mage.filter.FilterCard;
+import mage.filter.predicate.Predicates;
+
+import java.util.UUID;
 
 /**
  *
@@ -54,8 +47,14 @@ public final class SkillBorrower extends CardImpl {
 
 class SkillBorrowerAbility extends StaticAbility {
 
+    private static final FilterCard filter = new FilterCard("an artifact or creature card");
+
+    static {
+        filter.add(Predicates.or(CardType.CREATURE.getPredicate(), CardType.ARTIFACT.getPredicate()));
+    }
+
     public SkillBorrowerAbility() {
-        super(Zone.BATTLEFIELD, new SkillBorrowerEffect());
+        super(Zone.BATTLEFIELD, new GainActivatedAbilitiesOfTopCardEffect(filter));
     }
 
     public SkillBorrowerAbility(SkillBorrowerAbility ability) {
@@ -66,47 +65,5 @@ class SkillBorrowerAbility extends StaticAbility {
     public SkillBorrowerAbility copy() {
         return new SkillBorrowerAbility(this);
     }
-
-    @Override
-    public String getRule() {
-        return "As long as the top card of your library is an artifact or creature card, {this} has all activated abilities of that card";
-    }
 }
 
-class SkillBorrowerEffect extends ContinuousEffectImpl {
-
-    public SkillBorrowerEffect() {
-        super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-        staticText = "As long as the top card of your library is an artifact or creature card, {this} has all activated abilities of that card";
-    }
-
-    public SkillBorrowerEffect(final SkillBorrowerEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SkillBorrowerEffect copy() {
-        return new SkillBorrowerEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            Card card = player.getLibrary().getFromTop(game);
-            if (card != null && (card.isCreature() || card.isArtifact())) {
-                Permanent permanent = game.getPermanent(source.getSourceId());
-                if (permanent != null) {
-                    for (Ability ability : card.getAbilities(game)) {
-                        if (ability instanceof ActivatedAbility) {
-                            permanent.addAbility(ability, source.getSourceId(), game);
-                        }
-                    }
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-}

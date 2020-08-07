@@ -1,6 +1,6 @@
 package mage.cards.h;
 
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -10,9 +10,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -22,12 +21,6 @@ import java.util.UUID;
  * @author North
  */
 public final class Helvault extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you don't control");
-
-    static {
-        filter.add(TargetController.NOT_YOU.getControllerPredicate());
-    }
 
     public Helvault(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
@@ -42,14 +35,14 @@ public final class Helvault extends CardImpl {
         // {7}, {T}: Exile target creature you don't control.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetForSourceEffect(), new GenericManaCost(7));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
         this.addAbility(ability);
 
         // When Helvault is put into a graveyard from the battlefield, return all cards exiled with it to the battlefield under their owners' control.
-        this.addAbility(new DiesTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD)));
+        this.addAbility(new DiesSourceTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD)));
     }
 
-    public Helvault(final Helvault card) {
+    private Helvault(final Helvault card) {
         super(card);
     }
 

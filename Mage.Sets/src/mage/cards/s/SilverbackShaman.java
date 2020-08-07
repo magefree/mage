@@ -1,7 +1,7 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -28,7 +28,7 @@ public final class SilverbackShaman extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // When Silverback Shaman dies, draw a card.
-        this.addAbility(new DiesTriggeredAbility(new DrawCardSourceControllerEffect(1)));
+        this.addAbility(new DiesSourceTriggeredAbility(new DrawCardSourceControllerEffect(1)));
     }
 
     private SilverbackShaman(final SilverbackShaman card) {

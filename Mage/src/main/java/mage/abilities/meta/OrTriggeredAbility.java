@@ -2,6 +2,7 @@ package mage.abilities.meta;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
@@ -86,15 +87,15 @@ public class OrTriggeredAbility extends TriggeredAbilityImpl {
         }
         StringBuilder sb = new StringBuilder();
         if (triggeredAbilities[0].getRule().length() > 0) {
-            sb.append(triggeredAbilities[0].getRule().substring(0, 1).toUpperCase())
-                    .append(triggeredAbilities[0].getRule().substring(1).toLowerCase());
+            sb.append(triggeredAbilities[0].getRule().substring(0, 1).toUpperCase(Locale.ENGLISH))
+                    .append(triggeredAbilities[0].getRule().substring(1).toLowerCase(Locale.ENGLISH));
         }
 
         for (int i = 1; i < (triggeredAbilities.length - 1); i++) {
-            sb.append(triggeredAbilities[i].getRule().toLowerCase());
+            sb.append(triggeredAbilities[i].getRule().toLowerCase(Locale.ENGLISH));
         }
 
-        sb.append(" or ").append(triggeredAbilities[triggeredAbilities.length - 1].getRule().toLowerCase());
+        sb.append(" or ").append(triggeredAbilities[triggeredAbilities.length - 1].getRule().toLowerCase(Locale.ENGLISH));
         return sb.toString() + super.getRule();
     }
 

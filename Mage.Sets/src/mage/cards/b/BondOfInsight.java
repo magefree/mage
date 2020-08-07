@@ -1,5 +1,6 @@
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
@@ -15,8 +16,6 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInYourGraveyard;
-
-import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -45,8 +44,8 @@ class BondOfInsightEffect extends OneShotEffect {
 
     BondOfInsightEffect() {
         super(Outcome.Benefit);
-        staticText = "Each player puts the top four cards of their library into their graveyard. " +
-                "Return up to two instant and/or sorcery cards from your graveyard to your hand.";
+        staticText = "Each player mills four cards. "
+                + "Return up to two instant and/or sorcery cards from your graveyard to your hand.";
     }
 
     private BondOfInsightEffect(final BondOfInsightEffect effect) {
@@ -65,7 +64,7 @@ class BondOfInsightEffect extends OneShotEffect {
             if (player == null) {
                 continue;
             }
-            player.moveCards(player.getLibrary().getTopCards(game, 4), Zone.GRAVEYARD, source, game);
+            player.millCards(4, source, game);
         }
         Player player = game.getPlayer(source.getControllerId());
         if (player == null) {

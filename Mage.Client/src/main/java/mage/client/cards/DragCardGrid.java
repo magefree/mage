@@ -73,8 +73,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             }
             trimGrid();
             layoutGrid();
-            cardScroll.revalidate();
-            cardScroll.repaint();
+            repaintGrid();
         }
     }
 
@@ -315,8 +314,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             // Remove empty rows / cols / spaces in stacks
             trimGrid();
             layoutGrid();
-            cardScroll.revalidate();
-            cardScroll.repaint();
+            repaintGrid();
         } else {
             // Add new cards to grid
             for (CardView card : cards) {
@@ -325,14 +323,14 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                 eventSource.fireEvent(card, ClientEventType.ADD_SPECIFIC_CARD);
             }
             layoutGrid();
-            cardContent.repaint();
+            repaintGrid();
         }
     }
 
     public void changeGUISize() {
         layoutGrid();
         cardScroll.getVerticalScrollBar().setUnitIncrement(CardRenderer.getCardTopHeight(getCardWidth()));
-        cardContent.repaint();
+        repaintGrid();
     }
 
     public void cleanUp() {
@@ -386,7 +384,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         }
         trimGrid();
         layoutGrid();
-        cardContent.repaint();
+        repaintGrid();
     }
 
     public DeckCardLayout getCardLayout() {
@@ -562,6 +560,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
     JButton selectByButton;
     JButton analyseButton;
     JButton blingButton;
+    JButton oldVersionButton;
 
     // Popup for toolbar
     final JPopupMenu filterPopup;
@@ -709,60 +708,6 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         // Editting mode
         this.mode = Constants.DeckEditorMode.LIMITED_BUILDING;
 
-        // Toolbar
-        sortButton = new JButton("Sort");
-        filterButton = new JButton("Filter");
-        visibilityButton = new JButton("V"); // "Visibility" button
-        selectByButton = new JButton("Select By");
-        analyseButton = new JButton("M"); // "Mana" button
-        blingButton = new JButton("B"); // "Bling" button
-
-        // Name and count label
-        deckNameAndCountLabel = new JLabel();
-
-        // Count labels
-        landCountLabel = new JLabel("", new ImageIcon(getClass().getResource("/buttons/type_land.png")), SwingConstants.LEFT);
-        landCountLabel.setToolTipText("Number of lands in deck");
-        creatureCountLabel = new JLabel("", new ImageIcon(getClass().getResource("/buttons/type_creatures.png")), SwingConstants.LEFT);
-        creatureCountLabel.setToolTipText("Number of creatures in deck");
-
-        JPanel toolbar = new JPanel(new BorderLayout());
-        JPanel toolbarInner = new JPanel();
-        toolbar.setBackground(new Color(250, 250, 250, 150));
-        toolbar.setOpaque(true);
-        toolbarInner.setOpaque(false);
-        toolbarInner.add(deckNameAndCountLabel);
-        toolbarInner.add(landCountLabel);
-        toolbarInner.add(creatureCountLabel);
-        toolbarInner.add(sortButton);
-        toolbarInner.add(filterButton);
-        toolbarInner.add(selectByButton);
-        toolbarInner.add(visibilityButton);
-        toolbarInner.add(analyseButton);
-        toolbarInner.add(blingButton);
-        toolbar.add(toolbarInner, BorderLayout.WEST);
-        JPanel sliderPanel = new JPanel(new GridBagLayout());
-        sliderPanel.setOpaque(false);
-        cardSizeSlider = new JSlider(SwingConstants.HORIZONTAL, 0, 100, 50);
-        cardSizeSlider.setOpaque(false);
-        cardSizeSlider.setPreferredSize(new Dimension(100, (int) cardSizeSlider.getPreferredSize().getHeight()));
-        cardSizeSlider.addChangeListener(e -> {
-            if (!cardSizeSlider.getValueIsAdjusting()) {
-                // Fraction in [-1, 1]
-                float sliderFrac = ((float) (cardSizeSlider.getValue() - 50)) / 50;
-                // Convert to frac in [0.5, 2.0] exponentially
-                cardSizeMod = (float) Math.pow(2, sliderFrac);
-                // Update grid
-                layoutGrid();
-                cardContent.repaint();
-            }
-        });
-        cardSizeSliderLabel = new JLabel("Card Size:");
-        sliderPanel.add(cardSizeSliderLabel);
-        sliderPanel.add(cardSizeSlider);
-        toolbar.add(sliderPanel, BorderLayout.EAST);
-        this.add(toolbar, BorderLayout.NORTH);
-
         // Content
         cardContent = new JLayeredPane();
         cardContent.setLayout(null);
@@ -803,6 +748,62 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         cardScroll.setBorder(BorderFactory.createLineBorder(Color.gray, 1));
         cardScroll.getVerticalScrollBar().setUnitIncrement(CardRenderer.getCardTopHeight(getCardWidth()));
         this.add(cardScroll, BorderLayout.CENTER);
+
+        // Toolbar
+        sortButton = new JButton("Sort");
+        filterButton = new JButton("Filter");
+        visibilityButton = new JButton("V"); // "Visibility" button
+        selectByButton = new JButton("Select By");
+        analyseButton = new JButton("M"); // "Mana" button
+        blingButton = new JButton("B"); // "Bling" button
+        oldVersionButton = new JButton("O"); // "Old version" button
+
+        // Name and count label
+        deckNameAndCountLabel = new JLabel();
+
+        // Count labels
+        landCountLabel = new JLabel("", new ImageIcon(getClass().getResource("/buttons/type_land.png")), SwingConstants.LEFT);
+        landCountLabel.setToolTipText("Number of lands in deck");
+        creatureCountLabel = new JLabel("", new ImageIcon(getClass().getResource("/buttons/type_creatures.png")), SwingConstants.LEFT);
+        creatureCountLabel.setToolTipText("Number of creatures in deck");
+
+        JPanel toolbar = new JPanel(new BorderLayout());
+        JPanel toolbarInner = new JPanel();
+        toolbar.setBackground(new Color(250, 250, 250, 150));
+        toolbar.setOpaque(true);
+        toolbarInner.setOpaque(false);
+        toolbarInner.add(deckNameAndCountLabel);
+        toolbarInner.add(landCountLabel);
+        toolbarInner.add(creatureCountLabel);
+        toolbarInner.add(sortButton);
+        toolbarInner.add(filterButton);
+        toolbarInner.add(selectByButton);
+        toolbarInner.add(visibilityButton);
+        toolbarInner.add(analyseButton);
+        toolbarInner.add(blingButton);
+        toolbarInner.add(oldVersionButton);
+        toolbar.add(toolbarInner, BorderLayout.WEST);
+        JPanel sliderPanel = new JPanel(new GridBagLayout());
+        sliderPanel.setOpaque(false);
+        cardSizeSlider = new JSlider(SwingConstants.HORIZONTAL, 0, 100, 50);
+        cardSizeSlider.setOpaque(false);
+        cardSizeSlider.setPreferredSize(new Dimension(100, (int) cardSizeSlider.getPreferredSize().getHeight()));
+        cardSizeSlider.addChangeListener(e -> {
+            if (!cardSizeSlider.getValueIsAdjusting()) {
+                // Fraction in [-1, 1]
+                float sliderFrac = ((float) (cardSizeSlider.getValue() - 50)) / 50;
+                // Convert to frac in [0.5, 2.0] exponentially
+                cardSizeMod = (float) Math.pow(2, sliderFrac);
+                // Update grid
+                layoutGrid();
+                repaintGrid();
+            }
+        });
+        cardSizeSliderLabel = new JLabel("Card size:");
+        sliderPanel.add(cardSizeSliderLabel);
+        sliderPanel.add(cardSizeSlider);
+        toolbar.add(sliderPanel, BorderLayout.EAST);
+        this.add(toolbar, BorderLayout.NORTH);
 
         // Insert arrow
         insertArrow = new JLabel();
@@ -981,6 +982,11 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         blingButton.setToolTipText("Bling your deck! Select the original and added cards by selecting 'Multiples' in the selection options");
 
         blingButton.addActionListener(evt -> blingDeck());
+
+        // Old version button - Switch cards to the oldest non-promo printing. In case of multiples in a set, take the lowest card number.
+        oldVersionButton.setToolTipText("Switch cards to the oldest non-promo printing");
+
+        oldVersionButton.addActionListener(evt -> oldVersionDeck());
 
         // Filter popup
         filterPopup = new JPopupMenu();
@@ -1222,7 +1228,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
         // And finally rerender
         layoutGrid();
-        repaint();
+        repaintGrid();
     }
 
     public void reselectBy() {
@@ -1332,7 +1338,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
         // And finally rerender
         layoutGrid();
-        repaint();
+        repaintGrid();
     }
 
     private static final Pattern pattern = Pattern.compile(".*Add(.*)(\\{[WUBRGXC]\\})");
@@ -1633,11 +1639,47 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                 }
 
                 layoutGrid();
-                cardScroll.revalidate();
-                repaint();
+                repaintGrid();
                 JOptionPane.showMessageDialog(null, "Added " + pimpedCards.size() + " cards.  You can select them and the originals by choosing 'Multiples'");
             }
         }
+    }
+
+    private void oldVersionDeck() {
+        if (this.mode != Constants.DeckEditorMode.FREE_BUILDING) {
+            return;
+        }
+
+        if (JOptionPane.showConfirmDialog(null, "Are you sure you want to switch your card versions to the oldest ones?", "WARNING",
+                JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
+            return;
+        }
+
+        List<List<List<CardView>>> newCardGrid = new ArrayList<>();
+        for (List<List<CardView>> gridRow : cardGrid) {
+            List<List<CardView>> newGridRow = new ArrayList<>();
+            for (List<CardView> stack : gridRow) {
+                List<CardView> newStack = new ArrayList<>();
+                for (CardView card : stack) {
+                    CardInfo oldestCardInfo = CardRepository.instance.findOldestNonPromoVersionCard(card.getName());
+                    if (oldestCardInfo != null) {
+                        CardView oldestCardView = new CardView(oldestCardInfo.getMockCard());
+                        this.removeCardView(card);
+                        eventSource.fireEvent(card, ClientEventType.REMOVE_SPECIFIC_CARD);
+                        this.addCardView(oldestCardView, false);
+                        eventSource.fireEvent(oldestCardView, ClientEventType.ADD_SPECIFIC_CARD);
+                        newStack.add(oldestCardView);
+                    } else {
+                        newStack.add(card);
+                    }
+                }
+                newGridRow.add(newStack);
+            }
+            newCardGrid.add(newGridRow);
+        }
+        cardGrid = newCardGrid;
+        layoutGrid();
+        repaintGrid();
     }
 
     // Update the contents of the card grid
@@ -1761,10 +1803,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         if (didModify) {
             // Update layout
             layoutGrid();
-
-            // Update draw
-            cardScroll.revalidate();
-            repaint();
+            repaintGrid();
         }
     }
 
@@ -1904,9 +1943,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             eventSource.fireEvent(card, ClientEventType.ADD_SPECIFIC_CARD);
             // Update layout
             layoutGrid();
-            // Update draw
-            cardScroll.revalidate();
-            repaint();
+            repaintGrid();
         }
     }
 
@@ -2108,6 +2145,12 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
     private int getCardHeight() {
         return (int) (1.4 * getCardWidth());
+    }
+
+    private void repaintGrid() {
+        cardScroll.revalidate();
+        cardScroll.repaint();
+        repaint();
     }
 
     /**

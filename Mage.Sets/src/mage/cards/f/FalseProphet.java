@@ -3,7 +3,7 @@ package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.ExileAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -26,7 +26,7 @@ public final class FalseProphet extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When False Prophet dies, exile all creatures.
-        this.addAbility(new DiesTriggeredAbility(new ExileAllEffect(new FilterCreaturePermanent())));
+        this.addAbility(new DiesSourceTriggeredAbility(new ExileAllEffect(new FilterCreaturePermanent())));
     }
 
     public FalseProphet(final FalseProphet card) {

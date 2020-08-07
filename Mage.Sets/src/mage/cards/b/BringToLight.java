@@ -1,5 +1,6 @@
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.ColorsOfManaSpentToCastCount;
@@ -18,8 +19,6 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import org.apache.log4j.Logger;
-
-import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -68,7 +67,8 @@ class BringToLightEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             int numberColors = ColorsOfManaSpentToCastCount.getInstance().calculate(game, source, this);
-            FilterCard filter = new FilterCard();
+            FilterCard filter = new FilterCard("a creature, instant, or sorcery card with converted mana "
+                    + "cost less than or equal to " + numberColors);
             filter.add(Predicates.or(CardType.CREATURE.getPredicate(),
                     CardType.INSTANT.getPredicate(), CardType.SORCERY.getPredicate()));
             filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, numberColors + 1));
@@ -86,9 +86,6 @@ class BringToLightEffect extends OneShotEffect {
                     Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
                             game, true, new MageObjectReference(source.getSourceObject(game), game));
                     game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
-                    if (!cardWasCast) {
-                        Logger.getLogger(BringToLightEffect.class).error("Bring to Light: spellAbility == null " + card.getName());
-                    }
                 }
             }
             return true;

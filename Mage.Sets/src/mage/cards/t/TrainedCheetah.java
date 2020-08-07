@@ -3,7 +3,7 @@ package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BecomesBlockedTriggeredAbility;
+import mage.abilities.common.BecomesBlockedSourceTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -24,7 +24,7 @@ public final class TrainedCheetah extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Trained Cheetah becomes blocked, it gets +1/+1 until end of turn.
-        this.addAbility(new BecomesBlockedTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), false));
+        this.addAbility(new BecomesBlockedSourceTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), false));
     }
 
     public TrainedCheetah(final TrainedCheetah card) {

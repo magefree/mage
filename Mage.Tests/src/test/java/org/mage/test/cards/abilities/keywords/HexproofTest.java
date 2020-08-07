@@ -9,7 +9,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 public class HexproofTest extends CardTestPlayerBase {
@@ -37,6 +36,7 @@ public class HexproofTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Elder of Laurels", 3, 4);
         assertAbility(playerA, "Elder of Laurels", HexproofAbility.getInstance(), true);
     }
+
     /**
      * Tests one target gets hexproof
      */
@@ -63,5 +63,43 @@ public class HexproofTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Elder of Laurels", 3, 4);
         assertAbility(playerA, "Elder of Laurels", HexproofAbility.getInstance(), true);
         assertPermanentCount(playerA, "Arbor Elf", 0);
+    }
+
+    /**
+     * Tests hexproof from a color with opponent's spells
+     */
+    @Test
+    public void testHexproofFromColorOpponentSpells() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 6);
+        addCard(Zone.HAND, playerA, "Murder", 2);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Knight of Grace");
+        addCard(Zone.BATTLEFIELD, playerB, "Knight of Malice");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Murder", "Knight of Grace");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Murder", "Knight of Malice");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerB, "Knight of Grace", 1);
+        assertPermanentCount(playerB, "Knight of Malice", 0);
+    }
+
+    /**
+     * Tests hexproof from a color with controller's spells
+     */
+    @Test
+    public void testHexproofFromColorOwnSpells() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Knight of Grace");
+        addCard(Zone.HAND, playerA, "Murder");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Murder", "Knight of Grace");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Knight of Grace", 0);
     }
 }

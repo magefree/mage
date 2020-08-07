@@ -82,7 +82,7 @@ class TymnaTheWeaverEffect extends OneShotEffect {
                 Cost cost = new PayLifeCost(cardsToDraw);
                 if (cost.canPay(source, source.getSourceId(), source.getControllerId(), game)
                         && cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
-                    controller.drawCards(cardsToDraw, game);
+                    controller.drawCards(cardsToDraw, source.getSourceId(), game);
                 }
                 return true;
             }

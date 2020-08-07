@@ -58,7 +58,7 @@ class CometStormEffect extends OneShotEffect {
 
     public CometStormEffect() {
         super(Outcome.Damage);
-        staticText = "Choose any target, then choose another target for each time Comet Storm was kicked. Comet Storm deals X damage to each of them";
+        staticText = "Choose any target, then choose another target for each time this spell was kicked. {this} deals X damage to each of them";
     }
 
     public CometStormEffect(final CometStormEffect effect) {

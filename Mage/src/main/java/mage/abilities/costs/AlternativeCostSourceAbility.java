@@ -151,11 +151,11 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
                     for (AlternativeCost2 alternateCost : alternativeCostsToCheck) {
                         alternateCost.activate();
                         for (Iterator it = ((Costs) alternateCost).iterator(); it.hasNext(); ) {
-                            Cost costDeailed = (Cost) it.next();
-                            if (costDeailed instanceof ManaCost) {
-                                ability.getManaCostsToPay().add((ManaCost) costDeailed.copy());
-                            } else {
-                                ability.getCosts().add(costDeailed.copy());
+                            Cost costDetailed = (Cost) it.next();
+                            if (costDetailed instanceof ManaCost) {
+                                ability.getManaCostsToPay().add((ManaCost) costDetailed.copy());
+                            } else if (costDetailed != null) {
+                                ability.getCosts().add(costDetailed.copy());
                             }
                         }
                     }
@@ -222,7 +222,7 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
                     sb.append("pay ");
                 }
                 String text = alternativeCost.getText(true);
-                sb.append(Character.toLowerCase(text.charAt(0)) + text.substring(1));
+                sb.append(Character.toLowerCase(text.charAt(0))).append(text.substring(1));
             }
             ++numberCosts;
         }

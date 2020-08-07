@@ -3,7 +3,7 @@ package mage.cards.r;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -29,7 +29,7 @@ public final class ReliquaryMonk extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Reliquary Monk dies, destroy target artifact or enchantment.
-        Ability ability = new DiesTriggeredAbility(new DestroyTargetEffect(), false);
+        Ability ability = new DiesSourceTriggeredAbility(new DestroyTargetEffect(), false);
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
         this.addAbility(ability);
     }

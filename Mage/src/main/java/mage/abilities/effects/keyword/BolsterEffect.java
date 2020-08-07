@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.keyword;
 
 import mage.abilities.Ability;
@@ -78,7 +77,7 @@ public class BolsterEffect extends OneShotEffect {
                 }
                 if (selectedCreature != null) {
                     Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(amount.calculate(game, source, this)));
-                    effect.setTargetPointer(new FixedTarget(selectedCreature.getId()));
+                    effect.setTargetPointer(new FixedTarget(selectedCreature, game));
                     return effect.apply(game, source);
                 }
             }

@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -17,15 +15,16 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+
 /**
- *
  * @author ciaccona007
  */
 public final class SkySwallower extends CardImpl {
 
     public SkySwallower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
-        
+
         this.subtype.add(SubType.LEVIATHAN);
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
@@ -68,7 +67,7 @@ class GainControlAllPermanentsEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
-        if (targetPlayer != null && targetPlayer.isInGame()) {
+        if (targetPlayer != null) {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
                 if (permanent != null && !permanent.getId().equals(source.getSourceId())) {
                     permanent.changeControllerId(targetPlayer.getId(), game);

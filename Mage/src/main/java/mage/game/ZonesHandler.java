@@ -27,7 +27,7 @@ public final class ZonesHandler {
 
     public static boolean cast(ZoneChangeInfo info, Game game) {
         if (maybeRemoveFromSourceZone(info, game)) {
-            placeInDestinationZone(info, game);
+            placeInDestinationZone(info, game, 0);
             // create a group zone change event if a card is moved to stack for casting (it's always only one card, but some effects check for group events (one or more xxx))
             Set<Card> cards = new HashSet<>();
             Set<PermanentToken> tokens = new HashSet<>();
@@ -57,7 +57,7 @@ public final class ZonesHandler {
             ZoneChangeInfo info = itr.next();
             MeldCard card = game.getMeldCard(info.event.getTargetId());
             // Copies should be handled as normal cards.
-            if (card != null && !card.isMelded() && !card.isCopy()) {
+            if (card != null && !card.isMelded(game) && !card.isCopy()) {
                 ZoneChangeInfo.Unmelded unmelded = new ZoneChangeInfo.Unmelded(info, game);
                 if (unmelded.subInfo.isEmpty()) {
                     itr.remove();
@@ -67,8 +67,13 @@ public final class ZonesHandler {
             }
         }
         zoneChangeInfos.removeIf(zoneChangeInfo -> !maybeRemoveFromSourceZone(zoneChangeInfo, game));
+        int createOrder = 0;
         for (ZoneChangeInfo zoneChangeInfo : zoneChangeInfos) {
-            placeInDestinationZone(zoneChangeInfo, game);
+            if (createOrder == 0 && Zone.BATTLEFIELD.equals(zoneChangeInfo.event.getToZone())) {
+                // All permanents go to battlefield at the same time (=create order)
+                createOrder = game.getState().getNextPermanentOrderNumber();
+            }
+            placeInDestinationZone(zoneChangeInfo, game, createOrder);
             if (game.getPhase() != null) { // moving cards to zones before game started does not need events
                 game.addSimultaneousEvent(zoneChangeInfo.event);
             }
@@ -76,14 +81,14 @@ public final class ZonesHandler {
         return zoneChangeInfos;
     }
 
-    private static void placeInDestinationZone(ZoneChangeInfo info, Game game) {
+    private static void placeInDestinationZone(ZoneChangeInfo info, Game game, int createOrder) {
         // Handle unmelded cards
         if (info instanceof ZoneChangeInfo.Unmelded) {
             ZoneChangeInfo.Unmelded unmelded = (ZoneChangeInfo.Unmelded) info;
             Zone toZone = null;
             for (ZoneChangeInfo subInfo : unmelded.subInfo) {
                 toZone = subInfo.event.getToZone();
-                placeInDestinationZone(subInfo, game);
+                placeInDestinationZone(subInfo, game, createOrder);
             }
             // We arbitrarily prefer the bottom half card. This should never be relevant.
             if (toZone != null) {
@@ -161,7 +166,7 @@ public final class ZonesHandler {
                     break;
                 case BATTLEFIELD:
                     Permanent permanent = event.getTarget();
-                    game.addPermanent(permanent);
+                    game.addPermanent(permanent, createOrder);
                     game.getPermanentsEntering().remove(permanent.getId());
                     break;
                 default:
@@ -171,7 +176,7 @@ public final class ZonesHandler {
         game.setZone(event.getTargetId(), event.getToZone());
         if (targetCard instanceof MeldCard && cards != null) {
             if (event.getToZone() != Zone.BATTLEFIELD) {
-                ((MeldCard) targetCard).setMelded(false);
+                ((MeldCard) targetCard).setMelded(false, game);
             }
             for (Card card : cards.getCards(game)) {
                 game.setZone(card.getId(), event.getToZone());
@@ -229,6 +234,7 @@ public final class ZonesHandler {
         if (!game.replaceEvent(event)) {
             Zone fromZone = event.getFromZone();
             if (event.getToZone() == Zone.BATTLEFIELD) {
+                // prepare card and permanent
                 // If needed take attributes from the spell (e.g. color of spell was changed)
                 card = takeAttributesFromSpell(card, event, game);
                 // controlling player can be replaced so use event player now
@@ -241,15 +247,18 @@ public final class ZonesHandler {
                 } else {
                     permanent = new PermanentCard(card, event.getPlayerId(), game);
                 }
+
+                // put onto battlefield with possible counters
                 game.getPermanentsEntering().put(permanent.getId(), permanent);
                 card.checkForCountersToAdd(permanent, game);
-                permanent.setTapped(
-                        info instanceof ZoneChangeInfo.Battlefield && ((ZoneChangeInfo.Battlefield) info).tapped);
-                permanent.setFaceDown(info.faceDown, game);
+                permanent.setTapped(info instanceof ZoneChangeInfo.Battlefield
+                        && ((ZoneChangeInfo.Battlefield) info).tapped);
 
+                permanent.setFaceDown(info.faceDown, game);
                 if (info.faceDown) {
                     card.setFaceDown(false, game);
                 }
+
                 // make sure the controller of all continuous effects of this card are switched to the current controller
                 game.setScopeRelevant(true);
                 game.getContinuousEffects().setController(permanent.getId(), permanent.getControllerId());
@@ -290,7 +299,7 @@ public final class ZonesHandler {
         }
         TargetCard target = new TargetCard(Zone.ALL, new FilterCard(message));
         target.setRequired(true);
-        while (player.isInGame() && cards.size() > 1) {
+        while (player.canRespond() && cards.size() > 1) {
             player.choose(Outcome.Neutral, cards, target, game);
             UUID targetObjectId = target.getFirstTarget();
             order.add(cards.get(targetObjectId, game));

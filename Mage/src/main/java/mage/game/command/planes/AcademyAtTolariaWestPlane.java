@@ -1,8 +1,5 @@
-
 package mage.game.command.planes;
 
-import java.util.ArrayList;
-import java.util.List;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
@@ -15,8 +12,10 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.RollPlanarDieEffect;
+import mage.abilities.effects.common.cost.PlanarDieRollCostIncreasingEffect;
 import mage.abilities.effects.common.discard.DiscardHandControllerEffect;
 import mage.constants.Outcome;
+import mage.constants.Planes;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -26,14 +25,16 @@ import mage.target.Target;
 import mage.util.CardUtil;
 import mage.watchers.common.PlanarRollWatcher;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * @author spjspj
  */
 public class AcademyAtTolariaWestPlane extends Plane {
 
     public AcademyAtTolariaWestPlane() {
-        this.setName("Plane - Academy at Tolaria West");
+        this.setPlaneType(Planes.PLANE_ACADEMY_AT_TOLARIA_WEST);
         this.setExpansionSetCodeForImage("PCA");
 
         // At the beginning of your end step, if you have 0 cards in hand, draw seven cards
@@ -88,12 +89,12 @@ class DrawCardsActivePlayerEffect extends OneShotEffect {
         if (cPlane == null) {
             return false;
         }
-        if (!cPlane.getName().equalsIgnoreCase("Plane - Academy at Tolaria West")) {
+        if (!cPlane.getPlaneType().equals(Planes.PLANE_ACADEMY_AT_TOLARIA_WEST)) {
             return false;
         }
         Player player = game.getPlayer(game.getActivePlayerId());
         if (player != null) {
-            player.drawCards(amount.calculate(game, source, this), game);
+            player.drawCards(amount.calculate(game, source, this), source.getSourceId(), game);
             return true;
         }
         return false;

@@ -1,10 +1,10 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.*;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -12,22 +12,23 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 
+import java.util.Objects;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class CoercedConfession extends CardImpl {
 
     public CoercedConfession(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{U/B}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{U/B}");
 
         // Target player puts the top four cards of their library into their graveyard. You draw a card for each creature card put into a graveyard this way.
         getSpellAbility().addEffect(new CoercedConfessionMillEffect());
         getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public CoercedConfession(final CoercedConfession card) {
+    private CoercedConfession(final CoercedConfession card) {
         super(card);
     }
 
@@ -39,12 +40,12 @@ public final class CoercedConfession extends CardImpl {
 
 class CoercedConfessionMillEffect extends OneShotEffect {
 
-    public CoercedConfessionMillEffect() {
+    CoercedConfessionMillEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "Target player puts the top four cards of their library into their graveyard. You draw a card for each creature card put into a graveyard this way";
+        this.staticText = "Target player mills four cards. You draw a card for each creature card put into their graveyard this way";
     }
 
-    public CoercedConfessionMillEffect(final CoercedConfessionMillEffect effect) {
+    private CoercedConfessionMillEffect(final CoercedConfessionMillEffect effect) {
         super(effect);
     }
 
@@ -56,24 +57,26 @@ class CoercedConfessionMillEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        if (player != null) {
-            int foundCreatures = 0;
-            Cards cards = new CardsImpl();
-            for(Card card: player.getLibrary().getTopCards(game, 4)) {
-                cards.add(card);
-                if (card.isCreature()) {
-                    ++foundCreatures;
-                }
-            }
-            player.moveCards(cards, Zone.GRAVEYARD, source, game);
-            if (foundCreatures > 0) {
-                Player controller = game.getPlayer(source.getControllerId());
-                if (controller != null) {
-                    controller.drawCards(foundCreatures, game);
-                }
-            }
+        if (player == null) {
+            return false;
+        }
+        int creaturesMilled = player
+                .millCards(4, source, game)
+                .getCards(game)
+                .stream()
+                .filter(Objects::nonNull)
+                .filter(card -> game.getState().getZone(card.getId()) == Zone.GRAVEYARD)
+                .filter(MageObject::isCreature)
+                .mapToInt(x -> 1)
+                .sum();
+        if (creaturesMilled < 1) {
             return true;
         }
-        return false;
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return true;
+        }
+        controller.drawCards(creaturesMilled, source.getSourceId(), game);
+        return true;
     }
 }

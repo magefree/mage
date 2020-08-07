@@ -4,7 +4,7 @@ package mage.cards.e;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BlocksOrBecomesBlockedTriggeredAbility;
+import mage.abilities.common.BlocksOrBecomesBlockedSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
@@ -30,7 +30,7 @@ public final class EngulfingSlagwurm extends CardImpl {
         this.toughness = new MageInt(7);
 
         // Whenever Engulfing Slagwurm blocks or becomes blocked by a creature, destroy that creature. You gain life equal to that creature's toughness.
-        Ability ability = new BlocksOrBecomesBlockedTriggeredAbility(new DestroyTargetEffect(), false);
+        Ability ability = new BlocksOrBecomesBlockedSourceTriggeredAbility(new DestroyTargetEffect(), false);
         ability.addEffect(new EngulfingSlagwurmEffect());
         this.addAbility(ability);
     }
@@ -60,7 +60,7 @@ class EngulfingSlagwurmEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent creature = game.getPermanentOrLKIBattlefield(this.getTargetPointer().getFirst(game, source));
+        Permanent creature = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (creature != null && controller != null) {
             controller.gainLife(creature.getPower().getValue(), game, source);
         }

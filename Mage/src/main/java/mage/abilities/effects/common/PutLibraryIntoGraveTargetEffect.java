@@ -6,7 +6,6 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -45,7 +44,7 @@ public class PutLibraryIntoGraveTargetEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (player != null) {
-            player.moveCards(player.getLibrary().getTopCards(game, amount.calculate(game, source, this)), Zone.GRAVEYARD, source, game);
+            player.millCards(amount.calculate(game, source, this), source, game);
             return true;
         }
         return false;
@@ -65,23 +64,20 @@ public class PutLibraryIntoGraveTargetEffect extends OneShotEffect {
             sb.append("that target");
         }
 
-        sb.append(" puts the top ");
+        sb.append(" mills ");
         if (message.isEmpty()) {
             if (amount.toString().equals("1")) {
-                sb.append("card ");
+                sb.append("a card");
             } else {
-                sb.append(CardUtil.numberToText(amount.toString())).append(" cards ");
+                sb.append(CardUtil.numberToText(amount.toString())).append(" cards");
             }
         } else {
-            sb.append(" X cards ");
+            sb.append("X cards, where X is the number of ");
         }
-        sb.append("of their library into their graveyard");
 
         if (!message.isEmpty()) {
-            sb.append(", where X is the number of ");
             sb.append(message);
         }
         return sb.toString();
     }
-
 }

@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.mage</groupId>
         <artifactId>mage-root</artifactId>
-        <version>1.4.42</version>
+        <version>1.4.44</version>
     </parent>
 
     <artifactId>mage-verify</artifactId>
@@ -44,12 +44,12 @@
         <dependency>
             <groupId>org.reflections</groupId>
             <artifactId>reflections</artifactId>
-            <version>0.9.11</version>
+            <version>0.9.12</version>
         </dependency>
         <dependency>
             <groupId>org.mage</groupId>
             <artifactId>mage-client</artifactId>
-            <version>1.4.42</version>
+            <version>1.4.44</version>
         </dependency>
 
     </dependencies>

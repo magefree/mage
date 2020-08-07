@@ -1,6 +1,5 @@
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -9,23 +8,20 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SoldierLifelinkToken;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class LedevChampion extends CardImpl {
@@ -86,9 +82,10 @@ class LedevChampionEffect extends OneShotEffect {
         TargetCreaturePermanent target = new TargetCreaturePermanent(0, Integer.MAX_VALUE, filter, true);
         if (target.canChoose(source.getControllerId(), game)
                 && target.choose(Outcome.Tap, source.getControllerId(), source.getSourceId(), game)) {
-            for (UUID creature : target.getTargets()) {
+            for (UUID creatureId : target.getTargets()) {
+                Permanent creature = game.getPermanent(creatureId);
                 if (creature != null) {
-                    game.getPermanent(creature).tap(game);
+                    creature.tap(game);
                     tappedAmount++;
                 }
             }

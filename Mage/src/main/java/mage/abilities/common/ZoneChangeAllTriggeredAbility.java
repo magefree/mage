@@ -27,6 +27,9 @@ public class ZoneChangeAllTriggeredAbility extends TriggeredAbilityImpl {
 
     public ZoneChangeAllTriggeredAbility(Zone zone, Zone fromZone, Zone toZone, Effect effect, FilterPermanent filter, String rule, boolean optional) {
         super(zone, effect, optional);
+        if (fromZone == Zone.BATTLEFIELD) {
+            setLeavesTheBattlefieldTrigger(true);
+        }        
         this.fromZone = fromZone;
         this.toZone = toZone;
         this.rule = rule;

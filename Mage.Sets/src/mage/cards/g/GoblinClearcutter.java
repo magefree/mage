@@ -56,10 +56,9 @@ public final class GoblinClearcutter extends CardImpl {
     }
 }
 
-// TODO: replace by mana effect to use with mana reflection
 class GoblinClearCutterManaEffect extends ManaEffect {
 
-    private List<Mana> netMana = new ArrayList<>();
+    private final List<Mana> netMana = new ArrayList<>();
 
     public GoblinClearCutterManaEffect() {
         super();

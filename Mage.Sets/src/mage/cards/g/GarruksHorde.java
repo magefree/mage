@@ -1,9 +1,7 @@
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.PlayTheTopCardEffect;
 import mage.abilities.effects.common.continuous.PlayWithTheTopCardRevealedEffect;
 import mage.abilities.keyword.TrampleAbility;
@@ -11,13 +9,17 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.StaticFilters;
+import mage.filter.FilterCard;
+import mage.filter.common.FilterCreatureCard;
+
+import java.util.UUID;
 
 /**
  * @author nantuko
  */
 public final class GarruksHorde extends CardImpl {
+
+    private static final FilterCard filter = new FilterCreatureCard("cast creature spells");
 
     public GarruksHorde(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
@@ -26,16 +28,17 @@ public final class GarruksHorde extends CardImpl {
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 
+        // Trample
         this.addAbility(TrampleAbility.getInstance());
+
         // Play with the top card of your library revealed.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithTheTopCardRevealedEffect()));
+        this.addAbility(new SimpleStaticAbility(new PlayWithTheTopCardRevealedEffect()));
+
         // You may cast the top card of your library if it's a creature card.
-        Effect effect = new PlayTheTopCardEffect(StaticFilters.FILTER_CARD_CREATURE);
-        effect.setText("You may cast the top card of your library if it's a creature card");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(new PlayTheTopCardEffect(filter)));
     }
 
-    public GarruksHorde(final GarruksHorde card) {
+    private GarruksHorde(final GarruksHorde card) {
         super(card);
     }
 

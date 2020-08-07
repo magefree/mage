@@ -1,18 +1,17 @@
-
 package mage.cards.repository;
 
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.SelectArg;
 import com.j256.ormlite.stmt.Where;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
- *
  * @author North
  */
 public class CardCriteria {
@@ -177,6 +176,8 @@ public class CardCriteria {
     }
 
     public void buildQuery(QueryBuilder qb) throws SQLException {
+        optimize();
+
         Where where = qb.where();
         where.eq("nightCard", false);
         where.eq("splitCardHalf", false);
@@ -249,37 +250,35 @@ public class CardCriteria {
             clausesCount++;
         }
 
-        if (!black || !blue || !green || !red || !white || !colorless) {
-            int colorClauses = 0;
-            if (black) {
-                where.eq("black", true);
-                colorClauses++;
-            }
-            if (blue) {
-                where.eq("blue", true);
-                colorClauses++;
-            }
-            if (green) {
-                where.eq("green", true);
-                colorClauses++;
-            }
-            if (red) {
-                where.eq("red", true);
-                colorClauses++;
-            }
-            if (white) {
-                where.eq("white", true);
-                colorClauses++;
-            }
-            if (colorless) {
-                where.eq("black", false).eq("blue", false).eq("green", false).eq("red", false).eq("white", false);
-                where.and(5);
-                colorClauses++;
-            }
-            if (colorClauses > 0) {
-                where.or(colorClauses);
-                clausesCount++;
-            }
+        int colorClauses = 0;
+        if (black) {
+            where.eq("black", true);
+            colorClauses++;
+        }
+        if (blue) {
+            where.eq("blue", true);
+            colorClauses++;
+        }
+        if (green) {
+            where.eq("green", true);
+            colorClauses++;
+        }
+        if (red) {
+            where.eq("red", true);
+            colorClauses++;
+        }
+        if (white) {
+            where.eq("white", true);
+            colorClauses++;
+        }
+        if (colorless) {
+            where.eq("black", false).eq("blue", false).eq("green", false).eq("red", false).eq("white", false);
+            where.and(5);
+            colorClauses++;
+        }
+        if (colorClauses > 0) {
+            where.or(colorClauses);
+            clausesCount++;
         }
 
         if (minCardNumber != Integer.MIN_VALUE) {
@@ -308,6 +307,38 @@ public class CardCriteria {
         if (sortBy != null) {
             qb.orderBy(sortBy, true);
         }
+    }
+
+    private CardCriteria optimize() {
+        // remove rarity
+        if (rarities.size() > 0) {
+            List<Rarity> unusedRarities = new ArrayList<>(Arrays.asList(Rarity.values()));
+            unusedRarities.removeAll(rarities);
+            if (unusedRarities.isEmpty()) {
+                rarities.clear();
+            }
+        }
+
+        // remove color
+        if (black && blue && green && red && white && colorless) {
+            black = false;
+            blue = false;
+            green = false;
+            red = false;
+            white = false;
+            colorless = false;
+        }
+
+        // remove card type
+        if (types.size() > 0) {
+            List<CardType> unusedCardTypes = new ArrayList<>(Arrays.asList(CardType.values()));
+            unusedCardTypes.removeAll(types);
+            if (unusedCardTypes.stream().noneMatch(CardType::isIncludeInSearch)) {
+                types.clear();
+            }
+        }
+
+        return this;
     }
 
     public String getName() {

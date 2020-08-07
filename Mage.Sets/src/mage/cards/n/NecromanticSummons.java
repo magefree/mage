@@ -1,4 +1,3 @@
-
 package mage.cards.n;
 
 import java.util.UUID;
@@ -34,8 +33,11 @@ public final class NecromanticSummons extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
         this.getSpellAbility().addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card from a graveyard")));
 
-        // <i>Spell mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, that creature enters the battlefield with two additional +1/+1 counters on it.
-        this.getSpellAbility().addEffect(new InfoEffect("\"<br><i>Spell mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, that creature enters the battlefield with two additional +1/+1 counters on it\""));
+        // <i>Spell mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, 
+        // that creature enters the battlefield with two additional +1/+1 counters on it.
+        this.getSpellAbility().addEffect(new InfoEffect("<br><i>Spell mastery</i> &mdash; If there are two or more "
+                + "instant and/or sorcery cards in your graveyard, that creature enters the "
+                + "battlefield with two additional +1/+1 counters on it."));
     }
 
     public NecromanticSummons(final NecromanticSummons card) {

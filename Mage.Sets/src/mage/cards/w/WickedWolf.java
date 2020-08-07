@@ -15,11 +15,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 
@@ -30,14 +28,8 @@ import java.util.UUID;
  */
 public final class WickedWolf extends CardImpl {
 
-    private static final FilterPermanent filter
-            = new FilterCreaturePermanent("creature you don't control");
-    private static final FilterControlledPermanent filter2
+    private static final FilterControlledPermanent filter
             = new FilterControlledPermanent(SubType.FOOD, "a Food");
-
-    static {
-        filter.add(TargetController.NOT_YOU.getControllerPredicate());
-    }
 
     public WickedWolf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
@@ -50,17 +42,17 @@ public final class WickedWolf extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(
                 new FightTargetSourceEffect().setText("it fights up to one target creature you don't control")
         );
-        ability.addTarget(new TargetPermanent(0, 1, filter, false));
+        ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL, false));
         this.addAbility(ability);
 
         // Sacrifice a Food: Put a +1/+1 counter on Wicked Wolf. It gains indestructible until end of turn. Tap it.
         ability = new SimpleActivatedAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                new SacrificeTargetCost(new TargetControlledPermanent(filter2))
+                new SacrificeTargetCost(new TargetControlledPermanent(filter))
         );
         ability.addEffect(new GainAbilitySourceEffect(
                 IndestructibleAbility.getInstance(), Duration.EndOfTurn
-        ).setText("it gains indestructible until end of turn."));
+        ).setText("it gains indestructible until end of turn"));
         ability.addEffect(new TapSourceEffect().setText("Tap it"));
         this.addAbility(ability);
     }

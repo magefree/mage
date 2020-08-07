@@ -3,7 +3,7 @@ package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.CantBeCounteredAbility;
+import mage.abilities.common.CantBeCounteredSourceAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.ReturnToHandChosenControlledPermanentCost;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
@@ -34,7 +34,7 @@ public final class PearlLakeAncient extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
         
         // Pearl Lake Ancient can't be countered.
-        this.addAbility(new CantBeCounteredAbility());
+        this.addAbility(new CantBeCounteredSourceAbility());
         
         // Prowess
         this.addAbility(new ProwessAbility());

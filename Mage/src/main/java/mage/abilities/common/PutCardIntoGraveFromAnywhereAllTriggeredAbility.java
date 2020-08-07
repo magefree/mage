@@ -85,7 +85,7 @@ public class PutCardIntoGraveFromAnywhereAllTriggeredAbility extends TriggeredAb
                 switch (setTargetPointer) {
                     case CARD:
                         for (Effect effect : getEffects()) {
-                            effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
+                            effect.setTargetPointer(new FixedTarget(card, game));
                         }
                         break;
                     case PLAYER:

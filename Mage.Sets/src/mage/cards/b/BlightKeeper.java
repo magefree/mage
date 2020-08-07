@@ -1,7 +1,5 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -18,8 +16,9 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class BlightKeeper extends CardImpl {
@@ -37,7 +36,7 @@ public final class BlightKeeper extends CardImpl {
 
         // {7}{B}, {T}, Sacrifice Blight Keeper: Target opponent loses 4 life and you gain 4 life.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(4), new ManaCostsImpl("{7}{B}"));
-        ability.addEffect(new GainLifeEffect(4).setText("and you gain 4 life"));
+        ability.addEffect(new GainLifeEffect(4).concatBy("and"));
         ability.addTarget(new TargetOpponent());
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

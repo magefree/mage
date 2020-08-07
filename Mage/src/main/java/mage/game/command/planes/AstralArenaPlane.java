@@ -9,7 +9,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.RollPlanarDieEffect;
+import mage.abilities.effects.common.cost.PlanarDieRollCostIncreasingEffect;
 import mage.constants.Duration;
+import mage.constants.Planes;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -30,7 +32,7 @@ import java.util.UUID;
 public class AstralArenaPlane extends Plane {
 
     public AstralArenaPlane() {
-        this.setName("Plane - Astral Arena");
+        this.setPlaneType(Planes.PLANE_ASTRAL_ARENA);
         this.setExpansionSetCodeForImage("PCA");
 
         // No more than one creature can attack each turn.  No more than one creature can block each turn.
@@ -80,7 +82,7 @@ class AstralArenaAttackRestrictionEffect extends RestrictionEffect {
         if (cPlane == null) {
             return false;
         }
-        return cPlane.getName().equalsIgnoreCase("Plane - Astral Arena");
+        return cPlane.getPlaneType().equals(Planes.PLANE_ASTRAL_ARENA);
     }
 
     @Override
@@ -111,7 +113,7 @@ class AstralArenaBlockRestrictionEffect extends RestrictionEffect {
         if (cPlane == null) {
             return false;
         }
-        return cPlane.getName().equalsIgnoreCase("Plane - Astral Arena");
+        return cPlane.getPlaneType().equals(Planes.PLANE_ASTRAL_ARENA);
     }
 
     @Override

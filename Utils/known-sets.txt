@@ -27,6 +27,7 @@ Commander 2016 Edition|Commander2016Edition|
 Commander 2017 Edition|Commander2017Edition|
 Commander 2018|Commander2018Edition|
 Commander 2019|Commander2019Edition|
+Commander 2020|Commander2020Edition|
 Commander Anthology|CommanderAnthology|
 Commander Anthology 2018|CommanderAnthology2018|
 Commander's Arsenal|CommandersArsenal|
@@ -34,6 +35,7 @@ Conflux|Conflux|
 Conspiracy: Take the Crown|ConspiracyTakeTheCrown|
 Core Set 2019|CoreSet2019|
 Core Set 2020|CoreSet2020|
+Core Set 2021|CoreSet2021|
 Dark Ascension|DarkAscension|
 Darksteel|Darksteel|
 Dissension|Dissension|
@@ -105,12 +107,14 @@ Homelands|Homelands|
 Hour of Devastation|HourOfDevastation|
 Ice Age|IceAge|
 IconicMasters|IconicMasters|
+Ikoria: Lair of Behemoths|IkoriaLairOfBehemoths|
 Innistrad|Innistrad|
 Invasion|Invasion|
 Ixalan|Ixalan|
 Journey into Nyx|JourneyIntoNyx|
 Judge Promo|JudgePromo|
 Judgment|Judgment|
+Jumpstart|Jumpstart|
 Kaladesh|Kaladesh|
 Khans of Tarkir|KhansOfTarkir|
 Launch Party|LaunchParty|

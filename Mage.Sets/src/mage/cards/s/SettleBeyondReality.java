@@ -7,9 +7,7 @@ import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetE
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -20,12 +18,6 @@ import java.util.UUID;
  */
 public final class SettleBeyondReality extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent("creature you don't control");
-
-    static {
-        filter.add(TargetController.NOT_YOU.getControllerPredicate());
-    }
-
     public SettleBeyondReality(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{W}");
 
@@ -35,11 +27,11 @@ public final class SettleBeyondReality extends CardImpl {
 
         // • Exile target creature you don't control.
         this.getSpellAbility().addEffect(new ExileTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
 
         // • Exile target creature you control, then return it to the battlefield under its owner's control.
         Mode mode = new Mode(new ExileTargetForSourceEffect());
-        mode.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect());
+        mode.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false));
         mode.addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addMode(mode);
     }

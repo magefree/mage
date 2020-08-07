@@ -65,7 +65,7 @@ class EnfysNestEffect extends ExileTargetEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(source.getFirstTarget());
+        Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if(permanent != null) {
             // you may exile target creature an opponent controls
             if(!super.apply(game, source)) {

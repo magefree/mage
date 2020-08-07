@@ -1,0 +1,90 @@
+1 [DGM:11] Aetherling
+1 [JUD:77] Anger
+1 [10E:66] Arcanis the Omnipotent
+1 [SOM:28] Argent Sphinx
+1 [CHK:52] Azami, Lady of Scrolls
+1 [AVR:47] Deadeye Navigator
+1 [DRK:44] Eater of the Dead
+1 [EXO:33] Ertai, Wizard Adept
+1 [ALA:43] Fatestitcher
+1 [SOM:64] Geth, Lord of the Vault
+1 [EVE:55] Hateflayer
+1 [DKA:139] Havengul Lich
+1 [10E:87] Horseshoe Crab
+1 [ICE:136] Infernal Denizen
+1 [M12:59] Jace's Archivist
+1 [SHM:42] Knacksaw Clique
+1 [OGW:4] Kozilek, the Great Distortion
+1 [PLC:43] Magus of the Bazaar
+1 [ICE:150] Minion of Leshrac
+1 [SOM:72] Necrotic Ooze
+1 [SHM:258] Pili-Pala
+1 [MRD:47] Quicksilver Elemental
+1 [SOK:53] Sakashima the Impostor
+1 [MIR:142] Shauku, Endbringer
+1 [M15:231] Soul of New Phyrexia
+1 [PLC:110] Torchling
+1 [EMN:109] Tree of Perdition
+1 [M20:64] Leyline of Anticipation
+1 [9ED:152] Phyrexian Arena
+1 [PCY:45] Rhystic Study
+1 [RNA:245] Blood Crypt
+1 [KTK:230] Bloodstained Mire
+1 [WWK:132] Bojuka Bog
+1 [ELD:333] Command Tower
+1 [ALA:222] Crumbling Necropolis
+1 [RAV:276] Dimir Aqueduct
+1 [CON:142] Exotic Orchard
+1 [CHK:277] Hall of the Bandit Lord
+8 [IKO:263] Island
+1 [GPT:159] Izzet Boilerworks
+1 [CHK:279] Minamo, School at Water's Edge
+3 [IKO:269] Mountain
+1 [C20:298] Path of Ancestry
+1 [KTK:239] Polluted Delta
+1 [M19:254] Reliquary Tower
+1 [ONS:322] Riptide Laboratory
+1 [ORI:251] Shivan Reef
+1 [GRN:257] Steam Vents
+1 [10E:359] Sulfurous Springs
+1 [BFZ:249] Sunken Hollow
+4 [IKO:266] Swamp
+1 [10E:362] Underground River
+1 [GRN:259] Watery Grave
+1 [ODY:118] Buried Alive
+1 [3ED:105] Demonic Tutor
+1 [USG:188] Gamble
+1 [AVR:151] Reforge the Soul
+1 [EMA:108] Toxic Deluge
+1 [MB1:1603] Mana Crypt
+1 [5ED:388] Mana Vault
+1 [HOU:165] Mirage Mirror
+1 [5ED:391] Nevinyrral's Disk
+1 [CHK:268] Sensei's Divining Top
+1 [3ED:274] Sol Ring
+1 [5DN:156] Staff of Domination
+1 [LRW:263] Thousand-Year Elixir
+1 [UDS:139] Thran Dynamo
+1 [5DN:163] Vedalken Orrery
+1 [TMP:55] Capsize
+1 [C20:146] Chaos Warp
+1 [RTR:35] Cyclonic Rift
+1 [ODY:132] Entomb
+1 [INV:57] Fact or Fiction
+1 [TMP:70] Intuition
+1 [THS:65] Swan Song
+1 [RTR:111] Vandalblast
+1 [3ED:185] Wheel of Fortune
+1 [GTC:207] Whispering Madness
+1 [USG:111] Windfall
+1 [SHM:248] Cauldron of Souls
+1 [RAV:260] Dimir Signet
+1 [9ED:297] Fellwar Stone
+1 [DOM:215] Gilded Lotus
+1 [ULG:126] Grim Monolith
+1 [GTC:231] Illusionist's Bracers
+1 [GPT:152] Izzet Signet
+1 [MRD:199] Lightning Greaves
+SB: 1 [C17:41] Mairsil, the Pretender
+LAYOUT MAIN:(1,7)(CARD_TYPE,false,50)|([SHM:258],[M15:231])([SHM:248],[RAV:260],[9ED:297],[DOM:215],[ULG:126],[GTC:231],[GPT:152],[MRD:199],[MB1:1603],[5ED:388],[HOU:165],[5ED:391],[CHK:268],[3ED:274],[5DN:156],[LRW:263],[UDS:139],[5DN:163])([DGM:11],[JUD:77],[10E:66],[SOM:28],[CHK:52],[AVR:47],[DRK:44],[EXO:33],[ALA:43],[SOM:64],[EVE:55],[DKA:139],[10E:87],[ICE:136],[M12:59],[SHM:42],[OGW:4],[PLC:43],[ICE:150],[SOM:72],[MRD:47],[SOK:53],[MIR:142],[PLC:110],[EMN:109])([M20:64],[9ED:152],[PCY:45])([TMP:55],[C20:146],[RTR:35],[ODY:132],[INV:57],[TMP:70],[THS:65])([RNA:245],[KTK:230],[WWK:132],[ELD:333],[ALA:222],[RAV:276],[CON:142],[CHK:277],[IKO:263],[IKO:263],[IKO:263],[IKO:263],[IKO:263],[IKO:263],[IKO:263],[IKO:263],[GPT:159],[CHK:279],[IKO:269],[IKO:269],[IKO:269],[C20:298],[KTK:239],[M19:254],[ONS:322],[ORI:251],[GRN:257],[10E:359],[BFZ:249],[IKO:266],[IKO:266],[IKO:266],[IKO:266],[10E:362],[GRN:259])([ODY:118],[3ED:105],[USG:188],[AVR:151],[EMA:108],[RTR:111],[3ED:185],[GTC:207],[USG:111])
+LAYOUT SIDEBOARD:(1,1)(NONE,false,50)|([C17:41])

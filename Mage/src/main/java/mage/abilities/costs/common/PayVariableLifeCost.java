@@ -42,7 +42,7 @@ public class PayVariableLifeCost extends VariableCostImpl {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             // Paying 0 life is not considered paying any life, so paying 0 is still allowed
-            if (game.getPlayer(source.getControllerId()).canPayLifeCost()) {
+            if (game.getPlayer(source.getControllerId()).canPayLifeCost(source)) {
                 maxValue = controller.getLife();
             }
         }

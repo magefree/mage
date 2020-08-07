@@ -11,9 +11,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -28,13 +27,6 @@ import java.util.UUID;
  */
 public final class Outmuscle extends CardImpl {
 
-    private static final FilterCreaturePermanent filter
-            = new FilterCreaturePermanent("creature you don't control");
-
-    static {
-        filter.add(TargetController.NOT_YOU.getControllerPredicate());
-    }
-
     public Outmuscle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}");
 
@@ -42,7 +34,7 @@ public final class Outmuscle extends CardImpl {
         // Adamant — If at least three green mana was spent to cast this spell, the creature you control gains indestructible until end of turn.
         this.getSpellAbility().addEffect(new OutmuscleEffect());
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
         this.getSpellAbility().addWatcher(new ManaSpentToCastWatcher());
     }
 
@@ -91,7 +83,7 @@ class OutmuscleEffect extends OneShotEffect {
         if (creature == null) {
             return true;
         }
-        game.applyEffects();
+        game.getState().processAction(game);
         return creature.fight(permanent, source, game);
     }
 }

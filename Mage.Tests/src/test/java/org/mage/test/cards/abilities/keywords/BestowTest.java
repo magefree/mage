@@ -11,7 +11,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 public class BestowTest extends CardTestPlayerBase {
@@ -20,7 +19,6 @@ public class BestowTest extends CardTestPlayerBase {
      * Tests that if from bestow permanent targeted creature gets protection
      * from the color of the bestow permanent, the bestow permanent becomes a
      * creature on the battlefield.
-     *
      */
 
     /* Silent Artisan
@@ -157,7 +155,7 @@ public class BestowTest extends CardTestPlayerBase {
      * // Away casting both sides, will the creature that has bestow come in
      * time for it to be sacrificed or does it fully resolve before the creature
      * comes in?
-     *
+     * <p>
      * Bestowed creature can be used to sacrifice a creature for the Away part.
      * http://www.mtgsalvation.com/forums/magic-fundamentals/magic-rulings/magic-rulings-archives/513828-bestow-far-away
      */
@@ -188,12 +186,15 @@ public class BestowTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nyxborn Rollicker using bestow", "Cyclops of One-Eyed Pass");
 
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "fused Far // Away", "Cyclops of One-Eyed Pass");
-        addTarget(playerB, playerA);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "fused Far // Away");
+        addTarget(playerB, "Cyclops of One-Eyed Pass"); // Far
+        addTarget(playerB, playerA); // Away
         addTarget(playerA, "Nyxborn Rollicker");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
+        assertAllCommandsUsed();
 
         assertHandCount(playerA, "Cyclops of One-Eyed Pass", 1);
         assertHandCount(playerB, 0);
@@ -246,8 +247,6 @@ public class BestowTest extends CardTestPlayerBase {
     }
 
     /**
-     *
-     *
      *
      */
     @Test
@@ -463,4 +462,26 @@ public class BestowTest extends CardTestPlayerBase {
         Assert.assertFalse("The unattached Nighthowler may not have the aura subtype.", nighthowler.getSubtype(currentGame).contains(SubType.AURA));
     }
 
+    @Test
+    public void testCastBestowWithCostReduction() {
+        // Enchantment Creature — Horror
+        // Bestow {5}{G} (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)
+        // Trample
+        // Enchanted creature gets +3/+3 and has trample.
+        addCard(Zone.HAND, playerA, "Nylea's Emissary"); // Enchantment Creature
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion"); // {1}{W} 2/2 creature
+        // Aura spells you cast cost {1} less to cast.
+        addCard(Zone.BATTLEFIELD, playerA, "Transcendent Envoy", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nylea's Emissary using bestow", "Silvercoat Lion");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Nylea's Emissary", 1);
+        assertPowerToughness(playerA, "Silvercoat Lion", 5, 5);
+        assertType("Nylea's Emissary", CardType.CREATURE, false);
+        assertType("Nylea's Emissary", CardType.ENCHANTMENT, SubType.AURA);
+    }
 }

@@ -22,7 +22,8 @@ import mage.target.TargetPlayer;
  */
 public final class SternMentor extends CardImpl {
 
-    private static final String ruleText = "As long as {this} is paired with another creature, each of those creatures has \"{T}: Target player puts the top two cards of their library into their graveyard.\"";
+    private static final String ruleText = "As long as {this} is paired with another creature, " +
+            "each of those creatures has \"{T}: Target player mills two cards.\"";
 
     public SternMentor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

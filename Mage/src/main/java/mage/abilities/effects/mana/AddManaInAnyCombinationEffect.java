@@ -1,18 +1,22 @@
 package mage.abilities.effects.mana;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.mana.ManaOptions;
 import mage.constants.ColoredManaSymbol;
+import mage.constants.ManaType;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * @author LevelX2
@@ -21,20 +25,22 @@ public class AddManaInAnyCombinationEffect extends ManaEffect {
 
     private ArrayList<ColoredManaSymbol> manaSymbols = new ArrayList<>();
     private final DynamicValue amount;
+    private final DynamicValue netAmount;
 
     public AddManaInAnyCombinationEffect(int amount) {
-        this(StaticValue.get(amount), ColoredManaSymbol.B, ColoredManaSymbol.U, ColoredManaSymbol.R, ColoredManaSymbol.W, ColoredManaSymbol.G);
+        this(StaticValue.get(amount), StaticValue.get(amount), ColoredManaSymbol.B, ColoredManaSymbol.U, ColoredManaSymbol.R, ColoredManaSymbol.W, ColoredManaSymbol.G);
     }
 
     public AddManaInAnyCombinationEffect(int amount, ColoredManaSymbol... coloredManaSymbols) {
-        this(StaticValue.get(amount), coloredManaSymbols);
+        this(StaticValue.get(amount), StaticValue.get(amount), coloredManaSymbols);
     }
 
-    public AddManaInAnyCombinationEffect(DynamicValue amount, ColoredManaSymbol... coloredManaSymbols) {
+    public AddManaInAnyCombinationEffect(DynamicValue amount, DynamicValue netAmount, ColoredManaSymbol... coloredManaSymbols) {
         super();
         this.manaSymbols.addAll(Arrays.asList(coloredManaSymbols));
         this.amount = amount;
         this.staticText = setText();
+        this.netAmount = netAmount;
     }
 
     public AddManaInAnyCombinationEffect(int amount, String text) {
@@ -47,8 +53,8 @@ public class AddManaInAnyCombinationEffect extends ManaEffect {
         this.staticText = text;
     }
 
-    public AddManaInAnyCombinationEffect(DynamicValue amount, String text, ColoredManaSymbol... coloredManaSymbols) {
-        this(amount, coloredManaSymbols);
+    public AddManaInAnyCombinationEffect(DynamicValue amount, DynamicValue netAmount, String text, ColoredManaSymbol... coloredManaSymbols) {
+        this(amount, netAmount, coloredManaSymbols);
         this.staticText = text;
     }
 
@@ -56,6 +62,11 @@ public class AddManaInAnyCombinationEffect extends ManaEffect {
         super(effect);
         this.manaSymbols = effect.manaSymbols;
         this.amount = effect.amount;
+        if (effect.netAmount != null) {
+            this.netAmount = effect.netAmount.copy();
+        } else {
+            this.netAmount = null;
+        }
     }
 
     @Override
@@ -67,9 +78,26 @@ public class AddManaInAnyCombinationEffect extends ManaEffect {
     public List<Mana> getNetMana(Game game, Ability source) {
         List<Mana> netMana = new ArrayList<>();
         if (game != null) {
-            int amountOfManaLeft = amount.calculate(game, source, this);
-            if (amountOfManaLeft > 0) {
-                netMana.add(Mana.AnyMana(amountOfManaLeft));
+            if (game.inCheckPlayableState()) {
+                int count = netAmount.calculate(game, source, this);
+                if (count > 0) {
+                    // add color combinations
+                    ManaOptions allPossibleMana = new ManaOptions();
+                    for (int i = 0; i < count; ++i) {
+                        ManaOptions currentPossibleMana = new ManaOptions();
+                        for (ColoredManaSymbol coloredManaSymbol : manaSymbols) {
+                            currentPossibleMana.add(new Mana(coloredManaSymbol));
+                        }
+                        allPossibleMana.addMana(currentPossibleMana);
+                    }
+                    allPossibleMana.removeDuplicated();
+                    return allPossibleMana.stream().collect(Collectors.toList());
+                }
+            } else {
+                int amountOfManaLeft = amount.calculate(game, source, this);
+                if (amountOfManaLeft > 0) {
+                    netMana.add(Mana.AnyMana(amountOfManaLeft));
+                }
             }
         }
         return netMana;
@@ -102,6 +130,29 @@ public class AddManaInAnyCombinationEffect extends ManaEffect {
             return mana;
         }
         return null;
+    }
+
+    @Override
+    public Set<ManaType> getProducableManaTypes(Game game, Ability source) {
+        Set<ManaType> manaTypes = new HashSet<>();
+        for(ColoredManaSymbol coloredManaSymbol: manaSymbols) {
+            if (coloredManaSymbol.equals(ColoredManaSymbol.B)) {
+                manaTypes.add(ManaType.BLACK);
+            }
+            if (coloredManaSymbol.equals(ColoredManaSymbol.R)) {
+                manaTypes.add(ManaType.RED);
+            }
+            if (coloredManaSymbol.equals(ColoredManaSymbol.G)) {
+                manaTypes.add(ManaType.GREEN);
+            }
+            if (coloredManaSymbol.equals(ColoredManaSymbol.U)) {
+                manaTypes.add(ManaType.BLUE);
+            }
+            if (coloredManaSymbol.equals(ColoredManaSymbol.W)) {
+                manaTypes.add(ManaType.WHITE);
+            }
+        }
+        return manaTypes;
     }
 
     private String setText() {

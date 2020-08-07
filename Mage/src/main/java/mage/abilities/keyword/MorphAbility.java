@@ -1,4 +1,3 @@
-
 package mage.abilities.keyword;
 
 import java.util.Iterator;
@@ -43,7 +42,7 @@ import mage.players.Player;
  * mana cost. Any effects or prohibitions that would apply to casting a card
  * with these characteristics (and not the face-up cards characteristics) are
  * applied to casting this card. These values are the copiable values of that
- * objects characteristics. (See rule 613, "Interaction of Continuous Effects,"
+ * object's characteristics. (See rule 613, "Interaction of Continuous Effects,"
  * and rule 706, "Copying Objects.") Put it onto the stack (as a face-down spell
  * with the same characteristics), and pay {3} rather than pay its mana cost.
  * This follows the rules for paying alternative costs. You can use morph to
@@ -52,13 +51,13 @@ import mage.players.Player;
  * spell had. The morph effect applies to the face-down object wherever it is,
  * and it ends when the permanent is turned face up. #
  *
- * 702.36c You cant cast a card face down if it doesnt have morph.
+ * 702.36c You can't cast a card face down if it doesn't have morph.
  *
  * 702.36d If you have priority, you may turn a face-down permanent you control
- * face up. This is a special action; it doesnt use the stack (see rule 115).
+ * face up. This is a special action; it doesn't use the stack (see rule 115).
  * To do this, show all players what the permanents morph cost would be if it
  * were face up, pay that cost, then turn the permanent face up. (If the
- * permanent wouldnt have a morph cost if it were face up, it cant be turned
+ * permanent wouldn't have a morph cost if it were face up, it cant be turned
  * face up this way.) The morph effect on it ends, and it regains its normal
  * characteristics. Any abilities relating to the permanent entering the
  * battlefield dont trigger when its turned face up and dont have any effect,
@@ -73,10 +72,14 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
 
     protected static final String ABILITY_KEYWORD = "Morph";
     protected static final String ABILITY_KEYWORD_MEGA = "Megamorph";
-    protected static final String REMINDER_TEXT = "<i>(You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)</i>";
-    protected static final String REMINDER_TEXT_MEGA = "<i>(You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its megamorph cost and put a +1/+1 counter on it.)</i>";
+    protected static final String REMINDER_TEXT = "<i>(You may cast this card face down as a "
+            + "2/2 creature for {3}. Turn it face up any time for its morph cost.)</i>";
+    protected static final String REMINDER_TEXT_MEGA = "<i>(You may cast this card face down "
+            + "as a 2/2 creature for {3}. Turn it face up any time for its megamorph "
+            + "cost and put a +1/+1 counter on it.)</i>";
     protected String ruleText;
-    protected AlternativeCost2Impl alternateCosts = new AlternativeCost2Impl(ABILITY_KEYWORD, REMINDER_TEXT, new GenericManaCost(3));
+    protected AlternativeCost2Impl alternateCosts = new AlternativeCost2Impl(
+            ABILITY_KEYWORD, REMINDER_TEXT, new GenericManaCost(3));
     protected Costs<Cost> morphCosts;
     // needed to check activation status, if card changes zone after casting it
     private int zoneChangeCounter = 0;
@@ -126,7 +129,8 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
 
         ruleText = sb.toString();
 
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesFaceDownCreatureEffect(morphCosts, (megamorph ? FaceDownType.MEGAMORPHED : FaceDownType.MORPHED)));
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesFaceDownCreatureEffect(
+                morphCosts, (megamorph ? FaceDownType.MEGAMORPHED : FaceDownType.MORPHED)));
         ability.setWorksFaceDown(true);
         ability.setRuleVisible(false);
         addSubAbility(ability);
@@ -165,7 +169,8 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
     @Override
     public boolean isActivated(Ability ability, Game game) {
         Card card = game.getCard(sourceId);
-        if (card != null && card.getZoneChangeCounter(game) <= zoneChangeCounter + 1) {
+        if (card != null
+                && card.getZoneChangeCounter(game) <= zoneChangeCounter + 1) {
             return alternateCosts.isActivated(game);
         }
         return false;
@@ -179,14 +184,17 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
     @Override
     public boolean askToActivateAlternativeCosts(Ability ability, Game game) {
         if (ability.getAbilityType() == AbilityType.SPELL) {
-            Player player = game.getPlayer(controllerId);
+            Player player = game.getPlayer(ability.getControllerId());
             Spell spell = game.getStack().getSpell(ability.getId());
-            if (player != null && spell != null) {
+            if (player != null
+                    && spell != null) {
                 this.resetMorph();
                 spell.setFaceDown(true, game); // so only the back is visible
-                if (alternateCosts.canPay(ability, sourceId, controllerId, game)) {
-                    if (player.chooseUse(Outcome.Benefit, "Cast this card as a 2/2 face-down creature for " + getCosts().getText() + " ?", ability, game)) {
-                        game.getState().setValue("MorphAbility" + ability.getSourceId(), "activated"); // Gift of Doom
+                if (alternateCosts.canPay(ability, sourceId, ability.getControllerId(), game)) {
+                    if (player.chooseUse(Outcome.Benefit, "Cast this card as a 2/2 "
+                            + "face-down creature for " + getCosts().getText() + " ?", ability, game)) {
+                        game.getState().setValue("MorphAbility"
+                                + ability.getSourceId(), "activated"); // Gift of Doom
                         activateMorph(game);
                         // change mana costs
                         ability.getManaCostsToPay().clear();
@@ -214,11 +222,12 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
             }
         }
         if (ability.getAbilityType() == AbilityType.PLAY_LAND) {
-            Player player = game.getPlayer(controllerId);
+            Player player = game.getPlayer(ability.getControllerId());
             if (player != null) {
                 this.resetMorph();
-                if (alternateCosts.canPay(ability, sourceId, controllerId, game)) {
-                    if (player.chooseUse(Outcome.Benefit, "Cast this card as a 2/2 face-down creature for " + getCosts().getText() + " ?", ability, game)) {
+                if (alternateCosts.canPay(ability, sourceId, ability.getControllerId(), game)) {
+                    if (player.chooseUse(Outcome.Benefit, "Cast this card as a 2/2 "
+                            + "face-down creature for " + getCosts().getText() + " ?", ability, game)) {
                         activateMorph(game);
                         // change mana costs
                         ability.getManaCostsToPay().clear();

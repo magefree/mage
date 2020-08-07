@@ -1,8 +1,5 @@
-
 package mage.game.command.planes;
 
-import java.util.ArrayList;
-import java.util.List;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -13,6 +10,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveTargetEffect;
 import mage.abilities.effects.common.RollPlanarDieEffect;
+import mage.abilities.effects.common.cost.PlanarDieRollCostIncreasingEffect;
+import mage.constants.Planes;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.command.Plane;
@@ -20,18 +19,20 @@ import mage.target.Target;
 import mage.target.TargetPlayer;
 import mage.watchers.common.PlanarRollWatcher;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * @author spjspj
  */
 public class LetheLakePlane extends Plane {
 
     public LetheLakePlane() {
-        this.setName("Plane - Lethe Lake");
+        this.setPlaneType(Planes.PLANE_LETHE_LAKE);
         this.setExpansionSetCodeForImage("PCA");
 
         // At the beginning of your upkeep, put the top ten cards of your libary into your graveyard
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.COMMAND, new PutLibraryIntoGraveTargetEffect(10).setText("that player puts the top 10 cards of their library into their graveyard"), TargetController.ANY, false, true);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.COMMAND, new PutLibraryIntoGraveTargetEffect(10).setText("that player mills 10 cards"), TargetController.ANY, false, true);
         this.getAbilities().add(ability);
 
         // Active player can roll the planar die: Whenever you roll {CHAOS}, target player puts the top ten cards of their library into their graveyard

@@ -56,7 +56,7 @@ class MercyKillingTokenEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+        Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (permanent != null) {
             int power = permanent.getPower().getValue();
             return new MercyKillingToken().putOntoBattlefield(power, game, source.getSourceId(), permanent.getControllerId());

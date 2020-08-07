@@ -1,25 +1,23 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.Target;
-import mage.target.common.TargetCardInHand;
+import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
+import mage.target.common.TargetDiscard;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class RitesOfSpring extends CardImpl {
@@ -31,7 +29,7 @@ public final class RitesOfSpring extends CardImpl {
         getSpellAbility().addEffect(new RitesOfSpringEffect());
     }
 
-    public RitesOfSpring(final RitesOfSpring card) {
+    private RitesOfSpring(final RitesOfSpring card) {
         super(card);
     }
 
@@ -43,12 +41,13 @@ public final class RitesOfSpring extends CardImpl {
 
 class RitesOfSpringEffect extends OneShotEffect {
 
-    public RitesOfSpringEffect() {
+    RitesOfSpringEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "Discard any number of cards. Search your library for up to that many basic land cards, reveal those cards, and put them into your hand. Then shuffle your library.";
+        this.staticText = "Discard any number of cards. Search your library for up to that many basic land cards, " +
+                "reveal those cards, and put them into your hand. Then shuffle your library.";
     }
 
-    public RitesOfSpringEffect(final RitesOfSpringEffect effect) {
+    private RitesOfSpringEffect(final RitesOfSpringEffect effect) {
         super(effect);
     }
 
@@ -60,23 +59,15 @@ class RitesOfSpringEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Target target = new TargetCardInHand(0, Integer.MAX_VALUE, new FilterCard("cards to discard"));
-            while (controller.canRespond() && !target.isChosen()) {
-                target.choose(Outcome.BoostCreature, controller.getId(), source.getSourceId(), game);
-            }
-            int numDiscarded = 0;
-            for (UUID targetId : target.getTargets()) {
-                Card card = controller.getHand().get(targetId, game);
-                if (controller.discard(card, source, game)) {
-                    numDiscarded++;
-                }
-            }
-            game.applyEffects();
-            return new SearchLibraryPutInHandEffect(
-                    new TargetCardInLibrary(0, numDiscarded, StaticFilters.FILTER_CARD_BASIC_LAND), true, true)
-                    .apply(game, source);
+        if (controller == null) {
+            return false;
         }
-        return false;
+        TargetCard target = new TargetDiscard(0, Integer.MAX_VALUE, StaticFilters.FILTER_CARD, controller.getId());
+        controller.choose(Outcome.AIDontUseIt, controller.getHand(), target, game);
+        int numDiscarded = controller.discard(new CardsImpl(target.getTargets()), source, game).size();
+        new SearchLibraryPutInHandEffect(new TargetCardInLibrary(
+                0, numDiscarded, StaticFilters.FILTER_CARD_BASIC_LAND
+        ), true, true).apply(game, source);
+        return true;
     }
 }

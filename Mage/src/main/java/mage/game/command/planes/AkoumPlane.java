@@ -1,8 +1,5 @@
-
 package mage.game.command.planes;
 
-import java.util.ArrayList;
-import java.util.List;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MainPhaseStackEmptyCondition;
@@ -11,10 +8,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.RollPlanarDieEffect;
 import mage.abilities.effects.common.continuous.CastAsThoughItHadFlashAllEffect;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.abilities.effects.common.cost.PlanarDieRollCostIncreasingEffect;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -24,8 +19,10 @@ import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.PlanarRollWatcher;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * @author spjspj
  */
 public class AkoumPlane extends Plane {
@@ -39,7 +36,7 @@ public class AkoumPlane extends Plane {
     }
 
     public AkoumPlane() {
-        this.setName("Plane - Akoum");
+        this.setPlaneType(Planes.PLANE_AKOUM);
         this.setExpansionSetCodeForImage("PCA");
 
         // Players may cast enchantment spells as if they had flash

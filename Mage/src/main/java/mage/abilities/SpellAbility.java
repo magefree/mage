@@ -1,7 +1,5 @@
 package mage.abilities;
 
-import java.util.Optional;
-import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.costs.Cost;
@@ -14,8 +12,11 @@ import mage.cards.SplitCard;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.stack.Spell;
 import mage.players.Player;
+
+import java.util.Optional;
+import java.util.UUID;
+import javax.naming.directory.InvalidAttributesException;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -70,7 +71,7 @@ public class SpellAbility extends ActivatedAbilityImpl {
         }
         return null != game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.CAST_AS_INSTANT, this, playerId, game) // check this first to allow Offering in main phase
                 || timing == TimingRule.INSTANT
-                || object.hasAbility(FlashAbility.getInstance().getId(), game)
+                || object.hasAbility(FlashAbility.getInstance(), game)
                 || game.canPlaySorcery(playerId);
     }
 
@@ -104,12 +105,16 @@ public class SpellAbility extends ActivatedAbilityImpl {
                     return ActivationStatus.getFalse();
                 }
             }
-            if (costs.canPay(this, sourceId, controllerId, game)) {
+            if (costs.canPay(this, sourceId, playerId, game)) {
                 if (getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED) {
                     SplitCard splitCard = (SplitCard) game.getCard(getSourceId());
                     if (splitCard != null) {
-                        return new ActivationStatus(splitCard.getLeftHalfCard().getSpellAbility().canChooseTarget(game)
-                                && splitCard.getRightHalfCard().getSpellAbility().canChooseTarget(game), null);
+                        // fused can be called from hand only, so not permitting object allows or other zones checks
+                        // see https://www.mtgsalvation.com/forums/magic-fundamentals/magic-rulings/magic-rulings-archives/251926-snapcaster-mage-and-fuse
+                        if (game.getState().getZone(splitCard.getId()) == Zone.HAND) {
+                            return new ActivationStatus(splitCard.getLeftHalfCard().getSpellAbility().canChooseTarget(game)
+                                    && splitCard.getRightHalfCard().getSpellAbility().canChooseTarget(game), null);
+                        }
                     }
                     return ActivationStatus.getFalse();
 
@@ -140,9 +145,13 @@ public class SpellAbility extends ActivatedAbilityImpl {
         this.costs.clearPaid();
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     @Override
     public String toString() {
-        return this.name;
+        return getName();
     }
 
     @Override
@@ -227,12 +236,25 @@ public class SpellAbility extends ActivatedAbilityImpl {
         return this;
     }
 
+    /**
+     * Returns a card object with the spell characteristics like calor, types,
+     * subtypes etc. E.g. if you cast a Bestow card as enchantment, the
+     * characteristics don't include the creature type.
+     *
+     * @param game
+     * @return card object with the spell characteristics
+     */
     public Card getCharacteristics(Game game) {
-        Spell spell = game.getSpell(this.getId());
-        if (spell != null) {
-            return spell;
+        Card spellCharacteristics = game.getSpell(this.getId());
+        if (spellCharacteristics == null) {
+            spellCharacteristics = game.getCard(this.getSourceId());
         }
-        return game.getCard(this.getSourceId());
+        if (spellCharacteristics != null) {
+            if (getSpellAbilityCastMode() != SpellAbilityCastMode.NORMAL) {
+                spellCharacteristics = getSpellAbilityCastMode().getTypeModifiedCardObjectCopy(spellCharacteristics, game);
+            }
+        }
+        return spellCharacteristics;
     }
 
     public static SpellAbility getSpellAbilityFromEvent(GameEvent event, Game game) {

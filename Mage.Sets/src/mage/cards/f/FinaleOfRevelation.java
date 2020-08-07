@@ -45,7 +45,7 @@ class FinaleOfRevelationEffect extends OneShotEffect {
     FinaleOfRevelationEffect() {
         super(Outcome.Benefit);
         staticText = "Draw X cards. If X is 10 or more, instead shuffle your graveyard into your library, " +
-                "draw X cards, untap up to five lands, and you have no maximum hand size for the rest of the game.";
+                "draw X cards, untap up to five lands, and you have no maximum hand size for the rest of the game";
     }
 
     private FinaleOfRevelationEffect(final FinaleOfRevelationEffect effect) {
@@ -66,11 +66,11 @@ class FinaleOfRevelationEffect extends OneShotEffect {
         int xValue = source.getManaCostsToPay().getX();
 
         if (xValue < 10) {
-            player.drawCards(xValue, game);
+            player.drawCards(xValue, source.getSourceId(), game);
         } else {
             player.putCardsOnTopOfLibrary(player.getGraveyard(), game, source, false);
             player.shuffleLibrary(source, game);
-            player.drawCards(xValue, game);
+            player.drawCards(xValue, source.getSourceId(), game);
             new UntapLandsEffect(5).apply(game, source);
             game.addEffect(new MaximumHandSizeControllerEffect(
                     Integer.MAX_VALUE, Duration.EndOfGame,

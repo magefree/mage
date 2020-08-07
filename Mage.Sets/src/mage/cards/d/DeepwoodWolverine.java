@@ -3,7 +3,7 @@ package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BecomesBlockedTriggeredAbility;
+import mage.abilities.common.BecomesBlockedSourceTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
@@ -27,7 +27,7 @@ public final class DeepwoodWolverine extends CardImpl {
         // Whenever Deepwood Wolverine becomes blocked, it gets +2/+0 until end of turn.
         Effect effect = new BoostSourceEffect(2, 0, Duration.EndOfTurn);
         effect.setText("it gets +2/+0 until end of turn");
-        this.addAbility(new BecomesBlockedTriggeredAbility(effect, false));
+        this.addAbility(new BecomesBlockedSourceTriggeredAbility(effect, false));
     }
 
     public DeepwoodWolverine(final DeepwoodWolverine card) {

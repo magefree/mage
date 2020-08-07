@@ -1,4 +1,3 @@
-
 package mage.cards.n;
 
 import mage.abilities.Ability;
@@ -24,7 +23,6 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- *
  * @author Rene - bugisemail at gmail dot com
  */
 public final class NaturalBalance extends CardImpl {
@@ -100,9 +98,7 @@ public final class NaturalBalance extends CardImpl {
                     }
                 }
                 for (Player player : toShuffle) {
-                    if (player.isInGame()) {
-                        player.shuffleLibrary(source, game);
-                    }
+                    player.shuffleLibrary(source, game);
                 }
                 return true;
             }

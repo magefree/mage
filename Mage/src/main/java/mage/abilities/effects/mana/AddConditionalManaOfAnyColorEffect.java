@@ -1,5 +1,7 @@
 package mage.abilities.effects.mana;
 
+import java.util.ArrayList;
+import java.util.List;
 import mage.ConditionalMana;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -13,9 +15,6 @@ import mage.players.Player;
 import mage.util.CardUtil;
 import org.apache.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * @author noxx
  */
@@ -24,20 +23,22 @@ public class AddConditionalManaOfAnyColorEffect extends ManaEffect {
     private static final Logger logger = Logger.getLogger(AddConditionalManaOfAnyColorEffect.class);
 
     private final DynamicValue amount;
+    private final DynamicValue netAmount;
     private final ConditionalManaBuilder manaBuilder;
     private final boolean oneChoice;
 
     public AddConditionalManaOfAnyColorEffect(int amount, ConditionalManaBuilder manaBuilder) {
-        this(StaticValue.get(amount), manaBuilder);
+        this(StaticValue.get(amount), StaticValue.get(amount), manaBuilder);
     }
 
-    public AddConditionalManaOfAnyColorEffect(DynamicValue amount, ConditionalManaBuilder manaBuilder) {
-        this(amount, manaBuilder, true);
+    public AddConditionalManaOfAnyColorEffect(DynamicValue amount, DynamicValue netAmount, ConditionalManaBuilder manaBuilder) {
+        this(amount, netAmount, manaBuilder, true);
     }
 
-    public AddConditionalManaOfAnyColorEffect(DynamicValue amount, ConditionalManaBuilder manaBuilder, boolean oneChoice) {
+    public AddConditionalManaOfAnyColorEffect(DynamicValue amount, DynamicValue netAmount, ConditionalManaBuilder manaBuilder, boolean oneChoice) {
         super();
         this.amount = amount;
+        this.netAmount = netAmount;
         this.manaBuilder = manaBuilder;
         this.oneChoice = oneChoice;
         //
@@ -53,6 +54,7 @@ public class AddConditionalManaOfAnyColorEffect extends ManaEffect {
     public AddConditionalManaOfAnyColorEffect(final AddConditionalManaOfAnyColorEffect effect) {
         super(effect);
         this.amount = effect.amount;
+        this.netAmount = effect.netAmount;
         this.manaBuilder = effect.manaBuilder;
         this.oneChoice = effect.oneChoice;
     }
@@ -66,9 +68,16 @@ public class AddConditionalManaOfAnyColorEffect extends ManaEffect {
     public List<Mana> getNetMana(Game game, Ability source) {
         List<Mana> netMana = new ArrayList<>();
         if (game != null) {
-            int value = amount.calculate(game, source, this);
-            if (value > 0) {
-                netMana.add(Mana.AnyMana(value));
+            if (game.inCheckPlayableState()) {
+                int amountAvailableMana = netAmount.calculate(game, source, this);
+                if (amountAvailableMana > 0) {
+                    netMana.add(manaBuilder.setMana(Mana.AnyMana(amountAvailableMana), source, game).build());
+                }
+            } else {
+                int amountOfManaLeft = amount.calculate(game, source, this);
+                if (amountOfManaLeft > 0) {
+                    netMana.add(Mana.AnyMana(amountOfManaLeft));
+                }
             }
         }
         return netMana;

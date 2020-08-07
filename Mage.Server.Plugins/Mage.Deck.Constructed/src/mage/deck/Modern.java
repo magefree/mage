@@ -24,6 +24,7 @@ public class Modern extends Constructed {
         }
 
         banned.add("Ancient Den");
+        banned.add("Arcum's Astrolabe");
         banned.add("Birthing Pod");
         banned.add("Blazing Shoal");
         banned.add("Bridge from Below");

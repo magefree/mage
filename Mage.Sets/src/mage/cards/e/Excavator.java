@@ -112,7 +112,7 @@ class ExcavatorEffect extends ContinuousEffectImpl implements SourceEffect {
             if (permanent != null) {
                 for(Ability ability : abilities)
                 {
-                    permanent.addAbility(ability, source.getSourceId(), game, false);
+                    permanent.addAbility(ability, source.getSourceId(), game);
                 }
             }
         }

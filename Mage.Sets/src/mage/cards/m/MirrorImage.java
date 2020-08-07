@@ -1,17 +1,17 @@
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.common.CopyPermanentEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class MirrorImage extends CardImpl {
@@ -27,12 +27,12 @@ public final class MirrorImage extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(
                 new CopyPermanentEffect(StaticFilters.FILTER_CONTROLLED_CREATURE)
                         .setText("you may have {this} enter the battlefield "
-                                + "as a copy of any creature you control"),
+                                + "as a copy of a creature you control"),
                 true
         ));
     }
 
-    public MirrorImage(final MirrorImage card) {
+    private MirrorImage(final MirrorImage card) {
         super(card);
     }
 

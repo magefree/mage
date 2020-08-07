@@ -1,12 +1,11 @@
 package mage.game;
 
-import java.util.Map;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.continuous.CommanderReplacementEffect;
 import mage.abilities.effects.common.cost.CommanderCostModification;
+import mage.abilities.keyword.CompanionAbility;
 import mage.cards.Card;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.PhaseStep;
@@ -17,6 +16,9 @@ import mage.game.turn.TurnMod;
 import mage.players.Player;
 import mage.watchers.common.CommanderInfoWatcher;
 import mage.watchers.common.CommanderPlaysCountWatcher;
+
+import java.util.Map;
+import java.util.UUID;
 
 public abstract class GameCommanderImpl extends GameImpl {
 
@@ -29,8 +31,8 @@ public abstract class GameCommanderImpl extends GameImpl {
 
     protected boolean startingPlayerSkipsDraw = true;
 
-    public GameCommanderImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
-        super(attackOption, range, mulligan, startLife);
+    public GameCommanderImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife, int startingSize) {
+        super(attackOption, range, mulligan, startLife, startingSize);
     }
 
     public GameCommanderImpl(final GameCommanderImpl game) {
@@ -53,10 +55,14 @@ public abstract class GameCommanderImpl extends GameImpl {
             Player player = getPlayer(playerId);
             if (player != null) {
                 // add new commanders
-                for (UUID id : player.getSideboard()) {
-                    Card commander = this.getCard(id);
-                    if (commander != null) {
-                        addCommander(commander, player);
+                for (UUID cardId : player.getSideboard()) {
+                    Card card = this.getCard(cardId);
+                    if (card != null) {
+                        // Check for companions. If it is the only card in the sideboard, it is the commander, not a companion.
+                        if (player.getSideboard().size() > 1 && card.getAbilities(this).stream().anyMatch(ability -> ability instanceof CompanionAbility)) {
+                            continue;
+                        }
+                        addCommander(card, player);
                     }
                 }
 

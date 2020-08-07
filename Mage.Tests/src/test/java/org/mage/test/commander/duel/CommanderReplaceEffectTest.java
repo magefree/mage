@@ -110,8 +110,8 @@ public class CommanderReplaceEffectTest extends CardTestCommanderDuelBase {
         execute();
 
         assertPermanentCount(playerA, "Soulherder", 1);
-        assertPermanentCount(playerA, "Daxos of Meletis", 0);
-        assertCommandZoneCount(playerA, "Daxos of Meletis", 1);
+        assertPermanentCount(playerA, "Daxos of Meletis", 1);
+        assertCommandZoneCount(playerA, "Daxos of Meletis", 0);
         assertPowerToughness(playerA, "Soulherder", 2, 2);
 
     }

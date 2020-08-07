@@ -1,6 +1,7 @@
-
 package mage.cards.v;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -11,8 +12,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -26,7 +27,7 @@ import mage.target.common.TargetCreaturePermanent;
 public final class VoidStalker extends CardImpl {
 
     public VoidStalker(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.subtype.add(SubType.ELEMENTAL);
 
         this.power = new MageInt(2);
@@ -50,6 +51,7 @@ public final class VoidStalker extends CardImpl {
 }
 
 class VoidStalkerEffect extends OneShotEffect {
+
     VoidStalkerEffect() {
         super(Outcome.ReturnToHand);
         staticText = "Put {this} and target creature on top of their owners' libraries, then those players shuffle their libraries";
@@ -61,19 +63,25 @@ class VoidStalkerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent p = game.getPermanent(targetPointer.getFirst(game, source));
-        Permanent s = game.getPermanent(source.getSourceId());
-        if (p != null) {
-            p.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-            Player pl = game.getPlayer(p.getControllerId());
-            if (pl != null)
-                pl.shuffleLibrary(source, game);
+        Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
+        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Set<Player> toShuffle = new LinkedHashSet<>();
+        if (targetCreature != null) {
+            Player owner = game.getPlayer(targetCreature.getOwnerId());
+            if (owner != null) {
+                owner.putCardsOnTopOfLibrary(targetCreature, game, source, true);
+                toShuffle.add(owner);
+            }
         }
-        if (s != null) {
-            s.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-            Player pl = game.getPlayer(s.getControllerId());
-            if (pl != null)
-                pl.shuffleLibrary(source, game);
+        if (sourcePermanent != null) {
+            Player owner = game.getPlayer(sourcePermanent.getOwnerId());
+            if (owner != null) {
+                owner.putCardsOnTopOfLibrary(sourcePermanent, game, source, true);
+                toShuffle.add(owner);
+            }
+        }
+        for (Player player : toShuffle) {
+            player.shuffleLibrary(source, game);
         }
         return true;
     }

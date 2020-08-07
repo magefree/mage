@@ -2,7 +2,7 @@
 package mage.cards.w;
 
 import java.util.UUID;
-import mage.abilities.common.CantBeCounteredAbility;
+import mage.abilities.common.CantBeCounteredSourceAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -29,7 +29,7 @@ public final class WreakHavoc extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}{G}");
 
 
-        this.addAbility(new CantBeCounteredAbility());
+        this.addAbility(new CantBeCounteredSourceAbility());
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }

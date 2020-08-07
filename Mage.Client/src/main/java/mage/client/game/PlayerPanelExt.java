@@ -1,5 +1,13 @@
 package mage.client.game;
 
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.util.*;
+import javax.swing.*;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 import mage.cards.decks.importer.DckDeckImporter;
 import mage.client.MageFrame;
 import mage.client.SessionHandler;
@@ -8,6 +16,7 @@ import mage.client.components.HoverButton;
 import mage.client.components.MageRoundPane;
 import mage.client.components.ext.dlg.DialogManager;
 import mage.client.dialog.PreferencesDialog;
+import mage.client.themes.ThemeType;
 import mage.client.util.CardsViewUtil;
 import mage.client.util.ImageHelper;
 import mage.client.util.gui.BufferedImageBuilder;
@@ -15,6 +24,7 @@ import mage.client.util.gui.countryBox.CountryUtil;
 import mage.components.ImagePanel;
 import mage.components.ImagePanelStyle;
 import mage.constants.CardType;
+import static mage.constants.Constants.*;
 import mage.constants.ManaType;
 import mage.counters.Counter;
 import mage.counters.CounterType;
@@ -22,17 +32,6 @@ import mage.designations.DesignationType;
 import mage.utils.timer.PriorityTimer;
 import mage.view.*;
 import org.mage.card.arcane.ManaSymbols;
-
-import javax.swing.*;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.util.*;
-
-import static mage.constants.Constants.*;
 
 /**
  * Enhanced player pane.
@@ -42,7 +41,6 @@ import static mage.constants.Constants.*;
 public class PlayerPanelExt extends javax.swing.JPanel {
 
     // TODO: *.form file was lost, panel must be reworks in designer
-
     private UUID playerId;
     private UUID gameId;
     private PlayerView player;
@@ -59,9 +57,9 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     private static final Border GREEN_BORDER = new LineBorder(Color.green, 3);
     private static final Border RED_BORDER = new LineBorder(Color.red, 2);
     private static final Border EMPTY_BORDER = BorderFactory.createEmptyBorder(0, 0, 0, 0);
-    private final Color inactiveBackgroundColor = new Color(200, 200, 180, 200);
-    private final Color activeBackgroundColor = new Color(200, 255, 200, 200);
-    private final Color deadBackgroundColor = new Color(131, 94, 83, 200);
+    private final Color inactiveBackgroundColor;
+    private final Color activeBackgroundColor;
+    private final Color deadBackgroundColor;
 
     private final Color activeValueColor = new Color(244, 9, 47);
     private final Font fontValuesZero = this.getFont().deriveFont(Font.PLAIN);
@@ -81,13 +79,18 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
         initComponents();
         setGUISize();
+
+        ThemeType currentTheme = PreferencesDialog.getCurrentTheme();
+        inactiveBackgroundColor = currentTheme.getPlayerPanel_inactiveBackgroundColor();
+        activeBackgroundColor = currentTheme.getPlayerPanel_activeBackgroundColor();
+        deadBackgroundColor = currentTheme.getPlayerPanel_deadBackgroundColor();
     }
 
-    public void init(UUID gameId, UUID playerId, BigCard bigCard, int priorityTime) {
+    public void init(UUID gameId, UUID playerId, boolean controlled, BigCard bigCard, int priorityTime) {
         this.gameId = gameId;
         this.playerId = playerId;
         this.bigCard = bigCard;
-        cheat.setVisible(SessionHandler.isTestMode());
+        cheat.setVisible(SessionHandler.isTestMode() && controlled);
         cheat.setFocusable(false);
         flagName = null;
         if (priorityTime > 0) {
@@ -612,7 +615,6 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         manaCountLabelW.addMouseListener(manaMouseAdapter);
         manaLabels.put(manaCountLabelW, ManaType.WHITE);l
         //*/
-
         ///*
         JLabel manaCountLabelW = new JLabel();
         manaCountLabelW.setToolTipText("White mana");
@@ -944,7 +946,8 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         Set<String> cardTypesPresent = new LinkedHashSet<String>() {
         };
         for (CardView card : cardsView.values()) {
-            Set<CardType> cardTypes = card.getCardTypes();
+            Set<CardType> cardTypes = EnumSet.noneOf(CardType.class);
+            cardTypes.addAll(card.getCardTypes());
             for (CardType cardType : cardTypes) {
                 cardTypesPresent.add(cardType.toString());
             }

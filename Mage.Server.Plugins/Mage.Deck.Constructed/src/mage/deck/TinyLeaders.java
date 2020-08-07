@@ -6,6 +6,7 @@ import mage.cards.Sets;
 import mage.cards.SplitCard;
 import mage.cards.decks.Constructed;
 import mage.cards.decks.Deck;
+import mage.cards.decks.DeckValidatorErrorType;
 import mage.filter.FilterMana;
 import mage.game.GameTinyLeadersImpl;
 
@@ -22,7 +23,7 @@ public class TinyLeaders extends Constructed {
     protected List<String> bannedCommander = new ArrayList<>();
 
     public TinyLeaders() {
-        this("Tiny Leaders");
+        super("Tiny Leaders");
         for (ExpansionSet set : Sets.getInstance().values()) {
             if (set.getSetType().isEternalLegal()) {
                 setCodes.add(set.getCode());
@@ -86,10 +87,6 @@ public class TinyLeaders extends Constructed {
         bannedCommander.add("Derevi, Empyrical Tactician");
     }
 
-    public TinyLeaders(String name) {
-        super(name);
-    }
-
     @Override
     public int getDeckMinSize() {
         return 49; // commander gives from deck name
@@ -107,9 +104,10 @@ public class TinyLeaders extends Constructed {
     @Override
     public boolean validate(Deck deck) {
         boolean valid = true;
+        errorsList.clear();
 
         if (deck.getCards().size() != getDeckMinSize()) {
-            invalid.put("Deck", "Must contain " + getDeckMinSize() + " cards: has " + deck.getCards().size() + " cards");
+            addError(DeckValidatorErrorType.DECK_SIZE, "Deck", "Must contain " + getDeckMinSize() + " cards: has " + deck.getCards().size() + " cards");
             valid = false;
         }
 
@@ -121,7 +119,7 @@ public class TinyLeaders extends Constructed {
 
         for (String bannedCard : banned) {
             if (counts.containsKey(bannedCard)) {
-                invalid.put(bannedCard, "Banned");
+                addError(DeckValidatorErrorType.BANNED, "Banned", bannedCard);
                 valid = false;
             }
         }
@@ -138,16 +136,16 @@ public class TinyLeaders extends Constructed {
             if (commander == null || commander.getManaCost().convertedManaCost() > 3) {
                 if (commander == null) {
                     if (deck.getName() == null) {
-                        invalid.put("Leader", "You have to save your deck with the leader card name entered to the DECK NAME field of the DECK EDITOR (top left) so that XMage knows your leader."
+                        addError(DeckValidatorErrorType.PRIMARY, "Leader", "You have to save your deck with the leader card name entered to the DECK NAME field of the DECK EDITOR (top left) so that XMage knows your leader."
                                 + "(You can use the \"Sultai\" for a UBG (3/3) default Commander or \"Glass\" for a colorless 3/3 default Commander.)");
                     } else {
-                        invalid.put("Leader", "Leader [" + deck.getName() + "] not found. You have to enter the name of the leader card into the DECK NAME field of the DECK EDITOR (top left). Check your spelling "
+                        addError(DeckValidatorErrorType.PRIMARY, "Leader", "Leader [" + deck.getName() + "] not found. You have to enter the name of the leader card into the DECK NAME field of the DECK EDITOR (top left). Check your spelling "
                                 + "(use the \"Sultai\" for a UBG (3/3) default Commander or \"Glass\" for a colorless (3/3) default Commander)");
 
                     }
                 }
                 if (commander != null && commander.getManaCost().convertedManaCost() > 3) {
-                    invalid.put("Leader", "Commanders converted mana cost is greater than 3");
+                    addError(DeckValidatorErrorType.PRIMARY, "Leader", "Commanders converted mana cost is greater than 3");
                 }
                 return false;
             }
@@ -165,21 +163,21 @@ public class TinyLeaders extends Constructed {
                         }
                     }
                 } else {
-                    invalid.put("Commander", "Commander banned (" + commander.getName() + ')');
+                    addError(DeckValidatorErrorType.PRIMARY, "Commander", "Commander banned (" + commander.getName() + ')');
                     valid = false;
                 }
             } else {
-                invalid.put("Commander", "Commander invalide (" + commander.getName() + ')');
+                addError(DeckValidatorErrorType.PRIMARY, "Commander", "Commander invalide (" + commander.getName() + ')');
                 valid = false;
             }
         } else {
-            invalid.put("Commander", "Sideboard must contain only a maximum of 10 sideboard cards (the Tiny Leader name must be written to the deck name)");
+            addError(DeckValidatorErrorType.PRIMARY, "Commander", "Sideboard must contain only a maximum of 10 sideboard cards (the Tiny Leader name must be written to the deck name)");
             valid = false;
         }
         for (Card card : deck.getCards()) {
             if (!isSetAllowed(card.getExpansionSetCode())) {
                 if (!legalSets(card)) {
-                    invalid.put(card.getName(), "Not allowed Set " + card.getExpansionSetCode());
+                    addError(DeckValidatorErrorType.WRONG_SET, card.getName(), "Not allowed Set " + card.getExpansionSetCode());
                     valid = false;
                 }
             }
@@ -187,7 +185,7 @@ public class TinyLeaders extends Constructed {
         for (Card card : deck.getSideboard()) {
             if (!isSetAllowed(card.getExpansionSetCode())) {
                 if (!legalSets(card)) {
-                    invalid.put(card.getName(), "Not allowed Set " + card.getExpansionSetCode());
+                    addError(DeckValidatorErrorType.WRONG_SET, card.getName(), "Not allowed Set " + card.getExpansionSetCode());
                     valid = false;
                 }
             }
@@ -197,22 +195,22 @@ public class TinyLeaders extends Constructed {
 
     private boolean isCardFormatValid(Card card, Card commander, FilterMana color) {
         if (!cardHasValideColor(color, card)) {
-            invalid.put(card.getName(), "Invalid color (" + commander.getName() + ')');
+            addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid color (" + commander.getName() + ')');
             return false;
         }
 
         //905.5b - Converted mana cost must be 3 or less
         if (card instanceof SplitCard) {
             if (((SplitCard) card).getLeftHalfCard().getManaCost().convertedManaCost() > 3) {
-                invalid.put(card.getName(), "Invalid cost (" + ((SplitCard) card).getLeftHalfCard().getManaCost().convertedManaCost() + ')');
+                addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid cost (" + ((SplitCard) card).getLeftHalfCard().getManaCost().convertedManaCost() + ')');
                 return false;
             }
             if (((SplitCard) card).getRightHalfCard().getManaCost().convertedManaCost() > 3) {
-                invalid.put(card.getName(), "Invalid cost (" + ((SplitCard) card).getRightHalfCard().getManaCost().convertedManaCost() + ')');
+                addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid cost (" + ((SplitCard) card).getRightHalfCard().getManaCost().convertedManaCost() + ')');
                 return false;
             }
         } else if (card.getManaCost().convertedManaCost() > 3) {
-            invalid.put(card.getName(), "Invalid cost (" + card.getManaCost().convertedManaCost() + ')');
+            addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid cost (" + card.getManaCost().convertedManaCost() + ')');
             return false;
         }
         return true;

@@ -4,7 +4,7 @@ package mage.cards.f;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -63,7 +63,7 @@ public final class FleshCarver extends CardImpl {
     }
 }
 
-class FleshCarverAbility extends DiesTriggeredAbility {
+class FleshCarverAbility extends DiesSourceTriggeredAbility {
 
     public FleshCarverAbility() {
         super(new FleshCarverEffect(), false);

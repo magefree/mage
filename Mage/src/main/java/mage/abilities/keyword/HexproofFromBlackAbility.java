@@ -1,9 +1,9 @@
 package mage.abilities.keyword;
 
+import mage.MageObject;
+import mage.game.Game;
+
 import java.io.ObjectStreamException;
-import mage.abilities.MageSingleton;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.constants.Zone;
 
 /**
  * Hexproof from black (This creature or player can't be the target of black
@@ -11,7 +11,7 @@ import mage.constants.Zone;
  *
  * @author igoudt
  */
-public class HexproofFromBlackAbility extends SimpleStaticAbility implements MageSingleton {
+public class HexproofFromBlackAbility extends HexproofBaseAbility {
 
     private static final HexproofFromBlackAbility instance;
 
@@ -28,7 +28,12 @@ public class HexproofFromBlackAbility extends SimpleStaticAbility implements Mag
     }
 
     private HexproofFromBlackAbility() {
-        super(Zone.BATTLEFIELD, null);
+        super();
+    }
+
+    @Override
+    public boolean checkObject(MageObject source, Game game) {
+        return source.getColor(game).isBlack();
     }
 
     @Override

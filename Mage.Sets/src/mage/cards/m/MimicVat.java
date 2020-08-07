@@ -181,7 +181,7 @@ class MimicVatCreateTokenEffect extends OneShotEffect {
             Card card = game.getCard(permanent.getImprinted().get(0));
             if (card != null) {
                 CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(source.getControllerId(), null, true);
-                effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
+                effect.setTargetPointer(new FixedTarget(card, game));
                 effect.apply(game, source);
                 for (Permanent addedToken : effect.getAddedPermanent()) {
                     ExileTargetEffect exileEffect = new ExileTargetEffect();

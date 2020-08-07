@@ -43,7 +43,7 @@ import static mage.cards.decks.DeckFormats.XMAGE;
 import static mage.cards.decks.DeckFormats.XMAGE_INFO;
 
 /**
- * @author BetaSteward_at_googlemail.com, JayDi85
+ * @author BetaSteward_at_googlemail.com, JayDi85, Elandril
  */
 public class DeckEditorPanel extends javax.swing.JPanel {
 
@@ -78,7 +78,6 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         deckArea.setOpaque(false);
         panelLeft.setOpaque(false);
         panelRight.setOpaque(false);
-        restoreDividerLocationsAndDeckAreaSettings();
         countdown = new javax.swing.Timer(1000,
                 e -> {
                     if (--timeout > 0) {
@@ -93,11 +92,16 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                     }
                 });
 
-        // Set up tracking to save the deck editor settings when the deck editor is hidden.
+        // save editor settings dynamicly on hides (e.g. app close)
         addHierarchyListener((HierarchyEvent e) -> {
             if ((e.getChangeFlags() & HierarchyEvent.SHOWING_CHANGED) != 0) {
                 if (!isShowing()) {
-                    saveDividerLocationsAndDeckAreaSettings();
+                    // It's bugged and called on sideboarding creates too (before load). So:
+                    // * for free mode - save here
+                    // * for draft/sideboarding - save on cleanup call
+                    if (mode == DeckEditorMode.FREE_BUILDING) {
+                        saveDividerLocationsAndDeckAreaSettings();
+                    }
                 }
             }
         });
@@ -127,21 +131,32 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     }
 
     private void saveDividerLocationsAndDeckAreaSettings() {
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_EDITOR_HORIZONTAL_DIVIDER_LOCATION, Integer.toString(panelRight.getDividerLocation()));
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_EDITOR_DECKAREA_SETTINGS, this.deckArea.saveSettings().toString());
+        boolean isLimitedBuildingOrientation = (mode != DeckEditorMode.FREE_BUILDING);
+        if (isLimitedBuildingOrientation) {
+            PreferencesDialog.saveValue(PreferencesDialog.KEY_EDITOR_HORIZONTAL_DIVIDER_LOCATION_LIMITED, Integer.toString(panelRight.getDividerLocation()));
+        } else {
+            PreferencesDialog.saveValue(PreferencesDialog.KEY_EDITOR_HORIZONTAL_DIVIDER_LOCATION_NORMAL, Integer.toString(panelRight.getDividerLocation()));
+        }
+
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_EDITOR_DECKAREA_SETTINGS, this.deckArea.saveSettings(isLimitedBuildingOrientation).toString());
     }
 
     private void restoreDividerLocationsAndDeckAreaSettings() {
-        // Load horizontal split position setting
-        String dividerLocation = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_EDITOR_HORIZONTAL_DIVIDER_LOCATION, "");
+        String dividerLocation = "";
+        boolean isLimitedBuildingOrientation = (mode != DeckEditorMode.FREE_BUILDING);
+        if (isLimitedBuildingOrientation) {
+            dividerLocation = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_EDITOR_HORIZONTAL_DIVIDER_LOCATION_LIMITED, "");
+        } else {
+            dividerLocation = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_EDITOR_HORIZONTAL_DIVIDER_LOCATION_NORMAL, "");
+        }
         if (!dividerLocation.isEmpty()) {
             panelRight.setDividerLocation(Integer.parseInt(dividerLocation));
         }
 
         // Load deck area settings
         this.deckArea.loadSettings(
-                DeckArea.Settings.parse(
-                        PreferencesDialog.getCachedValue(PreferencesDialog.KEY_EDITOR_DECKAREA_SETTINGS, "")));
+                DeckArea.Settings.parse(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_EDITOR_DECKAREA_SETTINGS, "")),
+                isLimitedBuildingOrientation);
     }
 
     public void changeGUISize() {
@@ -157,11 +172,18 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         this.mode = mode;
         this.btnAddLand.setVisible(false);
 
+        // workaround to enable real opaque in scrollbar pane (transparent panel) and remove scroll pane border
+        scrollPaneInfo.getViewport().setOpaque(false);
+        scrollPaneInfo.setBorder(BorderFactory.createEmptyBorder());
+        scrollPaneInfo.setViewportBorder(BorderFactory.createEmptyBorder());
+
+        restoreDividerLocationsAndDeckAreaSettings();
         switch (mode) {
             case LIMITED_BUILDING:
                 this.btnAddLand.setVisible(true);
                 this.txtTimeRemaining.setVisible(true);
-                // Fall through to sideboarding
+                this.btnLegality.setVisible(false); // legality check available only in free building mode
+                // Fall through to sideboarding (no break)
             case SIDEBOARDING:
                 this.btnSubmit.setVisible(true);
                 this.btnSubmitTimer.setVisible(true);
@@ -194,6 +216,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 this.btnSubmit.setVisible(false);
                 this.btnSubmitTimer.setVisible(false);
                 this.btnAddLand.setVisible(true);
+                this.btnLegality.setVisible(true);
                 this.cardSelector.setVisible(true);
                 this.cardSelector.loadCards(this.bigCard);
                 //this.cardTableSelector.loadCards(this.bigCard);
@@ -839,7 +862,6 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             cardInfoPane = new JLabel();
             cardInfoPane.setVisible(false);
         }
-        bigCard = new mage.client.cards.BigCard();
         panelDeck = new javax.swing.JPanel();
         panelDeckName = new javax.swing.JPanel();
         lblDeckName = new javax.swing.JLabel();
@@ -858,13 +880,21 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         btnSubmitTimer = new javax.swing.JButton();
         panelDeckLands = new javax.swing.JPanel();
         btnAddLand = new javax.swing.JButton();
+        btnLegality = new javax.swing.JButton();
         panelDeckExit = new javax.swing.JPanel();
         btnExit = new javax.swing.JButton();
         txtTimeRemaining = new javax.swing.JTextField();
+        scrollPaneInfo = new javax.swing.JScrollPane();
+        panelInfo = new javax.swing.JPanel();
+        deckLegalityDisplay = new mage.client.deckeditor.DeckLegalityPanel();
+        bigCard = new mage.client.cards.BigCard();
 
+        panelRight.setDividerSize(10);
         panelRight.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
         panelRight.setResizeWeight(0.5);
         panelRight.setTopComponent(cardSelector);
+
+        deckArea.setMinimumSize(new java.awt.Dimension(200, 56));
         panelRight.setBottomComponent(deckArea);
 
         panelDeck.setOpaque(false);
@@ -884,7 +914,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                                 .addContainerGap()
                                 .addComponent(lblDeckName)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtDeckName, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                                .addComponent(txtDeckName, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
                                 .addContainerGap())
         );
         panelDeckNameLayout.setVerticalGroup(
@@ -928,7 +958,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                                 .addComponent(btnNew, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnGenDeck, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(40, Short.MAX_VALUE))
+                                .addContainerGap(70, Short.MAX_VALUE))
         );
         panelDeckCreateLayout.setVerticalGroup(
                 panelDeckCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -971,7 +1001,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                                 .addComponent(btnLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnImport, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(40, Short.MAX_VALUE))
+                                .addContainerGap(70, Short.MAX_VALUE))
         );
         panelDeckLoadLayout.setVerticalGroup(
                 panelDeckLoadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1014,7 +1044,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                                 .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnExport, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(40, Short.MAX_VALUE))
+                                .addContainerGap(70, Short.MAX_VALUE))
         );
         panelDeckSaveLayout.setVerticalGroup(
                 panelDeckSaveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1059,7 +1089,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                                 .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnSubmitTimer, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(40, Short.MAX_VALUE))
+                                .addContainerGap(70, Short.MAX_VALUE))
         );
         panelDeckDraftLayout.setVerticalGroup(
                 panelDeckDraftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1087,6 +1117,15 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             }
         });
 
+        btnLegality.setText("Validate");
+        btnLegality.setIconTextGap(2);
+        btnLegality.setName("btnLegality"); // NOI18N
+        btnLegality.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLegalityActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelDeckLandsLayout = new javax.swing.GroupLayout(panelDeckLands);
         panelDeckLands.setLayout(panelDeckLandsLayout);
         panelDeckLandsLayout.setHorizontalGroup(
@@ -1094,13 +1133,17 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                         .addGroup(panelDeckLandsLayout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(btnAddLand, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(146, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnLegality, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(70, Short.MAX_VALUE))
         );
         panelDeckLandsLayout.setVerticalGroup(
                 panelDeckLandsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(panelDeckLandsLayout.createSequentialGroup()
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDeckLandsLayout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(btnAddLand, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                                .addGroup(panelDeckLandsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(btnAddLand, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnLegality, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(0, 0, 0))
         );
 
@@ -1131,7 +1174,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                                 .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtTimeRemaining, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(40, Short.MAX_VALUE))
+                                .addContainerGap(70, Short.MAX_VALUE))
         );
         panelDeckExitLayout.setVerticalGroup(
                 panelDeckExitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1144,22 +1187,56 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
         panelDeck.add(panelDeckExit);
 
+        scrollPaneInfo.setBorder(null);
+        scrollPaneInfo.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPaneInfo.setOpaque(false);
+
+        panelInfo.setOpaque(false);
+
+        deckLegalityDisplay.setMaximumSize(new java.awt.Dimension(245, 155));
+        deckLegalityDisplay.setMinimumSize(new java.awt.Dimension(85, 155));
+        deckLegalityDisplay.setOpaque(false);
+        deckLegalityDisplay.setVisible(false);
+
+        javax.swing.GroupLayout panelInfoLayout = new javax.swing.GroupLayout(panelInfo);
+        panelInfo.setLayout(panelInfoLayout);
+        panelInfoLayout.setHorizontalGroup(
+                panelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelInfoLayout.createSequentialGroup()
+                                .addGap(15, 15, 15)
+                                .addGroup(panelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(bigCard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelInfoLayout.createSequentialGroup()
+                                                .addGap(0, 0, Short.MAX_VALUE)
+                                                .addComponent(deckLegalityDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGap(15, 15, 15))
+        );
+        panelInfoLayout.setVerticalGroup(
+                panelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelInfoLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(deckLegalityDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(bigCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())
+        );
+
+        scrollPaneInfo.setViewportView(panelInfo);
+
         javax.swing.GroupLayout panelLeftLayout = new javax.swing.GroupLayout(panelLeft);
         panelLeft.setLayout(panelLeftLayout);
         panelLeftLayout.setHorizontalGroup(
                 panelLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(panelLeftLayout.createSequentialGroup()
-                                .addGap(0, 0, 0)
-                                .addGroup(panelLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(panelDeck, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(bigCard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(panelDeck, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(scrollPaneInfo)
         );
         panelLeftLayout.setVerticalGroup(
                 panelLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(panelLeftLayout.createSequentialGroup()
                                 .addComponent(panelDeck, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(bigCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(scrollPaneInfo)
                                 .addContainerGap())
         );
 
@@ -1169,13 +1246,13 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                                 .addComponent(panelLeft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(panelRight, javax.swing.GroupLayout.DEFAULT_SIZE, 890, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(panelRight, javax.swing.GroupLayout.DEFAULT_SIZE, 883, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(panelLeft, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(panelRight, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 808, Short.MAX_VALUE)
+                        .addComponent(panelRight, javax.swing.GroupLayout.Alignment.TRAILING)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -1368,6 +1445,11 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         exportChoose(evt);
     }//GEN-LAST:event_btnExportActionPerformed
 
+    private void btnLegalityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLegalityActionPerformed
+        this.deckLegalityDisplay.setVisible(true);
+        this.deckLegalityDisplay.validateDeck(deck);
+    }//GEN-LAST:event_btnLegalityActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private mage.client.cards.BigCard bigCard;
@@ -1376,6 +1458,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnExport;
     private javax.swing.JButton btnGenDeck;
     private javax.swing.JButton btnImport;
+    private javax.swing.JButton btnLegality;
     private javax.swing.JButton btnLoad;
     private javax.swing.JButton btnNew;
     private javax.swing.JButton btnSave;
@@ -1387,6 +1470,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     */
     private mage.client.deckeditor.CardSelector cardSelector;
     private mage.client.deckeditor.DeckArea deckArea;
+    private mage.client.deckeditor.DeckLegalityPanel deckLegalityDisplay;
     private javax.swing.JLabel lblDeckName;
     private javax.swing.JPanel panelDeck;
     private javax.swing.JPanel panelDeckCreate;
@@ -1396,8 +1480,10 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     private javax.swing.JPanel panelDeckLoad;
     private javax.swing.JPanel panelDeckName;
     private javax.swing.JPanel panelDeckSave;
+    private javax.swing.JPanel panelInfo;
     private javax.swing.JPanel panelLeft;
     private javax.swing.JSplitPane panelRight;
+    private javax.swing.JScrollPane scrollPaneInfo;
     private javax.swing.JTextField txtDeckName;
     private javax.swing.JTextField txtTimeRemaining;
     // End of variables declaration//GEN-END:variables
@@ -1425,6 +1511,7 @@ class ImportFilter extends FileFilter {
                     || ext.equalsIgnoreCase("dek")
                     || ext.equalsIgnoreCase("cod")
                     || ext.equalsIgnoreCase("o8d")
+                    || ext.equalsIgnoreCase("json")
                     || ext.equalsIgnoreCase("draft")
                     || ext.equalsIgnoreCase("mtga");
         }
@@ -1433,7 +1520,7 @@ class ImportFilter extends FileFilter {
 
     @Override
     public String getDescription() {
-        return "All formats (*.dec; *.mwDeck; *.txt; *.dek; *.cod; *.o8d; *.draft; *.mtga)";
+        return "All formats (*.dec; *.mwDeck; *.txt; *.dek; *.cod; *.o8d; *.json; *.draft; *.mtga;)";
     }
 }
 

@@ -32,8 +32,9 @@ public final class ScuttlingSliver extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
                 new SimpleActivatedAbility(
                         new UntapSourceEffect().setText("untap this creature"), new GenericManaCost(2)
-                ), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS
-        )));
+                ), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS)
+                .withForceQuotes()
+        ));
     }
 
     private ScuttlingSliver(final ScuttlingSliver card) {

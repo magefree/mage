@@ -3,7 +3,7 @@ package mage.cards.u;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetForSourceEffect;
 import mage.cards.CardImpl;
@@ -40,7 +40,7 @@ public final class UnderworldSentinel extends CardImpl {
         this.addAbility(ability);
 
         // When Underworld Sentinel dies, put all cards exiled with it onto the battlefield.
-        this.addAbility(new DiesTriggeredAbility(new UnderworldSentinelEffect()));
+        this.addAbility(new DiesSourceTriggeredAbility(new UnderworldSentinelEffect()));
     }
 
     private UnderworldSentinel(final UnderworldSentinel card) {

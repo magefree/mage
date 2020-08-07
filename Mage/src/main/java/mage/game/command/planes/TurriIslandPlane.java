@@ -1,8 +1,5 @@
-
 package mage.game.command.planes;
 
-import java.util.ArrayList;
-import java.util.List;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
@@ -13,30 +10,27 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.RevealLibraryPutIntoHandEffect;
 import mage.abilities.effects.common.RollPlanarDieEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
+import mage.abilities.effects.common.cost.PlanarDieRollCostIncreasingEffect;
 import mage.cards.Card;
-import mage.constants.CardType;
-import mage.constants.CostModificationType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.command.Plane;
-import mage.game.stack.Spell;
 import mage.target.Target;
 import mage.util.CardUtil;
 import mage.watchers.common.PlanarRollWatcher;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * @author spjspj
  */
 public class TurriIslandPlane extends Plane {
 
     public TurriIslandPlane() {
-        this.setName("Plane - Turri Island");
+        this.setPlaneType(Planes.PLANE_TURRI_ISLAND);
         this.setExpansionSetCodeForImage("PCA");
 
         // Creature spells cost {2} less to cast.
@@ -47,9 +41,9 @@ public class TurriIslandPlane extends Plane {
         Effect chaosEffect = new RevealLibraryPutIntoHandEffect(3, new FilterCreatureCard("creature cards"), Zone.GRAVEYARD);
         Target chaosTarget = null;
 
-        List<Effect> chaosEffects = new ArrayList<Effect>();
+        List<Effect> chaosEffects = new ArrayList<>();
         chaosEffects.add(chaosEffect);
-        List<Target> chaosTargets = new ArrayList<Target>();
+        List<Target> chaosTargets = new ArrayList<>();
         chaosTargets.add(chaosTarget);
 
         ActivateIfConditionActivatedAbility chaosAbility = new ActivateIfConditionActivatedAbility(Zone.COMMAND, new RollPlanarDieEffect(chaosEffects, chaosTargets), new GenericManaCost(0), MainPhaseStackEmptyCondition.instance);
@@ -76,11 +70,11 @@ class TurriIslandEffect extends CostModificationEffectImpl {
         this.amount = 2;
         this.staticText = rule;
     }
-    
+
     protected TurriIslandEffect(TurriIslandEffect effect) {
         super(effect);
-        this.amount = effect.amount;        
-    }    
+        this.amount = effect.amount;
+    }
 
     @Override
     public void init(Ability source, Game game) {
@@ -112,17 +106,12 @@ class TurriIslandEffect extends CostModificationEffectImpl {
             if (cPlane == null) {
                 return false;
             }
-            if (!cPlane.getName().equalsIgnoreCase("Plane - Turri Island")) {
+            if (!cPlane.getPlaneType().equals(Planes.PLANE_TURRI_ISLAND)) {
                 return false;
             }
-
-            Spell spell = (Spell) game.getStack().getStackObject(abilityToModify.getId());
-            if (spell != null) {
-                return filter.match(spell, game) && selectedByRuntimeData(spell, source, game);
-            } else {
-                // used at least for flashback ability because Flashback ability doesn't use stack
-                Card sourceCard = game.getCard(abilityToModify.getSourceId());
-                return sourceCard != null && filter.match(sourceCard, game) && selectedByRuntimeData(sourceCard, source, game);
+            Card spellCard = ((SpellAbility) abilityToModify).getCharacteristics(game);
+            if (spellCard != null) {
+                return filter.match(spellCard, game) && selectedByRuntimeData(spellCard, source, game);
             }
         }
         return false;

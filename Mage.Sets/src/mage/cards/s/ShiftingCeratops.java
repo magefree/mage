@@ -3,7 +3,7 @@ package mage.cards.s;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.common.CantBeCounteredAbility;
+import mage.abilities.common.CantBeCounteredSourceAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -40,7 +40,7 @@ public final class ShiftingCeratops extends CardImpl {
         this.toughness = new MageInt(4);
 
         // This spell can't be countered.
-        this.addAbility(new CantBeCounteredAbility());
+        this.addAbility(new CantBeCounteredSourceAbility());
 
         // Protection from blue
         this.addAbility(ProtectionAbility.from(ObjectColor.BLUE));

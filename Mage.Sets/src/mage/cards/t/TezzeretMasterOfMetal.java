@@ -1,27 +1,19 @@
-
 package mage.cards.t;
 
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.RevealCardsFromLibraryUntilEffect;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterArtifactCard;
 import mage.filter.common.FilterControlledArtifactPermanent;
@@ -31,8 +23,10 @@ import mage.game.permanent.Permanent;
 import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author Styxo
  */
 public final class TezzeretMasterOfMetal extends CardImpl {
@@ -48,8 +42,10 @@ public final class TezzeretMasterOfMetal extends CardImpl {
         this.addAbility(new LoyaltyAbility(new RevealCardsFromLibraryUntilEffect(new FilterArtifactCard(), Zone.HAND, Zone.LIBRARY), 1));
 
         // -3: Target opponent loses life equal to the number of artifacts you control.
-        Ability ability = new LoyaltyAbility(new LoseLifeTargetEffect(new PermanentsOnBattlefieldCount(new FilterControlledArtifactPermanent())), -3);
+        DynamicValue xValue = new PermanentsOnBattlefieldCount(new FilterControlledArtifactPermanent());
+        Ability ability = new LoyaltyAbility(new LoseLifeTargetEffect(xValue), -3);
         ability.addTarget(new TargetOpponent());
+        ability.addHint(new ValueHint("Artifacts you control", xValue));
         this.addAbility(ability);
 
         // -8: Gain control of all artifacts and creatures target opponent controls.
@@ -95,7 +91,7 @@ class TezzeretMasterOfMetalEffect extends OneShotEffect {
         List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(filter, targetPointer.getFirst(game, source), game);
         for (Permanent permanent : permanents) {
             ContinuousEffect effect = new TezzeretMasterOfMetalControlEffect(source.getControllerId());
-            effect.setTargetPointer(new FixedTarget(permanent.getId()));
+            effect.setTargetPointer(new FixedTarget(permanent, game));
             game.addEffect(effect, source);
         }
         return true;

@@ -1,11 +1,15 @@
 package mage.game;
 
+import java.io.Serializable;
+import java.util.*;
+import java.util.stream.Collectors;
 import mage.MageItem;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.TriggeredAbility;
+import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
 import mage.abilities.effects.PreventionEffectData;
@@ -40,10 +44,6 @@ import mage.players.PlayerList;
 import mage.players.Players;
 import mage.util.MessageToClient;
 import mage.util.functions.ApplyToPermanent;
-
-import java.io.Serializable;
-import java.util.*;
-import java.util.stream.Collectors;
 
 public interface Game extends MageItem, Serializable {
 
@@ -300,8 +300,8 @@ public interface Game extends MageItem, Serializable {
     /**
      * Creates and fires an damage prevention event
      *
-     * @param damageEvent     damage event that will be replaced (instanceof check
-     *                        will be done)
+     * @param damageEvent     damage event that will be replaced (instanceof
+     *                        check will be done)
      * @param source          ability that's the source of the prevention effect
      * @param game
      * @param amountToPrevent max preventable amount
@@ -312,9 +312,10 @@ public interface Game extends MageItem, Serializable {
     /**
      * Creates and fires an damage prevention event
      *
-     * @param event            damage event that will be replaced (instanceof check will be
-     *                         done)
-     * @param source           ability that's the source of the prevention effect
+     * @param event            damage event that will be replaced (instanceof
+     *                         check will be done)
+     * @param source           ability that's the source of the prevention
+     *                         effect
      * @param game
      * @param preventAllDamage true if there is no limit to the damage that can
      *                         be prevented
@@ -372,7 +373,16 @@ public interface Game extends MageItem, Serializable {
 
     void addCommander(Commander commander);
 
-    void addPermanent(Permanent permanent);
+    /**
+     * Adds a permanent to the battlefield
+     *
+     * @param permanent
+     * @param createOrder upcounting number from state about the create order of
+     *                    all permanents. Can equal for multiple permanents, if
+     *                    they go to battlefield at the same time. If the value
+     *                    is set to 0, a next number will be set automatically.
+     */
+    void addPermanent(Permanent permanent, int createOrder);
 
     // priority method
     void sendPlayerAction(PlayerAction playerAction, UUID playerId, Object data);
@@ -398,6 +408,8 @@ public interface Game extends MageItem, Serializable {
 
     UUID addDelayedTriggeredAbility(DelayedTriggeredAbility delayedAbility, Ability source);
 
+    UUID fireReflexiveTriggeredAbility(ReflexiveTriggeredAbility reflexiveAbility, Ability source);
+
     void applyEffects();
 
     boolean checkStateAndTriggered();
@@ -408,7 +420,7 @@ public interface Game extends MageItem, Serializable {
 
     boolean endTurn(Ability source);
 
-    int doAction(MageAction action);
+    int doAction(MageAction action, UUID sourceId);
 
     //game transaction methods
     void saveState(boolean bookmark);
@@ -485,4 +497,8 @@ public interface Game extends MageItem, Serializable {
     default Set<UUID> getCommandersIds(Player player) {
         return getCommandersIds(player, CommanderCardType.ANY);
     }
+
+    void setGameStopped(boolean gameStopped);
+
+    boolean isGameStopped();
 }

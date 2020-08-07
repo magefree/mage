@@ -1,8 +1,7 @@
 package mage.abilities.keyword;
 
-import mage.abilities.MageSingleton;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.constants.Zone;
+import mage.MageObject;
+import mage.game.Game;
 
 import java.io.ObjectStreamException;
 
@@ -12,7 +11,7 @@ import java.io.ObjectStreamException;
  *
  * @author TheElk801
  */
-public class HexproofFromMonocoloredAbility extends SimpleStaticAbility implements MageSingleton {
+public class HexproofFromMonocoloredAbility extends HexproofBaseAbility {
 
     private static final HexproofFromMonocoloredAbility instance;
 
@@ -29,7 +28,12 @@ public class HexproofFromMonocoloredAbility extends SimpleStaticAbility implemen
     }
 
     private HexproofFromMonocoloredAbility() {
-        super(Zone.BATTLEFIELD, null);
+        super();
+    }
+
+    @Override
+    public boolean checkObject(MageObject source, Game game) {
+        return !source.getColor(game).isMulticolored() && !source.getColor(game).isColorless();
     }
 
     @Override

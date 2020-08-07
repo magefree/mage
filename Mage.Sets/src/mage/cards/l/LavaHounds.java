@@ -19,7 +19,7 @@ public final class LavaHounds extends CardImpl {
 
     public LavaHounds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
-        this.subtype.add(SubType.HOUND);
+        this.subtype.add(SubType.DOG);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

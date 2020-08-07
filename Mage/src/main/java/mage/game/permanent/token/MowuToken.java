@@ -1,4 +1,3 @@
-
 package mage.game.permanent.token;
 
 import mage.MageInt;
@@ -13,11 +12,11 @@ import mage.constants.SuperType;
 public final class MowuToken extends TokenImpl {
 
     public MowuToken() {
-        super("Mowu", "legendary 3/3 green Hound creature token named Mowu");
+        super("Mowu", "legendary 3/3 green Dog creature token named Mowu");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         this.addSuperType(SuperType.LEGENDARY);
-        subtype.add(SubType.HOUND);
+        subtype.add(SubType.DOG);
         power = new MageInt(3);
         toughness = new MageInt(3);
     }

@@ -67,14 +67,13 @@ class PlaneswalkersMischiefEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player opponent = game.getPlayer(source.getFirstTarget());
-        if (opponent != null
-                && opponent.getHand().size() > 0) {
+        if (opponent != null && opponent.getHand().size() > 0) {
             Card revealedCard = opponent.getHand().getRandom(game);
             if (revealedCard == null) {
                 return false;
             }
             Cards cards = new CardsImpl(revealedCard);
-            opponent.revealCards("Planeswalker's Mischief Reveal", cards, game);
+            opponent.revealCards(source, cards, game);
             if (revealedCard.isInstant()
                     || revealedCard.isSorcery()) {
                 opponent.moveCardToExileWithInfo(revealedCard, source.getSourceId(), "Planeswalker's Mischief", source.getSourceId(), game, Zone.HAND, true);
@@ -123,8 +122,7 @@ class PlaneswalkersMischiefCastFromExileEffect extends AsThoughEffectImpl {
             Card card = game.getCard(objectId);
             if (player != null
                     && card != null) {
-                player.setCastSourceIdWithAlternateMana(objectId, null, card.getSpellAbility().getCosts());
-                return true;
+                return allowCardToPlayWithoutMana(objectId, source, affectedControllerId, game);
             }
         }
         return false;
@@ -146,7 +144,7 @@ class PlaneswalkersMischiefCondition implements Condition {
         if (!game.getExile().getExileZone(exileId).contains(cardId)) {
             return false;
         }
-        SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class, source.getSourceId());
+        SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
         if (watcher != null) {
             List<Spell> spells = watcher.getSpellsCastThisTurn(source.getControllerId());
             if (spells != null) {

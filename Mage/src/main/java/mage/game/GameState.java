@@ -1,6 +1,11 @@
 package mage.game;
 
+import java.io.Serializable;
+import java.util.*;
+import static java.util.Collections.emptyList;
+import java.util.stream.Collectors;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.*;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
@@ -10,6 +15,7 @@ import mage.cards.Card;
 import mage.cards.SplitCard;
 import mage.constants.Zone;
 import mage.designations.Designation;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.combat.Combat;
 import mage.game.combat.CombatGroup;
 import mage.game.command.Command;
@@ -34,10 +40,6 @@ import mage.util.ThreadLocalStringBuilder;
 import mage.watchers.Watcher;
 import mage.watchers.Watchers;
 
-import java.io.Serializable;
-import java.util.*;
-import java.util.stream.Collectors;
-
 /**
  * @author BetaSteward_at_googlemail.com
  * <p>
@@ -59,6 +61,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     // revealed cards <Name, <Cards>>, will be reset if all players pass priority
     private final Revealed revealed;
     private final Map<UUID, LookedAt> lookedAt = new HashMap<>();
+    private final Revealed companion;
 
     private DelayedTriggeredAbilities delayed;
     private SpecialActions specialActions;
@@ -95,6 +98,8 @@ public class GameState implements Serializable, Copyable<GameState> {
     private Map<UUID, Integer> zoneChangeCounter = new HashMap<>();
     private Map<UUID, Card> copiedCards = new HashMap<>();
     private int permanentOrderNumber;
+    private final Map<UUID, FilterCreaturePermanent> usePowerInsteadOfToughnessForDamageLethalityFilters = new HashMap<>();
+    private Set<MageObjectReference> commandersToStay = new HashSet<>(); // commanders that do not go back to command zone
 
     private int applyEffectsCounter; // Upcounting number of each applyEffects execution
 
@@ -106,6 +111,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         command = new Command();
         exile = new Exile();
         revealed = new Revealed();
+        companion = new Revealed();
         battlefield = new Battlefield();
         effects = new ContinuousEffects();
         triggers = new TriggeredAbilities();
@@ -123,6 +129,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.choosingPlayerId = state.choosingPlayerId;
         this.revealed = state.revealed.copy();
         this.lookedAt.putAll(state.lookedAt);
+        this.companion = state.companion.copy();
         this.gameOver = state.gameOver;
         this.paused = state.paused;
 
@@ -172,6 +179,9 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.copiedCards.putAll(state.copiedCards);
         this.permanentOrderNumber = state.permanentOrderNumber;
         this.applyEffectsCounter = state.applyEffectsCounter;
+        state.usePowerInsteadOfToughnessForDamageLethalityFilters.forEach((uuid, filter)
+                -> this.usePowerInsteadOfToughnessForDamageLethalityFilters.put(uuid, filter.copy()));
+        this.commandersToStay.addAll(state.commandersToStay);
     }
 
     public void restoreForRollBack(GameState state) {
@@ -217,6 +227,9 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.copiedCards = state.copiedCards;
         this.permanentOrderNumber = state.permanentOrderNumber;
         this.applyEffectsCounter = state.applyEffectsCounter;
+        state.usePowerInsteadOfToughnessForDamageLethalityFilters.forEach((uuid, filter)
+                -> this.usePowerInsteadOfToughnessForDamageLethalityFilters.put(uuid, filter.copy()));
+        this.commandersToStay = state.commandersToStay;
     }
 
     @Override
@@ -473,12 +486,20 @@ public class GameState implements Serializable, Copyable<GameState> {
         return lookedAt.get(playerId);
     }
 
+    public Revealed getCompanion() {
+        return companion;
+    }
+
     public void clearRevealed() {
         revealed.clear();
     }
 
     public void clearLookedAt() {
         lookedAt.clear();
+    }
+
+    public void clearCompanion() {
+        companion.clear();
     }
 
     public Turn getTurn() {
@@ -586,7 +607,6 @@ public class GameState implements Serializable, Copyable<GameState> {
         delayed.removeEndOfTurnAbilities(game);
         exile.cleanupEndOfTurnZones(game);
         game.applyEffects();
-        effects.incYourTurnNumPlayed(game);
     }
 
     public void addEffect(ContinuousEffect effect, Ability source) {
@@ -604,7 +624,6 @@ public class GameState implements Serializable, Copyable<GameState> {
 //    public void addMessage(String message) {
 //        this.messages.add(message);
 //    }
-
     /**
      * Returns a list of all players of the game ignoring range or if a player
      * has lost or left the game.
@@ -778,7 +797,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         for (Map.Entry<ZoneChangeData, List<GameEvent>> entry : eventsByKey.entrySet()) {
             Set<Card> movedCards = new LinkedHashSet<>();
             Set<PermanentToken> movedTokens = new LinkedHashSet<>();
-            for (Iterator<GameEvent> it = entry.getValue().iterator(); it.hasNext(); ) {
+            for (Iterator<GameEvent> it = entry.getValue().iterator(); it.hasNext();) {
                 GameEvent event = it.next();
                 ZoneChangeEvent castEvent = (ZoneChangeEvent) event;
                 UUID targetId = castEvent.getTargetId();
@@ -850,7 +869,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     /**
-     * Abilities that are applied to other objects or applie for a certain time
+     * Abilities that are applied to other objects or applied for a certain time
      * span
      *
      * @param ability
@@ -871,6 +890,7 @@ public class GameState implements Serializable, Copyable<GameState> {
             // TODO: add sources for triggers - the same way as in addEffect: sources
             this.triggers.add((TriggeredAbility) ability, sourceId, attachedTo);
         }
+
         List<Watcher> watcherList = new ArrayList<>(ability.getWatchers()); // Workaround to prevent ConcurrentModificationException, not clear to me why this is happening now
         for (Watcher watcher : watcherList) {
             // TODO: Check that watcher for commanderAbility (where attachedTo = null) also work correctly
@@ -878,6 +898,7 @@ public class GameState implements Serializable, Copyable<GameState> {
             watcher.setSourceId(attachedTo == null ? ability.getSourceId() : attachedTo.getId());
             watchers.add(watcher);
         }
+
         for (Ability sub : ability.getSubAbilities()) {
             addAbility(sub, sourceId, attachedTo);
         }
@@ -930,6 +951,13 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public void addDelayedTriggeredAbility(DelayedTriggeredAbility ability) {
         this.delayed.add(ability);
+
+        List<Watcher> watcherList = new ArrayList<>(ability.getWatchers()); // Workaround to prevent ConcurrentModificationException, not clear to me why this is happening now
+        for (Watcher watcher : watcherList) {
+            watcher.setControllerId(ability.getControllerId());
+            watcher.setSourceId(ability.getSourceId());
+            this.watchers.add(watcher);
+        }
     }
 
     public void removeDelayedTriggeredAbility(UUID abilityId) {
@@ -1067,6 +1095,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         isPlaneChase = false;
         revealed.clear();
         lookedAt.clear();
+        companion.clear();
         turnNum = 0;
         stepNum = 0;
         extraTurn = false;
@@ -1081,6 +1110,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         zones.clear();
         simultaneousEvents.clear();
         copiedCards.clear();
+        usePowerInsteadOfToughnessForDamageLethalityFilters.clear();
         permanentOrderNumber = 0;
     }
 
@@ -1197,4 +1227,23 @@ public class GameState implements Serializable, Copyable<GameState> {
         return applyEffectsCounter;
     }
 
+    public void addPowerInsteadOfToughnessForDamageLethalityFilter(UUID source, FilterCreaturePermanent filter) {
+        usePowerInsteadOfToughnessForDamageLethalityFilters.put(source, filter);
+    }
+
+    public List<FilterCreaturePermanent> getActivePowerInsteadOfToughnessForDamageLethalityFilters() {
+        return usePowerInsteadOfToughnessForDamageLethalityFilters.isEmpty() ? emptyList() : getBattlefield().getAllActivePermanents().stream()
+                .map(Card::getId)
+                .filter(usePowerInsteadOfToughnessForDamageLethalityFilters::containsKey)
+                .map(usePowerInsteadOfToughnessForDamageLethalityFilters::get)
+                .collect(Collectors.toList());
+    }
+
+    boolean checkCommanderShouldStay(Card card, Game game) {
+        return commandersToStay.stream().anyMatch(mor -> mor.refersTo(card, game));
+    }
+
+    void setCommanderShouldStay(Card card, Game game) {
+        commandersToStay.add(new MageObjectReference(card, game));
+    }
 }

@@ -6,6 +6,7 @@ import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.hint.common.ArtifactYouControlHint;
 import mage.cards.*;
 import mage.constants.*;
 import mage.counters.CounterType;
@@ -19,7 +20,6 @@ import mage.target.Target;
 import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -46,6 +46,7 @@ public final class KarnScionOfUrza extends CardImpl {
 
         // -2: Create a 0/0 colorless Construct artifact creature token with "This creature gets +1/+1 for each artifact you control."
         LoyaltyAbility ability3 = new LoyaltyAbility(new KarnConstructEffect(), -2);
+        ability3.addHint(ArtifactYouControlHint.instance);
         this.addAbility(ability3);
     }
 

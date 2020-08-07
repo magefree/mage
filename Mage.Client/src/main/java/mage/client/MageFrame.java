@@ -200,9 +200,17 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         TConfig config = TConfig.current();
         config.setArchiveDetector(new TArchiveDetector("zip"));
         config.setAccessPreference(FsAccessOption.STORE, true);
+
         try {
             UIManager.put("desktop", new Color(0, 0, 0, 0));
-            UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+
+            UIManager.put("nimbusBlueGrey", PreferencesDialog.getCurrentTheme().getNimbusBlueGrey()); // buttons, scrollbar background, disabled inputs
+            UIManager.put("control", PreferencesDialog.getCurrentTheme().getControl()); // window bg
+            UIManager.put("nimbusLightBackground", PreferencesDialog.getCurrentTheme().getNimbusLightBackground()); // inputs, table rows
+            UIManager.put("info", PreferencesDialog.getCurrentTheme().getInfo()); // tooltips
+            UIManager.put("nimbusBase", PreferencesDialog.getCurrentTheme().getNimbusBase()); // title bars, scrollbar foreground
+
             //UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             // stop JSplitPane from eating F6 and F8 or any other function keys
             {
@@ -445,16 +453,19 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         }
     }
 
+    // Sets background for login screen
     private void setBackground() {
         if (liteMode || grayMode) {
             return;
         }
-        String filename = "/background.jpg";
+
         try {
-            if (Plugins.instance.isThemePluginLoaded()) {
+            // If user has custom background, use that, otherwise, use theme background
+            if (Plugins.instance.isThemePluginLoaded() &&
+                    !PreferencesDialog.getCachedValue(PreferencesDialog.KEY_BACKGROUND_IMAGE_DEFAULT, "true").equals("true")) {
                 backgroundPane = (ImagePanel) Plugins.instance.updateTablePanel(new HashMap<>());
             } else {
-                InputStream is = this.getClass().getResourceAsStream(filename);
+                InputStream is = this.getClass().getResourceAsStream(PreferencesDialog.getCurrentTheme().getLoginBackgroundPath());
                 BufferedImage background = ImageIO.read(is);
                 backgroundPane = new ImagePanel(background, ImagePanelStyle.SCALED);
             }
@@ -870,7 +881,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         popupDebug.add(menuDebugTestCardRenderModesDialog);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(1024, 768));
+        setMinimumSize(new java.awt.Dimension(1024, 500));
 
         desktopPane.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -1019,6 +1030,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                                 .addGap(2, 2, 2)
                                 .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE))
         );
+
+        if (PreferencesDialog.getCurrentTheme().getMageToolbar() != null) {
+            mageToolbar.getParent().setBackground(PreferencesDialog.getCurrentTheme().getMageToolbar());
+        }
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -1623,6 +1638,13 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         if (whatsNewDialog != null) {
             whatsNewDialog.checkUpdatesAndShow(forceToShowPage);
         }
+    }
+
+    public boolean isGameFrameActive(UUID gameId) {
+        if (activeFrame != null && activeFrame instanceof GamePane) {
+            return ((GamePane) activeFrame).getGameId().equals(gameId);
+        }
+        return false;
     }
 }
 

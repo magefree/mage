@@ -1,5 +1,7 @@
 package mage.cards.g;
 
+import java.awt.*;
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -19,9 +21,6 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.watchers.common.CardsAmountDrawnThisTurnWatcher;
-
-import java.awt.*;
-import java.util.UUID;
 
 /**
  * @author JayDi85
@@ -94,7 +93,7 @@ class GodEternalKefnetDrawCardReplacementEffect extends ReplacementEffectImpl {
 
         // cast copy
         if (topCard.isInstantOrSorcery() && you.chooseUse(outcome, "Would you like to copy " + topCard.getName()
-                + " and cast it {2} less?", source, game)) {
+                + " and cast it for {2} less?", source, game)) {
             Card blueprint = topCard.copy();
             blueprint.addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(2)));
             Card copiedCard = game.copyCard(blueprint, source, source.getControllerId());
@@ -154,4 +153,3 @@ class GodEternalKefnetDrawCardReplacementEffect extends ReplacementEffectImpl {
     }
 
 }
-

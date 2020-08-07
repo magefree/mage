@@ -1,14 +1,14 @@
 package mage.abilities.effects.mana;
 
+import java.util.ArrayList;
+import java.util.List;
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.choices.ChoiceColor;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -16,6 +16,7 @@ import java.util.List;
 public class AddManaOfAnyColorEffect extends BasicManaEffect {
 
     protected final int amount;
+    protected final DynamicValue netAmount;
     protected final ArrayList<Mana> netMana = new ArrayList<>();
     protected final boolean setFlag;
 
@@ -28,8 +29,13 @@ public class AddManaOfAnyColorEffect extends BasicManaEffect {
     }
 
     public AddManaOfAnyColorEffect(int amount, boolean setFlag) {
+        this(amount, null, setFlag);
+    }
+
+    public AddManaOfAnyColorEffect(int amount, DynamicValue netAmount, boolean setFlag) {
         super(new Mana(0, 0, 0, 0, 0, 0, amount, 0));
         this.amount = amount;
+        this.netAmount = netAmount;
         netMana.add(Mana.AnyMana(amount));
         this.staticText = "add " + CardUtil.numberToText(amount) + " mana of any " + (amount > 1 ? "one " : "") + "color";
         this.setFlag = setFlag;
@@ -40,6 +46,12 @@ public class AddManaOfAnyColorEffect extends BasicManaEffect {
         this.amount = effect.amount;
         this.netMana.addAll(effect.netMana);
         this.setFlag = effect.setFlag;
+        if (effect.netAmount == null) {
+            this.netAmount = null;
+        } else {
+            this.netAmount = effect.netAmount.copy();
+        }
+
     }
 
     @Override
@@ -49,6 +61,16 @@ public class AddManaOfAnyColorEffect extends BasicManaEffect {
 
     @Override
     public List<Mana> getNetMana(Game game, Ability source) {
+        if (game != null && game.inCheckPlayableState()) {
+            if (netAmount != null) {
+                int count = netAmount.calculate(game, source, this);
+                Mana mana = new Mana();
+                mana.setAny(count * amount);
+                ArrayList<Mana> possibleNetMana = new ArrayList<>();
+                possibleNetMana.add(mana);
+                return possibleNetMana;
+            }
+        }
         return new ArrayList<>(this.netMana);
     }
 

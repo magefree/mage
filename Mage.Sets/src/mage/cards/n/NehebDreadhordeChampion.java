@@ -6,7 +6,9 @@ import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TrampleAbility;
-import mage.cards.*;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -18,6 +20,7 @@ import mage.target.TargetCard;
 import mage.target.common.TargetCardInHand;
 
 import java.util.UUID;
+import java.util.stream.IntStream;
 
 /**
  * @author TheElk801
@@ -80,19 +83,13 @@ class NehebDreadhordeChampionEffect extends OneShotEffect {
         if (!player.choose(outcome, target, source.getSourceId(), game)) {
             return false;
         }
-        Cards cards = new CardsImpl(target.getTargets());
-        int counter = 0;
+        int counter = player.discard(new CardsImpl(target.getTargets()), source, game).size();
         Mana mana = new Mana();
-        for (Card card : cards.getCards(game)) {
-            if (player.discard(card, source, game)) {
-                counter++;
-                mana.increaseRed();
-            }
-        }
-        if (counter == 0) {
+        if (counter < 1) {
             return true;
         }
-        player.drawCards(counter, game);
+        IntStream.range(0, counter).forEach(x -> mana.increaseRed());
+        player.drawCards(counter, source.getSourceId(), game);
         player.getManaPool().addMana(mana, game, source, true);
         return true;
     }

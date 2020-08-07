@@ -582,6 +582,7 @@ public class TablesPanel extends javax.swing.JPanel {
         Dimension newDimension = new Dimension((int) jPanelBottom.getPreferredSize().getWidth(), GUISizeHelper.menuFont.getSize() + 28);
         jPanelBottom.setMinimumSize(newDimension);
         jPanelBottom.setPreferredSize(newDimension);
+        buttonWhatsNew.setFont(GUISizeHelper.menuFont);
         buttonNextMessage.setFont(GUISizeHelper.menuFont);
         labelMessageHeader.setFont(new Font(GUISizeHelper.menuFont.getName(), Font.BOLD, GUISizeHelper.menuFont.getSize()));
         labelMessageText.setFont(GUISizeHelper.menuFont);
@@ -693,6 +694,7 @@ public class TablesPanel extends javax.swing.JPanel {
         if (SessionHandler.getSession() != null) {
             btnQuickStartDuel.setVisible(SessionHandler.isTestMode());
             btnQuickStartCommander.setVisible(SessionHandler.isTestMode());
+            btnQuickStartMCTS.setVisible(SessionHandler.isTestMode());
             gameChooser.init();
             chatRoomId = SessionHandler.getRoomChatId(roomId).orElse(null);
         }
@@ -791,7 +793,7 @@ public class TablesPanel extends javax.swing.JPanel {
             typeFilterList.add(RowFilter.regexFilter("Constructed", TablesTableModel.COLUMN_GAME_TYPE));
         }
         if (btnTypeTourneyLimited.isSelected()) {
-            typeFilterList.add(RowFilter.regexFilter("Booster|Sealed", TablesTableModel.COLUMN_GAME_TYPE));
+            typeFilterList.add(RowFilter.regexFilter("Booster|Sealed|Jumpstart", TablesTableModel.COLUMN_GAME_TYPE));
         }
 
         // format
@@ -987,6 +989,7 @@ public class TablesPanel extends javax.swing.JPanel {
         btnPassword = new javax.swing.JToggleButton();
         btnQuickStartDuel = new javax.swing.JButton();
         btnQuickStartCommander = new javax.swing.JButton();
+        btnQuickStartMCTS = new javax.swing.JButton();
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanelTables = new javax.swing.JPanel();
         jSplitPaneTables = new javax.swing.JSplitPane();
@@ -1456,44 +1459,58 @@ public class TablesPanel extends javax.swing.JPanel {
             }
         });
 
+        btnQuickStartMCTS.setText("Quick start MCTS");
+        btnQuickStartMCTS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuickStartMCTSActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelTopLayout = new javax.swing.GroupLayout(jPanelTop);
         jPanelTop.setLayout(jPanelTopLayout);
         jPanelTopLayout.setHorizontalGroup(
-                jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanelTopLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(btnNewTable)
-                                .addGap(6, 6, 6)
-                                .addComponent(btnNewTournament)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(filterBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(filterBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(btnQuickStartDuel)
-                                        .addComponent(btnQuickStartCommander))
-                                .addContainerGap(667, Short.MAX_VALUE))
+            jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelTopLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnNewTable)
+                .addGap(6, 6, 6)
+                .addComponent(btnNewTournament)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(filterBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(filterBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelTopLayout.createSequentialGroup()
+                        .addComponent(btnQuickStartDuel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnQuickStartMCTS))
+                    .addComponent(btnQuickStartCommander))
+                .addContainerGap(540, Short.MAX_VALUE))
         );
         jPanelTopLayout.setVerticalGroup(
-                jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanelTopLayout.createSequentialGroup()
-                                .addContainerGap()
+            jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelTopLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnNewTable)
+                        .addComponent(btnNewTournament))
+                    .addGroup(jPanelTopLayout.createSequentialGroup()
+                        .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(filterBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanelTopLayout.createSequentialGroup()
                                 .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                .addComponent(btnNewTable)
-                                                .addComponent(btnNewTournament))
-                                        .addGroup(jPanelTopLayout.createSequentialGroup()
-                                                .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(filterBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(btnQuickStartDuel))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(filterBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addGroup(jPanelTopLayout.createSequentialGroup()
-                                                                .addComponent(btnQuickStartCommander)
-                                                                .addGap(0, 0, Short.MAX_VALUE)))))
-                                .addContainerGap())
+                                    .addComponent(btnQuickStartDuel)
+                                    .addComponent(btnQuickStartMCTS))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(filterBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanelTopLayout.createSequentialGroup()
+                                .addComponent(btnQuickStartCommander)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addContainerGap())
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1530,12 +1547,12 @@ public class TablesPanel extends javax.swing.JPanel {
         javax.swing.GroupLayout jPanelTablesLayout = new javax.swing.GroupLayout(jPanelTables);
         jPanelTables.setLayout(jPanelTablesLayout);
         jPanelTablesLayout.setHorizontalGroup(
-                jPanelTablesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jSplitPaneTables, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+            jPanelTablesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSplitPaneTables, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
         );
         jPanelTablesLayout.setVerticalGroup(
-                jPanelTablesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jSplitPaneTables, javax.swing.GroupLayout.DEFAULT_SIZE, 672, Short.MAX_VALUE)
+            jPanelTablesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSplitPaneTables, javax.swing.GroupLayout.DEFAULT_SIZE, 672, Short.MAX_VALUE)
         );
 
         jSplitPane1.setLeftComponent(jPanelTables);
@@ -1553,7 +1570,7 @@ public class TablesPanel extends javax.swing.JPanel {
         jPanelBottom.setPreferredSize(new java.awt.Dimension(516, 37));
         jPanelBottom.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        buttonWhatsNew.setText("Show that's new");
+        buttonWhatsNew.setText("Show what's new");
         buttonWhatsNew.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         buttonWhatsNew.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttonWhatsNew.setOpaque(false);
@@ -1596,7 +1613,7 @@ public class TablesPanel extends javax.swing.JPanel {
         newTournamentDialog.showDialog(roomId);
     }//GEN-LAST:event_btnNewTournamentActionPerformed
 
-    private void createTestGame(String gameName, String gameType) {
+    private void createTestGame(String gameName, String gameType, boolean useMonteCarloAI) {
         TableView table;
         try {
             String testDeckFile = "test.dck";
@@ -1612,9 +1629,10 @@ public class TablesPanel extends javax.swing.JPanel {
             }
             DeckCardLists testDeck = DeckImporter.importDeckFromFile(testDeckFile);
 
+            PlayerType aiType = useMonteCarloAI ? PlayerType.COMPUTER_MONTE_CARLO : PlayerType.COMPUTER_MAD;
             MatchOptions options = new MatchOptions(gameName, gameType, false, 2);
             options.getPlayerTypes().add(PlayerType.HUMAN);
-            options.getPlayerTypes().add(PlayerType.COMPUTER_MAD);
+            options.getPlayerTypes().add(aiType);
             options.setDeckType("Limited");
             options.setAttackOption(MultiplayerAttackOption.LEFT);
             options.setRange(RangeOfInfluence.ALL);
@@ -1630,7 +1648,7 @@ public class TablesPanel extends javax.swing.JPanel {
             table = SessionHandler.createTable(roomId, options);
 
             SessionHandler.joinTable(roomId, table.getTableId(), "Human", PlayerType.HUMAN, 1, testDeck, "");
-            SessionHandler.joinTable(roomId, table.getTableId(), "Computer", PlayerType.COMPUTER_MAD, 5, testDeck, "");
+            SessionHandler.joinTable(roomId, table.getTableId(), "Computer", aiType, 5, testDeck, "");
             SessionHandler.startMatch(roomId, table.getTableId());
         } catch (HeadlessException ex) {
             handleError(ex);
@@ -1638,7 +1656,7 @@ public class TablesPanel extends javax.swing.JPanel {
     }
 
     private void btnQuickStartDuelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuickStartDuelActionPerformed
-        createTestGame("Test duel", "Two Player Duel");
+        createTestGame("Test duel", "Two Player Duel", false);
     }//GEN-LAST:event_btnQuickStartDuelActionPerformed
 
     private void btnNewTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewTableActionPerformed
@@ -1677,8 +1695,12 @@ public class TablesPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_buttonWhatsNewActionPerformed
 
     private void btnQuickStartCommanderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuickStartCommanderActionPerformed
-        createTestGame("Test commander", "Commander Two Player Duel");
+        createTestGame("Test commander", "Commander Two Player Duel", false);
     }//GEN-LAST:event_btnQuickStartCommanderActionPerformed
+
+    private void btnQuickStartMCTSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuickStartMCTSActionPerformed
+        createTestGame("Test Monte Carlo AI", "Two Player Duel", true);
+    }//GEN-LAST:event_btnQuickStartMCTSActionPerformed
 
     private void handleError(Exception ex) {
         LOGGER.fatal("Error loading deck: ", ex);
@@ -1691,9 +1713,9 @@ public class TablesPanel extends javax.swing.JPanel {
     private javax.swing.JToggleButton btnFormatLegacy;
     private javax.swing.JToggleButton btnFormatLimited;
     private javax.swing.JToggleButton btnFormatModern;
-    private javax.swing.JToggleButton btnFormatPioneer;
     private javax.swing.JToggleButton btnFormatOathbreaker;
     private javax.swing.JToggleButton btnFormatOther;
+    private javax.swing.JToggleButton btnFormatPioneer;
     private javax.swing.JToggleButton btnFormatPremodern;
     private javax.swing.JToggleButton btnFormatStandard;
     private javax.swing.JToggleButton btnFormatTinyLeader;
@@ -1704,6 +1726,7 @@ public class TablesPanel extends javax.swing.JPanel {
     private javax.swing.JToggleButton btnPassword;
     private javax.swing.JButton btnQuickStartCommander;
     private javax.swing.JButton btnQuickStartDuel;
+    private javax.swing.JButton btnQuickStartMCTS;
     private javax.swing.JToggleButton btnRated;
     private javax.swing.JToggleButton btnSkillBeginner;
     private javax.swing.JToggleButton btnSkillCasual;

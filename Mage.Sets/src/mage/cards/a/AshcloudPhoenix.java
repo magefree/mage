@@ -4,7 +4,7 @@ package mage.cards.a;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
@@ -36,7 +36,7 @@ public final class AshcloudPhoenix extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Ashcloud Phoenix dies, return it to the battlefield face down under your control.
-        this.addAbility(new DiesTriggeredAbility(new AshcloudPhoenixEffect()));
+        this.addAbility(new DiesSourceTriggeredAbility(new AshcloudPhoenixEffect()));
 
         // Morph {4}{R}{R}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{4}{R}{R}")));

@@ -4,7 +4,7 @@ package mage.cards.m;
 import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.common.CantBeCounteredAbility;
+import mage.abilities.common.CantBeCounteredSourceAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.abilities.keyword.HasteAbility;
@@ -29,7 +29,7 @@ public final class MistcutterHydra extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Mistcutter Hydra can't be countered.
-        this.addAbility(new CantBeCounteredAbility());
+        this.addAbility(new CantBeCounteredSourceAbility());
         // Haste
         this.addAbility(HasteAbility.getInstance());
         // protection from blue

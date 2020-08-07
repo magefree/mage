@@ -1,4 +1,3 @@
-
 package mage.cards.h;
 
 import java.util.UUID;
@@ -10,8 +9,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -27,7 +26,7 @@ import mage.target.targetpointer.FixedTarget;
 public final class HamletbackGoliath extends CardImpl {
 
     public HamletbackGoliath(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{R}");
         this.subtype.add(SubType.GIANT);
         this.subtype.add(SubType.WARRIOR);
 
@@ -72,10 +71,10 @@ class HamletbackGoliathTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         UUID targetId = event.getTargetId();
         Permanent permanent = game.getPermanent(targetId);
-        if (permanent.isCreature()
+        if (permanent != null && permanent.isCreature()
                 && !(targetId.equals(this.getSourceId()))) {
             for (Effect effect : this.getEffects()) {
-                effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                effect.setTargetPointer(new FixedTarget(permanent, game));
             }
             return true;
         }
@@ -100,11 +99,8 @@ class HamletbackGoliathEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent creature = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent creature = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         Permanent sourceObject = game.getPermanent(source.getSourceId());
-        if (creature == null) {
-            creature = (Permanent) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.BATTLEFIELD);
-        }
         if (creature != null && sourceObject != null) {
             sourceObject.addCounters(CounterType.P1P1.createInstance(creature.getPower().getValue()), source, game);
         }

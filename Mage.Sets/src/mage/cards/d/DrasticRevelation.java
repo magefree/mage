@@ -2,10 +2,8 @@ package mage.cards.d;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
@@ -25,7 +23,7 @@ public final class DrasticRevelation extends CardImpl {
         this.getSpellAbility().addEffect(new DrasticRevelationEffect());
     }
 
-    public DrasticRevelation(final DrasticRevelation card) {
+    private DrasticRevelation(final DrasticRevelation card) {
         super(card);
     }
 
@@ -42,24 +40,19 @@ class DrasticRevelationEffect extends OneShotEffect {
         staticText = "Discard your hand. Draw seven cards, then discard three cards at random";
     }
 
-    DrasticRevelationEffect(final DrasticRevelationEffect effect) {
+    private DrasticRevelationEffect(final DrasticRevelationEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player you = game.getPlayer(source.getControllerId());
-        if (you != null) {
-            you.discard(you.getHand().size(), false, source, game);
-            you.drawCards(7, game);
-            Cards hand = you.getHand();
-            for (int i = 0; i < 3; i++) {
-                Card card = hand.getRandom(game);
-                if (card != null) {
-                    you.discard(card, source, game);
-                }
-            }
+        if (you == null) {
+            return false;
         }
+        you.discard(you.getHand(), source, game);
+        you.drawCards(7, source.getSourceId(), game);
+        you.discard(3, true, source, game);
         return false;
     }
 

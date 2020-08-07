@@ -1,5 +1,3 @@
-
-
 package mage.abilities.abilityword;
 
 import mage.abilities.Ability;
@@ -16,14 +14,13 @@ import mage.target.Target;
 import mage.util.ManaUtil;
 
 /**
- *
  * @author LevelX2
  */
 
 public class StriveAbility extends SimpleStaticAbility {
 
     private final String striveCost;
-            
+
     public StriveAbility(String manaString) {
         super(Zone.STACK, new StriveCostIncreasingEffect(new ManaCostsImpl(manaString)));
         setRuleAtTheTop(true);
@@ -63,7 +60,7 @@ class StriveCostIncreasingEffect extends CostModificationEffectImpl {
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         for (Target target : abilityToModify.getTargets()) {
-            if (target.getMaxNumberOfTargets() == Integer.MAX_VALUE) {
+            if (target.getMaxNumberOfTargets() == Integer.MAX_VALUE) { // strive works with "any number of target" only
                 int additionalTargets = target.getTargets().size() - 1;
                 StringBuilder sb = new StringBuilder();
                 for (int i = 0; i < additionalTargets; i++) {

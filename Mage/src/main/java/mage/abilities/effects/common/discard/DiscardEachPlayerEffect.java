@@ -5,12 +5,11 @@ import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
-import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
@@ -62,54 +61,49 @@ public class DiscardEachPlayerEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         // Store for each player the cards to discard, that's important because all discard shall happen at the same time
         Map<UUID, Cards> cardsToDiscard = new HashMap<>();
-        if (controller != null) {
-            // choose cards to discard
-            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                Player player = game.getPlayer(playerId);
-                if (player != null) {
-                    switch (targetController) {
-                        case NOT_YOU:
-                            if (playerId.equals(source.getControllerId())) {
-                                continue;
-                            }
-                            break;
-                        case OPPONENT:
-                            if (!game.getOpponents(source.getControllerId()).contains(playerId)) {
-                                continue;
-                            }
-                            break;
-                    }
-                    int numberOfCardsToDiscard = Math.min(amount.calculate(game, source, this), player.getHand().size());
-                    Cards cards = new CardsImpl();
-                    if (randomDiscard) {
-                        while (player.isInGame() && cards.size() < numberOfCardsToDiscard) {
-                            Card card = player.getHand().getRandom(game);
-                            if (!cards.contains(card.getId())) {
-                                cards.add(card);
-                            }
-                        }
-                    } else {
-                        Target target = new TargetDiscard(numberOfCardsToDiscard, numberOfCardsToDiscard, new FilterCard(), playerId);
-                        player.chooseTarget(outcome, target, source, game);
-                        cards.addAll(target.getTargets());
-                    }
-                    cardsToDiscard.put(playerId, cards);
-                }
+        if (controller == null) {
+            return true;
+        }
+        int toDiscard = amount.calculate(game, source, this);
+        // choose cards to discard
+        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+            Player player = game.getPlayer(playerId);
+            if (player == null) {
+                continue;
             }
-            // discard all choosen cards
-            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                Player player = game.getPlayer(playerId);
-                if (player != null) {
-                    Cards cardsPlayer = cardsToDiscard.get(playerId);
-                    if (cardsPlayer != null) {
-                        for (UUID cardId : cardsPlayer) {
-                            Card card = game.getCard(cardId);
-                            player.discard(card, source, game);
-
-                        }
+            switch (targetController) {
+                case NOT_YOU:
+                    if (playerId.equals(source.getControllerId())) {
+                        continue;
                     }
-                }
+                    break;
+                case OPPONENT:
+                    if (!game.getOpponents(source.getControllerId()).contains(playerId)) {
+                        continue;
+                    }
+                    break;
             }
+            if (randomDiscard) {
+                player.discard(toDiscard, true, source, game);
+                continue;
+            }
+            int numberOfCardsToDiscard = Math.min(toDiscard, player.getHand().size());
+            Cards cards = new CardsImpl();
+            Target target = new TargetDiscard(numberOfCardsToDiscard, numberOfCardsToDiscard, StaticFilters.FILTER_CARD, playerId);
+            player.chooseTarget(outcome, target, source, game);
+            cards.addAll(target.getTargets());
+            cardsToDiscard.put(playerId, cards);
+        }
+        if (randomDiscard) {
+            return true;
+        }
+        // discard all choosen cards
+        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+            Player player = game.getPlayer(playerId);
+            if (player == null) {
+                continue;
+            }
+            player.discard(cardsToDiscard.get(playerId), source, game);
         }
         return true;
     }

@@ -8,7 +8,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -30,7 +29,7 @@ public final class Predict extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public Predict(final Predict card) {
+    private Predict(final Predict card) {
         super(card);
     }
 
@@ -42,13 +41,13 @@ public final class Predict extends CardImpl {
 
 class PredictEffect extends OneShotEffect {
 
-    public PredictEffect() {
+    PredictEffect() {
         super(Outcome.DrawCard);
-        this.staticText = ", then target player puts the top card of their library into their graveyard. "
-                + "If that card has the chosen name, you draw two cards. Otherwise, you draw a card.";
+        this.staticText = ", then target player mills a card. If a card with the chosen name was milled this way, " +
+                "you draw two cards. Otherwise, you draw a card.";
     }
 
-    public PredictEffect(final PredictEffect effect) {
+    private PredictEffect(final PredictEffect effect) {
         super(effect);
     }
 
@@ -62,19 +61,17 @@ class PredictEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
         String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
-        if (controller != null && targetPlayer != null && cardName != null && !cardName.isEmpty()) {
-            int amount = 1;
-            Card card = targetPlayer.getLibrary().getFromTop(game);
-            if (card != null) {
-                controller.moveCards(card, Zone.GRAVEYARD, source, game);
-                if (CardUtil.haveSameNames(card.getName(), cardName)) {
-                    amount = 2;
-                }
-            }
-            controller.drawCards(amount, game);
-            return true;
+        if (controller == null || targetPlayer == null || cardName == null || cardName.isEmpty()) {
+            return false;
         }
-        return false;
+        int toDraw = 1;
+        for (Card card : targetPlayer.millCards(1, source, game).getCards(game)) {
+            if (CardUtil.haveSameNames(card, cardName, game)) {
+                toDraw = 2;
+                break;
+            }
+        }
+        controller.drawCards(toDraw, source.getSourceId(), game);
+        return true;
     }
-
 }

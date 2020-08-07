@@ -67,7 +67,7 @@ class CamaraderieEffect extends OneShotEffect {
                 source.getSourceId(), source.getControllerId(), game
         );
         player.gainLife(xValue, game, source);
-        player.drawCards(xValue, game);
+        player.drawCards(xValue, source.getSourceId(), game);
         game.addEffect(new BoostControlledEffect(1, 1, Duration.EndOfTurn), source);
         return true;
     }

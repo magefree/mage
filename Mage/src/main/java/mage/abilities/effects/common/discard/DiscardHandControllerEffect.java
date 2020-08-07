@@ -18,7 +18,7 @@ public class DiscardHandControllerEffect extends OneShotEffect {
 
     public DiscardHandControllerEffect() {
         super(Outcome.Discard);
-        this.staticText = "Discard your hand";
+        this.staticText = "discard your hand";
     }
 
     public DiscardHandControllerEffect(final DiscardHandControllerEffect effect) {
@@ -33,12 +33,10 @@ public class DiscardHandControllerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            for (Card card : player.getHand().getCards(game)) {
-                player.discard(card, source, game);
-            }
-            return true;
+        if (player == null) {
+            return false;
         }
-        return false;
+        player.discard(player.getHand().size(),false,source,game);
+        return true;
     }
 }

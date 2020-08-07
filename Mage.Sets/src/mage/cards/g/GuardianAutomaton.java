@@ -3,7 +3,7 @@ package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -24,7 +24,7 @@ public final class GuardianAutomaton extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Guardian Automaton dies, you gain 3 life.
-        this.addAbility(new DiesTriggeredAbility(new GainLifeEffect(3)));
+        this.addAbility(new DiesSourceTriggeredAbility(new GainLifeEffect(3)));
     }
 
     public GuardianAutomaton(final GuardianAutomaton card) {

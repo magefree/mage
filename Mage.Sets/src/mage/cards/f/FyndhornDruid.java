@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -31,7 +31,7 @@ public final class FyndhornDruid extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Fyndhorn Druid dies, if it was blocked this turn, you gain 4 life.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new DiesTriggeredAbility(new GainLifeEffect(4)), new SourceWasBlockedThisTurnCondition(),
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new DiesSourceTriggeredAbility(new GainLifeEffect(4)), new SourceWasBlockedThisTurnCondition(),
                 "When {this} dies, if it was blocked this turn, you gain 4 life."), new WasBlockedThisTurnWatcher());
     }
 

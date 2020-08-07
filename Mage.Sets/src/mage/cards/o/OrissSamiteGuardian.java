@@ -39,13 +39,13 @@ public final class OrissSamiteGuardian extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
-        // {tap}: Prevent all damage that would be dealt to target creature this turn.
+        // {T}: Prevent all damage that would be dealt to target creature this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, Integer.MAX_VALUE), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
         // Grandeur - Discard another card named Oriss, Samite Guardian: Target player can't cast spells this turn, and creatures that player controls can't attack this turn.
-        ability = new GrandeurAbility(new OrissSamiteGuardianCantCastEffect(), "Oriss, Samite Guardian");
+        ability = new GrandeurAbility(new OrissSamiteGuardianEffect(), "Oriss, Samite Guardian");
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

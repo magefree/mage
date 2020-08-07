@@ -62,14 +62,14 @@ class InfernalJudgmentEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+        Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         Player player = game.getPlayer(source.getControllerId());
         if (permanent == null || player == null) {
             return false;
         }
         int creaturePower = permanent.getPower().getValue();
         permanent.moveToExile(null, null, source.getSourceId(), game);
-        game.applyEffects();
+        game.getState().processAction(game);
         player.gainLife(creaturePower, game, source);
         return true;
     }

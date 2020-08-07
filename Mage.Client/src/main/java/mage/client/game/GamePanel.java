@@ -40,6 +40,7 @@ import javax.swing.plaf.basic.BasicSplitPaneDivider;
 import javax.swing.plaf.basic.BasicSplitPaneUI;
 import java.awt.*;
 import java.awt.event.*;
+import java.beans.PropertyVetoException;
 import java.io.Serializable;
 import java.util.List;
 import java.util.*;
@@ -74,6 +75,7 @@ public final class GamePanel extends javax.swing.JPanel {
     private final Map<String, CardInfoWindowDialog> revealed = new HashMap<>();
     private final Map<String, CardInfoWindowDialog> lookedAt = new HashMap<>();
     private final Map<String, CardInfoWindowDialog> graveyardWindows = new HashMap<>();
+    private final Map<String, CardInfoWindowDialog> companion = new HashMap<>();
     private final Map<String, CardsView> graveyards = new HashMap<>();
 
     private final ArrayList<ShowCardsDialog> pickTarget = new ArrayList<>();
@@ -241,6 +243,10 @@ public final class GamePanel extends javax.swing.JPanel {
             lookedAtDialog.cleanUp();
             lookedAtDialog.removeDialog();
         }
+        for (CardInfoWindowDialog companionDialog : companion.values()) {
+            companionDialog.cleanUp();
+            companionDialog.removeDialog();
+        }
         for (ShowCardsDialog pickTargetDialog : pickTarget) {
             pickTargetDialog.cleanUp();
             pickTargetDialog.removeDialog();
@@ -273,6 +279,9 @@ public final class GamePanel extends javax.swing.JPanel {
             cardInfoWindowDialog.changeGUISize();
         }
         for (CardInfoWindowDialog cardInfoWindowDialog : lookedAt.values()) {
+            cardInfoWindowDialog.changeGUISize();
+        }
+        for (CardInfoWindowDialog cardInfoWindowDialog : companion.values()) {
             cardInfoWindowDialog.changeGUISize();
         }
         for (CardInfoWindowDialog cardInfoWindowDialog : graveyardWindows.values()) {
@@ -602,6 +611,21 @@ public final class GamePanel extends javax.swing.JPanel {
         this.pnlBattlefield.add(topPanel, panelC);
         panelC.gridy = 1;
         this.pnlBattlefield.add(bottomPanel, panelC);
+
+        // TODO: combat arrows aren't visible on re-connect, must click on avatar to update correctrly
+        //  reason: panels aren't visible/located here, so battlefieldpanel see wrong sizes
+        // recalc all component sizes and update permanents/arrows positions
+        // if you don't do it here then will catch wrong arrows drawing on re-connect (no sortLayout calls)
+        /*
+        this.validate();
+        for (Map.Entry<UUID, PlayAreaPanel> p : players.entrySet()) {
+            PlayerView playerView = game.getPlayers().stream().filter(view -> view.getPlayerId().equals(p.getKey())).findFirst().orElse(null);
+            if (playerView != null) {
+                p.getValue().getBattlefieldPanel().updateSize();
+                p.getValue().update(null, playerView, null);
+            }
+        }
+         */
     }
 
     public synchronized void updateGame(GameView game) {
@@ -781,6 +805,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
         showRevealed(game);
         showLookedAt(game);
+        showCompanion(game);
         if (!game.getCombat().isEmpty()) {
             CombatManager.instance.showCombat(game.getCombat(), gameId);
         } else {
@@ -1085,6 +1110,9 @@ public final class GamePanel extends javax.swing.JPanel {
         for (CardInfoWindowDialog lookedAtDialog : lookedAt.values()) {
             lookedAtDialog.hideDialog();
         }
+        for (CardInfoWindowDialog companionDialog : companion.values()) {
+            companionDialog.hideDialog();
+        }
     }
 
     // Called if the game frame comes to front again
@@ -1101,6 +1129,9 @@ public final class GamePanel extends javax.swing.JPanel {
         }
         for (CardInfoWindowDialog lookedAtDialog : lookedAt.values()) {
             lookedAtDialog.show();
+        }
+        for (CardInfoWindowDialog companionDialog : companion.values()) {
+            companionDialog.show();
         }
     }
 
@@ -1146,6 +1177,23 @@ public final class GamePanel extends javax.swing.JPanel {
         removeClosedCardInfoWindows(lookedAt);
     }
 
+    private void showCompanion(GameView game) {
+        for (RevealedView revealView : game.getCompanion()) {
+            handleGameInfoWindow(companion, ShowType.COMPANION, revealView.getName(), revealView.getCards());
+        }
+        // Close the companion view if not in the game view
+        companion.forEach((name, companionDialog) -> {
+            if (game.getCompanion().stream().noneMatch(revealedView -> revealedView.getName().equals(name))) {
+                try {
+                    companionDialog.setClosed(true);
+                } catch (PropertyVetoException e) {
+                    logger.error("Couldn't close companion dialog", e);
+                }
+            }
+        });
+        removeClosedCardInfoWindows(companion);
+    }
+
     private void handleGameInfoWindow(Map<String, CardInfoWindowDialog> windowMap, ShowType showType, String name, LinkedHashMap cardsView) {
         CardInfoWindowDialog cardInfoWindowDialog;
         if (!windowMap.containsKey(name)) {
@@ -1160,6 +1208,7 @@ public final class GamePanel extends javax.swing.JPanel {
             switch (showType) {
                 case REVEAL:
                 case REVEAL_TOP_LIBRARY:
+                case COMPANION:
                     cardInfoWindowDialog.loadCards((CardsView) cardsView, bigCard, gameId);
                     break;
                 case LOOKED_AT:
@@ -1318,6 +1367,22 @@ public final class GamePanel extends javax.swing.JPanel {
 
         // revealed
         for (RevealedView rev : gameView.getRevealed()) {
+            for (Map.Entry<UUID, CardView> card : rev.getCards().entrySet()) {
+                if (needSelectable.contains(card.getKey())) {
+                    card.getValue().setChoosable(true);
+                }
+                if (needChoosen.contains(card.getKey())) {
+                    card.getValue().setSelected(true);
+                }
+                if (needPlayable.containsKey(card.getKey())) {
+                    card.getValue().setPlayable(true);
+                    card.getValue().setPlayableAmount(needPlayable.get(card.getKey()));
+                }
+            }
+        }
+
+        // companion
+        for (RevealedView rev : gameView.getCompanion()) {
             for (Map.Entry<UUID, CardView> card : rev.getCards().entrySet()) {
                 if (needSelectable.contains(card.getKey())) {
                     card.getValue().setChoosable(true);
@@ -1525,7 +1590,6 @@ public final class GamePanel extends javax.swing.JPanel {
 
     @SuppressWarnings("unchecked")
     private void initComponents() {
-
         abilityPicker = new mage.client.components.ability.AbilityPicker();
         jSplitPane1 = new javax.swing.JSplitPane();
         jSplitPane0 = new javax.swing.JSplitPane();
@@ -1560,14 +1624,16 @@ public final class GamePanel extends javax.swing.JPanel {
         txtHoldPriority.setToolTipText("Holding priority after the next spell cast or ability activation");
         txtHoldPriority.setVisible(false);
 
-        btnToggleMacro = new KeyboundButton(KEY_CONTROL_TOGGLE_MACRO);
-        btnCancelSkip = new KeyboundButton(KEY_CONTROL_CANCEL_SKIP); // F3
-        btnSkipToNextTurn = new KeyboundButton(KEY_CONTROL_NEXT_TURN); // F4
-        btnSkipToEndTurn = new KeyboundButton(KEY_CONTROL_END_STEP); // F5
-        btnSkipToNextMain = new KeyboundButton(KEY_CONTROL_MAIN_STEP); // F7
-        btnSkipStack = new KeyboundButton(KEY_CONTROL_SKIP_STACK); // F10
-        btnSkipToYourTurn = new KeyboundButton(KEY_CONTROL_YOUR_TURN); // F9
-        btnSkipToEndStepBeforeYourTurn = new KeyboundButton(KEY_CONTROL_PRIOR_END); // F11
+        boolean displayButtonText = PreferencesDialog.getCurrentTheme().isShortcutsVisibleForSkipButtons();
+
+        btnToggleMacro = new KeyboundButton(KEY_CONTROL_TOGGLE_MACRO, displayButtonText);
+        btnCancelSkip = new KeyboundButton(KEY_CONTROL_CANCEL_SKIP, displayButtonText); // F3
+        btnSkipToNextTurn = new KeyboundButton(KEY_CONTROL_NEXT_TURN, displayButtonText); // F4
+        btnSkipToEndTurn = new KeyboundButton(KEY_CONTROL_END_STEP, displayButtonText); // F5
+        btnSkipToNextMain = new KeyboundButton(KEY_CONTROL_MAIN_STEP, displayButtonText); // F7
+        btnSkipStack = new KeyboundButton(KEY_CONTROL_SKIP_STACK, displayButtonText); // F10
+        btnSkipToYourTurn = new KeyboundButton(KEY_CONTROL_YOUR_TURN, displayButtonText); // F9
+        btnSkipToEndStepBeforeYourTurn = new KeyboundButton(KEY_CONTROL_PRIOR_END, displayButtonText); // F11
 
         btnConcede = new javax.swing.JButton();
         btnSwitchHands = new javax.swing.JButton();

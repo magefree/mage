@@ -91,7 +91,7 @@ class StensiaMasqueradeTriggeredAbility extends TriggeredAbilityImpl {
                 && permanent.hasSubtype(SubType.VAMPIRE, game) && permanent.isControlledBy(controllerId)) {
             this.getEffects().clear();
             AddCountersTargetEffect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
-            effect.setTargetPointer(new FixedTarget(permanent.getId()));
+            effect.setTargetPointer(new FixedTarget(permanent, game));
             this.addEffect(effect);
             return true;
         }

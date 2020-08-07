@@ -125,8 +125,8 @@ class FinaleOfPromiseEffect extends OneShotEffect {
                     .filter(Objects::nonNull)
                     .map(Card::getName)
                     .collect(Collectors.joining(" -> "));
-            if (!controller.chooseUse(Outcome.Detriment, "Cast cards by choose order: " 
-                    + cardsOrder + "?", "Finale of Promise",
+            if (!controller.chooseUse(Outcome.Detriment, "Cast cards by choose order: "
+                            + cardsOrder + "?", "Finale of Promise",
                     "Use that order", "Reverse", source, game)) {
                 Collections.reverse(cardsToCast);
             }
@@ -154,8 +154,7 @@ class FinaleOfPromiseEffect extends OneShotEffect {
                 if (card != null) {
                     Spell spell = game.getStack().getSpell(card.getId());
                     if (spell != null) {
-                        spell.createCopyOnStack(game, source, controller.getId(), true);
-                        spell.createCopyOnStack(game, source, controller.getId(), true);
+                        spell.createCopyOnStack(game, source, controller.getId(), true, 2);
                         game.informPlayers(controller.getLogName() + " copies " + spell.getName() + " twice.");
                     }
                 }

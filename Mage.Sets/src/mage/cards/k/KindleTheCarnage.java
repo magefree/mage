@@ -1,7 +1,5 @@
-
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageAllEffect;
@@ -15,8 +13,9 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class KindleTheCarnage extends CardImpl {
@@ -62,7 +61,6 @@ class KindleTheCarnageEffect extends OneShotEffect {
             Cards hand = controller.getHand();
             while (hand != null
                     && hand.size() > 0
-                    && controller.isInGame()
                     && controller.chooseUse(Outcome.AIDontUseIt, "Discard a card randomly from your hand?", source, game)) {
                 Card discardedCard = controller.discardOne(true, source, game);
                 if (discardedCard != null) {

@@ -1,29 +1,29 @@
-
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.cost.CostModificationEffectImpl;
-import mage.cards.Card;
+import mage.abilities.effects.common.cost.SpellsCostIncreasingAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.CostModificationType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.game.Game;
+import mage.filter.FilterCard;
+import mage.filter.predicate.Predicates;
+
+import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
  */
 public final class LodestoneGolem extends CardImpl {
+
+    private static final FilterCard filter = new FilterCard("Nonartifact spells");
+
+    static {
+        filter.add(Predicates.not(CardType.ARTIFACT.getPredicate()));
+    }
 
     public LodestoneGolem(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
@@ -33,7 +33,7 @@ public final class LodestoneGolem extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Nonartifact spells cost {1} more to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LodestoneGolemCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostIncreasingAllEffect(1, filter, TargetController.ANY)));
     }
 
     public LodestoneGolem(final LodestoneGolem card) {
@@ -44,40 +44,4 @@ public final class LodestoneGolem extends CardImpl {
     public LodestoneGolem copy() {
         return new LodestoneGolem(this);
     }
-}
-
-class LodestoneGolemCostReductionEffect extends CostModificationEffectImpl {
-
-    LodestoneGolemCostReductionEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);
-        staticText = "Nonartifact spells cost {1} more to cast";
-    }
-
-    LodestoneGolemCostReductionEffect(LodestoneGolemCostReductionEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        SpellAbility spellAbility = (SpellAbility) abilityToModify;
-        spellAbility.getManaCostsToPay().add(new GenericManaCost(1));
-        return true;
-    }
-
-    @Override
-    public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify instanceof SpellAbility) {
-            Card card = game.getCard(abilityToModify.getSourceId());
-            if (card != null && !card.isArtifact()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public LodestoneGolemCostReductionEffect copy() {
-        return new LodestoneGolemCostReductionEffect(this);
-    }
-
 }

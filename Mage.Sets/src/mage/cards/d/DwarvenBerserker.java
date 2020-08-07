@@ -4,7 +4,7 @@ package mage.cards.d;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BecomesBlockedTriggeredAbility;
+import mage.abilities.common.BecomesBlockedSourceTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
@@ -31,7 +31,7 @@ public final class DwarvenBerserker extends CardImpl {
         // Whenever Dwarven Berserker becomes blocked, it gets +3/+0 and gains trample until end of turn.
         Effect effect = new BoostSourceEffect(3, 0, Duration.EndOfTurn);
         effect.setText("it gets +3/+0");
-        Ability ability = new BecomesBlockedTriggeredAbility(effect, false);
+        Ability ability = new BecomesBlockedSourceTriggeredAbility(effect, false);
         effect = new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gains trample until end of turn");
         ability.addEffect(effect);

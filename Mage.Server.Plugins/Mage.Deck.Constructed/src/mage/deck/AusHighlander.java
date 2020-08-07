@@ -4,6 +4,7 @@ import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.cards.decks.Constructed;
 import mage.cards.decks.Deck;
+import mage.cards.decks.DeckValidatorErrorType;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -81,7 +82,7 @@ public class AusHighlander extends Constructed {
     }
 
     public AusHighlander() {
-        this("Australian Highlander");
+        super("Australian Highlander", "AU Highlander");
         for (ExpansionSet set : Sets.getInstance().values()) {
             if (set.getSetType().isEternalLegal()) {
                 setCodes.add(set.getCode());
@@ -89,20 +90,17 @@ public class AusHighlander extends Constructed {
         }
     }
 
-    public AusHighlander(String name) {
-        super(name);
-    }
-
     @Override
     public boolean validate(Deck deck) {
         boolean valid = true;
+        errorsList.clear();
 
         if (deck.getCards().size() != getDeckMinSize()) {
-            invalid.put("Deck", "Must contain " + getDeckMinSize() + " singleton cards: has " + (deck.getCards().size()) + " cards");
+            addError(DeckValidatorErrorType.DECK_SIZE, "Deck", "Must contain " + getDeckMinSize() + " singleton cards: has " + (deck.getCards().size()) + " cards");
             valid = false;
         }
         if (deck.getSideboard().size() > 15) {
-            invalid.put("Sideboard", "Must contain at most 15 singleton cards: has " + (deck.getSideboard().size()) + " cards");
+            addError(DeckValidatorErrorType.DECK_SIZE, "Sideboard", "Must contain at most 15 singleton cards: has " + (deck.getSideboard().size()) + " cards");
             valid = false;
         }
 
@@ -142,12 +140,12 @@ public class AusHighlander extends Constructed {
             String cn = entry.getKey();
             if (pointMap.containsKey(cn)) {
                 totalPoints += pointMap.get(cn);
-                invalid.put(entry.getKey(), " " + pointMap.get(cn) + " point " + cn);
+                addError(DeckValidatorErrorType.OTHER, entry.getKey(), " " + pointMap.get(cn) + " point " + cn);
             }
         }
         if (totalPoints > 7) {
-            invalid.put("Total points too high", "Your calculated point total was " + totalPoints);
-            invalid.put("Only you can see this!", "Your opponents will not be able to see this message or what cards are in your deck!");
+            addError(DeckValidatorErrorType.PRIMARY, "Total points too high", "Your calculated point total was " + totalPoints);
+            addError(DeckValidatorErrorType.PRIMARY, "Only you can see this!", "Your opponents will not be able to see this message or what cards are in your deck!");
             valid = false;
         }
         return valid;

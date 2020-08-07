@@ -12,7 +12,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -25,12 +25,6 @@ import java.util.UUID;
  */
 public final class GwafaHazidProfiteer extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you don't control");
-
-    static {
-        filter.add(TargetController.NOT_YOU.getControllerPredicate());
-    }
-
     public GwafaHazidProfiteer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}");
         addSuperType(SuperType.LEGENDARY);
@@ -41,17 +35,16 @@ public final class GwafaHazidProfiteer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {W}{U}, {tap}: Put a bribery counter on target creature you don't control. Its controller draws a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GwafaHazidProfiteerEffect1(), new ManaCostsImpl("{W}{U}"));
+        Ability ability = new SimpleActivatedAbility(new GwafaHazidProfiteerEffect1(), new ManaCostsImpl("{W}{U}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
         this.addAbility(ability);
 
         // Creatures with bribery counters on them can't attack or block.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GwafaHazidProfiteerEffect2()));
-
+        this.addAbility(new SimpleStaticAbility(new GwafaHazidProfiteerEffect2()));
     }
 
-    public GwafaHazidProfiteer(final GwafaHazidProfiteer card) {
+    private GwafaHazidProfiteer(final GwafaHazidProfiteer card) {
         super(card);
     }
 
@@ -68,7 +61,7 @@ class GwafaHazidProfiteerEffect1 extends OneShotEffect {
         staticText = "Put a bribery counter on target creature you don't control. Its controller draws a card";
     }
 
-    public GwafaHazidProfiteerEffect1(final GwafaHazidProfiteerEffect1 effect) {
+    private GwafaHazidProfiteerEffect1(final GwafaHazidProfiteerEffect1 effect) {
         super(effect);
     }
 
@@ -79,7 +72,7 @@ class GwafaHazidProfiteerEffect1 extends OneShotEffect {
             Player controller = game.getPlayer(targetCreature.getControllerId());
             targetCreature.addCounters(CounterType.BRIBERY.createInstance(), source, game);
             if (controller != null) {
-                controller.drawCards(1, game);
+                controller.drawCards(1, source.getSourceId(), game);
             }
             return true;
         }
@@ -96,12 +89,12 @@ class GwafaHazidProfiteerEffect1 extends OneShotEffect {
 
 class GwafaHazidProfiteerEffect2 extends RestrictionEffect {
 
-    public GwafaHazidProfiteerEffect2() {
+    GwafaHazidProfiteerEffect2() {
         super(Duration.WhileOnBattlefield);
         staticText = "Creatures with bribery counters on them can't attack or block";
     }
 
-    public GwafaHazidProfiteerEffect2(final GwafaHazidProfiteerEffect2 effect) {
+    private GwafaHazidProfiteerEffect2(final GwafaHazidProfiteerEffect2 effect) {
         super(effect);
     }
 

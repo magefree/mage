@@ -5,15 +5,12 @@ import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ManaEffect;
-import mage.constants.AbilityType;
-import mage.constants.AsThoughEffectType;
-import mage.constants.TimingRule;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
+import mage.game.stack.Spell;
+import mage.game.stack.StackObject;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -54,10 +51,24 @@ public abstract class ActivatedManaAbilityImpl extends ActivatedAbilityImpl impl
                 && null == game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.ACTIVATE_AS_INSTANT, this, controllerId, game)) {
             return ActivationStatus.getFalse();
         }
-        // check if player is in the process of playing spell costs and they are no longer allowed to use activated mana abilities (e.g. because they started to use improvise)
+
+        // check if player is in the process of playing spell costs and they are no longer allowed to use
+        // activated mana abilities (e.g. because they started to use improvise or convoke)
+        if (!game.getStack().isEmpty()) {
+            StackObject stackObject = game.getStack().getFirst();
+            if (stackObject instanceof Spell) {
+                switch (((Spell) stackObject).getCurrentActivatingManaAbilitiesStep()) {
+                    case BEFORE:
+                    case NORMAL:
+                        break;
+                    case AFTER:
+                        return ActivationStatus.getFalse();
+                }
+            }
+        }
+
         //20091005 - 605.3a
         return new ActivationStatus(costs.canPay(this, sourceId, controllerId, game), null);
-
     }
 
     /**
@@ -71,7 +82,7 @@ public abstract class ActivatedManaAbilityImpl extends ActivatedAbilityImpl impl
      */
     @Override
     public List<Mana> getNetMana(Game game) {
-        if (netMana.isEmpty()) {
+        if (netMana.isEmpty() || (game != null && game.inCheckPlayableState())) {
             List<Mana> dynamicNetMana = new ArrayList<>();
             for (Effect effect : getEffects()) {
                 if (effect instanceof ManaEffect) {
@@ -90,6 +101,17 @@ public abstract class ActivatedManaAbilityImpl extends ActivatedAbilityImpl impl
         return netManaCopy;
     }
 
+    @Override
+    public Set<ManaType> getProducableManaTypes(Game game) {
+        Set<ManaType> manaTypes = new HashSet<>();
+        for (Effect effect : getEffects()) {
+            if (effect instanceof ManaEffect) {
+                manaTypes.addAll(((ManaEffect) effect).getProducableManaTypes(game, this));
+            }
+        }
+        return manaTypes;
+    }
+
     /**
      * Used to check if the ability itself defines mana types it can produce.
      *
@@ -104,6 +126,9 @@ public abstract class ActivatedManaAbilityImpl extends ActivatedAbilityImpl impl
      * Is it allowed to undo the mana creation. It's e.g. not allowed if some
      * game revealing information is related (like reveal the top card of the
      * library)
+     * <p>
+     * TODO: it helps with single mana activate for mana pool, but will not work while activates on paying for casting
+     * (e.g. user can cheats to see next draw card)
      *
      * @return
      */

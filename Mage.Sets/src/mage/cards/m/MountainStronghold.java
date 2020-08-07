@@ -1,7 +1,5 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
@@ -15,8 +13,9 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class MountainStronghold extends CardImpl {
@@ -32,7 +31,10 @@ public final class MountainStronghold extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // Red legendary creatures you control have "bands with other legendary creatures."
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(new BandsWithOtherAbility(SuperType.LEGENDARY), Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(
+                new BandsWithOtherAbility(SuperType.LEGENDARY), Duration.WhileOnBattlefield, filter)
+                .withForceQuotes()
+        ));
     }
 
     public MountainStronghold(final MountainStronghold card) {

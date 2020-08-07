@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mage.abilities.effects.common;
 
 import mage.MageObject;
@@ -10,13 +5,13 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.constants.Duration;
+import mage.filter.FilterInPlay;
 import mage.filter.FilterObject;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author LevelX2
  */
 public class PreventAllDamageByAllObjectsEffect extends PreventionEffectImpl {
@@ -36,7 +31,7 @@ public class PreventAllDamageByAllObjectsEffect extends PreventionEffectImpl {
         this.filter = filter;
     }
 
-    public PreventAllDamageByAllObjectsEffect(final PreventAllDamageByAllObjectsEffect effect) {
+    private PreventAllDamageByAllObjectsEffect(final PreventAllDamageByAllObjectsEffect effect) {
         super(effect);
         if (effect.filter != null) {
             this.filter = effect.filter.copy();
@@ -50,19 +45,24 @@ public class PreventAllDamageByAllObjectsEffect extends PreventionEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (super.applies(event, source, game) && event instanceof DamageEvent && event.getAmount() > 0) {
-            DamageEvent damageEvent = (DamageEvent) event;
-            if (damageEvent.isCombatDamage() || !onlyCombat) {
-                if (filter == null) {
-                    return true;
-                }
-                MageObject damageSource = game.getObject(damageEvent.getSourceId());
-                if (damageSource != null && filter.match(damageSource, game)) {
-                    return true;
-                }
-            }
+        if (!super.applies(event, source, game) || !(event instanceof DamageEvent) || event.getAmount() <= 0) {
+            return false;
         }
-        return false;
+        DamageEvent damageEvent = (DamageEvent) event;
+        if (!damageEvent.isCombatDamage() && onlyCombat) {
+            return false;
+        }
+        if (filter == null) {
+            return true;
+        }
+        MageObject damageSource = game.getObject(damageEvent.getSourceId());
+        if (damageSource == null) {
+            return false;
+        }
+        if (filter instanceof FilterInPlay) {
+            return ((FilterInPlay) filter).match(damageSource, source.getSourceId(), source.getControllerId(), game);
+        }
+        return filter.match(damageSource, game);
     }
 
     @Override

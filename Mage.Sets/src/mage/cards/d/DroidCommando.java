@@ -4,7 +4,7 @@ package mage.cards.d;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.keyword.RepairAbility;
@@ -27,7 +27,7 @@ public final class DroidCommando extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Droid Commando dies, target player loses 2 life and you gain 2 life.
-        Ability ability = new DiesTriggeredAbility(new LoseLifeTargetEffect(2));
+        Ability ability = new DiesSourceTriggeredAbility(new LoseLifeTargetEffect(2));
         ability.addEffect(new GainLifeEffect(2));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

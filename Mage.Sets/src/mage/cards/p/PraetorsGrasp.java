@@ -1,4 +1,3 @@
-
 package mage.cards.p;
 
 import mage.MageObject;
@@ -26,7 +25,8 @@ public final class PraetorsGrasp extends CardImpl {
     public PraetorsGrasp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
 
-        // Search target opponent's library for a card and exile it face down. Then that player shuffles their library. You may look at and play that card for as long as it remains exiled.
+        // Search target opponent's library for a card and exile it face down. Then that player 
+        //shuffles their library. You may look at and play that card for as long as it remains exiled.
         this.getSpellAbility().addEffect(new PraetorsGraspEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
@@ -45,7 +45,9 @@ class PraetorsGraspEffect extends OneShotEffect {
 
     public PraetorsGraspEffect() {
         super(Outcome.PlayForFree);
-        staticText = "Search target opponent's library for a card and exile it face down. Then that player shuffles their library. You may look at and play that card for as long as it remains exiled";
+        staticText = "Search target opponent's library for a card and exile it "
+                + "face down. Then that player shuffles their library. You may "
+                + "look at and play that card for as long as it remains exiled";
     }
 
     public PraetorsGraspEffect(final PraetorsGraspEffect effect) {
@@ -62,15 +64,21 @@ class PraetorsGraspEffect extends OneShotEffect {
         Player opponent = game.getPlayer(source.getFirstTarget());
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
-        if (controller != null && opponent != null && sourceObject != null) {
+        if (controller != null
+                && opponent != null
+                && sourceObject != null) {
             TargetCardInLibrary target = new TargetCardInLibrary();
             if (controller.searchLibrary(target, source, game, opponent.getId())) {
                 UUID targetId = target.getFirstTarget();
                 Card card = opponent.getLibrary().getCard(targetId, game);
-                UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
-                if (card != null && exileId != null) {
-                    game.informPlayers(controller.getLogName() + " moves the searched card face down to exile");
-                    card.moveToExile(exileId, sourceObject.getIdName(), source.getSourceId(), game);
+                UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(),
+                        source.getSourceObjectZoneChangeCounter());
+                if (card != null
+                        && exileId != null) {
+                    game.informPlayers(controller.getLogName() + " moves the searched "
+                            + "card face down to exile");
+                    card.moveToExile(exileId, sourceObject.getIdName(),
+                            source.getSourceId(), game);
                     card.setFaceDown(true, game);
                     game.addEffect(new PraetorsGraspPlayEffect(card.getId()), source);
                     game.addEffect(new PraetorsGraspRevealEffect(card.getId()), source);
@@ -110,12 +118,16 @@ class PraetorsGraspPlayEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (objectId.equals(cardId) && affectedControllerId.equals(source.getControllerId())) {
+        if (objectId.equals(cardId)
+                && affectedControllerId.equals(source.getControllerId())) {
             Player controller = game.getPlayer(source.getControllerId());
-            UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
-            if (exileId != null && controller != null) {
+            UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(),
+                    source.getSourceObjectZoneChangeCounter());
+            if (exileId != null
+                    && controller != null) {
                 ExileZone exileZone = game.getExile().getExileZone(exileId);
-                if (exileZone != null && exileZone.contains(cardId)) {
+                if (exileZone != null
+                        && exileZone.contains(cardId)) {
                     return true;
                 }
             }
@@ -152,15 +164,21 @@ class PraetorsGraspRevealEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (objectId.equals(cardId) && affectedControllerId.equals(source.getControllerId())) {
+        if (objectId.equals(cardId)
+                && affectedControllerId.equals(source.getControllerId())) {
             MageObject sourceObject = source.getSourceObject(game);
-            UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
-            if (exileId != null && sourceObject != null) {
+            UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(),
+                    source.getSourceObjectZoneChangeCounter());
+            if (exileId != null
+                    && sourceObject != null) {
                 ExileZone exileZone = game.getExile().getExileZone(exileId);
-                if (exileZone != null && exileZone.contains(cardId)) {
+                if (exileZone != null
+                        && exileZone.contains(cardId)) {
                     Player controller = game.getPlayer(source.getControllerId());
                     Card card = game.getCard(cardId);
-                    if (controller != null && card != null && game.getState().getZone(cardId) == Zone.EXILED) {
+                    if (controller != null
+                            && card != null
+                            && game.getState().getZone(cardId) == Zone.EXILED) {
                         return true;
                     }
                 } else {

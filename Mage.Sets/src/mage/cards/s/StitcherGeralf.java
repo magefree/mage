@@ -56,7 +56,7 @@ class StitcherGeralfEffect extends OneShotEffect {
 
     public StitcherGeralfEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Each player puts the top three cards of their library into their graveyard. Exile up to two creature cards put into graveyards this way. Create an X/X blue Zombie creature token, where X is the total power of the cards exiled this way";
+        this.staticText = "Each player mills three cards. Exile up to two creature cards put into graveyards this way. Create an X/X blue Zombie creature token, where X is the total power of the cards exiled this way";
     }
 
     public StitcherGeralfEffect(final StitcherGeralfEffect effect) {
@@ -76,10 +76,10 @@ class StitcherGeralfEffect extends OneShotEffect {
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    cards.addAll(player.getLibrary().getTopCards(game, 3));
+                    cards.addAll(player.millCards(3,source,game));
                 }
             }
-            controller.moveCards(cards, Zone.GRAVEYARD, source, game);
+            cards.removeIf(uuid -> game.getState().getZone(uuid)!=Zone.GRAVEYARD);
             TargetCard target = new TargetCard(0, 2, Zone.GRAVEYARD, new FilterCreatureCard("creature cards to exile"));
             controller.chooseTarget(outcome, cards, target, source, game);
             int power = 0;

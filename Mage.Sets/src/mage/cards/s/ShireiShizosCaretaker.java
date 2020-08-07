@@ -121,7 +121,7 @@ class ShireiShizosCaretakerEffect extends OneShotEffect {
             Effect effect = new ShireiShizosCaretakerReturnEffect(shireiId);
             effect.setText("return that card to the battlefield if {this} is still on the battlefield");
             DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
-            delayedAbility.getEffects().get(0).setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
+            delayedAbility.getEffects().get(0).setTargetPointer(new FixedTarget(card, game));
             game.addDelayedTriggeredAbility(delayedAbility, source);
             return true;
         }

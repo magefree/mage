@@ -13,23 +13,23 @@ import mage.game.events.ManaEvent;
 import mage.players.Player;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import mage.abilities.TriggeredAbility;
+import mage.constants.ManaType;
 
 /**
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class ManaEffect extends OneShotEffect {
 
-    protected Mana createdMana;
-
     public ManaEffect() {
         super(Outcome.PutManaInPool);
-        createdMana = null;
     }
 
     public ManaEffect(final ManaEffect effect) {
         super(effect);
-        this.createdMana = effect.createdMana == null ? null : effect.createdMana.copy();
     }
 
     @Override
@@ -37,6 +37,15 @@ public abstract class ManaEffect extends OneShotEffect {
         Player player = getPlayer(game, source);
         if (player == null) {
             return false;
+        }
+        if (game.inCheckPlayableState()) {
+            // During calculation of the available mana for a player the "TappedForMana" event is fired to simulate triggered mana production.
+            // By checking the inCheckPlayableState these events are handled to give back only the available mana of instead really producing mana
+            // So it's important if ManaEffects overwrite the apply method to take care for this.
+            if (source instanceof TriggeredAbility) {
+                player.addAvailableTriggeredMana(getNetMana(game, source));
+            }
+            return true; // No need to add mana to pool during checkPlayable   
         }
         Mana manaToAdd = produceMana(game, source);
         if (manaToAdd != null && manaToAdd.count() > 0) {
@@ -72,11 +81,60 @@ public abstract class ManaEffect extends OneShotEffect {
     }
 
     /**
-     * Produced the mana the effect can produce (DO NOT add it to mana pool -- return all added as mana object to process by replace events)
+     * The type of mana a permanent "could produce" is the type of mana that any
+     * ability of that permanent can generate, taking into account any
+     * applicable replacement effects. If the type of mana can’t be defined,
+     * there’s no type of mana that that permanent could produce. The "type" of
+     * mana is its color, or lack thereof (for colorless mana).
+     *
+     * @param game
+     * @param source
+     * @return
+     */
+    public Set<ManaType> getProducableManaTypes(Game game, Ability source) {
+        return getManaTypesFromManaList(getNetMana(game, source));
+    }
+
+    public static Set<ManaType> getManaTypesFromManaList(List<Mana> manaList) {
+        Set<ManaType> manaTypes = new HashSet<>();
+        for (Mana mana : manaList) {
+            if (mana.getAny() > 0) {
+                manaTypes.add(ManaType.BLACK);
+                manaTypes.add(ManaType.BLUE);
+                manaTypes.add(ManaType.GREEN);
+                manaTypes.add(ManaType.WHITE);
+                manaTypes.add(ManaType.RED);
+            }
+            if (mana.getBlack() > 0) {
+                manaTypes.add(ManaType.BLACK);
+            }
+            if (mana.getBlue() > 0) {
+                manaTypes.add(ManaType.BLUE);
+            }
+            if (mana.getGreen() > 0) {
+                manaTypes.add(ManaType.GREEN);
+            }
+            if (mana.getWhite() > 0) {
+                manaTypes.add(ManaType.WHITE);
+            }
+            if (mana.getRed() > 0) {
+                manaTypes.add(ManaType.RED);
+            }
+            if (mana.getColorless() > 0) {
+                manaTypes.add(ManaType.COLORLESS);
+            }
+        }
+        return manaTypes;
+    }
+
+    /**
+     * Produced the mana the effect can produce (DO NOT add it to mana pool --
+     * return all added as mana object to process by replace events)
      * <p>
-     * WARNING, produceMana can be called multiple times for mana and spell available calculations
-     * if you don't want it then overide getNetMana to return max possible mana values
-     * (if you have choose dialogs or extra effects like new counters in produceMana)
+     * WARNING, produceMana can be called multiple times for mana and spell
+     * available calculations if you don't want it then overide getNetMana to
+     * return max possible mana values (if you have choose dialogs or extra
+     * effects like new counters in produceMana)
      *
      * @param game   warning, can be NULL for AI score calcs (game == null)
      * @param source
@@ -93,14 +151,10 @@ public abstract class ManaEffect extends OneShotEffect {
      * @param source
      */
     public void checkToFirePossibleEvents(Mana mana, Game game, Ability source) {
-        if (source.getAbilityType() == AbilityType.MANA) {
-            for (Cost cost : source.getCosts()) {
-                if (cost instanceof TapSourceCost) {
-                    ManaEvent event = new ManaEvent(GameEvent.EventType.TAPPED_FOR_MANA, source.getSourceId(), source.getSourceId(), source.getControllerId(), mana);
-                    if (!game.replaceEvent(event)) {
-                        game.fireEvent(event);
-                    }
-                }
+        if (source.getAbilityType() == AbilityType.MANA && source.hasTapCost()) {
+            ManaEvent event = new ManaEvent(GameEvent.EventType.TAPPED_FOR_MANA, source.getSourceId(), source.getSourceId(), source.getControllerId(), mana);
+            if (!game.replaceEvent(event)) {
+                game.fireEvent(event);
             }
         }
     }

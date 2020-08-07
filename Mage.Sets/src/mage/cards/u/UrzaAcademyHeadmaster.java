@@ -268,7 +268,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
                                 effects.add(new UrzaAcademyHeadmasterBrainstormEffect());
                                 break;
                             case 8: // JACE MEMORY ADEPT 2
-                                sb.append("Target player puts the top ten cards of their library into their graveyard.");
+                                sb.append("Target player mills ten cards.");
                                 effects.add(new PutLibraryIntoGraveTargetEffect(10));
                                 target = new TargetPlayer();
                                 break;
@@ -550,7 +550,7 @@ class UrzaAcademyHeadmasterBrainstormEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            player.drawCards(3, game);
+            player.drawCards(3, source.getSourceId(), game);
             putOnLibrary(player, source, game);
             return true;
         }

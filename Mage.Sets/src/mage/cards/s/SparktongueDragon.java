@@ -1,28 +1,21 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.DoIfCostPaid;
-import mage.abilities.effects.common.SendOptionUsedEventEffect;
-import mage.constants.SubType;
+import mage.abilities.effects.common.DoWhenCostPaid;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.game.Game;
-import mage.game.events.GameEvent;
+import mage.constants.SubType;
 import mage.target.common.TargetAnyTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class SparktongueDragon extends CardImpl {
@@ -38,77 +31,23 @@ public final class SparktongueDragon extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Sparktongue Dragon enters the battlefield, you may pay {2}{R}. When you do, it deals 3 damage to any target.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new DoIfCostPaid(
-                        new SparktongueDragonCreateReflexiveTriggerEffect(),
-                        new ManaCostsImpl("{2}{R}"),
-                        "Pay {2}{R} to deal 3 damage?"
-                ).setText("you may pay {2}{R}. When you do, it deals 3 damage to any target")
-        ));
+        ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
+                new DamageTargetEffect(3), false,
+                "it deals 3 damage to any target"
+        );
+        ability.addTarget(new TargetAnyTarget());
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DoWhenCostPaid(
+                ability, new ManaCostsImpl("{2}{R}"),
+                "Pay {2}{R} to deal 3 damage?"
+        )));
     }
 
-    public SparktongueDragon(final SparktongueDragon card) {
+    private SparktongueDragon(final SparktongueDragon card) {
         super(card);
     }
 
     @Override
     public SparktongueDragon copy() {
         return new SparktongueDragon(this);
-    }
-}
-
-class SparktongueDragonCreateReflexiveTriggerEffect extends OneShotEffect {
-
-    public SparktongueDragonCreateReflexiveTriggerEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "When you do, it deals 3 damage to any target";
-    }
-
-    public SparktongueDragonCreateReflexiveTriggerEffect(final SparktongueDragonCreateReflexiveTriggerEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SparktongueDragonCreateReflexiveTriggerEffect copy() {
-        return new SparktongueDragonCreateReflexiveTriggerEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        game.addDelayedTriggeredAbility(new SparktongueDragonReflexiveTriggeredAbility(), source);
-        return new SendOptionUsedEventEffect().apply(game, source);
-    }
-}
-
-class SparktongueDragonReflexiveTriggeredAbility extends DelayedTriggeredAbility {
-
-    public SparktongueDragonReflexiveTriggeredAbility() {
-        super(new DamageTargetEffect(3), Duration.OneUse, true);
-        this.addTarget(new TargetAnyTarget());
-    }
-
-    public SparktongueDragonReflexiveTriggeredAbility(final SparktongueDragonReflexiveTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public SparktongueDragonReflexiveTriggeredAbility copy() {
-        return new SparktongueDragonReflexiveTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.OPTION_USED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getPlayerId().equals(this.getControllerId())
-                && event.getSourceId().equals(this.getSourceId());
-    }
-
-    @Override
-    public String getRule() {
-        return "When you pay {2}{R}, {this} deals 3 damage to any target";
     }
 }

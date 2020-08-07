@@ -4,7 +4,7 @@ import java.util.UUID;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
@@ -32,7 +32,7 @@ public final class DesperateSentry extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Desperate Sentry dies, create a 3/2 colorless Eldrazi Horror creature token.
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new EldraziHorrorToken()), false));
+        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new EldraziHorrorToken()), false));
 
         // <i>Delirium</i> &mdash; Desperate Sentry gets +3/+0 as long as there are four or more card types among cards in your graveyard.
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(

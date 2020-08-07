@@ -1,4 +1,3 @@
-
 package mage.abilities.keyword;
 
 import mage.abilities.ActivatedAbilityImpl;
@@ -12,7 +11,6 @@ import mage.filter.FilterCard;
 import mage.target.common.TargetCardInLibrary;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class CyclingAbility extends ActivatedAbilityImpl {
@@ -56,5 +54,4 @@ public class CyclingAbility extends ActivatedAbilityImpl {
         rule.append(cost.getText()).append(" <i>(").append(super.getRule(true)).append(")</i>");
         return rule.toString();
     }
-
 }

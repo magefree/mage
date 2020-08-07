@@ -1,9 +1,6 @@
-
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
@@ -18,20 +15,23 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.TargetPlayer;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
+import java.util.Objects;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author halljared
  */
 public final class InfectiousCurse extends CardImpl {
 
     public InfectiousCurse(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "");
         this.subtype.add(SubType.AURA, SubType.CURSE);
         this.color.setBlack(true);
 
@@ -46,6 +46,7 @@ public final class InfectiousCurse extends CardImpl {
 
         // Spells you cast that target enchanted player cost {1} less to cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new InfectiousCurseCostReductionEffect()));
+
         // At the beginning of enchanted player's upkeep, that player loses 1 life and you gain 1 life.
         InfectiousCurseAbility curseAbility = new InfectiousCurseAbility();
         curseAbility.addEffect(new GainLifeEffect(1));
@@ -106,7 +107,7 @@ class InfectiousCurseCostReductionEffect extends CostModificationEffectImpl {
 
     public InfectiousCurseCostReductionEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        this.staticText = "Spells you cast that target enchanted player cost {1} less to cast.";
+        this.staticText = "Spells you cast that target enchanted player cost {1} less to cast";
     }
 
     protected InfectiousCurseCostReductionEffect(InfectiousCurseCostReductionEffect effect) {
@@ -121,23 +122,31 @@ class InfectiousCurseCostReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify instanceof SpellAbility) {
-            if (source.isControlledBy(abilityToModify.getControllerId())) {
-                for (UUID modeId : abilityToModify.getModes().getSelectedModes()) {
-                    Mode mode = abilityToModify.getModes().get(modeId);
-                    for (Target target : mode.getTargets()) {
-                        for (UUID targetUUID : target.getTargets()) {
-                            Permanent enchantment = game.getPermanent(source.getSourceId());
-                            UUID attachedTo = enchantment.getAttachedTo();
-                            if (targetUUID.equals(attachedTo)) {
-                                return true;
-                            }
-                        }
-                    }
-                }
-            }
+        if (!(abilityToModify instanceof SpellAbility)) {
+            return false;
         }
-        return false;
+
+        if (!source.isControlledBy(abilityToModify.getControllerId())) {
+            return false;
+        }
+
+        Permanent enchantment = game.getPermanent(source.getSourceId());
+        if (enchantment == null || enchantment.getAttachedTo() == null) {
+            return false;
+        }
+
+        Spell spell = (Spell) game.getStack().getStackObject(abilityToModify.getId());
+        Set<UUID> allTargets;
+        if (spell != null) {
+            // real cast
+            allTargets = CardUtil.getAllSelectedTargets(abilityToModify, game);
+        } else {
+            // playable
+            allTargets = CardUtil.getAllPossibleTargets(abilityToModify, game);
+        }
+
+        // try to reduce all the time (if it possible to target)
+        return allTargets.stream().anyMatch(target -> Objects.equals(target, enchantment.getAttachedTo()));
     }
 
     @Override

@@ -1,7 +1,5 @@
 package mage.cards;
 
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
@@ -9,6 +7,10 @@ import mage.abilities.SpellAbility;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.ZoneChangeEvent;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -62,6 +64,22 @@ public abstract class AdventureCard extends CardImpl {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean removeFromZone(Game game, Zone fromZone, UUID sourceId) {
+        // zone contains only one main card
+        return super.removeFromZone(game, fromZone, sourceId);
+    }
+
+    @Override
+    public void updateZoneChangeCounter(Game game, ZoneChangeEvent event) {
+        if (isCopy()) { // same as meld cards
+            super.updateZoneChangeCounter(game, event);
+            return;
+        }
+        super.updateZoneChangeCounter(game, event);
+        getSpellCard().updateZoneChangeCounter(game, event);
     }
 
     @Override

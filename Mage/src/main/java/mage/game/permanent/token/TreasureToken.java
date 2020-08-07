@@ -8,6 +8,7 @@ import mage.abilities.mana.SimpleManaAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.util.RandomUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,28 +21,15 @@ public final class TreasureToken extends TokenImpl {
 
     static final private List<String> tokenImageSets = new ArrayList<>();
 
-    static {
-        tokenImageSets.addAll(Arrays.asList("XLN", "RNA", "M20", "C19"));
-    }
-
     public TreasureToken() {
-        this(null, 0);
-    }
-
-    public TreasureToken(String setCode) {
-        this(setCode, 0);
-    }
-
-    public TreasureToken(String setCode, int tokenType) {
         super("Treasure", "Treasure token");
-        availableImageSetCodes = tokenImageSets;
-        setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.ARTIFACT);
         subtype.add(SubType.TREASURE);
-
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
+
+        availableImageSetCodes = Arrays.asList("XLN", "RNA", "M20", "C19", "C20", "M21");
     }
 
     public TreasureToken(final TreasureToken token) {
@@ -50,5 +38,14 @@ public final class TreasureToken extends TokenImpl {
 
     public TreasureToken copy() {
         return new TreasureToken(this);
+    }
+
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("XLN")) {
+            this.setTokenType(RandomUtil.nextInt(4) + 1);
+        }
     }
 }

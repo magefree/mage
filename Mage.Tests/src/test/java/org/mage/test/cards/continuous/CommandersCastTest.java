@@ -17,7 +17,6 @@ public class CommandersCastTest extends CardTestCommander4Players {
         addCard(Zone.COMMAND, playerA, "Balduvian Bears", 1); // {1}{G}, 2/2, commander
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
 
-        // showCommand("commanders", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Balduvian Bears");
 
         setStopAt(1, PhaseStep.END_TURN);
@@ -70,9 +69,7 @@ public class CommandersCastTest extends CardTestCommander4Players {
     public void test_PlayAsLandOneTime() {
         addCard(Zone.COMMAND, playerA, "Academy Ruins", 1);
 
-        // showAvaileableAbilities("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Academy Ruins");
-        //castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Academy Ruins");
 
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
@@ -113,7 +110,6 @@ public class CommandersCastTest extends CardTestCommander4Players {
         waitStackResolved(5, PhaseStep.POSTCOMBAT_MAIN);
         checkPermanentCount("after cast 2", 5, PhaseStep.POSTCOMBAT_MAIN, playerA, "Academy Ruins", 1);
 
-//        showBattlefield("end battlefield", 5, PhaseStep.END_TURN, playerA);
         setStopAt(5, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
@@ -259,7 +255,6 @@ public class CommandersCastTest extends CardTestCommander4Players {
         addCard(Zone.BATTLEFIELD, playerA, "Balduvian Bears", 2);
 
         // cast overload
-        // showAvaileableAbilities("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Weapon Surge with overload");
         setChoice(playerA, "Yes"); // move to command zone
         checkAbility("after", 1, PhaseStep.BEGIN_COMBAT, playerA, "Balduvian Bears", FirstStrikeAbility.class, true);
@@ -268,5 +263,55 @@ public class CommandersCastTest extends CardTestCommander4Players {
         setStrictChooseMode(true);
         execute();
         assertAllCommandsUsed();
+    }
+
+    @Test
+    public void test_ExileWithDelvePayAndReturn() {
+        // https://github.com/magefree/mage/issues/5121
+        // Exiling your commander from your graveyard should give you the option to put it in command zone
+        // We were playing in a restarted-by-Karn game (if that mattered), and a player who exiled their
+        // commander from graveyard via Delve was not given the opportunity to place it in the command zone.
+        // Instead, it went directly to the exiled zone.
+
+        // disable auto-payment for delve test
+        disableManaAutoPayment(playerA);
+
+        // commander
+        addCard(Zone.COMMAND, playerA, "Balduvian Bears", 1); // {1}{G}, 2/2, commander
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        //
+        addCard(Zone.HAND, playerA, "Lightning Bolt", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        //
+        // {4}{U}{U} creature
+        // Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)
+        addCard(Zone.HAND, playerA, "Ethereal Forager", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5); // one from delve
+
+        // prepare commander and put it to graveyard
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G}", 2);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Balduvian Bears");
+        setChoice(playerA, "Green", 2); // pay
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        //
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Balduvian Bears");
+        setChoice(playerA, "Red"); // pay
+        setChoice(playerA, "No"); // leave in graveyard
+
+        // use commander as delve pay
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}", 5);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ethereal Forager");
+        setChoice(playerA, "Blue", 5); // pay normal
+        setChoice(playerA, "Exile cards"); // pay delve
+        setChoice(playerA, "Balduvian Bears");
+        setChoice(playerA, "Yes"); // move to command zone
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+        assertAllCommandsUsed();
+
+        assertCommandZoneCount(playerA, "Balduvian Bears", 1);
     }
 }

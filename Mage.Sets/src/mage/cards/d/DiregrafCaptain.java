@@ -1,7 +1,5 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
@@ -22,8 +20,9 @@ import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Loki
  */
 public final class DiregrafCaptain extends CardImpl {
@@ -35,16 +34,18 @@ public final class DiregrafCaptain extends CardImpl {
     }
 
     public DiregrafCaptain(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{B}");
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.SOLDIER);
-
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
+        // Deathtouch
         this.addAbility(DeathtouchAbility.getInstance());
+
         // Other Zombie creatures you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
+
         // Whenever another Zombie you control dies, target opponent loses 1 life.
         this.addAbility(new DiregrafCaptainTriggeredAbility());
     }
@@ -84,12 +85,10 @@ class DiregrafCaptainTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (!event.getTargetId().equals(this.getSourceId())) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
+            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             if (zEvent.isDiesEvent()) {
                 Permanent p = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-                if (p != null && p.isControlledBy(this.controllerId) && filter.match(p, game)) {
-                    return true;
-                }
+                return p != null && p.isControlledBy(this.controllerId) && filter.match(p, game);
             }
         }
         return false;

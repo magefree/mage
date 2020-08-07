@@ -14,6 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
@@ -88,7 +89,7 @@ class OathOfLimDulTriggeredAbility extends TriggeredAbilityImpl {
 
 class OathOfLimDulEffect extends OneShotEffect {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("controlled permanent other than Oath of Lim-Dul");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("controlled permanent other than Oath of Lim-Dul to sacrifice");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -104,31 +105,34 @@ class OathOfLimDulEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Boolean sacrificeDone = false;
+        int numberSacrificed = 0;
+        int numberToDiscard = 0;
+        int numberOfControlledPermanents = 0;
         Player controller = game.getPlayer(source.getControllerId());
-        int amount = (int) game.getState().getValue(source.getSourceId().toString() + "oathOfLimDul");
-        if (amount > 0
+        int amountDamage = (int) game.getState().getValue(source.getSourceId().toString() + "oathOfLimDul");
+        if (amountDamage > 0
                 && controller != null) {
-            for (int i = 0; i < amount; i++) {
-                TargetControlledPermanent target = new TargetControlledPermanent(filter);
-                target.setNotTarget(true);
-                if (target.canChoose(controller.getId(), game)
-                        && controller.choose(Outcome.Sacrifice, target, source.getSourceId(), game)) {
-                    Cost cost = new DiscardTargetCost(new TargetCardInHand());
-                    if (cost.canPay(source, source.getSourceId(), controller.getId(), game)
-                            && controller.chooseUse(Outcome.Benefit, 
-                                    "Do you wish to discard a card rather than sacrifice the target permanent?", source, game)) {
-                        cost.pay(source, game, source.getSourceId(), controller.getId(), true);
-                    } else {
-                        Permanent targetPermanent = game.getPermanent(target.getFirstTarget());
-                        if (targetPermanent != null) {
-                            targetPermanent.sacrifice(source.getSourceId(), game);
-                        }
+            TargetControlledPermanent target = new TargetControlledPermanent(0, numberOfControlledPermanents, filter, true);
+            target.setNotTarget(true);
+            if (controller.choose(Outcome.Detriment, target, source.getSourceId(), game)) {
+                for (UUID targetPermanentId : target.getTargets()) {
+                    Permanent permanent = game.getPermanent(targetPermanentId);
+                    if (permanent != null
+                            && permanent.sacrifice(source.getSourceId(), game)) {
+                        numberSacrificed += 1;
+                        sacrificeDone = true;
                     }
                 }
             }
-            return true;
+            numberToDiscard = amountDamage - numberSacrificed;
+            Cost cost = new DiscardTargetCost(new TargetCardInHand(numberToDiscard, new FilterCard("card(s) in your hand to discard")));
+            if (numberToDiscard > 0
+                    && cost.canPay(source, source.getSourceId(), controller.getId(), game)) {
+                return cost.pay(source, game, source.getSourceId(), controller.getId(), true);  // discard cost paid simultaneously
+            }
         }
-        return false;
+        return sacrificeDone;
     }
 
     @Override

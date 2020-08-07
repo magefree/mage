@@ -8,7 +8,10 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.other.OwnerIdPredicate;
 import mage.game.Game;
@@ -64,32 +67,20 @@ class LichsMirrorEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(event.getPlayerId());
         if (player != null) {
+            Cards toLib = new CardsImpl();
             FilterControlledPermanent filter = new FilterControlledPermanent();
             filter.add(new OwnerIdPredicate(player.getId()));
-            for (UUID uuid : player.getHand().copy()) {
-                Card card = game.getCard(uuid);
-                if (card != null) {
-                    card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-                }
-            }
-        
-            for (UUID uuid : player.getGraveyard().copy()) {
-                Card card = game.getCard(uuid);
-                if (card != null) {
-                    card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-                }
-            }
-            
+            toLib.addAll(player.getHand());
+            toLib.addAll(player.getGraveyard());
             for(Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)){
-                permanent.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-            }
-            player.shuffleLibrary(source, game);
-            
-            player.drawCards(7, game);
-            
-            player.setLife(20, game, source);
+                toLib.add(permanent);
+            }            
+            player.shuffleCardsToLibrary(toLib, game, source);
+            game.getState().processAction(game);
+            player.drawCards(7, source.getSourceId(), game);            
+            player.setLife(20, game, source);            
         }
-        return true;
+        return true; // replace the loses event
     }
 
     @Override
@@ -99,10 +90,7 @@ class LichsMirrorEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getPlayerId().equals(source.getControllerId())) {
-            return true;
-        }
-        return false;
+        return event.getPlayerId().equals(source.getControllerId());
     }
 
 }

@@ -12,6 +12,7 @@ import mage.target.TargetCard;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+import mage.filter.StaticFilters;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -19,7 +20,7 @@ import java.util.UUID;
 public class TargetCardInHand extends TargetCard {
 
     public TargetCardInHand() {
-        this(1, 1, new FilterCard());
+        this(1, 1, StaticFilters.FILTER_CARD_A);
     }
 
     public TargetCardInHand(FilterCard filter) {
@@ -41,8 +42,10 @@ public class TargetCardInHand extends TargetCard {
 
     @Override
     public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
-        Card card = game.getPlayer(playerId).getHand().get(id, game);
-        return card != null && filter.match(card, source != null ? source.getSourceId() : null, playerId, game);
+        // Has to be a card in the hand of a player in range. We don't know here, from which player's hand so we have to check all possible players
+        // And because a card in hand is never targeted we can omitt specific targeting related checks
+        return game.getState().getZone(id) == Zone.HAND
+                && game.getState().getPlayersInRange(getTargetController() == null ? playerId : getTargetController(), game).contains(game.getOwnerId(id));
     }
 
     @Override
@@ -89,5 +92,11 @@ public class TargetCardInHand extends TargetCard {
     @Override
     public String getTargetedName(Game game) {
         return filter.getMessage();
+    }
+
+    @Override
+    public TargetCardInHand withChooseHint(String chooseHint) {
+        super.withChooseHint(chooseHint);
+        return this;
     }
 }

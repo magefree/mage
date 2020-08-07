@@ -55,14 +55,14 @@ public final class PsychicVortex extends CardImpl {
 class PsychicVortexCost extends CostImpl {
     
     PsychicVortexCost() {
-        this.text = "Draw a card.";
+        this.text = "Draw a card";
     }
 
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
-            controller.drawCards(1, game);
+            controller.drawCards(1, sourceId, game);
             this.paid = true;
             return true;
             }

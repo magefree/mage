@@ -5,6 +5,7 @@ import mage.Mana;
 import mage.ManaSymbol;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.*;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
@@ -373,7 +374,12 @@ public final class ManaUtil {
         if (countColorfull == 0) { // seems there is no colorful mana we can use
             // try to pay {1}
             if (mana.getGeneric() > 0) {
-                // use any (lets choose first)
+                // choose first without addional costs if all have addional costs take the first
+                for (ActivatedManaAbilityImpl manaAbility : useableAbilities.values()) {
+                    if (manaAbility.getCosts().size() == 1 && manaAbility.getCosts().get(0).getClass().equals(TapSourceCost.class)) {
+                        return replace(useableAbilities, manaAbility);
+                    }
+                }
                 return replace(useableAbilities, useableAbilities.values().iterator().next());
             }
 
@@ -398,7 +404,7 @@ public final class ManaUtil {
     }
 
     /**
-     * This activates the special button inthe feedback panel of the client if
+     * This activates the special button in the feedback panel of the client if
      * there exists special ways to pay the mana (e.g. Delve, Convoke)
      *
      * @param source ability the mana costs have to be paid for
@@ -499,7 +505,8 @@ public final class ManaUtil {
     }
 
     /**
-     * all ability/effect code with "= new GenericManaCost" must be replaced by createManaCost call
+     * all ability/effect code with "= new GenericManaCost" must be replaced by
+     * createManaCost call
      */
     public static ManaCost createManaCost(int genericManaCount, boolean payAsX) {
         if (payAsX) {
@@ -542,7 +549,7 @@ public final class ManaUtil {
             }
 
             if (!payed) {
-                game.restoreState(bookmark, restoreContextName);
+                player.restoreState(bookmark, restoreContextName, game);
                 game.fireUpdatePlayersEvent();
             } else {
                 game.removeBookmark(bookmark);

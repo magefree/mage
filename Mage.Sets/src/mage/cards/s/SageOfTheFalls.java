@@ -1,7 +1,7 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldThisOrAnotherTriggeredAbility;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -18,8 +18,7 @@ import java.util.UUID;
  */
 public final class SageOfTheFalls extends CardImpl {
 
-    private static final FilterPermanent filter
-            = new FilterCreaturePermanent("{this} or another non-Human creature");
+    private static final FilterPermanent filter = new FilterCreaturePermanent("non-Human creature");
 
     static {
         filter.add(Predicates.not(SubType.HUMAN.getPredicate()));
@@ -34,9 +33,9 @@ public final class SageOfTheFalls extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Whenever Sage of the Falls or another non-Human creature enters the battlefield under you control, you may draw a card. If you do, discard a card.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
-                new DrawDiscardControllerEffect(1, 1, true), filter
-        ));
+        this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(new DrawDiscardControllerEffect(
+                1, 1, true
+        ), filter, false, true));
     }
 
     private SageOfTheFalls(final SageOfTheFalls card) {

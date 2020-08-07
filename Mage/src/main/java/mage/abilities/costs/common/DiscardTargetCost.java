@@ -1,20 +1,21 @@
-
 package mage.abilities.costs.common;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.cards.Card;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class DiscardTargetCost extends CostImpl {
@@ -50,13 +51,11 @@ public class DiscardTargetCost extends CostImpl {
         if (randomDiscard) {
             this.cards.addAll(player.discard(amount, true, ability, game).getCards(game));
         } else if (targets.choose(Outcome.Discard, controllerId, sourceId, game)) {
-            for (UUID targetId : targets.get(0).getTargets()) {
-                Card card = player.getHand().get(targetId, game);
-                if (card == null) {
-                    return false;
-                }
-                player.discard(card, ability, game);
-                this.cards.add(card);
+            Cards toDiscard = new CardsImpl();
+            toDiscard.addAll(targets.get(0).getTargets());
+            Cards discarded = player.discard(toDiscard, ability, game);
+            if (!discarded.isEmpty()) {
+                cards.addAll(discarded.getCards(game));
             }
         }
         paid = cards.size() >= amount;

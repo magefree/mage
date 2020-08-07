@@ -9,7 +9,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapTargetCost;
@@ -80,7 +80,7 @@ public final class VodalianWarMachine extends CardImpl {
     }
 }
 
-class VodalianWarMachineTriggeredAbility extends DiesTriggeredAbility {
+class VodalianWarMachineTriggeredAbility extends DiesSourceTriggeredAbility {
 
     public VodalianWarMachineTriggeredAbility() {
         super(new VodalianWarMachineEffect(), false);

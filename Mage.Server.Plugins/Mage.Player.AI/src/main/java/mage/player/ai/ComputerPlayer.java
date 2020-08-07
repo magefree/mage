@@ -1,5 +1,9 @@
 package mage.player.ai;
 
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.*;
+import java.util.Map.Entry;
 import mage.ConditionalMana;
 import mage.MageObject;
 import mage.MageObjectReference;
@@ -56,11 +60,6 @@ import mage.util.RandomUtil;
 import mage.util.TournamentUtil;
 import mage.util.TreeNode;
 import org.apache.log4j.Logger;
-
-import java.io.IOException;
-import java.io.Serializable;
-import java.util.*;
-import java.util.Map.Entry;
 
 /**
  * suitable for two player games and some multiplayer games
@@ -137,8 +136,6 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         // - target.getTargetController(), this.getId() -- player that must makes choices (must be same with this.getId)
         // - target.getAbilityController(), abilityControllerId -- affected player/controller for all actions/filters
         // - affected controler can be different from target controller (another player makes choices for controller)
-
-
         // sometimes a target selection can be made from a player that does not control the ability
         UUID abilityControllerId = playerId;
         if (target.getTargetController() != null
@@ -396,12 +393,16 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 }
             }
 
-            while ((outcome.isGood() ? target.getTargets().size() < target.getMaxNumberOfTargets() : !target.isChosen())
+            // exile cost workaround: exile is bad, but exile from graveyard in most cases is good (more exiled -- more good things you get, e.g. delve's pay)
+            boolean isRealGood = outcome.isGood() || outcome == Outcome.Exile;
+            while ((isRealGood ? target.getTargets().size() < target.getMaxNumberOfTargets() : !target.isChosen())
                     && !cards.isEmpty()) {
                 Card pick = pickTarget(abilityControllerId, cards, outcome, target, null, game);
                 if (pick != null) {
                     target.addTarget(pick.getId(), null, game);
                     cards.remove(pick);
+                } else {
+                    break;
                 }
             }
 
@@ -474,7 +475,6 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         // target - real target, make all changes and add targets to it
         // target.getOriginalTarget() - copy spell effect replaces original target with TargetWithAdditionalFilter
         // use originalTarget to get filters and target class info
-
         // source can be null (as example: legendary rule permanent selection)
         UUID sourceId = source != null ? source.getSourceId() : null;
 
@@ -725,17 +725,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             List<Permanent> targets;
             TargetPermanentOrPlayer origTarget = ((TargetPermanentOrPlayer) target.getOriginalTarget());
 
-            // TODO: if effect is bad and no opponent's targets available then AI can't target yourself but must by rules
-            /*
-            battlefield:Computer:Mountain:5
-            hand:Computer:Viashino Pyromancer:3
-            battlefield:Human:Shalai, Voice of Plenty:1
-             */
             // TODO: in multiplayer game there many opponents - if random opponents don't have targets then AI must use next opponent, but it skips
             //  (e.g. you randomOpponentId must be replaced by List<UUID> randomOpponents)
-
             // normal cycle (good for you, bad for opponents)
-
             // possible good/bad permanents
             if (outcome.isGood()) {
                 targets = threats(abilityControllerId, source.getSourceId(), ((FilterPermanentOrPlayer) target.getFilter()).getPermanentFilter(), game, target.getTargets());
@@ -776,6 +768,16 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 }
             } else if (target.canTarget(abilityControllerId, randomOpponentId, source, game)) {
                 return tryAddTarget(target, randomOpponentId, source, game);
+            }
+
+            // try target player as bad (bad on itself, good on opponent)
+            for (UUID opponentId : game.getOpponents(abilityControllerId)) {
+                if (target.canTarget(abilityControllerId, opponentId, source, game)) {
+                    return tryAddTarget(target, opponentId, source, game);
+                }
+            }
+            if (target.canTarget(abilityControllerId, abilityControllerId, source, game)) {
+                return tryAddTarget(target, abilityControllerId, source, game);
             }
 
             return false;
@@ -1267,7 +1269,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         //play a land that will allow us to play an unplayable
         for (Mana mana : unplayable.keySet()) {
             for (Card card : lands) {
-                for (ActivatedManaAbilityImpl ability : card.getAbilities().getActivatedManaAbilities(Zone.BATTLEFIELD)) {
+                for (ActivatedManaAbilityImpl ability : card.getAbilities(game).getActivatedManaAbilities(Zone.BATTLEFIELD)) {
                     for (Mana netMana : ability.getNetMana(game)) {
                         if (netMana.enough(mana)) {
                             this.playLand(card, game, false);
@@ -1281,7 +1283,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         //play a land that will get us closer to playing an unplayable
         for (Mana mana : unplayable.keySet()) {
             for (Card card : lands) {
-                for (ActivatedManaAbilityImpl ability : card.getAbilities().getActivatedManaAbilities(Zone.BATTLEFIELD)) {
+                for (ActivatedManaAbilityImpl ability : card.getAbilities(game).getActivatedManaAbilities(Zone.BATTLEFIELD)) {
                     for (Mana netMana : ability.getNetMana(game)) {
                         if (mana.contains(netMana)) {
                             this.playLand(card, game, false);
@@ -1304,7 +1306,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         playableAbilities.clear();
         Set<Card> nonLands = hand.getCards(new FilterNonlandCard(), game);
         ManaOptions available = getManaAvailable(game);
-        available.addMana(manaPool.getMana());
+//        available.addMana(manaPool.getMana());
 
         for (Card card : nonLands) {
             ManaOptions options = card.getManaCost().getOptions();
@@ -1321,7 +1323,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                         if (ability != null && ability.canActivate(playerId, game).canActivate()
                                 && !game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, ability.getSourceId(), ability.getSourceId(), playerId), ability, game, true)) {
                             if (card.getCardType().contains(CardType.INSTANT)
-                                    || card.hasAbility(FlashAbility.getInstance().getId(), game)) {
+                                    || card.hasAbility(FlashAbility.getInstance(), game)) {
                                 playableInstant.add(card);
                             } else {
                                 playableNonInstant.add(card);
@@ -1362,7 +1364,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             }
         }
         for (Card card : graveyard.getCards(game)) {
-            for (ActivatedAbility ability : card.getAbilities().getActivatedAbilities(Zone.GRAVEYARD)) {
+            for (ActivatedAbility ability : card.getAbilities(game).getActivatedAbilities(Zone.GRAVEYARD)) {
                 if (ability.canActivate(playerId, game).canActivate()) {
                     ManaOptions abilityOptions = ability.getManaCosts().getOptions();
                     if (abilityOptions.isEmpty()) {
@@ -1529,10 +1531,34 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 }
             }
         }
+
         // pay phyrexian life costs
         if (cost instanceof PhyrexianManaCost) {
             return cost.pay(null, game, null, playerId, false, null) || permittingObject != null;
         }
+
+        // pay special mana like convoke cost (tap for pay)
+        // GUI: user see "special" button while pay spell's cost
+        // TODO: AI can't prioritize special mana types to pay, e.g. it will use first available
+        SpecialAction specialAction = game.getState().getSpecialActions().getControlledBy(this.getId(), true)
+                .values().stream().findFirst().orElse(null);
+        ManaOptions specialMana = specialAction == null ? null : specialAction.getManaOptions(ability, game, unpaid);
+        if (specialMana != null) {
+            for (Mana netMana : specialMana) {
+                if (cost.testPay(netMana) || permittingObject != null) {
+                    if (netMana instanceof ConditionalMana && !((ConditionalMana) netMana).apply(ability, game, getId(), cost)) {
+                        continue;
+                    }
+                    specialAction.setUnpaidMana(unpaid);
+                    if (activateAbility(specialAction, game)) {
+                        return true;
+                    }
+                    // only one time try to pay
+                    break;
+                }
+            }
+        }
+
         return false;
     }
 
@@ -1893,27 +1919,6 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         log.debug("chooseReplacementEffect");
         //TODO: implement this
         return 0;
-    }
-
-    @Override
-    public SpellAbility chooseSpellAbilityForCast(SpellAbility ability, Game game, boolean noMana) {
-        switch (ability.getSpellAbilityType()) {
-            case SPLIT:
-            case SPLIT_FUSED:
-            case SPLIT_AFTERMATH:
-                MageObject object = game.getObject(ability.getSourceId());
-                if (object != null) {
-                    LinkedHashMap<UUID, ActivatedAbility> useableAbilities = getSpellAbilities(playerId, object, game.getState().getZone(object.getId()), game);
-                    if (useableAbilities != null && !useableAbilities.isEmpty()) {
-                        // game.fireGetChoiceEvent(playerId, name, object, new ArrayList<>(useableAbilities.values()));
-                        // TODO: Improve this
-                        return (SpellAbility) useableAbilities.values().iterator().next();
-                    }
-                }
-                return null;
-            default:
-                return ability;
-        }
     }
 
     @Override
@@ -2434,7 +2439,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
         simulations = new TreeNode<>(combat);
         addBlockSimulations(blockers, simulations, game);
-        combat.simulate();
+        combat.simulate(game);
 
         return getWorstSimulation(simulations);
 
@@ -2452,7 +2457,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                     TreeNode<CombatSimulator> child = new TreeNode<>(combat);
                     node.addChild(child);
                     addBlockSimulations(subList, child, game);
-                    combat.simulate();
+                    combat.simulate(game);
                 }
             }
         }
@@ -2550,7 +2555,6 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             badList.addAll(allList);
         }
     }
-
 
     protected List<Permanent> threats(UUID playerId, UUID sourceId, FilterPermanent filter, Game game, List<UUID> targets) {
         return threats(playerId, sourceId, filter, game, targets, true);
@@ -2676,7 +2680,6 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         int after = target.getTargets().size();
         return before != after;
     }
-
 
     /**
      * Sets a possible target player

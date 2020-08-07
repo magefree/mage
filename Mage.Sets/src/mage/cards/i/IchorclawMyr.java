@@ -3,7 +3,7 @@ package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BecomesBlockedTriggeredAbility;
+import mage.abilities.common.BecomesBlockedSourceTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
@@ -27,7 +27,7 @@ public final class IchorclawMyr extends CardImpl {
 
         this.addAbility(InfectAbility.getInstance());
         // Whenever Ichorclaw Myr becomes blocked, it gets +2/+2 until end of turn.
-        this.addAbility(new BecomesBlockedTriggeredAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), false));
+        this.addAbility(new BecomesBlockedSourceTriggeredAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), false));
     }
 
     public IchorclawMyr(final IchorclawMyr card) {

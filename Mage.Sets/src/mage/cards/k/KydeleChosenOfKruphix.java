@@ -31,8 +31,8 @@ public final class KydeleChosenOfKruphix extends CardImpl {
 
         // {T}: Add {C} for each card you've drawn this turn.
         DynamicManaAbility ability = new DynamicManaAbility(
-                Mana.ColorlessMana(1), CardsDrawnThisTurnDynamicValue.instance, new TapSourceCost()
-        );
+                Mana.ColorlessMana(1), CardsDrawnThisTurnDynamicValue.instance, 
+                new TapSourceCost(), null, false, CardsDrawnThisTurnDynamicValue.instance);
         this.addAbility(ability, new CardsDrawnThisTurnWatcher());
 
         // Partner

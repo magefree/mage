@@ -1,7 +1,5 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -13,21 +11,16 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.CostModificationType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class TorgaarFamineIncarnate extends CardImpl {
@@ -42,10 +35,10 @@ public final class TorgaarFamineIncarnate extends CardImpl {
 
         // As an additional cost to cast this spell, you may sacrifice any number of creatures.
         Cost cost = new SacrificeXTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT);
-        cost.setText("As an additional cost to cast this spell, you may sacrifice any number of creatures.");
+        cost.setText("As an additional cost to cast this spell, you may sacrifice any number of creatures");
         this.getSpellAbility().addCost(cost);
         // This spell costs {2} less to cast for each creature sacrificed this way.
-        this.addAbility(new SimpleStaticAbility(Zone.STACK, new TorgaarFamineIncarnateEffectCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new TorgaarFamineIncarnateEffectCostReductionEffect()));
 
         // When Torgaar, Famine Incarnate enters the battlefield, up to one target player's life total becomes half their starting life total, rounded down.
         Ability ability = new EntersBattlefieldTriggeredAbility(new TorgaarFamineIncarnateEffect(), false);
@@ -107,8 +100,16 @@ class TorgaarFamineIncarnateEffectCostReductionEffect extends CostModificationEf
         SpellAbility spellAbility = (SpellAbility) abilityToModify;
         for (Cost cost : spellAbility.getCosts()) {
             if (cost instanceof SacrificeXTargetCost) {
-                int reduction = ((SacrificeXTargetCost) cost).getAmount();
-                CardUtil.adjustCost(spellAbility, reduction * 2);
+                if (game.inCheckPlayableState()) {
+                    // allows to cast in getPlayable
+                    int reduction = ((SacrificeXTargetCost) cost).getMaxValue(spellAbility, game);
+                    CardUtil.adjustCost(spellAbility, reduction * 2);
+                } else {
+                    // real cast
+                    int reduction = ((SacrificeXTargetCost) cost).getAmount();
+                    CardUtil.adjustCost(spellAbility, reduction * 2);
+                }
+
                 break;
             }
         }

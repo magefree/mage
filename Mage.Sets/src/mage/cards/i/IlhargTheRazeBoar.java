@@ -95,7 +95,7 @@ class IlhargTheRazeBoarEffect extends OneShotEffect {
         }
         game.getCombat().addAttackingCreature(permanent.getId(), game);
         Effect effect = new ReturnToHandTargetEffect();
-        effect.setText("return {this} to its owner's hand");
+        effect.setText("return " + permanent.getName() + " to its owner's hand");
         effect.setTargetPointer(new FixedTarget(permanent, game));
         game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect), source);
         return true;

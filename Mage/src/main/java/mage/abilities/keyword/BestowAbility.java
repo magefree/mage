@@ -1,4 +1,3 @@
-
 package mage.abilities.keyword;
 
 import mage.MageObject;
@@ -12,6 +11,7 @@ import mage.cards.Card;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SpellAbilityCastMode;
 import mage.constants.SpellAbilityType;
 import mage.constants.SubType;
 import mage.constants.TimingRule;
@@ -92,6 +92,7 @@ public class BestowAbility extends SpellAbility {
     public BestowAbility(Card card, String manaString) {
         super(new ManaCostsImpl(manaString), card.getName() + " using bestow");
         this.spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
+        this.spellAbilityCastMode = SpellAbilityCastMode.BESTOW;
         this.timing = TimingRule.SORCERY;
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.addTarget(auraTarget);
@@ -134,6 +135,14 @@ public class BestowAbility extends SpellAbility {
                 permanent.addCardType(CardType.CREATURE);
             }
 
+        }
+    }
+
+    static public void becomeAura(Card card) {
+        if (card != null) {
+            card.getSubtype(null).add(SubType.AURA);
+            card.getCardType().remove(CardType.CREATURE);
+            card.getCardType().add(CardType.ENCHANTMENT);
         }
     }
 }

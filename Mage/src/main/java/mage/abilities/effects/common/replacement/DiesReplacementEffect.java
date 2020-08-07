@@ -52,7 +52,7 @@ public class DiesReplacementEffect extends ReplacementEffectImpl {
         Permanent permanent = ((ZoneChangeEvent) event).getTarget();
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && permanent != null) {
-            return controller.moveCardToExileWithInfo(permanent, null, "", source.getSourceId(), game, Zone.BATTLEFIELD, true);
+            return controller.moveCards(permanent, Zone.EXILED, source, game);
         }
         return false;
     }

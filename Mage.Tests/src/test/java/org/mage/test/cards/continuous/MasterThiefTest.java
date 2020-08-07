@@ -34,6 +34,7 @@ public class MasterThiefTest extends CardTestPlayerBase {
     @Test
     public void testMasterThief_LostControlOnSacrifice() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 10);
+        // When Master Thief enters the battlefield, gain control of target artifact for as long as you control Master Thief.
         addCard(Zone.HAND, playerA, "Master Thief", 3);
         addCard(Zone.BATTLEFIELD, playerB, "Accorder's Shield", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Bearer of the Heavens", 1);

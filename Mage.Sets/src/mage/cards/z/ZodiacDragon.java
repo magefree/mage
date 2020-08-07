@@ -3,7 +3,7 @@ package mage.cards.z;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -23,7 +23,7 @@ public final class ZodiacDragon extends CardImpl {
         this.toughness = new MageInt(8);
 
         // When Zodiac Dragon is put into your graveyard from the battlefield, you may return it to your hand.
-        this.addAbility(new DiesTriggeredAbility(new ReturnToHandSourceEffect(), true));
+        this.addAbility(new DiesSourceTriggeredAbility(new ReturnToHandSourceEffect(), true));
     }
 
     public ZodiacDragon(final ZodiacDragon card) {

@@ -1,5 +1,3 @@
-
-
 package mage.cards.h;
 
 import java.util.UUID;
@@ -16,8 +14,9 @@ import mage.target.TargetPlayer;
 public final class HuntersFeast extends CardImpl {
 
     public HuntersFeast(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}");
 
+        // Any number of target players each gain 6 life.
         this.getSpellAbility().addTarget(new TargetPlayer(0, Integer.MAX_VALUE, false));
         this.getSpellAbility().addEffect(new GainLifeTargetEffect(6));
     }

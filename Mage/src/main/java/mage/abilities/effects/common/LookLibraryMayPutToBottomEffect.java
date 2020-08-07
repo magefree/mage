@@ -39,7 +39,7 @@ public class LookLibraryMayPutToBottomEffect extends OneShotEffect {
         if (sourceObject == null || controller == null) {
             return false;
         }
-        if (!controller.getLibrary().isEmptyDraw()) {
+        if (controller.getLibrary().hasCards()) {
             Card card = controller.getLibrary().getFromTop(game);
             if (card == null) {
                 return false;

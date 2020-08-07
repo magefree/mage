@@ -1,12 +1,12 @@
-
-
 package mage.game.permanent.token;
+
+import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.MageInt;
+
+import java.util.Arrays;
 
 /**
- *
  * @author spjspj
  */
 public final class WalkerOfTheGroveToken extends TokenImpl {
@@ -18,6 +18,17 @@ public final class WalkerOfTheGroveToken extends TokenImpl {
         this.color.setGreen(true);
         power = new MageInt(4);
         toughness = new MageInt(4);
+
+        availableImageSetCodes = Arrays.asList("C13", "LRW", "MMA", "MOR");
+    }
+
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
+
+        if (getOriginalExpansionSetCode().equals("C13")) {
+            this.setTokenType(2);
+        }
     }
 
     public WalkerOfTheGroveToken(final WalkerOfTheGroveToken token) {

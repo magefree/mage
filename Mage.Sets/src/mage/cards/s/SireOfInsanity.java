@@ -1,43 +1,39 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.OnEventTriggeredAbility;
+import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.TargetController;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
-
-
 public final class SireOfInsanity extends CardImpl {
 
-    public SireOfInsanity (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{R}");
+    public SireOfInsanity(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{R}");
         this.subtype.add(SubType.DEMON);
-
 
         this.power = new MageInt(6);
         this.toughness = new MageInt(4);
 
         // At the beginning of each end step, each player discards their hand.
-        this.addAbility(new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of each end step", true, new SireOfInsanityEffect()));
-
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(
+                new SireOfInsanityEffect(), TargetController.ANY, false
+        ));
     }
 
-    public SireOfInsanity (final SireOfInsanity card) {
+    private SireOfInsanity(final SireOfInsanity card) {
         super(card);
     }
 
@@ -54,7 +50,7 @@ class SireOfInsanityEffect extends OneShotEffect {
         staticText = "each player discards their hand";
     }
 
-    SireOfInsanityEffect(final SireOfInsanityEffect effect) {
+    private SireOfInsanityEffect(final SireOfInsanityEffect effect) {
         super(effect);
     }
 
@@ -67,9 +63,7 @@ class SireOfInsanityEffect extends OneShotEffect {
         for (UUID playerId : game.getState().getPlayersInRange(sourcePlayer.getId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                for (Card c : player.getHand().getCards(game)) {
-                    player.discard(c, source, game);
-                }
+                player.discard(player.getHand(), source, game);
             }
         }
         return true;

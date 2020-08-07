@@ -1,4 +1,3 @@
-
 package mage.abilities.common.delayed;
 
 import mage.constants.Outcome;
@@ -19,7 +18,6 @@ public class PactDelayedTriggeredAbility extends DelayedTriggeredAbility {
         super(new PactEffect(cost));
     }
 
-
     public PactDelayedTriggeredAbility(PactDelayedTriggeredAbility ability) {
         super(ability);
     }
@@ -39,8 +37,6 @@ public class PactDelayedTriggeredAbility extends DelayedTriggeredAbility {
         return game.isActivePlayer(this.getControllerId());
     }
 
-    
-
     @Override
     public String getRule() {
         return "At the beginning of your next upkeep " + modes.getText();
@@ -49,8 +45,7 @@ public class PactDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
 class PactEffect extends OneShotEffect {
 
-    private ManaCosts cost;
-
+    private final ManaCosts cost;
 
     public PactEffect(ManaCosts cost) {
         super(Outcome.Neutral);
@@ -60,7 +55,7 @@ class PactEffect extends OneShotEffect {
 
     public PactEffect(final PactEffect effect) {
         super(effect);
-        this.cost = effect.cost;
+        this.cost = effect.cost.copy();
     }
 
     @Override
@@ -71,10 +66,10 @@ class PactEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null) { 
-            if (player.chooseUse(Outcome.Benefit, "Pay " + cost.getText()  + '?', source, game)) {
+        if (player != null) {
+            if (player.chooseUse(Outcome.Benefit, "Pay " + cost.getText() + '?', source, game)) {
                 cost.clearPaid();
-                if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)){
+                if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
                     return true;
                 }
             }
@@ -83,7 +78,4 @@ class PactEffect extends OneShotEffect {
         }
         return false;
     }
-
-    
-
 }

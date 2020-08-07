@@ -24,7 +24,7 @@ public enum GrabbagImageSource implements CardImageSource {
 
     @Override
     public String getSourceName() {
-        return "";
+        return "Grabbag";
     }
 
     @Override
@@ -75,7 +75,6 @@ public enum GrabbagImageSource implements CardImageSource {
             return;
         }
         singleLinks = new HashMap<>();
-
         singleLinks.put("SWS/AAT-1", "CqmDY8V.jpg");
         singleLinks.put("SWS/Acklay of the Arena", "ESVRm6F.jpg");
         singleLinks.put("SWS/Acquire Target", "FOskB4q.jpg");
@@ -468,7 +467,7 @@ public enum GrabbagImageSource implements CardImageSource {
         if (card.getSet().equals("MTG")) {
             return "http://static.starcitygames.com/sales/cardscans/";
         } else if (card.getSet().equals("SWS")) {
-            return "http://i.imgur.com/";
+            return "https://i.imgur.com/";
         } else {
             return "http://magiccards.info/scans/en/";
         }

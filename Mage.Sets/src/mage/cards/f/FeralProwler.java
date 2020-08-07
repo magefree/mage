@@ -2,7 +2,7 @@ package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -18,7 +18,7 @@ public final class FeralProwler extends CardImpl {
         power = new MageInt(1);
         toughness = new MageInt(3);
 
-        addAbility(new DiesTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
+        addAbility(new DiesSourceTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
     }
 
     public FeralProwler(final FeralProwler feralProwler) {

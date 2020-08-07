@@ -1,25 +1,22 @@
 package mage.game.permanent.token;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectImpl;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.CreateTokenEvent;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
+import mage.game.events.CreatedTokenEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 import mage.util.RandomUtil;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.UUID;
 
 public abstract class TokenImpl extends MageObjectImpl implements Token {
 
@@ -50,6 +47,9 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         int getCode() {
             return this.code;
         }
+    }
+
+    public TokenImpl() {
     }
 
     public TokenImpl(String name, String description) {
@@ -162,6 +162,9 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         if (controller == null) {
             return false;
         }
+        if (amount == 0) {
+            return false;
+        }
         lastAddedTokenIds.clear();
 
         CreateTokenEvent event = new CreateTokenEvent(sourceId, controllerId, amount, this);
@@ -198,8 +201,9 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
             }
         }
         game.setScopeRelevant(false);
+        int createOrder = game.getState().getNextPermanentOrderNumber();
         for (Permanent permanent : permanentsEntered) {
-            game.addPermanent(permanent);
+            game.addPermanent(permanent, createOrder);
             permanent.setZone(Zone.BATTLEFIELD, game);
             game.getPermanentsEntering().remove(permanent.getId());
 
@@ -208,6 +212,9 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
                 ((TokenImpl) token).lastAddedTokenId = permanent.getId();
             }
             game.addSimultaneousEvent(new ZoneChangeEvent(permanent, permanent.getControllerId(), Zone.OUTSIDE, Zone.BATTLEFIELD));
+            if (permanent instanceof PermanentToken) {
+                game.addSimultaneousEvent(new CreatedTokenEvent(event.getSourceId(), (PermanentToken) permanent));
+            }
             if (attacking && game.getCombat() != null && game.getActivePlayerId().equals(permanent.getControllerId())) {
                 game.getCombat().addAttackingCreature(permanent.getId(), game, attackedPlayer);
             }
@@ -234,6 +241,10 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         return tokenType;
     }
 
+    /**
+     * Set token index to search in card-pictures-tok.txt (if set have multiple
+     * tokens with same name) Default is 1
+     */
     @Override
     public void setTokenType(int tokenType) {
         this.tokenType = tokenType;

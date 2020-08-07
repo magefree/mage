@@ -25,7 +25,7 @@ public final class BlazingHellhound extends CardImpl {
 
     public BlazingHellhound(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{R}");
-        this.subtype.add(SubType.ELEMENTAL, SubType.HOUND);
+        this.subtype.add(SubType.ELEMENTAL, SubType.DOG);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 

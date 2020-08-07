@@ -494,7 +494,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
     }
 
     public final void init(PlayerView player, BigCard bigCard, UUID gameId, int priorityTime) {
-        this.playerPanel.init(gameId, player.getPlayerId(), bigCard, priorityTime);
+        this.playerPanel.init(gameId, player.getPlayerId(), player.getControlled(), bigCard, priorityTime);
         this.battlefieldPanel.init(gameId, bigCard);
         this.gameId = gameId;
         this.playerId = player.getPlayerId();

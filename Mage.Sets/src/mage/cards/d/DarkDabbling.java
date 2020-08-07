@@ -66,7 +66,7 @@ class DarkDabblingEffect extends OneShotEffect {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game)) {
                 if (!permanent.getId().equals(getTargetPointer().getFirst(game, source))) {
                     RegenerateTargetEffect regenEffect = new RegenerateTargetEffect();
-                    regenEffect.setTargetPointer(new FixedTarget(permanent.getId()));
+                    regenEffect.setTargetPointer(new FixedTarget(permanent, game));
                     game.addEffect(regenEffect, source);
                 }
             }

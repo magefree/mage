@@ -66,7 +66,6 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
     }
 
     public void removeEndOfCombatEffects() {
-
         for (Iterator<T> i = this.iterator(); i.hasNext(); ) {
             T entry = i.next();
             if (entry.getDuration() == Duration.EndOfCombat) {
@@ -86,15 +85,6 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
         }
     }
 
-    public void incYourTurnNumPlayed(Game game) {
-        for (Iterator<T> i = this.iterator(); i.hasNext(); ) {
-            T entry = i.next();
-            if (game.isActivePlayer(entry.getStartingController())) {
-                entry.incYourTurnNumPlayed();
-            }
-        }
-    }
-
     private boolean isInactive(T effect, Game game) {
         // ends all inactive effects -- calls on player leave or apply new effect
         if (game.getState().isGameOver()) {
@@ -109,9 +99,8 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
         those objects are exiled. This is not a state-based action. It happens as soon as the player leaves the game.
         If the player who left the game had priority at the time they left, priority passes to the next player in turn
         order who’s still in the game.
-        */
+         */
         // objects removes doing in player.leave() call... effects removes is here
-
         Set<Ability> set = effectAbilityMap.get(effect.getId());
         if (set == null) {
             logger.debug("No abilities for effect found: " + effect.toString());
@@ -218,20 +207,13 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
         return effectAbilityMap.getOrDefault(effectId, new HashSet<>());
     }
 
-    public void removeEffects(UUID effectIdToRemove, Set<Ability> abilitiesToRemove) {
-        Set<Ability> abilities = effectAbilityMap.get(effectIdToRemove);
-        if (abilitiesToRemove != null && abilities != null) {
-            abilities.removeAll(abilitiesToRemove);
-        }
-        if (abilities == null || abilities.isEmpty()) {
-            for (Iterator<T> iterator = this.iterator(); iterator.hasNext(); ) {
-                ContinuousEffect effect = iterator.next();
-                if (effect.getId().equals(effectIdToRemove)) {
-                    iterator.remove();
-                    break;
-                }
+    public void removeTemporaryEffects() {
+        for (Iterator<T> i = this.iterator(); i.hasNext(); ) {
+            T entry = i.next();
+            if (entry.isTemporary()) {
+                i.remove();
+                effectAbilityMap.remove(entry.getId());
             }
-            effectAbilityMap.remove(effectIdToRemove);
         }
     }
 
@@ -239,5 +221,25 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
     public void clear() {
         super.clear();
         effectAbilityMap.clear();
+    }
+
+    @Override
+    public boolean contains(Object object) {
+        if (object == null || !(object instanceof ContinuousEffect)) {
+            return false;
+        }
+
+        // search by id
+        ContinuousEffect need = (ContinuousEffect) object;
+        for (Iterator<T> iterator = this.iterator(); iterator.hasNext(); ) {
+            T test = iterator.next();
+            if (need.equals(test)) {
+                return true;
+            }
+            if (need.getId().equals(test.getId())) {
+                return true;
+            }
+        }
+        return false;
     }
 }

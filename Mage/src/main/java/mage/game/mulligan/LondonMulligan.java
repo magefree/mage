@@ -1,13 +1,12 @@
 package mage.game.mulligan;
 
-import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetCard;
+import mage.target.Target;
+import mage.target.common.TargetCardInHand;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,8 +14,8 @@ import java.util.UUID;
 
 public class LondonMulligan extends Mulligan {
 
-    protected Map<UUID, Integer> startingHandSizes = new HashMap<>();
-    protected Map<UUID, Integer> openingHandSizes = new HashMap<>();
+    private final Map<UUID, Integer> startingHandSizes = new HashMap<>();
+    private final Map<UUID, Integer> openingHandSizes = new HashMap<>();
 
     public LondonMulligan(int freeMulligans) {
         super(freeMulligans);
@@ -93,27 +92,20 @@ public class LondonMulligan extends Mulligan {
         openingHandSizes.put(playerId, openingHandSizes.get(playerId) - deduction);
         int newHandSize = openingHandSizes.get(player.getId());
         if (deduction == 0) {
-            game.fireInformEvent(new StringBuilder(player.getLogName())
-                    .append(" mulligans for free.")
-                    .toString());
+            game.fireInformEvent(player.getLogName() +
+                    " mulligans for free.");
         } else {
-            game.fireInformEvent(new StringBuilder(player.getLogName())
-                    .append(" mulligans")
-                    .append(" down to ")
-                    .append(newHandSize)
-                    .append(newHandSize == 1 ? " card" : " cards").toString());
+            game.fireInformEvent(player.getLogName() +
+                    " mulligans down to " +
+                    newHandSize +
+                    (newHandSize == 1 ? " card" : " cards"));
         }
-        player.drawCards(numCards, game);
+        player.drawCards(numCards, null, game);
 
-        if (player.getHand().size() > newHandSize) {
-            int cardsToDiscard = player.getHand().size() - newHandSize;
-            Cards cards = new CardsImpl();
-            cards.addAll(player.getHand());
-            TargetCard target = new TargetCard(cardsToDiscard, cardsToDiscard, Zone.HAND,
-                    new FilterCard("card" + (cardsToDiscard > 1 ? "s" : "") + " to PUT on the BOTTOM of your library (Discard for Mulligan)"));
-            player.chooseTarget(Outcome.Neutral, cards, target, null, game);
+        while (player.canRespond() && player.getHand().size() > newHandSize) {
+            Target target = new TargetCardInHand(new FilterCard("card (" + (player.getHand().size() - newHandSize) + " more) to put on the bottom of your library"));
+            player.chooseTarget(Outcome.Discard, target, null, game);
             player.putCardsOnBottomOfLibrary(new CardsImpl(target.getTargets()), game, null, true);
-            cards.removeAll(target.getTargets());
         }
     }
 
@@ -128,5 +120,4 @@ public class LondonMulligan extends Mulligan {
         mulligan.startingHandSizes.putAll(startingHandSizes);
         return mulligan;
     }
-
 }

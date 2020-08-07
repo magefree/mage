@@ -69,6 +69,7 @@
             </includes>
             <outputDirectory>/</outputDirectory>
         </fileSet>
+        <!-- database must be generated on first run/update
         <fileSet>
             <filtered>false</filtered>
             <directory>db/</directory>
@@ -78,6 +79,7 @@
             <outputDirectory>db/</outputDirectory>
             <fileMode>0644</fileMode>
         </fileSet>
+        -->
         <fileSet>
             <filtered>false</filtered>
             <directory>sounds/</directory>

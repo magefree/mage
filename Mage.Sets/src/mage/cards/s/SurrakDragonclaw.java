@@ -3,7 +3,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.CantBeCounteredAbility;
+import mage.abilities.common.CantBeCounteredSourceAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CantBeCounteredControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
@@ -44,7 +44,7 @@ public final class SurrakDragonclaw extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
 
         // Surrak Dragonclaw can't be countered.
-        this.addAbility(new CantBeCounteredAbility());
+        this.addAbility(new CantBeCounteredSourceAbility());
 
         // Creature spells you control can't be countered.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeCounteredControlledEffect(filterTarget, null, Duration.WhileOnBattlefield)));

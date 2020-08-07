@@ -1,5 +1,14 @@
 package mage.client.dialog;
 
+import java.awt.*;
+import java.beans.PropertyVetoException;
+import java.util.EnumSet;
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.UUID;
+import javax.swing.*;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 import mage.client.cards.BigCard;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.ImageHelper;
@@ -13,15 +22,6 @@ import mage.view.SimpleCardsView;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
 
-import javax.swing.*;
-import javax.swing.event.InternalFrameAdapter;
-import javax.swing.event.InternalFrameEvent;
-import java.awt.*;
-import java.beans.PropertyVetoException;
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.UUID;
-
 /**
  * @author BetaSteward_at_googlemail.com, JayDi85
  */
@@ -30,7 +30,7 @@ public class CardInfoWindowDialog extends MageDialog {
     private static final Logger LOGGER = Logger.getLogger(CardInfoWindowDialog.class);
 
     public enum ShowType {
-        REVEAL, REVEAL_TOP_LIBRARY, LOOKED_AT, EXILE, GRAVEYARD, OTHER
+        REVEAL, REVEAL_TOP_LIBRARY, LOOKED_AT, EXILE, GRAVEYARD, COMPANION, OTHER
     }
 
     private final ShowType showType;
@@ -72,8 +72,12 @@ public class CardInfoWindowDialog extends MageDialog {
             case EXILE:
                 this.setFrameIcon(new ImageIcon(ImageManagerImpl.instance.getExileImage()));
                 break;
+            case COMPANION:
+                this.setFrameIcon(new ImageIcon(ImageManagerImpl.instance.getTokenIconImage()));
+                this.setClosable(false);
+                break;
             default:
-                // no icon yet
+            // no icon yet
         }
         this.setTitelBarToolTip(name);
         setGUISize();
@@ -170,13 +174,17 @@ public class CardInfoWindowDialog extends MageDialog {
         Set<String> cardTypesPresent = new LinkedHashSet<String>() {
         };
         for (CardView card : cardsView.values()) {
-            Set<CardType> cardTypes = card.getCardTypes();
+            Set<CardType> cardTypes = EnumSet.noneOf(CardType.class);
+            cardTypes.addAll(card.getCardTypes());
             for (CardType cardType : cardTypes) {
                 cardTypesPresent.add(cardType.toString());
             }
         }
-        if (cardTypesPresent.isEmpty()) return 0;
-        else return cardTypesPresent.size();
+        if (cardTypesPresent.isEmpty()) {
+            return 0;
+        } else {
+            return cardTypesPresent.size();
+        }
     }
 
     /**

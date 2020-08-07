@@ -39,10 +39,10 @@ public final class VraskaRegalGorgon extends CardImpl {
         // +2: Put a +1/+1 counter on up to one target creature. That creature gains menace until end of turn.
         Ability ability = new LoyaltyAbility(new AddCountersTargetEffect(
                 CounterType.P1P1.createInstance()
-        ).setText("Put a +1/+1 counter on up to one target creature."), 2);
+        ).setText("Put a +1/+1 counter on up to one target creature"), 2);
         ability.addEffect(new GainAbilityTargetEffect(
                 new MenaceAbility(), Duration.EndOfTurn
-        ).setText("That creature gains menace until end of turn."));
+        ).setText("That creature gains menace until end of turn"));
         ability.addTarget(new TargetCreaturePermanent(0, 1));
         this.addAbility(ability);
 

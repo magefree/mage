@@ -23,10 +23,10 @@ import java.util.UUID;
  */
 public class RemoveCounterCost extends CostImpl {
 
-    private TargetPermanent target;
+    protected TargetPermanent target;
     private String name;
     private CounterType counterTypeToRemove;
-    private int countersToRemove;
+    protected int countersToRemove;
 
     public RemoveCounterCost(TargetPermanent target) {
         this(target, null);

@@ -1,8 +1,5 @@
-
 package mage.game.command.planes;
 
-import java.util.ArrayList;
-import java.util.List;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -14,8 +11,10 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.RollPlanarDieEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.effects.common.cost.PlanarDieRollCostIncreasingEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.Duration;
+import mage.constants.Planes;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -26,8 +25,10 @@ import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.PlanarRollWatcher;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * @author spjspj
  */
 public class TheZephyrMazePlane extends Plane {
@@ -44,7 +45,7 @@ public class TheZephyrMazePlane extends Plane {
     private static final String walkingRule = "Creatures without flying get -2/-0";
 
     public TheZephyrMazePlane() {
-        this.setName("Plane - The Zephyr Maze");
+        this.setPlaneType(Planes.PLANE_THE_ZEPHYR_MAZE_FOG);
         this.setExpansionSetCodeForImage("PCA");
 
         // Creatures with flying get +2/+0
@@ -61,7 +62,7 @@ public class TheZephyrMazePlane extends Plane {
         this.getAbilities().add(ability2);
 
         // Active player can roll the planar die: Whenever you roll {CHAOS}, target creature gains flying until end of turn
-        Effect chaosEffect = new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);        
+        Effect chaosEffect = new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
         Target chaosTarget = new TargetCreaturePermanent(0, 1);
 
         List<Effect> chaosEffects = new ArrayList<Effect>();

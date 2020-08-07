@@ -78,7 +78,7 @@ class InfernalDarknessCost extends CostImpl {
 
         manaCost.clearPaid();
         if (manaCost.pay(ability, game, player.getId(), player.getId(), false)
-                && player.canPayLifeCost()
+                && player.canPayLifeCost(ability)
                 && player.getLife() >= 1
                 && lifeCost.pay(ability, game, player.getId(), player.getId(), false)) {
             paid = true;
@@ -91,7 +91,7 @@ class InfernalDarknessCost extends CostImpl {
     public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
         Player player = game.getPlayer(controllerId);
         if (player != null
-                && player.canPayLifeCost()
+                && player.canPayLifeCost(ability)
                 && player.getLife() >= 1) {
             return true;
         }

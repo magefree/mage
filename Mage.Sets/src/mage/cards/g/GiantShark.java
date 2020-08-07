@@ -1,10 +1,8 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BlocksOrBecomesBlockedTriggeredAbility;
+import mage.abilities.common.BlocksOrBecomesBlockedSourceTriggeredAbility;
 import mage.abilities.common.ControlsPermanentsControllerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
@@ -14,19 +12,15 @@ import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.permanent.WasDealtDamageThisTurnPredicate;
 
+import java.util.UUID;
+
 /**
- *
  * @author KholdFuzion & L_J
- *
  */
 public final class GiantShark extends CardImpl {
 
@@ -39,8 +33,8 @@ public final class GiantShark extends CardImpl {
     }
 
     public GiantShark(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}");
-        this.subtype.add(SubType.FISH);
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}");
+        this.subtype.add(SubType.SHARK);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
@@ -49,7 +43,7 @@ public final class GiantShark extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(filter)));
 
         // Whenever Giant Shark blocks or becomes blocked by a creature that has been dealt damage this turn, Giant Shark gets +2/+0 and gains trample until end of turn.
-        Ability ability = new BlocksOrBecomesBlockedTriggeredAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn).setText("{this} gets +2/+0"), filter2, false);
+        Ability ability = new BlocksOrBecomesBlockedSourceTriggeredAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn).setText("{this} gets +2/+0"), filter2, false);
         ability.addEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn).setText("and gains trample until end of turn"));
         this.addAbility(ability);
 

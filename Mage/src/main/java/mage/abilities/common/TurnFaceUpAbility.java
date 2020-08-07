@@ -40,6 +40,7 @@ public class TurnFaceUpAbility extends SpecialAction {
         this.usesStack = false;
         this.abilityType = AbilityType.SPECIAL_ACTION;
         this.setRuleVisible(false); // will be made visible only to controller in CardView
+        this.setWorksFaceDown(true);
     }
 
     public TurnFaceUpAbility(final TurnFaceUpAbility ability) {

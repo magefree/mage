@@ -77,7 +77,7 @@ class CoercivePortalEffect extends OneShotEffect {
                 new SacrificeSourceEffect().apply(game, source);
                 new DestroyAllEffect(new FilterNonlandPermanent()).apply(game, source);
             } else {
-                controller.drawCards(1, game);
+                controller.drawCards(1, source.getSourceId(), game);
             }
             return true;
         }

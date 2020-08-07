@@ -1,7 +1,7 @@
 package mage.game.permanent.token;
 
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.constants.CardType;
 import mage.constants.SubType;
@@ -19,7 +19,7 @@ public final class WolfsQuarryToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
 
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new FoodToken())));
+        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new FoodToken())));
     }
 
     private WolfsQuarryToken(final WolfsQuarryToken token) {

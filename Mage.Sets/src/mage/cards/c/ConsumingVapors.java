@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -23,11 +22,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public final class ConsumingVapors extends CardImpl {
 
-
-
     public ConsumingVapors(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}");
 
         // Target player sacrifices a creature. You gain life equal to that creature's toughness.
         this.getSpellAbility().addEffect(new ConsumingVaporsEffect());
@@ -49,12 +45,12 @@ public final class ConsumingVapors extends CardImpl {
 
 class ConsumingVaporsEffect extends OneShotEffect {
 
-    ConsumingVaporsEffect ( ) {
+    ConsumingVaporsEffect() {
         super(Outcome.Sacrifice);
         staticText = "Target player sacrifices a creature. You gain life equal to that creature's toughness";
     }
 
-    ConsumingVaporsEffect ( ConsumingVaporsEffect effect ) {
+    ConsumingVaporsEffect(ConsumingVaporsEffect effect) {
         super(effect);
     }
 
@@ -68,15 +64,13 @@ class ConsumingVaporsEffect extends OneShotEffect {
         filter.add(TargetController.YOU.getControllerPredicate());
         TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);
 
-        //A spell or ability could have removed the only legal target this player
-        //had, if thats the case this ability should fizzle.
         if (player != null && target.canChoose(player.getId(), game)) {
             player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
 
             Permanent permanent = game.getPermanent(target.getFirstTarget());
-            if ( permanent != null ) {
+            if (permanent != null) {
+                permanent.sacrifice(source.getSourceId(), game);
                 controller.gainLife(permanent.getToughness().getValue(), game, source);
-                return permanent.sacrifice(source.getSourceId(), game);
             }
             return true;
         }

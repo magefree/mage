@@ -1,11 +1,12 @@
 package mage.abilities.effects;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.constants.Outcome;
 import mage.target.targetpointer.TargetPointer;
-
-import java.util.ArrayList;
+import mage.util.CardUtil;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -13,9 +14,7 @@ import java.util.ArrayList;
 public class Effects extends ArrayList<Effect> {
 
     public Effects(Effect... effects) {
-        for (Effect effect : effects) {
-            this.add(effect);
-        }
+        this.addAll(Arrays.asList(effects));
     }
 
     public Effects(final Effects effects) {
@@ -31,7 +30,7 @@ public class Effects extends ArrayList<Effect> {
     public String getTextStartingUpperCase(Mode mode) {
         String text = getText(mode);
         if (text.length() > 3) {
-            return Character.toUpperCase(text.charAt(0)) + text.substring(1);
+            return CardUtil.getTextWithFirstCharUpperCase(text);
         }
         return text;
     }
@@ -52,17 +51,27 @@ public class Effects extends ArrayList<Effect> {
 
             // concat effects (default: each effect with a new sentence)
             String concatPrefix = effect.getConcatPrefix();
+
             if (effectNum > 1 && !concatPrefix.isEmpty() && !concatPrefix.equals(".")) {
                 nextRule = concatPrefix + " " + nextRule;
             }
 
             if (nextRule != null) {
+                //check if nextRule is a new sentence or not.
                 if (nextRule.startsWith("and ") || nextRule.startsWith("with ") || nextRule.startsWith("then ")) {
                     endString = " ";
                 } else if (nextRule.startsWith(",") || nextRule.startsWith(" ")) {
                     endString = "";
+                    // nextRule determined to be a new sentence, now check ending of lastRule
                 } else if (lastRule != null && lastRule.length() > 3) {
-                    if (!lastRule.endsWith(".") && !lastRule.endsWith("<br>")) {
+                    //check if lastRule already has appropriate punctuation, if so, add a space.
+                    if (lastRule.endsWith(".\"")
+                            || lastRule.endsWith(".)")
+                            || lastRule.endsWith(".)</i>")
+                            || lastRule.endsWith(".")) {
+                        endString = " ";
+                        // if lastRule does not have appropriate punctuation, add the default ". "
+                    } else if (!lastRule.endsWith(".") && !lastRule.endsWith("<br>")) {
                         endString = ". ";
                     }
                     if (nextRule.length() > 3) {
@@ -82,9 +91,12 @@ public class Effects extends ArrayList<Effect> {
 
                 sbText.append(currentRule);
             }
+
             lastRule = nextRule;
+
         }
 
+        //add punctuation to very last rule.
         if (lastRule != null && lastRule.length() > 3
                 && !lastRule.endsWith(".")
                 && !lastRule.endsWith("\"")
@@ -95,6 +107,7 @@ public class Effects extends ArrayList<Effect> {
         }
 
         return sbText.toString();
+
     }
 
     public boolean hasOutcome(Ability source, Outcome outcome) {
@@ -167,4 +180,7 @@ public class Effects extends ArrayList<Effect> {
         }
     }
 
+    public void setValue(String key, Object value) {
+        this.stream().forEach(effect -> effect.setValue(key, value));
+    }
 }

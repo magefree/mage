@@ -41,6 +41,9 @@ public class TapForManaAllTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
+        if (game.inCheckPlayableState()) { // Ignored - see GameEvent.TAPPED_FOR_MANA
+            return false;
+        }
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
         if (permanent != null && filter.match(permanent, getSourceId(), getControllerId(), game)) {
             ManaEvent mEvent = (ManaEvent) event;
@@ -49,7 +52,7 @@ public class TapForManaAllTriggeredAbility extends TriggeredAbilityImpl {
             }
             switch(setTargetPointer) {
                 case PERMANENT:
-                    getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
+                    getEffects().get(0).setTargetPointer(new FixedTarget(permanent, game));
                     break;
                 case PLAYER:
                     getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getControllerId()));

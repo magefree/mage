@@ -12,9 +12,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -28,13 +27,10 @@ import java.util.UUID;
 public final class RavagerWurm extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterCreaturePermanent("creature you don't control");
-    private static final FilterPermanent filter2
             = new FilterPermanent("land with an activated ability that isn't a mana ability");
 
     static {
-        filter.add(TargetController.NOT_YOU.getControllerPredicate());
-        filter2.add(RavagerWurmPredicate.instance);
+        filter.add(RavagerWurmPredicate.instance);
     }
 
     public RavagerWurm(UUID ownerId, CardSetInfo setInfo) {
@@ -52,13 +48,13 @@ public final class RavagerWurm extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(
                 new FightTargetSourceEffect().setText("{this} fights target creature you don't control"), false
         );
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
         ability.getModes().setMinModes(0);
         ability.getModes().setMaxModes(1);
 
         // • Destroy target land with an activated ability that isn't a mana ability.
         Mode mode = new Mode(new DestroyTargetEffect());
-        mode.addTarget(new TargetPermanent(filter2));
+        mode.addTarget(new TargetPermanent(filter));
         ability.addMode(mode);
         this.addAbility(ability);
     }
@@ -78,14 +74,11 @@ enum RavagerWurmPredicate implements Predicate<Permanent> {
 
     @Override
     public boolean apply(Permanent input, Game game) {
-        if (input == null || !input.isLand()) {
-            return false;
-        }
-        for (Ability ability : input.getAbilities()) {
-            if (ability.getAbilityType() == AbilityType.ACTIVATED) {
-                return true;
-            }
-        }
-        return false;
+        return input != null && input.isLand()
+                && input
+                .getAbilities(game)
+                .stream()
+                .map(Ability::getAbilityType)
+                .anyMatch(AbilityType.ACTIVATED::equals);
     }
 }

@@ -7,6 +7,8 @@ import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.dynamicvalue.common.HighestCMCOfPermanentValue;
 import mage.abilities.dynamicvalue.common.SacrificeCostConvertedMana;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
@@ -38,8 +40,9 @@ public final class SoldeviAdnate extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {T}, Sacrifice a black or artifact creature: Add an amount of {B} equal to the sacrificed creature's converted mana cost.
-        Ability ability = new DynamicManaAbility(Mana.BlackMana(1), new SacrificeCostConvertedMana("creature"),
-                "add an amount of {B} equal to the sacrificed creature's converted mana cost");
+        Ability ability = new DynamicManaAbility(Mana.BlackMana(1),  new SacrificeCostConvertedMana("creature"), new TapSourceCost(),
+                "add an amount of {B} equal to the sacrificed creature's converted mana cost" , false, 
+                new HighestCMCOfPermanentValue(filter, true));
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         this.addAbility(ability);
     }

@@ -1,4 +1,3 @@
-
 package mage.abilities.costs.common;
 
 import mage.abilities.Ability;
@@ -10,7 +9,6 @@ import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 
 /**
- *
  * @author LevelX2
  */
 public class DiscardXTargetCost extends VariableCostImpl {

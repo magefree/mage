@@ -119,6 +119,7 @@ public enum SubType {
     DEVIL("Devil", SubTypeSet.CreatureType),
     DINOSAUR("Dinosaur", SubTypeSet.CreatureType), // With Ixalan now being spoiled, need this to be selectable
     DJINN("Djinn", SubTypeSet.CreatureType),
+    DOG("Dog", SubTypeSet.CreatureType),
     DRAGON("Dragon", SubTypeSet.CreatureType),
     DRAKE("Drake", SubTypeSet.CreatureType),
     DREADNOUGHT("Dreadnought", SubTypeSet.CreatureType),
@@ -175,7 +176,6 @@ public enum SubType {
     HOMUNCULUS("Homunculus", SubTypeSet.CreatureType),
     HORROR("Horror", SubTypeSet.CreatureType),
     HORSE("Horse", SubTypeSet.CreatureType),
-    HOUND("Hound", SubTypeSet.CreatureType),
     HUMAN("Human", SubTypeSet.CreatureType),
     HUNTER("Hunter", SubTypeSet.CreatureType),
     HUTT("Hutt", SubTypeSet.CreatureType, true), // Star Wars
@@ -258,6 +258,7 @@ public enum SubType {
     ORC("Orc", SubTypeSet.CreatureType),
     ORGG("Orgg", SubTypeSet.CreatureType),
     ORTOLAN("Ortolan", SubTypeSet.CreatureType, true),
+    OTTER("Otter", SubTypeSet.CreatureType),
     OUPHE("Ouphe", SubTypeSet.CreatureType),
     OX("Ox", SubTypeSet.CreatureType),
     OYSTER("Oyster", SubTypeSet.CreatureType),
@@ -308,6 +309,7 @@ public enum SubType {
     SHADE("Shade", SubTypeSet.CreatureType),
     SHAMAN("Shaman", SubTypeSet.CreatureType),
     SHAPESHIFTER("Shapeshifter", SubTypeSet.CreatureType),
+    SHARK("Shark", SubTypeSet.CreatureType),
     SHEEP("Sheep", SubTypeSet.CreatureType),
     SIREN("Siren", SubTypeSet.CreatureType),
     SITH("Sith", SubTypeSet.CreatureType),
@@ -389,6 +391,7 @@ public enum SubType {
     ARLINN("Arlinn", SubTypeSet.PlaneswalkerType),
     ASHIOK("Ashiok", SubTypeSet.PlaneswalkerType),
     AURRA("Aurra", SubTypeSet.PlaneswalkerType, true), // Star Wars
+    BASRI("Basri", SubTypeSet.PlaneswalkerType),
     BOLAS("Bolas", SubTypeSet.PlaneswalkerType),
     CALIX("Calix", SubTypeSet.PlaneswalkerType),
     CHANDRA("Chandra", SubTypeSet.PlaneswalkerType),
@@ -411,6 +414,7 @@ public enum SubType {
     KIORA("Kiora", SubTypeSet.PlaneswalkerType),
     KOTH("Koth", SubTypeSet.PlaneswalkerType),
     LILIANA("Liliana", SubTypeSet.PlaneswalkerType),
+    LUKKA("Lukka", SubTypeSet.PlaneswalkerType),
     NAHIRI("Nahiri", SubTypeSet.PlaneswalkerType),
     NARSET("Narset", SubTypeSet.PlaneswalkerType),
     NISSA("Nissa", SubTypeSet.PlaneswalkerType),
@@ -490,6 +494,19 @@ public enum SubType {
 
     public SubTypePredicate getPredicate() {
         return predicate;
+    }
+
+
+    public String getIndefiniteArticle() {
+        if (isVowel(description.charAt(0))) {
+            return "an";
+        } else {
+            return "a";
+        }
+    }
+
+    private boolean isVowel(char c) {
+        return "AEIOUaeiou".indexOf(c) != -1;
     }
 
     public static SubType fromString(String value) {

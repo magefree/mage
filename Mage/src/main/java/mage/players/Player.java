@@ -1,8 +1,11 @@
 package mage.players;
 
+import java.io.Serializable;
+import java.util.*;
 import mage.MageItem;
 import mage.MageObject;
 import mage.MageObjectReference;
+import mage.Mana;
 import mage.abilities.*;
 import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.Cost;
@@ -37,9 +40,6 @@ import mage.target.TargetAmount;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
 import mage.util.Copyable;
-
-import java.io.Serializable;
-import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -103,7 +103,13 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void setCanPayLifeCost(boolean canPayLifeCost);
 
-    boolean canPayLifeCost();
+    /**
+     * Can the player pay life for spells or activated abilities
+     * 
+     * @param Ability
+     * @return 
+     */
+    boolean canPayLifeCost(Ability Ability);
 
     void setCanPaySacrificeCostFilter(FilterPermanent filter);
 
@@ -151,8 +157,6 @@ public interface Player extends MageItem, Copyable<Player> {
     void setMaxAttackedBy(int maxAttackedBy);
 
     boolean isPassed();
-
-    boolean isEmptyDraw();
 
     void pass(Game game);
 
@@ -311,13 +315,11 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void shuffleLibrary(Ability source, Game game);
 
-    int drawCards(int num, Game game);
+    int drawCards(int num, UUID sourceId, Game game);
 
-    int drawCards(int num, Game game, List<UUID> appliedEffects);
+    int drawCards(int num, UUID sourceId, Game game, List<UUID> appliedEffects);
 
     boolean cast(SpellAbility ability, Game game, boolean noMana, MageObjectReference reference);
-
-    SpellAbility chooseSpellAbilityForCast(SpellAbility ability, Game game, boolean noMana);
 
     SpellAbility chooseAbilityForCast(Card card, Game game, boolean noMana);
 
@@ -369,8 +371,9 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param game
      * @param noMana       if it's a spell i can be cast without paying mana
      * @param ignoreTiming if it's cast during the resolution of another spell
-     *                     no sorcery or play land timing restriction are checked. For a land it has
-     *                     to be the turn of the player playing that card.
+     *                     no sorcery or play land timing restriction are
+     *                     checked. For a land it has to be the turn of the
+     *                     player playing that card.
      * @param reference    mage object that allows to play the card
      * @return
      */
@@ -380,8 +383,9 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param card         the land card to play
      * @param game
      * @param ignoreTiming false - it won't be checked if the stack is empty and
-     *                     you are able to play a Sorcery. It's still checked, if you are able to
-     *                     play a land concerning the number of lands you already played.
+     *                     you are able to play a Sorcery. It's still checked,
+     *                     if you are able to play a land concerning the number
+     *                     of lands you already played.
      * @return
      */
     boolean playLand(Card card, Game game, boolean ignoreTiming);
@@ -411,6 +415,8 @@ public interface Player extends MageItem, Copyable<Player> {
     Card discardOne(boolean random, Ability source, Game game);
 
     Cards discard(int amount, boolean random, Ability source, Game game);
+
+    Cards discard(Cards cards, Ability source, Game game);
 
     void discardToMax(Game game);
 
@@ -445,13 +451,20 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void resetStoredBookmark(Game game);
 
+    default void restoreState(int bookmark, String text, Game game) {
+        game.restoreState(bookmark, text);
+        if (getStoredBookmark() >= bookmark) {
+            resetStoredBookmark(game);
+        }
+    }
+
     void revealCards(Ability source, Cards cards, Game game);
 
-    void revealCards(String name, Cards cards, Game game);
+    void revealCards(String titelSuffix, Cards cards, Game game);
 
-    void revealCards(Ability source, String name, Cards cards, Game game);
+    void revealCards(Ability source, String titelSuffix, Cards cards, Game game);
 
-    void revealCards(String name, Cards cards, Game game, boolean postToLog);
+    void revealCards(String titelSuffix, Cards cards, Game game, boolean postToLog);
 
     /**
      * Adds the cards to the reveal window and adds the source object's id name
@@ -532,8 +545,12 @@ public interface Player extends MageItem, Copyable<Player> {
      *
      * @param cards    - list of cards that have to be moved
      * @param game     - game
-     * @param anyOrder - true if player can determine the order of the cards
-     *                 else random order
+     * @param anyOrder - true = if player can determine the order of the cards
+     *                 else false = random order 401.4. If an effect puts two or
+     *                 more cards in a specific position in a library at the
+     *                 same time, the owner of those cards may arrange them in
+     *                 any order. That library’s owner doesn’t reveal the order
+     *                 in which the cards go into the library.
      * @param source   - source ability
      * @return
      */
@@ -562,6 +579,12 @@ public interface Player extends MageItem, Copyable<Player> {
      * @return
      */
     boolean putCardsOnTopOfLibrary(Cards cards, Game game, Ability source, boolean anyOrder);
+
+    boolean putCardsOnTopOfLibrary(Card card, Game game, Ability source, boolean anyOrder);
+
+    boolean shuffleCardsToLibrary(Cards cards, Game game, Ability source);
+
+    boolean shuffleCardsToLibrary(Card card, Game game, Ability source);
 
     // set the value for X mana spells and abilities
     default int announceXMana(int min, int max, String message, Game game, Ability ability) {
@@ -629,13 +652,17 @@ public interface Player extends MageItem, Copyable<Player> {
 
     ManaOptions getManaAvailable(Game game);
 
-    List<Ability> getPlayable(Game game, boolean hidden);
+    void addAvailableTriggeredMana(List<Mana> netManaAvailable);
+
+    List<List<Mana>> getAvailableTriggeredMana();
+
+    List<ActivatedAbility> getPlayable(Game game, boolean hidden);
 
     List<Ability> getPlayableOptions(Ability ability, Game game);
 
     Map<UUID, Integer> getPlayableObjects(Game game, Zone zone);
 
-    LinkedHashMap<UUID, ActivatedAbility> getUseableActivatedAbilities(MageObject object, Zone zone, Game game);
+    LinkedHashMap<UUID, ActivatedAbility> getPlayableActivatedAbilities(MageObject object, Zone zone, Game game);
 
     boolean addCounters(Counter counter, Game game);
 
@@ -727,7 +754,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     /**
      * Universal method to move cards from one zone to another. Do not mix
-     * objects from different from zones to move.
+     * objects from different zones to move.
      *
      * @param cards
      * @param toZone
@@ -735,9 +762,10 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param game
      * @param tapped         the cards are tapped on the battlefield
      * @param faceDown       the cards are face down in the to zone
-     * @param byOwner        the card is moved (or put onto battlefield) by the owner
-     *                       of the card and if target zone is battlefield controls the permanent
-     *                       (instead of the controller of the source)
+     * @param byOwner        the card is moved (or put onto battlefield) by the
+     *                       owner of the card and if target zone is battlefield
+     *                       controls the permanent (instead of the controller
+     *                       of the source)
      * @param appliedEffects
      * @return
      */
@@ -833,6 +861,8 @@ public interface Player extends MageItem, Copyable<Player> {
      */
     boolean moveCardToCommandWithInfo(Card card, UUID sourceId, Game game, Zone fromZone);
 
+    Cards millCards(int toMill, Ability source, Game game);
+
     /**
      * Checks if the playerToCheckId is from an opponent in range
      *
@@ -909,10 +939,16 @@ public interface Player extends MageItem, Copyable<Player> {
 
     List<Designation> getDesignations();
 
+    /**
+     * Set the mana colors the user can pay with 2 life instead
+     * @param colors 
+     */
     void addPhyrexianToColors(FilterMana colors);
 
-    void removePhyrexianFromColors(FilterMana colors);
-
+    /**
+     * Mana colors the player can pay instead with 2 life
+     * @return 
+     */
     FilterMana getPhyrexianColors();
 
 }

@@ -1,5 +1,9 @@
 package mage.game.command;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.ObjectColor;
@@ -19,10 +23,6 @@ import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.util.GameLog;
 import mage.util.SubTypeList;
-
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 
 public class Commander implements CommandObject {
 
@@ -133,7 +133,7 @@ public class Commander implements CommandObject {
     }
 
     @Override
-    public Set<CardType> getCardType() {
+    public ArrayList<CardType> getCardType() {
         return sourceObject.getCardType();
     }
 
@@ -158,12 +158,12 @@ public class Commander implements CommandObject {
     }
 
     @Override
-    public boolean hasAbility(UUID abilityId, Game game) {
-        if (this.getAbilities().containsKey(abilityId)) {
+    public boolean hasAbility(Ability ability, Game game) {
+        if (this.getAbilities().contains(ability)) {
             return true;
         }
         Abilities<Ability> otherAbilities = game.getState().getAllOtherAbilities(getId());
-        return otherAbilities != null && otherAbilities.containsKey(abilityId);
+        return otherAbilities != null && otherAbilities.contains(ability);
     }
 
     @Override

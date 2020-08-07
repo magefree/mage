@@ -6,12 +6,15 @@ import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.dynamicvalue.common.HighestCMCOfPermanentValue;
 import mage.abilities.dynamicvalue.common.SacrificeCostConvertedMana;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.target.common.TargetControlledPermanent;
 
@@ -28,10 +31,14 @@ public final class PriestOfYawgmoth extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
-        // {T}, Sacrifice an artifact: Add an amount of {B} equal to the sacrificed artifact's converted mana cost.
+        // {T}, Sacrifice an artifact: Add an amount of {B} equal to the sacrificed artifact's converted mana cost.     
         Ability ability = new DynamicManaAbility(Mana.BlackMana(1), new SacrificeCostConvertedMana("artifact"),
-                "add an amount of {B} equal to the sacrificed artifact's converted mana cost");
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledArtifactPermanent())));
+                new TapSourceCost(),
+                "add an amount of {B} equal to the sacrificed artifact's converted mana cost",
+                false,
+                new HighestCMCOfPermanentValue(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT, true)
+        );
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT)));
         this.addAbility(ability);
     }
 

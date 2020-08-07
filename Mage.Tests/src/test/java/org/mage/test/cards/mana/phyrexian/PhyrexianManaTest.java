@@ -31,25 +31,35 @@ public class PhyrexianManaTest extends CardTestPlayerBase {
     
     @Test
     public void testKrrikOnlyUsableByController() {
-        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+        setStrictChooseMode(true);
+        
+        // ({B/P} can be paid with either {B} or 2 life.)        
+        // Lifelink
+        // For each {B} in a cost, you may pay 2 life rather than pay that mana.
+        // Whenever you cast a black spell, put a +1/+1 counter on K'rrik, Son of Yawgmoth.        
         addCard(Zone.BATTLEFIELD, playerA, "K'rrik, Son of Yawgmoth");
         addCard(Zone.HAND, playerA, "Banehound");
         
-        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 1);
-        addCard(Zone.HAND, playerB, "Banehound");
+        // Lifelink, haste        
+        addCard(Zone.HAND, playerB, "Banehound"); // Creature {B} 1/1
 
-        setChoice(playerA, "Yes");
+        checkPlayableAbility("pay 2 life for Banehound", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Banehound", true);  
+        
+        setChoice(playerA, "Yes");        
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Banehound");
-        setChoice(playerB, "Yes");
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Banehound");
+
+        checkPlayableAbility("no Mana for Banehound", 2, PhaseStep.PRECOMBAT_MAIN, playerB, "Cast Banehound", false);            
+
         setStopAt(2, PhaseStep.END_TURN);
         execute();
 
+        assertAllCommandsUsed();
+        
         //PlayerA pays life but PlayerB cannot
         assertLife(playerA, 18);
         assertLife(playerB, 20);
         assertPermanentCount(playerA, "Banehound", 1);
-        assertPermanentCount(playerB, "Banehound", 1);
+        assertPermanentCount(playerB, "Banehound", 0);
     }
 
     @Test
@@ -121,4 +131,65 @@ public class PhyrexianManaTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Dismember", 1);
         assertGraveyardCount(playerB, "Banehound", 1);
     }
+
+   @Test
+    public void testPlayerCanCastBanehoundWithoutAvailableBlackMana() {
+        setStrictChooseMode(true);
+        
+        // ({B/P} can be paid with either {B} or 2 life.)        
+        // Lifelink
+        // For each {B} in a cost, you may pay 2 life rather than pay that mana.
+        // Whenever you cast a black spell, put a +1/+1 counter on K'rrik, Son of Yawgmoth.        
+        addCard(Zone.BATTLEFIELD, playerA, "K'rrik, Son of Yawgmoth"); // Creature {4}{B/P}{B/P}{B/P} 2/2
+        addCard(Zone.HAND, playerA, "Banehound");
+                        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Banehound");
+        setChoice(playerA, "Yes"); // Pay 2 life for {B}
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertAllCommandsUsed();
+       
+        //PlayerA pays life
+        assertLife(playerA, 18);
+        assertLife(playerB, 20);
+        
+        
+        assertPermanentCount(playerA, "Banehound", 1);
+    }    
+    
+   @Test
+    public void testPlayerEffectNotUsableIfKrrikNotOnBattlefield() {
+        setStrictChooseMode(true);
+        
+        // addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+        // ({B/P} can be paid with either {B} or 2 life.)        
+        // Lifelink
+        // For each {B} in a cost, you may pay 2 life rather than pay that mana.
+        // Whenever you cast a black spell, put a +1/+1 counter on K'rrik, Son of Yawgmoth.        
+        addCard(Zone.BATTLEFIELD, playerA, "K'rrik, Son of Yawgmoth"); // Creature {4}{B/P}{B/P}{B/P} 2/2
+        addCard(Zone.HAND, playerA, "Banehound");
+        
+        addCard(Zone.HAND, playerB, "Lightning Bolt", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
+        
+        castSpell(1, PhaseStep.UPKEEP, playerB, "Lightning Bolt", "K'rrik, Son of Yawgmoth");
+                
+        checkPlayableAbility("no Mana for Banehound", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Banehound", false);                
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertAllCommandsUsed();
+
+        assertGraveyardCount(playerB, "Lightning Bolt", 1);
+        assertGraveyardCount(playerA, "K'rrik, Son of Yawgmoth", 1);
+        
+        assertHandCount(playerA, "Banehound", 1);
+        //PlayerA pays life
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+       
+    }    
 }

@@ -68,7 +68,7 @@ class OtherworldAtlasDrawEffect extends OneShotEffect {
                 for (UUID playerId : game.getState().getPlayersInRange(sourcePlayer.getId(), game)) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
-                        player.drawCards(amount, game);
+                        player.drawCards(amount, source.getSourceId(), game);
                     }
                 }
             }

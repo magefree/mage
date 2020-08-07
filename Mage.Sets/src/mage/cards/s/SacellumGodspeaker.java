@@ -33,7 +33,9 @@ public final class SacellumGodspeaker extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {T}: Reveal any number of creature cards with power 5 or greater from your hand. Add {G} for each card revealed this way.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new SacellumGodspeakerEffect(), new TapSourceCost()));
+        SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, new SacellumGodspeakerEffect(), new TapSourceCost());
+        ability.setUndoPossible(false);
+        this.addAbility(ability);
     }
 
     public SacellumGodspeaker(final SacellumGodspeaker card) {

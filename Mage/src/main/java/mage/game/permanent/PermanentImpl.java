@@ -10,6 +10,7 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.HintUtils;
 import mage.abilities.keyword.*;
@@ -29,7 +30,6 @@ import mage.game.command.CommandObject;
 import mage.game.events.*;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.token.SquirrelToken;
-import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
@@ -183,6 +183,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     public void setControllerId(UUID controllerId) {
         this.controllerId = controllerId;
         abilities.setControllerId(controllerId);
+    }
+
+    @Override
+    public void setOriginalControllerId(UUID originalControllerId) {
+        this.originalControllerId = originalControllerId;
     }
 
     /**
@@ -352,62 +357,64 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public Abilities<Ability> getAbilities() {
-        return abilities;
+        return super.getAbilities();
     }
 
     @Override
     public Abilities<Ability> getAbilities(Game game) {
-        return abilities;
-    }
-
-    /**
-     * @param ability
-     * @param game
-     */
-    @Override
-    public void addAbility(Ability ability, Game game) {
-        if (!abilities.containsKey(ability.getId())) {
-            Ability copyAbility = ability.copy();
-            copyAbility.setControllerId(controllerId);
-            copyAbility.setSourceId(objectId);
-            if (game != null) {
-                game.getState().addAbility(copyAbility, this);
-            }
-            abilities.add(copyAbility);
-        }
+        return super.getAbilities(game);
     }
 
     @Override
     public void addAbility(Ability ability, UUID sourceId, Game game) {
-        addAbility(ability, sourceId, game, true);
-    }
-
-    @Override
-    public void addAbility(Ability ability, UUID sourceId, Game game, boolean createNewId) {
+        // singleton abilities -- only one instance
+        // other abilities -- any amount of instances
         if (!abilities.containsKey(ability.getId())) {
             Ability copyAbility = ability.copy();
-            if (createNewId) {
-                copyAbility.newId(); // needed so that source can get an ability multiple times (e.g. Raging Ravine)
-            }
+            copyAbility.newId(); // needed so that source can get an ability multiple times (e.g. Raging Ravine)
             copyAbility.setControllerId(controllerId);
             copyAbility.setSourceId(objectId);
-            game.getState().addAbility(copyAbility, sourceId, this);
-            abilities.add(copyAbility);
-        } else if (!createNewId) {
-            // triggered abilities must be added to the state().triggerdAbilities
+            // triggered abilities must be added to the state().triggers
             // still as long as the prev. permanent is known to the LKI (e.g. Showstopper) so gained dies triggered ability will trigger
-            if (!game.getBattlefield().containsPermanent(this.getId())) {
-                Ability copyAbility = ability.copy();
-                copyAbility.setControllerId(controllerId);
-                copyAbility.setSourceId(objectId);
+            if (game != null) {
+                // game is null in cards viewer window (MageBook)
                 game.getState().addAbility(copyAbility, sourceId, this);
             }
+            abilities.add(copyAbility);
         }
     }
 
     @Override
     public void removeAllAbilities(UUID sourceId, Game game) {
-        getAbilities().clear();
+        // TODO: what about triggered abilities? See addAbility above -- triggers adds to GameState
+        abilities.clear();
+    }
+
+    @Override
+    public void removeAbility(Ability abilityToRemove, UUID sourceId, Game game) {
+        if (abilityToRemove == null) {
+            return;
+        }
+
+        // 112.10b  Effects that remove an ability remove all instances of it.
+        List<Ability> toRemove = new ArrayList<>();
+        abilities.forEach(a -> {
+            if (a.isSameInstance(abilityToRemove)) {
+                toRemove.add(a);
+            }
+        });
+
+        // TODO: what about triggered abilities? See addAbility above -- triggers adds to GameState
+        toRemove.forEach(r -> abilities.remove(r));
+    }
+
+    @Override
+    public void removeAbilities(List<Ability> abilitiesToRemove, UUID sourceId, Game game) {
+        if (abilitiesToRemove == null) {
+            return;
+        }
+
+        abilitiesToRemove.forEach(a -> removeAbility(a, sourceId, game));
     }
 
     @Override
@@ -729,7 +736,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             game.fireEvent(new GameEvent(EventType.GAINED_CONTROL, objectId, objectId, controllerId));
 
             return true;
-        } else if (isCopy()) {// Because the previous copied abilities can be from another controller chnage controller in any case for abilities
+        } else if (isCopy()) {// Because the previous copied abilities can be from another controller - change controller in any case for abilities
             this.getAbilities(game).setControllerId(controllerId);
             game.getContinuousEffects().setController(objectId, controllerId);
         }
@@ -1062,43 +1069,13 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                     return false;
                 }
             }
-            if (abilities.containsKey(HexproofAbility.getInstance().getId())) {
-                if (game.getPlayer(this.getControllerId()).hasOpponent(sourceControllerId, game)
-                        && null == game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, null, sourceControllerId, game)) {
-                    return false;
-                }
-            }
-
-            if (abilities.containsKey(HexproofFromWhiteAbility.getInstance().getId())) {
-                if (game.getPlayer(this.getControllerId()).hasOpponent(sourceControllerId, game)
-                        && null == game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, null, sourceControllerId, game)
-                        && source.getColor(game).isWhite()) {
-                    return false;
-                }
-            }
-
-            if (abilities.containsKey(HexproofFromBlueAbility.getInstance().getId())) {
-                if (game.getPlayer(this.getControllerId()).hasOpponent(sourceControllerId, game)
-                        && null == game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, null, sourceControllerId, game)
-                        && source.getColor(game).isBlue()) {
-                    return false;
-                }
-            }
-
-            if (abilities.containsKey(HexproofFromBlackAbility.getInstance().getId())) {
-                if (game.getPlayer(this.getControllerId()).hasOpponent(sourceControllerId, game)
-                        && null == game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, null, sourceControllerId, game)
-                        && source.getColor(game).isBlack()) {
-                    return false;
-                }
-            }
-
-            if (abilities.containsKey(HexproofFromMonocoloredAbility.getInstance().getId())) {
-                if (game.getPlayer(this.getControllerId()).hasOpponent(sourceControllerId, game)
-                        && null == game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, null, sourceControllerId, game)
-                        && !source.getColor(game).isColorless() && !source.getColor(game).isMulticolored()) {
-                    return false;
-                }
+            if (game.getPlayer(this.getControllerId()).hasOpponent(sourceControllerId, game)
+                    && game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, null, sourceControllerId, game) == null
+                    && abilities.stream()
+                    .filter(HexproofBaseAbility.class::isInstance)
+                    .map(HexproofBaseAbility.class::cast)
+                    .anyMatch(ability -> ability.checkObject(source, game))) {
+                return false;
             }
 
             if (hasProtectionFrom(source, game)) {
@@ -1144,14 +1121,18 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public boolean destroy(UUID sourceId, Game game, boolean noRegen) {
+        // Only permanets on the battlefield can be destroyed
+        if (!game.getState().getZone(getId()).equals(Zone.BATTLEFIELD)) {
+            return false;
+        }
         //20091005 - 701.6
         if (abilities.containsKey(IndestructibleAbility.getInstance().getId())) {
             return false;
         }
 
         if (!game.replaceEvent(GameEvent.getEvent(EventType.DESTROY_PERMANENT, objectId, sourceId, controllerId, noRegen ? 1 : 0))) {
-            // this means destroy was successful, if object movement to graveyard will be replaced (e.g. commander to command zone) its still
-            // is handled as successful destroying (but not as sucessful "dies this way" for destroying).
+            // this means destroy was successful, if object movement to graveyard will be replaced (e.g. commander to command zone) it's still
+            // handled as successful destroying (but not as sucessful "dies this way" for destroying).
             if (moveToZone(Zone.GRAVEYARD, sourceId, game, false)) {
                 if (!game.isSimulation()) {
                     String logName;
@@ -1192,13 +1173,17 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public boolean regenerate(UUID sourceId, Game game) {
+    public boolean regenerate(Ability source, Game game) {
         //20110930 - 701.12
-        if (!game.replaceEvent(GameEvent.getEvent(EventType.REGENERATE, objectId, sourceId, controllerId))) {
+        if (!game.replaceEvent(GameEvent.getEvent(EventType.REGENERATE, objectId, source.getSourceId(), controllerId))) {
             this.tap(game);
             this.removeFromCombat(game);
             this.removeAllDamage(game);
-            game.fireEvent(GameEvent.getEvent(EventType.REGENERATED, objectId, sourceId, controllerId));
+
+            // remove one regen shield
+            RegenerateSourceEffect.decRegenerationShieldsAmount(game, this.getId());
+
+            game.fireEvent(GameEvent.getEvent(EventType.REGENERATED, objectId, source.getSourceId(), controllerId));
             return true;
         }
         return false;
@@ -1580,10 +1565,24 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public boolean fight(Permanent fightTarget, Ability source, Game game) {
+        return this.fight(fightTarget, source, game, true);
+    }
+
+    @Override
+    public boolean fight(Permanent fightTarget, Ability source, Game game, boolean batchTrigger) {
         game.fireEvent(GameEvent.getEvent(GameEvent.EventType.FIGHTED_PERMANENT, fightTarget.getId(), getId(), source.getControllerId()));
         game.fireEvent(GameEvent.getEvent(GameEvent.EventType.FIGHTED_PERMANENT, getId(), fightTarget.getId(), source.getControllerId()));
-        damage(fightTarget.getPower().getValue(), fightTarget.getId(), game, false, true);
+        damage(fightTarget.getPower().getValue(), fightTarget.getId(), game);
         fightTarget.damage(getPower().getValue(), getId(), game);
+        if (!batchTrigger) {
+            return true;
+        }
+        Set<MageObjectReference> morSet = new HashSet<>();
+        morSet.add(new MageObjectReference(this, game));
+        morSet.add(new MageObjectReference(fightTarget, game));
+        String data = UUID.randomUUID().toString();
+        game.getState().setValue("batchFight_" + data, morSet);
+        game.fireEvent(GameEvent.getEvent(EventType.BATCH_FIGHT, getId(), getId(), source.getControllerId(), data, 0));
         return true;
     }
 
@@ -1644,9 +1643,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, List<UUID> appliedEffects) {
         Zone fromZone = game.getState().getZone(objectId);
         ZoneChangeEvent event = new ZoneChangeEvent(this, sourceId, ownerId, fromZone, Zone.EXILED, appliedEffects);
-        ZoneChangeInfo.Exile info = new ZoneChangeInfo.Exile(event, exileId, name);
+        ZoneChangeInfo.Exile zcInfo = new ZoneChangeInfo.Exile(event, exileId, name);
 
-        boolean successfullyMoved = ZonesHandler.moveCard(info, game);
+        boolean successfullyMoved = ZonesHandler.moveCard(zcInfo, game);
         //20180810 - 701.3d
         detachAllAttachments(game);
         return successfullyMoved;

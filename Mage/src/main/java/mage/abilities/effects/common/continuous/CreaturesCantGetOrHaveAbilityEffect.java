@@ -45,9 +45,7 @@ public class CreaturesCantGetOrHaveAbilityEffect extends ContinuousEffectImpl {
         if (controller != null) {
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
                 if (permanent != null) {
-                    while (permanent.getAbilities().remove(ability)) {
-                        // repeat as long as ability can be removed
-                    }
+                    permanent.removeAbility(ability, source.getSourceId(), game);
                 }
             }
             return true;

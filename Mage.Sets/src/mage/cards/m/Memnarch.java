@@ -1,4 +1,3 @@
-
 package mage.cards.m;
 
 import java.util.UUID;
@@ -12,8 +11,8 @@ import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.target.TargetPermanent;
@@ -26,7 +25,7 @@ import mage.target.common.TargetArtifactPermanent;
 public final class Memnarch extends CardImpl {
 
     public Memnarch(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{7}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.WIZARD);
 
@@ -34,7 +33,7 @@ public final class Memnarch extends CardImpl {
         this.toughness = new MageInt(5);
 
         // {1}{U}{U}: Target permanent becomes an artifact in addition to its other types.
-        Effect effect = new AddCardTypeTargetEffect(Duration.WhileOnBattlefield, CardType.ARTIFACT);
+        Effect effect = new AddCardTypeTargetEffect(Duration.Custom, CardType.ARTIFACT);
         effect.setText("Target permanent becomes an artifact in addition to its other types");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}{U}{U}"));
         ability.addTarget(new TargetPermanent());
@@ -46,8 +45,12 @@ public final class Memnarch extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public Memnarch(final Memnarch card){ super(card); }
+    public Memnarch(final Memnarch card) {
+        super(card);
+    }
 
     @Override
-    public Memnarch copy() { return new Memnarch(this); }
+    public Memnarch copy() {
+        return new Memnarch(this);
+    }
 }

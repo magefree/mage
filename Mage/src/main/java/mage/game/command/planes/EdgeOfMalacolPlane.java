@@ -1,27 +1,17 @@
-
 package mage.game.command.planes;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MainPhaseStackEmptyCondition;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.RollPlanarDieEffect;
-import mage.abilities.effects.common.SkipUntapStepEffect;
 import mage.abilities.effects.common.UntapAllControllerEffect;
+import mage.abilities.effects.common.cost.PlanarDieRollCostIncreasingEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.PhaseStep;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -34,14 +24,18 @@ import mage.target.Target;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.PlanarRollWatcher;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public class EdgeOfMalacolPlane extends Plane {
 
     public EdgeOfMalacolPlane() {
-        this.setName("Plane - Edge Of Malacol");
+        this.setPlaneType(Planes.PLANE_EDGE_OF_MALACOL);
         this.setExpansionSetCodeForImage("PCA");
 
         // If a creature you control would untap during your untap step, put two +1/+1 counters on it instead.
@@ -101,7 +95,7 @@ class EdgeOfMalacolEffect extends ContinuousRuleModifyingEffectImpl {
             if (cPlane == null) {
                 return false;
             }
-            if (!cPlane.getName().equalsIgnoreCase("Plane - Edge of Malacol")) {
+            if (!cPlane.getPlaneType().equals(Planes.PLANE_EDGE_OF_MALACOL)) {
                 return false;
             }
             Permanent permanent = game.getPermanent(event.getTargetId());

@@ -4,7 +4,7 @@ package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageEverythingEffect;
@@ -30,7 +30,7 @@ public final class MagmaPhoenix extends CardImpl {
         this.toughness = new MageInt(3);
 
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new DiesTriggeredAbility(new DamageEverythingEffect(3), false));
+        this.addAbility(new DiesSourceTriggeredAbility(new DamageEverythingEffect(3), false));
         this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl("{3}{R}{R}")));
     }
 

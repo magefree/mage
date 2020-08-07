@@ -98,7 +98,7 @@ class AminatouPlusEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            player.drawCards(1, game);
+            player.drawCards(1, source.getSourceId(), game);
             putOnLibrary(player, source, game);
             return true;
         }
@@ -172,7 +172,7 @@ class AminatouUltimateEffect extends OneShotEffect {
                         continue;
                     }
                     ContinuousEffect effect = new GainControlTargetEffect(Duration.EndOfGame, currentPlayer);
-                    effect.setTargetPointer(new FixedTarget(permanent.getId()));
+                    effect.setTargetPointer(new FixedTarget(permanent, game));
                     game.addEffect(effect, source);
                 }
                 currentPlayer = nextPlayer;

@@ -1,19 +1,18 @@
-
 package mage.cards.e;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.TargetPlayer;
+import mage.target.common.TargetCardInHand;
 
 import java.util.UUID;
 
@@ -30,7 +29,7 @@ public final class Extortion extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public Extortion(final Extortion card) {
+    private Extortion(final Extortion card) {
         super(card);
     }
 
@@ -42,12 +41,12 @@ public final class Extortion extends CardImpl {
 
 class ExtortionEffect extends OneShotEffect {
 
-    public ExtortionEffect() {
+    ExtortionEffect() {
         super(Outcome.Discard);
-        staticText = "Look at target player's hand and choose up to two cards from it. That player discards that card.";
+        staticText = "Look at target player's hand and choose up to two cards from it. That player discards those cards.";
     }
 
-    public ExtortionEffect(final ExtortionEffect effect) {
+    private ExtortionEffect(final ExtortionEffect effect) {
         super(effect);
     }
 
@@ -55,18 +54,15 @@ class ExtortionEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
         Player you = game.getPlayer(source.getControllerId());
-        if (targetPlayer != null && you != null) {
-            you.lookAtCards("Discard", targetPlayer.getHand(), game);
-            TargetCard target = new TargetCard(0, 2, Zone.HAND, new FilterCard());
-            target.setNotTarget(true);
-            if (you.choose(Outcome.Benefit, targetPlayer.getHand(), target, game)) {
-                Card card = targetPlayer.getHand().get(target.getFirstTarget(), game);
-                return targetPlayer.discard(card, source, game);
-
-            }
-
+        if (targetPlayer == null || you == null) {
+            return false;
         }
-        return false;
+        you.lookAtCards("Discard", targetPlayer.getHand(), game);
+        TargetCard target = new TargetCardInHand(0, 2, StaticFilters.FILTER_CARD_CARDS);
+        target.setNotTarget(true);
+        you.choose(Outcome.Discard, targetPlayer.getHand(), target, game);
+        targetPlayer.discard(new CardsImpl(target.getTargets()), source, game);
+        return true;
     }
 
     @Override

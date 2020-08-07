@@ -6,8 +6,9 @@ import mage.constants.SetType;
 
 /**
  * https://scryfall.com/sets/ha2
+ * @author mikalinn777
  */
-public class HistoricAnthology2 extends ExpansionSet {
+public final class HistoricAnthology2 extends ExpansionSet {
 
     private static final HistoricAnthology2 instance = new HistoricAnthology2();
 
@@ -19,7 +20,6 @@ public class HistoricAnthology2 extends ExpansionSet {
         super("Historic Anthology 2", "HA2", ExpansionSet.buildDate(2020, 3, 12), SetType.MAGIC_ONLINE);
         this.hasBoosters = false;
         this.hasBasicLands = false;
-
         cards.add(new SetCardInfo("Ancestral Mask", 13, Rarity.COMMON, mage.cards.a.AncestralMask.class));
         cards.add(new SetCardInfo("Barren Moor", 19, Rarity.COMMON, mage.cards.b.BarrenMoor.class));
         cards.add(new SetCardInfo("Bojuka Bog", 20, Rarity.COMMON, mage.cards.b.BojukaBog.class));

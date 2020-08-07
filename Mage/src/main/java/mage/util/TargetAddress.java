@@ -1,15 +1,15 @@
-
 package mage.util;
 
-import java.util.Iterator;
-import java.util.Objects;
-import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.Modes;
 import mage.abilities.SpellAbility;
 import mage.cards.Card;
 import mage.game.stack.Spell;
 import mage.target.Target;
+
+import java.util.Iterator;
+import java.util.Objects;
+import java.util.UUID;
 
 /**
  * @author duncant
@@ -44,7 +44,7 @@ public class TargetAddress {
 
         protected final Iterator<SpellAbility> spellAbilityIterator;
         protected Integer lastSpellAbilityIndex = null;
-        protected Iterator<UUID> modeIterator = null;
+        protected Iterator<UUID> modeIterator = null; // must be read only
         protected Modes modes = null;
         protected UUID lastMode = null;
         protected Iterator<Target> targetIterator = null;

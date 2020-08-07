@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -42,7 +42,7 @@ public final class LoyalCathar extends CardImpl {
 
         // When Loyal Cathar dies, return it to the battlefield transformed under your control at the beginning of the next end step.
         this.addAbility(new TransformAbility());
-        this.addAbility(new DiesTriggeredAbility(new LoyalCatharEffect()));
+        this.addAbility(new DiesSourceTriggeredAbility(new LoyalCatharEffect()));
     }
 
     public LoyalCathar(final LoyalCathar card) {

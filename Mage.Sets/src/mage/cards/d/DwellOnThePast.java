@@ -8,6 +8,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -61,24 +62,9 @@ class DwellOnThePastEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getFirstTarget());
-        if (player != null) {
-            List<UUID> targets = source.getTargets().get(1).getTargets();
-            boolean shuffle = false;
-            for (UUID targetId : targets) {
-                Card card = game.getCard(targetId);
-                if (card != null) {
-                    if (player.getGraveyard().contains(card.getId())) {
-                        player.getGraveyard().remove(card);
-                        card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-                        shuffle = true;
-                    }
-                }
-            }
-            if (shuffle) {
-                player.shuffleLibrary(source, game);
-            }
-            return true;
+        Player controller = game.getPlayer(source.getFirstTarget());
+        if (controller != null) {
+            return controller.shuffleCardsToLibrary(new CardsImpl(source.getTargets().get(1).getTargets()), game, source);
         }
         return false;
     }

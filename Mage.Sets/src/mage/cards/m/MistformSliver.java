@@ -72,7 +72,7 @@ class MistformSliverEffect extends OneShotEffect {
             }
             game.informPlayers(permanent.getName() + ": " + player.getLogName() + " has chosen " + typeChoice.getChoice());
             ContinuousEffect effect = new AddCardSubTypeTargetEffect(SubType.byDescription(typeChoice.getChoice()), Duration.EndOfTurn);
-            effect.setTargetPointer(new FixedTarget(permanent.getId()));
+            effect.setTargetPointer(new FixedTarget(permanent, game));
             game.addEffect(effect, source);
         }
         return false;

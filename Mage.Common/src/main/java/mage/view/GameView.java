@@ -49,12 +49,13 @@ public class GameView implements Serializable {
     private final List<ExileView> exiles = new ArrayList<>();
     private final List<RevealedView> revealed = new ArrayList<>();
     private List<LookedAtView> lookedAt = new ArrayList<>();
+    private final List<RevealedView> companion = new ArrayList<>();
     private final List<CombatGroupView> combat = new ArrayList<>();
     private final TurnPhase phase;
     private final PhaseStep step;
     private final UUID activePlayerId;
     private String activePlayerName = "";
-    private String priorityPlayerName;
+    private final String priorityPlayerName;
     private final int turn;
     private boolean special = false;
     private final boolean isPlayer; // false = watching user
@@ -137,7 +138,7 @@ public class GameView implements Serializable {
                     // can happen if a player times out while ability is on the stack
                     LOGGER.debug("Stack Object for stack ability not found: " + stackObject.getStackAbility().getRule());
                 }
-            } else {
+            } else if (stackObject != null) {
                 LOGGER.fatal("Unknown type of StackObject: " + stackObject.getName() + ' ' + stackObject.toString() + ' ' + stackObject.getClass().toString());
             }
             //stackOrder.add(stackObject.getId());
@@ -148,6 +149,12 @@ public class GameView implements Serializable {
         }
         for (String name : state.getRevealed().keySet()) {
             revealed.add(new RevealedView(name, state.getRevealed().get(name), game));
+        }
+        for (String name : state.getCompanion().keySet()) {
+            // Only show the companion window when the companion is still outside the game.
+            if (state.getCompanion().get(name).stream().anyMatch(cardId -> state.getZone(cardId) == Zone.OUTSIDE)) {
+                companion.add(new RevealedView(name, state.getCompanion().get(name), game));
+            }
         }
         this.phase = state.getTurn().getPhaseType();
         this.step = state.getTurn().getStepType();
@@ -264,6 +271,10 @@ public class GameView implements Serializable {
 
     public List<LookedAtView> getLookedAt() {
         return lookedAt;
+    }
+
+    public List<RevealedView> getCompanion() {
+        return companion;
     }
 
     public void setLookedAt(List<LookedAtView> list) {

@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -11,6 +10,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.dynamicvalue.common.RemovedCountersForCostValue;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.ColorlessManaAbility;
@@ -31,13 +31,13 @@ import mage.game.Game;
 public final class CrucibleOfTheSpiritDragon extends CardImpl {
 
     public CrucibleOfTheSpiritDragon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
         // {1}, {T}: Put a storage counter on Crucible of the Spirit Dragon.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.STORAGE.createInstance()),new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.STORAGE.createInstance()), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
@@ -45,9 +45,10 @@ public final class CrucibleOfTheSpiritDragon extends CardImpl {
         ability = new ConditionalAnyColorManaAbility(
                 new TapSourceCost(),
                 RemovedCountersForCostValue.instance,
+                new CountersSourceCount(CounterType.STORAGE),
                 new CrucibleOfTheSpiritDragonManaBuilder(),
                 false
-                );
+        );
         ability.addCost(new RemoveVariableCountersSourceCost(CounterType.STORAGE.createInstance()));
         this.addAbility(ability);
     }

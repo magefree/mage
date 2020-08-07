@@ -1,8 +1,5 @@
-
 package mage.game.command.planes;
 
-import java.util.ArrayList;
-import java.util.List;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -12,10 +9,8 @@ import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.RollPlanarDieEffect;
 import mage.abilities.effects.common.UntapAllControllerEffect;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.abilities.effects.common.cost.PlanarDieRollCostIncreasingEffect;
+import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.command.Plane;
@@ -23,14 +18,16 @@ import mage.game.events.GameEvent;
 import mage.target.Target;
 import mage.watchers.common.PlanarRollWatcher;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * @author spjspj
  */
 public class TheEonFogPlane extends Plane {
 
     public TheEonFogPlane() {
-        this.setName("Plane - The Eon Fog");
+        this.setPlaneType(Planes.PLANE_THE_EON_FOG);
         this.setExpansionSetCodeForImage("PCA");
 
         // All players miss their untap step
@@ -87,7 +84,7 @@ class TheEonFogSkipUntapStepEffect extends ContinuousRuleModifyingEffectImpl {
         if (cPlane == null) {
             return false;
         }
-        if (!cPlane.getName().equalsIgnoreCase("Plane - The Eon Fog")) {
+        if (!cPlane.getPlaneType().equals(Planes.PLANE_THE_EON_FOG)) {
             return false;
         }
         return event.getType() == GameEvent.EventType.UNTAP_STEP;

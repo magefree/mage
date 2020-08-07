@@ -1,7 +1,5 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.CanBeYourCommanderAbility;
@@ -14,12 +12,8 @@ import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffec
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.cards.CardsImpl;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterArtifactCard;
 import mage.filter.common.FilterControlledArtifactPermanent;
@@ -33,8 +27,9 @@ import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetDiscard;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class DarettiScrapSavant extends CardImpl {
@@ -93,15 +88,8 @@ class DarettiDiscardDrawEffect extends OneShotEffect {
         if (controller != null) {
             TargetDiscard target = new TargetDiscard(0, 2, new FilterCard(), controller.getId());
             target.choose(outcome, controller.getId(), source.getSourceId(), game);
-            int count = 0;
-            for (UUID cardId : target.getTargets()) {
-                Card card = game.getCard(cardId);
-                if (card != null) {
-                    controller.discard(card, source, game);
-                    count++;
-                }
-            }
-            controller.drawCards(count, game);
+            int count = controller.discard(new CardsImpl(target.getTargets()), source, game).size();
+            controller.drawCards(count, source.getSourceId(), game);
             return true;
         }
         return false;
@@ -166,7 +154,7 @@ class DarettiScrapSavantEffect extends OneShotEffect {
         Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {
             Effect effect = new ReturnFromGraveyardToBattlefieldTargetEffect();
-            effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
+            effect.setTargetPointer(new FixedTarget(card, game));
             effect.setText("return that card to the battlefield at the beginning of the next end step");
             game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(Zone.COMMAND, effect, TargetController.ANY), source);
             return true;

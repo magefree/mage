@@ -1,7 +1,6 @@
 package mage.abilities.keyword;
 
 import java.util.UUID;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
@@ -15,7 +14,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
+import mage.util.GameLog;
 
 /**
  * 702.46. Offering # 702.46a Offering is a static ability of a card that
@@ -128,7 +129,7 @@ class OfferingAsThoughEffect extends AsThoughEffectImpl {
                     return false;
                 }
                 Player player = game.getPlayer(source.getControllerId());
-                if (player != null && !game.inCheckPlayableState()
+                if (player != null
                         && player.chooseUse(Outcome.Benefit, "Offer a " + filter.getMessage() + " to cast " + spellToCast.getName() + '?', source, game)) {
                     Target target = new TargetControlledCreaturePermanent(1, 1, filter, true);
                     player.chooseTarget(Outcome.Sacrifice, target, source, game);
@@ -139,10 +140,14 @@ class OfferingAsThoughEffect extends AsThoughEffectImpl {
                     Permanent offer = game.getPermanent(target.getFirstTarget());
                     if (offer != null) {
                         UUID activationId = UUID.randomUUID();
-                        OfferingCostReductionEffect effect = new OfferingCostReductionEffect(spellToCast.getSpellAbility().getId(), new MageObjectReference(offer, game), activationId);
+                        OfferingCostReductionEffect effect = new OfferingCostReductionEffect(activationId);
+                        effect.setTargetPointer(new FixedTarget(offer, game));
                         game.addEffect(effect, source);
                         game.getState().setValue("offering_ok_" + card.getId(), true);
                         game.getState().setValue("offering_Id_" + card.getId(), activationId);
+                        game.informPlayers(player.getLogName() + " announces to offer " 
+                                + offer.getLogName() + " to cast " 
+                                + GameLog.getColoredObjectName(spellToCast));// No id name to prevent to offer hand card knowledge after cancel casting
                         return true;
                     }
                 } else {
@@ -156,29 +161,22 @@ class OfferingAsThoughEffect extends AsThoughEffectImpl {
 
 class OfferingCostReductionEffect extends CostModificationEffectImpl {
 
-    private final UUID spellAbilityId;
     private final UUID activationId;
-    private final MageObjectReference offeredPermanent;
-    // private final ManaCosts<ManaCost> manaCostsToReduce;
 
-    OfferingCostReductionEffect(UUID spellAbilityId, MageObjectReference offeredPermanent, UUID activationId) {
+    OfferingCostReductionEffect(UUID activationId) {
         super(Duration.OneUse, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        this.spellAbilityId = spellAbilityId;
-        this.offeredPermanent = offeredPermanent;
         this.activationId = activationId;
         staticText = "mana costs reduction from offering";
     }
 
     OfferingCostReductionEffect(OfferingCostReductionEffect effect) {
         super(effect);
-        this.spellAbilityId = effect.spellAbilityId;
-        this.offeredPermanent = effect.offeredPermanent;
         this.activationId = effect.activationId;
     }
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        Permanent toOffer = offeredPermanent.getPermanent(game);
+        Permanent toOffer = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (toOffer != null) {
             toOffer.sacrifice(source.getSourceId(), game);
             CardUtil.reduceCost((SpellAbility) abilityToModify, toOffer.getSpellAbility().getManaCosts());
@@ -194,15 +192,16 @@ class OfferingCostReductionEffect extends CostModificationEffectImpl {
         if (game.inCheckPlayableState()) { // Cost modifaction does not work correctly for checking available spells
             return false;
         }
-        if (abilityToModify.getId().equals(spellAbilityId) && abilityToModify instanceof SpellAbility) {
+        if (abilityToModify.getSourceId().equals(source.getSourceId()) 
+                && abilityToModify instanceof SpellAbility) {
             Card card = game.getCard(source.getSourceId());
             if (card != null) {
                 Object object = game.getState().getValue("offering_Id_" + card.getId());
-                if (object != null && object.equals(this.activationId) && offeredPermanent.getPermanent(game) != null) {
+                if (object != null && object.equals(this.activationId) && getTargetPointer().getFirst(game, source) != null) {
                     return true;
                 }
             }
-            // no or other id, this effect is no longer valid
+            // to target to offer, no correct activation ID this effect is no longer valid
             this.discard();
         }
         return false;

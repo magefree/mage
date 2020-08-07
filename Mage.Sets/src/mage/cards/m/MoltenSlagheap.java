@@ -1,4 +1,3 @@
-
 package mage.cards.m;
 
 import java.util.UUID;
@@ -7,9 +6,10 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.dynamicvalue.common.RemovedCountersForCostValue;
-import mage.abilities.effects.mana.AddManaInAnyCombinationEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.effects.mana.AddManaInAnyCombinationEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
@@ -26,7 +26,7 @@ import mage.counters.CounterType;
 public final class MoltenSlagheap extends CardImpl {
 
     public MoltenSlagheap(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
@@ -36,7 +36,8 @@ public final class MoltenSlagheap extends CardImpl {
         this.addAbility(ability);
         // {1}, Remove X storage counters from Molten Slagheap: Add X mana in any combination of {B} and/or {R}.
         ability = new SimpleManaAbility(Zone.BATTLEFIELD,
-                new AddManaInAnyCombinationEffect(RemovedCountersForCostValue.instance, ColoredManaSymbol.B, ColoredManaSymbol.R),
+                new AddManaInAnyCombinationEffect(RemovedCountersForCostValue.instance,
+                        new CountersSourceCount(CounterType.STORAGE), ColoredManaSymbol.B, ColoredManaSymbol.R),
                 new GenericManaCost(1));
         ability.addCost(new RemoveVariableCountersSourceCost(CounterType.STORAGE.createInstance()));
         this.addAbility(ability);

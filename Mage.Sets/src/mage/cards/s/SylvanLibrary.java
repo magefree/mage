@@ -71,7 +71,7 @@ class SylvanLibraryEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            controller.drawCards(2, game);
+            controller.drawCards(2, source.getSourceId(), game);
             SylvanLibraryCardsDrawnThisTurnWatcher watcher = game.getState().getWatcher(SylvanLibraryCardsDrawnThisTurnWatcher.class);
             if (watcher != null) {
                 Cards cards = new CardsImpl();
@@ -95,7 +95,7 @@ class SylvanLibraryEffect extends OneShotEffect {
                     for (UUID cardId : target.getTargets()) {
                         Card card = cards.get(cardId, game);
                         if (card != null) {
-                            if (controller.canPayLifeCost()
+                            if (controller.canPayLifeCost(source)
                                     && controller.getLife() >= 4
                                     && controller.chooseUse(outcome, "Pay 4 life for " + card.getLogName() + "? (Otherwise it's put on top of your library)", source, game)) {
                                 controller.loseLife(4, game, false);

@@ -56,8 +56,8 @@ class DacksDuplicateApplyToPermanent extends ApplyToPermanent {
          * 29/05/2014	The ability of Dack's Duplicate doesn't target the
          * creature.
          */
-        permanent.addAbility(new DethroneAbility(), game);
-        permanent.addAbility(HasteAbility.getInstance(), game);
+        permanent.addAbility(new DethroneAbility(), source.getSourceId(), game);
+        permanent.addAbility(HasteAbility.getInstance(), source.getSourceId(), game);
         return true;
     }
 

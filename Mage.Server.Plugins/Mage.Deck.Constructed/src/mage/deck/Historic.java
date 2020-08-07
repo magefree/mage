@@ -1,0 +1,106 @@
+package mage.deck;
+
+import mage.cards.ExpansionSet;
+import mage.cards.Sets;
+import mage.cards.decks.Constructed;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
+/**
+ * @author mikalinn777
+ * Historic is a nonrotating format in MTGA. https://mtg.gamepedia.com/Historic_(format)
+ */
+public class Historic extends Constructed {
+
+    public Historic() {
+        super("Constructed - Historic");
+
+        Date cutoff = new GregorianCalendar(2017, Calendar.SEPTEMBER, 29).getTime(); // XLN release date
+        for (ExpansionSet set : Sets.getInstance().values()) {
+            if (set.getSetType().isStandardLegal() && (set.getReleaseDate().after(cutoff) || set.getReleaseDate().equals(cutoff))) {
+                setCodes.add(set.getCode());
+            }
+        }
+        // Regular ban list
+        banned.add("Agent of Treachery");
+        banned.add("Burning-Tree Emissary");
+        banned.add("Fires of Invention");
+        banned.add("Nexus of Fate");
+        banned.add("Oko, Thief of Crowns");
+        banned.add("Once Upon a Time");
+        banned.add("Teferi, Time Raveler");
+        banned.add("Veil of Summer");
+        banned.add("Wilderness Reclamation");
+        banned.add("Winota, Joiner of Forces");
+
+        // Individual cards added
+        setCodes.add(mage.sets.HistoricAnthology1.getInstance().getCode());
+        setCodes.add(mage.sets.HistoricAnthology2.getInstance().getCode());
+        setCodes.add(mage.sets.HistoricAnthology3.getInstance().getCode());
+        singleCards.add("Rhys the Redeemed");
+        singleCards.add("Spiritual Guardian");
+        singleCards.add("Sanctuary Cat");
+        singleCards.add("Raging Goblin");
+        singleCards.add("Hanna, Ship's Navigator");
+        singleCards.add("Angelic Reward");
+        singleCards.add("Confront the Assault");
+        singleCards.add("Inspiring Commander");
+        singleCards.add("Shrine Keeper");
+        singleCards.add("Tactical Advantage");
+        singleCards.add("River's Favor");
+        singleCards.add("Shorecomber Crab");
+        singleCards.add("Zephyr Gull");
+        singleCards.add("Feral Roar");
+        singleCards.add("Treetop Warden");
+        singleCards.add("Angler Turtle");
+        singleCards.add("Vengeant Vampire");
+        singleCards.add("Rampaging Brontodon");
+        singleCards.add("Bladewing the Risen");
+        singleCards.add("The Gitrog Monster");
+        singleCards.add("Talrand, Sky Summoner");
+
+        // Jumpstart with replacements
+        setCodes.add(mage.sets.Jumpstart.getInstance().getCode());
+        singleCards.add("Archon of Sun's Grace");
+        singleCards.add("Banishing Light");
+        singleCards.add("Gadwick, the Wizened");
+        singleCards.add("Carnifex Demon");
+        singleCards.add("Weight of Memory");
+        singleCards.add("Bond of Revival");
+        singleCards.add("Audacious Thief");
+        singleCards.add("Lightning Serpent");
+        singleCards.add("Fanatic of Mogis");
+        singleCards.add("Woe Strider");
+        singleCards.add("Goblin Oriflamme");
+        singleCards.add("Doomed Necromancer");
+        singleCards.add("Scorching Dragonfire");
+        singleCards.add("Prey Upon");
+        singleCards.add("Lightning Strike");
+        singleCards.add("Pollenbright Druid");
+        singleCards.add("Dryad Greenseeker");
+        singleCards.add("Serra's Guardian");
+        // these cards aren't technically banned, so if any of them are added later they should be removed here
+        banned.add("Ajani's Chosen");
+        banned.add("Angelic Arbiter");
+        banned.add("Path to Exile");
+        banned.add("Read the Runes");
+        banned.add("Rhystic Study");
+        banned.add("Thought Scour");
+        banned.add("Exhume");
+        banned.add("Mausoleum Turnkey");
+        banned.add("Reanimate");
+        banned.add("Scourge of Nel Toth");
+        banned.add("Sheoldred, Whispering One");
+        banned.add("Ball Lightning");
+        banned.add("Chain Lightning");
+        banned.add("Draconic Roar");
+        banned.add("Flametongue Kavu");
+        banned.add("Goblin Lore");
+        banned.add("Lightning Bolt");
+        banned.add("Fa'adiyah Seer");
+        banned.add("Scrounging Bandar");
+        banned.add("Time to Feed");
+    }
+}

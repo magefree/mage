@@ -1,29 +1,21 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.RaidCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.abilities.hint.common.RaidHint;
+import mage.cards.*;
+import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 import mage.watchers.common.PlayerAttackedWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class RuinRaider extends CardImpl {
@@ -36,13 +28,15 @@ public final class RuinRaider extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
-        // <i>Raid</i> &mdash; At the beginning of your end step, if you attacked with a creature this turn, reveal the top card of your library and put that card into your hand. You lose life equal to the card's converted mana cost.
+        // <i>Raid</i> &mdash; At the beginning of your end step, if you attacked this turn, reveal the top card of your library and put that card into your hand. You lose life equal to the card's converted mana cost.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(new RuinRaiderEffect(), TargetController.YOU, false),
                 RaidCondition.instance,
-                "<i>Raid</i> &mdash; At the beginning of your end step, if you attacked with a creature this turn, "
-                + "reveal the top card of your library and put that card into your hand. "
-                + "You lose life equal to the card's converted mana cost.");
+                "<i>Raid</i> &mdash; At the beginning of your end step, if you attacked this turn, "
+                        + "reveal the top card of your library and put that card into your hand. "
+                        + "You lose life equal to the card's converted mana cost.");
+        ability.setAbilityWord(AbilityWord.RAID);
+        ability.addHint(RaidHint.instance);
         this.addAbility(ability, new PlayerAttackedWatcher());
     }
 

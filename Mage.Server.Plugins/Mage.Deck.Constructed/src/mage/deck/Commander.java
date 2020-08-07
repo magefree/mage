@@ -4,6 +4,7 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.CanBeYourCommanderAbility;
 import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.keyword.CompanionAbility;
 import mage.abilities.keyword.PartnerAbility;
 import mage.abilities.keyword.PartnerWithAbility;
 import mage.cards.Card;
@@ -11,6 +12,7 @@ import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.cards.decks.Constructed;
 import mage.cards.decks.Deck;
+import mage.cards.decks.DeckValidatorErrorType;
 import mage.filter.FilterMana;
 import mage.util.ManaUtil;
 
@@ -26,7 +28,7 @@ public class Commander extends Constructed {
     protected boolean partnerAllowed = true;
 
     public Commander() {
-        this("Commander");
+        super("Commander");
         for (ExpansionSet set : Sets.getInstance().values()) {
             if (set.getSetType().isEternalLegal()) {
                 setCodes.add(set.getCode());
@@ -42,6 +44,7 @@ public class Commander extends Constructed {
         banned.add("Emrakul, the Aeons Torn");
         banned.add("Erayo, Soratami Ascendant");
         banned.add("Fastbond");
+        banned.add("Flash");
         banned.add("Gifts Ungiven");
         banned.add("Griselbrand");
         banned.add("Iona, Shield of Emeria");
@@ -49,6 +52,7 @@ public class Commander extends Constructed {
         banned.add("Leovold, Emissary of Trest");
         banned.add("Library of Alexandria");
         banned.add("Limited Resources");
+        banned.add("Lutri, the Spellchaser");
         banned.add("Mox Emerald");
         banned.add("Mox Jet");
         banned.add("Mox Pearl");
@@ -77,6 +81,10 @@ public class Commander extends Constructed {
         super(name);
     }
 
+    public Commander(String name, String shortName) {
+        super(name, shortName);
+    }
+
     @Override
     public int getDeckMinSize() {
         return 98;
@@ -90,10 +98,58 @@ public class Commander extends Constructed {
     @Override
     public boolean validate(Deck deck) {
         boolean valid = true;
+        errorsList.clear();
         FilterMana colorIdentity = new FilterMana();
+        Set<Card> commanders = new HashSet<>();
+        Card companion = null;
 
-        if (deck.getCards().size() + deck.getSideboard().size() != 100) {
-            invalid.put("Deck", "Must contain " + 100 + " cards: has " + (deck.getCards().size() + deck.getSideboard().size()) + " cards");
+        if (deck.getSideboard().size() == 1) {
+            commanders.add(deck.getSideboard().iterator().next());
+        } else if (deck.getSideboard().size() == 2) {
+            Iterator<Card> iter = deck.getSideboard().iterator();
+            Card card1 = iter.next();
+            Card card2 = iter.next();
+            if (card1.getAbilities().stream().anyMatch(ability -> ability instanceof CompanionAbility)) {
+                companion = card1;
+                commanders.add(card2);
+            } else if (card2.getAbilities().stream().anyMatch(ability -> ability instanceof CompanionAbility)) {
+                companion = card2;
+                commanders.add(card1);
+            } else {
+                commanders.add(card1);
+                commanders.add(card2);
+            }
+        } else if (deck.getSideboard().size() == 3) {
+            Iterator<Card> iter = deck.getSideboard().iterator();
+            Card card1 = iter.next();
+            Card card2 = iter.next();
+            Card card3 = iter.next();
+            if (card1.getAbilities().stream().anyMatch(ability -> ability instanceof CompanionAbility)) {
+                companion = card1;
+                commanders.add(card2);
+                commanders.add(card3);
+            } else if (card2.getAbilities().stream().anyMatch(ability -> ability instanceof CompanionAbility)) {
+                companion = card2;
+                commanders.add(card1);
+                commanders.add(card3);
+            } else if (card3.getAbilities().stream().anyMatch(ability -> ability instanceof CompanionAbility)) {
+                companion = card3;
+                commanders.add(card1);
+                commanders.add(card2);
+            } else {
+                addError(DeckValidatorErrorType.PRIMARY, "Commander", "Sideboard must contain only the commander(s) and up to 1 companion");
+                valid = false;
+            }
+        } else {
+            addError(DeckValidatorErrorType.PRIMARY, "Commander", "Sideboard must contain only the commander(s) and up to 1 companion");
+            valid = false;
+        }
+
+        if (companion != null && deck.getCards().size() + deck.getSideboard().size() != 101) {
+            addError(DeckValidatorErrorType.DECK_SIZE, "Deck", "Must contain " + 101 + " cards (companion doesn't count for deck size): has " + (deck.getCards().size() + deck.getSideboard().size()) + " cards");
+            valid = false;
+        } else if (companion == null && deck.getCards().size() + deck.getSideboard().size() != 100) {
+            addError(DeckValidatorErrorType.DECK_SIZE, "Deck", "Must contain " + 100 + " cards: has " + (deck.getCards().size() + deck.getSideboard().size()) + " cards");
             valid = false;
         }
 
@@ -104,53 +160,45 @@ public class Commander extends Constructed {
 
         for (String bannedCard : banned) {
             if (counts.containsKey(bannedCard)) {
-                invalid.put(bannedCard, "Banned");
+                addError(DeckValidatorErrorType.BANNED, "Banned", bannedCard);
                 valid = false;
             }
         }
 
-        if (deck.getSideboard().isEmpty() || deck.getSideboard().size() > 2) {
-            if ((deck.getSideboard().size() > 1 && !partnerAllowed)) {
-                invalid.put("Commander", "You may only have one commander");
+        Set<String> commanderNames = new HashSet<>();
+        for (Card commander : commanders) {
+            commanderNames.add(commander.getName());
+        }
+        for (Card commander : commanders) {
+            if (bannedCommander.contains(commander.getName())) {
+                addError(DeckValidatorErrorType.PRIMARY, "Commander", "Commander banned (" + commander.getName() + ')');
+                valid = false;
             }
-            invalid.put("Commander", "Sideboard must contain only the commander(s)");
-            valid = false;
-        } else {
-            Set<String> commanderNames = new HashSet<>();
-            for (Card commander : deck.getSideboard()) {
-                commanderNames.add(commander.getName());
+            if ((!commander.isCreature() || !commander.isLegendary())
+                    && (!commander.isPlaneswalker() || !commander.getAbilities().contains(CanBeYourCommanderAbility.getInstance()))) {
+                addError(DeckValidatorErrorType.PRIMARY, "Commander", "Commander invalid (" + commander.getName() + ')');
+                valid = false;
             }
-            for (Card commander : deck.getSideboard()) {
-                if (bannedCommander.contains(commander.getName())) {
-                    invalid.put("Commander", "Commander banned (" + commander.getName() + ')');
-                    valid = false;
-                }
-                if ((!commander.isCreature() || !commander.isLegendary())
-                        && (!commander.isPlaneswalker() || !commander.getAbilities().contains(CanBeYourCommanderAbility.getInstance()))) {
-                    invalid.put("Commander", "Commander invalid (" + commander.getName() + ')');
-                    valid = false;
-                }
-                if (deck.getSideboard().size() == 2) {
-                    if (commander.getAbilities().contains(PartnerAbility.getInstance())) {
-                        if (bannedPartner.contains(commander.getName())) {
-                            invalid.put("Commander", "Partner banned (" + commander.getName() + ')');
-                            valid = false;
-                        }
-                    } else {
-                        boolean partnersWith = commander.getAbilities()
-                                .stream()
-                                .filter(PartnerWithAbility.class::isInstance)
-                                .map(PartnerWithAbility.class::cast)
-                                .map(PartnerWithAbility::getPartnerName)
-                                .anyMatch(commanderNames::contains);
-                        if (!partnersWith) {
-                            invalid.put("Commander", "Commander without Partner (" + commander.getName() + ')');
-                            valid = false;
-                        }
+            if (commanders.size() == 2) {
+                if (commander.getAbilities().contains(PartnerAbility.getInstance())) {
+                    if (bannedPartner.contains(commander.getName())) {
+                        addError(DeckValidatorErrorType.PRIMARY, "Commander", "Partner banned (" + commander.getName() + ')');
+                        valid = false;
+                    }
+                } else {
+                    boolean partnersWith = commander.getAbilities()
+                            .stream()
+                            .filter(PartnerWithAbility.class::isInstance)
+                            .map(PartnerWithAbility.class::cast)
+                            .map(PartnerWithAbility::getPartnerName)
+                            .anyMatch(commanderNames::contains);
+                    if (!partnersWith) {
+                        addError(DeckValidatorErrorType.PRIMARY, "Commander", "Commander without Partner (" + commander.getName() + ')');
+                        valid = false;
                     }
                 }
-                ManaUtil.collectColorIdentity(colorIdentity, commander.getColorIdentity());
             }
+            ManaUtil.collectColorIdentity(colorIdentity, commander.getColorIdentity());
         }
 
         // no needs in cards check on wrong commanders
@@ -160,14 +208,20 @@ public class Commander extends Constructed {
 
         for (Card card : deck.getCards()) {
             if (!ManaUtil.isColorIdentityCompatible(colorIdentity, card.getColorIdentity())) {
-                invalid.put(card.getName(), "Invalid color (" + colorIdentity.toString() + ')');
+                addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid color (" + colorIdentity.toString() + ')');
+                valid = false;
+            }
+        }
+        for (Card card : deck.getSideboard()) {
+            if (!ManaUtil.isColorIdentityCompatible(colorIdentity, card.getColorIdentity())) {
+                addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid color (" + colorIdentity.toString() + ')');
                 valid = false;
             }
         }
         for (Card card : deck.getCards()) {
             if (!isSetAllowed(card.getExpansionSetCode())) {
                 if (!legalSets(card)) {
-                    invalid.put(card.getName(), "Not allowed Set: " + card.getExpansionSetCode());
+                    addError(DeckValidatorErrorType.WRONG_SET, card.getName(), "Not allowed Set: " + card.getExpansionSetCode());
                     valid = false;
                 }
             }
@@ -175,8 +229,23 @@ public class Commander extends Constructed {
         for (Card card : deck.getSideboard()) {
             if (!isSetAllowed(card.getExpansionSetCode())) {
                 if (!legalSets(card)) {
-                    invalid.put(card.getName(), "Not allowed Set: " + card.getExpansionSetCode());
+                    addError(DeckValidatorErrorType.WRONG_SET, card.getName(), "Not allowed Set: " + card.getExpansionSetCode());
                     valid = false;
+                }
+            }
+        }
+        // Check for companion legality
+        if (companion != null) {
+            Set<Card> cards = new HashSet<>(deck.getCards());
+            cards.addAll(commanders);
+            for (Ability ability : companion.getAbilities()) {
+                if (ability instanceof CompanionAbility) {
+                    CompanionAbility companionAbility = (CompanionAbility) ability;
+                    if (!companionAbility.isLegal(cards, getDeckMinSize())) {
+                        addError(DeckValidatorErrorType.PRIMARY, companion.getName(), "Deck invalid for companion");
+                        valid = false;
+                    }
+                    break;
                 }
             }
         }

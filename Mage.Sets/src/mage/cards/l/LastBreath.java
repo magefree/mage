@@ -1,4 +1,3 @@
-
 package mage.cards.l;
 
 import java.util.UUID;
@@ -10,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
@@ -25,13 +23,13 @@ import mage.target.TargetPermanent;
 public final class LastBreath extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 2 or less");
+
     static {
         filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 3));
     }
 
     public LastBreath(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");
 
         // Exile target creature with power 2 or less. Its controller gains 4 life.
         this.getSpellAbility().addEffect(new ExileTargetEffect());
@@ -51,6 +49,7 @@ public final class LastBreath extends CardImpl {
 }
 
 class LastBreathEffect extends OneShotEffect {
+
     LastBreathEffect() {
         super(Outcome.GainLife);
         staticText = "Its controller gains 4 life";
@@ -62,7 +61,7 @@ class LastBreathEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent target = (Permanent) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.BATTLEFIELD);
+        Permanent target = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (target != null) {
             Player player = game.getPlayer(target.getControllerId());
             if (player != null) {

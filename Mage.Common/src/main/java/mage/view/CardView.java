@@ -1,6 +1,8 @@
 package mage.view;
 
 import com.google.gson.annotations.Expose;
+import java.util.*;
+import java.util.stream.Collectors;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Abilities;
@@ -29,9 +31,6 @@ import mage.target.Targets;
 import mage.util.CardUtil;
 import mage.util.SubTypeList;
 
-import java.util.*;
-import java.util.stream.Collectors;
-
 /**
  * @author BetaSteward_at_googlemail.com
  */
@@ -55,7 +54,7 @@ public class CardView extends SimpleCardView {
     @Expose
     protected String loyalty = "";
     protected String startingLoyalty;
-    protected Set<CardType> cardTypes;
+    protected ArrayList<CardType> cardTypes;
     protected SubTypeList subTypes;
     protected Set<SuperType> superTypes;
     protected ObjectColor color;
@@ -151,7 +150,7 @@ public class CardView extends SimpleCardView {
         this.toughness = cardView.toughness;
         this.loyalty = cardView.loyalty;
         this.startingLoyalty = cardView.startingLoyalty;
-        this.cardTypes = new HashSet<>(cardView.cardTypes);
+        this.cardTypes = new ArrayList<>(cardView.cardTypes);
         this.subTypes = new SubTypeList(cardView.subTypes);
         this.superTypes = cardView.superTypes;
 
@@ -213,8 +212,8 @@ public class CardView extends SimpleCardView {
      * @param card
      * @param game
      * @param controlled is the card view created for the card controller - used
-     *                   for morph / face down cards to know which player may see information for
-     *                   the card
+     *                   for morph / face down cards to know which player may
+     *                   see information for the card
      */
     public CardView(Card card, Game game, boolean controlled) {
         this(card, game, controlled, false, false);
@@ -240,12 +239,14 @@ public class CardView extends SimpleCardView {
     /**
      * @param card
      * @param game
-     * @param controlled       is the card view created for the card controller - used
-     *                         for morph / face down cards to know which player may see information for
-     *                         the card
+     * @param controlled       is the card view created for the card controller
+     *                         - used for morph / face down cards to know which
+     *                         player may see information for the card
      * @param showFaceDownCard if true and the card is not on the battlefield,
-     *                         also a face down card is shown in the view, face down cards will be shown
-     * @param storeZone        if true the card zone will be set in the zone attribute.
+     *                         also a face down card is shown in the view, face
+     *                         down cards will be shown
+     * @param storeZone        if true the card zone will be set in the zone
+     *                         attribute.
      */
     public CardView(Card card, Game game, boolean controlled, boolean showFaceDownCard, boolean storeZone) {
         super(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.getUsesVariousArt(), card.getTokenSetCode(), game != null, card.getTokenDescriptor());
@@ -318,13 +319,6 @@ public class CardView extends SimpleCardView {
             }
         }
 
-        AdventureCard adventureCard = null;
-        AdventureCardSpell adventureCardSpell = null;
-        if (card instanceof AdventureCard) {
-            adventureCard = (AdventureCard) card;
-            adventureCardSpell = (AdventureCardSpell) adventureCard.getSpellCard();
-        }
-
         String fullCardName;
         if (splitCard != null) {
             this.isSplitCard = true;
@@ -340,7 +334,9 @@ public class CardView extends SimpleCardView {
             fullCardName = card.getName(); // split card contains full name as normal
             this.manaCostLeft = splitCard.getLeftHalfCard().getManaCost().getSymbols();
             this.manaCostRight = splitCard.getRightHalfCard().getManaCost().getSymbols();
-        } else if (adventureCard != null) {
+        } else if (card instanceof AdventureCard) {
+            AdventureCard adventureCard = ((AdventureCard) card);
+            AdventureCardSpell adventureCardSpell = ((AdventureCardSpell) adventureCard.getSpellCard());
             fullCardName = adventureCard.getName() + MockCard.ADVENTURE_NAME_SEPARATOR + adventureCardSpell.getName();
             this.manaCostLeft = adventureCardSpell.getManaCost().getSymbols();
             this.manaCostRight = adventureCard.getManaCost().getSymbols();
@@ -467,7 +463,7 @@ public class CardView extends SimpleCardView {
                 } else if (spell.getCard() != null) {
                     SplitCard wholeCard = ((SplitCardHalf) spell.getCard()).getParentCard();
                     Abilities<Ability> aftermathHalfAbilities = wholeCard.getRightHalfCard().getAbilities(game);
-                    if (aftermathHalfAbilities.stream().anyMatch(ability -> ability instanceof AftermathAbility)) {
+                    if (aftermathHalfAbilities.stream().anyMatch(halfAbility -> halfAbility instanceof AftermathAbility)) {
                         if (ty == SpellAbilityType.SPLIT_RIGHT) {
                             artRect = ArtRect.AFTERMATH_BOTTOM;
                         } else {
@@ -636,7 +632,7 @@ public class CardView extends SimpleCardView {
         this.toughness = "";
         this.loyalty = "";
         this.startingLoyalty = "";
-        this.cardTypes = EnumSet.noneOf(CardType.class);
+        this.cardTypes = new ArrayList<>();
         this.subTypes = new SubTypeList();
         this.superTypes = EnumSet.noneOf(SuperType.class);
         this.color = new ObjectColor();
@@ -764,7 +760,7 @@ public class CardView extends SimpleCardView {
         return startingLoyalty;
     }
 
-    public Set<CardType> getCardTypes() {
+    public ArrayList<CardType> getCardTypes() {
         return cardTypes;
     }
 
@@ -1030,26 +1026,25 @@ public class CardView extends SimpleCardView {
     }
 
     public String getColorText() {
-
-        String color = getColor().getDescription();
-        return color.substring(0, 1).toUpperCase(Locale.ENGLISH) + color.substring(1);
+        String colorText = getColor().getDescription();
+        return colorText.substring(0, 1).toUpperCase(Locale.ENGLISH) + colorText.substring(1);
     }
 
     public String getTypeText() {
-        StringBuilder type = new StringBuilder();
+        StringBuilder typeText = new StringBuilder();
         if (!getSuperTypes().isEmpty()) {
-            type.append(String.join(" ", getSuperTypes().stream().map(SuperType::toString).collect(Collectors.toList())));
-            type.append(" ");
+            typeText.append(String.join(" ", getSuperTypes().stream().map(SuperType::toString).collect(Collectors.toList())));
+            typeText.append(" ");
         }
         if (!getCardTypes().isEmpty()) {
-            type.append(String.join(" ", getCardTypes().stream().map(CardType::toString).collect(Collectors.toList())));
-            type.append(" ");
+            typeText.append(String.join(" ", getCardTypes().stream().map(CardType::toString).collect(Collectors.toList())));
+            typeText.append(" ");
         }
         if (!getSubTypes().isEmpty()) {
-            type.append(" - ");
-            type.append(String.join(" ", getSubTypes().stream().map(SubType::toString).collect(Collectors.toList())));
+            typeText.append(" - ");
+            typeText.append(String.join(" ", getSubTypes().stream().map(SubType::toString).collect(Collectors.toList())));
         }
-        return type.toString();
+        return typeText.toString();
     }
 
     public boolean isLand() {

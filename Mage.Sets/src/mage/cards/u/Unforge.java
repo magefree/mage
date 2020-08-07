@@ -61,7 +61,7 @@ class UnforgeEffect extends OneShotEffect{
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent equipment = game.getPermanentOrLKIBattlefield(this.getTargetPointer().getFirst(game, source));
+        Permanent equipment = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if(equipment != null){
             Permanent creature = game.getPermanent(equipment.getAttachedTo());
             if(creature != null){

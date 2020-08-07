@@ -2,7 +2,7 @@ package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -27,7 +27,7 @@ public final class DeathpactAngel extends CardImpl {
         //Flying
         this.addAbility(FlyingAbility.getInstance());
         //When Deathpact Angel dies, create a 1/1 white and black Cleric creature token. It has "{3}{W}{B}{B}, {T}, Sacrifice this creature: Return a card named Deathpact Angel from your graveyard to the battlefield."
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new DeathpactAngelToken())));
+        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new DeathpactAngelToken())));
     }
 
     public DeathpactAngel(final DeathpactAngel card) {

@@ -3,6 +3,7 @@ package mage.server;
 import mage.MageException;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
+import mage.cards.decks.DeckValidatorError;
 import mage.cards.decks.DeckValidatorFactory;
 import mage.constants.RangeOfInfluence;
 import mage.constants.TableState;
@@ -32,11 +33,8 @@ import mage.server.util.ThreadExecutor;
 import mage.view.ChatMessage;
 import org.apache.log4j.Logger;
 
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Optional;
-import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -150,9 +148,10 @@ public class TableController {
             }
             if (!Main.isTestMode() && !table.getValidator().validate(deck)) {
                 StringBuilder sb = new StringBuilder("You (").append(name).append(") have an invalid deck for the selected ").append(table.getValidator().getName()).append(" Format. \n\n");
-                for (Map.Entry<String, String> entry : table.getValidator().getInvalid().entrySet()) {
-                    sb.append(entry.getKey()).append(": ").append(entry.getValue()).append('\n');
-                }
+                List<DeckValidatorError> errorsList = table.getValidator().getErrorsListSorted();
+                errorsList.stream().forEach(error -> {
+                    sb.append(error.getGroup()).append(": ").append(error.getMessage()).append("\n");
+                });
                 sb.append("\n\nSelect a deck that is appropriate for the selected format and try again!");
                 user.showUserMessage("Join Table", sb.toString());
                 if (isOwner(userId)) {
@@ -267,9 +266,10 @@ public class TableController {
 
         if (!Main.isTestMode() && !table.getValidator().validate(deck)) {
             StringBuilder sb = new StringBuilder("You (").append(name).append(") have an invalid deck for the selected ").append(table.getValidator().getName()).append(" Format. \n\n");
-            for (Map.Entry<String, String> entry : table.getValidator().getInvalid().entrySet()) {
-                sb.append(entry.getKey()).append(": ").append(entry.getValue()).append('\n');
-            }
+            List<DeckValidatorError> errorsList = table.getValidator().getErrorsListSorted();
+            errorsList.stream().forEach(error -> {
+                sb.append(error.getGroup()).append(": ").append(error.getMessage()).append("\n");
+            });
             sb.append("\n\nSelect a deck that is appropriate for the selected format and try again!");
             user.showUserMessage("Join Table", sb.toString());
             if (isOwner(userId)) {
@@ -425,9 +425,10 @@ public class TableController {
                 return false;
             }
             StringBuilder sb = new StringBuilder("Invalid deck for the selected ").append(table.getValidator().getName()).append(" format. \n\n");
-            for (Map.Entry<String, String> entry : table.getValidator().getInvalid().entrySet()) {
-                sb.append(entry.getKey()).append(": ").append(entry.getValue()).append('\n');
-            }
+            List<DeckValidatorError> errorsList = table.getValidator().getErrorsListSorted();
+            errorsList.stream().forEach(error -> {
+                sb.append(error.getGroup()).append(": ").append(error.getMessage()).append("\n");
+            });
             sb.append("\n\nAdd enough cards and try again!");
             _user.get().showUserMessage("Submit deck", sb.toString());
             return false;

@@ -33,7 +33,7 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
     private static final FilterCard filterOneCard = new FilterCard("one card");
 
     public DiscardCardYouChooseTargetEffect() {
-        this(new FilterCard("a card"));
+        this(StaticFilters.FILTER_CARD_A);
     }
 
     public DiscardCardYouChooseTargetEffect(TargetController targetController) {
@@ -144,12 +144,7 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
         if (!controller.choose(Outcome.Benefit, revealedCards, target, game)) {
             return result;
         }
-        for (UUID targetId : target.getTargets()) {
-            Card card = revealedCards.get(targetId, game);
-            if (!player.discard(card, source, game)) {
-                result = false;
-            }
-        }
+        result=!player.discard(new CardsImpl(target.getTargets()),source,game).isEmpty();
         return result;
     }
 
@@ -175,7 +170,7 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
         } else {
             if (numberCardsToReveal instanceof StaticValue) {
                 sb.append(" reveals ");
-                sb.append(CardUtil.numberToText(((StaticValue) numberCardsToReveal).getValue()) + " cards");
+                sb.append(CardUtil.numberToText(((StaticValue) numberCardsToReveal).getValue())).append(" cards");
                 sb.append(" from their hand");
             } else {
                 sb.append(" reveals a number of cards from their hand equal to ");

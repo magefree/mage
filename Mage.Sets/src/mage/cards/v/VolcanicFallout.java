@@ -2,7 +2,7 @@
 package mage.cards.v;
 
 import java.util.UUID;
-import mage.abilities.common.CantBeCounteredAbility;
+import mage.abilities.common.CantBeCounteredSourceAbility;
 import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -19,7 +19,7 @@ public final class VolcanicFallout extends CardImpl {
 
 
         // Volcanic Fallout can't be countered.
-        this.addAbility(new CantBeCounteredAbility());
+        this.addAbility(new CantBeCounteredSourceAbility());
         // Volcanic Fallout deals 2 damage to each creature and each player.
         this.getSpellAbility().addEffect(new DamageEverythingEffect(2));
     }

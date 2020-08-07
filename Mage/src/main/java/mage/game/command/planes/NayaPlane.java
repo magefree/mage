@@ -1,8 +1,5 @@
-
 package mage.game.command.planes;
 
-import java.util.ArrayList;
-import java.util.List;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
@@ -15,7 +12,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.RollPlanarDieEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.PlayAdditionalLandsAllEffect;
+import mage.abilities.effects.common.cost.PlanarDieRollCostIncreasingEffect;
 import mage.constants.Duration;
+import mage.constants.Planes;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
@@ -27,8 +26,10 @@ import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.watchers.common.PlanarRollWatcher;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * @author spjspj
  */
 public class NayaPlane extends Plane {
@@ -40,7 +41,7 @@ public class NayaPlane extends Plane {
     }
 
     public NayaPlane() {
-        this.setName("Plane - Naya");
+        this.setPlaneType(Planes.PLANE_NAYA);
         this.setExpansionSetCodeForImage("PCA");
 
         // You may play any number of lands on each of your turns

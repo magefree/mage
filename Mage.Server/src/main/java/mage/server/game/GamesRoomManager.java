@@ -43,7 +43,7 @@ public enum GamesRoomManager {
         if (rooms.containsKey(roomId)) {
             return Optional.of(rooms.get(roomId));
         }
-        logger.error("room not found : " + roomId);
+        logger.warn("room not found : " + roomId); // after server restart users try to use old rooms on reconnect
         return Optional.empty();
 
     }

@@ -48,7 +48,7 @@ class ForesightEffect extends SearchEffect {
 
     ForesightEffect() {
         super(new TargetCardInLibrary(3, new FilterCard()), Outcome.Benefit);
-        staticText = "Search your library for three cards, exile them, then shuffle your library.";
+        staticText = "Search your library for three cards, exile them, then shuffle your library";
     }
 
     ForesightEffect(final ForesightEffect effect) {

@@ -1,4 +1,3 @@
-
 package org.mage.test.cards.enchantments;
 
 import mage.constants.PhaseStep;
@@ -119,7 +118,7 @@ public class AnimateDeadTest extends CardTestPlayerBase {
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Cruel Edict", playerA);
 
-        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        setStopAt(2, PhaseStep.END_TURN);
         execute();
 
         assertGraveyardCount(playerB, "Cruel Edict", 1);
@@ -168,6 +167,8 @@ public class AnimateDeadTest extends CardTestPlayerBase {
      */
     @Test
     public void testAnimateAndDragonlordAtarkaWithNoTargets() {
+        setStrictChooseMode(true);
+
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
 
         // Enchant creature card in a graveyard
@@ -187,6 +188,11 @@ public class AnimateDeadTest extends CardTestPlayerBase {
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
+
+        assertAllCommandsUsed();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
 
         assertPermanentCount(playerA, "Animate Dead", 1);
         assertPermanentCount(playerA, "Dragonlord Atarka", 1);

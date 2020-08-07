@@ -1,4 +1,3 @@
-
 package mage.cards.f;
 
 import java.util.UUID;
@@ -11,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -23,7 +21,7 @@ import mage.players.Player;
 public final class FlintGolem extends CardImpl {
 
     public FlintGolem(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
         this.subtype.add(SubType.GOLEM);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
@@ -46,7 +44,7 @@ class FlintGolemEffect extends OneShotEffect {
 
     public FlintGolemEffect() {
         super(Outcome.Detriment);
-        this.staticText = "defending player puts the top three cards of their library into their graveyard";
+        this.staticText = "defending player mills three cards";
     }
 
     public FlintGolemEffect(final FlintGolemEffect effect) {
@@ -64,7 +62,7 @@ class FlintGolemEffect extends OneShotEffect {
         if (blockingCreature != null) {
             Player opponent = game.getPlayer(blockingCreature.getControllerId());
             if (opponent != null) {
-                opponent.moveCards(opponent.getLibrary().getTopCards(game, 3), Zone.GRAVEYARD, source, game);
+                opponent.millCards(3, source, game);
                 return true;
             }
         }

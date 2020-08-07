@@ -1,8 +1,5 @@
-
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
@@ -10,29 +7,28 @@ import mage.abilities.keyword.ExtortAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
-
-
 public final class PontiffOfBlight extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Other creatures you control");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+
     static {
         filter.add(AnotherPredicate.instance);
         filter.add(TargetController.YOU.getControllerPredicate());
     }
 
-    public PontiffOfBlight (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");
+    public PontiffOfBlight(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.CLERIC);
 
@@ -43,11 +39,13 @@ public final class PontiffOfBlight extends CardImpl {
         this.addAbility(new ExtortAbility());
 
         // Other creatures you control have extort. (If a creature has multiple instances of extort, each triggers separately.)
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(new ExtortAbility(), Duration.WhileOnBattlefield, filter)));
-
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
+                new ExtortAbility(), Duration.WhileOnBattlefield, filter
+        ).setText("Other creatures you control have extort. " +
+                "<i>(If a creature has multiple instances of extort, each triggers separately.)</i>")));
     }
 
-    public PontiffOfBlight (final PontiffOfBlight card) {
+    private PontiffOfBlight(final PontiffOfBlight card) {
         super(card);
     }
 
@@ -55,5 +53,4 @@ public final class PontiffOfBlight extends CardImpl {
     public PontiffOfBlight copy() {
         return new PontiffOfBlight(this);
     }
-
 }

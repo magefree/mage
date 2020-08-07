@@ -23,6 +23,7 @@ import mage.watchers.Watcher;
 import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
+import mage.abilities.costs.common.TapSourceCost;
 
 /**
  * Practically everything in the game is started from an Ability. This interface
@@ -190,12 +191,18 @@ public interface Ability extends Controllable, Serializable {
 
     /**
      * Retrieves all targets that must be satisfied before this ability is put
-     * onto the stack.
+     * onto the stack. Warning, return targets from first/current mode only.
      *
      * @return All {@link Targets} that must be satisfied before this ability is
      * put onto the stack.
      */
     Targets getTargets();
+
+    /**
+     * Retrieves all selected targets, read only. Multi-modes return different targets.
+     * Works on stack only (after real cast/activate)
+     */
+    Targets getAllSelectedTargets();
 
     /**
      * Retrieves the {@link Target} located at the 0th index in the
@@ -360,6 +367,19 @@ public interface Ability extends Controllable, Serializable {
      * @return
      */
     boolean hasSourceObjectAbility(Game game, MageObject source, GameEvent event);
+    
+    /**
+     * Returns true if the ability has a tap itself in their costs
+     * @return 
+     */
+    default boolean hasTapCost() {
+        for (Cost cost : this.getCosts()) {
+            if (cost instanceof TapSourceCost) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     /**
      * Returns true if this ability has to be shown as topmost of all the rules
@@ -447,7 +467,7 @@ public interface Ability extends Controllable, Serializable {
      *
      * @param abilityWord
      */
-    void setAbilityWord(AbilityWord abilityWord);
+    Ability setAbilityWord(AbilityWord abilityWord);
 
     /**
      * Creates the message about the ability casting/triggering/activating to
@@ -522,4 +542,12 @@ public interface Ability extends Controllable, Serializable {
     Ability addCustomOutcome(Outcome customOutcome);
 
     Outcome getCustomOutcome();
+
+    /**
+     * For mtg's instances search, see rules example in 112.10b
+     *
+     * @param ability
+     * @return
+     */
+    boolean isSameInstance(Ability ability);
 }

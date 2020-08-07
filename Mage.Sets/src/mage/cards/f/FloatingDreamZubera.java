@@ -4,7 +4,7 @@ package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.dynamicvalue.common.ZuberasDiedDynamicValue;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
@@ -25,7 +25,7 @@ public final class FloatingDreamZubera extends CardImpl {
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
-        this.addAbility(new DiesTriggeredAbility(new DrawCardSourceControllerEffect(ZuberasDiedDynamicValue.instance)), new ZuberasDiedWatcher());
+        this.addAbility(new DiesSourceTriggeredAbility(new DrawCardSourceControllerEffect(ZuberasDiedDynamicValue.instance)), new ZuberasDiedWatcher());
     }
 
     public FloatingDreamZubera(final FloatingDreamZubera card) {

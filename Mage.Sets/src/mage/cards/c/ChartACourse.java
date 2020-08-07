@@ -1,11 +1,10 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.RaidCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.hint.common.RaidHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -14,8 +13,9 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.watchers.common.PlayerAttackedWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class ChartACourse extends CardImpl {
@@ -27,9 +27,11 @@ public final class ChartACourse extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
         this.getSpellAbility().addEffect(new ChartACourseEffect());
         this.getSpellAbility().addWatcher(new PlayerAttackedWatcher());
+        // this.getSpellAbility().setAbilityWord(AbilityWord.RAID); // no raid ability, only same conditional
+        this.getSpellAbility().addHint(RaidHint.instance);
     }
 
-    public ChartACourse(final ChartACourse card) {
+    private ChartACourse(final ChartACourse card) {
         super(card);
     }
 
@@ -43,10 +45,10 @@ class ChartACourseEffect extends OneShotEffect {
 
     ChartACourseEffect() {
         super(Outcome.Neutral);
-        this.staticText = "Then discard a card unless you attacked with a creature this turn.";
+        this.staticText = "Then discard a card unless you attacked this turn.";
     }
 
-    ChartACourseEffect(final ChartACourseEffect effect) {
+    private ChartACourseEffect(final ChartACourseEffect effect) {
         super(effect);
     }
 

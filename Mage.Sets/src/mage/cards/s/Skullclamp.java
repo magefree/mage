@@ -28,7 +28,7 @@ public final class Skullclamp extends CardImpl {
         // Equipped creature gets +1/-1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, -1)));
         // Whenever equipped creature dies, draw two cards.
-        this.addAbility(new DiesAttachedTriggeredAbility(new DrawCardSourceControllerEffect(2), "equipped"));
+        this.addAbility(new DiesAttachedTriggeredAbility(new DrawCardSourceControllerEffect(2), "equipped creature"));
         // Equip {1}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
     }

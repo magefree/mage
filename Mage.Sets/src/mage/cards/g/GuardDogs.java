@@ -30,7 +30,7 @@ public final class GuardDogs extends CardImpl {
 
     public GuardDogs(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
-        this.subtype.add(SubType.HOUND);
+        this.subtype.add(SubType.DOG);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
@@ -86,7 +86,7 @@ class GuardDogsEffect extends PreventionEffectImpl {
             if (mageObject != null
                     && controlledTarget.getFirstTarget() != null) {
                 Permanent permanent = game.getPermanentOrLKIBattlefield(controlledTarget.getFirstTarget());
-                Permanent targetPermanent = game.getPermanentOrLKIBattlefield(this.getTargetPointer().getFirst(game, source));
+                Permanent targetPermanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
                 if (permanent != null
                         && targetPermanent != null
                         && this.getTargetPointer().getTargets(game, source).contains(event.getSourceId())

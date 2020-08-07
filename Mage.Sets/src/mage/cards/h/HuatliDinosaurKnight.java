@@ -10,6 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -21,14 +22,12 @@ import java.util.UUID;
 public final class HuatliDinosaurKnight extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Dinosaur you control");
-    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creature you don't control");
-    private static final FilterCreaturePermanent filter3 = new FilterCreaturePermanent("Dinosaurs");
+    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Dinosaurs");
 
     static {
         filter.add(SubType.DINOSAUR.getPredicate());
         filter.add(TargetController.YOU.getControllerPredicate());
-        filter2.add(TargetController.NOT_YOU.getControllerPredicate());
-        filter3.add(SubType.DINOSAUR.getPredicate());
+        filter2.add(SubType.DINOSAUR.getPredicate());
     }
 
     public HuatliDinosaurKnight(UUID ownerId, CardSetInfo setInfo) {
@@ -49,14 +48,14 @@ public final class HuatliDinosaurKnight extends CardImpl {
         // -3: Target Dinosaur you control deals damage equal to its power to target creature you don't control.
         ability = new LoyaltyAbility(new DamageWithPowerFromOneToAnotherTargetEffect(), -3);
         ability.addTarget(new TargetCreaturePermanent(filter));
-        ability.addTarget(new TargetCreaturePermanent(filter2));
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
         this.addAbility(ability);
 
         // -7: Dinosaurs you control get +4/+4 until end of turn.
-        this.addAbility(new LoyaltyAbility(new BoostControlledEffect(4, 4, Duration.EndOfTurn, filter3), -7));
+        this.addAbility(new LoyaltyAbility(new BoostControlledEffect(4, 4, Duration.EndOfTurn, filter2), -7));
     }
 
-    public HuatliDinosaurKnight(final HuatliDinosaurKnight card) {
+    private HuatliDinosaurKnight(final HuatliDinosaurKnight card) {
         super(card);
     }
 

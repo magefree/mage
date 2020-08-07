@@ -71,12 +71,12 @@ public final class ShiftingShadow extends CardImpl {
 
 class ShiftingShadowEffect extends OneShotEffect {
 
-    private UUID auraId;
+    private final UUID auraId;
 
     public ShiftingShadowEffect(UUID auraId) {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "destroy this creature. Reveal cards from the top of your library until you reveal a creature card. "
-                + "Put that card onto the battlefield and attach Shifting Shadow to it, then put all other cards revealed this way on the bottom of your library in a random order";
+                + "Put that card onto the battlefield and attach {this} to it, then put all other cards revealed this way on the bottom of your library in a random order";
         this.auraId = auraId;
     }
 
@@ -107,6 +107,11 @@ class ShiftingShadowEffect extends OneShotEffect {
             }
             if (aura != null) {
                 enchanted.destroy(source.getSourceId(), game, false);
+                // Because this effect has two steps, we have to call the processAction method here, so that triggered effects of the target going to graveyard go to the stack
+                // If we don't do it here, gained triggered effects to the target will be removed from the following moveCards method and the applyEffcts done there.
+                // Example: {@link org.mage.test.commander.duel.MairsilThePretenderTest#MairsilThePretenderTest Test}
+                game.getState().processAction(game);
+                
                 Cards revealed = new CardsImpl();
                 Cards otherCards = new CardsImpl();
                 for (Card card : controller.getLibrary().getCards(game)) {

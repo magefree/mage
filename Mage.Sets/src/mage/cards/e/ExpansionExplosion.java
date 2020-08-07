@@ -1,6 +1,5 @@
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
@@ -23,13 +22,15 @@ import mage.target.TargetSpell;
 import mage.target.common.TargetAnyTarget;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class ExpansionExplosion extends SplitCard {
 
-    private static final FilterSpell filter = new FilterInstantOrSorcerySpell("instant or sorcery spell with converted mana cost 4 or less");
+    private static final FilterSpell filter
+            = new FilterInstantOrSorcerySpell("instant or sorcery spell with converted mana cost 4 or less");
 
     static {
         filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 5));
@@ -46,11 +47,11 @@ public final class ExpansionExplosion extends SplitCard {
         // Explosion
         // Explosion deals X damage to any target. Target player draws X cards.
         this.getRightHalfCard().getSpellAbility().addEffect(new ExplosionEffect());
-        this.getRightHalfCard().getSpellAbility().addTarget(new TargetAnyTarget());
-        this.getRightHalfCard().getSpellAbility().addTarget(new TargetPlayer());
+        this.getRightHalfCard().getSpellAbility().addTarget(new TargetAnyTarget().withChooseHint("To deal damage"));
+        this.getRightHalfCard().getSpellAbility().addTarget(new TargetPlayer().withChooseHint("To draw cards"));
     }
 
-    public ExpansionExplosion(final ExpansionExplosion card) {
+    private ExpansionExplosion(final ExpansionExplosion card) {
         super(card);
     }
 
@@ -62,13 +63,13 @@ public final class ExpansionExplosion extends SplitCard {
 
 class ExplosionEffect extends OneShotEffect {
 
-    public ExplosionEffect() {
+    ExplosionEffect() {
         super(Outcome.Benefit);
         this.staticText = "{this} deals X damage to any target. "
                 + "Target player draws X cards.";
     }
 
-    public ExplosionEffect(final ExplosionEffect effect) {
+    private ExplosionEffect(final ExplosionEffect effect) {
         super(effect);
     }
 
@@ -85,7 +86,7 @@ class ExplosionEffect extends OneShotEffect {
         effect.apply(game, source);
         Player player = game.getPlayer(source.getTargets().get(1).getFirstTarget());
         if (player != null) {
-            player.drawCards(xValue, game);
+            player.drawCards(xValue, source.getSourceId(), game);
         }
         return true;
     }

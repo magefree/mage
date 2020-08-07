@@ -1,7 +1,4 @@
-
 package mage.cards.a;
-
-import java.util.UUID;
 
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -25,6 +22,8 @@ import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  * @author Styxo
@@ -82,7 +81,7 @@ class AnakinSkywalkerEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent != null) {
-            permanent.regenerate(source.getSourceId(), game);
+            permanent.regenerate(source, game);
             return new TransformSourceEffect(true).apply(game, source);
         }
         return false;

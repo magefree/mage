@@ -1,25 +1,20 @@
-
 package mage.cards.h;
 
-import java.util.UUID;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.CostModificationType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.game.Game;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+import mage.cards.Card;
+
 /**
- *
  * @author Pete Rossi
  */
 public final class HumOfTheRadix extends CardImpl {
@@ -56,18 +51,16 @@ class HumOfTheRadixCostIncreaseEffect extends CostModificationEffectImpl {
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         int additionalCost = game.getBattlefield().getAllActivePermanents(new FilterArtifactPermanent(), abilityToModify.getControllerId(), game).size();
-        if (additionalCost > 0) {
-            CardUtil.increaseCost(abilityToModify, additionalCost);
-        }
+        CardUtil.increaseCost(abilityToModify, additionalCost);
         return true;
     }
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         if (abilityToModify instanceof SpellAbility) {
-            MageObject sourceObject = abilityToModify.getSourceObject(game);
-            if (sourceObject != null && sourceObject.isArtifact()) {
-                return true;
+            Card spellCard = ((SpellAbility) abilityToModify).getCharacteristics(game);
+            if (spellCard != null) {
+                return !spellCard.isArtifact();
             }
         }
         return false;

@@ -2,7 +2,7 @@ package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
@@ -23,7 +23,7 @@ public final class PurpleCrystalCrab extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Purple-Crystal Crab dies, draw card.
-        this.addAbility(new DiesTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
+        this.addAbility(new DiesSourceTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
     }
 
     public PurpleCrystalCrab(final PurpleCrystalCrab card) {

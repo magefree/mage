@@ -13,14 +13,13 @@ import mage.choices.ChoiceImpl;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SpellAbilityCastMode;
 import mage.filter.FilterCard;
 import mage.game.Game;
-import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.util.CardUtil;
 
 /**
- *
  * @author North
  */
 public class SpellsCostReductionControllerEffect extends CostModificationEffectImpl {
@@ -114,13 +113,9 @@ public class SpellsCostReductionControllerEffect extends CostModificationEffectI
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         if (abilityToModify instanceof SpellAbility) {
             if (abilityToModify.isControlledBy(source.getControllerId())) {
-                Spell spell = (Spell) game.getStack().getStackObject(abilityToModify.getId());
-                if (spell != null) {
-                    return this.filter.match(spell, source.getSourceId(), source.getControllerId(), game);
-                } else {
-                    // used at least for flashback ability because Flashback ability doesn't use stack or for getPlayables where spell is not cast yet
-                    Card sourceCard = game.getCard(abilityToModify.getSourceId());
-                    return sourceCard != null && this.filter.match(sourceCard, source.getSourceId(), source.getControllerId(), game);
+                Card spellCard = ((SpellAbility) abilityToModify).getCharacteristics(game);;
+                if (spellCard != null) {
+                    return this.filter.match(spellCard, source.getSourceId(), source.getControllerId(), game);
                 }
             }
         }

@@ -1,9 +1,14 @@
 package mage.verify;
 
 import mage.ObjectColor;
+import mage.abilities.Ability;
+import mage.abilities.effects.keyword.ScryEffect;
+import mage.abilities.keyword.MenaceAbility;
 import mage.abilities.keyword.MultikickerAbility;
 import mage.cards.*;
 import mage.cards.basiclands.BasicLand;
+import mage.cards.decks.DeckCardLists;
+import mage.cards.decks.importer.DeckImporter;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.cards.repository.CardScanner;
@@ -11,6 +16,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SubType;
 import mage.constants.SuperType;
+import mage.game.command.Plane;
 import mage.game.draft.RateCard;
 import mage.game.permanent.token.Token;
 import mage.game.permanent.token.TokenImpl;
@@ -30,9 +36,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.NoSuchFileException;
-import java.nio.file.Paths;
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -105,7 +110,6 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_COST, "WC00", "Erase");
         skipListAddName(SKIP_LIST_COST, "H17", "Grimlock, Dinobot Leader");
         skipListAddName(SKIP_LIST_COST, "UST", "Everythingamajig");
-        skipListAddName(SKIP_LIST_COST, "ANA", "Shrine Keeper"); // until it's been corrected in MTGJSON
 
         // supertype
         skipListCreate(SKIP_LIST_SUPERTYPE);
@@ -119,17 +123,6 @@ public class VerifyCardDataTest {
         // subtype
         skipListCreate(SKIP_LIST_SUBTYPE);
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Miss Demeanor");
-        // the following are temporary
-        subtypesToIgnore.add("Noble");
-        skipListAddName(SKIP_LIST_SUBTYPE, "AER", "Ridgescale Tusker");
-        skipListAddName(SKIP_LIST_SUBTYPE, "ME3", "Lady Caleria");
-        skipListAddName(SKIP_LIST_SUBTYPE, "LEG", "Lady Caleria");
-        // Errata: Chicken -> Bird (2020). Remove these, when it's been corrected in MTGJSON
-        skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Chicken a la King");
-        skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Free-Range Chicken");
-        skipListAddName(SKIP_LIST_SUBTYPE, "UND", "Free-Range Chicken");
-        skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Poultrygeist");
-        skipListAddName(SKIP_LIST_SUBTYPE, "UND", "Poultrygeist");
 
         // number
         skipListCreate(SKIP_LIST_NUMBER);
@@ -218,7 +211,7 @@ public class VerifyCardDataTest {
     private final ArrayList<String> outputMessages = new ArrayList<>();
 
     @Test
-    public void verifyCards() throws IOException {
+    public void test_verifyCards() throws IOException {
         int cardIndex = 0;
         for (Card card : CardScanner.getAllCards()) {
             cardIndex++;
@@ -233,12 +226,12 @@ public class VerifyCardDataTest {
 
         printMessages(outputMessages);
         if (failed > 0) {
-            Assert.fail(failed + " errors in verify");
+            Assert.fail("found " + failed + " errors in cards verify (see errors list above)");
         }
     }
 
     @Test
-    public void checkDuplicateCardNumbersInDB() {
+    public void test_checkDuplicateCardNumbersInDB() {
         Collection<String> doubleErrors = new ArrayList<>();
 
         Collection<ExpansionSet> sets = Sets.getInstance().values();
@@ -290,7 +283,7 @@ public class VerifyCardDataTest {
 
     @Test
     @Ignore // TODO: enable it after THB set will be completed
-    public void checkDoubleRareCardsInSets() {
+    public void test_checkDoubleRareCardsInSets() {
         // all basic sets after THB must have double rare cards (one normal, one bonus)
         // ELD can have same rules, but xmage stores it as different sets (ELD and CELD)
         Date startCheck = TherosBeyondDeath.getInstance().getReleaseDate();
@@ -349,7 +342,7 @@ public class VerifyCardDataTest {
     }
 
     @Test
-    public void checkWrongCardClasses() {
+    public void test_checkWrongCardClasses() {
         Collection<String> errorsList = new ArrayList<>();
         Map<String, String> classesIndex = new HashMap<>();
         int totalCards = 0;
@@ -390,8 +383,7 @@ public class VerifyCardDataTest {
     }
 
     @Test
-    public void checkMissingSets() {
-
+    public void test_checkMissingSets() {
         Collection<String> errorsList = new ArrayList<>();
 
         int totalMissingSets = 0;
@@ -405,7 +397,7 @@ public class VerifyCardDataTest {
             if (skipListHaveName(SKIP_LIST_INVALID_SETS, searchSet))
                 continue;
 
-            ExpansionSet mageSet = Sets.findSet(searchSet.toUpperCase());
+            ExpansionSet mageSet = Sets.findSet(searchSet.toUpperCase(Locale.ENGLISH));
             if (mageSet == null) {
                 totalMissingSets = totalMissingSets + 1;
                 totalMissingCards = totalMissingCards + refSet.cards.size();
@@ -419,6 +411,55 @@ public class VerifyCardDataTest {
         // only warnings
         for (String error : errorsList) {
             System.out.println(error);
+        }
+    }
+
+    @Test
+    @Ignore // TODO: enable and fix broken decks after promo sets merge https://github.com/magefree/mage/pull/6190
+    public void test_checkSampleDecks() {
+        Collection<String> errorsList = new ArrayList<>();
+
+        // collect all files
+        final String rootPath = "..\\Mage.Client\\release\\sample-decks\\";
+        Collection<Path> filesList = new ArrayList<>();
+        try {
+            Files.walkFileTree(Paths.get(rootPath), new SimpleFileVisitor<Path>() {
+                @Override
+                public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+                    filesList.add(file);
+                    return FileVisitResult.CONTINUE;
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+            errorsList.add("Error: sample deck - can't get folder content - " + e.getMessage());
+        }
+        Assert.assertTrue("Sample decks: can't find any deck files", filesList.size() > 0);
+
+        // try to open deck files
+        int totalErrorFiles = 0;
+        for (Path deckFile : filesList) {
+            String deckName = deckFile.toString().replace(rootPath, "");
+            StringBuilder deckErrors = new StringBuilder();
+            DeckCardLists deckCards = DeckImporter.importDeckFromFile(deckFile.toString(), deckErrors);
+
+            if (!deckErrors.toString().isEmpty()) {
+                errorsList.add("Error: sample contains errors " + deckName);
+                System.out.println("Errors in sample file " + deckName + ":\n" + deckErrors.toString());
+                totalErrorFiles++;
+                continue;
+            }
+
+            if ((deckCards.getCards().size() + deckCards.getSideboard().size()) < 10) {
+                errorsList.add("Error: sample deck contains too little cards " + deckName);
+                totalErrorFiles++;
+                continue;
+            }
+        }
+
+        printMessages(errorsList);
+        if (errorsList.size() > 0) {
+            Assert.fail("Found sample decks: " + filesList.size() + "; with errors: " + totalErrorFiles);
         }
     }
 
@@ -464,13 +505,13 @@ public class VerifyCardDataTest {
     }
 
     @Test
-    public void checkMissingSetData() {
+    public void test_checkMissingSetData() {
         Collection<String> errorsList = new ArrayList<>();
         Collection<String> warningsList = new ArrayList<>();
 
         Collection<ExpansionSet> sets = Sets.getInstance().values();
 
-        // 1. wrong set class names
+        // CHECK: wrong set class names
         for (ExpansionSet set : sets) {
             String className = extractShortClass(set.getClass());
             String needClassName = set.getName()
@@ -493,7 +534,7 @@ public class VerifyCardDataTest {
             }
         }
 
-        // 2. wrong basic lands settings (it's for lands search, not booster construct)
+        // CHECK: wrong basic lands settings (it's for lands search, not booster construct)
         Map<String, Boolean> skipLandCheck = new HashMap<>();
         for (ExpansionSet set : sets) {
             if (skipLandCheck.containsKey(set.getName())) {
@@ -526,7 +567,7 @@ public class VerifyCardDataTest {
             // TODO: add test to check num cards (hasBasicLands and numLand > 0)
         }
 
-        // 3. wrong snow land info
+        // CHECK: wrong snow land info
         for (ExpansionSet set : sets) {
             boolean needSnow = CardRepository.instance.haveSnowLands(set.getCode());
             boolean haveSnow = false;
@@ -552,7 +593,7 @@ public class VerifyCardDataTest {
     }
 
     @Test
-    public void checkMissingCardData() {
+    public void test_checkMissingCardData() {
         Collection<String> errorsList = new ArrayList<>();
         Collection<String> warningsList = new ArrayList<>();
 
@@ -605,8 +646,7 @@ public class VerifyCardDataTest {
     }
 
     @Test
-    //@Ignore // TODO: enable it on copy() methods removing
-    public void checkWatcherCopyMethods() {
+    public void test_checkWatcherCopyMethods() {
 
         Collection<String> errorsList = new ArrayList<>();
         Collection<String> warningsList = new ArrayList<>();
@@ -683,7 +723,7 @@ public class VerifyCardDataTest {
 
     @Test
     @Ignore  // TODO: enable test after massive token fixes
-    public void checkMissingTokenData() {
+    public void test_checkMissingTokenData() {
 
         Collection<String> errorsList = new ArrayList<>();
         Collection<String> warningsList = new ArrayList<>();
@@ -759,9 +799,8 @@ public class VerifyCardDataTest {
         for (Class<? extends TokenImpl> tokenClass : publicTokens) {
             String className = extractShortClass(tokenClass);
             Token token = (Token) createNewObject(tokenClass);
-            //Assert.assertNotNull("Can't create token by default constructor", token);
             if (token == null) {
-                Assert.fail("Can't create token by default constructor: " + className);
+                errorsList.add("error, token must have default constructor with zero params: " + tokenClass.getName());
             } else if (tokDataNamesIndex.getOrDefault(token.getName(), "").isEmpty()) {
                 errorsList.add("error, can't find data in card-pictures-tok.txt for token: " + tokenClass.getName() + " -> " + token.getName());
             }
@@ -777,6 +816,57 @@ public class VerifyCardDataTest {
         printMessages(errorsList);
         if (errorsList.size() > 0) {
             Assert.fail("Found token errors: " + errorsList.size());
+        }
+
+        // TODO: all token must have correct availableImageSetCodes (all sets with that token)
+        // Some sets have original card, but don't have token card at all. So you must use scryfall tokens list above to find
+        // all token's sets and compare with xmage
+    }
+
+    @Test
+    public void test_checkMissingPlanesData() {
+        Collection<String> errorsList = new ArrayList<>();
+
+        Reflections reflections = new Reflections("mage.");
+        Set<Class<? extends Plane>> planesClassesList = reflections.getSubTypesOf(Plane.class);
+
+
+        // 1. correct class name
+        for (Class<? extends Plane> planeClass : planesClassesList) {
+            if (!planeClass.getName().endsWith("Plane")) {
+                String className = extractShortClass(planeClass);
+                errorsList.add("error, plane class must ends with Plane: " + className + " from " + planeClass.getName());
+            }
+        }
+
+        // 2. correct package
+        for (Class<? extends Plane> planeClass : planesClassesList) {
+            String fullClass = planeClass.getName();
+            if (!fullClass.startsWith("mage.game.command.planes.")) {
+                String className = extractShortClass(planeClass);
+                errorsList.add("error, plane must be stored in mage.game.command.planes package: " + className + " from " + planeClass.getName());
+            }
+        }
+
+        // 3. correct constructor
+        for (Class<? extends Plane> planeClass : planesClassesList) {
+            String className = extractShortClass(planeClass);
+            Plane plane;
+            try {
+                plane = (Plane) createNewObject(planeClass);
+
+                // 4. must have type/name
+                if (plane.getPlaneType() == null) {
+                    errorsList.add("error, plane must have plane type: " + className + " from " + planeClass.getName());
+                }
+            } catch (Throwable e) {
+                errorsList.add("error, can't create plane with default constructor: " + className + " from " + planeClass.getName());
+            }
+        }
+
+        printMessages(errorsList);
+        if (errorsList.size() > 0) {
+            Assert.fail("Found plane errors: " + errorsList.size());
         }
     }
 
@@ -934,6 +1024,28 @@ public class VerifyCardDataTest {
             fail(card, "abilities", "card have Multikicker ability, but missing it in rules text");
         }
 
+        // special check: missing or wrong ability/effect hints
+        Map<Class, String> hints = new HashMap<>();
+        hints.put(MenaceAbility.class, "can't be blocked except by two or more");
+        hints.put(ScryEffect.class, "Look at the top card of your library");
+        for (Class objectClass : hints.keySet()) {
+            String objectHint = hints.get(objectClass);
+            // ability/effect must have description or not
+            boolean mustCheck = card.getAbilities().containsClass(objectClass)
+                    || card.getAbilities().stream()
+                    .map(Ability::getAllEffects)
+                    .flatMap(Collection::stream)
+                    .anyMatch(effect -> effect.getClass().isAssignableFrom(objectClass));
+            mustCheck = false; // TODO: enable and fix all problems with effect and ability hints
+            if (mustCheck) {
+                boolean needHint = ref.text.contains(objectHint);
+                boolean haveHint = card.getRules().stream().anyMatch(rule -> rule.contains(objectHint));
+                if (needHint != haveHint) {
+                    fail(card, "abilities", "card have " + objectClass.getSimpleName() + " but hint is wrong (it must be " + (needHint ? "enabled" : "disabled") + ")");
+                }
+            }
+        }
+
         // spells have only 1 ability
         if (card.isSorcery() || card.isInstant()) {
             return;
@@ -995,20 +1107,32 @@ public class VerifyCardDataTest {
     }
 
     @Test
-    @Ignore
-    public void showCardInfo() throws Exception {
+    public void test_showCardInfo() throws Exception {
         // debug only: show direct card info (takes it from class file, not from db repository)
-        String cardName = "Essence Capture";
+        // can check multiple cards at once, example: name1;name2;name3
+        String cardNames = "Armed // Dangerous;Beacon Behemoth;Grizzly Bears";
         CardScanner.scan();
-        CardSetInfo testSet = new CardSetInfo(cardName, "test", "123", Rarity.COMMON);
-        CardInfo cardInfo = CardRepository.instance.findCard(cardName);
-        Card card = CardImpl.createCard(cardInfo.getClassName(), testSet);
-        System.out.println(card.getName());
-        if (card instanceof SplitCard) {
-            card.getAbilities().getRules(card.getName()).stream().forEach(System.out::println);
-        } else {
-            card.getRules().stream().forEach(System.out::println);
-        }
+        Arrays.stream(cardNames.split(";")).forEach(cardName -> {
+            cardName = cardName.trim();
+            CardSetInfo testSet = new CardSetInfo(cardName, "test", "123", Rarity.COMMON);
+            CardInfo cardInfo = CardRepository.instance.findCard(cardName);
+            if (cardInfo == null) {
+                Assert.fail("Can't find card name: " + cardName);
+            }
+            Card card = CardImpl.createCard(cardInfo.getClassName(), testSet);
+            System.out.println();
+            System.out.println(card.getName() + " " + card.getManaCost().getText());
+            if (card instanceof SplitCard) {
+                card.getAbilities().getRules(card.getName()).forEach(this::printAbilityText);
+            } else {
+                card.getRules().forEach(this::printAbilityText);
+            }
+        });
+    }
+
+    private void printAbilityText(String text) {
+        text = text.replace("<br>", "\n");
+        System.out.println(text);
     }
 
     private void checkWrongAbilitiesText(Card card, JsonCard ref, int cardIndex) {
@@ -1258,7 +1382,7 @@ public class VerifyCardDataTest {
     }
 
     @Test
-    public void testCardRatingConsistency() {
+    public void test_checkCardRatingConsistency() {
         // all cards with same name must have same rating (see RateCard.rateCard)
         // cards rating must be consistency (same) for card sorting
         List<Card> cardsList = new ArrayList<>(CardScanner.getAllCards());
@@ -1277,7 +1401,7 @@ public class VerifyCardDataTest {
     }
 
     @Test
-    public void testCardsCreatingAndConstructorErrors() {
+    public void test_CardsCreatingAndConstructorErrors() {
         int errorsCount = 0;
         Collection<ExpansionSet> sets = Sets.getInstance().values();
         for (ExpansionSet set : sets) {

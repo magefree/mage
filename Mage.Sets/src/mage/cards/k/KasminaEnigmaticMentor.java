@@ -2,7 +2,6 @@ package mage.cards.k;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -15,9 +14,11 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.WizardToken;
-import mage.target.Target;
+import mage.game.stack.Spell;
 import mage.util.CardUtil;
 
+import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -33,7 +34,7 @@ public final class KasminaEnigmaticMentor extends CardImpl {
         this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
 
         // Spells your opponents cast that target a creature or planeswalker you control cost {2} more to cast.
-        this.addAbility(new SimpleStaticAbility(new KasminaEnigmaticMentorCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(new KasminaEnigmaticMentorCostModificationEffect()));
 
         // -2: Create a 2/2 blue Wizard creature token. Draw a card, then discard a card.
         Ability ability = new LoyaltyAbility(new CreateTokenEffect(new WizardToken()), -2);
@@ -53,49 +54,66 @@ public final class KasminaEnigmaticMentor extends CardImpl {
     }
 }
 
-class KasminaEnigmaticMentorCostReductionEffect extends CostModificationEffectImpl {
+class KasminaEnigmaticMentorCostModificationEffect extends CostModificationEffectImpl {
 
-    KasminaEnigmaticMentorCostReductionEffect() {
+    KasminaEnigmaticMentorCostModificationEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);
         staticText = "Spells your opponents cast that target a creature or planeswalker you control cost {2} more to cast";
     }
 
-    private KasminaEnigmaticMentorCostReductionEffect(KasminaEnigmaticMentorCostReductionEffect effect) {
+    private KasminaEnigmaticMentorCostModificationEffect(KasminaEnigmaticMentorCostModificationEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        SpellAbility spellAbility = (SpellAbility) abilityToModify;
-        CardUtil.adjustCost(spellAbility, -2);
+        CardUtil.increaseCost(abilityToModify, 2);
         return true;
     }
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify.getAbilityType() != AbilityType.SPELL
-                || !game.getOpponents(source.getControllerId()).contains(abilityToModify.getControllerId())) {
+        if (!(abilityToModify instanceof SpellAbility)) {
             return false;
         }
-        for (UUID modeId : abilityToModify.getModes().getSelectedModes()) {
-            Mode mode = abilityToModify.getModes().get(modeId);
-            for (Target target : mode.getTargets()) {
-                for (UUID targetUUID : target.getTargets()) {
-                    Permanent permanent = game.getPermanent(targetUUID);
-                    if (permanent != null
-                            && (permanent.isCreature() || permanent.isPlaneswalker())
-                            && permanent.isControlledBy(source.getControllerId())) {
-                        return true;
-                    }
-                }
-            }
+
+        if (!game.getOpponents(source.getControllerId()).contains(abilityToModify.getControllerId())) {
+            return false;
         }
-        return false;
+
+        Spell spell = (Spell) game.getStack().getStackObject(abilityToModify.getId());
+        Set<UUID> allTargets;
+        if (spell != null) {
+            // real cast
+            allTargets = CardUtil.getAllSelectedTargets(abilityToModify, game);
+        } else {
+            // playable
+            allTargets = CardUtil.getAllPossibleTargets(abilityToModify, game);
+
+            // can target without cost increase
+            if (allTargets.stream()
+                    .map(game::getPermanent)
+                    .filter(Objects::nonNull)
+                    .anyMatch(permanent -> !isTargetCompatible(permanent, source))) {
+                return false;
+            }
+            ;
+        }
+
+        return allTargets.stream()
+                .map(game::getPermanent)
+                .filter(Objects::nonNull)
+                .anyMatch(permanent -> isTargetCompatible(permanent, source));
+    }
+
+    private boolean isTargetCompatible(Permanent permanent, Ability source) {
+        // target a creature or planeswalker you control
+        return permanent.isControlledBy(source.getControllerId())
+                && (permanent.isCreature() || permanent.isPlaneswalker());
     }
 
     @Override
-    public KasminaEnigmaticMentorCostReductionEffect copy() {
-        return new KasminaEnigmaticMentorCostReductionEffect(this);
+    public KasminaEnigmaticMentorCostModificationEffect copy() {
+        return new KasminaEnigmaticMentorCostModificationEffect(this);
     }
-
 }

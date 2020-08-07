@@ -4,30 +4,36 @@ import mage.MageObject;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.EnumSet;
 
 /**
  * @author North
  */
 public enum CardType {
-    ARTIFACT("Artifact", true),
-    CONSPIRACY("Conspiracy", false),
-    CREATURE("Creature", true),
-    ENCHANTMENT("Enchantment", true),
-    INSTANT("Instant", false),
-    LAND("Land", true),
-    PLANESWALKER("Planeswalker", true),
-    SORCERY("Sorcery", false),
-    TRIBAL("Tribal", false);
+    ARTIFACT("Artifact", true, true),
+    CONSPIRACY("Conspiracy", false, false),
+    CREATURE("Creature", true, true),
+    ENCHANTMENT("Enchantment", true, true),
+    INSTANT("Instant", false, true),
+    LAND("Land", true, true),
+    PHENOMENON("Phenomenon", false, false),
+    PLANE("Plane", false, false),
+    PLANESWALKER("Planeswalker", true, true),
+    SCHEME("Scheme", false, false),
+    SORCERY("Sorcery", false, true),
+    TRIBAL("Tribal", false, false),
+    VANGUARD("Vanguard", false, false);
 
     private final String text;
     private final boolean permanentType;
+    private final boolean includeInSearch; // types that can be searched/filtered by Deck Editor
     private final CardTypePredicate predicate;
 
-    CardType(String text, boolean permanentType) {
+    CardType(String text, boolean permanentType, boolean includeInSearch) {
         this.text = text;
         this.permanentType = permanentType;
+        this.includeInSearch = includeInSearch;
         this.predicate = new CardTypePredicate(this);
     }
 
@@ -50,6 +56,10 @@ public enum CardType {
         return permanentType;
     }
 
+    public boolean isIncludeInSearch() {
+        return includeInSearch;
+    }
+
     /**
      * Returns all of the card types from two lists of card types. Duplicates
      * are eliminated.
@@ -59,7 +69,7 @@ public enum CardType {
      * @return
      */
     public static CardType[] mergeTypes(CardType[] a, CardType[] b) {
-        EnumSet<CardType> cardTypes = EnumSet.noneOf(CardType.class);
+        ArrayList<CardType> cardTypes = new ArrayList<>();
         cardTypes.addAll(Arrays.asList(a));
         cardTypes.addAll(Arrays.asList(b));
         return cardTypes.toArray(new CardType[0]);

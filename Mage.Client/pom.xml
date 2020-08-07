@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.mage</groupId>
         <artifactId>mage-root</artifactId>
-        <version>1.4.42</version>
+        <version>1.4.44</version>
     </parent>
 
     <artifactId>mage-client</artifactId>
@@ -43,11 +43,14 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
         </dependency>
+
         <dependency>
+            <!-- needs for server connection by jboss -->
             <groupId>net.sf.trove4j</groupId>
             <artifactId>trove4j</artifactId>
             <version>3.0.3</version>
         </dependency>
+
         <dependency>
             <groupId>com.mortennobel</groupId>
             <artifactId>java-image-scaling</artifactId>
@@ -70,7 +73,7 @@
         <dependency>
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-java-sdk-s3</artifactId>
-            <version>1.11.498</version>
+            <version>1.11.827</version>
         </dependency>
         <dependency>
             <groupId>com.jgoodies</groupId>
@@ -107,7 +110,7 @@
         <dependency>
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
-            <version>1.11.3</version>
+            <version>1.13.1</version>
         </dependency>
         <dependency>
             <artifactId>truevfs-profile-base</artifactId>
@@ -125,6 +128,8 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
+        <!-- music player START -->
         <dependency>
             <groupId>com.googlecode.soundlibs</groupId>
             <artifactId>mp3spi</artifactId>
@@ -140,12 +145,15 @@
             <artifactId>tritonus_share</artifactId>
             <version>0.3.6</version>
         </dependency>
+        <!-- music player END -->
+
         <dependency>
             <groupId>net.java.balloontip</groupId>
             <artifactId>balloontip</artifactId>
             <version>1.2.4.1</version>
         </dependency>
-        <!-- svg support start -->
+
+        <!-- svg support START -->
         <!--
             for "SAX2 driver class org.apache.crimson.parser.XMLReaderImpl not found" error looks here:
             https://stackoverflow.com/questions/714243/sax2-driver-class-org-apache-crimson-parser-xmlreaderimpl-not-found-when-using
@@ -155,11 +163,17 @@
             <artifactId>batik-transcoder</artifactId>
             <version>1.11</version>
         </dependency>
-        <!-- svg support end -->
+        <!-- svg support END -->
+
         <dependency>
             <groupId>org.ocpsoft.prettytime</groupId>
             <artifactId>prettytime</artifactId>
-            <version>4.0.2.Final</version>
+            <version>4.0.5.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.unbescape</groupId>
+            <artifactId>unbescape</artifactId>
+            <version>1.1.6.RELEASE</version>
         </dependency>
     </dependencies>
 

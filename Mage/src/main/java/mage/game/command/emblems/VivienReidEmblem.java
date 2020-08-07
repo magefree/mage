@@ -14,7 +14,7 @@ import mage.game.command.Emblem;
 
 /**
  *
- * @author spjspj
+ * @author TheElk801
  */
 public final class VivienReidEmblem extends Emblem {
     // -8: You get an emblem with "Creatures you control get +2/+2 and have vigilance, trample, and indestructible.
@@ -34,18 +34,17 @@ public final class VivienReidEmblem extends Emblem {
                 VigilanceAbility.getInstance(),
                 Duration.EndOfGame,
                 StaticFilters.FILTER_PERMANENT_CREATURES
-        ).setText("and have vigilance,"));
+        ).setText("and have vigilance"));
         ability.addEffect(new GainAbilityControlledEffect(
                 TrampleAbility.getInstance(),
                 Duration.EndOfGame,
                 StaticFilters.FILTER_PERMANENT_CREATURES
-        ).setText("trample,"));
+        ).setText(", trample"));
         ability.addEffect(new GainAbilityControlledEffect(
                 IndestructibleAbility.getInstance(),
                 Duration.EndOfGame,
                 StaticFilters.FILTER_PERMANENT_CREATURES
-        ).setText("and indestructible"));
+        ).setText(", and indestructible"));
         this.getAbilities().add(ability);
-
     }
 }

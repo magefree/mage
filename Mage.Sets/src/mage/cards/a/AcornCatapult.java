@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -28,7 +27,7 @@ public final class AcornCatapult extends CardImpl {
     public AcornCatapult(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
-        // {1}, {tap}: Acorn Catapult deals 1 damage to any target. That creature's controller or that player creates a 1/1 green Squirrel creature token.
+        // {1}, {T}: Acorn Catapult deals 1 damage to any target. That creature's controller or that player creates a 1/1 green Squirrel creature token.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{1}"));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new AcornCatapultEffect());
@@ -64,10 +63,9 @@ class AcornCatapultEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID targetId = getTargetPointer().getFirst(game, source);
-        Player player = game.getPlayer(targetId);
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player == null) {
-            Permanent permanent = game.getPermanent(targetId);
+            Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
             if (permanent != null) {
                 player = game.getPlayer(permanent.getControllerId());
             }

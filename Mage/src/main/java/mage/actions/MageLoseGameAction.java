@@ -5,6 +5,8 @@ import mage.actions.score.ArtificialScoringSystem;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
  * Lose game action.
  *
@@ -26,7 +28,7 @@ public class MageLoseGameAction extends MageAction {
     }
 
     @Override
-    public int doAction(final Game game) {
+    public int doAction(UUID sourceId, final Game game) {
         oldLosingPlayer = game.getLosingPlayer();
         if (oldLosingPlayer == null && player.canLose(game)) {
             setScore(player, ArtificialScoringSystem.inst.getLoseGameScore(game));

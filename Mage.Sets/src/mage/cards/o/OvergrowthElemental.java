@@ -86,7 +86,7 @@ class OvergrowthElementalEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(targetPointer.getFirst(game, source));
+        Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (permanent == null || !permanent.hasSubtype(SubType.ELEMENTAL, game)) {
             return false;
         }

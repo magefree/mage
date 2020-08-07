@@ -37,8 +37,7 @@ public final class JandorsRing extends CardImpl {
         Watcher watcher = new JandorsRingWatcher();
         // {2}, {tap}, Discard the last card you drew this turn: Draw a card.
         // TODO: discard has to be a cost not a payment during resolution
-        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
-                new JandorsRingEffect(), new ManaCostsImpl("{2}"), WatchedCardInHandCondition.instance, "Last drawn card still in hand?");
+        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new JandorsRingEffect(), new ManaCostsImpl("{2}"), WatchedCardInHandCondition.instance, "{2}, {T}, Discard the last card you drew this turn: Draw a card.");
         ability.addCost(new TapSourceCost());
         this.addAbility(ability, watcher);
     }
@@ -82,7 +81,7 @@ class JandorsRingEffect extends OneShotEffect {
                 if (effect.apply(game, source)) {//Conditional was already checked, card should be in hand, but if for some weird reason it fails, the card won't be drawn, although the cost will already be paid
                     Player controller = game.getPlayer(source.getControllerId());
                     if(controller != null) {
-                        controller.drawCards(1, game);
+                        controller.drawCards(1, source.getSourceId(), game);
                     }
                 }
             }

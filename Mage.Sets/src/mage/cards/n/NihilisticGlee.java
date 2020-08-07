@@ -1,7 +1,5 @@
-
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.HellbentCondition;
@@ -20,8 +18,9 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class NihilisticGlee extends CardImpl {
@@ -34,7 +33,7 @@ public final class NihilisticGlee extends CardImpl {
                 new LoseLifeTargetEffect(1),
                 new ManaCostsImpl("{2}{B}")
         );
-        ability.addEffect(new GainLifeEffect(1).setText("and you gain 1 life"));
+        ability.addEffect(new GainLifeEffect(1).concatBy("and"));
         ability.addCost(new DiscardCardCost());
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);

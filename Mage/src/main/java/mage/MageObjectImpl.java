@@ -1,5 +1,6 @@
 package mage;
 
+import java.util.*;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
@@ -21,8 +22,6 @@ import mage.game.permanent.Permanent;
 import mage.util.GameLog;
 import mage.util.SubTypeList;
 
-import java.util.*;
-
 public abstract class MageObjectImpl implements MageObject {
 
     protected UUID objectId;
@@ -32,7 +31,7 @@ public abstract class MageObjectImpl implements MageObject {
     protected ObjectColor color;
     protected ObjectColor frameColor;
     protected FrameStyle frameStyle;
-    protected Set<CardType> cardType = EnumSet.noneOf(CardType.class);
+    protected ArrayList<CardType> cardType = new ArrayList<>();
     protected SubTypeList subtype = new SubTypeList();
     protected boolean isAllCreatureTypes;
     protected Set<SuperType> supertype = EnumSet.noneOf(SuperType.class);
@@ -112,7 +111,7 @@ public abstract class MageObjectImpl implements MageObject {
     }
 
     @Override
-    public Set<CardType> getCardType() {
+    public ArrayList<CardType> getCardType() {
         return cardType;
     }
 
@@ -132,12 +131,12 @@ public abstract class MageObjectImpl implements MageObject {
     }
 
     @Override
-    public boolean hasAbility(UUID abilityId, Game game) {
-        if (this.getAbilities().containsKey(abilityId)) {
+    public boolean hasAbility(Ability ability, Game game) {
+        if (this.getAbilities().contains(ability)) {
             return true;
         }
         Abilities<Ability> otherAbilities = game.getState().getAllOtherAbilities(getId());
-        return otherAbilities != null && otherAbilities.containsKey(abilityId);
+        return otherAbilities != null && otherAbilities.contains(ability);
     }
 
     @Override
@@ -171,39 +170,22 @@ public abstract class MageObjectImpl implements MageObject {
         // its frame colors.
         if (this.isLand()) {
             ObjectColor cl = frameColor.copy();
+            Set<ManaType> manaTypes = EnumSet.noneOf(ManaType.class);
             for (Ability ab : getAbilities()) {
                 if (ab instanceof ActivatedManaAbilityImpl) {
-                    ActivatedManaAbilityImpl mana = (ActivatedManaAbilityImpl) ab;
-                    try {
-                        List<Mana> manaAdded = mana.getNetMana(game);
-                        for (Mana m : manaAdded) {
-                            if (m.getAny() > 0) {
-                                return new ObjectColor("WUBRG");
-                            }
-                            if (m.getWhite() > 0) {
-                                cl.setWhite(true);
-                            }
-                            if (m.getBlue() > 0) {
-                                cl.setBlue(true);
-                            }
-                            if (m.getBlack() > 0) {
-                                cl.setBlack(true);
-                            }
-                            if (m.getRed() > 0) {
-                                cl.setRed(true);
-                            }
-                            if (m.getGreen() > 0) {
-                                cl.setGreen(true);
-                            }
-                        }
-                    } catch (NullPointerException e) {
-                        // Ability depends on game
-                        // but no game passed
-                        // All such abilities are 5-color ones
-                        return new ObjectColor("WUBRG");
-                    }
+                    manaTypes.addAll(((ActivatedManaAbilityImpl) ab).getProducableManaTypes(game));
                 }
             }
+            cl.setWhite(manaTypes.contains(ManaType.WHITE));
+            cl.setBlue(manaTypes.contains(ManaType.BLUE));
+            cl.setBlack(manaTypes.contains(ManaType.BLACK));
+            cl.setRed(manaTypes.contains(ManaType.RED));
+            cl.setGreen(manaTypes.contains(ManaType.GREEN));
+
+//                // Ability depends on game
+//                // but no game passed
+//                // All such abilities are 5-color ones
+//                return new ObjectColor("WUBRG");
             return cl;
         } else {
             // For everything else, just return the frame colors
@@ -329,7 +311,7 @@ public abstract class MageObjectImpl implements MageObject {
      */
     @Override
     public void removePTCDA() {
-        for (Iterator<Ability> iter = this.getAbilities().iterator(); iter.hasNext(); ) {
+        for (Iterator<Ability> iter = this.getAbilities().iterator(); iter.hasNext();) {
             Ability ability = iter.next();
             for (Effect effect : ability.getEffects()) {
                 if (effect instanceof ContinuousEffect && ((ContinuousEffect) effect).getSublayer() == SubLayer.CharacteristicDefining_7a) {

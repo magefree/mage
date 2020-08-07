@@ -12,10 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -26,12 +23,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class WarbriarBlessing extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterCreaturePermanent("creature you don't control");
-
-    static {
-        filter.add(TargetController.NOT_YOU.getControllerPredicate());
-    }
 
     public WarbriarBlessing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
@@ -47,7 +38,7 @@ public final class WarbriarBlessing extends CardImpl {
 
         // When Warbriar Blessing enters the battlefield, enchanted creature fights up to one target creature you don't control.
         ability = new EntersBattlefieldTriggeredAbility(new WarbriarBlessingEffect());
-        ability.addTarget(new TargetPermanent(0, 1, filter, false));
+        ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL, false));
         this.addAbility(ability);
 
         // Enchanted creature gets +0/+2.

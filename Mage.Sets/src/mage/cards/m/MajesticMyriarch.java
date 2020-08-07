@@ -75,7 +75,7 @@ class MajesticMyriarchEffect extends OneShotEffect {
         filterDeathtouch.add(new AbilityPredicate(DeathtouchAbility.class));
         filterDoubleStrike.add(new AbilityPredicate(DoubleStrikeAbility.class));
         filterHaste.add(new AbilityPredicate(HasteAbility.class));
-        filterHexproof.add(new AbilityPredicate(HexproofAbility.class));
+        filterHexproof.add(new AbilityPredicate(HexproofBaseAbility.class));
         filterIndestructible.add(new AbilityPredicate(IndestructibleAbility.class));
         filterLifelink.add(new AbilityPredicate(LifelinkAbility.class));
         filterMenace.add(new AbilityPredicate(MenaceAbility.class));

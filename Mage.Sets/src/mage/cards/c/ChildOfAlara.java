@@ -3,7 +3,7 @@ package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -31,7 +31,7 @@ public final class ChildOfAlara extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
         
         // When Child of Alara dies, destroy all nonland permanents. They can't be regenerated.
-        this.addAbility(new DiesTriggeredAbility(new DestroyAllEffect(new FilterNonlandPermanent("nonland permanents"), true)));
+        this.addAbility(new DiesSourceTriggeredAbility(new DestroyAllEffect(new FilterNonlandPermanent("nonland permanents"), true)));
         
     }
 

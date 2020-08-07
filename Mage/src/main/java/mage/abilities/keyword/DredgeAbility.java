@@ -4,8 +4,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -13,11 +11,11 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
- * If you would draw a card, instead you may put exactly X cards from the top of
- * your library into your graveyard. If you do, return this card from your
- * graveyard to your hand. Otherwise, draw a card.
+ * If you would draw a card, you may mill X cards instead. If you do, return
+ * this card from your graveyard to your hand.
  *
  * @author North
  */
@@ -44,9 +42,9 @@ class DredgeEffect extends ReplacementEffectImpl {
     public DredgeEffect(int value) {
         super(Duration.WhileInGraveyard, Outcome.AIDontUseIt);
         this.amount = value;
-        this.staticText = ("Dredge ") + Integer.toString(value) + " <i>(If you would draw a card, instead you may put exactly "
-                + value + " card(s) from the top of your library into your graveyard. If you do, return this card from "
-                + "your graveyard to your hand. Otherwise, draw a card.)</i>";
+        this.staticText = "Dredge " + value + " <i>(If you would draw a card, you may mill "
+                + CardUtil.numberToText(value, "a") + (value > 1 ? " cards" : " card")
+                + " instead. If you do, return this card from your graveyard to your hand.)</i>";
     }
 
     public DredgeEffect(final DredgeEffect effect) {
@@ -74,13 +72,11 @@ class DredgeEffect extends ReplacementEffectImpl {
         if (owner != null
                 && owner.getLibrary().size() >= amount
                 && owner.chooseUse(outcome, new StringBuilder("Dredge ").append(sourceCard.getLogName()).
-                        append("? (").append(amount).append(" cards go from top of library to graveyard)").toString(), source, game)) {
+                        append("? (").append(amount).append(" cards are milled)").toString(), source, game)) {
             if (!game.isSimulation()) {
                 game.informPlayers(new StringBuilder(owner.getLogName()).append(" dredges ").append(sourceCard.getLogName()).toString());
             }
-            Cards cardsToGrave = new CardsImpl();
-            cardsToGrave.addAll(owner.getLibrary().getTopCards(game, amount));
-            owner.moveCards(cardsToGrave, Zone.GRAVEYARD, source, game);
+            owner.millCards(amount, source, game);
             owner.moveCards(sourceCard, Zone.HAND, source, game);
             return true;
         }

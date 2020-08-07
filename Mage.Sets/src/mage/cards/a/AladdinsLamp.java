@@ -74,8 +74,8 @@ class AladdinsLampEffect extends ReplacementEffectImpl {
             cards.remove(target.getFirstTarget());
         }
         controller.putCardsOnBottomOfLibrary(cards, game, source, false);
-        game.applyEffects();
-        controller.drawCards(1, game, event.getAppliedEffects());
+        game.getState().processAction(game);
+        controller.drawCards(1, event.getSourceId(), game, event.getAppliedEffects());
         discard();
         return true;
     }

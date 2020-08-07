@@ -1,5 +1,3 @@
-
-
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
@@ -27,7 +25,11 @@ public class PreventAllNonCombatDamageToAllEffect extends PreventionEffectImpl {
         super(duration, Integer.MAX_VALUE, false);
         this.filter = filter;
         this.andToYou = andToYou;
-        staticText = "Prevent all non combat damage that would be dealt to " + (andToYou ? "you and " : "") + filter.getMessage() + ' ' + duration.toString();
+        staticText = "Prevent all noncombat damage that would be dealt to " + (andToYou ? "you and " : "") + filter.getMessage();
+
+        if (duration != Duration.WhileOnBattlefield) {
+            staticText += ' ' + duration.toString();
+        }
     }
 
     private PreventAllNonCombatDamageToAllEffect(final PreventAllNonCombatDamageToAllEffect effect) {

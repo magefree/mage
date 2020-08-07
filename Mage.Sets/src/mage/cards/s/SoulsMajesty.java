@@ -52,7 +52,7 @@ public final class SoulsMajesty extends CardImpl {
             Permanent target = game.getPermanent(source.getFirstTarget());
             Player player = game.getPlayer(source.getControllerId());
         if (player != null && target != null) {
-            player.drawCards(target.getPower().getValue(), game);
+            player.drawCards(target.getPower().getValue(), source.getSourceId(), game);
             return true;
         }
         return false;

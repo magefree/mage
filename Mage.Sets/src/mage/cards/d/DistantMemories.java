@@ -65,7 +65,7 @@ class DistantMemoriesEffect extends OneShotEffect {
         if (controller.searchLibrary(target, source, game)) {
             Card card = controller.getLibrary().remove(target.getFirstTarget(), game);
             if (card != null) {
-                card.moveToZone(Zone.EXILED, source.getSourceId(), game, false);
+                controller.moveCards(card, Zone.EXILED, source, game);
                 controller.shuffleLibrary(source, game);
 
                 StringBuilder sb = new StringBuilder();
@@ -76,16 +76,20 @@ class DistantMemoriesEffect extends OneShotEffect {
                 Set<UUID> opponents = game.getOpponents(source.getControllerId());
                 for (UUID opponentUuid : opponents) {
                     Player opponent = game.getPlayer(opponentUuid);
-                    if (opponent != null
-                            && opponent.chooseUse(Outcome.Detriment, sb.toString(), source, game)) {
-                        putInHand = true;
+                    if (opponent != null) {
+                        if (opponent.chooseUse(Outcome.Detriment, sb.toString(), source, game)) {
+                            putInHand = true;
+                            game.informPlayers(opponent.getName() + " decides to put the selected card into the player's hand.");
+                        } else {
+                            game.informPlayers(opponent.getName() + " decides to leave the card in exile.");
+                        }
                     }
                 }
 
                 if (putInHand) {
                     controller.moveCards(card, Zone.HAND, source, game);
                 } else {
-                    controller.drawCards(3, game);
+                    controller.drawCards(3, source.getSourceId(), game);
                 }
                 return true;
             }

@@ -12,7 +12,10 @@ import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.Locale;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * @author Loki
@@ -22,6 +25,7 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
     protected Ability ability;
     protected boolean excludeSource;
     protected FilterPermanent filter;
+    protected boolean forceQuotes = false;
 
     public GainAbilityAllEffect(Ability ability, Duration duration) {
         this(ability, duration, new FilterPermanent());
@@ -56,6 +60,7 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
         ability.newId(); // This is needed if the effect is copied e.g. by a clone so the ability can be added multiple times to permanents
         this.filter = effect.filter.copy();
         this.excludeSource = effect.excludeSource;
+        this.forceQuotes = effect.forceQuotes;
     }
 
     @Override
@@ -82,7 +87,7 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
             for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext(); ) { // filter may not be used again, because object can have changed filter relevant attributes but still geets boost
                 Permanent permanent = it.next().getPermanentOrLKIBattlefield(game); //LKI is neccessary for "dies triggered abilities" to work given to permanets  (e.g. Showstopper)
                 if (permanent != null) {
-                    permanent.addAbility(ability, source.getSourceId(), game, false);
+                    permanent.addAbility(ability, source.getSourceId(), game);
                 } else {
                     it.remove(); // no longer on the battlefield, remove reference to object
                     if (affectedObjectList.isEmpty()) {
@@ -94,7 +99,7 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
             setRuntimeData(source, game);
             for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
                 if (!(excludeSource && perm.getId().equals(source.getSourceId())) && selectedByRuntimeData(perm, source, game)) {
-                    perm.addAbility(ability, source.getSourceId(), game, false);
+                    perm.addAbility(ability, source.getSourceId(), game);
                 }
             }
             // still as long as the prev. permanent is known to the LKI (e.g. Mikaeus, the Unhallowed) so gained dies triggered ability will trigger
@@ -104,7 +109,7 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
                     Permanent perm = (Permanent) mageObject;
                     if (!(excludeSource && perm.getId().equals(source.getSourceId())) && selectedByRuntimeData(perm, source, game)) {
                         if (filter.match(perm, source.getSourceId(), source.getControllerId(), game)) {
-                            perm.addAbility(ability, source.getSourceId(), game, false);
+                            perm.addAbility(ability, source.getSourceId(), game);
                         }
                     }
                 }
@@ -143,7 +148,7 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
 
         StringBuilder sb = new StringBuilder();
 
-        boolean quotes = (ability instanceof SimpleActivatedAbility) || (ability instanceof TriggeredAbility);
+        boolean quotes = forceQuotes || (ability instanceof SimpleActivatedAbility) || (ability instanceof TriggeredAbility);
         if (excludeSource) {
             sb.append("Other ");
         }
@@ -170,5 +175,13 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
             sb.append(' ').append(duration.toString());
         }
         return sb.toString();
+    }
+
+    /**
+     * Add quotes to gains abilities (by default static abilities don't have it)
+     */
+    public GainAbilityAllEffect withForceQuotes() {
+        this.forceQuotes = true;
+        return this;
     }
 }

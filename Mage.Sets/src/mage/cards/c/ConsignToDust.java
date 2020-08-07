@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.abilityword.StriveAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -13,8 +11,9 @@ import mage.filter.predicate.Predicates;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class ConsignToDust extends CardImpl {
@@ -26,11 +25,11 @@ public final class ConsignToDust extends CardImpl {
     }
 
     public ConsignToDust(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{G}");
 
         // Strive - Consign to Dust costs 2G more to cast for each target beyond the first.
         this.addAbility(new StriveAbility("{2}{G}"));
+
         // Destroy any number of target artifacts and/or enchantments.
         Effect effect = new DestroyTargetEffect();
         effect.setText("Destroy any number of target artifacts and/or enchantments");

@@ -1,25 +1,34 @@
 package mage.cards.a;
 
+import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldThisOrAnotherTriggeredAbility;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
-
-import java.util.UUID;
+import mage.players.Player;
 
 /**
  * @author Loki
  */
 public final class ArchonOfRedemption extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterCreaturePermanent("creature with flying");
+
+    static {
+        filter.add(new AbilityPredicate(FlyingAbility.class));
+    }
 
     public ArchonOfRedemption(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
@@ -29,11 +38,14 @@ public final class ArchonOfRedemption extends CardImpl {
         this.toughness = new MageInt(4);
 
         this.addAbility(FlyingAbility.getInstance());
+
         // Whenever Archon of Redemption or another creature with flying enters the battlefield under your control, you may gain life equal to that creature's power.
-        this.addAbility(new ArchonOfRedemptionTriggeredAbility());
+        this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
+                new ArchonOfRedemptionEffect(), filter, true, SetTargetPointer.PERMANENT, true
+        ));
     }
 
-    public ArchonOfRedemption(final ArchonOfRedemption card) {
+    private ArchonOfRedemption(final ArchonOfRedemption card) {
         super(card);
     }
 
@@ -43,43 +55,29 @@ public final class ArchonOfRedemption extends CardImpl {
     }
 }
 
-class ArchonOfRedemptionTriggeredAbility extends TriggeredAbilityImpl {
+class ArchonOfRedemptionEffect extends OneShotEffect {
 
-    ArchonOfRedemptionTriggeredAbility() {
-        super(Zone.BATTLEFIELD, null, true);
+    ArchonOfRedemptionEffect() {
+        super(Outcome.Benefit);
+        staticText = "gain life equal to that creature's power";
     }
 
-    ArchonOfRedemptionTriggeredAbility(final ArchonOfRedemptionTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public ArchonOfRedemptionTriggeredAbility copy() {
-        return new ArchonOfRedemptionTriggeredAbility(this);
+    private ArchonOfRedemptionEffect(final ArchonOfRedemptionEffect effect) {
+        super(effect);
     }
 
     @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
+    public ArchonOfRedemptionEffect copy() {
+        return new ArchonOfRedemptionEffect(this);
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent != null
-                && permanent.isControlledBy(getControllerId())
-                && permanent.isCreature()
-                && (permanent.getId().equals(getSourceId())
-                || (permanent.getAbilities().contains(FlyingAbility.getInstance())))) {
-            this.getEffects().clear();
-            this.addEffect(new GainLifeEffect(permanent.getPower().getValue()));
-            return true;
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
+        if (player == null || permanent == null) {
+            return false;
         }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} or another creature with flying enters the battlefield under your control, you may gain life equal to that creature's power.";
+        return player.gainLife(permanent.getPower().getValue(), game, source) > 0;
     }
 }

@@ -1,7 +1,5 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -24,8 +22,9 @@ import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public final class MystifyingMaze extends CardImpl {
@@ -77,7 +76,7 @@ class MystifyingMazeEffect extends OneShotEffect {
         if (permanent != null && sourceObject != null) {
             if (permanent.moveToExile(source.getSourceId(), sourceObject.getIdName(), source.getSourceId(), game)) {
                 //create delayed triggered ability
-                Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(true);
+                Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(true, false);
                 effect.setText("At the beginning of the next end step, return it to the battlefield tapped under its owner's control");
                 effect.setTargetPointer(new FixedTarget(source.getFirstTarget(), game));
                 game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect), source);

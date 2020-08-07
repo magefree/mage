@@ -1,20 +1,18 @@
-
 package mage.abilities.effects.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public class PutTopCardOfLibraryIntoGraveEachPlayerEffect extends OneShotEffect {
@@ -33,7 +31,7 @@ public class PutTopCardOfLibraryIntoGraveEachPlayerEffect extends OneShotEffect 
         this.staticText = setText();
     }
 
-    public PutTopCardOfLibraryIntoGraveEachPlayerEffect(final PutTopCardOfLibraryIntoGraveEachPlayerEffect effect) {
+    private PutTopCardOfLibraryIntoGraveEachPlayerEffect(final PutTopCardOfLibraryIntoGraveEachPlayerEffect effect) {
         super(effect);
         this.numberCards = effect.numberCards;
         this.targetController = effect.targetController;
@@ -77,7 +75,7 @@ public class PutTopCardOfLibraryIntoGraveEachPlayerEffect extends OneShotEffect 
     private void putCardsToGravecard(UUID playerId, Ability source, Game game) {
         Player player = game.getPlayer(playerId);
         if (player != null) {
-            player.moveCards(player.getLibrary().getTopCards(game, numberCards.calculate(game, source, this)), Zone.GRAVEYARD, source, game);
+            player.millCards(numberCards.calculate(game, source, this), source, game);
         }
     }
 
@@ -96,14 +94,13 @@ public class PutTopCardOfLibraryIntoGraveEachPlayerEffect extends OneShotEffect 
             default:
                 throw new UnsupportedOperationException("TargetController type not supported.");
         }
-        sb.append("puts the top ");
-        if(numberCards.toString().equals("1")) {
-            sb.append("card");
+        sb.append("mills ");
+        if (numberCards.toString().equals("1")) {
+            sb.append("a card");
         } else {
             sb.append(CardUtil.numberToText(numberCards.toString()));
             sb.append(" cards");
         }
-        sb.append(" of their library into their graveyard");
         return sb.toString();
     }
 }

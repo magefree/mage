@@ -4,7 +4,7 @@ package mage.cards.d;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -21,7 +21,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public final class DriverOfTheDead extends CardImpl {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("creature card with converted mana cost 2 or less from your graveyard to the battlefield");
+    private static final FilterCreatureCard filter = new FilterCreatureCard("creature card with converted mana cost 2 or less from your graveyard");
 
     static {
         filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 3));
@@ -35,7 +35,7 @@ public final class DriverOfTheDead extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Driver of the Dead dies, return target creature card with converted mana cost 2 or less from your graveyard to the battlefield.
-        Ability ability = new DiesTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(), false);
+        Ability ability = new DiesSourceTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(), false);
         Target target = new TargetCardInYourGraveyard(filter);
         ability.addTarget(target);
         this.addAbility(ability);

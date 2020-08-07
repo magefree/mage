@@ -1,7 +1,7 @@
 package mage.cards.t;
 
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.combat.MustBeBlockedByAllSourceEffect;
@@ -28,7 +28,7 @@ public final class TreeshakerChimera extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new MustBeBlockedByAllSourceEffect()));
 
         // When Treeshaker Chimera dies, draw three cards.
-        this.addAbility(new DiesTriggeredAbility(new DrawCardSourceControllerEffect(3)));
+        this.addAbility(new DiesSourceTriggeredAbility(new DrawCardSourceControllerEffect(3)));
     }
 
     private TreeshakerChimera(final TreeshakerChimera card) {

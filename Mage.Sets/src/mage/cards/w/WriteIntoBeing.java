@@ -1,4 +1,3 @@
-
 package mage.cards.w;
 
 import java.util.UUID;
@@ -84,12 +83,11 @@ class WriteIntoBeingEffect extends OneShotEffect {
             new ManifestEffect(1).apply(game, source);
             if (controller.getLibrary().hasCards()) {
                 Card cardToPutBack = controller.getLibrary().getFromTop(game);
-                String position = "on top";
                 if (controller.chooseUse(Outcome.Detriment, "Put " + cardToPutBack.getName() + " on bottom of library?", source, game)) {
-                    cardToPutBack.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
-                    position = "on bottom";
+                    controller.putCardsOnBottomOfLibrary(cardToPutBack, game, source, true);
+                } else {
+                    controller.putCardsOnTopOfLibrary(cardToPutBack, game, source, true);
                 }
-                game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts the other card " + position + " of their library");
             }
             return true;
         }

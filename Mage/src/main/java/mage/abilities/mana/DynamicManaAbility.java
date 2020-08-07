@@ -80,17 +80,6 @@ public class DynamicManaAbility extends ActivatedManaAbilityImpl {
     }
 
     @Override
-    public List<Mana> getNetMana(Game game) {
-        List<Mana> newNetMana = new ArrayList<>();
-        if (game != null) {
-            // TODO: effects from replacement effects like Mana Reflection are not considered yet
-            // TODO: effects that need a X payment (e.g. Mage-Ring Network) return always 0
-            newNetMana.addAll(manaEffect.getNetMana(game, this));
-        }
-        return newNetMana;
-    }
-
-    @Override
     public boolean definesMana(Game game) {
         return true;
     }

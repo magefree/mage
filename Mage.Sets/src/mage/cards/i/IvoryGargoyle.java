@@ -3,7 +3,7 @@ package mage.cards.i;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -34,7 +34,7 @@ public final class IvoryGargoyle extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Ivory Gargoyle dies, return it to the battlefield under its owner's control at the beginning of the next end step and you skip your next draw step.
-        Ability ability = new DiesTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(
+        Ability ability = new DiesSourceTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(
                 new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnSourceFromGraveyardToBattlefieldEffect())));
         ability.addEffect(new SkipNextDrawStepControllerEffect());
         this.addAbility(ability);

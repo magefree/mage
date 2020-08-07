@@ -1,4 +1,3 @@
-
 package mage.cards.q;
 
 import java.util.UUID;
@@ -30,7 +29,8 @@ public final class QuarryColossus extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);
 
-        // When Quarry Colossus enters the battlefield, put target creature into its owner's library just beneath the top X cards of that library, where X is the number of Plains you control.
+        // When Quarry Colossus enters the battlefield, put target creature into its owner's 
+        // library just beneath the top X cards of that library, where X is the number of Plains you control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new QuarryColossusReturnLibraryEffect(), false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
@@ -49,8 +49,9 @@ public final class QuarryColossus extends CardImpl {
 class QuarryColossusReturnLibraryEffect extends OneShotEffect {
 
     public QuarryColossusReturnLibraryEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "put target creature into its owner's library just beneath the top X cards of that library, where X is the number of Plains you control";
+        super(Outcome.Detriment);
+        this.staticText = "put target creature into its owner's library just beneath the "
+                + "top X cards of that library, where X is the number of Plains you control";
     }
 
     public QuarryColossusReturnLibraryEffect(final QuarryColossusReturnLibraryEffect effect) {
@@ -69,7 +70,8 @@ class QuarryColossusReturnLibraryEffect extends OneShotEffect {
         if (permanent != null && controller != null) {
             Player owner = game.getPlayer(permanent.getOwnerId());
             if (owner != null) {
-                int plains = game.getBattlefield().countAll(new FilterPermanent(SubType.PLAINS, "Plains you control"), source.getControllerId(), game);
+                int plains = game.getBattlefield().countAll(new FilterPermanent(
+                        SubType.PLAINS, "Plains you control"), source.getControllerId(), game);
                 controller.putCardOnTopXOfLibrary(permanent, game, source, plains);
                 return true;
             }

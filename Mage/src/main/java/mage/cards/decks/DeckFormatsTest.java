@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -23,8 +24,8 @@ public class DeckFormatsTest {
             }
             // 2. must work with files
             String fileName = "C:\\xmage\\deck" + "." + df.getExporter().getDefaultFileExt();
-            Assert.assertTrue("Must support lower ext: " + df.getExporter().getDescription(), DeckFormats.getFormatForExtension(fileName.toLowerCase()).isPresent());
-            Assert.assertTrue("Must support upper ext: " + df.getExporter().getDescription(), DeckFormats.getFormatForExtension(fileName.toUpperCase()).isPresent());
+            Assert.assertTrue("Must support lower ext: " + df.getExporter().getDescription(), DeckFormats.getFormatForExtension(fileName.toLowerCase(Locale.ENGLISH)).isPresent());
+            Assert.assertTrue("Must support upper ext: " + df.getExporter().getDescription(), DeckFormats.getFormatForExtension(fileName.toUpperCase(Locale.ENGLISH)).isPresent());
         }
 
         // 3. wrong ext

@@ -7,7 +7,7 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -54,7 +54,7 @@ public final class TheScarabGod extends CardImpl {
         this.addAbility(ability);
 
         // When The Scarab God dies, return it to its owner's hand at the beginning of the next end step.
-        this.addAbility(new DiesTriggeredAbility(new TheScarabGodEffect3()));
+        this.addAbility(new DiesSourceTriggeredAbility(new TheScarabGodEffect3()));
     }
 
     public TheScarabGod(final TheScarabGod card) {
@@ -134,7 +134,7 @@ class TheScarabGodEffect2 extends OneShotEffect {
         if (controller != null && card != null) {
             controller.moveCards(card, Zone.EXILED, source, game); // Also if the move to exile is replaced, the copy takes place
             CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(source.getControllerId(), null, false, 1, false, false, null, 4, 4, false);
-            effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
+            effect.setTargetPointer(new FixedTarget(card, game));
             effect.setOnlySubType(SubType.ZOMBIE);
             effect.setOnlyColor(ObjectColor.BLACK);
             effect.apply(game, source);

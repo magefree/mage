@@ -67,6 +67,8 @@ public class WorldgorgerDragonTest extends CardTestPlayerBase {
      */
     @Test
     public void testWithAnimateDead() {
+        setStrictChooseMode(true);
+
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
 
         // When Worldgorger Dragon enters the battlefield, exile all other permanents you control.
@@ -79,6 +81,7 @@ public class WorldgorgerDragonTest extends CardTestPlayerBase {
         // Enchanted creature gets -1/-0.
         addCard(Zone.HAND, playerA, "Animate Dead");
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+
         // Instant {X}{R}{R}
         // Volcanic Geyser deals X damage to any target.
         addCard(Zone.HAND, playerA, "Volcanic Geyser", 1);
@@ -86,44 +89,61 @@ public class WorldgorgerDragonTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Staunch Defenders", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Animate Dead", "Worldgorger Dragon");
+        setChoice(playerA, "Worldgorger Dragon");
+        setChoice(playerA, "When {this} enters the battlefield, if it's");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
+
+        setChoice(playerA, "Worldgorger Dragon");
+        setChoice(playerA, "When {this} enters the battlefield, if it's");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
+
+        setChoice(playerA, "Worldgorger Dragon");
+        setChoice(playerA, "When {this} enters the battlefield, if it's");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
+
+        setChoice(playerA, "Worldgorger Dragon");
+        setChoice(playerA, "When {this} enters the battlefield, if it's");
+        setChoice(playerA, "No");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
+
+        setChoice(playerA, "Worldgorger Dragon");
         setChoice(playerA, "When {this} enters the battlefield, if it's");
 
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
+
+        setChoice(playerA, "Worldgorger Dragon");
+        setChoice(playerA, "When {this} enters the battlefield, if it's");
+
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
+
+        setChoice(playerA, "Worldgorger Dragon");
+        setChoice(playerA, "When {this} enters the battlefield, if it's");
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
+
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Volcanic Geyser", playerB, 22);
         setChoice(playerA, "X=20");
 
-        // not an infinite loop resulting in a draw
-        for (int i = 0; i < 6; ++i)
-        {
-            setChoice(playerA, "No");
-            setChoice(playerB, "No");
-        }
-
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
+        assertAllCommandsUsed();
         assertLife(playerA, 44);
         assertLife(playerB, 0);
 
@@ -132,7 +152,7 @@ public class WorldgorgerDragonTest extends CardTestPlayerBase {
     }
 
     /**
-     * v9: Worldgorger Dragon + Animate Dead is still acting up (yey complex
+     * v9: Worldgorger Dragon + Animate Dead is still acting up (yet complex
      * rules interactions!). The first time you return Animate Dead from
      * Worldgorger's exile, it works like it's supposed to. You have to pick a
      * creature, and it brings it back. But if you pick Worldgorger Dragon
@@ -149,6 +169,8 @@ public class WorldgorgerDragonTest extends CardTestPlayerBase {
      */
     @Test
     public void testWithAnimateDeadDifferentTargets() {
+        setStrictChooseMode(true);
+
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
 
         // When Worldgorger Dragon enters the battlefield, exile all other permanents you control.
@@ -161,9 +183,9 @@ public class WorldgorgerDragonTest extends CardTestPlayerBase {
         // under your control and attach Animate Dead to it. When Animate Dead leaves the battlefield, that creature's controller sacrifices it.
         addCard(Zone.HAND, playerA, "Animate Dead");
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
-        // Instant {X}{R}{R}
+
         // Volcanic Geyser deals X damage to any target.
-        addCard(Zone.HAND, playerA, "Volcanic Geyser", 1);
+        addCard(Zone.HAND, playerA, "Volcanic Geyser", 1);// Instant {X}{R}{R}
         // When Staunch Defenders enters the battlefield, you gain 4 life.
         addCard(Zone.BATTLEFIELD, playerA, "Staunch Defenders", 1);
 
@@ -176,12 +198,14 @@ public class WorldgorgerDragonTest extends CardTestPlayerBase {
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
         setChoice(playerA, "Worldgorger Dragon");
+        setChoice(playerA, "When {this} enters the battlefield, if it's");
 
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
-
         setChoice(playerA, "Silvercoat Lion");
+
+        setChoice(playerA, "When {this} enters the battlefield, if it's");
 
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
@@ -192,6 +216,8 @@ public class WorldgorgerDragonTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
+
+        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Volcanic Geyser", 1);
         assertGraveyardCount(playerA, "Worldgorger Dragon", 1);

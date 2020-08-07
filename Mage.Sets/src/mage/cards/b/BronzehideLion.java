@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -46,7 +45,7 @@ public final class BronzehideLion extends CardImpl {
         // When Bronzehide Lion dies, return it to the battlefield.
         // It's an Aura enchantment with enchant creature you control and
         // "{G}{W}: Enchanted creature gains indestructible until end of turn," and it loses all other abilities.
-        this.addAbility(new DiesTriggeredAbility(new BronzehideLionReturnEffect()));
+        this.addAbility(new DiesSourceTriggeredAbility(new BronzehideLionReturnEffect()));
     }
 
     private BronzehideLion(final BronzehideLion card) {
@@ -109,7 +108,7 @@ class BronzehideLionContinuousEffect extends ContinuousEffectImpl {
 
     private final int zoneChangeCounter;
     private final Ability activatedAbility = new SimpleActivatedAbility(new GainAbilityAttachedEffect(
-            IndestructibleAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield
+            IndestructibleAbility.getInstance(), AttachmentType.AURA, Duration.EndOfTurn
     ), new ManaCostsImpl("{G}{W}"));
 
     BronzehideLionContinuousEffect(int zoneChangeCounter) {
@@ -133,17 +132,14 @@ class BronzehideLionContinuousEffect extends ContinuousEffectImpl {
         if (game.getState().getZoneChangeCounter(source.getSourceId()) > zoneChangeCounter) {
             discard();
         }
-        MageObject sourceObject = game.getPermanent(source.getSourceId());
+        Permanent sourceObject = game.getPermanent(source.getSourceId());
         if (sourceObject == null) {
             sourceObject = game.getPermanentEntering(source.getSourceId());
         }
         if (sourceObject == null) {
             return false;
         }
-        if (!(sourceObject instanceof Permanent)) {
-            return true;
-        }
-        Permanent lion = (Permanent) sourceObject;
+        Permanent lion = sourceObject;
         switch (layer) {
             case TypeChangingEffects_4:
                 lion.getCardType().clear();
@@ -158,7 +154,7 @@ class BronzehideLionContinuousEffect extends ContinuousEffectImpl {
                         toRemove.add(ability);
                     }
                 }
-                lion.getAbilities(game).removeAll(toRemove);
+                lion.removeAbilities(toRemove, source.getSourceId(), game);
 
                 lion.getSpellAbility().getTargets().clear();
                 lion.getSpellAbility().getEffects().clear();

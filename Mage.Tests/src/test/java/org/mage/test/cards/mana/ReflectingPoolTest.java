@@ -5,7 +5,6 @@ import mage.constants.ManaType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -133,7 +132,6 @@ public class ReflectingPoolTest extends CardTestPlayerBase {
      * producing mana
      */
     @Test
-    @Ignore
     public void testWithDifferentLands() {
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
 
@@ -215,7 +213,6 @@ public class ReflectingPoolTest extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore
     public void testReflectingPoolAnyManaNeedWithoutCondition() {
         // any mana source without conditions (use any mana at any time)
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
@@ -233,7 +230,6 @@ public class ReflectingPoolTest extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore
     public void testReflectingPoolAnyManaNeedWithCondition() {
         // any mana source have condition to use (Reflecting Pool must ignore that condition)
         addCard(Zone.BATTLEFIELD, playerA, "Cavern of Souls", 1); // {C} or {any}
@@ -252,7 +248,7 @@ public class ReflectingPoolTest extends CardTestPlayerBase {
     public void testReflectingPoolAnyManaTapped() {
         // any mana source with tapped must allow use any too
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
-        addCard(Zone.BATTLEFIELD, playerA, "City of Brass", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "City of Brass", 1);        
         addCard(Zone.BATTLEFIELD, playerA, "Reflecting Pool", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Upwelling", 1);
 
@@ -270,4 +266,49 @@ public class ReflectingPoolTest extends CardTestPlayerBase {
         assertTapped("Reflecting Pool", false);
         Assert.assertEquals(1, playerA.getManaPool().get(ManaType.BLACK));
     }
+
+    /**
+     * I only control 3 lands, a Triome, a Reflecting Pool, and a Mana
+     * Confluence. The Reflecting Pool is able to tap for colorless, but it
+     * should not be able to.
+     * 
+     * https://blogs.magicjudges.org/rulestips/2012/09/you-have-to-name-a-color-when-you-add-one-mana-of-any-color-to-your-mana-pool/
+     */
+    @Test
+    public void testWithTriomeAndManaConfluence() {
+        // {T}: Add {C}.       
+        // {1}{U}, {T}: Put target artifact card from your graveyard on top of your library.
+        addCard(Zone.BATTLEFIELD, playerA, "Academy Ruins", 1);
+        // {T}, Pay 1 life: Add one mana of any color.        
+        addCard(Zone.BATTLEFIELD, playerA, "Mana Confluence", 1);
+        // {T}: Add one mana of any type that a land you control could produce.        
+        addCard(Zone.BATTLEFIELD, playerA, "Reflecting Pool", 1);
+
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        ManaOptions options = playerA.getAvailableManaTest(currentGame);
+        Assert.assertEquals("Player A should be able to create only 2 different mana options", 2, options.size());
+        assertManaOptions("{C}{C}{Any}", options);
+        assertManaOptions("{C}{Any}{Any}", options);
+    }
+    
+    @Test
+    public void testWithCalciformPools() {
+        // {T}: Add {C}.
+        // {1}, {T}: Put a storage counter on Calciform Pools.
+        // {1}, Remove X storage counters from Calciform Pools: Add X mana in any combination of {W} and/or {U}.        
+        addCard(Zone.BATTLEFIELD, playerA, "Calciform Pools", 1);
+        // {T}: Add one mana of any type that a land you control could produce.        
+        addCard(Zone.BATTLEFIELD, playerA, "Reflecting Pool", 1);
+
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        ManaOptions options = playerA.getAvailableManaTest(currentGame);
+        Assert.assertEquals("Player A should be able to create only 3 different mana options", 3, options.size());
+        assertManaOptions("{C}{C}", options);
+        assertManaOptions("{C}{W}", options);
+        assertManaOptions("{C}{U}", options);
+    }    
 }

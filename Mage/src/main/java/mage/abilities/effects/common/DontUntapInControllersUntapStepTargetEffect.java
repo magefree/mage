@@ -71,7 +71,7 @@ public class DontUntapInControllersUntapStepTargetEffect extends ContinuousRuleM
         if (staticText != null) {
             return staticText;
         }
-        return "Target " + mode.getTargets().get(0).getTargetName()
+        return "target " + mode.getTargets().get(0).getTargetName()
                 + " doesn't untap during its controller's untap step" + (getDuration().toString().isEmpty() ? "" : " " + getDuration());
     }
 

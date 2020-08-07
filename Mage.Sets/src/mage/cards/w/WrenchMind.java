@@ -1,7 +1,5 @@
-
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -9,28 +7,28 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetDiscard;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class WrenchMind extends CardImpl {
 
     public WrenchMind(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}{B}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}{B}");
 
         // Target player discards two cards unless they discard an artifact card.
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new WrenchMindEffect());
-
     }
 
-    public WrenchMind(final WrenchMind card) {
+    private WrenchMind(final WrenchMind card) {
         super(card);
     }
 
@@ -42,12 +40,12 @@ public final class WrenchMind extends CardImpl {
 
 class WrenchMindEffect extends OneShotEffect {
 
-    public WrenchMindEffect() {
+    WrenchMindEffect() {
         super(Outcome.Discard);
         this.staticText = "Target player discards two cards unless they discard an artifact card";
     }
 
-    public WrenchMindEffect(final WrenchMindEffect effect) {
+    private WrenchMindEffect(final WrenchMindEffect effect) {
         super(effect);
     }
 
@@ -59,18 +57,19 @@ class WrenchMindEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
-        if (targetPlayer != null && !targetPlayer.getHand().isEmpty()) {
-            TargetDiscard target = new TargetDiscard(targetPlayer.getId());
-            targetPlayer.choose(Outcome.Discard, target, source.getSourceId(), game);
-            Card card = targetPlayer.getHand().get(target.getFirstTarget(), game);
-            if (card != null) {
-                targetPlayer.discard(card, source, game);
-                if (!card.isArtifact() && !targetPlayer.getHand().isEmpty()) {
-                    targetPlayer.discard(1, false, source, game);
-                }
-                return true;
-            }            
+        if (targetPlayer == null || targetPlayer.getHand().isEmpty()) {
+            return false;
         }
-        return false;
+        if (targetPlayer.getHand().count(StaticFilters.FILTER_CARD_ARTIFACT, game) < 1
+                || !targetPlayer.chooseUse(Outcome.Benefit, "Discard an artifact card?", source, game)) {
+            return !targetPlayer.discard(2, false, source, game).isEmpty();
+        }
+        TargetDiscard target = new TargetDiscard(StaticFilters.FILTER_CARD_ARTIFACT_AN, targetPlayer.getId());
+        targetPlayer.choose(Outcome.Discard, target, source.getSourceId(), game);
+        Card card = targetPlayer.getHand().get(target.getFirstTarget(), game);
+        if (card != null && targetPlayer.discard(card, source, game)) {
+            return true;
+        }
+        return !targetPlayer.discard(2, false, source, game).isEmpty();
     }
 }

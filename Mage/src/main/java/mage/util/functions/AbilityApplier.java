@@ -21,7 +21,7 @@ public class AbilityApplier extends ApplyToPermanent {
 
     @Override
     public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
-        permanent.addAbility(ability, game);
+        permanent.addAbility(ability, source.getSourceId(), game);
         return true;
     }
 

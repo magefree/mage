@@ -3,7 +3,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BecomesBlockedTriggeredAbility;
+import mage.abilities.common.BecomesBlockedSourceTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -23,7 +23,7 @@ public final class SaprazzanHeir extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Saprazzan Heir becomes blocked, you may draw three cards.
-        this.addAbility(new BecomesBlockedTriggeredAbility(new DrawCardSourceControllerEffect(3), true));
+        this.addAbility(new BecomesBlockedSourceTriggeredAbility(new DrawCardSourceControllerEffect(3), true));
     }
 
     public SaprazzanHeir(final SaprazzanHeir card) {

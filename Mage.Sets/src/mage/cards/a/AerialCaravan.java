@@ -81,7 +81,7 @@ class AerialCaravanExileEffect extends OneShotEffect {
                 String exileName = sourcePermanent.getIdName() + " <this card may be played the turn it was exiled>";
                 controller.moveCardsToExile(card, source, game, true, source.getSourceId(), exileName);
                 ContinuousEffect effect = new PlayFromNotOwnHandZoneTargetEffect(Zone.EXILED, Duration.EndOfTurn);
-                effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
+                effect.setTargetPointer(new FixedTarget(card, game));
                 game.addEffect(effect, source);
             }
             return true;

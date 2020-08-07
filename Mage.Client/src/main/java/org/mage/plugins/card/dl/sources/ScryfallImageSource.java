@@ -114,6 +114,15 @@ public enum ScryfallImageSource implements CardImageSource {
                     + card.getCollectorId() + "/" + localizedCode + "?format=image";
             alternativeUrl = "https://api.scryfall.com/cards/" + formatSetName(card.getSet(), isToken) + "/"
                     + card.getCollectorId() + "/" + defaultCode + "?format=image";
+
+            // workaround to use cards without english images (some promos or special cards)
+            // bug: https://github.com/magefree/mage/issues/6829
+            // example: Mysterious Egg from IKO https://api.scryfall.com/cards/iko/385/?format=image
+            if (Objects.equals(baseUrl, alternativeUrl)) {
+                // without loc code scryfall must return first available image
+                alternativeUrl = "https://api.scryfall.com/cards/" + formatSetName(card.getSet(), isToken) + "/"
+                        + card.getCollectorId() + "/?format=image";
+            }
         }
 
         return new CardImageUrls(baseUrl, alternativeUrl);

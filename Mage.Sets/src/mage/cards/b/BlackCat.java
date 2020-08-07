@@ -32,7 +32,7 @@ package mage.cards.b;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -54,7 +54,7 @@ public final class BlackCat extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Black Cat dies, target opponent discards a card at random.
-        Ability ability = new DiesTriggeredAbility(new DiscardTargetEffect(1, true),false);
+        Ability ability = new DiesSourceTriggeredAbility(new DiscardTargetEffect(1, true),false);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }

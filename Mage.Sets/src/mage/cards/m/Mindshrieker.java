@@ -1,20 +1,24 @@
 package mage.cards.m;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -34,10 +38,9 @@ public final class Mindshrieker extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {2}: Target player puts the top card of their library into their graveyard. Mindshrieker gets +X/+X until end of turn, where X is that card's converted mana cost.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MindshriekerEffect(), new ManaCostsImpl("{2}"));
+        Ability ability = new SimpleActivatedAbility(new MindshriekerEffect(), new GenericManaCost(2));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
-
     }
 
     public Mindshrieker(final Mindshrieker card) {
@@ -52,30 +55,31 @@ public final class Mindshrieker extends CardImpl {
 
 class MindshriekerEffect extends OneShotEffect {
 
-    public MindshriekerEffect() {
+    MindshriekerEffect() {
         super(Outcome.Detriment);
-        staticText = "Target player puts the top card of their library into their graveyard. {this} gets +X/+X until end of turn, where X is that card's converted mana cost";
+        staticText = "Target player mills a card. {this} gets +X/+X until end of turn, " +
+                "where X is the milled card's converted mana cost";
     }
 
-    public MindshriekerEffect(final MindshriekerEffect effect) {
+    private MindshriekerEffect(final MindshriekerEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
-        if (targetPlayer != null) {
-            if (targetPlayer.getLibrary().hasCards()) {
-                Card card = targetPlayer.getLibrary().getFromTop(game);
-                if (card != null) {
-                    targetPlayer.moveCards(card, Zone.GRAVEYARD, source, game);
-                    int amount = card.getConvertedManaCost();
-                    if (amount > 0) {
-                        game.addEffect(new BoostSourceEffect(amount, amount, Duration.EndOfTurn), source);
-                    }
-                }
-            }
-            return true;
+        if (targetPlayer == null) {
+            return false;
+        }
+        int totalCMC = targetPlayer
+                .millCards(1, source, game)
+                .getCards(game)
+                .stream()
+                .filter(Objects::nonNull)
+                .mapToInt(MageObject::getConvertedManaCost)
+                .sum();
+        if (totalCMC > 0) {
+            game.addEffect(new BoostSourceEffect(totalCMC, totalCMC, Duration.EndOfTurn), source);
         }
         return false;
     }

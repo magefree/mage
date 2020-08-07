@@ -1,7 +1,5 @@
-
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.condition.common.IsStepCondition;
@@ -10,16 +8,13 @@ import mage.abilities.effects.Effects;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.EffectType;
-import mage.constants.Outcome;
-import mage.constants.PhaseStep;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author Styxo
  */
 public final class WellOfKnowledge extends CardImpl {
@@ -68,7 +63,7 @@ class WellOfKnowledgeConditionalActivatedAbility extends ActivatedAbilityImpl {
                 && costs.canPay(this, sourceId, playerId, game)
                 && game.isActivePlayer(playerId)) {
             this.activatorId = playerId;
-            return ActivationStatus.getTrue();
+            return ActivationStatus.getTrue(this, game);
         }
         return ActivationStatus.getFalse();
 
@@ -105,7 +100,7 @@ class WellOfKnowledgeEffect extends OneShotEffect {
         if (source instanceof ActivatedAbilityImpl) {
             Player activator = game.getPlayer(((ActivatedAbilityImpl) source).getActivatorId());
             if (activator != null) {
-                activator.drawCards(1, game);
+                activator.drawCards(1, source.getSourceId(), game);
                 return true;
             }
 

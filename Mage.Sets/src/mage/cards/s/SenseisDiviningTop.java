@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -16,6 +15,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  * @author LevelX
@@ -24,7 +24,10 @@ public final class SenseisDiviningTop extends CardImpl {
 
     public SenseisDiviningTop(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
+
+        // {1}: Look at the top three cards of your library, then put them back in any order.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new LookLibraryControllerEffect(3, false, true), new ManaCostsImpl("{1}")));
+        // {T}: Draw a card, then put Sensei's Divining Top on top of its owner's library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new TapSourceCost());
         ability.addEffect(new SenseisDiviningTopEffect());
         this.addAbility(ability);
@@ -45,7 +48,7 @@ class SenseisDiviningTopEffect extends OneShotEffect {
 
     public SenseisDiviningTopEffect() {
         super(Outcome.ReturnToHand);
-        staticText = ", then put Sensei's Divining Top on top of its owner's library";
+        staticText = ", then put {this} on top of its owner's library";
     }
 
     public SenseisDiviningTopEffect(final SenseisDiviningTopEffect effect) {
@@ -60,8 +63,9 @@ class SenseisDiviningTopEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            return permanent.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
+        Player owner = game.getPlayer(game.getOwnerId(source.getSourceId()));
+        if (permanent != null && owner != null) {
+            return owner.putCardsOnTopOfLibrary(permanent, game, source, true);
         }
         return false;
     }

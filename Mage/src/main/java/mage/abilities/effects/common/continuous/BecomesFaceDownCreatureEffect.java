@@ -1,8 +1,5 @@
-
 package mage.abilities.effects.common.continuous;
 
-import java.util.ArrayList;
-import java.util.List;
 import mage.MageObjectReference;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -12,13 +9,12 @@ import mage.abilities.costs.Costs;
 import mage.abilities.costs.CostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This effect lets the card be a 2/2 face-down creature, with no text, no name,
@@ -149,21 +145,31 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implemen
                     Card card = game.getCard(permanent.getId()); //
                     List<Ability> abilitiesToRemove = new ArrayList<>();
                     for (Ability ability : permanent.getAbilities()) {
+
+                        // keep gained abilities from other sources, removes only own (card text)
                         if (card != null && !card.getAbilities().contains(ability)) {
-                            // gained abilities from other sources won't be removed
                             continue;
                         }
+
+                        // 701.33c
+                        // If a card with morph is manifested, its controller may turn that card face up using
+                        // either the procedure described in rule 702.36e to turn a face-down permanent with morph face up
+                        // or the procedure described above to turn a manifested permanent face up.
+                        //
+                        // so keep all tune face up abilities and other face down compatible
                         if (ability.getWorksFaceDown()) {
                             ability.setRuleVisible(false);
                             continue;
-                        } else if (!ability.getRuleVisible() && !ability.getEffects().isEmpty()) {
+                        }
+
+                        if (!ability.getRuleVisible() && !ability.getEffects().isEmpty()) {
                             if (ability.getEffects().get(0) instanceof BecomesFaceDownCreatureEffect) {
                                 continue;
                             }
                         }
                         abilitiesToRemove.add(ability);
                     }
-                    permanent.getAbilities().removeAll(abilitiesToRemove);
+                    permanent.removeAbilities(abilitiesToRemove, source.getSourceId(), game);
                     if (turnFaceUpAbility != null) {
                         permanent.addAbility(turnFaceUpAbility, source.getSourceId(), game);
                     }

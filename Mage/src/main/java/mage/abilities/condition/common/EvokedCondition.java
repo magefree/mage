@@ -22,7 +22,7 @@ public enum EvokedCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(source.getSourceId());
         if (card != null) {
-            return card.getAbilities().stream()
+            return card.getAbilities(game).stream()
                     .filter(ab -> ab instanceof EvokeAbility)
                     .anyMatch(evoke -> ((EvokeAbility) evoke).isActivated(source, game));
         }

@@ -4,6 +4,8 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.Arrays;
+
 /**
  * @author spjspj
  */
@@ -15,14 +17,13 @@ public final class SeedGuardianToken extends TokenImpl {
 
     public SeedGuardianToken(int xValue) {
         super("Elemental", "X/X green Elemental creature token");
-        setTokenType(1);
-        setOriginalExpansionSetCode("OGW");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.ELEMENTAL);
         power = new MageInt(xValue);
         toughness = new MageInt(xValue);
 
+        availableImageSetCodes = Arrays.asList("C13", "CHK", "OGW");
     }
 
     public SeedGuardianToken(final SeedGuardianToken token) {

@@ -3,7 +3,7 @@ package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BecomesBlockedTriggeredAbility;
+import mage.abilities.common.BecomesBlockedSourceTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -23,7 +23,7 @@ public final class DeepwoodTantiv extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever Deepwood Tantiv becomes blocked, you gain 2 life.
-        this.addAbility(new BecomesBlockedTriggeredAbility(new GainLifeEffect(2), false));
+        this.addAbility(new BecomesBlockedSourceTriggeredAbility(new GainLifeEffect(2), false));
     }
 
     public DeepwoodTantiv(final DeepwoodTantiv card) {

@@ -1,24 +1,24 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterTeamPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class ThrasherBrute extends CardImpl {
@@ -35,12 +35,9 @@ public final class ThrasherBrute extends CardImpl {
 
         // Whenever Thrasher Brute or another Warrior enters the battlefield under your team's control, target opponent loses 1 life and you gain 1 life.
         Ability ability = new EntersBattlefieldAllTriggeredAbility(
-                Zone.BATTLEFIELD,
-                new LoseLifeTargetEffect(1),
-                filter,
-                false,
+                Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), filter, false,
                 "Whenever {this} or another Warrior enters the battlefield under your team's control, "
-                + "target opponent loses 1 life and you gain 1 life."
+                        + "target opponent loses 1 life and you gain 1 life."
         );
         ability.addEffect(new GainLifeEffect(1));
         ability.addTarget(new TargetOpponent());
@@ -63,8 +60,8 @@ class ThrasherBruteFilter extends FilterTeamPermanent {
         super();
     }
 
-    ThrasherBruteFilter(final ThrasherBruteFilter effect) {
-        super(effect);
+    private ThrasherBruteFilter(final ThrasherBruteFilter filter) {
+        super(filter);
     }
 
     @Override
@@ -74,16 +71,8 @@ class ThrasherBruteFilter extends FilterTeamPermanent {
 
     @Override
     public boolean match(Permanent permanent, UUID sourceId, UUID playerId, Game game) {
-        if (super.match(permanent, sourceId, playerId, game)) {
-            if (sourceId.equals(permanent.getId())) {
-                return true;
-            } else {
-                if (permanent.hasSubtype(SubType.WARRIOR, game)) {
-                    return true;
-                }
-            }
-        }
-        return false;
+        return super.match(permanent, sourceId, playerId, game)
+                && (sourceId.equals(permanent.getId())
+                || permanent.hasSubtype(SubType.WARRIOR, game));
     }
-
 }

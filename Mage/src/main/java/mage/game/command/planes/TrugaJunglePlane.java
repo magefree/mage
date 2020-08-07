@@ -1,8 +1,5 @@
-
 package mage.game.command.planes;
 
-import java.util.ArrayList;
-import java.util.List;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.IsStillOnPlaneCondition;
@@ -13,8 +10,10 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.RevealLibraryPutIntoHandEffect;
 import mage.abilities.effects.common.RollPlanarDieEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
+import mage.abilities.effects.common.cost.PlanarDieRollCostIncreasingEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.constants.Duration;
+import mage.constants.Planes;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
@@ -23,8 +22,10 @@ import mage.game.command.Plane;
 import mage.target.Target;
 import mage.watchers.common.PlanarRollWatcher;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * @author spjspj
  */
 public class TrugaJunglePlane extends Plane {
@@ -32,14 +33,14 @@ public class TrugaJunglePlane extends Plane {
     private static final String rule = "All lands have '{t}: Add one mana of any color";
 
     public TrugaJunglePlane() {
-        this.setName("Plane - Truga Jungle");
+        this.setPlaneType(Planes.PLANE_TRUGA_JUNGLE);
         this.setExpansionSetCodeForImage("PCA");
 
         SimpleStaticAbility ability
                 = new SimpleStaticAbility(Zone.COMMAND, new ConditionalContinuousEffect(
-                        new GainAbilityAllEffect(new AnyColorManaAbility(), Duration.Custom, StaticFilters.FILTER_LANDS),
-                        new IsStillOnPlaneCondition(this.getName()),
-                        rule));
+                new GainAbilityAllEffect(new AnyColorManaAbility(), Duration.Custom, StaticFilters.FILTER_LANDS),
+                new IsStillOnPlaneCondition(this.getName()),
+                rule));
         this.getAbilities().add(ability);
 
         // Active player can roll the planar die: Whenever you roll {CHAOS}, reveal the top three cards of your libary.  Put all land cards revealed this way into your hand the rest on the bottom of your library in any order.

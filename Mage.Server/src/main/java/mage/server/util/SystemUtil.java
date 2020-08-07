@@ -13,6 +13,7 @@ import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Planes;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -21,6 +22,7 @@ import mage.game.command.CommandObject;
 import mage.game.command.Plane;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 import mage.util.RandomUtil;
 
 import java.io.File;
@@ -81,7 +83,7 @@ public final class SystemUtil {
     }
 
     private static final Pattern patternGroup = Pattern.compile("\\[(.+)\\]"); // [test new card]
-    private static final Pattern patternCommand = Pattern.compile("([\\w]+):([\\S]+?):([\\S ]+):([\\d]+)"); // battlefield:Human:Island:10
+    private static final Pattern patternCommand = Pattern.compile("([\\w]+):([\\S ]+?):([\\S ]+):([\\d]+)"); // battlefield:Human:Island:10
     private static final Pattern patternCardInfo = Pattern.compile("([\\S ]+):([\\S ]+)"); // Island:XLN
 
     // show ext info for special commands
@@ -424,7 +426,7 @@ public final class SystemUtil {
                                 game.firePriorityEvent(opponent.getId());
                             }
 
-                            List<Ability> abilities = opponent.getPlayable(game, true);
+                            List<ActivatedAbility> abilities = opponent.getPlayable(game, true);
                             Map<String, String> choices = new HashMap<>();
                             abilities.forEach(ability -> {
                                 MageObject object = ability.getSourceObject(game);
@@ -436,10 +438,10 @@ public final class SystemUtil {
                             choice.setKeyChoices(choices);
                             if (feedbackPlayer.choose(Outcome.Detriment, choice, game) && choice.getChoiceKey() != null) {
                                 String needId = choice.getChoiceKey();
-                                Optional<Ability> ability = abilities.stream().filter(a -> a.getId().toString().equals(needId)).findFirst();
+                                Optional<ActivatedAbility> ability = abilities.stream().filter(a -> a.getId().toString().equals(needId)).findFirst();
                                 if (ability.isPresent()) {
                                     // TODO: set priority for player?
-                                    ActivatedAbility activatedAbility = (ActivatedAbility) ability.get();
+                                    ActivatedAbility activatedAbility = ability.get();
                                     game.informPlayers(feedbackPlayer.getLogName() + " as another player " + opponent.getLogName()
                                             + " trying to force an activate ability: " + activatedAbility.getGameLogMessage(game));
                                     if (opponent.activateAbility(activatedAbility, game)) {
@@ -538,12 +540,11 @@ public final class SystemUtil {
                             break;
                         }
                     }
-                    Class<?> c = Class.forName("mage.game.command.planes." + command.cardName);
-                    Constructor<?> cons = c.getConstructor();
-                    Object plane = cons.newInstance();
-                    if (plane instanceof mage.game.command.Plane) {
-                        ((mage.game.command.Plane) plane).setControllerId(player.getId());
-                        game.addPlane((mage.game.command.Plane) plane, null, player.getId());
+                    Planes planeType = Planes.fromClassName(command.cardName);
+                    Plane plane = Plane.createPlane(planeType);
+                    if (plane != null) {
+                        plane.setControllerId(player.getId());
+                        game.addPlane(plane, null, player.getId());
                         continue;
                     }
                 } else if ("loyalty".equalsIgnoreCase(command.zone)) {
@@ -572,7 +573,7 @@ public final class SystemUtil {
 
                     // move card from exile to stack
                     for (Card card : cardsToLoad) {
-                        swapWithAnyCard(game, player, card, Zone.STACK);
+                        putCardToZone(game, player, card, Zone.STACK);
                     }
 
                     continue;
@@ -647,7 +648,7 @@ public final class SystemUtil {
                 } else {
                     // as other card
                     for (Card card : cardsToLoad) {
-                        swapWithAnyCard(game, player, card, gameZone);
+                        putCardToZone(game, player, card, gameZone);
                     }
                 }
             }
@@ -657,38 +658,33 @@ public final class SystemUtil {
     }
 
     /**
-     * Swap cards between specified card from library and any hand card.
-     *
-     * @param game
-     * @param card Card to put to player's hand
+     * Put card to specified (battlefield zone will be tranformed to permanent with initialized effects)
      */
-    private static void swapWithAnyCard(Game game, Player player, Card card, Zone zone) {
-        // Put the card in Exile to start. Otherwise the game doesn't know where to remove the card from.
-        game.getExile().getPermanentExile().add(card);
-        game.setZone(card.getId(), Zone.EXILED);
+    private static void putCardToZone(Game game, Player player, Card card, Zone zone) {
+        // TODO: replace by player.move?
         switch (zone) {
             case BATTLEFIELD:
-                card.putOntoBattlefield(game, Zone.EXILED, null, player.getId());
+                CardUtil.putCardOntoBattlefieldWithEffects(game, card, player);
                 break;
             case LIBRARY:
                 card.setZone(Zone.LIBRARY, game);
-                game.getExile().getPermanentExile().remove(card);
                 player.getLibrary().putOnTop(card, game);
                 break;
             case STACK:
-                card.cast(game, Zone.EXILED, card.getSpellAbility(), player.getId());
+                card.cast(game, game.getState().getZone(card.getId()), card.getSpellAbility(), player.getId());
                 break;
             case EXILED:
-                // nothing to do
+                card.setZone(Zone.EXILED, game);
+                game.getExile().getPermanentExile().add(card);
                 break;
             case OUTSIDE:
                 card.setZone(Zone.OUTSIDE, game);
-                game.getExile().getPermanentExile().remove(card);
                 break;
             default:
                 card.moveToZone(zone, null, game, false);
                 break;
         }
+        game.applyEffects();
         logger.info("Added card to player's " + zone.toString() + ": " + card.getName() + ", player = " + player.getName());
     }
 

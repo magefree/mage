@@ -35,7 +35,7 @@ public final class LongshotSquad extends CardImpl {
 
     public LongshotSquad(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
-        this.subtype.add(SubType.HOUND);
+        this.subtype.add(SubType.DOG);
         this.subtype.add(SubType.ARCHER);
 
         this.power = new MageInt(3);

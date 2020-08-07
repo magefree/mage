@@ -8,6 +8,7 @@ import java.awt.*;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,15 +23,16 @@ public final class TextboxRuleParser {
     private static final Pattern LevelAbilityPattern = Pattern.compile("Level (\\d+)-?(\\d*)(\\+?)");
     private static final Pattern LoyaltyAbilityPattern = Pattern.compile("^(\\+|\\-)(\\d+|X): ");
     private static final Pattern SimpleKeywordPattern = Pattern.compile("^(\\w+( \\w+)?)\\s*(\\([^\\)]*\\))?\\s*$");
+    private static final Pattern FontColorValuePattern = Pattern.compile("color\\s*=\\s*[\"'](\\w+)[\"']");
 
     // Parse a given rule (given as a string) into a TextboxRule, replacing
     // symbol annotations, italics, etc, parsing out information such as
     // if the ability is a loyalty ability, and returning an TextboxRule
     // representing that information, which can be used to render the rule in
     // the textbox of a card.
-    public static TextboxRule parse(CardView source, String rule) {
+    public static TextboxRule parse(CardView source, String rule, String cardNameToUse) {
         // List of regions to apply
-        java.util.List<TextboxRule.AttributeRegion> regions = new ArrayList<>();
+        List<TextboxRule.AttributeRegion> regions = new ArrayList<>();
 
         // Leveler / loyalty / basic
         boolean isLeveler = false;
@@ -102,10 +104,9 @@ public final class TextboxRuleParser {
                         String contents = rule.substring(index + 1, closeIndex);
                         if (contents.equals("this") || contents.equals("source")) {
                             // Replace {this} with the card's name
-                            String cardName = source.getName();
-                            build.append(cardName);
+                            build.append(cardNameToUse);
                             index += contents.length() + 2;
-                            outputIndex += cardName.length();
+                            outputIndex += cardNameToUse.length();
                         } else {
                             Image symbol = ManaSymbols.getSizedManaSymbol(contents.replace("/", ""), 10);
                             if (symbol != null) {
@@ -198,6 +199,11 @@ public final class TextboxRuleParser {
                                             LOGGER.error("Bad leveler levels in rule `" + rule + "`.");
                                         }
                                     }
+                                    break;
+                                case "/font":
+                                    // Font it is an additional info of a card
+                                    // lets make it blue like it is in tooltip
+                                    regions.add(new TextboxRule.ColorRegion(openingIndex, outputIndex, Color.BLUE));
                                     break;
                                 default:
                                     // Unknown

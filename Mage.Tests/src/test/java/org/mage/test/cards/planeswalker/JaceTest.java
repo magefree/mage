@@ -1,9 +1,9 @@
-
 package org.mage.test.cards.planeswalker;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -72,35 +72,74 @@ public class JaceTest extends CardTestPlayerBase {
         assertExileCount("Jace, Vryn's Prodigy", 0);
         assertPermanentCount(playerA, "Jace, Telepath Unbound", 1);
     }
-    
+
+    /**
+     * Rollback doesn't unflip a newly flipped Jace #1973 Reporting on behalf of
+     * someone else (but he plays a lot on xmage) so I don't have any further
+     * information, but a rollback didn't reset a jace, vryn's prodigy. Haven't
+     * tried to recreate it.
+     */
+    @Test
+    public void rollbackDoesntUnflipJaceTest() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+        addCard(Zone.GRAVEYARD, playerA, "Mountain", 4);
+
+        // {T}: Draw a card, then discard a card. If there are five or more cards in your graveyard,
+        // exile Jace, Vryn's Prodigy, then return him to the battefield transformed under his owner's control.
+        addCard(Zone.BATTLEFIELD, playerA, "Jace, Vryn's Prodigy", 1); // {U}{1} - 0/2
+        addCard(Zone.HAND, playerA, "Pillarfield Ox", 1);
+
+        // Flash
+        // If a nontoken creature would enter the battlefield and it wasn't cast, exile it instead.
+        addCard(Zone.BATTLEFIELD, playerB, "Containment Priest", 1); // {2}{U}{U}
+
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Draw a card");
+        setChoice(playerA, "Pillarfield Ox");
+
+        rollbackTurns(3, PhaseStep.BEGIN_COMBAT, playerA, 0); // Start of turn 3
+
+        setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertGraveyardCount(playerA, "Pillarfield Ox", 0); // Goes back to hand
+        assertHandCount(playerA, "Pillarfield Ox", 1);
+
+        assertExileCount("Jace, Vryn's Prodigy", 0);
+
+        assertPermanentCount(playerA, "Jace, Telepath Unbound", 0);
+        assertPermanentCount(playerA, "Jace, Vryn's Prodigy", 1);
+
+        Assert.assertFalse("Jace, Vryn's Prodigy may not be flipped", getPermanent("Jace, Vryn's Prodigy").isFlipped());
+    }
+
     @Test
     public void vrynCannotCastAncestralVisions() {
-                
+
         // {T}: Draw a card, then discard a card. If there are five or more cards in your graveyard,
         // exile Jace, Vryn's Prodigy, then return him to the battefield transformed under his owner's control.
         String jVryn = "Jace, Vryn's Prodigy"; // {U}{1} 0/2
-        
-        //−3: You may cast target instant or sorcery card from your graveyard this turn. If that card would be put into your graveyard this turn, exile it instead.        
+
+        //−3: You may cast target instant or sorcery card from your graveyard this turn. If that card would be put into your graveyard this turn, exile it instead.
         String jTelepath = "Jace, Telepath Unbound"; // 5 loyalty
-        
+
         // Sorcery, Suspend 4 {U}. Target player draws three cards.
-        String ancestralVision = "Ancestral Vision"; 
-        
+        String ancestralVision = "Ancestral Vision";
+
         addCard(Zone.BATTLEFIELD, playerA, "Jace, Vryn's Prodigy", 1); // {U}{1} - 0/2
         addCard(Zone.BATTLEFIELD, playerA, "Island");
         addCard(Zone.GRAVEYARD, playerA, "Island", 4);
         addCard(Zone.GRAVEYARD, playerA, ancestralVision);
         addCard(Zone.HAND, playerA, "Swamp", 1);
-        
+
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Draw a card, then discard a card. If there are five or more cards in your graveyard");
         setChoice(playerA, "Swamp");
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "-3:");
         addTarget(playerA, ancestralVision);
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, ancestralVision);
-        
+
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
-        
+
         assertPermanentCount(playerA, jTelepath, 1);
         assertGraveyardCount(playerA, "Swamp", 1);
         assertGraveyardCount(playerA, ancestralVision, 1);

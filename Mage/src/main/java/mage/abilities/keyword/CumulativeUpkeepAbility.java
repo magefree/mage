@@ -1,4 +1,3 @@
-
 package mage.abilities.keyword;
 
 import mage.abilities.Ability;
@@ -104,7 +103,7 @@ class CumulativeUpkeepEffect extends OneShotEffect {
                         game.fireEvent(new GameEvent(EventType.PAID_CUMULATIVE_UPKEEP, permanent.getId(), permanent.getId(), player.getId(), ageCounter, false));
                         return true;
                     } else {
-                        game.restoreState(bookmark, source.getRule());
+                        player.restoreState(bookmark, source.getRule(), game);
                     }
                 }
                 game.fireEvent(new GameEvent(EventType.DIDNT_PAY_CUMULATIVE_UPKEEP, permanent.getId(), permanent.getId(), player.getId(), ageCounter, false));

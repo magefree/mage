@@ -1,6 +1,5 @@
 package mage.cards.u;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -15,10 +14,10 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
- *
  */
 public final class UndyingFlames extends CardImpl {
 
@@ -60,7 +59,7 @@ class UndyingFlamesEffect extends OneShotEffect {
 
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            while (controller.getLibrary().hasCards() && controller.isInGame()) {
+            while (controller.canRespond() && controller.getLibrary().hasCards()) {
                 Card card = controller.getLibrary().getFromTop(game);
                 if (card != null) {
                     controller.moveCards(card, Zone.EXILED, source, game);

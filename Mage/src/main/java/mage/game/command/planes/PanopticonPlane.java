@@ -1,7 +1,5 @@
 package mage.game.command.planes;
 
-import java.util.ArrayList;
-import java.util.List;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
@@ -13,6 +11,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.RollPlanarDieEffect;
+import mage.abilities.effects.common.cost.PlanarDieRollCostIncreasingEffect;
+import mage.constants.Planes;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -24,8 +24,10 @@ import mage.target.Target;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.PlanarRollWatcher;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * @author spjspj
  */
 public class PanopticonPlane extends Plane {
@@ -33,7 +35,7 @@ public class PanopticonPlane extends Plane {
     private static final String rule = "At the beginning of your draw step, draw an additional card";
 
     public PanopticonPlane() {
-        this.setName("Plane - Panopticon");
+        this.setPlaneType(Planes.PLANE_PANOPTICON);
         this.setExpansionSetCodeForImage("PCA");
 
         // When you planeswalk to Panopticon, draw a card
@@ -80,7 +82,7 @@ class PanopticonTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Plane cPlane = game.getState().getCurrentPlane();
-        if (cPlane == null || !cPlane.getName().equalsIgnoreCase("Plane - Panopticon")) {
+        if (cPlane == null || !cPlane.getPlaneType().equals(Planes.PLANE_PANOPTICON)) {
             return false;
         }
 

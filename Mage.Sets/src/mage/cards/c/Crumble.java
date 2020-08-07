@@ -1,5 +1,6 @@
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -11,8 +12,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetArtifactPermanent;
-
-import java.util.UUID;
 
 /**
  * @author fireshoes
@@ -58,9 +57,7 @@ class CrumbleEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        // If the target artifact becomes illegal before resolution, the player does not gain any life.
-        // (2004-10-04)
-        Permanent permanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source)); // must use LKI
+        Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source); // must use LKI
         if (permanent != null) {
             int cost = permanent.getConvertedManaCost();
             Player player = game.getPlayer(permanent.getControllerId());

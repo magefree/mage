@@ -53,7 +53,7 @@ class DesolationEffect extends OneShotEffect {
 
     public DesolationEffect() {
         super(Outcome.Damage);
-        this.staticText = "each player who tapped a land for mana this turn sacrifices a land. Desolation deals 2 damage to each player who sacrificed a Plains this way";
+        this.staticText = "each player who tapped a land for mana this turn sacrifices a land. {this} deals 2 damage to each player who sacrificed a Plains this way";
     }
 
     public DesolationEffect(DesolationEffect copy) {
@@ -108,7 +108,8 @@ class DesolationWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.UNTAP_STEP_PRE) {
             reset();
         }
-        if (event.getType() == GameEvent.EventType.TAPPED_FOR_MANA) {
+        if (event.getType() == GameEvent.EventType.TAPPED_FOR_MANA 
+                && !game.inCheckPlayableState()) { // Ignored - see GameEvent.TAPPED_FOR_MANA
             UUID playerId = event.getPlayerId();
             if (playerId != null) {
                 Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());

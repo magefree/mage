@@ -4,7 +4,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BlocksOrBecomesBlockedTriggeredAbility;
+import mage.abilities.common.BlocksOrBecomesBlockedSourceTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -39,7 +39,7 @@ public final class SpittingSlug extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever Spitting Slug blocks or becomes blocked, you may pay {1}{G}. If you do, Spitting Slug gains first strike until end of turn. Otherwise, each creature blocking or blocked by Spitting Slug gains first strike until end of turn.
-        this.addAbility(new BlocksOrBecomesBlockedTriggeredAbility(
+        this.addAbility(new BlocksOrBecomesBlockedSourceTriggeredAbility(
             new DoIfCostPaid(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), 
                 new SpittingSlugEffect(), 
                 new ManaCostsImpl("{1}{G}")).setText("you may pay {1}{G}. If you do, {this} gains first strike until end of turn. Otherwise, each creature blocking or blocked by {this} gains first strike until end of turn"), 
@@ -79,7 +79,7 @@ class SpittingSlugEffect extends OneShotEffect {
             filter.add(Predicates.or(new BlockedByIdPredicate(sourcePermanent.getId()), new BlockingAttackerIdPredicate(sourcePermanent.getId())));
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, game)) {
                 ContinuousEffect effect = new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn);
-                effect.setTargetPointer(new FixedTarget(permanent.getId()));
+                effect.setTargetPointer(new FixedTarget(permanent, game));
                 game.addEffect(effect, source);
             }
             return true;

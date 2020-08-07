@@ -1,5 +1,8 @@
 package mage.game.permanent;
 
+import java.util.UUID;
+import javax.annotation.processing.SupportedSourceVersion;
+import javax.lang.model.SourceVersion;
 import mage.MageObject;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
@@ -11,11 +14,10 @@ import mage.cards.LevelerCard;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 
-import java.util.UUID;
-
 /**
  * @author BetaSteward_at_googlemail.com
  */
+@SupportedSourceVersion(SourceVersion.RELEASE_8)
 public class PermanentCard extends PermanentImpl {
 
     protected int maxLevelCounters;
@@ -53,7 +55,7 @@ public class PermanentCard extends PermanentImpl {
             if (game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + getId()) != null) {
                 game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + getId(), null);
                 setTransformed(true);
-                TransformAbility.transform(this, getSecondCardFace(), game);
+                TransformAbility.transform(this, getSecondCardFace(), game, null);
             }
         }
     }
@@ -86,6 +88,7 @@ public class PermanentCard extends PermanentImpl {
             }
         } else {
             this.abilities = card.getAbilities().copy();
+            this.spellAbility = null; // will be set on first getSpellAbility call if card has one.
         }
         // adventure cards must show adventure spell info on battlefield too
         /*

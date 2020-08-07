@@ -20,7 +20,7 @@ import java.util.UUID;
 public final class FellThePheasant extends CardImpl {
 
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent("creature with flying.");
+    private static final FilterPermanent filter = new FilterCreaturePermanent("creature with flying");
 
     static {
         filter.add(new AbilityPredicate(FlyingAbility.class));

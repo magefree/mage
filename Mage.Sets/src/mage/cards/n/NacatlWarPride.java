@@ -23,9 +23,11 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.EmptyToken;
 import mage.target.targetpointer.FixedTargets;
-import mage.util.CardUtil;
+import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
+import mage.players.Player;
+import mage.target.targetpointer.FixedTarget;
+import mage.watchers.common.CreatureAttackedWhichPlayerWatcher;
 
 /**
  *
@@ -45,7 +47,10 @@ public final class NacatlWarPride extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBeBlockedByAtLeastOneSourceEffect(Duration.WhileOnBattlefield)));
 
         // Whenever Nacatl War-Pride attacks, create X tokens that are copies of Nacatl War-Pride tapped and attacking, where X is the number of creatures defending player controls. Exile the tokens at the beginning of the next end step.
-        this.addAbility(new AttacksTriggeredAbility(new NacatlWarPrideEffect(), false));
+        Ability ability = new AttacksTriggeredAbility(new NacatlWarPrideEffect(), false);
+        ability.addWatcher(new CreatureAttackedWhichPlayerWatcher());
+        this.addAbility(ability);       
+        
     }
 
     public NacatlWarPride(final NacatlWarPride card) {
@@ -62,7 +67,7 @@ class NacatlWarPrideEffect extends OneShotEffect {
 
     public NacatlWarPrideEffect() {
         super(Outcome.Benefit);
-        this.staticText = "create X tokens that are copies of Nacatl War-Pride tapped and attacking, where X is the number of creatures defending player controls. Exile the tokens at the beginning of the next end step.";
+        this.staticText = "create X tokens that are copies of {this} tapped and attacking, where X is the number of creatures defending player controls. Exile the tokens at the beginning of the next end step";
     }
 
     public NacatlWarPrideEffect(final NacatlWarPrideEffect effect) {
@@ -76,13 +81,16 @@ class NacatlWarPrideEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent origNactalWarPride = game.getPermanent(source.getSourceId());
+        Permanent origNactalWarPride = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (origNactalWarPride == null) {
             return false;
         }
+        
+        CreatureAttackedWhichPlayerWatcher PlayerAttackedWatcher = game.getState().getWatcher(CreatureAttackedWhichPlayerWatcher.class);
 
         // Count the number of creatures attacked opponent controls
-        UUID defenderId = game.getCombat().getDefendingPlayerId(origNactalWarPride.getId(), game);
+        UUID defenderId = PlayerAttackedWatcher.getPlayerAttackedThisTurnByCreature(source.getSourceId());        
+
         int count = 0;
         if (defenderId != null) {
             count = game.getBattlefield().countAll(new FilterControlledCreaturePermanent(), defenderId, game);
@@ -92,24 +100,17 @@ class NacatlWarPrideEffect extends OneShotEffect {
             return false;
         }
 
-        List<Permanent> copies = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            EmptyToken token = new EmptyToken();
-            CardUtil.copyTo(token).from(origNactalWarPride);
-            token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId(), true, true);
-
-            for (UUID tokenId : token.getLastAddedTokenIds()) { // by cards like Doubling Season multiple tokens can be added to the battlefield
-                Permanent tokenPermanent = game.getPermanent(tokenId);
-                if (tokenPermanent != null) {
-                    copies.add(tokenPermanent);
-                }
-            }
-        }
-
+        List<Permanent> copies = new ArrayList<>();    
+        Player controller = game.getPlayer(source.getControllerId());
+        CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(controller.getId(), null, false, count, true, true);
+        effect.setTargetPointer(new FixedTarget(origNactalWarPride, game));
+        effect.apply(game, source);
+        copies.addAll(effect.getAddedPermanent());
+        
         if (!copies.isEmpty()) {
             FixedTargets fixedTargets = new FixedTargets(copies, game);
             ExileTargetEffect exileEffect = new ExileTargetEffect();
-            exileEffect.setTargetPointer(fixedTargets);
+            exileEffect.setTargetPointer(fixedTargets).setText("exile the tokens");
             game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect), source);
             return true;
         }

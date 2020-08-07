@@ -80,7 +80,7 @@ public class FlipCoinEffect extends OneShotEffect {
         }
         StringBuilder sb = new StringBuilder("Flip a coin. If you win the flip, ").append(executingEffectsWon.getText(mode));
         if (!executingEffectsLost.isEmpty()) {
-            sb.append(". If you lose the flip, ").append(executingEffectsLost.getText(mode));
+            sb.append(" If you lose the flip, ").append(executingEffectsLost.getText(mode));
         }
         return sb.toString();
     }

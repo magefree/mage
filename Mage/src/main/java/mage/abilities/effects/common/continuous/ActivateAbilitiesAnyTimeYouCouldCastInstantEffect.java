@@ -19,7 +19,7 @@ import mage.game.Game;
  */
 public class ActivateAbilitiesAnyTimeYouCouldCastInstantEffect extends AsThoughEffectImpl {
 
-    private Class activatedAbility;
+    private final Class activatedAbility;
 
     public ActivateAbilitiesAnyTimeYouCouldCastInstantEffect(Class activatedAbility, String activatedAbilityName) {
         super(AsThoughEffectType.ACTIVATE_AS_INSTANT, Duration.EndOfGame, Outcome.Benefit);
@@ -45,7 +45,7 @@ public class ActivateAbilitiesAnyTimeYouCouldCastInstantEffect extends AsThoughE
     @Override
     public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
         return affectedAbility.isControlledBy(source.getControllerId())
-                && activatedAbility.isInstance(affectedAbility);
+                && activatedAbility.isAssignableFrom(affectedAbility.getClass());
     }
 
     @Override

@@ -1,7 +1,10 @@
-
 package mage.cards.h;
 
+import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -11,6 +14,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.Cards;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -20,7 +24,6 @@ import mage.players.Player;
 import mage.target.common.TargetOpponent;
 
 /**
- *
  * @author Plopman
  */
 public final class HelmOfObedience extends CardImpl {
@@ -31,13 +34,13 @@ public final class HelmOfObedience extends CardImpl {
         // {X}, {T}: Target opponent puts cards from the top of their library into their graveyard until a creature card or X cards are put into that graveyard this way, whichever comes first. If a creature card is put into that graveyard this way, sacrifice Helm of Obedience and put that card onto the battlefield under your control. X can't be 0.
         VariableManaCost xCosts = new VariableManaCost();
         xCosts.setMinX(1);
-        SimpleActivatedAbility abilitiy = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HelmOfObedienceEffect(), xCosts);
+        SimpleActivatedAbility abilitiy = new SimpleActivatedAbility(new HelmOfObedienceEffect(), xCosts);
         abilitiy.addCost(new TapSourceCost());
         abilitiy.addTarget(new TargetOpponent());
         this.addAbility(abilitiy);
     }
 
-    public HelmOfObedience(final HelmOfObedience card) {
+    private HelmOfObedience(final HelmOfObedience card) {
         super(card);
     }
 
@@ -51,12 +54,15 @@ class HelmOfObedienceEffect extends OneShotEffect {
 
     private static final ManacostVariableValue amount = ManacostVariableValue.instance;
 
-    public HelmOfObedienceEffect() {
+    HelmOfObedienceEffect() {
         super(Outcome.Detriment);
-        staticText = "Target opponent puts cards from the top of their library into their graveyard until a creature card or X cards are put into that graveyard this way, whichever comes first. If a creature card is put into that graveyard this way, sacrifice {this} and put that card onto the battlefield under your control. X can't be 0";
+        staticText = "Target opponent mills a card, then repeats this process until a creature card "
+                + "or X cards have been put into their graveyard this way, whichever comes first. "
+                + "If one or more creature cards were put into that graveyard this way, "
+                + "sacrifice {this} and put one of them onto the battlefield under your control. X can't be 0";
     }
 
-    public HelmOfObedienceEffect(final HelmOfObedienceEffect effect) {
+    private HelmOfObedienceEffect(final HelmOfObedienceEffect effect) {
         super(effect);
     }
 
@@ -70,32 +76,35 @@ class HelmOfObedienceEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Player targetOpponent = game.getPlayer(targetPointer.getFirst(game, source));
         int max = amount.calculate(game, source, this);
-        if (targetOpponent != null && controller != null && max > 0) {
-            int numberOfCard = 0;
-            for (Card card : targetOpponent.getLibrary().getCards(game)) {
-                if (card != null) {
-                    if (targetOpponent.moveCards(card, Zone.GRAVEYARD, source, game)) {
-                        if (card.isCreature()) {
-                            // If a creature card is put into that graveyard this way, sacrifice Helm of Obedience
-                            // and put that card onto the battlefield under your control.
-                            Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
-                            if (sourcePermanent != null) {
-                                sourcePermanent.sacrifice(source.getSourceId(), game);
-                            }
-                            controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                            break;
-                        } else {
-                            numberOfCard++;
-                            if (numberOfCard >= max) {
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
-            return true;
+        if (targetOpponent == null || controller == null || max <= 0) {
+            return false;
         }
-        return false;
+        int numberOfCard = 0;
+        while (targetOpponent.getLibrary().hasCards()) {
+            Cards cards = targetOpponent.millCards(1, source, game);
+            cards.removeIf(uuid -> game.getState().getZone(uuid) != Zone.GRAVEYARD);
+            numberOfCard += cards.size();
+            Set<Card> creatures = cards
+                    .getCards(game)
+                    .stream()
+                    .filter(Objects::nonNull)
+                    .filter(MageObject::isCreature)
+                    .collect(Collectors.toSet());
+            if (!creatures.isEmpty()) {
+                controller.moveCards(creatures, Zone.BATTLEFIELD, source, game);
+            }
+            if (!creatures.isEmpty()) {
+                Permanent permanent = game.getPermanent(source.getSourceId());
+                if (permanent != null) {
+                    permanent.sacrifice(source.getSourceId(), game);
+                }
+                break;
+            }
+            if (numberOfCard >= max) {
+                break;
+            }
+        }
+        return true;
     }
 
 }

@@ -46,7 +46,7 @@ public class DrawDiscardOneOfThemEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Cards initialHand = controller.getHand().copy();
-            controller.drawCards(cardsToDraw, game);
+            controller.drawCards(cardsToDraw, source.getSourceId(), game);
             Cards drawnCards = new CardsImpl(controller.getHand().copy());
             drawnCards.removeAll(initialHand);
             if (!drawnCards.isEmpty()) {

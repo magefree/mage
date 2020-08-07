@@ -1,7 +1,5 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -11,22 +9,23 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class ThoughtGorger extends CardImpl {
 
     public ThoughtGorger(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
         this.subtype.add(SubType.HORROR);
 
         this.power = new MageInt(2);
@@ -35,15 +34,13 @@ public final class ThoughtGorger extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // When Thought Gorger enters the battlefield, put a +1/+1 counter on it for each card in your hand. If you do, discard your hand.
-        Ability ability1 = new EntersBattlefieldTriggeredAbility(new ThoughtGorgerEffectEnters());
-        this.addAbility(ability1);
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ThoughtGorgerEffectEnters()));
 
         // When Thought Gorger leaves the battlefield, draw a card for each +1/+1 counter on it.
-        Ability ability2 = new LeavesBattlefieldTriggeredAbility(new ThoughtGorgerEffectLeaves(), false);
-        this.addAbility(ability2);
+        this.addAbility(new LeavesBattlefieldTriggeredAbility(new ThoughtGorgerEffectLeaves(), false));
     }
 
-    public ThoughtGorger(final ThoughtGorger card) {
+    private ThoughtGorger(final ThoughtGorger card) {
         super(card);
     }
 
@@ -56,12 +53,12 @@ public final class ThoughtGorger extends CardImpl {
 
 class ThoughtGorgerEffectEnters extends OneShotEffect {
 
-    public ThoughtGorgerEffectEnters() {
+    ThoughtGorgerEffectEnters() {
         super(Outcome.Benefit);
         this.staticText = "put a +1/+1 counter on it for each card in your hand. If you do, discard your hand.";
     }
 
-    public ThoughtGorgerEffectEnters(final ThoughtGorgerEffectEnters effect) {
+    private ThoughtGorgerEffectEnters(final ThoughtGorgerEffectEnters effect) {
         super(effect);
     }
 
@@ -74,24 +71,27 @@ class ThoughtGorgerEffectEnters extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Permanent thoughtGorger = game.getPermanent(source.getSourceId());
-        if (player != null && !player.getHand().isEmpty() && thoughtGorger != null ) {
-            int cardsInHand = player.getHand().size();
-            thoughtGorger.addCounters(CounterType.P1P1.createInstance(cardsInHand), source, game);
-            player.discard(cardsInHand, false, source, game);
-            return true;
+        if (player == null
+                || player.getHand().isEmpty()
+                || thoughtGorger == null
+                || !thoughtGorger.addCounters(
+                CounterType.P1P1.createInstance(player.getHand().size()), source, game
+        )) {
+            return false;
         }
-        return false;
+        player.discard(player.getHand(), source, game);
+        return true;
     }
 }
 
 class ThoughtGorgerEffectLeaves extends OneShotEffect {
 
-    public ThoughtGorgerEffectLeaves() {
+    ThoughtGorgerEffectLeaves() {
         super(Outcome.Neutral);
         this.staticText = "draw a card for each +1/+1 counter on it.";
     }
 
-    public ThoughtGorgerEffectLeaves(final ThoughtGorgerEffectLeaves effect) {
+    private ThoughtGorgerEffectLeaves(final ThoughtGorgerEffectLeaves effect) {
         super(effect);
     }
 
@@ -106,7 +106,7 @@ class ThoughtGorgerEffectLeaves extends OneShotEffect {
         Permanent thoughtGorgerLastState = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
         int numberCounters = thoughtGorgerLastState.getCounters(game).getCount(CounterType.P1P1);
         if (player != null) {
-            player.drawCards(numberCounters, game);
+            player.drawCards(numberCounters, source.getSourceId(), game);
             return true;
         }
         return false;

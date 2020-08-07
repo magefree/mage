@@ -4,7 +4,7 @@ package mage.cards.l;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.combat.MustBeBlockedByAtLeastOneSourceEffect;
@@ -41,7 +41,7 @@ public final class LoathsomeCatoblepas extends CardImpl {
         // {2}{G}: Loathsome Catoblepas must be blocked this turn if able.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new MustBeBlockedByAtLeastOneSourceEffect(), new ManaCostsImpl("{2}{G}")));
         // When Loathsome Catoblepas dies, target creature an opponent controls gets -3/-3 until end of turn.
-        Ability ability = new DiesTriggeredAbility(new BoostTargetEffect(-3,-3, Duration.EndOfTurn), false);
+        Ability ability = new DiesSourceTriggeredAbility(new BoostTargetEffect(-3,-3, Duration.EndOfTurn), false);
         Target target = new TargetCreaturePermanent(filter);
         ability.addTarget(target);
         this.addAbility(ability);

@@ -4,7 +4,7 @@ package mage.cards.d;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.CantBeCounteredAbility;
+import mage.abilities.common.CantBeCounteredSourceAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
@@ -30,7 +30,7 @@ public final class DragonlordDromoka extends CardImpl {
         this.toughness = new MageInt(7);
 
         // Dragonlord Dromoka can't be countered
-        this.addAbility(new CantBeCounteredAbility());
+        this.addAbility(new CantBeCounteredSourceAbility());
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Lifelink

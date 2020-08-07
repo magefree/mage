@@ -1,10 +1,3 @@
-
-
- /*
- * NewPlayerPanel.java
- *
- * Created on 15-Dec-2009, 10:09:46 PM
- */
 package mage.client.table;
 
 import java.io.File;
@@ -45,7 +38,7 @@ public class NewPlayerPanel extends javax.swing.JPanel {
         this.txtPlayerName.setEditable(false);
         this.txtPlayerName.setEnabled(false);
     }
-
+    
     protected void playerLoadDeck() {
         String lastFolder = MageFrame.getPreferences().get("lastDeckFolder", "");
         if (!lastFolder.isEmpty()) {

@@ -3,7 +3,7 @@ package mage.cards.l;
 import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.common.CantBeCounteredAbility;
+import mage.abilities.common.CantBeCounteredSourceAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -39,7 +39,7 @@ public final class LightningMare extends CardImpl {
         this.toughness = new MageInt(1);
 
         // This spell can't be countered.
-        this.addAbility(new CantBeCounteredAbility());
+        this.addAbility(new CantBeCounteredSourceAbility());
 
         // Lightning Mare can't be blocked by blue creatures.
         this.addAbility(new SimpleStaticAbility(

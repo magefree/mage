@@ -102,7 +102,7 @@ class JeweledAmuletAddManaEffect extends ManaEffect {
 
     JeweledAmuletAddManaEffect(JeweledAmuletAddManaEffect effect) {
         super(effect);
-        storedMana = effect.storedMana;
+        storedMana = effect.storedMana == null ? null : effect.storedMana.copy();
     }
 
     @Override

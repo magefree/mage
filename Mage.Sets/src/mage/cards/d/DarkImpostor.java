@@ -72,7 +72,7 @@ class DarkImpostorExileTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(source.getFirstTarget());
+        Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         MageObject sourceObject = source.getSourceObject(game);
         if (permanent != null) {
             permanent.moveToExile(null, null, source.getSourceId(), game);

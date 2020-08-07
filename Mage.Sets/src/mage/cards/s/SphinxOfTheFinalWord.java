@@ -3,7 +3,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.CantBeCounteredAbility;
+import mage.abilities.common.CantBeCounteredSourceAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CantBeCounteredControlledEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -37,7 +37,7 @@ public final class SphinxOfTheFinalWord extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Sphinx of the Final Word can't be countered.
-        this.addAbility(new CantBeCounteredAbility());
+        this.addAbility(new CantBeCounteredSourceAbility());
         
         // Flying
         this.addAbility(FlyingAbility.getInstance());

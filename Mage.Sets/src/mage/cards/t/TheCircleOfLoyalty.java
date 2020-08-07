@@ -1,24 +1,23 @@
 package mage.cards.t;
 
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.abilities.effects.common.cost.CostModificationEffectImpl;
+import mage.abilities.effects.common.cost.SpellCostReductionForEachSourceEffect;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterControlledPermanent;
-import mage.game.Game;
 import mage.game.permanent.token.KnightToken;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -27,10 +26,16 @@ import java.util.UUID;
  */
 public final class TheCircleOfLoyalty extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("a legendary spell");
+    private static final FilterSpell filterLegendary = new FilterSpell("a legendary spell");
 
     static {
-        filter.add(SuperType.LEGENDARY.getPredicate());
+        filterLegendary.add(SuperType.LEGENDARY.getPredicate());
+    }
+
+    static final FilterControlledPermanent filterKnight = new FilterControlledPermanent("Knight you control");
+
+    static {
+        filterKnight.add(SubType.KNIGHT.getPredicate());
     }
 
     public TheCircleOfLoyalty(UUID ownerId, CardSetInfo setInfo) {
@@ -39,7 +44,10 @@ public final class TheCircleOfLoyalty extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
 
         // This spell costs {1} less to cast for each Knight you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new TheCircleOfLoyaltyCostReductionEffect()));
+        DynamicValue xValue = new PermanentsOnBattlefieldCount(filterKnight);
+        this.addAbility(new SimpleStaticAbility(
+                Zone.ALL, new SpellCostReductionForEachSourceEffect(1, xValue)
+        ).addHint(new ValueHint("Knight you control", xValue)));
 
         // Creatures you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(
@@ -48,7 +56,7 @@ public final class TheCircleOfLoyalty extends CardImpl {
 
         // Whenever you cast a legendary spell, create a 2/2 white Knight creature token with vigilance.
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                new CreateTokenEffect(new KnightToken()), filter, false
+                new CreateTokenEffect(new KnightToken()), filterLegendary, false
         ));
 
         // {3}{W}, {T}: Create a 2/2 white Knight creature token with vigilance.
@@ -66,38 +74,5 @@ public final class TheCircleOfLoyalty extends CardImpl {
     @Override
     public TheCircleOfLoyalty copy() {
         return new TheCircleOfLoyalty(this);
-    }
-}
-
-class TheCircleOfLoyaltyCostReductionEffect extends CostModificationEffectImpl {
-
-    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.KNIGHT);
-
-    TheCircleOfLoyaltyCostReductionEffect() {
-        super(Duration.WhileOnStack, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        staticText = "This spell costs {1} less to cast for each Knight you control";
-    }
-
-    private TheCircleOfLoyaltyCostReductionEffect(final TheCircleOfLoyaltyCostReductionEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        int reductionAmount = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
-        CardUtil.reduceCost(abilityToModify, reductionAmount);
-        return true;
-    }
-
-    @Override
-    public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        return abilityToModify instanceof SpellAbility
-                && abilityToModify.getSourceId().equals(source.getSourceId())
-                && game.getCard(abilityToModify.getSourceId()) != null;
-    }
-
-    @Override
-    public TheCircleOfLoyaltyCostReductionEffect copy() {
-        return new TheCircleOfLoyaltyCostReductionEffect(this);
     }
 }

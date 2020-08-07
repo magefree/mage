@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import mage.Mana;
 import mage.abilities.costs.Cost;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.effects.mana.BasicManaEffect;
 import mage.constants.Zone;
@@ -35,7 +36,20 @@ public class SimpleManaAbility extends ActivatedManaAbilityImpl {
     }
 
     public SimpleManaAbility(Zone zone, Mana mana, Cost cost) {
-        super(zone, new BasicManaEffect(mana), cost);
+        this(zone, mana, cost, null);
+        this.netMana.add(mana.copy());
+        this.predictable = true;
+    }
+    
+    /**
+     * 
+     * @param zone
+     * @param mana 
+     * @param cost cost for one usage
+     * @param netAmount DynamicValu to calculate the max available mana if effect is repeatable
+     */
+    public SimpleManaAbility(Zone zone, Mana mana, Cost cost, DynamicValue netAmount) {
+        super(zone, new BasicManaEffect(mana, netAmount), cost);
         this.netMana.add(mana.copy());
         this.predictable = true;
     }
@@ -55,7 +69,7 @@ public class SimpleManaAbility extends ActivatedManaAbilityImpl {
         if (predictable) {
             return super.getNetMana(game);
         }
-        return new ArrayList<Mana>(netMana);
+        return new ArrayList<>(netMana);
     }
 
 }

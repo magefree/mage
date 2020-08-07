@@ -242,7 +242,7 @@ public class MageActionCallback implements ActionCallback {
         if (this.startedDragging && prevCardPanel != null && card != null) {
             for (Component component : card.getCardArea().getComponents()) {
                 if (component instanceof CardPanel) {
-                    if (cardPanels.contains(component)) {
+                    if (cardPanels.contains((CardPanel) component)) {
                         component.setLocation(component.getLocation().x, component.getLocation().y - GO_DOWN_ON_DRAG_Y_OFFSET);
                     }
                 }
@@ -316,7 +316,7 @@ public class MageActionCallback implements ActionCallback {
         for (Component component : container.getComponents()) {
             if (component instanceof CardPanel) {
                 if (!component.equals(card)) {
-                    if (!cardPanels.contains(component)) {
+                    if (!cardPanels.contains((CardPanel) component)) {
                         component.setLocation(component.getLocation().x, component.getLocation().y + GO_DOWN_ON_DRAG_Y_OFFSET);
                     }
                     cardPanels.add((CardPanel) component);
@@ -539,7 +539,7 @@ public class MageActionCallback implements ActionCallback {
                 if (enlargedWindowState == EnlargedWindowState.CLOSED) {
                     return;
                 }
-
+                
                 MageComponents mageComponentCardPreviewContainer;
                 MageComponents mageComponentCardPreviewPane;
                 if (cardView.isToRotate()) {
@@ -568,7 +568,7 @@ public class MageActionCallback implements ActionCallback {
                     location.translate(-parentPoint.x, -parentPoint.y);
                     popupContainer.setLocation(location);
                     popupContainer.setVisible(true);
-
+                    
                     MageCard mageCard = (MageCard) transferData.getComponent();
                     Image image = null;
                     switch (enlargeMode) {
@@ -593,13 +593,12 @@ public class MageActionCallback implements ActionCallback {
                         image = mageCard.getImage();
                     }
                     // shows the card in the popup Container
-                    BigCard bigCard = (BigCard) cardPreviewPane;
-                    displayCardInfo(mageCard, image, bigCard);
-
+                    displayCardInfo(mageCard, image, (BigCard) cardPreviewPane);
+                    
                 } else {
                     LOGGER.warn("No Card preview Pane in Mage Frame defined. Card: " + cardView.getName());
                 }
-
+                
             } catch (Exception e) {
                 LOGGER.warn("Problem dring display of enlarged card", e);
             }

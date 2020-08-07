@@ -73,7 +73,7 @@ class DeadshotDamageEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent ownCreature = game.getPermanentOrLKIBattlefield(source.getFirstTarget());
+        Permanent ownCreature = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (ownCreature != null) {
             int damage = ownCreature.getPower().getValue();
             Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));

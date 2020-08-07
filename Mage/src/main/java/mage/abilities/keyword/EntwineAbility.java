@@ -1,4 +1,3 @@
-
 package mage.abilities.keyword;
 
 import mage.abilities.Ability;
@@ -83,7 +82,7 @@ public class EntwineAbility extends StaticAbility implements OptionalAdditionalM
         if (!(ability instanceof SpellAbility)) {
             return;
         }
-        Player player = game.getPlayer(controllerId);
+        Player player = game.getPlayer(ability.getControllerId());
         if (player == null) {
             return;
         }
@@ -105,7 +104,7 @@ public class EntwineAbility extends StaticAbility implements OptionalAdditionalM
     @Override
     public void addOptionalAdditionalModeCosts(Ability ability, Game game) {
         if (additionalCost.isActivated()) {
-            for (Iterator it = ((Costs) additionalCost).iterator(); it.hasNext(); ) {
+            for (Iterator it = ((Costs) additionalCost).iterator(); it.hasNext();) {
                 Cost cost = (Cost) it.next();
                 if (cost instanceof ManaCostsImpl) {
                     ability.getManaCostsToPay().add((ManaCostsImpl) cost.copy());

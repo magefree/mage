@@ -7,6 +7,7 @@ import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.hint.common.MonstrousHint;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -54,6 +55,8 @@ public class MonstrosityAbility extends ActivatedAbilityImpl {
     public MonstrosityAbility(String manaString, int monstrosityValue) {
         super(Zone.BATTLEFIELD, new BecomeMonstrousSourceEffect(monstrosityValue),new ManaCostsImpl(manaString));
         this.monstrosityValue = monstrosityValue;
+
+        this.addHint(MonstrousHint.instance);
     }
 
     public MonstrosityAbility(final MonstrosityAbility ability) {

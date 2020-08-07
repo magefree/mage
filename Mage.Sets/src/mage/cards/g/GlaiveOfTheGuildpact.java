@@ -15,7 +15,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 
 import java.util.UUID;
 
@@ -30,13 +29,7 @@ public final class GlaiveOfTheGuildpact extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +1/+0 for each Gate you control and has vigilance and menace.
-        Ability ability = new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
-                new BoostEquippedEffect(
-                        GateYouControlCount.instance,
-                        StaticValue.get(0)
-                )
-        );
+        Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(GateYouControlCount.instance, StaticValue.get(0)));
         ability.addEffect(new GainAbilityAttachedEffect(
                 VigilanceAbility.getInstance(), AttachmentType.EQUIPMENT
         ).setText("and has vigilance"));
@@ -50,7 +43,7 @@ public final class GlaiveOfTheGuildpact extends CardImpl {
         this.addAbility(new EquipAbility(3));
     }
 
-    public GlaiveOfTheGuildpact(final GlaiveOfTheGuildpact card) {
+    private GlaiveOfTheGuildpact(final GlaiveOfTheGuildpact card) {
         super(card);
     }
 

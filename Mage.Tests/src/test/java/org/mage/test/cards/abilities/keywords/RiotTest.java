@@ -79,11 +79,40 @@ public class RiotTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
 
+        setStrictChooseMode(true);
         execute();
         assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
         assertPowerToughness(playerA, "Silvercoat Lion", 3, 3);
+        assertAbility(playerA, "Silvercoat Lion", HasteAbility.getInstance(), false);
+        assertAbility(playerA, "Silvercoat Lion", new RiotAbility(), true);
+    }
+
+    @Test
+    public void RiotRhythmOfTheWildDoubleBoost() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+
+        // Creature spells you control can't be countered.
+        // Nontoken creatures you control have riot.
+        addCard(Zone.BATTLEFIELD, playerA, "Rhythm of the Wild", 2);
+
+        // Riot (This creature enters the battleifled with your choice of a +1/+1 counter or haste.)
+        addCard(Zone.HAND, playerA, "Silvercoat Lion", 1); // Creature {1}{W}  2/2
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
+        setChoice(playerA, "Rhythm of the Wild"); // choose replacement effect
+        setChoice(playerA, "Yes"); // yes - counter
+        setChoice(playerA, "Yes"); // yes - counter
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+
+        setStrictChooseMode(true);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Silvercoat Lion", 1);
+        assertPowerToughness(playerA, "Silvercoat Lion", 2 + 2, 2 + 2);
         assertAbility(playerA, "Silvercoat Lion", HasteAbility.getInstance(), false);
         assertAbility(playerA, "Silvercoat Lion", new RiotAbility(), true);
     }
@@ -104,6 +133,7 @@ public class RiotTest extends CardTestPlayerBase {
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
 
+        setStrictChooseMode(true);
         execute();
         assertAllCommandsUsed();
 

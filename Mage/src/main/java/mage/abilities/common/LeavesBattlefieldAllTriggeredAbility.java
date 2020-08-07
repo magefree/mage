@@ -40,7 +40,7 @@ public class LeavesBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
         this.setTargetPointer = setTargetPointer;
     }
 
-    private LeavesBattlefieldAllTriggeredAbility(final LeavesBattlefieldAllTriggeredAbility ability) {
+    protected LeavesBattlefieldAllTriggeredAbility(final LeavesBattlefieldAllTriggeredAbility ability) {
         super(ability);
         filter = ability.filter;
         setTargetPointer = ability.setTargetPointer;
@@ -67,7 +67,7 @@ public class LeavesBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
                     for (Effect effect : this.getEffects()) {
                         switch (setTargetPointer) {
                             case PERMANENT:
-                                effect.setTargetPointer(new FixedTarget(permanent.getId()));
+                                effect.setTargetPointer(new FixedTarget(permanent, game));
                                 break;
                             case PLAYER:
                                 effect.setTargetPointer(new FixedTarget(permanent.getControllerId()));

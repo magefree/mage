@@ -76,8 +76,8 @@ class InducedAmnesiaExileEffect extends OneShotEffect {
                     card.setFaceDown(true, game);
                 }
                 game.informPlayers(sourcePermanent.getLogName() + ": " + targetPlayer.getLogName() + " exiles their hand face down (" + numberOfCards + "card" + (numberOfCards > 1 ? "s" : "") + ')');
-                game.applyEffects();
-                targetPlayer.drawCards(numberOfCards, game);
+                game.getState().processAction(game);
+                targetPlayer.drawCards(numberOfCards, source.getSourceId(), game);
             }
             return true;
         }

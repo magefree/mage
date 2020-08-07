@@ -3,7 +3,7 @@ package mage.cards.a;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldThisOrAnotherTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -20,10 +20,10 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
-import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  * @author TheElk801
@@ -31,7 +31,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
 public final class AyaraFirstOfLocthwain extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterCreaturePermanent("{this} or another black creature");
+            = new FilterCreaturePermanent("black creature");
     private static final FilterControlledPermanent filter2
             = new FilterControlledCreaturePermanent("another black creature");
 
@@ -51,7 +51,9 @@ public final class AyaraFirstOfLocthwain extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever Ayara, First of Locthwain or another black creature enters the battlefield under your control, each opponent loses 1 life and you gain 1 life.
-        Ability ability = new EntersBattlefieldControlledTriggeredAbility(new LoseLifeOpponentsEffect(1), filter);
+        Ability ability = new EntersBattlefieldThisOrAnotherTriggeredAbility(
+                new LoseLifeOpponentsEffect(1), filter, false, true
+        );
         ability.addEffect(new GainLifeEffect(1).concatBy("and"));
         this.addAbility(ability);
 

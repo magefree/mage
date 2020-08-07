@@ -1,8 +1,5 @@
-
 package mage.game.command.planes;
 
-import java.util.ArrayList;
-import java.util.List;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -14,10 +11,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.GainLifeTargetEffect;
 import mage.abilities.effects.common.RollPlanarDieEffect;
-import mage.constants.Outcome;
-import mage.constants.SetTargetPointer;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.abilities.effects.common.cost.PlanarDieRollCostIncreasingEffect;
+import mage.constants.*;
 import mage.filter.FilterSpell;
 import mage.game.Game;
 import mage.game.command.Plane;
@@ -26,8 +21,10 @@ import mage.target.Target;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.PlanarRollWatcher;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * @author spjspj
  */
 public class FieldsOfSummerPlane extends Plane {
@@ -35,7 +32,7 @@ public class FieldsOfSummerPlane extends Plane {
     private static final FilterSpell filter = new FilterSpell("a spell");
 
     public FieldsOfSummerPlane() {
-        this.setName("Plane - Fields of Summer");
+        this.setPlaneType(Planes.PLANE_FIELDS_OF_SUMMER);
         this.setExpansionSetCodeForImage("PCA");
 
         // Whenever a player casts a spell, that player may gain 2 life
@@ -78,7 +75,7 @@ class FieldsOfSummerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Plane cPlane = game.getState().getCurrentPlane();
-        if (cPlane == null || !cPlane.getName().equalsIgnoreCase("Plane - Fields of Summer")) {
+        if (cPlane == null || !cPlane.getPlaneType().equals(Planes.PLANE_FIELDS_OF_SUMMER)) {
             return false;
         }
         Player owner = game.getPlayer(this.getTargetPointer().getFirst(game, source));

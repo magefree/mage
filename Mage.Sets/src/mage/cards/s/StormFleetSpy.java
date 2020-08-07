@@ -1,21 +1,22 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.RaidCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.hint.common.RaidHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.watchers.common.PlayerAttackedWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class StormFleetSpy extends CardImpl {
@@ -28,11 +29,13 @@ public final class StormFleetSpy extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Raid — When Storm Fleet Spy enters the battlefield, if you attacked with a creature this turn, draw a card.
+        // Raid — When Storm Fleet Spy enters the battlefield, if you attacked this turn, draw a card.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)),
                 RaidCondition.instance,
-                "<i>Raid</i> &mdash; When {this} enters the battlefield, if you attacked with a creature this turn, draw a card.");
+                "<i>Raid</i> &mdash; When {this} enters the battlefield, if you attacked this turn, draw a card.");
+        ability.setAbilityWord(AbilityWord.RAID);
+        ability.addHint(RaidHint.instance);
         this.addAbility(ability, new PlayerAttackedWatcher());
     }
 

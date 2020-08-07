@@ -40,7 +40,7 @@ public class PayLifeCost extends CostImpl {
         //life total; in other words, the player loses that much life. (Players can always pay 0 life.)
         int lifeToPayAmount = amount.calculate(game, ability, null);
         // Paying 0 life is not considered paying any life.
-        if (lifeToPayAmount > 0 && !game.getPlayer(controllerId).canPayLifeCost()) {
+        if (lifeToPayAmount > 0 && !game.getPlayer(controllerId).canPayLifeCost(ability)) {
             return false;
         }
         return game.getPlayer(controllerId).getLife() >= lifeToPayAmount || lifeToPayAmount == 0;

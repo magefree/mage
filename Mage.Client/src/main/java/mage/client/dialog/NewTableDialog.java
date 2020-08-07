@@ -890,7 +890,7 @@ public class NewTableDialog extends MageDialog {
         this.spnFreeMulligans.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_OF_FREE_MULLIGANS + versionStr, "0")));
         this.cbMulligan.setSelectedItem(MulliganType.valueByName(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_MULLIGAN_TYPE + versionStr, MulliganType.GAME_DEFAULT.toString())));
 
-        int range = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_RANGE + versionStr, "1"));
+        int range = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_RANGE + versionStr, "0"));
         for (RangeOfInfluence roi : RangeOfInfluence.values()) {
             if (roi.getRange() == range) {
                 this.cbRange.setSelectedItem(roi);

@@ -1,12 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mage.abilities.keyword;
 
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.cost.SpellCostReductionSourceForOpponentsEffect;
+import mage.abilities.dynamicvalue.common.OpponentsCount;
+import mage.abilities.effects.common.cost.SpellCostReductionForEachSourceEffect;
 import mage.constants.Zone;
 
 /**
@@ -15,7 +11,7 @@ import mage.constants.Zone;
 public class UndauntedAbility extends SimpleStaticAbility {
 
     public UndauntedAbility() {
-        super(Zone.ALL, new SpellCostReductionSourceForOpponentsEffect("undaunted <i>(This spell costs {1} less to cast for each opponent.)</i>"));
+        super(Zone.ALL, new SpellCostReductionForEachSourceEffect(1, OpponentsCount.instance));
         setRuleAtTheTop(true);
     }
 
@@ -28,4 +24,8 @@ public class UndauntedAbility extends SimpleStaticAbility {
         return new UndauntedAbility(this);
     }
 
+    @Override
+    public String getRule() {
+        return "undaunted <i>(This spell costs {1} less to cast for each opponent.)</i>";
+    }
 }

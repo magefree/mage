@@ -98,7 +98,7 @@ class ZursWeirdingReplacementEffect extends ReplacementEffectImpl {
                         continue;
                     }
                     Player otherPlayer = game.getPlayer(playerId);
-                    if (otherPlayer.canPayLifeCost()
+                    if (otherPlayer.canPayLifeCost(source)
                             && otherPlayer.getLife() >= 2) {
                         PayLifeCost lifeCost = new PayLifeCost(2);
                         while (otherPlayer.canRespond()

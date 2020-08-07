@@ -9,10 +9,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.RollPlanarDieEffect;
-import mage.constants.ComparisonType;
-import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.abilities.effects.common.cost.PlanarDieRollCostIncreasingEffect;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
@@ -31,7 +29,7 @@ import java.util.List;
 public class HedronFieldsOfAgadeemPlane extends Plane {
 
     public HedronFieldsOfAgadeemPlane() {
-        this.setName("Plane - Hedron Fields of Agadeem");
+        this.setPlaneType(Planes.PLANE_HEDRON_FIELDS_OF_AGADEEM);
         this.setExpansionSetCodeForImage("PCA");
 
         // Creatures with power 7 or greater can't attack or block 
@@ -94,7 +92,7 @@ class HedronFieldsOfAgadeemRestrictionEffect extends RestrictionEffect {
         if (cPlane == null) {
             return false;
         }
-        if (!cPlane.getName().equalsIgnoreCase("Plane - Hedron Fields of Agadeem")) {
+        if (!cPlane.getPlaneType().equals(Planes.PLANE_HEDRON_FIELDS_OF_AGADEEM)) {
             return false;
         }
         return filter.match(permanent, source.getSourceId(), source.getControllerId(), game);

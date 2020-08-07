@@ -18,7 +18,8 @@ public class TournamentType implements Serializable {
     protected boolean limited;      // or construced
     protected boolean elimination;  // or Swiss
     protected boolean isRandom;
-    protected boolean isRichMan = false;    // or Rich Man Draft
+    protected boolean isRichMan;    // or Rich Man Draft
+    protected boolean isJumpstart;
 
     protected TournamentType() {
     }
@@ -66,6 +67,10 @@ public class TournamentType implements Serializable {
 
     public boolean isRichMan() {
         return this.isRichMan;
+    }
+
+    public boolean isJumpstart() {
+        return this.isJumpstart;
     }
 
 } 

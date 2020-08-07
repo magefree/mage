@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -11,11 +10,12 @@ import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
+import mage.constants.DependencyType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -28,13 +28,13 @@ import mage.target.TargetPermanent;
 public final class SongOfTheDryads extends CardImpl {
 
     public SongOfTheDryads(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
         this.subtype.add(SubType.AURA);
 
         // Enchant permanent
         TargetPermanent auraTarget = new TargetPermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
@@ -58,6 +58,7 @@ class BecomesColorlessForestLandEffect extends ContinuousEffectImpl {
     public BecomesColorlessForestLandEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         this.staticText = "Enchanted permanent is a colorless Forest land";
+        dependencyTypes.add(DependencyType.BecomeForest);
     }
 
     public BecomesColorlessForestLandEffect(final BecomesColorlessForestLandEffect effect) {
@@ -89,10 +90,10 @@ class BecomesColorlessForestLandEffect extends ContinuousEffectImpl {
                         permanent.getColor(game).setRed(false);
                         break;
                     case AbilityAddingRemovingEffects_6:
-                        permanent.removeAllAbilities(source.getSourceId(), game);
                         permanent.addAbility(new GreenManaAbility(), source.getSourceId(), game);
                         break;
                     case TypeChangingEffects_4:
+                        permanent.removeAllAbilities(source.getSourceId(), game);
                         permanent.getCardType().clear();
                         permanent.addCardType(CardType.LAND);
                         permanent.getSubtype(game).clear();
@@ -107,6 +108,8 @@ class BecomesColorlessForestLandEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean hasLayer(Layer layer) {
-        return layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.ColorChangingEffects_5 || layer == Layer.TypeChangingEffects_4;
+        return layer == Layer.AbilityAddingRemovingEffects_6
+                || layer == Layer.ColorChangingEffects_5
+                || layer == Layer.TypeChangingEffects_4;
     }
 }

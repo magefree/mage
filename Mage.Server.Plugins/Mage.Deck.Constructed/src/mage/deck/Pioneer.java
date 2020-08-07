@@ -30,12 +30,15 @@ public class Pioneer extends Constructed {
         banned.add("Wooded Foothills");
         banned.add("Felidar Guardian");
         banned.add("Field of the Dead");
+        banned.add("Inverter of Truth");
+        banned.add("Kethis, the Hidden Hand");
         banned.add("Leyline of Abundance");
         banned.add("Nexus of Fate");
-        banned.add("Oath of Nissa");
         banned.add("Oko, Thief of Crowns");
         banned.add("Once Upon a Time");
         banned.add("Smuggler's Copter");
+        banned.add("Underworld Breach");
         banned.add("Veil of Summer");
+        banned.add("Walking Ballista");
     }
 }

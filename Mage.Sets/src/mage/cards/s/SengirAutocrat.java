@@ -1,9 +1,6 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -12,17 +9,18 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.SerfToken;
 
+import java.util.UUID;
+
 /**
- *
  * @author Quercitron
  */
 public final class SengirAutocrat extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Serf tokens");
+    private static final FilterPermanent filter = new FilterPermanent("Serf tokens");
 
     static {
         filter.add(SubType.SERF.getPredicate());
@@ -37,11 +35,10 @@ public final class SengirAutocrat extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Sengir Autocrat enters the battlefield, create three 0/1 black Serf creature tokens.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new SerfToken(), 3));
-        this.addAbility(ability);
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new SerfToken(), 3)));
+
         // When Sengir Autocrat leaves the battlefield, exile all Serf tokens.
-        ability = new LeavesBattlefieldTriggeredAbility(new ExileAllEffect(filter), false);
-        this.addAbility(ability);
+        this.addAbility(new LeavesBattlefieldTriggeredAbility(new ExileAllEffect(filter), false));
     }
 
     public SengirAutocrat(final SengirAutocrat card) {

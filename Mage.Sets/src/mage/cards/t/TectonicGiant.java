@@ -1,6 +1,8 @@
 package mage.cards.t;
 
+import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.TriggeredAbilityImpl;
@@ -10,18 +12,15 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.cards.*;
 import mage.constants.*;
+import static mage.constants.Outcome.Benefit;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.stack.StackObject;
+import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInExile;
 import mage.target.targetpointer.FixedTarget;
-
-import java.util.UUID;
-
-import static mage.constants.Outcome.Benefit;
 
 /**
  * @author TheElk801
@@ -75,12 +74,14 @@ class TectonicGiantTriggeredAbility extends TriggeredAbilityImpl {
             case DECLARED_ATTACKERS:
                 return game.getCombat().getAttackers().contains(this.getSourceId());
             case TARGETED:
-                StackObject sourceObject = game.getStack().getStackObject(event.getSourceId());
-                Player player = game.getPlayer(getControllerId());
-                return sourceObject != null
-                        && player != null
-                        && player.hasOpponent(sourceObject.getControllerId(), game)
-                        && event.getTargetId().equals(getSourceId());
+                if (event.getTargetId().equals(getSourceId())) {
+                    MageObject mageObject = game.getObject(event.getSourceId());
+                    Player player = game.getPlayer(getControllerId());
+                    return mageObject != null
+                            && mageObject instanceof Spell
+                            && player != null
+                            && player.hasOpponent(((Spell) mageObject).getControllerId(), game);
+                }
         }
         return false;
     }
@@ -100,8 +101,8 @@ class TectonicGiantEffect extends OneShotEffect {
 
     TectonicGiantEffect() {
         super(Benefit);
-        staticText = "exile the top two cards of your library. Choose one of them. " +
-                "Until the end of your next turn, you may play that card";
+        staticText = "exile the top two cards of your library. Choose one of them. "
+                + "Until the end of your next turn, you may play that card";
     }
 
     private TectonicGiantEffect(final TectonicGiantEffect effect) {
