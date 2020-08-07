@@ -67,6 +67,7 @@ public final class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Cave Sense", 179, Rarity.COMMON, mage.cards.c.CaveSense.class));
         cards.add(new SetCardInfo("Ceremonial Guard", 182, Rarity.COMMON, mage.cards.c.CeremonialGuard.class));
         cards.add(new SetCardInfo("Chambered Nautilus", 64, Rarity.UNCOMMON, mage.cards.c.ChamberedNautilus.class));
+        cards.add(new SetCardInfo("Chameleon Spirit", 65, Rarity.UNCOMMON, mage.cards.c.ChameleonSpirit.class));
         cards.add(new SetCardInfo("Charisma", 66, Rarity.RARE, mage.cards.c.Charisma.class));
         cards.add(new SetCardInfo("Charm Peddler", 6, Rarity.COMMON, mage.cards.c.CharmPeddler.class));
         cards.add(new SetCardInfo("Charmed Griffin", 7, Rarity.UNCOMMON, mage.cards.c.CharmedGriffin.class));
