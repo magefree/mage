@@ -1,9 +1,12 @@
 package org.mage.test.cards.cost.modification;
 
+import mage.abilities.mana.ManaOptions;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBaseWithAIHelps;
+import static org.mage.test.utils.ManaOptionsTestUtils.assertManaOptions;
 
 /**
  * @author JayDi85
@@ -214,6 +217,27 @@ public class CostReduceForEachTest extends CardTestPlayerBaseWithAIHelps {
         assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Balduvian Bears", 1);
+    }
+    @Test
+    public void test_BenthicExplorers_BottomlessVault() {
+        // {T}, Untap a tapped land an opponent controls: Add one mana of any type that land could produce.
+        addCard(Zone.BATTLEFIELD, playerA, "Benthic Explorers", 1);
+
+        // Bottomless Vault enters the battlefield tapped.
+        // You may choose not to untap Bottomless Vault during your untap step.
+        // At the beginning of your upkeep, if Bottomless Vault is tapped, put a storage counter on it.
+        // Tap, Remove any number of storage counters from Bottomless Vault: Add Black for each storage counter removed this way.
+        addCard(Zone.BATTLEFIELD, playerB, "Bottomless Vault", 1); // give 1 mana
+        
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+        assertAllCommandsUsed();
+
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        assertManaOptions("{B}", manaOptions);        
+        
     }
 
     @Test

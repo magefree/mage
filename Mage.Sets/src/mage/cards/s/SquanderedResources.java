@@ -66,7 +66,6 @@ class SquanderedResourcesEffect extends ManaEffect {
 
     @Override
     public List<Mana> getNetMana(Game game, Ability source) {
-        List<Mana> netManas = new ArrayList<>();
         if (game != null && game.inCheckPlayableState()) {
             // add color combinations of available mana
             ManaOptions allPossibleMana = new ManaOptions();
@@ -88,30 +87,7 @@ class SquanderedResourcesEffect extends ManaEffect {
             allPossibleMana.removeDuplicated();
             return allPossibleMana.stream().collect(Collectors.toList());
         }
-        Set<ManaType> manaTypes = getManaTypesFromSacrificedPermanent(game, source);
-        if (manaTypes.size() == 5 && !manaTypes.contains(ManaType.COLORLESS) && !manaTypes.contains(ManaType.GENERIC)) {
-            netManas.add(Mana.AnyMana(1));
-        } else {
-            if (manaTypes.contains(ManaType.BLACK)) {
-                netManas.add(Mana.BlackMana(1));
-            }
-            if (manaTypes.contains(ManaType.RED)) {
-                netManas.add(Mana.RedMana(1));
-            }
-            if (manaTypes.contains(ManaType.BLUE)) {
-                netManas.add(Mana.BlueMana(1));
-            }
-            if (manaTypes.contains(ManaType.GREEN)) {
-                netManas.add(Mana.GreenMana(1));
-            }
-            if (manaTypes.contains(ManaType.WHITE)) {
-                netManas.add(Mana.WhiteMana(1));
-            }
-            if (manaTypes.contains(ManaType.COLORLESS)) {
-                netManas.add(Mana.ColorlessMana(1));
-            }
-        }
-        return netManas;
+        return ManaType.getManaListFromManaTypes(getManaTypesFromSacrificedPermanent(game, source), false);
     }
 
     @Override
@@ -120,28 +96,7 @@ class SquanderedResourcesEffect extends ManaEffect {
         if (game == null) {
             return mana;
         }
-        Set<ManaType> manaTypes = getManaTypesFromSacrificedPermanent(game, source);
-        Choice choice = new ChoiceColor(true);
-        choice.getChoices().clear();
-        choice.setMessage("Pick a mana color");
-        if (manaTypes.contains(ManaType.BLACK)) {
-            choice.getChoices().add("Black");
-        }
-        if (manaTypes.contains(ManaType.RED)) {
-            choice.getChoices().add("Red");
-        }
-        if (manaTypes.contains(ManaType.BLUE)) {
-            choice.getChoices().add("Blue");
-        }
-        if (manaTypes.contains(ManaType.GREEN)) {
-            choice.getChoices().add("Green");
-        }
-        if (manaTypes.contains(ManaType.WHITE)) {
-            choice.getChoices().add("White");
-        }
-        if (manaTypes.contains(ManaType.COLORLESS)) {
-            choice.getChoices().add("Colorless");
-        }
+        Choice choice = ManaType.getChoiceOfManaTypes(getManaTypesFromSacrificedPermanent(game, source), false);        
         if (!choice.getChoices().isEmpty()) {
             Player player = game.getPlayer(source.getControllerId());
             if (player == null) {

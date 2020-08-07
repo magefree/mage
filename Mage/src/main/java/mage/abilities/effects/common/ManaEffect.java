@@ -92,41 +92,10 @@ public abstract class ManaEffect extends OneShotEffect {
      * @return
      */
     public Set<ManaType> getProducableManaTypes(Game game, Ability source) {
-        return getManaTypesFromManaList(getNetMana(game, source));
+        return ManaType.getManaTypesFromManaList(getNetMana(game, source));
     }
 
-    public static Set<ManaType> getManaTypesFromManaList(List<Mana> manaList) {
-        Set<ManaType> manaTypes = new HashSet<>();
-        for (Mana mana : manaList) {
-            if (mana.getAny() > 0) {
-                manaTypes.add(ManaType.BLACK);
-                manaTypes.add(ManaType.BLUE);
-                manaTypes.add(ManaType.GREEN);
-                manaTypes.add(ManaType.WHITE);
-                manaTypes.add(ManaType.RED);
-            }
-            if (mana.getBlack() > 0) {
-                manaTypes.add(ManaType.BLACK);
-            }
-            if (mana.getBlue() > 0) {
-                manaTypes.add(ManaType.BLUE);
-            }
-            if (mana.getGreen() > 0) {
-                manaTypes.add(ManaType.GREEN);
-            }
-            if (mana.getWhite() > 0) {
-                manaTypes.add(ManaType.WHITE);
-            }
-            if (mana.getRed() > 0) {
-                manaTypes.add(ManaType.RED);
-            }
-            if (mana.getColorless() > 0) {
-                manaTypes.add(ManaType.COLORLESS);
-            }
-        }
-        return manaTypes;
-    }
-
+            
     /**
      * Produced the mana the effect can produce (DO NOT add it to mana pool --
      * return all added as mana object to process by replace events)

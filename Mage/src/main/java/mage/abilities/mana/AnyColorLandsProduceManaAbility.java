@@ -6,8 +6,6 @@ import mage.abilities.Ability;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.ManaEffect;
 import mage.choices.Choice;
-import mage.choices.ChoiceColor;
-import mage.constants.ColoredManaSymbol;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
@@ -101,29 +99,7 @@ class AnyColorLandsProduceManaEffect extends ManaEffect {
     public List<Mana> getNetMana(Game game, Ability source) {
         List<Mana> netManas = new ArrayList<>();
         if (game != null) {
-            Set<ManaType> manaTypes = getManaTypes(game, source);
-            if ((manaTypes.size() == 5 && !manaTypes.contains(ManaType.COLORLESS)) || manaTypes.size() == 6) { // GENERIC should never be returned from getManaTypes
-                netManas.add(Mana.AnyMana(1));
-            } else {
-                if (manaTypes.contains(ManaType.BLACK)) {
-                    netManas.add(Mana.BlackMana(1));
-                }
-                if (manaTypes.contains(ManaType.RED)) {
-                    netManas.add(Mana.RedMana(1));
-                }
-                if (manaTypes.contains(ManaType.BLUE)) {
-                    netManas.add(Mana.BlueMana(1));
-                }
-                if (manaTypes.contains(ManaType.GREEN)) {
-                    netManas.add(Mana.GreenMana(1));
-                }
-                if (manaTypes.contains(ManaType.WHITE)) {
-                    netManas.add(Mana.WhiteMana(1));
-                }
-            }
-            if (!onlyColors && manaTypes.contains(ManaType.COLORLESS)) {
-                netManas.add(Mana.ColorlessMana(1));
-            }
+            netManas = ManaType.getManaListFromManaTypes(getManaTypes(game, source), onlyColors);
         }
         return netManas;
     }
@@ -134,28 +110,7 @@ class AnyColorLandsProduceManaEffect extends ManaEffect {
         if (game == null) {
             return mana;
         }
-        Set<ManaType> types = getManaTypes(game, source);
-        Choice choice = new ChoiceColor(true);
-        choice.getChoices().clear();
-        choice.setMessage("Pick a mana " + (onlyColors ? "color" : "type"));
-        if (types.contains(ManaType.BLACK)) {
-            choice.getChoices().add("Black");
-        }
-        if (types.contains(ManaType.RED)) {
-            choice.getChoices().add("Red");
-        }
-        if (types.contains(ManaType.BLUE)) {
-            choice.getChoices().add("Blue");
-        }
-        if (types.contains(ManaType.GREEN)) {
-            choice.getChoices().add("Green");
-        }
-        if (types.contains(ManaType.WHITE)) {
-            choice.getChoices().add("White");
-        }
-        if (types.contains(ManaType.COLORLESS)) {
-            choice.getChoices().add("Colorless");
-        }
+        Choice choice = ManaType.getChoiceOfManaTypes(getManaTypes(game, source), onlyColors);
         if (!choice.getChoices().isEmpty()) {
             Player player = game.getPlayer(source.getControllerId());
             if (choice.getChoices().size() == 1) {

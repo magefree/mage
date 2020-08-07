@@ -12,6 +12,8 @@ import mage.players.Player;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import mage.constants.ManaType;
 
 /**
  * @author North
@@ -114,6 +116,11 @@ public class DynamicManaEffect extends ManaEffect {
         }
         netMana.add(computedMana);
         return netMana;
+    }
+
+    @Override
+    public Set<ManaType> getProducableManaTypes(Game game, Ability source) {
+        return ManaType.getManaTypesFromManaList(baseMana);
     }
 
     @Override
