@@ -4425,7 +4425,7 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="labelNumberOfDownloadThreads">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Number of download threads:"/>
+                    <Property name="text" type="java.lang.String" value="Default download threads:"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JComboBox" name="cbNumberOfDownloadThreads">
