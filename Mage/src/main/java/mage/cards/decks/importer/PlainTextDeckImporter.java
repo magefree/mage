@@ -58,6 +58,10 @@ public abstract class PlainTextDeckImporter extends DeckImporter {
                     saveFixedDeckFile(fixedFile, f);
                 }
 
+                if (deckList.getCards().isEmpty() && deckList.getSideboard().isEmpty()) {
+                    sbMessage.append("ERROR, unknown deck format, can't find any cards").append("\n");
+                }
+
                 if (sbMessage.length() > 0) {
                     if (errorMessages != null) {
                         // normal output for user

@@ -39,7 +39,7 @@ public enum CardRepository {
     private static final long CARD_CONTENT_VERSION = 231;
     private Dao<CardInfo, Object> cardDao;
     private Set<String> classNames;
-    private RepositoryEventSource eventSource = new RepositoryEventSource();
+    private final RepositoryEventSource eventSource = new RepositoryEventSource();
 
     CardRepository() {
         File file = new File("db");
@@ -335,11 +335,22 @@ public enum CardRepository {
     }
 
     public CardInfo findCard(String setCode, String cardNumber) {
+        return findCard(setCode, cardNumber, true);
+    }
+
+    public CardInfo findCard(String setCode, String cardNumber, boolean ignoreNightCards) {
         try {
             QueryBuilder<CardInfo, Object> queryBuilder = cardDao.queryBuilder();
-            queryBuilder.limit(1L).where().eq("setCode", new SelectArg(setCode))
-                    .and().eq("cardNumber", new SelectArg(cardNumber))
-                    .and().eq("nightCard", new SelectArg(false));
+            if (ignoreNightCards) {
+                queryBuilder.limit(1L).where()
+                        .eq("setCode", new SelectArg(setCode))
+                        .and().eq("cardNumber", new SelectArg(cardNumber))
+                        .and().eq("nightCard", new SelectArg(false));
+            } else {
+                queryBuilder.limit(1L).where()
+                        .eq("setCode", new SelectArg(setCode))
+                        .and().eq("cardNumber", new SelectArg(cardNumber));
+            }
             List<CardInfo> result = cardDao.query(queryBuilder.prepare());
             if (!result.isEmpty()) {
                 return result.get(0);

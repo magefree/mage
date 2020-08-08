@@ -7,7 +7,7 @@ import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -28,7 +28,9 @@ public class DckDeckImporter extends PlainTextDeckImporter {
 
     private static final Pattern layoutStackEntryPattern = Pattern.compile("\\[(\\w+[^:]*\\w*):(\\w+\\w*)]"); // test cases: [JR:64ab],[JR:64],[MPSAK1321:43],[MPSAKH:9],[MPS123-AKH:32],[MPS-13AKH:30],[MPS-AKH:49],[MPS-AKH:11], [PUMA:U16]
 
-    private final Map<String, String> possibleFixes = new HashMap<>(); // possible fixes for card codes and numbers [code:123] -> [code:456]
+    // possible fixes for card numbers: [code:123] -> [code:456]
+    // possible fixes for card numbers with name: [code:123] card1 -> [code:456] card2
+    private final Map<String, String> possibleFixes = new LinkedHashMap<>();
 
     @Override
     protected void readLine(String line, DeckCardLists deckList, FixedInfo fixedInfo) {
@@ -60,13 +62,14 @@ public class DckDeckImporter extends PlainTextDeckImporter {
             setCode = setCode == null ? "" : setCode.trim();
             cardName = cardName == null ? "" : cardName.trim();
 
-            // text for auto-fix
-            String originalText = "";
+            // text for auto-fix (don't work on extra spaces between numbers and name -- it's ok)
+            String originalNumbers = "";
+            String originalNumbersWithName = "";
             if (!setCode.isEmpty() && !cardNum.isEmpty()) {
-                // [ISD:144]
-                originalText = "[" + setCode + ":" + cardNum + "]";
+                // [ISD:144] card_name
+                originalNumbers = "[" + setCode + ":" + cardNum + "]";
+                originalNumbersWithName = originalNumbers + " " + cardName;
             }
-            String fixedText = originalText;
 
             // search priority: set/number -> name
             // with bulletproof on card number or name changes
@@ -74,7 +77,7 @@ public class DckDeckImporter extends PlainTextDeckImporter {
             DeckCardInfo deckCardInfo = null;
 
             // search by set/number
-            CardInfo foundedCard = CardRepository.instance.findCard(setCode, cardNum);
+            CardInfo foundedCard = CardRepository.instance.findCard(setCode, cardNum, true);
             boolean wasOutdated = false;
             if ((foundedCard != null) && !foundedCard.getName().equals(cardName)) {
                 sbMessage.append("Line ").append(lineCount).append(": ").append("found outdated card number or name, will try to replace: ").append(line).append('\n');
@@ -93,15 +96,24 @@ public class DckDeckImporter extends PlainTextDeckImporter {
                 }
 
                 if (foundedCard != null) {
-                    sbMessage.append("Line ").append(lineCount).append(": ")
-                            .append("replaced to [").append(foundedCard.getSetCode()).append(":").append(foundedCard.getCardNumberAsInt()).append("] ")
-                            .append(foundedCard.getName()).append('\n');
+                    if (foundedCard.isNightCard()) {
+                        sbMessage.append("Line ").append(lineCount).append(": ").append("ERROR, you can't use night card in deck [").append(foundedCard.getName()).append("]").append('\n');
+                    } else {
+                        sbMessage.append("Line ").append(lineCount).append(": ")
+                                .append("replaced to [").append(foundedCard.getSetCode()).append(":").append(foundedCard.getCardNumberAsInt()).append("] ")
+                                .append(foundedCard.getName()).append('\n');
 
-                    // AUTO-FIX POSSIBLE (apply and save it for another lines like layout)
-                    // [ISD:144]
-                    fixedText = "[" + foundedCard.getSetCode() + ":" + foundedCard.getCardNumber() + "]";
-                    fixedInfo.setFixedLine(fixedInfo.getOriginalLine().replace(originalText, fixedText));
-                    this.possibleFixes.put(originalText, fixedText);
+                        // AUTO-FIX POSSIBLE (apply and save it for another lines like layout)
+                        // [ISD:144] card
+                        String fixNumbers = "[" + foundedCard.getSetCode() + ":" + foundedCard.getCardNumber() + "]";
+                        String fixNumbersWithName = fixNumbers + " " + foundedCard.getName();
+                        this.possibleFixes.put(originalNumbersWithName, fixNumbersWithName); // name fix must goes first
+                        this.possibleFixes.put(originalNumbers, fixNumbers);
+                        String fixedLine = fixedInfo.getOriginalLine()
+                                .replace(originalNumbersWithName, fixNumbersWithName)
+                                .replace(originalNumbers, fixNumbers);
+                        fixedInfo.setFixedLine(fixedLine);
+                    }
                 } else {
                     sbMessage.append("Line ").append(lineCount).append(": ").append("ERROR, can't find card [").append(cardName).append("]").append('\n');
                 }

@@ -71,6 +71,7 @@ public class VerifyCardDataTest {
     private static final String SKIP_LIST_DOUBLE_RARE = "DOUBLE_RARE";
     private static final String SKIP_LIST_UNSUPPORTED_SETS = "UNSUPPORTED_SETS";
     private static final String SKIP_LIST_SCRYFALL_DOWNLOAD_SETS = "SCRYFALL_DOWNLOAD_SETS";
+    private static final String SKIP_LIST_SAMPLE_DECKS = "SAMPLE_DECKS";
     private static final Pattern SHORT_JAVA_STRING = Pattern.compile("(?<=\")[A-Z][a-z]+(?=\")");
 
     static {
@@ -190,6 +191,10 @@ public class VerifyCardDataTest {
         // scryfall download sets (missing from scryfall website)
         skipListCreate(SKIP_LIST_SCRYFALL_DOWNLOAD_SETS);
         skipListAddName(SKIP_LIST_SCRYFALL_DOWNLOAD_SETS, "SWS"); // Star Wars
+
+        // sample decks checking - some decks can contains unimplemented cards, so ignore it
+        skipListCreate(SKIP_LIST_SAMPLE_DECKS);
+        skipListAddName(SKIP_LIST_SAMPLE_DECKS, "\\Commander\\Commander 2019\\Merciless Rage.dck"); // TODO: delete after Aeon Engine implemented
     }
 
     private final ArrayList<String> outputMessages = new ArrayList<>();
@@ -472,7 +477,6 @@ public class VerifyCardDataTest {
     }
 
     @Test
-    //@Ignore // TODO: enable and fix broken decks after promo sets merge https://github.com/magefree/mage/pull/6190
     public void test_checkSampleDecks() {
         Collection<String> errorsList = new ArrayList<>();
 
@@ -496,7 +500,11 @@ public class VerifyCardDataTest {
         // try to open deck files
         int totalErrorFiles = 0;
         for (Path deckFile : filesList) {
-            String deckName = deckFile.toString().replace(rootPath, "");
+            String deckName = "\\" + deckFile.toString().replace(rootPath, "");
+            if (skipListHaveName(SKIP_LIST_SAMPLE_DECKS, deckName)) {
+                continue;
+            }
+
             StringBuilder deckErrors = new StringBuilder();
             DeckCardLists deckCards = DeckImporter.importDeckFromFile(deckFile.toString(), deckErrors, AUTO_FIX_SAMPLE_DECKS);
 
@@ -508,7 +516,7 @@ public class VerifyCardDataTest {
             }
 
             if ((deckCards.getCards().size() + deckCards.getSideboard().size()) < 10) {
-                errorsList.add("Error: sample deck contains too little cards " + deckName);
+                errorsList.add("Error: sample deck contains too little cards (" + deckCards.getSideboard().size() + ") " + deckName);
                 totalErrorFiles++;
                 continue;
             }
