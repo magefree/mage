@@ -40,7 +40,6 @@
 #|Generate|TOK:PPRE|Soldier||
 #|Generate|TOK:PPRE|Wolf||
 #|Generate|TOK:PPRE|Wurm||
-#|Generate|TOK:WMCQ|Angel||
 
 # Emblems
 |Generate|EMBLEM!:BFZ|Emblem Gideon|||GideonAllyOfZendikarEmblem|

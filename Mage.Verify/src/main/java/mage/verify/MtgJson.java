@@ -41,7 +41,6 @@ public final class MtgJson {
         mtgJsonToXMageCodes.put("DD3_EVG", "EVG");
         mtgJsonToXMageCodes.put("DD3_DVD", "DDC");
         mtgJsonToXMageCodes.put("NMS", "NEM");
-        mtgJsonToXMageCodes.put("MPS_AKH", "MPS-AKH");
         mtgJsonToXMageCodes.put("FRF_UGIN", "UGIN");
 
         // revert search

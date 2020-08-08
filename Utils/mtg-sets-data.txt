@@ -45,7 +45,6 @@ Commander|CMD|
 Conspiracy|CNS|
 Conspiracy: Take the Crown|CN2|
 Conflux|CON|
-Champs|CP|
 Coldsnap|CSP|
 Duel Decks: Jace vs. Chandra|DD2|
 Duel Decks: Anthology, Divine vs. Demonic|DVD|
@@ -88,7 +87,6 @@ European Land Program|EURO|
 Eventide|EVE|
 Duel Decks: Elves vs. Goblins|EVG|
 Duel Decks: Elves vs. Inventors|DDU|
-Duels of the Planeswalkers Promos|DPAP|
 Pro Tour Promos|PPRO|
 Exodus|EXO|
 Zendikar Expeditions|EXP|
@@ -155,7 +153,6 @@ Mercadian Masques|MMQ|
 Morningtide|MOR|
 Magic Player Rewards|MPRP|
 Masterpiece Series|MPS|
-Masterpiece Series Amonkhet|MPS-AKH|
 Mirrodin|MRD|
 Nemesis|NEM|
 New Phyrexia|NPH|
@@ -223,7 +220,6 @@ Vintage Masters|VMA|
 War of the Spark|WAR|
 Welcome Deck 2016|W16|
 Welcome Deck 2017|W17|
-World Magic Cup Qualifier|WMCQ|
 Weatherlight|WTH|
 Worldwake|WWK|
 Ixalan|XLN|

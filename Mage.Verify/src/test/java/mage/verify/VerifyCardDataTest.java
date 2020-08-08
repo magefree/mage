@@ -89,7 +89,7 @@ public class VerifyCardDataTest {
     private static final String SKIP_LIST_NUMBER = "NUMBER";
     private static final String SKIP_LIST_MISSING_ABILITIES = "MISSING_ABILITIES";
     private static final String SKIP_LIST_DOUBLE_RARE = "DOUBLE_RARE";
-    private static final String SKIP_LIST_INVALID_SETS = "INVALID_SETS";
+    private static final String SKIP_LIST_UNSUPPORTED_SETS = "UNSUPPORTED_SETS";
     private static final String SKIP_LIST_SCRYFALL_DOWNLOAD_SETS = "SCRYFALL_DOWNLOAD_SETS";
 
     static {
@@ -135,68 +135,76 @@ public class VerifyCardDataTest {
         // double rare cards
         skipListCreate(SKIP_LIST_DOUBLE_RARE);
 
-        // Non-English or empty sets: Token sets, Archenemy Schemes, Plane-Chase Planes, etc.
-        skipListCreate(SKIP_LIST_INVALID_SETS);
+        // Un-supported sets (mtgjson/scryfall contains that set but xmage don't implement it)
+        // Example: Non-English or empty sets: Token sets, Archenemy Schemes, Plane-Chase Planes, etc.
+        skipListCreate(SKIP_LIST_UNSUPPORTED_SETS);
+        //
         // Non-English-only sets should not be added. https://github.com/magefree/mage/pull/6190#issuecomment-582354790
-        skipListAddName(SKIP_LIST_INVALID_SETS, "4BB"); // 4th Edition Foreign black border.
-        skipListAddName(SKIP_LIST_INVALID_SETS, "FBB"); // Foreign Black Border. Not on Scryfall, but other sources use this to distinguish non-English Revised cards
-        skipListAddName(SKIP_LIST_INVALID_SETS, "PHJ"); // Hobby Japan Promos
-        skipListAddName(SKIP_LIST_INVALID_SETS, "PJJT"); // Japan Junior Tournament
-        skipListAddName(SKIP_LIST_INVALID_SETS, "PRED"); // Redemption Program
-        skipListAddName(SKIP_LIST_INVALID_SETS, "PSAL"); // Salvat 2005
-        skipListAddName(SKIP_LIST_INVALID_SETS, "PS11"); // Salvat 2011
-        skipListAddName(SKIP_LIST_INVALID_SETS, "PMPS"); // Magic Premiere Shop 2005, Japanese Basic lands
-        skipListAddName(SKIP_LIST_INVALID_SETS, "PMPS06"); // Magic Premiere Shop 2006, Japanese Basic lands
-        skipListAddName(SKIP_LIST_INVALID_SETS, "PMPS07"); // Magic Premiere Shop 2007, Japanese Basic lands
-        skipListAddName(SKIP_LIST_INVALID_SETS, "PMPS08"); // Magic Premiere Shop 2008, Japanese Basic lands
-        skipListAddName(SKIP_LIST_INVALID_SETS, "PMPS09"); // Magic Premiere Shop 2009, Japanese Basic lands
-        skipListAddName(SKIP_LIST_INVALID_SETS, "PMPS10"); // Magic Premiere Shop 2010, Japanese Basic lands
-        skipListAddName(SKIP_LIST_INVALID_SETS, "PMPS11"); // Magic Premiere Shop 2011, Japanese Basic lands
-        skipListAddName(SKIP_LIST_INVALID_SETS, "REN"); // Renaissance
-        skipListAddName(SKIP_LIST_INVALID_SETS, "RIN"); // Rinascimento
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "4BB"); // 4th Edition Foreign black border.
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "FBB"); // Foreign Black Border. Not on Scryfall, but other sources use this to distinguish non-English Revised cards
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "PHJ"); // Hobby Japan Promos
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "PJJT"); // Japan Junior Tournament
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "PRED"); // Redemption Program
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "PSAL"); // Salvat 2005
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "PS11"); // Salvat 2011
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "PMPS"); // Magic Premiere Shop 2005, Japanese Basic lands
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "PMPS06"); // Magic Premiere Shop 2006, Japanese Basic lands
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "PMPS07"); // Magic Premiere Shop 2007, Japanese Basic lands
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "PMPS08"); // Magic Premiere Shop 2008, Japanese Basic lands
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "PMPS09"); // Magic Premiere Shop 2009, Japanese Basic lands
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "PMPS10"); // Magic Premiere Shop 2010, Japanese Basic lands
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "PMPS11"); // Magic Premiere Shop 2011, Japanese Basic lands
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "REN"); // Renaissance
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "RIN"); // Rinascimento
+        //
         // Archenemy Schemes
-        skipListAddName(SKIP_LIST_INVALID_SETS, "OARC"); // Archenemy Schemes
-        skipListAddName(SKIP_LIST_INVALID_SETS, "OE01"); // Archenemy: Nicol Bolas Schemes
-        skipListAddName(SKIP_LIST_INVALID_SETS, "PARC"); // Promotional Schemes
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "OARC"); // Archenemy Schemes
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "OE01"); // Archenemy: Nicol Bolas Schemes
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "PARC"); // Promotional Schemes
+        //
         // Plane-chase Planes
-        skipListAddName(SKIP_LIST_INVALID_SETS, "OHOP"); // Planechase Planes
-        skipListAddName(SKIP_LIST_INVALID_SETS, "OPC2"); // Planechase 2012 Plane
-        skipListAddName(SKIP_LIST_INVALID_SETS, "OPCA"); // Planechase Anthology Planes
-        skipListAddName(SKIP_LIST_INVALID_SETS, "PHOP"); // Promotional Planes
-        // Token sets
-        skipListAddName(SKIP_LIST_INVALID_SETS, "L12"); // League Tokens 2012
-        skipListAddName(SKIP_LIST_INVALID_SETS, "L13"); // League Tokens 2013
-        skipListAddName(SKIP_LIST_INVALID_SETS, "L14"); // League Tokens 2014
-        skipListAddName(SKIP_LIST_INVALID_SETS, "L15"); // League Tokens 2015
-        skipListAddName(SKIP_LIST_INVALID_SETS, "L16"); // League Tokens 2016
-        skipListAddName(SKIP_LIST_INVALID_SETS, "L17"); // League Tokens 2017
-        skipListAddName(SKIP_LIST_INVALID_SETS, "PLNY"); // 2018 Lunar New Year
-        skipListAddName(SKIP_LIST_INVALID_SETS, "F18"); // Friday Night Magic 2018
-        skipListAddName(SKIP_LIST_INVALID_SETS, "PR2"); // Magic Player Rewards 2002
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "OHOP"); // Planechase Planes
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "OPC2"); // Planechase 2012 Plane
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "OPCA"); // Planechase Anthology Planes
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "PHOP"); // Promotional Planes
+        //
+        // Token sets TODO: implement tokens only sets
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "L12"); // League Tokens 2012
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "L13"); // League Tokens 2013
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "L14"); // League Tokens 2014
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "L15"); // League Tokens 2015
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "L16"); // League Tokens 2016
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "L17"); // League Tokens 2017
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "PLNY"); // 2018 Lunar New Year
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "F18"); // Friday Night Magic 2018
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "PR2"); // Magic Player Rewards 2002
+        //
         // PvE sets containing non-traditional cards. These enable casual PvE battles against a "random AI"-driven opponent.
-        skipListAddName(SKIP_LIST_INVALID_SETS, "PPC1"); // M15 Prerelease Challenge
-        skipListAddName(SKIP_LIST_INVALID_SETS, "TBTH"); // Battle the Horde
-        skipListAddName(SKIP_LIST_INVALID_SETS, "TDAG"); // Defeat a God
-        skipListAddName(SKIP_LIST_INVALID_SETS, "TFTH"); // Face the Hydra
-        skipListAddName(SKIP_LIST_INVALID_SETS, "THP1"); // Theros Hero's Path
-        skipListAddName(SKIP_LIST_INVALID_SETS, "THP2"); // Born of the Gods Hero's Path
-        skipListAddName(SKIP_LIST_INVALID_SETS, "THP3"); // Journey into Nyx Hero's Path
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "PPC1"); // M15 Prerelease Challenge
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "TBTH"); // Battle the Horde
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "TDAG"); // Defeat a God
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "TFTH"); // Face the Hydra
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "THP1"); // Theros Hero's Path
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "THP2"); // Born of the Gods Hero's Path
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "THP3"); // Journey into Nyx Hero's Path
+        //
         // Commander Oversized cards.
-        skipListAddName(SKIP_LIST_INVALID_SETS, "OCMD"); // Commander 2011 Oversized
-        skipListAddName(SKIP_LIST_INVALID_SETS, "OC13"); // Commander 2013 Oversized
-        skipListAddName(SKIP_LIST_INVALID_SETS, "OC14"); // Commander 2014 Oversized
-        skipListAddName(SKIP_LIST_INVALID_SETS, "OC15"); // Commander 2015 Oversized
-        skipListAddName(SKIP_LIST_INVALID_SETS, "OC16"); // Commander 2016 Oversized
-        skipListAddName(SKIP_LIST_INVALID_SETS, "OC17"); // Commander 2017 Oversized
-        skipListAddName(SKIP_LIST_INVALID_SETS, "OC18"); // Commander 2018 Oversized
-        skipListAddName(SKIP_LIST_INVALID_SETS, "OC19"); // Commander 2019 Oversized
-        skipListAddName(SKIP_LIST_INVALID_SETS, "OCM1"); // Commander's Arsenal Oversized
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "OCMD"); // Commander 2011 Oversized
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "OC13"); // Commander 2013 Oversized
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "OC14"); // Commander 2014 Oversized
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "OC15"); // Commander 2015 Oversized
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "OC16"); // Commander 2016 Oversized
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "OC17"); // Commander 2017 Oversized
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "OC18"); // Commander 2018 Oversized
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "OC19"); // Commander 2019 Oversized
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "OCM1"); // Commander's Arsenal Oversized
+        //
         // Other
-        skipListAddName(SKIP_LIST_INVALID_SETS, "PCEL"); // Celebration Cards
-        skipListAddName(SKIP_LIST_INVALID_SETS, "PMOA"); // Magic Online Avatar
-        skipListAddName(SKIP_LIST_INVALID_SETS, "PVAN"); // Vanguard Series
-        skipListAddName(SKIP_LIST_INVALID_SETS, "AMH1"); // Modern Horizons Art Series
-        skipListAddName(SKIP_LIST_INVALID_SETS, "PTG"); // Ponies: The Galloping
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "PCEL"); // Celebration Cards
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "PMOA"); // Magic Online Avatar
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "PVAN"); // Vanguard Series
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "AMH1"); // Modern Horizons Art Series
+        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "PTG"); // Ponies: The Galloping
 
         // scryfall download sets (missing from scryfall website)
         skipListCreate(SKIP_LIST_SCRYFALL_DOWNLOAD_SETS);
@@ -396,7 +404,7 @@ public class VerifyCardDataTest {
 
             // replace codes for aliases
             String searchSet = MtgJson.mtgJsonToXMageCodes.getOrDefault(refSet.code, refSet.code);
-            if (skipListHaveName(SKIP_LIST_INVALID_SETS, searchSet))
+            if (skipListHaveName(SKIP_LIST_UNSUPPORTED_SETS, searchSet))
                 continue;
 
             ExpansionSet mageSet = Sets.findSet(searchSet.toUpperCase(Locale.ENGLISH));

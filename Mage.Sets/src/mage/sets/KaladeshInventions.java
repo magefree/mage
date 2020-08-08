@@ -1,4 +1,3 @@
-
 package mage.sets;
 
 import mage.cards.CardGraphicInfo;
@@ -8,23 +7,26 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
+ * https://scryfall.com/sets/mps
  *
  * @author fireshoes
  */
-public final class MasterpieceSeries extends ExpansionSet {
+public final class KaladeshInventions extends ExpansionSet {
 
-    private static final MasterpieceSeries instance = new MasterpieceSeries();
+    private static final KaladeshInventions instance = new KaladeshInventions();
 
-    public static MasterpieceSeries getInstance() {
+    public static KaladeshInventions getInstance() {
         return instance;
     }
 
-    private MasterpieceSeries() {
-        super("Masterpiece Series", "MPS", ExpansionSet.buildDate(2016, 9, 30), SetType.PROMOTIONAL);
+    private KaladeshInventions() {
+        super("Kaladesh Inventions", "MPS", ExpansionSet.buildDate(2016, 9, 30), SetType.PROMOTIONAL);
         this.blockName = "Masterpiece Series";
         this.hasBoosters = false;
         this.hasBasicLands = false;
+
         CardGraphicInfo cardGraphicInfo = new CardGraphicInfo(FrameStyle.KLD_INVENTION, false);
+
         cards.add(new SetCardInfo("Aether Vial", 6, Rarity.MYTHIC, mage.cards.a.AetherVial.class, cardGraphicInfo));
         cards.add(new SetCardInfo("Arcbound Ravager", 31, Rarity.MYTHIC, mage.cards.a.ArcboundRavager.class, cardGraphicInfo));
         cards.add(new SetCardInfo("Black Vise", 32, Rarity.MYTHIC, mage.cards.b.BlackVise.class, cardGraphicInfo));

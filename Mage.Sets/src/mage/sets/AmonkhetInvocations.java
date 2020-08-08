@@ -6,19 +6,20 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
+ * https://scryfall.com/sets/mp2
  *
  * @author fireshoes
  */
-public final class MasterpieceSeriesAmonkhet extends ExpansionSet {
+public final class AmonkhetInvocations extends ExpansionSet {
 
-    private static final MasterpieceSeriesAmonkhet instance = new MasterpieceSeriesAmonkhet();
+    private static final AmonkhetInvocations instance = new AmonkhetInvocations();
 
-    public static MasterpieceSeriesAmonkhet getInstance() {
+    public static AmonkhetInvocations getInstance() {
         return instance;
     }
 
-    private MasterpieceSeriesAmonkhet() {
-        super("Masterpiece Series Amonkhet", "MP2", ExpansionSet.buildDate(2017, 4, 28), SetType.PROMOTIONAL);
+    private AmonkhetInvocations() {
+        super("Amonkhet Invocations", "MP2", ExpansionSet.buildDate(2017, 4, 28), SetType.PROMOTIONAL);
         this.blockName = "Masterpiece Series";
         this.hasBoosters = false;
         this.hasBasicLands = false;

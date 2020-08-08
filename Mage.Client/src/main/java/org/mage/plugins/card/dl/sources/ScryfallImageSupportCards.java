@@ -18,7 +18,6 @@ public class ScryfallImageSupportCards {
             //put("xmage", "scryfall").
                     build();
 
-
     private static final Set<String> supportedSets = new ArraySet<String>() {
         {
             // Sorted by release date, as listed on Scryfall
@@ -57,7 +56,7 @@ public class ScryfallImageSupportCards {
             add("ITP"); // Introductory Two-Player Set
             add("VIS"); // Visions
             add("5ED"); // Fifth Edition
-            add("PVAN"); // Vanguard Series
+            //add("PVAN"); // Vanguard Series
             add("PPOD"); // Portal Demo Game
             add("POR"); // Portal
             add("WTH"); // Weatherlight
@@ -105,7 +104,7 @@ public class ScryfallImageSupportCards {
             add("ODY"); // Odyssey
             add("DKM"); // Deckmasters
             add("PAL02"); // Arena League 2002
-            add("PR2"); // Magic Player Rewards 2002
+            //add("PR2"); // Magic Player Rewards 2002
             add("G02"); // Judge Gift Cards 2002
             add("F02"); // Friday Night Magic 2002
             add("TOR"); // Torment
@@ -113,7 +112,7 @@ public class ScryfallImageSupportCards {
             //add("PHJ"); // Hobby Japan Promos
             add("WC02"); // World Championship Decks 2002
             add("ONS"); // Onslaught
-            add("PMOA"); // Magic Online Avatars
+            //add("PMOA"); // Magic Online Avatars
             add("PAL03"); // Arena League 2003
             add("P03"); // Magic Player Rewards 2003
             add("G03"); // Judge Gift Cards 2003
@@ -121,6 +120,7 @@ public class ScryfallImageSupportCards {
             add("LGN"); // Legions
             add("SCG"); // Scourge
             add("8ED"); // Eighth Edition
+            add("8EB"); // Eighth Edition Box
             add("WC03"); // World Championship Decks 2003
             add("MRD"); // Mirrodin
             add("PAL04"); // Arena League 2004
@@ -140,6 +140,7 @@ public class ScryfallImageSupportCards {
             add("BOK"); // Betrayers of Kamigawa
             add("SOK"); // Saviors of Kamigawa
             add("9ED"); // Ninth Edition
+            add("9EB"); // Ninth Edition Box
             //add("PSAL"); // Salvat 2005
             add("RAV"); // Ravnica: City of Guilds
             add("P2HG"); // Two-Headed Giant Tournament
@@ -296,7 +297,7 @@ public class ScryfallImageSupportCards {
             add("J14"); // Judge Gift Cards 2014
             add("F14"); // Friday Night Magic 2014
             add("PBNG"); // Born of the Gods Promos
-            add("THP2"); // Born of the Gods Hero's Path
+            //add("THP2"); // Born of the Gods Hero's Path
             add("BNG"); // Born of the Gods
             add("DDM"); // Duel Decks: Jace vs. Vraska
             add("PJOU"); // Journey into Nyx Promos
@@ -306,7 +307,7 @@ public class ScryfallImageSupportCards {
             add("CNS"); // Conspiracy
             add("VMA"); // Vintage Masters
             add("PS14"); // San Diego Comic-Con 2014
-            add("PPC1"); // M15 Prerelease Challenge
+            //add("PPC1"); // M15 Prerelease Challenge
             add("PM15"); // Magic 2015 Promos
             add("M15"); // Magic 2015
             add("CP1"); // Magic 2015 Clash Pack
@@ -472,27 +473,16 @@ public class ScryfallImageSupportCards {
             //add("SS3"); // Signature Spellbook: Chandra
             add("HA3"); // Historic Anthology 3
 
-            // TODO: DuelsOfThePlaneswalkersPromos
-            add("DPAP");
-            //
             // add("TD0"); // Commander Theme Decks
             // add("TD2"); // Duel Decks: Mirrodin Pure vs. New Phyrexia
             // add("MD1"); // Modern Event Deck
             // add("DD3"); // Duel Decks Anthology
             // add("PZ1"); // Legendary Cube
-            // add("PZ2");
-            add("WMCQ");
-            add("MEDM");
-            add("IKO");
-            add("C20");
+            add("IKO"); // Ikoria: Lair of Behemoths
+            add("C20"); // Commander 2020 Edition
             //
-            add("MPS-AKH");
-            add("M21");
-            add("JMP");
-
-            //
-            add("8EB"); // Eighth Edition Box
-            add("9EB"); // Ninth Edition Box
+            add("M21"); // Core Set 2021
+            add("JMP"); // Jumpstart
         }
     };
 
@@ -524,28 +514,6 @@ public class ScryfallImageSupportCards {
 
             put("PAL99/Island/3+", "https://api.scryfall.com/cards/pal99/3†/");
             put("PSOI/Tamiyo's Journal/265s+", "https://api.scryfall.com/cards/psoi/265s†/");
-
-            // Duels of the Planeswalkers Promos -- xmage uses one set (DPAP), but scryfall store it by years
-            // 2009 - https://scryfall.com/sets/pdtp
-            put("DPAP/Garruk Wildspeaker", "https://api.scryfall.com/cards/pdtp/1/");
-            // 2010 - https://scryfall.com/sets/pdp10
-            put("DPAP/Liliana Vess", "https://api.scryfall.com/cards/pdp10/1/");
-            put("DPAP/Nissa Revane", "https://api.scryfall.com/cards/pdp10/2/");
-            // 2011 - https://scryfall.com/sets/pdp11
-            put("DPAP/Frost Titan", "https://api.scryfall.com/cards/pdp11/1/");
-            put("DPAP/Grave Titan", "https://api.scryfall.com/cards/pdp11/2/");
-            put("DPAP/Inferno Titan", "https://api.scryfall.com/cards/pdp11/3/");
-            // 2012 - https://scryfall.com/sets/pdp12
-            put("DPAP/Primordial Hydra", "https://api.scryfall.com/cards/pdp12/1/");
-            put("DPAP/Serra Avatar", "https://api.scryfall.com/cards/pdp12/2/");
-            put("DPAP/Vampire Nocturnus", "https://api.scryfall.com/cards/pdp12/3/");
-            // 2013 - https://scryfall.com/sets/pdp13
-            put("DPAP/Bonescythe Sliver", "https://api.scryfall.com/cards/pdp13/1/");
-            put("DPAP/Ogre Battledriver", "https://api.scryfall.com/cards/pdp13/2/");
-            put("DPAP/Scavenging Ooze", "https://api.scryfall.com/cards/pdp13/3/");
-            // 2014 - https://scryfall.com/sets/pdp14
-            put("DPAP/Soul of Ravnica", "https://api.scryfall.com/cards/pdp14/1/");
-            put("DPAP/Soul of Zendikar", "https://api.scryfall.com/cards/pdp14/2/");
 
             // 8th Edition box set and 9th Edition box set
             // scryfall stores it with one set, by xmage split into two -- 8ED and 8EB, 9ED and 9EB
