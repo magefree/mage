@@ -487,6 +487,10 @@ public class ScryfallImageSupportCards {
             add("MPS-AKH");
             add("M21");
             add("JMP");
+
+            //
+            add("8EB"); // Eighth Edition Box
+            add("9EB"); // Ninth Edition Box
         }
     };
 
@@ -542,6 +546,7 @@ public class ScryfallImageSupportCards {
             put("DPAP/Soul of Zendikar", "https://api.scryfall.com/cards/pdp14/2/");
 
             // 8th Edition box set and 9th Edition box set
+            // scryfall stores it with one set, by xmage split into two -- 8ED and 8EB, 9ED and 9EB
             put("8EB/Eager Cadet", "https://api.scryfall.com/cards/8ed/S1");
             put("8EB/Vengeance", "https://api.scryfall.com/cards/8ed/S2");
             put("8EB/Giant Octopus", "https://api.scryfall.com/cards/8ed/S3");

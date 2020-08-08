@@ -1509,7 +1509,9 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         Map<CardView, Integer> pimpedCards = new HashMap<>();
         pimpedSets.put("CP", 1);
         pimpedSets.put("MPS", 1);
-        pimpedSets.put("CLASH", 1);
+        pimpedSets.put("CP1", 1);
+        pimpedSets.put("CP2", 1);
+        pimpedSets.put("CP3", 1);
 
         // Judge Reward Gifts
         pimpedSets.put("JGP", 1);
