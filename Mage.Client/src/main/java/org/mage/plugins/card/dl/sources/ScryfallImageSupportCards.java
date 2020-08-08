@@ -414,6 +414,7 @@ public class ScryfallImageSupportCards {
             add("PSS3"); // M19 Standard Showdown
             add("M19"); // Core Set 2019
             add("ANA"); // Arena New Player Experience
+            add("XANA"); // Arena New Player Experience Extras
             add("PS18"); // San Diego Comic-Con 2018
             //add("HTR17"); // Heroes of the Realm 2017
             add("C18"); // Commander 2018

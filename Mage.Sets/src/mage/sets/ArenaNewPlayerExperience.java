@@ -18,7 +18,7 @@ public final class ArenaNewPlayerExperience extends ExpansionSet {
     private ArenaNewPlayerExperience() {
         super("Arena New Player Experience", "ANA", ExpansionSet.buildDate(2018, 7, 14), SetType.MAGIC_ONLINE);
         this.hasBoosters = false;
-        this.hasBasicLands = false;
+        this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Angelic Reward", 1, Rarity.UNCOMMON, mage.cards.a.AngelicReward.class));
         cards.add(new SetCardInfo("Confront the Assault", 3, Rarity.UNCOMMON, mage.cards.c.ConfrontTheAssault.class));

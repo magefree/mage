@@ -391,10 +391,11 @@ public class VerifyCardDataTest {
             }
         }
 
-        // unique cards stats
-        errorsList.add("Total unique cards: " + classesIndex.size() + ", total non unique cards (reprints): " + totalCards);
-
         printMessages(errorsList);
+
+        // unique cards stats
+        System.out.println("Total unique cards: " + classesIndex.size() + ", total non unique cards (reprints): " + totalCards);
+
         if (errorsList.size() > 0) {
             Assert.fail("DB has wrong card classes, found errors: " + errorsList.size());
         }
