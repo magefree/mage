@@ -193,8 +193,9 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_SCRYFALL_DOWNLOAD_SETS, "SWS"); // Star Wars
 
         // sample decks checking - some decks can contains unimplemented cards, so ignore it
+        // for linux/windows build system use paths constructor
         skipListCreate(SKIP_LIST_SAMPLE_DECKS);
-        skipListAddName(SKIP_LIST_SAMPLE_DECKS, "\\Commander\\Commander 2019\\Merciless Rage.dck"); // TODO: delete after Aeon Engine implemented
+        skipListAddName(SKIP_LIST_SAMPLE_DECKS, Paths.get("\\Commander\\Commander 2019\\Merciless Rage.dck").toString()); // TODO: delete after Aeon Engine implemented
     }
 
     private final ArrayList<String> outputMessages = new ArrayList<>();
@@ -481,7 +482,7 @@ public class VerifyCardDataTest {
         Collection<String> errorsList = new ArrayList<>();
 
         // collect all files
-        final String rootPath = "..\\Mage.Client\\release\\sample-decks\\";
+        final String rootPath = Paths.get("..\\Mage.Client\\release\\sample-decks").toString();
         Collection<Path> filesList = new ArrayList<>();
         try {
             Files.walkFileTree(Paths.get(rootPath), new SimpleFileVisitor<Path>() {
@@ -495,12 +496,12 @@ public class VerifyCardDataTest {
             e.printStackTrace();
             errorsList.add("Error: sample deck - can't get folder content - " + e.getMessage());
         }
-        Assert.assertTrue("Sample decks: can't find any deck files", filesList.size() > 0);
+        Assert.assertTrue("Sample decks: can't find any deck files in " + rootPath, filesList.size() > 0);
 
         // try to open deck files
         int totalErrorFiles = 0;
         for (Path deckFile : filesList) {
-            String deckName = "\\" + deckFile.toString().replace(rootPath, "");
+            String deckName = deckFile.toString().replace(rootPath, "");
             if (skipListHaveName(SKIP_LIST_SAMPLE_DECKS, deckName)) {
                 continue;
             }
