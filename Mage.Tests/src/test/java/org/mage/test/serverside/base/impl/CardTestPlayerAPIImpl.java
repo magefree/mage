@@ -248,7 +248,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         if (loadedDeckCardLists.containsKey(deckName)) {
             list = loadedDeckCardLists.get(deckName);
         } else {
-            list = DeckImporter.importDeckFromFile(deckName);
+            list = DeckImporter.importDeckFromFile(deckName, true);
             loadedDeckCardLists.put(deckName, list);
         }
         Deck deck = Deck.load(list, false, false);

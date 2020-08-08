@@ -31,7 +31,7 @@ public class TxtDeckImporter extends PlainTextDeckImporter {
     }
 
     @Override
-    protected void readLine(String line, DeckCardLists deckList) {
+    protected void readLine(String line, DeckCardLists deckList, FixedInfo fixedInfo) {
 
         line = line.trim();
 

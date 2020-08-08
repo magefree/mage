@@ -1,21 +1,19 @@
-
 package mage.cards.decks.importer;
-
-import java.util.Optional;
 
 import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardInfo;
-import mage.cards.repository.CardRepository;
+
+import java.util.Optional;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class DecDeckImporter extends PlainTextDeckImporter {
 
     @Override
-    protected void readLine(String line, DeckCardLists deckList) {
+    protected void readLine(String line, DeckCardLists deckList, FixedInfo fixedInfo) {
+
         if (line.isEmpty() || line.startsWith("//")) {
             return;
         }

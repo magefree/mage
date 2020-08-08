@@ -35,7 +35,7 @@ public class TxtDeckImporterTest {
         Assert.assertEquals("Deck does not contain 3 cards, found " + deck.getCards().size(), 3, deck.getCards().size());
         Assert.assertEquals("Sideboard does not contain 2 cards, found " + deck.getSideboard().size(), 2, deck.getSideboard().size());
 
-        DeckCardLists imported = importer.importDeck("JustLands.txt");
+        DeckCardLists imported = importer.importDeck("JustLands.txt", false);
 
         Assert.assertEquals("Imported deck does not contain 3 cards, found " + imported.getCards().size(), 3, imported.getCards().size());
         Assert.assertEquals("Imported sideboard does not contain 2 cards, found " + imported.getSideboard().size(), 2, imported.getSideboard().size());

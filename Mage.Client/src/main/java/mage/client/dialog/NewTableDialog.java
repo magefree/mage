@@ -525,7 +525,7 @@ public class NewTableDialog extends MageDialog {
                     table.getTableId(),
                     this.player1Panel.getPlayerName(),
                     PlayerType.HUMAN, 1,
-                    DeckImporter.importDeckFromFile(this.player1Panel.getDeckFile()),
+                    DeckImporter.importDeckFromFile(this.player1Panel.getDeckFile(), true),
                     this.txtPassword.getText())) {
                 for (TablePlayerPanel player : players) {
                     if (player.getPlayerType() != PlayerType.HUMAN) {

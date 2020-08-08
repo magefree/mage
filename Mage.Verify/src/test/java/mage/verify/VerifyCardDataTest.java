@@ -53,6 +53,7 @@ public class VerifyCardDataTest {
     private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
     private static final String FULL_ABILITIES_CHECK_SET_CODE = "THB"; // check all abilities and output cards with wrong abilities texts;
+    private static final boolean AUTO_FIX_SAMPLE_DECKS = false; // debug only: fix sample decks if it contains errors like wrong card numbers
 
     // right now this is very noisy, and not useful enough to make any assertions on
     private static final boolean CHECK_SOURCE_TOKENS = false;
@@ -471,7 +472,7 @@ public class VerifyCardDataTest {
     }
 
     @Test
-    @Ignore // TODO: enable and fix broken decks after promo sets merge https://github.com/magefree/mage/pull/6190
+    //@Ignore // TODO: enable and fix broken decks after promo sets merge https://github.com/magefree/mage/pull/6190
     public void test_checkSampleDecks() {
         Collection<String> errorsList = new ArrayList<>();
 
@@ -497,7 +498,7 @@ public class VerifyCardDataTest {
         for (Path deckFile : filesList) {
             String deckName = deckFile.toString().replace(rootPath, "");
             StringBuilder deckErrors = new StringBuilder();
-            DeckCardLists deckCards = DeckImporter.importDeckFromFile(deckFile.toString(), deckErrors);
+            DeckCardLists deckCards = DeckImporter.importDeckFromFile(deckFile.toString(), deckErrors, AUTO_FIX_SAMPLE_DECKS);
 
             if (!deckErrors.toString().isEmpty()) {
                 errorsList.add("Error: sample deck contains errors " + deckName);

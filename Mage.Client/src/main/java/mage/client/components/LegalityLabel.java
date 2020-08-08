@@ -187,7 +187,7 @@ public class LegalityLabel extends JLabel {
         }
         try {
             StringBuilder errorMessages = new StringBuilder();
-            Deck deck = Deck.load(DeckImporter.importDeckFromFile(deckFile.getAbsolutePath(), errorMessages), true, true);
+            Deck deck = Deck.load(DeckImporter.importDeckFromFile(deckFile.getAbsolutePath(), errorMessages, false), true, true);
             errorMessage = errorMessages.toString();
             validateDeck(deck);
         } catch (Exception ex) {

@@ -11,13 +11,14 @@ import java.util.regex.Pattern;
 
 public class DraftLogImporter extends PlainTextDeckImporter {
 
-    private static Pattern SET_PATTERN = Pattern.compile("------ (\\p{Alnum}+) ------$");
-    private static Pattern PICK_PATTERN = Pattern.compile("--> (.+)$");
+    private static final Pattern SET_PATTERN = Pattern.compile("------ (\\p{Alnum}+) ------$");
+    private static final Pattern PICK_PATTERN = Pattern.compile("--> (.+)$");
 
     private String currentSet = null;
 
     @Override
-    protected void readLine(String line, DeckCardLists deckList) {
+    protected void readLine(String line, DeckCardLists deckList, FixedInfo fixedInfo) {
+
         Matcher setMatcher = SET_PATTERN.matcher(line);
         if (setMatcher.matches()) {
             currentSet = setMatcher.group(1);
