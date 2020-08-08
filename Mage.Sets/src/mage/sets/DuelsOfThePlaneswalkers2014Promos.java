@@ -23,6 +23,6 @@ public final class DuelsOfThePlaneswalkers2014Promos extends ExpansionSet {
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Soul of Ravnica", 1, Rarity.MYTHIC, mage.cards.s.SoulOfRavnica.class));
-        cards.add(new SetCardInfo("Soul of Zendikar", 1, Rarity.MYTHIC, mage.cards.s.SoulOfZendikar.class));
+        cards.add(new SetCardInfo("Soul of Zendikar", 2, Rarity.MYTHIC, mage.cards.s.SoulOfZendikar.class));
     }
 }

@@ -256,19 +256,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
     }
 
     private String getSetNameWithYear(ExpansionSet exp) {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(exp.getReleaseDate());
-        String year = String.valueOf(cal.get(Calendar.YEAR));
-
-        return exp.getName() + " (" + exp.getCode() + ", " + year + ")";
-
-        /*
-        if (!exp.getName().contains(year)) {
-            return exp.getName() + " (" + year + ")";
-        } else {
-            return exp.getName();
-        }
-        */
+        return exp.getName() + " (" + exp.getCode() + ", " + exp.getReleaseYear() + ")";
     }
 
     private ExpansionSet findSetByNameWithYear(String name) {

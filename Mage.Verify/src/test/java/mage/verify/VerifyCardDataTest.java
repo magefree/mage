@@ -58,28 +58,6 @@ public class VerifyCardDataTest {
 
     private static final HashMap<String, Set<String>> skipCheckLists = new HashMap<>();
     private static final Set<String> subtypesToIgnore = new HashSet<>();
-
-    private static void skipListCreate(String listName) {
-        skipCheckLists.put(listName, new LinkedHashSet<>());
-    }
-
-    private static void skipListAddName(String listName, String set, String cardName) {
-        skipCheckLists.get(listName).add(set + " - " + cardName);
-    }
-
-    private static void skipListAddName(String listName, String set) {
-        skipCheckLists.get(listName).add(set);
-    }
-
-    private static boolean skipListHaveName(String listName, String set, String cardName) {
-        return skipCheckLists.get(listName).contains(set + " - " + cardName)
-                || skipCheckLists.get(listName).contains(set);
-    }
-
-    private static boolean skipListHaveName(String listName, String set) {
-        return skipCheckLists.get(listName).contains(set);
-    }
-
     private static final String SKIP_LIST_PT = "PT";
     private static final String SKIP_LIST_COLOR = "COLOR";
     private static final String SKIP_LIST_COST = "COST";
@@ -91,6 +69,7 @@ public class VerifyCardDataTest {
     private static final String SKIP_LIST_DOUBLE_RARE = "DOUBLE_RARE";
     private static final String SKIP_LIST_UNSUPPORTED_SETS = "UNSUPPORTED_SETS";
     private static final String SKIP_LIST_SCRYFALL_DOWNLOAD_SETS = "SCRYFALL_DOWNLOAD_SETS";
+    private static final Pattern SHORT_JAVA_STRING = Pattern.compile("(?<=\")[A-Z][a-z]+(?=\")");
 
     static {
         // skip lists for checks (example: unstable cards with same name may have different stats)
@@ -211,6 +190,37 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_SCRYFALL_DOWNLOAD_SETS, "SWS"); // Star Wars
     }
 
+    private final ArrayList<String> outputMessages = new ArrayList<>();
+    private int failed = 0;
+
+    private static void skipListCreate(String listName) {
+        skipCheckLists.put(listName, new LinkedHashSet<>());
+    }
+
+    private static void skipListAddName(String listName, String set, String cardName) {
+        skipCheckLists.get(listName).add(set + " - " + cardName);
+    }
+
+    private static void skipListAddName(String listName, String set) {
+        skipCheckLists.get(listName).add(set);
+    }
+
+    private static boolean skipListHaveName(String listName, String set, String cardName) {
+        return skipCheckLists.get(listName).contains(set + " - " + cardName)
+                || skipCheckLists.get(listName).contains(set);
+    }
+
+    private static boolean skipListHaveName(String listName, String set) {
+        return skipCheckLists.get(listName).contains(set);
+    }
+
+    private static <T> boolean eqSet(Collection<T> a, Collection<T> b) {
+        if (a == null || a.isEmpty()) {
+            return b == null || b.isEmpty();
+        }
+        return b != null && a.size() == b.size() && a.containsAll(b);
+    }
+
     private void warn(Card card, String message) {
         outputMessages.add("Warning: " + message + " for " + card.getExpansionSetCode() + " - " + card.getName() + " - " + card.getCardNumber());
     }
@@ -219,9 +229,6 @@ public class VerifyCardDataTest {
         failed++;
         outputMessages.add("Error: (" + category + ") " + message + " for " + card.getExpansionSetCode() + " - " + card.getName() + " - " + card.getCardNumber());
     }
-
-    private int failed = 0;
-    private final ArrayList<String> outputMessages = new ArrayList<>();
 
     @Test
     public void test_verifyCards() throws IOException {
@@ -394,32 +401,71 @@ public class VerifyCardDataTest {
 
     @Test
     public void test_checkMissingSets() {
-        Collection<String> errorsList = new ArrayList<>();
+        // generate unimplemented sets list
+        Collection<String> info = new ArrayList<>();
 
-        int totalMissingSets = 0;
-        int totalMissingCards = 0;
+        int missingSets = 0;
+        int missingCards = 0;
+        int unsupportedSets = 0;
+        int unsupportedCards = 0;
+        int mtgCards = 0;
+        int mtgSets = 0;
+        int xmageCards = 0;
+        int xmageUnofficialSets = 0;
+        int xmageUnofficialCards = 0;
         Collection<ExpansionSet> sets = Sets.getInstance().values();
+
+        // official sets
         for (Map.Entry<String, JsonSet> refEntry : MtgJson.sets().entrySet()) {
             JsonSet refSet = refEntry.getValue();
+            mtgCards += refSet.totalSetSize;
 
             // replace codes for aliases
             String searchSet = MtgJson.mtgJsonToXMageCodes.getOrDefault(refSet.code, refSet.code);
-            if (skipListHaveName(SKIP_LIST_UNSUPPORTED_SETS, searchSet))
+            if (skipListHaveName(SKIP_LIST_UNSUPPORTED_SETS, searchSet)) {
+                unsupportedSets++;
+                unsupportedCards += refSet.totalSetSize;
                 continue;
+            }
 
             ExpansionSet mageSet = Sets.findSet(searchSet.toUpperCase(Locale.ENGLISH));
             if (mageSet == null) {
-                totalMissingSets = totalMissingSets + 1;
-                totalMissingCards = totalMissingCards + refSet.cards.size();
-                errorsList.add("Warning: missing set " + refSet.code + " - " + refSet.name + " (cards: " + refSet.cards.size() + ")");
+                missingSets = missingSets + 1;
+                missingCards = missingCards + refSet.cards.size();
+                info.add("Warning: missing set " + refSet.code + " - " + refSet.name + " (cards: " + refSet.cards.size() + ", date: " + refSet.releaseDate + ")");
+                continue;
             }
+
+            mtgSets++;
+            xmageCards += mageSet.getSetCardInfo().size();
         }
-        if (errorsList.size() > 0) {
-            errorsList.add("Warning: total missing sets: " + totalMissingSets + ", with missing cards: " + totalMissingCards);
+        if (info.size() > 0) {
+            info.add("Warning: total missing sets: " + missingSets + ", with missing cards: " + missingCards);
         }
 
-        // only warnings
-        printMessages(errorsList);
+        // unofficial sets info
+        for (ExpansionSet set : sets) {
+            if (MtgJson.sets().containsKey(set.getCode())) {
+                continue;
+            }
+
+            // TODO: 8EB and 9EB uses workaround to split from main set, so it will be in unofficial list until booster cards improve
+            xmageUnofficialSets++;
+            xmageUnofficialCards += set.getSetCardInfo().size();
+            info.add("Unofficial set: " + set.getCode() + " - " + set.getName() + ", cards: " + set.getSetCardInfo().size() + ", year: " + set.getReleaseYear());
+        }
+
+        printMessages(info);
+        System.out.println();
+        System.out.println("Official sets implementation stats:");
+        System.out.println("* MTG sets: " + MtgJson.sets().size() + ", cards: " + mtgCards);
+        System.out.println("* Implemented sets: " + mtgSets + ", cards: " + xmageCards);
+        System.out.println("* Unsupported sets: " + unsupportedSets + ", cards: " + unsupportedCards);
+        System.out.println("* TODO: " + (MtgJson.sets().size() - mtgSets - unsupportedSets) + ", cards: " + (mtgCards - xmageCards - unsupportedCards));
+        System.out.println();
+        System.out.println("Unofficial sets implementation stats:");
+        System.out.println("* Implemented sets: " + xmageUnofficialSets + ", cards: " + xmageUnofficialCards);
+        System.out.println();
     }
 
     @Test
@@ -908,8 +954,6 @@ public class VerifyCardDataTest {
         }
     }
 
-    private static final Pattern SHORT_JAVA_STRING = Pattern.compile("(?<=\")[A-Z][a-z]+(?=\")");
-
     private Set<String> findSourceTokens(Class c) throws IOException {
         if (!CHECK_SOURCE_TOKENS || BasicLand.class.isAssignableFrom(c)) {
             return null;
@@ -1173,6 +1217,62 @@ public class VerifyCardDataTest {
         System.out.println(text);
     }
 
+
+        /*
+        for(String rule : card.getRules()) {
+            rule = rule.replaceAll("(?i)<i>.+</i>", ""); // Ignoring reminder text in italic
+            // TODO: add Equip {3} checks
+            // TODO: add Raid and other words checks
+            String[] sl = rule.split(":");
+            if (sl.length == 2 && !sl[0].isEmpty()) {
+                String cardCost = sl[0]
+                        .replace("{this}", card.getName())
+                        //.replace("<i>", "")
+                        //.replace("</i>", "")
+                        .replace("&mdash;", "—");
+                String cardAbility = sl[1]
+                        .trim()
+                        .replace("{this}", card.getName())
+                        //.replace("<i>", "")
+                        //.replace("</i>", "")
+                        .replace("&mdash;", "—");;
+
+                boolean found = false;
+                for (String refRule : refRules) {
+                    refRule = refRule.replaceAll("(?i)<i>.+</i>", ""); // Ignoring reminder text in italic
+
+                    // fix for ref mana: ref card have xxx instead {T}: Add {xxx}, example: W
+                    if (refRule.length() == 1) {
+                        refRule = "{T}: Add {" + refRule + "}";
+                    }
+                    refRule = refRule
+                            .trim()
+                            //.replace("<i>", "")
+                            //.replace("</i>", "")
+                            .replace("&mdash;", "—");
+
+                    // normal
+                    if (refRule.startsWith(cardCost)) {
+                        found = true;
+                        break;
+                    }
+
+                    // ref card have (xxx) instead xxx, example: ({T}: Add {G}.)
+                    // ref card have <i>(xxx) instead xxx, example: <i>({T}: Add {G}.)</i>
+                    // TODO: delete?
+                    if (refRule.startsWith("(" + cardCost)) {
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    fail(card, "abilities", "card ability have cost, but can't find in ref [" + cardCost + ": " + cardAbility + "]");
+                }
+            }
+
+        }
+    }*/
+
     private void checkWrongAbilitiesText(Card card, JsonCard ref, int cardIndex) {
         // checks missing or wrong text
         if (!card.getExpansionSetCode().equals(FULL_ABILITIES_CHECK_SET_CODE)) {
@@ -1241,63 +1341,6 @@ public class VerifyCardDataTest {
         }
     }
 
-
-        /*
-        for(String rule : card.getRules()) {
-            rule = rule.replaceAll("(?i)<i>.+</i>", ""); // Ignoring reminder text in italic
-            // TODO: add Equip {3} checks
-            // TODO: add Raid and other words checks
-            String[] sl = rule.split(":");
-            if (sl.length == 2 && !sl[0].isEmpty()) {
-                String cardCost = sl[0]
-                        .replace("{this}", card.getName())
-                        //.replace("<i>", "")
-                        //.replace("</i>", "")
-                        .replace("&mdash;", "—");
-                String cardAbility = sl[1]
-                        .trim()
-                        .replace("{this}", card.getName())
-                        //.replace("<i>", "")
-                        //.replace("</i>", "")
-                        .replace("&mdash;", "—");;
-
-                boolean found = false;
-                for (String refRule : refRules) {
-                    refRule = refRule.replaceAll("(?i)<i>.+</i>", ""); // Ignoring reminder text in italic
-
-                    // fix for ref mana: ref card have xxx instead {T}: Add {xxx}, example: W
-                    if (refRule.length() == 1) {
-                        refRule = "{T}: Add {" + refRule + "}";
-                    }
-                    refRule = refRule
-                            .trim()
-                            //.replace("<i>", "")
-                            //.replace("</i>", "")
-                            .replace("&mdash;", "—");
-
-                    // normal
-                    if (refRule.startsWith(cardCost)) {
-                        found = true;
-                        break;
-                    }
-
-                    // ref card have (xxx) instead xxx, example: ({T}: Add {G}.)
-                    // ref card have <i>(xxx) instead xxx, example: <i>({T}: Add {G}.)</i>
-                    // TODO: delete?
-                    if (refRule.startsWith("(" + cardCost)) {
-                        found = true;
-                        break;
-                    }
-                }
-                if (!found) {
-                    fail(card, "abilities", "card ability have cost, but can't find in ref [" + cardCost + ": " + cardAbility + "]");
-                }
-            }
-
-        }
-    }*/
-
-
     private void checkTypes(Card card, JsonCard ref) {
         if (skipListHaveName(SKIP_LIST_TYPE, card.getExpansionSetCode(), card.getName())) {
             return;
@@ -1311,13 +1354,6 @@ public class VerifyCardDataTest {
         if (!eqSet(type, expected)) {
             fail(card, "types", type + " != " + expected);
         }
-    }
-
-    private static <T> boolean eqSet(Collection<T> a, Collection<T> b) {
-        if (a == null || a.isEmpty()) {
-            return b == null || b.isEmpty();
-        }
-        return b != null && a.size() == b.size() && a.containsAll(b);
     }
 
     private void checkPT(Card card, JsonCard ref) {
