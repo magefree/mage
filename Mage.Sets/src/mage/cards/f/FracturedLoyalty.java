@@ -64,7 +64,12 @@ public final class FracturedLoyalty extends CardImpl {
 
         @Override
         public boolean apply(Game game, Ability source) {
+            // In the case that Fractured Loyalty is blinked
             Permanent enchantment = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
+            if (enchantment == null) {
+                // It was not blinked, use the standard method
+                enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
+            }
             if (enchantment != null) {
                 Permanent enchantedCreature = game.getPermanent(enchantment.getAttachedTo());
                 if (enchantedCreature != null) {
