@@ -26,6 +26,7 @@ import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.mage.plugins.card.dl.sources.ScryfallImageSupportCards;
 import org.mage.plugins.card.images.CardDownloadData;
 import org.mage.plugins.card.images.DownloadPicturesService;
 import org.reflections.Reflections;
@@ -89,6 +90,7 @@ public class VerifyCardDataTest {
     private static final String SKIP_LIST_MISSING_ABILITIES = "MISSING_ABILITIES";
     private static final String SKIP_LIST_DOUBLE_RARE = "DOUBLE_RARE";
     private static final String SKIP_LIST_INVALID_SETS = "INVALID_SETS";
+    private static final String SKIP_LIST_SCRYFALL_DOWNLOAD_SETS = "SCRYFALL_DOWNLOAD_SETS";
 
     static {
         // skip lists for checks (example: unstable cards with same name may have different stats)
@@ -196,6 +198,9 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_INVALID_SETS, "AMH1"); // Modern Horizons Art Series
         skipListAddName(SKIP_LIST_INVALID_SETS, "PTG"); // Ponies: The Galloping
 
+        // scryfall download sets (missing from scryfall website)
+        skipListCreate(SKIP_LIST_SCRYFALL_DOWNLOAD_SETS);
+        skipListAddName(SKIP_LIST_SCRYFALL_DOWNLOAD_SETS, "SWS"); // Star Wars
     }
 
     private void warn(Card card, String message) {
@@ -370,13 +375,10 @@ public class VerifyCardDataTest {
             }
         }
 
-        for (String error : errorsList) {
-            System.out.println(error);
-        }
-
         // unique cards stats
-        System.out.println("Total unique cards: " + classesIndex.size() + ", total non unique cards (reprints): " + totalCards);
+        errorsList.add("Total unique cards: " + classesIndex.size() + ", total non unique cards (reprints): " + totalCards);
 
+        printMessages(errorsList);
         if (errorsList.size() > 0) {
             Assert.fail("DB has wrong card classes, found errors: " + errorsList.size());
         }
@@ -409,9 +411,7 @@ public class VerifyCardDataTest {
         }
 
         // only warnings
-        for (String error : errorsList) {
-            System.out.println(error);
-        }
+        printMessages(errorsList);
     }
 
     @Test
@@ -444,8 +444,8 @@ public class VerifyCardDataTest {
             DeckCardLists deckCards = DeckImporter.importDeckFromFile(deckFile.toString(), deckErrors);
 
             if (!deckErrors.toString().isEmpty()) {
-                errorsList.add("Error: sample contains errors " + deckName);
-                System.out.println("Errors in sample file " + deckName + ":\n" + deckErrors.toString());
+                errorsList.add("Error: sample deck contains errors " + deckName);
+                System.out.println("Errors in sample deck " + deckName + ":\n" + deckErrors.toString());
                 totalErrorFiles++;
                 continue;
             }
@@ -460,6 +460,36 @@ public class VerifyCardDataTest {
         printMessages(errorsList);
         if (errorsList.size() > 0) {
             Assert.fail("Found sample decks: " + filesList.size() + "; with errors: " + totalErrorFiles);
+        }
+    }
+
+    @Test
+    public void test_checkMissingScryfallSettings() {
+        Collection<String> errorsList = new ArrayList<>();
+
+        Collection<ExpansionSet> xmageSets = Sets.getInstance().values();
+        Set<String> scryfallSets = ScryfallImageSupportCards.getSupportedSets();
+
+        // missing
+        for (ExpansionSet set : xmageSets) {
+            if (skipListHaveName(SKIP_LIST_SCRYFALL_DOWNLOAD_SETS, set.getCode()))
+                continue;
+
+            if (!scryfallSets.contains(set.getCode())) {
+                errorsList.add("Error: scryfall download missing setting: " + set.getCode() + " - " + set.getName());
+            }
+        }
+
+        // unknown
+        for (String scryfallCode : scryfallSets) {
+            if (xmageSets.stream().noneMatch(e -> e.getCode().equals(scryfallCode))) {
+                errorsList.add("Error: scryfall download unknown setting: " + scryfallCode);
+            }
+        }
+
+        printMessages(errorsList);
+        if (errorsList.size() > 0) {
+            Assert.fail("Found scryfall download errors: " + errorsList.size());
         }
     }
 
