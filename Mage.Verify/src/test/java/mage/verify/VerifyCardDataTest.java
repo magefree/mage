@@ -1,5 +1,6 @@
 package mage.verify;
 
+import com.google.common.base.CharMatcher;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.keyword.ScryEffect;
@@ -683,17 +684,15 @@ public class VerifyCardDataTest {
 
         Collection<ExpansionSet> sets = Sets.getInstance().values();
 
-        // 1. wrong UsesVariousArt settings (set have duplicated card name without that setting -- e.g. cards will have same image)
+        // CHECK: wrong UsesVariousArt settings (set have duplicated card name without that setting -- e.g. cards will have same image)
         for (ExpansionSet set : sets) {
 
-            // double names
             Map<String, Integer> doubleNames = new HashMap<>();
             for (ExpansionSet.SetCardInfo card : set.getSetCardInfo()) {
                 int count = doubleNames.getOrDefault(card.getName(), 0);
                 doubleNames.put(card.getName(), count + 1);
             }
 
-            // check double names
             for (ExpansionSet.SetCardInfo card : set.getSetCardInfo()) {
                 boolean cardHaveDoubleName = (doubleNames.getOrDefault(card.getName(), 0) > 1);
                 boolean cardHaveVariousSetting = card.getGraphicInfo() != null && card.getGraphicInfo().getUsesVariousArt();
@@ -711,14 +710,19 @@ public class VerifyCardDataTest {
                         cardInfo.getCardNumber(), cardInfo.getRarity(), cardInfo.getGraphicInfo()));
                 Assert.assertNotNull(card);
 
-                // 2. all planeswalkers must be legendary
+                // CHECK: all planeswalkers must be legendary
                 if (card.getCardType().contains(CardType.PLANESWALKER) && !card.getSuperType().contains(SuperType.LEGENDARY)) {
                     errorsList.add("error, planeswalker must have legendary type: " + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
                 }
 
-                // 3. check that getMana works without NPE errors (it uses getNetMana with empty game param for AI score calcs)
+                // CHECK: getMana must works without NPE errors (it uses getNetMana with empty game param for AI score calcs)
                 // https://github.com/magefree/mage/issues/6300
                 card.getMana();
+
+                // CHECK: non ascii symbols in card numbers
+                if (!CharMatcher.ascii().matchesAllOf(card.getName()) || !CharMatcher.ascii().matchesAllOf(card.getCardNumber())) {
+                    errorsList.add("error, card name or number contains non-ascii symbols: " + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
+                }
             }
         }
 
