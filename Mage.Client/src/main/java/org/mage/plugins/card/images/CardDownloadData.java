@@ -134,7 +134,8 @@ public class CardDownloadData {
     public String getCollectorIdAsFileName() {
         // return file names compatible card number (e.g. replace special symbols)
         return collectorId
-                .replace("*", "star");
+                .replace("*", "star")
+                .replace("★", "star");
     }
 
     public String getCollectorIdPostfix() {

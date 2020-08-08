@@ -102,7 +102,7 @@ public class SummerMagic extends ExpansionSet {
         cards.add(new SetCardInfo("Earthbind", 147, Rarity.COMMON, mage.cards.e.Earthbind.class));
         cards.add(new SetCardInfo("Earthquake", 148, Rarity.RARE, mage.cards.e.Earthquake.class));
         cards.add(new SetCardInfo("Ebony Horse", 247, Rarity.RARE, mage.cards.e.EbonyHorse.class));
-        cards.add(new SetCardInfo("El-Hajjâj", 108, Rarity.RARE, mage.cards.e.ElHajjaj.class));
+        cards.add(new SetCardInfo("El-Hajjaj", 108, Rarity.RARE, mage.cards.e.ElHajjaj.class));
         cards.add(new SetCardInfo("Elvish Archers", 193, Rarity.RARE, mage.cards.e.ElvishArchers.class));
         cards.add(new SetCardInfo("Energy Flux", 57, Rarity.UNCOMMON, mage.cards.e.EnergyFlux.class));
         cards.add(new SetCardInfo("Erg Raiders", 109, Rarity.COMMON, mage.cards.e.ErgRaiders.class));

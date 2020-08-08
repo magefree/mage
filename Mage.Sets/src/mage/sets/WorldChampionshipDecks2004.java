@@ -51,7 +51,7 @@ public class WorldChampionshipDecks2004 extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", "jn348", Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", "jn350", Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Frogmite", "ap172", Rarity.COMMON, mage.cards.f.Frogmite.class));
-        cards.add(new SetCardInfo("Furnace Dragon", "ap62sbb", Rarity.RARE, mage.cards.f.FurnaceDragon.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Furnace Dragon", "ap62sb", Rarity.RARE, mage.cards.f.FurnaceDragon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Furnace Dragon", "mb62sb", Rarity.RARE, mage.cards.f.FurnaceDragon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Glimmervoid", "ap281", Rarity.RARE, mage.cards.g.Glimmervoid.class));
         cards.add(new SetCardInfo("Goblin Charbelcher", "mb176", Rarity.RARE, mage.cards.g.GoblinCharbelcher.class));
@@ -66,7 +66,7 @@ public class WorldChampionshipDecks2004 extends ExpansionSet {
         cards.add(new SetCardInfo("Myr Incubator", "mb212", Rarity.RARE, mage.cards.m.MyrIncubator.class));
         cards.add(new SetCardInfo("Ornithopter", "ap224", Rarity.UNCOMMON, mage.cards.o.Ornithopter.class));
         cards.add(new SetCardInfo("Oxidize", "jn79sb", Rarity.COMMON, mage.cards.o.Oxidize.class));
-        cards.add(new SetCardInfo("Pacifism", "gn33", Rarity.COMMON, mage.cards.p.Pacifism.class));
+        cards.add(new SetCardInfo("Pacifism", "gn33sb", Rarity.COMMON, mage.cards.p.Pacifism.class));
         cards.add(new SetCardInfo("Pentad Prism", "mb143", Rarity.COMMON, mage.cards.p.PentadPrism.class));
         cards.add(new SetCardInfo("Plains", "gn331", Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", "gn332", Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
@@ -82,13 +82,13 @@ public class WorldChampionshipDecks2004 extends ExpansionSet {
         cards.add(new SetCardInfo("Relic Barrier", "gn147sb", Rarity.UNCOMMON, mage.cards.r.RelicBarrier.class));
         cards.add(new SetCardInfo("Renewed Faith", "jn50", Rarity.COMMON, mage.cards.r.RenewedFaith.class));
         cards.add(new SetCardInfo("Rewind", "gn96", Rarity.UNCOMMON, mage.cards.r.Rewind.class));
-        cards.add(new SetCardInfo("Rude Awakening", "jn92", Rarity.RARE, mage.cards.r.RudeAwakening.class));
+        cards.add(new SetCardInfo("Rude Awakening", "jn92sb", Rarity.RARE, mage.cards.r.RudeAwakening.class));
         cards.add(new SetCardInfo("Scrabbling Claws", "gn237sb", Rarity.UNCOMMON, mage.cards.s.ScrabblingClaws.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Scrabbling Claws", "jn237", Rarity.UNCOMMON, mage.cards.s.ScrabblingClaws.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Scrabbling Claws", "jn237sb", Rarity.UNCOMMON, mage.cards.s.ScrabblingClaws.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Seat of the Synod", "ap283", Rarity.COMMON, mage.cards.s.SeatOfTheSynod.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Seat of the Synod", "mb283", Rarity.COMMON, mage.cards.s.SeatOfTheSynod.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Secluded Steppe", "jn324", Rarity.COMMON, mage.cards.s.SecludedSteppe.class));
-        cards.add(new SetCardInfo("Seething Song", "ap104sbb", Rarity.COMMON, mage.cards.s.SeethingSong.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Seething Song", "ap104sb", Rarity.COMMON, mage.cards.s.SeethingSong.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Seething Song", "mb104sb", Rarity.COMMON, mage.cards.s.SeethingSong.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Serum Visions", "ap36sb", Rarity.COMMON, mage.cards.s.SerumVisions.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Serum Visions", "mb36", Rarity.COMMON, mage.cards.s.SerumVisions.class, NON_FULL_USE_VARIOUS));
@@ -98,7 +98,7 @@ public class WorldChampionshipDecks2004 extends ExpansionSet {
         cards.add(new SetCardInfo("Talisman of Dominance", "mb253", Rarity.UNCOMMON, mage.cards.t.TalismanOfDominance.class));
         cards.add(new SetCardInfo("Talisman of Progress", "mb256", Rarity.UNCOMMON, mage.cards.t.TalismanOfProgress.class));
         cards.add(new SetCardInfo("Temple of the False God", "gn143", Rarity.UNCOMMON, mage.cards.t.TempleOfTheFalseGod.class));
-        cards.add(new SetCardInfo("Thirst for Knowledge", "gn53", Rarity.COMMON, mage.cards.t.ThirstForKnowledge.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Thirst for Knowledge", "gn53", Rarity.UNCOMMON, mage.cards.t.ThirstForKnowledge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thirst for Knowledge", "mb53", Rarity.UNCOMMON, mage.cards.t.ThirstForKnowledge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thoughtcast", "ap54", Rarity.COMMON, mage.cards.t.Thoughtcast.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thoughtcast", "mb54", Rarity.COMMON, mage.cards.t.Thoughtcast.class, NON_FULL_USE_VARIOUS));
@@ -113,5 +113,5 @@ public class WorldChampionshipDecks2004 extends ExpansionSet {
         cards.add(new SetCardInfo("Wing Shards", "jn25", Rarity.UNCOMMON, mage.cards.w.WingShards.class));
         cards.add(new SetCardInfo("Wrath of God", "gn58", Rarity.RARE, mage.cards.w.WrathOfGod.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wrath of God", "jn58", Rarity.RARE, mage.cards.w.WrathOfGod.class, NON_FULL_USE_VARIOUS));
-     }
+    }
 }

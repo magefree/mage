@@ -52,8 +52,8 @@ public class Deckmasters extends ExpansionSet {
         // Card not implemented
         // cards.add(new SetCardInfo("Lava Burst", 16, Rarity.COMMON, mage.cards.l.LavaBurst.class));
         cards.add(new SetCardInfo("Lhurgoyf", 29, Rarity.RARE, mage.cards.l.Lhurgoyf.class));
-        cards.add(new SetCardInfo("Lim-Dûl's High Guard", "6a", Rarity.COMMON, mage.cards.l.LimDulsHighGuard.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Lim-Dûl's High Guard", "6b", Rarity.COMMON, mage.cards.l.LimDulsHighGuard.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lim-Dul's High Guard", "6a", Rarity.COMMON, mage.cards.l.LimDulsHighGuard.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lim-Dul's High Guard", "6b", Rarity.COMMON, mage.cards.l.LimDulsHighGuard.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 45, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 46, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 47, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));

@@ -500,39 +500,83 @@ public class ScryfallImageSupportCards {
             //   set/card_name/card_number
             //   set/card_name/card_number
 
-            // Cards with non-ASCII collector numbers
+            // Cards with non-ASCII collector numbers must use direct download (cause xmage uses different card number)
+            // J14
             put("J14/Plains/1*", "https://api.scryfall.com/cards/j14/1★/");
             put("J14/Island/2*", "https://api.scryfall.com/cards/j14/2★/");
             put("J14/Swamp/3*", "https://api.scryfall.com/cards/j14/3★/");
             put("J14/Mountain/4*", "https://api.scryfall.com/cards/j14/4★/");
             put("J14/Forest/5*", "https://api.scryfall.com/cards/j14/5★/");
+            // PLS
             put("PLS/Tahngarth, Talruum Hero/74*", "https://api.scryfall.com/cards/pls/74★/");
             put("PLS/Ertai, the Corrupted/107*", "https://api.scryfall.com/cards/pls/107★/");
             put("PLS/Skyship Weatherlight/133*", "https://api.scryfall.com/cards/pls/133★/");
+            // PROE
             put("PROE/Emrakul, the Aeons Torn/*4", "https://api.scryfall.com/cards/proe/★4/");
             put("PROE/Lord of Shatterskull Pass/*156", "https://api.scryfall.com/cards/proe/★156/");
-
+            // PAL99
             put("PAL99/Island/3+", "https://api.scryfall.com/cards/pal99/3†/");
+            // PSOI
             put("PSOI/Tamiyo's Journal/265s+", "https://api.scryfall.com/cards/psoi/265s†/");
+            // DKM
+            put("DKM/Icy Manipulator/36s", "https://api.scryfall.com/cards/dkm/36★/");
+            put("DKM/Incinerate/14s", "https://api.scryfall.com/cards/dkm/14★/");
+            // PWAR
+            put("PWAR/Ajani, the Greathearted/184s*", "https://api.scryfall.com/cards/pwar/184s★/");
+            put("PWAR/Angrath, Captain of Chaos/227s*", "https://api.scryfall.com/cards/pwar/227s★/");
+            put("PWAR/Arlinn, Voice of the Pack/150s*", "https://api.scryfall.com/cards/pwar/150s★/");
+            put("PWAR/Ashiok, Dream Render/228s*", "https://api.scryfall.com/cards/pwar/228s★/");
+            put("PWAR/Chandra, Fire Artisan/119s*", "https://api.scryfall.com/cards/pwar/119s★/");
+            put("PWAR/Davriel, Rogue Shadowmage/83s*", "https://api.scryfall.com/cards/pwar/83s★/");
+            put("PWAR/Domri, Anarch of Bolas/191s*", "https://api.scryfall.com/cards/pwar/191s★/");
+            put("PWAR/Dovin, Hand of Control/229s*", "https://api.scryfall.com/cards/pwar/229s★/");
+            put("PWAR/Gideon Blackblade/13s*", "https://api.scryfall.com/cards/pwar/13s★/");
+            put("PWAR/Huatli, the Sun's Heart/230s*", "https://api.scryfall.com/cards/pwar/230s★/");
+            put("PWAR/Jace, Wielder of Mysteries/54s*", "https://api.scryfall.com/cards/pwar/54s★/");
+            put("PWAR/Jaya, Venerated Firemage/135s*", "https://api.scryfall.com/cards/pwar/135s★/");
+            put("PWAR/Jiang Yanggu, Wildcrafter/164s*", "https://api.scryfall.com/cards/pwar/164s★/");
+            put("PWAR/Karn, the Great Creator/1s*", "https://api.scryfall.com/cards/pwar/1s★/");
+            put("PWAR/Kasmina, Enigmatic Mentor/56s*", "https://api.scryfall.com/cards/pwar/56s★/");
+            put("PWAR/Kaya, Bane of the Dead/231s*", "https://api.scryfall.com/cards/pwar/231s★/");
+            put("PWAR/Kiora, Behemoth Beckoner/232s*", "https://api.scryfall.com/cards/pwar/232s★/");
+            put("PWAR/Liliana, Dreadhorde General/97s*", "https://api.scryfall.com/cards/pwar/97s★/");
+            put("PWAR/Nahiri, Storm of Stone/233s*", "https://api.scryfall.com/cards/pwar/233s★/");
+            put("PWAR/Narset, Parter of Veils/61s*", "https://api.scryfall.com/cards/pwar/61s★/");
+            put("PWAR/Nicol Bolas, Dragon-God/207s*", "https://api.scryfall.com/cards/pwar/207s★/");
+            put("PWAR/Nissa, Who Shakes the World/169s*", "https://api.scryfall.com/cards/pwar/169s★/");
+            put("PWAR/Ob Nixilis, the Hate-Twisted/100s*", "https://api.scryfall.com/cards/pwar/100s★/");
+            put("PWAR/Ral, Storm Conduit/211s*", "https://api.scryfall.com/cards/pwar/211s★/");
+            put("PWAR/Saheeli, Sublime Artificer/234s*", "https://api.scryfall.com/cards/pwar/234s★/");
+            put("PWAR/Samut, Tyrant Smasher/235s*", "https://api.scryfall.com/cards/pwar/235s★/");
+            put("PWAR/Sarkhan the Masterless/143s*", "https://api.scryfall.com/cards/pwar/143s★/");
+            put("PWAR/Sorin, Vengeful Bloodlord/217s*", "https://api.scryfall.com/cards/pwar/217s★/");
+            put("PWAR/Tamiyo, Collector of Tales/220s*", "https://api.scryfall.com/cards/pwar/220s★/");
+            put("PWAR/Teferi, Time Raveler/221s*", "https://api.scryfall.com/cards/pwar/221s★/");
+            put("PWAR/Teyo, the Shieldmage/32s*", "https://api.scryfall.com/cards/pwar/32s★/");
+            put("PWAR/The Wanderer/37s*", "https://api.scryfall.com/cards/pwar/37s★/");
+            put("PWAR/Tibalt, Rakish Instigator/146s*", "https://api.scryfall.com/cards/pwar/146s★/");
+            put("PWAR/Ugin, the Ineffable/2s*", "https://api.scryfall.com/cards/pwar/2s★/");
+            put("PWAR/Vivien, Champion of the Wilds/180s*", "https://api.scryfall.com/cards/pwar/180s★/");
+            put("PWAR/Vraska, Swarm's Eminence/236s*", "https://api.scryfall.com/cards/pwar/236s★/");
 
             // 8th Edition box set and 9th Edition box set
             // scryfall stores it with one set, by xmage split into two -- 8ED and 8EB, 9ED and 9EB
-            put("8EB/Eager Cadet", "https://api.scryfall.com/cards/8ed/S1");
-            put("8EB/Vengeance", "https://api.scryfall.com/cards/8ed/S2");
-            put("8EB/Giant Octopus", "https://api.scryfall.com/cards/8ed/S3");
-            put("8EB/Sea Eagle", "https://api.scryfall.com/cards/8ed/S4");
-            put("8EB/Vizzerdrix", "https://api.scryfall.com/cards/8ed/S5");
-            put("8EB/Enormous Baloth", "https://api.scryfall.com/cards/8ed/S6");
-            put("8EB/Silverback Ape", "https://api.scryfall.com/cards/8ed/S7");
-            put("9EB/Eager Cadet", "https://api.scryfall.com/cards/9ed/S1");
-            put("9EB/Vengeance", "https://api.scryfall.com/cards/9ed/S3");
-            put("9EB/Coral Eel", "https://api.scryfall.com/cards/9ed/S3");
-            put("9EB/Giant Octopus", "https://api.scryfall.com/cards/9ed/S4");
-            put("9EB/Index", "https://api.scryfall.com/cards/9ed/S5");
-            put("9EB/Vizzerdrix", "https://api.scryfall.com/cards/9ed/S7");
-            put("9EB/Goblin Raider", "https://api.scryfall.com/cards/9ed/S8");
-            put("9EB/Enormous Baloth", "https://api.scryfall.com/cards/9ed/S9");
-            put("9EB/Spined Wurm", "https://api.scryfall.com/cards/9ed/S10");
+            put("8EB/Eager Cadet", "https://api.scryfall.com/cards/8ed/S1/");
+            put("8EB/Vengeance", "https://api.scryfall.com/cards/8ed/S2/");
+            put("8EB/Giant Octopus", "https://api.scryfall.com/cards/8ed/S3/");
+            put("8EB/Sea Eagle", "https://api.scryfall.com/cards/8ed/S4/");
+            put("8EB/Vizzerdrix", "https://api.scryfall.com/cards/8ed/S5/");
+            put("8EB/Enormous Baloth", "https://api.scryfall.com/cards/8ed/S6/");
+            put("8EB/Silverback Ape", "https://api.scryfall.com/cards/8ed/S7/");
+            put("9EB/Eager Cadet", "https://api.scryfall.com/cards/9ed/S1/");
+            put("9EB/Vengeance", "https://api.scryfall.com/cards/9ed/S3/");
+            put("9EB/Coral Eel", "https://api.scryfall.com/cards/9ed/S3/");
+            put("9EB/Giant Octopus", "https://api.scryfall.com/cards/9ed/S4/");
+            put("9EB/Index", "https://api.scryfall.com/cards/9ed/S5/");
+            put("9EB/Vizzerdrix", "https://api.scryfall.com/cards/9ed/S7/");
+            put("9EB/Goblin Raider", "https://api.scryfall.com/cards/9ed/S8/");
+            put("9EB/Enormous Baloth", "https://api.scryfall.com/cards/9ed/S9/");
+            put("9EB/Spined Wurm", "https://api.scryfall.com/cards/9ed/S10/");
         }
     };
 

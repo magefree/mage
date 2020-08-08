@@ -62,7 +62,7 @@ public class WorldChampionshipDecks1997 extends ExpansionSet {
         cards.add(new SetCardInfo("Frenetic Efreet", "jk264", Rarity.RARE, mage.cards.f.FreneticEfreet.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fyndhorn Elves", "sg244", Rarity.COMMON, mage.cards.f.FyndhornElves.class));
         cards.add(new SetCardInfo("Gemstone Mine", "js164", Rarity.UNCOMMON, mage.cards.g.GemstoneMine.class));
-        cards.add(new SetCardInfo("Ghazbán Ogre", "sg298", Rarity.COMMON, mage.cards.g.GhazbanOgre.class));
+        cards.add(new SetCardInfo("Ghazban Ogre", "sg298", Rarity.COMMON, mage.cards.g.GhazbanOgre.class));
         cards.add(new SetCardInfo("Giant Growth", "sg299", Rarity.COMMON, mage.cards.g.GiantGrowth.class));
         cards.add(new SetCardInfo("Hammer of Bogardan", "jk181", Rarity.RARE, mage.cards.h.HammerOfBogardan.class));
         cards.add(new SetCardInfo("Harvest Wurm", "sg130", Rarity.COMMON, mage.cards.h.HarvestWurm.class));

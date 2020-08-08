@@ -22,8 +22,8 @@ public final class DuelsOfThePlaneswalkers2013Promos extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
-        cards.add(new SetCardInfo("Bonescythe Sliver", 10, Rarity.RARE, mage.cards.b.BonescytheSliver.class));
-        cards.add(new SetCardInfo("Ogre Battledriver", 11, Rarity.RARE, mage.cards.o.OgreBattledriver.class));
-        cards.add(new SetCardInfo("Scavenging Ooze", 12, Rarity.RARE, mage.cards.s.ScavengingOoze.class));
+        cards.add(new SetCardInfo("Bonescythe Sliver", 1, Rarity.RARE, mage.cards.b.BonescytheSliver.class));
+        cards.add(new SetCardInfo("Ogre Battledriver", 2, Rarity.RARE, mage.cards.o.OgreBattledriver.class));
+        cards.add(new SetCardInfo("Scavenging Ooze", 3, Rarity.RARE, mage.cards.s.ScavengingOoze.class));
     }
 }

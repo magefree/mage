@@ -544,7 +544,7 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Icatian Javelineers", 59639, Rarity.COMMON, mage.cards.i.IcatianJavelineers.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Icy Manipulator", 35042, Rarity.UNCOMMON, mage.cards.i.IcyManipulator.class));
         cards.add(new SetCardInfo("Identity Thief", 61559, Rarity.RARE, mage.cards.i.IdentityThief.class));
-        cards.add(new SetCardInfo("Ifh-Bíff Efreet", 213, Rarity.RARE, mage.cards.i.IfhBiffEfreet.class));
+        cards.add(new SetCardInfo("Ifh-Biff Efreet", 213, Rarity.RARE, mage.cards.i.IfhBiffEfreet.class));
         cards.add(new SetCardInfo("Immolating Glare", 59669, Rarity.UNCOMMON, mage.cards.i.ImmolatingGlare.class));
         cards.add(new SetCardInfo("Imperious Perfect", 31409, Rarity.UNCOMMON, mage.cards.i.ImperiousPerfect.class));
         cards.add(new SetCardInfo("Impulse", 36006, Rarity.COMMON, mage.cards.i.Impulse.class));
@@ -598,7 +598,7 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Karakas", 43592, Rarity.UNCOMMON, mage.cards.k.Karakas.class));
         cards.add(new SetCardInfo("Karametra's Acolyte", 50118, Rarity.UNCOMMON, mage.cards.k.KarametrasAcolyte.class));
         cards.add(new SetCardInfo("Karn, Silver Golem", 36106, Rarity.RARE, mage.cards.k.KarnSilverGolem.class));
-        cards.add(new SetCardInfo("Khabál Ghoul", 215, Rarity.UNCOMMON, mage.cards.k.KhabalGhoul.class));
+        cards.add(new SetCardInfo("Khabal Ghoul", 215, Rarity.UNCOMMON, mage.cards.k.KhabalGhoul.class));
         cards.add(new SetCardInfo("Killing Wave", 44319, Rarity.RARE, mage.cards.k.KillingWave.class));
         cards.add(new SetCardInfo("Kiora's Follower", 51926, Rarity.UNCOMMON, mage.cards.k.KiorasFollower.class));
         cards.add(new SetCardInfo("Kiora, the Crashing Wave", 59651, Rarity.MYTHIC, mage.cards.k.KioraTheCrashingWave.class));

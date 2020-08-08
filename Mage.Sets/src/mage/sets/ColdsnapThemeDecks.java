@@ -54,7 +54,7 @@ public class ColdsnapThemeDecks extends ExpansionSet {
         cards.add(new SetCardInfo("Kjeldoran Home Guard", 8, Rarity.UNCOMMON, mage.cards.k.KjeldoranHomeGuard.class));
         cards.add(new SetCardInfo("Kjeldoran Pride", "9b", Rarity.COMMON, mage.cards.k.KjeldoranPride.class));
         cards.add(new SetCardInfo("Lat-Nam's Legacy", "30b", Rarity.COMMON, mage.cards.l.LatNamsLegacy.class));
-        cards.add(new SetCardInfo("Legions of Lim-Dûl", 142, Rarity.COMMON, mage.cards.l.LegionsOfLimDul.class));
+        cards.add(new SetCardInfo("Legions of Lim-Dul", 142, Rarity.COMMON, mage.cards.l.LegionsOfLimDul.class));
         cards.add(new SetCardInfo("Mistfolk", 84, Rarity.COMMON, mage.cards.m.Mistfolk.class));
         cards.add(new SetCardInfo("Mountain", 378, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 379, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));

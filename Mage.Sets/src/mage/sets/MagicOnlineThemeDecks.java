@@ -107,7 +107,7 @@ public class MagicOnlineThemeDecks extends ExpansionSet {
         cards.add(new SetCardInfo("Jund Panorama", "A131", Rarity.COMMON, mage.cards.j.JundPanorama.class));
         cards.add(new SetCardInfo("Jungle Barrier", "A99", Rarity.UNCOMMON, mage.cards.j.JungleBarrier.class));
         cards.add(new SetCardInfo("Jungle Lion", "A76", Rarity.COMMON, mage.cards.j.JungleLion.class));
-        cards.add(new SetCardInfo("Jötun Grunt", "B5", Rarity.UNCOMMON, mage.cards.j.JotunGrunt.class));
+        cards.add(new SetCardInfo("Jotun Grunt", "B5", Rarity.UNCOMMON, mage.cards.j.JotunGrunt.class));
         cards.add(new SetCardInfo("Kami of Ancient Law", "A9", Rarity.COMMON, mage.cards.k.KamiOfAncientLaw.class));
         cards.add(new SetCardInfo("Karakas", "B32", Rarity.RARE, mage.cards.k.Karakas.class));
         cards.add(new SetCardInfo("Keldon Marauders", "B19", Rarity.COMMON, mage.cards.k.KeldonMarauders.class));

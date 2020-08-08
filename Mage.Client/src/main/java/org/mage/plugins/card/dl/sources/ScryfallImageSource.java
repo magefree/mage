@@ -73,12 +73,17 @@ public enum ScryfallImageSource implements CardImageSource {
 
         // CARDS TRY
 
-        // direct links to images via hardcoded API path. Used for cards with non-ASCII collector numbers.
+        // direct links to images via hardcoded API path. Used for cards with non-ASCII collector numbers
         if (baseUrl == null) {
-            baseUrl = ScryfallImageSupportCards.findDirectDownloadLink(card.getSet(), card.getName(), card.getCollectorId());
-            if (baseUrl != null) {
-                alternativeUrl = baseUrl + defaultCode + "?format=image";
-                baseUrl += localizedCode + "?format=image";
+            String apiUrl = ScryfallImageSupportCards.findDirectDownloadLink(card.getSet(), card.getName(), card.getCollectorId());
+            if (apiUrl != null) {
+                baseUrl = apiUrl + localizedCode + "?format=image";
+                alternativeUrl = apiUrl + defaultCode + "?format=image";
+
+                // workaround to use cards without english images (some promos or special cards)
+                if (Objects.equals(baseUrl, alternativeUrl) && baseUrl.endsWith("/en?format=image")) {
+                    alternativeUrl = alternativeUrl.replace("/en?format=image", "/?format=image");
+                }
             }
         }
 
