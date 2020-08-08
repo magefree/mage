@@ -6,6 +6,7 @@ import mage.constants.SetType;
 
 /**
  * https://scryfall.com/sets/ha1
+ *
  * @author mikalinn777
  */
 public final class HistoricAnthology1 extends ExpansionSet {
@@ -20,6 +21,7 @@ public final class HistoricAnthology1 extends ExpansionSet {
         super("Historic Anthology 1", "HA1", ExpansionSet.buildDate(2019, 11, 21), SetType.MAGIC_ONLINE);
         this.hasBoosters = false;
         this.hasBasicLands = false;
+
         cards.add(new SetCardInfo("Burning Tree Emissary", 16, Rarity.UNCOMMON, mage.cards.b.BurningTreeEmissary.class));
         cards.add(new SetCardInfo("Captain Sisay", 17, Rarity.RARE, mage.cards.c.CaptainSisay.class));
         cards.add(new SetCardInfo("Cryptbreaker", 6, Rarity.RARE, mage.cards.c.Cryptbreaker.class));
@@ -40,5 +42,5 @@ public final class HistoricAnthology1 extends ExpansionSet {
         cards.add(new SetCardInfo("Soul Warden", 2, Rarity.COMMON, mage.cards.s.SoulWarden.class));
         cards.add(new SetCardInfo("Tendrils of Corruption", 9, Rarity.COMMON, mage.cards.t.TendrilsOfCorruption.class));
         cards.add(new SetCardInfo("Treasure Hunt", 4, Rarity.COMMON, mage.cards.t.TreasureHunt.class));
-     }
+    }
 }

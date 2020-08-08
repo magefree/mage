@@ -1507,7 +1507,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         // TODO: Why are these a HashMap? It can be a HashSet<String> instead, as the value is never used in the code.
         Map<String, Integer> pimpedSets = new HashMap<>();
         Map<CardView, Integer> pimpedCards = new HashMap<>();
-        pimpedSets.put("CP", 1);
+        pimpedSets.put("PCMP", 1);
         pimpedSets.put("MPS", 1);
         pimpedSets.put("CP1", 1);
         pimpedSets.put("CP2", 1);
@@ -1593,15 +1593,12 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         pimpedSets.put("PGTW", 1); // Gateway 2006
         pimpedSets.put("PJAS", 1); // Junior APAC Series
 
-        pimpedSets.put("MGDC", 1);
         pimpedSets.put("EXP", 1);
         pimpedSets.put("PGPX", 1);
-        pimpedSets.put("GRC", 1);
-        pimpedSets.put("MBP", 1);
-        pimpedSets.put("MLP", 1);
+        pimpedSets.put("PMEI", 1);
+        pimpedSets.put("PREL", 1);
         pimpedSets.put("PLS", 1);
         pimpedSets.put("PPRE", 1);
-        pimpedSets.put("SUS", 1);
 
         String[] sets = pimpedSets.keySet().toArray(new String[pimpedSets.keySet().size()]);
         Boolean didModify = false;

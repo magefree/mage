@@ -3,7 +3,10 @@ package org.mage.plugins.card.dl.sources;
 import com.google.common.collect.ImmutableMap;
 import org.tritonus.share.ArraySet;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
 
 
 /**
@@ -12,8 +15,8 @@ import java.util.*;
 public class ScryfallImageSupportCards {
 
     private static final Map<String, String> xmageSetsToScryfall = ImmutableMap.<String, String>builder().
-            put("MBP", "pmei").
-            build();
+            //put("xmage", "scryfall").
+                    build();
 
 
     private static final Set<String> supportedSets = new ArraySet<String>() {
@@ -156,6 +159,7 @@ public class ScryfallImageSupportCards {
             add("PG07"); // Gateway 2007
             //add("PMPS07"); // Magic Premiere Shop 2007
             add("P07"); // Magic Player Rewards 2007
+            add("HHO"); // Happy Holidays
             add("G07"); // Judge Gift Cards 2007
             add("F07"); // Friday Night Magic 2007
             add("PLC"); // Planar Chaos
@@ -466,10 +470,10 @@ public class ScryfallImageSupportCards {
             add("PMEI"); // Magazine Inserts
             add("SLU"); // Secret Lair: Ultimate Edition
             //add("SS3"); // Signature Spellbook: Chandra
+            add("HA3"); // Historic Anthology 3
 
             // TODO: DuelsOfThePlaneswalkersPromos
             add("DPAP");
-            add("GRC");
             //
             // add("TD0"); // Commander Theme Decks
             // add("TD2"); // Duel Decks: Mirrodin Pure vs. New Phyrexia
@@ -482,8 +486,6 @@ public class ScryfallImageSupportCards {
             add("IKO");
             add("C20");
             //
-            add("EURO");
-            add("GPX");
             add("MPS-AKH");
             add("M21");
             add("JMP");
@@ -563,7 +565,6 @@ public class ScryfallImageSupportCards {
             put("9EB/Goblin Raider", "https://api.scryfall.com/cards/9ed/S8");
             put("9EB/Enormous Baloth", "https://api.scryfall.com/cards/9ed/S9");
             put("9EB/Spined Wurm", "https://api.scryfall.com/cards/9ed/S10");
-
         }
     };
 

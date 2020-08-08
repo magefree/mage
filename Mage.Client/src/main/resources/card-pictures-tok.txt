@@ -23,16 +23,12 @@
 #|Generate|TOK:JR|Faerie Rogue||
 #|Generate|TOK:JR|Soldier||
 #|Generate|TOK:JR|Squirrel||
-#|Generate|TOK:MBP:Beast||
-#|Generate|TOK:MBP|Cat||
-#|Generate|TOK:MBP|Dragon||
-#|Generate|TOK:MBP|Elephant||
-#|Generate|TOK:MBP|Goblin||
-#|Generate|TOK:MBP|Zombie||
-#|Generate|TOK:MGDC|Centaur||
-#|Generate|TOK:MGDC|Knight||
-#|Generate|TOK:MGDC|Rhino||
-#|Generate|TOK:MGDC|Sliver||
+#|Generate|TOK:PMEI|Beast||
+#|Generate|TOK:PMEI|Cat||
+#|Generate|TOK:PMEI|Dragon||
+#|Generate|TOK:PMEI|Elephant||
+#|Generate|TOK:PMEI|Goblin||
+#|Generate|TOK:PMEI|Zombie||
 #|Generate|TOK:MLP|Thopter||
 #|Generate|TOK:PPRE|Angel||
 #|Generate|TOK:PPRE|Avatar||

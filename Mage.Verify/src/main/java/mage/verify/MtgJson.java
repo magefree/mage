@@ -28,12 +28,8 @@ public final class MtgJson {
     // TODO: MtgJson now seems to use upper case set codes only.
     //  Review the ones beginning with a lower case "p" and remove the redundant entries.
     static {
-        mtgJsonToXMageCodes.put("pSUS", "SUS");
         mtgJsonToXMageCodes.put("pPRE", "PPRE");
         // mtgJsonToXMageCodes.put("pMPR", "MPRP"); // TODO: The set was split into the individual sets
-        mtgJsonToXMageCodes.put("pMEI", "MBP");
-        mtgJsonToXMageCodes.put("pGTW", "GRC"); // pGTW - Gateway = GRC (WPN + Gateway in one inner set)
-        mtgJsonToXMageCodes.put("pWPN", "GRC"); // pWPN - Wizards Play Network = GRC (WPN + Gateway in one inner set)
         mtgJsonToXMageCodes.put("pGRU", "PGRU");
         mtgJsonToXMageCodes.put("pFNM", "FNMP");
         mtgJsonToXMageCodes.put("pELP", "PELP");
@@ -47,8 +43,6 @@ public final class MtgJson {
         mtgJsonToXMageCodes.put("NMS", "NEM");
         mtgJsonToXMageCodes.put("MPS_AKH", "MPS-AKH");
         mtgJsonToXMageCodes.put("FRF_UGIN", "UGIN");
-        mtgJsonToXMageCodes.put("pCMP", "CP");
-
 
         // revert search
         for (Map.Entry<String, String> entry : mtgJsonToXMageCodes.entrySet()) {

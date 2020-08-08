@@ -339,7 +339,6 @@ public enum WizardCardsImageSource implements CardImageSource {
         setsAliases.put("FUT", "Future Sight");
         setsAliases.put("GPT", "Guildpact");
         setsAliases.put("PGPX", "Grand Prix");
-        setsAliases.put("GRC", "WPN Gateway");
         setsAliases.put("GTC", "Gatecrash");
         setsAliases.put("H09", "Premium Deck Series: Slivers");
         setsAliases.put("HML", "Homelands");
@@ -365,15 +364,13 @@ public enum WizardCardsImageSource implements CardImageSource {
         setsAliases.put("M13", "Magic 2013");
         setsAliases.put("M14", "Magic 2014");
         setsAliases.put("M15", "Magic 2015");
-        setsAliases.put("MBP", "Media Inserts");
+        setsAliases.put("PMEI", "Media Inserts");
         setsAliases.put("MBS", "Mirrodin Besieged");
         setsAliases.put("ME2", "Masters Edition II");
         setsAliases.put("ME3", "Masters Edition III");
         setsAliases.put("ME4", "Masters Edition IV");
         setsAliases.put("MED", "Masters Edition");
-//        setsAliases.put("MGDC", "Game Day");
         setsAliases.put("MIR", "Mirage");
-        setsAliases.put("MLP", "Launch Party");
         setsAliases.put("MMA", "Modern Masters");
         setsAliases.put("MM2", "Modern Masters 2015");
         setsAliases.put("MM3", "Modern Masters 2017");

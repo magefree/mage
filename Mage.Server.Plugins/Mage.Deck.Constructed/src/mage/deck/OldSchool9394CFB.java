@@ -1,28 +1,24 @@
-
 package mage.deck;
 
-import mage.cards.ExpansionSet;
-import mage.cards.Sets;
 import mage.cards.decks.Constructed;
-import mage.constants.SetType;
 
 /**
  * This class validates a deck for the Old School 93/94 format, specifically for
  * the Channel Fireball Rules.
- *
+ * <p>
  * This was originally made to follow the deck construction rules found at the
  * Old School Mtg blog found at:
  * http://oldschool-mtg.blogspot.com/p/banrestriction.html
- *
+ * <p>
  * There is no mana burn in this version of old school
  *
  * @author jmharmon
  */
 public class OldSchool9394CFB extends Constructed {
-    
+
     public OldSchool9394CFB() {
         super("Constructed - Old School 93/94 - Channel Fireball Rules");
-        
+
         // use the set instances to make sure that we get the correct set codes
         setCodes.add(mage.sets.LimitedEditionAlpha.getInstance().getCode());
         setCodes.add(mage.sets.LimitedEditionBeta.getInstance().getCode());
@@ -32,8 +28,7 @@ public class OldSchool9394CFB extends Constructed {
         setCodes.add(mage.sets.Legends.getInstance().getCode());
         setCodes.add(mage.sets.TheDark.getInstance().getCode());
         setCodes.add(mage.sets.FallenEmpires.getInstance().getCode());
-        setCodes.add(mage.sets.MediaInserts.getInstance().getCode());
-        
+
         // ante cards and conspiracies banned, with specifically mentioned ones called out.
         banned.add("Advantageous Proclamation");
         banned.add("Amulet of Quoz");
@@ -57,8 +52,8 @@ public class OldSchool9394CFB extends Constructed {
         banned.add("Timmerian Fiends");
         banned.add("Unexpected Potential");
         banned.add("Worldknit");
-        
-         //Let Media Inserts Arena and Sewers of Estark being only cards playable
+
+        //Let Media Inserts Arena and Sewers of Estark being only cards playable
         banned.add("Acquire");
         banned.add("Aeronaut Tinkerer");
         banned.add("Ajani, Caller of the Pride");
@@ -241,7 +236,7 @@ public class OldSchool9394CFB extends Constructed {
         banned.add("Wash Out");
         banned.add("Wildfire Eternal");
         banned.add("Xathrid Necromancer");
-        
+
         restricted.add("Ancestral Recall");
         restricted.add("Balance");
         restricted.add("Black Lotus");
@@ -265,6 +260,6 @@ public class OldSchool9394CFB extends Constructed {
         restricted.add("Time Vault");
         restricted.add("Time Walk");
         restricted.add("Timetwister");
-        restricted.add("Wheel of Fortune"); 
+        restricted.add("Wheel of Fortune");
     }
 }
