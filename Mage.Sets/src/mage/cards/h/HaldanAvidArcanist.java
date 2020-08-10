@@ -113,7 +113,7 @@ class HaldanAvidArcanistSpendAnyManaEffect extends AsThoughEffectImpl implements
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        return true;
+        return HaldanAvidArcanist.checkCard(objectId, source, affectedControllerId, game);
     }
 
     @Override
