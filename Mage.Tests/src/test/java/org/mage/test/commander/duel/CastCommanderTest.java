@@ -1,6 +1,8 @@
 
 package org.mage.test.commander.duel;
 
+import java.util.ArrayList;
+import mage.cards.Card;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
@@ -92,5 +94,42 @@ public class CastCommanderTest extends CardTestCommanderDuelBase {
         assertPermanentCount(playerA, "Patron of the Orochi", 1);        
         assertGraveyardCount(playerA, "Coiled Tinviper", 1);
         assertTappedCount("Forest", false, 3);
+    }  
+    
+    // https://github.com/magefree/mage/issues/6952
+    
+    @Test
+    public void testCastCommanderAndUnexpectedlyAbsent() {
+        setStrictChooseMode(true);
+        
+        playerA.getLibrary().clear();
+        
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
+
+        // Put target nonland permanent into its owner's library just beneath the top X cards of that library.
+        addCard(Zone.HAND, playerA, "Unexpectedly Absent"); // Instant {X}{W}{W}
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ob Nixilis of the Black Oath"); // {3}{B}{B}
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Unexpectedly Absent", "Ob Nixilis of the Black Oath");
+        setChoice(playerA, "X=0");
+        setChoice(playerA, "Yes"); // Move Commander to command zone instead library?
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertAllCommandsUsed();
+        
+        assertPermanentCount(playerA, "Ob Nixilis of the Black Oath", 0);
+        assertLibraryCount(playerA, "Ob Nixilis of the Black Oath", 0);
+        assertCommandZoneCount(playerA, "Ob Nixilis of the Black Oath", 1);
+
+        assertLibraryCount(playerA, 0);
+
+        assertGraveyardCount(playerA, "Unexpectedly Absent", 1);
+
+        assertLife(playerA, 40);
+        assertLife(playerB, 40);        
     }        
 }
