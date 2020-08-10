@@ -92,4 +92,11 @@ class OnceUponATimeWatcher extends Watcher {
     public boolean getSpellsCastThisTurn(UUID playerId) {
         return !castSpells.contains(playerId);
     }
+
+    @Override
+    public void reset() {
+        castSpells.clear();
+        super.reset();
+    }
+    
 }
