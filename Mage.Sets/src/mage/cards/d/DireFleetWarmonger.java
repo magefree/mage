@@ -39,7 +39,7 @@ public final class DireFleetWarmonger extends CardImpl {
                 ))
         ).addEffect(new GainAbilitySourceEffect(
                 TrampleAbility.getInstance(), Duration.EndOfTurn
-        )), TargetController.YOU, false));
+        )), TargetController.YOU, true));
     }
 
     private DireFleetWarmonger(final DireFleetWarmonger card) {
