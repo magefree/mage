@@ -200,7 +200,7 @@ class CelestialDawnSpendAnyManaEffect extends AsThoughEffectImpl implements AsTh
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        return affectedControllerId.equals(source.getControllerId());
+        return source.isControlledBy(affectedControllerId);
     }
 
     @Override
@@ -235,7 +235,7 @@ class CelestialDawnSpendColorlessManaEffect extends AsThoughEffectImpl implement
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        return affectedControllerId.equals(source.getControllerId());
+        return source.isControlledBy(affectedControllerId);
     }
 
     @Override
