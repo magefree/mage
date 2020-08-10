@@ -4,7 +4,7 @@ package mage.cards.w;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BlocksTriggeredAbility;
+import mage.abilities.common.BlocksSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.SourceHasCounterCondition;
@@ -48,7 +48,7 @@ public final class WoollyRazorback extends CardImpl {
             new SourceHasCounterCondition(CounterType.ICE), "and it has defender"));
         this.addAbility(ability);
         // Whenever Woolly Razorback blocks, remove an ice counter from it.
-        this.addAbility(new BlocksTriggeredAbility(new RemoveCounterSourceEffect(CounterType.ICE.createInstance()), false));
+        this.addAbility(new BlocksSourceTriggeredAbility(new RemoveCounterSourceEffect(CounterType.ICE.createInstance()), false));
     }
 
     public WoollyRazorback(final WoollyRazorback card) {

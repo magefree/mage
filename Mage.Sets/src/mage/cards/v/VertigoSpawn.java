@@ -4,7 +4,7 @@ package mage.cards.v;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BlocksTriggeredAbility;
+import mage.abilities.common.BlocksSourceTriggeredAbility;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.keyword.DefenderAbility;
@@ -29,7 +29,7 @@ public final class VertigoSpawn extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // Whenever Vertigo Spawn blocks a creature, tap that creature. That creature doesn't untap during its controller's next untap step.
-        Ability ability = new BlocksTriggeredAbility(new TapTargetEffect("that creature"), false, true);
+        Ability ability = new BlocksSourceTriggeredAbility(new TapTargetEffect("that creature"), false, true);
         ability.addEffect(new DontUntapInControllersNextUntapStepTargetEffect("that creature"));
         this.addAbility(ability);
     }

@@ -3,7 +3,7 @@ package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BlocksTriggeredAbility;
+import mage.abilities.common.BlocksSourceTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -24,7 +24,7 @@ public final class FolkOfAnHavva extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Folk of An-Havva blocks, it gets +2/+0 until end of turn.
-        this.addAbility(new BlocksTriggeredAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn), false));
+        this.addAbility(new BlocksSourceTriggeredAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn), false));
     }
 
     public FolkOfAnHavva(final FolkOfAnHavva card) {

@@ -3,7 +3,7 @@ package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BlocksTriggeredAbility;
+import mage.abilities.common.BlocksSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.combat.CanBlockAdditionalCreatureEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
@@ -35,7 +35,7 @@ public final class GuardianOfTheGateless extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect(0)));
 
         // Whenever Guardian of the Gateless blocks, it gets +1/+1 until end of turn for each creature it's blocking.
-        this.addAbility(new BlocksTriggeredAbility(new BoostSourceEffect(1,1, Duration.EndOfTurn),false));
+        this.addAbility(new BlocksSourceTriggeredAbility(new BoostSourceEffect(1,1, Duration.EndOfTurn),false));
     }
 
     public GuardianOfTheGateless(final GuardianOfTheGateless card) {

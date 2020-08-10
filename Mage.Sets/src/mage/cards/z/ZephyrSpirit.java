@@ -3,7 +3,7 @@ package mage.cards.z;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BlocksTriggeredAbility;
+import mage.abilities.common.BlocksSourceTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -24,7 +24,7 @@ public final class ZephyrSpirit extends CardImpl {
         this.toughness = new MageInt(6);
 
         // When Zephyr Spirit blocks, return it to its owner's hand.
-        this.addAbility(new BlocksTriggeredAbility(
+        this.addAbility(new BlocksSourceTriggeredAbility(
                 new ReturnToHandSourceEffect(true).setText("return it to its owner's hand"),
                 false, false, true
         ));

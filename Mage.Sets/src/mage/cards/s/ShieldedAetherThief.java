@@ -4,7 +4,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BlocksTriggeredAbility;
+import mage.abilities.common.BlocksSourceTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.PayEnergyCost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -35,7 +35,7 @@ public final class ShieldedAetherThief extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
 
         // Whenever Shield Aether Thief blocks, you get {E}.
-        this.addAbility(new BlocksTriggeredAbility(new GetEnergyCountersControllerEffect(1), false, true));
+        this.addAbility(new BlocksSourceTriggeredAbility(new GetEnergyCountersControllerEffect(1), false, true));
 
         // {T}, Pay {E}{E}{E}: Draw a card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new TapSourceCost());

@@ -3,7 +3,7 @@ package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BlocksTriggeredAbility;
+import mage.abilities.common.BlocksSourceTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
@@ -28,7 +28,7 @@ public final class RoyalTrooper extends CardImpl {
         // Whenever Royal Trooper blocks, it gets +2/+2 until end of turn.
         Effect effect = new BoostSourceEffect(2, 2, Duration.EndOfTurn);
         effect.setText("it gets +2/+2 until end of turn");
-        this.addAbility(new BlocksTriggeredAbility(effect, false));
+        this.addAbility(new BlocksSourceTriggeredAbility(effect, false));
     }
 
     public RoyalTrooper(final RoyalTrooper card) {

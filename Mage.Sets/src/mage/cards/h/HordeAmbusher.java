@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.common.BlocksTriggeredAbility;
+import mage.abilities.common.BlocksSourceTriggeredAbility;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
 import mage.abilities.costs.common.RevealTargetFromHandCost;
 import mage.abilities.effects.Effect;
@@ -42,7 +42,7 @@ public final class HordeAmbusher extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Horde Ambusher blocks, it deals 1 damage to you.
-        this.addAbility(new BlocksTriggeredAbility(new DamageControllerEffect(1, "it"), false));
+        this.addAbility(new BlocksSourceTriggeredAbility(new DamageControllerEffect(1, "it"), false));
         
         // Morph - Reveal a red card in your hand.
         this.addAbility(new MorphAbility(this, new RevealTargetFromHandCost(new TargetCardInHand(filter))));

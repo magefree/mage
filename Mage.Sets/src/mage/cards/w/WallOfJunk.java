@@ -3,7 +3,7 @@ package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BlocksTriggeredAbility;
+import mage.abilities.common.BlocksSourceTriggeredAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
@@ -33,7 +33,7 @@ public final class WallOfJunk extends CardImpl {
         Effect effect = new CreateDelayedTriggeredAbilityEffect(
                 new AtTheEndOfCombatDelayedTriggeredAbility(new ReturnToHandSourceEffect(true)));
         effect.setText("return it to its owner's hand at end of combat");
-        this.addAbility(new BlocksTriggeredAbility(effect, false, false, true));
+        this.addAbility(new BlocksSourceTriggeredAbility(effect, false, false, true));
     }
 
     public WallOfJunk(final WallOfJunk card) {

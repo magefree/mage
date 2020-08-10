@@ -3,7 +3,7 @@ package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BlocksTriggeredAbility;
+import mage.abilities.common.BlocksSourceTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
@@ -26,7 +26,7 @@ public final class PsychicMembrane extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
         
         // Whenever Psychic Membrane blocks, you may draw a card.
-        this.addAbility(new BlocksTriggeredAbility(new DrawCardSourceControllerEffect(1), true));
+        this.addAbility(new BlocksSourceTriggeredAbility(new DrawCardSourceControllerEffect(1), true));
     }
 
     public PsychicMembrane(final PsychicMembrane card) {

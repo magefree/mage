@@ -3,7 +3,7 @@ package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BlocksTriggeredAbility;
+import mage.abilities.common.BlocksSourceTriggeredAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DestroySourceEffect;
@@ -29,7 +29,7 @@ public final class CinderWall extends CardImpl {
         // Defender
         this.addAbility(DefenderAbility.getInstance());
         // When Cinder Wall blocks, destroy it at end of combat.
-        this.addAbility(new BlocksTriggeredAbility(
+        this.addAbility(new BlocksSourceTriggeredAbility(
                 new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(new DestroySourceEffect())),
                 false, false, true
         ));

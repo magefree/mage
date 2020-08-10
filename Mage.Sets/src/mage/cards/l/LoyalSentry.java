@@ -4,7 +4,7 @@ package mage.cards.l;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BlocksTriggeredAbility;
+import mage.abilities.common.BlocksSourceTriggeredAbility;
 import mage.abilities.effects.common.DestroySourceEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
@@ -27,7 +27,7 @@ public final class LoyalSentry extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Loyal Sentry blocks a creature, destroy that creature and Loyal Sentry.
-        Ability ability = new BlocksTriggeredAbility(new DestroyTargetEffect().setText("destroy that creature"), false, true, true);
+        Ability ability = new BlocksSourceTriggeredAbility(new DestroyTargetEffect().setText("destroy that creature"), false, true, true);
         ability.addEffect(new DestroySourceEffect().setText("and {this}"));
         this.addAbility(ability);
     }

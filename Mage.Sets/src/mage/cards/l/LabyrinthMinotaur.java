@@ -3,7 +3,7 @@ package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BlocksTriggeredAbility;
+import mage.abilities.common.BlocksSourceTriggeredAbility;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
@@ -24,7 +24,7 @@ public final class LabyrinthMinotaur extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever Labyrinth Minotaur blocks a creature, that creature doesn't untap during its controller's next untap step.
-        this.addAbility(new BlocksTriggeredAbility(new DontUntapInControllersNextUntapStepTargetEffect("that creature"), false, true));
+        this.addAbility(new BlocksSourceTriggeredAbility(new DontUntapInControllersNextUntapStepTargetEffect("that creature"), false, true));
     }
 
     public LabyrinthMinotaur(final LabyrinthMinotaur card) {
