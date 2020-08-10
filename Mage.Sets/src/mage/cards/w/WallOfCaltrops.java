@@ -3,7 +3,7 @@ package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BlocksTriggeredAbility;
+import mage.abilities.common.BlocksSourceTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.BandingAbility;
 import mage.abilities.keyword.DefenderAbility;
@@ -47,7 +47,7 @@ public final class WallOfCaltrops extends CardImpl {
     }
 }
 
-class WallOfCaltropsAbility extends BlocksTriggeredAbility {
+class WallOfCaltropsAbility extends BlocksSourceTriggeredAbility {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Wall creature");
 

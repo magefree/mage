@@ -4,7 +4,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BlocksTriggeredAbility;
+import mage.abilities.common.BlocksSourceTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
@@ -38,7 +38,7 @@ public final class SereneMaster extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Serene Master blocks, exchange its power and the power of target creature it's blocking until end of combat.
-        this.addAbility(new BlocksTriggeredAbility(new SereneMasterEffect(), false));
+        this.addAbility(new BlocksSourceTriggeredAbility(new SereneMasterEffect(), false));
 
     }
 

@@ -4,7 +4,7 @@ package mage.cards.a;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BlocksTriggeredAbility;
+import mage.abilities.common.BlocksSourceTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.LoseAbilitySourceEffect;
@@ -41,7 +41,7 @@ public final class AgelessSentinels extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Ageless Sentinels blocks, it becomes a Bird Giant, and it loses defender.
-        Ability ability = new BlocksTriggeredAbility(new AgelessSentinelsEffect(), false, false, true);
+        Ability ability = new BlocksSourceTriggeredAbility(new AgelessSentinelsEffect(), false, false, true);
         Effect effect = new LoseAbilitySourceEffect(DefenderAbility.getInstance(), Duration.WhileOnBattlefield);
         effect.setText("and it loses defender");
         ability.addEffect(effect);

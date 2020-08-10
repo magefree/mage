@@ -4,7 +4,7 @@ package mage.cards.g;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BlocksTriggeredAbility;
+import mage.abilities.common.BlocksSourceTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.Effect;
@@ -37,7 +37,7 @@ public final class GoblinSnowman extends CardImpl {
         //Whenever Goblin Snowman blocks, prevent all combat damage that would be dealt to and dealt by it this turn.
         Effect effect = new PreventCombatDamageBySourceEffect(Duration.EndOfTurn);
         effect.setText("prevent all combat damage that would be dealt to");
-        Ability ability = new BlocksTriggeredAbility(effect, false);
+        Ability ability = new BlocksSourceTriggeredAbility(effect, false);
         effect = new PreventCombatDamageToSourceEffect(Duration.EndOfTurn);
         effect.setText("and dealt by it this turn");
         ability.addEffect(effect);

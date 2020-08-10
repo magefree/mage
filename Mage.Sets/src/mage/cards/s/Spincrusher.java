@@ -4,7 +4,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BlocksTriggeredAbility;
+import mage.abilities.common.BlocksSourceTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
@@ -29,7 +29,7 @@ public final class Spincrusher extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Spincrusher blocks, put a +1/+1 counter on it.
-        this.addAbility(new BlocksTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
+        this.addAbility(new BlocksSourceTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
         // Remove a +1/+1 counter from Spincrusher: Spincrusher can't be blocked this turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new CantBeBlockedSourceEffect(Duration.EndOfTurn),

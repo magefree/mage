@@ -4,7 +4,7 @@ package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BlocksTriggeredAbility;
+import mage.abilities.common.BlocksSourceTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
@@ -27,7 +27,7 @@ public final class PrideGuardian extends CardImpl {
         
         this.addAbility(DefenderAbility.getInstance());
         // Whenever Pride Guardian blocks, you gain 3 life.
-        this.addAbility(new BlocksTriggeredAbility(new GainLifeEffect(3), false));
+        this.addAbility(new BlocksSourceTriggeredAbility(new GainLifeEffect(3), false));
     }
 
     public PrideGuardian(final PrideGuardian card) {

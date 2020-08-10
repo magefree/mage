@@ -3,7 +3,7 @@ package mage.cards.a;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BlocksTriggeredAbility;
+import mage.abilities.common.BlocksSourceTriggeredAbility;
 import mage.abilities.costs.common.ReturnToHandFromBattlefieldSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
@@ -35,7 +35,7 @@ public final class Aetherplasm extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Aetherplasm blocks a creature, you may return Aetherplasm to its owner's hand. If you do, you may put a creature card from your hand onto the battlefield blocking that creature.
-        this.addAbility(new BlocksTriggeredAbility(new DoIfCostPaid(new AetherplasmEffect(), new ReturnToHandFromBattlefieldSourceCost()), false, true));
+        this.addAbility(new BlocksSourceTriggeredAbility(new DoIfCostPaid(new AetherplasmEffect(), new ReturnToHandFromBattlefieldSourceCost()), false, true));
     }
 
     public Aetherplasm(final Aetherplasm card) {
