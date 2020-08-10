@@ -115,11 +115,12 @@ public final class MtgJson {
         if (stream == null) {
             File file = new File(filename);
             if (!file.exists()) {
+                System.out.println("Downloading " + filename + " to " + file.getAbsolutePath());
                 URLConnection connection = new URL("https://mtgjson.com/files/" + filename).openConnection();
                 connection.setRequestProperty("user-agent", "xmage");
                 InputStream download = connection.getInputStream();
                 Files.copy(download, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
-                System.out.println("Downloaded " + filename + " to " + file.getAbsolutePath());
+                System.out.println("Downloading DONE");
             } else {
                 System.out.println("Using " + filename + " from " + file.getAbsolutePath());
             }

@@ -193,9 +193,10 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_SCRYFALL_DOWNLOAD_SETS, "SWS"); // Star Wars
 
         // sample decks checking - some decks can contains unimplemented cards, so ignore it
+        // file name must be related to sample-decks folder
         // for linux/windows build system use paths constructor
         skipListCreate(SKIP_LIST_SAMPLE_DECKS);
-        skipListAddName(SKIP_LIST_SAMPLE_DECKS, Paths.get("\\Commander\\Commander 2019\\Merciless Rage.dck").toString()); // TODO: delete after Aeon Engine implemented
+        skipListAddName(SKIP_LIST_SAMPLE_DECKS, Paths.get("Commander", "Commander 2019", "Merciless Rage.dck").toString()); // TODO: delete after Aeon Engine implemented
     }
 
     private final ArrayList<String> outputMessages = new ArrayList<>();
@@ -481,11 +482,19 @@ public class VerifyCardDataTest {
     public void test_checkSampleDecks() {
         Collection<String> errorsList = new ArrayList<>();
 
-        // collect all files
-        final String rootPath = Paths.get("..\\Mage.Client\\release\\sample-decks").toString();
+        // workaround to run verify test from IDE or from maven's project root folder
+        Path rootPath = Paths.get("Mage.Client", "release", "sample-decks");
+        if (!Files.exists(rootPath)) {
+            rootPath = Paths.get("..", "Mage.Client", "release", "sample-decks");
+        }
+        if (!Files.exists(rootPath)) {
+            Assert.fail("Sample decks: unknown root folder " + rootPath.toAbsolutePath().toString());
+        }
+
+        // collect all files in all root's folders
         Collection<Path> filesList = new ArrayList<>();
         try {
-            Files.walkFileTree(Paths.get(rootPath), new SimpleFileVisitor<Path>() {
+            Files.walkFileTree(rootPath, new SimpleFileVisitor<Path>() {
                 @Override
                 public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
                     filesList.add(file);
@@ -496,12 +505,12 @@ public class VerifyCardDataTest {
             e.printStackTrace();
             errorsList.add("Error: sample deck - can't get folder content - " + e.getMessage());
         }
-        Assert.assertTrue("Sample decks: can't find any deck files in " + rootPath, filesList.size() > 0);
+        Assert.assertTrue("Sample decks: can't find any deck files in " + rootPath.toAbsolutePath().toString(), filesList.size() > 0);
 
         // try to open deck files
         int totalErrorFiles = 0;
         for (Path deckFile : filesList) {
-            String deckName = deckFile.toString().replace(rootPath, "");
+            String deckName = rootPath.relativize(deckFile).toString();
             if (skipListHaveName(SKIP_LIST_SAMPLE_DECKS, deckName)) {
                 continue;
             }
