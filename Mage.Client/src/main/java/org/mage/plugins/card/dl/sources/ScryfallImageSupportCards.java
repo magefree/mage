@@ -484,6 +484,7 @@ public class ScryfallImageSupportCards {
             //
             add("M21"); // Core Set 2021
             add("JMP"); // Jumpstart
+            add("2XM"); // Double Masters
         }
     };
 
