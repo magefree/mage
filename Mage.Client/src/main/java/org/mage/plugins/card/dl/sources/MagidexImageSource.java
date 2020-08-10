@@ -16,9 +16,8 @@ public enum MagidexImageSource implements CardImageSource {
 
     MagidexImageSource() {
         supportedSets = new LinkedHashSet<>();
-        // supportedSets.add("PTC"); // Prerelease Events
-        // supportedSets.add("FNMP");
-        supportedSets.add("JR");
+        // supportedSets.add("PPRE"); // Prerelease Events
+        // supportedSets.add("JR"); // TODO: Set was split into the individual sets as listed on Scryfall
         supportedSets.add("LEA");
         supportedSets.add("LEB");
         supportedSets.add("2ED");
@@ -258,9 +257,10 @@ public enum MagidexImageSource implements CardImageSource {
         return setName;
     }
 
+
     private static final Map<String, String> setNameReplacement = new HashMap<String, String>() {
         {
-            put("JR", "pJGP");
+            // put("JR", "pJGP"); // TODO: Set was split into the individual sets as listed on Scryfall
         }
     };
 

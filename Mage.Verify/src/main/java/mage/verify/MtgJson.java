@@ -25,30 +25,23 @@ public final class MtgJson {
 
     public static final boolean MTGJSON_IGNORE_NEW_PROPERTIES = true; // set it to false for full mtgjson checks and research (new fields finds or mtgjson updates)
 
+    // TODO: MtgJson now seems to use upper case set codes only.
+    //  Review the ones beginning with a lower case "p" and remove the redundant entries.
     static {
-        mtgJsonToXMageCodes.put("pWCQ", "WMCQ");
-        mtgJsonToXMageCodes.put("pSUS", "SUS");
-        mtgJsonToXMageCodes.put("pPRE", "PTC");
-        mtgJsonToXMageCodes.put("pMPR", "MPRP");
-        mtgJsonToXMageCodes.put("pMEI", "MBP");
-        mtgJsonToXMageCodes.put("pGTW", "GRC"); // pGTW - Gateway = GRC (WPN + Gateway in one inner set)
-        mtgJsonToXMageCodes.put("pWPN", "GRC"); // pWPN - Wizards Play Network = GRC (WPN + Gateway in one inner set)
-        mtgJsonToXMageCodes.put("pGRU", "GUR");
-        mtgJsonToXMageCodes.put("pGPX", "GPX");
+        mtgJsonToXMageCodes.put("pPRE", "PPRE");
+        // mtgJsonToXMageCodes.put("pMPR", "MPRP"); // TODO: The set was split into the individual sets
+        mtgJsonToXMageCodes.put("pGRU", "PGRU");
         mtgJsonToXMageCodes.put("pFNM", "FNMP");
-        mtgJsonToXMageCodes.put("pELP", "EURO");
-        mtgJsonToXMageCodes.put("pARL", "ARENA");
-        mtgJsonToXMageCodes.put("pALP", "APAC");
+        mtgJsonToXMageCodes.put("pELP", "PELP");
+        mtgJsonToXMageCodes.put("pARL", "PARL"); // TODO: What about the other Arena League sets (1999-2006)?
+        mtgJsonToXMageCodes.put("pALP", "PALP");
         mtgJsonToXMageCodes.put("PO2", "P02");
-        mtgJsonToXMageCodes.put("DD3_JVC", "DD3JVC");
+        mtgJsonToXMageCodes.put("DD3_JVC", "JVC");
         mtgJsonToXMageCodes.put("DD3_GVL", "DDD");
-        mtgJsonToXMageCodes.put("DD3_EVG", "DD3EVG");
+        mtgJsonToXMageCodes.put("DD3_EVG", "EVG");
         mtgJsonToXMageCodes.put("DD3_DVD", "DDC");
         mtgJsonToXMageCodes.put("NMS", "NEM");
-        mtgJsonToXMageCodes.put("MPS_AKH", "MPS-AKH");
         mtgJsonToXMageCodes.put("FRF_UGIN", "UGIN");
-        mtgJsonToXMageCodes.put("pCMP", "CP");
-
 
         // revert search
         for (Map.Entry<String, String> entry : mtgJsonToXMageCodes.entrySet()) {
@@ -122,11 +115,12 @@ public final class MtgJson {
         if (stream == null) {
             File file = new File(filename);
             if (!file.exists()) {
+                System.out.println("Downloading " + filename + " to " + file.getAbsolutePath());
                 URLConnection connection = new URL("https://mtgjson.com/files/" + filename).openConnection();
                 connection.setRequestProperty("user-agent", "xmage");
                 InputStream download = connection.getInputStream();
                 Files.copy(download, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
-                System.out.println("Downloaded " + filename + " to " + file.getAbsolutePath());
+                System.out.println("Downloading DONE");
             } else {
                 System.out.println("Using " + filename + " from " + file.getAbsolutePath());
             }

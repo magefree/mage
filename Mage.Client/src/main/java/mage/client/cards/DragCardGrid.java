@@ -1504,29 +1504,103 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                 JOptionPane.YES_NO_OPTION) == JOptionPane.NO_OPTION) {
             return;
         }
-
+        // TODO: Why are these a HashMap? It can be a HashSet<String> instead, as the value is never used in the code.
         Map<String, Integer> pimpedSets = new HashMap<>();
         Map<CardView, Integer> pimpedCards = new HashMap<>();
-        pimpedSets.put("CP", 1);
-        pimpedSets.put("JR", 1);
+        pimpedSets.put("PCMP", 1);
         pimpedSets.put("MPS", 1);
-        pimpedSets.put("CLASH", 1);
-        pimpedSets.put("ARENA", 1);
-        pimpedSets.put("UGIN", 1);
-        pimpedSets.put("WMCQ", 1);
-        pimpedSets.put("APAC", 1);
-        pimpedSets.put("EURO", 1);
-        pimpedSets.put("FNMP", 1);
-        pimpedSets.put("MGDC", 1);
-        pimpedSets.put("MPRP", 1);
+        pimpedSets.put("MP2", 1);
         pimpedSets.put("EXP", 1);
-        pimpedSets.put("GPX", 1);
-        pimpedSets.put("GRC", 1);
-        pimpedSets.put("MBP", 1);
-        pimpedSets.put("MLP", 1);
+        pimpedSets.put("CP1", 1);
+        pimpedSets.put("CP2", 1);
+        pimpedSets.put("CP3", 1);
+
+        // Judge Reward Gifts
+        pimpedSets.put("JGP", 1);
+        pimpedSets.put("G99", 1);
+        pimpedSets.put("G00", 1);
+        pimpedSets.put("G01", 1);
+        pimpedSets.put("G02", 1);
+        pimpedSets.put("G03", 1);
+        pimpedSets.put("G04", 1);
+        pimpedSets.put("G05", 1);
+        pimpedSets.put("G06", 1);
+        pimpedSets.put("G07", 1);
+        pimpedSets.put("G08", 1);
+        pimpedSets.put("G09", 1);
+        pimpedSets.put("G10", 1);
+        pimpedSets.put("G11", 1);
+        pimpedSets.put("J12", 1);
+        pimpedSets.put("J13", 1);
+        pimpedSets.put("J14", 1);
+        pimpedSets.put("J15", 1);
+        pimpedSets.put("J16", 1);
+        pimpedSets.put("J17", 1);
+        pimpedSets.put("J18", 1);
+        pimpedSets.put("J19", 1);
+        pimpedSets.put("J20", 1);
+
+        // Arena League
+        pimpedSets.put("PARL", 1);
+        pimpedSets.put("PAL99", 1);
+        pimpedSets.put("PAL00", 1);
+        pimpedSets.put("PAL01", 1);
+        pimpedSets.put("PAL02", 1);
+        pimpedSets.put("PAL03", 1);
+        pimpedSets.put("PAL04", 1);
+        pimpedSets.put("PAL05", 1);
+        pimpedSets.put("PAL06", 1);
+
+        pimpedSets.put("UGIN", 1);
+        pimpedSets.put("PALP", 1);
+        pimpedSets.put("PELP", 1);
+
+        //Friday Night Magic
+        pimpedSets.put("FNM", 1);
+        pimpedSets.put("F01", 1);
+        pimpedSets.put("F02", 1);
+        pimpedSets.put("F03", 1);
+        pimpedSets.put("F04", 1);
+        pimpedSets.put("F05", 1);
+        pimpedSets.put("F06", 1);
+        pimpedSets.put("F07", 1);
+        pimpedSets.put("F08", 1);
+        pimpedSets.put("F09", 1);
+        pimpedSets.put("F10", 1);
+        pimpedSets.put("F11", 1);
+        pimpedSets.put("F12", 1);
+        pimpedSets.put("F13", 1);
+        pimpedSets.put("F14", 1);
+        pimpedSets.put("F15", 1);
+        pimpedSets.put("F16", 1);
+        pimpedSets.put("F17", 1);
+        pimpedSets.put("F18", 1);
+
+        // Magic Player Rewards 2001-2011, except for 2002 (P02), which only contains tokens
+        pimpedSets.put("MPR", 1);
+        pimpedSets.put("P03", 1);
+        pimpedSets.put("P04", 1);
+        pimpedSets.put("P05", 1);
+        pimpedSets.put("P06", 1);
+        pimpedSets.put("P07", 1);
+        pimpedSets.put("P08", 1);
+        pimpedSets.put("P09", 1);
+        pimpedSets.put("P10", 1);
+        pimpedSets.put("P11", 1);
+
+        pimpedSets.put("OVNT", 1); // Vintage Championship
+        pimpedSets.put("PREL", 1); // Release Events
+        pimpedSets.put("PJSE", 1); // Junior Series Europe
+        pimpedSets.put("P2HG", 1); // Two-Headed Giant Tournament
+        pimpedSets.put("PGTW", 1); // Gateway 2006
+        pimpedSets.put("PJAS", 1); // Junior APAC Series
+
+        pimpedSets.put("EXP", 1);
+        pimpedSets.put("PGPX", 1);
+        pimpedSets.put("PMEI", 1);
+        pimpedSets.put("PREL", 1);
         pimpedSets.put("PLS", 1);
-        pimpedSets.put("PTC", 1);
-        pimpedSets.put("SUS", 1);
+        pimpedSets.put("PPRE", 1);
 
         String[] sets = pimpedSets.keySet().toArray(new String[pimpedSets.keySet().size()]);
         Boolean didModify = false;

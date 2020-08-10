@@ -187,11 +187,9 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             case SIDEBOARDING:
                 this.btnSubmit.setVisible(true);
                 this.btnSubmitTimer.setVisible(true);
-                if (mode == DeckEditorMode.SIDEBOARDING) {
-                    this.deckArea.setOrientation(/*limitedBuildingOrientation = */false);
-                } else /*(if (mode == LIMITED_BUILDING)*/ {
-                    this.deckArea.setOrientation(/*limitedBuildingOrientation = */true);
-                }
+                /*(if (mode == LIMITED_BUILDING)*/
+                /*limitedBuildingOrientation = */
+                this.deckArea.setOrientation(/*limitedBuildingOrientation = */mode != DeckEditorMode.SIDEBOARDING);
                 this.cardSelector.setVisible(false);
                 this.btnExit.setVisible(false);
                 this.btnImport.setVisible(false);
@@ -479,14 +477,14 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
                 @Override
                 protected boolean handleFilesDrop(boolean move, List<File> files) {
-                    loadDeck(files.get(0).getAbsolutePath());
+                    loadDeck(files.get(0).getAbsolutePath(), true);
                     return true;
                 }
 
                 @Override
                 protected boolean handlePlainTextDrop(boolean move, String text) {
                     String tmpFile = DeckUtil.writeTextToTempFile(text);
-                    loadDeck(tmpFile);
+                    loadDeck(tmpFile, false);
                     return true;
                 }
             }));
@@ -679,7 +677,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                     StringBuilder errorMessages = new StringBuilder();
                     Deck newDeck = null;
 
-                    newDeck = Deck.load(importer.importDeck(file.getPath(), errorMessages));
+                    newDeck = Deck.load(importer.importDeck(file.getPath(), errorMessages, true)); // file will be auto-fixed and saved on simple errors
                     processAndShowImportErrors(errorMessages);
 
                     if (newDeck != null) {
@@ -711,7 +709,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         dialog.showDialog();
 
         if (!dialog.getTmpPath().isEmpty()) {
-            loadDeck(dialog.getTmpPath());
+            loadDeck(dialog.getTmpPath(), false);
         }
     }
 
@@ -725,7 +723,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
             MageFrame.getDesktop().setCursor(new Cursor(Cursor.WAIT_CURSOR));
             try {
-                deckToAppend = Deck.load(DeckImporter.importDeckFromFile(dialog.getTmpPath(), errorMessages), true, true);
+                deckToAppend = Deck.load(DeckImporter.importDeckFromFile(dialog.getTmpPath(), errorMessages, false), true, true);
                 processAndShowImportErrors(errorMessages);
 
                 if (deckToAppend != null) {
@@ -819,11 +817,11 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         }
     }
 
-    private boolean loadDeck(String file) {
+    private boolean loadDeck(String file, boolean saveAutoFixedFile) {
         MageFrame.getDesktop().setCursor(new Cursor(Cursor.WAIT_CURSOR));
         try {
             StringBuilder errorMessages = new StringBuilder();
-            Deck newDeck = Deck.load(DeckImporter.importDeckFromFile(file, errorMessages), true, true);
+            Deck newDeck = Deck.load(DeckImporter.importDeckFromFile(file, errorMessages, saveAutoFixedFile), true, true);
             processAndShowImportErrors(errorMessages);
 
             if (newDeck != null) {
@@ -1343,7 +1341,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 Deck newDeck = null;
                 StringBuilder errorMessages = new StringBuilder();
 
-                newDeck = Deck.load(DeckImporter.importDeckFromFile(file.getPath(), errorMessages), true, true);
+                newDeck = Deck.load(DeckImporter.importDeckFromFile(file.getPath(), errorMessages, true), true, true);
                 processAndShowImportErrors(errorMessages);
 
                 if (newDeck != null) {
@@ -1394,7 +1392,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         try {
             MageFrame.getDesktop().setCursor(new Cursor(Cursor.WAIT_CURSOR));
             String path = DeckGenerator.generateDeck();
-            deck = Deck.load(DeckImporter.importDeckFromFile(path), true, true);
+            deck = Deck.load(DeckImporter.importDeckFromFile(path, false), true, true);
         } catch (GameException ex) {
             JOptionPane.showMessageDialog(MageFrame.getDesktop(), ex.getMessage(), "Error loading generated deck", JOptionPane.ERROR_MESSAGE);
         } catch (DeckGeneratorException ex) {

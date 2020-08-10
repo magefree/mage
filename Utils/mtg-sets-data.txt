@@ -45,13 +45,12 @@ Commander|CMD|
 Conspiracy|CNS|
 Conspiracy: Take the Crown|CN2|
 Conflux|CON|
-Champs|CP|
 Coldsnap|CSP|
 Duel Decks: Jace vs. Chandra|DD2|
-Duel Decks: Anthology, Divine vs. Demonic|DD3DVD|
-Duel Decks: Anthology, Elves vs. Goblins|DD3EVG|
-Duel Decks: Anthology, Garruk vs. Liliana|DD3GVL|
-Duel Decks: Anthology, Jace vs. Chandra|DD3JVC|
+Duel Decks: Anthology, Divine vs. Demonic|DVD|
+Duel Decks: Anthology, Elves vs. Goblins|EVG|
+Duel Decks: Anthology, Garruk vs. Liliana|GVL|
+Duel Decks: Anthology, Jace vs. Chandra|JVC|
 Duel Decks: Divine vs. Demonic|DDC|
 Duel Decks: Garruk vs. Liliana|DDD|
 Duel Decks: Phyrexia vs. the Coalition|DDE|
@@ -88,7 +87,6 @@ European Land Program|EURO|
 Eventide|EVE|
 Duel Decks: Elves vs. Goblins|EVG|
 Duel Decks: Elves vs. Inventors|DDU|
-Duels of the Planeswalkers Promos|DPAP|
 Pro Tour Promos|PPRO|
 Exodus|EXO|
 Zendikar Expeditions|EXP|
@@ -99,10 +97,10 @@ Future Sight|FUT|
 Global Series: Jiang Yanggu & Mu Yanling|GS1|
 Guildpact|GPT|
 Guilds of Ravnica|GRN|
-Grand Prix|GPX|
+Grand Prix|PGPX|
 WPN Gateway|GRC|
 Gatecrash|GTC|
-Guru|GUR|
+Guru|PGRU|
 Premium Deck Series: Slivers|H09|
 Homelands|HML|
 Heroes of the Realm|HOTR|
@@ -155,7 +153,6 @@ Mercadian Masques|MMQ|
 Morningtide|MOR|
 Magic Player Rewards|MPRP|
 Masterpiece Series|MPS|
-Masterpiece Series Amonkhet|MPS-AKH|
 Mirrodin|MRD|
 Nemesis|NEM|
 New Phyrexia|NPH|
@@ -172,7 +169,7 @@ Premium Deck Series: Graveborn|PD3|
 Planar Chaos|PLC|
 Planeshift|PLS|
 Portal|POR|
-Prerelease Events|PTC|
+Prerelease Events|PPRE|
 Portal Three Kingdoms|PTK|
 Ravnica Allegiance|RNA|
 Ravnica: City of Guilds|RAV|
@@ -223,7 +220,6 @@ Vintage Masters|VMA|
 War of the Spark|WAR|
 Welcome Deck 2016|W16|
 Welcome Deck 2017|W17|
-World Magic Cup Qualifier|WMCQ|
 Weatherlight|WTH|
 Worldwake|WWK|
 Ixalan|XLN|

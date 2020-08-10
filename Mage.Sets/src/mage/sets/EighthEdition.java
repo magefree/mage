@@ -20,6 +20,10 @@ public final class EighthEdition extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+
+        // scryfall combines Eighth Edition and Eighth Edition Box sets in one, but xmage must split it
+        // reason: remove box's cards from booster? TODO: implement booster ignore settings for cards instead max card number
+
         cards.add(new SetCardInfo("Abyssal Specter", 117, Rarity.UNCOMMON, mage.cards.a.AbyssalSpecter.class));
         cards.add(new SetCardInfo("Air Elemental", 59, Rarity.UNCOMMON, mage.cards.a.AirElemental.class));
         cards.add(new SetCardInfo("Aladdin's Ring", 291, Rarity.RARE, mage.cards.a.AladdinsRing.class));

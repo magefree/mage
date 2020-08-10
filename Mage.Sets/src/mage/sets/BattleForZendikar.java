@@ -343,7 +343,7 @@ public final class BattleForZendikar extends ExpansionSet {
             CardCriteria criteria = new CardCriteria();
             criteria.setCodes("EXP");
             criteria.minCardNumber(1);
-            criteria.maxCardNumber(25);
+            criteria.maxCardNumber(45);
             savedSpecialLand.addAll(CardRepository.instance.findCards(criteria));
         }
 

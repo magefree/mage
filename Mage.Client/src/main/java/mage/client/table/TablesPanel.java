@@ -95,7 +95,7 @@ public class TablesPanel extends javax.swing.JPanel {
     final JToggleButton[] filterButtons;
 
     // time formater
-    private PrettyTime timeFormater = new PrettyTime(Locale.ENGLISH);
+    private final PrettyTime timeFormater = new PrettyTime(Locale.ENGLISH);
 
     // time ago renderer
     TableCellRenderer timeAgoCellRenderer = new DefaultTableCellRenderer() {
@@ -127,7 +127,7 @@ public class TablesPanel extends javax.swing.JPanel {
 
     // datetime render
     TableCellRenderer datetimeCellRenderer = new DefaultTableCellRenderer() {
-        DateFormat datetimeFormater = new SimpleDateFormat("HH:mm:ss");
+        final DateFormat datetimeFormater = new SimpleDateFormat("HH:mm:ss");
 
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
@@ -147,8 +147,8 @@ public class TablesPanel extends javax.swing.JPanel {
     TableCellRenderer skillCellRenderer = new DefaultTableCellRenderer() {
 
         // base panel to render
-        private JPanel renderPanel = new JPanel();
-        private ImageIcon skillIcon = new ImageIcon(this.getClass().getResource("/info/yellow_star_16.png"));
+        private final JPanel renderPanel = new JPanel();
+        private final ImageIcon skillIcon = new ImageIcon(this.getClass().getResource("/info/yellow_star_16.png"));
 
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
@@ -181,7 +181,7 @@ public class TablesPanel extends javax.swing.JPanel {
     // seats render
     TableCellRenderer seatsCellRenderer = new DefaultTableCellRenderer() {
 
-        JLabel greenLabel = new JLabel();
+        final JLabel greenLabel = new JLabel();
 
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
@@ -1469,48 +1469,48 @@ public class TablesPanel extends javax.swing.JPanel {
         javax.swing.GroupLayout jPanelTopLayout = new javax.swing.GroupLayout(jPanelTop);
         jPanelTop.setLayout(jPanelTopLayout);
         jPanelTopLayout.setHorizontalGroup(
-            jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelTopLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnNewTable)
-                .addGap(6, 6, 6)
-                .addComponent(btnNewTournament)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(filterBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(filterBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelTopLayout.createSequentialGroup()
-                        .addComponent(btnQuickStartDuel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnQuickStartMCTS))
-                    .addComponent(btnQuickStartCommander))
-                .addContainerGap(540, Short.MAX_VALUE))
+                jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanelTopLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(btnNewTable)
+                                .addGap(6, 6, 6)
+                                .addComponent(btnNewTournament)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(filterBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(filterBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanelTopLayout.createSequentialGroup()
+                                                .addComponent(btnQuickStartDuel)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(btnQuickStartMCTS))
+                                        .addComponent(btnQuickStartCommander))
+                                .addContainerGap(540, Short.MAX_VALUE))
         );
         jPanelTopLayout.setVerticalGroup(
-            jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelTopLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnNewTable)
-                        .addComponent(btnNewTournament))
-                    .addGroup(jPanelTopLayout.createSequentialGroup()
-                        .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(filterBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanelTopLayout.createSequentialGroup()
+                jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanelTopLayout.createSequentialGroup()
+                                .addContainerGap()
                                 .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnQuickStartDuel)
-                                    .addComponent(btnQuickStartMCTS))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(filterBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanelTopLayout.createSequentialGroup()
-                                .addComponent(btnQuickStartCommander)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addContainerGap())
+                                        .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(btnNewTable)
+                                                .addComponent(btnNewTournament))
+                                        .addGroup(jPanelTopLayout.createSequentialGroup()
+                                                .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(filterBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addGroup(jPanelTopLayout.createSequentialGroup()
+                                                                .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addComponent(btnQuickStartDuel)
+                                                                        .addComponent(btnQuickStartMCTS))
+                                                                .addGap(0, 0, Short.MAX_VALUE)))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(filterBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addGroup(jPanelTopLayout.createSequentialGroup()
+                                                                .addComponent(btnQuickStartCommander)
+                                                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addContainerGap())
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1547,12 +1547,12 @@ public class TablesPanel extends javax.swing.JPanel {
         javax.swing.GroupLayout jPanelTablesLayout = new javax.swing.GroupLayout(jPanelTables);
         jPanelTables.setLayout(jPanelTablesLayout);
         jPanelTablesLayout.setHorizontalGroup(
-            jPanelTablesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPaneTables, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+                jPanelTablesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jSplitPaneTables, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
         );
         jPanelTablesLayout.setVerticalGroup(
-            jPanelTablesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPaneTables, javax.swing.GroupLayout.DEFAULT_SIZE, 672, Short.MAX_VALUE)
+                jPanelTablesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jSplitPaneTables, javax.swing.GroupLayout.DEFAULT_SIZE, 672, Short.MAX_VALUE)
         );
 
         jSplitPane1.setLeftComponent(jPanelTables);
@@ -1627,7 +1627,7 @@ public class TablesPanel extends javax.swing.JPanel {
                         + "5 Mountain" + System.lineSeparator()
                         + "5 Plains");
             }
-            DeckCardLists testDeck = DeckImporter.importDeckFromFile(testDeckFile);
+            DeckCardLists testDeck = DeckImporter.importDeckFromFile(testDeckFile, false);
 
             PlayerType aiType = useMonteCarloAI ? PlayerType.COMPUTER_MONTE_CARLO : PlayerType.COMPUTER_MAD;
             MatchOptions options = new MatchOptions(gameName, gameType, false, 2);

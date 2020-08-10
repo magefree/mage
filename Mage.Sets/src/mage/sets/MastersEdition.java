@@ -17,7 +17,7 @@ public final class MastersEdition extends ExpansionSet {
     }
 
     private MastersEdition() {
-        super("Masters Edition", "MED", ExpansionSet.buildDate(2007, 9, 10), SetType.MAGIC_ONLINE);
+        super("Masters Edition", "ME1", ExpansionSet.buildDate(2007, 9, 10), SetType.MAGIC_ONLINE);
         this.hasBasicLands = true;
         this.hasBoosters = true;
         this.numBoosterLands = 1;

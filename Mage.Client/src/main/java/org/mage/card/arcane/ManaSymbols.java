@@ -66,7 +66,18 @@ public final class ManaSymbols {
         onlyMythics.add("EXP");
         onlyMythics.add("MPS");
 
-        withoutSymbols.add("MPRP");
+        // Magic Player Reward sets
+        withoutSymbols.add("MPR");
+        withoutSymbols.add("P03");
+        withoutSymbols.add("P04");
+        withoutSymbols.add("P05");
+        withoutSymbols.add("P06");
+        withoutSymbols.add("P07");
+        withoutSymbols.add("P08");
+        withoutSymbols.add("P09");
+        withoutSymbols.add("P10");
+        withoutSymbols.add("P11");
+        
     }
 
     private static final Map<String, Dimension> setImagesExist = new HashMap<>();

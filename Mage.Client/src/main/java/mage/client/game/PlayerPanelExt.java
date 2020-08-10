@@ -1,13 +1,5 @@
 package mage.client.game;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.util.*;
-import javax.swing.*;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
 import mage.cards.decks.importer.DckDeckImporter;
 import mage.client.MageFrame;
 import mage.client.SessionHandler;
@@ -24,7 +16,6 @@ import mage.client.util.gui.countryBox.CountryUtil;
 import mage.components.ImagePanel;
 import mage.components.ImagePanelStyle;
 import mage.constants.CardType;
-import static mage.constants.Constants.*;
 import mage.constants.ManaType;
 import mage.counters.Counter;
 import mage.counters.CounterType;
@@ -32,6 +23,17 @@ import mage.designations.DesignationType;
 import mage.utils.timer.PriorityTimer;
 import mage.view.*;
 import org.mage.card.arcane.ManaSymbols;
+
+import javax.swing.*;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.util.*;
+
+import static mage.constants.Constants.*;
 
 /**
  * Enhanced player pane.
@@ -935,7 +937,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
     private void btnCheatActionPerformed(java.awt.event.ActionEvent evt) {
         DckDeckImporter deckImporter = new DckDeckImporter();
-        SessionHandler.cheat(gameId, playerId, deckImporter.importDeck("cheat.dck"));
+        SessionHandler.cheat(gameId, playerId, deckImporter.importDeck("cheat.dck", false));
     }
 
     public PlayerView getPlayer() {

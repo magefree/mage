@@ -17,7 +17,7 @@ public final class Anthologies extends ExpansionSet {
     }
 
     private Anthologies() {
-        super("Anthologies", "ATH", ExpansionSet.buildDate(1998, 11, 01), SetType.SUPPLEMENTAL);
+        super("Anthologies", "ATH", ExpansionSet.buildDate(1998, 11, 1), SetType.SUPPLEMENTAL);
         this.hasBoosters = false;
         this.hasBasicLands = true;
 

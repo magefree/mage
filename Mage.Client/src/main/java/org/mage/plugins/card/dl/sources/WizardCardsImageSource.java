@@ -55,7 +55,7 @@ public enum WizardCardsImageSource implements CardImageSource {
         languageAliases.put(CardLanguage.CHINES_TRADITION, "Chinese Traditional ");
 
         supportedSets = new LinkedHashSet<>();
-        // supportedSets.add("PTC"); // Prerelease Events
+        // supportedSets.add("PPRE"); // Prerelease Events
         supportedSets.add("LEA");
         supportedSets.add("LEB");
         supportedSets.add("2ED");
@@ -334,12 +334,11 @@ public enum WizardCardsImageSource implements CardImageSource {
         setsAliases.put("EVG", "Duel Decks: Elves vs. Goblins");
         setsAliases.put("EXO", "Exodus");
         setsAliases.put("FEM", "Fallen Empires");
-//        setsAliases.put("FNMP", "Friday Night Magic");
+//        setsAliases.put("FNM", "Friday Night Magic");
         setsAliases.put("FRF", "Fate Reforged");
         setsAliases.put("FUT", "Future Sight");
         setsAliases.put("GPT", "Guildpact");
-        setsAliases.put("GPX", "Grand Prix");
-        setsAliases.put("GRC", "WPN Gateway");
+        setsAliases.put("PGPX", "Grand Prix");
         setsAliases.put("GTC", "Gatecrash");
         setsAliases.put("H09", "Premium Deck Series: Slivers");
         setsAliases.put("HML", "Homelands");
@@ -350,7 +349,7 @@ public enum WizardCardsImageSource implements CardImageSource {
         setsAliases.put("INV", "Invasion");
         setsAliases.put("ISD", "Innistrad");
         setsAliases.put("JOU", "Journey into Nyx");
-        setsAliases.put("JR", "Judge Promo");
+        // setsAliases.put("JR", "Judge Promo");  // TODO: Set was split into the individual sets as listed on Scryfall
         setsAliases.put("JUD", "Judgment");
         setsAliases.put("KLD", "Kaladesh");
         setsAliases.put("KTK", "Khans of Tarkir");
@@ -365,21 +364,19 @@ public enum WizardCardsImageSource implements CardImageSource {
         setsAliases.put("M13", "Magic 2013");
         setsAliases.put("M14", "Magic 2014");
         setsAliases.put("M15", "Magic 2015");
-        setsAliases.put("MBP", "Media Inserts");
+        setsAliases.put("PMEI", "Media Inserts");
         setsAliases.put("MBS", "Mirrodin Besieged");
         setsAliases.put("ME2", "Masters Edition II");
         setsAliases.put("ME3", "Masters Edition III");
         setsAliases.put("ME4", "Masters Edition IV");
         setsAliases.put("MED", "Masters Edition");
-//        setsAliases.put("MGDC", "Game Day");
         setsAliases.put("MIR", "Mirage");
-        setsAliases.put("MLP", "Launch Party");
         setsAliases.put("MMA", "Modern Masters");
         setsAliases.put("MM2", "Modern Masters 2015");
         setsAliases.put("MM3", "Modern Masters 2017");
         setsAliases.put("MMQ", "Mercadian Masques");
         setsAliases.put("MOR", "Morningtide");
-        setsAliases.put("MPRP", "Magic Player Rewards");
+        // setsAliases.put("MPRP", "Magic Player Rewards");
         setsAliases.put("MPS", "Masterpiece Series");
         setsAliases.put("MRD", "Mirrodin");
         setsAliases.put("NEM", "Nemesis");
@@ -395,7 +392,7 @@ public enum WizardCardsImageSource implements CardImageSource {
         setsAliases.put("PLS", "Planeshift");
         setsAliases.put("PO2", "Portal Second Age");
         setsAliases.put("POR", "Portal");
-        setsAliases.put("PTC", "Prerelease Events");
+        setsAliases.put("PPRE", "Prerelease Events");
         setsAliases.put("PTK", "Portal Three Kingdoms");
         setsAliases.put("RAV", "Ravnica: City of Guilds");
         setsAliases.put("ROE", "Rise of the Eldrazi");
@@ -436,7 +433,6 @@ public enum WizardCardsImageSource implements CardImageSource {
         setsAliases.put("VMA", "Vintage Masters");
         setsAliases.put("W16", "Welcome Deck 2016");
         setsAliases.put("W17", "Welcome Deck 2017");
-        setsAliases.put("WMCQ", "World Magic Cup Qualifier");
         setsAliases.put("WTH", "Weatherlight");
         setsAliases.put("WWK", "Worldwake");
         setsAliases.put("ZEN", "Zendikar");
@@ -462,7 +458,7 @@ public enum WizardCardsImageSource implements CardImageSource {
         String collectorId = card.getCollectorId();
         String cardSet = card.getSet();
         if (collectorId == null || cardSet == null) {
-            throw new Exception("Wrong parameters for image: collector id: " + collectorId + ",card set: " + cardSet);
+            throw new Exception("Wrong parameters for image: collector id: " + collectorId + ", card set: " + cardSet);
         }
         if (card.isFlippedSide()) { //doesn't support rotated images
             return null;

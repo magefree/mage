@@ -1,11 +1,11 @@
 package org.mage.plugins.card.images;
 
-import java.util.Locale;
-import java.util.Objects;
 import mage.util.CardUtil;
 
+import java.util.Locale;
+import java.util.Objects;
+
 /**
- *
  * @author North
  */
 public class CardDownloadData {
@@ -106,10 +106,7 @@ public class CardDownloadData {
         if (this.secondSide != other.secondSide) {
             return false;
         }
-        if (this.isType2 != other.isType2) {
-            return false;
-        }
-        return true;
+        return this.isType2 == other.isType2;
     }
 
     @Override
@@ -132,6 +129,13 @@ public class CardDownloadData {
 
     public Integer getCollectorIdAsInt() {
         return CardUtil.parseCardNumberAsInt(collectorId);
+    }
+
+    public String getCollectorIdAsFileName() {
+        // return file names compatible card number (e.g. replace special symbols)
+        return collectorId
+                .replace("*", "star")
+                .replace("★", "star");
     }
 
     public String getCollectorIdPostfix() {

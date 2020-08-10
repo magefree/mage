@@ -3,7 +3,7 @@ package mage.cards.decks.importer;
 import mage.cards.decks.DeckCardLists;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class DraftLogImporterTest {
 
@@ -19,7 +19,7 @@ public class DraftLogImporterTest {
             }
         };
         DeckCardLists deck = importer.importDeck(
-                "src/test/java/mage/cards/decks/importer/samples/testdeck.draft", errors);
+                "src/test/java/mage/cards/decks/importer/samples/testdeck.draft", errors, false);
 
         TestDeckChecker.checker()
                 .addMain("Raging Ravine", 1)

@@ -4,8 +4,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import mage.cards.ExpansionSet;
-import mage.cards.Sets;
 import mage.client.util.CardLanguage;
 import mage.util.CardUtil;
 import org.apache.log4j.Logger;
@@ -30,7 +28,7 @@ public enum ScryfallImageSource implements CardImageSource {
 
     private final Map<CardLanguage, String> languageAliases;
     private CardLanguage currentLanguage = CardLanguage.ENGLISH; // working language
-    private Map<CardDownloadData, String> preparedUrls = new HashMap<>();
+    private final Map<CardDownloadData, String> preparedUrls = new HashMap<>();
 
     ScryfallImageSource() {
         // LANGUAGES
@@ -68,34 +66,34 @@ public enum ScryfallImageSource implements CardImageSource {
         // TOKENS TRY
 
         // tokens support only direct links
-        if (baseUrl == null && isToken) {
+        if (isToken) {
             baseUrl = ScryfallImageSupportTokens.findTokenLink(card.getSet(), card.getName(), card.getType());
             alternativeUrl = null;
         }
 
         // CARDS TRY
 
-        // direct links to images (non localization)
+        // direct links to images via hardcoded API path. Used for cards with non-ASCII collector numbers
         if (baseUrl == null) {
-            baseUrl = ScryfallImageSupportCards.findDirectDownloadLink(card.getSet(), card.getName(), card.getCollectorId());
-            alternativeUrl = null;
-        }
+            String apiUrl = ScryfallImageSupportCards.findDirectDownloadLink(card.getSet(), card.getName(), card.getCollectorId());
+            if (apiUrl != null) {
+                baseUrl = apiUrl + localizedCode + "?format=image";
+                alternativeUrl = apiUrl + defaultCode + "?format=image";
 
-        // art variation cards
-        // ARN and POR use † notation
-        // PLS uses ★ notation
-        if (baseUrl == null && card.getUsesVariousArt() && card.getSet().matches("ARN|POR|PLS")) {
-            String scryfallCollectorId = card.getCollectorIdAsInt().toString();
-
-            if (card.getCollectorId().endsWith("b")) {
-                if (card.getSet().matches("ARN|POR")) {
-                    scryfallCollectorId += "†";
-                } else if (card.getSet().matches("PLS")) {
-                    scryfallCollectorId += "★";
+                // workaround to use cards without english images (some promos or special cards)
+                if (Objects.equals(baseUrl, alternativeUrl) && baseUrl.endsWith("/en?format=image")) {
+                    alternativeUrl = alternativeUrl.replace("/en?format=image", "/?format=image");
                 }
             }
+        }
 
-            scryfallCollectorId = CardUtil.urlEncode(scryfallCollectorId);
+        // ARN and POR uses † notation for art variation cards
+        if (baseUrl == null && card.getUsesVariousArt() && card.getSet().matches("ARN|POR")) {
+            String collectorId = card.getCollectorId();
+            if (collectorId.endsWith("b"))
+                collectorId = collectorId.replace("b", "†");
+
+            final String scryfallCollectorId = CardUtil.urlEncode(collectorId);
             baseUrl = "https://api.scryfall.com/cards/" + formatSetName(card.getSet(), isToken) + "/"
                     + scryfallCollectorId + "/" + localizedCode + "?format=image";
             alternativeUrl = "https://api.scryfall.com/cards/" + formatSetName(card.getSet(), isToken) + "/"
@@ -107,9 +105,9 @@ public enum ScryfallImageSource implements CardImageSource {
         // the back face is prepared beforehand
         if (baseUrl == null && card.isTwoFacedCard() && !card.isSecondSide()) {
             baseUrl = "https://api.scryfall.com/cards/" + formatSetName(card.getSet(), isToken) + "/"
-                    + card.getCollectorIdAsInt() + "/" + localizedCode + "?format=image";
+                    + card.getCollectorId() + "/" + localizedCode + "?format=image";
             alternativeUrl = "https://api.scryfall.com/cards/" + formatSetName(card.getSet(), isToken) + "/"
-                    + card.getCollectorIdAsInt() + "/" + defaultCode + "?format=image";
+                    + card.getCollectorId() + "/" + defaultCode + "?format=image";
         }
 
         // basic cards by api call (redirect to img link)
@@ -136,7 +134,7 @@ public enum ScryfallImageSource implements CardImageSource {
     private String getFaceImageUrl(Proxy proxy, CardDownloadData card, boolean isToken, String localizationCode) throws Exception {
         // connect to Scryfall API
         final URL cardUrl = new URL("https://api.scryfall.com/cards/" + formatSetName(card.getSet(), isToken) + "/"
-                + (card.getCollectorIdAsInt() % 1000) + "/" + localizationCode);
+                + card.getCollectorId() + "/" + localizationCode);
         URLConnection request = proxy == null ? cardUrl.openConnection() : cardUrl.openConnection(proxy);
         request.connect();
 
@@ -145,7 +143,7 @@ public enum ScryfallImageSource implements CardImageSource {
         JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent()));
         JsonObject jsonCard = root.getAsJsonObject();
         if (!jsonCard.has("card_faces")) {
-            throw new Exception("Couldn't find card_faces in Card JSON.");
+            throw new Exception("Couldn't find card_faces in Card JSON.: " + cardUrl.toString());
         }
         JsonArray jsonCardFaces = jsonCard.getAsJsonArray("card_faces");
         JsonObject jsonCardFace = jsonCardFaces.get(card.isSecondSide() ? 1 : 0).getAsJsonObject();
@@ -160,8 +158,6 @@ public enum ScryfallImageSource implements CardImageSource {
         Proxy proxy = downloadServiceInfo.getProxy();
 
         preparedUrls.clear();
-
-        final List<ExpansionSet.SetCardInfo> sixthEditionCards = Sets.findSet("6ED").getSetCardInfo();
 
         for (CardDownloadData card : downloadList) {
             // need cancel
@@ -179,42 +175,8 @@ public enum ScryfallImageSource implements CardImageSource {
                 try {
                     url = getFaceImageUrl(proxy, card, card.isToken(), localizedCode);
                 } catch (Exception e) {
-                    logger.warn("Failed to prepare image URL (back face) for " + card.getName() + " (" + card.getSet() + ") #" + card.getCollectorId());
-                    downloadServiceInfo.incErrorCount();
-                    continue;
-                }
-
-                preparedUrls.put(card, url);
-            }
-
-            // if a S00 card is in 6ED, it's actually a 6ED card
-            if (card.getSet().equals("S00") && sixthEditionCards.stream().anyMatch(sixthEditionCard -> sixthEditionCard.getName().equals(card.getName()))) {
-                // we have direct links for the lands because there are multiple search results
-                if (card.getUsesVariousArt()) { // lands are the only defined multiple art cards in S00 in XMage
-                    continue;
-                }
-
-                String url = null;
-
-                try {
-                    url = searchCard(proxy, "6ED", card.getName());
-                } catch (Exception e) {
-                    logger.warn("Failed to prepare image URL (S00) for " + card.getName() + " (" + card.getSet() + ") #" + card.getCollectorId());
-                    downloadServiceInfo.incErrorCount();
-                    continue;
-                }
-
-                preparedUrls.put(card, url);
-            }
-
-            // if an E01 card number is above 106, it's actually an AKH card
-            if (card.getSet().equals("E01") && card.getCollectorIdAsInt() > 106) {
-                String url = null;
-
-                try {
-                    url = searchCard(proxy, "AKH", card.getName());
-                } catch (Exception e) {
-                    logger.warn("Failed to prepare image URL (E01) for " + card.getName() + " (" + card.getSet() + ") #" + card.getCollectorId());
+                    logger.warn("Failed to prepare image URL (back face) for " + card.getName() + " (" + card.getSet() + ") #"
+                            + card.getCollectorId() + ", Error Message: " + e.getMessage());
                     downloadServiceInfo.incErrorCount();
                     continue;
                 }
@@ -227,24 +189,6 @@ public enum ScryfallImageSource implements CardImageSource {
         }
 
         return true;
-    }
-
-    private String searchCard(Proxy proxy, String set, String name) throws Exception {
-        final URL searchUrl = new URL("https://api.scryfall.com/cards/search?q=s:" + CardUtil.urlEncode(set + " " + name));
-        URLConnection request = proxy == null ? searchUrl.openConnection() : searchUrl.openConnection(proxy);
-        request.connect();
-
-        // parse the response and return the image URI from the correct card face
-        JsonParser jp = new JsonParser();
-        JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent()));
-        JsonObject searchResult = root.getAsJsonObject();
-        if (searchResult.get("total_cards").getAsInt() != 1) {
-            throw new Exception("Card not found in Scryfall.");
-        }
-        JsonObject jsonCard = searchResult.getAsJsonArray("data").get(0).getAsJsonObject();
-        JsonObject jsonImageUris = jsonCard.getAsJsonObject("image_uris");
-
-        return jsonImageUris.get("large").getAsString();
     }
 
     @Override
@@ -275,7 +219,8 @@ public enum ScryfallImageSource implements CardImageSource {
 
     @Override
     public float getAverageSize() {
-        return 90;
+        // March 2020: 46_354 image files with total size 9_545_168 KiB
+        return 206;
     }
 
     @Override

@@ -3,9 +3,7 @@ package mage.cards.decks.importer;
 import mage.cards.decks.DeckCardLists;
 import org.junit.Test;
 
-import java.io.File;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class MtgaImporterTest {
 
@@ -21,7 +19,7 @@ public class MtgaImporterTest {
         };
         StringBuilder errors = new StringBuilder();
         DeckCardLists deck = importer.importDeck(
-                "src/test/java/mage/cards/decks/importer/samples/testdeck.mtga", errors);
+                "src/test/java/mage/cards/decks/importer/samples/testdeck.mtga", errors, false);
 
         TestDeckChecker.checker()
                 .addMain("Niv-Mizzet Reborn", 1)

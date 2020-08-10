@@ -1,0 +1,160 @@
+package mage.sets;
+
+import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
+import mage.constants.SetType;
+
+/**
+ * https://scryfall.com/sets/pthb
+ */
+public class TherosBeyondDeathPromos extends ExpansionSet {
+
+    private static final TherosBeyondDeathPromos instance = new TherosBeyondDeathPromos();
+
+    public static TherosBeyondDeathPromos getInstance() {
+        return instance;
+    }
+
+    private TherosBeyondDeathPromos() {
+        super("Theros Beyond Death Promos", "PTHB", ExpansionSet.buildDate(2020, 1, 24), SetType.PROMOTIONAL);
+        this.hasBoosters = false;
+        this.hasBasicLands = false;
+
+        cards.add(new SetCardInfo("Allure of the Unknown", "207p", Rarity.RARE, mage.cards.a.AllureOfTheUnknown.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Allure of the Unknown", "207s", Rarity.RARE, mage.cards.a.AllureOfTheUnknown.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Aphemia, the Cacophony", "84p", Rarity.RARE, mage.cards.a.AphemiaTheCacophony.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Aphemia, the Cacophony", "84s", Rarity.RARE, mage.cards.a.AphemiaTheCacophony.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Arasta of the Endless Web", "165p", Rarity.RARE, mage.cards.a.ArastaOfTheEndlessWeb.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Arasta of the Endless Web", "165s", Rarity.RARE, mage.cards.a.ArastaOfTheEndlessWeb.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Archon of Sun's Grace", "3p", Rarity.RARE, mage.cards.a.ArchonOfSunsGrace.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Archon of Sun's Grace", "3s", Rarity.RARE, mage.cards.a.ArchonOfSunsGrace.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ashiok's Erasure", "43p", Rarity.RARE, mage.cards.a.AshioksErasure.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ashiok's Erasure", "43s", Rarity.RARE, mage.cards.a.AshioksErasure.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ashiok, Nightmare Muse", "208p", Rarity.MYTHIC, mage.cards.a.AshiokNightmareMuse.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ashiok, Nightmare Muse", "208s", Rarity.MYTHIC, mage.cards.a.AshiokNightmareMuse.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Atris, Oracle of Half-Truths", "209p", Rarity.RARE, mage.cards.a.AtrisOracleOfHalfTruths.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Atris, Oracle of Half-Truths", "209s", Rarity.RARE, mage.cards.a.AtrisOracleOfHalfTruths.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Bronzehide Lion", "210p", Rarity.RARE, mage.cards.b.BronzehideLion.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Bronzehide Lion", "210s", Rarity.RARE, mage.cards.b.BronzehideLion.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Calix, Destiny's Hand", "211p", Rarity.MYTHIC, mage.cards.c.CalixDestinysHand.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Calix, Destiny's Hand", "211s", Rarity.MYTHIC, mage.cards.c.CalixDestinysHand.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Dalakos, Crafter of Wonders", "212p", Rarity.RARE, mage.cards.d.DalakosCrafterOfWonders.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Dalakos, Crafter of Wonders", "212s", Rarity.RARE, mage.cards.d.DalakosCrafterOfWonders.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Dream Trawler", "214p", Rarity.RARE, mage.cards.d.DreamTrawler.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Dream Trawler", "214s", Rarity.RARE, mage.cards.d.DreamTrawler.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Dryad of the Ilysian Grove", "169p", Rarity.RARE, mage.cards.d.DryadOfTheIlysianGrove.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Dryad of the Ilysian Grove", "169s", Rarity.RARE, mage.cards.d.DryadOfTheIlysianGrove.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Eat to Extinction", "90p", Rarity.RARE, mage.cards.e.EatToExtinction.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Eat to Extinction", "90s", Rarity.RARE, mage.cards.e.EatToExtinction.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Eidolon of Obstruction", "12p", Rarity.RARE, mage.cards.e.EidolonOfObstruction.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Eidolon of Obstruction", "12s", Rarity.RARE, mage.cards.e.EidolonOfObstruction.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Elspeth Conquers Death", "13p", Rarity.RARE, mage.cards.e.ElspethConquersDeath.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Elspeth Conquers Death", "13s", Rarity.RARE, mage.cards.e.ElspethConquersDeath.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Elspeth, Sun's Nemesis", "14p", Rarity.MYTHIC, mage.cards.e.ElspethSunsNemesis.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Elspeth, Sun's Nemesis", "14s", Rarity.MYTHIC, mage.cards.e.ElspethSunsNemesis.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Enigmatic Incarnation", "215p", Rarity.RARE, mage.cards.e.EnigmaticIncarnation.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Enigmatic Incarnation", "215s", Rarity.RARE, mage.cards.e.EnigmaticIncarnation.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Erebos's Intervention", "94p", Rarity.RARE, mage.cards.e.ErebossIntervention.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Erebos's Intervention", "94s", Rarity.RARE, mage.cards.e.ErebossIntervention.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Erebos, Bleak-Hearted", "93p", Rarity.MYTHIC, mage.cards.e.ErebosBleakHearted.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Erebos, Bleak-Hearted", "93s", Rarity.MYTHIC, mage.cards.e.ErebosBleakHearted.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Gallia of the Endless Dance", "217p", Rarity.RARE, mage.cards.g.GalliaOfTheEndlessDance.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Gallia of the Endless Dance", "217s", Rarity.RARE, mage.cards.g.GalliaOfTheEndlessDance.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Gravebreaker Lamia", "98p", Rarity.RARE, mage.cards.g.GravebreakerLamia.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Gravebreaker Lamia", "98s", Rarity.RARE, mage.cards.g.GravebreakerLamia.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Haktos the Unscarred", "218p", Rarity.RARE, mage.cards.h.HaktosTheUnscarred.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Haktos the Unscarred", "218s", Rarity.RARE, mage.cards.h.HaktosTheUnscarred.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Heliod's Intervention", "19p", Rarity.RARE, mage.cards.h.HeliodsIntervention.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Heliod's Intervention", "19s", Rarity.RARE, mage.cards.h.HeliodsIntervention.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Heliod, Sun-Crowned", "18p", Rarity.MYTHIC, mage.cards.h.HeliodSunCrowned.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Heliod, Sun-Crowned", "18s", Rarity.MYTHIC, mage.cards.h.HeliodSunCrowned.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Idyllic Tutor", "24p", Rarity.RARE, mage.cards.i.IdyllicTutor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Idyllic Tutor", "24s", Rarity.RARE, mage.cards.i.IdyllicTutor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kiora Bests the Sea God", "52p", Rarity.MYTHIC, mage.cards.k.KioraBestsTheSeaGod.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kiora Bests the Sea God", "52s", Rarity.MYTHIC, mage.cards.k.KioraBestsTheSeaGod.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Klothys, God of Destiny", "220p", Rarity.MYTHIC, mage.cards.k.KlothysGodOfDestiny.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Klothys, God of Destiny", "220s", Rarity.MYTHIC, mage.cards.k.KlothysGodOfDestiny.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kroxa, Titan of Death's Hunger", "221p", Rarity.MYTHIC, mage.cards.k.KroxaTitanOfDeathsHunger.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kroxa, Titan of Death's Hunger", "221s", Rarity.MYTHIC, mage.cards.k.KroxaTitanOfDeathsHunger.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kunoros, Hound of Athreos", "222p", Rarity.RARE, mage.cards.k.KunorosHoundOfAthreos.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kunoros, Hound of Athreos", "222s", Rarity.RARE, mage.cards.k.KunorosHoundOfAthreos.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Labyrinth of Skophos", "243p", Rarity.RARE, mage.cards.l.LabyrinthOfSkophos.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Labyrinth of Skophos", "243s", Rarity.RARE, mage.cards.l.LabyrinthOfSkophos.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mantle of the Wolf", "178p", Rarity.RARE, mage.cards.m.MantleOfTheWolf.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mantle of the Wolf", "178s", Rarity.RARE, mage.cards.m.MantleOfTheWolf.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Nadir Kraken", "55p", Rarity.RARE, mage.cards.n.NadirKraken.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Nadir Kraken", "55s", Rarity.RARE, mage.cards.n.NadirKraken.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Nessian Boar", "181p", Rarity.RARE, mage.cards.n.NessianBoar.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Nessian Boar", "181s", Rarity.RARE, mage.cards.n.NessianBoar.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Nightmare Shepherd", "108p", Rarity.RARE, mage.cards.n.NightmareShepherd.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Nightmare Shepherd", "108s", Rarity.RARE, mage.cards.n.NightmareShepherd.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Nylea's Intervention", "188p", Rarity.RARE, mage.cards.n.NyleasIntervention.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Nylea's Intervention", "188s", Rarity.RARE, mage.cards.n.NyleasIntervention.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Nylea, Keen-Eyed", "185p", Rarity.MYTHIC, mage.cards.n.NyleaKeenEyed.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Nylea, Keen-Eyed", "185s", Rarity.MYTHIC, mage.cards.n.NyleaKeenEyed.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Nyx Lotus", "235p", Rarity.RARE, mage.cards.n.NyxLotus.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Nyx Lotus", "235s", Rarity.RARE, mage.cards.n.NyxLotus.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Nyxbloom Ancient", "190p", Rarity.MYTHIC, mage.cards.n.NyxbloomAncient.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Nyxbloom Ancient", "190s", Rarity.MYTHIC, mage.cards.n.NyxbloomAncient.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ox of Agonas", "147p", Rarity.MYTHIC, mage.cards.o.OxOfAgonas.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ox of Agonas", "147s", Rarity.MYTHIC, mage.cards.o.OxOfAgonas.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Phoenix of Ash", "148p", Rarity.RARE, mage.cards.p.PhoenixOfAsh.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Phoenix of Ash", "148s", Rarity.RARE, mage.cards.p.PhoenixOfAsh.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Polukranos, Unchained", "224p", Rarity.MYTHIC, mage.cards.p.PolukranosUnchained.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Polukranos, Unchained", "224s", Rarity.MYTHIC, mage.cards.p.PolukranosUnchained.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Protean Thaumaturge", "60p", Rarity.RARE, mage.cards.p.ProteanThaumaturge.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Protean Thaumaturge", "60s", Rarity.RARE, mage.cards.p.ProteanThaumaturge.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Purphoros's Intervention", "151p", Rarity.RARE, mage.cards.p.PurphorossIntervention.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Purphoros's Intervention", "151s", Rarity.RARE, mage.cards.p.PurphorossIntervention.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Purphoros, Bronze-Blooded", "150p", Rarity.MYTHIC, mage.cards.p.PurphorosBronzeBlooded.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Purphoros, Bronze-Blooded", "150s", Rarity.MYTHIC, mage.cards.p.PurphorosBronzeBlooded.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Setessan Champion", "198p", Rarity.RARE, mage.cards.s.SetessanChampion.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Setessan Champion", "198s", Rarity.RARE, mage.cards.s.SetessanChampion.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Shadowspear", "236p", Rarity.RARE, mage.cards.s.Shadowspear.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Shadowspear", "236s", Rarity.RARE, mage.cards.s.Shadowspear.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Shatter the Sky", "37p", Rarity.RARE, mage.cards.s.ShatterTheSky.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Shatter the Sky", "37s", Rarity.RARE, mage.cards.s.ShatterTheSky.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Storm Herald", "156p", Rarity.RARE, mage.cards.s.StormHerald.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Storm Herald", "156s", Rarity.RARE, mage.cards.s.StormHerald.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Storm's Wrath", "157p", Rarity.RARE, mage.cards.s.StormsWrath.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Storm's Wrath", "157s", Rarity.RARE, mage.cards.s.StormsWrath.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Taranika, Akroan Veteran", "39p", Rarity.RARE, mage.cards.t.TaranikaAkroanVeteran.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Taranika, Akroan Veteran", "39s", Rarity.RARE, mage.cards.t.TaranikaAkroanVeteran.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Tectonic Giant", "158p", Rarity.RARE, mage.cards.t.TectonicGiant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Tectonic Giant", "158s", Rarity.RARE, mage.cards.t.TectonicGiant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Temple of Abandon", "244p", Rarity.RARE, mage.cards.t.TempleOfAbandon.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Temple of Abandon", "244s", Rarity.RARE, mage.cards.t.TempleOfAbandon.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Temple of Deceit", "245p", Rarity.RARE, mage.cards.t.TempleOfDeceit.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Temple of Deceit", "245s", Rarity.RARE, mage.cards.t.TempleOfDeceit.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Temple of Enlightenment", "246p", Rarity.RARE, mage.cards.t.TempleOfEnlightenment.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Temple of Enlightenment", "246s", Rarity.RARE, mage.cards.t.TempleOfEnlightenment.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Temple of Malice", "247p", Rarity.RARE, mage.cards.t.TempleOfMalice.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Temple of Malice", "247s", Rarity.RARE, mage.cards.t.TempleOfMalice.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Temple of Plenty", "248p", Rarity.RARE, mage.cards.t.TempleOfPlenty.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Temple of Plenty", "248s", Rarity.RARE, mage.cards.t.TempleOfPlenty.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Thassa's Intervention", "72p", Rarity.RARE, mage.cards.t.ThassasIntervention.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Thassa's Intervention", "72s", Rarity.RARE, mage.cards.t.ThassasIntervention.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Thassa's Oracle", "73p", Rarity.RARE, mage.cards.t.ThassasOracle.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Thassa's Oracle", "73s", Rarity.RARE, mage.cards.t.ThassasOracle.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Thassa, Deep-Dwelling", "71p", Rarity.MYTHIC, mage.cards.t.ThassaDeepDwelling.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Thassa, Deep-Dwelling", "71s", Rarity.MYTHIC, mage.cards.t.ThassaDeepDwelling.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Akroan War", "124p", Rarity.RARE, mage.cards.t.TheAkroanWar.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Akroan War", "124s", Rarity.RARE, mage.cards.t.TheAkroanWar.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The First Iroan Games", "170p", Rarity.RARE, mage.cards.t.TheFirstIroanGames.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The First Iroan Games", "170s", Rarity.RARE, mage.cards.t.TheFirstIroanGames.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Thryx, the Sudden Storm", "76p", Rarity.RARE, mage.cards.t.ThryxTheSuddenStorm.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Thryx, the Sudden Storm", "76s", Rarity.RARE, mage.cards.t.ThryxTheSuddenStorm.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Treacherous Blessing", "117p", Rarity.RARE, mage.cards.t.TreacherousBlessing.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Treacherous Blessing", "117s", Rarity.RARE, mage.cards.t.TreacherousBlessing.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Tymaret Calls the Dead", "118p", Rarity.RARE, mage.cards.t.TymaretCallsTheDead.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Tymaret Calls the Dead", "118s", Rarity.RARE, mage.cards.t.TymaretCallsTheDead.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Underworld Breach", "161p", Rarity.RARE, mage.cards.u.UnderworldBreach.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Underworld Breach", "161s", Rarity.RARE, mage.cards.u.UnderworldBreach.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Uro, Titan of Nature's Wrath", "229p", Rarity.MYTHIC, mage.cards.u.UroTitanOfNaturesWrath.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Uro, Titan of Nature's Wrath", "229s", Rarity.MYTHIC, mage.cards.u.UroTitanOfNaturesWrath.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Wavebreak Hippocamp", "80p", Rarity.RARE, mage.cards.w.WavebreakHippocamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Wavebreak Hippocamp", "80s", Rarity.RARE, mage.cards.w.WavebreakHippocamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Woe Strider", "123p", Rarity.RARE, mage.cards.w.WoeStrider.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Woe Strider", "123s", Rarity.RARE, mage.cards.w.WoeStrider.class, NON_FULL_USE_VARIOUS));
+     }
+}

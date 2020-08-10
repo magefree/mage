@@ -18,8 +18,10 @@ public final class EuropeanLandProgram extends ExpansionSet {
     }
 
     private EuropeanLandProgram() {
-        super("European Land Program", "EURO", ExpansionSet.buildDate(2000, 2, 14), SetType.PROMOTIONAL);
+        super("European Land Program", "PELP", ExpansionSet.buildDate(2000, 2, 14), SetType.PROMOTIONAL);
         this.hasBoosters = false;
+        this.hasBasicLands = true;
+
         cards.add(new SetCardInfo("Forest", 1, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 6, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 11, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));

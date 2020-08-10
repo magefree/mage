@@ -1,21 +1,18 @@
-Hexproof Enchantress
-[general]
-constructed
-[main]
-3 Island
-5 Plains
-4 Invisible Stalker
-4 Mentor of the Meek
-4 Mesa Enchantress
-4 Mirran Crusader
-3 Angelic Destiny
-4 Bonds of Faith
-4 Nevermore
-4 Oblivion Ring
-3 Ghost Quarter
-4 Glacial Fortress
-2 Moorland Haunt
-4 Seachrome Coast
-4 Geist of Saint Traft
-4 Gitaxian Probe
-[sideboard]
+3 [M21:263] Island
+5 [M21:260] Plains
+4 [ISD:60] Invisible Stalker
+4 [M19:27] Mentor of the Meek
+4 [M12:25] Mesa Enchantress
+4 [MBS:14] Mirran Crusader
+3 [M12:3] Angelic Destiny
+4 [ISD:5] Bonds of Faith
+4 [ISD:25] Nevermore
+4 [M13:22] Oblivion Ring
+3 [ISD:240] Ghost Quarter
+4 [XLN:255] Glacial Fortress
+2 [ISD:244] Moorland Haunt
+4 [SOM:229] Seachrome Coast
+4 [ISD:213] Geist of Saint Traft
+4 [NPH:35] Gitaxian Probe
+LAYOUT MAIN:(1,5)(EDH_POWER_LEVEL,false,73)|([M21:263],[M21:263],[M21:263],[M21:260],[M21:260],[M21:260],[M21:260],[M21:260],[M12:3],[M12:3],[M12:3],[ISD:5],[ISD:5],[ISD:5],[ISD:5],[NPH:35],[NPH:35],[NPH:35],[NPH:35])([ISD:25],[ISD:25],[ISD:25],[ISD:25])([ISD:244],[ISD:244],[ISD:213],[ISD:213],[ISD:213],[ISD:213])([ISD:60],[ISD:60],[ISD:60],[ISD:60],[M12:25],[M12:25],[M12:25],[M12:25],[MBS:14],[MBS:14],[MBS:14],[MBS:14],[M13:22],[M13:22],[M13:22],[M13:22],[ISD:240],[ISD:240],[ISD:240])([M19:27],[M19:27],[M19:27],[M19:27],[XLN:255],[XLN:255],[XLN:255],[XLN:255],[SOM:229],[SOM:229],[SOM:229],[SOM:229])
+LAYOUT SIDEBOARD:(0,0)(EDH_POWER_LEVEL,false,50)|

@@ -114,7 +114,7 @@ public class DeckValidatorTest extends MageTestBase {
     @Test
     public void testModernCounterspell1() {
         ArrayList<CardNameAmount> deckList = new ArrayList<>();
-        deckList.add(new CardNameAmount("DD3JVC", 24, 4));
+        deckList.add(new CardNameAmount("JVC", 24, 4));
         deckList.add(new CardNameAmount("Mountain", 56));
         Assert.assertFalse("Counterspell not allowed in modern", testDeckValid(new Modern(), deckList));
 
@@ -134,7 +134,7 @@ public class DeckValidatorTest extends MageTestBase {
         Assert.assertFalse("Counterspell not allowed in modern", testDeckValid(new Modern(), deckList));
 
         deckList.clear();
-        deckList.add(new CardNameAmount("JR", 5, 4));
+        deckList.add(new CardNameAmount("G00", 1, 4));
         deckList.add(new CardNameAmount("Mountain", 56));
         Assert.assertFalse("Counterspell not allowed in modern", testDeckValid(new Modern(), deckList));
 
@@ -149,7 +149,7 @@ public class DeckValidatorTest extends MageTestBase {
         Assert.assertFalse("Counterspell not allowed in modern", testDeckValid(new Modern(), deckList));
 
         deckList.clear();
-        deckList.add(new CardNameAmount("FNMP", 66, 4));
+        deckList.add(new CardNameAmount("F05", 11, 4));
         deckList.add(new CardNameAmount("Mountain", 56));
         Assert.assertFalse("Counterspell not allowed in modern", testDeckValid(new Modern(), deckList));
 
@@ -210,11 +210,6 @@ public class DeckValidatorTest extends MageTestBase {
 
         deckList.clear();
         deckList.add(new CardNameAmount("TMP", 57, 4));
-        deckList.add(new CardNameAmount("Mountain", 56));
-        Assert.assertFalse("Counterspell not allowed in modern", testDeckValid(new Modern(), deckList));
-
-        deckList.clear();
-        deckList.add(new CardNameAmount("S00", 12, 4));
         deckList.add(new CardNameAmount("Mountain", 56));
         Assert.assertFalse("Counterspell not allowed in modern", testDeckValid(new Modern(), deckList));
 

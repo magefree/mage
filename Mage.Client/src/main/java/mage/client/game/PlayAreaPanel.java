@@ -498,11 +498,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         this.battlefieldPanel.init(gameId, bigCard);
         this.gameId = gameId;
         this.playerId = player.getPlayerId();
-        if (SessionHandler.isTestMode()) {
-            this.btnCheat.setVisible(true);
-        } else {
-            this.btnCheat.setVisible(false);
-        }
+        this.btnCheat.setVisible(SessionHandler.isTestMode());
     }
 
     public final void update(GameView game, PlayerView player, Set<UUID> possibleTargets) {
@@ -561,7 +557,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
     }
 
     private void btnCheatActionPerformed(java.awt.event.ActionEvent evt) {
-        SessionHandler.cheat(gameId, playerId, DeckImporter.importDeckFromFile("cheat.dck"));
+        SessionHandler.cheat(gameId, playerId, DeckImporter.importDeckFromFile("cheat.dck", false));
     }
 
     public boolean isSmallMode() {

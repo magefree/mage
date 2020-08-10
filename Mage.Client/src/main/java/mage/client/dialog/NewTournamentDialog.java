@@ -687,11 +687,11 @@ public class NewTournamentDialog extends MageDialog {
                 table.getTableId(),
                 this.player1Panel.getPlayerName(),
                 PlayerType.HUMAN, 1,
-                DeckImporter.importDeckFromFile(this.player1Panel.getDeckFile()),
+                DeckImporter.importDeckFromFile(this.player1Panel.getDeckFile(), true),
                 tOptions.getPassword())) {
             for (TournamentPlayerPanel player : players) {
                 if (player.getPlayerType().getSelectedItem() != PlayerType.HUMAN) {
-                    if (!player.joinTournamentTable(roomId, table.getTableId(), DeckImporter.importDeckFromFile(this.player1Panel.getDeckFile()))) {
+                    if (!player.joinTournamentTable(roomId, table.getTableId(), DeckImporter.importDeckFromFile(this.player1Panel.getDeckFile(), true))) {
                         // error message must be send by sever
                         SessionHandler.removeTable(roomId, table.getTableId());
                         table = null;
@@ -743,11 +743,7 @@ public class NewTournamentDialog extends MageDialog {
 
     private void spnNumSeatsStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnNumSeatsStateChanged
         int numSeats = (Integer) this.spnNumSeats.getValue();
-        if (numSeats > 2) {
-            this.spnNumPlayers.setEnabled(false);
-        } else {
-            this.spnNumPlayers.setEnabled(true);
-        }
+        this.spnNumPlayers.setEnabled(numSeats <= 2);
         updateNumSeats();
     }//GEN-LAST:event_spnNumSeatsStateChanged
 
@@ -1209,7 +1205,7 @@ public class NewTournamentDialog extends MageDialog {
                 if (!(cubeFromDeckFilename.isEmpty())) {
                     Deck cubeFromDeck = new Deck();
                     try {
-                        cubeFromDeck = Deck.load(DeckImporter.importDeckFromFile(cubeFromDeckFilename), true, true);
+                        cubeFromDeck = Deck.load(DeckImporter.importDeckFromFile(cubeFromDeckFilename, true), true, true);
                     } catch (GameException e1) {
                         JOptionPane.showMessageDialog(MageFrame.getDesktop(), e1.getMessage(), "Error loading deck", JOptionPane.ERROR_MESSAGE);
                     }

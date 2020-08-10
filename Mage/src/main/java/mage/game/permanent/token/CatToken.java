@@ -19,7 +19,7 @@ public final class CatToken extends TokenImpl {
         power = new MageInt(2);
         toughness = new MageInt(2);
 
-        availableImageSetCodes = Arrays.asList("MBP", "C14", "C15", "C17", "C18", "M13", "M14", "MBS", "SOM");
+        availableImageSetCodes = Arrays.asList("PMEI", "C14", "C15", "C17", "C18", "M13", "M14", "MBS", "SOM");
     }
 
     public CatToken(final CatToken token) {

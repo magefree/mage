@@ -16,7 +16,7 @@ public final class MythicEdition extends ExpansionSet {
     }
 
     private MythicEdition() {
-        super("Mythic Edition", "MEDM", ExpansionSet.buildDate(2018, 10, 5), SetType.SUPPLEMENTAL);  // MEDM cause MED uses for master edition
+        super("Mythic Edition", "MED", ExpansionSet.buildDate(2018, 10, 5), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Ajani, Mentor of Heroes", "RA5", Rarity.MYTHIC, mage.cards.a.AjaniMentorOfHeroes.class));

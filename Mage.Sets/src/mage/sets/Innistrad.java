@@ -116,7 +116,7 @@ public final class Innistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Gallows Warden", 16, Rarity.UNCOMMON, mage.cards.g.GallowsWarden.class));
         cards.add(new SetCardInfo("Galvanic Juggernaut", 222, Rarity.UNCOMMON, mage.cards.g.GalvanicJuggernaut.class));
         cards.add(new SetCardInfo("Garruk Relentless", 181, Rarity.MYTHIC, mage.cards.g.GarrukRelentless.class));
-        cards.add(new SetCardInfo("Garruk, the Veil-Cursed", 1181, Rarity.MYTHIC, mage.cards.g.GarrukTheVeilCursed.class));
+        cards.add(new SetCardInfo("Garruk, the Veil-Cursed", 181, Rarity.MYTHIC, mage.cards.g.GarrukTheVeilCursed.class));
         cards.add(new SetCardInfo("Gatstaf Howler", 182, Rarity.UNCOMMON, mage.cards.g.GatstafHowler.class));
         cards.add(new SetCardInfo("Gatstaf Shepherd", 182, Rarity.UNCOMMON, mage.cards.g.GatstafShepherd.class));
         cards.add(new SetCardInfo("Gavony Township", 239, Rarity.RARE, mage.cards.g.GavonyTownship.class));
@@ -151,7 +151,7 @@ public final class Innistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Hysterical Blindness", 59, Rarity.COMMON, mage.cards.h.HystericalBlindness.class));
         cards.add(new SetCardInfo("Infernal Plunge", 148, Rarity.COMMON, mage.cards.i.InfernalPlunge.class));
         cards.add(new SetCardInfo("Inquisitor's Flail", 227, Rarity.UNCOMMON, mage.cards.i.InquisitorsFlail.class));
-        cards.add(new SetCardInfo("Insectile Aberration", 1051, Rarity.COMMON, mage.cards.i.InsectileAberration.class));
+        cards.add(new SetCardInfo("Insectile Aberration", 51, Rarity.COMMON, mage.cards.i.InsectileAberration.class));
         cards.add(new SetCardInfo("Instigator Gang", 149, Rarity.RARE, mage.cards.i.InstigatorGang.class));
         cards.add(new SetCardInfo("Intangible Virtue", 19, Rarity.UNCOMMON, mage.cards.i.IntangibleVirtue.class));
         cards.add(new SetCardInfo("Into the Maw of Hell", 150, Rarity.UNCOMMON, mage.cards.i.IntoTheMawOfHell.class));
@@ -170,9 +170,9 @@ public final class Innistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Laboratory Maniac", 61, Rarity.RARE, mage.cards.l.LaboratoryManiac.class));
         cards.add(new SetCardInfo("Lantern Spirit", 62, Rarity.UNCOMMON, mage.cards.l.LanternSpirit.class));
         cards.add(new SetCardInfo("Liliana of the Veil", 105, Rarity.MYTHIC, mage.cards.l.LilianaOfTheVeil.class));
-        cards.add(new SetCardInfo("Lord of Lineage", 1090, Rarity.RARE, mage.cards.l.LordOfLineage.class));
+        cards.add(new SetCardInfo("Lord of Lineage", 90, Rarity.RARE, mage.cards.l.LordOfLineage.class));
         cards.add(new SetCardInfo("Lost in the Mist", 63, Rarity.COMMON, mage.cards.l.LostInTheMist.class));
-        cards.add(new SetCardInfo("Ludevic's Abomination", 1064, Rarity.RARE, mage.cards.l.LudevicsAbomination.class));
+        cards.add(new SetCardInfo("Ludevic's Abomination", 64, Rarity.RARE, mage.cards.l.LudevicsAbomination.class));
         cards.add(new SetCardInfo("Ludevic's Test Subject", 64, Rarity.RARE, mage.cards.l.LudevicsTestSubject.class));
         cards.add(new SetCardInfo("Lumberknot", 191, Rarity.UNCOMMON, mage.cards.l.Lumberknot.class));
         cards.add(new SetCardInfo("Make a Wish", 192, Rarity.UNCOMMON, mage.cards.m.MakeAWish.class));
@@ -276,7 +276,7 @@ public final class Innistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 258, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Terror of Kruin Pass", 152, Rarity.RARE, mage.cards.t.TerrorOfKruinPass.class));
         cards.add(new SetCardInfo("Think Twice", 83, Rarity.COMMON, mage.cards.t.ThinkTwice.class));
-        cards.add(new SetCardInfo("Thraben Militia", 1038, Rarity.COMMON, mage.cards.t.ThrabenMilitia.class));
+        cards.add(new SetCardInfo("Thraben Militia", 38, Rarity.COMMON, mage.cards.t.ThrabenMilitia.class));
         cards.add(new SetCardInfo("Thraben Purebloods", 37, Rarity.COMMON, mage.cards.t.ThrabenPurebloods.class));
         cards.add(new SetCardInfo("Thraben Sentry", 38, Rarity.COMMON, mage.cards.t.ThrabenSentry.class));
         cards.add(new SetCardInfo("Tormented Pariah", 165, Rarity.COMMON, mage.cards.t.TormentedPariah.class));

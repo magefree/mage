@@ -4,7 +4,6 @@ import com.google.common.collect.ImmutableMap;
 import mage.cards.decks.CardNameUtil;
 import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLists;
-import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 
 import java.util.Collections;
@@ -21,18 +20,19 @@ public class MtgaImporter extends PlainTextDeckImporter {
     private static final Map<String, String> SET_REMAPPING = ImmutableMap.of("DAR", "DOM");
     private static final Pattern MTGA_PATTERN = Pattern.compile(
             "(\\p{Digit}+)" +
-            "\\p{javaWhitespace}+" +
-            "(" + CARD_NAME_PATTERN.pattern() + ")" +
-            "\\p{javaWhitespace}+" +
-            "\\((\\p{Alnum}+)\\)" +
-            "\\p{javaWhitespace}+" +
-            "(\\p{Digit}+)");
+                    "\\p{javaWhitespace}+" +
+                    "(" + CARD_NAME_PATTERN.pattern() + ")" +
+                    "\\p{javaWhitespace}+" +
+                    "\\((\\p{Alnum}+)\\)" +
+                    "\\p{javaWhitespace}+" +
+                    "(\\p{Digit}+)");
 
     private final CardLookup lookup = getCardLookup();
     private boolean sideboard = false;
 
     @Override
-    protected void readLine(String line, DeckCardLists deckList) {
+    protected void readLine(String line, DeckCardLists deckList, FixedInfo fixedInfo) {
+
         if (line.trim().equals("")) {
             sideboard = true;
             return;

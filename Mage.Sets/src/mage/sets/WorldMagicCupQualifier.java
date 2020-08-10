@@ -6,7 +6,8 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
+ * https://scryfall.com/sets/pwcq
+ * https://mtg.gamepedia.com/World_Magic_Cup_Qualifiers
  * @author fireshoes
  */
 public final class WorldMagicCupQualifier extends ExpansionSet {
@@ -18,10 +19,10 @@ public final class WorldMagicCupQualifier extends ExpansionSet {
     }
 
     private WorldMagicCupQualifier() {
-        super("World Magic Cup Qualifier", "WMCQ", ExpansionSet.buildDate(2011, 6, 17), SetType.PROMOTIONAL);
+        super("World Magic Cup Qualifier", "PWCQ", ExpansionSet.buildDate(2011, 6, 17), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
-        // https://mtg.gamepedia.com/World_Magic_Cup_Qualifiers
+
         cards.add(new SetCardInfo("Abrupt Decay", 2016, Rarity.RARE, mage.cards.a.AbruptDecay.class));
         cards.add(new SetCardInfo("Geist of Saint Traft", 2014, Rarity.MYTHIC, mage.cards.g.GeistOfSaintTraft.class));
         cards.add(new SetCardInfo("Inkmoth Nexus", 2017, Rarity.SPECIAL, mage.cards.i.InkmothNexus.class));

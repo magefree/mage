@@ -1,4 +1,3 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -6,6 +5,7 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
+ * https://scryfall.com/sets/ha2
  * @author mikalinn777
  */
 public final class HistoricAnthology2 extends ExpansionSet {
@@ -17,15 +17,14 @@ public final class HistoricAnthology2 extends ExpansionSet {
     }
 
     private HistoricAnthology2() {
-        super("Historic Anthology 2", "HA2", ExpansionSet.buildDate(2020, 3, 12), SetType.SUPPLEMENTAL);
-        this.blockName = "Reprint";
+        super("Historic Anthology 2", "HA2", ExpansionSet.buildDate(2020, 3, 12), SetType.MAGIC_ONLINE);
         this.hasBoosters = false;
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Ancestral Mask", 13, Rarity.COMMON, mage.cards.a.AncestralMask.class));
         cards.add(new SetCardInfo("Barren Moor", 19, Rarity.COMMON, mage.cards.b.BarrenMoor.class));
         cards.add(new SetCardInfo("Bojuka Bog", 20, Rarity.COMMON, mage.cards.b.BojukaBog.class));
         cards.add(new SetCardInfo("Brain Maggot", 7, Rarity.UNCOMMON, mage.cards.b.BrainMaggot.class));
-        cards.add(new SetCardInfo("Dragonmaster Outcast", 11, Rarity.COMMON, mage.cards.d.DragonmasterOutcast.class));
+        cards.add(new SetCardInfo("Dragonmaster Outcast", 11, Rarity.MYTHIC, mage.cards.d.DragonmasterOutcast.class));
         cards.add(new SetCardInfo("Forgotten Cave", 21, Rarity.COMMON, mage.cards.f.ForgottenCave.class));
         cards.add(new SetCardInfo("Ghost Quarter", 22, Rarity.UNCOMMON, mage.cards.g.GhostQuarter.class));
         cards.add(new SetCardInfo("Goblin Ruinblaster", 12, Rarity.UNCOMMON, mage.cards.g.GoblinRuinblaster.class));
@@ -35,7 +34,7 @@ public final class HistoricAnthology2 extends ExpansionSet {
         cards.add(new SetCardInfo("Maelstrom Pulse", 16, Rarity.RARE, mage.cards.m.MaelstromPulse.class));
         cards.add(new SetCardInfo("Meddling Mage", 17, Rarity.RARE, mage.cards.m.MeddlingMage.class));
         cards.add(new SetCardInfo("Merrow Reejerey", 5, Rarity.UNCOMMON, mage.cards.m.MerrowReejerey.class));
-        cards.add(new SetCardInfo("Nyxfleece Ram", 1, Rarity.UNCOMMON, mage.cards.n.NyxFleeceRam.class));
+        cards.add(new SetCardInfo("Nyx-Fleece Ram", 1, Rarity.UNCOMMON, mage.cards.n.NyxFleeceRam.class));
         cards.add(new SetCardInfo("Pack Rat", 8, Rarity.RARE, mage.cards.p.PackRat.class));
         cards.add(new SetCardInfo("Platinum Angel", 18, Rarity.MYTHIC, mage.cards.p.PlatinumAngel.class));
         cards.add(new SetCardInfo("Ranger of Eos", 2, Rarity.RARE, mage.cards.r.RangerOfEos.class));
@@ -46,8 +45,5 @@ public final class HistoricAnthology2 extends ExpansionSet {
         cards.add(new SetCardInfo("Tranquil Thicket", 25, Rarity.COMMON, mage.cards.t.TranquilThicket.class));
         cards.add(new SetCardInfo("Virulent Plague", 9, Rarity.UNCOMMON, mage.cards.v.VirulentPlague.class));
         cards.add(new SetCardInfo("Waste Not", 10, Rarity.RARE, mage.cards.w.WasteNot.class));
-
-
-    }
-
+     }
 }

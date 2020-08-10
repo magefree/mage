@@ -79,6 +79,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_CARD_IMAGES_USE_DEFAULT = "cardImagesUseDefault";
     public static final String KEY_CARD_IMAGES_PATH = "cardImagesPath";
     public static final String KEY_CARD_IMAGES_THREADS = "cardImagesThreads";
+    public static final String KEY_CARD_IMAGES_THREADS_DEFAULT = "3";
     public static final String KEY_CARD_IMAGES_SAVE_TO_ZIP = "cardImagesSaveToZip";
     public static final String KEY_CARD_IMAGES_PREF_LANGUAGE = "cardImagesPreferedImageLaguage";
 
@@ -343,6 +344,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
         return CardLanguage.valueByCode(getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PREF_LANGUAGE, CardLanguage.ENGLISH.getCode()));
     }
 
+    public static Integer getPrefDownloadThreads() {
+        return Integer.parseInt(getCachedValue(KEY_CARD_IMAGES_THREADS, KEY_CARD_IMAGES_THREADS_DEFAULT));
+    }
+
     private static class ImageFileFilter extends FileFilter {
 
         @Override
@@ -486,7 +491,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         txtImageFolderPath = new javax.swing.JTextField();
         btnBrowseImageLocation = new javax.swing.JButton();
         cbSaveToZipFiles = new javax.swing.JCheckBox();
-        cbPreferedImageLanguage = new javax.swing.JComboBox<String>();
+        cbPreferedImageLanguage = new javax.swing.JComboBox<>();
         labelPreferedImageLanguage = new javax.swing.JLabel();
         labelNumberOfDownloadThreads = new javax.swing.JLabel();
         cbNumberOfDownloadThreads = new javax.swing.JComboBox();
@@ -547,7 +552,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         txtURLServerList = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         lblProxyType = new javax.swing.JLabel();
-        cbProxyType = new javax.swing.JComboBox<ProxyType>();
+        cbProxyType = new javax.swing.JComboBox<>();
         pnlProxySettings = new javax.swing.JPanel();
         pnlProxy = new javax.swing.JPanel();
         lblProxyServer = new javax.swing.JLabel();
@@ -588,7 +593,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         tabThemes = new javax.swing.JPanel();
         themesCategory = new javax.swing.JPanel();
         lbSelectLabel = new javax.swing.JLabel();
-        cbTheme = new javax.swing.JComboBox<ThemeType>();
+        cbTheme = new javax.swing.JComboBox<>();
         lbThemeHint = new javax.swing.JLabel();
         saveButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
@@ -1556,12 +1561,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
         });
 
         cbPreferedImageLanguage.setMaximumRowCount(20);
-        cbPreferedImageLanguage.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
+        cbPreferedImageLanguage.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
 
         labelPreferedImageLanguage.setText("Default images language:");
         labelPreferedImageLanguage.setFocusable(false);
 
-        labelNumberOfDownloadThreads.setText("Number of download threads:");
+        labelNumberOfDownloadThreads.setText("Default download threads:");
 
         cbNumberOfDownloadThreads.setMaximumRowCount(20);
         cbNumberOfDownloadThreads.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
@@ -3465,7 +3470,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
             updateCache(KEY_CARD_IMAGES_PATH, path);
         }
         load(prefs, dialog.cbSaveToZipFiles, KEY_CARD_IMAGES_SAVE_TO_ZIP, "true");
-        dialog.cbNumberOfDownloadThreads.setSelectedItem(MageFrame.getPreferences().get(KEY_CARD_IMAGES_THREADS, "10"));
+        dialog.cbNumberOfDownloadThreads.setSelectedItem(MageFrame.getPreferences().get(KEY_CARD_IMAGES_THREADS, KEY_CARD_IMAGES_THREADS_DEFAULT));
         dialog.cbPreferedImageLanguage.setSelectedItem(MageFrame.getPreferences().get(KEY_CARD_IMAGES_PREF_LANGUAGE, CardLanguage.ENGLISH.getCode()));
 
         // rendering settings
@@ -3762,10 +3767,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
         if (CACHE.containsKey(key)) {
             return CACHE.get(key);
         } else {
-            Preferences prefs = MageFrame.getPreferences();
-            String value = prefs.get(key, def);
+            String value = MageFrame.getPreferences().get(key, def);
             if (value == null) {
-                return null;
+                return def;
             }
             CACHE.put(key, value);
             return value;

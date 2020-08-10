@@ -1,0 +1,167 @@
+package mage.sets;
+
+import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
+import mage.constants.SetType;
+
+/**
+ * https://scryfall.com/sets/wc02
+ */
+public class WorldChampionshipDecks2002 extends ExpansionSet {
+
+    private static final WorldChampionshipDecks2002 instance = new WorldChampionshipDecks2002();
+
+    public static WorldChampionshipDecks2002 getInstance() {
+        return instance;
+    }
+
+    private WorldChampionshipDecks2002() {
+        super("World Championship Decks 2002", "WC02", ExpansionSet.buildDate(2002, 8, 14), SetType.PROMOTIONAL);
+        this.hasBoosters = false;
+        this.hasBasicLands = true;
+
+        cards.add(new SetCardInfo("Anurid Brushhopper", "bk137", Rarity.RARE, mage.cards.a.AnuridBrushhopper.class));
+        cards.add(new SetCardInfo("Birds of Paradise", "shh231", Rarity.RARE, mage.cards.b.BirdsOfParadise.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Birds of Paradise", "bk231", Rarity.RARE, mage.cards.b.BirdsOfParadise.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Breakthrough", "rl26", Rarity.UNCOMMON, mage.cards.b.Breakthrough.class));
+        cards.add(new SetCardInfo("Brushland", "bk326", Rarity.RARE, mage.cards.b.Brushland.class));
+        cards.add(new SetCardInfo("Call of the Herd", "bk231a", Rarity.RARE, mage.cards.c.CallOfTheHerd.class));
+        cards.add(new SetCardInfo("Careful Study", "rl70", Rarity.COMMON, mage.cards.c.CarefulStudy.class));
+        cards.add(new SetCardInfo("Cephalid Coliseum", "cr317", Rarity.UNCOMMON, mage.cards.c.CephalidColiseum.class));
+        cards.add(new SetCardInfo("Chainer's Edict", "cr57", Rarity.UNCOMMON, mage.cards.c.ChainersEdict.class));
+        cards.add(new SetCardInfo("Circular Logic", "shh33", Rarity.UNCOMMON, mage.cards.c.CircularLogic.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Circular Logic", "cr33", Rarity.UNCOMMON, mage.cards.c.CircularLogic.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("City of Brass", "bk327sb", Rarity.RARE, mage.cards.c.CityOfBrass.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("City of Brass", "bk327", Rarity.RARE, mage.cards.c.CityOfBrass.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Coffin Purge", "cr124sb", Rarity.COMMON, mage.cards.c.CoffinPurge.class));
+        cards.add(new SetCardInfo("Compost", "rl235sb", Rarity.UNCOMMON, mage.cards.c.Compost.class));
+        cards.add(new SetCardInfo("Counterspell", "cr67", Rarity.COMMON, mage.cards.c.Counterspell.class));
+        cards.add(new SetCardInfo("Cunning Wish", "cr37", Rarity.RARE, mage.cards.c.CunningWish.class));
+        cards.add(new SetCardInfo("Darkwater Catacombs", "cr319", Rarity.RARE, mage.cards.d.DarkwaterCatacombs.class));
+        cards.add(new SetCardInfo("Deep Analysis", "shh36", Rarity.COMMON, mage.cards.d.DeepAnalysis.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Deep Analysis", "cr36", Rarity.COMMON, mage.cards.d.DeepAnalysis.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Disrupt", "rl51sb", Rarity.UNCOMMON, mage.cards.d.Disrupt.class));
+        cards.add(new SetCardInfo("Duress", "cr131sb", Rarity.COMMON, mage.cards.d.Duress.class));
+        cards.add(new SetCardInfo("Fact or Fiction", "cr57sb", Rarity.UNCOMMON, mage.cards.f.FactOrFiction.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Fact or Fiction", "cr57a", Rarity.UNCOMMON, mage.cards.f.FactOrFiction.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Fire // Ice", "shh128", Rarity.UNCOMMON, mage.cards.f.FireIce.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Fire // Ice", "bk128", Rarity.UNCOMMON, mage.cards.f.FireIce.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Flametongue Kavu", "shh60sb", Rarity.UNCOMMON, mage.cards.f.FlametongueKavu.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Flametongue Kavu", "shh60", Rarity.UNCOMMON, mage.cards.f.FlametongueKavu.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Flametongue Kavu", "bk60", Rarity.UNCOMMON, mage.cards.f.FlametongueKavu.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", "shh350", Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", "rl350", Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", "shh349", Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", "rl349", Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", "bk349", Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", "shh348", Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", "rl348", Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", "bk348", Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", "shh347", Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", "rl347", Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", "bk347", Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", "shh331", Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", "rl331", Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", "bk331", Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", "shh330", Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", "rl330", Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", "bk330", Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", "shh329", Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", "rl329", Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", "bk329", Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", "shh328", Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", "rl328", Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", "bk328", Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Gainsay", "shh26sb", Rarity.UNCOMMON, mage.cards.g.Gainsay.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Gainsay", "cr26sb", Rarity.UNCOMMON, mage.cards.g.Gainsay.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Genesis", "rl117", Rarity.RARE, mage.cards.g.Genesis.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Genesis", "bk117sb", Rarity.RARE, mage.cards.g.Genesis.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ghastly Demise", "cr139sb", Rarity.COMMON, mage.cards.g.GhastlyDemise.class));
+        cards.add(new SetCardInfo("Global Ruin", "bk18sb", Rarity.RARE, mage.cards.g.GlobalRuin.class));
+        cards.add(new SetCardInfo("Glory", "bk11sb", Rarity.RARE, mage.cards.g.Glory.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Glory", "bk11", Rarity.RARE, mage.cards.g.Glory.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Hibernation", "cr79sb", Rarity.UNCOMMON, mage.cards.h.Hibernation.class));
+        cards.add(new SetCardInfo("Intrepid Hero", "bk22sb", Rarity.RARE, mage.cards.i.IntrepidHero.class));
+        cards.add(new SetCardInfo("Island", "shh338", Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", "rl338", Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", "cr338", Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", "shh337", Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", "rl337a", Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", "rl337", Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", "cr337a", Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", "cr337", Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", "shh336a", Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", "rl336a", Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", "rl336", Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", "cr336", Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", "shh335", Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", "rl335", Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", "cr335b", Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", "cr335a", Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", "cr335", Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", "shh334", Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", "rl334", Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", "cr334", Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", "rl333", Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", "cr333", Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", "rl332", Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", "cr332", Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Karplusan Forest", "shh336", Rarity.RARE, mage.cards.k.KarplusanForest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Karplusan Forest", "bk336", Rarity.RARE, mage.cards.k.KarplusanForest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Living Wish", "bk124", Rarity.RARE, mage.cards.l.LivingWish.class));
+        cards.add(new SetCardInfo("Llanowar Elves", "shh253", Rarity.COMMON, mage.cards.l.LlanowarElves.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Llanowar Elves", "bk253", Rarity.COMMON, mage.cards.l.LlanowarElves.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mana Short", "cr86sb", Rarity.RARE, mage.cards.m.ManaShort.class));
+        cards.add(new SetCardInfo("Memory Lapse", "cr88", Rarity.COMMON, mage.cards.m.MemoryLapse.class));
+        cards.add(new SetCardInfo("Mental Note", "rl46", Rarity.COMMON, mage.cards.m.MentalNote.class));
+        cards.add(new SetCardInfo("Merfolk Looter", "shh89", Rarity.UNCOMMON, mage.cards.m.MerfolkLooter.class));
+        cards.add(new SetCardInfo("Mountain", "bk346", Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", "bk343", Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Nightscape Familiar", "cr48", Rarity.COMMON, mage.cards.n.NightscapeFamiliar.class));
+        cards.add(new SetCardInfo("Nimble Mongoose", "rl258", Rarity.UNCOMMON, mage.cards.n.NimbleMongoose.class));
+        cards.add(new SetCardInfo("Opposition", "shh92", Rarity.RARE, mage.cards.o.Opposition.class));
+        cards.add(new SetCardInfo("Phantom Centaur", "shh127", Rarity.UNCOMMON, mage.cards.p.PhantomCentaur.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Phantom Centaur", "rl127sb", Rarity.UNCOMMON, mage.cards.p.PhantomCentaur.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Phantom Centaur", "bk127", Rarity.UNCOMMON, mage.cards.p.PhantomCentaur.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Phantom Nishoba", "bk140sb", Rarity.RARE, mage.cards.p.PhantomNishoba.class));
+        cards.add(new SetCardInfo("Plains", "bk341", Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", "bk333", Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", "bk331a", Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Psychatog", "cr292", Rarity.UNCOMMON, mage.cards.p.Psychatog.class));
+        cards.add(new SetCardInfo("Quiet Speculation", "shh49sb", Rarity.UNCOMMON, mage.cards.q.QuietSpeculation.class));
+        cards.add(new SetCardInfo("Ray of Revelation", "shh20sb", Rarity.COMMON, mage.cards.r.RayOfRevelation.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ray of Revelation", "rl20sb", Rarity.COMMON, mage.cards.r.RayOfRevelation.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Recoil", "cr264sb", Rarity.COMMON, mage.cards.r.Recoil.class));
+        cards.add(new SetCardInfo("Reprisal", "bk33sb", Rarity.UNCOMMON, mage.cards.r.Reprisal.class));
+        cards.add(new SetCardInfo("Repulse", "rl70sb", Rarity.COMMON, mage.cards.r.Repulse.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Repulse", "cr70", Rarity.COMMON, mage.cards.r.Repulse.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Roar of the Wurm", "shh266sb", Rarity.UNCOMMON, mage.cards.r.RoarOfTheWurm.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Roar of the Wurm", "rl266", Rarity.UNCOMMON, mage.cards.r.RoarOfTheWurm.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Rushing River", "rl30sb", Rarity.COMMON, mage.cards.r.RushingRiver.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Rushing River", "rl30", Rarity.COMMON, mage.cards.r.RushingRiver.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Salt Marsh", "cr326", Rarity.UNCOMMON, mage.cards.s.SaltMarsh.class));
+        cards.add(new SetCardInfo("Seton's Scout", "rl138", Rarity.UNCOMMON, mage.cards.s.SetonsScout.class));
+        cards.add(new SetCardInfo("Shivan Reef", "shh142", Rarity.RARE, mage.cards.s.ShivanReef.class));
+        cards.add(new SetCardInfo("Simoon", "shh272sb", Rarity.UNCOMMON, mage.cards.s.Simoon.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Simoon", "bk272sb", Rarity.UNCOMMON, mage.cards.s.Simoon.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Slay", "cr55sb", Rarity.UNCOMMON, mage.cards.s.Slay.class));
+        cards.add(new SetCardInfo("Squirrel Nest", "shh274", Rarity.UNCOMMON, mage.cards.s.SquirrelNest.class));
+        cards.add(new SetCardInfo("Swamp", "cr342", Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", "cr341", Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", "cr340", Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sylvan Safekeeper", "bk133sb", Rarity.RARE, mage.cards.s.SylvanSafekeeper.class));
+        cards.add(new SetCardInfo("Teferi's Response", "cr78sb", Rarity.RARE, mage.cards.t.TeferisResponse.class));
+        cards.add(new SetCardInfo("Thornscape Battlemage", "bk94sb", Rarity.UNCOMMON, mage.cards.t.ThornscapeBattlemage.class));
+        cards.add(new SetCardInfo("Thunderscape Battlemage", "bk75sb", Rarity.UNCOMMON, mage.cards.t.ThunderscapeBattlemage.class));
+        cards.add(new SetCardInfo("Underground River", "cr350", Rarity.RARE, mage.cards.u.UndergroundRiver.class));
+        cards.add(new SetCardInfo("Upheaval", "cr113", Rarity.RARE, mage.cards.u.Upheaval.class));
+        cards.add(new SetCardInfo("Wax // Wane", "bk296", Rarity.UNCOMMON, mage.cards.w.WaxWane.class));
+        cards.add(new SetCardInfo("Werebear", "rl282", Rarity.COMMON, mage.cards.w.Werebear.class));
+        cards.add(new SetCardInfo("Wild Mongrel", "shh283", Rarity.COMMON, mage.cards.w.WildMongrel.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Wild Mongrel", "rl283", Rarity.COMMON, mage.cards.w.WildMongrel.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Wild Mongrel", "bk283", Rarity.COMMON, mage.cards.w.WildMongrel.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Wonder", "rl54", Rarity.UNCOMMON, mage.cards.w.Wonder.class));
+        cards.add(new SetCardInfo("Yavimaya Coast", "shh143", Rarity.RARE, mage.cards.y.YavimayaCoast.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Yavimaya Coast", "rl143", Rarity.RARE, mage.cards.y.YavimayaCoast.class, NON_FULL_USE_VARIOUS));
+     }
+}
