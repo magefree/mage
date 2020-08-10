@@ -48,29 +48,3 @@ public final class EpitaphGolem extends CardImpl {
         return new EpitaphGolem(this);
     }
 }
-
-class EpitaphGolemGraveyardToLibraryEffect extends OneShotEffect {
-
-    public EpitaphGolemGraveyardToLibraryEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "Put target card from your graveyard on the bottom of your library";
-    }
-
-    public EpitaphGolemGraveyardToLibraryEffect(final EpitaphGolemGraveyardToLibraryEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public EpitaphGolemGraveyardToLibraryEffect copy() {
-        return new EpitaphGolemGraveyardToLibraryEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            return controller.putCardsOnBottomOfLibrary(game.getCard(getTargetPointer().getFirst(game, source)), game, source, true);
-        }
-        return false;
-    }
-}
