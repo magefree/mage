@@ -1,12 +1,11 @@
 package mage.cards.a;
 
 import java.util.UUID;
-import mage.MageObjectReference;
 import mage.constants.SubType;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
-import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.DidNotAttackThisTurnEnchantedCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DestroyAttachedToEffect;
@@ -24,8 +23,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.watchers.common.AttackedThisTurnWatcher;
 
 /**
@@ -33,9 +30,9 @@ import mage.watchers.common.AttackedThisTurnWatcher;
  * @author jeffwadsworth
  */
 public final class Aggression extends CardImpl {
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-    
+
     static {
         filter.add(Predicates.not(SubType.WALL.getPredicate()));
     }
@@ -66,10 +63,10 @@ public final class Aggression extends CardImpl {
         // At the beginning of the end step of enchanted creature's controller, destroy that creature if it didn't attack this turn.
         this.addAbility(new ConditionalTriggeredAbility(
                 new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
-                        new DestroyAttachedToEffect("enchanted"), 
-                        TargetController.CONTROLLER_ATTACHED_TO), 
-                DidNotAttackedThisTurnEnchantedCondition.instance, 
-                "At the beginning of the end step of enchanted creature's controller, destroy that creature if it didn't attack this turn."), 
+                        new DestroyAttachedToEffect("enchanted"),
+                        TargetController.CONTROLLER_ATTACHED_TO),
+                DidNotAttackThisTurnEnchantedCondition.instance,
+                "At the beginning of the end step of enchanted creature's controller, destroy that creature if it didn't attack this turn."),
                 new AttackedThisTurnWatcher());
 
     }
@@ -81,23 +78,5 @@ public final class Aggression extends CardImpl {
     @Override
     public Aggression copy() {
         return new Aggression(this);
-    }
-}
-
-enum DidNotAttackedThisTurnEnchantedCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent auraPermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (auraPermanent != null) {
-            Permanent enchantedPermanent = game.getPermanent(auraPermanent.getAttachedTo());
-            AttackedThisTurnWatcher watcher = game.getState().getWatcher(AttackedThisTurnWatcher.class);
-            return enchantedPermanent != null
-                    && watcher != null
-                    && !watcher.getAttackedThisTurnCreatures().contains(
-                            new MageObjectReference(enchantedPermanent, game));
-        }
-        return false;
     }
 }

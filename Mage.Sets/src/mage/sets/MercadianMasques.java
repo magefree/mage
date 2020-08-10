@@ -169,6 +169,7 @@ public final class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Ignoble Soldier", 22, Rarity.UNCOMMON, mage.cards.i.IgnobleSoldier.class));
         cards.add(new SetCardInfo("Indentured Djinn", 85, Rarity.UNCOMMON, mage.cards.i.IndenturedDjinn.class));
         cards.add(new SetCardInfo("Instigator", 140, Rarity.RARE, mage.cards.i.Instigator.class));
+        cards.add(new SetCardInfo("Insubordination", 141, Rarity.COMMON, mage.cards.i.Insubordination.class));
         cards.add(new SetCardInfo("Intimidation", 142, Rarity.UNCOMMON, mage.cards.i.Intimidation.class));
         cards.add(new SetCardInfo("Invigorate", 254, Rarity.COMMON, mage.cards.i.Invigorate.class));
         cards.add(new SetCardInfo("Inviolability", 23, Rarity.COMMON, mage.cards.i.Inviolability.class));
@@ -259,6 +260,7 @@ public final class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Reverent Mantra", 44, Rarity.RARE, mage.cards.r.ReverentMantra.class));
         cards.add(new SetCardInfo("Revive", 262, Rarity.UNCOMMON, mage.cards.r.Revive.class));
         cards.add(new SetCardInfo("Righteous Aura", 45, Rarity.UNCOMMON, mage.cards.r.RighteousAura.class));
+        cards.add(new SetCardInfo("Righteous Indignation", 46, Rarity.UNCOMMON, mage.cards.r.RighteousIndignation.class));
         cards.add(new SetCardInfo("Rishadan Airship", 91, Rarity.COMMON, mage.cards.r.RishadanAirship.class));
         cards.add(new SetCardInfo("Rishadan Brigand", 92, Rarity.RARE, mage.cards.r.RishadanBrigand.class));
         cards.add(new SetCardInfo("Rishadan Cutpurse", 93, Rarity.COMMON, mage.cards.r.RishadanCutpurse.class));
