@@ -70,7 +70,7 @@ enum OnceUponATimeCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         OnceUponATimeWatcher watcher = game.getState().getWatcher(OnceUponATimeWatcher.class);
-        return watcher != null && watcher.getSpellsCastThisTurn(source.getControllerId());
+        return watcher != null && watcher.getSpellsCastThisGame(source.getControllerId());
     }
 }
 
@@ -89,7 +89,7 @@ class OnceUponATimeWatcher extends Watcher {
         }
     }
 
-    public boolean getSpellsCastThisTurn(UUID playerId) {
+    public boolean getSpellsCastThisGame(UUID playerId) {
         return !castSpells.contains(playerId);
     }
     
