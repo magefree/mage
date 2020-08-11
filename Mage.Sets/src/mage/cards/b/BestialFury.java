@@ -4,7 +4,7 @@ package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.EnchantedCreatureBlockedTriggeredAbility;
+import mage.abilities.common.BecomesBlockedAttachedTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextUpkeepDelayedTriggeredAbility;
 import mage.abilities.effects.common.AttachEffect;
@@ -46,7 +46,7 @@ public final class BestialFury extends CardImpl {
                 new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1), Duration.OneUse)), false));
         
         // Whenever enchanted creature becomes blocked, it gets +4/+0 and gains trample until end of turn.
-        Ability pumpAbility = new EnchantedCreatureBlockedTriggeredAbility(new BoostEnchantedEffect(4, 0, Duration.EndOfTurn), false);
+        Ability pumpAbility = new BecomesBlockedAttachedTriggeredAbility(new BoostEnchantedEffect(4, 0, Duration.EndOfTurn), false);
         pumpAbility.addEffect(new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA, Duration.EndOfTurn));
         
         

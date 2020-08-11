@@ -3,7 +3,7 @@ package mage.cards.l;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.EnchantedCreatureBlockedTriggeredAbility;
+import mage.abilities.common.BecomesBlockedAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -41,7 +41,7 @@ public final class LaccolithRig extends CardImpl {
         this.addAbility(ability);
 
         // Whenever enchanted creature becomes blocked, you may have it deal damage equal to its power to target creature. If you do, the first creature assigns no combat damage this turn.
-        Ability ability2 = new EnchantedCreatureBlockedTriggeredAbility(new LaccolithRigEffect(), true);
+        Ability ability2 = new BecomesBlockedAttachedTriggeredAbility(new LaccolithRigEffect(), true);
         ability2.addTarget(new TargetCreaturePermanent());
         Effect effect = new GainAbilityTargetEffect(new SimpleStaticAbility(Zone.BATTLEFIELD, new AssignNoCombatDamageSourceEffect(Duration.Custom, true).setText("")), Duration.EndOfTurn, "If you do, the first creature assigns no combat damage this turn");
         ability2.addEffect(effect);
