@@ -239,6 +239,7 @@ public final class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 334, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Port Inspector", 90, Rarity.COMMON, mage.cards.p.PortInspector.class));
         cards.add(new SetCardInfo("Power Matrix", 309, Rarity.RARE, mage.cards.p.PowerMatrix.class));
+        cards.add(new SetCardInfo("Pretender's Claim", 151, Rarity.UNCOMMON, mage.cards.p.PretendersClaim.class));
         cards.add(new SetCardInfo("Primeval Shambler", 152, Rarity.UNCOMMON, mage.cards.p.PrimevalShambler.class));
         cards.add(new SetCardInfo("Puffer Extract", 310, Rarity.UNCOMMON, mage.cards.p.PufferExtract.class));
         cards.add(new SetCardInfo("Pulverize", 207, Rarity.RARE, mage.cards.p.Pulverize.class));
@@ -350,6 +351,7 @@ public final class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Two-Headed Dragon", 221, Rarity.RARE, mage.cards.t.TwoHeadedDragon.class));
         cards.add(new SetCardInfo("Undertaker", 167, Rarity.COMMON, mage.cards.u.Undertaker.class));
         cards.add(new SetCardInfo("Unmask", 168, Rarity.RARE, mage.cards.u.Unmask.class));
+        cards.add(new SetCardInfo("Unnatural Hunger", 169, Rarity.RARE, mage.cards.u.UnnaturalHunger.class));
         cards.add(new SetCardInfo("Uphill Battle", 222, Rarity.UNCOMMON, mage.cards.u.UphillBattle.class));
         cards.add(new SetCardInfo("Vendetta", 170, Rarity.COMMON, mage.cards.v.Vendetta.class));
         cards.add(new SetCardInfo("Venomous Breath", 281, Rarity.UNCOMMON, mage.cards.v.VenomousBreath.class));

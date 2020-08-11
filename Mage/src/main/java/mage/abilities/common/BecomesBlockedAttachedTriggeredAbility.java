@@ -6,7 +6,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -30,12 +29,11 @@ public class BecomesBlockedAttachedTriggeredAbility extends TriggeredAbilityImpl
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent equipment = game.getPermanent(sourceId);
-        if (equipment != null && equipment.getAttachedTo() != null) {
+        if (equipment != null 
+                && equipment.getAttachedTo() != null) {
             Permanent equipped = game.getPermanent(equipment.getAttachedTo());
-            if (equipped.getId().equals(event.getTargetId())) {
-                getEffects().get(1).setTargetPointer(new FixedTarget(equipped, game));
-                return true;
-            }
+            return (equipped != null
+                    && equipped.getId().equals(event.getTargetId()));
         }
         return false;
     }
