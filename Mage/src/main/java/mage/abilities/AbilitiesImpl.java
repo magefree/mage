@@ -131,11 +131,11 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
     }
 
     @Override
-    public Abilities<ActivatedManaAbilityImpl> getAvailableActivatedManaAbilities(Zone zone, Game game) {
+    public Abilities<ActivatedManaAbilityImpl> getAvailableActivatedManaAbilities(Zone zone, UUID playerId, Game game) {
         return stream()
                 .filter(ability -> ability instanceof ActivatedManaAbilityImpl)
                 .filter(ability -> ability.getZone().match(zone))
-                .filter(ability -> (((ActivatedManaAbilityImpl) ability).canActivate(ability.getControllerId(), game).canActivate()))
+                .filter(ability -> (((ActivatedManaAbilityImpl) ability).canActivate(playerId, game).canActivate()))
                 .map(ability -> (ActivatedManaAbilityImpl) ability)
                 .collect(Collectors.toCollection(AbilitiesImpl::new));
 

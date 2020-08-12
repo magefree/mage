@@ -90,6 +90,7 @@ public interface Abilities<T extends Ability> extends List<T>, Serializable {
      *
      * @param zone The {@link Zone} to search for
      * {@link ActivatedManaAbilityImpl mana abilities}.
+     * @param playerId The id of the player to check availability for
      * @return All {@link ActivatedManaAbilityImpl mana abilities} for the given
      * {@link Zone} that can be used.
      *
@@ -97,7 +98,7 @@ public interface Abilities<T extends Ability> extends List<T>, Serializable {
      * @see mage.players.PlayerImpl#getManaAvailable(mage.game.Game)
      * @see mage.players.PlayerImpl#getAvailableManaProducers(mage.game.Game)
      */
-    Abilities<ActivatedManaAbilityImpl> getAvailableActivatedManaAbilities(Zone zone, Game game);
+    Abilities<ActivatedManaAbilityImpl> getAvailableActivatedManaAbilities(Zone zone, UUID playerId, Game game);
 
     /**
      * Retrieves all {@link StaticAbility static abilities} in the given

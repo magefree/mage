@@ -1563,7 +1563,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     }
 
     private Abilities<ActivatedManaAbilityImpl> getManaAbilitiesSortedByManaCount(MageObject mageObject, final Game game) {
-        Abilities<ActivatedManaAbilityImpl> manaAbilities = mageObject.getAbilities().getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, game);
+        Abilities<ActivatedManaAbilityImpl> manaAbilities = mageObject.getAbilities().getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, playerId, game);
         if (manaAbilities.size() > 1) {
             // Sort mana abilities by number of produced manas, to use ability first that produces most mana (maybe also conditional if possible)
             Collections.sort(manaAbilities, new Comparator<ActivatedManaAbilityImpl>() {
@@ -1609,7 +1609,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             int score = 0;
             for (ManaCost cost : unpaid) {
                 Abilities:
-                for (ActivatedManaAbilityImpl ability : mageObject.getAbilities().getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, game)) {
+                for (ActivatedManaAbilityImpl ability : mageObject.getAbilities().getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, playerId, game)) {
                     for (Mana netMana : ability.getNetMana(game)) {
                         if (cost.testPay(netMana)) {
                             score++;
@@ -1619,7 +1619,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 }
             }
             if (score > 0) { // score mana producers that produce other mana types and have other uses higher
-                score += mageObject.getAbilities().getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, game).size();
+                score += mageObject.getAbilities().getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, playerId, game).size();
                 score += mageObject.getAbilities().getActivatedAbilities(Zone.BATTLEFIELD).size();
                 if (!mageObject.getCardType().contains(CardType.LAND)) {
                     score += 2;

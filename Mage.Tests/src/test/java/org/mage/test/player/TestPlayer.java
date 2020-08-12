@@ -613,7 +613,7 @@ public class TestPlayer implements Player {
 
                     for (MageObject mageObject : manaObjects) {
                         if (mageObject instanceof Permanent) {
-                            for (Ability manaAbility : ((Permanent) mageObject).getAbilities(game).getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, game)) {
+                            for (Ability manaAbility : ((Permanent) mageObject).getAbilities(game).getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, getId(), game)) {
                                 if (hasAbilityTargetNameOrAlias(game, manaAbility, groups[0])) {
                                     Ability newManaAbility = manaAbility.copy();
                                     computerPlayer.activateAbility((ActivatedAbility) newManaAbility, game);
@@ -622,7 +622,7 @@ public class TestPlayer implements Player {
                                 }
                             }
                         } else if (mageObject instanceof Card) {
-                            for (Ability manaAbility : ((Card) mageObject).getAbilities(game).getAvailableActivatedManaAbilities(game.getState().getZone(mageObject.getId()), game)) {
+                            for (Ability manaAbility : ((Card) mageObject).getAbilities(game).getAvailableActivatedManaAbilities(game.getState().getZone(mageObject.getId()), getId(), game)) {
                                 if (hasAbilityTargetNameOrAlias(game, manaAbility, groups[0])) {
                                     Ability newManaAbility = manaAbility.copy();
                                     computerPlayer.activateAbility((ActivatedAbility) newManaAbility, game);
@@ -631,7 +631,7 @@ public class TestPlayer implements Player {
                                 }
                             }
                         } else {
-                            for (Ability manaAbility : mageObject.getAbilities().getAvailableActivatedManaAbilities(game.getState().getZone(mageObject.getId()), game)) {
+                            for (Ability manaAbility : mageObject.getAbilities().getAvailableActivatedManaAbilities(game.getState().getZone(mageObject.getId()), getId(), game)) {
                                 if (hasAbilityTargetNameOrAlias(game, manaAbility, groups[0])) {
                                     Ability newManaAbility = manaAbility.copy();
                                     computerPlayer.activateAbility((ActivatedAbility) newManaAbility, game);
@@ -643,7 +643,7 @@ public class TestPlayer implements Player {
                     }
                     List<Permanent> manaPermsWithCost = computerPlayer.getAvailableManaProducersWithCost(game);
                     for (Permanent perm : manaPermsWithCost) {
-                        for (ActivatedManaAbilityImpl manaAbility : perm.getAbilities().getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, game)) {
+                        for (ActivatedManaAbilityImpl manaAbility : perm.getAbilities().getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, getId(), game)) {
                             if (hasAbilityTargetNameOrAlias(game, manaAbility, groups[0])
                                     && manaAbility.canActivate(computerPlayer.getId(), game).canActivate()) {
                                 Ability newManaAbility = manaAbility.copy();

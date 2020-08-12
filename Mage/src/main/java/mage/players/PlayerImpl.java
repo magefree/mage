@@ -2891,18 +2891,18 @@ public abstract class PlayerImpl implements Player, Serializable {
 
         List<Abilities<ActivatedManaAbilityImpl>> sourceWithoutManaCosts = new ArrayList<>();
         List<Abilities<ActivatedManaAbilityImpl>> sourceWithCosts = new ArrayList<>();
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(playerId)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(playerId, game)) { // Some permanents allow use of abilities from non controlling players. so check all permanents in range
             Boolean canUse = null;
             boolean canAdd = false;
             boolean withCost = false;
             Abilities<ActivatedManaAbilityImpl> manaAbilities
-                    = permanent.getAbilities().getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, game);
+                    = permanent.getAbilities().getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, playerId, game); // returns ability only if canActivate is true
             for (Iterator<ActivatedManaAbilityImpl> it = manaAbilities.iterator(); it.hasNext();) {
                 ActivatedManaAbilityImpl ability = it.next();
                 if (canUse == null) {
                     canUse = permanent.canUseActivatedAbilities(game);
                 }
-                if (canUse && ability.canActivate(playerId, game).canActivate()) {
+                if (canUse) {
                     // abilities without Tap costs have to be handled as separate sources, because they can be used also
                     if (!ability.hasTapCost()) {
                         it.remove();
@@ -2985,7 +2985,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     // returns only mana producers that don't require mana payment
     protected List<MageObject> getAvailableManaProducers(Game game) {
         List<MageObject> result = new ArrayList<>();
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(playerId)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(playerId, game)) { // Some permanents allow use of abilities from non controlling players. so check all permanents in range
             Boolean canUse = null;
             boolean canAdd = false;
             for (ActivatedManaAbilityImpl ability : permanent.getAbilities().getActivatedManaAbilities(Zone.BATTLEFIELD)) {
@@ -3025,7 +3025,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     // returns only mana producers that require mana payment
     public List<Permanent> getAvailableManaProducersWithCost(Game game) {
         List<Permanent> result = new ArrayList<>();
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(playerId)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(playerId, game)) {
             Boolean canUse = null;
             for (ActivatedManaAbilityImpl ability : permanent.getAbilities().getActivatedManaAbilities(Zone.BATTLEFIELD)) {
                 if (canUse == null) {

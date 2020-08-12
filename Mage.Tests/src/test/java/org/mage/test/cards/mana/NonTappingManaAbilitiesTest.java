@@ -289,4 +289,49 @@ public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
         Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
         assertManaOptions("{B}{B}{B}{B}", manaOptions);
     }
+    
+   @Test
+    public void Test_ManaCache() {
+        setStrictChooseMode(true);
+        
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+
+        // At the beginning of each player's end step, put a charge counter on Mana Cache for each untapped land that player controls.
+        // Remove a charge counter from Mana Cache: Add {C}. Any player may activate this ability but only during their turn before the end step.
+        addCard(Zone.BATTLEFIELD, playerA, "Mana Cache", 1);
+
+        setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertAllCommandsUsed();
+
+        assertCounterCount("Mana Cache", CounterType.CHARGE, 2);
+        
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        assertManaOptions("{C}{C}{B}{B}", manaOptions);
+    }    
+
+    @Test
+    public void Test_ManaCacheOpponent() {
+        setStrictChooseMode(true);
+        
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+
+        // At the beginning of each player's end step, put a charge counter on Mana Cache for each untapped land that player controls.
+        // Remove a charge counter from Mana Cache: Add {C}. Any player may activate this ability but only during their turn before the end step.
+        addCard(Zone.BATTLEFIELD, playerA, "Mana Cache", 1);
+
+        setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertAllCommandsUsed();
+
+        assertCounterCount("Mana Cache", CounterType.CHARGE, 2);
+        
+        ManaOptions manaOptions = playerB.getAvailableManaTest(currentGame);
+        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        assertManaOptions("{C}{C}", manaOptions);
+    }    
+    
 }
