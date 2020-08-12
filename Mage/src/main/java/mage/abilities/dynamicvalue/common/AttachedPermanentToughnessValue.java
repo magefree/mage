@@ -8,6 +8,7 @@ package mage.abilities.dynamicvalue.common;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -19,7 +20,15 @@ public enum AttachedPermanentToughnessValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability source, Effect effect) {
-        Permanent enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        // In the case that the enchantment is blinked
+        Permanent enchantment = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
+        if (enchantment == null) {
+            // It was not blinked, use the standard method
+            enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        }
+        if (enchantment == null) {
+            return 0;
+        }
         Permanent enchanted = game.getPermanentOrLKIBattlefield(enchantment.getAttachedTo());
         return enchanted.getToughness().getValue();
     }

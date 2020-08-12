@@ -1,4 +1,3 @@
-
 package mage.cards.l;
 
 import java.util.UUID;
@@ -30,7 +29,7 @@ import mage.target.common.TargetCreaturePermanent;
 public final class LaccolithRig extends CardImpl {
 
     public LaccolithRig(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{R}");
         this.subtype.add(SubType.AURA);
 
         // Enchant creature
@@ -76,7 +75,15 @@ class LaccolithRigEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        // In the case that the enchantment is blinked
+        Permanent enchantment = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
+        if (enchantment == null) {
+            // It was not blinked, use the standard method
+            enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        }
+        if (enchantment == null) {
+            return false;
+        }
         Permanent ownCreature = game.getPermanent(enchantment.getAttachedTo());
         if (ownCreature != null) {
             int damage = ownCreature.getPower().getValue();

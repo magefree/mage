@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.HashSet;
@@ -20,6 +19,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EnchantedPlayerAttackedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GainLifeTargetEffect;
+import mage.constants.Zone;
 import mage.players.Player;
 
 /**
@@ -70,7 +70,12 @@ class CurseOfVitalityEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        // In the case that the enchantment is blinked
+        Permanent enchantment = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
+        if (enchantment == null) {
+            // It was not blinked, use the standard method
+            enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        }
         if (enchantment != null) {
             Player enchantedPlayer = game.getPlayer(enchantment.getAttachedTo());
             if (enchantedPlayer != null) {
