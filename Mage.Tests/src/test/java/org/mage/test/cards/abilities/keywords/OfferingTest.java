@@ -46,6 +46,33 @@ public class OfferingTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, kurosTaken, 1);
         assertPermanentCount(playerA, nezumiPatron, 1);
-        assertTappedCount("Swamp", true, 7); // {5}{B}{B} - {1}{B} = {4}{B} = 7 swamps tapped
+        assertTappedCount("Swamp", true, 7); // {5}{B}{B} - {1}{B} = {4}{B} = 7 swamps tapped              
     }
+    
+    @Test
+    public void testCastWithMinimalMana() {
+        setStrictChooseMode(true);
+        
+        // Goblin offering (You may cast this card any time you could cast an instant by sacrificing a Goblin and paying the difference in mana costs between this and the sacrificed Goblin. Mana cost includes color.)
+        // Whenever Patron of the Akki attacks, creatures you control get +2/+0 until end of turn.        
+        String patron = "Patron of the Akki"; // Creature {4}{R}{R} (5/5)
+
+        addCard(Zone.HAND, playerA, patron, 1);
+        
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Akki Drillmaster"); // Creature Goblin {2}{R}  (2/2)
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, patron);                
+        setChoice(playerA, "Yes");
+        addTarget(playerA, "Akki Drillmaster");
+        
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertAllCommandsUsed();
+        assertPermanentCount(playerA, patron, 1);
+        
+        assertGraveyardCount(playerA, "Akki Drillmaster", 1);
+
+    }    
 }
