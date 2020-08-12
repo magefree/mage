@@ -1,6 +1,7 @@
-
 package mage.cards.c;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -35,7 +36,7 @@ import mage.watchers.common.ManaSpentToCastWatcher;
 public final class CryptChampion extends CardImpl {
 
     public CryptChampion(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.subtype.add(SubType.ZOMBIE);
 
         this.power = new MageInt(2);
@@ -80,6 +81,7 @@ class CryptChampionEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
+        Set<Card> toBattlefield = new HashSet<>();
         if (controller != null) {
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
@@ -88,15 +90,20 @@ class CryptChampionEffect extends OneShotEffect {
                     filter.add(new OwnerIdPredicate(playerId));
                     filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
                     Target target = new TargetCardInGraveyard(filter);
-                    if (target.canChoose(playerId, game) && player.chooseTarget(outcome, target, source, game)) {
+                    if (target.canChoose(playerId, game)
+                            && player.chooseTarget(outcome, target, source, game)) {
                         Card card = game.getCard(target.getFirstTarget());
                         if (card != null) {
-                            player.moveCards(card, Zone.BATTLEFIELD, source, game);
+                            toBattlefield.add(card);
                         }
                     }
                 }
             }
+
+            // must happen simultaneously Rule 101.4
+            controller.moveCards(toBattlefield, Zone.BATTLEFIELD, source, game, false, false, true, null);
             return true;
+            
         }
         return false;
     }
