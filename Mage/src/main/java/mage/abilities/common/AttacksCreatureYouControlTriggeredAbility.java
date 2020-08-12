@@ -57,6 +57,7 @@ public class AttacksCreatureYouControlTriggeredAbility extends TriggeredAbilityI
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
+        game.applyEffects(); // Hooded Blightfang
         Permanent sourcePermanent = game.getPermanent(event.getSourceId());
         if (sourcePermanent != null && filter.match(sourcePermanent, sourceId, controllerId, game)) {
             if (setTargetPointer) {
