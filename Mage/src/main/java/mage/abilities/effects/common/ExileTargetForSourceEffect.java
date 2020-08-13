@@ -11,10 +11,12 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.targetpointer.FirstTargetPointer;
 import mage.util.CardUtil;
-
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
+import mage.abilities.effects.Effect;
+import mage.target.targetpointer.FixedTarget;
+import mage.target.targetpointer.TargetPointer;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -22,8 +24,9 @@ import java.util.UUID;
 public class ExileTargetForSourceEffect extends OneShotEffect {
 
     /**
-     * Exile cards to source's exile window (e.g. if it have another effect like return from exile later)
-     * TODO: delete that effect and replace it by ExileTargetEffect (it have special param for same purpose)
+     * Exile cards to source's exile window (e.g. if it has another effect like
+     * return from exile later) TODO: delete that effect and replace it by
+     * ExileTargetEffect (it will have a special param for same purpose)
      */
     public ExileTargetForSourceEffect() {
         super(Outcome.Exile);
@@ -42,9 +45,12 @@ public class ExileTargetForSourceEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
-        if (controller != null && sourceObject != null) {
+
+        if (controller != null
+                && sourceObject != null) {
             Set<Card> cards = new LinkedHashSet<>();
-            if (source.getTargets().size() > 1 && targetPointer instanceof FirstTargetPointer) {
+            if (source.getTargets().size() > 1
+                    && targetPointer instanceof FirstTargetPointer) {
                 for (Target target : source.getTargets()) {
                     for (UUID targetId : target.getTargets()) {
                         MageObject mageObject = game.getObject(targetId);
@@ -54,10 +60,24 @@ public class ExileTargetForSourceEffect extends OneShotEffect {
                     }
                 }
             } else {
-                for (UUID targetId : targetPointer.getTargets(game, source)) {
-                    MageObject mageObject = game.getObject(targetId);
-                    if (mageObject != null) {
-                        cards.add((Card) mageObject);
+                if (!targetPointer.getTargets(game, source).isEmpty()) {
+                    for (UUID targetId : targetPointer.getTargets(game, source)) {
+                        MageObject mageObject = game.getObject(targetId);
+                        if (mageObject != null) {
+                            cards.add((Card) mageObject);
+                        }
+                    }
+                } else {
+                    // issue with Madness keyword  #6889
+                    UUID fixedTargetId = null;
+                    for (Effect effect : source.getEffects()) {
+                        TargetPointer targetPointerId = effect.getTargetPointer();
+                        if (targetPointerId instanceof FixedTarget) {
+                            fixedTargetId = (((FixedTarget) targetPointerId).getTarget());
+                        }
+                    }
+                    if (fixedTargetId != null) {
+                        cards.add((Card) game.getObject(fixedTargetId));
                     }
                 }
             }
