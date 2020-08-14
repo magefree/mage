@@ -2,6 +2,7 @@ package mage.abilities;
 
 import mage.MageObject;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DoIfCostPaid;
 import mage.constants.AbilityType;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -32,6 +33,13 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
             addEffect(effect);
         }
         this.optional = optional;
+
+        // verify check: DoIfCostPaid effect already asks about action (optional), so no needs to ask it again in triggered ability
+        if (effect instanceof DoIfCostPaid) {
+            if (this.optional && ((DoIfCostPaid) effect).isOptional()) {
+                throw new IllegalArgumentException("DoIfCostPaid effect must have only one optional settings, but it have two (trigger + DoIfCostPaid): " + this.getClass().getSimpleName());
+            }
+        }
     }
 
     public TriggeredAbilityImpl(final TriggeredAbilityImpl ability) {

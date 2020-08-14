@@ -1499,7 +1499,8 @@ public class VerifyCardDataTest {
     }
 
     @Test
-    public void test_CardsCreatingAndConstructorErrors() {
+    public void test_checkCardConstructors() {
+        Collection<String> errorsList = new ArrayList<>();
         int errorsCount = 0;
         Collection<ExpansionSet> sets = Sets.getInstance().values();
         for (ExpansionSet set : sets) {
@@ -1509,15 +1510,18 @@ public class VerifyCardDataTest {
                     Card card = CardImpl.createCard(setInfo.getCardClass(), new CardSetInfo(setInfo.getName(), set.getCode(),
                             setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo()));
                     if (card == null) {
+                        errorsList.add("Broken constructor: " + setInfo.getCardClass());
                         errorsCount++;
                     }
                 } catch (Throwable e) {
+                    // CardImpl.createCard don't throw exceptions (only error logs), so that logs are useless here
                     logger.error("Can't create card " + setInfo.getName() + ": " + e.getMessage(), e);
                 }
             }
         }
 
         if (errorsCount > 0) {
+            printMessages(errorsList);
             Assert.fail("Founded " + errorsCount + " broken cards, look at logs for stack error");
         }
     }
