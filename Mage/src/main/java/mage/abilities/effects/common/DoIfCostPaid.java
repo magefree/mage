@@ -20,8 +20,8 @@ public class DoIfCostPaid extends OneShotEffect {
     protected Effects executingEffects = new Effects();
     protected Effects otherwiseEffects = new Effects(); // used for Imprison
     private final Cost cost;
-    private String chooseUseText;
-    private boolean optional;
+    private final String chooseUseText;
+    private final boolean optional;
 
     public DoIfCostPaid(Effect effectOnPaid, Cost cost) {
         this(effectOnPaid, cost, null);
@@ -97,6 +97,7 @@ public class DoIfCostPaid extends OneShotEffect {
                 cost.clearPaid();
                 int bookmark = game.bookmarkState();
                 if (cost.pay(source, game, source.getSourceId(), player.getId(), false)) {
+                    game.informPlayers(player.getLogName() + " paid for " + mageObject.getLogName() + " - " + executingEffects.getText(source.getModes().getMode()));
                     for (Effect effect : executingEffects) {
                         effect.setTargetPointer(this.targetPointer);
                         if (effect instanceof OneShotEffect) {
@@ -177,5 +178,9 @@ public class DoIfCostPaid extends OneShotEffect {
     @Override
     public DoIfCostPaid copy() {
         return new DoIfCostPaid(this);
+    }
+
+    public boolean isOptional() {
+        return optional;
     }
 }
