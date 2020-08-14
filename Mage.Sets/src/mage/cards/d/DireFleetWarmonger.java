@@ -33,13 +33,11 @@ public final class DireFleetWarmonger extends CardImpl {
 
         // At the beginning of combat on your turn, you may sacrifice another creature. If you do, Dire Fleet Warmonger gets +2/+2 and gains trample until end of turn.
         this.addAbility(new BeginningOfCombatTriggeredAbility(new DoIfCostPaid(
-                new BoostSourceEffect(2, 2, Duration.EndOfTurn),
-                new SacrificeTargetCost(new TargetControlledPermanent(
-                        StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE
-                ))
-        ).addEffect(new GainAbilitySourceEffect(
-                TrampleAbility.getInstance(), Duration.EndOfTurn
-        )), TargetController.YOU, true));
+                new BoostSourceEffect(2, 2, Duration.EndOfTurn).setText("{this} gets +2/+2"),
+                new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE))
+        ).addEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn)
+                .concatBy("and").setText("gains trample until end of turn")),
+                TargetController.YOU, false));
     }
 
     private DireFleetWarmonger(final DireFleetWarmonger card) {

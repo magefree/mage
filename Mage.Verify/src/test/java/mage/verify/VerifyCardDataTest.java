@@ -471,7 +471,7 @@ public class VerifyCardDataTest {
         System.out.println("* MTG sets: " + MtgJson.sets().size() + ", cards: " + mtgCards);
         System.out.println("* Implemented sets: " + mtgSets + ", cards: " + xmageCards);
         System.out.println("* Unsupported sets: " + unsupportedSets + ", cards: " + unsupportedCards);
-        System.out.println("* TODO: " + (MtgJson.sets().size() - mtgSets - unsupportedSets) + ", cards: " + (mtgCards - xmageCards - unsupportedCards));
+        System.out.println("* TODO sets: " + (MtgJson.sets().size() - mtgSets - unsupportedSets) + ", cards: " + (mtgCards - xmageCards - unsupportedCards));
         System.out.println();
         System.out.println("Unofficial sets implementation stats:");
         System.out.println("* Implemented sets: " + xmageUnofficialSets + ", cards: " + xmageUnofficialCards);
@@ -1216,7 +1216,7 @@ public class VerifyCardDataTest {
     public void test_showCardInfo() throws Exception {
         // debug only: show direct card info (takes it from class file, not from db repository)
         // can check multiple cards at once, example: name1;name2;name3
-        String cardNames = "Armed // Dangerous;Beacon Behemoth;Grizzly Bears";
+        String cardNames = "Dire Fleet Warmonger";
         CardScanner.scan();
         Arrays.stream(cardNames.split(";")).forEach(cardName -> {
             cardName = cardName.trim();

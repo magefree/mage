@@ -16,8 +16,8 @@ public class DireFleetWarmongerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears");
 
         setChoice(playerA, "Yes");
-        setChoice(playerA, "Yes");
         setChoice(playerA, "Grizzly Bears");
+
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         setStrictChooseMode(true);
         execute();
