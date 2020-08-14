@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.zip.ZipInputStream;
 
-public final class MtgJson {
+public final class MtgJsonService {
 
     public static Map<String, String> mtgJsonToXMageCodes = new HashMap<>();
     public static Map<String, String> xMageToMtgJsonCodes = new HashMap<>();
@@ -49,11 +49,11 @@ public final class MtgJson {
         }
     }
 
-    private MtgJson() {
+    private MtgJsonService() {
     }
 
     private static final class CardHolder {
-        private static final Map<String, JsonCard> cards;
+        private static final Map<String, MtgJsonCard> cards;
 
         static {
             try {
@@ -62,7 +62,7 @@ public final class MtgJson {
                 List<String> keysToDelete = new ArrayList<>();
 
                 // fix names
-                Map<String, JsonCard> newKeys = new HashMap<>();
+                Map<String, MtgJsonCard> newKeys = new HashMap<>();
                 for (String key : cards.keySet()) {
                     if (key.contains("(")) {
                         newKeys.put(key.replaceAll("\\(.*\\)", "").trim(), cards.get(key));
@@ -74,7 +74,7 @@ public final class MtgJson {
 
                 // remove wrong data (tokens)
                 keysToDelete.clear();
-                for (Map.Entry<String, JsonCard> record : cards.entrySet()) {
+                for (Map.Entry<String, MtgJsonCard> record : cards.entrySet()) {
                     if (record.getValue().layout.equals("token") || record.getValue().layout.equals("double_faced_token")) {
                         keysToDelete.add(record.getKey());
                     }
@@ -89,7 +89,7 @@ public final class MtgJson {
     }
 
     private static final class SetHolder {
-        private static final Map<String, JsonSet> sets;
+        private static final Map<String, MtgJsonSet> sets;
 
         static {
             try {
@@ -100,18 +100,18 @@ public final class MtgJson {
         }
     }
 
-    private static Map<String, JsonCard> loadAllCards() throws IOException {
-        return readFromZip("AllCards.json.zip", new TypeReference<Map<String, JsonCard>>() {
+    private static Map<String, MtgJsonCard> loadAllCards() throws IOException {
+        return readFromZip("AllCards.json.zip", new TypeReference<Map<String, MtgJsonCard>>() {
         });
     }
 
-    private static Map<String, JsonSet> loadAllSets() throws IOException {
-        return readFromZip("AllPrintings.json.zip", new TypeReference<Map<String, JsonSet>>() {
+    private static Map<String, MtgJsonSet> loadAllSets() throws IOException {
+        return readFromZip("AllPrintings.json.zip", new TypeReference<Map<String, MtgJsonSet>>() {
         });
     }
 
     private static <T> T readFromZip(String filename, TypeReference<T> ref) throws IOException {
-        InputStream stream = MtgJson.class.getResourceAsStream(filename);
+        InputStream stream = MtgJsonService.class.getResourceAsStream(filename);
         if (stream == null) {
             File file = new File(filename);
             if (!file.exists()) {
@@ -133,11 +133,11 @@ public final class MtgJson {
 
     }
 
-    public static Map<String, JsonSet> sets() {
+    public static Map<String, MtgJsonSet> sets() {
         return SetHolder.sets;
     }
 
-    public static JsonCard card(String name) {
+    public static MtgJsonCard card(String name) {
         return findReference(CardHolder.cards, name);
     }
 

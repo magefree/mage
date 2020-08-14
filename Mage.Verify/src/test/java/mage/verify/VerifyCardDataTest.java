@@ -426,12 +426,12 @@ public class VerifyCardDataTest {
         Collection<ExpansionSet> sets = Sets.getInstance().values();
 
         // official sets
-        for (Map.Entry<String, JsonSet> refEntry : MtgJson.sets().entrySet()) {
-            JsonSet refSet = refEntry.getValue();
+        for (Map.Entry<String, MtgJsonSet> refEntry : MtgJsonService.sets().entrySet()) {
+            MtgJsonSet refSet = refEntry.getValue();
             mtgCards += refSet.totalSetSize;
 
             // replace codes for aliases
-            String searchSet = MtgJson.mtgJsonToXMageCodes.getOrDefault(refSet.code, refSet.code);
+            String searchSet = MtgJsonService.mtgJsonToXMageCodes.getOrDefault(refSet.code, refSet.code);
             if (skipListHaveName(SKIP_LIST_UNSUPPORTED_SETS, searchSet)) {
                 unsupportedSets++;
                 unsupportedCards += refSet.totalSetSize;
@@ -455,7 +455,7 @@ public class VerifyCardDataTest {
 
         // unofficial sets info
         for (ExpansionSet set : sets) {
-            if (MtgJson.sets().containsKey(set.getCode())) {
+            if (MtgJsonService.sets().containsKey(set.getCode())) {
                 continue;
             }
 
@@ -468,10 +468,10 @@ public class VerifyCardDataTest {
         printMessages(info);
         System.out.println();
         System.out.println("Official sets implementation stats:");
-        System.out.println("* MTG sets: " + MtgJson.sets().size() + ", cards: " + mtgCards);
+        System.out.println("* MTG sets: " + MtgJsonService.sets().size() + ", cards: " + mtgCards);
         System.out.println("* Implemented sets: " + mtgSets + ", cards: " + xmageCards);
         System.out.println("* Unsupported sets: " + unsupportedSets + ", cards: " + unsupportedCards);
-        System.out.println("* TODO sets: " + (MtgJson.sets().size() - mtgSets - unsupportedSets) + ", cards: " + (mtgCards - xmageCards - unsupportedCards));
+        System.out.println("* TODO sets: " + (MtgJsonService.sets().size() - mtgSets - unsupportedSets) + ", cards: " + (mtgCards - xmageCards - unsupportedCards));
         System.out.println();
         System.out.println("Unofficial sets implementation stats:");
         System.out.println("* Implemented sets: " + xmageUnofficialSets + ", cards: " + xmageUnofficialCards);
@@ -998,16 +998,16 @@ public class VerifyCardDataTest {
     }
 
     private void check(Card card, Set<String> tokens, int cardIndex) {
-        JsonCard ref = MtgJson.card(card.getName());
+        MtgJsonCard ref = MtgJsonService.card(card.getName());
         if (ref == null) {
             warn(card, "Missing card reference");
             return;
         }
         checkAll(card, ref, cardIndex);
         if (tokens != null) {
-            JsonCard ref2 = null;
+            MtgJsonCard ref2 = null;
             if (card.isFlipCard()) {
-                ref2 = MtgJson.card(card.getFlipCardName());
+                ref2 = MtgJsonService.card(card.getFlipCardName());
             }
             for (String token : tokens) {
                 if (!(token.equals(card.getName())
@@ -1020,7 +1020,7 @@ public class VerifyCardDataTest {
         }
     }
 
-    private boolean containsInTypesOrText(JsonCard ref, String token) {
+    private boolean containsInTypesOrText(MtgJsonCard ref, String token) {
         return contains(ref.types, token)
                 || contains(ref.subtypes, token)
                 || contains(ref.supertypes, token)
@@ -1031,7 +1031,7 @@ public class VerifyCardDataTest {
         return options != null && options.contains(value);
     }
 
-    private void checkAll(Card card, JsonCard ref, int cardIndex) {
+    private void checkAll(Card card, MtgJsonCard ref, int cardIndex) {
         checkCost(card, ref);
         checkPT(card, ref);
         checkSubtypes(card, ref);
@@ -1045,7 +1045,7 @@ public class VerifyCardDataTest {
         checkWrongAbilitiesText(card, ref, cardIndex);
     }
 
-    private void checkColors(Card card, JsonCard ref) {
+    private void checkColors(Card card, MtgJsonCard ref) {
         if (skipListHaveName(SKIP_LIST_COLOR, card.getExpansionSetCode(), card.getName())) {
             return;
         }
@@ -1070,7 +1070,7 @@ public class VerifyCardDataTest {
         }
     }
 
-    private void checkSubtypes(Card card, JsonCard ref) {
+    private void checkSubtypes(Card card, MtgJsonCard ref) {
         if (skipListHaveName(SKIP_LIST_SUBTYPE, card.getExpansionSetCode(), card.getName())) {
             return;
         }
@@ -1104,7 +1104,7 @@ public class VerifyCardDataTest {
         }
     }
 
-    private void checkSupertypes(Card card, JsonCard ref) {
+    private void checkSupertypes(Card card, MtgJsonCard ref) {
         if (skipListHaveName(SKIP_LIST_SUPERTYPE, card.getExpansionSetCode(), card.getName())) {
             return;
         }
@@ -1115,7 +1115,7 @@ public class VerifyCardDataTest {
         }
     }
 
-    private void checkMissingAbilities(Card card, JsonCard ref) {
+    private void checkMissingAbilities(Card card, MtgJsonCard ref) {
         if (skipListHaveName(SKIP_LIST_MISSING_ABILITIES, card.getExpansionSetCode(), card.getName())) {
             return;
         }
@@ -1180,7 +1180,7 @@ public class VerifyCardDataTest {
         }
     }
 
-    private void checkLegalityFormats(Card card, JsonCard ref) {
+    private void checkLegalityFormats(Card card, MtgJsonCard ref) {
         if (skipListHaveName("LEGALITY", card.getExpansionSetCode(), card.getName())) {
             return;
         }
@@ -1297,7 +1297,7 @@ public class VerifyCardDataTest {
         }
     }*/
 
-    private void checkWrongAbilitiesText(Card card, JsonCard ref, int cardIndex) {
+    private void checkWrongAbilitiesText(Card card, MtgJsonCard ref, int cardIndex) {
         // checks missing or wrong text
         if (!card.getExpansionSetCode().equals(FULL_ABILITIES_CHECK_SET_CODE)) {
             return;
@@ -1365,7 +1365,7 @@ public class VerifyCardDataTest {
         }
     }
 
-    private void checkTypes(Card card, JsonCard ref) {
+    private void checkTypes(Card card, MtgJsonCard ref) {
         if (skipListHaveName(SKIP_LIST_TYPE, card.getExpansionSetCode(), card.getName())) {
             return;
         }
@@ -1380,7 +1380,7 @@ public class VerifyCardDataTest {
         }
     }
 
-    private void checkPT(Card card, JsonCard ref) {
+    private void checkPT(Card card, MtgJsonCard ref) {
         if (skipListHaveName(SKIP_LIST_PT, card.getExpansionSetCode(), card.getName())) {
             return;
         }
@@ -1400,7 +1400,7 @@ public class VerifyCardDataTest {
         }
     }
 
-    private void checkCost(Card card, JsonCard ref) {
+    private void checkCost(Card card, MtgJsonCard ref) {
         if (skipListHaveName(SKIP_LIST_COST, card.getExpansionSetCode(), card.getName())) {
             return;
         }
@@ -1418,7 +1418,7 @@ public class VerifyCardDataTest {
         }
     }
 
-    private void checkNumbers(Card card, JsonCard ref) {
+    private void checkNumbers(Card card, MtgJsonCard ref) {
         if (skipListHaveName(SKIP_LIST_NUMBER, card.getExpansionSetCode(), card.getName())) {
             return;
         }
@@ -1446,7 +1446,7 @@ public class VerifyCardDataTest {
                 || checkName.equals("Wastes");
     }
 
-    private void checkBasicLands(Card card, JsonCard ref) {
+    private void checkBasicLands(Card card, MtgJsonCard ref) {
 
         // basic lands must have Rarity.LAND and SuperType.BASIC
         // other cards can't have that stats
