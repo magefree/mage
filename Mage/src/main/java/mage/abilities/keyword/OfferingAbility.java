@@ -3,6 +3,7 @@ package mage.abilities.keyword;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -11,6 +12,7 @@ import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
 import mage.abilities.costs.mana.ActivationManaAbilityStep;
 import mage.abilities.costs.mana.AlternateManaPaymentAbility;
+import mage.abilities.costs.mana.HybridManaCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
@@ -96,18 +98,34 @@ public class OfferingAbility extends StaticAbility implements AlternateManaPayme
     }
 
     @Override
-    public ManaOptions getManaOptions(Ability source, Game game, ManaCost unpaid) {        
-        ManaOptions options = new ManaOptions();
+    public ManaOptions getManaOptions(Ability source, Game game, ManaCost unpaid) {
+        ManaOptions additionalManaOptionsForThisAbility = new ManaOptions();
 
         // Creatures from the offerd type
         game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)
                 .stream()
                 .forEach(permanent -> {
-                    options.addMana(permanent.getSpellAbility().getManaCosts().getMana());
-                });
+                    ManaOptions manaOptionsForThisPermanent = new ManaOptions();
+                    for (ManaCost manaCost : permanent.getSpellAbility().getManaCosts()) {
+                        if (manaCost instanceof HybridManaCost) {
+                            ManaOptions manaOptionsForHybrid = new ManaOptions();
+                            for (Mana mana : manaCost.getManaOptions()) {
+                                manaOptionsForHybrid.add(mana);
+                            }
+                            manaOptionsForThisPermanent.addMana(manaOptionsForHybrid);
+                        } else {
+                            manaOptionsForThisPermanent.addMana(manaCost.getMana());
+                        }
+                    }
+                    for(Mana mana : manaOptionsForThisPermanent) {
+                        additionalManaOptionsForThisAbility.add(mana);
+                    }
+                    
+                }
+                );
 
-        options.removeDuplicated();
-        return options;
+        additionalManaOptionsForThisAbility.removeDuplicated();
+        return additionalManaOptionsForThisAbility;
     }
 }
 

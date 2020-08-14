@@ -310,6 +310,11 @@ public class ManaOptions extends ArrayList<Mana> {
         forceManaDeduplication();
     }
 
+    /**
+     * Adds the given mana value to all existing options
+     * 
+     * @param addMana Mana to add to the existing options
+     */
     public void addMana(Mana addMana) {
         if (isEmpty()) {
             this.add(new Mana());
