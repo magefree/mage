@@ -97,7 +97,7 @@ public class DoIfCostPaid extends OneShotEffect {
                 cost.clearPaid();
                 int bookmark = game.bookmarkState();
                 if (cost.pay(source, game, source.getSourceId(), player.getId(), false)) {
-                    game.informPlayers(player.getLogName() + " paid for " + mageObject.getLogName() + " - " + executingEffects.getText(source.getModes().getMode()));
+                    game.informPlayers(player.getLogName() + " paid for " + mageObject.getLogName() + " - " + message);
                     for (Effect effect : executingEffects) {
                         effect.setTargetPointer(this.targetPointer);
                         if (effect instanceof OneShotEffect) {

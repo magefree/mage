@@ -1,7 +1,5 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -19,8 +17,9 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class AzoriusAethermage extends CardImpl {
@@ -37,7 +36,7 @@ public final class AzoriusAethermage extends CardImpl {
 
         // Whenever a permanent is returned to your hand, you may pay {1}. If you do, draw a card.
         Effect effect = new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{1}"));
-        this.addAbility(new AzoriusAEthermageAbility(Zone.BATTLEFIELD, Zone.BATTLEFIELD, Zone.HAND, effect, new FilterPermanent(), rule, true));
+        this.addAbility(new AzoriusAEthermageAbility(Zone.BATTLEFIELD, Zone.BATTLEFIELD, Zone.HAND, effect, new FilterPermanent(), rule, false));
     }
 
     public AzoriusAethermage(final AzoriusAethermage card) {
@@ -87,11 +86,10 @@ class AzoriusAEthermageAbility extends TriggeredAbilityImpl {
             if (zEvent.getTarget() != null) {
                 permanentThatMoved = zEvent.getTarget();
             }
-            if (permanentThatMoved != null
+            //The controller's hand is where the permanent moved to.
+            return permanentThatMoved != null
                     && filter.match(permanentThatMoved, sourceId, controllerId, game)
-                    && zEvent.getPlayerId().equals(controllerId)) { //The controller's hand is where the permanent moved to.
-                return true;
-            }
+                    && zEvent.getPlayerId().equals(controllerId);
         }
         return false;
     }

@@ -1,6 +1,5 @@
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.common.ZoneChangeTriggeredAbility;
 import mage.abilities.costs.common.ExileSourceFromGraveCost;
 import mage.abilities.effects.common.DamagePlayersEffect;
@@ -12,8 +11,9 @@ import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class CreepingChill extends CardImpl {
@@ -52,7 +52,7 @@ class CreepingChillAbility extends ZoneChangeTriggeredAbility {
                         new DamagePlayersEffect(3, TargetController.OPPONENT),
                         new ExileSourceFromGraveCost()
                 ).addEffect(new GainLifeEffect(3)),
-                "", true
+                "", false
         );
     }
 

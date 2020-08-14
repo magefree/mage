@@ -1,7 +1,5 @@
-
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -18,14 +16,15 @@ import mage.constants.*;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class Farmstead extends CardImpl {
 
     public Farmstead(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}{W}{W}");
         this.subtype.add(SubType.AURA);
 
         // Enchant land
@@ -34,11 +33,11 @@ public final class Farmstead extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        
+
         // Enchanted land has "At the beginning of your upkeep, you may pay {W}{W}. If you do, you gain 1 life."
         ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
                 new DoIfCostPaid(new GainLifeEffect(1), new ManaCostsImpl("{W}{W}")),
-                TargetController.YOU, true);
+                TargetController.YOU, false);
         Effect effect = new GainAbilityAttachedEffect(ability, AttachmentType.AURA);
         effect.setText("Enchanted land has \"At the beginning of your upkeep, you may pay {W}{W}. If you do, you gain 1 life.\"");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));

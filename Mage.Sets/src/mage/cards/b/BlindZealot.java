@@ -55,8 +55,8 @@ public final class BlindZealot extends CardImpl {
 
 class BlindZealotTriggeredAbility extends TriggeredAbilityImpl {
 
-     BlindZealotTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DoIfCostPaid(new DestroyTargetEffect(), new SacrificeSourceCost()), true);
+    BlindZealotTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new DoIfCostPaid(new DestroyTargetEffect(), new SacrificeSourceCost()), false);
     }
 
     private BlindZealotTriggeredAbility(final BlindZealotTriggeredAbility ability) {

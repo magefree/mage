@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -14,14 +12,15 @@ import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class ConsulsShieldguard extends CardImpl {
@@ -33,7 +32,7 @@ public final class ConsulsShieldguard extends CardImpl {
     }
 
     public ConsulsShieldguard(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.subtype.add(SubType.DWARF);
         this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(3);
@@ -44,7 +43,7 @@ public final class ConsulsShieldguard extends CardImpl {
 
         // Whenever Consul's Shiedguard attacks, you may pay {E}. If you do, another target attacking creature gets indestructible until end of turn.
         DoIfCostPaid doIfCostPaidEffect = new DoIfCostPaid(new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn), new PayEnergyCost(1));
-        Ability ability = new AttacksTriggeredAbility(doIfCostPaidEffect, true,
+        Ability ability = new AttacksTriggeredAbility(doIfCostPaidEffect, false,
                 "Whenever {this} attacks, you may pay {E}. If you do, another target attacking creature gets indestructible until end of turn.");
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
