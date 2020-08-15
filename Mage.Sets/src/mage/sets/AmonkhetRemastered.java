@@ -59,7 +59,6 @@ public class AmonkhetRemastered extends ExpansionSet {
     cards.add(new SetCardInfo("Dissenter's Deliverance", "G-DD", Rarity.COMMON, mage.cards.d.DissentersDeliverance.class, NON_FULL_USE_VARIOUS));
     cards.add(new SetCardInfo("Djeru's Resolve", "W-DR", Rarity.COMMON, mage.cards.d.DjerusResolve.class, NON_FULL_USE_VARIOUS));
     cards.add(new SetCardInfo("Dusk // Dawn", "W-DD", Rarity.RARE, mage.cards.d.DuskDawn.class, NON_FULL_USE_VARIOUS));
-    cards.add(new SetCardInfo("Dusk // Dawn", "W-DD", Rarity.RARE, mage.cards.d.DuskDawn.class, NON_FULL_USE_VARIOUS));
     cards.add(new SetCardInfo("Exemplar of Strength", "G-EOS", Rarity.UNCOMMON, mage.cards.e.ExemplarOfStrength.class, NON_FULL_USE_VARIOUS));
     cards.add(new SetCardInfo("Fan Bearer", "W-FB", Rarity.COMMON, mage.cards.f.FanBearer.class, NON_FULL_USE_VARIOUS));
     cards.add(new SetCardInfo("Feral Prowler", "G-FP", Rarity.COMMON, mage.cards.f.FeralProwler.class, NON_FULL_USE_VARIOUS));
@@ -82,7 +81,6 @@ public class AmonkhetRemastered extends ExpansionSet {
     cards.add(new SetCardInfo("Majestic Myriarch", "G-MM", Rarity.MYTHIC, mage.cards.m.MajesticMyriarch.class, NON_FULL_USE_VARIOUS));
     cards.add(new SetCardInfo("Manglehorn", "G-MH", Rarity.UNCOMMON, mage.cards.m.Manglehorn.class, NON_FULL_USE_VARIOUS));
     cards.add(new SetCardInfo("Mighty Leap", "W-ML", Rarity.COMMON, mage.cards.m.MightyLeap.class, NON_FULL_USE_VARIOUS));
-    cards.add(new SetCardInfo("Mouth // Feed", "G-MTF", Rarity.RARE, mage.cards.m.MouthFeed.class, NON_FULL_USE_VARIOUS));
     cards.add(new SetCardInfo("Mouth // Feed", "G-MTF", Rarity.RARE, mage.cards.m.MouthFeed.class, NON_FULL_USE_VARIOUS));
     cards.add(new SetCardInfo("Naga Vitalist", "G-NF", Rarity.COMMON, mage.cards.n.NagaVitalist.class, NON_FULL_USE_VARIOUS));
     cards.add(new SetCardInfo("Oashra Cultivator", "G-OC", Rarity.COMMON, mage.cards.o.OashraCultivator.class, NON_FULL_USE_VARIOUS));
