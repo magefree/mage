@@ -3,7 +3,7 @@ package mage.abilities.mana;
 import mage.Mana;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.mana.ManaEffect;
 import mage.constants.AbilityType;
 import mage.constants.Zone;
 import mage.game.Game;

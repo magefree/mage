@@ -6,6 +6,7 @@ import org.junit.Assert;
 
 import java.util.HashSet;
 import java.util.Set;
+import mage.ConditionalMana;
 
 public class ManaOptionsTestUtils {
 
@@ -18,29 +19,34 @@ public class ManaOptionsTestUtils {
     //mana info
     //logger.info(playerA.getManaPool().getMana().toString());
     //logger.info(playerA.getManaAvailable(currentGame).toString());
-
-    public static boolean manaOptionsContain(ManaOptions list, String searchMana){
-        for(Mana mana: list){
-            if (mana.toString().equals(searchMana)){
-                return true;
+    public static boolean manaOptionsContain(ManaOptions list, String searchMana) {
+        for (Mana mana : list) {
+            if (mana instanceof ConditionalMana) {
+                if ((mana.toString() + ((ConditionalMana)mana).getConditionString()).equals(searchMana)) {
+                    return true;
+                }
+            } else {
+                if (mana.toString().equals(searchMana)) {
+                    return true;
+                }
             }
         }
         return false;
     }
 
-    public static void assertManaOptions(String searchMana, ManaOptions manaList){
-        if(!manaOptionsContain(manaList, searchMana)){
+    public static void assertManaOptions(String searchMana, ManaOptions manaList) {
+        if (!manaOptionsContain(manaList, searchMana)) {
             Assert.fail("Can't find " + searchMana + " in " + manaList.toString());
         }
     }
 
-    public static void assertDuplicatedManaOptions(ManaOptions manaList){
+    public static void assertDuplicatedManaOptions(ManaOptions manaList) {
         Set<String> list = new HashSet<>();
-        for(Mana mana: manaList){
+        for (Mana mana : manaList) {
             String s = mana.toString();
-            if(list.contains(s)){
+            if (list.contains(s)) {
                 Assert.fail("Found duplicated mana option " + s + " in " + manaList.toString());
-            }else{
+            } else {
                 list.add(s);
             }
         }

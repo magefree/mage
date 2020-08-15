@@ -3,7 +3,7 @@ package mage.abilities.decorator;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.effects.mana.BasicManaEffect;
 import mage.choices.ChoiceColor;
 import mage.game.Game;

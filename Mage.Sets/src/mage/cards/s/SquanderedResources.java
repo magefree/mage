@@ -10,7 +10,7 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.mana.AnyColorLandsProduceManaAbility;
 import mage.abilities.mana.ManaOptions;
 import mage.abilities.mana.SimpleManaAbility;

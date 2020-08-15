@@ -26,6 +26,7 @@ import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
+import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 
 /**
  * @author TheElk801
@@ -90,7 +91,7 @@ class TitansNestManaAbility extends ActivatedManaAbilityImpl {
 
     TitansNestManaAbility() {
         super(Zone.BATTLEFIELD, (BasicManaEffect) new BasicManaEffect(
-                new TitansNestConditionalMana())
+                new TitansNestConditionalMana(), new CardsInControllerGraveyardCount())
                 .setText("Add {C}. Spend this mana only to cast a colored spell without {X} in its mana cost."), 
                 new ExileFromGraveCost(new TargetCardInYourGraveyard()));
         this.netMana.add(Mana.ColorlessMana(1));

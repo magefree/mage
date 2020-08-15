@@ -4,7 +4,7 @@ import mage.Mana;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.mana.ManaEffect;
 import mage.choices.Choice;
 import mage.constants.TargetController;
 import mage.constants.Zone;

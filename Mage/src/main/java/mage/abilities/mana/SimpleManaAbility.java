@@ -5,7 +5,7 @@ import java.util.List;
 import mage.Mana;
 import mage.abilities.costs.Cost;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.effects.mana.BasicManaEffect;
 import mage.constants.Zone;
 import mage.game.Game;

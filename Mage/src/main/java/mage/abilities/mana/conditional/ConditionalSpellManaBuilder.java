@@ -5,7 +5,10 @@
  */
 package mage.abilities.mana.conditional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
+import javax.sql.rowset.Predicate;
 import mage.ConditionalMana;
 import mage.MageObject;
 import mage.Mana;
@@ -14,8 +17,14 @@ import mage.abilities.SpellAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
+import mage.cards.Card;
+import mage.constants.DependencyType;
+import mage.constants.SubType;
+import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.Predicates;
 import mage.game.Game;
+import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 
 /**
@@ -63,6 +72,10 @@ class SpellCastManaCondition extends ManaCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         if (source instanceof SpellAbility) {
             MageObject object = game.getObject(source.getSourceId());
+            if (game.inCheckPlayableState() && object instanceof Card) {
+                Spell spell = new Spell((Card) object, (SpellAbility) source, source.getControllerId(), game.getState().getZone(source.getSourceId()));
+                return spell != null && filter.match(spell, source.getSourceId(), source.getControllerId(), game);
+            }            
             if ((object instanceof StackObject)) {
                 return filter.match((StackObject) object, source.getSourceId(), source.getControllerId(), game);
             }

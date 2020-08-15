@@ -10,8 +10,10 @@ import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import mage.ConditionalMana;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -312,15 +314,27 @@ public class ManaOptions extends ArrayList<Mana> {
 
     /**
      * Adds the given mana value to all existing options
-     * 
+     *
      * @param addMana Mana to add to the existing options
      */
     public void addMana(Mana addMana) {
         if (isEmpty()) {
             this.add(new Mana());
         }
-        for (Mana mana : this) {
-            mana.add(addMana);
+        if (addMana instanceof ConditionalMana) {
+            ManaOptions copy = this.copy();
+            this.clear();
+            for (Mana mana : copy) {
+                ConditionalMana condMana = ((ConditionalMana) addMana).copy();
+                condMana.add(mana);
+                add(condMana); // Add mana as option with condition
+                add(mana); // Add old mana without the condition
+            }
+
+        } else {
+            for (Mana mana : this) {
+                mana.add(addMana);
+            }
         }
 
         forceManaDeduplication();
@@ -514,8 +528,15 @@ public class ManaOptions extends ArrayList<Mana> {
         Set<String> list = new HashSet<>();
 
         for (int i = this.size() - 1; i >= 0; i--) {
-            String s = this.get(i).toString();
-            if (list.contains(s)) {
+            String s;
+            if (this.get(i) instanceof ConditionalMana) {
+                s = this.get(i).toString() + ((ConditionalMana) this.get(i)).getConditionString();
+            } else {
+                s = this.get(i).toString();
+            }
+            if (s.isEmpty()) {
+                this.remove(i);
+            } else if (list.contains(s)) {
                 // remove duplicated
                 this.remove(i);
             } else {
@@ -549,5 +570,26 @@ public class ManaOptions extends ArrayList<Mana> {
             }
         }
         return false;
+    }
+
+    public String toString() {
+        Iterator<Mana> it = this.iterator();
+        if (!it.hasNext()) {
+            return "[]";
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append('[');
+        for (;;) {
+            Mana mana = it.next();
+            sb.append(mana.toString());
+            if (mana instanceof ConditionalMana) {
+                sb.append(((ConditionalMana) mana).getConditionString());
+            }
+            if (!it.hasNext()) {
+                return sb.append(']').toString();
+            }
+            sb.append(',').append(' ');
+        }
     }
 }

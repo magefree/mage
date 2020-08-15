@@ -5,7 +5,7 @@ package mage.abilities.mana;
 import mage.constants.Zone;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.mana.ManaEffect;
 import mage.constants.Duration;
 
 /**

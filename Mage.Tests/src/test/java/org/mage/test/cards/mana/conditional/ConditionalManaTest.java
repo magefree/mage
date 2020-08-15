@@ -1,4 +1,4 @@
-package org.mage.test.cards.mana;
+package org.mage.test.cards.mana.conditional;
 
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.mana.ManaOptions;
@@ -6,7 +6,6 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -20,13 +19,17 @@ public class ConditionalManaTest extends CardTestPlayerBase {
 
     @Test
     public void testNormalUse() {
+        setStrictChooseMode(true);
+        
         // {T}: Add one mana of any color. Spend this mana only to cast a multicolored spell.
         addCard(Zone.BATTLEFIELD, playerA, "Pillar of the Paruns", 2);
-        // Instant {G}{W}
+        
         // Target player gains 7 life.
-        addCard(Zone.HAND, playerA, "Heroes' Reunion", 1);
+        addCard(Zone.HAND, playerA, "Heroes' Reunion", 1); // Instant {G}{W}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Heroes' Reunion", playerA);
+        setChoice(playerA, "Green"); // Choose color
+        setChoice(playerA, "White"); // Choose color
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -358,4 +361,37 @@ public class ConditionalManaTest extends CardTestPlayerBase {
 
         assertLife(playerB, 20 - 3);
     }
+    
+    @Test
+    public void testTwoConditionalMana(){
+        setStrictChooseMode(true);
+        
+        // At the beginning of your upkeep, look at the top card of your library. You may put that card into your graveyard.
+        // Exile a card from your graveyard: Add {C}. Spend this mana only to cast a colored spell without {X} in its mana cost.
+        addCard(Zone.BATTLEFIELD, playerA, "Titans' Nest"); // Enchantment {1}{B}{G}{U}
+
+        // {T}: Add {C}{C}{C}{C}. Spend this mana only on costs that contain {X}.
+        addCard(Zone.BATTLEFIELD, playerA, "Rosheen Meanderer", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        
+        addCard(Zone.GRAVEYARD, playerA, "Grizzly Bears", 2);
+       
+        
+        setChoice(playerA, "No"); // Put [Top Card of Library] into your graveyard?
+        
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Titans' Nest", 1);
+        
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        Assert.assertEquals("mana variations don't fit", 4, manaOptions.size());
+        assertManaOptions("{R}", manaOptions);        
+        assertManaOptions("{C}{C}{R}[{TitansNestManaCondition}]", manaOptions);        
+        assertManaOptions("{C}{C}{C}{C}{R}[{RosheenMeandererManaCondition}]", manaOptions);        
+        assertManaOptions("{C}{C}{C}{C}{C}{C}{R}[{RosheenMeandererManaCondition}{TitansNestManaCondition}]", manaOptions);        
+    }
+
 }

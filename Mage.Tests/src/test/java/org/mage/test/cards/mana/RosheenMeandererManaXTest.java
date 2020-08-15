@@ -40,7 +40,7 @@ public class RosheenMeandererManaXTest extends CardTestPlayerBase {
 
     @Test
     public void test_KickerWithXMana() {
-        addCard(Zone.BATTLEFIELD, playerA, "Forest", 6 + 2 - 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 6);
         addCard(Zone.HAND, playerA, "Verdeloth the Ancient");
         //
         addCard(Zone.BATTLEFIELD, playerA, "Rosheen Meanderer");

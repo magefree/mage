@@ -4,7 +4,6 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.common.ManaEffect;
 import mage.choices.ChoiceColor;
 import mage.constants.Outcome;
 import mage.game.Game;

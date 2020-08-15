@@ -15,19 +15,20 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class GatherSpecimensTest extends CardTestPlayerBase {
 
-    /* Gather Specimens  {3}{U}{U}{U}
+    /* Gather Specimens - Instant {3}{U}{U}{U}
      * 
      * If a creature would enter the battlefield under an opponent's control this turn, it enters the battlefield under your control instead.
      */
     
     @Test
     public void testFromHandEffect() {
+        setStrictChooseMode(true);
 
         addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
         addCard(Zone.HAND, playerA, "Gather Specimens", 1);
 
         addCard(Zone.LIBRARY, playerB, "Mountain", 1);
-        addCard(Zone.HAND, playerB, "Memnite", 1);
+        addCard(Zone.HAND, playerB, "Memnite", 1); // Artifact Creature (1/1) {0}
 
         castSpell(2, PhaseStep.UPKEEP, playerA, "Gather Specimens");
 
@@ -37,6 +38,10 @@ public class GatherSpecimensTest extends CardTestPlayerBase {
 
         execute();
 
+        assertAllCommandsUsed();
+        
+        assertGraveyardCount(playerA, "Gather Specimens", 1);
+        
         assertPermanentCount(playerA, "Memnite", 1);
         assertPermanentCount(playerB, "Memnite", 0);
 

@@ -58,35 +58,35 @@ public enum ManaType {
         }
         return choice;
     }
-    
-    public static List<Mana> getManaListFromManaTypes(Set<ManaType> manaTypes, boolean onlyColors) {    
+
+    public static List<Mana> getManaListFromManaTypes(Set<ManaType> manaTypes, boolean onlyColors) {
         List<Mana> netManas = new ArrayList<>();
-            if ((manaTypes.size() == 5 && !manaTypes.contains(ManaType.COLORLESS)) || manaTypes.size() == 6) { // GENERIC should never be returned from getManaTypes
-                netManas.add(Mana.AnyMana(1));
-            } else {
-                if (manaTypes.contains(ManaType.BLACK)) {
-                    netManas.add(Mana.BlackMana(1));
-                }
-                if (manaTypes.contains(ManaType.RED)) {
-                    netManas.add(Mana.RedMana(1));
-                }
-                if (manaTypes.contains(ManaType.BLUE)) {
-                    netManas.add(Mana.BlueMana(1));
-                }
-                if (manaTypes.contains(ManaType.GREEN)) {
-                    netManas.add(Mana.GreenMana(1));
-                }
-                if (manaTypes.contains(ManaType.WHITE)) {
-                    netManas.add(Mana.WhiteMana(1));
-                }
+        if ((manaTypes.size() == 5 && !manaTypes.contains(ManaType.COLORLESS)) || manaTypes.size() == 6) { // GENERIC should never be returned from getManaTypes
+            netManas.add(Mana.AnyMana(1));
+        } else {
+            if (manaTypes.contains(ManaType.BLACK)) {
+                netManas.add(Mana.BlackMana(1));
             }
-            if (!onlyColors && manaTypes.contains(ManaType.COLORLESS)) {
-                netManas.add(Mana.ColorlessMana(1));
+            if (manaTypes.contains(ManaType.RED)) {
+                netManas.add(Mana.RedMana(1));
             }
-        
+            if (manaTypes.contains(ManaType.BLUE)) {
+                netManas.add(Mana.BlueMana(1));
+            }
+            if (manaTypes.contains(ManaType.GREEN)) {
+                netManas.add(Mana.GreenMana(1));
+            }
+            if (manaTypes.contains(ManaType.WHITE)) {
+                netManas.add(Mana.WhiteMana(1));
+            }
+        }
+        if (!onlyColors && manaTypes.contains(ManaType.COLORLESS)) {
+            netManas.add(Mana.ColorlessMana(1));
+        }
+
         return netManas;
     }
-    
+
     public static Set<ManaType> getManaTypesFromManaList(Mana mana) {
         Set<ManaType> manaTypes = EnumSet.noneOf(ManaType.class);
         if (mana.getAny() > 0) {
@@ -123,5 +123,8 @@ public enum ManaType {
             manaTypes.addAll(getManaTypesFromManaList(mana));
         }
         return manaTypes;
+    }
+    public static Set<ManaType> getTrueManaTypes() {
+        return EnumSet.of(BLACK, BLUE, GREEN, RED, WHITE, COLORLESS);
     }
 }

@@ -16,7 +16,6 @@ import mage.players.Player;
 
 import java.util.Optional;
 import java.util.UUID;
-import javax.naming.directory.InvalidAttributesException;
 
 /**
  * @author BetaSteward_at_googlemail.com

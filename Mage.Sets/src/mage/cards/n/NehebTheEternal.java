@@ -5,7 +5,7 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfPostCombatMainTriggeredAbility;
 import mage.abilities.dynamicvalue.common.OpponentsLostLifeCount;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.effects.mana.DynamicManaEffect;
 import mage.abilities.keyword.AfflictAbility;
 import mage.cards.CardImpl;

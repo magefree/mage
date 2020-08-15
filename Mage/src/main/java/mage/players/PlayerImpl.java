@@ -3121,6 +3121,9 @@ public abstract class PlayerImpl implements Player, Serializable {
             MageObjectReference permittingObject = game.getContinuousEffects().asThough(ability.getSourceId(),
                     AsThoughEffectType.SPEND_OTHER_MANA, ability, ability.getControllerId(), game);
             for (Mana mana : abilityOptions) {
+                if (mana.count() == 0) {
+                    return true;
+                }
                 for (Mana avail : availableMana) {
                     // TODO: SPEND_OTHER_MANA effects with getAsThoughManaType can change mana type to pay,
                     //  but that code processing it as any color, need to test and fix another use cases
@@ -3130,6 +3133,9 @@ public abstract class PlayerImpl implements Player, Serializable {
                     //  add tests for non any color like Sunglasses of Urza
                     if (permittingObject != null && mana.count() <= avail.count()) {
                         return true;
+                    }
+                    if (avail instanceof ConditionalMana && !((ConditionalMana) avail).apply(ability, game, getId(), ability.getManaCosts())) {
+                        continue;
                     }
                     if (mana.enough(avail)) { // here we need to check if spend mana as though allow to pay the mana cost
                         return true;
@@ -4620,4 +4626,10 @@ public abstract class PlayerImpl implements Player, Serializable {
     public SpellAbility chooseAbilityForCast(Card card, Game game, boolean noMana) {
         return card.getSpellAbility();
     }
+
+    @Override
+    public String toString() {
+        return getName() + " " + super.toString();
+    }
+
 }

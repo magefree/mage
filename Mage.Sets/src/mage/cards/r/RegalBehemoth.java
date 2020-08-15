@@ -7,7 +7,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.mana.AddManaOfAnyColorEffect;
 import mage.abilities.effects.common.BecomesMonarchSourceEffect;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.mana.TriggeredManaAbility;
 import mage.cards.CardImpl;

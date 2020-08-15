@@ -7,7 +7,6 @@ import mage.ConditionalMana;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.common.ManaEffect;
 import mage.game.Game;
 
 public class BasicManaEffect extends ManaEffect {
@@ -28,10 +27,14 @@ public class BasicManaEffect extends ManaEffect {
     }
 
     public BasicManaEffect(ConditionalMana conditionalMana) {
+        this(conditionalMana, null);
+    }
+
+    public BasicManaEffect(ConditionalMana conditionalMana, DynamicValue netAmount) {
         super();
         this.manaTemplate = conditionalMana;
         staticText = "add " + manaTemplate.toString() + " " + conditionalMana.getDescription();
-        this.netAmount = null;
+        this.netAmount = netAmount;
     }
 
     public BasicManaEffect(final BasicManaEffect effect) {
@@ -46,7 +49,7 @@ public class BasicManaEffect extends ManaEffect {
         if (game != null && game.inCheckPlayableState() && netAmount != null) {
             // calculate the maximum available mana
             int count = netAmount.calculate(game, source, this);
-            Mana computedMana = new Mana();
+            Mana computedMana = manaTemplate.copy(); // Copy to get condition
             if (count > 0) {
                 if (manaTemplate.getBlack() > 0) {
                     computedMana.setBlack(count * manaTemplate.getBlack());

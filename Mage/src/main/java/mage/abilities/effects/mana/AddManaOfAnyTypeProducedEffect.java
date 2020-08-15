@@ -2,7 +2,6 @@ package mage.abilities.effects.mana;
 
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.effects.common.ManaEffect;
 import mage.choices.Choice;
 import mage.choices.ChoiceColor;
 import mage.game.Game;

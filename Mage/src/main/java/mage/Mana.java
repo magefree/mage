@@ -275,6 +275,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
 
     /**
      * Adds mana from the passed in {@link Mana} object to this object.
+     * Ignores conditions from conditional mana
      *
      * @param mana mana to add to this object.
      */
@@ -1111,6 +1112,17 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * @return
      */
     public static Mana getMoreValuableMana(final Mana mana1, final Mana mana2) {
+        String conditionString1 = "";
+        String conditionString2 = "";
+        if (mana1 instanceof ConditionalMana){
+            conditionString1 = ((ConditionalMana)mana1).getConditionString();
+        }
+        if (mana2 instanceof ConditionalMana){
+            conditionString2 = ((ConditionalMana)mana2).getConditionString();
+        }
+        if (!conditionString1.equals(conditionString2)) {
+            return null;
+        }
         Mana moreMana;
         Mana lessMana;
         if (mana2.countColored() > mana1.countColored() || mana2.getAny() > mana1.getAny() || mana2.count() > mana1.count()) {
