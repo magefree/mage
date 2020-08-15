@@ -48,4 +48,9 @@ public enum SetType {
         // any official sets that was in modern (standard + Modern Horizons)
         return this.isStandardLegal() || this == SetType.SUPPLEMENTAL_MODERN_LEGAL;
     }
+
+    public boolean isHistoricLegal() {
+        // any set made for standard or specifically for arena
+        return this.isStandardLegal() || this == SetType.MAGIC_ARENA;
+    }
 }

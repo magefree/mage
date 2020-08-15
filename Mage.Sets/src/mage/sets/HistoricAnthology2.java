@@ -17,7 +17,7 @@ public final class HistoricAnthology2 extends ExpansionSet {
     }
 
     private HistoricAnthology2() {
-        super("Historic Anthology 2", "HA2", ExpansionSet.buildDate(2020, 3, 12), SetType.MAGIC_ONLINE);
+        super("Historic Anthology 2", "HA2", ExpansionSet.buildDate(2020, 3, 12), SetType.MAGIC_ARENA);
         this.hasBoosters = false;
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Ancestral Mask", 13, Rarity.COMMON, mage.cards.a.AncestralMask.class));

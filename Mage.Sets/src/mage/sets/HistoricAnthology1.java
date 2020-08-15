@@ -18,7 +18,7 @@ public final class HistoricAnthology1 extends ExpansionSet {
     }
 
     private HistoricAnthology1() {
-        super("Historic Anthology 1", "HA1", ExpansionSet.buildDate(2019, 11, 21), SetType.MAGIC_ONLINE);
+        super("Historic Anthology 1", "HA1", ExpansionSet.buildDate(2019, 11, 21), SetType.MAGIC_ARENA);
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

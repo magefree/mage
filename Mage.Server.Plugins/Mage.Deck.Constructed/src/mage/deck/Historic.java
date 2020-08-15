@@ -19,7 +19,7 @@ public class Historic extends Constructed {
 
         Date cutoff = new GregorianCalendar(2017, Calendar.SEPTEMBER, 29).getTime(); // XLN release date
         for (ExpansionSet set : Sets.getInstance().values()) {
-            if (set.getSetType().isStandardLegal() && (set.getReleaseDate().after(cutoff) || set.getReleaseDate().equals(cutoff))) {
+            if (set.getSetType().isHistoricLegal() && (set.getReleaseDate().after(cutoff) || set.getReleaseDate().equals(cutoff))) {
                 setCodes.add(set.getCode());
             }
         }
@@ -36,9 +36,6 @@ public class Historic extends Constructed {
         banned.add("Winota, Joiner of Forces");
 
         // Individual cards added
-        setCodes.add(mage.sets.HistoricAnthology1.getInstance().getCode());
-        setCodes.add(mage.sets.HistoricAnthology2.getInstance().getCode());
-        setCodes.add(mage.sets.HistoricAnthology3.getInstance().getCode());
         singleCards.add("Rhys the Redeemed");
         singleCards.add("Spiritual Guardian");
         singleCards.add("Sanctuary Cat");
