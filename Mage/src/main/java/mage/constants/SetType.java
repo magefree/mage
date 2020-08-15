@@ -7,6 +7,7 @@ public enum SetType {
     EXPANSION("Expansion"),
     CORE("Core"),
     MAGIC_ONLINE("Magic Online"),
+    MAGIC_ARENA("Magic Arena"),
     SUPPLEMENTAL("Supplemental"),
     SUPPLEMENTAL_STANDARD_LEGAL("Standard Legal Supplemental"),
     SUPPLEMENTAL_MODERN_LEGAL("Modern Legal Supplemental"),
