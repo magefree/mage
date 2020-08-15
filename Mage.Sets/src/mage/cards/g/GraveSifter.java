@@ -1,11 +1,13 @@
-
 package mage.cards.g;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
@@ -29,7 +31,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 public final class GraveSifter extends CardImpl {
 
     public GraveSifter(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}");
         this.subtype.add(SubType.ELEMENTAL);
         this.subtype.add(SubType.BEAST);
 
@@ -71,6 +73,7 @@ class GraveSifterEffect extends OneShotEffect {
         Choice typeChoice = new ChoiceCreatureType(game.getObject(source.getSourceId()));
         typeChoice.setMessage("Choose creature type to return cards from your graveyard");
         Player controller = game.getPlayer(source.getControllerId());
+        Set<Card> toHand = new HashSet<>();
         if (controller != null) {
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
@@ -82,11 +85,14 @@ class GraveSifterEffect extends OneShotEffect {
                         filter.add(SubType.byDescription(typeChoice.getChoice()).getPredicate());
                         Target target = new TargetCardInYourGraveyard(0, Integer.MAX_VALUE, filter);
                         player.chooseTarget(outcome, target, source, game);
-                        player.moveCards(new CardsImpl(target.getTargets()), Zone.HAND, source, game);
+                        toHand.addAll(new CardsImpl(target.getTargets()).getCards(game));
                     }
 
                 }
             }
+
+            // must happen simultaneously Rule 101.4
+            controller.moveCards(toHand, Zone.HAND, source, game, false, false, true, null);
             return true;
         }
         return false;
