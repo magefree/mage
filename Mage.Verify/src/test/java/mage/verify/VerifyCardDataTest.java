@@ -22,6 +22,9 @@ import mage.game.draft.RateCard;
 import mage.game.permanent.token.Token;
 import mage.game.permanent.token.TokenImpl;
 import mage.sets.TherosBeyondDeath;
+import mage.verify.mtgjson.MtgJsonCard;
+import mage.verify.mtgjson.MtgJsonService;
+import mage.verify.mtgjson.MtgJsonSet;
 import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
@@ -424,6 +427,9 @@ public class VerifyCardDataTest {
         int xmageUnofficialSets = 0;
         int xmageUnofficialCards = 0;
         Collection<ExpansionSet> sets = Sets.getInstance().values();
+
+        Assert.assertFalse("XMage data must contains sets list", sets.isEmpty());
+        Assert.assertFalse("MtgJson data must contains sets list", MtgJsonService.sets().isEmpty());
 
         // official sets
         for (Map.Entry<String, MtgJsonSet> refEntry : MtgJsonService.sets().entrySet()) {
@@ -1415,18 +1421,6 @@ public class VerifyCardDataTest {
         }
         if (!Objects.equals(cost, expected)) {
             fail(card, "cost", cost + " != " + expected);
-        }
-    }
-
-    private void checkNumbers(Card card, MtgJsonCard ref) {
-        if (skipListHaveName(SKIP_LIST_NUMBER, card.getExpansionSetCode(), card.getName())) {
-            return;
-        }
-
-        String expected = ref.number;
-        String current = card.getCardNumber();
-        if (!eqPT(current, expected)) {
-            warn(card, "card number " + current + " != " + expected);
         }
     }
 
