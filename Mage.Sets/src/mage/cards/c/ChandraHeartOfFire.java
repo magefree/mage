@@ -54,7 +54,7 @@ public final class ChandraHeartOfFire extends CardImpl {
         damageAbility.addTarget(new TargetAnyTarget());
         this.addAbility(damageAbility);
 
-        // −9: Search your graveyard and library for any number of red instant and/or sorcery spells, exile them, then shuffle your library. You may cast them this turn. Add six {R}.
+        // −9: Search your graveyard and library for any number of red instant and/or sorcery cards, exile them, then shuffle your library. You may cast them this turn. Add six {R}.
         Ability ultimateAbility = new LoyaltyAbility(new ChandraHeartOfFireUltimateEffect(), -9);
         ultimateAbility.addEffect(new BasicManaEffect(Mana.RedMana(6)).setText("Add six {R}"));
         this.addAbility(ultimateAbility);
@@ -81,7 +81,7 @@ class ChandraHeartOfFireUltimateEffect extends OneShotEffect {
 
     ChandraHeartOfFireUltimateEffect() {
         super(Outcome.Benefit);
-        staticText = "Search your graveyard and library for any number of red instant and/or sorcery spells, exile them, then shuffle your library. You may cast them this turn";
+        staticText = "Search your graveyard and library for any number of red instant and/or sorcery cards, exile them, then shuffle your library. You may cast them this turn";
     }
 
     private ChandraHeartOfFireUltimateEffect(ChandraHeartOfFireUltimateEffect effect) {

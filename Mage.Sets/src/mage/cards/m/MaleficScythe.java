@@ -40,7 +40,7 @@ public final class MaleficScythe extends CardImpl {
 
         // Whenever equipped creature dies, put a soul counter on Malefic Scythe.
         this.addAbility(new DiesAttachedTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.SOUL.createInstance()), "equipped"
+                new AddCountersSourceEffect(CounterType.SOUL.createInstance()), "equipped creature"
         ));
 
         // Equip {1}

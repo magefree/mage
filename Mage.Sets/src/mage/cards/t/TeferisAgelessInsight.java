@@ -40,7 +40,7 @@ class TeferisAgelessInsightEffect extends ReplacementEffectImpl {
 
     TeferisAgelessInsightEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
-        staticText = "If you draw a card except the first one you draw in each of your draw steps, draw two cards instead";
+        staticText = "If you would draw a card except the first one you draw in each of your draw steps, draw two cards instead";
     }
 
     private TeferisAgelessInsightEffect(final TeferisAgelessInsightEffect effect) {
