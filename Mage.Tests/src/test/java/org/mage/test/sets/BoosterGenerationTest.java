@@ -15,20 +15,47 @@ import org.junit.Test;
 import org.mage.test.serverside.base.MageTestBase;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author nigelzor, JayDi85
  */
 public class BoosterGenerationTest extends MageTestBase {
 
+    private static final List<String> basics = new ArrayList<>(Arrays.asList("Plains", "Island", "Swamp", "Mountain", "Forest"));
+
+    private static String str(List<Card> cards) {
+        StringBuilder sb = new StringBuilder("[");
+        Iterator<Card> iterator = cards.iterator();
+        while (iterator.hasNext()) {
+            Card next = iterator.next();
+            sb.append(next.getName());
+            if (iterator.hasNext()) {
+                sb.append(", ");
+            }
+        }
+        sb.append("] (").append(cards.size()).append(')');
+        return sb.toString();
+    }
+
+    private static boolean contains(List<Card> cards, List<String> names, String code) {
+        return names.stream().anyMatch((name) -> (contains(cards, name, code)));
+    }
+
+    private static boolean contains(List<Card> cards, String name, String code) {
+        return cards.stream().anyMatch((card)
+                -> (card.getName().equals(name)
+                && (code == null || card.getExpansionSetCode().equals(code)))
+        );
+    }
+
     @Before
     public void setUp() {
         CardScanner.scan();
     }
-
-    private static final List<String> basics = new ArrayList<>(Arrays.asList("Plains", "Island", "Swamp", "Mountain", "Forest"));
 
     private void checkOnePartnerBoost() {
         List<Card> booster = Battlebond.getInstance().createBooster();
@@ -58,7 +85,6 @@ public class BoosterGenerationTest extends MageTestBase {
 
     @Test
     public void testFateReforged() {
-
         List<String> tapland = new ArrayList<>(Arrays.asList(
                 "Bloodfell Caves", "Blossoming Sands", "Dismal Backwater", "Jungle Hollow", "Rugged Highlands",
                 "Scoured Barrens", "Swiftwater Cliffs", "Thornwood Falls", "Tranquil Cove", "Wind-Scarred Crag"));
@@ -66,9 +92,10 @@ public class BoosterGenerationTest extends MageTestBase {
                 "Bloodstained Mire", "Flooded Strand", "Polluted Delta", "Windswept Heath", "Wooded Foothills"));
 
         List<Card> booster = FateReforged.getInstance().createBooster();
-        assertTrue(str(booster), contains(booster, tapland, "FRF") || contains(booster, fetchland, "KTK")
-                || contains(booster, basics, null));
-        // assertFalse(str(booster), contains(booster, basics, null));
+        assertTrue(str(booster), contains(booster, tapland, "FRF")
+                || contains(booster, fetchland, "KTK")
+                || contains(booster, basics, null)
+        );
     }
 
     @Test
@@ -96,7 +123,7 @@ public class BoosterGenerationTest extends MageTestBase {
         Assert.assertTrue("Slot 11 is multicolored", booster.get(10).getColor(null).isMulticolored());
         Assert.assertTrue("Slot 12 is colorless", booster.get(11).getColor(null).isColorless());
 
-        Assert.assertEquals("Slot 15 is from FMB1 set","FMB1", booster.get(14).getExpansionSetCode());
+        Assert.assertEquals("Slot 15 is from FMB1 set", "FMB1", booster.get(14).getExpansionSetCode());
     }
 
     @Test
@@ -124,7 +151,7 @@ public class BoosterGenerationTest extends MageTestBase {
         Assert.assertTrue("Slot 11 is multicolored", booster.get(10).getColor(null).isMulticolored());
         Assert.assertTrue("Slot 12 is colorless", booster.get(11).getColor(null).isColorless());
 
-        Assert.assertEquals("Slot 15 is from FMB1 set","FMB1", booster.get(14).getExpansionSetCode());
+        Assert.assertEquals("Slot 15 is from FMB1 set", "FMB1", booster.get(14).getExpansionSetCode());
     }
 
     @Test
@@ -244,29 +271,23 @@ public class BoosterGenerationTest extends MageTestBase {
         }
     }
 
-    private static String str(List<Card> cards) {
-        StringBuilder sb = new StringBuilder("[");
-        Iterator<Card> iterator = cards.iterator();
-        while (iterator.hasNext()) {
-            Card next = iterator.next();
-            sb.append(next.getName());
-            if (iterator.hasNext()) {
-                sb.append(", ");
-            }
+    @Test
+    public void testAmonkhetRemastered_MustHaveSpecialLand() {
+        // AKR replace all basic lands with special (1 per booster)
+        // https://mtg.gamepedia.com/Amonkhet_Remastered
+
+        for (int i = 1; i <= 5; i++) {
+            List<Card> booster = AmonkhetRemastered.getInstance().createBooster();
+
+            // no basic lands in booster
+            assertFalse(str(booster), contains(booster, basics, null));
+
+            // special lands in land slot (can have multiple special lands per booster: one from land slot, one from common slot)
+            List<Card> boosterLands = booster.stream().filter(card -> !card.isBasic() && card.isLand()).collect(Collectors.toList());
+            Assert.assertTrue("Amonkhet Remastered's booster must contains minimum 1 special land", boosterLands.size() >= 1);
+
+            // Regal Caracal is top-boxer card, not booster
+            assertFalse("Amonkhet Remastered's booster must not contains Regal Caracal", contains(booster, "Regal Caracal", null));
         }
-        sb.append("] (").append(cards.size()).append(')');
-        return sb.toString();
     }
-
-    private static boolean contains(List<Card> cards, List<String> names, String code) {
-        return names.stream().anyMatch((name) -> (contains(cards, name, code)));
-    }
-
-    private static boolean contains(List<Card> cards, String name, String code) {
-        return cards.stream().anyMatch((card)
-                -> (card.getName().equals(name)
-                && (code == null || card.getExpansionSetCode().equals(code)))
-        );
-    }
-
 }
