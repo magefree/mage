@@ -14,6 +14,7 @@ import mage.constants.ComparisonType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.watchers.common.PlayerGainedLifeWatcher;
 
 import java.util.UUID;
 
@@ -30,8 +31,9 @@ public final class SanguineIndulgence extends CardImpl {
 
         // This spell costs {3} less to cast if you've gained 3 or more life this turn.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SpellCostReductionSourceEffect(3, condition)
-        ).setRuleAtTheTop(true).addHint(hint));
+                        Zone.ALL, new SpellCostReductionSourceEffect(3, condition)
+                ).addHint(hint).setRuleAtTheTop(true),
+                new PlayerGainedLifeWatcher());
 
         // Return up to two target creature cards from your graveyard to your hand.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
