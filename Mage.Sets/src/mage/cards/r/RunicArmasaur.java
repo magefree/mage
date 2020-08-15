@@ -68,9 +68,12 @@ class RunicArmasaurTriggeredAbility extends TriggeredAbilityImpl {
         StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
         if (stackAbility != null
                 && stackAbility.getAbilityType() == AbilityType.ACTIVATED
-                && game.getOpponents(this.getControllerId()).contains(stackAbility.getControllerId())) {
+                && game.getOpponents(this.getControllerId()).contains(stackAbility.getControllerId())
+                && stackAbility.getSourceObjectIfItStillExists(game).isPermanent()) { // must be a permanent
             MageObject abilitySourceObject = stackAbility.getSourceObject(game);
-            return abilitySourceObject != null && (abilitySourceObject.isLand() || abilitySourceObject.isCreature());
+            return abilitySourceObject != null
+                    && (abilitySourceObject.isLand()
+                    || abilitySourceObject.isCreature());
         }
         return false;
     }
