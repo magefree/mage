@@ -26,6 +26,9 @@ public class LegalityLabel extends JLabel {
     protected static final Dimension DIM_MAXIMUM = new Dimension(150, 75);
     protected static final Dimension DIM_PREFERRED = new Dimension(75, 25);
 
+    protected static final int TOOLTIP_TABLE_WIDTH = 300; // size of the label's tooltip
+    protected static final int TOOLTIP_MAX_ERRORS = 20; // max errors to show in tooltip
+
     protected Deck currentDeck;
     protected String errorMessage;
     protected DeckValidator validator;
@@ -108,16 +111,26 @@ public class LegalityLabel extends JLabel {
 
     protected String formatInvalidTooltip(java.util.List<DeckValidatorError> sortedErrorsList) {
         return sortedErrorsList.stream()
-                .reduce("<html><body><p>Deck is <span style='color:#BF544A;font-weight:bold;'>INVALID</span></p><u>The following problems have been found:</u><br><table>",
-                        (str, error) -> String.format("%s<tr><td><b>%s</b></td><td>%s</td></tr>", str, escapeHtml(error.getGroup()), escapeHtml(error.getMessage())), String::concat)
-                + "</table></body></html>";
+                .reduce("<html><body>"
+                                + "<p>Deck is <span style='color:#BF544A;font-weight:bold;'>INVALID</span></p>"
+                                + "<u>The following problems have been found:</u>"
+                                + "<br>"
+                                + "<table style=\"table-layout: fixed; width: " + TOOLTIP_TABLE_WIDTH + "px\">",
+                        (str, error) -> String.format("%s<tr><td style=\"word-wrap: break-word\"><b>%s</b></td><td style=\"word-wrap: break-word\">%s</td></tr>", str, escapeHtml(error.getGroup()), escapeHtml(error.getMessage())), String::concat)
+                + "</table>"
+                + "</body></html>";
     }
 
     protected String formatPartlyValidTooltip(java.util.List<DeckValidatorError> sortedErrorsList) {
         return sortedErrorsList.stream()
-                .reduce("<html><body><p>Deck is <span style='color:#b8860b;font-weight:bold;'>PARTLY VALID</span></p><u>The following problems have been found:</u><br><table>",
-                        (str, error) -> String.format("%s<tr><td><b>%s</b></td><td>%s</td></tr>", str, escapeHtml(error.getGroup()), escapeHtml(error.getMessage())), String::concat)
-                + "</table></body></html>";
+                .reduce("<html><body>"
+                                + "<p>Deck is <span style='color:#b8860b;font-weight:bold;'>PARTLY VALID</span></p>"
+                                + "<u>The following problems have been found:</u>"
+                                + "<br>"
+                                + "<table style=\"table-layout: fixed; width: " + TOOLTIP_TABLE_WIDTH + "px\">",
+                        (str, error) -> String.format("%s<tr><td style=\"word-wrap: break-word\"><b>%s</b></td><td style=\"word-wrap: break-word\">%s</td></tr>", str, escapeHtml(error.getGroup()), escapeHtml(error.getMessage())), String::concat)
+                + "</table>"
+                + "</body></html>";
     }
 
     private String appendErrorMessage(String string) {
@@ -169,9 +182,9 @@ public class LegalityLabel extends JLabel {
             if (validator.validate(deck)) {
                 showStateLegal("<html><body>Deck is <span style='color:green;font-weight:bold;'>VALID</span></body></html>");
             } else if (validator.isPartlyValid()) {
-                showStatePartlyLegal(formatPartlyValidTooltip(validator.getErrorsListSorted()));
+                showStatePartlyLegal(formatPartlyValidTooltip(validator.getErrorsListSorted(TOOLTIP_MAX_ERRORS)));
             } else {
-                showStateNotLegal(formatInvalidTooltip(validator.getErrorsListSorted()));
+                showStateNotLegal(formatInvalidTooltip(validator.getErrorsListSorted(TOOLTIP_MAX_ERRORS)));
             }
         } catch (Exception e) {
             showStateUnknown(String.format("<html><body><b>Deck could not be validated!</b><br>The following error occurred while validating this deck:<br>%s</body></html>", escapeHtml(e.getMessage())));

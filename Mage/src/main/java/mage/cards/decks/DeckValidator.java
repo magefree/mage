@@ -51,15 +51,19 @@ public abstract class DeckValidator implements Serializable {
         return this.errorsList;
     }
 
+    public List<DeckValidatorError> getErrorsListSorted() {
+        return getErrorsListSorted(Integer.MAX_VALUE);
+    }
+
     /**
      * Get errors list sorted by error type and texts
      *
      * @return
      */
-    public List<DeckValidatorError> getErrorsListSorted() {
+    public List<DeckValidatorError> getErrorsListSorted(int maxErrors) {
         List<DeckValidatorError> list = new ArrayList<>(this.getErrorsList());
 
-        Collections.sort(list, new Comparator<DeckValidatorError>() {
+        list.sort(new Comparator<DeckValidatorError>() {
             @Override
             public int compare(DeckValidatorError e1, DeckValidatorError e2) {
                 int res = 0;
@@ -67,21 +71,30 @@ public abstract class DeckValidator implements Serializable {
                 // sort by error type
                 Integer order1 = e1.getErrorType().getSortOrder();
                 Integer order2 = e2.getErrorType().getSortOrder();
-                res = order2.compareTo(order1);
+                res = order1.compareTo(order2);
 
                 // sort by group
-                if (res != 0) {
-                    res = e2.getGroup().compareTo(e1.getGroup());
+                if (res == 0) {
+                    res = e1.getGroup().compareTo(e2.getGroup());
                 }
 
                 // sort by message
-                if (res != 0) {
-                    res = e2.getMessage().compareTo(e1.getMessage());
+                if (res == 0) {
+                    res = e1.getMessage().compareTo(e2.getMessage());
                 }
 
                 return res;
             }
         });
+
+        if (list.size() <= maxErrors) {
+            return list;
+        } else {
+            int otherErrorsCount = list.size() - maxErrors;
+            list = list.stream().limit(maxErrors).collect(Collectors.toList());
+            list.add(new DeckValidatorError(DeckValidatorErrorType.OTHER, "...",
+                    "and more " + otherErrorsCount + " error" + (otherErrorsCount > 1 ? "s" : "")));
+        }
 
         return list;
     }
