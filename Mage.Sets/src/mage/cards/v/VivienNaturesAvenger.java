@@ -21,10 +21,10 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class VivienNaturesAvenger extends CardImpl {
-
+    
     public VivienNaturesAvenger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{G}{G}");
-
+        
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.VIVIEN);
         this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
@@ -48,13 +48,14 @@ public final class VivienNaturesAvenger extends CardImpl {
         ability.addEffect(new GainAbilityTargetEffect(
                 TrampleAbility.getInstance(), Duration.EndOfTurn
         ).setText("and gains trample until end of turn."));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
-
+    
     private VivienNaturesAvenger(final VivienNaturesAvenger card) {
         super(card);
     }
-
+    
     @Override
     public VivienNaturesAvenger copy() {
         return new VivienNaturesAvenger(this);
