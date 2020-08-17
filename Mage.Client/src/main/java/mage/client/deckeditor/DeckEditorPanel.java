@@ -9,6 +9,7 @@ import mage.client.MageFrame;
 import mage.client.SessionHandler;
 import mage.client.cards.BigCard;
 import mage.client.cards.ICardGrid;
+import mage.client.components.LegalityLabel;
 import mage.client.constants.Constants.DeckEditorMode;
 import mage.client.deck.generator.DeckGenerator;
 import mage.client.deck.generator.DeckGenerator.DeckGeneratorException;
@@ -27,12 +28,11 @@ import mage.view.SimpleCardView;
 import org.apache.log4j.Logger;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.filechooser.FileFilter;
 import java.awt.*;
 import java.awt.dnd.DropTarget;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.HierarchyEvent;
+import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -48,11 +48,15 @@ import static mage.cards.decks.DeckFormats.XMAGE_INFO;
 public class DeckEditorPanel extends javax.swing.JPanel {
 
     private static final Logger logger = Logger.getLogger(DeckEditorPanel.class);
+    private static final Border LEGALITY_LABEL_BORDER_SELECTED = BorderFactory.createLineBorder(Color.gray, 2);
+    private static final Border LEGALITY_LABEL_BORDER_EMPTY = BorderFactory.createEmptyBorder();
+
     private final JFileChooser fcSelectDeck;
     private final JFileChooser fcImportDeck;
     private final JFileChooser fcExportDeck;
-    private Deck deck = new Deck();
     private final Map<UUID, Card> temporaryCards = new HashMap<>(); // Cards dragged out of one part of the view into another
+    private final String LAST_DECK_FOLDER = "lastDeckFolder";
+    private Deck deck = new Deck();
     private boolean isShowCardInfo = false;
     private UUID tableId;
     private DeckEditorMode mode;
@@ -60,7 +64,41 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     private javax.swing.Timer countdown;
     private UpdateDeckTask updateDeckTask;
     private int timeToSubmit = -1;
-    private final String LAST_DECK_FOLDER = "lastDeckFolder";
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private mage.client.cards.BigCard bigCard;
+    private javax.swing.JButton btnAddLand;
+    private javax.swing.JButton btnExit;
+    private javax.swing.JButton btnExport;
+    private javax.swing.JButton btnGenDeck;
+    private javax.swing.JButton btnImport;
+    private javax.swing.JButton btnLegality;
+    private javax.swing.JButton btnLoad;
+    private javax.swing.JButton btnNew;
+    private javax.swing.JButton btnSave;
+    private javax.swing.JButton btnSubmit;
+    private javax.swing.JButton btnSubmitTimer;
+    private JComponent cardInfoPane;
+    /*
+    private org.mage.plugins.card.info.CardInfoPaneImpl cardInfoPane;
+    */
+    private mage.client.deckeditor.CardSelector cardSelector;
+    private mage.client.deckeditor.DeckArea deckArea;
+    private mage.client.deckeditor.DeckLegalityPanel deckLegalityDisplay;
+    private javax.swing.JLabel lblDeckName;
+    private javax.swing.JPanel panelDeck;
+    private javax.swing.JPanel panelDeckCreate;
+    private javax.swing.JPanel panelDeckDraft;
+    private javax.swing.JPanel panelDeckExit;
+    private javax.swing.JPanel panelDeckLands;
+    private javax.swing.JPanel panelDeckLoad;
+    private javax.swing.JPanel panelDeckName;
+    private javax.swing.JPanel panelDeckSave;
+    private javax.swing.JPanel panelInfo;
+    private javax.swing.JPanel panelLeft;
+    private javax.swing.JSplitPane panelRight;
+    private javax.swing.JScrollPane scrollPaneInfo;
+    private javax.swing.JTextField txtDeckName;
+    private javax.swing.JTextField txtTimeRemaining;
 
     public DeckEditorPanel() {
         initComponents();
@@ -105,6 +143,38 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 }
             }
         });
+
+        // deck legality cards selection
+        Arrays.stream(deckLegalityDisplay.getComponents())
+                .filter(c -> c instanceof LegalityLabel)
+                .forEach(c -> {
+                    c.addMouseListener(new MouseAdapter() {
+                        public void mouseClicked(MouseEvent e) {
+                            List<String> cardNames = new ArrayList<>();
+                            LegalityLabel label = (LegalityLabel) e.getComponent();
+                            label.getValidator().getErrorsList().stream()
+                                    .map(DeckValidatorError::getCardName)
+                                    .filter(Objects::nonNull)
+                                    .forEach(cardNames::add);
+                            deckArea.getDeckList().deselectAll();
+                            deckArea.getDeckList().selectByName(cardNames);
+                            deckArea.getSideboardList().deselectAll();
+                            deckArea.getSideboardList().selectByName(cardNames);
+                        }
+
+                        @Override
+                        public void mouseEntered(MouseEvent e) {
+                            LegalityLabel label = (LegalityLabel) e.getComponent();
+                            label.setBorder(LEGALITY_LABEL_BORDER_SELECTED);
+                        }
+
+                        @Override
+                        public void mouseExited(MouseEvent e) {
+                            LegalityLabel label = (LegalityLabel) e.getComponent();
+                            label.setBorder(LEGALITY_LABEL_BORDER_EMPTY);
+                        }
+                    });
+                });
     }
 
     /**
@@ -1447,43 +1517,6 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         this.deckLegalityDisplay.setVisible(true);
         this.deckLegalityDisplay.validateDeck(deck);
     }//GEN-LAST:event_btnLegalityActionPerformed
-
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private mage.client.cards.BigCard bigCard;
-    private javax.swing.JButton btnAddLand;
-    private javax.swing.JButton btnExit;
-    private javax.swing.JButton btnExport;
-    private javax.swing.JButton btnGenDeck;
-    private javax.swing.JButton btnImport;
-    private javax.swing.JButton btnLegality;
-    private javax.swing.JButton btnLoad;
-    private javax.swing.JButton btnNew;
-    private javax.swing.JButton btnSave;
-    private javax.swing.JButton btnSubmit;
-    private javax.swing.JButton btnSubmitTimer;
-    private JComponent cardInfoPane;
-    /*
-    private org.mage.plugins.card.info.CardInfoPaneImpl cardInfoPane;
-    */
-    private mage.client.deckeditor.CardSelector cardSelector;
-    private mage.client.deckeditor.DeckArea deckArea;
-    private mage.client.deckeditor.DeckLegalityPanel deckLegalityDisplay;
-    private javax.swing.JLabel lblDeckName;
-    private javax.swing.JPanel panelDeck;
-    private javax.swing.JPanel panelDeckCreate;
-    private javax.swing.JPanel panelDeckDraft;
-    private javax.swing.JPanel panelDeckExit;
-    private javax.swing.JPanel panelDeckLands;
-    private javax.swing.JPanel panelDeckLoad;
-    private javax.swing.JPanel panelDeckName;
-    private javax.swing.JPanel panelDeckSave;
-    private javax.swing.JPanel panelInfo;
-    private javax.swing.JPanel panelLeft;
-    private javax.swing.JSplitPane panelRight;
-    private javax.swing.JScrollPane scrollPaneInfo;
-    private javax.swing.JTextField txtDeckName;
-    private javax.swing.JTextField txtTimeRemaining;
     // End of variables declaration//GEN-END:variables
 }
 

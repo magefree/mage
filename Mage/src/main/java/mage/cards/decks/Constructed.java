@@ -77,7 +77,7 @@ public class Constructed extends DeckValidator {
 
         for (String bannedCard : banned) {
             if (counts.containsKey(bannedCard)) {
-                addError(DeckValidatorErrorType.BANNED, "Banned", bannedCard);
+                addError(DeckValidatorErrorType.BANNED, bannedCard, "Banned", true);
                 valid = false;
             }
         }
@@ -86,7 +86,7 @@ public class Constructed extends DeckValidator {
             if (counts.containsKey(restrictedCard)) {
                 int count = counts.get(restrictedCard);
                 if (count > 1) {
-                    addError(DeckValidatorErrorType.OTHER, restrictedCard, "Restricted amount: " + count);
+                    addError(DeckValidatorErrorType.OTHER, restrictedCard, "Restricted amount: " + count, true);
                     valid = false;
                 }
             }
@@ -143,7 +143,7 @@ public class Constructed extends DeckValidator {
             }
         }
         if (!legal && !errorsListContainsGroup(card.getName())) {
-            addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid rarity: " + card.getRarity());
+            addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid rarity: " + card.getRarity(), true);
         }
         return legal;
     }
@@ -181,7 +181,7 @@ public class Constructed extends DeckValidator {
         }
 
         if (!legal && !errorsListContainsGroup(card.getName())) {
-            addError(DeckValidatorErrorType.WRONG_SET, card.getName(), "Invalid set: " + card.getExpansionSetCode());
+            addError(DeckValidatorErrorType.WRONG_SET, card.getName(), "Invalid set: " + card.getExpansionSetCode(), true);
         }
         return legal;
     }
@@ -192,11 +192,11 @@ public class Constructed extends DeckValidator {
             if (entry.getValue() > maxCopies
                     && !basicLandNames.contains(entry.getKey())
                     && !anyNumberCardsAllowed.contains(entry.getKey())) {
-                addError(DeckValidatorErrorType.OTHER, entry.getKey(), "Too many: " + entry.getValue());
+                addError(DeckValidatorErrorType.OTHER, entry.getKey(), "Too many: " + entry.getValue(), true);
                 valid = false;
             }
             if (entry.getValue() > 7 && entry.getKey().equals("Seven Dwarves")) {
-                addError(DeckValidatorErrorType.OTHER, entry.getKey(), "Too many: " + entry.getValue());
+                addError(DeckValidatorErrorType.OTHER, entry.getKey(), "Too many: " + entry.getValue(), true);
                 valid = false;
             }
         }

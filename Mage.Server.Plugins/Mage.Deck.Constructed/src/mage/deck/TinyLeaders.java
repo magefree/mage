@@ -119,7 +119,7 @@ public class TinyLeaders extends Constructed {
 
         for (String bannedCard : banned) {
             if (counts.containsKey(bannedCard)) {
-                addError(DeckValidatorErrorType.BANNED, "Banned", bannedCard);
+                addError(DeckValidatorErrorType.BANNED, bannedCard, "Banned", true);
                 valid = false;
             }
         }
@@ -163,11 +163,11 @@ public class TinyLeaders extends Constructed {
                         }
                     }
                 } else {
-                    addError(DeckValidatorErrorType.PRIMARY, "Commander", "Commander banned (" + commander.getName() + ')');
+                    addError(DeckValidatorErrorType.PRIMARY, commander.getName(), "Commander banned (" + commander.getName() + ')', true);
                     valid = false;
                 }
             } else {
-                addError(DeckValidatorErrorType.PRIMARY, "Commander", "Commander invalide (" + commander.getName() + ')');
+                addError(DeckValidatorErrorType.PRIMARY, commander.getName(), "Commander invalide (" + commander.getName() + ')', true);
                 valid = false;
             }
         } else {
@@ -177,7 +177,7 @@ public class TinyLeaders extends Constructed {
         for (Card card : deck.getCards()) {
             if (!isSetAllowed(card.getExpansionSetCode())) {
                 if (!legalSets(card)) {
-                    addError(DeckValidatorErrorType.WRONG_SET, card.getName(), "Not allowed Set " + card.getExpansionSetCode());
+                    addError(DeckValidatorErrorType.WRONG_SET, card.getName(), "Not allowed Set " + card.getExpansionSetCode(), true);
                     valid = false;
                 }
             }
@@ -185,7 +185,7 @@ public class TinyLeaders extends Constructed {
         for (Card card : deck.getSideboard()) {
             if (!isSetAllowed(card.getExpansionSetCode())) {
                 if (!legalSets(card)) {
-                    addError(DeckValidatorErrorType.WRONG_SET, card.getName(), "Not allowed Set " + card.getExpansionSetCode());
+                    addError(DeckValidatorErrorType.WRONG_SET, card.getName(), "Not allowed Set " + card.getExpansionSetCode(), true);
                     valid = false;
                 }
             }
@@ -195,22 +195,22 @@ public class TinyLeaders extends Constructed {
 
     private boolean isCardFormatValid(Card card, Card commander, FilterMana color) {
         if (!cardHasValideColor(color, card)) {
-            addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid color (" + commander.getName() + ')');
+            addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid color (" + commander.getName() + ')', true);
             return false;
         }
 
         //905.5b - Converted mana cost must be 3 or less
         if (card instanceof SplitCard) {
             if (((SplitCard) card).getLeftHalfCard().getManaCost().convertedManaCost() > 3) {
-                addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid cost (" + ((SplitCard) card).getLeftHalfCard().getManaCost().convertedManaCost() + ')');
+                addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid cost (" + ((SplitCard) card).getLeftHalfCard().getManaCost().convertedManaCost() + ')', true);
                 return false;
             }
             if (((SplitCard) card).getRightHalfCard().getManaCost().convertedManaCost() > 3) {
-                addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid cost (" + ((SplitCard) card).getRightHalfCard().getManaCost().convertedManaCost() + ')');
+                addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid cost (" + ((SplitCard) card).getRightHalfCard().getManaCost().convertedManaCost() + ')', true);
                 return false;
             }
         } else if (card.getManaCost().convertedManaCost() > 3) {
-            addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid cost (" + card.getManaCost().convertedManaCost() + ')');
+            addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid cost (" + card.getManaCost().convertedManaCost() + ')', true);
             return false;
         }
         return true;

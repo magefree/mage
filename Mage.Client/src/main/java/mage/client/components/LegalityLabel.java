@@ -113,7 +113,7 @@ public class LegalityLabel extends JLabel {
         return sortedErrorsList.stream()
                 .reduce("<html><body>"
                                 + "<p>Deck is <span style='color:#BF544A;font-weight:bold;'>INVALID</span></p>"
-                                + "<u>The following problems have been found:</u>"
+                                + "<u>The following problems have been found (click to select problem cards):</u>"
                                 + "<br>"
                                 + "<table style=\"table-layout: fixed; width: " + TOOLTIP_TABLE_WIDTH + "px\">",
                         (str, error) -> String.format("%s<tr><td style=\"word-wrap: break-word\"><b>%s</b></td><td style=\"word-wrap: break-word\">%s</td></tr>", str, escapeHtml(error.getGroup()), escapeHtml(error.getMessage())), String::concat)
@@ -125,7 +125,7 @@ public class LegalityLabel extends JLabel {
         return sortedErrorsList.stream()
                 .reduce("<html><body>"
                                 + "<p>Deck is <span style='color:#b8860b;font-weight:bold;'>PARTLY VALID</span></p>"
-                                + "<u>The following problems have been found:</u>"
+                                + "<u>The following problems have been found (click to select problem cards):</u>"
                                 + "<br>"
                                 + "<table style=\"table-layout: fixed; width: " + TOOLTIP_TABLE_WIDTH + "px\">",
                         (str, error) -> String.format("%s<tr><td style=\"word-wrap: break-word\"><b>%s</b></td><td style=\"word-wrap: break-word\">%s</td></tr>", str, escapeHtml(error.getGroup()), escapeHtml(error.getMessage())), String::concat)

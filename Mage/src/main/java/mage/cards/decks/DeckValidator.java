@@ -93,7 +93,7 @@ public abstract class DeckValidator implements Serializable {
             int otherErrorsCount = list.size() - maxErrors;
             list = list.stream().limit(maxErrors).collect(Collectors.toList());
             list.add(new DeckValidatorError(DeckValidatorErrorType.OTHER, "...",
-                    "and more " + otherErrorsCount + " error" + (otherErrorsCount > 1 ? "s" : "")));
+                    "and more " + otherErrorsCount + " error" + (otherErrorsCount > 1 ? "s" : ""), null));
         }
 
         return list;
@@ -106,8 +106,19 @@ public abstract class DeckValidator implements Serializable {
                 .collect(Collectors.joining(", "));
     }
 
+    /**
+     * @param isCardError group contains card name that can be selected as wrong card
+     */
+    public void addError(DeckValidatorErrorType errorType, String group, String message, boolean isCardError) {
+        addError(errorType, group, message, (isCardError ? group : null));
+    }
+
     public void addError(DeckValidatorErrorType errorType, String group, String message) {
-        this.errorsList.add(new DeckValidatorError(errorType, group, message));
+        addError(errorType, group, message, null);
+    }
+
+    private void addError(DeckValidatorErrorType errorType, String group, String message, String cardName) {
+        this.errorsList.add(new DeckValidatorError(errorType, group, message, cardName));
     }
 
     public boolean errorsListContainsGroup(String group) {

@@ -96,7 +96,7 @@ public class Oathbreaker extends Vintage {
 
         for (String bannedCard : banned) {
             if (counts.containsKey(bannedCard)) {
-                addError(DeckValidatorErrorType.BANNED, "Banned", bannedCard);
+                addError(DeckValidatorErrorType.BANNED, bannedCard, "Banned", true);
                 valid = false;
             }
         }
@@ -121,7 +121,7 @@ public class Oathbreaker extends Vintage {
                         // color identity from commanders only, not spell
                         ManaUtil.collectColorIdentity(allCommandersColor, commander.getColorIdentity());
                     } else {
-                        addError(DeckValidatorErrorType.PRIMARY, "Oathbreaker", "Only planeswalker can be Oathbreaker, not " + commander.getName());
+                        addError(DeckValidatorErrorType.PRIMARY, commander.getName(), "Oathbreaker (only planeswalker can be Oathbreaker, not " + commander.getName(), true);
                         valid = false;
                     }
                 }
@@ -154,7 +154,7 @@ public class Oathbreaker extends Vintage {
                             }
                         }
                         if (!partnersWith) {
-                            addError(DeckValidatorErrorType.PRIMARY, "Oathbreaker", "Oathbreaker without Partner (" + commander.getName() + ')');
+                            addError(DeckValidatorErrorType.PRIMARY, commander.getName(), "Oathbreaker without Partner (" + commander.getName() + ')', true);
                             valid = false;
                         }
                     }
@@ -176,7 +176,7 @@ public class Oathbreaker extends Vintage {
                         }
                     }
                     if (!haveSameColor) {
-                        addError(DeckValidatorErrorType.PRIMARY, "Signature Spell", "Can't find oathbreaker with compatible color identity (" + spell.getName() + " - " + spellColor + ")");
+                        addError(DeckValidatorErrorType.PRIMARY, spell.getName(), "Signature Spell (can't find oathbreaker with compatible color identity: " + spell.getName() + " - " + spellColor + ")", true);
                         valid = false;
                     }
                 }
@@ -190,7 +190,7 @@ public class Oathbreaker extends Vintage {
 
         for (Card card : deck.getCards()) {
             if (!ManaUtil.isColorIdentityCompatible(allCommandersColor, card.getColorIdentity())) {
-                addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid color (" + card.getColorIdentity() + ')');
+                addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid color (" + card.getColorIdentity() + ')', true);
                 valid = false;
             }
         }
@@ -198,7 +198,7 @@ public class Oathbreaker extends Vintage {
         for (Card card : deck.getSideboard()) {
             if (!isSetAllowed(card.getExpansionSetCode())) {
                 if (!legalSets(card)) {
-                    addError(DeckValidatorErrorType.WRONG_SET, card.getName(), "Not allowed Set: " + card.getExpansionSetCode());
+                    addError(DeckValidatorErrorType.WRONG_SET, card.getName(), "Not allowed Set: " + card.getExpansionSetCode(), true);
                     valid = false;
                 }
             }

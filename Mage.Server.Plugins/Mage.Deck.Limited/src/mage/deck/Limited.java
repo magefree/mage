@@ -39,7 +39,7 @@ public class Limited extends DeckValidator {
         countCards(counts, deck.getCards());
         for (Map.Entry<String, Integer> entry : counts.entrySet()) {
             if (entry.getValue() > 7 && entry.getKey().equals("Seven Dwarves")) {
-                addError(DeckValidatorErrorType.OTHER, entry.getKey(), "Too many: " + entry.getValue());
+                addError(DeckValidatorErrorType.OTHER, entry.getKey(), "Too many: " + entry.getValue(), true);
                 valid = false;
             }
         }

@@ -140,7 +140,7 @@ public class AusHighlander extends Constructed {
             String cn = entry.getKey();
             if (pointMap.containsKey(cn)) {
                 totalPoints += pointMap.get(cn);
-                addError(DeckValidatorErrorType.OTHER, entry.getKey(), " " + pointMap.get(cn) + " point " + cn);
+                addError(DeckValidatorErrorType.OTHER, entry.getKey(), " " + pointMap.get(cn) + " point " + cn, true);
             }
         }
         if (totalPoints > 7) {

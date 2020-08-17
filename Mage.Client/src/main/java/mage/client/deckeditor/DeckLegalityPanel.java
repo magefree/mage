@@ -103,7 +103,6 @@ public class DeckLegalityPanel extends javax.swing.JPanel {
     protected LegalityLabel addLegalityLabel(DeckValidator validator) {
         LegalityLabel label = new LegalityLabel(validator);
         add(label);
-
         return label;
     }
 

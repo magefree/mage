@@ -160,7 +160,7 @@ public class Commander extends Constructed {
 
         for (String bannedCard : banned) {
             if (counts.containsKey(bannedCard)) {
-                addError(DeckValidatorErrorType.BANNED, "Banned", bannedCard);
+                addError(DeckValidatorErrorType.BANNED, bannedCard, "Banned", true);
                 valid = false;
             }
         }
@@ -171,18 +171,18 @@ public class Commander extends Constructed {
         }
         for (Card commander : commanders) {
             if (bannedCommander.contains(commander.getName())) {
-                addError(DeckValidatorErrorType.PRIMARY, "Commander", "Commander banned (" + commander.getName() + ')');
+                addError(DeckValidatorErrorType.PRIMARY, commander.getName(), "Commander banned (" + commander.getName() + ')', true);
                 valid = false;
             }
             if ((!commander.isCreature() || !commander.isLegendary())
                     && (!commander.isPlaneswalker() || !commander.getAbilities().contains(CanBeYourCommanderAbility.getInstance()))) {
-                addError(DeckValidatorErrorType.PRIMARY, "Commander", "Commander invalid (" + commander.getName() + ')');
+                addError(DeckValidatorErrorType.PRIMARY, commander.getName(), "Commander invalid (" + commander.getName() + ')', true);
                 valid = false;
             }
             if (commanders.size() == 2) {
                 if (commander.getAbilities().contains(PartnerAbility.getInstance())) {
                     if (bannedPartner.contains(commander.getName())) {
-                        addError(DeckValidatorErrorType.PRIMARY, "Commander", "Partner banned (" + commander.getName() + ')');
+                        addError(DeckValidatorErrorType.PRIMARY, commander.getName(), "Commander Partner banned (" + commander.getName() + ')', true);
                         valid = false;
                     }
                 } else {
@@ -193,7 +193,7 @@ public class Commander extends Constructed {
                             .map(PartnerWithAbility::getPartnerName)
                             .anyMatch(commanderNames::contains);
                     if (!partnersWith) {
-                        addError(DeckValidatorErrorType.PRIMARY, "Commander", "Commander without Partner (" + commander.getName() + ')');
+                        addError(DeckValidatorErrorType.PRIMARY, commander.getName(), "Commander without Partner (" + commander.getName() + ')', true);
                         valid = false;
                     }
                 }
@@ -208,20 +208,20 @@ public class Commander extends Constructed {
 
         for (Card card : deck.getCards()) {
             if (!ManaUtil.isColorIdentityCompatible(colorIdentity, card.getColorIdentity())) {
-                addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid color (" + colorIdentity.toString() + ')');
+                addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid color (" + colorIdentity.toString() + ')', true);
                 valid = false;
             }
         }
         for (Card card : deck.getSideboard()) {
             if (!ManaUtil.isColorIdentityCompatible(colorIdentity, card.getColorIdentity())) {
-                addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid color (" + colorIdentity.toString() + ')');
+                addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid color (" + colorIdentity.toString() + ')', true);
                 valid = false;
             }
         }
         for (Card card : deck.getCards()) {
             if (!isSetAllowed(card.getExpansionSetCode())) {
                 if (!legalSets(card)) {
-                    addError(DeckValidatorErrorType.WRONG_SET, card.getName(), "Not allowed Set: " + card.getExpansionSetCode());
+                    addError(DeckValidatorErrorType.WRONG_SET, card.getName(), "Not allowed Set: " + card.getExpansionSetCode(), true);
                     valid = false;
                 }
             }
@@ -229,7 +229,7 @@ public class Commander extends Constructed {
         for (Card card : deck.getSideboard()) {
             if (!isSetAllowed(card.getExpansionSetCode())) {
                 if (!legalSets(card)) {
-                    addError(DeckValidatorErrorType.WRONG_SET, card.getName(), "Not allowed Set: " + card.getExpansionSetCode());
+                    addError(DeckValidatorErrorType.WRONG_SET, card.getName(), "Not allowed Set: " + card.getExpansionSetCode(), true);
                     valid = false;
                 }
             }
@@ -242,7 +242,7 @@ public class Commander extends Constructed {
                 if (ability instanceof CompanionAbility) {
                     CompanionAbility companionAbility = (CompanionAbility) ability;
                     if (!companionAbility.isLegal(cards, getDeckMinSize())) {
-                        addError(DeckValidatorErrorType.PRIMARY, companion.getName(), "Deck invalid for companion");
+                        addError(DeckValidatorErrorType.PRIMARY, companion.getName(), "Commander Companion (deck invalid for companion)", true);
                         valid = false;
                     }
                     break;
