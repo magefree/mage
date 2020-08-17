@@ -3,6 +3,7 @@ package mage.cards.f;
 import mage.abilities.condition.common.ControlACommanderCondition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
+import mage.abilities.hint.common.ControlACommanderHint;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -21,7 +22,9 @@ public final class FlawlessManeuver extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{W}");
 
         // If you control a commander, you may cast this spell without paying its mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(null, ControlACommanderCondition.instance));
+        this.addAbility(new AlternativeCostSourceAbility(null, ControlACommanderCondition.instance)
+                .addHint(ControlACommanderHint.instance)
+        );
 
         // Creatures you control gain indestructible until end of turn.
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(

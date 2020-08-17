@@ -3,6 +3,7 @@ package mage.cards.d;
 import mage.abilities.condition.common.ControlACommanderCondition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.effects.common.ChooseNewTargetsTargetEffect;
+import mage.abilities.hint.common.ControlACommanderHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -19,7 +20,9 @@ public final class DeflectingSwat extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}");
 
         // If you control a commander, you may cast this spell without paying its mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(null, ControlACommanderCondition.instance));
+        this.addAbility(new AlternativeCostSourceAbility(null, ControlACommanderCondition.instance)
+                .addHint(ControlACommanderHint.instance)
+        );
 
         // You may chose new targets for target spell or ability.
         this.getSpellAbility().addTarget(new TargetStackObject());
