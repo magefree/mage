@@ -19,6 +19,7 @@ public abstract class ActivatedManaAbilityImpl extends ActivatedAbilityImpl impl
 
     protected List<Mana> netMana = new ArrayList<>();
     protected boolean undoPossible;
+    protected boolean poolDependant;
 
     public ActivatedManaAbilityImpl(Zone zone, ManaEffect effect, Cost cost) {
         super(AbilityType.MANA, zone);
@@ -36,6 +37,7 @@ public abstract class ActivatedManaAbilityImpl extends ActivatedAbilityImpl impl
         super(ability);
         this.netMana.addAll(ability.netMana);
         this.undoPossible = ability.undoPossible;
+        this.poolDependant = ability.poolDependant;
     }
 
     @Override
@@ -102,6 +104,23 @@ public abstract class ActivatedManaAbilityImpl extends ActivatedAbilityImpl impl
     }
 
     @Override
+    public List<Mana> getNetMana(Game game, Mana possibleManaInPool) {
+        if (isPoolDependant()) {
+            List<Mana> poolDependantNetMana = new ArrayList<>();
+            for (Effect effect : getEffects()) {
+                if (effect instanceof ManaEffect) {
+                    List<Mana> effectNetMana = ((ManaEffect) effect).getNetMana(game, possibleManaInPool, this);
+                    if (effectNetMana != null) {
+                        poolDependantNetMana.addAll(effectNetMana);
+                    }
+                }
+            }
+            return poolDependantNetMana;            
+        }
+        return getNetMana(game);
+    }
+
+    @Override
     public Set<ManaType> getProducableManaTypes(Game game) {
         Set<ManaType> manaTypes = new HashSet<>();
         for (Effect effect : getEffects()) {
@@ -127,8 +146,9 @@ public abstract class ActivatedManaAbilityImpl extends ActivatedAbilityImpl impl
      * game revealing information is related (like reveal the top card of the
      * library)
      * <p>
-     * TODO: it helps with single mana activate for mana pool, but will not work while activates on paying for casting
-     * (e.g. user can cheats to see next draw card)
+     * TODO: it helps with single mana activate for mana pool, but will not work
+     * while activates on paying for casting (e.g. user can cheats to see next
+     * draw card)
      *
      * @return
      */
@@ -138,6 +158,17 @@ public abstract class ActivatedManaAbilityImpl extends ActivatedAbilityImpl impl
 
     public void setUndoPossible(boolean undoPossible) {
         this.undoPossible = undoPossible;
+    }
+
+    @Override
+    public boolean isPoolDependant() {
+        return poolDependant;
+    }
+
+    @Override
+    public ActivatedManaAbilityImpl setPoolDependant(boolean poolDependant) {
+        this.poolDependant = poolDependant;
+        return this;
     }
 
 }

@@ -22,6 +22,7 @@ import mage.constants.ManaType;
 public abstract class TriggeredManaAbility extends TriggeredAbilityImpl implements ManaAbility {
 
     protected List<Mana> netMana = new ArrayList<>();
+        protected boolean poolDependant;
 
     public TriggeredManaAbility(Zone zone, ManaEffect effect) {
         this(zone, effect, false);
@@ -37,6 +38,7 @@ public abstract class TriggeredManaAbility extends TriggeredAbilityImpl implemen
     public TriggeredManaAbility(final TriggeredManaAbility ability) {
         super(ability);
         this.netMana.addAll(ability.netMana);
+        this.poolDependant = ability.poolDependant;
     }
 
     /**
@@ -61,6 +63,23 @@ public abstract class TriggeredManaAbility extends TriggeredAbilityImpl implemen
     }
     
     @Override
+    public List<Mana> getNetMana(Game game, Mana possibleManaInPool) {
+        if (isPoolDependant()) {
+            List<Mana> poolDependantNetMana = new ArrayList<>();
+            for (Effect effect : getEffects()) {
+                if (effect instanceof ManaEffect) {
+                    List<Mana> effectNetMana = ((ManaEffect) effect).getNetMana(game, possibleManaInPool, this);
+                    if (effectNetMana != null) {
+                        poolDependantNetMana.addAll(effectNetMana);
+                    }
+                }
+            }
+            return poolDependantNetMana;            
+        }
+        return getNetMana(game);
+    }
+    
+    @Override
     public Set<ManaType> getProducableManaTypes(Game game) {
         Set<ManaType> manaTypes = new HashSet<>();
         for (Effect effect : getEffects()) {
@@ -80,4 +99,16 @@ public abstract class TriggeredManaAbility extends TriggeredAbilityImpl implemen
     public boolean definesMana(Game game) {
         return !netMana.isEmpty();
     }
+
+    @Override
+    public boolean isPoolDependant() {
+        return poolDependant;
+    }
+
+    @Override
+    public TriggeredManaAbility setPoolDependant(boolean poolDependant) {
+        this.poolDependant = poolDependant;
+        return this;
+    }    
+    
 }

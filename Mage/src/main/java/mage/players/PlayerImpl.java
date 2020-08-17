@@ -2894,7 +2894,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(playerId, game)) { // Some permanents allow use of abilities from non controlling players. so check all permanents in range
             Boolean canUse = null;
             boolean canAdd = false;
-            boolean withCost = false;
+            boolean useLater = false; // sources with mana costs or mana pool dependency 
             Abilities<ActivatedManaAbilityImpl> manaAbilities
                     = permanent.getAbilities().getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, playerId, game); // returns ability only if canActivate is true
             for (Iterator<ActivatedManaAbilityImpl> it = manaAbilities.iterator(); it.hasNext();) {
@@ -2907,7 +2907,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     if (!ability.hasTapCost()) {
                         it.remove();
                         Abilities<ActivatedManaAbilityImpl> noTapAbilities = new AbilitiesImpl<>(ability);
-                        if (ability.getManaCosts().isEmpty()) {
+                        if (ability.getManaCosts().isEmpty() && !ability.isPoolDependant()) {
                             sourceWithoutManaCosts.add(noTapAbilities);
                         } else {
                             sourceWithCosts.add(noTapAbilities);
@@ -2916,14 +2916,14 @@ public abstract class PlayerImpl implements Player, Serializable {
                     }
 
                     canAdd = true;
-                    if (!ability.getManaCosts().isEmpty()) {
-                        withCost = true;
+                    if (!ability.getManaCosts().isEmpty() || ability.isPoolDependant()) {
+                        useLater = true;
                         break;
                     }
                 }
             }
             if (canAdd) {
-                if (withCost) {
+                if (useLater) {
                     sourceWithCosts.add(manaAbilities);
                 } else {
                     sourceWithoutManaCosts.add(manaAbilities);
@@ -2936,16 +2936,28 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
 
         boolean anAbilityWasUsed = true;
+        boolean usePoolDependantAbilities = false; // use such abilities later than other if possible because it can maximize mana production
         while (anAbilityWasUsed && !sourceWithCosts.isEmpty()) {
             anAbilityWasUsed = false;
             for (Iterator<Abilities<ActivatedManaAbilityImpl>> iterator = sourceWithCosts.iterator(); iterator.hasNext();) {
                 Abilities<ActivatedManaAbilityImpl> manaAbilities = iterator.next();
-                boolean used = availableMana.addManaWithCost(manaAbilities, game);
-                if (used) {
-                    iterator.remove();
-                    availableMana.removeDuplicated();
-                    anAbilityWasUsed = true;
+                if (usePoolDependantAbilities || !manaAbilities.hasPoolDependantAbilities()) {
+                    boolean used;
+                    if (manaAbilities.hasPoolDependantAbilities()) {
+                        used = availableMana.addManaPoolDependant(manaAbilities, game);
+                    } else {
+                        used = availableMana.addManaWithCost(manaAbilities, game);
+                    }
+                    if (used) {
+                        iterator.remove();
+                        availableMana.removeDuplicated();
+                        anAbilityWasUsed = true;
+                    }
                 }
+            }
+            if (!anAbilityWasUsed && !usePoolDependantAbilities) {
+                usePoolDependantAbilities = true;
+                anAbilityWasUsed = true;
             }
         }
 

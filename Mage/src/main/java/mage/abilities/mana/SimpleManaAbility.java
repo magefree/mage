@@ -71,5 +71,6 @@ public class SimpleManaAbility extends ActivatedManaAbilityImpl {
         }
         return new ArrayList<>(netMana);
     }
+    
 
 }

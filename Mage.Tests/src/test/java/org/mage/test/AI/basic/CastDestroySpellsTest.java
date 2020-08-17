@@ -21,7 +21,7 @@ public class CastDestroySpellsTest extends CardTestPlayerBaseAI {
         addCard(Zone.HAND, playerA, "Orzhov Charm"); // {W}{B}
 
         // {T}: Add {C}.
-        // {T}  {W/B}, {T}: Add {W}{W}, {W}{B}, or {B}{B}.
+        // {W/B}, {T}: Add {W}{W}, {W}{B}, or {B}{B}.
         addCard(Zone.BATTLEFIELD, playerA, "Fetid Heath", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
 

@@ -5,7 +5,6 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 import static org.mage.test.utils.ManaOptionsTestUtils.*;
@@ -330,6 +329,8 @@ public class ManaOptionsTest extends CardTestPlayerBase {
 
     @Test
     public void testFetidHeath() {
+        // {T}: Add {C}.
+        // {W/B}, {T}: Add {W}{W}, {W}{B}, or {B}{B}.        
         addCard(Zone.BATTLEFIELD, playerA, "Fetid Heath", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
 

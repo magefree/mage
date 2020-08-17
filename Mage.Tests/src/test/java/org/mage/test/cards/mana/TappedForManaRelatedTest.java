@@ -168,7 +168,7 @@ public class TappedForManaRelatedTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Castle Sengir", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
 
-        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.UPKEEP);
         execute();
 
         assertAllCommandsUsed();

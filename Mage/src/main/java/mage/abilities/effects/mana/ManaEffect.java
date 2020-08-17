@@ -81,6 +81,22 @@ public abstract class ManaEffect extends OneShotEffect {
     }
 
     /**
+     * Returns the currently available max mana variations the effect can
+     * produce. Also provides the possible before produced mana from other
+     * abilities. Needed for some abilities that produce mana related to the
+     * mana existing in the mana pool.
+     *
+     * @param game
+     * @param possibleManaInPool The possible mana already produced by other
+     *                           sources for this calculation option
+     * @param source
+     * @return
+     */
+    public List<Mana> getNetMana(Game game, Mana possibleManaInPool, Ability source) {
+        return getNetMana(game, source);
+    }
+
+    /**
      * The type of mana a permanent "could produce" is the type of mana that any
      * ability of that permanent can generate, taking into account any
      * applicable replacement effects. If the type of mana can’t be defined,
@@ -95,7 +111,6 @@ public abstract class ManaEffect extends OneShotEffect {
         return ManaType.getManaTypesFromManaList(getNetMana(game, source));
     }
 
-            
     /**
      * Produced the mana the effect can produce (DO NOT add it to mana pool --
      * return all added as mana object to process by replace events)

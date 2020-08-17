@@ -268,6 +268,12 @@ public interface Abilities<T extends Ability> extends List<T>, Serializable {
     boolean containsClass(Class classObject);
 
     /**
+     * Returns true if one or more of the abilities are activated mana abilities with the pollDependant flag set to true.
+     * @return 
+     */
+    boolean hasPoolDependantAbilities();
+    
+    /**
      * Copies this set of abilities. This copy should be new instances of all
      * the contained abilities.
      *
