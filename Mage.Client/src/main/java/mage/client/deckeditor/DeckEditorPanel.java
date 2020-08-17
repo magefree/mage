@@ -57,48 +57,12 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     private final Map<UUID, Card> temporaryCards = new HashMap<>(); // Cards dragged out of one part of the view into another
     private final String LAST_DECK_FOLDER = "lastDeckFolder";
     private Deck deck = new Deck();
-    private boolean isShowCardInfo = false;
     private UUID tableId;
     private DeckEditorMode mode;
     private int timeout;
     private javax.swing.Timer countdown;
     private UpdateDeckTask updateDeckTask;
     private int timeToSubmit = -1;
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private mage.client.cards.BigCard bigCard;
-    private javax.swing.JButton btnAddLand;
-    private javax.swing.JButton btnExit;
-    private javax.swing.JButton btnExport;
-    private javax.swing.JButton btnGenDeck;
-    private javax.swing.JButton btnImport;
-    private javax.swing.JButton btnLegality;
-    private javax.swing.JButton btnLoad;
-    private javax.swing.JButton btnNew;
-    private javax.swing.JButton btnSave;
-    private javax.swing.JButton btnSubmit;
-    private javax.swing.JButton btnSubmitTimer;
-    private JComponent cardInfoPane;
-    /*
-    private org.mage.plugins.card.info.CardInfoPaneImpl cardInfoPane;
-    */
-    private mage.client.deckeditor.CardSelector cardSelector;
-    private mage.client.deckeditor.DeckArea deckArea;
-    private mage.client.deckeditor.DeckLegalityPanel deckLegalityDisplay;
-    private javax.swing.JLabel lblDeckName;
-    private javax.swing.JPanel panelDeck;
-    private javax.swing.JPanel panelDeckCreate;
-    private javax.swing.JPanel panelDeckDraft;
-    private javax.swing.JPanel panelDeckExit;
-    private javax.swing.JPanel panelDeckLands;
-    private javax.swing.JPanel panelDeckLoad;
-    private javax.swing.JPanel panelDeckName;
-    private javax.swing.JPanel panelDeckSave;
-    private javax.swing.JPanel panelInfo;
-    private javax.swing.JPanel panelLeft;
-    private javax.swing.JSplitPane panelRight;
-    private javax.swing.JScrollPane scrollPaneInfo;
-    private javax.swing.JTextField txtDeckName;
-    private javax.swing.JTextField txtTimeRemaining;
 
     public DeckEditorPanel() {
         initComponents();
@@ -925,7 +889,6 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         if (cardInfoPane != null && System.getProperty("testCardInfo") != null) {
             cardInfoPane.setPreferredSize(new Dimension(170, 150));
             cardInfoPane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(200, 0, 0)));
-            isShowCardInfo = true;
         } else {
             cardInfoPane = new JLabel();
             cardInfoPane.setVisible(false);
@@ -1517,6 +1480,42 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         this.deckLegalityDisplay.setVisible(true);
         this.deckLegalityDisplay.validateDeck(deck);
     }//GEN-LAST:event_btnLegalityActionPerformed
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private mage.client.cards.BigCard bigCard;
+    private javax.swing.JButton btnAddLand;
+    private javax.swing.JButton btnExit;
+    private javax.swing.JButton btnExport;
+    private javax.swing.JButton btnGenDeck;
+    private javax.swing.JButton btnImport;
+    private javax.swing.JButton btnLegality;
+    private javax.swing.JButton btnLoad;
+    private javax.swing.JButton btnNew;
+    private javax.swing.JButton btnSave;
+    private javax.swing.JButton btnSubmit;
+    private javax.swing.JButton btnSubmitTimer;
+    private JComponent cardInfoPane;
+    /*
+    private org.mage.plugins.card.info.CardInfoPaneImpl cardInfoPane;
+    */
+    private mage.client.deckeditor.CardSelector cardSelector;
+    private mage.client.deckeditor.DeckArea deckArea;
+    private mage.client.deckeditor.DeckLegalityPanel deckLegalityDisplay;
+    private javax.swing.JLabel lblDeckName;
+    private javax.swing.JPanel panelDeck;
+    private javax.swing.JPanel panelDeckCreate;
+    private javax.swing.JPanel panelDeckDraft;
+    private javax.swing.JPanel panelDeckExit;
+    private javax.swing.JPanel panelDeckLands;
+    private javax.swing.JPanel panelDeckLoad;
+    private javax.swing.JPanel panelDeckName;
+    private javax.swing.JPanel panelDeckSave;
+    private javax.swing.JPanel panelInfo;
+    private javax.swing.JPanel panelLeft;
+    private javax.swing.JSplitPane panelRight;
+    private javax.swing.JScrollPane scrollPaneInfo;
+    private javax.swing.JTextField txtDeckName;
+    private javax.swing.JTextField txtTimeRemaining;
     // End of variables declaration//GEN-END:variables
 }
 
