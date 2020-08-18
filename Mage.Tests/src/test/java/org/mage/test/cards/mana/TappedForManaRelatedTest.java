@@ -4,6 +4,7 @@ import mage.abilities.mana.ManaOptions;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.game.permanent.Permanent;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -309,5 +310,35 @@ public class TappedForManaRelatedTest extends CardTestPlayerBase {
         Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
         assertManaOptions("{B}{B}{B}{B}{B}", manaOptions);
     }    
-       
+
+    @Test
+    public void TestParadiseMantle() {
+        setStrictChooseMode(true);
+        
+        // Equipped creature has "{T}: Add one mana of any color."
+        // Equip {1}
+        addCard(Zone.BATTLEFIELD, playerA, "Paradise Mantle", 1); // Creature {1}{B}  1/2
+
+        // Flying;
+        // {2}, {untap}: Add one mana of any color.        
+        addCard(Zone.BATTLEFIELD, playerA, "Pili-Pala", 1); // Artifact Creature (1/1)
+        
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);  
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip");
+        addTarget(playerA, "Pili-Pala"); // Select a creature you control
+        
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertAllCommandsUsed();
+        
+        Permanent pp = getPermanent("Pili-Pala");
+        Assert.assertTrue("Pili-Pala has 1 attachment", pp.getAttachments().size() == 1);
+        
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        assertManaOptions("{Any}", manaOptions);
+    }    
+    
 }

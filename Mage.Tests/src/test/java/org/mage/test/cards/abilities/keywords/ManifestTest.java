@@ -482,4 +482,56 @@ public class ManifestTest extends CardTestPlayerBase {
         assertHandCount(playerB, "Mountain", 1);
 
     }
+
+  @Test
+    public void test_ManifestSorceryAndBlinkIt() {
+
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
+
+        // {1}{B}, {T}, Sacrifice another creature: Manifest the top card of your library.
+        addCard(Zone.BATTLEFIELD, playerB, "Qarsi High Priest", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
+        
+        // Exile target creature you control, then return that card to the battlefield under your control.
+        addCard(Zone.HAND, playerB, "Cloudshift", 1); //Instant {W}
+
+        
+        // Devoid
+        // Flying
+        // At the beginning of your upkeep, sacrifice a creature
+        // Whenever you sacrifice a creature, draw a card.
+        addCard(Zone.LIBRARY, playerB, "Mountain", 1);
+        addCard(Zone.LIBRARY, playerB, "Lightning Bolt", 1);
+        addCard(Zone.LIBRARY, playerB, "Mountain", 1);
+
+        skipInitShuffling();
+
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}{B}, {T}, Sacrifice another creature");
+        setChoice(playerB, "Silvercoat Lion");
+
+        waitStackResolved(2, PhaseStep.PRECOMBAT_MAIN, playerB);
+        
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Cloudshift", EmptyNames.FACE_DOWN_CREATURE.toString());
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        // no life gain
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+        assertPermanentCount(playerB, "Qarsi High Priest", 1);
+
+        assertGraveyardCount(playerB, "Silvercoat Lion", 1);
+        assertGraveyardCount(playerB, "Cloudshift", 1);
+        
+        assertPermanentCount(playerB, "Lightning Bolt", 0);        
+        assertExileCount(playerB, "Lightning Bolt", 1);        
+
+        assertHandCount(playerB, "Mountain", 1);
+
+    }    
 }

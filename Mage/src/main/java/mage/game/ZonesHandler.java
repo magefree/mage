@@ -19,6 +19,7 @@ import mage.players.Player;
 import mage.target.TargetCard;
 
 import java.util.*;
+import mage.abilities.keyword.TransformAbility;
 
 /**
  * Created by samuelsandeen on 9/6/16.
@@ -53,7 +54,7 @@ public final class ZonesHandler {
 
     public static List<ZoneChangeInfo> moveCards(List<ZoneChangeInfo> zoneChangeInfos, Game game) {
         // Handle Unmelded Meld Cards
-        for (ListIterator<ZoneChangeInfo> itr = zoneChangeInfos.listIterator(); itr.hasNext(); ) {
+        for (ListIterator<ZoneChangeInfo> itr = zoneChangeInfos.listIterator(); itr.hasNext();) {
             ZoneChangeInfo info = itr.next();
             MeldCard card = game.getMeldCard(info.event.getTargetId());
             // Copies should be handled as normal cards.
@@ -202,7 +203,7 @@ public final class ZonesHandler {
         if (info instanceof ZoneChangeInfo.Unmelded) {
             ZoneChangeInfo.Unmelded unmelded = (ZoneChangeInfo.Unmelded) info;
             MeldCard meld = game.getMeldCard(info.event.getTargetId());
-            for (Iterator<ZoneChangeInfo> itr = unmelded.subInfo.iterator(); itr.hasNext(); ) {
+            for (Iterator<ZoneChangeInfo> itr = unmelded.subInfo.iterator(); itr.hasNext();) {
                 ZoneChangeInfo subInfo = itr.next();
                 if (!maybeRemoveFromSourceZone(subInfo, game)) {
                     itr.remove();
@@ -230,6 +231,12 @@ public final class ZonesHandler {
         boolean success = false;
         if (info.faceDown) {
             card.setFaceDown(true, game);
+        } else if (info.event.getToZone().equals(Zone.BATTLEFIELD)) {
+            if (!card.isPermanent() 
+                    && (!card.isTransformable() || Boolean.FALSE.equals(game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId())))) {
+                // Non permanents (Instants, Sorceries, ... stay in the zone they are if an abilty/effect tries to move it to the battlefield
+                    return false;
+            }
         }
         if (!game.replaceEvent(event)) {
             Zone fromZone = event.getFromZone();
