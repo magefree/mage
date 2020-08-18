@@ -2891,12 +2891,26 @@ public abstract class PlayerImpl implements Player, Serializable {
 
         List<Abilities<ActivatedManaAbilityImpl>> sourceWithoutManaCosts = new ArrayList<>();
         List<Abilities<ActivatedManaAbilityImpl>> sourceWithCosts = new ArrayList<>();
+        for (Card card : getHand().getCards(game)) {
+            Abilities<ActivatedManaAbilityImpl> manaAbilities
+                    = card.getAbilities(game).getAvailableActivatedManaAbilities(Zone.HAND, playerId, game);
+            for (Iterator<ActivatedManaAbilityImpl> it = manaAbilities.iterator(); it.hasNext();) {
+                ActivatedManaAbilityImpl ability = it.next();
+                Abilities<ActivatedManaAbilityImpl> noTapAbilities = new AbilitiesImpl<>(ability);
+                if (ability.getManaCosts().isEmpty() && !ability.isPoolDependant()) {
+                    sourceWithoutManaCosts.add(noTapAbilities);
+                } else {
+                    sourceWithCosts.add(noTapAbilities);
+                }
+            }
+        }
+
         for (Permanent permanent : game.getBattlefield().getActivePermanents(playerId, game)) { // Some permanents allow use of abilities from non controlling players. so check all permanents in range
             Boolean canUse = null;
             boolean canAdd = false;
             boolean useLater = false; // sources with mana costs or mana pool dependency 
             Abilities<ActivatedManaAbilityImpl> manaAbilities
-                    = permanent.getAbilities().getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, playerId, game); // returns ability only if canActivate is true
+                    = permanent.getAbilities(game).getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, playerId, game); // returns ability only if canActivate is true
             for (Iterator<ActivatedManaAbilityImpl> it = manaAbilities.iterator(); it.hasNext();) {
                 ActivatedManaAbilityImpl ability = it.next();
                 if (canUse == null) {
@@ -2978,7 +2992,8 @@ public abstract class PlayerImpl implements Player, Serializable {
      *                         abaility
      */
     @Override
-    public void addAvailableTriggeredMana(List<Mana> netManaAvailable) {
+    public void addAvailableTriggeredMana(List<Mana> netManaAvailable
+    ) {
         this.availableTriggeredManaList.add(netManaAvailable);
     }
 
@@ -2993,8 +3008,8 @@ public abstract class PlayerImpl implements Player, Serializable {
     public List<List<Mana>> getAvailableTriggeredMana() {
         return availableTriggeredManaList;
     }
-
     // returns only mana producers that don't require mana payment
+
     protected List<MageObject> getAvailableManaProducers(Game game) {
         List<MageObject> result = new ArrayList<>();
         for (Permanent permanent : game.getBattlefield().getActivePermanents(playerId, game)) { // Some permanents allow use of abilities from non controlling players. so check all permanents in range

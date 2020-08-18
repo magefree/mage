@@ -334,4 +334,19 @@ public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
         assertManaOptions("{C}{C}", manaOptions);
     }    
     
+    @Test
+    public void testAvailableManaWithSpiritGuides() {
+        // Exile Simian Spirit Guide from your hand: Add {R}.
+        addCard(Zone.HAND, playerA, "Simian Spirit Guide", 1);
+        // Exile Simian Spirit Guide from your hand: Add {R}.
+        addCard(Zone.HAND, playerA, "Elvish Spirit Guide", 1);
+
+        setStopAt(1, PhaseStep.UPKEEP);
+        execute();
+
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        assertManaOptions("{R}{G}", manaOptions);        
+    }
+    
 }
