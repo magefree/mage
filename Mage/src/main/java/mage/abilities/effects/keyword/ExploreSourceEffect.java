@@ -44,12 +44,10 @@ public class ExploreSourceEffect extends OneShotEffect {
             res = "it";
         }
 
-        if (numTimesExplored > 0)
-        {
+        if (numTimesExplored > 0) {
             res = String.format(RULE_TEXT_AGAIN, res);
         }
-        else
-        {
+        else {
             res += " " + RULE_TEXT_START;
         }
 
