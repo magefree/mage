@@ -41,6 +41,10 @@ public final class GhostlyPilferer extends CardImpl {
 
         // Whenever an opponent casts a spell from anywhere other than their hand, draw a card.
         this.addAbility(new GhostlyPilfererTriggeredAbility());
+        /*TODO: I think this way is the optimal way(copied from counter balance):
+         * this.addAbility(new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD,
+         * new CounterbalanceEffect(), StaticFilters.FILTER_SPELL, true, SetTargetPointer.SPELL));
+         */
 
         // Discard a card: Ghostly Pilferer can't be blocked this turn.
         this.addAbility(new SimpleActivatedAbility(
@@ -80,11 +84,9 @@ class GhostlyPilfererTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getZone() == Zone.HAND) {
-            return false;
-        }
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        return spell != null;
+        return (this.controllerId != spell.getControllerId()
+                && event.getZone() != Zone.HAND);
     }
 
     @Override
