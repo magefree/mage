@@ -85,7 +85,7 @@ class GhostlyPilfererTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        return (this.controllerId != spell.getControllerId()
+        return (game.getOpponents(getControllerId()).contains(spell.getControllerId())
                 && event.getZone() != Zone.HAND);
     }
 
