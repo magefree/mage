@@ -13,22 +13,26 @@ public class UseAlternateSourceCostsTest extends CardTestPlayerBase {
 
     @Test
     public void DreamHallsCastColoredSpell() {
+        setStrictChooseMode(true);
+        
         // Rather than pay the mana cost for a spell, its controller may discard a card that shares a color with that spell.
         addCard(Zone.BATTLEFIELD, playerA, "Dream Halls", 1);
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3); // Add the mountains so the spell is included in teh available spells
 
         addCard(Zone.HAND, playerA, "Gray Ogre", 1); // Creature 3/1
         addCard(Zone.HAND, playerA, "Lightning Bolt", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gray Ogre"); // Cast Orgre by discarding the Lightning Bolt
+        setChoice(playerA, "Yes"); // Pay alternative costs? (Discard a card that shares a color with that spell)
+        setChoice(playerA, "Lightning Bolt");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
+        assertAllCommandsUsed();
+        
         //Gray Ogre is cast with the discard
         assertPermanentCount(playerA, "Gray Ogre", 1);
         assertGraveyardCount(playerA, "Lightning Bolt", 1);
-        assertTapped("Mountain", false);
     }
 
     @Test

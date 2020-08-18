@@ -3208,7 +3208,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 // if cast for noMana no Alternative costs are allowed
                 if (alternateSourceCostsAbility instanceof AlternativeSourceCosts) {
                     if (((AlternativeSourceCosts) alternateSourceCostsAbility).isAvailable(ability, game)) {
-                        if (alternateSourceCostsAbility.getCosts().canPay(ability, playerId, playerId, game)) {
+                        if (alternateSourceCostsAbility.getCosts().canPay(ability, sourceObject.getId(), playerId, game)) {
                             ManaCostsImpl manaCosts = new ManaCostsImpl();
                             for (Cost cost : alternateSourceCostsAbility.getCosts()) {
                                 if (cost instanceof ManaCost) {
@@ -3250,7 +3250,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             for (AlternativeSourceCosts alternateSourceCosts : getAlternativeSourceCosts()) {
                 if (alternateSourceCosts instanceof Ability) {
                     if (alternateSourceCosts.isAvailable(ability, game)) {
-                        if (((Ability) alternateSourceCosts).getCosts().canPay(ability, playerId, playerId, game)) {
+                        if (((Ability) alternateSourceCosts).getCosts().canPay(ability, sourceObject.getId(), playerId, game)) {
                             ManaCostsImpl manaCosts = new ManaCostsImpl();
                             for (Cost cost : ((Ability) alternateSourceCosts).getCosts()) {
                                 if (cost instanceof ManaCost) {
