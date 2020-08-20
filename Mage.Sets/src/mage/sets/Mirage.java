@@ -70,7 +70,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Chaos Charm", 163, Rarity.COMMON, mage.cards.c.ChaosCharm.class));
         cards.add(new SetCardInfo("Chaosphere", 164, Rarity.RARE, mage.cards.c.Chaosphere.class));
         cards.add(new SetCardInfo("Charcoal Diamond", 296, Rarity.UNCOMMON, mage.cards.c.CharcoalDiamond.class));
-        cards.add(new SetCardInfo("Chariot of the Sun", 262, Rarity.UNCOMMON, mage.cards.c.ChariotOfTheSun.class));
+        cards.add(new SetCardInfo("Chariot of the Sun", 297, Rarity.UNCOMMON, mage.cards.c.ChariotOfTheSun.class));
         cards.add(new SetCardInfo("Choking Sands", 113, Rarity.COMMON, mage.cards.c.ChokingSands.class));
         cards.add(new SetCardInfo("Cinder Cloud", 165, Rarity.UNCOMMON, mage.cards.c.CinderCloud.class));
         cards.add(new SetCardInfo("Civic Guildmage", 7, Rarity.COMMON, mage.cards.c.CivicGuildmage.class));
@@ -104,7 +104,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Ebony Charm", 120, Rarity.COMMON, mage.cards.e.EbonyCharm.class));
         cards.add(new SetCardInfo("Ekundu Griffin", 13, Rarity.COMMON, mage.cards.e.EkunduGriffin.class));
         cards.add(new SetCardInfo("Elixir of Vitality", 300, Rarity.UNCOMMON, mage.cards.e.ElixirOfVitality.class));
-        cards.add(new SetCardInfo("Emberwilde Caliph", 322, Rarity.RARE, mage.cards.e.EmberwildeCaliph.class));
+        cards.add(new SetCardInfo("Emberwilde Caliph", 262, Rarity.RARE, mage.cards.e.EmberwildeCaliph.class));
         cards.add(new SetCardInfo("Emberwilde Djinn", 172, Rarity.RARE, mage.cards.e.EmberwildeDjinn.class));
         cards.add(new SetCardInfo("Energy Bolt", 263, Rarity.RARE, mage.cards.e.EnergyBolt.class));
         cards.add(new SetCardInfo("Energy Vortex", 64, Rarity.RARE, mage.cards.e.EnergyVortex.class));

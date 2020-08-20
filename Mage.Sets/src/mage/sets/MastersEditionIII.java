@@ -1,4 +1,3 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -136,7 +135,7 @@ public final class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Kobold Overlord", 105, Rarity.UNCOMMON, mage.cards.k.KoboldOverlord.class));
         cards.add(new SetCardInfo("Kobolds of Kher Keep", 107, Rarity.COMMON, mage.cards.k.KoboldsOfKherKeep.class));
         cards.add(new SetCardInfo("Kobold Taskmaster", 106, Rarity.COMMON, mage.cards.k.KoboldTaskmaster.class));
-        cards.add(new SetCardInfo("Kongming, 'Sleeping Dragon'", 16, Rarity.RARE, mage.cards.k.KongmingSleepingDragon.class));
+        cards.add(new SetCardInfo("Kongming, \"Sleeping Dragon\"", 16, Rarity.RARE, mage.cards.k.KongmingSleepingDragon.class));
         cards.add(new SetCardInfo("Labyrinth Minotaur", 39, Rarity.COMMON, mage.cards.l.LabyrinthMinotaur.class));
         cards.add(new SetCardInfo("Lady Caleria", 157, Rarity.UNCOMMON, mage.cards.l.LadyCaleria.class));
         cards.add(new SetCardInfo("Lady Evangela", 158, Rarity.UNCOMMON, mage.cards.l.LadyEvangela.class));

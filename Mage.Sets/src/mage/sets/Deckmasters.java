@@ -43,14 +43,12 @@ public class Deckmasters extends ExpansionSet {
         cards.add(new SetCardInfo("Guerrilla Tactics", "13a", Rarity.COMMON, mage.cards.g.GuerrillaTactics.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Guerrilla Tactics", "13b", Rarity.COMMON, mage.cards.g.GuerrillaTactics.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hurricane", 28, Rarity.UNCOMMON, mage.cards.h.Hurricane.class));
+        cards.add(new SetCardInfo("Icy Manipulator", "36*", Rarity.UNCOMMON, mage.cards.i.IcyManipulator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Icy Manipulator", 36, Rarity.UNCOMMON, mage.cards.i.IcyManipulator.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Icy Manipulator", "36s", Rarity.UNCOMMON, mage.cards.i.IcyManipulator.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Incinerate", "14*", Rarity.COMMON, mage.cards.i.Incinerate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Incinerate", 14, Rarity.COMMON, mage.cards.i.Incinerate.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Incinerate", "14s", Rarity.COMMON, mage.cards.i.Incinerate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jokulhaups", 15, Rarity.RARE, mage.cards.j.Jokulhaups.class));
         cards.add(new SetCardInfo("Karplusan Forest", 39, Rarity.RARE, mage.cards.k.KarplusanForest.class));
-        // Card not implemented
-        // cards.add(new SetCardInfo("Lava Burst", 16, Rarity.COMMON, mage.cards.l.LavaBurst.class));
         cards.add(new SetCardInfo("Lhurgoyf", 29, Rarity.RARE, mage.cards.l.Lhurgoyf.class));
         cards.add(new SetCardInfo("Lim-Dul's High Guard", "6a", Rarity.COMMON, mage.cards.l.LimDulsHighGuard.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lim-Dul's High Guard", "6b", Rarity.COMMON, mage.cards.l.LimDulsHighGuard.class, NON_FULL_USE_VARIOUS));
@@ -79,5 +77,5 @@ public class Deckmasters extends ExpansionSet {
         cards.add(new SetCardInfo("Yavimaya Ancients", "31a", Rarity.COMMON, mage.cards.y.YavimayaAncients.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Yavimaya Ancients", "31b", Rarity.COMMON, mage.cards.y.YavimayaAncients.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Yavimaya Ants", 32, Rarity.UNCOMMON, mage.cards.y.YavimayaAnts.class));
-     }
+    }
 }

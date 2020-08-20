@@ -1,6 +1,5 @@
 package mage.sets;
 
-import java.util.List;
 import mage.cards.ExpansionSet;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
@@ -8,8 +7,9 @@ import mage.cards.repository.CardRepository;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
+import java.util.List;
+
 /**
- *
  * @author LevelX2
  */
 public final class VintageMasters extends ExpansionSet {
@@ -183,7 +183,7 @@ public final class VintageMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Killer Whale", 76, Rarity.COMMON, mage.cards.k.KillerWhale.class));
         cards.add(new SetCardInfo("Kindle", 176, Rarity.COMMON, mage.cards.k.Kindle.class));
         cards.add(new SetCardInfo("Kjeldoran Outpost", 301, Rarity.RARE, mage.cards.k.KjeldoranOutpost.class));
-        cards.add(new SetCardInfo("Kongming, 'Sleeping Dragon'", 33, Rarity.RARE, mage.cards.k.KongmingSleepingDragon.class));
+        cards.add(new SetCardInfo("Kongming, \"Sleeping Dragon\"", 33, Rarity.RARE, mage.cards.k.KongmingSleepingDragon.class));
         cards.add(new SetCardInfo("Krosan Tusker", 218, Rarity.COMMON, mage.cards.k.KrosanTusker.class));
         cards.add(new SetCardInfo("Krosan Vorine", 219, Rarity.COMMON, mage.cards.k.KrosanVorine.class));
         cards.add(new SetCardInfo("Krovikan Sorcerer", 77, Rarity.COMMON, mage.cards.k.KrovikanSorcerer.class));

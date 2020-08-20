@@ -108,7 +108,8 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Concordia Pegasus", 304, Rarity.COMMON, mage.cards.c.ConcordiaPegasus.class));
         cards.add(new SetCardInfo("Convolute", 55, Rarity.COMMON, mage.cards.c.Convolute.class));
         cards.add(new SetCardInfo("Coral Merfolk", 315, Rarity.COMMON, mage.cards.c.CoralMerfolk.class));
-        cards.add(new SetCardInfo("Corpse Knight", 206, Rarity.UNCOMMON, mage.cards.c.CorpseKnight.class));
+        cards.add(new SetCardInfo("Corpse Knight", "206+", Rarity.UNCOMMON, mage.cards.c.CorpseKnight.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Corpse Knight", 206, Rarity.UNCOMMON, mage.cards.c.CorpseKnight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Creeping Trailblazer", 207, Rarity.UNCOMMON, mage.cards.c.CreepingTrailblazer.class));
         cards.add(new SetCardInfo("Cryptic Caves", 244, Rarity.UNCOMMON, mage.cards.c.CrypticCaves.class));
         cards.add(new SetCardInfo("Daggersail Aeronaut", 133, Rarity.COMMON, mage.cards.d.DaggersailAeronaut.class));
@@ -356,8 +357,8 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Undead Servant", 118, Rarity.COMMON, mage.cards.u.UndeadServant.class));
         cards.add(new SetCardInfo("Unholy Indenture", 119, Rarity.COMMON, mage.cards.u.UnholyIndenture.class));
         cards.add(new SetCardInfo("Unsummon", 78, Rarity.COMMON, mage.cards.u.Unsummon.class));
-        cards.add(new SetCardInfo("Vampire Opportunist", 326, Rarity.COMMON, mage.cards.v.VampireOpportunist.class));
         cards.add(new SetCardInfo("Vampire of the Dire Moon", 120, Rarity.UNCOMMON, mage.cards.v.VampireOfTheDireMoon.class));
+        cards.add(new SetCardInfo("Vampire Opportunist", 326, Rarity.COMMON, mage.cards.v.VampireOpportunist.class));
         cards.add(new SetCardInfo("Veil of Summer", 198, Rarity.UNCOMMON, mage.cards.v.VeilOfSummer.class));
         cards.add(new SetCardInfo("Vengeful Warchief", 121, Rarity.UNCOMMON, mage.cards.v.VengefulWarchief.class));
         cards.add(new SetCardInfo("Vial of Dragonfire", 241, Rarity.COMMON, mage.cards.v.VialOfDragonfire.class));

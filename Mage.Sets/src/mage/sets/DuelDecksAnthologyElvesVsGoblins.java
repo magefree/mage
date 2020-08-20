@@ -1,4 +1,3 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -72,15 +71,15 @@ public final class DuelDecksAnthologyElvesVsGoblins extends ExpansionSet {
         cards.add(new SetCardInfo("Spitting Earth", 55, Rarity.COMMON, mage.cards.s.SpittingEarth.class));
         cards.add(new SetCardInfo("Stonewood Invoker", 11, Rarity.COMMON, mage.cards.s.StonewoodInvoker.class));
         cards.add(new SetCardInfo("Sylvan Messenger", 12, Rarity.UNCOMMON, mage.cards.s.SylvanMessenger.class));
-        cards.add(new SetCardInfo("Tarfire", 56, Rarity.COMMON, mage.cards.t.Tarfire.class));
         cards.add(new SetCardInfo("Tar Pitcher", 53, Rarity.UNCOMMON, mage.cards.t.TarPitcher.class));
+        cards.add(new SetCardInfo("Tarfire", 56, Rarity.COMMON, mage.cards.t.Tarfire.class));
         cards.add(new SetCardInfo("Timberwatch Elf", 13, Rarity.COMMON, mage.cards.t.TimberwatchElf.class));
-        cards.add(new SetCardInfo("Tranquil Thicket", 27, Rarity.COMMON, mage.cards.t.TranquilThicket.class));
+        cards.add(new SetCardInfo("Tranquil Thicket", 26, Rarity.COMMON, mage.cards.t.TranquilThicket.class));
         cards.add(new SetCardInfo("Voice of the Woods", 14, Rarity.RARE, mage.cards.v.VoiceOfTheWoods.class));
         cards.add(new SetCardInfo("Wellwisher", 15, Rarity.COMMON, mage.cards.w.Wellwisher.class));
         cards.add(new SetCardInfo("Wildsize", 23, Rarity.COMMON, mage.cards.w.Wildsize.class));
         cards.add(new SetCardInfo("Wirewood Herald", 16, Rarity.COMMON, mage.cards.w.WirewoodHerald.class));
-        cards.add(new SetCardInfo("Wirewood Lodge", 26, Rarity.RARE, mage.cards.w.WirewoodLodge.class));
+        cards.add(new SetCardInfo("Wirewood Lodge", 27, Rarity.UNCOMMON, mage.cards.w.WirewoodLodge.class));
         cards.add(new SetCardInfo("Wirewood Symbiote", 17, Rarity.UNCOMMON, mage.cards.w.WirewoodSymbiote.class));
         cards.add(new SetCardInfo("Wood Elves", 18, Rarity.COMMON, mage.cards.w.WoodElves.class));
         cards.add(new SetCardInfo("Wren's Run Vanquisher", 19, Rarity.UNCOMMON, mage.cards.w.WrensRunVanquisher.class));

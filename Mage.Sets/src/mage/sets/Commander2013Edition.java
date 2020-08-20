@@ -1,4 +1,3 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -176,7 +175,7 @@ public final class Commander2013Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Khalni Garden", 302, Rarity.COMMON, mage.cards.k.KhalniGarden.class));
         cards.add(new SetCardInfo("Kher Keep", 303, Rarity.RARE, mage.cards.k.KherKeep.class));
         cards.add(new SetCardInfo("Kirtar's Wrath", 15, Rarity.RARE, mage.cards.k.KirtarsWrath.class));
-        cards.add(new SetCardInfo("Kongming, 'Sleeping Dragon'", 16, Rarity.RARE, mage.cards.k.KongmingSleepingDragon.class));
+        cards.add(new SetCardInfo("Kongming, \"Sleeping Dragon\"", 16, Rarity.RARE, mage.cards.k.KongmingSleepingDragon.class));
         cards.add(new SetCardInfo("Krosan Grip", 153, Rarity.UNCOMMON, mage.cards.k.KrosanGrip.class));
         cards.add(new SetCardInfo("Krosan Tusker", 154, Rarity.COMMON, mage.cards.k.KrosanTusker.class));
         cards.add(new SetCardInfo("Krosan Warchief", 155, Rarity.UNCOMMON, mage.cards.k.KrosanWarchief.class));

@@ -22,7 +22,7 @@ public final class HistoricAnthology1 extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
-        cards.add(new SetCardInfo("Burning Tree Emissary", 16, Rarity.UNCOMMON, mage.cards.b.BurningTreeEmissary.class));
+        cards.add(new SetCardInfo("Burning-Tree Emissary", 16, Rarity.UNCOMMON, mage.cards.b.BurningTreeEmissary.class));
         cards.add(new SetCardInfo("Captain Sisay", 17, Rarity.RARE, mage.cards.c.CaptainSisay.class));
         cards.add(new SetCardInfo("Cryptbreaker", 6, Rarity.RARE, mage.cards.c.Cryptbreaker.class));
         cards.add(new SetCardInfo("Darksteel Reactor", 20, Rarity.RARE, mage.cards.d.DarksteelReactor.class));

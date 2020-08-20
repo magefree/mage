@@ -18,12 +18,12 @@ public final class EighthEditionBox extends ExpansionSet {
         this.hasBasicLands = false;
 
         // http://www.magiclibrarities.net/540-rarities-eighth-edition-box-set-cards-english-cards-index.html
-        cards.add(new SetCardInfo("Eager Cadet", 1, Rarity.COMMON, mage.cards.e.EagerCadet.class));
-        cards.add(new SetCardInfo("Vengeance", 2, Rarity.UNCOMMON, mage.cards.v.Vengeance.class));
-        cards.add(new SetCardInfo("Giant Octopus", 3, Rarity.COMMON, mage.cards.g.GiantOctopus.class));
-        cards.add(new SetCardInfo("Sea Eagle", 4, Rarity.COMMON, mage.cards.s.SeaEagle.class));
-        cards.add(new SetCardInfo("Vizzerdrix", 5, Rarity.RARE, mage.cards.v.Vizzerdrix.class));
-        cards.add(new SetCardInfo("Enormous Baloth", 6, Rarity.UNCOMMON, mage.cards.e.EnormousBaloth.class));
-        cards.add(new SetCardInfo("Silverback Ape", 7, Rarity.UNCOMMON, mage.cards.s.SilverbackApe.class));
+        cards.add(new SetCardInfo("Eager Cadet", "S1", Rarity.COMMON, mage.cards.e.EagerCadet.class));
+        cards.add(new SetCardInfo("Enormous Baloth", "S6", Rarity.UNCOMMON, mage.cards.e.EnormousBaloth.class));
+        cards.add(new SetCardInfo("Giant Octopus", "S3", Rarity.COMMON, mage.cards.g.GiantOctopus.class));
+        cards.add(new SetCardInfo("Sea Eagle", "S4", Rarity.COMMON, mage.cards.s.SeaEagle.class));
+        cards.add(new SetCardInfo("Silverback Ape", "S7", Rarity.UNCOMMON, mage.cards.s.SilverbackApe.class));
+        cards.add(new SetCardInfo("Vengeance", "S2", Rarity.UNCOMMON, mage.cards.v.Vengeance.class));
+        cards.add(new SetCardInfo("Vizzerdrix", "S5", Rarity.RARE, mage.cards.v.Vizzerdrix.class));
     }
 }

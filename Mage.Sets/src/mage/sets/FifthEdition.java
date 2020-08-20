@@ -180,7 +180,8 @@ public final class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Funeral March", 164, Rarity.COMMON, mage.cards.f.FuneralMarch.class));
         cards.add(new SetCardInfo("Fungusaur", 296, Rarity.RARE, mage.cards.f.Fungusaur.class));
         cards.add(new SetCardInfo("Fyndhorn Elder", 297, Rarity.UNCOMMON, mage.cards.f.FyndhornElder.class));
-        cards.add(new SetCardInfo("Game of Chaos", 232, Rarity.RARE, mage.cards.g.GameOfChaos.class));
+        cards.add(new SetCardInfo("Game of Chaos", "232+", Rarity.RARE, mage.cards.g.GameOfChaos.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Game of Chaos", 232, Rarity.RARE, mage.cards.g.GameOfChaos.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gaseous Form", 90, Rarity.COMMON, mage.cards.g.GaseousForm.class));
         cards.add(new SetCardInfo("Gauntlets of Chaos", 373, Rarity.RARE, mage.cards.g.GauntletsOfChaos.class));
         cards.add(new SetCardInfo("Ghazban Ogre", 298, Rarity.COMMON, mage.cards.g.GhazbanOgre.class));
@@ -222,12 +223,14 @@ public final class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Ice Floe", 420, Rarity.UNCOMMON, mage.cards.i.IceFloe.class));
         cards.add(new SetCardInfo("Imposing Visage", 241, Rarity.COMMON, mage.cards.i.ImposingVisage.class));
         cards.add(new SetCardInfo("Incinerate", 242, Rarity.COMMON, mage.cards.i.Incinerate.class));
-        cards.add(new SetCardInfo("Inferno", 243, Rarity.RARE, mage.cards.i.Inferno.class));
+        cards.add(new SetCardInfo("Inferno", "243+", Rarity.RARE, mage.cards.i.Inferno.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Inferno", 243, Rarity.RARE, mage.cards.i.Inferno.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Infinite Hourglass", 378, Rarity.RARE, mage.cards.i.InfiniteHourglass.class));
         cards.add(new SetCardInfo("Initiates of the Ebon Hand", 169, Rarity.COMMON, mage.cards.i.InitiatesOfTheEbonHand.class));
         cards.add(new SetCardInfo("Instill Energy", 304, Rarity.UNCOMMON, mage.cards.i.InstillEnergy.class));
         cards.add(new SetCardInfo("Iron Star", 379, Rarity.UNCOMMON, mage.cards.i.IronStar.class));
-        cards.add(new SetCardInfo("Ironclaw Curse", 244, Rarity.RARE, mage.cards.i.IronclawCurse.class));
+        cards.add(new SetCardInfo("Ironclaw Curse", "244+", Rarity.RARE, mage.cards.i.IronclawCurse.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ironclaw Curse", 244, Rarity.RARE, mage.cards.i.IronclawCurse.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ironclaw Orcs", 245, Rarity.COMMON, mage.cards.i.IronclawOrcs.class));
         cards.add(new SetCardInfo("Ironroot Treefolk", 305, Rarity.COMMON, mage.cards.i.IronrootTreefolk.class));
         cards.add(new SetCardInfo("Island Sanctuary", 39, Rarity.RARE, mage.cards.i.IslandSanctuary.class));
@@ -277,7 +280,8 @@ public final class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Mana Clash", 248, Rarity.RARE, mage.cards.m.ManaClash.class));
         cards.add(new SetCardInfo("Mana Flare", 249, Rarity.RARE, mage.cards.m.ManaFlare.class));
         cards.add(new SetCardInfo("Mana Vault", 388, Rarity.RARE, mage.cards.m.ManaVault.class));
-        cards.add(new SetCardInfo("Manabarbs", 250, Rarity.RARE, mage.cards.m.Manabarbs.class));
+        cards.add(new SetCardInfo("Manabarbs", "250+", Rarity.RARE, mage.cards.m.Manabarbs.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Manabarbs", 250, Rarity.RARE, mage.cards.m.Manabarbs.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Marsh Viper", 315, Rarity.COMMON, mage.cards.m.MarshViper.class));
         cards.add(new SetCardInfo("Meekstone", 389, Rarity.RARE, mage.cards.m.Meekstone.class));
         cards.add(new SetCardInfo("Memory Lapse", 103, Rarity.COMMON, mage.cards.m.MemoryLapse.class));
@@ -378,7 +382,8 @@ public final class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Shatterstorm", 266, Rarity.UNCOMMON, mage.cards.s.Shatterstorm.class));
         cards.add(new SetCardInfo("Shield Bearer", 62, Rarity.COMMON, mage.cards.s.ShieldBearer.class));
         cards.add(new SetCardInfo("Shield Wall", 63, Rarity.COMMON, mage.cards.s.ShieldWall.class));
-        cards.add(new SetCardInfo("Shivan Dragon", 267, Rarity.RARE, mage.cards.s.ShivanDragon.class));
+        cards.add(new SetCardInfo("Shivan Dragon", "267+", Rarity.RARE, mage.cards.s.ShivanDragon.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Shivan Dragon", 267, Rarity.RARE, mage.cards.s.ShivanDragon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shrink", 326, Rarity.COMMON, mage.cards.s.Shrink.class));
         cards.add(new SetCardInfo("Sibilant Spirit", 123, Rarity.RARE, mage.cards.s.SibilantSpirit.class));
         cards.add(new SetCardInfo("Skull Catapult", 399, Rarity.UNCOMMON, mage.cards.s.SkullCatapult.class));
