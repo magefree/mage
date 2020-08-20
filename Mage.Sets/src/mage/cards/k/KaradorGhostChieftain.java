@@ -1,13 +1,14 @@
 package mage.cards.k;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -16,9 +17,9 @@ import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
@@ -43,7 +44,7 @@ public final class KaradorGhostChieftain extends CardImpl {
 
         // During each of your turns, you may cast one creature card from your graveyard.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new KaradorGhostChieftainContinuousEffect()),
+                new KaradorGhostChieftainCastFromGraveyardEffect()),
                 new KaradorGhostChieftainWatcher());
     }
 
@@ -94,46 +95,11 @@ class KaradorGhostChieftainCostReductionEffect extends CostModificationEffectImp
     }
 }
 
-class KaradorGhostChieftainContinuousEffect extends ContinuousEffectImpl {
-
-    KaradorGhostChieftainContinuousEffect() {
-        super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
-        staticText = "During each of your turns, you may cast one creature card from your graveyard";
-    }
-
-    KaradorGhostChieftainContinuousEffect(final KaradorGhostChieftainContinuousEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public KaradorGhostChieftainContinuousEffect copy() {
-        return new KaradorGhostChieftainContinuousEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            if (game.getActivePlayerId() == null
-                    || !game.isActivePlayer(player.getId())) {
-                return false;
-            }
-            for (Card card : player.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, game)) {
-                ContinuousEffect effect = new KaradorGhostChieftainCastFromGraveyardEffect();
-                effect.setTargetPointer(new FixedTarget(card.getId()));
-                game.addEffect(effect, source);
-            }
-            return true;
-        }
-        return false;
-    }
-}
-
 class KaradorGhostChieftainCastFromGraveyardEffect extends AsThoughEffectImpl {
 
     KaradorGhostChieftainCastFromGraveyardEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "You may cast one creature card from your graveyard";
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.PutCreatureInPlay);
+        staticText = "During each of your turns, you may cast one creature card from your graveyard";
     }
 
     KaradorGhostChieftainCastFromGraveyardEffect(final KaradorGhostChieftainCastFromGraveyardEffect effect) {
@@ -152,18 +118,21 @@ class KaradorGhostChieftainCastFromGraveyardEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        if (source.isControlledBy(affectedControllerId) 
+                && Zone.GRAVEYARD.equals(game.getState().getZone(objectId))
+                ) {
         Card objectCard = game.getCard(objectId);
-        if (objectCard != null
-                && objectCard.getId().equals(getTargetPointer().getFirst(game, source))
+        Permanent sourceObject = game.getPermanent(source.getSourceId()); // needs to be onto the battlefield
+        if (objectCard != null 
+                && sourceObject != null
+                && objectCard.isOwnedBy(source.getControllerId())
                 && objectCard.isCreature()
                 && objectCard.getSpellAbility() != null
-                && affectedControllerId != null
-                && objectCard.getSpellAbility().spellCanBeActivatedRegularlyNow(affectedControllerId, game)) {
-            if (affectedControllerId.equals(source.getControllerId())) {
+                && objectCard.getSpellAbility().spellCanBeActivatedRegularlyNow(affectedControllerId, game)) {            
                 KaradorGhostChieftainWatcher watcher
-                        = game.getState().getWatcher(KaradorGhostChieftainWatcher.class, source.getSourceId());
+                        = game.getState().getWatcher(KaradorGhostChieftainWatcher.class);
                 return watcher != null
-                        && !watcher.isAbilityUsed();
+                        && !watcher.isAbilityUsed(new MageObjectReference(sourceObject, game));
             }
         }
         return false;
@@ -172,10 +141,10 @@ class KaradorGhostChieftainCastFromGraveyardEffect extends AsThoughEffectImpl {
 
 class KaradorGhostChieftainWatcher extends Watcher {
 
-    private boolean abilityUsed = false;
+    private final Set<MageObjectReference> usedFrom = new HashSet<>();
 
     KaradorGhostChieftainWatcher() {
-        super(WatcherScope.CARD);
+        super(WatcherScope.GAME);
     }
 
     @Override
@@ -184,7 +153,10 @@ class KaradorGhostChieftainWatcher extends Watcher {
                 && event.getZone() == Zone.GRAVEYARD) {
             Spell spell = (Spell) game.getObject(event.getTargetId());
             if (spell.isCreature()) {
-                abilityUsed = true;
+                MageObjectReference mor = event.getAdditionalReference(); // permitting source
+                if (mor != null) {
+                    usedFrom.add(mor);
+                }                
             }
         }
     }
@@ -192,10 +164,10 @@ class KaradorGhostChieftainWatcher extends Watcher {
     @Override
     public void reset() {
         super.reset();
-        abilityUsed = false;
+        usedFrom.clear();
     }
 
-    public boolean isAbilityUsed() {
-        return abilityUsed;
+    public boolean isAbilityUsed(MageObjectReference mor) {
+        return usedFrom.contains(mor);
     }
 }
