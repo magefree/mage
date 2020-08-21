@@ -37,7 +37,8 @@ public class ActivateIfConditionActivatedAbility extends ActivatedAbilityImpl {
             sb.append(" Activate this ability only ");
         }
         if (!condition.toString().startsWith("during")
-                && !condition.toString().startsWith("before")) {
+                && !condition.toString().startsWith("before")
+                && !condition.toString().startsWith("if")) {
             sb.append("if ");
         }
         sb.append(condition.toString()).append('.');
