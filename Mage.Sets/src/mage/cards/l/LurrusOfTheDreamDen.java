@@ -79,7 +79,7 @@ enum LurrusOfTheDreamDenCompanionCondition implements CompanionCondition {
 class LurrusOfTheDreamDenCastFromGraveyardEffect extends AsThoughEffectImpl {
 
     LurrusOfTheDreamDenCastFromGraveyardEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit, true);
         staticText = "During each of your turns, you may cast one permanent spell with converted mana cost 2 or less from your graveyard";
     }
 

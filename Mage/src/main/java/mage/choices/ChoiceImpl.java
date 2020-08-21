@@ -215,6 +215,17 @@ public class ChoiceImpl implements Choice, Serializable {
                         answers.remove(needChoice);
                         return true;
                     }
+
+                }
+            }
+            // no key answer found, try to macht by text starting with
+            for (String needChoice : answers) {
+                for (Map.Entry<String, String> currentChoice : this.getKeyChoices().entrySet()) {
+                    if (currentChoice.getValue().startsWith(needChoice)) {
+                        this.setChoiceByKey(currentChoice.getKey());
+                        answers.remove(needChoice);
+                        return true;
+                    }
                 }
             }
         } else {

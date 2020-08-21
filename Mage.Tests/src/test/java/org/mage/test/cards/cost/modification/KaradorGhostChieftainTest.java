@@ -67,7 +67,7 @@ public class KaradorGhostChieftainTest extends CardTestPlayerBase {
         
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
-        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
         addCard(Zone.GRAVEYARD, playerA, "Silvercoat Lion", 7);
         
         // Exile target creature you control, then return that card to the battlefield under your control.
@@ -96,7 +96,7 @@ public class KaradorGhostChieftainTest extends CardTestPlayerBase {
     }
     
     @Test
-    @Ignore // It's not possible yet to select which ability to use to allow a asThoughtAs effect
+    // @Ignore // It's not possible yet to select which ability to use to allow a asThoughtAs effect
     public void test_castFromGraveyardWithDifferentApprovers() {
         setStrictChooseMode(true);
         
@@ -125,6 +125,8 @@ public class KaradorGhostChieftainTest extends CardTestPlayerBase {
         
         
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Accursed Horde");
+        setChoice(playerA, "During each of your turns, you may cast a Zombie creature card from your graveyard"); // Choose the permitting object
+        
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
         
         

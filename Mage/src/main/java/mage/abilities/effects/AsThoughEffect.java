@@ -20,4 +20,6 @@ public interface AsThoughEffect extends ContinuousEffect {
 
     @Override
     AsThoughEffect copy();
+    
+    boolean isConsumable();
 }
