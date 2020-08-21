@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class TableInfo {
 
-    private List<ColumnInfo> columns = new ArrayList<>();
+    private final List<ColumnInfo> columns = new ArrayList<>();
 
 
     public TableInfo addColumn(Integer index, Integer width, Class colClass, String headerName, String headerHint) {

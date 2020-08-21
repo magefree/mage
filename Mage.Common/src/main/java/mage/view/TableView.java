@@ -98,11 +98,20 @@ public class TableView implements Serializable {
                 addInfo.append("Wins:").append(table.getMatch().getWinsNeeded());
                 addInfo.append(" Time: ").append(table.getMatch().getOptions().getMatchTimeLimit().toString());
                 if (table.getMatch().getFreeMulligans() > 0) {
-                    addInfo.append(" Free Mul.: ").append(table.getMatch().getFreeMulligans());
+                    addInfo.append(" FM: ").append(table.getMatch().getFreeMulligans());
                 }
             } else {
                 addInfo.append("Wins:").append(table.getMatch().getWinsNeeded());
                 addInfo.append(sbScore.toString());
+            }
+            if (table.getMatch().getOptions().isRollbackTurnsAllowed()) {
+                addInfo.append(" RB");
+            }
+            if (table.getMatch().getOptions().isPlaneChase()) {
+                addInfo.append(" PC");
+            }
+            if (table.getMatch().getOptions().isSpectatorsAllowed()) {
+                addInfo.append(" SP");
             }
             if (table.getNumberOfSeats() > 3) {
                 addInfo.append(" Rng: ").append(table.getMatch().getOptions().getRange().toString());
@@ -134,17 +143,28 @@ public class TableView implements Serializable {
             infoText.append(" Seats: ").append(this.seatsInfo);
             switch (table.getState()) {
                 case WAITING:
-                    stateText.append(" (").append(table.getTournament().getPlayers().size()).append('/').append(table.getNumberOfSeats()).append(')');
-                    break;
                 case READY_TO_START:
                 case STARTING:
+                    if (TableState.WAITING.equals(table.getState())) {
+                        stateText.append(" (").append(table.getTournament().getPlayers().size()).append('/').append(table.getNumberOfSeats()).append(')');
+                    }
                     infoText.append(" Time: ").append(table.getTournament().getOptions().getMatchOptions().getMatchTimeLimit().toString());
                     if (table.getTournament().getOptions().getMatchOptions().getFreeMulligans() > 0) {
-                        infoText.append(" Fr.Mul: ").append(table.getTournament().getOptions().getMatchOptions().getFreeMulligans());
+                        infoText.append(" FM: ").append(table.getTournament().getOptions().getMatchOptions().getFreeMulligans());
                     }
                     if (table.getTournament().getTournamentType().isLimited()) {
                         infoText.append(" Constr.: ").append(table.getTournament().getOptions().getLimitedOptions().getConstructionTime() / 60).append(" Min.");
                     }
+                    if (table.getTournament().getOptions().getMatchOptions().isRollbackTurnsAllowed()) {
+                        infoText.append(" RB");
+                    }
+                    if (table.getTournament().getOptions().getMatchOptions().isPlaneChase()) {
+                        infoText.append(" PC");
+                    }
+                    if (table.getTournament().getOptions().isWatchingAllowed()) {
+                        infoText.append(" SP");
+                    }
+                    
                     break;
                 case DUELING:
                     stateText.append(" Round: ").append(table.getTournament().getRounds().size());
